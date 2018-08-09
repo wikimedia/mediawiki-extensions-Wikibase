@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
+use Language;
 use MediaWikiTestCase;
 use SpecialPage;
 use Title;
@@ -28,6 +29,7 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter;
@@ -37,6 +39,7 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityMetaTagsCreator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
@@ -87,7 +90,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		array $images,
 		array $referencedEntities
 	) {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( true, $titleText );
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entity );
 
@@ -172,7 +175,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function testTitleText_ItemHasNoLabel() {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( true, 'Q7799929', 'a kitten' );
 
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setDescription( 'en', 'a kitten' );
@@ -188,7 +191,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function newEntityParserOutputGenerator( $createView = true ) {
+	private function newEntityParserOutputGenerator( $createView = true, $title = null, $description = null ) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'ntriples' ] );
 
@@ -209,6 +212,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory( $createView ),
+			$this->getEntityMetaTagsFactory( $title, $description ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
 			new SqlEntityInfoBuilder(
@@ -221,7 +225,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			'en'
+			Language::factory( 'en' )
 		);
 	}
 
@@ -313,6 +317,45 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @return DispatchingEntityMetaTagsCreatorFactory
+	 */
+	private function getEntityMetaTagsFactory( $title = null, $description = null ) {
+		$entityMetaTagsCreatorFactory = $this->createMock( DispatchingEntityMetaTagsCreatorFactory::class );
+
+		$entityMetaTagsCreatorFactory
+			->method( 'newEntityMetaTags' )
+			->will( $this->returnValue( $this->getMetaTags( $title, $description ) ) );
+
+		return $entityMetaTagsCreatorFactory;
+	}
+
+	/**
+	 * @return EntityMetaTags
+	 */
+	private function getMetaTags( $title, $description ) {
+		$entityMetaTagsCreator = $this->getMockBuilder( EntityMetaTagsCreator::class )
+			->setMethods( [
+				'getMetaTags',
+			] )
+			->disableOriginalConstructor()
+			->getMockForAbstractClass();
+
+		$tags = [];
+
+		$tags[ 'title' ] = $title;
+
+		if ( $description !== null ) {
+			$tags[ 'description' ] = $description;
+		}
+
+		$entityMetaTagsCreator->expects( $this->any() )
+			->method( 'getMetaTags' )
+			->will( $this->returnValue( $tags ) );
+
+		return $entityMetaTagsCreator;
+	}
+
+	/**
 	 * @return ParserOutputJsConfigBuilder
 	 */
 	private function getConfigBuilderMock() {
@@ -396,6 +439,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		return new EntityParserOutputGenerator(
 			$this->getViewFactoryForRedirectTest(),
+			$this->getEntityMetaTagsFactory(),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
 			new SqlEntityInfoBuilder(
@@ -412,7 +456,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getMock( LocalizedTextProvider::class ),
 			new EntityDataFormatProvider(),
 			$dataUpdaters,
-			'en'
+			Language::factory( 'en' )
 		);
 	}
 
