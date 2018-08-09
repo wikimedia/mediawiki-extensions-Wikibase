@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "161311c1_1a148408",
+        "filename": "repo/includes/Search/Elastic/Fields/StatementsField.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-09T13:15:47Z",
+      "side": 1,
+      "message": "You can instead do \n\n/* public */ const QUALIFIER_END\n\nThat way when you switch to PHP 7.1 it is easy to do a search and replace",
+      "revId": "49fee293c8862664d6da11e2ae7076d1951d4e12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
