@@ -116,6 +116,13 @@ class EntityTypeDefinitions {
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	public function getMetaTagsFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'meta-tags-creator-callback' );
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public function getContentModelIds() {
