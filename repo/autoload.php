@@ -239,6 +239,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Notifications\\DatabaseChangeTransmitter' => __DIR__ . '/includes/Notifications/DatabaseChangeTransmitter.php',
 	'Wikibase\\Repo\\Notifications\\HookChangeTransmitter' => __DIR__ . '/includes/Notifications/HookChangeTransmitter.php',
 	'Wikibase\\Repo\\Notifications\\JobQueueChangeNotificationSender' => __DIR__ . '/includes/Notifications/JobQueueChangeNotificationSender.php',
+	'Wikibase\\Repo\\ParserOutput\\DispatchingEntityMetaTagsCreatorFactory' => __DIR__ . '/includes/ParserOutput/DispatchingEntityMetaTagsCreatorFactory.php',
 	'Wikibase\\Repo\\ParserOutput\\DispatchingEntityViewFactory' => __DIR__ . '/includes/ParserOutput/DispatchingEntityViewFactory.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityParserOutputDataUpdater' => __DIR__ . '/includes/ParserOutput/EntityParserOutputDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityParserOutputDataUpdaterCollection' => __DIR__ . '/includes/ParserOutput/EntityParserOutputDataUpdaterCollection.php',

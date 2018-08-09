@@ -108,6 +108,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 			[ 'src' ],
 			[
 				'tests/phpunit/EntityViewTestCase.php',
+				'tests/phpunit/EntityMetaTagsCreatorTestCase.php',
 			]
 		);
 
