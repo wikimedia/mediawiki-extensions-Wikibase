@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Interactors;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -162,7 +163,7 @@ class RedirectCreationInteractor {
 				}
 			} else {
 				$entity = $revision->getEntity();
-				if ( !$entity->isEmpty() ) {
+				if ( $entity->getType() === Item::ENTITY_TYPE && !$entity->isEmpty() ) {
 					throw new RedirectCreationException(
 						"Can't create redirect on non empty item $entityId",
 						'origin-not-empty',
