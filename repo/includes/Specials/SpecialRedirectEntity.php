@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\UserInputException;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 
@@ -32,7 +32,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	private $exceptionLocalizer;
 
 	/**
-	 * @var RedirectCreationInteractor
+	 * @var ItemRedirectCreationInteractor
 	 */
 	private $interactor;
 
@@ -45,7 +45,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,
 		TokenCheckInteractor $tokenCheck,
-		RedirectCreationInteractor $interactor
+		ItemRedirectCreationInteractor $interactor
 	) {
 		parent::__construct( 'RedirectEntity' );
 
