@@ -55,15 +55,13 @@ class ControlledFallbackEntityIdFormatter implements EntityIdFormatter {
 			try {
 				return $this->targetFormatter->formatEntityId( $value );
 			} catch ( \Exception $e ) { //TODO: Catch Throwable once we move to php7
-				$this->logger->error(
-					'Failed to format entity ID. Using fallback formatter',
+				$this->logger->critical(
+					'Failed to format entity ID. Using fallback formatter.'
+					. ' Error: {exception_message}',
 					[
 						'entityId' => $value->getSerialization(),
-						'exception_class' => get_class( $e ),
+						'exception' => $e,
 						'exception_message' => $e->getMessage(),
-						'exception_code' => $e->getCode(),
-						'exception_file' => $e->getFile(),
-						'exception_line' => $e->getLine(),
 					]
 				);
 
