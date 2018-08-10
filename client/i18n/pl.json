@@ -37,6 +37,7 @@
 	"apihelp-query+wblistentityusage-example-aspect": "Uzyskaj strony wykorzystujące element <kbd>Q2</kbd>, a aspektem ma być link do strony lub stwierdzenie.",
 	"apihelp-query+pageterms-example-label-en": "Uzyskaj etykiety i aliasy powiązane ze stroną 'London' po angielsku.",
 	"apihelp-query+pageterms-example-item": "Uzyskaj etykietę i aliasy elementu Q84.",
+	"apihelp-query+description-param-prefersource": "Które źródło opisu preferować, jeśli występuje:",
 	"wikibase-after-page-move": "Należy także zaktualizować [$1 powiązany element Wikidanych] w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
 	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
 	"wikibase-after-page-delete": "Należy również usunąć link do tej strony z [$1 odpowiedniego elementu Wikidanych] w celu aktualizacji linków językowych.",

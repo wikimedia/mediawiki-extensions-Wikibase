@@ -379,6 +379,7 @@
 	"apihelp-wbremovequalifiers-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
 	"apihelp-wbremovequalifiers-param-claim": "GUID identyfikujący stwierdzenie, z którego usuwa się kwalifikatory",
 	"apihelp-wbremovereferences-description": "Usuwa jeden lub więcej odnośników tej samej deklaracji.",
+	"apihelp-wbremovereferences-summary": "Usuwa jeden lub więcej odnośników tej samej deklaracji.",
 	"apihelp-wbremovereferences-param-bot": "Oznacz tę zmianę jako wykonaną przez bota. Ten znacznik adresu URL będzie brany pod uwagę tylko, jeśli użytkownik należy do grupy „{{int:group-bot}}”.",
 	"apihelp-wbsearchentities-param-search": "Wyszukaj w tym tekście.",
 	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",

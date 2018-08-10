@@ -108,7 +108,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Прихватам ове услове за све моје будуће измене. Не приказуј више ову поруку.",
 	"wikibase-entityselector-more": "још",
 	"wikibase-entityselector-notfound": "Нема подударања",
-	"wikibase-anonymouseditwarning": "Напомена: Нисте пријављени.\nВаша ИП адреса ће бити забележена у историји измена овог ентитета.",
+	"wikibase-anonymouseditwarning": "Напомена: Нисте пријављени.\nВаша IP адреса ће бити забележена у историји измена овог ентитета.",
 	"wikibase-validator-sitelink-conflict": "Веза $1 је већ прикачена за ставку $2. Можете је уклонити из $2 ако ту не припада или спојити ставке ако су о баш истој теми.",
 	"wikibase-validator-label-conflict": "Својство $3 већ има ознаку „$1“ повезан с кодом језика $2.",
 	"wikibase-validator-label-with-description-conflict": "Ставка $3 већ има ознаку „$1“ повезан са кодом језика $2, са истим описом",

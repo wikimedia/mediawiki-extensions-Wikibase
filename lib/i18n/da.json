@@ -71,7 +71,7 @@
 	"datatypes-type-number": "Tal",
 	"datatypes-type-mediawiki-title": "MediaWiki-titel",
 	"datatypes-type-unknown": "Uspecificeret",
-	"datatypes-type-boolean": "Boolesk",
+	"datatypes-type-boolean": "Boolsk værdi",
 	"datatypes-type-globe-coordinate": "Geografiske koordinater",
 	"datatypes-type-time": "Tidspunkt",
 	"datatypes-type-wikibase-item": "Emne",

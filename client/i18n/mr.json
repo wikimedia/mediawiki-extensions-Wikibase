@@ -85,5 +85,6 @@
 	"notification-header-page-connection": "हे पान <strong>$3</strong> {{WBREPONAME}} या कलमाशी {{GENDER:$2|जोडल्या गेले}}.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> व {{PLURAL:$4|एक दुसरे पान|$4 इतर पाने|100=99+ इतर पाने}}{{WBREPONAME}} कलमाशी {{GENDER:$2|जोडल्या गेलीत}}.",
 	"notification-link-text-view-item": "कलम {{GENDER:$1|बघा}}",
-	"notification-subject-page-connection": "आपण {{SITENAME}} वर {{GENDER:$3|निर्माण केलेले}} पान एका{{WBREPONAME}} कलमाशी {{GENDER:$2|जोडल्या गेले}}"
+	"notification-subject-page-connection": "आपण {{SITENAME}} वर {{GENDER:$3|निर्माण केलेले}} पान एका{{WBREPONAME}} कलमाशी {{GENDER:$2|जोडल्या गेले}}",
+	"unresolved-property-category": "समस्याग्रस्त गुणधर्म असणारी पाने"
 }

@@ -10,7 +10,8 @@
 			"Peter Alberti",
 			"Fnielsen",
 			"Sarrus",
-			"Saederup92"
+			"Saederup92",
+			"Dipsacus fullonum"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -55,7 +56,7 @@
 	"wikibase-replicationnote": "Vær opmærksom på, at der kan gå flere minutter før ændringerne er synlige på alle wikier.",
 	"wikibase-watchlist-show-changes-pref": "Vis redigeringer af {{WBREPONAME}} på din overvågningsliste",
 	"wikibase-error-serialize-error": "Serialisering af data mislykkkedes",
-	"wikibase-error-invalid-entity-id": "Den indtastede ID er ukendt i systemet. Anvend venligst en gyldig ID.",
+	"wikibase-error-invalid-entity-id": "Den indtastede ID \"$2\" er ukendt i systemet. Anvend venligst en gyldig ID.",
 	"unconnectedpages": "Sider, der ikke er forbundet til emner",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|sproghenvisning|sproghenvisninger}} på siden)",
 	"wikibase-unconnectedpages-submit": "Vis sider",
@@ -65,6 +66,7 @@
 	"wikibase-entityusage-submit": "Vis sider",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}s emne-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
+	"wikibase-pageinfo-description-local": "Lokal beskrivelse",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-emner, der bruges på denne side",
 	"wikibase-pageinfo-entity-usage-S": "Sidehenvisning",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiket: $1",
