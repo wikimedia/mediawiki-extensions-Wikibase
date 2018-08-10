@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fd3bbe5_b2d2af75",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-10T09:38:42Z",
+      "side": 1,
+      "message": "I don\u0027t have really opinion on this, just to hear your thoughts, not sure if we\u0027ve discussed that: phpunit-mock-style would $this-\u003ecreateMock( CacheInterface::class ). Any thoughts on mixing both mock libs in a single test class?",
+      "revId": "ce4203606e17a0444b702505724595a4b5369378",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
