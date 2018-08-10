@@ -188,7 +188,13 @@ module EntityPage
 
   def wait_until_cookie_loaded
     wait_until do
-      execute_script('return typeof $.cookie') != 'undefined'
+      execute_script(
+        'return (
+          typeof window.mw.loader === \'object\' &&
+          typeof window.mw.loader.getState === \'function\' &&
+          window.mw.loader.getState( \'jquery.cookie\' ) === \'ready\'
+        )'
+      ) != 'false'
     end
   end
 end
