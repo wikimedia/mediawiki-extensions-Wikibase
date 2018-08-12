@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"唐吉訶德的侍從",
-			"GnuDoyng"
+			"GnuDoyng",
+			"Davidzdh"
 		]
 	},
+	"tooltip-t-wikibase": "lièng-giék gáu ī-gĭng lièng-giék gì cṳ̆-lâiu cṳ̆-còng-kó hâung-mŭk",
 	"wikibase-dataitem": "{{WBREPONAME}} hâung-mŭk",
 	"wikibase-editlinks": "Siŭ-gāi lièng-giék",
 	"wikibase-editlinkstitle": "Siŭ-gāi gì-tă ngṳ̄-ngiòng gì lièng-giék",

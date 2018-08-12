@@ -492,5 +492,6 @@
 	"apihelp-wblinktitles-example-1": "Дадаць спасылку «Hydrogen» з ангельскай старонкі да «Wasserstoff» на нямецкай старонцы",
 	"apihelp-wbmergeitems-description": "Аб’ядноўвае некалькі элемэнтаў.",
 	"apihelp-wbmergeitems-summary": "Аб’ядноўвае некалькі элемэнтаў.",
-	"apihelp-wbmergeitems-param-fromid": "Ідэнтыфікатар для далучэньня з"
+	"apihelp-wbmergeitems-param-fromid": "Ідэнтыфікатар для далучэньня з",
+	"apihelp-wbmergeitems-param-toid": "Ідэнтыфікатар для аб’яднаньня ў"
 }
