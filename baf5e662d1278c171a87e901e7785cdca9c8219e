@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9eaacbf_3290e594",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-13T13:43:13Z",
+      "side": 1,
+      "message": "This seems to be specific to FingerprintableEntityMetaTags, so it shouldn\u0027t be part of the callback signature and instead be injected from the factory here. I might be missing something though.",
+      "range": {
+        "startLine": 68,
+        "startChar": 44,
+        "endLine": 68,
+        "endChar": 60
+      },
+      "revId": "baf5e662d1278c171a87e901e7785cdca9c8219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "831ed002_6251814d",
+        "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-13T13:43:13Z",
+      "side": 1,
+      "message": "Hmm, this changes the default behavior for other/future entity type\u0027s meta tags from generating empty (?) meta tags to throwing an Exception. As usual this is probably fine, since there aren\u0027t really any other entity types outside of Wikibase(Lexeme) + MediaInfo, but I just wanted to mention this, since this question popped up several times in the past. Is this something that we need a process or documentation for?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 102
+      },
+      "revId": "baf5e662d1278c171a87e901e7785cdca9c8219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f88c8a13_464c8c27",
+        "filename": "view/src/EntityMetaTags.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-13T13:43:13Z",
+      "side": 1,
+      "message": "I don\u0027t really see the value in this class. AFAICT `getTitleText` doesn\u0027t do much for the children classes since a persisted entity always has an id, so calling `$id-\u003egetSerialization()` is safe. I think this should rather become an interface with only `getMetaTags`.",
+      "revId": "baf5e662d1278c171a87e901e7785cdca9c8219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aa17c65_20c99619",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-13T13:43:13Z",
+      "side": 1,
+      "message": "It\u0027s only used directly, so it isn\u0027t really a base class as far as I can tell.",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "baf5e662d1278c171a87e901e7785cdca9c8219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bce035b5_75b80139",
+        "filename": "view/tests/phpunit/EntityMetaTagsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-13T13:43:13Z",
+      "side": 1,
+      "message": "I vaguely remember that we wanted all parent tests to have the `TestCase` suffix instead of `Test`.",
+      "range": {
+        "startLine": 14,
+        "startChar": 15,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "baf5e662d1278c171a87e901e7785cdca9c8219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
