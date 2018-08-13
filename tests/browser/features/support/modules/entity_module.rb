@@ -194,7 +194,7 @@ module EntityPage
           typeof window.mw.loader.getState === \'function\' &&
           window.mw.loader.getState( \'mediawiki.cookie\' ) === \'ready\'
         )'
-      ) != 'false'
+      ) != false
     end
   end
 end
