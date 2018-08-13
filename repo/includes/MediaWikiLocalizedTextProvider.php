@@ -20,12 +20,9 @@ class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 	private $language;
 
 	/**
-	 * @param Language|string $language
+	 * @param Language $language
 	 */
-	public function __construct( $language ) {
-		if ( !$language instanceof Language ) {
-			$language = Lanuage::factory( $language );
-		}
+	public function __construct( Language $language ) {
 		$this->language = $language;
 	}
 
