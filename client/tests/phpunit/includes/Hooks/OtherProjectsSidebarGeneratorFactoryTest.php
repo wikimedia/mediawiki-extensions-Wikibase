@@ -35,7 +35,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
 			$this->getMock( LabelDescriptionLookup::class ),
 			[],
-			new Language( 'en' )
+			Language::factory( 'en' )
 		);
 
 		$factory = new OtherProjectsSidebarGeneratorFactory(
