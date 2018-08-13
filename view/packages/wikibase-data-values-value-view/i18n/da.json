@@ -3,7 +3,8 @@
 		"authors": [
 			"Byrial",
 			"Joedalton",
-			"Peter Alberti"
+			"Peter Alberti",
+			"Saederup92"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering af værdier af $1 understøttes ikke endnu.",
@@ -15,5 +16,6 @@
 	"valueview-expert-timeinput-calendar": "Kalender:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Sprog (obligatorisk):",
+	"valueview-expertextender-unitsuggester-label": "Enhed (valgfrit):",
 	"valueview-listrotator-manually": "angiv manuelt"
 }
