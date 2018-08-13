@@ -192,7 +192,7 @@ module EntityPage
         'return (
           typeof window.mw.loader === \'object\' &&
           typeof window.mw.loader.getState === \'function\' &&
-          window.mw.loader.getState( \'jquery.cookie\' ) === \'ready\'
+          window.mw.loader.getState( \'mediawiki.cookie\' ) === \'ready\'
         )'
       ) != 'false'
     end
