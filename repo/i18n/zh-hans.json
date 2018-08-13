@@ -25,7 +25,8 @@
 			"王庭茂",
 			"Duolaimi",
 			"凡人丶",
-			"Wxyveronica"
+			"Wxyveronica",
+			"Hanyanbo98"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -327,6 +328,9 @@
 	"wikibase-redirectentity-fromid": "重定向的来自ID",
 	"wikibase-redirectentity-toid": "重定向的目标ID",
 	"wikibase-redirectentity-submit": "重定向",
+	"wikibase-redirect-origin-not-empty": "无法在已存在的 $1 上创建重定向",
+	"wikibase-redirect-no-such-entity": "找不到概念：$1",
+	"wikibase-redirect-cant-load-entity-content": "无法访问内容，可能会删除更改。",
 	"wikibase-redirect-target-is-incompatible": "不兼容的实体类型",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook已停止重定向创建",
 	"wikibase-redirect-cant-redirect": "技术问题导致重定向创建失败",
@@ -408,6 +412,7 @@
 	"wikibase-search-bad-entity-type": "错误实体类型：$1",
 	"wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
 	"wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。",
+	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 关键字不包含有效语句",
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-summary": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-example-1": "查询所有可用的徽章项",

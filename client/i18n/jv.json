@@ -6,7 +6,7 @@
 		]
 	},
 	"wikibase-client-desc": "Klièn marang èkstènsi Wikibase",
-	"tooltip-t-wikibase": "Pranala menyang wiji répositori sing kagayut",
+	"tooltip-t-wikibase": "Pranala menyang wiji répositori kang kagayut",
 	"apihelp-query+wbentityusage-description": "Mbalèkaké kabèh ID èntitas sing dienggo ing kaca iku.",
 	"apihelp-query+wbentityusage-param-aspect": "Balèkaké mligi ID èntitas sing nganggo aspèk iki.",
 	"apihelp-query+wbentityusage-param-prop": "Properti sing kudu ditambah menyang kasilé.",
@@ -36,7 +36,7 @@
 	"wikibase-comment-linked": "Wiji {{WBREPONAME}} wis kagayut karo kaca iki.",
 	"wikibase-comment-unlink": "Kaca iki wis ora nggayut wiji {{WBREPONAME}}. Pranala basa dibusak.",
 	"wikibase-comment-restore": "Wiji {{WBREPONAME}} magepokan wurung dibusak. Pranala basa dipulihaké.",
-	"wikibase-comment-update": "Wiji {{WBREPONAME}} diowah",
+	"wikibase-comment-update": "Wiji {{WBREPONAME}} owah",
 	"wikibase-comment-sitelink-add": "Pranala basa ditambah: $1",
 	"wikibase-comment-sitelink-change": "Pranala basa disalin saka $1 dadi $2",
 	"wikibase-comment-sitelink-remove": "Pranala basa dibusak: $1",
