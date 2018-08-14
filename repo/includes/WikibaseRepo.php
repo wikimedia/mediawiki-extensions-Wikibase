@@ -252,7 +252,7 @@ class WikibaseRepo {
 	/**
 	 * @var ContentLanguages|null
 	 */
-	private $monolingualTextLanguages = null;
+	private $contentLanguages = null;
 
 	/**
 	 * @var DataTypeDefinitions
@@ -1806,14 +1806,21 @@ class WikibaseRepo {
 		return $this->dataTypeDefinitions;
 	}
 
-	private function getMonolingualTextLanguages() {
-		if ( $this->monolingualTextLanguages === null ) {
+	public function getContentLanguages() {
+		if ( $this->contentLanguages === null ) {
+			$this->contentLanguages = [];
+
+			$this->contentLanguages['term'] = new MediaWikiContentLanguages();
+			$this->contentLanguages['label'] = $this->contentLanguages['term'];
+			$this->contentLanguages['description'] = $this->contentLanguages['term'];
+			$this->contentLanguages['alias'] = $this->contentLanguages['term'];
+
 			// This has to be a superset of the language codes returned by
 			// wikibase.WikibaseContentLanguages.
 			// We don't want to have language codes in the suggester that are not
 			// supported by the backend. The other way round is currently acceptable,
 			// but will be fixed in T124758.
-			$this->monolingualTextLanguages = new DifferenceContentLanguages(
+			$this->contentLanguages['monolingualtext'] = new DifferenceContentLanguages(
 				new UnionContentLanguages(
 					new MediaWikiContentLanguages(),
 					new StaticContentLanguages( [
@@ -1890,8 +1897,15 @@ class WikibaseRepo {
 					'nl-informal',
 				] )
 			);
+
+			Hooks::run( 'WikibaseContentLanguages', [ &$this->contentLanguages ] );
 		}
-		return $this->monolingualTextLanguages;
+
+		return $this->contentLanguages;
+	}
+
+	private function getMonolingualTextLanguages() {
+		return $this->getContentLanguages()['monolingualtext'];
 	}
 
 	/**
@@ -1900,7 +1914,7 @@ class WikibaseRepo {
 	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return new MediaWikiContentLanguages();
+		return $this->getContentLanguages()['term'];
 	}
 
 	/**
