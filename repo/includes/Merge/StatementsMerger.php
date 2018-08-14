@@ -14,6 +14,8 @@ use Wikimedia\Assert\Assert;
  * Merges statements of two StatementListProvider objects.
  *
  * Note that this will not check whether the source and target objects have links.
+ *
+ * @license GPL-2.0-or-later
  */
 class StatementsMerger {
 
