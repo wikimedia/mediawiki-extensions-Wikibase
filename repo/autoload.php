@@ -93,6 +93,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Api\\LinkTitles' => __DIR__ . '/includes/Api/LinkTitles.php',
 	'Wikibase\\Repo\\Api\\ListSubscribers' => __DIR__ . '/includes/Api/ListSubscribers.php',
 	'Wikibase\\Repo\\Api\\MergeItems' => __DIR__ . '/includes/Api/MergeItems.php',
+	'Wikibase\\Repo\\Api\\MetaContentLanguages' => __DIR__ . '/includes/Api/MetaContentLanguages.php',
 	'Wikibase\\Repo\\Api\\ModifyEntity' => __DIR__ . '/includes/Api/ModifyEntity.php',
 	'Wikibase\\Repo\\Api\\ModifyTerm' => __DIR__ . '/includes/Api/ModifyTerm.php',
 	'Wikibase\\Repo\\Api\\ParseValue' => __DIR__ . '/includes/Api/ParseValue.php',
