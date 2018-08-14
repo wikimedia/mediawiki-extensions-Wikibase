@@ -80,7 +80,8 @@ if ( !defined( 'WBC_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgAPIListModules,
+	global $wgAPIMetaModules,
+		$wgAPIListModules,
 		$wgAPIModules,
 		$wgAvailableRights,
 		$wgExtensionCredits,
@@ -637,6 +638,25 @@ call_user_func( function() {
 			);
 		}
 	];
+
+	$wgAPIMetaModules['wbcontentlanguages'] = [
+		'class' => Wikibase\Repo\Api\MetaContentLanguages::class,
+		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+			$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+			// if CLDR is available, we expect to have some language name
+			// (falling back to English if necessary) for any content language
+			$expectKnownLanguageNames = ExtensionRegistry::getInstance()->isLoaded( 'cldr' );
+
+			return new Wikibase\Repo\Api\MetaContentLanguages(
+				$repo->getContentLanguages(),
+				$expectKnownLanguageNames,
+				$apiQuery,
+				$moduleName
+			);
+		},
+	];
+
 	$wgAPIListModules['wbsearch'] = [
 		'class' => Wikibase\Repo\Api\QuerySearchEntities::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
