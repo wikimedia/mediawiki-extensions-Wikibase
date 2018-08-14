@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "aa6b71c7_dbddb0c8",
+        "filename": "repo/includes/Rdf/EntityMentionListener.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-08-14T00:07:30Z",
+      "side": 1,
+      "message": "OK, I see now after reviewing the code what the problem is. I think we need to create separate builder classes for Form and Sense then, in any case, single class with a switch looks wrong in any case. \nBut then I wonder why we need a special subEntityMentioned method? It\u0027s essentially duplicating entityReferenceMentioned with only difference being that it does not look on RdfProducer::PRODUCE_RESOLVED_ENTITIES flag. So maybe we should just make entityReferenceMentioned smarter? Then instead of keeping two separate lists of entity mentions we still have one list. Maybe something like this:\n\n\tpublic function entityReferenceMentioned( EntityId $id, $type \u003d RdfProducer::PRODUCE_RESOLVED_ENTITIES ) {\n\t\tif ( $this-\u003eshouldProduce( $type ) ) {\n\t\t\t$this-\u003eentityToResolve( $id );\n\t\t}\n\t}\n\nAnd then add RdfProducer::PRODUCE_SUBENTITIES and mark our mentions with it? Of course, there\u0027s still a bit of concept leakage in that only lexemes (for now) have sub-entities and this concept did not exist before. So instead we could also make it always add it:\n\n\tpublic function entityReferenceMentioned( EntityId $id, $type \u003d RdfProducer::PRODUCE_RESOLVED_ENTITIES ) {\n\t\tif ( $type \u003d\u003d\u003d true || $this-\u003eshouldProduce( $type ) ) {\n\t\t\t$this-\u003eentityToResolve( $id );\n\t\t}\n\t}\n\nand then call it with $this-\u003eentityMentionTraker-\u003eentityReferenceMentioned( $form, true ). Not sure which one is better, but what do you think about the idea? Otherwise indeed it\u0027ll require big refactoring to split RdfBuilder into reusable parts.",
+      "parentUuid": "9d3066fd_aa2a4681",
+      "revId": "8710db959702afa53da08ec9b2307df8fa6050fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6c684d7_c335d9d4",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 3
