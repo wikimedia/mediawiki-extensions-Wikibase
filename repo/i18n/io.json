@@ -7,17 +7,22 @@
 	},
 	"wikibase-edit": "redaktar",
 	"wikibase-add": "adjuntar",
+	"wikibase-entitytermsforlanguagelistview-label": "Etiketo",
 	"wikibase-entitytermsforlanguagelistview-language": "Linguo",
 	"wikibase-label-empty": "Nula notico definita",
 	"wikibase-description-empty": "Nula deskripto definita",
 	"wikibase-content-language-edit-label": "Linguo:",
+	"wikibase-diffview-label": "etiketo",
 	"wikibase-diffview-link-name": "Nomo",
 	"wikibase-sitelink-page-edit-placeholder": "Pagino",
 	"wikibase-sitelinks-special": "Altra pagini",
 	"wikibase-undo-title": "Desfacez la redakto a(d) \"$1\"",
 	"wikibase-statementview-rank-normal": "Normala rango",
 	"wikibase-itembytitle-lookup-page": "Pagino:",
+	"wikibase-itemdisambiguation-lookup-label": "Etiketo:",
 	"wikibase-newitem-site": "URL dil unesma pagino ligita",
 	"wikibase-newitem-no-external-page": "La pagino \"$2\" ne trovesis en \"$1\".",
-	"wikibase-newentity-language": "Linguo:"
+	"wikibase-newentity-language": "Linguo:",
+	"wikibase-newentity-label": "Etiketo:",
+	"wikibase-setlabel-label": "Etiketo:"
 }

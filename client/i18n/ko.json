@@ -118,6 +118,7 @@
 	"echo-category-title-wikibase-action": "{{WBREPONAME}}로 {{PLURAL:$1|연결}}",
 	"echo-pref-tooltip-wikibase-action": "누군가가 {{GENDER:|내가 만든}} 문서를 {{WBREPONAME}} 항목에 연결할 때 내게 알립니다.",
 	"notification-header-page-connection": "<strong>$3</strong> 문서가 주제 관련 데이터를 포함하는 {{PLURAL:$4|-1={{WBREPONAME}} 항목|{{WBREPONAME}} 항목 $4}}에 {{GENDER:$2|연결되었습니다}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> 및 {{PLURAL:$4|다른 문서 1개가|다른 문서 $4개가|100=다른 문서 99개 이상이}} {{WBREPONAME}} 항목에 {{GENDER:$2|연결되었습니다}}.",
 	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}",
 	"connected-redirect-category": "{{WBREPONAME}} 항목에 연결된 넘겨주기",
 	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다."

@@ -95,7 +95,7 @@
 	"datatypes-type-number": "Número",
 	"datatypes-type-mediawiki-title": "Título do MediaWiki",
 	"datatypes-type-unknown": "Não especificado",
-	"datatypes-type-boolean": "Booleano",
+	"datatypes-type-boolean": "Booliano",
 	"datatypes-type-globe-coordinate": "Coordenadas geográficas",
 	"datatypes-type-time": "Ponto no tempo",
 	"datatypes-type-wikibase-item": "Objeto",
