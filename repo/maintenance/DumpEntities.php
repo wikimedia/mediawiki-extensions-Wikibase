@@ -268,13 +268,13 @@ abstract class DumpEntities extends Maintenance {
 	/**
 	 * Cache flag for use in Store::getEntityRevisionLookup.
 	 *
-	 * @return string One of "retrieve-only" and "uncached"
+	 * @return string One of Store::LOOKUP_CACHING_RETRIEVE_ONLY and Store::LOOKUP_CACHING_DISABLED
 	 */
 	protected function getEntityRevisionLookupCacheMode() {
 		if ( $this->getOption( 'no-cache', false ) ) {
-			return 'uncached';
+			return Store::LOOKUP_CACHING_DISABLED;
 		} else {
-			return 'retrieve-only';
+			return Store::LOOKUP_CACHING_RETRIEVE_ONLY;
 		}
 	}
 

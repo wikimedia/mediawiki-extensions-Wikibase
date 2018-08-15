@@ -250,7 +250,7 @@ call_user_func( function() {
 				$mainModule,
 				$moduleName,
 				$wikibaseRepo->getTermsLanguages(),
-				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+				$wikibaseRepo->getEntityRevisionLookup( Wikibase\Store::LOOKUP_CACHING_DISABLED ),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getEntityFactory(),
 				$wikibaseRepo->getExternalFormatStatementDeserializer(),
@@ -280,7 +280,7 @@ call_user_func( function() {
 				$siteLinkTargetProvider,
 				$apiHelperFactory->getErrorReporter( $mainModule ),
 				$settings->getSetting( 'siteLinkGroups' ),
-				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+				$wikibaseRepo->getEntityRevisionLookup( Wikibase\Store::LOOKUP_CACHING_DISABLED ),
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getResultBuilder( $module );
 				},

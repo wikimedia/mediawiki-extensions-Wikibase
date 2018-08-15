@@ -12,9 +12,10 @@ use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 
 /**
- * @covers Wikibase\PropertyInfoTableBuilder
+ * @covers \Wikibase\PropertyInfoTableBuilder
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -88,7 +89,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
+		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED );
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( [
 			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
