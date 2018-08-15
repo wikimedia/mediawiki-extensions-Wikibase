@@ -14,6 +14,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -120,7 +121,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 			new \ApiMain( $request ),
 			'test',
 			$wikibaseRepo->getTermsLanguages(),
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getEntityFactory(),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),

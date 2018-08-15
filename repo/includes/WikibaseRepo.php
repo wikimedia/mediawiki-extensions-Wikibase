@@ -178,6 +178,7 @@ use Wikimedia\ObjectFactory;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class WikibaseRepo {
+	const LOOKUP_CACHE_DEFAULT = Store::LOOKUP_CACHING;
 
 	/**
 	 * @var SettingsArray
@@ -682,7 +683,7 @@ class WikibaseRepo {
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $cache = '' ) {
+	public function getEntityRevisionLookup( $cache = self::LOOKUP_CACHE_DEFAULT ) {
 		return $this->getStore()->getEntityRevisionLookup( $cache );
 	}
 
@@ -701,7 +702,7 @@ class WikibaseRepo {
 	 */
 	public function newRedirectCreationInteractor( User $user, IContextSource $context ) {
 		return new RedirectCreationInteractor(
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
@@ -782,7 +783,7 @@ class WikibaseRepo {
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = '' ) {
+	public function getEntityLookup( $cache = self::LOOKUP_CACHE_DEFAULT ) {
 		return $this->getStore()->getEntityLookup( $cache );
 	}
 
@@ -1647,7 +1648,7 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getSiteLookup(),
 			$this->getSummaryFormatter(),
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$this->newEditEntityFactory( $context ),
 			$this->getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
@@ -1666,7 +1667,7 @@ class WikibaseRepo {
 	public function newEditEntityFactory( IContextSource $context = null ) {
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
@@ -1685,7 +1686,7 @@ class WikibaseRepo {
 
 		return new ItemMergeInteractor(
 			$this->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),

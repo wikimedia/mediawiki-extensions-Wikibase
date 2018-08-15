@@ -11,6 +11,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -53,7 +54,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getSiteLookup(),

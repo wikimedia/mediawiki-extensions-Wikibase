@@ -83,7 +83,7 @@ class RebuildTermSqlIndex extends Maintenance {
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$termIndex,
 			$sqlEntityIdPagerFactory,
-			$wikibaseRepo->getEntityRevisionLookup( 'retrieve-only' ),
+			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_RETRIEVE_ONLY ),
 			$this->getEntityTypes(),
 			$this->getOption( 'sleep', 10 )
 		);

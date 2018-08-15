@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\FormatableSummary;
+use Wikibase\Store;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -56,7 +57,7 @@ abstract class UpdateRepoJob extends Job {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initRepoJobServices(
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->newEditEntityFactory()

@@ -8,6 +8,7 @@ use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 use Wikibase\WikibaseSettings;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -49,7 +50,7 @@ class RebuildItemsPerSite extends Maintenance {
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Use an uncached EntityLookup here to avoid memory leaks
-		$entityLookup = $wikibaseRepo->getEntityLookup( 'retrieve-only' );
+		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_RETRIEVE_ONLY );
 		$store = $wikibaseRepo->getStore();
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,

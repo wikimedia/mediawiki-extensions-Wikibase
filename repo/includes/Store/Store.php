@@ -32,6 +32,10 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  */
 interface Store {
 
+	const LOOKUP_CACHING = '';
+	const LOOKUP_UNCACHED = 'uncached';
+	const LOOKUP_RETRIEVE_ONLY = 'retrieve-only';
+
 	/**
 	 * @return SiteLinkStore
 	 */
@@ -83,20 +87,22 @@ interface Store {
 	public function getEntityRedirectLookup();
 
 	/**
-	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
-	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
+	 * @param string $cache Flag string: Can be set to self::LOOKUP_UNCACHED to get an uncached direct lookup or to
+	 *        self::LOOKUP_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
+	 *        there. Defaults to a caching lookup (self::LOOKUP_CACHING).
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = '' );
+	public function getEntityLookup( $cache = self::LOOKUP_CACHING );
 
 	/**
-	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
-	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
+	 * @param string $cache Flag string: Can be set to self::LOOKUP_UNCACHED to get an uncached direct lookup or to
+	 *        self::LOOKUP_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
+	 *        there. Defaults to a caching lookup (self::LOOKUP_CACHING).
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $cache = '' );
+	public function getEntityRevisionLookup( $cache = self::LOOKUP_CACHING );
 
 	/**
 	 * @return EntityStore

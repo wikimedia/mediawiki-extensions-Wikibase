@@ -374,12 +374,13 @@ class SqlStore implements Store {
 	 *
 	 * The EntityLookup returned by this method will resolve redirects.
 	 *
-	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
-	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
+	 * @param string $cache Flag string: Can be set to Store::LOOKUP_UNCACHED to get an uncached direct lookup or to
+	 *        Store::LOOKUP_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
+	 *        there. Defaults to a caching lookup (Store::LOOKUP_CACHING).
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = '' ) {
+	public function getEntityLookup( $cache = self::LOOKUP_CACHING ) {
 		$revisionLookup = $this->getEntityRevisionLookup( $cache );
 		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup );
 		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );
@@ -425,7 +426,7 @@ class SqlStore implements Store {
 		$store = new TypeDispatchingEntityStore(
 			WikibaseRepo::getDefaultInstance()->getEntityStoreFactoryCallbacks(),
 			$store,
-			$this->getEntityRevisionLookup( 'uncached' )
+			$this->getEntityRevisionLookup( self::LOOKUP_UNCACHED )
 		);
 
 		return $store;
@@ -434,19 +435,20 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getEntityRevisionLookup
 	 *
-	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
-	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
+	 * @param string $cache Flag string: Can be set to Store::LOOKUP_UNCACHED to get an uncached direct lookup or to
+	 *        Store::LOOKUP_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
+	 *        there. Defaults to a caching lookup (Store::LOOKUP_CACHING).
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $cache = '' ) {
+	public function getEntityRevisionLookup( $cache = self::LOOKUP_CACHING ) {
 		if ( !$this->entityRevisionLookup ) {
 			list( $this->rawEntityRevisionLookup, $this->entityRevisionLookup ) = $this->newEntityRevisionLookup();
 		}
 
-		if ( $cache === 'uncached' ) {
+		if ( $cache === self::LOOKUP_UNCACHED ) {
 			return $this->rawEntityRevisionLookup;
-		} elseif ( $cache === 'retrieve-only' ) {
+		} elseif ( $cache === self::LOOKUP_RETRIEVE_ONLY ) {
 			return $this->getCacheRetrievingEntityRevisionLookup();
 		} else {
 			return $this->entityRevisionLookup;
@@ -518,7 +520,7 @@ class SqlStore implements Store {
 					$this->cacheDuration,
 					$this->getEntityRevisionLookupCacheKey()
 				),
-				$this->getEntityRevisionLookup( 'uncached' )
+				$this->getEntityRevisionLookup( self::LOOKUP_UNCACHED )
 			);
 
 			$cacheRetrievingEntityRevisionLookup->setVerifyRevision( true );

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Sql\TermSqlIndexBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 
@@ -166,7 +167,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$wikibaseRepo->getStore()->getTermIndex(),
 			$sqlEntityIdPagerFactory,
-			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_UNCACHED ),
 			$entityTypes
 		);
 
