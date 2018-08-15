@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\SettingsArray;
 
 /**
  * Fields for an object that has statements.
@@ -41,10 +42,10 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
+		array $searchIndexDataFormatters,
 		array $propertyIds,
 		array $indexedTypes,
 		array $excludedIds,
-		array $searchIndexDataFormatters,
 		array $allowedQualifierPropertyIdsForQuantityStatements
 	) {
 		$this->propertyIds = $propertyIds;
@@ -82,6 +83,26 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 			);
 		}
 		return $fields;
+	}
+
+	/**
+	 * Factory to create StatementProviderFieldDefinitions from configs
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param callable[] $searchIndexDataFormatters
+	 * @param SettingsArray $settings
+	 * @return StatementProviderFieldDefinitions
+	 */
+	public static function newFromSettings(
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		array $searchIndexDataFormatters,
+		SettingsArray $settings
+	) {
+		return new static( $propertyDataTypeLookup, $searchIndexDataFormatters,
+			$settings->getSetting( 'searchIndexProperties' ),
+			$settings->getSetting( 'searchIndexTypes' ),
+			$settings->getSetting( 'searchIndexPropertiesExclude' ),
+			$settings->getSetting( 'searchIndexQualifierPropertiesForQuantity' )
+		);
 	}
 
 }
