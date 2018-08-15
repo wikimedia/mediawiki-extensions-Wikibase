@@ -41,7 +41,7 @@ class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 		$this->assertContains( 'wikibase-itemswithoutsitelinks-summary', $output );
 		$this->assertContains( '<div class="mw-spcontent">', $output );
 
-		// There was a bug in SpecialWikibaseQueryPage::showQuery() adding an unnecesarry
+		// There was a bug in SpecialWikibaseQueryPage::showQuery() adding an unnecessary
 		// Html::closeElement( 'div' ) when the results is empty.
 		$this->assertNotContains( '</div></div>', $output );
 	}
