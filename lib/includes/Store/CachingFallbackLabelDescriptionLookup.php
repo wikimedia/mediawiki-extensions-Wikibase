@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -180,7 +181,14 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 	 * @return string
 	 */
 	private function getCacheKey( EntityId $entityId, $languageCode, $termName ) {
+		Assert::parameterType( 'string', $languageCode, '$languageCode' );
+		Assert::parameter( !empty( $languageCode ), '$languageCode', "must not be empty" );
+		Assert::parameterType( 'string', $termName, '$termName' );
+		Assert::parameter( !empty( $termName ), '$termName', "must not be empty" );
+
 		$revisionId = $this->revisionLookup->getLatestRevisionId( $entityId );
+
+		Assert::postcondition( is_int( $revisionId ), "Revision ID must present" );
 
 		return "{$entityId->getSerialization()}_{$revisionId}_{$languageCode}_{$termName}";
 	}
