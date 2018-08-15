@@ -478,7 +478,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$dbr = $this->getConnection( DB_REPLICA );
 
 		$fields = [
-			'page_namespace',
 			'page_title',
 			'page_id',
 			'rd_title'
