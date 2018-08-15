@@ -254,4 +254,13 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'fulltext-search-context' );
 	}
 
+	/**
+	 * @return callable[] An array mapping entity type identifiers
+	 * to indexing field definitions.
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getFieldDefinitions() {
+		return $this->getMapForDefinitionField( 'search-field-definitions' );
+	}
+
 }
