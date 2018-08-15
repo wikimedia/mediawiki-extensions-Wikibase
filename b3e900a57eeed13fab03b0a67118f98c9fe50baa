@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "683f1a40_862d0d0b",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-15T12:01:21Z",
+      "side": 1,
+      "message": "Else is not needed.",
+      "range": {
+        "startLine": 410,
+        "startChar": 5,
+        "endLine": 410,
+        "endChar": 11
+      },
+      "revId": "b3e900a57eeed13fab03b0a67118f98c9fe50baa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aad4ebf_8c1ddd9c",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-15T12:01:21Z",
+      "side": 1,
+      "message": "OPTION_?",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 10
+      },
+      "revId": "b3e900a57eeed13fab03b0a67118f98c9fe50baa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
