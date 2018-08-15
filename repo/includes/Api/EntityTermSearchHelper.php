@@ -38,7 +38,7 @@ class EntityTermSearchHelper implements EntitySearchHelper {
 	 * @param int $limit
 	 * @param bool $strictLanguage
 	 *
-	 * @return TermSearchResult[] Key: string Serialized EntityId
+	 * @return TermSearchResult[] Key: string Serialized EntityIdWikibaseRepo
 	 */
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
 		$allSearchResults = [];

@@ -78,6 +78,8 @@ string key is associated with a function having the dedicated signature:
 : an array of strings listing the sub entity types that this entity type contains.
 ; fulltext-search-context (repo only)
 : configuration context allowing to instantiate fulltext search query builder
+; search-field-definitions (repo only)
+: field definitions for search indexing
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.

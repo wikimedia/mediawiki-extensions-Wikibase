@@ -284,6 +284,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\LabelCountField' => __DIR__ . '/includes/Search/Elastic/Fields/LabelCountField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\LabelsField' => __DIR__ . '/includes/Search/Elastic/Fields/LabelsField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\LabelsProviderFieldDefinitions' => __DIR__ . '/includes/Search/Elastic/Fields/LabelsProviderFieldDefinitions.php',
+	'Wikibase\\Repo\\Search\\Elastic\\Fields\\NoFieldDefinitions' => __DIR__ . '/includes/Search/Elastic/Fields/NoFieldDefinitions.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\PropertyFieldDefinitions' => __DIR__ . '/includes/Search/Elastic/Fields/PropertyFieldDefinitions.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\SiteLinkCountField' => __DIR__ . '/includes/Search/Elastic/Fields/SiteLinkCountField.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Fields\\StatementCountField' => __DIR__ . '/includes/Search/Elastic/Fields/StatementCountField.php',

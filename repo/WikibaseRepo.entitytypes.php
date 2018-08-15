@@ -21,6 +21,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -38,7 +39,13 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
+use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikimedia\Purtle\RdfWriter;
@@ -118,6 +125,19 @@ return [
 				$entityIdFormatter,
 				$basicEntityDiffVisualizer
 			);
+		},
+		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
+			$repo = WikibaseRepo::getDefaultInstance();
+			return new ItemFieldDefinitions( [
+				new LabelsProviderFieldDefinitions( $languageCodes ),
+				new DescriptionsProviderFieldDefinitions( $languageCodes,
+					$searchSettings->getSetting( 'entitySearch' ) ),
+				StatementProviderFieldDefinitions::newFromSettings(
+					new InProcessCachingDataTypeLookup( $repo->getPropertyDataTypeLookup() ),
+					$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
+					$searchSettings
+				)
+			] );
 		},
 		'entity-search-callback' => function ( WebRequest $request ) {
 			// FIXME: this code should be split into extension for T190022
@@ -216,6 +236,19 @@ return [
 				$vocabulary,
 				$writer
 			);
+		},
+		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
+			$repo = WikibaseRepo::getDefaultInstance();
+			return new PropertyFieldDefinitions( [
+				new LabelsProviderFieldDefinitions( $languageCodes ),
+				new DescriptionsProviderFieldDefinitions( $languageCodes,
+					$searchSettings->getSetting( 'entitySearch' ) ),
+				StatementProviderFieldDefinitions::newFromSettings(
+					new InProcessCachingDataTypeLookup( $repo->getPropertyDataTypeLookup() ),
+					$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
+					$searchSettings
+				)
+			] );
 		},
 		'entity-search-callback' => function ( WebRequest $request ) {
 			// FIXME: this code should be split into extension for T190022
