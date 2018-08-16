@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbfa5beb_fa8d73ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-16T16:06:53Z",
+      "side": 1,
+      "message": "The more I read this the more I think this should be the other way around,\n\nslotname@0",
+      "range": {
+        "startLine": 10,
+        "startChar": 56,
+        "endLine": 10,
+        "endChar": 82
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
