@@ -16,12 +16,11 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\RepoHooks;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\SummaryFormatter
+ * @covers \Wikibase\SummaryFormatter
  *
  * @group Wikibase
  * @group Database
@@ -31,6 +30,8 @@ use Wikibase\SummaryFormatter;
  * @author Daniel Kinzler
  */
 class SummaryFormatterTest extends MediaWikiLangTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @param EntityIdValue|EntityId $id
@@ -448,7 +449,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$itemTitle->expects( $this->once() )
 			->method( 'getNamespace' )
 			->will( $this->returnValue(
-				WikibaseRepo::getDefaultInstance()
+				$this->getWikibaseRepo()
 					->getEntityNamespaceLookup()
 					->getEntityNamespace( $type )
 			) );
