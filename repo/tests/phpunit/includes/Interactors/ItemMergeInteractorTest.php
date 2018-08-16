@@ -19,12 +19,12 @@ use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Interactors\ItemMergeInteractor
+ * @covers \Wikibase\Repo\Interactors\ItemMergeInteractor
  *
  * @group Wikibase
  * @group Database
@@ -36,6 +36,8 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Lucie-Aimée Kaffee
  */
 class ItemMergeInteractorTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockRepository|null
@@ -50,7 +52,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->testHelper = new EntityModificationTestHelper();
+		$this->testHelper = EntityModificationTestHelper::create( $this->getWikibaseRepo() );
 
 		$this->mockRepository = $this->testHelper->getMockRepository();
 
@@ -129,7 +131,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 			$user = $GLOBALS['wgUser'];
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		//XXX: we may want or need to mock some of these services

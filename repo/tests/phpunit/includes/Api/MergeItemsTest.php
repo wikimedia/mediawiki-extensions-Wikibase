@@ -29,10 +29,10 @@ use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -49,6 +49,8 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Lucie-Aimée Kaffee
  */
 class MergeItemsTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockRepository|null
@@ -68,7 +70,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->entityModificationTestHelper = new EntityModificationTestHelper();
+		$this->entityModificationTestHelper = EntityModificationTestHelper::create( $this->getWikibaseRepo() );
 		$this->apiModuleTestHelper = new ApiModuleTestHelper();
 
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
@@ -160,7 +162,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),

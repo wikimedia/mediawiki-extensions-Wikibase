@@ -31,6 +31,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
@@ -39,7 +40,7 @@ use WikiPage;
 use WikitextContent;
 
 /**
- * @covers Wikibase\Repo\Content\EntityHandler
+ * @covers \Wikibase\Repo\Content\EntityHandler
  *
  * @group Wikibase
  * @group WikibaseEntity
@@ -51,6 +52,10 @@ use WikitextContent;
  */
 abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
+	use WikibaseRepoAccess {
+		getWikibaseRepo as private getOriginalWikibaseRepo;
+	}
+
 	abstract public function getModelId();
 
 	/**
@@ -59,7 +64,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	protected function getWikibaseRepo( SettingsArray $settings = null ) {
-		$repoSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy();
+		$repoSettings = $this->getOriginalWikibaseRepo()->getSettings()->getArrayCopy();
 
 		if ( $settings ) {
 			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
@@ -413,7 +418,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 	public function exportTransformProvider() {
 		$entity = $this->newEntity();
 
-		$internalSerializer = WikibaseRepo::getDefaultInstance()->getStorageEntitySerializer();
+		$internalSerializer = $this->getOriginalWikibaseRepo()->getStorageEntitySerializer();
 		$oldBlob = json_encode( $internalSerializer->serialize( $entity ) );
 
 		// fake several old formats

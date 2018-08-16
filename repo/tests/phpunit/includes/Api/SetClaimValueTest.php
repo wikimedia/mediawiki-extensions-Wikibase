@@ -21,12 +21,11 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 use WikiPage;
 
 /**
- * @covers Wikibase\Repo\Api\SetClaimValue
+ * @covers \Wikibase\Repo\Api\SetClaimValue
  *
  * @group API
  * @group Database
@@ -70,7 +69,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return EntityDocument|StatementListProvider
 	 */
 	private function addStatementsAndSave( EntityDocument $entity, PropertyId $propertyId ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) );
@@ -87,7 +86,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$property = Property::newFromType( 'commonsMedia' );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );
@@ -108,7 +107,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function doTestValidRequest( EntityId $entityId, $guid, $value, $expectedSummary ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$entityLookup = $wikibaseRepo->getEntityLookup();
 		/** @var StatementListProvider $obtainedEntity */
 		$obtainedEntity = $entityLookup->getEntity( $entityId );
@@ -159,7 +158,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidRequest( $handle, $guid, $snakType, $value, $error ) {
 		$entityId = new ItemId( EntityTestHelper::getId( $handle ) );
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = $this->getWikibaseRepo()->getEntityLookup()->getEntity( $entityId );
 
 		if ( $guid === null ) {
 			/** @var StatementListProvider $entity */
@@ -215,7 +214,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 */
 	private function getEntityIdFormatter() {
 		if ( !$this->entityIdFormatter ) {
-			$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+			$titleLookup = $this->getWikibaseRepo()->getEntityTitleLookup();
 			$this->entityIdFormatter = new EntityIdPlainLinkFormatter( $titleLookup );
 		}
 
@@ -239,7 +238,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 				}
 			] );
 
-			$factory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
+			$factory = $this->getWikibaseRepo()->getValueFormatterFactory();
 			$this->propertyValueFormatter = $factory->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );
 		}
 

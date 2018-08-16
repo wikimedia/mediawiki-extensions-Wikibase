@@ -8,7 +8,6 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;
 
@@ -26,6 +25,8 @@ use WikitextContent;
 class ItemMoveTest extends \MediaWikiTestCase {
 
 	//@todo: make this a baseclass to use with all types of entities.
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var EntityRevision
@@ -51,8 +52,6 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		//TODO: remove global TestSites DB setup once we can inject sites sanely.
 		static $hasSites = false;
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		if ( !$hasSites ) {
 			$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesTable->clear();
@@ -61,10 +60,10 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		}
 
 		$item = new Item();
-		$this->entityRevision = $wikibaseRepo->getEntityStore()->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$this->entityRevision = $this->getWikibaseRepo()->getEntityStore()->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$id = $this->entityRevision->getEntity()->getId();
-		$this->itemTitle = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
+		$this->itemTitle = $this->getWikibaseRepo()->getEntityTitleLookup()->getTitleForId( $id );
 
 		$title = Title::newFromText( 'wbmovetest', $this->getDefaultWikitextNS() );
 		$this->page = new WikiPage( $title );
@@ -75,8 +74,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	 * Tests @see WikibaseItem::getIdForSiteLink
 	 */
 	public function testMovePrevention() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
+		$titleLookup = $this->getWikibaseRepo()->getEntityTitleLookup();
 
 		// Moving a regular page into data NS onto an existing item
 		$title = $this->itemTitle;
@@ -84,7 +82,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
-		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$entityNamespaceLookup = $this->getWikibaseRepo()->getEntityNamespaceLookup();
 		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
 		// Moving a regular page into data NS to an invalid location
