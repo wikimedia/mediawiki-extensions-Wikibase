@@ -181,6 +181,11 @@ class SqlStore implements Store {
 	private $forceWriteSearchFields;
 
 	/**
+	 * @var HashBagOStuff
+	 */
+	private $inMemoryCache;
+
+	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
@@ -214,6 +219,8 @@ class SqlStore implements Store {
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
+
+		$this->inMemoryCache = $this->newInMemoryCache();
 	}
 
 	/**
@@ -501,7 +508,7 @@ class SqlStore implements Store {
 
 		// Top caching layer using an in-process hash.
 		$hashCachingLookup = new CachingEntityRevisionLookup(
-			new EntityRevisionCache( new HashBagOStuff( [ 'maxKeys' => 1000 ] ) ),
+			new EntityRevisionCache( $this->inMemoryCache ),
 			$persistentCachingLookup
 		);
 		// No need to verify the revision ID, we'll ignore updates that happen during the request.
@@ -509,6 +516,14 @@ class SqlStore implements Store {
 		$dispatcher->registerWatcher( $hashCachingLookup );
 
 		return [ $nonCachingLookup, $hashCachingLookup ];
+	}
+
+	public function clearInMemoryCache() {
+		$this->inMemoryCache->clear();
+	}
+
+	private function newInMemoryCache() {
+		return new HashBagOStuff( [ 'maxKeys' => 1000 ] );
 	}
 
 	/**
