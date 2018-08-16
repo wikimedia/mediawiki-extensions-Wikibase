@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -102,7 +103,7 @@ class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCa
 		$mock->putEntity( $item, 12 );
 
 		// make sure we get the new revision automatically
-		$revId = $lookup->getLatestRevisionId( $id );
+		$revId = $this->extractConcreteRevisionId( $lookup->getLatestRevisionId( $id ) );
 		$this->assertEquals( 12, $revId, 'new revision should be detected if verification is enabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
@@ -111,8 +112,7 @@ class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCa
 		$mock->removeEntity( $id );
 
 		// try to fetch it again
-		$revId = $lookup->getLatestRevisionId( $id );
-		$this->assertFalse( $revId, 'deletion should be detected if verification is enabled' );
+		$revId = $this->assertNonexistent( $lookup->getLatestRevisionId( $id ), 'deletion should be detected if verification is enabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
 		$this->assertNull( $rev, 'deletion should be detected if verification is enabled' );
@@ -133,7 +133,7 @@ class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCa
 		$entityRevisionCache->set( new EntityRevision( $item, 11 ) );
 
 		// check that we are still getting the old revision
-		$revId = $lookup->getLatestRevisionId( $id );
+		$revId = $this->extractConcreteRevisionId( $lookup->getLatestRevisionId( $id ) );
 		$this->assertEquals( 11, $revId, 'new revision should be ignored if verification is disabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
@@ -142,11 +142,35 @@ class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCa
 		$mock->removeEntity( $id );
 
 		// try to fetch it again - should still be cached
-		$revId = $lookup->getLatestRevisionId( $id );
+		$revId = $this->extractConcreteRevisionId( $lookup->getLatestRevisionId( $id ) );
 		$this->assertEquals( 11, $revId, 'deletion should be ignored if verification is disabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
 		$this->assertEquals( 11, $rev->getRevisionId(), 'deletion should be ignored if verification is disabled' );
+	}
+
+	private function extractConcreteRevisionId( LatestRevisionIdResult $result ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Not a concrete revision result given' );
+		};
+
+		return $result->onNonexistentEntity( $shouldNotBeCalled )
+			->onRedirect( $shouldNotBeCalled )
+			->onConcreteRevision( 'intval' )
+			->map();
+	}
+
+	private function assertNonexistent( LatestRevisionIdResult $result, $message ) {
+		$shouldNotBeCalled = function () use ( $message ) {
+			$this->fail( $message );
+		};
+
+		return $result->onNonexistentEntity( function () {
+				$this->assertTrue( true );
+		} )
+			->onRedirect( $shouldNotBeCalled )
+			->onConcreteRevision( $shouldNotBeCalled )
+			->map();
 	}
 
 }

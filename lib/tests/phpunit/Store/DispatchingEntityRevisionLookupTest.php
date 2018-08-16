@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\ParameterAssertionException;
 
@@ -142,7 +143,10 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
-		$this->assertFalse( $dispatchingLookup->getLatestRevisionId( new ItemId( 'foo:Q123' ) ) );
+		$latestRevisionIdResult = $dispatchingLookup->getLatestRevisionId(
+			new ItemId( 'foo:Q123' )
+		);
+		$this->assertNonexistentRevisionId( $latestRevisionIdResult );
 	}
 
 	public function testLookupExceptionsAreNotCaught() {
@@ -184,6 +188,21 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 				],
 			],
 		];
+	}
+
+	private function assertNonexistentRevisionId( LatestRevisionIdResult $latestRevisionIdResult ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Should not be called' );
+		};
+
+		$latestRevisionIdResult->onConcreteRevision( $shouldNotBeCalled )
+			->onRedirect( $shouldNotBeCalled )
+			->onNonexistentEntity(
+				function () {
+					$this->assertTrue( true ); // To avoid risky test warning
+				}
+			)
+			->map();
 	}
 
 }
