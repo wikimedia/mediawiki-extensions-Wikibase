@@ -25,11 +25,11 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Dumpers\JsonDumpGenerator
- * @covers Wikibase\Dumpers\DumpGenerator
+ * @covers \Wikibase\Dumpers\JsonDumpGenerator
+ * @covers \Wikibase\Dumpers\DumpGenerator
  *
  * @group Wikibase
  *
@@ -39,6 +39,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var SerializerFactory|null
@@ -53,7 +54,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
 		$this->serializerFactory = new SerializerFactory( new DataValueSerializer(), $serializerOptions );

@@ -6,11 +6,10 @@ use ApiUsageException;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\SetSiteLink
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\SetSiteLink
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @license GPL-2.0-or-later
  *
@@ -361,7 +360,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$wikibaseRepo = $this->getWikibaseRepo();
 			$store = $wikibaseRepo->getEntityStore();
 
 			$this->initTestEntities( [ 'StringProp', 'Leipzig', 'Berlin' ] );
@@ -658,7 +657,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
 		return $itemRevision->getEntity();
