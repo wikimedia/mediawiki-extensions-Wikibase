@@ -47,7 +47,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "унесите опис на $1",
 	"wikibase-aliases-edit-placeholder": "унесите неке алијасе",
 	"wikibase-aliases-edit-placeholder-language-aware": "унесите неке алијасе на $1",
-	"wikibase-aliases-edit-label": "Алијаси, одвојени усправном цртом:",
+	"wikibase-aliases-edit-label": "Псеудоними, одвојени усправном цртом:",
 	"wikibase-content-language-edit-label": "Језик:",
 	"wikibase-diffview-reference": "референца",
 	"wikibase-diffview-rank": "ранг",

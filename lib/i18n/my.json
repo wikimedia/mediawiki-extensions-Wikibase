@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ninjastrikers"
+			"Ninjastrikers",
+			"Dr Lotus Black"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "ဝီကီပီးဒီးယား",
-	"wikibase-sitelinks-sitename-columnheading": "ဘာသာစကား"
+	"wikibase-sitelinks-sitename-columnheading": "ဘာသာစကား",
+	"wikibase-validator-description-too-long": "ဖော်ပြချက်သည် စာလုံးရေ {{PLURAL:$1|ခု|$1 ခု}} ထက်မပိုရပါ"
 }

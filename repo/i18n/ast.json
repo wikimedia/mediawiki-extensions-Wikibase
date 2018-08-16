@@ -302,6 +302,8 @@
 	"wikibase-redirectentity-fromid": "L'identificador dende'l que redirixir",
 	"wikibase-redirectentity-toid": "L'identificador al que redirixir",
 	"wikibase-redirectentity-submit": "Redireición",
+	"wikibase-redirect-origin-not-empty": "Nun puede crease una redireición na entidá $1 que nun ta vacia",
+	"wikibase-redirect-no-such-entity": "Non pudo alcontrase la entidá $1",
 	"special-mylanguagefallbackchain": "Cadena predeterminada na mio llingua",
 	"wikibase-mylanguagefallbackchain-text": "La cadena predeterminada de llingua que s'usa p'amosa-y les etiquetes apaez abaxo.",
 	"wikibase-mylanguagefallbackchain-babel": "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|so}} [[Special:MyPage|páxina d'usuariu]].",

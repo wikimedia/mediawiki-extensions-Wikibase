@@ -375,6 +375,7 @@
 	"wikibase-search-bad-profile-name": "잘못된 검색 프로파일 이름: $1",
 	"wikibase-search-config-notfound": "전문 검색 구성을 찾을 수 없습니다: $1",
 	"wikibase-search-config-badclass": "잘못된 쿼리 빌더 클래스: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 키워드에 유효한 문장이 포함되어 있지 않습니다",
 	"apihelp-wbcreateclaim-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbcreateredirect-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbeditentity-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
