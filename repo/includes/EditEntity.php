@@ -284,10 +284,17 @@ class EditEntity {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevisionId();
 			} elseif ( $id !== null ) {
-				$this->latestRevId = (int)$this->entityRevisionLookup->getLatestRevisionId(
+				$result = $this->entityRevisionLookup->getLatestRevisionId(
 					$id,
 					$this->getReplicaMode()
 				);
+				$returnZero = function () {
+					return 0;
+				};
+				$this->latestRevId = $result->onNonexistentEntity( $returnZero )
+					->onRedirect( $returnZero )
+					->onConcreteRevision( 'intval' )
+					->map();
 			}
 		}
 

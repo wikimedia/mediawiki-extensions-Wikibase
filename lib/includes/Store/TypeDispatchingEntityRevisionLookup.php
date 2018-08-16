@@ -61,7 +61,7 @@ class TypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		return $this->getLookup( $entityId->getEntityType() )->getLatestRevisionId(
