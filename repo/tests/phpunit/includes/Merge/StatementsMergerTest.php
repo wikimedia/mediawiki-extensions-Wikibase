@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Merge\StatementsMerger;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Tests\NewStatement;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
  * @covers \Wikibase\Repo\Merge\StatementsMerger
@@ -24,6 +24,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class StatementsMergerTest extends TestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @dataProvider statementsProvider
@@ -73,7 +75,7 @@ class StatementsMergerTest extends TestCase {
 	 */
 	private function newStatementsMerger() {
 		return new StatementsMerger(
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getStatementChangeOpFactory()
+			$this->getWikibaseRepo()->getChangeOpFactoryProvider()->getStatementChangeOpFactory()
 		);
 	}
 

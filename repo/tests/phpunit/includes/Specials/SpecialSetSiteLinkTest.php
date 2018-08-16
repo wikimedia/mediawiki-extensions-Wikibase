@@ -16,13 +16,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialSetSiteLink
- * @covers Wikibase\Repo\Specials\SpecialModifyEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialSetSiteLink
+ * @covers \Wikibase\Repo\Specials\SpecialModifyEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -37,6 +37,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	use HamcrestPHPUnitIntegration;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var array
@@ -64,7 +65,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	private static $oldBadgeItemsSetting;
 
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$siteLookup = $wikibaseRepo->getSiteLookup();
 		$settings = $wikibaseRepo->getSettings();
 
@@ -106,20 +107,20 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$this->addBadgeMatcher();
 		}
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = $this->getWikibaseRepo()->getSettings();
 		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 	}
 
 	protected function tearDown() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = $this->getWikibaseRepo()->getSettings();
 		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
 
 		parent::tearDown();
 	}
 
 	private function createItems() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$badge = new Item();
 		$badge->setLabel( 'de', 'Guter Artikel' );
@@ -250,7 +251,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostModifySiteLink() {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$lookup = $this->getWikibaseRepo()->getEntityLookup();
 		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',
@@ -273,7 +274,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostRemoveSiteLink() {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$lookup = $this->getWikibaseRepo()->getEntityLookup();
 		$request = new FauxRequest( [
 			'id' => self::$itemId,
 			'site' => 'dewiki',

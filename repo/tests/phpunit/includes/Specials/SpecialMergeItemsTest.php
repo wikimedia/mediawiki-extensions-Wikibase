@@ -28,11 +28,11 @@ use Wikibase\Repo\Specials\SpecialMergeItems;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialMergeItems
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialMergeItems
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -49,6 +49,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockRepository|null
@@ -68,7 +69,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->entityModificationTestHelper = new EntityModificationTestHelper();
+		$this->entityModificationTestHelper = EntityModificationTestHelper::create( $this->getWikibaseRepo() );
 
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
@@ -118,7 +119,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return SpecialMergeItems
 	 */
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		$changeOpsFactory = new MergeChangeOpsFactory(

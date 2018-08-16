@@ -23,12 +23,12 @@ use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialEntityData
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialEntityData
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Database
  *
@@ -41,6 +41,8 @@ use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
  * @author Daniel Kinzler
  */
 class SpecialEntityDataTest extends SpecialPageTestBase {
+
+	use WikibaseRepoAccess;
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
@@ -80,7 +82,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		// Note: We are testing with the actual RDF bindings. These should not change for well
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
 		$rdfBuilder = $wikibaseRepo->getValueSnakRdfBuilderFactory();

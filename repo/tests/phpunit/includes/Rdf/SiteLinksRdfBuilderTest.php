@@ -3,10 +3,11 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Wikibase\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\SiteLinksRdfBuilder
+ * @covers \Wikibase\Rdf\SiteLinksRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -16,6 +17,8 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Stas Malyshev
  */
 class SiteLinksRdfBuilderTest extends \PHPUnit\Framework\TestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -27,6 +30,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$this->helper = new NTriplesRdfTestHelper(
 			new RdfBuilderTestData(
+				$this->getWikibaseRepo()->getEntityContentDataCodec(),
 				__DIR__ . '/../../data/rdf/entities',
 				__DIR__ . '/../../data/rdf/SiteLinksRdfBuilder'
 			)

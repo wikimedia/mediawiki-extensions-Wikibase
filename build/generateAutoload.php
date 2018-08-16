@@ -63,7 +63,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/Api/EntityTestHelper.php',
 				'tests/phpunit/includes/Api/ModifyTermTestCase.php',
 				'tests/phpunit/includes/Api/PermissionsTestCase.php',
-				'tests/phpunit/includes/Api/TermTestHelper.php',
 				'tests/phpunit/includes/Api/WikibaseApiTestCase.php',
 				'tests/phpunit/includes/ChangeOp/ChangeOpTestMockProvider.php',
 				'tests/phpunit/includes/ChangeOp/StatementListProviderDummy.php',
@@ -85,6 +84,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/Specials/SpecialNewEntityTestCase.php',
 				'tests/phpunit/includes/Specials/SpecialWikibaseRepoPageTestBase.php',
 				'tests/phpunit/includes/Validators/TestValidator.php',
+				'tests/phpunit/includes/WikibaseRepoAccess.php',
 				'tests/phpunit/maintenance/MockAddUnits.php',
 			]
 		);
