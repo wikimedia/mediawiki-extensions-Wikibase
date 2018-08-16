@@ -66,11 +66,11 @@ class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	 * @param EntityId $entityId
 	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		$lookup = $this->getLookupForEntityId( $entityId );
-		return $lookup !== null ? $lookup->getLatestRevisionId( $entityId, $mode ) : false;
+		return $lookup !== null ? $lookup->getLatestRevisionId( $entityId, $mode ) : LatestRevisionIdResult::nonexistentEntity();
 	}
 
 	/**
