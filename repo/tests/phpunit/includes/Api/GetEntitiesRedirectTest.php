@@ -6,10 +6,10 @@ use ApiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Api\GetEntities
+ * @covers \Wikibase\Repo\Api\GetEntities
  *
  * Test for redirect resolution in the wbgetentities API module
  *
@@ -24,11 +24,13 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetEntitiesRedirectTest extends ApiTestCase {
 
+	use WikibaseRepoAccess;
+
 	private function createEntity( $label ) {
 		$entity = new Item();
 		$entity->setLabel( 'en', $label );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$rev = $store->saveEntity( $entity, 'GetEntitiesRedirectTest', $GLOBALS['wgUser'], EDIT_NEW );
 		$id = $rev->getEntity()->getId();
 
@@ -40,7 +42,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 
 		$redirect = new EntityRedirect( $id, $target );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$store->saveRedirect( $redirect, 'GetEntitiesRedirectTest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		return $id;

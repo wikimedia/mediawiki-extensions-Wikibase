@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\Search\Elastic\Fields\StatementQuantityField;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
  * @covers \Wikibase\Repo\Search\Elastic\Fields\StatementQuantityField
@@ -20,6 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class StatementQuantityFieldTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * List of properties we handle.
@@ -70,7 +71,7 @@ class StatementQuantityFieldTest extends \PHPUnit\Framework\TestCase {
 			$this->properties,
 			[],
 			[],
-			WikibaseRepo::getDefaultInstance()
+			$this->getWikibaseRepo()
 				->getDataTypeDefinitions()
 				->getSearchIndexDataFormatterCallbacks(),
 			$this->propertiesForQuantity
