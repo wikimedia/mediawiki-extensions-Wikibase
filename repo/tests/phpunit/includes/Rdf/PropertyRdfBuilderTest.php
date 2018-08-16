@@ -3,10 +3,11 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Wikibase\Rdf\PropertyRdfBuilder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\PropertyRdfBuilder
+ * @covers \Wikibase\Rdf\PropertyRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -15,6 +16,8 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class PropertyRdfBuilderTest extends \PHPUnit\Framework\TestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -40,6 +43,7 @@ class PropertyRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	private function getTestData() {
 		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
+				$this->getWikibaseRepo()->getEntityContentDataCodec(),
 				__DIR__ . '/../../data/rdf/entities',
 				__DIR__ . '/../../data/rdf/PropertyRdfBuilder'
 			);

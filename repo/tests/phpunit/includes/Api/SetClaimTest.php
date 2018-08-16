@@ -22,11 +22,10 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetClaim
+ * @covers \Wikibase\Repo\Api\SetClaim
  *
  * @group API
  * @group Database
@@ -53,7 +52,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	private function getPropertyIds() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$propertyIds = [];
 
@@ -123,7 +122,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testAddClaim() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$statements = $this->getStatements();
 
@@ -163,7 +162,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	private function getInvalidCases() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
@@ -271,7 +270,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testSetClaimAtIndex() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$entity = new Item();
 
@@ -320,7 +319,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$statementSerializer = $serializerFactory->newStatementSerializer();
-		$statementDeserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatStatementDeserializer();
+		$statementDeserializer = $this->getWikibaseRepo()->getExternalFormatStatementDeserializer();
 
 		if ( $statement instanceof Statement ) {
 			$serialized = $statementSerializer->serialize( $statement );
@@ -405,7 +404,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
 
 		/** @var StatementListProvider $entity */
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = $this->getWikibaseRepo()->getEntityLookup()->getEntity( $entityId );
 
 		$statements = $entity->getStatements();
 		$savedStatement = $statements->getFirstStatementWithGuid( $statement->getGuid() );
@@ -422,7 +421,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @note A hack is  in place in ChangeOpStatement to allow this
 	 */
 	public function testBugT60394SpecifiedIndexOutOfBounds() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		// Save new entity with empty statements:
 		$entity = new Item();
@@ -446,7 +445,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testBadPropertyError() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$property = Property::newFromType( 'quantity' );
 		$property = $store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();

@@ -12,16 +12,15 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
 use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Repo\WikibaseRepo;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialNewItem
- * @covers Wikibase\Repo\Specials\SpecialNewEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialNewItem
+ * @covers \Wikibase\Repo\Specials\SpecialNewEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -49,7 +48,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		return new SpecialNewItem(
 			$this->copyrightView,

@@ -13,11 +13,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\RemoveReferences
+ * @covers \Wikibase\Repo\Api\RemoveReferences
  *
  * @group API
  * @group Database
@@ -74,7 +73,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = new Item();
 
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = $this->getWikibaseRepo()->getEntityStore();
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 			$guidGenerator = new GuidGenerator();

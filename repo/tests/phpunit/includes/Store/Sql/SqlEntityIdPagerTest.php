@@ -15,10 +15,10 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\WikiPageEntityStore;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlEntityIdPager
+ * @covers \Wikibase\Repo\Store\Sql\SqlEntityIdPager
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -32,6 +32,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Marius Hoch
  */
 class SqlEntityIdPagerTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	public function setUp() {
 		parent::setUp();
@@ -83,7 +85,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	}
 
 	private function getPageRow( EntityId $entityId, $isRedirect ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = $this->getWikibaseRepo()->getEntityNamespaceLookup();
 
 		return [
 			'page_namespace' => $entityNamespaceLookup->getEntityNamespace( $entityId->getEntityType() ),
@@ -97,7 +99,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	}
 
 	private function getRedirectRow( EntityRedirect $redirect ) {
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityTitleLookup = $this->getWikibaseRepo()->getEntityTitleLookup();
 
 		$redirectTitle = $entityTitleLookup->getTitleForId( $redirect->getEntityId() );
 		return [
@@ -150,7 +152,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 	) {
 		$this->insertEntities( $entitiesToInsert, $redirectsToInsert );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$pager = new SqlEntityIdPager(
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getEntityIdParser(),
@@ -276,7 +278,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
 		$this->insertEntities( [ $property, $item ] );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$pager = new SqlEntityIdPager(
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getEntityIdParser()
@@ -319,7 +321,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
 		$this->insertEntities( [ $property, $item ] );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		/** @var WikiPageEntityStore $entityStore */
 		$entityStore = $wikibaseRepo->getEntityStore();
@@ -347,7 +349,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
 		$this->insertEntities( $entities );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$pager = new SqlEntityIdPager(
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getEntityIdParser()

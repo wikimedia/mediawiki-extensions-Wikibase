@@ -11,10 +11,11 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database
@@ -22,6 +23,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var EntityStore
@@ -40,7 +43,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->repo = WikibaseRepo::getDefaultInstance();
+		$this->repo = $this->getWikibaseRepo();
 		$this->entityStore = $this->repo->getEntityStore();
 
 		$namespaceLookup = $this->repo->getEntityNamespaceLookup();
@@ -76,7 +79,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 	}
 
 	private function newParserOutputGenerator() {
-		return WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory()
+		return $this->getWikibaseRepo()->getEntityParserOutputGeneratorFactory()
 			->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 	}
 

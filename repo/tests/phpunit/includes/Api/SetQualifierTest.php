@@ -16,11 +16,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetQualifier
+ * @covers \Wikibase\Repo\Api\SetQualifier
  *
  * @group API
  * @group Database
@@ -74,7 +73,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 * @return Property
 	 */
 	protected function makeProperty( Property $property ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 		return $property;
@@ -84,7 +83,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		static $item = null;
 
 		if ( !$item ) {
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = $this->getWikibaseRepo()->getEntityStore();
 
 			$newItem = new Item();
 			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_NEW );
@@ -175,7 +174,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeValidRequest( $params );
 
 		/** @var StatementListProvider $entity */
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = $this->getWikibaseRepo()->getEntityLookup()->getEntity( $entityId );
 
 		$statements = $entity->getStatements();
 
@@ -203,7 +202,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidRequest( $itemHandle, $guid, $propertyHande, $snakType, $value, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+		$item = $this->getWikibaseRepo()->getEntityLookup()->getEntity( $itemId );
 
 		$propertyId = EntityTestHelper::getId( $propertyHande );
 
