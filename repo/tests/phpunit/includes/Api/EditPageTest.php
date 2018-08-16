@@ -6,7 +6,6 @@ use MWException;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -29,7 +28,7 @@ class EditPageTest extends WikibaseApiTestCase {
 	 * @group API
 	 */
 	public function testEditItemDirectly() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$store = $wikibaseRepo->getEntityStore();
 
 		$item = new Item(); //@todo: do this with all kinds of entities.
@@ -61,7 +60,7 @@ class EditPageTest extends WikibaseApiTestCase {
 		global $wgContentHandlerUseDB;
 
 		$id = new ItemId( "Q1234567" );
-		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
+		$title = $this->wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
 		$page = new WikiPage( $title );
 
 		$text = "hallo welt";

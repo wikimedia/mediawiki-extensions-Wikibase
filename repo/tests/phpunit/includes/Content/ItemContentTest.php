@@ -31,8 +31,8 @@ use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\ItemContent
- * @covers Wikibase\EntityContent
+ * @covers \Wikibase\ItemContent
+ * @covers \Wikibase\EntityContent
  *
  * @group Wikibase
  * @group WikibaseItem
@@ -145,6 +145,7 @@ class ItemContentTest extends EntityContentTestCase {
 	 * @return ItemContent
 	 */
 	private function newRedirect( ItemId $itemId, ItemId $targetId ) {
+		// todo Use WikibaseRepoAccess or find alternative
 		$nsLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		$itemNs = $nsLookup->getEntityNamespace( 'item' );
 
@@ -265,6 +266,7 @@ class ItemContentTest extends EntityContentTestCase {
 	 * @return ItemHandler
 	 */
 	private function getItemHandler() {
+		// todo Use WikibaseRepoAccess or find alternative
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new ItemHandler(

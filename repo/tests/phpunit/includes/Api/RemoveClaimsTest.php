@@ -12,10 +12,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\RemoveClaims
+ * @covers \Wikibase\Repo\Api\RemoveClaims
  *
  * @group API
  * @group Database
@@ -38,7 +37,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @return Item
 	 */
 	private function addStatementsAndSave( Item $item ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		if ( !isset( self::$propertyId ) ) {
@@ -103,7 +102,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			$this->makeTheRequest( [ $statement->getGuid() ] );
 
 			/** @var Item $obtainedItem */
-			$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+			$obtainedItem = $this->wikibaseRepo->getEntityLookup()->getEntity( $item->getId() );
 			$obtainedStatements = $obtainedItem->getStatements();
 
 			$this->assertNull( $obtainedStatements->getFirstStatementWithGuid( $statement->getGuid() ) );
@@ -127,7 +126,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$this->makeTheRequest( $guids );
 
 		/** @var Item $obtainedItem */
-		$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
+		$obtainedItem = $this->wikibaseRepo->getEntityLookup()->getEntity( $item->getId() );
 
 		$this->assertTrue( $obtainedItem->getStatements()->isEmpty() );
 	}
@@ -180,7 +179,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	private function getNewProperty( $type ) {
 		$property = Property::newFromType( $type );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		return $property;

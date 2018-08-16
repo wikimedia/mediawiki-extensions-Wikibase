@@ -21,7 +21,7 @@ use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\SummaryFormatter
+ * @covers \Wikibase\SummaryFormatter
  *
  * @group Wikibase
  * @group Database
@@ -31,6 +31,8 @@ use Wikibase\SummaryFormatter;
  * @author Daniel Kinzler
  */
 class SummaryFormatterTest extends MediaWikiLangTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @param EntityIdValue|EntityId $id
@@ -448,7 +450,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$itemTitle->expects( $this->once() )
 			->method( 'getNamespace' )
 			->will( $this->returnValue(
-				WikibaseRepo::getDefaultInstance()
+				$this->wikibaseRepo
 					->getEntityNamespaceLookup()
 					->getEntityNamespace( $type )
 			) );

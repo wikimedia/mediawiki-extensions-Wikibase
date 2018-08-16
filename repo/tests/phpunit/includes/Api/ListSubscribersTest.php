@@ -10,10 +10,10 @@ use MediaWikiLangTestCase;
 use RequestContext;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Repo\Api\ListSubscribers;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Api\ListSubscribers
+ * @covers \Wikibase\Repo\Api\ListSubscribers
  *
  * @group API
  * @group Wikibase
@@ -24,6 +24,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Amir Sarabadani
  */
 class ListSubscribersTest extends MediaWikiLangTestCase {
+
+	use WikibaseRepoAccess;
 
 	protected function setUp() {
 		$this->tablesUsed[] = 'wb_changes_subscription';
@@ -85,7 +87,7 @@ class ListSubscribersTest extends MediaWikiLangTestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$apiMain = $this->getQueryModule( $params );
 		$errorReporter = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() )
 			->getErrorReporter( $apiMain );

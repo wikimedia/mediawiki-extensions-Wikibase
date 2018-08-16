@@ -38,6 +38,7 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Tests\Store\MockEntityIdPager;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
@@ -51,6 +52,8 @@ use Wikimedia\TestingAccessWrapper;
  * @author Addshore
  */
 class DumpRdfTest extends MediaWikiLangTestCase {
+
+	use WikibaseRepoAccess;
 
 	protected function setUp() {
 		parent::setUp();
@@ -157,7 +160,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			)
 			->will( $this->returnValue( $mockEntityIdPager ) );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
 		$rdfBuilder = $wikibaseRepo->getValueSnakRdfBuilderFactory();
 

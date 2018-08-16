@@ -22,11 +22,11 @@ use Wikibase\MediaInfo\DataModel\MediaInfo;
 use Wikibase\MediaInfo\DataModel\MediaInfoId;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\Repo\Api\EntitySavingHelper
+ * @covers \Wikibase\Repo\Api\EntitySavingHelper
  *
  * @group Database
  * @group Wikibase
@@ -38,6 +38,8 @@ use Wikibase\SummaryFormatter;
  */
 class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
+	use WikibaseRepoAccess;
+
 	/**
 	 * Skips a test of the given entity type is not enabled.
 	 *
@@ -48,7 +50,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			return;
 		}
 
-		$enabledTypes = WikibaseRepo::getDefaultInstance()->getLocalEntityTypes();
+		$enabledTypes = $this->wikibaseRepo->getLocalEntityTypes();
 		if ( !in_array( $requiredEntityType, $enabledTypes ) ) {
 			$this->markTestSkipped( 'Entity type not enabled: ' . $requiredEntityType );
 		}
@@ -158,7 +160,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'allowCreation' => true,
 			'params' => [ 'entity' => 'M7' ],
 			'entityId' => new MediaInfoId( 'M7' ),
-			'EntityIdParser' => WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+			'EntityIdParser' => $this->wikibaseRepo->getEntityIdParser()
 		] );
 
 		$return = $helper->loadEntity();
@@ -311,7 +313,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		);
 
 		if ( isset( $config['allowCreation'] ) && $config['allowCreation'] ) {
-			$helper->setEntityFactory( WikibaseRepo::getDefaultInstance()->getEntityFactory() );
+			$helper->setEntityFactory( $this->wikibaseRepo->getEntityFactory() );
 			$helper->setEntityStore( $this->getMockEntityStore() );
 		}
 

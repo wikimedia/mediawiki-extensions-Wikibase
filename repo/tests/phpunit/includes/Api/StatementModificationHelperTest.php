@@ -19,10 +19,11 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\StatementModificationHelper;
 use Wikibase\Repo\SnakFactory;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\StatementModificationHelper
+ * @covers \Wikibase\Repo\Api\StatementModificationHelper
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -32,6 +33,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class StatementModificationHelperTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	public function testValidGetEntityIdFromString() {
 		$validEntityIdString = 'q55';
@@ -73,7 +76,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 	private function createCreateClaimApiModule() {
 		$apiMain = new ApiMain();
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 

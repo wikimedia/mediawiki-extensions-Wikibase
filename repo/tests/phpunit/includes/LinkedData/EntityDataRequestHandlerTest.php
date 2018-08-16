@@ -23,10 +23,11 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\LinkedData\EntityDataRequestHandler
+ * @covers \Wikibase\Repo\LinkedData\EntityDataRequestHandler
  *
  * @group Database
  *
@@ -37,6 +38,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var Title
@@ -95,7 +98,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		// Note: We are testing with the actual RDF bindings. These should not change for well
 		// known data types. Mocking the bindings would be nice, but is complex and not needed.
 		$rdfBuilder = $wikibaseRepo->getValueSnakRdfBuilderFactory();

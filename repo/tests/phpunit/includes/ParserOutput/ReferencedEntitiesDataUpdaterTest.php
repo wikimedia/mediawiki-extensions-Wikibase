@@ -115,6 +115,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	 * @return int|null
 	 */
 	private function getEntityNamespace( $entityType ) {
+		// todo Use WikibaseRepoAccess or find alternative
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntityNamespace( $entityType );

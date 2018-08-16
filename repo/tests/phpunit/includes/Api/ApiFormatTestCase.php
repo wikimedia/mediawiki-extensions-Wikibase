@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
  * @group API
@@ -23,6 +23,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 abstract class ApiFormatTestCase extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var PropertyId|null
@@ -75,7 +77,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	protected function storeNewProperty() {
 		global $wgUser;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 
 		$property = Property::newFromType( 'string' );
 		$entityRevision = $store->saveEntity( $property, 'testing', $wgUser, EDIT_NEW );
@@ -85,7 +87,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	protected function storeNewItem() {
 		global $wgUser;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 
 		$item = new Item();
 		$entityRevision = $store->saveEntity( $item, 'testing', $wgUser, EDIT_NEW );
@@ -97,7 +99,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	private function storePresetDataInStatement( EntityRevision $entityRevision, PropertyId $propertyId ) {
 		global $wgUser;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 
 		/** @var Item $item */
 		$item = $entityRevision->getEntity();

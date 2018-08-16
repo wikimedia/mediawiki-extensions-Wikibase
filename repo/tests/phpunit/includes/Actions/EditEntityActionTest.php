@@ -882,6 +882,7 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @return int
 	 */
 	private function getItemNamespace() {
+		// todo Use WikibaseRepoAccess or find alternative
 		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		 return $entityNamespaceLookup->getEntityNamespace( 'item' );
 	}

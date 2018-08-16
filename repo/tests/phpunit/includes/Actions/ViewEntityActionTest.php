@@ -4,12 +4,11 @@ namespace Wikibase\Repo\Tests\Actions;
 
 use OutputPage;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\ViewEntityAction;
 use WikiPage;
 
 /**
- * @covers Wikibase\ViewEntityAction
+ * @covers \Wikibase\ViewEntityAction
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -155,7 +154,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	 */
 	public function testShow404() {
 		$id = new ItemId( 'q1122334455' );
-		$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $id );
+		$title = $this->wikibaseRepo->getEntityContentFactory()->getTitleForId( $id );
 		$page = new WikiPage( $title );
 		$action = $this->createAction( 'view', $page );
 

@@ -7,12 +7,11 @@ use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetAliases
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\SetAliases
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @group Database
  * @group medium
@@ -354,7 +353,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 
 		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
 		return $itemRevision->getEntity();
@@ -460,13 +459,13 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	private function saveTestItem( Item $item ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 
 		$store->saveEntity( $item, 'SetAliasesTest: created test item', $this->getTestUser()->getUser() );
 	}
 
 	private function getCurrentItemRevision( ItemId $id ) {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
+		$lookup = $this->wikibaseRepo->getEntityRevisionLookup();
 
 		return $lookup->getEntityRevision( $id );
 	}

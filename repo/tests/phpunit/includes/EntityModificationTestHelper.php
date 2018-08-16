@@ -45,6 +45,7 @@ class EntityModificationTestHelper {
 	private $redirectResolvingEntityLookup;
 
 	public function __construct() {
+		// todo Use WikibaseRepoAccess or find alternative
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->serializer = $wikibaseRepo->getAllTypesEntitySerializer();
