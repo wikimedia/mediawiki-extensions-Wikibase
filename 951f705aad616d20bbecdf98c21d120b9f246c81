@@ -22,6 +22,30 @@
       "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b10f9e79_3a8dff83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-16T16:14:25Z",
+      "side": 1,
+      "message": "Infact, as discussed in IRC I\u0027d be pro switching the @ for a /\nThis leaves the optional part at the end and can also be compared to an address",
+      "parentUuid": "cbfa5beb_fa8d73ba",
+      "range": {
+        "startLine": 10,
+        "startChar": 56,
+        "endLine": 10,
+        "endChar": 82
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
