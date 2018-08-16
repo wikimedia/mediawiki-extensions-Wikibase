@@ -17,10 +17,10 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\StatementsField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\StatementsField
  *
  * @group WikibaseElastic
  * @group Wikibase
@@ -30,6 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * List of properties we handle.
@@ -107,7 +108,7 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$repo = $this->getWikibaseRepo();
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',
 			'P11' => 'sometype',

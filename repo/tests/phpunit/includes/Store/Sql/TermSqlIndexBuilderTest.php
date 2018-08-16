@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Sql\TermSqlIndexBuilder;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
@@ -27,6 +27,8 @@ use Wikibase\TermIndexEntry;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	protected function setUp() {
 		$this->tablesUsed[] = 'page';
@@ -156,7 +158,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	 * @return TermSqlIndexBuilder
 	 */
 	private function getBuilder( array $entityTypes ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
@@ -180,7 +182,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	 * @param EntityDocument[] $entities
 	 */
 	private function saveEntities( array $entities ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$entityStore = $wikibaseRepo->getEntityStore();
 		$termSqlIndex = $wikibaseRepo->getStore()->getTermIndex();
@@ -276,7 +278,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	 * @return TermIndexEntry[]
 	 */
 	private function getLabelTerms( Item $item, $languageCode ) {
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = $this->getWikibaseRepo()->getStore()->getTermIndex();
 		$terms = $termIndex->getTermsOfEntity( $item->getId(), [ 'label' ], [ $languageCode ] );
 		return $terms;
 	}

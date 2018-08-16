@@ -21,7 +21,7 @@ use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Specials\SpecialRedirectEntity;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -42,6 +42,7 @@ use Wikibase\Lib\Tests\MockRepository;
 class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockRepository|null
@@ -109,7 +110,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @return SpecialRedirectEntity
 	 */
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
 		$exceptionLocalizer->expects( $this->any() )

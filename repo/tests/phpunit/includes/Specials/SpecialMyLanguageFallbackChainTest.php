@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain
+ * @covers \Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain
  *
  * @group Wikibase
  * @group SpecialPage
@@ -19,9 +19,11 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
+	use WikibaseRepoAccess;
+
 	protected function newSpecialPage() {
 		return new SpecialMyLanguageFallbackChain(
-			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
+			$this->getWikibaseRepo()->getLanguageFallbackChainFactory()
 		);
 	}
 

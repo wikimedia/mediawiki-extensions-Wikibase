@@ -13,11 +13,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 
 /**
- * @covers Wikibase\Repo\Notifications\ChangeNotifier
+ * @covers \Wikibase\Repo\Notifications\ChangeNotifier
  *
  * @group Database
  *
@@ -29,12 +29,14 @@ use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
  */
 class ChangeNotifierTest extends \MediaWikiTestCase {
 
+	use WikibaseRepoAccess;
+
 	private function getChangeNotifier( $expectNotifications = 1 ) {
 		$changeTransmitter = $this->getMock( ChangeTransmitter::class );
 		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
 			->method( 'transmitChange' );
 
-		$changeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+		$changeFactory = $this->getWikibaseRepo()->getEntityChangeFactory();
 		return new ChangeNotifier(
 			$changeFactory,
 			[ $changeTransmitter ],

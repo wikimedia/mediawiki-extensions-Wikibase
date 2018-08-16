@@ -7,11 +7,10 @@ use User;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\EditEntity
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\EditEntity
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @license GPL-2.0-or-later
  * @author Addshore
@@ -40,7 +39,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$wikibaseRepo = $this->getWikibaseRepo();
 			$store = $wikibaseRepo->getEntityStore();
 
 			$prop = Property::newFromType( 'string' );
@@ -412,7 +411,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			return;
 		}
 
-		$enabledTypes = WikibaseRepo::getDefaultInstance()->getLocalEntityTypes();
+		$enabledTypes = $this->getWikibaseRepo()->getLocalEntityTypes();
 		if ( !in_array( $requiredEntityType, $enabledTypes ) ) {
 			$this->markTestSkipped( 'Entity type not enabled: ' . $requiredEntityType );
 		}
@@ -1116,11 +1115,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	public function testGivenReadOnlyType_errorIsShownAndNoEditHappened() {
 		$this->overrideMwServices();
-		$oldSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+		$oldSetting = $this->getWikibaseRepo()->getSettings()->getSetting(
 			'readOnlyEntityTypes'
 		);
 
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+		$this->getWikibaseRepo()->getSettings()->setSetting(
 			'readOnlyEntityTypes',
 			[ 'item' ]
 		);
@@ -1145,7 +1144,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			);
 		}
 
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+		$this->getWikibaseRepo()->getSettings()->setSetting(
 			'readOnlyEntityTypes',
 			$oldSetting
 		);

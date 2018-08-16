@@ -35,7 +35,7 @@ use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
@@ -43,7 +43,7 @@ use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database
@@ -52,6 +52,8 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	public function provideTestGetParserOutput() {
 		return [
@@ -214,7 +216,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			new SqlEntityInfoBuilder(
 				$entityIdParser,
 				new EntityIdComposer( [] ),
-				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+				$this->getWikibaseRepo()->getEntityNamespaceLookup()
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
@@ -369,7 +371,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$user = $this->getTestUser()->getUser();
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$store->saveEntity( $item, 'test item', $user );
 		$store->saveEntity( $redirectSource, 'test item', $user );
 		$store->saveEntity( $redirectTarget, 'test item', $user );
@@ -405,7 +407,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 						return new ItemId( 'Q' . $idPart );
 					}
 				] ),
-				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+				$this->getWikibaseRepo()->getEntityNamespaceLookup()
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
@@ -417,7 +419,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function getViewFactoryForRedirectTest() {
-		$repo = WikibaseRepo::getDefaultInstance();
+		$repo = $this->getWikibaseRepo();
 		return new DispatchingEntityViewFactory( [
 			'item' => function(
 				$languageCode,

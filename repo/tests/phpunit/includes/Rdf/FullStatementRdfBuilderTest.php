@@ -12,11 +12,11 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SnakRdfBuilder;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\FullStatementRdfBuilder
+ * @covers \Wikibase\Rdf\FullStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -27,6 +27,7 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -80,7 +81,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			} ) );
 
 		// Note: using the actual factory here makes this an integration test!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = $this->getWikibaseRepo()->getValueSnakRdfBuilderFactory();
 
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
