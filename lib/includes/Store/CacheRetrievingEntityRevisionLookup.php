@@ -133,7 +133,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		// If we do not need to verify the revision, and the revision isn't
@@ -143,7 +143,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 			$entityRevision = $this->cache->get( $entityId );
 
 			if ( $entityRevision ) {
-				return $entityRevision->getRevisionId();
+				return LatestRevisionIdResult::concreteRevision( $entityRevision->getRevisionId() );
 			}
 		}
 
