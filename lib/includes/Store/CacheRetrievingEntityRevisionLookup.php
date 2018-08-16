@@ -105,7 +105,15 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 
 		if ( $entityRevision !== null ) {
 			if ( $revisionId === 0 && $this->shouldVerifyRevision ) {
-				$latestRevision = $this->lookup->getLatestRevisionId( $entityId, $mode );
+				$latestRevisionIdResult = $this->lookup->getLatestRevisionId( $entityId, $mode );
+				$returnFalse = function () {
+					return false;
+				};
+
+				$latestRevision = $latestRevisionIdResult->onConcreteRevision( 'intval' )
+					->onRedirect( $returnFalse )
+					->onNonexistentEntity( $returnFalse )
+					->map();
 
 				if ( $latestRevision === false ) {
 					// entity no longer exists!
@@ -133,7 +141,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		// If we do not need to verify the revision, and the revision isn't
@@ -143,7 +151,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 			$entityRevision = $this->cache->get( $entityId );
 
 			if ( $entityRevision ) {
-				return $entityRevision->getRevisionId();
+				return LatestRevisionIdResult::concreteRevision( $entityRevision->getRevisionId() );
 			}
 		}
 
