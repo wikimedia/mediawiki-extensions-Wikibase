@@ -15,9 +15,10 @@ use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Rdf\SnakRdfBuilder
+ * @covers \Wikibase\Rdf\SnakRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -28,6 +29,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilder;
  */
 class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -40,7 +42,8 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper = new NTriplesRdfTestHelper(
 			new RdfBuilderTestData(
 				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/SnakRdfBuilder'
+				__DIR__ . '/../../data/rdf/SnakRdfBuilder',
+				$this->getWikibaseRepo()->getEntityContentDataCodec()
 			)
 		);
 	}

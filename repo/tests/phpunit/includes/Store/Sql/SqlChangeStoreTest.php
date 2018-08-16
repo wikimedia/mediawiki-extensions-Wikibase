@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlChangeStore
+ * @covers \Wikibase\Repo\Store\Sql\SqlChangeStore
  *
  * @group Database
  *
@@ -24,8 +24,11 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SqlChangeStoreTest extends \MediaWikiTestCase {
 
+	use WikibaseRepoAccess;
+
 	public function saveChangeInsertProvider() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		// todo Use WikibaseRepoAccess or find alternative
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$factory = $wikibaseRepo->getEntityChangeFactory();
 
 		$time = wfTimestamp( TS_MW );
@@ -136,7 +139,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$factory = $wikibaseRepo->getEntityChangeFactory();
 
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );

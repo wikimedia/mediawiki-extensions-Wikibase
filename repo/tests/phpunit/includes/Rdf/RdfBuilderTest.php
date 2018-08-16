@@ -18,12 +18,12 @@ use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\RdfBuilder
+ * @covers \Wikibase\Rdf\RdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -33,6 +33,8 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Stas Malyshev
  */
 class RdfBuilderTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -45,7 +47,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$this->helper = new NTriplesRdfTestHelper(
 			new RdfBuilderTestData(
 				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/RdfBuilder'
+				__DIR__ . '/../../data/rdf/RdfBuilder',
+				$this->getWikibaseRepo()->getEntityContentDataCodec()
 			)
 		);
 
@@ -137,7 +140,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		// Note: using the actual factory here makes this an integration test!
 		// FIXME: we want to inject an ExternalIdentifierRdfBuilder here somehow!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = $this->getWikibaseRepo()->getValueSnakRdfBuilderFactory();
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ) );
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(

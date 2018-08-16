@@ -23,12 +23,12 @@ use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\CreateRedirect
+ * @covers \Wikibase\Repo\Api\CreateRedirect
  *
  * @group API
  * @group Wikibase
@@ -39,6 +39,8 @@ use Wikimedia\TestingAccessWrapper;
  * @author Daniel Kinzler
  */
 class CreateRedirectTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockRepository|null
@@ -124,7 +126,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$main = new ApiMain( $request, true );
 		$main->getContext()->setUser( $user );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$errorReporter = new ApiErrorReporter(
 			$main,
 			$wikibaseRepo->getExceptionLocalizer(),
@@ -265,7 +267,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$main = new ApiMain( new FauxRequest( $params, true ), true );
 		$main->getContext()->setUser( $wgUser );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $wgUser, $main->getContext() );
 		$store = $wikibaseRepo->getEntityStore();
 
@@ -293,7 +295,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$main = new ApiMain( new FauxRequest( $params, true ), true );
 		$main->getContext()->setUser( $wgUser );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $wgUser, $main->getContext() );
 		$store = $wikibaseRepo->getEntityStore();
 

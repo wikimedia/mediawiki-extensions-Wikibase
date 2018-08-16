@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Store;
 
 /**
@@ -27,6 +27,7 @@ use Wikibase\Store;
 class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase {
 
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	public function testGivenNotClearedEntity_validateReturnsSuccess() {
 		$item = $this->newItem();
@@ -115,7 +116,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 	private function newApi( array $params ) {
 		$request = new \FauxRequest( $params );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		return new EditEntity(
 			new \ApiMain( $request ),
@@ -168,7 +169,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 	}
 
 	private function saveItem( Item $item ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$store->saveEntity( $item, __METHOD__, $this->getTestUser()->getUser() );
 	}
 

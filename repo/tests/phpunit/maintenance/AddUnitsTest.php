@@ -9,9 +9,10 @@ use MediaWikiLangTestCase;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\AddUnitConversions
+ * @covers \Wikibase\AddUnitConversions
  *
  * @group Wikibase
  *
@@ -19,6 +20,8 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
  * @author Stas Malyshev
  */
 class AddUnitsTest extends MediaWikiLangTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockAddUnits
@@ -51,7 +54,8 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 		$this->helper = new NTriplesRdfTestHelper(
 			new RdfBuilderTestData(
 				__DIR__ . '/../data/maintenance',
-				__DIR__ . '/../data/maintenance'
+				__DIR__ . '/../data/maintenance',
+				$this->getWikibaseRepo()->getEntityContentDataCodec()
 			)
 		);
 	}

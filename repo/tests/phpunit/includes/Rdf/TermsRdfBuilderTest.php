@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\TermsRdfBuilder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -18,6 +19,8 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
+	use WikibaseRepoAccess;
+
 	/**
 	 * @var NTriplesRdfTestHelper
 	 */
@@ -29,7 +32,8 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper = new NTriplesRdfTestHelper(
 			new RdfBuilderTestData(
 				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/TermsRdfBuilder'
+				__DIR__ . '/../../data/rdf/TermsRdfBuilder',
+				$this->getWikibaseRepo()->getEntityContentDataCodec()
 			)
 		);
 	}

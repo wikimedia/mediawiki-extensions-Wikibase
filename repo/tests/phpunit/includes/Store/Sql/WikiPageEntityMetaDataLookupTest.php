@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
@@ -22,7 +22,7 @@ use Wikimedia\Rdbms\IDatabase;
  * This test needs to be in repo, although the class is in lib as we can't alter
  * the data without repo functionality.
  *
- * @covers Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
+ * @covers \Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -32,6 +32,8 @@ use Wikimedia\Rdbms\IDatabase;
  * @author Marius Hoch < hoo@online.de >
  */
 class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var EntityRevision[]
@@ -49,7 +51,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		if ( !$this->data ) {
 			global $wgUser;
 
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = $this->getWikibaseRepo()->getEntityStore();
 			for ( $i = 0; $i < 3; $i++ ) {
 				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $wgUser, EDIT_NEW );
 			}
@@ -70,7 +72,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 * @return EntityNamespaceLookup
 	 */
 	private function getEntityNamespaceLookup() {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = $this->getWikibaseRepo()->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup;
 	}

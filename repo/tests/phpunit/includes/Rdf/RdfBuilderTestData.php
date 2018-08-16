@@ -16,8 +16,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
@@ -38,9 +38,9 @@ class RdfBuilderTestData {
 	const URI_BASE_FOREIGN = 'http://foreign.test/';
 
 	/**
-	 * @var EntityContentDataCodec|null
+	 * @var EntityContentDataCodec
 	 */
-	private $codec = null;
+	private $codec;
 
 	/**
 	 * @var string
@@ -55,8 +55,13 @@ class RdfBuilderTestData {
 	/**
 	 * @param string $entityDir directory containing entity data (JSON files)
 	 * @param string $dataDir directory containing RDF data (n-triples files)
+	 * @param EntityContentDataCodec $codec Serialization and deserialization codec
 	 */
-	public function __construct( $entityDir, $dataDir ) {
+	public function __construct(
+		$entityDir,
+		$dataDir,
+		EntityContentDataCodec $codec = null
+	) {
 		// Sanity check for dev environments with possibly inconsistent library versions.
 		// The version range should reflect exactly what is specified in composer.json.
 		if ( !( version_compare( WIKIBASE_DATAMODEL_VERSION, '7' ) >= 0
@@ -65,20 +70,14 @@ class RdfBuilderTestData {
 			throw new RuntimeException( 'Current RDF test data require wikibase/data-model 7' );
 		}
 
-		$this->entityDir = $entityDir;
-		$this->dataDir = $dataDir;
-	}
-
-	/**
-	 * @return EntityContentDataCodec
-	 */
-	private function getCodec() {
-		if ( $this->codec === null ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$this->codec = $wikibaseRepo->getEntityContentDataCodec();
+		// BC way of setting it to work around circular CI dependency btw wb & wbl
+		if ( $codec === null ) {
+			$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 		}
 
-		return $this->codec;
+		$this->entityDir = $entityDir;
+		$this->dataDir = $dataDir;
+		$this->codec = $codec;
 	}
 
 	/**
@@ -89,7 +88,7 @@ class RdfBuilderTestData {
 	 * @return EntityDocument
 	 */
 	public function getEntity( $idString ) {
-		return $this->getCodec()->decodeEntity(
+		return $this->codec->decodeEntity(
 			file_get_contents( "{$this->entityDir}/$idString.json" ),
 			CONTENT_FORMAT_JSON
 		);
