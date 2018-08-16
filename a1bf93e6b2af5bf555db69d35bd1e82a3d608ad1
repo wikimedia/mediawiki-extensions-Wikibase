@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30d36dad_e594f5cd",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoAccess.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-16T15:00:58Z",
+      "side": 1,
+      "message": "I suggest to use reflection here. I already had an experience with similar tests-only method on production class. Once developer accidentally committed the call to it in production code (forgot to remove it), it wasn\u0027t spotted on review and thing went to production. \nIt took almost a day to figure out the reason, especially because deployment was quiet after the merge (as in our case). It looked like just some strange things happening from time to time in random places.\n\nI think reflection will work fine here, because in worst case, if property name changes, all affected tests will fail and the fix would be trivial.",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "a1bf93e6b2af5bf555db69d35bd1e82a3d608ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
