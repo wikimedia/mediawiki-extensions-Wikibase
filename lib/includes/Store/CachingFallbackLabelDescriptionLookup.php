@@ -186,7 +186,16 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 		Assert::parameterType( 'string', $termName, '$termName' );
 		Assert::parameter( !empty( $termName ), '$termName', "must not be empty" );
 
-		$revisionId = $this->revisionLookup->getLatestRevisionId( $entityId );
+		$revisionIdResult = $this->revisionLookup->getLatestRevisionId( $entityId );
+		$returnFalse = function () {
+			return false;
+		};
+
+		//TODO Handle redirects properly
+		$revisionId = $revisionIdResult->onNonexistentEntity( $returnFalse )
+			->onRedirect( $returnFalse )
+			->onConcreteRevision( 'intval' )
+			->map();
 
 		Assert::postcondition( is_int( $revisionId ), "Revision ID must present" );
 
