@@ -84,7 +84,7 @@ use Wikibase\SummaryFormatter;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\Repo\WikibaseRepo
+ * @covers \Wikibase\Repo\WikibaseRepo
  *
  * @group Wikibase
  * @group Database
@@ -94,6 +94,10 @@ use Wikibase\WikibaseSettings;
  * @author Daniel Kinzler
  */
 class WikibaseRepoTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess {
+		getWikibaseRepo as private getOriginalWikibaseRepo;
+	}
 
 	public function testGetDefaultValidatorBuilders() {
 		$first = WikibaseRepo::getDefaultValidatorBuilders();
@@ -362,7 +366,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetLocalEntityTypes() {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings = new SettingsArray( $this->getOriginalWikibaseRepo()->getSettings()->getArrayCopy() );
 		$settings->setSetting(
 			'entityNamespaces',
 			[
@@ -427,7 +431,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 */
 	private function getWikibaseRepoWithCustomRepositoryDefinitions( array $repoDefinitions ) {
 		return new WikibaseRepo(
-			WikibaseRepo::getDefaultInstance()->getSettings(),
+			$this->getOriginalWikibaseRepo()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) )
@@ -453,7 +457,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
 		$wikibaseRepo = new WikibaseRepo(
-			WikibaseRepo::getDefaultInstance()->getSettings(),
+			$this->getOriginalWikibaseRepo()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
 			new RepositoryDefinitions(
@@ -587,7 +591,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( $entityTypeDefinitions = [] ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings = new SettingsArray( $this->getOriginalWikibaseRepo()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),

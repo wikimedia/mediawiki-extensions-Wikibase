@@ -44,13 +44,24 @@ class EntityModificationTestHelper {
 	 */
 	private $redirectResolvingEntityLookup;
 
-	public function __construct() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
-		$this->serializer = $wikibaseRepo->getAllTypesEntitySerializer();
-		$this->deserializer = $wikibaseRepo->getInternalFormatEntityDeserializer();
+	private function __construct(
+		EntityIdParser $idParser,
+		Serializer $serializer,
+		Deserializer $deserializer
+	) {
+		$this->idParser = $idParser;
+		$this->serializer = $serializer;
+		$this->deserializer = $deserializer;
 		$this->mockRepository = new MockRepository();
 		$this->redirectResolvingEntityLookup  = new RedirectResolvingEntityLookup( $this->mockRepository );
+	}
+
+	public static function create( WikibaseRepo $wikibaseRepo ) {
+		return new self(
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getAllTypesEntitySerializer(),
+			$wikibaseRepo->getInternalFormatEntityDeserializer()
+		);
 	}
 
 	/**

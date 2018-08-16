@@ -11,16 +11,18 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
+
+	use WikibaseRepoAccess;
 
 	public function testGetLabelsChangeOpDeserializer() {
 		$this->assertInstanceOf(
@@ -58,7 +60,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newWikibaseChangeOpDeserializerFactory() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		return new ChangeOpDeserializerFactory(

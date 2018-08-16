@@ -16,11 +16,11 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer
  *
  * @group Wikibase
  *
@@ -28,6 +28,7 @@ use Wikibase\Summary;
  */
 class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	use LabelsChangeOpDeserializationTester;
 
@@ -58,7 +59,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$property = new PropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $property ) );
-		$statementSerialization = WikibaseRepo::getDefaultInstance()->getStatementSerializer()->serialize( $statement );
+		$statementSerialization = $this->getWikibaseRepo()->getStatementSerializer()->serialize( $statement );
 
 		$pageTitle = 'Some Title';
 
@@ -87,7 +88,7 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newItemChangeOpDeserializer() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		return new ItemChangeOpDeserializer( new ChangeOpDeserializerFactory(
