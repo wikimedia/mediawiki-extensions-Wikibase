@@ -10,7 +10,7 @@ use TestUser;
 use Title;
 use ApiUsageException;
 use User;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikimedia\TestingAccessWrapper;
 use WikiPage;
 
@@ -23,6 +23,8 @@ use WikiPage;
  * @author Addshore
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var TestUser|null
@@ -140,7 +142,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 */
 	protected function getTestEntityTitle( $handle ) {
 		try {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$wikibaseRepo = $this->getWikibaseRepo();
 			$idString = EntityTestHelper::getId( $handle );
 			$id = $wikibaseRepo->getEntityIdParser()->parse( $idString );
 			$title = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
@@ -370,7 +372,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $response
 	 */
 	protected function assertResultHasEntityType( array $response ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
@@ -419,6 +421,20 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		$comment = $rev->getComment();
 		$this->assertRegExp( $regex, $comment );
+	}
+
+	protected function makeOverlyLongString( $text = "Test", $length = null ) {
+		if ( $length === null ) {
+			// todo Use WikibaseRepoAccess or find alternative
+			$limits = $this->getWikibaseRepo()->
+				getSettings()->getSetting( 'multilang-limits' );
+			$length = $limits['length'];
+		}
+
+		$rep = $length / strlen( $text ) + 1;
+		$s = str_repeat( $text, $rep );
+
+		return $s;
 	}
 
 }

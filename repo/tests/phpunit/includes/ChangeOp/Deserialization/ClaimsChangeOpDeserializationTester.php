@@ -12,7 +12,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -121,7 +120,7 @@ trait ClaimsChangeOpDeserializationTester {
 	}
 
 	private function getStatementSerializer() {
-		return WikibaseRepo::getDefaultInstance()->getStatementSerializer();
+		return $this->getWikibaseRepo()->getStatementSerializer();
 	}
 
 	/**

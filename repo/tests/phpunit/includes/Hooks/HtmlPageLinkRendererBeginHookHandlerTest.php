@@ -23,11 +23,11 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @covers Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler
+ * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler
  *
  * @group Database
  * @group Wikibase
@@ -35,6 +35,8 @@ use Wikibase\Store\EntityIdLookup;
  * @license GPL-2.0-or-later
  */
 class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	const ITEM_WITH_LABEL = 'Q1';
 	const ITEM_WITHOUT_LABEL = 'Q11';
@@ -152,7 +154,7 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	public function overrideSpecialNewEntityLinkProvider() {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityContentFactory = $this->getWikibaseRepo()->getEntityContentFactory();
 		$linkTitles = [];
 
 		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {

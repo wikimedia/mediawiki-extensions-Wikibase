@@ -8,6 +8,7 @@ use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Rdbms\DatabaseMysqli;
 use Wikimedia\Rdbms\LoadBalancer;
@@ -17,10 +18,9 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
+ * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
  *
  * @group Medium
  * @group Database
@@ -30,6 +30,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Marius Hoch
  */
 class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var ItemId|null
@@ -53,7 +55,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	private function setUpEntities() {
 		global $wgUser;
 
-		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$entityStore = $this->getWikibaseRepo()->getEntityStore();
 
 		$item = new Item();
 		$entityStore->saveEntity( $item, "WikiPageEntityRedirectLookupTest", $wgUser, EDIT_NEW );
@@ -79,7 +81,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	private function setUpNonEntityRedirect() {
 		global $wgUser;
 
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityTitleLookup = $this->getWikibaseRepo()->getEntityTitleLookup();
 		$title = $entityTitleLookup->getTitleForId( $this->itemId );
 
 		$wikiText = '#REDIRECT [[' . $title->getFullText() . ']]';
@@ -208,7 +210,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	private function getWikiPageEntityRedirectLookup() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		return new WikiPageEntityRedirectLookup(
 			$wikibaseRepo->getEntityTitleLookup(),

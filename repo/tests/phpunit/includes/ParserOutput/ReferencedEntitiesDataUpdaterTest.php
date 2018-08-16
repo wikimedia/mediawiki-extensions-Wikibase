@@ -13,10 +13,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
  *
  * @group Wikibase
  * @group Database
@@ -25,6 +25,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Thiemo Kreuz
  */
 class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	const UNIT_PREFIX = 'unit:';
 
@@ -115,7 +117,8 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	 * @return int|null
 	 */
 	private function getEntityNamespace( $entityType ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		// todo Use WikibaseRepoAccess or find alternative
+		$entityNamespaceLookup = $this->getWikibaseRepo()->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup->getEntityNamespace( $entityType );
 	}

@@ -7,6 +7,7 @@ use Language;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
  * @covers \Wikibase\Repo\Search\Elastic\EntitySearchElastic
@@ -17,6 +18,8 @@ use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
  * @author Stas Malyshev
  */
 class EntitySearchElasticTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	public function setUp() {
 		parent::setUp();
@@ -31,7 +34,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 	 * @return EntitySearchElastic
 	 */
 	private function newEntitySearch( Language $userLang ) {
-		$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		$repo = $this->getWikibaseRepo();
 
 		return new EntitySearchElastic(
 			$repo->getLanguageFallbackChainFactory(),

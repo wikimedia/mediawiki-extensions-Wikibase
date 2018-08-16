@@ -8,7 +8,7 @@ use Message;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContent;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
  * Test case for modify term special pages
@@ -19,6 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+	use WikibaseRepoAccess;
 
 	const USER_LANGUAGE = 'en';
 
@@ -44,7 +45,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$item->setAliases( $language, [ $termValue ] );
 
 		// save the item
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW | EntityContent::EDIT_IGNORE_CONSTRAINTS );
 
 		// return the id

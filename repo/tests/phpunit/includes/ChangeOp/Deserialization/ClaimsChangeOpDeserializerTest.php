@@ -5,16 +5,18 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
 class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
+
+	use WikibaseRepoAccess;
 
 	use ClaimsChangeOpDeserializationTester;
 
@@ -50,7 +52,7 @@ class ClaimsChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newClaimsChangeOpDeserializer() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		return new ClaimsChangeOpDeserializer(
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),

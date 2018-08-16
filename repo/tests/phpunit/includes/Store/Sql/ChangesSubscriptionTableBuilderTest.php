@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder
+ * @covers \Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder
  *
  * @group Wikibase
  * @group WikibaseUsageTracking
@@ -21,6 +21,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	const TABLE_NAME = 'wb_changes_subscription';
 
@@ -42,7 +44,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 		return new ChangesSubscriptionTableBuilder(
 			$loadBalancer,
-			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
+			$this->getWikibaseRepo()->getEntityIdComposer(),
 			self::TABLE_NAME,
 			$batchSize,
 			$verbosity
