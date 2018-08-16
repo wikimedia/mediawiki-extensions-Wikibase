@@ -15,11 +15,11 @@ use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer
  *
  * @group Wikibase
  *
@@ -27,6 +27,7 @@ use Wikibase\Summary;
  */
 class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	use AliasChangeOpDeserializationTester;
 	use ClaimsChangeOpDeserializationTester;
@@ -38,7 +39,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function getChangeOpDeserializer() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		return new PropertyChangeOpDeserializer( new ChangeOpDeserializerFactory(
@@ -67,7 +68,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 		$otherProperty = new PropertyId( 'P7' );
 		$statement = new Statement( new PropertyNoValueSnak( $otherProperty ) );
-		$statementSerialization = WikibaseRepo::getDefaultInstance()->getStatementSerializer()->serialize( $statement );
+		$statementSerialization = $this->getWikibaseRepo()->getStatementSerializer()->serialize( $statement );
 
 		$changeRequest = [
 			'aliases' => [ 'en' => [ 'language' => 'en', 'value' => $newAlias ] ],

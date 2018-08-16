@@ -7,7 +7,6 @@ use MWException;
 use Title;
 use User;
 use Wikibase\EditEntityAction;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SubmitEntityAction;
 use WikiPage;
 
@@ -882,7 +881,7 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @return int
 	 */
 	private function getItemNamespace() {
-		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		 $entityNamespaceLookup = $this->getWikibaseRepo()->getEntityNamespaceLookup();
 		 return $entityNamespaceLookup->getEntityNamespace( 'item' );
 	}
 

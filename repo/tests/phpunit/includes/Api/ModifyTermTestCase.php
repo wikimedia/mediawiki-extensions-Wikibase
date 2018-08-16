@@ -145,7 +145,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				] ]
 			],
 			[ //1
-				'p' => [ 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ],
+				'p' => [ 'language' => 'nl', 'value' => $this->makeOverlyLongString() ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'modification-failed'

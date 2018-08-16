@@ -17,12 +17,12 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\StatementRankSerializer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\GetClaims
+ * @covers \Wikibase\Repo\Api\GetClaims
  *
  * @group API
  * @group Database
@@ -37,6 +37,8 @@ use Wikimedia\TestingAccessWrapper;
  * @author Addshore
  */
 class GetClaimsTest extends ApiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var SerializerFactory
@@ -55,7 +57,7 @@ class GetClaimsTest extends ApiTestCase {
 	private function save( EntityDocument $entity ) {
 		$flags = $entity->getId() ? EDIT_UPDATE : EDIT_NEW;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->getWikibaseRepo()->getEntityStore();
 
 		$rev = $store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags );
 

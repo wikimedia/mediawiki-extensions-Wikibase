@@ -8,7 +8,7 @@ use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialNewEntity
@@ -18,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var SpecialPageCopyrightView|\PHPUnit_Framework_MockObject_MockObject
@@ -47,7 +48,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		list( , $webResponse ) = $this->executeSpecialPage( '', $request );
 
 		$entityId = $this->extractEntityIdFromUrl( $webResponse->getHeader( 'location' ) );
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		$entity = $this->getWikibaseRepo()->getEntityLookup()->getEntity( $entityId );
 
 		$this->assertEntityMatchesFormData( $formData, $entity );
 	}

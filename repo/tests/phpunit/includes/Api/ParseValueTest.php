@@ -14,13 +14,13 @@ use ValueParsers\ParseException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\ValueParserFactory;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\ParseValue
+ * @covers \Wikibase\Repo\Api\ParseValue
  *
  * @group API
  * @group Wikibase
@@ -31,6 +31,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ParseValueTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @param string[] $params
@@ -42,7 +43,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$exceptionLocalizer = $wikibaseRepo->getExceptionLocalizer();
 		$validatorErrorLocalizer = $wikibaseRepo->getValidatorErrorLocalizer();
 
