@@ -46,6 +46,52 @@
       "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79354952_77c117d7",
+        "filename": "lib/includes/Store/EntityNamespaceLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-16T16:40:43Z",
+      "side": 1,
+      "message": "I\u0027m starting to think that \"main\" should be a constant defined somewhere..",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 11
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fa1c966_28649cea",
+        "filename": "lib/includes/Store/EntityNamespaceLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-16T16:40:43Z",
+      "side": 1,
+      "message": "attach?\nattached?",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 41
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
