@@ -52,6 +52,11 @@ interface Store {
 	public function clear();
 
 	/**
+	 * Clear the in-memory cache used when self::LOOKUP_CACHING_ENABLED
+	 */
+	public function clearInMemoryCache();
+
+	/**
 	 * Rebuilds the store from the original data source.
 	 */
 	public function rebuild();
