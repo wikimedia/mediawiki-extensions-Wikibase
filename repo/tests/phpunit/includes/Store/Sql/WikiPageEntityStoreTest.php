@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -354,7 +355,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertFalse( $res );
 
 		// create an edit and check if the anon user is last to edit --------------------
-		$lastRevId = $lookup->getLatestRevisionId( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
+		$lastRevIdResult = $lookup->getLatestRevisionId(
+			$itemId,
+			EntityRevisionLookup::LATEST_FROM_MASTER
+		);
+		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
 		$item->setLabel( 'en', "Test Anon" );
 		$store->saveEntity( $item, 'Test Anon', $anonUser, EDIT_UPDATE );
 		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
@@ -364,7 +369,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertFalse( $res );
 
 		// create an edit and check if the sysop user is last to edit --------------------
-		$lastRevId = $lookup->getLatestRevisionId( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
+		$lastRevIdResult = $lookup->getLatestRevisionId(
+			$itemId,
+			EntityRevisionLookup::LATEST_FROM_MASTER
+		);
+		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
 		$item->setLabel( 'en', "Test SysOp" );
 		$store->saveEntity( $item, 'Test SysOp', $user, EDIT_UPDATE );
 		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
@@ -406,7 +415,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * Convenience wrapper offering the legacy Status based interface for saving
 	 * Entities.
 	 *
-	 * @todo: rewrite the tests using this
+	 * @todo rewrite the tests using this
 	 *
 	 * @param WikiPageEntityStore $store
 	 * @param EntityDocument $entity
@@ -595,10 +604,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store->deleteEntity( $entityId, 'testing', $user );
 
 		// check that it's gone
-		$this->assertFalse(
-			$lookup->getLatestRevisionId( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER ),
-			'getLatestRevisionId'
+		$latestRevisionIdResult = $lookup->getLatestRevisionId(
+			$entityId,
+			EntityRevisionLookup::LATEST_FROM_MASTER
 		);
+		$this->assertNonexistentRevision( $latestRevisionIdResult );
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
 
 		// check that the term index got updated (via a DataUpdate).
@@ -695,6 +705,38 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->setExpectedException( InvalidArgumentException::class );
 
 		$store->isWatching( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ) );
+	}
+
+	/**
+	 * @param LatestRevisionIdResult $result
+	 * @return int
+	 */
+	private function extractConcreteRevisionId( LatestRevisionIdResult $result ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Expects concrete revision' );
+		};
+
+		return $result->onRedirect( $shouldNotBeCalled )
+			->onNonexistentEntity( $shouldNotBeCalled )
+			->onConcreteRevision( 'intval' )
+			->map();
+	}
+
+	/**
+	 * @param $latestRevisionIdResult
+	 */
+	private function assertNonexistentRevision( LatestRevisionIdResult $latestRevisionIdResult ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Not a nonexistent revision given' );
+		};
+
+		$latestRevisionIdResult->onRedirect( $shouldNotBeCalled )
+			->onConcreteRevision( $shouldNotBeCalled )
+			->onNonexistentEntity(
+				function () {
+					$this->assertTrue( true );
+				}
+			)->map();
 	}
 
 }
