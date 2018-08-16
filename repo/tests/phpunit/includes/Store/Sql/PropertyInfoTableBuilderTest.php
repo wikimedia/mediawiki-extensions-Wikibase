@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 
@@ -27,6 +28,8 @@ use Wikibase\Store;
  * @author Daniel Kinzler
  */
 class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	protected function setUp() {
 		parent::setUp();
@@ -47,7 +50,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			],
 		];
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$properties = [];
 
 		foreach ( $infos as $info ) {
@@ -82,7 +85,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testRebuildPropertyInfo() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();

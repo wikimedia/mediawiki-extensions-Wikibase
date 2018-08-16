@@ -8,11 +8,12 @@ use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\TruthyStatementRdfBuilder
+ * @covers \Wikibase\Rdf\TruthyStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -24,6 +25,7 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -59,7 +61,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		// Note: using the actual factory here makes this an integration test!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = $this->wikibaseRepo->getValueSnakRdfBuilderFactory();
 
 		$valueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
 			RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_FULL_VALUES,

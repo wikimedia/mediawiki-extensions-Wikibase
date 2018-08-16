@@ -14,10 +14,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Content\EntityContentFactory
+ * @covers \Wikibase\Repo\Content\EntityContentFactory
  *
  * @group Wikibase
  * @group WikibaseEntity
@@ -31,6 +32,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class EntityContentFactoryTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @dataProvider contentModelsProvider
@@ -52,6 +55,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		$argLists[] = [ [], [] ];
 		$argLists[] = [ [ 'Foo' => 'Bar' ], [] ];
+		// todo Use WikibaseRepoAccess or find alternative
 		$argLists[] = [ WikibaseRepo::getDefaultInstance()->getContentModelMappings(), [] ];
 
 		return $argLists;
@@ -86,7 +90,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function newFactory() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		return new EntityContentFactory(
 			[

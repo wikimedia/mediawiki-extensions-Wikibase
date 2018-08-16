@@ -5,13 +5,14 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSearchKeyBuilder;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 
 /**
- * @covers Wikibase\TermSearchKeyBuilder
+ * @covers \Wikibase\TermSearchKeyBuilder
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -22,6 +23,8 @@ use Wikibase\Lib\Store\Sql\TermSqlIndex;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	public function termProvider() {
 		$argLists = [];
@@ -40,7 +43,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
 		/** @var TermSqlIndex $termCache */
-		$termCache = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termCache = $this->wikibaseRepo->getStore()->getTermIndex();
 
 		// make term in item
 		$item = new Item( new ItemId( 'Q42' ) );

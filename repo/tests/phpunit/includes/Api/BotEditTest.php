@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiTestCase;
 use TestUser;
 use Title;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Tests for the ApiWikibase class.
@@ -160,7 +159,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		//      edits were done in the same second.
 		$change = null;
 
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = $this->wikibaseRepo->getEntityNamespaceLookup();
 		$itemNs = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
 		foreach ( $rcResult[0]['query']['recentchanges'] as $rc ) {

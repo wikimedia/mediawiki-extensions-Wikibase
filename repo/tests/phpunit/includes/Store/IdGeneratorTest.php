@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use Wikibase\IdGenerator;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -17,16 +18,11 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class IdGeneratorTest extends \MediaWikiTestCase {
 
-	public function instanceProvider() {
-		$instances = [ WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator() ];
+	use WikibaseRepoAccess;
 
-		return [ $instances ];
-	}
+	public function testGetNewId() {
+		$generator = $this->wikibaseRepo->getStore()->newIdGenerator();
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetNewId( IdGenerator $generator ) {
 		/**
 		 * @var IdGenerator $clone
 		 */

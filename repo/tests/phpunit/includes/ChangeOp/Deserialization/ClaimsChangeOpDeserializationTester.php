@@ -121,6 +121,7 @@ trait ClaimsChangeOpDeserializationTester {
 	}
 
 	private function getStatementSerializer() {
+		// todo Use WikibaseRepoAccess or find alternative
 		return WikibaseRepo::getDefaultInstance()->getStatementSerializer();
 	}
 

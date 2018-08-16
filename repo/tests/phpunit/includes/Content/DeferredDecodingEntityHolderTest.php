@@ -13,10 +13,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Content\DeferredDecodingEntityHolder
+ * @covers \Wikibase\Content\DeferredDecodingEntityHolder
  *
  * @group Wikibase
  * @group WikibaseEntity
@@ -27,6 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @return EntityDocument
@@ -46,7 +48,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityHolder
 	 */
 	private function newHolder( EntityDocument $entity, $expectedEntityType = null, EntityId $expectedEntityId = null ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$codec = new EntityContentDataCodec(
 			new ItemIdParser(),
 			$wikibaseRepo->getStorageEntitySerializer(),

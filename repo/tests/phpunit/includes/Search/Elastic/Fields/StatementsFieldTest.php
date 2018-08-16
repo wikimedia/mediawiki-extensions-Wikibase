@@ -107,7 +107,7 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$repo = $this->wikibaseRepo;
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',
 			'P11' => 'sometype',

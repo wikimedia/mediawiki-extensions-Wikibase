@@ -21,7 +21,6 @@ use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
 /**
@@ -218,7 +217,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @return ItemHandler
 	 */
 	private function getItemHandlerWithMockedPropertyDataTypeLookup() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		return new ItemHandler(
 			$wikibaseRepo->getStore()->getTermIndex(),

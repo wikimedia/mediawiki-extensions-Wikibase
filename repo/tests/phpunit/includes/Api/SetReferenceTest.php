@@ -18,11 +18,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetReference
+ * @covers \Wikibase\Repo\Api\SetReference
  *
  * @group API
  * @group Database
@@ -53,7 +52,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$store = $wikibaseRepo->getEntityStore();
 
 		if ( !self::$propertyIds ) {
@@ -82,7 +81,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @return Statement
 	 */
 	private function getNewStatement( array $references = [] ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		// Create a new empty item
 		$item = new Item();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
@@ -382,7 +381,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidRequest( $itemHandle, $guid, $referenceValue, $referenceHash, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+		$item = $this->wikibaseRepo->getEntityLookup()->getEntity( $itemId );
 
 		if ( $guid === null ) {
 			/** @var StatementListProvider $item */

@@ -70,6 +70,7 @@ class StatementQuantityFieldTest extends \PHPUnit\Framework\TestCase {
 			$this->properties,
 			[],
 			[],
+			// todo Use WikibaseRepoAccess or find alternative
 			WikibaseRepo::getDefaultInstance()
 				->getDataTypeDefinitions()
 				->getSearchIndexDataFormatterCallbacks(),

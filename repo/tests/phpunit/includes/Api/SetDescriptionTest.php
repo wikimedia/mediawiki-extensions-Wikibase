@@ -6,12 +6,11 @@ use ApiUsageException;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\SetDescription
- * @covers Wikibase\Repo\Api\ModifyTerm
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\SetDescription
+ * @covers \Wikibase\Repo\Api\ModifyTerm
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @group Database
  * @group medium
@@ -146,7 +145,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 	 * @return Item
 	 */
 	private function createItemUsing( User $user ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 
 		$itemRevision = $store->saveEntity( new Item(), 'SetSiteLinkTest', $user, EDIT_NEW );
 		return $itemRevision->getEntity();

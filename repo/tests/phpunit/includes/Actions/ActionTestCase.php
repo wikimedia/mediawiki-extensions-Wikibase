@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\ItemContent;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use WikiPage;
 
 /**
@@ -26,6 +26,8 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 class ActionTestCase extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	protected function setUp() {
 		parent::setUp();
@@ -260,7 +262,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	}
 
 	private function createTestItem( EntityDocument $entity, $comment, $user, $flags ) {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$rev = $store->saveEntity( $entity, $comment, $user, $flags );
 
 		$result = $rev->getEntity();
@@ -284,7 +286,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$targetId = $this->getTestItemId( $targetHandle );
 		$redirect = new EntityRedirect( $entityId, $targetId );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$revId = $store->saveRedirect( $redirect, $comment, $user, $flags );
 
 		$result = $redirect;
@@ -369,7 +371,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$this->initTestItems();
 
 		$itemId = $this->getTestItemId( $handle );
-		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $itemId );
+		$title = $this->wikibaseRepo->getEntityTitleLookup()->getTitleForId( $itemId );
 
 		$page = WikiPage::factory( $title );
 		return $page;

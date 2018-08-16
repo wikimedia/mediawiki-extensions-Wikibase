@@ -5,14 +5,13 @@ namespace Wikibase\Repo\Tests\Specials;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetDescription;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialSetDescription
- * @covers Wikibase\Repo\Specials\SpecialModifyTerm
- * @covers Wikibase\Repo\Specials\SpecialModifyEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialSetDescription
+ * @covers \Wikibase\Repo\Specials\SpecialModifyTerm
+ * @covers \Wikibase\Repo\Specials\SpecialModifyEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -28,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialSetDescriptionTest extends SpecialModifyTermTestCase {
 
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 

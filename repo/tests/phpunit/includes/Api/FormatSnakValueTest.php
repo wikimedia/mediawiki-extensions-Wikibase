@@ -13,10 +13,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 
 /**
- * @covers Wikibase\Repo\Api\FormatSnakValue
+ * @covers \Wikibase\Repo\Api\FormatSnakValue
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -27,6 +27,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class FormatSnakValueTest extends ApiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/** @var Item */
 	protected $testingItem;
@@ -230,7 +232,7 @@ class FormatSnakValueTest extends ApiTestCase {
 		// Set up a Property
 		$this->testingProperty = new Property( null, null, 'string' );
 
-		$store = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
+		$store = $this->wikibaseRepo->getStore()->getEntityStore();
 
 		// Save them, this will also automatically assign new IDs
 		$store->saveEntity( $this->testingItem, 'testing', $wgUser, EDIT_NEW );

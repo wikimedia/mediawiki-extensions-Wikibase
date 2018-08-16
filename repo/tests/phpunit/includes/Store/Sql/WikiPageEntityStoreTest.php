@@ -24,11 +24,12 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 
 /**
- * @covers Wikibase\Repo\Store\WikiPageEntityStore
+ * @covers \Wikibase\Repo\Store\WikiPageEntityStore
  *
  * @group Database
  * @group Wikibase
@@ -37,6 +38,8 @@ use Wikibase\SqlIdGenerator;
  * @author Daniel Kinzler
  */
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @return EntityHandler
@@ -78,7 +81,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 */
 	protected function createStoreAndLookup() {
 		// make sure the term index is empty to avoid conflicts.
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 		$wikibaseRepo->getStore()->getTermIndex()->clear();
 
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
@@ -175,7 +178,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = $this->wikibaseRepo->getStore()->getTermIndex();
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
 	}
 
@@ -270,7 +273,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = $this->wikibaseRepo->getStore()->getTermIndex();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
@@ -284,7 +287,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
-		$entityRedirectLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup();
+		$entityRedirectLookup = $this->wikibaseRepo->getStore()->getEntityRedirectLookup();
 
 		$targetId = $entityRedirectLookup->getRedirectForEntityId( $entityId );
 
@@ -599,7 +602,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = $this->wikibaseRepo->getStore()->getTermIndex();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!

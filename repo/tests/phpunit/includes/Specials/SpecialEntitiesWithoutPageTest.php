@@ -7,13 +7,14 @@ use SpecialPageTestBase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
- * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -29,8 +30,10 @@ use Wikibase\TermIndexEntry;
  */
 class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
+	use WikibaseRepoAccess;
+
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
