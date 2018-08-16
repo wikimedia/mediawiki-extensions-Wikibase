@@ -9,6 +9,7 @@ use Status;
 use TestSites;
 use Title;
 use User;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -350,7 +351,9 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 
 		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId );
 
-		$toRevId = $this->mockRepository->getLatestRevisionId( $toId );
+		$toRevId = $this->extractConcreteRevisionId(
+			$this->mockRepository->getLatestRevisionId( $toId )
+		);
 		$this->testHelper->assertRevisionSummary(
 			'@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@',
 			$toRevId,
@@ -452,6 +455,17 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 
 		$interactor = $this->newInteractor( $user );
 		$interactor->mergeItems( $fromId, $toId );
+	}
+
+	private function extractConcreteRevisionId( LatestRevisionIdResult $result ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Not a concrete revision result given' );
+		};
+
+		return $result->onNonexistentEntity( $shouldNotBeCalled )
+			->onRedirect( $shouldNotBeCalled )
+			->onConcreteRevision( 'intval' )
+			->map();
 	}
 
 }

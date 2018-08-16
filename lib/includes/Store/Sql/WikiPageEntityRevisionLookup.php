@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\StorageException;
@@ -156,17 +157,17 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 		$row = $rows[$entityId->getSerialization()];
 
 		if ( $row && $row->page_latest && !$row->page_is_redirect ) {
-			return (int)$row->page_latest;
+			return LatestRevisionIdResult::concreteRevision( (int)$row->page_latest );
 		}
 
-		return false;
+		return LatestRevisionIdResult::nonexistentEntity();
 	}
 
 	/**
