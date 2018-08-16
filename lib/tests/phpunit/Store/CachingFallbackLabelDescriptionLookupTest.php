@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 
 /**
  * @covers \Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup
@@ -302,8 +303,14 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	}
 
 	private function newRevisionLookup( $revisionIdToReturn = false ) {
+		if ( !$revisionIdToReturn ) {
+			$result = LatestRevisionIdResult::nonexistentEntity();
+		} else {
+			$result = LatestRevisionIdResult::concreteRevision( $revisionIdToReturn );
+		}
+
 		$revLookup = $this->prophesize( EntityRevisionLookup::class );
-		$revLookup->getLatestRevisionId( Argument::any() )->willReturn( $revisionIdToReturn );
+		$revLookup->getLatestRevisionId( Argument::any() )->willReturn( $result );
 
 		return $revLookup->reveal();
 	}
