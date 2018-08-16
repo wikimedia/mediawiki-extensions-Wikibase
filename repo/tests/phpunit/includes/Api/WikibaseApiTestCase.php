@@ -10,6 +10,7 @@ use TestUser;
 use Title;
 use ApiUsageException;
 use User;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 use WikiPage;
@@ -23,6 +24,8 @@ use WikiPage;
  * @author Addshore
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
+
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var TestUser|null
@@ -140,7 +143,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 */
 	protected function getTestEntityTitle( $handle ) {
 		try {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$wikibaseRepo = $this->wikibaseRepo;
 			$idString = EntityTestHelper::getId( $handle );
 			$id = $wikibaseRepo->getEntityIdParser()->parse( $idString );
 			$title = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
@@ -370,7 +373,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $response
 	 */
 	protected function assertResultHasEntityType( array $response ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {

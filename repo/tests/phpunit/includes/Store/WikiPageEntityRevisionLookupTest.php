@@ -14,10 +14,11 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use MWContentSerializationException;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
+ * @covers \Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
  *
  * @group Database
  * @group Wikibase
@@ -29,24 +30,26 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
+	use WikibaseRepoAccess;
+
 	/**
 	 * @var EntityRevision[]
 	 */
 	private static $testEntities = [];
 
-	protected static function storeTestEntity( EntityDocument $entity ) {
+	protected function storeTestEntity( EntityDocument $entity ) {
 		global $wgUser;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$revision = $store->saveEntity( $entity, "storeTestEntity", $wgUser );
 
 		return $revision;
 	}
 
-	protected static function storeTestRedirect( EntityRedirect $redirect ) {
+	protected function storeTestRedirect( EntityRedirect $redirect ) {
 		global $wgUser;
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store = $this->wikibaseRepo->getEntityStore();
 		$revision = $store->saveRedirect( $redirect, "storeTestEntity", $wgUser );
 
 		return $revision;
@@ -67,17 +70,17 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$logicalRev = $entityRev->getRevisionId();
 
 			if ( !isset( self::$testEntities[$logicalRev] ) ) {
-				$rev = self::storeTestEntity( $entityRev->getEntity() );
+				$rev = $this->storeTestEntity( $entityRev->getEntity() );
 				self::$testEntities[$logicalRev] = $rev;
 			}
 		}
 
 		foreach ( $entityRedirects as $entityRedir ) {
-			self::storeTestRedirect( $entityRedir );
+			$this->storeTestRedirect( $entityRedir );
 		}
 
 		return new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			$this->wikibaseRepo->getEntityContentDataCodec(),
 			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
 			false
 		);
@@ -87,7 +90,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	 * @return EntityNamespaceLookup
 	 */
 	private function getEntityNamespaceLookup() {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = $this->wikibaseRepo->getEntityNamespaceLookup();
 
 		return $entityNamespaceLookup;
 	}
@@ -143,7 +146,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			) );
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			$this->wikibaseRepo->getEntityContentDataCodec(),
 			$metaDataLookup,
 			false
 		);

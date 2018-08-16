@@ -26,13 +26,14 @@ use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Dumpers\RdfDumpGenerator
- * @covers Wikibase\Dumpers\DumpGenerator
+ * @covers \Wikibase\Dumpers\RdfDumpGenerator
+ * @covers \Wikibase\Dumpers\DumpGenerator
  *
  * @group Wikibase
  * @group WikibaseRdf
@@ -41,6 +42,8 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Stas Malyshev
  */
 class RdfDumpGeneratorTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
@@ -195,7 +198,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 
 		$siteLookup = $this->getSiteLookup();
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
 		$rdfBuilderFactory = $wikibaseRepo->getValueSnakRdfBuilderFactory();

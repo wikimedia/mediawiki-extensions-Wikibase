@@ -11,10 +11,11 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder
+ * @covers \Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder
  *
  * @group Database
  *
@@ -24,6 +25,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Marius Hoch
  */
 class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	public function setUp() {
 		parent::setUp();
@@ -86,7 +89,7 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 		$limit,
 		$offset
 	) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo = $this->wikibaseRepo;
 
 		$finder = new SqlEntitiesWithoutTermFinder(
 			$wikibaseRepo->getEntityIdParser(),

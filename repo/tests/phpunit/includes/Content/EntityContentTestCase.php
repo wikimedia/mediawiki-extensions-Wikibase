@@ -17,11 +17,12 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
- * @covers Wikibase\EntityContent
+ * @covers \Wikibase\EntityContent
  *
  * @group Wikibase
  *
@@ -31,6 +32,8 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 abstract class EntityContentTestCase extends \MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	private $originalGroupPermissions;
 	private $originalUser;
@@ -48,7 +51,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 		$this->originalGroupPermissions = $wgGroupPermissions;
 		$this->originalUser = $wgUser;
 
-		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$this->entityStore = $this->wikibaseRepo->getEntityStore();
 	}
 
 	protected function tearDown() {
@@ -416,10 +419,12 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	private function createTitleForEntity( EntityDocument $entity ) {
 		// NOTE: needs database access
 		$this->entityStore->assignFreshId( $entity );
+		// todo Use WikibaseRepoAccess or find alternative
 		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$title = $titleLookup->getTitleForId( $entity->getId() );
 
 		if ( !$title->exists( Title::GAID_FOR_UPDATE ) ) {
+			// todo Use WikibaseRepoAccess or find alternative
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'] );
 

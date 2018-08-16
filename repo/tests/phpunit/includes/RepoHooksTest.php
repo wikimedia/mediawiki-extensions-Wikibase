@@ -17,13 +17,12 @@ use stdClass;
 use Title;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use Wikibase\SettingsArray;
 use WikiImporter;
 
 /**
- * @covers Wikibase\RepoHooks
+ * @covers \Wikibase\RepoHooks
  *
  * @group Wikibase
  *
@@ -34,6 +33,8 @@ use WikiImporter;
  * @author Thiemo Kreuz
  */
 class RepoHooksTest extends MediaWikiTestCase {
+
+	use WikibaseRepoAccess;
 
 	private $saveAllowImport = false;
 
@@ -54,7 +55,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 	 * @return SettingsArray
 	 */
 	private function getSettings() {
-		return WikibaseRepo::getDefaultInstance()->getSettings();
+		return $this->wikibaseRepo->getSettings();
 	}
 
 	public function onBeforePageDisplayProviderMobile() {
@@ -77,7 +78,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 	 */
 	public function testOnBeforePageDisplayMobile( $expectedModules, $isEntityNamespace ) {
 		if ( $isEntityNamespace ) {
-			$namespace = array_values( WikibaseRepo::getDefaultInstance()->getLocalEntityNamespaces() )[0];
+			$namespace = array_values( $this->wikibaseRepo->getLocalEntityNamespaces() )[0];
 		} else {
 			$namespace = NS_TALK;
 		}

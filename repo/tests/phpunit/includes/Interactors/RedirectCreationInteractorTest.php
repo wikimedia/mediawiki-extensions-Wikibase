@@ -21,6 +21,7 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Tests\WikibaseRepoAccess;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -34,6 +35,7 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use WikibaseRepoAccess;
 
 	/**
 	 * @var MockRepository|null
@@ -131,7 +133,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 			$user = $GLOBALS['wgUser'];
 		}
 
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$summaryFormatter = $this->wikibaseRepo->getSummaryFormatter();
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
