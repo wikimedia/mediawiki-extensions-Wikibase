@@ -677,12 +677,14 @@ class WikibaseRepo {
 	/**
 	 * @see Store::getEntityRevisionLookup
 	 *
-	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
-	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
+	 * @param string $cache One of Store::LOOKUP_CACHING_*
+	 *        Store::LOOKUP_CACHING_DISABLED to get an uncached direct lookup
+	 *        Store::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
+	 *        Store::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getEntityRevisionLookup( $cache = '' ) {
+	public function getEntityRevisionLookup( $cache = Store::LOOKUP_CACHING_ENABLED ) {
 		return $this->getStore()->getEntityRevisionLookup( $cache );
 	}
 
@@ -701,7 +703,7 @@ class WikibaseRepo {
 	 */
 	public function newRedirectCreationInteractor( User $user, IContextSource $context ) {
 		return new RedirectCreationInteractor(
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
@@ -777,12 +779,14 @@ class WikibaseRepo {
 	/**
 	 * @see Store::getEntityLookup
 	 *
-	 * @param string $cache Flag string: Can be set to 'uncached' to get an uncached direct lookup or to 'retrieve-only' to get a
-	 *        lookup which reads from the cache, but doesn't store retrieved entities there. Defaults to a caching lookup.
+	 * @param string $cache One of Store::LOOKUP_CACHING_*
+	 *        Store::LOOKUP_CACHING_DISABLED to get an uncached direct lookup
+	 *        Store::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
+	 *        Store::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = '' ) {
+	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED ) {
 		return $this->getStore()->getEntityLookup( $cache );
 	}
 
@@ -1647,7 +1651,7 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getSiteLookup(),
 			$this->getSummaryFormatter(),
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->newEditEntityFactory( $context ),
 			$this->getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
@@ -1666,7 +1670,7 @@ class WikibaseRepo {
 	public function newEditEntityFactory( IContextSource $context = null ) {
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
@@ -1685,7 +1689,7 @@ class WikibaseRepo {
 
 		return new ItemMergeInteractor(
 			$this->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
-			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),

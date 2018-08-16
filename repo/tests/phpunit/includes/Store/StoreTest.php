@@ -20,7 +20,7 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 
 /**
- * @covers Wikibase\Store
+ * @covers \Wikibase\Store
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -124,6 +124,15 @@ class StoreTest extends \MediaWikiTestCase {
 			SiteLinkConflictLookup::class,
 			$store->getSiteLinkConflictLookup()
 		);
+	}
+
+	public function testLookupCacheConstantsHaveDistinctValues() {
+		$constants = [
+			Store::LOOKUP_CACHING_ENABLED,
+			Store::LOOKUP_CACHING_DISABLED,
+			Store::LOOKUP_CACHING_RETRIEVE_ONLY
+		];
+		$this->assertSame( count( $constants ), count( array_unique( $constants ) ) );
 	}
 
 }

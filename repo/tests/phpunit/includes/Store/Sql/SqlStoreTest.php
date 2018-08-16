@@ -26,11 +26,12 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\SqlStore;
+use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 
 /**
- * @covers Wikibase\SqlStore
+ * @covers \Wikibase\SqlStore
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -104,9 +105,9 @@ class SqlStoreTest extends MediaWikiTestCase {
 
 	public function entityLoookupCacheProvider() {
 		return [
-			[ '' ],
-			[ 'uncached' ],
-			[ 'retrieve-only' ],
+			[ Store::LOOKUP_CACHING_ENABLED ],
+			[ Store::LOOKUP_CACHING_DISABLED ],
+			[ Store::LOOKUP_CACHING_RETRIEVE_ONLY ],
 		];
 	}
 
