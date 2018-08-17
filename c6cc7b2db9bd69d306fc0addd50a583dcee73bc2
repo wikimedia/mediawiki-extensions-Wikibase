@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e3b7c7f_d55a4a41",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-17T11:22:58Z",
+      "side": 1,
+      "message": "Was thought put into it or is there precedence for the keys only being added if there is a \"good\" value for them? Makes for possibly nasty downstream checks (especially with this weak return type).",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 28
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf5efcbe_20832062",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-17T11:22:58Z",
+      "side": 1,
+      "message": "To keep the same level of abstraction this could do with a `$this-\u003egetDescription()`.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4534032d_0141a746",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-17T11:22:58Z",
+      "side": 1,
+      "message": "Stray \\n.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f728b939_25b234dc",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-17T11:22:58Z",
+      "side": 1,
+      "message": "Did we establish a rule about using use? Maybe for wbl only? I\u0027d prefer it.",
+      "range": {
+        "startLine": 14,
+        "startChar": 46,
+        "endLine": 14,
+        "endChar": 73
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

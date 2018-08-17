@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea1acf2e_87174abb",
+        "filename": "view/tests/phpunit/FingerprintableEntityMetaTagsTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-17T11:22:58Z",
+      "side": 1,
+      "message": "Stray \\n.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "f4aa37ca903c93ae17cc09ac80705226c6785945",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "318f98f1_97828264",
+        "filename": "view/tests/phpunit/FingerprintableEntityMetaTagsTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-08-17T11:22:58Z",
+      "side": 1,
+      "message": "This needs to become a FQCN.",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 54
+      },
+      "revId": "f4aa37ca903c93ae17cc09ac80705226c6785945",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
