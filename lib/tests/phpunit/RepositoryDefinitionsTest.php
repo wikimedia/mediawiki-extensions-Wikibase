@@ -60,7 +60,11 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'media' => [
 				'database' => 'foowiki',
 				'base-uri' => 'http://foo.test/concept/',
-				'entity-namespaces' => [ 'mediainfo' => 888 ],
+				'entity-namespaces' => [
+					'mediainfo' => NS_FILE . '/mediainfo',
+					'galleryinfo' => '/galleryinfo',
+					'userinfo' => 'User/userinfo',
+				],
 				'prefix-mapping' => [],
 			],
 			'lexeme' => [
@@ -110,12 +114,15 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityTypesPerRepository() {
-		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), $this->getEntityTypeDefinitions() );
+		$definitions = new RepositoryDefinitions(
+			$this->getCompleteRepositoryDefinitionArray(),
+			$this->getEntityTypeDefinitions()
+		);
 
 		$this->assertEquals(
 			[
 				'' => [ 'item', 'property' ],
-				'media' => [ 'mediainfo' ],
+				'media' => [ 'mediainfo', 'galleryinfo', 'userinfo' ],
 				'lexeme' => [ 'lexeme', 'form' ],
 			],
 			$definitions->getEntityTypesPerRepository()
@@ -127,10 +134,12 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals(
 			[
-				'item' => [ [ '', 666 ] ],
-				'property' => [ [ '', 777 ] ],
-				'mediainfo' => [ [ 'media', 888 ] ],
-				'lexeme' => [ [ 'lexeme', 999 ] ]
+				'item' => [ [ '', 666, 'main' ] ],
+				'property' => [ [ '', 777, 'main' ] ],
+				'mediainfo' => [ [ 'media', NS_FILE, 'mediainfo' ] ],
+				'galleryinfo' => [ [ 'media', NS_MAIN, 'galleryinfo' ] ],
+				'userinfo' => [ [ 'media', NS_USER, 'userinfo' ] ],
+				'lexeme' => [ [ 'lexeme', 999, 'main' ] ]
 			],
 			$definitions->getEntityTypeToRepositoryMapping()
 		);
@@ -154,7 +163,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), $this->getEntityTypeDefinitions() );
 
 		$this->assertEquals(
-			[ 'item', 'property', 'mediainfo', 'lexeme', 'form' ],
+			[ 'item', 'property', 'mediainfo', 'galleryinfo', 'userinfo', 'lexeme', 'form' ],
 			$definitions->getAllEntityTypes()
 		);
 	}
@@ -163,8 +172,31 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), $this->getEntityTypeDefinitions() );
 
 		$this->assertEquals(
-			[ 'item' => 666, 'property' => 777, 'mediainfo' => 888, 'lexeme' => 999 ],
+			[
+				'item' => 666,
+				'property' => 777,
+				'mediainfo' => NS_FILE,
+				'galleryinfo' => NS_MAIN,
+				'userinfo' => NS_USER,
+				'lexeme' => 999
+			],
 			$definitions->getEntityNamespaces()
+		);
+	}
+
+	public function testGetEntitySlots() {
+		$definitions = new RepositoryDefinitions( $this->getCompleteRepositoryDefinitionArray(), $this->getEntityTypeDefinitions() );
+
+		$this->assertEquals(
+			[
+				'item' => 'main',
+				'property' => 'main',
+				'mediainfo' => 'mediainfo',
+				'galleryinfo' => 'galleryinfo',
+				'userinfo' => 'userinfo',
+				'lexeme' => 'main'
+			],
+			$definitions->getEntitySlots()
 		);
 	}
 

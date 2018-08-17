@@ -107,7 +107,7 @@ class GenericServicesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newGenericServices() {
-		return new GenericServices( new EntityTypeDefinitions( [] ), [] );
+		return new GenericServices( new EntityTypeDefinitions( [] ), [], [] );
 	}
 
 }

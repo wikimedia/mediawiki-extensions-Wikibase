@@ -784,15 +784,15 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
 			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 100, 'bar' => 200 ] ] ),
 			$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 300 ] ] ),
-			$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'foobar' => 400 ] ] )
+			$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'foobar' => '400/foo' ] ] )
 		) );
 
 		$this->assertEquals(
 			[
-				'foo' => [ [ '', 100 ] ],
-				'bar' => [ [ '', 200 ] ],
-				'baz' => [ [ 'repo1', 300 ] ],
-				'foobar' => [ [ 'repo2', 400 ] ],
+				'foo' => [ [ '', 100, 'main' ] ],
+				'bar' => [ [ '', 200, 'main' ] ],
+				'baz' => [ [ 'repo1', 300, 'main' ] ],
+				'foobar' => [ [ 'repo2', 400, 'foo' ] ],
 			],
 			$wikibaseRepo->getEntityTypeToRepositoryMapping()
 		);
