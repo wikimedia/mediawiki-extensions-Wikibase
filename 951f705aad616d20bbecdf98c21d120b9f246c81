@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "388f1918_5ae0c4b4",
+        "filename": "lib/includes/Store/EntityNamespaceLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-17T13:38:45Z",
+      "side": 1,
+      "message": "I don\u0027t really see the value of that, to be honest.\nAlso, it\u0027s mostly legacy code that needs to explicitly reference the main slot. This here is one of the rare exceptions.",
+      "parentUuid": "79354952_77c117d7",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 11
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fa1c966_28649cea",
         "filename": "lib/includes/Store/EntityNamespaceLookup.php",
         "patchSetId": 15
@@ -83,6 +107,30 @@
       "writtenOn": "2018-08-16T16:40:43Z",
       "side": 1,
       "message": "attach?\nattached?",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 41
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ead081e0_60cfb27d",
+        "filename": "lib/includes/Store/EntityNamespaceLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-17T13:38:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fa1c966_28649cea",
       "range": {
         "startLine": 91,
         "startChar": 34,
