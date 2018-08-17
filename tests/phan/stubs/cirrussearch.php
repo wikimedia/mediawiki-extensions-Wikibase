@@ -249,6 +249,9 @@ namespace CirrusSearch\Search {
 	class ResultSet {
 	}
 
+	class EmptyResultSet extends ResultSet {
+	}
+
 	interface ResultsType {
 		/**
 		 * @return false|string|array corresponding to Elasticsearch source filtering syntax
