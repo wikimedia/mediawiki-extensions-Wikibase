@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "99778070_0a426ac1",
+        "filename": "lib/includes/Store/EntityNamespaceLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-17T13:44:27Z",
+      "side": 1,
+      "message": "It\u0027s already used in nearly 100 places, and its probably only a matter of time until something stupid happens such as a typo to \"mian\" which doesn\u0027t get caught by anything and then explosions",
+      "parentUuid": "388f1918_5ae0c4b4",
+      "range": {
+        "startLine": 71,
+        "startChar": 5,
+        "endLine": 71,
+        "endChar": 11
+      },
+      "revId": "951f705aad616d20bbecdf98c21d120b9f246c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fa1c966_28649cea",
         "filename": "lib/includes/Store/EntityNamespaceLookup.php",
         "patchSetId": 15
