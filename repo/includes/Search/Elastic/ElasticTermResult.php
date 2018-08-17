@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic;
 
+use CirrusSearch\Search\EmptyResultSet;
 use CirrusSearch\Search\ResultsType;
 use CirrusSearch\Search\SearchContext;
 use Wikibase\DataModel\Entity\EntityIdParser;
