@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eb490ff_fa663f37",
+        "filename": "data-access/tests/phpunit/MultiRepositoryServicesTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-17T13:48:12Z",
+      "side": 1,
+      "message": "https://en.wiktionary.org/wiki/frobnitz",
+      "range": {
+        "startLine": 74,
+        "startChar": 9,
+        "endLine": 74,
+        "endChar": 16
+      },
+      "revId": "a2de181f86e9a8d28c902a3ebb263f8b966cd926",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3495b59_a6ab3a4d",
+        "filename": "data-access/tests/phpunit/MultiRepositoryServicesTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-17T13:48:12Z",
+      "side": 1,
+      "message": "@ -\u003e /",
+      "range": {
+        "startLine": 74,
+        "startChar": 48,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "a2de181f86e9a8d28c902a3ebb263f8b966cd926",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7cb9fa_5fbe4d71",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-17T13:48:12Z",
+      "side": 1,
+      "message": "/",
+      "range": {
+        "startLine": 787,
+        "startChar": 87,
+        "endLine": 787,
+        "endChar": 88
+      },
+      "revId": "a2de181f86e9a8d28c902a3ebb263f8b966cd926",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
