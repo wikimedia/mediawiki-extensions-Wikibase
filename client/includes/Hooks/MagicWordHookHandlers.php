@@ -63,7 +63,7 @@ class MagicWordHookHandlers {
 		$message->inLanguage( $lang );
 
 		if ( $message->exists() ) {
-			return $message->parse();
+			return $message->text();
 		} else {
 			return $repoSiteName;
 		}
