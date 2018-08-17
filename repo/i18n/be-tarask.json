@@ -497,5 +497,6 @@
 	"apihelp-wbmergeitems-param-ignoreconflicts": "Масіў кампанэнтаў элемэнту для якіх ігнараваць канфлікты. Можа ўтрымліваць толькі значэньні «<var>description</var>», «<var>sitelink</var>» і «<var>statement</var>»",
 	"apihelp-wbmergeitems-param-summary": "Апісаньне рэдагаваньня.\nСьпераду будзе дададзены аўтаматычны камэнтар. Ліміт даўжыні аўтаматычнага камэнтару разам з апісаньнем — 260 сымбаляў. Памятайце, што ўсё, што перавышае гэты ліміт будзе сьцёртае.",
 	"apihelp-wbmergeitems-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «bot».",
-	"apihelp-wbmergeitems-example-1": "Аб’ядноўвае зьвесткі з <samp>Q42</samp> у <samp>Q222</samp>"
+	"apihelp-wbmergeitems-example-1": "Аб’ядноўвае зьвесткі з <samp>Q42</samp> у <samp>Q222</samp>",
+	"apihelp-wbmergeitems-example-2": "Аб’ядноўвае зьвесткі з <samp>Q555</samp> у <samp>Q3</samp>"
 }

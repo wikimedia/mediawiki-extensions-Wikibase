@@ -10,6 +10,7 @@
 	},
 	"tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элементы үзгәртелде",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|үзгәртү}}",
 	"wikibase-dataitem": "{{WBREPONAME}} элементы",
 	"wikibase-editlinks": "Сылтамалар өстәү",
 	"wikibase-editlinkstitle": "Башка телләргә сылтамалар өстәү",
