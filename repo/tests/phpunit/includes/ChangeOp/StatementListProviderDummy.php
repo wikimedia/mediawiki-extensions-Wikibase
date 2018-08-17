@@ -55,4 +55,8 @@ class StatementListProviderDummy implements EntityDocument, StatementListProvide
 		return $this->statements;
 	}
 
+	public function clear() {
+		// TODO: Implement clear() method.
+	}
+
 }
