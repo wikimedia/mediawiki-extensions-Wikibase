@@ -1844,6 +1844,7 @@ class WikibaseRepo {
 						'gmy', // T155421
 						'hai', // T138131
 						'haz', // T155374
+						'hbo', // T155368
 						'kjh', // T155377
 						'koy', // T125066
 						'lag', // T161983
