@@ -499,5 +499,6 @@
 	"apihelp-wbmergeitems-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «bot».",
 	"apihelp-wbmergeitems-example-1": "Аб’ядноўвае зьвесткі з <samp>Q42</samp> у <samp>Q222</samp>",
 	"apihelp-wbmergeitems-example-2": "Аб’ядноўвае зьвесткі з <samp>Q555</samp> у <samp>Q3</samp>",
-	"apihelp-wbmergeitems-example-3": "Аб’ядноўвае зьвесткі з <samp>Q66</samp> у <samp>Q99</samp> і пры гэтым ігнаруе канфлікты спасылак"
+	"apihelp-wbmergeitems-example-3": "Аб’ядноўвае зьвесткі з <samp>Q66</samp> у <samp>Q99</samp> і пры гэтым ігнаруе канфлікты спасылак",
+	"apihelp-wbmergeitems-example-4": "Аб’ядноўвае зьвесткі з <samp>Q66</samp> у <samp>Q99</samp> і ігнаруе канфлікты спасылак і апісаньняў"
 }

@@ -22,7 +22,8 @@
 			"Wicklo",
 			"Translatealcd",
 			"Ladsgroup",
-			"Kkairri"
+			"Kkairri",
+			"Suyama"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -307,6 +308,7 @@
 	"wikibase-redirectentity-fromid": "リダイレクト元のID",
 	"wikibase-redirectentity-toid": "リダイレクト先のID",
 	"wikibase-redirectentity-submit": "リダイレクト",
+	"wikibase-redirect-permissiondenied": "アクセスが拒否されました",
 	"special-mylanguagefallbackchain": "言語フォールバックチェイン",
 	"wikibase-mylanguagefallbackchain-text": "エンティティのラベルをあなた向けに表示するために使われている言語フォールバックチェインを以下に表示します。",
 	"wikibase-mylanguagefallbackchain-babel": "<nowiki>{{#babel: }}</nowiki> を{{GENDER:$1|自分の}}[[Special:MyPage|利用者ページ]]に置くことで編集できます。",
