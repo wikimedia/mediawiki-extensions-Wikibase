@@ -72,12 +72,12 @@ use Wikibase\ItemChange;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -91,6 +91,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
+use Wikibase\Lib\WikibaseContentLanguagesProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
@@ -1228,10 +1229,12 @@ final class WikibaseClient {
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 *
-	 * @return MediaWikiContentLanguages
+	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return new MediaWikiContentLanguages();
+		$provider = new WikibaseContentLanguagesProvider();
+
+		return $provider->getContentLanguages( 'Terms' );
 	}
 
 	/**

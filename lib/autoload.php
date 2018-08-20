@@ -192,6 +192,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\UserInputException' => __DIR__ . '/includes/UserInputException.php',
 	'Wikibase\\Lib\\UserLanguageLookup' => __DIR__ . '/includes/UserLanguageLookup.php',
 	'Wikibase\\Lib\\VocabularyUriFormatter' => __DIR__ . '/includes/Formatters/VocabularyUriFormatter.php',
+	'Wikibase\\Lib\\WikibaseContentLanguagesProvider' => __DIR__ . '/includes/WikibaseContentLanguagesProvider.php',
 	'Wikibase\\Lib\\WikibaseSnakFormatterBuilders' => __DIR__ . '/includes/Formatters/WikibaseSnakFormatterBuilders.php',
 	'Wikibase\\Lib\\WikibaseValueFormatterBuilders' => __DIR__ . '/includes/Formatters/WikibaseValueFormatterBuilders.php',
 	'Wikibase\\PopulateSitesTable' => __DIR__ . '/maintenance/populateSitesTable.php',
