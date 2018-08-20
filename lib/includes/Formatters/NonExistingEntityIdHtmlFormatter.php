@@ -34,11 +34,11 @@ class NonExistingEntityIdHtmlFormatter implements EntityIdFormatter {
 
 		$message = wfMessage( 'parentheses',
 			wfMessage( $this->deletedEntityMessagePrefix . $entityId->getEntityType() )->text()
-		);
+		)->text();
 
 		$undefinedInfo = Html::element( 'span', $attributes, $message );
 
-		$separator = wfMessage( 'word-separator' )->text();
+		$separator = wfMessage( 'word-separator' )->escaped();
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
