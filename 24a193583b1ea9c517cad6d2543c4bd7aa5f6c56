@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3433f50_e53b7c9d",
+        "filename": "view/src/EntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:28:56Z",
+      "side": 1,
+      "message": "EntityMetaTagCreator is a better name. Else it sounds like this is a value object instead of a service. Also, no need for the fully qualified name in the comment.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10b1b72c_957bba65",
+        "filename": "view/src/EntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:28:56Z",
+      "side": 1,
+      "message": "Is this \"meta tags\" an existing concept? I don\u0027t recognize it.\n\nIf it is not, or it has the same meaning as \"terms\", then I would stick with that more established terminology.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1856fa2a_600d50aa",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:28:56Z",
+      "side": 1,
+      "message": "This caused me to look up the signature of extractPreferredValue, since I wondered if this can be something that is not an array or if the check is superfluous. I\u0027d go for a $preferred !\u003d\u003d null check instead as that makes it easier to read. Then again you can make an argument that is_array is \"safer\".",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6df33ea7_9f0ba488",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:28:56Z",
+      "side": 1,
+      "message": "Private unless there is a good reason to expose the method. \"we might need it\" is not a good reason.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ef60db1_31dd2acd",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:28:56Z",
+      "side": 1,
+      "message": "Assuming that $preferred[\u0027value\u0027] is always a string, it is better to use a guard clause here.\n\nif ( is_array( $preferred ) ) {\n     return $preferred[\u0027value\u0027];\n}\n\nmore if stuff {\n    return $entityId-\u003egetSerialization();\n}\n\nreturn null;\n\nMuch easier to understand, less state and less mutations.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
