@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "011982d5_7a5db4ac",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T16:39:42Z",
+      "side": 1,
+      "message": "As far as I can tell this isn\u0027t possible. The callback array is keyed by the string representing the type of entity that callback will be used for. Argument unpacking seems to only be possible for non-string keyed arrays. See https://wiki.php.net/rfc/argument_unpacking#string_keys\n\nHave I missed something?",
+      "parentUuid": "243cdb03_911d7680",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ad372ee_e9c3d552",
         "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
         "patchSetId": 15
