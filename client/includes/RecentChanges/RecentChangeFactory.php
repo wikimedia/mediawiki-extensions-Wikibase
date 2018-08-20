@@ -87,12 +87,10 @@ class RecentChangeFactory {
 
 		// Creating a RecentChange by passing a faked-up row needs the correct
 		// fields, which are changing in Ic3a434c0.
-		if ( class_exists( \CommentStore::class ) ) {
-			$attribs += [
-				'rc_comment_text' => $attribs['rc_comment'],
-				'rc_comment_data' => null,
-			];
-		}
+		$attribs += [
+			'rc_comment_text' => $attribs['rc_comment'],
+			'rc_comment_data' => null,
+		];
 
 		$rc = RecentChange::newFromRow( (object)$attribs );
 		$rc->setExtra( [ 'pageStatus' => 'changed' ] );
@@ -166,12 +164,10 @@ class RecentChangeFactory {
 
 		// Creating a RecentChange by passing a faked-up row needs the correct
 		// fields, which are changing in Ic3a434c0.
-		if ( class_exists( \CommentStore::class ) ) {
-			$attribs += [
-				'rc_comment_text' => $attribs['rc_comment'],
-				'rc_comment_data' => null,
-			];
-		}
+		$attribs += [
+			'rc_comment_text' => $attribs['rc_comment'],
+			'rc_comment_data' => null,
+		];
 
 		return $attribs;
 	}
