@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use EchoEvent;
+use ExtensionRegistry;
 use MediaWikiTestCase;
 use Title;
 use User;
@@ -37,8 +37,7 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
-		// if Echo is not loaded, skip this test
-		if ( !class_exists( EchoEvent::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			$this->markTestSkipped( "Echo not loaded" );
 		}
 
