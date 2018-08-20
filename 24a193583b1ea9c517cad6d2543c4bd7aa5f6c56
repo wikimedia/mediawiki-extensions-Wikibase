@@ -84,6 +84,57 @@
       "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f55cec94_294bd472",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:36:36Z",
+      "side": 1,
+      "message": "\\Wikibase\\View\\EntityMetaTags\n\nNot all tools understand it if you omit the first backslash",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7257311b_ed48405f",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:36:36Z",
+      "side": 1,
+      "message": "I\u0027ve actually never seen use of a data provider in an abstract class where it is defined by subclasses. I would expect the method to be defined as an abstract method here though. Or does that for some reason confuse PHPUnit?\n\nWhat made you create this abstract class anyway? There is only one subclass. Looks like this was added to avoid possible code duplication in the future. That is IMO premature, and beware that inheritance is typically a very bad way to share code, as it introduces very high coupling. Also beware the fallacy of DRY https://www.entropywins.wtf/blog/2017/09/06/the-fallacy-of-dry/",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a61cce9_4f82d306",
+        "filename": "view/tests/phpunit/FingerprintableEntityMetaTagsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T12:36:36Z",
+      "side": 1,
+      "message": "https://www.entropywins.wtf/blog/2017/10/09/yield-in-phpunit-data-providers/\n\nyield \u0027good description of what is being tested\u0027 \u003d\u003e [\n    $fingerprintableEntityMetaTags,\n    ...\n]",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
