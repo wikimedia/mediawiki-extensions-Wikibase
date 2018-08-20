@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase\Lib\Tests\Store;
 
+use CirrusSearch;
 use Elastica\Result;
 use Status;
 use Title;
@@ -27,7 +28,7 @@ class ElasticTermLookupTest extends EntityTermLookupTest {
 	public static function setUpBeforeClass() {
 		parent::setUpBeforeClass();
 		self::$termData = self::getTermData();
-		if ( !class_exists( 'CirrusSearch' ) ) {
+		if ( !class_exists( CirrusSearch::class ) ) {
 			self::markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
 	}

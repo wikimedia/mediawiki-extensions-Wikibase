@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch;
 use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Query\BoostTemplatesFeature;
 use CirrusSearch\Query\FullTextQueryStringQueryBuilder;
@@ -35,7 +36,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		if ( !class_exists( 'CirrusSearch' ) ) {
+		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
 
