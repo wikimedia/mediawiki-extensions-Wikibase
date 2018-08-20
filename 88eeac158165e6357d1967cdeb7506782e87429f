@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0d2c8d5_c6c2fd03",
+        "filename": "client/includes/Hooks/ShortDescHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-20T07:55:09Z",
+      "side": 1,
+      "message": "Isn\u0027t a \"use\" necessary for this? Or a leading backslash?",
+      "range": {
+        "startLine": 107,
+        "startChar": 22,
+        "endLine": 107,
+        "endChar": 38
+      },
+      "revId": "88eeac158165e6357d1967cdeb7506782e87429f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
