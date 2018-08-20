@@ -88,7 +88,7 @@ class SpecialPagesWithBadges extends QueryPage {
 						[
 							'class' => 'error'
 						],
-						$this->msg( 'wikibase-pageswithbadges-invalid-id', $badge )
+						$this->msg( 'wikibase-pageswithbadges-invalid-id', $badge )->text()
 					)
 				);
 			}

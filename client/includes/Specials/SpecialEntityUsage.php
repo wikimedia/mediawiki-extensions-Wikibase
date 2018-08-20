@@ -75,7 +75,7 @@ class SpecialEntityUsage extends QueryPage {
 						[
 							'class' => 'error'
 						],
-						$this->msg( 'wikibase-entityusage-invalid-id', $entity )
+						$this->msg( 'wikibase-entityusage-invalid-id', $entity )->text()
 					)
 				);
 			}

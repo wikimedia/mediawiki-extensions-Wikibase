@@ -128,7 +128,7 @@ class ViewEntityAction extends ViewAction {
 			$id = ' ' . Html::element(
 				'span',
 				[ 'class' => 'wikibase-title-id' ],
-				$this->msg( 'parentheses' )->plaintextParams( $variables['wbEntityId'] )
+				$this->msg( 'parentheses' )->plaintextParams( $variables['wbEntityId'] )->text()
 			);
 		}
 
