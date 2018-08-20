@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Notifications;
 
 use EchoEvent;
 use EchoEventPresentationModel;
+use ExtensionRegistry;
 use Language;
 use MediaWikiTestCase;
 use Message;
@@ -26,8 +27,7 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
-		// if Echo is not loaded, skip this test
-		if ( !class_exists( EchoEventPresentationModel::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			$this->markTestSkipped( "Echo not loaded" );
 		}
 	}
