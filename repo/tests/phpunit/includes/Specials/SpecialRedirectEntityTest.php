@@ -15,7 +15,7 @@ use Wikibase\Lib\MessageException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -138,7 +138,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $this->user ),
-			new RedirectCreationInteractor(
+			new ItemRedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),

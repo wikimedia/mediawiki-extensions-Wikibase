@@ -135,7 +135,7 @@ use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
@@ -699,10 +699,10 @@ class WikibaseRepo {
 	 * @param User $user
 	 * @param IContextSource $context
 	 *
-	 * @return RedirectCreationInteractor
+	 * @return ItemRedirectCreationInteractor
 	 */
-	public function newRedirectCreationInteractor( User $user, IContextSource $context ) {
-		return new RedirectCreationInteractor(
+	public function newItemRedirectCreationInteractor( User $user, IContextSource $context ) {
+		return new ItemRedirectCreationInteractor(
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
@@ -1694,7 +1694,7 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
-			$this->newRedirectCreationInteractor( $user, $context ),
+			$this->newItemRedirectCreationInteractor( $user, $context ),
 			$this->getEntityTitleLookup()
 		);
 	}

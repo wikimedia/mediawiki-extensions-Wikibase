@@ -633,7 +633,7 @@ call_user_func( function() {
 				$moduleName,
 				$wikibaseRepo->getEntityIdParser(),
 				$apiHelperFactory->getErrorReporter( $apiMain ),
-				$wikibaseRepo->newRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() )
+				$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() )
 			);
 		}
 	];
@@ -930,7 +930,7 @@ call_user_func( function() {
 			new Wikibase\Repo\Interactors\TokenCheckInteractor(
 				$wgUser
 			),
-			$wikibaseRepo->newRedirectCreationInteractor(
+			$wikibaseRepo->newItemRedirectCreationInteractor(
 				$wgUser,
 				RequestContext::getMain()
 			)
