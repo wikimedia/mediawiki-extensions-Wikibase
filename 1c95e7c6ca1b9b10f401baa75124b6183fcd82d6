@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7c50b8b_8fbd3bd6",
+        "filename": "tests/browser/features/support/modules/entity_module.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-08-20T15:59:16Z",
+      "side": 1,
+      "message": "The following check would also work:\n\n \u0027return !!(window.mw \u0026\u0026 mw.cookie)\u0027\n\nThe only problem with the original check of \u0027$.cookie\u0027 is that it did not check for \u0027$\u0027 itself, which could also be \u0027return !!(window.$ \u0026\u0026 $.cookie)\u0027. But indeed, it made sense to switch the check to mw.cookie since that is what line 185 uses.",
+      "range": {
+        "startLine": 192,
+        "startChar": 8,
+        "endLine": 196,
+        "endChar": 10
+      },
+      "revId": "1c95e7c6ca1b9b10f401baa75124b6183fcd82d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
