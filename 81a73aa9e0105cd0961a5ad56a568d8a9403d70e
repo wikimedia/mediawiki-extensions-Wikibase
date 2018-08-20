@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba9da355_c7be3092",
+        "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T11:18:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dafa3b1b_f2d82ca5",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "81a73aa9e0105cd0961a5ad56a568d8a9403d70e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75bb8c33_b2443a83",
         "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-17T11:22:58Z",
       "side": 1,
       "message": "Not that I\u0027m a huge fan of this assert lib, but would this not be an ::invariant() ?",
+      "range": {
+        "startLine": 42,
+        "startChar": 10,
+        "endLine": 42,
+        "endChar": 23
+      },
+      "revId": "81a73aa9e0105cd0961a5ad56a568d8a9403d70e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebf4a2e_8ecb358b",
+        "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T11:18:23Z",
+      "side": 1,
+      "message": "I thought that this would be an \"after computation\" check. Where in this case the computation is executing the callback.\n\nHappy to use invariant if you prefer though.",
+      "parentUuid": "75bb8c33_b2443a83",
       "range": {
         "startLine": 42,
         "startChar": 10,

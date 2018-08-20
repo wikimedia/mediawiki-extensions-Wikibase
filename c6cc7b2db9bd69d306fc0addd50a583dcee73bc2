@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "66e8c3da_091deceb",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T11:18:23Z",
+      "side": 1,
+      "message": "Little thought was put in I took the precedence from how \"meta tags\" were used already. I extracted the whole section from EntityParserOutputGenerator::getMetaTags\n\nYou\u0027ll notice the title key is always set but description is only set for a \"good value\"",
+      "parentUuid": "1e3b7c7f_d55a4a41",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 28
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf5efcbe_20832062",
         "filename": "view/src/FingerprintableEntityMetaTags.php",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-17T11:22:58Z",
       "side": 1,
       "message": "To keep the same level of abstraction this could do with a `$this-\u003egetDescription()`.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2c421d_f047668e",
+        "filename": "view/src/FingerprintableEntityMetaTags.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T11:18:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf5efcbe_20832062",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "abb97803_d46c9b21",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T11:18:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4534032d_0141a746",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f728b939_25b234dc",
         "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2018-08-17T11:22:58Z",
       "side": 1,
       "message": "Did we establish a rule about using use? Maybe for wbl only? I\u0027d prefer it.",
+      "range": {
+        "startLine": 14,
+        "startChar": 46,
+        "endLine": 14,
+        "endChar": 73
+      },
+      "revId": "c6cc7b2db9bd69d306fc0addd50a583dcee73bc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8d7e445_a34ff206",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T11:18:23Z",
+      "side": 1,
+      "message": "If we did I didn\u0027t know of it but using use is fine by me.",
+      "parentUuid": "f728b939_25b234dc",
       "range": {
         "startLine": 14,
         "startChar": 46,
