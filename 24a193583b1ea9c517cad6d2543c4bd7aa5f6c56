@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0fb78358_4aef985b",
+        "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T13:47:38Z",
+      "side": 1,
+      "message": "If this were a decorator what would it decorate? Would it be an EntityParserOutputGenerator Decorator?",
+      "parentUuid": "49541908_19f23fce",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "243cdb03_911d7680",
         "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
         "patchSetId": 15
@@ -189,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "5b4789a9_50149bb6",
+        "filename": "view/src/EntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T13:47:38Z",
+      "side": 1,
+      "message": "The existing concept can be found in EntityParserOutputGenerator See getMetaTags and getParserOutput",
+      "parentUuid": "10b1b72c_957bba65",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6953c839_9b851ad9",
         "filename": "view/src/EntityMetaTags.php",
         "patchSetId": 15
@@ -274,6 +310,24 @@
     },
     {
       "key": {
+        "uuid": "f2591f9c_d35ad991",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T13:47:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f55cec94_294bd472",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7257311b_ed48405f",
         "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
         "patchSetId": 15
@@ -309,6 +363,24 @@
     },
     {
       "key": {
+        "uuid": "8734e0c8_ed5302c5",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T13:47:38Z",
+      "side": 1,
+      "message": "\u003e I would expect the method to be defined as an abstract method here though\n\nDo you mean the data provider or the test itself?\n\n\u003e beware the fallacy of DRY\n\nThis could definitely be duplicated in Lexeme rather than relying on the abstract TestCase.",
+      "parentUuid": "816eae58_3b6696b7",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e9201f70_82f72081",
         "filename": "view/tests/phpunit/FingerprintableEntityMetaTagsTest.php",
         "patchSetId": 15
@@ -323,6 +395,24 @@
       "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed682b72_3371b55b",
+        "filename": "view/tests/phpunit/FingerprintableEntityMetaTagsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-20T13:47:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e9201f70_82f72081",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
