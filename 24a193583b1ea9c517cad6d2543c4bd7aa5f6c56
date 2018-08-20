@@ -2,6 +2,159 @@
   "comments": [
     {
       "key": {
+        "uuid": "49541908_19f23fce",
+        "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "What about making this a Decorator instead of a Factory?",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "243cdb03_911d7680",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "You can remove the need for the custom type check and the test for it by using this siganture:\n\n__construct( callable ...$entityMetaTagsFactoryCallbacks )\n\nConstructor implementation remains the same. For callers you instead do \n\nnew MyClass( $arg1, $arg2 )\n\nor if you have an array you do\n\nnew MyClass( ...$list )\n\nOften the callers never have an array and are just creating one because of the signature, so it can simplify code there as well.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ad372ee_e9c3d552",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "It is good form to (in most cases) put the method definition right below its first caller. Now I needed to go look for it through the whole class.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "271069a3_ab821824",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "Using $this-\u003eexpectException() instead of the docblock thing allows you to be more precise about which code should throw the exception. I assume the call to newEntityMetaTags should be throwing the exception here, though that is not entirely obvious from the test (even if it is implied by the last statement otherwise being dead code). What\u0027s more, the test will pass if the constructor ends up throwing the exception. This issue increases in severity with the size of the test method.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73877d08_69a44fdc",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": ") {\n\nnot\n\n)\n{",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e06adb92_ee0f164b",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "createMock",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff91ca99_5238b9f8",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/MockEntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "StubEntityMetaTags seems like a better name. (Though of course EntityMetaTags itself has an issue)\n\nSee here for test double naming: https://www.entropywins.wtf/blog/2016/05/13/5-ways-to-write-better-mocks/",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56dec998_fb6f5ca3",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/MockEntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "huh?\n\nEdit: I see, this is to store the LanguageFallbackChain passed in the only test using this. Why not just take a LanguageFallbackChain in the constructor then? At least, if there was a need to take this thing at all, which to me it looks like it is not. You are using assertSame, which already guarantees you have the same instance of the class.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70b7f694_13ffd345",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/MockEntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "return [];\n\nElse this is going to break when switching to real PHP 7 and using return type hints.\n\nAnd on a more abstract level it does violate Liskov Substituion, which is good to avoid in general, even if nothing explodes right away.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3433f50_e53b7c9d",
         "filename": "view/src/EntityMetaTags.php",
         "patchSetId": 15
@@ -30,6 +183,23 @@
       "writtenOn": "2018-08-20T12:28:56Z",
       "side": 1,
       "message": "Is this \"meta tags\" an existing concept? I don\u0027t recognize it.\n\nIf it is not, or it has the same meaning as \"terms\", then I would stick with that more established terminology.",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6953c839_9b851ad9",
+        "filename": "view/src/EntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "Should have a return type hint. Probably also good to describe the format of the arrays (which keys they have)",
       "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -115,6 +285,41 @@
       "writtenOn": "2018-08-20T12:36:36Z",
       "side": 1,
       "message": "I\u0027ve actually never seen use of a data provider in an abstract class where it is defined by subclasses. I would expect the method to be defined as an abstract method here though. Or does that for some reason confuse PHPUnit?\n\nWhat made you create this abstract class anyway? There is only one subclass. Looks like this was added to avoid possible code duplication in the future. That is IMO premature, and beware that inheritance is typically a very bad way to share code, as it introduces very high coupling. Also beware the fallacy of DRY https://www.entropywins.wtf/blog/2017/09/06/the-fallacy-of-dry/",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "816eae58_3b6696b7",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "If the intention is to use this in the Lexeme extension then I\u0027m even more concerned: inheritance of concrete code across package boundaries is problematic. And in this case it would require having the test code autoloaded when the tests of the dependent package run, which is something that normally is not the case. (Then again this is MediaWiki so \"normally\" tends to not apply)",
+      "parentUuid": "7257311b_ed48405f",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9201f70_82f72081",
+        "filename": "view/tests/phpunit/FingerprintableEntityMetaTagsTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-20T13:10:33Z",
+      "side": 1,
+      "message": "You can just do $mock \u003d $this-\u003ecreateMock( class )\n\nThe verbose version was needed in older version of PHPUnit but not anymore",
       "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
