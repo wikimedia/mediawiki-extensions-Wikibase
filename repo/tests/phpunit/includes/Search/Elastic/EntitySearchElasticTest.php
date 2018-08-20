@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Tests;
 
+use CirrusSearch;
 use CirrusSearch\CirrusDebugOptions;
 use Language;
 use MediaWikiTestCase;
@@ -20,7 +21,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		if ( !class_exists( 'CirrusSearch' ) ) {
+		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
 		$this->markTestSkipped( 'Transitional.' );

@@ -16,6 +16,7 @@ namespace CirrusSearch\Query {
 
 namespace Wikibase\Repo\Search\Elastic\Tests {
 
+	use CirrusSearch;
 	use CirrusSearch\Profile\SearchProfileService;
 	use CirrusSearch\Query\FullTextQueryBuilder;
 	use CirrusSearch\Search\SearchContext;
@@ -39,7 +40,7 @@ namespace Wikibase\Repo\Search\Elastic\Tests {
 
 		public function setUp() {
 			parent::setUp();
-			if ( !class_exists( 'CirrusSearch' ) ) {
+			if ( !class_exists( CirrusSearch::class ) ) {
 				$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 			}
 			self::$buildCalled = [];
