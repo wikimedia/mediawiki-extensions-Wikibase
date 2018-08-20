@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7afd266_5648ccb5",
+        "filename": "lib/includes/Store/EntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-20T22:49:41Z",
+      "side": 1,
+      "message": "This comment is no longer true with this patch.\n\nThis interface contract is changing here so we should be sure that nothing using it or implementations relies on false being returned here for redirects in extensions etc.\n\nNo need to really announce this per the stable interface policy as:\n\u003e Wikibase PHP code is not considered a stable interface. Since there are currently no official releases of the Wikibase extension, just a rolling deployment to wikidata.org, there is no point in time at which any given PHP class or interface can be assumed to remain stable.",
+      "range": {
+        "startLine": 74,
+        "startChar": 69,
+        "endLine": 74,
+        "endChar": 94
+      },
+      "revId": "8e8bf8e286796842c6d790741ad6710420822adb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f9df53f_42271939",
+        "filename": "repo/includes/Api/EntityIdSearchHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-20T22:49:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure if these warnings will contain any sort of stacktrace or idea of where they are emitted from.\nAs we have 2 identical log messages here and below it might be an idea to prefix or suffix the message with __METHOD__",
+      "range": {
+        "startLine": 155,
+        "startChar": 3,
+        "endLine": 155,
+        "endChar": 15
+      },
+      "revId": "8e8bf8e286796842c6d790741ad6710420822adb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
