@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fb4d6bc_ede075a6",
+        "filename": "client/tests/phpunit/includes/Notifications/PageConnectionPresentationModelTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-20T08:01:48Z",
+      "side": 1,
+      "message": "This comment now repeats what the two lines of code below almost literally say. I would remove the comment.\n\nSame in EchoNotificationsHandlersTest.",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 42
+      },
+      "revId": "6d91a2445a3314b2efdfd87310d4bc255609f08b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
