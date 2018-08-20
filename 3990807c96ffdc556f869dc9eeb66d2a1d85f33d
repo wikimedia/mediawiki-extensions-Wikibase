@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2adffaf9_c24884ca",
+        "filename": "client/includes/RecentChanges/RecentChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-20T09:14:45Z",
+      "side": 0,
+      "message": "This got merged about a year ago.",
+      "range": {
+        "startLine": 89,
+        "startChar": 35,
+        "endLine": 89,
+        "endChar": 44
+      },
+      "revId": "3990807c96ffdc556f869dc9eeb66d2a1d85f33d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
