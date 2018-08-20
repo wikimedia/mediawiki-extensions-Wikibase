@@ -2,8 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use MagicWord;
-use MagicWordFactory;
 use Parser;
 use Wikibase\Client\Store\DescriptionLookup;
 
@@ -105,11 +103,7 @@ class ShortDescHandler {
 	private function parseNoReplace( $parser, $controlArg ) {
 		static $magicWord = null;
 		if ( is_null( $magicWord ) ) {
-			if ( class_exists( MagicWordFactory::class ) ) {
-				$magicWord = $parser->getMagicWordFactory()->get( 'shortdesc_noreplace' );
-			} else {
-				$magicWord = MagicWord::get( 'shortdesc_noreplace' );
-			}
+			$magicWord = $parser->getMagicWordFactory()->get( 'shortdesc_noreplace' );
 		}
 		return $magicWord->matchStartToEnd( $controlArg );
 	}
