@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b880373b_243b6d18",
+        "filename": "lib/includes/Store/EntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-21T09:12:49Z",
+      "side": 1,
+      "message": "To make this clearer.\n\n------\n\n\"This comment is no longer true with this patch.\" refers to \"(this includes redirects)\" which is highlighted by this comment.\n\nThe entire point of this patch is that exceptions are thrown in the case of redirects instead of returning false, thus the part that says false is returned for redirects needs to be removed..\n\n------\n\nThe part about the stable interface policy is merely acknowledging the fact that we do not have to announce a change like this in any way, or do any kind of backward compatibility, which we would have to do in other projects.\n\nAlthough we don\u0027t have to announce this we should still check all other Wikibase \u0026 WMF deployed extensions to make sure this change is not breaking something that they expect, they could be waiting for a false return to then resolve redirect, as that is what this interface previously said it would do.\nWe should check this before +2ing and merging this patch.\nno code changes are needed in this patch relating to this comment however.",
+      "parentUuid": "f7afd266_5648ccb5",
+      "range": {
+        "startLine": 74,
+        "startChar": 69,
+        "endLine": 74,
+        "endChar": 94
+      },
+      "revId": "8e8bf8e286796842c6d790741ad6710420822adb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f9df53f_42271939",
         "filename": "repo/includes/Api/EntityIdSearchHelper.php",
         "patchSetId": 5
