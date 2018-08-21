@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b03ac453_34c2f09f",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-21T09:09:55Z",
+      "side": 1,
+      "message": "Hm, should this now be a \u0027meta-tags-creator-callback\u0027? Or \u0027meta-tags-creator-factory-callback\u0027? I\u0027m leaning towards the former, since (1) it\u0027s redundant when they\u0027re pretty much all creating objects and (2) they\u0027re never used directly, but as parts of an actual factory. Sorry for nitpicking, but I think naming is important here as we\u0027re defining the interface for other entity types :)",
+      "range": {
+        "startLine": 202,
+        "startChar": 3,
+        "endLine": 202,
+        "endChar": 29
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb5decfd_dd87e438",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/StubEntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-21T09:09:55Z",
+      "side": 1,
+      "message": "I guess this is fine in tests!?",
+      "range": {
+        "startLine": 13,
+        "startChar": 54,
+        "endLine": 13,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f331087c_c0ec194f",
+        "filename": "view/src/EntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-21T09:09:55Z",
+      "side": 1,
+      "message": "Not allowed yet I think",
+      "range": {
+        "startLine": 22,
+        "startChar": 54,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f6e76ce_f65dcf3d",
+        "filename": "view/src/FingerprintableEntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-21T09:09:55Z",
+      "side": 1,
+      "message": "I don\u0027t think we can use this in prod yet :(\n(If that\u0027s true, then it\u0027s scary that it\u0027s green here)",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
