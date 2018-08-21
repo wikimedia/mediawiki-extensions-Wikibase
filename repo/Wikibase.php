@@ -649,7 +649,7 @@ call_user_func( function() {
 			$expectKnownLanguageNames = ExtensionRegistry::getInstance()->isLoaded( 'cldr' );
 
 			return new Wikibase\Repo\Api\MetaContentLanguages(
-				$repo->getContentLanguages(),
+				$repo->getWikibaseContentLanguages(),
 				$expectKnownLanguageNames,
 				$apiQuery,
 				$moduleName

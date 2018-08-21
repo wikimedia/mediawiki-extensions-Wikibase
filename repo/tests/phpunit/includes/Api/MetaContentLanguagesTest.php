@@ -10,6 +10,7 @@ use Language;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\Api\MetaContentLanguages;
 
 /**
@@ -48,7 +49,7 @@ class MetaContentLanguagesTest extends TestCase {
 	public function testExecute_warnsAboutUnknownLanguageNames() {
 		$query = $this->getQuery( [ 'wbclprop' => 'name' ] );
 		$api = new MetaContentLanguages(
-			[ 'term' => new StaticContentLanguages( [ 'unknown' ] ) ],
+			new WikibaseContentLanguages( [ 'term' => new StaticContentLanguages( [ 'unknown' ] ) ] ),
 			true,
 			$query,
 			'wbcontentlanguages'
@@ -72,10 +73,10 @@ class MetaContentLanguagesTest extends TestCase {
 	}
 
 	private function getContentLanguages() {
-		return [
+		return new WikibaseContentLanguages( [
 			'term' => new StaticContentLanguages( [ 'en', 'de', 'es' ] ),
 			'test' => new StaticContentLanguages( [ 'en', 'mis', 'und' ] ),
-		];
+		] );
 	}
 
 	public function provideParamsAndExpectedResults() {
