@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "060a16a0_7e577074",
+        "filename": "repo/includes/Api/EntityTermSearchHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-08-21T16:29:07Z",
+      "side": 1,
+      "message": "is this comment change expected?",
+      "revId": "65409a1a44c03d434a268f65306440620d9a558f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
