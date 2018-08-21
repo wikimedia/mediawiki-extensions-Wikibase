@@ -21,15 +21,21 @@ use Wikimedia\Purtle\RdfWriter;
 class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 	/**
-	 * A list of entities mentioned/touched to or by this builder.
-	 * The prefixed entity IDs are used as keys in the array, the value 'true'
-	 * is used to indicate that the entity has been resolved. If the value
-	 * is an EntityId, this indicates that the entity has not yet been resolved
-	 * (defined).
-	 *
-	 * @var bool[]
+	 * A list of entities resolved by this builder.
+	 * The keys are prefixed IDs, the values are EntityMentionListener constants
+	 * (FULL, STUB, etc.)
+	 * @var int[]
 	 */
 	private $entitiesResolved = [];
+
+	/**
+	 * A list of entities mentioned by this that need to be resolved.
+	 * The prefixed entity IDs are used as keys in the array.
+	 * The value is array of EntityMentionListener resolve type as key
+	 * and EntityId as value.
+	 * @var EntityId[][]
+	 */
+	private $entitiesToResolve = [];
 
 	/**
 	 * What the serializer would produce?
@@ -238,9 +244,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 *
 	 * @param EntityId $id
 	 */
-	public function entityReferenceMentioned( EntityId $id ) {
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
-			$this->entityToResolve( $id );
+	public function entityReferenceMentioned( EntityId $id, $type = EntityMentionListener::MENTION_STUB ) {
+		if ( $type === EntityMentionListener::FULL || $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
+			$this->entityToResolve( $id, $type );
 		}
 	}
 
@@ -251,22 +257,23 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	public function propertyMentioned( PropertyId $id ) {
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) {
-			$this->entityToResolve( $id );
+			$this->entityToResolve( $id, EntityMentionListener::STUB );
 		}
 	}
 
 	/**
 	 * Registers an entity as mentioned.
-	 * Will be recorded as unresolved
-	 * if it wasn't already marked as resolved.
+	 * Will be recorded as unresolved if it wasn't already marked as resolved at the
+	 * required resolution type.
 	 *
 	 * @param EntityId $entityId
+	 * @param int $type EntityMentionListener constant specifying which resolution is needed
 	 */
-	private function entityToResolve( EntityId $entityId ) {
+	private function entityToResolve( EntityId $entityId, $type ) {
 		$prefixedId = $entityId->getSerialization();
 
-		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
-			$this->entitiesResolved[$prefixedId] = $entityId;
+		if ( !isset( $this->entitiesResolved[$prefixedId] ) || $this->entitiesResolved[$prefixedId] < $type ) {
+			$this->entitiesToResolve[$prefixedId][$type] = $entityId;
 		}
 	}
 
@@ -274,10 +281,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * Registers an entity as resolved.
 	 *
 	 * @param EntityId $entityId
+	 * @param int $type EntityMentionListener constant specifying which resolution happened.
 	 */
-	private function entityResolved( EntityId $entityId ) {
+	private function entityResolved( EntityId $entityId, $type = EntityMentionListener::FULL ) {
 		$prefixedId = $entityId->getSerialization();
-		$this->entitiesResolved[$prefixedId] = true;
+		$this->entitiesResolved[$prefixedId] = $type;
 	}
 
 	/**
@@ -401,41 +409,51 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param EntityLookup $entityLookup
 	 */
 	public function resolveMentionedEntities( EntityLookup $entityLookup ) {
-		$hasRedirect = false;
+		do {
+			foreach ( $this->entitiesToResolve as $prefixedId => $resolve ) {
+				// Unset in any case so we don't process twice
+				unset( $this->entitiesToResolve[$prefixedId] );
 
-		foreach ( $this->entitiesResolved as $id ) {
-			// $value is true if the entity has already been resolved,
-			// or an EntityId to resolve.
-			if ( !( $id instanceof EntityId ) ) {
-				continue;
-			}
+				if ( isset( $resolve[EntityMentionListener::FULL] ) ) {
+					$type = EntityMentionListener::FULL;
+				} elseif ( isset( $resolve[EntityMentionListener::STUB] ) ) {
+					$type = EntityMentionListener::STUB;
+				} else {
+					continue;
+				}
+				if ( isset( $this->entitiesResolved[$prefixedId] ) &&
+					$this->entitiesResolved[$prefixedId] >= $type ) {
+					// We already resolved it at this level. Should not happen here,
+					// but check anyway to be sure.
+					continue;
+				}
+				$id = $resolve[$type];
 
-			try {
-				$entity = $entityLookup->getEntity( $id );
+				try {
+					$entity = $entityLookup->getEntity( $id );
 
-				if ( !$entity ) {
+					if ( !$entity ) {
+						continue;
+					}
+				} catch ( RevisionedUnresolvedRedirectException $ex ) {
+					// NOTE: this may add more entries to the end of entitiesResolved
+					$target = $ex->getRedirectTargetId();
+					$this->addEntityRedirect( $id, $target );
 					continue;
 				}
 
-				$this->addEntityStub( $entity );
-			} catch ( RevisionedUnresolvedRedirectException $ex ) {
-				// NOTE: this may add more entries to the end of entitiesResolved
-				$target = $ex->getRedirectTargetId();
-				$this->addEntityRedirect( $id, $target );
-				$hasRedirect = true;
+				if ( isset( $resolve[EntityMentionListener::FULL] ) ) {
+					$this->addEntity( $entity );
+				} elseif ( isset( $resolve[EntityMentionListener::STUB] ) ) {
+					$this->addEntityStub( $entity );
+				} else {
+					continue;
+				}
 			}
-		}
-
 		// If we encountered redirects, the redirect targets may now need resolving.
 		// They actually got added to $this->entitiesResolved, but may not have been
 		// processed by the loop above, because they got added while the loop was in progress.
-		if ( $hasRedirect ) {
-			// Call resolveMentionedEntities() recursively to resolve any yet unresolved
-			// redirect targets. The regress will eventually terminate even for circular
-			// redirect chains, because the second time an entity ID is encountered, it
-			// will be marked as already resolved.
-			$this->resolveMentionedEntities( $entityLookup );
-		}
+		} while ( count( $this->entitiesToResolve ) > 0 );
 	}
 
 	/**
@@ -450,6 +468,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		foreach ( $this->builders as $builder ) {
 			$builder->addEntityStub( $entity );
 		}
+		$this->entityResolved( $entity->getId(), EntityMentionListener::STUB );
 	}
 
 	/**
@@ -471,7 +490,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->entityResolved( $from );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
-			$this->entityToResolve( $to );
+			$this->entityToResolve( $to, EntityMentionListener::STUB );
 		}
 	}
 
