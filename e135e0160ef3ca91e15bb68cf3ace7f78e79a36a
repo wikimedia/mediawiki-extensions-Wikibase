@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fd05a490_25abc4dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-21T07:18:31Z",
+      "side": 1,
+      "message": "Yes repo IMO",
+      "range": {
+        "startLine": 22,
+        "startChar": 26,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "e135e0160ef3ca91e15bb68cf3ace7f78e79a36a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3be948a_263e7e71",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 4
