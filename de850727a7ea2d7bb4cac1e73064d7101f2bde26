@@ -187,6 +187,30 @@
       "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16339ccc_0e0157c7",
+        "filename": "view/src/FingerprintableEntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-21T12:12:05Z",
+      "side": 1,
+      "message": "That is really cool \\o/",
+      "parentUuid": "c108eccc_6a9ed154",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
