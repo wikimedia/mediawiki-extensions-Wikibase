@@ -216,7 +216,9 @@ abstract class DumpEntities extends Maintenance {
 	public function finalSetup() {
 		global $wgDBDefaultGroup;
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		// Don't use WikibaseRepo here as this is run very early on, thus
+		// the bootstrapping code is not ready yet (T202452).
+		$settings = WikibaseSettings::getRepoSettings();
 		$dumpDBDefaultGroup = $settings->getSetting( 'dumpDBDefaultGroup' );
 
 		if ( $dumpDBDefaultGroup !== null ) {
