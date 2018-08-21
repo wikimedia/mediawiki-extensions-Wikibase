@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "135fbc7f_3b16048d",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-08-21T20:44:06Z",
+      "side": 1,
+      "message": "I believe this behavior will look quite a lot like magic for someone using this code. RdfProducer::PRODUCE_RESOLVED_ENTITIES should probably be renamed to RdfProducer::PRODUCE_RESOLVED_STUB_ENTITIES",
+      "revId": "9bf0107a5a64d06065b03f86a683ef0ddb7dbc2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
