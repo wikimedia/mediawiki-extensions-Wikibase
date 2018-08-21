@@ -4,6 +4,7 @@ namespace Wikibase\Client;
 
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -77,7 +78,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -91,6 +91,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
@@ -241,6 +242,11 @@ final class WikibaseClient {
 	 * @var WikibaseValueFormatterBuilders|null
 	 */
 	private $valueFormatterBuilders = null;
+
+	/**
+	 * @var WikibaseContentLanguages|null
+	 */
+	private $wikibaseContentLanguages = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1225,13 +1231,21 @@ final class WikibaseClient {
 		);
 	}
 
+	public function getWikibaseContentLanguages() {
+		if ( $this->wikibaseContentLanguages === null ) {
+			$this->wikibaseContentLanguages = WikibaseContentLanguages::getDefaultInstance();
+		}
+
+		return $this->wikibaseContentLanguages;
+	}
+
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 *
-	 * @return MediaWikiContentLanguages
+	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return new MediaWikiContentLanguages();
+		return $this->getWikibaseContentLanguages()->getContentLanguages( 'term' );
 	}
 
 	/**

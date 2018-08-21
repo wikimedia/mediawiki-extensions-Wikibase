@@ -644,32 +644,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertSame( $service, $repo->getTermLookup(), 'TermBuffer and TermLookup should be the same object' );
 	}
 
-	public function testGetContentLanguages() {
-		$repo = $this->getWikibaseRepo();
-
-		$contentLanguages = $repo->getContentLanguages();
-
-		$this->assertContainsOnlyInstancesOf( ContentLanguages::class, $contentLanguages );
-		$this->assertArrayHasKey( 'term', $contentLanguages );
-		$this->assertArrayHasKey( 'monolingualtext', $contentLanguages );
-	}
-
-	public function testGetContentLanguages_withHook() {
-		$testLanguages = new StaticContentLanguages( [ 'test' ] );
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [
-			'WikibaseContentLanguages' => [
-				function ( array &$contentLanguages ) use ( $testLanguages ) {
-					$contentLanguages['test'] = $testLanguages;
-				},
-			],
-		] );
-		$repo = $this->getWikibaseRepo();
-
-		$contentLanguages = $repo->getContentLanguages();
-
-		$this->assertSame( $testLanguages, $contentLanguages['test'] );
-	}
-
 	public function testGetTermsLanguages() {
 		$service = $this->getWikibaseRepo()->getTermsLanguages();
 		$this->assertInstanceOf( ContentLanguages::class, $service );
