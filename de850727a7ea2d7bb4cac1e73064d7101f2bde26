@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9f256f3f_f6783e61",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T11:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b03ac453_34c2f09f",
+      "range": {
+        "startLine": 202,
+        "startChar": 3,
+        "endLine": 202,
+        "endChar": 29
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb5decfd_dd87e438",
         "filename": "repo/tests/phpunit/includes/ParserOutput/StubEntityMetaTagsCreator.php",
         "patchSetId": 18
@@ -45,6 +69,30 @@
       "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98f12f39_25f1a3bd",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/StubEntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T11:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb5decfd_dd87e438",
+      "range": {
+        "startLine": 13,
+        "startChar": 54,
+        "endLine": 13,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "914e9d55_ba90ed5a",
+        "filename": "view/src/EntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T11:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f331087c_c0ec194f",
+      "range": {
+        "startLine": 22,
+        "startChar": 54,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f6e76ce_f65dcf3d",
         "filename": "view/src/FingerprintableEntityMetaTagsCreator.php",
         "patchSetId": 18
@@ -82,6 +154,30 @@
       "writtenOn": "2018-08-21T09:09:55Z",
       "side": 1,
       "message": "I don\u0027t think we can use this in prod yet :(\n(If that\u0027s true, then it\u0027s scary that it\u0027s green here)",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c108eccc_6a9ed154",
+        "filename": "view/src/FingerprintableEntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T11:05:25Z",
+      "side": 1,
+      "message": "Apparently this is A-OK! See it in core here: https://github.com/wikimedia/mediawiki/blob/master/includes/ServiceWiring.php#L63",
+      "parentUuid": "8f6e76ce_f65dcf3d",
       "range": {
         "startLine": 24,
         "startChar": 54,
