@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3be948a_263e7e71",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1820,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-21T07:18:15Z",
+      "side": 1,
+      "message": "The commit message talks about:\n\n\u003e * Decide whether we should alias \u0027term\u0027 to\n\u003e  \u0027label\u0027/\u0027description\u0027/\u0027alias\u0027 or not\n\nI guess this is mainly a product question?\nAre labels aliases and descriptions ever going to have different sets of languages, my guess would be no.\n\nIn that case I think it would be safe to only have \u0027term\u0027 here.",
+      "range": {
+        "startLine": 1817,
+        "startChar": 3,
+        "endLine": 1820,
+        "endChar": 70
+      },
+      "revId": "e135e0160ef3ca91e15bb68cf3ace7f78e79a36a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8688b4d_6a0607f4",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-21T07:18:15Z",
+      "side": 1,
+      "message": "Might be nice to alter this comment actually:\n\nmainly for labels, descriptions and aliases.\n\nThese are also used now in Lexeme for other things.",
+      "range": {
+        "startLine": 1922,
+        "startChar": 66,
+        "endLine": 1922,
+        "endChar": 103
+      },
+      "revId": "e135e0160ef3ca91e15bb68cf3ace7f78e79a36a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
