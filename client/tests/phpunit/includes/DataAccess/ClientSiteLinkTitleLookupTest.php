@@ -36,7 +36,7 @@ class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( [ $id->getNumericId() ], [ $clientSiteId ] )
 			->will( $this->returnCallback( function ( array $numericIds, array $siteIds ) {
 				// TODO: SiteLinkLookup::getLinks does have a bad, bad interface.
-				return $siteIds === [ 'dewiki' ] ? [ [ 1 => 'Berlin' ] ] : null;
+				return $siteIds === [ 'dewiki' ] ? [ [ 1 => 'Berlin' ] ] : [];
 			} ) );
 
 		$lookup = new ClientSiteLinkTitleLookup( $siteLinkLookup, $clientSiteId );
