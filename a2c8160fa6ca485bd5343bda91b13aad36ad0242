@@ -45,6 +45,30 @@
       "revId": "a2c8160fa6ca485bd5343bda91b13aad36ad0242",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e68776b_4a3ca04d",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-08-21T10:36:22Z",
+      "side": 1,
+      "message": "\u003e The terms of an entity (including label, descript \u0026 alias)?\n\nAre we likely to have entities with labels, descriptions, aliases, *and* other kinds of terms? For lexicographical data we have a completely different set of “terms”.\n\n\u003e Or don\u0027t include the examples and just say term? \n\nHave a look at https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2018/08#How_would_you_call_this? – I don’t think a lot of people know what we mean by “term(s)”.",
+      "parentUuid": "0e8da16b_c988348d",
+      "range": {
+        "startLine": 603,
+        "startChar": 72,
+        "endLine": 603,
+        "endChar": 101
+      },
+      "revId": "a2c8160fa6ca485bd5343bda91b13aad36ad0242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
