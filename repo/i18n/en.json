@@ -302,7 +302,6 @@
 	"wikibase-entitydata-not-acceptable": "No matching format found. Supported MIME types: $1",
 	"wikibase-entitydata-bad-revision": "Can't show revision $2 of entity $1.",
 	"wikibase-entitydata-bad-id": "Invalid ID: $1.",
-	"wikibase-entitydata-rdf-disabled": "RDF export is disabled for this type of entity: $1.",
 	"wikibase-entitydata-unsupported-format": "The data format $1 is not supported by this interface.",
 	"wikibase-entitydata-storage-error": "Failed to load entity $1.",
 	"wikibase-entitydata-title": "Entity Data",

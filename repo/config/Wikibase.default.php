@@ -275,9 +275,6 @@ return [
 	// List of properties that, if in a qualifier, will be used for indexing quantities
 	'searchIndexQualifierPropertiesForQuantity' => [],
 
-	// List of entity types that rdf export is disabled
-	'disabledRdfExportEntityTypes' => [],
-
 	// Use search-related fields of wb_terms table
 	'useTermsTableSearchFields' => true,
 

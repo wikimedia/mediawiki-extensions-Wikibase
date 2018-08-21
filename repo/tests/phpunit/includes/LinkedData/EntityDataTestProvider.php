@@ -512,14 +512,6 @@ class EntityDataTestProvider {
 			]
 		];
 
-		$cases[] = [ // #43: disabled rdf export for properties
-			'',      // subpage
-			[ 'id' => 'P42', 'format' => 'rdf' ], // parameters
-			[], // headers
-			'!wikibase-entitydata-rdf-disabled: property!', // output regex
-			400,       // http code
-		];
-
 		return $cases;
 	}
 
