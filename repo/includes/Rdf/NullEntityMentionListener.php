@@ -20,7 +20,7 @@ class NullEntityMentionListener implements EntityMentionListener {
 	 *
 	 * @param EntityId $id
 	 */
-	public function entityReferenceMentioned( EntityId $id ) {
+	public function entityReferenceMentioned( EntityId $id, $type = EntityMentionListener::STUB ) {
 	}
 
 	/**
