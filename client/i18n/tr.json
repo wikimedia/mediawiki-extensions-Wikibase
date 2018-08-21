@@ -14,7 +14,8 @@
 			"Incelemeelemani",
 			"Vito Genovese",
 			"Diyapazon",
-			"Hedda"
+			"Hedda",
+			"TmY e12"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -61,6 +62,7 @@
 	"wikibase-otherprojects": "Diğer projelerde",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
 	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler.",
+	"echo-category-title-wikibase-action": "Vikiveri ile bağlantılar",
 	"notification-header-page-connection": "<strong>$3</strong> adlı sayfa, konuyla ilgili verileri içeren {{PLURAL:$4|-1=bir {{WBREPONAME}} öğesine|$4 numaralı {{WBREPONAME}} öğesine}} {{GENDER:$2|bağlandı}}.",
 	"connected-redirect-category": "Bir {{WBREPONAME}} öğesine bağlı olan yönlendirmeler",
 	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler."

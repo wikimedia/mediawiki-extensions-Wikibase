@@ -301,7 +301,6 @@
 	"wikibase-entitydata-not-acceptable": "Nenalezen žádný odpovídající formát. Podporované MIME typy: $1",
 	"wikibase-entitydata-bad-revision": "Nelze zobrazit revizi $2 entity $1.",
 	"wikibase-entitydata-bad-id": "Chybné ID: $1",
-	"wikibase-entitydata-rdf-disabled": "RDF export je pro typ entity $1 zakázán.",
 	"wikibase-entitydata-unsupported-format": "Toto rozhraní nepodporuje datový formát $1.",
 	"wikibase-entitydata-storage-error": "Nepodařilo se načíst entitu $1.",
 	"wikibase-entitydata-title": "Data entity",

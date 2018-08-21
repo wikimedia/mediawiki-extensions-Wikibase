@@ -299,7 +299,6 @@
 	"wikibase-entitydata-not-acceptable": "Inga matchande format finns. MIME-typer som stöds:$1",
 	"wikibase-entitydata-bad-revision": "Kan inte visa versionen $2 av enheten $1.",
 	"wikibase-entitydata-bad-id": "Ogiltigt ID: $1.",
-	"wikibase-entitydata-rdf-disabled": "RDF-export har inaktiverats för denna typ av entitet: $1.",
 	"wikibase-entitydata-unsupported-format": "Dataformatet $1 stöds inte av detta gränssnitt.",
 	"wikibase-entitydata-storage-error": "Misslyckades att läsa in enheten $1.",
 	"wikibase-entitydata-title": "Enhetsdata",

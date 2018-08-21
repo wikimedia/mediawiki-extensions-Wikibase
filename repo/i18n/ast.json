@@ -288,7 +288,6 @@
 	"wikibase-entitydata-not-acceptable": "Nun s'alcontró nengún formatu que coincidiera. Tipos MIME soportaos: $1",
 	"wikibase-entitydata-bad-revision": "Nun se pue amosar la revisión $2 de la entidá $1.",
 	"wikibase-entitydata-bad-id": "ID inválidu: $1.",
-	"wikibase-entitydata-rdf-disabled": "La esportación a RDF ta desactivada pa esta triba d'entidá: $1.",
 	"wikibase-entitydata-unsupported-format": "El formatu de datos $1 nun tien sofitu d'esta interfaz.",
 	"wikibase-entitydata-storage-error": "Nun pudo cargase la entidá $1.",
 	"wikibase-entitydata-title": "Datos de la entidá",

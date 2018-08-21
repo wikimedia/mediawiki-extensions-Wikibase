@@ -223,7 +223,6 @@
 	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" ass kee valabelen Typ vun Eenheet.",
 	"special-itemswithoutsitelinks": "Elementer ouni Linke mat Sitten",
 	"wikibase-entitydata-bad-revision": "D'Versioun $2 vun der Eenheet $1 kann net gewise ginn.",
-	"wikibase-entitydata-rdf-disabled": "Den RDF-Export ass fir dësen Typ vun Entitéit desaktivéiert: $1",
 	"wikibase-entitydata-unsupported-format": "Den Dateformat $1 gëtt net vun dësem Interface ënnerstëtzt.",
 	"wikibase-entitydata-storage-error": "D'Eenheet $1 konnt net geluede ginn.",
 	"special-redirectentity": "Eng Entitéit viruleeden",

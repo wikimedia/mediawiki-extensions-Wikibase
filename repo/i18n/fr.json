@@ -339,7 +339,6 @@
 	"wikibase-entitydata-not-acceptable": "Aucun format correspondant trouvé. Types MIME pris en charge : $1",
 	"wikibase-entitydata-bad-revision": "Impossible d’afficher la révision $2 de l’entité $1.",
 	"wikibase-entitydata-bad-id": "ID non valide : $1",
-	"wikibase-entitydata-rdf-disabled": "L'export RDF est désactivé pour ce type d'entité: $1 .",
 	"wikibase-entitydata-unsupported-format": "Le format de données $1 n’est pas pris en charge par cette interface.",
 	"wikibase-entitydata-storage-error": "Échec au chargement de l’entité $1.",
 	"wikibase-entitydata-title": "Données d’entité",

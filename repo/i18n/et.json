@@ -288,7 +288,6 @@
 	"wikibase-entitydata-not-acceptable": "Vastavat vormingut ei leitud. Toetatud MIME tüübid: $1",
 	"wikibase-entitydata-bad-revision": "Olemi $1 redaktsiooni $2 ei õnnestu näidata.",
 	"wikibase-entitydata-bad-id": "Vigane identifikaator: $1.",
-	"wikibase-entitydata-rdf-disabled": "Seda tüüpi olemite RDF-eksport on keelatud: $1.",
 	"wikibase-entitydata-unsupported-format": "See liides ei toeta andmevormingut $1.",
 	"wikibase-entitydata-storage-error": "Olemi $1 laadimine ebaõnnestus.",
 	"wikibase-entitydata-title": "Olemi andmed",

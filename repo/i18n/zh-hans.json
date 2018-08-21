@@ -314,7 +314,6 @@
 	"wikibase-entitydata-not-acceptable": "没有找到匹配的格式。支持的MIME类型：$1",
 	"wikibase-entitydata-bad-revision": "无法显示实体$1的版本$2。",
 	"wikibase-entitydata-bad-id": "无效ID：$1。",
-	"wikibase-entitydata-rdf-disabled": "RDF导出已为此实体类型禁用：$1。",
 	"wikibase-entitydata-unsupported-format": "该界面不支持数据格式$1。",
 	"wikibase-entitydata-storage-error": "无法载入实体$1。",
 	"wikibase-entitydata-title": "实体数据",

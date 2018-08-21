@@ -294,7 +294,6 @@
 	"wikibase-entitydata-not-acceptable": "Non se atopou ningún formato que coincidise. Tipos de MIME soportados: $1",
 	"wikibase-entitydata-bad-revision": "Non se pode mostrar a revisión $2 da entidade $1.",
 	"wikibase-entitydata-bad-id": "ID non válido: $1.",
-	"wikibase-entitydata-rdf-disabled": "A exportación a RDF está desactivada para este tipo de entidade: $1.",
 	"wikibase-entitydata-unsupported-format": "Esta interface non soporta o formato de datos \"$1\".",
 	"wikibase-entitydata-storage-error": "Erro ó cargar a entidade $1.",
 	"wikibase-entitydata-title": "Datos da entidade",

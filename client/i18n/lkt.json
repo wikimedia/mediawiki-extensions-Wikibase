@@ -6,8 +6,10 @@
 		]
 	},
 	"tooltip-t-wikibase": "Wamnáyaŋpi wóičhikȟoyake",
+	"wikibase-comment-update": "{{WBREPONAME}} yutȟókečapi",
 	"wikibase-dataitem": "{{WBREPONAME}} wamnáyaŋpi",
 	"wikibase-editlinks": "Wóičhikȟoyake kiŋ yutȟókča yo/ye",
 	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča yo/ye",
+	"wikibase-rc-wikibase-edit-letter": "Y",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} yutȟókeča"
 }

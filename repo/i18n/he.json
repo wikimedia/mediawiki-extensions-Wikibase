@@ -297,7 +297,6 @@
 	"wikibase-entitydata-not-acceptable": "לא נמצא תסדיר מתאים. סוגי MIME נתמכים: $1",
 	"wikibase-entitydata-bad-revision": "לא ניתן להציג את הגרסה $2 של הישות $1.",
 	"wikibase-entitydata-bad-id": "מזהה בלתי־תקין: $1.",
-	"wikibase-entitydata-rdf-disabled": "ייצוא RDF כבוי עבור סוג יישות: $1.",
 	"wikibase-entitydata-unsupported-format": "תסדיר $1 אינו נתמך בממשק הזה.",
 	"wikibase-entitydata-storage-error": "שגיאה בטעינת הישות $1.",
 	"wikibase-entitydata-title": "נתוני ישות",

@@ -312,7 +312,6 @@
 	"wikibase-entitydata-not-acceptable": "Kein passendes Format gefunden. Unterstützte MIME-Typen: $1",
 	"wikibase-entitydata-bad-revision": "Version $2 der Entität $1 kann nicht angezeigt werden.",
 	"wikibase-entitydata-bad-id": "Ungültige Kennung: $1.",
-	"wikibase-entitydata-rdf-disabled": "Der RDF-Export ist für den Objekttyp $1 deaktiviert.",
 	"wikibase-entitydata-unsupported-format": "Das Datenformat $1 wird von dieser Schnittstelle nicht unterstützt.",
 	"wikibase-entitydata-storage-error": "Das Objekt $1 konnte nicht geladen werden.",
 	"wikibase-entitydata-title": "Objektdaten",

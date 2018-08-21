@@ -299,7 +299,6 @@
 	"wikibase-entitydata-not-acceptable": "未找到符合的格式。支援的 MIME 類型：$1",
 	"wikibase-entitydata-bad-revision": "無法顯示實體 $1 的修訂 $2。",
 	"wikibase-entitydata-bad-id": "無效的 ID：$1。",
-	"wikibase-entitydata-rdf-disabled": "RDF 匯出已在此實體類型上停用：$1。",
 	"wikibase-entitydata-unsupported-format": "此介面不支援資料格式 $1。",
 	"wikibase-entitydata-storage-error": "讀取實體 $1 失敗。",
 	"wikibase-entitydata-title": "實體資料",

@@ -287,7 +287,6 @@
 	"wikibase-entitydata-not-acceptable": "Не најдов соодветен формат. Поддржани MIME-типови: $1",
 	"wikibase-entitydata-bad-revision": "Не можам да ја прикажам преработката $2 на единицата $1.",
 	"wikibase-entitydata-bad-id": "Неважечка назнака: $1.",
-	"wikibase-entitydata-rdf-disabled": "RDF-извоз е оневозможен за овој вид единица: $1.",
 	"wikibase-entitydata-unsupported-format": "Податочниот формат $1 не е поддржан на овој посредник.",
 	"wikibase-entitydata-storage-error": "Не можев да ја вчитам единицата $1.",
 	"wikibase-entitydata-title": "Податоци за единицата",

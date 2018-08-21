@@ -312,7 +312,6 @@
 	"wikibase-entitydata-not-acceptable": "لم يتم العثور على هيئة مطابقة. أنماط MIME المدعومة: $1",
 	"wikibase-entitydata-bad-revision": "لا يمكن عرض المراجعة $2 للكائن $1.",
 	"wikibase-entitydata-bad-id": "معرِّف غير صالح: $1.",
-	"wikibase-entitydata-rdf-disabled": "تصدير RDF معطل لهذا النوع من الكيان: $1.",
 	"wikibase-entitydata-unsupported-format": "هذه الواجهة لا تدعم هيئة البيانات $1.",
 	"wikibase-entitydata-storage-error": "لم يمكن تحميل الكائن $1.",
 	"wikibase-entitydata-title": "بيانات الكائن",

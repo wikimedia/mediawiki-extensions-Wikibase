@@ -140,7 +140,6 @@
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" मान्य भाषा कोड नहीं है।",
 	"special-entitydata": "इकाई डाटा",
 	"wikibase-entitydata-bad-id": "अमान्य आईडी: $1",
-	"wikibase-entitydata-rdf-disabled": "इस प्रकार की संस्था के लिए RDF निर्यात मना है: $1|",
 	"wikibase-entitydata-title": "इकाई डाटा",
 	"special-entitypage": "इकाई पृष्ठ",
 	"wikibase-entitypage-title": "इकाई पृष्ठ",

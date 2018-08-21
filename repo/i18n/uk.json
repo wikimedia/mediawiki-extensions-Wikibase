@@ -304,7 +304,6 @@
 	"wikibase-entitydata-not-acceptable": "Не знайдено відповідного формату. Підтримувані типи MIME:$1",
 	"wikibase-entitydata-bad-revision": "Не вдається показати версію $2 сутності  $1.",
 	"wikibase-entitydata-bad-id": "Некоректний ідентифікатор: $1.",
-	"wikibase-entitydata-rdf-disabled": "RDF-експорт відключений для цього типу сутності: $1.",
 	"wikibase-entitydata-unsupported-format": "Формат даних  $1 не підтримується цим інтерфейсом.",
 	"wikibase-entitydata-storage-error": "Не вдалося завантажити сутність $1.",
 	"wikibase-entitydata-title": "Дані сутності",
