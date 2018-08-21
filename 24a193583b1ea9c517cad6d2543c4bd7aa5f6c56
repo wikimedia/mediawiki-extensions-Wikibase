@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e74509b1_de0ce58b",
+        "filename": "repo/includes/ParserOutput/DispatchingEntityMetaTagsFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-21T12:10:25Z",
+      "side": 1,
+      "message": "Decorator for EntityMetaTags",
+      "parentUuid": "0fb78358_4aef985b",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "243cdb03_911d7680",
         "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
         "patchSetId": 15
@@ -69,6 +87,24 @@
       "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29caa929_0c6d4bdf",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityMetaTagsFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-21T12:10:25Z",
+      "side": 1,
+      "message": "No, it was me that missed the presence of string keys somehow. I can be quite blind at times :)",
+      "parentUuid": "011982d5_7a5db4ac",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -609,6 +645,24 @@
       "side": 1,
       "message": "\u003e I would expect the method to be defined as an abstract method here though\n\nDo you mean the data provider or the test itself?\n\n\u003e beware the fallacy of DRY\n\nThis could definitely be duplicated in Lexeme rather than relying on the abstract TestCase.",
       "parentUuid": "816eae58_3b6696b7",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90c9e7c1_7da8b029",
+        "filename": "view/tests/phpunit/EntityMetaTagsTestCase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-08-21T12:10:25Z",
+      "side": 1,
+      "message": "I was talking about the data provider. This class now uses a method that is not defined in it. Normally the IDE would complain, but since the method reference is in a dockblock it does not.",
+      "parentUuid": "8734e0c8_ed5302c5",
       "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
