@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6cabde63_8cfcd62a",
+        "filename": "view/src/EntityMetaTagsCreator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T08:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be929ee8_9e4198d0",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "7c88a2b997fd5f670c8333ecaca9ab92f3fa2887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a4270df_b0344c99",
         "filename": "view/src/EntityMetaTagsCreator.php",
         "patchSetId": 16
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-21T08:24:46Z",
       "side": 1,
       "message": "indenting here looks a bit odd, the first line is using tabs, the second spaces",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "7c88a2b997fd5f670c8333ecaca9ab92f3fa2887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbc69308_e6d974a7",
+        "filename": "view/src/EntityMetaTagsCreator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T08:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4270df_b0344c99",
       "range": {
         "startLine": 16,
         "startChar": 1,

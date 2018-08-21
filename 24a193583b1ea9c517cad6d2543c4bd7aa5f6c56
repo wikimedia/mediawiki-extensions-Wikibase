@@ -387,6 +387,24 @@
     },
     {
       "key": {
+        "uuid": "0846c1ac_8ff208c2",
+        "filename": "view/src/EntityMetaTags.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-21T08:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b4789a9_50149bb6",
+      "revId": "24a193583b1ea9c517cad6d2543c4bd7aa5f6c56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6953c839_9b851ad9",
         "filename": "view/src/EntityMetaTags.php",
         "patchSetId": 15
