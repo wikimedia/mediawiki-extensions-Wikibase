@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54c46c5a_e314769c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-21T07:30:47Z",
+      "side": 1,
+      "message": "Is there actually anything in Client that would use this?",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 72
+      },
+      "revId": "a2c8160fa6ca485bd5343bda91b13aad36ad0242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e8da16b_c988348d",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-21T07:30:47Z",
+      "side": 1,
+      "message": "Not sure if we should be so specific here, perhaps word it slightly differently.\n\nThe terms of an entity (including label, descript \u0026 alias) ?\nOr don\u0027t include the examples and just say term?",
+      "range": {
+        "startLine": 603,
+        "startChar": 72,
+        "endLine": 603,
+        "endChar": 101
+      },
+      "revId": "a2c8160fa6ca485bd5343bda91b13aad36ad0242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
