@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiQuery;
 use ApiQueryBase;
 use Language;
-use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,9 +13,9 @@ use Wikibase\Lib\ContentLanguages;
 class MetaContentLanguages extends ApiQueryBase {
 
 	/**
-	 * @var ContentLanguages[]
+	 * @var WikibaseContentLanguages
 	 */
-	private $contentLanguages;
+	private $wikibaseContentLanguages;
 
 	/**
 	 * @var bool
@@ -23,8 +23,7 @@ class MetaContentLanguages extends ApiQueryBase {
 	private $expectKnownLanguageNames;
 
 	/**
-	 * @param array $contentLanguages associative array from contexts
-	 * to {@link ContentLanguage} objects
+	 * @param WikibaseContentLanguages $wikibaseContentLanguages
 	 * @param bool $expectKnownLanguageNames whether we should expect MediaWiki
 	 * to know a language name for any language code that occurs in the content languages
 	 * (if true, warnings will be raised for any language without known language name)
@@ -32,13 +31,13 @@ class MetaContentLanguages extends ApiQueryBase {
 	 * @param string $moduleName
 	 */
 	public function __construct(
-		array $contentLanguages,
+		WikibaseContentLanguages $wikibaseContentLanguages,
 		$expectKnownLanguageNames,
 		ApiQuery $queryModule,
 		$moduleName
 	) {
 		parent::__construct( $queryModule, $moduleName, 'wbcl' );
-		$this->contentLanguages = $contentLanguages;
+		$this->wikibaseContentLanguages = $wikibaseContentLanguages;
 		$this->expectKnownLanguageNames = $expectKnownLanguageNames;
 	}
 
@@ -50,8 +49,8 @@ class MetaContentLanguages extends ApiQueryBase {
 		$result = $this->getResult();
 
 		$context = $params['context'];
-		$contentLanguagesForContext = $this->contentLanguages[$context];
-		$languageCodes = $contentLanguagesForContext->getLanguages();
+		$contentLanguages = $this->wikibaseContentLanguages->getContentLanguages( $context );
+		$languageCodes = $contentLanguages->getLanguages();
 
 		$props = $params['prop'];
 		$includeCode = in_array( 'code', $props );
@@ -108,7 +107,7 @@ class MetaContentLanguages extends ApiQueryBase {
 		return [
 			'context' => [
 				self::PARAM_DFLT => 'term',
-				self::PARAM_TYPE => array_keys( $this->contentLanguages ),
+				self::PARAM_TYPE => $this->wikibaseContentLanguages->getContexts(),
 				self::PARAM_HELP_MSG_PER_VALUE => [],
 			],
 			'prop' => [
