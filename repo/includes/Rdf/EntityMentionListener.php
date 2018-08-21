@@ -16,13 +16,22 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Daniel Kinzler
  */
 interface EntityMentionListener {
+	/**
+	 * Mention as a stub
+	 */
+	const STUB = 1;
+	/**
+	 * Mention as full entity
+	 */
+	const FULL = 2;
 
 	/**
 	 * Should be called when an entity reference (an EntityIdValue object) is encountered.
 	 *
 	 * @param EntityId $id
+	 * @param int $type Type of the mention
 	 */
-	public function entityReferenceMentioned( EntityId $id );
+	public function entityReferenceMentioned( EntityId $id, $type = self::STUB );
 
 	/**
 	 * Should be called when a property is used in a PropertySnak.
