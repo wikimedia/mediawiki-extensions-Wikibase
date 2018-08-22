@@ -67,6 +67,11 @@ class ChangeOpsMerge {
 	public static $conflictTypes = [ 'description', 'sitelink', 'statement' ];
 
 	/**
+	 * @var StatementsMerger
+	 */
+	private $statementsMerger;
+
+	/**
 	 * @param Item $fromItem
 	 * @param Item $toItem
 	 * @param string[] $ignoreConflicts list of elements to ignore conflicts for
@@ -74,6 +79,7 @@ class ChangeOpsMerge {
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $changeOpFactoryProvider
 	 * @param SiteLookup $siteLookup
+	 * @param StatementsMerger $statementsMerger
 	 *
 	 * @todo: Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
 	 *        need a MergeChangeOpsSequenceBuilder or some such. This will allow us
@@ -85,7 +91,8 @@ class ChangeOpsMerge {
 		array $ignoreConflicts,
 		EntityConstraintProvider $constraintProvider,
 		ChangeOpFactoryProvider $changeOpFactoryProvider,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		StatementsMerger $statementsMerger
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 
@@ -98,6 +105,7 @@ class ChangeOpsMerge {
 		$this->siteLookup = $siteLookup;
 
 		$this->changeOpFactoryProvider = $changeOpFactoryProvider;
+		$this->statementsMerger = $statementsMerger;
 	}
 
 	/**
@@ -148,8 +156,7 @@ class ChangeOpsMerge {
 		$this->toChangeOps->apply( $this->toItem );
 
 		$this->checkStatementLinks();
-		$statementsMerger = new StatementsMerger( $this->getStatementChangeOpFactory() );
-		$statementsMerger->merge( $this->fromItem, $this->toItem );
+		$this->statementsMerger->merge( $this->fromItem, $this->toItem );
 
 		//NOTE: we apply constraint checks on the modified items, but no
 		//      validation of individual change ops, since we are merging

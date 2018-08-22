@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use HashSiteStore;
 use InvalidArgumentException;
 use MediaWikiTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 use Site;
 use TestSites;
 use ValueValidators\Error;
@@ -21,13 +22,15 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Merge\StatementsMerger;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpsMerge
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpsMerge
  *
  * @group Wikibase
  * @group ChangeOp
@@ -44,6 +47,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	private $mockProvider;
 
 	/**
+	 * @var StatementsMerger|MockObject
+	 */
+	private $statementsMerger;
+
+	/**
 	 * @param string|null $name
 	 * @param array $data
 	 * @param string $dataName
@@ -52,6 +60,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
+		$this->statementsMerger = $this->newMockStatementsMerger();
 	}
 
 	protected function makeChangeOpsMerge(
@@ -100,7 +109,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$ignoreConflicts,
 			$constraintProvider,
 			$changeOpFactoryProvider,
-			$siteLookup
+			$siteLookup,
+			$this->statementsMerger
 		);
 	}
 
@@ -165,6 +175,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		Item $expectedTo,
 		array $ignoreConflicts = []
 	) {
+		$this->statementsMerger = $this->newRealStatementsMerger();
+
 		$from->setId( new ItemId( 'Q111' ) );
 		$to->setId( new ItemId( 'Q222' ) );
 
@@ -533,6 +545,17 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			'The two items cannot be merged because one of them links to the other using the properties: P42'
 		);
 		$changeOps->apply();
+	}
+
+	private function newMockStatementsMerger() {
+		return $this->createMock( StatementsMerger::class );
+	}
+
+	private function newRealStatementsMerger() {
+		return WikibaseRepo::getDefaultInstance()
+			->getChangeOpFactoryProvider()
+			->getMergeChangeOpFactory()
+			->getStatementsMerger();
 	}
 
 }

@@ -5,10 +5,13 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\Merge\StatementsMerger;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
  * Factory for ChangeOps that merge Items.
+ *
+ * TODO Maybe rename to MergeFactory (StatementsMerger is not a ChangeOp)
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -63,8 +66,13 @@ class MergeChangeOpsFactory {
 			$ignoreConflicts,
 			$this->constraintProvider,
 			$this->factoryProvider,
-			$this->siteLookup
+			$this->siteLookup,
+			$this->getStatementsMerger()
 		);
+	}
+
+	public function getStatementsMerger() {
+		return new StatementsMerger( $this->factoryProvider->getStatementChangeOpFactory() );
 	}
 
 }
