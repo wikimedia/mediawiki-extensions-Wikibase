@@ -257,15 +257,19 @@ class LinkTitles extends ApiBase {
 		return array_merge( parent::getAllowedParams(), [
 			'tosite' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_REQUIRED => true,
 			],
 			'totitle' => [
 				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			],
 			'fromsite' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_REQUIRED => true,
 			],
 			'fromtitle' => [
 				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			],
 			'token' => null,
 			'bot' => false,
