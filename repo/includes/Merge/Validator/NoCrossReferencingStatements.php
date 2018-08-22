@@ -18,8 +18,8 @@ class NoCrossReferencingStatements {
 	private $violations = [];
 
 	/**
-	 * TODO Reasonably hint against both EntityDocument (for id) and StatementListProvider
-	 * e.g. StatementListBearingEntityDocument
+	 * TODO Hint against StatementListProvidingEntity
+	 * https://github.com/wmde/WikibaseDataModel/pull/782 (v8.0.0)
 	 *
 	 * @param StatementListProvider $source
 	 * @param StatementListProvider $target
