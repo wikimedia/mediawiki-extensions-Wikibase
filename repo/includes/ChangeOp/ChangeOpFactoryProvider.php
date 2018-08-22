@@ -125,10 +125,10 @@ class ChangeOpFactoryProvider {
 	}
 
 	/**
-	 * @return MergeChangeOpsFactory
+	 * @return MergeFactory
 	 */
 	public function getMergeChangeOpFactory() {
-		return new MergeChangeOpsFactory(
+		return new MergeFactory(
 			$this->constraintProvider,
 			$this,
 			$this->siteLookup

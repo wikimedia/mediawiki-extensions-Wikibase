@@ -11,12 +11,10 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 /**
  * Factory for ChangeOps that merge Items.
  *
- * TODO Maybe rename to MergeFactory (StatementsMerger is not a ChangeOp)
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MergeChangeOpsFactory {
+class MergeFactory {
 
 	/**
 	 * @var EntityConstraintProvider

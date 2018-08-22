@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\ChangeOp\MergeFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -31,7 +31,7 @@ use Wikibase\SummaryFormatter;
 class ItemMergeInteractor {
 
 	/**
-	 * @var MergeChangeOpsFactory
+	 * @var MergeFactory
 	 */
 	private $changeOpFactory;
 
@@ -71,7 +71,7 @@ class ItemMergeInteractor {
 	private $entityTitleLookup;
 
 	public function __construct(
-		MergeChangeOpsFactory $changeOpFactory,
+		MergeFactory $changeOpFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
