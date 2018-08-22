@@ -7,14 +7,14 @@ use PHPUnit4And6Compat;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\MergeChangeOpsFactory
+ * @covers \Wikibase\Repo\Merge\MergeFactory
  *
  * @group Wikibase
  * @group ChangeOp
@@ -22,11 +22,11 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
+class MergeFactoryTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	/**
-	 * @return MergeChangeOpsFactory
+	 * @return MergeFactory
 	 */
 	protected function newChangeOpFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );
@@ -50,7 +50,7 @@ class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 			[]
 		);
 
-		return new MergeChangeOpsFactory(
+		return new MergeFactory(
 			$constraintProvider,
 			$changeOpFactoryProvider,
 			$siteStore

@@ -1688,7 +1688,7 @@ class WikibaseRepo {
 		$user = $context->getUser();
 
 		return new ItemMergeInteractor(
-			$this->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+			$this->getChangeOpFactoryProvider()->getMergeFactory(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),

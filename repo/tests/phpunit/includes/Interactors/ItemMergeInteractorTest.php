@@ -9,7 +9,7 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -24,7 +24,7 @@ use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Interactors\ItemMergeInteractor
+ * @covers \Wikibase\Repo\Interactors\ItemMergeInteractor
  *
  * @group Wikibase
  * @group Database
@@ -133,7 +133,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		//XXX: we may want or need to mock some of these services
-		$changeOpsFactory = new MergeChangeOpsFactory(
+		$changeOpsFactory = new MergeFactory(
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
