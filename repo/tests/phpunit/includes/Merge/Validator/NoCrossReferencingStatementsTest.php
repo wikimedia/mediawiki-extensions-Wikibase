@@ -3,8 +3,11 @@
 namespace Wikibase\Repo\Tests\Merge\Validator;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\Repo\Merge\Validator\NoCrossReferencingStatements;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\Tests\NewStatement;
@@ -17,6 +20,12 @@ use Wikibase\Repo\Tests\NewStatement;
  * @license GPL-2.0-or-later
  */
 class NoCrossReferencingStatementsTest extends TestCase {
+
+	public function testDataModelVersion() {
+		var_dump( ( new ReflectionClass( Item::class ) )->getFileName() );
+		var_dump( class_implements( Item::class ) );
+		var_dump( interface_exists( StatementListProvidingEntity::class ) );
+	}
 
 	/**
 	 * @dataProvider provideSamples
