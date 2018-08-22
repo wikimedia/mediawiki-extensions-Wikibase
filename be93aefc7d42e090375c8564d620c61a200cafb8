@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c06f9e4a_1292964b",
+        "filename": "repo/includes/ChangeOp/MergeChangeOpsFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:12:47Z",
+      "side": 1,
+      "message": "and neither is \"ChangeOpsMerge\" :D",
+      "range": {
+        "startLine": 14,
+        "startChar": 37,
+        "endLine": 14,
+        "endChar": 73
+      },
+      "revId": "be93aefc7d42e090375c8564d620c61a200cafb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
