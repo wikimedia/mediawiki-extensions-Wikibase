@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61c19d38_3eecb8af",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "What is this for? It does not seem to be used anywhere?",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 19
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e42660f_db907cc3",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "This looks like it should go before calling _processSearchHook.",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 7
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a006e574_d8ff79e4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "A more specific name would be nice. Maybe \"hookResults\" or something along those lines",
+      "range": {
+        "startLine": 320,
+        "startChar": 7,
+        "endLine": 320,
+        "endChar": 15
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebc83aba_8a073132",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "Can this run asynchronously? In that case strange things might happen.",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 49
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d32bd628_ecce96b1",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "Same as a couple of lines above. Maybe \"hookResults\" or anything more specific than \"promises\"",
+      "range": {
+        "startLine": 335,
+        "startChar": 33,
+        "endLine": 335,
+        "endChar": 41
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40bed306_6f85ca93",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "To distinguish them, maybe this should be \"searchResults\"",
+      "range": {
+        "startLine": 335,
+        "startChar": 43,
+        "endLine": 335,
+        "endChar": 50
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d83bd283_f0aabb09",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "This should not be needed if we know that the API request didn\u0027t error, right?",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 27
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea1a6ed0_56f55331",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-22T11:10:03Z",
+      "side": 1,
+      "message": "If it\u0027s the expected behavior, this should also include a test that the hook is not fired when the API call fails.",
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
