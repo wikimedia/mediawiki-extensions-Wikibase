@@ -501,5 +501,6 @@
 	"apihelp-wbmergeitems-example-3": "Аб’ядноўвае зьвесткі з <samp>Q66</samp> у <samp>Q99</samp> і пры гэтым ігнаруе канфлікты спасылак",
 	"apihelp-wbmergeitems-example-4": "Аб’ядноўвае зьвесткі з <samp>Q66</samp> у <samp>Q99</samp> і ігнаруе канфлікты спасылак і апісаньняў",
 	"apihelp-wbparsevalue-description": "Аналізуе значэньні з дапамогай <code>ValueParser</code>.",
-	"apihelp-wbparsevalue-summary": "Аналізуе значэньні з дапамогай <code>ValueParser</code>."
+	"apihelp-wbparsevalue-summary": "Аналізуе значэньні з дапамогай <code>ValueParser</code>.",
+	"apihelp-wbparsevalue-param-parser": "Ідэнтыфікатар <code>ValueParser</code> для ўжываньня. <span class=\"apihelp-deprecated\">Састарэлы</span>. Замест яго выкарыстоўвайце парамэтар <var>datatype</var>."
 }

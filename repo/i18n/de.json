@@ -527,6 +527,7 @@
 	"apihelp-wbsearchentities-example-4": "Sucht nach „abc“ in deutscher Sprache mit einer Beschränkung von 2 und einem Versatz von 2",
 	"apihelp-wbsearchentities-example-5": "Sucht nach „Alphabet“ in deutscher Sprache und lässt den URL-Parameter weg",
 	"apihelp-wbsearchentities-example-6": "Sucht nach „Q1234“ in Englischer Sprache, um die Objektkennung zu finden.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Der Sprachcode.",
 	"apihelp-query+wbsearch-summary": "Sucht nach Objekten, die Bezeichnungen und Aliasse verwenden.",
 	"apihelp-query+wbsearch-param-search": "Sucht nach diesem Text.",
 	"apihelp-query+wbsearch-param-language": "Sucht in dieser Sprache.",
