@@ -132,8 +132,8 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		];
 		$argLists[] = [ 'unknown_snaktype', $params ];
 
-		//5, 6
-		foreach ( [ 'entity', 'snaktype' ] as $requiredParam ) {
+		//5, 6, 7
+		foreach ( [ 'entity', 'snaktype', 'property' ] as $requiredParam ) {
 			$params = [
 				'action' => 'wbcreateclaim',
 				'entity' => '-',
@@ -146,15 +146,6 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 			$argLists[] = [ 'no' . $requiredParam, $params ];
 		}
-
-		//7
-		$params = [
-			'action' => 'wbcreateclaim',
-			'entity' => '-',
-			'snaktype' => 'value',
-			'value' => '"Foo.png"',
-		];
-		$argLists[] = [ 'param-missing', $params ];
 
 		//8
 		$params = [

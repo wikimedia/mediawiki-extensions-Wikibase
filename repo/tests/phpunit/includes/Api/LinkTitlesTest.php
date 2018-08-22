@@ -159,7 +159,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'param-illegal'
+					'code' => 'nototitle'
 				] ]
 			],
 			'bad tosite' => [

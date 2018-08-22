@@ -226,10 +226,6 @@ class LinkTitles extends ApiBase {
 		if ( $params['fromsite'] === $params['tosite'] ) {
 			$this->errorReporter->dieError( 'The from site cannot match the to site', 'param-illegal' );
 		}
-
-		if ( $params['fromtitle'] === '' || $params['totitle'] === '' ) {
-			$this->errorReporter->dieError( 'The from title and to title must have a value', 'param-illegal' );
-		}
 	}
 
 	/**
@@ -257,15 +253,19 @@ class LinkTitles extends ApiBase {
 		return array_merge( parent::getAllowedParams(), [
 			'tosite' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_REQUIRED => true,
 			],
 			'totitle' => [
 				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			],
 			'fromsite' => [
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_REQUIRED => true,
 			],
 			'fromtitle' => [
 				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			],
 			'token' => null,
 			'bot' => false,
