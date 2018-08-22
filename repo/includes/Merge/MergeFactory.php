@@ -1,22 +1,21 @@
 <?php
 
-namespace Wikibase\Repo\ChangeOp;
+namespace Wikibase\Repo\Merge;
 
 use InvalidArgumentException;
 use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\Merge\StatementsMerger;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * Factory for ChangeOps that merge Items.
- *
- * TODO Maybe rename to MergeFactory (StatementsMerger is not a ChangeOp)
+ * Factory for merging services
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MergeChangeOpsFactory {
+class MergeFactory {
 
 	/**
 	 * @var EntityConstraintProvider

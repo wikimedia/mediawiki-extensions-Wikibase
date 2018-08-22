@@ -193,7 +193,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			'wbmergeitems',
 			new ItemIdParser(),
 			new ItemMergeInteractor(
-				$changeOpsFactoryProvider->getMergeChangeOpFactory(),
+				$changeOpsFactoryProvider->getMergeFactory(),
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),

@@ -7,7 +7,7 @@ use PHPUnit4And6Compat;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider
  *
  * @group Wikibase
  * @group ChangeOp
@@ -80,9 +80,9 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( SiteLinkChangeOpFactory::class, $factory );
 	}
 
-	public function testGetMergeChangeOpFactory() {
-		$factory = $this->newChangeOpFactoryProvider()->getMergeChangeOpFactory();
-		$this->assertInstanceOf( MergeChangeOpsFactory::class, $factory );
+	public function testGetMergeFactory() {
+		$factory = $this->newChangeOpFactoryProvider()->getMergeFactory();
+		$this->assertInstanceOf( MergeFactory::class, $factory );
 	}
 
 }

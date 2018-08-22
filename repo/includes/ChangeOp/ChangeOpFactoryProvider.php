@@ -6,6 +6,7 @@ use SiteLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -125,10 +126,10 @@ class ChangeOpFactoryProvider {
 	}
 
 	/**
-	 * @return MergeChangeOpsFactory
+	 * @return MergeFactory
 	 */
-	public function getMergeChangeOpFactory() {
-		return new MergeChangeOpsFactory(
+	public function getMergeFactory() {
+		return new MergeFactory(
 			$this->constraintProvider,
 			$this,
 			$this->siteLookup

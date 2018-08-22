@@ -7,7 +7,7 @@ use PHPUnit4And6Compat;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -16,7 +16,7 @@ use Wikibase\Repo\Merge\StatementsMerger;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers \Wikibase\Repo\ChangeOp\MergeChangeOpsFactory
+ * @covers \Wikibase\Repo\Merge\MergeFactory
  *
  * @group Wikibase
  * @group ChangeOp
@@ -24,13 +24,13 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
+class MergeFactoryTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	/**
-	 * @return MergeChangeOpsFactory
+	 * @return MergeFactory
 	 */
-	protected function newChangeOpFactory() {
+	protected function newMergeFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );
 
 		$toItemId = new ItemId( 'Q3' );
@@ -50,7 +50,7 @@ class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 			[]
 		);
 
-		return new MergeChangeOpsFactory(
+		return new MergeFactory(
 			$constraintProvider,
 			$changeOpFactoryProvider,
 			$siteStore
@@ -61,12 +61,12 @@ class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$fromItem = new Item();
 		$toItem = new Item();
 
-		$op = $this->newChangeOpFactory()->newMergeOps( $fromItem, $toItem );
+		$op = $this->newMergeFactory()->newMergeOps( $fromItem, $toItem );
 		$this->assertInstanceOf( ChangeOpsMerge::class, $op );
 	}
 
 	public function testGetStatementsMergerYieldsStatementsMerger() {
-		$factory = $this->newChangeOpFactory();
+		$factory = $this->newMergeFactory();
 		$statementsMerger = $factory->getStatementsMerger();
 
 		$this->assertInstanceOf( StatementsMerger::class, $statementsMerger );
@@ -78,7 +78,7 @@ class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getStatementChangeOpFactory' )
 			->willReturn( $this->createMock( StatementChangeOpFactory::class ) );
 
-		$factory = new MergeChangeOpsFactory(
+		$factory = new MergeFactory(
 			$this->createMock( EntityConstraintProvider::class ),
 			$changeOpFactoryProvider,
 			$this->newSiteStore()
