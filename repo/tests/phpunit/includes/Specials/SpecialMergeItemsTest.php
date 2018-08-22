@@ -13,7 +13,7 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\Repo\ChangeOp\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;
@@ -121,7 +121,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
-		$changeOpsFactory = new MergeChangeOpsFactory(
+		$changeOpsFactory = new MergeFactory(
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
 			new HashSiteStore( TestSites::getSites() )
