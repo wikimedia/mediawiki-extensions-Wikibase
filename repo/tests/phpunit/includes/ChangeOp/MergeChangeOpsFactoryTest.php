@@ -11,10 +11,12 @@ use Wikibase\Repo\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\Merge\StatementsMerger;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\MergeChangeOpsFactory
+ * @covers \Wikibase\Repo\ChangeOp\MergeChangeOpsFactory
  *
  * @group Wikibase
  * @group ChangeOp
@@ -33,11 +35,9 @@ class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$toItemId = new ItemId( 'Q3' );
 
-		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$constraintProvider = $this->createMock( EntityConstraintProvider::class );
 
-		$siteStore = new HashSiteStore( TestSites::getSites() );
+		$siteStore = $this->newSiteStore();
 
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
@@ -63,6 +63,32 @@ class MergeChangeOpsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$op = $this->newChangeOpFactory()->newMergeOps( $fromItem, $toItem );
 		$this->assertInstanceOf( ChangeOpsMerge::class, $op );
+	}
+
+	public function testGetStatementsMergerYieldsStatementsMerger() {
+		$factory = $this->newChangeOpFactory();
+		$statementsMerger = $factory->getStatementsMerger();
+
+		$this->assertInstanceOf( StatementsMerger::class, $statementsMerger );
+	}
+
+	public function testGetStatementsMergerPassesStatementChangeOpFactory() {
+		$changeOpFactoryProvider = $this->createMock( ChangeOpFactoryProvider::class );
+		$changeOpFactoryProvider->expects( $this->once() )
+			->method( 'getStatementChangeOpFactory' )
+			->willReturn( $this->createMock( StatementChangeOpFactory::class ) );
+
+		$factory = new MergeChangeOpsFactory(
+			$this->createMock( EntityConstraintProvider::class ),
+			$changeOpFactoryProvider,
+			$this->newSiteStore()
+		);
+
+		$factory->getStatementsMerger();
+	}
+
+	private function newSiteStore() {
+		return new HashSiteStore( TestSites::getSites() );
 	}
 
 }
