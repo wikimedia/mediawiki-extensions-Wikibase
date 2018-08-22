@@ -211,7 +211,7 @@ class RemoveQualifiers extends ApiBase {
 	 */
 	protected function getExamplesMessages() {
 		return [
-			'action=wbremovequalifiers&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
+			'action=wbremovequalifiers&claim=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
 				. '&references=1eb8793c002b1d9820c833d234a1b54c8e94187e&token=foobar'
 				. '&baserevid=7201010'
 				=> 'apihelp-wbremovequalifiers-example-1',
