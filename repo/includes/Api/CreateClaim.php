@@ -173,7 +173,7 @@ class CreateClaim extends ApiBase {
 				],
 				'property' => [
 					self::PARAM_TYPE => 'string',
-					self::PARAM_REQUIRED => false,
+					self::PARAM_REQUIRED => true,
 				],
 				'value' => [
 					self::PARAM_TYPE => 'text',

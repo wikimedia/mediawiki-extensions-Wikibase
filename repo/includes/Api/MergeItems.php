@@ -187,9 +187,11 @@ class MergeItems extends ApiBase {
 		return [
 			'fromid' => [
 				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			],
 			'toid' => [
 				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			],
 			'ignoreconflicts' => [
 				self::PARAM_ISMULTI => true,
