@@ -679,7 +679,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
-	 *           In this implementation at most 2500 terms will be retreived.
+	 *           In this implementation at most 2500 terms will be retrieved.
 	 *           As we only return a single TermIndexEntry per Entity the return count may be lower.
 	 *
 	 * @return TermIndexEntry[]
