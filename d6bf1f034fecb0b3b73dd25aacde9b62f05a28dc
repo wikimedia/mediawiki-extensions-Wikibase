@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "38f4b4ad_0c81a9b6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-23T12:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61c19d38_3eecb8af",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 19
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e42660f_db907cc3",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-22T11:10:03Z",
       "side": 1,
       "message": "This looks like it should go before calling _processSearchHook.",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 7
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb853e9e_0d5e7b87",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-23T12:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e42660f_db907cc3",
       "range": {
         "startLine": 297,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9118e95a_9ea2c499",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-23T12:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a006e574_d8ff79e4",
+      "range": {
+        "startLine": 320,
+        "startChar": 7,
+        "endLine": 320,
+        "endChar": 15
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ebc83aba_8a073132",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2018-08-22T11:10:03Z",
       "side": 1,
       "message": "Can this run asynchronously? In that case strange things might happen.",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 49
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35273b4a_e8a41f37",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-23T12:56:19Z",
+      "side": 1,
+      "message": "Not asynchronously AFAIK.",
+      "parentUuid": "ebc83aba_8a073132",
       "range": {
         "startLine": 325,
         "startChar": 0,
@@ -128,6 +224,30 @@
       "writtenOn": "2018-08-22T11:10:03Z",
       "side": 1,
       "message": "To distinguish them, maybe this should be \"searchResults\"",
+      "range": {
+        "startLine": 335,
+        "startChar": 43,
+        "endLine": 335,
+        "endChar": 50
+      },
+      "revId": "d6bf1f034fecb0b3b73dd25aacde9b62f05a28dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c74a2f6_ee99efc7",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2018-08-23T12:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40bed306_6f85ca93",
       "range": {
         "startLine": 335,
         "startChar": 43,
