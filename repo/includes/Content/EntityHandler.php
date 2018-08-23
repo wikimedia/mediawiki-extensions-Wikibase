@@ -34,6 +34,7 @@ use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
+use Wikimedia\Assert\Assert;
 use WikiPage;
 
 /**
@@ -542,27 +543,29 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::getUndoContent
 	 *
-	 * @param Revision $latestRevision The current text
-	 * @param Revision $newerRevision The revision to undo
-	 * @param Revision $olderRevision Must be an earlier revision than $undo
+	 * @param Revision|EntityContent $latest The current text
+	 * @param Revision|EntityContent $newer The revision to undo
+	 * @param Revision|EntityContent $older Must be an earlier revision than $newer
+	 * @param bool $undoIsLatest Set to true if $newer is from the current revision (since 1.32)
 	 *
 	 * @return Content|bool Content on success, false on failure
 	 */
-	public function getUndoContent(
-		Revision $latestRevision,
-		Revision $newerRevision,
-		Revision $olderRevision
-	) {
-		/**
-		 * @var EntityContent $latestContent
-		 * @var EntityContent $newerContent
-		 * @var EntityContent $olderContent
-		 */
-		$latestContent = $latestRevision->getContent();
-		$newerContent = $newerRevision->getContent();
-		$olderContent = $olderRevision->getContent();
+	public function getUndoContent( $latest, $newer, $older, $undoIsLatest = false ) {
+		$latestContent = ( $latest instanceof Revision ) ? $latest->getContent() : $latest;
+		$newerContent = ( $newer instanceof Revision ) ? $newer->getContent() : $newer;
+		$olderContent = ( $older instanceof Revision ) ? $older->getContent() : $older;
+		if (
+			!$latestContent instanceof EntityContent
+			|| !$latestContent instanceof EntityContent
+			|| !$latestContent instanceof EntityContent
+		) {
+			return false;
+		}
+		if ( $latest instanceof Revision && $newer instanceof Revision ) {
+			$undoIsLatest = ( $latest->getId() === $newer->getId() );
+		}
 
-		if ( $latestRevision->getId() === $newerRevision->getId() ) {
+		if ( $undoIsLatest ) {
 			// no patching needed, just roll back
 			return $olderContent;
 		}
