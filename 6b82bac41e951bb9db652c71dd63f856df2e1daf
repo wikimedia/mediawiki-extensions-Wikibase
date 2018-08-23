@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "736d3ca4_7e983401",
+        "filename": "repo/includes/Merge/MergeFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T09:20:42Z",
+      "side": 0,
+      "message": "\"Factory for merging services\"? Something along those lines",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 42
+      },
+      "revId": "6b82bac41e951bb9db652c71dd63f856df2e1daf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

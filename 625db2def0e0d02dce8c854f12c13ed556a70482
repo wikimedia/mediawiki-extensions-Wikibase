@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1f953fa_f9328788",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T09:20:42Z",
+      "side": 1,
+      "message": "This should probably become $mergeFactory",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 31
+      },
+      "revId": "625db2def0e0d02dce8c854f12c13ed556a70482",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e254ec_f832e378",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T09:20:42Z",
+      "side": 1,
+      "message": "$mergeFactory",
+      "range": {
+        "startLine": 136,
+        "startChar": 3,
+        "endLine": 136,
+        "endChar": 19
+      },
+      "revId": "625db2def0e0d02dce8c854f12c13ed556a70482",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f5191d8_8f788138",
+        "filename": "repo/tests/phpunit/includes/Merge/MergeFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T09:20:42Z",
+      "side": 1,
+      "message": "newMergeFactory",
+      "range": {
+        "startLine": 33,
+        "startChar": 20,
+        "endLine": 33,
+        "endChar": 38
+      },
+      "revId": "625db2def0e0d02dce8c854f12c13ed556a70482",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71409c73_8b7c6316",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialMergeItemsTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T09:20:42Z",
+      "side": 1,
+      "message": "$mergeFactory",
+      "range": {
+        "startLine": 124,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 19
+      },
+      "revId": "625db2def0e0d02dce8c854f12c13ed556a70482",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
