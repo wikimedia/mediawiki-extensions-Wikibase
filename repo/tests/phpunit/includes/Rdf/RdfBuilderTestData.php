@@ -60,7 +60,7 @@ class RdfBuilderTestData {
 	public function __construct(
 		$entityDir,
 		$dataDir,
-		EntityContentDataCodec $codec = null
+		EntityContentDataCodec $codec
 	) {
 		// Sanity check for dev environments with possibly inconsistent library versions.
 		// The version range should reflect exactly what is specified in composer.json.
@@ -68,11 +68,6 @@ class RdfBuilderTestData {
 			&& version_compare( WIKIBASE_DATAMODEL_VERSION, '8' ) < 0
 		) ) {
 			throw new RuntimeException( 'Current RDF test data require wikibase/data-model 7' );
-		}
-
-		// BC way of setting it to work around circular CI dependency btw wb & wbl
-		if ( $codec === null ) {
-			$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 		}
 
 		$this->entityDir = $entityDir;
