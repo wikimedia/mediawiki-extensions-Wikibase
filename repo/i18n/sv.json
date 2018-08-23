@@ -14,7 +14,8 @@
 			"Rockyfelle",
 			"Macofe",
 			"Frisko",
-			"Skalman"
+			"Skalman",
+			"McDutchie"
 		]
 	},
 	"wikibase-desc": "Strukturerad datalagring",
@@ -557,6 +558,16 @@
 	"apihelp-wbsearchentities-example-4": "Sök efter \"abc\" på engelska med en gräns på 2 och en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Sök efter \"alphabet\" på engelska och utelämna URL-parametrar",
 	"apihelp-wbsearchentities-example-6": "Sök efter \"Q1234\" på engelska för att matcha entitetens ID.",
+	"apihelp-query+wbcontentlanguages-summary": "Returnerar information om innehållsspråken som Wikibase accepterar i olika sammanhang.",
+	"apihelp-query+wbcontentlanguages-param-context": "Sammanhanget som innehållsspråken bör vara giltiga.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Termerna (etikett, beskrivning, alias) för en entitet.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Ett enspråkigt textvärde i ett uttalande.",
+	"apihelp-query+wbcontentlanguages-param-prop": "Egenskaper som bör returneras om för varje språk.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Språkkoden.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "Språkets autonym, det vill säga språkets namn på språket. Kanske inte är känt för alla språk.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "Namnet på språket på det nuvarande språket (specificeras via parametern <var>uselang</var>), med språkfallback som tillämpas vid behov. Vanligtvis är minst ett engelskt namn känt för alla innehållsspråk som Wikibase accepterar.",
+	"apihelp-query+wbcontentlanguages-example-1": "Hämta de giltiga språkkoderna för en entitets termer.",
+	"apihelp-query+wbcontentlanguages-example-2": "Hämta de giltiga språken, med språkkod och autonym, för enspråkiga textvärden.",
 	"apihelp-query+wbsearch-description": "Sök efter entiteter med etiketter och alias.\nDetta kan användas som en generator till andra förfrågan.\nReturnerar den matchade termen som bör visas.",
 	"apihelp-query+wbsearch-summary": "Söker efter entiteter med etiketter och alias.",
 	"apihelp-query+wbsearch-extended-description": "Detta kan användas som en generator för andra frågor.\nReturnerar den matchade termen som bör visas.",

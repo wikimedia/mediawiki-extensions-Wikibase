@@ -385,6 +385,7 @@
 	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Czy wyłączyć język pomocniczy",
 	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Kod języka.",
 	"apihelp-query+wbsearch-param-search": "Wyszukaj ten tekst.",
 	"apihelp-query+wbsearch-param-language": "Wyszukaj w tym języku.",
 	"apihelp-query+wbsearch-param-limit": "Maksymalna liczba wyników",

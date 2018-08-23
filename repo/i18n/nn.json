@@ -170,6 +170,7 @@
 	"wikibase-mergeitems-submit": "Flett saman element",
 	"wikibase-mergeitems-success": "$1 vart fletta inn i $3 og omdirigert.",
 	"wikibase-itemmerge-missing-parameter": "Ufullstendig inndata.",
+	"wikibase-itemmerge-failed-modify": "Greidde ikkje å fletta saman dei to elementa, du lyt fyrst løysa konfliktar.",
 	"wikibase-itemmerge-cant-merge-self": "Kan ikkje fletta saman eit element med seg sjølv.",
 	"special-dispatchstats": "Statistikk for sending av endringar",
 	"wikibase-dispatchstats-intro": "Denne sida gjev statistikk for sending av endringar til klientane.\nEin klientwiki vert gjord merksam på ei endring på {{SITENAME}} so snart endringa er send til denne wikien og jobbkøen hans har handsama meldinga.\n* {{int:wikibase-dispatchstats-changes}} viser talet og datoen for det eldste og det nyaste elementet som finst i køen no.\n* {{int:wikibase-dispatchstats-stats}} gjev informasjon om dei klientwikiane med mest og minst seinking, og ein median i mellom. For kvar wiki er denne informasjonen gjeven:\n** «{{int:wikibase-dispatchstats-site-id}}» er den interne ID-en til klientwikien\n** «{{int:wikibase-dispatchstats-pos}}» er ID-en til den siste endringa som vart send til denne wikien.\n** «{{int:wikibase-dispatchstats-lag-time}}» er tida mellom endringa som sist vart send til wikien og den siste endringa utført på {{SITENAME}}.\n** «{{int:wikibase-dispatchstats-touched}}» er tida då den siste gruppa av endringar vart send til wikien.",

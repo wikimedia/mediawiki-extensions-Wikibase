@@ -394,6 +394,8 @@
 	"apihelp-wbsearchentities-param-props": "각 엔티티마다 이 속성들을 반환합니다.",
 	"apihelp-wbsearchentities-example-5": "URL 변수를 제외하고 영어로 \"alphabet\"을 검색합니다",
 	"apihelp-wbsearchentities-example-6": "엔티티 ID와 일치하기 위해 영어로 \"Q1234\"를 검색합니다.",
+	"apihelp-query+wbcontentlanguages-param-prop": "각 언어에 대해 반환되어야 할 속성입니다.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "언어 코드입니다.",
 	"apihelp-query+wbsearch-param-search": "이 텍스트를 찾습니다.",
 	"apihelp-query+wbsearch-param-language": "이 언어로 검색합니다.",
 	"apihelp-query+wbsearch-param-type": "이 유형의 엔티티를 검색합니다.",
