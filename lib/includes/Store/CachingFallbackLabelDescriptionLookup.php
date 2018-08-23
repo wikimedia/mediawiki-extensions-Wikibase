@@ -110,14 +110,23 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 	}
 
 	private function getTerm( EntityId $entityId, $languageCode, $termName = self::LABEL ) {
-		$cacheKey = $this->getCacheKey( $entityId, $languageCode, $termName );
+		$resolutionResult = $this->resolveRedirect( $entityId );
+		if ( $resolutionResult === null ) {
+			return null;
+		}
+
+		list( $revisionId, $targetEntityId ) = $resolutionResult;
+
+		$cacheKey = $this->getCacheKey( $targetEntityId, $revisionId,  $languageCode, $termName );
 		$result = $this->cache->get( $cacheKey, self::NO_VALUE );
 		if ( $result === self::NO_VALUE ) {
 			$term = $termName === self::LABEL
-				? $this->labelDescriptionLookup->getLabel( $entityId )
-				: $this->labelDescriptionLookup->getDescription( $entityId );
+				? $this->labelDescriptionLookup->getLabel( $targetEntityId )
+				: $this->labelDescriptionLookup->getDescription( $targetEntityId );
 
-			$this->cacheTerm( $entityId, $languageCode, $termName, $term );
+			$serialization = $this->serialize( $term );
+
+			$this->cache->set( $cacheKey, $serialization, $this->cacheTtlInSeconds );
 
 			return $term;
 		}
@@ -129,14 +138,6 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 		$term = $this->unserialize( $result );
 
 		return $term;
-	}
-
-	private function cacheTerm( EntityId $entityId, $languageCode, $termName, TermFallback $term = null ) {
-		$cacheKey = $this->getCacheKey( $entityId, $languageCode, $termName );
-
-		$serialization = $this->serialize( $term );
-
-		$this->cache->set( $cacheKey, $serialization, $this->cacheTtlInSeconds );
 	}
 
 	/**
@@ -180,26 +181,49 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 	 * @param string $termName
 	 * @return string
 	 */
-	private function getCacheKey( EntityId $entityId, $languageCode, $termName ) {
+	private function getCacheKey( EntityId $entityId, $revisionId, $languageCode, $termName ) {
 		Assert::parameterType( 'string', $languageCode, '$languageCode' );
 		Assert::parameter( !empty( $languageCode ), '$languageCode', "must not be empty" );
+
 		Assert::parameterType( 'string', $termName, '$termName' );
 		Assert::parameter( !empty( $termName ), '$termName', "must not be empty" );
 
-		$revisionIdResult = $this->revisionLookup->getLatestRevisionId( $entityId );
-		$returnFalse = function () {
-			return false;
-		};
-
-		//TODO Handle redirects properly
-		$revisionId = $revisionIdResult->onNonexistentEntity( $returnFalse )
-			->onRedirect( $returnFalse )
-			->onConcreteRevision( 'intval' )
-			->map();
-
-		Assert::postcondition( is_int( $revisionId ), "Revision ID must present" );
+		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
+		Assert::parameter( $revisionId > 0, '$revisionId', "should be positive" );
 
 		return "{$entityId->getSerialization()}_{$revisionId}_{$languageCode}_{$termName}";
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @return [int, EntityId]|null Returns a tuple containing revision ID and target entity ID.
+	 *                              If entity is not present or there is a double redirect null
+	 *                              is returned.
+	 * @note Target entity is entity we will take data from. It will differ from the given entity
+	 *       in case of redirect only.
+	 */
+	private function resolveRedirect( EntityId $entityId ) {
+		$revisionIdResult = $this->revisionLookup->getLatestRevisionId( $entityId );
+		$returnNull = function () {
+			return null;
+		};
+
+		return $revisionIdResult
+			->onConcreteRevision( function ( $revisionId ) use ( $entityId ) {
+				return [ $revisionId, $entityId ];
+			} )
+			->onNonexistentEntity( $returnNull )
+			->onRedirect( function ( $revisionId, EntityId $redirectsTo ) use ( $returnNull ) {
+
+				return $this->revisionLookup->getLatestRevisionId( $redirectsTo )
+					->onNonexistentEntity( $returnNull )
+					->onRedirect( $returnNull )
+					->onConcreteRevision( function ( $revisionId ) use ( $redirectsTo ) {
+							return [ $revisionId, $redirectsTo ];
+					} )
+					->map();
+			} )
+			->map();
 	}
 
 }
