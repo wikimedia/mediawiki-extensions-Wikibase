@@ -60,13 +60,14 @@ class ValidatorErrorLocalizer {
 	 */
 	public function getErrorMessage( Error $error ) {
 		// Messages:
-		// wikibase-validator-bad-type, wikibase-validator-too-long, wikibase-validator-too-short,
-		// wikibase-validator-too-high, wikibase-validator-too-low,
-		// wikibase-validator-malformed-value, wikibase-validator-bad-entity-id,
-		// wikibase-validator-bad-entity-type, wikibase-validator-no-such-entity,
-		// wikibase-validator-no-such-property, wikibase-validator-bad-value,
-		// wikibase-validator-bad-value-type, wikibase-validator-bad-url,
-		// wikibase-validator-bad-url-scheme, wikibase-validator-unknown-unit
+		// wikibase-validator-alias-too-long, wikibase-validator-bad-data-type, wikibase-validator-bad-entity-id,
+		// wikibase-validator-bad-entity-type, wikibase-validator-bad-type, wikibase-validator-bad-url,
+		// wikibase-validator-bad-url-scheme, wikibase-validator-bad-value, wikibase-validator-bad-value-type,
+		// wikibase-validator-description-too-long, wikibase-validator-invalid, wikibase-validator-label-too-long,
+		// wikibase-validator-malformed-value, wikibase-validator-missing-field, wikibase-validator-no-such-entity,
+		// wikibase-validator-no-such-property, wikibase-validator-no-validators, wikibase-validator-not-allowed,
+		// wikibase-validator-too-high, wikibase-validator-too-long, wikibase-validator-too-low,
+		// wikibase-validator-too-short, wikibase-validator-unknown-unit, wikibase-validator-url-scheme-missing,
 		$key = 'wikibase-validator-' . $error->getCode();
 		$params = $error->getParameters();
 

@@ -60,6 +60,10 @@ class StringLengthValidator implements ValueValidator {
 	 * @return Result
 	 */
 	public function validate( $value ) {
+		// Possible messages:
+		// wikibase-validator-too-short, wikibase-validator-alias-too-long, wikibase-validator-description-too-long,
+		// wikibase-validator-label-too-long, wikibase-validator-too-long
+
 		$length = call_user_func( $this->measure, $value );
 
 		if ( $length < $this->minLength ) {
