@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e67d2ad_fcac9b47",
+        "filename": "view/src/DefaultMetaTagsCreator.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T15:24:15Z",
+      "side": 1,
+      "message": "This needs a test!",
+      "revId": "dd8840d0ee730c0573d0f292a9b4cd64412c02ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
