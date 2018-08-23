@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad284f8d_cea580fb",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T13:26:05Z",
+      "side": 1,
+      "message": "I guess for consistency\u0027s sake this should also be hookResults. Sorry for not spotting this one right away.",
+      "range": {
+        "startLine": 284,
+        "startChar": 5,
+        "endLine": 284,
+        "endChar": 13
+      },
+      "revId": "4dbc7b1063b1b99ebea6250c0fc0e0c00fd89848",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70d7c9ee_a81a9ae9",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-23T13:26:05Z",
+      "side": 1,
+      "message": "Another idea: this is not really processing the search hook, it\u0027s combining the results of search and the hook(s). How about calling it \"_combineResults\"?",
+      "range": {
+        "startLine": 336,
+        "startChar": 2,
+        "endLine": 336,
+        "endChar": 20
+      },
+      "revId": "4dbc7b1063b1b99ebea6250c0fc0e0c00fd89848",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
