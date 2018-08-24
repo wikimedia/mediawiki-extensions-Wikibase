@@ -128,6 +128,8 @@ class MergeItems extends ApiBase {
 	 * @param string[] $ignoreConflicts
 	 * @param string $summary
 	 * @param bool $bot
+	 * @throws ItemMergeException
+	 * @throws RedirectCreationException
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary, $bot ) {
 		list( $newRevisionFrom, $newRevisionTo, $redirected )
