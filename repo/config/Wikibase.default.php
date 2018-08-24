@@ -301,4 +301,11 @@ return [
 	 */
 	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 0,
 
+	/**
+	 * Entity prefixes to use for creating new entities. Supported values are 'item' and 'property'.
+	 */
+	'entityTypeToPrefixMap' => [
+		'item' => 'Q',
+		'property' => 'P',
+	],
 ];

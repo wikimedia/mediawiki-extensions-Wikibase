@@ -330,8 +330,10 @@ UQUERY;
 	 * @return array[]
 	 */
 	private function getBaseUnits( $filter ) {
+		$itemPrefix = WikibaseSettings::getRepoSettings()->getSetting( 'entityTypeToPrefixMap' )['item'];
+
 		$types =
-			str_replace( [ ',', 'Q' ], [ ' ', 'wd:Q' ], $this->getOption( 'base-unit-types' ) );
+			str_replace( [ ',', $itemPrefix ], [ ' ', 'wd:' . $itemPrefix ], $this->getOption( 'base-unit-types' ) );
 
 		$baseQuery = <<<QUERY
 SELECT ?unit ?unitLabel WHERE {

@@ -120,12 +120,14 @@ class PopulateTermFullEntityId extends LoggedUpdateMaintenance {
 	 * @return bool
 	 */
 	private function runColumnPopulationQueries( IDatabase $db ) {
-		$query = $this->getUpdateQuery( $db, 'item', 'Q' );
+		$prefixMap = WikibaseSettings::getRepoSettings()->getSetting( 'entityTypeToPrefixMap' );
+
+		$query = $this->getUpdateQuery( $db, 'item', $prefixMap['item'] );
 		if ( !$db->query( $query, __METHOD__, true ) ) {
 			return false;
 		}
 
-		$query = $this->getUpdateQuery( $db, 'property', 'P' );
+		$query = $this->getUpdateQuery( $db, 'property', $prefixMap['property'] );
 		if ( !$db->query( $query, __METHOD__, true ) ) {
 			return false;
 		}

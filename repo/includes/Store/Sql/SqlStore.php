@@ -336,12 +336,15 @@ class SqlStore implements Store {
 	 * @return EntitiesWithoutTermFinder
 	 */
 	public function newEntitiesWithoutTermFinder() {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$prefixMap = $settings->getSetting( 'entityTypeToPrefixMap' );
+
 		return new SqlEntitiesWithoutTermFinder(
 			$this->entityIdParser,
 			$this->entityNamespaceLookup,
-			[ // TODO: Make this configurable!
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P'
+			[
+				Item::ENTITY_TYPE => $prefixMap['item'],
+				Property::ENTITY_TYPE => $prefixMap['property'],
 			]
 		);
 	}
