@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1989743c_3bafc012",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-08-24T09:34:14Z",
+      "side": 1,
+      "message": "It should use READ_LATEST in both cases, for LATEST_FROM_MASTER and LATEST_FROM_REPLICA_WITH_FALLBACK, even if it ignores the \"fallback\" part.",
+      "revId": "48016011e46080d36cf5ed3874f9ce0bfe192c34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
