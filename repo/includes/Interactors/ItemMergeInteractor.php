@@ -126,6 +126,7 @@ class ItemMergeInteractor {
 	 *  modified target item. The boolean indicates whether the redirect was successful.
 	 *
 	 * @throws ItemMergeException
+	 * @throws RedirectCreationException
 	 */
 	public function mergeItems(
 		ItemId $fromId,
