@@ -211,6 +211,30 @@
       "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2973764_ca9dcea9",
+        "filename": "view/src/FingerprintableEntityMetaTagsCreator.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-24T07:59:39Z",
+      "side": 1,
+      "message": "Also I just double checked on a production host as I couldn;t find any examples using array, only examples using classes.\n\naddshore@deploy1001:~$ php --version\nHipHop VM 3.18.6-dev (rel)\nCompiler: 3.18.5+dfsg-1+wmf8+deb9u1\nRepo schema: 7be0062745976798500274e76b3907ae9448a681\n\naddshore@deploy1001:~$ mwscript eval.php --wiki testwikidatawiki\n\u003e $a \u003d function() : array {return [];};\n\n\u003e var_dump( $a() );\narray(0) {\n}\n\nAll seems fine!",
+      "parentUuid": "16339ccc_0e0157c7",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "de850727a7ea2d7bb4cac1e73064d7101f2bde26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
