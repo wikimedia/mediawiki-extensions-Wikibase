@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
+use IDBAccessObject;
 use MediaWiki\Storage\BlobAccessException;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\RevisionAccessException;
@@ -111,7 +112,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		if ( $row ) {
 			/** @var EntityRedirect $redirect */
 			try {
-				list( $entityRevision, $redirect ) = $this->loadEntity( $row );
+				list( $entityRevision, $redirect ) = $this->loadEntity( $row, $mode );
 			} catch ( MWContentSerializationException $ex ) {
 				throw new StorageException( 'Failed to unserialize the content object.', 0, $ex );
 			}
@@ -172,15 +173,20 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * Construct an EntityRevision object from a database row from the revision table.
 	 *
 	 * @param stdClass $row a row object as returned by WikiPageEntityMetaDataLookup.
+	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws StorageException
 	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
-	private function loadEntity( $row ) {
+	private function loadEntity( $row, $mode = self::LATEST_FROM_REPLICA ) {
+		// XXX: This does not account for self::LATEST_FROM_REPLICA_WITH_FALLBACK
+		$revStoreFlags = ( $mode == self::LATEST_FROM_MASTER ) ? IDBAccessObject::READ_LATEST : 0;
+
 		// TODO: WikiPageEntityMetaDataLookup should use RevisionStore::getQueryInfo,
 		// then we could use RevisionStore::newRevisionFromRow here!
-		$revision = $this->revisionStore->getRevisionById( $row->rev_id );
+		$revision = $this->revisionStore->getRevisionById( $row->rev_id, $revStoreFlags );
 		$slotRole = $row->role_name ?? 'main';
 
 		// NOTE: Support for cross-wiki content access in RevisionStore is incomplete when,
@@ -203,7 +209,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		}
 
 		try {
-			$blob = $this->blobStore->getBlob( $slot->getAddress() );
+			$blob = $this->blobStore->getBlob( $slot->getAddress(), $revStoreFlags );
 		} catch ( BlobAccessException $e ) {
 			throw new StorageException( 'Failed to load blob', 0, $e );
 		}
