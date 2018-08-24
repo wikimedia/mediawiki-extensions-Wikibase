@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c907be25_23cf8e53",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-08-24T23:06:21Z",
+      "side": 1,
+      "message": "Not sure this worth a separate method - it\u0027s used only from addEntity() and never again.",
+      "revId": "8eee9761250da1db56cbefa62623a9421ee444b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
