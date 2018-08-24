@@ -209,6 +209,7 @@ class ItemMergeInteractor {
 
 			return $revision->getEntity();
 		} catch ( StorageException $ex ) {
+			\MWExceptionHandler::logException( $ex );
 			throw new ItemMergeException( $ex->getMessage(), 'cant-load-entity-content', $ex );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'cant-load-entity-content', $ex );
