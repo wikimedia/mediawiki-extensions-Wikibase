@@ -35,6 +35,13 @@ class TemplateFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [ 'basic' => '$1' ], $templates );
 	}
 
+	public function testAddTemplates() {
+		$sut = $this->newInstance();
+		$sut->addTemplates( [ 'other' => '$2' ] );
+		$templates = $sut->getTemplates();
+		$this->assertSame( [ 'basic' => '$1', 'other' => '$2' ], $templates );
+	}
+
 	public function testGet() {
 		$template = $this->newInstance()->get( 'basic', [ '<PARAM>' ] );
 		$this->assertSame( 'basic', $template->getKey() );

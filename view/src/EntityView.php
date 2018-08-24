@@ -29,7 +29,7 @@ abstract class EntityView {
 	/**
 	 * @var LanguageDirectionalityLookup
 	 */
-	private $languageDirectionalityLookup;
+	protected $languageDirectionalityLookup;
 
 	/**
 	 * @var string

@@ -33,6 +33,10 @@ class TemplateFactory {
 		$this->templateRegistry = $templateRegistry;
 	}
 
+	public function addTemplates( array $templates ) {
+		$this->templateRegistry->addTemplates( $templates );
+	}
+
 	/**
 	 * @return string[] Array containing all raw template strings.
 	 */
