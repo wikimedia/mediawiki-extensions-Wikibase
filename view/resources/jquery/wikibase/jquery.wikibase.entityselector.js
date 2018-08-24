@@ -74,6 +74,8 @@
 	 *        Messages should be specified using `mwMsgOrString(<resource loader module message key>,
 	 *        <fallback message>)` in order to use the messages specified in the resource loader module
 	 *        (if loaded).
+	 * @param {string} [options.searchHookName='wikibase.entityselector.search']
+	 *        Name of the hook that fires when searching for entities.
 	 * @param {string} [options.messages.more='more']
 	 *        Label of the link to display more suggestions.
 	 */
@@ -98,7 +100,8 @@
 			messages: {
 				more: mwMsgOrString( 'wikibase-entityselector-more', 'more' ),
 				notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'Nothing found' )
-			}
+			},
+			searchHookName: 'wikibase.entityselector.search'
 		},
 
 		/**
@@ -277,7 +280,8 @@
 			var self = this;
 
 			return function ( term ) {
-				var deferred = $.Deferred();
+				var deferred = $.Deferred(),
+					hookResults = self._fireSearchHook( term );
 
 				$.ajax( {
 					url: self.options.url,
@@ -290,12 +294,13 @@
 						deferred.reject( response.error.info );
 						return;
 					}
-
-					deferred.resolve(
-						response.search,
-						term,
-						response[ 'search-continue' ]
-					);
+					self._combineResults( hookResults, response.search ).then( function ( results ) {
+						deferred.resolve(
+							results,
+							term,
+							response[ 'search-continue' ]
+						);
+					} );
 				} )
 				.fail( function ( jqXHR, textStatus ) {
 					deferred.reject( textStatus );
@@ -304,7 +309,55 @@
 				return deferred.promise();
 			};
 		},
+		/**
+		 * @private
+		 */
+		_fireSearchHook: function ( term ) {
+			var hookResults = [],
+				addPromise = function ( p ) {
+					hookResults.push( p );
+				};
 
+			if ( this._cache.nextSuggestionOffset ) {
+				return hookResults; // Don't fire hook when paginating
+			}
+
+			mw.hook( this.options.searchHookName ).fire( {
+				element: this.element,
+				term: term,
+				options: this.options
+			}, addPromise );
+
+			return hookResults;
+		},
+		/**
+		 * @private
+		 */
+		_combineResults: function ( hookResults, searchResults ) {
+			var deferred = $.Deferred(),
+				ids = {},
+				uniqueFilter = function ( item ) {
+					if ( ids[ item.id ] ) {
+						return false;
+					}
+					ids[ item.id ] = true;
+					return true;
+				};
+
+			searchResults = searchResults || [];
+
+			$.when.apply( $, hookResults ).then( function () {
+
+				$.each( arguments, function ( key, data ) {
+					searchResults = data.concat( searchResults );
+				} );
+
+				searchResults = searchResults.filter( uniqueFilter );
+				deferred.resolve( searchResults );
+			} );
+
+			return deferred.promise();
+		},
 		/**
 		 * @inheritdoc
 		 * @protected
