@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "814a6aba_f6316fe9",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-24T08:13:33Z",
+      "side": 1,
+      "message": "Why is this being done like this?\n$existingRevisionId is not used below this line so I am confused as to why you are setting it?",
+      "range": {
+        "startLine": 175,
+        "startChar": 29,
+        "endLine": 175,
+        "endChar": 52
+      },
+      "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
