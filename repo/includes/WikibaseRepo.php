@@ -146,6 +146,7 @@ use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
+use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
@@ -1724,6 +1725,10 @@ class WikibaseRepo {
 		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() );
 	}
 
+	public function getEntityMetaTagsCreatorFactory() {
+		return new DispatchingEntityMetaTagsCreatorFactory( $this->entityTypeDefinitions->getMetaTagsFactoryCallbacks() );
+	}
+
 	/**
 	 * @return EntityParserOutputGeneratorFactory
 	 */
@@ -1734,6 +1739,7 @@ class WikibaseRepo {
 
 		return new EntityParserOutputGeneratorFactory(
 			$this->getEntityViewFactory(),
+			$this->getEntityMetaTagsCreatorFactory(),
 			$this->getStore()->getEntityInfoBuilder(),
 			$this->getEntityTitleLookup(),
 			$this->getLanguageFallbackChainFactory(),

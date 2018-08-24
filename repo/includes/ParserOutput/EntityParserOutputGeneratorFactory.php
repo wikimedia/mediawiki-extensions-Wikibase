@@ -34,6 +34,11 @@ class EntityParserOutputGeneratorFactory {
 	private $entityViewFactory;
 
 	/**
+	 * @var DispatchingEntityMetaTagsCreatorFactory
+	 */
+	private $entityMetaTagsCreatorFactory;
+
+	/**
 	 * @var EntityInfoBuilder
 	 */
 	private $entityInfoBuilder;
@@ -86,6 +91,7 @@ class EntityParserOutputGeneratorFactory {
 
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
+	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
@@ -101,6 +107,7 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
+		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
@@ -114,6 +121,7 @@ class EntityParserOutputGeneratorFactory {
 		array $globeUris = []
 	) {
 		$this->entityViewFactory = $entityViewFactory;
+		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
@@ -137,6 +145,7 @@ class EntityParserOutputGeneratorFactory {
 	public function getEntityParserOutputGenerator( Language $userLanguage ) {
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
+			$this->entityMetaTagsCreatorFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilder,
@@ -145,7 +154,7 @@ class EntityParserOutputGeneratorFactory {
 			new MediaWikiLocalizedTextProvider( $userLanguage->getCode() ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$userLanguage->getCode()
+			$userLanguage
 		);
 	}
 
