@@ -249,7 +249,7 @@ class ResultBuilder {
 	/**
 	 * Get serialized entity for the EntityRevision and add it to the result
 	 *
-	 * @param string|null $sourceEntityIdSerialization EntityId used to retreive $entityRevision
+	 * @param string|null $sourceEntityIdSerialization EntityId used to retrieve $entityRevision
 	 *        Used as the key for the entity in the 'entities' structure and for adding redirect
 	 *     info Will default to the entity's serialized ID if null. If given this must be the
 	 *     entity id before any redirects were resolved.
