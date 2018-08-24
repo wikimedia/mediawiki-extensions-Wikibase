@@ -14,9 +14,7 @@ use Wikibase\View\EntityMetaTagsCreator;
 abstract class EntityMetaTagsCreatorTestCase extends TestCase {
 	use \PHPUnit4And6Compat;
 
-	public function provideTestGetMetaTags() {
-		// Not implemented in the abstract class
-	}
+	abstract public function provideTestGetMetaTags();
 
 	/**
 	 * @dataProvider provideTestGetMetaTags
