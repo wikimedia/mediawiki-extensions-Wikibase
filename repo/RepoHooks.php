@@ -1286,4 +1286,8 @@ final class RepoHooks {
 		};
 	}
 
+	public static function onMediaWikiPHPUnitTestListenerStartTest( $test ) {
+		WikibaseRepo::resetClassStatics();
+	}
+
 }
