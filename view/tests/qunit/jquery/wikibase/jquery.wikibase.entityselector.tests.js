@@ -200,7 +200,7 @@
 			}
 		} );
 
-		assert.deepEqual( entitySelector._fireSearchHook(), [ promise ], 'Then the list returned should contain the promise' );
+		assert.deepEqual( entitySelector._fireSearchHook( '[TERM]' ), [ promise ], 'Then the list returned should contain the promise' );
 
 		hookStub.restore();
 	} );
