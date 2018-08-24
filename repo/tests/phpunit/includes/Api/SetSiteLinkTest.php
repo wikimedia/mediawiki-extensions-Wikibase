@@ -360,8 +360,10 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		// XXX: This test doesn't mark tablesUsed so things created here will remain through all tests in the class.
 		if ( !isset( self::$hasSetup ) ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$store = $wikibaseRepo->getEntityStore();
 
 			$this->initTestEntities( [ 'StringProp', 'Leipzig', 'Berlin' ] );
@@ -377,13 +379,14 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$badge = new Item();
 			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$otherItemId = $badge->getId();
-
-			$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
-				self::$gaItemId->getSerialization() => '',
-				self::$faItemId->getSerialization() => '',
-				'Q99999' => '', // Just in case we have a wrong config
-			] );
 		}
+
+		$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
+			self::$gaItemId->getSerialization() => '',
+			self::$faItemId->getSerialization() => '',
+			'Q99999' => '', // Just in case we have a wrong config
+		] );
+
 		self::$hasSetup = true;
 	}
 
