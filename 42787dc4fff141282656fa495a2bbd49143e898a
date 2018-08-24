@@ -22,6 +22,30 @@
       "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db42561d_da03d554",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-24T09:44:35Z",
+      "side": 1,
+      "message": "I believe, it is to make it more clear without needing to dig into newRevisionLookup and the class which instance is constructed here what the number 1 is meant to stand for here.",
+      "parentUuid": "814a6aba_f6316fe9",
+      "range": {
+        "startLine": 175,
+        "startChar": 29,
+        "endLine": 175,
+        "endChar": 52
+      },
+      "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
