@@ -39,8 +39,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		// XXX: This test doesn't mark tablesUsed so things created here will remain through all tests in the class.
 		if ( !isset( self::$hasSetup ) ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$store = $wikibaseRepo->getEntityStore();
 
 			$prop = Property::newFromType( 'string' );
@@ -71,12 +73,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
-			$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
-				self::$idMap['%Q42%'] => '',
-				self::$idMap['%Q149%'] => '',
-				'Q99999' => '', // Just in case we have a wrong config
-			] );
-
 			// Create a file page for which we can later create a MediaInfo entity.
 			// XXX It's ugly to have knowledge about MediaInfo here. But since we currently can't
 			// inject mock handlers for a mock media type, this is the only way to test automatic
@@ -85,6 +81,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$titleInfo = $this->insertPage( 'File:EditEntityTest.jpg' );
 			self::$idMap['%M11%'] = 'M' . $titleInfo['id'];
 		}
+
+		$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
+			self::$idMap['%Q42%'] => '',
+			self::$idMap['%Q149%'] => '',
+			'Q99999' => '', // Just in case we have a wrong config
+		] );
+
 		self::$hasSetup = true;
 	}
 
