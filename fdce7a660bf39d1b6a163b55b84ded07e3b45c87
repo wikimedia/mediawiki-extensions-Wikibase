@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad7e3b20_1b2b5d64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2018-08-24T14:57:14Z",
+      "side": 1,
+      "message": "More specifically, it\u0027s meant to be provisional until EditPage can preserve the \"undo\" EntityContent even if it doesn\u0027t allow editing that EntityContent.",
+      "revId": "fdce7a660bf39d1b6a163b55b84ded07e3b45c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
