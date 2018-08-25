@@ -141,7 +141,7 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 		$handlers = $this->getHandlers( $settings );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $setEn ),
-			"Failed asserting that configuration supresses creating an event"
+			"Failed asserting that configuration suppresses creating an event"
 		);
 
 		$changeDe = $changes['change-dewiki-sitelink'];

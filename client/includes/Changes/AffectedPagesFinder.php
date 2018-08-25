@@ -148,7 +148,7 @@ class AffectedPagesFinder {
 		}
 
 		if ( $aspects === [] ) {
-			// This is needed when diff is supressed for performance reasons
+			// This is needed when diff is suppressed for performance reasons
 			$aspects[] = EntityUsage::OTHER_USAGE;
 		}
 

@@ -15,7 +15,7 @@ class SerializationModifier {
 	/**
 	 * @param array $array the array to modify
 	 * @param null|string $path the path that we want to modify.
-	 *     Element keys should be seperated with / characters.
+	 *     Element keys should be separated with / characters.
 	 *     * characters can be used to match all keys at a given level.
 	 *     null can be used to modify $array directly.
 	 *     Examples:
