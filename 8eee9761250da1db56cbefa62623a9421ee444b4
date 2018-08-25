@@ -16,6 +16,24 @@
       "revId": "8eee9761250da1db56cbefa62623a9421ee444b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d999483a_c68696cc",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-08-25T19:08:35Z",
+      "side": 1,
+      "message": "I thought that having an specific method for this process allowed to put a name on this operation and to make the code more readable. But if you think it\u0027s not I could merge the methods together.",
+      "parentUuid": "c907be25_23cf8e53",
+      "revId": "8eee9761250da1db56cbefa62623a9421ee444b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
