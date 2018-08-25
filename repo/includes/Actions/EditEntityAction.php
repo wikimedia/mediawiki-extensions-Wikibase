@@ -320,7 +320,7 @@ class EditEntityAction extends ViewEntityAction {
 		return ( new ButtonWidget( [
 			'id' => 'mw-editform-cancel',
 			'href' => $this->getContext()->getTitle()->getLocalURL(),
-			'label' => $this->msg( 'cancel' )->parse(),
+			'label' => $this->msg( 'cancel' )->text(),
 			'framed' => false,
 			'flags' => 'destructive'
 		] ) )->toString();
@@ -447,7 +447,7 @@ class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "<div class='editOptions'>\n" );
 
-		$labelText = $this->msg( 'wikibase-summary-generated' )->text();
+		$labelText = $this->msg( 'wikibase-summary-generated' )->escaped();
 		$this->getOutput()->addHTML( $this->getSummaryInput( $labelText ) );
 		$this->getOutput()->addHTML( Html::rawElement( 'br' ) );
 		$this->getOutput()->addHTML( "<div class='editButtons'>\n" );
