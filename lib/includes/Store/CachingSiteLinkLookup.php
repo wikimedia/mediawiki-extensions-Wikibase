@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use BagOStuff;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
@@ -40,8 +41,14 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	private $cacheKeyPrefix;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @param SiteLinkLookup $siteLinkLookup The lookup to use
 	 * @param BagOStuff $cache The cache to use
+	 * @param EntityIdParser $entityIdParser composer to create new ItemIds
 	 * @param int $cacheDuration Cache duration in seconds. Defaults to 3600 (1 hour).
 	 * @param string $cacheKeyPrefix Cache key prefix to use.
 	 *     Important in case we're not in-process caching. Defaults to "wikibase"
@@ -49,11 +56,13 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		BagOStuff $cache,
+		EntityIdParser $entityIdParser,
 		$cacheDuration = 3600,
 		$cacheKeyPrefix = 'wikibase'
 	) {
 		$this->lookup = $siteLinkLookup;
 		$this->cache = $cache;
+		$this->entityIdParser = $entityIdParser;
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheKeyPrefix = $cacheKeyPrefix;
 	}
@@ -70,7 +79,8 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 		$itemIdSerialization = $this->cache->get( $this->getByPageCacheKey( $globalSiteId, $pageTitle ) );
 
 		if ( is_string( $itemIdSerialization ) ) {
-			return new ItemId( $itemIdSerialization );
+			// FIXME: parse() returns EntityId, whereas this function specifies ItemsId return type
+			return $this->entityIdParser->parse( $itemIdSerialization );
 		} elseif ( $itemIdSerialization === false ) {
 			return $this->getAndCacheItemIdForLink( $globalSiteId, $pageTitle );
 		}
