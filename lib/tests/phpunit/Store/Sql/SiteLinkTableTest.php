@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use TitleValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\WikibaseSettings;
 
@@ -34,8 +35,16 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
 
-		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false, self::newEntityIdComposer() );
 		$this->tablesUsed[] = 'wb_items_per_site';
+	}
+
+	private static function newEntityIdComposer() {
+		return new EntityIdComposer( [
+			'item' => function ( $repositoryName, $uniquePart ) {
+				return ItemId::newFromNumber( $uniquePart );
+			},
+		] );
 	}
 
 	public function itemProvider() {
