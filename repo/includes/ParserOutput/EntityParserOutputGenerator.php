@@ -105,7 +105,7 @@ class EntityParserOutputGenerator {
 	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
-	 * @param string $languageCode
+	 * @param Language $language
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
