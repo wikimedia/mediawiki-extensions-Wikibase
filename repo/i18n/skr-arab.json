@@ -11,5 +11,6 @@
 	"wikibase-label-empty": "کوئی سرخی کائنی",
 	"wikibase-description-empty": "کوئی وضاحت کائنی",
 	"wikibase-sitelinks-special": "ٻیاں سائٹاں",
-	"wikibase-statementview-rank-normal": "عام درجہ"
+	"wikibase-statementview-rank-normal": "عام درجہ",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "زبان دا کوڈ۔"
 }
