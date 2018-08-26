@@ -314,7 +314,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkStore
 	 */
 	public function newSiteLinkStore() {
-		return new SiteLinkTable( 'wb_items_per_site', false );
+		return new SiteLinkTable( 'wb_items_per_site', false, $this->entityIdComposer );
 	}
 
 	/**

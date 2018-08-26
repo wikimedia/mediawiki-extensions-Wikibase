@@ -33,7 +33,7 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 
 		$this->tablesUsed[] = 'wb_items_per_site';
 
-		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false, self::newEntityIdComposer() );
 
 		$siteLinks = new SiteLinkList( [
 			new SiteLink( 'dewiki', 'Katze' ),
@@ -77,13 +77,15 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 	}
 
 	private function newSqlSiteLinkConflictLookup() {
-		$entityIdComposer = new EntityIdComposer( [
+		return new SqlSiteLinkConflictLookup( $this->newEntityIdComposer() );
+	}
+
+	private static function newEntityIdComposer() {
+		return new EntityIdComposer( [
 			'item' => function ( $repositoryName, $uniquePart ) {
 				return ItemId::newFromNumber( $uniquePart );
 			},
 		] );
-
-		return new SqlSiteLinkConflictLookup( $entityIdComposer );
 	}
 
 }

@@ -190,8 +190,12 @@ class WikibaseLanguageIndependentLuaBindings {
 		$globalSiteId = $globalSiteId ?: $this->siteId;
 
 		try {
-			$itemId = new ItemId( $prefixedItemId );
-		} catch ( InvalidArgumentException $e ) {
+			$itemId = $this->entityIdParser->parse( $prefixedItemId );
+		} catch ( EntityIdParsingException $e ) {
+			return null;
+		}
+
+		if ( !( $itemId instanceof ItemId ) ) {
 			return null;
 		}
 
