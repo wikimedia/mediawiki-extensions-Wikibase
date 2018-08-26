@@ -8,6 +8,7 @@ use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikimedia\Assert\Assert;
@@ -34,14 +35,20 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	protected $readonly;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	protected $entityIdComposer;
+
+	/**
 	 * @param string $table The table to use for the sitelinks
 	 * @param bool $readonly Whether the table can be modified.
+	 * @param EntityIdComposer $entityIdComposer composer to create new ItemIds
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws MWException
 	 */
-	public function __construct( $table, $readonly, $wiki = false ) {
+	public function __construct( $table, $readonly, EntityIdComposer $entityIdComposer, $wiki = false ) {
 		if ( !is_string( $table ) ) {
 			throw new MWException( '$table must be a string.' );
 		}
@@ -54,6 +61,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$this->table = $table;
 		$this->readonly = $readonly;
+		$this->entityIdComposer = $entityIdComposer;
 
 		parent::__construct( $wiki );
 	}
@@ -230,7 +238,14 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		);
 
 		$this->releaseConnection( $db );
-		return $result === false ? null : ItemId::newFromNumber( (int)$result->ips_item_id );
+
+		if ( $result === false ) {
+			return null;
+		}
+
+		// FIXME: What repository name should be used here?
+		// FIXME: composeEntityId() returns EntityId, whereas this function specifies ItemsId return type
+		return $this->entityIdComposer->composeEntityId( '', Item::ENTITY_TYPE, (int)$result->ips_item_id );
 	}
 
 	/**

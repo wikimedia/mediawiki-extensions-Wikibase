@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use InvalidArgumentException;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -190,8 +189,12 @@ class WikibaseLanguageIndependentLuaBindings {
 		$globalSiteId = $globalSiteId ?: $this->siteId;
 
 		try {
-			$itemId = new ItemId( $prefixedItemId );
-		} catch ( InvalidArgumentException $e ) {
+			$itemId = $this->entityIdParser->parse( $prefixedItemId );
+		} catch ( EntityIdParsingException $e ) {
+			return null;
+		}
+
+		if ( !( $itemId instanceof ItemId ) ) {
 			return null;
 		}
 

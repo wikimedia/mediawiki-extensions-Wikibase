@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use HashBagOStuff;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -27,7 +28,8 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$this->getMock( SiteLinkLookup::class ),
-			$cache
+			$cache,
+			new ItemIdParser()
 		);
 
 		$this->assertSame(
@@ -46,7 +48,8 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$lookup,
-			$cache
+			$cache,
+			new ItemIdParser()
 		);
 
 		$this->assertSame(
@@ -68,7 +71,8 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$this->getMock( SiteLinkLookup::class ),
-			$cache
+			$cache,
+			new ItemIdParser()
 		);
 
 		$this->assertSame(
@@ -88,7 +92,8 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$lookup,
-			$cache
+			$cache,
+			new ItemIdParser()
 		);
 
 		$this->assertSame(
@@ -111,7 +116,8 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$this->getMock( SiteLinkLookup::class ),
-			$cache
+			$cache,
+			new ItemIdParser()
 		);
 
 		$this->assertSame(
@@ -131,7 +137,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( $q42 )
 			->will( $this->returnValue( $siteLinks ) );
 
-		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, $cache );
+		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, $cache, new ItemIdParser() );
 
 		$this->assertSame(
 			$siteLinks,
@@ -150,7 +156,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( [ 1 ], [ 'a' ], [ 'b' ] )
 			->will( $this->returnValue( 'bar' ) );
 
-		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, new HashBagOStuff() );
+		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, new HashBagOStuff(), new ItemIdParser() );
 
 		$this->assertSame(
 			'bar',
