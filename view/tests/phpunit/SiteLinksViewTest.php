@@ -28,9 +28,6 @@ use Wikibase\View\Template\TemplateRegistry;
  * @group WikibaseView
  *
  * @license GPL-2.0-or-later
- * @author Adrian Heine <adrian.heine@wikimedia.de>
- * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Thiemo Kreuz
  */
 class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;

@@ -18,9 +18,6 @@ use Wikimedia\Purtle\RdfWriter;
  * @group WikibaseRdf
  *
  * @license GPL-2.0-or-later
- * @author Daniel Kinzler
- * @author Stas Malyshev
- * @author Thiemo Kreuz
  */
 class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
