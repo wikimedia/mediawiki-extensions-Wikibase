@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Awangba Mangang"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ꯌꯥꯎꯗꯕ",
+	"valueview-expert-timevalue-calendar-gregorian": "ꯒꯔꯦꯒꯣꯔꯤꯑꯦꯟ",
+	"valueview-expert-timevalue-calendar-julian": "ꯖꯨꯂꯤꯑꯦꯟ",
+	"valueview-expert-timeinput-calendar": "ꯀꯦꯂꯦꯟꯗꯔ:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "ꯂꯣꯟ(ꯆꯪꯗꯔ ꯌꯥꯗꯔꯕ)"
+}
