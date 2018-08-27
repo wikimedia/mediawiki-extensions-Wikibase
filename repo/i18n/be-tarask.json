@@ -505,5 +505,6 @@
 	"apihelp-wbparsevalue-param-parser": "Ідэнтыфікатар <code>ValueParser</code> для ўжываньня. <span class=\"apihelp-deprecated\">Састарэлы</span>. Замест яго выкарыстоўвайце парамэтар <var>datatype</var>.",
 	"apihelp-wbparsevalue-param-datatype": "Тып зьвестак значэньня для аналізу. Вызначае, які аналізатар выкарыстоўваць.",
 	"apihelp-wbparsevalue-param-validate": "Ці правяраць дадаткова пададзеныя зьвесткі.",
-	"apihelp-wbparsevalue-param-values": "Значэньні для аналізу"
+	"apihelp-wbparsevalue-param-values": "Значэньні для аналізу",
+	"apihelp-wbparsevalue-param-options": "Парамэтры, якія мае выкарыстоўваць парсэр. Падаюцца як JSON-аб’ект."
 }

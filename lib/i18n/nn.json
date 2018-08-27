@@ -5,7 +5,8 @@
 			"Njardarlogar",
 			"Roarjo",
 			"Fitoschido",
-			"Macofe"
+			"Macofe",
+			"Ranveig"
 		]
 	},
 	"wikibase-lib-desc": "Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane",
@@ -76,6 +77,7 @@
 	"datatypes-type-wikibase-property": "Eigenskap",
 	"datatypes-type-commonsMedia": "Mediefil frå Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-10annum": "$1-åra",
 	"wikibase-snakformatter-property-not-found": "Fann ikkje eigenskapen $1, kan ikkje avgjera kva datatype som skal nyttast.",
 	"wikibase-entity-summary-wbsetitem": "Oppretta eit nytt element",
 	"wikibase-entity-summary-wbcreate-new": "Oppretta ei ny eining",

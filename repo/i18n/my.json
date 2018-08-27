@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Ninjastrikers",
-			"9.sinistra"
+			"9.sinistra",
+			"Dr Lotus Black"
 		]
 	},
 	"wikibase-edit": "တည်းဖြတ်",
+	"wikibase-cancel": "မလုပ်တော့ပါ",
 	"wikibase-add": "ပေါင်းထည့်",
 	"wikibase-label-empty": "နာမည်ညွှန်း မပေးထားပါ",
 	"wikibase-description-empty": "ဖော်ပြချက် ပေးမထားပါ",
