@@ -118,6 +118,30 @@
       "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "304b12ae_29af35b0",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-27T09:11:13Z",
+      "side": 1,
+      "message": "\u003e  Having this discussion is probably better than just sweeping it under the rug and waiting for it to come up again later down the line.\n\nSure. But you can merge the patch first and have a discussion on a merged patch. Gerrit allows it.",
+      "parentUuid": "de256a13_400def68",
+      "range": {
+        "startLine": 175,
+        "startChar": 29,
+        "endLine": 175,
+        "endChar": 52
+      },
+      "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
