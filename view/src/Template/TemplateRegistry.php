@@ -23,11 +23,7 @@ class TemplateRegistry {
 	 * @param string[] $templates
 	 */
 	public function __construct( array $templates ) {
-		foreach ( $templates as $key => $snippet ) {
-			$this->templates[$key] = str_replace( "\t", '',
-				preg_replace( '/<!--.*-->/Us', '', $snippet )
-			);
-		}
+		$this->addTemplates( $templates );
 	}
 
 	/**
@@ -48,6 +44,14 @@ class TemplateRegistry {
 	 */
 	public function getTemplate( $key ) {
 		return $this->templates[$key];
+	}
+
+	public function addTemplates( array $templates ) {
+		foreach ( $templates as $key => $snippet ) {
+			$this->templates[$key] = str_replace( "\t", '',
+				preg_replace( '/<!--.*-->/Us', '', $snippet )
+			);
+		}
 	}
 
 }
