@@ -37,6 +37,18 @@ class TemplateRegistryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [ 'key' => 'html' ], $registry->getTemplates() );
 	}
 
+	public function testAddTemplates() {
+		$registry = new TemplateRegistry( [ 'key' => 'html' ] );
+		$registry->addTemplates( [ 'key2' => 'html2' ] );
+		$this->assertSame( [ 'key' => 'html', 'key2' => 'html2' ], $registry->getTemplates() );
+	}
+
+	public function testAddTemplatesOverwrite() {
+		$registry = new TemplateRegistry( [ 'key' => 'html' ] );
+		$registry->addTemplates( [ 'key' => 'html2' ] );
+		$this->assertSame( [ 'key' => 'html2' ], $registry->getTemplates() );
+	}
+
 	public function testGetKnownTemplate() {
 		$registry = new TemplateRegistry( [ 'key' => 'html' ] );
 		$this->assertSame( 'html', $registry->getTemplate( 'key' ) );
