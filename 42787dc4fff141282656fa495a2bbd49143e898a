@@ -70,6 +70,30 @@
       "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e84d6ceb_c738e202",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-27T08:31:55Z",
+      "side": 1,
+      "message": "\u003e ... we are making use of a language feature, but using it for something that it was not intended.\n\nThe feature you referring to is that assignment operation is an expression in PHP. And it is intended to be used like this and every PHP programmer who ever queried MySQL from PHP used it many times: \n`while ($row \u003d mysql_fetch_assoc($result)) { ...` (copied from PHP manual). Although, in this concrete case the variable is unused.\n\n\u003e Anyone that knows PHP knows about this language feature and what it does and then looks at this and says, why is it doing that? it doesn\u0027t need to.\n\nI wonder what do you mean saying \"It doesn\u0027t need to\". The main quality of a test code IMO (except it\u0027s correctness) is readability, so if the code becomes more verbose but more clear I\u0027m totally for that.\nAn extreme example, but still: you don\u0027t need to assign values to variables if you use it in one place only (but I think you still do). So, it also looks like \"It doesn\u0027t need to\".\n\n\u003e I wouldn\u0027t really call it a dig into newRevisionLookup either, that method is 5 lines long and its pretty clear what it does. \n\nSure it is short, but reader have to jump between the methods. And if you are looking at the patch in Gerrit web interface method might out of the scope of the patch, so you need to expand all the code, find the method, understand it and then remember where you were and come back there. And what if there are 2 or 3 methods like this? I would find it supper annoying during, especially during the code review (rate of WTF/min will go above the threshold :) ).\n\n\u003e But I still don\u0027t really see the need of this hint ...\n\nIf I remove this, the code will look like: `$this-\u003enewRevisionLookup( 1 )`. The first question the reader will have is \"What does `1` mean? Create one RevisionLookup, or RevisionLookup with one revision or ...?\" That is why I see value in this.\n\n\u003e  ...let\u0027s use a less confusing phpdoc comment instead...\n\nCan be done, but it doesn\u0027t make it really prettier: `$this-\u003enewRevisionLookup( /* existingRevisionId */ 1 )`. Can\u0027t see how it is better. Also, some tests might use this value for assertions, and then in some tests it will be done with comments in other with variable. It\u0027s not a big problem for me, but just why do that?\n\n\u003e ...are we going to start doing this everywhere?\n\nI don\u0027t think we should do anything everywhere. I would say: we can do it where it makes sense. If you can achieve readability using other means, I don\u0027t mind.\n\nPS: Looks like we should discuss meaning of `-1` again. :) Next time, please. if this kind of concern is the only one blocking you from merging my patch, just fix it and merge.",
+      "parentUuid": "2230ea49_01c87c21",
+      "range": {
+        "startLine": 175,
+        "startChar": 29,
+        "endLine": 175,
+        "endChar": 52
+      },
+      "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
