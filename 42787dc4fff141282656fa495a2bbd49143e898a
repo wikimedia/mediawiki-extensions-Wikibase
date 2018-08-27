@@ -94,6 +94,30 @@
       "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de256a13_400def68",
+        "filename": "lib/tests/phpunit/Store/CachingFallbackLabelDescriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-27T09:04:53Z",
+      "side": 1,
+      "message": "\u003e `while ($row \u003d mysql_fetch_assoc($result)) { ...`\nThings like this are discouraged in our / the mediawiki code style (i\u0027m not actually sure if it is in the codesniffer anywhere).\n\nThe expected way to actually write the code for this method per the code style would be the following (if we actually had to set $existingRevisionId):\n\n$existingRevisionId \u003d 1;\n$lookup \u003d new CachingFallbackLabelDescriptionLookup(\n\t\t\t$this-\u003ecache-\u003ereveal(),\n\t\t\t$this-\u003enewRevisionLookup( $existingRevisionId ),\n\t\t\t$ldLookup-\u003ereveal(),\n\t\t\t$this-\u003enewFallbackChain(),\n\t\t\t$ttlInSeconds\n\t\t);\n\n\u003e you don\u0027t need to assign values to variables if you use it in one place only (but I think you still do).\nI\u0027m fine with assigning variables and using them in one place (see the example pasted above).\n\n\u003e And if you are looking at the patch in Gerrit web interface method might out of the scope of the patch, so you need to expand all the code, find the method, understand it and then remember where you were and come back there.\nIf I were looking at this code in gerrit, I wouldn\u0027t assume that $existingRevisionId has any relation to the parameter name within the function that I am calling.\n\n\u003e Can be done, but it doesn\u0027t make it really prettier: `$this-\u003enewRevisionLookup( /* existingRevisionId */ 1 )`\n\nIf I read this then I would expect exactly what you are trying to imply by assigning the variable in the call.\nWe don\u0027t want it to be pretty necessarily, we want it to be easy to understand.\n\n\u003e I don\u0027t think we should do anything everywhere. I would say: we can do it where it makes sense. If you can achieve readability using other means, I don\u0027t mind.\nThere could be some places that it makes sense to hint about the parmeter name of the function we are calling, perhaps this is not the place though with the method we are calling in the same class only 100 lines below.\n\n\u003e PS: Looks like we should discuss meaning of `-1` again. :) Next time, please. if this kind of concern is the only one blocking you from merging my patch, just fix it and merge.\n-1 \u003d \"There\u0027s a problem with this change, please improve\". Of course the change needed can be my opinion.\nWhen I first looked at this patch I literally had no idea what the intention of the assignment in the call was for, i couldn\u0027t \"just fix it\", as I didn\u0027t know the intention of that bit of code in the first place. Was it an accident? Was it intended?\nWe have had a pretty swift discussion on this patch over 3 days (2 of which were the weekend anyway), I now understand what the patch / line was doing \u0026 why and I hope you now understand my concerns. Having this discussion is probably better than just sweeping it under the rug and waiting for it to come up again later down the line.\n\nSo, on that note I\u0027m happy to remove this one bit and merge this straight away.\nIf we want to start doing param name hinting in our method calls we should perhaps schedule a 15 min call within the teams / have an email thread to discuss how exactly we want to do it, as clearly already my opinion differs from yours and I imagine the rest of the teams opinions would be spread across our 2 ideas \u0026 perhaps more.",
+      "parentUuid": "e84d6ceb_c738e202",
+      "range": {
+        "startLine": 175,
+        "startChar": 29,
+        "endLine": 175,
+        "endChar": 52
+      },
+      "revId": "42787dc4fff141282656fa495a2bbd49143e898a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
