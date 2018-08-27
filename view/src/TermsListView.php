@@ -17,22 +17,22 @@ class TermsListView {
 	/**
 	 * @var TemplateFactory
 	 */
-	private $templateFactory;
+	protected $templateFactory;
 
 	/**
 	 * @var LanguageDirectionalityLookup
 	 */
-	private $languageDirectionalityLookup;
+	protected $languageDirectionalityLookup;
 
 	/**
 	 * @var LanguageNameLookup
 	 */
-	private $languageNameLookup;
+	protected $languageNameLookup;
 
 	/**
 	 * @var LocalizedTextProvider
 	 */
-	private $textProvider;
+	protected $textProvider;
 
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -130,7 +130,7 @@ class TermsListView {
 		);
 	}
 
-	private function getTermView( TermList $termList, $templateName, $emptyTextKey, $languageCode ) {
+	protected function getTermView( TermList $termList, $templateName, $emptyTextKey, $languageCode ) {
 		$hasTerm = $termList->hasTermForLanguage( $languageCode );
 		$effectiveLanguage = $hasTerm ? $languageCode : $this->textProvider->getLanguageOf( $emptyTextKey );
 		return $this->templateFactory->render(
