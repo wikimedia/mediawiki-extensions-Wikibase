@@ -70,6 +70,30 @@
       "revId": "63c1ef0efcf4d13ac6918401f344b3ba5c6f7713",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2945623b_050cbde0",
+        "filename": "lib/tests/phpunit/Store/LatestRevisionIdResultTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-28T10:13:24Z",
+      "side": 1,
+      "message": "It was actually not only broken in this line but in two next tests too.",
+      "parentUuid": "086fd13d_4a72205a",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "63c1ef0efcf4d13ac6918401f344b3ba5c6f7713",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
