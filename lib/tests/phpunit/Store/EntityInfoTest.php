@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Lib\Store\EntityInfo
@@ -118,10 +119,11 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityInfo() {
-		$info = $this->getEntityInfo( [
+		/** @var EntityInfo $info */
+		$info = TestingAccessWrapper::newFromObject( $this->getEntityInfo( [
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),
-		] );
+		] ) );
 
 		$record = $info->getEntityInfo( new ItemId( 'Q11' ) );
 		$this->assertInternalType( 'array', $record );

@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\PropertyContent;
 use Wikibase\WikibaseSettings;
+use Wikimedia\TestingAccessWrapper;
 use Wikipage;
 
 /**
@@ -355,7 +356,10 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			'foo'
 		);
 
-		$entityInfo = $builder->collectEntityInfo( [ $itemId ], [ $languageCode ] )->getEntityInfo( $itemId );
+		$entityInfo = TestingAccessWrapper::newFromObject( $builder->collectEntityInfo(
+			[ $itemId ],
+			[ $languageCode ]
+		) )->getEntityInfo( $itemId );
 
 		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
 	}
