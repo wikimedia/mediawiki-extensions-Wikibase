@@ -1018,7 +1018,7 @@ final class RepoHooks {
 		}
 
 		// Analyzer for splitting statements and extracting properties:
-		// P31:Q1234 => P31
+		// P31=Q1234 => P31
 		$config['analyzer']['extract_wb_property'] = [
 			'type' => 'custom',
 			'tokenizer' => 'split_wb_statements',
@@ -1039,6 +1039,23 @@ final class RepoHooks {
 			'tokenizer' => 'keyword',
 			'filter' => [ 'term_freq' ],
 		];
+
+		// Analyzer for extracting statement data
+		// There's a bit of an issue here because it will also index properties, but may not be
+		// that big of a deal. If it is, we'd have to add some clever filter to throw it away.
+		$config['analyzer']['extract_wb_statements'] = [
+			'type' => 'custom',
+			'tokenizer' => 'split_wb_statements',
+			'filter' => [
+				'truncate_keyword',
+				'icu_normalizer',
+				'preserve_original_recorder',
+				'icu_folding',
+				'preserve_original',
+				'unique',
+			],
+  		];
+
 
 		// Language analyzers for descriptions
 		$repo = WikibaseRepo::getDefaultInstance();

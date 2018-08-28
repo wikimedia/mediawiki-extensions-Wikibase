@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 
 /**
  * Entity search implementation using ElasticSearch.
@@ -223,10 +224,12 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addShould( $dismax );
 		$titleMatch = new Term( [ 'title.keyword' => EntitySearchUtils::normalizeId( $text, $this->idParser ) ] );
+		$statementMatch = new Term( [ StatementsField::NAME . ".plain" => $text ] );
 
 		// Match either labels or exact match to title
 		$query->addShould( $labelsQuery );
 		$query->addShould( $titleMatch );
+		$query->addShould( $statementMatch );
 		$query->setMinimumShouldMatch( 1 );
 
 		// Filter to fetch only given entity type

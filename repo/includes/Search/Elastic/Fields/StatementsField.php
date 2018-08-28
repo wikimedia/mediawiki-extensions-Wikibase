@@ -264,6 +264,14 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 			'analyzer' => 'extract_wb_property',
 			'search_analyzer' => 'keyword',
 		];
+		// Subfield indexing property values with a little normalization.
+		$config['fields']['plain'] = [
+			'type' => 'text',
+			'analyzer' => 'extract_wb_statements',
+			// We'll do case folding, but not anything else for search
+			'search_analyzer' => 'lowercase_keyword',
+		];
+
 
 		return $config;
 	}
