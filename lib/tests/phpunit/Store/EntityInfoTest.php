@@ -118,6 +118,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityInfo() {
+		$this->markTestSkipped( 'Plan to make getEntityInfo private' );
 		$info = $this->getEntityInfo( [
 			$this->makeItemWithLabel( 'Q11', 'London' ),
 			$this->makeItemWithLabel( 'Q33', 'Berlin' ),

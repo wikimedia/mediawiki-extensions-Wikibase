@@ -295,6 +295,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 	}
 
 	public function testEntityIdsArePrefixedWithRepositoryName() {
+		$this->markTestSkipped( 'Plan to make getEntityInfo private' );
 		$itemId = new ItemId( 'foo:Q1' );
 
 		$label = 'dummy label';
