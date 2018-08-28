@@ -22,6 +22,30 @@
       "revId": "63c1ef0efcf4d13ac6918401f344b3ba5c6f7713",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a475ba5b_eb71f15c",
+        "filename": "lib/tests/phpunit/Store/LatestRevisionIdResultTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4089
+      },
+      "writtenOn": "2018-08-28T10:07:20Z",
+      "side": 1,
+      "message": "Oh! Didn\u0027t notice that.\nIt is not only OK for phpcs, but it is actually made by phpcbf! \nI run it sometimes to ensure correct formatting before submitting a patch.\nThere is a ticket about it: T154789 Closure formatting is ugly",
+      "parentUuid": "db5c627c_1c6ed9b2",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "63c1ef0efcf4d13ac6918401f344b3ba5c6f7713",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
