@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87f27868_bde17de2",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-28T13:10:28Z",
+      "side": 1,
+      "message": "This check here makes the entire change obsolete. If you *know* the result must be an ItemId (and we know that, because items are the only entities that have sitelinks), you should use the \"new ItemId( $idString )\" constructor, and not the full-fledged parser.",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 35
+      },
+      "revId": "1bbc86fc81a87c3eaacc625225dcdc9431bece3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "361863fb_ae03e530",
+        "filename": "lib/includes/Store/CachingSiteLinkLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-28T13:10:28Z",
+      "side": 1,
+      "message": "So we know this must return an ItemId. We also know Items are the only entities that can have sitelinks. So this should continue to use the \"new ItemId( $idString )\" constructor.",
+      "range": {
+        "startLine": 82,
+        "startChar": 6,
+        "endLine": 82,
+        "endChar": 11
+      },
+      "revId": "1bbc86fc81a87c3eaacc625225dcdc9431bece3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6d58adc_20030ea7",
+        "filename": "lib/includes/Store/Sql/SiteLinkTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-28T13:10:28Z",
+      "side": 1,
+      "message": "This change is ok, as it gets rid of one of the very few remaining newFromNumber calls. But it does not help much as this is still hard-wired to be an ItemId – and must be.",
+      "revId": "1bbc86fc81a87c3eaacc625225dcdc9431bece3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
