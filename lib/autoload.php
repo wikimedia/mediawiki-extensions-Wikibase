@@ -136,6 +136,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\LabelConflictFinder' => __DIR__ . '/includes/Store/LabelConflictFinder.php',
 	'Wikibase\\Lib\\Store\\LanguageFallbackLabelDescriptionLookup' => __DIR__ . '/includes/Store/LanguageFallbackLabelDescriptionLookup.php',
 	'Wikibase\\Lib\\Store\\LanguageFallbackLabelDescriptionLookupFactory' => __DIR__ . '/includes/Store/LanguageFallbackLabelDescriptionLookupFactory.php',
+	'Wikibase\\Lib\\Store\\LatestRevisionIdResult' => __DIR__ . '/includes/Store/LatestRevisionIdResult.php',
 	'Wikibase\\Lib\\Store\\PrefetchingTermLookup' => __DIR__ . '/includes/Store/PrefetchingTermLookup.php',
 	'Wikibase\\Lib\\Store\\PropertyInfoLookup' => __DIR__ . '/includes/Store/PropertyInfoLookup.php',
 	'Wikibase\\Lib\\Store\\PropertyInfoProvider' => __DIR__ . '/includes/Store/PropertyInfoProvider.php',
