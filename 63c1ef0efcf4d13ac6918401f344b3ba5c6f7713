@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db5c627c_1c6ed9b2",
+        "filename": "lib/tests/phpunit/Store/LatestRevisionIdResultTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-28T10:00:03Z",
+      "side": 1,
+      "message": "this is rather interesting indentation matching. And PHPCS is fine with that?\n\nSorry to make style comments. Per the rule \"PHPCS does not complain, no change needed\" I don\u0027t request to change it. Oddity levels high on this one, so I couldn\u0027t stop from commenting.",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "63c1ef0efcf4d13ac6918401f344b3ba5c6f7713",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
