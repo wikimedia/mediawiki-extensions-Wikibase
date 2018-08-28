@@ -1,0 +1,18 @@
+This file describes hooks defined by the Wikibase extensions.
+See docs/hooks.txt in the MediaWiki installation root for
+general information on hooks.
+
+
+== Repo ==
+
+'wikibase.entityPage.entityView.rendered' (entityViewInit.js): Called after the Wikibase UI is initialized.
+
+'wikibase.entityPage.entityLoaded' (entityLoaded.js): Called as soon as the JSON representing the entity stored on the current entity page is loaded.
+Listener callbacks should expect the entity as a native JavaScript object (the parsed JSON serialization) passed as the first argument.
+
+'wikibase.statement.saved' (StatementsChanger.js): Called after a statement has been saved. Entity ID and statement ID are passed as arguments.
+
+'wikibase.statement.removed' (StatementsChanger.js): Called after a statement has been removed. Entity ID and statement ID are passed as arguments.
+
+'wikibase.entityselector.search' (entityselector.js): Called when entity selector fetches suggestions.
+An object containing the following elements is passed: element, term and options.
