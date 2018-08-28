@@ -318,7 +318,7 @@
 					hookResults.push( p );
 				};
 
-			if ( this._cache.nextSuggestionOffset ) {
+			if ( this._cache.term === term ) {
 				return hookResults; // Don't fire hook when paginating
 			}
 
