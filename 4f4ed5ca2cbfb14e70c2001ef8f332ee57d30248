@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc19aa31_5aaeb6b4",
+        "filename": "docs/hooks-js.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-28T09:37:23Z",
+      "side": 1,
+      "message": "Could now more specifically say it is about JavaScript hooks.\nAnd this are Wikibase\u0027s own stuff, arent they (i.e. nothing added to existing MW hook system)? This information could potentially be good to put here.",
+      "revId": "4f4ed5ca2cbfb14e70c2001ef8f332ee57d30248",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fd07901_0afa96da",
+        "filename": "docs/hooks-js.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-28T09:37:23Z",
+      "side": 1,
+      "message": "Do I see right this file only contains PHP hook information? I would remove this reference, if this is the case.",
+      "revId": "4f4ed5ca2cbfb14e70c2001ef8f332ee57d30248",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa09e90f_8b828212",
+        "filename": "docs/hooks-js.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-08-28T09:37:23Z",
+      "side": 1,
+      "message": "Maybe we could even omit this header?",
+      "revId": "4f4ed5ca2cbfb14e70c2001ef8f332ee57d30248",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
