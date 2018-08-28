@@ -51,7 +51,7 @@ module EntityPage
   a(:wb_error_details_link, class: 'wikibase-wbtooltip-error-details-link')
 
   # mw notifications
-  div(:mw_notification_content, xpath: "//div[@id='mw-notification-area']/div/div[contains(@class, 'mw-notification-content')]")
+  div(:mw_notification_content, xpath: "//div[contains(@class, 'mw-notification-area')]/div/div[contains(@class, 'mw-notification-content')]")
 
   # ***** METHODS *****
   def navigate_to_entity(url)
