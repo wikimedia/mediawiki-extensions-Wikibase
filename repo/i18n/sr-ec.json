@@ -9,7 +9,8 @@
 			"Obsuser",
 			"Ladsgroup",
 			"Acamicamacaraca",
-			"BadDog"
+			"BadDog",
+			"Zoranzoki21"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -291,6 +292,10 @@
 	"apihelp-wbsearchentities-param-search": "Претрага за овај текст.",
 	"apihelp-wbsearchentities-param-language": "Претрага на овом језику.",
 	"apihelp-wbsearchentities-param-limit": "Максимални број резултата",
+	"apihelp-query+wbcontentlanguages-param-context": "Контекст у којем језици садржаја треба да важе.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Појмови (ознака, опис, псеудоними) ентитета.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Једнојезична вредност текста у изјави.",
+	"apihelp-query+wbcontentlanguages-param-prop": "Својства која треба де буду враћена за сваки језик.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "К̑од језика.",
 	"apihelp-query+wbsearch-param-search": "Претрага за овај текст.",
 	"apihelp-query+wbsearch-param-language": "Претрага на овом језику.",

@@ -11,10 +11,12 @@
 	"wikibase-add": "ပေါင်းထည့်",
 	"wikibase-label-empty": "နာမည်ညွှန်း မပေးထားပါ",
 	"wikibase-description-empty": "ဖော်ပြချက် ပေးမထားပါ",
+	"wikibase-diffview-link-name": "အမည်",
 	"wikibase-sitelink-page-edit-placeholder": "စာမျက်နှာ",
 	"wikibase-sitelinks-special": "အခြား ဆိုဒ်များ",
 	"wikibase-statementview-rank-normal": "သာမန် အဆင့်",
 	"wikibase-statementview-references-counter": "$1\n{{PLURAL:$1|ရည်ညွှန်းချက်|ရည်ညွှန်းချက်များ}}",
 	"wikibase-itembytitle-lookup-page": "စာမျက်နှာ:",
+	"wikibase-newentity-submit": "ဖန်တီးရန်",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်"
 }
