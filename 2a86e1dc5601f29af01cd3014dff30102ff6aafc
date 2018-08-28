@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63e86086_0cf27b91",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-08-28T13:57:30Z",
+      "side": 1,
+      "message": "It would be nice to also test that the resulting default suggestions are added to the menu.",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 96
+      },
+      "revId": "2a86e1dc5601f29af01cd3014dff30102ff6aafc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
