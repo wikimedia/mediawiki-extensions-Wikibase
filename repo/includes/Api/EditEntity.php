@@ -182,10 +182,18 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			if ( $preparedParameters['baserevid'] && $exists ) {
-				$latestRevision = $this->revisionLookup->getLatestRevisionId(
+				$latestRevisionResult = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
+
+				$returnFalse = function () {
+					return false;
+				};
+				$latestRevision = $latestRevisionResult->onConcreteRevision( 'intval' )
+					->onRedirect( $returnFalse )
+					->onNonexistentEntity( $returnFalse )
+					->map();
 
 				if ( !$baseRevId === $latestRevision ) {
 					$this->errorReporter->dieError(

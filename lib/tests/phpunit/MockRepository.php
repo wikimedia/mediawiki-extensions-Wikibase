@@ -25,6 +25,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\HashSiteLinkStore;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
@@ -444,7 +445,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		try {
@@ -453,7 +454,9 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 			return false;
 		}
 
-		return $revision === null ? false : $revision->getRevisionId();
+		return $revision === null
+			? LatestRevisionIdResult::nonexistentEntity()
+			: LatestRevisionIdResult::concreteRevision( $revision->getRevisionId() );
 	}
 
 	/**

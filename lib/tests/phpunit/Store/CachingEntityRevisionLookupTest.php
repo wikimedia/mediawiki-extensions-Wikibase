@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Lib\Tests\MockRepository;
@@ -91,8 +92,14 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mock->putEntity( $item, 12 );
 
 		// make sure we get the new revision automatically
-		$revId = $lookup->getLatestRevisionId( $id );
-		$this->assertEquals( 12, $revId, 'new revision should be detected if verification is enabled' );
+		$latestRevisionIdResult = $this->extractConcreteRevision(
+			$lookup->getLatestRevisionId( $id )
+		);
+		$this->assertEquals(
+			12,
+			$latestRevisionIdResult,
+			'new revision should be detected if verification is enabled'
+		);
 
 		$rev = $lookup->getEntityRevision( $id );
 		$this->assertEquals( 12, $rev->getRevisionId(), 'new revision should be detected if verification is enabled' );
@@ -101,8 +108,11 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mock->removeEntity( $id );
 
 		// try to fetch it again
-		$revId = $lookup->getLatestRevisionId( $id );
-		$this->assertFalse( $revId, 'deletion should be detected if verification is enabled' );
+		$latestRevisionIdResult = $lookup->getLatestRevisionId( $id );
+		$this->assertNonexistentRevision(
+			$latestRevisionIdResult,
+			'deletion should be detected if verification is enabled'
+		);
 
 		$rev = $lookup->getEntityRevision( $id );
 		$this->assertNull( $rev, 'deletion should be detected if verification is enabled' );
@@ -128,7 +138,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mock->putEntity( $item, 12 );
 
 		// check that we are still getting the old revision
-		$revId = $lookup->getLatestRevisionId( $id );
+		$revId = $this->extractConcreteRevision( $lookup->getLatestRevisionId( $id ) );
 		$this->assertEquals( 11, $revId, 'new revision should be ignored if verification is disabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
@@ -138,7 +148,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mock->removeEntity( $id );
 
 		// try to fetch it again - should still be cached
-		$revId = $lookup->getLatestRevisionId( $id );
+		$revId = $this->extractConcreteRevision( $lookup->getLatestRevisionId( $id ) );
 		$this->assertEquals( 11, $revId, 'deletion should be ignored if verification is disabled' );
 
 		$rev = $lookup->getEntityRevision( $id );
@@ -168,7 +178,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup->entityUpdated( $rev12 );
 
 		// make sure we get the new revision now
-		$revId = $lookup->getLatestRevisionId( $id );
+		$revId = $this->extractConcreteRevision( $lookup->getLatestRevisionId( $id ) );
 		$this->assertEquals( 12, $revId, 'new revision should be detected after notification' );
 
 		$rev = $lookup->getEntityRevision( $id );
@@ -231,11 +241,39 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup->entityDeleted( $id );
 
 		// make sure we get the new revision now
-		$revId = $lookup->getLatestRevisionId( $id );
-		$this->assertFalse( $revId, 'deletion should be detected after notification' );
+		$revId = $this->assertNonexistentRevision(
+			$lookup->getLatestRevisionId( $id ),
+			'deletion should be detected after notification'
+		);
 
 		$rev = $lookup->getEntityRevision( $id );
 		$this->assertNull( $rev, 'deletion should be detected after notification' );
+	}
+
+	private function extractConcreteRevision( LatestRevisionIdResult $result ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Not a concrete revision given' );
+		};
+
+		return $result->onNonexistentEntity( $shouldNotBeCalled )
+			->onRedirect( $shouldNotBeCalled )
+			->onConcreteRevision( 'intval' )
+			->map();
+	}
+
+	private function assertNonexistentRevision( LatestRevisionIdResult $result, $message ) {
+		$shouldNotBeCalled = function () use ( $message ) {
+			$this->fail( $message );
+		};
+
+		return $result->onRedirect( $shouldNotBeCalled )
+			->onConcreteRevision( $shouldNotBeCalled )
+			->onNonexistentEntity(
+				function () {
+					$this->assertTrue( true );
+				}
+			)
+			->map();
 	}
 
 }

@@ -56,8 +56,19 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
+		$returnFalse = function () {
+			return false;
+		};
+		$returnTrue = function () {
+			return true;
+		};
+
 		try {
-			return $this->lookup->getLatestRevisionId( $entityId ) !== false;
+			$latestRevisionIdResult = $this->lookup->getLatestRevisionId( $entityId );
+			return $latestRevisionIdResult->onRedirect( $returnFalse )
+				->onNonexistentEntity( $returnFalse )
+				->onConcreteRevision( $returnTrue )
+				->map();
 		} catch ( EntityLookupException $ex ) {
 			throw $ex;
 		} catch ( \Exception $ex ) {

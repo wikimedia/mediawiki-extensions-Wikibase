@@ -183,26 +183,44 @@ abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
 	 * @param int $expected
 	 */
 	public function testGetLatestRevisionId( EntityId $id, $expected ) {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Should not be called' );
+		};
+
 		$lookup = $this->getEntityRevisionLookup();
 		$result = $lookup->getLatestRevisionId( $id );
+		$gotRevisionId = $result->onRedirect( $shouldNotBeCalled )
+			->onNonexistentEntity( $shouldNotBeCalled )
+			->onConcreteRevision( 'intval' )
+			->map();
 
 		$expected = $this->resolveLogicalRevision( $expected );
 
-		$this->assertInternalType( 'int', $result );
-		$this->assertEquals( $expected, $result );
+		$this->assertEquals( $expected, $gotRevisionId );
 
 		$entityRev = $lookup->getEntityRevision( $id );
 		$this->assertInstanceOf( EntityRevision::class, $entityRev );
 	}
 
 	public function testGetLatestRevisionForMissing() {
+		$shouldNotBeCalled = function () {
+			$this->fail( 'Should not be called' );
+		};
+
 		$lookup = $this->getEntityRevisionLookup();
 		$itemId = new ItemId( 'Q753' );
 
 		$result = $lookup->getLatestRevisionId( $itemId );
-		$expected = $this->resolveLogicalRevision( false );
+		$gotRevision = $result->onRedirect( $shouldNotBeCalled )
+			->onNonexistentEntity(
+				function () {
+					return 'non-existent';
+				}
+			)
+			->onConcreteRevision( $shouldNotBeCalled )
+			->map();
 
-		$this->assertEquals( $expected, $result );
+		$this->assertEquals( 'non-existent', $gotRevision );
 
 		$entityRev = $lookup->getEntityRevision( $itemId );
 		$this->assertNull( $entityRev );

@@ -120,7 +120,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
-	 * @return int|false
+	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
 		return $this->cacheRetrievingLookup->getLatestRevisionId( $entityId, $mode );
