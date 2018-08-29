@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44d0e32b_86b39390",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-08-29T08:05:06Z",
+      "side": 1,
+      "message": "this won\u0027t tokenize anything after the \u0027\u003d\u0027 except other \u0027\u003d\u0027.\nThis won\u0027t add much value over the existing statement_keywords\nif we really want to match untokenized (which I\u0027m not yet 100% sure that is what is asked) I much prefer reuse the statement_keywords field instead of re-adding the same terms again.",
+      "revId": "01daecd76f23d9652aa2a24e52bf0940f28c817d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
