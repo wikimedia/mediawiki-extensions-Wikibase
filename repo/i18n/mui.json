@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jawadywn"
+			"Jawadywn",
+			"Masjawad99"
 		]
 	},
 	"wikibase-edit": "robah",
 	"wikibase-add": "imbuh",
 	"wikibase-description-empty": "Katek gambaran",
+	"wikibase-sitelinks-special": "Situs laen",
 	"wikibase-statementview-rank-normal": "Peréngkat normal"
 }

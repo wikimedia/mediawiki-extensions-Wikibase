@@ -147,9 +147,11 @@
 	"wikibase-item-summary-wbcreate-new": "নতুন একটি আইটেম তৈরি হয়েছে",
 	"wikibase-item-summary-wbeditentity": "নতুন একটি আইটেম তৈরি হয়েছে",
 	"wikibase-item-summary-wbeditentity-create": "নতুন একটি আইটেম তৈরি হয়েছে",
+	"wikibase-item-summary-wbeditentity-create-item": "নতুন একটি আইটেম তৈরি হয়েছে",
 	"wikibase-item-summary-wbeditentity-update": "আইটেম পরিবর্তন করা হয়েছে",
 	"wikibase-property-summary-wbcreate-new": "নতুন বৈশিষ্ট্য তৈরি হয়েছে",
 	"wikibase-property-summary-wbeditentity-create": "নতুন বৈশিষ্ট্য তৈরি হয়েছে",
+	"wikibase-property-summary-wbeditentity-create-property": "নতুন বৈশিষ্ট্য তৈরি হয়েছে",
 	"wikibase-property-summary-wbeditentity-update": "বৈশিষ্ট্য পরিবর্তন করা হয়েছে",
 	"wikibase-property-summary-wbeditentity-override": "বৈশিষ্ট্য পরিষ্কার করা হয়েছে"
 }

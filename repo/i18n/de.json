@@ -27,7 +27,8 @@
 			"MGChecker",
 			"Predatorix",
 			"Pascalco",
-			"ToBeFree"
+			"ToBeFree",
+			"MisterSynergy"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -72,9 +73,9 @@
 	"wikibase-content-language-edit-not-recognized-language": "Der angegebene Sprachcode wurde nicht erkannt.",
 	"wikibase-diffview-reference": "Fundstelle",
 	"wikibase-diffview-rank": "Rang",
-	"wikibase-diffview-rank-preferred": "Vorrangig",
+	"wikibase-diffview-rank-preferred": "Bevorzugter Rang",
 	"wikibase-diffview-rank-normal": "Normaler Rang",
-	"wikibase-diffview-rank-deprecated": "Herabgestufter Rang",
+	"wikibase-diffview-rank-deprecated": "Missbilligter Rang",
 	"wikibase-diffview-qualifier": "Qualifikator",
 	"wikibase-diffview-label": "Bezeichnung",
 	"wikibase-diffview-alias": "Aliasse",

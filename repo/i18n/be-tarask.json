@@ -507,5 +507,6 @@
 	"apihelp-wbparsevalue-param-validate": "Ці правяраць дадаткова пададзеныя зьвесткі.",
 	"apihelp-wbparsevalue-param-values": "Значэньні для аналізу",
 	"apihelp-wbparsevalue-param-options": "Парамэтры, якія мае выкарыстоўваць парсэр. Падаюцца як JSON-аб’ект.",
-	"apihelp-wbparsevalue-example-1": "Апрацоўка звычайнага радку ў аб’ект StringValue."
+	"apihelp-wbparsevalue-example-1": "Апрацоўка звычайнага радку ў аб’ект StringValue.",
+	"apihelp-wbparsevalue-example-2": "Апрацаваць 1994-02-08 у аб’ект TimeValue з дакладнасьцю 9 (год)."
 }
