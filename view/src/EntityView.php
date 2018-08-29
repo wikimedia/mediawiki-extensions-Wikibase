@@ -10,11 +10,12 @@ use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\DataModel\Entity\EntityDocument.
- * For the Wikibase\DataModel\Entity\EntityDocument this basically is what the Parser is for WikitextContent.
+ * This class provides some help for EntityDocuments that are also Labels/Descriptions/AliasesProviders.
+ * If you want a simple interface instead see EntityDocumentView.
  *
  * @license GPL-2.0-or-later
  */
-abstract class EntityView {
+abstract class EntityView implements EntityDocumentView {
 
 	/**
 	 * @var TemplateFactory
