@@ -244,7 +244,7 @@ class EditEntity extends ModifyEntity {
 		$this->applyChangeOp( $changeOp, $entity );
 
 		$this->buildResult( $entity );
-		return $this->getSummary( $preparedParameters );
+		return $this->getSummary( $preparedParameters, $entity );
 	}
 
 	/**
@@ -252,14 +252,14 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return Summary
 	 */
-	private function getSummary( array $preparedParameters ) {
+	private function getSummary( array $preparedParameters, EntityDocument $entity ) {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?
 		$summary = $this->createSummary( $preparedParameters );
 		if ( isset( $preparedParameters['id'] ) xor ( isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] ) ) ) {
 			$summary->setAction( $preparedParameters[self::PARAM_CLEAR] === false ? 'update' : 'override' );
 		} else {
-			$summary->setAction( 'create' );
+			$summary->setAction( 'create-' . $entity->getType() );
 		}
 		return $summary;
 	}
