@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "466c45ae_cbf4cdae",
+        "filename": "view/src/EntityDocumentView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-08-29T08:11:31Z",
+      "side": 1,
+      "message": "Not sure how to make this clearer but this returns something like:\n\u003cspan class\u003d\"wikibase title\"\u003e.....\u003c/span\u003e\n\nand NOT what goes in \u003chead\u003e\u003ctitle\u003e....\u003c/title\u003e\u003c/head\u003e",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "80993ca3fc15b105bcd9b6543ea810714a0b2532",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
