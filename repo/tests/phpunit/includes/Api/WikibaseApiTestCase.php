@@ -61,7 +61,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		ApiTestCase::$users['wbeditor'] = self::$wbTestUser;
 
-		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->getUser() );
+		$user = self::$users['wbeditor']->getUser();
+		$user->clearInstanceCache();
+
+		$this->setMwGlobals( 'wgUser', $user );
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'property-create' => true,
 			'createpage' => true,
