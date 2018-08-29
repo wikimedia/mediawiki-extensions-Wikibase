@@ -22,6 +22,30 @@
       "revId": "80993ca3fc15b105bcd9b6543ea810714a0b2532",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c398180b_6cf1f092",
+        "filename": "view/src/EntityDocumentView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-08-29T08:33:57Z",
+      "side": 1,
+      "message": "It might be worth just expanding the phpdoc in the interface to clear up what it returns / examples.\nI guess the method name can remain though.",
+      "parentUuid": "466c45ae_cbf4cdae",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "80993ca3fc15b105bcd9b6543ea810714a0b2532",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
