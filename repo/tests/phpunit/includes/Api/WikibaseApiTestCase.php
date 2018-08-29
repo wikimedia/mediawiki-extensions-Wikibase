@@ -170,8 +170,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
-	 * @see doTestQueryExceptions in IndependentWikibaseApiTestCase
-	 *
 	 * Do the test for exceptions from Api queries.
 	 *
 	 * @param array $params Array of params for the API query.
