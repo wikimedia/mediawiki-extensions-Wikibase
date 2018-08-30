@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo;
 
+use Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 
@@ -27,11 +27,14 @@ class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getEntityIdFormatter
 	 *
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param Language $language
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
-	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
+	public function getEntityIdFormatter( Language $language ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
+		$labelDescriptionLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
 		return new EntityIdLabelFormatter( $labelDescriptionLookup );
 	}
 

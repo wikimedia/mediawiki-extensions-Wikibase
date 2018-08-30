@@ -5,6 +5,7 @@ namespace Wikibase\Lib;
 use Html;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
@@ -18,7 +19,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz
  */
-class DefaultEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
+class DefaultEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter implements EntityIdFormatter {
 
 	/**
 	 * @var EntityTitleLookup
