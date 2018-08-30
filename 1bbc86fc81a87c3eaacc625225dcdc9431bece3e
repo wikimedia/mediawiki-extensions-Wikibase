@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0b85f989_59d4965d",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-30T09:19:32Z",
+      "side": 1,
+      "message": "\u003e because this is OOP, i can extend it\n\nThe fact that you – technically – can does not mean you should, or are allowed to. This is a dark pattern and not how OOP is used in any of the Wikibase codebases. Making code believe it got an ItemId when it got something else (that also *behaves* differently) is not ok.",
+      "parentUuid": "c4998f10_1edcb51d",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 35
+      },
+      "revId": "1bbc86fc81a87c3eaacc625225dcdc9431bece3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "361863fb_ae03e530",
         "filename": "lib/includes/Store/CachingSiteLinkLookup.php",
         "patchSetId": 6
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Same reasoning as in the other place - in the spirit of OOP, if we delegate instantiation to a factory, we can treat it as ItemID everywhere else, but customize the class itself where needed.  See https://github.com/nyurik/OsmWikibase/tree/customPrefix/includes -- OsmItemId.php implementation",
       "parentUuid": "361863fb_ae03e530",
+      "range": {
+        "startLine": 82,
+        "startChar": 6,
+        "endLine": 82,
+        "endChar": 11
+      },
+      "revId": "1bbc86fc81a87c3eaacc625225dcdc9431bece3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b95c3b5f_62c10e4f",
+        "filename": "lib/includes/Store/CachingSiteLinkLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-08-30T09:19:32Z",
+      "side": 1,
+      "message": "This sounds like you are talking about an interface. I would agree then. But ItemId is not an interface. It\u0027s a concrete thing that gives concrete guarantees.",
+      "parentUuid": "3899af65_7e7e6262",
       "range": {
         "startLine": 82,
         "startChar": 6,
