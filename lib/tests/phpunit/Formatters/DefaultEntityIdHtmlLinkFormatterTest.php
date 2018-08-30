@@ -100,7 +100,7 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		];
 	}
 
-	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
+	private function getFormatter( $hasLabel, $exists, Term $term = null ) : DefaultEntityIdHtmlLinkFormatter {
 		if ( $hasLabel ) {
 			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
 		} else {
@@ -123,21 +123,21 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 				return $names[ $languageCode ];
 			} ) );
 
-		$entityIdHtmlLinkFormatter = new DefaultEntityIdHtmlLinkFormatter(
+		$formatter = new DefaultEntityIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$entityTitleLookup,
 			$languageNameLookup
 		);
 
-		return $entityIdHtmlLinkFormatter;
+		return $formatter;
 	}
 
 	/**
 	 * @dataProvider formatProvider
 	 */
 	public function testFormat( $expectedRegex, $hasLabel = true, $exists = true ) {
-		$entityIdHtmlLinkFormatter = $this->getFormatter( $hasLabel, $exists );
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q42' ) );
+		$formatter = $this->getFormatter( $hasLabel, $exists );
+		$result = $formatter->formatEntityId( new ItemId( 'Q42' ) );
 
 		$this->assertRegExp( $expectedRegex, $result );
 	}
@@ -200,9 +200,9 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @dataProvider formatProvider_fallback
 	 */
 	public function testFormat_fallback( $expectedRegex, Term $term ) {
-		$entityIdHtmlLinkFormatter = $this->getFormatter( true, true, $term );
+		$formatter = $this->getFormatter( true, true, $term );
 
-		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q42' ) );
+		$result = $formatter->formatEntityId( new ItemId( 'Q42' ) );
 
 		$this->assertRegExp( $expectedRegex, $result );
 	}

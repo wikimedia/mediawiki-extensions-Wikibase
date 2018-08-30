@@ -387,7 +387,7 @@ return call_user_func( function() {
 						$formatter = new ControlledFallbackEntityIdFormatter(
 							$maxEntityId,
 							$factory->newItemIdHtmlLinkFormatter( $options ),
-							$factory->newEntityIdHtmlLinkFormatter( $options ),
+							$factory->newDefaultEntityIdHtmlLinkFormatter( $options ),
 							$statsdDataFactory,
 							'wikibase.repo.wb_terms.newItemIdFormatter.'
 						);

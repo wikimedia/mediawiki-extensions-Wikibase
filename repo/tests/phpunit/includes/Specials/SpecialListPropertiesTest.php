@@ -19,9 +19,9 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialListProperties
- * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialListProperties
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Database
  * @group SpecialPage
@@ -110,8 +110,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 				LanguageFallbackChainFactory::FALLBACK_ALL
 			)
 		);
+		// TODO Does fallback chain need to be influenceable for the entityIdFormatter?
 		$entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
-			$labelDescriptionLookup
+			$language
 		);
 		$specialPage = new SpecialListProperties(
 			$this->getDataTypeFactory(),

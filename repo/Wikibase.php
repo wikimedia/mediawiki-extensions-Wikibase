@@ -903,7 +903,7 @@ call_user_func( function() {
 				->newFromLanguage( $wikibaseRepo->getUserLanguage() )
 		);
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
-			->getEntityIdFormatter( $labelDescriptionLookup );
+			->getEntityIdFormatter( $wikibaseRepo->getUserLanguage() );
 		return new Wikibase\Repo\Specials\SpecialListProperties(
 			$wikibaseRepo->getDataTypeFactory(),
 			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
