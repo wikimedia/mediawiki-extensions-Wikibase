@@ -472,7 +472,7 @@ class WikibaseValueFormatterBuilders {
 
 	public function newEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
 		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-		return new EntityIdHtmlLinkFormatter(
+		return new DefaultEntityIdHtmlLinkFormatter(
 			$lookup,
 			$this->entityTitleLookup,
 			$this->languageNameLookup
