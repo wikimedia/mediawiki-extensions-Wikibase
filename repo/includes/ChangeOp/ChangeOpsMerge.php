@@ -129,13 +129,6 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * @return StatementChangeOpFactory
-	 */
-	private function getStatementChangeOpFactory() {
-		return $this->changeOpFactoryProvider->getStatementChangeOpFactory();
-	}
-
-	/**
 	 * @return SiteLinkChangeOpFactory
 	 */
 	private function getSiteLinkChangeOpFactory() {
