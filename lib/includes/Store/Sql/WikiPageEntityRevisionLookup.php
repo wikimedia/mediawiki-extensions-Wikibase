@@ -163,7 +163,15 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 		$row = $rows[$entityId->getSerialization()];
 
-		if ( $row && $row->page_latest && !$row->page_is_redirect ) {
+		if ( $row && $row->page_latest ) {
+			if ( $row->page_is_redirect ) {
+				/** @var EntityRedirect $redirect */
+				list( , $redirect ) = $this->loadEntity( $row, $mode );
+				return LatestRevisionIdResult::redirect(
+					(int)$row->page_latest,
+					$redirect->getTargetId()
+				);
+			}
 			return LatestRevisionIdResult::concreteRevision( (int)$row->page_latest );
 		}
 
