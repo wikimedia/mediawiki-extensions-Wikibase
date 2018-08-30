@@ -147,7 +147,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 		// If we do not need to verify the revision, and the revision isn't
 		// needed for an update, we can get the revision from the cached object.
 		// XXX: whether this is actually quicker depends on the cache.
-		if ( ! ( $this->shouldVerifyRevision || $mode === self::LATEST_FROM_MASTER ) ) {
+		if ( !$this->shouldVerifyRevision && $mode !== self::LATEST_FROM_MASTER ) {
 			$entityRevision = $this->cache->get( $entityId );
 
 			if ( $entityRevision ) {
