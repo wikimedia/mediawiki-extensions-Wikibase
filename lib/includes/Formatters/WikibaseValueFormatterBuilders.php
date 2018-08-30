@@ -237,7 +237,7 @@ class WikibaseValueFormatterBuilders {
 	public function newEntityIdFormatter( $format, FormatterOptions $options ) {
 		if ( $this->isHtmlFormat( $format ) && $this->entityTitleLookup ) {
 			return new EntityIdValueFormatter(
-				$this->newEntityIdHtmlLinkFormatter( $options )
+				$this->newDefaultEntityIdHtmlLinkFormatter( $options )
 			);
 		} elseif ( $format === SnakFormatter::FORMAT_WIKI && $this->entityTitleLookup ) {
 			return new EntityIdValueFormatter(
@@ -470,7 +470,7 @@ class WikibaseValueFormatterBuilders {
 		}
 	}
 
-	public function newEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
+	public function newDefaultEntityIdHtmlLinkFormatter( FormatterOptions $options ) {
 		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new DefaultEntityIdHtmlLinkFormatter(
 			$lookup,
