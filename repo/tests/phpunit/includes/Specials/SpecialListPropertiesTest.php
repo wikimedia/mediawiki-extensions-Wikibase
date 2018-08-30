@@ -19,9 +19,9 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialListProperties
- * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialListProperties
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Database
  * @group SpecialPage
@@ -111,7 +111,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			)
 		);
 		$entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
-			$labelDescriptionLookup
+			$language
 		);
 		$specialPage = new SpecialListProperties(
 			$this->getDataTypeFactory(),

@@ -245,6 +245,15 @@ class EntityTypeDefinitions {
 
 	/**
 	 * @return callable[] An array mapping entity type identifiers
+	 * to callables instantiating EntityHtmlLinkFormatter objects
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getEntityIdHtmlLinkFormatterCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-id-html-link-formatter-callback' );
+	}
+
+	/**
+	 * @return callable[] An array mapping entity type identifiers
 	 * to callables instantiating EntityReferenceExtractor objects
 	 * Not guaranteed to contain all entity types.
 	 */

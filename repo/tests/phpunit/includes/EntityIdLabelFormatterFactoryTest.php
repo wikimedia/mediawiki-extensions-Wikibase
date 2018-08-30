@@ -2,14 +2,15 @@
 
 namespace Wikibase\Repo\Tests;
 
+use Language;
 use PHPUnit4And6Compat;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 
 /**
- * @covers Wikibase\Repo\EntityIdLabelFormatterFactory
+ * @covers \Wikibase\Repo\EntityIdLabelFormatterFactory
  *
  * @group ValueFormatters
  * @group Wikibase
@@ -17,7 +18,7 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityIdLabelFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
+class EntityIdLabelFormatterFactoryTest extends TestCase {
 	use PHPUnit4And6Compat;
 
 	private function getFormatterFactory() {
@@ -33,7 +34,7 @@ class EntityIdLabelFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetEntityIdFormatter() {
 		$factory = $this->getFormatterFactory();
 
-		$formatter = $factory->getEntityIdFormatter( $this->getMock( LabelDescriptionLookup::class ) );
+		$formatter = $factory->getEntityIdFormatter( Language::factory( 'en' ) );
 		$this->assertInstanceOf( EntityIdFormatter::class, $formatter );
 	}
 
