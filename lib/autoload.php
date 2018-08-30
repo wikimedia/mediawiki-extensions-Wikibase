@@ -28,6 +28,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\DataTypeDefinitions' => __DIR__ . '/includes/DataTypeDefinitions.php',
 	'Wikibase\\Lib\\DataTypeFactory' => __DIR__ . '/includes/DataTypeFactory.php',
 	'Wikibase\\Lib\\DataValue\\UnmappedEntityIdValue' => __DIR__ . '/includes/DataValue/UnmappedEntityIdValue.php',
+	'Wikibase\\Lib\\DefaultEntityIdHtmlLinkFormatter' => __DIR__ . '/includes/Formatters/DefaultEntityIdHtmlLinkFormatter.php',
 	'Wikibase\\Lib\\DifferenceContentLanguages' => __DIR__ . '/includes/DifferenceContentLanguages.php',
 	'Wikibase\\Lib\\DispatchingSnakFormatter' => __DIR__ . '/includes/Formatters/DispatchingSnakFormatter.php',
 	'Wikibase\\Lib\\EntityIdHtmlLinkFormatter' => __DIR__ . '/includes/Formatters/EntityIdHtmlLinkFormatter.php',
