@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ninjastrikers",
-			"9.sinistra"
+			"9.sinistra",
+			"Dr Lotus Black"
 		]
 	},
 	"tooltip-t-wikibase": "ဒေတာအချက်အလက်နှင့် ချိတ်ဆက်ရန်လင့်ခ်",
@@ -28,5 +29,6 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} တည်းဖြတ်မှုများ",
 	"wikibase-replicationnote": "ပြောင်းလဲမှုများကို ဝီကီများအားလုံးတွင် တွေ့မြင်နိုင်ရန်အတွက် မိနစ်များစွာ ကြာမြင့်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။",
 	"wikibase-pageinfo-entity-usage": "ဤစာမျက်နှာတွင် အသုံးပြုထားသော {{WBREPONAME}} များ",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "ဖော်ပြချက်: $1",
 	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်"
 }

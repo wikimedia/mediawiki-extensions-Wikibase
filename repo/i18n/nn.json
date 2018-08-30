@@ -10,18 +10,22 @@
 		]
 	},
 	"wikibase-desc": "Strukturert datalager",
+	"wikibase-entity": "eining",
 	"wikibase-entity-item": "element",
 	"wikibase-entity-property": "eigenskap",
 	"wikibase-entity-query": "spørjing",
 	"wikibase-edit": "endre",
 	"wikibase-save": "lagre",
+	"wikibase-publish": "publiser",
 	"wikibase-cancel": "avbryt",
 	"wikibase-add": "legg til",
 	"wikibase-addqualifier": "legg til kvalifikator",
 	"wikibase-addreference": "legg til referanse",
 	"wikibase-save-inprogress": "Lagrar…",
+	"wikibase-publish-inprogress": "Publiserer …",
 	"wikibase-remove-inprogress": "Fjernar…",
-	"wikibase-statementlistview-add": "legg til",
+	"wikibase-statementlistview-add": "legg til verdi",
+	"wikibase-statementlistview-add-tooltip": "Legg til ein ny verdi",
 	"wikibase-statementgrouplistview-add": "legg til utsegn",
 	"wikibase-statementgrouplistview-add-tooltip": "Legg til ei ny utsegn",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "På fleire språk",
@@ -242,5 +246,6 @@
 	"content-model-wikibase-property": "Wikibase-eigenskap",
 	"content-model-wikibase-query": "Wikibase-spørjing",
 	"right-property-create": "Oppretta eigenskapar",
-	"action-property-create": "oppretta eigenskapar"
+	"action-property-create": "oppretta eigenskapar",
+	"apihelp-wbmergeitems-param-fromid": "ID-en det vert fletta frå"
 }
