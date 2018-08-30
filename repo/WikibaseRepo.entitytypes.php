@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -171,6 +172,16 @@ return [
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
+		'entity-id-html-link-formatter-callback' => function() {
+			$repo = WikibaseRepo::getDefaultInstance();
+			$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
+			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $repo->getUserLanguage() );
+			return new DefaultEntityIdHtmlLinkFormatter(
+				$languageLabelLookup,
+				$repo->getEntityTitleLookup(),
+				$repo->getLanguageNameLookup()
+			);
+		},
 		'entity-reference-extractor-callback' => function() {
 			return new EntityReferenceExtractorCollection( [
 				new SiteLinkBadgeItemReferenceExtractor(),
@@ -275,6 +286,16 @@ return [
 		},
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
+		},
+		'entity-id-html-link-formatter-callback' => function() {
+			$repo = WikibaseRepo::getDefaultInstance();
+			$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
+			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $repo->getUserLanguage() );
+			return new DefaultEntityIdHtmlLinkFormatter(
+				$languageLabelLookup,
+				$repo->getEntityTitleLookup(),
+				$repo->getLanguageNameLookup()
+			);
 		},
 		'entity-reference-extractor-callback' => function() {
 			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getLocalItemUriParser() );
