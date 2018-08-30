@@ -1717,7 +1717,8 @@ class WikibaseRepo {
 	public function getEntityIdHtmlLinkFormatterFactory() {
 		return new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
-			$this->getLanguageNameLookup()
+			$this->getLanguageNameLookup(),
+			$this->entityTypeDefinitions->getEntityIdHtmlLinkFormatterCallbacks()
 		);
 	}
 
