@@ -451,7 +451,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 		try {
 			$revision = $this->getEntityRevision( $entityId, 0, $mode );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
-			return false;
+			return LatestRevisionIdResult::redirect( $e->getRevisionId(), $e->getRedirectTargetId() );
 		}
 
 		return $revision === null

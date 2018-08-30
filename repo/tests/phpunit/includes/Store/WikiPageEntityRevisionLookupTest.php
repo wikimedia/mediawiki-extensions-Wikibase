@@ -209,4 +209,37 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
 	}
 
+	public function testGetLatestRevisionId_Redirect_ReturnsRedirectResultWithCorrectData() {
+		$entityId = new ItemId( 'Q1' );
+		$redirectsTo = new ItemId( 'Q2' );
+		$entityRedirect = new EntityRedirect( $entityId, $redirectsTo );
+
+		$redirectRevisionId = self::storeTestRedirect( $entityRedirect );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			MediaWikiServices::getInstance()->getRevisionStore(),
+			MediaWikiServices::getInstance()->getBlobStore(),
+			false
+		);
+
+		$shouldFail = function () {
+			$this->fail( 'Expecting redirect revision result' );
+		};
+
+		$latestRevisionIdResult = $lookup->getLatestRevisionId( $entityId );
+		$gotRevisionId = $latestRevisionIdResult->onConcreteRevision( $shouldFail )
+			->onNonexistentEntity( $shouldFail )
+			->onRedirect(
+				function ( $revisionId, $gotRedirectsTo ) use ( $redirectsTo ) {
+					$this->assertEquals( $redirectsTo, $gotRedirectsTo );
+					return $revisionId;
+				}
+			)
+			->map();
+
+		$this->assertEquals( $redirectRevisionId, $gotRevisionId );
+	}
+
 }
