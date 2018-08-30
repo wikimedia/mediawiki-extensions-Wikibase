@@ -2,16 +2,18 @@
 
 namespace Wikibase\Repo\Tests;
 
+use Language;
 use PHPUnit4And6Compat;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 
 /**
- * @covers Wikibase\Repo\EntityIdHtmlLinkFormatterFactory
+ * @covers \Wikibase\Repo\EntityIdHtmlLinkFormatterFactory
  *
  * @group ValueFormatters
  * @group Wikibase
@@ -19,13 +21,13 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityIdHtmlLinkFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
+class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 	use PHPUnit4And6Compat;
 
 	private function getFormatterFactory() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
@@ -44,8 +46,37 @@ class EntityIdHtmlLinkFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetEntityIdFormatter() {
 		$factory = $this->getFormatterFactory();
 
-		$formatter = $factory->getEntityIdFormatter( $this->getMock( LabelDescriptionLookup::class ) );
+		$formatter = $factory->getEntityIdFormatter( Language::factory( 'en' ) );
 		$this->assertInstanceOf( EntityIdFormatter::class, $formatter );
+		$this->assertInstanceOf( DispatchingEntityIdHtmlLinkFormatter::class, $formatter );
+	}
+
+	public function testPassesLanguageToFormatterCallbacks() {
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
+
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
+		$language = Language::factory( 'en' );
+
+		$callbackMock = $this->getMock( \stdClass::class, [ '__invoke' ] );
+		$callbackMock->expects( $this->once() )
+			->method( '__invoke' )
+			->willReturnCallback(
+				function ( $passedLanguage ) use ( $language ) {
+					$this->assertSame( $language, $passedLanguage );
+					return $this->createMock( EntityIdFormatter::class );
+				}
+			);
+
+		$factory = new EntityIdHtmlLinkFormatterFactory(
+			$titleLookup,
+			$languageNameLookup,
+			[ 'foo' => $callbackMock ]
+		);
+
+		$factory->getEntityIdFormatter( $language );
 	}
 
 }

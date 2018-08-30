@@ -1717,7 +1717,8 @@ class WikibaseRepo {
 	public function getEntityIdHtmlLinkFormatterFactory() {
 		return new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
-			$this->getLanguageNameLookup()
+			$this->getLanguageNameLookup(),
+			$this->entityTypeDefinitions->getEntityIdHtmlLinkFormatterCallbacks()
 		);
 	}
 
@@ -1923,7 +1924,7 @@ class WikibaseRepo {
 		);
 
 		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();
-		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
+		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
 
 		$formatterFactory = $this->getSnakFormatterFactory();
 		$detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
