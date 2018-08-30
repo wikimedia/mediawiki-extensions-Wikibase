@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use PHPUnit\Framework\TestCase;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -23,7 +24,9 @@ use Wikibase\Lib\Store\StorageException;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MockRepositoryTest extends \MediaWikiTestCase {
+class MockRepositoryTest extends TestCase {
+
+	use \PHPUnit4And6Compat;
 
 	/**
 	 * @var MockRepository|null
@@ -254,7 +257,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$links = $this->repo->getLinks( $numericIds, $siteIds, $pageNames );
 
-		$this->assertArrayEquals( $expectedLinks, $links );
+		$this->assertEquals( $expectedLinks, $links );
 	}
 
 	public function provideGetEntities() {
@@ -328,7 +331,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		/** @var Item[]|null[] $items */
 		$items = $this->repo->getEntities( $itemIds );
 
-		$this->assertType( 'array', $items, 'return value' );
+		$this->assertInternalType( 'array', $items, 'return value' );
 
 		// extract map of entity IDs to label arrays.
 		$actualLabels = [];
@@ -352,7 +355,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 				$this->assertNull( $actualLabels[$id] );
 			} else {
 				// check that the entity contains the expected labels
-				$this->assertArrayEquals( $labels, $actualLabels[$id] );
+				$this->assertEquals( $labels, $actualLabels[ $id ] );
 			}
 		}
 	}
@@ -672,6 +675,32 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$this->setExpectedException( EntityRedirectLookupException::class );
 		$mock->getRedirectForEntityId( $q77 );
+	}
+
+	public function testGetLatestRevisionId_Redirect_ReturnsRedirectResponseWithCorrectData() {
+		$mock = new MockRepository();
+		$entityId = new ItemId( 'Q55' );
+		$redirectsTo = new ItemId( 'Q5' );
+		$revisionId = 5;
+		$mock->putRedirect( new EntityRedirect( $entityId, $redirectsTo ), $revisionId );
+
+		$latestRevisionIdResult = $mock->getLatestRevisionId( $entityId );
+
+		$failTest = function () {
+			$this->fail( 'Redirect was expected' );
+		};
+		list( $gotRevisionId, $gotTargetId ) = $latestRevisionIdResult
+			->onNonexistentEntity( $failTest )
+			->onConcreteRevision( $failTest )
+			->onRedirect(
+				function ( $revisionId, $targetId ) {
+					return [ $revisionId, $targetId ];
+				}
+			)
+			->map();
+
+		$this->assertEquals( $revisionId, $gotRevisionId );
+		$this->assertEquals( $redirectsTo, $gotTargetId );
 	}
 
 }
