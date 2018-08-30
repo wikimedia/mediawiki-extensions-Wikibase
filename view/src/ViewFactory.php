@@ -2,6 +2,7 @@
 
 namespace Wikibase\View;
 
+use Language;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use SiteLookup;
@@ -207,7 +208,7 @@ class ViewFactory {
 			$this->templateFactory,
 			$this->siteLookup->getSites(),
 			$editSectionGenerator,
-			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
+			$this->plainTextIdFormatterFactory->getEntityIdFormatter( Language::factory( $languageCode ) ),
 			$this->languageNameLookup,
 			$this->numberLocalizer,
 			$this->badgeItems,
@@ -312,7 +313,7 @@ class ViewFactory {
 			$labelDescriptionLookup
 		);
 		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
-			$labelDescriptionLookup
+			Language::factory( $languageCode )
 		);
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
