@@ -7,8 +7,8 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityTermsView;
-use Wikibase\View\EntityView;
 
 /**
  * @group Wikibase
@@ -63,7 +63,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 			$entityTermsView
 		);
 
-		$this->assertInstanceOf( EntityView::class, $entityView );
+		$this->assertInstanceOf( EntityDocumentView::class, $entityView );
 	}
 
 	/**
