@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aa55758c_252e2aff",
+        "filename": "client/resources/wikibase.client.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-08-31T17:05:16Z",
+      "side": 1,
+      "message": "Thanks. Yeah, I think that would also make the IE fallback more tolerable. Done.",
+      "parentUuid": "fbfdbf73_3061c394",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "877799ecfde5bb11b9b910c7eb2baee909f4d0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4fcccd5_672e4e4c",
         "filename": "client/resources/wikibase.client.css",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2018-08-31T12:29:01Z",
       "side": 1,
       "message": "Did you forgot \"filter: none\" here?",
+      "revId": "877799ecfde5bb11b9b910c7eb2baee909f4d0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9bee88f8_c1760a7f",
+        "filename": "client/resources/wikibase.client.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-08-31T17:05:16Z",
+      "side": 1,
+      "message": "Indeed. Fixed.",
+      "parentUuid": "f4fcccd5_672e4e4c",
       "revId": "877799ecfde5bb11b9b910c7eb2baee909f4d0a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
