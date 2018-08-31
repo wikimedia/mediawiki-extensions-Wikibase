@@ -26,8 +26,10 @@
 
 .wb-langlinks-link > a:link:before,
 .wb-langlinks-link > a:visited:before {
-	/* @embed */
 	background-image: url( images/WBC-Asset-Pencil.png );
+	-webkit-filter: grayscale( 1 );
+	filter: grayscale( 1 );
+	opacity: 0.6;
 }
 
 .wb-langlinks-link > a:hover {
@@ -35,6 +37,7 @@
 }
 
 .wb-langlinks-link > a:hover:before {
-	/* @embed */
-	background-image: url( images/WBC-Asset-Pencil-Hover.png );
+	-webkit-filter: none;
+	filter: none;
+	opacity: 1;
 }
