@@ -10,8 +10,8 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityTermsView;
-use Wikibase\View\EntityView;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
@@ -80,7 +80,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$languageFallbackChain = new LanguageFallbackChain( [] );
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$entityTermsView = $this->getMock( EntityTermsView::class );
-		$entityView = $this->getMockBuilder( EntityView::class )
+		$entityView = $this->getMockBuilder( EntityDocumentView::class )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
 

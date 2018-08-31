@@ -39,9 +39,9 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
 use Wikibase\View\EntityTermsView;
-use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -294,10 +294,10 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityView
+	 * @return EntityDocumentView
 	 */
 	private function getEntityView() {
-		$entityView = $this->getMockBuilder( EntityView::class )
+		$entityView = $this->getMockBuilder( EntityDocumentView::class )
 			->setMethods( [
 				'getTitleHtml',
 				'getHtml',
