@@ -1,0 +1,19 @@
+{
+	"name": "wikibase/javascript-api",
+	"description": "DEPRECATED: JavaScript client for the Wikibase Repository web API",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "H. Snater",
+			"homepage": "http://www.snater.com"
+		},
+		{
+			"name": "Adrian Lang",
+			"email": "adrian.lang@wikimedia.de"
+		}
+	],
+	"support": {
+		"issues": "https://phabricator.wikimedia.org/",
+		"irc": "irc://irc.freenode.net/wikidata"
+	}
+}
