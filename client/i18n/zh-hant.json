@@ -62,7 +62,7 @@
 	"apihelp-query+wikibase-summary": "取得有關 Wikibase 客戶端以及關聯 Wikibase 儲存庫的資訊。",
 	"apihelp-query+wikibase-example": "取得有關 Wikibase 客戶端以及儲存庫的 URL 路徑以及其它資訊。",
 	"apihelp-query+wikibase-param-prop": "要取得的屬性：\n;<kbd>url</kbd>：基本 URL、Wikibase 儲存庫的腳本路徑、以及條目路徑。\n;<kbd>siteid</kbd>： 此網站的站台 id。",
-	"wikibase-after-page-move": "您的移動現應是[對應到{{WBREPONAME}}項目的 $1] 語言連結。我們請您確認這是否有發生。",
+	"wikibase-after-page-move": "您的移動現應是[$1 對應到{{WBREPONAME}}項目]的語言連結。我們請您確認這是否有發生。",
 	"wikibase-after-page-move-queued": "與此頁面關聯的 [$1 {{WBREPONAME}} 項目] 將會於稍後自動更新。 請注意這不代表會立即更新。",
 	"wikibase-after-page-delete": "至此頁面的連結應從[相關{{WBREPONAME}}項目 $1 ]中移除。我們請您確認這是否有發生。",
 	"wikibase-after-page-delete-queued": "與此頁面關聯的 [$1 {{WBREPONAME}} 項目] 將會於稍後自動更新。 請注意這不代表會立即更新。",

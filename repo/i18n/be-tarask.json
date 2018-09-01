@@ -510,5 +510,6 @@
 	"apihelp-wbparsevalue-example-1": "Апрацоўка звычайнага радку ў аб’ект StringValue.",
 	"apihelp-wbparsevalue-example-2": "Апрацаваць 1994-02-08 у аб’ект TimeValue з дакладнасьцю 9 (год).",
 	"apihelp-wbparsevalue-example-3": "Апрацоўка 1994-02-08 у аб’ект TimeValue з дакладнасьцю 14 (сэкунда) з уключанай праверкай, што прыводзіць да памылкі праверкі",
-	"apihelp-wbremoveclaims-description": "Выдаляе сьцьверджаньні Вікібазы."
+	"apihelp-wbremoveclaims-description": "Выдаляе сьцьверджаньні Вікібазы.",
+	"apihelp-wbremoveclaims-summary": "Выдаляе сьцьверджаньні Вікібазы."
 }
