@@ -394,6 +394,7 @@ class EntityUsageTable {
 	 * @param string[] $idStrings
 	 *
 	 * @return string[]
+	 * @suppress SecurityCheck-SQLInjection false positive
 	 */
 	private function getUsedEntityIdStrings( array $idStrings ) {
 		// Note: We need to use one (sub)query per entity here, per T116404
