@@ -23,6 +23,7 @@ use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
 use Wikibase\Repo\Search\Elastic\EntityResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
@@ -56,7 +57,7 @@ class ShowSearchHitHandler {
 	 */
 	private $entityLookup;
 	/**
-	 * @var DefaultEntityLinkFormatter
+	 * @var EntityLinkFormatter
 	 */
 	private $linkFormatter;
 
@@ -65,7 +66,7 @@ class ShowSearchHitHandler {
 		LanguageFallbackChain $languageFallbackChain,
 		EntityIdLookup $entityIdLookup,
 		EntityLookup $entityLookup,
-		DefaultEntityLinkFormatter $linkFormatter
+		EntityLinkFormatter $linkFormatter
 	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
