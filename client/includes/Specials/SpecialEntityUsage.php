@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Specials;
 
+use HtmlArmor;
 use HTMLForm;
 use Html;
 use Linker;
@@ -173,9 +174,10 @@ class SpecialEntityUsage extends QueryPage {
 			);
 		}
 
+		$linkText = $wgContLang->convert( htmlspecialchars( $title->getPrefixedText() ) );
 		return $this->getLinkRenderer()->makeLink(
 			$title,
-			$wgContLang->convert( $title->getPrefixedText() )
+			new HtmlArmor( $linkText )
 		) . $this->msg( 'colon-separator' )->escaped() . $this->formatAspects( $row->aspects );
 	}
 
