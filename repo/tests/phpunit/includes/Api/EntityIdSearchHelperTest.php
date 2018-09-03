@@ -140,6 +140,11 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				$defaultLimit,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
 			],
+			'Case insensitive' => [
+				strtolower( self::EXISTING_LOCAL_ITEM ),
+				$defaultLimit,
+				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
+			],
 		];
 	}
 

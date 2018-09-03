@@ -112,19 +112,18 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 * @return EntityId[]
 	 */
 	private function getEntityIdsMatchingSearchTerm( $term, $entityType ) {
-		try {
-			$entityId = $this->idParser->parse( trim( $term ) );
-		} catch ( EntityIdParsingException $ex ) {
-			// Extract the last (ASCII-only) word. This covers URIs and input strings like "(Q42)".
-			if ( !preg_match( '/.*(\b\w{2,})/s', $term, $matches ) ) {
-				return [];
-			}
-
+		$entityId = null;
+		foreach ( $this->getEntityIdCandidatesForSearchTerm( $term ) as $candidate ) {
 			try {
-				$entityId = $this->idParser->parse( $matches[1] );
+				$entityId = $this->idParser->parse( $candidate );
+				break;
 			} catch ( EntityIdParsingException $ex ) {
-				return [];
+				continue;
 			}
+		}
+
+		if ( $entityId === null ) {
+			return [];
 		}
 
 		if ( $entityId->getEntityType() !== $entityType ) {
@@ -132,6 +131,32 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 		}
 
 		return $this->getMatchingIdsIncludingPrefixes( $entityId );
+	}
+
+	/**
+	 * Returns a generator for candidates of entity ID serializations from a search term.
+	 * Callers should attempt to parse each candidate in turn
+	 * and use the first one that does not result in an {@link EntityIdParsingException}.
+	 *
+	 * @param string $term
+	 * @return \Generator
+	 */
+	private function getEntityIdCandidatesForSearchTerm( $term ) {
+		// Trim whitespace.
+		$term = trim( $term );
+		yield $term;
+
+		// Uppercase the search term. Entity IDs are *usually* all-uppercase,
+		// and we want to allow case-insensitive search for them.
+		$term = strtoupper( $term );
+		yield $term;
+
+		// Extract the last (ASCII-only) word. This covers URIs and input strings like "(Q42)".
+		// Note that this only supports single-word IDs and not IDs like "L1-F1".
+		if ( preg_match( '/.*(\b\w{2,})/s', $term, $matches ) ) {
+			$term = $matches[1];
+			yield $term;
+		}
 	}
 
 	/**
