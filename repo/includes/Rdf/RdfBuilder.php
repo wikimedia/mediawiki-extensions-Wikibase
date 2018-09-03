@@ -81,6 +81,12 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $pageProps;
 
 	/**
+	 * Entity-specific RDF builders to apply when building RDF for an entity.
+	 * @var EntityRdfBuilder[]
+	 */
+	private $entityRdfBuilders;
+
+	/**
 	 * @param SiteList $sites
 	 * @param RdfVocabulary $vocabulary
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
@@ -121,15 +127,13 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this->builders[] = $this->newFullStatementRdfBuilder();
 		}
 
-		$entityRdfBuilders = $entityRdfBuilderFactory->getEntityRdfBuilders(
+		$this->entityRdfBuilders = $entityRdfBuilderFactory->getEntityRdfBuilders(
 			$flavor,
 			$vocabulary,
 			$writer,
 			$this,
 			$dedupeBag
 		);
-
-		$this->builders = array_merge( $this->builders, $entityRdfBuilders );
 	}
 
 	/**
@@ -387,6 +391,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	public function addEntity( EntityDocument $entity ) {
 		$this->addEntityMetaData( $entity );
 
+		$type = $entity->getType();
+		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
+			$this->entityRdfBuilders[$type]->addEntity( $entity );
+		}
+
 		foreach ( $this->builders as $builder ) {
 			$builder->addEntity( $entity );
 		}
@@ -446,6 +455,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	public function addEntityStub( EntityDocument $entity ) {
 		$this->addEntityMetaData( $entity );
+
+		$type = $entity->getType();
+		if ( !empty( $this->entityRdfBuilders[$type] ) ) {
+			$this->entityRdfBuilders[$type]->addEntityStub( $entity );
+		}
 
 		foreach ( $this->builders as $builder ) {
 			$builder->addEntityStub( $entity );

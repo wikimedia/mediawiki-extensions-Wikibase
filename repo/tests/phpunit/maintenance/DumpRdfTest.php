@@ -212,23 +212,23 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		$dumpScript->execute();
 
 		$expectedLog = file_get_contents( $expectedLogFile );
-		$expectedOut = file_get_contents( $expectedOutFile );
+		$expectedOut = explode( "\n", $this->fixLineEndings( file_get_contents( $expectedOutFile ) ) );
+		sort( $expectedOut );
 
-		$actualOut = file_get_contents( $outFileName );
+		$actualOut = $this->fixLineEndings( file_get_contents( $outFileName ) );
 		$actualOut = preg_replace(
 			'/<http:\/\/wikiba.se\/ontology-beta#Dump> <http:\/\/schema.org\/dateModified> "[^"]+"/',
 			"<http://wikiba.se/ontology-beta#Dump> <http://schema.org/dateModified> \"2015-01-01T00:00:00Z\"",
 			$actualOut
 		);
+		$actualOut = explode( "\n", $actualOut );
+		sort( $actualOut );
 
 		$this->assertEquals(
 			$this->fixLineEndings( $expectedLog ),
 			$this->fixLineEndings( file_get_contents( $logFileName ) )
 		);
-		$this->assertEquals(
-			$this->fixLineEndings( $expectedOut ),
-			$this->fixLineEndings( $actualOut )
-		);
+		$this->assertEquals( $expectedOut, $actualOut );
 	}
 
 	/**
