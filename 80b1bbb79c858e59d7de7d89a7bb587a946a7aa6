@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ebb0d0f_d41cd569",
+        "filename": "repo/includes/Api/EntityIdSearchHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-03T13:25:22Z",
+      "side": 1,
+      "message": "I considered merging this into one line, like\n\n yield $term \u003d trim( $term );\n\nbut in the end that felt too C-ish to me :) what do you think?",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 14
+      },
+      "revId": "80b1bbb79c858e59d7de7d89a7bb587a946a7aa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
