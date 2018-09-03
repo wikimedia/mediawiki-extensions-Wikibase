@@ -511,5 +511,7 @@
 	"apihelp-wbparsevalue-example-2": "Апрацаваць 1994-02-08 у аб’ект TimeValue з дакладнасьцю 9 (год).",
 	"apihelp-wbparsevalue-example-3": "Апрацоўка 1994-02-08 у аб’ект TimeValue з дакладнасьцю 14 (сэкунда) з уключанай праверкай, што прыводзіць да памылкі праверкі",
 	"apihelp-wbremoveclaims-description": "Выдаляе сьцьверджаньні Вікібазы.",
-	"apihelp-wbremoveclaims-summary": "Выдаляе сьцьверджаньні Вікібазы."
+	"apihelp-wbremoveclaims-summary": "Выдаляе сьцьверджаньні Вікібазы.",
+	"apihelp-wbremoveclaims-param-baserevid": "Лікавы ідэнтыфікатар вэрсіі, на якой будзе грунтавацца зьмена.\nВыкарыстоўваецца для вызначэньня канфліктаў пры захаваньні.",
+	"apihelp-wbremoveclaims-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «bot»."
 }

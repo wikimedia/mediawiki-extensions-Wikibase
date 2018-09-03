@@ -13,7 +13,8 @@
 			"乌拉跨氪",
 			"Duolaimi",
 			"Hanyanbo98",
-			"Dimension"
+			"Dimension",
+			"夢蝶葬花"
 		]
 	},
 	"wikibase-lib-desc": "储存维基库及其客户端的共同功能",
@@ -171,12 +172,14 @@
 	"wikibase-item-summary-wbcreate-new": "已创建新项",
 	"wikibase-item-summary-wbeditentity": "已创建新项",
 	"wikibase-item-summary-wbeditentity-create": "已创建新项",
+	"wikibase-item-summary-wbeditentity-create-item": "创建新项",
 	"wikibase-item-summary-wbeditentity-update": "已更改项",
 	"wikibase-item-summary-wbeditentity-override": "已清除项",
 	"wikibase-item-summary-wblinktitles-create": "已创建此项以连接页面",
 	"wikibase-item-summary-wblinktitles-connect": "已添加语言链接以连接页面",
 	"wikibase-property-summary-wbcreate-new": "已创建新属性",
 	"wikibase-property-summary-wbeditentity-create": "已创建新属性",
+	"wikibase-property-summary-wbeditentity-create-property": "创建新属性",
 	"wikibase-property-summary-wbeditentity-update": "已更新一属性",
 	"wikibase-property-summary-wbeditentity-override": "已清除属性",
 	"wikibase-property-summary-special-create-property": "已创建带{{PLURAL:$1|值}}的[$2]属性"

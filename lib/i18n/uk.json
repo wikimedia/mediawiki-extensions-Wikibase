@@ -11,7 +11,8 @@
 			"Piramidion",
 			"Macofe",
 			"Dars",
-			"Avatar6"
+			"Avatar6",
+			"Vlad5250"
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",
@@ -167,12 +168,14 @@
 	"wikibase-item-summary-wbcreate-new": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity-create": "Створено новий елемент",
+	"wikibase-item-summary-wbeditentity-create-item": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity-update": "Елемент змінено",
 	"wikibase-item-summary-wbeditentity-override": "Перезаписано елемент.",
 	"wikibase-item-summary-wblinktitles-create": "Цей об'єкт створено для зв'язку сторінок",
 	"wikibase-item-summary-wblinktitles-connect": "Додано мовні посилання для зв'язку сторінок",
 	"wikibase-property-summary-wbcreate-new": "Створено нову властивість",
 	"wikibase-property-summary-wbeditentity-create": "Створено нову властивість",
+	"wikibase-property-summary-wbeditentity-create-property": "Створено нову властивість",
 	"wikibase-property-summary-wbeditentity-update": "Властивість змінено",
 	"wikibase-property-summary-wbeditentity-override": "Очищено властивість",
 	"wikibase-property-summary-special-create-property": "Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}"

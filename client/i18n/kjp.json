@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rul1902"
+		]
+	},
+	"tooltip-t-wikibase": "လ်ုတေတါအးမိင်အးစိင် မ်ုတ်ုတၠယ်စူး",
+	"wikibase-comment-update": "{{WBREPONAME}} item အင်းလဲါသာ့",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-rc-hide-wikidata-hide": "အ်ှသူး",
+	"wikibase-rc-hide-wikidata-show": "ဍုဂ်ၮဲ",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အင်းတင်ႋ"
+}

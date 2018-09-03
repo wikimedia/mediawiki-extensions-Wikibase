@@ -79,6 +79,7 @@
 	"wb-special-newitem-new-item-notification": "Nyt emne $1 oprettet og omdirigeret til dets side. Tilbage til $2.",
 	"wikibase-aliases-input-help-message": "Hvis dette datasæt er kendt under mere end ét bestemt navn, kan du angive alias og synonymer, så det kan findes ved de alternative navne.",
 	"wikibase-propertypage-datatype": "Datatype",
+	"wikibase-propertypage-bad-datatype": "Ukendt datatype: $1",
 	"wikibase-claimview-snak-tooltip": "Angiv en værdi der svarer til egenskaben med navnet \"$1\". Hvis egenskaben ikke har en udpeget værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi-inputboksen.",
 	"wikibase-claimview-snak-new-tooltip": "Efter angivelse af en egenskab, kan du angive en tilsvarende værdi. Hvis egenskaben ikke har en faktisk værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi-inputboksen.",
 	"wikibase-statementview-rank-preferred": "Foretrukne rang",
@@ -257,5 +258,6 @@
 	"content-model-wikibase-query": "Wikibase-forespørgsel",
 	"right-property-create": "Oprette egenskaber",
 	"action-property-create": "oprette egenskaber",
-	"wikibase-pageinfo-subscription-none": "Ingen"
+	"wikibase-pageinfo-subscription-none": "Ingen",
+	"apihelp-wbsetdescription-param-language": "Beskrivelsens sprog"
 }

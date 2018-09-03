@@ -26,7 +26,8 @@
 			"Duolaimi",
 			"凡人丶",
 			"Wxyveronica",
-			"Hanyanbo98"
+			"Hanyanbo98",
+			"夢蝶葬花"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -569,6 +570,7 @@
 	"apihelp-wbsearchentities-example-4": "在英语中搜索“abc”，限制为2，并且偏移为2",
 	"apihelp-wbsearchentities-example-5": "搜索英语“alphabet”，省略url参数",
 	"apihelp-wbsearchentities-example-6": "搜索英语中的“Q1234”，以匹配实体ID。",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "语言代码。",
 	"apihelp-query+wbsearch-description": "使用标签和别名搜索实体。\n这可被用作其他查询使用的生成器。\n返回应被显示的匹配关键字。",
 	"apihelp-query+wbsearch-summary": "使用标签和别名搜索实体。",
 	"apihelp-query+wbsearch-extended-description": "这可被用作其他查询使用的生成器。\n返回应被显示的匹配关键字。",

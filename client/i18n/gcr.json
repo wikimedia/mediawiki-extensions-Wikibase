@@ -4,11 +4,11 @@
 			"LeGuyanaisPure"
 		]
 	},
-	"tooltip-t-wikibase": "Lyen bò'd éléman-an di référansyèl dé data konnègté",
+	"tooltip-t-wikibase": "Lyannaj bò'd éléman-an di référansyèl dé data konnègté",
 	"wikibase-comment-update": "Éléman {{WBREPONAME}} modifyé",
 	"wikibase-dataitem": "Éléman {{WBREPONAME}}",
-	"wikibase-editlinks": "Modifyé lyen-yan",
-	"wikibase-editlinkstitle": "Modifyé lyen entèrlanng-yan",
+	"wikibase-editlinks": "Modifyé lyannaj-ya",
+	"wikibase-editlinkstitle": "Modifyé lyannaj entèrlanng-yan",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Maské",
 	"wikibase-rc-hide-wikidata-show": "Afiché",
