@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Utility class to format entity links with labels for usage in hooks.
  */
-class DefaultEntityLinkFormatter {
+class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 
 	/**
 	 * @var Language
