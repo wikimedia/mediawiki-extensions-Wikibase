@@ -4,13 +4,15 @@
 			"Nike",
 			"Silvonen",
 			"Stryn",
-			"Pyscowicz"
+			"Pyscowicz",
+			"Surjection"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Datatyypin \"$1\" arvojen käsittelyä ei vielä tueta.",
 	"valueview-expert-emptyvalue-empty": "tyhjä",
 	"valueview-expert-globecoordinateinput-precision": "Tarkkuus:",
 	"valueview-expert-globecoordinateinput-nullprecision": "määrittelemätön",
+	"valueview-expert-globecoordinateinput-customprecision": "erikoinen ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriaaninen",
 	"valueview-expert-timevalue-calendar-julian": "Juliaaninen",
 	"valueview-expert-timeinput-precision": "Tarkkuus:",
