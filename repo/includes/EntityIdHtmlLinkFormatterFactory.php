@@ -4,11 +4,12 @@ namespace Wikibase\Repo;
 
 use Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikimedia\Assert\Assert;
 
@@ -64,17 +65,11 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	 * @return EntityIdFormatter
 	 */
 	public function getEntityIdFormatter( Language $language ) {
-		$labelDescriptionLookup = WikibaseRepo::getDefaultInstance()
-			->getLanguageFallbackLabelDescriptionLookupFactory()
-			->newLabelDescriptionLookup( $language );
-
 		return new DispatchingEntityIdHtmlLinkFormatter(
 			$this->buildFormatters( $language ),
-			// TODO switch for a simple, true fallback implementation
-			new DefaultEntityIdHtmlLinkFormatter(
-				$labelDescriptionLookup,
+			new UnknownTypeEntityIdHtmlLinkFormatter(
 				$this->titleLookup,
-				$this->languageNameLookup
+				new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' )
 			)
 		);
 	}
