@@ -3,7 +3,7 @@
 namespace Wikibase\Repo;
 
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\Lib\EntityIdHtmlLinkFormatter;
+use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -49,10 +49,10 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	 *
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
-	 * @return EntityIdHtmlLinkFormatter
+	 * @return DefaultEntityIdHtmlLinkFormatter
 	 */
 	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
-		return new EntityIdHtmlLinkFormatter(
+		return new DefaultEntityIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$this->titleLookup,
 			$this->languageNameLookup

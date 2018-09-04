@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz
  */
-class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
+class DefaultEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
 	 * @var EntityTitleLookup
