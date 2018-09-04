@@ -237,7 +237,7 @@
 	"wikibase-modifyterm-language": "Codice lingua:",
 	"special-mergeitems": "Unisci due elementi",
 	"wikibase-mergeitems-intro": "Se si uniscono due elementi, tutte le etichette, le descrizioni, gli alias, i collegamenti dei siti e le dichiarazioni saranno spostate da un elemento all'altro.",
-	"wikibase-mergeitems-fromid": "L'ID da unire",
+	"wikibase-mergeitems-fromid": "L'ID da cui unire",
 	"wikibase-mergeitems-toid": "L'ID dove unire",
 	"wikibase-mergeitems-submit": "Unisci elementi",
 	"wikibase-mergeitems-success": "$1 è stato unito a $3 e reindirizzato.",

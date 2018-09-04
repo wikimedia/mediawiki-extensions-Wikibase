@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yejianfei"
+			"Yejianfei",
+			"Davidzdh"
 		]
 	},
-	"wikibase-edit": "修改"
+	"wikibase-edit": "siŭ-gāi",
+	"wikibase-add": "gă-tiĕng",
+	"wikibase-label-empty": "Gó muôi dêng-ngiê biĕu-chiĕng",
+	"wikibase-description-empty": "Gó muôi dêng-ngiê mièu-sŭk",
+	"wikibase-sitelinks-special": "Gì-tă uōng-câng",
+	"wikibase-statementview-rank-normal": "Ék-buăng dēng-ngék"
 }
