@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\LanguageFallbackChain;
 
 /**
  * A builder for collecting information about a batch of entities.
