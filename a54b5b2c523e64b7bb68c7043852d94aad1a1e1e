@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45fab03b_0cd22c5b",
+        "filename": "lib/tests/phpunit/Formatters/ControlledFallbackEntityIdFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-09-04T13:39:37Z",
+      "side": 1,
+      "message": "AFAIR having separate assignment statement has been mentioned as preferred or so.\nWouldn\u0027t block a patch on this, just spotted, hence commenting.",
+      "range": {
+        "startLine": 137,
+        "startChar": 3,
+        "endLine": 137,
+        "endChar": 22
+      },
+      "revId": "a54b5b2c523e64b7bb68c7043852d94aad1a1e1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
