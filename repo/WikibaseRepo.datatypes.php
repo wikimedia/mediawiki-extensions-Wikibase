@@ -28,6 +28,7 @@ use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
@@ -380,10 +381,15 @@ return call_user_func( function() {
 						$maxEntityId = WikibaseRepo::getDefaultInstance()->getSettings()
 							->getSetting( 'tmpMaxItemIdForNewItemIdHtmlFormatter' );
 
+						$statsdDataFactory = MediaWikiServices::getInstance()
+							->getStatsdDataFactory();
+
 						$formatter = new ControlledFallbackEntityIdFormatter(
 							$maxEntityId,
 							$factory->newItemIdHtmlLinkFormatter( $options ),
-							$factory->newEntityIdHtmlLinkFormatter( $options )
+							$factory->newEntityIdHtmlLinkFormatter( $options ),
+							$statsdDataFactory,
+							'wikibase.repo.wb_terms.newItemIdFormatter.'
 						);
 
 						$formatter->setLogger( $logger );
