@@ -6,6 +6,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 
 /**
@@ -70,7 +72,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenEmptyIdList_returnsEmptyEntityInfo() {
 		$builder = $this->newEntityInfoBuilder();
 
-		$this->assertEmpty( $builder->collectEntityInfo( [], [] )->asArray() );
+		$this->assertEmpty( $builder->collectEntityInfo( [], $this->toFallbackChain() )->asArray() );
 	}
 
 	public function testGivenDuplicateIds_eachIdsOnlyIncludedOnceInResult() {
@@ -78,7 +80,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $id, $id ], [] )->asArray();
+		$info = $builder->collectEntityInfo( [ $id, $id ], $this->toFallbackChain() )->asArray();
 
 		$this->assertCount( 1, array_keys( $info ) );
 		$this->assertArrayHasKey( 'Q1', $info );
@@ -89,7 +91,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
+		$info = $builder->collectEntityInfo( [ $id ], $this->toFallbackChain() )->asArray();
 
 		$this->assertEmpty( $info['Q1']['labels'] );
 		$this->assertEmpty( $info['Q1']['descriptions'] );
@@ -100,7 +102,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $id ], [ 'de' ] )->asArray();
+		$info = $builder->collectEntityInfo( [ $id ], $this->toFallbackChain( 'de' ) )->asArray();
 
 		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ), $info['Q1']['labels'] );
 		$this->assertEquals(
@@ -114,7 +116,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $id ], [ 'en', 'de' ] )->asArray();
+		$info = $builder->collectEntityInfo( [ $id ], $this->toFallbackChain( 'en', 'de' ) )->asArray();
 
 		$this->assertEquals(
 			$this->makeLanguageValueRecords(
@@ -135,7 +137,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $redirectId ], [ 'de' ] )->asArray();
+		$info = $builder->collectEntityInfo( [ $redirectId ], $this->toFallbackChain( 'de' ) )->asArray();
 
 		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info[self::REDIRECT_SOURCE_ID]['labels'] );
 	}
@@ -145,7 +147,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
+		$info = $builder->collectEntityInfo( [ $redirectId ], $this->toFallbackChain() )->asArray();
 
 		$this->assertArrayHasKey( self::REDIRECT_SOURCE_ID, $info );
 		$this->assertArrayNotHasKey( self::REDIRECT_TARGET_ID, $info );
@@ -157,7 +159,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$builder = $this->newEntityInfoBuilder();
 
-		$info = $builder->collectEntityInfo( [ $existingId, $nonExistingId ], [] )->asArray();
+		$info = $builder->collectEntityInfo( [ $existingId, $nonExistingId ], $this->toFallbackChain() )->asArray();
 
 		$this->assertArrayHasKey( 'Q1', $info );
 		$this->assertArrayNotHasKey( 'Q1000', $info );
@@ -193,6 +195,15 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 		}
 
 		return $records;
+	}
+
+	protected function toFallbackChain( ...$languages ) {
+		$result = [];
+		foreach ( $languages as $language ) {
+			$result[] = LanguageWithConversion::factory( $language );
+		}
+
+		return new LanguageFallbackChain( $result );
 	}
 
 }

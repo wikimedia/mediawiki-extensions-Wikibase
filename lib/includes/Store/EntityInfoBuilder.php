@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\LanguageFallbackChain;
 
 /**
  * A builder for collecting information about a batch of entities.
@@ -15,10 +16,10 @@ interface EntityInfoBuilder {
 	 * TODO: rename to getEntityInfo
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string[] $languageCodes
+	 * @param string[]|LanguageFallbackChain $languageCodes
 	 *
 	 * @return EntityInfo
 	 */
-	public function collectEntityInfo( array $entityIds, array $languageCodes );
+	public function collectEntityInfo( array $entityIds, $languageCodes );
 
 }

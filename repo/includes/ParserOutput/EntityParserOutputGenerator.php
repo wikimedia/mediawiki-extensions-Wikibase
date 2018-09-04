@@ -214,7 +214,7 @@ class EntityParserOutputGenerator {
 			$entityIds = [];
 		}
 
-		return $this->entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
+		return $this->entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain );
 	}
 
 	private function addHtmlToParserOutput(

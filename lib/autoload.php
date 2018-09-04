@@ -101,6 +101,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\StaticContentLanguages' => __DIR__ . '/includes/StaticContentLanguages.php',
 	'Wikibase\\Lib\\Store\\BadRevisionException' => __DIR__ . '/includes/Store/BadRevisionException.php',
 	'Wikibase\\Lib\\Store\\CacheAwarePropertyInfoStore' => __DIR__ . '/includes/Store/CacheAwarePropertyInfoStore.php',
+	'Wikibase\\Lib\\Store\\CacheBasedEntityInfoBuilder' => __DIR__ . '/includes/Store/CacheBasedEntityInfoBuilder.php',
 	'Wikibase\\Lib\\Store\\CacheRetrievingEntityRevisionLookup' => __DIR__ . '/includes/Store/CacheRetrievingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\CachingEntityRevisionLookup' => __DIR__ . '/includes/Store/CachingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\CachingFallbackLabelDescriptionLookup' => __DIR__ . '/includes/Store/CachingFallbackLabelDescriptionLookup.php',

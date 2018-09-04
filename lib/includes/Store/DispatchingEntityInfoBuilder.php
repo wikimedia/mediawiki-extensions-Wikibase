@@ -29,7 +29,7 @@ class DispatchingEntityInfoBuilder implements EntityInfoBuilder {
 		$this->builders = $builders;
 	}
 
-	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+	public function collectEntityInfo( array $entityIds, $languageCodes ) {
 		$info = [];
 
 		foreach ( $this->builders as $builder ) {

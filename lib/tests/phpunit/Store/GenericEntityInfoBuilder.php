@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -288,7 +289,12 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		$this->entityInfo = array_intersect_key( $this->entityInfo, array_flip( $retain ) );
 	}
 
-	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+	public function collectEntityInfo( array $entityIds, $languageCodes ) {
+		if ( $languageCodes instanceof LanguageFallbackChain ) {
+			$languageCodes = $languageCodes->getFetchLanguageCodes();
+		}
+		//FIXME: More validation of $languageCodes
+
 		$this->setEntityIds( $entityIds );
 
 		$this->resolveRedirects();
