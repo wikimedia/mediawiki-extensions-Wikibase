@@ -4,11 +4,12 @@ namespace Wikibase\Repo;
 
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikimedia\Assert\Assert;
 
@@ -56,18 +57,20 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getEntityIdFormatter
 	 *
+	 * TODO Point of the interface? Should it not - at least - lose its param?
+	 *
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdFormatter
 	 */
 	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
-		$defaultFormatter = new DefaultEntityIdHtmlLinkFormatter(
-			$labelDescriptionLookup,
-			$this->titleLookup,
-			$this->languageNameLookup
+		return new DispatchingEntityIdHtmlLinkFormatter(
+			$this->buildFormatters(),
+			new UnknownTypeEntityIdHtmlLinkFormatter(
+				$this->titleLookup,
+				new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' )
+			)
 		);
-		$formatters = $this->buildFormatters();
-		return new DispatchingEntityIdHtmlLinkFormatter( $formatters, $defaultFormatter );
 	}
 
 	private function buildFormatters() {

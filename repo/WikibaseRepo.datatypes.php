@@ -383,7 +383,7 @@ return call_user_func( function() {
 						$formatter = new ControlledFallbackEntityIdFormatter(
 							$maxEntityId,
 							$factory->newItemIdHtmlLinkFormatter( $options ),
-							$factory->newDefaultEntityIdHtmlLinkFormatter( $options )
+							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options )
 						);
 
 						$formatter->setLogger( $logger );

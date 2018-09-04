@@ -22,7 +22,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -176,7 +176,7 @@ return [
 			$repo = WikibaseRepo::getDefaultInstance();
 			$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $repo->getUserLanguage() );
-			return new DefaultEntityIdHtmlLinkFormatter(
+			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
 				$repo->getEntityTitleLookup(),
 				$repo->getLanguageNameLookup()
@@ -291,7 +291,7 @@ return [
 			$repo = WikibaseRepo::getDefaultInstance();
 			$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $repo->getUserLanguage() );
-			return new DefaultEntityIdHtmlLinkFormatter(
+			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
 				$repo->getEntityTitleLookup(),
 				$repo->getLanguageNameLookup()
