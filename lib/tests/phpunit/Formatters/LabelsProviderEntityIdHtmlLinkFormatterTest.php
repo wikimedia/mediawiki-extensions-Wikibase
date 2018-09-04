@@ -11,12 +11,12 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers \Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter
+ * @covers \Wikibase\Lib\LabelsProviderEntityIdHtmlLinkFormatter
  *
  * @group ValueFormatters
  * @group Wikibase
@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
+class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	use HamcrestPHPUnitIntegration;
 
 	/**
@@ -100,7 +100,7 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		];
 	}
 
-	private function getFormatter( $hasLabel, $exists, Term $term = null ) : DefaultEntityIdHtmlLinkFormatter {
+	private function getFormatter( $hasLabel, $exists, Term $term = null ) : LabelsProviderEntityIdHtmlLinkFormatter {
 		if ( $hasLabel ) {
 			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
 		} else {
@@ -123,7 +123,7 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 				return $names[ $languageCode ];
 			} ) );
 
-		$formatter = new DefaultEntityIdHtmlLinkFormatter(
+		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$entityTitleLookup,
 			$languageNameLookup
@@ -213,7 +213,7 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->method( $this->anything() )
 			->will( $this->returnValue( null ) );
 
-		$formatter = new DefaultEntityIdHtmlLinkFormatter(
+		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
 			$this->getMock( LabelDescriptionLookup::class ),
 			$entityTitleLookup,
 			$this->getMock( LanguageNameLookup::class )
@@ -252,7 +252,7 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 				return $id->isForeign() ? $foreignTitle : $localTitle;
 			} ) );
 
-		$formatter = new DefaultEntityIdHtmlLinkFormatter(
+		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup( new Term( 'en', 'Something' ) ),
 			$entityTitleLookup,
 			$this->getMock( LanguageNameLookup::class )
@@ -266,7 +266,7 @@ class DefaultEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$exists = true;
 		$isRedirect = true;
 		$entityTitleLookup = $this->newEntityTitleLookup( $exists, $isRedirect );
-		$formatter = new DefaultEntityIdHtmlLinkFormatter(
+		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup(),
 			$entityTitleLookup,
 			$this->getMock( LanguageNameLookup::class )
