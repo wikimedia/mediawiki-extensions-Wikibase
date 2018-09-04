@@ -2032,7 +2032,7 @@ class WikibaseRepo {
 	/**
 	 * @return CacheInterface
 	 */
-	private function getFormatterCache() {
+	public function getFormatterCache() {
 		global $wgSecretKey;
 
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );

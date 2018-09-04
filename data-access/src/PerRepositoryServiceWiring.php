@@ -31,6 +31,8 @@ return [
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
+
+		return new \Wikibase\Lib\Store\CacheBasedEntityInfoBuilder();
 		return new SqlEntityInfoBuilder(
 			$services->getEntityIdParser(),
 			$services->getEntityIdComposer(),
