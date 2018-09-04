@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36b79976_2b24f2f7",
+        "filename": "client/resources/wikibase.client.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2018-09-04T19:03:33Z",
+      "side": 1,
+      "message": "In Design Style Guide/OOUI we\u0027ve decided for a standard opacity approach of `0.87` for :link state and `0.73` for :hover and `1` for :active on black by default icon buttons to go as close along with text link changes from `#222` for :link and `#444` for :hover and `#000` for :active.",
+      "revId": "08d79ee30dbaa0c64c6b102d595cc1cf55a066b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
