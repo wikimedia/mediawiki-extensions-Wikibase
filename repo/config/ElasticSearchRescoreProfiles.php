@@ -51,5 +51,31 @@ return [
 				'function_chain' => 'entity_weight_boost'
 			],
 		]
+	],
+	// Fulltext profile with phrase scoring
+	'wikibase_prase' => [
+		'i18n_msg' => 'wikibase-rescore-profile-fulltext',
+		'supported_namespaces' => 'all',
+		'rescore' => [
+			// phrase rescore
+			[
+				'window' => 512,
+				'window_size_override' => 'CirrusSearchPhraseRescoreWindowSize',
+				'rescore_query_weight' => 10,
+				'rescore_query_weight_override' => 'CirrusSearchPhraseRescoreBoost',
+				'query_weight' => 1.0,
+				'type' => 'phrase',
+				// defaults: 'score_mode' => 'total'
+			],
+			[
+				'window' => 8192,
+				'window_size_override' => 'EntitySearchRescoreWindowSize',
+				'query_weight' => 1.0,
+				'rescore_query_weight' => 1.0,
+				'score_mode' => 'total',
+				'type' => 'function_score',
+				'function_chain' => 'entity_weight_boost'
+			],
+		]
 	]
 ];
