@@ -334,3 +334,12 @@ namespace CirrusSearch\Search {
 		}
 	}
 }
+
+namespace CirrusSearch\Extra\Query {
+	class TokenCountRouter {
+		public function __construct() {
+		}
+		public function addCondition() {
+		}
+	}
+}
