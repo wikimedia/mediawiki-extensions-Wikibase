@@ -69,6 +69,10 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			'fallback-folded'   => 0.005,
 			'fallback-partial'  => 0.03,
 			'fallback-discount' => 0.1,
+			'phrase' => [
+				'all' => 0.001,
+				'all.plain' => 0.1,
+			],
 		];
 	}
 
@@ -135,6 +139,36 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 
 		$builder->build( $context, "test" );
 		$this->assertNotContains( 'entity_full_text', $context->getSyntaxUsed() );
+	}
+
+	public function testPhraseRescore() {
+		$this->setMwGlobals( [
+			'wgCirrusSearchWikimediaExtraPlugin' => [ 'token_count_router' => true ],
+		] );
+
+		$config = new SearchConfig();
+
+		$builder = new EntityFullTextQueryBuilder(
+			self::$ENTITY_SEARCH_CONFIG,
+			$this->getConfigSettings(),
+			new LanguageFallbackChainFactory(),
+			new ItemIdParser(),
+			'en'
+		);
+
+		$features = [
+			new InSourceFeature( $config ),
+			new BoostTemplatesFeature(),
+		];
+		$builderSettings = $config->getProfileService()
+			->loadProfileByName( SearchProfileService::FT_QUERY_BUILDER, 'default' );
+		$defaultBuilder = new FullTextQueryStringQueryBuilder( $config, $features, $builderSettings['settings'] );
+
+		$context = new SearchContext( $config, [ 0 ] );
+		$defaultBuilder->build( $context, 'test' );
+		$builder->build( $context, 'test' );
+		$this->assertFileContains( __DIR__ . '/../../../data/entityFulltext/phraseRescore.expected',
+			json_encode( $context->getPhraseRescoreQuery()->toArray(), JSON_PRETTY_PRINT ) );
 	}
 
 }
