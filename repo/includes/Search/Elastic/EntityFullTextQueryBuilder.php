@@ -2,11 +2,15 @@
 
 namespace Wikibase\Repo\Search\Elastic;
 
+use CirrusSearch\Extra\Query\TokenCountRouter;
 use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Search\SearchContext;
+use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\DisMax;
 use Elastica\Query\Match;
+use Elastica\Query\MatchNone;
+use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
@@ -234,6 +238,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		$query->setMinimumShouldMatch( 1 );
 
 		$searchContext->setMainQuery( $query );
+		$searchContext->setPhraseRescoreQuery( $this->buildPhraseRescore( $term, $searchContext, $profile ) );
 	}
 
 	/**
@@ -275,6 +280,57 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$m->setFieldOperator( $field, $operator );
 		}
 		return $m;
+	}
+
+	/**
+	 * Create phrase rescore query for "all" fields
+	 * @param string $queryText
+	 * @param SearchContext $context
+	 * @param float[] $profile
+	 * @return AbstractQuery
+	 */
+	private function buildPhraseRescore( $queryText, SearchContext $context, array $profile ) {
+		if ( empty( $profile['phrase'] ) ) {
+			return null;
+		} else {
+			$phraseProfile = $profile['phrase'];
+		}
+		$useRouter = $context->getConfig()->getElement( 'CirrusSearchWikimediaExtraPlugin', 'token_count_router' ) === true;
+		$phrase = new MultiMatch();
+		$phrase->setParam( 'type', 'phrase' );
+		$phrase->setParam( 'slop', 0 );
+		$fields = [
+			"all^{$phraseProfile['all']}", "all.plain^{$phraseProfile['all.plain']}"
+		];
+		$phrase->setFields( $fields );
+		$phrase->setQuery( $queryText );
+		if ( !$useRouter ) {
+			return $phrase;
+		}
+		$tokCount = new TokenCountRouter(
+		// text
+			$queryText,
+			// fallback
+			new MatchNone(),
+			// field
+			null,
+			// analyzer
+			'text_search'
+		);
+		$tokCount->addCondition(
+			TokenCountRouter::GT,
+			1,
+			$phrase
+		);
+		$maxTokens = $context->getConfig()->get( 'CirrusSearchMaxPhraseTokens' );
+		if ( $maxTokens ) {
+			$tokCount->addCondition(
+				TokenCountRouter::GT,
+				$maxTokens,
+				new \Elastica\Query\MatchNone()
+			);
+		}
+		return $tokCount;
 	}
 
 }
