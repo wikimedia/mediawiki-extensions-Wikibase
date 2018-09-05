@@ -16,6 +16,24 @@
       "revId": "08d79ee30dbaa0c64c6b102d595cc1cf55a066b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09506e64_523ced31",
+        "filename": "client/resources/wikibase.client.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-09-05T21:03:11Z",
+      "side": 1,
+      "message": "Thanks, but I don\u0027t think that applies here.\n\nThis is transforming a binary image containing dark blue pixels to become light grey pixels. It is not the 0.6 value we should measure but the color of the resulting image on screen.\n\nThe current value (0.6) was chosen to keep the same visual appearance is it is before this change, which hardcoded the transformation in a separate PNG image, which this commit removes.",
+      "parentUuid": "36b79976_2b24f2f7",
+      "revId": "08d79ee30dbaa0c64c6b102d595cc1cf55a066b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
