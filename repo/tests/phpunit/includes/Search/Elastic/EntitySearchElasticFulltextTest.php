@@ -53,7 +53,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			$testName = substr( basename( $queryFile ), 0, - 6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
 			$expectedFile = "$testName-es" . EntitySearchElastic::getExpectedElasticMajorVersion() . '.expected';
-			$tests[$testName] = [ $query, $expectedFile ];
+			$tests[$testName] = [ $query, __DIR__ . '/../../../data/entityFulltext/' . $expectedFile ];
 		}
 
 		return $tests;
