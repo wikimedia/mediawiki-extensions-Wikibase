@@ -69,6 +69,8 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			'fallback-folded'   => 0.005,
 			'fallback-partial'  => 0.03,
 			'fallback-discount' => 0.1,
+			'phrase-all'        => 0.001,
+			'phrase-plain'      => 0.1,
 		];
 	}
 
