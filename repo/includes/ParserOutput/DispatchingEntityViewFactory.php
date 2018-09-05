@@ -6,12 +6,12 @@ use OutOfBoundsException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityView;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityTermsView;
 use Wikimedia\Assert\Assert;
 
 /**
- * A factory to create EntityView implementations by entity type based on callbacks.
+ * A factory to create EntityDocumentView implementations by entity type based on callbacks.
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -33,7 +33,7 @@ class DispatchingEntityViewFactory {
 	}
 
 	/**
-	 * Creates a new EntityView that can display the given type of entity.
+	 * Creates a new EntityDocumentView that can display the given type of entity.
 	 *
 	 * @param string $entityType
 	 * @param string $languageCode
@@ -43,7 +43,7 @@ class DispatchingEntityViewFactory {
 	 * @param EntityTermsView $entityTermsView
 	 *
 	 * @throws OutOfBoundsException
-	 * @return EntityView
+	 * @return EntityDocumentView
 	 */
 	public function newEntityView(
 		$entityType,
@@ -54,7 +54,7 @@ class DispatchingEntityViewFactory {
 		EntityTermsView $entityTermsView
 	) {
 		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
-			throw new OutOfBoundsException( "No EntityView is registered for entity type '$entityType'" );
+			throw new OutOfBoundsException( "No EntityDocumentView is registered for entity type '$entityType'" );
 		}
 
 		$entityView = call_user_func(
@@ -67,8 +67,8 @@ class DispatchingEntityViewFactory {
 		);
 
 		Assert::postcondition(
-			$entityView instanceof EntityView,
-			'Callback must return an instance of EntityView'
+			$entityView instanceof EntityDocumentView,
+			'Callback must return an instance of EntityDocumentView'
 		);
 
 		return $entityView;
