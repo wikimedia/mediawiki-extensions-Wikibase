@@ -25,5 +25,7 @@ return [
 		'fallback-folded' => 1.3,
 		'fallback-prefix' => 0.4,
 		'fallback-discount' => 0.9,
+		'phrase-all' => 0.001,
+		'phrase-plain' => 0.1,
 	]
 ];
