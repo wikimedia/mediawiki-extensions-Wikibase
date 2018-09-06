@@ -25,5 +25,11 @@
     "wdio-mocha-framework": "0.6.1",
     "wdio-spec-reporter": "0.1.4",
     "webdriverio": "4.13.1"
-  }
+  },
+  "eslintIgnore": [
+    "extensions/**",
+    "node_modules/**",
+    "vendor/**",
+    "view/lib/**"
+  ]
 }
