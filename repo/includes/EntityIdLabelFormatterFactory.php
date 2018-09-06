@@ -31,7 +31,7 @@ class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
-	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
+	public function getEntityIdFormatter( $labelDescriptionLookup ) {
 		return new EntityIdLabelFormatter( $labelDescriptionLookup );
 	}
 

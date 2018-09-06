@@ -51,7 +51,7 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	 *
 	 * @return DefaultEntityIdHtmlLinkFormatter
 	 */
-	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
+	public function getEntityIdFormatter( $labelDescriptionLookup ) {
 		return new DefaultEntityIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$this->titleLookup,

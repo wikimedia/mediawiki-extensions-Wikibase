@@ -2,6 +2,7 @@
 
 namespace Wikibase\View;
 
+use Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
@@ -28,10 +29,10 @@ interface EntityIdFormatterFactory {
 	public function getOutputFormat();
 
 	/**
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LabelDescriptionLookup|Language $labelDescriptionLookup
 	 *
 	 * @return EntityIdFormatter
 	 */
-	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup );
+	public function getEntityIdFormatter( $labelDescriptionLookup );
 
 }
