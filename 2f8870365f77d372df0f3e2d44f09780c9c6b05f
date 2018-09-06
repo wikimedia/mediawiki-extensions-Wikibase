@@ -234,6 +234,30 @@
       "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ca394b1_172d50c8",
+        "filename": "repo/tests/phpunit/includes/EntityIdHtmlLinkFormatterFactoryTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-06T14:47:59Z",
+      "side": 1,
+      "message": "a more naive, but less mocky approach might be something like this. I don\u0027t really have a strong opinion on it though:\n\n\t\t$callbackCalled \u003d false;\n\t\t$callback \u003d function ( $passedLanguage ) use ( $language, \u0026$callbackCalled ) {\n\t\t\t$callbackCalled \u003d true;\n\t\t\t$this-\u003eassertSame( $language, $passedLanguage );\n\t\t\treturn $this-\u003ecreateMock( EntityIdFormatter::class );\n\t\t};\n\n\t\t$factory \u003d new EntityIdHtmlLinkFormatterFactory(\n\t\t\t$titleLookup,\n\t\t\t$languageNameLookup,\n\t\t\t[ \u0027foo\u0027 \u003d\u003e $callback ]\n\t\t);\n\n\t\t$factory-\u003egetEntityIdFormatter( $language );\n\t\t$this-\u003eassertTrue( $callbackCalled, \u0027things happened.\u0027 );",
+      "parentUuid": "5ece628d_7970c651",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
