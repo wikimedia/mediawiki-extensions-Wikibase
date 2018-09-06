@@ -7,7 +7,8 @@
 			"Endres",
 			"Mirinano",
 			"Rxy",
-			"Afaz"
+			"Afaz",
+			"Suyama"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "「$1」の値の処理にはまだ対応していません。",
@@ -15,6 +16,7 @@
 	"valueview-expert-emptyvalue-empty": "空",
 	"valueview-expert-globecoordinateinput-precision": "精度:",
 	"valueview-expert-globecoordinateinput-nullprecision": "不特定",
+	"valueview-expert-globecoordinateinput-customprecision": "特殊文字 ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "グレゴリオ暦",
 	"valueview-expert-timevalue-calendar-julian": "ユリウス暦",
 	"valueview-expert-timeinput-precision": "精度:",

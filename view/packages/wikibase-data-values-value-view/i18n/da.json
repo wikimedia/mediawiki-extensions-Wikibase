@@ -17,5 +17,6 @@
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Sprog (obligatorisk):",
 	"valueview-expertextender-unitsuggester-label": "Enhed (valgfrit):",
+	"valueview-preview-label": "vil vises som:",
 	"valueview-listrotator-manually": "angiv manuelt"
 }
