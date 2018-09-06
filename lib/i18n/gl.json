@@ -5,7 +5,8 @@
 			"Chairego apc",
 			"Macofe",
 			"Elisardojm",
-			"Banjo"
+			"Banjo",
+			"Navhy"
 		]
 	},
 	"wikibase-lib-desc": "Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client",
@@ -51,7 +52,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "valor descoñecido",
 	"wikibase-snakview-snaktypeselector-novalue": "sen valor",
 	"wikibase-tooltip-error-details": "Detalles",
-	"wikibase-undeserializable-value": "O valor non é válido e non se pode mostrar.",
+	"wikibase-undeserializable-value": "O valor non é válido e non se pode amosar.",
 	"wikibase-validator-invalid": "Valor non válido",
 	"wikibase-validator-missing-field": "Falta o parámetro obrigatorio \"$1\"",
 	"wikibase-validator-bad-type": "\"$2\" no canto de \"$1\"",

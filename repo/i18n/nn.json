@@ -173,6 +173,7 @@
 	"wikibase-mergeitems-toid": "ID-en det vert fletta til",
 	"wikibase-mergeitems-submit": "Flett saman element",
 	"wikibase-mergeitems-success": "$1 vart fletta inn i $3 og omdirigert.",
+	"wikibase-itemmerge-redirect": "Desse elementa kan alt ha vorte fletta saman.",
 	"wikibase-itemmerge-missing-parameter": "Ufullstendig inndata.",
 	"wikibase-itemmerge-failed-modify": "Greidde ikkje å fletta saman dei to elementa, du lyt fyrst løysa konfliktar.",
 	"wikibase-itemmerge-cant-merge-self": "Kan ikkje fletta saman eit element med seg sjølv.",
@@ -231,6 +232,7 @@
 	"wikibase-no-direct-editing": "Direkteendring er slege av i namnerommet $1",
 	"wikibase-noentity": "Dette datasettet finst ikkje. Du kan  <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkja i relaterte loggar] for å finna ut kvar det fór.",
 	"wikibase-noentity-createone": "Du kan dessutan [[$1|oppretta eit nytt eit]].",
+	"wikibase-special-mergeitems-error-prefix": "Elementa kunne ikkje flettast saman. Denne feilen oppstod:",
 	"wikibase-listdatatypes-wikibase-item-head": "Element",
 	"wikibase-listdatatypes-wikibase-property-head": "Eigenskap",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons-media",
@@ -245,7 +247,9 @@
 	"content-model-wikibase-item": "Wikibase-element",
 	"content-model-wikibase-property": "Wikibase-eigenskap",
 	"content-model-wikibase-query": "Wikibase-spørjing",
+	"right-item-merge": "Fletta saman element",
 	"right-property-create": "Oppretta eigenskapar",
+	"action-item-merge": "fletta saman element",
 	"action-property-create": "oppretta eigenskapar",
 	"apihelp-wbmergeitems-param-fromid": "ID-en det vert fletta frå"
 }
