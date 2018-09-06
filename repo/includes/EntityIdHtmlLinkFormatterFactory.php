@@ -4,7 +4,6 @@ namespace Wikibase\Repo;
 
 use Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\DefaultEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
@@ -60,20 +59,14 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getEntityIdFormatter
 	 *
-	 * @param Language|LabelDescriptionLookup $language
+	 * @param Language $language
 	 *
 	 * @return EntityIdFormatter
 	 */
-	public function getEntityIdFormatter( $language ) {
-		// TODO accept only Language
-		if ( $language instanceof LabelDescriptionLookup ) {
-			$labelDescriptionLookup = $language;
-			$language = WikibaseRepo::getDefaultInstance()->getUserLanguage();
-		} else {
-			$labelDescriptionLookup = WikibaseRepo::getDefaultInstance()
-				->getLanguageFallbackLabelDescriptionLookupFactory()
-				->newLabelDescriptionLookup( $language );
-		}
+	public function getEntityIdFormatter( Language $language ) {
+		$labelDescriptionLookup = WikibaseRepo::getDefaultInstance()
+			->getLanguageFallbackLabelDescriptionLookupFactory()
+			->newLabelDescriptionLookup( $language );
 
 		return new DispatchingEntityIdHtmlLinkFormatter(
 			$this->buildFormatters( $language ),
