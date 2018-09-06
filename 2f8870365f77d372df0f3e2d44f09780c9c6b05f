@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8247073f_ca51fd08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-06T14:23:55Z",
+      "side": 1,
+      "message": "DispatchingEntityIdHtmlLinkFormatter",
+      "range": {
+        "startLine": 7,
+        "startChar": 15,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66ea27bd_d00f6e7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-06T14:23:55Z",
+      "side": 1,
+      "message": "DispatchingEntityIdHtmlLinkFormatter",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61463b3d_50b9366d",
+        "filename": "lib/includes/Formatters/DefaultEntityIdHtmlLinkFormatter.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-06T14:23:55Z",
+      "side": 1,
+      "message": "this is redundant, EntityIdLabelFormatter already implements it",
+      "range": {
+        "startLine": 22,
+        "startChar": 70,
+        "endLine": 22,
+        "endChar": 98
+      },
+      "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "228dd5a9_754be628",
+        "filename": "lib/includes/Formatters/DispatchingEntityIdHtmlLinkFormatter.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-06T14:23:55Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 53
+      },
+      "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6148c5f5_5feaabe2",
+        "filename": "repo/tests/phpunit/includes/EntityIdHtmlLinkFormatterFactoryTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-06T14:23:55Z",
+      "side": 1,
+      "message": "ohh, clever!",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "2f8870365f77d372df0f3e2d44f09780c9c6b05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
