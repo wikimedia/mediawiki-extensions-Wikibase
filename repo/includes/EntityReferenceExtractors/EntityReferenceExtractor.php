@@ -15,7 +15,7 @@ interface EntityReferenceExtractor {
 
 	/**
 	 * @param EntityDocument $entity
-	 * @return EntityId[]
+	 * @return EntityId[] There is no guarantee that array elements will be unique.
 	 */
 	public function extractEntityIds( EntityDocument $entity );
 
