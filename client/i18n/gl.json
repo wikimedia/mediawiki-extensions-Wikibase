@@ -96,7 +96,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ligazón interlingüística|ligazóns interlingüísticas}} na páxina)",
 	"wikibase-unconnectedpages-submit": "Amosar as páxinas",
 	"pageswithbadges": "Páxinas con distintivos",
-	"pageswithbadges-summary": "Esta páxina mostra as páxinas con distintivos (p. ex., artgo bo ou artigo destacado). A lista está ordenada por identificador de páxina descendente, polo que as páxinas novas móstranse primeiro.",
+	"pageswithbadges-summary": "Esta páxina amosa as páxinas con distintivos (p. ex., artigo bo ou artigo destacado). A lista está ordenada por identificador de páxina descendente, polo que as páxinas novas amósanse primeiro.",
 	"wikibase-pageswithbadges-invalid-id": "$1 non é un identificador de elemento válido",
 	"wikibase-pageswithbadges-legend": "Lista de páxinas cun distintivo determinado",
 	"wikibase-pageswithbadges-badge": "Distintivo:",
@@ -133,7 +133,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
 	"notification-subject-page-connection": "Unha páxina de {{SITENAME}} que {{GENDER:$3|creaches}} foi {{GENDER:$2|conectada}} cun obxecto {{WBREPONAME}}",
 	"unresolved-property-category": "Páxinas con propiedades non resoltas",
-	"unresolved-property-category-desc": "Esta categoría mostra páxinas que referencian propiedades {{WBREPONAME}} que non  se poden atopar polo seu identificador de propiedade nin pola súa etiqueta.",
+	"unresolved-property-category-desc": "Esta categoría amosa páxinas que referencian propiedades {{WBREPONAME}} que non  se poden atopar polo seu identificador de propiedade nin pola súa etiqueta.",
 	"connected-redirect-category": "Redireccións ligadas a un elemento {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Esta categoría lista as páxinas de redireccionamento que están ligadas a um elemento {{WBREPONAME}}."
 }
