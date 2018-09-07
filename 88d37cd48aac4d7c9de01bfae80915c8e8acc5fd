@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "564df74c_92aa95cf",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-09-07T21:35:10Z",
+      "side": 1,
+      "message": "For something like ABC123 I think slop 1 would mean it\u0027d also match ABC-DEF-123 which I am not sure is what we want.",
+      "parentUuid": "76c22b4b_52ad18ae",
+      "range": {
+        "startLine": 296,
+        "startChar": 29,
+        "endLine": 296,
+        "endChar": 30
+      },
+      "revId": "88d37cd48aac4d7c9de01bfae80915c8e8acc5fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dffea8ee_cb2670a8",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 5
