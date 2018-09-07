@@ -8,14 +8,7 @@ module.exports = function ( grunt ) {
 
 	grunt.initConfig( {
 		eslint: {
-			all: [
-				'*.js',
-				'**/*.js',
-				'!view/lib/**',
-				'!node_modules/**',
-				'!vendor/**',
-				'!extensions/**'
-			]
+			all: '.'
 		},
 		jsonlint: {
 			all: [
