@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4edf1673_55b0c0bc",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-07T11:25:18Z",
+      "side": 1,
+      "message": "Changed to MediaWikiPHPUnitTestListener",
+      "range": {
+        "startLine": 1023,
+        "startChar": 11,
+        "endLine": 1023,
+        "endChar": 37
+      },
+      "revId": "d98fe2c73839b7f14d8849d9b18b07ae116252a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
