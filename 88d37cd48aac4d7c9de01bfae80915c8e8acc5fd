@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "76c22b4b_52ad18ae",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-09-07T07:00:37Z",
+      "side": 1,
+      "message": "slop determines the max distance between words of the query for phrease query to match:\n- foo bar will match \"this is foo bar\" with slop 0, 1, 2, 3, ...\n- foo bar will match \"this is foo and bar\" with slop 1, 2, 3 but not 0\n\nit has a perf overhead so more than 1 is not appropriate, I think 1 is OK",
+      "parentUuid": "b3033601_5298ffe0",
+      "range": {
+        "startLine": 296,
+        "startChar": 29,
+        "endLine": 296,
+        "endChar": 30
+      },
+      "revId": "88d37cd48aac4d7c9de01bfae80915c8e8acc5fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dffea8ee_cb2670a8",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 5
