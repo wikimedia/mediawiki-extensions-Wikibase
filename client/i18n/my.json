@@ -28,7 +28,16 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} တည်းဖြတ်မှု",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} တည်းဖြတ်မှုများ",
 	"wikibase-replicationnote": "ပြောင်းလဲမှုများကို ဝီကီများအားလုံးတွင် တွေ့မြင်နိုင်ရန်အတွက် မိနစ်များစွာ ကြာမြင့်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။",
+	"wikibase-unconnectedpages-submit": "စာမျက်နှာများ ပြသရန်",
+	"wikibase-pageswithbadges-submit": "စာမျက်နှာများ ပြသရန်",
+	"wikibase-entityusage-submit": "စာမျက်နှာများ ပြသရန်",
+	"wikibase-pageinfo-entity-id-none": "ဘာမှမရှိ",
+	"wikibase-pageinfo-description-local": "ဒေသတွင်း ဖော်ပြချက်",
+	"wikibase-pageinfo-description-central": "ဗဟိုဖော်ပြချက်",
 	"wikibase-pageinfo-entity-usage": "ဤစာမျက်နှာတွင် အသုံးပြုထားသော {{WBREPONAME}} များ",
+	"wikibase-pageinfo-entity-usage-S": "ဆိုဒ်လင့်",
+	"wikibase-pageinfo-entity-usage-D": "ဖော်ပြချက်များ အချို့",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "ဖော်ပြချက်: $1",
+	"wikibase-pageinfo-entity-usage-T": "ခေါင်းစဉ်",
 	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်"
 }

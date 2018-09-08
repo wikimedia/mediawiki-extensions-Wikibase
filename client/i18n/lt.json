@@ -109,5 +109,6 @@
 	"wikibase-otherprojects": "Kituose projektuose",
 	"wikibase-otherprojects-beta-message": "Kitų projektų šoninė juosta",
 	"wikibase-otherprojects-beta-description": "Prie šoninės juostos prideda \"{{int:wikibase-otherprojects}}\" sekciją, pateikiančią nuorodas į kitus Wikimedia projektus, pagrįstus {{WBREPONAME}} duomenimis.",
+	"notification-header-page-connection": "Puslapis <strong>$3</strong> buvo {{GENDER:$2|susietas}} su {{PLURAL:$4|-1=a {{WBREPONAME}} įrašu|{{WBREPONAME}} įrašu $4}}, kuriame yra duomenų, susijusių su tema.",
 	"notification-link-text-view-item": "{{GENDER:$1|Žiūrėti}} elementą"
 }
