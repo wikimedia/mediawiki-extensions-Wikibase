@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67691b21_0a021152",
+        "filename": "repo/includes/ParserOutput/PageImagesDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-09-08T18:25:22Z",
+      "side": 1,
+      "message": "If the str_replace() call is kept within this function, but after the above statement, I can statically confirm that everything will be fine.\n\nHowever, the current version changes behaviour in that \u0027bestFilename\u0027 will no longer be normalised. Which means if it is used elsewhere in the class, each of those uses must carefully remember to also do the same transformation. That seems like a source of potential bugs.\n\nOn the other hand, it\u0027s a private member, and currently only used in one place. And I the late-transformation certainly does follow best-practice in terms of performance.\n\nPerhaps a comment would be a good compromise here, documenting that $bestFileName is not normalised and may use either spaces or underscores, and its consumer is responsible for normalising to DB-form or Text-form accordingly.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 3
+      },
+      "revId": "56b99896523d62c60a833f0533d9d21fc7d1973f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
