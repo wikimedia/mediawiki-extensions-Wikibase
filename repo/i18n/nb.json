@@ -546,6 +546,8 @@
 	"apihelp-wbsearchentities-example-4": "Søk etter «abc» på engelsk med ei grense på 2 og en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Søk etter «alphabet» på engelsk uten URL-parameter",
 	"apihelp-wbsearchentities-example-6": "Søk etter «Q1234» på engelsk, for å matche entitets-ID-en.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Språkkoden.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "Autonymet til språket, dvs. navnet til språket på språket. Er muligens ikke kjent for alle språk.",
 	"apihelp-query+wbsearch-description": "Søker etter entiteter med etiketter og aliaser.\nDette kan brukes som en generator for andre spørringer.\nReturnerer den matchende termen som skal vises.",
 	"apihelp-query+wbsearch-summary": "Søker etter entiteter med etiketter og aliaser.",
 	"apihelp-query+wbsearch-extended-description": "Denne kan brukes som en generator for andre spørringer.\nReturnerer matchende term som skal vises.",
