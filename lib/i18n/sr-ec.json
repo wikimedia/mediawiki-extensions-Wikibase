@@ -9,7 +9,8 @@
 			"Obsuser",
 			"Srdjan m",
 			"Acamicamacaraca",
-			"BadDog"
+			"BadDog",
+			"Zoranzoki21"
 		]
 	},
 	"wikibase-lib-desc": "Садржи заједничке функционалности за Викибазу и проширења за клијента Викибазе",
@@ -24,7 +25,7 @@
 	"wikibase-error-remove-timeout": "Тренутно имамо техничких потешкоћа. Покушајте касније.",
 	"wikibase-error-autocomplete-response": "Одговор сервера: $1",
 	"wikibase-error-ui-no-external-page": "Страница „$2” није пронађена на „$1”.",
-	"wikibase-error-ui-edit-conflict": "Дошло је до сукоба измена. Сачувате измене на локалном нивоу, поново учитајте страницу и сачувајте их.",
+	"wikibase-error-ui-edit-conflict": "Иста вредност је уређена у исто време, што је проузроковао сукоб измена. Поново учитајте страницу.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерација)",
 	"wikibase-quantitydetails-amount": "количина",
 	"wikibase-quantitydetails-upperbound": "Горња граница",
