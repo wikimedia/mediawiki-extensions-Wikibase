@@ -1018,7 +1018,7 @@ final class RepoHooks {
 		}
 
 		// Analyzer for splitting statements and extracting properties:
-		// P31:Q1234 => P31
+		// P31=Q1234 => P31
 		$config['analyzer']['extract_wb_property'] = [
 			'type' => 'custom',
 			'tokenizer' => 'split_wb_statements',
