@@ -156,6 +156,30 @@
     },
     {
       "key": {
+        "uuid": "ca4f91cf_43a4ce8a",
+        "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-09-10T17:18:48Z",
+      "side": 1,
+      "message": "Well, I really am not 100% sure whether or not it would serve other use cases. Maybe I should make slop a config value too?",
+      "parentUuid": "f1678bde_1cb1e6c6",
+      "range": {
+        "startLine": 296,
+        "startChar": 29,
+        "endLine": 296,
+        "endChar": 30
+      },
+      "revId": "88d37cd48aac4d7c9de01bfae80915c8e8acc5fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dffea8ee_cb2670a8",
         "filename": "repo/includes/Search/Elastic/EntityFullTextQueryBuilder.php",
         "patchSetId": 5
