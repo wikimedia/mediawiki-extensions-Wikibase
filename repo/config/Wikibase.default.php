@@ -149,6 +149,8 @@ return [
 			'nrm'         => 'fr-x-nrm',
 			'roa-tara'    => 'it-x-tara',
 			'de-formal'   => 'de-x-formal',
+			'es-formal'   => 'es-x-formal',
+			'hu-formal'   => 'hu-x-formal',
 			'nl-informal' => 'nl-x-informal',
 	],
 
