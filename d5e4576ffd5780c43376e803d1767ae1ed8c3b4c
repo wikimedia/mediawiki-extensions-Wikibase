@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e36594d2_83f49e84",
+        "filename": "docs/hooks-js.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-10T14:06:26Z",
+      "side": 1,
+      "message": "I’m not sure where this happens in the code. Is it a side effect of a) the original suggestions not having a \u0027rating\u0027 set, b) additional suggestions always being inserted before the original suggestions, and c) the sort (hopefully) being stable?",
+      "range": {
+        "startLine": 15,
+        "startChar": 58,
+        "endLine": 15,
+        "endChar": 96
+      },
+      "revId": "d5e4576ffd5780c43376e803d1767ae1ed8c3b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "792c1a80_d8e6c276",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-10T14:06:26Z",
+      "side": 1,
+      "message": "As far as I can tell, the current code doesn’t guarantee this. If both items have the same rating, ratingSorter will return -1, not 0, and according to MDN Array.sort() isn’t guaranteed to be stable anyways [1].\n\n[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+      "revId": "d5e4576ffd5780c43376e803d1767ae1ed8c3b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f0f1af9_f7b7a91a",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-10T14:06:26Z",
+      "side": 1,
+      "message": "double space",
+      "range": {
+        "startLine": 383,
+        "startChar": 41,
+        "endLine": 383,
+        "endChar": 43
+      },
+      "revId": "d5e4576ffd5780c43376e803d1767ae1ed8c3b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
