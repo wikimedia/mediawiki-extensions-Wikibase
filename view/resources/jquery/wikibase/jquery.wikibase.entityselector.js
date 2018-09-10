@@ -343,6 +343,21 @@
 					}
 					ids[ item.id ] = true;
 					return true;
+				},
+				ratingSorter = function ( item1, item2 ) {
+					if ( !item1.rating && !item1.rating ) {
+						return 0;
+					}
+					if ( !item1.rating ) {
+						return 1;
+					}
+					if ( !item2.rating ) {
+						return -1;
+					}
+					if ( item1.rating < item2.rating ) {
+						return 1;
+					}
+					return -1;
 				};
 
 			searchResults = searchResults || [];
@@ -353,6 +368,7 @@
 					searchResults = data.concat( searchResults );
 				} );
 
+				searchResults.sort( ratingSorter );
 				searchResults = searchResults.filter( uniqueFilter );
 				deferred.resolve( searchResults );
 			} );
