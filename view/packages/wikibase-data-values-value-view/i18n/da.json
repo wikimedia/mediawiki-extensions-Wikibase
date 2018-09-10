@@ -4,7 +4,8 @@
 			"Byrial",
 			"Joedalton",
 			"Peter Alberti",
-			"Saederup92"
+			"Saederup92",
+			"Jorn Ari"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering af værdier af $1 understøttes ikke endnu.",
@@ -17,6 +18,6 @@
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Sprog (obligatorisk):",
 	"valueview-expertextender-unitsuggester-label": "Enhed (valgfrit):",
-	"valueview-preview-label": "vil vises som:",
+	"valueview-preview-label": "vil blive vist som:",
 	"valueview-listrotator-manually": "angiv manuelt"
 }

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ဘာမှမရှိ",
+	"valueview-expert-globecoordinateinput-precision": "တိကျမှု:",
+	"valueview-expert-timevalue-calendar-gregorian": "ဂရီဂေါရီးယန်း",
+	"valueview-expert-timevalue-calendar-julian": "ဂျူလီယန်",
+	"valueview-expert-timeinput-precision": "တိကျမှု:",
+	"valueview-expert-timeinput-calendar": "ပြက္ခဒိန်:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "ဘာသာစကား (မဖြစ်မနေ):",
+	"valueview-expertextender-unitsuggester-label": "ယူနစ် (ထည့်လိုပါက):"
+}
