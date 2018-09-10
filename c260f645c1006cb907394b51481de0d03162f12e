@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc145ac0_339f41ac",
+        "filename": "tests/phan/stubs/cirrussearch.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-09-10T09:33:16Z",
+      "side": 1,
+      "message": "nitpick this namespace already exists line 97",
+      "revId": "c260f645c1006cb907394b51481de0d03162f12e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
