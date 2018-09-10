@@ -310,4 +310,99 @@
 		hookStub.restore();
 	} );
 
+	QUnit.test( 'When _combineResults() is called and all items have a rating', function ( assert ) {
+		var done = assert.async(),
+			itemList1 = [ { id: '[ID4]', rating: 4 }, { id: '[ID1]', rating: 1 } ],
+			itemList2 = [ { id: '[ID5]', rating: 5 }, { id: '[ID3]', rating: 3 }, { id: '[ID2]', rating: 2 } ],
+			sortedItemList = [ { id: '[ID5]', rating: 5 }, { id: '[ID4]', rating: 4 }, { id: '[ID3]', rating: 3 },
+				{ id: '[ID2]', rating: 2 }, { id: '[ID1]', rating: 1 } ],
+			promise1 = $.Deferred().resolve( itemList1 ).promise(),
+			promise2 = $.Deferred().resolve( itemList2 ).promise(),
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._combineResults( [ promise1, promise2 ] ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				sortedItemList,
+				'Then item list is returned is sorted  by rating desc'
+			);
+			done();
+		} );
+	} );
+
+	QUnit.test( 'When _combineResults() is called and all items have the same rating', function ( assert ) {
+		var done = assert.async(),
+			itemList = [ { id: '[ID1]', rating: 1 }, { id: '[ID2]', rating: 1 }, { id: '[ID3]', rating: 1 } ],
+			promise = $.Deferred().resolve( itemList ).promise(),
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._combineResults( [ promise ] ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				itemList,
+				'Then item list is returned has the original order'
+			);
+			done();
+		} );
+	} );
+
+	QUnit.test( 'When _combineResults() is called and all items are missing a rating', function ( assert ) {
+		var done = assert.async(),
+			itemList = [ { id: '[ID1]' }, { id: '[ID2]' }, { id: '[ID3]' } ],
+			promise = $.Deferred().resolve( itemList ).promise(),
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._combineResults( [ promise ] ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				itemList,
+				'Then item list is returned has the original order'
+			);
+			done();
+		} );
+	} );
+
+	QUnit.test( 'When _combineResults() is called and items have an equal rating or none', function ( assert ) {
+		var done = assert.async(),
+			itemList1 = [ { id: '[ID4]', rating: 4 }, { id: '[ID1]' } ],
+			itemList2 = [ { id: '[ID5]', rating: 5 }, { id: '[ID3]', rating: 2.5 }, { id: '[ID2]', rating: 2.5 } ],
+			sortedItemList = [ { id: '[ID5]', rating: 5 }, { id: '[ID4]', rating: 4 }, { id: '[ID3]', rating: 2.5 },
+				{ id: '[ID2]', rating: 2.5 }, { id: '[ID1]' } ],
+			promise1 = $.Deferred().resolve( itemList1 ).promise(),
+			promise2 = $.Deferred().resolve( itemList2 ).promise(),
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._combineResults( [ promise1, promise2 ] ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				sortedItemList,
+				'Then item list is returned is sorted  by rating desc'
+			);
+			done();
+		} );
+	} );
+
+	QUnit.test( 'When _combineResults() is called with hook results and default results', function ( assert ) {
+		var done = assert.async(),
+			itemList = [ { id: '[ID1]' }, { id: '[ID2]' }, { id: '[ID3]' } ],
+			defaultList = [ { id: '[IDX]', rating: 5 } ],
+			expectedList = itemList.concat( defaultList ),
+			promise = $.Deferred().resolve( itemList ).promise(),
+			$entitySelector = newTestEntitySelector(),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		entitySelector._combineResults( [ promise ], defaultList ).then( function ( list ) {
+			assert.deepEqual(
+				list,
+				expectedList,
+				'Then hook results are always on top of the list even if default results have a higher ranking'
+			);
+			done();
+		} );
+	} );
+
 }( jQuery, QUnit, sinon, mediaWiki ) );
