@@ -22,6 +22,30 @@
       "revId": "56b99896523d62c60a833f0533d9d21fc7d1973f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da3e57d5_cce8ec39",
+        "filename": "repo/includes/ParserOutput/PageImagesDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-09-10T09:18:08Z",
+      "side": 1,
+      "message": "True, good catch! However: There is only one public method where this might have an effect, and this method is well tested. Introducing another possibility to access the private member $this-\u003efestFileName would indeed be an issue because of what you wrote, and should not be done because of this.\n\nI updated the code documentation accordingly.",
+      "parentUuid": "67691b21_0a021152",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 3
+      },
+      "revId": "56b99896523d62c60a833f0533d9d21fc7d1973f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
