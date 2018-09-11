@@ -174,4 +174,29 @@
 		);
 	} );
 
+	QUnit.test( 'Given a value, sets html id attribute on creation', function ( assert ) {
+		var $statementgroupview = createStatementgroupview( {
+				value: new wb.datamodel.StatementGroup( 'P1' )
+			} ),
+			statementgroupview = $statementgroupview.data( 'statementgroupview' );
+
+		assert.equal(
+			'P1',
+			statementgroupview.element.attr( 'id' )
+		);
+	} );
+
+	QUnit.test( 'Given a value and a prefix, sets prefixed html id attribute on creation', function ( assert ) {
+		var $statementgroupview = createStatementgroupview( {
+				value: new wb.datamodel.StatementGroup( 'P1' ),
+				htmlIdPrefix: 'X1-Y2'
+			} ),
+			statementgroupview = $statementgroupview.data( 'statementgroupview' );
+
+		assert.equal(
+			'X1-Y2-P1',
+			statementgroupview.element.attr( 'id' )
+		);
+	} );
+
 }( jQuery, wikibase, QUnit ) );

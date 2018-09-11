@@ -41,6 +41,8 @@ class StatementGroupListView {
 	 */
 	private $statementHtmlGenerator;
 
+	const ID_PREFIX_SEPARATOR = '-';
+
 	public function __construct(
 		PropertyOrderProvider $propertyOrderProvider,
 		TemplateFactory $templateFactory,
@@ -59,16 +61,18 @@ class StatementGroupListView {
 	 * Builds and returns the HTML representing a WikibaseEntity's statements.
 	 *
 	 * @param Statement[] $statements
+	 * @param string $idPrefix - optional prefix for statement group ids
+	 *
 	 * @return string HTML
 	 */
-	public function getHtml( array $statements ) {
+	public function getHtml( array $statements, $idPrefix = '' ) {
 		$statementsByProperty = $this->orderStatementsByPropertyOrder(
 			$this->groupStatementsByProperties( $statements )
 		);
 
 		$statementsHtml = '';
 		foreach ( $statementsByProperty as $statements ) {
-			$statementsHtml .= $this->getHtmlForStatementGroupView( $statements );
+			$statementsHtml .= $this->getHtmlForStatementGroupView( $statements, $idPrefix );
 		}
 
 		return $this->templateFactory->render(
@@ -123,18 +127,23 @@ class StatementGroupListView {
 
 	/**
 	 * @param Statement[] $statements
+	 * @param string $prefix
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForStatementGroupView( array $statements ) {
+	private function getHtmlForStatementGroupView( array $statements, $prefix ) {
 		$propertyId = $statements[0]->getPropertyId();
 		$addStatementHtml = $this->editSectionGenerator->getAddStatementToGroupSection( $propertyId );
+
+		if ( $prefix !== '' ) {
+			$prefix .= self::ID_PREFIX_SEPARATOR;
+		}
 
 		return $this->templateFactory->render(
 			'wikibase-statementgroupview',
 			$this->propertyIdFormatter->formatEntityId( $propertyId ),
 			$this->getHtmlForStatementListView( $statements, $addStatementHtml ),
-			$propertyId->getSerialization()
+			$prefix . $propertyId->getSerialization()
 		);
 	}
 
