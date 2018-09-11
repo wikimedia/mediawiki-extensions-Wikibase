@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e30e4e79_1717665d",
+        "filename": "lib/tests/phpunit/Formatters/NonExistingEntityIdHtmlFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-11T16:56:37Z",
+      "side": 1,
+      "message": "The definition of `@group ValueFormatters` is unknown to me so it\u0027s hard to judge if it should be here or not.",
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d0da345_25d6dfb7",
+        "filename": "lib/tests/phpunit/Formatters/UnknownTypeEntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-11T16:56:37Z",
+      "side": 1,
+      "message": "The definition of `@group ValueFormatters` is unknown to me so it\u0027s hard to judge if it should be here or not.",
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
