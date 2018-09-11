@@ -1019,6 +1019,9 @@ call_user_func( function() {
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
 
+	// test hooks
+	$wgHooks['MediaWikiPHPUnitTest::startTest'][] = '\Wikibase\RepoHooks::onMediaWikiPHPUnitTestListenerStartTest';
+
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge(
 		$wgResourceModules,

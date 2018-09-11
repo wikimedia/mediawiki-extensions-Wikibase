@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use Deserializers\DispatchableDeserializer;
+use Exception;
 use InvalidArgumentException;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -293,6 +294,38 @@ class WikibaseRepo {
 	private $entityRdfBuilderFactory = null;
 
 	/**
+	 * @var WikibaseRepo|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * @var ValidatorBuilders|null
+	 */
+	private static $validatorBuilders = null;
+
+	/**
+	 * @var WikibaseValueFormatterBuilders|null
+	 */
+	private static $valueFormatterBuilders = null;
+
+	/**
+	 * @var WikibaseSnakFormatterBuilders|null
+	 */
+	private static $snakFormatterBuilders = null;
+
+	public static function resetClassStatics() {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new Exception(
+				'Cannot reset WikibaseRepo class statics outside of tests.'
+			);
+		}
+		self::$instance = null;
+		self::$validatorBuilders = null;
+		self::$valueFormatterBuilders = null;
+		self::$snakFormatterBuilders = null;
+	}
+
+	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
@@ -364,13 +397,11 @@ class WikibaseRepo {
 	 * @return self
 	 */
 	public static function getDefaultInstance() {
-		static $instance = null;
-
-		if ( $instance === null ) {
-			$instance = self::newInstance();
+		if ( self::$instance === null ) {
+			self::$instance = self::newInstance();
 		}
 
-		return $instance;
+		return self::$instance;
 	}
 
 	/**
@@ -380,14 +411,12 @@ class WikibaseRepo {
 	 * @return ValidatorBuilders
 	 */
 	public static function getDefaultValidatorBuilders() {
-		static $builders;
-
-		if ( $builders === null ) {
+		if ( self::$validatorBuilders === null ) {
 			$wikibaseRepo = self::getDefaultInstance();
-			$builders = $wikibaseRepo->newValidatorBuilders();
+			self::$validatorBuilders = $wikibaseRepo->newValidatorBuilders();
 		}
 
-		return $builders;
+		return self::$validatorBuilders;
 	}
 
 	/**
@@ -422,14 +451,12 @@ class WikibaseRepo {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public static function getDefaultValueFormatterBuilders() {
-		static $builders;
-
-		if ( $builders === null ) {
+		if ( self::$valueFormatterBuilders === null ) {
 			$wikibaseRepo = self::getDefaultInstance();
-			$builders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
+			self::$valueFormatterBuilders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
 		}
 
-		return $builders;
+		return self::$valueFormatterBuilders;
 	}
 
 	/**
@@ -470,15 +497,13 @@ class WikibaseRepo {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public static function getDefaultSnakFormatterBuilders() {
-		static $builders;
-
-		if ( $builders === null ) {
-			$builders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
+		if ( self::$snakFormatterBuilders === null ) {
+			self::$snakFormatterBuilders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
 				self::getDefaultValueFormatterBuilders()
 			);
 		}
 
-		return $builders;
+		return self::$snakFormatterBuilders;
 	}
 
 	/**
