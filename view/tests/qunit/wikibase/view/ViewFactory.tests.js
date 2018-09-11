@@ -171,9 +171,10 @@
 			entityIdHtmlFormatter = {},
 			viewFactory = newViewFactory( null, null, null, entityIdHtmlFormatter ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
-			value = new wb.datamodel.StatementGroup( 'P1' );
+			value = new wb.datamodel.StatementGroup( 'P1' ),
+			htmlIdPrefix = 'X1-Y2';
 
-		viewFactory.getListItemAdapterForStatementGroupView( null, entityId );
+		viewFactory.getListItemAdapterForStatementGroupView( null, entityId, null, htmlIdPrefix );
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
@@ -190,7 +191,8 @@
 			{
 				value: value,
 				entityIdHtmlFormatter: entityIdHtmlFormatter,
-				buildStatementListView: result.buildStatementListView // Hack
+				buildStatementListView: result.buildStatementListView, // Hack
+				htmlIdPrefix: htmlIdPrefix
 			}
 		);
 

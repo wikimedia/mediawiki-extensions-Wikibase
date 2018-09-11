@@ -53,6 +53,19 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		$this->assertContains( '<TOOLBAR></TOOLBAR>', $html );
 	}
 
+	public function testGivenIdPrefix_getHtmlPrefixesId() {
+		$id = 'P78';
+		$prefix = 'X1-Y5';
+		$statements = $this->makeStatements( new PropertyId( $id ) );
+
+		$statementGroupListView = $this->newStatementGroupListView();
+
+		$this->assertContains(
+			'id="' . $prefix . StatementGroupListView::ID_PREFIX_SEPARATOR . $id . '"',
+			$statementGroupListView->getHtml( $statements, $prefix )
+		);
+	}
+
 	public function testPropertyOrdering() {
 		$statements = [
 			$this->makeNoValueStatement( 'P2' ),

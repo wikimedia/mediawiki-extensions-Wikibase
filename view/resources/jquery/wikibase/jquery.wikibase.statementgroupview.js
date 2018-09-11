@@ -46,7 +46,8 @@
 			},
 			value: null,
 			buildStatementListView: null,
-			entityIdHtmlFormatter: null
+			entityIdHtmlFormatter: null,
+			htmlIdPrefix: ''
 		},
 
 		/**
@@ -89,8 +90,15 @@
 		 * @private
 		 */
 		_updateId: function () {
-			var propertyId = this.options.value.getKey();
-			this.element.attr( 'id', propertyId );
+			var propertyId = this.options.value.getKey(),
+				prefix = this.options.htmlIdPrefix,
+				prefixSeparator = '-';
+
+			if ( prefix !== '' ) {
+				prefix += prefixSeparator;
+			}
+
+			this.element.attr( 'id', prefix + propertyId );
 		},
 
 		/**
