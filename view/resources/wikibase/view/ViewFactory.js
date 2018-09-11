@@ -329,9 +329,11 @@
 	 * @param {Function} startEditingCallback
 	 * @param {wikibase.datamodel.Item|wikibase.datamodel.Property} entity
 	 * @param {jQuery} $statementgrouplistview
+	 * @param {string} htmlIdPrefix
+	 *
 	 * @return {jQuery.wikibase.statementgrouplistview} The constructed statementgrouplistview
 	 */
-	SELF.prototype.getStatementGroupListView = function ( startEditingCallback, entity, $statementgrouplistview ) {
+	SELF.prototype.getStatementGroupListView = function ( startEditingCallback, entity, $statementgrouplistview, htmlIdPrefix ) {
 		var statementGroupSet = entity.getStatements();
 
 		function getStatementForGuid( guid ) {
@@ -358,7 +360,8 @@
 				listItemAdapter: this.getListItemAdapterForStatementGroupView(
 					startEditingCallback,
 					entity.getId(),
-					getStatementForGuid
+					getStatementForGuid,
+					htmlIdPrefix
 				),
 				getAdder: this._getAdderWithStartEditing( startEditingCallback )
 			}
@@ -371,16 +374,19 @@
 	 * @param {Function} startEditingCallback
 	 * @param {string} entityId
 	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
+	 * @param {string} htmlIdPrefix
+	 *
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 */
-	SELF.prototype.getListItemAdapterForStatementGroupView = function ( startEditingCallback, entityId, getStatementForGuid ) {
+	SELF.prototype.getListItemAdapterForStatementGroupView = function ( startEditingCallback, entityId, getStatementForGuid, htmlIdPrefix ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementgroupview,
 			newItemOptionsFn: $.proxy( function ( value ) {
 				return {
 					value: value,
 					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					buildStatementListView: $.proxy( this.getStatementListView, this, startEditingCallback, entityId, value && value.getKey(), getStatementForGuid )
+					buildStatementListView: $.proxy( this.getStatementListView, this, startEditingCallback, entityId, value && value.getKey(), getStatementForGuid ),
+					htmlIdPrefix: htmlIdPrefix
 				};
 			}, this )
 		} );
