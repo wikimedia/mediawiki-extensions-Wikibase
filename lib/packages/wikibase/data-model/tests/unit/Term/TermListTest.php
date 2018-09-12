@@ -413,7 +413,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$deTerm = new Term( 'de', 'bar' );
 
 		$terms = new TermList();
-		$terms->add( [ $enTerm, $deTerm ] );
+		$terms->addAll( [ $enTerm, $deTerm ] );
 
 		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
 		$this->assertEquals( $deTerm, $terms->getByLanguage( 'de' ) );
@@ -425,7 +425,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$newEnTerm = new Term( 'en', 'NEW' );
 
 		$terms = new TermList( [ $enTerm ] );
-		$terms->add( [ $newEnTerm ] );
+		$terms->addAll( [ $newEnTerm ] );
 
 		$this->assertEquals( $newEnTerm, $terms->getByLanguage( 'en' ) );
 	}
@@ -435,7 +435,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$deTerm = new Term( 'de', 'bar' );
 
 		$terms = new TermList( [ $enTerm ] );
-		$terms->add( [ $deTerm ] );
+		$terms->addAll( [ $deTerm ] );
 
 		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
 	}
@@ -444,7 +444,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$enTerm = new Term( 'en', 'foo' );
 
 		$terms = new TermList();
-		$terms->add( new TermList( [ $enTerm ] ) );
+		$terms->addAll( new TermList( [ $enTerm ] ) );
 
 		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
 	}
@@ -452,7 +452,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testWhenAddingEmptyTerms_theyRemoveExistingOnes() {
 		$terms = new TermList( [ new Term( 'en', 'not-empty' ) ] );
 
-		$terms->add( [ new Term( 'en', '' ) ] );
+		$terms->addAll( [ new Term( 'en', '' ) ] );
 
 		$this->assertEquals( new TermList(), $terms );
 	}

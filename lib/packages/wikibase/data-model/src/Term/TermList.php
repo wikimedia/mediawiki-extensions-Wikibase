@@ -200,7 +200,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	 *
 	 * @param iterable|Term[] $terms
 	 */
-	public function add( /* iterable */ $terms ) {
+	public function addAll( /* iterable */ $terms ) {
 		foreach ( $terms as $term ) {
 			$this->setTerm( $term );
 		}
