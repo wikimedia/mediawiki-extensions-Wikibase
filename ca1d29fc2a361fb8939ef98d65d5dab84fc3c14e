@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7546b76_496a5cee",
+        "filename": "repo/tests/phpunit/includes/SummaryFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-12T09:57:41Z",
+      "side": 0,
+      "message": "Late in the game, but... would it not be more telling to prove that even such a (now admittedly arbitraily) long summary makes its way through unscathed, instead of removing the assertion? There apparently is no other of that kind.",
+      "range": {
+        "startLine": 288,
+        "startChar": 3,
+        "endLine": 292,
+        "endChar": 5
+      },
+      "revId": "ca1d29fc2a361fb8939ef98d65d5dab84fc3c14e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
