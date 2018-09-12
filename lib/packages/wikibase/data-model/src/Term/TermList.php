@@ -195,4 +195,15 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 		$this->terms = [];
 	}
 
+	/**
+	 * @since 8.1
+	 *
+	 * @param iterable|Term[] $terms
+	 */
+	public function add( /* iterable */ $terms ) {
+		foreach ( $terms as $term ) {
+			$this->setTerm( $term );
+		}
+	}
+
 }
