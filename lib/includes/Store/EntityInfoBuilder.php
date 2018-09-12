@@ -15,10 +15,10 @@ interface EntityInfoBuilder {
 	 * TODO: rename to getEntityInfo
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string[] $languageCodes
+	 * @param LanguageFallbackChain $languageFallbackChain
 	 *
 	 * @return EntityInfo
 	 */
-	public function collectEntityInfo( array $entityIds, array $languageCodes );
+	public function collectEntityInfo( array $entityIds, LanguageFallbackChain $languageFallbackChain );
 
 }

@@ -288,14 +288,14 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		$this->entityInfo = array_intersect_key( $this->entityInfo, array_flip( $retain ) );
 	}
 
-	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+	public function collectEntityInfo( array $entityIds, LanguageFallbackChain $languageFallbackChain ) {
 		$this->setEntityIds( $entityIds );
 
 		$this->resolveRedirects();
 
 		$this->collectTerms(
 			[ 'label', 'description' ],
-			$languageCodes
+			$languageFallbackChain->getFetchLanguageCodes()
 		);
 
 		$this->removeMissing();

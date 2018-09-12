@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
+use Wikibase\LanguageFallbackChain;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -29,14 +30,14 @@ class DispatchingEntityInfoBuilder implements EntityInfoBuilder {
 		$this->builders = $builders;
 	}
 
-	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+	public function collectEntityInfo( array $entityIds, LanguageFallbackChain $languageFallbackChain ) {
 		$info = [];
 
 		foreach ( $this->builders as $builder ) {
 			// This assumes that each per-repo EntityInfoBuilder only returns EntityInfo for its own entities.
 			// If the EntityInfoBuilder was also returning (maybe partial) information on other repo's entities,
 			// this should be adjusted to do a per-entity merge.
-			$info = array_merge( $info, $builder->collectEntityInfo( $entityIds, $languageCodes )->asArray() );
+			$info = array_merge( $info, $builder->collectEntityInfo( $entityIds, $languageFallbackChain )->asArray() );
 		}
 
 		return new EntityInfo( $info );

@@ -628,14 +628,14 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->unsetEntityInfo( $remove );
 	}
 
-	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
+	public function collectEntityInfo( array $entityIds, LanguageFallbackChain $languageFallbackChain ) {
 		$ids = $this->filterForeignEntityIds( $entityIds );
 
 		$this->setEntityIds( $ids );
 
 		$this->resolveRedirects();
 
-		$this->collectTerms( $languageCodes );
+		$this->collectTerms( $languageFallbackChain->getFetchLanguageCodes() );
 
 		$this->removeMissing();
 		$this->retainEntityInfo( $ids );
