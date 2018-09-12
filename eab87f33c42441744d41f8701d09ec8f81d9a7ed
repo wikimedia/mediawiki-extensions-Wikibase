@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "a5dd64b1_6e47db10",
+        "filename": "lib/includes/Formatters/LabelsProviderEntityIdHtmlLinkFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-12T14:46:51Z",
+      "side": 1,
+      "message": "Yay!",
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f6606dd_f782bfb6",
+        "filename": "lib/includes/Formatters/UnknownTypeEntityIdHtmlLinkFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-12T14:46:51Z",
+      "side": 1,
+      "message": "LabelsProviderEntityIdHtmlLinkFormatter itself didn\u0027t really change, right? UnknownTypeEntityIdHtmlLinkFormatter basically replaces LabelsProviderEntityIdHtmlLinkFormatter as the fallback EntityIdFormatter, but nothing really moved. Or maybe I misunderstand the comment.",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e30e4e79_1717665d",
         "filename": "lib/tests/phpunit/Formatters/NonExistingEntityIdHtmlFormatterTest.php",
         "patchSetId": 7
@@ -30,6 +70,29 @@
       "writtenOn": "2018-09-11T16:56:37Z",
       "side": 1,
       "message": "The definition of `@group ValueFormatters` is unknown to me so it\u0027s hard to judge if it should be here or not.",
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4396784a_2d3b2bd4",
+        "filename": "lib/tests/phpunit/Formatters/UnknownTypeEntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-12T14:46:51Z",
+      "side": 1,
+      "message": "Cool, I didn\u0027t know one could chain multiple -\u003eandAlso. Using allOf() instead of both()-\u003eandAlso()-\u003e... still seems nicer to me.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 79
+      },
       "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
