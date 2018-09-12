@@ -520,5 +520,6 @@
 	"apihelp-wbremovequalifiers-description": "Выдаляе кваліфікатар зь сьцьверджаньня.",
 	"apihelp-wbremovequalifiers-summary": "Выдаляе кваліфікатар зь сьцьверджаньня.",
 	"apihelp-wbremovequalifiers-param-baserevid": "Лікавы ідэнтыфікатар вэрсіі, на якой будзе грунтавацца зьмена.\nВыкарыстоўваецца для вызначэньня канфліктаў пры захаваньні.",
-	"apihelp-wbremovequalifiers-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}»."
+	"apihelp-wbremovequalifiers-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}».",
+	"apihelp-wbremovequalifiers-param-claim": "GUID сьцьверджаньня, зь якога выдаляць кваліфікатары"
 }

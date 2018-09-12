@@ -27,7 +27,8 @@
 			"AntonierCH",
 			"Envlh",
 			"KATRINE1992",
-			"Ayack"
+			"Ayack",
+			"Jona"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -164,7 +165,7 @@
 	"wikibase-entity-summary-wblinktitles-connect": "Lien de langue ajouté pour connecter les pages",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Affirmation ajoutée|Affirmations ajoutées}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Valeur spéciale «&nbsp;aucune valeur&nbsp;» ajoutée|Valeurs spéciales «&nbsp;aucune valeur&nbsp;» ajoutées}}",
-	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Affirmation ajoutée : «&nbsp;valeur inconnue&nbsp;»|A\nffirmations ajoutées : «&nbsp;valeur inconnue&nbsp;»}}",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Affirmation ajoutée : «&nbsp;valeur inconnue&nbsp;»|Affirmations ajoutées : «&nbsp;valeur inconnue&nbsp;»}}",
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Affirmation ajoutée|A\nffirmation ajoutée}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "{{PLURAL:$1|affirmation modifiée|affirmations modifiées}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Affirmation supprimée|Affirmations supprimées}}",
@@ -173,7 +174,7 @@
 	"wikibase-entity-summary-special-create-item": "Un élément [$2] créé avec {{PLURAL:$1|la valeur|les valeurs}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "Affirmation ajoutée",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Affirmation modifiée|Affirmations modifiées}}",
-	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|affirmation créée|Affirmations créées}}",
+	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Affirmation créée|Affirmations créées}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Un qualificatif|$4 qualificatifs}} de {{PLURAL:$3|déclaration|déclarations}} {{PLURAL:$4|modifié|modifiés}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|Une référence|$4 références}} d’{{PLURAL:$3|affirmation|affirmations}} {{PLURAL:$4|modifiée|modifiées}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Rang {{PLURAL:$3|de l’affirmation|des affirmations}} modifié",
