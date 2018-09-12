@@ -82,8 +82,6 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 		$propertyInfo = $this->getAllPropertyInfo();
 		$id = $propertyId->getSerialization();
 
-		wfDebugLog( 'AdHocDebug', 'Get property info for property ' . $id );
-
 		if ( isset( $propertyInfo[$id] ) ) {
 			return $propertyInfo[$id];
 		}
@@ -99,8 +97,6 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
-		wfDebugLog( 'AdHocDebug', 'Get property info for dataType ' . $dataType );
-
 		$propertyInfo = $this->getAllPropertyInfo();
 		$propertyInfoForDataType = [];
 
@@ -119,17 +115,15 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 */
 	public function getAllPropertyInfo() {
-		wfDebugLog( 'AdHocDebug', 'Get all property info: call' );
 		if ( $this->propertyInfo === null ) {
-			wfDebugLog( 'AdHocDebug', 'Get all property info: not in process cache' );
 			$this->propertyInfo = $this->cache->get( $this->cacheKey );
 
 			if ( !is_array( $this->propertyInfo ) ) {
 				$this->propertyInfo = $this->lookup->getAllPropertyInfo();
 				$this->cache->set( $this->cacheKey, $this->propertyInfo, $this->cacheDuration );
-				wfDebugLog( 'AdHocDebug', 'Get all property info: cached fresh property info table' );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': cached fresh property info table' );
 			} else {
-				wfDebugLog( 'AdHocDebug', 'Get all property info: using cached property info table' );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': using cached property info table' );
 			}
 		}
 
