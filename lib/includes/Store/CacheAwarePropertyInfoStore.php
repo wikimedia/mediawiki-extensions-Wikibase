@@ -89,7 +89,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$propertyInfo[$id] = $info;
 
 		// update external cache
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating cache after updating property ' . $id );
+		wfDebugLog( 'AdHocDebug', 'Updating cache after updating property ' . $id );
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 	}
 
@@ -116,7 +116,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		unset( $propertyInfo[$id] );
 
 		// update external cache
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating cache after removing property ' . $id );
+		wfDebugLog( 'AdHocDebug', 'Updating cache after removing property ' . $id );
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 
 		return true;
