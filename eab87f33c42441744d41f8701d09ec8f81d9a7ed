@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "13254d1b_7282ca38",
+        "filename": "lib/includes/Formatters/UnknownTypeEntityIdHtmlLinkFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-13T09:14:33Z",
+      "side": 1,
+      "message": "So as it turns out we still have to cover the scenario that items have no label. But we do this in one discreet place, while covering link formatting for non-items in another discreet place - instead of having this work in the same way accidentally.",
+      "parentUuid": "e73c2285_b5cc81a3",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e30e4e79_1717665d",
         "filename": "lib/tests/phpunit/Formatters/NonExistingEntityIdHtmlFormatterTest.php",
         "patchSetId": 7
