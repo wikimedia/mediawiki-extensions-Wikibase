@@ -457,4 +457,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( new TermList(), $terms );
 	}
 
+	public function testCanConstructWithIterables() {
+		$enTerm = new Term( 'en', 'foo' );
+		$deTerm = new Term( 'de', 'bar' );
+
+		$terms = new TermList( new TermList( [ $enTerm, $deTerm ] ) );
+
+		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
+		$this->assertEquals( $deTerm, $terms->getByLanguage( 'de' ) );
+	}
+
 }
