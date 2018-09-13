@@ -2,12 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
-use Article;
 use HashConfig;
 use IContextSource;
 use Language;
-use MWContentSerializationException;
 use OutputPage;
+use Page;
 use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_MockObject;
 use Title;
@@ -37,18 +36,16 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	const DUMMY_LANGUAGE = 'qqx';
 
 	/**
-	 * @return Article
+	 * @return Page
 	 */
-	private function getArticle() {
-		$page = $this->getMockBuilder( Article::class )
-			->disableOriginalConstructor()
+	private function getPage() {
+		$page = $this->getMockBuilder( Page::class )
+			->setMethods( [ 'exists', 'getTitle', 'getTouched' ] )
 			->getMock();
+		$page->method( 'exists' )
+			->willReturn( true );
 		$page->method( 'getTitle' )
 			->willReturn( Title::newFromText( 'Page title' ) );
-		$page->expects( $this->never() )
-			->method( 'getPage' )
-			// Deserializing the full entity may fail, see https://gerrit.wikimedia.org/r/262881
-			->willThrowException( new MWContentSerializationException() );
 
 		return $page;
 	}
@@ -94,7 +91,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
 
 		$context->method( 'getTitle' )
-			->willReturn( $this->getArticle()->getTitle() );
+			->willReturn( $this->getPage()->getTitle() );
 
 		$output->expects( $this->once() )
 			->method( 'getContext' )
@@ -142,7 +139,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->with( $expected );
 
 		$action = new HistoryEntityAction(
-			$this->getArticle(),
+			$this->getPage(),
 			$this->getContext( $output ),
 			$entityIdLookup,
 			$labelLookup
