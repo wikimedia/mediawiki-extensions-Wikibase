@@ -623,7 +623,18 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 		//TODO: Find a canonical way to generate an EntityId from the maxId number.
 		//XXX: Using setId() with an integer argument is deprecated!
 		$numericId = ++$this->maxEntityId;
-		$entity->setId( $numericId );
+
+		if ( $entity instanceof Item ) {
+			$entity->setId( ItemId::newFromNumber( $numericId ) );
+			return;
+		}
+
+		if ( $entity instanceof Property ) {
+			$entity->setId( PropertyId::newFromNumber( $numericId ) );
+			return;
+		}
+
+		throw new \RuntimeException( 'Cannot create a new ID for non-items and non-properties' );
 	}
 
 	/**
