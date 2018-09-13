@@ -66,6 +66,10 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	public function testAddsPropertyIdDataAttribute() {
+		$this->markTestIncomplete();
+	}
+
 	public function testPropertyOrdering() {
 		$statements = [
 			$this->makeNoValueStatement( 'P2' ),
