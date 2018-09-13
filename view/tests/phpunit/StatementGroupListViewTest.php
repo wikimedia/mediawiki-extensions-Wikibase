@@ -66,6 +66,18 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	public function testAddsPropertyIdDataAttribute() {
+		$id = 'P78';
+		$statements = $this->makeStatements( new PropertyId( $id ) );
+
+		$statementGroupListView = $this->newStatementGroupListView();
+
+		$this->assertContains(
+			'data-property-id="' . $id . '"',
+			$statementGroupListView->getHtml( $statements )
+		);
+	}
+
 	public function testPropertyOrdering() {
 		$statements = [
 			$this->makeNoValueStatement( 'P2' ),
@@ -151,7 +163,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( [
 			'wikibase-statementgrouplistview' => '<SGLIST>$1</SGLIST>',
 			'wikibase-listview' => '<LIST>$1</LIST>',
-			'wikibase-statementgroupview' => '<SGROUP id="$3"><PROPERTY>$1</PROPERTY>$2</SGROUP>',
+			'wikibase-statementgroupview' => '<SGROUP data-property-id="$4" id="$3"><PROPERTY>$1</PROPERTY>$2</SGROUP>',
 			'wikibase-statementlistview' => '<SLIST>$1<TOOLBAR>$2</TOOLBAR></SLIST>',
 		] ) );
 
