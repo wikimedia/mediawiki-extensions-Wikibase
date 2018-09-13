@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af2e5cde_b64025c6",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-09-13T07:14:47Z",
+      "side": 1,
+      "message": "as this is a test code, I would not moan here too much. But quite nasty it is.\nOTOH this whole MockRepository is rather iffy thing AFAIR",
+      "revId": "5ff3a38a728d4f7816326b10248ca5a696fb3539",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
