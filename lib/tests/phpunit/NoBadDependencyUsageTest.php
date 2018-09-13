@@ -16,14 +16,14 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNoRepoUsageInLib() {
 		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 1 );
-		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 2 );
+		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 0 );
+		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 1 );
 	}
 
 	public function testNoClientUsageInLib() {
 		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseClient' . '::', 1 );
-		$this->assertStringNotInLib( 'Wikibase\\Client\\', 1 );
+		$this->assertStringNotInLib( 'WikibaseClient' . '::', 0 );
+		$this->assertStringNotInLib( 'Wikibase\\Client\\', 0 );
 	}
 
 	/**
