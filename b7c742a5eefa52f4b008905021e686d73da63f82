@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4237654a_d608d2b1",
+        "filename": "view/tests/qunit/wikibase/view/ViewFactory.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-13T15:42:31Z",
+      "side": 1,
+      "message": "This dash might put people off (if they use the test as an example on how to use it) as it is now also auto-appended. Of course, it is not wrong per se.",
+      "range": {
+        "startLine": 175,
+        "startChar": 24,
+        "endLine": 175,
+        "endChar": 25
+      },
+      "revId": "b7c742a5eefa52f4b008905021e686d73da63f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
