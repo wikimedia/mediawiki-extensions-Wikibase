@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "e73c2285_b5cc81a3",
+        "filename": "lib/includes/Formatters/UnknownTypeEntityIdHtmlLinkFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-13T08:45:46Z",
+      "side": 1,
+      "message": "What this, ever so clumsy, tries to say is exactly what you rightfully denounce. EntityIdHtmlLinkFormatter is covering a scenario that before was solved in https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/457924/7/lib/includes/Formatters/LabelsProviderEntityIdHtmlLinkFormatter.php#72 - a code path that should be dead in there now. The question is if we are brave enough yet to eliminate it there? Let\u0027s chat, please.",
+      "parentUuid": "0f6606dd_f782bfb6",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 51
+      },
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e30e4e79_1717665d",
         "filename": "lib/tests/phpunit/Formatters/NonExistingEntityIdHtmlFormatterTest.php",
         "patchSetId": 7
@@ -96,6 +120,30 @@
       "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52f1c3df_038ba515",
+        "filename": "lib/tests/phpunit/Formatters/UnknownTypeEntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-13T08:45:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4396784a_2d3b2bd4",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 79
+      },
+      "revId": "eab87f33c42441744d41f8701d09ec8f81d9a7ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
