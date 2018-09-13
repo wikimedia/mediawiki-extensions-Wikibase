@@ -38,7 +38,8 @@
 			templateParams: [
 				'', // label
 				'', // statementlistview widget
-				'' // id
+				'', // id
+				'' // property id
 			],
 			templateShortCuts: {
 				$property: '.wikibase-statementgroupview-property',

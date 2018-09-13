@@ -54,7 +54,7 @@ HTML;
 
 	$templates['wikibase-statementgroupview'] =
 <<<HTML
-<div class="wikibase-statementgroupview" id="$3">
+<div class="wikibase-statementgroupview" id="$3" data-property-id="$4">
 	<div class="wikibase-statementgroupview-property">
 		<div class="wikibase-statementgroupview-property-label" dir="auto">$1</div>
 	</div>
