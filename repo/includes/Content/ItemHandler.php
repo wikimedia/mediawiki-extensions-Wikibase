@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Content;
 
-use Article;
 use DataUpdate;
 use IContextSource;
 use Page;
@@ -31,7 +30,6 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitEntityAction;
 use Wikibase\TermIndex;
 use Wikibase\ViewEntityAction;
-use WikiPage;
 
 /**
  * Content handler for Wikibase items.
@@ -111,15 +109,9 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return [
-			'history' => function( Page $article, IContextSource $context ) {
-				// NOTE: for now, the callback must work with a WikiPage as well as an Article
-				// object. Once I0335100b2 is merged, this is no longer needed.
-				if ( $article instanceof WikiPage ) {
-					$article = Article::newFromWikiPage( $article, $context );
-				}
-
+			'history' => function( Page $page, IContextSource $context ) {
 				return new HistoryEntityAction(
-					$article,
+					$page,
 					$context,
 					$this->entityIdLookup,
 					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
