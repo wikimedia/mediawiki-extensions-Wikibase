@@ -405,7 +405,7 @@
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
 	 */
 	SELF.prototype.getStatementListView = function ( startEditingCallback, entityId, propertyId, getStatementForGuid, value, $statementlistview ) {
-		propertyId = propertyId || $statementlistview.closest( '.wikibase-statementgroupview' ).attr( 'id' );
+		propertyId = propertyId || $statementlistview.closest( '.wikibase-statementgroupview' ).data( 'property-id' );
 
 		return this._getView(
 			'statementlistview',

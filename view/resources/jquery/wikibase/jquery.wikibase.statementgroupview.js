@@ -38,7 +38,8 @@
 			templateParams: [
 				'', // label
 				'', // statementlistview widget
-				'' // id
+				'', // html id attribute
+				'' // property id
 			],
 			templateShortCuts: {
 				$property: '.wikibase-statementgroupview-property',
@@ -70,6 +71,7 @@
 
 			if ( this.options.value ) {
 				this._updateId();
+				this._updatePropertyId( this.options.value.getKey() );
 				this._createPropertyLabel();
 			}
 			this._createStatementlistview();
@@ -99,6 +101,15 @@
 			}
 
 			this.element.attr( 'id', prefix + propertyId );
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {string} propertyId
+		 */
+		_updatePropertyId: function ( propertyId ) {
+			this.element.data( 'property-id', propertyId );
 		},
 
 		/**

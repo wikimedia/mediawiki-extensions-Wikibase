@@ -186,6 +186,18 @@
 		);
 	} );
 
+	QUnit.test( 'Given a value, sets property id data attribute on creation', function ( assert ) {
+		var $statementgroupview = createStatementgroupview( {
+				value: new wb.datamodel.StatementGroup( 'P1' )
+			} ),
+			statementgroupview = $statementgroupview.data( 'statementgroupview' );
+
+		assert.equal(
+			'P1',
+			statementgroupview.element.data( 'property-id' )
+		);
+	} );
+
 	QUnit.test( 'Given a value and a prefix, sets prefixed html id attribute on creation', function ( assert ) {
 		var $statementgroupview = createStatementgroupview( {
 				value: new wb.datamodel.StatementGroup( 'P1' ),

@@ -143,7 +143,8 @@ class StatementGroupListView {
 			'wikibase-statementgroupview',
 			$this->propertyIdFormatter->formatEntityId( $propertyId ),
 			$this->getHtmlForStatementListView( $statements, $addStatementHtml ),
-			$prefix . $propertyId->getSerialization()
+			$prefix . $propertyId->getSerialization(),
+			$propertyId->getSerialization()
 		);
 	}
 
