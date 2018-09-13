@@ -254,6 +254,32 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
+	QUnit.test( 'getStatementListView derives property id from parent data attribute', function ( assert ) {
+		assert.expect( 1 );
+		var factory = newViewFactory(),
+			value = new wb.datamodel.StatementList(),
+			$parent = $( '<div class="wikibase-statementgroupview" />' ),
+			expectedPropertyId = 'P123',
+			$dom = $( '<div/>' );
+
+		sinon.stub( factory, '_getAdderWithStartEditing' );
+		factory._getAdderWithStartEditing.returns( function () {} );
+
+		$parent.data( 'property-id', expectedPropertyId );
+		$parent.append( $dom );
+
+		sinon.spy( factory, 'getListItemAdapterForStatementView' );
+		factory.getStatementListView( null, null, null, function () {}, value, $dom );
+
+		sinon.assert.calledWith( factory.getListItemAdapterForStatementView,
+			sinon.match.any,
+			sinon.match.any,
+			sinon.match.any,
+			expectedPropertyId,
+			sinon.match.any
+		);
+	} );
+
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function ( assert ) {
 		assert.expect( 2 );
 		var entityId = 'Q1',
