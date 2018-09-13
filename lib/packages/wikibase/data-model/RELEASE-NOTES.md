@@ -2,7 +2,7 @@
 
 ## Version 8.1.0 (dev)
 
-* The `TermList` constructor now take any `iterable` instead of just `array`
+* The `TermList` constructor now takes any `iterable` instead of just `array`
 * Added `TermList::addAll`
 
 ## Version 8.0.0 (2018-08-03)
