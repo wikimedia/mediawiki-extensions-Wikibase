@@ -467,4 +467,16 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $deTerm, $terms->getByLanguage( 'de' ) );
 	}
 
+	public function testWhenProvidingNonTerms_constructorThrowsException() {
+		$this->setExpectedException( InvalidArgumentException::class );
+		new TermList( [ 'no-a-term' ] );
+	}
+
+	public function testWhenProvidingNonTerms_addAllThrowsException() {
+		$list = new TermList( [] );
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$list->addAll( [ 'no-a-term' ] );
+	}
+
 }
