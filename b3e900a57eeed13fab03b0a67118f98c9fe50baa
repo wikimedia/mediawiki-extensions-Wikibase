@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "94e32042_6c398ef9",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2018-09-14T19:16:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "683f1a40_862d0d0b",
+      "range": {
+        "startLine": 410,
+        "startChar": 5,
+        "endLine": 410,
+        "endChar": 11
+      },
+      "revId": "b3e900a57eeed13fab03b0a67118f98c9fe50baa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aad4ebf_8c1ddd9c",
         "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
         "patchSetId": 4
