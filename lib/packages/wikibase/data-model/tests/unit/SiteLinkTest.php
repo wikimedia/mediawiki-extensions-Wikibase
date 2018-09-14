@@ -217,7 +217,7 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNonItemIdCollectionForBadges_constructorThrowsException() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new SiteLink( 'foo', 'bar', 42 );
 	}
 

@@ -286,7 +286,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$referenceList = new ReferenceList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$referenceList->addReference( $reference, -1 );
 	}
 
@@ -491,7 +491,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 	public function testGivenNoneSnak_addNewReferenceThrowsException() {
 		$references = new ReferenceList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$references->addNewReference( new PropertyNoValueSnak( 1 ), null );
 	}
 

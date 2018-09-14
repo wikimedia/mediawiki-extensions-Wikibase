@@ -39,7 +39,7 @@ class LegacyIdInterpreterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidInputProvider
 	 */
 	public function testNewIdFromTypeAndNumber_withInvalidInput( $type, $number ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		LegacyIdInterpreter::newIdFromTypeAndNumber( $type, $number );
 	}
 

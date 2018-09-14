@@ -29,7 +29,7 @@ class EntityRedirectTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testConstruction_baseType() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$entityId = new ItemId( 'Q123' );
 		$targetId = new PropertyId( 'P345' );

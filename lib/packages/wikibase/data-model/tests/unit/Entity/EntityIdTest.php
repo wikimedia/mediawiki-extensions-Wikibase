@@ -120,7 +120,7 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testSplitSerializationFails_GivenInvalidSerialization( $serialization ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		EntityId::splitSerialization( $serialization );
 	}
 
@@ -135,7 +135,7 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidJoinSerializationDataProvider
 	 */
 	public function testJoinSerializationFails_GivenEmptyId( $parts ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		EntityId::joinSerialization( $parts );
 	}
 
@@ -184,13 +184,11 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testConstructor( $serialization ) {
-		$this->setExpectedException( InvalidArgumentException::class );
-
-		$mock = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
+		$mock = $this->createMock( EntityId::class );
 
 		$constructor = ( new ReflectionClass( EntityId::class ) )->getConstructor();
+
+		$this->expectException( InvalidArgumentException::class );
 		$constructor->invoke( $mock, $serialization );
 	}
 

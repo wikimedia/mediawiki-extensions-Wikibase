@@ -49,7 +49,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidIdSerializationProvider
 	 */
 	public function testCannotConstructWithInvalidSerialization( $invalidSerialization ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new PropertyId( $invalidSerialization );
 	}
 
@@ -142,7 +142,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidNumericIdProvider
 	 */
 	public function testNewFromNumberWithInvalidNumericId( $number ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		PropertyId::newFromNumber( $number );
 	}
 
@@ -162,7 +162,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewFromRepositoryAndNumberWithInvalidNumericId() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		PropertyId::newFromRepositoryAndNumber( '', 'P1' );
 	}
 

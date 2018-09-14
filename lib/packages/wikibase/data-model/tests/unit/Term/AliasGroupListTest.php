@@ -90,7 +90,7 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNonAliasGroups_constructorThrowsException() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new AliasGroupList( [ null ] );
 	}
 
@@ -111,14 +111,14 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new AliasGroupList();
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$list->getByLanguage( $languageCode );
 	}
 
 	public function testGivenNonSetLanguageCode_getByLanguageThrowsException() {
 		$list = new AliasGroupList();
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$list->getByLanguage( 'en' );
 	}
 
@@ -313,14 +313,14 @@ class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 	public function testGivenInvalidLanguageCode_setGroupTextsThrowsException() {
 		$list = new AliasGroupList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$list->setAliasesForLanguage( null, [ 'foo', 'bar' ] );
 	}
 
 	public function testGivenInvalidAliases_setGroupTextsThrowsException() {
 		$list = new AliasGroupList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$list->setAliasesForLanguage( 'en', [ 'foo', null ] );
 	}
 

@@ -51,7 +51,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	public function testCannotParseInvalidId( $invalidIdSerialization ) {
 		$parser = $this->getBasicParser();
 
-		$this->setExpectedException( EntityIdParsingException::class );
+		$this->expectException( EntityIdParsingException::class );
 		$parser->parse( $invalidIdSerialization );
 	}
 
@@ -75,7 +75,7 @@ class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	public function testCannotParseWithoutBuilders() {
 		$parser = new DispatchingEntityIdParser( [] );
 
-		$this->setExpectedException( EntityIdParsingException::class );
+		$this->expectException( EntityIdParsingException::class );
 		$parser->parse( 'Q1' );
 	}
 

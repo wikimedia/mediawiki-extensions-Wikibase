@@ -34,9 +34,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	 * @return Statement
 	 */
 	private function getStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
-		$statement = $this->getMockBuilder( Statement::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$statement = $this->createMock( Statement::class );
 
 		$statement->expects( $this->any() )
 			->method( 'getGuid' )
@@ -257,7 +255,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 		$list = new StatementList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$list->addStatement( $statement, -1 );
 	}
 
@@ -355,12 +353,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 			$this->getStatementWithSnak( 'P2', 'bar' ),
 		] );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new StatementList( $traversable );
 	}
 
 	public function testGivenNonTraversableOrArgList_constructorThrowsException() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new StatementList( null );
 	}
 
@@ -389,7 +387,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statement1 = new Statement( $this->newSnak( 'P42', 'bar' ) );
 		$statement2 = new Statement( $this->newSnak( 'P42', 'baz' ) );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new StatementList( $statement0, $statement1, [], $statement2 );
 	}
 

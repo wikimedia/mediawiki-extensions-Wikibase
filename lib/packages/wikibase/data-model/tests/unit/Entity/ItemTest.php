@@ -52,7 +52,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 	public function testGetSiteLinkWithNonSetSiteId() {
 		$item = new Item();
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$item->getSiteLinkList()->getBySiteId( 'enwiki' );
 	}
 
