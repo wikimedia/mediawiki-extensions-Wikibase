@@ -22,6 +22,30 @@
       "revId": "b7c742a5eefa52f4b008905021e686d73da63f82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92735bbf_b65b0d49",
+        "filename": "view/tests/qunit/wikibase/view/ViewFactory.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-14T08:37:24Z",
+      "side": 1,
+      "message": "Well spotted, fixed",
+      "parentUuid": "4237654a_d608d2b1",
+      "range": {
+        "startLine": 175,
+        "startChar": 24,
+        "endLine": 175,
+        "endChar": 25
+      },
+      "revId": "b7c742a5eefa52f4b008905021e686d73da63f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
