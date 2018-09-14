@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "533909af_74906327",
+        "filename": "view/src/StatementGroupListView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-14T14:42:41Z",
+      "side": 1,
+      "message": "Nope, added -\u003egetSerialization()!",
+      "parentUuid": "cf605ae4_dc91a384",
+      "range": {
+        "startLine": 147,
+        "startChar": 3,
+        "endLine": 147,
+        "endChar": 14
+      },
+      "revId": "547117ab86bb218bec7bd68aee57e79841d2d215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8ea13b3d_3b6ec30b",
         "filename": "view/tests/qunit/wikibase/view/ViewFactory.tests.js",
         "patchSetId": 4
@@ -68,6 +92,30 @@
       "revId": "547117ab86bb218bec7bd68aee57e79841d2d215",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5526b699_66ee229a",
+        "filename": "view/tests/qunit/wikibase/view/ViewFactory.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-14T14:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ea13b3d_3b6ec30b",
+      "range": {
+        "startLine": 272,
+        "startChar": 44,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "547117ab86bb218bec7bd68aee57e79841d2d215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
