@@ -145,6 +145,7 @@ call_user_func( function() {
 
 	// i18n
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
+	$wgMessagesDirs['WikibaseApi'] = __DIR__ . '/i18n/api';
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 
