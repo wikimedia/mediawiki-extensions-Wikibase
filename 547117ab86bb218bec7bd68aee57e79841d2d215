@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88d7a609_c3f7f5a8",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementgroupview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-14T14:09:05Z",
+      "side": 1,
+      "message": "Late but apparent only now - maybe use \"HTML id\" here. With the data attribute in place we know of no JS user that relies on it, right? So we could go as far as \"HTML id (as anchor)\".",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "547117ab86bb218bec7bd68aee57e79841d2d215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf605ae4_dc91a384",
+        "filename": "view/src/StatementGroupListView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-14T14:09:05Z",
+      "side": 1,
+      "message": "Was it a conscious decision not to explicitly call `-\u003egetSerialization()` here? I\u0027m just about fine with it (`EntityId` implements `__toString()`) but it would be a change of heart compared to the previous line.",
+      "range": {
+        "startLine": 147,
+        "startChar": 3,
+        "endLine": 147,
+        "endChar": 14
+      },
+      "revId": "547117ab86bb218bec7bd68aee57e79841d2d215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ea13b3d_3b6ec30b",
+        "filename": "view/tests/qunit/wikibase/view/ViewFactory.tests.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-09-14T14:09:05Z",
+      "side": 1,
+      "message": "Definitely not your fault but I could not find a test that asserts the propertyId, when passed as a parameter makes it through - now with the added complexity of not being overwritten by the data attribute.",
+      "range": {
+        "startLine": 272,
+        "startChar": 44,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "547117ab86bb218bec7bd68aee57e79841d2d215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
