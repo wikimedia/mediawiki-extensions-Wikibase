@@ -251,7 +251,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetInvalidRank( Statement $statement ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$statement->setRank( 9001 );
 	}
 

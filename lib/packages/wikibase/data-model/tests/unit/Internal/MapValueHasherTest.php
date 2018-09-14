@@ -59,7 +59,7 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 	public function testHashThrowsExceptionOnInvalidArgument() {
 		$hasher = new MapValueHasher();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$hasher->hash( null );
 	}
 

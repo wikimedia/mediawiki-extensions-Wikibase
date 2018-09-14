@@ -44,14 +44,9 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	private $fingerprint;
 
 	protected function setUp() {
-		$this->labels = $this->getMockBuilder( TermList::class )
-			->disableOriginalConstructor()->getMock();
-
-		$this->descriptions = $this->getMockBuilder( TermList::class )
-			->disableOriginalConstructor()->getMock();
-
-		$this->aliasGroups = $this->getMockBuilder( AliasGroupList::class )
-			->disableOriginalConstructor()->getMock();
+		$this->labels = $this->createMock( TermList::class );
+		$this->descriptions = $this->createMock( TermList::class );
+		$this->aliasGroups = $this->createMock( AliasGroupList::class );
 
 		$this->fingerprint = new Fingerprint(
 			new TermList( [

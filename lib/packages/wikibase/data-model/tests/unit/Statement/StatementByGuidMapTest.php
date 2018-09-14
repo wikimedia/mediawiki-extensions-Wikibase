@@ -44,7 +44,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonStringGuid_hasStatementWithGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$statements->hasStatementWithGuid( $nonString );
 	}
 
@@ -78,7 +78,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonStringGuid_getStatementByGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$statements->getStatementByGuid( $nonString );
 	}
 
@@ -106,12 +106,12 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNonStringGuid_removeStatementWithGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$statements->removeStatementWithGuid( $nonString );
 	}
 
 	public function testGivenStatementWithNoGuid_constructorThrowsException() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new StatementByGuidMap( [
 			$this->newStatement( 1, null )

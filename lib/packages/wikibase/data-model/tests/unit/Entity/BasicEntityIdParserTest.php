@@ -42,7 +42,7 @@ class BasicEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	public function testCannotParseInvalidId( $invalidIdSerialization ) {
 		$parser = new BasicEntityIdParser();
 
-		$this->setExpectedException( EntityIdParsingException::class );
+		$this->expectException( EntityIdParsingException::class );
 		$parser->parse( $invalidIdSerialization );
 	}
 

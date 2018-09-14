@@ -122,14 +122,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new TermList();
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$list->getByLanguage( $languageCode );
 	}
 
 	public function testGivenNonSetLanguageCode_getByLanguageThrowsException() {
 		$list = new TermList();
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$list->getByLanguage( 'en' );
 	}
 
@@ -315,14 +315,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidLanguageCode_setTermTextThrowsException() {
 		$list = new TermList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$list->setTextForLanguage( null, 'kittens' );
 	}
 
 	public function testGivenInvalidTermText_setTermTextThrowsException() {
 		$list = new TermList();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$list->setTextForLanguage( 'en', null );
 	}
 

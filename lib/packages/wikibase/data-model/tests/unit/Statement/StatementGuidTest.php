@@ -52,7 +52,7 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideBadConstruction
 	 */
 	public function testBadConstruction( EntityId $entityId, $guid ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new StatementGuid( $entityId, $guid );
 	}
 

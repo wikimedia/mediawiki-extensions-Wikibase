@@ -199,7 +199,7 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidArrayProvider
 	 */
 	public function testCannotDeserializeInvalidSerialization( $invalidArray ) {
-		$this->setExpectedException( IllegalValueException::class );
+		$this->expectException( IllegalValueException::class );
 
 		EntityIdValue::newFromArray( $invalidArray );
 	}

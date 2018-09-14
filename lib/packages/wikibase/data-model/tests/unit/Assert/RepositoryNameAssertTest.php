@@ -33,7 +33,7 @@ class RepositoryNameAssertTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideInvalidRepositoryNames
 	 */
 	public function testGivenInvalidValue_assertParameterIsValidRepositoryNameFails( $value ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $value, 'test' );
 	}
 
@@ -66,7 +66,7 @@ class RepositoryNameAssertTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideInvalidRepositoryNameIndexedArrays
 	 */
 	public function testGivenInvalidValue_assertParameterKeysAreValidRepositoryNamesFails( $values ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $values, 'test' );
 	}
 

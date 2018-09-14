@@ -40,7 +40,7 @@ class TermTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider nonStringProvider
 	 */
 	public function testGivenNonStringText_constructorThrowsException( $nonString ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new Term( 'foo', $nonString );
 	}
 
