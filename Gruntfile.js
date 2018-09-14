@@ -38,7 +38,8 @@ module.exports = function ( grunt ) {
 			all: [
 				'client/i18n/',
 				'lib/i18n/',
-				'repo/i18n/'
+				'repo/i18n/',
+				'repo/i18n/api/'
 			]
 		}
 	} );
