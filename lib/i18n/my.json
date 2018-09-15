@@ -12,6 +12,8 @@
 	"wikibase-error-remove-connection": "ကွန်နက်ရှင်အမှားကြောင့် မဖယ်ရှားနိုင်ခဲ့ပါ။ ကျေးဇူးပြု၍ အင်တာနက်ကွန်နက်ရှင်ကို စစ်ဆေးပါ။",
 	"wikibase-error-save-timeout": "နည်းပညာအခက်အခဲများ ကြုံတွေ့နေရပါသည်။ ကျေးဇူးပြု၍ ထပ်မံကြိုးစားကြည့်ပါ",
 	"wikibase-error-remove-timeout": "နည်းပညာအခက်အခဲများ ကြုံတွေ့နေရပါသည်။ ကျေးဇူးပြု၍ ထပ်မံကြိုးစားကြည့်ပါ",
+	"wikibase-error-ui-no-external-page": "\"$1\" တွင် \"$2\" ကို မရှာတွေ့နိုင်ခဲ့ပါ။",
+	"wikibase-language-fallback-transliteration-hint": "$1 (အသံဖလှယ်ပြီး)",
 	"wikibase-quantitydetails-unit": "ယူနစ်",
 	"wikibase-timedetails-time": "အချိန်",
 	"wikibase-timedetails-isotime": "အချိန်တံဆိပ်",
@@ -41,5 +43,8 @@
 	"wikibase-time-precision-BCE-annum": "ခရစ်တော်မပေါ်မီ {{PLURAL:$1|$1 နှစ်|$1 နှစ်}}",
 	"wikibase-time-precision-BCE-millennium": "ခရစ်တော်မပေါ်မီ $1 မီလီယံနှစ်",
 	"wikibase-time-precision-BCE-century": "ခရစ်တော်မပေါ်မီ $1 ရာစုနှစ်",
-	"wikibase-entity-summary-wbcreateredirect": "$4 သို့ ပြန်ညွှန်းထားသည်"
+	"wikibase-entity-summary-wbcreateredirect": "$4 သို့ ပြန်ညွှန်းထားသည်",
+	"wikibase-entity-summary-wbsetdescription-add": "[$2] ဖော်ပြချက်ကို ပေါင်းထည့်ခဲ့သည်",
+	"wikibase-entity-summary-wbsetdescription-set": "[$2] ဖော်ပြချက်ကို ပြောင်းလဲခဲ့သည်",
+	"wikibase-entity-summary-wbsetdescription-remove": "[$2] ဖော်ပြချက်ကို ဖယ်ရှားခဲ့သည်"
 }
