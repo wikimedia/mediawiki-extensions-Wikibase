@@ -22,6 +22,30 @@
       "revId": "573bc23bf0da688f1861609b505e53d965d11d9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e8f8e58_5a1d9f63",
+        "filename": "repo/config/ElasticSearchRescoreProfiles.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-09-17T19:06:32Z",
+      "side": 1,
+      "message": "It shouldn\u0027t matter too much what we do here since we override it in the config anyway, but I\u0027ll change it just to make the intent clearer.",
+      "parentUuid": "6f412407_c284a6d2",
+      "range": {
+        "startLine": 74,
+        "startChar": 30,
+        "endLine": 74,
+        "endChar": 33
+      },
+      "revId": "573bc23bf0da688f1861609b505e53d965d11d9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
