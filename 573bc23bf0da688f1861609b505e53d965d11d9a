@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f412407_c284a6d2",
+        "filename": "repo/config/ElasticSearchRescoreProfiles.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-09-17T09:32:58Z",
+      "side": 1,
+      "message": "since the phrase rescore is query dependent raising this weight to 2.0 would make sense to me.",
+      "range": {
+        "startLine": 74,
+        "startChar": 30,
+        "endLine": 74,
+        "endChar": 33
+      },
+      "revId": "573bc23bf0da688f1861609b505e53d965d11d9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
