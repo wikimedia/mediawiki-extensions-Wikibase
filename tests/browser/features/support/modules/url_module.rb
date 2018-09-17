@@ -7,19 +7,22 @@
 # module for URLs
 module URL
   def self.client_url(name)
-    url = ENV['WIKIDATA_CLIENT_URL']
-    lang = ENV['LANGUAGE_CODE']
-    "#{url}#{name}?setlang=#{lang}"
+    url_from_base(ENV['WIKIDATA_CLIENT_URL'], name)
   end
 
   def self.repo_url(name)
-    url = ENV['WIKIDATA_REPO_URL']
+    url_from_base(ENV['WIKIDATA_REPO_URL'], name)
+  end
+
+  def self.url_from_base(base, name)
+    target = "#{base}#{name}"
+    param_delimiter = target.include?('?') ? '&' : '?'
     lang = ENV['LANGUAGE_CODE']
-    "#{url}#{name}?setlang=#{lang}"
+
+    "#{target}#{param_delimiter}setlang=#{lang}"
   end
 
   def self.repo_api
-    url = ENV['WIKIDATA_REPO_API']
-    "#{url}"
+    ENV['WIKIDATA_REPO_API']
   end
 end
