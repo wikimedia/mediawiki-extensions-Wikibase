@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1152b28_7a89ef44",
+        "filename": "repo/includes/Actions/HistoryEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-09-17T10:01:39Z",
+      "side": 1,
+      "message": "Maybe this should be WikiPage rather than Page? (Which is the class $page will already be - and what the workarounds already expected, before turning $page into Article)\n`HistoryAction::onView` calls `$this-\u003epage-\u003eexists()`, a method that exists in WikiPage, but not in Page.",
+      "revId": "94f57323f8bf05e9d196743336b325fa306118ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
