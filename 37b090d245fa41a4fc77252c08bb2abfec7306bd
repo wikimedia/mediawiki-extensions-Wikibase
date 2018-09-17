@@ -22,6 +22,30 @@
       "revId": "37b090d245fa41a4fc77252c08bb2abfec7306bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0244138c_f7870765",
+        "filename": "tests/browser/features/support/modules/url_module.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-09-17T11:37:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec3a3a28_e6f4974b",
+      "range": {
+        "startLine": 21,
+        "startChar": 42,
+        "endLine": 21,
+        "endChar": 62
+      },
+      "revId": "37b090d245fa41a4fc77252c08bb2abfec7306bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
