@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ff7de3c_3e805eb1",
+        "filename": "docs/hooks-js.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-17T11:40:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e36594d2_83f49e84",
+      "range": {
+        "startLine": 15,
+        "startChar": 58,
+        "endLine": 15,
+        "endChar": 96
+      },
+      "revId": "5e43b845dc4f69284a3ec6444faab61791182f0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa870f81_06deced9",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-17T11:40:27Z",
+      "side": 1,
+      "message": "Apparently Array.sort() is stable in all modern browsers, so I think it would be okay to rely on it for this test. However, I would at least like to see a comment somewhere in the test noting that Array.sort() doesn’t guarantee this, to hopefully reduce confusion if the test breaks in the far future because some browser returns to a non-stable sort.",
+      "parentUuid": "792c1a80_d8e6c276",
+      "revId": "5e43b845dc4f69284a3ec6444faab61791182f0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
