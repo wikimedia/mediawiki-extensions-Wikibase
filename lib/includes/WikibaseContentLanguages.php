@@ -97,7 +97,6 @@ class WikibaseContentLanguages {
 					'lld', // T125066
 					'mid', // T155418
 					'mnc', // T137808
-					'mnw', // T155420
 					'moe', // T151129
 					'non', // T137115
 					'nr', // T155430
