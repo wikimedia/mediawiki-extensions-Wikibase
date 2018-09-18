@@ -57,6 +57,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/NewItem.php',
 				'tests/phpunit/includes/NewStatement.php',
 				'tests/phpunit/includes/PermissionsHelper.php',
+				'tests/phpunit/includes/TestEntityStoreWatcher.php',
 				'tests/phpunit/includes/Actions/ActionTestCase.php',
 				'tests/phpunit/includes/Api/ApiFormatTestCase.php',
 				'tests/phpunit/includes/Api/ApiModuleTestHelper.php',
