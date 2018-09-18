@@ -391,6 +391,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Tests\\Specials\\SpecialNewEntityTestCase' => __DIR__ . '/tests/phpunit/includes/Specials/SpecialNewEntityTestCase.php',
 	'Wikibase\\Repo\\Tests\\Specials\\SpecialWikibaseRepoPageTestBase' => __DIR__ . '/tests/phpunit/includes/Specials/SpecialWikibaseRepoPageTestBase.php',
 	'Wikibase\\Repo\\Tests\\Store\\MockEntityIdPager' => __DIR__ . '/tests/phpunit/includes/Store/MockEntityIdPager.php',
+	'Wikibase\\Repo\\Tests\\TestEntityStoreWatcher' => __DIR__ . '/tests/phpunit/includes/TestEntityStoreWatcher.php',
 	'Wikibase\\Repo\\Tests\\Validators\\TestValidator' => __DIR__ . '/tests/phpunit/includes/Validators/TestValidator.php',
 	'Wikibase\\Repo\\UpdateRepo\\UpdateRepoJob' => __DIR__ . '/includes/UpdateRepo/UpdateRepoJob.php',
 	'Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob' => __DIR__ . '/includes/UpdateRepo/UpdateRepoOnDeleteJob.php',
