@@ -37,6 +37,7 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'client/i18n/',
+				'client/i18n/api/',
 				'lib/i18n/',
 				'repo/i18n/',
 				'repo/i18n/api/'
