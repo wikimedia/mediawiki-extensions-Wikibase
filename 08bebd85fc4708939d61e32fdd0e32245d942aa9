@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8aaf9bd2_a27f042b",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-18T16:30:20Z",
+      "side": 1,
+      "message": "invalid-type isn’t quite the right message IMHO. (The entitieswithoutlabel also looks weird here, but apparently that’s a problem the whole class has, so nothing specific to this change.)",
+      "revId": "08bebd85fc4708939d61e32fdd0e32245d942aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
