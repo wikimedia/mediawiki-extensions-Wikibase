@@ -54,6 +54,7 @@
 	"wikibase-snakformatter-formatting-exception": "Formatēšanas kļūda: $1.",
 	"wikibase-entity-summary-wbsetitem": "Izveidots jauns ieraksts",
 	"wikibase-entity-summary-wbcreate-new": "Izveidots jauns ieraksts",
+	"wikibase-entity-summary-wbcreateredirect": "Pāradresēts uz $4",
 	"wikibase-entity-summary-wbeditentity": "Izveidots jauns ieraksts",
 	"wikibase-entity-summary-wbeditentity-create": "Izveidots jauns ieraksts",
 	"wikibase-entity-summary-wbeditentity-update": "Mainīts ieraksts",
