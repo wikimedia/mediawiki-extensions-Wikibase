@@ -20,22 +20,28 @@ use IContextSource;
 use LogEntry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\RevisionRecord;
+use MediaWikiTestCase;
 use MWException;
 use MWExceptionHandler;
 use OutputPage;
 use ParserOutput;
+use PHPUnit\Framework\Test;
 use RecentChange;
 use RequestContext;
 use ResourceLoader;
 use Revision;
+use RuntimeException;
 use Skin;
 use SkinTemplate;
 use StubUserLang;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
@@ -1286,8 +1292,36 @@ final class RepoHooks {
 		};
 	}
 
-	public static function onMediaWikiPHPUnitTestStartTest( $test ) {
+	public static function onMediaWikiPHPUnitTestStartTest( Test $test ) {
 		WikibaseRepo::resetClassStatics();
+
+		$testWatcher = new class ( $test ) implements EntityStoreWatcher {
+			private $test;
+
+			public function __construct( $test ) {
+				$this->test = $test;
+			}
+
+			public function entityUpdated( EntityRevision $entityRevision ) {
+				if ( !( $this->test instanceof MediaWikiTestCase ) ) {
+					throw new RuntimeException(
+						$this->test . ' interacting with the entity store does not extend MediaWikiTestCase. ' .
+						'Please fix this to ensure database cleanup (see tablesUsed).'
+					);
+				}
+
+				$this->test->addTablesUsed( [ 'page' ] );
+			}
+
+			public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+			}
+
+			public function entityDeleted( EntityId $entityId ) {
+			}
+
+		};
+
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->registerWatcher( $testWatcher );
 	}
 
 }
