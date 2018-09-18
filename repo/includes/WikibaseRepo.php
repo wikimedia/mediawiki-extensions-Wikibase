@@ -7,6 +7,7 @@ use Exception;
 use InvalidArgumentException;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
@@ -112,9 +113,8 @@ use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -1519,7 +1519,7 @@ class WikibaseRepo {
 			$siteLinkStore,
 			$this->getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
-			$this->getItemFieldDefinitions(),
+			$this->getFieldDefinitionsByType( Item::ENTITY_TYPE ),
 			$this->getPropertyDataTypeLookup(),
 			$legacyFormatDetector
 		);
@@ -1528,6 +1528,7 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @deprecated for T190022
 	 * @return FieldDefinitions
 	 */
 	public function getLabelProviderDefinitions() {
@@ -1535,6 +1536,7 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @deprecated for T190022
 	 * @return FieldDefinitions
 	 */
 	public function getDescriptionProviderDefinitions() {
@@ -1545,39 +1547,29 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @deprecated for T190022
 	 * @return FieldDefinitions
 	 */
 	public function getStatementProviderDefinitions() {
-		return new StatementProviderFieldDefinitions(
+		return StatementProviderFieldDefinitions::newFromSettings(
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
-			$this->settings->getSetting( 'searchIndexProperties' ),
-			$this->settings->getSetting( 'searchIndexTypes' ),
-			$this->settings->getSetting( 'searchIndexPropertiesExclude' ),
 			$this->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
-			$this->settings->getSetting( 'searchIndexQualifierPropertiesForQuantity' )
+			$this->settings
 		);
 	}
 
 	/**
+	 * Get field definitions for entity depending on its type.
+	 * @param string $type Entity type
 	 * @return FieldDefinitions
 	 */
-	private function getItemFieldDefinitions() {
-		return new ItemFieldDefinitions( [
-			$this->getLabelProviderDefinitions(),
-			$this->getDescriptionProviderDefinitions(),
-			$this->getStatementProviderDefinitions(),
-		] );
-	}
-
-	/**
-	 * @return FieldDefinitions
-	 */
-	private function getPropertyFieldDefinitions() {
-		return new PropertyFieldDefinitions( [
-			$this->getLabelProviderDefinitions(),
-			$this->getDescriptionProviderDefinitions(),
-			$this->getStatementProviderDefinitions(),
-		] );
+	public function getFieldDefinitionsByType( $type ) {
+		$definitions = $this->entityTypeDefinitions->getFieldDefinitions();
+		if ( isset( $definitions[$type] ) && is_callable( $definitions[$type] ) ) {
+			return call_user_func( $definitions[$type], $this->getTermsLanguages()->getLanguages(),
+				$this->settings );
+		}
+		return new NoFieldDefinitions();
 	}
 
 	/**
@@ -1602,7 +1594,7 @@ class WikibaseRepo {
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
 			$propertyInfoBuilder,
-			$this->getPropertyFieldDefinitions(),
+			$this->getFieldDefinitionsByType( Property::ENTITY_TYPE ),
 			$legacyFormatDetector
 		);
 
