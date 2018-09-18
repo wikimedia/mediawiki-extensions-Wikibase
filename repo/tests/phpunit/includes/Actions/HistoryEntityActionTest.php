@@ -37,9 +37,9 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	const DUMMY_LANGUAGE = 'qqx';
 
 	/**
-	 * @return Article
+	 * @return \Page
 	 */
-	private function getArticle() {
+	private function getPage() {
 		$page = $this->getMockBuilder( Article::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -94,7 +94,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
 
 		$context->method( 'getTitle' )
-			->willReturn( $this->getArticle()->getTitle() );
+			->willReturn( $this->getPage()->getTitle() );
 
 		$output->expects( $this->once() )
 			->method( 'getContext' )
@@ -142,7 +142,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->with( $expected );
 
 		$action = new HistoryEntityAction(
-			$this->getArticle(),
+			$this->getPage(),
 			$this->getContext( $output ),
 			$entityIdLookup,
 			$labelLookup
