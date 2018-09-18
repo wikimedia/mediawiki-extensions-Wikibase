@@ -46,6 +46,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\ConfigBuilder;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\Search\Elastic\Query\WbStatementQuantityFeature;
+use Wikibase\Repo\Tests\TestEntityStoreWatcher;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -1288,6 +1289,10 @@ final class RepoHooks {
 
 	public static function onMediaWikiPHPUnitTestStartTest( $test ) {
 		WikibaseRepo::resetClassStatics();
+
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->registerWatcher(
+			new TestEntityStoreWatcher( $test )
+		);
 	}
 
 }
