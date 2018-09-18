@@ -103,9 +103,9 @@ class ChangeOpStatement extends ChangeOpBase {
 
 		if ( $this->statement->getGuid() === null ) {
 			$this->statement->setGuid( $this->guidGenerator->newGuid( $entityId ) );
+		} else {
+			$this->validateStatementGuid( $entityId );
 		}
-
-		$this->validateStatementGuid( $entityId );
 
 		$entityStatements = $entity->getStatements();
 		$oldIndex = $this->removeStatement( $entityStatements );
