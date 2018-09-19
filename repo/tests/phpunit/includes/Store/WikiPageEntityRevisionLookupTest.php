@@ -5,8 +5,11 @@ namespace Wikibase\Repo\Tests\Store;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\MutableRevisionRecord;
+use MediaWiki\Storage\RevisionRecord;
 use MediaWiki\Storage\RevisionStore;
+use MediaWiki\Storage\RevisionStoreRecord;
 use MediaWiki\Storage\SlotRecord;
+use PHPUnit_Framework_MockObject_MockObject;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -19,6 +22,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup
@@ -240,6 +244,39 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->map();
 
 		$this->assertEquals( $redirectRevisionId, $gotRevisionId );
+	}
+
+	public function testLoadEntity_ReturnsNullIfNoSlot() {
+		$revId = 9876;
+		$flags = 0;
+		$slot = "myslotname";
+
+		$revision = $this->getMock( RevisionRecord::class, [], [], '', false );
+		$revision->expects( $this->once() )
+			->method( 'hasSlot' )
+			->with( $slot )
+			->willReturn( false );
+
+		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [] ,'', false );
+		$mockRevisionStore->expects( $this->once() )
+			->method( 'getRevisionById' )
+			->with( $revId, $flags )
+			->willReturn( $revision );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			$mockRevisionStore,
+			MediaWikiServices::getInstance()->getBlobStore(),
+			false
+		);
+
+		$lookup = TestingAccessWrapper::newFromObject( $lookup );
+
+		$result = $lookup->loadEntity( (object)[ 'rev_id' => $revId, 'role_name' => $slot ] );
+
+		$this->assertEquals( [ null, null ], $result );
 	}
 
 }
