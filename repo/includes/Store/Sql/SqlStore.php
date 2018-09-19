@@ -572,9 +572,14 @@ class SqlStore implements Store {
 		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 		return new CachingPropertyInfoLookup(
-			$nonCachingLookup,
-			ObjectCache::getInstance( $this->cacheType ),
-			$this->cacheDuration,
+			new CachingPropertyInfoLookup(
+				$nonCachingLookup,
+				ObjectCache::getInstance( $this->cacheType ),
+				$this->cacheDuration,
+				$cacheKey
+			),
+			ObjectCache::getLocalServerInstance(),
+			10,
 			$cacheKey
 		);
 	}
@@ -614,9 +619,14 @@ class SqlStore implements Store {
 		// TODO: we might want to register the CacheAwarePropertyInfoLookup instance created by
 		// newPropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
 		return new CacheAwarePropertyInfoStore(
-			$table,
-			ObjectCache::getInstance( $this->cacheType ),
-			$this->cacheDuration,
+			new CacheAwarePropertyInfoStore(
+				$table,
+				ObjectCache::getInstance( $this->cacheType ),
+				$this->cacheDuration,
+				$cacheKey
+			),
+			ObjectCache::getLocalServerInstance(),
+			10,
 			$cacheKey
 		);
 	}
