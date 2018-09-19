@@ -15,7 +15,8 @@
 			"MaxBioHazard",
 			"Smigles",
 			"Stjn",
-			"Vlad5250"
+			"Vlad5250",
+			"Putnik"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -35,7 +36,7 @@
 	"wikibase-error-ui-no-external-page": "Не удалось найти страницу «$2» на сайте «$1».",
 	"wikibase-error-ui-edit-conflict": "Возник конфликт редактирования. Пожалуйста, сохраните локально внесённые вами изменения, прегрузите страницу и сохраните её снова.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерировано)",
-	"wikibase-quantitydetails-amount": "Сумма",
+	"wikibase-quantitydetails-amount": "Итоговое значение",
 	"wikibase-quantitydetails-upperbound": "Верхняя граница",
 	"wikibase-quantitydetails-lowerbound": "Нижняя граница",
 	"wikibase-quantitydetails-unit": "Единица",

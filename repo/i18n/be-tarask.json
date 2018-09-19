@@ -525,5 +525,6 @@
 	"apihelp-wbremovequalifiers-param-qualifiers": "Хэшы снэкаў кваліфікатараў для выдаленьня",
 	"apihelp-wbremovequalifiers-param-summary": "Апісаньне рэдагаваньня.\nСьпераду будзе дададзены аўтаматычны камэнтар. Ліміт даўжыні аўтаматычнага камэнтару разам з апісаньнем — 260 сымбаляў. Памятайце, што ўсё, што перавышае гэты ліміт будзе сьцёртае.",
 	"apihelp-wbremovequalifiers-example-1": "Выдаліць кваліфіктар з хэшам «<var>1eb8793c002b1d9820c833d234a1b54c8e94187e</var>» зь сьцьверджаньня з GUID «<var>Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F</var>»",
-	"apihelp-wbremovereferences-description": "Выдаляе адну ці болей зносак аднаго і таго ж сьцьверджаньня."
+	"apihelp-wbremovereferences-description": "Выдаляе адну ці болей зносак аднаго і таго ж сьцьверджаньня.",
+	"apihelp-wbremovereferences-summary": "Выдаляе адну ці болей зносак аднаго і таго ж сьцьверджаньня."
 }
