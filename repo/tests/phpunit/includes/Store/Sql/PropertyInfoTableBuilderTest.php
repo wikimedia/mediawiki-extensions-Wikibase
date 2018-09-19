@@ -31,6 +31,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 		$this->tablesUsed[] = 'wb_property_info';
+		$this->tablesUsed[] = 'page';
 	}
 
 	private function initProperties() {

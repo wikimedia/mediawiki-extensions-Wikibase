@@ -38,6 +38,12 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	 */
 	private static $testEntities = [];
 
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
+	}
+
 	protected static function storeTestEntity( EntityDocument $entity ) {
 		global $wgUser;
 

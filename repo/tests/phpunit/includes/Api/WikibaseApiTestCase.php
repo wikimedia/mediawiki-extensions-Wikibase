@@ -27,6 +27,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		static $isSetup = false;
 
 		$this->setupUser();

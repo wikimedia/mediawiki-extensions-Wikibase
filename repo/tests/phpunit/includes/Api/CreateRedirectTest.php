@@ -28,7 +28,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\CreateRedirect
+ * @covers \Wikibase\Repo\Api\CreateRedirect
  *
  * @group API
  * @group Wikibase
@@ -47,6 +47,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
 
 		$this->mockRepository = new MockRepository();
 

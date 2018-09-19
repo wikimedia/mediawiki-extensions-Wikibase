@@ -30,6 +30,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		$testUser = new \TestUser( 'ActionTestUser' );
 		$user = $testUser->getUser();
 		$user->setId( 123456789 );

@@ -44,6 +44,8 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		if ( $this->itemId === null ) {
 			$this->setUpEntities();
 			$this->setUpNonEntityRedirect();

@@ -22,7 +22,7 @@ use Wikibase\StatementRankSerializer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\GetClaims
+ * @covers \Wikibase\Repo\Api\GetClaims
  *
  * @group API
  * @group Database
@@ -45,6 +45,8 @@ class GetClaimsTest extends ApiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
 
 		$this->serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),

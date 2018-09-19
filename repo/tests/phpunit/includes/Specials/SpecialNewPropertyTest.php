@@ -10,10 +10,10 @@ use Wikibase\Repo\Specials\SpecialNewProperty;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialNewProperty
- * @covers Wikibase\Repo\Specials\SpecialNewEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialNewProperty
+ * @covers \Wikibase\Repo\Specials\SpecialNewEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage
@@ -27,6 +27,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
+	}
 
 	protected function newSpecialPage() {
 		$namespaceNumber = 123;
