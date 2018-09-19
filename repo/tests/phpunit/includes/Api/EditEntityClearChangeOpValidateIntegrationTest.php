@@ -28,6 +28,12 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 
 	use PHPUnit4And6Compat;
 
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
+	}
+
 	public function testGivenNotClearedEntity_validateReturnsSuccess() {
 		$item = $this->newItem();
 

@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
- * @covers Wikibase\EntityContent
+ * @covers \Wikibase\EntityContent
  *
  * @group Wikibase
  *
@@ -44,6 +44,8 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
 
 		$this->originalGroupPermissions = $wgGroupPermissions;
 		$this->originalUser = $wgUser;

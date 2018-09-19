@@ -40,6 +40,8 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		$this->repo = WikibaseRepo::getDefaultInstance();
 		$this->entityStore = $this->repo->getEntityStore();
 

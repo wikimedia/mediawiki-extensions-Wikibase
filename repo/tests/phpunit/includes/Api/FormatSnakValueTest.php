@@ -16,7 +16,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\FormatSnakValue
+ * @covers \Wikibase\Repo\Api\FormatSnakValue
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -32,6 +32,12 @@ class FormatSnakValueTest extends ApiTestCase {
 	protected $testingItem;
 	/** @var Property */
 	protected $testingProperty;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
+	}
 
 	public function provideApiRequest() {
 		$november11 = new TimeValue(
