@@ -29,7 +29,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 
 /**
- * @covers Wikibase\Repo\Store\WikiPageEntityStore
+ * @covers \Wikibase\Repo\Store\WikiPageEntityStore
  *
  * @group Database
  * @group Wikibase
@@ -38,6 +38,14 @@ use Wikibase\SqlIdGenerator;
  * @author Daniel Kinzler
  */
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		// looks controversial as this is testing listener functionality itself
+		// but apparently also writes to the database one way or another
+		$this->tablesUsed[] = 'page';
+	}
 
 	/**
 	 * @return EntityHandler

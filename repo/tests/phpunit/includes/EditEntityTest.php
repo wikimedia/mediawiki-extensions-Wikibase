@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\EditEntity
+ * @covers \Wikibase\EditEntity
  *
  * @group Wikibase
  *
@@ -33,6 +33,12 @@ use Wikimedia\TestingAccessWrapper;
  * @author Daniel Kinzler
  */
 class EditEntityTest extends MediaWikiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
+	}
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );

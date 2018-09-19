@@ -22,7 +22,7 @@ use Wikimedia\Rdbms\IDatabase;
  * This test needs to be in repo, although the class is in lib as we can't alter
  * the data without repo functionality.
  *
- * @covers Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
+ * @covers \Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -45,6 +45,8 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
 
 		if ( !$this->data ) {
 			global $wgUser;

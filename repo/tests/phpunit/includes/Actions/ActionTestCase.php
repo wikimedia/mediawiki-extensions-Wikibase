@@ -30,6 +30,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		$testUser = new \TestUser( 'ActionTestUser' );
 		$user = $testUser->getUser();
 		$user->setId( 123456789 );
@@ -47,6 +49,9 @@ class ActionTestCase extends \MediaWikiTestCase {
 
 	protected function tearDown() {
 		ApiQueryInfo::resetTokenCache();
+
+		// TODO tests should be independent. rm $testItems if this was all it did to gain performance
+		self::$testItems = [];
 
 		parent::tearDown();
 	}

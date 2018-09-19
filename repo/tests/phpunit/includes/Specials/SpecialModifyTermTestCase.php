@@ -25,6 +25,8 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true, 'item-term' => true ] ] );
 	}
 

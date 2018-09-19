@@ -46,7 +46,7 @@ use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database
@@ -55,6 +55,11 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+		$this->tablesUsed[] = 'page';
+	}
 
 	public function provideTestGetParserOutput() {
 		return [

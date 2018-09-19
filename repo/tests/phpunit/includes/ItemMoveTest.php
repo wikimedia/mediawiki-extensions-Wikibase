@@ -48,6 +48,8 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'page';
+
 		//TODO: remove global TestSites DB setup once we can inject sites sanely.
 		static $hasSites = false;
 

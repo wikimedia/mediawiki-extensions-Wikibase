@@ -34,6 +34,12 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	 */
 	protected $lastItemId;
 
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'page';
+	}
+
 	/**
 	 * @param string $moduleClass
 	 * @param string $moduleName
