@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
@@ -221,13 +222,21 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		return $this->entitiesWithoutTerm->getEntitiesWithoutTerm(
-			$this->termType,
-			$this->requestedLanguageCode,
-			[ $this->requestedEntityType ],
-			$limit,
-			$offset
-		);
+		try {
+			return $this->entitiesWithoutTerm->getEntitiesWithoutTerm(
+				$this->termType,
+				$this->requestedLanguageCode,
+				[ $this->requestedEntityType ],
+				$limit,
+				$offset
+			);
+		} catch ( InvalidArgumentException $exception ) {
+			$this->showErrorHTML( $this->msg(
+				'wikibase-entitieswithoutlabel-invalid-type',
+				wfEscapeWikiText( $this->requestedEntityType )
+			)->parse() );
+			return [];
+		}
 	}
 
 	/**
