@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2bff5db_be7382fe",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-19T17:26:58Z",
+      "side": 1,
+      "message": "This is correct. One wrinkle:\nIf we don\u0027t want to mess with the slots table here (which, after all, may not yet exist or be incomplete in 1.32 installs), we could also check for the slot\u0027s existence \"further up\", when we have a RevisionRecord.",
+      "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
