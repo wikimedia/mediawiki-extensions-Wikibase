@@ -204,6 +204,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// instead of using RevisionRecord::getContent() or SlotRecord::getContent().
 		// TODO Once we can rely on the new MCR enabled DB schema, use getContent() directly!
 
+		if ( !$revision->hasSlot( $slotRole ) ) {
+			return [ null, null ];
+		}
+
 		try {
 			$slot = $revision->getSlot( $slotRole );
 		} catch ( RevisionAccessException $e ) {
