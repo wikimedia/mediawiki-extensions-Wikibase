@@ -154,6 +154,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
+	 * @todo This method / entityMetaDataAccessor still needs to be fixed for MCR.
+	 *
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
@@ -203,6 +205,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// For that reason, we have to load and decode the content blob directly,
 		// instead of using RevisionRecord::getContent() or SlotRecord::getContent().
 		// TODO Once we can rely on the new MCR enabled DB schema, use getContent() directly!
+
+		if ( !$revision->hasSlot( $slotRole ) ) {
+			return [ null, null ];
+		}
 
 		try {
 			$slot = $revision->getSlot( $slotRole );
