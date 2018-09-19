@@ -5,8 +5,11 @@ namespace Wikibase\Repo\Tests\Store;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\MutableRevisionRecord;
+use MediaWiki\Storage\RevisionRecord;
 use MediaWiki\Storage\RevisionStore;
 use MediaWiki\Storage\SlotRecord;
+use PHPUnit_Framework_MockObject_MockObject;
+use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -15,8 +18,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -240,6 +246,60 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->map();
 
 		$this->assertEquals( $redirectRevisionId, $gotRevisionId );
+	}
+
+	public function testLoadEntity_ReturnsNullIfNoSlot() {
+		$entityId = new ItemId( 'Q6654' );
+		$revId = 9876;
+		$slot = "myslotname";
+		$row = (object)[ 'rev_id' => $revId, 'role_name' => $slot ];
+
+		$revision = $this->getMock( RevisionRecord::class, [], [], '', false );
+		$revision->expects( $this->once() )
+			->method( 'hasSlot' )
+			->with( $slot )
+			->willReturn( false );
+
+		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
+		$mockRevisionStore->expects( $this->once() )
+			->method( 'getRevisionById' )
+			->with( $revId, 1 )
+			->willReturn( $revision );
+
+		/** @var BlobStore|ObjectProphecy $mockBlobStore */
+		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
+
+		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor
+			->loadRevisionInformationByRevisionId( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER )
+			->willReturn( $row );
+		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			$mockMetaDataAccessor,
+			$mockRevisionStore,
+			$mockBlobStore,
+			false
+		);
+
+		/**
+		 * We need to suppressWarnings as getEntityRevision will warn before throwing the exception that we want.
+		 * We need to try catch instead of setting expected exception so that we can turn warnings back on after.
+		 */
+		\Wikimedia\suppressWarnings();
+		try {
+			$lookup->getEntityRevision( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$this->fail( 'getEntityRevision failed to throw an exception.' );
+		} catch ( StorageException $e ) {
+			$this->assertEquals(
+				"No such revision found for {$entityId->getSerialization()}: {$revId}",
+				$e->getMessage()
+			);
+		}
+		\Wikimedia\suppressWarnings( true );
 	}
 
 }
