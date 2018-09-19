@@ -395,6 +395,15 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 				continue;
 			}
 
+			/**
+			 * TODO fix me
+			 * This should not assume that the title is the ID.
+			 * This needs an EntityTitleLookup injecting for use here
+			 * TODO
+			 * this should make sure that the slot that this entity type is using acsually exists.
+			 * otherwise this should not match the row.
+			 */
+
 			$where[] = $db->makeList(
 				[
 					$db->addQuotes( $entityId->getLocalPart() ) . '=page_title',
