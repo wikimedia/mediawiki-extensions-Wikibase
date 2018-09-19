@@ -6,9 +6,7 @@ use PHPUnit4And6Compat;
 use Parser;
 use ParserOptions;
 use PPFrame;
-use PPFrame_Hash;
 use PPNode;
-use Preprocessor_Hash;
 use Title;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRenderer;
@@ -50,7 +48,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$parser = $this->getParser();
-		$frame = new PPFrame_Hash( new Preprocessor_Hash( $parser ) );
+		$frame = $parser->getPreprocessor()->newFrame();
 		$result = $runner->runPropertyParserFunction( $parser, $frame, [ 'Cat' ], $type );
 
 		$expected = [
