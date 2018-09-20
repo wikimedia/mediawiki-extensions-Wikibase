@@ -22,6 +22,30 @@
       "revId": "cc94e17fc796bf1f7f86eb9693941760c04bfe06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f8cab05_20ee1331",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2488
+      },
+      "writtenOn": "2018-09-20T15:53:24Z",
+      "side": 1,
+      "message": "I\u0027m fine with this code in the sense that it won\u0027t produce any error ;)\n\nHowever I can\u0027t really speak to the business logic of the \u0027page-connection\u0027 notification.\n\nI\u0027m not sure why some EchoEvents don\u0027t have a title. Looking at the code[1], it looks like events are just not created without a title. There might be a different code path creating these notifications that I haven\u0027t seen.\n\nIt\u0027s also possible that the title is not available in the replica yet, in which case `$event-\u003egetTitle (true );` would be needed to read it from master but it would be wise to add instrumentation as a first step before spreading \"read from master\" left and right.\n\n[1] https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/57a5d0f8703dbf562e758e768f733de6db063ecf/client/includes/Hooks/EchoNotificationsHandlers.php#166",
+      "parentUuid": "7c86dee9_fb27e3aa",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 2
+      },
+      "revId": "cc94e17fc796bf1f7f86eb9693941760c04bfe06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
