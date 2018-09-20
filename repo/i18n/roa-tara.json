@@ -26,6 +26,8 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Jndr'à cchiù lènghe",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configure",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Fà 'ndrucà etichette, alias e descriziune jndr'à tutte le lènghe mie quanne ste careche 'a pàgene",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Otre lènghe personale apparte 'a lènghe de l'inderfacce utende ponne essere definite jndr'à pàgene de l'utende ausanne 'a sindasse de l'[[mw:Extension:Babel|estenzione Babel]]",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Canusciute pure cumme",
 	"wikibase-entitytermsforlanguagelistview-description": "Descrizione",
 	"wikibase-entitytermsforlanguagelistview-label": "Etichette",
 	"wikibase-entitytermsforlanguagelistview-language": "Lènghe",
