@@ -22,6 +22,30 @@
       "revId": "74c37f5e4b709d966500f7845d9078214ba5d985",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "970bce11_99e12108",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-20T20:45:07Z",
+      "side": 1,
+      "message": "I did this before adding the entity type to the metric names while planning ahead for this also being deployed on commons sooner or later.\nBut as the entity types are now in the metric names I don\u0027t think we need this.",
+      "parentUuid": "ebae31c1_08e11b24",
+      "range": {
+        "startLine": 1694,
+        "startChar": 40,
+        "endLine": 1694,
+        "endChar": 49
+      },
+      "revId": "74c37f5e4b709d966500f7845d9078214ba5d985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
