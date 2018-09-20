@@ -15,9 +15,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -105,7 +106,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		if ( $hookReturn === null ) {
 			$hookReturn = Status::newGood();
 		}
-		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
+		$mock = $this->getMockBuilder( MediawikiEditFilterHookRunner::class )
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();

@@ -8,6 +8,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWikiTestCase;
+use NullStatsdDataFactory;
 use RawMessage;
 use Revision;
 use Status;
@@ -130,7 +131,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),
-			MediaWikiServices::getInstance()->getRevisionStore()
+			MediaWikiServices::getInstance()->getRevisionStore(),
+			new NullStatsdDataFactory()
 		);
 
 		return [ $store, $lookup ];
