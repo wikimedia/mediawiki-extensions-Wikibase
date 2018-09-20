@@ -259,7 +259,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		}
 
 		if ( !preg_match( self::KEY_REGEX, $key ) ) {
-			throw $this->invalidArgument( "Cache key contains characters that are not allowed" );
+			throw $this->invalidArgument( "Cache key contains characters that are not allowed: `{$key}`" );
 		}
 	}
 
