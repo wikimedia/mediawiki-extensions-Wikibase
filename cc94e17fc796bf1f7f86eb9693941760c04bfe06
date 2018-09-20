@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c86dee9_fb27e3aa",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-20T07:53:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure how this would actually end up affecting getBundleCount?\nIt looks like perhaps we should be passing a numm callback into that method instead.\n\nIf you think this sounds fine though Sbisson LGTM!",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 2
+      },
+      "revId": "cc94e17fc796bf1f7f86eb9693941760c04bfe06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
