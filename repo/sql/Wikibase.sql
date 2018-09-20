@@ -64,3 +64,5 @@ CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_langua
 -- This index has good selectivity while still allowing ICP for short string values.
 CREATE INDEX /*i*/term_search_full ON /*_*/wb_terms (term_language, term_full_entity_id, term_type, term_search_key(16));
 
+-- Add tmp1 Index on wb_terms according to T202265
+CREATE INDEX IF NOT EXISTS /*i*/tmp1 ON /*_*/wb_terms (`term_language`, `term_type`, `term_entity_type`, `term_search_key`);
