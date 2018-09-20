@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWikiTestCase;
+use NullStatsdDataFactory;
 use ObjectCache;
 use ReflectionMethod;
 use Status;
@@ -150,6 +151,7 @@ class EditEntityTest extends MediaWikiTestCase {
 			$entityId,
 			$user,
 			$editFilterHookRunner,
+			new NullStatsdDataFactory(),
 			$baseRevId
 		);
 	}
