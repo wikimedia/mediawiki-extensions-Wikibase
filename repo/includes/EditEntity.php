@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use ReadOnlyError;
@@ -122,6 +123,11 @@ class EditEntity {
 	private $allowMasterConnection;
 
 	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
+	/**
 	 * indicates a permission error
 	 */
 	const PERMISSION_ERROR = 1;
@@ -174,6 +180,7 @@ class EditEntity {
 	 *        May be null when creating a new entity.
 	 * @param User $user the user performing the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param StatsdDataFactoryInterface $statsdDataFactory
 	 * @param int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
 	 *        effectively disabling conflict detections. true and false will be accepted for
@@ -192,6 +199,7 @@ class EditEntity {
 		EntityId $entityId = null,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
+		StatsdDataFactoryInterface $statsdDataFactory,
 		$baseRevId = 0,
 		$allowMasterConnection = true
 	) {
@@ -219,6 +227,7 @@ class EditEntity {
 		$this->entityPatcher = $entityPatcher;
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->stats = $statsdDataFactory;
 		$this->allowMasterConnection = $allowMasterConnection;
 	}
 
@@ -655,6 +664,7 @@ class EditEntity {
 	 * @see    EntityStore::saveEntity
 	 */
 	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null ) {
+		$attemptSaveStart = microtime( true );
 		$this->checkReadOnly( $newEntity );
 		$this->checkEntityId( $newEntity->getId() );
 
@@ -719,7 +729,9 @@ class EditEntity {
 			return $this->status;
 		}
 
+		$attemptSaveFilterStart = microtime( true );
 		$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+		$attemptSaveFilterEnd = microtime( true );
 		if ( !$hookStatus->isOK() ) {
 			$this->errorType |= self::FILTERED;
 		}
@@ -730,6 +742,7 @@ class EditEntity {
 			return $this->status;
 		}
 
+		$attemptSaveSaveStart = microtime( true );
 		try {
 			$entityRevision = $this->entityStore->saveEntity(
 				$newEntity,
@@ -751,6 +764,7 @@ class EditEntity {
 
 			$this->errorType |= self::SAVE_ERROR;
 		}
+		$attemptSaveSaveEnd = microtime( true );
 
 		$this->status->setResult( $editStatus->isOK(), $editStatus->getValue() );
 		$this->status->merge( $editStatus );
@@ -762,6 +776,21 @@ class EditEntity {
 			$value['errorFlags'] = $this->errorType;
 			$this->status->setResult( false, $value );
 		}
+
+		$attemptSaveEnd = microtime( true );
+		$entityType = $newEntity->getType();
+		$this->stats->timing(
+			"wikibase.repo.EditEntity.attemptSave.timing.{$entityType}.total",
+			( $attemptSaveEnd - $attemptSaveStart ) * 1000
+		);
+		$this->stats->timing(
+			"wikibase.repo.EditEntity.attemptSave.timing.{$entityType}.save",
+			( $attemptSaveSaveEnd - $attemptSaveSaveStart ) * 1000
+		);
+		$this->stats->timing(
+			"wikibase.repo.EditEntity.attemptSave.timing.{$entityType}.filters",
+			( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000
+		);
 
 		return $this->status;
 	}
