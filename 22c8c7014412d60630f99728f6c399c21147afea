@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50864b5d_16591604",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlChangeStoreTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-09-20T15:12:00Z",
+      "side": 1,
+      "message": "Add a fixme for removing the check and running every time?",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 3
+      },
+      "revId": "22c8c7014412d60630f99728f6c399c21147afea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
