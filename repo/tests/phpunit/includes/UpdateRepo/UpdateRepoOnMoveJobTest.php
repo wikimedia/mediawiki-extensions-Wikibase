@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
+use NullStatsdDataFactory;
 use Site;
 use SiteLookup;
 use Status;
@@ -12,9 +13,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\EditEntityFactory;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
 use Wikibase\SummaryFormatter;
@@ -111,7 +113,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	 * @return EditFilterHookRunner
 	 */
 	private function getMockEditFitlerHookRunner() {
-		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
+		$runner = $this->getMockBuilder( MediawikiEditFilterHookRunner::class )
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
@@ -171,7 +173,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			)
 		);
 

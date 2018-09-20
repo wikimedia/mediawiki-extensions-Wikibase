@@ -15,8 +15,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\EditEntity;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntity;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\MediaInfo\DataModel\MediaInfo;
 use Wikibase\MediaInfo\DataModel\MediaInfoId;
@@ -69,7 +70,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EditEntity
 	 */
 	private function getMockEditEntity( $calls ) {
-		$mock = $this->getMockBuilder( EditEntity::class )
+		$mock = $this->getMockBuilder( MediawikiEditEntity::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
