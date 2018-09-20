@@ -9,6 +9,7 @@ use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\SqlChangeStore
@@ -28,7 +29,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$factory = $wikibaseRepo->getEntityChangeFactory();
 
-		$time = wfTimestamp( TS_MW );
+		$time = ConvertibleTimestamp::now( TS_MW );
 
 		$simpleChange = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 
@@ -96,6 +97,11 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 	 * @dataProvider saveChangeInsertProvider
 	 */
 	public function testSaveChange_insert( array $expected, EntityChange $change ) {
+		if ( method_exists( $this, 'setTime' ) ) {
+			// disable mock clock in case I989e059 has been merged.
+			$this->setTime( false );
+		}
+
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $lb->getConnection( DB_MASTER );
 
@@ -113,11 +119,11 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$this->assertTrue( is_numeric( $row['change_id'] ) );
 
 		$this->assertEquals(
-			// wfTimestamp returns string, assertEquals/$delta requires int
-			(int)wfTimestamp( TS_UNIX, $expected['change_time'] ),
-			(int)wfTimestamp( TS_UNIX, $row['change_time'] ),
+			// convert to seconds for use with assertEquals/$delta
+			(int)ConvertibleTimestamp::convert( TS_UNIX, $expected['change_time'] ),
+			(int)ConvertibleTimestamp::convert( TS_UNIX, $row['change_time'] ),
 			'Change time',
-			60 * 60 // 1 hour
+			60 * 60 // One hour. A lot of time may have passed since the data provider was run.
 		);
 
 		unset( $row['change_id'] );
@@ -140,7 +146,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$factory = $wikibaseRepo->getEntityChangeFactory();
 
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
-		$change->setField( 'time', wfTimestampNow() );
+		$change->setField( 'time', ConvertibleTimestamp::time() );
 
 		$store = new SqlChangeStore( $lb );
 		$store->saveChange( $change );

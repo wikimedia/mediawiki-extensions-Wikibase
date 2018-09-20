@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 use InvalidArgumentException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Handles pruning wb_changes table, used by pruneChanges maintenance script.
@@ -79,7 +80,7 @@ class ChangePruner {
 
 			$this->messageReporter->reportMessage(
 				date( 'H:i:s' ) . " pruning entries older than "
-				. wfTimestamp( TS_ISO_8601, $until )
+				. ConvertibleTimestamp::convert( TS_ISO_8601, $until )
 			);
 
 			$affected = $this->pruneChanges( $until );
@@ -99,7 +100,7 @@ class ChangePruner {
 	 * timestamp).
 	 */
 	private function getCutoffTimestamp() {
-		$until = time() - $this->keepSeconds;
+		$until = ConvertibleTimestamp::time() - $this->keepSeconds;
 
 		if ( !$this->ignoreDispatch ) {
 			$dbr = wfGetDB( DB_REPLICA );
@@ -114,18 +115,24 @@ class ChangePruner {
 			);
 
 			if ( isset( $row->timestamp ) ) {
-				$dispatched = wfTimestamp( TS_UNIX, $row->timestamp ) - $this->graceSeconds;
+				$dispatched = ConvertibleTimestamp::convert( TS_UNIX, $row->timestamp )
+					- $this->graceSeconds;
 
 				$until = min( $until, $dispatched );
 			}
 		}
 
-		$limitedTimestamp = $this->limitCutoffTimestamp( wfTimestamp( TS_MW, $until ) );
+		$limitedTimestamp = $this->limitCutoffTimestamp(
+			ConvertibleTimestamp::convert( TS_MW, $until )
+		);
 
 		// Add one second just to make sure we delete at least one second worth of data
 		// as sometimes there are more edits in a single second than $this->batchSize
 		// (the peak on Wikidata is almost 550).
-		return wfTimestamp( TS_MW, wfTimestamp( TS_UNIX, $limitedTimestamp ) + 1 );
+		return ConvertibleTimestamp::convert(
+			TS_MW,
+			ConvertibleTimestamp::convert( TS_UNIX, $limitedTimestamp ) + 1
+		);
 	}
 
 	/**

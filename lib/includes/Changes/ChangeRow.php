@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use MWException;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
@@ -28,7 +29,8 @@ abstract class ChangeRow implements Change {
 	 * @return int Seconds
 	 */
 	public function getAge() {
-		return time() - (int)wfTimestamp( TS_UNIX, $this->getField( 'time' ) );
+		return ConvertibleTimestamp::time()
+			- (int)ConvertibleTimestamp::convert( TS_UNIX, $this->getField( 'time' ) );
 	}
 
 	/**

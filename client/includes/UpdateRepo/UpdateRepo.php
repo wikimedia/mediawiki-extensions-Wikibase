@@ -11,6 +11,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * Provides logic to update the repo after certain changes have been
@@ -126,7 +127,7 @@ abstract class UpdateRepo {
 	private function createJob( JobQueueGroup $jobQueueGroup ) {
 		$params = $this->getJobParameters();
 		if ( $this->delayJobs( $jobQueueGroup ) ) {
-			$params['jobReleaseTimestamp'] = time() + $this->getJobDelay();
+			$params['jobReleaseTimestamp'] = ConvertibleTimestamp::time() + $this->getJobDelay();
 		}
 
 		return new JobSpecification(

@@ -2,10 +2,13 @@
 
 namespace Wikibase\Lib;
 
+use BagOStuff;
+use DateTime;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @license GPL-2.0-or-later
@@ -17,7 +20,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	const KEY_REGEX = '/^[a-zA-Z0-9_\-.]+\z/';
 
 	/**
-	 * @var \BagOStuff
+	 * @var BagOStuff
 	 */
 	private $inner;
 
@@ -33,13 +36,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 	/**
 	 * SimpleCacheWithBagOStuff constructor.
-	 * @param \BagOStuff $inner
+	 * @param BagOStuff $inner
 	 * @param string $prefix While setting and getting all keys will be prefixed with this string
 	 * @param string $secret Will be used to create a signature for stored values
 	 *
 	 * @throws \InvalidArgumentException If prefix has wrong format or secret is not a string or empty
 	 */
-	public function __construct( \BagOStuff $inner, $prefix, $secret ) {
+	public function __construct( BagOStuff $inner, $prefix, $secret ) {
 		$this->assertKeyIsValid( $prefix );
 
 		if ( !is_string( $secret ) || empty( $secret ) ) {
@@ -334,18 +337,18 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		// very small (in former example it will be 0.001). This issue makes tests flaky.
 		// @see https://phabricator.wikimedia.org/T201453
 		if ( $ttl instanceof \DateInterval ) {
-			$date = new \DateTime();
+			$date = DateTime::createFromFormat( ConvertibleTimestamp::time(), 'U' );
 			$date->add( $ttl );
 			return $date->getTimestamp() + 1;
 		} elseif ( $ttl === 0 ) {
-			return time();
+			return ConvertibleTimestamp::time();
 		} elseif ( is_int( $ttl ) ) {
-			return $ttl + time() + 1;
+			return $ttl + ConvertibleTimestamp::time() + 1;
 		} elseif ( $ttl === null ) {
-			return \BagOStuff::TTL_INDEFINITE;
+			return BagOStuff::TTL_INDEFINITE;
 		} else {
 			$type = gettype( $ttl );
-			throw $this->invalidArgument( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
+			throw $this->invalidArgument( "Invalid TTL: `null|int|\\DateInterval` expected, `$type` given" );
 		}
 	}
 

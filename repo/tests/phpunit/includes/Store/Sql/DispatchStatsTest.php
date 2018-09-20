@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use stdClass;
 use Wikibase\DispatchStats;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
 
 /**
  * @covers Wikibase\DispatchStats
@@ -476,7 +477,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$dbw->delete( 'wb_changes_dispatch', '*' );
 
 		$stats = new DispatchStats();
-		$stats->load( time() );
+		$stats->load( ConvertibleTimestamp::time() );
 
 		$this->assertFalse( $stats->hasStats() ); // Still no stats as the table is empty
 	}
