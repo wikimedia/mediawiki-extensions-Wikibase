@@ -1,15 +1,16 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\EditEntity;
 
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
@@ -53,6 +54,11 @@ class EditEntityFactory {
 	 */
 	private $editFilterHookRunner;
 
+	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,
@@ -60,7 +66,8 @@ class EditEntityFactory {
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
-		EditFilterHookRunner $editFilterHookRunner
+		EditFilterHookRunner $editFilterHookRunner,
+		StatsdDataFactoryInterface $statsdDataFactory
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -69,6 +76,7 @@ class EditEntityFactory {
 		$this->entityDiffer = $entityDiffer;
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->stats = $statsdDataFactory;
 	}
 
 	/**
@@ -90,18 +98,30 @@ class EditEntityFactory {
 		$baseRevId = false,
 		$allowMasterConnection = true
 	) {
-		return new EditEntity(
-			$this->titleLookup,
-			$this->entityRevisionLookup,
-			$this->entityStore,
-			$this->permissionChecker,
-			$this->entityDiffer,
-			$this->entityPatcher,
-			$entityId,
-			$user,
-			$this->editFilterHookRunner,
-			$baseRevId,
-			$allowMasterConnection
+		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
+		return new TimedEditEntity(
+			new MediawikiEditEntity( $this->titleLookup,
+				$this->entityRevisionLookup,
+				new TimedEntityStore(
+					$this->entityStore,
+					$this->stats,
+					$statsTimingPrefix
+				),
+				$this->permissionChecker,
+				$this->entityDiffer,
+				$this->entityPatcher,
+				$entityId,
+				$user,
+				new TimedEditFilterHookRunner(
+					$this->editFilterHookRunner,
+					$this->stats,
+					$statsTimingPrefix
+				),
+				$baseRevId,
+				$allowMasterConnection
+			),
+			$this->stats,
+			$statsTimingPrefix
 		);
 	}
 

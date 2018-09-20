@@ -11,7 +11,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;

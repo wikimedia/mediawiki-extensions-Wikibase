@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store;
 use ActorMigration;
 use CommentStoreComment;
 use InvalidArgumentException;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Storage\RevisionRecord;
 use MediaWiki\Storage\RevisionStore;
 use MWException;
@@ -64,16 +65,24 @@ class WikiPageEntityStore implements EntityStore {
 	private $revisionStore;
 
 	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
+	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param IdGenerator $idGenerator
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
+	 * @param StatsdDataFactoryInterface $statsdDataFactory
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
 		IdGenerator $idGenerator,
 		EntityIdComposer $entityIdComposer,
-		RevisionStore $revisionStore
+		RevisionStore $revisionStore,
+		StatsdDataFactoryInterface $statsdDataFactory
+
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
@@ -82,6 +91,7 @@ class WikiPageEntityStore implements EntityStore {
 
 		$this->entityIdComposer = $entityIdComposer;
 		$this->revisionStore = $revisionStore;
+		$this->stats = $statsdDataFactory;
 	}
 
 	/**
@@ -213,6 +223,11 @@ class WikiPageEntityStore implements EntityStore {
 		);
 
 		$this->dispatcher->dispatch( 'entityUpdated', $entityRevision );
+
+		$this->stats->increment(
+			"wikibase.repo.WikiPageEntityStore.saveEntity.contentSize.{$entity->getType()}",
+			$content->getSize()
+		);
 
 		return $entityRevision;
 	}

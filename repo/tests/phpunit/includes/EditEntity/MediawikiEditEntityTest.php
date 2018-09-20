@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests;
+namespace Wikibase\Repo\Tests\EditEntity;
 
 use MediaWikiTestCase;
 use ObjectCache;
@@ -14,15 +14,17 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\EditEntity;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntity;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\EditEntity
+ * @covers \Wikibase\Repo\EditEntity\MediawikiEditEntity
  *
  * @group Wikibase
  *
@@ -32,7 +34,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EditEntityTest extends MediaWikiTestCase {
+class MediawikiEditEntityTest extends MediaWikiTestCase {
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -101,7 +103,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		if ( is_null( $expects ) ) {
 			$expects = $this->any();
 		}
-		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
+		$runner = $this->getMockBuilder( MediawikiEditFilterHookRunner::class )
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
@@ -140,8 +142,7 @@ class EditEntityTest extends MediaWikiTestCase {
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
 
-		return new EditEntity(
-			$titleLookup,
+		return new MediawikiEditEntity( $titleLookup,
 			$mockRepository,
 			$mockRepository,
 			$permissionChecker,
@@ -436,7 +437,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		TestingAccessWrapper::newFromObject( $edit )->checkEditPermissions( $item );
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
-		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
+		$this->assertNotEquals( $expectedOK, $edit->hasError( MediawikiEditEntity::PERMISSION_ERROR ) );
 	}
 
 	/**
@@ -455,7 +456,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$edit->attemptSave( $item, "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), $token );
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
-		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
+		$this->assertNotEquals( $expectedOK, $edit->hasError( MediawikiEditEntity::PERMISSION_ERROR ) );
 	}
 
 	/**
@@ -630,7 +631,7 @@ class EditEntityTest extends MediaWikiTestCase {
 			$edit->attemptSave( $item, "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
-			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
+			$this->assertNotEquals( $expectedOK, $edit->hasError( MediawikiEditEntity::RATE_LIMIT ) );
 		}
 
 		// make sure nobody else has to work with our cache
@@ -677,7 +678,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$this->assertEquals( $shouldWork, $edit->isTokenOK( $token ) );
 
 		$this->assertEquals( $shouldWork, $edit->getStatus()->isOK() );
-		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
+		$this->assertNotEquals( $shouldWork, $edit->hasError( MediawikiEditEntity::TOKEN_ERROR ) );
 	}
 
 	public function provideAttemptSaveWatch() {
@@ -735,7 +736,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$item = new Item();
 
-		$isNew = new ReflectionMethod( EditEntity::class, 'isNew' );
+		$isNew = new ReflectionMethod( MediawikiEditEntity::class, 'isNew' );
 		$isNew->setAccessible( true );
 
 		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;

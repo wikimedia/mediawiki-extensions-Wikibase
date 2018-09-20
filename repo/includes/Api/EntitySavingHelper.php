@@ -11,13 +11,14 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditEntity as EditEntityHandler;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntity as EditEntityHandler;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\FormatableSummary;
+use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -43,7 +44,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * Flags to pass to EditEntity::attemptSave; This is set by loadEntity() to EDIT_NEW
 	 * for new entities, and EDIT_UPDATE for existing entities.
 	 *
-	 * @see EditEntity::attemptSave
+	 * @see MediawikiEditEntity::attemptSave
 	 * @see WikiPage::doEditContent
 	 *
 	 * @var int
