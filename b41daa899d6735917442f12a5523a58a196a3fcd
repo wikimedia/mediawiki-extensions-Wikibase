@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06938e02_dfd8cdc5",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-09-20T20:50:18Z",
+      "side": 1,
+      "message": "Least surprise would be for this to get measured as well. Its not directly related to Stats-\u003etiming and could concievably be optimised or become a problem. May wanna move one line  up?",
+      "range": {
+        "startLine": 781,
+        "startChar": 2,
+        "endLine": 781,
+        "endChar": 38
+      },
+      "revId": "b41daa899d6735917442f12a5523a58a196a3fcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
