@@ -4,15 +4,20 @@
 			"NoiX180"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Durung bisa nandangi aji \"$1\".",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Durung bisa nandangi aji tumrap jinis dhatah \"$1\".",
 	"valueview-expert-emptyvalue-empty": "kosong",
+	"valueview-expert-globecoordinateinput-precision": "Patitis:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ora kaisi",
 	"valueview-expert-globecoordinateinput-customprecision": "mirunggan ($1)",
-	"valueview-expert-timevalue-calendar-gregorian": "Grégorian",
-	"valueview-expert-timevalue-calendar-julian": "Julian",
+	"valueview-expert-timevalue-calendar-gregorian": "Grégorius",
+	"valueview-expert-timevalue-calendar-julian": "Julius",
+	"valueview-expert-timeinput-precision": "Patitis:",
 	"valueview-expert-timeinput-calendar": "Pananggalan:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
-	"valueview-expertextender-languageselector-label": "Basa (wajib):",
+	"valueview-expertextender-languageselector-label": "Basa (kudu):",
 	"valueview-expertextender-unitsuggester-label": "Ékan (manasuka):",
-	"valueview-preview-label": "bakal dipajang minangka:",
-	"valueview-preview-novalue": "aji sing trep ora ana sing dingertèni",
-	"valueview-listrotator-manually": "setèl manual"
+	"valueview-preview-label": "bakal kapajang minangka:",
+	"valueview-preview-novalue": "aji kang trep ora tinemu",
+	"valueview-listrotator-manually": "setèl kanthi manuwal"
 }
