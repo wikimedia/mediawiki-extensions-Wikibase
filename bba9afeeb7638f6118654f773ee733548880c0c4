@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67aa8d5f_f49a1e72",
+        "filename": "tests/phan/stubs/cirrussearch.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-09-20T08:53:29Z",
+      "side": 1,
+      "message": "nitpick: should reuse existing namespace line 97",
+      "revId": "bba9afeeb7638f6118654f773ee733548880c0c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
