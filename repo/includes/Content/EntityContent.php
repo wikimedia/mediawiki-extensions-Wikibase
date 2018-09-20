@@ -365,16 +365,17 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * Recursively collects values from nested arrays.
+	 * This function can be called tens of thousands of times, so try to keep it as lean as possible.
+	 * The passing of $values by reference through the calls is a performance improvement.
 	 *
 	 * @param array $data The array structure to process.
 	 * @param array $ignore A list of keys to skip.
+	 * @param array &$values Values from a previous call.
 	 *
 	 * @return array The values found in the array structure.
 	 * @todo needs unit test
 	 */
-	protected static function collectValues( array $data, array $ignore = [] ) {
-		$values = [];
-
+	protected static function collectValues( array $data, $ignore, &$values = [] ) {
 		$erongi = array_flip( $ignore );
 		foreach ( $data as $key => $value ) {
 			if ( isset( $erongi[$key] ) ) {
@@ -382,7 +383,7 @@ abstract class EntityContent extends AbstractContent {
 			}
 
 			if ( is_array( $value ) ) {
-				$values = array_merge( $values, self::collectValues( $value, $ignore ) );
+				collectValues( $value, $ignore, $values );
 			} else {
 				$values[] = $value;
 			}
