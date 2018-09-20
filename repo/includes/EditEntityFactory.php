@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -53,6 +54,11 @@ class EditEntityFactory {
 	 */
 	private $editFilterHookRunner;
 
+	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,
@@ -60,7 +66,8 @@ class EditEntityFactory {
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
-		EditFilterHookRunner $editFilterHookRunner
+		EditFilterHookRunner $editFilterHookRunner,
+		StatsdDataFactoryInterface $statsdDataFactory
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -69,6 +76,7 @@ class EditEntityFactory {
 		$this->entityDiffer = $entityDiffer;
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->stats = $statsdDataFactory;
 	}
 
 	/**
@@ -100,6 +108,7 @@ class EditEntityFactory {
 			$entityId,
 			$user,
 			$this->editFilterHookRunner,
+			$this->stats,
 			$baseRevId,
 			$allowMasterConnection
 		);
