@@ -6,6 +6,7 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
+use MWTimestamp;
 use RuntimeException;
 use Title;
 use User;
@@ -126,7 +127,7 @@ abstract class UpdateRepo {
 	private function createJob( JobQueueGroup $jobQueueGroup ) {
 		$params = $this->getJobParameters();
 		if ( $this->delayJobs( $jobQueueGroup ) ) {
-			$params['jobReleaseTimestamp'] = time() + $this->getJobDelay();
+			$params['jobReleaseTimestamp'] = (int)MWTimestamp::now( TS_UNIX ) + $this->getJobDelay();
 		}
 
 		return new JobSpecification(

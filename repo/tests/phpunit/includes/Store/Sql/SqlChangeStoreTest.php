@@ -96,6 +96,11 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 	 * @dataProvider saveChangeInsertProvider
 	 */
 	public function testSaveChange_insert( array $expected, EntityChange $change ) {
+		if ( method_exists( $this, 'setTime' ) ) {
+			// disable mock clock in case I989e059 has been merged.
+			$this->setTime( false );
+		}
+
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $lb->getConnection( DB_MASTER );
 
@@ -117,7 +122,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 			(int)wfTimestamp( TS_UNIX, $expected['change_time'] ),
 			(int)wfTimestamp( TS_UNIX, $row['change_time'] ),
 			'Change time',
-			60 * 60 // 1 hour
+			60 * 60 // One hour. A lot of time may have passed since the data provider was run.
 		);
 
 		unset( $row['change_id'] );

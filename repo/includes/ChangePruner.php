@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use InvalidArgumentException;
+use MWTimestamp;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 
@@ -99,7 +100,7 @@ class ChangePruner {
 	 * timestamp).
 	 */
 	private function getCutoffTimestamp() {
-		$until = time() - $this->keepSeconds;
+		$until = (int)MWTimestamp::now( TS_UNIX ) - $this->keepSeconds;
 
 		if ( !$this->ignoreDispatch ) {
 			$dbr = wfGetDB( DB_REPLICA );

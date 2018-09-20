@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use MWTimestamp;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
@@ -338,9 +339,9 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			$date->add( $ttl );
 			return $date->getTimestamp() + 1;
 		} elseif ( $ttl === 0 ) {
-			return time();
+			return (int)MWTimestamp::now( TS_UNIX );
 		} elseif ( is_int( $ttl ) ) {
-			return $ttl + time() + 1;
+			return $ttl + (int)MWTimestamp::now( TS_UNIX ) + 1;
 		} elseif ( $ttl === null ) {
 			return \BagOStuff::TTL_INDEFINITE;
 		} else {

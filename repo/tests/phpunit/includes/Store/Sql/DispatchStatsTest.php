@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MWTimestamp;
 use stdClass;
 use Wikibase\DispatchStats;
 
@@ -476,7 +477,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 		$dbw->delete( 'wb_changes_dispatch', '*' );
 
 		$stats = new DispatchStats();
-		$stats->load( time() );
+		$stats->load( (int)MWTimestamp::now( TS_UNIX ) );
 
 		$this->assertFalse( $stats->hasStats() ); // Still no stats as the table is empty
 	}
