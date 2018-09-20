@@ -6,6 +6,7 @@ use FauxRequest;
 use FauxResponse;
 use Language;
 use Message;
+use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Status;
 use ValueValidators\Result;
@@ -74,7 +75,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
@@ -397,7 +399,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
