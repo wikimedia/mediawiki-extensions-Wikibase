@@ -378,31 +378,31 @@ abstract class EntityContent extends AbstractContent {
 		$json = $codec->encodeEntity( $this->getEntity(), CONTENT_FORMAT_JSON );
 		$data = json_decode( $json, true );
 
-		$values = self::collectValues( $data, $ignore );
+		$values = self::collectValues( $data, array_flip( $ignore ) );
 
 		return implode( "\n", $values );
 	}
 
 	/**
 	 * Recursively collects values from nested arrays.
+	 * This function can be called tens of thousands of times, so try to keep it as lean as possible.
+	 * The passing of $values by reference through the calls is a performance improvement.
 	 *
 	 * @param array $data The array structure to process.
-	 * @param array $ignore A list of keys to skip.
+	 * @param array $ignore An array with keys that should be flipped
+	 * @param array &$values Values from a previous call.
 	 *
 	 * @return array The values found in the array structure.
 	 * @todo needs unit test
 	 */
-	protected static function collectValues( array $data, array $ignore = [] ) {
-		$values = [];
-
-		$erongi = array_flip( $ignore );
+	protected static function collectValues( array $data, array $ignore, array &$values = [] ) {
 		foreach ( $data as $key => $value ) {
-			if ( isset( $erongi[$key] ) ) {
+			if ( isset( $ignore[$key] ) ) {
 				continue;
 			}
 
 			if ( is_array( $value ) ) {
-				$values = array_merge( $values, self::collectValues( $value, $ignore ) );
+				self::collectValues( $value, $ignore, $values );
 			} else {
 				$values[] = $value;
 			}
