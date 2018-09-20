@@ -13,11 +13,12 @@ use Status;
 use TestSites;
 use Title;
 use User;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -89,7 +90,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
+		$mock = $this->getMockBuilder( MediawikiEditFilterHookRunner::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -12,8 +12,9 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
@@ -76,7 +77,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
+		$mock = $this->getMockBuilder( MediawikiEditFilterHookRunner::class )
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();

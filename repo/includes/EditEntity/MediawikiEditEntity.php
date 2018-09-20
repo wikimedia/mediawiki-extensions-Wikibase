@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\EditEntity;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
@@ -17,9 +17,9 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -32,7 +32,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class EditEntity {
+class MediawikiEditEntity implements EditEntity {
 
 	/**
 	 * @var EntityRevisionLookup
@@ -122,48 +122,6 @@ class EditEntity {
 	private $allowMasterConnection;
 
 	/**
-	 * indicates a permission error
-	 */
-	const PERMISSION_ERROR = 1;
-
-	/**
-	 * indicates an unresolved edit conflict
-	 */
-	const EDIT_CONFLICT_ERROR = 2;
-
-	/**
-	 * indicates a token or session error
-	 */
-	const TOKEN_ERROR = 4;
-
-	/**
-	 * indicates that an error occurred while saving
-	 */
-	const SAVE_ERROR = 8;
-
-	/**
-	 * Indicates that the content failed some precondition to saving,
-	 * such as a global uniqueness constraint.
-	 */
-	const PRECONDITION_FAILED = 16;
-
-	/**
-	 * Indicates that the content triggered an edit filter that uses
-	 * the EditFilterMergedContent hook to supervise edits.
-	 */
-	const FILTERED = 32;
-
-	/**
-	 * Indicates that the edit exceeded a rate limit.
-	 */
-	const RATE_LIMIT = 64;
-
-	/**
-	 * bit mask for asking for any error.
-	 */
-	const ANY_ERROR = 0xFFFFFFFF;
-
-	/**
 	 * @param EntityTitleStoreLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
@@ -189,7 +147,7 @@ class EditEntity {
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
-		EntityId $entityId = null,
+		EntityId $entityId,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
 		$baseRevId = 0,
@@ -720,6 +678,7 @@ class EditEntity {
 		}
 
 		$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+
 		if ( !$hookStatus->isOK() ) {
 			$this->errorType |= self::FILTERED;
 		}
