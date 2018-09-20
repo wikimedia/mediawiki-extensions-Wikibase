@@ -17,9 +17,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 
 /**
  * @covers Wikibase\Repo\Hooks\EditFilterHookRunner
@@ -58,7 +59,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->with( $this->isInstanceOf( EntityRedirect::class ) )
 			->will( $this->returnValue( new ItemContent( new EntityInstanceHolder( new Item() ) ) ) );
 
-		return new EditFilterHookRunner(
+		return new MediawikiEditFilterHookRunner(
 			$namespaceLookup,
 			$entityTitleLookup,
 			$entityContentFactory,

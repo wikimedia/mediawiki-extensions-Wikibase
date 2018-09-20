@@ -7,7 +7,7 @@ use HTMLForm;
 use OutputPage;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Summary;

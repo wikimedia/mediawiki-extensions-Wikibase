@@ -66,7 +66,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
@@ -97,6 +97,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Modules\PropertyValueExpertsModule;
@@ -131,7 +132,7 @@ use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -743,7 +744,7 @@ class WikibaseRepo {
 	 * @return EditFilterHookRunner
 	 */
 	private function newEditFilterHookRunner( IContextSource $context ) {
-		return new EditFilterHookRunner(
+		return new MediawikiEditFilterHookRunner(
 			$this->getEntityNamespaceLookup(),
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
@@ -1680,7 +1681,7 @@ class WikibaseRepo {
 	/**
 	 * @param IContextSource|null $context
 	 *
-	 * @return EditEntityFactory
+	 * @return \Wikibase\Repo\EditEntity\EditEntityFactory
 	 */
 	public function newEditEntityFactory( IContextSource $context = null ) {
 		return new EditEntityFactory(
@@ -1690,7 +1691,8 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
 			$this->getEntityPatcher(),
-			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() )
+			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
+			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 	}
 

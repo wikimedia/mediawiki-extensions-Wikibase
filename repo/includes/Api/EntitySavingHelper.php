@@ -11,8 +11,8 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditEntity as EditEntityHandler;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -283,7 +283,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 	/**
 	 * Attempts to save the new entity content, while first checking for permissions,
-	 * edit conflicts, etc. Saving is done via EditEntityHandler::attemptSave().
+	 * edit conflicts, etc. Saving is done via EditEntity::attemptSave().
 	 *
 	 * This method automatically takes into account several parameters:
 	 * * 'bot' for setting the bot flag
@@ -300,8 +300,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @throws LogicException if not in write mode
-	 * @return Status the status of the save operation, as returned by EditEntityHandler::attemptSave()
-	 * @see  EditEntityHandler::attemptSave()
+	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
+	 * @see  EditEntity::attemptSave()
 	 */
 	public function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
 		if ( !$this->apiModule->isWriteMode() ) {
@@ -334,7 +334,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$this->baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : 0;
 		}
 
-		$editEntityHandler = $this->editEntityFactory->newEditEntity(
+		$editEntity = $this->editEntityFactory->newEditEntity(
 			$user,
 			$entity->getId(),
 			$this->baseRevisionId,
@@ -343,7 +343,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		$token = $this->evaluateTokenParam( $params );
 
-		$status = $editEntityHandler->attemptSave(
+		$status = $editEntity->attemptSave(
 			$entity,
 			$summary,
 			$this->entitySavingFlags | $flags,
@@ -372,7 +372,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	/**
 	 * Signal errors and warnings from a save operation to the API call's output.
 	 * This is much like handleStatus(), but specialized for Status objects returned by
-	 * EditEntityHandler::attemptSave(). In particular, the 'errorFlags' and 'errorCode' fields
+	 * EditEntity::attemptSave(). In particular, the 'errorFlags' and 'errorCode' fields
 	 * from the status value are used to determine the error code to return to the caller.
 	 *
 	 * @note: this function may or may not return normally, depending on whether
@@ -395,11 +395,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				$editError = $value['errorFlags'];
 			}
 
-			if ( $editError & EditEntityHandler::TOKEN_ERROR ) {
+			if ( $editError & EditEntity::TOKEN_ERROR ) {
 				$errorCode = 'badtoken';
-			} elseif ( $editError & EditEntityHandler::EDIT_CONFLICT_ERROR ) {
+			} elseif ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) {
 				$errorCode = 'editconflict';
-			} elseif ( $editError & EditEntityHandler::ANY_ERROR ) {
+			} elseif ( $editError & EditEntity::ANY_ERROR ) {
 				$errorCode = 'failed-save';
 			}
 		}

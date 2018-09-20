@@ -10,12 +10,13 @@ use TestSites;
 use Title;
 use User;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Hooks\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -72,7 +73,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
+		$mock = $this->getMockBuilder( MediawikiEditFilterHookRunner::class )
 			->setMethods( [ 'run' ] )
 			->disableOriginalConstructor()
 			->getMock();
