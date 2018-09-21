@@ -87,7 +87,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
-			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup(), false ),
+			new WikiPageEntityMetaDataLookup(
+				$wikibaseRepo->getEntityNamespaceLookup(),
+				\MediaWiki\MediaWikiServices::getInstance()->getSlotRoleStore(),
+				false
+			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
 			false
