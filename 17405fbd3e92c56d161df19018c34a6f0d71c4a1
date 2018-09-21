@@ -52,6 +52,24 @@
       "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8308414d_54639f48",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T11:46:22Z",
+      "side": 1,
+      "message": "Great plan",
+      "parentUuid": "a71adf83_c61d4359",
+      "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
