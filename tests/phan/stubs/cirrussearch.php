@@ -105,6 +105,12 @@ namespace CirrusSearch\Extra\Query {
 		public function __construct( $field, $term, $operator, $number ) {
 		}
 	}
+	class TokenCountRouter {
+		public function __construct() {
+		}
+		public function addCondition() {
+		}
+	}
 }
 
 namespace CirrusSearch\Maintenance {
