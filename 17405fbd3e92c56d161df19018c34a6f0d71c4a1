@@ -34,6 +34,24 @@
       "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a71adf83_c61d4359",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-21T11:45:40Z",
+      "side": 1,
+      "message": "One thing we could do is to only ask for slot_role if $role !\u003d\u003d \u0027main\u0027.\nSimilarly, we should only join against the slots table if $role !\u003d\u003d \u0027main\u0027. \n\nThis provides a simple though somewhat backwards way to avoid accessing the slots table when it doesn\u0027t exist or is not populated: in such an environment, $role would have to be \u0027main\u0027 anyway.",
+      "parentUuid": "1df3a98f_7a6cc4dd",
+      "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
