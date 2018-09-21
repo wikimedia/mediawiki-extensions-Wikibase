@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use Exception;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Storage\RevisionStore;
 use MediaWikiTestCase;
 use RawMessage;
 use Revision;
@@ -16,6 +19,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -27,6 +32,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers Wikibase\Repo\Store\WikiPageEntityStore
@@ -38,6 +44,8 @@ use Wikibase\SqlIdGenerator;
  * @author Daniel Kinzler
  */
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
+
+	const FAKE_NS_ID = 654;
 
 	/**
 	 * @return EntityHandler
@@ -528,6 +536,90 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$status->isOK(),
 			'try to save without flags, save failed' . $this->getStatusLine( $status )
 		);
+	}
+
+	/**
+	 * @param array $hasSlotCalls Key of slot names mapped to their return value.
+	 * @return RevisionRecord
+	 */
+	private function getMockRevisionRecord( $hasSlotCalls = [] ) {
+		$rec = $this->prophesize( RevisionRecord::class );
+		foreach ( $hasSlotCalls as $slotChecked => $return ) {
+			$rec->hasSlot( $slotChecked )->willReturn( $return );
+		}
+		return $rec->reveal();
+	}
+
+	public function provideAdjustFlagsForMCR() {
+		yield 'No flags, results in no adjustments' => [
+			0,
+			0,
+			null,
+			'main'
+		];
+		yield 'UPDATE, with no parent revision, throws exception' => [
+			EDIT_UPDATE,
+			new StorageException( 'Can\'t perform an update with no parent revision' ),
+			null,
+			'main'
+		];
+		yield 'UPDATE, with no slot to update, throws exception' => [
+			EDIT_UPDATE,
+			new StorageException(
+				'Can\'t perform an update when the parent revision doesn\'t have expected slot: main'
+			),
+			$this->getMockRevisionRecord( [ 'main' => false ] ),
+			'main'
+		];
+		yield 'NEW, with no parent revision, no adjustments' => [
+			EDIT_NEW,
+			EDIT_NEW,
+			null,
+			'main'
+		];
+		yield 'NEW, with parent revision on main slot, no adjustments' => [
+			EDIT_NEW,
+			EDIT_NEW,
+			$this->getMockRevisionRecord(),
+			'main'
+		];
+		yield 'NEW, with parent revision on non existing extra slot, switch to update' => [
+			EDIT_NEW,
+			EDIT_UPDATE,
+			$this->getMockRevisionRecord( [ 'extra' => false ] ),
+			'extra'
+		];
+		yield 'NEW, with parent revision on existing extra slot, throw exception' => [
+			EDIT_NEW,
+			new StorageException( 'Can\'t create slot, it already exists: extra' ),
+			$this->getMockRevisionRecord( [ 'extra' => true ] ),
+			'extra'
+		];
+	}
+
+	/**
+	 * @dataProvider provideAdjustFlagsForMCR
+	 * @param int $flagsIn
+	 * @param int|Exception $expected
+	 * @param RevisionRecord $parentRevision
+	 * @param string $slotRole
+	 */
+	public function testAdjustFlagsForMCR( $flagsIn, $expected, $parentRevision, $slotRole ) {
+		$store = new WikiPageEntityStore(
+			$this->prophesize( EntityContentFactory::class )->reveal(),
+			$this->prophesize( IdGenerator::class )->reveal(),
+			$this->prophesize( EntityIdComposer::class )->reveal(),
+			$this->prophesize( RevisionStore::class )->reveal()
+		);
+		$store = TestingAccessWrapper::newFromObject( $store );
+
+		if ( $expected instanceof Exception ) {
+			$this->setExpectedException( get_class( $expected ), $expected->getMessage() );
+		}
+
+		$flagsOut = $store->adjustFlagsForMCR( $flagsIn, $parentRevision, $slotRole );
+
+		$this->assertEquals( $expected, $flagsOut );
 	}
 
 	public function testRepeatedSave() {
