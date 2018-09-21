@@ -73,15 +73,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
-			// Create a file page for which we can later create a MediaInfo entity.
-			// XXX It's ugly to have knowledge about MediaInfo here. But since we currently can't
-			// inject mock handlers for a mock media type, this is the only way to test automatic
-			// creation.
-
-			$titleInfo = $this->insertPage( 'File:EditEntityTest.jpg' );
-			self::$idMap['%M11%'] = 'M' . $titleInfo['id'];
-		}
-
 		$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
 			self::$idMap['%Q42%'] => '',
 			self::$idMap['%Q149%'] => '',
@@ -110,11 +101,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"datatype":"string"}'
 				],
 				'e' => [ 'type' => 'property' ] ],
-			'new mediainfo from id' => [
-				'p' => [ 'id' => '%M11%', 'data' => '{}' ],
-				'e' => [ 'type' => 'mediainfo' ],
-				'requires' => 'mediainfo', // skip if MediaInfo is not configured
-			],
 			'add a sitelink..' => [ // make sure if we pass in a valid id it is accepted
 				'p' => [
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki",'
@@ -974,33 +960,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'param-illegal'
 				] ] ],
-			'create mediainfo with automatic id' => [
-				'p' => [ 'new' => 'mediainfo', 'data' => '{}' ],
-				'e' => [ 'exception' => [
-					'type' => ApiUsageException::class,
-					'message' => 'Cannot automatically assign ID: mediainfo entities do not support automatic IDs',
-					'code' => 'no-automatic-entity-id',
-				] ],
-				'requires' => 'mediainfo' // skip if MediaInfo is not configured
-			],
-			'create mediainfo with malformed id' => [
-				'p' => [ 'id' => 'M123X', 'data' => '{}' ],
-				'e' => [ 'exception' => [
-					'type' => ApiUsageException::class,
-					'code' => 'invalid-entity-id',
-					'message' => 'Invalid entity ID.'
-				] ],
-				'requires' => 'mediainfo' // skip if MediaInfo is not configured
-			],
-			'create mediainfo with bad id' => [
-				'p' => [ 'id' => 'M12734569', 'data' => '{}' ],
-				'e' => [ 'exception' => [
-					'type' => ApiUsageException::class,
-					'code' => 'no-such-entity',
-					'message-key' => 'no-such-entity'
-				] ],
-				'requires' => 'mediainfo' // skip if MediaInfo is not configured
-			],
 			'remove key misplaced in data' => [
 				'p' => [
 					'id' => '%Berlin%',
