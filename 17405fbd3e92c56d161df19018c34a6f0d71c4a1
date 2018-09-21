@@ -16,6 +16,24 @@
       "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1df3a98f_7a6cc4dd",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T11:27:50Z",
+      "side": 1,
+      "message": "I think it probably has to go into the query, as getWhere is also called by selectLatestRevisionIdsMultiple which has no access to the RevisonRecord etc.",
+      "parentUuid": "e2bff5db_be7382fe",
+      "revId": "17405fbd3e92c56d161df19018c34a6f0d71c4a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
