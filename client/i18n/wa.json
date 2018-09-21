@@ -9,8 +9,10 @@
 	"wikibase-dataitem": "Cayet di {{WBREPONAME}}",
 	"wikibase-editlinks": "Candjî les loyéns",
 	"wikibase-editlinkstitle": "Candjî les loyéns eturlingaedje",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Catchî",
 	"wikibase-rc-hide-wikidata-show": "Mostrer",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} candjî"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} candjî",
+	"wikibase-otherprojects": "Dins d' ôtes pordjets"
 }

@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Srtxg"
+			"Srtxg",
+			"Reptilien.19831209BE1"
 		]
 	},
-	"wikibase-edit": "candjî"
+	"wikibase-edit": "candjî",
+	"wikibase-add": "radjouter",
+	"wikibase-sitelinks-special": "Ôtès waibes"
 }
