@@ -160,6 +160,7 @@ return [
 				$services->getEntityMetaDataAccessorCallbacks(),
 				new WikiPageEntityMetaDataLookup(
 					$genericServices->getEntityNamespaceLookup(),
+					$services->getSlotRoleStore(),
 					$services->getDatabaseName(),
 					$services->getRepositoryName()
 				),
