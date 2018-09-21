@@ -342,9 +342,9 @@ class DatabaseSchemaUpdater {
 			'wb_terms',
 			'term_search',
 			$this->getUpdateScriptPath( 'DropNotFullEntityIdTermIndexes', $db->getType() )
-        );
+		  );
 
-        // T202265
+		// T202265
         $updater->addExtensionIndex(
             'wb_terms',
             'tmp1',
