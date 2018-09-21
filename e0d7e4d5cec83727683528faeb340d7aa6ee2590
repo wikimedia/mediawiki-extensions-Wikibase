@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "85ecb088_a3a1fb41",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T12:15:24Z",
+      "side": 1,
+      "message": "Yup, can do, had my head stuck in what was already here and copying it..",
+      "parentUuid": "d0b4541b_0427c78c",
+      "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6dfacca1_170d1d6e",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-21T12:11:15Z",
       "side": 1,
       "message": "could use a comment explaining the reasoning behind this",
+      "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6ebbdae_122c122f",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T12:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dfacca1_170d1d6e",
       "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fa60fe4d_3e169eb7",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T12:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4faca322_a252e2f5",
+      "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "be8598d2_d403dad4",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "b97d017f_8e878a3b",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T12:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be8598d2_d403dad4",
+      "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c37a07ba_208641ce",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2018-09-21T12:11:15Z",
       "side": 1,
       "message": "a proper join would be nicer",
+      "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff5a466_01d90d20",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T12:15:24Z",
+      "side": 1,
+      "message": "Added a TODO.\nI want to try and wire together a working patch for cormac asap, and can tidy it up after :)",
+      "parentUuid": "c37a07ba_208641ce",
       "revId": "e0d7e4d5cec83727683528faeb340d7aa6ee2590",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
