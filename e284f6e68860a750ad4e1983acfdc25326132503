@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2da82b2b_affb1237",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-21T12:34:08Z",
+      "side": 1,
+      "message": "I guess these both need to go in PerRepositoryServiceContainer.\n\nAlthough after looking at this thing, I realized that I don\u0027t agree with the GenericContainer vs PerRepositoryServiceContainer split.\n\nFor example, EntityNamespaceLookup is listed as a generic service, but the namespaces can differ per wiki, for example wikidata uses NS0 and I do not.\n\nI want to look at this a bit before bothering to write more code",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 67
+      },
+      "revId": "e284f6e68860a750ad4e1983acfdc25326132503",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
