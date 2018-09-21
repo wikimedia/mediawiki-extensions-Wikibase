@@ -363,6 +363,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Tests\\Actions\\ActionTestCase' => __DIR__ . '/tests/phpunit/includes/Actions/ActionTestCase.php',
 	'Wikibase\\Repo\\Tests\\Api\\ApiFormatTestCase' => __DIR__ . '/tests/phpunit/includes/Api/ApiFormatTestCase.php',
 	'Wikibase\\Repo\\Tests\\Api\\ApiModuleTestHelper' => __DIR__ . '/tests/phpunit/includes/Api/ApiModuleTestHelper.php',
+	'Wikibase\\Repo\\Tests\\Api\\EntityLoadingHelperTest' => __DIR__ . '/tests/phpunit/includes/Api/EntityLoadingHelperTest.php',
 	'Wikibase\\Repo\\Tests\\Api\\EntityTestHelper' => __DIR__ . '/tests/phpunit/includes/Api/EntityTestHelper.php',
 	'Wikibase\\Repo\\Tests\\Api\\ModifyTermTestCase' => __DIR__ . '/tests/phpunit/includes/Api/ModifyTermTestCase.php',
 	'Wikibase\\Repo\\Tests\\Api\\PermissionsTestCase' => __DIR__ . '/tests/phpunit/includes/Api/PermissionsTestCase.php',
