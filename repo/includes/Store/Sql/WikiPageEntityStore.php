@@ -290,6 +290,12 @@ class WikiPageEntityStore implements EntityStore {
 
 		$updater = $page->newPageUpdater( $user );
 
+		$flags = $this->adjustFlagsForMCR(
+			$flags,
+			$updater->grabParentRevision(),
+			$slotRole
+		);
+
 		if ( $baseRevId && $updater->hasEditConflict( $baseRevId ) ) {
 			throw new StorageException( Status::newFatal( 'edit-conflict' ) );
 		}
@@ -336,6 +342,44 @@ class WikiPageEntityStore implements EntityStore {
 			// latest revision, it should still be cached, and should always be the correct one.
 			return $page->getRevision()->getRevisionRecord();
 		}
+	}
+
+	/**
+	 * @param int $flags
+	 * @param RevisionRecord|null $parentRevision
+	 * @param string $slotRole
+	 * @return int
+	 * @throws StorageException
+	 */
+	private function adjustFlagsForMCR( $flags, $parentRevision, $slotRole ) {
+		if ( $flags & EDIT_UPDATE ) {
+			if ( !$parentRevision ) {
+				throw new StorageException( 'Can\'t perform an update with no parent revision' );
+			};
+			if ( !$parentRevision->hasSlot( $slotRole ) ) {
+				throw new StorageException(
+					'Can\'t perform an update when the parent revision doesn\'t have expected slot: ' . $slotRole
+				);
+			}
+		}
+
+		/**
+		 * If the flags indicate a new edit, and the page already exists and we are interacting
+		 * with a slot other than the main slot, adjust the slots for the MCR save.
+		 * If we are interacting with the main slot, keep the NEW flag.
+		 * This is consistent with previous behaviour.
+		 */
+		if ( $flags & EDIT_NEW && $parentRevision && $slotRole !== 'main' ) {
+			if ( $parentRevision->hasSlot( $slotRole ) ) {
+				throw new StorageException( 'Can\'t create slot, it already exists: ' . $slotRole );
+			}
+
+			// We are creating the entity, but updating the page.
+			// Unset the NEW bit, set the UPDATE bit.
+			$flags = ( $flags & ~EDIT_NEW ) | EDIT_UPDATE;
+		}
+
+		return $flags;
 	}
 
 	/**
