@@ -290,6 +290,31 @@ class WikiPageEntityStore implements EntityStore {
 
 		$updater = $page->newPageUpdater( $user );
 
+		$parentRevision = $updater->grabParentRevision();
+
+		if ( $flags & EDIT_UPDATE ) {
+			if ( !$parentRevision ) {
+				throw new StorageException( 'Can\'t perform an update with no parent revision' );
+			};
+			if ( !$parentRevision->hasSlot( $slotRole ) ) {
+				throw new StorageException(
+					'Can\'t perform an update when the parent revision doesn\'t have expected slot: ' . $slotRole
+				);
+			}
+		}
+
+		if ( $flags & EDIT_NEW ) {
+			if ( $parentRevision ) {
+				if ( $parentRevision->hasSlot( $slotRole ) ){
+					throw new StorageException( 'Can\'t create slot, it already exists:' . $slotRole );
+				}
+
+				// We are creating the entity, but updating the page.
+				// Unset the NEW bit, set the UPDATE bit.
+				$flags = ( $flags & EDIT_NEW ) | EDIT_UPDATE;
+			}
+		}
+
 		if ( $baseRevId && $updater->hasEditConflict( $baseRevId ) ) {
 			throw new StorageException( Status::newFatal( 'edit-conflict' ) );
 		}
