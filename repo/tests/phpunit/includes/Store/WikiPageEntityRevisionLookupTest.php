@@ -59,6 +59,14 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		return $revision;
 	}
 
+	private function getMetaDataLookup() {
+		return new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			\Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			\MediaWiki\MediaWikiServices::getInstance()->getSlotRoleStore()
+		);
+	}
+
 	/**
 	 * @see EntityRevisionLookupTestCase::newEntityRevisionLookup
 	 *
@@ -85,7 +93,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		return new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
-			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			$this->getMetaDataLookup(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
 			false
@@ -117,7 +125,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$entityId = $testEntityRevision->getEntity()->getId();
 		$revisionId = $testEntityRevision->getRevisionId();
 
-		$realMetaDataLookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() );
+		$realMetaDataLookup = $this->getMetaDataLookup();
 		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -221,7 +229,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
-			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			$this->getMetaDataLookup(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
 			false
