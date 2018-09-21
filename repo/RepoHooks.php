@@ -728,23 +728,23 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
-		$contentModelIds = $wikibaseRepo->getContentModelMappings();
-
-		$expectedModel = false;
-		$expectedEntityType = $namespaceLookup->getEntityType( $title->getNamespace() );
-		if ( $expectedEntityType !== null ) {
-			$expectedModel = $contentModelIds[$expectedEntityType];
-		}
-
-		// If the namespace is an entity namespace, the content model
-		// must be the model assigned to that namespace.
-		if ( $expectedModel !== false && $expectedModel !== $contentModel ) {
-			$ok = false;
-			return false;
-		}
+//		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+//
+//		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+//		$contentModelIds = $wikibaseRepo->getContentModelMappings();
+//
+//		$expectedModel = false;
+//		$expectedEntityType = $namespaceLookup->getEntityType( $title->getNamespace() );
+//		if ( $expectedEntityType !== null ) {
+//			$expectedModel = $contentModelIds[$expectedEntityType];
+//		}
+//
+//		// If the namespace is an entity namespace, the content model
+//		// must be the model assigned to that namespace.
+//		if ( $expectedModel !== false && $expectedModel !== $contentModel ) {
+//			$ok = false;
+//			return false;
+//		}
 
 		return true;
 	}
