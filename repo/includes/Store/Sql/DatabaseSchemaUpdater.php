@@ -192,7 +192,10 @@ class DatabaseSchemaUpdater {
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
-			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityNamespaceLookup() ),
+			new WikiPageEntityMetaDataLookup(
+				$wikibaseRepo->getEntityNamespaceLookup(),
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
 			false

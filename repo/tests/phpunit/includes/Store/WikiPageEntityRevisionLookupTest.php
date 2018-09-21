@@ -62,6 +62,13 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		return $revision;
 	}
 
+	private function getMetaDataLookup() {
+		return new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore()
+		);
+	}
+
 	/**
 	 * @see EntityRevisionLookupTestCase::newEntityRevisionLookup
 	 *
@@ -88,7 +95,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		return new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
-			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			$this->getMetaDataLookup(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
 			false
@@ -120,7 +127,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$entityId = $testEntityRevision->getEntity()->getId();
 		$revisionId = $testEntityRevision->getRevisionId();
 
-		$realMetaDataLookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() );
+		$realMetaDataLookup = $this->getMetaDataLookup();
 		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -224,7 +231,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
-			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() ),
+			$this->getMetaDataLookup(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
 			false
@@ -248,24 +255,47 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$this->assertEquals( $redirectRevisionId, $gotRevisionId );
 	}
 
-	public function testLoadEntity_ReturnsNullIfNoSlot() {
-		$entityId = new ItemId( 'Q6654' );
-		$revId = 9876;
-		$slot = "myslotname";
-		$row = (object)[ 'rev_id' => $revId, 'role_name' => $slot ];
 
-		$revision = $this->getMock( RevisionRecord::class, [], [], '', false );
-		$revision->expects( $this->once() )
-			->method( 'hasSlot' )
-			->with( $slot )
-			->willReturn( false );
+	public function testGetEntityRevision_ReturnsNullForNonExistingRevision() {
+		$entityId = new ItemId( 'Q6654' );
 
 		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
-		$mockRevisionStore->expects( $this->once() )
-			->method( 'getRevisionById' )
-			->with( $revId, 1 )
-			->willReturn( $revision );
+
+		/** @var BlobStore|ObjectProphecy $mockBlobStore */
+		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
+
+		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor
+			->loadRevisionInformation( [ $entityId ], EntityRevisionLookup::LATEST_FROM_MASTER )
+			->willReturn( [ 'Q6654' => false ] );
+		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			$mockMetaDataAccessor,
+			$mockRevisionStore,
+			$mockBlobStore,
+			false
+		);
+
+		/**
+		 * We need to suppressWarnings as getEntityRevision will warn before throwing the exception that we want.
+		 * We need to try catch instead of setting expected exception so that we can turn warnings back on after.
+		 */
+		\Wikimedia\suppressWarnings();
+		$result = $lookup->getEntityRevision( $entityId, 0,EntityRevisionLookup::LATEST_FROM_MASTER );
+		\Wikimedia\suppressWarnings( true );
+		$this->assertNull( $result );
+	}
+
+	public function testGetEntityRevision_ThrowsWhenRequestingSpecificNonExistingEntityRevision() {
+		$entityId = new ItemId( 'Q6654' );
+		$revId = 9876;
+
+		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */
 		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
@@ -274,7 +304,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$mockMetaDataAccessor
 			->loadRevisionInformationByRevisionId( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER )
-			->willReturn( $row );
+			->willReturn( false );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$lookup = new WikiPageEntityRevisionLookup(
@@ -300,6 +330,38 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			);
 		}
 		\Wikimedia\suppressWarnings( true );
+	}
+
+	public function testGetLatestRevisionId_ReturnsNullForNonExistingEntityRevision() {
+		$entityId = new ItemId( 'Q6654' );
+
+		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
+
+		/** @var BlobStore|ObjectProphecy $mockBlobStore */
+		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
+
+		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor
+			->loadRevisionInformation( [ $entityId ], EntityRevisionLookup::LATEST_FROM_MASTER )
+			->willReturn( [ 'Q6654' => false ] );
+		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			$mockMetaDataAccessor,
+			$mockRevisionStore,
+			$mockBlobStore,
+			false
+		);
+
+		$result = $lookup->getLatestRevisionId( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
+		$result
+			->onNonexistentEntity( function() { $this->assertTrue( true ); } )
+			->onRedirect( function() { $this->fail( 'Result should trigger onNonexistentEntity' ); } )
+			->onConcreteRevision( function() { $this->fail( 'Result should trigger onNonexistentEntity' ); } )
+			->map();
 	}
 
 }
