@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
@@ -79,7 +80,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 * @return WikiPageEntityMetaDataLookup
 	 */
 	private function getWikiPageEntityMetaDataLookup() {
-		return new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() );
+		return new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore()
+		);
 	}
 
 	/**
@@ -299,7 +304,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	public function testLoadRevisionInformation_unknownNamespace() {
 		$entityId = $this->data[0]->getEntity()->getId();
 		$namespaceLookup = new EntityNamespaceLookup( [] );
-		$metaDataLookup = new WikiPageEntityMetaDataLookup( $namespaceLookup );
+		$metaDataLookup = new WikiPageEntityMetaDataLookup(
+			$namespaceLookup,
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore()
+		);
 
 		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
 		$result = $metaDataLookup->loadRevisionInformation(
@@ -312,7 +321,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationThrowsException() {
-		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
+		$lookup = new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore(),
+			false,
+			''
+		);
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -323,7 +338,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationByRevisionIdThrowsException() {
-		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, '' );
+		$lookup = new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore(),
+			false,
+			''
+		);
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -338,7 +359,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$revision = $this->data[0];
 		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
 
-		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, 'foo' );
+		$lookup = new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore(),
+			false,
+			'foo'
+		);
 
 		$prefixedId = 'foo:' . $unprefixedId;
 
@@ -360,7 +387,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$revision = $this->data[0];
 		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
 
-		$lookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false, 'foo' );
+		$lookup = new WikiPageEntityMetaDataLookup(
+			$this->getEntityNamespaceLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore(),
+			false,
+			'foo'
+		);
 
 		$prefixedId = 'foo:' . $unprefixedId;
 
@@ -442,7 +475,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	public function testLoadLatestRevisionIds_unknownNamespace() {
 		$entityId = $this->data[0]->getEntity()->getId();
 		$namespaceLookup = new EntityNamespaceLookup( [] );
-		$metaDataLookup = new WikiPageEntityMetaDataLookup( $namespaceLookup );
+		$metaDataLookup = new WikiPageEntityMetaDataLookup(
+			$namespaceLookup,
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getSlotRoleStore()
+		);
 
 		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
 		$result = $metaDataLookup->loadLatestRevisionIds(

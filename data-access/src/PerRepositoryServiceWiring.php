@@ -157,6 +157,9 @@ return [
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new WikiPageEntityMetaDataLookup(
 				$genericServices->getEntityNamespaceLookup(),
+				// TODO remove global state here.....
+				\Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+				\MediaWiki\MediaWikiServices::getInstance()->getSlotRoleStore(),
 				$services->getDatabaseName(),
 				$services->getRepositoryName()
 			)
