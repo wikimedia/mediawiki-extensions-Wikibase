@@ -196,8 +196,9 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 			$entity = $this->createEntity( $new, $entityId );
 
-			$this->entitySavingFlags = EDIT_NEW;
-			$this->baseRevisionId = 0;
+			// TODO if the page already exists then we don't need to pass EDIT_NEW
+			// $this->entitySavingFlags = EDIT_NEW;
+			// $this->baseRevisionId = 0;
 		} else {
 			$this->entitySavingFlags = EDIT_UPDATE;
 			$this->baseRevisionId = $entityRevision->getRevisionId();
