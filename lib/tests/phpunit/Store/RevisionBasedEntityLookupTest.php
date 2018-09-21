@@ -153,4 +153,8 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup->getEntity( new ItemId( 'Q1' ) );
 	}
 
+	public function test() {
+
+	}
+
 }
