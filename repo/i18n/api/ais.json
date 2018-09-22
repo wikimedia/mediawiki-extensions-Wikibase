@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Benel",
+			"Bunukwiki",
+			"Tokoabibi"
+		]
+	},
+	"apihelp-wbcreateclaim-description": "patizeng Wikibase saleku.",
+	"apihelp-wbcreateclaim-param-entity": "amicunus kisu salekuay a masaheciay ID",
+	"apihelp-wbcreateredirect-description": "patizeng masaheciay miliyaw patatuzu’.",
+	"apihelp-wbcreateredirect-param-to": "miliyaw patatuzu’ a masaheciay ID",
+	"apihelp-wbeditentity-example-12": "misipu cacay a aazihen a paya",
+	"apihelp-wbformatvalue-description": "kesehwa piazihan sulyang",
+	"apihelp-wbformatvalue-param-generate": "patalaayaway patahkal tu kese.",
+	"apihelp-wbgetclaims-description": "maala Wikibase a saleku.",
+	"apihelp-wbgetclaims-param-entity": "miala sapisaleku masaheciay ID. anu nipabeli saleku GUID, anu caaysa pasuliten naca.",
+	"apihelp-wbgetclaims-param-rank": "pili’ sasulitan a siwasiw-pili’ sakacucek, maminay dada’ katukuh matuzu’ay kasaselel a saleku",
+	"apihelp-wbmergeitems-param-fromid": "mikabu nay kasacacay ID",
+	"apihelp-wbremoveclaims-description": "misipu Wikibase a salekuan.",
+	"apihelp-wbremoveclaims-param-claim": "misipu cacay GUID saca yadah (i | tatebanan nu nisulitan palaed) GUID pakatineng saleku.\nsacahamin saleku kanca tungusay nu malecad cacay masaheciay.",
+	"apihelp-wbremovequalifiers-description": "nay saleku misipu nikayadah a kamu.",
+	"apihelp-wbsearchentities-description": "ku aazihen-paya atu pacimilay ngangan mikilim masaheciay.\namahica taneng sa, maminay tu misaungayay kamu a masaheciay aazihen-paya atu buhci tu kamu.\nmaminay tu tada sasasuayan-kamu a kasiwantan kalunasulitan.\namahica tada kamu a cudad atu paazihay a aazihen-paya caay kalecad, amuenengtu i pacimilay ngangan sasasuayan-kamu.",
+	"apihelp-wbsearchentities-param-search": "mikilim tina sulit.",
+	"apihelp-wbsearchentities-param-language": "mikilim tina kamu.",
+	"apihelp-wbsearchentities-param-strictlanguage": "kapah haw edeben pahalhalay a kamu",
+	"apihelp-wbsearchentities-param-type": "mikilim tina nikalahizaan a masaheciay.",
+	"apihelp-wbsearchentities-param-limit": "sakatabakiay a sausi nu heci",
+	"apihelp-query+wbsearch-param-search": "mikilim tina sulit.",
+	"apihelp-query+wbsearch-param-language": "mikilim tina kamu.",
+	"apihelp-query+wbsearch-param-type": "mikilim tina nikalahizaan a masaheciay.",
+	"apihelp-query+wbsearch-param-limit": "sakatabakiay a sausi nu heci",
+	"apihelp-query+wbsubscribers-param-limit": "sakatabakiay a sausi nu heci",
+	"apihelp-wbsetaliases-description": "setin Wikibase masaheciay a pacimilay ngangan.",
+	"apihelp-wbsetclaim-description": "patizeng saca misabaluh sacahamin sapuelac saca saleku.",
+	"apihelp-wbsetdescription-description": "setin sacacay Wikibase masaheciay a sapuelac.",
+	"apihelp-wbsetlabel-description": "setin sacacay Wikibase masaheciay a aazihen-paya."
+}

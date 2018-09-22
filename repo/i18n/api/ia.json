@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"apihelp-wblinktitles-description": "Associa duo paginas sur duo wikis differente a un elemento Wikibase.",
+	"apihelp-wblinktitles-summary": "Associa duo paginas sur duo wikis differente a un elemento Wikibase.",
+	"apihelp-query+wbcontentlanguages-summary": "Retorna information sur le linguas de contento que Wikibase accepta in differente contextos.",
+	"apihelp-query+wbcontentlanguages-param-context": "Le contexto in le qual le linguas de contento debe esser valide.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Le terminos (etiquetta, description, aliases) de un entitate.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Un valor de texto monolingue in un declaration.",
+	"apihelp-query+wbcontentlanguages-param-prop": "Le proprietates que debe esser retornate pro cata lingua.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Le codice del lingua.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "Le autonymo del lingua, isto es le nomine del lingua in ille lingua. Pote non esser cognoscite pro tote le linguas.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "Le nomine del lingua in le lingua actual (specificate via le parametro <var>uselang</var>), con application de linguas de recurso si necessari. Normalmente, al minus un nomine in anglese es cognoscite pro tote le linguas de contento que Wikibase accepta.",
+	"apihelp-query+wbcontentlanguages-example-1": "Obtener le codices de lingua valide pro le terminos de un entitate.",
+	"apihelp-query+wbcontentlanguages-example-2": "Obtener le linguas valide, con codice de lingua e autonymo, pro valores de texto monolingue.",
+	"apihelp-wbsetsitelink-param-linksite": "Le identificator del sito sur le qual se trova le pagina a ligar"
+}

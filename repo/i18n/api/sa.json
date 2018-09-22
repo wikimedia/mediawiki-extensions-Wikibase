@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"NehalDaveND"
+		]
+	},
+	"apihelp-wbsearchentities-param-search": "पाठः अन्विष्यताम्",
+	"apihelp-wbsearchentities-param-language": "भाषा अन्विष्यताम्",
+	"apihelp-wbsearchentities-param-limit": "परिणामानाम् अधिकतमा सङ्ख्या"
+}

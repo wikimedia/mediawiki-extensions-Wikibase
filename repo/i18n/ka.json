@@ -186,10 +186,5 @@
 	"right-item-merge": "ელემენტების შერწყმა",
 	"right-property-create": "თვისებების შექმნა",
 	"action-item-merge": "ელემენტების შერწყმა",
-	"action-property-create": "თვისებების შექმნა",
-	"apihelp-wbsearchentities-param-search": "მოიძიე ეს ტექსტი.",
-	"apihelp-wbsearchentities-param-language": "მოიძიე ამ ენაზე.",
-	"apihelp-wbsearchentities-param-limit": "შედეგების მაქსიმალური ოდენობა",
-	"apihelp-query+wbsearch-param-limit": "შედეგების მაქსიმალური ოდენობა",
-	"apihelp-wbsetdescription-param-language": "აღწერის ენა"
+	"action-property-create": "თვისებების შექმნა"
 }

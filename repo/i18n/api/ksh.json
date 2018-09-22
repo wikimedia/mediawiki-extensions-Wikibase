@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"apihelp-wbcreateredirect-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbeditentity-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbgetentities-param-languagefallback": "Donn de Äsazschprohche aanwännde för di Schprohche, di övver dä Parramehter „<var lang=\"en\" xml:lang=\"en\" dir=\"ltr\">languages</var>“ em Zersammehang mem aktoälle <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Application Programming Interface\">API</i>_Opprohv beschtemmp wohde sen.",
+	"apihelp-wblinktitles-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbmergeitems-param-fromid": "De Kännong, vun woh zesamme lähje",
+	"apihelp-wbmergeitems-param-toid": "De Kännong, noh woh zesamme lähje",
+	"apihelp-wbmergeitems-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbmergeitems-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbmergeitems-example-3": "Läht de Dahte vun <code>Q96</code> noh <code>Q99</code> zesamme un övverjeiht derbei alle Lengks  di neit zesamme paße.",
+	"apihelp-wbparsevalue-param-parser": "De Kännong vun däm „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">ValueParser</code>“, dä jebruch wähde sull. <span class=\"apihelp-deprecated\">Övvehollt</span>. Doht der Parramehter „<vr lang=\"en\" xml:lang=\"en\" dir=\"ltr\">ValueParser</var>“ doför nämme.",
+	"apihelp-wbparsevalue-param-values": "De Wääte zom pahse",
+	"apihelp-wbparsevalue-example-1": "Donn ene einfache Reih vun Zeijsche en e Objäk vun dä Zoot „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">StringValue </code>“ wandelle.",
+	"apihelp-wbparsevalue-example-2": "Donn <code dir=\"ltr\">1994-02-08</code> met dä Jenoweschkeit vun nüng Johre en e Objäk vun dä Zoot „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">TimeValue</code>“ wandelle.",
+	"apihelp-wbparsevalue-example-3": "Donn <code dir=\"ltr\">1994-02-08</code> met dä Jenoweschkeit vun vehzehn Sekonde en e Objäk vun dä Zoot „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">TimeValue</code>“ wandelle. De Pröhvong ovv et reeschtesch es, es debei ennjeschalld. Dröm küdd erus, dat dat nit reeschtesch es.",
+	"apihelp-wbsearchentities-param-search": "Noh dämm Täx söhke.",
+	"apihelp-wbsearchentities-param-language": "En dä Schprohch söhke.",
+	"apihelp-wbsearchentities-param-limit": "De hühßte Zahl vun Äjehbmeße",
+	"apihelp-wbsearchentities-param-continue": "un woh wigger söhke",
+	"apihelp-wbsearchentities-example-1": "Söhk noh „abc“ en Änglesch mem Schtandat för Zood un Jräns",
+	"apihelp-wbsearchentities-example-2": "Söhk noh „<kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">abc</kbd>“ en Änglesch met ene Jräns vun 50.",
+	"apihelp-wbsetaliases-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetaliases-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetclaim-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetclaim-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetclaimvalue-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetclaimvalue-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetdescription-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetdescription-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetlabel-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetlabel-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetqualifier-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetqualifier-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetreference-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetreference-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
+	"apihelp-wbsetsitelink-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
+	"apihelp-wbsetsitelink-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es."
+}

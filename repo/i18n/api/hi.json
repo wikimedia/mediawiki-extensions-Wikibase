@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sfic"
+		]
+	},
+	"apihelp-wbeditentity-example-12": "लेबल निकालें",
+	"apihelp-wbsearchentities-param-search": "इस शब्द हेतु खोजें",
+	"apihelp-wbsearchentities-param-language": "इस भाषा में खोजें।",
+	"apihelp-wbsearchentities-param-limit": "परिणामों की अधिकतम संख्या",
+	"apihelp-query+wbsearch-param-search": "इस पाठ्य हेतु खोजें।",
+	"apihelp-query+wbsearch-param-language": "इस भाषा में खोजें।",
+	"apihelp-query+wbsearch-param-type": "इस प्रकार की इकाई हेतु खोजें",
+	"apihelp-query+wbsearch-param-limit": "परिणामों की अधिकतम संख्या",
+	"apihelp-query+wbsubscribers-param-prop": "परिणाम में जोड़ने हेतु गुण",
+	"apihelp-query+wbsubscribers-param-limit": "परिणामों की अधिकतम संख्या",
+	"apihelp-wbsetdescription-param-language": "विवरण कि भाषा",
+	"apihelp-wbsetlabel-param-language": "लेबल की भाषा",
+	"apihelp-wbsetlabel-param-value": "लेबल का मान"
+}

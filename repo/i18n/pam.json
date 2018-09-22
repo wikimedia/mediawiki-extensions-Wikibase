@@ -20,7 +20,5 @@
 	"wikibase-listproperties-submit": "Mayintun",
 	"wikibase-entitieswithoutlabel-label-language": "Amanu-kodigu (language code)",
 	"special-redirectentity": "I-redirekta ing entidad",
-	"wikibase-redirectentity-submit": "Redirekta",
-	"apihelp-query+wbsearch-param-search": "Maintun para king tekstung ini.",
-	"apihelp-query+wbsearch-param-language": "Maintun king amanung/pamiyalitang ini."
+	"wikibase-redirectentity-submit": "Redirekta"
 }

@@ -144,9 +144,5 @@
 	"right-property-create": "Ps’rux gluw na",
 	"action-item-merge": "Psqunun kwara’ binkgan lmlamu’",
 	"action-property-create": "ps’rux gluw na",
-	"wikibase-pageinfo-subscription-none": "Ungat",
-	"apihelp-wbeditentity-example-12": "Laxan qutux lalu’ na qinlah",
-	"apihelp-wbsearchentities-param-search": "Hkangi’ biru’ qaniy.",
-	"apihelp-wbsearchentities-param-language": "Hkangi’ kay’ qaniy.",
-	"apihelp-query+wbsearch-param-language": "Hkangi’ kay’ qaniy."
+	"wikibase-pageinfo-subscription-none": "Ungat"
 }

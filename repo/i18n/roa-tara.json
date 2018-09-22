@@ -88,6 +88,5 @@
 	"wikibase-setlabel-label": "Etichette:",
 	"wikibase-setlabel-submit": "'Mboste l'etichette",
 	"special-setdescription": "'Mboste 'na descrizione",
-	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>.",
-	"apihelp-query+wbsubscribers-param-prop": "Probbietà da aggiungere a 'u resultate"
+	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>."
 }

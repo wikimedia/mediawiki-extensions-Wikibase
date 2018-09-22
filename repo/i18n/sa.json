@@ -58,8 +58,5 @@
 	"wikibase-listdatatypes-wikibase-item-head": "वस्तु",
 	"wikibase-listdatatypes-time-head": "समयः",
 	"wikibase-listdatatypes-url-head": "सार्वसङ्केतः (URL)",
-	"datatypes-type-url": "सार्वसङ्केतः (URL)",
-	"apihelp-wbsearchentities-param-search": "पाठः अन्विष्यताम्",
-	"apihelp-wbsearchentities-param-language": "भाषा अन्विष्यताम्",
-	"apihelp-wbsearchentities-param-limit": "परिणामानाम् अधिकतमा सङ्ख्या"
+	"datatypes-type-url": "सार्वसङ्केतः (URL)"
 }

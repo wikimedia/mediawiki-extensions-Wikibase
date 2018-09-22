@@ -258,6 +258,5 @@
 	"content-model-wikibase-query": "Wikibase-forespørgsel",
 	"right-property-create": "Oprette egenskaber",
 	"action-property-create": "oprette egenskaber",
-	"wikibase-pageinfo-subscription-none": "Ingen",
-	"apihelp-wbsetdescription-param-language": "Beskrivelsens sprog"
+	"wikibase-pageinfo-subscription-none": "Ingen"
 }

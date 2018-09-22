@@ -96,6 +96,5 @@
 	"wikibase-noentity-createone": "ඔබට [[$1|අලුත් එකක්]] ද තැනිය හැක.",
 	"content-model-wikibase-item": "විකිපාදක අයිතමය",
 	"content-model-wikibase-property": "විකිපාදක අයිතිය",
-	"content-model-wikibase-query": "විකිපාදක ප්‍රශ්නය",
-	"apihelp-wbsetaliases-param-language": "මෙම අන්වර්ථ නාමය සැකසීම සඳහා භාෂාව"
+	"content-model-wikibase-query": "විකිපාදක ප්‍රශ්නය"
 }

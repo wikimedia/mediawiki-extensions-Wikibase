@@ -74,9 +74,5 @@
 	"wikibase-entitieswithoutlabel-label-language": "ဘာသာစကားကုဒ်:",
 	"wikibase-entitieswithoutlabel-label-type": "အမျိုးအစား:",
 	"wikibase-entitieswithoutlabel-submit": "ရှာပါ",
-	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်",
-	"apihelp-wbsearchentities-param-search": "ဤစာသားအတွက် ရှာဖွေပါ။",
-	"apihelp-wbsearchentities-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။",
-	"apihelp-query+wbsearch-param-search": "ဤစာသားအတွက် ရှာဖွေပါ။",
-	"apihelp-query+wbsearch-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။"
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်"
 }

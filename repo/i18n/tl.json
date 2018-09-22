@@ -73,9 +73,5 @@
 	"wikibase-entitieswithoutlabel-label-language": "Kodigong pang-wika:",
 	"special-entitypage": "Pinagmulang pagina",
 	"wikibase-restoreold": "itakdang muli",
-	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"apihelp-query+wbsearch-param-search": "Maghanap para sa tekstong ito.",
-	"apihelp-query+wbsearch-param-language": "Maghanap sa wikang ito.",
-	"apihelp-query+wbsearch-param-strictlanguage": "Kung di-papayagan ang pagsa-urong (fallback) ng wika",
-	"apihelp-query+wbsearch-param-limit": "Pinakamataas na bilang ng mga resulta"
+	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]"
 }

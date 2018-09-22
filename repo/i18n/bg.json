@@ -104,6 +104,5 @@
 	"datatypes-type-url": "URL адрес",
 	"content-model-wikibase-item": "Обект в Уикиданни",
 	"content-model-wikibase-property": "Свойство в Уикиданни",
-	"content-model-wikibase-query": "Заявка към Уикиданни",
-	"apihelp-wbavailablebadges-description": "Търси налични значки."
+	"content-model-wikibase-query": "Заявка към Уикиданни"
 }

@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mormegil"
+		]
+	},
+	"apihelp-wbsearchentities-example-4": "Vyhledávání „abc“ v angličtině s limitem 2 a posunem o 2"
+}

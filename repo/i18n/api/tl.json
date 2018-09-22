@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Leeheonjin"
+		]
+	},
+	"apihelp-query+wbsearch-param-search": "Maghanap para sa tekstong ito.",
+	"apihelp-query+wbsearch-param-language": "Maghanap sa wikang ito.",
+	"apihelp-query+wbsearch-param-strictlanguage": "Kung di-papayagan ang pagsa-urong (fallback) ng wika",
+	"apihelp-query+wbsearch-param-limit": "Pinakamataas na bilang ng mga resulta"
+}

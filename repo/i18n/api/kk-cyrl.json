@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Arystanbek"
+		]
+	},
+	"apihelp-wbsearchentities-param-search": "Мына мәтінді іздеу",
+	"apihelp-wbsearchentities-param-language": "Мына тілде іздеу",
+	"apihelp-wbsearchentities-param-limit": "Нәтижелердің максимум саны"
+}

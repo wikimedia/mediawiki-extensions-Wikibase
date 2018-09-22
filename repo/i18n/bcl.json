@@ -17,6 +17,5 @@
 	"wikibase-setsitelink-submit": "Isusog an pansityong saguysoy",
 	"wikibase-setsitelink-remove-failed": "An pansityong saguysoy dae tabi matatangkas.",
 	"wikibase-entity-not-viewable-title": "Tipo nin laman dae tarampad: Dae maipapahiling an laman",
-	"wikibase-entity-not-viewable": "An itinaong laman kan tipong \"$1\" bako sarong Entidad asin dae maipagpahiling sa paagi kan datulan nin Wiki.",
-	"apihelp-wbsetaliases-param-set": "Sarong listahan kan mga alyas na magriribay kan presenteng listahan (dae makukumbina dawa sa pagdugang o paghalion)"
+	"wikibase-entity-not-viewable": "An itinaong laman kan tipong \"$1\" bako sarong Entidad asin dae maipagpahiling sa paagi kan datulan nin Wiki."
 }

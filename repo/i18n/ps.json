@@ -81,9 +81,5 @@
 	"wikibase-listdatatypes-time-head": "وخت",
 	"wikibase-listdatatypes-url-head": "يو آر اېل",
 	"datatypes-type-url": "يو آر اېل",
-	"content-model-wikibase-item": "د ويکيبېز توکی",
-	"apihelp-query+wbsearch-param-search": "دغه متن پلټل.",
-	"apihelp-query+wbsearch-param-language": "په دې ژبه کې پلټل.",
-	"apihelp-wbsetdescription-param-language": "د څرگندونې ژبه",
-	"apihelp-wbsetlabel-param-language": "د نښکې ژبه"
+	"content-model-wikibase-item": "د ويکيبېز توکی"
 }

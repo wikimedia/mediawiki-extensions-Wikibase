@@ -323,6 +323,5 @@
 	"wikibase-entity-not-viewable": "Tilgreint innihald „$1\" er ekki eining og er ekki hægt að sýna af Wikibase.",
 	"action-item-merge": "sameina hluti",
 	"action-property-create": "búa til eiginleika",
-	"wikibase-pageinfo-subscription-none": "Ekkert",
-	"apihelp-wbmergeitems-param-fromid": "Auðkennið sem á að sameina frá"
+	"wikibase-pageinfo-subscription-none": "Ekkert"
 }

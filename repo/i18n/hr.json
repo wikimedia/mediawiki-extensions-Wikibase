@@ -156,6 +156,5 @@
 	"wikibase-listdatatypes-wikibase-item-head": "Stavka",
 	"wikibase-listdatatypes-time-head": "Vrijeme",
 	"wikibase-concept-uri": "URI koncepta",
-	"wikibase-concept-uri-tooltip": "URI koji označava koncept opisan ovom stavkom",
-	"apihelp-wbformatvalue-param-datatype": "Vrsta podataka za vrijednost. Razlikovati od vrste vrijednosti"
+	"wikibase-concept-uri-tooltip": "URI koji označava koncept opisan ovom stavkom"
 }

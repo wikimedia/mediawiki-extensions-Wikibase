@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pyscowicz",
+			"Rueter",
+			"Stryn"
+		]
+	},
+	"apihelp-wbsearchentities-param-search": "Etsi tätä tekstiä.",
+	"apihelp-wbsearchentities-param-language": "Hae tällä kielellä.",
+	"apihelp-query+wbsearch-param-search": "Etsi tätä tekstiä.",
+	"apihelp-query+wbsearch-param-language": "Hae tällä kielellä.",
+	"apihelp-wbsetdescription-param-language": "Kuvauksen kieli",
+	"apihelp-wbsetlabel-param-language": "Nimen kieli",
+	"apihelp-wbsetlabel-param-value": "Nimen arvo",
+	"apihelp-wbsetsitelink-example-4": "Poistaa saksankielisen sivustolinkin kohteesta"
+}

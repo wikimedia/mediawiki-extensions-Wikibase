@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
+		]
+	},
+	"apihelp-query+wbsearch-param-search": "دغه متن پلټل.",
+	"apihelp-query+wbsearch-param-language": "په دې ژبه کې پلټل.",
+	"apihelp-wbsetdescription-param-language": "د څرگندونې ژبه",
+	"apihelp-wbsetlabel-param-language": "د نښکې ژبه"
+}

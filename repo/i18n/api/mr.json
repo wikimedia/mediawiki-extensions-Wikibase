@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"V.narsikar",
+			"अभय नातू"
+		]
+	},
+	"apihelp-wbeditentity-example-11": "जर ते आधीच अस्तित्वात असेल तर, उपरीलेखनाविना एक खूणपट्टी(लेबल) जोडते",
+	"apihelp-wbeditentity-example-12": "खूणपट्टी हटविते",
+	"apihelp-query+wbsearch-param-search": "हा मजकूर शोधा."
+}

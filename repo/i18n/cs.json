@@ -376,6 +376,5 @@
 	"action-property-create": "vytvářet vlastnosti",
 	"wikibase-pageinfo-subscription": "Wiki odebírající tuto entitu",
 	"wikibase-pageinfo-subscription-none": "Žádné",
-	"wikibase-search-bad-entity-type": "Chybný typ entity: $1",
-	"apihelp-wbsearchentities-example-4": "Vyhledávání „abc“ v angličtině s limitem 2 a posunem o 2"
+	"wikibase-search-bad-entity-type": "Chybný typ entity: $1"
 }

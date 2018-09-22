@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"apihelp-wbsearchentities-param-search": "ဤစာသားအတွက် ရှာဖွေပါ။",
+	"apihelp-wbsearchentities-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။",
+	"apihelp-query+wbsearch-param-search": "ဤစာသားအတွက် ရှာဖွေပါ။",
+	"apihelp-query+wbsearch-param-language": "ဤဘာသာစကားထဲတွင် ရှာဖွေပါ။"
+}

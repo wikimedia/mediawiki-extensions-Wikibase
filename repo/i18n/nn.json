@@ -250,6 +250,5 @@
 	"right-item-merge": "Fletta saman element",
 	"right-property-create": "Oppretta eigenskapar",
 	"action-item-merge": "fletta saman element",
-	"action-property-create": "oppretta eigenskapar",
-	"apihelp-wbmergeitems-param-fromid": "ID-en det vert fletta frå"
+	"action-property-create": "oppretta eigenskapar"
 }

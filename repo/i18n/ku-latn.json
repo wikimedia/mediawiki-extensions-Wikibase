@@ -73,6 +73,5 @@
 	"wikibase-entitieswithoutlabel-submit": "Bibîne",
 	"wikibase-redirectentity-submit": "Beralîkirin",
 	"wikibase-listdatatypes-url-head": "URL",
-	"datatypes-type-url": "URL",
-	"apihelp-wbsetlabel-param-language": "Zimanê etîketê"
+	"datatypes-type-url": "URL"
 }

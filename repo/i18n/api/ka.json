@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"BRUTE",
+			"MIKHEIL"
+		]
+	},
+	"apihelp-wbsearchentities-param-search": "მოიძიე ეს ტექსტი.",
+	"apihelp-wbsearchentities-param-language": "მოიძიე ამ ენაზე.",
+	"apihelp-wbsearchentities-param-limit": "შედეგების მაქსიმალური ოდენობა",
+	"apihelp-query+wbsearch-param-limit": "შედეგების მაქსიმალური ოდენობა",
+	"apihelp-wbsetdescription-param-language": "აღწერის ენა"
+}
