@@ -80,7 +80,7 @@
 	"apihelp-wbgetentities-param-languages": "לפי בררת המחדל, הערכים המתורגמים מוחזרים בכל השפות הזמינות.\nהפרמטר הזה מאפשר סינון לשפה אחת או יותר באמצעות מן קוד שפה אחת או יותר.",
 	"apihelp-wbgetentities-param-languagefallback": "להחיל גיבוי שפה לשפות שמוגדרות בפרמטר <var>languages</var>, עם ההקשר הנוכחי של קריאת API.",
 	"apihelp-wbgetentities-param-normalize": "לנסות לנרמל את כותרת הדף אל מול אתר הלקוח.\nזה עובד רק אם ניתנו בדיוק אתר אחד ודף אחד.",
-	"apihelp-wbgetentities-param-sitefilter": "סינון קישורי אתר בישויות ל־siteid־ים האלה.",
+	"apihelp-wbgetentities-param-sitefilter": "סינון קישורי אתר בישויות לאלה עם מזהי האתר האלה.",
 	"apihelp-wbgetentities-example-1": "קבלת ישויות עם מזהה <samp>Q42</samp> עם כל המאפיינים הזמינים בכל השפות הזמינות",
 	"apihelp-wbgetentities-example-2": "קבלת ישויות עם מזהה <samp>P17</samp> עם כל המאפיינים הזמינים בכל השפות הזמינות",
 	"apihelp-wbgetentities-example-3": "קבלת ישויות עם המזהים <samp>Q42</samp> ו־<samp>P17</samp> עם כל המאפיינים הזמינים בכל השפות הזמינות",
@@ -296,5 +296,5 @@
 	"apihelp-wbsetsitelink-example-5": "הוספת קישור אתר אל הדף \"Wodór\" בפולנית לפריט שמקושר עם הדף \"Hydrogen\" באנגלית, עם סמל אחד שמצביע לפריט עם המזהה \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "שינוי הסמלים עבור הקישור לדף פולני מהפריט עם המזהה \"Q42\" לשני סמלים שמצביעים לפריטים עם המזהים \"Q2\" ו־\"Q149\" בלא אספקת כותרת הקישור",
 	"apihelp-wbsetsitelink-example-7": "שינוי הקישור לדף פולני מהפריט עם המזהה\"Q42\" ללא שינוי הסמלים",
-	"apihelp-wbsetsitelink-example-8": "שינוי הקישור לדף פולני מהפריט עם מזהה \"Q42\" והסרת כל הסמלים"
+	"apihelp-wbsetsitelink-example-8": "שינוי הקישור לדף הפולני מהפריט עם מזהה \"Q42\" והסרת כל הסמלים"
 }
