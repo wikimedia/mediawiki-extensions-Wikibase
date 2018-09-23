@@ -27,8 +27,8 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 
 $GLOBALS['wgResourceModules'] = array_merge(
 	$GLOBALS['wgResourceModules'],
-	include __DIR__ . '/lib/resources.php',
-	include __DIR__ . '/resources/resources.php'
+	require __DIR__ . '/lib/resources.php',
+	require __DIR__ . '/resources/resources.php'
 );
 
 $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
@@ -37,8 +37,8 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 ) {
 	$testModules['qunit'] = array_merge(
 		$testModules['qunit'],
-		include __DIR__ . '/lib/resources.test.php',
-		include __DIR__ . '/tests/qunit/resources.php'
+		require __DIR__ . '/lib/resources.test.php',
+		require __DIR__ . '/tests/qunit/resources.php'
 	);
 };
 

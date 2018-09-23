@@ -5,6 +5,6 @@
  */
 return call_user_func( function() {
 	return array_merge(
-		include __DIR__ . '/resources/wikibase-data-values-value-view/tests/resources.php'
+		require __DIR__ . '/resources/wikibase-data-values-value-view/tests/resources.php'
 	);
 } );
