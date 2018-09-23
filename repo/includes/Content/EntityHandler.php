@@ -159,7 +159,7 @@ abstract class EntityHandler extends ContentHandler {
 		$lang = $context->getLanguage()->getHtmlCode();
 
 		$outputPage = $context->getOutput();
-		$outputPage->addWikiText( Html::openElement( 'div', [
+		$outputPage->addWikiTextAsInterface( Html::openElement( 'div', [
 				'class' => "noarticletext mw-content-$dir",
 				'dir' => $dir,
 				'lang' => $lang,
