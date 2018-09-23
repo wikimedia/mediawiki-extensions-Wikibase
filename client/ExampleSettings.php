@@ -1,2 +1,2 @@
 <?php
-include __DIR__ . '/config/WikibaseClient.example.php';
+require __DIR__ . '/config/WikibaseClient.example.php';

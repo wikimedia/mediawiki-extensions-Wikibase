@@ -1013,7 +1013,7 @@ call_user_func( function() {
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge(
 		$wgResourceModules,
-		include __DIR__ . '/resources/Resources.php'
+		require __DIR__ . '/resources/Resources.php'
 	);
 
 	$wgWBRepoSettings = array_merge(
