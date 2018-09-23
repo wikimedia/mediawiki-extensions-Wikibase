@@ -54,22 +54,9 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.31c', '<' ) ) {
  */
 $GLOBALS['wgValueParsers'] = [];
 
-// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
-if ( !defined( 'WBL_VERSION' ) ) {
-	include_once __DIR__ . '/../lib/WikibaseLib.php';
-}
-
-if ( !defined( 'WBL_VERSION' ) ) {
-	throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
-}
-
-if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-	include_once __DIR__ . '/../view/WikibaseView.php';
-}
-
-if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-	throw new Exception( 'Wikibase depends on WikibaseView.' );
-}
+// Sub-extensions needed by WikibaseRepository
+require_once __DIR__ . '/../lib/WikibaseLib.php';
+require_once __DIR__ . '/../view/WikibaseView.php';
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__  . '/autoload.php';
