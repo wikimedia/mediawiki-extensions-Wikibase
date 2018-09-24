@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c935105_0d6214ea",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:41:34Z",
+      "side": 1,
+      "message": "using a blank mock here would be cleaner, as it would make clear that the blob store is not used at all.",
+      "revId": "0258fa4af5dc607b83af0b96a3c149f155948ced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ae3159_bb53ff0a",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:41:34Z",
+      "side": 1,
+      "message": "Would be nicer to call getEntityRevision() instead of relying on knowledge of implementation details.",
+      "revId": "0258fa4af5dc607b83af0b96a3c149f155948ced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
