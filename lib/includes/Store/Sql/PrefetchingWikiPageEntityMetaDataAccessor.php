@@ -27,11 +27,6 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	private $lookup;
 
 	/**
-	 * @var int
-	 */
-	private $maxCacheKeys;
-
-	/**
 	 * @var MapCacheLRU
 	 */
 	private $cache;
@@ -47,8 +42,18 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 */
 	public function __construct( WikiPageEntityMetaDataAccessor $lookup, $maxCacheKeys = 1000 ) {
 		$this->lookup = $lookup;
-		$this->maxCacheKeys = $maxCacheKeys;
 		$this->cache = new MapCacheLRU( $maxCacheKeys );
+	}
+
+	/**
+	 * @param int $newSize
+	 */
+	private function increaseCacheSize( $newSize ) {
+		$this->cache->setMaxSize( $newSize );
+		wfDebugLog(
+			'PrefetchingWikiPageEntityMetaDataAccessor',
+			"Needed to increase size of MapCacheLRU instance to $newSize."
+		);
 	}
 
 	/**
@@ -59,18 +64,13 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	public function prefetch( array $entityIds ) {
 		$entityIdCount = count( $entityIds );
 
-		if ( $entityIdCount > $this->maxCacheKeys ) {
+		if ( $entityIdCount > $this->cache->getMaxSize() ) {
 			// Ouch... fetching everything wouldn't fit into the cache, thus
 			// other functions might not find what they're looking for.
-			// Create a new, large enough MapCacheLRU to mitigate this.
-			$this->cache = new MapCacheLRU( $entityIdCount + 1 );
-			$this->maxCacheKeys = $entityIdCount + 1;
-			wfDebugLog(
-				'PrefetchingWikiPageEntityMetaDataAccessor',
-				"Needed to create a new MapCacheLRU instance for $entityIdCount entities."
-			);
+			// Increase the size of MapCacheLRU to mitigate this.
+			$this->increaseCacheSize( $entityIdCount + 1 );
 		}
-		if ( ( $entityIdCount + count( $this->toFetch ) ) > $this->maxCacheKeys ) {
+		if ( ( $entityIdCount + count( $this->toFetch ) ) > $this->cache->getMaxSize() ) {
 			// Fetching everything would exceed the capacity of the cache,
 			// thus discard all older entity ids as we can safely ignore these.
 			$this->toFetch = [];
