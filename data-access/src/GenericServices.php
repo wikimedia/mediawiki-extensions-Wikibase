@@ -59,6 +59,11 @@ class GenericServices {
 	private $stringNormalizer;
 
 	/**
+	 * @var string[]
+	 */
+	private $entitySlots;
+
+	/**
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param int[] $entityNamespaces
 	 * @param string[] $entitySlots
