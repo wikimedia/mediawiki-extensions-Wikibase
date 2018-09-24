@@ -337,12 +337,28 @@
 		_combineResults: function ( hookResults, searchResults ) {
 			var deferred = $.Deferred(),
 				ids = {},
+				result = [],
 				uniqueFilter = function ( item ) {
 					if ( ids[ item.id ] ) {
 						return false;
 					}
 					ids[ item.id ] = true;
 					return true;
+				},
+				ratingSorter = function ( item1, item2 ) {
+					if ( !item1.rating && !item2.rating ) {
+						return 0;
+					}
+					if ( !item1.rating ) {
+						return 1;
+					}
+					if ( !item2.rating ) {
+						return -1;
+					}
+					if ( item1.rating < item2.rating ) {
+						return 1;
+					}
+					return -1;
 				};
 
 			searchResults = searchResults || [];
@@ -350,11 +366,13 @@
 			$.when.apply( $, hookResults ).then( function () {
 
 				$.each( arguments, function ( key, data ) {
-					searchResults = data.concat( searchResults );
+					result = data.concat( result );
 				} );
 
-				searchResults = searchResults.filter( uniqueFilter );
-				deferred.resolve( searchResults );
+				result.sort( ratingSorter );
+				result = result.concat( searchResults );
+				result = result.filter( uniqueFilter );
+				deferred.resolve( result );
 			} );
 
 			return deferred.promise();
