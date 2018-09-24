@@ -7,7 +7,8 @@
 			"Macofe",
 			"Cocu",
 			"Jon Harald Søby",
-			"Ranveig"
+			"Ranveig",
+			"Kjetil r"
 		]
 	},
 	"wikibase-lib-desc": "Felles funksjonalitet for Wikibase, det strukturerte datalageret",
@@ -130,7 +131,7 @@
 	"wikibase-entity-summary-wbsetdescription-remove": "Fjernet beskrivelse [$2]",
 	"wikibase-entity-summary-wbsetaliases-set": "Satte {{PLURAL:$1|alias}} [$2]",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "La til og fjernet [$2] {{PLURAL:$1|alias}}",
-	"wikibase-entity-summary-wbsetaliases-add": "La til [$2] {{PLURAL:$1|kallenavn}}",
+	"wikibase-entity-summary-wbsetaliases-add": "La til [$2] {{PLURAL:$1|alias}}",
 	"wikibase-entity-summary-wbsetaliases-remove": "Fjernet [$2] {{PLURAL:$1|alias}}",
 	"wikibase-entity-summary-wbsetaliases-update": "Oppdaterte {{PLURAL:$1|alias}} [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Endret etikett, beskrivelse og alias for [$2]",

@@ -6,7 +6,8 @@
 			"Jeblad",
 			"Macofe",
 			"Jon Harald Søby",
-			"Njardarlogar"
+			"Njardarlogar",
+			"Kjetil r"
 		]
 	},
 	"wikibase-desc": "Tjenertutvidelse for Wikibase, det strukturerte datalageret",
@@ -45,7 +46,7 @@
 	"wikibase-description-edit-placeholder": "lag beskrivelse",
 	"wikibase-description-edit-placeholder-language-aware": "fyll inn beskrivelse på $1",
 	"wikibase-aliases-edit-placeholder": "fyll inn noen alias",
-	"wikibase-aliases-edit-placeholder-language-aware": "oppgi noen kallenavn i $1",
+	"wikibase-aliases-edit-placeholder-language-aware": "oppgi noen alias i $1",
 	"wikibase-aliases-edit-label": "Alias adskilt av vertikalstrek:",
 	"wikibase-content-language-edit-label": "Språk:",
 	"wikibase-content-language-edit-not-recognized-language": "Den angitte språkkoden ble ikke gjenkjent.",
