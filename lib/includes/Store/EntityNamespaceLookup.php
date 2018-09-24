@@ -60,7 +60,7 @@ class EntityNamespaceLookup {
 	/**
 	 * @param string $entityType
 	 *
-	 * @return int The role name of the slot that this kind of entity is stored in.
+	 * @return string The role name of the slot that this kind of entity is stored in.
 	 *         In dedicated entity namespaces, this will be the "main" slot, but
 	 *         other slots may be used when entities are "attached" to other kinds of
 	 *         pages.
