@@ -16,22 +16,14 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 class EditStatCollectingEditFilterHookRunner implements EditFilterHookRunner {
 
 	private $hookRunner;
-	private $stats;
-	private $timingPrefix;
+	private $profiler;
 
-	/**
-	 * @param EditFilterHookRunner $hookRunner
-	 * @param StatsdDataFactoryInterface $stats
-	 * @param string $timingPrefix e.g. wikibase.repo.EditEntity.timing.attemptSave
-	 */
 	public function __construct(
 		EditFilterHookRunner $hookRunner,
-		StatsdDataFactoryInterface $stats,
-		$timingPrefix
+		Profiler $profiler
 	) {
 		$this->hookRunner = $hookRunner;
-		$this->stats = $stats;
-		$this->timingPrefix = $timingPrefix;
+		$this->profiler = $profiler;
 	}
 
 	/**
@@ -41,16 +33,58 @@ class EditStatCollectingEditFilterHookRunner implements EditFilterHookRunner {
 	 * @return Status
 	 */
 	public function run( $new, User $user, $summary ) {
-		$attemptSaveFilterStart = microtime( true );
-		$hookStatus = $this->hookRunner->run( $new, $user, $summary );
-		$attemptSaveFilterEnd = microtime( true );
+		$arguments = func_get_args();
 
-		$this->stats->timing(
-			"{$this->timingPrefix}.{$new->getType()}.EditFilterHookRunner.run",
-			( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000
+		return $this->profiler->recordTiming(
+			$new->getType() . '.EditFilterHookRunner.run',
+			function() use ( $arguments ) {
+				return $this->hookRunner->run( ...$arguments );
+			}
 		);
+	}
 
-		return $hookStatus;
+}
+
+class Profiler {
+
+	private $stats;
+	private $baseKey;
+
+	public function __construct( StatsdDataFactoryInterface $stats, $baseKey = '' ) {
+		$this->stats = $stats;
+		$this->baseKey = $baseKey;
+	}
+
+	public function recordTiming( string $key, callable $function ) {
+		$startTime = microtime( true ); // TODO: use Clock
+		$returnValue = $function();
+		$endTime = microtime( true );
+
+		$this->recordToStatsd( $key, $endTime - $startTime );
+
+		return $returnValue;
+	}
+
+	private function recordToStatsd( $key, $microSeconds ) {
+		$this->stats->timing(
+			$this->joinKeys( $this->baseKey, $key ),
+			$microSeconds * 1000
+		);
+	}
+
+	private function joinKeys( $baseKey, $key ) {
+		if ( $baseKey === '' ) {
+			return $key;
+		}
+
+		return $baseKey . '.' . $key;
+	}
+
+	public function createSubRecorder( $baseKey ) {
+		return new self(
+			$this->stats,
+			$this->joinKeys( $this->baseKey, $baseKey )
+		);
 	}
 
 }
