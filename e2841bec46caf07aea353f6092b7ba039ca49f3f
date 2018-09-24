@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f36c606d_564aa5e7",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:23:47Z",
+      "side": 1,
+      "message": "The purpose of this flag is to avoid a race condition of two requests both trying create the same page. This cannot happen with entities that use sequential IDs, but it could for other kinds of entities. \n\nIt would be more appropriate to apply this fix in the code that passes these flags on to a PageUpdater: at that point, EDIT_NEW meaning \"create entity\" gets mapped to the meaning \"create wiki page\". So at that point, the code should check whether the page exists - if it does, change EDIT_NEW to EDIT_UPDATE. But only after checking that we were not asked to create an entity that existed, or to update an entity that did not, by checking whether the appropriate slot was already there or not.",
+      "revId": "e2841bec46caf07aea353f6092b7ba039ca49f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
