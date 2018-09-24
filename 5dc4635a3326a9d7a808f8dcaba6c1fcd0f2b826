@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f0823e8_d5763168",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:32:32Z",
+      "side": 1,
+      "message": "What would it take to avoid global state here? Perhaps a MediaWikiServices should be passed as a parameter?\nAlso... EntityTitleLookup should be per-repo... or is it just \"local repo only, fail for foreign entities\"?\n\nALso, please import classes.",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1097d9bc_1ea284f8",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:32:32Z",
+      "side": 1,
+      "message": "array_keys( $slotJoinConds ) would be nicer.",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e48fadfe_5103457c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:32:32Z",
+      "side": 1,
+      "message": "Should mention that this ensures compatibility to the pre-MCR schema, as long as only the main slot is used.\nOtherwise, there would be no good reason to make the distinction, we could just always check the slot.",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "875f9a26_4b46324e",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:32:32Z",
+      "side": 1,
+      "message": "double full stop.",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2901ea74_66990038",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:32:32Z",
+      "side": 1,
+      "message": "please import",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054939a8_fbbe86fd",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-24T13:32:32Z",
+      "side": 1,
+      "message": "please import",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
