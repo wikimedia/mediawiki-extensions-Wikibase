@@ -58,6 +58,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 
 	/**
 	 * Marks the given entity ids for prefetching.
+	 * XXX: This does not obey the definition of the EntityPrefetcher interface, that says this should actually fetch.
 	 *
 	 * @param EntityId[] $entityIds
 	 */
