@@ -454,6 +454,7 @@
 	"wikibase-rescore-profile-prefix": "Default rescore profile for completion search",
 	"wikibase-rescore-profile-prefix-boost": "\"Rescore\" is not a verb. So translate as \"profile of rescore\" and not as \"to rescore a profile\".\n:''([https://www.mediawiki.org/w/index.php?title=Extension:CirrusSearch/Profiles#Wikibase Reference] states: \"Added '''rescore profiles''' that are used for Wikibase entities\")''\n\n\"Completion search\" referred [[MediaWiki:Wikibaselexeme-rescore-profile-prefix/en|here]] as \"Prefix (completion) search\" is a search to find possible completions for the existing typed characters (the \"prefix\", one guesses).\n:''([https://www.mediawiki.org/w/index.php?title=Extension:CirrusSearch/Profiles#Context Reference] states: \"a '''rescore profile''' can be applied to regular search, '''prefix search''', Wikibase search, etc.\")''\n\nApparently related:\n* [[MediaWiki:Wikibaselexeme-rescore-profile-prefix/en]]",
 	"wikibase-rescore-profile-fulltext": "Default rescore profile for fulltext search",
+	"wikibase-rescore-profile-fulltext-phrase": "Default rescore profile for fulltext search with phrase rescoring",
 	"datatypes-type-url": "Unused at this time.\n{{related|Datatypes-type}}\n{{Identical|URL}}",
 	"content-model-wikibase-item": "The name for Wikibase item content model, used when describing what type of content a page contains.",
 	"content-model-wikibase-property": "The name for Wikibase property content model, used when describing what type of content a page contains.",

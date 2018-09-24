@@ -54,7 +54,7 @@ return [
 	],
 	// Fulltext profile with phrase scoring
 	'wikibase_phrase' => [
-		'i18n_msg' => 'wikibase-rescore-profile-fulltext',
+		'i18n_msg' => 'wikibase-rescore-profile-fulltext-phrase',
 		'supported_namespaces' => 'all',
 		'rescore' => [
 			// phrase rescore
