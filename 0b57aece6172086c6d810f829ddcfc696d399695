@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad5b9b88_ae4e9fbb",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-24T11:32:06Z",
+      "side": 1,
+      "message": "This description doesn’t match the test as far as I can tell (the items have different ratings here). Perhaps the QUnit.test() line and the test body got mixed up during a rebase or something?",
+      "revId": "0b57aece6172086c6d810f829ddcfc696d399695",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

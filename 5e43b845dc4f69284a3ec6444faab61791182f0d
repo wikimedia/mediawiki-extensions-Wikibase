@@ -41,6 +41,24 @@
       "revId": "5e43b845dc4f69284a3ec6444faab61791182f0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e86a2bd3_860fa1f5",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-24T11:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa870f81_06deced9",
+      "revId": "5e43b845dc4f69284a3ec6444faab61791182f0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
