@@ -419,6 +419,7 @@
 	"wikibase-rescore-profile-prefix": "Default rescore profile for completion search",
 	"wikibase-rescore-profile-prefix-boost": "Rescore profile for completion search with statement boosting",
 	"wikibase-rescore-profile-fulltext": "Default rescore profile for fulltext search",
+	"wikibase-rescore-profile-fulltext-phrase": "Rescore profile for fulltext search with phrase scoring",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase item",
 	"content-model-wikibase-property": "Wikibase property",
