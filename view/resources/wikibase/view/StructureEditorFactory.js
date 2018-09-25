@@ -26,6 +26,7 @@
 					return;
 				}
 				add();
+				return false;
 			}
 		);
 		return this._toolbarFactory.getAddToolbar( options, $dom );
