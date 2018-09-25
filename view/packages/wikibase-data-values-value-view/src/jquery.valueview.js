@@ -17,6 +17,6 @@
 
 	// Allow to query for ":valueview" isntead of ":valueview-valueview" (as defined by
 	// jQuery.Widget):
-	$.expr[ ':' ].valueview = $.expr[ ':' ][ 'valueview-valueview' ];
+	$.expr.pseudos.valueview = $.expr.pseudos[ 'valueview-valueview' ];
 
 }( jQuery ) );
