@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c047f938_970b3a4d",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-25T08:00:38Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "f8a6b47df6a9fe7b3e87d424373e39df5d1b9db4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c57db7cd_aca86dd9",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-25T08:00:38Z",
+      "side": 1,
+      "message": "why not use setExpectedException( StorageException::class, \"No such revision found for {$entityId-\u003egetSerialization()}: {$revId}\" )?",
+      "revId": "f8a6b47df6a9fe7b3e87d424373e39df5d1b9db4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
