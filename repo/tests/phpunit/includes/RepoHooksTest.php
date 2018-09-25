@@ -15,6 +15,7 @@ use RequestContext;
 use SkinTemplate;
 use stdClass;
 use Title;
+use TitleValue;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,7 +24,7 @@ use Wikibase\SettingsArray;
 use WikiImporter;
 
 /**
- * @covers Wikibase\RepoHooks
+ * @covers \Wikibase\RepoHooks
  *
  * @group Wikibase
  *
@@ -343,6 +344,27 @@ XML
 
 		$this->assertCount( 1, $extraFeatures );
 		$this->assertInstanceOf( HasWbStatementFeature::class, $extraFeatures[0] );
+	}
+
+	public function provideOnContentModelCanBeUsedOn() {
+		// true
+		yield 'Wikitext on a talk page' => [ CONTENT_MODEL_WIKITEXT, new TitleValue( NS_TALK, 'Foo' ), true ];
+		yield 'Item on an item' => [ CONTENT_MODEL_WIKIBASE_ITEM, new TitleValue( WB_NS_ITEM, 'Q123' ), true ];
+		yield 'Item on a talk page (not checked by this hook)' =>
+			[ CONTENT_MODEL_WIKIBASE_ITEM, new TitleValue( NS_TALK, 'Foo' ), true ];
+		// false
+		yield 'Wikitext on an item' => [ CONTENT_MODEL_WIKITEXT, new TitleValue( WB_NS_ITEM, 'Q123' ), false ];
+	}
+
+	/**
+	 * @dataProvider provideOnContentModelCanBeUsedOn
+	 */
+	public function testOnContentModelCanBeUsedOn( $contentModel, $linkTarget, $expectedOk ) {
+		$ok = true;
+		$return = RepoHooks::onContentModelCanBeUsedOn( $contentModel, $linkTarget, $ok );
+
+		$this->assertSame( $expectedOk, $ok );
+		$this->assertSame( $expectedOk, $return );
 	}
 
 }

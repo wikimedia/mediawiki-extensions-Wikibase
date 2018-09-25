@@ -18,6 +18,7 @@ use ExtensionRegistry;
 use HistoryPager;
 use IContextSource;
 use LogEntry;
+use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\RevisionRecord;
 use MWException;
@@ -722,12 +723,12 @@ final class RepoHooks {
 	 * to be placed in an entity namespace.
 	 *
 	 * @param string $contentModel
-	 * @param Title $title
+	 * @param LinkTarget $title Actually a Title object, but we only require getNamespace
 	 * @param bool &$ok
 	 *
 	 * @return bool
 	 */
-	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
+	public static function onContentModelCanBeUsedOn( $contentModel, LinkTarget $title, &$ok ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
