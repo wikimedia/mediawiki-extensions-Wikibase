@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6349737d_b11feb10",
+        "filename": "repo/includes/EditEntity/EditStatCollectingEditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-09-25T03:37:26Z",
+      "side": 1,
+      "message": "Would recommend to avoid using nesting for this. Complicates call graphs, stack traces, and does have overhead. While that might mean we avoid this for hot code, we\u0027re currently interested in measuring code that is quite hot. Overhead should be kept to a minimum for that, and where possible not change the stack itself.\n\nA few alternative ideas.\n\nStart and end:\n\n $id \u003d $this-\u003eprofiler-\u003estart( $type . \u0027.EditFilterHookRunner.run\u0027 );\n // ...\n $this-\u003eprofiler-\u003eendId( $id );\n\n\nScoped timer (automatic end):\n\n $scopedTimer \u003d $this-\u003eprofiler-\u003escopedStart( $type . \u0027.EditFilterHookRunner.run\u0027 );",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 4
+      },
+      "revId": "a09e7219af81971cdb31cca0bca32d7ce404ec27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
