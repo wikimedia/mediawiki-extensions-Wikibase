@@ -1935,10 +1935,6 @@ class WikibaseRepo {
 			$this->getLanguageFallbackChainFactory(),
 			$termLookup
 		);
-		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
-			$contextSource->getLanguage(),
-			[] // TODO: populate ids of entities to prefetch
-		);
 
 		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();
 		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
