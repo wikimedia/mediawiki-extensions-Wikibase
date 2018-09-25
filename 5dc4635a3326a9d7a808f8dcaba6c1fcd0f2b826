@@ -19,6 +19,47 @@
     },
     {
       "key": {
+        "uuid": "b670f2ef_d8a4eb71",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Yup, this is the one bit left TODO in this class.\nI need to get my head aronud GenericServices and PerRepoServices and figure out where these things need to live.\n\nSlotRole store will be trivial to do per repo as we have the NameTableStoreFactory and can use that with the dbname we already have.\n\nThe EntityTitleLookup however is currently only implemented as EntityContentFactory which will also require us to have per repo $entityContentModels and $entityHandlerFactoryCallback, both of which should be fine, but it also needs an InterWikiLookup.\nThat in turn needs 5 more params or something etc, and thats the mess i\u0027m trying to dig through and figure out now.",
+      "parentUuid": "6f0823e8_d5763168",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "543903a3_1c5dfa29",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Fixed to use array_keys here too",
+      "range": {
+        "startLine": 307,
+        "startChar": 25,
+        "endLine": 307,
+        "endChar": 58
+      },
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1097d9bc_1ea284f8",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 5
@@ -30,6 +71,24 @@
       "writtenOn": "2018-09-24T13:32:32Z",
       "side": 1,
       "message": "array_keys( $slotJoinConds ) would be nicer.",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d80cb0fe_f248911f",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1097d9bc_1ea284f8",
       "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -53,6 +112,24 @@
     },
     {
       "key": {
+        "uuid": "6db96349_ad016dd3",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e48fadfe_5103457c",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "875f9a26_4b46324e",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 5
@@ -64,6 +141,24 @@
       "writtenOn": "2018-09-24T13:32:32Z",
       "side": 1,
       "message": "double full stop.",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f10614ef_db306cbc",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "875f9a26_4b46324e",
       "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -87,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "396036e4_c6f45f86",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2901ea74_66990038",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "054939a8_fbbe86fd",
         "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
         "patchSetId": 5
@@ -98,6 +211,24 @@
       "writtenOn": "2018-09-24T13:32:32Z",
       "side": 1,
       "message": "please import",
+      "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb471843_bb3a1f4d",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-25T08:01:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "054939a8_fbbe86fd",
       "revId": "5dc4635a3326a9d7a808f8dcaba6c1fcd0f2b826",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
