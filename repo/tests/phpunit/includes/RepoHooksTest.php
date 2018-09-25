@@ -6,6 +6,7 @@ use ApiQuerySiteinfo;
 use ConfigFactory;
 use DerivativeContext;
 use ImportStringSource;
+use MediaWiki\Linker\LinkTarget;
 use MediaWikiTestCase;
 use MWException;
 use OutputPage;
@@ -35,6 +36,8 @@ use WikiImporter;
  * @author Thiemo Kreuz
  */
 class RepoHooksTest extends MediaWikiTestCase {
+
+	/* private */ const FAKE_NS_ID = 4557;
 
 	private $saveAllowImport = false;
 
@@ -352,6 +355,8 @@ XML
 		yield 'Item on an item' => [ CONTENT_MODEL_WIKIBASE_ITEM, new TitleValue( WB_NS_ITEM, 'Q123' ), true ];
 		yield 'Item on a talk page (not checked by this hook)' =>
 			[ CONTENT_MODEL_WIKIBASE_ITEM, new TitleValue( NS_TALK, 'Foo' ), true ];
+		yield 'Wikitext on a page with an entity in a slot' =>
+			[ CONTENT_MODEL_WIKITEXT, new TitleValue( self::FAKE_NS_ID, 'goat' ), true ];
 		// false
 		yield 'Wikitext on an item' => [ CONTENT_MODEL_WIKITEXT, new TitleValue( WB_NS_ITEM, 'Q123' ), false ];
 	}
@@ -359,12 +364,32 @@ XML
 	/**
 	 * @dataProvider provideOnContentModelCanBeUsedOn
 	 */
-	public function testOnContentModelCanBeUsedOn( $contentModel, $linkTarget, $expectedOk ) {
+	public function testOnContentModelCanBeUsedOn( $contentModel, LinkTarget $linkTarget, $expectedOk ) {
+		if ( $linkTarget->getNamespace() === self::FAKE_NS_ID ) {
+			$this->setupTestOnContentModelCanBeUsedOn();
+		}
+
 		$ok = true;
 		$return = RepoHooks::onContentModelCanBeUsedOn( $contentModel, $linkTarget, $ok );
 
 		$this->assertSame( $expectedOk, $ok );
 		$this->assertSame( $expectedOk, $return );
+	}
+
+	private function setupTestOnContentModelCanBeUsedOn() {
+		global $wgWBRepoSettings;
+		// Create a fake entity type for testOnContentModelCanBeUsedOn
+		$this->stashMwGlobals( 'wgWBRepoSettings' );
+		$wgWBRepoSettings['entityNamespaces']['slottedEntityType'] = self::FAKE_NS_ID . '/someSlot';
+
+		// Reset the WikibaseRepo instance after touching config that services within depend on
+		WikibaseRepo::resetClassStatics();
+
+		// Make sure the setting was correctly set & service has been updated
+		$nsLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$type = $nsLookup->getEntityType( self::FAKE_NS_ID );
+		$this->assertSame( 'slottedEntityType', $type );
+		$this->assertSame( 'someSlot', $nsLookup->getEntitySlotRole( $type ) );
 	}
 
 }
