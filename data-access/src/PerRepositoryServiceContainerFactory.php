@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess;
 
+use MediaWiki\Storage\NameTableStoreFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
@@ -59,6 +60,11 @@ class PerRepositoryServiceContainerFactory {
 	private $entityTypeDefinitions;
 
 	/**
+	 * @var NameTableStoreFactory
+	 */
+	private $nameTableStoreFactory;
+
+	/**
 	 * @param PrefixMappingEntityIdParserFactory $idParserFactory
 	 * @param EntityIdComposer $idComposer
 	 * @param RepositorySpecificDataValueDeserializerFactory $dataValueDeserializerFactory
@@ -67,6 +73,7 @@ class PerRepositoryServiceContainerFactory {
 	 * @param GenericServices $genericServices
 	 * @param DataAccessSettings $settings
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 * @param NameTableStoreFactory $nameTableStoreFactory
 	 */
 	public function __construct(
 		PrefixMappingEntityIdParserFactory $idParserFactory,
@@ -76,7 +83,8 @@ class PerRepositoryServiceContainerFactory {
 		array $serviceWiring,
 		GenericServices $genericServices,
 		DataAccessSettings $settings,
-		EntityTypeDefinitions $entityTypeDefinitions
+		EntityTypeDefinitions $entityTypeDefinitions,
+		NameTableStoreFactory $nameTableStoreFactory
 	) {
 		$this->idParserFactory = $idParserFactory;
 		$this->idComposer = $idComposer;
@@ -86,6 +94,7 @@ class PerRepositoryServiceContainerFactory {
 		$this->genericServices = $genericServices;
 		$this->settings = $settings;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		$this->nameTableStoreFactory = $nameTableStoreFactory;
 	}
 
 	/**
@@ -100,15 +109,17 @@ class PerRepositoryServiceContainerFactory {
 			throw new UnknownForeignRepositoryException( $repositoryName );
 		}
 
+		$dbName = $this->databaseNames[$repositoryName];
 		$container = new PerRepositoryServiceContainer(
-			$this->databaseNames[$repositoryName],
+			$dbName,
 			$repositoryName,
 			$this->idParserFactory->getIdParser( $repositoryName ),
 			$this->idComposer,
 			$this->dataValueDeserializerFactory->getDeserializer( $repositoryName ),
 			$this->genericServices,
 			$this->settings,
-			$this->entityTypeDefinitions->getDeserializerFactoryCallbacks()
+			$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+			$this->nameTableStoreFactory->getSlotRoles( $dbName )
 		);
 		$container->applyWiring( $this->serviceWiring );
 

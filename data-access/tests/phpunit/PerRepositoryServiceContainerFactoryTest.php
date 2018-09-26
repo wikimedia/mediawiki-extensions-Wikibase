@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use MediaWiki\Storage\NameTableStore;
+use MediaWiki\Storage\NameTableStoreFactory;
 use PHPUnit4And6Compat;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
@@ -24,6 +26,17 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
+	/**
+	 * @return NameTableStoreFactory|object
+	 */
+	private function getNameTableStoreFactoryProphecy() {
+		$prophecy = $this->prophesize( NameTableStoreFactory::class );
+		$prophecy->getSlotRoles( false )
+			->willReturn( $this->prophesize( NameTableStore::class )
+				->reveal() );
+		return $prophecy->reveal();
+	}
+
 	private function getRepositoryServiceContainerFactory() {
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(
 			new ItemIdParser(), []
@@ -39,7 +52,8 @@ class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCa
 			[],
 			new GenericServices( $entityTypeDefinitions, [] ),
 			new DataAccessSettings( 0, true, false ),
-			$entityTypeDefinitions
+			$entityTypeDefinitions,
+			$this->getNameTableStoreFactoryProphecy()
 		);
 	}
 

@@ -1994,7 +1994,8 @@ class WikibaseRepo {
 				$this->entityTypeDefinitions,
 				$this->getDataAccessSettings(),
 				$this->getMultiRepositoryServiceWiring(),
-				$this->getPerRepositoryServiceWiring()
+				$this->getPerRepositoryServiceWiring(),
+				MediaWikiServices::getInstance()->getNameTableStoreFactory()
 			);
 		}
 

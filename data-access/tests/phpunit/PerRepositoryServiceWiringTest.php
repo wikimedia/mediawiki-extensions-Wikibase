@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
+use MediaWiki\Storage\NameTableStore;
 use PHPUnit4And6Compat;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
@@ -31,6 +32,13 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	/**
+	 * @return NameTableStore|object
+	 */
+	private function getNameTableStoreProphecy() {
+		return $this->prophesize( NameTableStore::class )->reveal();
+	}
+
+	/**
 	 * @return PerRepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainer() {
@@ -42,7 +50,8 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
 			new DataAccessSettings( 0, true, false ),
-			[]
+			[],
+			$this->getNameTableStoreProphecy()
 		);
 
 		$container->loadWiringFiles( [ __DIR__ . '/../../src/PerRepositoryServiceWiring.php' ] );
