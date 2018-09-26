@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7cd3f3_baa6301c",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-09-26T13:46:43Z",
+      "side": 1,
+      "message": "Please add two \"array\" type hints here.",
+      "range": {
+        "startLine": 378,
+        "startChar": 55,
+        "endLine": 378,
+        "endChar": 72
+      },
+      "revId": "8619b33678b62b6ec107cd0c5e9c4d403fbaad64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "729d0817_a78a14bd",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-09-26T13:46:43Z",
+      "side": 1,
+      "message": "You could move this out of this function, and expect a flipped array instead.",
+      "range": {
+        "startLine": 379,
+        "startChar": 12,
+        "endLine": 379,
+        "endChar": 22
+      },
+      "revId": "8619b33678b62b6ec107cd0c5e9c4d403fbaad64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
