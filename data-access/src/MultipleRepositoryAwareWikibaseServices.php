@@ -4,6 +4,7 @@
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Services\ServiceContainer;
+use MediaWiki\Storage\NameTableStoreFactory;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
@@ -50,6 +51,7 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 	 * @param DataAccessSettings $settings
 	 * @param callable[] $multiRepositoryServiceWiring
 	 * @param callable[] $perRepositoryServiceWiring
+	 * @param NameTableStoreFactory $nameTableStoreFactory
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
@@ -58,7 +60,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		EntityTypeDefinitions $entityTypeDefinitions,
 		DataAccessSettings $settings,
 		array $multiRepositoryServiceWiring,
-		array $perRepositoryServiceWiring
+		array $perRepositoryServiceWiring,
+		$nameTableStoreFactory
 	) {
 		parent::__construct();
 
@@ -74,8 +77,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			$repositoryDefinitions,
 			$entityTypeDefinitions,
 			$settings,
-			$perRepositoryServiceWiring
-
+			$perRepositoryServiceWiring,
+			$nameTableStoreFactory
 		);
 		$this->multiRepositoryServices->applyWiring( $multiRepositoryServiceWiring );
 
@@ -88,7 +91,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		DataAccessSettings $settings,
-		array $perRepositoryServiceWiring
+		array $perRepositoryServiceWiring,
+		NameTableStoreFactory $nameTableStoreFactory
 	) {
 		return new MultiRepositoryServices(
 			$this->getRepositoryServiceContainerFactory(
@@ -97,7 +101,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 				$repositoryDefinitions,
 				$entityTypeDefinitions,
 				$settings,
-				$perRepositoryServiceWiring
+				$perRepositoryServiceWiring,
+				$nameTableStoreFactory
 			),
 			$repositoryDefinitions
 		);
@@ -109,7 +114,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 		RepositoryDefinitions $repositoryDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		DataAccessSettings $settings,
-		array $perRepositoryServiceWiring
+		array $perRepositoryServiceWiring,
+		NameTableStoreFactory $nameTableStoreFactory
 	) {
 		$idParserFactory = new PrefixMappingEntityIdParserFactory(
 			$idParser,
@@ -124,7 +130,8 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			$perRepositoryServiceWiring,
 			$this->genericServices,
 			$settings,
-			$entityTypeDefinitions
+			$entityTypeDefinitions,
+			$nameTableStoreFactory
 		);
 	}
 

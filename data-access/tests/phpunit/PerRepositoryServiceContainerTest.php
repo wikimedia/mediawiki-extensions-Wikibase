@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use MediaWiki\Storage\NameTableStore;
 use PHPUnit4And6Compat;
 use stdClass;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -30,6 +31,13 @@ class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	/**
+	 * @return NameTableStore|object
+	 */
+	private function getNameTableStoreProphecy() {
+		return $this->prophesize( NameTableStore::class )->reveal();
+	}
+
+	/**
 	 * @return PerRepositoryServiceContainer
 	 */
 	private function newRepositoryServiceContainer() {
@@ -41,7 +49,8 @@ class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
 			new DataAccessSettings( 0, true, false ),
-			[]
+			[],
+			$this->getNameTableStoreProphecy()
 		);
 	}
 
