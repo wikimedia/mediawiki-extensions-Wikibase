@@ -22,6 +22,30 @@
       "revId": "7ebbf50f1c682f0696ceabf630b93d91dd92327d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "094f0f9e_b44a317d",
+        "filename": "repo/includes/Specials/SpecialEntitiesWithoutPageFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-09-26T10:26:51Z",
+      "side": 1,
+      "message": "(facepalm) Thanks!",
+      "parentUuid": "fcb77b6f_a4fd4697",
+      "range": {
+        "startLine": 131,
+        "startChar": 3,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "7ebbf50f1c682f0696ceabf630b93d91dd92327d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
