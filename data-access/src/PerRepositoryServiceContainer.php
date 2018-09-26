@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use MediaWiki\Services\ServiceContainer;
+use MediaWiki\Storage\NameTableStore;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -54,6 +55,11 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	private $deserializerFactoryCallbacks;
 
 	/**
+	 * @var NameTableStore
+	 */
+	private $slotRoleStore;
+
+	/**
 	 * @param string|false $databaseName
 	 * @param string $repositoryName
 	 * @param EntityIdParser $entityIdParser
@@ -62,6 +68,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 * @param GenericServices $genericServices
 	 * @param DataAccessSettings $settings
 	 * @param callable[] $deserializerFactoryCallbacks
+	 * @param NameTableStore $slotRoleStore
 	 */
 	public function __construct(
 		$databaseName,
@@ -71,7 +78,8 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		DataValueDeserializer $dataValueDeserializer,
 		GenericServices $genericServices,
 		DataAccessSettings $settings,
-		array $deserializerFactoryCallbacks
+		array $deserializerFactoryCallbacks,
+		NameTableStore $slotRoleStore
 	) {
 		parent::__construct( [ $genericServices, $settings ] );
 
@@ -81,6 +89,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
+		$this->slotRoleStore = $slotRoleStore;
 	}
 
 	/**
@@ -116,6 +125,13 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 */
 	public function getDataValueDeserializer() {
 		return $this->dataValueDeserializer;
+	}
+
+	/**
+	 * @return NameTableStore
+	 */
+	public function getSlotRoleStore() {
+		return $this->slotRoleStore;
 	}
 
 	/**

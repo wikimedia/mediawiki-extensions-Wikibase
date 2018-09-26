@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use MediaWiki\Storage\NameTableStoreFactory;
 use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -33,6 +34,13 @@ use Wikibase\StringNormalizer;
 class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
+	/**
+	 * @return NameTableStoreFactory|object
+	 */
+	private function getNameTableStoreFactoryProphecy() {
+		return $this->prophesize( NameTableStoreFactory::class )->reveal();
+	}
+
 	private function newMultipleRepositoryAwareWikibaseServices() {
 		return new MultipleRepositoryAwareWikibaseServices(
 			new BasicEntityIdParser(),
@@ -41,7 +49,8 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 			new EntityTypeDefinitions( [] ),
 			new DataAccessSettings( 1, true, false ),
 			$this->getMultiRepoServiceWiring(),
-			[]
+			[],
+			$this->getNameTableStoreFactoryProphecy()
 		);
 	}
 

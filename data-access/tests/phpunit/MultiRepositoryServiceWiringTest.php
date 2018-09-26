@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use MediaWiki\Storage\NameTableStore;
+use MediaWiki\Storage\NameTableStoreFactory;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
@@ -27,6 +29,17 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 	/**
+	 * @return NameTableStoreFactory|object
+	 */
+	private function getNameTableStoreFactoryProphecy() {
+		$prophecy = $this->prophesize( NameTableStoreFactory::class );
+		$prophecy->getSlotRoles( false )
+			->willReturn( $this->prophesize( NameTableStore::class )
+			->reveal() );
+		return $prophecy->reveal();
+	}
+
+	/**
 	 * @return PerRepositoryServiceContainerFactory
 	 */
 	private function getPerRepositoryServiceContainerFactory() {
@@ -44,7 +57,8 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			require __DIR__ . '/../../src/PerRepositoryServiceWiring.php',
 			new GenericServices( $entityTypeDefinitions, [] ),
 			new DataAccessSettings( 0, true, false ),
-			$entityTypeDefinitions
+			$entityTypeDefinitions,
+			$this->getNameTableStoreFactoryProphecy()
 		);
 	}
 
