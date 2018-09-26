@@ -734,15 +734,26 @@ final class RepoHooks {
 		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		$contentModelIds = $wikibaseRepo->getContentModelMappings();
 
-		$expectedModel = false;
+		// Find any entity type that is mapped to the title namespace
 		$expectedEntityType = $namespaceLookup->getEntityType( $title->getNamespace() );
-		if ( $expectedEntityType !== null ) {
-			$expectedModel = $contentModelIds[$expectedEntityType];
+
+		// If we don't expect an entity type, then don't check anything else.
+		if ( $expectedEntityType === null ) {
+			return true;
+		}
+
+		// XXX: If the slot is not the main slot, then assume someone isn't somehow trying
+		// to add another content type there. We want to actually check per slot type here.
+		// This should be fixed with https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/434544/
+		$expectedSlot = $namespaceLookup->getEntitySlotRole( $expectedEntityType );
+		if ( $expectedSlot !== 'main' ) {
+			return true;
 		}
 
 		// If the namespace is an entity namespace, the content model
 		// must be the model assigned to that namespace.
-		if ( $expectedModel !== false && $expectedModel !== $contentModel ) {
+		$expectedModel = $contentModelIds[$expectedEntityType];
+		if ( $expectedModel !== $contentModel ) {
 			$ok = false;
 			return false;
 		}
