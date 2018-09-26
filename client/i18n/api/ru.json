@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Facenapalm",
+			"Okras",
+			"Putnik",
+			"Александр Сигачёв",
+			"Туллук"
+		]
+	},
+	"apihelp-query+wbentityusage-param-prop": "Свойства для включения в результат",
+	"apihelp-query+wbentityusage-param-limit": "Сколько всего использований сущности возвращать.",
+	"apihelp-query+wblistentityusage-description": "Возвращает все страницы, которые используют идентификаторы указанной сущности.",
+	"apihelp-query+wblistentityusage-summary": "Возвращает все страницы, которые используют идентификаторы указанной сущности.",
+	"apihelp-query+wblistentityusage-param-prop": "Свойства для включения в результат.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Если активировано, URL сущности будет добавлен к результату запроса.",
+	"apihelp-query+wblistentityusage-param-aspect": "Возвращать только идентификаторы, которые используются в данном аспекте.",
+	"apihelp-query+wblistentityusage-param-entities": "Сущности, которые были использованы.",
+	"apihelp-query+wblistentityusage-param-limit": "Сколько использований сущностей возвращать.",
+	"apihelp-query+wblistentityusage-example-simple": "Получить страницы, использующие сущность <kbd>Q2</kbd>.",
+	"apihelp-query+wblistentityusage-example-url": "Получить страницы, использующие сущность <kbd>Q2</kbd> с учетом включения URL",
+	"apihelp-query+wblistentityusage-example-aspect": "Получить страницы, использующие сущность <kbd>Q2</kbd> и ссылку на сайт или утверждение в качестве аспекта.",
+	"apihelp-query+pageterms-example-label-en": "Получить метки и синонимы, связанные с английской страницей «London»",
+	"apihelp-query+pageterms-example-item": "Получить обозначения и псевдонимы элемента Q84.",
+	"apihelp-query+wikibase-description": "Получить сведения о клиенте Wikibase и связанном хранилище Wikibase."
+}

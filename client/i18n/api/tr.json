@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alpkant"
+		]
+	},
+	"apihelp-query+wbentityusage-param-prop": "Özellikleri sonuca ekle.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Eğer aktifleştirildiyse,nesnenin linki eklenecektir."
+}

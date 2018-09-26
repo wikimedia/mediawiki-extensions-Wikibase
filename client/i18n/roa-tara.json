@@ -6,8 +6,6 @@
 	},
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
 	"tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
-	"apihelp-query+wbentityusage-description": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
-	"apihelp-query+wbentityusage-summary": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
 	"wikibase-comment-update": "Vôsce de {{WBREPONAME}} cangiate",
 	"wikibase-comment-sitelink-add": "Collegamende d'a lènghe aggiunde: $1",
 	"wikibase-comment-sitelink-change": "Collegamende 'a lènghe cangiate da $1 a $2",

@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Anakmalaysia"
+		]
+	},
+	"apihelp-query+pageterms-description": "Dapatkan istilah-istilah yang berkaitan dengan suatu halaman melalui item data yang berkaitan.",
+	"apihelp-query+pageterms-example-simple": "Dapatkan semua istilah yang berkaitan dengan laman 'London' dalam bahasa pengguna."
+}

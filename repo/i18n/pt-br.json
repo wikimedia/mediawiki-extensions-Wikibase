@@ -390,6 +390,7 @@
 	"wikibase-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
 	"wikibase-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
 	"wikibase-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
+	"wikibase-rescore-profile-fulltext-phrase": "Perfil Rescore para pesquisa de texto completo com pontuação de frase",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Item do Wikibase",
 	"content-model-wikibase-property": "Propriedade do Wikibase",

@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06",
+			"Guycn2"
+		]
+	},
+	"apihelp-query+wbentityusage-description": "Ги дава сите назнаки на единици користени на дадени страници.",
+	"apihelp-query+wbentityusage-summary": "Ги дава сите назнаки на единиците во дадени страници.",
+	"apihelp-query+wbentityusage-param-aspect": "Дај ја само назнаката на единицата што се користи во овој аспект.",
+	"apihelp-query+wbentityusage-param-prop": "Својства за додавање кон исходот.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Ако е овозможено, ќе се додаде URL на единицата",
+	"apihelp-query+wbentityusage-param-entities": "Давај само страници што ги користат следниве единици.",
+	"apihelp-query+wbentityusage-param-limit": "Колку единици да има во изводот.",
+	"apihelp-query+wbentityusage-example-simple": "Дај единици што се користат на страницата <kbd>Main Page</kbd>.",
+	"apihelp-query+wblistentityusage-description": "Ги дава ситге страници што користат единица со оваа назнака.",
+	"apihelp-query+wblistentityusage-summary": "Ги дава сите страници што ја користат дадената назнака на единцата.",
+	"apihelp-query+wblistentityusage-param-prop": "Својства што ќе се додадат во исходот.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Ако е овозможено, URL на единицата што ќе се придодаде кон исходот.",
+	"apihelp-query+wblistentityusage-param-aspect": "Давај само назнаки на единици што го користат дадениов аспект.",
+	"apihelp-query+wblistentityusage-param-entities": "Употребени единици.",
+	"apihelp-query+wblistentityusage-param-limit": "Колку примени на единици да има во изводот.",
+	"apihelp-query+wblistentityusage-example-simple": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd>.",
+	"apihelp-query+wblistentityusage-example-url": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd> со вклучена URL.",
+	"apihelp-query+wblistentityusage-example-aspect": "Дај ги страниците што ја користат единицата <kbd>Q2</kbd> и каде аспектот е викиврска или исказ.",
+	"apihelp-query+pageterms-description": "Дај поими од {{WBREPONAME}} (обично натписи, описи и истозначници) поврзани со страница преку викиврска. На самата единична страница, поимите се користат непосредно. Внимание: На складишното вики, овој модул работи само непосредно во единичните страници, но не во страниците поврзани со единица преку викиврска. Ова може да се смени во иднина.",
+	"apihelp-query+pageterms-summary": "Дај поими од {{WBREPONAME}} (обично натписи, описи и истозначници) поврзани со страница преку викиврска. На самата единична страница, поимите се користат непосредно. Внимание: На складишното вики, овој модул работи само непосредно во единичните страници, но не во страниците поврзани со единица преку викиврска. Ова може да се смени во иднина.",
+	"apihelp-query+pageterms-example-simple": "Дај ги сите поими поврзани со страницата „Лондон“, во корисничката страница.",
+	"apihelp-query+pageterms-example-label-en": "Дај ги натписите и истозначниците поврзани со страницата „Лондон“, на македонски.",
+	"apihelp-query+pageterms-example-item": "Дај натписи и истозначници за предметот Q84.",
+	"apihelp-query+pageterms-param-terms": "Кои видови поими да се добијат, на пр. „опис“; секои од нив се даваат како строј низи шифрирани по вид, како на пр. {„опис“: [\"foo\"]}. Ако не е укажано, ќе се дадат сите видови.",
+	"apihelp-query+description-summary": "Дај краток опис (т.е. поднаслов) кој објаснува на што се однесува целната страница",
+	"apihelp-query+description-extended-description": "Описот е прост текст во еден ред, но инаку произволен (можеби со сирови HTML-ознаки, кои исто така треба да се толкуваат како прост текст). Не треба да се користат во HTML без извод!",
+	"apihelp-query+description-param-prefersource": "Кој извор на опис да се претпочита, ако го има:",
+	"apihelp-query+description-paramvalue-prefersource-local": "Месни описи преку расчленувачката функција <code><nowiki>{{SHORTDESC:...}}</nowiki></code> во викитекстот на страницата.",
+	"apihelp-query+description-paramvalue-prefersource-central": "Централните описи од поврзаниот предмет на {{WBREPONAME}}.",
+	"apihelp-query+description-example": "Дај опис за страницата „Лондон“.",
+	"apihelp-query+description-example-central": "Дај опис за страницата „Лондон“, претпочитајќи го централниот опис, ако постои.",
+	"apihelp-query+wikibase-description": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата",
+	"apihelp-query+wikibase-summary": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата.",
+	"apihelp-query+wikibase-example": "Дај URL-патека и други информации за складиштето на Викибазата.",
+	"apihelp-query+wikibase-param-prop": "Кои својства да се дадат:\n;<kbd>url</kbd>: URL на базата, патека на скриптата и патека на статијата на складиштето на Викибазата.\n;<kbd>siteid</kbd>: Назнаката на ова мрежно место."
+}

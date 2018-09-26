@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chrumps",
+			"Woytecr"
+		]
+	},
+	"apihelp-query+wbentityusage-description": "Zwraca wszystkie identyfikatory obiektów użytych na podanych stronach.",
+	"apihelp-query+wbentityusage-param-aspect": "Zwróć tylko identyfikatory obiektów wykorzystujące ten aspekt.",
+	"apihelp-query+wbentityusage-param-prop": "Właściwości do dodania do wyniku.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Jeżeli włączone, zostanie dodany url do elementu",
+	"apihelp-query+wbentityusage-param-entities": "Zwróć tylko stronę, która wykorzystuje te elementy.",
+	"apihelp-query+wbentityusage-param-limit": "Ile zwrócić wykorzystanych obiektów.",
+	"apihelp-query+wbentityusage-example-simple": "Uzyskaj obiekty wykorzystane na stronie <kbd>Main Page</kbd>.",
+	"apihelp-query+wblistentityusage-description": "Zwraca wszystkie strony, które wykorzystują obiekty o podanych identyfikatorach.",
+	"apihelp-query+wblistentityusage-param-prop": "Właściwości, które dołączyć do wyniku.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Jeżeli włączone, zostanie dołączony url obiektu do wyniku.",
+	"apihelp-query+wblistentityusage-param-aspect": "Zwróć tylko identyfikatory obiektów wykorzystujące ten aspekt.",
+	"apihelp-query+wblistentityusage-param-entities": "Obiekty, które zostały wykorzystane.",
+	"apihelp-query+wblistentityusage-param-limit": "Ile zwrócić wykorzystanych obiektów.",
+	"apihelp-query+wblistentityusage-example-simple": "Uzyskaj strony wykorzystujące obiekt <kbd>Q2</kbd>.",
+	"apihelp-query+wblistentityusage-example-url": "Uzyskaj strony wykorzystujące obiekt <kbd>Q2</kbd> z dołączonym adresem URL.",
+	"apihelp-query+wblistentityusage-example-aspect": "Uzyskaj strony wykorzystujące element <kbd>Q2</kbd>, a aspektem ma być link do strony lub stwierdzenie.",
+	"apihelp-query+pageterms-example-label-en": "Uzyskaj etykiety i aliasy powiązane ze stroną 'London' po angielsku.",
+	"apihelp-query+pageterms-example-item": "Uzyskaj etykietę i aliasy elementu Q84.",
+	"apihelp-query+description-param-prefersource": "Które źródło opisu preferować, jeśli występuje:"
+}

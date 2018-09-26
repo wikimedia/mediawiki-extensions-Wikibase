@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Guycn2"
+		]
+	},
+	"apihelp-query+wbentityusage-description": "החזרת כל מזהי הישויות בדפים הנתונים.",
+	"apihelp-query+wbentityusage-summary": "החזרת כל מזהי השאילתות ששימשו בדפים הנתונים.",
+	"apihelp-query+wbentityusage-param-aspect": "החזרה רק של מזהי ישויות שהשתמשו בהיבט הזה.",
+	"apihelp-query+wbentityusage-param-prop": "אילו מאפיינים להוסיף לתוצאה.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "אם זה מופעל, יתווסף url של ישות",
+	"apihelp-query+wbentityusage-param-entities": "החזרה רק של דף שהשתמש בישויות האלו.",
+	"apihelp-query+wbentityusage-param-limit": "כמה שימושי ישויות להחזיר.",
+	"apihelp-query+wbentityusage-example-simple": "קבלת ישויות שמשמשות בדף <kbd>Main Page</kbd>.",
+	"apihelp-query+wblistentityusage-description": "מחזיר את כל הדפים שמשתשים במזהי הישויות הנתונים.",
+	"apihelp-query+wblistentityusage-summary": "החזרת כל הדפים שמשתמשים במזהי הישות הנתונים.",
+	"apihelp-query+wblistentityusage-param-prop": "אילו מאפיינים להוסיף לתוצאה.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "אם זה מופעל, ה־url של הישות יתווסף לתוצאה.",
+	"apihelp-query+wblistentityusage-param-aspect": "להחזיר רק מזהי ישות שהשתמשו בהיבט הזה.",
+	"apihelp-query+wblistentityusage-param-entities": "ישויות ששימשו.",
+	"apihelp-query+wblistentityusage-param-limit": "כמה שימושי ישויות להחזיר.",
+	"apihelp-query+wblistentityusage-example-simple": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd>.",
+	"apihelp-query+wblistentityusage-example-url": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd> עם ה־URL כלול.",
+	"apihelp-query+wblistentityusage-example-aspect": "קבלת דפים שמשתמשים בישות <kbd>Q2</kbd> וההיבט היה קישור או קביעה.",
+	"apihelp-query+pageterms-description": "קבלת מושגי {{WBREPONAME}} (בדרך־כלל תוויות, תיאורים, וכינויים) שמשויכים לדף דרך קישור אתר. בדף הישות עצמו, המושגים משמשים באופן ישיר. לתשומת לבך: בוויקי המאגר, המודול הזה יעבוד ישירות רק על דפי ישויות, ולא על דפים שמקושרים לישות דרך קישור אתר. זה יכול להשתנות בעתיד.",
+	"apihelp-query+pageterms-summary": "קבלת מושגי {{WBREPONAME}} (בדרך־כלל תוויות, תיאורים, וכינויים) שמשויכים לדף דרך קישור אתר. בדף הישות עצמו, המושגים משמשים באופן ישיר. לתשומת לבך: בוויקי המאגר, המודול הזה יעבוד ישירות רק על דפי ישויות, ולא על דפים שמקושרים לישות דרך קישור אתר. זה יכול להשתנות בעתיד.",
+	"apihelp-query+pageterms-example-simple": "קבלת כל הפריטים המשויכים לדף 'London', בשפה של המשתמש.",
+	"apihelp-query+pageterms-example-label-en": "קבלת תוויות וכינויים שמשויעכים לדף 'London', באנגלית.",
+	"apihelp-query+pageterms-example-item": "קבלת תוויות וכינויים של הפריט Q84.",
+	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'description', כל אחד מהם מוחזר בתור מערך של מחרוזות עם סוגים בתור מפתחות, למשל <span dir=\"ltr\">{\"description\": [\"foo\"]}</span>. אם לא צוין, יוחזרו כל הסוגים.",
+	"apihelp-query+description-summary": "קבלת תיאור קצר, כלומר כותרת משנה שמסבירה במה עוסק דף היעד.",
+	"apihelp-query+description-extended-description": "התיאור הוא טקסט רגיל בשורה אחת. הוא יכול לכלול תגי HTML, שגם הם יפורשו כטקסט רגיל. אין להשתמש בקוד HTML שאינו בטוח!",
+	"apihelp-query+description-param-prefersource": "איזה מקור להעדיף עבור התיאור, אם ישנו:",
+	"apihelp-query+description-paramvalue-prefersource-local": "תיאורים מקומיים באמצעות פונקציית המפענח <code dir=\"ltr\"><nowiki>{{SHORTDESC:...}}</nowiki></code> בקוד הוויקי של הדף.",
+	"apihelp-query+description-paramvalue-prefersource-central": "תיאורים מרכזיים מתוך פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך.",
+	"apihelp-query+description-example": "קבלת התיאור של הדף 'London'.",
+	"apihelp-query+description-example-central": "קבלת התיאור של הדף 'לונדון', והעדפת התיאור המרכזי אם הוא קיים.",
+	"apihelp-query+wikibase-description": "קבלת מידע על לקוח ויקיבייס ועל מאגר הוויקיבייס המשויך.",
+	"apihelp-query+wikibase-summary": "קבלת מידע על לקוח ויקיבייס ועל מאגר הוויקיבייס המשויך.",
+	"apihelp-query+wikibase-example": "קבלת נתיב URL ומידע אחר על לקוח ויקיבייס ומאגר ויקיבייס.",
+	"apihelp-query+wikibase-param-prop": "אילו מאפיינים לקבל:\n;<kbd>url</kbd>: כתובת URL בסיסית, נתיב תסריטים (script path) ונתיב ערכים (article path) של מאגר ויקיבייס.\n;<kbd>siteid</kbd>: ה־siteid של האתר הזה."
+}

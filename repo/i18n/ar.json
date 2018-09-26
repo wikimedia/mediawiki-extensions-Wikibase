@@ -392,6 +392,7 @@
 	"wikibase-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
 	"wikibase-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
 	"wikibase-rescore-profile-fulltext": "ملف التعريف الافتراضي للبحث في النص الكامل",
+	"wikibase-rescore-profile-fulltext-phrase": "ملف النتيجة للبحث عن النص الكامل مع نتيجة العبارات",
 	"datatypes-type-url": "المسار",
 	"content-model-wikibase-item": "عنصر Wikibase",
 	"content-model-wikibase-property": "خاصية Wikibase",

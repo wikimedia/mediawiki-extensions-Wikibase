@@ -8,7 +8,6 @@
 		]
 	},
 	"tooltip-t-wikibase": "Link deri tek artikulli i depos të të dhënave të lidhura",
-	"apihelp-query+description-extended-description": "Pershkrimi eshte tekst i plote, ne nje linje te vetme, mirepo ne te kunderten arbitrarisht (ne menyre potenciale duke perfshire HTML shenja identifikim te paperpunuara, te cilat gjithashtu duhet te interpretohen si tekst i plote). Nuk duhet te perdoret si ne HTML te pa-largueshme!",
 	"wikibase-comment-update": "Artikulli {{WBREPONAME}} u ndryshua",
 	"wikibase-dataitem": "Artikulli {{WBREPONAME}}",
 	"wikibase-editlinks": "Redakto lidhjet",

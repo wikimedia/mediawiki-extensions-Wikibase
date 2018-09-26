@@ -9,9 +9,6 @@
 	},
 	"wikibase-client-desc": "Кліент для пашырэньня Wikibase",
 	"tooltip-t-wikibase": "Спасылка на аб’ект у рэпазыторыі зьвестак",
-	"apihelp-query+wblistentityusage-description": "Вяртае ўсе старонкі, што выкарыстоўваюць дадзеныя ідэнтыфікатары аб’ектаў.",
-	"apihelp-query+pageterms-example-simple": "Атрымаць усе тэрміны, асацыяваныя з старонкай «London», мовай удзельніка.",
-	"apihelp-query+pageterms-example-item": "Атрымаць меткі і псэўданімы элемэнту Q84.",
 	"wikibase-after-page-move": "Ваш перанос цяпер павінен быць [$1 адлюстраваны ў моўнай спасылцы аб’екту {{grammar:genitive|{{WBREPONAME}}}}]. Мы просім вас праверыць, што гэта адбылося.",
 	"wikibase-after-page-move-queued": "[$1 Аб’ект {{WBREPONAME}}], злучаны з гэтай старонкай, неўзабаве будзе абноўлены. Калі ласка, памятайце, што гэта не абавязкова адбудзецца імгненна.",
 	"wikibase-after-page-delete": "Спасылка на гэтую старонку павінна была быць выдаленая з [$1 адпаведнага элемэнту {{GRAMMAR:genitive|{{WBREPONAME}}}}]. Мы просім вас праверыць, што гэта адбылося.",
@@ -26,7 +23,7 @@
 	"wikibase-comment-sitelink-change": "Моўная спасылка зьмененая з $1 на $2",
 	"wikibase-comment-sitelink-remove": "Моўная спасылка выдаленая: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|зьмена|зьмены|зьменаў}}",
-	"wikibase-dataitem": "Аб’ект {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-dataitem": "Аб’ект {{grammar:родны|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Правіць спасылкі",
 	"wikibase-editlinkstitle": "Рэдагаваць міжмоўныя спасылкі",
 	"wikibase-addlinkstitle": "Дадаць міжмоўныя спасылкі",
@@ -77,5 +74,6 @@
 	"wikibase-otherprojects-beta-description": "Дадае на бакавую панэль разьдзел «{{int:wikibase-otherprojects}}», які ўтрымлівае спасылкі на іншыя праекты фундацыі «Вікімэдыя», заснаваныя на зьвестках з {{WBREPONAME}}.",
 	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|далучаная}} да {{PLURAL:$4|-1=элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}|элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}} $4}}, які мае зьвесткі датычныя тэмы.",
 	"notification-subject-page-connection": "Старонка ў {{GRAMMAR:месны|{{SITENAME}}}}, якую вы {{GENDER:$3|стварылі}}, была {{GENDER:$2|далучаная}} да элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}",
-	"unresolved-property-category": "Старонкі зь недаступнымі ўласьцівасьцямі"
+	"unresolved-property-category": "Старонкі зь недаступнымі ўласьцівасьцямі",
+	"connected-redirect-category": "Перанакіраваньні, злучаныя з элемэнтам {{grammar:родны|{{WBREPONAME}}}}"
 }

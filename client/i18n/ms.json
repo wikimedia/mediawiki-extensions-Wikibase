@@ -13,8 +13,6 @@
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
 	"tooltip-t-wikibase": "Pautan ke perkara repositori data yang bersambungan",
-	"apihelp-query+pageterms-description": "Dapatkan istilah-istilah yang berkaitan dengan suatu halaman melalui item data yang berkaitan.",
-	"apihelp-query+pageterms-example-simple": "Dapatkan semua istilah yang berkaitan dengan laman 'London' dalam bahasa pengguna.",
 	"wikibase-after-page-move": "Anda juga boleh [$1 mengemaskinikan] perkara Wikidata yang berkenaan untuk memelihara pautan bahasa pada halaman yang dipindahkan.",
 	"wikibase-after-page-move-queued": "[$1 Perkara Wikidata] yang dikaitkan dengan halaman ini akan dikemaskinikan secara automatik tidak lama lagi.",
 	"wikibase-comment-remove": "Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.",

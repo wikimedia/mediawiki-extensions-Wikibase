@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Туллук"
+		]
+	},
+	"apihelp-query+wblistentityusage-description": "Бу ID аадырыһы туттубут сирэйдэри көрдөрөр",
+	"apihelp-query+wblistentityusage-example-simple": "<kbd>Q2</kbd> коду туттар сирэйдэри көр",
+	"apihelp-query+wblistentityusage-example-url": "<kbd>Q2</kbd> коду URL аадырыһын учуоттаан туран туттар сирэйдэри көр",
+	"apihelp-query+wblistentityusage-example-aspect": "<kbd>Q2</kbd> коду туттар уонна киниэхэ сигэнэр сирэйдэри көр"
+}

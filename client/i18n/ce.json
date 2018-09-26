@@ -6,7 +6,6 @@
 	},
 	"wikibase-client-desc": "Wikibase шорян клиент",
 	"tooltip-t-wikibase": "Йихкина элементан хьажорг хаамийн репозитори",
-	"apihelp-query+pageterms-example-label-en": "Схьаэца билгалонаш а, синонимаш а, ингалсан «London» агӀонца йолу",
 	"wikibase-after-page-move": "Викихаамашчохь [$1 карлаяккха] хьой цӀе хийцина агӀона хьажорг.",
 	"wikibase-after-page-move-queued": "ХӀара агӀо чохь йолу [$1 {{grammar:genitive|{{WBREPONAME}}}} чура элемент] ша карлаяьккина хила мега.",
 	"wikibase-after-page-delete": "ДӀаяккха еза [$1 кху {{GRAMMAR:genitive|{{WBREPONAME}}}} чура] хьажорг.",

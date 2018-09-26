@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pippinu",
+			"Sarvaturi"
+		]
+	},
+	"apihelp-query+pageterms-description": "Pigghia li tèrmini assuciati a na pàggina pi menzu dûn suggettu di dati assuciatu.",
+	"apihelp-query+pageterms-example-simple": "Pigghia tutti li tèrmini assuciati â pàggina 'London', ntâ lingua di l'utenti.",
+	"apihelp-query+pageterms-example-label-en": "Pigghia l'etichetti e l'alias assuciati â pàggina 'London', n ngrisi.",
+	"apihelp-query+pageterms-param-terms": "Chi sorta di tèrmini pigghiari, p'esempiu 'description'. Si nun si spicìfica, sunnu turnati tutti li sorti.",
+	"apihelp-query+wikibase-description": "Otteni nfurmazzioni a prupòsitu dû dipòsitu Wikibase assuciatu.",
+	"apihelp-query+wikibase-example": "Otteni nfurmazzioni supra l'URL e àutru a prupòsitu dû dipòsitu Wikibase.",
+	"apihelp-query+wikibase-param-prop": "Quali prupietà pigghiari:\n;<kbd>url</kbd>: URL basi, pircursi dî script e di l'artìculi."
+}

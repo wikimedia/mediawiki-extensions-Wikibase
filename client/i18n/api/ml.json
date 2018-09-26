@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"apihelp-query+pageterms-description": "ബന്ധപ്പെട്ട  ഡേറ്റാ ഇനം വഴി താളുമായി ബന്ധപ്പെട്ട പദങ്ങൾ ലഭ്യമാക്കുക.",
+	"apihelp-query+pageterms-example-simple": "ഉപയോക്താവിന്റെ ഭാഷയിൽ 'ലണ്ടൻ' എന്ന താളുമായി ബന്ധപ്പെട്ട എല്ലാ പദങ്ങളും ലഭ്യമാക്കുക."
+}

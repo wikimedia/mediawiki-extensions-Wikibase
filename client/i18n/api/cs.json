@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Guycn2",
+			"Ilimanaq29",
+			"Matěj Suchánek",
+			"Walter Klosse"
+		]
+	},
+	"apihelp-query+pageterms-param-terms": "Typy řetězců k načtení (např. 'description'), každý zobrazen jako pole řetězců s typem jako klíčem (např. {\"description\": [\"foo\"]}). Pokud není specifikován, jsou vráceny všechny typy.",
+	"apihelp-query+description-summary": "Získat krátký popis a.k.a. popisku, který popisuje, o čem je cílová stránka.",
+	"apihelp-query+description-param-prefersource": "Který zdrojový popis preferovat:",
+	"apihelp-query+description-paramvalue-prefersource-local": "Lokální popisy pomocí parserové funkce <code><nowiki>{{SHORTDESC:...}}</nowiki></code> ve wikitextu stránky.",
+	"apihelp-query+description-paramvalue-prefersource-central": "Centrální popisy ze související položky {{grammar:2sg|{{WBREPONAME}}}}.",
+	"apihelp-query+description-example": "Získat popis stránky 'London'.",
+	"apihelp-query+description-example-central": "Získejte popis pro stránku 'London', upřednostňujíce hlavní popis, pokud existuje."
+}

@@ -393,6 +393,7 @@
 	"wikibase-rescore-profile-prefix": "Standard-Rescore-Profil für die Vervollständigungssuche",
 	"wikibase-rescore-profile-prefix-boost": "Rescore-Profil für die Vervollständigungssuche mit Aussagenverstärkung",
 	"wikibase-rescore-profile-fulltext": "Standard-Rescore-Profil für die Volltextsuche",
+	"wikibase-rescore-profile-fulltext-phrase": "Rescore-Profil für die Volltextsuche mit Ausdrucksbewertung",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-Datenobjekt",
 	"content-model-wikibase-property": "Wikibase-Eigenschaft",

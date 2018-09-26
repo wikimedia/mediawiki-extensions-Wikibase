@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck",
+			"Renessaince"
+		]
+	},
+	"apihelp-query+wblistentityusage-description": "Вяртае ўсе старонкі, што выкарыстоўваюць дадзеныя ідэнтыфікатары аб’ектаў.",
+	"apihelp-query+pageterms-example-simple": "Атрымаць усе тэрміны, асацыяваныя з старонкай «London», мовай удзельніка.",
+	"apihelp-query+pageterms-example-item": "Атрымаць меткі і псэўданімы элемэнту Q84."
+}

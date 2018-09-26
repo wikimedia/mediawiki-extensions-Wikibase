@@ -9,7 +9,6 @@
 	},
 	"wikibase-client-desc": "Trình khách của phần mở rộng Wikibase",
 	"tooltip-t-wikibase": "Liên kết đến khoản mục kết nối trong kho dữ liệu",
-	"apihelp-query+wblistentityusage-description": "Trở về tất cả những trang sử dụng IDs riêng sau đây.",
 	"wikibase-after-page-move": "Tác vụ di chuyển của bạn đã [$1 được phản ánh bởi liên kết ngôn ngữ trong khoản mục {{WBREPONAME}}]. Xin vui lòng kiểm tra rằng điều này đã xảy ra.",
 	"wikibase-after-page-move-queued": "Chẳng bao lâu [$1 khoản mục {{WBREPONAME}}] ứng với trang này sẽ được tự động cập nhật. Xin lưu ý rằng nó có thể không được cập nhật ngay.",
 	"wikibase-after-page-delete": "Liên kết đến trang này đã được loại bỏ từ [$1 khoản mục {{WBREPONAME}} liên kết]. Xin hãy kiểm tra rằng điều này đã xảy ra.",

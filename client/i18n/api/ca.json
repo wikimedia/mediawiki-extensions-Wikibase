@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido",
+			"Toniher"
+		]
+	},
+	"apihelp-query+wbentityusage-param-prop": "Propietats que s'afegiran al resultat.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si s’habilita, s’hi afegirà l’URL de l’entitat",
+	"apihelp-query+wbentityusage-param-entities": "Només retorneu la pàgina que utilitzava aquestes entitats.",
+	"apihelp-query+wblistentityusage-param-prop": "Propietats per afegir al resultat.",
+	"apihelp-query+wblistentityusage-param-entities": "Entitats que s'han utilitzat.",
+	"apihelp-query+wblistentityusage-example-simple": "Aconsegueix pàgines que utilitzin l'entitat <kbd>Q2</kbd>.",
+	"apihelp-query+pageterms-description": "Aconsegueix termes de {{WBREPONAME}} (típicament etiquetes, descripcions i àlies) associats amb una pàgina mitjançant un enllaç de lloc. En la mateixa pàgina d'entitat, els termes s'utilitzen directament. Atenció: en un wiki repositori aquest mòdul només funciona directament en les pàgines d'entitat, no en pàgines connectades amb una entitat mitjançant un enllaç de lloc. Això podria canviar en un futur.",
+	"apihelp-query+pageterms-example-simple": "Aconsegueix tots els termes associats amb la pàgina 'London', en la llengua de l'usuari.",
+	"apihelp-query+pageterms-example-label-en": "Aconsegueix etiquetes i àlies associats amb la pàgina 'London', en anglès.",
+	"apihelp-query+pageterms-example-item": "Aconsegueix etiquetes i àlies de l'element Q84.",
+	"apihelp-query+pageterms-param-terms": "Els tipus de termes que s'obtindran, p. ex., 'description', cada un com una llista de cadenes prenent per índex llur tipus. P. ex., {\"description\": [\"foo\"]}. Si no s'especifica res, es retornen tots els tipus.",
+	"apihelp-query+description-extended-description": "La descripció és text pla, en una sola línia, però altrament arbitrària (potencialment inclou etiquetes d'HTML crues, que també poden interpretar-se com a text pla). No s'ha d'utilitzar amb HTML no escapat.",
+	"apihelp-query+description-example": "Aconsegueix la descripció de la pàgina 'Londres'.",
+	"apihelp-query+wikibase-summary": "Obté informació del client de Wikibase i del repositori de Wikibase associat."
+}

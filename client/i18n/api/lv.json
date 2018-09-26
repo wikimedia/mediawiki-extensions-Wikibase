@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Papuass"
+		]
+	},
+	"apihelp-query+wbentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
+	"apihelp-query+wblistentityusage-param-prop": "Īpašības, ko pievienot rezultātam.",
+	"apihelp-query+description-example": "Iegūt lapas \"Londona\" aprakstu."
+}
