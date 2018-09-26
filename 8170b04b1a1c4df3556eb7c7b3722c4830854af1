@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f03fd648_bb11bf51",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-09-26T12:38:41Z",
+      "side": 1,
+      "message": "this one is also unused as far as I can tell",
+      "range": {
+        "startLine": 1934,
+        "startChar": 3,
+        "endLine": 1934,
+        "endChar": 32
+      },
+      "revId": "8170b04b1a1c4df3556eb7c7b3722c4830854af1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
