@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a424b7bf_79d8e9c6",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-26T02:41:46Z",
+      "side": 1,
+      "message": "I\u0027d have gone for only having $expectedOk\u003dtrue cases in the dataProvider and having a dedicated test for the false case. Then you don\u0027t need the $expectedOk parameter, you don\u0027t need to have it in the dataProvider, you can use assertTrue and assertFalse and the true and false cases are more clearly separated.",
+      "revId": "28a99bb4ed5ad2dfb90abb9ed542d5af8a291b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
