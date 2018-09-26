@@ -16,6 +16,24 @@
       "revId": "e2841bec46caf07aea353f6092b7ba039ca49f3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8214f08f_0d4befbf",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-26T18:03:21Z",
+      "side": 1,
+      "message": "The right place for the fix seems to be WikiPageEntityStore::saveEntityContent. What it basically needs is:\n\n$parentRevision \u003d $updater-\u003egrabParentRevision();\n\nif ( $flags \u0026 EDIT_UPDATE ) {\n   if ( !$parentRevision ) throw new StorageException(...);\n   if ( !$parentRevision-\u003ehasSlot( $slotRole ) ) throw new StorageException(...);\n}\n\nif ( $flags \u0026 EDIT_NEW ) {\n   if ( $parentRevision ) {\n      if ( $parentRevision-\u003ehasSlot( $slotRole ) ) throw new StorageException(...);\n\n      // We are creating the entity, but updating the page.\n      // Unset the NEW bit, set the UPDATE bit.\n      $flags \u003d ( $flags \u0026 ^EDIT_NEW ) | EDIT_UPDATE;\n   }\n}",
+      "parentUuid": "f36c606d_564aa5e7",
+      "revId": "e2841bec46caf07aea353f6092b7ba039ca49f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
