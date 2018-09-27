@@ -110,10 +110,19 @@ return call_user_func( function() {
 			]
 		],
 
+		'wikibase.EntityInitializer' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.EntityInitializer.js'
+			],
+			'dependencies' => [
+				'wikibase',
+				'wikibase.serialization.EntityDeserializer'
+			]
+		],
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + [
 			'scripts' => [
-				'wikibase.EntityInitializer.js',
-				'wikibase.ui.entityViewInit.js',
+				'wikibase.ui.entityViewInit.js'
 			],
 			'dependencies' => [
 				'mediawiki.api',
@@ -130,6 +139,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.EntityId',
 				'wikibase.dataTypeStore',
 				'wikibase.entityChangers.EntityChangersFactory',
+				'wikibase.EntityInitializer',
 				'wikibase.experts.getStore',
 				'wikibase.formatters.ApiValueFormatterFactory',
 				'wikibase.entityIdFormatter.CachingEntityIdHtmlFormatter',
@@ -139,7 +149,6 @@ return call_user_func( function() {
 				'wikibase.parsers.getStore',
 				'wikibase.api.RepoApi',
 				'wikibase.RevisionStore',
-				'wikibase.serialization.EntityDeserializer',
 				'wikibase.sites',
 				'wikibase.store.ApiEntityStore',
 				'wikibase.store.CachingEntityStore',
