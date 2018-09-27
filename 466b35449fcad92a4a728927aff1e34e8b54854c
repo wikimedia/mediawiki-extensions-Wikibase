@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfba0170_a8bb3af3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-09-27T17:04:46Z",
+      "side": 1,
+      "message": "Use \"Bug:\" instead (and with a space), so that it is recognised as footer meta-data and will get associated automatically on Phabricator.\n\nhttps://www.mediawiki.org/wiki/Gerrit/Commit_message_guidelines",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 12
+      },
+      "revId": "466b35449fcad92a4a728927aff1e34e8b54854c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
