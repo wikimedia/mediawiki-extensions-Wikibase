@@ -12,6 +12,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
 use Hooks;
+use Language;
 use LogicException;
 use MWException;
 use ParserOptions;
@@ -270,7 +271,7 @@ abstract class EntityContent extends AbstractContent {
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
 
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$options->getUserLangObj()
+			$this->getValidUserLanguage( $options->getUserLangObj() )
 		);
 
 		$entityRevision = $this->getEntityRevision( $revisionId );
@@ -286,6 +287,14 @@ abstract class EntityContent extends AbstractContent {
 		$this->applyEntityPageProperties( $output );
 
 		return $output;
+	}
+
+	private function getValidUserLanguage( Language $language ) {
+		if( Language::isValidBuiltInCode( $language->getCode() ) ) {
+			return Language::factory( 'und' ); // T204791
+		}
+
+		return $language;
 	}
 
 	/**
