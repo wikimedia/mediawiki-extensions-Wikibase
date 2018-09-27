@@ -37,6 +37,16 @@
 		} );
 	};
 
+	EntityInitializer.newFromEntityLoadedHook = function () {
+		var entityPromise = $.Deferred( function ( deferred ) {
+			mw.hook( 'wikibase.entityPage.entityLoaded' ).add( function ( entity ) {
+				deferred.resolve( entity );
+			} );
+		} ).promise();
+
+		return new EntityInitializer( entityPromise );
+	};
+
 	$.extend( EntityInitializer.prototype, {
 
 		/**

@@ -71,5 +71,14 @@ return call_user_func( function() {
 				'wikibase.tests.qunit.testrunner',
 			],
 		],
+
+		'wikibase.EntityInitializer.tests' => $moduleBase + [
+			'scripts' => [
+				'wikibase.EntityInitializer.tests.js',
+			],
+			'dependencies' => [
+				'wikibase.EntityInitializer'
+			],
+		],
 	];
 } );
