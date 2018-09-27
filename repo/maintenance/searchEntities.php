@@ -128,10 +128,12 @@ class SearchEntities extends Maintenance {
 		foreach ( $results as $match ) {
 			$entityId = $match->getEntityId();
 
+			$title = $this->repo->getEntityTitleLookup()->getTitleForId( $entityId );
 			$displayLabel = $match->getDisplayLabel();
 			$out['rows'][] = [
-				'pageId' => $entityId->getSerialization(),
-				'title' => $this->repo->getEntityTitleLookup()->getTitleForId( $entityId )->getPrefixedText(),
+				'pageId' => $title->getArticleID(),
+				'entityId' => $entityId->getSerialization(),
+				'title' => $title->getPrefixedText(),
 				'snippets' => [
 					'term' => $match->getMatchedTerm()->getText(),
 					'termLanguage' => $match->getMatchedTerm()->getLanguageCode(),
