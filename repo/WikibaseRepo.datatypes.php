@@ -396,7 +396,7 @@ return call_user_func( function() {
 
 						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
 					} catch ( \Exception $e ) {
-						$logger->critical(
+						$logger->error(
 							"Failed to construct ItemIdHtmlLinkFormatter: {exception_message}",
 							[
 								'exception' => $e,

@@ -101,7 +101,7 @@ class ControlledFallbackEntityIdFormatter implements EntityIdFormatter {
 	 * @param \Exception $e
 	 */
 	private function logTargetFormatterFailure( EntityId $value, \Exception $e ) {
-		$this->logger->critical(
+		$this->logger->error(
 			'Failed to format entity ID. Using fallback formatter.'
 			. ' Error: {exception_message}',
 			[
