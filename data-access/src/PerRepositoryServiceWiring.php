@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -154,12 +155,17 @@ return [
 		PerRepositoryServiceContainer $services,
 		GenericServices $genericServices
 	) {
-		return new PrefetchingWikiPageEntityMetaDataAccessor(
-			new WikiPageEntityMetaDataLookup(
-				$genericServices->getEntityNamespaceLookup(),
-				$services->getDatabaseName(),
-				$services->getRepositoryName()
-			)
+		return new TypeDispatchingWikiPageEntityMetaDataAccessor(
+			$services->getEntityMetaDataAccessorCallbacks(),
+			new PrefetchingWikiPageEntityMetaDataAccessor(
+				new WikiPageEntityMetaDataLookup(
+					$genericServices->getEntityNamespaceLookup(),
+					$services->getDatabaseName(),
+					$services->getRepositoryName()
+				)
+			),
+			$services->getDatabaseName(),
+			$services->getRepositoryName()
 		);
 	},
 
