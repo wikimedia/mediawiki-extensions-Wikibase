@@ -63,6 +63,9 @@ string key is associated with a function having the dedicated signature:
 : a callable that returns an EntityHandler instance supporting this entity type
 ; entity-factory-callback (repo only)
 : a callback for creating an empty entity of this type
+; entity-metadata-accessor-callback
+: a callback for creating a WikiPageEntityMetaDataAccessor for an entity of this type, with the arguments
+  being the wiki database name (string|false), and the repository name (string)
 ; js-deserializer-factory-function (repo only)
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type

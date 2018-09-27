@@ -51,6 +51,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
 			new DataAccessSettings( 0, true, false ),
 			[],
+			[],
 			$this->getNameTableStoreProphecy()
 		);
 

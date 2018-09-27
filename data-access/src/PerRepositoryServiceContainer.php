@@ -55,6 +55,11 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	private $deserializerFactoryCallbacks;
 
 	/**
+	 * @var callable[]
+	 */
+	private $entityMetaDataAccessorCallbacks;
+
+	/**
 	 * @var NameTableStore
 	 */
 	private $slotRoleStore;
@@ -68,6 +73,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 * @param GenericServices $genericServices
 	 * @param DataAccessSettings $settings
 	 * @param callable[] $deserializerFactoryCallbacks
+	 * @param callable[] $entityMetaDataAccessorCallbacks
 	 * @param NameTableStore $slotRoleStore
 	 */
 	public function __construct(
@@ -79,6 +85,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		GenericServices $genericServices,
 		DataAccessSettings $settings,
 		array $deserializerFactoryCallbacks,
+		array $entityMetaDataAccessorCallbacks,
 		NameTableStore $slotRoleStore
 	) {
 		parent::__construct( [ $genericServices, $settings ] );
@@ -89,6 +96,7 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
+		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
 		$this->slotRoleStore = $slotRoleStore;
 	}
 
@@ -134,6 +142,14 @@ class PerRepositoryServiceContainer extends ServiceContainer implements DataAcce
 	 */
 	public function getSlotRoleStore() {
 		return $this->slotRoleStore;
+	}
+
+	/**
+	 * XXX: This is a bit out of place, as this class should return services not callbacks.
+	 * @return callable[]
+	 */
+	public function getEntityMetaDataAccessorCallbacks() {
+		return $this->entityMetaDataAccessorCallbacks;
 	}
 
 	/**
