@@ -345,11 +345,11 @@ class DatabaseSchemaUpdater {
 		  );
 
 		// T202265
-        $updater->addExtensionIndex(
-            'wb_terms',
-            'tmp1',
-            $this->getUpdateScriptPath( 'AddTermTmp1Index', $db->getType() )
-        );
+		$updater->addExtensionIndex(
+			'wb_terms',
+			'tmp1',
+			$this->getUpdateScriptPath( 'AddTermTmp1Index', $db->getType() )
+		);
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
