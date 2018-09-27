@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf7a4d53_ba5fbe9d",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T13:06:06Z",
+      "side": 1,
+      "message": "As discussed, using an EntityTitleLookup for this doesn\u0027t work on clients.\nAlso, replacing the hard-coded mapping of entity IDs to page title is unrelated to the topic of this patch, and should be tracked in a separate ticket. \n\nJust don\u0027t touch the old title mapping logic in this patch, and just add the join against the slots table below.",
+      "revId": "64041d46ff7fb0de76e1080e7869f2bd8a90173d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
