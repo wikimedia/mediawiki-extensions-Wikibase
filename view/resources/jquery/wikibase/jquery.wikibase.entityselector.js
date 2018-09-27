@@ -290,7 +290,7 @@
 					dataType: 'json',
 					data: self._getSearchApiParameters( term )
 				} )
-				.done( function ( response ) {
+				.done( function ( response, statusText, jqXHR ) {
 					if ( response.error ) {
 						deferred.reject( response.error.info );
 						return;
@@ -299,7 +299,8 @@
 						deferred.resolve(
 							results,
 							term,
-							response[ 'search-continue' ]
+							response[ 'search-continue' ],
+							jqXHR.getResponseHeader( 'X-Search-ID' )
 						);
 					} );
 				} )
@@ -530,7 +531,7 @@
 			var self = this;
 
 			return $.ui.suggester.prototype._getSuggestions.apply( this, arguments )
-			.then( function ( suggestions, searchTerm, nextSuggestionOffset ) {
+			.then( function ( suggestions, searchTerm, nextSuggestionOffset, searchId ) {
 				var deferred = $.Deferred();
 
 				if ( self._cache.term === searchTerm && self._cache.nextSuggestionOffset ) {
@@ -542,6 +543,11 @@
 						suggestions: suggestions,
 						nextSuggestionOffset: nextSuggestionOffset
 					};
+				}
+				if ( searchId ) {
+					self._cache.searchId = searchId;
+				} else {
+					delete self._cache.searchId;
 				}
 
 				deferred.resolve( self._cache.suggestions, searchTerm );
