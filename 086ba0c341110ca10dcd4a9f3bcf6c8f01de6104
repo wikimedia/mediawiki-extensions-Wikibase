@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eda73bfe_157d5d3a",
+        "filename": "data-access/src/PerRepositoryServiceContainer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T14:13:06Z",
+      "side": 1,
+      "message": "This now exposes something that is inherently bound to MediaWiki. Nothing else in the interface is, and ServiceContainer itself can hopefully be moved to a library soon. \n\nPerhaps this can be avoided, by wrapping the NameTableStore, or by only using it internally?...",
+      "revId": "086ba0c341110ca10dcd4a9f3bcf6c8f01de6104",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
