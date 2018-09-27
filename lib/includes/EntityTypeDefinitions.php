@@ -90,6 +90,13 @@ class EntityTypeDefinitions {
 	/**
 	 * @return callable[]
 	 */
+	public function getEntityMetaDataAccessorCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-metadata-accessor-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
 	public function getSerializerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'serializer-factory-callback' );
 	}

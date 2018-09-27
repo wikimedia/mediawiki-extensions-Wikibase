@@ -119,6 +119,7 @@ class PerRepositoryServiceContainerFactory {
 			$this->genericServices,
 			$this->settings,
 			$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+			$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
 			$this->nameTableStoreFactory->getSlotRoles( $dbName )
 		);
 		$container->applyWiring( $this->serviceWiring );
