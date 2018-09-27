@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "957dd4d7_6514edbf",
+        "filename": "data-access/src/PerRepositoryServiceContainer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "This looks a bit out of place here - a service container should return services, not callbacks... is that why you wanted to introduce the factory class?\n\nI guess the fundamental issue here is that we want to expose some internals to the wiring callbacks, but we don\u0027t want to expose these things to application logic. So the service container would have to have an \"internal\" and an \"external\" facet. I\u0027ll have to think about that some more.\n\nI guess this is ok for now, especially since application logic shouldn\u0027t be using this service container directly.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9836a6a6_509da9a3",
+        "filename": "data-access/src/PerRepositoryServiceContainerFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "Maybe it\u0027s better to just inject the EntityTypeDefinitions.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2718f612_057560e4",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "would be nice to explain the intent of the class here.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "519f9e95_3216180a",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "$instantiators would be more descriptive. And it should say what they are expected to return. Ideally, give a signature: $instantiators An associative array mapping entity types to instantiator callbacks. Callback signature: function( $databaseName, $repositoryName ): WikiPageEntityMetaDataAccessor.\n\nAlso, perhaps document that it\u0027s ok to directly supply a WikiPageEntityMetaDataAccessor here.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc0eff51_904a5870",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "Assert::parameterElementType would be good here.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3155a676_14a6f575",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "add a doc block, please. also below.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8c00b78_7c456da6",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 1,
+      "message": "why not Assert::postCondition?",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

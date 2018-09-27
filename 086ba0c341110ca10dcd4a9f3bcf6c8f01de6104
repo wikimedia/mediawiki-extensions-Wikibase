@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ef9f48c_ce036e45",
+        "filename": "repo/autoload.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-27T19:35:02Z",
+      "side": 0,
+      "message": "I\u0027d expect a new class to be added to the autoload list, and I didn\u0027t expect to see one being removed...",
+      "revId": "086ba0c341110ca10dcd4a9f3bcf6c8f01de6104",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
