@@ -110,10 +110,29 @@ return call_user_func( function() {
 			]
 		],
 
+		'wikibase.EntityInitializer' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.EntityInitializer.js'
+			],
+			'dependencies' => [
+				'wikibase',
+				'wikibase.serialization.EntityDeserializer'
+			]
+		],
+
+		'wikibase.entityInit' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.entityInit.js'
+			],
+			'dependencies' => [
+				'wikibase',
+				'wikibase.EntityInitializer'
+			]
+		],
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + [
 			'scripts' => [
-				'wikibase.EntityInitializer.js',
-				'wikibase.ui.entityViewInit.js',
+				'wikibase.ui.entityViewInit.js'
 			],
 			'dependencies' => [
 				'mediawiki.api',
@@ -139,7 +158,6 @@ return call_user_func( function() {
 				'wikibase.parsers.getStore',
 				'wikibase.api.RepoApi',
 				'wikibase.RevisionStore',
-				'wikibase.serialization.EntityDeserializer',
 				'wikibase.sites',
 				'wikibase.store.ApiEntityStore',
 				'wikibase.store.CachingEntityStore',
@@ -147,7 +165,8 @@ return call_user_func( function() {
 				'wikibase.view.ViewFactoryFactory',
 				'wikibase.view.StructureEditorFactory',
 				'wikibase.view.ToolbarFactory',
-				'wikibase.WikibaseContentLanguages'
+				'wikibase.WikibaseContentLanguages',
+				'wikibase.entityInit'
 			],
 			'messages' => [
 				'pagetitle',
