@@ -46,6 +46,9 @@
 		"wikibase/wikibase-codesniffer": "^0.3.0",
 		"cache/integration-tests": "dev-master"
 	},
+	"suggest": {
+		"ext-calendar": "Needed for dumpRdf script"
+	},
 	"scripts": {
 		"fix": "phpcbf",
 		"test": [
