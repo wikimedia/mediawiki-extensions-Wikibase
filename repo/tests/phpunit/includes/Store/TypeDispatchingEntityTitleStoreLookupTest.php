@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
-use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
+use Wikimedia\Assert\PostconditionException;
 
 /**
  * @covers \Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup
@@ -32,7 +32,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends MediaWikiTestCase {
 			$this->newDefaultService()
 		);
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->setExpectedException( PostConditionException::class );
 		$lookup->getTitleForId( new PropertyId( 'P1' ) );
 	}
 
