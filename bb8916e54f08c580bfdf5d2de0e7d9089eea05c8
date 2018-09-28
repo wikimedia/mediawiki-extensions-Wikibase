@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9c70e3d_2dcc7978",
+        "filename": "repo/includes/Store/TypeDispatchingEntityTitleStoreLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T10:52:32Z",
+      "side": 0,
+      "message": "This is now a PostconditionException, the corresponding tests needs to be changed accordingly.",
+      "revId": "bb8916e54f08c580bfdf5d2de0e7d9089eea05c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
