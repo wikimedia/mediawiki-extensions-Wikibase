@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e263b251_8f10a6e6",
+        "filename": "data-access/src/PerRepositoryServiceContainer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "I agree, and yes this is one of the reasons I was considering also adding the factory.\nI\u0027ll add a note in the phpdoc.",
+      "parentUuid": "957dd4d7_6514edbf",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9836a6a6_509da9a3",
         "filename": "data-access/src/PerRepositoryServiceContainerFactory.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-27T19:35:02Z",
       "side": 1,
       "message": "Maybe it\u0027s better to just inject the EntityTypeDefinitions.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6164784a_ff22fbe7",
+        "filename": "data-access/src/PerRepositoryServiceContainerFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "It turned out to be less work to just add this as another parameter here but I could followup with switching to just entityTypeDefinitions once this chain is done and ready for MCR / sdoc.",
+      "parentUuid": "9836a6a6_509da9a3",
       "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ef8db3f_cab36f75",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2718f612_057560e4",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "519f9e95_3216180a",
         "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2018-09-27T19:35:02Z",
       "side": 1,
       "message": "$instantiators would be more descriptive. And it should say what they are expected to return. Ideally, give a signature: $instantiators An associative array mapping entity types to instantiator callbacks. Callback signature: function( $databaseName, $repositoryName ): WikiPageEntityMetaDataAccessor.\n\nAlso, perhaps document that it\u0027s ok to directly supply a WikiPageEntityMetaDataAccessor here.",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b2f2d99_3ba13ac4",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "519f9e95_3216180a",
       "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "b3ec192e_bbc15a1c",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc0eff51_904a5870",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3155a676_14a6f575",
         "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 4
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "41e9339d_9b8caa2c",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3155a676_14a6f575",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8c00b78_7c456da6",
         "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 4
@@ -115,6 +223,24 @@
       "writtenOn": "2018-09-27T19:35:02Z",
       "side": 1,
       "message": "why not Assert::postCondition?",
+      "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c72b4984_41fa6022",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-09-28T07:23:37Z",
+      "side": 1,
+      "message": "This was CP from another example! done!",
+      "parentUuid": "f8c00b78_7c456da6",
       "revId": "83749d7d9c0d9aca67cb635ffad64d3aa22c2180",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
