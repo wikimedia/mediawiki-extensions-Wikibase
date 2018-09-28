@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store;
 use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikimedia\Assert\Assert;
 
 /**
  * An EntityTitleStoreLookup that guarantees to return the titles of pages that actually store the
@@ -60,11 +61,11 @@ class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {
 				$this->defaultLookup
 			);
 
-			if ( !( $this->lookups[$entityType] instanceof EntityTitleStoreLookup ) ) {
-				throw new InvalidArgumentException(
-					"Callback provided for $entityType did not create an EntityTitleStoreLookup"
-				);
-			}
+			Assert::postcondition(
+				$this->lookups[$entityType] instanceof EntityTitleStoreLookup,
+				"Callback provided for $entityType must create a EntityTitleStoreLookup"
+			);
+
 		}
 
 		return $this->lookups[$entityType];
