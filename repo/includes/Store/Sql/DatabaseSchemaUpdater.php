@@ -325,12 +325,12 @@ class DatabaseSchemaUpdater {
 		}
 
 		// updated indexes
-		$updater->dropExtensionIndex( 
+		$updater->dropExtensionIndex(
 			'wb_terms',
 			'wb_terms_entity_id ',
 			$this->getUpdateScriptPath( 'DropTermIndices', $db->getType() )
 		);
-		
+
 		$updater->addExtensionIndex(
 			'wb_terms',
 			'term_text',
@@ -356,14 +356,14 @@ class DatabaseSchemaUpdater {
 			'tmp1',
 			$this->getUpdateScriptPath( 'AddTermTmp1Index', $db->getType() )
 		);
-		
+
 		// Remove old onces T204837 & T204838
-		$updater->dropExtensionIndex( 
+		$updater->dropExtensionIndex(
 			'wb_terms',
 			'term_text',
 			$this->getUpdateScriptPath( 'DropTermIndices2018', $db->getType() )
 		);
-		
+
 		// T204837 & T204838 & T204836
 		$updater->addExtensionIndex(
 			'wb_terms',
