@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2395d4ac_efab90d4",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:16:51Z",
+      "side": 1,
+      "message": "May be better to refer to the page_title field here than to the Title object.",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a2312d6_247ffc43",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:16:51Z",
+      "side": 1,
+      "message": "If we are processing different types of entity IDs in the same query, and not all of them reside in the same slot, this will break. We need a test case that covers this.\n\nThe only solution I see is to have one query per entity type (or use a union).",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f232128_cf53097c",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:16:51Z",
+      "side": 1,
+      "message": "Missing the $slotRoleStore parameter",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22ff7a7a_b9416deb",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:16:51Z",
+      "side": 1,
+      "message": "import class",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ccc0bf0_ffef6ee2",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:16:51Z",
+      "side": 1,
+      "message": "import class",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
