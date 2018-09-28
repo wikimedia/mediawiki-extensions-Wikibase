@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "683d97fe_f8d8cd9e",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:05:34Z",
+      "side": 1,
+      "message": "Needs to be $flags \u0026 ~EDIT_NEW",
+      "revId": "0efe9c2a9a94b6a0e66a35f48bb875c887811c4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
