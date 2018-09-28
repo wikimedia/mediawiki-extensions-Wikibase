@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48690604_fc9071b8",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-28T07:51:59Z",
+      "side": 1,
+      "message": "This doc is not needed as there is a type hint in the constructor, which is enough for tools to understand what is going on",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "467c8b9e_1370fb13",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-28T07:51:59Z",
+      "side": 1,
+      "message": "This doc is not adding value",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c2351ce_ab8381e6",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-28T07:51:59Z",
+      "side": 1,
+      "message": "Please use dependency injection instead of calls to global functions, especially when these functions rely on state, and especially if they are defined by the framework.",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "285b8d37_aa64ca76",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-28T07:51:59Z",
+      "side": 1,
+      "message": "Also a global function",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8fa41c7_f1fecd3a",
+        "filename": "lib/tests/phpunit/Formatters/WikitextGlobeCoordinateFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-28T07:51:59Z",
+      "side": 1,
+      "message": "Ok that\u0027s it... going to write a blog post about it now. 3 commits by 3 different people in 3 days doing it.\n\nI think you are better off not using a dataProvider or at least having one for the true and the false cases of the last parameter. Then you can drop that parameter, use asserTrue/assertFalse and simplify the data provider. Plus the true and false cases will be more clearly separated. Not clear to me using dataProviders here adds value to begin with. Why not just have 4 well named test methods? If there is duplication you can use the extract method refactoring.\n\nIf you stick with the dataProviders, check out https://www.entropywins.wtf/blog/2017/10/09/yield-in-phpunit-data-providers/",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
