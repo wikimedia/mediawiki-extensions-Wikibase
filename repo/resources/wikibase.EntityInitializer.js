@@ -30,11 +30,7 @@
 			);
 		}
 
-		this._deserializedEntityPromise = entityPromise.then( function ( entity ) {
-			return getDeserializer().then( function ( entityDeserializer ) {
-				return entityDeserializer.deserialize( entity );
-			} );
-		} );
+		this._entityPromise = entityPromise;
 	};
 
 	EntityInitializer.newFromEntityLoadedHook = function () {
@@ -50,9 +46,9 @@
 	$.extend( EntityInitializer.prototype, {
 
 		/**
-		 * @type {jQuery.Promise} Promise for wikibase.datamodel.Entity
+		 * @type {jQuery.Promise} Promise for serialized
 		 */
-		_deserializedEntityPromise: null,
+		_entityPromise: null,
 
 		/**
 		 * Retrieves an entity from mw.config.
@@ -63,7 +59,46 @@
 		 *         No rejected parameters.
 		 */
 		getEntity: function () {
-			return this._deserializedEntityPromise;
+			var self = this;
+
+			return this._entityPromise.then( function ( entity ) {
+				return self._getDeserializer().then( function( entityDeserializer ) {
+					return entityDeserializer.deserialize( entity );
+				} );
+			} );
+		},
+
+		/**
+		 * @return {Object} jQuery promise
+		 *         Resolved parameters:
+		 *         - {wikibase.serialization.EntityDeserializer}
+		 *         No rejected parameters.
+		 */
+		_getDeserializer: function () {
+			var entityDeserializer = new wb.serialization.EntityDeserializer(),
+				deferred = $.Deferred();
+
+			var entityTypes = mw.config.get( 'wbEntityTypes' );
+			var modules = [];
+			var typeNames = [];
+			entityTypes.types.forEach( function ( type ) {
+				var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
+				if ( deserializerFactoryFunction ) {
+					modules.push( deserializerFactoryFunction );
+					typeNames.push( type );
+				}
+			} );
+			mw.loader.using( modules, function ( require ) {
+				modules.forEach( function ( module, index ) {
+					entityDeserializer.registerStrategy(
+						require( module )(),
+						typeNames[ index ]
+					);
+				} );
+
+				deferred.resolve( entityDeserializer );
+			} );
+			return deferred.promise();
 		}
 	} );
 
@@ -92,39 +127,6 @@
 				deferred.resolve( JSON.parse( serializedEntity ) );
 			} );
 		} ).promise();
-	}
-
-	/**
-	 * @return {Object} jQuery promise
-	 *         Resolved parameters:
-	 *         - {wikibase.serialization.EntityDeserializer}
-	 *         No rejected parameters.
-	 */
-	function getDeserializer() {
-		var entityDeserializer = new wb.serialization.EntityDeserializer(),
-			deferred = $.Deferred();
-
-		var entityTypes = mw.config.get( 'wbEntityTypes' );
-		var modules = [];
-		var typeNames = [];
-		entityTypes.types.forEach( function ( type ) {
-			var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
-			if ( deserializerFactoryFunction ) {
-				modules.push( deserializerFactoryFunction );
-				typeNames.push( type );
-			}
-		} );
-		mw.loader.using( modules, function ( require ) {
-			modules.forEach( function ( module, index ) {
-				entityDeserializer.registerStrategy(
-					require( module )(),
-					typeNames[ index ]
-				);
-			} );
-
-			deferred.resolve( entityDeserializer );
-		} );
-		return deferred.promise();
 	}
 
 }( jQuery, mediaWiki, wikibase ) );
