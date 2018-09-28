@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68c87244_f466762c",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-28T15:28:15Z",
+      "side": 1,
+      "message": "Perhaps explain that this is needed because the EntityMetaDataAccessor implements queries against the page table based on entity IDs.",
+      "revId": "bb8916e54f08c580bfdf5d2de0e7d9089eea05c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
