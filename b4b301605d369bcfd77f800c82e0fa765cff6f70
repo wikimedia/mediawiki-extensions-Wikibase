@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "881165b8_e2ecfdca",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-29T19:49:10Z",
+      "side": 1,
+      "message": "Needs to be protected now, so it can be overwritten.",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a2312d6_247ffc43",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 10
@@ -33,6 +50,24 @@
       "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fe5b6cb_d688c6e6",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-09-29T19:49:10Z",
+      "side": 1,
+      "message": "Oh, never mind - we generate one set of conditions per entity id, so this would work. We should still have a test case ensuring that.",
+      "parentUuid": "0a2312d6_247ffc43",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
