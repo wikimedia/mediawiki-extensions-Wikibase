@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4d6ce3cf_3855fd27",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-30T04:06:12Z",
+      "side": 1,
+      "message": "There is no need to inherit helpers from ValueFormatterBase and use FormatterOptions in the constructor. A simple boolean parameter and field $enableKartographer would be less work to create and easier to understand.\n\nBeware my other comment about this config possibly not making sense in this class at all.",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "48690604_fc9071b8",
         "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
         "patchSetId": 5
