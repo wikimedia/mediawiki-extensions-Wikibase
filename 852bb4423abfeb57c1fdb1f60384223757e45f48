@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "7537b3a7_182c9e7c",
+        "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-09-30T04:00:29Z",
+      "side": 1,
+      "message": "Why have the decoupling here if it is not used in the tests? I\u0027d go for requiring a GlobeCoordinateFormatter. If there is no need/desire for using a test double in the tests, it is probably even fine to not have a constructor parameter and construct GlobeCoordinateFormatter internally.",
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c2351ce_ab8381e6",
         "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
         "patchSetId": 5
