@@ -20,14 +20,42 @@ class WikitextGlobeCoordinateFormatterTest extends \PHPUnit\Framework\TestCase {
 
 	/* private */ const GLOBE_MOON = 'http://www.wikidata.org/entity/Q405';
 
-	/**
-	 * @dataProvider globeCoordinateFormatProvider
-	 */
-	public function testFormat( GlobeCoordinateValue $value, $output, $withKartographer ) {
-		$this->assertEquals( $output, $this->newFormatter( $withKartographer )->format( $value ) );
+	public function testWhenFormattingEarthCoordinatesWithoutKartographer_plainCoordinatesAreReturned() {
+		$this->assertSame(
+			'1, 2',
+			$this->newFormatterWithoutKartographer()->format(
+				$this->newGlobeCoordinate( GlobeCoordinateValue::GLOBE_EARTH )
+			)
+		);
 	}
 
-	private function newFormatter( $enableKartographer ) {
+	public function testWhenFormattingEarthCoordinatesWithKartographer_mapLinkIsReturned() {
+		$this->assertSame(
+			'<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":[2,1]}}</maplink>',
+			$this->newFormatterWithKartographer()->format(
+				$this->newGlobeCoordinate( GlobeCoordinateValue::GLOBE_EARTH )
+			)
+		);
+	}
+
+	public function testWhenFormattingNonEarthCoordinatesWithKartographer_plainCoordinatesAreReturned() {
+		$this->assertSame(
+			'1, 2',
+			$this->newFormatterWithKartographer()->format(
+				$this->newGlobeCoordinate( self::GLOBE_MOON )
+			)
+		);
+	}
+
+	private function newFormatterWithKartographer(): WikitextGlobeCoordinateFormatter {
+		return $this->newFormatter( true );
+	}
+
+	private function newFormatterWithoutKartographer(): WikitextGlobeCoordinateFormatter {
+		return $this->newFormatter( false );
+	}
+
+	private function newFormatter( $enableKartographer ): WikitextGlobeCoordinateFormatter {
 		return new WikitextGlobeCoordinateFormatter(
 			new GlobeCoordinateFormatter(),
 			new FormatterOptions(
@@ -38,37 +66,12 @@ class WikitextGlobeCoordinateFormatterTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	private function newGlobeCoordinateValue( $globe ) {
+	private function newGlobeCoordinate( $globe ): GlobeCoordinateValue {
 		return new GlobeCoordinateValue(
 			new LatLongValue( 1, 2 ),
 			0.1,
 			$globe
 		);
-	}
-
-	public function globeCoordinateFormatProvider() {
-		return [
-			'earth with kartographer' => [
-				$this->newGlobeCoordinateValue( GlobeCoordinateValue::GLOBE_EARTH ),
-				'<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":[2,1]}}</maplink>',
-				true
-			],
-			'earth without kartographer' => [
-				$this->newGlobeCoordinateValue( GlobeCoordinateValue::GLOBE_EARTH ),
-				'1, 2',
-				false
-			],
-			'moon with kartographer' => [
-				$this->newGlobeCoordinateValue( self::GLOBE_MOON ),
-				'1, 2',
-				true
-			],
-			'moon without kartographer' => [
-				$this->newGlobeCoordinateValue( self::GLOBE_MOON ),
-				'1, 2',
-				false
-			],
-		];
 	}
 
 }
