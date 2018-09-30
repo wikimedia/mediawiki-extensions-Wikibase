@@ -9,7 +9,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Formatters\WikitextGlobeCoordinateFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\WikitextGlobeCoordinateFormatter
+ * @covers \Wikibase\Lib\Formatters\WikitextGlobeCoordinateFormatter
  *
  * @group Wikibase
  *
@@ -18,18 +18,24 @@ use Wikibase\Lib\Formatters\WikitextGlobeCoordinateFormatter;
  */
 class WikitextGlobeCoordinateFormatterTest extends \PHPUnit\Framework\TestCase {
 
+	/* private */ const GLOBE_MOON = 'http://www.wikidata.org/entity/Q405';
+
 	/**
 	 * @dataProvider globeCoordinateFormatProvider
 	 */
 	public function testFormat( GlobeCoordinateValue $value, $output, $withKartographer ) {
-		$options = new FormatterOptions( [
-			WikitextGlobeCoordinateFormatter::OPT_ENABLE_KARTOGRAPHER => $withKartographer
-		] );
-		$formatter = new WikitextGlobeCoordinateFormatter(
+		$this->assertEquals( $output, $this->newFormatter( $withKartographer )->format( $value ) );
+	}
+
+	private function newFormatter( $enableKartographer ) {
+		return new WikitextGlobeCoordinateFormatter(
 			new GlobeCoordinateFormatter(),
-			$options
+			new FormatterOptions(
+				[
+					WikitextGlobeCoordinateFormatter::OPT_ENABLE_KARTOGRAPHER => $enableKartographer
+				]
+			)
 		);
-		$this->assertEquals( $output, $formatter->format( $value ) );
 	}
 
 	public function globeCoordinateFormatProvider() {
@@ -56,7 +62,7 @@ class WikitextGlobeCoordinateFormatterTest extends \PHPUnit\Framework\TestCase {
 				new GlobeCoordinateValue(
 					new LatLongValue( 1, 2 ),
 					0.1,
-					'http://www.wikidata.org/entity/Q405'
+					self::GLOBE_MOON
 				),
 				'1, 2',
 				true
@@ -65,7 +71,7 @@ class WikitextGlobeCoordinateFormatterTest extends \PHPUnit\Framework\TestCase {
 				new GlobeCoordinateValue(
 					new LatLongValue( 1, 2 ),
 					0.1,
-					'http://www.wikidata.org/entity/Q405'
+					self::GLOBE_MOON
 				),
 				'1, 2',
 				false
