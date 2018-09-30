@@ -38,41 +38,33 @@ class WikitextGlobeCoordinateFormatterTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	private function newGlobeCoordinateValue( $globe ) {
+		return new GlobeCoordinateValue(
+			new LatLongValue( 1, 2 ),
+			0.1,
+			$globe
+		);
+	}
+
 	public function globeCoordinateFormatProvider() {
 		return [
 			'earth with kartographer' => [
-				new GlobeCoordinateValue(
-					new LatLongValue( 1, 2 ),
-					0.1,
-					GlobeCoordinateValue::GLOBE_EARTH
-				),
+				$this->newGlobeCoordinateValue( GlobeCoordinateValue::GLOBE_EARTH ),
 				'<maplink latitude="1" longitude="2">{"type":"Feature","geometry":{"type":"Point","coordinates":[2,1]}}</maplink>',
 				true
 			],
 			'earth without kartographer' => [
-				new GlobeCoordinateValue(
-					new LatLongValue( 1, 2 ),
-					0.1,
-					GlobeCoordinateValue::GLOBE_EARTH
-				),
+				$this->newGlobeCoordinateValue( GlobeCoordinateValue::GLOBE_EARTH ),
 				'1, 2',
 				false
 			],
 			'moon with kartographer' => [
-				new GlobeCoordinateValue(
-					new LatLongValue( 1, 2 ),
-					0.1,
-					self::GLOBE_MOON
-				),
+				$this->newGlobeCoordinateValue( self::GLOBE_MOON ),
 				'1, 2',
 				true
 			],
 			'moon without kartographer' => [
-				new GlobeCoordinateValue(
-					new LatLongValue( 1, 2 ),
-					0.1,
-					self::GLOBE_MOON
-				),
+				$this->newGlobeCoordinateValue( self::GLOBE_MOON ),
 				'1, 2',
 				false
 			],
