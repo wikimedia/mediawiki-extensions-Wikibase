@@ -1,9 +1,14 @@
-( function ( QUnit, wb ) {
+( function ( QUnit, wb, sinon, mw ) {
 	'use strict';
 
-	var EntityInitializer = wb.EntityInitializer;
+	var EntityInitializer = wb.EntityInitializer,
+		sandbox = sinon.sandbox.create();
 
-	QUnit.module( 'wikibase.EntityInitializer' );
+	QUnit.module( 'wikibase.EntityInitializer', {
+		teardown: function () {
+			sandbox.restore();
+		}
+	} );
 
 	QUnit.test( 'constructor validates parameter', function ( assert ) {
 		try {
@@ -19,4 +24,26 @@
 		assert.ok( initializer instanceof EntityInitializer );
 	} );
 
-}( QUnit, wikibase ) );
+	QUnit.test( 'uses entity returned from hook', function ( assert ) {
+		var done = assert.async(),
+			entity = { id: 'Q123' },
+			hookStub = sandbox.stub( mw, 'hook' ).returns( {
+				add: sinon.stub().yields( entity )
+			} ),
+			mockDeserializer = {
+				deserialize: sinon.stub()
+			};
+
+		sandbox.stub( EntityInitializer.prototype, '_getDeserializer' )
+			.returns( $.Deferred().resolve( mockDeserializer ) );
+
+		var initializer = EntityInitializer.newFromEntityLoadedHook();
+
+		initializer.getEntity().then( function () {
+			assert.ok( hookStub.calledWith( 'wikibase.entityPage.entityLoaded' ) );
+			assert.ok( mockDeserializer.deserialize.calledWith( entity ) );
+			done();
+		} );
+	} );
+
+}( QUnit, wikibase, sinon, mediaWiki ) );
