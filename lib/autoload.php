@@ -201,6 +201,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\WikibaseContentLanguages' => __DIR__ . '/includes/WikibaseContentLanguages.php',
 	'Wikibase\\Lib\\WikibaseSnakFormatterBuilders' => __DIR__ . '/includes/Formatters/WikibaseSnakFormatterBuilders.php',
 	'Wikibase\\Lib\\WikibaseValueFormatterBuilders' => __DIR__ . '/includes/Formatters/WikibaseValueFormatterBuilders.php',
+	'Wikibase\\NonExistingEntityRevision' => __DIR__ . '/includes/Store/NonExistingEntityRevision.php',
 	'Wikibase\\PopulateSitesTable' => __DIR__ . '/maintenance/populateSitesTable.php',
 	'Wikibase\\RepoAccessModule' => __DIR__ . '/includes/Modules/RepoAccessModule.php',
 	'Wikibase\\Settings' => __DIR__ . '/includes/Settings.php',
