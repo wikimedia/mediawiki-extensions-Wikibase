@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "617719aa_cd6172e0",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T17:22:59Z",
+      "side": 1,
+      "message": "0 is probably evil, as that means latest.\nMaybe we could use -1?\nMaybe we should think of something else?",
+      "range": {
+        "startLine": 165,
+        "startChar": 74,
+        "endLine": 165,
+        "endChar": 75
+      },
+      "revId": "d32d6d8b292776df35559c9675ce5b57cde25afc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
