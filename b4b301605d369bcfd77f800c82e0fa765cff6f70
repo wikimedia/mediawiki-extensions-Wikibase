@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7fcc7370_af45e5fb",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:39:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2395d4ac_efab90d4",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "881165b8_e2ecfdca",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-29T19:49:10Z",
       "side": 1,
       "message": "Needs to be protected now, so it can be overwritten.",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3235aa4_480daeaf",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:39:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "881165b8_e2ecfdca",
       "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ab06a235_0c5f0a1c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:39:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fe5b6cb_d688c6e6",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f232128_cf53097c",
         "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
         "patchSetId": 10
@@ -82,6 +136,24 @@
       "writtenOn": "2018-09-28T15:16:51Z",
       "side": 1,
       "message": "Missing the $slotRoleStore parameter",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f174927_dc2052d2",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:39:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f232128_cf53097c",
       "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "11987224_5f0acb0b",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:39:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22ff7a7a_b9416deb",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ccc0bf0_ffef6ee2",
         "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
         "patchSetId": 10
@@ -116,6 +206,24 @@
       "writtenOn": "2018-09-28T15:16:51Z",
       "side": 1,
       "message": "import class",
+      "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86f52db2_0d3d0d68",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:39:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ccc0bf0_ffef6ee2",
       "revId": "b4b301605d369bcfd77f800c82e0fa765cff6f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
