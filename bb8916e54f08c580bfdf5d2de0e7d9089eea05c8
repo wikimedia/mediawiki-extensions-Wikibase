@@ -16,6 +16,24 @@
       "revId": "bb8916e54f08c580bfdf5d2de0e7d9089eea05c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fed9b7fd_61e022c8",
+        "filename": "lib/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-01T07:11:47Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/463707/",
+      "parentUuid": "68c87244_f466762c",
+      "revId": "bb8916e54f08c580bfdf5d2de0e7d9089eea05c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
