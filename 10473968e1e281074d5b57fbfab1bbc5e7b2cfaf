@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "979b729e_4b301c7d",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:14:18Z",
+      "side": 1,
+      "message": "This is needlessly hard-coding the fact that every page must have a main slot. The check for the main slot should not be needed at all: in the current situation, you\u0027d keep the EDIT_NEW flag simply because $parentRevision would be null if there is no main slot. But the code here doesn\u0027t have to know about that.\n\nAlso, SlotRecord::MAIN exists in core now.",
+      "revId": "10473968e1e281074d5b57fbfab1bbc5e7b2cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c67f7861_cb9f748f",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:14:18Z",
+      "side": 1,
+      "message": "I\u0027m always a bit dubious about this kind of white-box testing. I\u0027d rather see tests against the public interface.",
+      "revId": "10473968e1e281074d5b57fbfab1bbc5e7b2cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
