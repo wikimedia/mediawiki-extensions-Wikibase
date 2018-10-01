@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
@@ -155,12 +156,16 @@ return [
 		PerRepositoryServiceContainer $services,
 		GenericServices $genericServices
 	) {
+		$entityNamespaceLookup = $genericServices->getEntityNamespaceLookup();
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new TypeDispatchingWikiPageEntityMetaDataAccessor(
 				$services->getEntityMetaDataAccessorCallbacks(),
 				new WikiPageEntityMetaDataLookup(
-					$genericServices->getEntityNamespaceLookup(),
-					$services->getSlotRoleStore(),
+					$entityNamespaceLookup,
+					new EntityIdLocalPartPageTableEntityQuery(
+						$entityNamespaceLookup,
+						$services->getSlotRoleStore()
+					),
 					$services->getDatabaseName(),
 					$services->getRepositoryName()
 				),
