@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\FormatableSummary;
+use Wikibase\NonExistingEntityRevision;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -160,14 +161,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		}
 
 		$new = isset( $params['new'] ) ? $params['new'] : null;
-		if ( is_null( $entityRevision ) ) {
-			if ( $baseRev > 0 ) {
-				$this->errorReporter->dieError(
-					'Could not find revision ' . $baseRev,
-					'nosuchrevid'
-				);
-			}
-
+		if ( is_null( $entityRevision ) || $entityRevision instanceof NonExistingEntityRevision ) {
 			if ( !$this->isEntityCreationSupported() ) {
 				if ( !$entityId ) {
 					$this->errorReporter->dieError(
