@@ -351,16 +351,9 @@
 		mwPerformance.mark( 'wbInitStart' );
 
 		var $entityview = $( '.wikibase-entityview' );
-		var entityPromise = $.Deferred( function ( deferred ) {
-			mw.hook( 'wikibase.entityPage.entityLoaded' ).add( function ( entity ) {
-				deferred.resolve( entity );
-			} );
-		} ).promise();
-
-		var entityInitializer = new wb.EntityInitializer( entityPromise );
 		var canEdit = isEditable();
 
-		entityInitializer.getEntity().done( function ( entity ) {
+		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().done( function ( entity ) {
 			var viewName = createEntityView( entity, $entityview.first() );
 
 			if ( canEdit ) {
