@@ -4,8 +4,6 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use MediaWiki\Storage\NameTableAccessException;
-use MediaWiki\Storage\NameTableStore;
 use stdClass;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -35,9 +33,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var NameTableStore
+	 * @var PageTableEntityConditionGenerator
 	 */
-	private $slotRoleStore;
+	private $pageTableEntityConditionGenerator;
 
 	/**
 	 * @var string
@@ -46,20 +44,20 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param NameTableStore $slotRoleStore
+	 * @param PageTableEntityConditionGenerator $pageTableEntityConditionGenerator
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 * @param string $repositoryName The name of the repository to lookup from (use an empty string for the local repository)
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
-		NameTableStore $slotRoleStore,
+		PageTableEntityConditionGenerator $pageTableEntityConditionGenerator,
 		$wiki = false,
 		$repositoryName = ''
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 		parent::__construct( $wiki );
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->slotRoleStore = $slotRoleStore;
+		$this->pageTableEntityConditionGenerator = $pageTableEntityConditionGenerator;
 		$this->repositoryName = $repositoryName;
 	}
 
@@ -403,51 +401,8 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 *
 	 * @return array [ string $whereString, array $extraTables ]
 	 */
-	protected function getWhere( array $entityIds, IDatabase $db ) {
-		$where = [];
-		$slotJoinConds = [];
-
-		foreach ( $entityIds as $entityId ) {
-			$entityType = $entityId->getEntityType();
-			$slotRole = $this->entityNamespaceLookup->getEntitySlotRole( $entityType );
-			$namespace = $this->entityNamespaceLookup->getEntityNamespace( $entityType );
-
-			$conditions = [
-				'page_title' => $entityId->getLocalPart(),
-				'page_namespace' => $namespace,
-			];
-
-			/**
-			 * Only check against the slot role when we are not using the main slot.
-			 * If we are using the main slot, then we only need to check that the page
-			 * exists rather than a specific slot within the page.
-			 * This ensures comparability with the pre MCR schema as long as only the
-			 * main slot is used.
-			 */
-			if ( $slotRole !== 'main' ) {
-				try {
-					$slotRoleId = $this->slotRoleStore->getId( $slotRole );
-				} catch ( NameTableAccessException $e ) {
-					// The slot role is not yet saved, nothing to retrieve.
-					continue;
-				}
-
-				$conditions['slot_role_id'] = $slotRoleId;
-				$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'page_latest=slot_revision_id' ] ];
-			}
-
-			$where[] = $db->makeList(
-				$conditions,
-				LIST_AND
-			);
-		}
-
-		if ( empty( $where ) ) {
-			// If we skipped all entity IDs, select nothing, not everything.
-			return [ '0=1', [] ];
-		}
-
-		return [ $db->makeList( $where, LIST_OR ), $slotJoinConds ];
+	private function getWhere( array $entityIds, IDatabase $db ) {
+		return $this->pageTableEntityConditionGenerator->getQueryInfo( $entityIds, $db );
 	}
 
 }

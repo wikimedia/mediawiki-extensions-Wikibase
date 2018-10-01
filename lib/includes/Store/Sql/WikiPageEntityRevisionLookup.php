@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\MediaInfo\DataModel\MediaInfo;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -94,6 +95,21 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$revisionId = 0,
 		$mode = self::LATEST_FROM_REPLICA
 	) {
+		return $this->getLatestRevisionId( $entityId )
+			->onNonexistentEntity(
+				function () use ( $revisionId ) {
+					return new EntityRevision( new MediaInfo(), $revisionId );
+				}
+			)->onConcreteRevision(
+				function () use ( $entityId, $revisionId, $mode ) {
+					return $this->defaultLookup->getEntityRevision( $entityId, $revisionId, $mode );
+				}
+			)->onRedirect(
+				function () use ( $entityId, $revisionId, $mode ) {
+					return $this->defaultLookup->getEntityRevision( $entityId, $revisionId, $mode );
+				}
+			)->map();
+
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
 
