@@ -24,6 +24,7 @@ use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -93,12 +94,15 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 
+		$nsLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
-				$wikibaseRepo->getEntityNamespaceLookup(),
-				MediaWikiServices::getInstance()->getSlotRoleStore(),
-				false
+				$nsLookup,
+				new EntityIdLocalPartPageTableEntityQuery(
+					$nsLookup,
+					MediaWikiServices::getInstance()->getSlotRoleStore()
+				)
 			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
