@@ -4,16 +4,12 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use MediaWiki\Storage\NameTableAccessException;
-use MediaWiki\Storage\NameTableStore;
 use stdClass;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBQueryError;
-use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -35,9 +31,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var NameTableStore
+	 * @var PageTableEntityQuery
 	 */
-	private $slotRoleStore;
+	private $pageTableEntityQuery;
 
 	/**
 	 * @var string
@@ -46,20 +42,20 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param NameTableStore $slotRoleStore
+	 * @param PageTableEntityQuery $pageTableEntityConditionGenerator
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 * @param string $repositoryName The name of the repository to lookup from (use an empty string for the local repository)
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
-		NameTableStore $slotRoleStore,
+		PageTableEntityQuery $pageTableEntityConditionGenerator,
 		$wiki = false,
 		$repositoryName = ''
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 		parent::__construct( $wiki );
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->slotRoleStore = $slotRoleStore;
+		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->repositoryName = $repositoryName;
 	}
 
@@ -284,31 +280,16 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
 
-		$join = [];
-		$fields = $this->selectFields();
-		// To be able to link rows with entity ids
-		$fields[] = 'page_title';
-
-		$tables = [ 'page', 'revision' ];
-
-		// pick latest revision via page_latest
-		$join['revision'] = [ 'INNER JOIN', 'page_latest=rev_id' ];
-
-		list( $where, $slotJoinConds ) = $this->getWhere( $entityIds, $db );
-		$join = array_merge( $join, $slotJoinConds );
-
-		$res = $db->select(
-			array_merge( $tables, array_keys( $slotJoinConds ) ),
-			$fields,
-			$where,
-			__METHOD__,
-			[],
-			$join
+		$rows = $this->pageTableEntityQuery->selectRows(
+			$this->selectFields(),
+			[ 'revision' => [ 'INNER JOIN', 'page_latest=rev_id' ] ],
+			$entityIds,
+			$db
 		);
 
 		$this->releaseConnection( $db );
 
-		return $this->indexResultByEntityId( $entityIds, $res );
+		return $this->processRows( $entityIds, $rows );
 	}
 
 	/**
@@ -323,17 +304,13 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * or false if an entity could not be found (including if the page is a redirect).
 	 */
 	private function selectLatestRevisionIdsMultiple( array $entityIds, $connType ) {
-		$db = $this->getConnection( $connType );
+				$db = $this->getConnection( $connType );
 
-		list( $where, $slotJoinConds ) = $this->getWhere( $entityIds, $db );
-
-		$res = $db->select(
-			array_merge( [ 'page' ], array_keys( $slotJoinConds ) ),
+		$rows = $this->pageTableEntityQuery->selectRows(
 			[ 'page_title', 'page_latest', 'page_is_redirect' ],
-			$where,
-			__METHOD__,
 			[],
-			$slotJoinConds
+			$entityIds,
+			$db
 		);
 
 		$this->releaseConnection( $db );
@@ -350,28 +327,21 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 				return $revisionInformation->page_latest;
 			},
-			$this->indexResultByEntityId( $entityIds, $res )
+
+			$this->processRows( $entityIds, $rows )
 		);
 	}
 
 	/**
-	 * Takes a ResultWrapper and indexes the returned rows based on the serialized
-	 * entity id of the entities they refer to.
+	 * Takes an array of rows and returns a result where every given entity ID has some value.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param IResultWrapper $res
+	 * @param array $rows indexed by entity id serialization
 	 *
 	 * @return array Array mapping entity ID serializations to either objects or false if an entity
 	 *  is not present in $res.
 	 */
-	private function indexResultByEntityId( array $entityIds, IResultWrapper $res ) {
-		$rows = [];
-		// Create a key based map from the rows just returned to reduce
-		// the complexity below.
-		foreach ( $res as $row ) {
-			$rows[$row->page_title] = $row;
-		}
-
+	private function processRows( array $entityIds, array $rows ) {
 		$result = [];
 		foreach ( $entityIds as $entityId ) {
 			// $rows is indexed by page titles without repository prefix but we want to keep prefixes
@@ -395,59 +365,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		}
 
 		return $result;
-	}
-
-	/**
-	 * @param EntityId[] $entityIds
-	 * @param IDatabase $db
-	 *
-	 * @return array [ string $whereString, array $extraTables ]
-	 */
-	protected function getWhere( array $entityIds, IDatabase $db ) {
-		$where = [];
-		$slotJoinConds = [];
-
-		foreach ( $entityIds as $entityId ) {
-			$entityType = $entityId->getEntityType();
-			$slotRole = $this->entityNamespaceLookup->getEntitySlotRole( $entityType );
-			$namespace = $this->entityNamespaceLookup->getEntityNamespace( $entityType );
-
-			$conditions = [
-				'page_title' => $entityId->getLocalPart(),
-				'page_namespace' => $namespace,
-			];
-
-			/**
-			 * Only check against the slot role when we are not using the main slot.
-			 * If we are using the main slot, then we only need to check that the page
-			 * exists rather than a specific slot within the page.
-			 * This ensures comparability with the pre MCR schema as long as only the
-			 * main slot is used.
-			 */
-			if ( $slotRole !== 'main' ) {
-				try {
-					$slotRoleId = $this->slotRoleStore->getId( $slotRole );
-				} catch ( NameTableAccessException $e ) {
-					// The slot role is not yet saved, nothing to retrieve.
-					continue;
-				}
-
-				$conditions['slot_role_id'] = $slotRoleId;
-				$slotJoinConds = [ 'slots' => [ 'INNER JOIN', 'page_latest=slot_revision_id' ] ];
-			}
-
-			$where[] = $db->makeList(
-				$conditions,
-				LIST_AND
-			);
-		}
-
-		if ( empty( $where ) ) {
-			// If we skipped all entity IDs, select nothing, not everything.
-			return [ '0=1', [] ];
-		}
-
-		return [ $db->makeList( $where, LIST_OR ), $slotJoinConds ];
 	}
 
 }
