@@ -160,13 +160,17 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		}
 
 		$new = isset( $params['new'] ) ? $params['new'] : null;
-		if ( is_null( $entityRevision ) ) {
-			if ( $baseRev > 0 ) {
-				$this->errorReporter->dieError(
-					'Could not find revision ' . $baseRev,
-					'nosuchrevid'
-				);
-			}
+		// If there is no entity revision or we have got an entity revision with no
+		// revision id (thanks mediainfo) then we must create said entity.
+		if ( is_null( $entityRevision ) || $entityRevision->getRevisionId() === 0 ) {
+			// If we are creating an entity, we are allowed a page base rev id, as the
+			// page can exist but our slot not.
+//			if ( $baseRev > 0 ) {
+//				$this->errorReporter->dieError(
+//					'Could not find revision ' . $baseRev,
+//					'nosuchrevid'
+//				);
+//			}
 
 			if ( !$this->isEntityCreationSupported() ) {
 				if ( !$entityId ) {
