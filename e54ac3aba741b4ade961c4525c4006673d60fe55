@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69f64444_e1a97504",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:20:11Z",
+      "side": 1,
+      "message": "I\u0027m not convinced by this rationale. Narrow public interfaces are good, but using php interfaces as extension points is problematic for versioning, see T193613. Base classes make less brittle extension points.\n\nOn the other hand, using composition (strategy pattern) here seems fine, even though perhaps it\u0027s not needed. I\u0027d recommend a base class anyway.",
+      "revId": "e54ac3aba741b4ade961c4525c4006673d60fe55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c1a1a03_796ec8e0",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQueryHelper.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:20:11Z",
+      "side": 1,
+      "message": "why not a method that just executes the select, instead of returning a complex structure in a brittle way?",
+      "revId": "e54ac3aba741b4ade961c4525c4006673d60fe55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
