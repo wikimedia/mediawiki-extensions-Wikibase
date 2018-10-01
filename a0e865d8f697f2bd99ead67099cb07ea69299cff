@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84a92f7b_4a75ee67",
+        "filename": "repo/tests/qunit/wikibase.EntityInitializer.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-01T13:51:52Z",
+      "side": 1,
+      "message": "Opinion: By now I\u0027d probably do this as `.yields( entity )` during the setup phase.",
+      "range": {
+        "startLine": 39,
+        "startChar": 18,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "a0e865d8f697f2bd99ead67099cb07ea69299cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0309d5f8_b0f5e437",
+        "filename": "repo/tests/qunit/wikibase.EntityInitializer.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-01T13:51:52Z",
+      "side": 1,
+      "message": "Opinion: this would be easier to grasp if it said `mockDeserializer.deserialize.calledWith( entity )` and we would not even need a dedicated variable for the `deserialize` method.",
+      "range": {
+        "startLine": 43,
+        "startChar": 14,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "a0e865d8f697f2bd99ead67099cb07ea69299cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1072b78_af36a64a",
+        "filename": "repo/tests/qunit/wikibase.EntityInitializer.tests.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-01T13:51:52Z",
+      "side": 1,
+      "message": "Moving this from the test to a (sinon sandbox) teardown would separate test and infrastructure more clearly, safe us from possible tears, and would future proof the test class for more tests to come.",
+      "range": {
+        "startLine": 45,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "a0e865d8f697f2bd99ead67099cb07ea69299cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
