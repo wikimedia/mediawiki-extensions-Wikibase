@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3291b1a3_2320a879",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:51:45Z",
+      "side": 0,
+      "message": "I this check is fine, it\u0027s the code that sets the $baseRev that should only do that if there indeed was a based revision of the entity (not just the page).\n\nSo. Can the client know that there was no base entity? How does it determined the base revision Id to send? Can we detect whether the client was sending a base revision ID, or just the ID of the latest revision of a page that does not jet have an entity attached?",
+      "revId": "e6acfd545c1d6b0f3b3497643c8d809a0fe58b37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

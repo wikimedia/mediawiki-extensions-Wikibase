@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eef9c3d9_50ce01b3",
+        "filename": "lib/includes/Store/NonExistingEntityRevision.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:51:45Z",
+      "side": 1,
+      "message": "Introducing this has implications. There is code that will assume that the entity exists if the EntityRevision exists.\n\nAlso, the EntityDocument clearly does exist. In what sense it this non-existign, then?\nPerhaps it\u0027s unsaved, or virtual, or automatic, or a placeholder or a dummy - but it clearly exists.",
+      "revId": "90392cd54dca20de37c41a688776db3ec422314d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e495473_6af25fe0",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:51:45Z",
+      "side": 1,
+      "message": "How many other places in the code are there that would now have to make this distinction?",
+      "revId": "90392cd54dca20de37c41a688776db3ec422314d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
