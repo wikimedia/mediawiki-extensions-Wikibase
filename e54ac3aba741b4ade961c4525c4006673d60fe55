@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "82ffedad_9e5b52dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-01T21:37:24Z",
+      "side": 1,
+      "message": "It would allow a third method to be added with a default implementation, without a breaking change. There is no backwards compatible way to add anything to an interface. When an interface is used as an extension point, it can never be extended, it becomes immutable. It can only be replaced. The the discussion on the ticket.",
+      "parentUuid": "b46c5c4d_18117ae6",
+      "revId": "e54ac3aba741b4ade961c4525c4006673d60fe55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c1a1a03_796ec8e0",
         "filename": "lib/includes/Store/Sql/PageTableEntityQueryHelper.php",
         "patchSetId": 9
