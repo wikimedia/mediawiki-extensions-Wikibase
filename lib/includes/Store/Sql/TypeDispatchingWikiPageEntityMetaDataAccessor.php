@@ -12,6 +12,8 @@ use Wikimedia\Assert\Assert;
  * Accessor that can dispatch to internal Accessors based on the entity type of IDs provided.
  * As the accessor includes batched access this class will batch entity IDs by type before
  * using the internal accessors.
+ * This is needed as the EntityMetaDataAccessor implements queries against the page table base
+ * on entity IDs that won't work for all entities.
  *
  * @author Addshore
  * @license GPL-2.0-or-later
