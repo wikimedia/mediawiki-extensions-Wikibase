@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityConditionGenerator;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -63,9 +64,13 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	}
 
 	private function getMetaDataLookup() {
+		$nsLookup = $this->getEntityNamespaceLookup();
 		return new WikiPageEntityMetaDataLookup(
-			$this->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getSlotRoleStore()
+			$nsLookup,
+			new EntityIdLocalPartPageTableEntityConditionGenerator(
+				$nsLookup,
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			)
 		);
 	}
 
