@@ -48,6 +48,21 @@ use Wikibase\Lib\Tests\MockRepository;
  */
 class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
+	public function setUp() {
+		parent::setUp();
+
+		// Remove any hooks from other extensions that might cause issues.
+		$this->mergeMwGlobalArrayValue(
+			'wgHooks',
+			[
+				'WikibaseClientOtherProjectsSidebar' => [
+					function () {
+					},
+				],
+			]
+		);
+	}
+
 	/**
 	 * @param string $globalId
 	 * @param string $group
