@@ -45,7 +45,6 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		array $result,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
-
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),

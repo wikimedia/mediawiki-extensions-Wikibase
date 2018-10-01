@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Storage\NameTableStore;
 use MediaWikiTestCase;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
@@ -14,12 +13,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * This test needs to be in repo, although the class is in lib as we can't alter
@@ -81,10 +80,20 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	/**
 	 * @return WikiPageEntityMetaDataLookup
 	 */
-	private function getWikiPageEntityMetaDataLookup() {
+	private function getWikiPageEntityMetaDataLookup( $nsLookup = null, $slotRoleStore = null ) {
+		if ( $nsLookup === null ) {
+			$nsLookup = $this->getEntityNamespaceLookup();
+		}
+		if ( $slotRoleStore === null ) {
+			$slotRoleStore = MediaWikiServices::getInstance()->getSlotRoleStore();
+		}
+
 		return new WikiPageEntityMetaDataLookup(
-			$this->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getSlotRoleStore()
+			$nsLookup,
+			new EntityIdLocalPartPageTableEntityQuery(
+				$nsLookup,
+				$slotRoleStore
+			)
 		);
 	}
 
@@ -98,10 +107,14 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 * @return WikiPageEntityMetaDataLookup
 	 */
 	private function getLookupWithLaggedConnection( $selectCount, $selectRowCount, $getConnectionCount ) {
+		$nsLookup = $this->getEntityNamespaceLookup();
 		$lookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
 			->setConstructorArgs( [
-				$this->getEntityNamespaceLookup(),
-				MediaWikiServices::getInstance()->getSlotRoleStore()
+				$nsLookup,
+				new EntityIdLocalPartPageTableEntityQuery(
+					$nsLookup,
+					MediaWikiServices::getInstance()->getSlotRoleStore()
+				),
 			] )
 			->setMethods( [ 'getConnection' ] )
 			->getMock();
@@ -308,10 +321,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	public function testLoadRevisionInformation_unknownNamespace() {
 		$entityId = $this->data[0]->getEntity()->getId();
 		$namespaceLookup = new EntityNamespaceLookup( [] );
-		$metaDataLookup = new WikiPageEntityMetaDataLookup(
-			$namespaceLookup,
-			MediaWikiServices::getInstance()->getSlotRoleStore()
-		);
+		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
 
 		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
 		$result = $metaDataLookup->loadRevisionInformation(
@@ -324,12 +334,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationThrowsException() {
-		$lookup = new WikiPageEntityMetaDataLookup(
-			$this->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getSlotRoleStore(),
-			false,
-			''
-		);
+		$lookup = $this->getWikiPageEntityMetaDataLookup();
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -340,12 +345,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationByRevisionIdThrowsException() {
-		$lookup = new WikiPageEntityMetaDataLookup(
-			$this->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getSlotRoleStore(),
-			false,
-			''
-		);
+		$lookup = $this->getWikiPageEntityMetaDataLookup();
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -360,9 +360,14 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$revision = $this->data[0];
 		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
 
+		$nsLookup = $this->getEntityNamespaceLookup();
+
 		$lookup = new WikiPageEntityMetaDataLookup(
-			$this->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getSlotRoleStore(),
+			$nsLookup,
+			new EntityIdLocalPartPageTableEntityQuery(
+				$nsLookup,
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			),
 			false,
 			'foo'
 		);
@@ -387,9 +392,13 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$revision = $this->data[0];
 		$unprefixedId = $revision->getEntity()->getId()->getSerialization();
 
+		$nsLookup = $this->getEntityNamespaceLookup();
 		$lookup = new WikiPageEntityMetaDataLookup(
-			$this->getEntityNamespaceLookup(),
-			MediaWikiServices::getInstance()->getSlotRoleStore(),
+			$nsLookup,
+			new EntityIdLocalPartPageTableEntityQuery(
+				$nsLookup,
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			),
 			false,
 			'foo'
 		);
@@ -474,10 +483,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	public function testLoadLatestRevisionIds_unknownNamespace() {
 		$entityId = $this->data[0]->getEntity()->getId();
 		$namespaceLookup = new EntityNamespaceLookup( [] );
-		$metaDataLookup = new WikiPageEntityMetaDataLookup(
-			$namespaceLookup,
-			MediaWikiServices::getInstance()->getSlotRoleStore()
-		);
+		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
 
 		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
 		$result = $metaDataLookup->loadLatestRevisionIds(
@@ -499,59 +505,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			);
 
 		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
-	}
-
-	/**
-	 * @param string $type
-	 * @param string $localPart
-	 * @return EntityId
-	 */
-	private function getMockEntityId( $type, $localPart ) {
-		$id = $this->prophesize( EntityId::class );
-		$id->getLocalPart()->willReturn( $localPart );
-		$id->getEntityType()->willReturn( $type );
-		return $id->reveal();
-	}
-
-	public function testGetWhereHasConditionsPerEntityId() {
-		$namespaceLookup = new EntityNamespaceLookup(
-			[ 'type1' => 1, 'type2' => 2 ],
-			[ 'type1' => 'main', 'type2' => 'second' ]
-		);
-
-		$roleStore = $slotRoleStore = $this->prophesize( NameTableStore::class );
-		$roleStore->getId( 'second' )->willReturn( 2 );
-
-		$metaDataLookup = new WikiPageEntityMetaDataLookup(
-			$namespaceLookup,
-			$roleStore->reveal()
-		);
-
-		// We only use the DB for makeList, so we can just use any DB.
-		$db = $this->db;
-
-		$metaDataLookup = TestingAccessWrapper::newFromObject( $metaDataLookup );
-
-		$where = $metaDataLookup->getWhere(
-			[
-				$this->getMockEntityId( 'type1', 'Q1' ),
-				$this->getMockEntityId( 'type2', 'Q2' ),
-			],
-			$db
-		);
-
-		$this->assertEquals(
-			[
-				"(page_title = 'Q1' AND page_namespace = '1') OR (page_title = 'Q2' AND page_namespace = '2' AND slot_role_id = '2')",
-				[
-					'slots' => [
-						'INNER JOIN',
-						'page_latest=slot_revision_id',
-					],
-				]
-			],
-			$where
-		);
 	}
 
 }
