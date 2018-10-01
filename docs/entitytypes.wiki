@@ -63,6 +63,9 @@ string key is associated with a function having the dedicated signature:
 : a callable that returns an EntityHandler instance supporting this entity type
 ; entity-factory-callback (repo only)
 : a callback for creating an empty entity of this type
+; entity-revision-lookup-factory-callback (repo only)
+: a callback for creating an EntityRevisionLookup for and entity of this type, with first and only argument
+  being the default lookup, which will be an instance of EntityRevisionLookup.
 ; entity-metadata-accessor-callback
 : a callback for creating a WikiPageEntityMetaDataAccessor for an entity of this type, with the arguments
   being the wiki database name (string|false), and the repository name (string)
