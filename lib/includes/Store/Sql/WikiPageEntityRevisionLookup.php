@@ -154,8 +154,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
-	 * @todo This method / entityMetaDataAccessor still needs to be fixed for MCR.
-	 *
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
