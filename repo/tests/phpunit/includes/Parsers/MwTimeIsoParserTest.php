@@ -39,15 +39,15 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 	protected function setUp() {
 		parent::setUp();
 
-		// We don't have control over object instantiation, but
-		// need this in order to test with some staged messages.
-		Language::$mLangObjCache['es'] = $this->getLanguage();
-	}
+		if ( class_exists( LanguageFactory::class ) ) {
+			$stub = $this->createMock( LanguageFactory::class );
 
-	protected function tearDown() {
-		parent::tearDown();
-
-		unset( Language::$mLangObjCache['es'] );
+			$stub->method( 'get' )->willReturn( $this->getLanguage() );
+			$this->setService( 'LanguageFactory', $stub );
+		} else {
+			// Backward compatibility until LanguageFactory code lands in core
+			Language::$mLangObjCache['es'] = $this->getLanguage();
+		}
 	}
 
 	private function getLanguage() {
