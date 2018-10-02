@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07556fb3_4c1948d6",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-10-02T03:47:50Z",
+      "side": 1,
+      "message": "Is this meant to override the \u0027slots\u0027 element rather than append?",
+      "revId": "def6244e83f93a196278ee96bbc5cbc2d484e0dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
