@@ -51,6 +51,24 @@
       "revId": "10473968e1e281074d5b57fbfab1bbc5e7b2cfaf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc521443_517728a2",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-02T07:12:06Z",
+      "side": 1,
+      "message": "Well, it should be tested via saveEntity and saveRedirect, because this is part of the contract of saveEntity and saveRedirect: EDIT_NEW and EDIT_UPDATE should be enforced by these methods, according to the existence of the entity, not the page. Splitting the flag munging into a separate class would not change that. Well, then you could mock that class, but that would be pointless.\n\nThe point is that the tests should assert that the public interface matches the contract. It should not care about the behavior of the implementation.",
+      "parentUuid": "0cfd2571_e939a65f",
+      "revId": "10473968e1e281074d5b57fbfab1bbc5e7b2cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
