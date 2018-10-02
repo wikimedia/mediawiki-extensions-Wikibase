@@ -16,6 +16,24 @@
       "revId": "e6acfd545c1d6b0f3b3497643c8d809a0fe58b37",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9437ec1_c08cfbf2",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-02T06:45:33Z",
+      "side": 0,
+      "message": "baserev may also be needed here.\n\nIf we are telling the API to set a label on a mediainfo entity, and since we loaded the page someone else has done so, we have an edit conflict situation if we don\u0027t use the baserevid?\n\nThus we want to be able to pass baserevid all the way down even when we don\u0027t think the entity already exists, in case it does now.\n\nOtherwise we will automatically load the latest entity revision and not detect a conflict.",
+      "parentUuid": "3291b1a3_2320a879",
+      "revId": "e6acfd545c1d6b0f3b3497643c8d809a0fe58b37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
