@@ -33,6 +33,24 @@
       "revId": "10473968e1e281074d5b57fbfab1bbc5e7b2cfaf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cfd2571_e939a65f",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-02T06:30:29Z",
+      "side": 1,
+      "message": "The public interface is horrible, this would just have to be tested via saveEntity and saveRedirect.\nI would much rather split this small bit of code out into its down class and test via that route, and make this a \"public interface.\"\nI think having something seperate to handle the flags could make sense, although these are still pretty tangled up in other places.",
+      "parentUuid": "c67f7861_cb9f748f",
+      "revId": "10473968e1e281074d5b57fbfab1bbc5e7b2cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
