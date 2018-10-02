@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71cf58a6_ebbb43cf",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-10-02T19:00:42Z",
+      "side": 1,
+      "message": "This needs to go in order of being added, I\u0027m not sure if anything unexpected happens if you don\u0027t but it\u0027s pretty much the standard in core.",
+      "range": {
+        "startLine": 328,
+        "startChar": 2,
+        "endLine": 328,
+        "endChar": 32
+      },
+      "revId": "2e0f5fa5065d42cd12bd1321bc84513ac2cf0e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d2e1450_c68484de",
+        "filename": "repo/sql/DropTermIndices.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-10-02T19:00:42Z",
+      "side": 1,
+      "message": "Optional: Name of the file is CamelCase, in core it\u0027s snake_case, in Wikibase it\u0027s mixed. I prefer snake_case to follow core but meh :D",
+      "revId": "2e0f5fa5065d42cd12bd1321bc84513ac2cf0e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
