@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "effb821f_f7625e64",
+        "filename": "lib/tests/phpunit/Store/RevisionBasedEntityLookupTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-02T08:33:03Z",
+      "side": 1,
+      "message": "??",
+      "revId": "3ebb66257801ad0f4acfb84ca523627e00dccf30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
