@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use Language;
+use LanguageFactory;
 use PHPUnit4And6Compat;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
@@ -39,15 +40,23 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 	protected function setUp() {
 		parent::setUp();
 
-		// We don't have control over object instantiation, but
-		// need this in order to test with some staged messages.
-		Language::$mLangObjCache['es'] = $this->getLanguage();
+		if ( class_exists( LanguageFactory::class ) ) {
+			$stub = $this->createMock( LanguageFactory::class );
+			$stub->method( 'get' )->willReturn( $this->getLanguage() );
+			$this->setService( 'LanguageFactory', $stub );
+		} else {
+			// Back-compat code, remove once LanguageFactory lands
+			Language::$mLangObjCache['es'] = $this->getLanguage();
+		}
 	}
 
 	protected function tearDown() {
-		parent::tearDown();
+		if ( !class_exists( LanguageFactory::class ) ) {
+			// Back-compat code, remove once LanguageFactory lands
+			unset( Language::$mLangObjCache['es'] );
+		}
 
-		unset( Language::$mLangObjCache['es'] );
+		parent::tearDown();
 	}
 
 	private function getLanguage() {
