@@ -34,6 +34,24 @@
       "revId": "e6acfd545c1d6b0f3b3497643c8d809a0fe58b37",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "422298d5_24587e23",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-02T07:27:24Z",
+      "side": 0,
+      "message": "\u003e If we are telling the API to set a label on a mediainfo entity, and since we loaded the page someone else has done so, we have an edit conflict situation if we don\u0027t use the baserevid?\n\nFor pages, this is solved by using $baseRevId \u003d 0 or EDIT_NEW to indicate that the edit should fail if the thing we are trying to created was created. In the context of an entity edit we can do the same. We could even still try to patch the edit in, but that\u0027s not something this code here should be concerned with.\n\nAnyway - if the client \"things\" the entity doesn\u0027t exist and should be created, it should signal this to the API. It could set the \"new\" parameter, and/or pass baseRevisionId \u003d 0.  \n\nI suppose the client code currently assumes that the entity exists if the page exists.",
+      "parentUuid": "a9437ec1_c08cfbf2",
+      "revId": "e6acfd545c1d6b0f3b3497643c8d809a0fe58b37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
