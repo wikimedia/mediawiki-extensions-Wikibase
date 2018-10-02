@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "83037b5a_e5c22c70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-02T07:15:47Z",
+      "side": 1,
+      "message": "Even with extensions that follow releases we have a policy to stay B/C for at least one release.",
+      "parentUuid": "56705354_c4e8978c",
+      "revId": "e54ac3aba741b4ade961c4525c4006673d60fe55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c1a1a03_796ec8e0",
         "filename": "lib/includes/Store/Sql/PageTableEntityQueryHelper.php",
         "patchSetId": 9
