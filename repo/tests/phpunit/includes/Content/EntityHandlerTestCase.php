@@ -12,6 +12,7 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use MediaWiki\Storage\PageIdentityValue;
+use MediaWiki\Storage\RevisionRecord;
 use MWException;
 use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;
@@ -604,9 +605,15 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$page = $this->getMockBuilder( WikiPage::class )
 			->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
 			->getMock();
+		$revisionRecord = $this->getMockBuilder( RevisionRecord::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$revisionRecord->method( 'hasSlot' )
+			->willReturn( false );
 
 		$page->method( 'getContent' )->willReturn( $this->getTestContent() );
 		$page->method( 'getTitle' )->willReturn( $title );
+		$page->method( 'getRevisionRecord' )->willReturn( $revisionRecord );
 
 		return $page;
 	}
