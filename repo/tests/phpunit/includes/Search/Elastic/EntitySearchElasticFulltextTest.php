@@ -83,6 +83,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
+		$this->markTestSkipped( 'T205958 testing' );
 		$this->setMwGlobals( [
 			'wgCirrusSearchQueryStringMaxDeterminizedStates' => 500,
 			'wgCirrusSearchElasticQuirks' => [],
