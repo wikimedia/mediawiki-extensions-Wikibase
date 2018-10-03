@@ -215,6 +215,10 @@ namespace CirrusSearch\Query {
 	class SimpleKeywordFeature {
 
 	}
+	class MoreLikeFeature {
+		protected function doApply( $context, $key, $value, $quotedValue, $negated ) {
+		}
+	}
 }
 
 namespace CirrusSearch\Query\Builder {

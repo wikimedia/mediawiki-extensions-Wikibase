@@ -62,6 +62,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\Hooks\\UpdateRepoHookHandlers' => __DIR__ . '/includes/Hooks/UpdateRepoHookHandlers.php',
 	'Wikibase\\Client\\LangLinkHandler' => __DIR__ . '/includes/LangLinkHandler.php',
 	'Wikibase\\Client\\Modules\\SiteModule' => __DIR__ . '/includes/Modules/SiteModule.php',
+	'Wikibase\\Client\\MoreLikeWikibase' => __DIR__ . '/includes/MoreLikeWikibase.php',
 	'Wikibase\\Client\\NamespaceChecker' => __DIR__ . '/includes/NamespaceChecker.php',
 	'Wikibase\\Client\\Notifications\\PageConnectionPresentationModel' => __DIR__ . '/includes/Notifications/PageConnectionPresentationModel.php',
 	'Wikibase\\Client\\OtherProjectsSitesGenerator' => __DIR__ . '/includes/OtherProjectsSitesGenerator.php',
