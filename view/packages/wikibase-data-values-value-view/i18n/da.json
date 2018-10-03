@@ -11,6 +11,7 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering af værdier af $1 understøttes ikke endnu.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering af værdier for datatypen $1 understøttes ikke endnu.",
 	"valueview-expert-emptyvalue-empty": "tom",
+	"valueview-expert-globecoordinateinput-customprecision": "speciel ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
 	"valueview-expert-timevalue-calendar-julian": "Juliansk",
 	"valueview-expert-timeinput-precision": "Præcision:",

@@ -1,16 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Les Meloures"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "eidel",
-	"valueview-expert-globecoordinateinput-precision": "Präzisioun:",
+	"valueview-expert-globecoordinateinput-precision": "Prezisioun:",
 	"valueview-expert-globecoordinateinput-nullprecision": "net uginn",
 	"valueview-expert-globecoordinateinput-customprecision": "Spezial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorianesch",
 	"valueview-expert-timevalue-calendar-julian": "Julianesch",
-	"valueview-expert-timeinput-precision": "Präzisioun:",
+	"valueview-expert-timeinput-precision": "Prezisioun:",
 	"valueview-expert-timeinput-calendar": "Kalenner:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Sprooch (obligatoresch)",
