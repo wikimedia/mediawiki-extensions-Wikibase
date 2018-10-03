@@ -319,6 +319,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Můžete jej upravit vložením <nowiki>{{#babel: }}</nowiki> do {{GENDER:$1|své}} [[Special:MyPage|uživatelské stránky]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, konverze z $3 - $4",
 	"wikibase-api-unresolved-redirect": "Zadané ID entity odkazuje na přesměrování, které v tomto kontextu není podporováno.",
+	"wikibase-api-no-external-page": "Externí klientský web „$1“ neposkytl informace o stránce „$2“.",
 	"wikibase-api-no-such-sitelink": "Při editaci odznaku nebyl odkaz na článek „$1“ nalezen.",
 	"wikibase-api-target-not-empty": "Přesměrování lze založit jen z prázdné nebo smazané entity.",
 	"wikibase-api-target-is-redirect": "Cíl přesměrování nesmí být sám přesměrováním.",

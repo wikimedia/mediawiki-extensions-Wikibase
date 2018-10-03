@@ -283,6 +283,7 @@
 	"wikibase-redirectentity-toid": "Auðkennið sem á að endurbeina til",
 	"wikibase-redirectentity-submit": "Endurbeina",
 	"wikibase-api-unresolved-redirect": "Tilgreint auðkenni einingar bendir á tilvísun, sem er ekki stutt í þessu samhengi.",
+	"wikibase-api-no-external-page": "Biðlarinn gaf engar upplýsingar um síðuna.",
 	"wikibase-api-no-such-sitelink": "Fann ekki vefsvæðistengil á „$1“ þegar merki var bætt við.",
 	"wikibase-api-target-not-empty": "Aðeins er hægt að búa til tilvísun ofan á tóma eða eydda einingu.",
 	"wikibase-self-conflict-patched": "Breytingunni þinni hefur verið bætt við nýjustu útgáfu, sem hefur hunsað sumar millibreytingar þínar.",

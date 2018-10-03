@@ -35,9 +35,16 @@
 	"wikibase-unconnectedpages-submit": "'Ndruche le pàggene",
 	"pageswithbadges": "Pàggene cu le badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
+	"wikibase-pageswithbadges-submit": "'Ndruche le pàggene",
+	"entityusage": "Ause de l'entità",
 	"wikibase-entityusage-entity": "Entità:",
 	"wikibase-entityusage-submit": "'Ndruche le pàggene",
 	"wikibase-pageinfo-entity-id": "ID d'a vôsce de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ninde",
+	"wikibase-pageinfo-entity-usage-T": "Titole",
+	"wikibase-pageinfo-entity-usage-C": "Quacche dichiarazzione",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Dichiarazzione: $1",
+	"wikibase-pageinfo-entity-usage-X": "Tutte le date de l'entità",
+	"wikibase-pageinfo-entity-usage-O": "Otre (dichiarazziune)",
 	"wikibase-otherprojects": "Jndr'à otre pruggette"
 }

@@ -156,6 +156,7 @@
 	"wikibase-entitydata-unsupported-format": "Datowy format $1 so přez tutón wužiwarski powjerch njepodpěruje.",
 	"wikibase-entitydata-title": "Entitowe daty",
 	"wikibase-entitydata-text": "Tuta strona dodawa wotkazany datowy powjerch za hódnoty entitow. Prošu podaj ID w URL, wužiwajo syntaksu podstrony.",
+	"wikibase-api-no-external-page": "Eksterne websydło njeje žane informacije k dispoziciji stajiło.",
 	"wikibase-self-conflict-patched": "Twoja změna je so do najnowšeje wersije porjedźiła, přepisujo někotre z twojich mjeztymnych změnow.",
 	"wikibase-conflict-patched": "Twoja změna je so do najnowšeje wersije zadźěłała.",
 	"wikibase-restoreold": "wróćo stajić",

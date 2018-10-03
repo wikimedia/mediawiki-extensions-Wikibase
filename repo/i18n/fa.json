@@ -322,6 +322,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "با قرار دادن <nowiki>{{#babel: }}</nowiki> در {{GENDER:$1|قسمت}} [[Special:MyPage|صفحه کاربریتان]] می‌توانید این را ویرایش کنید.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1- $2 ، تبدیل شده از  $3 - $4",
 	"wikibase-api-unresolved-redirect": "این شناسه موجودیت به یک تغییر مسیر منتهی می‌شود. در اینجا امکان‌پذیر نیست.",
+	"wikibase-api-no-external-page": "وب‌گاه مشتری بیرونی صفحهٔ اطلاعات را ارائه نکرده‌است.",
 	"wikibase-api-no-such-entity": "نمی‌توان موجودیت با شناسه «$1» را یافت.",
 	"wikibase-api-no-such-sitelink": "در هنگام ویرایش نشان‌ها پیوند '$1' یافت نشد.",
 	"wikibase-api-target-not-empty": "تغییر مسیر فقط می‌تواند در بالای موجودیت (جوهره) خالی ایجاد شود.",

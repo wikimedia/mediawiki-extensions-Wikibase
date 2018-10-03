@@ -72,6 +72,7 @@
 	"wikibase-mergeitems-submit": "Ipagsama ang mga bagay",
 	"wikibase-entitieswithoutlabel-label-language": "Kodigong pang-wika:",
 	"special-entitypage": "Pinagmulang pagina",
+	"wikibase-api-no-external-page": "Hindi nagbigay ng pahina ng impormasyon ang pook ng panlabas na kliyente.",
 	"wikibase-restoreold": "itakdang muli",
 	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]"
 }

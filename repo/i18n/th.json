@@ -75,6 +75,7 @@
 	"wikibase-history-title-with-label": "ประวัติการปรับปรุงของ \"$2\" ($1)",
 	"wikibase-listproperties-datatype": "ชนิดของข้อมูล:",
 	"wikibase-entitieswithoutlabel-label-language": "รหัสภาษา:",
+	"wikibase-api-no-external-page": "ไซต์ไคลเอนต์ภายนอก \"$1\" ไม่ได้จัดเตรียมข้อมูลหน้าสำหรับหน้า \"$2\"",
 	"wikibase-entity-summary-restore": "กู้คืนรุ่น $3 ซึ่ง [[Special:Contributions/$4|{{GENDER:$4|$4}}]] สร้าง",
 	"wikibase-entity-summary-undo": "ย้อนรุ่น $3 ซึ่ง [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|คุย]]) ได้สร้างไว้",
 	"wikibase-listdatatypes-wikibase-item-head": "สิ่งหนึ่ง",

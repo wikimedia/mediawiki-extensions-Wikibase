@@ -275,6 +275,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "A listát úgy {{GENDER:$1|szerkesztheted}}, hogy egy <nowiki>{{#babel: }}</nowiki> függvényt helyezel el a [[Special:MyPage|szerkesztői lapodon]].",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, átalakítva $3 – $4 nyelvről",
+	"wikibase-api-no-external-page": "A(z) „$1” külső kliensoldal nem szolgáltatott elég információt a(z) „$2” lap számára.",
 	"wikibase-api-target-is-redirect": "Az átirányítás célja nem lehet maga is átirányítás.",
 	"wikibase-self-conflict-patched": "A szerkesztésedet végrehajtottuk az utolsó változaton, felülírva a saját közbenső változtatásaidat. (Ez leginkább akkor fordul elő, ha egyszerre több helyről szerkesztesz.)",
 	"wikibase-conflict-patched": "A szerkesztésed sikeresen végre lett hajtva.",

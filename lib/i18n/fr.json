@@ -165,7 +165,7 @@
 	"wikibase-entity-summary-wblinktitles-connect": "Lien de langue ajouté pour connecter les pages",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Affirmation ajoutée|Affirmations ajoutées}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Valeur spéciale «&nbsp;aucune valeur&nbsp;» ajoutée|Valeurs spéciales «&nbsp;aucune valeur&nbsp;» ajoutées}}",
-	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Affirmation ajoutée : «&nbsp;valeur inconnue&nbsp;»|Affirmations ajoutées : «&nbsp;valeur inconnue&nbsp;»}}",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Affirmation crée|Affirmations créées}}",
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Affirmation ajoutée|A\nffirmation ajoutée}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "{{PLURAL:$1|affirmation modifiée|affirmations modifiées}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Affirmation supprimée|Affirmations supprimées}}",

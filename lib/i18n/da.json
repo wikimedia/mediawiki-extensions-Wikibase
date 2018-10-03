@@ -34,6 +34,7 @@
 	"wikibase-quantitydetails-lowerbound": "Nedre grænse",
 	"wikibase-quantitydetails-unit": "Enhed",
 	"wikibase-timedetails-time": "Tidspunkt",
+	"wikibase-timedetails-isotime": "Tidsstempel",
 	"wikibase-timedetails-timezone": "Tidszone",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-timedetails-precision": "Præcision",

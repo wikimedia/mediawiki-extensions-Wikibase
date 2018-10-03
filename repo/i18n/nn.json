@@ -224,6 +224,7 @@
 	"special-mylanguagefallbackchain": "Kjeda mi av ettervalsspråk",
 	"wikibase-mylanguagefallbackchain-text": "Under er kjeda av ettervalsspråk som vert nytta for å visa merkelappane til einingar vist.",
 	"wikibase-mylanguagefallbackchain-babel": "Du kan endra henne ved å leggja til <nowiki>{{#babel: }}</nowiki> på [[Special:MyPage|brukarsida]] {{GENDER:$1|di}}.",
+	"wikibase-api-no-external-page": "Dnt eksterne klientnettstaden sendte ikkje tilbake sideinformasjon.",
 	"wikibase-self-conflict-patched": "Endringa di vart bøtt inn i den nyaste versjonen, og overstyrte nokre av dine eigne mellomliggjande endringar.",
 	"wikibase-conflict-patched": "Endringa di vart bøtt inn i den nyaste versjonen.",
 	"wikibase-restoreold": "attopprett",

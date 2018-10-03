@@ -38,5 +38,6 @@
 	"pageswithbadges": "Pagini kun insigni",
 	"wikibase-pageinfo-entity-id": "Identifiko dil artiklo en {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
-	"wikibase-otherprojects": "En altra projeti"
+	"wikibase-otherprojects": "En altra projeti",
+	"notification-link-text-view-item": "{{GENDER:$1|Vidar}} detalo"
 }

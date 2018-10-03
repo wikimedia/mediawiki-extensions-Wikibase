@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Paulu"
+			"Paulu",
+			"Jumpy01"
 		]
 	},
 	"wikibase-dataitem": "Elementu dati",
-	"wikibase-rc-wikibase-edit-title": "Quessa hè una mudifica nantu à Wikidata"
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Quessa hè una mudifica nantu à {{WBREPONAME}}"
 }

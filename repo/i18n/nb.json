@@ -323,6 +323,7 @@
 	"wikibase-api-illegal-entity-remove": "Entiteter kan ikke slettes ved å gi en toppnivå-<var>remove</var>-nøkkel.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Du må angi enten en entitets-<var>id</var>, eller kombinasjonen <var>site</var> og <var>page</var>, men ikke begge.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "Angi enten elementets «id» eller et par med «site» og «title» for den tilhørende siden",
+	"wikibase-api-no-external-page": "Det eksterne klientnettstedet sendte ikke tilbake sideinformasjon.",
 	"wikibase-api-no-such-entity": "Finner ikke noen entitet med ID-en «$1».",
 	"wikibase-api-no-such-sitelink": "Kunne ikke finne en nettstedlenke til «$1» under forsøk på å redigere merker.",
 	"wikibase-api-not-recognized-datatype": "En datatype var forventet, men manglet eller ble ikke gjenkjent.",

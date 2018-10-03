@@ -133,6 +133,7 @@
 	"wikibase-entitydata-unsupported-format": "Datowy format $1 njepódpěra se pśez toś ten wužywarski pówjerch.",
 	"wikibase-entitydata-title": "Entitowe daty",
 	"wikibase-entitydata-text": "Toś ten bok dodawa wótkazany datowy pówjerch za gódnoty entitow. Pšosym pódaj ID w URL, z tym až wužywaš syntaksu pódboka.",
+	"wikibase-api-no-external-page": "Eksterne websedło njejo žedne bokowe informacije k dispoziciji stajiło.",
 	"wikibase-self-conflict-patched": "Twója změna jo se do nejnowšeje wersije pópšawiła, z tym až pśepisujo někotare z twójich mjazycasnych změnow.",
 	"wikibase-conflict-patched": "Twója změna jo se do nejnowšeje wersije zaźěłała.",
 	"wikibase-restoreold": "slědk stajiś",

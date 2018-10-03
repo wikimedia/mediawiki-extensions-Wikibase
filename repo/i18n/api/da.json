@@ -4,5 +4,7 @@
 			"Saederup92"
 		]
 	},
+	"apihelp-query+wbsearch-param-search": "Søg efter denne tekst.",
+	"apihelp-query+wbsearch-param-language": "Søg på dette sprog.",
 	"apihelp-wbsetdescription-param-language": "Beskrivelsens sprog"
 }

@@ -9,7 +9,7 @@
 	"wikibase-add": "adjuntar",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiketo",
 	"wikibase-entitytermsforlanguagelistview-language": "Linguo",
-	"wikibase-label-empty": "Nula notico definita",
+	"wikibase-label-empty": "Nula etiketo definita",
 	"wikibase-description-empty": "Nula deskripto definita",
 	"wikibase-content-language-edit-label": "Linguo:",
 	"wikibase-diffview-label": "etiketo",
@@ -19,10 +19,15 @@
 	"wikibase-undo-title": "Desfacez la redakto a(d) \"$1\"",
 	"wikibase-statementview-rank-normal": "Normala rango",
 	"wikibase-itembytitle-lookup-page": "Pagino:",
+	"wikibase-itemdisambiguation-lookup-language": "Linguala kodexo:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiketo:",
 	"wikibase-newitem-site": "URL dil unesma pagino ligita",
 	"wikibase-newitem-no-external-page": "La pagino \"$2\" ne trovesis en \"$1\".",
 	"wikibase-newentity-language": "Linguo:",
 	"wikibase-newentity-label": "Etiketo:",
-	"wikibase-setlabel-label": "Etiketo:"
+	"wikibase-setlabel-label": "Etiketo:",
+	"wikibase-modifyterm-language": "Linguala kodexo:",
+	"special-entitieswithoutlabel": "Enti sen etiketo",
+	"wikibase-entitieswithoutlabel-label-language": "Linguala kodexo:",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" Ne esas valida linguala kodexo."
 }

@@ -27,7 +27,8 @@
 			"凡人丶",
 			"Wxyveronica",
 			"Hanyanbo98",
-			"夢蝶葬花"
+			"夢蝶葬花",
+			"A Chinese Wikipedian"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -332,6 +333,7 @@
 	"wikibase-redirect-no-such-entity": "找不到概念：$1",
 	"wikibase-redirect-cant-load-entity-content": "无法访问内容，可能会删除更改。",
 	"wikibase-redirect-target-is-incompatible": "不兼容的实体类型",
+	"wikibase-redirect-target-is-redirect": "实体$1是重定向。",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook已停止重定向创建",
 	"wikibase-redirect-cant-redirect": "技术问题导致重定向创建失败",
 	"wikibase-redirect-permissiondenied": "没有权限",
@@ -345,6 +347,7 @@
 	"wikibase-api-illegal-entity-remove": "实体不能通过提供顶级<var>remove</var>关键词来删除。",
 	"wikibase-api-illegal-id-or-site-page-selector": "您需要提供实体<var>id</var>，或是<var>site</var>和<var>page</var>组合之一，但不是两个都需要。",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "为对应页面提供项“ids”，或成对提供“sites”和“titles”",
+	"wikibase-api-no-external-page": "外部客户端网站“$1”未提供页面“$2”的页面信息。",
 	"wikibase-api-no-such-entity": "找不到任何ID为“$1”的实体。",
 	"wikibase-api-no-such-sitelink": "尝试编辑徽章时无法找到至“$1”的网站链接。",
 	"wikibase-api-not-recognized-datatype": "应有数据类型，但实际缺少或未受认可。",

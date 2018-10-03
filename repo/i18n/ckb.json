@@ -98,6 +98,7 @@
 	"wikibase-entitieswithoutlabel-label-type": "جۆر:",
 	"wikibase-entitieswithoutlabel-submit": "دۆزینەوە",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» کۆدێکی زمانی دروست نییە.",
+	"wikibase-api-no-external-page": "پێگەی پەیڕەی دەرەکی زانیاریی پەڕەی دابین نەکردووە.",
 	"wikibase-restoreold": "گەڕاندنەوە",
 	"wikibase-entity-summary-restore": "گەڕاندنەوەی پێداچوونەوەی $3 لە لایەن [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-noentity-createone": "ھەروەھا دەتوانی [[$1|یەکی نوێ دروست بکەی]].",

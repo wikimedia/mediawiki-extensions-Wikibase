@@ -318,6 +318,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "{{GENDER:$1|자신의}} [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, $3 - $4에서 변환됨",
 	"wikibase-api-illegal-entity-remove": "최상위 <var>remove</var> 키를 지정하여 엔티티를 삭제할 수 없습니다.",
+	"wikibase-api-no-external-page": "외부 클라이언트 사이트 \"$1\"은(는) \"$2\" 문서에 대한 페이지 정보를 제공하지 않았습니다.",
 	"wikibase-api-no-such-entity": "ID \"$1\"의 엔티티를 찾을 수 없습니다.",
 	"wikibase-api-no-such-sitelink": "배지 편집을 시도할 때 \"$1\"에 대한 사이트링크를 찾을 수 없었습니다.",
 	"wikibase-api-not-recognized-datatype": "자료형을 예측했으나 존재하지 않거나 인식하지 못했습니다.",

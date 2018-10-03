@@ -320,6 +320,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "U kunt deze bewerken door <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, omgezet van $3 - $4",
 	"wikibase-api-unresolved-redirect": "De gegeven entiteits-ID verwijst naar een doorverwijzing, wat niet ondersteund wordt in deze context.",
+	"wikibase-api-no-external-page": "De externe clientsite '$1' heeft geen paginagegevens verstrekt voor '$2'.",
 	"wikibase-api-no-such-entity": "Het was niet mogelijk een entiteit met ID \"$1\" te vinden.",
 	"wikibase-api-no-such-sitelink": "Een sitekoppeling naar \"$1\" kon niet gevonden worden tijdens het bewerken van badges.",
 	"wikibase-api-target-not-empty": "De doorverwijzing kan alleen worden aangemaakt op een lege of verwijderde entiteit.",

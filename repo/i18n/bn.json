@@ -262,6 +262,7 @@
 	"special-mylanguagefallbackchain": "আমার ভাষা ফলব্যাক চেইন",
 	"wikibase-mylanguagefallbackchain-babel": "{{GENDER:$1|আপনি}} আপনার [[Special:MyPage|ব্যবহারকারী পাতায়]]  <nowiki>{{#babel: }}</nowiki> লাগানোর দ্বারা এটি সম্পাদনা করতে পারেন।",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, $3 - $4 থেকে রূপান্তরিত",
+	"wikibase-api-no-external-page": "বহিঃস্থ ক্লায়েন্ট সাইট পাতার তথ্য প্রদান করছে না",
 	"wikibase-conflict-patched": "আপনার সম্পাদনা সর্বশেষ সংস্করণে প্রবেশ করানো হয়েছে।",
 	"wikibase-restoreold": "পুনরুদ্ধার",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] কর্তৃক $3 নং সংশোধনটি পুনরুদ্ধার করা হয়েছে",

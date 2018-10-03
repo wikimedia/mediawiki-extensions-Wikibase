@@ -149,6 +149,7 @@
 	"wikibase-entitieswithoutlabel-label-type": "Vrsta:",
 	"wikibase-entitieswithoutlabel-submit": "Nađi",
 	"special-entitydata": "Podatci o jedinici",
+	"wikibase-api-no-external-page": "Na klijentu \"$1\" nema informacija o stranici \"$2\".",
 	"wikibase-api-no-such-sitelink": "Nije moguće pronaći takve poveznice",
 	"wikibase-restoreold": "vrati",
 	"wikibase-entity-summary-undo": "Uklonjena izmjena $3 [[Special:Contributions/$4|{{GENDER:$4|suradnika $4|suradnice $4}}]] ([[User talk:$4|razgovor]])",

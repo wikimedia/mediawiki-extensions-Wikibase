@@ -343,6 +343,7 @@
 	"wikibase-api-illegal-entity-remove": "الكيانات لا يمكن حذفها بواسطة توفير مفتاح <var>remove</var> عالي المستوى.",
 	"wikibase-api-illegal-id-or-site-page-selector": "تحتاج إلى تقديم أي كيان <var>id</var>، أو موقع <var>site</var> و صفحة <var>page</var>، ولكن ليس على حد سواء.",
 	"wikibase-api-illegal-ids-or-sites-titles-selector": "إما أن توفر \"ids\" للعناصر أو أزواج \"sites\" و \"titles\" للصفحة المناظرة",
+	"wikibase-api-no-external-page": "لم يوفر موقع العميل الخارجي \"$1\" معلومات الصفحة لصفحة \"$2\".",
 	"wikibase-api-no-such-entity": "تعذر العثور على كيان يحمل المعرف \"$1\".",
 	"wikibase-api-no-such-sitelink": "لم يمكن العثور على وصلة موقع إلى \"$1\" عند محاولة تعديل الشارات.",
 	"wikibase-api-not-recognized-datatype": "نوع البيانات كان متوقع، ولكنها إما مفقودة أو غير معروفه.",
