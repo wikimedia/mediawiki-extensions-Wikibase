@@ -143,6 +143,10 @@ call_user_func( function() {
 	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
 	$wgHooks['AbortEmailNotification'][] = '\Wikibase\ClientHooks::onAbortEmailNotification';
 
+	// CIrrusSearch hooks. To be moved out to new extension eventually.
+	$wgHooks['CirrusSearchMappingConfig'][] = '\Wikibase\ClientHooks::onCirrusSearchMappingConfig';
+	$wgHooks['CirrusSearchBuildDocumentParse'][] = '\Wikibase\ClientHooks::onCirrusSearchBuildDocumentParse';
+
 	// for client notifications (requires the Echo extension)
 	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
 	// thus we have to register these two handlers disregarding Echo is loaded or not

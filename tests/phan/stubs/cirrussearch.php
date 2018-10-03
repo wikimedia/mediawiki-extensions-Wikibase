@@ -123,6 +123,14 @@ namespace CirrusSearch\Maintenance {
 		public function buildLanguageConfigs( array &$config, array $languages, array $analyzers ) {
 		}
 	}
+	
+	class MappingConfigBuilder {
+		public function getSearchIndexFieldFactory() {
+		}
+		
+		public function getFieldMapping() {			
+		}
+	}
 }
 
 namespace CirrusSearch\Parser\AST {

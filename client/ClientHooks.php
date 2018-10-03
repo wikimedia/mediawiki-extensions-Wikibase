@@ -4,10 +4,13 @@ namespace Wikibase;
 
 use Action;
 use BaseTemplate;
+use CirrusSearch\Maintenance\MappingConfigBuilder;
+use Content;
 use EditPage;
 use ExtensionRegistry;
 use OutputPage;
 use Parser;
+use ParserOutput;
 use RecentChange;
 use Skin;
 use Title;
@@ -320,6 +323,36 @@ final class ClientHooks {
 		// recent changes / watchlist hooks
 		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
 			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
+	}
+
+	/**
+	 * Register wikibase_item field.
+	 */
+	public static function onCirrusSearchMappingConfig(
+		array &$config,
+		MappingConfigBuilder $builder
+	) {
+		$config['wikibase_item'] = $builder->getFieldMapping( $builder->getSearchIndexFieldFactory()
+				->newKeywordField( 'wikibase_item' ) );
+	}
+
+	/**
+	 * Put wikibase_item into the data.
+	 * @param \Elastica\Document $doc
+	 * @param Title $title
+	 * @param Content $content
+	 * @param ParserOutput $parserOutput
+	 */
+	public static function onCirrusSearchBuildDocumentParse(
+		\Elastica\Document $doc,
+		Title $title,
+		Content $content,
+		ParserOutput $parserOutput
+	) {
+		$wikibaseItem = $parserOutput->getProperty( 'wikibase_item' );
+		if ( $wikibaseItem ) {
+			$doc->set( 'wikibase_item', $wikibaseItem );
+		}
 	}
 
 }
