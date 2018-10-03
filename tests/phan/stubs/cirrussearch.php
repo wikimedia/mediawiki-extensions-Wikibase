@@ -215,6 +215,9 @@ namespace CirrusSearch\Query {
 	class SimpleKeywordFeature {
 
 	}
+	class MoreLikeFeature {
+
+	}
 }
 
 namespace CirrusSearch\Query\Builder {
