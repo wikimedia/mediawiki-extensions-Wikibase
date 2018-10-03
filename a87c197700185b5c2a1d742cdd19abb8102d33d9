@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3629a863_0c8d4f7d",
+        "filename": "repo/tests/phpunit/includes/Parsers/MwTimeIsoParserTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-10-03T21:06:38Z",
+      "side": 1,
+      "message": "This re-sequences the parent\u0027s tear-down from before to after… is that OK?",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "a87c197700185b5c2a1d742cdd19abb8102d33d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
