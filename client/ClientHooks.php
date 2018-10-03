@@ -4,11 +4,15 @@ namespace Wikibase;
 
 use Action;
 use BaseTemplate;
+use ContentHandler;
 use EditPage;
 use ExtensionRegistry;
 use OutputPage;
 use Parser;
+use ParserOutput;
 use RecentChange;
+use SearchEngine;
+use SearchIndexField;
 use Skin;
 use Title;
 use User;
@@ -20,6 +24,7 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
+use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
@@ -27,6 +32,7 @@ use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
+use WikiPage;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -320,6 +326,49 @@ final class ClientHooks {
 		// recent changes / watchlist hooks
 		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
 			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
+	}
+
+	/**
+	 * Register wikibase_item field.
+	 * @param array $fields
+	 * @param SearchEngine $engine
+	 */
+	public static function onSearchIndexFields( array &$fields, SearchEngine $engine ) {
+		$fields['wikibase_item'] = $engine->makeSearchFieldMapping( 'wikibase_item',
+				SearchIndexField::INDEX_TYPE_KEYWORD );
+	}
+
+	/**
+	 * Put wikibase_item into the data.
+	 * @param array $fields
+	 * @param ContentHandler $handler
+	 * @param WikiPage $page
+	 * @param ParserOutput $output
+	 * @param SearchEngine $engine
+	 */
+	public static function onSearchDataForIndex(
+		array &$fields,
+		ContentHandler $handler,
+		WikiPage $page,
+		ParserOutput $output,
+		SearchEngine $engine
+	) {
+		$wikibaseItem = $output->getProperty( 'wikibase_item' );
+		if ( $wikibaseItem ) {
+			$fields['wikibase_item'] = $wikibaseItem;
+		}
+	}
+
+	/**
+	 * Add morelikewithwikibase keyword.
+	 * @param $config
+	 * @param array $extraFeatures
+	 */
+	public static function onCirrusSearchAddQueryFeatures(
+		$config,
+		array &$extraFeatures
+	) {
+		$extraFeatures[] = new MoreLikeWikibase( $config );
 	}
 
 }
