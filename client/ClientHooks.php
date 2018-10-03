@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Action;
 use BaseTemplate;
+use CirrusSearch\Maintenance\MappingConfigBuilder;
 use EditPage;
 use ExtensionRegistry;
 use OutputPage;
@@ -320,6 +321,15 @@ final class ClientHooks {
 		// recent changes / watchlist hooks
 		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
 			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
+	}
+
+	/**
+	 * Register wikibase_item field.
+	 */
+	public static function onCirrusSearchMappingConfig( array &$config,
+	                                                    MappingConfigBuilder $builder ) {
+		$config['wikibase_item'] = $builder->getFieldMapping( $builder->getSearchIndexFieldFactory()
+				->newKeywordField( 'wikibase_item' ) );
 	}
 
 }
