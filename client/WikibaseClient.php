@@ -142,6 +142,8 @@ call_user_func( function() {
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
 	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
 	$wgHooks['AbortEmailNotification'][] = '\Wikibase\ClientHooks::onAbortEmailNotification';
+	$wgHooks['SearchDataForIndex'][] = '\Wikibase\ClientHooks::onSearchDataForIndex';
+	$wgHooks['SearchIndexFields'][] = '\Wikibase\ClientHooks::onSearchIndexFields';
 
 	// for client notifications (requires the Echo extension)
 	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
