@@ -30,7 +30,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			$cache
 		);
 
-		$this->assertSame(
+		$this->assertEquals(
 			'Q42',
 			$cachingSiteLinkLookup->getItemIdForLink( 'foowiki', 'bar' )->getSerialization()
 		);
@@ -49,13 +49,13 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			$cache
 		);
 
-		$this->assertSame(
+		$this->assertEquals(
 			'Q42',
 			$cachingSiteLinkLookup->getItemIdForLink( 'foowiki', 'bar' )->getSerialization()
 		);
 
 		// Make sure the new value also made it into the cache
-		$this->assertSame(
+		$this->assertEquals(
 			'Q42',
 			$cache->get( 'wikibase:sitelinks-by-page:foowiki:bar' )
 		);
@@ -71,7 +71,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			$cache
 		);
 
-		$this->assertSame(
+		$this->assertEquals(
 			'Q42',
 			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
@@ -91,13 +91,13 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			$cache
 		);
 
-		$this->assertSame(
+		$this->assertEquals(
 			'Q42',
 			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 
 		// Make sure the new value also made it into the cache
-		$this->assertSame(
+		$this->assertEquals(
 			'Q42',
 			$cache->get( 'wikibase:sitelinks-by-page:foowiki:bar' )
 		);
@@ -114,7 +114,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 			$cache
 		);
 
-		$this->assertSame(
+		$this->assertEquals(
 			$siteLinks,
 			$cachingSiteLinkLookup->getSiteLinksForItem( new ItemId( 'Q42' ) )
 		);
@@ -133,13 +133,13 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, $cache );
 
-		$this->assertSame(
+		$this->assertEquals(
 			$siteLinks,
 			$cachingSiteLinkLookup->getSiteLinksForItem( new ItemId( 'Q42' ) )
 		);
 
 		// Make sure the new value also made it into the cache
-		$this->assertSame( $siteLinks, $cache->get( 'wikibase:sitelinks:Q42' ) );
+		$this->assertEquals( $siteLinks, $cache->get( 'wikibase:sitelinks:Q42' ) );
 	}
 
 	public function testGetLinks() {
@@ -152,7 +152,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup( $lookup, new HashBagOStuff() );
 
-		$this->assertSame(
+		$this->assertEquals(
 			'bar',
 			$cachingSiteLinkLookup->getLinks( [ 1 ], [ 'a' ], [ 'b' ] )
 		);
