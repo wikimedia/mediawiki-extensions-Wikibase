@@ -22,6 +22,30 @@
       "revId": "a87c197700185b5c2a1d742cdd19abb8102d33d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "298503a6_b1f7dc84",
+        "filename": "repo/tests/phpunit/includes/Parsers/MwTimeIsoParserTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-10-04T06:24:30Z",
+      "side": 1,
+      "message": "Yep, that\u0027s the conventional way. setUp is parent first , tearDown should be parent last. That way the encapsulation is balanced, like A-setup, B-setup, B-teardown, A-teardown. The previous code was a mistake and could\u0027ve failed in theory (e.g. if the parent method had its own reservations about Language:$mLangObjCache). Albeit unlikely in this case.",
+      "parentUuid": "3629a863_0c8d4f7d",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "a87c197700185b5c2a1d742cdd19abb8102d33d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
