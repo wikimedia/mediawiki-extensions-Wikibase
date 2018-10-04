@@ -46,6 +46,30 @@
       "revId": "a87c197700185b5c2a1d742cdd19abb8102d33d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c395ccd_18eee768",
+        "filename": "repo/tests/phpunit/includes/Parsers/MwTimeIsoParserTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-10-04T16:56:28Z",
+      "side": 1,
+      "message": "Absolutely, I was just worried if we\u0027d be able to tell if anything depended on the previous wrong behaviour; however given I think all the Wikibase* extensions are gated together, this should be fine.",
+      "parentUuid": "298503a6_b1f7dc84",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "a87c197700185b5c2a1d742cdd19abb8102d33d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
