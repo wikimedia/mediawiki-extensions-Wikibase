@@ -118,6 +118,30 @@
       "revId": "cc94e17fc796bf1f7f86eb9693941760c04bfe06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "903e9b49_dd4788ac",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2488
+      },
+      "writtenOn": "2018-10-04T20:18:37Z",
+      "side": 1,
+      "message": "\u003e Perhaps the events should be array_filter\u0027d with canRender in getBundleCount before using this callback. \n\nIt certainly looks like an oversight from when we rewrote the notification rendering system, moderation, and dynamic bundling in 2015/2016. \n\nAll (top-level) notifications are check with isDeleted() and canRender() but the inner notifications inside of bundles are not. Except for expandable notifications, their inner notifications are also are also checked when they are rendered individually later on but it\u0027s happening *after* the issue we are seeing here.  I can see why is wasn\u0027t obvious by looking at the code but I think it should be fixed in Echo.\n\n \u003e However, the idea of an optional title, and the idea of a title\n \u003e being allowed to not exist are not the same.\n\nFor sure. Most but not all notification types will check that the title exist in their canRender() function.",
+      "parentUuid": "0b485726_63659c55",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 2
+      },
+      "revId": "cc94e17fc796bf1f7f86eb9693941760c04bfe06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
