@@ -31,7 +31,7 @@ class EntityRevisionCacheTest extends \PHPUnit\Framework\TestCase {
 		$cache = new EntityRevisionCache( $bagOStuff, 3600, 'blah' );
 
 		$this->assertNull( $cache->get( $q2 ), 'Cache miss' );
-		$this->assertSame( $entityRevision, $cache->get( $q5 ), 'Cache hit' );
+		$this->assertEquals( $entityRevision, $cache->get( $q5 ), 'Cache hit' );
 	}
 
 	public function testSet() {
@@ -47,8 +47,8 @@ class EntityRevisionCacheTest extends \PHPUnit\Framework\TestCase {
 
 		$cache->set( $entityRevision );
 
-		$this->assertSame( $entityRevision, $bagOStuff->get( 'cache-key:Q5' ) );
-		$this->assertSame( $entityRevision, $cache->get( $q5 ) );
+		$this->assertEquals( $entityRevision, $bagOStuff->get( 'cache-key:Q5' ) );
+		$this->assertEquals( $entityRevision, $cache->get( $q5 ) );
 	}
 
 	public function testDelete() {
@@ -61,7 +61,7 @@ class EntityRevisionCacheTest extends \PHPUnit\Framework\TestCase {
 		$cache = new EntityRevisionCache( $bagOStuff, 3600, 'cache-key' );
 		$cache->set( $entityRevision );
 
-		$this->assertSame( $entityRevision, $cache->get( $q5 ), 'Cache hit' );
+		$this->assertEquals( $entityRevision, $cache->get( $q5 ), 'Cache hit' );
 
 		$cache->delete( $q5 );
 
