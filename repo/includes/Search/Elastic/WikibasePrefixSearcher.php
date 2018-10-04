@@ -72,14 +72,6 @@ class WikibasePrefixSearcher extends Searcher {
 	}
 
 	/**
-	 * Set rescore profile for search.
-	 * @param array|string $profile
-	 */
-	public function setRescoreProfile( $profile ) {
-		$this->getSearchContext()->setRescoreProfile( $profile );
-	}
-
-	/**
 	 * Perform prefix search for Wikibase entities.
 	 * @param AbstractQuery $query Search query.
 	 * @return Status
