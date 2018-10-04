@@ -397,6 +397,7 @@
 	"wikibase-rescore-profile-prefix": "默认用于完成搜索的重新计分详情",
 	"wikibase-rescore-profile-prefix-boost": "用于使用声明推进完成搜索的重新计分详情",
 	"wikibase-rescore-profile-fulltext": "默认用于全文搜索的重新计分详情",
+	"wikibase-rescore-profile-fulltext-phrase": "短语评分全文检索的Rescore简介",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "维基数据库项",
 	"content-model-wikibase-property": "维基数据库属性",

@@ -153,5 +153,6 @@
 	"apihelp-wbsearchentities-param-strictlanguage": "Ці адключаць запасную мову",
 	"apihelp-wbsearchentities-param-type": "Шукаць такі тып элемэнтаў.",
 	"apihelp-wbsearchentities-param-props": "Вярнуць гэтыя ўласьцівасьці для кожнага элемэнту.",
-	"apihelp-wbsearchentities-param-limit": "Максымальная колькасьць вынікаў"
+	"apihelp-wbsearchentities-param-limit": "Максымальная колькасьць вынікаў",
+	"apihelp-wbsearchentities-param-continue": "Зьмяшчэньне, зь якога працягваць пошук"
 }

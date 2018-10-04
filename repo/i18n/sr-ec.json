@@ -119,7 +119,7 @@
 	"wikibase-validator-label-with-description-conflict": "Ставка $3 већ има ознаку „$1“ повезан са кодом језика $2, са истим описом",
 	"wikibase-validator-illegal-geo-shape-title": "Вредност мора да почиње са <code>Data:</code> и завршава са <code>.map</code>. Додатно, наслов не треба да садржи карактере као што је двотачка, тараба или усправна црта.",
 	"wikibase-validator-illegal-tabular-data-title": "Вредност мора да почиње са <code>Data:</code> и завршава са <code>.tab</code>. Такође, наслов не би требало да садржи карактере као што је двотачка, тараба или усправна црта.",
-	"wikibase-validator-no-such-sitelink": "Није могуће пронаћи сајт-линк до „$1” при покушају уређивања значака.",
+	"wikibase-validator-no-such-sitelink": "Није могуће пронаћи сајт-везу ка „$1” при покушају уређивања значака.",
 	"wikibase-validator-page-not-exists": "Страница „$1“ не постоји.",
 	"wikibase-validator-not-a-language": "„$1“ није познат језички код.",
 	"wikibase-item-reference-edit-placeholder": "Унесите идентификатор ставке, нпр. Q10",
