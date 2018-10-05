@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb18fedf_341bf7cb",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQuery.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-05T13:01:37Z",
+      "side": 1,
+      "message": "This can be derived from $joins.",
+      "revId": "c13f0f81975e72d5986bec2630174dfe8a1fd770",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
