@@ -6,7 +6,8 @@ let ComponentInteraction = Base => class extends Base {
 		return {
 			OPTION_WIDGET: '.oo-ui-optionWidget',
 			OPTION_WIDGET_SELECTED: '.oo-ui-optionWidget-selected',
-			OVERLAY: '.oo-ui-defaultOverlay'
+			OVERLAY: '.oo-ui-defaultOverlay',
+			COMBOBOX_DROPDOWN: '.oo-ui-comboBoxInputWidget-dropdownButton'
 		};
 	}
 
@@ -27,7 +28,7 @@ let ComponentInteraction = Base => class extends Base {
 				)
 			);
 		} );
-		browser.keys( 'Escape' ); // close suggestion overlay
+		element.$( this.constructor.OOUI_SELECTORS.COMBOBOX_DROPDOWN ).click(); // close suggestion overlay
 	}
 };
 
