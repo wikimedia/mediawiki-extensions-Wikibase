@@ -154,5 +154,6 @@
 	"apihelp-wbsearchentities-param-type": "Шукаць такі тып элемэнтаў.",
 	"apihelp-wbsearchentities-param-props": "Вярнуць гэтыя ўласьцівасьці для кожнага элемэнту.",
 	"apihelp-wbsearchentities-param-limit": "Максымальная колькасьць вынікаў",
-	"apihelp-wbsearchentities-param-continue": "Зьмяшчэньне, зь якога працягваць пошук"
+	"apihelp-wbsearchentities-param-continue": "Зьмяшчэньне, зь якога працягваць пошук",
+	"apihelp-wbsearchentities-example-1": "Шукаць «abc» ангельскай мовай з значэньнямі па змоўчаньні для тыпу і ліміту"
 }
