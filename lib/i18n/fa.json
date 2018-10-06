@@ -17,7 +17,8 @@
 			"Nojan Madinehi",
 			"Huji",
 			"Mahdy Saffar",
-			"Mjbmr"
+			"Mjbmr",
+			"Arash.pt"
 		]
 	},
 	"wikibase-lib-desc": "نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس",
@@ -175,6 +176,7 @@
 	"wikibase-item-summary-wbcreate-new": "مورد جدیدی ایجاد شد",
 	"wikibase-item-summary-wbeditentity": "ایجاد یک آیتم تازه",
 	"wikibase-item-summary-wbeditentity-create": "ایجاد یک مورد تازه",
+	"wikibase-item-summary-wbeditentity-create-item": "ایجاد یک آیتم جدید",
 	"wikibase-item-summary-wbeditentity-update": "تغییر دادن یک آیتم",
 	"wikibase-item-summary-wbeditentity-override": "پریدن از روی یک مورد",
 	"wikibase-item-summary-wblinktitles-create": "ساخت این آیتم برای پیوند صفحه های",

@@ -23,7 +23,8 @@
 			"Alirezaaa",
 			"Bersam",
 			"Huji",
-			"Alifakoor"
+			"Alifakoor",
+			"Arash.pt"
 		]
 	},
 	"wikibase-desc": "مخزن داده‌های ساخت‌یافته",
@@ -314,6 +315,7 @@
 	"wikibase-redirectentity-toid": "شناسۀ مقصد تغییر مسیر",
 	"wikibase-redirectentity-submit": "تغییرمسیر",
 	"wikibase-redirect-no-such-entity": "نمی‌توان موجودیت $1 را یافت",
+	"wikibase-redirect-cant-load-entity-content": "دسترسی به محتوا وجود ندارد، ممکن است نسخه حذف شده باشد.",
 	"wikibase-redirect-target-is-incompatible": "نوع جوهره ناسازگار",
 	"wikibase-redirect-target-is-redirect": "جوهره $1 یک تغییر مسیر است",
 	"wikibase-redirect-permissiondenied": "اجازه داده نشد",
