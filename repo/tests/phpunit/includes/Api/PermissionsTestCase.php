@@ -24,8 +24,6 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 			$this->initTestEntities( [ 'Oslo', 'Empty' ] );
 		}
 		self::$hasSetup = true;
-		$this->stashMwGlobals( 'wgGroupPermissions' );
-		$this->stashMwGlobals( 'wgUser' );
 	}
 
 	protected function doPermissionsTest(
@@ -36,7 +34,6 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	) {
 		global $wgUser;
 
-		$this->setMwGlobals( 'wgUser', clone $wgUser );
 		PermissionsHelper::applyPermissions( $permissions );
 
 		try {

@@ -12,8 +12,8 @@ class PermissionsHelper {
 	/**
 	 * Utility function for applying a set of permissions to $wgGroupPermissions.
 	 * Automatically resets the rights cache for $wgUser.
-	 * This modifies the global $wgGroupPermissions and $wgUser variables.
-	 * No measures are taken to restore the original permissions later, this is up to the caller.
+	 * This modifies the global $wgGroupPermissions and $wgUser variables, but both will be
+	 * automatically restored at the end of the test.
 	 *
 	 * @param array[]|null $permissions
 	 * @param string[]|null $groups groups to apply to $wgUser. If not given, group
@@ -22,12 +22,13 @@ class PermissionsHelper {
 	 * @todo: try to do this without messing with the globals, or at least without hardcoding them.
 	 */
 	public static function applyPermissions( array $permissions = null, array $groups = null ) {
-		global $wgGroupPermissions,
-			$wgUser;
+		global $wgUser;
 
 		if ( !$permissions ) {
 			return;
 		}
+
+		$this->setMwGlobals( 'wgUser', clone $wgUser );
 
 		$wgUser->addToDatabase();
 
@@ -43,10 +44,8 @@ class PermissionsHelper {
 		}
 
 		foreach ( $permissions as $group => $rights ) {
-			if ( !empty( $wgGroupPermissions[ $group ] ) ) {
-				$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
-			} else {
-				$wgGroupPermissions[ $group ] = $rights;
+			foreach ( $rights as $key => $val ) {
+				$this->setGroupPermissions( $group, $key, $val );
 			}
 		}
 
