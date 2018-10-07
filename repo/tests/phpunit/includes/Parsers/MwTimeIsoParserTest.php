@@ -41,6 +41,11 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 	protected function setUp() {
 		parent::setUp();
 
+		if ( version_compare( \PHPUnit_Runner_Version::id(), '6.0', '<' ) ) {
+			// Ancient PHPUnit dies with a stack overflow for some reason
+			$test->markTestSkipped( 'PHPUnit too old for this test' );
+		}
+
 		if ( class_exists( LanguageFactory::class ) ) {
 			$stub = $this->createMock( LanguageFactory::class );
 			$stub->method( 'get' )->willReturn( $this->getLanguage() );
