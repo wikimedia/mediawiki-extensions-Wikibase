@@ -379,8 +379,9 @@ XML
 	private function setupTestOnContentModelCanBeUsedOn() {
 		global $wgWBRepoSettings;
 		// Create a fake entity type for testOnContentModelCanBeUsedOn
-		$this->stashMwGlobals( 'wgWBRepoSettings' );
-		$wgWBRepoSettings['entityNamespaces']['slottedEntityType'] = self::FAKE_NS_ID . '/someSlot';
+		$settings = $wgWBRepoSettings;
+		$settings['entityNamespaces']['slottedEntityType'] = self::FAKE_NS_ID . '/someSlot';
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
 
 		// Reset the WikibaseRepo instance after touching config that services within depend on
 		WikibaseRepo::resetClassStatics();
