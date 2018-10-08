@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use Wikibase\Repo\Tests\PermissionsHelper;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -24,8 +23,51 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 			$this->initTestEntities( [ 'Oslo', 'Empty' ] );
 		}
 		self::$hasSetup = true;
-		$this->stashMwGlobals( 'wgGroupPermissions' );
-		$this->stashMwGlobals( 'wgUser' );
+	}
+
+	/**
+	 * Utility function for applying a set of permissions to $wgGroupPermissions.
+	 * Automatically resets the rights cache for $wgUser.
+	 * This modifies the global $wgGroupPermissions and $wgUser variables, but both will be
+	 * automatically restored at the end of the test.
+	 *
+	 * @param array[]|null $permissions
+	 * @param string[]|null $groups groups to apply to $wgUser. If not given, group
+	 * membership is not modified.
+	 *
+	 * @todo: try to do this without messing with the globals, or at least without hardcoding them.
+	 */
+	protected function applyPermissions( array $permissions = null, array $groups = null ) {
+		global $wgUser;
+
+		if ( !$permissions ) {
+			return;
+		}
+
+		$this->setMwGlobals( 'wgUser', clone $wgUser );
+
+		$wgUser->addToDatabase();
+
+		if ( is_array( $groups ) ) {
+			$oldGroups = $wgUser->getGroups();
+			foreach ( $oldGroups as $group ) {
+				$wgUser->removeGroup( $group );
+			}
+
+			foreach ( $groups as $group ) {
+				$wgUser->addGroup( $group );
+			}
+		}
+
+		foreach ( $permissions as $group => $rights ) {
+			foreach ( $rights as $key => $val ) {
+				$this->setGroupPermissions( $group, $key, $val );
+			}
+		}
+
+		// reset rights cache
+		$wgUser->addGroup( "dummy" );
+		$wgUser->removeGroup( "dummy" );
 	}
 
 	protected function doPermissionsTest(
@@ -36,8 +78,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	) {
 		global $wgUser;
 
-		$this->setMwGlobals( 'wgUser', clone $wgUser );
-		PermissionsHelper::applyPermissions( $permissions );
+		$this->applyPermissions( $permissions );
 
 		try {
 			$params[ 'action' ] = $action;

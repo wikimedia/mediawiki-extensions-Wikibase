@@ -383,7 +383,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Tests\\LinkedData\\EntityDataTestProvider' => __DIR__ . '/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php',
 	'Wikibase\\Repo\\Tests\\NewItem' => __DIR__ . '/tests/phpunit/includes/NewItem.php',
 	'Wikibase\\Repo\\Tests\\NewStatement' => __DIR__ . '/tests/phpunit/includes/NewStatement.php',
-	'Wikibase\\Repo\\Tests\\PermissionsHelper' => __DIR__ . '/tests/phpunit/includes/PermissionsHelper.php',
 	'Wikibase\\Repo\\Tests\\Rdf\\NTriplesRdfTestHelper' => __DIR__ . '/tests/phpunit/includes/Rdf/NTriplesRdfTestHelper.php',
 	'Wikibase\\Repo\\Tests\\Rdf\\RdfBuilderTestData' => __DIR__ . '/tests/phpunit/includes/Rdf/RdfBuilderTestData.php',
 	'Wikibase\\Repo\\Tests\\Search\\Elastic\\Fields\\SearchFieldTestCase' => __DIR__ . '/tests/phpunit/includes/Search/Elastic/Fields/SearchFieldTestCase.php',
