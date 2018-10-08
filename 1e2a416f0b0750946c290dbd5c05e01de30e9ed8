@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76e4b6f3_1af5039e",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-08T18:01:56Z",
+      "side": 1,
+      "message": "how can this be hard-coded here? shouldn\u0027t there be a dispatching implementation created here, that delegates the call based on the entity type?",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c66cf333_04441f1a",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-08T18:01:56Z",
+      "side": 1,
+      "message": "doing this merge up here and the other merges inline below is a bit confusing.",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3515e989_ba9149d6",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-08T18:01:56Z",
+      "side": 1,
+      "message": "should this also be done in the EntityQuery class? How the role name is determined should be controlled by the class that defines the query.\n\nBut... I don\u0027t recall why role_name is needed at all. Is it still needed?",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2d10e01_24725eec",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-08T18:01:56Z",
+      "side": 1,
+      "message": "This won\u0027t work for MediaInfo",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
