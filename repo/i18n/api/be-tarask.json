@@ -157,5 +157,6 @@
 	"apihelp-wbsearchentities-param-continue": "Зьмяшчэньне, зь якога працягваць пошук",
 	"apihelp-wbsearchentities-example-1": "Шукаць «abc» ангельскай мовай з значэньнямі па змоўчаньні для тыпу і ліміту",
 	"apihelp-wbsearchentities-example-2": "Шукаць «abc» ангельскай мовай зь лімітам 50",
-	"apihelp-wbsearchentities-example-3": "Шукаць «alphabet» ангельскай мовай сярод тыпаў уласьцівасьцяў"
+	"apihelp-wbsearchentities-example-3": "Шукаць «alphabet» ангельскай мовай сярод тыпаў уласьцівасьцяў",
+	"apihelp-wbsearchentities-example-4": "Шукаць «abc» ангельскай мовай зь лімітам 2 і зьмяшчэньнем 2"
 }
