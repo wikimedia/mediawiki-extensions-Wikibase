@@ -185,6 +185,24 @@
       "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "943d0ca2_93ffc9ad",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/EntityIdLocalPartPageTableEntityQueryTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T14:58:56Z",
+      "side": 1,
+      "message": "Test with the DB has been created as a followup at https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/465436/",
+      "parentUuid": "f1d1fd5a_c476e656",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
