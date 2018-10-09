@@ -79,7 +79,12 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		);
 		$decodedQuery = json_decode( $elasticQuery, true );
 		unset( $decodedQuery['path'] );
+			// T205958
+		$serializePrecision = ini_get( 'serialize_precision' );
+		ini_set( 'serialize_precision', 10 );
 		$encodedData = json_encode( $decodedQuery, JSON_PRETTY_PRINT );
+		ini_set( 'serialize_precision', $serializePrecision );
+
 		$this->assertFileContains( $expected, $encodedData );
 	}
 
