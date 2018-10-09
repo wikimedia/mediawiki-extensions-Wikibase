@@ -2060,4 +2060,8 @@ class WikibaseRepo {
 		);
 	}
 
+	public function useNewTermbox() {
+		return $this->settings->getSetting( 'mobileTermboxEnabled' );
+	}
+
 }
