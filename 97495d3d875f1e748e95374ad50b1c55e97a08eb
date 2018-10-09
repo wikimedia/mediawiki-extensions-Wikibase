@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "779f01ca_645f7994",
+        "filename": "client/tests/phpunit/includes/Hooks/OtherProjectsSidebarGeneratorTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T12:39:05Z",
+      "side": 1,
+      "message": "Some tests broke at some point along the way, and the cause was this test and a hook in WikimediaBadges if I remember correctly.\n\nThis can probably be removed now.",
+      "parentUuid": "09173d96_09020532",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "727bb3f3_fa0b98da",
         "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
         "patchSetId": 24
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-09T12:05:35Z",
       "side": 1,
       "message": "why is this in this patch?",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc621b70_0281ecf3",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T12:39:05Z",
+      "side": 1,
+      "message": "As with the other one, this can probably be removed now.",
+      "parentUuid": "727bb3f3_fa0b98da",
       "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "feeb49fc_36fe961d",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T12:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90d52736_77658a26",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3fd28f1_da739d8d",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 24
@@ -64,6 +118,30 @@
       "writtenOn": "2018-10-09T10:55:11Z",
       "side": 1,
       "message": "indenting?",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 307,
+        "endChar": 4
+      },
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9647df8a_6cfb9db8",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T12:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3fd28f1_da739d8d",
       "range": {
         "startLine": 307,
         "startChar": 2,
