@@ -16,6 +16,24 @@
       "revId": "890d0d24abe28ad0538b0e00fbb1711a84962558",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "451fb918_6df19e49",
+        "filename": "lib/tests/phpunit/Store/Sql/EntityIdLocalPartPageTableEntityQueryDbTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T15:40:34Z",
+      "side": 1,
+      "message": "Yup, makes sense",
+      "parentUuid": "b8f6f330_83fe4183",
+      "revId": "890d0d24abe28ad0538b0e00fbb1711a84962558",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
