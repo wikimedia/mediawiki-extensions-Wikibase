@@ -122,7 +122,7 @@ class ControlledFallbackEntityIdFormatterTest extends TestCase {
 		$formatter->setLogger( $logger->reveal() );
 		$formatter->formatEntityId( $givenItemId );
 
-		$logger->critical(
+		$logger->error(
 			Argument::type( 'string' ),
 			Argument::type( 'array' )
 		)->shouldHaveBeenCalled();
