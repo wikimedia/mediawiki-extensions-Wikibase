@@ -10,6 +10,12 @@
  */
 
 return [
+	// url of (termbox) ssr-server
+	'ssrServerUrl' => '',
+
+	// feature flag for termbox
+	'termboxEnabled' => false,
+
 	'idBlacklist' => [],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
