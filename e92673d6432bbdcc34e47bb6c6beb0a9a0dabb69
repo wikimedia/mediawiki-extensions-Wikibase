@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94536f7f_5fbc48c1",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T16:19:43Z",
+      "side": 1,
+      "message": "this should still say $skin",
+      "range": {
+        "startLine": 79,
+        "startChar": 73,
+        "endLine": 79,
+        "endChar": 79
+      },
+      "revId": "e92673d6432bbdcc34e47bb6c6beb0a9a0dabb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aeafde3_5212052b",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T16:19:43Z",
+      "side": 1,
+      "message": "// should have a space after, I think phpcs should catch this one jenkins runs.",
+      "range": {
+        "startLine": 13,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "e92673d6432bbdcc34e47bb6c6beb0a9a0dabb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b451e27b_af3e3afc",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T16:19:43Z",
+      "side": 1,
+      "message": "duplicate array keys here, i guess one should be new and one should be old?",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "e92673d6432bbdcc34e47bb6c6beb0a9a0dabb69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
