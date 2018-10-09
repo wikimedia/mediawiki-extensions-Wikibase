@@ -62,24 +62,37 @@ class RepoHooksTest extends MediaWikiTestCase {
 	}
 
 	public function onBeforePageDisplayProviderMobile() {
+		$wikibaseMobileNewTermbox = [ 'wikibase.mobile', 'wikibase.termbox' ];
 		$wikibaseMobile = [ 'wikibase.mobile' ];
 
 		return [
-			'Mobile entity page' => [
+			'mobile entity page' => [
 				$wikibaseMobile,
 				true,
-			],
-			'Mobile non-entity page' => [
-				[],
 				false
 			],
+			'mobile non-entity page' => [
+				[],
+				false,
+				false
+			],
+			'termbox entity page' => [
+				$wikibaseMobileNewTermbox,
+				true,
+				true
+			],
+			'termbox non-entity page' => [
+				[],
+				false,
+				true
+			]
 		];
 	}
 
 	/**
 	 * @dataProvider onBeforePageDisplayProviderMobile
 	 */
-	public function testOnBeforePageDisplayMobile( $expectedModules, $isEntityNamespace ) {
+	public function testOnBeforePageDisplayMobile( $expectedModules, $isEntityNamespace, $useNewTermbox ) {
 		if ( $isEntityNamespace ) {
 			$namespace = array_values( WikibaseRepo::getDefaultInstance()->getLocalEntityNamespaces() )[0];
 		} else {
@@ -97,6 +110,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 		$outputPage = new OutputPage( $context );
 
 		$skin = $this->getMock( SkinTemplate::class );
+		$this->getSettings()->setSetting( 'termboxEnabled', $useNewTermbox );
 		RepoHooks::onBeforePageDisplayMobile(
 			$outputPage,
 			$skin

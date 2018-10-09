@@ -85,6 +85,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;searchIndexQualifierPropertiesForQuantity: Array of properties (by ID string) that, if used in a qualifier, will be used to write a value to the "statment_quantity" field. For now, only relevant when Cirrus search is enabled.
 ;dispatchLagToMaxLagFactor: If set to a positive number, the median dispatch lag (in seconds) will be divided by this number and passed to core like database lag (see the API maxlag parameter). Defaults to 0 (disabled).
 ;dumpDBDefaultGroup: Default database group to use in dump maintenance scripts, defaults to "dump". Set to <code>null</code> to use the value from <code>$wgDBDefaultGroup</code>.
+;termboxEnabled: Enable/Disable the server-side-rendered (SSR) termbox. The default setting is <code>false</code>, so the SSR feature for termbox is disabled.
 
 == Client Settings ==
 
