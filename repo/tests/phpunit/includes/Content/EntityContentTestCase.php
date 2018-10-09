@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
@@ -271,8 +272,11 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	}
 
 	public function diffProvider() {
-		$empty = $this->newBlank( $this->getDummyId() );
 		$entityType = $this->getEntityType();
+
+		$empty = $this->newEmpty();
+
+		$blank = $this->newBlank( $this->getDummyId() );
 
 		$spam = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
@@ -280,8 +284,22 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 		$ham = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
+		$emptyToBlankRedirectDiff = new EntityDiff( [
+			'entity' => new DiffOpAdd( $blank->getEntityId() ),
+		] );
+
+		$emptyToHam = new DiffOpAdd( 'Ham' );
+		$emptyToHamEntityDiff = new EntityDiff( [
+			'label' => new Diff( [ 'en' => $emptyToHam ] ),
+		] );
+		$emptyToHamRedirectDiff = new EntityDiff( [
+			'entity' => new DiffOpAdd( $ham->getEntityId() ),
+		] );
+
+		$blankToHamEntityDiff = $emptyToHamEntityDiff;
+
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
-		$spamToHamDiff = new EntityDiff( [
+		$spamToHamEntityDiff = new EntityDiff( [
 			'label' => new Diff( [ 'en' => $spamToHam ] ),
 		] );
 
@@ -291,15 +309,35 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 				$empty,
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
 			],
+			'blank' => [
+				$blank,
+				$blank,
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+			],
 			'same' => [
 				$ham,
 				$ham,
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
 			],
+			'empty to blank' => [
+				$empty,
+				$blank,
+				new EntityContentDiff( new EntityDiff(), $emptyToBlankRedirectDiff, $entityType )
+			],
+			'empty to ham' => [
+				$empty,
+				$ham,
+				new EntityContentDiff( $emptyToHamEntityDiff, $emptyToHamRedirectDiff, $entityType )
+			],
+			'blank to ham' => [
+				$blank,
+				$ham,
+				new EntityContentDiff( $blankToHamEntityDiff, new Diff(), $entityType )
+			],
 			'spam to ham' => [
 				$spam,
 				$ham,
-				new EntityContentDiff( $spamToHamDiff, new Diff(), $entityType )
+				new EntityContentDiff( $spamToHamEntityDiff, new Diff(), $entityType )
 			],
 		];
 	}
