@@ -45,6 +45,22 @@ return call_user_func( function() {
 			'targets' => 'mobile'
 		],
 
+		'wikibase.termbox.old' => $moduleTemplate + [
+			'styles' => [
+			],
+			'dependcies' => [
+			],
+			'target' => 'mobile'
+		],
+
+		'wikibase.termbox.old' => $moduleTemplate + [
+			'styles' => [
+			],
+			'dependcies' => [
+			],
+			'target' => 'mobile'
+		],
+
 		'wikibase.RevisionStore' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.RevisionStore.js',

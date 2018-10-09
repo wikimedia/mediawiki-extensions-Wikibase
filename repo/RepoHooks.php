@@ -76,13 +76,21 @@ final class RepoHooks {
 	 * @param OutputPage $out
 	 * @param Skin $skin
 	 */
-	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skin ) {
+	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skini ) {
 		$title = $out->getTitle();
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$instance = WikibaseRepo::getDefaultInstance();
+		$entityNamespaceLookup = $instance->getEntityNamespaceLookup();
 		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $title->getNamespace() );
+		$useNewTermbox = $instance->useNewTermbox();
 
 		if ( $isEntityTitle ) {
 			$out->addModules( 'wikibase.mobile' );
+
+			if ( $useNewTermbox ) {
+				$out->addModules( 'wikibase.termbox.new' );
+			} else {
+				$out->addModules( 'wikibase.termbox.old' );
+			}
 		}
 	}
 
