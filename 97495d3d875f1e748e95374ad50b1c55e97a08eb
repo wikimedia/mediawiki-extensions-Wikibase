@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3fd28f1_da739d8d",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-10-09T10:55:11Z",
+      "side": 1,
+      "message": "indenting?",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 307,
+        "endChar": 4
+      },
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
