@@ -476,19 +476,11 @@ class WikiPageEntityStore implements EntityStore {
 		$title = $this->getTitleForEntity( $id );
 
 		if ( $user->isLoggedIn() && $title && ( $watch != $user->isWatched( $title ) ) ) {
-			$fname = __METHOD__;
-
-			// Do this in its own transaction to reduce contention...
-			$dbw = wfGetDB( DB_MASTER );
-			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
-				$dbw->startAtomic( $fname );
-				if ( $watch ) {
-					WatchAction::doWatch( $title, $user );
-				} else {
-					WatchAction::doUnwatch( $title, $user );
-				}
-				$dbw->endAtomic( $fname );
-			} );
+			if ( $watch ) {
+				WatchAction::doWatch( $title, $user );
+			} else {
+				WatchAction::doUnwatch( $title, $user );
+			}
 		}
 	}
 
