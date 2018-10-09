@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "857fe5d9_ab6927b3",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T15:24:08Z",
+      "side": 1,
+      "message": "Was there a reason behind also making this change in this patch?",
+      "range": {
+        "startLine": 458,
+        "startChar": 2,
+        "endLine": 460,
+        "endChar": 3
+      },
+      "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8d64f97_620df6b0",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T15:24:08Z",
+      "side": 1,
+      "message": "Looking at newBlank this still creates a Content object with an EntityInstanceHolder, so the holder is not null and your code path is not actually being tested?\n\nAlthough testing 2 blank objects probably does still make sense.\n\nI guess a test case for this patch should use $empty and $ham and make sure the diff still works?",
+      "range": {
+        "startLine": 278,
+        "startChar": 11,
+        "endLine": 278,
+        "endChar": 50
+      },
+      "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
