@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpAdd;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
 use ParserOutput;
@@ -271,8 +272,11 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	}
 
 	public function diffProvider() {
-		$empty = $this->newBlank( $this->getDummyId() );
 		$entityType = $this->getEntityType();
+
+		$empty = $this->newEmpty();
+
+		$blank = $this->newBlank( $this->getDummyId() );
 
 		$spam = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
@@ -280,9 +284,12 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 		$ham = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
-		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
+		$blankToHamDiff = new EntityDiff( [
+			'label' => new Diff( [ 'en' => new DiffOpAdd( 'Ham' ) ] ),
+		] );
+
 		$spamToHamDiff = new EntityDiff( [
-			'label' => new Diff( [ 'en' => $spamToHam ] ),
+			'label' => new Diff( [ 'en' => new DiffOpChange( 'Spam', 'Ham' ) ] ),
 		] );
 
 		return [
@@ -291,10 +298,20 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 				$empty,
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
 			],
+			'blank' => [
+				$blank,
+				$blank,
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+			],
 			'same' => [
 				$ham,
 				$ham,
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+			],
+			'blank to ham' => [
+				$blank,
+				$ham,
+				new EntityContentDiff( $blankToHamDiff, new Diff(), $entityType )
 			],
 			'spam to ham' => [
 				$spam,
@@ -336,9 +353,8 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 		$ham = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
-		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
 		$spamToHamDiff = new EntityDiff( [
-			'label' => new Diff( [ 'en' => $spamToHam ] ),
+			'label' => new Diff( [ 'en' => new DiffOpChange( 'Spam', 'Ham' ) ] ),
 		] );
 
 		return [

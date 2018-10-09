@@ -453,9 +453,11 @@ abstract class EntityContent extends AbstractContent {
 	 */
 	private function getRedirectData() {
 		// NOTE: keep in sync with getPatchedRedirect
-		$data = [
-			'entity' => $this->getEntityId()->getSerialization(),
-		];
+		$data = [];
+
+		if ( $this->isValid() ) {
+			$data['entity'] = $this->getEntityId()->getSerialization();
+		}
 
 		if ( $this->isRedirect() ) {
 			$data['redirect'] = $this->getEntityRedirect()->getTargetId()->getSerialization();
@@ -574,8 +576,10 @@ abstract class EntityContent extends AbstractContent {
 
 		$redirectDiff = new Diff( $redirectDiffOps, true );
 
-		$fromEntity = $fromContent->isRedirect() ? $this->makeEmptyEntity() : $fromContent->getEntity();
-		$toEntity = $toContent->isRedirect() ? $this->makeEmptyEntity() : $toContent->getEntity();
+		$fromEntity = ( $fromContent->isRedirect() || $fromContent->getEntityHolder() === null ) ?
+			$this->makeEmptyEntity() : $fromContent->getEntity();
+		$toEntity = ( $toContent->isRedirect() || $toContent->getEntityHolder() === null ) ?
+			$this->makeEmptyEntity() : $toContent->getEntity();
 
 		$entityDiffer = WikibaseRepo::getDefaultInstance()->getEntityDiffer();
 		$entityDiff = $entityDiffer->diffEntities( $fromEntity, $toEntity );
