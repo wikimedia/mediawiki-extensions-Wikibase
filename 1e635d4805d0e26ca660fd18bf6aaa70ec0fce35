@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "72ca5dfb_457a7a19",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-09T16:13:40Z",
+      "side": 1,
+      "message": "This is called from getDiff, and -\u003egetEntityId fails when there\u0027s no entityHolder",
+      "parentUuid": "857fe5d9_ab6927b3",
+      "range": {
+        "startLine": 458,
+        "startChar": 2,
+        "endLine": 460,
+        "endChar": 3
+      },
+      "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8d64f97_620df6b0",
         "filename": "repo/tests/phpunit/includes/Content/EntityContentTestCase.php",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0277c37c_7e26b9ad",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-09T16:13:40Z",
+      "side": 1,
+      "message": "I didn\u0027t actually add this one, but the diff looks confusing :)\nThe one I added is $empty \u003d $this-\u003enewEmpty().\nAnd I just renamed the existing $empty to $blank - which makes this diff quite confusing :)\nI\u0027m open to better naming suggestions, just thought I\u0027d use something similar to the method names.\n\nAgree that I should probably add another test case for empty/non-empty as well - will add one.",
+      "parentUuid": "b8d64f97_620df6b0",
+      "range": {
+        "startLine": 278,
+        "startChar": 11,
+        "endLine": 278,
+        "endChar": 50
+      },
+      "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
