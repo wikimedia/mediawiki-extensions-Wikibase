@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1662db81_b30657fb",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T07:56:24Z",
+      "side": 1,
+      "message": "The WikiPageEntityMetaDataAccessor is what we have configurable per entity type.",
+      "parentUuid": "76e4b6f3_1af5039e",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c66cf333_04441f1a",
         "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
         "patchSetId": 22
