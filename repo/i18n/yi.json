@@ -121,7 +121,7 @@
 	"wikibase-itembytitle-submit": "זוכן",
 	"wikibase-itembytitle-error-site": "ביטע ניצט אן עקזעסטירנדן וועבזייטל־אידענטיפיצירער, למשל \"enwiki\" פאר דער ענגליש־וויקיפעדיע.",
 	"wikibase-itembytitle-create": "איר קענט אויך [$1 שאפֿן א דאטנאביעקט].",
-	"wikibase-itembytitle-summary": "ודער באזונדערער בלאט Special:ItemByTitle ניצט מען צו טרעפן דעם פאסנדיקן אביעקט פאר אן אנגעגעבענעם בלאט אויף א פארבונדענעם וועבזייטל. <br /> אינעם ערשטן פעלד, \"{{int:wikibase-itembytitle-lookup-site}}\", לייגט מען דעם שפראך און וועבזייטל קאד. <br /> אינעם אנדערן פעלד, \"{{int:wikibase-itembytitle-lookup-page}}\", דארפט איר איינגעבן דעם גענויעם טיטל פונעם בלאט אזוי ווי ער ערשיינט אויפן פארבונדענעם וועבזייטל.",
+	"wikibase-itembytitle-summary": "דעם באזונדערן בלאט Special:ItemByTitle ניצט מען צו טרעפן דעם פאסנדיקן אביעקט פאר אן אנגעגעבענעם בלאט אויף א פארבונדענעם וועבזייטל. <br /> אינעם ערשטן פעלד, \"{{int:wikibase-itembytitle-lookup-site}}\", לייגט מען דעם שפראך און וועבזייטל קאד. <br /> אינעם אנדערן פעלד, \"{{int:wikibase-itembytitle-lookup-page}}\", דארפט איר איינגעבן דעם גענויעם טיטל פונעם בלאט אזוי ווי ער ערשיינט אויפן פארבונדענעם וועבזייטל.",
 	"special-gotolinkedpage": "גיין צו פארלינקטן בלאט",
 	"wikibase-gotolinkedpage-lookup-site": "וועבזײַטל:",
 	"wikibase-gotolinkedpage-lookup-item": "אביעקט אידענטיפיצירער:",
