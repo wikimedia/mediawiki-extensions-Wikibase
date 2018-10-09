@@ -90,6 +90,23 @@
       "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1d1fd5a_c476e656",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/EntityIdLocalPartPageTableEntityQueryTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:22:42Z",
+      "side": 1,
+      "message": "It seems to me this test is not testing the classe\u0027s contract, but rather its implementation.\nThe contract is defined based on database content, so the tests should also be based on database content. The queries that are used internally are implementation details that the test should not know or care about.",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
