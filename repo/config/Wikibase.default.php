@@ -10,6 +10,9 @@
  */
 
 return [
+	// feature flag to enable ssr-termbox
+	'mobileTermboxEnabled' => false,
+
 	'idBlacklist' => [],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
