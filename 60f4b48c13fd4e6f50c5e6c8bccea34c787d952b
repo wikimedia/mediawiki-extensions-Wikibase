@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73922b41_14b74d68",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-10-09T16:17:31Z",
+      "side": 1,
+      "message": "\"ones\"\n\nI could probably even say \"indexes\" (or \"indices\")",
+      "range": {
+        "startLine": 368,
+        "startChar": 16,
+        "endLine": 368,
+        "endChar": 21
+      },
+      "revId": "60f4b48c13fd4e6f50c5e6c8bccea34c787d952b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bc6d836_80927a11",
+        "filename": "repo/sql/UpdateTermIndices2018.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-10-09T16:17:31Z",
+      "side": 1,
+      "message": "this is also a new index, isn\u0027t it?\n\nI don\u0027t have a particular opinion, neither feel an expert, but I could see some reason if adding this index was grouped together with adding \"tmp1\", and updating already existing two other indexes was kept separate here.",
+      "revId": "60f4b48c13fd4e6f50c5e6c8bccea34c787d952b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
