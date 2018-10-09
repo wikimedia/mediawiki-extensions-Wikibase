@@ -62,7 +62,11 @@ class RepoHooksTest extends MediaWikiTestCase {
 	}
 
 	public function onBeforePageDisplayProviderMobile() {
-		$wikibaseMobile = [ 'wikibase.mobile' ];
+		if ( WikibaseRepo::getDefaultInstance()->useNewTermbox() ) {
+			$wikibaseMobile = [ 'wikibase.mobile', 'wikibase.termbox.new' ];
+		} else {
+			$wikibaseMobile = [ 'wikibase.mobile', 'wikibase.termbox.old' ];
+		}
 
 		return [
 			'Mobile entity page' => [

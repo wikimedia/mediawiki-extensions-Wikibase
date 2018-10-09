@@ -10,6 +10,9 @@
  */
 
 return [
+	// temp feature flag for termbox dev
+	'mobileTermboxEnabled' => false,
+
 	'idBlacklist' => [],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
