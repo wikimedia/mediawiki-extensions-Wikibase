@@ -39,8 +39,18 @@ return call_user_func( function() {
 			'styles' => [
 				'wikibase.mobile.css'
 			],
-			'dependencies' => [
+			'scripts' => [
 				'jquery.wikibase.statementview.RankSelector.styles',
+			],
+			'targets' => 'mobile'
+		],
+
+		'wikibase.termbox' => $moduleTemplate + [
+			'styles' => [
+				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
+			],
+			'dependencies' => [
+				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.js',
 			],
 			'targets' => 'mobile'
 		],
