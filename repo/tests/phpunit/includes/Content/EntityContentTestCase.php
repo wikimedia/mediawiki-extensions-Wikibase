@@ -271,8 +271,11 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	}
 
 	public function diffProvider() {
-		$empty = $this->newBlank( $this->getDummyId() );
 		$entityType = $this->getEntityType();
+
+		$empty = $this->newEmpty();
+
+		$blank = $this->newBlank( $this->getDummyId() );
 
 		$spam = $this->newBlank( $this->getDummyId() );
 		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
@@ -289,6 +292,11 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 			'empty' => [
 				$empty,
 				$empty,
+				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
+			],
+			'blank' => [
+				$blank,
+				$blank,
 				new EntityContentDiff( new EntityDiff(), new Diff(), $entityType )
 			],
 			'same' => [
