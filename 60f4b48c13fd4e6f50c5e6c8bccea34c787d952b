@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "5f2015c1_d2549ce5",
+        "filename": "repo/sql/DropTermIndices.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-10-09T16:21:52Z",
+      "side": 1,
+      "message": "does this comment is supposed to say those DROP lines were originally in the said UpdateTermIndexes sql script?\nI guess this information does not really matter, so the comment could be removed?",
+      "revId": "60f4b48c13fd4e6f50c5e6c8bccea34c787d952b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3bc6d836_80927a11",
         "filename": "repo/sql/UpdateTermIndices2018.sql",
         "patchSetId": 6
