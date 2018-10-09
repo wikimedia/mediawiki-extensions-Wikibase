@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "065965ee_a878abad",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1662db81_b30657fb",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c66cf333_04441f1a",
         "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
         "patchSetId": 22
@@ -69,6 +87,24 @@
       "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "379fecfd_96ed0fd2",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c94eca9_42605b8c",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "11cb46e2_14d47ae3",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "I dug it up, WikiPageEntityRevisionLookup::loadEntity needs it.",
+      "parentUuid": "dba2b3db_83d0073a",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2d10e01_24725eec",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 22
@@ -139,6 +193,24 @@
       "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c74190d_3c7f9998",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "ah, right. properties only.",
+      "parentUuid": "2f5ee9f4_a8a4e77d",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

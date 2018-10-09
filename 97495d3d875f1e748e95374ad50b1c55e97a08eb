@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "09173d96_09020532",
+        "filename": "client/tests/phpunit/includes/Hooks/OtherProjectsSidebarGeneratorTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "why is this in this patch?",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "727bb3f3_fa0b98da",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserOutputUpdateHookHandlersTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "why is this in this patch?",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90d52736_77658a26",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "The name sounds like the method returns a list of entity IDs, while it in fact returns the rows indexed by id.",
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3fd28f1_da739d8d",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 24
@@ -19,6 +70,23 @@
         "endLine": 307,
         "endChar": 4
       },
+      "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d18324_baada55c",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2018-10-09T12:05:35Z",
+      "side": 1,
+      "message": "It still seems to me like this should be in the new EntityQuery class. It\u0027s logically bound to the select that used to happen in line 300, and should be factored out along with that select, and remain in the same class.",
       "revId": "97495d3d875f1e748e95374ad50b1c55e97a08eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
