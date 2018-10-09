@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Store\Sql;
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use ArrayObject;
 use IDatabase;
@@ -13,10 +13,14 @@ use Wikibase\Lib\Store\Sql\PageTableEntityQueryBase;
 
 /**
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseLib
+ *
+ * @covers \Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery
+ * @covers \Wikibase\Lib\Store\Sql\PageTableEntityQueryBase
+ *
  * @license GPL-2.0-or-later
  */
-class EntityIdLocalPartPageTableEntityQueryTest extends TestCase {
+class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 
 	/**
 	 * @param string $type
