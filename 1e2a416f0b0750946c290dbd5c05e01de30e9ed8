@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0c94eca9_42605b8c",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQueryBase.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T07:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c66cf333_04441f1a",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3515e989_ba9149d6",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 22
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "dba2b3db_83d0073a",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T07:56:01Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it is still needed, you added the role_name here in Ia66f8ffcc74a4786acdab813abe4d52dbd59e82e.\nIt is also added in selectRevisionInformationById.\n\nI think this would be done in either place, ass this is quite self contained this could be done in a followup.",
+      "parentUuid": "3515e989_ba9149d6",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2d10e01_24725eec",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 22
@@ -64,6 +100,24 @@
       "writtenOn": "2018-10-08T18:01:56Z",
       "side": 1,
       "message": "This won\u0027t work for MediaInfo",
+      "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f5ee9f4_a8a4e77d",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-09T07:56:01Z",
+      "side": 1,
+      "message": "It should still work for the function it is in (rebuilding property info).\nThat doesn\u0027t need to know about media info entities.",
+      "parentUuid": "a2d10e01_24725eec",
       "revId": "1e2a416f0b0750946c290dbd5c05e01de30e9ed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
