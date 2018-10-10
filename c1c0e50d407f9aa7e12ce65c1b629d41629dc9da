@@ -34,6 +34,24 @@
       "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a60e976_33768793",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-10-10T17:47:16Z",
+      "side": 1,
+      "message": "@Legoktm yes, exactly! And yes, as I suspected, this need of setting the ini vars is not unique for this particular case, so makes sense to support it properly.",
+      "parentUuid": "c312d4ec_8ee45fa1",
+      "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
