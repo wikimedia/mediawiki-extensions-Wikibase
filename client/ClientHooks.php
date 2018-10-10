@@ -24,6 +24,7 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
+use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialEntityUsage;
@@ -369,6 +370,48 @@ final class ClientHooks {
 		array &$extraFeatures
 	) {
 		$extraFeatures[] = new MoreLikeWikibase( $config );
+	}
+
+	/**
+	 * SkinAfterBottomScripts hook handler
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinAfterBottomScripts
+	 *
+	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
+	 *
+	 * @param Skin $skin
+	 * @param string &$html
+	 * @return true
+	 */
+	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$out = $skin->getOutput();
+		$title = $out->getTitle();
+		$entityId = self::parseEntityId( $wikibaseClient, $out->getProperty( 'wikibase_item' ) );
+		if (
+			!$title || !$title->exists() || $title->getNamespace() !== NS_MAIN ||
+			!$entityId
+		) {
+			return true;
+		}
+
+		$repoLinker = $wikibaseClient->newRepoLinker();
+		$handler = new SkinAfterBottomScriptsHandler( $repoLinker );
+		$html .= $handler->createSchema( $title, $entityId );
+
+		return true;
+	}
+
+	/**
+	 * @param WikibaseClient $prefixId
+	 * @param string|null $prefixId
+	 * @return EntityId|null
+	 */
+	private static function parseEntityId( WikibaseClient $wikibaseClient, $prefixedId ) {
+		if ( !$prefixedId ) {
+			return null;
+		}
+
+		return $wikibaseClient->getEntityIdParser()->parse( $prefixedId );
 	}
 
 }
