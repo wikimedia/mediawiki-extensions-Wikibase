@@ -70,6 +70,30 @@
       "revId": "abd48f66dc3d541a48663e8e1ecfdc486c108f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ca73f59_36e1a905",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T09:08:37Z",
+      "side": 1,
+      "message": "patch for the try finally block https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/465578/",
+      "parentUuid": "6f152c2e_c716bbef",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 5
+      },
+      "revId": "abd48f66dc3d541a48663e8e1ecfdc486c108f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
