@@ -14,17 +14,21 @@ class RepoLinker {
 
 	private $baseUrl;
 
+	private $baseConceptUri;
+
 	private $articlePath;
 
 	private $scriptPath;
 
 	/**
 	 * @param string $baseUrl
+	 * @param string $baseConceptUri Usually getSetting( 'repositories' )[ '' ][ 'baseUri' ].
 	 * @param string $articlePath
 	 * @param string $scriptPath
 	 */
-	public function __construct( $baseUrl, $articlePath, $scriptPath ) {
+	public function __construct( $baseUrl, $baseConceptUri, $articlePath, $scriptPath ) {
 		$this->baseUrl = $baseUrl;
+		$this->baseConceptUri = $baseConceptUri;
 		$this->articlePath = $articlePath;
 		$this->scriptPath = $scriptPath;
 	}
@@ -42,6 +46,21 @@ class RepoLinker {
 
 		$encodedPage = $this->encodePage( $page );
 		return $this->getBaseUrl() . str_replace( '$1', $encodedPage, $this->articlePath );
+	}
+
+	/**
+	 * @param string $page
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string
+	 */
+	public function getConceptUri( $page ) {
+		if ( !is_string( $page ) ) {
+			throw new InvalidArgumentException( '$page must be a string' );
+		}
+
+		$encodedPage = $this->encodePage( $page );
+		return $this->getBaseConceptUri() . '/' . $encodedPage;
 	}
 
 	/**
@@ -122,10 +141,29 @@ class RepoLinker {
 	}
 
 	/**
+	 * Constructs the machine followable link to an entity. E.g., https://www.wikidata.org/entity/Q42.
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	public function getEntityConceptUri( EntityId $entityId ) {
+		$title = $entityId->getSerialization();
+		return $this->getConceptUri( $title );
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getBaseUrl() {
 		return rtrim( $this->baseUrl, '/' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getBaseConceptUri() {
+		return rtrim( $this->baseConceptUri, '/' );
 	}
 
 	/**

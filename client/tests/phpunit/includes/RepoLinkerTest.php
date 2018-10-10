@@ -25,16 +25,19 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'baseUrl' => '//www.example.com',
+				'baseConceptUri' => 'http://www.example.com/entity',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 			],
 			[
 				'baseUrl' => '//example.com/',
+				'baseConceptUri' => 'http://example.com/entity',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 			],
 			[
 				'baseUrl' => 'http://www.example.com',
+				'baseConceptUri' => '',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
 			]
@@ -44,6 +47,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
 			$settings['baseUrl'],
+			$settings['baseConceptUri'],
 			$settings['articlePath'],
 			$settings['scriptPath']
 		);
@@ -196,6 +200,32 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 			[
 				'http://www.example.com/wiki/Special:EntityPage/Q1234',
 				$settings[2],
+				new ItemId( 'Q1234' )
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider getEntityConceptUri
+	 */
+	public function testGetEntityConceptUri( $expected, array $settings, EntityId $entityId ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getEntityConceptUri( $entityId ) );
+	}
+
+	public function getEntityConceptUri() {
+		$settings = $this->getRepoSettings();
+
+		return [
+			[
+				'http://www.example.com/entity/Q730',
+				$settings[0],
+				new ItemId( 'Q730' )
+			],
+			[
+				'http://example.com/entity/Q1234',
+				$settings[1],
 				new ItemId( 'Q1234' )
 			]
 		];

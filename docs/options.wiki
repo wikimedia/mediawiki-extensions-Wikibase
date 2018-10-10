@@ -144,3 +144,4 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :referencedEntityIdAccessLimit: Maximum number of calls to "mw.wikibase.getReferencedEntityId" allowed on a single page.
 ;referencedEntityIdMaxDepth: Maximum search depth for referenced entities in "mw.wikibase.getReferencedEntityId".
 ;referencedEntityIdMaxReferencedEntityVisits: Maximum number of entities to visit in a "mw.wikibase.getReferencedEntityId" call.
+;pageSchemaNamespaces: An array of namespace numbers defaulting to empty (disabled); pages with a matching namespace will include a JSON-LD schema script for search engine optimization (SEO).
