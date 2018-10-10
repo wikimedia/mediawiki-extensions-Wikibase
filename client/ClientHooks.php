@@ -6,6 +6,7 @@ use Action;
 use BaseTemplate;
 use ContentHandler;
 use EditPage;
+use Exception;
 use ExtensionRegistry;
 use OutputPage;
 use Parser;
@@ -24,6 +25,7 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
+use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialEntityUsage;
@@ -369,6 +371,79 @@ final class ClientHooks {
 		array &$extraFeatures
 	) {
 		$extraFeatures[] = new MoreLikeWikibase( $config );
+	}
+
+	/**
+	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
+	 *
+	 * @param Skin $skin
+	 * @param string &$html
+	 * @return bool Always true.
+	 */
+	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
+		$client = WikibaseClient::getDefaultInstance();
+		$schemaNamespaces = $client->getSettings()->getSetting( 'schemaNamespaces' );
+
+		$out = $skin->getOutput();
+		$title = $out->getTitle();
+		$entityId = self::parseEntityId( $client, $out->getProperty( 'wikibase_item' ) );
+		if (
+			!$entityId ||
+			!$title ||
+			!in_array( $title->getNamespace(), $schemaNamespaces ) ||
+			!$title->exists()
+		) {
+			return true;
+		}
+
+		$repoLinker = $client->newRepoLinker();
+		$handler = new SkinAfterBottomScriptsHandler( $repoLinker );
+		$revisionTimestamp = $out->getRevisionTimestamp();
+		$image = self::queryPageImage( $title );
+		$html .= $handler->createSchema( $title, $revisionTimestamp, $image, self::getEntity( $client, $entityId ), $entityId );
+
+		return true;
+	}
+
+	/**
+	 * @param WikibaseClient $prefixId
+	 * @param string|null $prefixId
+	 * @return EntityId|null
+	 */
+	private static function parseEntityId( WikibaseClient $client, $prefixedId ) {
+		if ( !$prefixedId ) {
+			return null;
+		}
+
+		return $client->getEntityIdParser()->parse( $prefixedId );
+	}
+
+	/**
+	 * If available, query the canonical page image injected into the og:image meta tag. It's
+	 * important that the schema image match the page meta image since the schema describes the page.
+	 * @param EntityId $entityId
+	 * @return File|null
+	 */
+	private static function queryPageImage( Title $title ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
+			return null;
+		}
+		/** @suppress PhanUndeclaredStaticMethod Static call to undeclared method */
+		$image = \PageImages::getPageImage( $title );
+		return $image ? $image : null;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @return EntityDocument|null
+	 */
+	private static function getEntity( WikibaseClient $client, EntityId $entityId ) {
+		try {
+			$entityLookup = $client->getStore()->getEntityLookup();
+			return $entityLookup->getEntity( $entityId );
+		} catch ( Exception $ex ) {
+			return null;
+		}
 	}
 
 }
