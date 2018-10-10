@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "718e24a8_6e753ea2",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-10T09:42:02Z",
+      "side": 1,
+      "message": "Not a big deal, but usually these are called $repo or $wikibaseRepo throughout the rest of the code base.",
+      "range": {
+        "startLine": 81,
+        "startChar": 3,
+        "endLine": 81,
+        "endChar": 11
+      },
+      "revId": "ae923112714a7048d4470e462e209159ba87d591",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3adb938c_2032c56d",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-10T09:42:02Z",
+      "side": 1,
+      "message": "Not a fan of calling things \"new\" and \"old\". This could just be \u0027wikibase.mobile.termbox\u0027.",
+      "range": {
+        "startLine": 90,
+        "startChar": 23,
+        "endLine": 90,
+        "endChar": 43
+      },
+      "revId": "ae923112714a7048d4470e462e209159ba87d591",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38dae88c_f7d43987",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-10T09:42:02Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027re expected to load anything here, so this can just be removed. (Or there\u0027s something I\u0027m not seeing?)",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 4
+      },
+      "revId": "ae923112714a7048d4470e462e209159ba87d591",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a5f0d48_19967c30",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 2063,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-10T09:42:02Z",
+      "side": 1,
+      "message": "IMO this either needs a test or we don\u0027t add it and just call `$repo-\u003egetSettings()-\u003egetSetting( \u0027mobileTermboxEnabled\u0027 )` directly.",
+      "range": {
+        "startLine": 2063,
+        "startChar": 17,
+        "endLine": 2063,
+        "endChar": 30
+      },
+      "revId": "ae923112714a7048d4470e462e209159ba87d591",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4039c9af_93e8bd35",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-10T09:42:02Z",
+      "side": 1,
+      "message": "As mentioned, I don\u0027t think this is needed.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 4
+      },
+      "revId": "ae923112714a7048d4470e462e209159ba87d591",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aa77232_61857f30",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-10T09:42:02Z",
+      "side": 1,
+      "message": "Looks a bit silly being empty, but I guess it helps with testing the feature flag :)",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 4
+      },
+      "revId": "ae923112714a7048d4470e462e209159ba87d591",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
