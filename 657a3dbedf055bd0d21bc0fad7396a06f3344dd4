@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89dc9984_26c6446c",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "This space should not be here",
+      "range": {
+        "startLine": 338,
+        "startChar": 22,
+        "endLine": 338,
+        "endChar": 23
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea7e07f3_56225230",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "I\u0027m unsure if we should do the drops and adds in batches here.\nIt might be better and even faster for the updater to process one index change at a time, drop the old and bring in the new.\n\nThis would require splitting the sql changes up into more sql files.",
+      "range": {
+        "startLine": 362,
+        "startChar": 2,
+        "endLine": 380,
+        "endChar": 4
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c38106a4_ad0af876",
+        "filename": "repo/sql/DropTermIndices.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 42
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c9e706f_30cab74c",
+        "filename": "repo/sql/DropTermIndices.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "This patch looks like it is just randomly dropping a bunch of stuff?\n\nFor example https://phabricator.wikimedia.org/T204838 states that term_search_key is created on install, and we want to switch that to be wb_terms_search_key  which is only in prod.\nBut instead we try to drop the prod index here? while not dropping the one we want to?\n\nThis patch could do with some more explanation as to what it is doing and why.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 63
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "417fbf89_42f41f66",
+        "filename": "repo/sql/DropTermIndices2018.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "It would be good to be consistent with the comments, this one has no space after the --, but the one below does.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb25ec0d_cfeeb40b",
+        "filename": "repo/sql/UpdateTermIndices2018.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "wb_terms_text\n\nAlso needs fixing in the comment on the lin above",
+      "range": {
+        "startLine": 2,
+        "startChar": 32,
+        "endLine": 2,
+        "endChar": 44
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5808934_85a04f7d",
+        "filename": "repo/sql/UpdateTermIndices2018.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "Looking at https://phabricator.wikimedia.org/T85414#4597677 this should be wb_terms_search_key.\n\nIt looks like the ticket https://phabricator.wikimedia.org/T204838 had 2 typos in it, fixed now.\n\nAlso needs fixing on the line above in the comment.",
+      "range": {
+        "startLine": 5,
+        "startChar": 32,
+        "endLine": 5,
+        "endChar": 50
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5190400_ee5a9861",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "wb_terms_text",
+      "range": {
+        "startLine": 71,
+        "startChar": 32,
+        "endLine": 71,
+        "endChar": 44
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc8b4f95_df2497f9",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 1,
+      "message": "wb_terms_search_key",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "657a3dbedf055bd0d21bc0fad7396a06f3344dd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "adb90f00_e06e751e",
+        "filename": "repo/sql/UpdateTermIndexes.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:54:06Z",
+      "side": 0,
+      "message": "Aaah, the drop indexes have come from here\n\nI still don\u0027t quite understand why though and this could do with an explanation.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "d96539d28e08778f403aa8c3dba1adea6cd0b7f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
