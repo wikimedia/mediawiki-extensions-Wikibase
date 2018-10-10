@@ -111,12 +111,16 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$builder->build( $context, $params['search'] );
 		$query = $context->getQuery();
 		$rescore = $context->getRescore();
-		// T205958
+
+		// serialize_precision set for T205958
 		$serializePrecision = ini_get( 'serialize_precision' );
 		ini_set( 'serialize_precision', -1 );
-		$encoded = json_encode( [ 'query' => $query->toArray(), 'rescore_query' => $rescore ],
+		try{
+			$encoded = json_encode( [ 'query' => $query->toArray(), 'rescore_query' => $rescore ],
 				JSON_PRETTY_PRINT );
-		ini_set( 'serialize_precision', $serializePrecision );
+		} finally {
+			ini_set( 'serialize_precision', $serializePrecision );
+		}
 
 		$this->assertFileContains( $expected, $encoded );
 	}
