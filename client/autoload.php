@@ -58,6 +58,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\Hooks\\ShortDescHandler' => __DIR__ . '/includes/Hooks/ShortDescHandler.php',
 	'Wikibase\\Client\\Hooks\\SidebarHookHandlers' => __DIR__ . '/includes/Hooks/SidebarHookHandlers.php',
 	'Wikibase\\Client\\Hooks\\SidebarLinkBadgeDisplay' => __DIR__ . '/includes/Hooks/SidebarLinkBadgeDisplay.php',
+	'Wikibase\\Client\\Hooks\\SkinAfterBottomScriptsHandler' => __DIR__ . '/includes/Hooks/SkinAfterBottomScriptsHandler.php',
 	'Wikibase\\Client\\Hooks\\SkinTemplateOutputPageBeforeExecHandler' => __DIR__ . '/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php',
 	'Wikibase\\Client\\Hooks\\UpdateRepoHookHandlers' => __DIR__ . '/includes/Hooks/UpdateRepoHookHandlers.php',
 	'Wikibase\\Client\\LangLinkHandler' => __DIR__ . '/includes/LangLinkHandler.php',
