@@ -7,6 +7,7 @@ use BaseTemplate;
 use ContentHandler;
 use EditPage;
 use ExtensionRegistry;
+use HTML;
 use OutputPage;
 use Parser;
 use ParserOutput;
@@ -120,17 +121,8 @@ final class ClientHooks {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$skin = $baseTemplate->getSkin();
 		$title = $skin->getTitle();
-		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
-		$entityId = null;
-
-		if ( $idString !== null ) {
-			$entityIdParser = $wikibaseClient->getEntityIdParser();
-			$entityId = $entityIdParser->parse( $idString );
-		} elseif ( $title && Action::getActionName( $skin ) !== 'view' && $title->exists() ) {
-			// Try to load the item ID from Database, but only do so on non-article views,
-			// (where the article's OutputPage isn't available to us).
-			$entityId = self::getEntityIdForTitle( $title );
-		}
+		$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
+		$entityId = self::getEntityIdForStringOrTitle( Action::getActionName( $skin ), $prefixedId, $title );
 
 		if ( $entityId !== null ) {
 			$repoLinker = $wikibaseClient->newRepoLinker();
@@ -140,6 +132,26 @@ final class ClientHooks {
 				'id' => 't-wikibase'
 			];
 		}
+	}
+
+	/**
+	 * @param string $actionName
+	 * @param string|null $prefixedId
+	 * @param Title|null $title
+	 *
+	 * @return EntityId|null
+	 */
+	private static function getEntityIdForStringOrTitle( string $actionName, string $prefixedId = null, Title $title = null ) {
+		if ( $prefixedId !== null ) {
+			$entityIdParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+			return $entityIdParser->parse( $prefixedId );
+		}
+		if ( $title && $actionName !== 'view' && $title->exists() ) {
+			// Try to load the item ID from Database, but only do so on non-article views,
+			// (where the article's OutputPage isn't available to us).
+			return self::getEntityIdForTitle( $title );
+		}
+		return null;
 	}
 
 	/**
@@ -179,11 +191,37 @@ final class ClientHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
 
 		$actionName = Action::getActionName( $skin->getContext() );
 		$beforePageDisplayHandler->addModules( $out, $actionName );
+
+		$title = $out->getTitle();
+		$prefixedId = $skin->getOutput()->getProperty( 'wikibase_item' );
+		$prefixedId = 'Q7503010'; // todo: remove.
+		$entityId = self::getEntityIdForStringOrTitle( $actionName, $prefixedId, $title );
+
+		if ( $entityId !== null ) {
+			$repoLinker = $wikibaseClient->newRepoLinker();
+
+			// todo: should this use out->addInlineScript() which adds a nonce? It's not JavaScript, it's
+			// JSON-LD, and will need a type attribute.
+			$html = Html::openElement( 'script', [ 'type' => 'application/ld+json' ] );
+			$html .= json_encode( [
+				'@context' => 'http://schema.org', // todo: HTTPS? Go Fish and Google use HTTP in their examples.
+				'name' => $title->getText(),
+				'url' => $title->getFullURL(),
+				'sameAs' => [
+					$repoLinker->getCanonicalEntityUrl( $entityId )
+				],
+			] );
+			$html .= Html::closeElement( 'script' );
+
+			// Append anywhere within the body.
+			$out->addHTML( $html );
+		}
 	}
 
 	/**
