@@ -23,10 +23,11 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
+		$conceptBaseUri = [ '' => 'https://www.wikidata.org/entity' ];
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
 
-		return new RepoLinker( $baseUrl, $articlePath, $scriptPath );
+		return new RepoLinker( $baseUrl, $conceptBaseUri, $articlePath, $scriptPath );
 	}
 
 	public function getLinksProvider() {

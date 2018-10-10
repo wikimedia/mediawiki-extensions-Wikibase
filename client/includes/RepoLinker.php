@@ -4,6 +4,7 @@ namespace Wikibase\Client;
 
 use Html;
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -14,17 +15,21 @@ class RepoLinker {
 
 	private $baseUrl;
 
+	private $conceptBaseUris;
+
 	private $articlePath;
 
 	private $scriptPath;
 
 	/**
 	 * @param string $baseUrl
+	 * @param array $conceptBaseUris
 	 * @param string $articlePath
 	 * @param string $scriptPath
 	 */
-	public function __construct( $baseUrl, $articlePath, $scriptPath ) {
+	public function __construct( $baseUrl, array $conceptBaseUris, $articlePath, $scriptPath ) {
 		$this->baseUrl = $baseUrl;
+		$this->conceptBaseUris = $conceptBaseUris;
 		$this->articlePath = $articlePath;
 		$this->scriptPath = $scriptPath;
 	}
@@ -122,10 +127,41 @@ class RepoLinker {
 	}
 
 	/**
+	 * Constructs the machine followable link to an entity. E.g., https://www.wikidata.org/entity/Q42.
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @throws LogicException when there is no base URI for the repository $entityId belongs to
+	 *
+	 * @return string
+	 */
+	public function getEntityConceptUri( EntityId $entityId ) {
+		$baseUri = $this->getConceptBaseUri( $entityId );
+		return $baseUri . '/' . wfUrlencode( $entityId->getLocalPart() );
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getBaseUrl() {
 		return rtrim( $this->baseUrl, '/' );
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws LogicException when there is no base URI for the repository $entityId belongs to
+	 *
+	 * @return string
+	 */
+	public function getConceptBaseUri( EntityId $entityId ) {
+		$uri = $this->conceptBaseUris[$entityId->getRepositoryName()];
+		if ( !isset( $uri ) ) {
+			throw new LogicException(
+				'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName()
+			);
+		}
+		return rtrim( $uri, '/' );
 	}
 
 	/**
