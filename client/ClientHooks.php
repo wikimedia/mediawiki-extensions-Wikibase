@@ -24,6 +24,7 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
+use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialEntityUsage;
@@ -31,6 +32,7 @@ use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\AutoCommentFormatter;
 use WikiPage;
 
@@ -369,6 +371,59 @@ final class ClientHooks {
 		array &$extraFeatures
 	) {
 		$extraFeatures[] = new MoreLikeWikibase( $config );
+	}
+
+	/**
+	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
+	 *
+	 * @param Skin $skin
+	 * @param string &$html
+	 *
+	 * @return bool Always true.
+	 */
+	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
+		$client = WikibaseClient::getDefaultInstance();
+		$enabledNamespaces = $client->getSettings()->getSetting( 'pageSchemaNamespaces' );
+
+		$out = $skin->getOutput();
+		$entityId = self::parseEntityId( $client, $out->getProperty( 'wikibase_item' ) );
+		$title = $out->getTitle();
+		if (
+			!$entityId ||
+			!$title ||
+			!in_array( $title->getNamespace(), $enabledNamespaces ) ||
+			!$title->exists()
+		) {
+			return true;
+		}
+
+		$handler = new SkinAfterBottomScriptsHandler( $client, $client->newRepoLinker() );
+		$revisionTimestamp = $out->getRevisionTimestamp();
+		$html .= $handler->createSchemaElement(
+			$title,
+			$revisionTimestamp,
+			$entityId
+		);
+
+		return true;
+	}
+
+	/**
+	 * @param WikibaseClient $prefixId
+	 * @param string|null $prefixId
+	 *
+	 * @return EntityId|null
+	 */
+	private static function parseEntityId( WikibaseClient $client, $prefixedId = null ) {
+		if ( !$prefixedId ) {
+			return null;
+		}
+
+		try {
+			return $client->getEntityIdParser()->parse( $prefixedId );
+		} catch ( EntityIdParsingException $ex ) {
+			return null;
+		}
 	}
 
 }
