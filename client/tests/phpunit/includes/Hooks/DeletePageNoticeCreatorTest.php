@@ -28,10 +28,11 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 	protected function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
+		$conceptBaseUri = [ '' => 'https://www.wikidata.org/entity' ];
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
 
-		return new RepoLinker( $baseUrl, $articlePath, $scriptPath );
+		return new RepoLinker( $baseUrl, $conceptBaseUri, $articlePath, $scriptPath );
 	}
 
 	/**
