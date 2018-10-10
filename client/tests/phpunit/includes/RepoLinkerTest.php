@@ -202,6 +202,32 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * @dataProvider getCanonicalEntityUrl
+	 */
+	public function testGetCanonicalEntityUrl( $expected, array $settings, EntityId $entityId ) {
+		$repoLinker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( $expected, $repoLinker->getCanonicalEntityUrl( $entityId ) );
+	}
+
+	public function getCanonicalEntityUrl() {
+		$settings = $this->getRepoSettings();
+
+		return [
+			[
+				'//example.com/wiki/Q730',
+				$settings[1],
+				new ItemId( 'Q730' )
+			],
+			[
+				'http://www.example.com/wiki/Q1234',
+				$settings[2],
+				new ItemId( 'Q1234' )
+			]
+		];
+	}
+
+	/**
 	 * @dataProvider getBaseUrlProvider
 	 */
 	public function testGetBaseUrl( $expected, array $settings ) {
