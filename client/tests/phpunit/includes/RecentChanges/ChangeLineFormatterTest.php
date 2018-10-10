@@ -48,6 +48,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		$this->repoLinker = new RepoLinker(
 			'http://www.wikidata.org',
+			'http://www.wikidata.org/entity',
 			'/wiki/$1',
 			'/w'
 		);
