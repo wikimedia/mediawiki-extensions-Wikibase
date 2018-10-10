@@ -5,10 +5,10 @@
  */
 return call_user_func( function() {
 	return array_merge(
-		include __DIR__ . '/resources/wikibase-data-model.php',
-		include __DIR__ . '/resources/wikibase-data-values.php',
-		include __DIR__ . '/resources/wikibase-serialization.php',
-		include __DIR__ . '/resources/wikibase-api.php',
-		include __DIR__ . '/resources/wikibase-data-values-value-view.php'
+		require __DIR__ . '/resources/wikibase-data-model.php',
+		require __DIR__ . '/resources/wikibase-data-values.php',
+		require __DIR__ . '/resources/wikibase-serialization.php',
+		require __DIR__ . '/resources/wikibase-api.php',
+		require __DIR__ . '/resources/wikibase-data-values-value-view.php'
 	);
 } );

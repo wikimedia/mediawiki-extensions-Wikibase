@@ -54,6 +54,6 @@ return call_user_func( function() {
 
 	return array_merge(
 		$modules,
-		include __DIR__ . '/jquery.wikibase/resources.php'
+		require __DIR__ . '/jquery.wikibase/resources.php'
 	);
 } );
