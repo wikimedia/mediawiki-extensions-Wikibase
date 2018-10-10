@@ -841,7 +841,7 @@ final class WikibaseClient {
 	 *
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	private function getSnakFormatterFactory() {
+	public function getSnakFormatterFactory() {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
