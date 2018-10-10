@@ -46,6 +46,30 @@
       "revId": "abd48f66dc3d541a48663e8e1ecfdc486c108f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f152c2e_c716bbef",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T09:07:44Z",
+      "side": 1,
+      "message": "This actually fails for me now on 7.1....\n\neg.\n\n-                                                                \"boost\": 3.0e-10\\n\n+                                                                \"boost\": 3.0000000000000015e-10\\n",
+      "parentUuid": "db15bce9_b1fbee95",
+      "range": {
+        "startLine": 119,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 5
+      },
+      "revId": "abd48f66dc3d541a48663e8e1ecfdc486c108f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
