@@ -93,6 +93,30 @@
       "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "553a836f_de903ff0",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:29:34Z",
+      "side": 1,
+      "message": "Aaaah yes, the diff does look totally confusing, but I see it now, the blank one used to be called $empty :P",
+      "parentUuid": "0277c37c_7e26b9ad",
+      "range": {
+        "startLine": 278,
+        "startChar": 11,
+        "endLine": 278,
+        "endChar": 50
+      },
+      "revId": "1e635d4805d0e26ca660fd18bf6aaa70ec0fce35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
