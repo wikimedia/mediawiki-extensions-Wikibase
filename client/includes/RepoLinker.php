@@ -122,6 +122,18 @@ class RepoLinker {
 	}
 
 	/**
+	 * Constructs the ideal link to an entity. E.g., https://www.wikidata.org/wiki/Q42.
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	public function getCanonicalEntityUrl( EntityId $entityId ) {
+		$title = $entityId->getSerialization();
+		return $this->getPageUrl( $title );
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getBaseUrl() {
