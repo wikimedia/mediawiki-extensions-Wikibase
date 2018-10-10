@@ -519,6 +519,7 @@ final class WikibaseClient {
 	public function newRepoLinker() {
 		return new RepoLinker(
 			$this->settings->getSetting( 'repoUrl' ),
+			$this->settings->getSetting( 'repositories' )[ '' ][ 'baseUri' ],
 			$this->settings->getSetting( 'repoArticlePath' ),
 			$this->settings->getSetting( 'repoScriptPath' )
 		);
