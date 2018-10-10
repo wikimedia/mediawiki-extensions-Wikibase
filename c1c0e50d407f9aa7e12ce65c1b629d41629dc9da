@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b18c71d_04c54c51",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-10-10T15:34:45Z",
+      "side": 1,
+      "message": "I would still recommend using tearDown(). We already do this with globals, we just need to add the same handling for ini settings.",
+      "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
