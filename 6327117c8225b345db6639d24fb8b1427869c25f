@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6a87113_421031d7",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-10-10T14:16:23Z",
+      "side": 1,
+      "message": "Copy-paste mistake. I guess this should not even say \"entity\", but \"… and this Content object either contains no or an empty Entity\".",
+      "range": {
+        "startLine": 87,
+        "startChar": 56,
+        "endLine": 87,
+        "endChar": 60
+      },
+      "revId": "6327117c8225b345db6639d24fb8b1427869c25f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4168959_17f2fb93",
+        "filename": "repo/includes/Content/PropertyContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-10-10T14:16:23Z",
+      "side": 1,
+      "message": "Uh, sorry? This is the PropertyContent class.",
+      "range": {
+        "startLine": 121,
+        "startChar": 56,
+        "endLine": 121,
+        "endChar": 60
+      },
+      "revId": "6327117c8225b345db6639d24fb8b1427869c25f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
