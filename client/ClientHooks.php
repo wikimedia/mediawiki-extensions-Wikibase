@@ -26,6 +26,7 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
@@ -369,6 +370,47 @@ final class ClientHooks {
 		array &$extraFeatures
 	) {
 		$extraFeatures[] = new MoreLikeWikibase( $config );
+	}
+
+	/**
+	 * SkinAfterBottomScripts hook handler
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinAfterBottomScripts
+	 *
+	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
+	 *
+	 * @param Skin $skin
+	 * @param string &$html
+	 * @return true
+	 */
+	public static function onSkinAfterBottomScripts( Skin $skin, &$html ) {
+		$out = $skin->getOutput();
+		$title = $out->getTitle();
+		if ( !$title ) {
+			return true;
+		}
+
+		$entityId = null;
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$actionName = Action::getActionName( $skin );
+		$prefixedId = $out->getProperty( 'wikibase_item' );
+
+		if ( $prefixedId !== null ) {
+			$entityIdParser = $wikibaseClient->getEntityIdParser();
+			$entityId = $entityIdParser->parse( $prefixedId );
+		} elseif ( $actionName !== 'view' && $title->exists() ) {
+			// Try to load the item ID from Database, but only do so on non-article views,
+			// (where the article's OutputPage isn't available to us).
+			$entityId = self::getEntityIdForTitle( $title );
+		}
+		if ( !$entityId ) {
+			return true;
+		}
+
+		$repoLinker = $wikibaseClient->newRepoLinker();
+		$handler = new SkinAfterBottomScriptsHandler( $repoLinker );
+		$handler->addSchema( $html, $title, $entityId );
+
+		return true;
 	}
 
 }
