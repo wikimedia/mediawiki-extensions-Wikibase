@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f059e7da_1c224f9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-10T08:56:08Z",
+      "side": 1,
+      "message": "There should not be a new line within the footer.\n\nSee https://www.mediawiki.org/wiki/Gerrit/Commit_message_guidelines",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "a0a79b9ef73db23dd7a4c0a48f4e4db7f626b6a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
