@@ -16,6 +16,24 @@
       "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c312d4ec_8ee45fa1",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2018-10-10T17:37:19Z",
+      "side": 1,
+      "message": "So are you suggesting a $this-\u003esetIniValue() just like we have $this-\u003esetMwGlobals() ?\n\nPotential uses: https://codesearch.wmflabs.org/search/?q\u003dini_set\u0026i\u003dnope\u0026files\u003dtests%2Fphpunit\u0026repos\u003d",
+      "parentUuid": "4b18c71d_04c54c51",
+      "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
