@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6fdf105_6e04ee5d",
+        "filename": "repo/includes/Store/Sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-10-11T11:34:53Z",
+      "side": 1,
+      "message": "Repeating string all over is a recipe for error. Can this part be factored out to a constant or class attribute?",
+      "range": {
+        "startLine": 370,
+        "startChar": 3,
+        "endLine": 370,
+        "endChar": 47
+      },
+      "revId": "7f7b577d6caaebcb94cfc702e915a5c6aeeaa401",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
