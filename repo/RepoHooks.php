@@ -20,7 +20,7 @@ use IContextSource;
 use LogEntry;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use MWExceptionHandler;
 use OutputPage;

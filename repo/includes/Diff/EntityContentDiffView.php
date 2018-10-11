@@ -8,7 +8,7 @@ use Html;
 use IContextSource;
 use Language;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use ParserOutput;
 use Revision;

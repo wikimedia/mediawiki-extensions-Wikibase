@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiResult;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use Revision;
 use Serializers\Serializer;
 use SiteLookup;
