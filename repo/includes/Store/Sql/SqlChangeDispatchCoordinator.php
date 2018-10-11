@@ -315,17 +315,20 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @see selectClient()
 	 */
 	private function getCandidateClients() {
+		$startTime = microtime( true ) * 1000;
 		$dbr = $this->getRepoReplica();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
 		$freshDispatchTime = wfTimestamp( TS_MW, $this->now() - $this->dispatchInterval );
 
 		// TODO: pass the max change ID as a parameter!
+		$startTimeSelectMax = microtime( true ) * 1000;
 		$row = $dbr->selectRow(
 			$this->changesTable,
 			'max( change_id ) as maxid',
 			[],
 			__METHOD__ );
+		$endTimeSelectMax = microtime( true ) * 1000;
 
 		$maxId = $row ? $row->maxid : 0;
 
@@ -344,6 +347,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			'chd_disabled = 0' // and not disabled
 		];
 
+		$startTimeSelectCandidates = microtime( true ) * 1000;
 		$candidates = $dbr->selectFieldValues(
 			$this->stateTable,
 			'chd_site',
@@ -354,8 +358,23 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				'LIMIT' => (int)$this->randomness
 			]
 		);
+		$endTimeSelectCandidates = microtime( true ) * 1000;
 
 		$this->releaseRepoDb( $dbr );
+
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.getCandidateClients-time.total',
+			( ( microtime( true ) * 1000 ) - $startTime )
+		);
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.getCandidateClients-time.selectMax',
+			( $endTimeSelectMax - $startTimeSelectMax )
+		);
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.getCandidateClients-time.selectCandidates',
+			( $endTimeSelectCandidates - $startTimeSelectCandidates )
+		);
+
 		return $candidates;
 	}
 
@@ -424,6 +443,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @see selectClient()
 	 */
 	public function lockClient( $siteID ) {
+		$startTime = microtime( true ) * 1000;
 		$this->trace( "Trying $siteID" );
 
 		$dbr = $this->getRepoReplica();
@@ -432,12 +452,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			$this->trace( 'Loaded repo db master' );
 
 			// get client state
+			$startTimeSelectClientSite = microtime( true ) * 1000;
 			$state = $dbr->selectRow(
 				$this->stateTable,
 				[ 'chd_site', 'chd_db', 'chd_seen', 'chd_touched', 'chd_lock', 'chd_disabled' ],
 				[ 'chd_site' => $siteID ],
 				__METHOD__
 			);
+			$endTimeSelectClientSite = microtime( true ) * 1000;
 
 			$this->releaseRepoDb( $dbr );
 
@@ -451,7 +473,9 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			}
 
 			$lock = $this->getClientLockName( $siteID );
+			$startTimeEngageLock = microtime( true ) * 1000;
 			$ok = $this->engageClientLock( $lock );
+			$endTimeEngageLock = microtime( true ) * 1000;
 
 			if ( !$ok ) {
 				// This really shouldn't happen, since we already checked if another process has a lock.
@@ -476,6 +500,19 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->trace( "Locked site $siteID at {$state['chd_seen']}." );
 
 		unset( $state['chd_disabled'] ); // don't mess with this.
+
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.lockClient-time.total',
+			( ( microtime( true ) * 1000)  - $startTime )
+		);
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.lockClient-time.selectClientSite',
+			( $endTimeSelectClientSite - $startTimeSelectClientSite )
+		);
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.lockClient-time.engageLock',
+			( $endTimeEngageLock - $startTimeEngageLock )
+		);
 
 		return $state;
 	}
