@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4709b571_e64b5b1e",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "looks like imports are sorted by the namespace, please keep all hook imports in one place (move it up 2 lines)",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 56
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f962462_2207127b",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "Most probably we should limit only to NS_MAIN namespace, but please check that with Olga.",
+      "range": {
+        "startLine": 387,
+        "startChar": 11,
+        "endLine": 387,
+        "endChar": 28
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebeacc1c_ae4c2a4e",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "do you want to leave early here? You have check that uses the \n\n    $out-\u003egetProperty(\u0027wikibase_item\u0027);\n\nYou don\u0027t need Title in that case, later you do the title-\u003eexists(), maybe remove that early return and change the elseif to:\n\n    elseif ($actionName !\u003d\u003d \u0027view\u0027 \u0026\u0026 title \u0026\u0026 title-\u003eexists())",
+      "range": {
+        "startLine": 389,
+        "startChar": 3,
+        "endLine": 389,
+        "endChar": 15
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b23ad98_17b9c49e",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "to simplify the code a bit you can move that into something like \n    private getEntityId(wikibaseClient, title, Skin){\n        if (prefixedId) { \n           return ...\n        } else if (....) {\n           return ....\n        }\n        return null;\n    }",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 3
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a09df58f_4a47ea51",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "There might be a typo here, you expect the EntityId but phpdoc says EntityDocument",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98f48592_3e44f76b",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "I\u0027m being picky here, but maybe instead of passing the reference the $html, just return the HTML here, and add that in the HookListener. Make this a pure function without side effects.\n\nThis function would become something like:\n    buildSchema()\n\nThen in the hook, you just concatenate return of this function once (also a micro performance improvement ;) ).",
+      "range": {
+        "startLine": 29,
+        "startChar": 29,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe3ebd20_ee0926e8",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "if we want to handle different namespaces - most probably we should use $title-\u003egetFullText() (which will prefix the title with namespaces different than NS_MAIN)",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "acf9cec5_53b72f18",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-11T20:54:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure how the crawler works, the getFullURL() returns the relative url (//en.wikipedia.org/.....), I think we should return the HTTPS url all the time.",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "de3fb0fa42f83da5cce3d5074692a086c10eeb53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
