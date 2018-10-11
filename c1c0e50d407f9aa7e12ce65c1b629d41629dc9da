@@ -52,6 +52,24 @@
       "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "089b047d_b4067c75",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2018-10-11T05:33:58Z",
+      "side": 1,
+      "message": "Change-Id: I7be4198592f0aaf73a28d3c60acb307a918b1a1f",
+      "parentUuid": "4a60e976_33768793",
+      "revId": "c1c0e50d407f9aa7e12ce65c1b629d41629dc9da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
