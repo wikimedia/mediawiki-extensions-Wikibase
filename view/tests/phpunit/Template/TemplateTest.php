@@ -6,7 +6,7 @@ use Wikibase\View\Template\Template;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\Template\Template
+ * @covers \Wikibase\View\Template\Template
  *
  * @uses Wikibase\View\Template\TemplateRegistry
  *

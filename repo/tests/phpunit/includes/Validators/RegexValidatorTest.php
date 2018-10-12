@@ -6,7 +6,7 @@ use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\RegexValidator
+ * @covers \Wikibase\Repo\Validators\RegexValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

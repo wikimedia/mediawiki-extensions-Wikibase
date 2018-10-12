@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Diff;
 use Wikibase\Repo\Diff\DiffOpValueFormatter;
 
 /**
- * @covers Wikibase\Repo\Diff\DiffOpValueFormatter
+ * @covers \Wikibase\Repo\Diff\DiffOpValueFormatter
  *
  * @group Wikibase
  *

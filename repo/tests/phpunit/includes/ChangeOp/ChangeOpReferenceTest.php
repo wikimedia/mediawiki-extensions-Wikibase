@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpReference
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpReference
  *
  * @group Wikibase
  * @group ChangeOp

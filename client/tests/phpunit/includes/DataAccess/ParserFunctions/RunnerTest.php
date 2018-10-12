@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\DataAccess\ParserFunctions\Runner
+ * @covers \Wikibase\Client\DataAccess\ParserFunctions\Runner
  *
  * @group Wikibase
  * @group WikibaseClient

@@ -9,7 +9,7 @@ use WikiPage;
 use WikitextContent;
 
 /**
- * @covers Wikibase\Client\Store\TitleFactory
+ * @covers \Wikibase\Client\Store\TitleFactory
  *
  * @group Database
  * @group Wikibase

@@ -14,7 +14,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\StatementSectionsView
+ * @covers \Wikibase\View\StatementSectionsView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

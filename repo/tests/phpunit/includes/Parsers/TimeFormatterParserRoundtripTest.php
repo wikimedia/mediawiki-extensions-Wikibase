@@ -14,8 +14,8 @@ use Wikibase\Lib\MwTimeIsoFormatter;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
- * @covers Wikibase\Lib\MwTimeIsoFormatter
- * @covers Wikibase\Repo\Parsers\TimeParserFactory
+ * @covers \Wikibase\Lib\MwTimeIsoFormatter
+ * @covers \Wikibase\Repo\Parsers\TimeParserFactory
  *
  * @group Wikibase
  *

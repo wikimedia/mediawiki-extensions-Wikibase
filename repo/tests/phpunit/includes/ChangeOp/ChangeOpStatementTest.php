@@ -30,7 +30,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpStatement
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpStatement
  *
  * @group Wikibase
  * @group ChangeOp

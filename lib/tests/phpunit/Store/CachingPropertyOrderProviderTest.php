@@ -8,7 +8,7 @@ use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
- * @covers Wikibase\Lib\Store\CachingPropertyOrderProvider
+ * @covers \Wikibase\Lib\Store\CachingPropertyOrderProvider
  *
  * @group WikibaseStore
  * @group Wikibase

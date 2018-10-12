@@ -17,7 +17,7 @@ use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Client\LangLinkHandler
+ * @covers \Wikibase\Client\LangLinkHandler
  *
  * @group WikibaseClient
  * @group Wikibase

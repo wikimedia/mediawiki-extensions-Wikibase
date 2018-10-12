@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Diff\ItemDiffView;
 
 /**
- * @covers Wikibase\Repo\Diff\ItemDiffView
+ * @covers \Wikibase\Repo\Diff\ItemDiffView
  *
  * @group Wikibase
  *

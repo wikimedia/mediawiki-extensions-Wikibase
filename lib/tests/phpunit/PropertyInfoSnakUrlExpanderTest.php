@@ -15,7 +15,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**
- * @covers Wikibase\Lib\PropertyInfoSnakUrlExpander
+ * @covers \Wikibase\Lib\PropertyInfoSnakUrlExpander
  *
  * @group Wikibase
  *

@@ -8,8 +8,8 @@ use Wikibase\ChangeRow;
 use Wikibase\EntityChange;
 
 /**
- * @covers Wikibase\ChangeRow
- * @covers Wikibase\EntityChange
+ * @covers \Wikibase\ChangeRow
+ * @covers \Wikibase\EntityChange
  *
  * @group Database
  * @group Wikibase

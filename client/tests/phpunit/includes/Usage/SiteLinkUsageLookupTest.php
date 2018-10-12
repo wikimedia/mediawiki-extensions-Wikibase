@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\Usage\SiteLinkUsageLookup
+ * @covers \Wikibase\Client\Usage\SiteLinkUsageLookup
  *
  * @group Wikibase
  * @group WikibaseClient

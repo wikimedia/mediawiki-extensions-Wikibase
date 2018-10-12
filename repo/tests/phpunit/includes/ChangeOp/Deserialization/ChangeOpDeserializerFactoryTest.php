@@ -14,7 +14,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializerFactory
  *
  * @group Wikibase
  *

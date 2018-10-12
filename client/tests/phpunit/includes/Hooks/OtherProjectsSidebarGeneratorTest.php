@@ -21,7 +21,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGenerator
+ * @covers \Wikibase\Client\Hooks\OtherProjectsSidebarGenerator
  *
  * @group WikibaseClient
  * @group Wikibase

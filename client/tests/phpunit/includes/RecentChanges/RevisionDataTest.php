@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 use Wikibase\Client\RecentChanges\RevisionData;
 
 /**
- * @covers Wikibase\Client\RecentChanges\RevisionData
+ * @covers \Wikibase\Client\RecentChanges\RevisionData
  *
  * @group WikibaseClient
  * @group Wikibase

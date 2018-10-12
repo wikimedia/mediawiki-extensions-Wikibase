@@ -7,7 +7,7 @@ use Title;
 use Wikibase\Client\ChangeNotificationJob;
 
 /**
- * @covers Wikibase\Client\ChangeNotificationJob
+ * @covers \Wikibase\Client\ChangeNotificationJob
  *
  * @group Wikibase
  * @group WikibaseChange

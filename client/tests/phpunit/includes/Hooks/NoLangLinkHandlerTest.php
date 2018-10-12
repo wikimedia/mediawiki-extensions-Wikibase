@@ -10,7 +10,7 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 
 /**
- * @covers Wikibase\Client\Hooks\NoLangLinkHandler
+ * @covers \Wikibase\Client\Hooks\NoLangLinkHandler
  *
  * @group WikibaseClient
  * @group Wikibase

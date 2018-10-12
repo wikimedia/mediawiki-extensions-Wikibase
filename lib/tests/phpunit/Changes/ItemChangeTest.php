@@ -11,8 +11,8 @@ use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
- * @covers Wikibase\ItemChange
- * @covers Wikibase\DiffChange
+ * @covers \Wikibase\ItemChange
+ * @covers \Wikibase\DiffChange
  *
  * @group Database
  * @group Wikibase

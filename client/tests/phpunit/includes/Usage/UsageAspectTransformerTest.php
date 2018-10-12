@@ -8,7 +8,7 @@ use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Usage\UsageAspectTransformer
+ * @covers \Wikibase\Client\Usage\UsageAspectTransformer
  *
  * @group Wikibase
  * @group WikibaseClient

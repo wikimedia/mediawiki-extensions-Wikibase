@@ -16,7 +16,7 @@ use Wikibase\Lib\MessageSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\DispatchingSnakFormatter
+ * @covers \Wikibase\Lib\DispatchingSnakFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

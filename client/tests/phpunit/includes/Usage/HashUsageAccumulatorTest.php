@@ -5,8 +5,8 @@ namespace Wikibase\Client\Tests\Usage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 
 /**
- * @covers Wikibase\Client\Usage\HashUsageAccumulator
- * @covers Wikibase\Client\Usage\UsageAccumulator
+ * @covers \Wikibase\Client\Usage\HashUsageAccumulator
+ * @covers \Wikibase\Client\Usage\UsageAccumulator
  *
  * @group Wikibase
  * @group WikibaseClient

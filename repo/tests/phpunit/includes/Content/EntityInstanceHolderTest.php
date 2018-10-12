@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Content\EntityInstanceHolder
+ * @covers \Wikibase\Content\EntityInstanceHolder
  *
  * @group Wikibase
  * @group WikibaseEntity

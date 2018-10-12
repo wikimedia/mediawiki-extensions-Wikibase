@@ -10,7 +10,7 @@ use Wikibase\Repo\Validators\CompositeEntityValidator;
 use Wikibase\Repo\Validators\EntityValidator;
 
 /**
- * @covers Wikibase\Repo\Validators\CompositeEntityValidator
+ * @covers \Wikibase\Repo\Validators\CompositeEntityValidator
  *
  * @group Database
  * @group Wikibase

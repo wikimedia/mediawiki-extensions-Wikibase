@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Content\DeferredCopyEntityHolder
+ * @covers \Wikibase\Content\DeferredCopyEntityHolder
  *
  * @group Wikibase
  * @group WikibaseEntity

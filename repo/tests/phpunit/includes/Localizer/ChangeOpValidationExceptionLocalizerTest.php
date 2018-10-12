@@ -11,7 +11,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 
 /**
- * @covers Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer
+ * @covers \Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer
  *
  * @group Wikibase
  *

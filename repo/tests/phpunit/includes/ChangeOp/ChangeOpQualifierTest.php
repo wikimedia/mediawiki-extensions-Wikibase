@@ -21,7 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpQualifier
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpQualifier
  *
  * @group Wikibase
  * @group ChangeOp

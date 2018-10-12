@@ -26,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\Repo\Api\EntitySavingHelper
+ * @covers \Wikibase\Repo\Api\EntitySavingHelper
  *
  * @group Database
  * @group Wikibase

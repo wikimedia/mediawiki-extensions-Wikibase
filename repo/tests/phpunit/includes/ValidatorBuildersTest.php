@@ -29,7 +29,7 @@ use Wikibase\Repo\ValidatorBuilders;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 
 /**
- * @covers Wikibase\Repo\ValidatorBuilders
+ * @covers \Wikibase\Repo\ValidatorBuilders
  *
  * @group Wikibase
  * @group WikibaseValidators

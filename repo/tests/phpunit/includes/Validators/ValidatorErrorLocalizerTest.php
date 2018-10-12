@@ -11,7 +11,7 @@ use ValueValidators\Result;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\ValidatorErrorLocalizer
+ * @covers \Wikibase\Repo\Validators\ValidatorErrorLocalizer
  *
  * @group Wikibase
  * @group WikibaseValidators

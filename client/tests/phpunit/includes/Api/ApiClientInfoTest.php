@@ -11,7 +11,7 @@ use Wikibase\Client\Api\ApiClientInfo;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Client\Api\ApiClientInfo
+ * @covers \Wikibase\Client\Api\ApiClientInfo
  *
  * @group Database
  * @group API

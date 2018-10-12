@@ -14,7 +14,7 @@ use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\View\TermsListView
+ * @covers \Wikibase\View\TermsListView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * @covers Wikibase\Client\Store\Sql\PagePropsEntityIdLookup
+ * @covers \Wikibase\Client\Store\Sql\PagePropsEntityIdLookup
  *
  * @group Wikibase
  * @group WikibaseClient

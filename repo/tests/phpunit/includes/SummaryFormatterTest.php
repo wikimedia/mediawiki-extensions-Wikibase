@@ -21,7 +21,7 @@ use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\SummaryFormatter
+ * @covers \Wikibase\SummaryFormatter
  *
  * @group Wikibase
  * @group Database

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove
  *
  * @group Wikibase
  * @group ChangeOp

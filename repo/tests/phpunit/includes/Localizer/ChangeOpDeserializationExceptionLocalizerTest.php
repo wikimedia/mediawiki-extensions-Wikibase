@@ -9,7 +9,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 
 /**
- * @covers Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer
+ * @covers \Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer
  *
  * @group Wikibase
  *

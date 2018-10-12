@@ -8,7 +8,7 @@ use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @covers Wikibase\Client\Specials\SpecialUnconnectedPages
+ * @covers \Wikibase\Client\Specials\SpecialUnconnectedPages
  *
  * @group WikibaseClient
  * @group SpecialPage

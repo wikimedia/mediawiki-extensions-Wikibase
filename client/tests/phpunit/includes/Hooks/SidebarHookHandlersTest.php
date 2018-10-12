@@ -20,7 +20,7 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Client\Hooks\SidebarHookHandlers
+ * @covers \Wikibase\Client\Hooks\SidebarHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase

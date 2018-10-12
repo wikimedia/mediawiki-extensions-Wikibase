@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Store\UsageUpdater
+ * @covers \Wikibase\Client\Store\UsageUpdater
  *
  * @group Wikibase
  * @group WikibaseClient

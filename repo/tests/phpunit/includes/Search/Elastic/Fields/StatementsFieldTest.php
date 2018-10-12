@@ -20,7 +20,7 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Search\Elastic\Fields\StatementsField
+ * @covers \Wikibase\Repo\Search\Elastic\Fields\StatementsField
  *
  * @group WikibaseElastic
  * @group Wikibase

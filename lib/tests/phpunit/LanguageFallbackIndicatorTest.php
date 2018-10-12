@@ -8,7 +8,7 @@ use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
- * @covers Wikibase\Lib\LanguageFallbackIndicator
+ * @covers \Wikibase\Lib\LanguageFallbackIndicator
  *
  * @group ValueFormatters
  * @group Wikibase

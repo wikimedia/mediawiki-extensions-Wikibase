@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 
 /**
- * @covers Wikibase\Store\Sql\SqlChangeDispatchCoordinator
+ * @covers \Wikibase\Store\Sql\SqlChangeDispatchCoordinator
  *
  * @group Wikibase
  * @group WikibaseStore

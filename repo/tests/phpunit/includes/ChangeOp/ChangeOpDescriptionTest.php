@@ -13,7 +13,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpDescription
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpDescription
  *
  * @group Wikibase
  * @group ChangeOp

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Diff\ClaimDifference;
 
 /**
- * @covers Wikibase\Repo\Diff\ClaimDifference
+ * @covers \Wikibase\Repo\Diff\ClaimDifference
  *
  * @group Wikibase
  *

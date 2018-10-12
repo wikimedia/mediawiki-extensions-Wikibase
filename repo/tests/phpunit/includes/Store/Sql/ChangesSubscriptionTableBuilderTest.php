@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder
+ * @covers \Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder
  *
  * @group Wikibase
  * @group WikibaseUsageTracking

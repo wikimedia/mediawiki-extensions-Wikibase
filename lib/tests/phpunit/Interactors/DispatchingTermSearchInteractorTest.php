@@ -15,7 +15,7 @@ use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\Lib\Interactors\DispatchingTermSearchInteractor
+ * @covers \Wikibase\Lib\Interactors\DispatchingTermSearchInteractor
  *
  * @group Wikibase
  *

@@ -8,7 +8,7 @@ use SiteLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
- * @covers Wikibase\Repo\SiteLinkTargetProvider
+ * @covers \Wikibase\Repo\SiteLinkTargetProvider
  *
  * @group Wikibase
  *

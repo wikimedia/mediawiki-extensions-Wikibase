@@ -14,7 +14,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TermsListView;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView
+ * @covers \Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView
  *
  * @group Wikibase
  *

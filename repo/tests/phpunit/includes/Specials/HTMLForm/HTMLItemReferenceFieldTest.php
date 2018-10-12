@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
 
 /**
- * @covers Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField
+ * @covers \Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField
  *
  * @group Wikibase
  *

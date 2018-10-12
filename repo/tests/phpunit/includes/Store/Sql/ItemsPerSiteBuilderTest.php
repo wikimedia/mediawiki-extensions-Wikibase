@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder
+ * @covers \Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

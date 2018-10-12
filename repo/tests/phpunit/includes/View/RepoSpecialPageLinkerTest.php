@@ -7,7 +7,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 
 /**
- * @covers Wikibase\Repo\View\RepoSpecialPageLinker
+ * @covers \Wikibase\Repo\View\RepoSpecialPageLinker
  *
  * @group Wikibase
  *

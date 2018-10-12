@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
- * @covers Wikibase\Lib\LanguageNameLookup
+ * @covers \Wikibase\Lib\LanguageNameLookup
  *
  * @group Wikibase
  *

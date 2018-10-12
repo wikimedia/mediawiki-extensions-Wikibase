@@ -9,7 +9,7 @@ use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 
 /**
- * @covers Wikibase\Lib\Units\UnitConverter
+ * @covers \Wikibase\Lib\Units\UnitConverter
  *
  * @group Wikibase
  *

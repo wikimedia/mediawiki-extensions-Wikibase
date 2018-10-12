@@ -9,8 +9,8 @@ use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Store\BufferingTermLookup
- * @covers Wikibase\Lib\Store\EntityTermLookupBase
+ * @covers \Wikibase\Store\BufferingTermLookup
+ * @covers \Wikibase\Lib\Store\EntityTermLookupBase
  *
  * @group Wikibase
  * @group WikibaseStore

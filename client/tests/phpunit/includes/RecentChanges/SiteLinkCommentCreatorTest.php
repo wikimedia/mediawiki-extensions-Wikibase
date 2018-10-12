@@ -16,7 +16,7 @@ use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
- * @covers Wikibase\Client\RecentChanges\SiteLinkCommentCreator
+ * @covers \Wikibase\Client\RecentChanges\SiteLinkCommentCreator
  *
  * @group Wikibase
  * @group WikibaseClient

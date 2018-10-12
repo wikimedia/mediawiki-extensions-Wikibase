@@ -6,7 +6,7 @@ use Language;
 use Wikibase\CopyrightMessageBuilder;
 
 /**
- * @covers Wikibase\CopyrightMessageBuilder
+ * @covers \Wikibase\CopyrightMessageBuilder
  *
  * @group Wikibase
  *

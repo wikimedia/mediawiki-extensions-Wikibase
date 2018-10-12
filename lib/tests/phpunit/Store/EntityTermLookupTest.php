@@ -7,8 +7,8 @@ use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Lib\Store\EntityTermLookup
- * @covers Wikibase\Lib\Store\EntityTermLookupBase
+ * @covers \Wikibase\Lib\Store\EntityTermLookup
+ * @covers \Wikibase\Lib\Store\EntityTermLookupBase
  *
  * @group Wikibase
  * @group WikibaseStore

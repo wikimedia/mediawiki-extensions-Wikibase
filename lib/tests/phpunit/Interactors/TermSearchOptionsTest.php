@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Interactors;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 
 /**
- * @covers Wikibase\Lib\Interactors\TermSearchOptions
+ * @covers \Wikibase\Lib\Interactors\TermSearchOptions
  *
  * @group Wikibase
  *

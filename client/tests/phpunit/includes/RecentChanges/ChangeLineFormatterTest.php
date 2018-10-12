@@ -20,7 +20,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
- * @covers Wikibase\Client\RecentChanges\ChangeLineFormatter
+ * @covers \Wikibase\Client\RecentChanges\ChangeLineFormatter
  *
  * @group WikibaseClient
  * @group Wikibase

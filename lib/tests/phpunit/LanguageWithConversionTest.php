@@ -7,7 +7,7 @@ use MWException;
 use Wikibase\LanguageWithConversion;
 
 /**
- * @covers Wikibase\LanguageWithConversion
+ * @covers \Wikibase\LanguageWithConversion
  *
  * @group Wikibase
  *

@@ -17,7 +17,7 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\ClaimSummaryBuilder
+ * @covers \Wikibase\ClaimSummaryBuilder
  *
  * @group Wikibase
  *

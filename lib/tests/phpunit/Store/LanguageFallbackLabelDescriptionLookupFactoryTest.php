@@ -12,7 +12,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory
+ * @covers \Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory
  *
  * @group Wikibase
  * @group WikibaseStore

@@ -5,7 +5,7 @@ namespace Wikibase\View\Tests;
 use Wikibase\View\DummyLocalizedTextProvider;
 
 /**
- * @covers Wikibase\View\DummyLocalizedTextProvider
+ * @covers \Wikibase\View\DummyLocalizedTextProvider
  *
  * @group Wikibase
  *

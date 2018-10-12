@@ -40,7 +40,7 @@ use WikiPage;
 use WikitextContent;
 
 /**
- * @covers Wikibase\Repo\Content\EntityHandler
+ * @covers \Wikibase\Repo\Content\EntityHandler
  *
  * @group Wikibase
  * @group WikibaseEntity

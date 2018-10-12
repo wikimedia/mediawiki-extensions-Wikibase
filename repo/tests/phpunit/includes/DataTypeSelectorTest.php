@@ -8,7 +8,7 @@ use MWException;
 use Wikibase\DataTypeSelector;
 
 /**
- * @covers Wikibase\DataTypeSelector
+ * @covers \Wikibase\DataTypeSelector
  *
  * @group Wikibase
  *

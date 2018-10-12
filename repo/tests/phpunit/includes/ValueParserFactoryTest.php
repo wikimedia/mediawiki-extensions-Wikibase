@@ -12,7 +12,7 @@ use ValueParsers\ValueParser;
 use Wikibase\Repo\ValueParserFactory;
 
 /**
- * @covers Wikibase\Repo\ValueParserFactory
+ * @covers \Wikibase\Repo\ValueParserFactory
  *
  * @group Wikibase
  *

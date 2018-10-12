@@ -8,7 +8,7 @@ use SiteLookup;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 
 /**
- * @covers Wikibase\Client\OtherProjectsSitesGenerator
+ * @covers \Wikibase\Client\OtherProjectsSitesGenerator
  *
  * @group WikibaseClient
  * @group Wikibase

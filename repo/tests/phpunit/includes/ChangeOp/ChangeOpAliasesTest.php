@@ -13,7 +13,7 @@ use Wikibase\ItemContent;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpAliases
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpAliases
  *
  * @group Wikibase
  * @group ChangeOp

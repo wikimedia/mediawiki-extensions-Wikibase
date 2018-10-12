@@ -11,7 +11,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\TimeDetailsFormatter;
 
 /**
- * @covers Wikibase\Lib\TimeDetailsFormatter
+ * @covers \Wikibase\Lib\TimeDetailsFormatter
  * @uses DataValues\TimeValue
  *
  * @group ValueFormatters

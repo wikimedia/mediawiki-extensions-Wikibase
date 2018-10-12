@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException
  *
  * @group Wikibase
  *

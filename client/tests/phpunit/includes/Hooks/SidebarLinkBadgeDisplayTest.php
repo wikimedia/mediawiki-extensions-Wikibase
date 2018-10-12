@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * @covers Wikibase\Client\Hooks\SidebarLinkBadgeDisplay
+ * @covers \Wikibase\Client\Hooks\SidebarLinkBadgeDisplay
  *
  * @group WikibaseClient
  * @group Wikibase

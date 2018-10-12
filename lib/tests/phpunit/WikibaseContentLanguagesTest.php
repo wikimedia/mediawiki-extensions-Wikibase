@@ -9,7 +9,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
- * @covers Wikibase\Lib\WikibaseContentLanguages
+ * @covers \Wikibase\Lib\WikibaseContentLanguages
  *
  * @group Wikibase
  *

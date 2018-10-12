@@ -9,7 +9,7 @@ use Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
 /**
- * @covers Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler
+ * @covers \Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase

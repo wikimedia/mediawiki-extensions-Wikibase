@@ -10,7 +10,7 @@ use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
- * @covers Wikibase\Rdf\Values\ComplexValueRdfHelper
+ * @covers \Wikibase\Rdf\Values\ComplexValueRdfHelper
  *
  * @group Wikibase
  * @group WikibaseRdf

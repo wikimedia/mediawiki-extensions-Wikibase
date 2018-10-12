@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\EditEntity
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\EditEntity
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @license GPL-2.0-or-later
  * @author Addshore

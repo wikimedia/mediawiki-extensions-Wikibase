@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
 
 /**
- * @covers Wikibase\Repo\Parsers\MediaWikiMonthNameProvider
+ * @covers \Wikibase\Repo\Parsers\MediaWikiMonthNameProvider
  *
  * @group ValueParsers
  * @group Wikibase

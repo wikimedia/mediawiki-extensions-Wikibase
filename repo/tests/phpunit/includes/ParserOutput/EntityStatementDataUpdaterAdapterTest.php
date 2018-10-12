@@ -11,7 +11,7 @@ use Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter;
 use Wikibase\Repo\ParserOutput\StatementDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter
+ * @covers \Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter
  *
  * @group Wikibase
  *

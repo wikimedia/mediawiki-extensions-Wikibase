@@ -18,7 +18,7 @@ use Wikibase\Client\RepoItemLinkGenerator;
 use WikiPage;
 
 /**
- * @covers Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler
+ * @covers \Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler
  *
  * @group WikibaseClient
  * @group Wikibase

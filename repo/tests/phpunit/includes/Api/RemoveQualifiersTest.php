@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\RemoveQualifiers
+ * @covers \Wikibase\Repo\Api\RemoveQualifiers
  *
  * @group API
  * @group Database

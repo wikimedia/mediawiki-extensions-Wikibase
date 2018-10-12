@@ -10,7 +10,7 @@ use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikibase\Client\Store\DescriptionLookup;
 
 /**
- * @covers Wikibase\Client\Hooks\ShortDescHandler
+ * @covers \Wikibase\Client\Hooks\ShortDescHandler
  *
  * @group WikibaseClient
  * @group Wikibase

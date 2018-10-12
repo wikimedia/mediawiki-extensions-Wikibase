@@ -6,7 +6,7 @@ use ArrayIterator;
 use Wikibase\Client\Usage\NullUsageTracker;
 
 /**
- * @covers Wikibase\Client\Usage\NullUsageTracker
+ * @covers \Wikibase\Client\Usage\NullUsageTracker
  *
  * @group WikibaseClient
  * @group Wikibase

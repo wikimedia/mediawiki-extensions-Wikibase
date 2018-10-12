@@ -6,7 +6,7 @@ use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\StringLengthValidator
+ * @covers \Wikibase\Repo\Validators\StringLengthValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

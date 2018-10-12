@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\Lib\Store\ChunkCache;
 
 /**
- * @covers Wikibase\Lib\Store\ChunkCache
+ * @covers \Wikibase\Lib\Store\ChunkCache
  *
  * @group Wikibase
  *

@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetReference
+ * @covers \Wikibase\Repo\Api\SetReference
  *
  * @group API
  * @group Database

@@ -10,7 +10,7 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
 
 /**
- * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration

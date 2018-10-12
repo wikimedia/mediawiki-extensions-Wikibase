@@ -7,8 +7,8 @@ use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialListDatatypes;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialListDatatypes
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialListDatatypes
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

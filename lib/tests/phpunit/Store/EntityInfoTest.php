@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Lib\Store\EntityInfo
+ * @covers \Wikibase\Lib\Store\EntityInfo
  *
  * @group Wikibase
  * @group WikibaseStore

@@ -17,7 +17,7 @@ use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Lib\FormatterLabelDescriptionLookupFactory
+ * @covers \Wikibase\Lib\FormatterLabelDescriptionLookupFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions

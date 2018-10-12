@@ -27,7 +27,7 @@ use Wikibase\TermIndex;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\Client\Store\Sql\DirectSqlStore
+ * @covers \Wikibase\Client\Store\Sql\DirectSqlStore
  *
  * @group Database
  * @group Wikibase

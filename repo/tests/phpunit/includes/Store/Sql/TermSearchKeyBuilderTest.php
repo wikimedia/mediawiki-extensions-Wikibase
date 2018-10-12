@@ -11,7 +11,7 @@ use Wikibase\TermSearchKeyBuilder;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 
 /**
- * @covers Wikibase\TermSearchKeyBuilder
+ * @covers \Wikibase\TermSearchKeyBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

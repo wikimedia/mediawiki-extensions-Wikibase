@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
 
 /**
- * @covers Wikibase\Repo\GenericEventDispatcher
+ * @covers \Wikibase\Repo\GenericEventDispatcher
  *
  * @group Wikibase
  *

@@ -6,7 +6,7 @@ use MediaWikiLangTestCase;
 use Wikibase\UpdateUnits;
 
 /**
- * @covers Wikibase\UpdateUnits
+ * @covers \Wikibase\UpdateUnits
  *
  * @group Wikibase
  *

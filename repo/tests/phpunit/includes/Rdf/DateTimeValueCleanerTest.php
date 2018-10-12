@@ -7,8 +7,8 @@ use Wikibase\Rdf\DateTimeValueCleaner;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
 
 /**
- * @covers Wikibase\Rdf\DateTimeValueCleaner
- * @covers Wikibase\Rdf\JulianDateTimeValueCleaner
+ * @covers \Wikibase\Rdf\DateTimeValueCleaner
+ * @covers \Wikibase\Rdf\JulianDateTimeValueCleaner
  *
  * @group Wikibase
  * @group WikibaseRdf

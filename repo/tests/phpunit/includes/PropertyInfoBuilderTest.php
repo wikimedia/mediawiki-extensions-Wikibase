@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyInfoBuilder;
 
 /**
- * @covers Wikibase\PropertyInfoBuilder
+ * @covers \Wikibase\PropertyInfoBuilder
  *
  * @group Wikibase
  *

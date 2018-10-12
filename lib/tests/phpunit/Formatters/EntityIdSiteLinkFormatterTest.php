@@ -12,7 +12,7 @@ use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter
  *
  * @group Wikibase
  *

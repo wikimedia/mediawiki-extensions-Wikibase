@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 
 /**
- * @covers Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField
+ * @covers \Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField
  *
  * @license GPL-2.0-or-later
  * @group Wikibase

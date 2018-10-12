@@ -12,7 +12,7 @@ use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Repo\Api\EntityTermSearchHelper
+ * @covers \Wikibase\Repo\Api\EntityTermSearchHelper
  *
  * @group Wikibase
  * @group WikibaseAPI

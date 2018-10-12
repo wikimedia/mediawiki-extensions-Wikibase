@@ -11,7 +11,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
- * @covers Wikibase\Repo\Validators\SiteLinkUniquenessValidator
+ * @covers \Wikibase\Repo\Validators\SiteLinkUniquenessValidator
  *
  * @group Database
  * @group Wikibase

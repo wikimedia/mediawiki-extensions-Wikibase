@@ -14,7 +14,7 @@ use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers Wikibase\Lib\EntityIdLinkFormatter
+ * @covers \Wikibase\Lib\EntityIdLinkFormatter
  *
  * @group Wikibase
  *

@@ -6,7 +6,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\Template\TemplateFactory
+ * @covers \Wikibase\View\Template\TemplateFactory
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateRegistry

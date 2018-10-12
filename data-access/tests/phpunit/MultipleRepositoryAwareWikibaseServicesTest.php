@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices
+ * @covers \Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices
  *
  * @group Wikibase
  *

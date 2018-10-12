@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Content\DeferredDecodingEntityHolder
+ * @covers \Wikibase\Content\DeferredDecodingEntityHolder
  *
  * @group Wikibase
  * @group WikibaseEntity

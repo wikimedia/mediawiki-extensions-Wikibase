@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 
 /**
- * @covers Wikibase\Repo\MediaWikiLocalizedTextProvider
+ * @covers \Wikibase\Repo\MediaWikiLocalizedTextProvider
  *
  * @group Wikibase
  *

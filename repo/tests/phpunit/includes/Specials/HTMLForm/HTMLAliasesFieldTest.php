@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 
 /**
- * @covers Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField
+ * @covers \Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField
  *
  * @group Wikibase
  * @license GPL-2.0-or-later

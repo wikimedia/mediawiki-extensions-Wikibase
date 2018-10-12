@@ -7,7 +7,7 @@ use PHPUnit4And6Compat;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\WikibaseSettings
+ * @covers \Wikibase\WikibaseSettings
  *
  * @group Wikibase
  *

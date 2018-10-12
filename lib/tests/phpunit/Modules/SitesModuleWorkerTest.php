@@ -11,7 +11,7 @@ use Wikibase\Lib\SitesModuleWorker;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Lib\SitesModuleWorker
+ * @covers \Wikibase\Lib\SitesModuleWorker
  *
  * @uses Xml
  * @uses SiteList

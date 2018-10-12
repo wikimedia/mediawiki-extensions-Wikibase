@@ -19,7 +19,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer
  *
  * @group Wikibase
  *

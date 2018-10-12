@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
- * @covers Wikibase\EntityContent
+ * @covers \Wikibase\EntityContent
  *
  * @group Wikibase
  *

@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 
 /**
- * @covers Wikibase\Repo\Notifications\ChangeNotifier
+ * @covers \Wikibase\Repo\Notifications\ChangeNotifier
  *
  * @group Database
  *

@@ -7,7 +7,7 @@ use Wikibase\Client\RecentChanges\RevisionData;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\RecentChanges\ExternalChange
+ * @covers \Wikibase\Client\RecentChanges\ExternalChange
  *
  * @group WikibaseClient
  * @group Wikibase

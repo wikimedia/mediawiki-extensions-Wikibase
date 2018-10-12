@@ -12,7 +12,7 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
 
 /**
- * @covers Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection
+ * @covers \Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection
  *
  * @group Wikibase
  *

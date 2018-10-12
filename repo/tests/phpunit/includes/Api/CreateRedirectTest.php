@@ -28,7 +28,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\CreateRedirect
+ * @covers \Wikibase\Repo\Api\CreateRedirect
  *
  * @group API
  * @group Wikibase

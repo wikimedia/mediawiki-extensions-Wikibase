@@ -6,7 +6,7 @@ use stdClass;
 use Wikibase\DispatchStats;
 
 /**
- * @covers Wikibase\DispatchStats
+ * @covers \Wikibase\DispatchStats
  *
  * @group Database
  * @group Wikibase

@@ -8,7 +8,7 @@ use PHPUnit4And6Compat;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
- * @covers Wikibase\Lib\Changes\EntityDiffChangedAspects
+ * @covers \Wikibase\Lib\Changes\EntityDiffChangedAspects
  *
  * @group Wikibase
  * @group WikibaseChange

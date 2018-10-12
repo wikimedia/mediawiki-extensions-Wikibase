@@ -11,7 +11,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\GetClaimsStatementFilter;
 
 /**
- * @covers Wikibase\Repo\Api\GetClaimsStatementFilter
+ * @covers \Wikibase\Repo\Api\GetClaimsStatementFilter
  *
  * @group Wikibase
  *

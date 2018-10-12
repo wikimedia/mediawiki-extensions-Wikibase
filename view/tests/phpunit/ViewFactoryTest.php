@@ -28,7 +28,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\ViewFactory
+ * @covers \Wikibase\View\ViewFactory
  *
  * @uses Wikibase\View\StatementHtmlGenerator
  * @uses Wikibase\View\EditSectionGenerator

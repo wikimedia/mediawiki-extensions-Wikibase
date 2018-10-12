@@ -13,7 +13,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
- * @covers Wikibase\View\ToolbarEditSectionGenerator
+ * @covers \Wikibase\View\ToolbarEditSectionGenerator
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

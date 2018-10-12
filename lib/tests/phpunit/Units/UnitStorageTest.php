@@ -11,9 +11,9 @@ use Wikimedia\ObjectFactory;
 use RuntimeException;
 
 /**
- * @covers Wikibase\Lib\Units\JsonUnitStorage
- * @covers Wikibase\Lib\Units\CSVUnitStorage
- * @covers Wikibase\Lib\Units\BaseUnitStorage
+ * @covers \Wikibase\Lib\Units\JsonUnitStorage
+ * @covers \Wikibase\Lib\Units\CSVUnitStorage
+ * @covers \Wikibase\Lib\Units\BaseUnitStorage
  *
  * @group Wikibase
  *

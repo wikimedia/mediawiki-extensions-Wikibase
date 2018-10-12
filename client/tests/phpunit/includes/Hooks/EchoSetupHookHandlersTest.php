@@ -8,7 +8,7 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 
 /**
- * @covers Wikibase\Client\Hooks\EchoSetupHookHandlers
+ * @covers \Wikibase\Client\Hooks\EchoSetupHookHandlers
  *
  * @group Database
  * @group WikibaseClient

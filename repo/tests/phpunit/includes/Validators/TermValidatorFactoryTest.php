@@ -16,7 +16,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
- * @covers Wikibase\Repo\Validators\TermValidatorFactory
+ * @covers \Wikibase\Repo\Validators\TermValidatorFactory
  *
  * @group Wikibase
  * @group WikibaseValidators

@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
- * @covers Wikibase\Client\Changes\AffectedPagesFinder
+ * @covers \Wikibase\Client\Changes\AffectedPagesFinder
  *
  * @group Database
  * @group WikibaseClient

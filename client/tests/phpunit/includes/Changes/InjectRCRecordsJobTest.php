@@ -22,7 +22,7 @@ use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Client\Changes\InjectRCRecordsJob
+ * @covers \Wikibase\Client\Changes\InjectRCRecordsJob
  *
  * @group Wikibase
  * @group WikibaseClient

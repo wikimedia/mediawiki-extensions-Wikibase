@@ -11,7 +11,7 @@ use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\TermIndexEntry
+ * @covers \Wikibase\TermIndexEntry
  *
  * @group Wikibase
  *

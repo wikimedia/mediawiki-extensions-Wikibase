@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder
+ * @covers \Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder
  *
  * @group Wikibase
  * @group WikibaseStore

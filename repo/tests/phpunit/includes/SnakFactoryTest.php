@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\SnakFactory;
 
 /**
- * @covers Wikibase\Repo\SnakFactory
+ * @covers \Wikibase\Repo\SnakFactory
  *
  * @group Wikibase
  *

@@ -24,7 +24,7 @@ use Wikibase\ItemChange;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 
 /**
- * @covers Wikibase\Client\RecentChanges\RecentChangeFactory
+ * @covers \Wikibase\Client\RecentChanges\RecentChangeFactory
  *
  * @group WikibaseClient
  * @group Wikibase

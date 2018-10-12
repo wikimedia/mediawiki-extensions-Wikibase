@@ -13,7 +13,7 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 
 /**
- * @covers Wikibase\Repo\Localizer\DispatchingExceptionLocalizer
+ * @covers \Wikibase\Repo\Localizer\DispatchingExceptionLocalizer
  *
  * @group Wikibase
  *

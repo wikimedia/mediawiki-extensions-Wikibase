@@ -15,7 +15,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
 
 /**
- * @covers Wikibase\Repo\Api\EntityIdSearchHelper
+ * @covers \Wikibase\Repo\Api\EntityIdSearchHelper
  *
  * @group Wikibase
  * @group WikibaseAPI

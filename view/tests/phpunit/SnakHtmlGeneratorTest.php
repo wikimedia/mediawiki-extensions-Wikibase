@@ -16,7 +16,7 @@ use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\View\SnakHtmlGenerator
+ * @covers \Wikibase\View\SnakHtmlGenerator
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

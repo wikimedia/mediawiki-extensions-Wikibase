@@ -7,7 +7,7 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Usage\UsageDeduplicator
+ * @covers \Wikibase\Client\Usage\UsageDeduplicator
  *
  * @group Wikibase
  * @group WikibaseClient

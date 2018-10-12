@@ -10,7 +10,7 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer
+ * @covers \Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer
  *
  * @group Wikibase
  *

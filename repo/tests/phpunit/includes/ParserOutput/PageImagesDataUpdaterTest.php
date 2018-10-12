@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\ParserOutput\PageImagesDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\PageImagesDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\PageImagesDataUpdater
  *
  * @group Wikibase
  *

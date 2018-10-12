@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer
+ * @covers \Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer
  *
  * @group Wikibase
  * @group WikibaseClient

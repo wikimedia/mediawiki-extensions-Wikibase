@@ -13,7 +13,7 @@ use Wikibase\Lib\Tests\MockPropertyLabelResolver;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Client\DataAccess\PropertyIdResolver
+ * @covers \Wikibase\Client\DataAccess\PropertyIdResolver
  *
  * @group Wikibase
  * @group WikibaseClient

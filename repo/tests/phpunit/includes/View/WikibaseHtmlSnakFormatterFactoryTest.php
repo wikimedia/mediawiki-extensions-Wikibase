@@ -13,7 +13,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 
 /**
- * @covers Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory
+ * @covers \Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory
  *
  * @group Wikibase
  *

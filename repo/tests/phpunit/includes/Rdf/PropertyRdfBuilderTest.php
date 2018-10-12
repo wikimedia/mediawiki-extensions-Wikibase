@@ -6,7 +6,7 @@ use Wikibase\Rdf\PropertyRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\PropertyRdfBuilder
+ * @covers \Wikibase\Rdf\PropertyRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

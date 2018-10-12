@@ -19,7 +19,7 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 
 /**
- * @covers Wikibase\Lib\Store\EntityContentDataCodec
+ * @covers \Wikibase\Lib\Store\EntityContentDataCodec
  *
  * @group Wikibase
  *

@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
- * @covers Wikibase\Lib\EntityTypeDefinitions
+ * @covers \Wikibase\Lib\EntityTypeDefinitions
  *
  * @group Wikibase
  *

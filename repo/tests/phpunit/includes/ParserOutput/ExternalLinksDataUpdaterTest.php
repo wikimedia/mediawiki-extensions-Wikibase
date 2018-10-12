@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater
  *
  * @group Wikibase
  *

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\StatementRankSerializer;
 
 /**
- * @covers Wikibase\StatementRankSerializer
+ * @covers \Wikibase\StatementRankSerializer
  *
  * @group Wikibase
  *

@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
 /**
- * @covers Wikibase\Repo\LinkedData\EntityDataUriManager
+ * @covers \Wikibase\Repo\LinkedData\EntityDataUriManager
  *
  * @group Database
  * ^--- just because Title is a mess

@@ -8,7 +8,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\LanguageWithConversion;
 
 /**
- * @covers Wikibase\LanguageFallbackChain
+ * @covers \Wikibase\LanguageFallbackChain
  *
  * @group Wikibase
  *

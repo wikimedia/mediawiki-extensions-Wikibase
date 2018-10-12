@@ -15,7 +15,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\Validators\EntityExistsValidator
+ * @covers \Wikibase\Repo\Validators\EntityExistsValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

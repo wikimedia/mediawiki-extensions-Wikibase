@@ -18,7 +18,7 @@ use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 
 /**
- * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractor
+ * @covers \Wikibase\Lib\Interactors\TermIndexSearchInteractor
  *
  * @group Wikibase
  *

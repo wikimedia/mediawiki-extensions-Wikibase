@@ -11,7 +11,7 @@ use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\DispatchingValueSnakRdfBuilder
+ * @covers \Wikibase\Rdf\DispatchingValueSnakRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

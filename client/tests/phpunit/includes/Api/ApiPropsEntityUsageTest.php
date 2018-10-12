@@ -14,7 +14,7 @@ use Wikibase\Client\WikibaseClient;
 use WikiPage;
 
 /**
- * @covers Wikibase\Client\Api\ApiPropsEntityUsage
+ * @covers \Wikibase\Client\Api\ApiPropsEntityUsage
  *
  * @group API
  * @group Wikibase

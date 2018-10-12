@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\Client\RepoLinker
+ * @covers \Wikibase\Client\RepoLinker
  *
  * @group WikibaseClient
  * @group Wikibase

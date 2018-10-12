@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use Wikibase\Repo\ParserOutput\TextInjector;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\TextInjector
+ * @covers \Wikibase\Repo\ParserOutput\TextInjector
  *
  * @group Wikibase
  *

@@ -12,8 +12,8 @@ use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Repo\Content\PropertyHandler
- * @covers Wikibase\Repo\Content\EntityHandler
+ * @covers \Wikibase\Repo\Content\PropertyHandler
+ * @covers \Wikibase\Repo\Content\EntityHandler
  *
  * @group Wikibase
  * @group WikibaseProperty

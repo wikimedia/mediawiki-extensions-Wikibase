@@ -12,7 +12,7 @@ use Wikibase\SettingsArray;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Client\Hooks\MagicWordHookHandlers
+ * @covers \Wikibase\Client\Hooks\MagicWordHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase

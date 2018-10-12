@@ -14,7 +14,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\Rdf\Values\TimeRdfBuilder
+ * @covers \Wikibase\Rdf\Values\TimeRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

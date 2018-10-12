@@ -5,7 +5,7 @@ namespace Wikibase\DataAccess\Tests;
 use Wikibase\DataAccess\DataAccessSettings;
 
 /**
- * @covers Wikibase\DataAccess\DataAccessSettings
+ * @covers \Wikibase\DataAccess\DataAccessSettings
  *
  * @license GPL-2.0-or-later
  */

@@ -15,7 +15,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 
 /**
- * @covers Wikibase\Repo\Diff\DifferencesSnakVisualizer
+ * @covers \Wikibase\Repo\Diff\DifferencesSnakVisualizer
  *
  * @group Wikibase
  *

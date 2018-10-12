@@ -7,7 +7,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

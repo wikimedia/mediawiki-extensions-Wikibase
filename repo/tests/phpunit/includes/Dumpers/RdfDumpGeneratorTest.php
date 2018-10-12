@@ -31,8 +31,8 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Dumpers\RdfDumpGenerator
- * @covers Wikibase\Dumpers\DumpGenerator
+ * @covers \Wikibase\Dumpers\RdfDumpGenerator
+ * @covers \Wikibase\Dumpers\DumpGenerator
  *
  * @group Wikibase
  * @group WikibaseRdf

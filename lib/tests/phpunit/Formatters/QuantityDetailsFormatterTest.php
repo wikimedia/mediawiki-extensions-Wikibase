@@ -13,7 +13,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\QuantityDetailsFormatter;
 
 /**
- * @covers Wikibase\Lib\QuantityDetailsFormatter
+ * @covers \Wikibase\Lib\QuantityDetailsFormatter
  *
  * @group ValueFormatters
  * @group Wikibase

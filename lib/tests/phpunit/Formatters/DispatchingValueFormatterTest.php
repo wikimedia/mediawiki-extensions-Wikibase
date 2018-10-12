@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Formatters\DispatchingValueFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\DispatchingValueFormatter
+ * @covers \Wikibase\Lib\Formatters\DispatchingValueFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

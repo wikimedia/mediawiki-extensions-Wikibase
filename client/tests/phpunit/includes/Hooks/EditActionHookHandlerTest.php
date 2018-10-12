@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\Usage\EntityUsage;
 
 /**
- * @covers Wikibase\Client\Hooks\EditActionHookHandler
+ * @covers \Wikibase\Client\Hooks\EditActionHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase

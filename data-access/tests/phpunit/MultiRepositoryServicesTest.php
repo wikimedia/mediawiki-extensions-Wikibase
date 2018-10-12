@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\RepositoryDefinitions;
 
 /**
- * @covers Wikibase\DataAccess\MultiRepositoryServices
+ * @covers \Wikibase\DataAccess\MultiRepositoryServices
  *
  * @group Wikibase
  *

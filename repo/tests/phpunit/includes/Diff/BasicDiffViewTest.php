@@ -9,7 +9,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Wikibase\Repo\Diff\BasicDiffView;
 
 /**
- * @covers Wikibase\Repo\Diff\BasicDiffView
+ * @covers \Wikibase\Repo\Diff\BasicDiffView
  *
  * @group Wikibase
  *

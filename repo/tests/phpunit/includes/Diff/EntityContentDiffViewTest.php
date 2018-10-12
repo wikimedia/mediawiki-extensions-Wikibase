@@ -14,7 +14,7 @@ use Wikibase\ItemContent;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 
 /**
- * @covers Wikibase\Repo\Diff\EntityContentDiffView
+ * @covers \Wikibase\Repo\Diff\EntityContentDiffView
  *
  * @group Wikibase
  * @group Database

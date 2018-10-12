@@ -8,7 +8,7 @@ use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\MembershipValidator
+ * @covers \Wikibase\Repo\Validators\MembershipValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

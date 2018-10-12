@@ -8,7 +8,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 
 /**
- * @covers Wikibase\Lib\RepositoryDefinitions
+ * @covers \Wikibase\Lib\RepositoryDefinitions
  *
  * @group Wikibase
  *

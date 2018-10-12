@@ -14,7 +14,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder
+ * @covers \Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

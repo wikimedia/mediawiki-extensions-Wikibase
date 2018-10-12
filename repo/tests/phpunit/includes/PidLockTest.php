@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use Wikibase\Repo\PidLock;
 
 /**
- * @covers Wikibase\Repo\PidLock
+ * @covers \Wikibase\Repo\PidLock
  *
  * @group Wikibase
  *

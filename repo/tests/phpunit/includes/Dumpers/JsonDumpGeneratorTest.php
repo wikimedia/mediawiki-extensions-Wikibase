@@ -28,8 +28,8 @@ use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Dumpers\JsonDumpGenerator
- * @covers Wikibase\Dumpers\DumpGenerator
+ * @covers \Wikibase\Dumpers\JsonDumpGenerator
+ * @covers \Wikibase\Dumpers\DumpGenerator
  *
  * @group Wikibase
  *

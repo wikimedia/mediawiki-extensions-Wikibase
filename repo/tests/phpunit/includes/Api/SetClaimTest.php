@@ -26,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetClaim
+ * @covers \Wikibase\Repo\Api\SetClaim
  *
  * @group API
  * @group Database

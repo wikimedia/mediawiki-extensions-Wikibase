@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Rdf\RdfVocabulary;
 
 /**
- * @covers Wikibase\Rdf\RdfVocabulary
+ * @covers \Wikibase\Rdf\RdfVocabulary
  *
  * @group Wikibase
  * @group WikibaseRdf

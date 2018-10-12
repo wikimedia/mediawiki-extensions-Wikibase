@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOpRemoveStatement
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOpRemoveStatement
  *
  * @group Wikibase
  * @group ChangeOp

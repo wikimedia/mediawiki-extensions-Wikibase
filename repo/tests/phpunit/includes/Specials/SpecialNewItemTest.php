@@ -18,10 +18,10 @@ use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialNewItem
- * @covers Wikibase\Repo\Specials\SpecialNewEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialNewItem
+ * @covers \Wikibase\Repo\Specials\SpecialNewEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

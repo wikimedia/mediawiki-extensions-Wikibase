@@ -20,7 +20,7 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 
 /**
- * @covers Wikibase\Repo\Api\EntityLoadingHelper
+ * @covers \Wikibase\Repo\Api\EntityLoadingHelper
  *
  * @group Wikibase
  * @group WikibaseAPI

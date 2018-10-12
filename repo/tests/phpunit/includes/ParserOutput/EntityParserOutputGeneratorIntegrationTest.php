@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database

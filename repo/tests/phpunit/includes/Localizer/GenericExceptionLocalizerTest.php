@@ -7,7 +7,7 @@ use RuntimeException;
 use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
 
 /**
- * @covers Wikibase\Repo\Localizer\GenericExceptionLocalizer
+ * @covers \Wikibase\Repo\Localizer\GenericExceptionLocalizer
  *
  * @group Wikibase
  *

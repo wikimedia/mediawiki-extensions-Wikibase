@@ -7,7 +7,7 @@ use Title;
 /**
  * Tests for pages that are not connected to any Item.
  *
- * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration

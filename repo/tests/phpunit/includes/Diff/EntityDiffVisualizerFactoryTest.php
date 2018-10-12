@@ -15,7 +15,7 @@ use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 
 /**
- * @covers Wikibase\Repo\Diff\EntityDiffVisualizerFactory
+ * @covers \Wikibase\Repo\Diff\EntityDiffVisualizerFactory
  *
  * @group Wikibase
  *

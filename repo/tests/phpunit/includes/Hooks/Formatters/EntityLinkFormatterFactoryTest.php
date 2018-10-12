@@ -9,7 +9,7 @@ use Wikimedia\Assert\ParameterElementTypeException;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**
- * @covers Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory
+ * @covers \Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory
  *
  * @group Wikibase
  *

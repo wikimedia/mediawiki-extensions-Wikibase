@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Lib\Store\RevisionBasedEntityLookup
+ * @covers \Wikibase\Lib\Store\RevisionBasedEntityLookup
  *
  * @group WikibaseEntityLookup
  * @group Wikibase

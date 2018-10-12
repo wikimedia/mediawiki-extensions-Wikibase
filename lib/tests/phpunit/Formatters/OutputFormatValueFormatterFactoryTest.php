@@ -23,7 +23,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\OutputFormatValueFormatterFactory
+ * @covers \Wikibase\Lib\OutputFormatValueFormatterFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions

@@ -11,7 +11,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * @covers Wikibase\LanguageFallbackChainFactory
+ * @covers \Wikibase\LanguageFallbackChainFactory
  *
  * @group Wikibase
  *

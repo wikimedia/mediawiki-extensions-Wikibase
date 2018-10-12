@@ -22,7 +22,7 @@ use Wikibase\StatementRankSerializer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\GetClaims
+ * @covers \Wikibase\Repo\Api\GetClaims
  *
  * @group API
  * @group Database

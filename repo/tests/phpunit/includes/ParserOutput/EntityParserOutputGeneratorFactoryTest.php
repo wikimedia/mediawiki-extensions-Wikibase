@@ -17,7 +17,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
  *
  * @group Wikibase
  * @group Database

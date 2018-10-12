@@ -6,7 +6,7 @@ use Language;
 use Wikibase\Lib\AutoCommentFormatter;
 
 /**
- * @covers Wikibase\Lib\AutoCommentFormatter
+ * @covers \Wikibase\Lib\AutoCommentFormatter
  *
  * @group Wikibase
  *

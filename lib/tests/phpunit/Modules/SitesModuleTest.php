@@ -8,7 +8,7 @@ use ResourceLoaderContext;
 use Wikibase\SitesModule;
 
 /**
- * @covers Wikibase\SitesModule
+ * @covers \Wikibase\SitesModule
  *
  * @group Wikibase
  *

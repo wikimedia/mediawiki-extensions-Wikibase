@@ -12,7 +12,7 @@ use Wikimedia\Rdbms\FakeResultWrapper;
 use WikiPage;
 
 /**
- * @covers Wikibase\Client\Specials\SpecialEntityUsage
+ * @covers \Wikibase\Client\Specials\SpecialEntityUsage
  *
  * @group WikibaseClient
  * @group SpecialPage

@@ -8,7 +8,7 @@ use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\Store\FieldPropertyInfoProvider
+ * @covers \Wikibase\Lib\Store\FieldPropertyInfoProvider
  *
  * @group Wikibase
  * @group WikibaseStore

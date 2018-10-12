@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\RemoveClaims
+ * @covers \Wikibase\Repo\Api\RemoveClaims
  *
  * @group API
  * @group Database

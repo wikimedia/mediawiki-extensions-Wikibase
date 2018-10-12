@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 
 /**
- * @covers Wikibase\Lib\Store\HttpUrlPropertyOrderProvider
- * @covers Wikibase\Lib\Store\WikiTextPropertyOrderProvider
+ * @covers \Wikibase\Lib\Store\HttpUrlPropertyOrderProvider
+ * @covers \Wikibase\Lib\Store\WikiTextPropertyOrderProvider
  *
  * @group Wikibase
  * @group Database

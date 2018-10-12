@@ -15,7 +15,7 @@ use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
 
 /**
- * @covers Wikibase\Client\Notifications\PageConnectionPresentationModel
+ * @covers \Wikibase\Client\Notifications\PageConnectionPresentationModel
  *
  * @group Database
  * @group Wikibase

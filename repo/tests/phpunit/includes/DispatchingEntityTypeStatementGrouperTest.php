@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
 
 /**
- * @covers Wikibase\Repo\DispatchingEntityTypeStatementGrouper
+ * @covers \Wikibase\Repo\DispatchingEntityTypeStatementGrouper
  *
  * @group Wikibase
  *

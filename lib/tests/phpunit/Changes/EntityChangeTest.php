@@ -18,8 +18,8 @@ use Wikibase\ItemContent;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\EntityChange
- * @covers Wikibase\DiffChange
+ * @covers \Wikibase\EntityChange
+ * @covers \Wikibase\DiffChange
  *
  * @group Database
  * @group Wikibase

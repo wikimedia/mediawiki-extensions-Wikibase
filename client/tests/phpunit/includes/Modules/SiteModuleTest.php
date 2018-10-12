@@ -7,7 +7,7 @@ use ResourceLoaderContext;
 use Wikibase\Client\Modules\SiteModule;
 
 /**
- * @covers Wikibase\Client\Modules\SiteModule
+ * @covers \Wikibase\Client\Modules\SiteModule
  *
  * @group Wikibase
  * @group WikibaseClient

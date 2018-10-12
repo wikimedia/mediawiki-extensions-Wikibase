@@ -23,7 +23,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\GeoDataDataUpdater
  *
  * @group Wikibase
  * @group Database

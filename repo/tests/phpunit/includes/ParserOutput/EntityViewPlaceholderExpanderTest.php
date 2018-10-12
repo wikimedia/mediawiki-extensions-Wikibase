@@ -13,7 +13,7 @@ use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander
+ * @covers \Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander
  *
  * @uses Wikibase\View\TermsListView
  * @uses Wikibase\View\Template\Template

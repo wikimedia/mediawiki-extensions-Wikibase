@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ItemSearchTextGenerator;
 
 /**
- * @covers Wikibase\Repo\ItemSearchTextGenerator
+ * @covers \Wikibase\Repo\ItemSearchTextGenerator
  *
  * @group Wikibase
  *

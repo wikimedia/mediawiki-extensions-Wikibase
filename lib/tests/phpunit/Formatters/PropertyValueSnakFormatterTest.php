@@ -25,7 +25,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\UnDeserializableValueFormatter;
 
 /**
- * @covers Wikibase\Lib\PropertyValueSnakFormatter
+ * @covers \Wikibase\Lib\PropertyValueSnakFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

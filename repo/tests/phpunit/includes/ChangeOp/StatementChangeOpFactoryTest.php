@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\StatementChangeOpFactory
+ * @covers \Wikibase\Repo\ChangeOp\StatementChangeOpFactory
  *
  * @group Wikibase
  * @group ChangeOp

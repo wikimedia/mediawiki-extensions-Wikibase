@@ -9,7 +9,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\CommonsLinkFormatter;
 
 /**
- * @covers Wikibase\Lib\CommonsLinkFormatter
+ * @covers \Wikibase\Lib\CommonsLinkFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

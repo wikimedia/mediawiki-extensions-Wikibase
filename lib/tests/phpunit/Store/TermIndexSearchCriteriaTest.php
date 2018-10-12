@@ -9,7 +9,7 @@ use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\Lib\Store\TermIndexSearchCriteria
+ * @covers \Wikibase\Lib\Store\TermIndexSearchCriteria
  *
  * @group Wikibase
  *

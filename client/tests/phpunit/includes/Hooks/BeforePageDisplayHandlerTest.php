@@ -12,7 +12,7 @@ use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @covers Wikibase\Client\Hooks\BeforePageDisplayHandler
+ * @covers \Wikibase\Client\Hooks\BeforePageDisplayHandler
  *
  * @group WikibaseClient
  * @group WikibaseHooks

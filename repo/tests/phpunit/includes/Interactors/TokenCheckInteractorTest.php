@@ -9,7 +9,7 @@ use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 
 /**
- * @covers Wikibase\Repo\Interactors\TokenCheckInteractor
+ * @covers \Wikibase\Repo\Interactors\TokenCheckInteractor
  *
  * @group Wikibase
  *

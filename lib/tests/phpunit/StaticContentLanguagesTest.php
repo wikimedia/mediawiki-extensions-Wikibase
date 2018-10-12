@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests;
 use Wikibase\Lib\StaticContentLanguages;
 
 /**
- * @covers Wikibase\Lib\StaticContentLanguages
+ * @covers \Wikibase\Lib\StaticContentLanguages
  *
  * @group Wikibase
  *

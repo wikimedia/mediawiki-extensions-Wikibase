@@ -15,8 +15,8 @@ use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialItemDisambiguation
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialItemDisambiguation
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

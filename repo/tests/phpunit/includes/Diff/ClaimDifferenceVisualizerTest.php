@@ -20,7 +20,7 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 
 /**
- * @covers Wikibase\Repo\Diff\ClaimDifferenceVisualizer
+ * @covers \Wikibase\Repo\Diff\ClaimDifferenceVisualizer
  *
  * @group Wikibase
  * @group Database

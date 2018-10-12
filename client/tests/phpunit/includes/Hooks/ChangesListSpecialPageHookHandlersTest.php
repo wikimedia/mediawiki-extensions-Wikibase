@@ -16,7 +16,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers
+ * @covers \Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase

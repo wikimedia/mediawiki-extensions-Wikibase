@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Client\Specials\SpecialPagesWithBadges
+ * @covers \Wikibase\Client\Specials\SpecialPagesWithBadges
  *
  * @group WikibaseClient
  * @group SpecialPage

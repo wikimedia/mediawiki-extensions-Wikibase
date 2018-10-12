@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\IO;
 use Wikibase\Repo\IO\LineReader;
 
 /**
- * @covers Wikibase\Repo\IO\LineReader
+ * @covers \Wikibase\Repo\IO\LineReader
  *
  * @group Wikibase
  *

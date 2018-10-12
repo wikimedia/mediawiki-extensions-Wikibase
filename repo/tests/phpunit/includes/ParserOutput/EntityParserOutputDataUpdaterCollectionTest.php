@@ -11,7 +11,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdaterCollection;
 use Wikibase\Repo\ParserOutput\ParserOutputDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater
  *
  * @group Wikibase
  *

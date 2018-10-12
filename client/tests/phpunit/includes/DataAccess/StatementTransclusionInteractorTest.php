@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
- * @covers Wikibase\Client\DataAccess\StatementTransclusionInteractor
+ * @covers \Wikibase\Client\DataAccess\StatementTransclusionInteractor
  *
  * @group Wikibase
  * @group WikibaseClient

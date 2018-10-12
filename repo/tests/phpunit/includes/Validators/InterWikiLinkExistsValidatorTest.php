@@ -9,7 +9,7 @@ use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\InterWikiLinkExistsValidator
+ * @covers \Wikibase\Repo\Validators\InterWikiLinkExistsValidator
  *
  * @group Wikibase
  *

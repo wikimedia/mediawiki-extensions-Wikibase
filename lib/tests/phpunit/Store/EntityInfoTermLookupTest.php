@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 
 /**
- * @covers Wikibase\Lib\Store\EntityInfoTermLookup
+ * @covers \Wikibase\Lib\Store\EntityInfoTermLookup
  *
  * @group Wikibase
  * @group WikibaseStore

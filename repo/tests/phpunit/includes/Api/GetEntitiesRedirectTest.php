@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\GetEntities
+ * @covers \Wikibase\Repo\Api\GetEntities
  *
  * Test for redirect resolution in the wbgetentities API module
  *

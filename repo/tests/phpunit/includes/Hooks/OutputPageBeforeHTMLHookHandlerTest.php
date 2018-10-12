@@ -20,7 +20,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler
+ * @covers \Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler
  *
  * @group Wikibase
  *

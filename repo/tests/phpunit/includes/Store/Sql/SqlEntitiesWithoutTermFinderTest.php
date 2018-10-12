@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder
+ * @covers \Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder
  *
  * @group Database
  *

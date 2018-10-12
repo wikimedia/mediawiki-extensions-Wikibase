@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter
+ * @covers \Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter
  *
  * @group Wikibase
  *

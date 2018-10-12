@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer
+ * @covers \Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient

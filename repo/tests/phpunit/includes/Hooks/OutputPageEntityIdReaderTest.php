@@ -12,7 +12,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 
 /**
- * @covers Wikibase\Repo\Hooks\OutputPageEntityIdReader
+ * @covers \Wikibase\Repo\Hooks\OutputPageEntityIdReader
  *
  * @group Wikibase
  *

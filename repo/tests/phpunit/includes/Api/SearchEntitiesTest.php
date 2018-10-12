@@ -20,7 +20,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
 
 /**
- * @covers Wikibase\Repo\Api\SearchEntities
+ * @covers \Wikibase\Repo\Api\SearchEntities
  *
  * @group API
  * @group Wikibase

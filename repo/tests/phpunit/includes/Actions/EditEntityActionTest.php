@@ -12,8 +12,8 @@ use Wikibase\SubmitEntityAction;
 use WikiPage;
 
 /**
- * @covers Wikibase\EditEntityAction
- * @covers Wikibase\SubmitEntityAction
+ * @covers \Wikibase\EditEntityAction
+ * @covers \Wikibase\SubmitEntityAction
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

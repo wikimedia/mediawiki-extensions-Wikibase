@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 
 /**
- * @covers Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler
+ * @covers \Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler
  *
  * @group Wikibase
  * @group Database
