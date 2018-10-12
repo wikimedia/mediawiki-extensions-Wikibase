@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\MutableRevisionRecord;
-use MediaWiki\Storage\RevisionStore;
 use MediaWiki\Storage\SlotRecord;
 use PHPUnit_Framework_MockObject_MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
