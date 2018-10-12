@@ -47,10 +47,15 @@ return call_user_func( function() {
 
 		'wikibase.termbox.new' => $moduleTemplate + [
 			'styles' => [
+				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
 			],
-			'dependcies' => [
+			'scripts' => [
+				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.js',
 			],
-			'target' => 'mobile'
+			'dependencies' => [
+				'wikibase.mobile',
+			],
+			'targets' => 'mobile'
 		],
 
 		'wikibase.RevisionStore' => $moduleTemplate + [
