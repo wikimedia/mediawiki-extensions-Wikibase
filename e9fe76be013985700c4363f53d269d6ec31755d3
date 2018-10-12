@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "12db9f0d_86decb2b",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2018-10-12T14:37:31Z",
+      "side": 1,
+      "message": "Would it be worth moving this change to the end of the || chain so that the cheap tests are done first and will break the chain as cheaply as possible?\n\nThe best-case route through #exists is a process-level cache hit and a hook invocation (the TitleExists hook). The worst-case route is a process-level cache miss, a WAN-cache miss, and a (highly optimised) query to a slave, and then a hook invocation.",
+      "range": {
+        "startLine": 389,
+        "startChar": 14,
+        "endLine": 389,
+        "endChar": 31
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d75c8_74694d86",
         "filename": "client/includes/RepoLinker.php",
         "patchSetId": 11
