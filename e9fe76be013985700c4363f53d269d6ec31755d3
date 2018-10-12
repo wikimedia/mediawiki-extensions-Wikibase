@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "10408027_fa37e342",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-12T16:00:09Z",
+      "side": 1,
+      "message": "@addshore, I\u0027m a struggling to understand what the tests report for my local instance vs how this would work in production. I\u0027d like the URLs produced to look like https://www.wikidata.org/wiki/Q42 but the tests report https://www.wikidata.org/wiki/Special:EntityPage/Q42. Don\u0027t I need this function to get the main namespace URL on Wikidata?",
+      "parentUuid": "891dcee8_c9a947f4",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 133,
+        "endChar": 37
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca617096_1b967c7d",
         "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
         "patchSetId": 11
