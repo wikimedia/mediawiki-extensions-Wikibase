@@ -55,8 +55,8 @@ CREATE INDEX /*i*/term_full_entity ON /*_*/wb_terms (term_full_entity_id);
 -- T204837
 CREATE INDEX /*i*/wb_terms_text ON /*_*/wb_terms (term_text);
 
--- Same idea as above for terms_search_key (for normalized/insensitive matches).
-CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_language);
+-- T204838
+CREATE INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms (term_search_key);
 
 -- This index has good selectivity while still allowing ICP for short string values.
 CREATE INDEX /*i*/term_search_full ON /*_*/wb_terms (term_language, term_full_entity_id, term_type, term_search_key(16));
