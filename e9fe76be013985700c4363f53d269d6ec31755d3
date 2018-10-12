@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efcd914c_f3d807fe",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-12T08:12:44Z",
+      "side": 1,
+      "message": "The namespace condition should be configurable.\nI can already think of use cases where people might want to use this not in the main namespace.",
+      "range": {
+        "startLine": 389,
+        "startChar": 35,
+        "endLine": 389,
+        "endChar": 69
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f08d75c8_74694d86",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-12T08:12:44Z",
+      "side": 1,
+      "message": "The serialization of the entity id does match the page title, this depends on configuration.\n\nIf items are in the item namespace, the ID for example is Q1 but the title is Item:Q1.\nIn this case this code will now link to an article called \"Q1\" in the main namespace instead of to the entity.\n\ngetEntityUrl can just be used above.",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 133,
+        "endChar": 37
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca617096_1b967c7d",
+        "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-12T08:12:44Z",
+      "side": 1,
+      "message": "\\Wikibase please",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 13
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
