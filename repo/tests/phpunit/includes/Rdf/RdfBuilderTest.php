@@ -23,7 +23,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\RdfBuilder
+ * @covers \Wikibase\Rdf\RdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

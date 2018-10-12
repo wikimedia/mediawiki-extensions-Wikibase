@@ -17,7 +17,7 @@ use Wikibase\Lib\Tests\EntityRevisionLookupTestCase;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Lib\Store\CachingEntityRevisionLookup
+ * @covers \Wikibase\Lib\Store\CachingEntityRevisionLookup
  *
  * @group WikibaseEntityLookup
  * @group Wikibase

@@ -9,7 +9,7 @@ use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Repo\Content\DataUpdateAdapter;
 
 /**
- * @covers Wikibase\Repo\Content\DataUpdateAdapter
+ * @covers \Wikibase\Repo\Content\DataUpdateAdapter
  *
  * @group Wikibase
  *

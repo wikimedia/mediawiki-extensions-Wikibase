@@ -11,7 +11,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\CommonsInlineImageFormatter
+ * @covers \Wikibase\Lib\Formatters\CommonsInlineImageFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

@@ -7,7 +7,7 @@ use RuntimeException;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 
 /**
- * @covers Wikibase\DataAccess\Serializer\ForbiddenSerializer
+ * @covers \Wikibase\DataAccess\Serializer\ForbiddenSerializer
  *
  * @group Wikibase
  *

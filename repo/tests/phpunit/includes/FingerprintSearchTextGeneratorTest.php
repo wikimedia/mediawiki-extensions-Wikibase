@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
 
 /**
- * @covers Wikibase\Repo\FingerprintSearchTextGenerator
+ * @covers \Wikibase\Repo\FingerprintSearchTextGenerator
  *
  * @group Wikibase
  *

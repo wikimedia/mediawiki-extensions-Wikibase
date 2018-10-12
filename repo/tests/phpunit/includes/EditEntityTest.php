@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\EditEntity
+ * @covers \Wikibase\EditEntity
  *
  * @group Wikibase
  *

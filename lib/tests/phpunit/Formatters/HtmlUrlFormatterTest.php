@@ -10,7 +10,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\HtmlUrlFormatter;
 
 /**
- * @covers Wikibase\Lib\HtmlUrlFormatter
+ * @covers \Wikibase\Lib\HtmlUrlFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

@@ -8,7 +8,7 @@ use ValueFormatters\StringFormatter;
 use Wikibase\Lib\EscapingValueFormatter;
 
 /**
- * @covers Wikibase\Lib\EscapingValueFormatter
+ * @covers \Wikibase\Lib\EscapingValueFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

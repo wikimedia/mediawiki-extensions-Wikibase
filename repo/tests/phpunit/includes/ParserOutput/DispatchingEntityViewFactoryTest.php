@@ -14,7 +14,7 @@ use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityTermsView;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
+ * @covers \Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
  *
  * @group Wikibase
  *

@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
- * @covers Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory
+ * @covers \Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory
  *
  * @group Wikibase
  * @group WikibaseChange

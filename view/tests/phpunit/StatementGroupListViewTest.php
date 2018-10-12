@@ -21,7 +21,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\StatementGroupListView
+ * @covers \Wikibase\View\StatementGroupListView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

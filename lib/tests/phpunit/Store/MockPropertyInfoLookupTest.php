@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\Tests\Store\MockPropertyInfoLookup
+ * @covers \Wikibase\Lib\Tests\Store\MockPropertyInfoLookup
  *
  * @group Wikibase
  * @group WikibasePropertyInfo

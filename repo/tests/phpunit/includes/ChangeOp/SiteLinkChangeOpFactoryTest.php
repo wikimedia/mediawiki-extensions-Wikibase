@@ -9,7 +9,7 @@ use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory
+ * @covers \Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory
  *
  * @group Wikibase
  * @group ChangeOp

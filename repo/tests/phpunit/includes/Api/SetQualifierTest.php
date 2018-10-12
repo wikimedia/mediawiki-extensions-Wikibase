@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetQualifier
+ * @covers \Wikibase\Repo\Api\SetQualifier
  *
  * @group API
  * @group Database

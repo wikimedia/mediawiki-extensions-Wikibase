@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
- * @covers Wikibase\Client\DataAccess\SnaksFinder
+ * @covers \Wikibase\Client\DataAccess\SnaksFinder
  *
  * @group Wikibase
  * @group WikibaseClient

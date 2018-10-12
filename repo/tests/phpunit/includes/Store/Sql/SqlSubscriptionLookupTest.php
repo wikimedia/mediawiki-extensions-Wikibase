@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 
 /**
- * @covers Wikibase\Store\Sql\SqlSubscriptionLookup
+ * @covers \Wikibase\Store\Sql\SqlSubscriptionLookup
  *
  * @group Wikibase
  * @group WikibaseStore

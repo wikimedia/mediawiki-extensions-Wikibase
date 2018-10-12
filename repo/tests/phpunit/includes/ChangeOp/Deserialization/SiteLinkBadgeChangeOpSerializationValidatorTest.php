@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator
  *
  * @group Wikibase
  *

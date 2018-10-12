@@ -7,7 +7,7 @@ use Wikibase\Lib\DifferenceContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
 
 /**
- * @covers Wikibase\Lib\DifferenceContentLanguages
+ * @covers \Wikibase\Lib\DifferenceContentLanguages
  *
  * @uses Wikibase\Lib\StaticContentLanguages
  *

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
- * @covers Wikibase\Lib\Interactors\TermSearchResult
+ * @covers \Wikibase\Lib\Interactors\TermSearchResult
  *
  * @group Wikibase
  *

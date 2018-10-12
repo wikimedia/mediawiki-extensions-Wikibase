@@ -10,7 +10,7 @@ use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\CompositeValidator
+ * @covers \Wikibase\Repo\Validators\CompositeValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

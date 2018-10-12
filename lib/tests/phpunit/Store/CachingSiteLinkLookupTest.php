@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Lib\Store\CachingSiteLinkLookup
+ * @covers \Wikibase\Lib\Store\CachingSiteLinkLookup
  *
  * @group WikibaseStore
  * @group Wikibase

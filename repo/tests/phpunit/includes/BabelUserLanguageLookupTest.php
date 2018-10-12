@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use User;
 
 /**
- * @covers Wikibase\Repo\BabelUserLanguageLookup
+ * @covers \Wikibase\Repo\BabelUserLanguageLookup
  *
  * @group Wikibase
  * @group Database

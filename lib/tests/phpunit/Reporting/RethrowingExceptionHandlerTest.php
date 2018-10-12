@@ -7,7 +7,7 @@ use RuntimeException;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 
 /**
- * @covers Wikibase\Lib\Reporting\RethrowingExceptionHandler
+ * @covers \Wikibase\Lib\Reporting\RethrowingExceptionHandler
  *
  * @group Wikibase
  * @group WikibaseReporting

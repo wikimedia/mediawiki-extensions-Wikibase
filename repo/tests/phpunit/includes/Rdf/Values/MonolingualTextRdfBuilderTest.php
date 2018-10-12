@@ -10,7 +10,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\Rdf\Values\MonolingualTextRdfBuilder
+ * @covers \Wikibase\Rdf\Values\MonolingualTextRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

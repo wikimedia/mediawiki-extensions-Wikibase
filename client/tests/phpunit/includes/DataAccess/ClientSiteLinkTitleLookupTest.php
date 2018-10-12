@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup
+ * @covers \Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup
  *
  * @group Wikibase
  * @group WikibaseClient

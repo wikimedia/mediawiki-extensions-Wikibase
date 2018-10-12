@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
- * @covers Wikibase\Repo\Validators\UniquenessViolation
+ * @covers \Wikibase\Repo\Validators\UniquenessViolation
  *
  * @group Database
  * @group Wikibase

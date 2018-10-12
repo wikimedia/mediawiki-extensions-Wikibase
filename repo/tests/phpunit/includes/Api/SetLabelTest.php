@@ -9,9 +9,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\SetLabel
- * @covers Wikibase\Repo\Api\ModifyTerm
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\SetLabel
+ * @covers \Wikibase\Repo\Api\ModifyTerm
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @group Database
  * @group medium

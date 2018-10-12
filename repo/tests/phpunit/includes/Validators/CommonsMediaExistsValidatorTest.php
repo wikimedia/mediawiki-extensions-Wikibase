@@ -9,7 +9,7 @@ use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
 
 /**
- * @covers Wikibase\Repo\Validators\CommonsMediaExistsValidator
+ * @covers \Wikibase\Repo\Validators\CommonsMediaExistsValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

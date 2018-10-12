@@ -84,7 +84,7 @@ use Wikibase\SummaryFormatter;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\Repo\WikibaseRepo
+ * @covers \Wikibase\Repo\WikibaseRepo
  *
  * @group Wikibase
  * @group Database

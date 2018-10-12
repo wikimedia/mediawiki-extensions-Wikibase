@@ -7,7 +7,7 @@ use Wikibase\Lib\MessageException;
 use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 
 /**
- * @covers Wikibase\Repo\Localizer\MessageExceptionLocalizer
+ * @covers \Wikibase\Repo\Localizer\MessageExceptionLocalizer
  *
  * @group Wikibase
  *

@@ -11,7 +11,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\EntityChangeOpProvider
+ * @covers \Wikibase\Repo\ChangeOp\EntityChangeOpProvider
  *
  * @group Wikibase
  *

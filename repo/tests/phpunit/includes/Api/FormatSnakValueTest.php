@@ -16,7 +16,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\FormatSnakValue
+ * @covers \Wikibase\Repo\Api\FormatSnakValue
  *
  * @group Wikibase
  * @group WikibaseAPI

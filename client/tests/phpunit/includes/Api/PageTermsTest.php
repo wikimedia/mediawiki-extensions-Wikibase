@@ -18,7 +18,7 @@ use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Client\Api\PageTerms
+ * @covers \Wikibase\Client\Api\PageTerms
  *
  * @group API
  * @group Wikibase

@@ -26,7 +26,7 @@ use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\LinkedData\EntityDataRequestHandler
+ * @covers \Wikibase\Repo\LinkedData\EntityDataRequestHandler
  *
  * @group Database
  *

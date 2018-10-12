@@ -18,7 +18,7 @@ use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlEntityIdPager
+ * @covers \Wikibase\Repo\Store\Sql\SqlEntityIdPager
  *
  * @group Wikibase
  * @group WikibaseStore

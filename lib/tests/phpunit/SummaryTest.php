@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Summary
+ * @covers \Wikibase\Summary
  *
  * @group Wikibase
  *

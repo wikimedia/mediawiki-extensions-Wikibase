@@ -16,7 +16,7 @@ use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter
+ * @covers \Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter
  *
  * @group SnakFormatters
  * @group DataValueExtensions

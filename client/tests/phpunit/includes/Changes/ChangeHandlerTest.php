@@ -24,7 +24,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
- * @covers Wikibase\Client\Changes\ChangeHandler
+ * @covers \Wikibase\Client\Changes\ChangeHandler
  *
  * @group Wikibase
  * @group WikibaseClient

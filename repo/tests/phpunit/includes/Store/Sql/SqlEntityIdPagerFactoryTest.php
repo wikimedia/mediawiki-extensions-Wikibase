@@ -8,7 +8,7 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory
+ * @covers \Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory
  *
  * @group Wikibase
  * @group WikibaseStore

@@ -36,7 +36,7 @@ use Wikibase\SqlIdGenerator;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Store\WikiPageEntityStore
+ * @covers \Wikibase\Repo\Store\WikiPageEntityStore
  *
  * @group Database
  * @group Wikibase

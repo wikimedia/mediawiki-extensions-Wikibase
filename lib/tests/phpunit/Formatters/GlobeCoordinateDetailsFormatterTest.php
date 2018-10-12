@@ -12,7 +12,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
 
 /**
- * @covers Wikibase\Lib\GlobeCoordinateDetailsFormatter
+ * @covers \Wikibase\Lib\GlobeCoordinateDetailsFormatter
  *
  * @group ValueFormatters
  * @group Wikibase

@@ -7,7 +7,7 @@ use PHPUnit4And6Compat;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 
 /**
- * @covers Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler
+ * @covers \Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler
  *
  * @group WikibaseClient
  * @group WikibaseHooks

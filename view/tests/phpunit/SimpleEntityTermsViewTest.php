@@ -18,7 +18,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TermsListView;
 
 /**
- * @covers Wikibase\View\SimpleEntityTermsView
+ * @covers \Wikibase\View\SimpleEntityTermsView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

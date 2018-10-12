@@ -18,7 +18,7 @@ use Wikibase\EntityChange;
 use Wikimedia\Rdbms\LBFactory;
 
 /**
- * @covers Wikibase\Client\Changes\WikiPageUpdater
+ * @covers \Wikibase\Client\Changes\WikiPageUpdater
  *
  * @group Wikibase
  * @group WikibaseClient

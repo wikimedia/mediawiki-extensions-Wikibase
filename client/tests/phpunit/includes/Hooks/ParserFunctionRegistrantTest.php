@@ -6,7 +6,7 @@ use Parser;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 
 /**
- * @covers Wikibase\Client\Hooks\ParserFunctionRegistrant
+ * @covers \Wikibase\Client\Hooks\ParserFunctionRegistrant
  *
  * @group Wikibase
  * @group WikibaseClient

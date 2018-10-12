@@ -11,7 +11,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\Rdf\Values\CommonsMediaRdfBuilder
+ * @covers \Wikibase\Rdf\Values\CommonsMediaRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

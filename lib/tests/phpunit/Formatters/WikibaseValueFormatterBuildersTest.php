@@ -35,7 +35,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
- * @covers Wikibase\Lib\WikibaseValueFormatterBuilders
+ * @covers \Wikibase\Lib\WikibaseValueFormatterBuilders
  *
  * @group ValueFormatters
  * @group DataValueExtensions

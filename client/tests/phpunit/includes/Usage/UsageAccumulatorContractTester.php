@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * Contract tester for implementations of the UsageAccumulator interface.
  *
- * @covers Wikibase\Client\Usage\UsageAccumulator
+ * @covers \Wikibase\Client\Usage\UsageAccumulator
  * @uses Wikibase\Client\Usage\EntityUsage
  *
  * @group Wikibase

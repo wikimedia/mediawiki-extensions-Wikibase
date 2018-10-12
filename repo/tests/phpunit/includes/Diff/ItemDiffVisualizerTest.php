@@ -21,7 +21,7 @@ use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ItemDiffVisualizer;
 
 /**
- * @covers Wikibase\Repo\Diff\ItemDiffVisualizer
+ * @covers \Wikibase\Repo\Diff\ItemDiffVisualizer
  *
  * @group Wikibase
  *

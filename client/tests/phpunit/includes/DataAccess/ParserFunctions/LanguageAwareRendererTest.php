@@ -24,7 +24,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer
+ * @covers \Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient

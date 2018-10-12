@@ -6,7 +6,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Usage\EntityUsage
+ * @covers \Wikibase\Client\Usage\EntityUsage
  *
  * @group Wikibase
  * @group WikibaseClient

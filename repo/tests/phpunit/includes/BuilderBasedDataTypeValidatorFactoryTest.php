@@ -10,7 +10,7 @@ use Wikimedia\Assert\ParameterElementTypeException;
 use Wikimedia\Assert\PostconditionException;
 
 /**
- * @covers Wikibase\Repo\BuilderBasedDataTypeValidatorFactory
+ * @covers \Wikibase\Repo\BuilderBasedDataTypeValidatorFactory
  *
  * @group Wikibase
  *

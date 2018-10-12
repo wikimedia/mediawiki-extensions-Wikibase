@@ -22,7 +22,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 
 /**
- * @covers Wikibase\Repo\Hooks\EditFilterHookRunner
+ * @covers \Wikibase\Repo\Hooks\EditFilterHookRunner
  *
  * @group Wikibase
  *

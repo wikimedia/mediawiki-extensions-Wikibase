@@ -14,7 +14,7 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 
 /**
- * @covers Wikibase\Client\Usage\Sql\SqlUsageTracker
+ * @covers \Wikibase\Client\Usage\Sql\SqlUsageTracker
  *
  * @group Wikibase
  * @group WikibaseClient

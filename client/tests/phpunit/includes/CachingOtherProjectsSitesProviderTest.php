@@ -8,7 +8,7 @@ use Wikibase\Client\CachingOtherProjectsSitesProvider;
 use Wikibase\Client\OtherProjectsSitesProvider;
 
 /**
- * @covers Wikibase\Client\CachingOtherProjectsSitesProvider
+ * @covers \Wikibase\Client\CachingOtherProjectsSitesProvider
  *
  * @group WikibaseClient
  * @group Wikibase

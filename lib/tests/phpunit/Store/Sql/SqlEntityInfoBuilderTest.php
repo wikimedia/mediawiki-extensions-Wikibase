@@ -22,7 +22,7 @@ use Wikibase\WikibaseSettings;
 use Wikipage;
 
 /**
- * @covers Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
+ * @covers \Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

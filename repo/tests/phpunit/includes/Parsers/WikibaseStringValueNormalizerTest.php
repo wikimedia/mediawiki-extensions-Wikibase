@@ -7,7 +7,7 @@ use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\Repo\Parsers\WikibaseStringValueNormalizer
+ * @covers \Wikibase\Repo\Parsers\WikibaseStringValueNormalizer
  *
  * @group ValueParsers
  * @group Wikibase

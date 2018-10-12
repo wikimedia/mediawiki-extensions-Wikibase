@@ -11,7 +11,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
- * @covers Wikibase\Client\Usage\Sql\EntityUsageTableBuilder
+ * @covers \Wikibase\Client\Usage\Sql\EntityUsageTableBuilder
  *
  * @group Wikibase
  * @group WikibaseClient

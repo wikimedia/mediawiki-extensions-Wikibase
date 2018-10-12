@@ -7,7 +7,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 
 /**
- * @covers Wikibase\Lib\Serialization\CallbackFactory
+ * @covers \Wikibase\Lib\Serialization\CallbackFactory
  *
  * @group Wikibase
  *

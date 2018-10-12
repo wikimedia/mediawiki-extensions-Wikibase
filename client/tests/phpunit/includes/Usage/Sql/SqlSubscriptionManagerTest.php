@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\Client\Usage\Sql\SqlSubscriptionManager
+ * @covers \Wikibase\Client\Usage\Sql\SqlSubscriptionManager
  *
  * @group Wikibase
  * @group WikibaseClient

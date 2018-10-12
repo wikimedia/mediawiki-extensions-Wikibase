@@ -9,7 +9,7 @@ use Wikibase\Repo\Modules\MediaWikiConfigModule;
 use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
 
 /**
- * @covers Wikibase\Repo\Modules\MediaWikiConfigModule
+ * @covers \Wikibase\Repo\Modules\MediaWikiConfigModule
  *
  * @group Wikibase
  *

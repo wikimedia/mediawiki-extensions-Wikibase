@@ -13,7 +13,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\LabelDescriptionDuplicateDetector
+ * @covers \Wikibase\LabelDescriptionDuplicateDetector
  *
  * @group Wikibase
  *

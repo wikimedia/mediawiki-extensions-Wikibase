@@ -16,7 +16,7 @@ use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\DedupeBag;
 
 /**
- * @covers Wikibase\Rdf\EntityRdfBuilderFactory
+ * @covers \Wikibase\Rdf\EntityRdfBuilderFactory
  *
  * @group Wikibase
  * @group WikibaseRdf

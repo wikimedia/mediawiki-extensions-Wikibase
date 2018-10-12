@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionCache;
 
 /**
- * @covers Wikibase\Lib\Store\EntityRevisionCache
+ * @covers \Wikibase\Lib\Store\EntityRevisionCache
  *
  * @group WikibaseEntityLookup
  * @group Wikibase

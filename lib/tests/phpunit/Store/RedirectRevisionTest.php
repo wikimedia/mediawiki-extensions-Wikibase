@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\RedirectRevision;
 
 /**
- * @covers Wikibase\Lib\Store\RedirectRevision
+ * @covers \Wikibase\Lib\Store\RedirectRevision
  *
  * @group Wikibase
  * @group WikibaseStore

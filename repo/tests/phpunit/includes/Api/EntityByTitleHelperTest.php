@@ -17,7 +17,7 @@ use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\Repo\Api\ItemByTitleHelper
+ * @covers \Wikibase\Repo\Api\ItemByTitleHelper
  *
  * @group Wikibase
  * @group WikibaseAPI

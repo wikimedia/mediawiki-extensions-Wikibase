@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Reporting;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 
 /**
- * @covers Wikibase\Lib\Reporting\ObservableMessageReporter
+ * @covers \Wikibase\Lib\Reporting\ObservableMessageReporter
  *
  * @group Wikibase
  * @group WikibaseReporting

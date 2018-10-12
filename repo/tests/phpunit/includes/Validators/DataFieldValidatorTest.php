@@ -9,7 +9,7 @@ use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\DataFieldValidator
+ * @covers \Wikibase\Repo\Validators\DataFieldValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

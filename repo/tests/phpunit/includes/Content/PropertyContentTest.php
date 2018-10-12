@@ -12,8 +12,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyContent;
 
 /**
- * @covers Wikibase\PropertyContent
- * @covers Wikibase\EntityContent
+ * @covers \Wikibase\PropertyContent
+ * @covers \Wikibase\EntityContent
  *
  * @group Database
  * @group Wikibase

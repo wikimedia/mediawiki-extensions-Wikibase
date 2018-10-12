@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 
 /**
- * @covers Wikibase\Client\Store\AddUsagesForPageJob
+ * @covers \Wikibase\Client\Store\AddUsagesForPageJob
  *
  * @group Wikibase
  * @group WikibaseClient

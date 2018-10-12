@@ -7,7 +7,7 @@ use Wikibase\Lib\DataType;
 use InvalidArgumentException;
 
 /**
- * @covers Wikibase\Lib\DataType
+ * @covers \Wikibase\Lib\DataType
  *
  * @group Wikibase
  *

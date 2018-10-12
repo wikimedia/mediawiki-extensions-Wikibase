@@ -7,7 +7,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory
+ * @covers \Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory
  *
  * @group Wikibase
  * @group ChangeOp

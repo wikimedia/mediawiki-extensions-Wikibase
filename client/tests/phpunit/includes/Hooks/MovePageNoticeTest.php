@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\Hooks\MovePageNotice
+ * @covers \Wikibase\Client\Hooks\MovePageNotice
  *
  * @group WikibaseClient
  * @group Wikibase

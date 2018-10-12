@@ -7,7 +7,7 @@ use MWNamespace;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @covers Wikibase\Client\NamespaceChecker
+ * @covers \Wikibase\Client\NamespaceChecker
  *
  * @group WikibaseClient
  * @group Wikibase

@@ -13,7 +13,7 @@ use Wikibase\Lib\MessageSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\MessageSnakFormatter
+ * @covers \Wikibase\Lib\MessageSnakFormatter
  * @uses Wikibase\DataModel\Entity\PropertyId
  * @uses Wikibase\DataModel\Snak\PropertyNoValueSnak
  * @uses Wikibase\DataModel\Snak\PropertySomeValueSnak

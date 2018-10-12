@@ -6,7 +6,7 @@ use MediaWikiSite;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 
 /**
- * @covers Wikibase\Lib\Sites\SiteMatrixParser
+ * @covers \Wikibase\Lib\Sites\SiteMatrixParser
  *
  * @group Wikibase
  *

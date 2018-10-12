@@ -8,7 +8,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer
  *
  * @group Wikibase
  *

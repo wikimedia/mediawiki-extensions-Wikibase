@@ -13,7 +13,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
- * @covers Wikibase\Client\Store\Sql\BulkSubscriptionUpdater
+ * @covers \Wikibase\Client\Store\Sql\BulkSubscriptionUpdater
  *
  * @group Wikibase
  * @group WikibaseClient

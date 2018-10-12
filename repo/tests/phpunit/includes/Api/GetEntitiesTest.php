@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiUsageException;
 
 /**
- * @covers Wikibase\Repo\Api\GetEntities
+ * @covers \Wikibase\Repo\Api\GetEntities
  *
  * Test cases are generated using the data provided in the various static arrays below.
  *

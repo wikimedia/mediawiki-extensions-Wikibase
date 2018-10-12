@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
 /**
- * @covers Wikibase\DataAccess\PerRepositoryServiceContainer
+ * @covers \Wikibase\DataAccess\PerRepositoryServiceContainer
  *
  * @group Wikibase
  *

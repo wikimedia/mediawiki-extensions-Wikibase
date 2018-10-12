@@ -9,7 +9,7 @@ use Wikibase\ViewEntityAction;
 use WikiPage;
 
 /**
- * @covers Wikibase\ViewEntityAction
+ * @covers \Wikibase\ViewEntityAction
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

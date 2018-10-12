@@ -11,7 +11,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\HtmlTimeFormatter;
 
 /**
- * @covers Wikibase\Lib\HtmlTimeFormatter
+ * @covers \Wikibase\Lib\HtmlTimeFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

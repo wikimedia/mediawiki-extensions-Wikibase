@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\TermIndex;
 
 /**
- * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory
+ * @covers \Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory
  *
  * @group Wikibase
  * @group WikibaseLib

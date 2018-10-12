@@ -14,7 +14,7 @@ use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 
 /**
- * @covers Wikibase\Repo\IO\EntityIdReader
+ * @covers \Wikibase\Repo\IO\EntityIdReader
  *
  * @group Wikibase
  *

@@ -12,7 +12,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\TruthyStatementRdfBuilder
+ * @covers \Wikibase\Rdf\TruthyStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

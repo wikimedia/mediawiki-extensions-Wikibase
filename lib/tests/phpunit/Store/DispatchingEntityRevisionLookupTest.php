@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\Lib\Store\DispatchingEntityRevisionLookup
+ * @covers \Wikibase\Lib\Store\DispatchingEntityRevisionLookup
  *
  * @group WikibaseStore
  * @group Wikibase

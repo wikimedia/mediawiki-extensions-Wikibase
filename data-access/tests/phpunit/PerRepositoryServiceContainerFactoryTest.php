@@ -17,7 +17,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
- * @covers Wikibase\DataAccess\PerRepositoryServiceContainerFactory
+ * @covers \Wikibase\DataAccess\PerRepositoryServiceContainerFactory
  *
  * @group Wikibase
  *

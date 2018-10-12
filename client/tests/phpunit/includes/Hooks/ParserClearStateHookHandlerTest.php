@@ -12,7 +12,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockClientStore;
 
 /**
- * @covers Wikibase\Client\Hooks\ParserClearStateHookHandler
+ * @covers \Wikibase\Client\Hooks\ParserClearStateHookHandler
  *
  * @group Wikibase
  * @group WikibaseClient

@@ -22,7 +22,7 @@ use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\StatementModificationHelper
+ * @covers \Wikibase\Repo\Api\StatementModificationHelper
  *
  * @group Wikibase
  * @group WikibaseAPI

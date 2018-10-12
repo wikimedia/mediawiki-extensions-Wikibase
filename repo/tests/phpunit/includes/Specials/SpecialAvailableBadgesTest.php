@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Repo\Specials\SpecialAvailableBadges;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialAvailableBadges
+ * @covers \Wikibase\Repo\Specials\SpecialAvailableBadges
  *
  * @group Wikibase
  * @group SpecialPage

@@ -20,7 +20,7 @@ use Wikibase\HistoryEntityAction;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @covers Wikibase\HistoryEntityAction
+ * @covers \Wikibase\HistoryEntityAction
  *
  * @group Action
  * @group Wikibase

@@ -16,7 +16,7 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\ApiErrorReporter
+ * @covers \Wikibase\Repo\Api\ApiErrorReporter
  *
  * @group Wikibase
  * @group WikibaseValidators

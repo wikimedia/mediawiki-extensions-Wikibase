@@ -14,7 +14,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
- * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration

@@ -5,7 +5,7 @@ namespace Wikibase\View\Tests\Template;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\Template\TemplateRegistry
+ * @covers \Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView

@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 
 /**
- * @covers Wikibase\Lib\Store\CacheAwarePropertyInfoStore
+ * @covers \Wikibase\Lib\Store\CacheAwarePropertyInfoStore
  *
  * @group Wikibase
  * @group WikibasePropertyInfo

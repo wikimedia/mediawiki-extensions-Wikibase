@@ -7,8 +7,8 @@ use Wikibase\Lib\MediaWikiNumberLocalizer;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 
 /**
- * @covers Wikibase\Lib\MediaWikiNumberLocalizer
- * @covers Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer
+ * @covers \Wikibase\Lib\MediaWikiNumberLocalizer
+ * @covers \Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer
  *
  * @group ValueParsers
  * @group Wikibase

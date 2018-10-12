@@ -21,7 +21,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder
+ * @covers \Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder
  *
  * @group Wikibase
  *

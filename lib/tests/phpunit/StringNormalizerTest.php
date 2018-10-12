@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\StringNormalizer
+ * @covers \Wikibase\StringNormalizer
  *
  * @group Wikibase
  *

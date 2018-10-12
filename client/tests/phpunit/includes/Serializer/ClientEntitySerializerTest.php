@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\LanguageFallbackChain;
 
 /**
- * @covers Wikibase\Client\Serializer\ClientEntitySerializer
+ * @covers \Wikibase\Client\Serializer\ClientEntitySerializer
  *
  * @group Wikibase
  * @group WikibaseClient

@@ -17,7 +17,7 @@ use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 
 /**
- * @covers Wikibase\Lib\Changes\EntityChangeFactory
+ * @covers \Wikibase\Lib\Changes\EntityChangeFactory
  *
  * @group Database
  * @group Wikibase

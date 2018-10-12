@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRevision;
 
 /**
- * @covers Wikibase\Lib\Store\EntityRevision
+ * @covers \Wikibase\Lib\Store\EntityRevision
  *
  * @group Wikibase
  * @group WikibaseStore

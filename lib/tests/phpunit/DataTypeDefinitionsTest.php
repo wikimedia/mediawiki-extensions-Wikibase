@@ -7,7 +7,7 @@ use UnexpectedValueException;
 use Wikibase\Lib\DataTypeDefinitions;
 
 /**
- * @covers Wikibase\Lib\DataTypeDefinitions
+ * @covers \Wikibase\Lib\DataTypeDefinitions
  *
  * @group DataValueExtensions
  * @group Wikibase

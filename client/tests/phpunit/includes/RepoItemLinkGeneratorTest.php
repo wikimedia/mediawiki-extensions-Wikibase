@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @covers Wikibase\Client\RepoItemLinkGenerator
+ * @covers \Wikibase\Client\RepoItemLinkGenerator
  *
  * @group WikibaseClient
  * @group Wikibase

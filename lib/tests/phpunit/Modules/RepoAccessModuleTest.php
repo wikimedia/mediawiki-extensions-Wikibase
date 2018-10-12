@@ -7,7 +7,7 @@ use ResourceLoaderContext;
 use Wikibase\RepoAccessModule;
 
 /**
- * @covers Wikibase\RepoAccessModule
+ * @covers \Wikibase\RepoAccessModule
  *
  * @group Wikibase
  *

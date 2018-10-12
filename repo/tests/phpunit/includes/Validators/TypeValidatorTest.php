@@ -8,7 +8,7 @@ use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\TypeValidator
+ * @covers \Wikibase\Repo\Validators\TypeValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

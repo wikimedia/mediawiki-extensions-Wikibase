@@ -6,7 +6,7 @@ use ValueParsers\ParserOptions;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
 
 /**
- * @covers Wikibase\Repo\Parsers\MonolingualTextParser
+ * @covers \Wikibase\Repo\Parsers\MonolingualTextParser
  *
  * @group ValueParsers
  * @group Wikibase

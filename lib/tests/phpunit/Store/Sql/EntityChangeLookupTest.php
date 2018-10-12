@@ -13,7 +13,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\Lib\Store\Sql\EntityChangeLookup
+ * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
  *
  * @group Wikibase
  * @group WikibaseStore

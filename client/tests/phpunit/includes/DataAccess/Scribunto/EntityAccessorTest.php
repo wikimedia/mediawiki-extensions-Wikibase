@@ -28,7 +28,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Client\DataAccess\Scribunto\EntityAccessor
+ * @covers \Wikibase\Client\DataAccess\Scribunto\EntityAccessor
  *
  * @group Wikibase
  * @group WikibaseClient

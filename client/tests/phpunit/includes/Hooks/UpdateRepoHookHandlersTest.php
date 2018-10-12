@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @covers Wikibase\Client\Hooks\UpdateRepoHookHandlers
+ * @covers \Wikibase\Client\Hooks\UpdateRepoHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase

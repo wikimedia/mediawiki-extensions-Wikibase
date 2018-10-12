@@ -10,7 +10,7 @@ use Wikibase\Lib\EscapingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\EscapingSnakFormatter
+ * @covers \Wikibase\Lib\EscapingSnakFormatter
  *
  * @group SnakFormatters
  * @group DataValueExtensions

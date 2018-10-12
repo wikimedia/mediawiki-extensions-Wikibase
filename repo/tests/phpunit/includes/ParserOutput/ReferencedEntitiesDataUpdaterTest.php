@@ -16,7 +16,7 @@ use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
  *
  * @group Wikibase
  * @group Database

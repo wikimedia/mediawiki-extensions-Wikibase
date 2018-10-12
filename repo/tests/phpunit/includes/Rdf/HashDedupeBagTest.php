@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 use Wikibase\Rdf\HashDedupeBag;
 
 /**
- * @covers Wikibase\Rdf\HashDedupeBag
+ * @covers \Wikibase\Rdf\HashDedupeBag
  *
  * @group Wikibase
  * @group WikibaseRdf

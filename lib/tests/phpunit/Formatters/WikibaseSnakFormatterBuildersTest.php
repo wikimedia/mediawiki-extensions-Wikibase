@@ -19,7 +19,7 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\WikibaseSnakFormatterBuilders
+ * @covers \Wikibase\Lib\WikibaseSnakFormatterBuilders
  *
  * @group SnakFormatters
  * @group DataValueExtensions

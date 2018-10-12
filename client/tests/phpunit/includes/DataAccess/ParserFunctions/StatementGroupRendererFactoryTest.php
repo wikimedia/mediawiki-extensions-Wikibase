@@ -34,7 +34,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory
+ * @covers \Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory
  *
  * @group Wikibase
  * @group WikibaseClient

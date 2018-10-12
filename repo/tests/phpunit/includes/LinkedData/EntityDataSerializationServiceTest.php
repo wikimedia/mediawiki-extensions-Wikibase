@@ -26,7 +26,7 @@ use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\LinkedData\EntityDataSerializationService
+ * @covers \Wikibase\Repo\LinkedData\EntityDataSerializationService
  *
  * @group Database
  * @group Wikibase

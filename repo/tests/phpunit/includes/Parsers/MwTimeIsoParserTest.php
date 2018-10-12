@@ -13,7 +13,7 @@ use ValueParsers\Test\StringValueParserTest;
 use Wikibase\Repo\Parsers\MwTimeIsoParser;
 
 /**
- * @covers Wikibase\Repo\Parsers\MwTimeIsoParser
+ * @covers \Wikibase\Repo\Parsers\MwTimeIsoParser
  *
  * @group ValueParsers
  * @group Wikibase

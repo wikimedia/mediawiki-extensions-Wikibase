@@ -22,7 +22,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\NamespaceChecker;
 
 /**
- * @covers Wikibase\Client\Hooks\InfoActionHookHandler
+ * @covers \Wikibase\Client\Hooks\InfoActionHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase

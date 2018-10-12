@@ -10,8 +10,8 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Usage\ParserOutputUsageAccumulator
- * @covers Wikibase\Client\Usage\UsageAccumulator
+ * @covers \Wikibase\Client\Usage\ParserOutputUsageAccumulator
+ * @covers \Wikibase\Client\Usage\UsageAccumulator
  *
  * @group Wikibase
  * @group WikibaseClient

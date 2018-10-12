@@ -17,7 +17,7 @@ use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 
 /**
- * @covers Wikibase\Rdf\SnakRdfBuilder
+ * @covers \Wikibase\Rdf\SnakRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

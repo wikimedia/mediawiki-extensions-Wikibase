@@ -13,7 +13,7 @@ use Wikibase\Client\WikibaseClient;
 use WikiPage;
 
 /**
- * @covers Wikibase\Client\Api\ApiListEntityUsage
+ * @covers \Wikibase\Client\Api\ApiListEntityUsage
  *
  * @group API
  * @group Wikibase

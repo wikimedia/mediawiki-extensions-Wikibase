@@ -10,7 +10,7 @@ use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\DataValueValidator
+ * @covers \Wikibase\Repo\Validators\DataValueValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

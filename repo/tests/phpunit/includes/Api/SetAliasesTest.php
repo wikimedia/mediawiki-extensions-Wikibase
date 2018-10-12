@@ -11,8 +11,8 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\SetAliases
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\SetAliases
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @group Database
  * @group medium

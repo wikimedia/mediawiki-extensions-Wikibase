@@ -7,7 +7,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\UnDeserializableValueFormatter;
 
 /**
- * @covers Wikibase\Lib\UnDeserializableValueFormatter
+ * @covers \Wikibase\Lib\UnDeserializableValueFormatter
  *
  * @group Wikibase
  *

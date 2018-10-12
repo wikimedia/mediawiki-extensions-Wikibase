@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 
 /**
- * @covers Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor
+ * @covers \Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor
  *
  * @group Wikibase
  *

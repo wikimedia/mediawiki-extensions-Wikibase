@@ -20,7 +20,7 @@ use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\ParseValue
+ * @covers \Wikibase\Repo\Api\ParseValue
  *
  * @group API
  * @group Wikibase

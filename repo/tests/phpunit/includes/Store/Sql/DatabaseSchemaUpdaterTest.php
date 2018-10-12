@@ -9,7 +9,7 @@ use Wikibase\Store;
 use Wikimedia\Rdbms\DatabaseMysqli;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater
+ * @covers \Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater
  *
  * @group Wikibase
  * @group WikibaseChange

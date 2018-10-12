@@ -7,7 +7,7 @@ use Wikibase\Repo\Modules\EntityTypesConfigValueProvider;
 use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
 
 /**
- * @covers Wikibase\Repo\Modules\EntityTypesConfigValueProvider
+ * @covers \Wikibase\Repo\Modules\EntityTypesConfigValueProvider
  *
  * @group Wikibase
  *

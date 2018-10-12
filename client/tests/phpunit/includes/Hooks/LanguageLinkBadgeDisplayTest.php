@@ -17,7 +17,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
+ * @covers \Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
  *
  * @group WikibaseClient
  * @group Wikibase

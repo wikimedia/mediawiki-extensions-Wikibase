@@ -14,8 +14,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnDelete
- * @covers Wikibase\Client\UpdateRepo\UpdateRepo
+ * @covers \Wikibase\Client\UpdateRepo\UpdateRepoOnDelete
+ * @covers \Wikibase\Client\UpdateRepo\UpdateRepo
  *
  * @group WikibaseClient
  * @group Wikibase

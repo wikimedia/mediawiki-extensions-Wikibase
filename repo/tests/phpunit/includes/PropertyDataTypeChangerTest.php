@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\PropertyDataTypeChanger;
 
 /**
- * @covers Wikibase\Repo\PropertyDataTypeChanger
+ * @covers \Wikibase\Repo\PropertyDataTypeChanger
  *
  * @group Wikibase
  *

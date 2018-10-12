@@ -12,7 +12,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers Wikibase\ItemDisambiguation
+ * @covers \Wikibase\ItemDisambiguation
  *
  * @group Wikibase
  * @group SpecialPage

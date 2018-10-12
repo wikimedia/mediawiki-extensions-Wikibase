@@ -13,7 +13,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Hooks\DataUpdateHookHandlers
+ * @covers \Wikibase\Client\Hooks\DataUpdateHookHandlers
  *
  * @group WikibaseClient
  * @group WikibaseUsageTracking

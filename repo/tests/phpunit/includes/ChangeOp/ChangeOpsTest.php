@@ -23,7 +23,7 @@ use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\ChangeOps
+ * @covers \Wikibase\Repo\ChangeOp\ChangeOps
  *
  * @group Wikibase
  * @group ChangeOp

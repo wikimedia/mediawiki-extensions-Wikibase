@@ -13,7 +13,7 @@ use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
 use Wikibase\Repo\StatementGrouperBuilder;
 
 /**
- * @covers Wikibase\Repo\StatementGrouperBuilder
+ * @covers \Wikibase\Repo\StatementGrouperBuilder
  *
  * @group Wikibase
  *

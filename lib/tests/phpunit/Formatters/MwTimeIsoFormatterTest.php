@@ -9,7 +9,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\MwTimeIsoFormatter;
 
 /**
- * @covers Wikibase\Lib\MwTimeIsoFormatter
+ * @covers \Wikibase\Lib\MwTimeIsoFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

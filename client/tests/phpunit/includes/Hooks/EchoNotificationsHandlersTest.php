@@ -14,7 +14,7 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Client\Hooks\EchoNotificationsHandlers
+ * @covers \Wikibase\Client\Hooks\EchoNotificationsHandlers
  *
  * @group Database
  * @group WikibaseClient

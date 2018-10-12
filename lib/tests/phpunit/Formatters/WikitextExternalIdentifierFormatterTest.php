@@ -13,7 +13,7 @@ use Wikibase\Lib\SnakUrlExpander;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**
- * @covers Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter
+ * @covers \Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers Wikibase\Lib\Store\Sql\PropertyInfoTable
+ * @covers \Wikibase\Lib\Store\Sql\PropertyInfoTable
  *
  * @group Wikibase
  * @group WikibaseStore

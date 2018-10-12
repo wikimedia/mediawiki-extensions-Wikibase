@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Usage;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 
 /**
- * @covers Wikibase\Client\Usage\NullSubscriptionManager
+ * @covers \Wikibase\Client\Usage\NullSubscriptionManager
  *
  * @group WikibaseClient
  * @group Wikibase

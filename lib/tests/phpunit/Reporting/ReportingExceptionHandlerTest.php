@@ -8,7 +8,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 
 /**
- * @covers Wikibase\Lib\Reporting\ReportingExceptionHandler
+ * @covers \Wikibase\Lib\Reporting\ReportingExceptionHandler
  *
  * @group Wikibase
  * @group WikibaseReporting

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\EntityView;
 
 /**
- * @covers Wikibase\View\EntityView
+ * @covers \Wikibase\View\EntityView
  *
  * @group Wikibase
  * @group WikibaseView

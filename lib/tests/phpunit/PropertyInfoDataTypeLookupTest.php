@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\PropertyInfoDataTypeLookup
+ * @covers \Wikibase\Lib\PropertyInfoDataTypeLookup
  *
  * @group Wikibase
  *

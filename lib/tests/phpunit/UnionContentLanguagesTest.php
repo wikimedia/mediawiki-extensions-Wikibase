@@ -7,7 +7,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\UnionContentLanguages;
 
 /**
- * @covers Wikibase\Lib\UnionContentLanguages
+ * @covers \Wikibase\Lib\UnionContentLanguages
  *
  * @group Wikibase
  *

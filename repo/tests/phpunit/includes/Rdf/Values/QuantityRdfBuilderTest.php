@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\Values\QuantityRdfBuilder
+ * @covers \Wikibase\Rdf\Values\QuantityRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

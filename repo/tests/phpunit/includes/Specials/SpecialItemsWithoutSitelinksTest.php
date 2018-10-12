@@ -6,9 +6,9 @@ use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks
- * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

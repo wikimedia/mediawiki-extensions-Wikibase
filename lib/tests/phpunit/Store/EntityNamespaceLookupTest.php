@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
- * @covers Wikibase\Lib\Store\EntityNamespaceLookup
+ * @covers \Wikibase\Lib\Store\EntityNamespaceLookup
  *
  * @group Wikibase
  *

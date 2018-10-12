@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\FullStatementRdfBuilder
+ * @covers \Wikibase\Rdf\FullStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

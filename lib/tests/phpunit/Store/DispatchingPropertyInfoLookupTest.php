@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\Store\DispatchingPropertyInfoLookup
+ * @covers \Wikibase\Lib\Store\DispatchingPropertyInfoLookup
  *
  * @group WikibaseStore
  * @group Wikibase

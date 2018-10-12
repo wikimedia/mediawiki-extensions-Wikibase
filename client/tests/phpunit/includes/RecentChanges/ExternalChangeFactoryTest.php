@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\RecentChanges\ExternalChangeFactory
+ * @covers \Wikibase\Client\RecentChanges\ExternalChangeFactory
  *
  * @group WikibaseClient
  * @group Database

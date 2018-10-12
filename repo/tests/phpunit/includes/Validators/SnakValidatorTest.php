@@ -25,7 +25,7 @@ use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**
- * @covers Wikibase\Repo\Validators\SnakValidator
+ * @covers \Wikibase\Repo\Validators\SnakValidator
  *
  * @group Wikibase
  * @group WikibaseValidators

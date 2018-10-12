@@ -7,7 +7,7 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Usage\PageEntityUsages
+ * @covers \Wikibase\Client\Usage\PageEntityUsages
  *
  * @group Wikibase
  * @group WikibaseClient

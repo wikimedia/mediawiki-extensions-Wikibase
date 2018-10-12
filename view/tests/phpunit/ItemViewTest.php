@@ -17,8 +17,8 @@ use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\View\ItemView
- * @covers Wikibase\View\EntityView
+ * @covers \Wikibase\View\ItemView
+ * @covers \Wikibase\View\EntityView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory

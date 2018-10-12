@@ -9,7 +9,7 @@ use Wikibase\Lib\CommonsLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter
+ * @covers \Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter
  *
  * @group Wikibase
  * @group Database

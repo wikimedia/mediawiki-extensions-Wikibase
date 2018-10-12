@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory
+ * @covers \Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory
  *
  * @note We also have integration tests for this at DataAccessSnakFormatterOutputFormatTest.
  *

@@ -12,7 +12,7 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Client\Api\Description
+ * @covers \Wikibase\Client\Api\Description
  *
  * @group API
  * @group Wikibase

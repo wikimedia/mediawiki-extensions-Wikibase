@@ -7,7 +7,7 @@ use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
- * @covers Wikibase\Formatters\MonolingualHtmlFormatter
+ * @covers \Wikibase\Formatters\MonolingualHtmlFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

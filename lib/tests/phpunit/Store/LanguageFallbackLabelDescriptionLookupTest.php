@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup
+ * @covers \Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup
  *
  * @group Wikibase
  * @group WikibaseStore

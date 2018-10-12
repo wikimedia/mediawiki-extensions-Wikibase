@@ -9,7 +9,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\CreateClaim
+ * @covers \Wikibase\Repo\Api\CreateClaim
  *
  * @group API
  * @group Database

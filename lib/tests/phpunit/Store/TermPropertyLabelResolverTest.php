@@ -10,7 +10,7 @@ use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Store\TermPropertyLabelResolver;
 
 /**
- * @covers Wikibase\Lib\Store\TermPropertyLabelResolver
+ * @covers \Wikibase\Lib\Store\TermPropertyLabelResolver
  *
  * @group Wikibase
  * @group WikibaseStore

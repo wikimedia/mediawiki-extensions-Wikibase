@@ -14,7 +14,7 @@ use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 
 /**
- * @covers Wikibase\Client\Hooks\ChangesListLinesHandler
+ * @covers \Wikibase\Client\Hooks\ChangesListLinesHandler
  *
  * @group WikibaseClient
  * @group Wikibase

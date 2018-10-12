@@ -7,7 +7,7 @@ use ValueParsers\ParseException;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 
 /**
- * @covers Wikibase\Repo\Localizer\ParseExceptionLocalizer
+ * @covers \Wikibase\Repo\Localizer\ParseExceptionLocalizer
  *
  * @group Wikibase
  *

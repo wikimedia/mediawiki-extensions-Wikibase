@@ -9,7 +9,7 @@ use User;
 use Wikibase\OutputPageJsConfigBuilder;
 
 /**
- * @covers Wikibase\OutputPageJsConfigBuilder
+ * @covers \Wikibase\OutputPageJsConfigBuilder
  *
  * @group Wikibase
  * @group Database

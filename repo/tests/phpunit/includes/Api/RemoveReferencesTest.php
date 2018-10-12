@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Repo\Api\RemoveReferences
+ * @covers \Wikibase\Repo\Api\RemoveReferences
  *
  * @group API
  * @group Database

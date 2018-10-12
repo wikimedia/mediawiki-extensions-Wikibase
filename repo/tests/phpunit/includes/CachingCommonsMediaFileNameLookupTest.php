@@ -9,7 +9,7 @@ use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 
 /**
- * @covers Wikibase\Repo\CachingCommonsMediaFileNameLookup
+ * @covers \Wikibase\Repo\CachingCommonsMediaFileNameLookup
  *
  * @group Wikibase
  *

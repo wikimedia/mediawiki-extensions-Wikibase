@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 
 /**
- * @covers Wikibase\Lib\DataTypeFactory
+ * @covers \Wikibase\Lib\DataTypeFactory
  *
  * @group Wikibase
  *

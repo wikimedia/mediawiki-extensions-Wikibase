@@ -14,7 +14,7 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 
 /**
- * @covers Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator
+ * @covers \Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator
  *
  * @group Wikibase
  *

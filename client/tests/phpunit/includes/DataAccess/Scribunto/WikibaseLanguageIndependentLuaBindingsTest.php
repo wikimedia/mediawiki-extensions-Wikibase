@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings
  *
  * @group Wikibase
  * @group WikibaseClient

@@ -18,7 +18,7 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 
 /**
- * @covers Wikibase\Repo\Diff\BasicEntityDiffVisualizer
+ * @covers \Wikibase\Repo\Diff\BasicEntityDiffVisualizer
  *
  * @group Wikibase
  *

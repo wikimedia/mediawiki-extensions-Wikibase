@@ -31,8 +31,8 @@ use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\ItemContent
- * @covers Wikibase\EntityContent
+ * @covers \Wikibase\ItemContent
+ * @covers \Wikibase\EntityContent
  *
  * @group Wikibase
  * @group WikibaseItem

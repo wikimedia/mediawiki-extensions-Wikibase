@@ -17,7 +17,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
 
 /**
- * @covers Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker
+ * @covers \Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker
  *
  * @group Database
  * @group Wikibase

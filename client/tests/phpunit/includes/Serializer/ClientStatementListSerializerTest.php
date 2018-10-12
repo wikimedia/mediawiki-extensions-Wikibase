@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\Client\Serializer\ClientStatementListSerializer
+ * @covers \Wikibase\Client\Serializer\ClientStatementListSerializer
  *
  * @group Wikibase
  * @group WikibaseClient

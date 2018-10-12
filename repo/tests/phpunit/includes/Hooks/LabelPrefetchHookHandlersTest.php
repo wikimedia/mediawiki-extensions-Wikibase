@@ -18,7 +18,7 @@ use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @covers Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
+ * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
  *
  * @group Wikibase
  * @group Database

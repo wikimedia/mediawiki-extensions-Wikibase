@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ImageLinksDataUpdater
+ * @covers \Wikibase\Repo\ParserOutput\ImageLinksDataUpdater
  *
  * @group Wikibase
  *

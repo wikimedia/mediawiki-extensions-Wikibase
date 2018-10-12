@@ -23,7 +23,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\SummaryFormatter;
 
 /**
- * @covers Wikibase\Repo\Api\ApiHelperFactory
+ * @covers \Wikibase\Repo\Api\ApiHelperFactory
  *
  * @group Wikibase
  * @group WikibaseAPI

@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\SetSiteLink
- * @covers Wikibase\Repo\Api\ModifyEntity
+ * @covers \Wikibase\Repo\Api\SetSiteLink
+ * @covers \Wikibase\Repo\Api\ModifyEntity
  *
  * @license GPL-2.0-or-later
  *

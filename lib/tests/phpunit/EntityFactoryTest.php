@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 
 /**
- * @covers Wikibase\EntityFactory
+ * @covers \Wikibase\EntityFactory
  *
  * @group Wikibase
  *

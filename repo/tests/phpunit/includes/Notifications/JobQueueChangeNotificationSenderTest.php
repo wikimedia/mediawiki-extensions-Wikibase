@@ -9,7 +9,7 @@ use Wikibase\Change;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 
 /**
- * @covers Wikibase\Repo\Notifications\JobQueueChangeNotificationSender
+ * @covers \Wikibase\Repo\Notifications\JobQueueChangeNotificationSender
  *
  * @group Wikibase
  * @group WikibaseStore

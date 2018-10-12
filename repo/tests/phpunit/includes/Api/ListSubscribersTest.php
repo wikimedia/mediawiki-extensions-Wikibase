@@ -13,7 +13,7 @@ use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Api\ListSubscribers
+ * @covers \Wikibase\Repo\Api\ListSubscribers
  *
  * @group API
  * @group Wikibase

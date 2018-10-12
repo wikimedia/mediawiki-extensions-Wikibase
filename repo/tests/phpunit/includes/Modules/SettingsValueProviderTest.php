@@ -8,7 +8,7 @@ use Wikibase\Repo\Modules\SettingsValueProvider;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Repo\Modules\SettingsValueProvider
+ * @covers \Wikibase\Repo\Modules\SettingsValueProvider
  *
  * @group Wikibase
  *

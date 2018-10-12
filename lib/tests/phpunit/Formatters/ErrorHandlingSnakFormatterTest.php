@@ -17,7 +17,7 @@ use Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter
+ * @covers \Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

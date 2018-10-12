@@ -45,7 +45,7 @@ use Wikibase\StringNormalizer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers Wikibase\Client\WikibaseClient
+ * @covers \Wikibase\Client\WikibaseClient
  *
  * @group Wikibase
  * @group WikibaseClient

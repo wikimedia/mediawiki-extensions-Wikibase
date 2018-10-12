@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * @covers Wikibase\Client\Usage\Sql\EntityUsageTable
+ * @covers \Wikibase\Client\Usage\Sql\EntityUsageTable
  *
  * @group Wikibase
  * @group WikibaseClient

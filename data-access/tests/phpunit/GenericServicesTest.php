@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\DataAccess\GenericServices
+ * @covers \Wikibase\DataAccess\GenericServices
  *
  * @group Wikibase
  *

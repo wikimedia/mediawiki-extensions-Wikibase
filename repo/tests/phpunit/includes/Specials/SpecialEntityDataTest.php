@@ -27,8 +27,8 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialEntityData
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialEntityData
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Database
  *

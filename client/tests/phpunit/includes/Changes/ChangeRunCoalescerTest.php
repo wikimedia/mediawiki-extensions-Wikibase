@@ -16,7 +16,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
- * @covers Wikibase\Client\Changes\ChangeRunCoalescer
+ * @covers \Wikibase\Client\Changes\ChangeRunCoalescer
  *
  * @group Wikibase
  * @group WikibaseClient

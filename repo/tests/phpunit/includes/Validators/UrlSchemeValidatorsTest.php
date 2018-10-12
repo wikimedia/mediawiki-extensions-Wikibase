@@ -8,7 +8,7 @@ use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Repo\Validators\UrlSchemeValidators
+ * @covers \Wikibase\Repo\Validators\UrlSchemeValidators
  *
  * @group Wikibase
  * @group WikibaseValidators

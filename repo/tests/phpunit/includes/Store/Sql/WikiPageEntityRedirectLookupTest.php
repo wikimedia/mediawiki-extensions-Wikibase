@@ -20,7 +20,7 @@ use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
+ * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
  *
  * @group Medium
  * @group Database

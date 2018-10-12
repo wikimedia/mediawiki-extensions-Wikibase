@@ -35,7 +35,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ResultBuilder;
 
 /**
- * @covers Wikibase\Repo\Api\ResultBuilder
+ * @covers \Wikibase\Repo\Api\ResultBuilder
  * @todo mock and inject serializers to avoid massive expected output?
  *
  * @group Wikibase

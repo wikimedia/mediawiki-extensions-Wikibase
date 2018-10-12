@@ -19,10 +19,10 @@ use Wikibase\Repo\Specials\SpecialSetSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialSetSiteLink
- * @covers Wikibase\Repo\Specials\SpecialModifyEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialSetSiteLink
+ * @covers \Wikibase\Repo\Specials\SpecialModifyEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

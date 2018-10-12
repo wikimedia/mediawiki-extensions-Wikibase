@@ -21,8 +21,8 @@ use Wikibase\SummaryFormatter;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob
- * @covers Wikibase\Repo\UpdateRepo\UpdateRepoJob
+ * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob
+ * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoJob
  *
  * @group Wikibase
  * @group WikibaseIntegration

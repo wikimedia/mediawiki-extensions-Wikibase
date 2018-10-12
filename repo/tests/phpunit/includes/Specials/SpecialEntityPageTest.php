@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialEntityPage;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialEntityPage
+ * @covers \Wikibase\Repo\Specials\SpecialEntityPage
  *
  * @group Wikibase
  * @group SpecialPage

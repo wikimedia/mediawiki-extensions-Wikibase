@@ -11,7 +11,7 @@ use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory
+ * @covers \Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory
  *
  * @group Wikibase
  * @group WikibaseLib

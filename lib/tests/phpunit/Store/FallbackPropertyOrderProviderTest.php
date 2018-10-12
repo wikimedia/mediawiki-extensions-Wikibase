@@ -7,7 +7,7 @@ use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
- * @covers Wikibase\Lib\Store\FallbackPropertyOrderProvider
+ * @covers \Wikibase\Lib\Store\FallbackPropertyOrderProvider
  *
  * @group WikibaseStore
  * @group Wikibase

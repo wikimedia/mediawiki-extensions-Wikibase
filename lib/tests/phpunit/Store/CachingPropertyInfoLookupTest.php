@@ -8,7 +8,7 @@ use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers Wikibase\Lib\Store\CachingPropertyInfoLookup
+ * @covers \Wikibase\Lib\Store\CachingPropertyInfoLookup
  *
  * @group Wikibase
  * @group WikibasePropertyInfo

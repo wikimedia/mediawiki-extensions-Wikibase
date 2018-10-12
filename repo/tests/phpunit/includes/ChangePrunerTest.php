@@ -12,7 +12,7 @@ use Wikibase\Repo\ChangePruner;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 
 /**
- * @covers Wikibase\Repo\ChangePruner
+ * @covers \Wikibase\Repo\ChangePruner
  *
  * @group Database
  * @group Wikibase

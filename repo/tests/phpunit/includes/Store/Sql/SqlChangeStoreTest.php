@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlChangeStore
+ * @covers \Wikibase\Repo\Store\Sql\SqlChangeStore
  *
  * @group Database
  *

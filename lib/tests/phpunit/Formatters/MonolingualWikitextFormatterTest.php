@@ -6,7 +6,7 @@ use DataValues\MonolingualTextValue;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\MonolingualWikitextFormatter
+ * @covers \Wikibase\Lib\Formatters\MonolingualWikitextFormatter
  *
  * @group ValueFormatters
  * @group Wikibase

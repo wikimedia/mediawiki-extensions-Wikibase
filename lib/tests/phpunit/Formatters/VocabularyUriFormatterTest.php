@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\VocabularyUriFormatter;
 
 /**
- * @covers Wikibase\Lib\VocabularyUriFormatter
+ * @covers \Wikibase\Lib\VocabularyUriFormatter
  *
  * @group Wikibase
  *

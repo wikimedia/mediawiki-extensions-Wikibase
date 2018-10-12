@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\SqlIdGenerator;
 
 /**
- * @covers Wikibase\SqlIdGenerator
+ * @covers \Wikibase\SqlIdGenerator
  *
  * @group Wikibase
  * @group WikibaseStore

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
 
 /**
- * @covers Wikibase\Lib\Store\DispatchingEntityPrefetcher
+ * @covers \Wikibase\Lib\Store\DispatchingEntityPrefetcher
  *
  * @group Wikibase
  * @group WikibaseStore

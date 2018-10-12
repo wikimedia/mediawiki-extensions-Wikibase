@@ -15,7 +15,7 @@ use Wikibase\Repo\Validators\LabelUniquenessValidator;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
- * @covers Wikibase\Repo\Validators\LabelUniquenessValidator
+ * @covers \Wikibase\Repo\Validators\LabelUniquenessValidator
  *
  * @group Database
  * @group Wikibase

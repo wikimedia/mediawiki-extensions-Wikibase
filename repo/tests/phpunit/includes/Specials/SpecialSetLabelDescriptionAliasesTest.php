@@ -29,10 +29,10 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
- * @covers Wikibase\Repo\Specials\SpecialModifyEntity
- * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
+ * @covers \Wikibase\Repo\Specials\SpecialModifyEntity
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

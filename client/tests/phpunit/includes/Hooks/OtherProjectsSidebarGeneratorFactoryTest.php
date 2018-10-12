@@ -14,7 +14,7 @@ use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory
+ * @covers \Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory
  *
  * @group WikibaseClient
  * @group Wikibase

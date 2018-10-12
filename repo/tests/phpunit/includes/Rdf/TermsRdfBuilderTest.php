@@ -7,7 +7,7 @@ use Wikibase\Rdf\TermsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\TermsRdfBuilder
+ * @covers \Wikibase\Rdf\TermsRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

@@ -13,7 +13,7 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\StringNormalizer;
 
 /**
- * @covers Wikibase\Repo\ChangeOp\Deserialization\DescriptionsChangeOpDeserializer
+ * @covers \Wikibase\Repo\ChangeOp\Deserialization\DescriptionsChangeOpDeserializer
  *
  * @group Wikibase
  *

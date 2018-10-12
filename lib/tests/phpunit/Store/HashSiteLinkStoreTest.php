@@ -10,7 +10,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 
 /**
- * @covers Wikibase\Lib\Store\HashSiteLinkStore
+ * @covers \Wikibase\Lib\Store\HashSiteLinkStore
  *
  * @group Wikibase
  * @group WikibaseStore

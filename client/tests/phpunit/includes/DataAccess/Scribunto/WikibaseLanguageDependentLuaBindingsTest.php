@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
 
 /**
- * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings
+ * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings
  *
  * @group Wikibase
  * @group WikibaseClient

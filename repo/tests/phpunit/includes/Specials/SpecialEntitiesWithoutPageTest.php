@@ -11,9 +11,9 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
- * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
- * @covers Wikibase\Repo\Specials\SpecialWikibasePage
+ * @covers \Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers \Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

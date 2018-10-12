@@ -46,7 +46,7 @@ use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database

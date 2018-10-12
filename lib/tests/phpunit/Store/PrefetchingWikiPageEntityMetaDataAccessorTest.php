@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 
 /**
- * @covers Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor
+ * @covers \Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor
  *
  * @group WikibaseStore
  * @group Wikibase

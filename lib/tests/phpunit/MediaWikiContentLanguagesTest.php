@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests;
 use Wikibase\Lib\MediaWikiContentLanguages;
 
 /**
- * @covers Wikibase\Lib\MediaWikiContentLanguages
+ * @covers \Wikibase\Lib\MediaWikiContentLanguages
  *
  * @group Wikibase
  *

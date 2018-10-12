@@ -9,7 +9,7 @@ use ResourceLoaderContext;
 use Wikibase\Repo\Modules\DataTypesModule;
 
 /**
- * @covers WikibaseRepo\Modules\DataTypesModule
+ * @covers \WikibaseRepo\Modules\DataTypesModule
  *
  * @group Wikibase
  *

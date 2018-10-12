@@ -16,7 +16,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater
+ * @covers \Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater
  *
  * @group WikibaseClient
  * @group Wikibase

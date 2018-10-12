@@ -26,7 +26,7 @@ use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikibase\Store\SubscriptionLookup;
 
 /**
- * @covers Wikibase\Repo\ChangeDispatcher
+ * @covers \Wikibase\Repo\ChangeDispatcher
  *
  * @group Wikibase
  * @group WikibaseChange

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 /**
  * Verifies that arbitrary data access doesn't work, if it's disabled.
  *
- * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
+ * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration

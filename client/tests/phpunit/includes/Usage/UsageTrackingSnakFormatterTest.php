@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\Client\Usage\UsageTrackingSnakFormatter
+ * @covers \Wikibase\Client\Usage\UsageTrackingSnakFormatter
  *
  * @group Wikibase
  * @group WikibaseClient

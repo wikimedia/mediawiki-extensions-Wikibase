@@ -6,7 +6,7 @@ use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\SiteLinksRdfBuilder
+ * @covers \Wikibase\Rdf\SiteLinksRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

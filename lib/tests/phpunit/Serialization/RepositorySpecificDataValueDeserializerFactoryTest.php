@@ -12,7 +12,7 @@ use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 
 /**
- * @covers Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory
+ * @covers \Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory
  *
  * @group Wikibase
  *

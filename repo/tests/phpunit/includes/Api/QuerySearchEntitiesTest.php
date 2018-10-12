@@ -20,7 +20,7 @@ use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\QuerySearchEntities;
 
 /**
- * @covers Wikibase\Repo\Api\QuerySearchEntities
+ * @covers \Wikibase\Repo\Api\QuerySearchEntities
  *
  * @group API
  * @group Wikibase

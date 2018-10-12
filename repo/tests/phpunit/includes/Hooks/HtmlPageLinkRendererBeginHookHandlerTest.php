@@ -27,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @covers Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler
+ * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler
  *
  * @group Database
  * @group Wikibase
