@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "140e9d0e_576aeb13",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-12T16:31:54Z",
+      "side": 1,
+      "message": "I think this is needed in some form so I\u0027ve put the change back in. For example, the toolbox uses getEntityUrl() and the Wikidata item link on https://de.wikipedia.org/wiki/Banana points to https://www.wikidata.org/wiki/Special:EntityPage/Q7624911 which is unwanted. We want the canonical https://www.wikidata.org/wiki/Q7624911. Please correct me if I\u0027m wrong.",
+      "parentUuid": "10408027_fa37e342",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 133,
+        "endChar": 37
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca617096_1b967c7d",
         "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
         "patchSetId": 11
