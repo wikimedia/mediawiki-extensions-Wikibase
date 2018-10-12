@@ -2,7 +2,6 @@
 DROP INDEX /*i*/wb_terms_entity_type ON /*_*/wb_terms;
 DROP INDEX /*i*/wb_terms_language ON /*_*/wb_terms;
 DROP INDEX /*i*/wb_terms_type ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms;
 
 -- Indexes and comments below adopted from the suggestions Sean Pringle made
 -- at https://phabricator.wikimedia.org/T47529#518941 based on a
@@ -20,8 +19,9 @@ DROP INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms;
 -- that MariaDB still uses the entire key length even with LIKE '...%' on term_text.
 -- CREATE INDEX /*i*/term_text ON /*_*/wb_terms (term_text, term_language);
 
+-- term_search_key is removed down the update chain, so don't bother adding it in the first place.
 -- Same idea as above for terms_search_key (for normalized/insensitive matches).
-CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_language);
+-- CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_language);
 
 -- term_search is removed down the update chain, so don't bother adding it in the first place.
 -- This index has good selectivity while still allowing ICP for short string values.
