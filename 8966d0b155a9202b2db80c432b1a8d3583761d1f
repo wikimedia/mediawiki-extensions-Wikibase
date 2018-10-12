@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e294e1f_8e6e7329",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-10-12T18:01:36Z",
+      "side": 1,
+      "message": "We can now use MediaWikiTestCase::setIniSetting() for this which will auto-restore.",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 38
+      },
+      "revId": "8966d0b155a9202b2db80c432b1a8d3583761d1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
