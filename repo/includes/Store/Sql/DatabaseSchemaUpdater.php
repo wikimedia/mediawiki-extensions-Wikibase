@@ -333,10 +333,10 @@ class DatabaseSchemaUpdater {
 		}
 
 		// updated indexes
-		$updater->addExtensionIndex(
+		$updater->dropExtensionIndex(
 			'wb_terms',
-			'term_search_key',
-			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
+			'wb_terms_entity_type',
+			$this->getUpdateScriptPath( 'DropUnusedTermIndexes', $db->getType() )
 		);
 
 		// T159851
@@ -371,6 +371,13 @@ class DatabaseSchemaUpdater {
 			'wb_terms',
 			'wb_terms_text',
 			$this->getUpdateScriptPath( 'AddWbTermsTextIndex', $db->getType() )
+		);
+
+		// T204838
+		$updater->addExtensionIndex(
+			'wb_terms',
+			'wb_terms_search_key',
+			$this->getUpdateScriptPath( 'AddWbTermsSearchKeyIndex', $db->getType() )
 		);
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
