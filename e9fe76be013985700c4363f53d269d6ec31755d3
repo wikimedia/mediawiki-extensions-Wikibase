@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "75a0f4c4_09b17cda",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2018-10-12T15:00:39Z",
+      "side": 1,
+      "message": "LGTM.",
+      "parentUuid": "09d8d857_4402a861",
+      "range": {
+        "startLine": 389,
+        "startChar": 35,
+        "endLine": 389,
+        "endChar": 69
+      },
+      "revId": "e9fe76be013985700c4363f53d269d6ec31755d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d75c8_74694d86",
         "filename": "client/includes/RepoLinker.php",
         "patchSetId": 11
