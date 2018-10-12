@@ -52,11 +52,8 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
 -- Some wb_terms queries use term_full_entity_id_s=X which is good selectivity.
 CREATE INDEX /*i*/term_full_entity ON /*_*/wb_terms (term_full_entity_id);
 
--- When any wb_terms query includes a search on term_text greater than
--- four or five leading characters a simple index on term_text and
--- language is often better than the proposed composite indexes. Note
--- that MariaDB still uses the entire key length even with LIKE '...%' on term_text.
-CREATE INDEX /*i*/term_text ON /*_*/wb_terms (term_text, term_language);
+-- T204837
+CREATE INDEX /*i*/wb_terms_text ON /*_*/wb_terms (term_text);
 
 -- Same idea as above for terms_search_key (for normalized/insensitive matches).
 CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_language);
