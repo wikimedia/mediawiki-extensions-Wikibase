@@ -22,6 +22,30 @@
       "revId": "8966d0b155a9202b2db80c432b1a8d3583761d1f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f66bce34_7cff12d8",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticFulltextTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-10-12T18:29:03Z",
+      "side": 1,
+      "message": "I don\u0027t think 2 is a good value here. We will have calculations that require more precision.",
+      "parentUuid": "6e294e1f_8e6e7329",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 38
+      },
+      "revId": "8966d0b155a9202b2db80c432b1a8d3583761d1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
