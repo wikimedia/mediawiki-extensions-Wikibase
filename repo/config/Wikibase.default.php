@@ -146,7 +146,7 @@ return [
 			'crh'         => 'crh-Latn',
 			'cbk-zam'     => 'cbk-x-zam',
 			'map-bms'     => 'jv-x-bms',
-			'nrm'         => 'fr-x-nrm',
+			'nrm'         => 'nrf',
 			'roa-tara'    => 'it-x-tara',
 			'de-formal'   => 'de-x-formal',
 			'es-formal'   => 'es-x-formal',
