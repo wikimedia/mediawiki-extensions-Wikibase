@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Asenoner"
+		]
+	},
+	"tooltip-t-wikibase": "Culegamënt cul element culegà de l archive di dac",
+	"wikibase-comment-update": "Elemënt {{WBREPONAME}} mudà",
+	"wikibase-dataitem": "{{WBREPONAME}} element",
+	"wikibase-editlinks": "Muda i links",
+	"wikibase-editlinkstitle": "Muda i links te autra rujenedes",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Mudazion fata sun {{WBREPONAME}}"
+}

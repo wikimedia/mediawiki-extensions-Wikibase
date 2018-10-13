@@ -161,5 +161,6 @@
 	"apihelp-wbsearchentities-example-4": "Шукаць «abc» ангельскай мовай зь лімітам 2 і зьмяшчэньнем 2",
 	"apihelp-wbsearchentities-example-5": "Шукаць «alphabet» ангельскай мовай без уліку url-парамэтру",
 	"apihelp-wbsearchentities-example-6": "Шукаць «Q1234» ангельскай мовай на супадзеньне з ідэнтыфікатарам элемэнту.",
-	"apihelp-query+wbcontentlanguages-summary": "Вяртае зьвесткі пра мовы зьместу, якія Вікібаза прымае ў розных кантэкстах."
+	"apihelp-query+wbcontentlanguages-summary": "Вяртае зьвесткі пра мовы зьместу, якія Вікібаза прымае ў розных кантэкстах.",
+	"apihelp-query+wbcontentlanguages-param-context": "Кантэкст, у якім мовы зьместу павінныя быць слушнымі."
 }
