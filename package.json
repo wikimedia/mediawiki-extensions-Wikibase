@@ -1,34 +1,34 @@
 {
-  "name": "Wikibase",
-  "version": "0.0.0",
-  "scripts": {
-    "selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w npm run selenium-test",
-    "selenium-test": "wdio repo/tests/selenium/wdio.conf.js",
-    "test": "grunt test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase"
-  },
-  "author": "The Wikidata team",
-  "license": "GPL-2.0-or-later",
-  "devDependencies": {
-    "eslint-config-wikimedia": "0.5.0",
-    "grunt": "1.0.1",
-    "grunt-banana-checker": "0.6.0",
-    "grunt-eslint": "20.1.0",
-    "grunt-jsonlint": "1.1.0",
-    "grunt-stylelint": "0.9.0",
-    "stylelint": "8.2.0",
-    "stylelint-config-wikimedia": "0.4.2",
-    "wdio-mediawiki": "0.2.0",
-    "wdio-mocha-framework": "0.6.1",
-    "wdio-spec-reporter": "0.1.4",
-    "webdriverio": "4.13.1"
-  },
-  "eslintIgnore": [
-    "extensions/**",
-    "vendor/**",
-    "view/lib/**"
-  ]
+	"name": "Wikibase",
+	"version": "0.0.0",
+	"scripts": {
+		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w npm run selenium-test",
+		"selenium-test": "wdio repo/tests/selenium/wdio.conf.js",
+		"test": "grunt test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase"
+	},
+	"author": "The Wikidata team",
+	"license": "GPL-2.0-or-later",
+	"devDependencies": {
+		"eslint-config-wikimedia": "0.5.0",
+		"grunt": "1.0.3",
+		"grunt-banana-checker": "0.6.0",
+		"grunt-eslint": "20.1.0",
+		"grunt-jsonlint": "1.1.0",
+		"grunt-stylelint": "0.9.0",
+		"stylelint": "8.2.0",
+		"stylelint-config-wikimedia": "0.4.2",
+		"wdio-mediawiki": "0.2.0",
+		"wdio-mocha-framework": "0.6.1",
+		"wdio-spec-reporter": "0.1.4",
+		"webdriverio": "4.13.1"
+	},
+	"eslintIgnore": [
+		"extensions/**",
+		"vendor/**",
+		"view/lib/**"
+	]
 }
