@@ -48,6 +48,8 @@
 	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі {{WBREPONAME}} у сьпісе апошніх зьменаў",
 	"wikibase-rc-wikibase-edit-letter": "З",
 	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Праўкі {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Праўкі, якія паходзяць з {{grammar:родны|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены {{WBREPONAME}} у Вашым сьпісе назіраньня",
 	"wikibase-error-serialize-error": "Не ўдалося сэрыялізаваць зьвесткі",

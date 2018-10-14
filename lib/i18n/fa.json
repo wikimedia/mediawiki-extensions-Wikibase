@@ -183,6 +183,7 @@
 	"wikibase-item-summary-wblinktitles-connect": "افزودن یک پیوند زبانی برای ارتباط صفحه های",
 	"wikibase-property-summary-wbcreate-new": "ایجاد یک ویژگی تازه",
 	"wikibase-property-summary-wbeditentity-create": "ایجاد یک  خصوصیت تازه",
+	"wikibase-property-summary-wbeditentity-create-property": "ایجاد یک  خصوصیت تازه",
 	"wikibase-property-summary-wbeditentity-update": "تغییر دادن یک خصوصیت",
 	"wikibase-property-summary-wbeditentity-override": "پاک کردن یک خصوصیت",
 	"wikibase-property-summary-special-create-property": "ایجاد یک ویژگی [$2] با {{PLURAL:$1|مقدار|مقدارها}}"

@@ -162,5 +162,7 @@
 	"apihelp-wbsearchentities-example-5": "Шукаць «alphabet» ангельскай мовай без уліку url-парамэтру",
 	"apihelp-wbsearchentities-example-6": "Шукаць «Q1234» ангельскай мовай на супадзеньне з ідэнтыфікатарам элемэнту.",
 	"apihelp-query+wbcontentlanguages-summary": "Вяртае зьвесткі пра мовы зьместу, якія Вікібаза прымае ў розных кантэкстах.",
-	"apihelp-query+wbcontentlanguages-param-context": "Кантэкст, у якім мовы зьместу павінныя быць слушнымі."
+	"apihelp-query+wbcontentlanguages-param-context": "Кантэкст, у якім мовы зьместу павінныя быць слушнымі.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Тэрміны (метка, апісаньне, псэўданімы) элемэнту.",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Аднамоўнае тэкставае значэньне ў сьцьверджаньні."
 }

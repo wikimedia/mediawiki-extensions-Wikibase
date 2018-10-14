@@ -8,5 +8,10 @@
 	},
 	"wikibase-error-unexpected": "Xəta: $1",
 	"wikibase-sitelinks-wikipedia": "Vikipediya",
-	"wikibase-validator-no-such-property": "$1 xüsusiyyəti tapılmadı"
+	"wikibase-validator-no-such-property": "$1 xüsusiyyəti tapılmadı",
+	"datatypes-type-wikibase-item": "Maddə",
+	"wikibase-entity-summary-wbsetitem": "Yeni müddəa yaradıldı",
+	"wikibase-item-summary-wbcreate-new": "Yeni müddəa yaradıldı",
+	"wikibase-item-summary-wbeditentity": "Yeni müddəa yaradıldı",
+	"wikibase-item-summary-wbeditentity-create": "Yeni müddəa yaradıldı"
 }
