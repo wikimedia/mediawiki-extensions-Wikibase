@@ -22,6 +22,30 @@
       "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74d2a34d_87294dbd",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T17:35:22Z",
+      "side": 1,
+      "message": "Thanks but getPageImage() oddly returns a File or a bool, not a null, so I don\u0027t think null coalescing can be used.",
+      "parentUuid": "857856b6_090686d2",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 32
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
