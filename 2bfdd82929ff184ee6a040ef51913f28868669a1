@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7280768d_a542dcb4",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "I\u0027ve changed this to $pageSchemaNamespaces. My reasoning is that this a fairly high level schema to the describe the page as opposed to item schemas deeper in the DOM. Let me know if you think of something more descriptive.",
+      "parentUuid": "90ab7d86_a14e47f1",
+      "range": {
+        "startLine": 385,
+        "startChar": 59,
+        "endLine": 385,
+        "endChar": 75
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "132029da_2d6220cb",
         "filename": "client/ClientHooks.php",
         "patchSetId": 19
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-15T17:56:58Z",
       "side": 1,
       "message": "can we move that to the SkinAfterBottomScriptsHandler, it looks like a better place for it. I think it\u0027s wise to minimize the number of functions in ClientHooks file. \n\nSame applies to getEntity().",
+      "range": {
+        "startLine": 427,
+        "startChar": 25,
+        "endLine": 427,
+        "endChar": 39
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43bead9b_ba2c2302",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "132029da_2d6220cb",
       "range": {
         "startLine": 427,
         "startChar": 25,
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "17babf5a_697bb8ab",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "👍",
+      "parentUuid": "85d158b1_a47dbbbd",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 32
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1111642d_38e07e49",
         "filename": "client/ClientHooks.php",
         "patchSetId": 19
@@ -130,6 +202,30 @@
       "writtenOn": "2018-10-15T17:56:58Z",
       "side": 1,
       "message": "Catch them all, if possible - can we try to catch only the exception thrown by getEntityLookup()?",
+      "range": {
+        "startLine": 444,
+        "startChar": 12,
+        "endLine": 444,
+        "endChar": 21
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fe9aee3_5456a301",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "Correct me if I\u0027m wrong but getStore() throws a generic Exception so I can\u0027t do much about this (except add a redundant specific catch in addition to the generic Exception catch). PS20 added a type comment.",
+      "parentUuid": "1111642d_38e07e49",
       "range": {
         "startLine": 444,
         "startChar": 12,
@@ -165,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "01ff2962_4f0e56af",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "EntityDocument actually has a getId() method but it can return null so I wanted to request both. I\u0027ve restructured this to move more code into the handler. Let me know what you think in the new PS.",
+      "parentUuid": "058afb8c_468f240d",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 20
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed914176_b14deb7d",
         "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
         "patchSetId": 19
@@ -188,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "80ae900e_0c9a2929",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed914176_b14deb7d",
+      "range": {
+        "startLine": 51,
+        "startChar": 18,
+        "endLine": 51,
+        "endChar": 65
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b81d7ad4_72226914",
         "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
         "patchSetId": 19
@@ -199,6 +343,30 @@
       "writtenOn": "2018-10-15T17:56:58Z",
       "side": 1,
       "message": "Most probably we should have some util function that provides that image.",
+      "range": {
+        "startLine": 57,
+        "startChar": 6,
+        "endLine": 57,
+        "endChar": 9
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b2b6d75_957f2fe1",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-15T19:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b81d7ad4_72226914",
       "range": {
         "startLine": 57,
         "startChar": 6,
