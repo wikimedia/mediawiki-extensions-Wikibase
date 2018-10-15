@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "857856b6_090686d2",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1196
+      },
+      "writtenOn": "2018-10-15T17:11:27Z",
+      "side": 1,
+      "message": "IIRC you can use the null coalesce operator here:\n\n    return $image ?? null;",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 32
+      },
+      "revId": "2bfdd82929ff184ee6a040ef51913f28868669a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
