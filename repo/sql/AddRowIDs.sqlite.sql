@@ -8,7 +8,7 @@ CREATE TABLE /*_*/wb_items_per_site_tmp (
 ) /*$wgDBTableOptions*/;
 
 INSERT INTO /*_*/wb_items_per_site_tmp( ips_item_id, ips_site_id, ips_site_page )
-  SELECT ips_item_id, ips_site_id, ips_site_page FROM wb_items_per_site;
+  SELECT ips_item_id, ips_site_id, ips_site_page FROM /*_*/wb_items_per_site;
 
 DROP TABLE /*_*/wb_items_per_site;
 
@@ -29,7 +29,7 @@ CREATE TABLE /*_*/wb_terms_tmp (
 ) /*$wgDBTableOptions*/;
 
 INSERT INTO /*_*/wb_terms_tmp( term_entity_id, term_entity_type, term_language, term_type, term_text, term_search_key )
-  SELECT term_entity_id, term_entity_type, term_language, term_type, term_text, term_search_key FROM wb_terms;
+  SELECT term_entity_id, term_entity_type, term_language, term_type, term_text, term_search_key FROM /*_*/wb_terms;
 
 DROP TABLE /*_*/wb_terms;
 
