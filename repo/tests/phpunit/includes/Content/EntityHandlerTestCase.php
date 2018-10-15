@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use MediaWiki\Storage\PageIdentityValue;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;

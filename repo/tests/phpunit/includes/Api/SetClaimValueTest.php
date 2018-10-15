@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use DataValues\StringValue;
 use FormatJson;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use ApiUsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
