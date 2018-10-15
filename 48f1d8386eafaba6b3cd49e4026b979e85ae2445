@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "804378e2_417ae6ad",
+        "filename": "repo/sql/AddRowIDs.sqlite.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2018-10-15T12:04:35Z",
+      "side": 1,
+      "message": "Another one here",
+      "range": {
+        "startLine": 32,
+        "startChar": 101,
+        "endLine": 32,
+        "endChar": 109
+      },
+      "revId": "48f1d8386eafaba6b3cd49e4026b979e85ae2445",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
