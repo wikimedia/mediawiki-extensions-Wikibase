@@ -4,6 +4,9 @@ namespace Wikibase\Repo\Tests\Search\Elastic\Query;
 
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
+use Elastica\Query\Match;
+use Elastica\Query\Prefix;
+use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 
 /**
@@ -144,6 +147,20 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'search string' => 'haswbstatement:P999|P777=someString',
 				'foreignRepoNames' => [],
 			],
+			'prefix' => [
+				'expected' => [ 'bool' => [
+					'should' => [
+						[ 'prefix' => [
+							'statement_keywords' => [
+								'value' => 'P999=Q888[P111=',
+								'rewrite' => 'top_terms_1024',
+							],
+						] ]
+					]
+				] ],
+				'search string' => 'haswbstatement:P999=Q888[P111=*',
+				'foreignRepoNames' => [],
+			],
 		];
 	}
 
@@ -184,7 +201,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 		$feature = new HasWbStatementFeature( [ 'P999' ] );
 		$expectedWarnings = [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
 		$kwAssertions = $this->getKWAssertions();
-		$kwAssertions->assertParsedValue( $feature, 'haswbstatement:INVALID', [ 'statements' => [] ], $expectedWarnings );
+		$kwAssertions->assertParsedValue( $feature, 'haswbstatement:INVALID', [], $expectedWarnings );
 		$kwAssertions->assertExpandedData( $feature, 'haswbstatement:INVALID', [], [] );
 		$kwAssertions->assertFilter( $feature, 'haswbstatement:INVALID', null, $expectedWarnings );
 		$kwAssertions->assertNoResultsPossible( $feature, 'haswbstatement:INVALID' );
@@ -197,7 +214,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
 		$expectedWarnings = $warningExpected ? [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions = $this->getKWAssertions();
-		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", [ 'statements' => $expected ], $expectedWarnings );
+		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", $expected, $expectedWarnings );
 	}
 
 	public function parseProvider() {
@@ -223,27 +240,53 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'single value Q-id' => [
 				'foreignRepoNames' => [],
 				'value' => 'P999=Q888',
-				'expected' => [ 'P999=Q888' ],
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'P999=Q888'
+					]
+				],
 				'warningExpected' => false,
 			],
 			'single value other id' => [
 				'foreignRepoNames' => [],
 				'value' => 'P999=AB123',
-				'expected' => [ 'P999=AB123' ],
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'P999=AB123'
+					]
+				],
 				'warningExpected' => false,
 			],
 			'single value federated' => [
 				'foreignRepoNames' => [ 'Wikidata' ],
 				'value' => 'Wikidata:P999=Wikidata:Q888',
-				'expected' => [ 'Wikidata:P999=Wikidata:Q888' ],
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'Wikidata:P999=Wikidata:Q888'
+					]
+				],
 				'warningExpected' => false,
 			],
 			'multiple values' => [
 				'foreignRepoNames' => [ 'Wikidata', 'Wikisource' ],
 				'value' => 'Wikidata:P999=Wikidata:Q888|Wikisource:P777=12345',
 				'expected' => [
-					'Wikidata:P999=Wikidata:Q888',
-					'Wikisource:P777=12345',
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'Wikidata:P999=Wikidata:Q888'
+					],
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'Wikisource:P777=12345'
+					],
 				],
 				'warningExpected' => false,
 			],
@@ -251,38 +294,88 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'foreignRepoNames' => [ 'Wikidata' ],
 				'value' => 'Wikidata:P999=Wikidata:Q888|Wikisource:P777=12345',
 				'expected' => [
-					'Wikidata:P999=Wikidata:Q888',
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'Wikidata:P999=Wikidata:Q888'
+					],
 				],
 				'warningExpected' => false,
 			],
-			'single property without value' => [
+			'property-only' => [
 				'foreignRepoNames' => [],
 				'value' => 'P999',
-				'expected' => [ 'P999' ],
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME . '.property',
+						'string' => 'P999'
+					],
+				],
 				'warningExpected' => false,
 			],
-			'federated property without value' => [
+			'federated property-only' => [
 				'foreignRepoNames' => [ 'Wikidata' ],
 				'value' => 'Wikidata:P999',
-				'expected' => [ 'Wikidata:P999' ],
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME . '.property',
+						'string' => 'Wikidata:P999'
+					],
+				],
 				'warningExpected' => false,
 			],
-			'multiple properties with and without value' => [
-				'foreignRepoNames' => [],
-				'value' => 'P999|P123=A456',
-				'expected' => [ 'P999', 'P123=A456' ],
-				'warningExpected' => false,
-			],
-			'invalid without value' => [
+			'invalid property-only' => [
 				'foreignRepoNames' => [],
 				'value' => 'P123,abc',
 				'expected' => [],
 				'warningExpected' => true,
 			],
-			'invalid and valid property' => [
+			'invalid and valid property-only' => [
 				'foreignRepoNames' => [],
 				'value' => 'P123,abc|P345',
-				'expected' => [ 'P345' ],
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME . '.property',
+						'string' => 'P345'
+					],
+				],
+				'warningExpected' => false,
+			],
+			'prefix search' => [
+				'foreignRepoNames' => [],
+				'value' => 'P999=P888[P111*',
+				'expected' => [
+					[
+						'class' => Prefix::class,
+						'field' => StatementsField::NAME,
+						'string' => 'P999=P888[P111'
+					],
+				],
+				'warningExpected' => false,
+			],
+			'normal, property-only and prefix search simultaneously' => [
+				'foreignRepoNames' => [],
+				'value' => 'P111=Q222|P333|P444=Q555[P666*',
+				'expected' => [
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME,
+						'string' => 'P111=Q222'
+					],
+					[
+						'class' => Match::class,
+						'field' => StatementsField::NAME . '.property',
+						'string' => 'P333'
+					],
+					[
+						'class' => Prefix::class,
+						'field' => StatementsField::NAME,
+						'string' => 'P444=Q555[P666'
+					],
+				],
 				'warningExpected' => false,
 			],
 		];
