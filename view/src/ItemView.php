@@ -6,6 +6,9 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -39,6 +42,11 @@ class ItemView extends EntityView {
 	private $textProvider;
 
 	/**
+	 * @var EntityTermsView
+	 */
+	private $entityTermsView;
+
+	/**
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
@@ -60,12 +68,26 @@ class ItemView extends EntityView {
 		array $siteLinkGroups,
 		LocalizedTextProvider $textProvider
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
+		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->textProvider = $textProvider;
+		$this->entityTermsView = $entityTermsView;
+	}
+
+	/**
+	 * @see EntityView::getTitleHtml()
+	 */
+	public function getTitleHtml( EntityDocument $entity ) {
+		if ( $entity instanceof LabelsProvider ) {
+			return $this->entityTermsView->getTitleHtml(
+				$entity->getId()
+			);
+		}
+
+		return '';
 	}
 
 	/**
@@ -131,6 +153,29 @@ class ItemView extends EntityView {
 			'wikibase-pageimage',
 			htmlspecialchars( $helpText )
 		);
+	}
+
+	/**
+	 * Builds and returns the HTML for the entity's fingerprint.
+	 *
+	 * @param EntityDocument $entity
+	 *
+	 * @return string HTML
+	 */
+	protected function getHtmlForTerms( EntityDocument $entity ) {
+		$id = $entity->getId();
+
+		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {
+			return $this->entityTermsView->getHtml(
+				$this->languageCode,
+				$entity->getLabels(),
+				$entity->getDescriptions(),
+				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null,
+				$id
+			);
+		}
+
+		return '';
 	}
 
 }
