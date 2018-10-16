@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c981d213_5fb55574",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-10-16T15:07:56Z",
+      "side": 1,
+      "message": "I don\u0027t think that we should activate the prefix query for all the user queries.\nI think it\u0027d be preferable to include a hint at the syntax level to trigger it.\n- if the user query ends with \u0027*\u0027 triggers prefix\n- if not use the same Match query\n\ne.g.\n - haswbstatement:P180\u003dQ146[P462\u003d would find nothing\n - haswbstatement:P180\u003dQ146[P462\u003d* would find what you expect",
+      "revId": "720cf784b7772be313aa473bf338f4da1efd96f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
