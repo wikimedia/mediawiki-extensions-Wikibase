@@ -111,6 +111,30 @@
       "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1672db6_1aac217e",
+        "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-16T20:03:00Z",
+      "side": 1,
+      "message": "Thank you both, revised.",
+      "parentUuid": "34713d71_d1819d6d",
+      "range": {
+        "startLine": 46,
+        "startChar": 41,
+        "endLine": 46,
+        "endChar": 45
+      },
+      "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }

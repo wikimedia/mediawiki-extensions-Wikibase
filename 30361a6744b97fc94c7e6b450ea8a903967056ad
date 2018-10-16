@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50c1a0f1_3b5d84d9",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-16T20:03:00Z",
+      "side": 1,
+      "message": "I\u0027m not confident that the changes I\u0027ve made to RepoLinker are acceptable or if the mechanism I\u0027ve used to retrieve the base concept URI is adequate. @addshore, @pmiazga, do you have any ideas on how to improve this code?",
+      "revId": "30361a6744b97fc94c7e6b450ea8a903967056ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
