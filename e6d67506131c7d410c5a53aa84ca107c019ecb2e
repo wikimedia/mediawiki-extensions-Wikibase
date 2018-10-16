@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c4b9e8c_f551c0c9",
+        "filename": "repo/sql/Wikibase.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-16T09:32:22Z",
+      "side": 1,
+      "message": "Is there a reason to choose IF NOT EXISTS here?\nWe don\u0027t do it for another of the other indexes.",
+      "range": {
+        "startLine": 68,
+        "startChar": 13,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "e6d67506131c7d410c5a53aa84ca107c019ecb2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
