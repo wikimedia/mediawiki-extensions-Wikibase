@@ -11,6 +11,7 @@ use CirrusSearch\WarningCollector;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
+use Elastica\Query\Prefix;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 
@@ -103,7 +104,15 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 				$query->addShould( new Match( StatementsField::NAME . '.property',
 					[ 'query' => $statement ] ) );
 			} else {
-				$query->addShould( new Match( StatementsField::NAME, [ 'query' => $statement ] ) );
+				$query->addShould( new Prefix(
+					[
+						StatementsField::NAME =>
+							[
+								'value' => $statement,
+								'rewrite'=> 'top_terms_1024'
+							]
+					]
+				) );
 			}
 		}
 		return $query;

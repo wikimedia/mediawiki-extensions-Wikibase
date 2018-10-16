@@ -27,9 +27,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'single statement entity' => [
 				'expected' => [ 'bool' => [
 					'should' => [
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'P999=Q888',
+								'value' => 'P999=Q888',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ]
 					]
@@ -40,9 +41,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'single statement string' => [
 				'expected' => [ 'bool' => [
 					'should' => [
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'P999=12345',
+								'value' => 'P999=12345',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ]
 					]
@@ -53,9 +55,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'single statement federated' => [
 				'expected' => [ 'bool' => [
 					'should' => [
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'Federated:P999=Federated:Q888',
+								'value' => 'Federated:P999=Federated:Q888',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ]
 					]
@@ -66,14 +69,16 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'multiple statements' => [
 				'expected' => [ 'bool' => [
 					'should' => [
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'Federated:P999=Q888',
+								'value' => 'Federated:P999=Q888',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ],
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'P777=someString',
+								'value' => 'P777=someString',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ]
 					]
@@ -84,9 +89,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'some data invalid' => [
 				'expected' => [ 'bool' => [
 					'should' => [
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'P999=Q888',
+								'value' => 'P999=Q888',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ],
 					]
@@ -97,9 +103,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 			'invalid foreign repo name rejected' => [
 				'expected' => [ 'bool' => [
 					'should' => [
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'Federated:P999=Q888',
+								'value' => 'Federated:P999=Q888',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ],
 					]
@@ -134,9 +141,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 								'query' => 'P999',
 							],
 						] ],
-						[ 'match' => [
+						[ 'prefix' => [
 							'statement_keywords' => [
-								'query' => 'P777=someString',
+								'value' => 'P777=someString',
+								'rewrite' => 'top_terms_1024',
 							],
 						] ]
 					]
