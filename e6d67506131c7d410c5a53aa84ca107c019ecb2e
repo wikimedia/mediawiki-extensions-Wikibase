@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70c47142_b88aadb2",
+        "filename": "repo/sql/UpdateTermIndexes.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-16T10:36:42Z",
+      "side": 0,
+      "message": "I think it would be better to comment these out and add a comment saying that they were removed from here as they are removed further down the chain.\n\notherwise i can see future us getting confused",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 64
+      },
+      "revId": "e6d67506131c7d410c5a53aa84ca107c019ecb2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
