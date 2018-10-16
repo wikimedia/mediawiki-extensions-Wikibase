@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ff98222f_460eec20",
+        "filename": "repo/sql/AddWbTermsTmp1Index.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-10-16T11:07:25Z",
+      "side": 1,
+      "message": "Removing it here too seems to be fine because the updater handles it if it already exists",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "e6d67506131c7d410c5a53aa84ca107c019ecb2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c4b9e8c_f551c0c9",
         "filename": "repo/sql/Wikibase.sql",
         "patchSetId": 1
