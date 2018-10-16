@@ -19,7 +19,7 @@ use Wikibase\TermIndexEntry;
  */
 class SpecialEntitiesWithoutPageFactory {
 
-	private static function newFromGlobalState() {
+	private static function newFromGlobalState(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
@@ -31,37 +31,18 @@ class SpecialEntitiesWithoutPageFactory {
 		);
 	}
 
-	public static function newSpecialEntitiesWithoutLabel() {
+	public static function newSpecialEntitiesWithoutLabel(): SpecialEntitiesWithoutPage {
 		return self::newFromGlobalState()->createSpecialEntitiesWithoutLabel();
 	}
 
-	public static function newSpecialEntitiesWithoutDescription() {
+	public static function newSpecialEntitiesWithoutDescription(): SpecialEntitiesWithoutPage {
 		return self::newFromGlobalState()->createSpecialEntitiesWithoutDescription();
 	}
 
-	/**
-	 * @var EntitiesWithoutTermFinder
-	 */
 	private $entitiesWithoutTerm;
-
-	/**
-	 * @var string[]
-	 */
 	private $entityTypes;
-
-	/**
-	 * @var ContentLanguages
-	 */
 	private $termsLanguages;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
 	private $languageNameLookup;
-
-	/**
-	 * @var EntityFactory
-	 */
 	private $entityFactory;
 
 	/**
@@ -85,10 +66,7 @@ class SpecialEntitiesWithoutPageFactory {
 		$this->entityFactory = $entityFactory;
 	}
 
-	/**
-	 * @return SpecialEntitiesWithoutPage
-	 */
-	public function createSpecialEntitiesWithoutLabel() {
+	public function createSpecialEntitiesWithoutLabel(): SpecialEntitiesWithoutPage {
 		$supportedEntityTypes = [];
 		foreach ( $this->entityTypes as $entityType ) {
 			if ( $this->entityFactory->newEmpty( $entityType ) instanceof LabelsProvider ) {
@@ -106,10 +84,7 @@ class SpecialEntitiesWithoutPageFactory {
 		);
 	}
 
-	/**
-	 * @return SpecialEntitiesWithoutPage
-	 */
-	public function createSpecialEntitiesWithoutDescription() {
+	public function createSpecialEntitiesWithoutDescription(): SpecialEntitiesWithoutPage {
 		$supportedEntityTypes = [];
 		foreach ( $this->entityTypes as $entityType ) {
 			if ( $this->entityFactory->newEmpty( $entityType ) instanceof DescriptionsProvider ) {
