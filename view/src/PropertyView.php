@@ -2,6 +2,9 @@
 
 namespace Wikibase\View;
 
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -35,6 +38,11 @@ class PropertyView extends EntityView {
 	private $textProvider;
 
 	/**
+	 * @var EntityTermsView
+	 */
+	private $entityTermsView;
+
+	/**
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
@@ -54,11 +62,25 @@ class PropertyView extends EntityView {
 		$languageCode,
 		LocalizedTextProvider $textProvider
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
+		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->textProvider = $textProvider;
+		$this->entityTermsView = $entityTermsView;
+	}
+
+	/**
+	 * @see EntityView::getTitleHtml()
+	 */
+	public function getTitleHtml( EntityDocument $entity ) {
+		if ( $entity instanceof LabelsProvider ) {
+			return $this->entityTermsView->getTitleHtml(
+				$entity->getId()
+			);
+		}
+
+		return '';
 	}
 
 	/**
@@ -124,6 +146,29 @@ class PropertyView extends EntityView {
 	 * @return string HTML
 	 */
 	protected function getSideHtml( EntityDocument $entity ) {
+		return '';
+	}
+
+	/**
+	 * Builds and returns the HTML for the entity's fingerprint.
+	 *
+	 * @param EntityDocument $entity
+	 *
+	 * @return string HTML
+	 */
+	private function getHtmlForTerms( EntityDocument $entity ) {
+		$id = $entity->getId();
+
+		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {
+			return $this->entityTermsView->getHtml(
+				$this->languageCode,
+				$entity->getLabels(),
+				$entity->getDescriptions(),
+				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null,
+				$id
+			);
+		}
+
 		return '';
 	}
 
