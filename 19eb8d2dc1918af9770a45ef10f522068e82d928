@@ -22,6 +22,30 @@
       "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98403078_c3cf7a4e",
+        "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-16T18:16:14Z",
+      "side": 1,
+      "message": "I\u0027m not opposed to changing this but I worry that the chain of redirects will negatively impact our Google rankings. https://www.wikidata.org/entity/Q42 returns a 303 to https://www.wikidata.org/wiki/Special:EntityData/Q42 which 303s to https://www.wikidata.org/wiki/Q42. My preference is to keep the resolved URL, https://www.wikidata.org/entity/Q42, until this patch goes into the wild and improvements can be A/B tested with referrers.",
+      "parentUuid": "329a3174_3125a8b1",
+      "range": {
+        "startLine": 46,
+        "startChar": 41,
+        "endLine": 46,
+        "endChar": 45
+      },
+      "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
