@@ -46,6 +46,30 @@
       "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a48aa8_8efc468c",
+        "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-10-16T18:19:43Z",
+      "side": 1,
+      "message": "Well this depends on the meaning of these values. If you need RDF ID, it\u0027s /entity/ one, but if it\u0027s the URL at which the data should be accessed, it\u0027s negotiated and can be https://www.wikidata.org/wiki/Q42 for browser users. So I wonder what\u0027s the intended semantics of sameAs and mainEntity in this case. These URIs are different and not interchangeable so we need to use right one in the right context.",
+      "parentUuid": "98403078_c3cf7a4e",
+      "range": {
+        "startLine": 46,
+        "startChar": 41,
+        "endLine": 46,
+        "endChar": 45
+      },
+      "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
