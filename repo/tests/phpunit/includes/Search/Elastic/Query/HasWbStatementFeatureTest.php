@@ -144,6 +144,20 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'search string' => 'haswbstatement:P999|P777=someString',
 				'foreignRepoNames' => [],
 			],
+			'prefix' => [
+				'expected' => [ 'bool' => [
+					'should' => [
+						[ 'prefix' => [
+							'statement_keywords' => [
+								'value' => 'P999=Q888[P111=',
+								'rewrite' => 'top_terms_1024',
+							],
+						] ]
+					]
+				] ],
+				'search string' => 'haswbstatement:P999=Q888[P111=*',
+				'foreignRepoNames' => [],
+			],
 		];
 	}
 
