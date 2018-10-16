@@ -70,6 +70,30 @@
       "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34713d71_d1819d6d",
+        "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2018-10-16T19:55:39Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t notice this.  Yes, it should be the /entity/ URL, at least for \"mainEntity\".  I don\u0027t care as much about \"sameAs\" because we\u0027re misusing it semantically anyway (the article about a thing is not the same as the thing itself) and AFAICT we\u0027re only including it for SEO.  So I\u0027d be fine if mainEntity pointed at the proper /entity/ URL which will content-negotiate a JSON-LD response when looked up as part of a semantic processor, but sameAs did whatever hack was necessary to obtain good SEO.\n\nI\u0027ll note that T109420/T122711 covers returning actual entity data from the /wiki/ endpoint; that\u0027s a separate feature request (although one I support).  I don\u0027t know why exactly we don\u0027t do content-negotiation on the /wiki/ endpoint the same way we do on the /entity/ endpoint, although I suspect \"difficult to integrate with mediawiki\" is the reason.",
+      "parentUuid": "43a48aa8_8efc468c",
+      "range": {
+        "startLine": 46,
+        "startChar": 41,
+        "endLine": 46,
+        "endChar": 45
+      },
+      "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
