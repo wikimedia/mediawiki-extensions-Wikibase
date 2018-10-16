@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "61f08b6a_5d736996",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2018-10-16T20:00:49Z",
+      "side": 1,
+      "message": "As pointed out in the other comment, this is the wrong URL for `mainEntity` at least: you need something which will return JSON-LD data for the entity, at least under content-negotation (ie, when sent an `Accept: application/ld+json` header).  That\u0027s /entity/Q42, not /wiki/Q42.\n\nThe same goes for `sameAs`, but I don\u0027t care as much because we\u0027re already misusing that for SEO.  (An \"article about Douglas Adams\" is not the same thing as \"Douglas Adams\", although it\u0027s true to say that \"Douglas Adams\" is the \"main entity\" of the \"article about Douglas Adams\".)\n\nIt looks like this has been fixed in PS30 in the time it took me to type this up about PS29...",
+      "revId": "19eb8d2dc1918af9770a45ef10f522068e82d928",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "329a3174_3125a8b1",
         "filename": "client/tests/phpunit/includes/Hooks/SkinAfterBottomScriptsHandlerTest.php",
         "patchSetId": 29
