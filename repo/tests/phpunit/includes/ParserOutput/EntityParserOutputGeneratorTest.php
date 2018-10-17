@@ -36,12 +36,12 @@ use Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
+use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
-use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -96,13 +96,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
-
-		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-view-chunks' ), 'view chunks' );
-
-		$this->assertArrayHasKey(
-			'en',
-			$parserOutput->getExtensionData( 'wikibase-terms-list-items' )
-		);
 
 		$this->assertSame( [ '<JS>' ], $parserOutput->getJsConfigVars(), 'config vars' );
 
@@ -467,8 +460,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				$languageCode,
 				LabelDescriptionLookup $labelDescriptionLookup,
 				LanguageFallbackChain $fallbackChain,
-				EditSectionGenerator $editSectionGenerator,
-				EntityTermsView $entityTermsView
+				EditSectionGenerator $editSectionGenerator
 			) use ( $repo ) {
 				$viewFactory = $repo->getViewFactory();
 				return $viewFactory->newItemView(
@@ -476,7 +468,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 					$labelDescriptionLookup,
 					$fallbackChain,
 					$editSectionGenerator,
-					$entityTermsView
+					$this->createMock( PlaceholderEmittingEntityTermsView::class )
 				);
 			},
 		] );
