@@ -34,6 +34,7 @@ use SkinTemplate;
 use StubUserLang;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Store\EntityRevision;
@@ -1300,6 +1301,54 @@ final class RepoHooks {
 
 	public static function onMediaWikiPHPUnitTestStartTest( $test ) {
 		WikibaseRepo::resetClassStatics();
+	}
+
+	/**
+	 * Will instantiate descriptions for search results.
+	 * @param array $results
+	 */
+	public static function onApiOpenSearchSuggest( &$results ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$lookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
+		$idParser = $repo->getEntityIdParser();
+		$entityIds = [];
+		$namespaceLookup = $repo->getEntityNamespaceLookup();
+
+		foreach ( $results as &$result ) {
+			if ( empty( $result['title'] ) ||
+				!$namespaceLookup->isEntityNamespace( $result['title']->getNamespace() ) ) {
+				continue;
+			}
+			try {
+				$title = $result['title']->getText();
+				$entityId = $idParser->parse( $title );
+				$entityIds[] = $entityId;
+				$result['entityId'] = $entityId;
+			} catch ( EntityIdParsingException $e ) {
+				continue;
+			}
+		}
+		if ( empty( $entityIds ) ) {
+			return;
+		}
+		$lookup = $lookupFactory->newLabelDescriptionLookup( $repo->getUserLanguage(), $entityIds );
+		$formatterFactory = $repo->getEntityLinkFormatterFactory( $repo->getUserLanguage() );
+		foreach ( $results as &$result ) {
+			if ( empty( $result['entityId'] ) ) {
+				continue;
+			}
+			$entityId = $result['entityId'];
+			unset( $result['entityId'] );
+			$label = $lookup->getLabel( $entityId );
+			if ( !$label ) {
+				continue;
+			}
+			$linkFormatter = $formatterFactory->getLinkFormatter( $entityId->getEntityType() );
+			$result['extract'] = strip_tags( $linkFormatter->getHtml( $entityId, [
+				'value' => $label->getText(),
+				'language' => $label->getActualLanguageCode(),
+			] ) );
+		}
 	}
 
 }
