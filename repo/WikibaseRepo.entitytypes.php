@@ -17,13 +17,14 @@
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\LabelsProviderEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -47,8 +48,6 @@ use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
-use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityTermsView;
 use Wikibase\View\FingerprintableEntityMetaTagsCreator;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -58,19 +57,20 @@ return [
 			return $serializerFactory->newItemSerializer();
 		},
 		'view-factory-callback' => function(
-			$languageCode,
-			LabelDescriptionLookup $labelDescriptionLookup,
+			Language $language,
 			LanguageFallbackChain $fallbackChain,
-			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			EntityDocument $entity,
+			EntityInfo $entityInfo
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newItemView(
-				$languageCode,
-				$labelDescriptionLookup,
+				$language,
 				$fallbackChain,
-				$editSectionGenerator,
-				$entityTermsView
+				$entity,
+				$entityInfo,
+				$wikibaseRepo->getEntityTermsViewFactory()
+					->newEntityTermsView( $entity, Language::factory( $language->getCode() ), $fallbackChain, false )
 			);
 		},
 		'meta-tags-creator-callback' => function ( $userLanguage ) {
@@ -215,19 +215,20 @@ return [
 			return $serializerFactory->newPropertySerializer();
 		},
 		'view-factory-callback' => function(
-			$languageCode,
-			LabelDescriptionLookup $labelDescriptionLookup,
+			Language $language,
 			LanguageFallbackChain $fallbackChain,
-			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			EntityDocument $entity,
+			EntityInfo $entityInfo
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newPropertyView(
-				$languageCode,
-				$labelDescriptionLookup,
+				$language,
 				$fallbackChain,
-				$editSectionGenerator,
-				$entityTermsView
+				$entity,
+				$entityInfo,
+				$wikibaseRepo->getEntityTermsViewFactory()
+					->newEntityTermsView( $entity, Language::factory( $language->getCode() ), $fallbackChain, false )
 			);
 		},
 		'meta-tags-creator-callback' => function ( Language $userLanguage ) {

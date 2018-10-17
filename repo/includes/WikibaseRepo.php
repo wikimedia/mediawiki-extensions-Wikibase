@@ -163,6 +163,7 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\View\EntityTermsViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
@@ -1741,6 +1742,14 @@ class WikibaseRepo {
 
 	public function getEntityViewFactory() {
 		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() );
+	}
+
+	public function getEntityTermsViewFactory() {
+		return new EntityTermsViewFactory(
+			new MediaWikiLanguageDirectionalityLookup(),
+			$this->getLanguageNameLookup(),
+			TemplateFactory::getDefaultInstance()
+		);
 	}
 
 	public function getEntityMetaTagsCreatorFactory() {
