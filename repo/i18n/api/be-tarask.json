@@ -165,5 +165,6 @@
 	"apihelp-query+wbcontentlanguages-param-context": "Кантэкст, у якім мовы зьместу павінныя быць слушнымі.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Тэрміны (метка, апісаньне, псэўданімы) элемэнту.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Аднамоўнае тэкставае значэньне ў сьцьверджаньні.",
-	"apihelp-query+wbcontentlanguages-param-prop": "Уласьцівасьці, якія павінны вяртацца пра кожную мову."
+	"apihelp-query+wbcontentlanguages-param-prop": "Уласьцівасьці, якія павінны вяртацца пра кожную мову.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Код мовы."
 }
