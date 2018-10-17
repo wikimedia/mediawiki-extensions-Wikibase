@@ -40,15 +40,13 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = new DispatchingEntityViewFactory(
 			[]
 		);
-		$entityTermsView = $this->getMock( EntityTermsView::class );
 
 		$factory->newEntityView(
 			'unknown',
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$this->getMock( EditSectionGenerator::class )
 		);
 	}
 
@@ -63,15 +61,13 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 				}
 			]
 		);
-		$entityTermsView = $this->getMock( EntityTermsView::class );
 
 		$factory->newEntityView(
 			'foo',
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$this->getMock( EditSectionGenerator::class )
 		);
 	}
 
@@ -79,7 +75,6 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$languageFallbackChain = new LanguageFallbackChain( [] );
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
-		$entityTermsView = $this->getMock( EntityTermsView::class );
 		$entityView = $this->getMockBuilder( EntityDocumentView::class )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
@@ -90,20 +85,17 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 					$languageCodeParam,
 					LabelDescriptionLookup $labelDescriptionLookupParam,
 					LanguageFallbackChain $languageFallbackChainParam,
-					EditSectionGenerator $editSectionGeneratorParam,
-					EntityTermsView $entityTermsViewParam
+					EditSectionGenerator $editSectionGeneratorParam
 				) use(
 					$labelDescriptionLookup,
 					$languageFallbackChain,
 					$editSectionGenerator,
-					$entityTermsView,
 					$entityView
 				) {
 					$this->assertEquals( 'en', $languageCodeParam );
 					$this->assertSame( $labelDescriptionLookup, $labelDescriptionLookupParam );
 					$this->assertSame( $languageFallbackChain, $languageFallbackChainParam );
 					$this->assertSame( $editSectionGenerator, $editSectionGeneratorParam );
-					$this->assertSame( $entityTermsView, $entityTermsViewParam );
 
 					return $entityView;
 				}
@@ -115,8 +107,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			'en',
 			$labelDescriptionLookup,
 			$languageFallbackChain,
-			$editSectionGenerator,
-			$entityTermsView
+			$editSectionGenerator
 		);
 
 		$this->assertSame( $entityView, $newEntityView );
