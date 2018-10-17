@@ -4,6 +4,7 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
+	'ViewPlaceHolderEmitter' => __DIR__ . '/src/ViewPlaceHolderEmitter.php',
 	'Wikibase\\View\\DefaultMetaTagsCreator' => __DIR__ . '/src/DefaultMetaTagsCreator.php',
 	'Wikibase\\View\\DummyLocalizedTextProvider' => __DIR__ . '/src/DummyLocalizedTextProvider.php',
 	'Wikibase\\View\\EditSectionGenerator' => __DIR__ . '/src/EditSectionGenerator.php',
@@ -11,6 +12,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\EntityIdFormatterFactory' => __DIR__ . '/src/EntityIdFormatterFactory.php',
 	'Wikibase\\View\\EntityMetaTagsCreator' => __DIR__ . '/src/EntityMetaTagsCreator.php',
 	'Wikibase\\View\\EntityTermsView' => __DIR__ . '/src/EntityTermsView.php',
+	'Wikibase\\View\\EntityTermsViewFactory' => __DIR__ . '/src/EntityTermsViewFactory.php',
 	'Wikibase\\View\\EntityView' => __DIR__ . '/src/EntityView.php',
 	'Wikibase\\View\\FingerprintableEntityMetaTagsCreator' => __DIR__ . '/src/FingerprintableEntityMetaTagsCreator.php',
 	'Wikibase\\View\\HtmlSnakFormatterFactory' => __DIR__ . '/src/HtmlSnakFormatterFactory.php',
@@ -30,6 +32,8 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\Template\\Template' => __DIR__ . '/src/Template/Template.php',
 	'Wikibase\\View\\Template\\TemplateFactory' => __DIR__ . '/src/Template/TemplateFactory.php',
 	'Wikibase\\View\\Template\\TemplateRegistry' => __DIR__ . '/src/Template/TemplateRegistry.php',
+	'Wikibase\\View\\TermboxFlag' => __DIR__ . '/src/Termbox/TermboxFlag.php',
+	'Wikibase\\View\\TermboxView' => __DIR__ . '/src/Termbox/TermboxView.php',
 	'Wikibase\\View\\TermsListView' => __DIR__ . '/src/TermsListView.php',
 	'Wikibase\\View\\Tests\\EntityMetaTagsCreatorTestCase' => __DIR__ . '/tests/phpunit/EntityMetaTagsCreatorTestCase.php',
 	'Wikibase\\View\\Tests\\EntityViewTestCase' => __DIR__ . '/tests/phpunit/EntityViewTestCase.php',

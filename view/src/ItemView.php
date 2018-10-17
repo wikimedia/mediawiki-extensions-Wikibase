@@ -3,12 +3,15 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
+use ParserOutput;
+use ViewPlaceHolderEmitter;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -19,7 +22,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  */
-class ItemView extends EntityView {
+class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 
 	/**
 	 * @var StatementSectionsView
@@ -42,7 +45,7 @@ class ItemView extends EntityView {
 	private $textProvider;
 
 	/**
-	 * @var EntityTermsView
+	 * @var PlaceholderEmittingEntityTermsView
 	 */
 	private $entityTermsView;
 
@@ -50,7 +53,7 @@ class ItemView extends EntityView {
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
-	 * @param EntityTermsView $entityTermsView
+	 * @param PlaceholderEmittingEntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param string $languageCode
@@ -60,7 +63,7 @@ class ItemView extends EntityView {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		EntityTermsView $entityTermsView,
+		PlaceholderEmittingEntityTermsView $entityTermsView,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
 		$languageCode,
@@ -176,6 +179,14 @@ class ItemView extends EntityView {
 		}
 
 		return '';
+	}
+
+	public function preparePlaceHolders(
+		ParserOutput $parserOutput,
+		EntityDocument $entity,
+		$languageCode
+	) {
+		$this->entityTermsView->preparePlaceHolders( $parserOutput, $entity, $languageCode );
 	}
 
 }

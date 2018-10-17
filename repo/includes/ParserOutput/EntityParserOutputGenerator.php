@@ -6,14 +6,11 @@ use InvalidArgumentException;
 use Language;
 use ParserOutput;
 use SpecialPage;
+use ViewPlaceHolderEmitter;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
-use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityInfo;
@@ -247,20 +244,6 @@ class EntityParserOutputGenerator {
 			$languageDirectionalityLookup
 		);
 
-		$textInjector = new TextInjector();
-		$entityTermsView = new PlaceholderEmittingEntityTermsView(
-			new FallbackHintHtmlTermRenderer(
-				$languageDirectionalityLookup,
-				$languageNameLookup
-			),
-			$entityLabelDescriptionLookup,
-			$this->templateFactory,
-			$editSectionGenerator,
-			$this->textProvider,
-			$termsListView,
-			$textInjector
-		);
-
 		$referencedEntitiesLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityInfoTermLookup( $entityInfo ),
 			$this->languageFallbackChain
@@ -271,8 +254,7 @@ class EntityParserOutputGenerator {
 			$this->languageCode,
 			$referencedEntitiesLabelDescriptionLookup,
 			$this->languageFallbackChain,
-			$editSectionGenerator,
-			$entityTermsView
+			$editSectionGenerator
 		);
 
 		// Set the display title to display the label together with the item's id
@@ -281,17 +263,10 @@ class EntityParserOutputGenerator {
 
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
-		$parserOutput->setExtensionData( 'wikibase-view-chunks', $textInjector->getMarkers() );
 
-		$parserOutput->setExtensionData(
-			'wikibase-terms-list-items',
-			$entityTermsView->getTermsListItems(
-				$this->languageCode,
-				$entity instanceof LabelsProvider ? $entity->getLabels() : new TermList(),
-				$entity instanceof DescriptionsProvider ? $entity->getDescriptions() : new TermList(),
-				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null
-			)
-		);
+		if ( $entityView instanceof ViewPlaceHolderEmitter ) {
+			$entityView->preparePlaceHolders( $parserOutput, $entity, $this->languageCode );
+		}
 	}
 
 	private function addModules( ParserOutput $parserOutput ) {
