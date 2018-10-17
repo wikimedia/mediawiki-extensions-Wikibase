@@ -48,8 +48,8 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityTermsView;
 use Wikibase\View\FingerprintableEntityMetaTagsCreator;
+use Wikibase\View\TermboxFlag;
 use Wikimedia\Purtle\RdfWriter;
 
 return [
@@ -61,16 +61,20 @@ return [
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
-			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			EditSectionGenerator $editSectionGenerator
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newItemView(
 				$languageCode,
 				$labelDescriptionLookup,
 				$fallbackChain,
 				$editSectionGenerator,
-				$entityTermsView
+				$wikibaseRepo->getEntityTermsViewFactory()
+					->newEntityTermsView(
+						Language::factory( $languageCode ),
+						TermboxFlag::shouldRenderTermbox()
+					)
 			);
 		},
 		'meta-tags-creator-callback' => function ( $userLanguage ) {
@@ -218,16 +222,17 @@ return [
 			$languageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
-			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			EditSectionGenerator $editSectionGenerator
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newPropertyView(
 				$languageCode,
 				$labelDescriptionLookup,
 				$fallbackChain,
 				$editSectionGenerator,
-				$entityTermsView
+				$wikibaseRepo->getEntityTermsViewFactory()
+					->newEntityTermsView( Language::factory( $languageCode ), false )
 			);
 		},
 		'meta-tags-creator-callback' => function ( Language $userLanguage ) {
