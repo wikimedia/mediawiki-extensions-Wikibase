@@ -1003,6 +1003,7 @@ call_user_func( function() {
 	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\RepoHooks::onCirrusSearchAddQueryFeatures';
 	$wgHooks['ApiMaxLagInfo'][] = '\Wikibase\RepoHooks::onApiMaxLagInfo';
 	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\RepoHooks::onParserOptionsRegister';
+	$wgHooks['ApiOpenSearchSuggest'][] = '\Wikibase\RepoHooks::onApiOpenSearchSuggest';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
