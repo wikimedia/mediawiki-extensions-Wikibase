@@ -50,8 +50,7 @@ class DispatchingEntityViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $languageFallbackChain,
-		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EditSectionGenerator $editSectionGenerator
 	) {
 		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
 			throw new OutOfBoundsException( "No EntityDocumentView is registered for entity type '$entityType'" );
@@ -62,8 +61,7 @@ class DispatchingEntityViewFactory {
 			$languageCode,
 			$labelDescriptionLookup,
 			$languageFallbackChain,
-			$editSectionGenerator,
-			$entityTermsView
+			$editSectionGenerator
 		);
 
 		Assert::postcondition(
