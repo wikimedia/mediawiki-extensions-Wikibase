@@ -2,12 +2,17 @@
 
 /**
  * Minimal set of classes necessary to fulfill needs of parts of Wikibase relying on
- * the CirrusSearch extension.
+ * the CirrusSearch and MobileFrontend extension.
  * @codingStandardsIgnoreFile
  */
 
 namespace {
 	class CirrusSearch {
+	}
+
+	class MobileContext {
+		public static function singleton() {
+		}
 	}
 }
 
