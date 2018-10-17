@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edb05ec7_63985f0a",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-10-17T08:26:57Z",
+      "side": 1,
+      "message": "nitpick: ideally we move this inside the parseValue method as it is about parsing and not query building. Reason is that we want to do as much \"parsing logic\" as we can so that the generated AST can be used without doing string manipulation. \n\n(this is just FYI so please don\u0027t change the code just for that)",
+      "revId": "c18bff22ad9389e622ce618014c2ee76274b2057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
