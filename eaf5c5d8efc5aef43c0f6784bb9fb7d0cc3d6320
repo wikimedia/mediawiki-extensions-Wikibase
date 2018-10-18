@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65f3a5d5_0cb4d890",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 32
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-10-18T08:42:59Z",
+      "side": 1,
+      "message": "should this be commented?",
+      "range": {
+        "startLine": 122,
+        "startChar": 12,
+        "endLine": 122,
+        "endChar": 41
+      },
+      "revId": "eaf5c5d8efc5aef43c0f6784bb9fb7d0cc3d6320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cfd93ca_104222be",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 32
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-10-18T08:42:59Z",
+      "side": 1,
+      "message": "I think perhaps this should refer to local part. See: \\Wikibase\\Repo\\Api\\SearchEntities::getConceptUri",
+      "range": {
+        "startLine": 151,
+        "startChar": 2,
+        "endLine": 151,
+        "endChar": 41
+      },
+      "revId": "eaf5c5d8efc5aef43c0f6784bb9fb7d0cc3d6320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
