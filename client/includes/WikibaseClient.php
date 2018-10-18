@@ -545,7 +545,6 @@ final class WikibaseClient {
 	/**
 	 * Returns an instance of the default store.
 	 *
-	 * @throws Exception
 	 * @return ClientStore
 	 */
 	public function getStore() {
