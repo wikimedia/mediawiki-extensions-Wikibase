@@ -166,5 +166,6 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Тэрміны (метка, апісаньне, псэўданімы) элемэнту.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Аднамоўнае тэкставае значэньне ў сьцьверджаньні.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Уласьцівасьці, якія павінны вяртацца пра кожную мову.",
-	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Код мовы."
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Код мовы.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "Саманазва мовы, г. зн, назва мовы на гэтай мове. Можа ня быць вядома для ўсіх моваў."
 }
