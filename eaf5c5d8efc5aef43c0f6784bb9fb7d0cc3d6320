@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "99e78ee7_0604d7f6",
+        "filename": "client/includes/Hooks/SkinAfterBottomScriptsHandler.php",
+        "patchSetId": 32
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-10-18T15:06:37Z",
+      "side": 1,
+      "message": "Looking at this you should probably only catch the EntityLookupException.\nThe docs of WikibaseClient::getStore should probably be updated.\n@throws Exception is too generic a phpdoc there.\n\nSee https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/468334/",
+      "parentUuid": "a4bc17df_abd62f43",
+      "range": {
+        "startLine": 122,
+        "startChar": 12,
+        "endLine": 122,
+        "endChar": 41
+      },
+      "revId": "eaf5c5d8efc5aef43c0f6784bb9fb7d0cc3d6320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5cfd93ca_104222be",
         "filename": "client/includes/RepoLinker.php",
         "patchSetId": 32
