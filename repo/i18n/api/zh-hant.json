@@ -110,13 +110,18 @@
 	"apihelp-wbsetclaimvalue-description": "設定 Wikibase 聲稱的值。",
 	"apihelp-wbsetclaimvalue-summary": "設定 Wikibase 聲稱的值。",
 	"apihelp-wbsetdescription-description": "設定單一 Wikibase 實體的描述。",
+	"apihelp-wbsetdescription-summary": "設定單一 Wikibase 實體的描述。",
+	"apihelp-wbsetdescription-param-bot": "標註此為機器人編輯。該 URL 標記僅會在使用者隸屬「{{int:group-bot}}」群組時採用。",
 	"apihelp-wbsetdescription-param-language": "描述的語言",
 	"apihelp-wbsetdescription-param-value": "用於描述設定的值",
 	"apihelp-wbsetlabel-description": "設定單一 Wikibase 實體的標籤。",
 	"apihelp-wbsetlabel-summary": "設定單一 Wikibase 實體的標籤。",
 	"apihelp-wbsetlabel-param-language": "標籤語言",
 	"apihelp-wbsetlabel-param-value": "標籤值",
+	"apihelp-wbsetqualifier-param-bot": "標註此為機器人編輯。該 URL 標記僅會在使用者隸屬「{{int:group-bot}}」群組時採用。",
 	"apihelp-wbsetreference-description": "建立參考文獻或是設定現有參考文獻的值。",
 	"apihelp-wbsetreference-summary": "建立參考文獻或是設定現有參考文獻的值。",
+	"apihelp-wbsetreference-param-reference": "應更新的參考文獻雜湊，可選用。當不提供時，會建立一個新的參考文獻",
+	"apihelp-wbsetsitelink-param-title": "關聯的頁面標題。\n與 <var>site</var> 一起使用來建立完整的網站連結。",
 	"apihelp-wbsetsitelink-example-4": "從項目移除德語站台連結"
 }
