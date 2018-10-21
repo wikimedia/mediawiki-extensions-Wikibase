@@ -223,7 +223,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Popis:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliasy:",
 	"wikibase-setlabeldescriptionaliases-submit": "Nastavit štítek, popis a aliasy",
-	"special-setsitelink": "Nastavení odkazu na článek",
+	"special-setsitelink": "Nastavit odkaz na článek",
 	"wikibase-setsitelink-introfull": "Nastavujete odkaz na článek v jazyce $2 pro [[$1]].",
 	"wikibase-setsitelink-intro": "Tento formulář vám umožňuje přidat k položce odkaz na článek. Je třeba zadat id položky (např. Q23), zkratku projektu (např. „enwiki“) a název stránky, kterou chcete do položky přidat.",
 	"wikibase-setsitelink-intro-badges": "Navíc můžete odkazu na článek přidělit různé níže uvedené odznaky.",

@@ -169,5 +169,6 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Код мовы.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "Саманазва мовы, г. зн, назва мовы на гэтай мове. Можа ня быць вядома для ўсіх моваў.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "Назва мовы цяперашняй мовай (пазначанай праз парамэтар <var>uselang</var>), з дастасаванай пры неабходнасьці мовай замены. Звычайна, як мінімум ангельская назва вядомая для ўсіх моваў зьместу, якія прымае Вікібаза.",
-	"apihelp-query+wbcontentlanguages-example-1": "Атрымаць слушныя моўныя коды для тэрмінаў элемэнту."
+	"apihelp-query+wbcontentlanguages-example-1": "Атрымаць слушныя моўныя коды для тэрмінаў элемэнту.",
+	"apihelp-query+wbcontentlanguages-example-2": "Атрымаць слушныя мовы з моўнымі кодамі і саманазвамі для аднамоўных тэкставых значэньняў."
 }
