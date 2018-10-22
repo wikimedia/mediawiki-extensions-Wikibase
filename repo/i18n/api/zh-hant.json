@@ -135,6 +135,8 @@
 	"apihelp-wbsearchentities-example-1": "以預設類型和限制來搜尋英語裡的「abc」",
 	"apihelp-wbsearchentities-example-2": "搜尋英語裡的「abc」，限定 50 個結果",
 	"apihelp-wbsearchentities-example-3": "搜尋「alphabet」在英語裡的類型屬性",
+	"apihelp-wbsearchentities-example-5": "省略 url 參數來搜尋在英語裡的「alphabet」",
+	"apihelp-wbsearchentities-example-6": "搜尋在英語裡的「Q1234」，以符合實體 ID。",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "實體的用語（標籤、描述、別名）。",
 	"apihelp-query+wbcontentlanguages-param-prop": "應會回傳有關各語言的屬性。",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "語言代碼。",
@@ -167,6 +169,10 @@
 	"apihelp-wbsetaliases-param-add": "要添加的別名清單（可與 <var>remove</var> 結合）",
 	"apihelp-wbsetaliases-param-remove": "要移除的別名清單（可與 <var>add</var> 結合）",
 	"apihelp-wbsetaliases-param-language": "用於設定別名的語言",
+	"apihelp-wbsetaliases-example-1": "將 ID 為 <samp>Q1</samp> 實體的英語別名設定成 <var>Foo</var> 和 <var>Bar</var>",
+	"apihelp-wbsetaliases-example-2": "從用於 ID 為 <samp>Q1</samp> 實體的英語別名清單來添加 <var>Foo</var> 和 <var>Bar</var>",
+	"apihelp-wbsetaliases-example-3": "從用於 ID 為 <samp>Q1</samp> 實體的英語別名清單來移除 <var>Foo</var> 和 <var>Bar</var>",
+	"apihelp-wbsetaliases-example-4": "當添加 <var>Bar</var> 至用於 ID 為 <samp>Q1</samp> 實體的英語別名清單時，移除 <var>Foo</var>",
 	"apihelp-wbsetclaim-description": "建立或更新整個陳述或聲稱。",
 	"apihelp-wbsetclaim-summary": "建立或更新整個陳述或聲稱。",
 	"apihelp-wbsetclaim-param-claim": "陳述或聲稱序列化",
@@ -215,6 +221,8 @@
 	"apihelp-wbsetreference-param-bot": "標註此為機器人編輯。該 URL 標記僅會在使用者隸屬「bot」群組時採用。",
 	"apihelp-wbsetreference-example-1": "建立用於 GUID 為 Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF 聲稱的新參考文獻",
 	"apihelp-wbsetreference-example-2": "設定用於 GUID 為 Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF，且雜湊為 1eb8793c002b1d9820c833d234a1b54c8e94187e 聲稱的參考文獻",
+	"apihelp-wbsetsitelink-description": "以 Wikibase 項目來關聯在 wiki 上的頁面，或是將已關聯到的給移除。",
+	"apihelp-wbsetsitelink-summary": "以 Wikibase 項目來關聯在 wiki 上的頁面，或是將已關聯到的給移除。",
 	"apihelp-wbsetsitelink-param-id": "用於實體的識別碼，包含字首。\n使用 <var>id</var>，或是同時使用 <var>site</var> 與 <var>title</var>。",
 	"apihelp-wbsetsitelink-param-new": "如有設定，將會建立一個新實體。\n將此設定成您所想建立的實體類型。",
 	"apihelp-wbsetsitelink-param-site": "於頁面所在處上的網站識別碼。\n與 <var>title</var> 一起使用來產生完整的網站連結。",
@@ -223,5 +231,7 @@
 	"apihelp-wbsetsitelink-param-summary": "編輯的摘要。\n會自動產生註釋來附加在開頭。摘要與自動註釋的共同長度限制是 260 個字元，請注意超出限制的任何內容將會被去除。",
 	"apihelp-wbsetsitelink-param-bot": "標註此為機器人編輯。該 URL 標記僅會在使用者隸屬「bot」群組時採用。",
 	"apihelp-wbsetsitelink-param-linksite": "於連結所在處的頁面上之網站識別碼",
-	"apihelp-wbsetsitelink-example-4": "從項目移除德語站台連結"
+	"apihelp-wbsetsitelink-example-4": "從項目移除德語站台連結",
+	"apihelp-wbsetsitelink-example-7": "從 ID 為「Q42」的項目來更改連接至波蘭語的頁面，且不變動徽章",
+	"apihelp-wbsetsitelink-example-8": "從 ID 為「Q42」的項目來更改連接至波蘭語的頁面，且移除所有徽章"
 }
