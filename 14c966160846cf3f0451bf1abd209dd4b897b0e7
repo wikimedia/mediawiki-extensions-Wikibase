@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d135c21_c404c1b0",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2018-10-22T15:59:54Z",
+      "side": 1,
+      "message": "this will populate the \"description\" data in opensearch, the \"text\" will remain QXYZ.\nSadly I\u0027m not sure that this data (the description field) is displayed in Special:Search search-as-you-type.",
+      "revId": "14c966160846cf3f0451bf1abd209dd4b897b0e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
