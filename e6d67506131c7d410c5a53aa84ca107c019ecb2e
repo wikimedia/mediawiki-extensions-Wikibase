@@ -22,6 +22,30 @@
       "revId": "e6d67506131c7d410c5a53aa84ca107c019ecb2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e01b365f_1c10011e",
+        "filename": "repo/sql/UpdateTermIndexes.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-10-22T17:39:30Z",
+      "side": 0,
+      "message": "you mean comment out and remove after all the chain is merged, or keep commented out for some longer time (i.e. next year or so)?",
+      "parentUuid": "70c47142_b88aadb2",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 64
+      },
+      "revId": "e6d67506131c7d410c5a53aa84ca107c019ecb2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
