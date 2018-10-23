@@ -90,13 +90,19 @@ class EntityParserOutputGenerator {
 	 */
 	private $languageCode;
 
-	/*
+	/**
 	 * @var Language
 	 */
 	private $language;
 
 	/**
+	 * @var DispatchingEntityMetaTagsCreatorFactory
+	 */
+	private $entityMetaTagsCreatorFactory;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
+	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
