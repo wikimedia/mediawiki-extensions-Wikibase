@@ -268,7 +268,7 @@
 	"wikibase-redirect-cant-load-entity-content": "Није могуће приступити садржају. Измена је можда избрисана.",
 	"wikibase-redirect-cant-redirect": "Прављење преусмеравања није успело због техничких проблема",
 	"special-mylanguagefallbackchain": "Мој језички ланац",
-	"wikibase-mylanguagefallbackchain-babel": "Можете га променити додавањем <nowiki>{{#babel: }}</nowiki> на {{GENDER:$1|вашу }} [[Special:MyPage|корисничку страницу]].",
+	"wikibase-mylanguagefallbackchain-babel": "Можете га уредити додавањем <nowiki>{{#babel: }}</nowiki> на {{GENDER:$1|своју}} [[Special:MyPage|корисничку страницу]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, претворено из $3 - $4",
 	"wikibase-api-no-external-page": "Сајт спољног клијента „$1” није дао информације о страници за „$2”.",
 	"wikibase-api-no-such-entity": "Није могуће пронаћи ентитет са ID-ом „$1”",
