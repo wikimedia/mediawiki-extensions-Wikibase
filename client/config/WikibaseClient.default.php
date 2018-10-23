@@ -34,6 +34,7 @@ return call_user_func( function() {
 		'referencedEntityIdAccessLimit' => 3,
 		'referencedEntityIdMaxDepth' => 4,
 		'referencedEntityIdMaxReferencedEntityVisits' => 50,
+		'pageSchemaNamespaces' => [],
 		'allowLocalShortDesc' => false,
 		'propagateChangesToRepo' => true,
 		'propertyOrderUrl' => null,

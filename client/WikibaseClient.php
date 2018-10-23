@@ -147,6 +147,8 @@ call_user_func( function() {
 
 	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\ClientHooks::onCirrusSearchAddQueryFeatures';
 
+	$wgHooks['SkinAfterBottomScripts'][] = '\Wikibase\ClientHooks::onSkinAfterBottomScripts';
+
 	// for client notifications (requires the Echo extension)
 	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
 	// thus we have to register these two handlers disregarding Echo is loaded or not
