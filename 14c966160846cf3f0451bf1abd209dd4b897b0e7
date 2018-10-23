@@ -16,6 +16,24 @@
       "revId": "14c966160846cf3f0451bf1abd209dd4b897b0e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4c1cbbc_26457c0d",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-10-23T06:16:18Z",
+      "side": 1,
+      "message": "Yeah I know. This is the first attempt, to provide something useful at least in description text. I could change the title too, but I wonder if it won\u0027t break anything - as then it won\u0027t be actual title, so clients assuming it is a title would fail. No idea yet what to do with it. Another option is to change wikidata search widget to show this part.",
+      "parentUuid": "7d135c21_c404c1b0",
+      "revId": "14c966160846cf3f0451bf1abd209dd4b897b0e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
