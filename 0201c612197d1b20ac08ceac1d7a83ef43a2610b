@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a07eb53_2dc7210f",
+        "filename": "client/resources/wikibase.client.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-10-23T20:56:48Z",
+      "side": 0,
+      "message": "Is this asset still used elsewhere, or should it be dropped?",
+      "range": {
+        "startLine": 29,
+        "startChar": 24,
+        "endLine": 29,
+        "endChar": 51
+      },
+      "revId": "0201c612197d1b20ac08ceac1d7a83ef43a2610b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
