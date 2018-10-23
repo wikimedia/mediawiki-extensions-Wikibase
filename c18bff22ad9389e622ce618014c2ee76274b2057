@@ -16,6 +16,29 @@
       "revId": "c18bff22ad9389e622ce618014c2ee76274b2057",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4a73355_fc1ccb36",
+        "filename": "repo/includes/Search/Elastic/Query/HasWbStatementFeature.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-10-23T02:29:07Z",
+      "side": 1,
+      "message": "Having an isSubQuery/hasSubQuery function could help with readability here",
+      "range": {
+        "startLine": 106,
+        "startChar": 39,
+        "endLine": 106,
+        "endChar": 45
+      },
+      "revId": "c18bff22ad9389e622ce618014c2ee76274b2057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
