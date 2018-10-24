@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f350c9c_2f741d42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5575
+      },
+      "writtenOn": "2018-10-24T14:28:14Z",
+      "side": 1,
+      "message": "Remove this",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 81
+      },
+      "revId": "b0ef9268caf129ea60a6f7306b7539938afcc458",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
