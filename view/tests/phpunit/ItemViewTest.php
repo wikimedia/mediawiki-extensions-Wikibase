@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\View\EntityTermsView;
+use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
@@ -65,7 +65,7 @@ class ItemViewTest extends EntityViewTestCase {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$itemView = new ItemView(
 			$templateFactory,
-			$this->getMock( EntityTermsView::class ),
+			$this->createMock( CacheableEntityTermsView::class ),
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()
