@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use Language;
 use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use HashSiteStore;
@@ -13,14 +14,16 @@ use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityTermsView;
 use Wikibase\View\HtmlSnakFormatterFactory;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\PropertyView;
+use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\EntityIdFormatterFactory;
@@ -80,7 +83,8 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			[],
 			[],
 			[],
-			$this->getMock( LocalizedTextProvider::class )
+			$this->getMock( LocalizedTextProvider::class ),
+			$this->createMock( SpecialPageLinker::class )
 		);
 	}
 
@@ -108,13 +112,11 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNewItemView() {
 		$factory = $this->newViewFactory();
-		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$itemView = $factory->newItemView(
-			'de',
-			$this->getMock( LabelDescriptionLookup::class ),
+			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$editSectionGenerator,
-			$this->getMock( EntityTermsView::class )
+			new EntityInfo( [] ),
+			$this->createMock( CacheableEntityTermsView::class )
 		);
 
 		$this->assertInstanceOf( ItemView::class, $itemView );
@@ -122,13 +124,11 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNewPropertyView() {
 		$factory = $this->newViewFactory();
-		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$propertyView = $factory->newPropertyView(
-			'de',
-			$this->getMock( LabelDescriptionLookup::class ),
+			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$editSectionGenerator,
-			$this->getMock( EntityTermsView::class )
+			new EntityInfo( [] ),
+			$this->createMock( CacheableEntityTermsView::class )
 		);
 
 		$this->assertInstanceOf( PropertyView::class, $propertyView );
