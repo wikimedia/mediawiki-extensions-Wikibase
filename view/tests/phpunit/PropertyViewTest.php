@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\View\EntityTermsView;
+use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\PropertyView;
@@ -79,7 +79,7 @@ class PropertyViewTest extends EntityViewTestCase {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$propertyView = new PropertyView(
 			$templateFactory,
-			$this->getMock( EntityTermsView::class ),
+			$this->createMock( PlaceholderEmittingEntityTermsView::class ),
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()
