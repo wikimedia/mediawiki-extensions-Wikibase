@@ -4,6 +4,7 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
+	'Wikibase\\View\\CacheableEntityTermsView' => __DIR__ . '/src/CacheableEntityTermsView.php',
 	'Wikibase\\View\\DefaultMetaTagsCreator' => __DIR__ . '/src/DefaultMetaTagsCreator.php',
 	'Wikibase\\View\\DummyLocalizedTextProvider' => __DIR__ . '/src/DummyLocalizedTextProvider.php',
 	'Wikibase\\View\\EditSectionGenerator' => __DIR__ . '/src/EditSectionGenerator.php',
@@ -35,4 +36,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\Tests\\EntityViewTestCase' => __DIR__ . '/tests/phpunit/EntityViewTestCase.php',
 	'Wikibase\\View\\ToolbarEditSectionGenerator' => __DIR__ . '/src/ToolbarEditSectionGenerator.php',
 	'Wikibase\\View\\ViewFactory' => __DIR__ . '/src/ViewFactory.php',
+	'Wikibase\\View\\ViewPlaceHolderEmitter' => __DIR__ . '/src/ViewPlaceHolderEmitter.php',
 ];
