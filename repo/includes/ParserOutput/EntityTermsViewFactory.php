@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -12,6 +13,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -21,12 +23,22 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  */
 class EntityTermsViewFactory {
 
+	/**
+	 * @param EntityDocument $entity
+	 * @param Language $language
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param bool $isTermbox
+	 *
+	 * @return PlaceholderEmittingEntityTermsView
+	 */
 	public function newEntityTermsView(
 		EntityDocument $entity,
 		Language $language,
-		LanguageFallbackChain $fallbackChain
+		LanguageFallbackChain $fallbackChain,
+		$isTermbox = false
 	) {
-		return $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
+		return $isTermbox ? $this->newTermboxView( $fallbackChain )
+			: $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
 	}
 
 	private function newPlaceHolderEmittingEntityTermsView(
@@ -66,6 +78,14 @@ class EntityTermsViewFactory {
 				$languageDirectionalityLookup
 			),
 			new TextInjector()
+		);
+	}
+
+	private function newTermboxView( LanguageFallbackChain $fallbackChain ) {
+		return new TermboxView(
+			$fallbackChain,
+			MediaWikiServices::getInstance()->getHttpRequestFactory(),
+			WikibaseRepo::getDefaultInstance()->getSettings()
 		);
 	}
 
