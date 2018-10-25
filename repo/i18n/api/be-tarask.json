@@ -172,5 +172,7 @@
 	"apihelp-query+wbcontentlanguages-example-1": "Атрымаць слушныя моўныя коды для тэрмінаў элемэнту.",
 	"apihelp-query+wbcontentlanguages-example-2": "Атрымаць слушныя мовы з моўнымі кодамі і саманазвамі для аднамоўных тэкставых значэньняў.",
 	"apihelp-query+wbsearch-description": "Шукае элемэнты з дапамогай метак і псэўданімаў.\nМожа быць ужыты як генэратар для іншых запытаў.\nВяртае адпаведны тэрмін, які павінен быць паказаны.",
-	"apihelp-query+wbsearch-summary": "Шукае элемэнты з дапамогай метак і псэўданімаў."
+	"apihelp-query+wbsearch-summary": "Шукае элемэнты з дапамогай метак і псэўданімаў.",
+	"apihelp-query+wbsearch-extended-description": "Гэта можа быць выкарыстана як генэратар для іншых запытаў.\nВяртае адпаведны тэрмін, які павінен быць паказаны.",
+	"apihelp-query+wbsearch-param-search": "Шукаць гэты тэкст."
 }

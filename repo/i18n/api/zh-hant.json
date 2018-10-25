@@ -149,6 +149,7 @@
 	"apihelp-query+wbcontentlanguages-param-prop": "應會回傳有關各語言的屬性。",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "語言代碼。",
 	"apihelp-query+wbcontentlanguages-example-1": "取得用於實體用語裡的有效語言代碼。",
+	"apihelp-query+wbcontentlanguages-example-2": "取得用於單語言文字值的帶有語言代碼與原名之有效語言。",
 	"apihelp-query+wbsearch-summary": "搜尋實體所使用的標籤和別名。",
 	"apihelp-query+wbsearch-param-search": "搜尋此文字。",
 	"apihelp-query+wbsearch-param-language": "搜尋此語言。",

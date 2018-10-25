@@ -315,6 +315,7 @@
 	"wikibase-redirectentity-fromid": "Het ID waarvandaan door te verwijzen",
 	"wikibase-redirectentity-toid": "Het ID waarnaartoe door te verwijzen",
 	"wikibase-redirectentity-submit": "Doorverwijzing",
+	"wikibase-redirect-permissiondenied": "Toegang geweigerd",
 	"special-mylanguagefallbackchain": "Terugvalketen voor mijn taal",
 	"wikibase-mylanguagefallbackchain-text": "De terugvalketen voor talen die gebruikt word voor het weergeven van entiteitlabels wordt hieronder weergegeven.",
 	"wikibase-mylanguagefallbackchain-babel": "U kunt deze bewerken door <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].",
