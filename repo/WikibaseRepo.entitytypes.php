@@ -42,6 +42,7 @@ use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
+use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
@@ -70,7 +71,12 @@ return [
 				$fallbackChain,
 				$entityInfo,
 				( new EntityTermsViewFactory() )
-					->newEntityTermsView( $entity, Language::factory( $language->getCode() ), $fallbackChain )
+					->newEntityTermsView(
+						$entity,
+						Language::factory( $language->getCode() ),
+						$fallbackChain,
+						TermboxFlag::getInstance()->shouldRenderTermbox()
+					)
 			);
 		},
 		'meta-tags-creator-callback' => function ( $userLanguage ) {
@@ -227,7 +233,12 @@ return [
 				$fallbackChain,
 				$entityInfo,
 				( new EntityTermsViewFactory() )
-					->newEntityTermsView( $entity, Language::factory( $language->getCode() ), $fallbackChain )
+					->newEntityTermsView(
+						$entity,
+						Language::factory( $language->getCode() ),
+						$fallbackChain,
+						TermboxFlag::getInstance()->shouldRenderTermbox()
+					)
 			);
 		},
 		'meta-tags-creator-callback' => function ( Language $userLanguage ) {
