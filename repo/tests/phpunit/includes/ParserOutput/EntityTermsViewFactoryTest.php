@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
+use Wikibase\Repo\ParserOutput\TermboxView;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\EntityTermsViewFactory
@@ -28,6 +29,18 @@ class EntityTermsViewFactoryTest extends TestCase {
 			);
 
 		$this->assertInstanceOf( PlaceholderEmittingEntityTermsView::class, $termsView );
+	}
+
+	public function testGivenShouldRenderTermbox_returnsTermboxView() {
+		$termsView = $this->newEntityTermsViewFactory()
+			->newEntityTermsView(
+				new Item( new ItemId( 'Q42' ) ),
+				Language::factory( 'en' ),
+				new LanguageFallbackChain( [] ),
+				true
+			);
+
+		$this->assertInstanceOf( TermboxView::class, $termsView );
 	}
 
 	private function newEntityTermsViewFactory() {
