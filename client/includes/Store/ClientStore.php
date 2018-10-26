@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Store;
 
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\Store\Sql\PageRandomLookup;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -79,6 +80,11 @@ interface ClientStore {
 	 * @return DescriptionLookup
 	 */
 	public function getDescriptionLookup();
+
+	/**
+	 * @return PageRandomLookup
+	 */
+	public function getPageRandomLookup();
 
 	/**
 	 * @return PropertyInfoLookup
