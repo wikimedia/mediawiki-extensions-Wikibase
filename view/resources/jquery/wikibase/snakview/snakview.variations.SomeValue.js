@@ -10,7 +10,7 @@
 	 * additional user interface interaction.
 	 * @see jQuery.wikibase.snakview
 	 * @see wikibase.datamodel.PropertySomeValueSnak
-	 * @class jQuery.wikibase.snakview.varaiations.SomeValue
+	 * @class jQuery.wikibase.snakview.variations.SomeValue
 	 * @extends jQuery.wikibase.snakview.variations.Variation
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
