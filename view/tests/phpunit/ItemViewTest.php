@@ -20,9 +20,9 @@ use Wikibase\View\Template\TemplateFactory;
  * @covers \Wikibase\View\ItemView
  * @covers \Wikibase\View\EntityView
  *
- * @uses Wikibase\View\Template\Template
- * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
+ * @uses \Wikibase\View\Template\Template
+ * @uses \Wikibase\View\Template\TemplateFactory
+ * @uses \Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -62,10 +62,35 @@ class ItemViewTest extends EntityViewTestCase {
 	}
 
 	public function provideTestGetHtml() {
+		$itemView = $this->newItemView();
+
+		return [
+			[
+				$itemView,
+				$this->newEntityForStatements( [] ),
+				'/wb-item/'
+			]
+		];
+	}
+
+	public function testTermsViewPlaceholdersArePropagated() {
+		$placeholders = [ 'a' => 'b' ];
+		$itemView = $this->newItemView( $placeholders );
+
+		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ) );
+
+		$this->assertSame( $placeholders, $view->getPlaceholders() );
+	}
+
+	private function newItemView( $placeholders = [] ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
-		$itemView = new ItemView(
+
+		$termsView = $this->getMock( CacheableEntityTermsView::class );
+		$termsView->method( 'getPlaceholders' )->willReturn( $placeholders );
+
+		return new ItemView(
 			$templateFactory,
-			$this->createMock( CacheableEntityTermsView::class ),
+			$termsView,
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()
@@ -77,14 +102,6 @@ class ItemViewTest extends EntityViewTestCase {
 			[],
 			$this->getMock( LocalizedTextProvider::class )
 		);
-
-		return [
-			[
-				$itemView,
-				$this->newEntityForStatements( [] ),
-				'/wb-item/'
-			]
-		];
 	}
 
 }

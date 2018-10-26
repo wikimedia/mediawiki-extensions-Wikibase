@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -20,7 +19,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  */
-class ItemView extends EntityView implements ViewPlaceHolderEmitter {
+class ItemView extends EntityView {
 
 	/**
 	 * @var StatementSectionsView
@@ -89,6 +88,20 @@ class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Builds and returns the main content representing a whole WikibaseEntity
+	 *
+	 * @param EntityDocument $entity the entity to render
+	 *
+	 * @return ViewContent
+	 */
+	public function getContent( EntityDocument $entity ): ViewContent {
+		return new ViewContent(
+			$this->renderEntityView( $entity ),
+			$this->entityTermsView->getPlaceholders( $entity, $this->languageCode )
+		);
 	}
 
 	/**
@@ -177,14 +190,6 @@ class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 		}
 
 		return '';
-	}
-
-	public function preparePlaceHolders(
-		ParserOutput $parserOutput,
-		EntityDocument $entity,
-		$languageCode
-	) {
-		$this->entityTermsView->preparePlaceHolders( $parserOutput, $entity, $languageCode );
 	}
 
 }

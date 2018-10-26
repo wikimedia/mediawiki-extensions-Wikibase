@@ -20,6 +20,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\LanguageDirectionalityLookup' => __DIR__ . '/src/LanguageDirectionalityLookup.php',
 	'Wikibase\\View\\LocalizedTextProvider' => __DIR__ . '/src/LocalizedTextProvider.php',
 	'Wikibase\\View\\Module\\TemplateModule' => __DIR__ . '/src/Module/TemplateModule.php',
+	'Wikibase\\View\\ViewContent' => __DIR__ . '/src/ViewContent.php',
 	'Wikibase\\View\\PropertyView' => __DIR__ . '/src/PropertyView.php',
 	'Wikibase\\View\\SimpleEntityTermsView' => __DIR__ . '/src/SimpleEntityTermsView.php',
 	'Wikibase\\View\\SiteLinksView' => __DIR__ . '/src/SiteLinksView.php',
