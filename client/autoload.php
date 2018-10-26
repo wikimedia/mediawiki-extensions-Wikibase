@@ -124,6 +124,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\Usage\\UsageTrackingLanguageFallbackLabelDescriptionLookup' => __DIR__ . '/includes/Usage/UsageTrackingLanguageFallbackLabelDescriptionLookup.php',
 	'Wikibase\\Client\\Usage\\UsageTrackingSnakFormatter' => __DIR__ . '/includes/Usage/UsageTrackingSnakFormatter.php',
 	'Wikibase\\Client\\WikibaseClient' => __DIR__ . '/includes/WikibaseClient.php',
+	'Wikibase\\Client\\PageSplitTester' => __DIR__ . '/includes/PageSplitTester.php',
 	'Wikibase\\PopulateEntityUsage' => __DIR__ . '/maintenance/populateEntityUsage.php',
 	'Wikibase\\PopulateInterwiki' => __DIR__ . '/maintenance/populateInterwiki.php',
 	'Wikibase\\Test\\MockClientStore' => __DIR__ . '/tests/phpunit/MockClientStore.php',
