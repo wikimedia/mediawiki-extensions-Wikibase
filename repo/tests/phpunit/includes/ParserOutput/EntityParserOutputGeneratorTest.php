@@ -42,6 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
 use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\ViewContent;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -297,7 +298,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityView = $this->getMockBuilder( EntityDocumentView::class )
 			->setMethods( [
 				'getTitleHtml',
-				'getHtml',
+				'getContent'
 			] )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
@@ -306,9 +307,14 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->method( 'getTitleHtml' )
 			->will( $this->returnValue( '<TITLE>' ) );
 
+		$viewContent = new ViewContent(
+			'<HTML>',
+			[]
+		);
+
 		$entityView->expects( $this->any() )
-			->method( 'getHtml' )
-			->will( $this->returnValue( '<HTML>' ) );
+			->method( 'getContent' )
+			->will( $this->returnValue( $viewContent ) );
 
 		return $entityView;
 	}
@@ -467,11 +473,13 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				EntityInfo $entityInfo
 			) use ( $repo ) {
 				$viewFactory = $repo->getViewFactory();
+				$termsView = $this->createMock( PlaceholderEmittingEntityTermsView::class );
+				$termsView->method( 'getPlaceholders' )->with( $entity )->willReturn( [] );
 				return $viewFactory->newItemView(
 					$language,
 					$fallbackChain,
 					$entityInfo,
-					$this->createMock( PlaceholderEmittingEntityTermsView::class )
+					$termsView
 				);
 			},
 		] );

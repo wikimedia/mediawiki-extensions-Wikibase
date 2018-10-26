@@ -44,17 +44,10 @@ abstract class EntityView implements EntityDocumentView {
 		$this->templateFactory = $templateFactory;
 	}
 
-	/**
-	 * Builds and returns the HTML representing a whole WikibaseEntity.
-	 *
-	 * @param EntityDocument $entity the entity to render
-	 *
-	 * @return string HTML
-	 */
-	public function getHtml( EntityDocument $entity ) {
+	protected function renderEntityView( EntityDocument $entity ) {
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
-		$html = $this->templateFactory->render(
+		return $this->templateFactory->render(
 			'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
@@ -63,8 +56,6 @@ abstract class EntityView implements EntityDocumentView {
 			$this->getMainHtml( $entity ),
 			$this->getSideHtml( $entity )
 		);
-
-		return $html;
 	}
 
 	/**
