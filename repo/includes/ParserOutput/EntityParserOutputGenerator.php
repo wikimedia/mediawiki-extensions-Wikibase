@@ -13,9 +13,9 @@ use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\ViewPlaceHolderEmitter;
 
 /**
  * Creates the parser output for an entity.
@@ -223,8 +223,9 @@ class EntityParserOutputGenerator {
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
 
-		if ( $entityView instanceof ViewPlaceHolderEmitter ) {
-			$entityView->preparePlaceHolders( $parserOutput, $entity, $this->languageCode );
+		$extensionData = $entityView->getPlaceholderInformation( $entity );
+		foreach ( $extensionData as $key => $value ) {
+			$parserOutput->setExtensionData( $key, $value );
 		}
 	}
 

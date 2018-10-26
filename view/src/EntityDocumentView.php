@@ -2,7 +2,9 @@
 
 namespace Wikibase\View;
 
+use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\RepoHooks;
 
 /**
  * Interface for creating views for all different kinds of Wikibase\DataModel\Entity\EntityDocument.
@@ -29,5 +31,16 @@ interface EntityDocumentView {
 	 * @return string HTML
 	 */
 	public function getTitleHtml( EntityDocument $entity );
+
+	/**
+	 * Information about placeholder to store in the (cached) ParserOutput
+	 * object for later use in the page output
+	 * @see ParserOutput::setExtensionData()
+	 * @see RepoHooks::onOutputPageParserOutput()
+	 *
+	 * @param EntityDocument $entity
+	 * @return array
+	 */
+	public function getPlaceholderInformation( EntityDocument $entity );
 
 }

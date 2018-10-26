@@ -2,6 +2,7 @@
 
 namespace Wikibase\View;
 
+use Language;
 use ParserOutput;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -21,7 +22,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
  */
-class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
+class PropertyView extends EntityView {
 
 	/**
 	 * @var StatementSectionsView
@@ -173,12 +174,8 @@ class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
 		return '';
 	}
 
-	public function preparePlaceHolders(
-		ParserOutput $parserOutput,
-		EntityDocument $entity,
-		$languageCode
-	) {
-		$this->entityTermsView->preparePlaceHolders( $parserOutput, $entity, $languageCode );
+	public function getPlaceholderInformation( EntityDocument $entity ) {
+		return $this->entityTermsView->getPlaceholderMapping( $entity, $this->languageCode );
 	}
 
 }
