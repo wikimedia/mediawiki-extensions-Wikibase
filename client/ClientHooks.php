@@ -26,6 +26,7 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\MoreLikeWikibase;
+use Wikibase\Client\PageSplitTester;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
@@ -42,6 +43,7 @@ use WikiPage;
  * @license GPL-2.0-or-later
  */
 final class ClientHooks {
+	private static $PAGE_SCHEMA_SPLIT_TEST_TREATMENT = 'treatment';
 
 	/**
 	 * @see NamespaceChecker::isWikibaseEnabled
@@ -392,7 +394,8 @@ final class ClientHooks {
 			!$entityId ||
 			!$title ||
 			!in_array( $title->getNamespace(), $enabledNamespaces ) ||
-			!$title->exists()
+			!$title->exists() ||
+			!self::isSchemaTreatmentActiveForPageId( $client, $title->getArticleID() )
 		) {
 			return true;
 		}
@@ -409,7 +412,7 @@ final class ClientHooks {
 	}
 
 	/**
-	 * @param WikibaseClient $prefixId
+	 * @param WikibaseClient $client
 	 * @param string|null $prefixId
 	 *
 	 * @return EntityId|null
@@ -424,6 +427,24 @@ final class ClientHooks {
 		} catch ( EntityIdParsingException $ex ) {
 			return null;
 		}
+	}
+
+	/**
+	 * @param WikibaseClient $client
+	 * @param int $pageId
+	 *
+	 * @return bool True if page schema A/B test is active, page is sampled, and page is in the
+	 *              treatment bucket.
+	 */
+	private static function isSchemaTreatmentActiveForPageId( WikibaseClient $client, $pageId ) {
+		$samplingRatio = $client->getSettings()->getSetting( 'pageSchemaSplitTestSamplingRatio' );
+		$buckets = $client->getSettings()->getSetting( 'pageSchemaSplitTestBuckets' );
+		$tester = new PageSplitTester( $samplingRatio, $buckets );
+		$pageRandomLookup = $client->getStore()->getPageRandomLookup();
+		$pageRandom = $pageRandomLookup->getPageRandom( $pageId );
+		return $pageRandom !== null
+			&& $tester->isSampled( $pageRandom )
+			&& $tester->getBucket( $pageRandom ) === self::$PAGE_SCHEMA_SPLIT_TEST_TREATMENT;
 	}
 
 }
