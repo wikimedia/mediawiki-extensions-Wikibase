@@ -2,7 +2,6 @@
 
 namespace Wikibase\View;
 
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
@@ -10,8 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 interface ViewPlaceHolderEmitter {
 
-	public function preparePlaceHolders(
-		ParserOutput $parserOutput,
+	public function getPlaceholderMapping(
 		EntityDocument $entity,
 		$languageCode
 	);

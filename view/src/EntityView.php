@@ -67,6 +67,10 @@ abstract class EntityView implements EntityDocumentView {
 		return $html;
 	}
 
+	public function getPlaceholderInformation( EntityDocument $entity ) {
+		return [];
+	}
+
 	/**
 	 * Returns the html used for the title of the page.
 	 * @see ParserOutput::setDisplayTitle

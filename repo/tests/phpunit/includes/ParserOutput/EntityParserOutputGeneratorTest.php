@@ -298,6 +298,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->setMethods( [
 				'getTitleHtml',
 				'getHtml',
+				'getPlaceholderInformation'
 			] )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
@@ -309,6 +310,10 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityView->expects( $this->any() )
 			->method( 'getHtml' )
 			->will( $this->returnValue( '<HTML>' ) );
+
+		$entityView->expects( $this->any() )
+			->method( 'getPlaceholderInformation' )
+			->will( $this->returnValue( [] ) );
 
 		return $entityView;
 	}
@@ -467,11 +472,13 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				EntityInfo $entityInfo
 			) use ( $repo ) {
 				$viewFactory = $repo->getViewFactory();
+				$termsView = $this->createMock( PlaceholderEmittingEntityTermsView::class );
+				$termsView->method( 'getPlaceholderMapping' )->with( $entity )->willReturn( [] );
 				return $viewFactory->newItemView(
 					$language,
 					$fallbackChain,
 					$entityInfo,
-					$this->createMock( PlaceholderEmittingEntityTermsView::class )
+					$termsView
 				);
 			},
 		] );

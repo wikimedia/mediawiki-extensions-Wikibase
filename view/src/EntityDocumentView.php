@@ -22,12 +22,23 @@ interface EntityDocumentView {
 
 	/**
 	 * Returns the html used for the title of the page.
-	 * @see ParserOutput::setDisplayTitle
+	 * @see \ParserOutput::setDisplayTitle()
 	 *
 	 * @param EntityDocument $entity
 	 *
 	 * @return string HTML
 	 */
 	public function getTitleHtml( EntityDocument $entity );
+
+	/**
+	 * Information about placeholders in the HTML to store in the
+	 * (cached) ParserOutput object for later use in the page output
+	 * @see \ParserOutput::setExtensionData()
+	 * @see \Wikibase\RepoHooks::onOutputPageParserOutput()
+	 *
+	 * @param EntityDocument $entity
+	 * @return array
+	 */
+	public function getPlaceholderInformation( EntityDocument $entity );
 
 }
