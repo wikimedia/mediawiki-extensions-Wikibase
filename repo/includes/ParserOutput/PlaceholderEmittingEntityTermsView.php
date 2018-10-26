@@ -2,14 +2,10 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EditSectionGenerator;
@@ -130,25 +126,21 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		return $termsListItems;
 	}
 
-	public function preparePlaceHolders(
-		ParserOutput $parserOutput,
+	public function getPlaceholders(
 		EntityDocument $entity,
 		$languageCode
 	) {
-		$parserOutput->setExtensionData(
-			'wikibase-view-chunks',
-			$this->textInjector->getMarkers()
-		);
-
-		$parserOutput->setExtensionData(
-			'wikibase-terms-list-items',
-			$this->getTermsListItems(
-				$languageCode,
-				$entity instanceof LabelsProvider ? $entity->getLabels() : new TermList(),
-				$entity instanceof DescriptionsProvider ? $entity->getDescriptions() : new TermList(),
-				$entity instanceof AliasesProvider ? $entity->getAliasGroups() : null
-			)
-		);
+		return [
+			'wikibase-view-chunks' =>
+				$this->textInjector->getMarkers(),
+			'wikibase-terms-list-items' =>
+				$this->getTermsListItems(
+					$languageCode,
+					$entity->getLabels(),
+					$entity->getDescriptions(),
+					$entity->getAliasGroups()
+				)
+		];
 	}
 
 }

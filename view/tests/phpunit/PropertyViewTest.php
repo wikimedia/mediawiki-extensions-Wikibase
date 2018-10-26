@@ -21,9 +21,9 @@ use Wikibase\View\Template\TemplateFactory;
  * @covers \Wikibase\View\EntityView
  * @covers \Wikibase\View\PropertyView
  *
- * @uses Wikibase\View\Template\Template
- * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
+ * @uses \Wikibase\View\Template\Template
+ * @uses \Wikibase\View\Template\TemplateFactory
+ * @uses \Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -76,18 +76,7 @@ class PropertyViewTest extends EntityViewTestCase {
 	}
 
 	public function provideTestGetHtml() {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$propertyView = new PropertyView(
-			$templateFactory,
-			$this->createMock( CacheableEntityTermsView::class ),
-			$this->getMock( LanguageDirectionalityLookup::class ),
-			$this->getMockBuilder( StatementSectionsView::class )
-				->disableOriginalConstructor()
-				->getMock(),
-			$this->getDataTypeFactory(),
-			'en',
-			$this->getMock( LocalizedTextProvider::class )
-		);
+		$propertyView = $this->newPropertyView();
 
 		return [
 			[
@@ -96,6 +85,34 @@ class PropertyViewTest extends EntityViewTestCase {
 				'/wb-property/'
 			]
 		];
+	}
+
+	public function testTermsViewPlaceholdersArePropagated() {
+		$placeholders = [ 'a' => 'b' ];
+		$itemView = $this->newPropertyView( $placeholders );
+
+		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ) );
+
+		$this->assertSame( $placeholders, $view->getPlaceholders() );
+	}
+
+	private function newPropertyView( $placeholders = [] ) {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
+		$termsView = $this->getMock( CacheableEntityTermsView::class );
+		$termsView->method( 'getPlaceholders' )->willReturn( $placeholders );
+
+		return new PropertyView(
+			$templateFactory,
+			$termsView,
+			$this->getMock( LanguageDirectionalityLookup::class ),
+			$this->getMockBuilder( StatementSectionsView::class )
+				->disableOriginalConstructor()
+				->getMock(),
+			$this->getDataTypeFactory(),
+			'en',
+			$this->getMock( LocalizedTextProvider::class )
+		);
 	}
 
 	private function getDataTypeFactory() {
