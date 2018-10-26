@@ -137,6 +137,11 @@ class DirectSqlStore implements ClientStore {
 	private $propertyInfoLookup = null;
 
 	/**
+	 * @var PageRandomLookup|null
+	 */
+	private $pageRandomLookup = null;
+
+	/**
 	 * @var SiteLinkLookup|null
 	 */
 	private $siteLinkLookup = null;
@@ -471,6 +476,21 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function rebuild() {
 		$this->clear();
+	}
+
+	/**
+	 * @see ClientStore::getPageRandomLookup
+	 *
+	 * @return PageRandomLookup
+	 */
+	public function getPageRandomLookup() {
+		if ( $this->pageRandomLookup === null ) {
+			$this->pageRandomLookup = new PageRandomLookup(
+				MediaWikiServices::getInstance()->getDBLoadBalancer()
+			);
+		}
+
+		return $this->pageRandomLookup;
 	}
 
 	/**
