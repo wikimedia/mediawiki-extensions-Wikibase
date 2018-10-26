@@ -137,14 +137,14 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 			];
 		}
 
-		$success = $dbw->insert(
+		$dbw->insert(
 			$this->table,
 			$insert,
 			__METHOD__,
 			[ 'IGNORE' ]
 		);
 
-		return $success && $dbw->affectedRows();
+		return $dbw->affectedRows() ? true : false;
 	}
 
 	/**
