@@ -21,6 +21,7 @@ use Http;
 use JobQueueGroup;
 use Language;
 use LogicException;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
@@ -557,7 +558,8 @@ final class WikibaseClient {
 				$this->getWikibaseServices(),
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
-				$this->getContentLanguage()->getCode()
+				$this->getContentLanguage()->getCode(),
+				LoggerFactory::getInstance( 'PageRandomLookup' )
 			);
 		}
 
