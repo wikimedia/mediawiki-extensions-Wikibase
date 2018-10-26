@@ -474,6 +474,21 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
+	 * @see ClientStore::getPageRandomLookup
+	 *
+	 * @return PageRandomLookup
+	 */
+	public function getPageRandomLookup() {
+		if ( $this->pageRandomLookup === null ) {
+			$this->pageRandomLookup = new PageRandomLookup(
+				MediaWikiServices::getInstance()->getDBLoadBalancer()
+			);
+		}
+
+		return $this->pageRandomLookup;
+	}
+
+	/**
 	 * @see ClientStore::getPropertyInfoLookup
 	 *
 	 * @return PropertyInfoLookup
