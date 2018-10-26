@@ -140,7 +140,7 @@ class EntityViewPlaceholderExpander {
 	 *
 	 * @return string
 	 */
-	protected function expandPlaceholder( $name ) {
+	private function expandPlaceholder( $name ) {
 		switch ( $name ) {
 			case 'termbox':
 				return $this->renderTermBox();
@@ -177,7 +177,7 @@ class EntityViewPlaceholderExpander {
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function renderTermBox() {
+	private function renderTermBox() {
 		$termsListView = new TermsListView(
 			$this->templateFactory,
 			$this->languageNameLookup,

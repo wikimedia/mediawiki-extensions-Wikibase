@@ -15,10 +15,10 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * @covers \Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander
  *
- * @uses Wikibase\View\TermsListView
- * @uses Wikibase\View\Template\Template
- * @uses Wikibase\View\Template\TemplateFactory
- * @uses Wikibase\View\Template\TemplateRegistry
+ * @uses \Wikibase\View\TermsListView
+ * @uses \Wikibase\View\Template\Template
+ * @uses \Wikibase\View\Template\TemplateFactory
+ * @uses \Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  *
@@ -84,19 +84,19 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		return $user;
 	}
 
-	public function testGetHtmlForPlaceholder() {
+	public function testGetHtmlForPlaceholderTermbox_resultIsHtmlString() {
 		$expander = $this->newExpander( $this->newUser(), $this->newItem() );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox' );
 		$this->assertInternalType( 'string', $html );
 	}
 
-	public function testRenderTermBox() {
+	public function testGetHtmlForPlaceholderTermbox_resultContainsLabelsAndDescriptionsInAllLanguages() {
 		$expander = $this->newExpander( $this->newUser(), $this->newItem() );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
-		$html = $expander->renderTermBox();
+		$html = $expander->getHtmlForPlaceholder( 'termbox' );
 
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
 		$this->assertContains( 'Moskow', $html );
