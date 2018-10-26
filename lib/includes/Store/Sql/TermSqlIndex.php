@@ -903,9 +903,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.wb_terms.delete.TermSqlIndex_clear'
 		);
-		$ok = $dbw->delete( $this->tableName, '*', __METHOD__ );
+		$dbw->delete( $this->tableName, '*', __METHOD__ );
 		$this->releaseConnection( $dbw );
-		return $ok;
+		return true;
 	}
 
 	/**
