@@ -16,13 +16,13 @@ interface EntityDocumentView {
 	 *
 	 * @param EntityDocument $entity the entity to render
 	 *
-	 * @return string HTML
+	 * @return ViewContent
 	 */
-	public function getHtml( EntityDocument $entity );
+	public function getContent( EntityDocument $entity ): ViewContent;
 
 	/**
 	 * Returns the html used for the title of the page.
-	 * @see ParserOutput::setDisplayTitle
+	 * @see \ParserOutput::setDisplayTitle()
 	 *
 	 * @param EntityDocument $entity
 	 *
