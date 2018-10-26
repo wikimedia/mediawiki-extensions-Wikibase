@@ -81,6 +81,11 @@ interface ClientStore {
 	public function getDescriptionLookup();
 
 	/**
+	 * @return PageRandomLookup
+	 */
+	public function getPageRandomLookup();
+
+	/**
 	 * @return PropertyInfoLookup
 	 */
 	public function getPropertyInfoLookup();
