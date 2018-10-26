@@ -14,15 +14,17 @@ interface EntityDocumentView {
 	/**
 	 * Builds and returns the HTML representing a whole WikibaseEntity.
 	 *
+	 * TODO the name should probably change to correctly reflect the capabilities
+	 *
 	 * @param EntityDocument $entity the entity to render
 	 *
-	 * @return string HTML
+	 * @return PlaceholderEnabledView
 	 */
-	public function getHtml( EntityDocument $entity );
+	public function getHtml( EntityDocument $entity ): PlaceholderEnabledView;
 
 	/**
 	 * Returns the html used for the title of the page.
-	 * @see ParserOutput::setDisplayTitle
+	 * @see \ParserOutput::setDisplayTitle()
 	 *
 	 * @param EntityDocument $entity
 	 *
