@@ -185,6 +185,15 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
+	 * @see ClientStore::getPageRandomLookup
+	 *
+	 * @return PageRandomLookup|null
+	 */
+	public function getPageRandomLookup() {
+		return null;
+	}
+
+	/**
 	 * @see ClientStore::getPropertyInfoLookup
 	 *
 	 * @return MockPropertyInfoLookup
