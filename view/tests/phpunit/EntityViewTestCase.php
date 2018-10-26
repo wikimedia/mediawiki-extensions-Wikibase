@@ -59,11 +59,15 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 		$regexp
 	) {
 		$output = $view->getHtml( $entity );
-		$this->assertRegexp( $regexp, $output );
+
+		$this->assertSame( [], $output->getPlaceholders() );
+
+		$html = $output->getHtml();
+		$this->assertRegexp( $regexp, $html );
 
 		$entityId = $entity->getId()->getSerialization();
-		$this->assertRegExp( '/id="wb-[a-z]+-' . $entityId . '"/', $output );
-		$this->assertContains( '<div id="toc"></div>', $output );
+		$this->assertRegExp( '/id="wb-[a-z]+-' . $entityId . '"/', $html );
+		$this->assertContains( '<div id="toc"></div>', $html );
 	}
 
 	abstract public function provideTestGetHtml();
