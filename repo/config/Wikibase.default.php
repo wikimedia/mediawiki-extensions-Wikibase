@@ -78,6 +78,8 @@ return [
 		'html',
 	],
 
+	'enableEntitySearchUI' => true,
+
 	'dataRightsUrl' => function() {
 		return $GLOBALS['wgRightsUrl'];
 	},

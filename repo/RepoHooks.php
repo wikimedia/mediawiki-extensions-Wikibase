@@ -67,7 +67,10 @@ final class RepoHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$out->addModules( 'wikibase.ui.entitysearch' );
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
+			$out->addModules( 'wikibase.ui.entitysearch' );
+		}
 	}
 
 	/**
