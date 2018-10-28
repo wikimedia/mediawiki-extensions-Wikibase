@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e5ab090_1c8d44c7",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-28T16:18:35Z",
+      "side": 1,
+      "message": "type the object (WikibaseClient $client)",
+      "range": {
+        "startLine": 438,
+        "startChar": 59,
+        "endLine": 438,
+        "endChar": 66
+      },
+      "revId": "d2e2d61ea88e4da193e01fd31042b31310ca2f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d8afc16_3ffe57bc",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-28T16:18:35Z",
+      "side": 1,
+      "message": "please use constant for this.",
+      "range": {
+        "startLine": 444,
+        "startChar": 109,
+        "endLine": 444,
+        "endChar": 118
+      },
+      "revId": "d2e2d61ea88e4da193e01fd31042b31310ca2f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c442cc85_a31bf49a",
+        "filename": "client/includes/PageSplitTester.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-28T16:18:35Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 19
+      },
+      "revId": "d2e2d61ea88e4da193e01fd31042b31310ca2f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd875fd8_f9b127a7",
+        "filename": "client/includes/PageSplitTester.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-28T16:18:35Z",
+      "side": 1,
+      "message": "you can use Wikimedia\\Assert\\Assert class.\nhttps://github.com/wikimedia/Assert",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 51
+      },
+      "revId": "d2e2d61ea88e4da193e01fd31042b31310ca2f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b36b260_abf7821e",
+        "filename": "client/includes/PageSplitTester.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-28T16:18:35Z",
+      "side": 1,
+      "message": "can we throw an exception if `$this-\u003ebuckets` is empty? maybe this can simplify the code.",
+      "range": {
+        "startLine": 94,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 47
+      },
+      "revId": "d2e2d61ea88e4da193e01fd31042b31310ca2f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a023117_9d9127c1",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-28T16:18:35Z",
+      "side": 1,
+      "message": "do we have any other way to access this property?",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 28,
+        "endChar": 30
+      },
+      "revId": "d2e2d61ea88e4da193e01fd31042b31310ca2f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
