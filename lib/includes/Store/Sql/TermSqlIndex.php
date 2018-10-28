@@ -263,11 +263,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'wikibase.repo.wb_terms.insert.TermSqlIndex_insertTerm'
 		);
 
-		return $dbw->insert(
+		$dbw->insert(
 			$this->tableName,
 			$fields,
 			__METHOD__
 		);
+
+		return true;
 	}
 
 	/**
