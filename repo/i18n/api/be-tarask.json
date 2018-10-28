@@ -175,5 +175,6 @@
 	"apihelp-query+wbsearch-summary": "Шукае элемэнты з дапамогай метак і псэўданімаў.",
 	"apihelp-query+wbsearch-extended-description": "Гэта можа быць выкарыстана як генэратар для іншых запытаў.\nВяртае адпаведны тэрмін, які павінен быць паказаны.",
 	"apihelp-query+wbsearch-param-search": "Шукаць гэты тэкст.",
-	"apihelp-query+wbsearch-param-language": "Шукаць гэтай мовай."
+	"apihelp-query+wbsearch-param-language": "Шукаць гэтай мовай.",
+	"apihelp-query+wbsearch-param-strictlanguage": "Ці адключаць запасную мову"
 }
