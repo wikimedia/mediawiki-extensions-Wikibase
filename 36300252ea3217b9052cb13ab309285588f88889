@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c1e597db_90a966fc",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-29T21:55:57Z",
+      "side": 1,
+      "message": "Great catch, thank you! This decision was based on the approach used in PagePropsEntityIdLookup. Fixed to use interface.",
+      "parentUuid": "48e13db0_1323fbc0",
+      "range": {
+        "startLine": 20,
+        "startChar": 30,
+        "endLine": 20,
+        "endChar": 42
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad13b69e_df77176f",
         "filename": "client/tests/phpunit/includes/PageSplitTesterTest.php",
         "patchSetId": 20
@@ -36,6 +60,24 @@
       "writtenOn": "2018-10-29T20:17:39Z",
       "side": 1,
       "message": "This is probabilistic and will false positive with a very low probability. Increase the iterations or increase the tolerance if this occurs.",
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "553447b0_30877742",
+        "filename": "client/tests/phpunit/includes/PageSplitTesterTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-29T21:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad13b69e_df77176f",
       "revId": "36300252ea3217b9052cb13ab309285588f88889",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
