@@ -92,7 +92,7 @@
 	"apihelp-wbgetentities-example-8": "Obter as entidades com o identificador <samp>Q42</samp>, mostrando todos os nomes alternativos em inglês",
 	"apihelp-wbgetentities-example-9": "Obter as entidades com os identificadores <samp>Q1</samp> e <samp>Q42</samp>, mostrando todas as descrições em inglês, alemão e francês",
 	"apihelp-wbgetentities-example-10": "Obter o objeto para a página \"<var>Berlim</var>\" no sítio \"<var>enwiki</var>\", com atributos de língua em inglês",
-	"apihelp-wbgetentities-example-11": "Obter o objeto para a página \"<var>Berlin</var>\" no sítio \"<var>enwiki</var>\", após normalizar o título de \"<var>berlin</var>\"",
+	"apihelp-wbgetentities-example-11": "Obter o objeto para a página \"<var>Berlin</var>\" no sítio \"<var>enwiki</var>\", depois de normalizar o título de \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Obter as hiperligações intersites do objeto <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Obter as entidades com o identificador <samp>Q42</samp>, mostrando apenas as hiperligações intersítios do sítio \"<var>enwiki</var>\"",
 	"apihelp-wblinktitles-description": "Associa duas páginas em duas wikis diferentes com um objeto Wikibase.",
