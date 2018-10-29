@@ -15,7 +15,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-interface EntityDocument extends Comparable, ClearableEntity {
+interface EntityDocument extends Comparable {
 
 	/**
 	 * Returns a type identifier for the entity, e.g. "item" or "property".
