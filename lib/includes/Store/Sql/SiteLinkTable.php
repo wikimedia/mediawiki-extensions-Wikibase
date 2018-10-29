@@ -162,7 +162,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 			$siteIds[] = $siteLink->getSiteId();
 		}
 
-		$success = $dbw->delete(
+		$dbw->delete(
 			$this->table,
 			[
 				'ips_item_id' => $item->getId()->getNumericId(),
@@ -171,7 +171,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 			__METHOD__
 		);
 
-		return $success;
+		return true;
 	}
 
 	/**
@@ -189,7 +189,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$dbw = $this->getConnection( DB_MASTER );
 
-		$ok = $dbw->delete(
+		$dbw->delete(
 			$this->table,
 			[ 'ips_item_id' => $itemId->getNumericId() ],
 			__METHOD__
@@ -197,7 +197,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$this->releaseConnection( $dbw );
 
-		return $ok;
+		return true;
 	}
 
 	/**
@@ -257,10 +257,10 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$dbw = $this->getConnection( DB_MASTER );
 
-		$ok = $dbw->delete( $this->table, '*', __METHOD__ );
+		$dbw->delete( $this->table, '*', __METHOD__ );
 
 		$this->releaseConnection( $dbw );
-		return $ok;
+		return true;
 	}
 
 	/**
