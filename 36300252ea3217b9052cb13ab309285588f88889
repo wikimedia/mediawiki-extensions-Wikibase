@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48e13db0_1323fbc0",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-29T18:37:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure if passing the LoadBalancer is correct. please verify that. Also, if we stick to passing LoadBalancer, please depend on interface, not concrete class (ILoadBalancer)",
+      "range": {
+        "startLine": 20,
+        "startChar": 30,
+        "endLine": 20,
+        "endChar": 42
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c83cb785_de16292c",
+        "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-29T18:37:59Z",
+      "side": 1,
+      "message": "we shouldn\u0027t hardcode items that are generated automaticaly as those may conflict.",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebf548f1_af0e4388",
+        "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-29T18:37:59Z",
+      "side": 1,
+      "message": "instead of raw `$db-\u003einsert()` we should use `$this-\u003einsertPage()`, but thats most probably not possible as we would need to override `wfRandom()`, please check with core team.\n\nYou shouldn\u0027t call $db directly as this can leave elements in the database. We use transactions and on tearDown we rollback, but I\u0027m not sure if using db directly is ok.\n\nThe only thing that comes to my mind is to use $this-\u003einsertPage(), and then do the $db-\u003eupdate(\u0027page\u0027, \u0027page_random\u0027 \u003d\u003e $pageRandom);` -\u003e but again, please check with core/platform team.\n\n\nThis comment is not a blocker as I\u0027m not sure if it\u0027s possible to use the `$this-\u003einsertPage()` in this scenario.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f817b79_9fdc7a47",
+        "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3945
+      },
+      "writtenOn": "2018-10-29T18:37:59Z",
+      "side": 1,
+      "message": "you should use `addDBData()` that is run before every test and properly cleaned up. Most probably instead of using provider you\u0027l need to create all pages at once, and then test those.\n\nIf you really need DB, please use `$this-\u003edb`",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 46
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
