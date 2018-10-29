@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10571738_1da50c7f",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-10-29T08:01:14Z",
+      "side": 1,
+      "message": "sorry for not being clear. I was thinking class constant.\nwill change it once Jenkins is fine with the current state of the patch.\nSeems to work locally (at least things didn\u0027t explode),so good to merge from my side. I assume the A/B testing logic is covered by you guys.",
+      "revId": "534e7eeac1b369e55e55de13f1cc071fb015c1bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3279c0e1_de778eed",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-10-29T08:01:14Z",
+      "side": 1,
+      "message": "I like this simplication!",
+      "revId": "534e7eeac1b369e55e55de13f1cc071fb015c1bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
