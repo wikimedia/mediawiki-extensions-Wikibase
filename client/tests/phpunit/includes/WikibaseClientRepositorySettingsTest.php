@@ -138,7 +138,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 
 		$this->setMwGlobals( 'wgWBClientSettings', $clientSettings );
 		$this->setMwGlobals( 'wgHooks', [
-			'WikibaseEntityNamespaces' => [
+			'WikibaseClientEntityNamespaces' => [
 				function ( &$namespaces ) {
 					$namespaces['cool'] = 666;
 				},
@@ -166,7 +166,7 @@ class WikibaseClientRepositorySettingsTest extends \MediaWikiTestCase {
 
 		$this->setMwGlobals( 'wgWBClientSettings', $clientSettings );
 		$this->setMwGlobals( 'wgHooks', [
-			'WikibaseEntityNamespaces' => [
+			'WikibaseClientEntityNamespaces' => [
 				function ( &$namespaces ) {
 					$namespaces['cool'] = 666;
 				},
