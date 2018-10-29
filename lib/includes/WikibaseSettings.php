@@ -30,8 +30,8 @@ class WikibaseSettings {
 	}
 
 	/**
-	 * @note This runs the WikibaseEntityNamespaces hook to allow extensions to modify
-	 *       the 'entityNamespaces' setting.
+	 * @note This runs the WikibaseRepoEntityNamespaces hook to allow extensions to modify
+	 *       the repo 'entityNamespaces' setting.
 	 *
 	 * @throws MWException
 	 *
@@ -43,7 +43,11 @@ class WikibaseSettings {
 		}
 
 		$settings = self::getSettings( 'wgWBRepoSettings' );
-		$settings->setSetting( 'entityNamespaces', self::buildEntityNamespaceConfigurations( $settings ) );
+
+		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
+		Hooks::run( 'WikibaseRepoEntityNamespaces', [ &$entityNamespaces ] );
+
+		$settings->setSetting( 'entityNamespaces', $entityNamespaces );
 		return $settings;
 	}
 
@@ -67,6 +71,9 @@ class WikibaseSettings {
 		$settings = self::getSettings( 'wgWBClientSettings' );
 
 		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
+
+		Hooks::run( 'WikibaseClientEntityNamespaces', [ &$entityNamespaces ] );
+
 		self::applyEntityNamespacesToSettings( $settings, $entityNamespaces );
 
 		return $settings;
@@ -110,7 +117,6 @@ class WikibaseSettings {
 			? $settings->getSetting( 'entityNamespaces' )
 			: self::getEntityNamespacesFromRepositorySettings( $settings->getSetting( 'repositories' ) );
 
-		Hooks::run( 'WikibaseEntityNamespaces', [ &$namespaces ] );
 		return $namespaces;
 	}
 
