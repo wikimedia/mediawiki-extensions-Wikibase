@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f08cc12_d9f15583",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T17:22:20Z",
+      "side": 1,
+      "message": "This changed surprised me. Inside the `ViewFactory` it is used to build a `LanguageFallbackLabelDescriptionLookup` based on this and the `$fallbackChain` to use in the `StatementSectionsView` - there does not seem to be anything wrong with this but fail to see the connection to this patch.",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "229a87f9_60b58e19",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T17:22:20Z",
+      "side": 1,
+      "message": "I started I3a61b5261a0076f116b07299b55508f706625076 as, as I see it, the html and the placeholders are really closely coupled and html containing any is unusable without them - as such they should be bundled in a convenient working package. That said it does not really aid understandability or readability that various template variables effectively get interpolated at different points in time.\nDo you see this a worthwhile follow-up?",
+      "range": {
+        "startLine": 226,
+        "startChar": 2,
+        "endLine": 226,
+        "endChar": 56
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b110af5b_8b33b002",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T17:22:20Z",
+      "side": 1,
+      "message": "Contents stem from `EntityParserOutputGenerator::addHtmlToParserOutput()`",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50ba02ce_edde8bb1",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T17:22:20Z",
+      "side": 1,
+      "message": "I can only see one use of the temporary variable, so we may as well omit it.",
+      "range": {
+        "startLine": 260,
+        "startChar": 2,
+        "endLine": 260,
+        "endChar": 23
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1d4bc0c_258cc5de",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T17:22:20Z",
+      "side": 1,
+      "message": "I\u0027d probably go with `newToolbarEditSectionGenerator()` instead",
+      "range": {
+        "startLine": 352,
+        "startChar": 18,
+        "endLine": 352,
+        "endChar": 41
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
