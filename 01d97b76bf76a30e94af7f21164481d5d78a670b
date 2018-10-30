@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb2c06b3_e9d24bef",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T18:19:45Z",
+      "side": 1,
+      "message": "Probably obvious, but we are missing the equivalent for properties.",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 55
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87d8f7bc_da14dc42",
+        "filename": "repo/includes/ParserOutput/TermboxFlag.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T18:19:45Z",
+      "side": 1,
+      "message": "Taking note that we should add to the README how to configure termbox correctly\n\n```LocalSettings.php\n$wgWBRepoSettings[\u0027termboxEnabled\u0027] \u003d true;\n$wgWBRepoSettings[\u0027ssrServerUrl\u0027] \u003d \u0027http://node-ssr:3030/termbox\u0027;",
+      "range": {
+        "startLine": 19,
+        "startChar": 23,
+        "endLine": 19,
+        "endChar": 37
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a394025_751559d2",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T18:19:45Z",
+      "side": 1,
+      "message": "\"nah\" is the answer I took from our previous discussions. If there are doubts we should re-iterated, of course.",
+      "range": {
+        "startLine": 37,
+        "startChar": 73,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e66cd55_e1a12859",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T18:19:45Z",
+      "side": 1,
+      "message": "This is in all likelihood going to be a GET request so the \"data\" will be part of the query here.",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 49
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d575d15c_5040c277",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-30T18:19:45Z",
+      "side": 1,
+      "message": "Things for options that come to mind:\n* timeout\n* a user agent (maybe with the wikimedia/wikibase version requesting)\n* SSL (custom private cert)",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
