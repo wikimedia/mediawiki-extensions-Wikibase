@@ -177,5 +177,6 @@
 	"apihelp-query+wbsearch-param-search": "Шукаць гэты тэкст.",
 	"apihelp-query+wbsearch-param-language": "Шукаць гэтай мовай.",
 	"apihelp-query+wbsearch-param-strictlanguage": "Ці адключаць запасную мову",
-	"apihelp-query+wbsearch-param-type": "Шукаць гэты тып элемэнту."
+	"apihelp-query+wbsearch-param-type": "Шукаць гэты тып элемэнту.",
+	"apihelp-query+wbsearch-param-limit": "Максымальная колькасьць вынікаў"
 }
