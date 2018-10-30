@@ -107,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7d09a731_61fc9a96",
+        "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-30T00:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c83cb785_de16292c",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebf548f1_af0e4388",
         "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
         "patchSetId": 20
@@ -130,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "825a8a60_1fbf2b51",
+        "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-30T00:03:39Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ve updated this test to mock out the database.",
+      "parentUuid": "ebf548f1_af0e4388",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f817b79_9fdc7a47",
         "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
         "patchSetId": 20
@@ -141,6 +189,30 @@
       "writtenOn": "2018-10-29T18:37:59Z",
       "side": 1,
       "message": "you should use `addDBData()` that is run before every test and properly cleaned up. Most probably instead of using provider you\u0027l need to create all pages at once, and then test those.\n\nIf you really need DB, please use `$this-\u003edb`",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 46
+      },
+      "revId": "36300252ea3217b9052cb13ab309285588f88889",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef99c25a_09b24d99",
+        "filename": "client/tests/phpunit/includes/Store/Sql/PageRandomLookupTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-10-30T00:03:39Z",
+      "side": 1,
+      "message": "Thank you. Per previous comment, I\u0027ve updated the test to use a mock database. This is no longer applicable.",
+      "parentUuid": "9f817b79_9fdc7a47",
       "range": {
         "startLine": 50,
         "startChar": 2,
