@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "3396a849_00844339",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-10-30T13:25:24Z",
+      "side": 1,
+      "message": "The relevant principle: https://en.wikipedia.org/wiki/Liskov_substitution_principle\n\nOsmItemId seems to be violating that",
+      "parentUuid": "0b85f989_59d4965d",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 35
+      },
+      "revId": "1bbc86fc81a87c3eaacc625225dcdc9431bece3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "361863fb_ae03e530",
         "filename": "lib/includes/Store/CachingSiteLinkLookup.php",
         "patchSetId": 6
