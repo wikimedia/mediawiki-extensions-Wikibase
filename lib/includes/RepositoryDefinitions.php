@@ -210,6 +210,9 @@ class RepositoryDefinitions {
 		$this->entitySlots = [];
 
 		foreach ( $repositoryDefinitions as $repositoryName => $definition ) {
+			// Even if a repo has no namespaces defined, still correctly set an array T208308
+			$this->entityTypesPerRepository[$repositoryName] = [];
+
 			foreach ( $definition['entity-namespaces'] as $type => $namespaceAndSlot ) {
 				if ( isset( $this->entityTypeToRepositoryMapping[$type] ) ) {
 					throw new InvalidArgumentException(
