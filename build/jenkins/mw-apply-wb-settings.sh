@@ -28,42 +28,36 @@ fi
 function apply_client_settings {
   echo "Applying client settings"
 
-  cat <<-PHP >> LocalSettings.php
+  cat <<-PHP > LocalSettings.php
+<?php
+// mw-apply-wb-settings.php:
 \$wgEnableWikibaseRepo = false;
 \$wgEnableWikibaseClient = true;
 // \$wgWikimediaJenkinsCI is usually set by Jenkins/Quibble
 \$wgWikimediaJenkinsCI = true;
 \$wmgUseWikibaseRepo = false;
 \$wmgUseWikibaseClient = true;
-require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";
+?>$(cat LocalSettings.php)
 PHP
 }
 
 function apply_repo_settings {
   echo "Applying repo settings"
 
-  cat <<-PHP >> LocalSettings.php
+  cat <<-PHP > LocalSettings.php
+<?php
+// mw-apply-wb-settings.php:
 \$wgEnableWikibaseRepo = true;
 \$wgEnableWikibaseClient = true;
 // \$wgWikimediaJenkinsCI is usually set by Jenkins/Quibble
 \$wgWikimediaJenkinsCI = true;
 \$wmgUseWikibaseRepo = true;
 \$wmgUseWikibaseClient = true;
-require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";
+?>$(cat LocalSettings.php)
 PHP
 }
 
 cd $WORKSPACE/src
-
-if [ "$(tail -n1 LocalSettings.php)" = "?>" ]
-then
-  PHPTAGS=true
-fi
-if [ -v PHPTAGS ]
-then
-  echo '<?php' >> LocalSettings.php
-fi
-
 if [ "${REPO:-}" = "repo" ]
 then
   apply_repo_settings
@@ -72,9 +66,4 @@ then
   apply_client_settings
 else
   usage
-fi
-
-if [ -v PHPTAGS ]
-then
-  echo '?>' >> LocalSettings.php
 fi
