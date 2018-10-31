@@ -114,6 +114,30 @@
       "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58442a10_8c9e4369",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-10-31T10:50:02Z",
+      "side": 1,
+      "message": "https://phabricator.wikimedia.org/T208381",
+      "parentUuid": "d575d15c_5040c277",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
