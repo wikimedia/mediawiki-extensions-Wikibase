@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d718a041_95a9a724",
+        "filename": "lib/tests/phpunit/RepositoryDefinitionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-10-31T23:43:26Z",
+      "side": 1,
+      "message": "\"Bad value for parameter $repositoryDefinitions: each repository definition must contain the following keys: database, base-uri, entity-namespaces, prefix-mapping\"",
+      "revId": "bc5b686fba715b7b8ed20bb8568f37c768260c2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
