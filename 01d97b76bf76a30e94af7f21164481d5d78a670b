@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "6cad340d_2ea42b56",
+        "filename": "repo/includes/ParserOutput/TermboxFlag.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T13:58:02Z",
+      "side": 1,
+      "message": "They are documented in extensions/Wikibase/docs/options.wiki but I agree that this is hard to find.",
+      "parentUuid": "87d8f7bc_da14dc42",
+      "range": {
+        "startLine": 19,
+        "startChar": 23,
+        "endLine": 19,
+        "endChar": 37
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a394025_751559d2",
         "filename": "repo/includes/ParserOutput/TermboxView.php",
         "patchSetId": 8
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "ba372d6a_da2b3c8d",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T13:58:02Z",
+      "side": 1,
+      "message": "I have some doubts left, but this comment isn\u0027t helping either, so I removed it :P",
+      "parentUuid": "4a394025_751559d2",
+      "range": {
+        "startLine": 37,
+        "startChar": 73,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e66cd55_e1a12859",
         "filename": "repo/includes/ParserOutput/TermboxView.php",
         "patchSetId": 8
@@ -91,6 +139,30 @@
       "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dc4aff3_f7e16674",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T13:58:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6e66cd55_e1a12859",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 49
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -129,6 +201,30 @@
       "side": 1,
       "message": "https://phabricator.wikimedia.org/T208381",
       "parentUuid": "d575d15c_5040c277",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "01d97b76bf76a30e94af7f21164481d5d78a670b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5839ec9_44234790",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T13:58:02Z",
+      "side": 1,
+      "message": "Thanks for filing the task!",
+      "parentUuid": "58442a10_8c9e4369",
       "range": {
         "startLine": 48,
         "startChar": 3,
