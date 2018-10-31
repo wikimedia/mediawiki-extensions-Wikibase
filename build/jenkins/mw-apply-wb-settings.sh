@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -xeu
 
 function usage {
   echo "usage: $0 -r <repo|client> -e <true|false> -b <true|false>"
@@ -15,9 +15,14 @@ do
    esac
 done
 
-if [ $BUILD = true ]; then
+if [[ "${BUILD:-}" == true ]]; then
   echo "-b true is not supported by this script anymore."
   exit 1
+fi
+
+if [ ! -v WORKSPACE ]; then
+	echo "\$WORKSPACE environment variable must be set."
+	exit 1
 fi
 
 function apply_client_settings {
@@ -52,10 +57,10 @@ then
   echo '<?php' >> LocalSettings.php
 fi
 
-if [ "$REPO" = "repo" ]
+if [ "${REPO:-}" = "repo" ]
 then
   apply_repo_settings
-elif [ "$REPO" = "client" ]
+elif [ "${REPO:-}" = "client" ]
 then
   apply_client_settings
 else
