@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a5c9928_00f5792d",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T16:10:21Z",
+      "side": 1,
+      "message": "We could call the thing that contains the html and optional placeholders \"view content\". $entityView-\u003egetContent(), $viewContent-\u003egetHtml() and $viewContent-\u003egetPlaceholders() sounds ok-ish to me. Then we could differentiate between PlaceholderEnabledViewContents and PlainHtmlViewContent or something like that.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 43
+      },
+      "revId": "f1f9108446e09e1762d63d475de0bf3389a5e94e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
