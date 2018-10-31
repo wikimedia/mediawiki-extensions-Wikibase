@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "bbc9318c_865d0e6a",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T11:51:45Z",
+      "side": 1,
+      "message": "Trying to write down what I just said: In my opinion the LabelDescriptionLookup that we traded for the EntityInfo object was conceptually not the real dependency that we want to have available here. It\u0027s there so that terms of items and properties that are used within statements on the entity can be looked up without having to query the database. EntityInfo claims to be a \"wrapper for a simple array structure representing pre-fetched data about entities\".\n\nHere is a hopefully not too far-fetched scenario: EntityInfo currently only serves as a performance optimization for LabelDescriptionLookups, but in the future we might run into the same issues with data about Lexemes. As soon as EntityInfo holds anything but labels, descriptions and aliases, what we want to have injected here is not a LabelDescriptionLookup.\n\nI felt that since I\u0027m already moving a bunch of code out of EntityParserOutputGenerator, I might as well make the affected \u0027view-factory-callback\u0027 interface as clean as possible, also keeping in mind that any future change in this file introduces new cyclic dependencies. That said, YAGNI might apply.",
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "229a87f9_60b58e19",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 7
@@ -36,6 +53,30 @@
       "writtenOn": "2018-10-30T17:22:20Z",
       "side": 1,
       "message": "I started I3a61b5261a0076f116b07299b55508f706625076 as, as I see it, the html and the placeholders are really closely coupled and html containing any is unusable without them - as such they should be bundled in a convenient working package. That said it does not really aid understandability or readability that various template variables effectively get interpolated at different points in time.\nDo you see this a worthwhile follow-up?",
+      "range": {
+        "startLine": 226,
+        "startChar": 2,
+        "endLine": 226,
+        "endChar": 56
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b1e9d9f_af8bc56b",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T11:51:45Z",
+      "side": 1,
+      "message": "I do think it\u0027s a worthwhile follow-up!",
+      "parentUuid": "229a87f9_60b58e19",
       "range": {
         "startLine": 226,
         "startChar": 2,
@@ -94,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "5ad82ee2_f521ee21",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T11:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50ba02ce_edde8bb1",
+      "range": {
+        "startLine": 260,
+        "startChar": 2,
+        "endLine": 260,
+        "endChar": 23
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1d4bc0c_258cc5de",
         "filename": "view/src/ViewFactory.php",
         "patchSetId": 7
@@ -114,6 +179,30 @@
       "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbab7100_a37b7abb",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-10-31T11:51:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d4bc0c_258cc5de",
+      "range": {
+        "startLine": 352,
+        "startChar": 18,
+        "endLine": 352,
+        "endChar": 41
+      },
+      "revId": "e8c69bd135981ac0fd4335f5775b69deb52c7c06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
