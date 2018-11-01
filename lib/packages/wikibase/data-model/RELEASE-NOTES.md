@@ -1,9 +1,10 @@
 # Wikibase DataModel release notes
 
-## Version 9.0.0 (dev)
+## Version 9.0.0 (2018-11-01)
 
 * Breaking change: `EntityDocument` no longer extends `ClearableEntity` (8.0.0 revert)
 * The `TermList` constructor now takes any `iterable` instead of just `array`
+* The `SiteLinkList` constructor now takes any `iterable` instead of just `array`
 * Added `TermList::addAll`
 
 ## Version 8.0.0 (2018-08-03)
