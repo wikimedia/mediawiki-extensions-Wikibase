@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6b5cdca_1b25bc26",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-01T16:48:26Z",
+      "side": 1,
+      "message": "`CacheableEntityTermsView` rather.",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 46
+      },
+      "revId": "ce5b8c096dec43d52eae6c3ad6907b8037130b63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c499cadd_85ac8480",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-01T16:48:26Z",
+      "side": 1,
+      "message": "I would prefer `$useTermbox`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 3,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "ce5b8c096dec43d52eae6c3ad6907b8037130b63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2546565_2df9f4f5",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-01T16:48:26Z",
+      "side": 1,
+      "message": "This looks peculiar in comparison to the parameters passed to the traditional view. Is the `$fallbackChain` guaranteed to always contain the `$language` as first item? It is compelling but who knows...",
+      "range": {
+        "startLine": 40,
+        "startChar": 45,
+        "endLine": 40,
+        "endChar": 59
+      },
+      "revId": "ce5b8c096dec43d52eae6c3ad6907b8037130b63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "282576fb_d506abf4",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-01T16:48:26Z",
+      "side": 1,
+      "message": "I struggled with the name but I now think it is as good a keyword for the project as we can come up with without decorating the term with technology terminology.",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 24
+      },
+      "revId": "ce5b8c096dec43d52eae6c3ad6907b8037130b63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
