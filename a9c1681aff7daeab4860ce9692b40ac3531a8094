@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "973d7c6a_3384b0b2",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-01T10:16:09Z",
+      "side": 0,
+      "message": "The UpdateTermIndexes.sql should be removed in this patch",
+      "range": {
+        "startLine": 339,
+        "startChar": 32,
+        "endLine": 339,
+        "endChar": 49
+      },
+      "revId": "a9c1681aff7daeab4860ce9692b40ac3531a8094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
