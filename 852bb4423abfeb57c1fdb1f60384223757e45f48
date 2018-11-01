@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f4e2bf31_cc256454",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-01T16:08:30Z",
+      "side": 1,
+      "message": "I feel like this should probably be optional, and based on a config var as well as the fact that the extension is loaded.\nThis will allow us to deploy this separately to the train.",
+      "range": {
+        "startLine": 452,
+        "startChar": 2,
+        "endLine": 452,
+        "endChar": 71
+      },
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d6ce3cf_3855fd27",
         "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
         "patchSetId": 5
