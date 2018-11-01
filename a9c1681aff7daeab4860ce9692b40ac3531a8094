@@ -34,6 +34,24 @@
       "revId": "a9c1681aff7daeab4860ce9692b40ac3531a8094",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb1ac63_0e585cf1",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-01T10:12:04Z",
+      "side": 1,
+      "message": "I don\u0027t think this causes problems. Looking in DatabaseUpdater it seems that this isn\u0027t used to add an entry to the update log. The addIndex is run each time if the index does not exist.",
+      "parentUuid": "3e246e5b_fc857f0d",
+      "revId": "a9c1681aff7daeab4860ce9692b40ac3531a8094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
