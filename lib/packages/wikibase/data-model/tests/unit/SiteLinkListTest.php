@@ -337,4 +337,13 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( 3, $list->count() );
 	}
 
+	public function testCanConstructWithIterable() {
+		$links = [ new SiteLink( 'enwiki', 'foo' ) ];
+
+		$this->assertEquals(
+			new SiteLinkList( $links ),
+			new SiteLinkList( new SiteLinkList( $links ) )
+		);
+	}
+
 }
