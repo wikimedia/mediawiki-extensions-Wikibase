@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6cab291_e5157063",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-01T09:02:36Z",
+      "side": 1,
+      "message": "This is the respective change in termbox itself in case someone happens to run jsduck against the project in isolation.",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "8223636b9f9c89d8be95a04d943960301a1d800c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
