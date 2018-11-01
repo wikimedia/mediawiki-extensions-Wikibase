@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "d131f067_69f83295",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-01T17:20:52Z",
+      "side": 1,
+      "message": "Just realized that the language is in fact part of `EntityTermsView::getHtml()`\u0027s signature - sorry.",
+      "parentUuid": "272b3ade_0d9e1aea",
+      "range": {
+        "startLine": 40,
+        "startChar": 45,
+        "endLine": 40,
+        "endChar": 59
+      },
+      "revId": "ce5b8c096dec43d52eae6c3ad6907b8037130b63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "282576fb_d506abf4",
         "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
         "patchSetId": 10
