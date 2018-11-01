@@ -2,7 +2,6 @@
 DROP INDEX /*i*/wb_terms_entity_type ON /*_*/wb_terms;
 DROP INDEX /*i*/wb_terms_language ON /*_*/wb_terms;
 DROP INDEX /*i*/wb_terms_type ON /*_*/wb_terms;
-DROP INDEX /*i*/wb_terms_text ON /*_*/wb_terms;
 DROP INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms;
 
 -- Indexes and comments below adopted from the suggestions Sean Pringle made
@@ -14,11 +13,12 @@ DROP INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms;
 -- Some wb_terms queries use term_entity_id=N which is good selectivity.
 -- CREATE INDEX /*i*/term_entity ON /*_*/wb_terms (term_entity_id);
 
+-- term_text is removed down the update chain, so don't bother adding it in the first place.
 -- When any wb_terms query includes a search on term_text greater than
 -- four or five leading characters a simple index on term_text and
 -- language is often better than the proposed composite indexes. Note
 -- that MariaDB still uses the entire key length even with LIKE '...%' on term_text.
-CREATE INDEX /*i*/term_text ON /*_*/wb_terms (term_text, term_language);
+-- CREATE INDEX /*i*/term_text ON /*_*/wb_terms (term_text, term_language);
 
 -- Same idea as above for terms_search_key (for normalized/insensitive matches).
 CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_language);
