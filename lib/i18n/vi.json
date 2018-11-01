@@ -4,7 +4,8 @@
 			"Cheers!",
 			"Minh Nguyen",
 			"පසිඳු කාවින්ද",
-			"Trần Nguyễn Minh Huy"
+			"Trần Nguyễn Minh Huy",
+			"Vinhtantran"
 		]
 	},
 	"wikibase-lib-desc": "Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase",
@@ -135,7 +136,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Đã thêm liên kết có phù hiệu đến [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "Đã thay đổi liên kết đến [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "Đã thay phù hiệu cho [$2]",
-	"wikibase-entity-summary-wbsetsitelink-set-both": "Đã thay đổi liên kết và dấu hình cho [$2]",
+	"wikibase-entity-summary-wbsetsitelink-set-both": "Đã thay đổi liên kết và huy hiệu của [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Đã loại bỏ liên kết khỏi [$2]",
 	"wikibase-entity-summary-wblinktitles-create": "Đã tạo thực thể này để kết nối các trang",
 	"wikibase-entity-summary-wblinktitles-connect": "Đã thêm liên kết ngôn ngữ để kết nối các trang",
