@@ -66,3 +66,6 @@ CREATE INDEX /*i*/term_search_full ON /*_*/wb_terms (term_language, term_full_en
 
 -- T202265
 CREATE INDEX /*i*/tmp1 ON /*_*/wb_terms (`term_language`, `term_type`, `term_entity_type`, `term_search_key`);
+
+-- T204836
+CREATE INDEX /*i*/wb_terms_entity_id ON /*_*/wb_terms (`term_entity_id`);

@@ -359,6 +359,13 @@ class DatabaseSchemaUpdater {
 			$this->getUpdateScriptPath( 'AddWbTermsTmp1Index', $db->getType() )
 		);
 
+		// T204836
+		$updater->addExtensionIndex(
+			'wb_terms',
+			'wb_terms_entity_id',
+			$this->getUpdateScriptPath( 'AddWbTermsEntityIdIndex', $db->getType() )
+		);
+
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
 	}
