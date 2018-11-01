@@ -16,6 +16,24 @@
       "revId": "a9c1681aff7daeab4860ce9692b40ac3531a8094",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8bf08b7_5e3aa350",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-01T10:11:21Z",
+      "side": 1,
+      "message": "So, addExtensionIndex seems to call DatabaseUpdater::addIndex internally which doesn\u0027t use the update log, instead it checks for the existence of the index.\n\nAs this sql file now only creates 1 index, that is the index that we need to check for existence for.\n\nSo I think this looks good.",
+      "parentUuid": "3e246e5b_fc857f0d",
+      "revId": "a9c1681aff7daeab4860ce9692b40ac3531a8094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
