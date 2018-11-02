@@ -626,6 +626,22 @@ call_user_func( function() {
 			);
 		}
 	];
+	$wgAPIModules['wbformatentities'] = [
+		'class' => \Wikibase\Repo\Api\FormatEntities::class,
+		'factory' => function( ApiMain $apiMain, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+			return new \Wikibase\Repo\Api\FormatEntities(
+				$apiMain,
+				$moduleName,
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
+				$apiHelperFactory->getResultBuilder( $apiMain ),
+				$apiHelperFactory->getErrorReporter( $apiMain ),
+				\MediaWiki\MediaWikiServices::getInstance()->getStatsdDataFactory()
+			);
+		}
+	];
 
 	$wgAPIMetaModules['wbcontentlanguages'] = [
 		'class' => Wikibase\Repo\Api\MetaContentLanguages::class,
