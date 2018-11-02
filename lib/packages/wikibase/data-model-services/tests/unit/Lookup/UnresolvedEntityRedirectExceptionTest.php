@@ -22,7 +22,7 @@ class UnresolvedEntityRedirectExceptionTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame( $entityId, $exception->getEntityId() );
 		$this->assertSame( $redirectTargetId, $exception->getRedirectTargetId() );
-		$this->assertSame( 'Unresolved redirect to Q2', $exception->getMessage() );
+		$this->assertSame( 'Unresolved redirect from Q1 to Q2', $exception->getMessage() );
 		$this->assertSame( 0, $exception->getCode() );
 		$this->assertNull( $exception->getPrevious() );
 	}
