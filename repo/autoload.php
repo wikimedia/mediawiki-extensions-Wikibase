@@ -86,6 +86,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Api\\EntitySavingHelper' => __DIR__ . '/includes/Api/EntitySavingHelper.php',
 	'Wikibase\\Repo\\Api\\EntitySearchHelper' => __DIR__ . '/includes/Api/EntitySearchHelper.php',
 	'Wikibase\\Repo\\Api\\EntityTermSearchHelper' => __DIR__ . '/includes/Api/EntityTermSearchHelper.php',
+	'Wikibase\\Repo\\Api\\FormatEntities' => __DIR__ . '/includes/Api/FormatEntities.php',
 	'Wikibase\\Repo\\Api\\FormatSnakValue' => __DIR__ . '/includes/Api/FormatSnakValue.php',
 	'Wikibase\\Repo\\Api\\GetClaims' => __DIR__ . '/includes/Api/GetClaims.php',
 	'Wikibase\\Repo\\Api\\GetClaimsStatementFilter' => __DIR__ . '/includes/Api/GetClaimsStatementFilter.php',
