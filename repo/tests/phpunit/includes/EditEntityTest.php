@@ -9,6 +9,7 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -182,6 +183,12 @@ class EditEntityTest extends MediaWikiTestCase {
 		$item->setLabel( 'de', 'bar' );
 		$item->setDescription( 'en', 'more testing' );
 		$repo->putEntity( $item, 13, 0, $user );
+
+		$redirect = new EntityRedirect(
+			new ItemId( 'Q302' ),
+			new ItemId( 'Q404' )
+		);
+		$repo->putRedirect( $redirect );
 
 		return $repo;
 	}
@@ -728,6 +735,29 @@ class EditEntityTest extends MediaWikiTestCase {
 		$this->assertTrue( $status->isOK(), "edit failed: " . $status->getWikiText() ); // sanity
 
 		$this->assertEquals( $expected, $repo->isWatching( $user, $item->getId() ), "watched" );
+	}
+
+	public function testAttemptSaveUnresolvedRedirect() {
+		$repo = $this->getMockRepository();
+
+		$user = $this->getUser( 'EditEntityTestUser2' );
+
+		if ( $user->getId() === 0 ) {
+			$user->addToDatabase();
+		}
+
+		$item = new Item( new ItemId( 'Q302' ) );
+		$item->setLabel( "en", "Test" );
+
+		$titleLookup = $this->getEntityTitleLookup();
+		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user );
+		$status = $edit->attemptSave( $item, "testing", EDIT_UPDATE, false );
+
+		$this->assertFalse( $status->isOK() );
+		$this->assertSame(
+			'(wikibase-save-unresolved-redirect: Q302, Q404)',
+			$status->getWikiText( null, null, 'qqx' )
+		);
 	}
 
 	public function testIsNew() {
