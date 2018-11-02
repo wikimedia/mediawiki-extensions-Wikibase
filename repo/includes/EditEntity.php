@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -252,6 +253,7 @@ class EditEntity {
 	/**
 	 * Returns the latest revision of the entity.
 	 *
+	 * @throws RevisionedUnresolvedRedirectException
 	 * @return EntityRevision|null
 	 */
 	public function getLatestRevision() {
@@ -691,7 +693,19 @@ class EditEntity {
 		//      Note that this protection against "late" conflicts is unrelated to the detection
 		//      of edit conflicts during user interaction, which use the base revision supplied
 		//      to the constructor.
-		$this->getLatestRevision();
+		try {
+			$this->getLatestRevision();
+		} catch ( RevisionedUnresolvedRedirectException $exception ) {
+			$this->errorType |= self::PRECONDITION_FAILED;
+			$this->status->fatal(
+				'wikibase-save-unresolved-redirect',
+				$exception->getEntityId()->getSerialization(),
+				$exception->getRedirectTargetId()->getSerialization()
+			);
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			return $this->status;
+		}
+
 		$raceProtectionRevId = $this->getLatestRevisionId();
 
 		if ( $raceProtectionRevId === 0 ) {
