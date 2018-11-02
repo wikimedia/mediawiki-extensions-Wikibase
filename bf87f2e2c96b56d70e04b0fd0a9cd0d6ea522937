@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55d25d38_c84d0f24",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-11-02T08:39:39Z",
+      "side": 1,
+      "message": "This looks a bit like it\u0027s duplicated. Even if ResourceLoader is clever enough to not load stuff twice, it looks confusing.\n\nIn other extensions we split the ResourceLoader module into two and created a separate \"wikibase.termbox.css\" module, for example. The original \"wikibase.termbox\" module would require it, just to be sure, and it would also be loaded via addModuleStyles.\n\nI\u0027m not sure if this is the best approach, though.",
+      "revId": "bf87f2e2c96b56d70e04b0fd0a9cd0d6ea522937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
