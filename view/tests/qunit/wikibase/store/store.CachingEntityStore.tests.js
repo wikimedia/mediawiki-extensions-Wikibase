@@ -8,13 +8,11 @@
 	QUnit.module( 'wikibase.store.CachingEntityStore' );
 
 	QUnit.test( 'Initialize', function ( assert ) {
-		assert.expect( 1 );
 		var entityStore = new wb.store.CachingEntityStore();
 		assert.ok( entityStore.get, 'Entity store has get() method.' );
 	} );
 
 	QUnit.test( 'get() returns a jQuery promise', function ( assert ) {
-		assert.expect( 1 );
 		var store = new wb.store.EntityStore();
 		store.get = function ( entityId ) {
 			return $.Deferred().resolve();
@@ -26,7 +24,6 @@
 	} );
 
 	QUnit.test( 'upstream store is called', function ( assert ) {
-		assert.expect( 2 );
 		var store = new wb.store.EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			return $.Deferred().resolve();

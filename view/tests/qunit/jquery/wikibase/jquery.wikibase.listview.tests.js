@@ -61,8 +61,6 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function ( assert ) {
-		assert.expect( 18 );
-
 		/**
 		 * Runs assertions testing initialization and destruction of a listview widget initialized
 		 * with the values passed.
@@ -122,7 +120,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 4 );
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [
@@ -162,7 +159,6 @@
 	} );
 
 	QUnit.test( 'addItem() and removeItem()', function ( assert ) {
-		assert.expect( 9 );
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [ 'a', 'b', 'c' ],
@@ -212,7 +208,6 @@
 	} );
 
 	QUnit.test( 'enterNewItem()', function ( assert ) {
-		assert.expect( 10 );
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [ 'a', 'b', 'c' ];
@@ -289,7 +284,6 @@
 	} );
 
 	QUnit.test( 'listItemNodeName option', function ( assert ) {
-		assert.expect( 2 );
 		var $node = createListview( [ 'a', 'b', 'c' ], { listItemNodeName: 'SPAN' } ),
 			listview = $node.data( 'listview' );
 
@@ -310,7 +304,6 @@
 	} );
 
 	QUnit.test( 'indexOf()', function ( assert ) {
-		assert.expect( 3 );
 		var $node = createListview( [ 'a', 'b', 'c' ] ),
 			listview = $node.data( 'listview' );
 
@@ -324,7 +317,6 @@
 	} );
 
 	QUnit.test( 'startEditing', function ( assert ) {
-		assert.expect( 2 );
 		var listItemAdapter = wb.tests.getMockListItemAdapter(
 			'test',
 			function () {
@@ -349,7 +341,6 @@
 	} );
 
 	QUnit.test( 'reuse items', function ( assert ) {
-		assert.expect( 1 );
 		var $node = $( document.createElement( 'span' ) );
 		$node.append( document.createElement( 'span' ) ).append( document.createElement( 'span' ) );
 		var listview = $node.listview( {
@@ -384,12 +375,10 @@
 		}
 		getInstances.forEach( function ( getInstance ) {
 			QUnit.test( 'destroy', function ( assert ) {
-				assert.expect( 1 );
 				var instance = getInstance();
 				tryDestroy( instance, assert );
 			} );
 			QUnit.test( 'destroy after startEditing', function ( assert ) {
-				assert.expect( 1 );
 				var instance = getInstance();
 				return instance.startEditing().done( function () {
 					tryDestroy( instance, assert );

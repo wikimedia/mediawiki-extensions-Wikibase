@@ -10,7 +10,6 @@
 	var SUBJECT = wikibase.entityChangers.SiteLinksChanger;
 
 	QUnit.test( 'is a function', function ( assert ) {
-		assert.expect( 1 );
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -19,12 +18,10 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setSiteLink performs correct API call', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().promise();
@@ -42,7 +39,6 @@
 	} );
 
 	QUnit.test( 'setSiteLink correctly handles API response', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -70,7 +66,6 @@
 	} );
 
 	QUnit.test( 'setSiteLink correctly passes badges', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -99,7 +94,6 @@
 	} );
 
 	QUnit.test( 'setSiteLink correctly handles API failures', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
@@ -125,7 +119,6 @@
 	} );
 
 	QUnit.test( 'setSiteLink performs correct API call for remove', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().promise();
@@ -143,7 +136,6 @@
 	} );
 
 	QUnit.test( 'setSiteLink correctly handles API response for remove', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( {

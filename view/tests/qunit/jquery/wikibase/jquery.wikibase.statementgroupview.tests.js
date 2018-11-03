@@ -55,7 +55,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		var $statementgroupview = createStatementgroupview(),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
@@ -88,7 +87,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 6 );
 		var statementGroup1 = new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
 				new wb.datamodel.Statement(
 					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )

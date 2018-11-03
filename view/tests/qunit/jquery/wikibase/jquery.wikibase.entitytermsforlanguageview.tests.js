@@ -46,7 +46,6 @@
 	} ) );
 
 	QUnit.skip( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		assert.throws(
 			function () {
 				createEntitytermsforlanguageview( { value: null } );
@@ -72,7 +71,6 @@
 	} );
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
-		assert.expect( 6 );
 		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 			entitytermsforlanguageview
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
@@ -187,7 +185,6 @@
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {
-		assert.expect( 1 );
 		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 			entitytermsforlanguageview
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
@@ -204,7 +201,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 8 );
 		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 			entitytermsforlanguageview
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' ),

@@ -35,7 +35,6 @@
 	}
 
 	QUnit.skip( 'Create & destroy', function ( assert ) {
-		assert.expect( 4 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -70,7 +69,6 @@
 	} );
 
 	QUnit.skip( 'Deferred button initialization', function ( assert ) {
-		assert.expect( 7 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' ),
 			deferredButtons = [ 'save', 'remove', 'cancel' ];
@@ -106,7 +104,6 @@
 	} );
 
 	QUnit.skip( 'toEditMode(), toNonEditMode()', function ( assert ) {
-		assert.expect( 9 );
 		var $edittoolbar = createEdittoolbar(),
 			edittoolbar = $edittoolbar.data( 'edittoolbar' );
 

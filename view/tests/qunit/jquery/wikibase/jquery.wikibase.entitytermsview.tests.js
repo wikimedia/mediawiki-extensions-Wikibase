@@ -60,7 +60,6 @@
 	} ) );
 
 	QUnit.skip( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		assert.throws(
 			function () {
 				createEntitytermsview( { value: null } );
@@ -85,7 +84,6 @@
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {
-		assert.expect( 1 );
 		var $entitytermsview = createEntitytermsview(),
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
@@ -101,7 +99,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 2 );
 		var $entitytermsview = createEntitytermsview(),
 			entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
