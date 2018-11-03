@@ -17,14 +17,13 @@
 
 			// There is no reason to further test ULS behaviour as ULS is supposed to always return a
 			// sensible directionality string.
-			return;
+		} else {
+			assert.strictEqual(
+				$.util.getDirectionality( 'doesNotExist' ),
+				'auto',
+				'Falling back to "auto"'
+			);
 		}
-
-		assert.strictEqual(
-			$.util.getDirectionality( 'doesNotExist' ),
-			'auto',
-			'Falling back to "auto"'
-		);
 	} );
 
 }( jQuery, QUnit ) );

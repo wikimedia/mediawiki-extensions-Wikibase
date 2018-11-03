@@ -5,7 +5,7 @@
 		sandbox = sinon.sandbox.create();
 
 	QUnit.module( 'wikibase.EntityInitializer', {
-		teardown: function () {
+		afterEach: function () {
 			sandbox.restore();
 		}
 	} );
