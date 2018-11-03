@@ -77,7 +77,7 @@
 			var types = [];
 
 			for ( var key in variations ) {
-				if ( variations.hasOwnProperty( key ) ) {
+				if ( Object.prototype.hasOwnProperty.call( variations, key ) ) {
 					types.push( key );
 				}
 			}

@@ -8,7 +8,7 @@
 			var modules = require( 'wikibase.experts.modules' );
 
 			for ( var propertyType in modules ) {
-				if ( modules.hasOwnProperty( propertyType ) ) {
+				if ( Object.prototype.hasOwnProperty.call( modules, propertyType ) ) {
 					var caughtError = null;
 
 					try {

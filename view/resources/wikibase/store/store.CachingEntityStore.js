@@ -37,7 +37,7 @@
 			 * @see wikibase.store.EntityStore.get
 			 */
 			get: function ( entityId ) {
-				if ( !this._deferreds.hasOwnProperty( entityId ) ) {
+				if ( !Object.prototype.hasOwnProperty.call( this._deferreds, entityId ) ) {
 					this._deferreds[ entityId ] = this._store.get( entityId );
 				}
 				return this._deferreds[ entityId ];

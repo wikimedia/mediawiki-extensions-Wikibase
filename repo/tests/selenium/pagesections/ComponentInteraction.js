@@ -1,6 +1,6 @@
 'use strict';
 
-let ComponentInteraction = Base => class extends Base {
+let ComponentInteraction = ( Base ) => class extends Base {
 
 	static get OOUI_SELECTORS() {
 		return {
@@ -28,7 +28,8 @@ let ComponentInteraction = Base => class extends Base {
 				)
 			);
 		} );
-		element.$( this.constructor.OOUI_SELECTORS.COMBOBOX_DROPDOWN ).click(); // close suggestion overlay
+		// close suggestion overlay
+		element.$( this.constructor.OOUI_SELECTORS.COMBOBOX_DROPDOWN ).click();
 	}
 };
 
