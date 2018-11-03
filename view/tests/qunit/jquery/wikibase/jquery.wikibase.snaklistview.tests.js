@@ -92,7 +92,6 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function ( assert ) {
-		assert.expect( 6 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -138,7 +137,6 @@
 	} );
 
 	QUnit.test( 'Setting and getting value while not in edit mode', function ( assert ) {
-		assert.expect( 5 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -180,7 +178,6 @@
 	} );
 
 	QUnit.test( 'Setting value while in edit mode', function ( assert ) {
-		assert.expect( 8 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -242,7 +239,6 @@
 	} );
 
 	QUnit.test( 'Basic start and stop editing', function ( assert ) {
-		assert.expect( 5 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -297,7 +293,6 @@
 	} );
 
 	QUnit.test( 'Basic start and stop editing of filled snaklistview', function ( assert ) {
-		assert.expect( 5 );
 		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -358,7 +353,6 @@
 	} );
 
 	QUnit.test( 'enterNewItem()', function ( assert ) {
-		assert.expect( 4 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -398,7 +392,6 @@
 	} );
 
 	QUnit.test( 'Stopping edit mode dropping value', function ( assert ) {
-		assert.expect( 6 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -466,7 +459,6 @@
 	} );
 
 	QUnit.test( 'Stopping edit mode retaining value', function ( assert ) {
-		assert.expect( 7 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -538,7 +530,6 @@
 
 	QUnit.test( 'Dis- and enabling', function ( assert ) {
 		var done = assert.async( 3 );
-		assert.expect( 5 );
 		var $node = createSnaklistview( snakLists[ 0 ] ),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -609,7 +600,6 @@
 	} );
 
 	QUnit.test( 'singleProperty option', function ( assert ) {
-		assert.expect( 4 );
 		var $node = createSnaklistview( snakLists[ 0 ], { singleProperty: true } ),
 			snaklistview = $node.data( 'snaklistview' );
 

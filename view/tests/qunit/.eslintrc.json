@@ -13,7 +13,6 @@
 				"functions": false
 			}
 		],
-		"qunit/require-expect": "off",
 		"qunit/resolve-async": "off",
 		"space-unary-ops": "off"
 	}

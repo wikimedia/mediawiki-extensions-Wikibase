@@ -35,7 +35,6 @@
 	}
 
 	QUnit.test( 'is constructable', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( newViewFactory() instanceof ViewFactory );
 	} );
 
@@ -48,7 +47,6 @@
 	}
 
 	QUnit.test( 'getEntityView constructs correct views', function ( assert ) {
-		assert.expect( 2 );
 		var viewFactory = newViewFactory(),
 			fooView = {},
 			$dom = $( '<div/>' ),
@@ -62,7 +60,6 @@
 	} );
 
 	QUnit.test( 'getEntityView throws on incorrect views', function ( assert ) {
-		assert.expect( 1 );
 		var viewFactory = newViewFactory();
 
 		assert.throws(
@@ -74,7 +71,6 @@
 	} );
 
 	QUnit.test( 'getEntityView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var entity = getEntityStub( 'foo' ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' ),
@@ -91,7 +87,6 @@
 	} );
 
 	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var sitelinkSet = new wb.datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
@@ -109,7 +104,6 @@
 	} );
 
 	QUnit.test( 'getSitelinkGroupView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var groupName = 'groupid',
 			siteLinks = new wb.datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
@@ -130,7 +124,6 @@
 	} );
 
 	QUnit.test( 'getSiteLinkListView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var siteLinks = [],
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
@@ -149,7 +142,6 @@
 	} );
 
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var entity = new wb.datamodel.Item( 'Q1' ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
@@ -166,7 +158,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', function ( assert ) {
-		assert.expect( 3 );
 		var entityId = 'Q1',
 			entityIdHtmlFormatter = {},
 			viewFactory = newViewFactory( null, null, null, entityIdHtmlFormatter ),
@@ -202,7 +193,6 @@
 	} );
 
 	QUnit.test( 'getStatementListView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList( [
 				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
@@ -232,7 +222,6 @@
 	} );
 
 	QUnit.test( 'getStatementListView passes null for an empty StatementList', function ( assert ) {
-		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
 			viewFactory = newViewFactory(),
@@ -255,7 +244,6 @@
 	} );
 
 	QUnit.test( 'getStatementListView: given property id, passes id to list adapter', function ( assert ) {
-		assert.expect( 1 );
 		var factory = newViewFactory(),
 			value = new wb.datamodel.StatementList(),
 			expectedPropertyId = 'P123',
@@ -277,7 +265,6 @@
 	} );
 
 	QUnit.test( 'getStatementListView: given no property id, gets id from parent data attribute', function ( assert ) {
-		assert.expect( 1 );
 		var factory = newViewFactory(),
 			value = new wb.datamodel.StatementList(),
 			$parent = $( '<div class="wikibase-statementgroupview" />' ),
@@ -303,7 +290,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function ( assert ) {
-		assert.expect( 2 );
 		var entityId = 'Q1',
 			value = null,
 			entityIdPlainFormatter = {},
@@ -362,7 +348,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', function ( assert ) {
-		assert.expect( 1 );
 		var entityId = 'Q1',
 			propertyId = 'propertyId',
 			value = null,
@@ -391,7 +376,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function ( assert ) {
-		assert.expect( 1 );
 		var propertyId = 'P1',
 			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
 			viewFactory = newViewFactory(),
@@ -419,7 +403,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function ( assert ) {
-		assert.expect( 1 );
 		var viewFactory = newViewFactory(),
 			removeCallback = function () {},
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
@@ -438,7 +421,6 @@
 	} );
 
 	QUnit.test( 'getReferenceView passes correct options to view', function ( assert ) {
-		assert.expect( 1 );
 		var value = null,
 			viewFactory = newViewFactory(),
 			removeCallback = function () {},
@@ -462,7 +444,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function ( assert ) {
-		assert.expect( 1 );
 		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
@@ -480,8 +461,6 @@
 	} );
 
 	QUnit.test( 'getSnakListView passes correct options to view', function ( assert ) {
-		assert.expect( 1 );
-
 		var value = null,
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' ),
@@ -502,7 +481,6 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function ( assert ) {
-		assert.expect( 1 );
 		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
@@ -520,7 +498,6 @@
 	} );
 
 	QUnit.test( 'getSnakView passes correct options to view', function ( assert ) {
-		assert.expect( 2 );
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
@@ -584,7 +561,6 @@
 	} );
 
 	QUnit.test( 'getEntityTermsView passes correct options to views', function ( assert ) {
-		assert.expect( 1 );
 		var fingerprint = new wb.datamodel.Fingerprint(),
 			message = 'message',
 			messageProvider = { getMessage: function () { return message; } },

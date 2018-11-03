@@ -8,7 +8,6 @@
 	QUnit.module( 'jquery.wikibase.entityview' );
 
 	QUnit.test( 'Direct initialization fails', function ( assert ) {
-		assert.expect( 1 );
 		assert.throws(
 			function () {
 				$( '<div/>' ).entityview( $.extend( {

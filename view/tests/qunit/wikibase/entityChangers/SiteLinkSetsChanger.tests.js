@@ -20,7 +20,6 @@
 	};
 
 	QUnit.test( 'is a function', function ( assert ) {
-		assert.expect( 1 );
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -29,12 +28,10 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'save performs correct API call', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( API_RESPONSE ).promise();
@@ -58,7 +55,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API response', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( API_RESPONSE ).promise();
@@ -79,7 +75,6 @@
 	} );
 
 	QUnit.test( 'save correctly passes badges', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -110,7 +105,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API failures', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
@@ -139,7 +133,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API call for removal', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( API_RESPONSE ).promise();
@@ -162,7 +155,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API response for removal', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -192,7 +184,6 @@
 	} );
 
 	QUnit.test( 'save correctly passes badges for removal', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -222,7 +213,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API failures for removal', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			setSitelink: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();

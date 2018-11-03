@@ -11,7 +11,6 @@
 	var entity = new wikibase.datamodel.Item( 'Q1' );
 
 	QUnit.test( 'is a function', function ( assert ) {
-		assert.expect( 1 );
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -20,12 +19,10 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'remove performs correct API call', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			removeClaim: sinon.spy( function () {
 				return $.Deferred().promise();
@@ -47,7 +44,6 @@
 	} );
 
 	QUnit.test( 'remove correctly handles API response', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			removeClaim: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -76,7 +72,6 @@
 	} );
 
 	QUnit.test( 'remove correctly handles API failures', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			removeClaim: sinon.spy( function () {
 				return $.Deferred()
@@ -115,7 +110,6 @@
 	} );
 
 	QUnit.test( 'remove fires correct hook', function ( assert ) {
-		assert.expect( 3 );
 		var deferred = $.Deferred();
 		var api = {
 			removeClaim: sinon.spy( function () {
@@ -150,7 +144,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API call', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function () {
 				return $.Deferred().promise();
@@ -173,7 +166,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API response', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -207,7 +199,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API failures', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			setClaim: sinon.spy( function () {
 				return $.Deferred()
@@ -248,7 +239,6 @@
 	} );
 
 	QUnit.test( 'save fires correct hook', function ( assert ) {
-		assert.expect( 3 );
 		var deferred = $.Deferred();
 		var api = {
 			setClaim: sinon.spy( function () {

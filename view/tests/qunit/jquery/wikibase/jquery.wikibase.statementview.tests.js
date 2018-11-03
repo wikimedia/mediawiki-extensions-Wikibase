@@ -88,7 +88,6 @@
 	};
 
 	QUnit.test( 'Create & destroy without value', function ( assert ) {
-		assert.expect( 2 );
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 
@@ -107,7 +106,6 @@
 	} );
 
 	QUnit.test( 'Create & destroy with value', function ( assert ) {
-		assert.expect( 2 );
 		var $statementview = createStatementview( {
 				value: new wb.datamodel.Statement(
 					new wb.datamodel.Claim(
@@ -136,7 +134,6 @@
 	} );
 
 	QUnit.test( 'value after startEditing with value', function ( assert ) {
-		assert.expect( 1 );
 		var $statementview = createStatementview( {
 				value: new wb.datamodel.Statement(
 					new wb.datamodel.Claim(
@@ -155,7 +152,6 @@
 	} );
 
 	QUnit.test( 'value after startEditing on new statementview', function ( assert ) {
-		assert.expect( 1 );
 		var $statementview = createStatementview( {
 				guidGenerator: {
 					newGuid: function () {
@@ -198,7 +194,6 @@
 	} );
 
 	QUnit.test( 'value with empty reference', function ( assert ) {
-		assert.expect( 1 );
 		var $statementview = createStatementview( {
 				value: new wb.datamodel.Statement(
 					new wb.datamodel.Claim(
@@ -218,7 +213,6 @@
 	} );
 
 	QUnit.test( 'wb-new', function ( assert ) {
-		assert.expect( 2 );
 		var $statementview = createStatementview(),
 			statementview = $statementview.data( 'statementview' );
 

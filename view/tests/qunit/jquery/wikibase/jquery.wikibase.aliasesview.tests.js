@@ -43,7 +43,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		assert.throws(
 			function () {
 				createAliasesview( { value: null } );
@@ -82,7 +81,6 @@
 	} );
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
-		assert.expect( 6 );
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' ),
 			done = assert.async();
@@ -194,7 +192,6 @@
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {
-		assert.expect( 1 );
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
@@ -210,7 +207,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 3 );
 		var $aliasesview = createAliasesview(),
 			aliasesview = $aliasesview.data( 'aliasesview' ),
 			newValue = null;

@@ -40,7 +40,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		assert.throws(
 			function () {
 				createLabelview( { value: null } );
@@ -66,7 +65,6 @@
 	} );
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
-		assert.expect( 5 );
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' );
 
@@ -104,7 +102,6 @@
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {
-		assert.expect( 1 );
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' );
 
@@ -120,7 +117,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 3 );
 		var $labelview = createLabelview(),
 			labelview = $labelview.data( 'labelview' ),
 			newValue = null;
