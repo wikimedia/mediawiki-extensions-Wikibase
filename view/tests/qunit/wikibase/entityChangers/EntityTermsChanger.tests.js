@@ -21,7 +21,6 @@
 	var REVISION_ID = 9;
 
 	QUnit.test( 'is a function', function ( assert ) {
-		assert.expect( 1 );
 		assert.strictEqual(
 			typeof EntityTermsChanger,
 			'function',
@@ -30,12 +29,10 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( new EntityTermsChanger() instanceof EntityTermsChanger );
 	} );
 
 	QUnit.test( 'save performs correct API calls for new label', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
 			setLabel: sinon.spy(
@@ -67,7 +64,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for changed label', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
 			setLabel: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID )
@@ -91,7 +87,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for removed label', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
 			setLabel: sinon.spy( function () {
@@ -124,7 +119,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API response for labels', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setLabel: sinon.spy(
 				functionReturningSuccessfulResponse( 'lastrevid' )
@@ -147,7 +141,6 @@
 
 	QUnit.test( 'save correctly handles API failures for labels', function ( assert ) {
 		var done = assert.async();
-		assert.expect( 4 );
 		var api = {
 			setLabel: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
@@ -175,7 +168,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for new description', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var revisionId = 9;
 		var api = {
@@ -206,7 +198,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for changed description', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 
 		var api = {
@@ -237,7 +228,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for removed description', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
 			setDescription: sinon.spy( function () {
@@ -269,7 +259,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API response for descriptions', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setDescription: sinon.spy(
 				functionReturningSuccessfulResponse( 'lastrevid' )
@@ -293,7 +282,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API failures for descriptions', function ( assert ) {
-		assert.expect( 4 );
 		var api = {
 			setDescription: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();
@@ -322,7 +310,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for new aliases', function ( assert ) {
-		assert.expect( 2 );
 		var revisionId = REVISION_ID;
 		var done = assert.async();
 		var api = {
@@ -347,7 +334,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for changed aliases', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
 			setAliases: sinon.spy(
@@ -378,7 +364,6 @@
 	} );
 
 	QUnit.test( 'save performs correct API calls for removed aliases', function ( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var api = {
 			setAliases: sinon.spy( functionReturningSuccessfulResponse( REVISION_ID ) )
@@ -406,7 +391,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API response for aliases', function ( assert ) {
-		assert.expect( 1 );
 		var done = assert.async();
 		var api = {
 			setAliases: sinon.spy(
@@ -429,7 +413,6 @@
 	} );
 
 	QUnit.test( 'save correctly handles API failures for aliases', function ( assert ) {
-		assert.expect( 4 );
 		var api = {
 			setAliases: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();

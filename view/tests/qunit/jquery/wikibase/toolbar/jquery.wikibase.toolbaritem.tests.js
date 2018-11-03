@@ -32,7 +32,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 2 );
 		var $item = createTestItem(),
 			item = $item.data( 'toolbaritem' );
 

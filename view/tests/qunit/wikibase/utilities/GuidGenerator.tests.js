@@ -8,7 +8,6 @@
 	QUnit.module( 'wikibase.utilities.GuidGenerator' );
 
 	QUnit.test( 'V4GuidGenerator', function ( assert ) {
-		assert.expect( 3 );
 		var generator = new wb.utilities.V4GuidGenerator();
 
 		assert.strictEqual(

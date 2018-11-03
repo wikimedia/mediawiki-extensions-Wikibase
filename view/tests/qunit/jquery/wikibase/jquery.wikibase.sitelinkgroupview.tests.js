@@ -95,7 +95,6 @@
 	} ) );
 
 	QUnit.test( 'Create and destroy', function ( assert ) {
-		assert.expect( 3 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
@@ -126,7 +125,6 @@
 	} );
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
-		assert.expect( 3 );
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
 				value: new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ] )
@@ -245,7 +243,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 2 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			siteLinks = new wb.datamodel.SiteLinkSet( [ siteLink ] ),
 			$sitelinkgroupview = createSitelinkgroupview( {

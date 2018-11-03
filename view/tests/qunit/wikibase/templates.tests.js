@@ -13,8 +13,6 @@
 	QUnit.module( 'wikibase.templates', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'mw.wbTemplate()', function ( assert ) {
-		assert.expect( 74 );
-
 		assert.strictEqual(
 			typeof mw.wbTemplates,
 			'object',

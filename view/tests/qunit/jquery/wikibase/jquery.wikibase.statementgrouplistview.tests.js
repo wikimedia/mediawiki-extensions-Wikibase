@@ -51,7 +51,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -82,7 +81,6 @@
 	} );
 
 	QUnit.test( 'enterNewItem', function ( assert ) {
-		assert.expect( 2 );
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -102,7 +100,6 @@
 	} );
 
 	QUnit.test( 'enterNewItem & save', function ( assert ) {
-		assert.expect( 2 );
 		var $statementgrouplistview = createStatementgrouplistview(),
 			statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 

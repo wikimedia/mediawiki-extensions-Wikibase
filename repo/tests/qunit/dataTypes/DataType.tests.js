@@ -65,8 +65,6 @@
 	];
 
 	QUnit.test( 'invalid constructor arguments', function ( assert ) {
-		assert.expect( invalidArguments.length );
-
 		function instantiateObject( testArguments ) {
 			return function () {
 				var args = testArguments.constructorParams;

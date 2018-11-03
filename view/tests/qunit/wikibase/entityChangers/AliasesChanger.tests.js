@@ -10,7 +10,6 @@
 	var SUBJECT = wikibase.entityChangers.AliasesChanger;
 
 	QUnit.test( 'is a function', function ( assert ) {
-		assert.expect( 1 );
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -19,12 +18,10 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setAliases performs correct API call', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setAliases: sinon.spy( function () {
 				return $.Deferred().promise();
@@ -42,7 +39,6 @@
 	} );
 
 	QUnit.test( 'setAliases correctly handles API response', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setAliases: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -66,7 +62,6 @@
 	} );
 
 	QUnit.test( 'setAliases correctly handles API failure', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			setAliases: sinon.spy( function () {
 				return $.Deferred()
@@ -101,7 +96,6 @@
 	} );
 
 	QUnit.test( 'setAliases correctly removes aliases', function ( assert ) {
-		assert.expect( 3 );
 		var api = {
 			setAliases: sinon.spy( function () {
 				return $.Deferred().resolve( {

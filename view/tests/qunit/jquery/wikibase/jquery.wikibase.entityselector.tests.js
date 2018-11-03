@@ -52,7 +52,6 @@
 	} ) );
 
 	QUnit.test( 'Create', function ( assert ) {
-		assert.expect( 1 );
 		var $entitySelector = newTestEntitySelector();
 
 		assert.ok(
@@ -118,8 +117,6 @@
 	} );
 
 	QUnit.test( 'Don\'t implicitly select entity by matching alias / selectedEntity()', function ( assert ) {
-		assert.expect( 0 );
-
 		var $entitySelector = newTestEntitySelector(),
 			done = assert.async();
 
@@ -136,7 +133,6 @@
 	} );
 
 	QUnit.test( 'Item constructor', function ( assert ) {
-		assert.expect( 2 );
 		var item = new $.wikibase.entityselector.Item( 'label', 'value', entityStubs[ 0 ] );
 
 		assert.ok(
@@ -153,8 +149,6 @@
 	} );
 
 	QUnit.test( 'Cache invalidation of small (not continued) search results', function ( assert ) {
-		assert.expect( 2 );
-
 		var $entitySelector = newTestEntitySelector( {
 				source: function () {
 					return $.Deferred().resolve( [ 'Alpha' ] ).promise();

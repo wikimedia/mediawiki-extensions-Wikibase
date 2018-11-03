@@ -31,7 +31,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 2 );
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' );
 
@@ -50,7 +49,6 @@
 	} );
 
 	QUnit.test( 'Close when clicking "close" anchor', function ( assert ) {
-		assert.expect( 2 );
 		var $closeable = createCloseable( {
 				$content: $( '<span>test</span>' )
 			} ),
@@ -71,7 +69,6 @@
 	} );
 
 	QUnit.test( 'setContent()', function ( assert ) {
-		assert.expect( 7 );
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' ),
 			$content = $( '<span>test</span>' );

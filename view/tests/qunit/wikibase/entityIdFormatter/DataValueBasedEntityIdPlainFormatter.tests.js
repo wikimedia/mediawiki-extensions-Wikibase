@@ -31,7 +31,6 @@
 	}
 
 	QUnit.test( 'format returns formatter return value', function ( assert ) {
-		assert.expect( 1 );
 		var formatter = newFormatterGetter( 'success' )();
 		var done = assert.async();
 		formatter.format( 'Q1' ).done( function ( res ) {
@@ -41,7 +40,6 @@
 	} );
 
 	QUnit.test( 'format falls back to plain id on parse error', function ( assert ) {
-		assert.expect( 1 );
 		var formatter = newFormatterGetter( 'parsefail' )();
 		var done = assert.async();
 		formatter.format( 'Q1' ).done( function ( res ) {
@@ -51,7 +49,6 @@
 	} );
 
 	QUnit.test( 'format falls back to plain id on formatter error', function ( assert ) {
-		assert.expect( 1 );
 		var formatter = newFormatterGetter( 'formatfail' )();
 		var done = assert.async();
 		formatter.format( 'Q1' ).done( function ( res ) {

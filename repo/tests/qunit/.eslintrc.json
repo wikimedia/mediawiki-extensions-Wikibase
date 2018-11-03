@@ -7,7 +7,6 @@
 		"sinon": false
 	},
 	"rules": {
-		"qunit/require-expect": "off",
 		"qunit/resolve-async": "off"
 	}
 }
