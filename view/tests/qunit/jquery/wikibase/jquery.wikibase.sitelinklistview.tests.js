@@ -155,19 +155,6 @@
 		);
 	} );
 
-	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 1 );
-		var $sitelinklistview = createSitelinklistview( {
-				value: [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
-			} ),
-			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
-
-		assert.ok(
-			sitelinklistview.value(),
-			'Verified value() returning value.'
-		);
-	} );
-
 	QUnit.test( 'value() with invalid sitelinkview', function ( assert ) {
 		assert.expect( 1 );
 		var $sitelinklistview = createSitelinklistview( {
