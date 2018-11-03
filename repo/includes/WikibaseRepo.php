@@ -1213,7 +1213,13 @@ class WikibaseRepo {
 	 * @return TermValidatorFactory
 	 */
 	public function getTermValidatorFactory() {
-		$constraints = $this->settings->getSetting( 'multilang-limits' );
+		// Use the old deprecated setting if it exists
+		if ( $this->settings->hasSetting( 'multilang-limits' ) ) {
+			$constraints = $this->settings->getSetting( 'multilang-limits' );
+		} else {
+			$constraints = $this->settings->getSetting( 'string-limits' )['multilang'];
+		}
+
 		$maxLength = $constraints['length'];
 
 		$languages = $this->getTermsLanguages()->getLanguages();
