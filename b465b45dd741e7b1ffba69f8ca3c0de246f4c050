@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c7edc80e_c7160011",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-11-03T18:38:10Z",
+      "side": 1,
+      "message": "We had some discussion about using the page ID for this purpose but chose page_random, which is persisted from wfRandom(), for its uniform distribution independent of wiki size. For a simple 50/50 A/B test, even / odd page IDs can be mapped easily. However, for rollouts and more sophisticated split tests, larger page IDs are needed to make the random number adequately granular. For example, ( $pageId % 1000 ) / 1000 can replace page_random usages but, according to HaeB, only on wikis with 100s of thousands pages.\n\n@addshore, is there a MediaWiki hash function you would recommend for page ID inputs? This seems preferable to page ID arithmetic if a uniformly distributed output can be generated from nonuniform page ID inputs weighted towards 0.\n\n@HaeB, do you have any concerns for substituting page_random for a page ID calculation such as ( $pageId % 1000 ) / 1000?",
+      "parentUuid": "4c2f40ae_7c0bb59f",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "b465b45dd741e7b1ffba69f8ca3c0de246f4c050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "892401b3_c4c25a33",
         "filename": "client/includes/Store/Sql/DirectSqlStore.php",
         "patchSetId": 25
@@ -59,6 +83,30 @@
       "writtenOn": "2018-11-03T11:33:15Z",
       "side": 1,
       "message": "Ideally the logger would be injected, but i\u0027m not super fussed here, as we could remove all of this code next year?\nIf the plan is for it to remain in this repo for longer then please inject the logger :).\n\nAlso note that if you don\u0027t enable this log channel in production you\u0027ll never see these log messages.",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "b465b45dd741e7b1ffba69f8ca3c0de246f4c050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7187c8d_6a111ca8",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-11-03T18:38:10Z",
+      "side": 1,
+      "message": "Thank you for this. I\u0027ve exposed the logger as a parameter. I\u0027ll talk with @jdlrobson about production logging.",
+      "parentUuid": "6ddae719_cab21939",
       "range": {
         "startLine": 37,
         "startChar": 13,
