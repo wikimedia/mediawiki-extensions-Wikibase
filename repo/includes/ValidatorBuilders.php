@@ -275,10 +275,11 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @param int $maxLength
 	 * @return ValueValidator[]
 	 */
-	public function buildStringValidators() {
-		$validators = $this->getCommonStringValidators();
+	public function buildStringValidators( $maxLength = 400 ) {
+		$validators = $this->getCommonStringValidators( $maxLength );
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
@@ -288,14 +289,17 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @param int $maxLength Defaults to 400 characters. This was an arbitrary decision and simply copied the default
+	 * of the CommonStringValidators
+	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildMonolingualTextValidators() {
+	public function buildMonolingualTextValidators( $maxLangth = 400 ) {
 		$validators = [];
 
 		$validators[] = new DataFieldValidator(
 			'text',
-			new CompositeValidator( $this->getCommonStringValidators() ) //Note: each validator is fatal
+			new CompositeValidator( $this->getCommonStringValidators( $maxLangth ) ) //Note: each validator is fatal
 		);
 
 		$validators[] = new DataFieldValidator(
@@ -414,10 +418,11 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @param int $maxLength
 	 * @return ValueValidator[]
 	 */
-	public function buildUrlValidators() {
-		$urlValidator = $this->getUrlValidator( $this->urlSchemes );
+	public function buildUrlValidators( $maxLength = 500 ) {
+		$urlValidator = $this->getUrlValidator( $this->urlSchemes, null, $maxLength );
 
 		$topValidator = new DataValueValidator(
 			$urlValidator

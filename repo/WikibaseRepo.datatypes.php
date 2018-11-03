@@ -184,8 +184,10 @@ return call_user_func( function() {
 		'VT:monolingualtext' => [
 			'expert-module' => 'jquery.valueview.experts.MonolingualText',
 			'validator-factory-callback' => function() {
+				$maxLength = WikibaseRepo::getDefaultInstance()->getSettings()
+					->getSetting( 'string-limits' )['VT:monolingualtext'];
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildMonolingualTextValidators();
+				return $factory->buildMonolingualTextValidators( $maxLength );
 			},
 			'parser-factory-callback' => function( ParserOptions $options ) {
 				return new MonolingualTextParser( $options );
@@ -240,7 +242,9 @@ return call_user_func( function() {
 			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildStringValidators();
+				$maxLength = WikibaseRepo::getDefaultInstance()->getSettings()
+					->getSetting( 'string-limits' )['VT:string'];
+				return $factory->buildStringValidators( $maxLength );
 			},
 			'parser-factory-callback' => function ( ParserOptions $options ) {
 				$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
@@ -294,7 +298,9 @@ return call_user_func( function() {
 		'PT:url' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildUrlValidators();
+				$maxLength = WikibaseRepo::getDefaultInstance()->getSettings()
+					->getSetting( 'string-limits' )['PT:url'];
+				return $factory->buildUrlValidators( $maxLength );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
