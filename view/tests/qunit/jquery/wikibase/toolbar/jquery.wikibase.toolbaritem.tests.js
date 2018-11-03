@@ -43,8 +43,8 @@
 
 		item.destroy();
 
-		assert.ok(
-			!$item.data( 'toolbaritem' ),
+		assert.notOk(
+			$item.data( 'toolbaritem' ),
 			'Destroyed widget.'
 		);
 	} );

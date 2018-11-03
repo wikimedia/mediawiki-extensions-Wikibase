@@ -60,8 +60,9 @@
 
 		propertyview.destroy();
 
-		assert.ok(
-			$propertyview.data( 'propertyview' ) === undefined,
+		assert.strictEqual(
+			$propertyview.data( 'propertyview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 

@@ -64,8 +64,9 @@
 
 			$subject.data( 'TemplatedWidget' ).destroy();
 
-			assert.ok(
-				$subject.data( 'TemplatedWidget' ) === undefined,
+			assert.strictEqual(
+				$subject.data( 'TemplatedWidget' ),
+				undefined,
 				'Destroyed widget.'
 			);
 		}

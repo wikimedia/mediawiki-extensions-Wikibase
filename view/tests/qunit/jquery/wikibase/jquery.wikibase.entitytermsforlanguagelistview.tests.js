@@ -77,15 +77,17 @@
 			entitytermsforlanguagelistview
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-		assert.ok(
-			entitytermsforlanguagelistview !== undefined,
+		assert.notStrictEqual(
+			entitytermsforlanguagelistview,
+			undefined,
 			'Created widget.'
 		);
 
 		entitytermsforlanguagelistview.destroy();
 
-		assert.ok(
-			$entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' ) === undefined,
+		assert.strictEqual(
+			$entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -116,8 +118,9 @@
 			entitytermsforlanguagelistview
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-		assert.ok(
+		assert.strictEqual(
 			entitytermsforlanguagelistview.value().equals( createFingerprint() ),
+			true,
 			'Retrieved value.'
 		);
 
@@ -147,7 +150,7 @@
 			entitytermsforlanguagelistview
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-		assert.ok( entitytermsforlanguagelistview._hasMoreLanguages() );
+		assert.strictEqual( entitytermsforlanguagelistview._hasMoreLanguages(), true );
 
 		$entitytermsforlanguagelistview = createEntitytermsforlanguagelistview( {
 			userLanguages: [ 'de', 'en', 'fa', 'it', 'nl' ]
@@ -155,7 +158,7 @@
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-		assert.ok( !entitytermsforlanguagelistview._hasMoreLanguages() );
+		assert.strictEqual( !entitytermsforlanguagelistview._hasMoreLanguages(), true );
 	} );
 
 }( jQuery, wikibase, QUnit ) );

@@ -11,15 +11,17 @@
 		assert.expect( 2 );
 		var $node = $( '<div/>' ).sticknode();
 
-		assert.ok(
-			$node.data( 'sticknode' ) !== undefined,
+		assert.notStrictEqual(
+			$node.data( 'sticknode' ),
+			undefined,
 			'Attached plugin.'
 		);
 
 		$node.data( 'sticknode' ).destroy();
 
-		assert.ok(
-			$node.data( 'sticknode' ) === undefined,
+		assert.strictEqual(
+			$node.data( 'sticknode' ),
+			undefined,
 			'Detached plugin.'
 		);
 	} );

@@ -61,8 +61,9 @@
 
 		itemview.destroy();
 
-		assert.ok(
-			$itemview.data( 'itemview' ) === undefined,
+		assert.strictEqual(
+			$itemview.data( 'itemview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 

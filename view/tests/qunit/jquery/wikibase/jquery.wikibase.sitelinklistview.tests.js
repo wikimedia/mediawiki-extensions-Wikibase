@@ -104,8 +104,9 @@
 
 		sitelinklistview.destroy();
 
-		assert.ok(
-			$sitelinklistview.data( 'sitelinklistview' ) === undefined,
+		assert.strictEqual(
+			$sitelinklistview.data( 'sitelinklistview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -125,8 +126,9 @@
 
 		sitelinklistview.destroy();
 
-		assert.ok(
-			$sitelinklistview.data( 'sitelinklistview' ) === undefined,
+		assert.strictEqual(
+			$sitelinklistview.data( 'sitelinklistview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -136,8 +138,9 @@
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-		assert.ok(
-			!sitelinklistview.isFull(),
+		assert.strictEqual(
+			sitelinklistview.isFull(),
+			false,
 			'Returning false.'
 		);
 
@@ -149,8 +152,9 @@
 		} );
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-		assert.ok(
+		assert.strictEqual(
 			sitelinklistview.isFull(),
+			true,
 			'Returning true.'
 		);
 	} );

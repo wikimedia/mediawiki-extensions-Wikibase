@@ -75,8 +75,9 @@
 				listview = $node.data( 'listview' ),
 				valuesLength = ( values ) ? values.length : 0;
 
-			assert.ok(
-				listview !== undefined,
+			assert.notStrictEqual(
+				listview,
+				undefined,
 				'Instantiated listview widget.'
 			);
 
@@ -100,8 +101,9 @@
 
 			listview.destroy();
 
-			assert.ok(
-				$node.data( 'listview' ) === undefined,
+			assert.strictEqual(
+				$node.data( 'listview' ),
+				undefined,
 				'Destroyed listview.'
 			);
 

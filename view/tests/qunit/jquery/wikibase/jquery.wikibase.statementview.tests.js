@@ -99,8 +99,9 @@
 
 		statementview.destroy();
 
-		assert.ok(
-			$statementview.data( 'statementview' ) === undefined,
+		assert.strictEqual(
+			$statementview.data( 'statementview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -119,15 +120,17 @@
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
-		assert.ok(
-			statementview !== undefined,
+		assert.notStrictEqual(
+			statementview,
+			undefined,
 			'Created widget.'
 		);
 
 		statementview.destroy();
 
-		assert.ok(
-			$statementview.data( 'statementview' ) === undefined,
+		assert.strictEqual(
+			$statementview.data( 'statementview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -230,7 +233,7 @@
 			new wb.datamodel.ReferenceList( [ ] )
 		) );
 
-		assert.ok( !$statementview.hasClass( 'wb-new' ) );
+		assert.notOk( $statementview.hasClass( 'wb-new' ) );
 	} );
 
 }( jQuery, mediaWiki, wikibase, dataValues, QUnit ) );

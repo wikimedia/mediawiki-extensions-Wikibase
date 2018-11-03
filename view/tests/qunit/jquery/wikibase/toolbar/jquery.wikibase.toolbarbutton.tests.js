@@ -42,8 +42,9 @@
 
 		button.destroy();
 
-		assert.ok(
-			$button.data( 'button' ) === undefined,
+		assert.strictEqual(
+			$button.data( 'button' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -53,8 +54,9 @@
 			button = $button.data( 'toolbarbutton' );
 
 		$button.on( 'toolbarbuttonaction', function ( event ) {
-			assert.ok(
-				$( event.target ).data( 'toolbarbutton' ) === button,
+			assert.strictEqual(
+				$( event.target ).data( 'toolbarbutton' ),
+				button,
 				'Triggered "action" event.'
 			);
 		} );

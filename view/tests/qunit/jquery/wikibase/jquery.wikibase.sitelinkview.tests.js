@@ -86,8 +86,9 @@
 
 		sitelinkview.destroy();
 
-		assert.ok(
-			$sitelinkview.data( 'sitelinkview' ) === undefined,
+		assert.strictEqual(
+			$sitelinkview.data( 'sitelinkview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -107,8 +108,9 @@
 
 		sitelinkview.destroy();
 
-		assert.ok(
-			$sitelinkview.data( 'sitelinkview' ) === undefined,
+		assert.strictEqual(
+			$sitelinkview.data( 'sitelinkview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -176,8 +178,9 @@
 
 		sitelinkview.startEditing();
 
-		assert.ok(
-			$sitelinkview.find( ':wikibase-siteselector' ).length === 0,
+		assert.strictEqual(
+			$sitelinkview.find( ':wikibase-siteselector' ).length,
+			0,
 			'Did not create a site selector widget.'
 		);
 
@@ -225,31 +228,35 @@
 			$sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-		assert.ok(
+		assert.strictEqual(
 			sitelinkview.isEmpty(),
+			true,
 			'isEmpty() returns TRUE when no site link is set and the widget is not in edit mode.'
 		);
 
 		sitelinkview.startEditing();
 
-		assert.ok(
+		assert.strictEqual(
 			sitelinkview.isEmpty(),
+			true,
 			'Verified isEmpty() returning TRUE when no site link is set, the widget is in edit '
 			+ 'and input elements are empty.'
 		);
 
 		$sitelinkview.find( ':wikibase-siteselector' ).val( 'site' );
 
-		assert.ok(
-			!sitelinkview.isEmpty(),
+		assert.strictEqual(
+			sitelinkview.isEmpty(),
+			false,
 			'Widget is not empty when the site selector is filled with input.'
 		);
 
 		$sitelinkview.find( ':wikibase-siteselector' ).val( '' );
 		$sitelinkview.find( ':wikibase-pagesuggester' ).val( 'page' );
 
-		assert.ok(
-			!sitelinkview.isEmpty(),
+		assert.strictEqual(
+			sitelinkview.isEmpty(),
+			false,
 			'Widget is not empty when the page suggester is filled with input.'
 		);
 
@@ -258,16 +265,18 @@
 		} );
 		sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-		assert.ok(
-			!sitelinkview.isEmpty(),
+		assert.strictEqual(
+			sitelinkview.isEmpty(),
+			false,
 			'isEmpty() returns FALSE when a site link is set initially.'
 		);
 
 		sitelinkview.startEditing();
 		$sitelinkview.find( ':wikibase-pagesuggester' ).val( '' );
 
-		assert.ok(
-			!sitelinkview.isEmpty(),
+		assert.strictEqual(
+			sitelinkview.isEmpty(),
+			false,
 			'isEmpty() returns FALSE when a site link is set initially although the page suggester '
 			+ ' input is cleared in edit mode.'
 		);

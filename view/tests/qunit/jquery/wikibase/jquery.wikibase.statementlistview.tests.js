@@ -71,8 +71,9 @@
 
 		statementlistview.destroy();
 
-		assert.ok(
-			$statementlistview.data( 'statementlistview' ) === undefined,
+		assert.strictEqual(
+			$statementlistview.data( 'statementlistview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 
