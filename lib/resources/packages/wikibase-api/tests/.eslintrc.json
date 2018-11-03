@@ -1,15 +1,9 @@
 {
-        "extends": [
-                "wikimedia/qunit",
-                "../.eslintrc.json"
-        ],
-        "globals": {
-                "sinon": false
-        },
-        "rules": {
-		"array-bracket-spacing": "off",
-		"object-curly-spacing": "off",
-		"quotes": "off",
-		"valid-jsdoc": "off"
-        }
+	"extends": [
+		"wikimedia/qunit",
+		"../.eslintrc.json"
+	],
+	"globals": {
+		"sinon": false
+	}
 }
