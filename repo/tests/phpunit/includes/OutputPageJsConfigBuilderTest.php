@@ -97,9 +97,6 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param bool $isBlocked
-	 * @param bool $canEdit
-	 *
 	 * @return OutputPage
 	 */
 	private function getOutputPage() {
