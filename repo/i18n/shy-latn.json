@@ -5,6 +5,11 @@
 		]
 	},
 	"wikibase-edit": "glef",
+	"wikibase-add": "rni",
+	"wikibase-label-empty": "Ulac isem d-ittunefken",
+	"wikibase-description-empty": "Ulac aglam d-ittunefken",
+	"wikibase-sitelinks-special": "Ismal-nniḍen",
+	"wikibase-statementview-rank-normal": "Adar amagnu",
 	"wikibase-itembytitle-submit": "Iruzzi",
 	"wikibase-itemdisambiguation-submit": "Iruzzi"
 }

@@ -9,7 +9,10 @@
 	"wikibase-dataitem": "Aferdis {{WBREPONAME}}",
 	"wikibase-editlinks": "Ẓreg iseɣwan",
 	"wikibase-editlinkstitle": "Ẓreg iseɣwan n gar tutlayin",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ffer",
+	"wikibase-rc-hide-wikidata-show": "Ssken",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Taẓrigt n {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Taẓrigt n {{WBREPONAME}}",
+	"wikibase-otherprojects": "Deg isenfaṛen-nniḍen"
 }
