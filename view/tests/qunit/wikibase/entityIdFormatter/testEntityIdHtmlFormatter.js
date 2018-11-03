@@ -31,7 +31,7 @@
 				var done = assert.async();
 
 				instance.format( 'Q1' ).done( function ( res ) {
-					assert.equal( typeof res, 'string' );
+					assert.strictEqual( typeof res, 'string' );
 					assert.notEqual( res, '' );
 					done();
 				} );
@@ -42,7 +42,7 @@
 				var done = assert.async();
 
 				instance.format( '&' ).done( function ( res ) {
-					assert.equal( res.match( /&($|[^a])/ ), null );
+					assert.strictEqual( res.match( /&($|[^a])/ ), null );
 					done();
 				} );
 			} );
@@ -52,7 +52,7 @@
 				var done = assert.async();
 
 				instance.format( '<script>' ).done( function ( res ) {
-					assert.equal( $( document.createElement( 'span' ) ).html( res ).find( 'script' ).length, 0 );
+					assert.strictEqual( $( document.createElement( 'span' ) ).html( res ).find( 'script' ).length, 0 );
 					done();
 				} );
 			} );

@@ -367,12 +367,12 @@
 			return true;
 		};
 
-		assert.equal( listview.items().length, 2 );
+		assert.strictEqual( listview.items().length, 2 );
 		var e = $.Event( 'keydown' );
 		e.which = e.keyCode = $.ui.keyCode.BACKSPACE;
 		sitelinkview.element.trigger( e );
 
-		assert.equal( listview.items().length, 1 );
+		assert.strictEqual( listview.items().length, 1 );
 	} );
 
 }( jQuery, wikibase, QUnit ) );

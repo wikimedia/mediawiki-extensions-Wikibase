@@ -15,7 +15,7 @@
 	QUnit.test( 'mw.wbTemplate()', function ( assert ) {
 		assert.expect( 74 );
 
-		assert.equal(
+		assert.strictEqual(
 			typeof mw.wbTemplates,
 			'object',
 			'mw.wbTemplates is defined.'
@@ -205,7 +205,7 @@
 					'Triggered error when trying to create invalid HTML filling single param template "' + template + '" with "' + paramMessage + '"'
 				);
 			} else {
-				assert.equal(
+				assert.strictEqual(
 					replaceChevrons( $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html() ),
 					replaceChevrons( expected ),
 					'Verified template: "' + template + '" with "' + paramMessage + '"'
@@ -245,8 +245,8 @@
 			var $div = $( '<div/>' );
 			$div.applyTemplate( templateName );
 
-			assert.equal( $div.attr( 'attr1' ), 'val1' );
-			assert.equal( $div.attr( 'attr2' ), 'val2' );
+			assert.strictEqual( $div.attr( 'attr1' ), 'val1' );
+			assert.strictEqual( $div.attr( 'attr2' ), 'val2' );
 		}
 	);
 
@@ -258,7 +258,7 @@
 			var $div = $( '<div>some contents</div>' );
 			$div.applyTemplate( templateName );
 
-			assert.equal( $div.html(), 'template contents' );
+			assert.strictEqual( $div.html(), 'template contents' );
 		}
 	);
 

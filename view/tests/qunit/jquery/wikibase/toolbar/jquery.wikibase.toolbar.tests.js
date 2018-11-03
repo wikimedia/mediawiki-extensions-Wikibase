@@ -40,7 +40,7 @@
 			'Instantiated widget.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			toolbar.getContainer().get( 0 ),
 			$toolbar.get( 0 ),
 			'Verified toolbar node getting returned by getContainer().'
@@ -72,13 +72,13 @@
 			'Instantiated toolbar with one button.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$container.contents().first().data( 'toolbarbutton' ),
 			$button.data( 'toolbarbutton' ),
 			'Verified toolbar container containing the button.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			toolbar.getContainer().get( 0 ),
 			$container.get( 0 ),
 			'Verified dedicated container node getting returned by getContainer().'

@@ -80,19 +80,19 @@
 				'Instantiated listview widget.'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				listview.items().length,
 				valuesLength,
 				'Listview does not feature any items.'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				listview.value().length,
 				valuesLength,
 				'Listview does not return an array of values.'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				listview.nonEmptyItems().length,
 				valuesLength,
 				'Listview does not feature any items not empty.'
@@ -175,7 +175,7 @@
 				'Added item #' + i + ' to the list.'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				listview.listItemAdapter().liInstance( listview.items().eq( i ) ).value(),
 				values[ i ],
 				'Retrieved listview\'s list item node for list item #' + i + '.'
@@ -291,7 +291,7 @@
 		var $node = createListview( [ 'a', 'b', 'c' ], { listItemNodeName: 'SPAN' } ),
 			listview = $node.data( 'listview' );
 
-		assert.equal(
+		assert.strictEqual(
 			$node.children( 'span' ).length,
 			3,
 			'Initialized listview with non-default list item nodes.'
@@ -300,7 +300,7 @@
 		listview.removeItem( $node.children().first() );
 		listview.enterNewItem();
 
-		assert.equal(
+		assert.strictEqual(
 			$node.children( 'span' ).length,
 			3,
 			'Listview item node type remains the same after manipulations.'
@@ -357,7 +357,7 @@
 			} ),
 			listItemNodeName: 'span'
 		} ).data( 'listview' );
-		assert.equal( listview.value().length, 2 );
+		assert.strictEqual( listview.value().length, 2 );
 	} );
 
 	function destroyTests( getInstances, prototype ) {

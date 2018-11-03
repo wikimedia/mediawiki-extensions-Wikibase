@@ -12,7 +12,7 @@
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
-		assert.equal(
+		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
 			'is a function.'
@@ -109,7 +109,7 @@
 				'remove did not fail with a RepoApiError'
 			);
 
-			assert.equal( error.code, 'errorCode' );
+			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
 	} );
@@ -242,7 +242,7 @@
 				'save failed with a RepoApiError'
 			);
 
-			assert.equal( error.code, 'errorCode' );
+			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
 	} );

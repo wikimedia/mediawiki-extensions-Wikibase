@@ -230,7 +230,7 @@
 
 		snakview.propertyId( 'P1' );
 
-		assert.equal(
+		assert.strictEqual(
 			snakview.propertyId(),
 			'P1',
 			'Set Property ID.'
@@ -246,7 +246,7 @@
 
 		snakview.snak( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
 
-		assert.equal(
+		assert.strictEqual(
 			snakview.propertyId(),
 			'P1',
 			'Property ID is updated when setting a Snak.'
@@ -273,7 +273,7 @@
 
 		snakview.snakType( 'novalue' );
 
-		assert.equal(
+		assert.strictEqual(
 			snakview.snakType(),
 			'novalue',
 			'Set Snak type.'
@@ -289,7 +289,7 @@
 
 		snakview.snak( new wb.datamodel.PropertySomeValueSnak( 'P1' ) );
 
-		assert.equal(
+		assert.strictEqual(
 			snakview.snakType(),
 			'somevalue',
 			'Snak type is updated when setting a Snak.'

@@ -13,7 +13,7 @@
 
 					try {
 						var module = require( modules[ propertyType ] );
-						assert.equal(
+						assert.strictEqual(
 							typeof module,
 							'function',
 							'Property type "' + propertyType + '" exports a constructor'

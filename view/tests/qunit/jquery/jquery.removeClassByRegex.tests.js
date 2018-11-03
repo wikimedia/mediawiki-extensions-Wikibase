@@ -14,7 +14,7 @@
 			'class': classes.join( '   ' ) // should also work with more than one space
 		} );
 
-		assert.equal(
+		assert.strictEqual(
 			subject.attr( 'class' ).split( /\s+/ ).length,
 			classes.length,
 			'number of classes ok'
@@ -25,19 +25,19 @@
 			'jQuery.removeClassByRegex() returns instance of jQuery'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			subject.removeClassByRegex( /abcdefgh/ ).attr( 'class' ),
 			classes.join( ' ' ),
 			'non-matching regex, all classes should still be there'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			subject.clone().removeClassByRegex( /.*/ ).attr( 'class' ),
 			'',
 			'removed all classes (from a clone)'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			subject.clone().removeClassByRegex( /\d+/ ).attr( 'class' ),
 			'bbb dddd e',
 			'removed all classes with numbers in it (from a clone)'
@@ -61,14 +61,14 @@
 		);
 
 		var tmp = subject.clone().removeClassByRegex( /.*/ );
-		assert.equal(
+		assert.strictEqual(
 			$( tmp[ 0 ] ).attr( 'class' ) + $( tmp[ 1 ] ).attr( 'class' ) + $( tmp[ 2 ] ).attr( 'class' ),
 			'',
 			'removed all classes from all three elements (from a clone)'
 		);
 
 		tmp = subject.clone().removeClassByRegex( /^\d+$/ );
-		assert.equal(
+		assert.strictEqual(
 			[
 				$( tmp[ 0 ] ).attr( 'class' ),
 				$( tmp[ 1 ] ).attr( 'class' ),

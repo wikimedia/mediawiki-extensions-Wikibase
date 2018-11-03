@@ -32,7 +32,7 @@
 			var entityStore = new wb.store.CombiningEntityStore( [ store ] );
 
 			var promise = entityStore.get( 'id' );
-			assert.equal( promise.state(), 'pending', 'Promise is pending.' );
+			assert.strictEqual( promise.state(), 'pending', 'Promise is pending.' );
 
 			return promise.done( function ( entity ) {
 				assert.ok( true, 'Resolved promise.' );

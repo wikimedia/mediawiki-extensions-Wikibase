@@ -35,7 +35,7 @@
 		assert.expect( 1 );
 		var rankSelector = createTestRankSelector( { value: wb.datamodel.Statement.RANK.DEPRECATED } );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.value(),
 			wb.datamodel.Statement.RANK.DEPRECATED,
 			'Instantiated rank selector with "deprecated" rank.'
@@ -48,7 +48,7 @@
 
 		rankSelector.value( wb.datamodel.Statement.RANK.DEPRECATED );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.value(),
 			wb.datamodel.Statement.RANK.DEPRECATED,
 			'Set "deprecated" rank.'
@@ -56,7 +56,7 @@
 
 		rankSelector.value( wb.datamodel.Statement.RANK.PREFERRED );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.value(),
 			wb.datamodel.Statement.RANK.PREFERRED,
 			'Set "preferred" rank.'
@@ -64,7 +64,7 @@
 
 		rankSelector.value( wb.datamodel.Statement.RANK.NORMAL );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.value(),
 			wb.datamodel.Statement.RANK.NORMAL,
 			'Set "normal" rank.'
@@ -77,7 +77,7 @@
 
 		rankSelector.option( 'value', wb.datamodel.Statement.RANK.DEPRECATED );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.option( 'value' ),
 			wb.datamodel.Statement.RANK.DEPRECATED,
 			'Set "deprecated" rank.'
@@ -85,7 +85,7 @@
 
 		rankSelector.option( 'value', wb.datamodel.Statement.RANK.PREFERRED );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.option( 'value' ),
 			wb.datamodel.Statement.RANK.PREFERRED,
 			'Set "preferred" rank.'
@@ -93,7 +93,7 @@
 
 		rankSelector.option( 'value', wb.datamodel.Statement.RANK.NORMAL );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector.option( 'value' ),
 			wb.datamodel.Statement.RANK.NORMAL,
 			'Set "normal" rank.'
@@ -104,7 +104,7 @@
 		assert.expect( 7 );
 		var rankSelector1 = createTestRankSelector( { value: wb.datamodel.Statement.RANK.DEPRECATED } );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector1.value(),
 			wb.datamodel.Statement.RANK.DEPRECATED,
 			'Instantiated first rank selector with "deprecated" rank.'
@@ -112,13 +112,13 @@
 
 		var rankSelector2 = createTestRankSelector( { value: wb.datamodel.Statement.RANK.PREFERRED } );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector2.value(),
 			wb.datamodel.Statement.RANK.PREFERRED,
 			'Instantiated second rank selector with "preferred" rank.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector1.value(),
 			wb.datamodel.Statement.RANK.DEPRECATED,
 			'First rank selector still features "deprecated" rank.'
@@ -126,13 +126,13 @@
 
 		rankSelector1.value( wb.datamodel.Statement.RANK.NORMAL );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector1.value(),
 			wb.datamodel.Statement.RANK.NORMAL,
 			'Changed first rank selector\'s rank to "normal".'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector2.value(),
 			wb.datamodel.Statement.RANK.PREFERRED,
 			'Second rank selector still features "preferred" rank.'
@@ -140,13 +140,13 @@
 
 		rankSelector2.value( wb.datamodel.Statement.RANK.DEPRECATED );
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector2.value(),
 			wb.datamodel.Statement.RANK.DEPRECATED,
 			'Changed second rank selector\'s rank to "deprecated".'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			rankSelector1.value(),
 			wb.datamodel.Statement.RANK.NORMAL,
 			'First rank selector still features "normal" rank.'

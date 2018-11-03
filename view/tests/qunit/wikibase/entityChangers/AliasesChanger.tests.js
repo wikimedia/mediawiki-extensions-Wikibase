@@ -11,7 +11,7 @@
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
-		assert.equal(
+		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
 			'is a function.'
@@ -95,7 +95,7 @@
 				'setAliases failed with a RepoApiError'
 			);
 
-			assert.equal( error.code, 'errorCode' );
+			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
 	} );

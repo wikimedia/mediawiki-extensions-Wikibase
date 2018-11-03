@@ -145,7 +145,7 @@
 		var $statementlistview = createStatementlistview(),
 			statementlistview = $statementlistview.data( 'statementlistview' );
 
-		assert.equal(
+		assert.strictEqual(
 			statementlistview.$listview.data( 'listview' ).items().length,
 			0,
 			'Plain widget has no items.'
@@ -153,7 +153,7 @@
 
 		statementlistview.enterNewItem();
 
-		assert.equal(
+		assert.strictEqual(
 			statementlistview.$listview.data( 'listview' ).items().length,
 			1,
 			'Increased number of items after calling enterNewItem().'

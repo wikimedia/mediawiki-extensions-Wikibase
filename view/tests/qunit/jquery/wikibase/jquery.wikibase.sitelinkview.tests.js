@@ -212,7 +212,7 @@
 		} );
 		sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-		assert.equal(
+		assert.strictEqual(
 			sitelinkview.value(),
 			siteLink,
 			'Returning SiteLink object when a valid value is set.'

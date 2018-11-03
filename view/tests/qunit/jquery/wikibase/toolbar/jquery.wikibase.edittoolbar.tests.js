@@ -116,7 +116,7 @@
 			'Toolbar has 1 button.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).data( 'toolbarbutton' ),
 			edittoolbar.getButton( 'edit' ),
 			'Verified toolbar\'s button being the "edit" button.'
@@ -124,19 +124,19 @@
 
 		edittoolbar.toEditMode();
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
 			2,
 			'Toolbar contains 2 buttons after switching to edit mode.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).first().data( 'toolbarbutton' ),
 			edittoolbar.getButton( 'save' ),
 			'Verified toolbar\'s first button being the "save" button.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).last().data( 'toolbarbutton' ),
 			edittoolbar.getButton( 'cancel' ),
 			'Verified toolbar\'s last button being the "cancel" button.'
@@ -150,7 +150,7 @@
 			'Toolbar has 1 button after switching back to non-edit mode.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).first().data( 'toolbarbutton' ),
 			edittoolbar.getButton( 'edit' ),
 			'Verified toolbar\'s button being the "edit" button.'
@@ -160,13 +160,13 @@
 
 		edittoolbar.toEditMode();
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).length,
 			3,
 			'Toolbar contains 3 buttons after switching to edit mode.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$edittoolbar.find( ':wikibase-toolbarbutton' ).eq( 1 ).data( 'toolbarbutton' ),
 			edittoolbar.getButton( 'remove' ),
 			'Verified toolbar\'s second button being the "remove" button.'

@@ -41,7 +41,7 @@
 		var formatter = newFormatterGetter( 'success' )();
 		var done = assert.async();
 		formatter.format( 'Q1' ).done( function ( res ) {
-			assert.equal( res, 'formatted Q1' );
+			assert.strictEqual( res, 'formatted Q1' );
 			done();
 		} );
 	} );
@@ -51,7 +51,7 @@
 		var formatter = newFormatterGetter( 'parsefail' )();
 		var done = assert.async();
 		formatter.format( 'Q1' ).done( function ( res ) {
-			assert.equal( res, 'Q1' );
+			assert.strictEqual( res, 'Q1' );
 			done();
 		} );
 	} );
@@ -61,7 +61,7 @@
 		var formatter = newFormatterGetter( 'formatfail' )();
 		var done = assert.async();
 		formatter.format( 'Q1' ).done( function ( res ) {
-			assert.equal( res, 'Q1' );
+			assert.strictEqual( res, 'Q1' );
 			done();
 		} );
 	} );

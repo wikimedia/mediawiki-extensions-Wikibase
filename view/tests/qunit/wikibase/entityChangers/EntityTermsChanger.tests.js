@@ -22,7 +22,7 @@
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
-		assert.equal(
+		assert.strictEqual(
 			typeof EntityTermsChanger,
 			'function',
 			'is a function.'
@@ -141,7 +141,7 @@
 			newFingerprint().withLabel( 'language', 'label' ),
 			currentFingerprint().empty()
 		).done( function ( savedFingerprint ) {
-			assert.equal( savedFingerprint.getLabelFor( 'language' ).getText(), 'normalized label' );
+			assert.strictEqual( savedFingerprint.getLabelFor( 'language' ).getText(), 'normalized label' );
 		} );
 	} );
 
@@ -167,8 +167,8 @@
 		} )
 		.fail( function ( error ) {
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			assert.equal( error.context.type, 'label' );
+			assert.strictEqual( error.code, 'errorCode' );
+			assert.strictEqual( error.context.type, 'label' );
 			assert.ok( error.context.value.equals( new Term( 'language', 'label' ) ) );
 		} )
 		.always( done );
@@ -288,7 +288,7 @@
 			newFingerprint().withDescription( 'language', 'description' ),
 			currentFingerprint().empty()
 		).done( function ( savedFingerprint ) {
-			assert.equal( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
+			assert.strictEqual( savedFingerprint.getDescriptionFor( 'language' ).getText(), 'normalized description' );
 		} ).fail( failOnError( assert ) ).always( done );
 	} );
 
@@ -315,8 +315,8 @@
 		} )
 		.fail( function ( error ) {
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			assert.equal( error.context.type, 'description' );
+			assert.strictEqual( error.code, 'errorCode' );
+			assert.strictEqual( error.context.type, 'description' );
 			assert.ok( error.context.value.equals( new Term( 'language', 'description' ) ) );
 		} ).always( done );
 	} );
@@ -451,8 +451,8 @@
 		} )
 		.fail( function ( error ) {
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
-			assert.equal( error.context.type, 'aliases' );
+			assert.strictEqual( error.code, 'errorCode' );
+			assert.strictEqual( error.context.type, 'aliases' );
 			assert.ok( error.context.value.equals( new wb.datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
 		} ).always( done );
 	} );

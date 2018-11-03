@@ -11,7 +11,7 @@
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
-		assert.equal(
+		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
 			'is a function.'
@@ -65,7 +65,7 @@
 
 		return descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
 		.done( function ( savedDescription ) {
-			assert.equal( savedDescription.getText(), 'description' );
+			assert.strictEqual( savedDescription.getText(), 'description' );
 		} );
 	} );
 
@@ -90,7 +90,7 @@
 		} )
 		.fail( function ( error ) {
 			assert.ok( error instanceof wb.api.RepoApiError, 'setDescription did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
+			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
 	} );
