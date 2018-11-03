@@ -11,7 +11,7 @@ class WikibaseApi {
 	 * Create an item
 	 *
 	 * @param {string} [label] Optional English label of the item
-	 * @param {object} [data] Optional data to populate the item with
+	 * @param {Object} [data] Optional data to populate the item with
 	 * @return {Promise}
 	 */
 	createItem( label, data ) {
