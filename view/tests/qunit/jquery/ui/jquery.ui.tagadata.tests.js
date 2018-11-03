@@ -39,15 +39,17 @@
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 
-		assert.ok(
-			tagadata !== undefined,
+		assert.notStrictEqual(
+			tagadata,
+			undefined,
 			'Initialized widget.'
 		);
 
 		tagadata.destroy();
 
-		assert.ok(
-			$tagadata.data( 'tagadata' ) === undefined,
+		assert.strictEqual(
+			$tagadata.data( 'tagadata' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -83,14 +85,16 @@
 			'Validated new tag\'s label.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			tagadata.getTag( 'foo' ).hasClass( 'foo-class' ),
+			true,
 			'Validated new tag\'s custom CSS class.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			tagadata.createTag( 'foo' ).stop().hasClass( 'foo-class' )
 				&& tagadata.getTags().length === 4,
+			true,
 			'Creating tag which already exists returns existing tag instead of creating a new one.'
 		);
 	} );
@@ -146,15 +150,17 @@
 
 		tagadata.disable();
 
-		assert.ok(
+		assert.strictEqual(
 			tagadata.option( 'disabled' ),
+			true,
 			'Disabled widget.'
 		);
 
 		tagadata.enable();
 
-		assert.ok(
-			!tagadata.option( 'disabled' ),
+		assert.strictEqual(
+			tagadata.option( 'disabled' ),
+			false,
 			'Enabled widget.'
 		);
 	} );
@@ -164,36 +170,41 @@
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 
-		assert.ok(
-			!tagadata.hasConflict(),
+		assert.strictEqual(
+			tagadata.hasConflict(),
+			false,
 			'Empty widget does not have a conflict.'
 		);
 
 		tagadata.createTag( 'foo' );
 
-		assert.ok(
-			!tagadata.hasConflict(),
+		assert.strictEqual(
+			tagadata.hasConflict(),
+			false,
 			'Widget containing a single tag does not have a conflict.'
 		);
 
 		var $tag = tagadata.createTag( 'bar' );
 
-		assert.ok(
-			!tagadata.hasConflict(),
+		assert.strictEqual(
+			tagadata.hasConflict(),
+			false,
 			'Widget containing different tags does not have a conflict.'
 		);
 
 		$tag.find( 'input' ).val( 'foo' );
 
-		assert.ok(
+		assert.strictEqual(
 			tagadata.hasConflict(),
+			true,
 			'Detected conflict.'
 		);
 
 		tagadata.removeTag( $tag );
 
-		assert.ok(
-			!tagadata.hasConflict(),
+		assert.strictEqual(
+			tagadata.hasConflict(),
+			false,
 			'Resolved conflict after removing conflicting tag.'
 		);
 	} );

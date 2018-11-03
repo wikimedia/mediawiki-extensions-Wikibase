@@ -14,13 +14,15 @@
 
 		dataTypeStore.registerDataType( testDataType );
 
-		assert.ok(
+		assert.strictEqual(
 			dataTypeStore.hasDataType( testDataTypeId ),
+			true,
 			'hasDataType: Data type "' + testDataTypeId + '" is available after registering it'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			testDataType === dataTypeStore.getDataType( testDataTypeId ),
+			true,
 			'getDataType: returns exact same instance of the data type which was registered before'
 		);
 	} );

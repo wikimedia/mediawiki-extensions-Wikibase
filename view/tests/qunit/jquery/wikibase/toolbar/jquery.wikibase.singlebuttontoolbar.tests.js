@@ -42,8 +42,8 @@
 
 		singlebuttontoolbar.destroy();
 
-		assert.ok(
-			!$singlebuttontoolbar.data( 'singlebuttontoolbar' ),
+		assert.notOk(
+			$singlebuttontoolbar.data( 'singlebuttontoolbar' ),
 			'Destroyed widget.'
 		);
 	} );

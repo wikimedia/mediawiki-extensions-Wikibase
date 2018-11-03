@@ -83,15 +83,17 @@
 			} ),
 			sitelinkgrouplistview = $sitelinkgrouplistview.data( 'sitelinkgrouplistview' );
 
-		assert.ok(
-			sitelinkgrouplistview !== undefined,
+		assert.notStrictEqual(
+			sitelinkgrouplistview,
+			undefined,
 			'Created widget.'
 		);
 
 		sitelinkgrouplistview.destroy();
 
-		assert.ok(
-			$sitelinkgrouplistview.data( 'sitelinkview' ) === undefined,
+		assert.strictEqual(
+			$sitelinkgrouplistview.data( 'sitelinkview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 

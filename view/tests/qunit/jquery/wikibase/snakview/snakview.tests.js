@@ -71,8 +71,9 @@
 
 		snakview.destroy();
 
-		assert.ok(
-			$snakview.data( 'snakview' ) === undefined,
+		assert.strictEqual(
+			$snakview.data( 'snakview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 
@@ -81,15 +82,17 @@
 		} );
 		snakview = $snakview.data( 'snakview' );
 
-		assert.ok(
-			snakview !== undefined,
+		assert.notStrictEqual(
+			snakview,
+			undefined,
 			'Created widget passing a wikibase.datamodel.Snak object.'
 		);
 
 		snakview.destroy();
 
-		assert.ok(
-			$snakview.data( 'snakview' ) === undefined,
+		assert.strictEqual(
+			$snakview.data( 'snakview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 
@@ -98,15 +101,17 @@
 		} );
 		snakview = $snakview.data( 'snakview' );
 
-		assert.ok(
-			snakview !== undefined,
+		assert.notStrictEqual(
+			snakview,
+			undefined,
 			'Created widget passing a Snak serialization.'
 		);
 
 		snakview.destroy();
 
-		assert.ok(
-			$snakview.data( 'snakview' ) === undefined,
+		assert.strictEqual(
+			$snakview.data( 'snakview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

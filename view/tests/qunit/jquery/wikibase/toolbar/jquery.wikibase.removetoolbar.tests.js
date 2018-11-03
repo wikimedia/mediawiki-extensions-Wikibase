@@ -42,8 +42,8 @@
 
 		removetoolbar.destroy();
 
-		assert.ok(
-			!$removetoolbar.data( 'removetoolbar' ),
+		assert.notOk(
+			$removetoolbar.data( 'removetoolbar' ),
 			'Destroyed widget.'
 		);
 	} );

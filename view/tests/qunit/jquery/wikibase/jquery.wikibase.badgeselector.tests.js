@@ -48,15 +48,17 @@
 		var $badgeselector = createBadgeselector(),
 			badgeselector = $badgeselector.data( 'badgeselector' );
 
-		assert.ok(
-			badgeselector !== undefined,
+		assert.notStrictEqual(
+			badgeselector,
+			undefined,
 			'Instantiated widget.'
 		);
 
 		badgeselector.destroy();
 
-		assert.ok(
-			$badgeselector.data( 'badgeselector' ) === undefined,
+		assert.strictEqual(
+			$badgeselector.data( 'badgeselector' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

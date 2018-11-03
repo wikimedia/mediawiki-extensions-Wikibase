@@ -62,13 +62,15 @@
 			'Handler has been called for every source.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			$.inArray( sources[ 0 ], triggeredForSources ) !== -1,
+			true,
 			'Handler was called for first source.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			$.inArray( sources[ 1 ], triggeredForSources ) !== -1,
+			true,
 			'Handler was called for second source.'
 		);
 

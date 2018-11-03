@@ -38,8 +38,9 @@
 			'getDataValueType() returns string'
 		);
 
-		assert.ok(
-			dvType !== '',
+		assert.notStrictEqual(
+			dvType,
+			'',
 			'string returned by getDataValueType() is not empty'
 		);
 	} );

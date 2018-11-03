@@ -58,8 +58,9 @@
 
 		descriptionview.destroy();
 
-		assert.ok(
-			$descriptionview.data( 'descriptionview' ) === undefined,
+		assert.strictEqual(
+			$descriptionview.data( 'descriptionview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -85,8 +86,9 @@
 
 		descriptionview.startEditing();
 
-		assert.ok(
-			descriptionview.$text.find( 'textarea' ).length === 1,
+		assert.strictEqual(
+			descriptionview.$text.find( 'textarea' ).length,
+			1,
 			'Generated textarea element.'
 		);
 
@@ -134,8 +136,9 @@
 
 		descriptionview.value( newValue );
 
-		assert.ok(
+		assert.strictEqual(
 			descriptionview.value().equals( newValue ),
+			true,
 			'Set new value.'
 		);
 
@@ -143,8 +146,9 @@
 
 		descriptionview.value( newValue );
 
-		assert.ok(
+		assert.strictEqual(
 			descriptionview.value().equals( newValue ),
+			true,
 			'Set another value.'
 		);
 	} );
