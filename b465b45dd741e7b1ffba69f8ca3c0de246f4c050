@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c2f40ae_7c0bb59f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-03T11:33:15Z",
+      "side": 1,
+      "message": "Rather than selecting page_random from the db i\u0027m pretty sure we would be able to come up with some other way to get a consistent \u0026 mildly random number between 0 and 1 for a page, either hashing the pageid or doing some arithmetic.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "b465b45dd741e7b1ffba69f8ca3c0de246f4c050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "892401b3_c4c25a33",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-03T11:33:15Z",
+      "side": 1,
+      "message": "The db connection used by the service should probably use $this-\u003esiteId.\nBut again it looks like multiple things in this store already don\u0027t do that, so lets not bother.",
+      "range": {
+        "startLine": 488,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 5
+      },
+      "revId": "b465b45dd741e7b1ffba69f8ca3c0de246f4c050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ddae719_cab21939",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-03T11:33:15Z",
+      "side": 1,
+      "message": "Ideally the logger would be injected, but i\u0027m not super fussed here, as we could remove all of this code next year?\nIf the plan is for it to remain in this repo for longer then please inject the logger :).\n\nAlso note that if you don\u0027t enable this log channel in production you\u0027ll never see these log messages.",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "b465b45dd741e7b1ffba69f8ca3c0de246f4c050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
