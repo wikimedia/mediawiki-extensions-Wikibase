@@ -32,7 +32,7 @@
 		var dataType = new DataType( 'foo', 'string' ),
 			dvType = dataType.getDataValueType();
 
-		assert.equal(
+		assert.strictEqual(
 			typeof dvType,
 			'string',
 			'getDataValueType() returns string'

@@ -545,7 +545,7 @@
 			}
 		}
 
-		assert.equal(
+		assert.strictEqual(
 			getSnakviewStates( snaklistview ),
 			'enabled',
 			'snaklistview\'s snakviews are enabled.'
@@ -569,7 +569,7 @@
 
 		snaklistview.disable();
 
-		assert.equal(
+		assert.strictEqual(
 			getSnakviewStates( snaklistview ),
 			'disabled',
 			'Disabled snaklistview\'s snakviews.'
@@ -577,7 +577,7 @@
 
 		snaklistview.enable();
 
-		assert.equal(
+		assert.strictEqual(
 			getSnakviewStates( snaklistview ),
 			'enabled',
 			'Eabled snaklistview\'s snakviews.'

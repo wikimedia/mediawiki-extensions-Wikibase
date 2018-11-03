@@ -1,8 +1,8 @@
 {
-	"extends": "../../../.eslintrc.json",
-	"env": {
-		"qunit": true
-	},
+	"extends": [
+		"wikimedia/qunit",
+		"../../../.eslintrc.json"
+	],
 	"globals": {
 		"sinon": false
 	},
@@ -13,6 +13,15 @@
 				"functions": false
 			}
 		],
+		"qunit/literal-compare-order": "off",
+		"qunit/no-commented-tests": "off",
+		"qunit/no-early-return": "off",
+		"qunit/no-identical-names": "off",
+		"qunit/no-negated-ok": "off",
+		"qunit/no-ok-equality": "off",
+		"qunit/no-setup-teardown": "off",
+		"qunit/require-expect": "off",
+		"qunit/resolve-async": "off",
 		"space-unary-ops": "off"
 	}
 }

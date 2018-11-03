@@ -182,7 +182,7 @@
 		hookStub.withArgs( hook ).returns( { fire: fireSpy } );
 		entitySelector._fireSearchHook( term );
 
-		assert.equal( fireSpy.getCall( 0 ).args[ 0 ].term, term, 'Then mw.hook().fire() is called with term' );
+		assert.strictEqual( fireSpy.getCall( 0 ).args[ 0 ].term, term, 'Then mw.hook().fire() is called with term' );
 
 		hookStub.restore();
 	} );
@@ -306,7 +306,7 @@
 		$entitySelector.val( value );
 		entitySelector._showDefaultSuggestions();
 
-		assert.equal( fireSpy.getCall( 0 ), null, 'Then mw.hook().fire() is NOT called' );
+		assert.strictEqual( fireSpy.getCall( 0 ), null, 'Then mw.hook().fire() is NOT called' );
 		hookStub.restore();
 	} );
 

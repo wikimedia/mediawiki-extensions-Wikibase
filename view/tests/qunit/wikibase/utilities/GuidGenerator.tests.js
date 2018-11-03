@@ -11,13 +11,13 @@
 		assert.expect( 3 );
 		var generator = new wb.utilities.V4GuidGenerator();
 
-		assert.equal(
+		assert.strictEqual(
 			generator._getRandomHex( 0, 0 ),
-			0,
+			'0',
 			'getRandomHex(): 0.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			generator._getRandomHex( 65535, 65535 ),
 			'ffff',
 			'getRandomHex(): 65535.'

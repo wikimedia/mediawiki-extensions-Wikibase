@@ -11,7 +11,7 @@
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.expect( 1 );
-		assert.equal(
+		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
 			'is a function.'
@@ -65,7 +65,7 @@
 
 		return labelsChanger.setLabel( new wb.datamodel.Term( 'language', 'label' ) )
 		.done( function ( savedLabel ) {
-			assert.equal( savedLabel.getText(), 'label' );
+			assert.strictEqual( savedLabel.getText(), 'label' );
 		} );
 	} );
 
@@ -90,7 +90,7 @@
 		} )
 		.fail( function ( error ) {
 			assert.ok( error instanceof wb.api.RepoApiError, 'setLabel did not fail with a RepoApiError' );
-			assert.equal( error.code, 'errorCode' );
+			assert.strictEqual( error.code, 'errorCode' );
 		} )
 		.always( done );
 	} );

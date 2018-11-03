@@ -57,13 +57,13 @@
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
 
-		assert.equal(
+		assert.strictEqual(
 			tagadata.getTags().length,
 			3,
 			'Three tags attached.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			tagadata.getTagLabel( tagadata.getTags().first() ),
 			'A',
 			'Validated label.'
@@ -71,13 +71,13 @@
 
 		tagadata.createTag( 'foo', 'foo-class' );
 
-		assert.equal(
+		assert.strictEqual(
 			tagadata.getTags().length,
 			4,
 			'Attached new tag.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			tagadata.getTagLabel( tagadata.getTags().last() ),
 			'foo',
 			'Validated new tag\'s label.'

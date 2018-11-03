@@ -50,7 +50,7 @@
 
 			$subject.removeAttr( 'class' );
 
-			assert.equal(
+			assert.strictEqual(
 				$( '<div/>' ).append( $subject ).html(),
 				$( '<div/>' ).append(
 					mw.wbTemplate( 'templatedWidget-test', testSets[ i ][ 1 ].templateParams )

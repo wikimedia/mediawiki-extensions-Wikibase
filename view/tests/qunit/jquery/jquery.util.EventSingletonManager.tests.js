@@ -24,7 +24,7 @@
 					'Triggered event "' + event.type + '.'
 				);
 
-				assert.equal(
+				assert.strictEqual(
 					$source.get( 0 ),
 					source,
 					'Verified source element being passed to the handler.'
@@ -56,7 +56,7 @@
 
 		$target.trigger( event );
 
-		assert.equal(
+		assert.strictEqual(
 			triggeredForSources.length,
 			$sources.length,
 			'Handler has been called for every source.'
@@ -76,7 +76,7 @@
 
 		$target.trigger( event );
 
-		assert.equal(
+		assert.strictEqual(
 			triggeredForSources[ 2 ],
 			$sources.get( 0 ),
 			'Handler was called once again after unregistering a source.'

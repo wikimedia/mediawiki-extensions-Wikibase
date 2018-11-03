@@ -90,13 +90,13 @@
 
 		closeable.setContent( $content, 'cssClass' );
 
-		assert.equal(
+		assert.strictEqual(
 			closeable.option( '$content' ).get( 0 ),
 			$content.get( 0 ),
 			'Set content.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			closeable.option( 'cssClass' ),
 			'cssClass',
 			'Set CSS class.'
@@ -110,7 +110,7 @@
 			'Removed content.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			closeable.option( 'cssClass' ),
 			'',
 			'Removed CSS class.'

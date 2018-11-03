@@ -173,7 +173,7 @@
 
 		var done = assert.async();
 		statementview.getHelpMessage().done( function ( helpMessage ) {
-			assert.equal( mw.msg( 'wikibase-claimview-snak-new-tooltip' ), helpMessage );
+			assert.strictEqual( mw.msg( 'wikibase-claimview-snak-new-tooltip' ), helpMessage );
 			done();
 		} );
 	} );
@@ -189,7 +189,7 @@
 		var done = assert.async();
 
 		statementview.getHelpMessage().done( function ( helpMessage ) {
-			assert.equal( mw.msg( 'wikibase-claimview-snak-tooltip', 'P1' ), helpMessage );
+			assert.strictEqual( mw.msg( 'wikibase-claimview-snak-tooltip', 'P1' ), helpMessage );
 			done();
 		} );
 	} );

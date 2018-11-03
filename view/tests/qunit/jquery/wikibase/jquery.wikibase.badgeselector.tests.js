@@ -113,19 +113,19 @@
 
 		badgeselector.startEditing();
 
-		assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 1 );
+		assert.strictEqual( $badgeselector.find( '[data-wb-badge=""]' ).length, 1 );
 
 		badgeselector.stopEditing( true );
 
-		assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 0 );
+		assert.strictEqual( $badgeselector.find( '[data-wb-badge=""]' ).length, 0 );
 
 		badgeselector.startEditing();
 
-		assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 1 );
+		assert.strictEqual( $badgeselector.find( '[data-wb-badge=""]' ).length, 1 );
 
 		badgeselector.stopEditing();
 
-		assert.equal( $badgeselector.find( '[data-wb-badge=""]' ).length, 0 );
+		assert.strictEqual( $badgeselector.find( '[data-wb-badge=""]' ).length, 0 );
 
 	} );
 

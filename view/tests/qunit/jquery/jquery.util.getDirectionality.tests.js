@@ -9,7 +9,7 @@
 
 	QUnit.test( 'Basic tests', function ( assert ) {
 		if ( $.uls && $.uls.data ) {
-			assert.equal(
+			assert.strictEqual(
 				$.util.getDirectionality( 'fa' ),
 				'rtl',
 				'Retrieved language code from ULS.'
@@ -20,7 +20,7 @@
 			return;
 		}
 
-		assert.equal(
+		assert.strictEqual(
 			$.util.getDirectionality( 'doesNotExist' ),
 			'auto',
 			'Falling back to "auto"'
