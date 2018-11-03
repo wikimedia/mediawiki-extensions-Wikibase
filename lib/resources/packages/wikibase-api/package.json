@@ -28,10 +28,10 @@
     "wikibase-data-values": "^0.10.0"
   },
   "devDependencies": {
-    "eslint-config-wikimedia": "0.4.0",
-    "grunt": "1.0.1",
-    "grunt-eslint": "19.0.0",
-    "grunt-jsonlint": "1.0.7",
+    "eslint-config-wikimedia": "0.8.1",
+    "grunt": "1.0.3",
+    "grunt-eslint": "21.0.0",
+    "grunt-jsonlint": "1.1.0",
     "grunt-karma": "^2.0.0",
     "karma": "^1.7.0",
     "karma-cli": "^1.0.1",
