@@ -182,5 +182,6 @@
 	"apihelp-query+wbsearch-example-1": "Шукаць «abc» ангельскай мовай з значэньнямі па змоўчаньні для тыпу і ліміту",
 	"apihelp-query+wbsearch-example-2": "Шукаць «abc» ангельскай мовай зь лімітам 50",
 	"apihelp-query+wbsearch-example-3": "Шукаць «alphabet» ангельскай мовай сярод тыпаў уласьцівасьцяў",
-	"apihelp-query+wbsearch-example-4": "Шукаць «alphabet» ангельскай мовай як генэратар"
+	"apihelp-query+wbsearch-example-4": "Шукаць «alphabet» ангельскай мовай як генэратар",
+	"apihelp-query+wbsubscribers-description": "Атрымаць падпіскі на пададзеныя элемэнты."
 }
