@@ -43,7 +43,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		assert.throws(
 			function () {
 				createItemview( { value: null } );

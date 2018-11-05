@@ -10,7 +10,6 @@
 	var SUBJECT = wikibase.entityChangers.DescriptionsChanger;
 
 	QUnit.test( 'is a function', function ( assert ) {
-		assert.expect( 1 );
 		assert.strictEqual(
 			typeof SUBJECT,
 			'function',
@@ -19,12 +18,10 @@
 	} );
 
 	QUnit.test( 'is a constructor', function ( assert ) {
-		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setDescription performs correct API call', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setDescription: sinon.spy( function () {
 				return $.Deferred().promise();
@@ -42,7 +39,6 @@
 	} );
 
 	QUnit.test( 'setDescription correctly handles API response', function ( assert ) {
-		assert.expect( 1 );
 		var api = {
 			setDescription: sinon.spy( function () {
 				return $.Deferred().resolve( {
@@ -70,7 +66,6 @@
 	} );
 
 	QUnit.test( 'setDescription correctly handles API failures', function ( assert ) {
-		assert.expect( 2 );
 		var api = {
 			setDescription: sinon.spy( function () {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();

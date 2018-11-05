@@ -71,7 +71,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		var value = new wb.datamodel.SiteLinkSet( [
 			new wb.datamodel.SiteLink( 'aawiki', 'page1' ),
 			new wb.datamodel.SiteLink( 'dewiki', 'page1' ),

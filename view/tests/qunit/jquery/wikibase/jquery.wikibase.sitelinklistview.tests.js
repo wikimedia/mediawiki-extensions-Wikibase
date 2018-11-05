@@ -93,7 +93,6 @@
 	} ) );
 
 	QUnit.test( 'Create and destroy', function ( assert ) {
-		assert.expect( 2 );
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -112,7 +111,6 @@
 	} );
 
 	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
-		assert.expect( 2 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinklistview = createSitelinklistview( {
 				value: [ siteLink ]
@@ -134,7 +132,6 @@
 	} );
 
 	QUnit.test( 'isFull()', function ( assert ) {
-		assert.expect( 2 );
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -160,7 +157,6 @@
 	} );
 
 	QUnit.test( 'value() with invalid sitelinkview', function ( assert ) {
-		assert.expect( 1 );
 		var $sitelinklistview = createSitelinklistview( {
 				value: []
 			} ),
@@ -176,7 +172,6 @@
 	} );
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
-		assert.expect( 4 );
 		var $sitelinklistview = createSitelinklistview( {
 				value: [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
 			} ),
@@ -300,7 +295,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 2 );
 		var value = [ new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ) ],
 			$sitelinklistview = createSitelinklistview( {
 				value: value
@@ -343,7 +337,6 @@
 	} );
 
 	QUnit.test( 'remove empty sitelinkview when hitting backspace', function ( assert ) {
-		assert.expect( 2 );
 		var $sitelinklistview = createSitelinklistview(),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 

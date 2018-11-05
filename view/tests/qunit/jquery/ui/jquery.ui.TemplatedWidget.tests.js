@@ -8,7 +8,6 @@
 	QUnit.module( 'jquery.ui.TemplatedWidget' );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 4 );
 		var testSets = [
 			[
 				'<div><span>$1</span></div>',

@@ -65,7 +65,6 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		assert.expect( 3 );
 		assert.throws(
 			function () {
 				createEntitytermsforlanguagelistview( { value: null } );
@@ -93,7 +92,6 @@
 	} );
 
 	QUnit.test( 'setError()', function ( assert ) {
-		assert.expect( 1 );
 		var done = assert.async();
 
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
@@ -113,7 +111,6 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		assert.expect( 2 );
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -133,7 +130,6 @@
 	} );
 
 	QUnit.test( '_getMoreLanguages()', function ( assert ) {
-		assert.expect( 1 );
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -145,7 +141,6 @@
 	} );
 
 	QUnit.test( '_hasMoreLanguages()', function ( assert ) {
-		assert.expect( 2 );
 		var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 			entitytermsforlanguagelistview
 				= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
