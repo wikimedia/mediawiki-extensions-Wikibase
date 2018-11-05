@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cc655bd_dad34a42",
+        "filename": "view/src/ViewPlaceHolderEmitter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-05T15:15:28Z",
+      "side": 1,
+      "message": "Not for this change, but is there any reason this couldn\u0027t move to view?",
+      "range": {
+        "startLine": 11,
+        "startChar": 51,
+        "endLine": 11,
+        "endChar": 92
+      },
+      "revId": "cf3622ce39e780c7066274ada15a79fe440a298f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
