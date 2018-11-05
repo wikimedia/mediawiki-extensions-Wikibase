@@ -212,4 +212,24 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	/**
+	 * Test specifically for https://phabricator.wikimedia.org/T208308
+	 * When a repository is defined with no namespaces / entity types then everything
+	 * should still work.
+	 */
+	public function testGetEntityTypesPerRepository_returnsArrayWhenNoEntities() {
+		$etd = new RepositoryDefinitions(
+			[
+				'' => [
+					'database' => false,
+					'base-uri' => 'http://acme.test/concept/',
+					'entity-namespaces' => [],
+					'prefix-mapping' => [],
+				],
+			],
+			$this->getEntityTypeDefinitions()
+		);
+		$this->assertEquals( [ '' => [] ], $etd->getEntityTypesPerRepository() );
+	}
+
 }
