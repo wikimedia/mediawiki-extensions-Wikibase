@@ -24,7 +24,7 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.statementgrouplabelscroll', {
-		teardown: function () {
+		afterEach: function () {
 			$.each( StatementGroupLabelScrollWidget.activeInstances(), function ( i, instance ) {
 				instance.destroy();
 				instance.element.remove();

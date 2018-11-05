@@ -6,7 +6,7 @@
 	'use strict';
 
 	QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
-		setup: function () {
+		beforeEach: function () {
 			$.widget( 'test.editablewidget', {
 				_create: function () {
 					this._initialValue = this.options.value;
@@ -21,7 +21,7 @@
 				}
 			} );
 		},
-		teardown: function () {
+		afterEach: function () {
 			delete( $.test.editablewidget );
 
 			$( '.test_edittoolbar' ).each( function () {

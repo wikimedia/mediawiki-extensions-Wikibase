@@ -181,8 +181,8 @@
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
 		assert.strictEqual(
-			'P1',
-			statementgroupview.element.attr( 'id' )
+			statementgroupview.element.attr( 'id' ),
+			'P1'
 		);
 	} );
 
@@ -193,8 +193,8 @@
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
 		assert.strictEqual(
-			'P1',
-			statementgroupview.element.data( 'property-id' )
+			statementgroupview.element.data( 'property-id' ),
+			'P1'
 		);
 	} );
 
@@ -206,8 +206,8 @@
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
 		assert.strictEqual(
-			'X1-Y2-P1',
-			statementgroupview.element.attr( 'id' )
+			statementgroupview.element.attr( 'id' ),
+			'X1-Y2-P1'
 		);
 	} );
 

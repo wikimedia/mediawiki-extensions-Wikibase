@@ -19,7 +19,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.pagesuggester', {
-		teardown: function () {
+		afterEach: function () {
 			var $pageSuggester = $( '.test_pagesuggester' ),
 				pageSuggester = $pageSuggester.data( 'pagesuggester' );
 			if ( pageSuggester ) {

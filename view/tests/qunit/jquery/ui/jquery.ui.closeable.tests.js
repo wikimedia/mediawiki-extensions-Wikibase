@@ -16,7 +16,7 @@
 	}
 
 	QUnit.module( 'jquery.ui.closeable', QUnit.newMwEnvironment( {
-		teardown: function () {
+		afterEach: function () {
 			$( '.test_closeable' ).each( function () {
 				var $closeable = $( this ),
 					closeable = $( this ).data( 'closeable' );
