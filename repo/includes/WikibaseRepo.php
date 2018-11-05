@@ -156,7 +156,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\SettingsArray;
 use Wikibase\SqlStore;
@@ -1812,8 +1811,7 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang->getCode() ),
-			new RepoSpecialPageLinker()
+			new MediaWikiLocalizedTextProvider( $lang->getCode() )
 		);
 	}
 
