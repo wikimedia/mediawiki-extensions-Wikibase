@@ -14,7 +14,7 @@ class TermTestHelper {
 	public static function makeOverlyLongString( $text = "Test", $length = null ) {
 		if ( $length === null ) {
 			$limits = WikibaseRepo::getDefaultInstance()->
-				getSettings()->getSetting( 'multilang-limits' );
+				getSettings()->getSetting( 'string-limits' )['multilang'];
 			$length = $limits['length'];
 		}
 

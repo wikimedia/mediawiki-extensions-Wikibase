@@ -28,9 +28,24 @@ return [
 	// See StatementGrouperBuilder for an example.
 	'statementSections' => [],
 
-	// Define constraints for multilingual terms (such as labels, descriptions and aliases).
+	// multilang-limits is deprecated, please use string-limits instead
 	'multilang-limits' => [
 		'length' => 250, // length constraint
+	],
+	// Define constraints for various strings, such as multilingual terms (such as labels, descriptions and aliases).
+	'string-limits' => [
+		'multilang' => [
+			'length' => 250, // length constraint
+		],
+		'VT:monolingualtext' => [
+			'length' => 400,
+		],
+		'VT:string' => [
+			'length' => 400,
+		],
+		'PT:url' => [
+			'length' => 500,
+		],
 	],
 
 	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.

@@ -58,9 +58,15 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;dispatchMaxTime: Overrides the default value for max-time in dispatchChanges.php
 ;dispatchIdleDelay: Overrides the default value for idle-delay in dispatchChanges.php
 ;idBlacklist: A map from entity ID type to a list of IDs to reserve and skip for new entities of that type. IDs are given as integers. For example <code>[ 'item' => [ 1, 2, 3 ] ]</code>.
-;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
+;string-limits: Limits to impose on various strings, such as multilanguage terms, various data types etc.
+:;Supported string types:
+;;multilang: multilanguage strings like labels, descriptions and such. (used to be the multilang-limits option)
+:;Supported limits:
+:;length: the maximum length of the string, in characters.
+;multilang-limits: DEPRECATED( use string-limits ). Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
 :;length: the maximum length of the string, in characters.
 :Default: <code>array( 'length' => 250 )</code>.
+
 ;urlSchemes: Which URL schemes should be allowed in URL data values. The default is <code>array( 'bzr', 'cvs', 'ftp', 'git', 'http', 'https', 'irc', 'mailto', 'ssh', 'svn' )</code>. Other supported schemes are <code>ftps</code>, <code>ircs</code>, <code>mms</code>, <code>nntp</code>, <code>redis</code>, <code>sftp</code>, <code>telnet</code>, <code>worldwind</code> and <code>gopher</code>. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding <code>ftps</code> will work, while adding <code>dummy</code> will do nothing.
 ;formatterUrlProperty: Property to be used on properties that defines a formatter URL which is used to link external identifiers. The placeholder <code>$1</code> will be replaced by the identifier. Example: On wikidata.org, this is set to <code>P1630</code>, a string property named "formatter URL". When formatting identifiers, each identifiers property page is checked for it's formatter URL (e.g. <code>http://d-nb.info/gnd/$1</code>) specified by the property from this setting.
 ;canonicalUriProperty: Property to be used on properties that defines a URI pattern which is used to link external identifiers in RDF and other exports. The placeholder <code>$1</code> will be replaced by the identifier. Example: On wikidata.org, this is set to <code>P1921</code>, a string property named "URI used in RDF". When exporting identifiers to RDF or other formats, each identifiers property page is checked for it's URI pattern (e.g. <code>http://d-nb.info/gnd/$1/about/rdf</code>) specified by the property from this setting.
