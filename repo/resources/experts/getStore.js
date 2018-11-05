@@ -55,7 +55,7 @@
 		var constructors = {};
 
 		for ( var dataType in registeredExperts ) {
-			if ( registeredExperts.hasOwnProperty( dataType ) ) {
+			if ( Object.prototype.hasOwnProperty.call( registeredExperts, dataType ) ) {
 				constructors[ dataType ] = require( registeredExperts[ dataType ] );
 			}
 		}

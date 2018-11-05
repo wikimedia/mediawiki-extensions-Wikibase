@@ -1,6 +1,6 @@
 'use strict';
 
-let MainStatementSection = Base => class extends Base {
+let MainStatementSection = ( Base ) => class extends Base {
 
 	static get STATEMENT_WIDGET_SELECTORS() {
 		return {

@@ -257,7 +257,7 @@
 		for ( var name in attributes ) {
 			if ( name === 'class' ) {
 				this.addClass( attributes[ name ] );
-			} else if ( attributes.hasOwnProperty( name ) ) {
+			} else if ( Object.prototype.hasOwnProperty.call( attributes, name ) ) {
 				this.attr( name, attributes[ name ] );
 			}
 		}
