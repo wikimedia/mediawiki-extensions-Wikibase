@@ -406,7 +406,6 @@ return call_user_func( function() {
 							"Failed to construct ItemIdHtmlLinkFormatter: {exception_message}",
 							[
 								'exception' => $e,
-								'exception_message' => $e->getMessage(),
 							]
 						);
 
