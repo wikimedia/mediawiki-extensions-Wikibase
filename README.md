@@ -63,6 +63,12 @@ Then, in the root of your mediawiki folder, run:
 composer install
 ```
 
+If you already ran `composer install` during the installation of MediaWiki, run instead:
+```bash
+composer update
+```
+
+
 > When using ways to combine MediaWiki with the extension folders (e.g. symlinks or docker volumes) please make sure that the folders are available to composer in the same structure they are available to the webserver, too.
 
 This will install both Wikibase Client and Repo together on the same wiki.
