@@ -18,10 +18,14 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	/**
 	 * @param EchoEvent $event
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function callbackForBundleCount( EchoEvent $event ) {
-		return $event->getTitle()->getPrefixedText();
+		$title = $event->getTitle();
+		if ( $title !== null ) {
+			return $title->getPrefixedText();
+		}
+		return null;
 	}
 
 	/**
@@ -118,7 +122,7 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 			$this->event->getExtraParam( 'repoSiteName' ) );
 		if ( !$message->isDisabled() ) {
 			$title = Title::newFromText( $message->plain() );
-			if ( $title->exists() ) {
+			if ( $title && $title->exists() ) {
 				$ret[] = [
 					'url' => $title->getFullURL(),
 					'label' => $this->msg( 'echo-learn-more' )->text(),
