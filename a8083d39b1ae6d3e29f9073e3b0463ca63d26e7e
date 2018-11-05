@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55bbd928_41cb5284",
+        "filename": "view/src/CacheableEntityTermsView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-05T14:19:49Z",
+      "side": 1,
+      "message": "This could do with some phpdoc explaining what this is and why it exists and what it should be used for.",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "a8083d39b1ae6d3e29f9073e3b0463ca63d26e7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4665b2b_3fad7de3",
+        "filename": "view/src/ViewPlaceHolderEmitter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-05T14:19:49Z",
+      "side": 1,
+      "message": "This one could also do with some doc comment",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "a8083d39b1ae6d3e29f9073e3b0463ca63d26e7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
