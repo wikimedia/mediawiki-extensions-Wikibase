@@ -22,6 +22,30 @@
       "revId": "e42f04e9a1622f6ad33a04f472491bc3accc6f61",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76087618_6e365a46",
+        "filename": "view/src/ViewContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-05T17:16:02Z",
+      "side": 1,
+      "message": "I tried to describe the challenge in the phpdoc. We are dealing with TextInjector markers and individual placeholders\u0027 meta information. Maybe in the next step they can be reorganized (`ViewPlaceHolderEmitter` interface), `getPlaceholders()` returning only what\u0027s currently in \u0027wikibase-view-chunks\u0027 - the mapping of actually unique placeholders and their to-be value, and a `getPlaceholderData()` method containing a mapping of placeholder(type?) to data.",
+      "parentUuid": "13f7f537_d3495737",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "e42f04e9a1622f6ad33a04f472491bc3accc6f61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
