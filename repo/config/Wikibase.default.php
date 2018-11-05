@@ -28,10 +28,6 @@ return [
 	// See StatementGrouperBuilder for an example.
 	'statementSections' => [],
 
-	// multilang-limits is deprecated, please use string-limits instead
-	'multilang-limits' => [
-		'length' => 250, // length constraint
-	],
 	// Define constraints for various strings, such as multilingual terms (such as labels, descriptions and aliases).
 	'string-limits' => [
 		'multilang' => [
