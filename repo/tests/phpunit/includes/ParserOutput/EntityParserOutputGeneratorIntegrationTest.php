@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -74,24 +73,6 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 			$unitItemId,
 			$output->getLinks()[$this->itemNamespace]
 		);
-	}
-
-	public function testSetsViewChunksForEntityTermsView() {
-		$parserOutputGenerator = $this->newParserOutputGenerator();
-
-		$output = $parserOutputGenerator->getParserOutput(
-			NewItem::withId( 'Q42' )->build(),
-			true
-		);
-
-		$this->assertSame(
-			[
-				[ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ],
-				[ 'termbox' ],
-			],
-			array_values( $output->getExtensionData( 'wikibase-view-chunks' ) )
-		);
-		$this->assertArrayHasKey( 'en', $output->getExtensionData( 'wikibase-terms-list-items' ) );
 	}
 
 	private function newParserOutputGenerator() {

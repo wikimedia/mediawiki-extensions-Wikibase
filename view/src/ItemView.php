@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -20,7 +19,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  */
-class ItemView extends EntityView implements ViewPlaceHolderEmitter {
+class ItemView extends EntityView {
 
 	/**
 	 * @var StatementSectionsView
@@ -43,7 +42,7 @@ class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 	private $textProvider;
 
 	/**
-	 * @var CacheableEntityTermsView
+	 * @var EntityTermsView
 	 */
 	private $entityTermsView;
 
@@ -51,7 +50,7 @@ class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
-	 * @param CacheableEntityTermsView $entityTermsView
+	 * @param EntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param string $languageCode
@@ -61,7 +60,7 @@ class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		CacheableEntityTermsView $entityTermsView,
+		EntityTermsView $entityTermsView,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
 		$languageCode,
@@ -177,14 +176,6 @@ class ItemView extends EntityView implements ViewPlaceHolderEmitter {
 		}
 
 		return '';
-	}
-
-	public function preparePlaceHolders(
-		ParserOutput $parserOutput,
-		EntityDocument $entity,
-		$languageCode
-	) {
-		$this->entityTermsView->preparePlaceHolders( $parserOutput, $entity, $languageCode );
 	}
 
 }

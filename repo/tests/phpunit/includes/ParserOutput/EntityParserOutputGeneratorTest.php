@@ -19,9 +19,9 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
@@ -36,11 +36,12 @@ use Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
-use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -96,10 +97,12 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
 
-		/**
-		 * @see \Wikibase\Repo\Tests\ParserOutput\EntityParserOutputGeneratorIntegrationTest
-		 * for tests concerning html view placeholder integration.
-		 */
+		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-view-chunks' ), 'view chunks' );
+
+		$this->assertArrayHasKey(
+			'en',
+			$parserOutput->getExtensionData( 'wikibase-terms-list-items' )
+		);
 
 		$this->assertSame( [ '<JS>' ], $parserOutput->getJsConfigVars(), 'config vars' );
 
@@ -461,17 +464,19 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$repo = WikibaseRepo::getDefaultInstance();
 		return new DispatchingEntityViewFactory( [
 			'item' => function(
-				Language $language,
+				$languageCode,
+				LabelDescriptionLookup $labelDescriptionLookup,
 				LanguageFallbackChain $fallbackChain,
-				EntityDocument $entity,
-				EntityInfo $entityInfo
+				EditSectionGenerator $editSectionGenerator,
+				EntityTermsView $entityTermsView
 			) use ( $repo ) {
 				$viewFactory = $repo->getViewFactory();
 				return $viewFactory->newItemView(
-					$language,
+					$languageCode,
+					$labelDescriptionLookup,
 					$fallbackChain,
-					$entityInfo,
-					$this->createMock( PlaceholderEmittingEntityTermsView::class )
+					$editSectionGenerator,
+					$entityTermsView
 				);
 			},
 		] );
