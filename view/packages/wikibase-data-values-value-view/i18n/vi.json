@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Leducthn",
-			"Phjtieudoc"
+			"Phjtieudoc",
+			"Vinhtantran"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Chưa hỗ trợ các giá trị dữ liệu “$1”.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Chưa hỗ trợ các giá trị có kiểu dữ liệu “$1”.",
 	"valueview-expert-emptyvalue-empty": "trống",
-	"valueview-expert-timevalue-calendar-gregorian": "Lịch Gregorian",
-	"valueview-expert-timevalue-calendar-julian": "Lịch Julian",
+	"valueview-expert-timevalue-calendar-gregorian": "Công lịch",
+	"valueview-expert-timevalue-calendar-julian": "Lịch Julius",
 	"valueview-expert-timeinput-precision": "Độ chính xác:",
 	"valueview-expert-timeinput-calendar": "Lịch:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
