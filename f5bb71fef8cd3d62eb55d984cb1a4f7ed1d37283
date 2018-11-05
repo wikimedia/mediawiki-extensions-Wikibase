@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b9273e4_2c4b77e9",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-05T15:23:54Z",
+      "side": 1,
+      "message": "Did this come from somewhere or was it just arbitrary? If arbitrary why not the same as the others",
+      "range": {
+        "startLine": 424,
+        "startChar": 50,
+        "endLine": 424,
+        "endChar": 53
+      },
+      "revId": "f5bb71fef8cd3d62eb55d984cb1a4f7ed1d37283",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
