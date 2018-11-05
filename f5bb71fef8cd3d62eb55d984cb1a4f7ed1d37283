@@ -22,6 +22,30 @@
       "revId": "f5bb71fef8cd3d62eb55d984cb1a4f7ed1d37283",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1065219e_99099d0c",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-05T15:24:58Z",
+      "side": 1,
+      "message": "This is the current default of getUrlValidator use below :)",
+      "parentUuid": "9b9273e4_2c4b77e9",
+      "range": {
+        "startLine": 424,
+        "startChar": 50,
+        "endLine": 424,
+        "endChar": 53
+      },
+      "revId": "f5bb71fef8cd3d62eb55d984cb1a4f7ed1d37283",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
