@@ -42,8 +42,9 @@
 
 		closeable.destroy();
 
-		assert.ok(
-			$closeable.data( 'closeable' ) === undefined,
+		assert.strictEqual(
+			$closeable.data( 'closeable' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

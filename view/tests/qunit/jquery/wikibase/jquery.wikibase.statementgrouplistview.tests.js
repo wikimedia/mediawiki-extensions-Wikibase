@@ -62,8 +62,9 @@
 
 		statementgrouplistview.destroy();
 
-		assert.ok(
-			$statementgrouplistview.data( 'statementgrouplistview' ) === undefined,
+		assert.strictEqual(
+			$statementgrouplistview.data( 'statementgrouplistview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 
@@ -117,8 +118,8 @@
 		$statementgroupview.wrap( '<div/>' );
 		$statementgroupview.trigger( 'afterstopediting', [ false ] );
 
-		assert.ok(
-			!statementgrouplistview.listview.items().first().hasClass( 'wb-new' ),
+		assert.notOk(
+			statementgrouplistview.listview.items().first().hasClass( 'wb-new' ),
 			'Verified new statementgroupview not being pending after saving.'
 		);
 	} );

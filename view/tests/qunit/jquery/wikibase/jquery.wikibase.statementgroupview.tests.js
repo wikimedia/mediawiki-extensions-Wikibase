@@ -66,8 +66,9 @@
 
 		statementgroupview.destroy();
 
-		assert.ok(
-			$statementgroupview.data( 'statementgroupview' ) === undefined,
+		assert.strictEqual(
+			$statementgroupview.data( 'statementgroupview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 

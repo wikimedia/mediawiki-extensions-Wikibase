@@ -58,8 +58,9 @@
 
 		labelview.destroy();
 
-		assert.ok(
-			$labelview.data( 'labelview' ) === undefined,
+		assert.strictEqual(
+			$labelview.data( 'labelview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -85,8 +86,9 @@
 
 		labelview.startEditing();
 
-		assert.ok(
-			labelview.$text.find( 'textarea' ).length === 1,
+		assert.strictEqual(
+			labelview.$text.find( 'textarea' ).length,
+			1,
 			'Generated input element.'
 		);
 
@@ -134,8 +136,9 @@
 
 		labelview.value( newValue );
 
-		assert.ok(
+		assert.strictEqual(
 			labelview.value().equals( newValue ),
+			true,
 			'Set new value.'
 		);
 
@@ -143,8 +146,9 @@
 
 		labelview.value( newValue );
 
-		assert.ok(
+		assert.strictEqual(
 			labelview.value().equals( newValue ),
+			true,
 			'Set another value.'
 		);
 	} );

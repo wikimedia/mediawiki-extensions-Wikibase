@@ -4,8 +4,6 @@
 		"../../../.eslintrc.json"
 	],
 	"rules": {
-		"qunit/no-negated-ok": "off",
-		"qunit/no-ok-equality": "off",
 		"qunit/require-expect": "off",
 		"qunit/resolve-async": "off"
 	}

@@ -61,8 +61,9 @@
 
 		aliasesview.destroy();
 
-		assert.ok(
-			$aliasesview.data( 'aliasesview' ) === undefined,
+		assert.strictEqual(
+			$aliasesview.data( 'aliasesview' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -72,8 +73,9 @@
 			aliasesview = $aliasesview.data( 'aliasesview' );
 
 		return aliasesview.startEditing().done( function () {
-			assert.ok(
-				aliasesview.$list.data( 'tagadata' ) !== undefined,
+			assert.notStrictEqual(
+				aliasesview.$list.data( 'tagadata' ),
+				undefined,
 				'Instantiated tagadata widget.'
 			);
 		} );
@@ -223,16 +225,18 @@
 		newValue = new wb.datamodel.MultiTerm( 'de', [ 'x', 'y' ] );
 		aliasesview.value( newValue );
 
-		assert.ok(
+		assert.strictEqual(
 			aliasesview.value().equals( newValue ),
+			true,
 			'Set new value.'
 		);
 
 		newValue = new wb.datamodel.MultiTerm( 'en', [] );
 		aliasesview.value( newValue );
 
-		assert.ok(
+		assert.strictEqual(
 			aliasesview.value().equals( newValue ),
+			true,
 			'Set another value.'
 		);
 	} );

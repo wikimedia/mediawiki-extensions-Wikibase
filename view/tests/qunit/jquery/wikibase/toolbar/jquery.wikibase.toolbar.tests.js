@@ -48,8 +48,9 @@
 
 		toolbar.destroy();
 
-		assert.ok(
-			$toolbar.data( 'toolbar' ) === undefined,
+		assert.strictEqual(
+			$toolbar.data( 'toolbar' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );
@@ -103,8 +104,9 @@
 
 		toolbar.option( '$content', $button );
 
-		assert.ok(
-			$toolbar.contents().first().get( 0 ) === $button.get( 0 ),
+		assert.strictEqual(
+			$toolbar.contents().first().get( 0 ),
+			$button.get( 0 ),
 			'Added button.'
 		);
 

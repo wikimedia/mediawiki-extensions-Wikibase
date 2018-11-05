@@ -64,8 +64,9 @@
 
 			$subject.data( 'editablewidget' ).destroy();
 
-			assert.ok(
-				$subject.data( 'editablewidget' ) === undefined,
+			assert.strictEqual(
+				$subject.data( 'editablewidget' ),
+				undefined,
 				'Destroyed widget.'
 			);
 		}

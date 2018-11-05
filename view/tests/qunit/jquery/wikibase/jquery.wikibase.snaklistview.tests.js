@@ -96,8 +96,9 @@
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
-		assert.ok(
-			snaklistview !== undefined,
+		assert.notStrictEqual(
+			snaklistview,
+			undefined,
 			'Initialized snaklistview widget.'
 		);
 
@@ -149,20 +150,23 @@
 
 		snaklistview.value( snakLists[ 0 ] );
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 0 ] ),
+			true,
 			'Set snak list.'
 		);
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Snaklistview is not in edit mode.'
 		);
 
 		snaklistview.value( snakLists[ 1 ] );
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 1 ] ),
+			true,
 			'Overwrote snak list.'
 		);
 
@@ -182,8 +186,9 @@
 
 		snaklistview.startEditing();
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.isInEditMode(),
+			true,
 			'Snaklistview is in edit mode.'
 		);
 
@@ -195,25 +200,29 @@
 
 		snaklistview.value( snakLists[ 0 ] );
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 0 ] ),
+			true,
 			'Set snak list.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.isInEditMode(),
+			true,
 			'Snaklistview is in edit mode.'
 		);
 
 		snaklistview.value( snakLists[ 1 ] );
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 1 ] ),
+			true,
 			'Overwrote snak list.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.isInEditMode(),
+			true,
 			'Snaklistview is in edit mode.'
 		);
 
@@ -225,8 +234,9 @@
 			'Set empty snak list.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.isInEditMode(),
+			true,
 			'Snaklistview is in edit mode.'
 		);
 	} );
@@ -372,8 +382,9 @@
 
 		snaklistview.enterNewItem();
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.isInEditMode(),
+			true,
 			'Verified snaklistview being in edit mode.'
 		);
 
@@ -401,8 +412,9 @@
 
 		snaklistview.stopEditing( true );
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Left edit mode.'
 		);
 
@@ -420,13 +432,15 @@
 
 		snaklistview.stopEditing( true );
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Left edit mode.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 0 ] ),
+			true,
 			'Verified reset to initial value.'
 		);
 
@@ -436,13 +450,15 @@
 
 		snaklistview.stopEditing( true );
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Left edit mode.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 0 ] ),
+			true,
 			'Verified reset to initial value.'
 		);
 
@@ -464,18 +480,21 @@
 
 		snaklistview.stopEditing();
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Left edit mode.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snaklistview.value().equals( snakLists[ 0 ] ),
+			true,
 			'Snaklistview\'s value changed.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snakLists[ 0 ].equals( snaklistview.value() ),
+			true,
 			'Verified new value.'
 		);
 
@@ -484,13 +503,15 @@
 
 		snaklistview.stopEditing();
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Left edit mode.'
 		);
 
-		assert.ok(
+		assert.strictEqual(
 			snakLists[ 1 ].equals( snaklistview.value() ),
+			true,
 			'Verified new value.'
 		);
 
@@ -500,8 +521,9 @@
 
 		snaklistview.stopEditing();
 
-		assert.ok(
-			!snaklistview.isInEditMode(),
+		assert.strictEqual(
+			snaklistview.isInEditMode(),
+			false,
 			'Left edit mode.'
 		);
 
@@ -602,13 +624,15 @@
 					snakview = snaklistview._lia.liInstance( $snakview );
 
 				if ( i === 0 ) {
-					assert.ok(
+					assert.strictEqual(
 						snakview._propertyLabelVisible,
+						true,
 						'Topmost snakview\'s property label is visible.'
 					);
 				} else {
-					assert.ok(
-						!snakview._propertyLabelVisible,
+					assert.strictEqual(
+						snakview._propertyLabelVisible,
+						false,
 						'Property label of snakview that is not on top of the snaklistview is not '
 							+ 'visible.'
 					);

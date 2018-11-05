@@ -13,8 +13,6 @@
 				"functions": false
 			}
 		],
-		"qunit/no-negated-ok": "off",
-		"qunit/no-ok-equality": "off",
 		"qunit/require-expect": "off",
 		"qunit/resolve-async": "off",
 		"space-unary-ops": "off"

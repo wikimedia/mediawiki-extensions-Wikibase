@@ -54,8 +54,9 @@
 
 		$entitysearch.data( 'entitysearch' ).destroy();
 
-		assert.ok(
-			$entitysearch.data( 'entitysearch' ) === undefined,
+		assert.strictEqual(
+			$entitysearch.data( 'entitysearch' ),
+			undefined,
 			'Destroyed widget.'
 		);
 	} );

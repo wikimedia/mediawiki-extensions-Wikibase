@@ -73,8 +73,9 @@
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
-		assert.ok(
-			referenceview !== undefined,
+		assert.notStrictEqual(
+			referenceview,
+			undefined,
 			'Initialized referenceview widget.'
 		);
 

@@ -42,8 +42,8 @@
 
 		addtoolbar.destroy();
 
-		assert.ok(
-			!$addtoolbar.data( 'addtoolbar' ),
+		assert.notOk(
+			$addtoolbar.data( 'addtoolbar' ),
 			'Destroyed widget.'
 		);
 	} );
