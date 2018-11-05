@@ -107,7 +107,6 @@ class ControlledFallbackEntityIdFormatter implements EntityIdFormatter {
 			[
 				'entityId' => $value->getSerialization(),
 				'exception' => $e,
-				'exception_message' => $e->getMessage(),
 			]
 		);
 		$this->statsdDataFactory->increment( $this->statsPrefix . 'targetFormatterFailed' );
