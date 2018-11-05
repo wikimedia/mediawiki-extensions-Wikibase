@@ -2,7 +2,6 @@
 
 namespace Wikibase\View;
 
-use ParserOutput;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
@@ -21,7 +20,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
  */
-class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
+class PropertyView extends EntityView {
 
 	/**
 	 * @var StatementSectionsView
@@ -39,7 +38,7 @@ class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
 	private $textProvider;
 
 	/**
-	 * @var CacheableEntityTermsView
+	 * @var EntityTermsView
 	 */
 	private $entityTermsView;
 
@@ -47,7 +46,7 @@ class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
-	 * @param CacheableEntityTermsView $entityTermsView
+	 * @param EntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param DataTypeFactory $dataTypeFactory
@@ -56,7 +55,7 @@ class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		CacheableEntityTermsView $entityTermsView,
+		EntityTermsView $entityTermsView,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
@@ -171,14 +170,6 @@ class PropertyView extends EntityView implements ViewPlaceHolderEmitter {
 		}
 
 		return '';
-	}
-
-	public function preparePlaceHolders(
-		ParserOutput $parserOutput,
-		EntityDocument $entity,
-		$languageCode
-	) {
-		$this->entityTermsView->preparePlaceHolders( $parserOutput, $entity, $languageCode );
 	}
 
 }
