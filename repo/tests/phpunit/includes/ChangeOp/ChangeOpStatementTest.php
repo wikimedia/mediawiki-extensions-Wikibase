@@ -36,9 +36,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @group ChangeOp
  *
  * @license GPL-2.0-or-later
- * @author Addshore
- * @author Daniel Kinzler
- * @author Thiemo Kreuz
  */
 class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;

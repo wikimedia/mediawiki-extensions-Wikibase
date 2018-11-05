@@ -16,9 +16,6 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
- * @author H. Snater < mediawiki@snater.com >
- * @author Addshore
- * @author Thiemo Kreuz
  */
 class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
