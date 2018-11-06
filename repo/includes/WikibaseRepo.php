@@ -1094,7 +1094,8 @@ class WikibaseRepo {
 				$entityDataTitle->getCanonicalURL() . '/',
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris(),
-				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: []
+				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: [],
+				$this->getSettings()->getSetting( 'rdfDataRightsUrl' )
 			);
 		}
 

@@ -95,6 +95,8 @@ return [
 		return $GLOBALS['wgRightsUrl'];
 	},
 
+	'rdfDataRightsUrl' => 'http://creativecommons.org/publicdomain/zero/1.0/',
+
 	'dataRightsText' => function() {
 		return $GLOBALS['wgRightsText'];
 	},

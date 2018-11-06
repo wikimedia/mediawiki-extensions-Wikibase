@@ -59,8 +59,6 @@ class RdfVocabulary {
 	const COMMONS_DATA_URI = 'http://commons.wikimedia.org/data/main/';
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
-	// TODO: make the license settable
-	const LICENSE = 'http://creativecommons.org/publicdomain/zero/1.0/';
 
 	// Gregorian calendar link.
 	// I'm not very happy about hardcoding it here but see no better way so far.
@@ -139,21 +137,25 @@ class RdfVocabulary {
 	 */
 	private $pagePropertyDefs;
 
+	private $licenseUrl;
+
 	/**
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
-	 * @param string   $dataUri Base URI for entity description URIs.
+	 * @param string $dataUri Base URI for entity description URIs.
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
 	 *                 if different from the default mapping.
 	 * @param string[] $pagePropertyDefs Mapping of page props: pageProp => wikibase predicate
 	 *                 All predicates will be prefixed with wikibase:
+	 * @param string $licenseUrl
 	 */
 	public function __construct(
 		array $conceptUris,
 		$dataUri,
 		array $canonicalLanguageCodes = [],
 		array $dataTypeUris = [],
-		array $pagePropertyDefs = []
+		array $pagePropertyDefs = [],
+		$licenseUrl = ''
 	) {
 		Assert::parameter(
 			array_key_exists( '', $conceptUris ),
@@ -232,6 +234,8 @@ class RdfVocabulary {
 				$this->getConceptNamespaces( $namespaceSuffix, $baseUri )
 			);
 		}
+
+		$this->licenseUrl = $licenseUrl;
 	}
 
 	/**
@@ -449,6 +453,13 @@ class RdfVocabulary {
 	 */
 	public function getPageProperties() {
 		return $this->pagePropertyDefs;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLicenseUrl() {
+		return $this->licenseUrl;
 	}
 
 }
