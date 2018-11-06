@@ -11,13 +11,18 @@ use CirrusSearch\WarningCollector;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
+use Elastica\Query\Prefix;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
 
 /**
  * Handles the search keyword 'haswbstatement:'
  *
- * Allows the user to search for pages/items that have wikibase statements associated with them.
+ * Allows the user to search for pages/items that have wikibase properties or statements associated
+ * with them.
+ *
+ * If a file page has ANY statement about property 'wikidata:P180' ('depicts') then it can be found
+ * by including 'haswbstatement:wikidata:P180' in the search query.
  *
  * If a file page has the statement 'wikidata:P180=wikidata:Q527' (meaning 'depicts sky') associated
  * with it then it can be found by including 'haswbstatement:wikidata:P180=wikidata:Q527' in the
@@ -27,11 +32,20 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementsField;
  * associated with it then it can be found by including 'haswbstatement:wikidata:P2014=79802' in the
  * search query.
  *
+ * A '*' at the end of a 'haswbstatement' string triggers a prefix search. If different file pages
+ * have the statements:
+ *	- wikidata:P180=wikidata:Q146[wikidata:P462=wikidata:Q23445] ('depicts cat, color black')
+ * 	- wikidata:P180=wikidata:Q146[wikidata:P462=wikidata:Q23444] ('depicts cat, color white')
+ * ... then both those pages will be found if 'wikidata:P180=wikidata:Q146[wikidata:P462=*' is
+ * included in the search query.
+ *
+ *
  * Statements can be combined using logical OR by separating them with a | character in a single
  * haswbstatement query e.g. 'haswbstatement:P999=Q888|P999=Q777'
  *
  * Statements can be combined using logical AND by using two separate haswbstatement queries e.g.
  * 'haswbstatement:P999=Q888 haswbstatement:P999=Q777'
+ *
  *
  * Note that NOT ALL STATEMENTS ARE INDEXED. Searching for a statement about a property that has
  * not been indexed will give an empty result set.
@@ -74,7 +88,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 *  string.
 	 */
 	protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
-		$parsedValue = $this->parseValue(
+		$queries = $this->parseValue(
 			$key,
 			$value,
 			$quotedValue,
@@ -82,31 +96,40 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 			'',
 			$context
 		);
-		if ( count( $parsedValue[ 'statements' ] ) == 0 ) {
+		if ( count( $queries ) == 0 ) {
 			$context->setResultsPossible( false );
 			return [ null, false ];
 		}
 
-		return [ $this->matchStatements( $parsedValue[ 'statements' ] ), false ];
+		return [ $this->combineQueries( $queries ), false ];
 	}
 
 	/**
 	 * Builds an OR between many statements about the wikibase item
 	 *
-	 * @param string[] $statements statements to match
+	 * @param string[] $queries queries to combine
 	 * @return \Elastica\Query\BoolQuery
 	 */
-	private function matchStatements( array $statements ) {
-		$query = new BoolQuery();
-		foreach ( $statements as $statement ) {
-			if ( strchr( $statement, '=' ) === false ) {
-				$query->addShould( new Match( StatementsField::NAME . '.property',
-					[ 'query' => $statement ] ) );
-			} else {
-				$query->addShould( new Match( StatementsField::NAME, [ 'query' => $statement ] ) );
+	private function combineQueries( array $queries ) {
+		$return = new BoolQuery();
+		foreach ( $queries as $query ) {
+			if ( $query['class'] == Prefix::class ) {
+				$return->addShould( new Prefix( [
+					$query['field'] =>
+						[
+							'value' => $query['string'],
+							'rewrite' => 'top_terms_1024'
+						]
+				] ) );
+			}
+			if ( $query['class'] == Match::class ) {
+				$return->addShould( new Match(
+					$query['field'],
+					[ 'query' => $query['string'] ]
+				) );
 			}
 		}
-		return $query;
+		return $return;
 	}
 
 	/**
@@ -116,7 +139,14 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * @param string $valueDelimiter
 	 * @param string $suffix
 	 * @param WarningCollector $warningCollector
-	 * @return array|false|null
+	 * @return array [
+	 * 		[
+	 * 			'class' => \Elastica\Query class name to be used to construct the query,
+	 * 			'field' => document field to run the query against,
+	 * 			'string' => string to search for
+	 * 		],
+	 * 		...
+	 * 	]
 	 */
 	public function parseValue(
 		$key,
@@ -126,29 +156,51 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		$suffix,
 		WarningCollector $warningCollector
 	) {
-		$validStatements = [];
+		$queries = [];
 		$statementStrings = explode( '|', $value );
 		foreach ( $statementStrings as $statementString ) {
-			if ( $this->isStatementStringValid( $statementString ) ) {
-				$validStatements[] = $statementString;
+			if ( !$this->isStatementStringValid( $statementString ) ) {
+				continue;
 			}
+			if ( $this->statementContainsPropertyOnly( $statementString ) ) {
+				$queries[] = [
+					'class' => Match::class,
+					'field' => StatementsField::NAME . '.property',
+					'string' => $statementString,
+				];
+				continue;
+			}
+			if ( $this->statementEndsWithWildcard( $statementString ) ) {
+				$queries[] = [
+					'class' => Prefix::class,
+					'field' => StatementsField::NAME,
+					'string' => substr( $statementString, 0, strlen( $statementString ) - 1 ),
+				];
+				continue;
+			}
+			$queries[] = [
+				'class' => Match::class,
+				'field' => StatementsField::NAME,
+				'string' => $statementString,
+			];
 		}
-		if ( count( $validStatements ) == 0 ) {
+		if ( count( $queries ) == 0 ) {
 			$warningCollector->addWarning(
 				'wikibase-haswbstatement-feature-no-valid-statements',
 				$key
 			);
 		}
-		return [ 'statements' => $validStatements ];
+		return $queries;
 	}
 
 	/**
-	 * Check that a statement string is valid. A valid string is a P-id followed by an equals and
+	 * Check that a statement string is valid. A valid string is a P-id
 	 * optionally suffixed with a foreign repo name followed by a colon
 	 *
 	 * The following strings are valid:
 	 * Wikidata:P180=Wikidata:Q537 (assuming 'Wikidata' is a valid foreign repo name)
 	 * P2014=79802
+	 * P999
 	 *
 	 * The following strings are invalid:
 	 * NON_EXISTENT_FOREIGN_REPO_NAME:P123=Wikidata:Q537
@@ -177,17 +229,31 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		);
 	}
 
+	private function statementContainsPropertyOnly( $statementString ) {
+		if ( strpos( $statementString, '=' ) === false ) {
+			return true;
+		}
+		return false;
+	}
+
+	private function statementEndsWithWildcard( $statementString ) {
+		if ( substr( $statementString, -1 ) == '*' ) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * @param KeywordFeatureNode $node
 	 * @param QueryBuildingContext $context
 	 * @return AbstractQuery|null
 	 */
 	public function getFilterQuery( KeywordFeatureNode $node, QueryBuildingContext $context ) {
-		$statements = $node->getParsedValue()['statements'];
+		$statements = $node->getParsedValue();
 		if ( $statements === [] ) {
 			return null;
 		}
-		return $this->matchStatements( $statements );
+		return $this->combineQueries( $statements );
 	}
 
 }
