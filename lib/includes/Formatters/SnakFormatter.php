@@ -32,6 +32,7 @@ interface SnakFormatter {
 	const FORMAT_HTML = 'text/html';
 	const FORMAT_HTML_DIFF = 'text/html; disposition=diff';
 	const FORMAT_HTML_VERBOSE = 'text/html; disposition=verbose';
+	const FORMAT_HTML_VERBOSE_PREVIEW = 'text/html; disposition=verbose-preview';
 
 	/**
 	 * Options key for controlling error handling.
