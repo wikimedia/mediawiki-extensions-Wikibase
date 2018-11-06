@@ -7,6 +7,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
 use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
+use Wikibase\Lib\SnakFormat;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -42,6 +43,11 @@ class WikibaseSnakFormatterBuilders {
 	 */
 	private $dataTypeFactory;
 
+	/**
+	 * @var SnakFormat
+	 */
+	private $snakFormat;
+
 	public function __construct(
 		WikibaseValueFormatterBuilders $valueFormatterBuilders,
 		PropertyInfoLookup $propertyInfoLookup,
@@ -52,26 +58,7 @@ class WikibaseSnakFormatterBuilders {
 		$this->propertyInfoLookup = $propertyInfoLookup;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
-	}
-
-	/**
-	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string Either SnakFormatter::FORMAT_HTML, ...WIKI or ...PLAIN.
-	 */
-	private function getBaseFormat( $format ) {
-		switch ( $format ) {
-			case SnakFormatter::FORMAT_HTML:
-			case SnakFormatter::FORMAT_HTML_DIFF:
-			case SnakFormatter::FORMAT_HTML_VERBOSE:
-				return SnakFormatter::FORMAT_HTML;
-			case SnakFormatter::FORMAT_WIKI:
-			case SnakFormatter::FORMAT_PLAIN:
-				return $format;
-		}
-
-		throw new InvalidArgumentException( 'Unsupported output format: ' . $format );
+		$this->snakFormat = new SnakFormat();
 	}
 
 	/**
@@ -81,7 +68,7 @@ class WikibaseSnakFormatterBuilders {
 	 * @return bool True if $format is one of the SnakFormatter::FORMAT_HTML_XXX formats.
 	 */
 	private function isHtmlFormat( $format ) {
-		return $this->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML;
+		return $this->snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML;
 	}
 
 	/**

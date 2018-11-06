@@ -36,6 +36,7 @@ use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter;
+use Wikibase\Lib\SnakFormat;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -370,16 +371,10 @@ return call_user_func( function() {
 				return $factory->buildItemValidators();
 			},
 			'formatter-factory-callback' => function ( $format, FormatterOptions $options ) {
-
 				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+				$snakFormat = new SnakFormat();
 
-				$htmlFormats = [
-					SnakFormatter::FORMAT_HTML,
-					SnakFormatter::FORMAT_HTML_DIFF,
-					SnakFormatter::FORMAT_HTML_VERBOSE,
-				];
-
-				if ( in_array( $format, $htmlFormats ) ) {
+				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
 					//TODO Cleanup the code once https://phabricator.wikimedia.org/T196882 is Done.
 
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewItemIdFormatter' );
