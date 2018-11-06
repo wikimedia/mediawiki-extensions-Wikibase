@@ -97,6 +97,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\SitesModuleWorker' => __DIR__ . '/includes/Modules/SitesModuleWorker.php',
 	'Wikibase\\Lib\\Sites\\SiteMatrixParser' => __DIR__ . '/includes/Sites/SiteMatrixParser.php',
 	'Wikibase\\Lib\\Sites\\SitesBuilder' => __DIR__ . '/includes/Sites/SitesBuilder.php',
+	'Wikibase\\Lib\\SnakFormat' => __DIR__ . '/includes/Formatters/SnakFormat.php',
 	'Wikibase\\Lib\\SnakFormatter' => __DIR__ . '/includes/Formatters/SnakFormatter.php',
 	'Wikibase\\Lib\\SnakUrlExpander' => __DIR__ . '/includes/SnakUrlExpander.php',
 	'Wikibase\\Lib\\StaticContentLanguages' => __DIR__ . '/includes/StaticContentLanguages.php',
