@@ -85,8 +85,10 @@ class EntityTermsViewFactory {
 	private function newTermboxView( LanguageFallbackChain $fallbackChain ) {
 		return new TermboxView(
 			$fallbackChain,
-			MediaWikiServices::getInstance()->getHttpRequestFactory(),
-			WikibaseRepo::getDefaultInstance()->getSettings()
+			new TermboxViewSsrClient(
+				MediaWikiServices::getInstance()->getHttpRequestFactory(),
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
+			)
 		);
 	}
 

@@ -261,6 +261,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ParserOutput\\StatementDataUpdater' => __DIR__ . '/includes/ParserOutput/StatementDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\TermboxFlag' => __DIR__ . '/includes/ParserOutput/TermboxFlag.php',
 	'Wikibase\\Repo\\ParserOutput\\TermboxView' => __DIR__ . '/includes/ParserOutput/TermboxView.php',
+	'Wikibase\\Repo\\ParserOutput\\TermboxViewSsrClient' => __DIR__ . '/includes/ParserOutput/TermboxViewSsrClient.php',
 	'Wikibase\\Repo\\ParserOutput\\TextInjector' => __DIR__ . '/includes/ParserOutput/TextInjector.php',
 	'Wikibase\\Repo\\Parsers\\EntityIdValueParser' => __DIR__ . '/includes/Parsers/EntityIdValueParser.php',
 	'Wikibase\\Repo\\Parsers\\MediaWikiMonthNameProvider' => __DIR__ . '/includes/Parsers/MediaWikiMonthNameProvider.php',

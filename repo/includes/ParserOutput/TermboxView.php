@@ -2,13 +2,12 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use MediaWiki\Http\HttpRequestFactory;
+use Exception;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\SettingsArray;
 use Wikibase\View\CacheableEntityTermsView;
 
 /**
@@ -16,20 +15,18 @@ use Wikibase\View\CacheableEntityTermsView;
  */
 class TermboxView implements CacheableEntityTermsView {
 
+	// todo I suggest we use the desktop view as fallback
+	/* public */ const FALLBACK_HTML = '<div class="wikibase-entitytermsview"></div>';
+
 	private $fallbackChain;
-
-	private $requestFactory;
-
-	private $settings;
+	private $ssrClient;
 
 	public function __construct(
 		LanguageFallbackChain $fallbackChain,
-		HttpRequestFactory $requestFactory,
-		SettingsArray $settings
+		TermboxViewSsrClient $ssrClient
 	) {
 		$this->fallbackChain = $fallbackChain;
-		$this->requestFactory = $requestFactory;
-		$this->settings = $settings;
+		$this->ssrClient = $ssrClient;
 	}
 
 	public function getHtml(
@@ -39,13 +36,11 @@ class TermboxView implements CacheableEntityTermsView {
 		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	) {
-		$request = $this->requestFactory->create(
-			$this->settings->getSetting( 'ssrServerUrl' ),
-			[ /* TODO attach required data */ ]
-		);
-		$request->execute();
-
-		return $request->getContent();
+		try {
+			return $this->ssrClient->getContent( $entityId, $mainLanguageCode );
+		} catch ( Exception $exception ) {
+			return self::FALLBACK_HTML;
+		}
 	}
 
 	/**
