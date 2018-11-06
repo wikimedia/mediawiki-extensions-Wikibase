@@ -64,6 +64,14 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 			[ SnakFormatter::FORMAT_HTML_VERBOSE, SnakFormatter::FORMAT_HTML ],
 			SnakFormatter::FORMAT_HTML_VERBOSE
 		];
+		yield [
+			[
+				SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW,
+				SnakFormatter::FORMAT_HTML_VERBOSE,
+				SnakFormatter::FORMAT_HTML
+			],
+			SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW
+		];
 	}
 
 	/**
