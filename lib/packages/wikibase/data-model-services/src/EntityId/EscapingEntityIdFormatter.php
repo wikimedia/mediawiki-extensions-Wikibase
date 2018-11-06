@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @since 1.1
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EscapingEntityIdFormatter implements EntityIdFormatter {

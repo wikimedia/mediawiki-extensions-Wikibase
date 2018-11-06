@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @covers Wikibase\DataModel\Services\Statement\Grouper\ByPropertyIdStatementGrouper
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class ByPropertyIdStatementGrouperTest extends PHPUnit_Framework_TestCase {

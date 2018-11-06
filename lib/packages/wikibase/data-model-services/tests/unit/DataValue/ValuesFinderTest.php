@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\Snak;
 /**
  * @covers Wikibase\DataModel\Services\DataValue\ValuesFinder
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ValuesFinderTest extends \PHPUnit_Framework_TestCase {

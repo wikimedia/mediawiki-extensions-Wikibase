@@ -9,7 +9,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * @since 3.7
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PrefixMappingEntityIdParserFactory {
 

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {

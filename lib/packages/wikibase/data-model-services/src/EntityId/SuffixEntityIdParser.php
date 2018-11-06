@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  *
  * @since 1.1
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SuffixEntityIdParser implements EntityIdParser {

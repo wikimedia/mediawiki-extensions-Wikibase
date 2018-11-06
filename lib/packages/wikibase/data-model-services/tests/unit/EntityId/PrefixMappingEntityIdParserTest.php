@@ -15,7 +15,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PrefixMappingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 

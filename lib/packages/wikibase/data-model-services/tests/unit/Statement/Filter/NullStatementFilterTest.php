@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * @covers Wikibase\DataModel\Services\Statement\Filter\NullStatementFilter
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class NullStatementFilterTest extends PHPUnit_Framework_TestCase {

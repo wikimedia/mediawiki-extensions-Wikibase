@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * @since 2.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class PropertyDataTypeLookupException extends RuntimeException {
