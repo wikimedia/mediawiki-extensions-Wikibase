@@ -2,13 +2,14 @@
 
 namespace Wikibase\Repo\Tests;
 
+use Language;
 use PHPUnit4And6Compat;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityDocumentView;
-use Wikibase\View\EntityTermsView;
 
 /**
  * @group Wikibase
@@ -52,15 +53,12 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertInternalType( 'callable', $callback );
 
-		$entityTermsView = $this->getMock( EntityTermsView::class );
-
 		$entityView = call_user_func(
 			$callback,
-			'en',
-			$this->getMock( LabelDescriptionLookup::class ),
+			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			new Item( new ItemId( 'Q123' ) ),
+			new EntityInfo( [] )
 		);
 
 		$this->assertInstanceOf( EntityDocumentView::class, $entityView );
