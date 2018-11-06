@@ -15,6 +15,7 @@
 	"devDependencies": {
 		"eslint-config-wikimedia": "0.8.1",
 		"eslint-plugin-qunit": "3.3.1",
+		"eslint-plugin-compat": "^2.6.3",
 		"grunt": "1.0.3",
 		"grunt-banana-checker": "0.6.0",
 		"grunt-eslint": "21.0.0",
@@ -31,5 +32,6 @@
 		"extensions/**",
 		"vendor/**",
 		"view/lib/**"
-	]
+	],
+	"browserslist": ["ie 11"]
 }
