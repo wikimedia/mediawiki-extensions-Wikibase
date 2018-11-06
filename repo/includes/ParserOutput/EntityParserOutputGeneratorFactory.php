@@ -189,21 +189,21 @@ class EntityParserOutputGeneratorFactory {
 				$this->entityReferenceExtractorDelegator,
 				$this->entityTitleLookup
 			),
-			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
-			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
+			$this->getEntityUpdater( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
+			$this->getEntityUpdater( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
 		];
 
 		if ( !empty( $this->preferredPageImagesProperties )
 			&& ExtensionRegistry::getInstance()->isLoaded( 'PageImages' )
 		) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter( new PageImagesDataUpdater(
+			$updaters[] = $this->getEntityUpdater( new PageImagesDataUpdater(
 				$this->preferredPageImagesProperties,
 				PageImages::PROP_NAME_FREE
 			) );
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'GeoData' ) ) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter( new GeoDataDataUpdater(
+			$updaters[] = $this->getEntityUpdater( new GeoDataDataUpdater(
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,
 				$this->globeUris
@@ -211,12 +211,18 @@ class EntityParserOutputGeneratorFactory {
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Math' ) ) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter(
+			$updaters[] = $this->getEntityUpdater(
 				new \MathDataUpdater( $propertyDataTypeMatcher )
 			);
 		}
 
 		return $updaters;
+	}
+
+	private function getEntityUpdater( StatementDataUpdater $statementUpdater ): EntityParserOutputDataUpdater {
+		return new SubEntityDataUpdaterAdapter(
+			new EntityStatementDataUpdaterAdapter( $statementUpdater )
+		);
 	}
 
 }
