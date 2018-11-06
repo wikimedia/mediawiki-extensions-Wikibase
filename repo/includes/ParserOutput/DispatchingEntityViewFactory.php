@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use Language;
 use OutOfBoundsException;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\View\EditSectionGenerator;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\View\EntityDocumentView;
-use Wikibase\View\EntityTermsView;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -35,35 +35,31 @@ class DispatchingEntityViewFactory {
 	/**
 	 * Creates a new EntityDocumentView that can display the given type of entity.
 	 *
-	 * @param string $entityType
-	 * @param string $languageCode
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param LanguageFallbackChain $languageFallbackChain
-	 * @param EditSectionGenerator $editSectionGenerator
-	 * @param EntityTermsView $entityTermsView
+	 * @param Language $language
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param EntityDocument $entity
+	 * @param EntityInfo $entityInfo
 	 *
 	 * @throws OutOfBoundsException
 	 * @return EntityDocumentView
 	 */
 	public function newEntityView(
-		$entityType,
-		$languageCode,
-		LabelDescriptionLookup $labelDescriptionLookup,
-		LanguageFallbackChain $languageFallbackChain,
-		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		Language $language,
+		LanguageFallbackChain $fallbackChain,
+		EntityDocument $entity,
+		EntityInfo $entityInfo
 	) {
+		$entityType = $entity->getType();
 		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
 			throw new OutOfBoundsException( "No EntityDocumentView is registered for entity type '$entityType'" );
 		}
 
 		$entityView = call_user_func(
 			$this->entityViewFactoryCallbacks[$entityType],
-			$languageCode,
-			$labelDescriptionLookup,
-			$languageFallbackChain,
-			$editSectionGenerator,
-			$entityTermsView
+			$language,
+			$fallbackChain,
+			$entity,
+			$entityInfo
 		);
 
 		Assert::postcondition(

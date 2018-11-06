@@ -12,6 +12,9 @@ use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfo;
+use Wikibase\Lib\Store\EntityInfoTermLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -102,6 +105,11 @@ class ViewFactory {
 	private $textProvider;
 
 	/**
+	 * @var SpecialPageLinker
+	 */
+	private $specialPageLinker;
+
+	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -117,6 +125,7 @@ class ViewFactory {
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
 	 * @param LocalizedTextProvider $textProvider
+	 * @param SpecialPageLinker $specialPageLinker
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -135,7 +144,8 @@ class ViewFactory {
 		array $siteLinkGroups = [],
 		array $specialSiteLinkGroups = [],
 		array $badgeItems = [],
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		SpecialPageLinker $specialPageLinker
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -158,6 +168,7 @@ class ViewFactory {
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
 		$this->textProvider = $textProvider;
+		$this->specialPageLinker = $specialPageLinker;
 	}
 
 	/**
@@ -182,24 +193,25 @@ class ViewFactory {
 	/**
 	 * Creates an ItemView suitable for rendering the item.
 	 *
-	 * @param string $languageCode UI language
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EditSectionGenerator $editSectionGenerator
-	 * @param EntityTermsView $entityTermsView
+	 * @param EntityInfo $entityInfo
+	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
+	 * @throws \MWException
 	 */
 	public function newItemView(
-		$languageCode,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EntityInfo $entityInfo,
+		CacheableEntityTermsView $entityTermsView
 	) {
+		$editSectionGenerator = $this->newToolbarEditSectionGenerator();
+
 		$statementSectionsView = $this->newStatementSectionsView(
-			$languageCode,
-			$labelDescriptionLookup,
+			$language->getCode(),
+			$this->newEntityInfoBasedLabelDescriptionLookup( $fallbackChain, $entityInfo ),
 			$fallbackChain,
 			$editSectionGenerator
 		);
@@ -208,7 +220,7 @@ class ViewFactory {
 			$this->templateFactory,
 			$this->siteLookup->getSites(),
 			$editSectionGenerator,
-			$this->plainTextIdFormatterFactory->getEntityIdFormatter( Language::factory( $languageCode ) ),
+			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $language ),
 			$this->languageNameLookup,
 			$this->numberLocalizer,
 			$this->badgeItems,
@@ -221,7 +233,7 @@ class ViewFactory {
 			$entityTermsView,
 			$this->languageDirectionalityLookup,
 			$statementSectionsView,
-			$languageCode,
+			$language->getCode(),
 			$siteLinksView,
 			$this->siteLinkGroups,
 			$this->textProvider
@@ -231,26 +243,25 @@ class ViewFactory {
 	/**
 	 * Creates an PropertyView suitable for rendering the property.
 	 *
-	 * @param string $languageCode
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EditSectionGenerator $editSectionGenerator
-	 * @param EntityTermsView $entityTermsView
+	 * @param EntityInfo $entityInfo
+	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
+	 * @throws \MWException
 	 */
 	public function newPropertyView(
-		$languageCode,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EntityInfo $entityInfo,
+		CacheableEntityTermsView $entityTermsView
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(
-			$languageCode,
-			$labelDescriptionLookup,
+			$language->getCode(),
+			$this->newEntityInfoBasedLabelDescriptionLookup( $fallbackChain, $entityInfo ),
 			$fallbackChain,
-			$editSectionGenerator
+			$this->newToolbarEditSectionGenerator()
 		);
 
 		return new PropertyView(
@@ -259,7 +270,7 @@ class ViewFactory {
 			$this->languageDirectionalityLookup,
 			$statementSectionsView,
 			$this->dataTypeFactory,
-			$languageCode,
+			$language->getCode(),
 			$this->textProvider
 		);
 	}
@@ -334,6 +345,24 @@ class ViewFactory {
 			$propertyIdFormatter,
 			$editSectionGenerator,
 			$statementHtmlGenerator
+		);
+	}
+
+	private function newToolbarEditSectionGenerator() : ToolbarEditSectionGenerator {
+		return new ToolbarEditSectionGenerator(
+			$this->specialPageLinker,
+			$this->templateFactory,
+			$this->textProvider
+		);
+	}
+
+	private function newEntityInfoBasedLabelDescriptionLookup(
+		LanguageFallbackChain $fallbackChain,
+		EntityInfo $entityInfo
+	) : LanguageFallbackLabelDescriptionLookup {
+		return new LanguageFallbackLabelDescriptionLookup(
+			new EntityInfoTermLookup( $entityInfo ),
+			$fallbackChain
 		);
 	}
 

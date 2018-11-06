@@ -3,15 +3,15 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
+use Language;
 use LogicException;
 use OutOfBoundsException;
 use PHPUnit4And6Compat;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
-use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityDocumentView;
-use Wikibase\View\EntityTermsView;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
@@ -40,15 +40,12 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = new DispatchingEntityViewFactory(
 			[]
 		);
-		$entityTermsView = $this->getMock( EntityTermsView::class );
 
 		$factory->newEntityView(
-			'unknown',
-			'en',
-			$this->getMock( LabelDescriptionLookup::class ),
+			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$this->createMock( EntityDocument::class ),
+			$this->createMock( EntityInfo::class )
 		);
 	}
 
@@ -63,47 +60,48 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 				}
 			]
 		);
-		$entityTermsView = $this->getMock( EntityTermsView::class );
+
+		$unknownEntity = $this->createMock( EntityDocument::class );
+		$unknownEntity->expects( $this->once() )
+			->method( 'getType' )
+			->willReturn( 'foo' );
 
 		$factory->newEntityView(
-			'foo',
-			'en',
-			$this->getMock( LabelDescriptionLookup::class ),
+			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$unknownEntity,
+			$this->createMock( EntityInfo::class )
 		);
 	}
 
 	public function testNewEntityView() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$language = Language::factory( 'en' );
 		$languageFallbackChain = new LanguageFallbackChain( [] );
-		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
-		$entityTermsView = $this->getMock( EntityTermsView::class );
-		$entityView = $this->getMockBuilder( EntityDocumentView::class )
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
+		$entity = $this->createMock( EntityDocument::class );
+		$entity->expects( $this->once() )
+			->method( 'getType' )
+			->willReturn( 'foo' );
+		$entityInfo = $this->createMock( EntityInfo::class );
+		$entityView = $this->createMock( EntityDocumentView::class );
 
 		$factory = new DispatchingEntityViewFactory(
 			[
 				'foo' => function(
-					$languageCodeParam,
-					LabelDescriptionLookup $labelDescriptionLookupParam,
-					LanguageFallbackChain $languageFallbackChainParam,
-					EditSectionGenerator $editSectionGeneratorParam,
-					EntityTermsView $entityTermsViewParam
+					Language $languageParam,
+					LanguageFallbackChain $fallbackChainParam,
+					EntityDocument $entityParam,
+					EntityInfo $entityInfoParam
 				) use(
-					$labelDescriptionLookup,
+					$language,
 					$languageFallbackChain,
-					$editSectionGenerator,
-					$entityTermsView,
+					$entity,
+					$entityInfo,
 					$entityView
 				) {
-					$this->assertEquals( 'en', $languageCodeParam );
-					$this->assertSame( $labelDescriptionLookup, $labelDescriptionLookupParam );
-					$this->assertSame( $languageFallbackChain, $languageFallbackChainParam );
-					$this->assertSame( $editSectionGenerator, $editSectionGeneratorParam );
-					$this->assertSame( $entityTermsView, $entityTermsViewParam );
+					$this->assertSame( $language, $languageParam );
+					$this->assertSame( $languageFallbackChain, $fallbackChainParam );
+					$this->assertSame( $entity, $entityParam );
+					$this->assertSame( $entityInfo, $entityInfoParam );
 
 					return $entityView;
 				}
@@ -111,12 +109,10 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$newEntityView = $factory->newEntityView(
-			'foo',
-			'en',
-			$labelDescriptionLookup,
+			$language,
 			$languageFallbackChain,
-			$editSectionGenerator,
-			$entityTermsView
+			$entity,
+			$entityInfo
 		);
 
 		$this->assertSame( $entityView, $newEntityView );
