@@ -1,5 +1,9 @@
 # Wikibase DataModel Serialization release notes
 
+## 2.9.0 (2018-11-06)
+
+* Added compatibility with Wikibase DataModel 9.x
+
 ## 2.8.0 (2018-08-07)
 
 * Added compatibility with Wikibase DataModel 8.x
