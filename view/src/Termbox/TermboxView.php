@@ -1,35 +1,32 @@
 <?php
 
-namespace Wikibase\Repo\ParserOutput;
+namespace Wikibase\View;
 
-use MediaWiki\Http\HttpRequestFactory;
+use Exception;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\SettingsArray;
-use Wikibase\View\CacheableEntityTermsView;
+use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 
 /**
  * @license GPL-2.0-or-later
  */
 class TermboxView implements CacheableEntityTermsView {
 
+	// render the root element and give client side re-rendering a chance
+	/* public */ const FALLBACK_HTML = '<div class="wikibase-entitytermsview renderer-fallback"></div>';
+
 	private $fallbackChain;
-
-	private $requestFactory;
-
-	private $settings;
+	private $renderer;
 
 	public function __construct(
 		LanguageFallbackChain $fallbackChain,
-		HttpRequestFactory $requestFactory,
-		SettingsArray $settings
+		TermboxRenderer $renderer
 	) {
 		$this->fallbackChain = $fallbackChain;
-		$this->requestFactory = $requestFactory;
-		$this->settings = $settings;
+		$this->renderer = $renderer;
 	}
 
 	public function getHtml(
@@ -39,13 +36,11 @@ class TermboxView implements CacheableEntityTermsView {
 		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	) {
-		$request = $this->requestFactory->create(
-			$this->settings->getSetting( 'ssrServerUrl' ),
-			[ /* TODO attach required data */ ]
-		);
-		$request->execute();
-
-		return $request->getContent();
+		try {
+			return $this->renderer->getContent( $entityId, $mainLanguageCode );
+		} catch ( Exception $exception ) {
+			return self::FALLBACK_HTML;
+		}
 	}
 
 	/**

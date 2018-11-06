@@ -16,6 +16,8 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
+use Wikibase\View\TermboxView;
 use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -85,8 +87,10 @@ class EntityTermsViewFactory {
 	private function newTermboxView( LanguageFallbackChain $fallbackChain ) {
 		return new TermboxView(
 			$fallbackChain,
-			MediaWikiServices::getInstance()->getHttpRequestFactory(),
-			WikibaseRepo::getDefaultInstance()->getSettings()
+			new TermboxRemoteRenderer(
+				MediaWikiServices::getInstance()->getHttpRequestFactory(),
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
+			)
 		);
 	}
 
