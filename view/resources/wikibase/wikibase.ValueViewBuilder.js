@@ -80,7 +80,7 @@
 		_getOptions: function ( dataType, dataValue, propertyId ) {
 			var dataTypeId = dataType && dataType.getId();
 			var valueViewOptions = $.extend( {}, this._baseOptions, {
-				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html; disposition=verbose' ),
+				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html; disposition=verbose-preview' ),
 				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/plain' ),
 				value: dataValue
 			} );
