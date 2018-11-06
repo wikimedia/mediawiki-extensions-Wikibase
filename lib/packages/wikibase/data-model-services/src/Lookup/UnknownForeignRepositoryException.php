@@ -8,7 +8,7 @@ use InvalidArgumentException;
 /**
  * @since 3.7
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class UnknownForeignRepositoryException extends InvalidArgumentException {
 

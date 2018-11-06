@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @since 1.1
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 /**
  * @covers Wikibase\DataModel\Services\Diff\Internal\AliasGroupListPatcher
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AliasGroupListPatcherTest extends PHPUnit_Framework_TestCase {

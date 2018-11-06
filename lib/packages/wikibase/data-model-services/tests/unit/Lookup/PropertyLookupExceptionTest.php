@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\PropertyLookupException
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class PropertyLookupExceptionTest extends \PHPUnit_Framework_TestCase {

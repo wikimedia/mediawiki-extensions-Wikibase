@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class EscapingEntityIdFormatterTest extends PHPUnit_Framework_TestCase {

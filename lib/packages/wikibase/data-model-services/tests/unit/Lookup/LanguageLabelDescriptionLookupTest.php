@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {

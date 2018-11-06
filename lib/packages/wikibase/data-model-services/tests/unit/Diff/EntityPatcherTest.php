@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Fixtures\EntityOfUnknownType;
 /**
  * @covers Wikibase\DataModel\Services\Diff\EntityPatcher
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Christoph Fischer < christoph.fischer@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

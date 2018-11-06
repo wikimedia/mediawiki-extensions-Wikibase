@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {

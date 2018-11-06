@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * @covers Wikibase\DataModel\Services\Diff\TermListPatcher
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class TermListPatcherTest extends PHPUnit_Framework_TestCase {

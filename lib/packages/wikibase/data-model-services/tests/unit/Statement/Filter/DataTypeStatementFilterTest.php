@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * @covers Wikibase\DataModel\Services\Statement\Filter\DataTypeStatementFilter
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class DataTypeStatementFilterTest extends PHPUnit_Framework_TestCase {

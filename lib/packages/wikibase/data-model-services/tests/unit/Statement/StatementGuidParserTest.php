@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 /**
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidParser
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {

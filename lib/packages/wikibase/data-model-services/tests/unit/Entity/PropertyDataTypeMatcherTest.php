@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 /**
  * @covers Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class PropertyDataTypeMatcherTest extends PHPUnit_Framework_TestCase {

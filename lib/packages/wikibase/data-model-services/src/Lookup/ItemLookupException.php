@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @since 2.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class ItemLookupException extends EntityLookupException {

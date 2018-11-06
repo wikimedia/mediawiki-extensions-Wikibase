@@ -15,7 +15,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 

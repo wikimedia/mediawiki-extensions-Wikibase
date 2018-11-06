@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class LabelDescriptionLookupExceptionTest extends PHPUnit_Framework_TestCase {

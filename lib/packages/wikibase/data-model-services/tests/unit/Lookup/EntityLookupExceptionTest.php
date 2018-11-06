@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\EntityLookupException
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class EntityLookupExceptionTest extends \PHPUnit_Framework_TestCase {

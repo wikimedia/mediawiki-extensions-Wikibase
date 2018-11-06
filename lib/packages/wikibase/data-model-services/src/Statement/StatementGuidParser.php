@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
  *
  * @since 1.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class StatementGuidParser {

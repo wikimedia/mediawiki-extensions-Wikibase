@@ -3,7 +3,7 @@
 /**
  * PHPUnit test bootstrap file for the Wikibase DataModel Services component.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 

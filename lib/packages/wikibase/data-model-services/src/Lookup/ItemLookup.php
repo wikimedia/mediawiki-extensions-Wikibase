@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @since 1.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 interface ItemLookup {

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @since 3.2
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class FilteringStatementGrouper implements StatementGrouper {

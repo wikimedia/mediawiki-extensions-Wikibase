@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 /**
  * @covers Wikibase\DataModel\Services\Diff\EntityDiffer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityDifferTest extends \PHPUnit_Framework_TestCase {

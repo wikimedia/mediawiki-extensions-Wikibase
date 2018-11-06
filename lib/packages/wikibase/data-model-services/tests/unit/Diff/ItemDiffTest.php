@@ -15,7 +15,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @covers Wikibase\DataModel\Services\Diff\ItemDiff
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

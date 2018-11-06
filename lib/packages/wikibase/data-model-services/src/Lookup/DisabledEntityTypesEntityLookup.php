@@ -12,7 +12,7 @@ use Wikimedia\Assert\Assert;
  *
  * @since 3.9
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class DisabledEntityTypesEntityLookup implements EntityLookup {

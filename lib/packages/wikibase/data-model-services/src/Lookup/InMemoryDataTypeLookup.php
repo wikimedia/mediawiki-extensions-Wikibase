@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @since 1.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class InMemoryDataTypeLookup implements PropertyDataTypeLookup {

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class InMemoryDataTypeLookupTest extends \PHPUnit_Framework_TestCase {

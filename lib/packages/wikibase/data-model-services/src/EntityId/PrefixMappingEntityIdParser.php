@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  *
  * @since 3.7
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PrefixMappingEntityIdParser implements EntityIdParser {
 

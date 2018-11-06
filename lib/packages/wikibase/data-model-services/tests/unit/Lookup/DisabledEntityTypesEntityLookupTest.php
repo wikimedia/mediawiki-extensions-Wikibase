@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
 class DisabledEntityTypesEntityLookupTest extends \PHPUnit_Framework_TestCase {
