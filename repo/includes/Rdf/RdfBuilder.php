@@ -324,7 +324,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
 			// Dumps don't need version/license info for each entity, since it is included in the dump header
 			$this->writer
-				->say( RdfVocabulary::NS_CC, 'license' )->is( RdfVocabulary::LICENSE )
+				->say( RdfVocabulary::NS_CC, 'license' )->is( $this->vocabulary->getLicenseUrl() )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION );
 		}
 
@@ -537,7 +537,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer->about( RdfVocabulary::NS_ONTOLOGY, 'Dump' )
 			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
 			->a( 'owl', 'Ontology' )
-			->say( RdfVocabulary::NS_CC, 'license' )->is( RdfVocabulary::LICENSE )
+			->say( RdfVocabulary::NS_CC, 'license' )->is( $this->vocabulary->getLicenseUrl() )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime' )
 			->say( 'owl', 'imports' )->is( RdfVocabulary::getOntologyURI() );

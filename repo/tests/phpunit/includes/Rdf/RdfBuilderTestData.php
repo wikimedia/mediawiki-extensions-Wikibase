@@ -163,7 +163,11 @@ class RdfBuilderTestData {
 	public function getVocabulary() {
 		return new RdfVocabulary(
 			[ '' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
-			self::URI_DATA
+			self::URI_DATA,
+			[],
+			[],
+			[],
+			'http://creativecommons.org/publicdomain/zero/1.0/'
 		);
 	}
 

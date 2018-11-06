@@ -28,7 +28,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
 			'<DATA>',
 			[ 'German' => 'de' ],
-			[ 'acme' => 'http://acme.test/vocab/ACME' ]
+			[ 'acme' => 'http://acme.test/vocab/ACME' ],
+			[],
+			'http://cc0.test/'
 		);
 	}
 
@@ -171,6 +173,11 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$dataValue = new StringValue( '' );
 		$actual = $this->newInstance()->getValueTypeName( $dataValue );
 		$this->assertSame( 'StringValue', $actual );
+	}
+
+	public function testGetLicenseUrl() {
+		$actual = $this->newInstance()->getLicenseUrl();
+		$this->assertSame( 'http://cc0.test/', $actual );
 	}
 
 }
