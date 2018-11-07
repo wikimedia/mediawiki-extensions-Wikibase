@@ -14,7 +14,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @since 6.3
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RepositoryNameAssert {
 

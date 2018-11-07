@@ -7,7 +7,7 @@ namespace Wikibase\DataModel\Entity;
  *
  * @since 7.5
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 interface ClearableEntity {
 

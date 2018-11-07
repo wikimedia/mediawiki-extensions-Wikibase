@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\SnakList;
  *
  * @since 0.1, instantiable since 0.4
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class Reference implements Hashable, Comparable, Immutable, Countable {

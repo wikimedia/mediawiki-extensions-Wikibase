@@ -10,7 +10,7 @@ use Serializable;
  * @since 0.5
  * Abstract since 2.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 abstract class EntityId implements Comparable, Serializable {
 

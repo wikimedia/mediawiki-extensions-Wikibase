@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementByGuidMap;
 /**
  * @covers \Wikibase\DataModel\Statement\StatementByGuidMap
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Kai Nissen < kai.nissen@wikimedia.de >
  */
