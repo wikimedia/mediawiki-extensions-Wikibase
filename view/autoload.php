@@ -20,7 +20,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\LanguageDirectionalityLookup' => __DIR__ . '/src/LanguageDirectionalityLookup.php',
 	'Wikibase\\View\\LocalizedTextProvider' => __DIR__ . '/src/LocalizedTextProvider.php',
 	'Wikibase\\View\\Module\\TemplateModule' => __DIR__ . '/src/Module/TemplateModule.php',
-	'Wikibase\\View\\ViewContent' => __DIR__ . '/src/ViewContent.php',
 	'Wikibase\\View\\PropertyView' => __DIR__ . '/src/PropertyView.php',
 	'Wikibase\\View\\SimpleEntityTermsView' => __DIR__ . '/src/SimpleEntityTermsView.php',
 	'Wikibase\\View\\SiteLinksView' => __DIR__ . '/src/SiteLinksView.php',
@@ -36,6 +35,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\Tests\\EntityMetaTagsCreatorTestCase' => __DIR__ . '/tests/phpunit/EntityMetaTagsCreatorTestCase.php',
 	'Wikibase\\View\\Tests\\EntityViewTestCase' => __DIR__ . '/tests/phpunit/EntityViewTestCase.php',
 	'Wikibase\\View\\ToolbarEditSectionGenerator' => __DIR__ . '/src/ToolbarEditSectionGenerator.php',
+	'Wikibase\\View\\ViewContent' => __DIR__ . '/src/ViewContent.php',
 	'Wikibase\\View\\ViewFactory' => __DIR__ . '/src/ViewFactory.php',
 	'Wikibase\\View\\ViewPlaceHolderEmitter' => __DIR__ . '/src/ViewPlaceHolderEmitter.php',
 ];
