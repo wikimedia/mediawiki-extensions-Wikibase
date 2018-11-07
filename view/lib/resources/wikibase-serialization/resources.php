@@ -8,6 +8,10 @@
  */
 return call_user_func( function() {
 	$moduleTemplate = [
+		'targets' => [
+			'desktop',
+			'mobile'
+		],
 		'localBasePath' => __DIR__ . '/../../wikibase-serialization/src',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
 	];

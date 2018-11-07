@@ -928,6 +928,10 @@ final class RepoHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
+			'targets' => [
+				'desktop',
+				'mobile'
+			],
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'Wikibase/repo',
 		];

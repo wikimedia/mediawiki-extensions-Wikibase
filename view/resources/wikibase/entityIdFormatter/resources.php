@@ -6,6 +6,10 @@
  */
 return call_user_func( function() {
 	$moduleTemplate = [
+		'targets' => [
+			'desktop',
+			'mobile'
+		],
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'Wikibase/view/resources/wikibase/entityIdFormatter',
 	];

@@ -15,6 +15,8 @@ use Wikibase\Lib\SitesModuleWorker;
  */
 class SitesModule extends ResourceLoaderModule {
 
+	protected $targets = [ 'desktop', 'mobile' ];
+
 	/**
 	 * @var SitesModuleWorker
 	 */

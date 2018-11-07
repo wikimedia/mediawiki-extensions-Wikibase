@@ -9,6 +9,10 @@
  */
 return call_user_func( function() {
 	$moduleTemplate = [
+		'targets' => [
+			'desktop',
+			'mobile'
+		],
 		'localBasePath' => __DIR__ . '/../../../wikibase-data-values/lib',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values/lib',
 	];

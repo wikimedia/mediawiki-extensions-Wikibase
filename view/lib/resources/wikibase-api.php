@@ -6,6 +6,10 @@
  */
 return call_user_func( function () {
 	$moduleTemplate = [
+		'targets' => [
+			'desktop',
+			'mobile'
+		],
 		'localBasePath' => __DIR__ . '/../wikibase-api/src',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-api/src',
 	];
