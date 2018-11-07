@@ -12,7 +12,10 @@ describe( 'WikibaseRepoNonExistingItemPage', function () {
 	it( 'the title should match', function () {
 		NonExistingItemPage.open();
 
-		assert.strictEqual( NonExistingItemPage.title.getText(), 'Item:Q1xy' );
+		var fullTitle = NonExistingItemPage.title.getText(),
+			title = fullTitle.substring( fullTitle.indexOf( ':' ) + 1 );
+
+		assert.strictEqual( title, 'Q999999999' );
 	} );
 
 } );
