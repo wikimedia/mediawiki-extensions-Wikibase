@@ -1,0 +1,8 @@
+Code-Review+2: Smalyshev <smalyshev@wikimedia.org>
+Code-Review+1: Lucas Werkmeister (WMDE) <lucas.werkmeister@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Wed, 07 Nov 2018 21:42:46 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/472110
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
