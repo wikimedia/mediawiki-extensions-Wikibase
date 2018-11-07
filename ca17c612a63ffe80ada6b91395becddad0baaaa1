@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8e9bb13_649c6ab9",
+        "filename": "repo/includes/ParserOutput/EntityTermsViewFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-11-07T10:45:31Z",
+      "side": 1,
+      "message": "Whoops, I meant to do that for the parent patch at some point. Thanks for picking it up!",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 83
+      },
+      "revId": "ca17c612a63ffe80ada6b91395becddad0baaaa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5652ea1f_0337188c",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-11-07T10:45:31Z",
+      "side": 1,
+      "message": "Maybe. Without giving it too much thought, I can also see us returning some sort of loading indicator as a fallback and let CSR take over. This would of course go against our \"should be readable w/o js\" philosophy, but it\u0027s an exceptional case.",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 54
+      },
+      "revId": "ca17c612a63ffe80ada6b91395becddad0baaaa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "241f6349_e23c1f06",
+        "filename": "view/src/Termbox/Renderer/TermboxRenderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-11-07T10:45:31Z",
+      "side": 1,
+      "message": "Good idea!",
+      "revId": "ca17c612a63ffe80ada6b91395becddad0baaaa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55c0d672_357de689",
+        "filename": "view/src/Termbox/Renderer/TermboxRenderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-11-07T10:45:31Z",
+      "side": 1,
+      "message": "Seeing \"getContent\" here and \"getPlaceholders\" over in the TermboxView rings a small alarm bell for me. I can see the placeholders depending on the type of TermboxRenderer and in the future returning a ViewContent (or similar) here instead of a string.\n\nSolving this in this patch seems unnecessary though, considering we haven\u0027t given this much thought yet.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 61
+      },
+      "revId": "ca17c612a63ffe80ada6b91395becddad0baaaa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
