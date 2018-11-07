@@ -22,6 +22,30 @@
       "revId": "6e42bb0e59f6c0c4542a552fa31659076260f1bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_963ababf",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-11-07T14:30:34Z",
+      "side": 1,
+      "message": "This \"suppress\" operator is a code smell and I believe even reported by our code sniffer. This pair of functions is what should be used.\n\nThe moment I want to move this code to a component independent from MediaWiki I have to change this, most probably as you suggested.",
+      "parentUuid": "ee375f69_d0628a37",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 30
+      },
+      "revId": "6e42bb0e59f6c0c4542a552fa31659076260f1bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
