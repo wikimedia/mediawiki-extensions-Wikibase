@@ -12,7 +12,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {

@@ -13,7 +13,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacySnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
