@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "bf39833b_171f943c",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-11-07T12:02:20Z",
+      "side": 1,
+      "message": "That was the plan with adding this rudimentary mark-up - allowing the client side code to find (`$mount`) the right element and render in the browser.\nhttps://github.com/wmde/wikibase-termbox/blob/834a6b111261feb8e09ac415b7a101ba324aa022/src/client-entry.ts#L10\n\nWe should pick this up during https://phabricator.wikimedia.org/T208381 when we model timeout behavior.",
+      "parentUuid": "5652ea1f_0337188c",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 54
+      },
+      "revId": "ca17c612a63ffe80ada6b91395becddad0baaaa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "241f6349_e23c1f06",
         "filename": "view/src/Termbox/Renderer/TermboxRenderer.php",
         "patchSetId": 2
