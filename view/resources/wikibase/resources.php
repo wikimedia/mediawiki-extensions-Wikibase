@@ -46,12 +46,17 @@ return call_user_func( function() {
 		],
 
 		'wikibase.termbox' => $moduleTemplate + [
-			'styles' => [
-				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.css'
-			],
 			'scripts' => [
 				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.js',
 			],
+			'targets' => 'mobile',
+			'dependencies' => [
+				'wikibase.termbox.styles'
+			]
+		],
+
+		'wikibase.termbox.styles' => $moduleTemplate + [
+			'styles' => '../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
 			'targets' => 'mobile'
 		],
 

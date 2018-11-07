@@ -91,6 +91,7 @@ final class RepoHooks {
 
 			if ( $useNewTermbox ) {
 				$out->addModules( 'wikibase.termbox' );
+				$out->addModuleStyles( [ 'wikibase.termbox.styles' ] );
 			}
 		}
 	}
