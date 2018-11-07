@@ -22,6 +22,30 @@
       "revId": "612ff874fd26d92cf0be9f43e4cc3a707f941c7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25e03066_20a8733b",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-11-07T15:55:44Z",
+      "side": 1,
+      "message": "yes, this can be done, but can also be done in a followup patch.",
+      "parentUuid": "f1f90102_d3bbf25d",
+      "range": {
+        "startLine": 414,
+        "startChar": 2,
+        "endLine": 415,
+        "endChar": 54
+      },
+      "revId": "612ff874fd26d92cf0be9f43e4cc3a707f941c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
