@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cba877d_cb49859a",
+        "filename": "repo/includes/Parsers/TimeParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-11-07T14:43:53Z",
+      "side": 1,
+      "message": "Notes:\n* Please check the order of all parsers. It might be better to start with \"monthonly\", as well as moving these two new parsers way up in the list. This heavily depends on what each parser accepts. If two would accept the same string, but parse it differently, it\u0027s critical to accept the more likely interpretation of a date string first.\n* That said, I just realized the position as of PS1 is bad: YearMonthDayTimeParser ignores non-numeric characters and might accept strings the new parser also accepts. So better move it up, maybe even before YearMonthTimeParser.\n* I\u0027m not entirely sure if the $dateFormatPreference should be the wikis default, or the current users actual setting. Both does have implications. When going the per-user route, the parser will behave different for each user, which might be confusing.",
+      "revId": "6c67e3e171933ebd95eeeea8ce37b5107ab61e05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
