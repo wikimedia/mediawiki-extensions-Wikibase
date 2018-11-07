@@ -56,6 +56,10 @@ final class LibHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
+			'targets' => [
+				'desktop',
+				'mobile'
+			],
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'Wikibase/lib',
 		];
