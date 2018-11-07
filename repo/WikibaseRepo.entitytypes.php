@@ -73,7 +73,7 @@ return [
 				( new EntityTermsViewFactory() )
 					->newEntityTermsView(
 						$entity,
-						Language::factory( $language->getCode() ),
+						$language,
 						$fallbackChain,
 						TermboxFlag::getInstance()->shouldRenderTermbox()
 					)
@@ -235,7 +235,7 @@ return [
 				( new EntityTermsViewFactory() )
 					->newEntityTermsView(
 						$entity,
-						Language::factory( $language->getCode() ),
+						$language,
 						$fallbackChain,
 						TermboxFlag::getInstance()->shouldRenderTermbox()
 					)
