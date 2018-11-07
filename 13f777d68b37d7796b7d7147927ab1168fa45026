@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e46b77a0_a8082446",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-07T12:09:44Z",
+      "side": 1,
+      "message": "It would probably simplify the tests to make CC0 the default value here as well.",
+      "range": {
+        "startLine": 158,
+        "startChar": 16,
+        "endLine": 158,
+        "endChar": 18
+      },
+      "revId": "13f777d68b37d7796b7d7147927ab1168fa45026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
