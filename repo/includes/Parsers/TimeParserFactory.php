@@ -67,6 +67,8 @@ class TimeParserFactory {
 	 * @return ValueParser[]
 	 */
 	private function getTimeParsers() {
+		global $wgDefaultUserOptions;
+
 		$eraParser = new EraParser( $this->options );
 		$isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
@@ -80,6 +82,22 @@ class TimeParserFactory {
 		$parsers[] = $isoTimestampParser;
 		$parsers[] = new MwTimeIsoParser( $this->options );
 		$parsers[] = new YearMonthDayTimeParser( $eraParser, $this->options );
+
+		// FIXME: This should be the current users \User::getDatePreference(). Currently it's what
+		// the wikis configuration specifies as default for all users, in all languages.
+		$dateFormatPreference = $wgDefaultUserOptions['date'];
+		$mwDateFormatParserFactory = new MwDateFormatParserFactory();
+		$parsers[] = $mwDateFormatParserFactory->getMwDateFormatParser(
+			$this->options->getOption( ValueParser::OPT_LANG ),
+			$dateFormatPreference,
+			'date'
+		);
+		$parsers[] = $mwDateFormatParserFactory->getMwDateFormatParser(
+			$this->options->getOption( ValueParser::OPT_LANG ),
+			$dateFormatPreference,
+			'monthonly'
+		);
+
 		$parsers[] = new PhpDateTimeParser(
 			$this->getMonthNameUnlocalizer(),
 			$eraParser,
