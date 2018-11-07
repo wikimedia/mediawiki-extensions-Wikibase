@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1f90102_d3bbf25d",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-07T14:19:37Z",
+      "side": 1,
+      "message": "If I understand the OWL Primer [1] correctly, this could be abbreviated to:\n\n \u003cowl:AllDisjointClasses\u003e\n\nBut I’m not familiar at all with RDF/XML in general, so I’m not sure if that’s correct.\n\n[1]: https://www.w3.org/2007/OWL/draft/owl2-primer/#Class_Disjointness",
+      "range": {
+        "startLine": 414,
+        "startChar": 2,
+        "endLine": 415,
+        "endChar": 54
+      },
+      "revId": "612ff874fd26d92cf0be9f43e4cc3a707f941c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
