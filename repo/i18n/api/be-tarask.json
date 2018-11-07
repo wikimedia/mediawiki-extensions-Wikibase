@@ -184,5 +184,7 @@
 	"apihelp-query+wbsearch-example-3": "Шукаць «alphabet» ангельскай мовай сярод тыпаў уласьцівасьцяў",
 	"apihelp-query+wbsearch-example-4": "Шукаць «alphabet» ангельскай мовай як генэратар",
 	"apihelp-query+wbsubscribers-description": "Атрымаць падпіскі на пададзеныя элемэнты.",
-	"apihelp-query+wbsubscribers-summary": "Атрымаць падпіскі на пададзеныя элемэнты."
+	"apihelp-query+wbsubscribers-summary": "Атрымаць падпіскі на пададзеныя элемэнты.",
+	"apihelp-query+wbsubscribers-param-entities": "Элемэнты для атрыманьня падпісчыкаў",
+	"apihelp-query+wbsubscribers-param-prop": "Уласьцівасьці для дадаваньня ў вынік"
 }

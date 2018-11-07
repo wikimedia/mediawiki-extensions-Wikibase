@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Tem",
-			"Nmacu"
+			"Nmacu",
+			"Kwekubo"
 		]
 	},
 	"wikibase-dataitem": "Mír {{WBREPONAME}}",
-	"wikibase-editlinks": "Athraigh na naisc",
+	"wikibase-editlinks": "Athraigh naisc",
 	"wikibase-editlinkstitle": "Athraigh na naisc idirtheanga",
 	"wikibase-rc-hide-wikidata-hide": "Folaigh",
 	"wikibase-rc-hide-wikidata-show": "Taispeáin",
