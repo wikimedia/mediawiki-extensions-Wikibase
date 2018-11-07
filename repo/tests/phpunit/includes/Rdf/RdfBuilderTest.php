@@ -417,7 +417,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testPageProps( $name, $props ) {
 		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], RdfBuilderTestData::URI_DATA,
-				[], [], $props );
+				[], [], $props, 'http://creativecommons.org/publicdomain/zero/1.0/' );
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, null, $vocab );
 
 		$builder->setPageProps( $this->getPropsMock() );
@@ -434,7 +434,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			'claims' => [ 'name' => 'rdf-claims' ]
 		];
 		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], RdfBuilderTestData::URI_DATA,
-				[], [], $props );
+				[], [], $props, 'http://creativecommons.org/publicdomain/zero/1.0/' );
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_PAGE_PROPS, null, $vocab );
 
 		$builder->setPageProps( $this->getPropsMock() );
