@@ -40,14 +40,12 @@
   </owl:Class>
 
   <owl:Class rdf:about="&wikibase;Item">
-    <owl:disjointWith rdf:resource="&wikibase;Property"/>
     <rdfs:label>Item</rdfs:label>
     <rdfs:comment>Wikibase item.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
   </owl:Class>
 
   <owl:Class rdf:about="&wikibase;Property">
-    <owl:disjointWith rdf:resource="&wikibase;Item"/>
     <rdfs:label>Property</rdfs:label>
     <rdfs:comment>Wikibase property.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
@@ -404,5 +402,21 @@
       <rdfs:label>wikiGroup</rdfs:label>
       <rdfs:comment>Wiki group that the site belongs to.</rdfs:comment>
   </owl:DatatypeProperty>
+
+  <!--
+  ///////////////////////////////////////////////////////////////////////////////////////
+  //
+  // General axioms
+  //
+  ///////////////////////////////////////////////////////////////////////////////////////
+   -->
+
+  <rdf:Description>
+    <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="&wikibase;Item"/>
+      <rdf:Description rdf:about="&wikibase;Property"/>
+    </owl:members>
+  </rdf:Description>
 
 </rdf:RDF>
