@@ -59,6 +59,10 @@ $GLOBALS['wgHooks']['UnitTestsList'][] = function( array &$paths ) {
  */
 $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoader $resourceLoader ) {
 	$moduleTemplate = [
+		'targets' => [
+			'desktop',
+			'mobile'
+		],
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'Wikibase/view',
 	];

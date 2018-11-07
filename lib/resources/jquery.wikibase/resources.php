@@ -17,6 +17,10 @@ return call_user_func( function() {
 			'scripts' => [
 				'jquery.wikibase.siteselector.js',
 			],
+			'targets' => [
+				'desktop',
+				'mobile'
+			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.ui.ooMenu',
