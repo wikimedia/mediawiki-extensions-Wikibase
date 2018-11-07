@@ -70,6 +70,30 @@
       "revId": "13f777d68b37d7796b7d7147927ab1168fa45026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31a7d981_20a15038",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-11-07T14:42:23Z",
+      "side": 1,
+      "message": "I would rather keep it because this needs fixing (the RdfVocabulary needs to have a factory or any sort of constructor, so we don\u0027t need to change it in one million places or compromise to a default)",
+      "parentUuid": "d175a77d_aec2cb60",
+      "range": {
+        "startLine": 158,
+        "startChar": 16,
+        "endLine": 158,
+        "endChar": 18
+      },
+      "revId": "13f777d68b37d7796b7d7147927ab1168fa45026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
