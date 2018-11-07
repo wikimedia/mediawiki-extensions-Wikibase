@@ -25,7 +25,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @group WikibaseDataModel
  * @group WikibaseSnak
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SnakTest extends \PHPUnit_Framework_TestCase {

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 /**
  * @covers \Wikibase\DataModel\Entity\ItemIdParser
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class ItemIdParserTest extends PHPUnit_Framework_TestCase {

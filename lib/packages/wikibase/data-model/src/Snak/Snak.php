@@ -14,7 +14,7 @@ use Wikibase\DataModel\PropertyIdProvider;
  *
  * @since 0.1
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 interface Snak extends Serializable, Hashable, Immutable, Comparable, PropertyIdProvider {

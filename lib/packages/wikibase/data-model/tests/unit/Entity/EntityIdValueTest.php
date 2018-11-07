@@ -16,7 +16,7 @@ use Wikibase\DataModel\Fixtures\CustomEntityId;
  * @group Wikibase
  * @group WikibaseDataModel
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  * @author Daniel Kinzler

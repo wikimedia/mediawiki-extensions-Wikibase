@@ -14,7 +14,7 @@ use Wikibase\DataModel\LegacyIdInterpreter;
  * @group Wikibase
  * @group WikibaseDataModel
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class LegacyIdInterpreterTest extends \PHPUnit_Framework_TestCase {

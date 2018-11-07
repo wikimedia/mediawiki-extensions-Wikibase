@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Snak;
 /**
  * @since 0.7
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class TypedSnak {

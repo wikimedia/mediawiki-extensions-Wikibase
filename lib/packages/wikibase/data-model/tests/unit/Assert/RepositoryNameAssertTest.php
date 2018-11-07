@@ -8,7 +8,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 /**
  * @covers \Wikibase\DataModel\Assert\RepositoryNameAssert
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class RepositoryNameAssertTest extends \PHPUnit_Framework_TestCase {
 

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  *
  * @since 7.6
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 interface StatementListProvidingEntity extends EntityDocument, StatementListProvider {
 }

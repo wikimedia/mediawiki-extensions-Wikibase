@@ -13,7 +13,7 @@ use InvalidArgumentException;
  *
  * @since 0.7.3
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class AliasGroup implements Comparable, Countable {

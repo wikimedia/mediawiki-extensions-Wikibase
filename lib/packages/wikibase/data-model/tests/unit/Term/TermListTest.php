@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\TermList;
  * @covers \Wikibase\DataModel\Term\TermList
  * @uses \Wikibase\DataModel\Term\Term
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class TermListTest extends \PHPUnit_Framework_TestCase {

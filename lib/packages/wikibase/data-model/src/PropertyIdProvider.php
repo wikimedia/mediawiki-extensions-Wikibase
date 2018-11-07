@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @since 1.1
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 interface PropertyIdProvider {

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Dummy custom EntityId implementation for use with EntityIdValueTest
  *
- * @license GPL 2+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class CustomEntityId extends EntityId {

@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  * @since 0.5
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class PropertyId extends EntityId implements Int32EntityId {
 

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Term\TermList;
  * @uses \Wikibase\DataModel\Term\Term
  * @uses \Wikibase\DataModel\Term\TermList
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\TypedSnak;
  * @group WikibaseDataModel
  * @group WikibaseSnak
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class TypedSnakTest extends \PHPUnit_Framework_TestCase {
