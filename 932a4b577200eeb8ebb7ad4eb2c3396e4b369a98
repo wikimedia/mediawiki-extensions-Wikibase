@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4f88a7a7_38931c62",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-08T17:28:58Z",
+      "side": 1,
+      "message": "Not sure if I agree with this. But on the other hand, “should not” is misleading if we’re not actually going to allow it from this page (it sounds like it would be allowed on resubmit, for example).",
+      "range": {
+        "startLine": 199,
+        "startChar": 75,
+        "endLine": 199,
+        "endChar": 82
+      },
+      "revId": "932a4b577200eeb8ebb7ad4eb2c3396e4b369a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe55e164_1b3972bb",
         "filename": "repo/includes/Specials/SpecialNewItem.php",
         "patchSetId": 1
