@@ -559,7 +559,7 @@ final class WikibaseClient {
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode(),
-				LoggerFactory::getInstance( 'PageRandomLookup' )
+				LoggerFactory::getInstance( 'wikibase-debug' )
 			);
 		}
 

@@ -45,7 +45,10 @@ class PageRandomLookup {
 
 		if ( $pageRandom === false || $pageRandom < 0 || $pageRandom > 1 ) {
 			if ( $this->logger ) {
-				$this->logger->warning( 'page_random is not a probability: ' . $pageRandom );
+				$this->logger->warning( 'Invalid probability for page_random, {pageRandom}, on page ID {pageId}.', [
+					'pageId' => $pageId,
+					'pageRandom' => $pageRandom,
+				] );
 			}
 			return null;
 		}
