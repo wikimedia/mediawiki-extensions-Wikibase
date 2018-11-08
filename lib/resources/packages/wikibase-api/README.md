@@ -4,6 +4,11 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 3.0.2 (2018-11-08)
+
+* Fixed `wikibase.api.RepoApi` to check whether the user
+  is still logged in before making any POST requests.
+
 ### 3.0.1 (2017-11-01)
 
 * Fixed `wikibase.api.RepoApi.getEntities` to return all properties
