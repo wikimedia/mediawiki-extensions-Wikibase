@@ -186,5 +186,6 @@
 	"apihelp-query+wbsubscribers-description": "Атрымаць падпіскі на пададзеныя элемэнты.",
 	"apihelp-query+wbsubscribers-summary": "Атрымаць падпіскі на пададзеныя элемэнты.",
 	"apihelp-query+wbsubscribers-param-entities": "Элемэнты для атрыманьня падпісчыкаў",
-	"apihelp-query+wbsubscribers-param-prop": "Уласьцівасьці для дадаваньня ў вынік"
+	"apihelp-query+wbsubscribers-param-prop": "Уласьцівасьці для дадаваньня ў вынік",
+	"apihelp-query+wbsubscribers-param-limit": "Максымальная колькасьць вынікаў"
 }
