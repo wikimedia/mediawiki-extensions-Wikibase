@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de9924a4_e2aadc53",
+        "filename": "lib/includes/Formatters/SnakFormat.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-08T13:25:10Z",
+      "side": 1,
+      "message": "From what I see in the rest of the change, instances of this class don’t really have any state, right? Perhaps it would be better to make the three methods static.",
+      "revId": "1e65bd7720d87e7e7f0d85e7f8ddfedaa8e45779",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9fb93fd_0e9df329",
+        "filename": "lib/includes/Formatters/SnakFormat.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-08T13:25:10Z",
+      "side": 1,
+      "message": "Huh – I thought since arrays are passed ”by value”, this wouldn’t matter after we return from the function, but then I tried it out and apparently it does? PHP is weird.",
+      "revId": "1e65bd7720d87e7e7f0d85e7f8ddfedaa8e45779",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
