@@ -22,6 +22,30 @@
       "revId": "bc99098f1c442adf597cd694c7c0a17fd5b928ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc8ca2bc_d5f56a4f",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-11-08T04:17:47Z",
+      "side": 1,
+      "message": "We have not encountered the values checked for above yet and initial analysis by @haeb has found none[0]. However, at time of writing, there was general concern that the database may contain some unusual values in rare cases. Additionally, with the exception of Special:Random and Special:Random/Category, the field did not appear to have many clients. Further, page_random has a history of bad values[1] and we\u0027ve recently uncovered more[2].\n\n[0] T208789#4723304\n[1] T5946\n[2] T208909",
+      "parentUuid": "0c94b545_8f56dfdc",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 10
+      },
+      "revId": "bc99098f1c442adf597cd694c7c0a17fd5b928ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
