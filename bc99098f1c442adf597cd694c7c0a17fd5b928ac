@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c94b545_8f56dfdc",
+        "filename": "client/includes/Store/Sql/PageRandomLookup.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2018-11-08T03:43:19Z",
+      "side": 1,
+      "message": "Is this a real thing you encountered with page_random values being wrong or just hypothetical? It seems like overkill.",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 10
+      },
+      "revId": "bc99098f1c442adf597cd694c7c0a17fd5b928ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
