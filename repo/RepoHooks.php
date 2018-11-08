@@ -899,7 +899,12 @@ final class RepoHooks {
 		}
 
 		$entityIdLookup = WikibaseRepo::getDefaultInstance()->getEntityIdLookup();
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+
 		$entityId = $entityIdLookup->getEntityIdForTitle( $title );
+		if ( !$entityLookup->hasEntity( $entityId ) ) {
+			return;
+		}
 
 		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
 		$navigationUrls['wb-concept-uri'] = [
