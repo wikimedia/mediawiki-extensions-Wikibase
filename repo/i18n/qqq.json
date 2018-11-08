@@ -231,6 +231,7 @@
 	"wikibase-newitem-page": "Label for the page-textfield holding the page name of the first linked page to add to the new item",
 	"wikibase-newitem-no-external-page": "Error message shown when a user tries to add a page that does not exist on the site chosen.\n\nParameters:\n* $1 - global site ID, known to be valid\n* $2 - requested page name that could not be found on the site\n{{Related|Wikibase-no-external-page}}",
 	"wikibase-newitem-not-recognized-siteid": "Error message shown when a user tries to add a link to a site with an unknown identifier.\n\nSee also:\n* {{msg-mw|Wikibase-api-not-recognized-siteid}}",
+	"wikibase-newitem-same-label-and-description": "Error message shown when a user tries to create an item with the same label and description",
 	"wikibase-newitem-insufficient-data": "Error message shown when a user tries to create an item and didn't fill in enough data",
 	"wikibase-newentity-language": "Name for \"language\"\n{{Identical|Language}}",
 	"wikibase-newentity-label": "Label for the \"label\" textfield holding the label of the new item.\n{{Identical|Label}}",
