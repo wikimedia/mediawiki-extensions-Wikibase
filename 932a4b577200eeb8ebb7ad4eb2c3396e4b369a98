@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe55e164_1b3972bb",
+        "filename": "repo/includes/Specials/SpecialNewItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 27
+      },
+      "writtenOn": "2018-11-08T17:28:03Z",
+      "side": 1,
+      "message": "Can you please move this square bracket to the left?",
+      "range": {
+        "startLine": 236,
+        "startChar": 77,
+        "endLine": 236,
+        "endChar": 78
+      },
+      "revId": "932a4b577200eeb8ebb7ad4eb2c3396e4b369a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
