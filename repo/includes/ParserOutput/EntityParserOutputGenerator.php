@@ -67,7 +67,7 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var ParserOutputDataUpdater[]
+	 * @var EntityParserOutputDataUpdater[]
 	 */
 	private $dataUpdaters;
 
@@ -90,7 +90,7 @@ class EntityParserOutputGenerator {
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
-	 * @param ParserOutputDataUpdater[] $dataUpdaters
+	 * @param EntityParserOutputDataUpdater[] $dataUpdaters
 	 * @param Language $language
 	 */
 	public function __construct(
