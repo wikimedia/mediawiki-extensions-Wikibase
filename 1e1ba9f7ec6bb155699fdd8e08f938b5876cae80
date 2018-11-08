@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23abe006_f5e282b1",
+        "filename": "repo/includes/Api/FormatEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-08T13:58:53Z",
+      "side": 1,
+      "message": "If we\u0027re dealing with valid html, couldn\u0027t we use DOMDocument?",
+      "revId": "1e1ba9f7ec6bb155699fdd8e08f938b5876cae80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
