@@ -233,6 +233,13 @@ class SpecialNewItem extends SpecialNewEntity {
 			return Status::newFatal( 'wikibase-newitem-insufficient-data' );
 		}
 
+		// Disallow the same label and description, but ignore if both are empty T100933
+		if ( $formData[ self::FIELD_LABEL ] !== '' &&
+			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
+		) {
+			return Status::newFatal( 'wikibase-newitem-same-label-and-description' );
+		}
+
 		if ( $formData[self::FIELD_LABEL] != '' ) {
 			$validator = $this->termValidatorFactory->getLabelValidator( $this->getEntityType() );
 			$result = $validator->validate( $formData[self::FIELD_LABEL] );
