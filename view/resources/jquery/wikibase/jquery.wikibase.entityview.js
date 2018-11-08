@@ -164,7 +164,7 @@
 	 */
 	$.wikibase.entityview.TYPES = [];
 
-	$.expr[ ':' ][ $.wikibase.entityview.prototype.widgetFullName ]
+	$.expr.pseudos[ $.wikibase.entityview.prototype.widgetFullName ]
 		= $.expr.createPseudo( function ( fullName ) {
 			return function ( elem ) {
 				for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
