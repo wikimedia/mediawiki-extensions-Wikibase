@@ -182,14 +182,31 @@ wikibase.view.ControllerViewFactory = ( function ( mw, wb, $ ) {
 			if ( view.option( 'disabled' ) ) {
 				return;
 			}
-			if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+			if ( SELF._isCancelEvent( event ) ) {
 				controller.stopEditing( true );
-			} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
+			} else if ( SELF._isSaveEvent( event ) ) {
 				controller.stopEditing( false );
 			}
 		} );
 
 		return controller;
+	};
+
+	SELF._isCancelEvent = function ( event ) {
+		return event.keyCode === $.ui.keyCode.ESCAPE;
+	};
+
+	SELF._isSaveEvent = function ( event ) {
+		// do not save the whole statement if Enter is pressed on e.g. an "add qualifier" link;
+		// only save if Enter is pressed on elements of the following types:
+		var savingNodeNames = [
+			'input',
+			'textarea'
+		];
+		var eventNodeName = event.target.nodeName.toLowerCase();
+
+		return event.keyCode === $.ui.keyCode.ENTER &&
+			savingNodeNames.indexOf( eventNodeName ) !== -1;
 	};
 
 	return SELF;
