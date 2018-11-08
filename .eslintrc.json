@@ -29,5 +29,6 @@
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off"
-	}
+	},
+	"plugins": ["compat"]
 }
