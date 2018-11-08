@@ -898,10 +898,13 @@ final class RepoHooks {
 			return;
 		}
 
+		$entityIdLookup = WikibaseRepo::getDefaultInstance()->getEntityIdLookup();
+		$entityId = $entityIdLookup->getEntityIdForTitle( $title );
+
 		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
 		$navigationUrls['wb-concept-uri'] = [
 			'text' => $skinTemplate->msg( 'wikibase-concept-uri' ),
-			'href' => $baseUri . $title->getDBkey(),
+			'href' => $baseUri . $entityId->getSerialization(),
 			'title' => $skinTemplate->msg( 'wikibase-concept-uri-tooltip' )
 		];
 	}
