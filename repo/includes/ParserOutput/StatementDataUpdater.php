@@ -2,13 +2,22 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use ParserOutput;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface StatementDataUpdater extends ParserOutputDataUpdater {
+interface StatementDataUpdater {
+
+	/**
+	 * Update extension data, properties or other data in ParserOutput.
+	 * These updates are invoked when EntityContent::getParserOutput is called.
+	 *
+	 * @param ParserOutput $parserOutput
+	 */
+	public function updateParserOutput( ParserOutput $parserOutput );
 
 	/**
 	 * Extract some data or do processing on a Statement during parsing.

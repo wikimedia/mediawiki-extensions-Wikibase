@@ -254,7 +254,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ParserOutput\\GeoDataDataUpdater' => __DIR__ . '/includes/ParserOutput/GeoDataDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\ImageLinksDataUpdater' => __DIR__ . '/includes/ParserOutput/ImageLinksDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\PageImagesDataUpdater' => __DIR__ . '/includes/ParserOutput/PageImagesDataUpdater.php',
-	'Wikibase\\Repo\\ParserOutput\\ParserOutputDataUpdater' => __DIR__ . '/includes/ParserOutput/ParserOutputDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\ParserOutputJsConfigBuilder' => __DIR__ . '/includes/ParserOutput/ParserOutputJsConfigBuilder.php',
 	'Wikibase\\Repo\\ParserOutput\\PlaceholderEmittingEntityTermsView' => __DIR__ . '/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php',
 	'Wikibase\\Repo\\ParserOutput\\ReferencedEntitiesDataUpdater' => __DIR__ . '/includes/ParserOutput/ReferencedEntitiesDataUpdater.php',
