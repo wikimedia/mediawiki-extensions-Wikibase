@@ -1,5 +1,10 @@
 # ValueView release notes
 
+## 0.22.3 (2018-11-08)
+
+* Updated some deprecated `jQuery.expr` statements.
+* Updated i18n message translations.
+
 ## 0.22.2 (2018-04-17)
 
 * Updated i18n message translations.
