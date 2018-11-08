@@ -16,6 +16,24 @@
       "revId": "1e1ba9f7ec6bb155699fdd8e08f938b5876cae80",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96b1f54e_0069bfcc",
+        "filename": "repo/includes/Api/FormatEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-08T14:55:06Z",
+      "side": 1,
+      "message": "Well, we’re not dealing with a full document, just a snippet… I guess we could wrap it in \u003chtml\u003e\u003cbody\u003e…\u003c/body\u003e\u003c/html\u003e or something like that.\n\nBut is it a good idea to use DOMDocument? Does it support HTML5? I’m not familiar with it, but from a brief look at its documentation on php.net I’m not especially enthusiastic about it, to be honest.",
+      "parentUuid": "23abe006_f5e282b1",
+      "revId": "1e1ba9f7ec6bb155699fdd8e08f938b5876cae80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
