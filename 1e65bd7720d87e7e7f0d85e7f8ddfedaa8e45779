@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "623ab6f3_b59c7e12",
+        "filename": "lib/includes/Formatters/SnakFormat.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-08T13:43:15Z",
+      "side": 1,
+      "message": "I thought about this as well... most of the times the downsides clearly outweigh the benefits (of static methods)... but in this case it might actually be the better choice.",
+      "parentUuid": "de9924a4_e2aadc53",
+      "revId": "1e65bd7720d87e7e7f0d85e7f8ddfedaa8e45779",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9fb93fd_0e9df329",
         "filename": "lib/includes/Formatters/SnakFormat.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-11-08T13:25:10Z",
       "side": 1,
       "message": "Huh – I thought since arrays are passed ”by value”, this wouldn’t matter after we return from the function, but then I tried it out and apparently it does? PHP is weird.",
+      "revId": "1e65bd7720d87e7e7f0d85e7f8ddfedaa8e45779",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "856cd271_d426b981",
+        "filename": "lib/includes/Formatters/SnakFormat.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-08T13:43:15Z",
+      "side": 1,
+      "message": "Yes :D\n\nAFAIR arrays (and objects) are returned by reference",
+      "parentUuid": "c9fb93fd_0e9df329",
       "revId": "1e65bd7720d87e7e7f0d85e7f8ddfedaa8e45779",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
