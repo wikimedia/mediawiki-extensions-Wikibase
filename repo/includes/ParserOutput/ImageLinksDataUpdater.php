@@ -36,12 +36,22 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * Add DataValue to list of used images if Snak property data type is commonsMedia.
-	 *
-	 * @param Statement $statement
+	 * Treat CommonsMedia values as file transclusions
 	 */
-	public function processStatement( Statement $statement ) {
+	public function updateParserOutput( ParserOutput $parserOutput, Statement $statement ) {
+		// TODO: $this->fileNames is no longer needed, code can be simplified
 		foreach ( $statement->getAllSnaks() as $snak ) {
 			$this->processSnak( $snak );
+		}
+
+		foreach ( $this->fileNames as $fileName => $null ) {
+			$file = wfFindFile( $fileName );
+
+			$parserOutput->addImage(
+				$fileName,
+				$file ? $file->getSha1() : false,
+				$file ? $file->getTimestamp() : false
+			);
 		}
 	}
 
@@ -59,23 +69,6 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 					$this->fileNames[$fileName] = null;
 				}
 			}
-		}
-	}
-
-	/**
-	 * Treat CommonsMedia values as file transclusions
-	 *
-	 * @param ParserOutput $parserOutput
-	 */
-	public function updateParserOutput( ParserOutput $parserOutput ) {
-		foreach ( $this->fileNames as $fileName => $null ) {
-			$file = wfFindFile( $fileName );
-
-			$parserOutput->addImage(
-				$fileName,
-				$file ? $file->getSha1() : false,
-				$file ? $file->getTimestamp() : false
-			);
 		}
 	}
 

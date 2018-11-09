@@ -157,9 +157,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
-		$updater = $this->getUpdaterWithStatements(
-			[ 'P9000', 'P625' ]
-		);
+		$updater = $this->newGeoDataDataUpdater( [ 'P9000', 'P625' ] );
 
 		$coords = $this->getCoords();
 
@@ -176,7 +174,9 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$updater->updateParserOutput( $parserOutput );
+		foreach ( $this->getStatements() as $statement ) {
+			$updater->updateParserOutput( $parserOutput, $statement );
+		}
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}

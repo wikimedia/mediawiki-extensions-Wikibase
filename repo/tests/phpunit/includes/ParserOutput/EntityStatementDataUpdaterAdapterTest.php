@@ -32,7 +32,7 @@ class EntityStatementDataUpdaterAdapterTest extends TestCase {
 				[ $statement2 ]
 			);
 		$adapter = new EntityStatementDataUpdaterAdapter( $statementDataUpdater );
-		$adapter->processEntity( $item );
+		$adapter->updateParserOutput( new ParserOutput(), $item );
 	}
 
 	public function testUpdateParserOutputIsDelegated() {
@@ -44,7 +44,14 @@ class EntityStatementDataUpdaterAdapterTest extends TestCase {
 
 		$adapter = new EntityStatementDataUpdaterAdapter( $statementDataUpdater );
 
-		$adapter->updateParserOutput( $parserOutput );
+		$adapter->updateParserOutput( $parserOutput, $this->newItemWithStatements() );
+	}
+
+	private function newItemWithStatements() {
+		$statement1 = $this->getMockStatement();
+		$statement2 = $this->getMockStatement();
+		$item = new Item( null, null, null, new StatementList( [ $statement1, $statement2 ] ) );
+		return $item;
 	}
 
 	private function getMockStatementDataUpdater() {
