@@ -36,12 +36,15 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * Add DataValue to list of used urls, if Snak property has 'url' data type.
-	 *
-	 * @param Statement $statement
 	 */
-	public function processStatement( Statement $statement ) {
+	public function updateParserOutput( ParserOutput $parserOutput, Statement $statement ) {
+		// TODO: $this->urls is no longer needed, code can be simplified
 		foreach ( $statement->getAllSnaks() as $snak ) {
 			$this->processSnak( $snak );
+		}
+
+		foreach ( $this->urls as $url => $null ) {
+			$parserOutput->addExternalLink( $url );
 		}
 	}
 
@@ -62,10 +65,6 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 		}
 	}
 
-	public function updateParserOutput( ParserOutput $parserOutput ) {
-		foreach ( $this->urls as $url => $null ) {
-			$parserOutput->addExternalLink( $url );
-		}
-	}
+
 
 }
