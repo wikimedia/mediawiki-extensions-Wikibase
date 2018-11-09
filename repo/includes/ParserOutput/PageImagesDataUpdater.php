@@ -53,17 +53,23 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 		$this->pagePropName = $pagePropName;
 	}
 
-	/**
-	 * @see StatementDataUpdater::processStatement
-	 *
-	 * @param Statement $statement
-	 */
-	public function processStatement( Statement $statement ) {
+	public function updateParserOutput( ParserOutput $parserOutput, Statement $statement ) {
+		$this->bestProperty = null;
+		$this->bestRank = null;
+		$this->bestFileName = null;
+
 		$this->processSnak(
 			$statement->getMainSnak(),
 			$statement->getPropertyId(),
 			$statement->getRank()
 		);
+
+		if ( $this->bestFileName === null ) {
+			$parserOutput->unsetProperty( $this->pagePropName );
+		} else {
+			$fileName = str_replace( ' ', '_', $this->bestFileName );
+			$parserOutput->setProperty( $this->pagePropName, $fileName );
+		}
 	}
 
 	/**
@@ -169,20 +175,6 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 
 		// Ranks are guaranteed to be in increasing, numerical order.
 		return $rank > $this->bestRank;
-	}
-
-	/**
-	 * @see EntityParserOutputDataUpdater::updateParserOutput
-	 *
-	 * @param ParserOutput $parserOutput
-	 */
-	public function updateParserOutput( ParserOutput $parserOutput ) {
-		if ( $this->bestFileName === null ) {
-			$parserOutput->unsetProperty( $this->pagePropName );
-		} else {
-			$fileName = str_replace( ' ', '_', $this->bestFileName );
-			$parserOutput->setProperty( $this->pagePropName, $fileName );
-		}
 	}
 
 }

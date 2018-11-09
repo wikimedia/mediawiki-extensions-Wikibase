@@ -93,10 +93,8 @@ class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance = $this->newInstance( $propertyIds );
 
 		foreach ( $statements as $statement ) {
-			$instance->processStatement( $statement );
+			$instance->updateParserOutput( $parserOutput, $statement );
 		}
-
-		$instance->updateParserOutput( $parserOutput );
 	}
 
 	public function bestImageProvider() {

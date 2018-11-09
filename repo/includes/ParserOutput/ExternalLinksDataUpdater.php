@@ -24,46 +24,31 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 	 */
 	private $propertyDataTypeMatcher;
 
-	/**
-	 * @var null[] Hash set of the URL strings found while processing statements. Only the array
-	 * keys are used for performance reasons, the values are meaningless.
-	 */
-	private $urls = [];
-
 	public function __construct( PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
 		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
 	}
 
-	/**
-	 * Add DataValue to list of used urls, if Snak property has 'url' data type.
-	 *
-	 * @param Statement $statement
-	 */
-	public function processStatement( Statement $statement ) {
+	public function updateParserOutput( ParserOutput $parserOutput, Statement $statement ) {
 		foreach ( $statement->getAllSnaks() as $snak ) {
-			$this->processSnak( $snak );
-		}
-	}
+			if ( !( $snak instanceof PropertyValueSnak ) ) {
+				continue;
+			}
 
-	private function processSnak( Snak $snak ) {
-		if ( $snak instanceof PropertyValueSnak ) {
 			$id = $snak->getPropertyId();
 			$value = $snak->getDataValue();
 
-			if ( $value instanceof StringValue
-				&& $this->propertyDataTypeMatcher->isMatchingDataType( $id, 'url' )
-			) {
-				$url = $value->getValue();
-
-				if ( $url !== '' ) {
-					$this->urls[$url] = null;
-				}
+			if ( !( $value instanceof StringValue ) ) {
+				continue;
 			}
-		}
-	}
+			if ( !$this->propertyDataTypeMatcher->isMatchingDataType( $id, 'url' ) ) {
+				continue;
+			}
+			$url = $value->getValue();
 
-	public function updateParserOutput( ParserOutput $parserOutput ) {
-		foreach ( $this->urls as $url => $null ) {
+			if ( $url === '' ) {
+				continue;
+			}
+
 			$parserOutput->addExternalLink( $url );
 		}
 	}
