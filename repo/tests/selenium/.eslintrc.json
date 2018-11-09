@@ -9,6 +9,7 @@
 		"browser": false
 	},
 	"rules": {
+		"compat/compat": 0,
 		"max-len": 0,
 		"no-console": 0
 	}

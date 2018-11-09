@@ -17,6 +17,7 @@
 		"wikibase": false
 	},
 	"rules": {
+		"compat/compat": "error",
 		"dot-notation": "off",
 		"indent": [ "error", "tab", { "SwitchCase": 1, "MemberExpression": "off" } ],
 		"max-len": "off",
