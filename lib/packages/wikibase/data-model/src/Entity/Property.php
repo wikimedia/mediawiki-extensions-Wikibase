@@ -24,7 +24,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class Property implements StatementListProvidingEntity, FingerprintProvider, StatementListHolder,
-	LabelsProvider, DescriptionsProvider, AliasesProvider {
+	LabelsProvider, DescriptionsProvider, AliasesProvider, ClearableEntity {
 
 	const ENTITY_TYPE = 'property';
 
