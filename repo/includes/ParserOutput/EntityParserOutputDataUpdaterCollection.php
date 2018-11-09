@@ -5,6 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use InvalidArgumentException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lexeme\Domain\Model\Lexeme;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -28,7 +29,7 @@ class EntityParserOutputDataUpdaterCollection {
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param EntityParserOutputDataUpdater[] $dataUpdaters
+	 * @param EntityParserOutputThing[] $dataUpdaters
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -44,6 +45,57 @@ class EntityParserOutputDataUpdaterCollection {
 			$dataUpdater->processEntity( $entity );
 			$dataUpdater->updateParserOutput( $this->parserOutput );
 		}
+
+		/**
+		 * @var EntityParserOutputThing $parserOutputThing
+		 */
+		foreach ( $something as $parserOutputThing ) {
+			if ( $parserOutputThing->canHandle( $entity ) ) {
+				$parserOutputThing->updateParserOutput( $entity );
+				break;
+			}
+		}
 	}
 
+}
+
+interface EntityParserOutputThing {
+
+	public function canHandle( EntityDocument $e ): bool;
+
+	public function updateParserOutput( ParserOutput $po, EntityDocument $entity );
+
+}
+
+class LexemeParserOutputThing implements EntityParserOutputThing {
+
+	public function __construct( StatementDataUpdater $statementDataUpdater ) {
+		$this->statementDataUpdater = $statementDataUpdater;
+	}
+
+	public function canHandle( EntityDocument $e ): bool {
+		return $e instanceof Lexeme;
+	}
+
+	public function updateParserOutput( ParserOutput $po, EntityDocument $entity ) {
+		/**
+		 * @var Lexeme $entity
+		 */
+
+		foreach ( $entity->getStatements() as $s ) {
+			$this->statementDataUpdater->processStatement( $s );
+		}
+
+		foreach ( $entity->getForms()->toArray() as $l ) {
+			foreach ( $l->getStatements() as $s ) {
+				$this->statementDataUpdater->processStatement( $s );
+			}
+		}
+
+		foreach ( $entity->getForms()->toArray() as $l ) {
+			foreach ( $l->getStatements() as $s ) {
+				$this->statementDataUpdater->processStatement( $s );
+			}
+		}
+	}
 }
