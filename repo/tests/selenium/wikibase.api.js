@@ -75,6 +75,18 @@ class WikibaseApi {
 		} );
 	}
 
+	getProperty( datatype ) {
+		let env_name = `WIKIBASE_PROPERTY_${ datatype.toUpperCase() }`;
+		if ( env_name in process.env ) {
+			return Promise.resolve( process.env[ env_name ] );
+		} else {
+			return this.createProperty( datatype ).then( ( propertyId ) => {
+				process.env[ env_name ] = propertyId;
+				return propertyId;
+			} );
+		}
+	}
+
 }
 
 module.exports = new WikibaseApi();
