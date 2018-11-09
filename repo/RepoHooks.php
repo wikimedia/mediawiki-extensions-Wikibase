@@ -902,7 +902,7 @@ final class RepoHooks {
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 
 		$entityId = $entityIdLookup->getEntityIdForTitle( $title );
-		if ( !$entityLookup->hasEntity( $entityId ) ) {
+		if ( $entityId === null || !$entityLookup->hasEntity( $entityId ) ) {
 			return;
 		}
 
