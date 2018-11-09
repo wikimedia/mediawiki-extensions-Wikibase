@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb5b84f6_d6e1db59",
+        "filename": "lib/includes/Formatters/ErrorHandlingSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-09T17:14:20Z",
+      "side": 1,
+      "message": "This could also use SnakFormat.",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd1a3330_19fd954a",
+        "filename": "lib/includes/Formatters/MessageSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-09T17:14:20Z",
+      "side": 1,
+      "message": "This could also use SnakFormat.",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3f8ac8_06fab373",
+        "filename": "view/src/SnakHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-09T17:14:20Z",
+      "side": 1,
+      "message": "Could this also use SnakFormat? not sure",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf28ed20_bccb6f5a",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-09T17:14:20Z",
+      "side": 1,
+      "message": "This could probably also use SnakFormat.",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
