@@ -41,8 +41,7 @@ class EntityParserOutputDataUpdaterCollection {
 
 	public function updateParserOutput( EntityDocument $entity ) {
 		foreach ( $this->dataUpdaters as $dataUpdater ) {
-			$dataUpdater->processEntity( $entity );
-			$dataUpdater->updateParserOutput( $this->parserOutput );
+			$dataUpdater->updateParserOutput( $this->parserOutput, $entity );
 		}
 	}
 

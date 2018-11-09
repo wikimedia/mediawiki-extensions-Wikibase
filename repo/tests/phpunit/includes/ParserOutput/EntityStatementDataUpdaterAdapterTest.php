@@ -19,32 +19,28 @@ use Wikibase\Repo\ParserOutput\StatementDataUpdater;
  */
 class EntityStatementDataUpdaterAdapterTest extends TestCase {
 
-	public function testProcessEntityCallsProcessStatementForEachStatement() {
+	public function testProcessEntityCallsUpdateParserOutputForEachStatement() {
 		$statement1 = $this->getMockStatement();
 		$statement2 = $this->getMockStatement();
 		$item = new Item( null, null, null, new StatementList( [ $statement1, $statement2 ] ) );
+		$parserOutput = new ParserOutput();
 
 		$statementDataUpdater = $this->getMockStatementDataUpdater();
 		$statementDataUpdater->expects( $this->exactly( 2 ) )
-			->method( 'processStatement' )
+			->method( 'updateParserOutput' )
 			->withConsecutive(
-				[ $statement1 ],
-				[ $statement2 ]
+				[ $parserOutput, $statement1 ],
+				[ $parserOutput, $statement2 ]
 			);
 		$adapter = new EntityStatementDataUpdaterAdapter( $statementDataUpdater );
-		$adapter->processEntity( $item );
+		$adapter->updateParserOutput( $parserOutput, $item );
 	}
 
-	public function testUpdateParserOutputIsDelegated() {
-		$parserOutput = new ParserOutput();
-		$statementDataUpdater = $this->getMockStatementDataUpdater();
-		$statementDataUpdater->expects( $this->once() )
-			->method( 'updateParserOutput' )
-			->with( $parserOutput );
-
-		$adapter = new EntityStatementDataUpdaterAdapter( $statementDataUpdater );
-
-		$adapter->updateParserOutput( $parserOutput );
+	private function newItemWithStatements() {
+		$statement1 = $this->getMockStatement();
+		$statement2 = $this->getMockStatement();
+		$item = new Item( null, null, null, new StatementList( [ $statement1, $statement2 ] ) );
+		return $item;
 	}
 
 	private function getMockStatementDataUpdater() {

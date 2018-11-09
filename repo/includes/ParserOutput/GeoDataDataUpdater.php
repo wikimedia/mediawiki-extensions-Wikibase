@@ -71,6 +71,21 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		$this->globeUris = $globeUris;
 	}
 
+	public function updateParserOutput( ParserOutput $parserOutput, Statement $statement ) {
+		$this->processStatement( $statement );
+
+		$coordinatesOutput = $this->getCoordinatesOutput( $parserOutput );
+		$primaryCoordKey = $this->findPrimaryCoordinateKey();
+
+		if ( $coordinatesOutput->getPrimary() === false && $primaryCoordKey !== null ) {
+			$this->addPrimaryCoordinate( $coordinatesOutput, $primaryCoordKey );
+		}
+
+		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
+
+		$parserOutput->geoData = $coordinatesOutput;
+	}
+
 	/**
 	 * Extract globe-coordinate DataValues for storing in ParserOutput for GeoData.
 	 *
@@ -94,19 +109,6 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 				}
 			}
 		}
-	}
-
-	public function updateParserOutput( ParserOutput $parserOutput ) {
-		$coordinatesOutput = $this->getCoordinatesOutput( $parserOutput );
-		$primaryCoordKey = $this->findPrimaryCoordinateKey();
-
-		if ( $coordinatesOutput->getPrimary() === false && $primaryCoordKey !== null ) {
-			$this->addPrimaryCoordinate( $coordinatesOutput, $primaryCoordKey );
-		}
-
-		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
-
-		$parserOutput->geoData = $coordinatesOutput;
 	}
 
 	/**

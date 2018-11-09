@@ -67,10 +67,9 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$instance = $this->newInstance();
 
 		foreach ( $statements as $statement ) {
-			$instance->processStatement( $statement );
+			$instance->updateParserOutput( $parserOutput, $statement );
 		}
 
-		$instance->updateParserOutput( $parserOutput );
 		$this->assertSame( $expected, $actual );
 	}
 
