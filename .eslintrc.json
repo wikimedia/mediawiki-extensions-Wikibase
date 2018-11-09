@@ -28,7 +28,8 @@
 		"one-var": "off",
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off"
+		"vars-on-top": "off",
+		"compat/compat": "error"
 	},
 	"plugins": ["compat"]
 }
