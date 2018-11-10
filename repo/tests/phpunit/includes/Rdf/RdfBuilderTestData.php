@@ -22,9 +22,6 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 /**
  * Helper class for accessing data files for RdfBuilder related tests.
  *
- * @group Wikibase
- * @group WikibaseRdf
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Stas Malyshev
