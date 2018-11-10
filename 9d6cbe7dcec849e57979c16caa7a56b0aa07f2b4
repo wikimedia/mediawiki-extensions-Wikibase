@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "16a10d6b_ba0398a7",
+        "filename": "lib/includes/Formatters/ErrorHandlingSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-10T17:56:48Z",
+      "side": 1,
+      "message": "It could, but using the fact that all of these are mime types should be just fine",
+      "parentUuid": "cb5b84f6_d6e1db59",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd1a3330_19fd954a",
         "filename": "lib/includes/Formatters/MessageSnakFormatter.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-11-09T17:14:20Z",
       "side": 1,
       "message": "This could also use SnakFormat.",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08a24abf_0b1e470c",
+        "filename": "lib/includes/Formatters/MessageSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-10T17:56:48Z",
+      "side": 1,
+      "message": "It could, but using the fact that all of these are mime types should be just fine… hm",
+      "parentUuid": "bd1a3330_19fd954a",
       "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c67c1930_57e00c82",
+        "filename": "view/src/SnakHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-10T17:56:48Z",
+      "side": 1,
+      "message": "Yeah, this is a bit hard to tell… on the one hand generating preview Html here doesn\u0027t make sense… on the other hand, maybe this should be more flexible for the future?!",
+      "parentUuid": "aa3f8ac8_06fab373",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf28ed20_bccb6f5a",
         "filename": "view/src/ViewFactory.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2018-11-09T17:14:20Z",
       "side": 1,
       "message": "This could probably also use SnakFormat.",
+      "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f91a6d1_a74234d9",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-10T17:56:48Z",
+      "side": 1,
+      "message": "Indeed, will do",
+      "parentUuid": "cf28ed20_bccb6f5a",
       "revId": "9d6cbe7dcec849e57979c16caa7a56b0aa07f2b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
