@@ -120,7 +120,7 @@ class NTriplesRdfTestHelper {
 		$testData = $this->getTestData();
 
 		$dataSetNames = (array)$dataSetNames;
-		$joinedName = join( '-', $dataSetNames );
+		$joinedName = implode( '-', $dataSetNames );
 
 		$expected = $testData->getNTriples( $dataSetNames );
 		$expected = $this->normalizeNTriples( $expected );
@@ -156,7 +156,7 @@ class NTriplesRdfTestHelper {
 		$testData = $this->getTestData();
 
 		$dataSetNames = (array)$dataSetNames;
-		$joinedName = join( '-', $dataSetNames );
+		$joinedName = implode( '-', $dataSetNames );
 
 		$testData->putTestData( $joinedName, $triples, $suffix );
 	}
@@ -170,7 +170,7 @@ class NTriplesRdfTestHelper {
 		$testData = $this->getTestData();
 
 		$dataSetNames = (array)$dataSetNames;
-		$prettyName = join( '+', $dataSetNames );
+		$prettyName = implode( '+', $dataSetNames );
 
 		if ( $message === null ) {
 			$message = "Data set $prettyName";

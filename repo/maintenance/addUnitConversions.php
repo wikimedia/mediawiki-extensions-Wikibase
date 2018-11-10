@@ -279,7 +279,7 @@ QUERY;
 		$shortValues = array_map( function ( $str ) {
 			return 'wdv:' . $str;
 		}, $values );
-		$valuesStr = join( ' ', $shortValues );
+		$valuesStr = implode( ' ', $shortValues );
 		$query = <<<QUERY
 SELECT ?s ?p ?v WHERE {
 	VALUES ?v { $valuesStr }

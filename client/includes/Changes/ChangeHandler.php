@@ -189,7 +189,7 @@ class ChangeHandler {
 			if ( isset( $changeData['info']['change-ids'] ) ) {
 				$ids = $changeData['info']['change-ids'];
 				sort( $ids );
-				return 'change-batch:' . join( ',', $ids );
+				return 'change-batch:' . implode( ',', $ids );
 			} else {
 				ksort( $changeData );
 				return 'change-hash:' . sha1( json_encode( $changeData ) );
