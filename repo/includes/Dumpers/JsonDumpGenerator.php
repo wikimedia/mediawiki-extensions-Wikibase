@@ -160,7 +160,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * @param array $serialization
 	 *
-	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
@@ -185,7 +185,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param array $array
 	 * @param string $path
 	 *
-	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */

@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\StorageException;
  * This should be used instead of the static factory methods in the Title class,
  * to allow the title construction process to be overwritten during testing.
  *
- * @todo: move this into MediaWiki core.
+ * @todo move this into MediaWiki core.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

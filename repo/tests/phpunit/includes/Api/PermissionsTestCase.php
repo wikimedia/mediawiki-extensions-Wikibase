@@ -35,7 +35,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 	 * @param string[]|null $groups groups to apply to $wgUser. If not given, group
 	 * membership is not modified.
 	 *
-	 * @todo: try to do this without messing with the globals, or at least without hardcoding them.
+	 * @todo try to do this without messing with the globals, or at least without hardcoding them.
 	 */
 	protected function applyPermissions( array $permissions = null, array $groups = null ) {
 		global $wgUser;

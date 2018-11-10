@@ -17,7 +17,7 @@ class StringNormalizer {
 	 * Remove bytes that represent an incomplete Unicode character
 	 * at the end of string (e.g. bytes of the char are missing)
 	 *
-	 * @todo: this was stolen from the Language class. Make that code reusable.
+	 * @todo this was stolen from the Language class. Make that code reusable.
 	 *
 	 * @param string $string
 	 *
@@ -45,7 +45,7 @@ class StringNormalizer {
 	 * Remove bytes that represent an incomplete Unicode character
 	 * at the start of string (e.g. bytes of the char are missing)
 	 *
-	 * @todo: this was stolen from the Language class. Make that code reusable.
+	 * @todo this was stolen from the Language class. Make that code reusable.
 	 *
 	 * @param string $string
 	 *

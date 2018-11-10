@@ -51,7 +51,7 @@ class MergeFactory {
 	 * @throws InvalidArgumentException
 	 * @return ChangeOpsMerge
 	 *
-	 * @todo: Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
+	 * @todo Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
 	 *        need a ItemMergeChangeOpsSequenceBuilder or some such.
 	 */
 	public function newMergeOps(

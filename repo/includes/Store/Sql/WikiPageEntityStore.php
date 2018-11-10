@@ -487,7 +487,7 @@ class WikiPageEntityStore implements EntityStore {
 	/**
 	 * Determines whether the given user is watching the given item
 	 *
-	 * @todo: move this to a separate service
+	 * @todo move this to a separate service
 	 *
 	 * @param User $user
 	 * @param EntityId $id the entity to watch

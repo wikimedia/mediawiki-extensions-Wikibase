@@ -107,7 +107,7 @@ class ChangeHandler {
 	/**
 	 * Main entry point for handling changes
 	 *
-	 * @todo: process multiple changes at once!
+	 * @todo process multiple changes at once!
 	 *
 	 * @param EntityChange $change
 	 * @param array $rootJobParams any relevant root job parameters to be inherited by new jobs.

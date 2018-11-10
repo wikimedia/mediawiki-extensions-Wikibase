@@ -67,7 +67,7 @@ class ValidatorBuilders {
 	 * values. Our parsers for these data types currently have Wikidata URIs hardcoded, so we need
 	 * to hardcode the URI to check them against for now.
 	 *
-	 * @todo: use a configurable vocabulary for calendars and reference globes, instead of
+	 * @todo use a configurable vocabulary for calendars and reference globes, instead of
 	 * hardcoding wikidata. Then replace usages of $wikidataBaseUri with $vocabularyBaseUri.
 	 */
 	private $wikidataBaseUri = 'http://www.wikidata.org/entity/';

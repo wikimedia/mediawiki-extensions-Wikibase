@@ -53,7 +53,7 @@ abstract class ClientSerializer implements Serializer {
 	 * @param array $serialization
 	 * @param string $pathPrefix
 	 *
-	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
@@ -78,7 +78,7 @@ abstract class ClientSerializer implements Serializer {
 	 * @param array $array
 	 * @param string $path
 	 *
-	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */

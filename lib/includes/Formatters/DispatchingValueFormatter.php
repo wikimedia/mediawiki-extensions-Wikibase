@@ -12,7 +12,7 @@ use ValueFormatters\ValueFormatter;
  * DispatchingValueFormatter is a formatter for DataValues. In addition to dispatching based on
  * the DataValue type, it also supports dispatching based on a DataType.
  *
- * @todo: Plain format() shouldn't be supported,
+ * @todo Plain format() shouldn't be supported,
  * formatValue() should require the dataType ID.
  *
  * @license GPL-2.0-or-later

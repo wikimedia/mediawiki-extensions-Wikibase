@@ -25,7 +25,7 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  * of storing pages and associated core MediaWiki indexing is done
  * through this interface.
  *
- * @todo: provide getXXX() methods for getting local pseudo-singletons (shared service objects).
+ * @todo provide getXXX() methods for getting local pseudo-singletons (shared service objects).
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

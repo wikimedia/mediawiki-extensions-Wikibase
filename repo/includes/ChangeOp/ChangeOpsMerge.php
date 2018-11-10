@@ -81,7 +81,7 @@ class ChangeOpsMerge {
 	 * @param SiteLookup $siteLookup
 	 * @param StatementsMerger $statementsMerger
 	 *
-	 * @todo: Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
+	 * @todo Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
 	 *        need a MergeChangeOpsSequenceBuilder or some such. This will allow us
 	 *        to merge different kinds of entities nicely, too.
 	 */

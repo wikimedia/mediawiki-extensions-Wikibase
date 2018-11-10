@@ -210,7 +210,7 @@ class ChangeNotifier {
 	 * Returns a EntityChange based on the old and new content object, taking
 	 * redirects into consideration.
 	 *
-	 * @todo: Notify the client about changes to redirects explicitly.
+	 * @todo Notify the client about changes to redirects explicitly.
 	 *
 	 * @param EntityContent $oldContent
 	 * @param EntityContent $newContent

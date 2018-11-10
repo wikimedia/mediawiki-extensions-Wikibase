@@ -17,7 +17,7 @@ use Wikibase\TermIndexEntry;
  * @note: this uses internal knowledge about which functions of TermIndex are used
  * by PropertyLabelResolver, and how.
  *
- * @todo: make a fully functional mock conforming to the contract of the TermIndex
+ * @todo make a fully functional mock conforming to the contract of the TermIndex
  * interface and passing tests for that interface. Only then will TermPropertyLabelResolverTest
  * be a true blackbox test.
  *
