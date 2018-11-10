@@ -147,6 +147,10 @@ class CachingKartographerEmbeddingHandler {
 	private function getMapframeInitJS( $mapPreviewId, array $rlModules, array $kartographerLiveData ) {
 		$javaScript = $this->getMWConfigJS( $kartographerLiveData );
 
+		// ext.kartographer.frame contains mw.kartographer.initMapframeFromElement (which we use below)
+		$rlModules[] = 'ext.kartographer.frame';
+		$rlModules = array_unique( $rlModules );
+
 		$JSRlModules = join(
 			', ',
 			array_map(
@@ -160,7 +164,8 @@ class CachingKartographerEmbeddingHandler {
 
 		// Require all needed RL modules, than fire the "wikipage.content" hook for the new JS container
 		$javaScript .= "mw.loader.using( [ $JSRlModules ], " .
-				"function() { mw.hook( 'wikipage.content' ).fire( $( $jsMapPreviewId ) ); } );";
+				"function() { mw.kartographer.initMapframeFromElement( " .
+				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map' ).get( 0 ) ); } );";
 
 		return '<script type="text/javascript">' . $javaScript . '</script>';
 	}
