@@ -187,5 +187,7 @@
 	"apihelp-query+wbsubscribers-summary": "Атрымаць падпіскі на пададзеныя элемэнты.",
 	"apihelp-query+wbsubscribers-param-entities": "Элемэнты для атрыманьня падпісчыкаў",
 	"apihelp-query+wbsubscribers-param-prop": "Уласьцівасьці для дадаваньня ў вынік",
-	"apihelp-query+wbsubscribers-param-limit": "Максымальная колькасьць вынікаў"
+	"apihelp-query+wbsubscribers-param-limit": "Максымальная колькасьць вынікаў",
+	"apihelp-query+wbsubscribers-example-1": "Атрымаць падпісчыкаў элемэнту <samp>Q42</samp>",
+	"apihelp-query+wbsubscribers-example-2": "Атрымаць падпісчыкаў на элемэнт <samp>Q42</samp> з уключаным URL-адрасам на <code>Special:EntityUsage</code>"
 }
