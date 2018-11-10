@@ -9,7 +9,7 @@ use TextContent;
 /**
  * Provides a list of ordered Property numbers
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  */
 class WikiPagePropertyOrderProvider extends WikiTextPropertyOrderProvider implements PropertyOrderProvider {

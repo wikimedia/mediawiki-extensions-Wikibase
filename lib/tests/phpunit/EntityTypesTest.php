@@ -11,7 +11,7 @@ use Wikibase\DataModel\SerializerFactory;
 /**
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {

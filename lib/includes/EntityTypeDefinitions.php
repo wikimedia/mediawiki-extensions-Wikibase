@@ -14,7 +14,7 @@ use InvalidArgumentException;
  * The fields of a definition array can be seen in the follow doc file:
  * @see docs/entitytypes.wiki
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Kreuz

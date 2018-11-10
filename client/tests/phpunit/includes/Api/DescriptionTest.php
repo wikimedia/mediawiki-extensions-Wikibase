@@ -19,7 +19,7 @@ use Wikimedia\TestingAccessWrapper;
  * @group WikibaseAPI
  * @group WikibaseClient
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class DescriptionTest extends TestCase {
 	use PHPUnit4And6Compat;

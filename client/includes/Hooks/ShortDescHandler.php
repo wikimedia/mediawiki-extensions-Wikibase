@@ -8,7 +8,7 @@ use Wikibase\Client\Store\DescriptionLookup;
 /**
  * Handles the {{SHORTDESC:...}} parser function.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class ShortDescHandler {
 

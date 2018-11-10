@@ -7,7 +7,7 @@ use BagOStuff;
 /**
  * PropertyOrderProvider implementation, that caches the information
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  */
 class CachingPropertyOrderProvider implements PropertyOrderProvider {

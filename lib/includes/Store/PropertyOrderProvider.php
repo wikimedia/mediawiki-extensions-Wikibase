@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store;
 /**
  * Interface that contains method for the PropertyOrderProvider
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  */
 interface PropertyOrderProvider {

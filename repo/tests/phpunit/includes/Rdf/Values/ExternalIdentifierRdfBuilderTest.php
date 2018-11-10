@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @group WikibaseRepo
  * @group WikibaseRdf
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
