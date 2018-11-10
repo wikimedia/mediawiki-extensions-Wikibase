@@ -107,9 +107,15 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
+	public function provideGetEntity_usage() {
+		return [
+			true,
+			false
+		];
+	}
+
 	/**
-	 * @testWith [true]
-	 *           [false]
+	 * @dataProvider provideGetEntity_usage
 	 */
 	public function testGetEntity_usage( $fineGrainedTracking ) {
 		$item = $this->getItem();
