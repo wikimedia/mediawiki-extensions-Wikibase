@@ -119,6 +119,78 @@ class PageSplitTesterTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
+	public function testScenarioAb1() {
+		// "control" / "treatment" A/B test with 1% sampling.
+		$sampling = 0.01;
+		$buckets = [ /*A*/ 'control', /*B*/ 'treatment' ];
+		$subject = new PageSplitTester( $sampling, $buckets );
+
+		// Supply page_random at different values. [0, .005) and [.5, .505) are sampled,
+		// [.005, .5) and [.505, 1) are unsampled.
+		$this->assertEquals( true, $subject->isSampled( 0.000 ) ); // Sampled
+		$this->assertEquals( true, $subject->isSampled( 0.001 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.002 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.003 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.004 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.005 ) ); // Unsampled
+		$this->assertEquals( false, $subject->isSampled( 0.008 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.009 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.010 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.011 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.012 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.013 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.015 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.018 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.019 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.100 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.200 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.490 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.500 ) ); // Sampled
+		$this->assertEquals( true, $subject->isSampled( 0.501 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.502 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.503 ) ); // ''
+		$this->assertEquals( true, $subject->isSampled( 0.504 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.505 ) ); // Unsampled
+		$this->assertEquals( false, $subject->isSampled( 0.508 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.509 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.510 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.800 ) ); // ''
+		$this->assertEquals( false, $subject->isSampled( 0.999 ) ); // ''
+
+		// Supply page_random at different values. [0, .5) are "control", [.5, 1) are "treatment".
+		$this->assertEquals( 'control', $subject->getBucket( 0.000 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.001 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.002 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.003 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.004 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.005 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.008 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.009 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.010 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.011 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.012 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.013 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.015 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.018 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.019 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.100 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.200 ) );
+		$this->assertEquals( 'control', $subject->getBucket( 0.490 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.500 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.501 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.502 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.503 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.504 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.505 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.508 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.509 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.510 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.800 ) );
+		$this->assertEquals( 'treatment', $subject->getBucket( 0.999 ) );
+
+		// Thus, pages sampled at 1% in "treatment" may be found for page_random in [.5, .505).
+	}
+
 	public function testScenarioAb10() {
 		// A/B test with 10% sampling.
 		$subject = new PageSplitTester( 0.1, [ 'a', 'b' ] );
