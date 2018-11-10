@@ -6,7 +6,6 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
-use GeoData\GeoData;
 use ParserOutput;
 use RuntimeException;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
