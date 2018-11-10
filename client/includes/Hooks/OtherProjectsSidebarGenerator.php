@@ -7,9 +7,9 @@ use Site;
 use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -116,7 +116,7 @@ class OtherProjectsSidebarGenerator {
 	private function runHook( ItemId $itemId, array $sidebar ) {
 		$newSidebar = $sidebar;
 
-		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [ $itemId, &$newSidebar ] );
+		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [ $itemId, &$newSidebar, $this->siteIdsToOutput ] );
 
 		if ( $newSidebar === $sidebar ) {
 			return $sidebar;
