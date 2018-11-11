@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c78e0993_8ce6da97",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-11T22:51:53Z",
+      "side": 1,
+      "message": "Just a note that this could change once https://phabricator.wikimedia.org/T207850 is completed.",
+      "range": {
+        "startLine": 562,
+        "startChar": 33,
+        "endLine": 562,
+        "endChar": 47
+      },
+      "revId": "bc474e42aa70efd6d7ecf3bdb442d06b7975a446",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
