@@ -22,6 +22,30 @@
       "revId": "bc474e42aa70efd6d7ecf3bdb442d06b7975a446",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "593f1f58_3fcd13c9",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 2426
+      },
+      "writtenOn": "2018-11-11T23:32:17Z",
+      "side": 1,
+      "message": "Thank you. I\u0027ve subscribed to the ticket to monitor changes and take action as needed.",
+      "parentUuid": "c78e0993_8ce6da97",
+      "range": {
+        "startLine": 562,
+        "startChar": 33,
+        "endLine": 562,
+        "endChar": 47
+      },
+      "revId": "bc474e42aa70efd6d7ecf3bdb442d06b7975a446",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
