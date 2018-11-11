@@ -26,7 +26,7 @@ use Wikibase\WikibaseSettings;
 class PageTerms extends ApiQueryBase {
 
 	/**
-	 * @todo: Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
+	 * @todo Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
 	 * @var TermIndex
 	 */
 	private $termIndex;

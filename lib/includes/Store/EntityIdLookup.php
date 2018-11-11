@@ -36,7 +36,7 @@ interface EntityIdLookup {
 	 *
 	 * @param Title $title
 	 *
-	 * @todo: Switch this to using TitleValue once we can easily get the content model and
+	 * @todo Switch this to using TitleValue once we can easily get the content model and
 	 * handler based on a TitleValue.
 	 *
 	 * @return EntityId|null

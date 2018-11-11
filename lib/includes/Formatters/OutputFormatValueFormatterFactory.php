@@ -97,7 +97,7 @@ class OutputFormatValueFormatterFactory {
 	 * @throws InvalidArgumentException
 	 * @todo  : Sort out how the desired language is specified. We have two language options,
 	 *        each accepting different ways of specifying the language. That's not good.
-	 * @todo: this shouldn't be public at all. Perhaps factor it out into a helper class.
+	 * @todo this shouldn't be public at all. Perhaps factor it out into a helper class.
 	 */
 	public function applyLanguageDefaults( FormatterOptions $options ) {
 		$options->defaultOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );

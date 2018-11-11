@@ -796,7 +796,7 @@ class EditEntity {
 	 * Watches or unwatches the entity.
 	 *
 	 * @note Keep in sync with logic in EditPage!
-	 * @todo: move to separate service
+	 * @todo move to separate service
 	 *
 	 * @param bool $watch whether to watch or unwatch the page.
 	 *

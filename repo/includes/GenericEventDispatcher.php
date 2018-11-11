@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  * Dispatches a notification to a set of watchers.
  *
- * @todo: should go into MediaWiki core.
+ * @todo should go into MediaWiki core.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

@@ -168,7 +168,7 @@ class WikibaseLuaEntityBindings {
 	/**
 	 * Get global site ID (e.g. "enwiki")
 	 * This is basically a helper function.
-	 * @TODO: Make this part of mw.site in the Scribunto extension.
+	 * @todo Make this part of mw.site in the Scribunto extension.
 	 *
 	 * @return string
 	 */
@@ -178,7 +178,7 @@ class WikibaseLuaEntityBindings {
 
 	/**
 	 * Get the language we are currently working with.
-	 * @TODO: Once T114640 has been implemented, this should probably be
+	 * @todo Once T114640 has been implemented, this should probably be
 	 * generally exposed in Scribunto as parser target language.
 	 *
 	 * @return string

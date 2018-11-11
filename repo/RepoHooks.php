@@ -338,7 +338,7 @@ final class RepoHooks {
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/RecentChange_save
 	 *
-	 * @todo: find a better way to do this!
+	 * @todo find a better way to do this!
 	 *
 	 * @param RecentChange $recentChange
 	 */

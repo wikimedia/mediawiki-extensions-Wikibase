@@ -112,7 +112,7 @@ interface EntityStore {
 	/**
 	 * Watches or unwatches the entity.
 	 *
-	 * @todo: move this to a separate service
+	 * @todo move this to a separate service
 	 *
 	 * @param User $user
 	 * @param EntityId $id the entity to watch
@@ -126,7 +126,7 @@ interface EntityStore {
 	/**
 	 * Determines whether the given user is watching the given item
 	 *
-	 * @todo: move this to a separate service
+	 * @todo move this to a separate service
 	 *
 	 * @param User $user
 	 * @param EntityId $id the entity to watch

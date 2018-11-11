@@ -9,7 +9,7 @@ use Wikibase\SettingsArray;
 /**
  * Provides url and path information for the associated Wikibase repo
  *
- * @todo: may want to include namespaces and other settings here too.
+ * @todo may want to include namespaces and other settings here too.
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

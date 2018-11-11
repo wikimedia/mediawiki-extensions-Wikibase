@@ -305,7 +305,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * Adds revision information about an entity's revision to the RDF graph.
 	 *
-	 * @todo: extract into MetaDataRdfBuilder
+	 * @todo extract into MetaDataRdfBuilder
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revision
@@ -384,7 +384,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
-	 * @todo: extract into MetaDataRdfBuilder
+	 * @todo extract into MetaDataRdfBuilder
 	 *
 	 * @param EntityDocument $entity
 	 */

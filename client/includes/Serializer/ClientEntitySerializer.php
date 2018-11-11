@@ -72,7 +72,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @TODO FIXME duplicated code in Repo ResultBuilder
+	 * @todo FIXME duplicated code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
@@ -90,7 +90,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
@@ -115,7 +115,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
