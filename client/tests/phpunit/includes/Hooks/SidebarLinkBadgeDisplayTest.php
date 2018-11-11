@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\Term;
  * @group Wikibase
  * @group Database
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class SidebarLinkBadgeDisplayTest extends \MediaWikiTestCase {
 

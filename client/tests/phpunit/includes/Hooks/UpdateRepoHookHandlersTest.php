@@ -20,7 +20,7 @@ use Wikibase\Client\NamespaceChecker;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {

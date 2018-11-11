@@ -16,7 +16,7 @@ use Wikibase\View\EntityMetaTagsCreator;
  *
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 	use PHPUnit4And6Compat;

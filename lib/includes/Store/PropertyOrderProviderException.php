@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store;
 use RuntimeException;
 
 /**
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  */
 class PropertyOrderProviderException extends RuntimeException {

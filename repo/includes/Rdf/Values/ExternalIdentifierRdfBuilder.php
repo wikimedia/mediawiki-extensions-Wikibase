@@ -16,7 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */

@@ -17,7 +17,7 @@ use OutOfBoundsException;
  *
  * @todo Move this to a separate component.
  *
- * @license GPL 2+
+ * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
 class WikibaseSettings {

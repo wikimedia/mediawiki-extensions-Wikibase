@@ -29,7 +29,7 @@ namespace Wikibase\Repo\Search\Elastic\Tests {
 	 * @covers \Wikibase\Repo\Search\Elastic\DispatchingQueryBuilder
 	 *
 	 * @group Wikibase
-	 * @license GPL-2.0+
+	 * @license GPL-2.0-or-later
 	 * @author  Stas Malyshev
 	 */
 	class DispatchingQueryBuilderTest extends MediaWikiTestCase {

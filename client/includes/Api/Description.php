@@ -14,7 +14,7 @@ use Wikibase\Client\Store\DescriptionLookup;
  * Arguably this should be a separate extension so that it can be used on wikis without Wikibase
  * as well, but was initially implemented inside Wikibase for speed and convenience (T189154).
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  */
 class Description extends ApiQueryBase {
 
