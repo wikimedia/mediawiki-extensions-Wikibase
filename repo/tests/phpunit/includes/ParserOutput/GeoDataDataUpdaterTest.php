@@ -9,7 +9,6 @@ use DataValues\StringValue;
 use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
-use GeoData\GeoData;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
