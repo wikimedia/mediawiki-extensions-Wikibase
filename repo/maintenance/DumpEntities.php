@@ -175,7 +175,7 @@ abstract class DumpEntities extends Maintenance {
 
 		$entityTypes = $this->getEntityTypes();
 
-		$this->logMessage( 'Dumping entities of type ' . join( ', ', $entityTypes ) );
+		$this->logMessage( 'Dumping entities of type ' . implode( ', ', $entityTypes ) );
 
 		if ( $shardingFactor ) {
 			$this->logMessage( "Dumping shard $shard/$shardingFactor" );

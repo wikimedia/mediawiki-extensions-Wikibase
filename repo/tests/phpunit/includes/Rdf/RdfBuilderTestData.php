@@ -149,7 +149,7 @@ class RdfBuilderTestData {
 	public function putTestData( $dataSetName, $lines, $suffix = '' ) {
 		$filename = $this->getDataSetFileName( $dataSetName ) . $suffix;
 
-		$data = join( "\n", (array)$lines );
+		$data = implode( "\n", (array)$lines );
 		file_put_contents( $filename, $data );
 
 		return $filename;

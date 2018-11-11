@@ -576,7 +576,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 		$params = [
 			'action' => 'wbgetentities',
-			'languages' => join( '|', $languages ),
+			'languages' => implode( '|', $languages ),
 			'languagefallback' => '',
 			'ids' => $id,
 		];
