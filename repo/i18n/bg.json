@@ -40,6 +40,8 @@
 	"wikibase-description-empty": "Не е въведено описание",
 	"wikibase-description-edit-placeholder": "въведете описание",
 	"wikibase-description-edit-placeholder-language-aware": "въведете описание на $1",
+	"wikibase-aliases-edit-placeholder-language-aware": "въведете псевдоними на $1",
+	"wikibase-aliases-edit-label": "Псевдоними, отделени с вертикални черти:",
 	"wikibase-content-language-edit-label": "Език:",
 	"wikibase-diffview-rank-preferred": "Предпочитан ранг",
 	"wikibase-diffview-rank-normal": "Нормален ранг",
