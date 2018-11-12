@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfcf31f7_258b26e9",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-12T22:32:50Z",
+      "side": 1,
+      "message": "Maybe the name is to generic for what this does (format as html)… but then again, a format-selection parameter defaulting to html could easily be added later.",
+      "range": {
+        "startLine": 629,
+        "startChar": 16,
+        "endLine": 629,
+        "endChar": 32
+      },
+      "revId": "557cb293f4848e43c59714ea95492cbecce2fccf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9473d209_3cd31b5a",
+        "filename": "repo/includes/Api/FormatEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-12T22:32:50Z",
+      "side": 1,
+      "message": "Maybe use TestingAccessWrapper then?",
+      "revId": "557cb293f4848e43c59714ea95492cbecce2fccf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0553b4c_dab56050",
+        "filename": "repo/includes/Api/FormatEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-12T22:32:50Z",
+      "side": 1,
+      "message": "Hm, maybe this should also advertise how to ask for a specific language",
+      "revId": "557cb293f4848e43c59714ea95492cbecce2fccf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
