@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, wb, vf, util ) {
+( function ( wb, vf ) {
 	'use strict';
 
 	wb.formatters = wb.formatters || {};
@@ -88,4 +88,4 @@
 		}
 	);
 
-}( jQuery, wikibase, valueFormatters, util ) );
+}( wikibase, valueFormatters ) );

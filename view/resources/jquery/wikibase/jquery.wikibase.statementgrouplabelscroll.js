@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Thiemo Kreuz
  */
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	var WIDGET_NAME = 'statementgrouplabelscroll';
@@ -226,4 +226,4 @@
 		return activeInstances.slice();
 	};
 
-}( jQuery ) );
+}() );

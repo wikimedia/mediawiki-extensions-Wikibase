@@ -1,4 +1,4 @@
-( function ( $, mw, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -226,4 +226,4 @@
 
 	} );
 
-}( jQuery, mediaWiki, wikibase ) );
+}( wikibase ) );

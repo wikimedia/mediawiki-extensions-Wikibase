@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	'use strict';
 
 	var PARENT = $.wikibase.singlebuttontoolbar;
@@ -29,4 +29,4 @@
 
 	} );
 
-}( mediaWiki, jQuery ) );
+}() );

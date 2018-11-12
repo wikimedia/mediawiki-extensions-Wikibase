@@ -1,4 +1,4 @@
-( function ( $, sinon, QUnit, wb, mw ) {
+( function ( wb ) {
 	'use strict';
 
 	var MODULE = wb.entityIdFormatter;
@@ -63,4 +63,4 @@
 		} );
 	} );
 
-}( jQuery, sinon, QUnit, wikibase, mediaWiki ) );
+}( wikibase ) );

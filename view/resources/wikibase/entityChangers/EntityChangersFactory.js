@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
@@ -106,4 +106,4 @@
 		}
 	} );
 
-}( wikibase, jQuery ) );
+}( wikibase ) );

@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, wb, mw, QUnit ) {
+( function ( wb ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.badgeselector', QUnit.newMwEnvironment( {
@@ -127,4 +127,4 @@
 
 	} );
 
-}( jQuery, wikibase, mediaWiki, QUnit ) );
+}( wikibase ) );

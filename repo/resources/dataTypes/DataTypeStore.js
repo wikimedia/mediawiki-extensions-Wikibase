@@ -1,4 +1,4 @@
-( function ( $, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	/**
@@ -65,4 +65,4 @@
 		}
 	} );
 
-}( jQuery, wikibase ) );
+}( wikibase ) );

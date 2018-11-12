@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( $, wb, QUnit ) {
+( function ( wb ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.entityview' );
@@ -19,4 +19,4 @@
 		);
 	} );
 
-}( jQuery, wikibase, QUnit ) );
+}( wikibase ) );

@@ -1,4 +1,4 @@
-( function ( $, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	/**
@@ -79,4 +79,4 @@
 		return new SELF( dataTypeId, json.dataValueType );
 	};
 
-}( jQuery, wikibase ) );
+}( wikibase ) );

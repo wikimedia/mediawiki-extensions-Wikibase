@@ -1,4 +1,4 @@
-( function ( $, sinon, QUnit, wb, mw ) {
+( function ( wb ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' );
@@ -57,4 +57,4 @@
 		} );
 	} );
 
-}( jQuery, sinon, QUnit, wikibase, mediaWiki ) );
+}( wikibase ) );

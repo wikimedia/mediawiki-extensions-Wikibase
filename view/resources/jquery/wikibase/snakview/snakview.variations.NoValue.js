@@ -1,4 +1,4 @@
-( function ( mw, wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	var MODULE = $.wikibase.snakview.variations,
@@ -31,4 +31,4 @@
 		}
 	} );
 
-}( mediaWiki, wikibase, jQuery ) );
+}( wikibase ) );

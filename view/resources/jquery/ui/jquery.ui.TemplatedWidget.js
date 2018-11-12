@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	var PARENT = $.Widget;
@@ -223,4 +223,4 @@
 		}
 	} );
 
-}( jQuery ) );
+}() );

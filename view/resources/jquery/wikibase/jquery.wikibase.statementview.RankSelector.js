@@ -326,4 +326,4 @@
 
 	} );
 
-}( mediaWiki, wikibase, jQuery, util ) );
+}( wikibase ) );

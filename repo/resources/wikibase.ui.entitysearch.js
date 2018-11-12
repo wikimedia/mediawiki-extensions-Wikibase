@@ -4,7 +4,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, mw ) {
+( function () {
 	'use strict';
 
 	$( function () {
@@ -144,4 +144,4 @@
 
 	} );
 
-}( jQuery, mediaWiki ) );
+}() );

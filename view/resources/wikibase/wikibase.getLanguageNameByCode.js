@@ -7,7 +7,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	/**
@@ -50,4 +50,4 @@
 			&& ulsLanguages[ langCode ] || getNativeLanguageName( langCode );
 	};
 
-}( wikibase, jQuery ) );
+}( wikibase ) );

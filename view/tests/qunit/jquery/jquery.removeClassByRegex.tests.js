@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Daniel Werner
  */
-( function ( $, QUnit ) {
+( function () {
 	'use strict';
 
 	QUnit.module( 'jquery.removeClassByRegex' );
@@ -20,7 +20,7 @@
 		);
 
 		assert.ok(
-			subject.removeClassByRegex( /abcdefgh/ ) instanceof jQuery,
+			subject.removeClassByRegex( /abcdefgh/ ) instanceof $,
 			'jQuery.removeClassByRegex() returns instance of jQuery'
 		);
 
@@ -53,7 +53,7 @@
 		);
 
 		assert.ok(
-			subject.removeClassByRegex( /abcdefgh/ ) instanceof jQuery,
+			subject.removeClassByRegex( /abcdefgh/ ) instanceof $,
 			'jQuery.removeClassByRegex() returns instance of jQuery'
 		);
 
@@ -76,4 +76,4 @@
 		);
 	} );
 
-}( jQuery, QUnit ) );
+}() );

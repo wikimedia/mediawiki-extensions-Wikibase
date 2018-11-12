@@ -4,7 +4,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( $, mw, wb, dataTypeStore, getExpertsStore, getParserStore, performance ) {
+( function ( wb, dataTypeStore, getExpertsStore, getParserStore, performance ) {
 	'use strict';
 
 	/**
@@ -396,8 +396,6 @@
 	} );
 
 }(
-	jQuery,
-	mediaWiki,
 	wikibase,
 	wikibase.dataTypeStore,
 	wikibase.experts.getStore,

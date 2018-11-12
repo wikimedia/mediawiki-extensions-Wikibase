@@ -1,4 +1,4 @@
-( function ( mw, wb, $, dv ) {
+( function ( wb, dv ) {
 	'use strict';
 
 	// Back-up components already initialized in the namespace to re-apply them after initializing
@@ -859,4 +859,4 @@
 
 	$.extend( $.wikibase.snakview, existingSnakview );
 
-}( mediaWiki, wikibase, jQuery, dataValues ) );
+}( wikibase, dataValues ) );

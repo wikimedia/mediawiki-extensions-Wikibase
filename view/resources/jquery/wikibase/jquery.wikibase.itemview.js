@@ -1,4 +1,4 @@
-( function ( $, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	var PARENT = $.wikibase.entityview;
@@ -133,4 +133,4 @@
 
 	$.wikibase.entityview.TYPES.push( $.wikibase.itemview.prototype.widgetName );
 
-}( jQuery, wikibase ) );
+}( wikibase ) );

@@ -25,4 +25,4 @@
 
 		}
 	);
-}( wikibase, util ) );
+}( wikibase ) );

@@ -31,7 +31,7 @@
  *     } );
  * } );
  */
-( function ( mw ) {
+( function () {
 	'use strict';
 
 	var wbEntity = mw.config.get( 'wbEntity' );
@@ -74,4 +74,4 @@
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( deepFreeze( JSON.parse( wbEntity ) ) );
 	}
 
-}( mediaWiki ) );
+}() );

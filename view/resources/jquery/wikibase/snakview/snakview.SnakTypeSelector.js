@@ -1,4 +1,4 @@
-( function ( mw, $ ) {
+( function () {
 	'use strict';
 
 	var PARENT = $.Widget;
@@ -237,4 +237,4 @@
 	// the prototype
 	$.wikibase.snakview.SnakTypeSelector.prototype.widgetBaseClass = 'wikibase-snaktypeselector';
 
-}( mediaWiki, jQuery ) );
+}() );

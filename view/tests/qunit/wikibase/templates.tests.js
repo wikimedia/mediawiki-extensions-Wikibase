@@ -7,7 +7,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function ( mw, $, QUnit ) {
+( function () {
 	'use strict';
 
 	QUnit.module( 'wikibase.templates', QUnit.newMwEnvironment() );
@@ -188,7 +188,7 @@
 				}
 				if ( typeof param === 'string' ) {
 					paramMessage += param;
-				} else if ( param instanceof jQuery ) {
+				} else if ( param instanceof $ ) {
 					paramMessage += 'jQuery object';
 				}
 			} );
@@ -260,4 +260,4 @@
 		}
 	);
 
-}( mediaWiki, jQuery, QUnit ) );
+}() );

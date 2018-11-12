@@ -1,5 +1,5 @@
 // Copied from mediawiki-core's mediawiki.action.edit.collapsibleFooter.js
-( function ( mw ) {
+( function () {
 	'use strict';
 
 	var collapsibleLists, handleOne;
@@ -54,4 +54,4 @@
 			);
 		}
 	} );
-}( mediaWiki ) );
+}() );

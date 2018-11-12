@@ -1,4 +1,4 @@
-( function ( wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -235,4 +235,4 @@
 
 	} );
 
-}( wikibase, jQuery ) );
+}( wikibase ) );

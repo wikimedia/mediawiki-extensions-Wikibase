@@ -1,4 +1,4 @@
-( function ( $, sinon, QUnit, wb, mw ) {
+( function ( wb ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.view.ToolbarViewController' );
@@ -47,4 +47,4 @@
 
 	wb.view.testViewController.all( wb.view.ToolbarViewController, initToolbarViewController );
 
-}( jQuery, sinon, QUnit, wikibase, mediaWiki ) );
+}( wikibase ) );

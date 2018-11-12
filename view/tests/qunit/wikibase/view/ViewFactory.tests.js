@@ -1,4 +1,4 @@
-( function ( $, sinon, QUnit, wb, ViewFactory ) {
+( function ( wb, ViewFactory ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.view.ViewFactory' );
@@ -594,4 +594,4 @@
 		$.wikibase.entitytermsview.restore();
 	} );
 
-}( jQuery, sinon, QUnit, wikibase, wikibase.view.ViewFactory ) );
+}( wikibase, wikibase.view.ViewFactory ) );

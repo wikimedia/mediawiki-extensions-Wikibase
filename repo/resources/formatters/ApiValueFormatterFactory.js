@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( $, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	var PARENT = wb.ValueFormatterFactory;
@@ -48,4 +48,4 @@
 		}
 	);
 
-}( jQuery, wikibase ) );
+}( wikibase ) );

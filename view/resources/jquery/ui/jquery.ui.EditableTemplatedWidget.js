@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -194,4 +194,4 @@
 		doErrorNotification: null
 	} );
 
-}( jQuery ) );
+}() );

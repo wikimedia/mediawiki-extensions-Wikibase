@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	var form = $( 'form#wb-mergeitems-form1' );
@@ -7,4 +7,4 @@
 		$( this ).find( 'button[type="submit"]' ).prop( 'disabled', true );
 	} );
 
-}( jQuery ) );
+}() );

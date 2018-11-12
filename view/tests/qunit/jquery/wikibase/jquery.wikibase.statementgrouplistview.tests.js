@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( $, wb, QUnit ) {
+( function ( wb ) {
 	'use strict';
 
 	var statementgroupviewListItemAdapter = wb.tests.getMockListItemAdapter(
@@ -121,4 +121,4 @@
 		);
 	} );
 
-}( jQuery, wikibase, QUnit ) );
+}( wikibase ) );

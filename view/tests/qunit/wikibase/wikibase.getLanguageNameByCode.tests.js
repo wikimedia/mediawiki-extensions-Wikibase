@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 
-( function ( wb, mw, $, QUnit ) {
+( function ( wb ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.getLanguageNameByCode' );
@@ -40,4 +40,4 @@
 		);
 	} );
 
-}( wikibase, mediaWiki, jQuery, QUnit ) );
+}( wikibase ) );

@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	$.wikibase = $.wikibase || {};
@@ -81,4 +81,4 @@
 		}
 	} );
 
-}( jQuery ) );
+}() );

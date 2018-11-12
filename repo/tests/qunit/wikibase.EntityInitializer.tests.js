@@ -1,4 +1,4 @@
-( function ( QUnit, wb, sinon, mw ) {
+( function ( wb ) {
 	'use strict';
 
 	var EntityInitializer = wb.EntityInitializer,
@@ -46,4 +46,4 @@
 		} );
 	} );
 
-}( QUnit, wikibase, sinon, mediaWiki ) );
+}( wikibase ) );

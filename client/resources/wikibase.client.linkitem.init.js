@@ -4,7 +4,7 @@
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-( function ( mw, $ ) {
+( function () {
 	'use strict';
 
 	function initLinkItem( elem ) {
@@ -82,4 +82,4 @@
 			initLinkItem( this );
 		} );
 	} );
-}( mediaWiki, jQuery ) );
+}() );

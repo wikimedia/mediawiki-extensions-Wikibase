@@ -75,7 +75,7 @@
  *        - {jQuery.Event}
  *        - {jQuery} $tag
  */
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	$.widget( 'ui.tagadata', {
@@ -569,4 +569,4 @@
 		}
 	} );
 
-}( jQuery ) );
+}() );

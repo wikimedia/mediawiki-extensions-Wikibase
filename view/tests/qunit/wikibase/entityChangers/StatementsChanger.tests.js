@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( sinon, wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.entityChangers.StatementsChanger' );
@@ -279,4 +279,4 @@
 		assert.ok( fireHook.calledWith( 'wikibase.statement.saved', 'Q1', guid ), 'hook should have correct arguments' );
 	} );
 
-}( sinon, wikibase, jQuery ) );
+}( wikibase ) );

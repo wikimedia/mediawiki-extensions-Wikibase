@@ -1,4 +1,4 @@
-( function ( $, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	var MODULE = wb.view;
@@ -76,4 +76,4 @@
 		return $dom.data( toolbarName );
 	};
 
-}( jQuery, wikibase ) );
+}( wikibase ) );

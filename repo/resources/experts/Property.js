@@ -30,4 +30,4 @@ module.exports = ( function ( wb, vv ) {
 
 	return SELF;
 
-}( wikibase, jQuery.valueview ) );
+}( wikibase, $.valueview ) );
