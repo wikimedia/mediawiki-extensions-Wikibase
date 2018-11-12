@@ -14,3 +14,4 @@ The following are the RDF format versions, see FORMAT_VERSION in RdfVocabulary.p
 0.0.4 - Added unit conversion & normalization support (see T117031)
 0.0.5 - Added quantities without bounds (see T115269)
 0.1.0 - Changed sitelink encoding (see T131960)
+1.0.0 - Moved ontology URI to http://wikiba.se/ontology# (removed beta) (see T112127)

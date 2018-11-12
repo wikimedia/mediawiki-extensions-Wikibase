@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Rdf\RdfVocabulary;
 
 /**
  * Provider class for EntityData tests.
@@ -59,6 +60,7 @@ class EntityDataTestProvider {
 	}
 
 	public static function provideHandleRequest() {
+		$version = preg_quote( RdfVocabulary::FORMAT_VERSION );
 		$cases = [];
 
 		$cases[] = [ // #0: no params, fail
@@ -447,7 +449,7 @@ class EntityDataTestProvider {
 			[ 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'full' ], // parameters
 			[], // headers
 			'!^<http://data\.acme\.test/Q42> *'
-				. '<http://schema.org/softwareVersion> *"0\.1\.0" *\.$.*^'
+				. "<http://schema.org/softwareVersion> *\"$version\" *\\.\$.*^"
 				. '<http://acme\.test/Q22> *'
 				. '<http://www\.w3\.org/2002/07/owl#sameAs> *'
 				. '<http://acme\.test/Q42> *.$!sm',
@@ -459,7 +461,7 @@ class EntityDataTestProvider {
 			[ 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'dump' ], // parameters
 			[], // headers
 			'!^<http://data\.acme\.test/Q42> +'
-				. '<http://schema.org/softwareVersion> +"0\.1\.0" *\.$'
+				. "<http://schema.org/softwareVersion> +\"$version\" *\\.\$"
 				. '!sm',
 			200,       // http code
 		];

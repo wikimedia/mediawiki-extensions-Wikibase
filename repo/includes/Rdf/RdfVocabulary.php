@@ -18,7 +18,7 @@ use Wikimedia\Assert\Assert;
 class RdfVocabulary {
 
 	// Change this when changing data format!
-	const FORMAT_VERSION = '0.1.0';
+	const FORMAT_VERSION = '1.0.0';
 	const ONTOLOGY_VERSION = '1.0';
 
 	const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
@@ -174,8 +174,7 @@ class RdfVocabulary {
 			'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 			'xsd' => 'http://www.w3.org/2001/XMLSchema#',
 			'owl' => 'http://www.w3.org/2002/07/owl#',
-			// TODO: drop beta once we have stable ontology
-			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
+			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "#",
 
 			self::NS_STATEMENT => $conceptUris[''] . 'statement/',
 

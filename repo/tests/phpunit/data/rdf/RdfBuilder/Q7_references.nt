@@ -12,4 +12,4 @@
 <http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://acme.test/prop/reference/P9> <http://url.acme.test/> .
 <http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://foreign.test/prop/reference/P11> "simplestring" .
 <http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://foreign.test/prop/reference/P12> <http://foreign.test/Q303> .
-<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Reference> .
+<http://acme.test/reference/f2693d55e4237eed12e76c87e54f6ae0f3d7080f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Reference> .

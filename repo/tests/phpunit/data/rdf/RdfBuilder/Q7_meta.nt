@@ -1,4 +1,4 @@
-<http://acme.test/Q7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Item> .
+<http://acme.test/Q7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Item> .
 <http://data.acme.test/Q7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Dataset> .
 <http://data.acme.test/Q7> <http://schema.org/about> <http://acme.test/Q7> .
 <http://data.acme.test/Q7> <http://schema.org/version> "42"^^<http://www.w3.org/2001/XMLSchema#integer> .
