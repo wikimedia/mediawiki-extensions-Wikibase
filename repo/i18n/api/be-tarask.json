@@ -190,5 +190,6 @@
 	"apihelp-query+wbsubscribers-param-limit": "Максымальная колькасьць вынікаў",
 	"apihelp-query+wbsubscribers-example-1": "Атрымаць падпісчыкаў элемэнту <samp>Q42</samp>",
 	"apihelp-query+wbsubscribers-example-2": "Атрымаць падпісчыкаў на элемэнт <samp>Q42</samp> з уключаным URL-адрасам на <code>Special:EntityUsage</code>",
-	"apihelp-wbsetaliases-description": "Вызначае псэўданімы для элемэнту Вікібазы."
+	"apihelp-wbsetaliases-description": "Вызначае псэўданімы для элемэнту Вікібазы.",
+	"apihelp-wbsetaliases-summary": "Вызначае псэўданімы для элемэнту Вікібазы."
 }
