@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 9.0.1 (2018-11-09)
+
+* `Item` and `Property` now implement `ClearableEntity` again
+
 ## Version 9.0.0 (2018-11-01)
 
 * Breaking change: `EntityDocument` no longer extends `ClearableEntity` (8.0.0 revert)
