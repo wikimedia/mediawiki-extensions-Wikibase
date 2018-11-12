@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function ( $, util ) {
+( function () {
 	'use strict';
 
 	$.wikibase = $.wikibase || {};
@@ -240,4 +240,4 @@
 		blur: function () {}
 	} );
 
-}( jQuery, util ) );
+}() );

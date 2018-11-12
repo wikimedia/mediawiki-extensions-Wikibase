@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Daniel Werner
  */
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	/**
@@ -35,4 +35,4 @@
 		return this;
 	};
 
-}( jQuery ) );
+}() );

@@ -29,14 +29,14 @@ class TemplateModule extends ResourceLoaderFileModule {
 
 		// template store JavaScript initialisation
 		$script = <<<EOT
-( function( mw ) {
+( function () {
 	'use strict';
 
 	mw.wbTemplates = mw.wbTemplates || {};
 	mw.wbTemplates.store = new mw.Map();
 	mw.wbTemplates.store.set( $templatesJson );
 
-}( mediaWiki ) );
+}() );
 EOT;
 
 		return $script . "\n" . parent::getScript( $context );

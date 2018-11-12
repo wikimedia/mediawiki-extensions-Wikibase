@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -176,4 +176,4 @@
 			};
 		} );
 
-}( jQuery ) );
+}() );

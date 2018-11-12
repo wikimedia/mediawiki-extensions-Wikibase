@@ -1,4 +1,4 @@
-( function ( $, sinon, QUnit, wb, ViewFactoryFactory ) {
+( function ( wb, ViewFactoryFactory ) {
 	'use strict';
 
 	var sandbox = sinon.sandbox.create();
@@ -45,4 +45,4 @@
 		assert.ok( wikibase.view.ReadModeViewFactory.calledWith( 3 ) );
 	} );
 
-}( jQuery, sinon, QUnit, wikibase, wikibase.view.ViewFactoryFactory ) );
+}( wikibase, wikibase.view.ViewFactoryFactory ) );

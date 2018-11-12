@@ -1,4 +1,4 @@
-( function ( $, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	var MODULE = wb.view;
@@ -655,4 +655,4 @@
 		return $dom.data( viewName );
 	};
 
-}( jQuery, wikibase ) );
+}( wikibase ) );

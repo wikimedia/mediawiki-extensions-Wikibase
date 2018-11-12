@@ -1,4 +1,4 @@
-( function ( $, util ) {
+( function () {
 	'use strict';
 
 	// TODO: Resolve namespace initialization
@@ -128,4 +128,4 @@
 
 	$.extend( $.wikibase.snakview.variations, existingVariations );
 
-}( jQuery, util ) );
+}() );

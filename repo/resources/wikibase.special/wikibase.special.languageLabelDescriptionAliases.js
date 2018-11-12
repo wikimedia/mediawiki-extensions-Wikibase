@@ -3,7 +3,7 @@
  *
  * @license GPL-2.0-or-later
  */
-( function ( $, mw, OO ) {
+( function () {
 	'use strict';
 
 	$( function () {
@@ -66,4 +66,4 @@
 		langWidget.on( 'change', updatePlaceholders );
 	} );
 
-}( jQuery, mediaWiki, OO ) );
+}() );

@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( mw, $ ) {
+( function () {
 	'use strict';
 
 	/**
@@ -19,7 +19,7 @@
 	 * @return {string}
 	 */
 	function getParameterType( param ) {
-		return ( param instanceof jQuery ) ? 'jQuery' : typeof param;
+		return ( param instanceof $ ) ? 'jQuery' : typeof param;
 	}
 
 	/**
@@ -197,7 +197,7 @@
 				// to detect HTML entities properly (e.g. a &nbsp; in Firefox would show up as a
 				// space instead of an entity which would cause an invalid HTML error)
 				tempParams.push( $( '<div/>' ).html( mw.html.escape( params[ i ] ) ).html() );
-			} else if ( params[ i ] instanceof jQuery ) {
+			} else if ( params[ i ] instanceof $ ) {
 				// construct temporary placeholder nodes
 				// (using an actual invalid class name to not interfere with any other node)
 				var nodeName = params[ i ][ 0 ].nodeName.toLowerCase();
@@ -267,4 +267,4 @@
 		return this;
 	};
 
-}( mediaWiki, jQuery ) );
+}() );

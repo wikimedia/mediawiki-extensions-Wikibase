@@ -1,4 +1,4 @@
-wikibase.view.ViewFactoryFactory = ( function ( wb, $ ) {
+wikibase.view.ViewFactoryFactory = ( function ( wb ) {
 	'use strict';
 
 	var ViewFactoryFactory = function () {};
@@ -51,4 +51,4 @@ wikibase.view.ViewFactoryFactory = ( function ( wb, $ ) {
 	} );
 
 	return ViewFactoryFactory;
-}( wikibase, jQuery ) );
+}( wikibase ) );

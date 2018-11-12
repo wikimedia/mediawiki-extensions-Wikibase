@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-( function ( mw, wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -495,4 +495,4 @@
 		}
 	} );
 
-}( mediaWiki, wikibase, jQuery ) );
+}( wikibase ) );

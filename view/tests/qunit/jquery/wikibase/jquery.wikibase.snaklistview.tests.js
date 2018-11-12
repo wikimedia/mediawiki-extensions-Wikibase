@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, wb, dv, QUnit ) {
+( function ( wb, dv ) {
 	'use strict';
 
 	var snakLists = [
@@ -633,4 +633,4 @@
 		testPropertyLabelVisibility( assert, snaklistview );
 	} );
 
-}( jQuery, wikibase, dataValues, QUnit ) );
+}( wikibase, dataValues ) );

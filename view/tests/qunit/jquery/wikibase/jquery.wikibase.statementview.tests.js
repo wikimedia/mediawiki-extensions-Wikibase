@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( $, mw, wb, dv, QUnit ) {
+( function ( wb, dv ) {
 	'use strict';
 
 	QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
@@ -230,4 +230,4 @@
 		assert.notOk( $statementview.hasClass( 'wb-new' ) );
 	} );
 
-}( jQuery, mediaWiki, wikibase, dataValues, QUnit ) );
+}( wikibase, dataValues ) );

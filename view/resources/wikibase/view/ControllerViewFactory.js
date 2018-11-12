@@ -1,4 +1,4 @@
-wikibase.view.ControllerViewFactory = ( function ( mw, wb, $ ) {
+wikibase.view.ControllerViewFactory = ( function ( wb ) {
 	'use strict';
 
 	var PARENT = wikibase.view.ViewFactory;
@@ -211,4 +211,4 @@ wikibase.view.ControllerViewFactory = ( function ( mw, wb, $ ) {
 
 	return SELF;
 
-}( mediaWiki, wikibase, jQuery ) );
+}( wikibase ) );

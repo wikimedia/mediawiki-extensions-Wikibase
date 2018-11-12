@@ -1,4 +1,4 @@
-( function ( $, util, mw ) {
+( function () {
 	'use strict';
 
 	// TODO: Get rid of MediaWiki context detection by submitting a message provider as option.
@@ -658,4 +658,4 @@
 		Item: Item
 	} );
 
-}( jQuery, util, mediaWiki ) );
+}() );

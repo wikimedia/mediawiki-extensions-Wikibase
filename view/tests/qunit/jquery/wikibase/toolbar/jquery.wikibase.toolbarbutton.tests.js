@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki at snater.com >
  */
-( function ( $, QUnit ) {
+( function () {
 	'use strict';
 
 	/**
@@ -63,4 +63,4 @@
 		$button.children( 'a' ).trigger( 'click' );
 	} );
 
-}( jQuery, QUnit ) );
+}() );

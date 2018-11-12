@@ -1,4 +1,4 @@
-( function ( mw, wb, $, vv ) {
+( function ( wb, vv ) {
 	'use strict';
 
 	var MODULE = wb.experts,
@@ -105,4 +105,4 @@
 	 */
 	SELF.TYPE = null;
 
-}( mediaWiki, wikibase, jQuery, jQuery.valueview ) );
+}( wikibase, $.valueview ) );

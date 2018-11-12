@@ -4,7 +4,7 @@
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, mw, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	/**
@@ -129,4 +129,4 @@
 		} ).promise();
 	}
 
-}( jQuery, mediaWiki, wikibase ) );
+}( wikibase ) );

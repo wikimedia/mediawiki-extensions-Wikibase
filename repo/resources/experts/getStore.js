@@ -63,4 +63,4 @@
 		return constructors;
 	}
 
-}( wikibase, jQuery.valueview, dataValues ) );
+}( wikibase, $.valueview, dataValues ) );

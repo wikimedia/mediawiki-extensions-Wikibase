@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( $, wb, QUnit ) {
+( function ( wb ) {
 	'use strict';
 
 	/**
@@ -156,4 +156,4 @@
 		assert.strictEqual( !entitytermsforlanguagelistview._hasMoreLanguages(), true );
 	} );
 
-}( jQuery, wikibase, QUnit ) );
+}( wikibase ) );

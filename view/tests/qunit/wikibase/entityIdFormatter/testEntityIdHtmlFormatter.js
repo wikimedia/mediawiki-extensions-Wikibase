@@ -1,4 +1,4 @@
-( function ( $, QUnit, wb ) {
+( function ( wb ) {
 	'use strict';
 
 	wb.entityIdFormatter.testEntityIdHtmlFormatter = {
@@ -54,4 +54,4 @@
 			} );
 		}
 	};
-}( jQuery, QUnit, wikibase ) );
+}( wikibase ) );

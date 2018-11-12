@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function () {
 	'use strict';
 
 	$.util = $.util || {};
@@ -21,4 +21,4 @@
 			: 'auto';
 	};
 
-}( jQuery ) );
+}() );

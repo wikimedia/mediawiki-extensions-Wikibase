@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( QUnit, valueview, wb ) {
+( function ( valueview, wb ) {
 	'use strict';
 
 	var testExpert = valueview.tests.testExpert;
@@ -13,4 +13,4 @@
 		expertConstructor: wb.experts.Item
 	} );
 
-}( QUnit, jQuery.valueview, wikibase ) );
+}( $.valueview, wikibase ) );

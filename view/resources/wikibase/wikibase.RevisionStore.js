@@ -4,7 +4,7 @@
  * @license GPL-2.0-or-later
  * @author Tobias Gritschacher
  */
-( function ( wb, $ ) {
+( function ( wb ) {
 	'use strict';
 
 	/**
@@ -150,4 +150,4 @@
 		}
 
 	} );
-}( wikibase, jQuery ) );
+}( wikibase ) );

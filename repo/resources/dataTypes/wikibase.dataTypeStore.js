@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-wikibase.dataTypeStore = ( function ( $, mw, wb ) {
+wikibase.dataTypeStore = ( function ( wb ) {
 	'use strict';
 
 	var dataTypeStore = new wb.dataTypes.DataTypeStore(),
@@ -15,4 +15,4 @@ wikibase.dataTypeStore = ( function ( $, mw, wb ) {
 
 	return dataTypeStore;
 
-}( jQuery, mediaWiki, wikibase ) );
+}( wikibase ) );

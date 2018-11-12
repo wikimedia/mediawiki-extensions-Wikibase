@@ -1,4 +1,4 @@
-( function ( $, sinon, QUnit, wb, ToolbarFactory ) {
+( function ( wb, ToolbarFactory ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.view.ToolbarFactory' );
@@ -67,4 +67,4 @@
 		stub.restore();
 	} );
 
-}( jQuery, sinon, QUnit, wikibase, wikibase.view.ToolbarFactory ) );
+}( wikibase, wikibase.view.ToolbarFactory ) );

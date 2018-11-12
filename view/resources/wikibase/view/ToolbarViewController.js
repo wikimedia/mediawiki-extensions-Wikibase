@@ -1,4 +1,4 @@
-wikibase.view.ToolbarViewController = ( function ( $, wb, mw ) {
+wikibase.view.ToolbarViewController = ( function ( wb ) {
 	'use strict';
 
 	/**
@@ -253,4 +253,4 @@ wikibase.view.ToolbarViewController = ( function ( $, wb, mw ) {
 
 	return SELF;
 
-}( jQuery, wikibase, mediaWiki ) );
+}( wikibase ) );
