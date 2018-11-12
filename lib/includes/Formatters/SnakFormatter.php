@@ -20,6 +20,13 @@ interface SnakFormatter {
 	 */
 	const OPT_LANG = ValueFormatter::OPT_LANG;
 
+	/**
+	 * Output format types.
+	 *
+	 * Use SnakFormat::getBaseFormat or SnakFormat::isPossibleFormat when dispatching
+	 * to a concrete formatter based on any of these (in order to support more nuanced
+	 * formats in the future).
+	 */
 	const FORMAT_PLAIN = 'text/plain';
 	const FORMAT_WIKI = 'text/x-wiki';
 	const FORMAT_HTML = 'text/html';

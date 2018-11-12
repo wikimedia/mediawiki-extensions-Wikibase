@@ -95,6 +95,7 @@ class WikibaseValueFormatterBuilders {
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
+
 	/**
 	 * @var EntityRevisionLookup
 	 */
@@ -104,6 +105,12 @@ class WikibaseValueFormatterBuilders {
 	 * @var CacheInterface
 	 */
 	private $cache;
+
+	/**
+	 * @var SnakFormat
+	 */
+	private $snakFormat;
+
 	/**
 	 * @var int
 	 */
@@ -169,6 +176,7 @@ class WikibaseValueFormatterBuilders {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityLookup = $entityLookup;
 		$this->cache = $cache;
+		$this->snakFormat = new SnakFormat();
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
 	}
 
@@ -180,33 +188,13 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
-	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string Either SnakFormatter::FORMAT_HTML, ...WIKI or ...PLAIN.
-	 */
-	private function getBaseFormat( $format ) {
-		switch ( $format ) {
-			case SnakFormatter::FORMAT_HTML:
-			case SnakFormatter::FORMAT_HTML_DIFF:
-			case SnakFormatter::FORMAT_HTML_VERBOSE:
-				return SnakFormatter::FORMAT_HTML;
-			case SnakFormatter::FORMAT_WIKI:
-			case SnakFormatter::FORMAT_PLAIN:
-				return $format;
-		}
-
-		throw new InvalidArgumentException( 'Unsupported output format: ' . $format );
-	}
-
-	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 *
 	 * @throws InvalidArgumentException
 	 * @return bool True if $format is one of the SnakFormatter::FORMAT_HTML_XXX formats.
 	 */
 	private function isHtmlFormat( $format ) {
-		return $this->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML;
+		return $this->snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML;
 	}
 
 	/**
@@ -218,7 +206,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	private function escapeValueFormatter( $format, ValueFormatter $formatter ) {
-		switch ( $this->getBaseFormat( $format ) ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new EscapingValueFormatter( $formatter, 'htmlspecialchars' );
 			case SnakFormatter::FORMAT_WIKI:
@@ -300,7 +288,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newUrlFormatter( $format, FormatterOptions $options ) {
-		switch ( $this->getBaseFormat( $format ) ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new HtmlUrlFormatter( $options );
 			case SnakFormatter::FORMAT_WIKI:
@@ -318,11 +306,11 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_HTML_VERBOSE ) {
+		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format ) ) {
 			return new CommonsInlineImageFormatter( $options );
 		}
 
-		switch ( $this->getBaseFormat( $format ) ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new CommonsLinkFormatter( $options );
 			case SnakFormatter::FORMAT_WIKI:
@@ -339,7 +327,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newGeoShapeFormatter( $format, FormatterOptions $options ) {
-		switch ( $this->getBaseFormat( $format ) ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new InterWikiLinkHtmlFormatter( $this->geoShapeStorageBaseUrl );
 			case SnakFormatter::FORMAT_WIKI:
@@ -356,7 +344,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newTabularDataFormatter( $format, FormatterOptions $options ) {
-		switch ( $this->getBaseFormat( $format ) ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new InterWikiLinkHtmlFormatter( $this->tabularDataStorageBaseUrl );
 			case SnakFormatter::FORMAT_WIKI:
@@ -374,7 +362,7 @@ class WikibaseValueFormatterBuilders {
 	 */
 	public function newTimeFormatter( $format, FormatterOptions $options ) {
 		// TODO: Add a wikitext formatter that shows the calendar model
-		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
+		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
 			return new TimeDetailsFormatter(
 				$options,
 				new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) )
@@ -415,7 +403,7 @@ class WikibaseValueFormatterBuilders {
 	public function newQuantityFormatter( $format, FormatterOptions $options ) {
 		$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
 
-		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
+		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
 			$localizer = $this->getNumberLocalizer( $options );
 			return new QuantityDetailsFormatter( $localizer, $vocabularyUriFormatter, $options );
 		} elseif ( $this->isHtmlFormat( $format ) ) {
@@ -437,7 +425,7 @@ class WikibaseValueFormatterBuilders {
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
 		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
 		// see https://phabricator.wikimedia.org/T102960
-		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
+		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {
 			return new GlobeCoordinateDetailsFormatter(
 				$this->getVocabularyUriFormatter( $options ),
 				$options
@@ -460,7 +448,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return MonolingualHtmlFormatter
 	 */
 	public function newMonolingualFormatter( $format ) {
-		switch ( $this->getBaseFormat( $format ) ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
 				return new MonolingualHtmlFormatter( $this->languageNameLookup );
 			case SnakFormatter::FORMAT_WIKI:

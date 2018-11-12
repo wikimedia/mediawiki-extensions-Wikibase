@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\SnakFormat;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
@@ -178,12 +179,11 @@ class ViewFactory {
 	 * @return bool
 	 */
 	private function hasValidOutputFormat( EntityIdFormatterFactory $factory, $expected ) {
-		switch ( $factory->getOutputFormat() ) {
+		$snakFormat = new SnakFormat();
+		switch ( $snakFormat->getBaseFormat( $factory->getOutputFormat() ) ) {
 			case SnakFormatter::FORMAT_PLAIN:
 				return $expected === 'text/plain';
-
 			case SnakFormatter::FORMAT_HTML:
-			case SnakFormatter::FORMAT_HTML_DIFF:
 				return $expected === 'text/html';
 		}
 
