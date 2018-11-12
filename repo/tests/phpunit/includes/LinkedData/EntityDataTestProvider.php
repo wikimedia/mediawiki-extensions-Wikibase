@@ -13,8 +13,6 @@ use Wikibase\Lib\Tests\MockRepository;
 /**
  * Provider class for EntityData tests.
  *
- * @group Wikibase
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
