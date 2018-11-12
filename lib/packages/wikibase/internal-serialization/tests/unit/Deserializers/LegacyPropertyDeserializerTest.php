@@ -14,7 +14,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {

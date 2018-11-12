@@ -2,6 +2,7 @@
 <ruleset>
 	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase">
 		<exclude name="Generic.Arrays.DisallowLongArraySyntax" />
+		<exclude name="Wikibase.Namespaces.FullQualifiedClassName" />
 	</rule>
 
 	<rule ref="Generic.CodeAnalysis" />

@@ -11,7 +11,7 @@ use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\StatementDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class StatementDeserializerTest extends PHPUnit_Framework_TestCase {

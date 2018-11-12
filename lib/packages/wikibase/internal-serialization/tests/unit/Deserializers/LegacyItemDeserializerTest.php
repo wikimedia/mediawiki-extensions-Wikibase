@@ -19,7 +19,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {

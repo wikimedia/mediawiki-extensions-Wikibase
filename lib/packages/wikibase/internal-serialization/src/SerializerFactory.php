@@ -9,9 +9,10 @@ namespace Wikibase\InternalSerialization;
  * is "Serializer". You are also not allowed to know which concrete
  * implementation is returned.
  *
+ *
  * @since 1.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SerializerFactory extends \Wikibase\DataModel\SerializerFactory {
