@@ -28,7 +28,7 @@ describe( 'item', function () {
 				} );
 		} );
 		browser.call( () => {
-			return WikibaseApi.createProperty( 'string' )
+			return WikibaseApi.getProperty( 'string' )
 				.then( ( id ) => {
 					propertyId = id;
 				} );
