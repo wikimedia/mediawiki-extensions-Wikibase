@@ -22,6 +22,30 @@
       "revId": "a753c147a4553a620cd7707270bffbb6bd9a6063",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ef5c365_691bc78a",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2018-11-12T18:50:47Z",
+      "side": 1,
+      "message": "I thought so too, but this explicitly forces the local Mediawiki by setting the third parameter to its default value.\n\nHowever, `$wikibaseRepo-\u003egetLocalRepoWikiPageMetaDataLookup()` uses `$this-\u003egetSettings()-\u003egetSetting( \u0027changesDatabase\u0027 )` to allow changing that database.\n(I tried hinting at that with the complicated naming. Apparently not that successful :/ )",
+      "parentUuid": "d0a63d1b_c1ca8f34",
+      "range": {
+        "startLine": 196,
+        "startChar": 3,
+        "endLine": 203,
+        "endChar": 4
+      },
+      "revId": "a753c147a4553a620cd7707270bffbb6bd9a6063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
