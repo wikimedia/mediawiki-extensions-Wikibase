@@ -4,6 +4,10 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 3.1.0 (2018-11-13)
+
+* Made public method: `wikibase.api.RepoApi.post()`.
+
 ### 3.0.2 (2018-11-08)
 
 * Fixed `wikibase.api.RepoApi` to check whether the user
