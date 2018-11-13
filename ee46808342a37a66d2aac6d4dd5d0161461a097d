@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1b9e568_76ba07fa",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-13T15:28:21Z",
+      "side": 1,
+      "message": "Hmm. This works because redirections are processed left-to-right, so `cat LocalSettings.php` is executed before the `\u003e LocalSettings.php` clobbers the file. I’m not quite comfortable with this, to be honest… if anyone changes the `cat` line to `cat \u003e LocalSettings.php \u003c\u003c-PHP`, perhaps just for aesthetic reasons, then suddenly this will be broken.\n\nSomething like this could be used instead:\n\n cat - LocalSettings.php \u003e LocalSettings.php.1 \u003c\u003c \u0027PHP\u0027\n \u003c?php\n // mw-apply-wb-settings.php\n # etc.\n PHP\n mv LocalSettings.php.1 LocalSettings.php",
+      "revId": "ee46808342a37a66d2aac6d4dd5d0161461a097d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
