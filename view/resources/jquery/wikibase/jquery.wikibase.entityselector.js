@@ -101,7 +101,8 @@
 				more: mwMsgOrString( 'wikibase-entityselector-more', 'more' ),
 				notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'Nothing found' )
 			},
-			searchHookName: 'wikibase.entityselector.search'
+			searchHookName: 'wikibase.entityselector.search',
+			searchApiParametersHookName: 'wikibase.entityselector.search.api-parameters'
 		},
 
 		/**
@@ -265,6 +266,8 @@
 			if ( this.options.limit ) {
 				data.limit = this.options.limit;
 			}
+
+			mw.hook( this.options.searchApiParametersHookName ).fire( data );
 
 			return data;
 		},
