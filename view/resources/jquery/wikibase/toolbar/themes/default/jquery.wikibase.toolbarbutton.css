@@ -40,65 +40,55 @@
 
 .wikibase-toolbar-button .wb-icon {
 	background-position: center;
-	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+	display: inline-block;
 	width: 20px;
 	height: 20px;
-	display: inline-block;
 	vertical-align: middle;
-	opacity: 0.7;
+	opacity: 0.87;
 }
 
 .wikibase-toolbar-button a:hover .wb-icon {
-	opacity: 0.9;
+	opacity: 1;
 }
 
-.wikibase-toolbar-button.ui-state-disabled .wb-icon,
 .wikibase-toolbar-button.ui-state-disabled a:hover .wb-icon {
 	opacity: 0.5;
 }
 
+/**
+ * Icons below are enabling SVG support by using a transparent gradient to
+ * guarantee cross-browser compatibility (browsers able to understand
+ * gradient syntax support also SVG).
+ * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique
+ */
 .wikibase-toolbar-button-edit .wb-icon {
-	/* SVG support using a transparent gradient to guarantee cross-browser
-	 * compatibility (browsers able to understand gradient syntax support also SVG).
-	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/icons/oojs-ui/edit-ltr.png );
+	background-image: url( images/icons/ooui/edit.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/edit-ltr.svg );
-	background-position: 0 40%;
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/edit.svg );
 }
 
 .wikibase-toolbar-button-save .wb-icon {
-	/* SVG support using a transparent gradient to guarantee cross-browser
-	 * compatibility (browsers able to understand gradient syntax support also SVG).
-	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/icons/oojs-ui/check.png );
+	background-image: url( images/icons/ooui/check.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/check.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/check.svg );
 }
 
 .wikibase-toolbar-button-remove .wb-icon {
-	/* SVG support using a transparent gradient to guarantee cross-browser
-	 * compatibility (browsers able to understand gradient syntax support also SVG).
-	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/icons/oojs-ui/remove.png );
+	background-image: url( images/icons/ooui/trash.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/remove.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/trash.svg );
 }
 
 .wikibase-toolbar-button-cancel .wb-icon {
-	/* SVG support using a transparent gradient to guarantee cross-browser
-	 * compatibility (browsers able to understand gradient syntax support also SVG).
-	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/icons/oojs-ui/close-ltr.png );
+	background-image: url( images/icons/ooui/close.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/close-ltr.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/close.svg );
 }
 
 .wikibase-toolbar-button-add .wb-icon {
-	/* SVG support using a transparent gradient to guarantee cross-browser
-	 * compatibility (browsers able to understand gradient syntax support also SVG).
-	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/icons/oojs-ui/add.png );
+	background-image: url( images/icons/ooui/add.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/add.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/add.svg );
 }
