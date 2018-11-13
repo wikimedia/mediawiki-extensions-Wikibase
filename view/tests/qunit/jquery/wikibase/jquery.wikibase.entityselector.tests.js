@@ -405,4 +405,19 @@
 		} );
 	} );
 
+	QUnit.test( 'Applies api parameter overrides from hook', function ( assert ) {
+		var result,
+			hookStub = sinon.stub( mw, 'hook' ),
+			fireSpy = sinon.spy(),
+			hook = 'HOOK_NAME',
+			term = '[TERM]',
+			$entitySelector = newTestEntitySelector( { searchApiParametersHookName: hook } ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		hookStub.withArgs( hook ).returns( { fire: fireSpy } );
+		result = entitySelector._getSearchApiParameters( term );
+		assert.equal( fireSpy.getCall( 0 ).args[ 0 ], result, 'Then mw.hook().fire() is called with final result' );
+
+		hookStub.restore();
+	} );
 }() );
