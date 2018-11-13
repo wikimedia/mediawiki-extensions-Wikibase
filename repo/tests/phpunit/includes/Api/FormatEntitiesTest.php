@@ -106,19 +106,19 @@ class FormatEntitiesTest extends ApiTestCase {
 			],
 			'single-quoted attributes' => [
 				"<a title='title' href='/foo' rel='noopener'>link</a>",
-				"<a title='title' href='$foo' rel='noopener'>link</a>",
+				"<a title=\"title\" href=\"$foo\" rel=\"noopener\">link</a>",
 			],
 			'unquoted attributes' => [
 				'<a title=title href=/foo rel=noopener>link</a>',
-				"<a title=title href=$foo rel=noopener>link</a>",
+				"<a title=\"title\" href=\"$foo\" rel=\"noopener\">link</a>",
 			],
 			'empty attributes' => [
 				'<a hidden href="/foo">link</a>',
-				"<a hidden href=\"$foo\">link</a>",
+				"<a hidden=\"\" href=\"$foo\">link</a>",
 			],
 			'mixed attributes' => [
 				"<a title=\"title\" href='/foo' rel=noopener hidden>link</a>",
-				"<a title=\"title\" href='$foo' rel=noopener hidden>link</a>",
+				"<a title=\"title\" href=\"$foo\" rel=\"noopener\" hidden=\"\">link</a>",
 			],
 			'spaced attributes' => [
 				'<a href  =  "/foo">link</a>',
@@ -126,7 +126,7 @@ class FormatEntitiesTest extends ApiTestCase {
 			],
 			'custom attribute names' => [
 				'<a data-extra=foo href="/foo">link</a>',
-				"<a data-extra=foo href=\"$foo\">link</a>",
+				"<a data-extra=\"foo\" href=\"$foo\">link</a>",
 			],
 			'text before' => [
 				'some text before the <a href="/foo">link</a>',
@@ -136,15 +136,13 @@ class FormatEntitiesTest extends ApiTestCase {
 				'<a href="/foo"><bdi>foo</bdi></a><sup>hi</sup>',
 				"<a href=\"$foo\"><bdi>foo</bdi></a><sup>hi</sup>",
 			],
-
-			// not yet supported
 			'elements before' => [
 				'<sub>howdy</sub><a href="/foo">link</a>',
-				'<sub>howdy</sub><a href="/foo">link</a>',
+				"<sub>howdy</sub><a href=\"$foo\">link</a>",
 			],
 			'two links' => [
-				'<a href="/foo">link 1</a>, <a href="/bar">link 2</a>',
-				"<a href=\"$foo\">link 1</a>, <a href=\"/bar\">link 2</a>",
+				'<a href="/foo">link 1</a>, <a href="/foo">link 2</a>',
+				"<a href=\"$foo\">link 1</a>, <a href=\"$foo\">link 2</a>",
 			],
 		];
 	}
@@ -152,9 +150,9 @@ class FormatEntitiesTest extends ApiTestCase {
 	/**
 	 * @dataProvider provideHtmlSnippets
 	 */
-	public function testMakeHrefAbsolute( $html, $expected ) {
+	public function testMakeLinksAbsolute( $html, $expected ) {
 		$actual = TestingAccessWrapper::newFromClass( FormatEntities::class )
-			->makeHrefAbsolute( $html );
+			->makeLinksAbsolute( $html );
 
 		$this->assertSame( $expected, $actual );
 	}
