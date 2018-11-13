@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0e8cb58_e448628d",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-13T15:33:08Z",
+      "side": 1,
+      "message": "You can skip escaping all the dollar signs below by single-quoting this bit.",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "b55de573578e70fad1d9900be7ab4c70ff33a4f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
