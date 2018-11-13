@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9280e3_f2eecb12",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-13T15:34:35Z",
+      "side": 1,
+      "message": "Better yet: use Bash’s own conditional syntax instead of the external `test` command.\n\n if [[ $BUILD \u003d\u003d true ]]; then\n\nYou don’t even need to quote `$BUILD` in that case. (`\u003d` and `\u003d\u003d` are both fine, I personally prefer `\u003d\u003d`.)",
+      "revId": "d3773809ac51be16d6c0c045a18713cc378b5842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
