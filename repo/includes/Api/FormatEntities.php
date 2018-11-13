@@ -5,6 +5,14 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use IBufferingStatsdDataFactory;
+use RemexHtml\Serializer\HtmlFormatter;
+use RemexHtml\Serializer\Serializer;
+use RemexHtml\Serializer\SerializerNode;
+use RemexHtml\Tokenizer\Attributes;
+use RemexHtml\Tokenizer\PlainAttributes;
+use RemexHtml\Tokenizer\Tokenizer;
+use RemexHtml\TreeBuilder\Dispatcher;
+use RemexHtml\TreeBuilder\TreeBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -118,41 +126,44 @@ class FormatEntities extends ApiBase {
 	 * @return string
 	 */
 	private static function makeHrefAbsolute( $html ) {
-		$attrName = '[^[:space:][:cntrl:]' . '"' . "'" . '>/=' . ']+';
-		$unquotedAttributeValue = '[^[:space:]' . '"' . "'" . '=><`' . ']*';
-		$singleQuotedAttributeValue = "'[^']*'";
-		$doubleQuotedAttributeValue = '"[^"]*"';
-		$attr = $attrName . '(?:\s*=\s*(?:' .
-			$unquotedAttributeValue . '|' .
-			$singleQuotedAttributeValue . '|' .
-			$doubleQuotedAttributeValue . '))?';
-		$hrefAttr = 'href\s*=\s*(' .
-			$unquotedAttributeValue . '|' .
-			$singleQuotedAttributeValue . '|' .
-			$doubleQuotedAttributeValue . ')';
+		$formatter = new class extends HtmlFormatter {
 
-		if ( !preg_match( '!(^[^<]*<a(?:\s+' . $attr . ')*\s+)' . $hrefAttr . '((?:\s+' . $attr . ')*>.*$)!', $html, $matches ) ) {
-			return $html;
-		}
+			public function startDocument( $fragmentNamespace, $fragmentName ) {
+				// don’t emit <!DOCTYPE>
+			}
 
-		$beginning = $matches[1];
-		$hrefValue = $matches[2];
-		$end = $matches[3];
+			public function element( SerializerNode $parent, SerializerNode $node, $contents ) {
+				if ( $node->name === 'a' ) {
+					/** @var Attributes $attributes */
+					$attributes = $node->attrs;
+					/** @var string[] $attributeValues */
+					$attributeValues = $attributes->getValues();
+					if ( array_key_exists( 'href', $attributeValues ) ) {
+						$attributeValues['href'] = wfExpandUrl( $attributeValues['href'], PROTO_CANONICAL );
+						$attributes = new PlainAttributes( $attributeValues );
+					}
+					$node = new SerializerNode(
+						$node->id,
+						$node->parentId,
+						$node->namespace,
+						$node->name,
+						$attributes,
+						$node->snData
+					);
+				} elseif ( $node->name === 'html' || $node->name === 'head' || $node->name === 'body' ) {
+					return $contents; // don’t wrap in <html>/<head>/<body> tags
+				}
 
-		if ( $hrefValue[0] === '"' ) {
-			$href = substr( $hrefValue, 1, -1 );
-			$quote = '"';
-		} elseif ( $hrefValue[0] === "'" ) {
-			$href = substr( $hrefValue, 1, -1 );
-			$quote = "'";
-		} else {
-			$href = $hrefValue;
-			$quote = '';
-		}
+				return parent::element( $parent, $node, $contents );
+			}
 
-		$href = wfExpandUrl( $href, PROTO_CANONICAL );
-
-		return $beginning . 'href=' . $quote . $href . $quote . $end;
+		};
+		$serializer = new Serializer( $formatter );
+		$treeBuilder = new TreeBuilder( $serializer, [] );
+		$dispatcher = new Dispatcher( $treeBuilder );
+		$tokenizer = new Tokenizer( $dispatcher, $html, [] );
+		$tokenizer->execute();
+		return $serializer->getResult();
 	}
 
 	protected function getAllowedParams() {
