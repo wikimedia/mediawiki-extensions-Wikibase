@@ -46,6 +46,30 @@
       "revId": "a753c147a4553a620cd7707270bffbb6bd9a6063",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9047deb_dfe89932",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-14T16:31:59Z",
+      "side": 1,
+      "message": "This can probably stay like this for now.\nThe way to \"get around this\" and stop creating this here would be to make a WikiPageEntityMetaDataLookupFactory",
+      "parentUuid": "4ef5c365_691bc78a",
+      "range": {
+        "startLine": 196,
+        "startChar": 3,
+        "endLine": 203,
+        "endChar": 4
+      },
+      "revId": "a753c147a4553a620cd7707270bffbb6bd9a6063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
