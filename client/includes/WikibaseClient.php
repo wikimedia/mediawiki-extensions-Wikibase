@@ -83,6 +83,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
@@ -1328,11 +1329,19 @@ final class WikibaseClient {
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
-		return new SimpleCacheWithBagOStuff(
+		$cache = new SimpleCacheWithBagOStuff(
 			wfGetCache( $cacheType ),
 			'wikibase.client.formatter.',
 			$cacheSecret
 		);
+
+		$cache = new StatsdMissRecordingSimpleCache(
+			$cache,
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			'wikibase.client.formatterCache.miss'
+		);
+
+		return $cache;
 	}
 
 }

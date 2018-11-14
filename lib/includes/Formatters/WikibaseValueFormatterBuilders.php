@@ -123,7 +123,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param EntityIdParser $repoItemUriParser
 	 * @param string $geoShapeStorageBaseUrl
 	 * @param string $tabularDataStorageBaseUrl
-	 * @param CacheInterface $cache
+	 * @param CacheInterface $formatterCache
 	 * @param int $cacheTtlInSeconds
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -136,7 +136,7 @@ class WikibaseValueFormatterBuilders {
 		EntityIdParser $repoItemUriParser,
 		$geoShapeStorageBaseUrl,
 		$tabularDataStorageBaseUrl,
-		CacheInterface $cache,
+		CacheInterface $formatterCache,
 		$cacheTtlInSeconds,
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -175,7 +175,7 @@ class WikibaseValueFormatterBuilders {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityLookup = $entityLookup;
-		$this->cache = $cache;
+		$this->cache = $formatterCache;
 		$this->snakFormat = new SnakFormat();
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
 	}
