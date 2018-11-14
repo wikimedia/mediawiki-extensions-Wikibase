@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39cdec1a_da50009c",
+        "filename": "repo/tests/phpunit/includes/Api/FormatEntitiesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-11-14T15:01:32Z",
+      "side": 0,
+      "message": "It\u0027s supported now \u003c3",
+      "range": {
+        "startLine": 140,
+        "startChar": 3,
+        "endLine": 140,
+        "endChar": 23
+      },
+      "revId": "c1f5077aef193ebb8a00178caa731b2f10f8d6cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
