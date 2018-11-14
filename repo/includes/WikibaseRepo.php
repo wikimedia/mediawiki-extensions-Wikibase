@@ -41,6 +41,8 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataAccess\WikibaseServices;
@@ -696,6 +698,22 @@ class WikibaseRepo {
 	 */
 	public function getEntityIdLookup() {
 		return $this->getEntityContentFactory();
+	}
+
+	/**
+	 * @return WikiPageEntityMetaDataLookup
+	 */
+	public function getLocalRepoWikiPageMetaDataLookup() {
+		$entityNamespaceLookup = $this->getEntityNamespaceLookup();
+		return new WikiPageEntityMetaDataLookup(
+			$entityNamespaceLookup,
+			new EntityIdLocalPartPageTableEntityQuery(
+				$entityNamespaceLookup,
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			),
+			$this->getSettings()->getSetting( 'changesDatabase' ),
+			'' // Empty string here means this only works for the local repo
+		);
 	}
 
 	/**
