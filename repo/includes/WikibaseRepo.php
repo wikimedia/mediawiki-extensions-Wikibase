@@ -38,6 +38,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -2080,11 +2081,19 @@ class WikibaseRepo {
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
-		return new SimpleCacheWithBagOStuff(
+		$cache = new SimpleCacheWithBagOStuff(
 			wfGetCache( $cacheType ),
 			'wikibase.repo.formatter.',
 			$cacheSecret
 		);
+
+		$cache = new StatsdMissRecordingSimpleCache(
+			$cache,
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			'wikibase.repo.formatterCache.miss'
+		);
+
+		return $cache;
 	}
 
 }

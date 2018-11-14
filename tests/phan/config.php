@@ -347,6 +347,8 @@ return [
 		"PhanUndeclaredProperty",
 		// approximate error count: 4
 		"PhanUndeclaredVariable",
+		// approximate error count: 1
+		"PhanTypeArraySuspicious",
 	],
 
 	/**
