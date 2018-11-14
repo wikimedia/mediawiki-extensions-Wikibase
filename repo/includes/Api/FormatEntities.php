@@ -4,7 +4,15 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use DOMElement;
+use DOMNode;
 use IBufferingStatsdDataFactory;
+use RemexHtml\DOM\DOMBuilder;
+use RemexHtml\HTMLData;
+use RemexHtml\Serializer\HtmlFormatter;
+use RemexHtml\Tokenizer\Tokenizer;
+use RemexHtml\TreeBuilder\Dispatcher;
+use RemexHtml\TreeBuilder\TreeBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -76,7 +84,7 @@ class FormatEntities extends ApiBase {
 
 		foreach ( $entityIds as $entityId ) {
 			$formatted = $entityIdFormatter->formatEntityId( $entityId );
-			$formatted = self::makeHrefAbsolute( $formatted );
+			$formatted = self::makeLinksAbsolute( $formatted );
 			$this->resultBuilder->setValue( $this->getModuleName(), $entityId->getSerialization(), $formatted );
 		}
 
@@ -106,53 +114,51 @@ class FormatEntities extends ApiBase {
 	}
 
 	/**
-	 * Make the `href=""` attribute of an `<a>` element in an HTML snippet absolute.
-	 *
-	 * Only adjusts a single `<a>` element,
-	 * and there must not be any tags before the opening `<a>` tag
-	 * (though there may be anything after it).
-	 * The `href` attribute is expanded using {@link wfExpandUrl},
-	 * and all other attributes are left untouched.
+	 * Make the `href=""` attributes of `<a>` elements in an HTML snippet absolute.
+	 * URLs are expanded using {@link wfExpandUrl}.
 	 *
 	 * @param string $html
 	 * @return string
 	 */
-	private static function makeHrefAbsolute( $html ) {
-		$attrName = '[^[:space:][:cntrl:]' . '"' . "'" . '>/=' . ']+';
-		$unquotedAttributeValue = '[^[:space:]' . '"' . "'" . '=><`' . ']*';
-		$singleQuotedAttributeValue = "'[^']*'";
-		$doubleQuotedAttributeValue = '"[^"]*"';
-		$attr = $attrName . '(?:\s*=\s*(?:' .
-			$unquotedAttributeValue . '|' .
-			$singleQuotedAttributeValue . '|' .
-			$doubleQuotedAttributeValue . '))?';
-		$hrefAttr = 'href\s*=\s*(' .
-			$unquotedAttributeValue . '|' .
-			$singleQuotedAttributeValue . '|' .
-			$doubleQuotedAttributeValue . ')';
+	private static function makeLinksAbsolute( $html ) {
+		$domBuilder = new DOMBuilder();
+		$treeBuilder = new TreeBuilder( $domBuilder, [] );
+		$dispatcher = new Dispatcher( $treeBuilder );
+		$tokenizer = new Tokenizer( $dispatcher, $html, [] );
 
-		if ( !preg_match( '!(^[^<]*<a(?:\s+' . $attr . ')*\s+)' . $hrefAttr . '((?:\s+' . $attr . ')*>.*$)!', $html, $matches ) ) {
-			return $html;
+		$tokenizer->execute( [
+			'fragmentNamespace' => HTMLData::NS_HTML,
+			'fragmentName' => 'body',
+		] );
+		/** @var DOMNode $node */
+		$node = $domBuilder->getFragment();
+		self::makeLinksAbsoluteDOM( $node );
+
+		$formatter = new HtmlFormatter();
+		$absoluteHtml = $formatter->formatDOMNode( $node );
+		if ( substr( $absoluteHtml, 0, 6 ) === '<html>' ) {
+			$absoluteHtml = substr( $absoluteHtml, 6 );
 		}
-
-		$beginning = $matches[1];
-		$hrefValue = $matches[2];
-		$end = $matches[3];
-
-		if ( $hrefValue[0] === '"' ) {
-			$href = substr( $hrefValue, 1, -1 );
-			$quote = '"';
-		} elseif ( $hrefValue[0] === "'" ) {
-			$href = substr( $hrefValue, 1, -1 );
-			$quote = "'";
-		} else {
-			$href = $hrefValue;
-			$quote = '';
+		if ( substr( $absoluteHtml, -7 ) === '</html>' ) {
+			$absoluteHtml = substr( $absoluteHtml, 0, -7 );
 		}
+		return $absoluteHtml;
+	}
 
-		$href = wfExpandUrl( $href, PROTO_CANONICAL );
-
-		return $beginning . 'href=' . $quote . $href . $quote . $end;
+	private static function makeLinksAbsoluteDOM( DOMNode $node ) {
+		if (
+			$node instanceof DOMElement &&
+			$node->nodeName === 'a' &&
+			$node->hasAttribute( 'href' )
+		) {
+			$href = wfExpandUrl( $node->getAttribute( 'href' ), PROTO_CANONICAL );
+			$node->setAttribute( 'href', $href );
+		}
+		if ( $node->hasChildNodes() ) {
+			for ( $index = 0; $index < $node->childNodes->length; $index ++ ) {
+				self::makeLinksAbsoluteDOM( $node->childNodes->item( $index ) );
+			}
+		}
 	}
 
 	protected function getAllowedParams() {
