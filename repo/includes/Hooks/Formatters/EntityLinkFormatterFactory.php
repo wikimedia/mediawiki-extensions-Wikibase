@@ -40,7 +40,7 @@ class EntityLinkFormatterFactory {
 
 	/**
 	 * @param $type string entity type
-	 * @return mixed
+	 * @return EntityLinkFormatter
 	 */
 	public function getLinkFormatter( $type ) {
 		Assert::parameterType( 'string', $type, '$type' );
