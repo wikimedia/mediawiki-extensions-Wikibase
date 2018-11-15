@@ -1,13 +1,13 @@
 #!/bin/bash -xeu
 
 function usage {
-  echo "usage: $0 -r <repo|client> -e <true|false> -b <true|false>"
+  echo "usage: $0 -r <repo|client> -b <true|false>"
   echo "       -r specify if the settings are for repo or client"
   echo "       -b specify if the settings are for a build or not"
   exit 1
 }
 
-while getopts r:e:b: opt
+while getopts r:b: opt
 do
    case $opt in
        r) REPO="$OPTARG";;
