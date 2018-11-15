@@ -737,9 +737,6 @@ class MediawikiEditEntity implements EditEntity {
 	}
 
 	/**
-	}
-
-	/**
 	 * Returns whether the present edit would, per default,
 	 * lead to the user watching the page.
 	 *
