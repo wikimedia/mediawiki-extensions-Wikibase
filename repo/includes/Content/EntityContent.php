@@ -32,6 +32,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Repo\ArrayValueCollector;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
@@ -378,36 +379,9 @@ abstract class EntityContent extends AbstractContent {
 		$json = $codec->encodeEntity( $this->getEntity(), CONTENT_FORMAT_JSON );
 		$data = json_decode( $json, true );
 
-		$values = self::collectValues( $data, $ignore );
+		$values = ArrayValueCollector::collectValues( $data, $ignore );
 
 		return implode( "\n", $values );
-	}
-
-	/**
-	 * Recursively collects values from nested arrays.
-	 *
-	 * @param array $data The array structure to process.
-	 * @param array $ignore A list of keys to skip.
-	 *
-	 * @return array The values found in the array structure.
-	 */
-	protected static function collectValues( array $data, array $ignore = [] ) {
-		$values = [];
-
-		$erongi = array_flip( $ignore );
-		foreach ( $data as $key => $value ) {
-			if ( isset( $erongi[$key] ) ) {
-				continue;
-			}
-
-			if ( is_array( $value ) ) {
-				$values = array_merge( $values, self::collectValues( $value, $ignore ) );
-			} else {
-				$values[] = $value;
-			}
-		}
-
-		return $values;
 	}
 
 	/**
