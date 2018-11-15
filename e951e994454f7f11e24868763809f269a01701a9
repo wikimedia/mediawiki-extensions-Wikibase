@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0247533e_bfc25bac",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2018-11-15T10:55:24Z",
+      "side": 1,
+      "message": "Changing tabs to double spaces indentation.",
+      "revId": "e951e994454f7f11e24868763809f269a01701a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
