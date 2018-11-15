@@ -16,6 +16,24 @@
       "revId": "d3773809ac51be16d6c0c045a18713cc378b5842",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae8d715f_77e9ffa1",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2018-11-15T09:53:18Z",
+      "side": 1,
+      "message": "It seems \u003d\u003d does pattern matching, but anyway that probably does not matter.\n\nI am dropping the quotes, still have to set a default value though since the script uses set -u (fails when a variable is not set).",
+      "parentUuid": "2e9280e3_f2eecb12",
+      "revId": "d3773809ac51be16d6c0c045a18713cc378b5842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
