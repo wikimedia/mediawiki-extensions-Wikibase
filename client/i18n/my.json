@@ -7,6 +7,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "ဒေတာအချက်အလက်နှင့် ချိတ်ဆက်ရန်လင့်ခ်",
+	"wikibase-after-page-move": "သင်၏ ရွေ့ပြောင်းမှုသည် ယခုဆိုလျင် [$1 {{WBREPONAME}} item ထဲတွင် ရောင်ပြန်ဟပ်သင့်ပြီ]ဖြစ်သည်။ ဤကိစ္စဖြစ်ပွားခဲ့သည်ကို စစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
 	"wikibase-comment-update": "{{WBREPONAME}} item ပြောင်းလဲခဲ့သည်",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "လင့်ခ်များကို တည်းဖြတ်ရန်",

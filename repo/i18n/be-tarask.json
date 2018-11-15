@@ -372,6 +372,7 @@
 	"wikibase-rescore-profile-prefix": "Профіль rescore па змоўчаньні для запаўняльнага пошуку",
 	"wikibase-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
 	"wikibase-rescore-profile-fulltext": "Профіль rescore па змоўчаньні для паўнатэкставага пошуку",
+	"wikibase-rescore-profile-fulltext-phrase": "Профіль rescore для паўнатэкставага пошуку з ацэнкай фразаў",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Прадмет у Вікібазе",
 	"content-model-wikibase-property": "Уласьцівасьць Wikibase",

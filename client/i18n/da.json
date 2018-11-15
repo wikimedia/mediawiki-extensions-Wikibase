@@ -67,6 +67,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}s emne-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-pageinfo-description-local": "Lokal beskrivelse",
+	"wikibase-pageinfo-description-central": "Central beskrivelse",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-emner, der bruges på denne side",
 	"wikibase-pageinfo-entity-usage-S": "Sidehenvisning",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiket: $1",

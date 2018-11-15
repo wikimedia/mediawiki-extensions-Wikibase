@@ -307,5 +307,12 @@
 	"apihelp-wbsetsitelink-example-5": "Ajouter un lien de site vers la page en polonais « Wodór » à l’élément lié avec la page en anglais « Hydrogen », avec un badge pointant vers l’élément avec l’ID « Q149 »",
 	"apihelp-wbsetsitelink-example-6": "Changer les badges du lien vers la page polonaise à partir de l'élément ayant l'ID \"Q42\" en deux badges pointant vers les articles ayant les Id \"Q2\" et \"Q149\" sans fournir de titre du lien",
 	"apihelp-wbsetsitelink-example-7": "Modifier le lien vers la page polonaise à partir de l'élément ayant l'ID \"Q42\" sans changer les badges",
-	"apihelp-wbsetsitelink-example-8": "Modifier le lien vers la page polonaise à partir de l'élément avec l'ID \"Q42\" et supprimer tous ses badges"
+	"apihelp-wbsetsitelink-example-8": "Modifier le lien vers la page polonaise à partir de l'élément avec l'ID \"Q42\" et supprimer tous ses badges",
+	"apihelp-wbformatentities-summary": "Met en forme les ID d’entité en HTML.",
+	"apihelp-wbformatentities-extended-description": "La langue peut être spécifiée avec le paramètre global wvar>uselang</var>.",
+	"apihelp-wbformatentities-param-ids": "Les ID d’entité à mettre en forme.",
+	"apihelp-wbformatentities-example-1": "Mettre en forme un unique ID d’élément.",
+	"apihelp-wbformatentities-example-2": "Mettre en forme un ID d’élément et un ID de propriété.",
+	"apihelp-wbformatentities-example-3": "Mettre en forme un ID d’élément, un ID de propriété et un ID de lexème.",
+	"apihelp-wbformatentities-example-4": "Mettre en forme trois ID d’élément en français."
 }

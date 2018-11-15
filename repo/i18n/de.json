@@ -354,6 +354,7 @@
 	"wikibase-api-cant-redirect": "Weiterleitung konnte nicht erstellt werden (vermutlich weil Weiterleitungen zwischen dieser Objektart überhaupt nicht unterstützt werden).",
 	"wikibase-self-conflict-patched": "Deine Bearbeitung wurde in die aktuellste Version gepatcht und deine eigenen zwischenzeitlichen Änderungen überschrieben.",
 	"wikibase-conflict-patched": "Deine Bearbeitung wurde in die aktuellste Version gepatcht.",
+	"wikibase-save-unresolved-redirect": "Beim Versuch, eine Änderung zu speichern, ist eine ungelöste Weiterleitung von $1 nach $2 aufgetreten.",
 	"wikibase-restoreold": "zurücksetzen",
 	"wikibase-entity-summary-restore": "Die Version $3 von [[Special:Contributions/$4|{{GENDER:$4|$4}}]] wurde wiederhergestellt.",
 	"wikibase-entity-summary-undo": "Version $3 von [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|Diskussion]]) rückgängig machen",
