@@ -390,7 +390,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @param array $ignore A list of keys to skip.
 	 *
 	 * @return array The values found in the array structure.
-	 * @todo needs unit test
 	 */
 	protected static function collectValues( array $data, array $ignore = [] ) {
 		$values = [];
