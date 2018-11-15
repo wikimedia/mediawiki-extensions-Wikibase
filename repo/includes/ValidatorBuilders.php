@@ -294,12 +294,12 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildMonolingualTextValidators( $maxLangth = 400 ) {
+	public function buildMonolingualTextValidators( $maxLength = 400 ) {
 		$validators = [];
 
 		$validators[] = new DataFieldValidator(
 			'text',
-			new CompositeValidator( $this->getCommonStringValidators( $maxLangth ) ) //Note: each validator is fatal
+			new CompositeValidator( $this->getCommonStringValidators( $maxLength ) ) //Note: each validator is fatal
 		);
 
 		$validators[] = new DataFieldValidator(
