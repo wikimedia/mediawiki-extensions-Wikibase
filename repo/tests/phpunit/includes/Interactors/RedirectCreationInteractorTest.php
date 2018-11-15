@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -93,7 +93,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $invokeCount
 	 * @param Status|null $hookReturn
 	 *
-	 * @return EditFilterHookRunner
+	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner(
 		$invokeCount = null,

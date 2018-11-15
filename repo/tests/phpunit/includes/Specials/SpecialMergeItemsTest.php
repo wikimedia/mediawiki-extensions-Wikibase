@@ -17,7 +17,7 @@ use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -86,7 +86,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return EditFilterHookRunner
+	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )

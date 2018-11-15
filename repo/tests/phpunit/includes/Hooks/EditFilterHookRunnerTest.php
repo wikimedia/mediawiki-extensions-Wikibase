@@ -19,10 +19,10 @@ use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 
 /**
- * @covers \Wikibase\Repo\Hooks\EditFilterHookRunner
+ * @covers \Wikibase\Repo\EditEntity\EditFilterHookRunner
  *
  * @group Wikibase
  *
@@ -32,7 +32,7 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
 class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return EditFilterHookRunner
+	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
 	 */
 	public function getEditFilterHookRunner( RequestContext $context ) {
 		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
@@ -58,7 +58,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->with( $this->isInstanceOf( EntityRedirect::class ) )
 			->will( $this->returnValue( new ItemContent( new EntityInstanceHolder( new Item() ) ) ) );
 
-		return new EditFilterHookRunner(
+		return new \Wikibase\Repo\EditEntity\EditFilterHookRunner(
 			$namespaceLookup,
 			$entityTitleLookup,
 			$entityContentFactory,
