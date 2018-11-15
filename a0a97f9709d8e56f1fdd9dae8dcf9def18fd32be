@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3c00f2d_d4666728",
+        "filename": "lib/tests/phpunit/StatsdMissRecordingSimpleCacheTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-11-15T08:28:37Z",
+      "side": 1,
+      "message": "would the test case for no cache misses \u003d no data record case make sense too?",
+      "revId": "a0a97f9709d8e56f1fdd9dae8dcf9def18fd32be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ddc14c4_ea60ffcb",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2018-11-15T08:28:37Z",
+      "side": 1,
+      "message": "wooo, which new code added this? out of curiosity",
+      "revId": "a0a97f9709d8e56f1fdd9dae8dcf9def18fd32be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
