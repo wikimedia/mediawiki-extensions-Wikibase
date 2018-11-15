@@ -22,6 +22,47 @@
       "revId": "b55de573578e70fad1d9900be7ab4c70ff33a4f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a90b84f1_2c186759",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2018-11-15T10:58:17Z",
+      "side": 1,
+      "message": "Indeed thanks.\n\nI am also removing the dash \u0027-\u0027, that is to strip leading tabulations and allow indentation of the here document, but the script uses two spaces for indentation.",
+      "parentUuid": "e0e8cb58_e448628d",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "b55de573578e70fad1d9900be7ab4c70ff33a4f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5e80d9_53313294",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2018-11-15T10:58:17Z",
+      "side": 1,
+      "message": "Doing the same here: \u0027PHP\u0027 and stop escaping dollar signs.",
+      "revId": "b55de573578e70fad1d9900be7ab4c70ff33a4f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
