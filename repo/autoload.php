@@ -31,6 +31,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\ItemContent' => __DIR__ . '/includes/Content/ItemContent.php',
 	'Wikibase\\ItemDisambiguation' => __DIR__ . '/includes/ItemDisambiguation.php',
 	'Wikibase\\LabelDescriptionDuplicateDetector' => __DIR__ . '/includes/LabelDescriptionDuplicateDetector.php',
+	'Wikibase\\MediawikiEditEntity' => __DIR__ . '/includes/MediawikiEditEntity.php',
 	'Wikibase\\OutputPageJsConfigBuilder' => __DIR__ . '/includes/OutputPageJsConfigBuilder.php',
 	'Wikibase\\PopulateChangesSubscription' => __DIR__ . '/maintenance/populateChangesSubscription.php',
 	'Wikibase\\PropertyContent' => __DIR__ . '/includes/Content/PropertyContent.php',

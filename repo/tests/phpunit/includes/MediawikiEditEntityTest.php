@@ -16,6 +16,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
+use Wikibase\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -23,7 +24,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\EditEntity
+ * @covers \Wikibase\MediawikiEditEntity
  *
  * @group Wikibase
  *
@@ -33,7 +34,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EditEntityTest extends MediaWikiTestCase {
+class MediawikiEditEntityTest extends MediaWikiTestCase {
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -121,7 +122,7 @@ class EditEntityTest extends MediaWikiTestCase {
 	 * @param bool[]|null $permissions map of actions to bool, indicating which actions are allowed.
 	 * @param EditFilterHookRunner|null $editFilterHookRunner
 	 *
-	 * @return EditEntity
+	 * @return MediawikiEditEntity
 	 */
 	private function makeEditEntity(
 		MockRepository $mockRepository,
@@ -141,7 +142,7 @@ class EditEntityTest extends MediaWikiTestCase {
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
 
-		return new EditEntity(
+		return new MediawikiEditEntity(
 			$titleLookup,
 			$mockRepository,
 			$mockRepository,
@@ -765,7 +766,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$item = new Item();
 
-		$isNew = new ReflectionMethod( EditEntity::class, 'isNew' );
+		$isNew = new ReflectionMethod( MediawikiEditEntity::class, 'isNew' );
 		$isNew->setAccessible( true );
 
 		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup );

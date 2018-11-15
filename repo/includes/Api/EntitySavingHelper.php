@@ -11,7 +11,7 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditEntity as EditEntityHandler;
+use Wikibase\EditEntity;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -395,11 +395,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				$editError = $value['errorFlags'];
 			}
 
-			if ( $editError & EditEntityHandler::TOKEN_ERROR ) {
+			if ( $editError & EditEntity::TOKEN_ERROR ) {
 				$errorCode = 'badtoken';
-			} elseif ( $editError & EditEntityHandler::EDIT_CONFLICT_ERROR ) {
+			} elseif ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) {
 				$errorCode = 'editconflict';
-			} elseif ( $editError & EditEntityHandler::ANY_ERROR ) {
+			} elseif ( $editError & EditEntity::ANY_ERROR ) {
 				$errorCode = 'failed-save';
 			}
 		}
