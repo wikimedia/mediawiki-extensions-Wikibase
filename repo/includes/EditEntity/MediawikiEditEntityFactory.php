@@ -101,8 +101,11 @@ class MediawikiEditEntityFactory {
 		return new StatsdSaveTimeRecordingEditEntity(
 			new MediawikiEditEntity( $this->titleLookup,
 				$this->entityRevisionLookup,
-				// TODO introduce EditStatCollectingEntityStore
-				$this->entityStore,
+				new StatsdSaveTimeRecordingEntityStore(
+					$this->entityStore,
+					$this->stats,
+					$statsTimingPrefix . '.EntityStore'
+				),
 				$this->permissionChecker,
 				$this->entityDiffer,
 				$this->entityPatcher,
