@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
 use Wikibase\SummaryFormatter;
@@ -113,7 +113,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EditFilterHookRunner
+	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
