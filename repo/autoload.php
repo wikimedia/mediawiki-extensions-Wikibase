@@ -182,6 +182,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\EditEntity\\MediawikiEditEntityFactory' => __DIR__ . '/includes/EditEntity/MediawikiEditEntityFactory.php',
 	'Wikibase\\Repo\\EditEntity\\MediawikiEditFilterHookRunner' => __DIR__ . '/includes/EditEntity/MediawikiEditFilterHookRunner.php',
 	'Wikibase\\Repo\\EditEntity\\StatsdSaveTimeRecordingEditEntity' => __DIR__ . '/includes/EditEntity/StatsdSaveTimeRecordingEditEntity.php',
+	'Wikibase\\Repo\\EditEntity\\StatsdSaveTimeRecordingEntityStore' => __DIR__ . '/includes/EditEntity/StatsdSaveTimeRecordingEntityStore.php',
 	'Wikibase\\Repo\\EditEntity\\StatsdTimeRecordingEditFilterHookRunner' => __DIR__ . '/includes/EditEntity/StatsdTimeRecordingEditFilterHookRunner.php',
 	'Wikibase\\Repo\\EntityIdHtmlLinkFormatterFactory' => __DIR__ . '/includes/EntityIdHtmlLinkFormatterFactory.php',
 	'Wikibase\\Repo\\EntityIdLabelFormatterFactory' => __DIR__ . '/includes/EntityIdLabelFormatterFactory.php',
