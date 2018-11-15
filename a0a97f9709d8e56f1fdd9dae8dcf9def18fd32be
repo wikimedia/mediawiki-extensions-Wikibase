@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "af8fcaa6_d9a177f3",
+        "filename": "lib/tests/phpunit/StatsdMissRecordingSimpleCacheTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-15T08:30:02Z",
+      "side": 1,
+      "message": "Yes, will add in a followup!",
+      "parentUuid": "e3c00f2d_d4666728",
+      "revId": "a0a97f9709d8e56f1fdd9dae8dcf9def18fd32be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ddc14c4_ea60ffcb",
         "filename": "tests/phan/config.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-11-15T08:28:37Z",
       "side": 1,
       "message": "wooo, which new code added this? out of curiosity",
+      "revId": "a0a97f9709d8e56f1fdd9dae8dcf9def18fd32be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d9eb579_45867db5",
+        "filename": "tests/phan/config.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-15T08:30:02Z",
+      "side": 1,
+      "message": "Its actually the cache interface returning iterable, which i don\u0027t think the version of phan we are running knows about yet.\nI might take another bash at how we exclude it in a followup",
+      "parentUuid": "3ddc14c4_ea60ffcb",
       "revId": "a0a97f9709d8e56f1fdd9dae8dcf9def18fd32be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
