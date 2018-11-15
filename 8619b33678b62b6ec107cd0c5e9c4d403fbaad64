@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "14009ac7_d48f42c6",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-15T17:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7cd3f3_baa6301c",
+      "range": {
+        "startLine": 378,
+        "startChar": 55,
+        "endLine": 378,
+        "endChar": 72
+      },
+      "revId": "8619b33678b62b6ec107cd0c5e9c4d403fbaad64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "729d0817_a78a14bd",
         "filename": "repo/includes/Content/EntityContent.php",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2018-09-26T13:46:43Z",
       "side": 1,
       "message": "You could move this out of this function, and expect a flipped array instead.",
+      "range": {
+        "startLine": 379,
+        "startChar": 12,
+        "endLine": 379,
+        "endChar": 22
+      },
+      "revId": "8619b33678b62b6ec107cd0c5e9c4d403fbaad64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04aa1f4d_2d70fd76",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-15T17:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "729d0817_a78a14bd",
       "range": {
         "startLine": 379,
         "startChar": 12,
