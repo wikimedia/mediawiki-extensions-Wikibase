@@ -112,6 +112,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Api\\SetSiteLink' => __DIR__ . '/includes/Api/SetSiteLink.php',
 	'Wikibase\\Repo\\Api\\StatementModificationHelper' => __DIR__ . '/includes/Api/StatementModificationHelper.php',
 	'Wikibase\\Repo\\Api\\TypeDispatchingEntitySearchHelper' => __DIR__ . '/includes/Api/TypeDispatchingEntitySearchHelper.php',
+	'Wikibase\\Repo\\ArrayValueCollector' => __DIR__ . '/includes/ArrayValueCollector.php',
 	'Wikibase\\Repo\\BabelUserLanguageLookup' => __DIR__ . '/includes/BabelUserLanguageLookup.php',
 	'Wikibase\\Repo\\BuilderBasedDataTypeValidatorFactory' => __DIR__ . '/includes/BuilderBasedDataTypeValidatorFactory.php',
 	'Wikibase\\Repo\\CachingCommonsMediaFileNameLookup' => __DIR__ . '/includes/CachingCommonsMediaFileNameLookup.php',
