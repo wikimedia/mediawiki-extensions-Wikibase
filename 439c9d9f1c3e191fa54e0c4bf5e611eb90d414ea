@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96418ebd_1e786a73",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-15T09:25:47Z",
+      "side": 1,
+      "message": "Does this still throw this now?",
+      "range": {
+        "startLine": 256,
+        "startChar": 12,
+        "endLine": 256,
+        "endChar": 49
+      },
+      "revId": "439c9d9f1c3e191fa54e0c4bf5e611eb90d414ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
