@@ -71,7 +71,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
@@ -1709,10 +1709,10 @@ class WikibaseRepo {
 	/**
 	 * @param IContextSource|null $context
 	 *
-	 * @return EditEntityFactory
+	 * @return MediawikiEditEntityFactory
 	 */
 	public function newEditEntityFactory( IContextSource $context = null ) {
-		return new EditEntityFactory(
+		return new MediawikiEditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),

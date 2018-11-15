@@ -15,8 +15,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\EditEntity;
-use Wikibase\MediawikiEditEntity;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -24,7 +24,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\MediawikiEditEntity
+ * @covers \Wikibase\Repo\EditEntity\MediawikiEditEntity
  *
  * @group Wikibase
  *
@@ -122,7 +122,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 * @param bool[]|null $permissions map of actions to bool, indicating which actions are allowed.
 	 * @param EditFilterHookRunner|null $editFilterHookRunner
 	 *
-	 * @return MediawikiEditEntity
+	 * @return \Wikibase\Repo\EditEntity\MediawikiEditEntity
 	 */
 	private function makeEditEntity(
 		MockRepository $mockRepository,

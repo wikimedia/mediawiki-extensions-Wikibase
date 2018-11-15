@@ -8,7 +8,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
@@ -41,7 +41,7 @@ abstract class UpdateRepoJob extends Job {
 	protected $summaryFormatter;
 
 	/**
-	 * @var EditEntityFactory
+	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -68,7 +68,7 @@ abstract class UpdateRepoJob extends Job {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;

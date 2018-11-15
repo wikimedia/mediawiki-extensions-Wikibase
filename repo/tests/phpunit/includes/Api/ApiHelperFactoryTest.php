@@ -11,7 +11,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
@@ -39,7 +39,7 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$editEntityFactory = $this->getMockBuilder( EditEntityFactory::class )
+		$editEntityFactory = $this->getMockBuilder( MediawikiEditEntityFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 

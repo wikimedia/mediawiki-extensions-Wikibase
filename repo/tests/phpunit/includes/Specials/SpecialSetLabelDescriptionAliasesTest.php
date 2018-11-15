@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -67,7 +67,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
-			new EditEntityFactory(
+			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
@@ -390,7 +390,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
-			new EditEntityFactory(
+			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),

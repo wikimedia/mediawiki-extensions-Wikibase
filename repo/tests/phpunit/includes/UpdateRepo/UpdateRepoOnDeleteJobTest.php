@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -168,7 +168,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$this->getSummaryFormatter(),
 			$this->getSiteLookup( $titleExists ),
-			new EditEntityFactory(
+			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),
 				$mockRepository,
 				$mockRepository,

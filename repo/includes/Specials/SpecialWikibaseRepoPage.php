@@ -9,8 +9,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EditEntity;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
@@ -41,7 +41,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $entityTitleLookup;
 
 	/**
-	 * @var EditEntityFactory
+	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -56,7 +56,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
+	 * @param \Wikibase\Repo\EditEntity\MediawikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$title,
@@ -64,7 +64,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $title, $restriction );
 		$this->copyrightView = $copyrightView;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\EditEntity;
 
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -16,7 +16,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class EditEntityFactory {
+class MediawikiEditEntityFactory {
 
 	/**
 	 * @var EntityTitleStoreLookup

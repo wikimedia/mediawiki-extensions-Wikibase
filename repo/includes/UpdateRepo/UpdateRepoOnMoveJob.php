@@ -7,7 +7,7 @@ use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -67,7 +67,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
 		SiteLookup $siteLookup,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
 			$entityRevisionLookup,
