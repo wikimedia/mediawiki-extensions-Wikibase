@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client;
 
+use CachedBagOStuff;
+use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -1321,6 +1323,7 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @fixme this is duplicated in WikibaseRepo...
 	 * @return CacheInterface
 	 */
 	private function getFormatterCache() {
@@ -1329,8 +1332,14 @@ final class WikibaseClient {
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
+		// Get out default shared cache wrapped in an in memory cache
+		$bagOStuff = ObjectCache::getInstance( $cacheType );
+		if ( !$bagOStuff instanceof CachedBagOStuff ) {
+			$bagOStuff = new CachedBagOStuff( $bagOStuff );
+		}
+
 		$cache = new SimpleCacheWithBagOStuff(
-			wfGetCache( $cacheType ),
+			$bagOStuff,
 			'wikibase.client.formatter.',
 			$cacheSecret
 		);

@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo;
 
+use CachedBagOStuff;
 use Deserializers\DispatchableDeserializer;
 use Exception;
 use InvalidArgumentException;
+use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
@@ -2073,6 +2075,8 @@ class WikibaseRepo {
 	}
 
 	/**
+	 *
+	 * @fixme this is duplicated in WikibaseClient...
 	 * @return CacheInterface
 	 */
 	private function getFormatterCache() {
@@ -2081,8 +2085,14 @@ class WikibaseRepo {
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
+		// Get out default shared cache wrapped in an in memory cache
+		$bagOStuff = ObjectCache::getInstance( $cacheType );
+		if ( !$bagOStuff instanceof CachedBagOStuff ) {
+			$bagOStuff = new CachedBagOStuff( $bagOStuff );
+		}
+
 		$cache = new SimpleCacheWithBagOStuff(
-			wfGetCache( $cacheType ),
+			$bagOStuff,
 			'wikibase.repo.formatter.',
 			$cacheSecret
 		);
