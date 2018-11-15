@@ -16,6 +16,24 @@
       "revId": "ee46808342a37a66d2aac6d4dd5d0161461a097d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18f5fbbc_3a2e1b56",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2018-11-15T11:45:01Z",
+      "side": 1,
+      "message": "$(cat LocalSettings.php) is the reason I have used an heredoc without quote in the previous change.\n\nI agree it feels hacky and prone to failure next time the code is tweaked.  I \u0027just\u0027 wanted to avoid a temporary file.",
+      "parentUuid": "c1b9e568_76ba07fa",
+      "revId": "ee46808342a37a66d2aac6d4dd5d0161461a097d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
