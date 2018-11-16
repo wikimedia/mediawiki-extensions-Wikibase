@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use Language;
+use NullStatsdDataFactory;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
@@ -52,7 +53,8 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
 				->disableOriginalConstructor()->getMock(),
 			$this->getMockBuilder( CachingKartographerEmbeddingHandler::class )
-				->disableOriginalConstructor()->getMock()
+				->disableOriginalConstructor()->getMock(),
+			new NullStatsdDataFactory()
 		);
 	}
 
