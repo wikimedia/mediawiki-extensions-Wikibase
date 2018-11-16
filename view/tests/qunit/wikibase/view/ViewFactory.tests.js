@@ -249,8 +249,8 @@
 			expectedPropertyId = 'P123',
 			$dom = $( '<div/>' );
 
-		sinon.stub( factory, '_getAdderWithStartEditing' );
-		factory._getAdderWithStartEditing.returns( function () {} );
+		sinon.stub( factory, 'getAdderWithStartEditing' );
+		factory.getAdderWithStartEditing.returns( function () {} );
 
 		sinon.spy( factory, 'getListItemAdapterForStatementView' );
 		factory.getStatementListView( null, null, expectedPropertyId, function () {}, value, $dom );
@@ -271,8 +271,8 @@
 			expectedPropertyId = 'P123',
 			$dom = $( '<div/>' );
 
-		sinon.stub( factory, '_getAdderWithStartEditing' );
-		factory._getAdderWithStartEditing.returns( function () {} );
+		sinon.stub( factory, 'getAdderWithStartEditing' );
+		factory.getAdderWithStartEditing.returns( function () {} );
 
 		$parent.data( 'property-id', expectedPropertyId );
 		$parent.append( $dom );
