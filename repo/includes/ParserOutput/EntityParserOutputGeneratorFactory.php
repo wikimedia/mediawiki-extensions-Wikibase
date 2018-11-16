@@ -5,6 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use ExtensionRegistry;
 use Hooks;
 use Language;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PageImages;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -97,6 +98,11 @@ class EntityParserOutputGeneratorFactory {
 	private $kartographerEmbeddingHandler;
 
 	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityInfoBuilder $entityInfoBuilder
@@ -107,6 +113,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param Serializer $entitySerializer
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
+	 * @param StatsdDataFactoryInterface $stats
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
@@ -125,6 +132,7 @@ class EntityParserOutputGeneratorFactory {
 		Serializer $entitySerializer,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
 		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
+		StatsdDataFactoryInterface $stats,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -138,15 +146,16 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entitySerializer = $entitySerializer;
+		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
+		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
+		$this->stats = $stats;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
-		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
-		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 	}
 
 	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
-		return new EntityParserOutputGenerator(
+		$pog = new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
 			$this->newParserOutputJsConfigBuilder(),
@@ -159,6 +168,14 @@ class EntityParserOutputGeneratorFactory {
 			$this->getDataUpdaters(),
 			$userLanguage
 		);
+
+		$pog = new StatsdTimeRecordingEntityParserOutputGenerator(
+			$pog,
+			$this->stats,
+			'wikibase.repo.ParserOutputGenerator.timing'
+		);
+
+		return $pog;
 	}
 
 	private function newParserOutputJsConfigBuilder() {
