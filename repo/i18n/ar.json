@@ -353,6 +353,7 @@
 	"wikibase-api-cant-redirect": "لا يمكن إنشاء تحويلة (ربما لأن التحويلات بين هذا النوع من الكائنات غير مدعومة أساساً).",
 	"wikibase-self-conflict-patched": "تم رقع تعديلك على النسخة الأخيرة مع تجاوز بعض من تعديلاتك المتوسطة.",
 	"wikibase-conflict-patched": "تم رقع تعديلك على النسخة الأخيرة.",
+	"wikibase-save-unresolved-redirect": "صادف تحويلة غير محلولة من $1 إلى $2 عند محاولة حفظ تغيير.",
 	"wikibase-restoreold": "استرجاع",
 	"wikibase-entity-summary-restore": "استرجع التعديل $3 من قبل [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "الرجوع عن التعديل $3 بواسطة [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",

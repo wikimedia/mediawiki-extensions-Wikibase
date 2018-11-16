@@ -194,5 +194,6 @@
 	"apihelp-wbsetaliases-summary": "Вызначае псэўданімы для элемэнту Вікібазы.",
 	"apihelp-wbsetaliases-param-id": "Ідэнтыфікатар элемэнту з прэфіксам.\nУжывайце <var>id</var> ці <var>site</var> і <var>title</var> разам.",
 	"apihelp-wbsetaliases-param-new": "Калі пазначана, будзе створаны новы элемэнт.\nПазначце тып элемэнту, які вы хочаце стварыць.",
-	"apihelp-wbsetaliases-param-site": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>title</var>, каб зрабіць поўную спасылку на сайт."
+	"apihelp-wbsetaliases-param-site": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>title</var>, каб зрабіць поўную спасылку на сайт.",
+	"apihelp-wbsetaliases-param-title": "Назва старонкі для злучэньня.\nУжывайце разам з <var>site</var>, каб зрабіць поўную спасылку на сайт."
 }

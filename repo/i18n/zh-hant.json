@@ -353,6 +353,7 @@
 	"wikibase-api-cant-redirect": "無法建立重新導向 (可能不支援重新導向至此類型的實體)",
 	"wikibase-self-conflict-patched": "您的編輯已修補成最新版本，覆蓋了部份您中間所做的更改。",
 	"wikibase-conflict-patched": "您的編輯已修補成最新版本。",
+	"wikibase-save-unresolved-redirect": "當嘗試保存更改時，遭遇到從 $1 至 $2 的未處理重新導向。",
 	"wikibase-restoreold": "還原",
 	"wikibase-entity-summary-restore": "還原 [[Special:Contributions/$4|{{GENDER:$4|$4}}]] 的修訂 $3",
 	"wikibase-entity-summary-undo": "復原[[Special:Contributions/$4|{{GENDER:$4|$4}}]]（[[User talk:$4|討論]]）的版本$3",
