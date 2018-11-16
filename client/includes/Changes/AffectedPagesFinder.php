@@ -4,6 +4,8 @@ namespace Wikibase\Client\Changes;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Title;
 use Traversable;
 use UnexpectedValueException;
@@ -51,6 +53,11 @@ class AffectedPagesFinder {
 	private $checkPageExistence;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param UsageLookup $usageLookup
 	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
@@ -84,6 +91,8 @@ class AffectedPagesFinder {
 		$this->siteId = $siteId;
 		$this->contentLanguageCode = $contentLanguageCode;
 		$this->checkPageExistence = $checkPageExistence;
+		// TODO inject me
+		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 	/**
@@ -351,8 +360,10 @@ class AffectedPagesFinder {
 			$pageId = $title->getArticleID();
 
 			if ( $pageId === 0 ) {
-				wfDebugLog( 'WikibaseChangeNotification', __METHOD__ . ': Article ID for '
-					. $title->getFullText() . ' is 0.' );
+				$this->logger->debug(
+					'{method}: Article ID for {titleFullText} is 0',
+					[ 'method' => __METHOD__, 'titleFullText' => $title->getFullText() ]
+				);
 
 				continue;
 			}
