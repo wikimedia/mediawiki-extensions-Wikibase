@@ -766,8 +766,14 @@ final class WikibaseClient {
 
 			$this->site = $this->siteLookup->getSite( $globalId );
 
+			// Todo inject me
+			$logger = LoggerFactory::getInstance( 'Wikibase' );
+
 			if ( !$this->site ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
+				$logger->debug(
+					'{method}:  Unable to resolve site ID {globalId}!',
+					[ 'method' => __METHOD__, 'globalId' => $globalId ]
+				);
 
 				$this->site = new MediaWikiSite();
 				$this->site->setGlobalId( $globalId );
@@ -776,9 +782,15 @@ final class WikibaseClient {
 			}
 
 			if ( !in_array( $localId, $this->site->getLocalIds() ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__
-					. ": The configured local id $localId does not match any local ID of site $globalId: "
-					. var_export( $this->site->getLocalIds(), true ) );
+				$logger->debug(
+					'{method}: The configured local id {localId} does not match any local IDs of site {globalId}: {localIds}',
+					[
+						'method' => __METHOD__,
+						'localId' => $localId,
+						'globalId' => $globalId,
+						'localIds' => json_encode( $this->site->getLocalIds() )
+					]
+				);
 			}
 		}
 
