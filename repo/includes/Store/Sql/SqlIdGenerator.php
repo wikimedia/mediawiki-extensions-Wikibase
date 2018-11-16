@@ -26,6 +26,13 @@ class SqlIdGenerator implements IdGenerator {
 	private $idBlacklist;
 
 	/**
+	 * Limit for id generation attempts that hit the blacklist.
+	 * We have not had any blacklists in the past with anywhere near this number of sequential entity ids.
+	 * @var int
+	 */
+	private $blacklistAttempts = 10;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
 	 * @param array[] $idBlacklist
 	 */
@@ -43,10 +50,26 @@ class SqlIdGenerator implements IdGenerator {
 	 */
 	public function getNewId( $type ) {
 		$database = $this->loadBalancer->getConnection( DB_MASTER );
-		$id = $this->generateNewId( $database, $type );
+
+		$idGenerations = 0;
+		do {
+			if ( $idGenerations >= $this->blacklistAttempts ) {
+				throw new MWException(
+					"Could not generate a non blacklisted ID of type '{$type}', tried {$this->blacklistAttempts} times."
+				);
+			}
+			$id = $this->generateNewId( $database, $type );
+			$idGenerations++;
+
+		} while( $this->idIsOnBlacklist( $type, $id ) );
+
 		$this->loadBalancer->reuseConnection( $database );
 
 		return $id;
+	}
+
+	private function idIsOnBlacklist( $type, $id ) {
+		return array_key_exists( $type, $this->idBlacklist ) && in_array( $id, $this->idBlacklist[$type] );
 	}
 
 	/**
@@ -54,60 +77,54 @@ class SqlIdGenerator implements IdGenerator {
 	 *
 	 * @param IDatabase $database
 	 * @param string $type
-	 * @param bool $retry Retry once in case of e.g. race conditions. Defaults to true.
 	 *
 	 * @throws MWException
 	 * @return int
 	 */
-	private function generateNewId( IDatabase $database, $type, $retry = true ) {
+	private function generateNewId( IDatabase $database, $type ) {
 		$database->startAtomic( __METHOD__ );
 
-		$currentId = $database->selectRow(
-			'wb_id_counters',
-			'id_value',
-			[ 'id_type' => $type ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
-		);
+		$success = $this->upsertId( $database, $type );
 
-		if ( is_object( $currentId ) ) {
-			$id = $currentId->id_value + 1;
-			$success = $database->update(
-				'wb_id_counters',
-				[ 'id_value' => $id ],
-				[ 'id_type' => $type ]
-			);
-		} else {
-			$id = 1;
-
-			$success = $database->insert(
-				'wb_id_counters',
-				[
-					'id_value' => $id,
-					'id_type' => $type,
-				]
-			);
-
-			// Retry once, since a race condition on initial insert can cause one to fail.
-			// Race condition is possible due to occurrence of phantom reads is possible
-			// at non serializable transaction isolation level.
-			if ( !$success && $retry ) {
-				$id = $this->generateNewId( $database, $type, false );
-				$success = true;
-			}
+		// Retry once, since a race condition on initial insert can cause one to fail.
+		// Race condition is possible due to occurrence of phantom reads is possible
+		// at non serializable transaction isolation level.
+		if ( !$success ) {
+			$success = $this->upsertId( $database, $type );
 		}
-
-		$database->endAtomic( __METHOD__ );
 
 		if ( !$success ) {
 			throw new MWException( 'Could not generate a reliably unique ID.' );
 		}
 
-		if ( array_key_exists( $type, $this->idBlacklist ) && in_array( $id, $this->idBlacklist[$type] ) ) {
-			$id = $this->generateNewId( $database, $type );
+		$id = $database->insertId();
+
+		$database->endAtomic( __METHOD__ );
+
+		// If the upsert successfully inserts, we won't have an auto increment ID, instead it will be the 1 set in the query.
+		if ( !is_int( $id ) || $id === 0 ) {
+			$id = 1;
 		}
 
 		return $id;
+	}
+
+	/**
+	 * @param IDatabase $database
+	 * @param string $type
+	 * @return bool Query success
+	 */
+	private function upsertId( IDatabase $database, $type ) {
+		return $database->upsert(
+			'wb_id_counters',
+			[
+				'id_type' => $type,
+				'id_value' => 1,
+			],
+			[ 'id_value' ],
+			[ 'id_value = LAST_INSERT_ID(id_value + 1)' ],
+			__METHOD__
+		);
 	}
 
 }
