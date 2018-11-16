@@ -31,9 +31,9 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
-use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
+use Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
@@ -46,7 +46,7 @@ use Wikibase\View\ViewContent;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database
@@ -208,7 +208,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			)
 		];
 
-		return new EntityParserOutputGenerator(
+		return new FullEntityParserOutputGenerator(
 			$this->getEntityViewFactory( $createView ),
 			$this->getEntityMetaTagsFactory( $title, $description ),
 			$this->getConfigBuilderMock(),
@@ -440,7 +440,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			)
 		];
 
-		return new EntityParserOutputGenerator(
+		return new FullEntityParserOutputGenerator(
 			$this->getViewFactoryForRedirectTest(),
 			$this->getEntityMetaTagsFactory(),
 			$this->getConfigBuilderMock(),
