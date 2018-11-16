@@ -1800,6 +1800,7 @@ class WikibaseRepo {
 				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
 				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
 			),
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use ExtensionRegistry;
 use Language;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PageImages;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -90,6 +91,11 @@ class EntityParserOutputGeneratorFactory {
 	private $entityReferenceExtractorDelegator;
 
 	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityInfoBuilder $entityInfoBuilder
@@ -100,6 +106,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param Serializer $entitySerializer
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
+	 * @param StatsdDataFactoryInterface $stats
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
@@ -116,6 +123,7 @@ class EntityParserOutputGeneratorFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		Serializer $entitySerializer,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
+		StatsdDataFactoryInterface $stats,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -133,6 +141,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
+		$this->stats = $stats;
 	}
 
 	/**
@@ -143,7 +152,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @return EntityParserOutputGenerator
 	 */
 	public function getEntityParserOutputGenerator( Language $userLanguage ) {
-		return new EntityParserOutputGenerator(
+		$pog = new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
 			$this->newParserOutputJsConfigBuilder(),
@@ -156,6 +165,14 @@ class EntityParserOutputGeneratorFactory {
 			$this->getDataUpdaters(),
 			$userLanguage
 		);
+
+		$pog = new StatsdTimeRecordingEntityParserOutputGenerator(
+			$pog,
+			$this->stats,
+			'wikibase.repo.ParserOutputGenerator.timing'
+		);
+
+		return $pog;
 	}
 
 	/**
