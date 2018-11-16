@@ -358,6 +358,14 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * Get the keys within this Contents Entity JSON that should be removed for
+	 * text passed to edit filters.
+	 *
+	 * @return string[] Keys to ignore
+	 */
+	abstract protected function getIgnoreKeysForFilters();
+
+	/**
 	 * @return string A string representing the content in a way useful for content filtering as
 	 *         performed by extensions like AbuseFilter.
 	 */
@@ -366,20 +374,12 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getRedirectText();
 		}
 
-		//XXX: $ignore contains knowledge about the Entity's internal representation.
-		//     This list should therefore rather be maintained in the Entity class.
-		static $ignore = [
-			'language',
-			'site',
-			'type',
-		];
-
 		// @todo this text for filters stuff should be it's own class with test coverage!
 		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 		$json = $codec->encodeEntity( $this->getEntity(), CONTENT_FORMAT_JSON );
 		$data = json_decode( $json, true );
 
-		$values = ArrayValueCollector::collectValues( $data, $ignore );
+		$values = ArrayValueCollector::collectValues( $data, $this->getIgnoreKeysForFilters() );
 
 		return implode( "\n", $values );
 	}
