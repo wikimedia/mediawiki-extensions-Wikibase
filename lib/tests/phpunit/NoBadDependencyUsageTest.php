@@ -14,55 +14,63 @@ use SplFileInfo;
  */
 class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 
-	public function testNoRepoUsageInLib() {
-		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 0 );
-		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 1 );
-	}
-
-	public function testNoClientUsageInLib() {
-		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseClient' . '::', 0 );
-		$this->assertStringNotInLib( 'Wikibase\\Client\\', 0 );
-	}
-
-	/**
-	 * @param string $string
-	 * @param int $maxAllowance
-	 */
-	private function assertStringNotInLib( $string, $maxAllowance ) {
-		$this->assertLessThanOrEqual(
-			$maxAllowance,
-			$this->countStringInDir( $string, __DIR__ . '/../../' ),
-			'You are not allowed to use ' . $string . ' in this component'
+	public function testNoBadUsageInLib() {
+		// Increasing these allowances is forbidden
+		$this->assertStringsNotInLib(
+			[
+				'WikibaseRepo' . '::' => 0,
+				'Wikibase\\Repo\\' => 1,
+				'WikibaseClient' . '::' => 0,
+				'Wikibase\\Client\\' => 0,
+			]
 		);
 	}
 
 	/**
-	 * @param string $string
+	 * @param int[] $stringCounts Keys of strings and values of number of allowed occurrences
+	 */
+	private function assertStringsNotInLib( $stringCounts ) {
+		$counts = $this->countMultiStringInDir( array_keys( $stringCounts ), __DIR__ . '/../../' );
+		foreach ( $stringCounts as $string => $maxAllowance ) {
+			$this->assertLessThanOrEqual(
+				$maxAllowance,
+				$counts[$string],
+				'You are not allowed to use ' . $string . ' in this component'
+			);
+		}
+	}
+
+	/**
+	 * @param string[] $strings
 	 * @param string $dir
 	 *
-	 * @return int
+	 * @return int[] counts indexed by string
 	 */
-	private function countStringInDir( $string, $dir ) {
-		$count = 0;
+	private function countMultiStringInDir( $strings, $dir ) {
+		$counts = [];
+		foreach ( $strings as $string ) {
+			$counts[$string] = 0;
+		}
+
 		$directoryIterator = new RecursiveDirectoryIterator( $dir );
 
 		/**
 		 * @var SplFileInfo $fileInfo
 		 */
-		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+		foreach ( new RecursiveIteratorIterator( $directoryIterator, RecursiveIteratorIterator::SELF_FIRST ) as $fileInfo ) {
 			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -4 ) === '.php' ) {
-				$text = file_get_contents( $fileInfo->getPathname() );
-				$text = preg_replace( '@/\*.*?\*/@s', '', $text );
+				foreach ( $strings as $string ) {
+					$text = file_get_contents( $fileInfo->getPathname() );
+					$text = preg_replace( '@/\*.*?\*/@s', '', $text );
 
-				if ( strpos( $text, $string ) !== false ) {
-					$count++;
+					if ( strpos( $text, $string ) !== false ) {
+						$counts[$string]++;
+					}
 				}
 			}
 		}
 
-		return $count;
+		return $counts;
 	}
 
 }
