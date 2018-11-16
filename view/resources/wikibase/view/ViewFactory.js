@@ -313,7 +313,11 @@
 		} );
 	};
 
-	SELF.prototype._getAdderWithStartEditing = function ( startEditingCallback ) {
+	/**
+	 * @param {Function} startEditingCallback
+	 * @returns {function(*=, *=, *=, *=): *}
+	 */
+	SELF.prototype.getAdderWithStartEditing = function ( startEditingCallback ) {
 		var structureEditorFactory = this._structureEditorFactory;
 		return function ( doAdd, $dom, label, title ) {
 			var newDoAdd = function () {
@@ -322,6 +326,14 @@
 			return structureEditorFactory.getAdder( newDoAdd, $dom, label, title );
 		};
 	};
+
+	/**
+	 * FIXME that is a migration method, because WikiBaseLexeme ControllerViewFactory used this before
+	 * @param startEditingCallback
+	 * @returns {function(*=, *=, *=, *=): *}
+	 * @private
+	 */
+	SELF.prototype._getAdderWithStartEditing = SELF.prototype.getAdderWithStartEditing;
 
 	/**
 	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
@@ -363,7 +375,7 @@
 					getStatementForGuid,
 					htmlIdPrefix
 				),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this.getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -422,7 +434,7 @@
 					},
 					propertyId
 				),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this.getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -476,7 +488,7 @@
 					false
 				),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getQualifiersListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceListItemAdapter: this.getListItemAdapterForReferenceView.bind( this, startEditingCallback ),
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId )
@@ -510,7 +522,7 @@
 			$dom,
 			{
 				value: value || null,
-				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceRemover: function ( $dom ) {
 					return structureEditorFactory.getRemover( function () {
