@@ -20,8 +20,10 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 			[
 				'WikibaseRepo' . '::' => 0,
 				'Wikibase\\Repo\\' => 1,
+				'Wikibase\\\\Repo\\\\' => 2,
 				'WikibaseClient' . '::' => 0,
 				'Wikibase\\Client\\' => 0,
+				'Wikibase\\\\Client\\\\' => 1,
 			]
 		);
 	}
