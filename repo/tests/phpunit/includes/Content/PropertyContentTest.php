@@ -2,6 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
+use DataValues\StringValue;
+use DataValues\TimeValue;
 use InvalidArgumentException;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
@@ -9,6 +13,19 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\PropertyContent;
 
 /**
@@ -104,6 +121,68 @@ class PropertyContentTest extends EntityContentTestCase {
 		$Property->setLabel( 'en', '~=[,,_,,]:3' );
 		$content = PropertyContent::newFromProperty( $Property );
 		$this->assertFalse( $content->isEmpty() );
+	}
+
+	public function testGetTextForFilters() {
+		$property = new Property(
+			new PropertyId( 'P123' ),
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'label1' ), new Term( 'de', 'label2' ) ] ),
+				new TermList( [ new Term( 'en', 'descen' ), new Term( 'de', 'descde' ) ] ),
+				new AliasGroupList(
+					[
+						new AliasGroup( 'fr', [ 'alias1', 'alias2' ] ),
+						new AliasGroup( 'pt', [ 'alias3' ] ),
+					]
+				)
+			),
+			'dataTypeId',
+			new StatementList(
+				new Statement(
+					new PropertyValueSnak(
+						new PropertyId( 'P6654' ), new StringValue( 'stringvalue' )
+					),
+					new SnakList(
+						[
+							new PropertyValueSnak(
+								new PropertyId( 'P6654' ),
+								new GlobeCoordinateValue( new LatLongValue( 1, 2 ), 1 )
+							),
+							new PropertyValueSnak(
+								new PropertyId( 'P6654' ),
+								new TimeValue(
+									'+2015-11-11T00:00:00Z',
+									0,
+									0,
+									0,
+									TimeValue::PRECISION_DAY,
+									TimeValue::CALENDAR_GREGORIAN
+								)
+							),
+						]
+					),
+					new ReferenceList(
+						[
+							new Reference(
+								[
+									new PropertySomeValueSnak( new PropertyId( 'P987' ) ),
+									new PropertyNoValueSnak( new PropertyId( 'P986' ) )
+								]
+							)
+						]
+					),
+					'imaguid'
+				)
+			)
+		);
+
+		$content = new PropertyContent( new EntityInstanceHolder( $property ) );
+		$output = $content->getTextForFilters();
+
+		$this->assertSame(
+			trim( file_get_contents( __DIR__ . '/textForFiltersProperty.txt' ) ),
+			$output
+		);
 	}
 
 }
