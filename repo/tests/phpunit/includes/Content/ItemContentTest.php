@@ -2,11 +2,15 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
+use PhpParser\Node\Stmt\TraitUseAdaptation\Alias;
 use Title;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
@@ -14,15 +18,27 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -527,6 +543,77 @@ class ItemContentTest extends EntityContentTestCase {
 		$item->setLabel( 'en', '~=[,,_,,]:3' );
 		$content = ItemContent::newFromItem( $item );
 		$this->assertFalse( $content->isEmpty() );
+	}
+
+	public function testGetTextForFilters() {
+		$item = new Item(
+			new ItemId( 'Q123' ),
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'label1' ), new Term( 'de', 'label2' ) ] ),
+				new TermList( [ new Term( 'en', 'descen' ), new Term( 'de', 'descde' ) ] ),
+				new AliasGroupList(
+					[
+						new AliasGroup( 'fr', [ 'alias1', 'alias2' ] ),
+						new AliasGroup( 'pt', [ 'alias3' ] ),
+					]
+				)
+			),
+			new SiteLinkList(
+				[
+					new SiteLink(
+						'dewiki',
+						'page1',
+						new ItemIdSet( [ new ItemId( 'Q1' ), new ItemId( 'Q2' ) ] )
+					),
+					new SiteLink( 'nowiki', 'page2', [ new ItemId( 'Q1' ) ] ),
+				]
+			),
+			new StatementList(
+				new Statement(
+					new PropertyValueSnak(
+						new PropertyId( 'P6654' ), new StringValue( 'stringvalue' )
+					),
+					new SnakList(
+						[
+							new PropertyValueSnak(
+								new PropertyId( 'P6654' ),
+								new GlobeCoordinateValue( new LatLongValue( 1, 2 ), 1 )
+							),
+							new PropertyValueSnak(
+								new PropertyId( 'P6654' ),
+								new TimeValue(
+									'+2015-11-11T00:00:00Z',
+									0,
+									0,
+									0,
+									TimeValue::PRECISION_DAY,
+									TimeValue::CALENDAR_GREGORIAN
+								)
+							),
+						]
+					),
+					new ReferenceList(
+						[
+							new Reference(
+								[
+									new PropertySomeValueSnak( new PropertyId( 'P987' ) ),
+									new PropertyNoValueSnak( new PropertyId( 'P986' ) )
+								]
+							)
+						]
+					),
+					'imaguid'
+				)
+			)
+		);
+
+		$content = new ItemContent( new EntityInstanceHolder( $item ) );
+		$output = $content->getTextForFilters();
+
+		$this->assertSame(
+			trim( file_get_contents( __DIR__ . '/textForFiltersItem.txt' ) ),
+			$output
+		);
 	}
 
 }
