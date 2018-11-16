@@ -12,6 +12,7 @@ let MainStatementSection = ( Base ) => class extends Base {
 
 	static get TOOLBAR_WIDGET_SELECTORS() {
 		return {
+			ADD_BUTTON: '.wikibase-toolbar-button-add',
 			EDIT_BUTTON: '.wikibase-toolbar-button-edit',
 			REMOVE_BUTTON: '.wikibase-toolbar-button-remove',
 			SAVE_BUTTON: '.wikibase-toolbar-button-save'
@@ -52,6 +53,29 @@ let MainStatementSection = ( Base ) => class extends Base {
 		this.mainStatementsContainer.$( this.constructor.TOOLBAR_WIDGET_SELECTORS.SAVE_BUTTON ).click();
 
 		this.mainStatementsContainer.$( this.constructor.STATEMENT_WIDGET_SELECTORS.EDIT_INPUT_VALUE ).waitForExist( null, true );
+	}
+
+	addReferenceToNthStatementOfStatementGroup( index, propertyId, referencePropety, referenceValue ) {
+		var self = this,
+			statementGroup = $( '#' + propertyId ),
+			statements = statementGroup.$$( '.wikibase-statementview' ),
+			statement = statements[ index ],
+			referencesContainer = statement.$( '.wikibase-statementview-references-container' );
+
+		statement.$( '.wikibase-statementview-references-heading' ).click();
+		statement.waitForVisible( '.wikibase-statementview-references' );
+		referencesContainer.$( this.constructor.TOOLBAR_WIDGET_SELECTORS.ADD_BUTTON ).click();
+		referencesContainer.waitForVisible( this.constructor.STATEMENT_WIDGET_SELECTORS.EDIT_INPUT_PROPERTY );
+		referencesContainer.$( this.constructor.STATEMENT_WIDGET_SELECTORS.EDIT_INPUT_PROPERTY ).setValue( referencePropety );
+
+		referencesContainer.waitForExist( this.constructor.STATEMENT_WIDGET_SELECTORS.EDIT_INPUT_VALUE );
+		referencesContainer.$( this.constructor.STATEMENT_WIDGET_SELECTORS.EDIT_INPUT_VALUE ).setValue( referenceValue );
+		statementGroup.$( this.constructor.TOOLBAR_WIDGET_SELECTORS.SAVE_BUTTON ).waitUntil( function () {
+			return self.mainStatementsContainer.$( self.constructor.TOOLBAR_WIDGET_SELECTORS.SAVE_BUTTON ).getAttribute( 'aria-disabled' ) === 'false';
+		} );
+		statementGroup.$( this.constructor.TOOLBAR_WIDGET_SELECTORS.SAVE_BUTTON ).click();
+
+		referencesContainer.$( this.constructor.STATEMENT_WIDGET_SELECTORS.EDIT_INPUT_VALUE ).waitForExist( null, true );
 	}
 
 	/**
