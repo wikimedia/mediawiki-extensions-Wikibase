@@ -313,7 +313,11 @@
 		} );
 	};
 
-	SELF.prototype._getAdderWithStartEditing = function ( startEditingCallback ) {
+	/**
+	 * @param {Function} startEditingCallback
+	 * @returns {function(*=, *=, *=, *=): *}
+	 */
+	SELF.prototype.getAdderWithStartEditing = function ( startEditingCallback ) {
 		var structureEditorFactory = this._structureEditorFactory;
 		return function ( doAdd, $dom, label, title ) {
 			var newDoAdd = function () {
@@ -363,7 +367,7 @@
 					getStatementForGuid,
 					htmlIdPrefix
 				),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this.getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -422,7 +426,7 @@
 					},
 					propertyId
 				),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this.getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -476,7 +480,7 @@
 					false
 				),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getQualifiersListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceListItemAdapter: this.getListItemAdapterForReferenceView.bind( this, startEditingCallback ),
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId )
@@ -510,7 +514,7 @@
 			$dom,
 			{
 				value: value || null,
-				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceRemover: function ( $dom ) {
 					return structureEditorFactory.getRemover( function () {
