@@ -454,5 +454,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\TermSearchKeyBuilder' => __DIR__ . '/includes/Store/Sql/TermSearchKeyBuilder.php',
 	'Wikibase\\Test\\MockAddUnits' => __DIR__ . '/tests/phpunit/maintenance/MockAddUnits.php',
 	'Wikibase\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
+	'Wikibase\\UpsertSqlIdGenerator' => __DIR__ . '/includes/Store/Sql/UpsertSqlIdGenerator.php',
 	'Wikibase\\ViewEntityAction' => __DIR__ . '/includes/Actions/ViewEntityAction.php',
 ];
