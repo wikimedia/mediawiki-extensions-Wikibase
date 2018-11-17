@@ -31,7 +31,7 @@
 	"wikibase-comment-sitelink-remove": "Уклоњена веза за језик: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|промена|промене|промена}}",
 	"wikibase-dataitem": "Ставка на Википодацима",
-	"wikibase-editlinks": "Измените везе",
+	"wikibase-editlinks": "Измени везе",
 	"wikibase-editlinkstitle": "Измените међујезичке везе",
 	"wikibase-addlinkstitle": "Додајте међујезичне везе",
 	"wikibase-linkitem-addlinks": "Додај везе",
