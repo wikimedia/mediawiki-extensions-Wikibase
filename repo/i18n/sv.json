@@ -341,6 +341,7 @@
 	"wikibase-api-cant-redirect": "Kan inte skapa omdirigering (möjligen eftersom omdirigeringar mellan entiteter av denna typ inte stöds alls).",
 	"wikibase-self-conflict-patched": "Din redigering integrerades med den senaste versionen, vilket har åsidosatt några av dina egna mellanliggande ändringar.",
 	"wikibase-conflict-patched": "Din redigering lappades i den senaste versionen.",
+	"wikibase-save-unresolved-redirect": "Stötte på en olöst omdirigering från $1 till $2 när en ändring försökte sparas.",
 	"wikibase-restoreold": "återställ",
 	"wikibase-entity-summary-restore": "Återställ versionen $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Gör sidversion $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskussion]]) ogjord",
