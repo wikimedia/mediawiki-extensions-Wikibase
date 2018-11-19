@@ -200,15 +200,20 @@ class ValidatorBuilders {
 		// so restrict file name to 240 bytes (see UploadBase::getTitle).
 		$validators = $this->getCommonStringValidators( 240 );
 
-		// Must contain a non-empty file name with no nasty characters (see documentation of
-		// $wgLegalTitleChars as well as $wgIllegalFileChars). File name extensions with digits
-		// (e.g. ".jp2") are possible, as well as two characters (e.g. ".ai").
+		//The filename must contain an extension
 		$validators[] = new RegexValidator(
-			'/^[^#\/:[\\\\\]{|}]+\.\w{2,}$/u',
+			'/.*\.\w{2,}$/u',
+			false,
+			'check-file-type'
+		);
+
+		// Must contain a non-empty file name with no nasty characters (see documentation of
+		// $wgLegalTitleChars as well as $wgIllegalFileChars)
+		$validators[] = new RegexValidator(
+			'/^[^#\/:[\\\\\]{|}]+$/u',
 			false,
 			'illegal-file-chars'
 		);
-
 		if ( $checkExistence === 'checkExistence' ) {
 			$validators[] = new CommonsMediaExistsValidator( $this->mediaFileNameLookup );
 		}
