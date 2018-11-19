@@ -124,25 +124,25 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideCommonsMediaValidation() {
 		return [
-			'Should not be empty' => [ '', false ],
-			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg', false ],
-			'Should have extension' => [ 'Foo', false ],
-			'Extension to short' => [ 'Foo.a', false ],
-			'This should be good' => [ 'Foo.jpg', true ],
-			'Illegal character: newline' => [ "a\na.jpg", false ],
-			'Illegal character: open square bracket' => [ 'a[a.jpg', false ],
-			'Illegal character: close square bracket' => [ 'a]a.jpg', false ],
-			'Illegal character: open curly bracket' => [ 'a{a.jpg', false ],
-			'Illegal character: close curly bracket' => [ 'a}a.jpg', false ],
-			'Illegal character: pipe' => [ 'a|a.jpg', false ],
-			'Illegal character: hash' => [ 'Foo#bar.jpg', false ],
-			'Illegal character: colon' => [ 'Foo:bar.jpg', false ],
-			'Illegal character: slash' => [ 'Foo/bar.jpg', false ],
-			'Illegal character: backslash' => [ 'Foo\bar.jpg', false ],
-			'Unicode support' => [ 'Äöü.jpg', true ],
-			'Leading space' => [ ' Foo.jpg', false ],
-			'Trailing space' => [ 'Foo.jpg ', false ],
-			'Not found' => [ 'Foo-NOT-FOUND.jpg', false ],
+			'Should not be empty' => [ '', true ],
+			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg', true ],
+			'Should have extension' => [ 'Foo', 'check-file-type' ],
+			'Extension to short' => [ 'Foo.a', 'check-file-type' ],
+			'This should be good' => [ 'Foo.jpg', null ],
+			'Illegal character: newline' => [ "a\na.jpg", true ],
+			'Illegal character: open square bracket' => [ 'a[a.jpg', 'illegal-file-chars' ],
+			'Illegal character: close square bracket' => [ 'a]a.jpg', 'illegal-file-chars' ],
+			'Illegal character: open curly bracket' => [ 'a{a.jpg', 'illegal-file-chars' ],
+			'Illegal character: close curly bracket' => [ 'a}a.jpg', 'illegal-file-chars' ],
+			'Illegal character: pipe' => [ 'a|a.jpg', 'illegal-file-chars' ],
+			'Illegal character: hash' => [ 'Foo#bar.jpg', 'illegal-file-chars' ],
+			'Illegal character: colon' => [ 'Foo:bar.jpg', 'illegal-file-chars' ],
+			'Illegal character: slash' => [ 'Foo/bar.jpg', 'illegal-file-chars' ],
+			'Illegal character: backslash' => [ 'Foo\bar.jpg', 'illegal-file-chars' ],
+			'Unicode support' => [ 'Äöü.jpg', null ],
+			'Leading space' => [ ' Foo.jpg', true ],
+			'Trailing space' => [ 'Foo.jpg ', true ],
+			'Not found' => [ 'Foo-NOT-FOUND.jpg', true ],
 		];
 	}
 
@@ -153,7 +153,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$value = new StringValue( $fileName );
 		$validators = $this->newValidatorBuilders()->buildMediaValidators();
 
-		$this->assertValidation( $expected, $validators, $value );
+		$this->assertValidationWithMessage( $expected, $validators, $value );
 	}
 
 	public function provideGeoShapeValidation() {
@@ -513,6 +513,31 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			$this->assertEquals( $expected, $result->isValid() );
 		} else {
 			$this->assertEquals( $expected, $result->isValid() );
+		}
+	}
+
+	protected function assertValidationWithMessage( $expected, array $validators, $value ) {
+		$result = Result::newSuccess();
+		foreach ( $validators as $validator ) {
+			$result = $validator->validate( $value );
+
+			if ( !$result->isValid() ) {
+				break;
+			}
+		}
+
+		if ( $expected ) {
+			$errors = $result->getErrors();
+			$this->assertNotEmpty( $errors );
+			foreach ( $errors as $error ) {
+				if ( $error->getCode() == $expected ) {
+					return;
+				}
+			}
+			$this->fail( $errors[0]->getText() );
+
+		} else {
+			$this->assertTrue( $result->isValid() );
 		}
 	}
 
