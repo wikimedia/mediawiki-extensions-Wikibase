@@ -171,6 +171,7 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\UpsertSqlIdGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
@@ -983,10 +984,21 @@ class WikibaseRepo {
 	}
 
 	public function newIdGenerator() : IdGenerator {
-		return new SqlIdGenerator(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$this->getSettings()->getSetting( 'idBlacklist' )
-		);
+		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'old' ) {
+			return new SqlIdGenerator(
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
+				$this->getSettings()->getSetting( 'idBlacklist' )
+			);
+		}
+
+		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'upsert' ) {
+			return new UpsertSqlIdGenerator(
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
+				$this->getSettings()->getSetting( 'idBlacklist' )
+			);
+		}
+
+		throw new InvalidArgumentException( 'idGenerator config option must be either \'old\' or \'upsert\'' );
 	}
 
 	/**

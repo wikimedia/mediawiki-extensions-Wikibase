@@ -322,4 +322,13 @@ return [
 	 */
 	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 0,
 
+	/**
+	 * @note This config options is primarily added for Wikidata transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * @var string 'old' or 'upsert' depending on what implementation of IdGenerator you wish to use.
+	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
+	 */
+	'idGenerator' => 'old',
+
 ];
