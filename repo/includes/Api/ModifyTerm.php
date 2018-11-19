@@ -2,6 +2,9 @@
 
 namespace Wikibase\Repo\Api;
 
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -42,14 +45,35 @@ abstract class ModifyTerm extends ModifyEntity {
 			parent::getAllowedParams(),
 			[
 				'language' => [
+					// TODO inject me
 					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 					self::PARAM_REQUIRED => true,
 				],
 				'value' => [
 					self::PARAM_TYPE => 'string',
 				],
+				'new' => [
+					self::PARAM_TYPE => $this->getEntityTypesWithTerms(),
+				],
 			]
 		);
+	}
+
+	private function getEntityTypesWithTerms() {
+		// TODO inject me
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$supportedEntityTypes = [];
+		foreach ( $this->enabledEntityTypes as $entityType ) {
+			$testEntity = $entityFactory->newEmpty( $entityType );
+			if (
+				$testEntity instanceof LabelsProvider ||
+				$testEntity instanceof DescriptionsProvider ||
+				$testEntity instanceof AliasesProvider
+			) {
+				$supportedEntityTypes[] = $entityType;
+			}
+		}
+		return $supportedEntityTypes;
 	}
 
 }
