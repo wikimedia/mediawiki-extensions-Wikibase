@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "895231bb_d76542d5",
+        "filename": "repo/includes/Api/ApiHelperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-19T13:51:26Z",
+      "side": 1,
+      "message": "use use?",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 63
+      },
+      "revId": "1ffb9aa292e80953d65f641f7448b6f47404fc6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d57e38ce_3a4c39e3",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-19T13:51:26Z",
+      "side": 1,
+      "message": "same use use for pretty looking docs?",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 58
+      },
+      "revId": "1ffb9aa292e80953d65f641f7448b6f47404fc6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47068e1d_83005830",
+        "filename": "repo/includes/Specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-19T13:51:26Z",
+      "side": 1,
+      "message": "usey",
+      "range": {
+        "startLine": 59,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 62
+      },
+      "revId": "1ffb9aa292e80953d65f641f7448b6f47404fc6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36f28db_6ec2df7e",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-19T13:51:26Z",
+      "side": 1,
+      "message": "usey?",
+      "range": {
+        "startLine": 69,
+        "startChar": 11,
+        "endLine": 69,
+        "endChar": 38
+      },
+      "revId": "1ffb9aa292e80953d65f641f7448b6f47404fc6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54b4593_fc399ba8",
+        "filename": "repo/tests/phpunit/includes/MediawikiEditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-11-19T13:51:26Z",
+      "side": 1,
+      "message": "same use thing",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 125,
+        "endChar": 57
+      },
+      "revId": "1ffb9aa292e80953d65f641f7448b6f47404fc6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
