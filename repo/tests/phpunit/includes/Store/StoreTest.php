@@ -44,6 +44,7 @@ class StoreTest extends \MediaWikiTestCase {
 				$this->getMock( EntityIdLookup::class ),
 				$this->getMock( EntityTitleStoreLookup::class ),
 				new EntityNamespaceLookup( [] ),
+				$this->getMock( IdGenerator::class ),
 				$this->getMock( WikibaseServices::class )
 			)
 		];
@@ -93,13 +94,6 @@ class StoreTest extends \MediaWikiTestCase {
 	 */
 	public function testGetLabelConflictFinder( Store $store ) {
 		$this->assertInstanceOf( LabelConflictFinder::class, $store->getLabelConflictFinder() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testNewIdGenerator( Store $store ) {
-		$this->assertInstanceOf( IdGenerator::class, $store->newIdGenerator() );
 	}
 
 	/**
