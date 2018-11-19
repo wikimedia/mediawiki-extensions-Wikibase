@@ -131,16 +131,26 @@
 			mw.config.get( 'wbGeoShapeStorageApiEndpoint' ),
 			mw.config.get( 'wbTabularDataStorageApiEndpoint' )
 		];
+		var hookResults = [];
+		mw.hook( 'wikibase.entityPage.entityView.viewFactoryFactory.required' ).fire(
+			entityNamespace,
+			function(promise) {
+				hookResults.push(promise);
+			}
+		);
 
-		ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
-			&& wb[ entityNamespace ].view.ViewFactoryFactory
-			|| wb.view.ViewFactoryFactory;
+		return $.when.apply($, hookResults).then(function () {
+			ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
+				&& wb[ entityNamespace ].view.ViewFactoryFactory
+				|| wb.view.ViewFactoryFactory;
 
-		viewFactory = ( new ViewFactoryFactory() ).getViewFactory( isEditable(), viewFactoryArguments );
+			viewFactory = ( new ViewFactoryFactory() ).getViewFactory( isEditable(), viewFactoryArguments );
 
-		entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
+			entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
 
-		return entityView.widgetName;
+			return entityView.widgetName;
+		});
+
 	}
 
 	/**
@@ -354,16 +364,17 @@
 		var canEdit = isEditable();
 
 		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().done( function ( entity ) {
-			var viewName = createEntityView( entity, $entityview.first() );
+			var viewNamePromise = createEntityView( entity, $entityview.first() );
+			viewNamePromise.then(function ( viewName ) {
+				if ( canEdit ) {
+					attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
+					attachWatchLinkUpdater( $entityview, viewName );
+				}
 
-			if ( canEdit ) {
-				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
-				attachWatchLinkUpdater( $entityview, viewName );
-			}
+				mw.hook( 'wikibase.entityPage.entityView.rendered' ).fire();
 
-			mw.hook( 'wikibase.entityPage.entityView.rendered' ).fire();
-
-			mwPerformance.mark( 'wbInitEnd' );
+				mwPerformance.mark( 'wbInitEnd' );
+			});
 		} );
 
 		if ( canEdit ) {
