@@ -93,7 +93,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $invokeCount
 	 * @param Status|null $hookReturn
 	 *
-	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
+	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner(
 		$invokeCount = null,

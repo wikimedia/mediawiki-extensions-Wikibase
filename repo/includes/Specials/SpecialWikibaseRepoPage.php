@@ -56,7 +56,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param \Wikibase\Repo\EditEntity\MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$title,

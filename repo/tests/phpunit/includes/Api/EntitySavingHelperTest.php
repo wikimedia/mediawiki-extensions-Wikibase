@@ -66,7 +66,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	/**
 	 * @param int|null $calls
 	 *
-	 * @return \Wikibase\Repo\EditEntity\EditEntity
+	 * @return EditEntity
 	 */
 	private function getMockEditEntity( $calls ) {
 		$mock = $this->getMock( EditEntity::class );

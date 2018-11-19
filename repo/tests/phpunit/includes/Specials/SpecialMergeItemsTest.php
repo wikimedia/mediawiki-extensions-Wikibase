@@ -86,7 +86,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
+	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
