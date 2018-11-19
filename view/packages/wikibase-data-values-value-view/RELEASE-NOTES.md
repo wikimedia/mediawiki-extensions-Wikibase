@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.22.4 (2018-11-19)
+
+* Re-render "globecoordinate" values for preview.
+
 ## 0.22.3 (2018-11-08)
 
 * Updated some deprecated `jQuery.expr` statements.
