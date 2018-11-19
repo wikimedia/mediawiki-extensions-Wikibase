@@ -120,9 +120,9 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 * @param User|null $user
 	 * @param bool $baseRevId
 	 * @param bool[]|null $permissions map of actions to bool, indicating which actions are allowed.
-	 * @param \Wikibase\Repo\EditEntity\EditFilterHookRunner|null $editFilterHookRunner
+	 * @param EditFilterHookRunner|null $editFilterHookRunner
 	 *
-	 * @return \Wikibase\Repo\EditEntity\MediawikiEditEntity
+	 * @return MediawikiEditEntity
 	 */
 	private function makeEditEntity(
 		MockRepository $mockRepository,

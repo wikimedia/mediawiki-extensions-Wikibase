@@ -93,7 +93,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
+	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner() {
 		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
