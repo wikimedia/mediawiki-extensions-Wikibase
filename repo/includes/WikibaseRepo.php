@@ -10,6 +10,7 @@ use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
@@ -164,6 +165,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\SettingsArray;
+use Wikibase\SqlIdGenerator;
 use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
@@ -980,6 +982,13 @@ class WikibaseRepo {
 		return $this->settings;
 	}
 
+	public function newIdGenerator() : IdGenerator {
+		return new SqlIdGenerator(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			$this->getSettings()->getSetting( 'idBlacklist' )
+		);
+	}
+
 	/**
 	 * @return Store
 	 */
@@ -992,6 +1001,7 @@ class WikibaseRepo {
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
+				$this->newIdGenerator(),
 				$this->getWikibaseServices()
 			);
 		}
