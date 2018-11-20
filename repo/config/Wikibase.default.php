@@ -313,7 +313,7 @@ return [
 	 * be rendered using ItemIdHtmlLinkFormatter.
 	 *
 	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
-	 *       Should be removed not later than 31-09-2018. Do not use it.
+	 *       Do not use it.
 	 *
 	 * @var int
 	 * @see https://phabricator.wikimedia.org/T196882
