@@ -165,7 +165,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 			->loadProfile( self::WIKIBASE_PREFIX_QUERY_BUILDER, self::CONTEXT_WIKIBASE_PREFIX );
 
 		$dismax = new DisMax();
-		$dismax->setTieBreaker( 0 );
+		$dismax->setTieBreaker( $profile['tie-breaker'] ?? 0 );
 
 		$fields = [
 			[ "labels.{$languageCode}.near_match", $profile['lang-exact'] ],
@@ -222,7 +222,10 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$labelsQuery = new BoolQuery();
 		$labelsQuery->addFilter( $labelsFilter );
 		$labelsQuery->addShould( $dismax );
-		$titleMatch = new Term( [ 'title.keyword' => EntitySearchUtils::normalizeId( $text, $this->idParser ) ] );
+		$titleMatch = new Term( [ 'title.keyword' => [
+			'value' => EntitySearchUtils::normalizeId( $text, $this->idParser ),
+			'boost' => $profile['title-exact'] ?? 1,
+		] ] );
 
 		// Match either labels or exact match to title
 		$query->addShould( $labelsQuery );
