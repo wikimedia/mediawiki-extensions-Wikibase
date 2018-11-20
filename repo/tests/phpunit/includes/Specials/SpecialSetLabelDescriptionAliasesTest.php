@@ -22,7 +22,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Store\EntityPermissionChecker;

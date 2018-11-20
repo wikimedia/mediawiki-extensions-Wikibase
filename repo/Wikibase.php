@@ -65,6 +65,7 @@ require_once __DIR__  . '/autoload.php';
 class_alias( \Wikibase\Repo\EditEntity\EditEntity::class, 'Wikibase\EditEntity' );
 class_alias( \Wikibase\Repo\EditEntity\MediawikiEditEntity::class, 'Wikibase\MediawikiEditEntity' );
 class_alias( \Wikibase\Repo\EditEntity\MediawikiEditEntityFactory::class, 'Wikibase\EditEntityFactory' );
+class_alias( \Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner::class, 'Wikibase\Repo\Hooks\EditFilterHookRunner' );
 
 // Nasty hack: part of repo relies on classes defined in Client! load it if in repo-only mode
 if ( !defined( 'WBC_VERSION' ) ) {

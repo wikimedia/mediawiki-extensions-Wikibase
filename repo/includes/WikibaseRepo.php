@@ -100,6 +100,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
@@ -136,7 +137,7 @@ use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -765,7 +766,7 @@ class WikibaseRepo {
 	 * @return EditFilterHookRunner
 	 */
 	private function newEditFilterHookRunner( IContextSource $context ) {
-		return new EditFilterHookRunner(
+		return new MediawikiEditFilterHookRunner(
 			$this->getEntityNamespaceLookup(),
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),

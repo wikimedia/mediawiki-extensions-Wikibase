@@ -19,7 +19,7 @@ use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
 
@@ -120,7 +120,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 * @param User|null $user
 	 * @param bool $baseRevId
 	 * @param bool[]|null $permissions map of actions to bool, indicating which actions are allowed.
-	 * @param EditFilterHookRunner|null $editFilterHookRunner
+	 * @param \Wikibase\Repo\EditEntity\EditFilterHookRunner|null $editFilterHookRunner
 	 *
 	 * @return \Wikibase\Repo\EditEntity\MediawikiEditEntity
 	 */

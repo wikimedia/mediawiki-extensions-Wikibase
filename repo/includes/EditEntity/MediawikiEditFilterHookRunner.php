@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Hooks;
+namespace Wikibase\Repo\EditEntity;
 
 use DerivativeContext;
 use Hooks;
@@ -20,12 +20,12 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use WikiPage;
 
 /**
- * Class to run the EditFilterMergedContent hook
+ * Class to run the Mediawiki EditFilterMergedContent hook.
  *
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class EditFilterHookRunner {
+class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 
 	/**
 	 * @var EntityNamespaceLookup

@@ -10,7 +10,6 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
@@ -109,8 +108,11 @@ class MediawikiEditEntityFactory {
 				$this->entityPatcher,
 				$entityId,
 				$user,
-				// TODO introduce EditStatCollectingEditFilterHookRunner
-				$this->editFilterHookRunner,
+				new StatsdTimeRecordingEditFilterHookRunner(
+					$this->editFilterHookRunner,
+					$this->stats,
+					$statsTimingPrefix . '.EditFilterHookRunner'
+				),
 				$baseRevId,
 				$allowMasterConnection
 			),
