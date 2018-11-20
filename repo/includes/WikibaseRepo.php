@@ -1719,7 +1719,8 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
 			$this->getEntityPatcher(),
-			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() )
+			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
+			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 	}
 

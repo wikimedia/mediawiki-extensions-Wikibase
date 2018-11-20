@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
+use NullStatsdDataFactory;
 use Site;
 use SiteLookup;
 use Status;
@@ -171,7 +172,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			)
 		);
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\EditEntity;
 
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -53,6 +54,11 @@ class MediawikiEditEntityFactory {
 	 */
 	private $editFilterHookRunner;
 
+	/**
+	 * @var StatsdDataFactoryInterface
+	 */
+	private $stats;
+
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,
@@ -60,7 +66,8 @@ class MediawikiEditEntityFactory {
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
-		EditFilterHookRunner $editFilterHookRunner
+		EditFilterHookRunner $editFilterHookRunner,
+		StatsdDataFactoryInterface $statsdDataFactory
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -69,6 +76,7 @@ class MediawikiEditEntityFactory {
 		$this->entityDiffer = $entityDiffer;
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->stats = $statsdDataFactory;
 	}
 
 	/**
@@ -90,18 +98,24 @@ class MediawikiEditEntityFactory {
 		$baseRevId = false,
 		$allowMasterConnection = true
 	) {
-		return new MediawikiEditEntity(
-			$this->titleLookup,
-			$this->entityRevisionLookup,
-			$this->entityStore,
-			$this->permissionChecker,
-			$this->entityDiffer,
-			$this->entityPatcher,
-			$entityId,
-			$user,
-			$this->editFilterHookRunner,
-			$baseRevId,
-			$allowMasterConnection
+		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
+		return new StatsdSaveTimeRecordingEditEntity(
+			new MediawikiEditEntity( $this->titleLookup,
+				$this->entityRevisionLookup,
+				// TODO introduce EditStatCollectingEntityStore
+				$this->entityStore,
+				$this->permissionChecker,
+				$this->entityDiffer,
+				$this->entityPatcher,
+				$entityId,
+				$user,
+				// TODO introduce EditStatCollectingEditFilterHookRunner
+				$this->editFilterHookRunner,
+				$baseRevId,
+				$allowMasterConnection
+			),
+			$this->stats,
+			$statsTimingPrefix . '.EditEntity'
 		);
 	}
 
