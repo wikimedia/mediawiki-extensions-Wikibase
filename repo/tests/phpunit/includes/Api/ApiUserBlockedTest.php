@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
 use Block;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 
@@ -21,6 +22,8 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 	private $block;
 
 	protected function setUp() {
+		global $wgWBRepoSettings;
+
 		parent::setUp();
 
 		$testuser = self::getTestUser()->getUser();
@@ -30,6 +33,12 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			'by' => $testuser->getId(),
 		] );
 		$this->block->insert();
+
+		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
+		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
+
 		$this->initTestEntities( [ 'StringProp', 'Berlin', 'Oslo' ] );
 	}
 
