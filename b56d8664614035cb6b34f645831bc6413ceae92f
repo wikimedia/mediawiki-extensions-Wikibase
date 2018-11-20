@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96d8da10_aa3bc393",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-11-20T12:14:21Z",
+      "side": 1,
+      "message": "repeated before. Does it refer to another thing?",
+      "range": {
+        "startLine": 98,
+        "startChar": 67,
+        "endLine": 98,
+        "endChar": 78
+      },
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46cc29a0_f2c948f0",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-11-20T12:14:21Z",
+      "side": 1,
+      "message": "This is way outside of scope of this patch but I rather like name of this method to be getInsertId() cause for a couple of minutes I thought it\u0027s going to insert something (and method names should start with verb anyway)",
+      "range": {
+        "startLine": 108,
+        "startChar": 19,
+        "endLine": 108,
+        "endChar": 27
+      },
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7095661_271bad3e",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-11-20T12:14:21Z",
+      "side": 1,
+      "message": "Isn\u0027t it just possible to do `id_value \u003d id_value + 1`? I looked at this manual and couldn\u0027t come up with any reason we should use it: https://mariadb.com/kb/en/library/last_insert_id/",
+      "range": {
+        "startLine": 133,
+        "startChar": 17,
+        "endLine": 133,
+        "endChar": 31
+      },
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
