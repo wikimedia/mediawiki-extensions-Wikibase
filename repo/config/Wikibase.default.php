@@ -308,6 +308,13 @@ return [
 	// DB group to use in dump maintenance scripts. Defaults to "dump", per T147169.
 	'dumpDBDefaultGroup' => 'dump',
 
+	// the special group includes all the sites in the specialSiteLinkGroups,
+	// grouped together in a 'Pages linked to other sites' section.
+	'siteLinkGroups' => [],
+
+	// these are the site_group codes as listed in the sites table
+	'specialSiteLinkGroups' => [],
+
 	/**
 	 * Upper inclusive range bound of Q-ID. Html links for Item IDs that within this range will
 	 * be rendered using ItemIdHtmlLinkFormatter.
