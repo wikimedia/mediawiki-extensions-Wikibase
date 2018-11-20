@@ -90,7 +90,7 @@ class EditEntityFactory {
 		$baseRevId = false,
 		$allowMasterConnection = true
 	) {
-		return new EditEntity(
+		return new MediawikiEditEntity(
 			$this->titleLookup,
 			$this->entityRevisionLookup,
 			$this->entityStore,

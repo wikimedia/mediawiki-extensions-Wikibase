@@ -69,9 +69,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EditEntity
 	 */
 	private function getMockEditEntity( $calls ) {
-		$mock = $this->getMockBuilder( EditEntity::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->getMock( EditEntity::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'attemptSave' )
 			->will( $this->returnValue( Status::newGood() ) );
