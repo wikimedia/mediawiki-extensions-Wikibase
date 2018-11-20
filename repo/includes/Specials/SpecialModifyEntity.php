@@ -11,7 +11,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -45,14 +45,14 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
+	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$title,
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct(
 			$title,

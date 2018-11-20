@@ -11,8 +11,8 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditEntity;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -35,7 +35,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	private $summaryFormatter;
 
 	/**
-	 * @var EditEntityFactory
+	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -43,7 +43,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * Flags to pass to EditEntity::attemptSave; This is set by loadEntity() to EDIT_NEW
 	 * for new entities, and EDIT_UPDATE for existing entities.
 	 *
-	 * @see EditEntity::attemptSave
+	 * @see \Wikibase\Repo\EditEntity\EditEntity::attemptSave
 	 * @see WikiPage::doEditContent
 	 *
 	 * @var int
@@ -81,7 +81,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $apiModule, $idParser, $entityRevisionLookup, $errorReporter );
 
