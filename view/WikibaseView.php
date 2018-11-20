@@ -76,6 +76,7 @@ $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoade
 			'dependencies' => [
 				'wikibase',
 			],
+			'targets' => [ 'desktop', 'mobile' ]
 		],
 	];
 

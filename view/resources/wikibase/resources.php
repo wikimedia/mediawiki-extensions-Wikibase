@@ -51,7 +51,9 @@ return call_user_func( function() {
 			],
 			'targets' => 'mobile',
 			'dependencies' => [
-				'wikibase.termbox.styles'
+				'wikibase.termbox.styles',
+				'wikibase.getLanguageNameByCode',
+				'wikibase.entityPage.entityLoaded',
 			]
 		],
 
