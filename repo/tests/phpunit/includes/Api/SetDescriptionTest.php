@@ -42,6 +42,29 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		self::$hasSetup = true;
 	}
 
+	public function testGetAllowedParams_listsItemsAndProperties() {
+		list( $result, ) = $this->doApiRequest(
+			[
+				'action' => 'paraminfo',
+				'modules' => self::$testAction,
+			]
+		);
+		$apiParams = $result['paraminfo']['modules'][0]['parameters'];
+
+		$completedAssertions = false;
+		foreach ( $apiParams as $paramDetails ) {
+			if ( $paramDetails['name'] === 'new' ) {
+				$this->assertContains( 'item', $paramDetails['type'] );
+				$this->assertContains( 'property', $paramDetails['type'] );
+				$completedAssertions = true;
+			}
+		}
+
+		if ( !$completedAssertions ) {
+			$this->fail( 'Failed to find and verify \'new\' parameter docs for wbsetlabel' );
+		}
+	}
+
 	/**
 	 * @dataProvider provideData
 	 */
