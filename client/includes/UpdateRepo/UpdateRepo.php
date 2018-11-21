@@ -6,6 +6,7 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Title;
 use User;
@@ -47,6 +48,11 @@ abstract class UpdateRepo {
 	protected $title;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var EntityId|null|bool
 	 */
 	private $entityId = false;
@@ -54,6 +60,7 @@ abstract class UpdateRepo {
 	/**
 	 * @param string $repoDB IDatabase name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param LoggerInterface $logger
 	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $title Title in the client that has been changed
@@ -61,12 +68,14 @@ abstract class UpdateRepo {
 	public function __construct(
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
+		LoggerInterface $logger,
 		User $user,
 		$siteId,
 		Title $title
 	) {
 		$this->repoDB = $repoDB;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->logger = $logger;
 		$this->user = $user;
 		$this->siteId = $siteId;
 		$this->title = $title;
@@ -85,9 +94,11 @@ abstract class UpdateRepo {
 			);
 
 			if ( $this->entityId === null ) {
-				wfDebugLog(
-					'UpdateRepo',
-					"Couldn't find an item for {$this->title->getPrefixedText()}"
+				$this->logger->debug(
+					'Could not find an item for "{titleText}"',
+					[
+						'titleText' => $this->title->getPrefixedText()
+					]
 				);
 			}
 		}

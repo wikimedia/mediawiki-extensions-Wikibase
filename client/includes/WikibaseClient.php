@@ -562,6 +562,7 @@ final class WikibaseClient {
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode(),
+				// XXX: This should probably just use the "wikibase" log channel and LoggerInterface::debug
 				LoggerFactory::getInstance( 'wikibase-debug' )
 			);
 		}
@@ -766,8 +767,14 @@ final class WikibaseClient {
 
 			$this->site = $this->siteLookup->getSite( $globalId );
 
+			// Todo inject me
+			$logger = LoggerFactory::getInstance( 'Wikibase' );
+
 			if ( !$this->site ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
+				$logger->debug(
+					'{method}:  Unable to resolve site ID {globalId}!',
+					[ 'method' => __METHOD__, 'globalId' => $globalId ]
+				);
 
 				$this->site = new MediaWikiSite();
 				$this->site->setGlobalId( $globalId );
@@ -776,9 +783,15 @@ final class WikibaseClient {
 			}
 
 			if ( !in_array( $localId, $this->site->getLocalIds() ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__
-					. ": The configured local id $localId does not match any local ID of site $globalId: "
-					. var_export( $this->site->getLocalIds(), true ) );
+				$logger->debug(
+					'{method}: The configured local id {localId} does not match any local IDs of site {globalId}: {localIds}',
+					[
+						'method' => __METHOD__,
+						'localId' => $localId,
+						'globalId' => $globalId,
+						'localIds' => json_encode( $this->site->getLocalIds() )
+					]
+				);
 			}
 		}
 
@@ -1186,10 +1199,13 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
+		$logger = LoggerFactory::getInstance( 'wikibase' );
+
 		$pageUpdater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
 			$this->getRecentChangeFactory(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$logger,
 			$this->getStore()->getRecentChangesDuplicateDetector(),
 			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
@@ -1200,6 +1216,7 @@ final class WikibaseClient {
 		$changeListTransformer = new ChangeRunCoalescer(
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getEntityChangeFactory(),
+			$logger,
 			$this->settings->getSetting( 'siteGlobalID' )
 		);
 
@@ -1209,6 +1226,7 @@ final class WikibaseClient {
 			$pageUpdater,
 			$changeListTransformer,
 			$this->siteLookup,
+			$logger,
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);
 	}

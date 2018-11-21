@@ -8,6 +8,7 @@ use Job;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PHPUnit_Framework_MockObject_MockObject;
+use Psr\Log\NullLogger;
 use MediaWiki\MediaWikiServices;
 use RefreshLinksJob;
 use Title;
@@ -163,6 +164,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			new NullLogger(),
 			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
 				'WebCache.jobs' => 2, // 2 batches (batch size 2, 3 titles)
@@ -220,6 +222,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			new NullLogger(),
 			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
 				'RefreshLinks.jobs' => 3, // no batching
@@ -280,6 +283,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			$jobQueueGroup,
 			$this->getRCFactoryMock(),
 			$this->getLBFactoryMock(),
+			new NullLogger(),
 			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
 				// FIXME: Because of the hot fix for T177707 we expect only the first batch.

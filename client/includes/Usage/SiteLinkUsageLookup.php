@@ -4,6 +4,8 @@ namespace Wikibase\Client\Usage;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Traversable;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -36,6 +38,11 @@ class SiteLinkUsageLookup implements UsageLookup {
 	private $titleFactory;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param string $clientSiteId The local wiki's global site id
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param TitleFactory $titleFactory
@@ -50,6 +57,9 @@ class SiteLinkUsageLookup implements UsageLookup {
 		$this->clientSiteId = $clientSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->titleFactory = $titleFactory;
+
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'WikibaseChangeNotification' );
 	}
 
 	/**
@@ -137,8 +147,13 @@ class SiteLinkUsageLookup implements UsageLookup {
 				$pageId = $title->getArticleID();
 
 				if ( $pageId === 0 ) {
-					wfDebugLog( 'WikibaseChangeNotification', __METHOD__ . ': Article ID for '
-						. $title->getFullText() . ' is 0.' );
+					$this->logger->debug(
+						'{method}: Article ID for {titleText} is 0.',
+						[
+							'method' => __METHOD__,
+							'titleText' => $title->getFullText()
+						]
+					);
 
 					return null;
 				}
