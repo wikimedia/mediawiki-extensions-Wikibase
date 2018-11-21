@@ -107,7 +107,8 @@ return call_user_func( function() {
 		'wikibase.entityPage.entityLoaded' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.entityPage.entityLoaded.js',
-			]
+			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.EntityInitializer' => $moduleTemplate + [
