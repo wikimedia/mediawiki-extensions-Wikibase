@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
 use Exception;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Wikibase\Change;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
@@ -35,6 +36,11 @@ class ChangeRunCoalescer {
 	private $changeFactory;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var string
 	 */
 	private $localSiteId;
@@ -42,15 +48,18 @@ class ChangeRunCoalescer {
 	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityChangeFactory $changeFactory
+	 * @param LoggerInterface $logger
 	 * @param string $localSiteId
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityChangeFactory $changeFactory,
+		LoggerInterface $logger,
 		$localSiteId
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->changeFactory = $changeFactory;
+		$this->logger = $logger;
 		$this->localSiteId = $localSiteId;
 	}
 
@@ -73,9 +82,14 @@ class ChangeRunCoalescer {
 		}
 
 		usort( $coalesced, [ $this, 'compareChangesByTimestamp' ] );
-
-		wfDebugLog( __CLASS__, __METHOD__ . ': coalesced '
-			. count( $changes ) . ' into ' . count( $coalesced ) . ' changes' );
+		$this->logger->debug(
+			'{method}: coalesced {changeCount} into {changeCoalescedCount} changes',
+			[
+				'method' => __METHOD__,
+				'changeCount' => count( $changes ),
+				'changeCoalescedCount' => count( $coalesced ),
+			]
+		);
 
 		return $coalesced;
 	}

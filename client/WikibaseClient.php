@@ -201,7 +201,7 @@ call_user_func( function() {
 
 		$job->setRecentChangesDuplicateDetector( $wbServices->getStore()->getRecentChangesDuplicateDetector() );
 
-		$job->setLogger( MediaWiki\Logger\LoggerFactory::getInstance( 'wikibase.client.pageupdates' ) );
+		$job->setLogger( $wbServices->getLogger() );
 		$job->setStats( $mwServices->getStatsdDataFactory() );
 
 		return $job;
