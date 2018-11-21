@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "365c7a36_4e3c9ef4",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-21T17:10:15Z",
+      "side": 1,
+      "message": "I don\u0027t think you meant to include this new message in this patch",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 89
+      },
+      "revId": "277c8e9fabcdf2e90573936121c5ac2dac7d7427",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
