@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49b8c76a_20b54397",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-21T17:20:48Z",
+      "side": 1,
+      "message": "ooh, you also added it here ;)\nBut I can remove this!",
+      "range": {
+        "startLine": 168,
+        "startChar": 32,
+        "endLine": 168,
+        "endChar": 36
+      },
+      "revId": "3b3b350be36a5a3eab751872d7c4bd3c15dd33f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
