@@ -5,6 +5,7 @@ namespace Wikibase\Client\Changes;
 use HTMLCacheUpdateJob;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use Psr\Log\LoggerInterface;
 use RefreshLinksJob;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -39,6 +40,11 @@ class WikiPageUpdater implements PageUpdater {
 	private $LBFactory;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var int Batch size for UpdateHtmlCacheJob
 	 */
 	private $purgeCacheBatchSize = 300;
@@ -62,6 +68,7 @@ class WikiPageUpdater implements PageUpdater {
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param RecentChangeFactory $recentChangeFactory
 	 * @param LBFactory $LBFactory
+	 * @param LoggerInterface $logger
 	 * @param RecentChangesDuplicateDetector|null $recentChangesDuplicateDetector
 	 * @param StatsdDataFactoryInterface|null $stats
 	 */
@@ -69,12 +76,14 @@ class WikiPageUpdater implements PageUpdater {
 		JobQueueGroup $jobQueueGroup,
 		RecentChangeFactory $recentChangeFactory,
 		LBFactory $LBFactory,
+		LoggerInterface $logger,
 		RecentChangesDuplicateDetector $recentChangesDuplicateDetector = null,
 		StatsdDataFactoryInterface $stats = null
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->recentChangeFactory = $recentChangeFactory;
 		$this->LBFactory = $LBFactory;
+		$this->logger = $logger;
 		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
 		$this->stats = $stats;
 	}
@@ -162,8 +171,13 @@ class WikiPageUpdater implements PageUpdater {
 		$cause = [ 'causeAction' => $causeAction, 'causeAgent' => $causeAgent ];
 		/** @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling HTMLCacheUpdateJob for "
-				. count( $batch ) . " titles" );
+			$this->logger->debug(
+				'{method}: scheduling HTMLCacheUpdateJob for {pageCount} titles',
+				[
+					'method' => __METHOD__,
+					'pageCount' => count( $batch ),
+				]
+			);
 
 			$jobs[] = new HTMLCacheUpdateJob(
 				$dummyTitle, // the title will be ignored because the 'pages' parameter is set.
@@ -245,8 +259,13 @@ class WikiPageUpdater implements PageUpdater {
 
 		/** @var Title[] $batch */
 		foreach ( $titleBatches as $batch ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": scheduling InjectRCRecords for "
-				. count( $batch ) . " titles" );
+			$this->logger->debug(
+				'{method}: scheduling InjectRCRecords for {pageCount} titles',
+				[
+					'method' => __METHOD__,
+					'pageCount' => count( $batch ),
+				]
+			);
 
 			$jobs[] = InjectRCRecordsJob::makeJobSpecification( $batch, $change, $rootJobParams );
 			$titleCount += count( $batch );
