@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7ee6f22f_03f984b0",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-11-21T23:43:42Z",
+      "side": 1,
+      "message": "Can this race condition be elaborated on? I\u0027m not sure what scenario this describing (for INSERT ON DUPLICATE KEY UPDATE).",
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96d8da10_aa3bc393",
         "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
         "patchSetId": 3
