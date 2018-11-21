@@ -338,6 +338,7 @@
 	"wikibase-api-cant-redirect": "לא ניתן ליצור הפניה (אולי בגלל שהפניות בין סוגים כאלה של ישויות אינן נתמכות כלל).",
 	"wikibase-self-conflict-patched": "העריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה ודרסה כמה ששינויי־הביניים שעשית.",
 	"wikibase-conflict-patched": "עריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה.",
+	"wikibase-save-unresolved-redirect": "נמצאה הפניה בלתי־פתורה מ־$1 ל־$2 בזמן הניסוי לשמור שינוי.",
 	"wikibase-restoreold": "איפוס",
 	"wikibase-entity-summary-restore": "שחזור גרסה $3 מאת [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "ביטול גרסה $3 של [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|שיחה]])",

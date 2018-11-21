@@ -25,5 +25,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دَییشیکلیگی",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} دَییشدیرمه‌لری",
 	"wikibase-otherprojects": "آیری پروژه‌لرده",
+	"notification-header-page-connection": "<strong>$3</strong> صفحه‌سی {{PLURAL:$4|-1=a {{WBREPONAME}} آیتمینه| {{WBREPONAME}} آیتمینه$4}} {{GENDER:$2|باغلاندی}}.",
 	"notification-link-text-view-item": "آیتمه {{GENDER:$1|باخ}}"
 }

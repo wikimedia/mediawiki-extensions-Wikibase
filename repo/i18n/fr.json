@@ -380,6 +380,7 @@
 	"wikibase-api-cant-redirect": "Impossible de créer la redirection (peut-être parce que les redirections entre cette sorte d’entité ne sont pas du tout permises).",
 	"wikibase-self-conflict-patched": "Votre modification a été intégrée dans la dernière version, écrasant certaines de vos corrections intermédiaires.",
 	"wikibase-conflict-patched": "Votre modification a été intégrée dans la dernière version.",
+	"wikibase-save-unresolved-redirect": "Redirection non résolue rencontrée de $1 vers $2 en essayant d’enregistrer une modification.",
 	"wikibase-restoreold": "restaurer",
 	"wikibase-entity-summary-restore": "Restauration de la révision $3 par [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Annulation de la révision $3 par [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",

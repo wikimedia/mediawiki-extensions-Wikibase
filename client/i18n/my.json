@@ -45,5 +45,6 @@
 	"wikibase-pageinfo-entity-usage-D": "ဖော်ပြချက်များ အချို့",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "ဖော်ပြချက်: $1",
 	"wikibase-pageinfo-entity-usage-T": "ခေါင်းစဉ်",
-	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်"
+	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်",
+	"connected-redirect-category": "{{WBREPONAME}} item တစ်ခုသို့ ချိတ်ဆက်ထားသော ပြန်ညွှန်းများ"
 }

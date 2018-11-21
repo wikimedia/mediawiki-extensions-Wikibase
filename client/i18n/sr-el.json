@@ -70,6 +70,7 @@
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovu podataka iz Vikibaze.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s Vikipodacima",
 	"echo-pref-tooltip-wikibase-action": "Obaveštava vas kada neko poveže stranicu koju ste napravili na stavku Vikipodataka.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> i {{PLURAL:$4|jedna druga stranica je povezana|$4 druge stranice su povezane|$4 drugih stranica je povezano}} sa stavkom projekta {{WBREPONAME}}.",
 	"connected-redirect-category": "Preusmerenja koja su povezana na Vikipodatke",
 	"connected-redirect-category-desc": "Ova kategorija prikazuje listu preusmerenih stranica koje su povezane na Vikipodacima."
 }
