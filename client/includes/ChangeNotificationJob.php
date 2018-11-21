@@ -3,6 +3,8 @@
 namespace Wikibase\Client;
 
 use Job;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Title;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\EntityChange;
@@ -27,6 +29,11 @@ class ChangeNotificationJob extends Job {
 	 * @var ChangeHandler|null
 	 */
 	private $changeHandler = null;
+
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
 
 	/**
 	 * Constructs a ChangeNotificationJob representing the changes given by $changeIds.
@@ -54,6 +61,9 @@ class ChangeNotificationJob extends Job {
 			'$params',
 			'$params[\'changeIds\'] not set or not an array.'
 		);
+
+		// TODO inject me
+		$this->logger = WikibaseClient::getDefaultInstance()->getLogger();
 	}
 
 	/**
@@ -68,15 +78,27 @@ class ChangeNotificationJob extends Job {
 			$params = $this->getParams();
 			$ids = $params['changeIds'];
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": loading " . count( $ids ) . " changes." );
+			$this->logger->debug(
+				"{method}: loading {idCount} changes.",
+				[
+					'method' => __METHOD__,
+					'idCount' => count( $ids ),
+				]
+			);
 
 			// load actual change records from the changes table
 			// TODO: allow mock store for testing!
 			$changeLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityChangeLookup();
 			$this->changes = $changeLookup->loadByChangeIds( $ids );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": loaded " . count( $this->changes )
-				. " of " . count( $ids ) . " changes." );
+			$this->logger->debug(
+				"{method}: loaded {changeCount} of {idCount} changes.",
+				[
+					'method' => __METHOD__,
+					'changeCount' => count( $this->changes ),
+					'idCount' => count( $ids ),
+				]
+			);
 
 			if ( count( $this->changes ) != count( $ids ) ) {
 				trigger_error( "Number of changes loaded mismatches the number of change IDs provided: "
@@ -100,14 +122,21 @@ class ChangeNotificationJob extends Job {
 
 		if ( $changes ) {
 			/** @var EntityChange $last */
-			$n = count( $changes );
+			$changeCount = count( $changes );
 			$last = end( $changes );
 
-			wfDebugLog( __CLASS__, __METHOD__ . ": processed $n notifications, "
-						. "up to " . $last->getId() . ", timestamp " . $last->getTime() . "; "
-						. "Lag is " . $last->getAge() . " seconds." );
+			$this->logger->debug(
+				"{method}: processed {changeCount} notifications, up to {lastChange}, timestamp {lastTime}; Lag is {lastAge} seconds.",
+				[
+					'method' => __METHOD__,
+					'changeCount' => $changeCount,
+					'lastChange' => $last->getId(),
+					'lastTime' => $last->getTime(),
+					'lastAge' => $last->getAge(),
+				]
+			);
 		} else {
-			wfDebugLog( __CLASS__, __METHOD__ . ": processed no notifications." );
+			$this->logger->debug( '{method}: processed no notifications.', [ 'method' => __METHOD__ ] );
 		}
 
 		return true;
