@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use stdClass;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -36,6 +38,11 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private $pageTableEntityQuery;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var string
 	 */
 	private $repositoryName;
@@ -57,6 +64,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->repositoryName = $repositoryName;
+
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'wikibase' );
 	}
 
 	/**
@@ -124,8 +134,14 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
 			// Try loading from master, unless the caller only wants replica data.
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
-				. " with $revisionId from DB_MASTER." );
+			$this->logger->debug(
+				'{method}: try to load {entityId} with {revisionId} from DB_MASTER.',
+				[
+					'method' => __METHOD__,
+					'entityId' => $entityId,
+					'revisionId' => $revisionId,
+				]
+			);
 
 			$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_MASTER );
 		}
@@ -241,7 +257,14 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$join = [];
 		$join['page'] = [ 'INNER JOIN', 'rev_page=page_id' ];
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
+		$this->logger->debug(
+			'{method}: Looking up revision {revisionId} of {entityId}.',
+			[
+				'method' => __METHOD__,
+				'revisionId' => $revisionId,
+				'entityId' => $entityId,
+			]
+		);
 
 		$fields = $this->selectFields();
 

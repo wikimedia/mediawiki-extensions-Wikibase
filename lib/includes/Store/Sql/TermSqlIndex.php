@@ -4,8 +4,10 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Traversable;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -59,6 +61,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $entityIdParser;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var bool
 	 */
 	private $useSearchFields = true;
@@ -96,6 +103,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdParser = $entityIdParser;
 		$this->tableName = 'wb_terms';
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'wikibase' );
 	}
 
 	/**
@@ -157,7 +166,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$termsToDelete = array_udiff( $oldTerms, $newTerms, [ TermIndexEntry::class, 'compare' ] );
 
 		if ( !$termsToInsert && !$termsToDelete ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': terms did not change, returning.' );
+			$this->logger->debug(
+				'{method}: Terms did not change, returning.',
+				[
+					'method' => __METHOD__,
+				]
+			);
+
 			return true;
 		}
 
@@ -165,12 +180,26 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$dbw = $this->getConnection( DB_MASTER );
 
 		if ( $ok && $termsToDelete ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . count( $termsToDelete ) . ' terms to delete.' );
+			$this->logger->debug(
+				'{method}: {termsToDeleteCount} terms to delete.',
+				[
+					'method' => __METHOD__,
+					'termsToDeleteCount' => count( $termsToDelete ),
+				]
+			);
+
 			$ok = $this->deleteTerms( $entity->getId(), $termsToDelete, $dbw );
 		}
 
 		if ( $ok && $termsToInsert ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . count( $termsToInsert ) . ' terms to insert.' );
+			$this->logger->debug(
+				'{method}: {termsToInsertCount} terms to insert.',
+				[
+					'method' => __METHOD__,
+					'termsToInsertCount' => count( $termsToInsert ),
+				]
+			);
+
 			$ok = $this->insertTerms( $entity, $termsToInsert, $dbw );
 		}
 
@@ -212,7 +241,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$entityIdentifiers['term_weight'] = $this->getWeight( $entity );
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
+		$this->logger->debug(
+			'{method}: inserting terms for {entityId}',
+			[
+				'method' => __METHOD__,
+				'entityId' => $entity->getId()->getSerialization(),
+			]
+		);
 
 		$success = true;
 		foreach ( $terms as $term ) {
@@ -251,11 +286,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		);
 
 		if ( $hasRow ) {
-			wfDebugLog(
-				'TermSqlIndex-duplicate',
-				'Attempted to insert duplicate Term into ' . $this->tableName .
-					' for ' . $term->getEntityId()->getSerialization() . ': ' . implode( ', ', $fields )
+			$this->logger->debug(
+				'{method}: Attempted to insert duplicate Term into {tableName} for {entityId}: {fields}',
+				[
+					'method' => __METHOD__,
+					'tableName' => $this->tableName,
+					'entityId' => $term->getEntityId()->getSerialization(),
+					'fields' => implode( ', ', $fields ),
+				]
 			);
+
 			return true;
 		}
 
@@ -371,7 +411,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdentifiers = [ 'term_full_entity_id' => $entityId->getSerialization() ];
 		$uniqueKeyFields = [ 'term_language', 'term_type', 'term_text', 'term_full_entity_id' ];
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting terms for ' . $entityId->getSerialization() );
+		$this->logger->debug(
+			'{method}: deleting terms for {entityId}',
+			[
+				'method' => __METHOD__,
+				'entityId' => $entityId->getSerialization(),
+			]
+		);
 
 		$success = true;
 		foreach ( $terms as $term ) {

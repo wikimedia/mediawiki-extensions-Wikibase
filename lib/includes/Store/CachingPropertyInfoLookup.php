@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Store;
 
 use BagOStuff;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -25,6 +27,11 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @var BagOStuff
 	 */
 	protected $cache;
+
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
 
 	/**
 	 * @var int
@@ -69,6 +76,8 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 		}
 
 		$this->cacheKey = $cacheKey;
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'wikibase' );
 	}
 
 	/**
@@ -121,9 +130,13 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 			if ( !is_array( $this->propertyInfo ) ) {
 				$this->propertyInfo = $this->lookup->getAllPropertyInfo();
 				$this->cache->set( $this->cacheKey, $this->propertyInfo, $this->cacheDuration );
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': cached fresh property info table' );
+				$this->logger->debug(
+					'{method}: cached fresh property info table', [ 'method' => __METHOD__ ]
+				);
 			} else {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': using cached property info table' );
+				$this->logger->debug(
+					'{method}: using cached property info table', [ 'method' => __METHOD__ ]
+				);
 			}
 		}
 

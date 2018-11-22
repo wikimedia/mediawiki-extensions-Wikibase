@@ -5,6 +5,8 @@ namespace Wikibase;
 use ArrayObject;
 use Closure;
 use OutOfBoundsException;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class representing a collection of settings.
@@ -34,6 +36,18 @@ use OutOfBoundsException;
 class SettingsArray extends ArrayObject {
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	public function __construct( array $input = [] ) {
+		parent::__construct( $input );
+
+		// TODO: Inject?!
+		$this->logger = LoggerFactory::getInstance( 'wikibase' );
+	}
+
+	/**
 	 * Gets the value of the specified setting.
 	 *
 	 * @param string $settingName
@@ -59,7 +73,14 @@ class SettingsArray extends ArrayObject {
 				$logValue = var_export( $value, true );
 			}
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': setting ' . $settingName . ' was given as a closure, resolve it to ' . $logValue );
+			$this->logger->debug(
+				'{method}: setting {settingName} was given as a closure, resolve it to {logValue}',
+				[
+					'method' => __METHOD__,
+					'settingName' => $settingName,
+					'logValue' => $logValue,
+				]
+			);
 
 			// only eval once, then remember the value
 			$this->setSetting( $settingName, $value );
