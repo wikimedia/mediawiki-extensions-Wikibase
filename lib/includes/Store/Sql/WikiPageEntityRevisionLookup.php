@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use IDBAccessObject;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Storage\BlobAccessException;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Revision\RevisionAccessException;
@@ -55,6 +56,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $blobStore;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param RevisionStore $revisionStore
@@ -75,6 +81,9 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
 		$this->revisionStore = $revisionStore;
 		$this->blobStore = $blobStore;
+
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'wikibase' );
 	}
 
 	/**
@@ -97,8 +106,14 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
-			. " (revision $revisionId)." );
+		$this->logger->debug(
+			'{method}: Looking up entity {entityId} (revision {revisionId}).',
+			[
+				'method' => __METHOD__,
+				'entityId' => $entityId,
+				'revisionId' => $revisionId,
+			]
+		);
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
