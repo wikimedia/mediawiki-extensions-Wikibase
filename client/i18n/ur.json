@@ -77,6 +77,7 @@
 	"wikibase-otherprojects": "دیگر منصوبوں میں",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} سے {{PLURAL:$1|رابطہ|رابطے}}",
 	"notification-header-page-connection": "صفحہ <strong>$3</strong> {{PLURAL:$4|-1={{WBREPONAME}} کے آئٹم|\n{{WBREPONAME}} کے آئٹم $4}} سے  {{GENDER:$2|مربوط}} کیا۔",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> اور {{PLURAL:$4|ایک دوسرے صفحے|$4 دوسرے صفحات|100=99+ دوسرے صفحات}} کو {{WBREPONAME}} آئٹموں سے {{GENDER:$2|مربوط}} کیا۔",
 	"notification-link-text-view-item": "آئٹم {{GENDER:$1|دیکھیں}}",
 	"notification-subject-page-connection": "{{SITENAME}} پر جو صفحہ آپ نے {{GENDER:$3|تخلیق}} کیا تھا وہ {{WBREPONAME}} آئٹم سے {{GENDER:$2|مربوط}} کر دیا گیا ہے۔",
 	"connected-redirect-category": "{{WBREPONAME}} آئٹم سے مربوط رجوع مکررات",

@@ -167,7 +167,7 @@
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|1=Удалён квалификатор|Удалены квалификаторы}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|1=Удалена ссылка|Удалены ссылки}} из заявления",
 	"wikibase-entity-summary-wbmergeitems-from": "Объединённый элемент из $3",
-	"wikibase-entity-summary-wbmergeitems-to": "Объединённый элемент в $3",
+	"wikibase-entity-summary-wbmergeitems-to": "Объединённый элемент в «$3»",
 	"wikibase-item-summary-wbcreate-new": "Создан новый элемент",
 	"wikibase-item-summary-wbeditentity": "Новый элемент создан",
 	"wikibase-item-summary-wbeditentity-create": "Новый элемент создан",
