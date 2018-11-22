@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use Psr\Log\NullLogger;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 
 /**
@@ -29,7 +30,8 @@ class HttpUrlPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 	public function testGetPropertyOrder( $text, $expected ) {
 		$instance = new HttpUrlPropertyOrderProvider(
 			'page-url',
-			$this->getHttp( $text )
+			$this->getHttp( $text ),
+			new NullLogger()
 		);
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( $expected, $propertyOrder );
