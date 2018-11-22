@@ -27,6 +27,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
@@ -503,7 +504,11 @@ final class WikibaseClient {
 		if ( $this->propertyDataTypeLookup === null ) {
 			$infoLookup = $this->getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoLookup, $retrievingLookup );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
+				$infoLookup,
+				$this->getWikibaseLogger(),
+				$retrievingLookup
+			);
 		}
 
 		return $this->propertyDataTypeLookup;
@@ -767,8 +772,7 @@ final class WikibaseClient {
 
 			$this->site = $this->siteLookup->getSite( $globalId );
 
-			// Todo inject me
-			$logger = LoggerFactory::getInstance( 'Wikibase' );
+			$logger = $this->getWikibaseLogger();
 
 			if ( !$this->site ) {
 				$logger->debug(
@@ -1199,7 +1203,7 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
-		$logger = LoggerFactory::getInstance( 'wikibase' );
+		$logger = $this->getWikibaseLogger();
 
 		$pageUpdater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
@@ -1301,7 +1305,11 @@ final class WikibaseClient {
 			if ( $url !== null ) {
 				$innerProvider = new FallbackPropertyOrderProvider(
 					$innerProvider,
-					new HttpUrlPropertyOrderProvider( $url, new Http() )
+					new HttpUrlPropertyOrderProvider(
+						$url,
+						new Http(),
+						$this->getWikibaseLogger()
+					)
 				);
 			}
 
@@ -1369,6 +1377,13 @@ final class WikibaseClient {
 		);
 
 		return $cache;
+	}
+
+	/**
+	 * @return LoggerInterface
+	 */
+	private function getWikibaseLogger() {
+		return LoggerFactory::getInstance( 'wikibase' );
 	}
 
 }

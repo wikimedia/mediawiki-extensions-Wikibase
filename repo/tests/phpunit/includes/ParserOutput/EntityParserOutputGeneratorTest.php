@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use DataValues\StringValue;
 use Language;
 use MediaWikiTestCase;
+use Psr\Log\NullLogger;
 use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -216,7 +217,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			new SqlEntityInfoBuilder(
 				$entityIdParser,
 				new EntityIdComposer( [] ),
-				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
+				new NullLogger()
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
@@ -452,7 +454,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 						return new ItemId( 'Q' . $idPart );
 					}
 				] ),
-				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
+				new NullLogger()
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),

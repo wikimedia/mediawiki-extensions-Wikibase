@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
@@ -37,6 +38,7 @@ return [
 			$services->getEntityIdParser(),
 			$services->getEntityIdComposer(),
 			$genericServices->getEntityNamespaceLookup(),
+			LoggerFactory::getInstance( 'wikibase' ),
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
@@ -171,7 +173,8 @@ return [
 				),
 				$services->getDatabaseName(),
 				$services->getRepositoryName()
-			)
+			),
+			LoggerFactory::getInstance( 'wikibase' )
 		);
 	},
 
