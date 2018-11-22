@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Store;
 
 use BagOStuff;
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -28,6 +30,11 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	 * @var BagOStuff
 	 */
 	protected $cache;
+
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
 
 	/**
 	 * @var int
@@ -65,6 +72,8 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		}
 
 		$this->cacheKey = $cacheKey;
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 	/**
@@ -88,8 +97,15 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
 		$propertyInfo[$id] = $info;
 
-		// update external cache
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating cache after updating property ' . $id );
+		// Update external cache
+		$this->logger->debug(
+			'{method}: updating cache after updating property {id}',
+			[
+				'method' => __METHOD__,
+				'id' => $id,
+			]
+		);
+
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 	}
 
@@ -115,8 +131,15 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
 		unset( $propertyInfo[$id] );
 
-		// update external cache
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating cache after removing property ' . $id );
+		// Update external cache
+		$this->logger->debug(
+			'{method}: updating cache after removing property {id}',
+			[
+				'method' => __METHOD__,
+				'id' => $id,
+			]
+		);
+
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 
 		return true;

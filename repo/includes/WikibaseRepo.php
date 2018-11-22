@@ -29,6 +29,7 @@ use HashBagOStuff;
 use Hooks;
 use IContextSource;
 use Language;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
@@ -842,6 +843,7 @@ class WikibaseRepo {
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
 				$infoLookup,
+				LoggerFactory::getInstance( 'Wikibase' ),
 				$retrievingLookup
 			);
 		}

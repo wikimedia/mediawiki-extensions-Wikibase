@@ -525,7 +525,11 @@ final class WikibaseClient {
 		if ( $this->propertyDataTypeLookup === null ) {
 			$infoLookup = $this->getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoLookup, $retrievingLookup );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
+				$infoLookup,
+				$this->getLogger(),
+				$retrievingLookup
+			);
 		}
 
 		return $this->propertyDataTypeLookup;
@@ -1326,7 +1330,11 @@ final class WikibaseClient {
 			if ( $url !== null ) {
 				$innerProvider = new FallbackPropertyOrderProvider(
 					$innerProvider,
-					new HttpUrlPropertyOrderProvider( $url, new Http() )
+					new HttpUrlPropertyOrderProvider(
+						$url,
+						new Http(),
+						$this->getLogger()
+					)
 				);
 			}
 
