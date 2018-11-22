@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a3084841_281848d0",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-22T14:23:19Z",
+      "side": 1,
+      "message": "I think we can actually remove this now.\nAs far as I can tell this only applies for the previous IdGenerator? Perhaps depending on what the implementation is of the upsert method used here for each db type though?",
+      "parentUuid": "7ee6f22f_03f984b0",
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96d8da10_aa3bc393",
         "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
         "patchSetId": 3
@@ -76,6 +94,30 @@
       "writtenOn": "2018-11-20T12:14:21Z",
       "side": 1,
       "message": "Isn\u0027t it just possible to do `id_value \u003d id_value + 1`? I looked at this manual and couldn\u0027t come up with any reason we should use it: https://mariadb.com/kb/en/library/last_insert_id/",
+      "range": {
+        "startLine": 133,
+        "startChar": 17,
+        "endLine": 133,
+        "endChar": 31
+      },
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac167e30_83dec0fe",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-22T14:23:19Z",
+      "side": 1,
+      "message": "That weill mean we can\u0027t use $database-\u003einsertId(); above though?",
+      "parentUuid": "a7095661_271bad3e",
       "range": {
         "startLine": 133,
         "startChar": 17,
