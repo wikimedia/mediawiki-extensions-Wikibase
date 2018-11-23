@@ -28,7 +28,8 @@
 			"Predatorix",
 			"Pascalco",
 			"ToBeFree",
-			"MisterSynergy"
+			"MisterSynergy",
+			"Sushi"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -256,7 +257,7 @@
 	"wikibase-mergeitems-toid": "Die Kennung des Objekts, in das zusammengeführt werden soll:",
 	"wikibase-mergeitems-submit": "Datenobjekte zusammenführen",
 	"wikibase-mergeitems-success": "$1 wurde erfolgreich in $3 zusammengeführt und weitergeleitet.",
-	"wikibase-itemmerge-redirect": "Diese Objekte könnten bereits zusammengeführt sein.",
+	"wikibase-itemmerge-redirect": "Diese Objekte könnten bereits zusammengeführt worden sein.",
 	"wikibase-itemmerge-missing-parameter": "Unvollständige Eingabe.",
 	"wikibase-itemmerge-not-item": "Das angegebene Element ist kein Objekt.",
 	"wikibase-itemmerge-failed-save": "Objekt konnte nicht gespeichert werden.",

@@ -201,5 +201,6 @@
 	"apihelp-wbsetaliases-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}».",
 	"apihelp-wbsetaliases-param-add": "Сьпіс псэўданімаў для дадаваньня (можа выкарыстоўвацца разам з <var>remove</var>)",
 	"apihelp-wbsetaliases-param-remove": "Сьпіс псэўданімаў для выдаленьня (можа выкарыстоўвацца разам з <var>add</var>)",
-	"apihelp-wbsetaliases-param-set": "Сьпіс псэўданімаў, які заменіць цяперашні сьпіс (ня можа ўжывацца разам ні з <var>add</var>, ні з <var>remove</var>)"
+	"apihelp-wbsetaliases-param-set": "Сьпіс псэўданімаў, які заменіць цяперашні сьпіс (ня можа ўжывацца разам ні з <var>add</var>, ні з <var>remove</var>)",
+	"apihelp-wbsetaliases-param-language": "Мова, для якой вызначаць псэўданімы"
 }

@@ -10,7 +10,8 @@
 			"Geraki",
 			"Glavkos",
 			"KATRINE1992",
-			"ZaDiak"
+			"ZaDiak",
+			"KATRINE1993"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -96,6 +97,7 @@
 	"wikibase-item-summary-wbeditentity-override": "Δημιούργησε ένα αντικείμενο",
 	"wikibase-property-summary-wbcreate-new": "Δημιούργησε μια νέα ιδιότητα",
 	"wikibase-property-summary-wbeditentity-create": "Δημιουργήστε μια νέα ιδιότητα",
+	"wikibase-property-summary-wbeditentity-create-property": "Εισήγαγε μια νέα Ιδιότητα",
 	"wikibase-property-summary-wbeditentity-update": "Η ιδιότητα ενημερώθηκε",
 	"wikibase-property-summary-wbeditentity-override": "Δημιουργία ιδιότητας"
 }
