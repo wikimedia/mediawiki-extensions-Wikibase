@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ad0d049_62cad18d",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-23T23:11:14Z",
+      "side": 1,
+      "message": "This indenting is messed up and should be using tabs not spaces!",
+      "range": {
+        "startLine": 217,
+        "startChar": 1,
+        "endLine": 217,
+        "endChar": 4
+      },
+      "revId": "a9c3df9253a8f83129d9e25a2f9e254eff70fd88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
