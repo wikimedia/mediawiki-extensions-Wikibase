@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7afce3c9_36b44b3a",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-11-23T23:13:18Z",
+      "side": 1,
+      "message": "So this regex / this validator is still checking for the file extension, it probably shouldn\u0027t be doing that any more.\n\nWe just want 1 validator making sure a valid file extension is there and providing one error message.\nAnd then another one only looking for the invalid chars and returning the invalid chars error message.",
+      "range": {
+        "startLine": 214,
+        "startChar": 24,
+        "endLine": 214,
+        "endChar": 33
+      },
+      "revId": "d865ac95c69001d48e1bd82a01074d563d267273",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
