@@ -202,5 +202,7 @@
 	"apihelp-wbsetaliases-param-add": "Сьпіс псэўданімаў для дадаваньня (можа выкарыстоўвацца разам з <var>remove</var>)",
 	"apihelp-wbsetaliases-param-remove": "Сьпіс псэўданімаў для выдаленьня (можа выкарыстоўвацца разам з <var>add</var>)",
 	"apihelp-wbsetaliases-param-set": "Сьпіс псэўданімаў, які заменіць цяперашні сьпіс (ня можа ўжывацца разам ні з <var>add</var>, ні з <var>remove</var>)",
-	"apihelp-wbsetaliases-param-language": "Мова, для якой вызначаць псэўданімы"
+	"apihelp-wbsetaliases-param-language": "Мова, для якой вызначаць псэўданімы",
+	"apihelp-wbsetaliases-example-1": "Усталяваць ангельскамоўныя псэўданімы для элемэнту з ідэнтыфікатарам <samp>Q1</samp> на <var>Foo</var> і <var>Bar</var>",
+	"apihelp-wbsetaliases-example-2": "Дадаць <var>Foo</var> і <var>Bar</var> да сьпісу ангельскамоўных псэўданімаў для элемэнту з ідэнтыфікатарам <samp>Q1</samp>"
 }
