@@ -382,6 +382,7 @@
 	"wikibase-rescore-profile-prefix": "Omvärderingsstandardprofil för kompletterande sökning",
 	"wikibase-rescore-profile-prefix-boost": "Omvärderingsprofil för kompletterande sökning med uttalandeförstärkning",
 	"wikibase-rescore-profile-fulltext": "Omvärderingsstandardprofil för fulltextsökning",
+	"wikibase-rescore-profile-fulltext-phrase": "Omvärderingsprofil för fulltextsökning med fraspoäng",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-objekt",
 	"content-model-wikibase-property": "Wikibase-egenskap",

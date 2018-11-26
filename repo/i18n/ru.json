@@ -327,6 +327,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, преобразованные из $3 — $4",
 	"wikibase-api-unresolved-redirect": "Указанный идентификатор сущности относится к перенаправленнию, которое не поддерживается в данном контексте.",
+	"wikibase-api-illegal-ids-or-sites-titles-selector": "Укажите «идентификаторы» элемента, или же пары «сайтов» та «названий» для соответствующей страницы",
 	"wikibase-api-no-such-sitelink": "При попытке отредактировать значки не удалось найти ссылку на «$1».",
 	"wikibase-api-target-not-empty": "Перенаправление может быть создано только на месте пустой или удалённой сущности.",
 	"wikibase-api-target-is-redirect": "Целью перенаправления не должно быть другое перенаправление.",
