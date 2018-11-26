@@ -127,6 +127,30 @@
       "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e011328_e770816f",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-11-26T12:59:57Z",
+      "side": 1,
+      "message": "I can\u0027t say for sure but if that\u0027s case. It\u0027s fine to leave it as it is.",
+      "parentUuid": "ac167e30_83dec0fe",
+      "range": {
+        "startLine": 133,
+        "startChar": 17,
+        "endLine": 133,
+        "endChar": 31
+      },
+      "revId": "b56d8664614035cb6b34f645831bc6413ceae92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
