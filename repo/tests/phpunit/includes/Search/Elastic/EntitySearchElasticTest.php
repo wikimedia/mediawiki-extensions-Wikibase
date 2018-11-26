@@ -24,7 +24,6 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
-		$this->markTestSkipped( 'Transitional.' );
 	}
 
 	/**
@@ -50,7 +49,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		foreach ( glob( __DIR__ . '/../../../data/entitySearch/*.query' ) as $queryFile ) {
 			$testName = substr( basename( $queryFile ), 0, -6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
-			$expectedFile = "$testName-es" . EntitySearchElastic::getExpectedElasticMajorVersion() . '.expected';
+			$expectedFile = __DIR__ . "/../../../data/entitySearch/$testName-es" . EntitySearchElastic::getExpectedElasticMajorVersion() . '.expected';
 			$tests[$testName] = [ $query, $expectedFile ];
 		}
 
