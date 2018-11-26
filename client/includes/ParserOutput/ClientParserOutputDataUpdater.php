@@ -103,9 +103,9 @@ class ClientParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
+			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
 			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
-				->getOtherProjectsSidebarGenerator();
-
+				->getOtherProjectsSidebarGenerator( $usageAccumulator );
 			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
