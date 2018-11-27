@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bd45d5c7_a8bc14f0",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-27T11:47:29Z",
+      "side": 1,
+      "message": "Sounds sensible to me, but I’m unsure how it would be implemented. Should this flag be another constructor parameter of WikibaseValueFormatterBuilders, and be read from the repo/client settings when initializing them in WikibaseRepo/WikibaseClient?",
+      "parentUuid": "f4e2bf31_cc256454",
+      "range": {
+        "startLine": 452,
+        "startChar": 2,
+        "endLine": 452,
+        "endChar": 71
+      },
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d6ce3cf_3855fd27",
         "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
         "patchSetId": 5
