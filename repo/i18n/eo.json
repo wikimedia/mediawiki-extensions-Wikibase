@@ -11,7 +11,8 @@
 			"AVRS",
 			"Rafaneta",
 			"Psychoslave",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Surfo"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -189,6 +190,7 @@
 	"wikibase-no-direct-editing": "Rekta redakto estas malebligita en nomspaco $1",
 	"wikibase-noentity": "Ĉi tiu datumaro ne ekzistas. Vi povas\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} priserĉi la rilatajn protokolojn]</span>\npor trovi de kie ĝi venis.",
 	"wikibase-noentity-createone": "vi ankaŭ povas [[$1|krei iun novan]].",
+	"wikibase-special-mergeitems-error-prefix": "Ne eblis kounigi la erojn. Okazis ĉi tiu eraro:",
 	"wikibase-listdatatypes-wikibase-item-head": "Ero",
 	"wikibase-listdatatypes-wikibase-property-head": "Eco",
 	"wikibase-listdatatypes-commonsmedia-head": "Medio en Komunejo",

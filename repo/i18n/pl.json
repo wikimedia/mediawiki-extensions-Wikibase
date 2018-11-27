@@ -18,7 +18,8 @@
 			"PiotrAntosz",
 			"Woytecr",
 			"Pawel Niemczuk",
-			"InternerowyGołąb"
+			"InternerowyGołąb",
+			"CiaPan"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -153,12 +154,14 @@
 	"wikibase-itembytitle-lookup-page": "Strona:",
 	"wikibase-itembytitle-submit": "Szukaj",
 	"wikibase-itembytitle-error-site": "Użyj istniejącego identyfikatora projektu, np. „plwiki” dla polskojęzycznej Wikipedii.",
+	"wikibase-itembytitle-error-item": "Nie znaleziono elementu linkującego do danej strony.",
 	"wikibase-itembytitle-create": "Możesz także [$1 utworzyć element].",
 	"special-gotolinkedpage": "Przejście do linkującej strony",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Przejdź do linkującej strony zgodnie z podaną witryną i elementem",
 	"wikibase-gotolinkedpage-lookup-site": "Witryna:",
 	"wikibase-gotolinkedpage-lookup-item": "Identyfikator elementu:",
 	"wikibase-gotolinkedpage-submit": "Dalej",
+	"wikibase-gotolinkedpage-error-page-not-found": "Nie znaleziono strony dla tej kombinacji elementu i witryny",
 	"wikibase-gotolinkedpage-error-item-not-found": "Nie znaleziono elementu",
 	"special-itemdisambiguation": "Ujednoznacznienie elementów",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Wyszukiwanie elementów według języka i etykiety",
