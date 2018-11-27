@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bea82359_195c0b13",
+        "filename": "lib/includes/Formatters/CachingKartographerEmbeddingHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-27T11:26:04Z",
+      "side": 1,
+      "message": "this comment is now outdated, as far as I can tell :/",
+      "revId": "52dd39d1a08589ee2ffc5268677433f0b92c5eeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
