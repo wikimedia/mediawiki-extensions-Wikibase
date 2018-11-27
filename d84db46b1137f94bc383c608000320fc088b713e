@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37eaf879_b50eb999",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-27T12:54:55Z",
+      "side": 1,
+      "message": "Do we even have a task for this yet? My vague feeling for this is that I don’t expect this to be done in 2019…",
+      "range": {
+        "startLine": 19,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "d84db46b1137f94bc383c608000320fc088b713e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b916d813_2c45c057",
+        "filename": "repo/tests/selenium/pageobjects/item.page.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-27T12:54:55Z",
+      "side": 1,
+      "message": "there probably shouldn’t be a tab in the middle of this line",
+      "revId": "d84db46b1137f94bc383c608000320fc088b713e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b372510e_45d9a788",
+        "filename": "view/resources/wikibase/view/ReadModeViewFactory.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-27T12:54:55Z",
+      "side": 1,
+      "message": "I think this would feel less hacky if the function was renamed to getAdderWithStartEditing (without underscore, to indicate that it’s no longer strictly private), but I’m not sure if that’s a good idea. What do you think?",
+      "revId": "d84db46b1137f94bc383c608000320fc088b713e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
