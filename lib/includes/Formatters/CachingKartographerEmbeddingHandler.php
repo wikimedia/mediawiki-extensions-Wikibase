@@ -146,7 +146,7 @@ class CachingKartographerEmbeddingHandler {
 	private function getMapframeInitJS( $mapPreviewId, array $rlModules, array $kartographerLiveData ) {
 		$javaScript = $this->getMWConfigJS( $kartographerLiveData );
 
-		// ext.kartographer.frame contains mw.kartographer.initMapframeFromElement (which we use below)
+		// ext.kartographer.frame contains initMapframeFromElement (which we use below)
 		$rlModules[] = 'ext.kartographer.frame';
 		$rlModules = array_unique( $rlModules );
 
