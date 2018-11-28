@@ -39,6 +39,30 @@
       "revId": "3171854151feaabdeca02d5ba6e4cab496cdfbc3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89146eb9_0b326b0b",
+        "filename": "lib/includes/Formatters/CachingKartographerEmbeddingHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-11-28T15:12:21Z",
+      "side": 1,
+      "message": "Whoops, this one also is no longer correct :O",
+      "parentUuid": "74003063_14159a52",
+      "range": {
+        "startLine": 164,
+        "startChar": 36,
+        "endLine": 164,
+        "endChar": 98
+      },
+      "revId": "3171854151feaabdeca02d5ba6e4cab496cdfbc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
