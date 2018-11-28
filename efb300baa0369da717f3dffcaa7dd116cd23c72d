@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37d24114_2f1bca84",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-28T10:05:33Z",
+      "side": 1,
+      "message": "To make CI pass, I’d suggest temporarily adding a line like\n\n SELF.prototype._getAdderWithStartEditing \u003d SELF.prototype.getAdderWithStartEditing;\n\nand then removing it in another change. It’s not pretty, but it’s still better than force-merging the change without CI, in my opinion.",
+      "revId": "efb300baa0369da717f3dffcaa7dd116cd23c72d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
