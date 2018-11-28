@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d3a0c1b_e4a3ce2c",
+        "filename": "lib/includes/Formatters/CachingKartographerEmbeddingHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-28T09:56:44Z",
+      "side": 1,
+      "message": "I’m confused… that’s not the comment I meant :D",
+      "revId": "3171854151feaabdeca02d5ba6e4cab496cdfbc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74003063_14159a52",
+        "filename": "lib/includes/Formatters/CachingKartographerEmbeddingHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-28T09:56:44Z",
+      "side": 1,
+      "message": "This is the part that’s no longer accurate, as far as I can tell.",
+      "range": {
+        "startLine": 164,
+        "startChar": 36,
+        "endLine": 164,
+        "endChar": 98
+      },
+      "revId": "3171854151feaabdeca02d5ba6e4cab496cdfbc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
