@@ -101,6 +101,7 @@ class CachingKartographerEmbeddingHandler {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( array $values, Language $language ) {
+		$out = new ParserOutput();
 		// Clear the state initially (but only once)
 		$clearState = true;
 
