@@ -328,14 +328,6 @@
 	};
 
 	/**
-	 * FIXME that is a migration method, because WikiBaseLexeme ControllerViewFactory used this before
-	 * @param startEditingCallback
-	 * @returns {function(*=, *=, *=, *=): *}
-	 * @private
-	 */
-	SELF.prototype._getAdderWithStartEditing = SELF.prototype.getAdderWithStartEditing;
-
-	/**
 	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
 	 *
 	 * @param {Function} startEditingCallback
