@@ -147,7 +147,7 @@ class CachingKartographerEmbeddingHandler {
 	private function getMapframeInitJS( $mapPreviewId, array $rlModules, array $kartographerLiveData ) {
 		$javaScript = $this->getMWConfigJS( $kartographerLiveData );
 
-		// ext.kartographer.frame contains mw.kartographer.initMapframeFromElement (which we use below)
+		// ext.kartographer.frame contains initMapframeFromElement (which we use below)
 		$rlModules[] = 'ext.kartographer.frame';
 		$rlModules = array_unique( $rlModules );
 
@@ -162,7 +162,7 @@ class CachingKartographerEmbeddingHandler {
 		);
 		$jsMapPreviewId = Xml::encodeJsVar( '#' . $mapPreviewId );
 
-		// Require all needed RL modules, than fire the "wikipage.content" hook for the new JS container
+		// Require all needed RL modules, then call initMapframeFromElement with the injected mapframe HTML
 		$javaScript .= "mw.loader.using( [ $JSRlModules ] ).then( " .
 				"function() { mw.loader.require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
 				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map' ).get( 0 ) ); } );";
