@@ -21,12 +21,19 @@ class TermboxView implements CacheableEntityTermsView {
 	private $fallbackChain;
 	private $renderer;
 
+	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
 	public function __construct(
 		LanguageFallbackChain $fallbackChain,
-		TermboxRenderer $renderer
+		TermboxRenderer $renderer,
+		LocalizedTextProvider $textProvider
 	) {
 		$this->fallbackChain = $fallbackChain;
 		$this->renderer = $renderer;
+		$this->textProvider = $textProvider;
 	}
 
 	public function getHtml(
@@ -43,13 +50,10 @@ class TermboxView implements CacheableEntityTermsView {
 		}
 	}
 
-	/**
-	 * FIXME This actually sets the html within h1#firstHeading.
-	 * The correct title could either be set here, or it gets hidden, similarly to how the Lemma title is handled
-	 * for WikibaseLexeme.
-	 */
 	public function getTitleHtml( EntityId $entityId = null ) {
-		return '';
+		return htmlspecialchars(
+			$this->textProvider->get( 'parentheses', [ $entityId->getSerialization() ] )
+		);
 	}
 
 	/**
