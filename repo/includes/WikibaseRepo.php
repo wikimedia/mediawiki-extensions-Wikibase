@@ -514,13 +514,7 @@ class WikibaseRepo {
 	 * @return bool
 	 */
 	private function useKartographerGlobeCoordinateFormatter() {
-		// FIXME: remove the global out of here
-		global $wgKartographerEnableMapFrame;
-
-		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-			isset( $wgKartographerEnableMapFrame ) &&
-			$wgKartographerEnableMapFrame;
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' );
 	}
 
 	/**

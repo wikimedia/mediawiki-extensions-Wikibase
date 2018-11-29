@@ -433,7 +433,7 @@ class WikibaseValueFormatterBuilders {
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
 		$isHtmlVerboseFormat = $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format );
 
-		if ( $isHtmlVerboseFormat && $this->kartographerEmbeddingHandler ) {
+		if ( $isHtmlVerboseFormat && $this->kartographerEmbeddingHandler && $this->kartographerEmbeddingHandler->canBeUsed() ) {
 			$isPreview = $format === SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW;
 
 			return new GlobeCoordinateKartographerFormatter(

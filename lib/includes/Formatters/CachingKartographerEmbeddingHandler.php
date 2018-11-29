@@ -18,6 +18,8 @@ use Xml;
  * Use getParserOutput with ALL GlobeCoordinateValues on a page to get metadata
  * needed to display the mapframes properly.
  * Use getHtml for getting the HTML for a specific GlobeCoordinateValue.
+ * Users should initially check canBeUsed to make sure that Kartographer is properly
+ * installed and configured for this.
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
@@ -40,6 +42,15 @@ class CachingKartographerEmbeddingHandler {
 	public function __construct( Parser $parser ) {
 		$this->parser = $parser;
 		$this->cache = new MapCacheLRU( 100 );
+	}
+
+	/**
+	 * Whether this can be used (needs Kartographer to be installed and configured)
+	 *
+	 * @return bool
+	 */
+	public function canBeUsed() {
+		return isset( $this->parser->mTagHooks['mapframe'] );
 	}
 
 	/**
