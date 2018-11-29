@@ -273,8 +273,6 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
-		global $wgKartographerEnableMapFrame;
-
 		if ( $this->valueFormatterBuilders === null ) {
 			$entityTitleLookup = new ClientSiteLinkTitleLookup(
 				$this->getStore()->getSiteLinkLookup(),
@@ -282,11 +280,7 @@ final class WikibaseClient {
 			);
 
 			$kartographerEmbeddingHandler = null;
-			if (
-				ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-				isset( $wgKartographerEnableMapFrame ) &&
-				$wgKartographerEnableMapFrame
-			) {
+			if ( $this->useKartographerGlobeCoordinateFormatter() ) {
 				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
 			}
 
@@ -307,6 +301,19 @@ final class WikibaseClient {
 		}
 
 		return $this->valueFormatterBuilders;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function useKartographerGlobeCoordinateFormatter() {
+		// FIXME: remove the global out of here
+		global $wgKartographerEnableMapFrame;
+
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
+			isset( $wgKartographerEnableMapFrame ) &&
+			$wgKartographerEnableMapFrame;
 	}
 
 	/**
