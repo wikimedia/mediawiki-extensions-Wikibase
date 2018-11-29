@@ -503,16 +503,24 @@ class WikibaseRepo {
 	 * @return CachingKartographerEmbeddingHandler|null
 	 */
 	public function getKartographerEmbeddingHandler() {
-		global $wgKartographerEnableMapFrame;
-
-		$hasKartographer = ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' );
-		$mapFramesEnabled = isset( $wgKartographerEnableMapFrame ) && $wgKartographerEnableMapFrame;
-
-		if ( $this->kartographerEmbeddingHandler === null && $hasKartographer && $mapFramesEnabled ) {
+		if ( $this->kartographerEmbeddingHandler === null && $this->useKartographerGlobeCoordinateFormatter() ) {
 			$this->kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
 		}
 
 		return $this->kartographerEmbeddingHandler;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function useKartographerGlobeCoordinateFormatter() {
+		// FIXME: remove the global out of here
+		global $wgKartographerEnableMapFrame;
+
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
+			isset( $wgKartographerEnableMapFrame ) &&
+			$wgKartographerEnableMapFrame;
 	}
 
 	/**
