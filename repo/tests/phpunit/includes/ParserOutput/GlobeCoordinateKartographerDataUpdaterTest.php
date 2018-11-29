@@ -107,6 +107,10 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 				}
 			) );
 
+		$handler->expects( $this->exactly( $this->getStatements()->count() ) )
+			->method( 'canBeUsed' )
+			->will( $this->returnValue( true ) );
+
 		return $handler;
 	}
 

@@ -123,6 +123,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			->will( $this->returnValue( '<kartographer-html/>' ) );
 
 		$handler->expects( $this->any() )
+			->method( 'canBeUsed' )
+			->will( $this->returnValue( true ) );
+
+		$handler->expects( $this->any() )
 			->method( 'getPreviewHtml' )
 			->with(
 				$this->isInstanceOf( GlobeCoordinateValue::class ),

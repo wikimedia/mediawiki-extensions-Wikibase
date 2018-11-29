@@ -24,7 +24,6 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
-use ExtensionRegistry;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
@@ -514,13 +513,7 @@ class WikibaseRepo {
 	 * @return bool
 	 */
 	private function useKartographerGlobeCoordinateFormatter() {
-		// FIXME: remove the global out of here
-		global $wgKartographerEnableMapFrame;
-
-		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-			isset( $wgKartographerEnableMapFrame ) &&
-			$wgKartographerEnableMapFrame;
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' );
 	}
 
 	/**
