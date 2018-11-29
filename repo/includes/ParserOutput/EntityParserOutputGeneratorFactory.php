@@ -191,8 +191,6 @@ class EntityParserOutputGeneratorFactory {
 	 * @return EntityParserOutputDataUpdater[]
 	 */
 	private function getDataUpdaters() {
-		global $wgKartographerEnableMapFrame;
-
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
 		$updaters = [
@@ -227,10 +225,9 @@ class EntityParserOutputGeneratorFactory {
 			);
 		}
 
-		$hasKartographer = ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' );
-		$mapFramesEnabled = isset( $wgKartographerEnableMapFrame ) && $wgKartographerEnableMapFrame;
-
-		if ( $this->kartographerEmbeddingHandler && $hasKartographer && $mapFramesEnabled ) {
+		// FIXME: null implementation of KartographerEmbeddingHandler would seem better than null pointer
+		// in general, and would also remove the need for the check here
+		if ( $this->kartographerEmbeddingHandler ) {
 			$updaters[] = new EntityStatementDataUpdaterAdapter(
 				new GlobeCoordinateKartographerDataUpdater(
 					$this->kartographerEmbeddingHandler

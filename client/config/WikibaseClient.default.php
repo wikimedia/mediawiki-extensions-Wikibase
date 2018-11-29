@@ -115,6 +115,8 @@ return call_user_func( function() {
 				? $settings->getSetting( 'wikiPageUpdaterDbBatchSize' )
 				: $mainConfig->get( 'UpdateRowsPerJob' );
 		},
+
+		'useKartographerGlobeCoordinateFormatter' => false,
 	];
 
 	// Some defaults depend on information not available at this time.

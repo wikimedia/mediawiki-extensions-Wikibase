@@ -322,4 +322,6 @@ return [
 	 */
 	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 0,
 
+	'useKartographerGlobeCoordinateFormatter' => false,
+
 ];
