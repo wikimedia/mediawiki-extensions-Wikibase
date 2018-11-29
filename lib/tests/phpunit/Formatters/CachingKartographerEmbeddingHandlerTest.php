@@ -30,6 +30,19 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testCanBeUsed() {
+		$parser = new Parser();
+		$parser->setHook( 'mapframe', function() {
+			// Dummy
+		} );
+
+		$handler = new CachingKartographerEmbeddingHandler( $parser );
+		$this->assertTrue( $handler->canBeUsed() );
+
+		$parser->clearTagHooks();
+		$this->assertFalse( $handler->canBeUsed() );
+	}
+
 	public function testGetHtml() {
 		$handler = new CachingKartographerEmbeddingHandler( new Parser );
 

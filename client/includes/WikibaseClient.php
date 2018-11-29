@@ -17,7 +17,6 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
-use ExtensionRegistry;
 use ExternalUserNames;
 use Hooks;
 use Http;
@@ -307,13 +306,7 @@ final class WikibaseClient {
 	 * @return bool
 	 */
 	private function useKartographerGlobeCoordinateFormatter() {
-		// FIXME: remove the global out of here
-		global $wgKartographerEnableMapFrame;
-
-		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
-			isset( $wgKartographerEnableMapFrame ) &&
-			$wgKartographerEnableMapFrame;
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' );
 	}
 
 	/**

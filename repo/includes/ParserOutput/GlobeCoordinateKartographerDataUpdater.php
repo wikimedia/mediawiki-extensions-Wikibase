@@ -36,6 +36,10 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement ) {
+		if ( !$this->kartographerHandler->canBeUsed() ) {
+			return;
+		}
+
 		foreach ( $statement->getAllSnaks() as $snak ) {
 			$this->processSnak( $snak );
 		}
