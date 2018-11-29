@@ -12,7 +12,8 @@
 			"Kareyac",
 			"Ladsgroup",
 			"ShockD",
-			"Datawiki30"
+			"Datawiki30",
+			"Vlad5250"
 		]
 	},
 	"wikibase-desc": "Хранилище на структурирани данни",
@@ -98,8 +99,10 @@
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Страница:",
 	"wikibase-itembytitle-submit": "Търсене",
+	"wikibase-itembytitle-create": "Може да [$1 създадете обект].",
 	"wikibase-itemdisambiguation-lookup-language": "Езиков код:",
 	"wikibase-itemdisambiguation-submit": "Търсене",
+	"wikibase-itemdisambiguation-create": "Може да [$1 създадете обект].",
 	"special-newproperty": "Създаване на ново свойство",
 	"wikibase-newproperty-fieldset": "Създаване на ново свойство",
 	"wikibase-newproperty-datatype": "Тип на данните:",
@@ -116,7 +119,9 @@
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Псевдоними:",
 	"wikibase-setsitelink-not-badge": "Елемент $1 не е значка.",
 	"wikibase-modifyterm-language": "Езиков код:",
+	"special-mergeitems": "Сливане на два обекта",
 	"wikibase-mergeitems-intro": "Ако слеете два обекта, тогава всичките етикети, описания, истозначници, връзки към сайта и твърдения ще бъдат преместени от единия предмет в другия.",
+	"wikibase-mergeitems-submit": "Сливане на обекти",
 	"wikibase-itemmerge-permissiondenied": "Достъпът е отказан.",
 	"wikibase-itemmerge-no-such-entity": "Обектът не беше намерен.",
 	"wikibase-itemmerge-cant-merge-self": "Обектът не може да бъде слят със себе си.",
@@ -127,6 +132,7 @@
 	"wikibase-dispatchstats-median": "Медиана",
 	"special-listdatatypes": "Списък на всички налични типове данни",
 	"wikibase-listdatatypes-intro": "Това е списък на всички типове данни, които са достъпни в инсталацията:",
+	"wikibase-listdatatypes-listproperties": "Списък на свойства с този тип данни",
 	"special-listproperties": "Списък на свойства",
 	"wikibase-listproperties-datatype": "Тип на данните:",
 	"wikibase-listproperties-all": "Всички типове данни",
@@ -153,5 +159,9 @@
 	"content-model-wikibase-item": "Обект в Уикиданни",
 	"content-model-wikibase-property": "Свойство в Уикиданни",
 	"content-model-wikibase-query": "Заявка към Уикиданни",
-	"right-item-merge": "Сливане на обекти"
+	"right-item-merge": "Сливане на обекти",
+	"right-item-redirect": "Създаване на пренасочвания на обекти",
+	"right-property-create": "Създаване на свойства",
+	"action-item-merge": "сливане на обекти",
+	"action-property-create": "създаване на свойства"
 }

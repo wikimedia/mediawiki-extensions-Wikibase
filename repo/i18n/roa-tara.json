@@ -81,6 +81,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Code d'a lènghe:",
 	"wikibase-itemdisambiguation-lookup-label": "Etichette:",
 	"wikibase-itemdisambiguation-submit": "Cirche",
+	"special-newproperty": "Ccrejate 'na probbietà nove",
 	"wikibase-newitem-fieldset": "Ccreje 'na vôscia nove",
 	"wikibase-newentity-label": "Etichette:",
 	"wikibase-newentity-description": "Descrizione:",
@@ -89,6 +90,11 @@
 	"wikibase-setlabel-label": "Etichette:",
 	"wikibase-setlabel-submit": "'Mboste l'etichette",
 	"special-setdescription": "'Mboste 'na descrizione",
+	"wikibase-setsitelink-not-badge": "L'elemende $1 non g'è 'nu distindive.",
 	"wikibase-itemmerge-cant-load-entity-content": "Errore mendre ca ste carecave l'elemende.",
-	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>."
+	"special-listproperties": "Elenghe de le probbietà",
+	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>.",
+	"content-model-wikibase-item": "Elemende Uicchibase",
+	"content-model-wikibase-property": "Probbietà Uicchibase",
+	"content-model-wikibase-query": "'Nderrogazione UicchiBase"
 }
