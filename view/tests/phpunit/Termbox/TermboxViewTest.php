@@ -6,9 +6,11 @@ use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PHPUnit4And6Compat;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\TermboxView;
 
@@ -37,7 +39,7 @@ class TermboxViewTest extends TestCase {
 
 		$this->assertSame(
 			$response,
-			$this->newTermbox( $renderer )->getHtml(
+			$this->newTermbox( $renderer, $this->newLocalizedTextProvider() )->getHtml(
 				$language,
 				new TermList( [] ),
 				new TermList( [] ),
@@ -58,13 +60,45 @@ class TermboxViewTest extends TestCase {
 
 		$this->assertSame(
 			TermboxView::FALLBACK_HTML,
-			$this->newTermbox( $renderer )->getHtml(
+			$this->newTermbox( $renderer, $this->newLocalizedTextProvider() )->getHtml(
 				$language,
 				new TermList( [] ),
 				new TermList( [] ),
 				null,
 				$entityId
 			)
+		);
+	}
+
+	public function testGetTitleHtml_returnsHtmlWithEnitityId() {
+		$entityId = new ItemId( 'Q42' );
+		$decoratedIdSerialization = '( ' . $entityId->getSerialization() . ')';
+
+		$textProvider = $this->newLocalizedTextProvider();
+		$textProvider->method( 'get' )
+			->with( 'parentheses', [ $entityId->getSerialization() ] )
+			->willReturn( $decoratedIdSerialization );
+
+		$termbox = $this->newTermbox( $this->newTermboxRenderer(), $textProvider );
+
+		$this->assertSame(
+			$decoratedIdSerialization,
+			$termbox->getTitleHtml( $entityId )
+		);
+	}
+
+	public function testGetPlaceholders_returnsNone() {
+		$entity = $this->getMock( EntityDocument::class );
+		$languageCode = 'en';
+
+		$termbox = $this->newTermbox(
+			$this->newTermboxRenderer(),
+			$this->newLocalizedTextProvider()
+		);
+
+		$this->assertSame(
+			[],
+			$termbox->getPlaceholders( $entity, $languageCode )
 		);
 	}
 
@@ -75,10 +109,18 @@ class TermboxViewTest extends TestCase {
 		return $this->getMock( TermboxRenderer::class );
 	}
 
-	private function newTermbox( TermboxRenderer $renderer ): TermboxView {
+	/**
+	 * @return LocalizedTextProvider|MockObject
+	 */
+	private function newLocalizedTextProvider(): LocalizedTextProvider {
+		return $this->getMock( LocalizedTextProvider::class );
+	}
+
+	private function newTermbox( TermboxRenderer $renderer, LocalizedTextProvider $textProvider ): TermboxView {
 		return new TermboxView(
 			new LanguageFallbackChain( [] ),
-			$renderer
+			$renderer,
+			$textProvider
 		);
 	}
 
