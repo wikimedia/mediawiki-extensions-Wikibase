@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
-use Wikibase\View\TermboxView;
+use Wikibase\View\Termbox\TermboxView;
 use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
