@@ -5,10 +5,12 @@
 			"Silvonen",
 			"Stryn",
 			"Pyscowicz",
-			"Surjection"
+			"Surjection",
+			"Valtlait"
 		]
 	},
-	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Datatyypin \"$1\" arvojen käsittelyä ei vielä tueta.",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Tyyppiä $1 olevien arvojen käsittelyä ei vielä tueta.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Datatyypin ”$1” arvojen käsittelyä ei vielä tueta.",
 	"valueview-expert-emptyvalue-empty": "tyhjä",
 	"valueview-expert-globecoordinateinput-precision": "Tarkkuus:",
 	"valueview-expert-globecoordinateinput-nullprecision": "määrittelemätön",
