@@ -87,7 +87,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$this->assertContains( $plainHtml, $result );
 		$this->assertStringStartsWith( '<div id="wb-globeCoordinateValue-preview-', $result );
 		$this->assertContains( 'wgKartographerLiveData', $result );
-		$this->assertContains( 'wikipage.content', $result );
+		$this->assertContains( 'initMapframeFromElement', $result );
 	}
 
 	public function testGetPreviewHtml_marsCoordinate() {
@@ -125,6 +125,22 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$this->assertNotEmpty( $out->getModules() );
 	}
 
+	public function testGetParserOutput_empty() {
+		$handler = new CachingKartographerEmbeddingHandler( new Parser );
+		$language = Language::factory( 'qqx' );
+
+		$out = $handler->getParserOutput(
+			[
+				$this->newSampleMarsCoordinate()
+			],
+			$language
+		);
+
+		$this->assertInstanceOf( ParserOutput::class, $out );
+		$this->assertFalse( $out->getProperty( 'kartographer' ) );
+		$this->assertFalse( $out->getProperty( 'kartographer_frames' ) );
+	}
+
 	public function testGetMapframeInitJS() {
 		$handler = new CachingKartographerEmbeddingHandler( new Parser );
 		$handler = TestingAccessWrapper::newFromObject( $handler );
@@ -141,7 +157,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 			'mw.config.get( \'wgKartographerLiveData\' )["maps"] = "awesome"',
 			$html
 		);
-		$this->assertContains( '[ "rl-module-1", "another-rl-module" ]', $html );
+		$this->assertContains( '[ "rl-module-1", "another-rl-module", "ext.kartographer.frame" ]', $html );
 		$this->assertContains( '( "#foo" )', $html );
 	}
 
