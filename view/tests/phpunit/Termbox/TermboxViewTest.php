@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\View\Tests\Termbox;
 
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
-use Wikibase\View\TermboxView;
+use Wikibase\View\Termbox\TermboxView;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\TermboxView

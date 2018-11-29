@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View;
+namespace Wikibase\View\Termbox;
 
 use Exception;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -8,6 +8,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\View\CacheableEntityTermsView;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 
 /**
