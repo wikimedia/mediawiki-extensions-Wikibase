@@ -54,7 +54,7 @@
 	"wikibase-tooltip-error-details": "Detaloj",
 	"wikibase-undeserializable-value": "La valoro estas misformita kaj ne povas esti montrita.",
 	"wikibase-validator-invalid": "Malvalida valoro",
-	"wikibase-validator-missing-field": "Mankas nepra kampo \"$1\"",
+	"wikibase-validator-missing-field": "Mankas deviga kampo \"$1\"",
 	"wikibase-validator-bad-type": "$2 anstataŭ $1",
 	"wikibase-validator-malformed-value": "Misformita enigo: $1",
 	"wikibase-validator-bad-entity-id": "Misformita identigilo: $1",

@@ -63,6 +63,7 @@
 	"wikibase-pageswithbadges-submit": "താളുകൾ പ്രദർശിപ്പിക്കുക",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ഇനം ഐ.ഡി.",
 	"wikibase-pageinfo-entity-id-none": "ഒന്നുമില്ല",
+	"wikibase-pageinfo-description-central": "പ്രധാന വിവരണം",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "വിവരണം: $1",
 	"wikibase-pageinfo-entity-usage-T": "തലക്കെട്ട്",
 	"wikibase-property-render-error": "$1 എന്ന ഗുണഗണം പ്രദർശനസജ്ജമാക്കൽ പരാജയപ്പെട്ടു: $2",

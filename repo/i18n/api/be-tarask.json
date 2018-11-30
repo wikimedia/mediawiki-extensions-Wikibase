@@ -208,5 +208,6 @@
 	"apihelp-wbsetaliases-example-3": "Выдаліць <var>Foo</var> і <var>Bar</var> зь сьпісу ангельскамоўных псэўданімаў для элемэнту з ідэнтыфікатарам <samp>Q1</samp>",
 	"apihelp-wbsetaliases-example-4": "Выдаліць <var>Foo</var> зь сьпісу ангельскамоўных псэўданімаў элемэнту з ідэнтыфікатарам <samp>Q1</samp> пры дадаваньні <var>Bar</var> да яго",
 	"apihelp-wbsetclaim-description": "Стварае ці абнаўляе цэлае сьцьверджаньне ці запіс.",
-	"apihelp-wbsetclaim-summary": "Стварае ці абнаўляе цэлае сьцьверджаньне ці запіс."
+	"apihelp-wbsetclaim-summary": "Стварае ці абнаўляе цэлае сьцьверджаньне ці запіс.",
+	"apihelp-wbsetclaim-param-claim": "Сэрыялізацыя сьцьверджаньня ці запісу"
 }
