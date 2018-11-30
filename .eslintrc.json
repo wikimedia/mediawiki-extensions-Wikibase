@@ -1,5 +1,5 @@
 {
-	"extends": "wikimedia",
+	"extends": "wikimedia/client",
 	"env": {
 		"browser": true
 	},
@@ -28,7 +28,16 @@
 		"one-var": "off",
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off"
+		"vars-on-top": "off",
+
+		"jquery/no-proxy":  "off",
+		"jquery/no-trim":  "off",
+		"jquery/no-grep":  "off",
+		"jquery/no-is-function":  "off",
+		"jquery/no-in-array":  "off",
+		"jquery/no-map-util":  "off",
+		"jquery/no-each-util": "off",
+		"max-statements-per-line": "off"
 	},
 	"plugins": ["compat"]
 }
