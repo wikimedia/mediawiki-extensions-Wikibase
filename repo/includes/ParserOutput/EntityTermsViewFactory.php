@@ -40,7 +40,7 @@ class EntityTermsViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		$useTermbox = false
 	) {
-		return $useTermbox ? $this->newTermboxView( $fallbackChain )
+		return $useTermbox ? $this->newTermboxView( $language, $fallbackChain )
 			: $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
 	}
 
@@ -84,13 +84,16 @@ class EntityTermsViewFactory {
 		);
 	}
 
-	private function newTermboxView( LanguageFallbackChain $fallbackChain ) {
+	private function newTermboxView( Language $language, LanguageFallbackChain $fallbackChain ) {
+		$textProvider = new MediaWikiLocalizedTextProvider( $language );
+
 		return new TermboxView(
 			$fallbackChain,
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
-			)
+			),
+			$textProvider
 		);
 	}
 
