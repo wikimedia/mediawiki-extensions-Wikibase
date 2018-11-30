@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12ba4b7b_d1f033ae",
+        "filename": "lib/tests/phpunit/Formatters/CachingKartographerEmbeddingHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-11-30T07:24:49Z",
+      "side": 1,
+      "message": "This violates Arrange Act Assert, you can avoid this by having two dedicated test methods",
+      "revId": "d32db19e0ff34214ddced8c2b8870a4ff75f6070",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
