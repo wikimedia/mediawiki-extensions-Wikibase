@@ -34,6 +34,24 @@
       "revId": "21c6622bf532d944533bbb1812850225b0a49d2d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2b41a73_cad84b09",
+        "filename": "repo/tests/selenium/.eslintrc.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-11-30T11:59:09Z",
+      "side": 0,
+      "message": "Thanks, I didn’t know .eslintrc.* files extend each other like that.",
+      "parentUuid": "8c0174d4_6e88e7bf",
+      "revId": "21c6622bf532d944533bbb1812850225b0a49d2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
