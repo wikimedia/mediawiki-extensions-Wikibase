@@ -86,9 +86,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 
 		$instance = $this->newInstance( $item, $expectedEntityIds );
 
-		$instance->processEntity( $item );
-
-		$instance->updateParserOutput( $parserOutput );
+		$instance->updateParserOutput( $parserOutput, $item );
 		$expectedEntityIdStrings = array_map( function ( EntityId $id ) {
 			return $id->getSerialization();
 		}, $expectedEntityIds );

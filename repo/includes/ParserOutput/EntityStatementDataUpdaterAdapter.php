@@ -20,15 +20,13 @@ class EntityStatementDataUpdaterAdapter implements EntityParserOutputDataUpdater
 		$this->dataUpdater = $dataUpdater;
 	}
 
-	public function processEntity( EntityDocument $entity ) {
+	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity  ) {
 		if ( $entity instanceof StatementListProvider ) {
 			foreach ( $entity->getStatements() as $statement ) {
 				$this->dataUpdater->processStatement( $statement );
 			}
 		}
-	}
 
-	public function updateParserOutput( ParserOutput $parserOutput ) {
 		$this->dataUpdater->updateParserOutput( $parserOutput );
 	}
 
