@@ -68,6 +68,10 @@
 		<exclude-pattern>WikibaseStringValueNormalizer\.php</exclude-pattern>
 	</rule>
 
+	<rule ref="Wikibase.Commenting">
+		<exclude name="Wikibase.Commenting.ClassLevelDocumentation.Missing" />
+	</rule>
+
 	<!-- Metrics are intentionally not part of the base Wikibase CodeSniffer rule set. -->
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
 		<properties>
