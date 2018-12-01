@@ -16,8 +16,6 @@ interface EntityParserOutputDataUpdater {
 	 *
 	 * @param ParserOutput $parserOutput
 	 */
-	public function updateParserOutput( ParserOutput $parserOutput );
-
-	public function processEntity( EntityDocument $entity );
+	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity );
 
 }
