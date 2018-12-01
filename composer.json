@@ -28,7 +28,7 @@
 		"data-values/geo": "^3.0.1|^2.1.2",
 		"data-values/interfaces": "^0.2.0",
 		"data-values/number": "^0.10.1",
-		"data-values/time": "^0.8.4|^1.0.1",
+		"data-values/time": "^1.0.1",
 		"data-values/serialization": "^1.2.1",
 		"wikibase/data-model": "^9.0.1",
 		"wikibase/data-model-serialization": "^2.5.0",
