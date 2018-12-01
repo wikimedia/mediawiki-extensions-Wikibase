@@ -29,12 +29,13 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\ParserOutput\CompositeStatementDataUpdater;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
-use Wikibase\Repo\ParserOutput\EntityStatementDataUpdaterAdapter;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
+use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
@@ -199,9 +200,13 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$entityIdParser = new BasicEntityIdParser();
 
+		$statementUpdater = new CompositeStatementDataUpdater(
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+		);
+
 		$dataUpdaters = [
-			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
-			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) ),
+			new ItemParserOutputUpdater( $statementUpdater ),
 			new ReferencedEntitiesDataUpdater(
 				$this->newEntityReferenceExtractor(),
 				$entityTitleLookup

@@ -17,7 +17,7 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  */
-class ReferencedEntitiesDataUpdater implements EntityParserOutputDataUpdater {
+class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 
 	/**
 	 * @var EntityTitleLookup

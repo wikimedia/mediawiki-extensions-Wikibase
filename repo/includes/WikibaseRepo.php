@@ -119,6 +119,7 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
@@ -1811,10 +1812,7 @@ class WikibaseRepo {
 		return new DispatchingEntityMetaTagsCreatorFactory( $this->entityTypeDefinitions->getMetaTagsFactoryCallbacks() );
 	}
 
-	/**
-	 * @return EntityParserOutputGeneratorFactory
-	 */
-	public function getEntityParserOutputGeneratorFactory() {
+	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$formats = $this->settings->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
@@ -1840,6 +1838,11 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )
 		);
+	}
+
+	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
+		return $this->getEntityParserOutputGeneratorFactory()
+			->getEntityParserOutputGenerator( $userLanguage );
 	}
 
 	/**
