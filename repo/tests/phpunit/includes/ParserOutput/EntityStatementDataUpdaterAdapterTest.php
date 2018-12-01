@@ -19,7 +19,7 @@ use Wikibase\Repo\ParserOutput\StatementDataUpdater;
  */
 class EntityStatementDataUpdaterAdapterTest extends TestCase {
 
-	public function testProcessEntityCallsProcessStatementForEachStatement() {
+	public function testUpdateParserOutputCallsProcessStatementForEachStatement() {
 		$statement1 = $this->getMockStatement();
 		$statement2 = $this->getMockStatement();
 		$item = new Item( null, null, null, new StatementList( [ $statement1, $statement2 ] ) );
@@ -32,7 +32,7 @@ class EntityStatementDataUpdaterAdapterTest extends TestCase {
 				[ $statement2 ]
 			);
 		$adapter = new EntityStatementDataUpdaterAdapter( $statementDataUpdater );
-		$adapter->processEntity( $item );
+		$adapter->updateParserOutput( new ParserOutput(), $item );
 	}
 
 	public function testUpdateParserOutputIsDelegated() {
@@ -44,18 +44,15 @@ class EntityStatementDataUpdaterAdapterTest extends TestCase {
 
 		$adapter = new EntityStatementDataUpdaterAdapter( $statementDataUpdater );
 
-		$adapter->updateParserOutput( $parserOutput );
+		$adapter->updateParserOutput( $parserOutput, new Item() );
 	}
 
 	private function getMockStatementDataUpdater() {
-		return $this->getMockBuilder( StatementDataUpdater::class )
-			->getMock();
+		return $this->createMock( StatementDataUpdater::class );
 	}
 
 	private function getMockStatement() {
-		return $this->getMockBuilder( Statement::class )
-			->disableOriginalConstructor()
-			->getMock();
+		return $this->createMock( Statement::class );
 	}
 
 }
