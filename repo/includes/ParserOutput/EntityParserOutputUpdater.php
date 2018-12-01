@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 /**
  * @license GPL-2.0-or-later
  */
-interface EntityParserOutputDataUpdater {
+interface EntityParserOutputUpdater {
 
 	/**
 	 * Update extension data, properties or other data in ParserOutput.
