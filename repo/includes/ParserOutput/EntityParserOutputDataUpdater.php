@@ -15,9 +15,10 @@ interface EntityParserOutputDataUpdater {
 	 * These updates are invoked when EntityContent::getParserOutput is called.
 	 *
 	 * @param ParserOutput $parserOutput
+	 * @param EntityDocument $entity
+	 *
+	 * @return void
 	 */
-	public function updateParserOutput( ParserOutput $parserOutput );
-
-	public function processEntity( EntityDocument $entity );
+	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity );
 
 }
