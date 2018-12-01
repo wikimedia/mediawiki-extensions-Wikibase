@@ -268,7 +268,9 @@
 	"content-model-wikibase-item": "Wikibase-emne",
 	"content-model-wikibase-property": "Wikibase-egenskab",
 	"content-model-wikibase-query": "Wikibase-forespørgsel",
+	"right-item-merge": "Flet emner",
 	"right-property-create": "Oprette egenskaber",
+	"action-item-merge": "flet emner",
 	"action-property-create": "oprette egenskaber",
 	"wikibase-pageinfo-subscription-none": "Ingen"
 }
