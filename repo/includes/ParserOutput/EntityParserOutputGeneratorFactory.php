@@ -10,8 +10,8 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -144,14 +144,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 	}
 
-	/**
-	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
-	 *
-	 * @param Language $userLanguage
-	 *
-	 * @return EntityParserOutputGenerator
-	 */
-	public function getEntityParserOutputGenerator( Language $userLanguage ) {
+	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
@@ -167,19 +160,11 @@ class EntityParserOutputGeneratorFactory {
 		);
 	}
 
-	/**
-	 * @return ParserOutputJsConfigBuilder
-	 */
 	private function newParserOutputJsConfigBuilder() {
 		return new ParserOutputJsConfigBuilder( $this->entitySerializer );
 	}
 
-	/**
-	 * @param Language $language
-	 *
-	 * @return LanguageFallbackChain
-	 */
-	private function getLanguageFallbackChain( Language $language ) {
+	private function getLanguageFallbackChain( Language $language ): LanguageFallbackChain {
 		// Language fallback must depend ONLY on the target language,
 		// so we don't confuse the parser cache with user specific HTML.
 		return $this->languageFallbackChainFactory->newFromLanguage(
@@ -188,54 +173,69 @@ class EntityParserOutputGeneratorFactory {
 	}
 
 	/**
-	 * @return EntityParserOutputDataUpdater[]
+	 * @return EntityParserOutputUpdater[]
 	 */
-	private function getDataUpdaters() {
+	private function getDataUpdaters(): array {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
-		$updaters = [
-			new ReferencedEntitiesDataUpdater(
-				$this->entityReferenceExtractorDelegator,
-				$this->entityTitleLookup
-			),
-			new EntityStatementDataUpdaterAdapter( new ExternalLinksDataUpdater( $propertyDataTypeMatcher ) ),
-			new EntityStatementDataUpdaterAdapter( new ImageLinksDataUpdater( $propertyDataTypeMatcher ) )
-		];
+		$statementUpdater = new CompositeStatementDataUpdater(
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+		);
 
 		if ( !empty( $this->preferredPageImagesProperties )
 			&& ExtensionRegistry::getInstance()->isLoaded( 'PageImages' )
 		) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter( new PageImagesDataUpdater(
-				$this->preferredPageImagesProperties,
-				PageImages::PROP_NAME_FREE
-			) );
+			$statementUpdater->addUpdater( $this->newPageImagesDataUpdater() );
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'GeoData' ) ) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter( new GeoDataDataUpdater(
-				$propertyDataTypeMatcher,
-				$this->preferredGeoDataProperties,
-				$this->globeUris
-			) );
+			$statementUpdater->addUpdater( $this->newGeoDataDataUpdater( $propertyDataTypeMatcher ) );
 		}
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'Math' ) ) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter(
-				new \MathDataUpdater( $propertyDataTypeMatcher )
-			);
+			$statementUpdater->addUpdater( new \MathDataUpdater( $propertyDataTypeMatcher ) );
 		}
 
 		// FIXME: null implementation of KartographerEmbeddingHandler would seem better than null pointer
 		// in general, and would also remove the need for the check here
 		if ( $this->kartographerEmbeddingHandler ) {
-			$updaters[] = new EntityStatementDataUpdaterAdapter(
-				new GlobeCoordinateKartographerDataUpdater(
-					$this->kartographerEmbeddingHandler
-				)
-			);
+			$statementUpdater->addUpdater( $this->newKartographerDataUpdater() );
 		}
 
-		return $updaters;
+		return [
+			new ItemParserOutputUpdater(
+				$statementUpdater
+			),
+			new PropertyParserOutputUpdater(
+				$statementUpdater
+			),
+			new ReferencedEntitiesDataUpdater(
+				$this->entityReferenceExtractorDelegator,
+				$this->entityTitleLookup
+			)
+		];
+	}
+
+	private function newPageImagesDataUpdater(): StatementDataUpdater {
+		return new PageImagesDataUpdater(
+			$this->preferredPageImagesProperties,
+			PageImages::PROP_NAME_FREE
+		);
+	}
+
+	private function newGeoDataDataUpdater( $propertyDataTypeMatcher ): StatementDataUpdater {
+		return new GeoDataDataUpdater(
+			$propertyDataTypeMatcher,
+			$this->preferredGeoDataProperties,
+			$this->globeUris
+		);
+	}
+
+	private function newKartographerDataUpdater(): StatementDataUpdater {
+		return new GlobeCoordinateKartographerDataUpdater(
+			$this->kartographerEmbeddingHandler
+		);
 	}
 
 }
