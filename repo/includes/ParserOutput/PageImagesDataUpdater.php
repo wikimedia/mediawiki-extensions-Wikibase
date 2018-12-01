@@ -172,7 +172,7 @@ class PageImagesDataUpdater implements StatementDataUpdater {
 	}
 
 	/**
-	 * @see EntityParserOutputDataUpdater::updateParserOutput
+	 * @see EntityParserOutputUpdater::updateParserOutput
 	 *
 	 * @param ParserOutput $parserOutput
 	 */
