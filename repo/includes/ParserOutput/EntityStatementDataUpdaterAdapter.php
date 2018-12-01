@@ -9,7 +9,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 /**
  * @license GPL-2.0-or-later
  */
-class EntityStatementDataUpdaterAdapter implements EntityParserOutputDataUpdater {
+class EntityStatementDataUpdaterAdapter implements EntityParserOutputUpdater {
 
 	/**
 	 * @var StatementDataUpdater

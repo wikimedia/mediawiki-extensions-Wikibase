@@ -22,18 +22,18 @@ class EntityParserOutputDataUpdaterCollection {
 	private $parserOutput;
 
 	/**
-	 * @var EntityParserOutputDataUpdater[]
+	 * @var EntityParserOutputUpdater[]
 	 */
 	private $dataUpdaters;
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param EntityParserOutputDataUpdater[] $dataUpdaters
+	 * @param EntityParserOutputUpdater[] $dataUpdaters
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ParserOutput $parserOutput, array $dataUpdaters ) {
-		Assert::parameterElementType( EntityParserOutputDataUpdater::class, $dataUpdaters, '$dataUpdaters' );
+		Assert::parameterElementType( EntityParserOutputUpdater::class, $dataUpdaters, '$dataUpdaters' );
 
 		$this->parserOutput = $parserOutput;
 		$this->dataUpdaters = $dataUpdaters;
