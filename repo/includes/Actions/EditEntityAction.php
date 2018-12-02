@@ -520,4 +520,13 @@ class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::closeElement( 'div' ) );
 	}
 
+	/**
+	 * @see Action::requiresUnblock
+	 *
+	 * @return bool Always true.
+	 */
+	public function requiresUnblock() {
+		return true;
+	}
+
 }
