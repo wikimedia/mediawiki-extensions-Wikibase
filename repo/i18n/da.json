@@ -186,6 +186,8 @@
 	"wikibase-mergeitems-fromid": "Id at flette fra",
 	"wikibase-mergeitems-toid": "Id at flette til",
 	"wikibase-mergeitems-submit": "Flet emner",
+	"wikibase-itemmerge-failed-save": "Kunne ikke gemme emne.",
+	"wikibase-itemmerge-cant-load-entity-content": "Kunne ikke indlæse emnet.",
 	"special-dispatchstats": "Statistik for udbredelse af ændringer",
 	"wikibase-dispatchstats-intro": "Denne side giver statistikker om udsendelse af ændringer til klienterne.",
 	"wikibase-dispatchstats-no-stats": "I øjeblikket er der ingen tilgængelige statistikker.",
