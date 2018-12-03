@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9ef2c9f7_064bf375",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-03T16:58:02Z",
+      "side": 1,
+      "message": "Slightly evil adding all of these commas when not actually touching these lines.",
+      "range": {
+        "startLine": 4,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ff2ad48_09a6532e",
         "filename": "repo/tests/selenium/wikibase.api.js",
         "patchSetId": 1
@@ -16,6 +39,29 @@
       "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12945094_ed996a62",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-03T16:58:02Z",
+      "side": 1,
+      "message": "Ooof, it is lame that we can\u0027t just protect directly with the API.\nI think this again shows us how wikidata needs a better api in many places.\nBut nothing todo here relating to that..",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 6
+      },
+      "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
