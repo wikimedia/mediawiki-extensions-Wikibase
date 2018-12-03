@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79d716fb_4ad38ea5",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-03T14:01:35Z",
+      "side": 1,
+      "message": "Don’t we need to override this function in EditEntityAction as well?",
+      "range": {
+        "startLine": 182,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 30
+      },
+      "revId": "14fc0b808adbf6085ea6cf38133bfe581bf1ef8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
