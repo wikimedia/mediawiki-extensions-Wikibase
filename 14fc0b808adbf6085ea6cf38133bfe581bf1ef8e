@@ -46,6 +46,30 @@
       "revId": "14fc0b808adbf6085ea6cf38133bfe581bf1ef8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc58393_52942bbf",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-03T16:57:01Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/477307/",
+      "parentUuid": "eb7c697c_6b0a3d9e",
+      "range": {
+        "startLine": 182,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 30
+      },
+      "revId": "14fc0b808adbf6085ea6cf38133bfe581bf1ef8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
