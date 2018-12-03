@@ -75,6 +75,41 @@ class WikibaseApi {
 		} );
 	}
 
+	protectEntity( entityId ) {
+		return Promise.all( [
+			bot.login( {
+				username: browser.options.username,
+				password: browser.options.password
+			} ).then( () => {
+				return bot.request( {
+					action: 'query',
+					meta: 'tokens',
+					format: 'json'
+				} ).then( csrfTokenResponse => {
+					return csrfTokenResponse.query.tokens.csrftoken;
+				} );
+			} ),
+			bot.request( {
+				action: 'wbgetentities',
+				format: 'json',
+				ids: entityId,
+				props: 'info'
+			} ).then( getEntitiesResponse => {
+				return getEntitiesResponse.entities[ entityId ].title;
+			} )
+		] )
+			.then( ( results ) => {
+				const csrfToken = results[ 0 ],
+					entityTitle = results[ 1 ];
+				return bot.request( {
+					action: 'protect',
+					title: entityTitle,
+					protections: 'edit=sysop',
+					token: csrfToken
+				} );
+			} );
+	}
+
 	getProperty( datatype ) {
 		let envName = `WIKIBASE_PROPERTY_${ datatype.toUpperCase() }`;
 		if ( envName in process.env ) {
