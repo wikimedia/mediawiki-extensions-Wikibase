@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0a5e497b_deac696e",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2018-12-03T17:18:41Z",
+      "side": 1,
+      "message": "Yeah, that wasn\u0027t intentional. It came from idea\u0027s auto-formatting and I forgot to skip it when staging my code. Fixed now. (Also caused linter errors now)",
+      "parentUuid": "9ef2c9f7_064bf375",
+      "range": {
+        "startLine": 4,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ff2ad48_09a6532e",
         "filename": "repo/tests/selenium/wikibase.api.js",
         "patchSetId": 1
