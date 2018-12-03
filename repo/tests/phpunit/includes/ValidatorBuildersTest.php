@@ -128,7 +128,6 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg', true ],
 			'Should have extension' => [ 'Foo', 'check-file-type' ],
 			'Extension to short' => [ 'Foo.a', 'check-file-type' ],
-			'This should be good' => [ 'Foo.jpg', null ],
 			'Illegal character: newline' => [ "a\na.jpg", true ],
 			'Illegal character: open square bracket' => [ 'a[a.jpg', 'illegal-file-chars' ],
 			'Illegal character: close square bracket' => [ 'a]a.jpg', 'illegal-file-chars' ],
@@ -139,27 +138,28 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'Illegal character: colon' => [ 'Foo:bar.jpg', 'illegal-file-chars' ],
 			'Illegal character: slash' => [ 'Foo/bar.jpg', 'illegal-file-chars' ],
 			'Illegal character: backslash' => [ 'Foo\bar.jpg', 'illegal-file-chars' ],
-			'Unicode support' => [ 'Äöü.jpg', null ],
 			'Leading space' => [ ' Foo.jpg', true ],
 			'Trailing space' => [ 'Foo.jpg ', true ],
 			'Not found' => [ 'Foo-NOT-FOUND.jpg', true ],
 		];
 	}
 
+	public function testCommonsMediaValidationSucceeds() {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
+
+		$this->assertTrue( $validator->validate( new StringValue( 'Foo.jpg' ) )->isValid() );
+		$this->assertTrue( $validator->validate( new StringValue( 'Äöü.jpg' ) )->isValid() );
+	}
+
 	/**
 	 * @dataProvider provideCommonsMediaValidation
 	 * @param string $fileName
-	 * @param string|null|true $expectedErrorCode null for no error, true for any error
+	 * @param string|true $expectedErrorCode true for any error
 	 */
 	public function testCommonsMediaValidation( $fileName, $expectedErrorCode ) {
 		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
 
 		$result = $validator->validate( new StringValue( $fileName ) );
-
-		if ( $expectedErrorCode === null ) {
-			$this->assertTrue( $result->isValid() );
-			return;
-		}
 
 		if ( $expectedErrorCode === true ) {
 			$this->assertFalse( $result->isValid() );
