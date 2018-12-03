@@ -148,12 +148,34 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideCommonsMediaValidation
+	 * @param string $fileName
+	 * @param string|null|true $expectedErrorCode null for no error, true for any error
 	 */
-	public function testCommonsMediaValidation( $fileName, $expected ) {
-		$value = new StringValue( $fileName );
-		$validators = $this->newValidatorBuilders()->buildMediaValidators();
+	public function testCommonsMediaValidation( $fileName, $expectedErrorCode ) {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
 
-		$this->assertValidationWithMessage( $expected, $validators, $value );
+		$this->assertValidationWithMessage(
+			$expectedErrorCode,
+			$validator->validate( new StringValue( $fileName ) )
+		);
+	}
+
+	private function assertValidationWithMessage( $expectedErrorCode, Result $result ) {
+		if ( $expectedErrorCode === null ) {
+			$this->assertTrue( $result->isValid() );
+			return;
+		}
+
+		if ( $expectedErrorCode ) {
+			$errors = $result->getErrors();
+			$this->assertNotEmpty( $errors );
+			foreach ( $errors as $error ) {
+				if ( $error->getCode() == $expectedErrorCode ) {
+					return;
+				}
+			}
+			$this->fail( $errors[0]->getText() );
+		}
 	}
 
 	public function provideGeoShapeValidation() {
@@ -494,7 +516,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @param ValueValidator[] $validators
 	 * @param mixed $value
 	 */
-	protected function assertValidation( $expected, array $validators, $value ) {
+	private function assertValidation( $expected, array $validators, $value ) {
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );
@@ -513,31 +535,6 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			$this->assertEquals( $expected, $result->isValid() );
 		} else {
 			$this->assertEquals( $expected, $result->isValid() );
-		}
-	}
-
-	protected function assertValidationWithMessage( $expected, array $validators, $value ) {
-		$result = Result::newSuccess();
-		foreach ( $validators as $validator ) {
-			$result = $validator->validate( $value );
-
-			if ( !$result->isValid() ) {
-				break;
-			}
-		}
-
-		if ( $expected ) {
-			$errors = $result->getErrors();
-			$this->assertNotEmpty( $errors );
-			foreach ( $errors as $error ) {
-				if ( $error->getCode() == $expected ) {
-					return;
-				}
-			}
-			$this->fail( $errors[0]->getText() );
-
-		} else {
-			$this->assertTrue( $result->isValid() );
 		}
 	}
 
