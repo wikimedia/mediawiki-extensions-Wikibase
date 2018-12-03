@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01603225_5de032c7",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-03T18:51:12Z",
+      "side": 1,
+      "message": "This could be much nicer:\n\n .then( ([csrfToken, entityTitle]) \u003d\u003e {\n\nbut I assume the Chromium version in CI doesn’t support this yet.",
+      "range": {
+        "startLine": 101,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 32
+      },
+      "revId": "ac2007d070288f12961b02bb02c8c9ff9f995336",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
