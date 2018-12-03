@@ -2,7 +2,7 @@
 
 const MWBot = require( 'mwbot' ),
 	bot = new MWBot( {
-		apiUrl: browser.options.baseUrl + '/api.php'
+		apiUrl: browser.options.baseUrl + '/api.php',
 	} );
 
 class WikibaseApi {
@@ -21,8 +21,8 @@ class WikibaseApi {
 			labels = {
 				en: {
 					language: 'en',
-					value: label
-				}
+					value: label,
+				},
 			};
 		}
 
@@ -35,7 +35,7 @@ class WikibaseApi {
 						action: 'wbeditentity',
 						'new': 'item',
 						data: JSON.stringify( itemData ),
-						token: bot.editToken
+						token: bot.editToken,
 					} ).then( ( response ) => {
 						resolve( response.entity.id );
 					}, reject );
@@ -55,7 +55,7 @@ class WikibaseApi {
 						action: 'wbeditentity',
 						'new': 'property',
 						data: JSON.stringify( propertyData ),
-						token: bot.editToken
+						token: bot.editToken,
 					} ).then( ( response ) => {
 						resolve( response.entity.id );
 					}, reject );
@@ -75,8 +75,34 @@ class WikibaseApi {
 		} );
 	}
 
+	async protectEntity( entityId ) {
+		await bot.login( {
+			username: browser.options.username,
+			password: browser.options.password,
+		} );
+		const csrfToken = await bot.request( {
+			action: 'query',
+			meta: 'tokens',
+			format: 'json',
+		} ).then( csrfTokenResponse => {
+			return csrfTokenResponse.query.tokens.csrftoken;
+		} );
+		const entityTitle = await bot.request( {
+			action: 'wbgetentities',
+			format: 'json',
+			ids: entityId,
+			props: 'info',
+		} ).then( getEntitiesResponse => getEntitiesResponse.entities[ entityId ].title );
+		await bot.request( {
+			action: 'protect',
+			title: entityTitle,
+			protections: 'edit=sysop',
+			token: csrfToken,
+		} );
+	}
+
 	getProperty( datatype ) {
-		let envName = `WIKIBASE_PROPERTY_${ datatype.toUpperCase() }`;
+		let envName = `WIKIBASE_PROPERTY_${datatype.toUpperCase()}`;
 		if ( envName in process.env ) {
 			return Promise.resolve( process.env[ envName ] );
 		} else {

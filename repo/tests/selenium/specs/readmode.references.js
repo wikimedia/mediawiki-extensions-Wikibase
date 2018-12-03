@@ -23,9 +23,12 @@ describe( 'WikibaseReferenceOnProtectedPage', function () {
 		ItemPage.open( itemId );
 		ItemPage.addMainStatement( propertyId, 'mval' );
 		ItemPage.addReferenceToNthStatementOfStatementGroup( 0, propertyId, propertyId, 'refval' );
-		ItemPage.protectPage( itemId );
+		browser.call(() => WikibaseApi.protectEntity( itemId ));
+		ItemPage.open( itemId );
 
 		browser.waitForVisible( '.wikibase-statementview-references-container .wikibase-statementview-references-heading a.ui-toggler' );
-
+		if(browser.isExisting('.wikibase-addtoolbar')) {
+			throw new Error('This shouldn\'t exist on a protected page!');
+		}
 	} );
 } );
