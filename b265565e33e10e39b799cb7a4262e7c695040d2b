@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "c7dd3521_7b68742e",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2018-12-03T18:14:38Z",
+      "side": 1,
+      "message": "Well, thanks to the old chrome version of CI, this code is now much uglier, but at least also running in parallel^^",
+      "parentUuid": "9ff2ad48_09a6532e",
+      "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12945094_ed996a62",
         "filename": "repo/tests/selenium/wikibase.api.js",
         "patchSetId": 1
