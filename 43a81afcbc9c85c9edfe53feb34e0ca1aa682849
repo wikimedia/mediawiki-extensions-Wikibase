@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "034ce1f9_e16cef93",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-03T13:49:08Z",
+      "side": 1,
+      "message": "Methods should be private by default. Only increase their visibility if there is good reason to do so. \"protected\" methods are rare in a well designed codebase (because inheritance of concrete code is rare).",
+      "revId": "43a81afcbc9c85c9edfe53feb34e0ca1aa682849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "826d5ac6_6351ef14",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-03T13:49:08Z",
+      "side": 1,
+      "message": "Loops and if statements are a red flag in tests. There are cases where they are ok, though more often than not either the test or the code under test has an issue.",
+      "revId": "43a81afcbc9c85c9edfe53feb34e0ca1aa682849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e92bc781_ff2a9a41",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-03T13:49:08Z",
+      "side": 1,
+      "message": "The above block of code can be extracted into a dedicated method.",
+      "revId": "43a81afcbc9c85c9edfe53feb34e0ca1aa682849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "917e9730_0579be8c",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-03T13:49:08Z",
+      "side": 1,
+      "message": "Please use explicit checks.\n\nAlso try to avoid variables with multiple types. This one can be true, null or string. Often it is OK to have something that can be of a certain type of be null. Very rarely it is OK for something to be more types.",
+      "revId": "43a81afcbc9c85c9edfe53feb34e0ca1aa682849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4896f8a_fbf3d292",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-03T13:49:08Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d unless reason to not use it",
+      "revId": "43a81afcbc9c85c9edfe53feb34e0ca1aa682849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
