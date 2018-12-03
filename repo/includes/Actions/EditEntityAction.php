@@ -529,4 +529,13 @@ class EditEntityAction extends ViewEntityAction {
 		return true;
 	}
 
+	/**
+	 * @see Action::requiresWrite
+	 *
+	 * @return bool Always true.
+	 */
+	public function requiresWrite() {
+		return true;
+	}
+
 }
