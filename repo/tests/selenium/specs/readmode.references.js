@@ -21,8 +21,8 @@ describe( 'WikibaseReferenceOnProtectedPage', function () {
 		} );
 
 		ItemPage.open( itemId );
-		ItemPage.addMainStatement( propertyId, 'main value' );
-		ItemPage.addReferenceToNthStatementOfStatementGroup( 0, propertyId, propertyId, 'reference value 1-1' );
+		ItemPage.addMainStatement( propertyId, 'mval' );
+		ItemPage.addReferenceToNthStatementOfStatementGroup( 0, propertyId, propertyId, 'refval' );
 		ItemPage.protectPage( itemId );
 
 		browser.waitForVisible( '.wikibase-statementview-references-container .wikibase-statementview-references-heading a.ui-toggler' );
