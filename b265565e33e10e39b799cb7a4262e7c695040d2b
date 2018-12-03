@@ -62,6 +62,30 @@
       "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2088326_db0d45e1",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-03T17:13:49Z",
+      "side": 1,
+      "message": "I don’t think the Wikibase API should have its own way to protect pages/entities… but perhaps something like this would be neat:\n\n action\u003dprotect\u0026\n generator\u003dwbentities\u0026\n gwbeids\u003dID\u0026\n protection\u003dedit\u003dsysop\u0026\n token\u003dTOKEN",
+      "parentUuid": "12945094_ed996a62",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 6
+      },
+      "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
