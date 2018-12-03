@@ -138,7 +138,7 @@
 	"wikibase-property-summary-wbcreate-new": "Oprettede en ny egenskab",
 	"wikibase-property-summary-wbeditentity-create": "Oprettede en ny egenskab",
 	"wikibase-property-summary-wbeditentity-create-property": "Oprettede en ny egenskab",
-	"wikibase-property-summary-wbeditentity-update": "Opdaterede en egenskab",
+	"wikibase-property-summary-wbeditentity-update": "Ændrede en egenskab",
 	"wikibase-property-summary-wbeditentity-override": "Ryddet en egenskab",
 	"wikibase-property-summary-special-create-property": "Oprettede en egenskab for [$2] med {{PLURAL:$1|en værdi|værdier}}"
 }
