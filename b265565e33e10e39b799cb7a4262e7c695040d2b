@@ -86,6 +86,30 @@
       "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6471f38_4d19476a",
+        "filename": "repo/tests/selenium/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-03T17:16:01Z",
+      "side": 1,
+      "message": "Something like that would be cool.\n\nThe question is, if wikibase would still have a way to protect entities if it were not build on mediawiki, and I think the answer to that is probably still yes, so a separate API probably makes sense.",
+      "parentUuid": "f2088326_db0d45e1",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 6
+      },
+      "revId": "b265565e33e10e39b799cb7a4262e7c695040d2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
