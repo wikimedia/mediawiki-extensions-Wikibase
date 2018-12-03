@@ -12,16 +12,16 @@ use Wikibase\DataModel\Entity\EntityId;
 class FakeEntityDocument implements EntityDocument {
 
 	/**
-	 * @var EntityId
+	 * @var EntityId|null
 	 */
 	private $id;
 
-	public function __construct( EntityId $id ) {
+	public function __construct( EntityId $id = null ) {
 		$this->id = $id;
 	}
 
 	/**
-	 * @return EntityId
+	 * @return EntityId|null
 	 */
 	public function getId() {
 		return $this->id;
