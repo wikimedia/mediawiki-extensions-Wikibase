@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02423961_feeb7df2",
+        "filename": "repo/includes/ParserOutput/CompositeStatementDataUpdater.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-04T09:57:02Z",
+      "side": 1,
+      "message": "IMO this should have a type hint",
+      "revId": "5be8140fb244fd7cb64bc49e0b9a0088fb3e6efc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
