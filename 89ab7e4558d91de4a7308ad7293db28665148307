@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f3f58f2_f9228cde",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-04T09:59:23Z",
+      "side": 1,
+      "message": "Missing @param for this one",
+      "range": {
+        "startLine": 19,
+        "startChar": 80,
+        "endLine": 19,
+        "endChar": 87
+      },
+      "revId": "89ab7e4558d91de4a7308ad7293db28665148307",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
