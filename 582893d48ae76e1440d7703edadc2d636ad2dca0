@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32e7819d_ba69d1c4",
+        "filename": "repo/includes/Hooks/Formatters/DefaultEntityLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-04T13:47:44Z",
+      "side": 1,
+      "message": "I worked on this code and the idea was to use these @see pointing to the parent class instead of @inheritDoc. Both is fine. Nowadays I would only use @inheritDoc, and remove the redundant @see.\n\nWhat do the people currently working on the Wikibase codebases think?",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 37
+      },
+      "revId": "582893d48ae76e1440d7703edadc2d636ad2dca0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18a2e886_247aafe2",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-04T13:47:44Z",
+      "side": 1,
+      "message": "This should be removed as it now returns null.",
+      "range": {
+        "startLine": 126,
+        "startChar": 2,
+        "endLine": 126,
+        "endChar": 8
+      },
+      "revId": "582893d48ae76e1440d7703edadc2d636ad2dca0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
