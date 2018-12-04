@@ -10,8 +10,10 @@ use Wikibase\DataModel\Entity\EntityId;
 interface TermboxRenderer {
 
 	/**
+	 * @throws TermboxRenderingException
+	 *
 	 * @param EntityId $entityId
-	 * @param $language
+	 * @param string $language
 	 *
 	 * @return string
 	 */

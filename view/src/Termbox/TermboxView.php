@@ -2,13 +2,13 @@
 
 namespace Wikibase\View;
 
-use Exception;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
+use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
 /**
  * @license GPL-2.0-or-later
@@ -45,7 +45,8 @@ class TermboxView implements CacheableEntityTermsView {
 	) {
 		try {
 			return $this->renderer->getContent( $entityId, $mainLanguageCode );
-		} catch ( Exception $exception ) {
+		} catch ( TermboxRenderingException $exception ) {
+			// TODO Log
 			return self::FALLBACK_HTML;
 		}
 	}
