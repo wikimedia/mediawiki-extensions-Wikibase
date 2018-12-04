@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
+use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 use Wikibase\View\TermboxView;
 
 /**
@@ -56,7 +57,7 @@ class TermboxViewTest extends TestCase {
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->willThrowException( new Exception( 'unspecific' ) );
+			->willThrowException( new TermboxRenderingException( 'specific reason of failure' ) );
 
 		$this->assertSame(
 			TermboxView::FALLBACK_HTML,
