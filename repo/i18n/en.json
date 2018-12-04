@@ -197,6 +197,7 @@
 	"wikibase-newitem-page": "Name of the first linked page",
 	"wikibase-newitem-no-external-page": "A page \"$2\" could not be found on \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "The provided site identifier was not recognized.",
+	"wikibase-newitem-same-label-and-description": "The label and description can not have the same value.",
 	"wikibase-newitem-insufficient-data": "You need to fill at least either label, description or aliases.",
 	"wikibase-newentity-language": "Language:",
 	"wikibase-newentity-label": "Label:",
