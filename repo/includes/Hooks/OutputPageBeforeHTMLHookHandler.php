@@ -119,8 +119,6 @@ class OutputPageBeforeHTMLHookHandler {
 	 *
 	 * @param OutputPage $out
 	 * @param string &$html the HTML to mangle
-	 *
-	 * @return bool
 	 */
 	public static function onOutputPageBeforeHTML( OutputPage $out, &$html ) {
 		$self = self::newFromGlobalState();
@@ -131,8 +129,6 @@ class OutputPageBeforeHTMLHookHandler {
 	/**
 	 * @param OutputPage $out
 	 * @param string &$html
-	 *
-	 * @return bool
 	 */
 	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
