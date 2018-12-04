@@ -16,6 +16,24 @@
       "revId": "5be8140fb244fd7cb64bc49e0b9a0088fb3e6efc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c7498c1_364c6862",
+        "filename": "repo/includes/ParserOutput/CompositeStatementDataUpdater.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-04T10:03:29Z",
+      "side": 1,
+      "message": "IDEs should detect this automagically.\ntypehint could be useful for people not using IDEs.",
+      "parentUuid": "02423961_feeb7df2",
+      "revId": "5be8140fb244fd7cb64bc49e0b9a0088fb3e6efc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
