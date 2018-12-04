@@ -122,7 +122,7 @@
 	"wikibase-validator-label-conflict": "Уласьцівасьць $3 ужо мае метку «$1» для моўнага коду $2.",
 	"wikibase-validator-label-with-description-conflict": "Элемэнт $3 ужо мае метку «$1», злучаны з кодам мовы $2 і мае ў апісаньні той жа тэкст.",
 	"wikibase-validator-label-no-entityid": "Метка ня мусіць супадаць зь дзейным ідэнтыфікатарам элемэнту.",
-	"wikibase-validator-illegal-file-chars": "Назва файлу ня можа ўтрыліваць такія сымбалі, як двукроп’і ці нахіленыя рыскі. Калі ласка, устаўце толькі назву файлу пасьля «Файл:».",
+	"wikibase-validator-illegal-file-chars": "Назва файлу ня можа ўтрыліваць такія сымбалі, як двукроп’і ці нахіленыя рыскі.",
 	"wikibase-validator-illegal-geo-shape-title": "Значэньне мусіць пачынацца з <code>Data:</code> і сканчацца на <code>.map</code>. Дадаткова загаловак ня мусіць утрымліваць такія сымбалі як двукроп’е, краты ці вэртыкальная рыса.",
 	"wikibase-validator-illegal-tabular-data-title": "Значэньне мусіць пачынацца з <code>Data:</code> і сканчацца на <code>.tab</code>. Дадаткова загаловак ня мусіць утрымліваць такія сымбалі як двукроп’е, краты ці вэртыкальную рысу.",
 	"wikibase-validator-no-such-media": "Файл «$1» не існуе ў [https://commons.wikimedia.org/ Вікісховішчы].",

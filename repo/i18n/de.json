@@ -209,6 +209,7 @@
 	"wikibase-newitem-page": "Titel der ersten verlinkten Seite",
 	"wikibase-newitem-no-external-page": "Eine Seite „$2“ konnte nicht auf „$1“ gefunden werden.",
 	"wikibase-newitem-not-recognized-siteid": "Die angegebene Websitekennung ist nicht bekannt.",
+	"wikibase-newitem-same-label-and-description": "Die Bezeichnung und die Beschreibung können nicht den gleichen Wert haben.",
 	"wikibase-newitem-insufficient-data": "Du musst mindestens entweder eine Bezeichnung, Beschreibung oder Aliasse angeben.",
 	"wikibase-newentity-language": "Sprache:",
 	"wikibase-newentity-label": "Bezeichnung:",

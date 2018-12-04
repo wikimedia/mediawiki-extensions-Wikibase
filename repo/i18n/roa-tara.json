@@ -71,6 +71,7 @@
 	"wikibase-snakview-variations-novalue-label": "nisciune valore",
 	"wikibase-snakview-snaktypeselector-value": "valore personalizzate",
 	"wikibase-entityselector-more": "de cchiù",
+	"wikibase-validator-check-file-type": "L'estenzione d'u file manghe",
 	"wikibase-validator-page-not-exists": "'A pàgene \"$1\" non g'esiste.",
 	"wikibase-item-reference-edit-placeholder": "Mitte l'ID d'a vôsce e.g. Q10",
 	"special-itembytitle": "Vôsce pe titole",

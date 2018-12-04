@@ -95,7 +95,7 @@
 	"wikibase-otherprojects-beta-description": "Dodaje odeljak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovu podataka iz Vikibaze.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s Vikipodacima",
 	"echo-pref-tooltip-wikibase-action": "Obaveštava vas kada neko poveže stranicu koju ste napravili na stavku Vikipodataka.",
-	"notification-header-page-connection": "!!FUZZY!!{{GENDER:$2|Korisnik|Korisnica|Korisnik}} $2 je {{GENDER:$2|povezao|povezala|povezao}} stranicu <strong>$3</strong> na stavku na Vikipodacima.",
+	"notification-header-page-connection": "{{GENDER:$2|Korisnik|Korisnica|Korisnik}} $2 je {{GENDER:$2|povezao|povezala|povezao}} stranicu <strong>$3</strong> na stavku na Vikipodacima.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> i {{PLURAL:$4|jedna druga stranica je {{GENDER:$2|povezana}}|$4 druge stranice su {{GENDER:$2|povezane}}|$4 drugih stranica je {{GENDER:$2|povezano}}}} sa stavkom na Vikipodacima.",
 	"notification-link-text-view-item": "{{GENDER:$1|Pogledaj}} stavku",
 	"notification-subject-page-connection": "{{GENDER:$2|Korisnik|Korisnica|Korisnik}} $2 je stranicu <strong>$3</strong> koju ste Vi {{GENDER:$3|napravili}} na projektu {{SITENAME}} {{GENDER:$2|povezao|povezala|povezao}} na stavku na Vikipodacima",

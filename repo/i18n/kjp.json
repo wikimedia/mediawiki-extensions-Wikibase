@@ -10,5 +10,8 @@
 	"wikibase-label-empty": "မၠိင်ထါင်ၮဲ ဖှ်ေထလ်ုအှ်",
 	"wikibase-description-empty": "ဆ်ုလဝ်ကၠယ် ဖှ်ေထလှ်အှ်",
 	"wikibase-sitelinks-special": "အ်ုၰာၰံင် ဆိုဒ်သယ်",
-	"wikibase-statementview-rank-normal": "အ်ုထိုဝ် အ်ုဆင့်"
+	"wikibase-statementview-rank-normal": "အ်ုထိုဝ် အ်ုဆင့်",
+	"wikibase-itemdisambiguation-lookup-language": "ဆ်ုခၠါင်ဘာႋသာ့ၜီးၜါ်:",
+	"wikibase-modifyterm-language": "ဆ်ုခၠါင်ဘာႋသာ့ၜီးၜါ်:",
+	"wikibase-entitieswithoutlabel-label-language": "ဆ်ုခၠါင်ဘာႋသာ့ၜီးၜါ်:"
 }

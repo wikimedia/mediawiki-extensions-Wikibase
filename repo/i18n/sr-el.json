@@ -292,7 +292,7 @@
 	"wikibase-listdatatypes-tabular-data-head": "tabelarni podaci",
 	"wikibase-listdatatypes-tabular-data-body": "Veza do tabelarnih podataka spremljenih na Vikimedijinoj Ostavi (ili drugom konfigurisanom Vikiju). Pogledajte „https://www.mediawiki.org/wiki/Help:Tabular_Data” za još dokumentacije oko tabelarnih podataka.",
 	"wikibase-listdatatypes-quantity-head": "količina",
-	"wikibase-listdatatypes-quantity-body": "!!FUZZY!!Doslovno polje podataka za količinu koja se odnosi na neku vrstu precizno definisane jedinice. Stvarna jedinica ide u vrednosti podataka koji se upisuju.\n* vrednost - implicitni deo niske (mapiranje prefiksa jedinice je nejasno)\n* jedinica - implicitno deo niske (mapiranje standardizacionog telu je nejasno)\n* tačnost (opcionalno) - eksplicitna vrednost podatka, ima istu jedinicu kao vrednost",
+	"wikibase-listdatatypes-quantity-body": "Doslovno polje podataka za količinu koja se odnosi na neku vrstu precizno definisane jedinice. Stvarna jedinica ide u vrednosti podataka koji se upisuju.\n* vrednost - implicitni deo niske (mapiranje prefiksa jedinice je nejasno)\n* jedinica - implicitno deo niske (mapiranje standardizacionog telu je nejasno)\n* tačnost (opcionalno) - eksplicitna vrednost podatka, ima istu jedinicu kao vrednost",
 	"wikibase-listdatatypes-monolingualtext-head": "jednojezički tekst",
 	"wikibase-listdatatypes-multilingualtext-head": "višejezički tekst",
 	"wikibase-listdatatypes-string-head": "tekst",
