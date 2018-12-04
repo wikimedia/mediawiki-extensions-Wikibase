@@ -35,11 +35,12 @@ class StringLengthValidator implements ValueValidator {
 	private $errorCodePrefix;
 
 	/**
-	 * @param int             $minLength
-	 * @param int             $maxLength
+	 * @param int $minLength
+	 * @param int $maxLength
 	 * @param callable|string $measure The function to use to measure the string's length.
 	 *                        Use 'strlen' for byte length and 'mb_strlen' for character length.
 	 *                        A callable can be used to provide an alternative measure.
+	 * @param string $errorCodePrefix
 	 */
 	public function __construct( $minLength, $maxLength, $measure = 'strlen', $errorCodePrefix = '' ) {
 		//TODO: check type

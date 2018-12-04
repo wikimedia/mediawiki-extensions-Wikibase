@@ -122,6 +122,7 @@ class TermValidatorFactory {
 	}
 
 	/**
+	 * @param string $errorCodePrefix
 	 * @return ValueValidator[]
 	 */
 	private function getCommonTermValidators( $errorCodePrefix ) {
