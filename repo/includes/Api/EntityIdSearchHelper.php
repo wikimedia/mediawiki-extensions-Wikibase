@@ -43,7 +43,6 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	/**
 	 * @param EntityLookup $entityLookup
 	 * @param EntityIdParser $idParser
-	 * @param ConfigurableTermSearchInteractor $termSearchInteractor
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param array $entityTypeToRepositoryMapping Associative array (string => string[]) mapping entity types to a list of repository names
 	 *              which provide entities of the given type.
