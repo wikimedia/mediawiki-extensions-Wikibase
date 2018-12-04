@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30c773d2_12a36978",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-04T13:44:46Z",
+      "side": 0,
+      "message": "This is effectively documentation how the subclasses should behave. I would not remove this.",
+      "range": {
+        "startLine": 282,
+        "startChar": 4,
+        "endLine": 282,
+        "endChar": 30
+      },
+      "revId": "b4113915bf26e6ddcab85e7a70756245e9285899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
