@@ -159,7 +159,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	/**
 	 * Formats a row for display.
 	 *
-	 * @param PropertyId $propertyId
+	 * @param EntityId $propertyId
 	 *
 	 * @return string
 	 */

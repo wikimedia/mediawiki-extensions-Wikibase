@@ -194,7 +194,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @param Property $property
+	 * @param EntityDocument $property
 	 *
 	 * @return Summary
 	 */

@@ -280,7 +280,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
-	 * @param Item $item
+	 * @param EntityDocument $item
 	 *
 	 * @return Summary
 	 */
