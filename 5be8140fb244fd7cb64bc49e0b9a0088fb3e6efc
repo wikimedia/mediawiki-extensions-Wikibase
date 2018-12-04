@@ -34,6 +34,24 @@
       "revId": "5be8140fb244fd7cb64bc49e0b9a0088fb3e6efc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91f0f2a2_c3c215b1",
+        "filename": "repo/includes/ParserOutput/CompositeStatementDataUpdater.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-04T15:54:44Z",
+      "side": 1,
+      "message": "In this case the IDE won\u0027t understand the type since it is not properly annotated in the constructor. Will be fixed when moving away from HHVM.\n\nGenerally speaking I think such field annotations are at best not helpful in small classes like this and at worst get in the way of the actual code. You can easily see the type in the constructor.",
+      "parentUuid": "2c7498c1_364c6862",
+      "revId": "5be8140fb244fd7cb64bc49e0b9a0088fb3e6efc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
