@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "72b4b7fc_00766209",
+        "filename": "repo/includes/Hooks/Formatters/DefaultEntityLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2842
+      },
+      "writtenOn": "2018-12-04T13:56:07Z",
+      "side": 1,
+      "message": "You are correct! @see + @inheritDoc would pretty much mean the same thing in this case.\n\nBut looking at the use of @see in this case is not properly done. So the @see annotation defines a reference to a structural element or a URI. So in this case, @see should be done so for example;\n```\n@see EntityLinkFormatter::getHtml()\n```\nif we want to reference a particular method. I\u0027m wondering we should stick to @see and remove the @inheritDoc annotation hence removing the redundancy?",
+      "parentUuid": "32e7819d_ba69d1c4",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 37
+      },
+      "revId": "582893d48ae76e1440d7703edadc2d636ad2dca0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18a2e886_247aafe2",
         "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
         "patchSetId": 2
