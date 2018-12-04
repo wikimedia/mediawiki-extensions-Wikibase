@@ -35,7 +35,6 @@ use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\TypeDispatchingEntityStore;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
@@ -232,7 +231,7 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getLabelConflictFinder
 	 *
-	 * @return LabelConflictFinder
+	 * @return TermIndex
 	 */
 	public function getLabelConflictFinder() {
 		return $this->getTermIndex();
