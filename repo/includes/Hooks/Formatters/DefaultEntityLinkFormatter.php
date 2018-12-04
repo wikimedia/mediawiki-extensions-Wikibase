@@ -22,6 +22,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 
 	/**
 	 * @see EntityLinkFormatter::getHtml
+	 * @inheritdoc
 	 */
 	public function getHtml( EntityId $entityId, array $labelData = null ) {
 		/** @var Language $labelLang */
@@ -74,6 +75,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 
 	/**
 	 * @see EntityLinkFormatter::getTitleAttribute
+	 * @inheritdoc
 	 */
 	public function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
 		/** @var Language $labelLang */
