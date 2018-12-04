@@ -58,7 +58,10 @@ return call_user_func( function() {
 		],
 
 		'wikibase.termbox.styles' => $moduleTemplate + [
-			'styles' => '../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
+			'styles' => [
+				'termbox/main.less',
+				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
+			],
 			'targets' => 'mobile'
 		],
 
