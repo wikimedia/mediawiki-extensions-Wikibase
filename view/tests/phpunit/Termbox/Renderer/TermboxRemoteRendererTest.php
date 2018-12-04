@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\View\Tests\Termbox\Renderer;
 
 use Exception;
 use MediaWiki\Http\HttpRequestFactory;
