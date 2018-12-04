@@ -16,6 +16,24 @@
       "revId": "a460768f03ea4622c322fde44faf714437a2a21a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e2e05ba_93fce5ad",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-04T15:52:38Z",
+      "side": 1,
+      "message": "That would still use global state and since I think the whole \"generic entity stuff\" pattern is harmful, I am not keen on using that mechanism. On top of that it is also more complicated than just using a hook.\n\nThe global state issue can be solved by using a sanely designed event dispatcher. Easy to write ourself (\u003c50 LLOC) or we can use an existing lib (like Symfony Event Dispatcher), as per my recent mail to the list.",
+      "parentUuid": "5f4191f3_56f62c4e",
+      "revId": "a460768f03ea4622c322fde44faf714437a2a21a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
