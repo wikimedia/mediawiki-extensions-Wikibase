@@ -10,6 +10,7 @@ use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
+use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\TermboxViewSsrRenderer
@@ -29,6 +30,9 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
+			->method( 'getStatus' )
+			->willReturn( TermboxRemoteRenderer::HTTP_STATUS_OK );
+		$request->expects( $this->once() )
 			->method( 'getContent' )
 			->willReturn( $content );
 
@@ -45,17 +49,15 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @expectedException Exception
-	 */
 	public function testGetContentWithEntityIdAndLanguage_bubblesRequestException() {
 		$entityId = new ItemId( 'Q42' );
 		$language = 'de';
+		$upstreamException = new Exception( 'domain exception' );
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
-			->method( 'getContent' )
-			->willThrowException( new Exception( 'unspecific' ) );
+			->method( 'execute' )
+			->willThrowException( $upstreamException );
 
 		$requestFactory = $this->newHttpRequestFactory();
 		$requestFactory->expects( $this->once() )
@@ -64,7 +66,71 @@ class TermboxRemoteRendererTest extends TestCase {
 			->willReturn( $request );
 
 		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
-		$client->getContent( $entityId, $language );
+
+		try {
+			$client->getContent( $entityId, $language );
+			$this->fail( 'Expected exception did not occur.' );
+		} catch ( Exception $exception ) {
+			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
+			$this->assertSame( 'Encountered request problem', $exception->getMessage() );
+			$this->assertSame( $upstreamException, $exception->getPrevious() );
+		}
+	}
+
+	public function testGetContentEncounteringServerErrorResponse_throwsException() {
+		$entityId = new ItemId( 'Q42' );
+		$language = 'de';
+
+		$request = $this->newHttpRequest();
+		$request->expects( $this->once() )
+			->method( 'getStatus' )
+			->willReturn( 500 );
+		$request->expects( $this->never() )
+			->method( 'getContent' );
+
+		$requestFactory = $this->newHttpRequestFactory();
+		$requestFactory->expects( $this->once() )
+			->method( 'create' )
+			->with( self::SSR_URL . '?entity=Q42&language=de', [] )
+			->willReturn( $request );
+
+		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
+
+		try {
+			$client->getContent( $entityId, $language );
+			$this->fail( 'Expected exception did not occur.' );
+		} catch ( Exception $exception ) {
+			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
+			$this->assertSame( 'Encountered bad response: 500', $exception->getMessage() );
+		}
+	}
+
+	public function testGetContentEncounteringNotFoundResponse_throwsException() {
+		$entityId = new ItemId( 'Q4711' );
+		$language = 'de';
+
+		$request = $this->newHttpRequest();
+		$request->expects( $this->once() )
+			->method( 'getStatus' )
+			->willReturn( 404 );
+		$request->expects( $this->never() )
+			->method( 'getContent' );
+
+		$requestFactory = $this->newHttpRequestFactory();
+		$requestFactory->expects( $this->once() )
+			->method( 'create' )
+			->with( self::SSR_URL . '?entity=Q4711&language=de', [] )
+			->willReturn( $request );
+
+		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
+
+		try {
+			$client->getContent( $entityId, $language );
+			$this->fail( 'Expected exception did not occur.' );
+		} catch ( Exception $exception ) {
+			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
+			$this->assertSame( 'Encountered bad response: 404', $exception->getMessage() );
+		}
 	}
 
 	/**
