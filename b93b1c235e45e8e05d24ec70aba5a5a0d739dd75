@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e6a4fbb_5dfd4061",
+        "filename": "client/includes/ChangeNotificationJob.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-12-04T10:26:38Z",
+      "side": 1,
+      "message": "\u003c3 \u003c3 I have been waiting for this.",
+      "range": {
+        "startLine": 66,
+        "startChar": 18,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "b93b1c235e45e8e05d24ec70aba5a5a0d739dd75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
