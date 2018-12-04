@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af5a80be_f6e221d1",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-12-04T11:22:03Z",
+      "side": 1,
+      "message": "The class can be called MysqlUpsertSqlIdGenerator to 1- Make it obvious it only works with MySQL. 2- Enable others to build a similar class for other db types and change it.",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 25
+      },
+      "revId": "1edef5da25b92d33cfb1c11b7e031ab4f730c478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b33fbdc_86125646",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-12-04T11:22:03Z",
+      "side": 1,
+      "message": "Can this and $type be added as message argument so can filter them out based on normalizied message in logstash? It doesn\u0027t matter much in this case though.",
+      "range": {
+        "startLine": 66,
+        "startChar": 72,
+        "endLine": 66,
+        "endChar": 96
+      },
+      "revId": "1edef5da25b92d33cfb1c11b7e031ab4f730c478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0c2f790_cdc42c8b",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/UpsertSqlIdGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2018-12-04T11:22:03Z",
+      "side": 1,
+      "message": "MySQL",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "1edef5da25b92d33cfb1c11b7e031ab4f730c478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
