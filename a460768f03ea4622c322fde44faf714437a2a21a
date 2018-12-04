@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f4191f3_56f62c4e",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-04T10:08:48Z",
+      "side": 1,
+      "message": "Thinking about this… an alternative would be to define a entitytype callback… but that would be less flexible.",
+      "revId": "a460768f03ea4622c322fde44faf714437a2a21a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
