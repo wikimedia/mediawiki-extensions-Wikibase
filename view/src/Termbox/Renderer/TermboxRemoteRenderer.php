@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Termbox\Renderer;
 
+use Exception;
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -13,6 +14,8 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	private $requestFactory;
 	private $ssrServerUrl;
 
+	/* public */ const HTTP_STATUS_OK = 200;
+
 	public function __construct( HttpRequestFactory $requestFactory, $ssrServerUrl ) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
@@ -22,11 +25,20 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	 * @inheritDoc
 	 */
 	public function getContent( EntityId $entityId, $language ) {
-		$request = $this->requestFactory->create(
-			$this->formatUrl( $entityId, $language ),
-			[ /* TODO attach required data */ ]
-		);
-		$request->execute();
+		try {
+			$request = $this->requestFactory->create(
+				$this->formatUrl( $entityId, $language ),
+				[ /* TODO attach required data */ ]
+			);
+			$request->execute();
+		} catch ( Exception $e ) {
+			throw new TermboxRenderingException( 'Encountered request problem', null, $e );
+		}
+
+		$status = $request->getStatus();
+		if ( $status !== self::HTTP_STATUS_OK ) {
+			throw new TermboxRenderingException( 'Encountered bad response: ' . $status );
+		}
 
 		return $request->getContent();
 	}
