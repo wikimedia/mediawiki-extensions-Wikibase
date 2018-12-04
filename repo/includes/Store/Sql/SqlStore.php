@@ -232,7 +232,7 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getLabelConflictFinder
 	 *
-	 * @return LabelConflictFinder
+	 * @return TermIndex
 	 */
 	public function getLabelConflictFinder() {
 		return $this->getTermIndex();
