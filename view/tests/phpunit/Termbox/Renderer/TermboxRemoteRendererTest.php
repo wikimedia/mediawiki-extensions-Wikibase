@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\TermboxViewSsrRenderer
+ * @covers \Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer
  *
  * @group Wikibase
  *
