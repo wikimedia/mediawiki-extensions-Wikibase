@@ -584,7 +584,7 @@ final class WikibaseClient {
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode(),
-				self::getDefaultInstance()->getLogger()
+				$this->getLogger()
 			);
 		}
 
@@ -793,7 +793,7 @@ final class WikibaseClient {
 			$this->site = $this->siteLookup->getSite( $globalId );
 
 			// Todo inject me
-			$logger = self::getDefaultInstance()->getLogger();
+			$logger = $this->getLogger();
 
 			if ( !$this->site ) {
 				$logger->debug(
@@ -1224,7 +1224,7 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
-		$logger = self::getDefaultInstance()->getLogger();
+		$logger = $this->getLogger();
 
 		$pageUpdater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
