@@ -279,7 +279,6 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string $text
 	 *
 	 * @throws MWException Always.
-	 * @return EntityContent|null
 	 */
 	public function makeRedirectContent( Title $title, $text = '' ) {
 		throw new MWException( 'EntityContent does not support plain title based redirects.'
