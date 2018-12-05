@@ -170,6 +170,7 @@
 	"wikibase-newitem-site": "Сајт прве повезане странице",
 	"wikibase-newitem-page": "Назив прве повезане странице",
 	"wikibase-newitem-no-external-page": "Није могуће пронаћи страницу „$2” на „$1”",
+	"wikibase-newitem-same-label-and-description": "Ознака и опис не могу имати исту вредност.",
 	"wikibase-newentity-language": "Језик:",
 	"wikibase-newentity-label": "Ознака:",
 	"wikibase-newentity-description": "Опис:",

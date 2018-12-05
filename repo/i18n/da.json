@@ -65,7 +65,7 @@
 	"wikibase-statementsection-statements": "Udsagn",
 	"wikibase-sitelinks": "Liste over sider, der er knyttet til dette emne",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|værdi|værdier}}",
-	"wikibase-sitelinks-empty": "Der er endnu ingen webstedshenvisninger for dette emne.",
+	"wikibase-sitelinks-empty": "Der er ingen sider der er tilknyttet dette emne.",
 	"wikibase-sitelinks-special": "Andre websteder",
 	"wikibase-remove": "fjern",
 	"wikibase-move-up": "flyt op",

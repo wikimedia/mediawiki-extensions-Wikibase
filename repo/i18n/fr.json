@@ -234,6 +234,7 @@
 	"wikibase-newitem-page": "Nom de la première page liée",
 	"wikibase-newitem-no-external-page": "Une page « $2 » n’a pas pu être trouvée sur « $1 ».",
 	"wikibase-newitem-not-recognized-siteid": "L’identifiant de site fourni n’a pas été reconnu.",
+	"wikibase-newitem-same-label-and-description": "Le libellé et la description ne peuvent pas avoir la même valeur.",
 	"wikibase-newitem-insufficient-data": "Vous devez remplir au moins soit l'étiquette, soit la description ou bien les alias.",
 	"wikibase-newentity-language": "Langue :",
 	"wikibase-newentity-label": "Libellé&nbsp;:",

@@ -192,6 +192,7 @@
 	"wikibase-newitem-page": "שם הדף המקושר הראשון",
 	"wikibase-newitem-no-external-page": "הדף \"$2\" לא נמצא ב־\"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "מזהה האתר שסופק אינו מוּכּר.",
+	"wikibase-newitem-same-label-and-description": "התווית והתיאור אינם יכולים להיות זהים.",
 	"wikibase-newitem-insufficient-data": "חובה למלא לפחות תווית, תיאור או כינויים.",
 	"wikibase-newentity-language": "שפה:",
 	"wikibase-newentity-label": "תווית:",

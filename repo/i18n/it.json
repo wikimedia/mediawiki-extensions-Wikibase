@@ -196,6 +196,7 @@
 	"wikibase-newitem-page": "Nome della prima pagina collegata",
 	"wikibase-newitem-no-external-page": "Una pagina \"$2\" non è stata trovata su \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "L'identificatore del sito fornito non è stato riconosciuto.",
+	"wikibase-newitem-same-label-and-description": "L'etichetta e la descrizione non possono avere lo stesso valore.",
 	"wikibase-newentity-language": "Lingua:",
 	"wikibase-newentity-label": "Etichetta:",
 	"wikibase-newentity-description": "Descrizione:",
