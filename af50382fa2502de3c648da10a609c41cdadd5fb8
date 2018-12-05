@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41b5f6c6_704fb1c1",
+        "filename": "data-access/src/MultiRepositoryServiceWiring.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase ?",
+      "range": {
+        "startLine": 46,
+        "startChar": 31,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7323bb8_ec691274",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 41,
+        "startChar": 32,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8975c35a_cda6db73",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 177,
+        "startChar": 32,
+        "endLine": 177,
+        "endChar": 40
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "473d418a_c76e3494",
+        "filename": "lib/includes/SettingsArray.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 47,
+        "startChar": 47,
+        "endLine": 47,
+        "endChar": 55
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4d47e9_75112cc1",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 80,
+        "startChar": 47,
+        "endLine": 80,
+        "endChar": 55
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbf6dab6_18043265",
+        "filename": "lib/includes/Store/Sql/SiteLinkTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 65,
+        "startChar": 55,
+        "endLine": 65,
+        "endChar": 56
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2ff8a0b_e0d81719",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 69,
+        "startChar": 47,
+        "endLine": 69,
+        "endChar": 55
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d68e656_e113df46",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 87,
+        "startChar": 47,
+        "endLine": 87,
+        "endChar": 55
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a235fd47_408dbaca",
+        "filename": "lib/includes/Units/UnitConverter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 45,
+        "startChar": 47,
+        "endLine": 45,
+        "endChar": 55
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2b844f9_d5f93304",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:37:01Z",
+      "side": 1,
+      "message": "wikibase -\u003e Wikibase",
+      "range": {
+        "startLine": 845,
+        "startChar": 33,
+        "endLine": 845,
+        "endChar": 41
+      },
+      "revId": "af50382fa2502de3c648da10a609c41cdadd5fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
