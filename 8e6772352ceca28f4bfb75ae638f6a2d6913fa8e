@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a0ac263_82347d6d",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:33:06Z",
+      "side": 1,
+      "message": "So this actually returns an SqlTermIndex always which implements LabelConflictFinder.\nWe are probably better off learning the @return type here and if we want to doing an assert istance of LabelConflictFinder before actually returning.",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 238,
+        "endChar": 2
+      },
+      "revId": "8e6772352ceca28f4bfb75ae638f6a2d6913fa8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
