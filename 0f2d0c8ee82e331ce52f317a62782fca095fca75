@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5e1e061_0d881cdd",
+        "filename": "client/includes/Hooks/UpdateRepoHookHandlers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-05T07:43:44Z",
+      "side": 1,
+      "message": "Lets switch this one back to UpdateRepo as it is currently always logged in prod",
+      "range": {
+        "startLine": 87,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 53
+      },
+      "revId": "0f2d0c8ee82e331ce52f317a62782fca095fca75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
