@@ -22,6 +22,30 @@
       "revId": "8e6772352ceca28f4bfb75ae638f6a2d6913fa8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29cc05ce_815bde0e",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 2842
+      },
+      "writtenOn": "2018-12-05T16:51:47Z",
+      "side": 1,
+      "message": "Thanks @Addshore for your review. I don\u0027t quite follow here, I only get the first sentence which is very clear (thanks) but the following statement is not clear to me.",
+      "parentUuid": "4a0ac263_82347d6d",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 238,
+        "endChar": 2
+      },
+      "revId": "8e6772352ceca28f4bfb75ae638f6a2d6913fa8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
