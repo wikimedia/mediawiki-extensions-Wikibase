@@ -7,6 +7,7 @@ use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
@@ -63,6 +64,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit\Framework\TestCase {
 				// Nobody knows why we need to clone over here, but it's not working
 				// without... PHP is fun!
 				clone $data['siteLinkLookup'],
+				new NullLogger(),
 				$data['user'],
 				$data['siteId'],
 				$data['title']
