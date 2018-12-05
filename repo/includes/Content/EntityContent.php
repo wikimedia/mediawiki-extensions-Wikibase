@@ -700,7 +700,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param EntityValidator[] $validators
 	 *
-	 * @return Result
+	 * @return Status
 	 */
 	private function applyValidators( array $validators ) {
 		$result = Result::newSuccess();
