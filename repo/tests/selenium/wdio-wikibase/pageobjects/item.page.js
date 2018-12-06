@@ -1,6 +1,6 @@
 'use strict';
 
-const Page = require( 'wdio-mediawiki/Page' ),
+const Page = require( '../../../../../../../tests/selenium/wdio-mediawiki/Page' ),
 	MixinBuilder = require( '../pagesections/mixinbuilder' ),
 	MainStatementSection = require( '../pagesections/main.statement.section' ),
 	ComponentInteraction = require( '../pagesections/ComponentInteraction' ),
