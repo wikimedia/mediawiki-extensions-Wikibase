@@ -1,5 +1,5 @@
 var assert = require( 'assert' ),
-	NonExistingItemPage = require( '../pageobjects/nonexisting.item' );
+	NonExistingItemPage = require( 'wdio-wikibase/pageobjects/nonexisting.item' );
 
 describe( 'WikibaseRepoNonExistingItemPage', function () {
 

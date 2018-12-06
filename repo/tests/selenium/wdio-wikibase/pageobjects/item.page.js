@@ -1,10 +1,10 @@
 'use strict';
 
-const Page = require( 'wdio-mediawiki/Page' ),
+const Page = require( '../../../../../../../tests/selenium/wdio-mediawiki/Page' ),
 	MixinBuilder = require( '../pagesections/mixinbuilder' ),
 	MainStatementSection = require( '../pagesections/main.statement.section' ),
 	ComponentInteraction = require( '../pagesections/ComponentInteraction' ),
-	LoginPage = require( 'wdio-mediawiki/LoginPage' );
+	LoginPage = require( '../../../../../../../tests/selenium/wdio-mediawiki/LoginPage' );
 
 class ItemPage extends MixinBuilder.mix( Page ).with( MainStatementSection, ComponentInteraction ) {
 

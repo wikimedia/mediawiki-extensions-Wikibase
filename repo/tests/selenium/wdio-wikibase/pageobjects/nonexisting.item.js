@@ -1,4 +1,4 @@
-const Page = require( 'wdio-mediawiki/Page' );
+const Page = require( '../../../../../../../tests/selenium/wdio-mediawiki/Page' );
 
 class NonExistingItemPage extends Page {
 	get editTab() { return browser.element( '.ca-edit' ); }
