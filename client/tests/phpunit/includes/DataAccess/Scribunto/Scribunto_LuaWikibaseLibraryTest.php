@@ -8,10 +8,12 @@ use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use ScribuntoException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
@@ -528,6 +530,32 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			[ null ],
 			$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'Q2', [ 'Q3' ] )
 		);
+	}
+
+	public function testGetLuaFunctionCallTracker() {
+		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
+			$this->newScribuntoLuaWikibaseLibrary()
+		);
+
+		$this->assertInstanceOf(
+			LuaFunctionCallTracker::class,
+			$luaWikibaseLibrary->getLuaFunctionCallTracker()
+		);
+	}
+
+	public function testIncrementStatsKey() {
+		$luaFunctionCallTracker = $this->getMockBuilder( LuaFunctionCallTracker::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$luaFunctionCallTracker->expects( $this->once() )
+			->method( 'incrementKey' )
+			->with( 'a-key.suffix' );
+
+		$luaWikibaseLibrary = TestingAccessWrapper::newFromObject(
+			$this->newScribuntoLuaWikibaseLibrary()
+		);
+		$luaWikibaseLibrary->luaFunctionCallTracker = $luaFunctionCallTracker;
+		$luaWikibaseLibrary->incrementStatsKey( 'a-key.suffix' );
 	}
 
 	/**
