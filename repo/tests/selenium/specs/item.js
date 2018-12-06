@@ -1,6 +1,6 @@
 const Util = require( 'wdio-mediawiki/Util' ),
-	EntityPage = require( '../pageobjects/entity.page' ),
-	WikibaseApi = require( '../wikibase.api' );
+	EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' ),
+	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 describe( 'item', function () {
 
