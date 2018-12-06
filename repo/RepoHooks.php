@@ -674,13 +674,6 @@ final class RepoHooks {
 		}
 
 		if ( $wgLang instanceof StubUserLang ) {
-			wfDebugLog(
-				'wikibase-debug',
-				'Bug: T112070: ' . MWExceptionHandler::prettyPrintTrace(
-					MWExceptionHandler::redactTrace( debug_backtrace() )
-				)
-			);
-
 			StubUserLang::unstub( $wgLang );
 		}
 
