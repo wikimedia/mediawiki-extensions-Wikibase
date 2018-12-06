@@ -26,6 +26,7 @@
 		"wdio-mediawiki": "0.2.0",
 		"wdio-mocha-framework": "0.6.1",
 		"wdio-spec-reporter": "0.1.4",
+		"wdio-wikibase": "file:repo/tests/selenium/wdio-wikibase",
 		"webdriverio": "4.13.1"
 	},
 	"eslintIgnore": [
