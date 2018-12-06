@@ -117,6 +117,8 @@ return call_user_func( function() {
 		},
 
 		'useKartographerGlobeCoordinateFormatter' => false,
+		'trackLuaFunctionCallsPerSiteGroup' => false,
+		'trackLuaFunctionCallsPerWiki' => false,
 	];
 
 	// Some defaults depend on information not available at this time.
