@@ -4,6 +4,8 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use Language;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\MediaWikiServices;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -26,6 +28,11 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @var WikibaseLuaEntityBindings|null
 	 */
 	private $wbLibrary;
+
+	/**
+	 * @var LuaFunctionCallTracker|null
+	 */
+	private $luaFunctionCallTracker = null;
 
 	private function getImplementation() {
 		if ( !$this->wbLibrary ) {
@@ -83,6 +90,27 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$this->getUsageAccumulator(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
+	}
+
+	/**
+	 * @return LuaFunctionCallTracker
+	 */
+	private function getLuaFunctionCallTracker() {
+		if ( !$this->luaFunctionCallTracker ) {
+			$mwServices = MediaWikiServices::getInstance();
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$settings = $wikibaseClient->getSettings();
+
+			$this->luaFunctionCallTracker = new LuaFunctionCallTracker(
+				$mwServices->getStatsdDataFactory(),
+				$settings->getSetting( 'siteGlobalID' ),
+				$wikibaseClient->getSiteGroup(),
+				$settings->getSetting( 'trackLuaFunctionCallsPerSiteGroup' ),
+				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' )
+			);
+		}
+
+		return $this->luaFunctionCallTracker;
 	}
 
 	/**
@@ -192,6 +220,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			'addSiteLinksUsage' => [ $this, 'addSiteLinksUsage' ],
 			'addOtherUsage' => [ $this, 'addOtherUsage' ],
 			'getSetting' => [ $this, 'getSetting' ],
+			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
 		];
 
 		return $this->getEngine()->registerInterface(
@@ -300,6 +329,15 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		} catch ( PropertyLabelNotResolvedException $e ) {
 			return [ null ];
 		}
+	}
+
+	/**
+	 * Increment the given stats key.
+	 *
+	 * @param string $key
+	 */
+	public function incrementStatsKey( $key ) {
+		$this->getLuaFunctionCallTracker()->incrementKey( $key );
 	}
 
 }
