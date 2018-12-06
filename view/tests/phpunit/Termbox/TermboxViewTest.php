@@ -15,7 +15,7 @@ use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 use Wikibase\View\Termbox\TermboxView;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\TermboxView
+ * @covers \Wikibase\View\Termbox\TermboxView
  *
  * @group Wikibase
  *

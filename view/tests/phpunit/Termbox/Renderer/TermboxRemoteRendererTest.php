@@ -13,7 +13,7 @@ use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\TermboxViewSsrRenderer
+ * @covers \Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer
  *
  * @group Wikibase
  *
