@@ -48,6 +48,10 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	public function __construct( Title $title, $params = false ) {
 		parent::__construct( 'UpdateRepoOnDelete', $title, $params );
 
+		$this->initRepoJobServicesFromGlobalState();
+	}
+
+	protected function initRepoJobServicesFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
