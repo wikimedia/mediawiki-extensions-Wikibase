@@ -749,6 +749,7 @@ call_user_func( function() {
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$siteLinkTargetProvider,
+			$wikibaseRepo->getLogger(),
 			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
 		);
 	};

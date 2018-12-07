@@ -34,6 +34,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use Parser;
+use Psr\Log\LoggerInterface;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
@@ -2145,6 +2146,10 @@ class WikibaseRepo {
 		);
 
 		return $cache;
+	}
+
+	public function getLogger(): LoggerInterface {
+		return LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 }
