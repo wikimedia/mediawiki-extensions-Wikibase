@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use MediaWiki\Logger\LoggerFactory;
 use OutOfBoundsException;
+use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -52,6 +54,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
+			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
@@ -61,6 +64,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
+		LoggerInterface $logger,
 		SiteLookup $siteLookup,
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
@@ -68,6 +72,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			$entityRevisionLookup,
 			$entityStore,
 			$summaryFormatter,
+			$logger,
 			$editEntityFactory
 		);
 		$this->siteLookup = $siteLookup;
@@ -123,7 +128,13 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		$siteLink = $this->getSiteLink( $item, $siteId );
 		if ( !$siteLink || $siteLink->getPageName() !== $page ) {
 			// Probably something changed since the job has been inserted
-			wfDebugLog( 'UpdateRepo', "OnDelete: The site link to " . $siteId . " is no longer $page" );
+			$this->logger->debug(
+				'OnDelete: The site link to {siteId} is no longer {page}',
+				[
+					'siteId' => $siteId,
+					'page' => $page,
+				]
+			);
 			return false;
 		}
 
@@ -132,7 +143,13 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		// Maybe the page has been undeleted/ recreated?
 		$exists = $site->normalizePageName( $page );
 		if ( $exists !== false ) {
-			wfDebugLog( 'UpdateRepo', "OnDelete: $page on $siteId exists" );
+			$this->logger->debug(
+				'OnDelete: {page} on {siteId} exists',
+				[
+					'siteId' => $siteId,
+					'page' => $page,
+				]
+			);
 			return false;
 		}
 

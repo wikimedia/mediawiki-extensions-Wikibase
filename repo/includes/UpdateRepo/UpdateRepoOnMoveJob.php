@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use OutOfBoundsException;
 use SiteLookup;
 use Title;
@@ -57,6 +59,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
+			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
@@ -66,6 +69,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
+		LoggerInterface $logger,
 		SiteLookup $siteLookup,
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
@@ -73,6 +77,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$entityRevisionLookup,
 			$entityStore,
 			$summaryFormatter,
+			$logger,
 			$editEntityFactory
 		);
 		$this->siteLookup = $siteLookup;
@@ -129,7 +134,13 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$this->normalizedPageName = $site->normalizePageName( $newPage );
 
 			if ( $this->normalizedPageName === false ) {
-				wfDebugLog( 'UpdateRepo', "OnMove: Normalizing the page name $newPage on $siteId failed" );
+				$this->logger->debug(
+					'OnMove: Normalizing the page name {newPage} on {siteId} failed',
+					[
+						'newPage' => $newPage,
+						'siteId' => $siteId,
+					]
+				);
 			}
 
 		}
@@ -152,7 +163,13 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		$oldSiteLink = $this->getSiteLink( $item, $siteId );
 		if ( !$oldSiteLink || $oldSiteLink->getPageName() !== $oldPage ) {
 			// Probably something changed since the job has been inserted
-			wfDebugLog( 'UpdateRepo', "OnMove: The site link to " . $siteId . " is no longer $oldPage" );
+			$this->logger->debug(
+				'OnMove: The site link to {siteId} is no longer {oldPage}',
+				[
+					'siteId' => $siteId,
+					'oldPage' => $oldPage,
+				]
+			);
 			return false;
 		}
 
