@@ -126,6 +126,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityRedirectLookup,
 			$serializationService,
 			$this->entityDataFormatProvider,
+			$wikibaseRepo->getLogger(),
 			$defaultFormat,
 			$maxAge,
 			$wgUseSquid,

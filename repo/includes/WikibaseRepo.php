@@ -2147,4 +2147,8 @@ class WikibaseRepo {
 		return $cache;
 	}
 
+	public function getLogger() {
+		return LoggerFactory::getInstance( 'Wikibase' );
+	}
+
 }

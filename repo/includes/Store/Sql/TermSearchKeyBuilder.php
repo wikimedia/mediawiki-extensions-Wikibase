@@ -2,8 +2,9 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\Reporting\MessageReporter;
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -21,6 +22,11 @@ class TermSearchKeyBuilder {
 	 * @var TermSqlIndex
 	 */
 	private $table;
+
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
 
 	/**
 	 * @var MessageReporter|null
@@ -46,8 +52,9 @@ class TermSearchKeyBuilder {
 	 */
 	private $batchSize = 100;
 
-	public function __construct( TermSqlIndex $table ) {
+	public function __construct( TermSqlIndex $table, LoggerInterface $logger ) {
 		$this->table = $table;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -169,11 +176,25 @@ class TermSearchKeyBuilder {
 		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to normalized term: $text" );
+			$this->logger->debug(
+				'{method}: failed to normalize term: {text}',
+				[
+					'method' => __METHOD__,
+					'text' => $text,
+				]
+			);
+
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": row_id = $rowId, search_key = `$key`" );
+		$this->logger->debug(
+			'{method}: row_id = {rowId}, search_key = `{key}`',
+			[
+				'method' => __METHOD__,
+				'rowId' => $rowId,
+				'key' => $key,
+			]
+		);
 
 		$dbw->update(
 			$this->table->getTableName(),

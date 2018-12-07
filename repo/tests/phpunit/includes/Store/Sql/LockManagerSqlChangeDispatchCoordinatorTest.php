@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
 use NullLockManager;
+use Psr\Log\NullLogger;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 
 /**
@@ -33,6 +34,7 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		return new LockManagerSqlChangeDispatchCoordinator(
 			$lockManager,
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			new NullLogger(),
 			false,
 			'TestRepo'
 		);
