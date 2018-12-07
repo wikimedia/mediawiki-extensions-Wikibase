@@ -324,4 +324,8 @@ return [
 
 	'useKartographerGlobeCoordinateFormatter' => false,
 
+	'EventLoggingSchemas' => [
+		'WikibaseTermboxInteraction' => 18726648
+	]
+
 ];
