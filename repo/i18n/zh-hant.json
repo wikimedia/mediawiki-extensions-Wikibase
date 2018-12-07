@@ -207,6 +207,7 @@
 	"wikibase-newitem-page": "第一個連結頁面的名稱",
 	"wikibase-newitem-no-external-page": "在「$1」上找不到頁面「$2」。",
 	"wikibase-newitem-not-recognized-siteid": "提供的網站識別碼不被認可。",
+	"wikibase-newitem-same-label-and-description": "標籤和描述不可用同樣的內容。",
 	"wikibase-newitem-insufficient-data": "您需要至少填充標籤、描述或別名。",
 	"wikibase-newentity-language": "語言：",
 	"wikibase-newentity-label": "標籤：",

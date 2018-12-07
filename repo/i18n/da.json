@@ -16,6 +16,7 @@
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
+	"wikibase-entity": "Entitet",
 	"wikibase-entity-item": "emne",
 	"wikibase-entity-property": "egenskab",
 	"wikibase-entity-query": "forespørgsel",
@@ -147,6 +148,7 @@
 	"wikibase-newitem-page": "Navnet på den sidehenvisning",
 	"wikibase-newitem-no-external-page": "Den angivne side blev ikke fundet på det tilsvarende websted.",
 	"wikibase-newitem-not-recognized-siteid": "Det angivne websteds-id blev ikke genkendt.",
+	"wikibase-newitem-same-label-and-description": "Værdien for etiketten og beskrivelsen kan ikke være den samme.",
 	"wikibase-newentity-language": "Sprog:",
 	"wikibase-newentity-label": "Etiket:",
 	"wikibase-newentity-description": "Beskrivelse:",

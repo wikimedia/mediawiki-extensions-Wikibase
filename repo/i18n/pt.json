@@ -196,6 +196,7 @@
 	"wikibase-newitem-page": "Nome da primeira página ligada",
 	"wikibase-newitem-no-external-page": "A página \"$2\" não foi encontrada em \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "O identificador de sítio fornecido não foi reconhecido.",
+	"wikibase-newitem-same-label-and-description": "O rótulo e a descrição não podem ter o mesmo valor.",
 	"wikibase-newitem-insufficient-data": "No mínimo, precisa de preencher o rótulo, a descrição ou os nomes alternativos.",
 	"wikibase-newentity-language": "Língua:",
 	"wikibase-newentity-label": "Rótulo:",

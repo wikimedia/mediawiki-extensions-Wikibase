@@ -28,6 +28,8 @@
 	"wikibase-rc-show-wikidata-pref": "Fà vedè le cangiaminde de {{WBREPONAME}} jndr'à l'urteme cangiaminde",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "cangiamende de {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "cangiaminde de {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Cangiaminde ca onne origgene da {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Pe piacere te 'mbormame ca ponne passà diverse minute fine ca le cangiaminde ponne essere 'ndrucate sus a tutte le uicchi",
 	"wikibase-watchlist-show-changes-pref": "Fà vedè le cangiaminde de {{WBREPONAME}} jndr'à l'elenghe de le pàggene condrollate",
 	"wikibase-error-serialize-error": "'A serializzazzione de le date ave sciute a male.",
@@ -41,10 +43,13 @@
 	"wikibase-entityusage-submit": "'Ndruche le pàggene",
 	"wikibase-pageinfo-entity-id": "ID d'a vôsce de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ninde",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etichette: $1",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Descrizione: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titole",
 	"wikibase-pageinfo-entity-usage-C": "Quacche dichiarazzione",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Dichiarazzione: $1",
 	"wikibase-pageinfo-entity-usage-X": "Tutte le date de l'entità",
 	"wikibase-pageinfo-entity-usage-O": "Otre (dichiarazziune)",
-	"wikibase-otherprojects": "Jndr'à otre pruggette"
+	"wikibase-otherprojects": "Jndr'à otre pruggette",
+	"notification-link-text-view-item": "{{GENDER:$1|'Ndruche}} l'elemende"
 }

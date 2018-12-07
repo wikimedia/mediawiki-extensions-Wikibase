@@ -76,6 +76,7 @@
 	"datatypes-type-globe-coordinate": "Geografiske koordinater",
 	"datatypes-type-time": "Tidspunkt",
 	"datatypes-type-wikibase-item": "Emne",
+	"datatypes-type-wikibase-property": "Egenskab",
 	"datatypes-type-commonsMedia": "Commons media-fil",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "i $1 milliarder år",
