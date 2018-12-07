@@ -199,6 +199,21 @@
 			return deferred.resolve().promise();
 		},
 
+		_trackToggling: function ( isVisible ) {
+			var currentActionTracking = isVisible ? 'lessLanguages' : 'moreLanguages';
+			if ( !this.tracked ) {
+				this.tracked = {};
+			}
+			if ( this.tracked[ currentActionTracking ] ) {
+				return;
+			}
+			mw.track(
+				'MediaWiki.wikibase.repo.ui.termBox.'
+				+ currentActionTracking
+			);
+			this.tracked[ currentActionTracking ] = true;
+		},
+
 		/**
 		 * Creates the dedicated toggler for showing/hiding the list of entity terms. This function is
 		 * supposed to be removed as soon as drop-down edit buttons are implemented with the mechanism
@@ -246,6 +261,8 @@
 							!params.visible
 						);
 					}
+
+					self._trackToggling( params.visible );
 				} );
 
 			this.$entitytermsforlanguagelistviewContainer.before(

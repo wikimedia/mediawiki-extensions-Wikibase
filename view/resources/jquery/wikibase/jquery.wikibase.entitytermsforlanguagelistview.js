@@ -244,6 +244,7 @@
 			}
 
 			this._toggleMoreLanguagesButton( $button );
+			this._trackAllLanguagesShown();
 			return false;
 		},
 
@@ -259,6 +260,14 @@
 				'wikibase-entitytermsforlanguagelistview-'
 					+ ( this._isMoreLanguagesExpanded() ? 'less' : 'more' )
 			) );
+		},
+
+		_trackAllLanguagesShown: function () {
+			if ( this.showAllLanguagesTracked ) {
+				return;
+			}
+			mw.track( 'counter.MediaWiki.wikibase.repo.ui.termBox.allLanguages' );
+			this.showAllLanguagesTracked = true;
 		},
 
 		/**
