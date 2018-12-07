@@ -8,6 +8,7 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use MWExceptionHandler;
+use Psr\Log\LoggerInterface;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\ChunkCache;
@@ -137,13 +138,15 @@ class DispatchChanges extends Maintenance {
 	 * @param string[] $clientWikis A mapping of client wiki site IDs to logical database names.
 	 * @param EntityChangeLookup $changeLookup
 	 * @param SettingsArray $settings
+	 * @param LoggerInterface $logger
 	 *
 	 * @return ChangeDispatcher
 	 */
 	private function newChangeDispatcher(
 		array $clientWikis,
 		EntityChangeLookup $changeLookup,
-		SettingsArray $settings
+		SettingsArray $settings,
+		LoggerInterface $logger
 	) {
 		$repoDB = $settings->getSetting( 'changesDatabase' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
@@ -179,13 +182,17 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = $this->getCoordinator( $settings );
+		$coordinator = $this->getCoordinator( $settings, $logger );
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
 		$coordinator->setRandomness( $randomness );
 
-		$notificationSender = new JobQueueChangeNotificationSender( $repoDB, $clientWikis );
+		$notificationSender = new JobQueueChangeNotificationSender(
+			$repoDB,
+			$logger,
+			$clientWikis
+		);
 		$subscriptionLookup = new SqlSubscriptionLookup(
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
@@ -251,7 +258,8 @@ class DispatchChanges extends Maintenance {
 		$dispatcher = $this->newChangeDispatcher(
 			$clientWikis,
 			$wikibaseRepo->getStore()->getEntityChangeLookup(),
-			$wikibaseRepo->getSettings()
+			$wikibaseRepo->getSettings(),
+			$wikibaseRepo->getLogger()
 		);
 
 		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );
@@ -337,10 +345,11 @@ class DispatchChanges extends Maintenance {
 	 * Find and return the proper ChangeDispatchCoordinator
 	 *
 	 * @param SettingsArray $settings
+	 * @param LoggerInterface $logger
 	 *
 	 * @return SqlChangeDispatchCoordinator
 	 */
-	private function getCoordinator( SettingsArray $settings ) {
+	private function getCoordinator( SettingsArray $settings, LoggerInterface $logger ) {
 		$repoID = wfWikiID();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
 		$LBFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
@@ -349,6 +358,7 @@ class DispatchChanges extends Maintenance {
 			return new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
 				$LBFactory,
+				$logger,
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
@@ -356,7 +366,8 @@ class DispatchChanges extends Maintenance {
 			return new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID,
-				$LBFactory
+				$LBFactory,
+				$logger
 			);
 		}
 	}
