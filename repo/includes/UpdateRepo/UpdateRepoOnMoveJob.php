@@ -53,6 +53,10 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	public function __construct( Title $title, $params = false ) {
 		parent::__construct( 'UpdateRepoOnMove', $title, $params );
 
+		$this->initRepoJobServicesFromGlobalState();
+	}
+
+	protected function initRepoJobServicesFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(

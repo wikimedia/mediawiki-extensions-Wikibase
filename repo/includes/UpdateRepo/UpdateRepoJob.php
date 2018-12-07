@@ -2,11 +2,8 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
-use InvalidArgumentException;
 use Job;
-use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,9 +11,7 @@ use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\FormatableSummary;
-use Wikibase\Store;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -52,26 +47,6 @@ abstract class UpdateRepoJob extends Job {
 	 */
 	private $editEntityFactory;
 
-	/**
-	 * @see Job::__construct
-	 *
-	 * @param string $command
-	 * @param Title $title
-	 * @param array|bool $params
-	 */
-	public function __construct( $command, Title $title, $params = false ) {
-		parent::__construct( $command, $title, $params );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initRepoJobServices(
-			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$wikibaseRepo->getEntityStore(),
-			$wikibaseRepo->getSummaryFormatter(),
-			LoggerFactory::getInstance( 'UpdateRepo' ),
-			$wikibaseRepo->newEditEntityFactory()
-		);
-	}
-
 	protected function initRepoJobServices(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
@@ -85,6 +60,11 @@ abstract class UpdateRepoJob extends Job {
 		$this->logger = $logger;
 		$this->editEntityFactory = $editEntityFactory;
 	}
+
+	/**
+	 * Initialize repo services from global state.
+	 */
+	abstract protected function initRepoJobServicesFromGlobalState();
 
 	/**
 	 * Get a Summary object for the edit
@@ -116,20 +96,7 @@ abstract class UpdateRepoJob extends Job {
 	 */
 	private function getItem() {
 		$params = $this->getParams();
-
-		try {
-			$itemId = new ItemId( $params['entityId'] );
-		} catch ( InvalidArgumentException $ex ) {
-			$this->logger->debug(
-				'{method}: Invalid ItemId serialization {entityId} given.',
-				[
-					'method' => __METHOD__,
-					'entityId' => $params['entityId'],
-				]
-			);
-
-			return null;
-		}
+		$itemId = new ItemId( $params['entityId'] );
 
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
