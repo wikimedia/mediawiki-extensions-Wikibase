@@ -338,4 +338,7 @@ return [
 	 */
 	'idGenerator' => 'original',
 
+	'EventLoggingSchemas' => [
+		'WikibaseTermboxInteraction' => 18726648
+	]
 ];
