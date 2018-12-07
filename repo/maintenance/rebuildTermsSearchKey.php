@@ -44,8 +44,10 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 			[ $this, 'report' ]
 		);
 
-		$table = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
-		$builder = new TermSearchKeyBuilder( $table );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$table = $wikibaseRepo->getStore()->getTermIndex();
+
+		$builder = new TermSearchKeyBuilder( $table, $wikibaseRepo->getLogger() );
 		$builder->setReporter( $reporter );
 
 		$builder->setBatchSize( (int)$this->getOption( 'batch-size', 100 ) );
