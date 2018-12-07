@@ -4,6 +4,8 @@ namespace Wikibase\Repo\UpdateRepo;
 
 use InvalidArgumentException;
 use Job;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
@@ -41,6 +43,11 @@ abstract class UpdateRepoJob extends Job {
 	protected $summaryFormatter;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	protected $logger;
+
+	/**
 	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
@@ -60,6 +67,7 @@ abstract class UpdateRepoJob extends Job {
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
+			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
@@ -68,11 +76,13 @@ abstract class UpdateRepoJob extends Job {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
+		LoggerInterface $logger,
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
+		$this->logger = $logger;
 		$this->editEntityFactory = $editEntityFactory;
 	}
 
@@ -110,9 +120,12 @@ abstract class UpdateRepoJob extends Job {
 		try {
 			$itemId = new ItemId( $params['entityId'] );
 		} catch ( InvalidArgumentException $ex ) {
-			wfDebugLog(
-				'UpdateRepo',
-				__FUNCTION__ . ": Invalid ItemId serialization " . $params['entityId'] . " given."
+			$this->logger->debug(
+				'{method}: Invalid ItemId serialization {entityId} given.',
+				[
+					'method' => __METHOD__,
+					'entityId' => $params['entityId'],
+				]
 			);
 
 			return null;
@@ -121,9 +134,13 @@ abstract class UpdateRepoJob extends Job {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 		} catch ( StorageException $ex ) {
-			wfDebugLog(
-				'UpdateRepo',
-				__FUNCTION__ . ": EntityRevision couldn't be loaded for " . $itemId->getSerialization() . ": " . $ex->getMessage()
+			$this->logger->debug(
+				'{method}: EntityRevision couldn\'t be loaded for {itemIdSerialization}: {msg}',
+				[
+					'method' => __METHOD__,
+					'itemIdSerialization' => $itemId->getSerialization(),
+					'msg' => $ex->getMessage(),
+				]
 			);
 
 			return null;
@@ -133,10 +150,14 @@ abstract class UpdateRepoJob extends Job {
 			return $entityRevision->getEntity();
 		}
 
-		wfDebugLog(
-			'UpdateRepo',
-			__FUNCTION__ . ": EntityRevision not found for " . $itemId->getSerialization()
+		$this->logger->debug(
+			'{method}: EntityRevision not found for {itemIdSerialization}',
+			[
+				'method' => __METHOD__,
+				'itemIdSerialization' => $itemId->getSerialization(),
+			]
 		);
+
 		return null;
 	}
 
@@ -165,8 +186,14 @@ abstract class UpdateRepoJob extends Job {
 		);
 
 		if ( !$status->isOK() ) {
-			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ': attemptSave for '
-				. $itemId->getSerialization() . ' failed: ' . $status->getMessage()->text() );
+			$this->logger->debug(
+				'{method}: attemptSave for {itemIdSerialization} failed: {msgText}',
+				[
+					'method' => __METHOD__,
+					'itemIdSerialization' => $itemId->getSerialization(),
+					'msgText' => $status->getMessage()->text(),
+				]
+			);
 		}
 
 		return $status->isOK();
@@ -180,7 +207,7 @@ abstract class UpdateRepoJob extends Job {
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
 		if ( !$user || !$user->isLoggedIn() ) {
-			wfDebugLog( 'UpdateRepo', "User $name doesn't exist." );
+			$this->logger->debug( 'User {name} doesn\'t exist.', [ 'name' => $name ] );
 			return false;
 		}
 

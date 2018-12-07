@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
 use NullStatsdDataFactory;
+use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use Status;
@@ -168,6 +169,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
+			new NullLogger(),
 			$this->getSiteLookup( $titleExists ),
 			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),

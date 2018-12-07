@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
 use NullStatsdDataFactory;
+use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use Status;
@@ -164,6 +165,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
+			new NullLogger(),
 			$this->getSiteLookup( $normalizedPageName ),
 			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),
