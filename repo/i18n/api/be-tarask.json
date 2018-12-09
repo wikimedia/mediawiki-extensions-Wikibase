@@ -216,5 +216,7 @@
 	"apihelp-wbsetclaim-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}».",
 	"apihelp-wbsetclaim-example-1": "Усталяваць сьцьверджаньне з пададзеным ідэнтыфікатарам уласьцівасьці <samp>P1</samp> з радковым значэньнем «<var>City</var>»",
 	"apihelp-wbsetclaimvalue-description": "Усталёўвае значэньне сьцьверджаньне Вікібазы.",
-	"apihelp-wbsetclaimvalue-summary": "Усталёўвае значэньне сьцьверджаньня Вікібазы."
+	"apihelp-wbsetclaimvalue-summary": "Усталёўвае значэньне сьцьверджаньня Вікібазы.",
+	"apihelp-wbsetclaimvalue-param-claim": "GUID, які вызначае сьцьверджаньне",
+	"apihelp-wbsetclaimvalue-param-snaktype": "Тып снэку"
 }

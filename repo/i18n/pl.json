@@ -136,6 +136,7 @@
 	"wikibase-validator-label-with-description-conflict": "Etykietę \"$1\" z takim samym opisem dla języka o kodzie $2 ma już element $3",
 	"wikibase-validator-label-no-entityid": "Etykieta nie może być w postaci identyfikatora elementu.",
 	"wikibase-validator-illegal-file-chars": "Nazwy plików nie mgoą zawierać takich znaków jak dwukropki czy ukośniki. Wklej tylko nazwę pliku za \"File:\".",
+	"wikibase-validator-check-file-type": "Brak rozszerzenia pliku.",
 	"wikibase-validator-no-such-media": "Plik „$1” nie istnieje w [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-page-not-exists": "Strona „$1” nie istnieje.",
 	"wikibase-validator-not-a-language": "„$1” jest nieznanym kodem języka.",

@@ -216,6 +216,7 @@
 	"wikibase-history-title-with-label": "Versionshistorik for \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Versionshistorik for $1",
 	"special-listproperties": "Liste over egenskaber",
+	"wikibase-listproperties-legend": "Få en liste over egenskaber efter datatyper",
 	"wikibase-listproperties-datatype": "Datatype:",
 	"wikibase-listproperties-all": "Alle datatyper",
 	"wikibase-listproperties-submit": "Find",
