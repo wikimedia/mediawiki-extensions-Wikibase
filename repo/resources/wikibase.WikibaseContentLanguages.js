@@ -58,7 +58,13 @@
 		 */
 		getName: function ( code ) {
 			return this._languageMap ? this._languageMap[ code ] : null;
-		}
+		},
+		/**
+		 * @inheritdoc
+		 */
+		getAllPairs: function () {
+			return Object.assign( {}, this._languageMap );
+		},
 	} );
 
 }( wikibase ) );
