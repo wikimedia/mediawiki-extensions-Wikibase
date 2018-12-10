@@ -942,6 +942,7 @@ final class RepoHooks {
 					'util.inherit',
 					'wikibase',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + [
 				'scripts' => [
