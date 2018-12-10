@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8173b837_6ad5719f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-10T11:29:01Z",
+      "side": 1,
+      "message": "Since this is an internal field, it should start with an underscore, I believe.",
+      "range": {
+        "startLine": 266,
+        "startChar": 13,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "c0f7ad6e627104586d1f6b4be9a924a7461d6669",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c05a5b9_f108c2ed",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-10T11:29:01Z",
+      "side": 1,
+      "message": "If I understand correctly, this tracks how many times the “all entered languages” / “fewer languages” link was clicked, and it assumes that “fewer languages” is the default state, so that this always counts “all entered languages” clicks. But there might be some gadgets or user scripts that mess with this assumption… I’d feel more comfortable if we tested this explicitly by checking this._isMoreLanguagesExpanded(), as in _toggleMoreLanguagesButton.",
+      "revId": "c0f7ad6e627104586d1f6b4be9a924a7461d6669",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "735c4d00_0b07db0f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-10T11:29:01Z",
+      "side": 1,
+      "message": "The _tracked field should probably be documented here.",
+      "revId": "c0f7ad6e627104586d1f6b4be9a924a7461d6669",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3497cb1_568ac97e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-10T11:29:01Z",
+      "side": 1,
+      "message": "Should also start with an underscore.",
+      "range": {
+        "startLine": 204,
+        "startChar": 14,
+        "endLine": 204,
+        "endChar": 21
+      },
+      "revId": "c0f7ad6e627104586d1f6b4be9a924a7461d6669",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a31aa789_c0745fed",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-10T11:29:01Z",
+      "side": 0,
+      "message": "The _showAllLanguagesTracked field should probably be documented here.",
+      "revId": "7de5ac1140562c53c1962dc749b2876b4dca598e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
