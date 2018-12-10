@@ -215,7 +215,8 @@ return call_user_func( function() {
 				],
 				'dependencies' => [
 					'util.inherit',
-				]
+				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 
 		'util.Extendable' => $moduleTemplate + [
