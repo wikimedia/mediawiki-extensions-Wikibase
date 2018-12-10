@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "146d6411_f5516e4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-10T19:08:30Z",
+      "side": 1,
+      "message": "Can you add the missing type checks, please? (Not necessarily in the same patch, but should not be forgotten.)",
+      "range": {
+        "startLine": 15,
+        "startChar": 57,
+        "endLine": 16,
+        "endChar": 44
+      },
+      "revId": "5c792b32d2cfa4ef3084ac54013d4898f78bf49a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
