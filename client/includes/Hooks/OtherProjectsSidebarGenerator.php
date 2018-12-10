@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use LanguageCode;
 use Hooks;
 use Site;
 use SiteLookup;
@@ -245,7 +246,7 @@ class OtherProjectsSidebarGenerator {
 
 		$siteLanguageCode = $site->getLanguageCode();
 		if ( $siteLanguageCode !== null ) {
-			$attributes['hreflang'] = $siteLanguageCode;
+			$attributes['hreflang'] = LanguageCode::bcp47( $siteLanguageCode );
 		}
 
 		$this->sidebarLinkBadgeDisplay->applyBadgeToLink(

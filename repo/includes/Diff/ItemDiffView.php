@@ -9,6 +9,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Html;
 use InvalidArgumentException;
+use LanguageCode;
 use MWException;
 use MessageLocalizer;
 use Site;
@@ -221,7 +222,7 @@ class ItemDiffView implements DiffView {
 			// Otherwise it may have been deleted from the sites table
 			$tagName = 'a';
 			$attrs['href'] = $site->getPageUrl( $pageName );
-			$attrs['hreflang'] = $site->getLanguageCode();
+			$attrs['hreflang'] = LanguageCode::bcp47( $site->getLanguageCode() );
 		}
 
 		return Html::element( $tagName, $attrs, $pageName );
