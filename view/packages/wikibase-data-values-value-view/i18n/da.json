@@ -11,6 +11,8 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering af værdier af $1 understøttes ikke endnu.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering af værdier for datatypen $1 understøttes ikke endnu.",
 	"valueview-expert-emptyvalue-empty": "tom",
+	"valueview-expert-globecoordinateinput-precision": "Præcision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "uspecificeret",
 	"valueview-expert-globecoordinateinput-customprecision": "speciel ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
 	"valueview-expert-timevalue-calendar-julian": "Juliansk",
@@ -20,5 +22,6 @@
 	"valueview-expertextender-languageselector-label": "Sprog (obligatorisk):",
 	"valueview-expertextender-unitsuggester-label": "Enhed (valgfrit):",
 	"valueview-preview-label": "vil blive vist som:",
+	"valueview-preview-novalue": "ingen gyldig værdi blev genkendt",
 	"valueview-listrotator-manually": "angiv manuelt"
 }
