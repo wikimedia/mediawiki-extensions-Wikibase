@@ -121,7 +121,7 @@ class SqlStore implements Store {
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var TermIndex|null
+	 * @var TermIndex|LabelConflictFinder|null
 	 */
 	private $termIndex = null;
 
@@ -239,7 +239,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @return TermIndex
+	 * @return TermIndex|LabelConflictFinder
 	 */
 	private function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
