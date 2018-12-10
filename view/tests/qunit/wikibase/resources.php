@@ -11,6 +11,15 @@ return call_user_func( function() {
 	];
 
 	return [
+		'wikibase.WikibaseContentLanguages.tests' => $moduleBase + [
+			'scripts' => [
+				'wikibase.WikibaseContentLanguages.tests.js'
+			],
+			'dependencies' => [
+				'wikibase.WikibaseContentLanguages'
+			]
+		],
+
 		'wikibase.getLanguageNameByCode.tests' => $moduleBase + [
 			'scripts' => [
 				'wikibase.getLanguageNameByCode.tests.js'
