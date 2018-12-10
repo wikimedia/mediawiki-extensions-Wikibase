@@ -54,6 +54,7 @@ return call_user_func( function() {
 				'wikibase.termbox.styles',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.entityPage.entityLoaded',
+				'wikibase.WikibaseContentLanguages',
 			]
 		],
 
