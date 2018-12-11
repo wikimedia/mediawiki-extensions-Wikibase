@@ -177,6 +177,7 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\UpsertSqlIdGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
@@ -1020,9 +1021,25 @@ class WikibaseRepo {
 	}
 
 	public function newIdGenerator() : IdGenerator {
-		return new SqlIdGenerator(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$this->getSettings()->getSetting( 'idBlacklist' )
+		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'original' ) {
+			return new SqlIdGenerator(
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
+				$this->getSettings()->getSetting( 'idBlacklist' )
+			);
+		}
+
+		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'mysql-upsert' ) {
+			// We could make sure the 'upsert' generator is only being used with mysql dbs here,
+			// but perhaps that is an unnecessary check? People will realize when the DB query for
+			// ID selection fails anyway...
+			return new UpsertSqlIdGenerator(
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
+				$this->getSettings()->getSetting( 'idBlacklist' )
+			);
+		}
+
+		throw new InvalidArgumentException(
+			'idGenerator config option must be either \'original\' or \'mysql-upsert\''
 		);
 	}
 
