@@ -8,7 +8,8 @@
 			"Zolo",
 			"පසිඳු කාවින්ද",
 			"Trần Nguyễn Minh Huy",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Leduyquang753"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -124,7 +125,8 @@
 	"wikibase-validator-label-conflict": "Thuộc tính $3 đã có nhãn “$1” ứng với mã ngôn ngữ $2.",
 	"wikibase-validator-label-with-description-conflict": "Khoản mục $3 đã có nhãn “$1” và cùng lời miêu tả ứng với mã ngôn ngữ $2.",
 	"wikibase-validator-label-no-entityid": "Nhãn không được là một ID thực thể hợp lệ.",
-	"wikibase-validator-illegal-file-chars": "Tên tập tin không thể có các ký tự như dấu hai chấm và dấu gạch chéo. Xin vui lòng chỉ dán vào phần tên tập tin sau “Tập tin:” hay “File:”.",
+	"wikibase-validator-illegal-file-chars": "Tên tập tin không được chứa các ký tự như dấu hai chấm hay dấu gạch chéo",
+	"wikibase-validator-check-file-type": "Phần mở rộng tệp bị thiếu.",
 	"wikibase-validator-illegal-geo-shape-title": "Giá trị phải bắt đầu với <code>Data:</code> và kết thúc với <code>.map</code>. Ngoài ra, tên không thể chứa ký tự như dấu hai chấm, dấu băm, hoặc dấu sổ thẳng.",
 	"wikibase-validator-illegal-tabular-data-title": "Giá trị phải bắt đầu với <code>Data:</code> và kết thúc với <code>.tab</code>. Ngoài ra, tên không thể chứa ký tự như dấu hai chấm, dấu băm, hoặc dấu sổ thẳng.",
 	"wikibase-validator-no-such-media": "Tập tin “$1” không tồn tại trên [https://commons.wikimedia.org/wiki/Special:MyLanguage Wikimedia Commons].",
@@ -187,6 +189,7 @@
 	"wikibase-newitem-page": "Tên của trang liên kết đầu tiên",
 	"wikibase-newitem-no-external-page": "Không tìm thấy trang “$2” trên “$1”.",
 	"wikibase-newitem-not-recognized-siteid": "Không nhận được định danh dịch vụ được cung cấp.",
+	"wikibase-newitem-same-label-and-description": "Nhãn và mô tả không thể có cùng giá trị.",
 	"wikibase-newitem-insufficient-data": "Bạn cần phải nhập nhãn, miêu tả, hoặc biệt danh.",
 	"wikibase-newentity-language": "Ngôn ngữ:",
 	"wikibase-newentity-label": "Nhãn:",
