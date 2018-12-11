@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03518e01_c49bec76",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/LuaWikibaseStatsTests.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2018-12-11T10:23:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure I see where we are asserting in this test that the tracking calls are made",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "6ff4557432a560e824b92e0fcb79943f18cd1483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
