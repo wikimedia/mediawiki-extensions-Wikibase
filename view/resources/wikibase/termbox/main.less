@@ -1,13 +1,32 @@
 @import "_variables";
 
 .skin-minerva {
+	#ca-watch {
+		@heading-holder-height: 2.1em;
+		@star-area-size: 48px;
+		@star-icon-width: 20px;
+		width: @star-area-size;
+		height: @star-area-size;
+		min-width: @star-area-size;
+		right: -9px;
 
+		&:before {
+			margin: 0;
+			background-size: @star-icon-width auto;
+			width: @star-area-size;
+			height: @star-area-size;
+		}
+	}
+
+	@heading-holder-padding: 0.4em;
 	&.wb-entitypage .pre-content.heading-holder {
-		padding: 0.4em 0;
+		padding: @heading-holder-padding 0;
 	}
 
 	&.wb-entitypage #page-actions {
 		border-top: 0 none;
+		height: 1em + 2 * @heading-holder-padding;
+		overflow: visible;
 	}
 
 	&.wb-entitypage .pre-content h1 {
