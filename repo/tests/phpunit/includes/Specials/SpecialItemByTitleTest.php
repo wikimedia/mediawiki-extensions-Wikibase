@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use HashSiteStore;
 use Prophecy\Argument;
+use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use SpecialPageTestBase;
@@ -105,6 +106,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			$siteLookup,
 			$this->getMockSiteLinkLookup(),
 			$siteLinkTargetProvider,
+			new NullLogger(),
 			[ 'wikipedia' ]
 		);
 

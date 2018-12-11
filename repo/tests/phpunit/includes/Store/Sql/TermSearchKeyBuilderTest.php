@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
@@ -55,7 +56,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$dbw->update( $termCache->getTableName(), [ 'term_search_key' => '' ], [], __METHOD__ );
 
 		// rebuild search key
-		$builder = new TermSearchKeyBuilder( $termCache );
+		$builder = new TermSearchKeyBuilder( $termCache, new NullLogger() );
 		$builder->setRebuildAll( true );
 		$builder->rebuildSearchKey();
 
