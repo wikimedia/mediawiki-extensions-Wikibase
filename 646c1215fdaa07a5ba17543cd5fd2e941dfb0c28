@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acf2245f_77c01bd8",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-11T09:59:47Z",
+      "side": 1,
+      "message": "What purpose does the JSON round-trip serve?\nPlease add a test when adding a public method.",
+      "revId": "646c1215fdaa07a5ba17543cd5fd2e941dfb0c28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
