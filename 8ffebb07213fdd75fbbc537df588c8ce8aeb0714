@@ -22,6 +22,30 @@
       "revId": "8ffebb07213fdd75fbbc537df588c8ce8aeb0714",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "160edd41_2aa7f7c4",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-11T12:03:44Z",
+      "side": 1,
+      "message": "Good catch :) Done",
+      "parentUuid": "dc6141de_8c41b6c3",
+      "range": {
+        "startLine": 2150,
+        "startChar": 28,
+        "endLine": 2150,
+        "endChar": 29
+      },
+      "revId": "8ffebb07213fdd75fbbc537df588c8ce8aeb0714",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
