@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "738698f5_03e73a2a",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-12T15:57:28Z",
+      "side": 1,
+      "message": "I’m curious about this line. As far as I understand, Special:PagesWithBadges doesn’t make sense as a querypage API parameter either, because it requires a parameter to return pages (the badge). But unlike EntityUsage, PagesWithBadges is not available for the qppage parameter anyways, and if you try to use it [1], you’ll just get an “unrecognized value for parameter” error. So perhaps we should investigate a bit why PagesWithBadges is not available even though it’s listed here, and make EntityUsage unavailable via the same mechanism instead of removing it from here?\n\n[1]: https://en.wikipedia.org/w/api.php?action\u003dquery\u0026list\u003dquerypage\u0026qppage\u003dPagesWithBadges",
+      "revId": "aa7a77ca1db7b96b649f1585c4d8bb1cdc02bf78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
