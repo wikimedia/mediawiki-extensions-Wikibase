@@ -6,6 +6,7 @@
 	},
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
 	"tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
+	"wikibase-after-page-move": "Condrolle ca [$1 l'elemende {{WBREPONAME}} associate] ha state aggiornate automatecamende pe mandenè le collegaminde de le lènghe sus 'a pàgene.",
 	"wikibase-comment-update": "Vôsce de {{WBREPONAME}} cangiate",
 	"wikibase-comment-sitelink-add": "Collegamende d'a lènghe aggiunde: $1",
 	"wikibase-comment-sitelink-change": "Collegamende 'a lènghe cangiate da $1 a $2",

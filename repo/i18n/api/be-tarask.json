@@ -220,5 +220,6 @@
 	"apihelp-wbsetclaimvalue-description": "Усталёўвае значэньне сьцьверджаньне Вікібазы.",
 	"apihelp-wbsetclaimvalue-summary": "Усталёўвае значэньне сьцьверджаньня Вікібазы.",
 	"apihelp-wbsetclaimvalue-param-claim": "GUID, які вызначае сьцьверджаньне",
-	"apihelp-wbsetclaimvalue-param-snaktype": "Тып снэку"
+	"apihelp-wbsetclaimvalue-param-snaktype": "Тып снэку",
+	"apihelp-wbsetclaimvalue-param-value": "Значэньне, якое трэба задаць DataValue асноўнага снэку сьцьверджаньня"
 }
