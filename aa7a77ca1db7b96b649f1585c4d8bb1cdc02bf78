@@ -16,6 +16,24 @@
       "revId": "aa7a77ca1db7b96b649f1585c4d8bb1cdc02bf78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6135e33d_b58b822a",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2018-12-12T16:31:58Z",
+      "side": 1,
+      "message": "It is part of the `$uselessQueryPages` in https://github.com/wikimedia/mediawiki/blob/029a08b3688dadd978a59f2df1c9c8b4373d87ff/includes/api/ApiQueryQueryPage.php#L34\n\nI didn\u0027t look deeper in how it got there. But I tried out the actual SpecialPage on wikidata.org and it  didn\u0027t return any results and seems quite useless indeed for wikidata",
+      "parentUuid": "738698f5_03e73a2a",
+      "revId": "aa7a77ca1db7b96b649f1585c4d8bb1cdc02bf78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
