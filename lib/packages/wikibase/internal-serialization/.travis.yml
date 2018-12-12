@@ -20,7 +20,8 @@ sudo: false
 
 install: travis_retry composer require "wikibase/data-model=$DM" --prefer-source
 
-script: composer ci
+# Hack: Don't run phpmd with HHVM
+script: if $(php --version | grep -q HipHop); then composer test; else composer ci; fi
 
 after_success:
   - if [[ "`phpenv version-name`" != "7.1" ]]; then exit 0; fi
