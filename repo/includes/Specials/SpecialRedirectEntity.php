@@ -92,6 +92,8 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
+		$this->checkPermissions();
+		$this->checkBlocked();
 		$this->checkReadOnly();
 
 		$this->setHeaders();
