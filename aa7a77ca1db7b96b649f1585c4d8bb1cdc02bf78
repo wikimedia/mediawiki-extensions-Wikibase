@@ -34,6 +34,24 @@
       "revId": "aa7a77ca1db7b96b649f1585c4d8bb1cdc02bf78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22753ccd_344b1a69",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-12T16:49:08Z",
+      "side": 1,
+      "message": "Thanks, I submitted Ibc50faea5c to add EntityUsage there as well.",
+      "parentUuid": "6135e33d_b58b822a",
+      "revId": "aa7a77ca1db7b96b649f1585c4d8bb1cdc02bf78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
