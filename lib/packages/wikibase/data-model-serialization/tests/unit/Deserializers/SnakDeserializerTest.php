@@ -115,14 +115,6 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 					'hash' => 'not a valid hash'
 				]
 			],
-			[
-				new PropertyNoValueSnak( new PropertyId( 'foo:P42' ) ),
-				[
-					'snaktype' => 'novalue',
-					'property' => 'foo:P42',
-					'hash' => 'not a valid hash'
-				]
-			],
 		];
 	}
 
