@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
+use MediaWiki\Logger\LoggerFactory;
+use RuntimeException;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -28,6 +30,20 @@ class EntityNamespaceLookup {
 	public function __construct( array $entityNamespaces, array $entitySlots = [] ) {
 		Assert::parameterElementType( 'integer', $entityNamespaces, '$entityNamespaces' );
 		Assert::parameterElementType( 'string', $entitySlots, '$entitySlots' );
+
+		// TODO: remove: temporary logging for T211801.
+		// NOTE: This is for investigation on the beta cluster, it should not go on the live sites!
+		$logger = LoggerFactory::getInstance( 'EntityNamespaces' );
+		$logger->_tick = ( $logger->_tick ?? 0 ) + 1;
+		$logger->debug(
+			__METHOD__,
+			[
+				'entityNamespaces' => $entityNamespaces,
+				'entitySlots' => $entitySlots,
+				'tick' => $logger->_tick,
+				'trace' => ( new RuntimeException() )->getTraceAsString()
+			]
+		);
 
 		$this->entityNamespaces = $entityNamespaces;
 		$this->entitySlots = $entitySlots;

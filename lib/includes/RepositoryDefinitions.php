@@ -3,7 +3,9 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
 use MWNamespace;
+use RuntimeException;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikimedia\Assert\Assert;
 
@@ -240,6 +242,20 @@ class RepositoryDefinitions {
 				}
 			}
 		}
+
+		// TODO: remove: temporary logging for T211801.
+		// NOTE: This is for investigation on the beta cluster, it should not go on the live sites!
+		$logger = LoggerFactory::getInstance( 'EntityNamespaces' );
+		$logger->_tick = ( $logger->_tick ?? 0 ) + 1;
+		$logger->debug(
+			__METHOD__,
+			[
+				'entityNamespaces' => $this->entityNamespaces,
+				'entitySlots' => $this->entitySlots,
+				'tick' => $logger->_tick,
+				'trace' => ( new RuntimeException() )->getTraceAsString()
+			]
+		);
 	}
 
 	/**
