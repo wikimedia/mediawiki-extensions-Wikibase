@@ -12,7 +12,9 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
-use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -32,8 +34,17 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 */
 	private $dataValueDeserializer;
 
-	public function __construct( Deserializer $dataValueDeserializer ) {
+	/**
+	 * @var EntityIdParser
+	 */
+	private $propertyIdParser;
+
+	public function __construct(
+		EntityIdParser $propertyIdParser,
+		Deserializer $dataValueDeserializer
+	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
+		$this->propertyIdParser = $propertyIdParser;
 	}
 
 	/**
@@ -137,8 +148,18 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 */
 	private function deserializePropertyId( $serialization ) {
 		try {
-			return new PropertyId( $serialization );
-		} catch ( InvalidArgumentException $ex ) {
+			$id = $this->propertyIdParser->parse( $serialization );
+
+			if ( $id->getEntityType() !== Property::ENTITY_TYPE ) {
+				throw new InvalidAttributeException(
+					'property',
+					$serialization,
+					"'$serialization' is not a property ID"
+				);
+			}
+
+			return $id;
+		} catch ( EntityIdParsingException $ex ) {
 			throw new InvalidAttributeException(
 				'property',
 				$serialization,
