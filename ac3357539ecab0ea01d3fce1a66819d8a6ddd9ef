@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7c75b7a_debb335f",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-13T00:01:45Z",
+      "side": 1,
+      "message": "The JSON stuff here is just to do a deep clone right? If so, you can extract that bit info a deepClone function, if there is no such thing already readily available.",
+      "revId": "ac3357539ecab0ea01d3fce1a66819d8a6ddd9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c1faa4d_b31c906d",
+        "filename": "view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2018-12-13T00:01:45Z",
+      "side": 1,
+      "message": "Looks like you can inline this var. If not, beware that the naming convention is likeThis and not LikeThis.",
+      "revId": "ac3357539ecab0ea01d3fce1a66819d8a6ddd9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
