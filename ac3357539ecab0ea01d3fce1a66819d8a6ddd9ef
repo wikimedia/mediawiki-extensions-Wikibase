@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "72c2ada0_a21078dc",
+        "filename": "view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-12-13T12:19:42Z",
+      "side": 1,
+      "message": "Hurray for test coverage!",
+      "revId": "ac3357539ecab0ea01d3fce1a66819d8a6ddd9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "800a5ea1_e52242f5",
+        "filename": "view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-12-13T12:19:42Z",
+      "side": 1,
+      "message": "IMO this (or a second) test should also cover the cloning behavior.",
+      "revId": "ac3357539ecab0ea01d3fce1a66819d8a6ddd9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c1faa4d_b31c906d",
         "filename": "view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",
         "patchSetId": 9
@@ -30,6 +64,29 @@
       "writtenOn": "2018-12-13T00:01:45Z",
       "side": 1,
       "message": "Looks like you can inline this var. If not, beware that the naming convention is likeThis and not LikeThis.",
+      "revId": "ac3357539ecab0ea01d3fce1a66819d8a6ddd9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3306fb20_e0bbe733",
+        "filename": "view/tests/qunit/wikibase/wikibase.WikibaseContentLanguages.tests.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-12-13T12:19:42Z",
+      "side": 1,
+      "message": "It would be cleaner to mock the result of this call and not use the actual config value.",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 45
+      },
       "revId": "ac3357539ecab0ea01d3fce1a66819d8a6ddd9ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
