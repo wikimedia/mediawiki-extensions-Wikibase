@@ -8,6 +8,7 @@ use DataValues\UnDeserializableValue;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -23,6 +24,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
 		return new SnakDeserializer(
+			new BasicEntityIdParser(),
 			new DataValueDeserializer( [
 				'string' => StringValue::class,
 			] )
@@ -141,12 +143,22 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testDeserializePropertyIdFilterItemId() {
-		$deserializer = new SnakDeserializer( new DataValueDeserializer() );
+		$deserializer = new SnakDeserializer( new BasicEntityIdParser(), new DataValueDeserializer() );
 
 		$this->setExpectedException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'snaktype' => 'somevalue',
 			'property' => 'Q42'
+		] );
+	}
+
+	public function testDeserializeBadPropertyId() {
+		$deserializer = new SnakDeserializer( new BasicEntityIdParser(), new DataValueDeserializer() );
+
+		$this->setExpectedException( InvalidAttributeException::class );
+		$deserializer->deserialize( [
+			'snaktype' => 'somevalue',
+			'property' => 'xyz'
 		] );
 	}
 
