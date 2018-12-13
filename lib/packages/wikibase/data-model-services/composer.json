@@ -31,6 +31,7 @@
 		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
+		"phpmd/phpmd": "~2.3",
 		"phpunit/phpunit": "~5.7",
 		"wikibase/wikibase-codesniffer": "^0.5.0"
 	},
@@ -50,7 +51,8 @@
 			"phpunit --coverage-php /dev/null"
 		],
 		"cs": [
-			"phpcs -p -s"
+			"phpcs -p -s",
+			"phpmd src/,tests/unit/ text phpmd.xml"
 		],
 		"ci": [
 			"@cs",
