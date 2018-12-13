@@ -400,7 +400,14 @@ class WikibaseRepo {
 			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ];
 
-		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
+
+		if ( isset( $foreignRepositories[''] ) ) {
+			throw new MWException( 'A WikibaseRepo cannot have a foreign repo configured with '
+				. 'the empty prefix, since the empty prefix always refers to the local repo.' );
+		}
+
+		foreach ( $foreignRepositories as $repository => $repositorySettings ) {
 			$repoDefinitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
