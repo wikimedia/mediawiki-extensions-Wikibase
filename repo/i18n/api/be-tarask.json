@@ -221,5 +221,7 @@
 	"apihelp-wbsetclaimvalue-summary": "Усталёўвае значэньне сьцьверджаньня Вікібазы.",
 	"apihelp-wbsetclaimvalue-param-claim": "GUID, які вызначае сьцьверджаньне",
 	"apihelp-wbsetclaimvalue-param-snaktype": "Тып снэку",
-	"apihelp-wbsetclaimvalue-param-value": "Значэньне, якое трэба задаць DataValue асноўнага снэку сьцьверджаньня"
+	"apihelp-wbsetclaimvalue-param-value": "Значэньне, якое трэба задаць DataValue асноўнага снэку сьцьверджаньня",
+	"apihelp-wbsetclaimvalue-param-summary": "Апісаньне рэдагаваньня.\nСьпераду будзе дададзены аўтаматычны камэнтар. Ліміт даўжыні аўтаматычнага камэнтару разам з апісаньнем — 260 сымбаляў. Памятайце, што ўсё, што перавышае гэты ліміт будзе сьцёртае.",
+	"apihelp-wbsetclaimvalue-param-baserevid": "Лікавы ідэнтыфікатар вэрсіі, на якім будзе грунтавацца зьмена.\nВыкарыстоўваецца для вызначэньня канфліктаў пры захаваньні."
 }

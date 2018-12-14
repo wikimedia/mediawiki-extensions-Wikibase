@@ -6,6 +6,8 @@
 	},
 	"apihelp-query+wbentityusage-description": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
 	"apihelp-query+wbentityusage-summary": "Tuèrne tutte le ID de l'entità ausate jndr'à le pàggene indicate.",
+	"apihelp-query+wblistentityusage-description": "Tuèrne tutte le pàggene ca ausane le ID endità indicate.",
+	"apihelp-query+wblistentityusage-summary": "Tuèrne tutte le pàggene ca ausane le ID endità indicate.",
 	"apihelp-query+description-example": "Pigghie 'a descrizione d'a pàgene 'Londre'.",
 	"apihelp-query+description-example-central": "Pigghie 'a descrizione d'a pàgene 'Londre', preferenne 'a descrizione cendralizzate ce esiste."
 }
