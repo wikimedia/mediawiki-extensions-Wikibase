@@ -58,6 +58,17 @@
 		 */
 		getName: function ( code ) {
 			return this._languageMap ? this._languageMap[ code ] : null;
+		},
+
+		/**
+		 * @inheritdoc
+		 */
+		getAllPairs: function () {
+			return this._deepClone( this._languageMap );
+		},
+
+		_deepClone: function ( original ) {
+			return JSON.parse( JSON.stringify( original ) );
 		}
 	} );
 
