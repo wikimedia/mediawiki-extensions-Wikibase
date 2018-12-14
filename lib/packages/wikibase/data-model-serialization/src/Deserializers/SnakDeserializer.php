@@ -148,16 +148,6 @@ class SnakDeserializer implements DispatchableDeserializer {
 	private function deserializePropertyId( $serialization ) {
 		try {
 			$id = $this->propertyIdParser->parse( $serialization );
-
-			if ( !( $id instanceof PropertyId ) ) {
-				throw new InvalidAttributeException(
-					'property',
-					$serialization,
-					"'$serialization' is not a property ID"
-				);
-			}
-
-			return $id;
 		} catch ( EntityIdParsingException $ex ) {
 			throw new InvalidAttributeException(
 				'property',
@@ -165,6 +155,16 @@ class SnakDeserializer implements DispatchableDeserializer {
 				"'$serialization' is not a valid property ID"
 			);
 		}
+
+		if ( $id instanceof PropertyId ) {
+			return $id;
+		}
+
+		throw new InvalidAttributeException(
+			'property',
+			$serialization,
+			"'$serialization' is not a property ID"
+		);
 	}
 
 	private function assertCanDeserialize( $serialization ) {
