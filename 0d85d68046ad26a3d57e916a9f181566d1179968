@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aefa0abc_f6e5e4b1",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-12-14T00:33:32Z",
+      "side": 1,
+      "message": "If I understand this right, it would produce month and day of 0 for dates with precision of year. I am not sure what is supposed to happen to this after it, but I don\u0027t think this would be a valid date for Wikidata. It is certainly not valid for many ISO formats, and would probably be invalid for RDF export. Not sure if this is the right place to address that issue, but wanted to raise it nevertheless.",
+      "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
