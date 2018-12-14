@@ -16,6 +16,24 @@
       "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "611368e0_a32d1d4a",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-14T12:12:45Z",
+      "side": 1,
+      "message": "It’s valid for Wikibase according to the data model documentation [1], and while I generally wouldn’t trust this page too much (it’s horrendously outdated in places, and my attempts to clean up the parts about precision have resulted in some nasty arguments), I’m sure I’ve also seen such timestamps used on Wikidata – in fact, there are even some timestamps like that on the current sandbox item [2]. For the RDF export, I believe we clean up the timestamp (which also includes adjusting the BCE convention – 1 BCE is -0001 to Wikibase but 0000 in RDF).\n\n[1]: https://www.mediawiki.org/wiki/Wikibase/DataModel#Dates_and_times\n[2]: https://www.wikidata.org/wiki/Special:EntityData/Q4115189.json?revision\u003d811680247",
+      "parentUuid": "aefa0abc_f6e5e4b1",
+      "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
