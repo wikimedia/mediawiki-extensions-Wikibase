@@ -14,7 +14,6 @@ use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -150,7 +149,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 		try {
 			$id = $this->propertyIdParser->parse( $serialization );
 
-			if ( $id->getEntityType() !== Property::ENTITY_TYPE ) {
+			if ( !( $id instanceof PropertyId ) ) {
 				throw new InvalidAttributeException(
 					'property',
 					$serialization,
