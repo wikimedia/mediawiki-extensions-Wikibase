@@ -122,7 +122,6 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as
 ## See also 
 
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
-* [Ask Serialization](https://github.com/wmde/AskSerialization)
 * [Wikibase Internal Serialization](https://github.com/wmde/WikibaseInternalSerialization) (For the "internal" serialization format)
 
 # Bugs on Phabricator
