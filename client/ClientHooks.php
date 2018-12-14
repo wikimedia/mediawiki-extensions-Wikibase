@@ -28,7 +28,6 @@ use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\PageSplitTester;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -288,7 +287,9 @@ final class ClientHooks {
 	 */
 	public static function onwgQueryPages( &$queryPages ) {
 		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
-		$queryPages[] = [ SpecialPagesWithBadges::class, 'PagesWithBadges' ];
+		// SpecialPagesWithBadges and SpecialEntityUsage also extend QueryPage,
+		// but are not useful in the list of query pages,
+		// since they require a parameter (badge, entity id) to operate
 	}
 
 	/**
