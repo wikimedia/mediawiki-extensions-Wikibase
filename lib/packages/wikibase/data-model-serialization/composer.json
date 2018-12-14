@@ -33,9 +33,9 @@
 		"data-values/serialization": "~1.0"
 	},
 	"require-dev": {
-		"data-values/geo": "~3.0",
-		"data-values/number": ">=0.1 <0.10",
-		"data-values/time": "~0.2",
+		"data-values/geo": "~4.0|~3.0",
+		"data-values/number": ">=0.1 <0.11",
+		"data-values/time": "~1.0|~0.2",
 		"phpunit/phpunit": "^4.8.35",
 		"wikibase/wikibase-codesniffer": "^0.4.1"
 	},
