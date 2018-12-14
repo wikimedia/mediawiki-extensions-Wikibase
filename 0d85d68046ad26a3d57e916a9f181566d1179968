@@ -34,6 +34,47 @@
       "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e2b12aa_ef646abf",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-14T14:40:39Z",
+      "side": 1,
+      "message": "The values stored in the Wikibase database are not really ISO, they just look like ISO. Meaningless elements are set to 0. More precisely: meaningless values can be set to anything. Users are expected to ignore them. To make this more obvious we are using \"00\" for month and day the moment they become meaningless.",
+      "parentUuid": "611368e0_a32d1d4a",
+      "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6976aad1_4d209d31",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-14T14:40:39Z",
+      "side": 1,
+      "message": "The string from up there ends here. When this data value class is able to accept 0 for month and day, it can\u0027t be wrong.\n\nOr to put this the other way around: It\u0027s possible to change this behavior and enforce month and day to be 1. Not much would change: users are expected to ignore these elements anyway. So it does not matter much if they are \"00\" or \"01\". However, such a change is unrelated to what this patch does, needs to be discussed separately, and should then be done in the TimeValue class.",
+      "range": {
+        "startLine": 91,
+        "startChar": 10,
+        "endLine": 91,
+        "endChar": 23
+      },
+      "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
