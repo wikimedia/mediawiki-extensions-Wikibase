@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "e603b539_9683dfc0",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2018-12-14T20:21:46Z",
+      "side": 1,
+      "message": "OK, if the does say to put 0 there in the docs, then you\u0027re correct. I think keeping values that will give us trouble in the future is a mistake, and we\u0027ve been bitten by it in the past, and I\u0027m sure this will happen more in the future. But you are right that this should not be part of this patch, since it follows the established practice.",
+      "parentUuid": "8e2b12aa_ef646abf",
+      "revId": "0d85d68046ad26a3d57e916a9f181566d1179968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6976aad1_4d209d31",
         "filename": "repo/includes/Parsers/DateFormatParser.php",
         "patchSetId": 15
