@@ -34,17 +34,14 @@
 	}
 
 	QUnit.test( 'construction without "new"', function( assert ) {
-		assert.expect( 5 );
 		assertSuccessfulConstruction( assert, AnimationEvent( 'nopurpose' ), 'nopurpose' );
 	} );
 
 	QUnit.test( 'construction with "new"', function( assert ) {
-		assert.expect( 5 );
 		assertSuccessfulConstruction( assert, new AnimationEvent( 'foo' ), 'foo' );
 	} );
 
 	QUnit.test( 'construction with custom fields given', function( assert ) {
-		assert.expect( 7 );
 		var fields = {
 			someCustomField1: 'foo',
 			someCustomField2: {}
@@ -53,18 +50,17 @@
 
 		assertSuccessfulConstruction( assert, event, 'someanimation' );
 
-		assert.ok(
-			event.foo === fields.foo,
+		assert.strictEqual(
+			event.foo, fields.foo,
 			'Custom field got copied.'
 		);
-		assert.ok(
-			event.someCustomField2 === fields.someCustomField2,
+		assert.strictEqual(
+			event.someCustomField2, fields.someCustomField2,
 			'Another custom field got copied, copy happens by reference, no deep extend.'
 		);
 	} );
 
 	QUnit.test( 'animationOptions()', function( assert ) {
-		assert.expect( AnimationEvent.ANIMATION_STEPS.length + 2 );
 		var event = AnimationEvent( 'animationpurpose' );
 		var predefined = {
 			easing: 'swing',
@@ -94,8 +90,6 @@
 	} );
 
 	QUnit.test( 'ANIMATION_STEPS', function( assert ) {
-		assert.expect( 2 );
-
 		assert.ok(
 			$.isArray( AnimationEvent.ANIMATION_STEPS ),
 			'Is an array.'
@@ -167,7 +161,6 @@
 		QUnit.test(
 			'animationOptions(). ' + step + ' callbacks test',
 			function( assert ) {
-				assert.expect( 4 );
 				testAnimationOptionsGeneratedCallbacks( assert, step );
 			} );
 	} );

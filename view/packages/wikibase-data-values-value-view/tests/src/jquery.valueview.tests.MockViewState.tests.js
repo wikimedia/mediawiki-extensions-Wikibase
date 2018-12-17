@@ -20,7 +20,6 @@
 	 */
 	function buildMemberTestFn( params, memberName ) {
 		return function( assert ) {
-			assert.expect( 1 );
 			var viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
@@ -83,7 +82,6 @@
 
 	testCases.forEach( function ( params ) {
 		QUnit.test( 'constructor', function( assert ) {
-			assert.expect( 2 );
 			var viewState = new MockViewState( params.constructorArg );
 
 			assert.ok(
@@ -104,7 +102,6 @@
 		QUnit.test( 'value', buildMemberTestFn( params, 'value' ) );
 
 		QUnit.test( 'option', function( assert ) {
-			assert.expect( 2 );
 			var viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
@@ -122,19 +119,18 @@
 	} );
 
 	QUnit.test( 'Changing state after construction', function( assert ) {
-		assert.expect( 2 );
 		var state = {},
 			viewState = new MockViewState( state );
 
-		assert.ok(
-			!viewState.isInEditMode(),
+		assert.strictEqual(
+			viewState.isInEditMode(), false,
 			'MockViewState "isInEditMode" returns false after injecting empty definition'
 		);
 
 		state.isInEditMode = true;
 
-		assert.ok(
-			viewState.isInEditMode(),
+		assert.strictEqual(
+			viewState.isInEditMode(), true,
 			'MockViewState "isInEditMode" returns true after changing object given to constructor'
 		);
 	} );

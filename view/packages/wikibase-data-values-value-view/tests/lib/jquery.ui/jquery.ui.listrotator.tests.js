@@ -48,13 +48,13 @@
 		var listrotator = newTestListrotator(),
 			widgetBaseClass = listrotator.widgetBaseClass;
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.test_listrotator' ).data( 'listrotator' ),
 			listrotator,
 			'Initialized widget.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.' + widgetBaseClass + '-menu' ).length,
 			1,
 			'Appended menu element to DOM.'
@@ -62,12 +62,12 @@
 
 		listrotator.destroy();
 
-		assert.ok(
-			$( '.test_listrotator' ).data( 'listrotator' ) === undefined,
+		assert.strictEqual(
+			$( '.test_listrotator' ).data( 'listrotator' ), undefined,
 			'Destroyed widget.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.' + widgetBaseClass + '-menu' ).length,
 			0,
 			'Remove menu element from DOM.'
@@ -97,7 +97,6 @@
 	} );
 
 	QUnit.test( 'autoActive()', function( assert ) {
-		assert.expect( 1 );
 		assert.ok(
 			newTestListrotator().autoActive(),
 			'Listrotator uses "auto" initially'

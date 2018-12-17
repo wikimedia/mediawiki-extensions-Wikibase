@@ -40,7 +40,7 @@
 		var preview = newTestPreview(),
 			widgetBaseClass = preview.widgetBaseClass;
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.test_preview' ).data( 'preview' ),
 			preview,
 			'Initialized widget.'
@@ -48,12 +48,12 @@
 
 		preview.destroy();
 
-		assert.ok(
-			$( '.test_preview' ).data( 'preview' ) === undefined,
+		assert.strictEqual(
+			$( '.test_preview' ).data( 'preview' ), undefined,
 			'Destroyed widget.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.' + widgetBaseClass + '-value' ).length,
 			0,
 			'Removed preview value node from DOM.'
@@ -65,13 +65,13 @@
 
 		preview.update( 'test' );
 
-		assert.equal(
+		assert.strictEqual(
 			preview.$value.children().length,
 			0,
 			'Preview has no child node.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			preview.$value.text(),
 			'test',
 			'Updated preview.'
@@ -79,7 +79,7 @@
 
 		preview.showSpinner();
 
-		assert.equal(
+		assert.strictEqual(
 			preview.$value.children().length,
 			1,
 			'Preview has only one child node.'
@@ -92,13 +92,13 @@
 
 		preview.update( 'test2' );
 
-		assert.equal(
+		assert.strictEqual(
 			preview.$value.text(),
 			'test2',
 			'Updated preview.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			preview.$value.children().length,
 			0,
 			'Preview has no child node.'

@@ -21,7 +21,6 @@
 	}
 
 	QUnit.test( 'valueCharacteristics', function( assert ) {
-		assert.expect( 3 );
 		var expert = newExpert(),
 			characteristics = expert.valueCharacteristics();
 
@@ -35,8 +34,8 @@
 			'unit is null or a string'
 		);
 
-		assert.notOk(
-			characteristics.unit === '', 'unit should not be empty string'
+		assert.notStrictEqual(
+			characteristics.unit, '', 'unit should not be empty string'
 		);
 	} );
 

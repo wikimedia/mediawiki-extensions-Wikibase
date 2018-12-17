@@ -8,7 +8,6 @@
 QUnit.module( 'util.highlightSubstring' );
 
 QUnit.test( 'Highlight with default options', function( assert ) {
-	assert.expect( 7 );
 	var testCases = [
 		['', '', ''],
 		['abc', 'abc', '<span class="highlight">abc</span>'],
@@ -24,7 +23,7 @@ QUnit.test( 'Highlight with default options', function( assert ) {
 			substring = testCases[i][1],
 			expected = testCases[i][2];
 
-		assert.equal(
+		assert.strictEqual(
 			util.highlightSubstring( substring, string ),
 			expected,
 			'Highlighting "' + substring + '" in "' + string + '" results in "' + expected + '".'
@@ -33,7 +32,6 @@ QUnit.test( 'Highlight with default options', function( assert ) {
 } );
 
 QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
-	assert.expect( 4 );
 	var testCases = [
 		['abcdef', 'abc', '<span class="highlight">abc</span>def'],
 		['Abcdef', 'abc', 'Abcdef'],
@@ -46,7 +44,7 @@ QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
 			substring = testCases[i][1],
 			expected = testCases[i][2];
 
-		assert.equal(
+		assert.strictEqual(
 			util.highlightSubstring( substring, string, { caseSensitive: true } ),
 			expected,
 			'Test set #' + i + ': Highlighting "' + substring + '" in "' + string + '" '
@@ -56,7 +54,6 @@ QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
 } );
 
 QUnit.test( 'Highlight (withinString === true)', function( assert ) {
-	assert.expect( 2 );
 	var testCases = [
 		['abc', 'abc', '<span class="highlight">abc</span>'],
 		['abcdef', 'abc', '<span class="highlight">abc</span>def']
@@ -67,7 +64,7 @@ QUnit.test( 'Highlight (withinString === true)', function( assert ) {
 			substring = testCases[i][1],
 			expected = testCases[i][2];
 
-		assert.equal(
+		assert.strictEqual(
 			util.highlightSubstring( substring, string, { withinString: true } ),
 			expected,
 			'Test set #' + i + ': Highlighting "' + substring + '" in "' + string + '" '
@@ -77,7 +74,6 @@ QUnit.test( 'Highlight (withinString === true)', function( assert ) {
 } );
 
 QUnit.test( 'Highlight (wrapperNodeName, wrapperNodeClass)', function( assert ) {
-	assert.expect( 3 );
 	var testCases = [
 		['abcdef', 'a', '<div class="highlight">a</div>bcdef', {
 			wrapperNodeName: 'div'
@@ -96,7 +92,7 @@ QUnit.test( 'Highlight (wrapperNodeName, wrapperNodeClass)', function( assert ) 
 			substring = testCases[i][1],
 			expected = testCases[i][2];
 
-		assert.equal(
+		assert.strictEqual(
 			util.highlightSubstring( substring, string, testCases[i][3] ),
 			expected,
 			'Test set #' + i + ': Highlighting "' + substring + '" in "' + string + '" '

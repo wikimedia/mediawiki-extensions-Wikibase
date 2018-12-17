@@ -61,7 +61,6 @@
 	QUnit.module( 'jquery.valueview.ExpertStore' );
 
 	QUnit.test( 'Constructor', function( assert ) {
-		assert.expect( 1 );
 		var expertStore = new vv.ExpertStore();
 
 		assert.ok(
@@ -71,7 +70,6 @@
 	} );
 
 	QUnit.test( 'registerDataTypeExpert(): Error handling', function( assert ) {
-		assert.expect( 2 );
 		var expertStore = new vv.ExpertStore();
 
 		assert.throws(
@@ -92,7 +90,6 @@
 	} );
 
 	QUnit.test( 'registerDataValueExpert(): Error handling', function( assert ) {
-		assert.expect( 2 );
 		var expertStore = new vv.ExpertStore();
 
 		assert.throws(
@@ -113,16 +110,15 @@
 	} );
 
 	QUnit.test( 'Return default expert constructor on getExpert()', function( assert ) {
-		assert.expect( 5 );
 		var expertStore = new vv.ExpertStore( MockExpertForUnsupportedValue );
 
-		assert.equal(
+		assert.strictEqual(
 			expertStore.getExpert( StringValue.TYPE ),
 			MockExpertForUnsupportedValue,
 			'Returning default expert if no expert is registered for a specific data value.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			expertStore.getExpert( stringType.getDataValueType(), stringType.getId() ),
 			MockExpertForUnsupportedValue,
 			'Returning default if no expert is registered for a specific data type.'
@@ -130,19 +126,19 @@
 
 		expertStore.registerDataValueExpert( MockExpertForStringValue, StringValue.TYPE );
 
-		assert.equal(
+		assert.strictEqual(
 			expertStore.getExpert( StringValue.TYPE ),
 			MockExpertForStringValue,
 			'Returning specific expert if an expert is registered for a specific data value.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			expertStore.getExpert( UnknownValue.TYPE ),
 			MockExpertForUnsupportedValue,
 			'Still returning default expert if no expert is registered for a specific data value.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			expertStore.getExpert( numberType.getDataValueType(), numberType.getId() ),
 			MockExpertForUnsupportedValue,
 			'Still returning default expert if no expert is registered for a specific data type.'
@@ -224,7 +220,6 @@
 	 *        constructor and an Expert constructor which is expected to be registered for it.
 	 */
 	function expertStoreRegistrationTest( assert, toRegister, toExpect ) {
-		assert.expect( toRegister.length + toExpect.length );
 		var expertStore = new vv.ExpertStore();
 
 		// Register experts as per definition:

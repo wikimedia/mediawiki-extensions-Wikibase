@@ -46,7 +46,6 @@
 	} );
 
 	QUnit.test( 'Create', function( assert ) {
-		assert.expect( 7 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -70,13 +69,13 @@
 			'Instantiated menu widget filled with items.'
 		);
 
-		assert.ok(
-			menu.option( 'items' ).length === menuItems.length,
+		assert.strictEqual(
+			menu.option( 'items' ).length, menuItems.length,
 			'Verified items set.'
 		);
 
-		assert.ok(
-			$menu.children().length === menuItems.length,
+		assert.strictEqual(
+			$menu.children().length, menuItems.length,
 			'Verified DOM structure.'
 		);
 
@@ -100,24 +99,23 @@
 	} );
 
 	QUnit.test( 'hasVisibleItems()', function( assert ) {
-		assert.expect( 9 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
-		assert.ok(
-			!menu.hasVisibleItems(),
+		assert.strictEqual(
+			menu.hasVisibleItems(), false,
 			'Empty menu has no visible default items.'
 		);
 
-		assert.ok(
-			!menu.hasVisibleItems( true ),
+		assert.strictEqual(
+			menu.hasVisibleItems( true ), false,
 			'Empty menu has no visible items at all.'
 		);
 
 		menu.option( 'customItems', customMenuItems );
 
-		assert.ok(
-			!menu.hasVisibleItems(),
+		assert.strictEqual(
+			menu.hasVisibleItems(), false,
 			'Menu filled with custom items only has no visible default items.'
 		);
 
@@ -130,8 +128,8 @@
 			return menu.hasVisibleItems();
 		} ) ] );
 
-		assert.ok(
-			!menu.hasVisibleItems( true ),
+		assert.strictEqual(
+			menu.hasVisibleItems( true ), false,
 			'Menu filled with an invisible custom item has no visible items at all.'
 		);
 
@@ -162,13 +160,12 @@
 	} );
 
 	QUnit.test( 'Update items using option()', function( assert ) {
-		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
 		menu.option( 'items', menuItems );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			menuItems.length,
 			'Updated empty menu with items.'
@@ -178,7 +175,7 @@
 			new $.ui.ooMenu.Item( 'test' )
 		] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			1,
 			'Updated menu with single item.'
@@ -186,7 +183,7 @@
 
 		menu.option( 'items', [] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			0,
 			'Removed all items.'
@@ -194,13 +191,12 @@
 	} );
 
 	QUnit.test( 'Update items using option() with custom items present', function( assert ) {
-		assert.expect( 3 );
 		var $menu = newTestMenu( { customItems: customMenuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
 		menu.option( 'items', menuItems );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			menuItems.length + customMenuItems.length - 1,
 			'Updated empty menu with items.'
@@ -210,7 +206,7 @@
 			new $.ui.ooMenu.Item( 'test' )
 		] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			customMenuItems.length - 1 + 1,
 			'Updated menu with single item.'
@@ -218,7 +214,7 @@
 
 		menu.option( 'items', [] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			customMenuItems.length - 1,
 			'Removed all items.'
@@ -226,13 +222,12 @@
 	} );
 
 	QUnit.test( 'Update custom items using option()', function( assert ) {
-		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
 		menu.option( 'customItems', customMenuItems );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			customMenuItems.length - 1,
 			'Updated empty menu with custom items.'
@@ -242,7 +237,7 @@
 			new $.ui.ooMenu.CustomItem( 'test' )
 		] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			1,
 			'Updated menu with single custom item.'
@@ -250,7 +245,7 @@
 
 		menu.option( 'customItems', [] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			0,
 			'Removed all custom items.'
@@ -258,13 +253,12 @@
 	} );
 
 	QUnit.test( 'Update custom items using option() with items present', function( assert ) {
-		assert.expect( 3 );
 		var $menu = newTestMenu( { customItems: customMenuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
 		menu.option( 'items', menuItems );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			menuItems.length + customMenuItems.length - 1,
 			'Updated empty menu with items.'
@@ -274,7 +268,7 @@
 			new $.ui.ooMenu.Item( 'test' )
 		] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			customMenuItems.length - 1 + 1,
 			'Updated menu with single item.'
@@ -282,7 +276,7 @@
 
 		menu.option( 'items', [] );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.children().length,
 			customMenuItems.length - 1,
 			'Removed all items.'
@@ -290,7 +284,6 @@
 	} );
 
 	QUnit.test( 'Setting "maxItems" option triggering scale()', function( assert ) {
-		assert.expect( 2 );
 		var $menu = newTestMenu( {
 				items: menuItems,
 				maxItems: menuItems.length - 1
@@ -308,7 +301,7 @@
 
 		menu.option( 'maxItems', menuItems.length - 1 );
 
-		assert.equal(
+		assert.strictEqual(
 			$menu.outerHeight(),
 			maxHeight,
 			'Reset "maxItems" option rescaling the menu size.'
@@ -316,7 +309,6 @@
 	} );
 
 	QUnit.test( '"manipulateLabel" option', function( assert ) {
-		assert.expect( 2 );
 		var $menu = newTestMenu( {
 				items: menuItems.slice( 0, 2 ),
 				manipulateLabel: function( label ) {
@@ -325,7 +317,7 @@
 			} );
 
 		$menu.children( '.ui-ooMenu-item' ).each( function() {
-			assert.equal(
+			assert.strictEqual(
 				$( this ).text(),
 				'manipulated label'
 			);
@@ -333,7 +325,6 @@
 	} );
 
 	QUnit.test( 'prev() & getActiveItem()', function( assert ) {
-		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -344,8 +335,8 @@
 
 		menu.previous();
 
-		assert.ok(
-			menu.getActiveItem() === menuItems[menuItems.length - 1],
+		assert.strictEqual(
+			menu.getActiveItem(), menuItems[menuItems.length - 1],
 			'Moving to last item if no item is active.'
 		);
 
@@ -354,21 +345,20 @@
 
 		menu.previous();
 
-		assert.ok(
-			menu.getActiveItem() === menuItems[menuItems.length - 1],
+		assert.strictEqual(
+			menu.getActiveItem(), menuItems[menuItems.length - 1],
 			'Moving from first item to last item.'
 		);
 
 		menu.previous();
 
-		assert.ok(
-			menu.getActiveItem() === menuItems[menuItems.length - 2],
+		assert.strictEqual(
+			menu.getActiveItem(), menuItems[menuItems.length - 2],
 			'Moving to previous item.'
 		);
 	} );
 
 	QUnit.test( 'next() & getActiveItem()', function( assert ) {
-		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -379,8 +369,8 @@
 
 		menu.next();
 
-		assert.ok(
-			menu.getActiveItem() === menuItems[0],
+		assert.strictEqual(
+			menu.getActiveItem(), menuItems[0],
 			'Moving to first item if no item is active.'
 		);
 
@@ -389,28 +379,27 @@
 
 		menu.next();
 
-		assert.ok(
-			menu.getActiveItem() === menuItems[0],
+		assert.strictEqual(
+			menu.getActiveItem(), menuItems[0],
 			'Moving from last item to first item.'
 		);
 
 		menu.next();
 
-		assert.ok(
-			menu.getActiveItem() === menuItems[1],
+		assert.strictEqual(
+			menu.getActiveItem(), menuItems[1],
 			'Moving to next item.'
 		);
 	} );
 
 	QUnit.test( 'select() on Item instances', function( assert ) {
-		assert.expect( 2 );
 		var $menu = newTestMenu( { items: menuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
 		$( menu )
 		.on( 'selected', function( event, item ) {
-			assert.ok(
-				item === null,
+			assert.strictEqual(
+				item, null,
 				'Event transmits "null" if no item is active when selecting.'
 			);
 		} );
@@ -422,8 +411,8 @@
 		$( menu )
 		.off( 'selected' )
 		.on( 'selected', function( event, item ) {
-			assert.ok(
-				item === menuItems[menuItems.length - 1],
+			assert.strictEqual(
+				item, menuItems[menuItems.length - 1],
 				'Verified selected item.'
 			);
 		} );
@@ -432,7 +421,6 @@
 	} );
 
 	QUnit.test( 'select() on CustomInstance instances', function( assert ) {
-		assert.expect( 2 );
 		var check = false;
 
 		var customItem = new $.ui.ooMenu.CustomItem(
@@ -455,8 +443,8 @@
 
 		$( menu )
 		.on( 'selected', function( event, item ) {
-			assert.ok(
-				item === customItem,
+			assert.strictEqual(
+				item, customItem,
 				'Verified selected item.'
 			);
 
@@ -470,7 +458,6 @@
 	} );
 
 	QUnit.test( 'activate()', function( assert ) {
-		assert.expect( 4 );
 		var $menu = newTestMenu( { items: menuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
@@ -489,7 +476,7 @@
 		);
 
 		$( menu ).on( 'focus', function( event, item ) {
-			assert.equal(
+			assert.strictEqual(
 				item,
 				menuItems[0],
 				'Verified activated item.'
@@ -504,7 +491,6 @@
 	} );
 
 	QUnit.test( 'deactivate()', function( assert ) {
-		assert.expect( 2 );
 		var $menu = newTestMenu( { items: menuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
@@ -527,7 +513,6 @@
 	} );
 
 	QUnit.test( 'Triggering "focus" event', function( assert ) {
-		assert.expect( 2 );
 		var customItem = new $.ui.ooMenu.CustomItem( 'label' );
 
 		var $menu = newTestMenu( {
@@ -539,8 +524,8 @@
 
 		$( menu )
 		.on( 'focus', function( event, item ) {
-			assert.ok(
-				item === customItem,
+			assert.strictEqual(
+				item, customItem,
 				'Activated custom item.'
 			);
 		} );
@@ -550,8 +535,8 @@
 		$( menu )
 		.off( 'focus' )
 		.on( 'focus', function( event, item ) {
-			assert.ok(
-				item === menuItems[0],
+			assert.strictEqual(
+				item, menuItems[0],
 				'Activated default item.'
 			);
 		} );
@@ -560,7 +545,6 @@
 	} );
 
 	QUnit.test( 'Item constructor', function( assert ) {
-		assert.expect( 2 );
 		var item = new $.ui.ooMenu.Item( 'label' );
 
 		assert.ok(
@@ -577,7 +561,6 @@
 	} );
 
 	QUnit.test( 'CustomItem constructor', function( assert ) {
-		assert.expect( 24 );
 		var testSets = [
 			['label'],
 			[$( '<div>label</div>' )],
@@ -610,13 +593,13 @@
 				'Test set #' + i + ': Verified getVisibile() return value.'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				item.getAction(),
 				$.isFunction( testSets[i][2] ) ? testSets[i][2] : null,
 				'Test set #' + i + ': Verified getAction() return value.'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				item.getCssClass(),
 				testSets[i][3] || '',
 				'Test set #' + i + ': Verified getCssClass() return value.'

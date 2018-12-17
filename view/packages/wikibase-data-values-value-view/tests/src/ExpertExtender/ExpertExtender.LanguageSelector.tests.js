@@ -30,7 +30,6 @@
 	);
 
 	QUnit.test( 'initial draw works when the upstream value is null', function( assert ) {
-		assert.expect( 1 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en' ]; },
@@ -57,7 +56,6 @@
 	} );
 
 	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
-		assert.expect( 2 );
 		var upstreamValue = 'en';
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
@@ -80,7 +78,7 @@
 			languageSelector.draw();
 		}
 
-		assert.equal( languageSelector.getValue(), 'en' );
+		assert.strictEqual( languageSelector.getValue(), 'en' );
 
 		upstreamValue = 'de';
 
@@ -88,11 +86,10 @@
 			languageSelector.draw();
 		}
 
-		assert.equal( languageSelector.getValue(), 'en' );
+		assert.strictEqual( languageSelector.getValue(), 'en' );
 	} );
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
-		assert.expect( 2 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en' ]; },
@@ -115,12 +112,11 @@
 			languageSelector.draw();
 		}
 
-		assert.equal( languageSelector.getValue(), 'en' );
-		assert.equal( languageSelector.$selector.val(), 'en label en' );
+		assert.strictEqual( languageSelector.getValue(), 'en' );
+		assert.strictEqual( languageSelector.$selector.val(), 'en label en' );
 	} );
 
 	QUnit.test( 'returns correct value after changing it', function( assert ) {
-		assert.expect( 2 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en', 'fr' ]; },
@@ -145,12 +141,11 @@
 
 		languageSelector.$selector.val( 'fr' ).trigger( 'keydown' );
 
-		assert.equal( languageSelector.getValue(), 'fr' );
-		assert.equal( languageSelector.$selector.val(), 'fr' );
+		assert.strictEqual( languageSelector.getValue(), 'fr' );
+		assert.strictEqual( languageSelector.$selector.val(), 'fr' );
 	} );
 
 	QUnit.test( 'returns correct value after initialization for value not in ContentLanguages', function( assert ) {
-		assert.expect( 2 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en' ]; },
@@ -173,12 +168,11 @@
 			languageSelector.draw();
 		}
 
-		assert.equal( languageSelector.getValue(), 'ar' );
-		assert.equal( languageSelector.$selector.val(), 'ar' );
+		assert.strictEqual( languageSelector.getValue(), 'ar' );
+		assert.strictEqual( languageSelector.$selector.val(), 'ar' );
 	} );
 
 	QUnit.test( 'returns correct value after changing it to a value not in ContentLanguages', function( assert ) {
-		assert.expect( 2 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en', 'ar' ]; },
@@ -203,8 +197,8 @@
 
 		languageSelector.$selector.val( 'fr' ).trigger( 'keydown' );
 
-		assert.equal( languageSelector.getValue(), 'fr' );
-		assert.equal( languageSelector.$selector.val(), 'fr' );
+		assert.strictEqual( languageSelector.getValue(), 'fr' );
+		assert.strictEqual( languageSelector.$selector.val(), 'fr' );
 	} );
 
 } )(

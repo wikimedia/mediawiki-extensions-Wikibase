@@ -23,7 +23,6 @@
 	QUnit.module( 'jquery.focusAt' );
 
 	QUnit.test( 'plugin initialization', function( assert ) {
-		assert.expect( 1 );
 		assert.ok(
 			$.isFunction( $.fn.focusAt ),
 			'"jQuery.focusAt" is available'
@@ -56,7 +55,6 @@
 
 	elemsCasesData.forEach( function ( params ) {
 		QUnit.test( 'Focusing with valid parameter', function( assert ) {
-			assert.expect( 10 );
 			var $dom = getDomInsertionTestViewport(),
 				positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
 
@@ -74,7 +72,6 @@
 
 	elemsCasesData.forEach( function ( params ) {
 		QUnit.test( 'Focusing with invalid parameter', function( assert ) {
-			assert.expect( 5 );
 			var positions = [ null, undefined, 'foo', [], {} ];
 
 			$.each( positions, function( i, pos ) {
@@ -90,7 +87,6 @@
 
 	elemsCasesData.forEach( function ( params ) {
 		QUnit.test( 'Focusing element, not in DOM yet', function( assert ) {
-			assert.expect( 2 );
 			var $dom = getDomInsertionTestViewport(),
 				elem = params.elem;
 
@@ -104,18 +100,18 @@
 					'Can call focusAt on element not in DOM yet.'
 				);
 			} catch ( e ) {
-				assert.expect( 1 );
 				assert.ok(
 					e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
 					'Unable to focus since browser requires element to be in the DOM.'
 				);
+				// eslint-disable-next-line qunit/no-early-return
 				return;
 			}
 
 			$( ':focus' ).blur();
 			elem.appendTo( $dom );
 
-			assert.equal(
+			assert.strictEqual(
 				$( ':focus' ).length,
 				0,
 				'After inserting focused element into DOM, the element is not focused since there is' +
@@ -141,13 +137,12 @@
 			// Check if focussing actually works
 			elem.focus();
 			if ( !elem.is( ':focus' ) ) {
-				assert.expect( 1 );
 				assert.ok( 'Could not test because focussing does not work.' );
+				// eslint-disable-next-line qunit/no-early-return
 				return;
 			}
-			assert.expect( 3 );
 			elem.blur();
-			assert.ok( !elem.is( ':focus' ) );
+			assert.strictEqual( elem.is( ':focus' ), false );
 
 			assert.ok(
 				elem.focusAt( 0 ),
@@ -155,7 +150,7 @@
 			);
 
 			if ( !params.focusable ) {
-				assert.equal(
+				assert.strictEqual(
 					$( ':focus' ).length,
 					0,
 					'Element is a non-focusable element and no focus is active'

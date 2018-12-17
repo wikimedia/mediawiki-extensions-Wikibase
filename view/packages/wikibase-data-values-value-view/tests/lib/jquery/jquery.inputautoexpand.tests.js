@@ -66,18 +66,17 @@
 	} );
 
 	QUnit.test( 'Initialize plugin', function( assert ) {
-		assert.expect( 3 );
 		var $input = newTestInputAutoExpand(),
 			$textarea = newTestTextareaAutoExpand(),
 			$div = $( '<div/>' ).addClass( 'test_inputautoexpand' ).appendTo( 'body' );
 
-		assert.equal(
+		assert.strictEqual(
 			$input.inputautoexpand(),
 			$input,
 			'Initialized plugin on input box.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$textarea.inputautoexpand(),
 			$textarea,
 			'Initialized plugin.'
@@ -85,7 +84,7 @@
 
 		$div.inputautoexpand();
 
-		assert.equal(
+		assert.strictEqual(
 			undefined,
 			$div.data( 'inputautoexpand' ),
 			'Not initializing plugin on div.'
@@ -93,7 +92,6 @@
 	} );
 
 	QUnit.test( 'Applying plugin to input boxes', function( assert ) {
-		assert.expect( 4 );
 		var $input = newTestInputAutoExpand(),
 			initialWidth = Math.ceil( $input.width() ),
 			previousWidth,
@@ -126,7 +124,7 @@
 		$input.testInsert( 'O' );
 		currentWidth = Math.ceil( $input.width() );
 
-		assert.equal(
+		assert.strictEqual(
 			previousWidth,
 			currentWidth,
 			'Width does not change when clearing the input while a placeholder longer than the '
@@ -149,7 +147,6 @@
 	} );
 
 	QUnit.test( 'Applying horizontally growing plugin to textareas', function( assert ) {
-		assert.expect( 3 );
 		var $textarea = newTestTextareaAutoExpand().inputautoexpand(),
 			initialWidth = Math.ceil( $textarea.width() ),
 			previousWidth,
@@ -178,7 +175,7 @@
 		$textarea.testInsert( '' );
 		currentWidth = Math.ceil( $textarea.width() );
 
-		assert.equal(
+		assert.strictEqual(
 			initialWidth,
 			currentWidth,
 			'Textarea contracts to initial width after erasing its content. '
@@ -188,7 +185,6 @@
 	} );
 
 	QUnit.test( 'Applying vertically growing plugin to textareas', function( assert ) {
-		assert.expect( 3 );
 		var $textarea = newTestTextareaAutoExpand();
 
 		// Init plugin before measuring the initial height since the plugin will shrink the textarea
@@ -213,7 +209,7 @@
 		$textarea.testInsert( 'a\naa' );
 		currentHeight = Math.ceil( $textarea.height() );
 
-		assert.equal(
+		assert.strictEqual(
 			previousHeight,
 			currentHeight,
 			'Textarea does not grow when adding characters to an existing line. '
@@ -224,7 +220,7 @@
 		$textarea.testInsert( '' );
 		currentHeight = Math.ceil( $textarea.height() );
 
-		assert.equal(
+		assert.strictEqual(
 			initialHeight,
 			currentHeight,
 			'Textarea contracts to initial height after erasing its content. '
@@ -234,7 +230,6 @@
 	} );
 
 	QUnit.test( 'Applying horizontally and vertically growing plugin to textareas', function( assert ) {
-		assert.expect( 6 );
 		var $textarea = newTestTextareaAutoExpand(),
 			MAXIMUM_WIDTH = 150;
 
@@ -256,7 +251,7 @@
 		currentHeight = Math.ceil( $textarea.height() );
 		currentWidth = Math.ceil( $textarea.width() );
 
-		assert.equal(
+		assert.strictEqual(
 			initialHeight,
 			currentHeight,
 			'Textarea does not grow vertically when inserting a string shorter than the maximum '
@@ -298,7 +293,7 @@
 		currentHeight = Math.ceil( $textarea.height() );
 		currentWidth = Math.ceil( $textarea.width() );
 
-		assert.equal(
+		assert.strictEqual(
 			initialHeight,
 			currentHeight,
 			'Textarea contracts to initial height after erasing its content. '
@@ -306,7 +301,7 @@
 				+ 'initial: ' + initialHeight + ')'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			initialWidth,
 			currentWidth,
 			'Textarea contracts to initial width after erasing its content. '

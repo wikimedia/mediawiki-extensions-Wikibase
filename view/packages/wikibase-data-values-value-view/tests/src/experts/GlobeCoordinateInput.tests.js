@@ -14,7 +14,6 @@
 	} );
 
 	QUnit.test( 'don\'t crash with null precision', function( assert ) {
-		assert.expect( 1 );
 		var $div = $( '<div/>' ).appendTo( 'body' );
 		var expert = new valueview.experts.GlobeCoordinateInput(
 			$div,

@@ -9,7 +9,6 @@
 	QUnit.module( 'jquery.animateWithEvent' );
 
 	QUnit.test( 'special start callback execution before options.start', function( assert ) {
-		assert.expect( 3 );
 		var done = assert.async( 2 );
 		var optionsStartCallbackDone = 0;
 		var specialStartCallbackDone = 0;
@@ -23,8 +22,8 @@
 					done();
 				}
 			}, function( animationEvent ) {
-				assert.ok(
-					!optionsStartCallbackDone,
+				assert.strictEqual(
+					optionsStartCallbackDone, 0,
 					'last argument start callback got fired before options.start callback.'
 				);
 				specialStartCallbackDone++;
@@ -46,7 +45,6 @@
 	} );
 
 	QUnit.test( 'special start callback', function( assert ) {
-		assert.expect( 2 );
 		var $elem = $( '<div/>' );
 
 		return $elem.animateWithEvent(
@@ -54,8 +52,8 @@
 			{ width: 200 },
 			{},
 			function( animationEvent ) {
-				assert.ok(
-					this === $elem.get( 0 ),
+				assert.strictEqual(
+					this, $elem.get( 0 ),
 					'Context of the callback is the DOM node to be animated.'
 				);
 				assert.ok(
@@ -68,7 +66,6 @@
 	} );
 
 	QUnit.test( 'options.start callback', function( assert ) {
-		assert.expect( 2 );
 		var $elem = $( '<div/>' );
 		var animationEventsAnimation;
 
@@ -77,12 +74,12 @@
 			{ width: 200 },
 			{
 				start: function( animation ) {
-					assert.ok(
-						this === $elem.get( 0 ),
+					assert.strictEqual(
+						this, $elem.get( 0 ),
 						'Context of the callback is the DOM node to be animated.'
 					);
-					assert.ok(
-						animation === animationEventsAnimation,
+					assert.strictEqual(
+						animation, animationEventsAnimation,
 						'First argument ist the animation object which is set to the '
 							+ 'AnimationEvent instance\'s "animation" field in the callback '
 							+ 'given as animateWithEvent\'s last argument.'
@@ -96,7 +93,6 @@
 	} );
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
-		assert.expect( 2 );
 		var done = assert.async( 3 );
 		var $elems = $( '<div/>' ).add( $( '<span/> ' ) ).add( $( '<div/> ' ) );
 		var $confirmedElems = $();
@@ -131,7 +127,6 @@
 	} );
 
 	QUnit.test( 'Error cases', function( assert ) {
-		assert.expect( 2 );
 		assert.throws(
 			function() {
 				$( '<div/>' ).animateWithEvent(
@@ -151,7 +146,6 @@
 	} );
 
 	QUnit.test( 'Two arguments are sufficient', function( assert ) {
-		assert.expect( 2 );
 		var $node = $( '<div/>' );
 		var done = assert.async( 2 );
 

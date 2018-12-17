@@ -8,7 +8,6 @@
 	QUnit.module( 'util.Notifier' );
 
 	QUnit.test( 'Construction of Notifier instances', function( assert ) {
-		assert.expect( 4 );
 		var n;
 
 		assert.ok(
@@ -35,7 +34,6 @@
 	} );
 
 	QUnit.test( 'Notifier.prototype.hasListenerFor', function( assert ) {
-		assert.expect( 6 );
 		var notificationKeys = [ 'foo', 'bar123', 'xxx' ],
 			notificationMap = {};
 
@@ -48,19 +46,18 @@
 
 		// check whether all notification keys are available on the Notifier object:
 		$.each( notificationKeys, function( i, value ) {
-			assert.ok(
-				notifier.hasListenerFor( value ),
+			assert.strictEqual(
+				notifier.hasListenerFor( value ), true,
 				'Notifier has registered callback for notification "' + value + '"'
 			);
-			assert.ok(
-				!emptyNotifier.hasListenerFor( value ),
+			assert.strictEqual(
+				emptyNotifier.hasListenerFor( value ), false,
 				'Empty Notifier does not have callback for notification "' + value + '"'
 			);
 		} );
 	} );
 
 	QUnit.test( 'Notifier.prototype.notify', function( assert ) {
-		assert.expect( 10 );
 		var notifier;
 
 		// callback with tests for notify() calls:
@@ -70,17 +67,17 @@
 				'notification has been triggered'
 			);
 
-			assert.ok(
-				this === notifier,
+			assert.strictEqual(
+				this, notifier,
 				'Context the notify callback is called in is the Notifier object'
 			);
 
-			assert.ok(
-				testNotificationKeyName !== undefined,
+			assert.notStrictEqual(
+				testNotificationKeyName, undefined,
 				'Custom notify argument got passed into callback'
 			);
 
-			assert.equal(
+			assert.strictEqual(
 				this.current(),
 				testNotificationKeyName,
 				'Notifier.current() returns callback notification key "' + testNotificationKeyName + '"'
@@ -92,8 +89,8 @@
 			test2: fnNotifyAssertions
 		} );
 
-		assert.ok(
-			notifier.current() === null,
+		assert.strictEqual(
+			notifier.current(), null,
 			'Notifier.current() returns null'
 		);
 
@@ -101,8 +98,8 @@
 		notifier.notify( 'test2', [ 'test2' ] );
 		notifier.notify( 'test3' ); // should not do anything
 
-		assert.ok(
-			notifier.current() === null,
+		assert.strictEqual(
+			notifier.current(), null,
 			'Notifier.current() returns null again'
 		);
 	} );

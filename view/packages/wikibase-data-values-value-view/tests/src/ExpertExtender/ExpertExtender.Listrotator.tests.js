@@ -20,7 +20,6 @@
 	);
 
 	QUnit.test( 'supports custom values', function( assert ) {
-		assert.expect( 1 );
 		var getUpstreamValue = function() {
 			return {
 				custom: true,
@@ -41,11 +40,10 @@
 		listrotator.init( $extender );
 		listrotator.draw();
 
-		assert.equal( listrotator.getValue(), 'custom value' );
+		assert.strictEqual( listrotator.getValue(), 'custom value' );
 	} );
 
 	QUnit.test( 'supports switching away from custom values', function( assert ) {
-		assert.expect( 2 );
 		var done = assert.async();
 		var onValueChange = sinon.spy();
 		var upstreamValue = {
@@ -72,7 +70,7 @@
 
 		setTimeout( function() {
 			sinon.assert.calledOnce( onValueChange );
-			assert.equal( listrotator.getValue(), 'fixed value' );
+			assert.strictEqual( listrotator.getValue(), 'fixed value' );
 
 			done();
 		}, 200 );

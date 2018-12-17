@@ -39,7 +39,6 @@
 	} );
 
 	QUnit.test( 'Create', function( assert ) {
-		assert.expect( 1 );
 		var $suggester = newTestSuggester();
 
 		assert.ok(
@@ -88,10 +87,7 @@
 				// Do not do anything with invalid URL encoding
 				'1%': '1%',
 				'title=1%.jpg': 'title=1%.jpg'
-			},
-			numberOfTestCases = Object.keys( testCases ).length;
-
-		assert.expect( numberOfTestCases );
+			};
 
 		$.each( testCases, function( input, expected ) {
 			var actual = suggester._grepFileTitleFromTerm( input );
@@ -101,7 +97,6 @@
 	} );
 
 	QUnit.test( 'search integration', function( assert ) {
-		assert.expect( 2 );
 		var $suggester = newTestSuggester(),
 			suggester = $suggester.data( 'commonssuggester' ),
 			input = 'title=Foo/Bar',

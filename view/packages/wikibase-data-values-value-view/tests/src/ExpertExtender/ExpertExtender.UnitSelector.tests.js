@@ -27,7 +27,6 @@
 	);
 
 	QUnit.test( 'getConceptUri() does change if input value changes', function( assert ) {
-		assert.expect( 2 );
 		var unitSelector = new ExpertExtender.UnitSelector(
 			messageProvider,
 			function() {
@@ -46,15 +45,14 @@
 			unitSelector.draw();
 		}
 
-		assert.equal( unitSelector.getConceptUri(), 'Ultrameter' );
+		assert.strictEqual( unitSelector.getConceptUri(), 'Ultrameter' );
 
 		$extender.find( 'input' ).val( 'foobar' );
 
-		assert.equal( unitSelector.getConceptUri(), 'foobar' );
+		assert.strictEqual( unitSelector.getConceptUri(), 'foobar' );
 	} );
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
-		assert.expect( 1 );
 		var unitSelector = new ExpertExtender.UnitSelector(
 			messageProvider,
 			function() {
@@ -73,7 +71,7 @@
 			unitSelector.draw();
 		}
 
-		assert.equal( unitSelector.getConceptUri(), 'Ultrameter' );
+		assert.strictEqual( unitSelector.getConceptUri(), 'Ultrameter' );
 	} );
 
 } )(

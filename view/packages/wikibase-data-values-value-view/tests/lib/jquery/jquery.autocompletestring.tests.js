@@ -21,28 +21,27 @@
 	} );
 
 	QUnit.test( 'Adapt letter case', function( assert ) {
-		assert.expect( 4 );
 		var $input = createTestInput();
 
-		assert.equal(
+		assert.strictEqual(
 			$input.autocompletestring( 'a', 'abc' ).val(),
 			'abc',
 			'Auto-completed \'a\' to \'abc\'.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$input.autocompletestring( '12', '123' ).val(),
 			'123',
 			'Auto-completed \'12\' to \'123\'.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$input.autocompletestring( 'abc', 'abc' ).val(),
 			'abc',
 			'Value remains the same when \'incomplete\' and \'complete\' string match.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$input.autocompletestring( 'a', 'ABC' ).val(),
 			'abc',
 			'No auto-completion is performed when \'incomplete\' is not part of \'complete\' '
@@ -51,16 +50,15 @@
 	} );
 
 	QUnit.test( 'selectText()', function( assert ) {
-		assert.expect( 2 );
 		var $input = createTestInput().val( '0123456789' );
 
-		assert.equal(
+		assert.strictEqual(
 			$.fn.autocompletestring.selectText( $input[0], 0, 1 ),
 			1,
 			'Applied text selection with length of 1.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$.fn.autocompletestring.selectText( $input[0], 0, 20 ),
 			10,
 			'Applied a text selection with the input value\'s character length since it is shorter '

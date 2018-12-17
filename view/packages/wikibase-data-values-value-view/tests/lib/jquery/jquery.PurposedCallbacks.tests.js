@@ -9,7 +9,6 @@
 	QUnit.module( 'jquery.PurposedCallbacks' );
 
 	QUnit.test( 'construction', function( assert ) {
-		assert.expect( 1 );
 		var pc = PurposedCallbacks();
 
 		assert.ok(
@@ -19,7 +18,6 @@
 	} );
 
 	QUnit.test( 'facade()', function( assert ) {
-		assert.expect( 2 );
 		var pc = PurposedCallbacks();
 
 		assert.ok(
@@ -27,15 +25,13 @@
 			'Returns instance of PurposedCallbacks.Facade.'
 		);
 
-		assert.ok(
-			// eslint-disable-next-line no-self-compare
-			pc.facade() === pc.facade(),
+		assert.strictEqual(
+			pc.facade(), pc.facade(),
 			'Always returns the same facade instance and does not create a new one.'
 		);
 	} );
 
 	QUnit.test( 'puposes() on instance without predefined purposes', function( assert ) {
-		assert.expect( 4 );
 		var pcf = PurposedCallbacks().facade();
 
 		assert.ok(
@@ -68,7 +64,6 @@
 	} );
 
 	QUnit.test( 'purposes() on instance with predefined purposes', function( assert ) {
-		assert.expect( 3 );
 		var purposes = [ 'foo', 'bar' ];
 		var pcf = PurposedCallbacks( purposes ).facade();
 
@@ -78,8 +73,8 @@
 			'Returns all predefined purposes initially.'
 		);
 
-		assert.ok(
-			pcf.purposes() !== purposes,
+		assert.notStrictEqual(
+			pcf.purposes(), purposes,
 			'Returned array is a copy of the predefined purposes, not the same object.'
 		);
 
@@ -93,16 +88,15 @@
 	} );
 
 	QUnit.test( 'chainable members', function( assert ) {
-		assert.expect( 4 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
-		assert.ok(
-			pcf.add( 'foo', $.noop ) === pcf,
+		assert.strictEqual(
+			pcf.add( 'foo', $.noop ), pcf,
 			'add() is chainable.'
 		);
-		assert.ok(
-			pcf.remove( 'foo', $.noop ) === pcf,
+		assert.strictEqual(
+			pcf.remove( 'foo', $.noop ), pcf,
 			'remove() is chainable.'
 		);
 
@@ -118,7 +112,6 @@
 	} );
 
 	QUnit.test( 'add() callback of unknown purpose', function( assert ) {
-		assert.expect( 1 );
 		var pcf = PurposedCallbacks( [ 'bar' ] ).facade();
 		assert.throws(
 			function() {
@@ -129,7 +122,6 @@
 	} );
 
 	QUnit.test( 'fire()', function( assert ) {
-		assert.expect( 4 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -139,8 +131,8 @@
 			fired1 = fired2 = 0;
 		};
 
-		assert.ok(
-			pcf.fire === undefined,
+		assert.strictEqual(
+			pcf.fire, undefined,
 			'fire() is not a member of the facade.'
 		);
 
@@ -175,7 +167,6 @@
 	} );
 
 	QUnit.test( 'fire() with custom arguments', function( assert ) {
-		assert.expect( 1 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 		var args = [ {}, [] ];
@@ -204,7 +195,6 @@
 	};
 
 	QUnit.test( 'add() verified by fireWith()', function( assert ) {
-		assert.expect( 2 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -232,7 +222,6 @@
 	} );
 
 	QUnit.test( 'remove() verified by fireWith()', function( assert ) {
-		assert.expect( 2 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -263,54 +252,52 @@
 	} );
 
 	QUnit.test( 'has()', function( assert ) {
-		assert.expect( 4 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
 		pcf.add( 'foo', $.noop );
-		assert.ok(
-			pcf.has( 'foo' ),
+		assert.strictEqual(
+			pcf.has( 'foo' ), true,
 			'Newly defined purpose exists.'
 		);
-		assert.ok(
-			pcf.has( 'foo', $.noop ),
+		assert.strictEqual(
+			pcf.has( 'foo', $.noop ), true,
 			'Callback for that purpose is recognized as existent as well.'
 		);
-		assert.ok(
-			!pcf.has( 'bar' ),
+		assert.strictEqual(
+			pcf.has( 'bar' ), false,
 			'Purpose without callbacks does not exist.'
 		);
 
 		pcf.remove( 'foo', $.noop );
-		assert.ok(
-			pcf.has( 'foo' ),
+		assert.strictEqual(
+			pcf.has( 'foo' ), true,
 			'Purpose still exists after removing only callback from it.'
 		);
 	} );
 
 	QUnit.test( 'has() on instance with predefined purposes', function( assert ) {
-		assert.expect( 4 );
 		var pc = PurposedCallbacks( [ 'foo' ] );
 		var pcf = pc.facade();
 
-		assert.ok(
-			pcf.has( 'foo' ),
+		assert.strictEqual(
+			pcf.has( 'foo' ), true,
 			'Predefined purpose exists.'
 		);
 
 		pcf.add( 'foo', $.noop );
 		pcf.remove( 'foo', $.noop );
-		assert.ok(
-			pcf.has( 'foo' ),
+		assert.strictEqual(
+			pcf.has( 'foo' ), true,
 			'Predefined purpose exists still exists after adding and removing callback from it.'
 		);
-		assert.ok(
-			!pcf.has( 'foo', $.noop ),
+		assert.strictEqual(
+			pcf.has( 'foo', $.noop ), false,
 			'Callback got removed though.'
 		);
 
-		assert.ok(
-			!pcf.has( 'bar' ),
+		assert.strictEqual(
+			pcf.has( 'bar' ), false,
 			'Purpose without callbacks does not exist.'
 		);
 	} );

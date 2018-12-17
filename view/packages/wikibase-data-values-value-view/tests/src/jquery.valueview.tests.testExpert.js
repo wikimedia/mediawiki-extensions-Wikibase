@@ -65,7 +65,6 @@ function testExpert( testDefinition ) {
 	}
 
 	expertCasesTestAndCleanup( 'constructor', function( args, assert ) {
-		assert.expect( 3 );
 		assert.ok(
 			args.expert instanceof Expert,
 			'expert successfully constructed'
@@ -85,7 +84,6 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'destroy', function( args, assert ) {
-		assert.expect( 2 );
 		var $viewPort = $( args.constructorArgs[0] );
 
 		args.expert.destroy();
@@ -101,7 +99,6 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'valueCharacteristics', function( args, assert ) {
-		assert.expect( 1 );
 		var valueCharacteristics = args.expert.valueCharacteristics();
 
 		assert.ok(
@@ -111,7 +108,6 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'viewState', function( args, assert ) {
-		assert.expect( 1 );
 		var viewState = args.expert.viewState();
 		assert.ok(
 			viewState instanceof valueview.ViewState,
@@ -120,7 +116,6 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'rawValue: initial value', function( args, assert ) {
-		assert.expect( 1 );
 		var rawValue = args.expert.rawValue();
 		assert.ok(
 			rawValue === '' || rawValue === null,
@@ -130,7 +125,6 @@ function testExpert( testDefinition ) {
 
 	var expertCasesMemberCallTest = function( memberName, additionalAssertionsFn ) {
 		expertCasesTestAndCleanup( memberName, function( args, assert ) {
-			assert.expect( 1 );
 			args.expert[ memberName ]();
 			assert.ok(
 				true,
@@ -142,7 +136,6 @@ function testExpert( testDefinition ) {
 		} );
 	};
 	expertCasesMemberCallTest( 'draw', function( args, assert ) {
-		assert.expect( 1 + assert.expect() );
 		var $viewPort = $( args.constructorArgs[0] );
 
 		assert.ok(
@@ -152,7 +145,6 @@ function testExpert( testDefinition ) {
 	} );
 
 	expertCasesTestAndCleanup( 'focus', function( args, assert ) {
-		assert.expect( 1 + assert.expect() );
 		try {
 			args.expert.focus();
 		} catch ( e ) {

@@ -54,7 +54,6 @@
 	} );
 
 	QUnit.test( 'Create', function( assert ) {
-		assert.expect( 1 );
 		var $suggester = newTestSuggester();
 
 		assert.ok(
@@ -75,7 +74,7 @@
 
 		$suggester
 		.one( 'suggesteropen', function() {
-			assert.equal(
+			assert.strictEqual(
 				suggester.options.menu,
 				customMenu
 			);
@@ -92,7 +91,7 @@
 
 		$suggester
 		.one( 'suggesteropen', function() {
-			assert.equal(
+			assert.strictEqual(
 				suggester.options.menu,
 				customMenu
 			);
@@ -104,14 +103,13 @@
 	} );
 
 	QUnit.test( 'search() gathering suggestions from an array', function( assert ) {
-		assert.expect( 1 );
 		var $suggester = newTestSuggester(),
 			suggester = $suggester.data( 'suggester' );
 
 		$suggester.val( 'a' );
 
 		return suggester.search().then( function( suggestions ) {
-			assert.equal(
+			assert.strictEqual(
 				suggestions.length,
 				3,
 				'Gathered suggestions from array.'
@@ -120,7 +118,6 @@
 	} );
 
 	QUnit.test( 'search() gathering suggestions from a function', function( assert ) {
-		assert.expect( 1 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -135,7 +132,7 @@
 		$suggester.val( 'a' );
 
 		return suggester.search().then( function( suggestions ) {
-			assert.equal(
+			assert.strictEqual(
 				suggestions.length,
 				2,
 				'Gathered suggestions from function.'
@@ -144,7 +141,6 @@
 	} );
 
 	QUnit.test( 'isSearching() - triggering search() programmatically', function( assert ) {
-		assert.expect( 3 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -161,8 +157,8 @@
 			} ),
 			suggester = $suggester.data( 'suggester' );
 
-		assert.ok(
-			!suggester.isSearching(),
+		assert.strictEqual(
+			suggester.isSearching(), false,
 			'Returning FALSE when not having triggered a search.'
 		);
 
@@ -176,15 +172,14 @@
 		);
 
 		return promise.then( function( suggestions ) {
-			assert.ok(
-				!suggester.isSearching(),
+			assert.strictEqual(
+				suggester.isSearching(), false,
 				'Returning FALSE after search has finished.'
 			);
 		} );
 	} );
 
 	QUnit.test( 'isSearching() - triggering with "key" event', function( assert ) {
-		assert.expect( 3 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -202,8 +197,8 @@
 			suggester = $suggester.data( 'suggester' ),
 			done = assert.async();
 
-		assert.ok(
-			!suggester.isSearching(),
+		assert.strictEqual(
+			suggester.isSearching(), false,
 			'Returning FALSE when not having triggered a search.'
 		);
 
@@ -213,8 +208,8 @@
 		$suggester.one( 'suggesterchange', function() {
 			// Second "change" event is triggered after gathering the suggestions.
 			$suggester.one( 'suggesterchange', function() {
-				assert.ok(
-					!suggester.isSearching(),
+				assert.strictEqual(
+					suggester.isSearching(), false,
 					'Returning FALSE after search has finished.'
 				);
 
@@ -231,7 +226,6 @@
 	} );
 
 	QUnit.test( 'Error', function( assert ) {
-		assert.expect( 2 );
 		var $suggester = newTestSuggester( {
 				source: function( term ) {
 					var deferred = new $.Deferred();
@@ -242,7 +236,7 @@
 			done = assert.async();
 
 		$suggester.on( 'suggestererror', function( event, errorString ) {
-			assert.equal(
+			assert.strictEqual(
 				errorString,
 				'error string',
 				'Validated expected error string.'
@@ -264,7 +258,9 @@
 				'Searching failed as expected.'
 			);
 		} )
-		.always( done );
+		.always( function () {
+			done();
+		} );
 	} );
 
 }() );

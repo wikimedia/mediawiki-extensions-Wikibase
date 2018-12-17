@@ -41,7 +41,7 @@
 	QUnit.test( 'Initialization and destruction', function( assert ) {
 		var toggler = newTestToggler();
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.test_toggler' ).data( 'toggler' ),
 			toggler,
 			'Initialized widget.'
@@ -49,12 +49,12 @@
 
 		toggler.destroy();
 
-		assert.ok(
-			$( '.test_toggler' ).data( 'toggler' ) === undefined,
+		assert.strictEqual(
+			$( '.test_toggler' ).data( 'toggler' ), undefined,
 			'Destroyed widget.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.test_toggler-subject' ).length,
 			1,
 			'Toggler subject still exists.'
@@ -64,7 +64,7 @@
 	QUnit.test( 'Toggle toggler', function( assert ) {
 		var toggler = newTestToggler();
 
-		assert.equal(
+		assert.strictEqual(
 				toggler.isCollapsed(),
 				true,
 				'Toggler is initially collapsed'
@@ -72,7 +72,7 @@
 
 		toggler.toggle();
 
-		assert.equal(
+		assert.strictEqual(
 				toggler.isCollapsed(),
 				false,
 				'Toggler is expanded after toggle'

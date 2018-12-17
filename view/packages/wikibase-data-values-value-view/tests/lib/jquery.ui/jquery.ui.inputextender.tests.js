@@ -104,17 +104,17 @@
 			'Initialized widget.'
 		);
 
-		assert.ok(
-			!extender.extensionIsActive(),
+		assert.strictEqual(
+			extender.extensionIsActive(), false,
 			'Extension not active initially.'
 		);
 	} );
 
 	QUnit.test( 'Initialization on focused input', function( assert ) {
-		assert.expect( 1 );
 		var $input = $( '<input/>' ).appendTo( $( 'body' ) ).focus();
 		if ( !$input.is( ':focus' ) ) {
 			assert.ok( true, 'Could not test since focussing does not work.' );
+			// eslint-disable-next-line qunit/no-early-return
 			return;
 		}
 		var extender = newTestInputextender( $input );
@@ -130,12 +130,12 @@
 		extender.showExtension(); // Make sure extension is being constructed.
 		extender.destroy();
 
-		assert.ok(
-			$( '.test_inputextender' ).data( 'inputextender' ) === undefined,
+		assert.strictEqual(
+			$( '.test_inputextender' ).data( 'inputextender' ), undefined,
 			'Destroyed widget.'
 		);
 
-		assert.equal(
+		assert.strictEqual(
 			$( '.' + widgetBaseClass + '-extension' ).length,
 			0,
 			'Removed extension node from DOM.'
@@ -176,13 +176,13 @@
 			afterCallingShowExtension: function( instance ) {},
 			whenFullyShown: function( instance ) {},
 			afterCallingHideExtension: function( instance ) {
-				assert.ok(
-					!instance.extensionIsActive(),
+				assert.strictEqual(
+					instance.extensionIsActive(), false,
 					'Extension is considered "inactive" immediately after calling "hideExtension".'
 				);
 
-				assert.ok(
-					!instance.extensionIsVisible(),
+				assert.strictEqual(
+					instance.extensionIsVisible(), false,
 					'Extension is regarded invisible immediately when calling "hideExtension".'
 				);
 
@@ -198,8 +198,8 @@
 					'hideExtension( callback ) has triggered callback.'
 				);
 
-				assert.ok(
-					!instance.extensionIsVisible(),
+				assert.strictEqual(
+					instance.extensionIsVisible(), false,
 					'Extension is not visible anymore when callback gets called after "hide" is done.'
 				);
 
@@ -284,7 +284,6 @@
 	}
 
 	QUnit.test( '$.ui.inputextender.getInstancesWithVisibleExtensions', function( assert ) {
-		assert.expect( 21 );
 		var instances = $.ui.inputextender.getInstancesWithVisibleExtensions();
 
 		assert.ok(

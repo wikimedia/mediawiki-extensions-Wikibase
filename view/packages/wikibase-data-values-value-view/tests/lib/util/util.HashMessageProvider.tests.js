@@ -14,10 +14,9 @@
 	QUnit.module( 'util.HashMessageProvider' );
 
 	QUnit.test( 'getMessage(): Use default messages', function( assert ) {
-		assert.expect( 2 );
 		var messageProvider = new util.HashMessageProvider( messages );
 
-		assert.equal(
+		assert.strictEqual(
 			messageProvider.getMessage( 'messageProviderTestMessage2' ),
 			'message2',
 			'Fetched default message.'
