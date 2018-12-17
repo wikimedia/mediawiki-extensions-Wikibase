@@ -2,11 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Bencemac",
-			"Wolf Rex"
+			"Wolf Rex",
+			"--szabi--"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A(z) „$1” típusú adatokat még nem támogatjuk.",
 	"valueview-expert-emptyvalue-empty": "üres",
+	"valueview-expert-globecoordinateinput-precision": "Pontosság:",
+	"valueview-expert-globecoordinateinput-nullprecision": "meghatározatlan",
+	"valueview-expert-globecoordinateinput-customprecision": "különleges ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gergely",
 	"valueview-expert-timeinput-calendar": "Naptár:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
