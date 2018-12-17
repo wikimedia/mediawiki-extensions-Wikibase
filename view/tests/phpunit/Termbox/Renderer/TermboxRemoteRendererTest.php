@@ -9,6 +9,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
+use Wikibase\View\EntityTermsView;
+use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -28,25 +30,51 @@ class TermboxRemoteRendererTest extends TestCase {
 	public function testGetContentWithEntityIdAndLanguage_returnsRequestResponse() {
 		$content = 'hello from server!';
 
-		$request = $this->newHttpRequest();
-		$request->expects( $this->once() )
-			->method( 'getStatus' )
-			->willReturn( TermboxRemoteRenderer::HTTP_STATUS_OK );
+		$request = $this->newSuccessfulRequest();
 		$request->expects( $this->once() )
 			->method( 'getContent' )
 			->willReturn( $content );
 
-		$requestFactory = $this->newHttpRequestFactory();
-		$requestFactory->expects( $this->once() )
-			->method( 'create' )
-			->with( self::SSR_URL . '?entity=Q42&language=de', [] )
-			->willReturn( $request );
-
-		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
+		$client = new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			$this->newSpecialPageLinker()
+		);
 		$this->assertSame(
 			$content,
 			$client->getContent( new ItemId( 'Q42' ), 'de' )
 		);
+	}
+
+	public function testGetContentBuildsRequestUrl() {
+		$language = 'de';
+		$itemId = 'Q42';
+		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
+		$requestFactory = $this->newHttpRequestFactory();
+		$requestFactory->expects( $this->once() )
+			->method( 'create' )
+			->with(
+				self::SSR_URL
+				. '?' . http_build_query( [
+					'entity' => $itemId,
+					'language' => $language,
+					'editLink' => $editLinkUrl,
+				] ),
+				[]
+			)
+			->willReturn( $this->newSuccessfulRequest() );
+
+		$specialPageLinker = $this->newSpecialPageLinker();
+		$specialPageLinker->expects( $this->once() )
+			->method( 'getLink' )
+			->with( EntityTermsView::TERMS_EDIT_SPECIAL_PAGE, [ $itemId ] )
+			->willReturn( $editLinkUrl );
+
+		( new TermboxRemoteRenderer(
+			$requestFactory,
+			self::SSR_URL,
+			$specialPageLinker
+		) )->getContent( new ItemId( $itemId ), $language );
 	}
 
 	public function testGetContentWithEntityIdAndLanguage_bubblesRequestException() {
@@ -59,13 +87,11 @@ class TermboxRemoteRendererTest extends TestCase {
 			->method( 'execute' )
 			->willThrowException( $upstreamException );
 
-		$requestFactory = $this->newHttpRequestFactory();
-		$requestFactory->expects( $this->once() )
-			->method( 'create' )
-			->with( self::SSR_URL . '?entity=Q42&language=de', [] )
-			->willReturn( $request );
-
-		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
+		$client = new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			$this->newSpecialPageLinker()
+		);
 
 		try {
 			$client->getContent( $entityId, $language );
@@ -88,13 +114,11 @@ class TermboxRemoteRendererTest extends TestCase {
 		$request->expects( $this->never() )
 			->method( 'getContent' );
 
-		$requestFactory = $this->newHttpRequestFactory();
-		$requestFactory->expects( $this->once() )
-			->method( 'create' )
-			->with( self::SSR_URL . '?entity=Q42&language=de', [] )
-			->willReturn( $request );
-
-		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
+		$client = new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			$this->newSpecialPageLinker()
+		);
 
 		try {
 			$client->getContent( $entityId, $language );
@@ -116,13 +140,11 @@ class TermboxRemoteRendererTest extends TestCase {
 		$request->expects( $this->never() )
 			->method( 'getContent' );
 
-		$requestFactory = $this->newHttpRequestFactory();
-		$requestFactory->expects( $this->once() )
-			->method( 'create' )
-			->with( self::SSR_URL . '?entity=Q4711&language=de', [] )
-			->willReturn( $request );
-
-		$client = new TermboxRemoteRenderer( $requestFactory, self::SSR_URL );
+		$client = new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			$this->newSpecialPageLinker()
+		);
 
 		try {
 			$client->getContent( $entityId, $language );
@@ -141,6 +163,28 @@ class TermboxRemoteRendererTest extends TestCase {
 	}
 
 	/**
+	 * @return MockObject|HttpRequestFactory
+	 */
+	private function newHttpRequestFactoryWithRequest( MWHttpRequest $req ) {
+		$factory = $this->createMock( HttpRequestFactory::class );
+		$factory->method( 'create' )
+			->willReturn( $req );
+
+		return $factory;
+	}
+
+	/**
+	 * @return MockObject|MWHttpRequest
+	 */
+	private function newSuccessfulRequest() {
+		$request = $this->newHttpRequest();
+		$request->method( 'getStatus' )
+			->willReturn( TermboxRemoteRenderer::HTTP_STATUS_OK );
+
+		return $request;
+	}
+
+	/**
 	 * @return MockObject|MWHttpRequest
 	 */
 	private function newHttpRequest() {
@@ -148,6 +192,13 @@ class TermboxRemoteRendererTest extends TestCase {
 		$req->expects( $this->once() )->method( 'execute' );
 
 		return $req;
+	}
+
+	/**
+	 * @return MockObject|SpecialPageLinker
+	 */
+	private function newSpecialPageLinker() {
+		return $this->createMock( SpecialPageLinker::class );
 	}
 
 }
