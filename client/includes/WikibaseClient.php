@@ -145,11 +145,6 @@ final class WikibaseClient {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var Serializer|null
-	 */
-	private $compactEntitySerializer = null;
-
-	/**
 	 * @var EntityIdParser|null
 	 */
 	private $entityIdParser = null;
