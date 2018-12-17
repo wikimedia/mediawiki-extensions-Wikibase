@@ -5,6 +5,7 @@ namespace Wikibase\View\Termbox\Renderer;
 use Exception;
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\View\SpecialPageLinker;
 
 /**
  * @license GPL-2.0-or-later
@@ -12,13 +13,20 @@ use Wikibase\DataModel\Entity\EntityId;
 class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private $requestFactory;
+	private $specialPageLinker;
 	private $ssrServerUrl;
 
 	/* public */ const HTTP_STATUS_OK = 200;
+	/* public */ const EDIT_PAGE = 'SetLabelDescriptionAliases';
 
-	public function __construct( HttpRequestFactory $requestFactory, $ssrServerUrl ) {
+	public function __construct(
+		HttpRequestFactory $requestFactory,
+		$ssrServerUrl,
+		SpecialPageLinker $specialPageLinker
+	) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
+		$this->specialPageLinker = $specialPageLinker;
 	}
 
 	/**
@@ -51,7 +59,11 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	private function getRequestParams( EntityId $entityId, $language ) {
 		return [
 			'entity' => $entityId->getSerialization(),
-			'language' => $language
+			'language' => $language,
+			'editLink' => $this->specialPageLinker->getLink(
+				self::EDIT_PAGE,
+				[ $entityId->getSerialization() ]
+			),
 		];
 	}
 
