@@ -26,7 +26,7 @@
 			characteristics = expert.valueCharacteristics();
 
 		assert.ok(
-			characteristics.hasOwnProperty( 'unit' ),
+			'unit' in characteristics,
 			'unit exists'
 		);
 

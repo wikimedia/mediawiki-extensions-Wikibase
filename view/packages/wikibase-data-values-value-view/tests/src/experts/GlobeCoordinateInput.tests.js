@@ -19,7 +19,15 @@
 		var expert = new valueview.experts.GlobeCoordinateInput(
 			$div,
 			new valueview.tests.MockViewState( {
-				value: { getValue: function() { return { getPrecision: function() { return null; } }; } },
+				value: {
+					getValue: function() {
+						return {
+							getPrecision: function() {
+								return null;
+							}
+						};
+					}
+				},
 				getTextValue: 'value'
 			} )
 		);

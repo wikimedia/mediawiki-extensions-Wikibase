@@ -25,10 +25,10 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "eslint-config-wikimedia": "0.4.0",
+    "eslint-config-wikimedia": "0.9.0",
     "grunt": "1.0.1",
     "grunt-banana-checker": "0.3.0",
-    "grunt-eslint": "19.0.0",
+    "grunt-eslint": "21.0.0",
     "grunt-jsonlint": "1.0.4",
     "grunt-karma": "^2.0.0",
     "karma": "^1.7.1",

@@ -52,7 +52,7 @@
 		 */
 		init: function() {
 			this.$input.inputextender( {
-				initCallback: $.proxy( this._initExtensions, this ),
+				initCallback: this._initExtensions.bind( this ),
 				contentAnimationEvents: 'toggleranimation'
 			} );
 			this._inputextender = this.$input.data( 'inputextender' );

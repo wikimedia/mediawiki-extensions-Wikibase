@@ -28,6 +28,7 @@
 		);
 
 		assert.ok(
+			// eslint-disable-next-line no-self-compare
 			pc.facade() === pc.facade(),
 			'Always returns the same facade instance and does not create a new one.'
 		);
@@ -134,7 +135,9 @@
 
 		var fired1 = 0;
 		var fired2 = 0;
-		var resetFired = function() { fired1 = fired2 = 0; };
+		var resetFired = function() {
+			fired1 = fired2 = 0;
+		};
 
 		assert.ok(
 			pcf.fire === undefined,
@@ -187,10 +190,18 @@
 	} );
 
 	// Helper callbacks for the following tests:
-	var fn1 = function() { this.push( 1 ); };
-	var fn2 = function() { this.push( 2 ); };
-	var fn3 = function() { this.push( 3 ); };
-	var fn4 = function() { this.push( 4 ); };
+	var fn1 = function() {
+		this.push( 1 );
+	};
+	var fn2 = function() {
+		this.push( 2 );
+	};
+	var fn3 = function() {
+		this.push( 3 );
+	};
+	var fn4 = function() {
+		this.push( 4 );
+	};
 
 	QUnit.test( 'add() verified by fireWith()', function( assert ) {
 		assert.expect( 2 );

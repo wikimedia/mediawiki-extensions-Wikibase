@@ -18,6 +18,7 @@
 		"comma-spacing": "off",
 		"computed-property-spacing": "off",
 		"indent": "off",
+		"max-len": "off",
 		"no-underscore-dangle": "off",
 		"no-unused-vars": "off",
 		"one-var": "off",

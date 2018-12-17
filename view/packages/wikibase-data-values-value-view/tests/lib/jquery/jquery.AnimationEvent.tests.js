@@ -116,7 +116,9 @@
 		var predefined = {};
 
 		var firedPredefined, firedCallbacksMember;
-		var resetFired = function() { firedPredefined = firedCallbacksMember = 0; };
+		var resetFired = function() {
+			firedPredefined = firedCallbacksMember = 0;
+		};
 
 		resetFired();
 

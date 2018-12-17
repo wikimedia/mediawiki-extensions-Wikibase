@@ -68,7 +68,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 		this.precisionRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-precision',
 			getPrecisionValues(),
-			$.proxy( this._onRotatorChange, this ),
+			this._onRotatorChange.bind( this ),
 			function() {
 				var value = self.viewState().value();
 				return value && value.getOption( 'precision' );
@@ -86,7 +86,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 		this.calendarRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-calendar',
 			getCalendarValues( this._messageProvider ),
-			$.proxy( this._onRotatorChange, this ),
+			this._onRotatorChange.bind( this ),
 			function() {
 				var value = self.viewState().value();
 				return value && value.getOption( 'calendarModel' );

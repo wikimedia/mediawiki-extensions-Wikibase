@@ -56,7 +56,7 @@ module.exports = ( function( $, vv ) {
 				this.$input = null;
 			}
 
-			PARENT.prototype.destroy.call( this );  // empties viewport
+			PARENT.prototype.destroy.call( this ); // empties viewport
 		},
 
 		/**

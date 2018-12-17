@@ -959,8 +959,8 @@ $.widget( 'valueview.valueview', PARENT, {
 					|| newValueCharacteristics[i] !== lastValueCharacteristics[i];
 				}
 
-				var changeDetected
-					= differentValueCharacteristics || self.getTextValue() !== self._expert.rawValue();
+				var changeDetected = differentValueCharacteristics ||
+					self.getTextValue() !== self._expert.rawValue();
 
 				if ( changeDetected ) {
 					self.__lastValueCharacteristics = newValueCharacteristics;
