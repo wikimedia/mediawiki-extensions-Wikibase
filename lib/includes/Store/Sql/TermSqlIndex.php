@@ -626,7 +626,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$dbr = $this->getReadDb();
 
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.wb_terms.select.TermSqlIndex_fetchTemrs'
+			'wikibase.repo.wb_terms.select.TermSqlIndex_fetchTerms'
 		);
 
 		$res = $dbr->select(
