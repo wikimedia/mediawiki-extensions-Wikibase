@@ -19,7 +19,8 @@
 			"Duolaimi",
 			"Cwek",
 			"A2093064",
-			"Eflyjason"
+			"Eflyjason",
+			"A Chinese Wikipedian"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
@@ -107,8 +108,8 @@
 	"wikibase-pageinfo-entity-usage-D": "一些描述",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "描述：$1",
 	"wikibase-pageinfo-entity-usage-T": "标题",
-	"wikibase-pageinfo-entity-usage-C": "一些声明",
-	"wikibase-pageinfo-entity-usage-C-with-modifier": "声明：$1",
+	"wikibase-pageinfo-entity-usage-C": "一些陈述",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "陈述：$1",
 	"wikibase-pageinfo-entity-usage-X": "所有实体数据",
 	"wikibase-pageinfo-entity-usage-O": "其他（声明）",
 	"wikibase-property-render-error": "无法生成属性$1：$2",

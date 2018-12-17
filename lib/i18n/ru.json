@@ -16,7 +16,8 @@
 			"Smigles",
 			"Stjn",
 			"Vlad5250",
-			"Putnik"
+			"Putnik",
+			"Nk88"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -98,6 +99,8 @@
 	"datatypes-type-wikibase-item": "Элемент",
 	"datatypes-type-wikibase-property": "Свойство",
 	"datatypes-type-commonsMedia": "Медиафайл на Викискладе",
+	"datatypes-type-geo-shape": "Географическая форма",
+	"datatypes-type-tabular-data": "Табличные данные",
 	"datatypes-type-external-id": "Внешний идентификатор",
 	"version-wikibase": "Вики-база",
 	"wikibase-time-calendar-gregorian": "Григорианский",
