@@ -26,6 +26,8 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  */
 class EntityTermsViewFactory {
 
+	/** public */ const TERMS_EDIT_SPECIAL_PAGE = 'SetLabelDescriptionAliases';
+
 	/**
 	 * @param EntityDocument $entity
 	 * @param Language $language
@@ -91,7 +93,8 @@ class EntityTermsViewFactory {
 			$fallbackChain,
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
-				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' ),
+				new RepoSpecialPageLinker()
 			),
 			$textProvider
 		);

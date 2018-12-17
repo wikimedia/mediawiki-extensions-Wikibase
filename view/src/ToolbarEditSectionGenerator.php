@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -78,7 +79,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 			$specialPageUrlParams[] = $entityId->getSerialization();
 			$specialPageUrlParams[] = $languageCode;
 		}
-		return $this->getHtmlForEditSection( 'SetLabelDescriptionAliases', $specialPageUrlParams );
+		return $this->getHtmlForEditSection( EntityTermsViewFactory::TERMS_EDIT_SPECIAL_PAGE, $specialPageUrlParams );
 	}
 
 	/**
