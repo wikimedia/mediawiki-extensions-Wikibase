@@ -54,7 +54,7 @@ class ApiHelperFactory {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var \Wikibase\Repo\EditEntity\MediawikiEditEntityFactory
+	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -100,7 +100,7 @@ class ApiHelperFactory {
 	 * @param SiteLookup $siteLookup
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param \Wikibase\Repo\EditEntity\MediawikiEditEntityFactory $editEntityFactory
+	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param EntityIdParser $idParser

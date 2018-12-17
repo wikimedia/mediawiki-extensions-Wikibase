@@ -43,7 +43,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * Flags to pass to EditEntity::attemptSave; This is set by loadEntity() to EDIT_NEW
 	 * for new entities, and EDIT_UPDATE for existing entities.
 	 *
-	 * @see \Wikibase\Repo\EditEntity\EditEntity::attemptSave
+	 * @see EditEntity::attemptSave
 	 * @see WikiPage::doEditContent
 	 *
 	 * @var int

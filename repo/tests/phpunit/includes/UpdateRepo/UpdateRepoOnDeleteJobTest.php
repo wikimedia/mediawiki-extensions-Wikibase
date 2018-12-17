@@ -114,7 +114,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return \Wikibase\Repo\EditEntity\EditFilterHookRunner
+	 * @return EditFilterHookRunner
 	 */
 	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
