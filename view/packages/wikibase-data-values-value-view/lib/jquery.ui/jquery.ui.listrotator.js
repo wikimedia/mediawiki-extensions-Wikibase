@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 /**
@@ -456,4 +456,4 @@ $.widget( 'ui.listrotator', {
 
 } );
 
-} )( jQuery );
+}() );

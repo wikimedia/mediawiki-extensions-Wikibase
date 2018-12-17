@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	/**
@@ -107,4 +107,4 @@
 		//  which would also result into autoActive() === false.
 	} );
 
-}( jQuery, QUnit ) );
+}() );

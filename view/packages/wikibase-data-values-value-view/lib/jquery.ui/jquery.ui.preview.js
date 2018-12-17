@@ -1,4 +1,4 @@
-( function( $, util ) {
+( function () {
 	'use strict';
 
 /**
@@ -122,4 +122,4 @@ $.widget( 'ui.preview', {
 
 } );
 
-} )( jQuery, util );
+}() );

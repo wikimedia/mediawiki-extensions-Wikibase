@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	/**
@@ -315,4 +315,4 @@
 		);
 	} );
 
-}( jQuery, QUnit ) );
+}() );

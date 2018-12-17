@@ -9,7 +9,7 @@ jQuery.util = jQuery.util || {};
  *
  * @return {number} Scrollbar width in pixel.
  */
-jQuery.util.getscrollbarwidth = ( function( $ ) {
+jQuery.util.getscrollbarwidth = ( function () {
 	'use strict';
 
 	var scrollbarWidth;
@@ -38,4 +38,4 @@ jQuery.util.getscrollbarwidth = ( function( $ ) {
 		return scrollbarWidth;
 	};
 
-} )( jQuery );
+}() );

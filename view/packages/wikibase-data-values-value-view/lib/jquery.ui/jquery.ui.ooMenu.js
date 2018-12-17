@@ -1,4 +1,4 @@
-( function( $, util ) {
+( function () {
 'use strict';
 
 /**
@@ -285,7 +285,7 @@ $.widget( 'ui.ooMenu', {
 			$item = this.element.children( '.ui-ooMenu-item' ).filter( function() {
 				return $( this ).data( 'ui-ooMenu-item' ) === item;
 			} );
-		} else if ( item instanceof jQuery && item.data( 'ui-ooMenu-item' ) ) {
+		} else if ( item instanceof $ && item.data( 'ui-ooMenu-item' ) ) {
 			$item = item;
 		} else {
 			throw new Error( 'Need $.ui.ooMenu.Item instance or menu item jQuery object to '
@@ -415,7 +415,7 @@ var Item = function( label, value, link ) {
 	}
 
 	this._label = label;
-	this._value = value || ( label instanceof jQuery ? label.text() : label );
+	this._value = value || ( label instanceof $ ? label.text() : label );
 	this._link = link || null;
 };
 

@@ -1,4 +1,4 @@
-( function( dv, util, $, vf, vp ) {
+( function( dv, vf, vp ) {
 'use strict';
 
 var PARENT = $.Widget;
@@ -978,4 +978,4 @@ $.widget( 'valueview.valueview', PARENT, {
 // the prototype
 $.valueview.valueview.prototype.widgetBaseClass = 'valueview';
 
-}( dataValues, util, jQuery, valueFormatters, valueParsers ) );
+}( dataValues, valueFormatters, valueParsers ) );

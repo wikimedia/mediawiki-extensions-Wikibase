@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	QUnit.module( 'jquery.util.adaptlettercase' );
@@ -50,4 +50,4 @@
 
 	} );
 
-}( jQuery, QUnit ) );
+}() );

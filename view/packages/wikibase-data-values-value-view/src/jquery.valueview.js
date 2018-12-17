@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 	var origValueview = $.valueview || {};
@@ -19,4 +19,4 @@
 	// jQuery.Widget):
 	$.expr.pseudos.valueview = $.expr.pseudos[ 'valueview-valueview' ];
 
-}( jQuery ) );
+}() );

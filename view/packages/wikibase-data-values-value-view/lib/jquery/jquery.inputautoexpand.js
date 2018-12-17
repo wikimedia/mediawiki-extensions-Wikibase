@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 /**
@@ -467,4 +467,4 @@ $.extend( $.AutoExpandInput.prototype, {
 	}
 } );
 
-}( jQuery ) );
+}() );

@@ -4,7 +4,7 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	// TODO: Tests for hideWhenInputEmptyOption
@@ -300,4 +300,4 @@
 		testGetInstancesWithVisibleExtensions( assert, extenders );
 	} );
 
-}( jQuery, QUnit ) );
+}() );

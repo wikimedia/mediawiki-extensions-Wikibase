@@ -2,7 +2,7 @@
  * @license GNU GPL v2+
  * @author Daniel Werner
  */
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	/**
@@ -168,4 +168,4 @@
 		} );
 	} );
 
-}( jQuery, QUnit ) );
+}() );

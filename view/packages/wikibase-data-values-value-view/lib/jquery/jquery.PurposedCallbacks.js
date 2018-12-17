@@ -1,4 +1,4 @@
-jQuery.PurposedCallbacks = ( function( $ ) {
+jQuery.PurposedCallbacks = ( function () {
 	'use strict';
 
 	/**
@@ -244,4 +244,4 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 
 	return SELF;
 
-}( jQuery ) );
+}() );

@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 var PARENT = $.ui.suggester;
@@ -127,4 +127,4 @@ $.widget( 'ui.languagesuggester', PARENT, {
 	}
 } );
 
-}( jQuery ) );
+}() );

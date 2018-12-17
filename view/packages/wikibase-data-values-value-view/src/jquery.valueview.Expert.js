@@ -1,6 +1,6 @@
-jQuery.valueview = jQuery.valueview || {};
+$.valueview = $.valueview || {};
 
-( function( $, vv, util ) {
+( function( vv ) {
 	'use strict';
 
 	/**
@@ -291,4 +291,4 @@ jQuery.valueview = jQuery.valueview || {};
 		blur: function() {}
 	};
 
-}( jQuery, jQuery.valueview, util ) );
+}( $.valueview ) );

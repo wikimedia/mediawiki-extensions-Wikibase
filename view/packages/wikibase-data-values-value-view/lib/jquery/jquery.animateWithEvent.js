@@ -1,4 +1,4 @@
-jQuery.fn.animateWithEvent = ( function( $ ) {
+jQuery.fn.animateWithEvent = ( function () {
 	'use strict';
 
 	/**
@@ -99,4 +99,4 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 		return this;
 	};
 
-}( jQuery ) );
+}() );

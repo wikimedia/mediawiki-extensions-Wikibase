@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 var PARENT = $.ui.suggester;
@@ -313,4 +313,4 @@ $.widget( 'ui.unitsuggester', PARENT, {
 	}
 } );
 
-}( jQuery ) );
+}() );

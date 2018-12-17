@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 /**
@@ -220,4 +220,4 @@ $.widget( 'ui.toggler', {
 	}
 } );
 
-} )( jQuery );
+}() );

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	/**
@@ -116,4 +116,4 @@
 		} );
 	} );
 
-}( jQuery, QUnit ) );
+}() );

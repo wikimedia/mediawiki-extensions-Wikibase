@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 /**
@@ -583,4 +583,4 @@ $.ui.inputextender.redrawVisibleExtensions = function() {
 	} );
 };
 
-} )( jQuery );
+}() );

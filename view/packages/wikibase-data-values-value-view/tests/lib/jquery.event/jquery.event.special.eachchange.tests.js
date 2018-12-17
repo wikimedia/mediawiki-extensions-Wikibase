@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  */
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 
 	// Helper functions:
@@ -252,4 +252,4 @@
 		$subject.remove();
 	} );
 
-}( jQuery, QUnit ) );
+}() );

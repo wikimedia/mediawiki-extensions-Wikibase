@@ -1,4 +1,4 @@
-jQuery.fn.autocompletestring = ( function( $ ) {
+jQuery.fn.autocompletestring = ( function () {
 	'use strict';
 
 	/**
@@ -73,4 +73,4 @@ jQuery.fn.autocompletestring = ( function( $ ) {
 
 	return autocompletestring;
 
-} )( jQuery );
+}() );

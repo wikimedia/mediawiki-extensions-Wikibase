@@ -1,4 +1,4 @@
-( function( $ ) {
+( function () {
 	'use strict';
 
 /**
@@ -746,4 +746,4 @@ $.widget( 'ui.suggester', {
 
 } );
 
-} )( jQuery );
+}() );

@@ -1,4 +1,4 @@
-( function( $, util ) {
+( function () {
 	'use strict';
 
 	var NAMESPACE = {
@@ -185,4 +185,4 @@
 
 	} );
 
-}( jQuery, util ) );
+}() );

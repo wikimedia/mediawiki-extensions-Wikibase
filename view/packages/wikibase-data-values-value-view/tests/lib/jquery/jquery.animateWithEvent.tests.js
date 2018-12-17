@@ -2,7 +2,7 @@
  * @license GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( $, QUnit ) {
+( function () {
 	'use strict';
 	/* jshint newcap: false */
 
@@ -179,4 +179,4 @@
 		} );
 	} );
 
-}( jQuery, QUnit ) );
+}() );

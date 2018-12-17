@@ -1,6 +1,6 @@
-jQuery.valueview = jQuery.valueview || {};
+$.valueview = $.valueview || {};
 
-( function( $, vv ) {
+( function( vv ) {
 	'use strict';
 
 	/**
@@ -96,4 +96,4 @@ jQuery.valueview = jQuery.valueview || {};
 		}
 	} );
 
-}( jQuery, jQuery.valueview ) );
+}( $.valueview ) );
