@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f543fbcb_d21bab39",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-17T17:49:48Z",
+      "side": 1,
+      "message": "Are there competing (special) pages which all implement LabelDescriptionAlias editing so that this is supposed to be configurable on a per-termbox-variant level? Otherwise I think we would be better off making a dedicated linker primed for SetLabelDescriptionAliases and injecting it into both variants in EntityTermsViewFactory. Am aware that, as it stands, it\u0027s effectively the same way it is done for the traditional termbox but somehow I\u0027m afraid someone is going to change one and forget the other. A compromise could be to place the constant in the EntityTermsViewFactory.",
+      "range": {
+        "startLine": 20,
+        "startChar": 33,
+        "endLine": 20,
+        "endChar": 59
+      },
+      "revId": "03e1a856ada83387f9ef17e57985771309970f44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
