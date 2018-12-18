@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9170029d_ce3faeb7",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-18T16:07:06Z",
+      "side": 1,
+      "message": "Either this [ shouldn\u0027t be here, or we are missing one at the end of the line",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 3
+      },
+      "revId": "d610fe2e2707c69d33cf9b2d54198a2fc0b41dc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
