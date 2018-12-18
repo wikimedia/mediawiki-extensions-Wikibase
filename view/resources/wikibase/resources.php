@@ -45,27 +45,6 @@ return call_user_func( function() {
 			'targets' => 'mobile'
 		],
 
-		'wikibase.termbox' => $moduleTemplate + [
-			'scripts' => [
-				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.js',
-			],
-			'targets' => 'mobile',
-			'dependencies' => [
-				'wikibase.termbox.styles',
-				'wikibase.getLanguageNameByCode',
-				'wikibase.entityPage.entityLoaded',
-				'wikibase.WikibaseContentLanguages',
-			]
-		],
-
-		'wikibase.termbox.styles' => $moduleTemplate + [
-			'styles' => [
-				'termbox/main.less',
-				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
-			],
-			'targets' => 'mobile'
-		],
-
 		'wikibase.RevisionStore' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.RevisionStore.js',
