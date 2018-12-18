@@ -24,7 +24,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
-use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -248,7 +248,7 @@ class WikibaseValueFormatterBuilders {
 		return $this->escapeValueFormatter( $format, $plainFormatter );
 	}
 
-	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
+	public function newItemPropertyIdHtmlLinkFormatter(FormatterOptions $options ) {
 		$nonCachingLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityRetrievingTermLookup( $this->entityLookup ),
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
@@ -262,7 +262,7 @@ class WikibaseValueFormatterBuilders {
 			$this->cacheTtlInSeconds
 		);
 
-		return new ItemIdHtmlLinkFormatter(
+		return new ItemPropertyIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$this->entityTitleLookup,
 			$this->languageNameLookup

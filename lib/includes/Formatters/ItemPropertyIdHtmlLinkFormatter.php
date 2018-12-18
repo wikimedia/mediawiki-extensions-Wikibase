@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @license GPL-2.0-or-later
  */
-class ItemIdHtmlLinkFormatter extends EntityIdLabelFormatter {
+class ItemPropertyIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
 	 * @var EntityTitleLookup
