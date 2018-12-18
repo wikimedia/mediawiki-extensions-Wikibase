@@ -322,6 +322,20 @@ return [
 	 */
 	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 0,
 
+	/**
+	 * Upper inclusive range bound of P-ID. Html links for Item IDs that within this range will
+	 * be rendered using ItemPropertyIdHtmlLinkFormatter.
+	 *
+	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
+	 *       Do not use it.
+	 *
+	 * @var int
+	 * @see https://phabricator.wikimedia.org/T196882
+	 * @see \Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter
+	 * @see \Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter
+	 */
+	'tmpMaxPropertyIdForNewItemIdHtmlFormatter' => 0,
+
 	'useKartographerGlobeCoordinateFormatter' => false,
 
 	/**
