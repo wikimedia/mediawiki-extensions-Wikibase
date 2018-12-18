@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29614321_b15549cc",
+        "filename": "repo/tests/phpunit/includes/Api/ApiUserBlockedTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-18T16:12:30Z",
+      "side": 1,
+      "message": "This should be WikibaseRepo I believe",
+      "range": {
+        "startLine": 14,
+        "startChar": 10,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "b3fbc1adf6a3926c3504bfdbb225221cb84e9efe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69d74c23_13ebee8d",
+        "filename": "repo/tests/phpunit/includes/Api/ApiUserBlockedTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-18T16:12:30Z",
+      "side": 1,
+      "message": "It could be nice to have a completeness test (even if it is a little evil)\n\nAll API modules are registered when we run this code, and in theroy we always use the wb prefix for our api modules.\nSo we could write a completeness test that calls this dataProvider, and gets a list of all api modules tested, and check that no api modules that are registered with a prefix of wb are missed?\n\nMight be tricky though as our extensions also have api modules starting with wb...\nSo maybe we could check for a few different prefixes like wbget, wbedit, wbcreate, wbremove, wbmerge, wbset ?\n\nThoughts?",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 17
+      },
+      "revId": "b3fbc1adf6a3926c3504bfdbb225221cb84e9efe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
