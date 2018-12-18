@@ -9,7 +9,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
- * @covers \Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter
  *
  * @group ValueFormatters
  * @group Wikibase
@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  *
  * @license GPL-2.0-or-later
  */
-class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
+class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	use HamcrestPHPUnitIntegration;
 
 	/** @var EntityTitleLookup|ObjectProphecy */
@@ -221,7 +221,7 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->method( $this->anything() )
 			->will( $this->returnValue( null ) );
 
-		$formatter = new ItemIdHtmlLinkFormatter(
+		$formatter = new ItemPropertyIdHtmlLinkFormatter(
 			$this->createMock( LanguageFallbackLabelDescriptionLookup::class ),
 			$entityTitleLookup,
 			$this->getMock( LanguageNameLookup::class )
@@ -261,10 +261,10 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return ItemIdHtmlLinkFormatter
+	 * @return ItemPropertyIdHtmlLinkFormatter
 	 */
 	protected function createFormatter() {
-		return new ItemIdHtmlLinkFormatter(
+		return new ItemPropertyIdHtmlLinkFormatter(
 			$this->labelDescriptionLookup->reveal(),
 			$this->entityTitleLookup->reveal(),
 			$this->languageNameLookup->reveal()
@@ -279,7 +279,7 @@ class ItemIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$this->setUserLang( $languageCode );
 		$this->currentUserLanguage = $languageCode;
 
-		return new class( $this ) extends ItemIdHtmlLinkFormatterTest {
+		return new class( $this ) extends ItemPropertyIdHtmlLinkFormatterTest {
 
 			public function __construct( $testCase ) {
 				$this->testCase = $testCase;

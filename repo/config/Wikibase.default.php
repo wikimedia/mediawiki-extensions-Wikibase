@@ -318,7 +318,7 @@ return [
 	 * @var int
 	 * @see https://phabricator.wikimedia.org/T196882
 	 * @see \Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter
-	 * @see \Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter
+	 * @see \Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter
 	 */
 	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 0,
 
