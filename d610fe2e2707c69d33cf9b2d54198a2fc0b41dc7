@@ -22,6 +22,30 @@
       "revId": "d610fe2e2707c69d33cf9b2d54198a2fc0b41dc7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e69bafb8_3628a919",
+        "filename": "docs/change-op-serializations.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2018-12-18T16:40:57Z",
+      "side": 1,
+      "message": "Ouch, started to fix this and did not complete it…",
+      "parentUuid": "9170029d_ce3faeb7",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 3
+      },
+      "revId": "d610fe2e2707c69d33cf9b2d54198a2fc0b41dc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
