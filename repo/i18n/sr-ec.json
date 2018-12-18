@@ -310,7 +310,7 @@
 	"datatypes-type-url": "адреса",
 	"content-model-wikibase-item": "ставка Викибазе",
 	"content-model-wikibase-property": "својство Викибазе",
-	"content-model-wikibase-query": "упит Викибазе",
+	"content-model-wikibase-query": "Wikibase упит",
 	"right-item-term": "промена термина ставке (ознаке, описи, псеудоними)",
 	"right-item-merge": "обједињавање ставки",
 	"right-item-redirect": "прављење преусмерења ставки",
