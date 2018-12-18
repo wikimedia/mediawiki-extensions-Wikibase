@@ -420,6 +420,46 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildPropertyValidators();
 			},
+			'formatter-factory-callback' => function ( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+				$snakFormat = new SnakFormat();
+
+				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
+					//TODO Cleanup the code once https://phabricator.wikimedia.org/T196882 is Done.
+
+					$logger = LoggerFactory::getInstance( 'Wikibase.NewPropertyIdFormatter' );
+					try {
+						$maxEntityId = WikibaseRepo::getDefaultInstance()->getSettings()
+							->getSetting( 'tmpMaxItemIdForNewPropertyIdHtmlFormatter' );
+
+						$statsdDataFactory = MediaWikiServices::getInstance()
+							->getStatsdDataFactory();
+
+						$formatter = new ControlledFallbackEntityIdFormatter(
+							$maxEntityId,
+							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
+							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
+							$statsdDataFactory,
+							'wikibase.repo.wb_terms.newPropertyIdFormatter.'
+						);
+
+						$formatter->setLogger( $logger );
+
+						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+					} catch ( \Exception $e ) {
+						$logger->error(
+							"Failed to construct ItemPropertyIdHtmlLinkFormatter: {exception_message}",
+							[
+								'exception' => $e,
+							]
+						);
+
+						return $factory->newEntityIdFormatter( $format, $options );
+					}
+				}
+
+				return $factory->newEntityIdFormatter( $format, $options );
+			},
 		]
 	];
 } );
