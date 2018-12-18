@@ -22,6 +22,30 @@
       "revId": "03e1a856ada83387f9ef17e57985771309970f44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd99aecf_b6fb85e0",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2018-12-18T16:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f543fbcb_d21bab39",
+      "range": {
+        "startLine": 20,
+        "startChar": 33,
+        "endLine": 20,
+        "endChar": 59
+      },
+      "revId": "03e1a856ada83387f9ef17e57985771309970f44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
