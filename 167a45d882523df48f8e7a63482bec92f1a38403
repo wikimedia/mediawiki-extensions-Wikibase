@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e867c522_faa63f66",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-19T15:56:02Z",
+      "side": 1,
+      "message": "This is a global shared between all extensions and core, so we just want to set our single key rather than overwrite the whole array with our new settings.",
+      "range": {
+        "startLine": 1042,
+        "startChar": 1,
+        "endLine": 1042,
+        "endChar": 23
+      },
+      "revId": "167a45d882523df48f8e7a63482bec92f1a38403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
