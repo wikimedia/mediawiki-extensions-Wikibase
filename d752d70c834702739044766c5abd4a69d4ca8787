@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ab22169_805e06c2",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-19T09:04:45Z",
+      "side": 1,
+      "message": "This makes for a relative link. That works for what we plan at the moment, just want it to be an active decision.",
+      "range": {
+        "startLine": 63,
+        "startChar": 43,
+        "endLine": 63,
+        "endChar": 50
+      },
+      "revId": "d752d70c834702739044766c5abd4a69d4ca8787",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
