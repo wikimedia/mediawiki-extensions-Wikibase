@@ -1,96 +1,68 @@
+= Entitytypes =
+
 == Abstract ==
 
-Entities as defined by Wikibase have a unique identifier and a type. As Wikibase is an extension of
-MediaWiki, every entity object is stored on its own page in a given namespace that can hold entities
-of one type.
+Entities as defined by Wikibase have a unique identifier and a type. As Wikibase is an extension of MediaWiki, every entity object is stored on its own page in a given namespace that can hold entities of one type.
 
-The EntityDocument interface describes this construct and adds some methods around it that allow
-getting the type, getting and setting the id, creating a copy and checking if an entity has content
-and whether two entities are equal. It is important that the identifier does not count as content
-and neither affects emptiness nor equality.
+The EntityDocument interface describes this construct and adds some methods around it that allow getting the type, getting and setting the id, creating a copy and checking if an entity has content and whether two entities are equal. It is important that the identifier does not count as content and neither affect's emptiness nor equality.
 
-All entities must implement this interface. The two entity types 'item' and 'property' are defined
-in Wikibase by default. They can be enabled by defining their namespace.
+All entities must implement this interface. The two entity types 'item' and 'property' are defined in Wikibase by default. They can be enabled by defining their namespace.
 
-The actual content of an entity can be anything. However, Wikibase defines some basic structures
-including labels, descriptions, aliases and statements. If an entity holds one of these structures,
-it has to implement the corresponding provider interface (eg. LabelsProvider).
+The actual content of an entity can be anything. However, Wikibase defines some basic structures including labels, descriptions, aliases and statements. If an entity holds one of these structures, it has to implement the corresponding provider interface (eg. LabelsProvider).
 
 == Entity type definitions ==
 
-To support an entity type, additionally to defining the entity itself, the following services need
-to be implemented and registered:
+To support an entity type, additionally to defining the entity itself, the following services need to be implemented and registered:
 
-* Serializers and Deserializers must be defined to convert the entity into native data structures
-  that can be (de-)serialized as json. These classes have to implement the DispatchableSerializer
-  and DispatchableDeserializer interfaces from the serialization component.
-* Each entity needs a view to provide an HTML representation to the user. Each view has to implement
-  the EntityDocumentView interface from the WikibaseView component.
-* MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
-  class extending EntityHandler. Furthermore, the handler has to be registered in the entity types
-  repository. It is used to create instances of the content class.
+* Serializers and Deserializers must be defined to convert the entity into native data structures that can be (de-)serialized as json. These classes have to implement the DispatchableSerializer and DispatchableDeserializer interfaces from the serialization component.
+* Each entity needs a view to provide an HTML representation to the user. Each view has to implement the EntityDocumentView interface from the WikibaseView component.
+* MediaWiki bindings are needed by defining a content class extending EntityContent and a handler class extending EntityHandler. Furthermore, the handler has to be registered in the entity types repository. It is used to create instances of the content class.
 
-Entity types are defined in WikibaseLib.entitytypes.php and WikibaseRepo.entitytypes.php. They can
-be amended by extensions using WikibaseRepoEntityTypes hook.
+Entity types are defined in WikibaseLib.entitytypes.php and WikibaseRepo.entitytypes.php. They can be amended by extensions using WikibaseRepoEntityTypes hook.
 
-The entity types repository is an associative array mapping entity type identifiers to a set of
-callbacks that act as factory methods. The structure of this set is defined as follows, where each
-string key is associated with a function having the dedicated signature:
+The entity types repository is an associative array mapping entity type identifiers to a set of callbacks that act as factory methods. The structure of this set is defined as follows, where each string key is associated with a function having the dedicated signature:
 
 ; serializer-factory-callback (repo and client)
-: a callable that returns a DispatchableSerializer instance, with the first and only argument being
-  a SerializerFactory. The returned serializer is used to produce the output visible to the user.
+: A callable that returns a DispatchableSerializer instance, with the first and only argument being a SerializerFactory. The returned serializer is used to produce the output visible to the user.
 ; storage-serializer-factory-callback (repo only)
-: a callable that returns a DispatchableSerializer instance, with the first and only argument being
-  a SerializerFactory. The returned serializer is used when storing entity data internally.
+: A callable that returns a DispatchableSerializer instance, with the first and only argument being a SerializerFactory. The returned serializer is used when storing entity data internally.
 ; deserializer-factory-callback (repo and client)
-: a callable that returns a DispatchableDeserializer instance, with the first and only argument
-  being a DeserializerFactory
+: A callable that returns a DispatchableDeserializer instance, with the first and only argument being a DeserializerFactory
 ; entity-id-pattern (repo and client)
-: a regular expression that matches serialized entity IDs
+: A regular expression that matches serialized entity IDs
 ; entity-id-builder (repo and client)
-: a callable that returns an EntityId instance for a given entity ID serialization
+: A callable that returns an EntityId instance for a given entity ID serialization
 ; entity-id-composer-callback (repo and client)
-: a callable that returns an EntityId instance for the given unique part of an entity ID
-  serialization. Only entity types with IDs that are constructed from a static and a unique part can
-  and should specify this.
+: A callable that returns an EntityId instance for the given unique part of an entity ID serialization. Only entity types with IDs that are constructed from a static and a unique part can and should specify this.
 ; view-factory-callback (repo only)
-: a callable that returns an EntityDocumentView instance, with the arguments being a language code, a
-  LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
+: A callable that returns an EntityDocumentView instance, with the arguments being a language code, a LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
 ; content-model-id (repo only)
-: a string representing the id of the content model
+: A string representing the id of the content model
 ; content-handler-factory-callback (repo only)
-: a callable that returns an EntityHandler instance supporting this entity type
+: A callable that returns an EntityHandler instance supporting this entity type
 ; entity-factory-callback (repo only)
-: a callback for creating an empty entity of this type
+: A callback for creating an empty entity of this type
 ; entity-revision-lookup-factory-callback (repo only)
-: a callback for creating an EntityRevisionLookup for and entity of this type, with first and only argument
-  being the default lookup, which will be an instance of EntityRevisionLookup.
+: A callback for creating an EntityRevisionLookup for and entity of this type, with first and only argument being the default lookup, which will be an instance of EntityRevisionLookup.
 ; entity-metadata-accessor-callback
-: a callback for creating a WikiPageEntityMetaDataAccessor for an entity of this type, with the arguments
-  being the wiki database name (string|false), and the repository name (string)
+: A callback for creating a WikiPageEntityMetaDataAccessor for an entity of this type, with the arguments being the wiki database name (string|false), and the repository name (string)
 ; js-deserializer-factory-function (repo only)
-: a string representing a resource loader module that, when `require`d, returns a function returning
-  a `wikibase.serialization.Deserializer` instance supporting this entity type
+: A string representing a resource loader module that, when `require`d, returns a function returning a `wikibase.serialization.Deserializer` instance supporting this entity type
 ; changeop-deserializer-callback (repo only)
-: a callable that returns a ChangeOpDeserializer instance for change requests to the entity of this type
+: A callable that returns a ChangeOpDeserializer instance for change requests to the entity of this type
 ; rdf-builder-factory-callback (repo only)
-: a callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilders
-  for arguments in the callback
+: A callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilders for arguments in the callback
 ; entity-search-callback (repo only)
-: a callable that returns EntitySearchHelper instance. Takes WebRequest as an argument. This defines how
-  the completion search (wbsearchentities) for the entity type works.
+: A callable that returns EntitySearchHelper instance. Takes WebRequest as an argument. This defines how the completion search (wbsearchentities) for the entity type works.
 ; sub-entity-types (optional) (repo and client)
-: an array of strings listing the sub entity types that this entity type contains.
+: An array of strings listing the sub entity types that this entity type contains.
 ; fulltext-search-context (repo only)
-: configuration context allowing to instantiate fulltext search query builder
+: Configuration context to allow instantiating a fulltext search query builder
 ; search-field-definitions (repo only)
-: field definitions for search indexing
+: Field definitions for search indexing
 
-Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
-WikibaseClientEntityTypes hooks to provide additional entity type definitions.
+Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or WikibaseClientEntityTypes hooks to provide additional entity type definitions.
 
 == Programmatic Access ==
 
-Information about entity types can be accessed programmatically using the appropriate service
-objects. The entity type definitions themselves are wrapped by the EntityTypeDefinitions class.
+Information about entity types can be accessed programmaticaly using the appropriate service objects. The entity type definitions themselves are wrapped by the EntityTypeDefinitions class.
