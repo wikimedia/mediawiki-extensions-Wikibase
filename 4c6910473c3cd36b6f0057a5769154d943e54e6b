@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19925f06_1354a306",
+        "filename": "view/src/Termbox/TermboxDependencyLoader.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-19T08:42:18Z",
+      "side": 1,
+      "message": "I was eying https://www.mediawiki.org/wiki/ResourceLoader/Images#Loading_data_from_separate_JSON_file and was a bit disappointed after briefly scanning https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/core/+/d4254e0c4d7de1adb1a4f58fe09e7fe3af85dbb5/includes/resourceloader that there does not _seem_ to be an implementation that already does the loading from JSON file.\nIf we need to implement it I think we should play nicely and go with the same pattern, create a \u0027wikibase.termbox.messages\u0027 on which \u0027wikibase.termbox\u0027 depends and let it refer to the \u0027class\u0027 of our custom implementation of ResourceLoaderModule and point it to a \u0027data\u0027 file - in the end it will not be much different from what is but it will be more in line with existing implementation and reusable.",
+      "range": {
+        "startLine": 8,
+        "startChar": 6,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "4c6910473c3cd36b6f0057a5769154d943e54e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
