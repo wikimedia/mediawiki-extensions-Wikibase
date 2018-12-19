@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d21dd7e8_c763f7fd",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-19T15:39:37Z",
+      "side": 1,
+      "message": "This is the wrong config.\n\nThere are no example of using EventLoggingSchemas in Wikibase yet, but this should be in repo/Wikibase.php alongside all of the other wg global settings.\n\nhttps://www.mediawiki.org/wiki/Manual:$wgEventLoggingSchemas",
+      "range": {
+        "startLine": 341,
+        "startChar": 1,
+        "endLine": 343,
+        "endChar": 2
+      },
+      "revId": "460a75128427ed950e23012aafee65dc52bb08cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
