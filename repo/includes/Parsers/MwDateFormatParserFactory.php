@@ -26,6 +26,7 @@ class MwDateFormatParserFactory {
 	 * @param string $dateFormatPreference Typically "dmy", "mdy", "ISO 8601" or "default", but
 	 *  this depends heavily on the actual MessagesXx.php file.
 	 * @param string $dateFormatType Either "date", "both" (date and time) or "monthonly".
+	 * @param ParserOptions|null $options
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ValueParser
@@ -33,7 +34,8 @@ class MwDateFormatParserFactory {
 	public function getMwDateFormatParser(
 		$languageCode = 'en',
 		$dateFormatPreference = 'dmy',
-		$dateFormatType = 'date'
+		$dateFormatType = 'date',
+		ParserOptions $options = null
 	) {
 		if ( !is_string( $languageCode ) || $languageCode === '' ) {
 			throw new InvalidArgumentException( '$languageCode must be a non-empty string' );
@@ -52,11 +54,13 @@ class MwDateFormatParserFactory {
 		$digitTransformTable = $language->digitTransformTable();
 		$monthNames = $this->getCachedMonthNames( $language );
 
-		return new DateFormatParser( new ParserOptions( [
-			DateFormatParser::OPT_DATE_FORMAT => $dateFormat,
-			DateFormatParser::OPT_DIGIT_TRANSFORM_TABLE => $digitTransformTable,
-			DateFormatParser::OPT_MONTH_NAMES => $monthNames,
-		] ) );
+		if ( $options === null ) {
+			$options = new ParserOptions();
+		}
+		$options->setOption( DateFormatParser::OPT_DATE_FORMAT, $dateFormat );
+		$options->setOption( DateFormatParser::OPT_DIGIT_TRANSFORM_TABLE, $digitTransformTable );
+		$options->setOption( DateFormatParser::OPT_MONTH_NAMES, $monthNames );
+		return new DateFormatParser( $options );
 	}
 
 	/**

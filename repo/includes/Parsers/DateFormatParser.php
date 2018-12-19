@@ -38,6 +38,12 @@ class DateFormatParser extends StringValueParser {
 	 */
 	const OPT_MONTH_NAMES = 'monthNames';
 
+	/**
+	 * Option to override the precision auto-detection and set a specific precision. Should be an
+	 * integer or string containing one of the TimeValue::PRECISION_... constants.
+	 */
+	const OPT_PRECISION = 'precision';
+
 	public function __construct( ParserOptions $options = null ) {
 		parent::__construct( $options );
 
@@ -45,6 +51,7 @@ class DateFormatParser extends StringValueParser {
 		// FIXME: Should not be an option. Options should be trivial, never arrays or objects!
 		$this->defaultOption( self::OPT_DIGIT_TRANSFORM_TABLE, null );
 		$this->defaultOption( self::OPT_MONTH_NAMES, null );
+		$this->defaultOption( self::OPT_PRECISION, null );
 	}
 
 	/**
@@ -82,6 +89,21 @@ class DateFormatParser extends StringValueParser {
 						}
 					}
 				}
+			}
+		}
+
+		$option = $this->getOption( self::OPT_PRECISION );
+		if ( $option !== null ) {
+			if ( !is_int( $option ) && !ctype_digit( $option ) ) {
+				throw new ParseException( 'Precision must be an integer' );
+			}
+
+			$option = (int)$option;
+
+			// It's impossible to increase the detected precision via option, e.g. from year to month if
+			// no month is given. If a day is given it can be increased, relevant for midnight.
+			if ( $option <= $precision || $precision >= TimeValue::PRECISION_DAY ) {
+				$precision = $option;
 			}
 		}
 
