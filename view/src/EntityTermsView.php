@@ -14,6 +14,8 @@ use Wikibase\DataModel\Term\TermList;
  */
 interface EntityTermsView {
 
+	/* public */ const TERMS_EDIT_SPECIAL_PAGE = 'SetLabelDescriptionAliases';
+
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
