@@ -15,9 +15,10 @@ interface TermboxRenderer {
 	 * @param EntityId $entityId
 	 * @param string $language
 	 * @param string $editLink
+	 * @param bool $canEdit
 	 *
 	 * @return string
 	 */
-	public function getContent( EntityId $entityId, $language, $editLink );
+	public function getContent( EntityId $entityId, $language, $editLink, $canEdit );
 
 }
