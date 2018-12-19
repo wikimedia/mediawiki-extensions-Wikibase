@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b62cb8a9_55df23a5",
+        "filename": "docs/hooks-php.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-19T16:06:01Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "78c21437c9f07c6f6e035ade0c109e627a55c481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
