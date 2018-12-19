@@ -335,6 +335,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 				unset( $exp['id'] );
 				unset( $exp['datatype'] );
 				unset( $exp['hash'] );
+				unset( $exp['qualifiers-order'] );
 				unset( $data['datatype'] );
 				unset( $data['id'] );
 				unset( $data['hash'] );
