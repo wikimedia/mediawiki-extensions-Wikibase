@@ -9,7 +9,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 use Wikibase\View\Termbox\TermboxView;
@@ -28,18 +30,23 @@ class TermboxViewTest extends TestCase {
 	public function testGetHtmlWithClientStringResponse_returnsContent() {
 		$language = 'en';
 		$entityId = new ItemId( 'Q42' );
+		$editLinkUrl = '/edit/Q42';
 
 		$response = 'termbox says hi';
 
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->with( $entityId, $language )
+			->with( $entityId, $language, $editLinkUrl )
 			->willReturn( $response );
 
 		$this->assertSame(
 			$response,
-			$this->newTermbox( $renderer, $this->newLocalizedTextProvider() )->getHtml(
+			$this->newTermbox(
+				$renderer,
+				$this->newLocalizedTextProvider(),
+				$this->newLinkingSpecialPageLinker( $entityId, $editLinkUrl )
+			)->getHtml(
 				$language,
 				new TermList( [] ),
 				new TermList( [] ),
@@ -60,7 +67,7 @@ class TermboxViewTest extends TestCase {
 
 		$this->assertSame(
 			TermboxView::FALLBACK_HTML,
-			$this->newTermbox( $renderer, $this->newLocalizedTextProvider() )->getHtml(
+			$this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getHtml(
 				$language,
 				new TermList( [] ),
 				new TermList( [] ),
@@ -79,7 +86,11 @@ class TermboxViewTest extends TestCase {
 			->with( 'parentheses', [ $entityId->getSerialization() ] )
 			->willReturn( $decoratedIdSerialization );
 
-		$termbox = $this->newTermbox( $this->newTermboxRenderer(), $textProvider );
+		$termbox = $this->newTermbox(
+			$this->newTermboxRenderer(),
+			$textProvider,
+			$this->newSpecialPageLinker()
+		);
 
 		$this->assertSame(
 			$decoratedIdSerialization,
@@ -93,7 +104,8 @@ class TermboxViewTest extends TestCase {
 
 		$termbox = $this->newTermbox(
 			$this->newTermboxRenderer(),
-			$this->newLocalizedTextProvider()
+			$this->newLocalizedTextProvider(),
+			$this->newSpecialPageLinker()
 		);
 
 		$this->assertSame(
@@ -116,12 +128,33 @@ class TermboxViewTest extends TestCase {
 		return $this->getMock( LocalizedTextProvider::class );
 	}
 
-	private function newTermbox( TermboxRenderer $renderer, LocalizedTextProvider $textProvider ): TermboxView {
+	private function newTermbox(
+		TermboxRenderer $renderer,
+		LocalizedTextProvider $textProvider,
+		SpecialPageLinker $specialPageLinker
+	): TermboxView {
 		return new TermboxView(
 			new LanguageFallbackChain( [] ),
 			$renderer,
-			$textProvider
+			$textProvider,
+			$specialPageLinker
 		);
+	}
+
+	private function newLinkingSpecialPageLinker( $itemId, $editLinkUrl ) {
+		$specialPageLinker = $this->newSpecialPageLinker();
+		$specialPageLinker->expects( $this->once() )
+			->method( 'getLink' )
+			->with( EntityTermsView::TERMS_EDIT_SPECIAL_PAGE, [ $itemId ] )
+			->willReturn( $editLinkUrl );
+		return $specialPageLinker;
+	}
+
+	/**
+	 * @return MockObject|SpecialPageLinker
+	 */
+	private function newSpecialPageLinker() {
+		return $this->createMock( SpecialPageLinker::class );
 	}
 
 }

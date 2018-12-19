@@ -8,7 +8,9 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\CacheableEntityTermsView;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -22,6 +24,7 @@ class TermboxView implements CacheableEntityTermsView {
 
 	private $fallbackChain;
 	private $renderer;
+	private $specialPageLinker;
 
 	/**
 	 * @var LocalizedTextProvider
@@ -31,11 +34,13 @@ class TermboxView implements CacheableEntityTermsView {
 	public function __construct(
 		LanguageFallbackChain $fallbackChain,
 		TermboxRenderer $renderer,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		SpecialPageLinker $specialPageLinker
 	) {
 		$this->fallbackChain = $fallbackChain;
 		$this->renderer = $renderer;
 		$this->textProvider = $textProvider;
+		$this->specialPageLinker = $specialPageLinker;
 	}
 
 	public function getHtml(
@@ -46,7 +51,14 @@ class TermboxView implements CacheableEntityTermsView {
 		EntityId $entityId = null
 	) {
 		try {
-			return $this->renderer->getContent( $entityId, $mainLanguageCode );
+			return $this->renderer->getContent(
+				$entityId,
+				$mainLanguageCode,
+				$this->specialPageLinker->getLink(
+					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
+					[ $entityId->getSerialization() ]
+				)
+			);
 		} catch ( TermboxRenderingException $exception ) {
 			// TODO Log
 			return self::FALLBACK_HTML;

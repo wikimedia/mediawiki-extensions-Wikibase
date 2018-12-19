@@ -9,8 +9,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
-use Wikibase\View\EntityTermsView;
-use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -37,12 +35,11 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			$this->newSpecialPageLinker()
+			self::SSR_URL
 		);
 		$this->assertSame(
 			$content,
-			$client->getContent( new ItemId( 'Q42' ), 'de' )
+			$client->getContent( new ItemId( 'Q42' ), 'de', '/edit/Q42' )
 		);
 	}
 
@@ -64,22 +61,17 @@ class TermboxRemoteRendererTest extends TestCase {
 			)
 			->willReturn( $this->newSuccessfulRequest() );
 
-		$specialPageLinker = $this->newSpecialPageLinker();
-		$specialPageLinker->expects( $this->once() )
-			->method( 'getLink' )
-			->with( EntityTermsView::TERMS_EDIT_SPECIAL_PAGE, [ $itemId ] )
-			->willReturn( $editLinkUrl );
-
 		( new TermboxRemoteRenderer(
 			$requestFactory,
-			self::SSR_URL,
-			$specialPageLinker
-		) )->getContent( new ItemId( $itemId ), $language );
+			self::SSR_URL
+		) )->getContent( new ItemId( $itemId ), $language, $editLinkUrl );
 	}
 
-	public function testGetContentWithEntityIdAndLanguage_bubblesRequestException() {
+	public function testGetContentEncounteringUpstreamException_bubblesRequestException() {
 		$entityId = new ItemId( 'Q42' );
 		$language = 'de';
+		$editLinkUrl = '/edit/Q42';
+
 		$upstreamException = new Exception( 'domain exception' );
 
 		$request = $this->newHttpRequest();
@@ -89,12 +81,11 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			$this->newSpecialPageLinker()
+			self::SSR_URL
 		);
 
 		try {
-			$client->getContent( $entityId, $language );
+			$client->getContent( $entityId, $language, $editLinkUrl );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -106,6 +97,7 @@ class TermboxRemoteRendererTest extends TestCase {
 	public function testGetContentEncounteringServerErrorResponse_throwsException() {
 		$entityId = new ItemId( 'Q42' );
 		$language = 'de';
+		$editLinkUrl = '/edit/Q42';
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
@@ -116,12 +108,11 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			$this->newSpecialPageLinker()
+			self::SSR_URL
 		);
 
 		try {
-			$client->getContent( $entityId, $language );
+			$client->getContent( $entityId, $language, $editLinkUrl );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -132,6 +123,7 @@ class TermboxRemoteRendererTest extends TestCase {
 	public function testGetContentEncounteringNotFoundResponse_throwsException() {
 		$entityId = new ItemId( 'Q4711' );
 		$language = 'de';
+		$editLinkUrl = '/edit/Q4711';
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
@@ -142,12 +134,11 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			$this->newSpecialPageLinker()
+			self::SSR_URL
 		);
 
 		try {
-			$client->getContent( $entityId, $language );
+			$client->getContent( $entityId, $language, $editLinkUrl );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -192,13 +183,6 @@ class TermboxRemoteRendererTest extends TestCase {
 		$req->expects( $this->once() )->method( 'execute' );
 
 		return $req;
-	}
-
-	/**
-	 * @return MockObject|SpecialPageLinker
-	 */
-	private function newSpecialPageLinker() {
-		return $this->createMock( SpecialPageLinker::class );
 	}
 
 }

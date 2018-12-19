@@ -5,8 +5,6 @@ namespace Wikibase\View\Termbox\Renderer;
 use Exception;
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\View\EntityTermsView;
-use Wikibase\View\SpecialPageLinker;
 
 /**
  * @license GPL-2.0-or-later
@@ -14,28 +12,25 @@ use Wikibase\View\SpecialPageLinker;
 class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private $requestFactory;
-	private $specialPageLinker;
 	private $ssrServerUrl;
 
 	/* public */ const HTTP_STATUS_OK = 200;
 
 	public function __construct(
 		HttpRequestFactory $requestFactory,
-		$ssrServerUrl,
-		SpecialPageLinker $specialPageLinker
+		$ssrServerUrl
 	) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
-		$this->specialPageLinker = $specialPageLinker;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function getContent( EntityId $entityId, $language ) {
+	public function getContent( EntityId $entityId, $language, $editLink ) {
 		try {
 			$request = $this->requestFactory->create(
-				$this->formatUrl( $entityId, $language ),
+				$this->formatUrl( $entityId, $language, $editLink ),
 				[ /* TODO attach required data */ ]
 			);
 			$request->execute();
@@ -51,19 +46,16 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		return $request->getContent();
 	}
 
-	private function formatUrl( EntityId $entityId, $language ) {
+	private function formatUrl( EntityId $entityId, $language, $editLink ) {
 		return $this->ssrServerUrl . '?' .
-			http_build_query( $this->getRequestParams( $entityId, $language ) );
+			http_build_query( $this->getRequestParams( $entityId, $language, $editLink ) );
 	}
 
-	private function getRequestParams( EntityId $entityId, $language ) {
+	private function getRequestParams( EntityId $entityId, $language, $editLink ) {
 		return [
 			'entity' => $entityId->getSerialization(),
 			'language' => $language,
-			'editLink' => $this->specialPageLinker->getLink(
-				EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
-				[ $entityId->getSerialization() ]
-			),
+			'editLink' => $editLink,
 		];
 	}
 

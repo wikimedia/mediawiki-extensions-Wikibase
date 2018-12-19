@@ -91,10 +91,10 @@ class EntityTermsViewFactory {
 			$fallbackChain,
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
-				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' ),
-				new RepoSpecialPageLinker()
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
 			),
-			$textProvider
+			$textProvider,
+			new RepoSpecialPageLinker()
 		);
 	}
 
