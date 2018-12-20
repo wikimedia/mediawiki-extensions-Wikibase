@@ -33,13 +33,15 @@
 	} );
 
 	QUnit.test( 'widget definition', function ( assert ) {
-		assert.ok(
-			$.isFunction( StatementGroupLabelScrollWidget ),
+		assert.strictEqual(
+			typeof StatementGroupLabelScrollWidget,
+			'function',
 			'"jQuery.wikibase.statementgrouplabelscroll" (widget definition) is defined'
 		);
 
-		assert.ok(
-			$.isFunction( $.fn.statementgrouplabelscroll ),
+		assert.strictEqual(
+			typeof $.fn.statementgrouplabelscroll,
+			'function',
 			'"jQuery.fn.statementgrouplabelscroll" (widget bridge) is defined'
 		);
 
