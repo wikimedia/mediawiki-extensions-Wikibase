@@ -183,7 +183,7 @@
 				var $tag = $( this ),
 					tagLabel = self.getTagLabel( $tag );
 
-				if ( tagLabel !== '' && $.inArray( tagLabel, usedLabels ) === -1 ) {
+				if ( tagLabel !== '' && usedLabels.indexOf( tagLabel ) === -1 ) {
 					$tags = $tags.add( this );
 					usedLabels.push( tagLabel );
 				}
@@ -366,7 +366,7 @@
 				}
 			} )
 			.on( 'keydown.' + this.widgetName, function ( event ) {
-				if ( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
+				if ( self.options.triggerKeys.indexOf( event.which ) > -1 ) {
 					// Key for finishing tag input was hit (e.g. ENTER)
 
 					event.preventDefault();
@@ -413,7 +413,7 @@
 					// Check whether the tag is modified/new compared to initial state:
 					$tag.toggleClass(
 						'tagadata-choice-modified',
-						$.inArray( tagLabel, self._initialTagLabels ) === -1
+						self._initialTagLabels.indexOf( tagLabel ) === -1
 					);
 				}
 			);
