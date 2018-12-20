@@ -23,7 +23,7 @@
 
 			href += href.indexOf( '?' ) === -1 ? '?' : '&';
 
-			$.each( $form.serializeArray(), function ( i, param ) {
+			$form.serializeArray().forEach( function ( param ) {
 				params[ param.name ] = param.value;
 			} );
 
