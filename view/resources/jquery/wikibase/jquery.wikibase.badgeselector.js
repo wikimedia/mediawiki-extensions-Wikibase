@@ -250,7 +250,7 @@
 				var badgeLabels = arguments;
 				$menu.empty();
 
-				$.each( badgeIds, function ( index, itemId ) {
+				badgeIds.forEach( function ( index, itemId ) {
 					var badgeLabel = badgeLabels[ index ];
 					var $item = $( '<a/>' )
 						.on( 'click.' + self.widgetName, function ( event ) {
@@ -299,7 +299,7 @@
 
 		_addBadges: function () {
 			var self = this;
-			$.each( this.options.value, function ( index, badgeId ) {
+			this.options.value.forEach( function ( index, badgeId ) {
 				self._addBadge( badgeId );
 			} );
 		},

@@ -135,7 +135,7 @@
 							self.element.find( '.wikibase-entitytermsview-heading-aliases' ).append( $ul );
 						}
 						$ul.empty();
-						$.each( aliases.getTexts(), function ( i, text ) {
+						aliases.getTexts().forEach( function ( i, text ) {
 							$ul.append( mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias', text ) );
 						} );
 					}

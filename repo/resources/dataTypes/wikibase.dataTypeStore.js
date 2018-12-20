@@ -9,9 +9,9 @@ wikibase.dataTypeStore = ( function ( wb ) {
 	var dataTypeStore = new wb.dataTypes.DataTypeStore(),
 		dataTypeDefinitions = mw.config.get( 'wbDataTypes' ) || {};
 
-	$.each( dataTypeDefinitions, function ( dtTypeId, dtDefinition ) {
-		dataTypeStore.registerDataType( wb.dataTypes.DataType.newFromJSON( dtTypeId, dtDefinition ) );
-	} );
+	for ( var dtTypeId in dataTypeDefinitions ) {
+		dataTypeStore.registerDataType( wb.dataTypes.DataType.newFromJSON( dtTypeId, dataTypeDefinitions[ dtTypeId ] ) );
+	}
 
 	return dataTypeStore;
 

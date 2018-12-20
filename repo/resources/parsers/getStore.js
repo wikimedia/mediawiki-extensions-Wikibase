@@ -31,7 +31,7 @@
 			'wikibase-entityid': wb.datamodel.EntityId.TYPE
 		};
 
-		$.each( parserIdToDataValueType, function ( parserId, dvType ) {
+		parserIdToDataValueType.forEach( function ( parserId, dvType ) {
 			var Parser = util.inherit(
 				ApiBasedValueParser,
 				{ API_VALUE_PARSER_ID: parserId }

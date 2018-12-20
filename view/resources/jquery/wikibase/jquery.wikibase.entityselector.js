@@ -369,7 +369,7 @@
 
 			$.when.apply( $, hookResults ).then( function () {
 
-				$.each( arguments, function ( key, data ) {
+				arguments.forEach( function ( key, data ) {
 					result = data.concat( result );
 				} );
 

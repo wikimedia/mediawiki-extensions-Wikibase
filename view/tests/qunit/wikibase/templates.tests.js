@@ -184,7 +184,7 @@
 			mw.wbTemplates.store.set( key, template );
 
 			var paramMessage = '';
-			$.each( params, function ( i, param ) {
+			params.forEach( function ( i, param ) {
 				if ( i > 0 ) {
 					paramMessage += ', ';
 				}
@@ -215,9 +215,9 @@
 		};
 
 		// Loop through testsData and params to run the tests
-		$.each( testsData, function ( numberOfParams, testData ) {
-			$.each( testData, function ( template, expectedResults ) {
-				$.each( params[ numberOfParams ], function ( i, params ) {
+		testsData.forEach( function ( numberOfParams, testData ) {
+			testData.forEach( function ( template, expectedResults ) {
+				params[ numberOfParams ].forEach( function ( i, params ) {
 					verifyTemplate( params, template, expectedResults[ i ] );
 				} );
 			} );
