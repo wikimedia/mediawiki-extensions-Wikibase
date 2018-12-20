@@ -153,7 +153,7 @@
 			var self = this,
 				missingMethods = [];
 			$.each( this._requiredMethods, function ( i, methodName ) {
-				if ( !$.isFunction( self._controller[ methodName ] ) ) {
+				if ( typeof self._controller[ methodName ] !== 'function' ) {
 					missingMethods.push( methodName );
 				}
 			} );
@@ -237,7 +237,7 @@
 			}
 
 			var $buttons = this.getButton( 'save' ).element;
-			if ( $.isFunction( this.options.onRemove ) ) {
+			if ( typeof this.options.onRemove !== 'function' ) {
 				$buttons = $buttons.add( this.getButton( 'remove' ).element );
 			}
 			$buttons = $buttons.add( this.getButton( 'cancel' ).element );

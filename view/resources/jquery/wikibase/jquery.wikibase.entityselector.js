@@ -142,7 +142,7 @@
 						+ 'be specified.' );
 				}
 				this.options.source = this._initDefaultSource();
-			} else if ( !$.isFunction( this.options.source ) && !Array.isArray( this.options.source ) ) {
+			} else if ( typeof this.options.source !== 'function' && !Array.isArray( this.options.source ) ) {
 				throw new Error( 'Source needs to be a function or an array' );
 			}
 
