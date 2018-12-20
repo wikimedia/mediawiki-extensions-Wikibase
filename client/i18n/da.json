@@ -11,7 +11,8 @@
 			"Fnielsen",
 			"Sarrus",
 			"Saederup92",
-			"Dipsacus fullonum"
+			"Dipsacus fullonum",
+			"Weblars"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -79,5 +80,6 @@
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
 	"wikibase-otherprojects": "I andre projekter",
 	"wikibase-otherprojects-beta-message": "Andre projekter sidebar",
-	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data."
+	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Forbindelse|Forbindelser}} til {{WBREPONAME}}"
 }

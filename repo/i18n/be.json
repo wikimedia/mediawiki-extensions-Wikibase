@@ -63,6 +63,7 @@
 	"wikibase-entitytermsview-input-help-message": "Увядзіце метку гэтай сутнасці, кароткае апісанне і альтэрнатыўныя назвы для кожнай мовы.",
 	"wikibase-statementsection-statements": "Факты",
 	"wikibase-sitelinks": "Спіс спасылак на сайты",
+	"wikibase-sitelinkgroupview-input-help-message": "Дадайце спасылку на вонкавы сайт, пазначыўшы адрас сайта і старонцы на гэтым сайце; выпраўце або выдаліце існуючыя спасылкі на сайт.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запіс|запісы|запісаў}}",
 	"wikibase-sitelinks-empty": "Няма старонак, якія б спасылаліся на гэты элемент.",
 	"wikibase-sitelinks-special": "Іншыя сайты",
