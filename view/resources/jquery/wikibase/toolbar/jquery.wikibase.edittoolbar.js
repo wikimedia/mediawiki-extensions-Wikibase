@@ -131,6 +131,7 @@
 
 			this.getContainer().off( '.' + this.widgetName );
 
+			// eslint-disable-next-line jquery/no-each-util
 			$.each( this._buttons, function ( buttonName, $button ) {
 				$button.off( '.' + self.widgetName );
 				wbtooltip = $button.data( 'wbtooltip' );
@@ -152,7 +153,7 @@
 		checkRequiredMethods: function () {
 			var self = this,
 				missingMethods = [];
-			$.each( this._requiredMethods, function ( i, methodName ) {
+			this._requiredMethods.forEach( function ( methodName ) {
 				if ( typeof self._controller[ methodName ] !== 'function' ) {
 					missingMethods.push( methodName );
 				}
@@ -190,6 +191,7 @@
 
 			$subToolbar.children( '.wikibase-toolbar-button' ).each( function () {
 				var $button = $( this );
+				// eslint-disable-next-line jquery/no-each-util
 				$.each( self.options.buttonLabels, function ( buttonName, label ) {
 					if ( $button.text() === label ) {
 						self._buttons[ buttonName ] = $button.toolbarbutton( {

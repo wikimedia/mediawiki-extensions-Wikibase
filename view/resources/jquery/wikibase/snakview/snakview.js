@@ -177,7 +177,7 @@
 			} else if ( key === 'locked' && typeof value === 'boolean' ) {
 				var locked = value;
 				value = $.extend( {}, $.wikibase.snakview.prototype.options.locked );
-				$.each( $.wikibase.snakview.prototype.options.locked, function ( k, v ) {
+				$.wikibase.snakview.prototype.options.locked.forEach( function ( v, k ) {
 					value[ k ] = locked;
 				} );
 			}
