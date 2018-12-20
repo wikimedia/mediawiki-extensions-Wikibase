@@ -61,13 +61,13 @@
 		);
 
 		assert.strictEqual(
-			$.inArray( sources[ 0 ], triggeredForSources ) !== -1,
+			triggeredForSources.indexOf( sources[ 0 ] ) !== -1,
 			true,
 			'Handler was called for first source.'
 		);
 
 		assert.strictEqual(
-			$.inArray( sources[ 1 ], triggeredForSources ) !== -1,
+			triggeredForSources.indexOf( sources[ 1 ] ) !== -1,
 			true,
 			'Handler was called for second source.'
 		);
