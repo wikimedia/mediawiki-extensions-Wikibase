@@ -13,6 +13,7 @@
 	 */
 	function getSiteIdsOfGroup( group ) {
 		var siteIds = [];
+		// eslint-disable-next-line jquery/no-each-util
 		$.each( wb.sites.getSitesOfGroup( group ), function ( siteId, site ) {
 			siteIds.push( siteId );
 		} );

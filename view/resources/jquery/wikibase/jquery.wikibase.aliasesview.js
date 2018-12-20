@@ -94,7 +94,7 @@
 
 				this.$list.empty();
 
-				$.each( this.options.value.getTexts(), function ( index, text ) {
+				this.options.value.getTexts().forEach( function ( text ) {
 					self.$list.append( mw.wbTemplate( 'wikibase-aliasesview-list-item', text ) );
 				} );
 			}

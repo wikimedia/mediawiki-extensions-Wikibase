@@ -25,6 +25,7 @@
 		 * @param {jQuery} $subject
 		 */
 		function checkShortCuts( templateShortCuts, $subject ) {
+			// eslint-disable-next-line jquery/no-each-util
 			$.each( templateShortCuts, function ( key, selector ) {
 				assert.ok(
 					$subject.data( 'TemplatedWidget' )[ key ] instanceof $,

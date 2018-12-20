@@ -91,7 +91,7 @@
 				self = this;
 
 			// template params which are functions are callbacks to be called in the widget's context
-			$.each( this.options.templateParams, function ( i, value ) {
+			this.options.templateParams.forEach( function ( value ) {
 				if ( typeof value === 'function' ) {
 					value = value.call( self );
 				}
