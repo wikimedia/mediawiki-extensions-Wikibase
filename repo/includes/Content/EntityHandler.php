@@ -34,7 +34,6 @@ use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
-use Wikimedia\Assert\Assert;
 use WikiPage;
 
 /**
@@ -441,14 +440,7 @@ abstract class EntityHandler extends ContentHandler {
 	final public function getEntityNamespace() {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		$ns = $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
-
-		Assert::postcondition(
-			$ns !== null,
-			'Namespace for entity type ' . $this->getEntityType() . ' must be defined!'
-		);
-
-		return $ns;
+		return $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
 	}
 
 	/**

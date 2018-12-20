@@ -7,7 +7,6 @@ use MediaWiki\Storage\NameTableStore;
 use stdClass;
 use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -80,13 +79,6 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 			$entityType = $entityId->getEntityType();
 			$slotRole = $this->entityNamespaceLookup->getEntitySlotRole( $entityType );
 			$namespace = $this->entityNamespaceLookup->getEntityNamespace( $entityType );
-
-			if ( $namespace === null ) {
-				throw new EntityLookupException(
-					$entityId,
-					"No namespace configured for entity type `$entityType`"
-				);
-			}
 
 			$conditions = $this->getConditionForEntityId( $entityId );
 			$conditions['page_namespace'] = $namespace;
