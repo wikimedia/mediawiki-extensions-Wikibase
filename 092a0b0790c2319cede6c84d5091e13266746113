@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11ceec70_e0d3c871",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-20T12:17:31Z",
+      "side": 1,
+      "message": "\"by\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 35,
+        "endLine": 23,
+        "endChar": 38
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c121d4_cb498cf4",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-20T12:17:31Z",
+      "side": 1,
+      "message": "Are there no scenarios whatsoever where this would be unacceptable? Like (completely hypothetical) validation based on its value right after a change?",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 110
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6cfdf89_af104321",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2018-12-20T12:17:31Z",
+      "side": 1,
+      "message": "Which steps are taken to ensure the new keys don\u0027t (all) wind up on the same instance?",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
