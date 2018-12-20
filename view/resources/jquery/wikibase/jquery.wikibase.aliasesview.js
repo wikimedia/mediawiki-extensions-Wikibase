@@ -207,7 +207,7 @@
 
 			return new wb.datamodel.MultiTerm(
 				this.options.value.getLanguageCode(),
-				$.map( tagadata.getTags(), function ( tag ) {
+				tagadata.getTags().map( function ( tag ) {
 					return tagadata.getTagLabel( $( tag ) );
 				} )
 			);
