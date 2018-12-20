@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -51,11 +50,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		if ( !$this->data ) {
 			global $wgUser;
-
-			$this->mergeMwGlobalArrayValue(
-				'wgWBRepoSettings',
-				[ 'entityNamespaces' => [ 'item' => 120, 'property' => 122 ] ]
-			);
 
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			for ( $i = 0; $i < 3; $i++ ) {
@@ -329,11 +323,14 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
 
-		$this->setExpectedException( EntityLookupException::class );
-		$metaDataLookup->loadRevisionInformation(
+		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
+		$result = $metaDataLookup->loadRevisionInformation(
 			[ $entityId ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
+		\Wikimedia\restoreWarnings();
+
+		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
 	}
 
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationThrowsException() {
@@ -488,11 +485,14 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
 
-		$this->setExpectedException( EntityLookupException::class );
+		\Wikimedia\suppressWarnings(); // suppress warning about entity type with no known namespace
 		$result = $metaDataLookup->loadLatestRevisionIds(
 			[ $entityId ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
+		\Wikimedia\restoreWarnings();
+
+		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
 	}
 
 	public function testLoadLatestRevisionIds_noResultForRedirect() {
