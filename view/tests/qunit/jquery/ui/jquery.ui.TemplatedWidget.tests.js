@@ -25,7 +25,7 @@
 		 * @param {jQuery} $subject
 		 */
 		function checkShortCuts( templateShortCuts, $subject ) {
-			$.each( templateShortCuts, function ( key, selector ) {
+			templateShortCuts.forEach( function ( key, selector ) {
 				assert.ok(
 					$subject.data( 'TemplatedWidget' )[ key ] instanceof $,
 					'Assigned templateShortCut: ' + key + '.'

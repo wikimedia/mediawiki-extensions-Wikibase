@@ -609,7 +609,7 @@
 		);
 
 		function testPropertyLabelVisibility( assert, snaklistview ) {
-			$.each( snaklistview._listview.items(), function ( i, snakviewNode ) {
+			snaklistview._listview.items().forEach( function ( i, snakviewNode ) {
 				var $snakview = $( snakviewNode ),
 					snakview = snaklistview._lia.liInstance( $snakview );
 

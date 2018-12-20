@@ -197,7 +197,7 @@
 			var self = this,
 				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
 
-			$.each( wb.datamodel.Statement.RANK, function ( rankName, rank ) {
+			wb.datamodel.Statement.RANK.forEach( function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 
 				$menu.append(

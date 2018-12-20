@@ -20,7 +20,7 @@
 
 			var newClasses = '';
 
-			$.each( subject.attr( 'class' ).split( /\s+/ ), function ( i, className ) {
+			subject.attr( 'class' ).split( /\s+/ ).forEach( function ( i, className ) {
 				// check for each class whether it matches...
 				if ( !className.match( classNameRegex ) ) {
 					// ...if not, we re-add it

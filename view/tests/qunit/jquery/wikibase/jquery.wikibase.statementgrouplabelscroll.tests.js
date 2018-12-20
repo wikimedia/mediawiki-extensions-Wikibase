@@ -25,7 +25,7 @@
 
 	QUnit.module( 'jquery.wikibase.statementgrouplabelscroll', {
 		afterEach: function () {
-			$.each( StatementGroupLabelScrollWidget.activeInstances(), function ( i, instance ) {
+			StatementGroupLabelScrollWidget.activeInstances().forEach( function ( i, instance ) {
 				instance.destroy();
 				instance.element.remove();
 			} );

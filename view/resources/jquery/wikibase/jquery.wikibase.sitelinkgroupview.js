@@ -13,7 +13,7 @@
 	 */
 	function getSiteIdsOfGroup( group ) {
 		var siteIds = [];
-		$.each( wb.sites.getSitesOfGroup( group ), function ( siteId, site ) {
+		wb.sites.getSitesOfGroup( group ).forEach( function ( siteId, site ) {
 			siteIds.push( siteId );
 		} );
 		return siteIds;

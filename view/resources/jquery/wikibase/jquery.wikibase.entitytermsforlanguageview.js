@@ -125,7 +125,7 @@
 		_createWidgets: function () {
 			var self = this;
 
-			$.each( [ 'label', 'description', 'aliases' ], function ( i, subjectName ) {
+			[ 'label', 'description', 'aliases' ].forEach( function ( i, subjectName ) {
 				var widgetName = subjectName + 'view';
 
 				self[ '$' + widgetName ] = self[ '$' + subjectName ].children( '.wikibase-' + widgetName );
