@@ -51,7 +51,9 @@
 			fooView = {},
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
-		$dom.data = sinon.spy( function () { return fooView; } );
+		$dom.data = sinon.spy( function () {
+			return fooView;
+		} );
 
 		var res = viewFactory.getEntityView( null, getEntityStub( 'foo' ), $dom );
 
@@ -306,7 +308,13 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( null, entityId, function () { return statement; } );
+		viewFactory.getListItemAdapterForStatementView(
+			null,
+			entityId,
+			function () {
+				return statement;
+			}
+		);
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
