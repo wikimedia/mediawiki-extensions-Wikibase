@@ -52,7 +52,7 @@
 			 * @see wikibase.store.EntityStore.get
 			 */
 			get: function ( entityId ) {
-				return asyncFallback( entityId, $.map( this._stores, function ( store ) {
+				return asyncFallback( entityId, this._stores.map( function ( store ) {
 					return function ( entityId ) {
 						return store.get( entityId );
 					};
