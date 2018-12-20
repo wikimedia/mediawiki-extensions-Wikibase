@@ -45,7 +45,6 @@
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
 		"jquery/no-trim": "off",
-		"jquery/no-in-array": "off",
 		"max-statements-per-line": "off"
 	},
 	"plugins": [
