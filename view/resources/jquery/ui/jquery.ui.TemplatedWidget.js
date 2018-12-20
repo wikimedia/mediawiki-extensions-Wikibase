@@ -92,7 +92,7 @@
 
 			// template params which are functions are callbacks to be called in the widget's context
 			$.each( this.options.templateParams, function ( i, value ) {
-				if ( $.isFunction( value ) ) {
+				if ( typeof value === 'function' ) {
 					value = value.call( self );
 				}
 				templateParams.push( value );
@@ -216,7 +216,7 @@
 
 			this.element[ this.options.encapsulate ? 'triggerHandler' : 'trigger' ]( event, data );
 			return !(
-				$.isFunction( callback )
+				typeof callback === 'function'
 					&& callback.apply( this.element[ 0 ], [ event ].concat( data ) ) === false
 				|| event.isDefaultPrevented()
 			);
