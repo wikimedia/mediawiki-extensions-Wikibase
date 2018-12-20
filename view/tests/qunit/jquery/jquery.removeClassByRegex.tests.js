@@ -41,6 +41,12 @@
 			'bbb dddd e',
 			'removed all classes with numbers in it (from a clone)'
 		);
+
+		assert.strictEqual(
+			$( '<div>' ).removeClassByRegex( /foo/ ).attr( 'class' ),
+			undefined,
+			'jQuery.removeClassByRegex() does not add the attribut class when not present'
+		);
 	} );
 
 	QUnit.test( 'Multiple elements', function ( assert ) {
