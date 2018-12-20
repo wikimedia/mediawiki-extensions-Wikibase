@@ -35,8 +35,8 @@
 	}
 
 	function unregisterWidgetInstance( instance ) {
-		var index = $.inArray( instance );
-		if ( index ) {
+		var index = activeInstances.indexOf( instance );
+		if ( index !== -1 ) {
 			activeInstances.splice( index, 1 );
 		}
 		if ( activeInstances.length === 0 ) {
