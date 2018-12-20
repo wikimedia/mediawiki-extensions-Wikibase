@@ -566,7 +566,7 @@
 			var deferred = $.Deferred(),
 				matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
-			deferred.resolve( $.grep( source, function ( item ) {
+			deferred.resolve( source.filter( function ( item ) {
 				if ( item.aliases ) {
 					for ( var i = 0; i < item.aliases.length; i++ ) {
 						if ( matcher.test( item.aliases[ i ] ) ) {
