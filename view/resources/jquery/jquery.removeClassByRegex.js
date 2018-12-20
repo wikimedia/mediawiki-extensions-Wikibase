@@ -18,18 +18,16 @@
 				return;
 			}
 
-			var newClasses = '';
-
-			$.each( subject.attr( 'class' ).split( /\s+/ ), function ( i, className ) {
-				// check for each class whether it matches...
-				if ( !className.match( classNameRegex ) ) {
-					// ...if not, we re-add it
-					newClasses += ' ' + className;
-				}
+			// Replace classes
+			subject.attr( 'class', function ( index, classes ) {
+				return classes
+					.split( /\s+/ )
+					.filter( function ( className ) {
+						// Check for each class whether it matches the regexp
+						return !classNameRegex.test( className );
+					} )
+					.join( ' ' );
 			} );
-
-			// override classes:
-			subject.attr( 'class', $.trim( newClasses ) );
 		} );
 
 		return this;
