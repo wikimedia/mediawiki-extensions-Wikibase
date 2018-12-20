@@ -240,11 +240,11 @@
 		_fillMenu: function () {
 			var self = this,
 				deferred = $.Deferred(),
-				badgeIds = $.map( this.options.badges, function ( cssClasses, itemId ) {
+				badgeIds = this.options.badges.map( function ( cssClasses, itemId ) {
 					return itemId;
 				} );
 
-			$.when.apply( $, $.map( badgeIds, function ( badgeId ) {
+			$.when.apply( $, badgeIds.map( function ( badgeId ) {
 				return self.options.entityIdPlainFormatter.format( badgeId );
 			} ) ).done( function ( /* … */ ) {
 				var badgeLabels = arguments;
