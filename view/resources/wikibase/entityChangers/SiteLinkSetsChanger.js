@@ -49,7 +49,7 @@
 				var removedSiteLinkIds = [];
 
 				oldSiteLinkSet.each( function ( siteId ) {
-					if ( $.inArray( siteId, currentSiteIds ) === -1 ) {
+					if ( currentSiteIds.indexOf( siteId ) === -1 ) {
 						removedSiteLinkIds.push( siteId );
 					}
 				} );
