@@ -117,7 +117,7 @@
 		 * @return {wikibase.datamodel.StatementGroup[]}
 		 */
 		_statementGroupSetToStatementGroups: function ( statementGroupSet ) {
-			return $.map( statementGroupSet.getKeys(), function ( propertyId ) {
+			return statementGroupSet.getKeys().map( function ( propertyId ) {
 				return statementGroupSet.getItemByKey( propertyId );
 			} );
 		},

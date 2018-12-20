@@ -181,7 +181,7 @@
 						};
 					}
 				} ),
-				value: $.map( this.options.userLanguages, function ( lang ) {
+				value: this.options.userLanguages.map( function ( lang ) {
 					return self._getValueForLanguage( lang );
 				} ),
 				listItemNodeName: 'TR'
