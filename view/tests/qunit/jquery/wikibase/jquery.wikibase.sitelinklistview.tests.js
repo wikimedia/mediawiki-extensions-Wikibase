@@ -18,7 +18,9 @@
 					function () {
 						this.$siteId = $( '<div/>' );
 						this.focus = function () {};
-						this.isEmpty = function () { return !this.options.value; };
+						this.isEmpty = function () {
+							return !this.options.value;
+						};
 						this.startEditing = function () {};
 						this.value = function () {
 							return this.options.value;
