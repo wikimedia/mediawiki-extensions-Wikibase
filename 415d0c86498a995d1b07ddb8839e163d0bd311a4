@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4aaa8759_106ad740",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-20T17:38:43Z",
+      "side": 1,
+      "message": "\"Broken\" how? The commit message sounds like there was never an unregistration done. But when I look at the code it seems the opposite is true: the code tried to unregister stuff with the index -1.\n\nIf this is true, can you please reword the commit message accordingly?",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "415d0c86498a995d1b07ddb8839e163d0bd311a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
