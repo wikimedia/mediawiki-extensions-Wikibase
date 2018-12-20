@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "158f9c2d_0534a4d3",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-20T12:23:32Z",
+      "side": 1,
+      "message": "Will fix",
+      "parentUuid": "11ceec70_e0d3c871",
+      "range": {
+        "startLine": 23,
+        "startChar": 35,
+        "endLine": 23,
+        "endChar": 38
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b7c121d4_cb498cf4",
         "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "725bbcd6_80a8919c",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-20T12:23:32Z",
+      "side": 1,
+      "message": "So the table doesn\u0027t include info about constraints or anything used for validation.\nThe things held are property ID, type, and the formatterUrl.\nEven if these are a few minutes out of date we won\u0027t hit any issues.\nThe creation is the case to think about the most as if a user creates a property, they may not be able to fully use it for the short amount of time the data is cached on the app server. But again this is low risk as the property creation process is slow and well controlled and properties are generally not used immediately after being created.",
+      "parentUuid": "b7c121d4_cb498cf4",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 110
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e6cfdf89_af104321",
         "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-12-20T12:17:31Z",
       "side": 1,
       "message": "Which steps are taken to ensure the new keys don\u0027t (all) wind up on the same instance?",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fc193ec_14bc290a",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2018-12-20T12:23:32Z",
+      "side": 1,
+      "message": "So, there would be no actual steps in place to stop the keys from landing on the same host as the chance of that happening would be very low when talking about ~2000 keys.\nEven if 90% of the keys landed on the same host, the different access pattern (per key rather than all of the data) would mean we don\u0027t get the high read data traffic either.",
+      "parentUuid": "e6cfdf89_af104321",
       "range": {
         "startLine": 37,
         "startChar": 17,
