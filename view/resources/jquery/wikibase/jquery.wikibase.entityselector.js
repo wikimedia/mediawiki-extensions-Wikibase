@@ -17,7 +17,7 @@
 	 */
 	var IS_MODULE_LOADED = (
 		IS_MW_CONTEXT
-		&& $.inArray( 'jquery.wikibase.entityselector', mw.loader.getModuleNames() ) !== -1
+		&& mw.loader.getModuleNames().indexOf( 'jquery.wikibase.entityselector' ) !== -1
 	);
 
 	/**
