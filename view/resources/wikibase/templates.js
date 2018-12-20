@@ -127,7 +127,9 @@
 	 *
 	 * @constructor
 	 */
-	mw.WbTemplate = function () { mw.Message.apply( this, arguments ); };
+	mw.WbTemplate = function () {
+		mw.Message.apply( this, arguments );
+	};
 	mw.WbTemplate.prototype = $.extend(
 		{},
 		mw.Message.prototype,
