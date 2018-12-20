@@ -300,7 +300,10 @@
 						getSiteLinkRemover: function ( $dom, title ) {
 							return self._structureEditorFactory.getRemover(
 								function () {
-									return startEditingCallback().then( function () { return removeCallback( view ); } );
+									return startEditingCallback()
+										.then( function () {
+											return removeCallback( view );
+										} );
 								},
 								$dom,
 								title
@@ -619,7 +622,10 @@
 				drawProperty: drawProperty,
 				getSnakRemover: removeCallback ? function ( $dom ) {
 					return structureEditorFactory.getRemover( function () {
-						return startEditingCallback().then( function () { return removeCallback( view ); } );
+						return startEditingCallback()
+							.then( function () {
+								return removeCallback( view );
+							} );
 					}, $dom );
 				} : null
 			}
