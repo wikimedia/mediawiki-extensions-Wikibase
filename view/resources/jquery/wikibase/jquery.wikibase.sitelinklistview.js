@@ -243,7 +243,7 @@
 			} );
 
 			return this.option( 'allowedSiteIds' ).filter( function ( siteId ) {
-				return $.inArray( siteId, representedSiteIds ) === -1;
+				return representedSiteIds.indexOf( siteId ) === -1;
 			} );
 		},
 
