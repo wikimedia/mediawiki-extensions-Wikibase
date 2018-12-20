@@ -184,7 +184,7 @@
 			mw.wbTemplates.store.set( key, template );
 
 			var paramMessage = '';
-			$.each( params, function ( i, param ) {
+			params.forEach( function ( param, i ) {
 				if ( i > 0 ) {
 					paramMessage += ', ';
 				}
@@ -215,9 +215,10 @@
 		};
 
 		// Loop through testsData and params to run the tests
-		$.each( testsData, function ( numberOfParams, testData ) {
+		testsData.forEach( function ( testData, numberOfParams ) {
+			// eslint-disable-next-line jquery/no-each-util
 			$.each( testData, function ( template, expectedResults ) {
-				$.each( params[ numberOfParams ], function ( i, params ) {
+				params[ numberOfParams ].forEach( function ( params, i ) {
 					verifyTemplate( params, template, expectedResults[ i ] );
 				} );
 			} );

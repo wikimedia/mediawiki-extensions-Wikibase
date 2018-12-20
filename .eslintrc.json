@@ -47,7 +47,6 @@
 		"jquery/no-trim": "off",
 		"jquery/no-in-array": "off",
 		"jquery/no-map-util": "off",
-		"jquery/no-each-util": "off",
 		"max-statements-per-line": "off"
 	},
 	"plugins": [
