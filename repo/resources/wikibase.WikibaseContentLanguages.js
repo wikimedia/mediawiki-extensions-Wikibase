@@ -38,9 +38,7 @@
 		getAll: function () {
 			// Cache language codes
 			if ( !this._languageCodes && this._languageMap ) {
-				this._languageCodes = $.map( this._languageMap, function ( val, key ) {
-					return key;
-				} );
+				this._languageCodes = Object.keys( this._languageMap );
 				this._languageCodes = this._languageCodes.filter( function ( code ) {
 					// Make sure this is a subset of the language codes returned by
 					// WikibaseRepo::getMonolingualTextLanguages
