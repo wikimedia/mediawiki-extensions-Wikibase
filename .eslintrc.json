@@ -43,8 +43,7 @@
 		"one-var": "off",
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off",
-		"max-statements-per-line": "off"
+		"vars-on-top": "off"
 	},
 	"plugins": [
 		"compat"
