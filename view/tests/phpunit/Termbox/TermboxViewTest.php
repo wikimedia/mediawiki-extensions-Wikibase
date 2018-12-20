@@ -31,13 +31,14 @@ class TermboxViewTest extends TestCase {
 		$language = 'en';
 		$entityId = new ItemId( 'Q42' );
 		$editLinkUrl = '/edit/Q42';
+		$canEdit = true;
 
 		$response = 'termbox says hi';
 
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->with( $entityId, $language, $editLinkUrl )
+			->with( $entityId, $language, $editLinkUrl, $canEdit )
 			->willReturn( $response );
 
 		$this->assertSame(
