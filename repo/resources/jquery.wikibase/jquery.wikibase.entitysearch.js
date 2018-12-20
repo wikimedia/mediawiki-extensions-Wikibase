@@ -66,7 +66,7 @@
 			if ( key === 'suggestionsPlaceholder' ) {
 				var customItems = this.options.menu.option( 'customItems' );
 
-				customItems.splice( $.inArray( this.options.suggestionsPlaceholder, customItems ), 1 );
+				customItems.splice( customItems.indexOf( this.options.suggestionsPlaceholder ), 1 );
 
 				if ( value instanceof $.ui.ooMenu.CustomItem ) {
 					customItems.unshift( value );
