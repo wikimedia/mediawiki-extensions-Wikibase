@@ -12,24 +12,18 @@
 	 * @return {jQuery}
 	 */
 	$.fn.removeClassByRegex = function ( classNameRegex ) {
-		this.each( function () {
-			var subject = $( this );
-			if ( !subject.attr( 'class' ) ) {
+		this.attr( 'class', function ( index, classes ) {
+			if ( !classes ) {
+				// If nothing is returned the current value is not changed.
 				return;
 			}
-
-			var newClasses = '';
-
-			$.each( subject.attr( 'class' ).split( /\s+/ ), function ( i, className ) {
-				// check for each class whether it matches...
-				if ( !className.match( classNameRegex ) ) {
-					// ...if not, we re-add it
-					newClasses += ' ' + className;
-				}
-			} );
-
-			// override classes:
-			subject.attr( 'class', $.trim( newClasses ) );
+			return classes
+				.split( /\s+/ )
+				.filter( function ( className ) {
+					// Check for each class whether it matches the regexp.
+					return !classNameRegex.test( className );
+				} )
+				.join( ' ' );
 		} );
 
 		return this;
