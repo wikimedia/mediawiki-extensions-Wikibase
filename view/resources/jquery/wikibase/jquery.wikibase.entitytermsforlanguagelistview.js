@@ -204,7 +204,7 @@
 
 			var $moreLanguagesButton = $( '<a/>' )
 				.attr( 'href', '#' )
-				.click( $.proxy( this._onMoreLanguagesButtonClicked, this ) );
+				.click( this._onMoreLanguagesButtonClicked.bind( this ) );
 			this._toggleMoreLanguagesButton( $moreLanguagesButton );
 
 			this.$entitytermsforlanguagelistviewMore = $( '<div/>' )

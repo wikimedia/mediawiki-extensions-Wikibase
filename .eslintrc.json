@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"extends": "wikimedia/client",
+	"extends": ["wikimedia/client", "wikimedia/jquery"],
 	"env": {
 		"browser": true
 	},
@@ -45,7 +45,6 @@
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
-		"jquery/no-proxy": "off",
 		"jquery/no-trim": "off",
 		"jquery/no-grep": "off",
 		"jquery/no-is-function": "off",
