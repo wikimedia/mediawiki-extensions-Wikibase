@@ -29,7 +29,7 @@
 			} );
 
 			// override classes:
-			subject.attr( 'class', $.trim( newClasses ) );
+			subject.attr( 'class', newClasses.trim() );
 		} );
 
 		return this;
