@@ -197,6 +197,7 @@
 			var self = this,
 				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
 
+			// eslint-disable-next-line jquery/no-each-util
 			$.each( wb.datamodel.Statement.RANK, function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 

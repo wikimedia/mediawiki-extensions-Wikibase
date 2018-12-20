@@ -609,6 +609,7 @@
 		);
 
 		function testPropertyLabelVisibility( assert, snaklistview ) {
+			// eslint-disable-next-line jquery/no-each-util
 			$.each( snaklistview._listview.items(), function ( i, snakviewNode ) {
 				var $snakview = $( snakviewNode ),
 					snakview = snaklistview._lia.liInstance( $snakview );

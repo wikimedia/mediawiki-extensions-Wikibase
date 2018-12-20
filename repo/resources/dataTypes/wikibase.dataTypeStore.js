@@ -9,9 +9,10 @@ wikibase.dataTypeStore = ( function ( wb ) {
 	var dataTypeStore = new wb.dataTypes.DataTypeStore(),
 		dataTypeDefinitions = mw.config.get( 'wbDataTypes' ) || {};
 
+	// eslint-disable-next-line jquery/no-each-util
 	$.each( dataTypeDefinitions, function ( dtTypeId, dtDefinition ) {
 		dataTypeStore.registerDataType( wb.dataTypes.DataType.newFromJSON( dtTypeId, dtDefinition ) );
-	} );
+	});
 
 	return dataTypeStore;
 

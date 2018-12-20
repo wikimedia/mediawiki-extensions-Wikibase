@@ -369,7 +369,8 @@
 
 			$.when.apply( $, hookResults ).then( function () {
 
-				$.each( arguments, function ( key, data ) {
+				var args = Array.prototype.slice.call( arguments );
+				args.forEach( function ( data ) {
 					result = data.concat( result );
 				} );
 
