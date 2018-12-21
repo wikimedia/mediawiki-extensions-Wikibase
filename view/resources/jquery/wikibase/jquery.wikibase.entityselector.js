@@ -362,6 +362,9 @@
 					if ( item1.rating < item2.rating ) {
 						return 1;
 					}
+					if ( item1.rating === item2.rating ) {
+						return 0;
+					}
 					return -1;
 				};
 
