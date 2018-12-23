@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2f3817e2_d3dc59f6",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T22:18:19Z",
+      "side": 1,
+      "message": "Do we specify which Markdown flavor our ADRs use? The original Markdown implementation would cause this to result in an emphasized “property” word (surrounded by “wb” and “info” with no visible separator), whereas in CommonMark it’s a single word [1], “wb_property_info” (as intended).\n\nThe safest option would be to wrap this in backticks, which would look good anyways IMHO.\n\n[1]: https://spec.commonmark.org/0.28/#example-341",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 58
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11ceec70_e0d3c871",
         "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
         "patchSetId": 1
@@ -96,6 +119,53 @@
     },
     {
       "key": {
+        "uuid": "8c6c09ab_734d1449",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T22:18:19Z",
+      "side": 1,
+      "message": "Well, the property creator typically imports usage examples from the property proposal to the property once it’s been created, I believe, which includes using that property (usually as a qualifier).",
+      "parentUuid": "725bbcd6_80a8919c",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 110
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93e036f3_5bafb64d",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T22:18:19Z",
+      "side": 1,
+      "message": "I would definitely support this option – we could still add an in-process cache to this, too, and it wouldn’t suffer from being stale as much as the all-properties-at-once cache does (since property type *changes* are extremely rare, and using outdated formatter URLs doesn’t matter as much because we don’t even bother purging pages using old formatter URLs from Varnish).\n\nPerhaps an explanation could be added to the ADR why this option was not implemented right away? It seems more natural to me than the additional in-process cache. (My guess would be that the in-process cache was chosen because it it a simpler code change.)",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e6cfdf89_af104321",
         "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
         "patchSetId": 1
@@ -131,6 +201,30 @@
       "side": 1,
       "message": "So, there would be no actual steps in place to stop the keys from landing on the same host as the chance of that happening would be very low when talking about ~2000 keys.\nEven if 90% of the keys landed on the same host, the different access pattern (per key rather than all of the data) would mean we don\u0027t get the high read data traffic either.",
       "parentUuid": "e6cfdf89_af104321",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "227f9175_41f9dbe8",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T22:18:19Z",
+      "side": 1,
+      "message": "Just to clarify – I infer from this that cache keys are randomly distributed across servers, based on something like the key’s hash, correct?",
+      "parentUuid": "9fc193ec_14bc290a",
       "range": {
         "startLine": 37,
         "startChar": 17,
