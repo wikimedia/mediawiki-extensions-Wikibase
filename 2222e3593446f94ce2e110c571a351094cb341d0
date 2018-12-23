@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ea3fe0bd_47ce6b46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T21:36:23Z",
+      "side": 1,
+      "message": "If we ever ascend to ES6 level (either by dropping compatibility with older browsers or by using a transpiler), we can probably replace most of this with plain for...of loops.",
+      "range": {
+        "startLine": 12,
+        "startChar": 44,
+        "endLine": 15,
+        "endChar": 35
+      },
+      "revId": "2222e3593446f94ce2e110c571a351094cb341d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e3d9433_b124eabe",
         "filename": "view/resources/jquery/wikibase/snakview/snakview.SnakTypeSelector.js",
         "patchSetId": 5
@@ -30,6 +53,24 @@
       "writtenOn": "2018-12-23T21:34:21Z",
       "side": 1,
       "message": "Alternative suggestion:\n\n Object.keys( $.wikibase.snakview.prototype.options.locked ).forEach( function( k ) {\n\nObject.keys() is apparently supported in all browsers (IE9, Firefox 4, …), and I feel like this makes it more explicit that we don’t care about the values, instead of having to check the function body for occurrences of v. That said, the function body is a single statement, so it doesn’t matter that much :)",
+      "revId": "2222e3593446f94ce2e110c571a351094cb341d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f44350ee_3f86a7ed",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T21:36:23Z",
+      "side": 1,
+      "message": "Actually, I guess this could use a plain for...in loop?\n\n for ( var k in $.wikibase.snakview.prototype.options.locked ) {\n     value[ k ] \u003d locked;\n }",
+      "parentUuid": "bf344169_97080170",
       "revId": "2222e3593446f94ce2e110c571a351094cb341d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
