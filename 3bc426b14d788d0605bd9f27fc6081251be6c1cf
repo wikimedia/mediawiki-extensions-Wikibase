@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57d0ade6_84fb4c80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T21:24:19Z",
+      "side": 1,
+      "message": "missing right parenthesis",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "3bc426b14d788d0605bd9f27fc6081251be6c1cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "148babe6_742ac2f6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.aliasesview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T21:24:19Z",
+      "side": 1,
+      "message": "I’m sorry, I don’t understand why this can’t use the regular map function. Does tagadata.getTags() not return an array of tags?",
+      "revId": "3bc426b14d788d0605bd9f27fc6081251be6c1cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
