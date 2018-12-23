@@ -22,6 +22,30 @@
       "revId": "415d0c86498a995d1b07ddb8839e163d0bd311a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "577f9637_47b119fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2018-12-23T22:00:27Z",
+      "side": 1,
+      "message": "I think I interpret “broken” more generally than you do… to me it just means “didn’t work correctly”, so the commit message sounds accurate to me. However, I still think more detail could be added.\n\n\u003e But when I look at the code it seems the opposite is true: the code tried to unregister stuff with the index -1.\n\nWell, this, and it would also never have unregistered stuff with the index 0, since 0 is not “truthy”. That sounds like it could be a common case (though I haven’t looked at the code in detail to understand it).",
+      "parentUuid": "4aaa8759_106ad740",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "415d0c86498a995d1b07ddb8839e163d0bd311a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
