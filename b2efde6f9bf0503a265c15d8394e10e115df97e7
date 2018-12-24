@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24bc3bc4_ae538fbe",
+        "filename": "docs/json.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-12-24T09:00:39Z",
+      "side": 0,
+      "message": "I wonder why this was removed. As far as I\u0027m concerned this is correct and very much relevant for all users of time values.",
+      "range": {
+        "startLine": 425,
+        "startChar": 2,
+        "endLine": 425,
+        "endChar": 445
+      },
+      "revId": "b2efde6f9bf0503a265c15d8394e10e115df97e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
