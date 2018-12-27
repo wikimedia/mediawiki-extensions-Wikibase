@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "d92bcf30_63c2fed6",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-27T21:37:06Z",
+      "side": 1,
+      "message": "I think this is a little unclear… this suggests that the caching is being done in PHP itself solely, thus doesn\u0027t persist between web requests (which we also do, but that\u0027s not what this touches)",
+      "range": {
+        "startLine": 22,
+        "startChar": 23,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11ceec70_e0d3c871",
         "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
         "patchSetId": 1
@@ -66,6 +89,23 @@
         "endLine": 23,
         "endChar": 38
       },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e282da5c_98eb97d1",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-27T21:37:06Z",
+      "side": 1,
+      "message": "Do we maybe want to mention here why this was done (presumably because it was a trivial code change and we already do this in other places)?",
       "revId": "092a0b0790c2319cede6c84d5091e13266746113",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -131,6 +171,30 @@
       "side": 1,
       "message": "Well, the property creator typically imports usage examples from the property proposal to the property once it’s been created, I believe, which includes using that property (usually as a qualifier).",
       "parentUuid": "725bbcd6_80a8919c",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 110
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1e22cde_cba2d5b4",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-27T21:37:06Z",
+      "side": 1,
+      "message": "I guess this also means that newly deleted properties can still be used when creating new statements… but that should be a negligible problem also (properties are usually only deleted once they are basically unused)",
+      "parentUuid": "8c6c09ab_734d1449",
       "range": {
         "startLine": 28,
         "startChar": 38,
@@ -225,6 +289,30 @@
       "side": 1,
       "message": "Just to clarify – I infer from this that cache keys are randomly distributed across servers, based on something like the key’s hash, correct?",
       "parentUuid": "9fc193ec_14bc290a",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "092a0b0790c2319cede6c84d5091e13266746113",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47d962e7_a2e1eea5",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2018-12-27T21:37:06Z",
+      "side": 1,
+      "message": "\u003e Just to clarify – I infer from this that cache keys are randomly distributed across servers, based on something like the key’s hash, correct?\n\nYes.",
+      "parentUuid": "227f9175_41f9dbe8",
       "range": {
         "startLine": 37,
         "startChar": 17,
