@@ -81,5 +81,6 @@
 	"wikibase-otherprojects": "I andre projekter",
 	"wikibase-otherprojects-beta-message": "Andre projekter sidebar",
 	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data.",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Forbindelse|Forbindelser}} til {{WBREPONAME}}"
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Forbindelse|Forbindelser}} til {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Giv mig besked, når nogen forbinder en side som {{GENDER:|jeg oprettede}} til et {{WBREPONAME}}-emne."
 }
