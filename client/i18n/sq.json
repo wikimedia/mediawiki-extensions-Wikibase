@@ -7,11 +7,16 @@
 			"Bjakupi"
 		]
 	},
+	"wikibase-client-desc": "Klient për ekstensionin Wikibase",
 	"tooltip-t-wikibase": "Link deri tek artikulli i depos të të dhënave të lidhura",
 	"wikibase-comment-update": "Artikulli {{WBREPONAME}} u ndryshua",
 	"wikibase-dataitem": "Artikulli {{WBREPONAME}}",
 	"wikibase-editlinks": "Redakto lidhjet",
 	"wikibase-editlinkstitle": "Redakto lidhjet ndërgjuhësore",
+	"wikibase-addlinkstitle": "Shto lidhjet ndërgjuhësore",
+	"wikibase-linkitem-addlinks": "Shto lidhjet",
+	"wikibase-linkitem-close": "Mbyll dialogun dhe ringarko faqen",
+	"wikibase-linkitem-title": "Lidhu me faqen",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fshih",
 	"wikibase-rc-hide-wikidata-show": "Shfaq",

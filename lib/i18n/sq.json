@@ -2,9 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"GretaDoci",
-			"Liridon"
+			"Liridon",
+			"Arianit"
 		]
 	},
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-deletedentity-item": "Njësi e fshirë",
+	"wikibase-deletedentity-property": "Tipar i fshirë",
 	"wikibase-timedetails-time": "Koha",
 	"wikibase-timedetails-timezone": "Zona kohore:",
 	"wikibase-timedetails-calendar": "Kalendari",

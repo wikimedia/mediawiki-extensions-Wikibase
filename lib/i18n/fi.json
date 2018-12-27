@@ -63,7 +63,7 @@
 	"wikibase-validator-too-short": "Pitää olla vähintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen",
 	"wikibase-validator-no-such-entity": "$1 ei löydy",
 	"wikibase-validator-no-such-property": "Ominaisuutta $1 ei löydy",
-	"wikibase-validator-bad-url-scheme": "Ei-tuettu URL-järjestelmä: $1",
+	"wikibase-validator-bad-url-scheme": "URL-järjestelmä \"$1\" ei ole tuettu.",
 	"wikibase-validator-unknown-unit": "Tuntematon yksikkö: $1",
 	"wikibase-validator-not-allowed": "Virheellinen arvo: $1",
 	"wikibase-validator-no-validators": "Kielletty",
