@@ -1,6 +1,6 @@
 -- Adds a column to hold the full ID of the entity (a string, not only number part of the ID).
 
-ALTER TABLE wb_terms
+ALTER TABLE /*_*/wb_terms
 ADD COLUMN term_full_entity_id
 VARCHAR(32) DEFAULT NULL
 AFTER term_entity_id;
