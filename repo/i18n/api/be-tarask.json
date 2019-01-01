@@ -234,5 +234,10 @@
 	"apihelp-wbsetdescription-param-title": "Назва старонкі для злучэньня.\nУжывайце разам з <var>site</var>, каб зрабіць поўную спасылку на сайт.",
 	"apihelp-wbsetdescription-param-baserevid": "Лікавы ідэнтыфікатар вэрсіі, на якім будзе грунтавацца зьмена.\nВыкарыстоўваецца для вызначэньня канфліктаў пры захаваньні.",
 	"apihelp-wbsetdescription-param-summary": "Апісаньне рэдагаваньня.\nСьпераду будзе дададзены аўтаматычны камэнтар. Ліміт даўжыні аўтаматычнага камэнтару разам з апісаньнем — 260 сымбаляў. Памятайце, што ўсё, што перавышае гэты ліміт будзе сьцёртае.",
-	"apihelp-wbsetdescription-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}»."
+	"apihelp-wbsetdescription-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}».",
+	"apihelp-wbsetdescription-param-language": "Мова апісаньня",
+	"apihelp-wbsetdescription-param-value": "Значэньне для апісаньня",
+	"apihelp-wbsetdescription-example-1": "Усталяваць радок «<var>An encyclopedia that everyone can edit</var>» для старонкі з ідэнтыфікатарам «<samp>Q42</samp>» як апісаньне на ангельскай мове",
+	"apihelp-wbsetdescription-example-2": "Вызначае радок «<var>An encyclopedia that everyone can edit</var>» як апісаньне на ангельскай мове для старонкі з спасылкай на сайт <var>enwiki:Wikipedia</var>",
+	"apihelp-wbsetlabel-description": "Вызначае метку для аднаго элемэнту Вікібазы."
 }
