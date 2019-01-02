@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use RuntimeException;
 use User;
@@ -11,9 +12,14 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\TermsListView;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -146,6 +152,8 @@ class EntityViewPlaceholderExpander {
 				return $this->renderTermBox();
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
 				return $this->isInitiallyCollapsed() ? 'wikibase-initially-collapsed' : '';
+			case 'newtermbox':
+				return $this->renderNewTermbox();
 			default:
 				wfWarn( "Unknown placeholder: $name" );
 				return '(((' . htmlspecialchars( $name ) . ')))';
@@ -197,6 +205,29 @@ class EntityViewPlaceholderExpander {
 		}
 
 		return $termsListView->getListViewHtml( $contentHtml );
+	}
+
+	private function renderNewTermbox() {
+		$wb = WikibaseRepo::getDefaultInstance();
+
+		$renderer = new TermboxRemoteRenderer(
+			MediaWikiServices::getInstance()->getHttpRequestFactory(),
+			$wb->getSettings()->getSetting( 'ssrServerUrl' )
+		);
+		$linker = new RepoSpecialPageLinker();
+
+		$lanaguageFallbackChain = $wb->getLanguageFallbackChainFactory()
+			->newFromLanguage( $wb->getUserLanguage() ); // get from context directly
+
+		return $renderer->getContent(
+			$this->entity->getId(),
+			$this->termsLanguages[0],
+			$linker->getLink(
+				EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
+				[ $this->entity->getId()->getSerialization() ]
+			),
+			$lanaguageFallbackChain
+		);
 	}
 
 }
