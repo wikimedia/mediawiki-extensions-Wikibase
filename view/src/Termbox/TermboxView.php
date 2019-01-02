@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
@@ -50,6 +51,7 @@ class TermboxView implements CacheableEntityTermsView {
 		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	) {
+		return 'newtermbox';
 		try {
 			return $this->renderer->getContent(
 				$entityId,
@@ -79,7 +81,9 @@ class TermboxView implements CacheableEntityTermsView {
 		EntityDocument $entity,
 		$languageCode
 	) {
-		return [];
+		$inj = new TextInjector( [ 'newtermbox' => [ 'newtermbox' ] ] );
+		return [ 			'wikibase-view-chunks' =>
+			$inj->getMarkers() ];
 	}
 
 }
