@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acb9bd59_4974f0b5",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-01-02T16:40:53Z",
+      "side": 1,
+      "message": "\"Character which visually separates aliases of items and properties.\" maybe?",
+      "range": {
+        "startLine": 482,
+        "startChar": 30,
+        "endLine": 482,
+        "endChar": 91
+      },
+      "revId": "017cb7409eb8faff8d18f23d7b2907ecff8b3ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
