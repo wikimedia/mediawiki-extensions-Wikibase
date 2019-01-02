@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
-use MWException;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOp;
