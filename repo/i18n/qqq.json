@@ -87,6 +87,7 @@
 	"wikibase-aliases-edit-placeholder": "This is a generic text used as a placeholder while editing a new list of pipe-separated aliases.",
 	"wikibase-aliases-edit-placeholder-language-aware": "Like {{msg-mw|Wikibase-aliases-edit-placeholder}}, but language ($1) aware.",
 	"wikibase-aliases-edit-label": "Generic label for the \"aliases\" text field holding the pipe-separated aliases.",
+	"wikibase-aliases-separator": "Character which visually separates elements of the list of aliases for items as well as properties. See also wikibase-aliases-edit-label.",
 	"wikibase-content-language-edit-label": "Generic label for the \"language\" field.\n{{Identical|Language}}",
 	"wikibase-content-language-edit-not-recognized-language": "Error message shown when a user enters an unknown language code into a \"language\" field.\n\nSee also:\n* {{msg-mw|Wikibase-api-not-recognized-language}}",
 	"wikibase-diffview-reference": "Label within the header of a diff-operation on the entity diff view to describe that the diff-operation affects a reference. Will be shown as e.g. \"claim / property q1 / reference\".\n{{Identical|Reference}}",

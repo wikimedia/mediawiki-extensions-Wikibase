@@ -52,6 +52,7 @@
 	"wikibase-aliases-edit-placeholder": "enter some aliases",
 	"wikibase-aliases-edit-placeholder-language-aware": "enter some aliases in $1",
 	"wikibase-aliases-edit-label": "Aliases, pipe-separated:",
+	"wikibase-aliases-separator": "|",
 	"wikibase-content-language-edit-label": "Language:",
 	"wikibase-content-language-edit-not-recognized-language": "The supplied language code was not recognized.",
 	"wikibase-diffview-reference": "reference",
