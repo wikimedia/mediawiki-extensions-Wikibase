@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
-use MWException;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOp;
@@ -75,7 +74,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @note The return value is undefined before prepareArguments() has been called.
 	 *
 	 * @return null|EntityId
-	 * @throws \MWException
 	 */
 	protected function getEntityId() {
 		return $this->entityId;
