@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8903dc41_5a1351a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-02T16:16:12Z",
+      "side": 1,
+      "message": "This can happen, but not \"always\".\n\nFrom what I see now (thanks to Lucas\u0027 explanation) there are two issues:\n* The widget that was added first (at index 0) can never be unregistered.\n* When called with a widget that was never registered (or is unregistered already), the code will indeed remove the last array element.\n\nAll this is mostly hypothetical at this point. I believe the method is not even called in real-life situations, and if it is, it is only called with known widgets, which means the -1 situation never really happens.",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "92b942079fc9fffe1bca533ec22557a57731f5b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
