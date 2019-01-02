@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51800893_e62806ee",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-01-02T17:41:31Z",
+      "side": 1,
+      "message": "It\u0027s \"separator\" - two \"a\".",
+      "range": {
+        "startLine": 447,
+        "startChar": 17,
+        "endLine": 447,
+        "endChar": 26
+      },
+      "revId": "a46418f3e53918efb8b073b5d736ae67596c59ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
