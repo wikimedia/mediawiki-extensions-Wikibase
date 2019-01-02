@@ -22,6 +22,30 @@
       "revId": "92b942079fc9fffe1bca533ec22557a57731f5b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ed86a06_3d940a26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-01-02T16:24:05Z",
+      "side": 1,
+      "message": "No. The call to `$.inArray` was missing its second argument (i.e. the array to check) and thus always returned `-1`.\nUnless I\u0027m missing something?",
+      "parentUuid": "8903dc41_5a1351a9",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "92b942079fc9fffe1bca533ec22557a57731f5b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
