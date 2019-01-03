@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e15bdc56_ed5537d8",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-03T14:50:02Z",
+      "side": 1,
+      "message": "what if I don\u0027t have memcached in my system?\n\nis this about a default Wikibase wiring, which uses memcached when available and does not cache when not availabe? Or is about the WMF/Wikidata config?",
+      "revId": "a483b931530bec106b2c5ee4d958583db5d47d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
