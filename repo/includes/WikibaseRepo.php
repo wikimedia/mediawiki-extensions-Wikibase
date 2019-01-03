@@ -1871,6 +1871,7 @@ class WikibaseRepo {
 				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
 			),
 			$this->getKartographerEmbeddingHandler(),
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )
