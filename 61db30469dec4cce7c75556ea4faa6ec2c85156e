@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e78f1de9_366d1b4c",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-03T11:32:46Z",
+      "side": 1,
+      "message": "Visually separates elements where?\n\nAlso, if this message is only going to be used in the termbox git repo it might be a good idea to document that in this message, else people might think this message is un used in the future and remove it.",
+      "range": {
+        "startLine": 482,
+        "startChar": 46,
+        "endLine": 482,
+        "endChar": 73
+      },
+      "revId": "61db30469dec4cce7c75556ea4faa6ec2c85156e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
