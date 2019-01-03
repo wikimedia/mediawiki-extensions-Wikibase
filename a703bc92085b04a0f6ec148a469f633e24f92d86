@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d97d9f27_6726fd1c",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityParserOutputGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-03T09:11:48Z",
+      "side": 0,
+      "message": "to be super accurate, this class should also be renamed to be Full.... now",
+      "revId": "a703bc92085b04a0f6ec148a469f633e24f92d86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
