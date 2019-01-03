@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2c5bced_a857046c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-03T21:43:43Z",
+      "side": 1,
+      "message": "You have to adjust the message-key to wikibase-aliases-separator",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 55
+      },
+      "revId": "acc9ea3e264fa967246a6a66ab987d865e73c7c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc6ddd73_277e098f",
+        "filename": "view/resources/wikibase/view/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-03T21:43:43Z",
+      "side": 1,
+      "message": "You have to adjust the message-key to wikibase-aliases-separator",
+      "revId": "acc9ea3e264fa967246a6a66ab987d865e73c7c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "925cc324_296bfbcb",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-03T21:43:43Z",
+      "side": 1,
+      "message": "You have to adjust the message-key to wikibase-aliases-separator",
+      "revId": "acc9ea3e264fa967246a6a66ab987d865e73c7c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89d3d23a_73681a50",
+        "filename": "view/tests/phpunit/SimpleEntityTermsViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-03T21:43:43Z",
+      "side": 1,
+      "message": "You have to adjust the message-key to wikibase-aliases-separator",
+      "revId": "acc9ea3e264fa967246a6a66ab987d865e73c7c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
