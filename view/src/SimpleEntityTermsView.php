@@ -230,7 +230,8 @@ class SimpleEntityTermsView implements EntityTermsView {
 		foreach ( $aliases as $alias ) {
 			$aliasesHtml .= $this->templateFactory->render(
 				'wikibase-entitytermsview-aliases-alias',
-				htmlspecialchars( $alias )
+				htmlspecialchars( $alias ),
+				htmlspecialchars( $this->textProvider->get( 'wikibase-alias-separator' ) )
 			);
 		}
 
