@@ -46,7 +46,6 @@
 		"vars-on-top": "off",
 		"jquery/no-trim": "off",
 		"jquery/no-grep": "off",
-		"jquery/no-is-function": "off",
 		"jquery/no-in-array": "off",
 		"jquery/no-map-util": "off",
 		"jquery/no-each-util": "off",
