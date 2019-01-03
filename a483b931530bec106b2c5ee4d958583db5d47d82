@@ -16,6 +16,24 @@
       "revId": "a483b931530bec106b2c5ee4d958583db5d47d82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66acfe9b_f08164f5",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-01-03T17:25:41Z",
+      "side": 1,
+      "message": "It uses `wgMainCacheType` per default (`sharedCacheType` wikibase repo settings). This is `CACHE_NONE` in MediaWiki default.",
+      "parentUuid": "e15bdc56_ed5537d8",
+      "revId": "a483b931530bec106b2c5ee4d958583db5d47d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
