@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use HamcrestPHPUnitIntegration;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -34,6 +35,7 @@ use Wikibase\View\TermsListView;
  */
 class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+	use HamcrestPHPUnitIntegration;
 
 	private function getEntityTermsView( $editSectionCalls = 0, TermsListView $termsListView = null ) {
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
@@ -86,12 +88,21 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetHtml_containsAliases() {
+		$alias1 = '<ALIAS1>';
+		$alias2 = '<ALIAS2>';
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$aliasGroups = $this->getAliasGroupList( [ '<ALIAS1>', '<ALIAS2>' ] );
+		$aliasGroups = $this->getAliasGroupList( [ $alias1, $alias2 ] );
 		$html = $entityTermsView->getHtml( 'en', new TermList(), new TermList(), $aliasGroups, null );
 
-		$this->assertContains( '&lt;ALIAS1&gt;', $html );
-		$this->assertContains( '&lt;ALIAS2&gt;', $html );
+		$matchingAliasMarkup = tagMatchingOutline(
+			'<li class="wikibase-entitytermsview-aliases-alias" data-alias-separator="(wikibase-alias-separator)">'
+		);
+		$this->assertThatHamcrest( $html, is( htmlPiece(
+			both( havingChild( both( $matchingAliasMarkup )->andAlso( havingTextContents( $alias1 ) ) ) )
+				->andAlso(
+					havingChild( both( $matchingAliasMarkup )->andAlso( havingTextContents( $alias2 ) ) )
+				)
+		) ) );
 	}
 
 	public function entityFingerprintProvider() {

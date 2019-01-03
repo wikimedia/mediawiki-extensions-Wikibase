@@ -110,6 +110,7 @@ return call_user_func( function() {
 			],
 			'messages' => [
 				'wikibase-entitytermsview-input-help-message',
+				'wikibase-alias-separator',
 			]
 		],
 	];

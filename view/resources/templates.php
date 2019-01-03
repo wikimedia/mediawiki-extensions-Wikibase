@@ -192,7 +192,7 @@ HTML;
 
 	$templates['wikibase-entitytermsview-aliases-alias'] =
 <<<HTML
-<li class="wikibase-entitytermsview-aliases-alias">$1</li>
+<li class="wikibase-entitytermsview-aliases-alias" data-alias-separator="$2">$1</li>
 HTML;
 
 	$templates['wikibase-entitytermsforlanguagelistview'] =
