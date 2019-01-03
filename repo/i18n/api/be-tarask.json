@@ -239,5 +239,7 @@
 	"apihelp-wbsetdescription-param-value": "Значэньне для апісаньня",
 	"apihelp-wbsetdescription-example-1": "Усталяваць радок «<var>An encyclopedia that everyone can edit</var>» для старонкі з ідэнтыфікатарам «<samp>Q42</samp>» як апісаньне на ангельскай мове",
 	"apihelp-wbsetdescription-example-2": "Вызначае радок «<var>An encyclopedia that everyone can edit</var>» як апісаньне на ангельскай мове для старонкі з спасылкай на сайт <var>enwiki:Wikipedia</var>",
-	"apihelp-wbsetlabel-description": "Вызначае метку для аднаго элемэнту Вікібазы."
+	"apihelp-wbsetlabel-description": "Вызначае метку для аднаго элемэнту Вікібазы.",
+	"apihelp-wbsetlabel-summary": "Вызначае метку для аднаго элемэнту Вікібазы.",
+	"apihelp-wbsetlabel-param-id": "Ідэнтыфікатар элемэнту з прэфіксам.\nУжывайце <var>id</var> ці <var>site</var> і <var>title</var> разам."
 }
