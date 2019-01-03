@@ -22,6 +22,30 @@
       "revId": "61db30469dec4cce7c75556ea4faa6ec2c85156e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22f7563b_1ca3bbaf",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-01-03T12:56:38Z",
+      "side": 1,
+      "message": "`https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/2fdda19dbfd86ea9c1c6feb2784512c4479e1420/view/resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css#21` would be the place to change (maybe via https://github.com/wmde/wikibase-termbox/blob/f1924af4080fc669926219d5612dae07d6ac812d/src/components/TermBox.vue#L161) so it is influencing good old wikibase, too.",
+      "parentUuid": "e78f1de9_366d1b4c",
+      "range": {
+        "startLine": 482,
+        "startChar": 46,
+        "endLine": 482,
+        "endChar": 73
+      },
+      "revId": "61db30469dec4cce7c75556ea4faa6ec2c85156e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
