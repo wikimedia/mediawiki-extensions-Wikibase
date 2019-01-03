@@ -56,7 +56,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
+class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 	public function provideTestGetParserOutput() {
 		return [
