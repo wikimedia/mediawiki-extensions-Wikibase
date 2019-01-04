@@ -2,22 +2,25 @@
 
 namespace Wikibase\View\Termbox;
 
+use ResourceLoaderFileModule;
+
 /**
  * @license GPL-2.0-or-later
  */
-class TermboxDependencyLoader {
+class TermboxDependencyLoader extends ResourceLoaderFileModule {
 
-	/**
-	 *
-	 * @return string[]
-	 */
-	public static function getMessages( $file ) {
-		$JSON = self::readFileAsJSON( $file );
-		if ( array_key_exists( 'messages', $JSON ) ) {
-			return $JSON[ 'messages' ];
-		} else {
-			return [];
+	public function __construct( array $options = [], string $localBasePath = null, string $remoteBasePath = null ) {
+		parent::__construct( $options, $localBasePath, $remoteBasePath );
+
+		if ( !array_key_exists( 'data', $options ) ) {
+			return;
 		}
+
+		$config = $this->readJsonFile(
+			$this->localBasePath . DIRECTORY_SEPARATOR . $options['data']
+		);
+
+		$this->messages = $config['messages'] ?? [];
 	}
 
 	/**
@@ -25,7 +28,7 @@ class TermboxDependencyLoader {
 	 *
 	 * @return string[] | null
 	 */
-	private static function readFileAsJSON( $file ) {
+	private function readJsonFile( $file ) {
 		if ( !is_readable( $file ) ) {
 			return [];
 		}
