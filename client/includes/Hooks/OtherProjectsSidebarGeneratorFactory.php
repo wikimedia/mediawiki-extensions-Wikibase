@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use SiteLookup;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
@@ -12,11 +13,6 @@ use Wikibase\SettingsArray;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class OtherProjectsSidebarGeneratorFactory {
-
-	/**
-	 * @var OtherProjectsSidebarGenerator|null
-	 */
-	private $otherProjectsSidebarGenerator = null;
 
 	/**
 	 * @var SettingsArray
@@ -58,26 +54,18 @@ class OtherProjectsSidebarGeneratorFactory {
 	}
 
 	/**
+	 * @param UsageAccumulator $usageAccumulator
+	 *
 	 * @return OtherProjectsSidebarGenerator
 	 */
-	public function getOtherProjectsSidebarGenerator() {
-		if ( $this->otherProjectsSidebarGenerator === null ) {
-			$this->otherProjectsSidebarGenerator = $this->newOtherProjectsSidebarGenerator();
-		}
-
-		return $this->otherProjectsSidebarGenerator;
-	}
-
-	/**
-	 * @return OtherProjectsSidebarGenerator
-	 */
-	private function newOtherProjectsSidebarGenerator() {
+	public function getOtherProjectsSidebarGenerator( UsageAccumulator $usageAccumulator ) {
 		return new OtherProjectsSidebarGenerator(
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->siteLinkLookup,
 			$this->siteLookup,
 			$this->entityLookup,
 			$this->sidebarLinkBadgeDisplay,
+			$usageAccumulator,
 			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}
