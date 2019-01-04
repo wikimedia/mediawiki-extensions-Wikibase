@@ -1,5 +1,5 @@
 {
-	"name": "wdio-wikibase",
+	"name": "@wmde/wdio-wikibase",
 	"version": "0.1.0",
 	"description": "WebdriverIO plugin for testing a Wikibase repo.",
 	"homepage": "https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/master/repo/tests/selenium/wdio-wikibase/",
