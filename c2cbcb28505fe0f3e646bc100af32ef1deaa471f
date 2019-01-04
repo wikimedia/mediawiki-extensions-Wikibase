@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90638921_a38d9ada",
+        "filename": "view/autoload.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-01-04T17:17:56Z",
+      "side": 1,
+      "message": "This line is now here twice? (line 39)",
+      "revId": "c2cbcb28505fe0f3e646bc100af32ef1deaa471f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
