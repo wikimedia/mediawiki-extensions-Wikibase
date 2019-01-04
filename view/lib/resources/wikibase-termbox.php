@@ -22,8 +22,8 @@ return call_user_func( function () {
 				'wikibase.getLanguageNameByCode',
 				'wikibase.entityPage.entityLoaded',
 				'wikibase.WikibaseContentLanguages',
+				'wikibase.termbox.messages',
 			],
-			'messages' => TermboxDependencyLoader::getMessages( $moduleTemplate[ 'localBasePath' ] . '/resources.json' )
 		],
 
 		'wikibase.termbox.styles' => $moduleTemplate + [
@@ -32,6 +32,12 @@ return call_user_func( function () {
 				'dist/wikibase.termbox.main.css',
 			],
 			'targets' => 'mobile'
-		]
+		],
+
+		'wikibase.termbox.messages' => $moduleTemplate + [
+			'targets' => 'mobile',
+			'class' => TermboxDependencyLoader::class,
+			'data' => 'resources.json',
+		],
 	];
 } );
