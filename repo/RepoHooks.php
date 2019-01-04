@@ -89,7 +89,10 @@ final class RepoHooks {
 			$out->addModules( 'wikibase.mobile' );
 
 			if ( $useNewTermbox ) {
-				$out->addModules( 'wikibase.termbox' );
+				$out->addModules( [
+					'wikibase.termbox',
+					'wikibase.termbox.messages', // TODO why is this not taken care of by the dep in wikibase.termbox?
+				] );
 				$out->addModuleStyles( [ 'wikibase.termbox.styles' ] );
 			}
 		}
