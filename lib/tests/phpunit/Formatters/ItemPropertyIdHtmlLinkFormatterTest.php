@@ -7,7 +7,9 @@ use MediaWikiTestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageFallbackIndicator;
@@ -234,7 +236,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$this->assertRegExp( $expectedPattern, $formatter->formatEntityId( new ItemId( 'Q123' ) ) );
 	}
 
-	public function testGivenForeignEntityId_fullUrlIsUsedInTheOutput() {
+	public function testGivenForeignItemId_fullUrlIsUsedInTheOutput() {
 		$this->givenUserLanguageIs( 'en' );
 		$this->givenItemExists( 'foo:Q1' )->andIsNotLocal();
 		$this->givenItemHasLabel( 'foo:Q1', 'en', 'Something' );
@@ -258,6 +260,145 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 		$this->assertThatHamcrest( $result, htmlPiece(
 			havingRootElement( withClass( 'mw-redirect' ) ) ) );
+	}
+
+	public function testGivenPropertyExists_ResultingLinkPointsToPropertyPage() {
+		$this->givenPropertyExists( 'P42' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P42' ) );
+
+		$expectedUrl = $this->propertyPageUrl( 'P42' );
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingDirectChild(
+					tagMatchingOutline( "<a href=\"${expectedUrl}\"/>" ) )
+			) ) );
+	}
+
+	public function testPropertyHasLabelInUserLanguage_ResultingLinkHasLabelAsAText() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenPropertyHasLabel( 'P1', 'en', 'Some label' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+				both( withTagName( 'a' ) )
+					->andAlso( havingTextContents( 'Some label' ) )
+			) ) )
+		);
+	}
+
+	public function testPropertyDoesNotHaveLabelInUserLanguage_ResultingLinkUsesIdAsAText() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenPropertyExists( 'P1' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+				both( withTagName( 'a' ) )
+					->andAlso( havingTextContents( 'P1' ) )
+			) ) )
+		);
+	}
+
+	public function testPropertyDoesNotExist_DelegatesFormattingToNonExistingEntityIdHtmlFormatter() {
+		$this->givenPropertyDoesNotExist( 'P1' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
+		$expectedResult = $nonExistingEntityIdHtmlFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$this->assertEquals( $expectedResult, $result );
+	}
+
+	public function testGivenPropertyLabelInFallbackLanguageExists_UsesThatLabelAsTheText() {
+		$this->givenUserLanguageIs( 'de' )
+			->withFallbackChain( 'en' );
+		$this->givenPropertyHasLabel( 'P1', 'en', 'Label in English' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+				both( withTagName( 'a' ) )
+					->andAlso( havingTextContents( 'Label in English' ) )
+			) ) )
+		);
+	}
+
+	public function testGivenPropertyLabelInFallbackLanguageExists_LinkHasLangAttributeSet() {
+		$this->givenUserLanguageIs( 'de' )
+			->withFallbackChain( $fallbackLanguage = 'en' );
+		$this->givenPropertyHasLabel( 'P1', $fallbackLanguage, 'some text' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+				both( withTagName( 'a' ) )
+					->andAlso( withAttribute( 'lang' )->havingValue( $fallbackLanguage ) )
+			) ) )
+		);
+	}
+
+	public function testGivenPropertyLabelInFallbackLanguageExists_ResultContainsFallbackMarker() {
+		$this->givenUserLanguageIs( 'de' )
+			->withFallbackChain( 'en' );
+		$this->givenPropertyHasLabel( 'P1', 'en', 'Label in English' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$languageFallbackIndicator = new LanguageFallbackIndicator(
+			$this->languageNameLookup->reveal()
+		);
+		$fallbackMarker = $languageFallbackIndicator->getHtml(
+			new TermFallback( 'de', 'Label in English', 'en', 'en' )
+		);
+		$this->assertContains( $fallbackMarker, $result );
+	}
+
+	public function testGivenPropertyLabelInTransliteratableLanguageExists_ResultContainsFallbackMarker() {
+		$this->givenUserLanguageIs( 'crh-latn' )
+			->canBeTransliteratedFrom( 'crh-cyrl' );
+		$this->givenPropertyHasLabel( 'P1', 'crh-cyrl', 'къырымтатарджа' );
+
+		$entityIdHtmlLinkFormatter = $this->createFormatter();
+		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
+
+		$languageFallbackIndicator = new LanguageFallbackIndicator( $this->languageNameLookup->reveal() );
+		$fallbackMarker = $languageFallbackIndicator->getHtml(
+			new TermFallback( 'crh-latn', self::SOME_TRANSLITERATED_TEXT, 'crh-latn', 'crh-cyrl' )
+		);
+		$this->assertContains( $fallbackMarker, $result );
+	}
+
+	public function testGivenForeignPropertyId_fullUrlIsUsedInTheOutput() {
+		$this->givenUserLanguageIs( 'en' );
+		$this->givenPropertyExists( 'foo:P1' )->andIsNotLocal();
+		$this->givenPropertyHasLabel( 'foo:P1', 'en', 'Something' );
+
+		$formatter = $this->createFormatter();
+		$result = $formatter->formatEntityId( new PropertyId( 'foo:P1' ) );
+
+		$isFullUrl = startsWith( 'http' );
+		$this->assertThatHamcrest(
+			$result,
+			is( htmlPiece( havingChild(
+				withAttribute( 'href' )->havingValue( $isFullUrl )
+			) ) ) );
 	}
 
 	/**
@@ -299,10 +440,13 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	private function givenItemHasLabel( $itemId, $labelLanguage, $labelText ) {
 		$this->givenItemExists( 'Q1' );
 
-		$testCase = $this;
+		$this->givenEntityHasLabel( new ItemId( $itemId ), $labelLanguage, $labelText );
+	}
 
+	private function givenEntityHasLabel( EntityId $id, $labelLanguage, $labelText ) {
+		$testCase = $this;
 		$this->labelDescriptionLookup
-			->getLabel( new ItemId( $itemId ) )
+			->getLabel( $id )
 			->will(
 				function () use (
 					$labelLanguage,
@@ -389,6 +533,58 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 			public function andIsRedirect() {
 				$this->title->isRedirect()->willReturn( true );
+			}
+
+			public function andIsNotLocal() {
+				$this->title->isLocal()->willReturn( false );
+				$this->title->getFullURL()->willReturn( 'http://some.url/' );
+			}
+
+		};
+	}
+
+	private function givenPropertyHasLabel( $propertyId, $labelLanguage, $labelText ) {
+		$this->givenPropertyExists( 'P1' );
+
+		$this->givenEntityHasLabel( new PropertyId( $propertyId ), $labelLanguage, $labelText );
+	}
+
+	private function propertyPageUrl( $propertyId ) {
+		return "/index.php/Property:{$propertyId}";
+	}
+
+	/**
+	 * @param string $propertyId
+	 */
+	private function givenPropertyDoesNotExist( $propertyId ) {
+		$title = $this->prophesize( Title::class );
+		$title->exists()->willReturn( false );
+		$title->isLocal()->willReturn( true );
+
+		$this->entityTitleLookup
+			->getTitleForId( new PropertyId( $propertyId ) )
+			->willReturn( $title->reveal() );
+	}
+
+	/**
+	 * @param string $propertyId
+	 */
+	private function givenPropertyExists( $propertyId ) {
+		$title = $this->prophesize( Title::class );
+		$title->isLocal()->willReturn( true );
+		$title->exists()->willReturn( true );
+		$title->isRedirect()->willReturn( false );
+		$title->getLocalURL()->willReturn( $this->propertyPageUrl( $propertyId ) );
+		$title->getPrefixedText()->willReturn( $propertyId );
+
+		$this->entityTitleLookup->getTitleForId( new PropertyId( $propertyId ) )->willReturn(
+			$title->reveal()
+		);
+
+		return new class( $title ) {
+
+			public function __construct( $title ) {
+				$this->title = $title;
 			}
 
 			public function andIsNotLocal() {
