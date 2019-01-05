@@ -241,5 +241,7 @@
 	"apihelp-wbsetdescription-example-2": "Вызначае радок «<var>An encyclopedia that everyone can edit</var>» як апісаньне на ангельскай мове для старонкі з спасылкай на сайт <var>enwiki:Wikipedia</var>",
 	"apihelp-wbsetlabel-description": "Вызначае метку для аднаго элемэнту Вікібазы.",
 	"apihelp-wbsetlabel-summary": "Вызначае метку для аднаго элемэнту Вікібазы.",
-	"apihelp-wbsetlabel-param-id": "Ідэнтыфікатар элемэнту з прэфіксам.\nУжывайце <var>id</var> ці <var>site</var> і <var>title</var> разам."
+	"apihelp-wbsetlabel-param-id": "Ідэнтыфікатар элемэнту з прэфіксам.\nУжывайце <var>id</var> ці <var>site</var> і <var>title</var> разам.",
+	"apihelp-wbsetlabel-param-new": "Калі ўсталявана, будзе створаны новы элемэнт.\nПазначце тут тып элемэнту, які вы хочаце стварць.",
+	"apihelp-wbsetlabel-param-site": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>title</var>, каб зрабіць поўную спасылку на сайт."
 }
