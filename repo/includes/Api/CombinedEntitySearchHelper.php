@@ -17,7 +17,6 @@ class CombinedEntitySearchHelper implements EntitySearchHelper {
 	private $searchHelpers;
 
 	/**
-	 * CombinedEntitySearchHelper constructor.
 	 * @param array $searchHelpers ordered array of EntitySearchHelpers to be used.
 	 */
 	public function __construct( array $searchHelpers ) {

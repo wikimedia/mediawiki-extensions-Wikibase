@@ -25,7 +25,6 @@ class StatsdMissRecordingSimpleCache implements CacheInterface {
 	private $statsKey;
 
 	/**
-	 * StatsdMissRecordingSimpleCache constructor.
 	 * @param CacheInterface $innner
 	 * @param StatsdDataFactoryInterface $stats
 	 * @param string $statsKey

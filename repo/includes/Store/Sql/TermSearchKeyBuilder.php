@@ -152,7 +152,6 @@ class TermSearchKeyBuilder {
 			$total += $c;
 
 			if ( $c < $this->batchSize ) {
-				// we are done.
 				break;
 			}
 		}

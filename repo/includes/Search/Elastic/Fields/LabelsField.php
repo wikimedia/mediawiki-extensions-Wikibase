@@ -27,7 +27,6 @@ class LabelsField extends TermIndexField {
 	private $languages;
 
 	/**
-	 * LabelsField constructor.
 	 * @param string[] $languages
 	 */
 	public function __construct( $languages ) {
