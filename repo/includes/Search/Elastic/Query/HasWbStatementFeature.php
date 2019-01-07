@@ -62,7 +62,6 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	private $foreignRepoNames;
 
 	/**
-	 * HasWbStatementFeature constructor.
 	 * @param array $foreignRepoNames Array of names of foreign repos from $wgWBRepoSettings
 	 */
 	public function __construct( array $foreignRepoNames ) {
