@@ -1,0 +1,19 @@
+{
+	"name": "wdio-wikibase",
+	"version": "0.2.0",
+	"description": "WebdriverIO plugin for testing a Wikibase repo.",
+	"homepage": "https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/master/repo/tests/selenium/wdio-wikibase/",
+	"license": "GPLv2",
+	"keywords": [
+		"mediawiki",
+		"wikibase",
+		"wdio-plugin"
+	],
+	"engines": {
+		"node": ">=6.0"
+	},
+	"dependencies": {
+		"mwbot": "1.0.10",
+		"wdio-mediawiki": "^0.2.0"
+	}
+}

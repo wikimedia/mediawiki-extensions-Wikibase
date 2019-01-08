@@ -101,4 +101,8 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 		}
 	}
 
+	public function getFragment( EntityId $entityId, $fragment ) {
+		return $fragment;
+	}
+
 }

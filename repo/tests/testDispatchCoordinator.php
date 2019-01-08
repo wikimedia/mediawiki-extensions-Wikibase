@@ -7,6 +7,7 @@ use LogicException;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Psr\Log\NullLogger;
 use RuntimeException;
 use WANObjectCache;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
@@ -94,6 +95,7 @@ class TestDispatchCoordinator extends Maintenance {
 			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
 				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+				new NullLogger(),
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID
 			);
@@ -101,7 +103,8 @@ class TestDispatchCoordinator extends Maintenance {
 			$coordinator = new SqlChangeDispatchCoordinator(
 				$settings->getSetting( 'changesDatabase' ),
 				$repoID,
-				MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+				new NullLogger()
 			);
 		}
 		$coordinator->setChangesTable( self::TABLE_PREFIX . 'wb_changes' );

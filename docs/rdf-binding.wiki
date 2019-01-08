@@ -1,0 +1,17 @@
+= RDF binding =
+
+Wikibase allows exporting data in RDF format. See details of the implementation in [https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format RDF Dump Format]
+
+Changes to the RDF mapping are however subject to the Stable Interface Policy, see [https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy Wikidata:Stable Interface Policy].
+
+== Change log ==
+
+The following are the RDF format versions, see FORMAT_VERSION in <code>RdfVocabulary.php</code>.
+
+* 0.0.1 – Initial implementation
+* 0.0.2 – Changed WKT coordinate order (see T130049)
+* 0.0.3 – Added page props option to wdata: (see T129046)
+* 0.0.4 – Added unit conversion & normalization support (see T117031)
+* 0.0.5 – Added quantities without bounds (see T115269)
+* 0.1.0 – Changed sitelink encoding (see T131960)
+* 1.0.0 – Moved ontology URI to [http://wikiba.se/ontology# Ontology] (removed beta) (see T112127)

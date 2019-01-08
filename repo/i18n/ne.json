@@ -9,6 +9,8 @@
 			"Nirajan pant"
 		]
 	},
+	"wikibase-entity": "एकाइ",
+	"wikibase-entity-item": "वस्तु",
 	"wikibase-entity-property": "गुणधर्म",
 	"wikibase-entity-query": "जाँच्ने",
 	"wikibase-edit": "सम्पादन",
@@ -51,6 +53,8 @@
 	"wikibase-itemdisambiguation-lookup-language": "भाषाकोड :",
 	"wikibase-itemdisambiguation-lookup-label": "नामपत्र",
 	"wikibase-itemdisambiguation-submit": "खोज",
+	"wikibase-newproperty-fieldset": "नयाँ गुण बनाउनुहोस्",
+	"wikibase-newitem-fieldset": "नयाँ वस्तु बनाउनुहोस्",
 	"wikibase-newentity-label": "नामपत्र :",
 	"wikibase-newentity-description": "वर्णन :",
 	"wikibase-newentity-submit": "सृजना गर्ने",
@@ -61,6 +65,8 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "विवरण:",
 	"wikibase-modifyentity-id": "आडी",
 	"wikibase-modifyterm-language": "भाषा कोड:",
+	"special-mergeitems": "दुई वस्तुहरू जोड्नुहोस्",
+	"wikibase-mergeitems-submit": "वस्तुहरू जोड्नुहोस्",
 	"wikibase-dispatchstats-change-id": "आई डी",
 	"wikibase-dispatchstats-change-timestamp": "समयमुद्रा",
 	"wikibase-dispatchstats-oldest-change": "पुरामा",
@@ -78,5 +84,7 @@
 	"wikibase-listdatatypes-time-head": "समय",
 	"wikibase-listdatatypes-url-head": "URL",
 	"datatypes-type-url": "URL",
+	"content-model-wikibase-item": "विकिवेस वस्तु",
+	"content-model-wikibase-property": "विकिवेस वस्तु",
 	"action-item-merge": "चिजहरू जोड्नुहोस्"
 }

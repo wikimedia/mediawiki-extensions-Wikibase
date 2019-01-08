@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
+use NullStatsdDataFactory;
+use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use Status;
@@ -12,9 +14,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
 use Wikibase\SummaryFormatter;
@@ -167,15 +169,17 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
+			new NullLogger(),
 			$this->getSiteLookup( $titleExists ),
-			new EditEntityFactory(
+			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),
 				$mockRepository,
 				$mockRepository,
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			)
 		);
 

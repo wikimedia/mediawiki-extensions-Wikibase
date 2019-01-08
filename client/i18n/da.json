@@ -11,7 +11,8 @@
 			"Fnielsen",
 			"Sarrus",
 			"Saederup92",
-			"Dipsacus fullonum"
+			"Dipsacus fullonum",
+			"Weblars"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -67,14 +68,19 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}s emne-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-pageinfo-description-local": "Lokal beskrivelse",
+	"wikibase-pageinfo-description-central": "Central beskrivelse",
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}-emner, der bruges på denne side",
 	"wikibase-pageinfo-entity-usage-S": "Sidehenvisning",
+	"wikibase-pageinfo-entity-usage-L": "Nogle etiketter",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiket: $1",
 	"wikibase-pageinfo-entity-usage-D": "Nogle beskrivelser",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Beskrivelse: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
+	"wikibase-pageinfo-entity-usage-C": "Nogle udsagn",
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
 	"wikibase-otherprojects": "I andre projekter",
 	"wikibase-otherprojects-beta-message": "Andre projekter sidebar",
-	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data."
+	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Forbindelse|Forbindelser}} til {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Giv mig besked, når nogen forbinder en side som {{GENDER:|jeg oprettede}} til et {{WBREPONAME}}-emne."
 }

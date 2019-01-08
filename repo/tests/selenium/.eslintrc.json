@@ -1,5 +1,7 @@
 {
-	"extends": "wikimedia",
+	"parserOptions": {
+		"ecmaVersion": 6
+	},
 	"env": {
 		"es6": true,
 		"mocha": true,
@@ -11,6 +13,8 @@
 	"rules": {
 		"compat/compat": 0,
 		"max-len": 0,
-		"no-console": 0
+		"no-console": 0,
+		"no-restricted-syntax": 0,
+		"no-restricted-properties": 0
 	}
 }

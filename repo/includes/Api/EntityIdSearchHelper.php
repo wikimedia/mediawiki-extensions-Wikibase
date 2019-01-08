@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikimedia\Assert\Assert;
 
@@ -43,7 +42,6 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	/**
 	 * @param EntityLookup $entityLookup
 	 * @param EntityIdParser $idParser
-	 * @param ConfigurableTermSearchInteractor $termSearchInteractor
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param array $entityTypeToRepositoryMapping Associative array (string => string[]) mapping entity types to a list of repository names
 	 *              which provide entities of the given type.

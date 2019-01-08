@@ -297,5 +297,12 @@
 	"apihelp-wbsetsitelink-example-5": "Adicionar uma hiperligação intersites para a página em polaco \"Wodór\" ao objeto que está ligado com a página em inglês \"Hydrogen\", com um emblema a apontar para o objeto com o identificador \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "Alterar os emblemas da hiperligação para a página em polaco do objeto com o identificador \"Q42\", para dois emblemas com os identificadores \"Q2\" e \"Q149\" sem fornecer o título da hiperligação",
 	"apihelp-wbsetsitelink-example-7": "Alterar a hiperligação para a página em polaco do objeto com o identificador \"Q42\" sem alterar emblemas",
-	"apihelp-wbsetsitelink-example-8": "Alterar a hiperligação para a página em polaco com o identificador \"Q42\" e remover todos os seus emblemas"
+	"apihelp-wbsetsitelink-example-8": "Alterar a hiperligação para a página em polaco com o identificador \"Q42\" e remover todos os seus emblemas",
+	"apihelp-wbformatentities-summary": "Formata identificadores de entidade em HTML.",
+	"apihelp-wbformatentities-extended-description": "A língua pode ser especificada com o parâmetro global <var>uselang</var>.",
+	"apihelp-wbformatentities-param-ids": "Os identificadores de entidade a serem formatados.",
+	"apihelp-wbformatentities-example-1": "Formatar um identificador de elemento único.",
+	"apihelp-wbformatentities-example-2": "Formatar um identificador de elemento e um identificador de propriedade.",
+	"apihelp-wbformatentities-example-3": "Formatar um identificador de elemento, um identificador de propriedade e um identificador de lexema.",
+	"apihelp-wbformatentities-example-4": "Formatar três identificadores de elemento em francês."
 }

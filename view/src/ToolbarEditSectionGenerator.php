@@ -78,7 +78,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 			$specialPageUrlParams[] = $entityId->getSerialization();
 			$specialPageUrlParams[] = $languageCode;
 		}
-		return $this->getHtmlForEditSection( 'SetLabelDescriptionAliases', $specialPageUrlParams );
+		return $this->getHtmlForEditSection( EntityTermsView::TERMS_EDIT_SPECIAL_PAGE, $specialPageUrlParams );
 	}
 
 	/**

@@ -82,6 +82,7 @@
 	"wikibase-otherprojects-beta-message": "Кхечу проектийн агӀонгара панель",
 	"wikibase-otherprojects-beta-description": "АгӀорар панель тӀетуху дакъа «{{int:wikibase-otherprojects}}», цуна тӀехь хьулу Викимедиа фондан кхечу проекташка хьажоргаш {{WBREPONAME}}кара.",
 	"echo-category-title-wikibase-action": "{{grammar:genitive|{{WBREPONAME}}}} {{PLURAL:$1|тӀетасадалар}}",
+	"notification-header-page-connection": "АгӀо <strong>$3</strong> {{GENDER:$2|тӀетесна}} {{PLURAL:$4|-1=a {{WBREPONAME}} |{{WBREPONAME}} $4}}, темица йогӀуш йолучунца.",
 	"notification-link-text-view-item": "{{GENDER:$1|Хьажа}} элемент",
 	"unresolved-property-category": "Мегаш йоцу билгалонаш йолу агӀонаш"
 }

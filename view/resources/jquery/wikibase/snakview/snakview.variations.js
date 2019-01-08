@@ -40,7 +40,7 @@
 		 * @return {jQuery.snakview.variations.Variation} The new `Variation`'s constructor.
 		 */
 		variation: function ( snakConstructor, baseOrDefinition, definition ) {
-			if ( !$.isFunction( snakConstructor ) || !snakConstructor.TYPE ) {
+			if ( typeof snakConstructor !== 'function' || !snakConstructor.TYPE ) {
 				throw new Error( 'Snak constructor required for registering a snakview variation' );
 			}
 

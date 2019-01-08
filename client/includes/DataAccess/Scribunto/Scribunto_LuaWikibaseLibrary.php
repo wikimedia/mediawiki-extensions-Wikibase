@@ -5,6 +5,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Deserializers\Exceptions\DeserializationException;
 use Exception;
 use Language;
+use MediaWiki\MediaWikiServices;
 use Scribunto_LuaError;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
@@ -79,6 +80,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @var RepoLinker|null
 	 */
 	private $repoLinker = null;
+
+	/**
+	 * @var LuaFunctionCallTracker|null
+	 */
+	private $luaFunctionCallTracker = null;
 
 	/**
 	 * @return WikibaseLanguageIndependentLuaBindings
@@ -190,6 +196,27 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		}
 
 		return $wgContLang;
+	}
+
+	/**
+	 * @return LuaFunctionCallTracker
+	 */
+	private function getLuaFunctionCallTracker() {
+		if ( !$this->luaFunctionCallTracker ) {
+			$mwServices = MediaWikiServices::getInstance();
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$settings = $wikibaseClient->getSettings();
+
+			$this->luaFunctionCallTracker = new LuaFunctionCallTracker(
+				$mwServices->getStatsdDataFactory(),
+				$settings->getSetting( 'siteGlobalID' ),
+				$wikibaseClient->getSiteGroup(),
+				$settings->getSetting( 'trackLuaFunctionCallsPerSiteGroup' ),
+				$settings->getSetting( 'trackLuaFunctionCallsPerWiki' )
+			);
+		}
+
+		return $this->luaFunctionCallTracker;
 	}
 
 	/**
@@ -343,6 +370,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'isValidEntityId' => [ $this, 'isValidEntityId' ],
 			'getPropertyOrder' => [ $this, 'getPropertyOrder' ],
 			'orderProperties' => [ $this, 'orderProperties' ],
+			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
 		];
 
 		return $this->getEngine()->registerInterface(
@@ -736,6 +764,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getPropertyOrder() {
 		return [ $this->getPropertyOrderProvider()->getPropertyOrder() ];
+	}
+
+	/**
+	 * Increment the given stats key.
+	 *
+	 * @param string $key
+	 */
+	public function incrementStatsKey( $key ) {
+		$this->getLuaFunctionCallTracker()->incrementKey( $key );
 	}
 
 	/**

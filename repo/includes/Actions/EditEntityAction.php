@@ -471,4 +471,22 @@ class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::closeElement( 'div' ) );
 	}
 
+	/**
+	 * @see Action::requiresUnblock
+	 *
+	 * @return bool Always true.
+	 */
+	public function requiresUnblock() {
+		return true;
+	}
+
+	/**
+	 * @see Action::requiresWrite
+	 *
+	 * @return bool Always true.
+	 */
+	public function requiresWrite() {
+		return true;
+	}
+
 }

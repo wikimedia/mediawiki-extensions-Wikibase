@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Changes;
 
+use Psr\Log\NullLogger;
 use Wikibase\Change;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\DataModel\Entity\Item;
@@ -36,6 +37,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$coalescer = new ChangeRunCoalescer(
 			$entityRevisionLookup,
 			$changeFactory,
+			new NullLogger(),
 			'enwiki'
 		);
 

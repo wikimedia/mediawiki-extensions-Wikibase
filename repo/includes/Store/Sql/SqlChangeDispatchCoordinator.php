@@ -5,7 +5,9 @@ namespace Wikibase\Store\Sql;
 use Exception;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\MediaWikiServices;
+use Monolog\Processor\PsrLogMessageProcessor;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Store\ChangeDispatchCoordinator;
@@ -107,14 +109,21 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $stats;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
 	 * @param LBFactory $LBFactory
+	 * @param LoggerInterface $logger
 	 */
 	public function __construct(
 		$repoDB,
 		$repoSiteId,
-		LBFactory $LBFactory
+		LBFactory $LBFactory,
+		LoggerInterface $logger
 	) {
 		Assert::parameterType( 'string|boolean', $repoDB, '$repoDB' );
 
@@ -124,6 +133,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->stats = MediaWikiServices::getInstance()->getPerDbNameStatsdDataFactory();
 		$this->messageReporter = new NullMessageReporter();
 		$this->LBFactory = $LBFactory;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -290,12 +300,24 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			$this->stats->increment(
 				'wikibase.repo.SqlChangeDispatchCoordinator.selectClient.fail'
 			);
-			$this->log( 'Failed to grab dispatch lock for ' . $wiki );
+			$this->log(
+				'{method}: Failed to grab dispatch lock for {wiki}',
+				[
+					'method' => __METHOD__,
+					'wiki' => $wiki,
+				]
+			);
 			// try again
 		}
 
 		// we ran out of candidates
-		$this->log( 'Could not lock any of the candidate client wikis for dispatching' );
+		$this->log(
+			'{method}: Could not lock any of the candidate client wikis for dispatching',
+			[
+				'method' => __METHOD__,
+			]
+		);
+
 		return null;
 	}
 
@@ -403,7 +425,13 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				[ 'IGNORE' ]
 			);
 
-			$this->log( "Initialized dispatch state for $siteID" );
+			$this->log(
+				'{method}: Initialized dispatch state for {siteID}',
+				[
+					'method' => __METHOD__,
+					'siteID' => $siteID,
+				]
+			);
 		}
 
 		$this->releaseRepoDb( $dbr );
@@ -602,14 +630,30 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$this->messageReporter->reportMessage( $message );
 	}
 
-	private function log( $message ) {
-		wfDebugLog( __CLASS__, $message );
+	private function log( $message, array $context ) {
+		$this->logger->debug( $message, $context );
 
-		$this->messageReporter->reportMessage( $message );
+		$this->messageReporter->reportMessage(
+			$this->getMessageReportString( $message, $context )
+		);
 	}
 
 	private function trace( $message ) {
-		wfDebugLog( __CLASS__, $message );
+		// Currently unused
+	}
+
+	/**
+	 * @param string $message
+	 * @param array $context
+	 * @return string
+	 */
+	private function getMessageReportString( $message, array $context ) {
+		$logMessageProcessor = new PsrLogMessageProcessor;
+
+		return $logMessageProcessor( [
+			'message' => $message,
+			'context' => $context,
+		] )['message'];
 	}
 
 }

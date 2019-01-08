@@ -165,16 +165,16 @@
 						text: mw.msg( 'wikibase-linkitem-linkpage' ),
 						id: 'wbclient-linkItem-goButton',
 						disabled: 'disabled',
-						click: $.proxy( this._secondStep, this )
+						click: this._secondStep.bind( this )
 					} ],
 					modal: true
 				} )
 				// Use .on instead of passing this to dialog() as close as we want to be able to remove
 				// it later:
-				.on( 'dialogclose', $.proxy( function () {
+				.on( 'dialogclose', function () {
 					this.element.show();
 					this._trigger( 'dialogclose' );
-				}, this ) )
+				}.bind( this ) )
 				.append( $( '<p>' ).text( mw.msg( 'wikibase-linkitem-selectlink' ) ) )
 				.append( this._createSiteLinkForm() );
 
@@ -237,7 +237,7 @@
 				} )
 				.on(
 					'siteselectoropen siteselectorclose siteselectorautocomplete blur',
-					$.proxy( this._onSiteSelectorChangeHandler, this )
+					this._onSiteSelectorChangeHandler.bind( this )
 				)
 			);
 		},
@@ -366,9 +366,9 @@
 			this._showSpinner();
 
 			this._pageConnector.getNewlyLinkedPages()
-			.done( $.proxy( this._onConfirmationDataLoad, this ) )
+			.done( this._onConfirmationDataLoad.bind( this ) )
 			// This will (as a side effect) also catch errors where the target page doesn't exist:
-			.fail( $.proxy( this._onError, this ) );
+			.fail( this._onError.bind( this ) );
 		},
 
 		/**
@@ -428,8 +428,8 @@
 					// The item we want to link with only has a single sitelink so we don't have to ask
 					// for confirmation:
 					this._pageConnector.linkPages()
-					.done( $.proxy( this._onSuccess, this ) )
-					.fail( $.proxy( this._onError, this ) );
+					.done( this._onSuccess.bind( this ) )
+					.fail( this._onError.bind( this ) );
 				} else {
 					// Let the user verify this is indeed the entity to link with and link it after.
 					this._removeSpinner();
@@ -437,8 +437,8 @@
 				}
 			} else {
 				this._pageConnector.linkPages()
-				.done( $.proxy( this._onSuccess, this ) )
-				.fail( $.proxy( this._onError, this ) );
+				.done( this._onSuccess.bind( this ) )
+				.fail( this._onError.bind( this ) );
 			}
 		},
 
@@ -470,8 +470,8 @@
 					// The user confirmed that this is the right item...
 					self._showSpinner();
 					self._pageConnector.linkPages()
-					.done( $.proxy( self._onSuccess, self ) )
-					.fail( $.proxy( self._onError, self ) );
+					.done( self._onSuccess.bind( self ) )
+					.fail( self._onError.bind( self ) );
 				} );
 		},
 
@@ -563,10 +563,10 @@
 			// Replace the button with one asking to close the dialog and reload the current page
 			this.$goButton
 				.off( 'click' )
-				.click( $.proxy( function () {
+				.click( function () {
 					this._showSpinner();
 					window.location.reload( true );
-				}, this ) )
+				}.bind( this ) )
 				.button( 'option', 'label', mw.msg( 'wikibase-linkitem-close' ) );
 
 			// Purge this page in the background... we shouldn't confuse the user with the newly added

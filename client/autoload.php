@@ -27,6 +27,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\DataAccess\\ParserFunctions\\VariantsAwareRenderer' => __DIR__ . '/includes/DataAccess/ParserFunctions/VariantsAwareRenderer.php',
 	'Wikibase\\Client\\DataAccess\\PropertyIdResolver' => __DIR__ . '/includes/DataAccess/PropertyIdResolver.php',
 	'Wikibase\\Client\\DataAccess\\Scribunto\\EntityAccessor' => __DIR__ . '/includes/DataAccess/Scribunto/EntityAccessor.php',
+	'Wikibase\\Client\\DataAccess\\Scribunto\\LuaFunctionCallTracker' => __DIR__ . '/includes/DataAccess/Scribunto/LuaFunctionCallTracker.php',
 	'Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseEntityLibrary' => __DIR__ . '/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php',
 	'Wikibase\\Client\\DataAccess\\Scribunto\\Scribunto_LuaWikibaseLibrary' => __DIR__ . '/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php',
 	'Wikibase\\Client\\DataAccess\\Scribunto\\SnakSerializationRenderer' => __DIR__ . '/includes/DataAccess/Scribunto/SnakSerializationRenderer.php',

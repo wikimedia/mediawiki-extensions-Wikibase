@@ -215,6 +215,15 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 				],
 				'you need to fill'
 			],
+			'label and description are identical' => [
+				[
+					SpecialNewItem::FIELD_LANG => 'en',
+					SpecialNewItem::FIELD_LABEL => 'something',
+					SpecialNewItem::FIELD_DESCRIPTION => 'something',
+					SpecialNewItem::FIELD_ALIASES => '',
+				],
+				'label and description can not have the same value'
+			],
 		];
 	}
 

@@ -18,6 +18,9 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ជាភាសាដទៃទៀត",
 	"wikibase-entitytermsforlanguagelistview-language": "ភាសា",
 	"wikibase-description-empty": "គ្មានការអធិប្បាយពន្យល់",
+	"wikibase-diffview-link-badges": "សញ្ញាសម្គាល់",
 	"wikibase-sitelinks-special": "វិបសាយផ្សេងទៀត",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}"
+	"wikibase-badgeselector-badge-placeholder-title": "ចុចដើម្បីដាក់សញ្ញាសម្គាល់។",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
+	"special-availablebadges": "សញ្ញាសម្គាល់ដែលអាចប្រើបាន"
 }

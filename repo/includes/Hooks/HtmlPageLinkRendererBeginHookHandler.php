@@ -258,6 +258,9 @@ class HtmlPageLinkRendererBeginHookHandler {
 			$descriptionData
 		);
 
+		$fragment = $linkFormatter->getFragment( $entityId, $target->getFragment() );
+		$target->setFragment( '#' . $fragment );
+
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out->addModuleStyles( [ 'wikibase.common' ] );
 

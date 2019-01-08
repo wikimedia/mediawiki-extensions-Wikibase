@@ -17,6 +17,13 @@
 	"wikibase-rc-hide-wikidata-show": "បង្ហាញ",
 	"wikibase-rc-wikibase-edit-letter": "ទិន",
 	"wikibase-rc-wikibase-edit-title": "កំណែប្រែរបស់{{WBREPONAME}}",
+	"wikibase-unconnectedpages-submit": "បង្ហាញទំព័រ",
+	"pageswithbadges": "ទំព័រមានសញ្ញាសម្គាល់",
+	"pageswithbadges-summary": "ទំព័រនេះជាបញ្ជីទំព័រដែលមានសញ្ញាសម្គាល់ (ដូចជា អត្ថបទល្អ ឬ អត្ថបទឆ្នើមជាដើម)។ បញ្ជីនេះតម្រៀបតាមអត្តលេខទំព័រពីធំទៅតូច ហេតុនេះទំព័រថ្មីែៗជាងគេនឹងនៅខាងលើគេ។",
+	"wikibase-pageswithbadges-legend": "បញ្ជីទំព័រដែលមានសញ្ញាសម្គាល់ណាមួយ",
+	"wikibase-pageswithbadges-badge": "សញ្ញាសម្គាល់៖",
+	"wikibase-pageswithbadges-submit": "បង្ហាញទំព័រ",
+	"wikibase-entityusage-submit": "បង្ហាញទំព័រ",
 	"wikibase-otherprojects": "ក្នុងគម្រោងផ្សេងៗទៀត",
 	"wikibase-otherprojects-beta-message": "គម្រោងដទៃទៀតនៅរបារចំហៀង"
 }

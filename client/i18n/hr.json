@@ -37,6 +37,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Morate biti prijavljeni",
 	"wikibase-linkitem-not-loggedin": "Za uporabu ove mogućnosti morate biti prijavljeni na ovoj wiki i na [$1 središnjem spremištu podataka].",
 	"wikibase-linkitem-success-link": "Stranice su povezane. Ovu stavku s ostalim poveznicama možete pronaći u našoj [$1 središnjoj bazi podataka].",
+	"limitreport-entityaccesscount": "Broj učitanih Wikibase entiteta",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "sakrij",
 	"wikibase-rc-hide-wikidata-show": "prikaži",

@@ -101,7 +101,8 @@
 				more: mwMsgOrString( 'wikibase-entityselector-more', 'more' ),
 				notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'Nothing found' )
 			},
-			searchHookName: 'wikibase.entityselector.search'
+			searchHookName: 'wikibase.entityselector.search',
+			searchApiParametersHookName: 'wikibase.entityselector.search.api-parameters'
 		},
 
 		/**
@@ -141,7 +142,7 @@
 						+ 'be specified.' );
 				}
 				this.options.source = this._initDefaultSource();
-			} else if ( !$.isFunction( this.options.source ) && !Array.isArray( this.options.source ) ) {
+			} else if ( typeof this.options.source !== 'function' && !Array.isArray( this.options.source ) ) {
 				throw new Error( 'Source needs to be a function or an array' );
 			}
 
@@ -266,6 +267,8 @@
 				data.limit = this.options.limit;
 			}
 
+			mw.hook( this.options.searchApiParametersHookName ).fire( data );
+
 			return data;
 		},
 
@@ -358,6 +361,9 @@
 					}
 					if ( item1.rating < item2.rating ) {
 						return 1;
+					}
+					if ( item1.rating === item2.rating ) {
+						return 0;
 					}
 					return -1;
 				};
@@ -563,7 +569,7 @@
 			var deferred = $.Deferred(),
 				matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
-			deferred.resolve( $.grep( source, function ( item ) {
+			deferred.resolve( source.filter( function ( item ) {
 				if ( item.aliases ) {
 					for ( var i = 0; i < item.aliases.length; i++ ) {
 						if ( matcher.test( item.aliases[ i ] ) ) {

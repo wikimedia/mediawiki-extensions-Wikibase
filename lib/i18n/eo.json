@@ -6,7 +6,8 @@
 			"Amire80",
 			"Tlustulimu",
 			"Robin van der Vliet",
-			"Yekrats"
+			"Yekrats",
+			"YvesNevelsteen"
 		]
 	},
 	"wikibase-lib-desc": "Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo",
@@ -53,7 +54,7 @@
 	"wikibase-tooltip-error-details": "Detaloj",
 	"wikibase-undeserializable-value": "La valoro estas misformita kaj ne povas esti montrita.",
 	"wikibase-validator-invalid": "Malvalida valoro",
-	"wikibase-validator-missing-field": "Mankas nepra kampo \"$1\"",
+	"wikibase-validator-missing-field": "Mankas deviga kampo \"$1\"",
 	"wikibase-validator-bad-type": "$2 anstataŭ $1",
 	"wikibase-validator-malformed-value": "Misformita enigo: $1",
 	"wikibase-validator-bad-entity-id": "Misformita identigilo: $1",
@@ -112,10 +113,10 @@
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "Kreis {{PLURAL:$1|deklaron|deklarojn}}",
 	"wikibase-entity-summary-wbcreateclaim": "Kreis {{PLURAL:$1|deklaron|deklarojn}}",
 	"wikibase-entity-summary-clientsitelink-update": "Paĝo movita de [$3] al [$4]",
-	"wikibase-entity-summary-wbmergeitems-from": "Kunigita ero elde '$3'",
+	"wikibase-entity-summary-wbmergeitems-from": "Kunigita ero de '$3'",
 	"wikibase-entity-summary-wbmergeitems-to": "Kunigita ero al '$3'",
 	"wikibase-item-summary-wbcreate-new": "Kreita nova ero",
-	"wikibase-item-summary-wbeditentity": "Kreu novan eron",
+	"wikibase-item-summary-wbeditentity": "Krei novan eron",
 	"wikibase-item-summary-wbeditentity-create": "Kreita nova ero",
 	"wikibase-item-summary-wbeditentity-update": "Ŝanĝita ero",
 	"wikibase-item-summary-wblinktitles-create": "Kreita ero por interkonekti paĝojn",

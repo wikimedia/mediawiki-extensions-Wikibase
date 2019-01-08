@@ -15,8 +15,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\EditEntity;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\MediaInfo\DataModel\MediaInfo;
 use Wikibase\MediaInfo\DataModel\MediaInfoId;
@@ -69,9 +69,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EditEntity
 	 */
 	private function getMockEditEntity( $calls ) {
-		$mock = $this->getMockBuilder( EditEntity::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->getMock( EditEntity::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'attemptSave' )
 			->will( $this->returnValue( Status::newGood() ) );
@@ -81,10 +79,10 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	/**
 	 * @param int|null $calls
 	 *
-	 * @return EditEntityFactory
+	 * @return MediawikiEditEntityFactory
 	 */
 	private function getMockEditEntityFactory( $calls ) {
-		$mock = $this->getMockBuilder( EditEntityFactory::class )
+		$mock = $this->getMockBuilder( MediawikiEditEntityFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )

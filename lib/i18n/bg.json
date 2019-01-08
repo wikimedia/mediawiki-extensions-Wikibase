@@ -7,9 +7,12 @@
 			"Vodnokon4e",
 			"StanProg",
 			"පසිඳු කාවින්ද",
-			"ShockD"
+			"ShockD",
+			"Vlad5250"
 		]
 	},
+	"wikibase-deletedentity-item": "Изтрит обект",
+	"wikibase-deletedentity-property": "Изтрито свойство",
 	"wikibase-error-unexpected": "Грешка: $1.",
 	"wikibase-error-save-generic": "Не могат да бъдат съхранени поради грешка.",
 	"wikibase-error-remove-generic": "Не могат да бъдат премахнати поради възникнала грешка.",
@@ -57,13 +60,21 @@
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
+	"wikibase-entity-summary-special-create-item": "Създаден обект за [$2] с {{PLURAL:$1|стойността|стойностите}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-clientsitelink-update": "Страницата е преместена от [$3] на [$4]",
 	"wikibase-entity-summary-wbmergeitems-from": "Сливане на обект от $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Сливане на обекта с $3",
 	"wikibase-item-summary-wbcreate-new": "Създаване на нов обект",
-	"wikibase-item-summary-wbeditentity": "Създаване на нов обект",
-	"wikibase-item-summary-wbeditentity-create": "Създаване на нов обект",
-	"wikibase-item-summary-wbeditentity-override": "Изчистване на обект"
+	"wikibase-item-summary-wbeditentity": "Създаден нов обект",
+	"wikibase-item-summary-wbeditentity-create": "Създаден нов обект",
+	"wikibase-item-summary-wbeditentity-create-item": "Създаден нов обект",
+	"wikibase-item-summary-wbeditentity-update": "Изменен обект",
+	"wikibase-item-summary-wbeditentity-override": "Изчистване на обект",
+	"wikibase-property-summary-wbcreate-new": "Създадено ново свойство",
+	"wikibase-property-summary-wbeditentity-create": "Създадено ново свойство",
+	"wikibase-property-summary-wbeditentity-create-property": "Създадено ново свойство",
+	"wikibase-property-summary-wbeditentity-update": "Изменено свойство",
+	"wikibase-property-summary-special-create-property": "Създадено свойство за [$2] с {{PLURAL:$1|стойността|стойностите}}"
 }

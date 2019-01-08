@@ -80,5 +80,6 @@
 	"apihelp-wbsetdescription-param-language": "Язык описания",
 	"apihelp-wbsetdescription-param-value": "Устанавливаемое для описания значение",
 	"apihelp-wbsetlabel-param-language": "Язык метки",
-	"apihelp-wbsetlabel-param-value": "Значение метки"
+	"apihelp-wbsetlabel-param-value": "Значение метки",
+	"apihelp-wbformatentities-extended-description": "Язык может быть определён глобальным параметром <var>uselang</var>."
 }

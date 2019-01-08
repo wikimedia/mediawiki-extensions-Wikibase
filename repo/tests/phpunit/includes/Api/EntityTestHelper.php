@@ -72,13 +72,35 @@ class EntityTestHelper {
 					[ "language" => "nn", "value" => "Hovudstad og delstat i Forbundsrepublikken Tyskland." ],
 				],
 				"claims" => [
-					[ 'mainsnak' => [
-						'snaktype' => 'value',
-						'property' => '%StringProp%',
-						'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ],
-					],
+					[
+						'mainsnak' => [
+							'snaktype' => 'value',
+							'property' => '%StringProp%',
+							'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ],
+						],
 						'type' => 'statement',
-						'rank' => 'normal' ]
+						'rank' => 'normal',
+						'qualifiers' => [
+							 [
+								'snaktype' => 'value',
+								'property' => '%StringProp%',
+								'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ],
+								'datatype' => 'string',
+							],
+						],
+						'references' => [
+							[
+								'snaks' => [
+										[
+											'snaktype' => 'value',
+											'property' => '%StringProp%',
+											'datavalue' => [ 'value' => 'imastring1', 'type' => 'string' ],
+											'datatype' => 'string',
+										],
+								],
+							],
+						],
+					],
 				],
 			]
 		],

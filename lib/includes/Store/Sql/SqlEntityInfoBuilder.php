@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store\Sql;
 use DBAccessBase;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -109,6 +110,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entityNamespaceLookup;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var string
 	 */
 	private $repositoryName;
@@ -117,6 +123,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param LoggerInterface $logger
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
@@ -125,6 +132,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
+		LoggerInterface $logger,
 		$wiki = false,
 		$repositoryName = ''
 	) {
@@ -141,6 +149,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityIdComposer = $entityIdComposer;
 		$this->repositoryName = $repositoryName;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -409,7 +418,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 					$this->injectDescription( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
 					break;
 				default:
-					wfDebugLog( __CLASS__, __FUNCTION__ . ': unknown term type: ' . $row->term_type );
+					$this->logger->debug(
+						'{method}: unknown term type: {termType}',
+						[
+							'method' => __METHOD__,
+							'termType' => $row->term_type,
+						]
+					);
 			}
 		}
 	}

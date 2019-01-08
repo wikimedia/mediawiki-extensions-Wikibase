@@ -8,6 +8,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -124,6 +125,33 @@ class SetDescription extends ModifyTerm {
 			'action=wbsetdescription&site=enwiki&title=Wikipedia&language=en&value=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'apihelp-wbsetdescription-example-2',
 		];
+	}
+
+	/**
+	 * @see ModifyEntity::getAllowedParams
+	 */
+	protected function getAllowedParams() {
+		return array_merge(
+			parent::getAllowedParams(),
+			[
+				'new' => [
+					self::PARAM_TYPE => $this->getEntityTypesWithDescriptions(),
+				],
+			]
+		);
+	}
+
+	protected function getEntityTypesWithDescriptions() {
+		// TODO inject me
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$supportedEntityTypes = [];
+		foreach ( $this->enabledEntityTypes as $entityType ) {
+			$testEntity = $entityFactory->newEmpty( $entityType );
+			if ( $testEntity instanceof DescriptionsProvider ) {
+				$supportedEntityTypes[] = $entityType;
+			}
+		}
+		return $supportedEntityTypes;
 	}
 
 }

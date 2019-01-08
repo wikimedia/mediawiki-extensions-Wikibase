@@ -7,6 +7,7 @@ use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
@@ -66,6 +67,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 				// Nobody knows why we need to clone over here, but it's not working
 				// without... PHP is fun!
 				clone $moveData['siteLinkLookup'],
+				new NullLogger(),
 				$moveData['user'],
 				$moveData['siteId'],
 				$moveData['oldTitle'],

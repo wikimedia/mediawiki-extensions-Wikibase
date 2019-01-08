@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\UpdateRepo;
 
+use Psr\Log\LoggerInterface;
 use Title;
 use User;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -22,6 +23,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 	/**
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param LoggerInterface $logger
 	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $oldTitle
@@ -30,12 +32,13 @@ class UpdateRepoOnMove extends UpdateRepo {
 	public function __construct(
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
+		LoggerInterface $logger,
 		User $user,
 		$siteId,
 		Title $oldTitle,
 		Title $newTitle
 	) {
-		parent::__construct( $repoDB, $siteLinkLookup, $user, $siteId, $oldTitle );
+		parent::__construct( $repoDB, $siteLinkLookup, $logger, $user, $siteId, $oldTitle );
 		$this->newTitle = $newTitle;
 	}
 

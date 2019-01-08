@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -61,7 +61,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
+	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 * @param EntityPermissionChecker $permissionChecker
 	 */
 	public function __construct(
@@ -69,7 +69,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory,
+		MediawikiEditEntityFactory $editEntityFactory,
 		EntityPermissionChecker $permissionChecker
 	) {
 		parent::__construct(

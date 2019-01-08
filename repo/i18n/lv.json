@@ -82,6 +82,7 @@
 	"wikibase-snakformat-propertynotfound": "Īpašība nav atrasta.",
 	"wikibase-copyrighttooltip-acknowledge": "Es piekrītu šiem noteikumiem saviem nākotnes labojumiem. Turpmāk nerādīt šo ziņojumu.",
 	"wikibase-entityselector-more": "vairāk",
+	"wikibase-validator-check-file-type": "Trūks faila paplašinājuma.",
 	"wikibase-validator-page-not-exists": "Lapa \"$1\" nepastāv.",
 	"wikibase-validator-not-a-language": "\"$1\" ir nezināms valodas kods.",
 	"wikibase-item-reference-edit-placeholder": "Ievadi vienuma ID, piemēram, Q10",

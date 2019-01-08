@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Notifications;
 use JobQueueGroup;
 use JobSpecification;
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use Wikibase\Change;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 
@@ -56,6 +57,7 @@ class JobQueueChangeNotificationSenderTest extends \PHPUnit\Framework\TestCase {
 
 		return new JobQueueChangeNotificationSender(
 			'repo-db',
+			new NullLogger(),
 			[ 'site-id-0' => 'database-name-0' ],
 			$batchSize,
 			$jobQueueGroupFactory

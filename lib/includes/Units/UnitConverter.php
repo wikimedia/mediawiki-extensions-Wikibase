@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Units;
 use DataValues\DecimalMath;
 use DataValues\DecimalValue;
 use DataValues\UnboundedQuantityValue;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 
 /**
  * Convert quantities to other units.
@@ -25,6 +27,11 @@ class UnitConverter {
 	private $math;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * Prefix of the data entity (concept URI)
 	 * @var string
 	 */
@@ -34,6 +41,8 @@ class UnitConverter {
 		$this->store = $store;
 		$this->prefix = $entityPrefix;
 		$this->math = new DecimalMath();
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 	/**
@@ -81,7 +90,13 @@ class UnitConverter {
 
 		if ( $toUnits['factor']{0} === '-' || $mult->isZero() ) {
 			// We do not support negative conversion factors, and zero factor makes no sense
-			wfDebugLog( 'private', "Bad factor for $fromUnit: {$toUnits['factor']}" );
+			$this->logger->debug(
+				'Bad factor for {fromUnit}: {factor}',
+				[
+					'fromUnit' => $fromUnit,
+					'factor' => $toUnits['factor'],
+				]
+			);
 			return null;
 		}
 

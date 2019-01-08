@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client;
 
+use CachedBagOStuff;
+use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -15,6 +17,7 @@ use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
+use ExtensionRegistry;
 use ExternalUserNames;
 use Hooks;
 use Http;
@@ -25,6 +28,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
+use Parser;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
@@ -72,6 +76,7 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\ItemChange;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -83,6 +88,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
@@ -137,11 +143,6 @@ final class WikibaseClient {
 	 * @var Deserializer|null
 	 */
 	private $entityDeserializer = null;
-
-	/**
-	 * @var Serializer|null
-	 */
-	private $compactEntitySerializer = null;
 
 	/**
 	 * @var EntityIdParser|null
@@ -273,6 +274,11 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'siteGlobalID' )
 			);
 
+			$kartographerEmbeddingHandler = null;
+			if ( $this->useKartographerGlobeCoordinateFormatter() ) {
+				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
+			}
+
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 				$this->getContentLanguage(),
 				new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
@@ -284,11 +290,25 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'sharedCacheDuration' ),
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
-				$entityTitleLookup
+				$entityTitleLookup,
+				$kartographerEmbeddingHandler
 			);
 		}
 
 		return $this->valueFormatterBuilders;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function useKartographerGlobeCoordinateFormatter() {
+		// FIXME: remove the global out of here
+		global $wgKartographerEnableMapFrame;
+
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
+			isset( $wgKartographerEnableMapFrame ) &&
+			$wgKartographerEnableMapFrame;
 	}
 
 	/**
@@ -500,7 +520,11 @@ final class WikibaseClient {
 		if ( $this->propertyDataTypeLookup === null ) {
 			$infoLookup = $this->getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoLookup, $retrievingLookup );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
+				$infoLookup,
+				$this->getLogger(),
+				$retrievingLookup
+			);
 		}
 
 		return $this->propertyDataTypeLookup;
@@ -559,7 +583,7 @@ final class WikibaseClient {
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode(),
-				LoggerFactory::getInstance( 'wikibase-debug' )
+				$this->getLogger()
 			);
 		}
 
@@ -744,6 +768,10 @@ final class WikibaseClient {
 		return $instance;
 	}
 
+	public function getLogger() {
+		return LoggerFactory::getInstance( 'Wikibase' );
+	}
+
 	/**
 	 * Returns the this client wiki's site object.
 	 *
@@ -763,8 +791,14 @@ final class WikibaseClient {
 
 			$this->site = $this->siteLookup->getSite( $globalId );
 
+			// Todo inject me
+			$logger = $this->getLogger();
+
 			if ( !$this->site ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
+				$logger->debug(
+					'{method}:  Unable to resolve site ID {globalId}!',
+					[ 'method' => __METHOD__, 'globalId' => $globalId ]
+				);
 
 				$this->site = new MediaWikiSite();
 				$this->site->setGlobalId( $globalId );
@@ -773,9 +807,15 @@ final class WikibaseClient {
 			}
 
 			if ( !in_array( $localId, $this->site->getLocalIds() ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__
-					. ": The configured local id $localId does not match any local ID of site $globalId: "
-					. var_export( $this->site->getLocalIds(), true ) );
+				$logger->debug(
+					'{method}: The configured local id {localId} does not match any local IDs of site {globalId}: {localIds}',
+					[
+						'method' => __METHOD__,
+						'localId' => $localId,
+						'globalId' => $globalId,
+						'localIds' => json_encode( $this->site->getLocalIds() )
+					]
+				);
 			}
 		}
 
@@ -1183,10 +1223,13 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
+		$logger = $this->getLogger();
+
 		$pageUpdater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
 			$this->getRecentChangeFactory(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$logger,
 			$this->getStore()->getRecentChangesDuplicateDetector(),
 			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
@@ -1197,6 +1240,7 @@ final class WikibaseClient {
 		$changeListTransformer = new ChangeRunCoalescer(
 			$this->getStore()->getEntityRevisionLookup(),
 			$this->getEntityChangeFactory(),
+			$logger,
 			$this->settings->getSetting( 'siteGlobalID' )
 		);
 
@@ -1206,6 +1250,7 @@ final class WikibaseClient {
 			$pageUpdater,
 			$changeListTransformer,
 			$this->siteLookup,
+			$logger,
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);
 	}
@@ -1280,7 +1325,11 @@ final class WikibaseClient {
 			if ( $url !== null ) {
 				$innerProvider = new FallbackPropertyOrderProvider(
 					$innerProvider,
-					new HttpUrlPropertyOrderProvider( $url, new Http() )
+					new HttpUrlPropertyOrderProvider(
+						$url,
+						new Http(),
+						$this->getLogger()
+					)
 				);
 			}
 
@@ -1320,6 +1369,7 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @fixme this is duplicated in WikibaseRepo...
 	 * @return CacheInterface
 	 */
 	private function getFormatterCache() {
@@ -1328,11 +1378,25 @@ final class WikibaseClient {
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
-		return new SimpleCacheWithBagOStuff(
-			wfGetCache( $cacheType ),
+		// Get out default shared cache wrapped in an in memory cache
+		$bagOStuff = ObjectCache::getInstance( $cacheType );
+		if ( !$bagOStuff instanceof CachedBagOStuff ) {
+			$bagOStuff = new CachedBagOStuff( $bagOStuff );
+		}
+
+		$cache = new SimpleCacheWithBagOStuff(
+			$bagOStuff,
 			'wikibase.client.formatter.',
 			$cacheSecret
 		);
+
+		$cache = new StatsdMissRecordingSimpleCache(
+			$cache,
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			'wikibase.client.formatterCache.miss'
+		);
+
+		return $cache;
 	}
 
 }

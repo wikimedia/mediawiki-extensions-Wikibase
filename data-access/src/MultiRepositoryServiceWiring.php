@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
@@ -41,7 +42,8 @@ return [
 
 	'TermBuffer' => function( MultiRepositoryServices $multiRepositoryServices ) {
 		return new DispatchingTermBuffer(
-			$multiRepositoryServices->getServiceMap( 'PrefetchingTermLookup' )
+			$multiRepositoryServices->getServiceMap( 'PrefetchingTermLookup' ),
+			LoggerFactory::getInstance( 'Wikibase' )
 		);
 	},
 

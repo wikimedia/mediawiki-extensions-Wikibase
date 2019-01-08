@@ -138,5 +138,6 @@
 	"apihelp-wbsetsitelink-example-2": "Aggiunge un sitelink alla pagina in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste. Inoltre aggiunge \"Loves Oxygen\" all'oggetto della modifica.",
 	"apihelp-wbsetsitelink-example-3": "Aggiunge un sitelink alla pagina in tedesco \"Wasserstoff\", all'elemento che è collegato alla pagina in inglese \"Hydrogen\", se il sitelink non esiste",
 	"apihelp-wbsetsitelink-example-4": "Rimuove il sitelink tedesco dall'elemento",
-	"apihelp-wbsetsitelink-example-5": "Aggiunge un sitelink alla pagina in polacco \"Wodór\", all'elemento che è collegato alla pagina in inglese \"Hydrogen\", con un distintivo che punta all'elemento con ID \"Q149\""
+	"apihelp-wbsetsitelink-example-5": "Aggiunge un sitelink alla pagina in polacco \"Wodór\", all'elemento che è collegato alla pagina in inglese \"Hydrogen\", con un distintivo che punta all'elemento con ID \"Q149\"",
+	"apihelp-wbformatentities-extended-description": "La lingua può essere specificata con il parametro globale <var>uselang</var>."
 }

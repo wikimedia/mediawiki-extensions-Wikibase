@@ -9,6 +9,7 @@ use FauxResponse;
 use HashSiteStore;
 use HttpError;
 use OutputPage;
+use Psr\Log\NullLogger;
 use RequestContext;
 use SiteList;
 use Title;
@@ -159,6 +160,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$service,
 			$entityDataFormatProvider,
+			new NullLogger(),
 			'json',
 			1800,
 			false,

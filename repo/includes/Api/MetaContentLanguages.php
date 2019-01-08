@@ -133,7 +133,7 @@ class MetaContentLanguages extends ApiQueryBase {
 
 		return [
 			"$pathUrl" => "apihelp-$pathMsg-example-1",
-			"$pathUrl&context=monolingualtext&props=code|autonym" => "apihelp-$pathMsg-example-2",
+			"$pathUrl&wbclcontext=monolingualtext&wbclprop=code|autonym" => "apihelp-$pathMsg-example-2",
 		];
 	}
 

@@ -60,6 +60,7 @@ require_once __DIR__ . '/../view/WikibaseView.php';
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__  . '/autoload.php';
+
 // Nasty hack: part of repo relies on classes defined in Client! load it if in repo-only mode
 if ( !defined( 'WBC_VERSION' ) ) {
 	global $wgAutoloadClasses;
@@ -71,6 +72,7 @@ call_user_func( function() {
 		$wgAPIListModules,
 		$wgAPIModules,
 		$wgAvailableRights,
+		$wgEventLoggingSchemas,
 		$wgExtensionCredits,
 		$wgExtensionMessagesFiles,
 		$wgGrantPermissions,
@@ -626,6 +628,22 @@ call_user_func( function() {
 			);
 		}
 	];
+	$wgAPIModules['wbformatentities'] = [
+		'class' => \Wikibase\Repo\Api\FormatEntities::class,
+		'factory' => function( ApiMain $apiMain, $moduleName ) {
+			$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+			return new \Wikibase\Repo\Api\FormatEntities(
+				$apiMain,
+				$moduleName,
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
+				$apiHelperFactory->getResultBuilder( $apiMain ),
+				$apiHelperFactory->getErrorReporter( $apiMain ),
+				\MediaWiki\MediaWikiServices::getInstance()->getStatsdDataFactory()
+			);
+		}
+	];
 
 	$wgAPIMetaModules['wbcontentlanguages'] = [
 		'class' => Wikibase\Repo\Api\MetaContentLanguages::class,
@@ -732,6 +750,7 @@ call_user_func( function() {
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$siteLinkTargetProvider,
+			$wikibaseRepo->getLogger(),
 			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
 		);
 	};
@@ -1020,4 +1039,6 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
+
+	$wgEventLoggingSchemas['WikibaseTermboxInteraction'] = 18726648;
 } );

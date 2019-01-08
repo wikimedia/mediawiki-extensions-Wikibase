@@ -10,7 +10,8 @@
 			"Fitoschido",
 			"Peter Alberti",
 			"Sarrus",
-			"Saederup92"
+			"Saederup92",
+			"Kranix"
 		]
 	},
 	"wikibase-lib-desc": "Fælles funktionalitet for Wikibase og Wikibase-klientudvidelser",
@@ -76,11 +77,12 @@
 	"datatypes-type-globe-coordinate": "Geografiske koordinater",
 	"datatypes-type-time": "Tidspunkt",
 	"datatypes-type-wikibase-item": "Emne",
+	"datatypes-type-wikibase-property": "Egenskab",
 	"datatypes-type-commonsMedia": "Commons media-fil",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "i $1 milliarder år",
-	"wikibase-time-precision-Mannum": "i $1 millioner år",
-	"wikibase-time-precision-annum": "i $1 år",
+	"wikibase-time-precision-Mannum": "$1 million år e.v.t.",
+	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 år}} e.v.t.",
 	"wikibase-time-precision-millennium": "$1. årtusind",
 	"wikibase-time-precision-century": "$1. århundrede",
 	"wikibase-time-precision-10annum": "$1. årti",
@@ -130,13 +132,15 @@
 	"wikibase-item-summary-wbcreate-new": "Oprettede et nyt emne",
 	"wikibase-item-summary-wbeditentity": "Oprettede et nyt emne",
 	"wikibase-item-summary-wbeditentity-create": "Oprettede et nyt emne",
-	"wikibase-item-summary-wbeditentity-update": "Opdaterede et emne",
+	"wikibase-item-summary-wbeditentity-create-item": "Oprettede et nyt emne",
+	"wikibase-item-summary-wbeditentity-update": "Ændrede et emne",
 	"wikibase-item-summary-wbeditentity-override": "Overskrev et emne",
 	"wikibase-item-summary-wblinktitles-create": "Oprettede dette element for at forbinde siderne",
 	"wikibase-item-summary-wblinktitles-connect": "Tilknyttede en sproghenvisning for at forbinde siderne",
 	"wikibase-property-summary-wbcreate-new": "Oprettede en ny egenskab",
 	"wikibase-property-summary-wbeditentity-create": "Oprettede en ny egenskab",
-	"wikibase-property-summary-wbeditentity-update": "Opdaterede en egenskab",
+	"wikibase-property-summary-wbeditentity-create-property": "Oprettede en ny egenskab",
+	"wikibase-property-summary-wbeditentity-update": "Ændrede en egenskab",
 	"wikibase-property-summary-wbeditentity-override": "Ryddet en egenskab",
 	"wikibase-property-summary-special-create-property": "Oprettede en egenskab for [$2] med {{PLURAL:$1|en værdi|værdier}}"
 }

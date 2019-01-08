@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use Psr\Log\LoggerInterface;
 use JobQueueGroup;
 use JobSpecification;
 use Wikibase\Change;
@@ -36,13 +37,20 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	private $jobQueueGroupFactory;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param string|bool $repoDB
+	 * @param LoggerInterface $logger
 	 * @param string[] $wikiDBNames An associative array mapping site IDs to logical database names.
 	 * @param int $batchSize Number of changes to push per job.
 	 * @param callable|null $jobQueueGroupFactory Function that returns a JobQueueGroup for a given wiki.
 	 */
 	public function __construct(
 		$repoDB,
+		LoggerInterface $logger,
 		array $wikiDBNames = [],
 		$batchSize = 50,
 		$jobQueueGroupFactory = null
@@ -51,6 +59,7 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 		$this->wikiDBNames = $wikiDBNames;
 		$this->batchSize = $batchSize;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory ?: [ JobQueueGroup::class, 'singleton' ];
+		$this->logger = $logger;
 	}
 
 	/**
@@ -79,10 +88,16 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 		}
 		$qgroup->lazyPush( $jobs );
 
-		wfDebugLog(
-			__METHOD__,
-			"Posted " . count( $jobs ) . " notification jobs for site $siteID with " .
-				count( $changes ) . " changes to $wikiDB."
+		$this->logger->debug(
+			'{method}: Posted {jobCount} notification jobs for site {siteId} ' .
+			'with {changeCount} changes to {wikiDB}.',
+			[
+				'method' => __METHOD__,
+				'jobCount' => count( $jobs ),
+				'siteId' => $siteID,
+				'changeCount' => count( $changes ),
+				'wikiDB' => $wikiDB,
+			]
 		);
 	}
 

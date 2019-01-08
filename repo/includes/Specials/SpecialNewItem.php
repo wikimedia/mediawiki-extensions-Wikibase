@@ -9,7 +9,7 @@ use WebRequest;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
@@ -49,7 +49,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory,
+		MediawikiEditEntityFactory $editEntityFactory,
 		SiteLookup $siteLookup,
 		TermValidatorFactory $termValidatorFactory
 	) {
@@ -231,6 +231,13 @@ class SpecialNewItem extends SpecialNewEntity {
 			 && $formData[ self::FIELD_ALIASES ] === []
 		) {
 			return Status::newFatal( 'wikibase-newitem-insufficient-data' );
+		}
+
+		// Disallow the same label and description, but ignore if both are empty T100933
+		if ( $formData[ self::FIELD_LABEL ] !== '' &&
+			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
+		) {
+			return Status::newFatal( 'wikibase-newitem-same-label-and-description' );
 		}
 
 		if ( $formData[self::FIELD_LABEL] != '' ) {

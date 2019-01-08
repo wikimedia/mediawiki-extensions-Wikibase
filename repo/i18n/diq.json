@@ -12,6 +12,7 @@
 		]
 	},
 	"wikibase-entity-item": "unsur",
+	"wikibase-entity-property": "Xısusiyet",
 	"wikibase-entity-query": "persen",
 	"wikibase-edit": "bıvurne",
 	"wikibase-save": "qeyd ke",
@@ -41,6 +42,7 @@
 	"wikibase-disambiguation-title": "Menaya \"$1\" bine",
 	"wikibase-statementview-rank-normal": "Dereceyo normal",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|çıme|çımeyi}}",
+	"wikibase-snakview-property-input-placeholder": "Xısusiyet",
 	"wikibase-entityselector-more": "zêde",
 	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",

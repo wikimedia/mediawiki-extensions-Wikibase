@@ -51,12 +51,18 @@ return call_user_func( function() {
 			],
 			'targets' => 'mobile',
 			'dependencies' => [
-				'wikibase.termbox.styles'
+				'wikibase.termbox.styles',
+				'wikibase.getLanguageNameByCode',
+				'wikibase.entityPage.entityLoaded',
+				'wikibase.WikibaseContentLanguages',
 			]
 		],
 
 		'wikibase.termbox.styles' => $moduleTemplate + [
-			'styles' => '../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
+			'styles' => [
+				'termbox/main.less',
+				'../../lib/wikibase-termbox/dist/wikibase.termbox.main.css',
+			],
 			'targets' => 'mobile'
 		],
 

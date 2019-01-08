@@ -165,7 +165,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 			->loadProfile( self::WIKIBASE_PREFIX_QUERY_BUILDER, self::CONTEXT_WIKIBASE_PREFIX );
 
 		$dismax = new DisMax();
-		$dismax->setTieBreaker( 0 );
+		$dismax->setTieBreaker( $profile['tie-breaker'] ?? 0 );
 
 		$fields = [
 			[ "labels.{$languageCode}.near_match", $profile['lang-exact'] ],

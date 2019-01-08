@@ -272,10 +272,12 @@ class ChunkCache implements ChunkAccess {
 			}
 		);
 
-		while ( $this->size > $this->maxSize && !empty( $this->entries ) ) {
-			$entry = array_shift( $lru );
-
+		foreach ( $lru as $entry ) {
 			$this->dropChunk( $entry['start'] );
+
+			if ( $this->size <= $this->maxSize ) {
+				break;
+			}
 		}
 	}
 

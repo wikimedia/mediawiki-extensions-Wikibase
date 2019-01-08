@@ -13,7 +13,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;

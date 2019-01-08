@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -47,7 +48,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				'Q3' => '~=[,,_,,]:3'
 			] ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
 		// Prefetch Q1 and Q3
 		$accessor->prefetch( [ $q1, $q3 ] );
@@ -91,7 +92,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				$q2->getSerialization() => $q2 ] )
 			->will( $this->returnValue( $expected ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, 2 );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger(), 2 );
 
 		// This will trigger all three to be loaded
 		$result = $accessor->loadRevisionInformation( [ $q1, $q2, $q3 ], $fromReplica );
@@ -121,7 +122,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				$q2->getSerialization() => $q2 ] )
 			->will( $this->returnValue( $expected ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, 2 );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger(), 2 );
 
 		// Ask to prefetch $q1 and $q3
 		$accessor->prefetch( [ $q1, $q3 ] );
@@ -158,7 +159,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				return $ret;
 			} ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 		// Prefetch Q1 and Q3
 		$accessor->prefetch( [ $q1, $q3 ] );
 
@@ -212,7 +213,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			)
 			->will( $this->returnValue( [ 'Q1' => 'data' ] ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
 		// This loads Q1 with $mode = 'load-mode'
 		$result = $accessor->loadRevisionInformation( [ $q1 ], 'load-mode' );
@@ -231,7 +232,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			->with( $q1, 123, EntityRevisionLookup::LATEST_FROM_MASTER )
 			->will( $this->returnValue( 'passthrough' ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
 		$result = $accessor->loadRevisionInformationByRevisionId( $q1, 123 );
 
@@ -251,7 +252,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			] ] );
 		$lookup->expects( $this->never() )
 			->method( 'loadLatestRevisionIds' );
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 		$accessor->loadRevisionInformation( [ $q1 ], $mode );
 
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1 ], $mode );
@@ -275,7 +276,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			->method( 'loadLatestRevisionIds' )
 			->with( [ $q2 ], $mode )
 			->willReturn( [ $q2->getSerialization() => 200 ] );
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 		$accessor->loadRevisionInformation( [ $q1 ], $mode );
 
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q2 ], $mode );
@@ -310,7 +311,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				$q2->getSerialization() => 200,
 				$q4->getSerialization() => 400,
 			] );
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 		$accessor->loadRevisionInformation( [ $q1, $q3 ], $mode );
 
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1, $q2, $q3, $q4 ], $mode );
@@ -344,7 +345,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			->method( 'loadLatestRevisionIds' )
 			->with( [ $q1 ], $mode )
 			->willReturn( [ $q1->getSerialization() => 101 ] );
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 		$accessor->loadRevisionInformation( [ $q1 ], $mode );
 
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1 ], $mode );
@@ -373,7 +374,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			] );
 		$lookup->expects( $this->never() )
 			->method( 'loadLatestRevisionIds' );
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
 		$accessor->prefetch( [ $q1, $q2 ] );
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q2 ], $mode );
@@ -395,7 +396,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			] ] );
 		$lookup->expects( $this->never() )
 			->method( 'loadLatestRevisionIds' );
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
 		$accessor->prefetch( [ $q1 ] );
 		$latestRevisionIds = $accessor->loadLatestRevisionIds( [ $q1 ], $mode );
@@ -428,7 +429,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 				}
 			} ) );
 
-		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
 
 		$rows = $accessor->loadRevisionInformation( [ $q1 ], $fromReplica );
 		$result = $rows[$q1->getSerialization()];

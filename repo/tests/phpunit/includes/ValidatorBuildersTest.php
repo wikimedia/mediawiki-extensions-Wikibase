@@ -122,38 +122,91 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		return $fileNameLookup;
 	}
 
-	public function provideCommonsMediaValidation() {
+	public function testCommonsMediaValidationSucceeds() {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
+
+		$this->assertTrue( $validator->validate( new StringValue( 'Foo.jpg' ) )->isValid() );
+		$this->assertTrue( $validator->validate( new StringValue( 'Äöü.jpg' ) )->isValid() );
+	}
+
+	/**
+	 * @dataProvider commonsFileNamesWithIllegalCharactersProvider
+	 */
+	public function testCommonsMediaValidationFailsWithIllegalFileCharsCode( $fileName ) {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
+
+		$this->assertResultContainsErrorCode(
+			'illegal-file-chars',
+			$validator->validate( new StringValue( $fileName ) )
+		);
+	}
+
+	public function commonsFileNamesWithIllegalCharactersProvider() {
+		yield [ 'Illegal character: open square bracket' => 'a[a.jpg' ];
+		yield [ 'Illegal character: close square bracket' => 'a]a.jpg' ];
+		yield [ 'Illegal character: open curly bracket' => 'a{a.jpg' ];
+		yield [ 'Illegal character: close curly bracket' => 'a}a.jpg' ];
+		yield [ 'Illegal character: pipe' => 'a|a.jpg' ];
+		yield [ 'Illegal character: hash' => 'Foo#bar.jpg' ];
+		yield [ 'Illegal character: colon' => 'Foo:bar.jpg' ];
+		yield [ 'Illegal character: slash' => 'Foo/bar.jpg' ];
+		yield [ 'Illegal character: backslash' => 'Foo\bar.jpg' ];
+	}
+
+	public function testCommonsMediaValidationFailsWhenFileTypeIsMissing() {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
+
+		$this->assertResultContainsErrorCode(
+			'check-file-type',
+			$validator->validate( new StringValue( 'Foo' ) )
+		);
+	}
+
+	public function testCommonsMediaValidationFailsWhenFileTypeIsTooShort() {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
+
+		$this->assertResultContainsErrorCode(
+			'check-file-type',
+			$validator->validate( new StringValue( 'Foo.a' ) )
+		);
+	}
+
+	/**
+	 * @dataProvider invalidCommonsFileNamesProvider
+	 * @param string $fileName
+	 */
+	public function testCommonsMediaValidationFailureCases( $fileName ) {
+		$validator = $this->newValidatorBuilders()->buildMediaValidators()[1];
+
+		$this->assertFalse( $validator->validate( new StringValue( $fileName ) )->isValid() );
+	}
+
+	public function invalidCommonsFileNamesProvider() {
 		return [
-			'Should not be empty' => [ '', false ],
-			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg', false ],
-			'Should have extension' => [ 'Foo', false ],
-			'Extension to short' => [ 'Foo.a', false ],
-			'This should be good' => [ 'Foo.jpg', true ],
-			'Illegal character: newline' => [ "a\na.jpg", false ],
-			'Illegal character: open square bracket' => [ 'a[a.jpg', false ],
-			'Illegal character: close square bracket' => [ 'a]a.jpg', false ],
-			'Illegal character: open curly bracket' => [ 'a{a.jpg', false ],
-			'Illegal character: close curly bracket' => [ 'a}a.jpg', false ],
-			'Illegal character: pipe' => [ 'a|a.jpg', false ],
-			'Illegal character: hash' => [ 'Foo#bar.jpg', false ],
-			'Illegal character: colon' => [ 'Foo:bar.jpg', false ],
-			'Illegal character: slash' => [ 'Foo/bar.jpg', false ],
-			'Illegal character: backslash' => [ 'Foo\bar.jpg', false ],
-			'Unicode support' => [ 'Äöü.jpg', true ],
-			'Leading space' => [ ' Foo.jpg', false ],
-			'Trailing space' => [ 'Foo.jpg ', false ],
-			'Not found' => [ 'Foo-NOT-FOUND.jpg', false ],
+			'Should not be empty' => [ '' ],
+			'Too long' => [ str_repeat( 'x', 237 ) . '.jpg' ],
+			'Illegal character: newline' => [ "a\na.jpg" ],
+			'Leading space' => [ ' Foo.jpg' ],
+			'Trailing space' => [ 'Foo.jpg ' ],
+			'Not found' => [ 'Foo-NOT-FOUND.jpg' ],
 		];
 	}
 
 	/**
-	 * @dataProvider provideCommonsMediaValidation
+	 * @param string $errorCode
+	 * @param Result $result
 	 */
-	public function testCommonsMediaValidation( $fileName, $expected ) {
-		$value = new StringValue( $fileName );
-		$validators = $this->newValidatorBuilders()->buildMediaValidators();
+	private function assertResultContainsErrorCode( $errorCode, Result $result ) {
+		$errors = $result->getErrors();
+		$this->assertNotEmpty( $errors );
 
-		$this->assertValidation( $expected, $validators, $value );
+		foreach ( $errors as $error ) {
+			if ( $error->getCode() === $errorCode ) {
+				return;
+			}
+		}
+
+		$this->fail( $errors[0]->getText() );
 	}
 
 	public function provideGeoShapeValidation() {
@@ -494,7 +547,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 	 * @param ValueValidator[] $validators
 	 * @param mixed $value
 	 */
-	protected function assertValidation( $expected, array $validators, $value ) {
+	private function assertValidation( $expected, array $validators, $value ) {
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );

@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use Psr\Log\NullLogger;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -189,7 +190,8 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 					return new PropertyId( 'P' . $uniquePart );
 				},
 			] ),
-			$this->getEntityNamespaceLookup()
+			$this->getEntityNamespaceLookup(),
+			new NullLogger()
 		);
 	}
 
@@ -229,6 +231,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new BasicEntityIdParser(),
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
+			new NullLogger(),
 			$databaseName,
 			$repositoryName
 		);
@@ -242,6 +245,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new BasicEntityIdParser(),
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
+			new NullLogger(),
 			false,
 			''
 		);
@@ -310,6 +314,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				},
 			] ),
 			$this->getEntityNamespaceLookup(),
+			new NullLogger(),
 			false,
 			'foo'
 		);

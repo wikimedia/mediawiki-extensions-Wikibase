@@ -313,13 +313,43 @@ return [
 	 * be rendered using ItemIdHtmlLinkFormatter.
 	 *
 	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
-	 *       Should be removed not later than 31-09-2018. Do not use it.
+	 *       Do not use it.
 	 *
 	 * @var int
 	 * @see https://phabricator.wikimedia.org/T196882
 	 * @see \Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter
-	 * @see \Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter
+	 * @see \Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter
 	 */
 	'tmpMaxItemIdForNewItemIdHtmlFormatter' => 0,
+
+	/**
+	 * Upper inclusive range bound of P-ID. Html links for Item IDs that within this range will
+	 * be rendered using ItemPropertyIdHtmlLinkFormatter.
+	 *
+	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
+	 *       Do not use it.
+	 *
+	 * @var int
+	 * @see https://phabricator.wikimedia.org/T196882
+	 * @see \Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter
+	 * @see \Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter
+	 */
+	'tmpMaxPropertyIdForNewItemIdHtmlFormatter' => 0,
+
+	'useKartographerGlobeCoordinateFormatter' => false,
+
+	/**
+	 * @note This config options is primarily added for Wikidata transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * XXX: The default for this idGenerator will have to remain using the 'original'
+	 * generator as the 'upsert' generator only supports MySQL currently.
+	 *
+	 * @var string 'original' or 'mysql-upsert' depending on what implementation of IdGenerator
+	 * you wish to use.
+	 *
+	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
+	 */
+	'idGenerator' => 'original',
 
 ];

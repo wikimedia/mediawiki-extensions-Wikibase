@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -106,7 +107,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 			$this->setExpectedException( PropertyDataTypeLookupException::class );
 		}
 
-		$lookup = new PropertyInfoDataTypeLookup( $infoLookup, $fallbackLookup );
+		$lookup = new PropertyInfoDataTypeLookup( $infoLookup, new NullLogger(), $fallbackLookup );
 
 		$actualDataType = $lookup->getDataTypeIdForProperty( $propertyId );
 

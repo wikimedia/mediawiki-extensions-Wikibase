@@ -7,6 +7,8 @@
 		]
 	},
 	"tooltip-t-wikibase": "ဒေတာအချက်အလက်နှင့် ချိတ်ဆက်ရန်လင့်ခ်",
+	"wikibase-after-page-move": "သင်၏ ရွှေ့ပြောင်းမှုသည် ယခုဆိုလျှင် [$1 {{WBREPONAME}} item ထဲတွင် ရောင်ပြန်ဟပ်သင့်ပြီ]ဖြစ်သည်။ ဤကိစ္စဖြစ်ပွားခဲ့သည်ကို စစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
+	"wikibase-after-page-delete": "ဤစာမျက်နှာသို့ ချိတ်ဆက်ထားသောလင့်ခ်ကို [$1 ဆက်နွယ်သည့် {{WBREPONAME}} item] မှ ဖယ်ရှားခဲ့သင့်သည်။ ဤကိစ္စ ဖြစ်ပွားခဲ့သည်ကိုစစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
 	"wikibase-comment-update": "{{WBREPONAME}} item ပြောင်းလဲခဲ့သည်",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "လင့်ခ်များကို တည်းဖြတ်ရန်",
@@ -29,6 +31,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} တည်းဖြတ်မှု",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} တည်းဖြတ်မှုများ",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} ပေါ်တွင် မြစ်ဖျားခံသော တည်းဖြတ်မှုများ။",
 	"wikibase-replicationnote": "ပြောင်းလဲမှုများကို ဝီကီများအားလုံးတွင် တွေ့မြင်နိုင်ရန်အတွက် မိနစ်များစွာ ကြာမြင့်နိုင်သည်ကို ကျေးဇူးပြု၍ သတိပြုပါ။",
 	"wikibase-watchlist-show-changes-pref": "သင်၏စောင့်ကြည့်စာရင်းရှိ {{WBREPONAME}} တည်းဖြတ်မှုများကို ပြသရန်",
 	"wikibase-unconnectedpages-submit": "စာမျက်နှာများ ပြသရန်",
@@ -42,5 +45,6 @@
 	"wikibase-pageinfo-entity-usage-D": "ဖော်ပြချက်များ အချို့",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "ဖော်ပြချက်: $1",
 	"wikibase-pageinfo-entity-usage-T": "ခေါင်းစဉ်",
-	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်"
+	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်",
+	"connected-redirect-category": "{{WBREPONAME}} item တစ်ခုသို့ ချိတ်ဆက်ထားသော ပြန်ညွှန်းများ"
 }

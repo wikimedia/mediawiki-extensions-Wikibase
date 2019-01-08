@@ -61,6 +61,11 @@
 		$entitytermsforlanguagelistviewMore: null,
 
 		/**
+		 * @type {boolean} Has the "show all languages" button been clicked and this click been tracked?
+		 */
+		_showAllLanguagesTracked: false,
+
+		/**
 		 * @type {Object} Map of language codes pointing to list items (in the form of jQuery nodes).
 		 */
 		_moreLanguagesItems: {},
@@ -199,7 +204,7 @@
 
 			var $moreLanguagesButton = $( '<a/>' )
 				.attr( 'href', '#' )
-				.click( $.proxy( this._onMoreLanguagesButtonClicked, this ) );
+				.click( this._onMoreLanguagesButtonClicked.bind( this ) );
 			this._toggleMoreLanguagesButton( $moreLanguagesButton );
 
 			this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
@@ -237,6 +242,7 @@
 
 			if ( !this._isMoreLanguagesExpanded() ) {
 				this._addMoreLanguages();
+				this._trackAllLanguagesShown();
 			} else {
 				var previousTop = $button.offset().top;
 				this._removeMoreLanguages();
@@ -259,6 +265,16 @@
 				'wikibase-entitytermsforlanguagelistview-'
 					+ ( this._isMoreLanguagesExpanded() ? 'less' : 'more' )
 			) );
+		},
+
+		_trackAllLanguagesShown: function () {
+			if ( this._showAllLanguagesTracked ) {
+				return;
+			}
+			mw.track( 'event.WikibaseTermboxInteraction', {
+				actionType: 'all'
+			} );
+			this._showAllLanguagesTracked = true;
 		},
 
 		/**

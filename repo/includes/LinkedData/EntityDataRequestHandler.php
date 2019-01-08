@@ -5,6 +5,7 @@ namespace Wikibase\Repo\LinkedData;
 use HttpError;
 use OutputPage;
 use CdnCacheUpdate;
+use Psr\Log\LoggerInterface;
 use WebRequest;
 use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
@@ -34,7 +35,7 @@ use Wikimedia\Http\HttpAcceptParser;
 class EntityDataRequestHandler {
 
 	/**
-	 * Allowed smallest and bigest number of seconds for the "max-age=..." and "s-maxage=..." cache
+	 * Allowed smallest and biggest number of seconds for the "max-age=..." and "s-maxage=..." cache
 	 * control parameters.
 	 *
 	 * @todo Hard maximum could be configurable somehow.
@@ -78,6 +79,11 @@ class EntityDataRequestHandler {
 	private $entityDataFormatProvider;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var string
 	 */
 	private $defaultFormat;
@@ -105,6 +111,7 @@ class EntityDataRequestHandler {
 	 * @param EntityRedirectLookup $entityRedirectLookup
 	 * @param EntityDataSerializationService $serializationService
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param LoggerInterface $logger
 	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useSquids do we have web caches configured?
@@ -118,6 +125,7 @@ class EntityDataRequestHandler {
 		EntityRedirectLookup $entityRedirectLookup,
 		EntityDataSerializationService $serializationService,
 		EntityDataFormatProvider $entityDataFormatProvider,
+		LoggerInterface $logger,
 		$defaultFormat,
 		$maxAge,
 		$useSquids,
@@ -130,6 +138,7 @@ class EntityDataRequestHandler {
 		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->serializationService = $serializationService;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->logger = $logger;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
 		$this->useSquids = $useSquids;
@@ -355,7 +364,14 @@ class EntityDataRequestHandler {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $id, $revision );
 
 			if ( $entityRevision === null ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId" );
+				$this->logger->debug(
+					'{method}: entity not found: {prefixedId}',
+					[
+						'method' => __METHOD__,
+						'prefixedId' => $prefixedId,
+					]
+				);
+
 				$msg = wfMessage( 'wikibase-entitydata-not-found', $prefixedId );
 				throw new HttpError( 404, $msg );
 			}
@@ -370,16 +386,43 @@ class EntityDataRequestHandler {
 				list( $entityRevision, ) = $this->getEntityRevision( $ex->getRedirectTargetId(), $revision );
 			} else {
 				// The requested revision is a redirect
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision of $prefixedId is a redirect: $ex" );
+				$this->logger->debug(
+					'{method}: revision {revision} of {prefixedId} is a redirect: {exMsg}',
+					[
+						'method' => __METHOD__,
+						'revision' => $revision,
+						'prefixedId' => $prefixedId,
+						'exMsg' => strval( $ex ),
+					]
+				);
+
 				$msg = wfMessage( 'wikibase-entitydata-bad-revision', $prefixedId, $revision );
 				throw new HttpError( 400, $msg );
 			}
 		} catch ( BadRevisionException $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load revision $revision or $prefixedId: $ex" );
+			$this->logger->debug(
+				'{method}: could not load revision {revision} or {prefixedId}: {exMsg}',
+				[
+					'method' => __METHOD__,
+					'revision' => $revision,
+					'prefixedId' => $prefixedId,
+					'exMsg' => strval( $ex ),
+				]
+			);
+
 			$msg = wfMessage( 'wikibase-entitydata-bad-revision', $prefixedId, $revision );
 			throw new HttpError( 404, $msg );
 		} catch ( StorageException $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)" );
+			$this->logger->debug(
+				'{method}: failed to load {prefixedId}: {exMsg} (revision {revision})',
+				[
+					'method' => __METHOD__,
+					'prefixedId' => $prefixedId,
+					'exMsg' => strval( $ex ),
+					'revision' => $revision,
+				]
+			);
+
 			$msg = wfMessage( 'wikibase-entitydata-storage-error', $prefixedId, $revision );
 			throw new HttpError( 500, $msg );
 		}
@@ -400,7 +443,15 @@ class EntityDataRequestHandler {
 			return $this->entityRedirectLookup->getRedirectIds( $id );
 		} catch ( EntityRedirectLookupException $ex ) {
 			$prefixedId = $id->getSerialization();
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex" );
+			$this->logger->debug(
+				'{method}: failed to load incoming redirects of {prefixedId}: {exMsg}',
+				[
+					'method' => __METHOD__,
+					'prefixedId' => $prefixedId,
+					'exMsg' => strval( $ex ),
+				]
+			);
+
 			return [];
 		}
 	}

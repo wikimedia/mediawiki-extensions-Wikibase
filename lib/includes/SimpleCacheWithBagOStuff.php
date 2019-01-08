@@ -32,7 +32,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private $secret;
 
 	/**
-	 * SimpleCacheWithBagOStuff constructor.
 	 * @param \BagOStuff $inner
 	 * @param string $prefix While setting and getting all keys will be prefixed with this string
 	 * @param string $secret Will be used to create a signature for stored values

@@ -6,6 +6,7 @@ use Exception;
 use Hooks;
 use InvalidArgumentException;
 use LinkBatch;
+use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
 use Wikibase\Change;
@@ -50,6 +51,11 @@ class ChangeHandler {
 	private $siteLookup;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var bool
 	 */
 	private $injectRecentChanges;
@@ -60,6 +66,7 @@ class ChangeHandler {
 	 * @param PageUpdater $updater
 	 * @param ChangeRunCoalescer $changeRunCoalescer
 	 * @param SiteLookup $siteLookup
+	 * @param LoggerInterface $logger
 	 * @param bool $injectRecentChanges
 	 *
 	 * @throws InvalidArgumentException
@@ -70,6 +77,7 @@ class ChangeHandler {
 		PageUpdater $updater,
 		ChangeRunCoalescer $changeRunCoalescer,
 		SiteLookup $siteLookup,
+		LoggerInterface $logger,
 		$injectRecentChanges = true
 	) {
 		if ( !is_bool( $injectRecentChanges ) ) {
@@ -81,6 +89,7 @@ class ChangeHandler {
 		$this->updater = $updater;
 		$this->changeRunCoalescer = $changeRunCoalescer;
 		$this->siteLookup = $siteLookup;
+		$this->logger = $logger;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
@@ -114,13 +123,26 @@ class ChangeHandler {
 	 */
 	public function handleChange( EntityChange $change, array $rootJobParams = [] ) {
 		$changeId = $this->getChangeIdForLog( $change );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": handling change #$changeId"
-			. ' (' . $change->getType() . ')' );
+
+		$this->logger->debug(
+			'{method}: handling change #{changeId} ({changeType})',
+			[
+				'method' => __METHOD__,
+				'changeId' => $changeId,
+				'changeType' => $change->getType(),
+			]
+		);
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
-			. " page(s) for change #$changeId." );
+		$this->logger->debug(
+			'{method}: updating {pageCount} page(s) for change #{changeId}.',
+			[
+				'method' => __METHOD__,
+				'changeId' => $changeId,
+				'pageCount' => count( $usagesPerPage ),
+			]
+		);
 
 		// Run all updates on all affected pages
 		$titlesToUpdate = $this->getTitlesForUsages( $usagesPerPage );

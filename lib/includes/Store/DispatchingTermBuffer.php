@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -19,15 +20,22 @@ class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingT
 	private $termBuffers;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param TermBuffer[] $termBuffers
+	 * @param LoggerInterface $logger
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $termBuffers ) {
+	public function __construct( array $termBuffers, LoggerInterface $logger ) {
 		Assert::parameter( !empty( $termBuffers ), '$termBuffers', 'must not be empty' );
 		Assert::parameterElementType( TermBuffer::class, $termBuffers, '$termBuffers' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $termBuffers, '$termBuffers' );
 		$this->termBuffers = $termBuffers;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -76,7 +84,13 @@ class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingT
 			$termBuffer = $this->getTermBufferForRepository( $repository );
 
 			if ( $termBuffer === null ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': unknown repository: ' . $repository );
+				$this->logger->debug(
+					'{method}: unknown repository: {repository}',
+					[
+						'method' => __METHOD__,
+						'repository' => $repository,
+					]
+				);
 				continue;
 			}
 

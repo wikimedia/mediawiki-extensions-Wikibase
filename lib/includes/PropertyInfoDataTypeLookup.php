@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -17,7 +18,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var PropertyDataTypeLookup|null
 	 */
 	private $fallbackLookup;
 
@@ -27,12 +28,23 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 	private $infoLookup;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param PropertyInfoLookup $infoLookup
+	 * @param LoggerInterface $logger
 	 * @param PropertyDataTypeLookup|null $fallbackLookup
 	 */
-	public function __construct( PropertyInfoLookup $infoLookup, PropertyDataTypeLookup $fallbackLookup = null ) {
+	public function __construct(
+		PropertyInfoLookup $infoLookup,
+		LoggerInterface $logger,
+		PropertyDataTypeLookup $fallbackLookup = null
+	) {
 		$this->infoLookup = $infoLookup;
 		$this->fallbackLookup = $fallbackLookup;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -53,9 +65,13 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 			$dataTypeId = $this->fallbackLookup->getDataTypeIdForProperty( $propertyId );
 
 			if ( $dataTypeId !== null ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': No property info found for '
-					. $propertyId . ', but property ID could be retrieved from fallback store!' );
-
+				$this->logger->debug(
+					'{method}: No property info found for {propertyId}, but property ID could be retrieved from fallback store!',
+					[
+						'method' => __METHOD__,
+						'propertyId' => $propertyId,
+					]
+				);
 				//TODO: Automatically update the info store?
 				//TODO: Suggest to run rebuildPropertyInfo.php
 			}

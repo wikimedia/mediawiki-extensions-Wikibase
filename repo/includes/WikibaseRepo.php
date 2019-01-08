@@ -2,12 +2,15 @@
 
 namespace Wikibase\Repo;
 
+use CachedBagOStuff;
 use Deserializers\DispatchableDeserializer;
 use Exception;
 use InvalidArgumentException;
+use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValueFactory;
@@ -22,13 +25,17 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
+use ExtensionRegistry;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
 use Language;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
+use Parser;
+use Psr\Log\LoggerInterface;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
@@ -38,9 +45,12 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
+use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataAccess\WikibaseServices;
@@ -66,7 +76,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
@@ -95,6 +105,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
@@ -111,12 +122,14 @@ use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationVal
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -131,7 +144,7 @@ use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -159,11 +172,13 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 use Wikibase\SettingsArray;
+use Wikibase\SqlIdGenerator;
 use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\UpsertSqlIdGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
@@ -295,6 +310,11 @@ class WikibaseRepo {
 	private $entityRdfBuilderFactory = null;
 
 	/**
+	 * @var CachingKartographerEmbeddingHandler|null
+	 */
+	private $kartographerEmbeddingHandler = null;
+
+	/**
 	 * @var WikibaseRepo|null
 	 */
 	private static $instance = null;
@@ -380,7 +400,14 @@ class WikibaseRepo {
 			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 		] ];
 
-		foreach ( $settings->getSetting( 'foreignRepositories' ) as $repository => $repositorySettings ) {
+		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
+
+		if ( isset( $foreignRepositories[''] ) ) {
+			throw new MWException( 'A WikibaseRepo cannot have a foreign repo configured with '
+				. 'the empty prefix, since the empty prefix always refers to the local repo.' );
+		}
+
+		foreach ( $foreignRepositories as $repository => $repositorySettings ) {
 			$repoDefinitions[$repository] = [
 				'database' => $repositorySettings['repoDatabase'],
 				'base-uri' => $repositorySettings['baseUri'],
@@ -480,8 +507,33 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'sharedCacheDuration' ),
 			$this->getEntityLookup(),
 			$this->getEntityRevisionLookup(),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			$this->getKartographerEmbeddingHandler()
 		);
+	}
+
+	/**
+	 * @return CachingKartographerEmbeddingHandler|null
+	 */
+	public function getKartographerEmbeddingHandler() {
+		if ( $this->kartographerEmbeddingHandler === null && $this->useKartographerGlobeCoordinateFormatter() ) {
+			$this->kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
+		}
+
+		return $this->kartographerEmbeddingHandler;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function useKartographerGlobeCoordinateFormatter() {
+		// FIXME: remove the global out of here
+		global $wgKartographerEnableMapFrame;
+
+		return $this->settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
+			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) &&
+			isset( $wgKartographerEnableMapFrame ) &&
+			$wgKartographerEnableMapFrame;
 	}
 
 	/**
@@ -699,6 +751,22 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return WikiPageEntityMetaDataLookup
+	 */
+	public function getLocalRepoWikiPageMetaDataLookup() {
+		$entityNamespaceLookup = $this->getEntityNamespaceLookup();
+		return new WikiPageEntityMetaDataLookup(
+			$entityNamespaceLookup,
+			new EntityIdLocalPartPageTableEntityQuery(
+				$entityNamespaceLookup,
+				MediaWikiServices::getInstance()->getSlotRoleStore()
+			),
+			$this->getSettings()->getSetting( 'changesDatabase' ),
+			'' // Empty string here means this only works for the local repo
+		);
+	}
+
+	/**
 	 * @see Store::getEntityRevisionLookup
 	 *
 	 * @param string $cache One of Store::LOOKUP_CACHING_*
@@ -744,7 +812,7 @@ class WikibaseRepo {
 	 * @return EditFilterHookRunner
 	 */
 	private function newEditFilterHookRunner( IContextSource $context ) {
-		return new EditFilterHookRunner(
+		return new MediawikiEditFilterHookRunner(
 			$this->getEntityNamespaceLookup(),
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
@@ -786,6 +854,7 @@ class WikibaseRepo {
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
 				$infoLookup,
+				LoggerFactory::getInstance( 'Wikibase' ),
 				$retrievingLookup
 			);
 		}
@@ -959,6 +1028,29 @@ class WikibaseRepo {
 		return $this->settings;
 	}
 
+	public function newIdGenerator() : IdGenerator {
+		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'original' ) {
+			return new SqlIdGenerator(
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
+				$this->getSettings()->getSetting( 'idBlacklist' )
+			);
+		}
+
+		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'mysql-upsert' ) {
+			// We could make sure the 'upsert' generator is only being used with mysql dbs here,
+			// but perhaps that is an unnecessary check? People will realize when the DB query for
+			// ID selection fails anyway...
+			return new UpsertSqlIdGenerator(
+				MediaWikiServices::getInstance()->getDBLoadBalancer(),
+				$this->getSettings()->getSetting( 'idBlacklist' )
+			);
+		}
+
+		throw new InvalidArgumentException(
+			'idGenerator config option must be either \'original\' or \'mysql-upsert\''
+		);
+	}
+
 	/**
 	 * @return Store
 	 */
@@ -971,6 +1063,7 @@ class WikibaseRepo {
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
+				$this->newIdGenerator(),
 				$this->getWikibaseServices()
 			);
 		}
@@ -1688,17 +1781,18 @@ class WikibaseRepo {
 	/**
 	 * @param IContextSource|null $context
 	 *
-	 * @return EditEntityFactory
+	 * @return MediawikiEditEntityFactory
 	 */
 	public function newEditEntityFactory( IContextSource $context = null ) {
-		return new EditEntityFactory(
+		return new MediawikiEditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
 			$this->getEntityPatcher(),
-			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() )
+			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
+			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 	}
 
@@ -1755,10 +1849,7 @@ class WikibaseRepo {
 		return new DispatchingEntityMetaTagsCreatorFactory( $this->entityTypeDefinitions->getMetaTagsFactoryCallbacks() );
 	}
 
-	/**
-	 * @return EntityParserOutputGeneratorFactory
-	 */
-	public function getEntityParserOutputGeneratorFactory() {
+	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$formats = $this->settings->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
@@ -1779,10 +1870,17 @@ class WikibaseRepo {
 				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
 				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
 			),
+			$this->getKartographerEmbeddingHandler(),
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )
 		);
+	}
+
+	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
+		return $this->getEntityParserOutputGeneratorFactory()
+			->getEntityParserOutputGenerator( $userLanguage );
 	}
 
 	/**
@@ -1819,7 +1917,7 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $lang->getCode() ),
+			new MediaWikiLocalizedTextProvider( $lang ),
 			new RepoSpecialPageLinker()
 		);
 	}
@@ -2054,6 +2152,8 @@ class WikibaseRepo {
 	}
 
 	/**
+	 *
+	 * @fixme this is duplicated in WikibaseClient...
 	 * @return CacheInterface
 	 */
 	private function getFormatterCache() {
@@ -2062,11 +2162,29 @@ class WikibaseRepo {
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
-		return new SimpleCacheWithBagOStuff(
-			wfGetCache( $cacheType ),
+		// Get out default shared cache wrapped in an in memory cache
+		$bagOStuff = ObjectCache::getInstance( $cacheType );
+		if ( !$bagOStuff instanceof CachedBagOStuff ) {
+			$bagOStuff = new CachedBagOStuff( $bagOStuff );
+		}
+
+		$cache = new SimpleCacheWithBagOStuff(
+			$bagOStuff,
 			'wikibase.repo.formatter.',
 			$cacheSecret
 		);
+
+		$cache = new StatsdMissRecordingSimpleCache(
+			$cache,
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			'wikibase.repo.formatterCache.miss'
+		);
+
+		return $cache;
+	}
+
+	public function getLogger(): LoggerInterface {
+		return LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 }

@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Http;
+use Psr\Log\LoggerInterface;
 
 /**
  * PropertyOrderProvider that retrieves the order from a http(s) URL.
@@ -18,17 +19,24 @@ class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider impleme
 	private $http;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var string
 	 */
 	private $url;
 
 	/**
 	 * @param string $url
-	 * @param Http $http
+	 * @param Http $logger
+	 * @param LoggerInterface $http
 	 */
-	public function __construct( $url, Http $http ) {
+	public function __construct( $url, Http $http, LoggerInterface $logger ) {
 		$this->url = $url;
 		$this->http = $http;
+		$this->logger = $logger;
 	}
 
 	protected function getPropertyOrderWikitext() {
@@ -37,7 +45,13 @@ class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider impleme
 		$httpText = $this->http->get( $this->url, $options, __METHOD__ );
 
 		if ( $httpText === false ) {
-			wfDebugLog( 'HttpUrlPropertyOrderProvider', "Error loading wikitext from $this->url\n" );
+			$this->logger->debug(
+				'{method}: Error loading wikitext from {url}',
+				[
+					'method' => __METHOD__,
+					'url' => $this->url,
+				]
+			);
 			return null;
 		}
 

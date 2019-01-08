@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
 use MapCacheLRU;
+use Psr\Log\LoggerInterface;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -32,16 +33,23 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	private $cache;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var EntityId[]
 	 */
 	private $toFetch = [];
 
 	/**
 	 * @param WikiPageEntityMetaDataAccessor $lookup
+	 * @param LoggerInterface $logger
 	 * @param int $maxCacheKeys Maximum number of entries to cache (defaults to 1000)
 	 */
-	public function __construct( WikiPageEntityMetaDataAccessor $lookup, $maxCacheKeys = 1000 ) {
+	public function __construct( WikiPageEntityMetaDataAccessor $lookup, LoggerInterface $logger, $maxCacheKeys = 1000 ) {
 		$this->lookup = $lookup;
+		$this->logger = $logger;
 		$this->cache = new MapCacheLRU( $maxCacheKeys );
 	}
 
@@ -50,9 +58,13 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 */
 	private function increaseCacheSize( $newSize ) {
 		$this->cache->setMaxSize( $newSize );
-		wfDebugLog(
-			'PrefetchingWikiPageEntityMetaDataAccessor',
-			"Needed to increase size of MapCacheLRU instance to $newSize."
+
+		$this->logger->debug(
+			'{method}: Needed to increase size of MapCacheLRU instance to {newSize}',
+			[
+				'method' => __METHOD__,
+				'newSize' => $newSize,
+			]
 		);
 	}
 

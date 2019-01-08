@@ -41,7 +41,7 @@
 				this._languageCodes = $.map( this._languageMap, function ( val, key ) {
 					return key;
 				} );
-				this._languageCodes = $.grep( this._languageCodes, function ( code ) {
+				this._languageCodes = this._languageCodes.filter( function ( code ) {
 					// Make sure this is a subset of the language codes returned by
 					// WikibaseRepo::getMonolingualTextLanguages
 					// We don't want to have language codes in the suggester that are not
@@ -58,6 +58,17 @@
 		 */
 		getName: function ( code ) {
 			return this._languageMap ? this._languageMap[ code ] : null;
+		},
+
+		/**
+		 * @inheritdoc
+		 */
+		getAllPairs: function () {
+			return this._deepClone( this._languageMap );
+		},
+
+		_deepClone: function ( original ) {
+			return JSON.parse( JSON.stringify( original ) );
 		}
 	} );
 

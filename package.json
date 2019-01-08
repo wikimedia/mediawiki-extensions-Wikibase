@@ -2,7 +2,7 @@
 	"name": "Wikibase",
 	"version": "0.0.0",
 	"scripts": {
-		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w npm run selenium-test",
+		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "wdio repo/tests/selenium/wdio.conf.js",
 		"test": "grunt test"
 	},
@@ -13,7 +13,7 @@
 	"author": "The Wikidata team",
 	"license": "GPL-2.0-or-later",
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.8.1",
+		"eslint-config-wikimedia": "0.9.0",
 		"eslint-plugin-qunit": "3.3.1",
 		"eslint-plugin-compat": "^2.6.3",
 		"grunt": "1.0.3",
@@ -26,6 +26,7 @@
 		"wdio-mediawiki": "0.2.0",
 		"wdio-mocha-framework": "0.6.1",
 		"wdio-spec-reporter": "0.1.4",
+		"wdio-wikibase": "file:repo/tests/selenium/wdio-wikibase",
 		"webdriverio": "4.13.1"
 	},
 	"eslintIgnore": [
@@ -33,5 +34,7 @@
 		"vendor/**",
 		"view/lib/**"
 	],
-	"browserslist": ["ie 11"]
+	"browserslist": [
+		"ie 11"
+	]
 }

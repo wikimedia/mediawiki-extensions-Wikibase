@@ -227,8 +227,24 @@ class SetAliases extends ModifyEntity {
 					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
 					self::PARAM_REQUIRED => true,
 				],
+				'new' => [
+					self::PARAM_TYPE => $this->getEntityTypesWithAliases(),
+				],
 			]
 		);
+	}
+
+	protected function getEntityTypesWithAliases() {
+		// TODO inject me
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$supportedEntityTypes = [];
+		foreach ( $this->enabledEntityTypes as $entityType ) {
+			$testEntity = $entityFactory->newEmpty( $entityType );
+			if ( $testEntity instanceof AliasesProvider ) {
+				$supportedEntityTypes[] = $entityType;
+			}
+		}
+		return $supportedEntityTypes;
 	}
 
 	/**

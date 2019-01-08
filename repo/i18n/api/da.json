@@ -4,6 +4,8 @@
 			"Saederup92"
 		]
 	},
+	"apihelp-wbeditentity-example-12": "Fjerner en etiket",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Sprogkoden.",
 	"apihelp-query+wbsearch-param-search": "Søg efter denne tekst.",
 	"apihelp-query+wbsearch-param-language": "Søg på dette sprog.",
 	"apihelp-wbsetdescription-param-language": "Beskrivelsens sprog"

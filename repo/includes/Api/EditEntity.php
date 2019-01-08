@@ -257,7 +257,7 @@ class EditEntity extends ModifyEntity {
 
 	/**
 	 * @param array $preparedParameters
-	 *
+	 * @param EntityDocument $entity
 	 * @return Summary
 	 */
 	private function getSummary( array $preparedParameters, EntityDocument $entity ) {

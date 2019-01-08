@@ -71,7 +71,9 @@
 	"wikibase-snakview-variations-novalue-label": "nisciune valore",
 	"wikibase-snakview-snaktypeselector-value": "valore personalizzate",
 	"wikibase-entityselector-more": "de cchiù",
+	"wikibase-validator-check-file-type": "L'estenzione d'u file manghe",
 	"wikibase-validator-page-not-exists": "'A pàgene \"$1\" non g'esiste.",
+	"wikibase-item-reference-edit-placeholder": "Mitte l'ID d'a vôsce e.g. Q10",
 	"special-itembytitle": "Vôsce pe titole",
 	"wikibase-itembytitle-lookup-site": "Site:",
 	"wikibase-itembytitle-lookup-page": "Pàgene:",
@@ -80,6 +82,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Code d'a lènghe:",
 	"wikibase-itemdisambiguation-lookup-label": "Etichette:",
 	"wikibase-itemdisambiguation-submit": "Cirche",
+	"special-newproperty": "Ccrejate 'na probbietà nove",
 	"wikibase-newitem-fieldset": "Ccreje 'na vôscia nove",
 	"wikibase-newentity-label": "Etichette:",
 	"wikibase-newentity-description": "Descrizione:",
@@ -88,5 +91,11 @@
 	"wikibase-setlabel-label": "Etichette:",
 	"wikibase-setlabel-submit": "'Mboste l'etichette",
 	"special-setdescription": "'Mboste 'na descrizione",
-	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>."
+	"wikibase-setsitelink-not-badge": "L'elemende $1 non g'è 'nu distindive.",
+	"wikibase-itemmerge-cant-load-entity-content": "Errore mendre ca ste carecave l'elemende.",
+	"special-listproperties": "Elenghe de le probbietà",
+	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>.",
+	"content-model-wikibase-item": "Elemende Uicchibase",
+	"content-model-wikibase-property": "Probbietà Uicchibase",
+	"content-model-wikibase-query": "'Nderrogazione UicchiBase"
 }

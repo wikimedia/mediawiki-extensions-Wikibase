@@ -25,5 +25,8 @@
 	"apihelp-query+wbsearch-param-language": "Претрага на овом језику.",
 	"apihelp-query+wbsearch-param-limit": "Максимални број резултата",
 	"apihelp-query+wbsubscribers-param-limit": "Максимални број резултата",
-	"apihelp-wbsetdescription-param-language": "Језик описа"
+	"apihelp-wbsetdescription-param-language": "Језик описа",
+	"apihelp-wbformatentities-summary": "Форматира ID-ове ентитета у HTML.",
+	"apihelp-wbformatentities-extended-description": "Језик може да буде наведен са глобалним параметром <var>uselang</var>.",
+	"apihelp-wbformatentities-param-ids": "ID-ови ентитета за форматирање"
 }

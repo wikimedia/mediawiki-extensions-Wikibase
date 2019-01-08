@@ -8,6 +8,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -124,6 +125,33 @@ class SetLabel extends ModifyTerm {
 			'action=wbsetlabel&site=enwiki&title=Earth&language=en&value=Earth'
 				=> 'apihelp-wbsetlabel-example-2',
 		];
+	}
+
+	/**
+	 * @see ModifyEntity::getAllowedParams
+	 */
+	protected function getAllowedParams() {
+		return array_merge(
+			parent::getAllowedParams(),
+			[
+				'new' => [
+					self::PARAM_TYPE => $this->getEntityTypesWithLabels(),
+				],
+			]
+		);
+	}
+
+	protected function getEntityTypesWithLabels() {
+		// TODO inject me
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$supportedEntityTypes = [];
+		foreach ( $this->enabledEntityTypes as $entityType ) {
+			$testEntity = $entityFactory->newEmpty( $entityType );
+			if ( $testEntity instanceof LabelsProvider ) {
+				$supportedEntityTypes[] = $entityType;
+			}
+		}
+		return $supportedEntityTypes;
 	}
 
 }

@@ -296,5 +296,12 @@
 	"apihelp-wbsetsitelink-example-5": "Adicionar um sitelink para a página em polonês \"Wodór\" ao item vinculado com a página em inglês \"Hydrogen\", com um emblema apontando para o item com ID \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "Altere os emblemas do link para a página polaca do item com a identificação \"Q42\" para dois emblemas apontando para os itens com IDs \"Q2\" e \"Q149\" sem fornecer o título do link",
 	"apihelp-wbsetsitelink-example-7": "Altere o link para a página polonesa do item com o ID \"Q42\" sem alterar seus emblemas",
-	"apihelp-wbsetsitelink-example-8": "Altere o link para a página polonesa do item com o ID \"Q42\" e remova todos os seus emblemas"
+	"apihelp-wbsetsitelink-example-8": "Altere o link para a página polonesa do item com o ID \"Q42\" e remova todos os seus emblemas",
+	"apihelp-wbformatentities-summary": "Formata IDs de entidade para HTML.",
+	"apihelp-wbformatentities-extended-description": "A linguagem pode ser especificada com o parâmetro global <var>uselang</var>.",
+	"apihelp-wbformatentities-param-ids": "Os IDs da entidade a serem formatados.",
+	"apihelp-wbformatentities-example-1": "Formate um ID de item único.",
+	"apihelp-wbformatentities-example-2": "Formate um ID de item e um ID de propriedade.",
+	"apihelp-wbformatentities-example-3": "Formate um ID de item, um ID de propriedade e um ID de lexema.",
+	"apihelp-wbformatentities-example-4": "Formate três IDs de item em francês."
 }

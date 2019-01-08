@@ -76,7 +76,7 @@ wikibase.view.ToolbarViewController = ( function ( wb ) {
 		// When option is set, remove icon is shown. Not really needed on every setValue().
 		this._toolbar.option(
 			'onRemove',
-			( value && this._model.remove ) ? $.proxy( this.remove, this ) : null
+			( value && this._model.remove ) ? this.remove.bind( this ) : null
 		);
 	};
 
@@ -87,11 +87,11 @@ wikibase.view.ToolbarViewController = ( function ( wb ) {
 		this._updateSaveButtonState();
 		this._view.element.on(
 			this._view.widgetEventPrefix + 'change',
-			$.proxy( this._updateSaveButtonState, this )
+			this._updateSaveButtonState.bind( this )
 		);
 		this._view.element.on(
 			this._view.widgetEventPrefix + 'disable',
-			$.proxy( this._updateToolbarState, this )
+			this._updateToolbarState.bind( this )
 		);
 		result.done( this._startEditingCallback );
 		return result;

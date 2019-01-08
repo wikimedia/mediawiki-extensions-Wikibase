@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use MediaWiki\Logger\LoggerFactory;
 use OutOfBoundsException;
+use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -46,12 +48,17 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	public function __construct( Title $title, $params = false ) {
 		parent::__construct( 'UpdateRepoOnDelete', $title, $params );
 
+		$this->initRepoJobServicesFromGlobalState();
+	}
+
+	protected function initRepoJobServicesFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
+			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->newEditEntityFactory()
 		);
@@ -61,13 +68,15 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
+		LoggerInterface $logger,
 		SiteLookup $siteLookup,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
 			$entityRevisionLookup,
 			$entityStore,
 			$summaryFormatter,
+			$logger,
 			$editEntityFactory
 		);
 		$this->siteLookup = $siteLookup;
@@ -123,7 +132,13 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		$siteLink = $this->getSiteLink( $item, $siteId );
 		if ( !$siteLink || $siteLink->getPageName() !== $page ) {
 			// Probably something changed since the job has been inserted
-			wfDebugLog( 'UpdateRepo', "OnDelete: The site link to " . $siteId . " is no longer $page" );
+			$this->logger->debug(
+				'OnDelete: The site link to {siteId} is no longer {page}',
+				[
+					'siteId' => $siteId,
+					'page' => $page,
+				]
+			);
 			return false;
 		}
 
@@ -132,7 +147,13 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		// Maybe the page has been undeleted/ recreated?
 		$exists = $site->normalizePageName( $page );
 		if ( $exists !== false ) {
-			wfDebugLog( 'UpdateRepo', "OnDelete: $page on $siteId exists" );
+			$this->logger->debug(
+				'OnDelete: {page} on {siteId} exists',
+				[
+					'siteId' => $siteId,
+					'page' => $page,
+				]
+			);
 			return false;
 		}
 

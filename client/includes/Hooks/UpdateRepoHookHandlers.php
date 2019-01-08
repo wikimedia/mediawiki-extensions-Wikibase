@@ -5,7 +5,9 @@ namespace Wikibase\Client\Hooks;
 use Content;
 use JobQueueGroup;
 use LogEntry;
+use MediaWiki\Logger\LoggerFactory;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
@@ -39,6 +41,11 @@ class UpdateRepoHookHandlers {
 	 * @var SiteLinkLookup
 	 */
 	private $siteLinkLookup;
+
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
 
 	/**
 	 * @var string
@@ -78,6 +85,7 @@ class UpdateRepoHookHandlers {
 			$namespaceChecker,
 			$jobQueueGroup,
 			$siteLinkLookup,
+			LoggerFactory::getInstance( 'UpdateRepo' ),
 			$repoDB,
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'propagateChangesToRepo' )
@@ -148,6 +156,7 @@ class UpdateRepoHookHandlers {
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param LoggerInterface $logger
 	 * @param string $repoDatabase
 	 * @param string $siteGlobalID
 	 * @param bool $propagateChangesToRepo
@@ -156,6 +165,7 @@ class UpdateRepoHookHandlers {
 		NamespaceChecker $namespaceChecker,
 		JobQueueGroup $jobQueueGroup,
 		SiteLinkLookup $siteLinkLookup,
+		LoggerInterface $logger,
 		$repoDatabase,
 		$siteGlobalID,
 		$propagateChangesToRepo
@@ -163,6 +173,7 @@ class UpdateRepoHookHandlers {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->logger = $logger;
 
 		$this->repoDatabase = $repoDatabase;
 		$this->siteGlobalID = $siteGlobalID;
@@ -194,6 +205,7 @@ class UpdateRepoHookHandlers {
 		$updateRepo = new UpdateRepoOnDelete(
 			$this->repoDatabase,
 			$this->siteLinkLookup,
+			$this->logger,
 			$user,
 			$this->siteGlobalID,
 			$title
@@ -213,7 +225,15 @@ class UpdateRepoHookHandlers {
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
 			wfLogWarning( $e->getMessage() );
-			wfDebugLog( 'UpdateRepo', "OnDelete: Failed to inject job: " . $e->getMessage() );
+
+			$this->logger->debug(
+				'{method}: Failed to inject job: "{msg}"!',
+				[
+					'method' => __METHOD__,
+					'msg' => $e->getMessage()
+				]
+			);
+
 		}
 
 		return true;
@@ -238,6 +258,7 @@ class UpdateRepoHookHandlers {
 		$updateRepo = new UpdateRepoOnMove(
 			$this->repoDatabase,
 			$this->siteLinkLookup,
+			$this->logger,
 			$user,
 			$this->siteGlobalID,
 			$oldTitle,
@@ -258,7 +279,14 @@ class UpdateRepoHookHandlers {
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
 			wfLogWarning( $e->getMessage() );
-			wfDebugLog( 'UpdateRepo', "OnMove: Failed to inject job: " . $e->getMessage() );
+
+			$this->logger->debug(
+				'{method}: Failed to inject job: "{msg}"!',
+				[
+					'method' => __METHOD__,
+					'msg' => $e->getMessage()
+				]
+			);
 		}
 
 		return true;

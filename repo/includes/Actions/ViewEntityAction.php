@@ -168,7 +168,7 @@ class ViewEntityAction extends ViewAction {
 	/**
 	 * @see Action::requiresUnblock
 	 *
-	 * @return bool Always false.
+	 * @return bool Always false, but overridden by some subclasses.
 	 */
 	public function requiresUnblock() {
 		return false;
@@ -177,7 +177,7 @@ class ViewEntityAction extends ViewAction {
 	/**
 	 * @see Action::requiresWrite
 	 *
-	 * @return bool Always false.
+	 * @return bool Always false, but overridden by some subclasses.
 	 */
 	public function requiresWrite() {
 		return false;

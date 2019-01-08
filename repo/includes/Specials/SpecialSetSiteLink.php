@@ -13,7 +13,7 @@ use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -83,7 +83,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param SpecialPageCopyrightView $copyrightView
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
+	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param string[] $siteLinkGroups
@@ -95,7 +95,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory,
+		MediawikiEditEntityFactory $editEntityFactory,
 		SiteLookup $siteLookup,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $siteLinkGroups,

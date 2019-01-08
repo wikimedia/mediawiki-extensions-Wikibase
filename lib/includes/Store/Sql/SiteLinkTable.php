@@ -4,7 +4,9 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use MediaWiki\Logger\LoggerFactory;
 use MWException;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -22,6 +24,11 @@ use Wikimedia\Rdbms\IDatabase;
  * @author Daniel Kinzler
  */
 class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
+
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
 
 	/**
 	 * @var string
@@ -54,6 +61,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$this->table = $table;
 		$this->readonly = $readonly;
+		// TODO: Inject
+		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 
 		parent::__construct( $wiki );
 	}
@@ -96,7 +105,12 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		$linksToDelete = $this->diffSiteLinks( $oldLinks, $newLinks );
 
 		if ( !$linksToInsert && !$linksToDelete ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": links did not change, returning." );
+			$this->logger->debug(
+				'{method}: links did not change, returning.',
+				[
+					'method' => __METHOD__,
+				]
+			);
 			return true;
 		}
 
@@ -104,12 +118,24 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		$dbw = $this->getConnection( DB_MASTER );
 
 		if ( $ok && $linksToDelete ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $linksToDelete ) . " links to delete." );
+			$this->logger->debug(
+				'{method}: {linksToDeleteCount} links to delete.',
+				[
+					'method' => __METHOD__,
+					'linksToDeleteCount' => count( $linksToDelete ),
+				]
+			);
 			$ok = $this->deleteLinks( $item, $linksToDelete, $dbw );
 		}
 
 		if ( $ok && $linksToInsert ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $linksToInsert ) . " links to insert." );
+			$this->logger->debug(
+				'{method}: {linksToInsertCount} links to insert.',
+				[
+					'method' => __METHOD__,
+					'linksToInsertCount' => count( $linksToInsert ),
+				]
+			);
 			$ok = $this->insertLinks( $item, $linksToInsert, $dbw );
 		}
 
@@ -126,7 +152,13 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return bool Success indicator
 	 */
 	private function insertLinks( Item $item, array $links, IDatabase $dbw ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
+		$this->logger->debug(
+			'{method}: inserting links for {entityId}',
+			[
+				'method' => __METHOD__,
+				'entityId' => $item->getId()->getSerialization(),
+			]
+		);
 
 		$insert = [];
 		foreach ( $links as $siteLink ) {
@@ -155,7 +187,13 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return bool Success indicator
 	 */
 	private function deleteLinks( Item $item, array $links, IDatabase $dbw ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
+		$this->logger->debug(
+			'{method}: deleting links for {entityId}',
+			[
+				'method' => __METHOD__,
+				'entityId' => $item->getId()->getSerialization(),
+			]
+		);
 
 		$siteIds = [];
 		foreach ( $links as $siteLink ) {

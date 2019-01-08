@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
+use Psr\Log\LoggerInterface;
 use Site;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
@@ -47,6 +48,11 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	private $siteLinkTargetProvider;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * site link groups
 	 *
 	 * @var string[]
@@ -61,6 +67,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * @param SiteLookup $siteLookup
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param LoggerInterface $logger
 	 * @param string[] $siteLinkGroups
 	 */
 	public function __construct(
@@ -69,6 +76,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		SiteLookup $siteLookup,
 		SiteLinkLookup $siteLinkLookup,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
+		LoggerInterface $logger,
 		array $siteLinkGroups
 	) {
 		parent::__construct( 'ItemByTitle', '', true );
@@ -78,6 +86,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$this->sites = $siteLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->logger = $logger;
 		$this->groups = $siteLinkGroups;
 	}
 
@@ -170,7 +179,14 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$siteExists = $siteId
 			&& $this->siteLinkTargetProvider->getSiteList( $this->groups )->hasSite( $siteId );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
+		$this->logger->debug(
+			'{method}: Site {siteId} exists: {siteExists}',
+			[
+				'method' => __METHOD__,
+				'siteId' => $siteId,
+				'siteExists' => var_export( $siteExists, true ),
+			]
+		);
 
 		$formDescriptor = [
 			'site' => [

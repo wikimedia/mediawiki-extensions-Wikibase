@@ -32,6 +32,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Repo\ArrayValueCollector;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
@@ -279,9 +280,7 @@ abstract class EntityContent extends AbstractContent {
 		$generateHtml = true
 	) {
 		// @todo: move this to the ContentHandler
-		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
-
-		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
+		$outputGenerator = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGenerator(
 			$this->getValidUserLanguage( $options->getUserLangObj() )
 		);
 
@@ -357,6 +356,14 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * Get the keys within this Contents Entity JSON that should be removed for
+	 * text passed to edit filters.
+	 *
+	 * @return string[] Keys to ignore
+	 */
+	abstract protected function getIgnoreKeysForFilters();
+
+	/**
 	 * @return string A string representing the content in a way useful for content filtering as
 	 *         performed by extensions like AbuseFilter.
 	 */
@@ -365,50 +372,14 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getRedirectText();
 		}
 
-		//XXX: $ignore contains knowledge about the Entity's internal representation.
-		//     This list should therefore rather be maintained in the Entity class.
-		static $ignore = [
-			'language',
-			'site',
-			'type',
-		];
-
 		// @todo this text for filters stuff should be it's own class with test coverage!
 		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 		$json = $codec->encodeEntity( $this->getEntity(), CONTENT_FORMAT_JSON );
 		$data = json_decode( $json, true );
 
-		$values = self::collectValues( $data, $ignore );
+		$values = ArrayValueCollector::collectValues( $data, $this->getIgnoreKeysForFilters() );
 
 		return implode( "\n", $values );
-	}
-
-	/**
-	 * Recursively collects values from nested arrays.
-	 *
-	 * @param array $data The array structure to process.
-	 * @param array $ignore A list of keys to skip.
-	 *
-	 * @return array The values found in the array structure.
-	 * @todo needs unit test
-	 */
-	protected static function collectValues( array $data, array $ignore = [] ) {
-		$values = [];
-
-		$erongi = array_flip( $ignore );
-		foreach ( $data as $key => $value ) {
-			if ( isset( $erongi[$key] ) ) {
-				continue;
-			}
-
-			if ( is_array( $value ) ) {
-				$values = array_merge( $values, self::collectValues( $value, $ignore ) );
-			} else {
-				$values[] = $value;
-			}
-		}
-
-		return $values;
 	}
 
 	/**
@@ -729,7 +700,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param EntityValidator[] $validators
 	 *
-	 * @return Result
+	 * @return Status
 	 */
 	private function applyValidators( array $validators ) {
 		$result = Result::newSuccess();

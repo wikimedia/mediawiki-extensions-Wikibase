@@ -6,8 +6,8 @@ use OutputPage;
 use ParserOutput;
 use Skin;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * ParserOutput related hook handlers.
@@ -205,20 +205,8 @@ class SidebarHookHandlers {
 	 */
 	public function doSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
 		$outputPage = $skin->getContext()->getOutput();
-		$title = $outputPage->getTitle();
-
-		if ( !$title || !$outputPage->getProperty( 'wikibase_item' ) ) {
-			return true;
-		}
 
 		$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
-
-		// in case of stuff in cache without the other projects
-		if ( $otherProjectsSidebar === null ) {
-			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
-				->getOtherProjectsSidebarGenerator();
-			$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
-		}
 
 		if ( !empty( $otherProjectsSidebar ) ) {
 			$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;

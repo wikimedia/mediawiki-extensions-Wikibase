@@ -18,7 +18,7 @@
 	display: inline;
 }
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:before {
-	content: '|';
+	content: attr( data-aliases-separator );
 	padding: 0 0.4em;
 }
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:first-child:before {

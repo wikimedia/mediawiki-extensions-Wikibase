@@ -63,6 +63,7 @@ class StatementsMerger {
 	 * Finds a statement in the target entity with the same main snak and qualifiers as $fromStatement
 	 *
 	 * @param Statement $fromStatement
+	 * @param StatementListProvider $target
 	 *
 	 * @return Statement|false Statement to merge reference into or false
 	 */

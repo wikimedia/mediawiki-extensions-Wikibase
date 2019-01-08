@@ -29,4 +29,20 @@ interface EntityLinkFormatter {
 	 */
 	public function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null );
 
+	/**
+	 * Optionally update the fragment of the link.
+	 *
+	 * This is necessary for subentities, where the link
+	 * points to a section of the parent entity’s page;
+	 * if the anchor of that section changes
+	 * (e. g. from including the parent entity ID to not including it),
+	 * we want to update the fragment in old links to that entity accordingly.
+	 * See T208423 for an example of this.
+	 *
+	 * @param EntityId $entityId
+	 * @param string $fragment The current fragment of the link, not including an initial '#'.
+	 * @return string The new fragment (or the same as $fragment), not including an initial '#'.
+	 */
+	public function getFragment( EntityId $entityId, $fragment );
+
 }

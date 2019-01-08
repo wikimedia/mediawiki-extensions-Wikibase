@@ -71,10 +71,18 @@ class ControlledFallbackEntityIdFormatter implements EntityIdFormatter {
 	}
 
 	public function formatEntityId( EntityId $value ) {
+		static $previousTargetValues = [];
+
 		if ( $value instanceof Int32EntityId && $value->getNumericId() <= $this->maxEntityId ) {
 			try {
 				$formatEntityId = $this->targetFormatter->formatEntityId( $value );
+
+				if ( !array_key_exists( $value->getSerialization(), $previousTargetValues ) ) {
+					$previousTargetValues[$value->getSerialization()] = true;
+					$this->statsdDataFactory->increment( $this->statsPrefix . 'targetFormatterCalledUnique' );
+				}
 				$this->statsdDataFactory->increment( $this->statsPrefix . 'targetFormatterCalled' );
+
 				return $formatEntityId;
 			} catch ( \Exception $e ) { //TODO: Catch Throwable once we move to php7
 				$this->logTargetFormatterFailure( $value, $e );

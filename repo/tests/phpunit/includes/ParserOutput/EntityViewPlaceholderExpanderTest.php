@@ -128,28 +128,6 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( 'wikibase-initially-collapsed', $html );
 	}
 
-	public function testGivenOldCookieSetToTrue_placeholderIsInitiallyExpanded() {
-		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
-
-		unset( $_COOKIE['testwiki-' . self::COOKIE_NAME] );
-		$_COOKIE[self::COOKIE_NAME] = 'true';
-
-		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
-
-		$this->assertEquals( '', $html );
-	}
-
-	public function testGivenOldCookieSetToFalse_placeholderIsInitiallyCollapsed() {
-		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
-
-		unset( $_COOKIE['testwiki-' . self::COOKIE_NAME] );
-		$_COOKIE[self::COOKIE_NAME] = 'false';
-
-		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
-
-		$this->assertEquals( 'wikibase-initially-collapsed', $html );
-	}
-
 	public function testPrefixedCookieHasPrecedenceOverOldCookie() {
 		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
 

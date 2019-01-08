@@ -135,7 +135,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function provideGetPropertyAndValueHeader() {
-		$expected = 'property / <a>PID</a>: <i>SNAK</i>';
+		$expected = 'Property / <a>PID</a>: <i>SNAK</i>';
 		return [
 			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
 			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
@@ -153,13 +153,13 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function provideGetPropertyHeader() {
-		$expected = 'property / <a>PID</a>';
+		$expected = 'Property / <a>PID</a>';
 		return [
 			[ new PropertySomeValueSnak( new PropertyId( 'P1' ) ), $expected ],
 			[ new PropertyNoValueSnak( new PropertyId( 'P1' ) ), $expected ],
 			[ new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( '' ) ), $expected ],
-			[ null, 'property' ],
-			[ null, 'property' ],
+			[ null, 'Property' ],
+			[ null, 'Property' ],
 		];
 	}
 

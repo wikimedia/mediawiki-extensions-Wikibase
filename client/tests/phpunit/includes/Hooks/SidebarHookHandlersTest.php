@@ -14,9 +14,9 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\Client\NamespaceChecker;
 use Wikibase\SettingsArray;
 
 /**
@@ -279,14 +279,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$sidebar = $this->callDoSidebarBeforeOutput( $projects );
 
 		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
-	}
-
-	public function testDoSidebarBeforeOutput_generate() {
-		// If no sidebar is set, it should be generated on the fly
-		$sidebar = $this->callDoSidebarBeforeOutput( null );
-
-		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
-		$this->assertNotEmpty( $sidebar );
 	}
 
 	private function assertOutputPageProperties( $props, OutputPage $outputPage ) {

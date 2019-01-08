@@ -4,7 +4,8 @@
 			"Interfase",
 			"Wertuose",
 			"Dağlı95",
-			"Serkanland"
+			"Serkanland",
+			"Toghrul Rahimli"
 		]
 	},
 	"wikibase-after-page-move-queued": "Bu səhifə ilə əlaqəli olan [$1 {{WBREPONAME}} qeydi] tezliklə avtomatik dəyişdiriləcək. Nəzərə alın ki, bu, dərhal baş verməyə bilər.",
@@ -20,6 +21,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktəsi",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} redaktələri",
+	"wikibase-watchlist-show-changes-pref": "İzləmə siyahısında {{WBREPONAME}} redaktələrini göstər",
 	"wikibase-pageinfo-entity-id": "Elementin {{WBREPONAME}} identifikatoru",
 	"wikibase-pageinfo-entity-usage": "Bu səhifədə istifadə edilən {{WBREPONAME}} vahidləri",
 	"wikibase-otherprojects": "Digər layihələr"

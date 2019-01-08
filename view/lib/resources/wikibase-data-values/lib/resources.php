@@ -25,6 +25,7 @@ return call_user_func( function() {
 				'scripts' => [
 					'util/util.inherit.js',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 	];
 } );

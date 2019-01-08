@@ -7,7 +7,7 @@ use HTMLForm;
 use OutputPage;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Summary;
@@ -39,7 +39,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EditEntityFactory $editEntityFactory
+	 * @param MediawikiEditEntityFactory $editEntityFactory
 	 */
 	public function __construct(
 		$name,
@@ -48,7 +48,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct(
 			$name,

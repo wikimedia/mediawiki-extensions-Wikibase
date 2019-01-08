@@ -22,7 +22,6 @@ use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MWException;
-use MWExceptionHandler;
 use OutputPage;
 use ParserOutput;
 use RecentChange;
@@ -517,7 +516,7 @@ final class RepoHooks {
 
 	/**
 	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
-	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
 	 *
 	 * @param OutputPage $out
 	 * @param Skin $skin
@@ -674,13 +673,6 @@ final class RepoHooks {
 		}
 
 		if ( $wgLang instanceof StubUserLang ) {
-			wfDebugLog(
-				'wikibase-debug',
-				'Bug: T112070: ' . MWExceptionHandler::prettyPrintTrace(
-					MWExceptionHandler::redactTrace( debug_backtrace() )
-				)
-			);
-
 			StubUserLang::unstub( $wgLang );
 		}
 
@@ -950,6 +942,7 @@ final class RepoHooks {
 					'util.inherit',
 					'wikibase',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + [
 				'scripts' => [

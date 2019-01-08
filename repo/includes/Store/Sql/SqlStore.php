@@ -121,7 +121,7 @@ class SqlStore implements Store {
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var TermIndex|null
+	 * @var TermIndex|LabelConflictFinder|null
 	 */
 	private $termIndex = null;
 
@@ -166,9 +166,9 @@ class SqlStore implements Store {
 	private $cacheDuration;
 
 	/**
-	 * @var array[]
+	 * @var IdGenerator
 	 */
-	private $idBlacklist;
+	private $idGenerator;
 
 	/**
 	 * @var bool
@@ -187,6 +187,7 @@ class SqlStore implements Store {
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleStoreLookup $entityTitleLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param IdGenerator $idGenerator
 	 * @param WikibaseServices $wikibaseServices Service container providing data access services
 	 */
 	public function __construct(
@@ -196,6 +197,7 @@ class SqlStore implements Store {
 		EntityIdLookup $entityIdLookup,
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
+		IdGenerator $idGenerator,
 		WikibaseServices $wikibaseServices
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
@@ -204,6 +206,7 @@ class SqlStore implements Store {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->idGenerator = $idGenerator;
 		$this->wikibaseServices = $wikibaseServices;
 
 		//TODO: inject settings
@@ -211,7 +214,6 @@ class SqlStore implements Store {
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 	}
@@ -239,7 +241,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @return TermIndex
+	 * @return TermIndex|LabelConflictFinder
 	 */
 	private function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
@@ -294,18 +296,6 @@ class SqlStore implements Store {
 				);
 			}
 		}
-	}
-
-	/**
-	 * @see Store::newIdGenerator
-	 *
-	 * @return IdGenerator
-	 */
-	public function newIdGenerator() {
-		return new SqlIdGenerator(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$this->idBlacklist
-		);
 	}
 
 	/**
@@ -419,11 +409,10 @@ class SqlStore implements Store {
 	 */
 	private function newEntityStore() {
 		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$idGenerator = $this->newIdGenerator();
 
 		$store = new WikiPageEntityStore(
 			$contentFactory,
-			$idGenerator,
+			$this->idGenerator,
 			$this->entityIdComposer,
 			MediaWikiServices::getInstance()->getRevisionStore()
 		);

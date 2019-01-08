@@ -35,7 +35,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -613,12 +613,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testNewEditEntityFactory() {
 		$factory = $this->getWikibaseRepo()->newEditEntityFactory( new RequestContext() );
-		$this->assertInstanceOf( EditEntityFactory::class, $factory );
+		$this->assertInstanceOf( MediawikiEditEntityFactory::class, $factory );
 	}
 
 	public function testNewEditEntityFactory_withoutContextParam() {
 		$factory = $this->getWikibaseRepo()->newEditEntityFactory();
-		$this->assertInstanceOf( EditEntityFactory::class, $factory );
+		$this->assertInstanceOf( MediawikiEditEntityFactory::class, $factory );
 	}
 
 	public function testNewItemMergeInteractor() {

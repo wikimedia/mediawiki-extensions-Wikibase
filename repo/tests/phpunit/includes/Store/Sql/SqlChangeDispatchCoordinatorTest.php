@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use Psr\Log\NullLogger;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 
 /**
@@ -29,7 +30,8 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$coordinator = new SqlChangeDispatchCoordinator(
 			false,
 			'TestRepo',
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			new NullLogger()
 		);
 
 		$coordinator->setBatchSize( 3 );

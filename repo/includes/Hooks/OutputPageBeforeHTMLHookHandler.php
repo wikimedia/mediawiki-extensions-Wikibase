@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use Language;
 use OutputPage;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -118,20 +119,14 @@ class OutputPageBeforeHTMLHookHandler {
 	 *
 	 * @param OutputPage $out
 	 * @param string &$html the HTML to mangle
-	 *
-	 * @return bool
 	 */
 	public static function onOutputPageBeforeHTML( OutputPage $out, &$html ) {
-		$self = self::newFromGlobalState();
-
-		return $self->doOutputPageBeforeHTML( $out, $html );
+		self::newFromGlobalState()->doOutputPageBeforeHTML( $out, $html );
 	}
 
 	/**
 	 * @param OutputPage $out
 	 * @param string &$html
-	 *
-	 * @return bool
 	 */
 	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
@@ -173,7 +168,7 @@ class OutputPageBeforeHTMLHookHandler {
 					$out->getUser(),
 					$this->getTermsLanguagesCodes( $out ),
 					$termsListItemsHtml,
-					$out->getLanguage()->getCode()
+					$out->getLanguage()
 				);
 				$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
 			}
@@ -222,7 +217,7 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param User $user
 	 * @param string[] $termsLanguages
 	 * @param string[]|null $termsListItemsHtml
-	 * @param string $languageCode
+	 * @param Language $language
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
@@ -231,16 +226,16 @@ class OutputPageBeforeHTMLHookHandler {
 		User $user,
 		array $termsLanguages,
 		array $termsListItemsHtml = null,
-		$languageCode
+		Language $language
 	) {
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$user,
 			$entity,
-			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
+			array_unique( array_merge( [ $language->getCode() ], $termsLanguages ) ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $languageCode ),
+			new MediaWikiLocalizedTextProvider( $language ),
 			$this->cookiePrefix,
 			$termsListItemsHtml ?: []
 		);

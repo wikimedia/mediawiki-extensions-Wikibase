@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use Language;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 
 /**
@@ -17,7 +18,7 @@ class MediaWikiLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 	public function mediaWikiLocalizedTextProviderProvider() {
 		return [
 			[
-				new MediaWikiLocalizedTextProvider( 'en' ),
+				new MediaWikiLocalizedTextProvider( Language::factory( 'en' ) ),
 				true,
 				'($1)',
 				'en'

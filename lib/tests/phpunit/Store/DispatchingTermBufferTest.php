@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
@@ -25,7 +26,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidTermBuffers_exceptionIsThrown( array $termBuffers ) {
 		$this->setExpectedException( ParameterAssertionException::class );
-		new DispatchingTermBuffer( $termBuffers );
+		new DispatchingTermBuffer( $termBuffers, new NullLogger() );
 	}
 
 	public function invalidTermBufferProvider() {
@@ -79,7 +80,10 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 				return true;
 			} ) );
 
-		$dispatcher = new DispatchingTermBuffer( [ 'foo' => $fooTermBuffer, '' => $localTermBuffer ] );
+		$dispatcher = new DispatchingTermBuffer(
+			[ 'foo' => $fooTermBuffer, '' => $localTermBuffer ],
+			new NullLogger()
+		);
 		$dispatcher->prefetchTerms( $ids );
 	}
 
@@ -102,16 +106,19 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetPrefetchedTerm() {
-		$dispatcher = new DispatchingTermBuffer( [
-			'' => $this->getTermBufferWithTerms( [
-				'label' => [ 'en' => 'Vienna', 'de' => 'Wien' ],
-				'description' => [ 'en' => 'Vienna description', 'de' => 'Wien description' ],
-			] ),
-			'foo' => $this->getTermBufferWithTerms( [
-				'label' => [ 'en' => 'Berlin', 'de' => 'Berlin' ],
-				'description' => [ 'en' => 'Berlin description', 'de' => 'Berlin Beschreibung' ],
-			] ),
-		] );
+		$dispatcher = new DispatchingTermBuffer(
+			[
+				'' => $this->getTermBufferWithTerms( [
+					'label' => [ 'en' => 'Vienna', 'de' => 'Wien' ],
+					'description' => [ 'en' => 'Vienna description', 'de' => 'Wien description' ],
+				] ),
+				'foo' => $this->getTermBufferWithTerms( [
+					'label' => [ 'en' => 'Berlin', 'de' => 'Berlin' ],
+					'description' => [ 'en' => 'Berlin description', 'de' => 'Berlin Beschreibung' ],
+				] ),
+			],
+			new NullLogger()
+		);
 
 		$this->assertSame(
 			'Vienna',
@@ -132,18 +139,24 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownRepository_getPrefetchedTermReturnsNull() {
-		$dispatcher = new DispatchingTermBuffer( [
-			'foo' => $this->getMock( TermBuffer::class ),
-		] );
+		$dispatcher = new DispatchingTermBuffer(
+			[
+				'foo' => $this->getMock( TermBuffer::class ),
+			],
+			new NullLogger()
+		);
 
 		$this->assertNull( $dispatcher->getPrefetchedTerm( new ItemId( 'bar:Q123' ), 'label', 'en' ) );
 	}
 
 	public function testGetLabel() {
-		$dispatcher = new DispatchingTermBuffer( [
-			'' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Vienna', 'de' => 'Wien' ] ] ),
-			'foo' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Rome', 'de' => 'Rom' ] ] ),
-		] );
+		$dispatcher = new DispatchingTermBuffer(
+			[
+				'' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Vienna', 'de' => 'Wien' ] ] ),
+				'foo' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Rome', 'de' => 'Rom' ] ] ),
+			],
+			new NullLogger()
+		);
 
 		$this->assertSame( 'Vienna', $dispatcher->getLabel( new ItemId( 'Q123' ), 'en' ) );
 		$this->assertSame( 'Wien', $dispatcher->getLabel( new ItemId( 'Q123' ), 'de' ) );
@@ -151,12 +164,15 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetLabels() {
-		$dispatcher = new DispatchingTermBuffer( [
-			'' => $this->getTermBufferWithTerms(
-				[ 'label' => [ 'en' => 'Vienna', 'de' => 'Wien', 'fr' => 'Vienne' ] ]
-			),
-			'foo' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Rome', 'de' => 'Rom' ] ] ),
-		] );
+		$dispatcher = new DispatchingTermBuffer(
+			[
+				'' => $this->getTermBufferWithTerms(
+					[ 'label' => [ 'en' => 'Vienna', 'de' => 'Wien', 'fr' => 'Vienne' ] ]
+				),
+				'foo' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Rome', 'de' => 'Rom' ] ] ),
+			],
+			new NullLogger()
+		);
 
 		$this->assertSame(
 			[ 'en' => 'Vienna', 'de' => 'Wien' ],
@@ -177,9 +193,12 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 			->method( 'prefetchTerms' )
 			->with( [ $entityId ], [ 'label' ], $languageCodes );
 
-		$dispatcher = new DispatchingTermBuffer( [
-			'foo' => $termBuffer,
-		] );
+		$dispatcher = new DispatchingTermBuffer(
+			[
+				'foo' => $termBuffer,
+			],
+			new NullLogger()
+		);
 		$dispatcher->getLabels( $entityId, $languageCodes );
 	}
 
@@ -191,11 +210,14 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownTerm_termDoesNotAppearInResults() {
-		$dispatcher = new DispatchingTermBuffer( [
-			'' => $this->getTermBufferWithTerms(
-				[ 'label' => [ 'en' => 'Vienna', 'fr' => 'Vienne', 'de' => false ] ]
-			),
-		] );
+		$dispatcher = new DispatchingTermBuffer(
+			[
+				'' => $this->getTermBufferWithTerms(
+					[ 'label' => [ 'en' => 'Vienna', 'fr' => 'Vienne', 'de' => false ] ]
+				),
+			],
+			new NullLogger()
+		);
 
 		$labels = $dispatcher->getLabels( new ItemId( 'Q123' ), [ 'de', 'en' ] );
 		$this->assertArrayHasKey( 'en', $labels );

@@ -2,19 +2,16 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
-use InvalidArgumentException;
 use Job;
-use Title;
+use Psr\Log\LoggerInterface;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\FormatableSummary;
-use Wikibase\Store;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -41,40 +38,33 @@ abstract class UpdateRepoJob extends Job {
 	protected $summaryFormatter;
 
 	/**
-	 * @var EditEntityFactory
+	 * @var LoggerInterface
 	 */
-	private $editEntityFactory;
+	protected $logger;
 
 	/**
-	 * @see Job::__construct
-	 *
-	 * @param string $command
-	 * @param Title $title
-	 * @param array|bool $params
+	 * @var MediawikiEditEntityFactory
 	 */
-	public function __construct( $command, Title $title, $params = false ) {
-		parent::__construct( $command, $title, $params );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		$this->initRepoJobServices(
-			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$wikibaseRepo->getEntityStore(),
-			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->newEditEntityFactory()
-		);
-	}
+	private $editEntityFactory;
 
 	protected function initRepoJobServices(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		EditEntityFactory $editEntityFactory
+		LoggerInterface $logger,
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
+		$this->logger = $logger;
 		$this->editEntityFactory = $editEntityFactory;
 	}
+
+	/**
+	 * Initialize repo services from global state.
+	 */
+	abstract protected function initRepoJobServicesFromGlobalState();
 
 	/**
 	 * Get a Summary object for the edit
@@ -106,24 +96,18 @@ abstract class UpdateRepoJob extends Job {
 	 */
 	private function getItem() {
 		$params = $this->getParams();
-
-		try {
-			$itemId = new ItemId( $params['entityId'] );
-		} catch ( InvalidArgumentException $ex ) {
-			wfDebugLog(
-				'UpdateRepo',
-				__FUNCTION__ . ": Invalid ItemId serialization " . $params['entityId'] . " given."
-			);
-
-			return null;
-		}
+		$itemId = new ItemId( $params['entityId'] );
 
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 		} catch ( StorageException $ex ) {
-			wfDebugLog(
-				'UpdateRepo',
-				__FUNCTION__ . ": EntityRevision couldn't be loaded for " . $itemId->getSerialization() . ": " . $ex->getMessage()
+			$this->logger->debug(
+				'{method}: EntityRevision couldn\'t be loaded for {itemIdSerialization}: {msg}',
+				[
+					'method' => __METHOD__,
+					'itemIdSerialization' => $itemId->getSerialization(),
+					'msg' => $ex->getMessage(),
+				]
 			);
 
 			return null;
@@ -133,10 +117,14 @@ abstract class UpdateRepoJob extends Job {
 			return $entityRevision->getEntity();
 		}
 
-		wfDebugLog(
-			'UpdateRepo',
-			__FUNCTION__ . ": EntityRevision not found for " . $itemId->getSerialization()
+		$this->logger->debug(
+			'{method}: EntityRevision not found for {itemIdSerialization}',
+			[
+				'method' => __METHOD__,
+				'itemIdSerialization' => $itemId->getSerialization(),
+			]
 		);
+
 		return null;
 	}
 
@@ -165,8 +153,14 @@ abstract class UpdateRepoJob extends Job {
 		);
 
 		if ( !$status->isOK() ) {
-			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ': attemptSave for '
-				. $itemId->getSerialization() . ' failed: ' . $status->getMessage()->text() );
+			$this->logger->debug(
+				'{method}: attemptSave for {itemIdSerialization} failed: {msgText}',
+				[
+					'method' => __METHOD__,
+					'itemIdSerialization' => $itemId->getSerialization(),
+					'msgText' => $status->getMessage()->text(),
+				]
+			);
 		}
 
 		return $status->isOK();
@@ -180,7 +174,7 @@ abstract class UpdateRepoJob extends Job {
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
 		if ( !$user || !$user->isLoggedIn() ) {
-			wfDebugLog( 'UpdateRepo', "User $name doesn't exist." );
+			$this->logger->debug( 'User {name} doesn\'t exist.', [ 'name' => $name ] );
 			return false;
 		}
 

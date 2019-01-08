@@ -46,6 +46,15 @@ class PropertyContent extends EntityContent {
 		$this->propertyHolder = $propertyHolder;
 	}
 
+	protected function getIgnoreKeysForFilters() {
+		// FIXME: Refine this after https://phabricator.wikimedia.org/T205254 is complete
+		return [
+			'language',
+			'site',
+			'type',
+		];
+	}
+
 	/**
 	 * Create a new propertyContent object for the provided property.
 	 *

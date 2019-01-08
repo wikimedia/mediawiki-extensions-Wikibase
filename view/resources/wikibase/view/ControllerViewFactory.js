@@ -136,7 +136,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		// Empty statementviews (added with the "add" button) should start in edit mode
 		if ( !value ) {
 			controller.startEditing()
-				.done( $.proxy( statementview, 'focus' ) );
+				.done( statementview.focus.bind( statementview ) );
 		}
 
 		// Always focus the statementview that switched to edit mode last
