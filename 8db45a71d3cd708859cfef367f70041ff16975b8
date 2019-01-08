@@ -22,6 +22,30 @@
       "revId": "8db45a71d3cd708859cfef367f70041ff16975b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef37745d_7d0d03a0",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-08T12:54:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44dc39c1_f62aae7b",
+      "range": {
+        "startLine": 25,
+        "startChar": 114,
+        "endLine": 25,
+        "endChar": 124
+      },
+      "revId": "8db45a71d3cd708859cfef367f70041ff16975b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
