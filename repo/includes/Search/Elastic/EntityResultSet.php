@@ -23,13 +23,13 @@ class EntityResultSet extends ResultSet {
 	/**
 	 * @param string $displayLanguage
 	 * @param LanguageFallbackChain $displayFallbackChain
-	 * @param \Elastica\ResultSet $result
+	 * @param \Elastica\ResultSet|null $result
 	 */
 	public function __construct( $displayLanguage,
 		LanguageFallbackChain $displayFallbackChain,
-		\Elastica\ResultSet $result
+		\Elastica\ResultSet $result = null
 	) {
-		parent::__construct( [], [], $result, false );
+		parent::__construct( false, $result );
 		$this->fallbackChain = $displayFallbackChain;
 		$this->displayLanguage = $displayLanguage;
 	}
