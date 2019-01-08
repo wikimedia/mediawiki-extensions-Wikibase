@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Repo\Search\Elastic;
 
-use CirrusSearch\Search\EmptyResultSet;
 use CirrusSearch\Search\BaseResultsType;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\Searcher;
@@ -133,7 +132,7 @@ class EntityResultType extends BaseResultsType {
 	 * @return mixed Empty set of search results
 	 */
 	public function createEmptyResult() {
-		return new EmptyResultSet();
+		return new EntityResultSet( $this->displayLanguage, $this->fallbackChain );
 	}
 
 }
