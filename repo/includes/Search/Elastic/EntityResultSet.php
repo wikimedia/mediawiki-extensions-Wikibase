@@ -29,7 +29,7 @@ class EntityResultSet extends ResultSet {
 		LanguageFallbackChain $displayFallbackChain,
 		\Elastica\ResultSet $result
 	) {
-		parent::__construct( [], [], $result, false );
+		parent::__construct( false, $result  );
 		$this->fallbackChain = $displayFallbackChain;
 		$this->displayLanguage = $displayLanguage;
 	}
