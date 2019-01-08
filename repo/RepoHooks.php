@@ -568,16 +568,22 @@ final class RepoHooks {
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */
 	public static function onApiCheckCanExecute( ApiBase $module, User $user, &$message ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
 		if ( $module instanceof ApiEditPage ) {
 			$params = $module->extractRequestParams();
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
+			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+			$entityTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
+
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */
 				$handler = ContentHandler::getForModelID( $contentModel );
+
+				if( !in_array( $handler->getEntityType(), $entityTypes ) ) {
+					// If the entity type isn't enabled then Wikibase shouldn't be checking anything.
+					continue;
+				}
 
 				if ( $handler->getEntityNamespace() === $namespace ) {
 					// XXX: This is most probably redundant with setting
