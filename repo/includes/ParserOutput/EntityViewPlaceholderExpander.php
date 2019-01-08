@@ -163,9 +163,6 @@ class EntityViewPlaceholderExpander {
 			if ( isset( $_COOKIE[$cookieName] ) ) {
 				return $_COOKIE[$cookieName] === 'false';
 			}
-			// B/C: cookie set before 2017-11-06 are not prefixed. B/C code to be removed after 2018-11-14
-			// once all old cookies have expired.
-			return isset( $_COOKIE[$name] ) && $_COOKIE[$name] === 'false';
 		} else {
 			return !$this->user->getOption( $name, true );
 		}

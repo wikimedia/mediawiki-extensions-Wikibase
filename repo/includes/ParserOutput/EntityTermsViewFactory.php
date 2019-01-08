@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
-use Wikibase\View\TermboxView;
+use Wikibase\View\Termbox\TermboxView;
 use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -40,7 +40,7 @@ class EntityTermsViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		$useTermbox = false
 	) {
-		return $useTermbox ? $this->newTermboxView( $fallbackChain )
+		return $useTermbox ? $this->newTermboxView( $language, $fallbackChain )
 			: $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
 	}
 
@@ -49,7 +49,7 @@ class EntityTermsViewFactory {
 		Language $language,
 		LanguageFallbackChain $fallbackChain
 	) {
-		$textProvider = new MediaWikiLocalizedTextProvider( $language->getCode() );
+		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
 		$languageNameLookup = new LanguageNameLookup( $language->getCode() );
@@ -84,13 +84,17 @@ class EntityTermsViewFactory {
 		);
 	}
 
-	private function newTermboxView( LanguageFallbackChain $fallbackChain ) {
+	private function newTermboxView( Language $language, LanguageFallbackChain $fallbackChain ) {
+		$textProvider = new MediaWikiLocalizedTextProvider( $language );
+
 		return new TermboxView(
 			$fallbackChain,
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
-			)
+			),
+			$textProvider,
+			new RepoSpecialPageLinker()
 		);
 	}
 

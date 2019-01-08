@@ -7,7 +7,8 @@
 			"Aftabuzzaman",
 			"Nasir8891",
 			"Elias Ahmmad",
-			"আফতাবুজ্জামান"
+			"আফতাবুজ্জামান",
+			"Mahir256"
 		]
 	},
 	"wikibase-desc": "কাঠামোবদ্ধ তথ্য ভান্ডার",
@@ -168,7 +169,7 @@
 	"wikibase-newentity-language": "ভাষা:",
 	"wikibase-newentity-label": "লেবেল:",
 	"wikibase-newentity-description": "বিবরণ:",
-	"wikibase-newentity-submit": "তৈরি",
+	"wikibase-newentity-submit": "তৈরি করুন",
 	"special-setlabel": "লেবেল যোগ",
 	"wikibase-setlabel-introfull": "আপনি $2-এ [[$1]]-এর জন্য লেবেল নির্ধারণ করছেন।",
 	"wikibase-setlabel-label": "লেবেল:",
@@ -277,7 +278,7 @@
 	"wikibase-listdatatypes-globe-coordinate-head": "ভৌগলিক স্থানাংক",
 	"wikibase-listdatatypes-geo-shape-head": "জিওগ্রাফিক আকৃতি",
 	"wikibase-listdatatypes-quantity-head": "পরিমাণ",
-	"wikibase-listdatatypes-monolingualtext-head": "বহুভাষিক টেক্সট",
+	"wikibase-listdatatypes-monolingualtext-head": "একভাষিক টেক্সট",
 	"wikibase-listdatatypes-multilingualtext-head": "বহুভাষিক টেক্সট",
 	"wikibase-listdatatypes-string-head": "স্ট্রিং",
 	"wikibase-listdatatypes-time-head": "সময়",

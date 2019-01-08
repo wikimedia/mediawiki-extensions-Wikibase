@@ -10,12 +10,14 @@
 			"আজিজ",
 			"Elias Ahmmad",
 			"Bodhisattwa",
-			"আফতাবুজ্জামান"
+			"আফতাবুজ্জামান",
+			"Mahir256"
 		]
 	},
 	"specialpages-group-wikibase": "উইকিবেজ",
-	"wikibase-deletedentity-item": "আইটেম অপসারণ করা হয়েছে",
+	"wikibase-deletedentity-item": "আইটেম অপসারিত হয়েছে",
 	"wikibase-deletedentity-property": "বৈশিষ্ট্য অপসারিত হয়েছে",
+	"wikibase-deletedentity-query": "কোয়েরি অপসারিত হয়েছে",
 	"wikibase-error-unexpected": "ত্রুটি: $1।",
 	"wikibase-error-save-generic": "একটি ত্রুটির কারণে সংরক্ষণ করা যায়নি।",
 	"wikibase-error-remove-generic": "একটি ত্রুটির কারণে সরানো যায়নি।",
@@ -103,6 +105,8 @@
 	"wikibase-entity-summary-wbcreateredirect": "$4-এ পুনঃনির্দেশিত",
 	"wikibase-entity-summary-wbeditentity": "একটি নতুন সত্তা তৈরি হয়েছে",
 	"wikibase-entity-summary-wbeditentity-create": "একটি নতুন সত্তা তৈরি হয়েছে",
+	"wikibase-entity-summary-wbeditentity-update": "একটি সত্তা পরিবর্তন হয়েছে",
+	"wikibase-entity-summary-wbeditentity-override": "একটি সত্তা পরিষ্কার করা হয়েছে",
 	"wikibase-entity-summary-wbsetreference": "একটি সূত্র নির্ধারিত হয়েছে",
 	"wikibase-entity-summary-wbsetreference-add": "দাবিতে সূত্র যোগ হয়েছে",
 	"wikibase-entity-summary-wbsetreference-set": "দাবির সূত্র পরিবর্তন হয়েছে",

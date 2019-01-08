@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ильнар"
+			"Ильнар",
+			"Marat-avgust"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Википедия",
@@ -14,5 +15,6 @@
 	"datatypes-type-unknown": "Ачыкланмаган",
 	"datatypes-type-boolean": "Логик мәгънәсе",
 	"datatypes-type-globe-coordinate": "Географик координаталар",
-	"datatypes-type-time": "Вакыт мәле"
+	"datatypes-type-time": "Вакыт мәле",
+	"wikibase-time-precision-10annum": "$1-"
 }

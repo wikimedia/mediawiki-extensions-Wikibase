@@ -162,16 +162,6 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 		$actual = $differ->diffClaims( $oldStatement, $newStatement );
 
 		$this->assertTrue( $expected->equals( $actual ) );
-		// Additional fail-safe checks to guard against an ArrayObject bug in PHP 5.3, that returned
-		// true when using == to compare two ArrayObject instances with differing content.
-		$this->assertEquals(
-			$expected->getQualifierChanges()->getArrayCopy(),
-			$actual->getQualifierChanges()->getArrayCopy()
-		);
-		$this->assertEquals(
-			$expected->getReferenceChanges()->getArrayCopy(),
-			$actual->getReferenceChanges()->getArrayCopy()
-		);
 	}
 
 }

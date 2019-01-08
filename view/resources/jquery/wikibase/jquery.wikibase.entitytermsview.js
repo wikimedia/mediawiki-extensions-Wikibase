@@ -81,6 +81,11 @@
 		$entitytermsforlanguagelistviewHelp: null,
 
 		/**
+		 * @type {Object} Has the termbox been hidden or shown via the button and has this click been tracked?
+		 */
+		_tracked: {},
+
+		/**
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
 		_create: function () {
@@ -131,7 +136,11 @@
 						}
 						$ul.empty();
 						$.each( aliases.getTexts(), function ( i, text ) {
-							$ul.append( mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias', text ) );
+							$ul.append( mw.wbTemplate(
+								'wikibase-entitytermsview-aliases-alias',
+								text,
+								mw.message( 'wikibase-aliases-separator' ).text()
+							) );
 						} );
 					}
 				}
@@ -199,6 +208,19 @@
 			return deferred.resolve().promise();
 		},
 
+		_trackToggling: function ( isVisible ) {
+			var currentActionTracking = isVisible ? 'hide' : 'show';
+			if ( this._tracked[ currentActionTracking ] ) {
+				return;
+			}
+			mw.track(
+				'event.WikibaseTermboxInteraction', {
+					actionType: currentActionTracking
+				}
+			);
+			this._tracked[ currentActionTracking ] = true;
+		},
+
 		/**
 		 * Creates the dedicated toggler for showing/hiding the list of entity terms. This function is
 		 * supposed to be removed as soon as drop-down edit buttons are implemented with the mechanism
@@ -246,6 +268,8 @@
 							!params.visible
 						);
 					}
+
+					self._trackToggling( params.visible );
 				} );
 
 			this.$entitytermsforlanguagelistviewContainer.before(

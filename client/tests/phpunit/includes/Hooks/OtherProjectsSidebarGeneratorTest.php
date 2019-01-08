@@ -7,10 +7,11 @@ use HashSiteStore;
 use Language;
 use MediaWikiSite;
 use SiteLookup;
-use Title;
 use TestSites;
+use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -51,6 +52,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup(),
 			$sidebarLinkBadgeDisplay,
+			$this->getUsageAccumulator(),
 			$siteIdsToOutput
 		);
 
@@ -122,6 +124,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
 			$siteIdsToOutput
 		);
 
@@ -150,6 +153,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
 			$siteIdsToOutput
 		);
 
@@ -287,6 +291,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
 			[ 'enwiki' ]
 		);
 
@@ -315,6 +320,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
 			[ 'unknown-site' ]
 		);
 
@@ -335,7 +341,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$site->setGlobalId( 'enwikiquote' );
 		$site->setGroup( 'wikiquote' );
 		$site->setLanguageCode( 'en' );
-		$site->setPath( MediaWikiSite::PATH_PAGE, "https://en.wikiquote.org/wiki/$1" );
+		$site->setPath( MediaWikiSite::PATH_PAGE, 'https://en.wikiquote.org/wiki/$1' );
 		$siteStore->saveSite( $site );
 
 		return $siteStore;
@@ -376,6 +382,10 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$lookup->addEntity( $item );
 
 		return $lookup;
+	}
+
+	private function getUsageAccumulator() {
+		return $this->getMock( UsageAccumulator::class );
 	}
 
 	/**

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Validators;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use Wikimedia\Assert\Assert;
 
 /**
  * StringLengthValidator checks a string's length
@@ -35,20 +36,23 @@ class StringLengthValidator implements ValueValidator {
 	private $errorCodePrefix;
 
 	/**
-	 * @param int             $minLength
-	 * @param int             $maxLength
+	 * @param int $minLength
+	 * @param int $maxLength
 	 * @param callable|string $measure The function to use to measure the string's length.
 	 *                        Use 'strlen' for byte length and 'mb_strlen' for character length.
 	 *                        A callable can be used to provide an alternative measure.
+	 * @param string $errorCodePrefix
 	 */
 	public function __construct( $minLength, $maxLength, $measure = 'strlen', $errorCodePrefix = '' ) {
-		//TODO: check type
+		Assert::parameterType( 'integer', $minLength, '$minLength' );
+		Assert::parameterType( 'integer', $maxLength, '$maxLength' );
 		$this->minLength = $minLength;
 		$this->maxLength = $maxLength;
 
-		//TODO: check callable
+		Assert::parameterType( 'callable', $measure, '$measure' );
 		$this->measure = $measure;
 
+		Assert::parameterType( 'string', $errorCodePrefix, '$errorCodePrefix' );
 		$this->errorCodePrefix = $errorCodePrefix;
 	}
 

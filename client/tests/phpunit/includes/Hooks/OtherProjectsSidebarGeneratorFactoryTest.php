@@ -8,10 +8,11 @@ use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory
@@ -46,7 +47,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 			$sidebarLinkBadgeDisplay
 		);
 
-		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator();
+		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator( $this->getMock( UsageAccumulator::class ) );
 
 		$this->assertInstanceOf(
 			OtherProjectsSidebarGenerator::class,

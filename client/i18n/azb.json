@@ -17,6 +17,8 @@
 	"wikibase-linkitem-addlinks": "باغلانتی آرتیر",
 	"wikibase-linkitem-close": "پنجره‌نی باغلاییب صفحه‌نی یئنه آچ",
 	"wikibase-linkitem-title": "صفحه‌یه باغلانتی",
+	"wikibase-linkitem-linkpage": "صفحه‌یه باغلا",
+	"wikibase-linkitem-selectlink": "لوطفا بو صفحه‌یه باغلادیغینیز سایت ایله صفحه‌نی سئچین.",
 	"wikibase-linkitem-success-link": "بۇ صفحه‌یه باغلانتی وئریلدی. بیزیم [$1 آنا دئیتا آنباریمیزدا] باغلانتی‌یا شامیل اوْلان آیتمی تاپا بیلرسینیز.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "گیزلت",
@@ -25,5 +27,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دَییشیکلیگی",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} دَییشدیرمه‌لری",
 	"wikibase-otherprojects": "آیری پروژه‌لرده",
+	"notification-header-page-connection": "<strong>$3</strong> صفحه‌سی {{PLURAL:$4|-1=a {{WBREPONAME}} آیتمینه| {{WBREPONAME}} آیتمینه$4}} {{GENDER:$2|باغلاندی}}.",
 	"notification-link-text-view-item": "آیتمه {{GENDER:$1|باخ}}"
 }

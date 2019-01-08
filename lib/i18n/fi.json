@@ -11,7 +11,8 @@
 			"Macofe",
 			"Pyscowicz",
 			"01miki10",
-			"Silvonen"
+			"Silvonen",
+			"Valtlait"
 		]
 	},
 	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",
@@ -57,12 +58,12 @@
 	"wikibase-tooltip-error-details": "Tiedot",
 	"wikibase-undeserializable-value": "Arvo on virheellinen, eikä sitä voida näyttää.",
 	"wikibase-validator-invalid": "Virheellinen arvo",
-	"wikibase-validator-missing-field": "Puuttuu pakollinen kenttä \"$1\"",
+	"wikibase-validator-missing-field": "Puuttuu pakollinen kenttä ”$1”",
 	"wikibase-validator-too-long": "Saa olla enintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen",
 	"wikibase-validator-too-short": "Pitää olla vähintään {{PLURAL:$1|yhden merkin|$1 merkin}} pituinen",
 	"wikibase-validator-no-such-entity": "$1 ei löydy",
 	"wikibase-validator-no-such-property": "Ominaisuutta $1 ei löydy",
-	"wikibase-validator-bad-url-scheme": "Ei-tuettu URL-järjestelmä: $1",
+	"wikibase-validator-bad-url-scheme": "URL-järjestelmä \"$1\" ei ole tuettu.",
 	"wikibase-validator-unknown-unit": "Tuntematon yksikkö: $1",
 	"wikibase-validator-not-allowed": "Virheellinen arvo: $1",
 	"wikibase-validator-no-validators": "Kielletty",
@@ -74,7 +75,7 @@
 	"datatypes-type-mediawiki-title": "MediaWiki-otsikko",
 	"datatypes-type-unknown": "Määrittelemätön",
 	"datatypes-type-boolean": "Totuusarvo",
-	"datatypes-type-globe-coordinate": "Maantieteellinen koordinaatti",
+	"datatypes-type-globe-coordinate": "Maantieteelliset koordinaatit",
 	"datatypes-type-time": "Ajanhetki",
 	"datatypes-type-wikibase-item": "Kohde",
 	"datatypes-type-wikibase-property": "Ominaisuus",

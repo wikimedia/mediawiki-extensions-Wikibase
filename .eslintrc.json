@@ -1,11 +1,11 @@
 {
-	"extends": "wikimedia",
-	"env": {
-		"browser": true
-	},
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/jquery"
+	],
 	"globals": {
 		"mw": false,
-		"$": false,
 		"module": false,
 		"dataTypes": false,
 		"dataValues": false,
@@ -18,18 +18,39 @@
 	},
 	"rules": {
 		"compat/compat": "error",
-		"dot-notation": "off",
-		"indent": [ "error", "tab", { "SwitchCase": 1, "MemberExpression": "off" } ],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1,
+				"MemberExpression": "off"
+			}
+		],
 		"max-len": "off",
 		"new-cap": "off",
 		"no-underscore-dangle": "off",
-		"no-use-before-define": [ "error", "nofunc" ],
-		"no-unused-vars": [ "error", { "args": "none" } ],
+		"no-use-before-define": [
+			"error",
+			"nofunc"
+		],
+		"no-unused-vars": [
+			"error",
+			{
+				"args": "none"
+			}
+		],
 		"no-useless-concat": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off"
+		"vars-on-top": "off",
+		"jquery/no-trim": "off",
+		"jquery/no-in-array": "off",
+		"jquery/no-map-util": "off",
+		"jquery/no-each-util": "off",
+		"max-statements-per-line": "off"
 	},
-	"plugins": ["compat"]
+	"plugins": [
+		"compat"
+	]
 }

@@ -11,8 +11,8 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditEntity as EditEntityHandler;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -35,7 +35,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	private $summaryFormatter;
 
 	/**
-	 * @var EditEntityFactory
+	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
 
@@ -81,7 +81,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
-		EditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $apiModule, $idParser, $entityRevisionLookup, $errorReporter );
 
@@ -395,11 +395,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				$editError = $value['errorFlags'];
 			}
 
-			if ( $editError & EditEntityHandler::TOKEN_ERROR ) {
+			if ( $editError & EditEntity::TOKEN_ERROR ) {
 				$errorCode = 'badtoken';
-			} elseif ( $editError & EditEntityHandler::EDIT_CONFLICT_ERROR ) {
+			} elseif ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) {
 				$errorCode = 'editconflict';
-			} elseif ( $editError & EditEntityHandler::ANY_ERROR ) {
+			} elseif ( $editError & EditEntity::ANY_ERROR ) {
 				$errorCode = 'failed-save';
 			}
 		}

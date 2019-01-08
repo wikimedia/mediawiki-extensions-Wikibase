@@ -6,7 +6,6 @@ use LinkBatch;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
 
@@ -18,7 +17,7 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  */
-class ReferencedEntitiesDataUpdater implements EntityParserOutputDataUpdater {
+class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 
 	/**
 	 * @var EntityTitleLookup
@@ -29,11 +28,6 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputDataUpdater {
 	 * @var EntityReferenceExtractor
 	 */
 	private $entityReferenceExtractor;
-
-	/**
-	 * @var EntityId[]
-	 */
-	private $entityIds = [];
 
 	/**
 	 * @param EntityReferenceExtractor $entityReferenceExtractor
@@ -47,25 +41,23 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputDataUpdater {
 		$this->entityReferenceExtractor = $entityReferenceExtractor;
 	}
 
-	public function processEntity( EntityDocument $entity ) {
-		$this->entityIds = $this->entityReferenceExtractor->extractEntityIds( $entity );
-	}
+	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
+		$entityIds = $this->entityReferenceExtractor->extractEntityIds( $entity );
 
-	public function updateParserOutput( ParserOutput $parserOutput ) {
 		/**
 		 * Needed and used in EntityParserOutputGenerator, for getEntityInfo, to allow this data to
 		 * be accessed later in processing.
 		 *
 		 * @see EntityParserOutputGenerator::getEntityInfo
 		 */
-		$parserOutput->setExtensionData( 'referenced-entities', $this->entityIds );
-		$this->addLinksToParserOutput( $parserOutput );
+		$parserOutput->setExtensionData( 'referenced-entities', $entityIds );
+		$this->addLinksToParserOutput( $parserOutput, $entityIds );
 	}
 
-	private function addLinksToParserOutput( ParserOutput $parserOutput ) {
+	private function addLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
 		$linkBatch = new LinkBatch();
 
-		foreach ( $this->entityIds as $entityId ) {
+		foreach ( $entityIds as $entityId ) {
 			$linkBatch->addObj( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
 

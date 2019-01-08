@@ -6,6 +6,7 @@ use FauxRequest;
 use FauxResponse;
 use Language;
 use Message;
+use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Status;
 use ValueValidators\Result;
@@ -18,10 +19,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\EditEntityFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -67,14 +68,15 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
-			new EditEntityFactory(
+			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
@@ -390,14 +392,15 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$copyrightView,
 			$this->getSummaryFormatter(),
 			$this->getEntityTitleLookup(),
-			new EditEntityFactory(
+			new MediawikiEditEntityFactory(
 				$this->getEntityTitleLookup(),
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
 				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory()
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),

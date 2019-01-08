@@ -67,11 +67,6 @@ interface Store {
 	public function getLabelConflictFinder();
 
 	/**
-	 * @return IdGenerator
-	 */
-	public function newIdGenerator();
-
-	/**
 	 * @return EntitiesWithoutTermFinder
 	 */
 	public function newEntitiesWithoutTermFinder();

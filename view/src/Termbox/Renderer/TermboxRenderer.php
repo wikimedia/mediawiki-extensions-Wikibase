@@ -10,11 +10,15 @@ use Wikibase\DataModel\Entity\EntityId;
 interface TermboxRenderer {
 
 	/**
+	 * @throws TermboxRenderingException
+	 *
 	 * @param EntityId $entityId
-	 * @param $language
+	 * @param string $language
+	 * @param string $editLink
+	 * @param bool $canEdit
 	 *
 	 * @return string
 	 */
-	public function getContent( EntityId $entityId, $language );
+	public function getContent( EntityId $entityId, $language, $editLink, $canEdit );
 
 }

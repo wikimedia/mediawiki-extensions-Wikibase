@@ -185,8 +185,9 @@ return call_user_func( function() {
 		'VT:monolingualtext' => [
 			'expert-module' => 'jquery.valueview.experts.MonolingualText',
 			'validator-factory-callback' => function() {
-				$maxLength = WikibaseRepo::getDefaultInstance()->getSettings()
+				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
 					->getSetting( 'string-limits' )['VT:monolingualtext'];
+				$maxLength = $constraints['length'];
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildMonolingualTextValidators( $maxLength );
 			},
@@ -243,8 +244,9 @@ return call_user_func( function() {
 			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				$maxLength = WikibaseRepo::getDefaultInstance()->getSettings()
+				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
 					->getSetting( 'string-limits' )['VT:string'];
+				$maxLength = $constraints['length'];
 				return $factory->buildStringValidators( $maxLength );
 			},
 			'parser-factory-callback' => function ( ParserOptions $options ) {
@@ -299,8 +301,9 @@ return call_user_func( function() {
 		'PT:url' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				$maxLength = WikibaseRepo::getDefaultInstance()->getSettings()
+				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
 					->getSetting( 'string-limits' )['PT:url'];
+				$maxLength = $constraints['length'];
 				return $factory->buildUrlValidators( $maxLength );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
@@ -387,7 +390,7 @@ return call_user_func( function() {
 
 						$formatter = new ControlledFallbackEntityIdFormatter(
 							$maxEntityId,
-							$factory->newItemIdHtmlLinkFormatter( $options ),
+							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
 							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
 							$statsdDataFactory,
 							'wikibase.repo.wb_terms.newItemIdFormatter.'
@@ -416,6 +419,46 @@ return call_user_func( function() {
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildPropertyValidators();
+			},
+			'formatter-factory-callback' => function ( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+				$snakFormat = new SnakFormat();
+
+				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
+					//TODO Cleanup the code once https://phabricator.wikimedia.org/T196882 is Done.
+
+					$logger = LoggerFactory::getInstance( 'Wikibase.NewPropertyIdFormatter' );
+					try {
+						$maxEntityId = WikibaseRepo::getDefaultInstance()->getSettings()
+							->getSetting( 'tmpMaxItemIdForNewPropertyIdHtmlFormatter' );
+
+						$statsdDataFactory = MediaWikiServices::getInstance()
+							->getStatsdDataFactory();
+
+						$formatter = new ControlledFallbackEntityIdFormatter(
+							$maxEntityId,
+							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
+							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
+							$statsdDataFactory,
+							'wikibase.repo.wb_terms.newPropertyIdFormatter.'
+						);
+
+						$formatter->setLogger( $logger );
+
+						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+					} catch ( \Exception $e ) {
+						$logger->error(
+							"Failed to construct ItemPropertyIdHtmlLinkFormatter: {exception_message}",
+							[
+								'exception' => $e,
+							]
+						);
+
+						return $factory->newEntityIdFormatter( $format, $options );
+					}
+				}
+
+				return $factory->newEntityIdFormatter( $format, $options );
 			},
 		]
 	];

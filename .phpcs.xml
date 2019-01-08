@@ -29,7 +29,7 @@
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
-		<exclude-pattern>Scribunto_LuaWikibase*Library</exclude-pattern>
+		<exclude-pattern>Scribunto_LuaWikibase*</exclude-pattern>
 	</rule>
 	<rule ref="MediaWiki.Commenting.LicenseComment.LicenseTagNonFileComment">
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase\.php</exclude-pattern>

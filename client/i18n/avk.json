@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Axel xadolik"
+		]
+	},
+	"tooltip-t-wikibase": "Gluyaxa va daykayan origolk",
+	"wikibase-comment-update": "{{WBREPONAME}} olkoy betayan",
+	"wikibase-dataitem": "{{WBREPONAME}} olkoy",
+	"wikibase-editlinks": "Va gluyaxa betá",
+	"wikibase-editlinkstitle": "Walavafa gluyaxa",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Palsera",
+	"wikibase-rc-hide-wikidata-show": "Nedil",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} betar",
+	"wikibase-otherprojects": "Dene ar abdumimaks"
+}

@@ -84,7 +84,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @var string[]
 	 */
-	private $enabledEntityTypes;
+	protected $enabledEntityTypes;
 
 	/**
 	 * @param ApiMain $mainModule

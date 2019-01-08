@@ -301,5 +301,12 @@
 	"apihelp-wbsetsitelink-example-5": "Lägg till en webbplatslänk till den polska sidan \"Wodór\" i objektet som är länkat med den engelska sidan \"Hydrogen\", men ett emblem som pekar till objektet med ID \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "Ändra länken till den polska sidan från objektet med ID\"Q42\" till två emblem som pekar till objekt med ID:n \"Q2\" och \"Q149\" utan att ange länkens titel",
 	"apihelp-wbsetsitelink-example-7": "Ändra länken till den polska sidan från objektet med ID \"Q42\" utan att ändra emblem",
-	"apihelp-wbsetsitelink-example-8": "Ändra länken till den polska sidan från objektet med ID \"Q42\" och ta bort alla emblem"
+	"apihelp-wbsetsitelink-example-8": "Ändra länken till den polska sidan från objektet med ID \"Q42\" och ta bort alla emblem",
+	"apihelp-wbformatentities-summary": "Formaterar entitet-ID:n till HTML.",
+	"apihelp-wbformatentities-extended-description": "Språket kan specificeras med den globala parametern <var>uselang</var>.",
+	"apihelp-wbformatentities-param-ids": "Entitet-ID:n att formatera.",
+	"apihelp-wbformatentities-example-1": "Formatera ett enda objekt-ID.",
+	"apihelp-wbformatentities-example-2": "Formatera ett objekt-ID och ett egenskaps-ID.",
+	"apihelp-wbformatentities-example-3": "Formatera ett objekt-ID, ett egenskaps-ID och ett lexeme-ID.",
+	"apihelp-wbformatentities-example-4": "Formatera tre objekt-ID:n på franska."
 }

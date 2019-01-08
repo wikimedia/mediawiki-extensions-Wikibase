@@ -242,7 +242,7 @@
 				return siteLink.getSiteId();
 			} );
 
-			return $.grep( this.option( 'allowedSiteIds' ), function ( siteId ) {
+			return this.option( 'allowedSiteIds' ).filter( function ( siteId ) {
 				return $.inArray( siteId, representedSiteIds ) === -1;
 			} );
 		},
