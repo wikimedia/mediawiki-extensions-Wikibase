@@ -3,7 +3,8 @@
 		"authors": [
 			"Iwan Novirion",
 			"Naval Scene",
-			"Muhraz"
+			"Muhraz",
+			"Ardzun"
 		]
 	},
 	"wikibase-client-desc": "Klien untuak ekstensi Wikibase",
@@ -38,6 +39,8 @@
 	"wikibase-linkitem-success-link": "Laman alah barasil ditauikkan. Sanak dapek manamukan item barisi tautan tarsabuik pado [$1 pusek panyimpanan data] kami.",
 	"wikibase-property-notfound": "Properti $1 indak basobok.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Suruakan",
+	"wikibase-rc-hide-wikidata-show": "Tunjuakan",
 	"wikibase-rc-show-wikidata-pref": "Tunjuakan suntiangan Wikidata di parubahan baru",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Suntiang {{WBREPONAME}}",
@@ -48,5 +51,5 @@
 	"wikibase-unconnectedpages-submit": "Lanjut",
 	"wikibase-pageinfo-entity-id": "ID Item Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Indak ado",
-	"wikibase-otherprojects": "Proyek lain"
+	"wikibase-otherprojects": "Dalam proyek lain"
 }

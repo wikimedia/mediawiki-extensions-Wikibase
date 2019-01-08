@@ -5,7 +5,8 @@
 			"Shirayuki",
 			"Macofe",
 			"TomT0m",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Ardzun"
 		]
 	},
 	"wikibase-edit": "suntiang",
@@ -24,8 +25,10 @@
 	"wikibase-alias-edit-placeholder": "masuakan namo lain",
 	"wikibase-statementsection-statements": "Panyataan",
 	"wikibase-sitelinks-empty": "Alun ado interwiki untuak item ko.",
+	"wikibase-sitelinks-special": "Situs lain",
 	"wikibase-remove": "hapuih",
 	"wikibase-propertypage-datatype": "Jenis data",
+	"wikibase-statementview-rank-normal": "Paringkek normal",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|sumber}}",
 	"wikibase-snakview-property-input-placeholder": "properti",
 	"wikibase-snakview-choosesnaktype": "Piliah jenis nilai",
