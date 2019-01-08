@@ -2,14 +2,16 @@
 
 namespace Wikibase\Client\Hooks;
 
+use LanguageCode;
 use Hooks;
 use Site;
 use SiteLookup;
 use Title;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -47,6 +49,11 @@ class OtherProjectsSidebarGenerator {
 	private $sidebarLinkBadgeDisplay;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteIdsToOutput;
@@ -57,6 +64,7 @@ class OtherProjectsSidebarGenerator {
 	 * @param SiteLookup $siteLookup
 	 * @param EntityLookup $entityLookup
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+	 * @param UsageAccumulator $usageAccumulator
 	 * @param string[] $siteIdsToOutput
 	 */
 	public function __construct(
@@ -65,6 +73,7 @@ class OtherProjectsSidebarGenerator {
 		SiteLookup $siteLookup,
 		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
+		UsageAccumulator $usageAccumulator,
 		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
@@ -72,6 +81,7 @@ class OtherProjectsSidebarGenerator {
 		$this->siteLookup = $siteLookup;
 		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
+		$this->usageAccumulator = $usageAccumulator;
 		$this->siteIdsToOutput = $siteIdsToOutput;
 	}
 
@@ -116,7 +126,9 @@ class OtherProjectsSidebarGenerator {
 	private function runHook( ItemId $itemId, array $sidebar ) {
 		$newSidebar = $sidebar;
 
-		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [ $itemId, &$newSidebar ] );
+		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [
+			$itemId, &$newSidebar, $this->siteIdsToOutput, $this->usageAccumulator
+		] );
 
 		if ( $newSidebar === $sidebar ) {
 			return $sidebar;
@@ -245,7 +257,7 @@ class OtherProjectsSidebarGenerator {
 
 		$siteLanguageCode = $site->getLanguageCode();
 		if ( $siteLanguageCode !== null ) {
-			$attributes['hreflang'] = $siteLanguageCode;
+			$attributes['hreflang'] = LanguageCode::bcp47( $siteLanguageCode );
 		}
 
 		$this->sidebarLinkBadgeDisplay->applyBadgeToLink(

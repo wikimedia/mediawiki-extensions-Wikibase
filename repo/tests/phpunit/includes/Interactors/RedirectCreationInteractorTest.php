@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;

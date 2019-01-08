@@ -9,6 +9,7 @@ use Language;
 use HashSiteStore;
 use HttpError;
 use OutputPage;
+use Psr\Log\NullLogger;
 use SiteList;
 use SpecialPage;
 use SpecialPageTestBase;
@@ -124,6 +125,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$mockRepository,
 			$serializationService,
 			$entityDataFormatProvider,
+			new NullLogger(),
 			$defaultFormat,
 			0,
 			$useSquid,

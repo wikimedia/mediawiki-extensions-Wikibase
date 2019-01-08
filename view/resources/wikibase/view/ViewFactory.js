@@ -313,7 +313,11 @@
 		} );
 	};
 
-	SELF.prototype._getAdderWithStartEditing = function ( startEditingCallback ) {
+	/**
+	 * @param {Function} startEditingCallback
+	 * @returns {function(*=, *=, *=, *=): *}
+	 */
+	SELF.prototype.getAdderWithStartEditing = function ( startEditingCallback ) {
 		var structureEditorFactory = this._structureEditorFactory;
 		return function ( doAdd, $dom, label, title ) {
 			var newDoAdd = function () {
@@ -363,7 +367,7 @@
 					getStatementForGuid,
 					htmlIdPrefix
 				),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this.getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -381,14 +385,14 @@
 	SELF.prototype.getListItemAdapterForStatementGroupView = function ( startEditingCallback, entityId, getStatementForGuid, htmlIdPrefix ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementgroupview,
-			newItemOptionsFn: $.proxy( function ( value ) {
+			newItemOptionsFn: function ( value ) {
 				return {
 					value: value,
 					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					buildStatementListView: $.proxy( this.getStatementListView, this, startEditingCallback, entityId, value && value.getKey(), getStatementForGuid ),
+					buildStatementListView: this.getStatementListView.bind( this, startEditingCallback, entityId, value && value.getKey(), getStatementForGuid ),
 					htmlIdPrefix: htmlIdPrefix
 				};
-			}, this )
+			}.bind( this )
 		} );
 	};
 
@@ -422,7 +426,7 @@
 					},
 					propertyId
 				),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this.getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -442,11 +446,11 @@
 	SELF.prototype.getListItemAdapterForStatementView = function ( startEditingCallback, entityId, getValueForDom, propertyId, removeCallback ) {
 		var listItemAdapter = new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementview,
-			getNewItem: $.proxy( function ( value, dom ) {
+			getNewItem: function ( value, dom ) {
 				value = value || getValueForDom( dom );
 				var view = this.getStatementView( startEditingCallback, entityId, propertyId, removeCallback, value, $( dom ) );
 				return view;
-			}, this )
+			}.bind( this )
 		} );
 		return listItemAdapter;
 	};
@@ -469,14 +473,14 @@
 					}
 				},
 
-				buildSnakView: $.proxy(
-					this.getSnakView,
-					this,
-					startEditingCallback,
-					false
-				),
+				buildSnakView:
+					this.getSnakView.bind(
+						this,
+						startEditingCallback,
+						false
+					),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getQualifiersListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceListItemAdapter: this.getListItemAdapterForReferenceView.bind( this, startEditingCallback ),
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId )
@@ -493,9 +497,9 @@
 	SELF.prototype.getListItemAdapterForReferenceView = function ( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.referenceview,
-			getNewItem: $.proxy( function ( value, dom ) {
+			getNewItem: function ( value, dom ) {
 				return this.getReferenceView( startEditingCallback, removeCallback, value, $( dom ) );
-			}, this )
+			}.bind( this )
 		} );
 	};
 
@@ -510,7 +514,7 @@
 			$dom,
 			{
 				value: value || null,
-				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceRemover: function ( $dom ) {
 					return structureEditorFactory.getRemover( function () {
@@ -531,9 +535,9 @@
 	SELF.prototype.getListItemAdapterForSnakListView = function ( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.snaklistview,
-			getNewItem: $.proxy( function ( value, dom ) {
+			getNewItem: function ( value, dom ) {
 				return this.getSnakListView( startEditingCallback, removeCallback, $( dom ), value );
-			}, this )
+			}.bind( this )
 		} );
 	};
 
@@ -566,7 +570,7 @@
 	SELF.prototype.getListItemAdapterForSnakView = function ( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.snakview,
-			getNewItem: $.proxy( function ( value, dom ) {
+			getNewItem: function ( value, dom ) {
 				return this.getSnakView(
 					startEditingCallback,
 					true,
@@ -583,7 +587,7 @@
 					$( dom ),
 					removeCallback
 				);
-			}, this )
+			}.bind( this )
 		} );
 	};
 

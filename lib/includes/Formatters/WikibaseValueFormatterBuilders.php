@@ -24,7 +24,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
-use Wikibase\Lib\Formatters\ItemIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -112,6 +112,11 @@ class WikibaseValueFormatterBuilders {
 	private $snakFormat;
 
 	/**
+	 * @var CachingKartographerEmbeddingHandler|null
+	 */
+	private $kartographerEmbeddingHandler;
+
+	/**
 	 * @var int
 	 */
 	private $cacheTtlInSeconds;
@@ -123,11 +128,12 @@ class WikibaseValueFormatterBuilders {
 	 * @param EntityIdParser $repoItemUriParser
 	 * @param string $geoShapeStorageBaseUrl
 	 * @param string $tabularDataStorageBaseUrl
-	 * @param CacheInterface $cache
+	 * @param CacheInterface $formatterCache
 	 * @param int $cacheTtlInSeconds
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup|null $entityTitleLookup
+	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 */
 	public function __construct(
 		Language $defaultLanguage,
@@ -136,11 +142,12 @@ class WikibaseValueFormatterBuilders {
 		EntityIdParser $repoItemUriParser,
 		$geoShapeStorageBaseUrl,
 		$tabularDataStorageBaseUrl,
-		CacheInterface $cache,
+		CacheInterface $formatterCache,
 		$cacheTtlInSeconds,
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
-		EntityTitleLookup $entityTitleLookup = null
+		EntityTitleLookup $entityTitleLookup = null,
+		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null
 	) {
 		Assert::parameterType(
 			'string',
@@ -175,9 +182,10 @@ class WikibaseValueFormatterBuilders {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityLookup = $entityLookup;
-		$this->cache = $cache;
+		$this->cache = $formatterCache;
 		$this->snakFormat = new SnakFormat();
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
+		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -240,7 +248,7 @@ class WikibaseValueFormatterBuilders {
 		return $this->escapeValueFormatter( $format, $plainFormatter );
 	}
 
-	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
+	public function newItemPropertyIdHtmlLinkFormatter( FormatterOptions $options ) {
 		$nonCachingLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityRetrievingTermLookup( $this->entityLookup ),
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
@@ -254,7 +262,7 @@ class WikibaseValueFormatterBuilders {
 			$this->cacheTtlInSeconds
 		);
 
-		return new ItemIdHtmlLinkFormatter(
+		return new ItemPropertyIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$this->entityTitleLookup,
 			$this->languageNameLookup
@@ -423,6 +431,19 @@ class WikibaseValueFormatterBuilders {
 	 * @return GlobeCoordinateFormatter
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
+		$isHtmlVerboseFormat = $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format );
+
+		if ( $isHtmlVerboseFormat && $this->kartographerEmbeddingHandler ) {
+			$isPreview = $format === SnakFormatter::FORMAT_HTML_VERBOSE_PREVIEW;
+
+			return new GlobeCoordinateKartographerFormatter(
+				$options,
+				$this->newGlobeCoordinateFormatter( SnakFormatter::FORMAT_HTML, $options ),
+				$this->kartographerEmbeddingHandler,
+				$isPreview
+			);
+		}
+
 		// TODO: Add a wikitext formatter that links to the geohack or it's proposed replacement,
 		// see https://phabricator.wikimedia.org/T102960
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_DIFF, $format ) ) {

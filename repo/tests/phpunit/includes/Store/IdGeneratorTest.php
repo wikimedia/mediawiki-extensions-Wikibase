@@ -18,7 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
 class IdGeneratorTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = [ WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator() ];
+		$instances = [ WikibaseRepo::getDefaultInstance()->newIdGenerator() ];
 
 		return [ $instances ];
 	}

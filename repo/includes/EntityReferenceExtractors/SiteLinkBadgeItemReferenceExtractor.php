@@ -17,8 +17,7 @@ use Wikimedia\Assert\Assert;
 class SiteLinkBadgeItemReferenceExtractor implements EntityReferenceExtractor {
 
 	/**
-	 * @param EntityDocument $entity
-	 *
+	 * @param EntityDocument $item
 	 * @return EntityId[]
 	 */
 	public function extractEntityIds( EntityDocument $item ) {

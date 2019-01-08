@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use MediaWikiTestCase;
+use Psr\Log\NullLogger;
 use SiteLookup;
 use Title;
 use Wikibase\Change;
@@ -79,6 +80,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
 			$this->getMock( SiteLookup::class ),
+			new NullLogger(),
 			true
 		);
 
@@ -602,7 +604,8 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater,
 			$this->getChangeRunCoalescer(),
-			$this->getMock( SiteLookup::class )
+			$this->getMock( SiteLookup::class ),
+			new NullLogger()
 		);
 
 		$inputRootJobParams = [ 'rootJobTimestamp' => '20171122040506' ];

@@ -9,7 +9,8 @@
 			"VezonThunder",
 			"Pxos",
 			"Pyscowicz",
-			"Zache"
+			"Zache",
+			"Valtlait"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
@@ -45,6 +46,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Sinun täytyy olla sisäänkirjautuneena",
 	"wikibase-linkitem-not-loggedin": "Sinun täytyy olla kirjautuneena tässä wikissä ja [$1 keskustietovarastossa] käyttääksesi tätä toimintoa.",
 	"wikibase-linkitem-success-link": "Sivujen linkittäminen onnistui. Linkit sisältävä kohde on [$1 keskustietovarastossa].",
+	"limitreport-entityaccesscount": "Ladattujen Wikibase-aiheiden määrä",
 	"wikibase-property-notfound": "Ominaisuutta $1 ei löydy.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Piilota",
@@ -57,7 +59,7 @@
 	"wikibase-replicationnote": "Huomaa, että voi kestää useita minuutteja ennen kuin muutokset näkyvät kaikissa wikeissä.",
 	"wikibase-watchlist-show-changes-pref": "Näytä {{WBREPONAME}}-muokkaukset tarkkailulistalla",
 	"wikibase-error-serialize-error": "Tietojen sarjoittaminen epäonnistui.",
-	"wikibase-error-invalid-entity-id": "Tunniste \"$2\" on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.",
+	"wikibase-error-invalid-entity-id": "Tunniste ”$2” on järjestelmälle tuntematon. Käytä kelvollista tunnistetta.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Liian monta mw.wikibase.getReferencedEntityId-kutsua. Enintään $2 {{PLURAL:$2|kutsu|kutsua}} sallittu.",
 	"unconnectedpages": "Sivut, joita ei ole liitetty kohteisiin",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|kieltenvälinen linkki|kieltenvälistä linkkiä}} sivulla)",
@@ -81,11 +83,11 @@
 	"wikibase-property-render-error": "Ominaisuuden $1 näyttäminen epäonnistui: $2",
 	"wikibase-otherprojects": "Muissa hankkeissa",
 	"wikibase-otherprojects-beta-message": "Muut projektit -sivupalkki",
-	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion \"{{int:wikibase-otherprojects}}\", joka tarjoaa linkit muihin Wikimedia-hankkeisiin perustuen dataan sivustolla {{WBREPONAME}}.",
+	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion ”{{int:wikibase-otherprojects}}”, joka tarjoaa linkit muihin Wikimedia-hankkeisiin perustuen dataan sivustolla {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Yhteys|Yhteydet}} {{WBREPONAME}}an",
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
 	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, joka sisältää aiheeseen liittyviä tietoja.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} oli {{GENDER:$2|yhdistetty}} {{WBREPONAME}}-kohteisiin.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin.",
 	"unresolved-property-category": "Sivut, joissa on ratkaisemattomia ominaisuuksia",
 	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen"
 }

@@ -16,7 +16,8 @@
 			"Smigles",
 			"Stjn",
 			"Vlad5250",
-			"Putnik"
+			"Putnik",
+			"Nk88"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -98,6 +99,8 @@
 	"datatypes-type-wikibase-item": "Элемент",
 	"datatypes-type-wikibase-property": "Свойство",
 	"datatypes-type-commonsMedia": "Медиафайл на Викискладе",
+	"datatypes-type-geo-shape": "Географическая форма",
+	"datatypes-type-tabular-data": "Табличные данные",
 	"datatypes-type-external-id": "Внешний идентификатор",
 	"version-wikibase": "Вики-база",
 	"wikibase-time-calendar-gregorian": "Григорианский",
@@ -167,7 +170,7 @@
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|1=Удалён квалификатор|Удалены квалификаторы}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|1=Удалена ссылка|Удалены ссылки}} из заявления",
 	"wikibase-entity-summary-wbmergeitems-from": "Объединённый элемент из $3",
-	"wikibase-entity-summary-wbmergeitems-to": "Объединённый элемент в $3",
+	"wikibase-entity-summary-wbmergeitems-to": "Объединённый элемент в «$3»",
 	"wikibase-item-summary-wbcreate-new": "Создан новый элемент",
 	"wikibase-item-summary-wbeditentity": "Новый элемент создан",
 	"wikibase-item-summary-wbeditentity-create": "Новый элемент создан",

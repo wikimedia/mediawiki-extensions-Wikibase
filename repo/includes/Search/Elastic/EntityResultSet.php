@@ -21,7 +21,6 @@ class EntityResultSet extends ResultSet {
 	private $displayLanguage;
 
 	/**
-	 * EntityResultSet constructor.
 	 * @param string $displayLanguage
 	 * @param LanguageFallbackChain $displayFallbackChain
 	 * @param \Elastica\ResultSet $result

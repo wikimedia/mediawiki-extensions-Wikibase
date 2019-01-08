@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bjankuloski06",
-			"Macofe"
+			"Macofe",
+			"Vlad5250"
 		]
 	},
 	"wikibase-lib-desc": "Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.",
@@ -108,7 +109,7 @@
 	"wikibase-snakformatter-valuetype-mismatch": "Типит на вредноста („$1“) не одговара на типот на својството („$2“).",
 	"wikibase-snakformatter-property-not-found": "Не го најдов својството $1. Не можам да го одредам податочниот тип што треба да се користи.",
 	"wikibase-snakformatter-formatting-exception": "Грешка во форматирањето: $1.",
-	"wikibase-entity-summary-wbsetitem": "Создавање на нов предмет",
+	"wikibase-entity-summary-wbsetitem": "Создаден нов предмет",
 	"wikibase-entity-summary-wbcreate-new": "Создадена нова единица",
 	"wikibase-entity-summary-wbcreateredirect": "Пренасочено на $4",
 	"wikibase-entity-summary-wbeditentity": "Создадена нова единица",
@@ -162,7 +163,7 @@
 	"wikibase-entity-summary-wbmergeitems-from": "Споен предмет од „$3“",
 	"wikibase-entity-summary-wbmergeitems-to": "Споен предмет во „$3“",
 	"wikibase-item-summary-wbcreate-new": "Создаден нов предмет",
-	"wikibase-item-summary-wbeditentity": "Создавање на нов предмет",
+	"wikibase-item-summary-wbeditentity": "Создаден нов предмет",
 	"wikibase-item-summary-wbeditentity-create": "Создавање на нов предмет",
 	"wikibase-item-summary-wbeditentity-create-item": "Создаден нов предмет",
 	"wikibase-item-summary-wbeditentity-update": "Изменет предмет",

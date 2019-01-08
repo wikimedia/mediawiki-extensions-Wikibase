@@ -26,7 +26,6 @@ class TermLookupSearcher extends ElasticsearchIntermediary {
 	private $clientTimeout;
 
 	/**
-	 * TermLookupSearcher constructor.
 	 * @param Connection $conn
 	 * @param string $indexBaseName Index base for fetching
 	 * @param float $slowSeconds how many seconds a request through this

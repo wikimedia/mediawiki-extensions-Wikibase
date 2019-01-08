@@ -1,0 +1,4 @@
+{
+	"@metadata": [],
+	"apihelp-query+pageterms-description": "Dobijanje uslova o korišćenju za projekat {{WBREPONAME}} (obično tabele, opisi i pseudonimi) povezan sa stranicom preko veze do sajta. Ona samoj stranici entiteta, uslovi se koriste direktno. Upozorenje: Na repo vikiju, ovaj modul radi samo direktno na stranicama entiteta, ne na stranicama povezanima sa entitetom preko veze do sajta. Ovo će se možda izmeniti u budućnosti."
+}

@@ -18,6 +18,8 @@
 	"wikibase-error-remove-connection": "کنکشن کے نقص کی وجہ سے نہیں ہٹ سکا۔ براہ مہربانی اپنے انٹرنیٹ کنکشن دیکھیں۔",
 	"wikibase-timedetails-calendar": "تقویم",
 	"wikibase-sitelinks-wikipedia": "ویکیپیڈیا",
+	"wikibase-sitelinks-sitename-columnheading": "زبانیں",
+	"wikibase-sitelinks-link-columnheading": "مربوط شدہ صفحات",
 	"wikibase-tooltip-error-details": "تفصیلات",
 	"wikibase-validator-no-such-property": "خاصیت $1 نہیں ملی۔",
 	"datatypes-type-wikibase-item": "آئٹم",

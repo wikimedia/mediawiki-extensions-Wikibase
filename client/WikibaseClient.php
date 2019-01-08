@@ -62,7 +62,6 @@ call_user_func( function() {
 	global $wgAPIListModules,
 		$wgAPIMetaModules,
 		$wgAPIPropModules,
-		$wgAPIUselessQueryPages,
 		$wgExtensionCredits,
 		$wgExtensionFunctions,
 		$wgExtensionMessagesFiles,
@@ -201,7 +200,7 @@ call_user_func( function() {
 
 		$job->setRecentChangesDuplicateDetector( $wbServices->getStore()->getRecentChangesDuplicateDetector() );
 
-		$job->setLogger( MediaWiki\Logger\LoggerFactory::getInstance( 'wikibase.client.pageupdates' ) );
+		$job->setLogger( $wbServices->getLogger() );
 		$job->setStats( $mwServices->getStatsdDataFactory() );
 
 		return $job;
@@ -283,7 +282,6 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIUselessQueryPages[] = 'PagesWithBadges';
 
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages'] = Wikibase\Client\Specials\SpecialUnconnectedPages::class;

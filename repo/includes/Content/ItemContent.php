@@ -108,6 +108,15 @@ class ItemContent extends EntityContent {
 		return new static( null, $redirect, $redirectTitle );
 	}
 
+	protected function getIgnoreKeysForFilters() {
+		// FIXME: Refine this after https://phabricator.wikimedia.org/T205254 is complete
+		return [
+			'language',
+			'site',
+			'type',
+		];
+	}
+
 	/**
 	 * @see Content::getRedirectTarget
 	 *

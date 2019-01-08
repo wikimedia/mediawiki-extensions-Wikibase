@@ -6,6 +6,7 @@ use IJobSpecification;
 use JobQueue;
 use JobQueueGroup;
 use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
 use ReflectionMethod;
 use Title;
 use User;
@@ -180,6 +181,7 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 			$namespaceChecker,
 			$jobQueueGroup,
 			$siteLinkLookup,
+			new NullLogger(),
 			'repowiki',
 			'clientwiki',
 			$propagateChangesToRepo

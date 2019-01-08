@@ -62,6 +62,7 @@ return [
 		'tests/phan/stubs/geodata.php',
 		'tests/phan/stubs/math.php',
 		'tests/phan/stubs/mobilefrontend.php',
+		'tests/phan/stubs/monolog.php',
 		'tests/phan/stubs/pageimages.php',
 		'tests/phan/stubs/scribunto.php',
 	],
@@ -347,6 +348,8 @@ return [
 		"PhanUndeclaredProperty",
 		// approximate error count: 4
 		"PhanUndeclaredVariable",
+		// approximate error count: 1
+		"PhanTypeArraySuspicious",
 	],
 
 	/**

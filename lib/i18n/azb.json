@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Amir a57",
-			"Koroğlu"
+			"Koroğlu",
+			"Alp Er Tunqa"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "ویکی‌پدیا"
+	"wikibase-sitelinks-wikipedia": "ویکی‌پدیا",
+	"wikibase-sitelinks-link-columnheading": "باغلی صفحه"
 }

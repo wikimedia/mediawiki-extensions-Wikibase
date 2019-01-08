@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\Lib\FormatableSummary;

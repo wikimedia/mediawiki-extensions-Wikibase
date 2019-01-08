@@ -7,7 +7,8 @@
 			"Otokoume",
 			"Afaz",
 			"ネイ",
-			"Yusuke1109"
+			"Yusuke1109",
+			"Omotecho"
 		]
 	},
 	"wikibase-lib-desc": "ウィキベースとウィキベースクライアント拡張機能の共通の機能を保持",
@@ -168,6 +169,7 @@
 	"wikibase-item-summary-wblinktitles-connect": "ページを接続する言語リンクを追加",
 	"wikibase-property-summary-wbcreate-new": "プロパティを新規作成",
 	"wikibase-property-summary-wbeditentity-create": "プロパティを新規作成",
+	"wikibase-property-summary-wbeditentity-create-property": "プロパティを新規作成",
 	"wikibase-property-summary-wbeditentity-update": "プロパティを変更",
 	"wikibase-property-summary-wbeditentity-override": "プロパティを消去",
 	"wikibase-property-summary-special-create-property": "{{PLURAL:$1|1=値を持つ|0=値を持たない|複数の値を持つ}} [$2] プロパティを作成"

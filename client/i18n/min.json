@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Iwan Novirion",
-			"Naval Scene"
+			"Naval Scene",
+			"Muhraz"
 		]
 	},
 	"wikibase-client-desc": "Klien untuak ekstensi Wikibase",
@@ -13,7 +14,7 @@
 	"wikibase-comment-linked": "Item Wikidata alah tapauik ka laman iko.",
 	"wikibase-comment-unlink": "Laman ko alah indak tapauik ka item Wikidata. Interwiki hilang.",
 	"wikibase-comment-restore": "Dek pambatalan pahapuihan item Wikidata, interwiki dikambalian.",
-	"wikibase-comment-update": "Item Wikidata barubah",
+	"wikibase-comment-update": "Item {{WBREPONAME}} alah diubah",
 	"wikibase-comment-sitelink-add": "Panambahan interwiki: $1",
 	"wikibase-comment-sitelink-change": "Interwiki barubah dari $1 ka $2",
 	"wikibase-comment-sitelink-remove": "Pangurangan interwiki: $1",
@@ -38,6 +39,8 @@
 	"wikibase-property-notfound": "Properti $1 indak basobok.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-show-wikidata-pref": "Tunjuakan suntiangan Wikidata di parubahan baru",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Suntiang {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "Tambahan suntiangan Wikidata pado daftar pantau",
 	"wikibase-error-invalid-entity-id": "ID nan dimasuakan indak dikenal sistem. Gunoan entitas ID nan valid.",
 	"unconnectedpages": "Laman nan alun tapauik ka Wikidata",
