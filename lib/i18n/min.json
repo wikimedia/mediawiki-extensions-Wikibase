@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iwan Novirion"
+			"Iwan Novirion",
+			"Ardzun"
 		]
 	},
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-snakview-snaktypeselector-somevalue": "nilai indak dikatahui",
 	"wikibase-snakview-snaktypeselector-novalue": "indak ado nilai",
 	"wikibase-entity-summary-wbsetitem": "Buek item baru",
