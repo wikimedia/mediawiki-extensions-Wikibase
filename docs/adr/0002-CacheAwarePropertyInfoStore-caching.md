@@ -10,7 +10,7 @@ accepted
 
 The PropertyInfoStore interfaces with the `wb_property_info` DB table holding information about wikibase properties.
 The CacheAwarePropertyInfoStore stores the whole of the `wb_property_info` table in a single cache key.
-The Wikibase wiring is setup to provide this CacheAware store using the default cache (memcachedfor WMF).
+The Wikibase wiring is setup to provide this CacheAware store using the default cache (memcached for WMF).
 
 The CacheAwarePropertyInfoStore has a high number of reads, and the method of storing the whole table in a single key
 results in lots of traffic to a single memcached instance as described in https://phabricator.wikimedia.org/T97368.
