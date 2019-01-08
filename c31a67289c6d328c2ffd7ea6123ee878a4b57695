@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69ed9e23_2355fdc1",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-08T12:38:14Z",
+      "side": 1,
+      "message": "DBName -\u003e dbName?",
+      "range": {
+        "startLine": 763,
+        "startChar": 2,
+        "endLine": 763,
+        "endChar": 9
+      },
+      "revId": "c31a67289c6d328c2ffd7ea6123ee878a4b57695",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba962995_44d7bf0f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-08T12:38:14Z",
+      "side": 1,
+      "message": "This probably isn\u0027t the right setting.\n\nThe default setting is:\n\n\t$defaults[\u0027changesDatabase\u0027] \u003d function ( SettingsArray $settings ) {\n\t\t// Per default, the database for tracking changes is the local repo\u0027s database.\n\t\t// Note that the value for the repoDatabase setting may be calculated dynamically,\n\t\t// see above in \u0027repositories\u0027 setting.\n\t\tif ( $settings-\u003ehasSetting( \u0027repoDatabase\u0027 ) ) {\n\t\t\treturn $settings-\u003egetSetting( \u0027repoDatabase\u0027 );\n\t\t}\n\t\t$repositorySettings \u003d $settings-\u003egetSetting( \u0027repositories\u0027 );\n\t\treturn $repositorySettings[\u0027\u0027][\u0027repoDatabase\u0027];\n\t};\n\nWe probably just want to use repoDatabase directly here.",
+      "range": {
+        "startLine": 763,
+        "startChar": 47,
+        "endLine": 763,
+        "endChar": 62
+      },
+      "revId": "c31a67289c6d328c2ffd7ea6123ee878a4b57695",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
