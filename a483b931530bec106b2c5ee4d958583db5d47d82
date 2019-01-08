@@ -34,6 +34,24 @@
       "revId": "a483b931530bec106b2c5ee4d958583db5d47d82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08b8720b_941fd1a7",
+        "filename": "docs/adr/0002-CacheAwarePropertyInfoStore-caching.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-08T12:24:51Z",
+      "side": 1,
+      "message": "thanks for clarifying, and Addshore thanks for changing!",
+      "parentUuid": "66acfe9b_f08164f5",
+      "revId": "a483b931530bec106b2c5ee4d958583db5d47d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
