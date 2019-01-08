@@ -753,6 +753,9 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
+	/**
+	 * @deprecated use getLocalRepoWikiPageMetaDataAccessor
+	 */
 	public function getLocalRepoWikiPageMetaDataLookup() : WikiPageEntityMetaDataAccessor {
 		return $this->getLocalRepoWikiPageMetaDataAccessor();
 	}
