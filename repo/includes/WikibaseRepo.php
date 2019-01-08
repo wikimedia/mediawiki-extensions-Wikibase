@@ -50,6 +50,9 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -750,19 +753,26 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
-	/**
-	 * @return WikiPageEntityMetaDataLookup
-	 */
-	public function getLocalRepoWikiPageMetaDataLookup() {
+	public function getLocalRepoWikiPageMetaDataAccessor() : WikiPageEntityMetaDataAccessor {
 		$entityNamespaceLookup = $this->getEntityNamespaceLookup();
-		return new WikiPageEntityMetaDataLookup(
-			$entityNamespaceLookup,
-			new EntityIdLocalPartPageTableEntityQuery(
-				$entityNamespaceLookup,
-				MediaWikiServices::getInstance()->getSlotRoleStore()
+		$repoName = ''; // Empty string here means this only works for the local repo
+		$DBName = $this->getSettings()->getSetting( 'changesDatabase' );
+		return new PrefetchingWikiPageEntityMetaDataAccessor(
+			new TypeDispatchingWikiPageEntityMetaDataAccessor(
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
+				new WikiPageEntityMetaDataLookup(
+					$entityNamespaceLookup,
+					new EntityIdLocalPartPageTableEntityQuery(
+						$entityNamespaceLookup,
+						MediaWikiServices::getInstance()->getSlotRoleStore()
+					),
+					$DBName,
+					$repoName
+				),
+				$DBName,
+				$repoName
 			),
-			$this->getSettings()->getSetting( 'changesDatabase' ),
-			'' // Empty string here means this only works for the local repo
+			LoggerFactory::getInstance( 'Wikibase' )
 		);
 	}
 
