@@ -16,6 +16,24 @@
       "revId": "72e964e72b9bd6012e4c9ddea50504b5223769d3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c5d03f2_c584d37e",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-01-09T15:58:25Z",
+      "side": 1,
+      "message": "Thanks! Done in https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/483157",
+      "parentUuid": "34a44389_777d1104",
+      "revId": "72e964e72b9bd6012e4c9ddea50504b5223769d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
