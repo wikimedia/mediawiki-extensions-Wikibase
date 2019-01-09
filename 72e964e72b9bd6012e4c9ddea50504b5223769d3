@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34a44389_777d1104",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2019-01-09T15:42:08Z",
+      "side": 1,
+      "message": "FYI, the plan for T200570 is to have an array $params[\u0027slots\u0027]. You\u0027d therefore need \n\n $slots  \u003d $params[\u0027slots\u0027] ?? [ SlotRecord::MAIN ];\n\nhere, and an in_array() below.\n\nIn https://gerrit.wikimedia.org/r/c/mediawiki/core/+/460436/6/includes/api/ApiStashEdit.php you can see ApiStashEdit being changed along those lines.",
+      "revId": "72e964e72b9bd6012e4c9ddea50504b5223769d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
