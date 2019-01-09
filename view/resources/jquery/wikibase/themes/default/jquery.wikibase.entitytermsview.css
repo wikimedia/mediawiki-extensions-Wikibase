@@ -14,13 +14,16 @@
 	margin: 0;
 	word-wrap: break-word;
 }
+
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li {
 	display: inline;
 }
+
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:before {
 	content: attr( data-aliases-separator );
 	padding: 0 0.4em;
 }
+
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases li:first-child:before {
 	content: '';
 	padding: 0;
@@ -64,6 +67,7 @@
 	/* Reserve space for the toggler to avoid the rest of the page jumping down when it loads in */
 	margin-top: 2.6em;
 }
+
 .wikibase-entitytermsview-entitytermsforlanguagelistview-toggler ~ .wikibase-entitytermsview-entitytermsforlanguagelistview {
 	/* Remove the reserve space when the toggler loaded in */
 	margin-top: 0;
