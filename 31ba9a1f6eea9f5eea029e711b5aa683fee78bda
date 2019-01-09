@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "003f458d_e09abe7f",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2019-01-09T18:24:57Z",
+      "side": 1,
+      "message": "\", true\" ?",
+      "range": {
+        "startLine": 596,
+        "startChar": 53,
+        "endLine": 596,
+        "endChar": 54
+      },
+      "revId": "31ba9a1f6eea9f5eea029e711b5aa683fee78bda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
