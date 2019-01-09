@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "822db281_5b37d566",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2019-01-09T17:53:51Z",
+      "side": 1,
+      "message": "In context of the other elements in this interface, I\u0027d suggest using `16px` width/height (to have a bit bigger interaction area on the element for increased usability) and `background-size: 14px` for the icon. \nAlso the margin to the other elements should be increased to `6px`. Prepared screenshots on the task…",
+      "revId": "380100b25df5be905afdb327b2dd03afaa82d619",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
