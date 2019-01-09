@@ -21,6 +21,7 @@ use LogEntry;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MWException;
 use OutputPage;
 use ParserOutput;
@@ -573,6 +574,11 @@ final class RepoHooks {
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
+			// XXX FIXME: ApiEditPage doesn't expose the slot, but this 'magically' works if the edit is
+			// to a MAIN slot and the entity is stored in a non-MAIN slot, because it falls back.
+			// To be done properly once T200570 is done in MediaWiki itself
+			$slot = $params['slot'] ?? SlotRecord::MAIN;
+
 			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 			$entityTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
 
@@ -585,7 +591,10 @@ final class RepoHooks {
 					continue;
 				}
 
-				if ( $handler->getEntityNamespace() === $namespace ) {
+				if (
+					$handler->getEntityNamespace() === $namespace &&
+					$handler->getEntitySlotRole() === $slot
+				) {
 					// XXX: This is most probably redundant with setting
 					// ContentHandler::supportsDirectApiEditing to false.
 					// trying to use ApiEditPage on an entity namespace
