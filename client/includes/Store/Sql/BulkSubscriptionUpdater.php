@@ -119,7 +119,7 @@ class BulkSubscriptionUpdater {
 	public function updateSubscriptions( EntityId $startEntity = null ) {
 		$this->repoConnectionManager->prepareForUpdates();
 
-		$continuation = $startEntity === null ? null : [ $startEntity->getSerialization() ];
+		$continuation = $startEntity ? [ $startEntity->getSerialization() ] : null;
 
 		while ( true ) {
 			wfWaitForSlaves( null, $this->repoWiki );
@@ -259,7 +259,7 @@ class BulkSubscriptionUpdater {
 	 * @param EntityId|null $startEntity The entity to start with.
 	 */
 	public function purgeSubscriptions( EntityId $startEntity = null ) {
-		$continuation = $startEntity === null ? null : [ $startEntity->getSerialization() ];
+		$continuation = $startEntity ? [ $startEntity->getSerialization() ] : null;
 
 		$this->repoConnectionManager->prepareForUpdates();
 
