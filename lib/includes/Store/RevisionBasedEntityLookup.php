@@ -44,7 +44,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 			throw new EntityLookupException( $entityId, $ex->getMessage(), $ex );
 		}
 
-		return $revision === null ? null : $revision->getEntity();
+		return $revision ? $revision->getEntity() : null;
 	}
 
 	/**
