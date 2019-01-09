@@ -109,7 +109,7 @@ class EntityChange extends DiffChange {
 		$metadata = array_merge( $this->getMetadata(), $metadata );
 
 		// make sure the comment field is set
-		if ( !isset( $metadata['comment'] ) ) {
+		if ( !isset( $metadata['comment'] ) || $metadata['comment'] === '' ) {
 			$metadata['comment'] = $this->getComment();
 		}
 
@@ -126,7 +126,7 @@ class EntityChange extends DiffChange {
 
 		// TODO: get rid of this awkward fallback and messages. Comments and messages
 		// should come from the revision, not be invented here.
-		if ( !isset( $metadata['comment'] ) ) {
+		if ( !isset( $metadata['comment'] ) || $metadata['comment'] === '' ) {
 			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
 			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
 			$metadata['comment'] = 'wikibase-comment-' . $this->getAction();
