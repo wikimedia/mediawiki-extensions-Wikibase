@@ -53,7 +53,7 @@
 }
 
 .wikibase-toolbar-button.ui-state-disabled .wb-icon,
-.wikibase-toolbar-button.ui-state-disabled a:hover .wb-icon{
+.wikibase-toolbar-button.ui-state-disabled a:hover .wb-icon {
 	opacity: 0.5;
 }
 
