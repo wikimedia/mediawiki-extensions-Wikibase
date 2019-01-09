@@ -572,6 +572,7 @@ final class RepoHooks {
 			$params = $module->extractRequestParams();
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
+			$slot = $params['slot'] ?? SlotRecord::MAIN;
 
 			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 			$entityTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
@@ -585,7 +586,10 @@ final class RepoHooks {
 					continue;
 				}
 
-				if ( $handler->getEntityNamespace() === $namespace ) {
+				if (
+					$handler->getEntityNamespace() === $namespace &&
+					$handler->getEntitySlotRole() === $slot
+				) {
 					// XXX: This is most probably redundant with setting
 					// ContentHandler::supportsDirectApiEditing to false.
 					// trying to use ApiEditPage on an entity namespace
