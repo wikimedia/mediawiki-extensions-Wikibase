@@ -57,8 +57,7 @@ class TermboxView implements CacheableEntityTermsView {
 				$this->specialPageLinker->getLink(
 					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
 					[ $entityId->getSerialization() ]
-				),
-				true // TODO make me dynamic
+				)
 			);
 		} catch ( TermboxRenderingException $exception ) {
 			// TODO Log

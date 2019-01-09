@@ -27,10 +27,10 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	/**
 	 * @inheritDoc
 	 */
-	public function getContent( EntityId $entityId, $language, $editLink, $canEdit ) {
+	public function getContent( EntityId $entityId, $language, $editLink ) {
 		try {
 			$request = $this->requestFactory->create(
-				$this->formatUrl( $entityId, $language, $editLink, $canEdit ),
+				$this->formatUrl( $entityId, $language, $editLink ),
 				[ /* TODO attach required data */ ]
 			);
 			$request->execute();
@@ -46,17 +46,16 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		return $request->getContent();
 	}
 
-	private function formatUrl( EntityId $entityId, $language, $editLink, $canEdit ) {
+	private function formatUrl( EntityId $entityId, $language, $editLink ) {
 		return $this->ssrServerUrl . '?' .
-			http_build_query( $this->getRequestParams( $entityId, $language, $editLink, $canEdit ) );
+			http_build_query( $this->getRequestParams( $entityId, $language, $editLink ) );
 	}
 
-	private function getRequestParams( EntityId $entityId, $language, $editLink, $canEdit ) {
+	private function getRequestParams( EntityId $entityId, $language, $editLink ) {
 		return [
 			'entity' => $entityId->getSerialization(),
 			'language' => $language,
 			'editLink' => $editLink,
-			'canEdit' => $canEdit ? 1 : 0
 		];
 	}
 

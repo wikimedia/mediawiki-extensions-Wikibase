@@ -9,7 +9,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -40,26 +39,23 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 		$this->assertSame(
 			$content,
-			$client->getContent( new ItemId( 'Q42' ), 'de', '/edit/Q42', true )
+			$client->getContent( new ItemId( 'Q42' ), 'de', '/edit/Q42' )
 		);
 	}
 
-	/**
-	 * @dataProvider requestParamsDataProvider
-	 */
-	public function testGetContentBuildsRequestUrl(
-		array $given, array $returned
-	) {
+	public function testGetContentBuildsRequestUrl() {
+		$language = 'de';
+		$itemId = 'Q42';
+		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
 		$requestFactory = $this->newHttpRequestFactory();
 		$requestFactory->expects( $this->once() )
 			->method( 'create' )
 			->with(
 				self::SSR_URL
 				. '?' . http_build_query( [
-					'entity' => $returned[0],
-					'language' => $returned[1],
-					'editLink' => $returned[2],
-					'canEdit' => $returned[3]
+					'entity' => $itemId,
+					'language' => $language,
+					'editLink' => $editLinkUrl,
 				] ),
 				[]
 			)
@@ -68,26 +64,13 @@ class TermboxRemoteRendererTest extends TestCase {
 		( new TermboxRemoteRenderer(
 			$requestFactory,
 			self::SSR_URL
-		) )->getContent( $given[0], $given[1], $given[2], $given[3] );
-	}
-
-	public function requestParamsDataProvider() {
-		yield [
-			[ new ItemId( 'Q42' ), 'de', '/wiki/Special:SetLabelDescriptionAliases/Q42', true ],
-			[ 'Q42', 'de', '/wiki/Special:SetLabelDescriptionAliases/Q42', 1 ]
-		];
-
-		yield [
-			[ new PropertyId( 'P3' ), 'en', '/wiki/Special:SetLabelDescriptionAliases/P3', false ],
-			[ 'P3', 'en', '/wiki/Special:SetLabelDescriptionAliases/P3', 0 ]
-		];
+		) )->getContent( new ItemId( $itemId ), $language, $editLinkUrl );
 	}
 
 	public function testGetContentEncounteringUpstreamException_bubblesRequestException() {
 		$entityId = new ItemId( 'Q42' );
 		$language = 'de';
 		$editLinkUrl = '/edit/Q42';
-		$canEdit = true;
 
 		$upstreamException = new Exception( 'domain exception' );
 
@@ -102,7 +85,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl, $canEdit );
+			$client->getContent( $entityId, $language, $editLinkUrl );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -115,7 +98,6 @@ class TermboxRemoteRendererTest extends TestCase {
 		$entityId = new ItemId( 'Q42' );
 		$language = 'de';
 		$editLinkUrl = '/edit/Q42';
-		$canEdit = true;
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
@@ -130,7 +112,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl, $canEdit );
+			$client->getContent( $entityId, $language, $editLinkUrl );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -142,7 +124,6 @@ class TermboxRemoteRendererTest extends TestCase {
 		$entityId = new ItemId( 'Q4711' );
 		$language = 'de';
 		$editLinkUrl = '/edit/Q4711';
-		$canEdit = false;
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
@@ -157,7 +138,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl, $canEdit );
+			$client->getContent( $entityId, $language, $editLinkUrl );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
