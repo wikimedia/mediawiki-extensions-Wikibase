@@ -17,9 +17,11 @@
 	height: 20px; /* same height as rankselector.png */
 	width: 14px;
 }
+
 .ui-state-hover .ui-icon-snaktypeselector {
 	background-position: -24px 0;
 }
+
 .ui-state-active .ui-icon-snaktypeselector {
 	background-position: 2px 0;
 }
