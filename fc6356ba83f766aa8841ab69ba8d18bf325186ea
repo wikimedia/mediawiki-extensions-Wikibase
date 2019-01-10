@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4817d515_ca518a28",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-01-10T17:24:35Z",
+      "side": 1,
+      "message": "EntityContent could really use some cleaning up :[\n(in general, not in this patch)",
+      "revId": "fc6356ba83f766aa8841ab69ba8d18bf325186ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8f9b18a_d7ec546c",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-01-10T17:24:35Z",
+      "side": 1,
+      "message": "This method actually reads better than before now. I like it.",
+      "revId": "fc6356ba83f766aa8841ab69ba8d18bf325186ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
