@@ -30,6 +30,8 @@ use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\ArrayValueCollector;
@@ -580,18 +582,20 @@ abstract class EntityContent extends AbstractContent {
 		$handler = $this->getContentHandler();
 
 		if ( $this->isRedirect() ) {
-			$entityAfterPatch = $this->makeEmptyEntity();
-			$entityAfterPatch->setId( $this->getEntityId() );
+			$unpatchedEntityCopy = $this->makeEmptyEntity();
+			$unpatchedEntityCopy->setId( $this->getEntityId() );
 		} else {
-			$entityAfterPatch = $this->getEntity()->copy();
+			$unpatchedEntityCopy = $this->getEntity()->copy();
 		}
 
-		$patcher = WikibaseRepo::getDefaultInstance()->getEntityPatcher();
-		$patcher->patchEntity( $entityAfterPatch, $patch->getEntityDiff() );
-
+		$patchedEntityCopy = $this->patchCopyWithEntityDiff(
+			WikibaseRepo::getDefaultInstance()->getEntityPatcher(),
+			$unpatchedEntityCopy,
+			$patch->getEntityDiff()
+		);
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );
 
-		if ( $redirAfterPatch !== null && !$entityAfterPatch->isEmpty() ) {
+		if ( $redirAfterPatch !== null && !$patchedEntityCopy->isEmpty() ) {
 			throw new PatcherException( 'EntityContent must not contain Entity data as well as'
 				. ' a redirect after applying the patch!' );
 		} elseif ( $redirAfterPatch ) {
@@ -602,10 +606,19 @@ abstract class EntityContent extends AbstractContent {
 					. $this->getModel() . '!' );
 			}
 		} else {
-			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );
+			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $patchedEntityCopy ) );
 		}
 
 		return $patched;
+	}
+
+	protected function patchCopyWithEntityDiff(
+		EntityPatcher $patcher,
+		EntityDocument $entityCopy,
+		EntityDiff $diff
+	) {
+		$patcher->patchEntity( $entityCopy, $diff );
+		return $entityCopy;
 	}
 
 	/**
