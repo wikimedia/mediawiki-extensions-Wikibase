@@ -85,7 +85,8 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 
 		if ( $new instanceof EntityDocument ) {
 			$entityContent = $this->entityContentFactory->newFromEntity( $new );
-			$context = $this->getContextForEditFilter( $new->getId(), $new->getType() );
+			$entityType = $new->getType();
+			$context = $this->getContextForEditFilter( $new->getId(), $entityType );
 
 		} elseif ( $new instanceof EntityRedirect ) {
 			$entityContent = $this->entityContentFactory->newFromRedirect( $new );
@@ -96,17 +97,22 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 				);
 			}
 
+			$entityId = $new->getEntityId();
+			$entityType = $entityId->getEntityType();
+
 			$context = $this->getContextForEditFilter(
-				$new->getEntityId(),
-				$new->getEntityId()->getEntityType()
+				$entityId,
+				$entityType
 			);
 		} else {
 			throw new InvalidArgumentException( '$new must be instance of EntityDocument or EntityRedirect' );
 		}
 
+		$slotRole = $this->namespaceLookup->getEntitySlotRole( $entityType );
+
 		if ( !Hooks::run(
 			'EditFilterMergedContent',
-			[ $context, $entityContent, &$filterStatus, $summary, $user, false ]
+			[ $context, $entityContent, &$filterStatus, $summary, $user, false, $slotRole ]
 		) ) {
 			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
