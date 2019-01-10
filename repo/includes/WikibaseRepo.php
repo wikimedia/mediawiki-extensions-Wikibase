@@ -753,13 +753,6 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
-	/**
-	 * @deprecated use getLocalRepoWikiPageMetaDataAccessor
-	 */
-	public function getLocalRepoWikiPageMetaDataLookup() : WikiPageEntityMetaDataAccessor {
-		return $this->getLocalRepoWikiPageMetaDataAccessor();
-	}
-
 	public function getLocalRepoWikiPageMetaDataAccessor() : WikiPageEntityMetaDataAccessor {
 		$entityNamespaceLookup = $this->getEntityNamespaceLookup();
 		$repoName = ''; // Empty string here means this only works for the local repo
