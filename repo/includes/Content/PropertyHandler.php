@@ -185,7 +185,8 @@ class PropertyHandler extends EntityHandler {
 
 		return array_merge(
 			$updates,
-			parent::getEntityModificationUpdates( $content, $title )
+			parent::getEntityModificationUpdates( $content, $title ),
+			parent::getTermIndexEntityModificationUpdates( $content, $title )
 		);
 	}
 
