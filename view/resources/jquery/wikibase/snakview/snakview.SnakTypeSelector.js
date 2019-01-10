@@ -158,7 +158,7 @@
 				$menu = $( '<ul/>' ).addClass( this.widgetBaseClass + '-menu' ),
 				snakTypes = $.wikibase.snakview.variations.getCoveredSnakTypes();
 
-			$.each( snakTypes, function ( i, type ) {
+			snakTypes.forEach( function ( type ) {
 				$menu.append(
 					$( '<li/>' )
 					.addClass( classPrefix + type ) // type should only be lower case string anyhow!
@@ -166,7 +166,7 @@
 					.append(
 						$( '<a/>' )
 						.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
-						.on( 'click.' + this.widgetName, function ( event ) {
+						.on( 'click', function ( event ) {
 							event.preventDefault();
 						} )
 					)
