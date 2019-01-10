@@ -648,6 +648,22 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
+		// Call the WikibaseEntityModificationUpdate hook.
+		// Do this after doing all well-known updates.
+		return [ new DataUpdateAdapter(
+			[ Hooks::class, 'run' ],
+			'WikibaseEntityModificationUpdate',
+			[ $content, $title ]
+		) ] ;
+	}
+
+	/**
+	 * @param EntityContent $content
+	 * @param Title $title
+	 * @return DataUpdate[]
+	 * @throws MWException
+	 */
+	protected function getTermIndexEntityModificationUpdates( EntityContent $content, Title $title ) {
 		$updates = [];
 		$entityId = $content->getEntityId();
 
@@ -669,14 +685,6 @@ abstract class EntityHandler extends ContentHandler {
 				$content->getEntity()
 			);
 		}
-
-		// Call the WikibaseEntityModificationUpdate hook.
-		// Do this after doing all well-known updates.
-		$updates[] = new DataUpdateAdapter(
-			[ Hooks::class, 'run' ],
-			'WikibaseEntityModificationUpdate',
-			[ $content, $title ]
-		);
 
 		return $updates;
 	}
