@@ -409,6 +409,6 @@
 	"wikibase-search-bad-profile-name": "Хибна назва пошукового профілю: $1",
 	"wikibase-search-namespace-mix": "Суміщення просторів сутностей та статей у пошуку наразі не підтримується. Пошук буде здійснено лише за простором назв для сутностей.",
 	"wikibase-search-config-notfound": "Конфігурацію повнотекстового пошуку не знайдено: $1",
-	"wikibase-search-config-badclass": "Поганий клас конструктора запитів:",
+	"wikibase-search-config-badclass": "Поганий клас конструктора запитів: $1",
 	"wikibase-haswbstatement-feature-no-valid-statements": "Ключове слово haswbstatement не містить жодних дійсних тверджень"
 }
