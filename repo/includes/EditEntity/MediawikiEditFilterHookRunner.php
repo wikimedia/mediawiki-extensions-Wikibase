@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -104,9 +105,13 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 			throw new InvalidArgumentException( '$new must be instance of EntityDocument or EntityRedirect' );
 		}
 
+		$slotName = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()->getEntitySlotRole(
+			$new->getEntityId()->getEntityType()
+		);
+
 		if ( !Hooks::run(
 			'EditFilterMergedContent',
-			[ $context, $entityContent, &$filterStatus, $summary, $user, false ]
+			[ $context, $entityContent, &$filterStatus, $summary, $user, false, $slotName ]
 		) ) {
 			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
