@@ -245,7 +245,7 @@
 		 * @return {string}
 		 */
 		_formatLabel: function ( string ) {
-			string = $.trim( string );
+			string = string.trim();
 			if ( this.options.caseSensitive ) {
 				return string;
 			}

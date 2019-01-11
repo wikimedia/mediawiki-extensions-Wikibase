@@ -347,8 +347,8 @@
 			}
 
 			return !this.options.value
-				&& $.trim( this.$link.find( 'input' ).val() ) === ''
-				&& $.trim( this.$siteId.find( 'input' ).val() ) === '';
+				&& this.$link.find( 'input' ).val().trim() === ''
+				&& this.$siteId.find( 'input' ).val().trim() === '';
 		},
 
 		/**

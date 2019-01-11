@@ -218,7 +218,7 @@
 
 			return new wb.datamodel.Term(
 				this.options.value.getLanguageCode(),
-				$.trim( this.$text.children( '.' + this.widgetFullName + '-input' ).val() )
+				this.$text.children( '.' + this.widgetFullName + '-input' ).val().trim()
 			);
 		},
 

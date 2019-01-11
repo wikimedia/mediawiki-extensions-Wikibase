@@ -39,7 +39,7 @@
 
 			this.element
 			.on( this.widgetEventPrefix + 'change.' + this.widgetName, function ( event ) {
-				var value = $.trim( self.element.val() );
+				var value = self.element.val().trim();
 				if ( value !== self.option( 'pageName' ) ) {
 					self.option( 'pageName', value );
 				}
