@@ -122,6 +122,39 @@ class WikibaseApi {
 		}
 	}
 
+	blockUser( username ) {
+		return bot.getEditToken()
+			.then( () => {
+				return new Promise( ( resolve, reject ) => {
+					bot.request( {
+						action: 'block',
+						user: username || browser.options.username,
+						expiry: '1 minute',
+						reason: 'Wikibase browser test',
+						token: bot.editToken
+					} )
+						.then( resolve, reject );
+				} )
+			} )
+	}
+
+	unblockUser( username ) {
+		return bot.getEditToken()
+			.then( () => {
+				return new Promise( ( resolve, reject ) => {
+					bot.request( {
+						action: 'unblock',
+						user: username || browser.options.username,
+						reason: 'Wikibase browser test done',
+						token: bot.editToken
+					} )
+						.then( resolve, reject );
+				} )
+			} )
+	}
+
+
+
 }
 
 module.exports = new WikibaseApi();
