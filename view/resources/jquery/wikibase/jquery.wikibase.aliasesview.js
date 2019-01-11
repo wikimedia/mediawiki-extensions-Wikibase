@@ -207,6 +207,8 @@
 
 			return new wb.datamodel.MultiTerm(
 				this.options.value.getLanguageCode(),
+				// tagadata.getTags() returns a jquery object of html nodes
+				// eslint-disable-next-line jquery/no-map-util
 				$.map( tagadata.getTags(), function ( tag ) {
 					return tagadata.getTagLabel( $( tag ) );
 				} )

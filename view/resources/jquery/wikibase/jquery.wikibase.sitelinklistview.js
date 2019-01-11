@@ -125,7 +125,7 @@
 			var self = this,
 				listItemAdapter = this.options.getListItemAdapter(
 					function () {
-						return $.map( self._getUnusedAllowedSiteIds(), function ( siteId ) {
+						return self._getUnusedAllowedSiteIds().map( function ( siteId ) {
 							return wb.sites.getSite( siteId );
 						} );
 					},
@@ -238,7 +238,7 @@
 		 * @return {string[]}
 		 */
 		_getUnusedAllowedSiteIds: function () {
-			var representedSiteIds = $.map( this.value(), function ( siteLink ) {
+			var representedSiteIds = this.value().map( function ( siteLink ) {
 				return siteLink.getSiteId();
 			} );
 
