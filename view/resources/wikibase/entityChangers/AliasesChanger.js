@@ -96,7 +96,7 @@
 				newAliases = [];
 
 			for ( var i = 0; i < currentTexts.length; i++ ) {
-				if ( $.inArray( currentTexts[ i ], initialTexts ) === -1 ) {
+				if ( initialTexts.indexOf( currentTexts[ i ] ) === -1 ) {
 					newAliases.push( currentTexts[ i ] );
 				}
 			}
@@ -115,7 +115,7 @@
 				removedAliases = [];
 
 			for ( var i = 0; i < initialTexts.length; i++ ) {
-				if ( $.inArray( initialTexts[ i ], currentTexts ) === -1 ) {
+				if ( currentTexts.indexOf( initialTexts[ i ] ) === -1 ) {
 					removedAliases.push( initialTexts[ i ] );
 				}
 			}

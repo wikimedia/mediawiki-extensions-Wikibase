@@ -84,7 +84,7 @@
 			}
 
 			for ( i = 0; i < registrations.length; i++ ) {
-				var index = $.inArray( source, registrations[ i ].sources );
+				var index = registrations[ i ].sources.indexOf( source );
 				if ( index !== -1 ) {
 					registrations[ i ].sources.splice( index, 1 );
 				}

@@ -28,7 +28,7 @@
 			languages = mw.uls.getFrequentLanguageList().slice( 1, 4 );
 		} else {
 			languages = userLanguages.slice();
-			languages.splice( $.inArray( mw.config.get( 'wgUserLanguage' ), userLanguages ), 1 );
+			languages.splice( userLanguages.indexOf( mw.config.get( 'wgUserLanguage' ) ), 1 );
 		}
 
 		languages.unshift( mw.config.get( 'wgUserLanguage' ) );

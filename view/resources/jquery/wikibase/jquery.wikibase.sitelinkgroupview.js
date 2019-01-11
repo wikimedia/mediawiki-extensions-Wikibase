@@ -179,7 +179,7 @@
 			}
 
 			this.options.value.each( function ( siteId, siteLink ) {
-				if ( $.inArray( siteId, self._siteIdsOfGroup ) !== -1 ) {
+				if ( self._siteIdsOfGroup.indexOf( siteId ) !== -1 ) {
 					result.push( siteLink );
 				}
 			} );

@@ -216,7 +216,7 @@
 
 					$li
 					.addClass( 'ui-menu-item' )
-					.toggleClass( 'ui-state-active', $.inArray( badgeId, self.value() ) !== -1 );
+					.toggleClass( 'ui-state-active', self.value().indexOf( badgeId ) !== -1 );
 				} );
 
 				$menu.hide();
