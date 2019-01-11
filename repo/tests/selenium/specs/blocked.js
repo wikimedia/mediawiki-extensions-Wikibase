@@ -2,6 +2,12 @@ const assert = require( 'assert' ),
 	MWBot = require( 'mwbot' ),
 	Page = require( 'wdio-mediawiki/Page' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' );
+let WikibaseApi;
+try {
+	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+} catch ( e ) {
+	WikibaseApi = require( '../wdio-wikibase/wikibase.api' );
+}
 
 describe( 'blocked user cannot use', function () {
 
@@ -20,24 +26,9 @@ describe( 'blocked user cannot use', function () {
 		return LoginPage.loginAdmin();
 	} );
 
-	beforeEach( function blockUser() {
-		return bot.request( {
-			action: 'block',
-			user: browser.options.username,
-			expiry: '1 minute',
-			reason: 'Wikibase browser test (T211120)',
-			token: bot.editToken
-		} );
-	} );
+	beforeEach( WikibaseApi.blockUser );
 
-	afterEach( function unblockUser() {
-		return bot.request( {
-			action: 'unblock',
-			user: browser.options.username,
-			reason: 'Wikibase browser test done (T211120)',
-			token: bot.editToken
-		} );
-	} );
+	afterEach( WikibaseApi.unblockUser );
 
 	function assertIsUserBlockedError() {
 		$( '#mw-returnto' ).waitForVisible();
