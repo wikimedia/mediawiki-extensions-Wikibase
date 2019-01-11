@@ -84,7 +84,9 @@
 					}
 					self._unbindGlobalListenersFn();
 				};
-				var repositionMenu = function ( event ) { self.repositionMenu(); };
+				var repositionMenu = function ( event ) {
+					self.repositionMenu();
+				};
 				// also make this available for destroy() function!
 				self._unbindGlobalListenersFn = function () {
 					// unbind event after closing menu, explicitly unbind specific handler to
