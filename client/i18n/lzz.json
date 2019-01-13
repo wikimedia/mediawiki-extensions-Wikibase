@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cem Rize"
+		]
+	},
+	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
+	"wikibase-comment-update": "{{WBREPONAME}} ögesi değiştirildi",
+	"wikibase-dataitem": "{{WBREPONAME}} öğesi",
+	"wikibase-editlinks": "Bağlantıları değiştir",
+	"wikibase-editlinkstitle": "Dillerarası bağlantıları değiştir",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Şinaxi",
+	"wikibase-rc-hide-wikidata-show": "Ko3ʼiri",
+	"wikibase-rc-wikibase-edit-letter": "V",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
+	"wikibase-otherprojects": "Diğer projelerde"
+}
