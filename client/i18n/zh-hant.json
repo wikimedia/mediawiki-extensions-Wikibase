@@ -66,7 +66,7 @@
 	"wikibase-rc-hide-wikidata-show": "顯示",
 	"wikibase-rc-show-wikidata-pref": "於最近變更中顯示 {{WBREPONAME}} 的編輯",
 	"wikibase-rc-wikibase-edit-letter": "數",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 編輯",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}編輯",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}編輯",
 	"wikibase-rcfilters-hide-wikibase-description": "在{{WBREPONAME}}引起的編輯。",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "此篩選與一個或多個貢獻品質或使用者目的篩選起衝突。品質與目的預測不可用於{{WBREPONAME}}編輯。",

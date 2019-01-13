@@ -89,7 +89,7 @@
 	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",
 	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}}からの{{PLURAL:$1|接続}}",
-	"echo-pref-tooltip-wikibase-action": "{{GENDER:|私が作成した}}ページが{{WBREPONAME}}項目に接続された通知する。",
+	"echo-pref-tooltip-wikibase-action": "{{GENDER:|自分が作成した}}ページが{{WBREPONAME}}項目に接続されたときに通知する。",
 	"notification-link-text-view-item": "項目を{{GENDER:$1|閲覧}}",
 	"connected-redirect-category": "{{WBREPONAME}}項目に接続されているリダイレクト",
 	"connected-redirect-category-desc": "このカテゴリでは{{WBREPONAME}}項目に接続されているリダイレクトページを列挙します。"
