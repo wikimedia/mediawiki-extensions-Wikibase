@@ -270,7 +270,13 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return LanguageFallbackChainFactory
 	 */
 	private function newLanguageFallbackChainFactory() {
-		$fallbackChain = new LanguageFallbackChain( [] );
+		$fallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
+			->setConstructorArgs( [ [] ] )
+			->setMethods( [ 'getFetchLanguageCodes' ] )
+			->getMock();
+		$fallbackChain->expects( $this->any() )
+			->method( 'getFetchLanguageCodes' )
+			->will( $this->returnValue( [ 'phpunit_lang' ] ) );
 
 		$factory = $this->getMock( LanguageFallbackChainFactory::class );
 		$factory->method( 'newFromLanguage' )->willReturn( $fallbackChain );
