@@ -22,6 +22,30 @@
       "revId": "b2efde6f9bf0503a265c15d8394e10e115df97e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f2649b8_09ca0d73",
+        "filename": "docs/json.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-14T17:34:56Z",
+      "side": 0,
+      "message": "I removed it [1] because it’s *not* entirely correct: for century- and millennium-precision values, simply truncating the timestamp will give you wrong results. According to Wikibase, 1900 and 1981 do not lie in the same century: 1900 is the last year of the 19th century, not the first year of the 20th.\n\nWe also, in practice, don’t discard insignificant parts of the date string when exporting to different formats; in particular, when exporting simple values for RDF, the precision is invisible (it’s only exposed in the full value node) but the timestamp is not adjusted, so that RDF consumers will see 1988-… and 1981-… as different values even though the text removed here says that they have the exact same interpretation.\n\n[1]: https://www.mediawiki.org/wiki/Special:Diff/2884633",
+      "parentUuid": "24bc3bc4_ae538fbe",
+      "range": {
+        "startLine": 425,
+        "startChar": 2,
+        "endLine": 425,
+        "endChar": 445
+      },
+      "revId": "b2efde6f9bf0503a265c15d8394e10e115df97e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
