@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5076cef_87e85aeb",
+        "filename": "repo/includes/Search/Elastic/EntityResultSet.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-01-14T18:54:36Z",
+      "side": 0,
+      "message": "A bit scary that we\u0027re changing the API used by extensions, are we sure there are no other extension using it (e.g. Lexemes? MediaInfo?)",
+      "revId": "89d38c416544e5a372594f601f217747aa959f0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
