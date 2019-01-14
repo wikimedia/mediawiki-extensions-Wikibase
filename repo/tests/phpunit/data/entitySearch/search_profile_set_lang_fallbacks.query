@@ -1,0 +1,24 @@
+{
+	"search": "Abr",
+	"language": "de",
+	"userLang": "de",
+	"type": "item",
+	"strictlanguage": false,
+	"profiles": {
+		"wikibase_prefix_querybuilder": {
+			"default-de": {
+				"language-chain": ["de", "pr"],
+				"tie-breaker": 0.2,
+				"de-exact": 9,
+				"de-folded": 8,
+				"de-prefix": 7,
+				"pr-exact": 6,
+				"pr-folded": 5,
+				"pr-prefix": 4,
+				"any": 1,
+				"space-discount": 1,
+				"fallback-discount": 999
+			}
+		}
+	}
+}
