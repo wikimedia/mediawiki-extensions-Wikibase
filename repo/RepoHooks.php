@@ -1155,6 +1155,10 @@ final class RepoHooks {
 		}
 		$service->registerDefaultProfile( SearchProfileService::RESCORE,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, $defaultRescore );
+		// Check for a variation of the default profile with the requested language code appended. If available
+		// use the language specific profile instead of the default profile.
+		$service->registerContextualOverride( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, "{$defaultRescore}-{lang}", [ '{lang}' => 'language' ] );
 		// add the possibility to override the profile by setting the URI param cirrusRescoreProfile
 		$service->registerUriParamOverride( SearchProfileService::RESCORE,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusRescoreProfile' );
@@ -1166,6 +1170,8 @@ final class RepoHooks {
 		}
 		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, $defaultQB );
+		$service->registerContextualOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, "{$defaultQB}-{lang}", [ '{lang}' => 'language' ] );
 		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusWBProfile' );
 

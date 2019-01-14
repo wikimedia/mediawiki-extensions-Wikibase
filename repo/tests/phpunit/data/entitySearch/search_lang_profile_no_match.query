@@ -1,0 +1,14 @@
+{
+	"search": "Wien",
+	"language": "de",
+	"userLang": "de",
+	"type": "item",
+	"strictlanguage": false,
+	"profiles": {
+		"wikibase_prefix_querybuilder": {
+			"default-en": {
+				"IRRELEVANT": "UNREFERENCED"
+			}
+		}
+	}
+}

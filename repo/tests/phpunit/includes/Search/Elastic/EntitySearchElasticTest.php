@@ -49,6 +49,9 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		foreach ( glob( __DIR__ . '/../../../data/entitySearch/*.query' ) as $queryFile ) {
 			$testName = substr( basename( $queryFile ), 0, -6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
+			if ( json_last_error() !== JSON_ERROR_NONE ) {
+				throw new \RuntimeException( "invalid json: " . $queryFile );
+			}
 			$expectedFile = __DIR__ . "/../../../data/entitySearch/$testName-es" .
 				EntitySearchElastic::getExpectedElasticMajorVersion() . '.expected';
 			$tests[$testName] = [ $query, $expectedFile ];
@@ -57,12 +60,39 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		return $tests;
 	}
 
+	private function overrideProfiles( array $profiles ) {
+		$hookName = 'CirrusSearchProfileService';
+		$handlers = $GLOBALS['wgHooks'][$hookName];
+		$handlers[] = function ( $service ) use ( $profiles ) {
+			foreach ( $profiles as $repoType => $contextProfiles ) {
+				$service->registerArrayRepository( $repoType, 'phpunit_config', $contextProfiles );
+			}
+		};
+		$this->mergeMWGlobalArrayValue( 'wgHooks', [ $hookName => $handlers ] );
+	}
+
+	private function resetGlobalSearchConfig() {
+		// For whatever reason the mediawiki test suite reuses the same config
+		// objects for the entire test. This breaks caches inside the cirrus
+		// SearchConfig, so reset them as necessary.
+		$config = \MediaWiki\MediaWikiServices::getInstance()
+			->getConfigFactory()
+			->makeConfig( 'CirrusSearch' );
+		$reflProp = new \ReflectionProperty( $config, 'profileService' );
+		$reflProp->setAccessible( true );
+		$reflProp->setValue( $config, null );
+	}
+
 	/**
 	 * @dataProvider searchDataProvider
 	 * @param string[] $params query parameters
 	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
+		$this->resetGlobalSearchConfig();
+		if ( isset( $params['profiles'] ) ) {
+			$this->overrideProfiles( $params['profiles'] );
+		}
 		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
 		$search = $this->newEntitySearch( Language::factory( $params['userLang'] ) );
 		$limit = 10;
@@ -78,7 +108,8 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		// serialize_precision set for T205958
 		$this->setIniSetting( 'serialize_precision', 10 );
 		$encodedData = json_encode( $decodedQuery, JSON_PRETTY_PRINT );
-		$this->assertFileContains( $expected, $encodedData );
+		$createIfMissing = getenv( 'WIKIBASE_CREATE_FIXTURES' ) === 'yes';
+		$this->assertFileContains( $expected, $encodedData, $createIfMissing );
 	}
 
 }
