@@ -72,8 +72,7 @@ class EditEntityAction extends ViewEntityAction {
 
 		if ( !$this->getTitle()->userCan( $action, $this->getUser(), $rigor ) ) {
 			$this->getOutput()->showPermissionsErrorPage(
-				[ $this->getTitle()
-					->getUserPermissionsErrors( $action, $this->getUser(), $rigor ) ],
+				$this->getTitle()->getUserPermissionsErrors( $action, $this->getUser(), $rigor ),
 				$action
 			);
 
