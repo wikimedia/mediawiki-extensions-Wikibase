@@ -2,6 +2,8 @@
 Introduction to Wikibase
 ====================
 
+DUMMY CHANGE
+
 [![Build Status](https://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase.svg)](http://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase/)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/badges/quality-score.png)](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/)
 
