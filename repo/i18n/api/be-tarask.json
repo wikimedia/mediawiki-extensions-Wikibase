@@ -251,5 +251,8 @@
 	"apihelp-wbsetlabel-param-language": "Мова меткі",
 	"apihelp-wbsetlabel-param-value": "Значэньне меткі",
 	"apihelp-wbsetlabel-example-1": "Усталёўвае радок «Wikimedia» для старонкі з ідэнтыфікатарам «<samp>Q42</samp>» у якасьці меткі ангельскай мовай і выводзіць яго ў выглядзе добрафарматаванага JSON.",
-	"apihelp-wbsetlabel-example-2": "Усталёўвае метку ангельскай мовай «<var>Earth</var>» для элемэнту з спасылкай на сайт <var>enwiki</var> => «<var>Earth</var>»."
+	"apihelp-wbsetlabel-example-2": "Усталёўвае метку ангельскай мовай «<var>Earth</var>» для элемэнту з спасылкай на сайт <var>enwiki</var> => «<var>Earth</var>».",
+	"apihelp-wbsetqualifier-description": "Стварае кваліфікатар ці ўсталёўвае значэньне існага.",
+	"apihelp-wbsetqualifier-summary": "Стварае кваліфікатар ці ўсталёўвае значэньне існага.",
+	"apihelp-wbsetqualifier-param-claim": "GUID, які вызначае сьцьверджаньне, для якога ўсталёўваецца кваліфікатар"
 }
