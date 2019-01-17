@@ -39,7 +39,7 @@
 	"wikibase-linkitem-input-page": "पान:",
 	"wikibase-linkitem-confirmitem-text": "आपण निवडलेले पान हे  [केंद्रिय माहिती भंडारातील $1 कलमाशी] पूर्वीच जोडल्या गेले आहे. कृपया खाली दर्शविलेल्या {{PLURAL:$2|पानाची|पानांची}} निश्चिती करा,ती या पानास जोडण्यासाठी असलेली {{PLURAL:$2|एक|एकाधिक}} {{PLURAL:$2|आहे|आहेत}}.",
 	"wikibase-linkitem-confirmitem-button": "निश्चित करा",
-	"wikibase-linkitem-not-loggedin-title": "आपण सनोंद-प्रवेशित असावयास हवे",
+	"wikibase-linkitem-not-loggedin-title": "आल्याची नोंद करणे आवश्यक आहे",
 	"wikibase-linkitem-not-loggedin": "हा तोंडवळा वापरण्यास आपण, या विकिवर व  [$1 केंद्रिय माहिती भांडारात] सनोंद प्रवेशित असावयास हवे.",
 	"wikibase-linkitem-success-link": "या पानांना दुवे देण्यात आलेले आहेत. या कलमास आपण या दुव्यांसह आमच्या [$1 केंद्रिय माहिती भांडारात] बघू शकता.",
 	"limitreport-entityaccesscount": "विकिबेस अस्तित्व प्रभारलेल्याचा आकडा",

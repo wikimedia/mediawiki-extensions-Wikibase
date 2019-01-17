@@ -56,7 +56,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} pakeitimai",
 	"wikibase-rcfilters-hide-wikibase-description": "Pakeitimai iš {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Atkreipkite dėmesį, kad gali praeiti keletas minučių kol keitimai bus matomi visose wiki.",
-	"wikibase-watchlist-show-changes-pref": "Rodyti keitimus {{WBREPONAME}} jūsų stebimųjų puslapių sąraše",
+	"wikibase-watchlist-show-changes-pref": "Rodyti {{WBREPONAME}} keitimus jūsų stebimųjų puslapių sąraše",
 	"wikibase-error-deserialize-error": "Nepavyko deserializuoti duomenų.",
 	"wikibase-error-serialize-error": "Nepavyko išdėstyti duomenų",
 	"wikibase-error-invalid-entity-id": "Įvestas ID sistemai nežinomas. Prašome įvesti galiojantį esybės ID.",
