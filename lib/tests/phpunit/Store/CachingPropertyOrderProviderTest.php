@@ -23,7 +23,7 @@ class CachingPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 		$expected = [ 'P12' => 1, 'P42' => 2 ];
 
 		$cache = new HashBagOStuff();
-		$cache->set( wfMemcKey( 'wikibase-PropertyOrderProvider' ), $expected );
+		$cache->set( $cache->makeKey( 'wikibase-PropertyOrderProvider' ), $expected );
 
 		$cachingPropertyOrderProvider = new CachingPropertyOrderProvider(
 			$this->getMock( PropertyOrderProvider::class ),
@@ -57,7 +57,7 @@ class CachingPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 		// Make sure the new value also made it into the cache
 		$this->assertSame(
 			$expected,
-			$cache->get( wfMemcKey( 'wikibase-PropertyOrderProvider' ) )
+			$cache->get( $cache->makeKey( 'wikibase-PropertyOrderProvider' ) )
 		);
 	}
 
