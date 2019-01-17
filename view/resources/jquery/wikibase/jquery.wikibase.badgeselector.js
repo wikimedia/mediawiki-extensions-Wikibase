@@ -245,7 +245,8 @@
 		_fillMenu: function () {
 			var self = this,
 				deferred = $.Deferred(),
-				badgeIds = this.options.badges.map( function ( cssClasses, itemId ) {
+				// eslint-disable-next-line jquery/no-map-util
+				badgeIds = $.map( this.options.badges, function ( cssClasses, itemId ) {
 					return itemId;
 				} );
 
