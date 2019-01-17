@@ -350,6 +350,8 @@ return [
 		"PhanUndeclaredVariable",
 		// approximate error count: 1
 		"PhanTypeArraySuspicious",
+		// test for T214016
+		"PhanUndeclaredClassMethod",
 	],
 
 	/**
