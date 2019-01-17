@@ -350,6 +350,10 @@ return [
 		"PhanUndeclaredVariable",
 		// approximate error count: 1
 		"PhanTypeArraySuspicious",
+		// https://phabricator.wikimedia.org/T214016
+		"PhanUndeclaredClassMethod",
+		"PhanUndeclaredClass",
+		"PhanUndeclaredExtendedClass",
 	],
 
 	/**
