@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcfac035_15dc469a",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-01-18T08:34:50Z",
+      "side": 1,
+      "message": "Not sure I understand what is happening here and what {lang} does, some comment here would help.",
+      "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99489d9b_132ce798",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-01-18T08:34:50Z",
+      "side": 1,
+      "message": "This implies we would be hardcoding language fallback chains for tuned profiles? What\u0027s the reason to do this, can\u0027t we still use the language chain factory?",
+      "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19c1e5de_c19e1a8c",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-01-18T08:34:50Z",
+      "side": 1,
+      "message": "I feel a little bit uneasy exact-comparing floats, if we\u0027re not going to use it, do we even have to set it to anything (except maybe null)?",
+      "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
