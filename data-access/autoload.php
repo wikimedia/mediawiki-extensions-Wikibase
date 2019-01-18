@@ -8,6 +8,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\DataAccess\\DataAccessSettings' => __DIR__ . '/src/DataAccessSettings.php',
 	'Wikibase\\DataAccess\\GenericServices' => __DIR__ . '/src/GenericServices.php',
 	'Wikibase\\DataAccess\\MultiRepositoryServices' => __DIR__ . '/src/MultiRepositoryServices.php',
+	'Wikibase\\DataAccess\\MultipleEntitySourceServices' => __DIR__ . '/src/MultipleEntitySourceServices.php',
 	'Wikibase\\DataAccess\\MultipleRepositoryAwareWikibaseServices' => __DIR__ . '/src/MultipleRepositoryAwareWikibaseServices.php',
 	'Wikibase\\DataAccess\\PerRepositoryServiceContainer' => __DIR__ . '/src/PerRepositoryServiceContainer.php',
 	'Wikibase\\DataAccess\\PerRepositoryServiceContainerFactory' => __DIR__ . '/src/PerRepositoryServiceContainerFactory.php',
