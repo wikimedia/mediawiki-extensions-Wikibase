@@ -3,7 +3,6 @@
 
 namespace Wikibase\DataAccess;
 
-use MediaWiki\Services\ServiceContainer;
 use MediaWiki\Storage\NameTableStoreFactory;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -23,6 +22,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\StringNormalizer;
+use Wikimedia\Services\ServiceContainer;
 
 /**
  * Top-level container/factory of data access services making use of the "dispatching" pattern of

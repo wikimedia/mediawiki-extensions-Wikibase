@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess;
 
-use MediaWiki\Services\ServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,6 +14,7 @@ use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikimedia\Services\ServiceContainer;
 
 /**
  * A factory/locator of services dispatching the action to services configured for the

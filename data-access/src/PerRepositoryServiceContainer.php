@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
-use MediaWiki\Services\ServiceContainer;
 use MediaWiki\Storage\NameTableStore;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikimedia\Services\ServiceContainer;
 
 /**
  * A service locator for services configured for a particular repository.
