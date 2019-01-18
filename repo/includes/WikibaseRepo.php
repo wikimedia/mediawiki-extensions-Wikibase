@@ -8,6 +8,9 @@ use Exception;
 use InvalidArgumentException;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\IdGenerator;
@@ -44,6 +47,8 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -337,6 +342,13 @@ class WikibaseRepo {
 	 */
 	private static $snakFormatterBuilders = null;
 
+	/**
+	 * @var EntitySourceDefinitions|null
+	 */
+	private $entitySourceDefinitions;
+
+	private $xyzService;
+
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -380,7 +392,8 @@ class WikibaseRepo {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			$entityTypeDefinitions,
-			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions )
+			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
+			self::getEntitySourceDefinitionsFromSettings( $settings )
 		);
 	}
 
@@ -420,6 +433,36 @@ class WikibaseRepo {
 		}
 
 		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
+	}
+
+	// TODO: current settings (especially foreign repositories blob) might be quite confusing
+	// Having a "entitySources" or so setting might be better, and would also allow unifying
+	// the way these are configured in Repo and in Client parts
+	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+		$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
+		$localDatabaseName = $settings->getSetting( 'changesDatabase' );
+
+		$sources = [];
+
+		$sources[] = new EntitySource( 'local', array_keys( $localEntityNamespaces ), $localDatabaseName, $localEntityNamespaces );
+
+		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
+
+		if ( isset( $foreignRepositories[''] ) ) {
+			throw new MWException( 'A WikibaseRepo cannot have a foreign repo configured with '
+				. 'the empty prefix, since the empty prefix always refers to the local repo.' );
+		}
+
+		foreach ( $foreignRepositories as $repository => $repositorySettings ) {
+			$sources[] = new EntitySource(
+				$repository,
+				array_keys( $repositorySettings['entityNamespaces'] ),
+				$repositorySettings['repoDatabase'],
+				$repositorySettings['entityNamespaces']
+			);
+		}
+
+		return new EntitySourceDefinitions( $sources );
 	}
 
 	/**
@@ -585,12 +628,14 @@ class WikibaseRepo {
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		RepositoryDefinitions $repositoryDefinitions
+		RepositoryDefinitions $repositoryDefinitions,
+		EntitySourceDefinitions $entitySourceDefinitions = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
 	/**
@@ -1074,7 +1119,8 @@ class WikibaseRepo {
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
 				$this->newIdGenerator(),
-				$this->getWikibaseServices()
+				$this->getWikibaseServices(),
+				$this->getXYZServices()
 			);
 		}
 
@@ -2117,6 +2163,33 @@ class WikibaseRepo {
 		}
 
 		return $this->wikibaseServices;
+	}
+
+	// TODO: rename
+	private function getXYZServices() {
+		if ( $this->xyzService === null ) {
+			$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
+			$singleSourceServices = [];
+			foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
+				// TODO: extract
+				$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
+					new GenericServices(
+						$this->entityTypeDefinitions,
+						$this->repositoryDefinitions->getEntityNamespaces(),
+						$this->repositoryDefinitions->getEntitySlots()
+					),
+					$this->getEntityIdParser(),
+					$this->getDataValueDeserializer(),
+					$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+					$this->getDataAccessSettings(),
+					$source,
+					$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+					$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+				);
+			}
+			$this->xyzService = new MultipleEntitySourceServices( $this->entitySourceDefinitions, $singleSourceServices );
+		}
+		return $this->xyzService;
 	}
 
 	private function getDataAccessSettings() {
