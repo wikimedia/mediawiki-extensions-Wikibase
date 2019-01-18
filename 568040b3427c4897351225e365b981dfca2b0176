@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f08987a_355de024",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/EntitySearchElasticTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-01-18T22:06:55Z",
+      "side": 1,
+      "message": "Isn\u0027t that what setTemporaryHook is doing?",
+      "revId": "568040b3427c4897351225e365b981dfca2b0176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
