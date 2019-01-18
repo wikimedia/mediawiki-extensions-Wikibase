@@ -15,5 +15,5 @@
 	url = https://phabricator.wikimedia.org/source/wikibase-data-model.git
 [submodule "view/lib/wikibase-termbox"]
 	path = view/lib/wikibase-termbox
-	url = https://phabricator.wikimedia.org/source/wikibase-termbox
+	url = https://phabricator.wikimedia.org/source/wikibase-termbox.git
 
