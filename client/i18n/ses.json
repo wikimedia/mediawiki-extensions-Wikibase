@@ -10,7 +10,9 @@
 	"wikibase-editlinks": "Dobey barmay",
 	"wikibase-editlinkstitle": "Šenni-game dobey barmay",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Tugu",
 	"wikibase-rc-hide-wikidata-show": "Cebe",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} barmay"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} barmay",
+	"wikibase-otherprojects": "Porože taney ra"
 }

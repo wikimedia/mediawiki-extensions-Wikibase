@@ -141,7 +141,7 @@
 	"special-newitem": "Opprett eit nytt element",
 	"wikibase-newitem-summary": "Gjer deg viss på at ikkje [[Special:Search|elementet alt finst]]!<br />Du bør opretta ein [[{{int:Wikibase-label-helppage}}|merkelapp]] og ei [[{{int:Wikibase-description-helppage}}|skildring]] for alle nye element.",
 	"wikibase-newitem-fieldset": "Opprett eit nytt element",
-	"wikibase-newitem-site": "Nettstaden til den fyrst lenkja sida",
+	"wikibase-newitem-site": "Nettstaden til den fyrste lenkja sida",
 	"wikibase-newitem-page": "Namnet til den fyrste lenkja sida",
 	"wikibase-newitem-no-external-page": "Den oppgjevne sida vart ikkje funne på nettstaden som høyrer til.",
 	"wikibase-newentity-language": "Språk:",

@@ -36,6 +36,8 @@
 	"wikibase-rc-wikibase-edit-title": "Labojums {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} labojumi",
 	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus {{WBREPONAME}} uzraugāmo lapu sarakstā",
+	"wikibase-error-deserialize-error": "Neizdevās deserializēt datus.",
+	"wikibase-error-serialize-error": "Neizdevās serializēt datus.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",
