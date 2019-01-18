@@ -5,6 +5,11 @@ namespace Wikibase\Client;
 use CachedBagOStuff;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -250,6 +255,11 @@ final class WikibaseClient {
 	private $wikibaseContentLanguages = null;
 
 	/**
+	 * @var EntitySourceDefinitions|null
+	 */
+	private $entitySourceDefinitions;
+
+	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
@@ -353,13 +363,15 @@ final class WikibaseClient {
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		RepositoryDefinitions $repositoryDefinitions,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		EntitySourceDefinitions $entitySourceDefinitions = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->siteLookup = $siteLookup;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
 	/**
@@ -417,6 +429,31 @@ final class WikibaseClient {
 		}
 
 		return $this->wikibaseServices;
+	}
+
+	// TODO: rename
+	private function getXYZServices() {
+		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
+		$singleSourceServices = [];
+		foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
+			// TODO: extract
+			$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
+				new GenericServices(
+					$this->entityTypeDefinitions,
+					$this->repositoryDefinitions->getEntityNamespaces(),
+					$this->repositoryDefinitions->getEntitySlots()
+				),
+				$this->getEntityIdParser(),
+				$this->getDataValueDeserializer(),
+				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+				$this->getDataAccessSettings(),
+				$source,
+				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+			);
+		}
+		// TODO: only create a single instance
+		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $singleSourceServices );
 	}
 
 	private function getDataAccessSettings() {
@@ -583,7 +620,8 @@ final class WikibaseClient {
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode(),
-				$this->getLogger()
+				$this->getLogger(),
+				$this->getXYZServices()
 			);
 		}
 
@@ -704,11 +742,13 @@ final class WikibaseClient {
 			),
 			$entityTypeDefinitions,
 			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
-			MediaWikiServices::getInstance()->getSiteLookup()
+			MediaWikiServices::getInstance()->getSiteLookup(),
+			self::getEntitySourceDefinitionsFromSettings( $settings )
 		);
 	}
 
 	/**
+	 *
 	 * @param SettingsArray $settings
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
@@ -749,6 +789,45 @@ final class WikibaseClient {
 		}
 
 		return new RepositoryDefinitions( $definitions, $entityTypeDefinitions );
+	}
+
+	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
+	// Having a "entitySources" or so setting might be better, and would also allow unifying
+	// the way these are configured in Repo and in Client parts
+	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
+			? $settings->getSetting( 'foreignRepositories' )
+			: $settings->getSetting( 'repositories' );
+
+		if ( $settings->hasSetting( 'repoDatabase' )
+			&& $settings->hasSetting( 'entityNamespaces' )
+			&& $settings->hasSetting( 'repoConceptBaseUri' )
+		) {
+			$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
+			$localDatabaseName = $settings->getSetting( 'repoDatabase' );
+			unset( $repoSettingsArray[''] );
+		}
+
+		if ( array_key_exists( '', $repoSettingsArray ) ) {
+			$localEntityNamespaces = $repoSettingsArray['']['entityNamespaces'];
+			$localDatabaseName = $repoSettingsArray['']['repoDatabase'];
+			unset( $repoSettingsArray[''] );
+		}
+
+		$sources = [];
+
+		$sources[] = new EntitySource( 'local', array_keys( $localEntityNamespaces ), $localDatabaseName, $localEntityNamespaces );
+
+		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
+			$sources[] = new EntitySource(
+				$repository,
+				array_keys( $repositorySettings['entityNamespaces'] ),
+				$repositorySettings['repoDatabase'],
+				$repositorySettings['entityNamespaces']
+			);
+		}
+
+		return new EntitySourceDefinitions( $sources );
 	}
 
 	/**
