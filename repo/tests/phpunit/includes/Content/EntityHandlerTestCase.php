@@ -29,6 +29,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
@@ -70,7 +71,8 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 			new SettingsArray( $repoSettings ),
 			new DataTypeDefinitions( [] ),
 			$this->getEntityTypeDefinitions(),
-			$this->getRepositoryDefinitions()
+			$this->getRepositoryDefinitions(),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 

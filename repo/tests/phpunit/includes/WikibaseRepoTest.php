@@ -19,6 +19,7 @@ use RequestContext;
 use Serializers\Serializer;
 use User;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
@@ -430,7 +431,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			WikibaseRepo::getDefaultInstance()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) )
+			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 
@@ -592,7 +594,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$this->getRepositoryDefinitions()
+			$this->getRepositoryDefinitions(),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 
