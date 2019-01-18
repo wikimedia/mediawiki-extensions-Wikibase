@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a77caf1f_33d11e27",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2019-01-18T16:42:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcfac035_15dc469a",
+      "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "99489d9b_132ce798",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "59f8c7f6_fffcdb40",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2019-01-18T16:42:31Z",
+      "side": 1,
+      "message": "The is due to the tuning being run for a single chain of fallback languages.  If another language was added to the chain but not accounted for in the language specific tuning the results would be unpredictable.",
+      "parentUuid": "99489d9b_132ce798",
+      "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19c1e5de_c19e1a8c",
         "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
         "patchSetId": 9
@@ -47,6 +83,24 @@
       "writtenOn": "2019-01-18T08:34:50Z",
       "side": 1,
       "message": "I feel a little bit uneasy exact-comparing floats, if we\u0027re not going to use it, do we even have to set it to anything (except maybe null)?",
+      "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac039eb2_ccf87ea8",
+        "filename": "repo/includes/Search/Elastic/EntitySearchElastic.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2019-01-18T16:42:31Z",
+      "side": 1,
+      "message": "Setting to null does sound like a better solution.",
+      "parentUuid": "19c1e5de_c19e1a8c",
       "revId": "1efc9c4016f55e067ff236ca02bda83da12dd39a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
