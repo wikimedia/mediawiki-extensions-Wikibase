@@ -256,5 +256,6 @@
 	"apihelp-wbsetqualifier-summary": "Стварае кваліфікатар ці ўсталёўвае значэньне існага.",
 	"apihelp-wbsetqualifier-param-claim": "GUID, які вызначае сьцьверджаньне, для якога ўсталёўваецца кваліфікатар",
 	"apihelp-wbsetqualifier-param-property": "Ідэнтыфікатар уласьцівасьці снэку.\nПавінен падавацца толькі пры стварэньні новага кваліфікатару ці зьмяненьні ўласьцівасьці існага",
-	"apihelp-wbsetqualifier-param-value": "Новае значэньне кваліфкатару.\nПавінна пазначацца толькі для кваліфікатараў PropertyValueSnak"
+	"apihelp-wbsetqualifier-param-value": "Новае значэньне кваліфкатару.\nПавінна пазначацца толькі для кваліфікатараў PropertyValueSnak",
+	"apihelp-wbsetqualifier-param-snaktype": "Тып снэку.\nПавінен падавацца толькі пры стварэньні новага кваліфікатару ці зьмяненьні тыпу існага"
 }

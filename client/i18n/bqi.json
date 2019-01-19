@@ -4,11 +4,11 @@
 			"Mogoeilor"
 		]
 	},
-	"tooltip-t-wikibase": "هوم پیڤأند سي إمایأجا رسينإ آ",
+	"tooltip-t-wikibase": "هومپاٛیڤٱند سی اْمایاْجا رسیناْیٱل",
 	"wikibase-comment-update": "{{WBREPONAME}} قلم آلشد ڤابي",
-	"wikibase-dataitem": "{{WBREPONAME}} قلم",
-	"wikibase-editlinks": "ویرایشت هوم پیوندا",
-	"wikibase-editlinkstitle": "ڤیرایشت هوم پیڤندا مإن زۈنی",
+	"wikibase-dataitem": "{{WBREPONAME}} آیتم",
+	"wikibase-editlinks": "آلشدکاری هومپاٛیڤٱندٱل",
+	"wikibase-editlinkstitle": "آلشدکاری هومپاٛیڤٱندا میٛن زڤونی",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "قام کردن",
 	"wikibase-rc-hide-wikidata-show": "نشون دائن",
