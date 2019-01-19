@@ -88,6 +88,7 @@
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
 	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, joka sisältää aiheeseen liittyviä tietoja.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin.",
+	"notification-link-text-view-item": "{{GENDER:$1|Näytä}} kohde",
 	"unresolved-property-category": "Sivut, joissa on ratkaisemattomia ominaisuuksia",
 	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen"
 }
