@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ukabia"
+			"Ukabia",
+			"Uzoma Ozurumba"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} ihe a gbanwere",
+	"wikibase-dataitem": "{{WBREPONAME}} ihe",
+	"wikibase-editlinks": "Dezie njikọ ndi a",
+	"wikibase-editlinkstitle": "Dezie njiko asusu ndi yiri nụ",
 	"wikibase-rc-hide-wikidata-hide": "Zònarị",
 	"wikibase-rc-hide-wikidata-show": "Zi",
 	"wikibase-rc-wikibase-edit-letter": "D",
