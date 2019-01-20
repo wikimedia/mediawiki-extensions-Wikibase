@@ -3,7 +3,8 @@
 		"authors": [
 			"Dgstranz",
 			"Fitoschido",
-			"Macofe"
+			"Macofe",
+			"Tiberius1701"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Devuelve todos los identificadores de entidad utilizados en las páginas dadas.",
@@ -31,7 +32,7 @@
 	"apihelp-query+pageterms-example-item": "Obtener etiquetas y alias del elemento Q84.",
 	"apihelp-query+pageterms-param-terms": "Los tipos de términos que se deben obtener; p. ej., \"description\", cada uno de los cuales devuelto como una matriz de cadenas con claves según su tipo; p. ej., {\"description\": [\"foo\"]}. Si no se especifica, se devolverán todos los tipos.",
 	"apihelp-query+description-summary": "Obtener una descripción breve o subtítulo que explica el tema de la página de destino.",
-	"apihelp-query+description-extended-description": "La descripción está en texto plano, en una sola línea, pero por lo demás arbitrario (pudiendo incluir etiquetas HTML crudas, que también deberían interpretarse como texto plano). ¡No debe usarse en HTML sin escapar!",
+	"apihelp-query+description-extended-description": "La descripción está en texto sin formato, en una sola línea, pero, por lo demás, arbitraria (puede incluir etiquetas HTML sin procesar, que también se deben interpretar como texto sin formato). ¡No debe usarse en HTML sin escapar!",
 	"apihelp-query+description-param-prefersource": "Fuente de descripción preferida si está presente:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Descripciones locales mediante la función <code><nowiki>{{SHORTDESC:...}}</nowiki></code> del analizador sintáctico en el wikitexto de la página.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Descripciones centrales provenientes del elemento asociado de {{WBREPONAME}}.",

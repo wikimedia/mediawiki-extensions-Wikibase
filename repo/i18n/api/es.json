@@ -6,7 +6,8 @@
 			"Fitoschido",
 			"Lemondoge",
 			"Macofe",
-			"Matiia"
+			"Matiia",
+			"Tiberius1701"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta los elementos de insignias disponibles.",
@@ -107,7 +108,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Un valor de texto monolingüe en una declaración.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Las propiedades que deben devolverse sobre cada idioma.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "El código de idioma.",
-	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "El autónimo del idioma, es decir, el nombre del idioma en ese mismo idioma. Puede que no sea conocido para todos los idiomas.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "El autónimo del idioma, es decir, el nombre del idioma en ese mismo idioma. Puede que no sea conocido en todos los idiomas.",
 	"apihelp-query+wbsearch-description": "Busca entidades que usan etiquetas y alias.\nEsto se puede utilizar como generador de otras consultas.\nDevuelve el término encontrado que debe mostrarse.",
 	"apihelp-query+wbsearch-param-search": "Buscar este texto.",
 	"apihelp-query+wbsearch-param-language": "Buscar en este idioma.",
