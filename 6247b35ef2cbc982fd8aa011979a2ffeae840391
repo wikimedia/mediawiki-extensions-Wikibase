@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c0e5bf8_15ac72fe",
+        "filename": ".phpcs.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-21T17:51:06Z",
+      "side": 1,
+      "message": "As the name indicates, this is a Wikibase-specific sniff, so excluding it in the Wikibase codebase makes little sense to me, to be honest. If we decide we don’t want to use this sniff, we might as well remove it from wikibase-codesniffer altogether.",
+      "revId": "6247b35ef2cbc982fd8aa011979a2ffeae840391",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
