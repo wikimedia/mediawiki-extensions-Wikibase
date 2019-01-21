@@ -156,6 +156,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityId = $entity->getId();
 		Assert::parameterType( EntityId::class, $entityId, '$entityId' );
 
+		// TODO: change this. Those sanity checks should now assert that the "entity source"
+		// this index is configured for are actually providing entities of the given type
 		$this->assertEntityIdFromRightRepository( $entityId );
 
 		//First check whether there's anything to update
@@ -320,6 +322,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
 		$id = $entity->getId();
+		// TODO: change this. Those sanity checks should now assert that the "entity source"
+		// this index is configured for are actually providing entities of the given type
 		$this->assertEntityIdFromRightRepository( $id );
 
 		$terms = [];
@@ -498,6 +502,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return bool Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
+		// TODO: change this. Those sanity checks should now assert that the "entity source"
+		// this index is configured for are actually providing entities of the given type
 		$this->assertEntityIdFromRightRepository( $entityId );
 
 		$dbw = $this->getConnection( DB_MASTER );
@@ -540,6 +546,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
+		// TODO: change this. Those sanity checks should now assert that the "entity source"
+		// this index is configured for are actually providing entities of the given type
 		$this->assertEntityIdFromRightRepository( $entityId );
 
 		return $this->getTermsOfEntities(
@@ -566,6 +574,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
+		// TODO: change this. Those sanity checks should now assert that the "entity source"
+		// this index is configured for are actually providing entities of the given type
 		foreach ( $entityIds as $id ) {
 			$this->assertEntityIdFromRightRepository( $id );
 		}
