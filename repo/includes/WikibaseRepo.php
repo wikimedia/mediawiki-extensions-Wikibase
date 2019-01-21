@@ -2179,6 +2179,7 @@ class WikibaseRepo {
 						$this->repositoryDefinitions->getEntitySlots()
 					),
 					$this->getEntityIdParser(),
+					$this->getEntityIdComposer(),
 					$this->getDataValueDeserializer(),
 					$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 					$this->getDataAccessSettings(),

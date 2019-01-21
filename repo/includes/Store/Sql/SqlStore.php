@@ -543,6 +543,10 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilder
 	 */
 	public function getEntityInfoBuilder() {
+		if ( $this->multipleEntitySourceServices ) {
+			return $this->multipleEntitySourceServices->getEntityInfoBuilder();
+		}
+
 		return $this->wikibaseServices->getEntityInfoBuilder();
 	}
 
