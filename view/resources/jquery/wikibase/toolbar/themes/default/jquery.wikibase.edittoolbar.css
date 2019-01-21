@@ -12,19 +12,21 @@
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
-	background-image: url( images/help-question.png );
+	background-image: url( images/icons/ooui/helpNotice.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/help-question.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/helpNotice.svg );
 	background-position: 0 0;
 	background-repeat: no-repeat;
-	cursor: pointer;
+	background-size: 14px 14px;
 	display: inline-block;
-	height: 11px;
-	margin-left: 3px;
+	width: 16px;
+	height: 16px;
+	margin-left: 6px;
 	vertical-align: middle;
-	width: 11px;
+	opacity: 0.87; /* Equals `#222` on `background-color: #fff` */
+	cursor: pointer;
 }
 
 .wb-help-field-hint:hover {
-	background-position: 0 -12px;
+	opacity: 0.73; /* Equals `#454545` on `background-color: #fff`, closest to `#444` */
 }
