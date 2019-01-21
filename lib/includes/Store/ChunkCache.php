@@ -273,29 +273,16 @@ class ChunkCache implements ChunkAccess {
 		);
 
 		foreach ( $lru as $pos => $entry ) {
-			$this->dropChunk( $pos, $entry );
+			unset( $this->entries[$pos] );
+
+			$this->size -= count( $entry['data'] );
 
 			if ( $this->size <= $this->maxSize ) {
 				break;
 			}
 		}
-	}
 
-	/**
-	 * Remove the given chunk at the given position from the cache.
-	 * Used during pruning.
-	 *
-	 * @param int $pos
-	 * @param array $entry
-	 */
-	private function dropChunk( $pos, $entry ) {
-		unset( $this->entries[$pos] );
-
-		// re-index
 		$this->entries = array_values( $this->entries );
-		$this->size -= count( $entry['data'] );
-
-		return true;
 	}
 
 	/**
