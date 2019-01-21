@@ -881,7 +881,7 @@ class WikibaseRepo {
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return $this->getWikibaseServices()->getTermSearchInteractorFactory()->newInteractor(
+		return $this->getXYZServices()->getTermSearchInteractorFactory()->newInteractor(
 			$displayLanguageCode
 		);
 	}

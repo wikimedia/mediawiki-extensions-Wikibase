@@ -260,6 +260,11 @@ final class WikibaseClient {
 	private $entitySourceDefinitions;
 
 	/**
+	 * @var MultipleEntitySourceServices|null
+	 */
+	private $xyzServices = null;
+
+	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
@@ -433,28 +438,33 @@ final class WikibaseClient {
 
 	// TODO: rename
 	private function getXYZServices() {
-		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
-		$singleSourceServices = [];
-		foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
-			// TODO: extract
-			$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
-				new GenericServices(
-					$this->entityTypeDefinitions,
-					$this->repositoryDefinitions->getEntityNamespaces(),
-					$this->repositoryDefinitions->getEntitySlots()
-				),
-				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
-				$this->getDataValueDeserializer(),
-				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-				$this->getDataAccessSettings(),
-				$source,
-				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
-				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
-			);
+		if ( $this->xyzServices === null ) {
+			$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
+			$singleSourceServices = [];
+
+			foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
+				// TODO: extract
+				$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
+					new GenericServices(
+						$this->entityTypeDefinitions,
+						$this->repositoryDefinitions->getEntityNamespaces(),
+						$this->repositoryDefinitions->getEntitySlots()
+					),
+					$this->getEntityIdParser(),
+					$this->getEntityIdComposer(),
+					$this->getDataValueDeserializer(),
+					$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+					$this->getDataAccessSettings(),
+					$source,
+					$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+					$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+				);
+			}
+
+			$this->xyzServices = new MultipleEntitySourceServices( $this->entitySourceDefinitions, $singleSourceServices );
 		}
-		// TODO: only create a single instance
-		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $singleSourceServices );
+
+		return $this->xyzServices;
 	}
 
 	private function getDataAccessSettings() {
@@ -547,7 +557,7 @@ final class WikibaseClient {
 	 * @return TermSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return $this->getWikibaseServices()->getTermSearchInteractorFactory()
+		return $this->getXYZServices()->getTermSearchInteractorFactory()
 			->newInteractor( $displayLanguageCode );
 	}
 
