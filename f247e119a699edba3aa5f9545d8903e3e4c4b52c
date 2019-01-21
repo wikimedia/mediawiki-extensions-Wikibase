@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7e8d591_f3bbe21d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-21T08:20:04Z",
+      "side": 1,
+      "message": "I\u0027m afraid I don\u0027t understand this commit message. The mentioned patch I4742882 replaced a bunch of `include` with `require`. But I fail to see how this made these checks for constants obsolete.\n\nI\u0027m not opposing this patch. The checks are indeed obsolete, at least when the code is used as it should be used. If not, the additional checks might be helpful, e.g. when someone tries to initialize the extension like this:\n\n\nrequire_once __DIR__ . \u0027/extensions/Wikibase/repo/Wikibase.php\u0027;\nrequire_once __DIR__ . \u0027/extensions/Wikibase/lib/WikibaseLib.php\u0027;\nrequire_once __DIR__ . \u0027/extensions/Wikibase/view/WikibaseView.php\u0027;\n\nA (bad) setup like this works now, but will probably stop working when this patch is merged.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "f247e119a699edba3aa5f9545d8903e3e4c4b52c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
