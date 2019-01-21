@@ -35,11 +35,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-if ( defined( 'WB_VERSION' ) ) {
-	// Do not initialize more than once.
-	return 1;
-}
-
 define( 'WB_VERSION', '0.5 alpha' );
 
 // Needs to be 1.31c because version_compare() works in confusing ways.
