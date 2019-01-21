@@ -267,14 +267,14 @@ class ChunkCache implements ChunkAccess {
 		}
 
 		$lru = $this->entries; // copy (PHP is crazy like that)
-		usort( $lru,
+		uasort( $lru,
 			function ( $a, $b ) {
 				return $a['touched'] - $b['touched'];
 			}
 		);
 
-		foreach ( $lru as $entry ) {
-			$this->dropChunk( $entry['start'] );
+		foreach ( $lru as $pos => $entry ) {
+			$this->dropChunk( $pos, $entry );
 
 			if ( $this->size <= $this->maxSize ) {
 				break;
@@ -283,27 +283,20 @@ class ChunkCache implements ChunkAccess {
 	}
 
 	/**
-	 * Remove the chunk with the given start key from the cache.
+	 * Remove the given chunk at the given position from the cache.
 	 * Used during pruning.
 	 *
-	 * @param int $startKey
-	 *
-	 * @return bool
+	 * @param int $pos
+	 * @param array $entry
 	 */
-	private function dropChunk( $startKey ) {
-		foreach ( $this->entries as $pos => $entry ) {
-			if ( $entry['start'] === $startKey ) {
-				unset( $this->entries[$pos] );
+	private function dropChunk( $pos, $entry ) {
+		unset( $this->entries[$pos] );
 
-				// re-index
-				$this->entries = array_values( $this->entries );
-				$this->size -= count( $entry['data'] );
+		// re-index
+		$this->entries = array_values( $this->entries );
+		$this->size -= count( $entry['data'] );
 
-				return true;
-			}
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
