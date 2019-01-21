@@ -40,11 +40,6 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
 }
 
-if ( defined( 'WBL_VERSION' ) ) {
-	// Do not initialize more than once.
-	return 1;
-}
-
 define( 'WBL_VERSION', '0.5 alpha' );
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
