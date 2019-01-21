@@ -267,43 +267,25 @@ class ChunkCache implements ChunkAccess {
 		}
 
 		$lru = $this->entries; // copy (PHP is crazy like that)
-		usort( $lru,
+		// associative sort needed so that $pos below refers to correct $this->entries element
+		uasort( $lru,
 			function ( $a, $b ) {
 				return $a['touched'] - $b['touched'];
 			}
 		);
 
-		foreach ( $lru as $entry ) {
-			$this->dropChunk( $entry['start'] );
+		foreach ( $lru as $pos => $entry ) {
+			unset( $this->entries[$pos] );
+
+			$this->size -= count( $entry['data'] );
 
 			if ( $this->size <= $this->maxSize ) {
 				break;
 			}
 		}
-	}
 
-	/**
-	 * Remove the chunk with the given start key from the cache.
-	 * Used during pruning.
-	 *
-	 * @param int $startKey
-	 *
-	 * @return bool
-	 */
-	private function dropChunk( $startKey ) {
-		foreach ( $this->entries as $pos => $entry ) {
-			if ( $entry['start'] === $startKey ) {
-				unset( $this->entries[$pos] );
-
-				// re-index
-				$this->entries = array_values( $this->entries );
-				$this->size -= count( $entry['data'] );
-
-				return true;
-			}
-		}
-
-		return false;
+		// compact the array after we created holes in it
+		$this->entries = array_values( $this->entries );
 	}
 
 	/**
