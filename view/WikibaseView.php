@@ -4,11 +4,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-if ( defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-	// Do not initialize more than once.
-	return 1;
-}
-
 define( 'WIKIBASE_VIEW_VERSION', '0.1-dev' );
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
@@ -27,8 +22,8 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = [
 
 $GLOBALS['wgResourceModules'] = array_merge(
 	$GLOBALS['wgResourceModules'],
-	include __DIR__ . '/lib/resources.php',
-	include __DIR__ . '/resources/resources.php'
+	require __DIR__ . '/lib/resources.php',
+	require __DIR__ . '/resources/resources.php'
 );
 
 $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
@@ -37,8 +32,8 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 ) {
 	$testModules['qunit'] = array_merge(
 		$testModules['qunit'],
-		include __DIR__ . '/lib/resources.test.php',
-		include __DIR__ . '/tests/qunit/resources.php'
+		require __DIR__ . '/lib/resources.test.php',
+		require __DIR__ . '/tests/qunit/resources.php'
 	);
 };
 
