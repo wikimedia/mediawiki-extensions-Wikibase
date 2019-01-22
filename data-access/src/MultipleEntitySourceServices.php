@@ -8,16 +8,19 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
  */
-class MultipleEntitySourceServices implements EntityStoreWatcher {
+class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatcher {
 
 	/**
 	 * @var EntitySourceDefinitions
 	 */
 	private $entitySourceDefinitions;
+
+	private $genericServices;
 
 	/**
 	 * @var SingleEntitySourceServices[]
@@ -34,8 +37,14 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 
 	private $entityPrefetcher = null;
 
-	public function __construct( EntitySourceDefinitions $entitySourceDefinitions, array $singleSourceServices ) {
+	public function __construct(
+		EntitySourceDefinitions $entitySourceDefinitions,
+		GenericServices $genericServices,
+		array $singleSourceServices
+	) {
+		Assert::parameterElementType( SingleEntitySourceServices::class, $singleSourceServices, '$singleSourceServices' );
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->genericServices = $genericServices;
 		$this->singleSourceServices = $singleSourceServices;
 	}
 
@@ -145,6 +154,44 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 		if ( $source !== null ) {
 			$this->singleSourceServices[$source->getSourceName()]->entityDeleted( $entityId );
 		}
+	}
+
+	public function getEntityNamespaceLookup() {
+		// TODO: entity namespace lookup is actually source-specific service, should not be provided by
+		// GenericServices
+		return $this->genericServices->getEntityNamespaceLookup();
+	}
+
+	public function getFullEntitySerializer() {
+		return $this->genericServices->getFullEntitySerializer();
+	}
+
+	public function getCompactEntitySerializer() {
+		return $this->genericServices->getCompactEntitySerializer();
+	}
+
+	public function getStorageEntitySerializer() {
+		return $this->genericServices->getStorageEntitySerializer();
+	}
+
+	public function getBaseDataModelSerializerFactory() {
+		return $this->genericServices->getBaseDataModelSerializerFactory();
+	}
+
+	public function getCompactBaseDataModelSerializerFactory() {
+		return $this->genericServices->getCompactBaseDataModelSerializerFactory();
+	}
+
+	public function getLanguageFallbackChainFactory() {
+		return $this->genericServices->getLanguageFallbackChainFactory();
+	}
+
+	public function getStringNormalizer() {
+		return $this->genericServices->getStringNormalizer();
+	}
+
+	public function getTermBuffer() {
+		return $this->getPrefetchingTermLookup();
 	}
 
 }
