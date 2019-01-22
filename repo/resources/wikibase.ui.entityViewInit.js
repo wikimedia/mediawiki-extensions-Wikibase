@@ -122,7 +122,7 @@
 			formatterFactory,
 			{
 				getMessage: function ( key, params ) {
-					return mw.msg.apply( mw, [ key ].concat( params ) );
+					return mw.msg.apply( mw, [ key ].concat( params | [] ) );
 				}
 			},
 			parserStore,
