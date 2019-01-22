@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use MWException;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**
@@ -41,12 +42,23 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	private $blacklistAttempts = 10;
 
 	/**
+	 * @var bool whether use a separate master database connection to generate new id or not.
+	 */
+	private $separateDbConnection;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
 	 * @param array[] $idBlacklist
+	 * @param bool $separateDbConnection
 	 */
-	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist = [] ) {
+	public function __construct(
+		LoadBalancer $loadBalancer,
+		array $idBlacklist = [],
+		$separateDbConnection = false
+	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->idBlacklist = $idBlacklist;
+		$this->separateDbConnection = $separateDbConnection;
 	}
 
 	/**
@@ -57,7 +69,8 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	 * @return int
 	 */
 	public function getNewId( $type ) {
-		$database = $this->loadBalancer->getConnection( DB_MASTER );
+		$flags = ( $this->separateDbConnection === true ) ? ILoadBalancer::CONN_TRX_AUTOCOMMIT : 0;
+		$database = $this->loadBalancer->getConnection( DB_MASTER, [], false, $flags );
 
 		$idGenerations = 0;
 		do {
