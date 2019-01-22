@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Deserializers\Deserializer;
 use HashSiteStore;
@@ -143,7 +144,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			new EntitySourceDefinitions( [] )
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -164,7 +166,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$siteLookup
+			$siteLookup,
+			new EntitySourceDefinitions( [] )
 		);
 
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
@@ -199,7 +202,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$siteLookup
+			$siteLookup,
+			new EntitySourceDefinitions( [] )
 		);
 
 		$this->assertEquals( $expected, $client->getSiteGroup() );
@@ -378,7 +382,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 

@@ -352,4 +352,6 @@ return [
 	 */
 	'idGenerator' => 'original',
 
+	'useEntitySourceBasedFederation' => false,
+
 ];
