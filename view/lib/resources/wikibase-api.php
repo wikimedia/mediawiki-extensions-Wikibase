@@ -15,6 +15,10 @@ return call_user_func( function () {
 				'scripts' => [
 					'namespace.js'
 				],
+				'targets' => [
+					'desktop',
+					'mobile'
+				],
 			],
 
 		'wikibase.api.FormatValueCaller' => $moduleTemplate + [
@@ -37,6 +41,10 @@ return call_user_func( function () {
 					'mediawiki.ForeignApi',
 					'wikibase.api.__namespace',
 				],
+				'targets' => [
+					'desktop',
+					'mobile'
+				],
 			],
 
 		'wikibase.api.ParseValueCaller' => $moduleTemplate + [
@@ -56,6 +64,10 @@ return call_user_func( function () {
 				'dependencies' => [
 					'wikibase.api.__namespace',
 				],
+				'targets' => [
+					'desktop',
+					'mobile'
+				]
 			],
 
 		'wikibase.api.RepoApiError' => $moduleTemplate + [
@@ -74,6 +86,10 @@ return call_user_func( function () {
 				'dependencies' => [
 					'util.inherit',
 					'wikibase.api.__namespace',
+				],
+				'targets' => [
+					'desktop',
+					'mobile'
 				],
 			],
 	];
