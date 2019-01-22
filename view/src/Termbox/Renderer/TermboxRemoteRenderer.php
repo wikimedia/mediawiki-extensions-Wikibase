@@ -5,6 +5,8 @@ namespace Wikibase\View\Termbox\Renderer;
 use Exception;
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageWithConversion;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,10 +29,10 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	/**
 	 * @inheritDoc
 	 */
-	public function getContent( EntityId $entityId, $language, $editLink ) {
+	public function getContent( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
 		try {
 			$request = $this->requestFactory->create(
-				$this->formatUrl( $entityId, $language, $editLink ),
+				$this->formatUrl( $entityId, $language, $editLink, $preferredLanguages ),
 				[ /* TODO attach required data */ ]
 			);
 			$request->execute();
@@ -46,17 +48,24 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		return $request->getContent();
 	}
 
-	private function formatUrl( EntityId $entityId, $language, $editLink ) {
+	private function formatUrl( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
 		return $this->ssrServerUrl . '?' .
-			http_build_query( $this->getRequestParams( $entityId, $language, $editLink ) );
+			http_build_query( $this->getRequestParams( $entityId, $language, $editLink, $preferredLanguages ) );
 	}
 
-	private function getRequestParams( EntityId $entityId, $language, $editLink ) {
+	private function getRequestParams( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
 		return [
 			'entity' => $entityId->getSerialization(),
 			'language' => $language,
 			'editLink' => $editLink,
+			'preferredLanguages' => implode( '|', $this->getLanguageCodes( $preferredLanguages ) ),
 		];
+	}
+
+	private function getLanguageCodes( LanguageFallbackChain $preferredLanguages ) {
+		return array_map( function ( LanguageWithConversion $language ) {
+			return $language->getLanguageCode();
+		}, $preferredLanguages->getFallbackChain() );
 	}
 
 }
