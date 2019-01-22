@@ -2168,16 +2168,16 @@ class WikibaseRepo {
 	// TODO: rename
 	private function getXYZServices() {
 		if ( $this->xyzService === null ) {
+			$genericServices = new GenericServices(
+				$this->entityTypeDefinitions,
+				$this->repositoryDefinitions->getEntityNamespaces(),
+				$this->repositoryDefinitions->getEntitySlots()
+			);
 			$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
 			$singleSourceServices = [];
 			foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
-				// TODO: extract
 				$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
-					new GenericServices(
-						$this->entityTypeDefinitions,
-						$this->repositoryDefinitions->getEntityNamespaces(),
-						$this->repositoryDefinitions->getEntitySlots()
-					),
+					$genericServices,
 					$this->getEntityIdParser(),
 					$this->getEntityIdComposer(),
 					$this->getDataValueDeserializer(),
@@ -2188,7 +2188,7 @@ class WikibaseRepo {
 					$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
 				);
 			}
-			$this->xyzService = new MultipleEntitySourceServices( $this->entitySourceDefinitions, $singleSourceServices );
+			$this->xyzService = new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
 		}
 		return $this->xyzService;
 	}
