@@ -352,4 +352,16 @@ return [
 	 */
 	'idGenerator' => 'original',
 
+	/**
+	 * Whether use a separate master database connection to generate new id or not.
+	 *
+	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
+	 *       Do not use it.
+	 *
+	 * @var bool
+	 * @see https://phabricator.wikimedia.org/T213817
+	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
+	 */
+	'idGeneratorSeparateDbConnection' => false,
+
 ];
