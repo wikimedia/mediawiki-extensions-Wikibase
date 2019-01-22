@@ -13,7 +13,6 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -23,7 +22,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 use Wikibase\WikibaseSettings;
 
 /**

@@ -232,7 +232,7 @@ class DirectSqlStore implements ClientStore {
 			$settings->getSetting( 'maxSerializedEntitySize' ),
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+			$settings->getSetting( 'useEntitySourceBasedFederation' )
 		);
 	}
 
