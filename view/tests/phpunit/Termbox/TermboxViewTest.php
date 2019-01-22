@@ -31,13 +31,14 @@ class TermboxViewTest extends TestCase {
 		$language = 'en';
 		$entityId = new ItemId( 'Q42' );
 		$editLinkUrl = '/edit/Q42';
+		$fallbackChain = $this->createMock( LanguageFallbackChain::class );
 
 		$response = 'termbox says hi';
 
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->with( $entityId, $language, $editLinkUrl )
+			->with( $entityId, $language, $editLinkUrl, $fallbackChain )
 			->willReturn( $response );
 
 		$this->assertSame(
@@ -45,7 +46,8 @@ class TermboxViewTest extends TestCase {
 			$this->newTermbox(
 				$renderer,
 				$this->newLocalizedTextProvider(),
-				$this->newLinkingSpecialPageLinker( $entityId, $editLinkUrl )
+				$this->newLinkingSpecialPageLinker( $entityId, $editLinkUrl ),
+				$fallbackChain
 			)->getHtml(
 				$language,
 				new TermList( [] ),
@@ -131,10 +133,11 @@ class TermboxViewTest extends TestCase {
 	private function newTermbox(
 		TermboxRenderer $renderer,
 		LocalizedTextProvider $textProvider,
-		SpecialPageLinker $specialPageLinker
+		SpecialPageLinker $specialPageLinker,
+		LanguageFallbackChain $fallbackChain = null
 	): TermboxView {
 		return new TermboxView(
-			new LanguageFallbackChain( [] ),
+			$fallbackChain ?: new LanguageFallbackChain( [] ),
 			$renderer,
 			$textProvider,
 			$specialPageLinker

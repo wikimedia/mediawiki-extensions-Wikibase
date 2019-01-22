@@ -3,12 +3,15 @@
 namespace Wikibase\View\Tests\Termbox\Renderer;
 
 use Exception;
+use Language;
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageWithConversion;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -39,7 +42,12 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 		$this->assertSame(
 			$content,
-			$client->getContent( new ItemId( 'Q42' ), 'de', '/edit/Q42' )
+			$client->getContent(
+				new ItemId( 'Q42' ),
+				'de',
+				'/edit/Q42',
+				$this->newLanguageFallbackChain()
+			)
 		);
 	}
 
@@ -47,6 +55,9 @@ class TermboxRemoteRendererTest extends TestCase {
 		$language = 'de';
 		$itemId = 'Q42';
 		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
+		$preferredLanguages = [ 'en', 'fr', 'es' ];
+		$fallbackChain = $this->newLanguageFallbackChain( $preferredLanguages );
+
 		$requestFactory = $this->newHttpRequestFactory();
 		$requestFactory->expects( $this->once() )
 			->method( 'create' )
@@ -56,6 +67,7 @@ class TermboxRemoteRendererTest extends TestCase {
 					'entity' => $itemId,
 					'language' => $language,
 					'editLink' => $editLinkUrl,
+					'preferredLanguages' => "$preferredLanguages[0]|$preferredLanguages[1]|$preferredLanguages[2]",
 				] ),
 				[]
 			)
@@ -64,7 +76,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		( new TermboxRemoteRenderer(
 			$requestFactory,
 			self::SSR_URL
-		) )->getContent( new ItemId( $itemId ), $language, $editLinkUrl );
+		) )->getContent( new ItemId( $itemId ), $language, $editLinkUrl, $fallbackChain );
 	}
 
 	public function testGetContentEncounteringUpstreamException_bubblesRequestException() {
@@ -85,7 +97,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl );
+			$client->getContent( $entityId, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -112,7 +124,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl );
+			$client->getContent( $entityId, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -138,7 +150,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl );
+			$client->getContent( $entityId, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -183,6 +195,15 @@ class TermboxRemoteRendererTest extends TestCase {
 		$req->expects( $this->once() )->method( 'execute' );
 
 		return $req;
+	}
+
+	/**
+	 * @return LanguageFallbackChain
+	 */
+	private function newLanguageFallbackChain( $languages = [] ) {
+		return new LanguageFallbackChain( array_map( function ( $languageCode ) {
+			return LanguageWithConversion::factory( Language::factory( $languageCode ) );
+		}, $languages ) );
 	}
 
 }
