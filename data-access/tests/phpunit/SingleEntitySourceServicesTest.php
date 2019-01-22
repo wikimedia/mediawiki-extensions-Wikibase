@@ -10,6 +10,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
@@ -39,6 +40,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getEntityInfoBuilder', EntityInfoBuilder::class, true ],
 			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class, true ],
 			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
+			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
 		];
 	}
 
