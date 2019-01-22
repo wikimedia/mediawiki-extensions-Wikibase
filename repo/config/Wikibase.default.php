@@ -340,4 +340,8 @@ return [
 	 */
 	'idGeneratorSeparateDbConnection' => false,
 
+	'useEntitySourceBasedFederation' => false,
+
+	'localEntitySourceName' => 'local',
+
 ];

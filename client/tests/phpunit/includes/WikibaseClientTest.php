@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Deserializers\Deserializer;
 use HashSiteStore;
@@ -143,7 +145,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			new EntitySourceDefinitions( [] )
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -164,7 +167,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$siteLookup
+			$siteLookup,
+			new EntitySourceDefinitions( [] )
 		);
 
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
@@ -199,7 +203,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$siteLookup
+			$siteLookup,
+			$this->getEntitySourceDefinitions()
 		);
 
 		$this->assertEquals( $expected, $client->getSiteGroup() );
@@ -378,7 +383,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
-			$this->getSiteLookup()
+			$this->getSiteLookup(),
+			$this->getEntitySourceDefinitions()
 		);
 	}
 
@@ -390,6 +396,20 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			[ '' => [ 'database' => 'repo', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
 			new EntityTypeDefinitions( [] )
 		);
+	}
+
+	/**
+	 * @return EntitySourceDefinitions
+	 */
+	private function getEntitySourceDefinitions() {
+		$irrelevantPropertyNamespaceId = 200;
+		$irrelevantPropertySlotName = 'main';
+
+		return new EntitySourceDefinitions( [ new EntitySource(
+			'test',
+			false,
+			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ]
+		) ] );
 	}
 
 }
