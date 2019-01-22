@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use HashSiteStore;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -34,15 +35,19 @@ class MultiRepositoryServicesIntegrationTest extends \MediaWikiTestCase {
 	}
 
 	private function getWikibaseClient() {
+		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'useEntitySourceBasedFederation', false );
+
 		return new WikibaseClient(
-			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			new RepositoryDefinitions(
 				[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
 				new EntityTypeDefinitions( [] )
 			),
-			new HashSiteStore()
+			new HashSiteStore(),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 

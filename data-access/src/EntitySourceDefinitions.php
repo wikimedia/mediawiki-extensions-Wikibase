@@ -60,6 +60,10 @@ class EntitySourceDefinitions {
 		}
 	}
 
+	public function getSources() {
+		return $this->sources;
+	}
+
 	/**
 	 * @param string $entityType
 	 * @return EntitySource|null

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -45,7 +46,8 @@ class StoreTest extends \MediaWikiTestCase {
 				$this->getMock( EntityTitleStoreLookup::class ),
 				new EntityNamespaceLookup( [] ),
 				$this->getMock( IdGenerator::class ),
-				$this->getMock( WikibaseServices::class )
+				$this->getMock( WikibaseServices::class ),
+				new EntitySource( 'testsource', 'testdb', [] )
 			)
 		];
 
