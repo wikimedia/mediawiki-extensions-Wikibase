@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -11,6 +12,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -160,6 +162,7 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [ new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ) ] ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -177,6 +180,7 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [ new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ) ] ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -224,6 +228,7 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [ new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ) ] ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -258,6 +263,7 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 			new EntitySourceDefinitions( [
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ),
 			] ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
 			[]
 		);
 
@@ -323,6 +329,7 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ),
 				new EntitySource( 'props', 'propb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ] ),
 			] ),
+			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
 			$perSourceServices
 		);
 	}
