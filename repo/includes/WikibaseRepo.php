@@ -1164,7 +1164,7 @@ class WikibaseRepo {
 	 * @return PrefetchingTermLookup
 	 */
 	public function getPrefetchingTermLookup() {
-		return $this->getWikibaseServices()->getTermBuffer();
+		return $this->getXYZServices()->getPrefetchingTermLookup();
 	}
 
 	/**
