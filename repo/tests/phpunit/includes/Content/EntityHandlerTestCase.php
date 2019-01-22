@@ -22,6 +22,8 @@ use SearchEngine;
 use Serializers\Serializer;
 use Title;
 use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -65,12 +67,18 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		if ( $settings ) {
 			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
 		}
+		$repoSettings['localEntitySourceName'] = 'test';
 
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
 			new DataTypeDefinitions( [] ),
 			$this->getEntityTypeDefinitions(),
-			$this->getRepositoryDefinitions()
+			$this->getRepositoryDefinitions(),
+			new EntitySourceDefinitions( [ new EntitySource(
+				'test',
+				'testdb',
+				[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ]
+			) ] )
 		);
 	}
 
