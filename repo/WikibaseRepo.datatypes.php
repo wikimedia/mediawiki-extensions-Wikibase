@@ -382,14 +382,10 @@ return call_user_func( function() {
 
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewItemIdFormatter' );
 					try {
-						$maxEntityId = WikibaseRepo::getDefaultInstance()->getSettings()
-							->getSetting( 'tmpMaxItemIdForNewItemIdHtmlFormatter' );
-
 						$statsdDataFactory = MediaWikiServices::getInstance()
 							->getStatsdDataFactory();
 
 						$formatter = new ControlledFallbackEntityIdFormatter(
-							$maxEntityId,
 							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
 							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
 							$statsdDataFactory,
@@ -429,14 +425,10 @@ return call_user_func( function() {
 
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewPropertyIdFormatter' );
 					try {
-						$maxEntityId = WikibaseRepo::getDefaultInstance()->getSettings()
-							->getSetting( 'tmpMaxItemIdForNewPropertyIdHtmlFormatter' );
-
 						$statsdDataFactory = MediaWikiServices::getInstance()
 							->getStatsdDataFactory();
 
 						$formatter = new ControlledFallbackEntityIdFormatter(
-							$maxEntityId,
 							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
 							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
 							$statsdDataFactory,
