@@ -115,6 +115,70 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $itemResult, $searchResult );
 	}
 
+	public function testGetPrefetchingTermLookupReturnsLookupBufferingDataOfSourceEntities() {
+		$itemId = new ItemId( 'Q200' );
+		$propertyId = new PropertyId( 'P500' );
+		$fakeItemLabel = 'Q200 en label';
+		$fakePropertyLabel = 'P500 en label';
+
+		$itemLookup = new FakePrefetchingTermLookup();
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getPrefetchingTermLookup' )
+			->willReturn( $itemLookup );
+
+		$propertyLookup = new FakePrefetchingTermLookup();
+
+		$propertyServices = $this->createMock( SingleEntitySourceServices::class );
+		$propertyServices->method( 'getPrefetchingTermLookup' )
+			->willReturn( $propertyLookup );
+
+		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
+
+		$lookup = $services->getPrefetchingTermLookup();
+		$lookup->prefetchTerms( [ $itemId, $propertyId ], [ 'label' ], [ 'en' ] );
+
+		$this->assertEquals( $fakeItemLabel, $lookup->getPrefetchedTerm( $itemId, 'label', 'en' ) );
+		$this->assertEquals( $fakePropertyLabel, $lookup->getPrefetchedTerm( $propertyId, 'label', 'en' ) );
+	}
+
+	public function testGetPrefetchingTermLookupReturnsLookupReturningTermsOfEntitiesConfiguredInSources() {
+		$itemId = new ItemId( 'Q200' );
+		$fakeItemLabel = 'Q200 en label';
+
+		$itemLookup = new FakePrefetchingTermLookup();
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getPrefetchingTermLookup' )
+			->willReturn( $itemLookup );
+
+		$services = new MultipleEntitySourceServices(
+			new EntitySourceDefinitions( [ new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ) ] ),
+			[ 'items' => $itemServices ]
+		);
+
+		$lookup = $services->getPrefetchingTermLookup();
+
+		$this->assertEquals( $fakeItemLabel, $lookup->getLabel( $itemId, 'en' ) );
+	}
+
+	public function testGetPrefetchingTermLookupReturnsLookupReturningNullWhenGivenEntitiesUnknownInSources() {
+		$itemLookup = new FakePrefetchingTermLookup();
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getPrefetchingTermLookup' )
+			->willReturn( $itemLookup );
+
+		$services = new MultipleEntitySourceServices(
+			new EntitySourceDefinitions( [ new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ) ] ),
+			[ 'items' => $itemServices ]
+		);
+
+		$lookup = $services->getPrefetchingTermLookup();
+
+		$this->assertNull( $lookup->getLabel( new PropertyId( 'P123' ), 'en' ) );
+	}
+
 	public function testEntityFromKnownSourceUpdated_entityUpdatedPassedToRelevantServiceContainer() {
 		$itemRevision = new EntityRevision( new Item( new ItemId( 'Q1' ) ) );
 
