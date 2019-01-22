@@ -652,6 +652,9 @@ class SqlStore implements Store {
 	 * @return EntityPrefetcher
 	 */
 	private function newEntityPrefetcher() {
+		if ( $this->multipleEntitySourceServices !== null ) {
+			return $this->multipleEntitySourceServices->getEntityPrefetcher();
+		}
 		return $this->wikibaseServices->getEntityPrefetcher();
 	}
 
