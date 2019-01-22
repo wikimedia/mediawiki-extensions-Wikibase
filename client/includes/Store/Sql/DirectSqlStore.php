@@ -244,13 +244,12 @@ class DirectSqlStore implements ClientStore {
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 		$this->addEntityUsagesBatchSize = $settings->getSetting( 'addEntityUsagesBatchSize' );
 
-		$doNotUseEntitySourceBasedFederation = false;
 		// TODO: inject or so, this is a temporary hack
 		$this->dataAccessSettings = new DataAccessSettings(
 			$settings->getSetting( 'maxSerializedEntitySize' ),
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$doNotUseEntitySourceBasedFederation
+			$settings->getSetting( 'useEntitySourceBasedFederation' )
 		);
 	}
 

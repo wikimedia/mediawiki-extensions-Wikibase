@@ -6,8 +6,12 @@ use CachedBagOStuff;
 use Deserializers\DispatchableDeserializer;
 use Exception;
 use InvalidArgumentException;
+use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
@@ -45,6 +49,8 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -338,6 +344,11 @@ class WikibaseRepo {
 	 */
 	private static $snakFormatterBuilders = null;
 
+	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -381,7 +392,8 @@ class WikibaseRepo {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			$entityTypeDefinitions,
-			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions )
+			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
+			self::getEntitySourceDefinitionsFromSettings( $settings )
 		);
 	}
 
@@ -421,6 +433,83 @@ class WikibaseRepo {
 		}
 
 		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
+	}
+
+	// TODO: current settings (especially foreign repositories blob) might be quite confusing
+	// Having a "entitySources" or so setting might be better, and would also allow unifying
+	// the way these are configured in Repo and in Client parts
+	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+		$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
+		$localDatabaseName = $settings->getSetting( 'changesDatabase' );
+
+		$sources = [];
+
+		$localEntityNamespaceSlotData = [];
+		foreach ( $localEntityNamespaces as $entityType => $namespaceSlot ) {
+			list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+			$localEntityNamespaceSlotData[$entityType] = [
+				'namespaceId' => $namespaceId,
+				'slot' => $slot,
+			];
+		}
+		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData );
+
+		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
+
+		if ( isset( $foreignRepositories[''] ) ) {
+			throw new MWException( 'A WikibaseRepo cannot have a foreign repo configured with '
+				. 'the empty prefix, since the empty prefix always refers to the local repo.' );
+		}
+
+		foreach ( $foreignRepositories as $repository => $repositorySettings ) {
+			$namespaceSlotData = [];
+			foreach ( $repositorySettings['entityNamespaces'] as $entityType => $namespaceSlot ) {
+				list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+				$namespaceSlotData[$entityType] = [
+					'namespaceId' => $namespaceId,
+					'slot' => $slot,
+				];
+			}
+			$sources[] = new EntitySource(
+				$repository,
+				$repositorySettings['repoDatabase'],
+				$namespaceSlotData
+			);
+		}
+
+		return new EntitySourceDefinitions( $sources );
+	}
+
+	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {
+		if ( is_int( $namespaceAndSlot ) ) {
+			return [ $namespaceAndSlot, 'main' ];
+		}
+
+		if ( !preg_match( '!^(\w*)(/(\w+))?!', $namespaceAndSlot, $m ) ) {
+			throw new InvalidArgumentException(
+				'Bad namespace/slot specification: an integer namespace index, or a canonical'
+				. ' namespace name, or have the form <namespace>/<slot-name>.'
+				. ' Found ' . $namespaceAndSlot
+			);
+		}
+
+		if ( is_numeric( $m[1] ) ) {
+			$ns = intval( $m[1] );
+		} else {
+			$ns = MWNamespace::getCanonicalIndex( strtolower( $m[1] ) );
+		}
+
+		if ( !is_int( $ns ) ) {
+			throw new InvalidArgumentException(
+				'Bad namespace specification: must be either an integer or a canonical'
+				. ' namespace name. Found ' . $m[1]
+			);
+		}
+
+		return [
+			$ns,
+			$m[3] ?? 'main'
+		];
 	}
 
 	/**
@@ -586,12 +675,14 @@ class WikibaseRepo {
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		RepositoryDefinitions $repositoryDefinitions
+		RepositoryDefinitions $repositoryDefinitions,
+		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
 	/**
@@ -1071,6 +1162,11 @@ class WikibaseRepo {
 	 */
 	public function getStore() {
 		if ( $this->store === null ) {
+			$localEntitySource = $this->getLocalEntitySource();
+			// TODO: the idea of local entity source seems not really suitable here. Store should probably
+			// get source definitions and pass the right source/sources to services it creates accordingly
+			// (as long as what it creates should not migrate to *SourceServices in the first place)
+
 			$this->store = new SqlStore(
 				$this->getEntityChangeFactory(),
 				$this->getEntityIdParser(),
@@ -1079,11 +1175,26 @@ class WikibaseRepo {
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup(),
 				$this->newIdGenerator(),
-				$this->getWikibaseServices()
+				$this->getWikibaseServices(),
+				$localEntitySource
 			);
 		}
 
 		return $this->store;
+	}
+
+	private function getLocalEntitySource() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$localDatabaseName = $this->settings->getSetting( 'changesDatabase' );
+			$sources = $this->entitySourceDefinitions->getSources();
+			foreach ( $sources as $source ) {
+				if ( $source->getDatabaseName() === $localDatabaseName ) {
+					return $source;
+				}
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 	/**
@@ -2090,6 +2201,14 @@ class WikibaseRepo {
 	 *         assumption can be changed in the future.
 	 */
 	public function getEntityTypeToRepositoryMapping() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			// Map all entity types to unprefixed repository.
+			// TODO: This is a bit of a hack but does the job for EntityIdSearchHelper as long as there are no
+			// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
+			// of getting this map passed from Repo
+			$entityTypes = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
+			return array_fill_keys( $entityTypes, '' );
+		}
 		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
 	}
 
@@ -2109,29 +2228,59 @@ class WikibaseRepo {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
-				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
-				$this->repositoryDefinitions,
-				$this->entityTypeDefinitions,
-				$this->getDataAccessSettings(),
-				$this->getMultiRepositoryServiceWiring(),
-				$this->getPerRepositoryServiceWiring(),
-				MediaWikiServices::getInstance()->getNameTableStoreFactory()
-			);
+			$this->wikibaseServices = $this->settings->getSetting( 'useEntitySourceBasedFederation' ) ?
+				$this->newEntitySourceWikibaseServices() :
+				$this->newMultipleRepositoryAwareWikibaseServices();
 		}
 
 		return $this->wikibaseServices;
 	}
 
-	private function getDataAccessSettings() {
-		$doNotUseEntitySourceBasedFederation = false;
+	private function newMultipleRepositoryAwareWikibaseServices() {
+		return new MultipleRepositoryAwareWikibaseServices(
+			$this->getEntityIdParser(),
+			$this->getEntityIdComposer(),
+			$this->repositoryDefinitions,
+			$this->entityTypeDefinitions,
+			$this->getDataAccessSettings(),
+			$this->getMultiRepositoryServiceWiring(),
+			$this->getPerRepositoryServiceWiring(),
+			MediaWikiServices::getInstance()->getNameTableStoreFactory()
+		);
+	}
 
+	private function newEntitySourceWikibaseServices() {
+		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
+		$genericServices = new GenericServices(
+			$this->entityTypeDefinitions,
+			$this->repositoryDefinitions->getEntityNamespaces(),
+			$this->repositoryDefinitions->getEntitySlots()
+		);
+
+		$singleSourceServices = [];
+		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
+			// TODO: extract
+			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
+				$genericServices,
+				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
+				$this->getDataValueDeserializer(),
+				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+				$this->getDataAccessSettings(),
+				$source,
+				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+			);
+		}
+		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
+	}
+
+	private function getDataAccessSettings() {
 		return new DataAccessSettings(
 			$this->settings->getSetting( 'maxSerializedEntitySize' ),
 			$this->settings->getSetting( 'useTermsTableSearchFields' ),
 			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$doNotUseEntitySourceBasedFederation
+			$this->settings->getSetting( 'useEntitySourceBasedFederation' )
 		);
 	}
 
