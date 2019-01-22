@@ -519,7 +519,11 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {
-			$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
+			if ( $this->multipleEntitySourceServices !== null ) {
+				$propertyInfoLookup = $this->multipleEntitySourceServices->getPropertyInfoLookup();
+			} else {
+				$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
+			}
 			$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
