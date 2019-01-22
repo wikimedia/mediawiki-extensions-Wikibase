@@ -9,7 +9,6 @@ use Psr\Log\LoggerInterface;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
-use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
@@ -193,8 +192,6 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private $forceWriteSearchFields;
 
-	private $multipleEntitySourceServices = null;
-
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
@@ -216,8 +213,7 @@ class DirectSqlStore implements ClientStore {
 		SettingsArray $settings,
 		$repoWiki = false,
 		$languageCode,
-		LoggerInterface $pageRandomLookupLogger = null,
-		MultipleEntitySourceServices $multipleEntitySourceServices = null
+		LoggerInterface $pageRandomLookupLogger = null
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -227,7 +223,6 @@ class DirectSqlStore implements ClientStore {
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 		$this->pageRandomLookupLogger = $pageRandomLookupLogger;
-		$this->multipleEntitySourceServices = $multipleEntitySourceServices;
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -379,11 +374,7 @@ class DirectSqlStore implements ClientStore {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
-		if ( $this->multipleEntitySourceServices ) {
-			$dispatchingLookup = $this->multipleEntitySourceServices->getEntityRevisionLookup();
-		} else {
-			$dispatchingLookup = $this->wikibaseServices->getEntityRevisionLookup();
-		}
+		$dispatchingLookup = $this->wikibaseServices->getEntityRevisionLookup();
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
@@ -519,11 +510,7 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {
-			if ( $this->multipleEntitySourceServices !== null ) {
-				$propertyInfoLookup = $this->multipleEntitySourceServices->getPropertyInfoLookup();
-			} else {
-				$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
-			}
+			$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
 			$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
@@ -541,9 +528,6 @@ class DirectSqlStore implements ClientStore {
 	 * @return PrefetchingWikiPageEntityMetaDataAccessor
 	 */
 	public function getEntityPrefetcher() {
-		if ( $this->multipleEntitySourceServices !== null ) {
-			return $this->multipleEntitySourceServices->getEntityPrefetcher();
-		}
 		return $this->wikibaseServices->getEntityPrefetcher();
 	}
 

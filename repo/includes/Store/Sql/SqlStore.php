@@ -7,7 +7,6 @@ use MediaWiki\MediaWikiServices;
 use ObjectCache;
 use Revision;
 use Hooks;
-use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -181,8 +180,6 @@ class SqlStore implements Store {
 	 */
 	private $forceWriteSearchFields;
 
-	private $multipleEntitySourceServices = null;
-
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
@@ -201,8 +198,7 @@ class SqlStore implements Store {
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		IdGenerator $idGenerator,
-		WikibaseServices $wikibaseServices,
-		MultipleEntitySourceServices $multipleEntitySourceServices = null
+		WikibaseServices $wikibaseServices
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -212,7 +208,6 @@ class SqlStore implements Store {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->idGenerator = $idGenerator;
 		$this->wikibaseServices = $wikibaseServices;
-		$this->multipleEntitySourceServices = $multipleEntitySourceServices;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -477,13 +472,8 @@ class SqlStore implements Store {
 		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
 
-		if ( $this->multipleEntitySourceServices ) {
-			$dispatcher->registerWatcher( $this->multipleEntitySourceServices->getEntityStoreWatcher() );
-			$nonCachingLookup = $this->multipleEntitySourceServices->getEntityRevisionLookup();
-		} else {
-			$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
-			$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
-		}
+		$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
+		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();
 
 		$nonCachingLookup = new TypeDispatchingEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityRevisionLookupFactoryCallbacks(),
@@ -543,10 +533,6 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilder
 	 */
 	public function getEntityInfoBuilder() {
-		if ( $this->multipleEntitySourceServices ) {
-			return $this->multipleEntitySourceServices->getEntityInfoBuilder();
-		}
-
 		return $this->wikibaseServices->getEntityInfoBuilder();
 	}
 
@@ -570,11 +556,7 @@ class SqlStore implements Store {
 	 * @return PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
-		if ( $this->multipleEntitySourceServices !== null ) {
-			$nonCachingLookup = $this->multipleEntitySourceServices->getPropertyInfoLookup();
-		} else {
-			$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
-		}
+		$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
 
 		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
@@ -670,9 +652,6 @@ class SqlStore implements Store {
 	 * @return EntityPrefetcher
 	 */
 	private function newEntityPrefetcher() {
-		if ( $this->multipleEntitySourceServices !== null ) {
-			return $this->multipleEntitySourceServices->getEntityPrefetcher();
-		}
 		return $this->wikibaseServices->getEntityPrefetcher();
 	}
 

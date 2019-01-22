@@ -421,50 +421,53 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
-				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
-				$this->repositoryDefinitions,
-				$this->entityTypeDefinitions,
-				$this->getDataAccessSettings(),
-				$this->getMultiRepositoryServiceWiring(),
-				$this->getPerRepositoryServiceWiring(),
-				MediaWikiServices::getInstance()->getNameTableStoreFactory()
-			);
+			$this->wikibaseServices = $this->settings->getSetting( 'useEntitySourceBasedFederation' ) ?
+				$this->newEntitySourceWikibaseServices() :
+				$this->newMultipleRepositoryAwareWikibaseServices();
 		}
 
 		return $this->wikibaseServices;
 	}
 
-	// TODO: rename
-	private function getXYZServices() {
-		if ( $this->xyzServices === null ) {
-			$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
-			$singleSourceServices = [];
+	private function newMultipleRepositoryAwareWikibaseServices() {
+		return new MultipleRepositoryAwareWikibaseServices(
+			$this->getEntityIdParser(),
+			$this->getEntityIdComposer(),
+			$this->repositoryDefinitions,
+			$this->entityTypeDefinitions,
+			$this->getDataAccessSettings(),
+			$this->getMultiRepositoryServiceWiring(),
+			$this->getPerRepositoryServiceWiring(),
+			MediaWikiServices::getInstance()->getNameTableStoreFactory()
+		);
+	}
 
-			foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
-				// TODO: extract
-				$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
-					new GenericServices(
-						$this->entityTypeDefinitions,
-						$this->repositoryDefinitions->getEntityNamespaces(),
-						$this->repositoryDefinitions->getEntitySlots()
-					),
-					$this->getEntityIdParser(),
-					$this->getEntityIdComposer(),
-					$this->getDataValueDeserializer(),
-					$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
-					$this->getDataAccessSettings(),
-					$source,
-					$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
-					$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
-				);
-			}
+	private function newEntitySourceWikibaseServices() {
+		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
+		$genericServices = new GenericServices(
+			$this->entityTypeDefinitions,
+			$this->repositoryDefinitions->getEntityNamespaces(),
+			$this->repositoryDefinitions->getEntitySlots()
+		);
 
-			$this->xyzServices = new MultipleEntitySourceServices( $this->entitySourceDefinitions, $singleSourceServices );
+		$singleSourceServices = [];
+
+		foreach ( $this->entitySourceDefinitions->getSources() as $sourceName => $source ) {
+			// TODO: extract
+			$singleSourceServices[$sourceName] = new SingleEntitySourceServices(
+				$genericServices,
+				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
+				$this->getDataValueDeserializer(),
+				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+				$this->getDataAccessSettings(),
+				$source,
+				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+			);
 		}
 
-		return $this->xyzServices;
+		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
 	}
 
 	private function getDataAccessSettings() {
@@ -543,7 +546,7 @@ final class WikibaseClient {
 	private function getPrefetchingTermLookup() {
 		if ( !$this->prefetchingTermLookup ) {
 			// TODO: This should not assume the TermBuffer instance to be a PrefetchingTermLookup
-			$this->prefetchingTermLookup = $this->getXYZServices()->getPrefetchingTermLookup();
+			$this->prefetchingTermLookup = $this->getWikibaseServices()->getTermBuffer();
 		}
 
 		return $this->prefetchingTermLookup;
@@ -557,7 +560,7 @@ final class WikibaseClient {
 	 * @return TermSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return $this->getXYZServices()->getTermSearchInteractorFactory()
+		return $this->getWikibaseServices()->getTermSearchInteractorFactory()
 			->newInteractor( $displayLanguageCode );
 	}
 
@@ -631,8 +634,7 @@ final class WikibaseClient {
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
 				$this->getContentLanguage()->getCode(),
-				$this->getLogger(),
-				$this->getXYZServices()
+				$this->getLogger()
 			);
 		}
 
