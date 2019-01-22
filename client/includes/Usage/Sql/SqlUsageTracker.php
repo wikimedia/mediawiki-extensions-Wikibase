@@ -49,21 +49,31 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	private $entityUsagePerPageLimit;
 
 	/**
+	 * The batch size when adding entity usage.
+	 *
+	 * @var int
+	 */
+	private $addEntityUsagesBatchSize;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param SessionConsistentConnectionManager $connectionManager
 	 * @param string[] $disabledUsageAspects
 	 * @param int $entityUsagePerPageLimit
+	 * @param int $addEntityUsagesBatchSize
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
 		SessionConsistentConnectionManager $connectionManager,
 		array $disabledUsageAspects,
-		$entityUsagePerPageLimit
+		$entityUsagePerPageLimit,
+		$addEntityUsagesBatchSize = 500
 	) {
 		$this->idParser = $idParser;
 		$this->connectionManager = $connectionManager;
 		$this->disabledUsageAspects = $disabledUsageAspects;
 		$this->entityUsagePerPageLimit = $entityUsagePerPageLimit;
+		$this->addEntityUsagesBatchSize = $addEntityUsagesBatchSize;
 	}
 
 	/**
@@ -72,7 +82,13 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsageTable
 	 */
 	private function newUsageTable( IDatabase $db ) {
-		return new EntityUsageTable( $this->idParser, $db );
+		return new EntityUsageTable(
+			$this->idParser,
+			$db,
+			null,
+			null,
+			$this->addEntityUsagesBatchSize
+		);
 	}
 
 	/**
