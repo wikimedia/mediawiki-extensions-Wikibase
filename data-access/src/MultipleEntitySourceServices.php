@@ -35,6 +35,8 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 
 	private $termSearchInteractorFactory = null;
 
+	private $prefetchingTermLookup = null;
+
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param SingleEntitySourceServices[] $singleSourceServices indexed by source name
@@ -88,6 +90,21 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->termSearchInteractorFactory;
+	}
+
+	public function getPrefetchingTermLookup() {
+		if ( $this->prefetchingTermLookup === null ) {
+			$lookupsByType = [];
+
+			/** @var EntitySource $source */
+			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+				$lookupsByType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getPrefetchingTermLookup();
+			}
+
+			$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup( $lookupsByType );
+		}
+
+		return $this->prefetchingTermLookup;
 	}
 
 	public function getEntityStoreWatcher() {
