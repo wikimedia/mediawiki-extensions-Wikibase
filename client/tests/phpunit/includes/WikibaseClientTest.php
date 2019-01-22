@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Deserializers\Deserializer;
@@ -145,7 +146,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
 			$this->getSiteLookup(),
-			new EntitySourceDefinitions( [] )
+			$this->getEntitySourceDefinitions()
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -381,7 +382,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
 			$this->getSiteLookup(),
-			new EntitySourceDefinitions( [] )
+			$this->getEntitySourceDefinitions()
 		);
 	}
 
@@ -393,6 +394,13 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			[ '' => [ 'database' => 'repo', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
 			new EntityTypeDefinitions( [] )
 		);
+	}
+
+	/**
+	 * @return EntitySourceDefinitions
+	 */
+	private function getEntitySourceDefinitions() {
+		return new EntitySourceDefinitions( [ new EntitySource( 'test', [ 'property' ], false, [] ) ] );
 	}
 
 }

@@ -570,7 +570,11 @@ class SqlStore implements Store {
 	 * @return PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
-		$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
+		if ( $this->multipleEntitySourceServices !== null ) {
+			$nonCachingLookup = $this->multipleEntitySourceServices->getPropertyInfoLookup();
+		} else {
+			$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
+		}
 
 		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 

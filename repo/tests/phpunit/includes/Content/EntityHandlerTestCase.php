@@ -22,6 +22,7 @@ use SearchEngine;
 use Serializers\Serializer;
 use Title;
 use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -72,8 +73,12 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 			new DataTypeDefinitions( [] ),
 			$this->getEntityTypeDefinitions(),
 			$this->getRepositoryDefinitions(),
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [ $this->getEntitySource() ] )
 		);
+	}
+
+	private function getEntitySource() {
+		return new EntitySource( 'test', [ 'property' ], false, [] );
 	}
 
 	protected function getEntityTypeDefinitions() {

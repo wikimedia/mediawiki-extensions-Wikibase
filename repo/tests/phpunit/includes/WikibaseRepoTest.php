@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
@@ -595,8 +596,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			$this->getRepositoryDefinitions(),
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [ $this->getEntitySource() ] )
 		);
+	}
+
+	private function getEntitySource() {
+		return new EntitySource( 'foobar', [ 'property' ], false, [] );
 	}
 
 	/**
