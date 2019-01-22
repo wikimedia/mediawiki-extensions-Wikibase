@@ -6,6 +6,7 @@ global $wgAutoloadClasses;
 $wgAutoloadClasses += [
 	'Wikibase\\DataAccess\\ByTypeDispatchingEntityInfoBuilder' => __DIR__ . '/src/ByTypeDispatchingEntityInfoBuilder.php',
 	'Wikibase\\DataAccess\\ByTypeDispatchingEntityRevisionLookup' => __DIR__ . '/src/ByTypeDispatchingEntityRevisionLookup.php',
+	'Wikibase\\DataAccess\\ByTypeDispatchingPrefetchingTermLookup' => __DIR__ . '/src/ByTypeDispatchingPrefetchingTermLookup.php',
 	'Wikibase\\DataAccess\\DataAccessServices' => __DIR__ . '/src/DataAccessServices.php',
 	'Wikibase\\DataAccess\\DataAccessSettings' => __DIR__ . '/src/DataAccessSettings.php',
 	'Wikibase\\DataAccess\\EntitySource' => __DIR__ . '/src/EntitySource.php',
