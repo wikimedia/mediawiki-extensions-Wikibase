@@ -8,7 +8,7 @@ use ObjectCache;
 use Revision;
 use Hooks;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\UnusableEntitySource;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -182,6 +182,8 @@ class SqlStore implements Store {
 	 */
 	private $forceWriteSearchFields;
 
+	private $entitySource;
+
 	private $dataAccessSettings;
 
 	/**
@@ -193,6 +195,7 @@ class SqlStore implements Store {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param IdGenerator $idGenerator
 	 * @param WikibaseServices $wikibaseServices Service container providing data access services
+	 * @param EntitySource $entitySource
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
@@ -202,7 +205,8 @@ class SqlStore implements Store {
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		IdGenerator $idGenerator,
-		WikibaseServices $wikibaseServices
+		WikibaseServices $wikibaseServices,
+		EntitySource $entitySource
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -212,6 +216,7 @@ class SqlStore implements Store {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->idGenerator = $idGenerator;
 		$this->wikibaseServices = $wikibaseServices;
+		$this->entitySource = $entitySource;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -221,12 +226,11 @@ class SqlStore implements Store {
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 
-		$doNotUseEntitySourceBasedFederation = false;
 		$this->dataAccessSettings = new DataAccessSettings(
 			$settings->getSetting( 'maxSerializedEntitySize' ),
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$doNotUseEntitySourceBasedFederation
+			$settings->getSetting( 'useEntitySourceBasedFederation' )
 		);
 	}
 
@@ -264,7 +268,7 @@ class SqlStore implements Store {
 			$stringNormalizer,
 			$this->entityIdComposer,
 			$this->entityIdParser,
-			new UnusableEntitySource(),
+			$this->entitySource,
 			$this->dataAccessSettings,
 			false,
 			''
@@ -640,7 +644,7 @@ class SqlStore implements Store {
 	 */
 	private function getPropertyInfoTable() {
 		if ( $this->propertyInfoTable === null ) {
-			$this->propertyInfoTable = new PropertyInfoTable( $this->entityIdComposer, new UnusableEntitySource(), $this->dataAccessSettings );
+			$this->propertyInfoTable = new PropertyInfoTable( $this->entityIdComposer, $this->entitySource, $this->dataAccessSettings );
 		}
 		return $this->propertyInfoTable;
 	}
