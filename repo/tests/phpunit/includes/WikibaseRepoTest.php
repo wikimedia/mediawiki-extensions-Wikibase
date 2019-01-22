@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests;
 
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
@@ -389,7 +391,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			new RepositoryDefinitions(
 				$settings->getSetting( 'repositories' ),
 				$entityTypeDefinitions
-			)
+			),
+			new EntitySourceDefinitions( [] )
 		);
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
@@ -430,7 +433,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			WikibaseRepo::getDefaultInstance()->getSettings(),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) )
+			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) ),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 
@@ -463,7 +467,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 					$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'lexeme' => 280 ] ] )
 				),
 				$entityTypeDefinitions
-			)
+			),
+			new EntitySourceDefinitions( [] )
 		);
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
@@ -592,7 +597,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$this->getRepositoryDefinitions()
+			$this->getRepositoryDefinitions(),
+			$this->getEntitySourceDefinitions()
 		);
 	}
 
@@ -604,6 +610,14 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
 			new EntityTypeDefinitions( [] )
 		);
+	}
+
+	private function getEntitySourceDefinitions() {
+		return new EntitySourceDefinitions( [ new EntitySource(
+			'test',
+			'testdb',
+			[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ]
+		) ] );
 	}
 
 	public function testGetApiHelperFactory() {

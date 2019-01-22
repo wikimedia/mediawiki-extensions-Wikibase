@@ -336,4 +336,6 @@ return [
 	 */
 	'idGeneratorSeparateDbConnection' => false,
 
+	'useEntitySourceBasedFederation' => false,
+
 ];
