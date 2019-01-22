@@ -183,6 +183,54 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $lookup->getLabel( new PropertyId( 'P123' ), 'en' ) );
 	}
 
+	public function testGetEntityPrefetcherReturnsServiceBufferingDataOfSourceEntities() {
+		$itemId = new ItemId( 'Q200' );
+		$propertyId = new PropertyId( 'P500' );
+
+		$itemPrefetcher = new EntityPrefetcherSpy();
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getEntityPrefetcher' )
+			->willReturn( $itemPrefetcher );
+
+		$propertyPrefetcher = new EntityPrefetcherSpy();
+
+		$propertyServices = $this->createMock( SingleEntitySourceServices::class );
+		$propertyServices->method( 'getEntityPrefetcher' )
+			->willReturn( $propertyPrefetcher );
+
+		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
+
+		$prefetcher = $services->getEntityPrefetcher();
+		$prefetcher->prefetch( [ $itemId, $propertyId ] );
+
+		$this->assertEquals(
+			[ $itemId, $propertyId ],
+			array_merge( $itemPrefetcher->getPrefetchedEntities(), $propertyPrefetcher->getPrefetchedEntities() )
+		);
+	}
+
+	public function testGetEntityPrefetcherReturnsServiceThatDoesNotPrefetchEntitiesNotConfiguredInSources() {
+		$itemId = new ItemId( 'Q200' );
+		$propertyId = new PropertyId( 'P500' );
+
+		$itemPrefetcher = new EntityPrefetcherSpy();
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getEntityPrefetcher' )
+			->willReturn( $itemPrefetcher );
+
+		$services = new MultipleEntitySourceServices(
+			new EntitySourceDefinitions( [ new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ) ] ),
+			[ 'items' => $itemServices ]
+		);
+
+		$prefetcher = $services->getEntityPrefetcher();
+		$prefetcher->prefetch( [ $itemId, $propertyId ] );
+
+		$this->assertNotContains( [ $propertyId ], $itemPrefetcher->getPrefetchedEntities() );
+	}
+
 	public function testEntityFromKnownSourceUpdated_entityUpdatedPassedToRelevantServiceContainer() {
 		$itemRevision = new EntityRevision( new Item( new ItemId( 'Q1' ) ) );
 
