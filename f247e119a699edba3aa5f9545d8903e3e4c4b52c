@@ -22,6 +22,30 @@
       "revId": "f247e119a699edba3aa5f9545d8903e3e4c4b52c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75de5f5b_7e031fde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-01-22T19:42:52Z",
+      "side": 1,
+      "message": "That is indeed an unsupported setup that should fail as far as I\u0027m concerned.\n\nHaving said that, why would it fail? The first include, repo/Wikibase, will already require Lib and View.\n\nThus, when the PHP engine reaches the end of repo/Wikibase, and proceeds to the next top-level include for Lib, it will skip it, because it was already required, once.",
+      "parentUuid": "e7e8d591_f3bbe21d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "f247e119a699edba3aa5f9545d8903e3e4c4b52c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
