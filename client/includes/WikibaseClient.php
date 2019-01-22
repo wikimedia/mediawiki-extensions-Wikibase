@@ -3,8 +3,15 @@
 namespace Wikibase\Client;
 
 use CachedBagOStuff;
+use InvalidArgumentException;
+use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -250,6 +257,11 @@ final class WikibaseClient {
 	private $wikibaseContentLanguages = null;
 
 	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
+	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
@@ -353,13 +365,15 @@ final class WikibaseClient {
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		RepositoryDefinitions $repositoryDefinitions,
-		SiteLookup $siteLookup
+		SiteLookup $siteLookup,
+		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->siteLookup = $siteLookup;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
 	/**
@@ -404,19 +418,53 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = new MultipleRepositoryAwareWikibaseServices(
-				$this->getEntityIdParser(),
-				$this->getEntityIdComposer(),
-				$this->repositoryDefinitions,
-				$this->entityTypeDefinitions,
-				$this->getDataAccessSettings(),
-				$this->getMultiRepositoryServiceWiring(),
-				$this->getPerRepositoryServiceWiring(),
-				MediaWikiServices::getInstance()->getNameTableStoreFactory()
-			);
+			$this->wikibaseServices = $this->settings->getSetting( 'useEntitySourceBasedFederation' ) ?
+				$this->newEntitySourceWikibaseServices() :
+				$this->newMultipleRepositoryAwareWikibaseServices();
 		}
 
 		return $this->wikibaseServices;
+	}
+
+	private function newMultipleRepositoryAwareWikibaseServices() {
+		return new MultipleRepositoryAwareWikibaseServices(
+			$this->getEntityIdParser(),
+			$this->getEntityIdComposer(),
+			$this->repositoryDefinitions,
+			$this->entityTypeDefinitions,
+			$this->getDataAccessSettings(),
+			$this->getMultiRepositoryServiceWiring(),
+			$this->getPerRepositoryServiceWiring(),
+			MediaWikiServices::getInstance()->getNameTableStoreFactory()
+		);
+	}
+
+	private function newEntitySourceWikibaseServices() {
+		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
+		$genericServices = new GenericServices(
+			$this->entityTypeDefinitions,
+			$this->repositoryDefinitions->getEntityNamespaces(),
+			$this->repositoryDefinitions->getEntitySlots()
+		);
+
+		$singleSourceServices = [];
+
+		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
+			// TODO: extract
+			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
+				$genericServices,
+				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
+				$this->getDataValueDeserializer(),
+				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
+				$this->getDataAccessSettings(),
+				$source,
+				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+			);
+		}
+
+		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
 	}
 
 	private function getDataAccessSettings() {
@@ -707,11 +755,13 @@ final class WikibaseClient {
 			),
 			$entityTypeDefinitions,
 			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
-			MediaWikiServices::getInstance()->getSiteLookup()
+			MediaWikiServices::getInstance()->getSiteLookup(),
+			self::getEntitySourceDefinitionsFromSettings( $settings )
 		);
 	}
 
 	/**
+	 *
 	 * @param SettingsArray $settings
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
@@ -752,6 +802,92 @@ final class WikibaseClient {
 		}
 
 		return new RepositoryDefinitions( $definitions, $entityTypeDefinitions );
+	}
+
+	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
+	// Having a "entitySources" or so setting might be better, and would also allow unifying
+	// the way these are configured in Repo and in Client parts
+	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
+			? $settings->getSetting( 'foreignRepositories' )
+			: $settings->getSetting( 'repositories' );
+
+		if ( $settings->hasSetting( 'repoDatabase' )
+			&& $settings->hasSetting( 'entityNamespaces' )
+			&& $settings->hasSetting( 'repoConceptBaseUri' )
+		) {
+			$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
+			$localDatabaseName = $settings->getSetting( 'repoDatabase' );
+			unset( $repoSettingsArray[''] );
+		}
+
+		if ( array_key_exists( '', $repoSettingsArray ) ) {
+			$localEntityNamespaces = $repoSettingsArray['']['entityNamespaces'];
+			$localDatabaseName = $repoSettingsArray['']['repoDatabase'];
+			unset( $repoSettingsArray[''] );
+		}
+
+		$sources = [];
+
+		$localEntityNamespaceSlotData = [];
+		foreach ( $localEntityNamespaces as $entityType => $namespaceSlot ) {
+			list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+			$localEntityNamespaceSlotData[$entityType] = [
+				'namespaceId' => $namespaceId,
+				'slot' => $slot,
+			];
+		}
+		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData );
+
+		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
+			$namespaceSlotData = [];
+			foreach ( $repositorySettings['entityNamespaces'] as $entityType => $namespaceSlot ) {
+				list( $namespaceId, $slot ) = self::splitNamespaceAndSlot( $namespaceSlot );
+				$namespaceSlotData[$entityType] = [
+					'namespaceId' => $namespaceId,
+					'slot' => $slot,
+				];
+			}
+			$sources[] = new EntitySource(
+				$repository,
+				$repositorySettings['repoDatabase'],
+				$namespaceSlotData
+			);
+		}
+
+		return new EntitySourceDefinitions( $sources );
+	}
+
+	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {
+		if ( is_int( $namespaceAndSlot ) ) {
+			return [ $namespaceAndSlot, 'main' ];
+		}
+
+		if ( !preg_match( '!^(\w*)(/(\w+))?!', $namespaceAndSlot, $m ) ) {
+			throw new InvalidArgumentException(
+				'Bad namespace/slot specification: an integer namespace index, or a canonical'
+				. ' namespace name, or have the form <namespace>/<slot-name>.'
+				. ' Found ' . $namespaceAndSlot
+			);
+		}
+
+		if ( is_numeric( $m[1] ) ) {
+			$ns = intval( $m[1] );
+		} else {
+			$ns = MWNamespace::getCanonicalIndex( strtolower( $m[1] ) );
+		}
+
+		if ( !is_int( $ns ) ) {
+			throw new InvalidArgumentException(
+				'Bad namespace specification: must be either an integer or a canonical'
+				. ' namespace name. Found ' . $m[1]
+			);
+		}
+
+		return [
+			$ns,
+			$m[3] ?? 'main'
+		];
 	}
 
 	/**

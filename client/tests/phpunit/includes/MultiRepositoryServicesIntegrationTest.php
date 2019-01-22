@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use HashSiteStore;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -42,7 +43,8 @@ class MultiRepositoryServicesIntegrationTest extends \MediaWikiTestCase {
 				[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
 				new EntityTypeDefinitions( [] )
 			),
-			new HashSiteStore()
+			new HashSiteStore(),
+			new EntitySourceDefinitions( [] )
 		);
 	}
 
