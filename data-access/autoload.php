@@ -14,9 +14,11 @@ $wgAutoloadClasses += [
 	'Wikibase\\DataAccess\\EntitySourceDefinitions' => __DIR__ . '/src/EntitySourceDefinitions.php',
 	'Wikibase\\DataAccess\\GenericServices' => __DIR__ . '/src/GenericServices.php',
 	'Wikibase\\DataAccess\\MultiRepositoryServices' => __DIR__ . '/src/MultiRepositoryServices.php',
+	'Wikibase\\DataAccess\\MultipleEntitySourceServices' => __DIR__ . '/src/MultipleEntitySourceServices.php',
 	'Wikibase\\DataAccess\\MultipleRepositoryAwareWikibaseServices' => __DIR__ . '/src/MultipleRepositoryAwareWikibaseServices.php',
 	'Wikibase\\DataAccess\\PerRepositoryServiceContainer' => __DIR__ . '/src/PerRepositoryServiceContainer.php',
 	'Wikibase\\DataAccess\\PerRepositoryServiceContainerFactory' => __DIR__ . '/src/PerRepositoryServiceContainerFactory.php',
 	'Wikibase\\DataAccess\\Serializer\\ForbiddenSerializer' => __DIR__ . '/src/Serializer/ForbiddenSerializer.php',
+	'Wikibase\\DataAccess\\SingleEntitySourceServices' => __DIR__ . '/src/SingleEntitySourceServices.php',
 	'Wikibase\\DataAccess\\WikibaseServices' => __DIR__ . '/src/WikibaseServices.php',
 ];
