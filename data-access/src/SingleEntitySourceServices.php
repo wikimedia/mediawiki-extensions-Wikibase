@@ -267,6 +267,10 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->prefetchingTermLookup;
 	}
 
+	public function getEntityPrefetcher() {
+		return $this->getEntityMetaDataAccessor();
+	}
+
 	public function entityUpdated( EntityRevision $entityRevision ) {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
