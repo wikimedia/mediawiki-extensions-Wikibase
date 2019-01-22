@@ -268,5 +268,8 @@ return call_user_func( function() {
 		EntityUsage::STATEMENT_USAGE => 10
 	];
 
+	// Batch size for adding entity usage records
+	$defaults['addEntityUsagesBatchSize'] = 500;
+
 	return $defaults;
 } );

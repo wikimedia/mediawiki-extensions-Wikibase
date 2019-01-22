@@ -30,13 +30,6 @@ class EntityUsageTable {
 	const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
 
 	/**
-	 * INSERTs are supposed to be done in much larger batches than SELECTs or DELETEs, per the DBA.
-	 * About 1000 was suggested. Given the default batch size is 100, a factor of 5 seems to be a
-	 * good compromise.
-	 */
-	const INSERT_BATCH_SIZE_FACTOR = 5;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -67,11 +60,17 @@ class EntityUsageTable {
 	private $tableName;
 
 	/**
+	 * @var int
+	 */
+	private $addUsagesBatchSize;
+
+	/**
 	 * @param EntityIdParser $idParser
 	 * @param IDatabase $writeConnection
 	 * @param int $batchSize Batch size for database queries on the entity usage table, including
 	 *  INSERTs, SELECTs, and DELETEs. Defaults to 100.
 	 * @param string|null $tableName defaults to wbc_entity_usage
+	 * @param int $addUsagesBatchSize Batch size for adding entity usage records
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -79,10 +78,15 @@ class EntityUsageTable {
 		EntityIdParser $idParser,
 		IDatabase $writeConnection,
 		$batchSize = 100,
-		$tableName = null
+		$tableName = null,
+		$addUsagesBatchSize = 500
 	) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
+		}
+
+		if ( !is_int( $addUsagesBatchSize ) || $addUsagesBatchSize < 1 ) {
+			throw new InvalidArgumentException( '$addUsagesBatchSize must be an integer >= 1' );
 		}
 
 		if ( !is_string( $tableName ) && $tableName !== null ) {
@@ -93,6 +97,7 @@ class EntityUsageTable {
 		$this->writeConnection = $writeConnection;
 		$this->batchSize = $batchSize;
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
+		$this->addUsagesBatchSize = $addUsagesBatchSize;
 
 		//TODO: Inject
 		$this->loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
@@ -175,7 +180,7 @@ class EntityUsageTable {
 
 		$batches = array_chunk(
 			$this->makeUsageRows( $pageId, $usages ),
-			$this->batchSize * self::INSERT_BATCH_SIZE_FACTOR
+			$this->addUsagesBatchSize
 		);
 
 		$c = 0;
@@ -472,6 +477,17 @@ class EntityUsageTable {
 		}
 
 		return $values;
+	}
+
+	/**
+	 * @param int $addUsagesBatchSize
+	 */
+	public function setAddUsagesBatchSize( $addUsagesBatchSize ) {
+		if ( !is_int( $addUsagesBatchSize ) || $addUsagesBatchSize < 1 ) {
+			throw new InvalidArgumentException( '$addUsagesBatchSize must be an integer >= 1' );
+		}
+
+		$this->addUsagesBatchSize = $addUsagesBatchSize;
 	}
 
 }
