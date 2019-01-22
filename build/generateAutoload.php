@@ -23,7 +23,11 @@ class GenerateWikibaseAutoload extends Maintenance {
 	}
 
 	public function execute() {
-		$this->generateAutoloadForComponent( 'data-access', [ 'src' ] );
+		$this->generateAutoloadForComponent(
+			'data-access',
+			[ 'src' ],
+			[ 'tests/phpunit/FakePrefetchingTermLookup.php' ]
+		);
 
 		$this->generateAutoloadForComponent(
 			'lib',
