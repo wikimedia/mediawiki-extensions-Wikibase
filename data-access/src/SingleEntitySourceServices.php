@@ -76,6 +76,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	private $termIndex = null;
 
+	private $prefetchingTermLookup = null;
+
 	/**
 	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
 	 */
@@ -256,8 +258,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->termIndex;
 	}
 
-	private function getPrefetchingTermLookup() {
-		return new BufferingTermLookup( $this->getTermIndex(), 1000 ); // TODO: customize buffer sizes
+	public function getPrefetchingTermLookup() {
+		if ( $this->prefetchingTermLookup === null ) {
+			$this->prefetchingTermLookup = new BufferingTermLookup( $this->getTermIndex(), 1000 ); // TODO: customize buffer sizes
+		}
+		return $this->prefetchingTermLookup;
 	}
 
 	public function entityUpdated( EntityRevision $entityRevision ) {

@@ -15,6 +15,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
 
 /**
@@ -37,6 +38,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getEntityRevisionLookup', EntityRevisionLookup::class, true ],
 			[ 'getEntityInfoBuilder', EntityInfoBuilder::class, true ],
 			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class, true ],
+			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 		];
 	}
 
