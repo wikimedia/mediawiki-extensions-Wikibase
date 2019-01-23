@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "563b4f0e_7513775e",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-23T10:30:24Z",
+      "side": 0,
+      "message": "It looks like the config vars in the ticket were actually wrong, so you didn\u0027t spot this one!\n\nI updated the ticket https://phabricator.wikimedia.org/T214391#4901723\n\nIt looks like this one is actually just wrong, an tmpMaxItemIdForNewPropertyIdHtmlFormatter is used in the code...\nIt looks like production is correctly setting the right thing though.",
+      "range": {
+        "startLine": 326,
+        "startChar": 2,
+        "endLine": 337,
+        "endChar": 50
+      },
+      "revId": "547da0d833b46b803495ffb7a54a9c864756c88b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
