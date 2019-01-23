@@ -44,8 +44,6 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
 }
 
-define( 'WBC_DIR', __DIR__ );
-
 // Sub-extensions needed by WikibaseClient
 require_once __DIR__ . '/../lib/WikibaseLib.php';
 require_once __DIR__ . '/../view/WikibaseView.php';
