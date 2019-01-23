@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d61bdaf1_42ee041f",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-23T17:45:27Z",
+      "side": 1,
+      "message": "Hm. We try to have the type first, nowadays. The MediaWiki CodeSniffer already complains about this. This sniff is just disabled here in the Wikibase codebase because of other issues.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 21
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f0261db_94926e90",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-23T17:45:27Z",
+      "side": 1,
+      "message": "This is weird. Why does it only fetch … oh, I see. The elements starting from 16 are already cached.",
+      "range": {
+        "startLine": 72,
+        "startChar": 39,
+        "endLine": 72,
+        "endChar": 44
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "568e985c_3ef2feda",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-23T17:45:27Z",
+      "side": 1,
+      "message": "And here the elements 26 and 27 are already cached. Got it.",
+      "range": {
+        "startLine": 73,
+        "startChar": 39,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33796934_54cfd366",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-23T17:45:27Z",
+      "side": 1,
+      "message": "Hehe, here a mock gets labeled as \"real\". ;-) Not an issue, just something I found funny.",
+      "range": {
+        "startLine": 106,
+        "startChar": 2,
+        "endLine": 106,
+        "endChar": 23
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "912476f8_759418c1",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-23T17:45:27Z",
+      "side": 1,
+      "message": "This looks ... fascinating. I think I get most of it. But what is the array_filter for?",
+      "range": {
+        "startLine": 109,
+        "startChar": 5,
+        "endLine": 109,
+        "endChar": 64
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
