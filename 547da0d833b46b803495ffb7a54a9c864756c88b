@@ -22,6 +22,30 @@
       "revId": "547da0d833b46b803495ffb7a54a9c864756c88b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d42f850d_00df6f74",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-01-23T11:59:20Z",
+      "side": 0,
+      "message": "I had the same question but wasn\u0027t sure so I left it as it is for now. Removed now though.",
+      "parentUuid": "563b4f0e_7513775e",
+      "range": {
+        "startLine": 326,
+        "startChar": 2,
+        "endLine": 337,
+        "endChar": 50
+      },
+      "revId": "547da0d833b46b803495ffb7a54a9c864756c88b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

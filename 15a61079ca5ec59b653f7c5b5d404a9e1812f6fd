@@ -22,6 +22,30 @@
       "revId": "15a61079ca5ec59b653f7c5b5d404a9e1812f6fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36d48b18_50fdd687",
+        "filename": "lib/includes/Formatters/ControlledFallbackEntityIdFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-01-23T11:59:20Z",
+      "side": 1,
+      "message": "I think removing the fallback in case of error is outside of scope of this patch and the task. We might need to discuss it with PM/EMs before moving forward.",
+      "parentUuid": "57ea64f5_a91571b0",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 76,
+        "endChar": 50
+      },
+      "revId": "15a61079ca5ec59b653f7c5b5d404a9e1812f6fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
