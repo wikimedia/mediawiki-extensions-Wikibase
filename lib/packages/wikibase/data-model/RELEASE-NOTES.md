@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 9.1.0 (2019-01-24)
+
+* Raised minimum PHP version to 7.0 or HHVM
+
 ## Version 9.0.1 (2018-11-09)
 
 * `Item` and `Property` now implement `ClearableEntity` again
