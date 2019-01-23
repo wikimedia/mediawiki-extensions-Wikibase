@@ -46,6 +46,30 @@
       "revId": "f247e119a699edba3aa5f9545d8903e3e4c4b52c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7675b3f_88b597b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-23T15:25:28Z",
+      "side": 1,
+      "message": "Oh dear, this is all using …_once. I glanced over this. ;-) With this, the scenario I described can\u0027t happen.",
+      "parentUuid": "75de5f5b_7e031fde",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "f247e119a699edba3aa5f9545d8903e3e4c4b52c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
