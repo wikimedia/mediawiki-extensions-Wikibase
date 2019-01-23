@@ -21,9 +21,10 @@ class ChunkCache implements ChunkAccess {
 	 * Array containing cache entries; each entry is an associative array with the
 	 * following fields:
 	 *
-	 * - start: the chunk's data (an array of data records)
-	 * - next:  the next ID after the records in this chunk
-	 * - data:  an array of data records
+	 * - start: the ID of the first record in this chunk
+	 * - next: the next ID after the records in this chunk
+	 * - data: an array of data records (length `next - start`)
+	 * - touched: access "timestamp" (higher => more recent), see $modCount
 	 *
 	 * The entries array is maintained sorted by the 'start' field of its entries.
 	 *
