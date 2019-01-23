@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3c4abd9_d84255ef",
+        "filename": "view/tests/phpunit/Termbox/TermboxViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-23T20:06:45Z",
+      "side": 1,
+      "message": "Maybe that could also be preferredLanguages",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 16
+      },
+      "revId": "e36023f6c4af89465eb93bcd3979a10ad7d0df27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f942527_e2678a0e",
+        "filename": "view/tests/phpunit/Termbox/TermboxViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-23T20:06:45Z",
+      "side": 1,
+      "message": "Maybe that could also be a preferredLanguage",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 18
+      },
+      "revId": "e36023f6c4af89465eb93bcd3979a10ad7d0df27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64cd189c_9c0f51fd",
+        "filename": "view/tests/phpunit/Termbox/TermboxViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-23T20:06:45Z",
+      "side": 1,
+      "message": "Maybe that could also be a preferredLanguage",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 23
+      },
+      "revId": "e36023f6c4af89465eb93bcd3979a10ad7d0df27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c466a778_9eabba0d",
+        "filename": "view/tests/phpunit/Termbox/TermboxViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-01-23T20:06:45Z",
+      "side": 1,
+      "message": "Maybe that could also be a preferredLanguage",
+      "range": {
+        "startLine": 140,
+        "startChar": 3,
+        "endLine": 140,
+        "endChar": 17
+      },
+      "revId": "e36023f6c4af89465eb93bcd3979a10ad7d0df27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
