@@ -74,6 +74,8 @@ class GenericServices {
 		array $entitySlots = []
 	) {
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		// TODO: this seems wrong, or at least suspicious: namespaces and slots are repo/db/wiki-specific stuff
+		// and should not be relied by any other user. Only the wiki itself can make sense of namespace 123 etc
 		$this->entityNamespaces = $entityNamespaces;
 		$this->entitySlots = $entitySlots;
 	}
