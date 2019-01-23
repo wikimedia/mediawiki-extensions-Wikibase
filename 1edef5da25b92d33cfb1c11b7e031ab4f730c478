@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "289e99ff_29c30fac",
+        "filename": "repo/includes/Store/Sql/UpsertSqlIdGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-23T11:27:19Z",
+      "side": 1,
+      "message": "How does that work in MWException? Is it just like LoggerInterface::log()? I can’t find anything about this in the MWException documentation.",
+      "parentUuid": "3b33fbdc_86125646",
+      "range": {
+        "startLine": 66,
+        "startChar": 72,
+        "endLine": 66,
+        "endChar": 96
+      },
+      "revId": "1edef5da25b92d33cfb1c11b7e031ab4f730c478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d0c2f790_cdc42c8b",
         "filename": "repo/tests/phpunit/includes/Store/Sql/UpsertSqlIdGeneratorTest.php",
         "patchSetId": 5
