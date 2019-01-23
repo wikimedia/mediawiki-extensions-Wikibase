@@ -22,6 +22,29 @@
       "revId": "e0ef75955bd93c441ae70ce5968d5fb9e2145c7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2a0d1ee_caf3e849",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-23T18:29:51Z",
+      "side": 1,
+      "message": "I feel like there should still be a comma in here.",
+      "range": {
+        "startLine": 113,
+        "startChar": 162,
+        "endLine": 113,
+        "endChar": 172
+      },
+      "revId": "e0ef75955bd93c441ae70ce5968d5fb9e2145c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
