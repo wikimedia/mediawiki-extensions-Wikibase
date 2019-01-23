@@ -76,7 +76,7 @@
 	"wikibase-empty-undo": "येथे पुनर्स्थापनेसारखे काहीही नाही.",
 	"wikibase-undo-revision-error": "पुनर्स्थापन अयशस्वी",
 	"wikibase-undo-samerev": "संपादन वगळावयाचे असल्यास, दोन वेगवेगळ्या आवृत्त्या नमूद करावयास हव्यात.",
-	"wikibase-undo-badpage": "वाईट आवृत्ती:आवृत्ती $2 ही [[$1]] अंतर्गत नाही.",
+	"wikibase-undo-badpage": "वाईट आवृत्ती:आवृत्ती $2 ही [[:$1]] अंतर्गत नाही.",
 	"wikibase-undo-firstrev": "या पानाची निर्मिती थांबवू शकत नाही",
 	"wikibase-undo-nocontent": "पान$1च्या आवर्तन $2चा आशय प्रभारण करू शकत नाही",
 	"wikibase-disambiguation-title": "\"$1\" साठी निःसंदिग्धीकरण",
