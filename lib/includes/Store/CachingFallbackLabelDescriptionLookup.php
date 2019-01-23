@@ -24,8 +24,8 @@ use Wikimedia\Assert\Assert;
 class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 
 	// TODO: make private constant when possible (PHP 7.1+)
-	/* private */ const LABEL = 'label';
-	/* private */ const DESCRIPTION = 'description';
+	/** @private */ const LABEL = 'label';
+	/** @private */ const DESCRIPTION = 'description';
 
 	const FIELD_LANGUAGE = 'language';
 	const FIELD_VALUE = 'value';

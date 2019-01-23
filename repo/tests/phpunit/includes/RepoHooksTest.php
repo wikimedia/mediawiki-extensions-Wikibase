@@ -37,7 +37,7 @@ use WikiImporter;
  */
 class RepoHooksTest extends MediaWikiTestCase {
 
-	/* private */ const FAKE_NS_ID = 4557;
+	/** @private */ const FAKE_NS_ID = 4557;
 
 	private $saveAllowImport = false;
 

@@ -23,7 +23,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 	use PHPUnit4And6Compat;
 
-	/** private */ const SSR_URL = 'https://ssr/termbox';
+	/** @private */ const SSR_URL = 'https://ssr/termbox';
 
 	public function testGetContentWithEntityIdAndLanguage_returnsRequestResponse() {
 		$content = 'hello from server!';
