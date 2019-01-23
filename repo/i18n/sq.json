@@ -79,7 +79,7 @@
 	"wikibase-empty-undo": "Nuk ka asgjë që mund të zhbëhet këtu.",
 	"wikibase-undo-revision-error": "Zhbërja dështoi",
 	"wikibase-undo-samerev": "Dy rishikime të ndryshme duhet të specifikohen për të zhbërë një redaktim.",
-	"wikibase-undo-badpage": "Revidim i gabuar: Revidimi $2 nuk i përket [[$1]].",
+	"wikibase-undo-badpage": "Revidim i gabuar: Revidimi $2 nuk i përket [[:$1]].",
 	"wikibase-undo-firstrev": "Nuk mund të zhbëhet krijimi i faqes",
 	"wikibase-undo-nocontent": "Nuk mund të ngarkohet përmbajtja e revidimit $2 të faqes $1",
 	"wikibase-statementview-rank-normal": "Rangimi normal",

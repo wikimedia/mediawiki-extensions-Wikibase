@@ -58,7 +58,7 @@
 	"wikibase-newentity-label": "ریتراز:",
 	"wikibase-newentity-submit": "راس كردن",
 	"special-setlabel": "میزوکاری ریتراز",
-	"wikibase-setlabel-introfull": "شما یه گل ریتراز د $2 سی [[$1]] نیائیته.",
+	"wikibase-setlabel-introfull": "شما یه گل ریتراز د $2 سی [[:$1]] نیائیته.",
 	"wikibase-setlabel-label": "ریتراز:",
 	"wikibase-setlabel-submit": "میزوکاری ری دیار",
 	"special-setsitelink": "یه گل هوم پیوند سیلجا بنیت",

@@ -48,7 +48,7 @@
 	"wikibase-partial-undo": "Gellir gwrthdroi'r golygiad hwn yn rhannol yn unig.",
 	"wikibase-empty-undo": "Ni ellir gwrthdroi unrhywbeth yn yr achos hwn.",
 	"wikibase-undo-revision-error": "Methwyd gwrthdroi",
-	"wikibase-undo-badpage": "Diwygiad gwallus: Nid yw'r diwygiad $2 yn perthyn i [[$1]].",
+	"wikibase-undo-badpage": "Diwygiad gwallus: Nid yw'r diwygiad $2 yn perthyn i [[:$1]].",
 	"wikibase-undo-firstrev": "Ni ellir gwrthdroi'r diwygiad a ddechreuodd y dudalen",
 	"wikibase-undo-nocontent": "Methwyd llwytho cynnwys y diwygiad $2 o'r dudalen $1",
 	"wikibase-disambiguation-title": "Gwahaniaethu ystyron \"$1\"",

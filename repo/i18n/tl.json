@@ -37,7 +37,7 @@
 	"wikibase-empty-undo": "Walang bagay na maaaring hindi na isagawa pa rito.",
 	"wikibase-undo-revision-error": "Nabigo ang hindi pagsasagawa",
 	"wikibase-undo-samerev": "Hindi maaaring hindi maisagawa, ibinigay ang katulad na rebisyon para sa saligan ng hindi pagsasagawa at pinupukol na hindi pagsasagawa.",
-	"wikibase-undo-badpage": "Masamang rebisyon: Ang rebisyong $2 ay hindi kaanib sa [[$1]].",
+	"wikibase-undo-badpage": "Masamang rebisyon: Ang rebisyong $2 ay hindi kaanib sa [[:$1]].",
 	"wikibase-undo-firstrev": "Hindi maaaring hindi maisagawa ang paglikha ng pahina",
 	"wikibase-disambiguation-title": "Paglilinaw para sa \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nilikha ang bagong bagay na $1 at muling pinapunta sa pahina nito. Bumalik sa $2.",

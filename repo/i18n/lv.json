@@ -121,7 +121,7 @@
 	"wikibase-setdescription-label": "Apraksts:",
 	"wikibase-setdescription-submit": "Norādiet nosaukumu",
 	"special-setaliases": "Norādīt citus nosaukumus",
-	"wikibase-setaliases-introfull": "Jūs norādāt $2 citus nosaukumus [[$1]]. Vairākus nosaukumus var atdalīt ar vertikālās svītras (<code>|</code>) simbolu.",
+	"wikibase-setaliases-introfull": "Jūs norādāt $2 citus nosaukumus [[:$1]]. Vairākus nosaukumus var atdalīt ar vertikālās svītras (<code>|</code>) simbolu.",
 	"wikibase-setaliases-label": "Citi nosaukumi:",
 	"wikibase-setaliases-submit": "Norādīt citus nosaukumus",
 	"wikibase-setlabeldescriptionaliases-label-label": "Nosaukums:",

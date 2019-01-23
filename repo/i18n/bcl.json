@@ -13,7 +13,7 @@
 	"wikibase-statementview-rank-normal": "Normal na ranggo",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 sarong pabalikwat.",
 	"wikibase-setlabeldescriptionaliases-intro": "Ining porma minatugot saimo na magkaag nin panandaan, deskripsyon asin mga alyas kan entidad. Ika kaipo enot na magtao nin ID kan entidad (e.g. \"Q23\") asin sarong kodigo nin lengguwahe (e.g. \"en\").",
-	"wikibase-setsitelink-introfull": "Ika nagkakaag nin pansityong saguysoy kan $2 para sa [[$1]].",
+	"wikibase-setsitelink-introfull": "Ika nagkakaag nin pansityong saguysoy kan $2 para sa [[:$1]].",
 	"wikibase-setsitelink-submit": "Isusog an pansityong saguysoy",
 	"wikibase-setsitelink-remove-failed": "An pansityong saguysoy dae tabi matatangkas.",
 	"wikibase-entity-not-viewable-title": "Tipo nin laman dae tarampad: Dae maipapahiling an laman",

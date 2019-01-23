@@ -70,7 +70,7 @@
 	"wikibase-newentity-description": "විස්තරය:",
 	"wikibase-newentity-submit": "තනන්න",
 	"special-setlabel": "ලේබලයක් සකසන්න",
-	"wikibase-setlabel-introfull": "ඔබ විසින් $2 හී [[$1]] සඳහා ලේබලය සකසමින්.",
+	"wikibase-setlabel-introfull": "ඔබ විසින් $2 හී [[:$1]] සඳහා ලේබලය සකසමින්.",
 	"wikibase-setlabel-label": "ලේබලය:",
 	"wikibase-setlabel-submit": "ලේබලය සකසන්න",
 	"wikibase-setlabeldescriptionaliases-description-label": "විස්තරය:",
