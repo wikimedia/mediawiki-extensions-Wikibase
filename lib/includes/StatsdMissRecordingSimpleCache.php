@@ -17,7 +17,7 @@ use Wikimedia\Assert\Assert;
  */
 class StatsdMissRecordingSimpleCache implements CacheInterface {
 
-	/* private */const DEFAULT_VALUE = __CLASS__ . '-default';
+	/** @private */ const DEFAULT_VALUE = __CLASS__ . '-default';
 
 	private $inner;
 	private $stats;
