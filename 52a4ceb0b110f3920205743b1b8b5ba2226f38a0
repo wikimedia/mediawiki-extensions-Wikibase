@@ -45,6 +45,30 @@
       "revId": "52a4ceb0b110f3920205743b1b8b5ba2226f38a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6e98bf8_b19c5c31",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-01-23T10:00:23Z",
+      "side": 1,
+      "message": "One big thing is if we don\u0027t put a setter here and send it as an argument, then we need to explicitly send tableName and batchSize as well (we can\u0027t send null for batch size, things will break) so I can send the default batchSize\u003d100 but it would duplicate the default value in several places and if we want to change it, we need to do it here as well which is not nice.\nHaving setters is a good idea when there is lots of arguments and specially in php where arguments are not named and the order is important. It would reduce risk of mistakenly sending arguments in the wrong order.",
+      "parentUuid": "c55b704a_ef567ea4",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "52a4ceb0b110f3920205743b1b8b5ba2226f38a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
