@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9494a082_710907c7",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-23T09:46:15Z",
+      "side": 1,
+      "message": "This is introduced just to avoid setting constructor args? :/",
+      "range": {
+        "startLine": 485,
+        "startChar": 17,
+        "endLine": 485,
+        "endChar": 38
+      },
+      "revId": "52a4ceb0b110f3920205743b1b8b5ba2226f38a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c55b704a_ef567ea4",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-23T09:46:15Z",
+      "side": 1,
+      "message": "I don\u0027t really like having this method to avoid having to specify more constructor args :/\n\nThe method has the potential to accidentally be used to do unexpected things.",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "52a4ceb0b110f3920205743b1b8b5ba2226f38a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
