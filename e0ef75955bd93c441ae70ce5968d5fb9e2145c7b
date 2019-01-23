@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37ad6554_662625f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2842
+      },
+      "writtenOn": "2019-01-23T18:21:58Z",
+      "side": 1,
+      "message": "There should be an extra newline after the commit message body and Bug: TXXX with Change-Id: IXXX should be separated by 1 new line, not 2. See: https://www.mediawiki.org/wiki/Gerrit/Commit_message_guidelines.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "e0ef75955bd93c441ae70ce5968d5fb9e2145c7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
