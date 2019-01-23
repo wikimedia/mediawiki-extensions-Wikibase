@@ -69,6 +69,30 @@
       "revId": "52a4ceb0b110f3920205743b1b8b5ba2226f38a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3f5fa27_23996100",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-23T11:46:27Z",
+      "side": 1,
+      "message": "The default batch size for the class could be a class constant, then used when we construct the object.\n\nHowever it would indeed avoid the risk of screwing up the constructor args.\n\nWe could also change the EntityUsageTable constructor args order, requiring a addUsages batch size? forcing it to be set? \n\nhmm",
+      "parentUuid": "d6e98bf8_b19c5c31",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "52a4ceb0b110f3920205743b1b8b5ba2226f38a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
