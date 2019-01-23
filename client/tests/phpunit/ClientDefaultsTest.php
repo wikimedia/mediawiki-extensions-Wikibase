@@ -221,7 +221,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 		$this->markTestSkipped( 'flaky, see T214761' );
 		$this->setMwGlobals( $wg );
 
-		$defaults = include WBC_DIR . '/config/WikibaseClient.default.php';
+		$defaults = require '../../config/WikibaseClient.default.php';
 
 		$settings = array_merge( $defaults, $settings );
 		$settings = new SettingsArray( $settings );
