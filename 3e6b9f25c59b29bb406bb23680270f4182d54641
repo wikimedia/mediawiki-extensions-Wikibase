@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9185fd9_3b60d42b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-23T13:38:24Z",
+      "side": 1,
+      "message": "It turns out there was even a Phabricator task explicitly requesting such a test, T50136.",
+      "range": {
+        "startLine": 11,
+        "startChar": 30,
+        "endLine": 14,
+        "endChar": 72
+      },
+      "revId": "3e6b9f25c59b29bb406bb23680270f4182d54641",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
