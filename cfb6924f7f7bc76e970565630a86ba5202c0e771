@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24af0a0d_65248b84",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-23T18:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d61bdaf1_42ee041f",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 21
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f0261db_94926e90",
         "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
         "patchSetId": 1
@@ -114,6 +138,30 @@
       "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebee7c4f_6d9c5f52",
+        "filename": "lib/tests/phpunit/Store/ChunkCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-23T18:06:19Z",
+      "side": 1,
+      "message": "I think it’s redundant, now that you mention it. It filters out empty arrays, but with the array_merge that doesn’t make a difference. (It took me a while to figure out what I needed to feed into withConsecutive().)",
+      "parentUuid": "912476f8_759418c1",
+      "range": {
+        "startLine": 109,
+        "startChar": 5,
+        "endLine": 109,
+        "endChar": 64
+      },
+      "revId": "cfb6924f7f7bc76e970565630a86ba5202c0e771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
