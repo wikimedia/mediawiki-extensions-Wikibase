@@ -12,6 +12,7 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
@@ -35,6 +36,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ 'getEntityRevisionLookup', EntityRevisionLookup::class, true ],
 			[ 'getEntityInfoBuilder', EntityInfoBuilder::class, true ],
+			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class, true ],
 		];
 	}
 

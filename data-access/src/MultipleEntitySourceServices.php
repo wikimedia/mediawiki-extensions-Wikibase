@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikimedia\Assert\Assert;
@@ -31,6 +32,8 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 	private $entityRevisionLookup = null;
 
 	private $entityInfoBuilder = null;
+
+	private $termSearchInteractorFactory = null;
 
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
@@ -70,6 +73,21 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityInfoBuilder;
+	}
+
+	public function getTermSearchInteractorFactory() {
+		if ( $this->termSearchInteractorFactory === null ) {
+			$factoriesByType = [];
+
+			/** @var EntitySource $source */
+			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+				$factoriesByType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getTermSearchInteractorFactory();
+			}
+
+			$this->termSearchInteractorFactory = new DispatchingTermSearchInteractorFactory( $factoriesByType );
+		}
+
+		return $this->termSearchInteractorFactory;
 	}
 
 	public function getEntityStoreWatcher() {
