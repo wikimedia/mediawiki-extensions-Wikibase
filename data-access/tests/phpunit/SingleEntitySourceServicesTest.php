@@ -10,6 +10,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
@@ -56,6 +57,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		new SingleEntitySourceServices(
 			$this->newGenericServices(),
 			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false ),
@@ -70,6 +72,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		new SingleEntitySourceServices(
 			$this->newGenericServices(),
 			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false ),
@@ -83,6 +86,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		return new SingleEntitySourceServices(
 			$this->newGenericServices(),
 			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false ),
