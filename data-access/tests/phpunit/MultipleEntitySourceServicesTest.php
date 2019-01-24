@@ -18,6 +18,8 @@ use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -225,6 +227,37 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 		$prefetcher->prefetch( [ $itemId, $propertyId ] );
 
 		$this->assertNotContains( [ $propertyId ], $itemPrefetcher->getPrefetchedEntities() );
+	}
+
+	public function testGetPropertyInfoLookupReturnsPropertyDataAccessingService() {
+		$propertyId = new PropertyId( 'P6' );
+
+		$propertyLookup = new MockPropertyInfoLookup();
+		$propertyLookup->addPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+
+		$sourceServices = $this->createMock( SingleEntitySourceServices::class );
+		$sourceServices->method( 'getPropertyInfoLookup' )
+			->willReturn( $propertyLookup );
+
+		$services = $this->newMultipleEntitySourceServices( [ 'props' => $sourceServices ] );
+
+		$lookup = $services->getPropertyInfoLookup();
+
+		$this->assertEquals( [ 'type' => 'string' ], $lookup->getPropertyInfo( $propertyId ) );
+	}
+
+	/**
+	 * @expectedException \LogicException
+	 */
+	public function testGivenNoSourceProvidingProperties_getPropertyInfoLookupThrowsException() {
+		$services = new MultipleEntitySourceServices(
+			new EntitySourceDefinitions( [
+				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ),
+			] ),
+			[]
+		);
+
+		$services->getPropertyInfoLookup();
 	}
 
 	public function testEntityFromKnownSourceUpdated_entityUpdatedPassedToRelevantServiceContainer() {
