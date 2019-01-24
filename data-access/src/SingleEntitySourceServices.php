@@ -12,12 +12,14 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -46,6 +48,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	private $entityIdParser;
 
+	private $entityIdComposer;
+
 	private $dataValueDeserializer;
 
 	/**
@@ -57,13 +61,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 * @var EntitySource
 	 */
 	private $entitySource;
-
 	private $deserializerFactoryCallbacks;
 	private $entityMetaDataAccessorCallbacks;
-	private $slotRoleStore;
 
+	private $slotRoleStore;
 	private $entityRevisionLookup = null;
 
+	private $entityInfoBuilder = null;
 	/**
 	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
 	 */
@@ -72,6 +76,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	public function __construct(
 		GenericServices $genericServices,
 		EntityIdParser $entityIdParser,
+		EntityIdComposer $entityIdComposer,
 		DataValueDeserializer $dataValueDeserializer,
 		NameTableStore $slotRoleStore,
 		DataAccessSettings $settings,
@@ -92,6 +97,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 		$this->genericServices = $genericServices;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->slotRoleStore = $slotRoleStore;
 		$this->settings = $settings;
@@ -183,6 +189,29 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityMetaDataAccessor;
+	}
+
+	public function getEntityInfoBuilder() {
+		if ( $this->entityInfoBuilder === null ) {
+			// TODO: Having this lookup in GenericServices seems shady, this class should
+			// probably create/provide one for itself (all data needed in in the entity source)
+			$entityNamespaceLookup = $this->genericServices->getEntityNamespaceLookup();
+			$repositoryName = '';
+			$databaseName = $this->entitySource->getDatabaseName();
+
+			$this->entityInfoBuilder = new SqlEntityInfoBuilder(
+				$this->entityIdParser,
+				$this->entityIdComposer,
+				$entityNamespaceLookup,
+				LoggerFactory::getInstance( 'Wikibase' ),
+				$this->entitySource,
+				$this->settings,
+				$databaseName,
+				$repositoryName
+			);
+		}
+
+		return $this->entityInfoBuilder;
 	}
 
 	public function entityUpdated( EntityRevision $entityRevision ) {
