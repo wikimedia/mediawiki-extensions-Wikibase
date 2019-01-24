@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19061f61_3315793b",
+        "filename": "data-access/src/ByTypeDispatchingPrefetchingTermLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-24T08:20:01Z",
+      "side": 1,
+      "message": "TODO: validate",
+      "revId": "caad8262d637c19094b74f922d18fce520555354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
