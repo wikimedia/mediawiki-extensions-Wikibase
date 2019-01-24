@@ -247,6 +247,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return bool
 	 */
 	private function isEntityIdFromRightRepository( EntityId $entityId ) {
+		return true;
 		return $entityId->getRepositoryName() === $this->repositoryName;
 	}
 
