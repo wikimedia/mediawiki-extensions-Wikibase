@@ -17,6 +17,7 @@ use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
 
 /**
@@ -41,6 +42,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class, true ],
 			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
+			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],
 		];
 	}
 
@@ -60,6 +62,25 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertNotSame( $serviceOne, $serviceTwo );
 		}
+	}
+
+	/**
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function testGivenEntitySourceDoesNotProvideProperties_getPropertyInfoLookupThrowsException() {
+		$services = new SingleEntitySourceServices(
+			$this->newGenericServices(),
+			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
+			new DataValueDeserializer( [] ),
+			$this->getMockNameTableStore(),
+			new DataAccessSettings( 10, true, false, false ),
+			new EntitySource( 'source', 'sourcedb', [] ),
+			[ null ],
+			[]
+		);
+
+		$services->getPropertyInfoLookup();
 	}
 
 	public function testInvalidConstruction_deserializeFactoryCallbacks() {
@@ -100,7 +121,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
-			new EntitySource( 'source', 'sourcedb', [] ),
+			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ] ),
 			[],
 			[]
 		);
