@@ -225,7 +225,8 @@ class RepositoryDefinitions {
 				list( $namespace, $slotName ) = $this->splitNamespaceAndSlot( $namespaceAndSlot );
 
 				$this->entityTypeToRepositoryMapping[$type][] = [
-					$repositoryName,
+					//$repositoryName,
+					'',
 					$namespace,
 					$slotName,
 				];
