@@ -9,6 +9,9 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityInfo;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
@@ -45,6 +48,34 @@ class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 		$lookup = $services->getEntityRevisionLookup();
 
 		$this->assertEquals( 'item revision data', $lookup->getEntityRevision( new ItemId( 'Q123' ) ) );
+	}
+
+	public function testGetEntityInfoBuilderReturnsBuilderHandlingAllSourceEntities() {
+		$itemId = 'Q200';
+		$propertyId = 'P500';
+
+		$itemInfoBuilder = $this->createMock( EntityInfoBuilder::class );
+		$itemInfoBuilder->method( 'collectEntityInfo' )
+			->willReturn( new EntityInfo( [ $itemId => 'item info' ] ) );
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getEntityInfoBuilder' )
+			->willReturn( $itemInfoBuilder );
+
+		$propertyInfoBuilder = $this->createMock( EntityInfoBuilder::class );
+		$propertyInfoBuilder->method( 'collectEntityInfo' )
+			->willReturn( new EntityInfo( [ $propertyId => 'property info' ] ) );
+
+		$propertyServices = $this->createMock( SingleEntitySourceServices::class );
+		$propertyServices->method( 'getEntityInfoBuilder' )
+			->willReturn( $propertyInfoBuilder );
+
+		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
+
+		$infoBuilder = $services->getEntityInfoBuilder();
+		$info = $infoBuilder->collectEntityInfo( [ new PropertyId( $propertyId ), new ItemId( $itemId ) ], [ 'en' ] );
+
+		$this->assertEquals( [ $itemId => 'item info', $propertyId => 'property info' ], $info->asArray() );
 	}
 
 	public function testEntityFromKnownSourceUpdated_entityUpdatedPassedToRelevantServiceContainer() {
