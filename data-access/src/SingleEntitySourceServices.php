@@ -14,16 +14,19 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
+use Wikibase\Store\BufferingTermLookup;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
@@ -68,6 +71,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $entityRevisionLookup = null;
 
 	private $entityInfoBuilder = null;
+
+	private $termSearchInteractorFactory = null;
+
+	private $termIndex = null;
+
 	/**
 	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
 	 */
@@ -212,6 +220,42 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityInfoBuilder;
+	}
+
+	public function getTermSearchInteractorFactory() {
+		if ( $this->termSearchInteractorFactory === null ) {
+			$this->termSearchInteractorFactory = new TermIndexSearchInteractorFactory(
+				$this->getTermIndex(),
+				$this->genericServices->getLanguageFallbackChainFactory(),
+				$this->getPrefetchingTermLookup()
+			);
+		}
+
+		return $this->termSearchInteractorFactory;
+	}
+
+	private function getTermIndex() {
+		if ( $this->termIndex === null ) {
+			$repositoryName = '';
+
+			$this->termIndex = new TermSqlIndex(
+				$this->genericServices->getStringNormalizer(),
+				$this->entityIdComposer,
+				$this->entityIdParser,
+				$this->entitySource->getDatabaseName(),
+				$repositoryName
+			);
+
+			$this->termIndex->setUseSearchFields( $this->settings->useSearchFields() );
+			$this->termIndex->setForceWriteSearchFields( $this->settings->forceWriteSearchFields() );
+
+		}
+
+		return $this->termIndex;
+	}
+
+	private function getPrefetchingTermLookup() {
+		return new BufferingTermLookup( $this->getTermIndex(), 1000 ); // TODO: customize buffer sizes
 	}
 
 	public function entityUpdated( EntityRevision $entityRevision ) {
