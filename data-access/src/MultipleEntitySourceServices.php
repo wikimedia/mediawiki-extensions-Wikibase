@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -111,6 +112,14 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityPrefetcher;
+	}
+
+	public function getPropertyInfoLookup() {
+		$source = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+		if ( $source === null ) {
+			throw new \LogicException( 'No entity source provides properties!' );
+		}
+		return $this->singleSourceServices[$source->getSourceName()]->getPropertyInfoLookup();
 	}
 
 	public function getEntityStoreWatcher() {
