@@ -30,6 +30,8 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 
 	private $entityRevisionLookup = null;
 
+	private $entityInfoBuilder = null;
+
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param SingleEntitySourceServices[] $singleSourceServices indexed by source name
@@ -53,6 +55,21 @@ class MultipleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityRevisionLookup;
+	}
+
+	public function getEntityInfoBuilder() {
+		if ( $this->entityInfoBuilder === null ) {
+			$buildersPerType = [];
+
+			/** @var EntitySource $source */
+			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+				$buildersPerType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getEntityInfoBuilder();
+			}
+
+			$this->entityInfoBuilder = new ByTypeDispatchingEntityInfoBuilder( $buildersPerType );
+		}
+
+		return $this->entityInfoBuilder;
 	}
 
 	public function getEntityStoreWatcher() {
