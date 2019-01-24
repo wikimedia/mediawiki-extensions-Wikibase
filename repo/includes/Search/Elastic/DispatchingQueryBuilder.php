@@ -94,8 +94,6 @@ class DispatchingQueryBuilder implements FullTextQueryBuilder {
 
 		// Reset highlight query, we will define our own
 		$searchContext->setHighlightQuery( null );
-		// Reset suggest query
-		$searchContext->setSuggest( [] );
 		/**
 		 * @var FullTextQueryBuilder $builder
 		 */
