@@ -12,6 +12,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
@@ -20,6 +21,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
@@ -82,6 +84,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
 	 */
 	private $entityMetaDataAccessor = null;
+
+	private $propertyInfoLookup = null;
 
 	public function __construct(
 		GenericServices $genericServices,
@@ -269,6 +273,23 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getEntityPrefetcher() {
 		return $this->getEntityMetaDataAccessor();
+	}
+
+	public function getPropertyInfoLookup() {
+		if ( !in_array( Property::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
+			throw new \LogicException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does no provide properties' );
+		}
+		if ( $this->propertyInfoLookup === null ) {
+			$irrelevantRepositoryName = '';
+			$this->propertyInfoLookup = new PropertyInfoTable(
+				$this->entityIdComposer,
+				$this->entitySource,
+				$this->settings,
+				$this->entitySource->getDatabaseName(),
+				$irrelevantRepositoryName
+			);
+		}
+		return $this->propertyInfoLookup;
 	}
 
 	public function entityUpdated( EntityRevision $entityRevision ) {
