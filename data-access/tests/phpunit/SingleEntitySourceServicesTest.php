@@ -17,6 +17,7 @@ use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
 
 /**
@@ -41,6 +42,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getTermSearchInteractorFactory', TermSearchInteractorFactory::class, true ],
 			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
+			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],
 		];
 	}
 
