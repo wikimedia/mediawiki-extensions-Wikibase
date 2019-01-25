@@ -31,6 +31,16 @@ class EntitySourceDefinitionsTest extends \PHPUnit_Framework_TestCase {
 		new EntitySourceDefinitions( [ $itemSourceOne, $itemSourceTwo ] );
 	}
 
+	/**
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function testTwoSourcesWithSameName_constructorThrowsException() {
+		$sourceOne = new EntitySource( 'same name', 'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] );
+		$sourceTwo = new EntitySource( 'same name', 'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ] );
+
+		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ] );
+	}
+
 	public function testGivenKnownType_getSourceForEntityTypeReturnsTheConfiguredSource() {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
