@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5406a20_8a7f7e5f",
+        "filename": "data-access/src/EntitySourceDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T16:48:48Z",
+      "side": 1,
+      "message": "Might be an idea to specify that this is unindexed, before people start passing in arrays indexed by strings / source names for no reason.",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 18,
+        "endChar": 34
+      },
+      "revId": "6131b6efa3c5a0c58f59e60f570552e224171c1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80228d6b_0ad1fcb6",
+        "filename": "data-access/src/EntitySourceDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T16:48:48Z",
+      "side": 1,
+      "message": "this is only used in a test?\nit would be better to call this the first time getSourceForEntityType is called to create the mapping, and then just refer to the mapping rather than having a foreach there.",
+      "range": {
+        "startLine": 59,
+        "startChar": 17,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "6131b6efa3c5a0c58f59e60f570552e224171c1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
