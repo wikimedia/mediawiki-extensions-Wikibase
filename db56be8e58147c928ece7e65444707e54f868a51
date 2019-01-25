@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb82b7ca_c570c6bc",
+        "filename": "data-access/src/ByTypeDispatchingEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T15:57:59Z",
+      "side": 1,
+      "message": "Looking at DispatchingEntityInfoBuilder the current behaviour would be to silently not return info for entity types that can not be handled.\n\nprobably not ideal, but would be consistent.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 49
+      },
+      "revId": "db56be8e58147c928ece7e65444707e54f868a51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
