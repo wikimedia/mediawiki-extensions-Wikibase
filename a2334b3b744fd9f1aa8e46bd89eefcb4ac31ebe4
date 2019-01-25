@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20821a65_a84514d6",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T15:54:03Z",
+      "side": 1,
+      "message": "TypeDispatchingEntityRevisionLookup has a fallback/ default lookup, IMO the approach introduced here is nicer, maybe soon we should rename and or kill the other implementation.",
+      "range": {
+        "startLine": 10,
+        "startChar": 27,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "387b957f_0b87137c",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T15:54:03Z",
+      "side": 1,
+      "message": "This class possibly shouldn\u0027t live here?, or EntityRevisionLookup shouldn\u0027t live in lib.\nblurred lines",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d02fe86e_6c59aee7",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T15:54:03Z",
+      "side": 1,
+      "message": "Per the definition of the interface it sounds like this should probably return null?\n\n \u003e null if there is no such entity or if access is forbidden.\n\nThat will not currently be the case if getLookupForEntity can\u0027t find a lookup for the entity type.",
+      "range": {
+        "startLine": 29,
+        "startChar": 17,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62c82ace_73812e8f",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T15:54:03Z",
+      "side": 1,
+      "message": "This doesn\u0027t return null? It actually throws",
+      "range": {
+        "startLine": 47,
+        "startChar": 33,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
