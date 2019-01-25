@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b695fdc_949fbeb5",
+        "filename": "data-access/src/SingleEntitySourceServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T16:04:05Z",
+      "side": 1,
+      "message": "Instead of passing in the dbname, the entity source can be passed in.\nThen the checks as described in https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/485691/ could be fixed easily.",
+      "range": {
+        "startLine": 225,
+        "startChar": 4,
+        "endLine": 225,
+        "endChar": 42
+      },
+      "revId": "2cac22f1e985cdfb96cd9667a5d498082187f51a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
