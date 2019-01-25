@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e1e3ed3_27c2f0c8",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T16:09:21Z",
+      "side": 1,
+      "message": "Again rather than taking the wikidb, if this took an entity source it would be able to check",
+      "range": {
+        "startLine": 94,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 9
+      },
+      "revId": "ad30b4682f343ecbde7198ba7383577ee5e39107",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56292d90_dbb35299",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T16:09:21Z",
+      "side": 1,
+      "message": "again, entity source instead of dbname / wiki?",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 7
+      },
+      "revId": "ad30b4682f343ecbde7198ba7383577ee5e39107",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
