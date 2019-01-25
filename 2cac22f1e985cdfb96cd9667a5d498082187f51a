@@ -22,6 +22,30 @@
       "revId": "2cac22f1e985cdfb96cd9667a5d498082187f51a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f126ce24_2b91e328",
+        "filename": "data-access/src/SingleEntitySourceServices.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T16:09:20Z",
+      "side": 1,
+      "message": "yup, I was thinking of something similar.\ngood suggestion, thanks!",
+      "parentUuid": "3b695fdc_949fbeb5",
+      "range": {
+        "startLine": 225,
+        "startChar": 4,
+        "endLine": 225,
+        "endChar": 42
+      },
+      "revId": "2cac22f1e985cdfb96cd9667a5d498082187f51a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
