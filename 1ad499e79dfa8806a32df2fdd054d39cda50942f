@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6716b5e7_30d13688",
+        "filename": "data-access/src/EntitySource.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T17:12:03Z",
+      "side": 1,
+      "message": "Might be that we come up with the idea to make those names stricter at some point (I am not saying it is a good idea). For now names are indeed only informational,",
+      "revId": "1ad499e79dfa8806a32df2fdd054d39cda50942f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99605a9c_c8de4531",
+        "filename": "data-access/src/EntitySourceDefinitions.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T17:12:03Z",
+      "side": 1,
+      "message": "great change, much more clear, thanks!",
+      "revId": "1ad499e79dfa8806a32df2fdd054d39cda50942f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
