@@ -22,6 +22,30 @@
       "revId": "f02e9a5c1c6a380dbab8aa496831086abbaa8f94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f1f63d4_f78d0d50",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T15:48:04Z",
+      "side": 1,
+      "message": "thanks, will do!",
+      "parentUuid": "a2a7af58_e70b0a81",
+      "range": {
+        "startLine": 355,
+        "startChar": 2,
+        "endLine": 355,
+        "endChar": 32
+      },
+      "revId": "f02e9a5c1c6a380dbab8aa496831086abbaa8f94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
