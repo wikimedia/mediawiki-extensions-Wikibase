@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "69ded3bd_e33487b7",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T17:16:21Z",
+      "side": 1,
+      "message": "this other thing, i.e. the one with fallback, is also constructed differently, and it kind of make sense for its use case (adding new lookup by other extension). Maybe some common ground would be possible, but seems to me it would be something rather worth doing separately.",
+      "parentUuid": "20821a65_a84514d6",
+      "range": {
+        "startLine": 10,
+        "startChar": 27,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "387b957f_0b87137c",
         "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-25T15:54:03Z",
       "side": 1,
       "message": "This class possibly shouldn\u0027t live here?, or EntityRevisionLookup shouldn\u0027t live in lib.\nblurred lines",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6242be0f_8e7876d9",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T17:16:21Z",
+      "side": 1,
+      "message": "lib is a mess, hence I am reluctant to add more stuff to it. OTOH, this other directory is not really better.\nI would not mind if some more clearly (but also reasonably) defined \"component\" would be defined. Maybe the code allowing use of many entity sources is something which deserves its own component (as vs the \"default\" behaviour there is also a single source)? I am not sure.",
+      "parentUuid": "387b957f_0b87137c",
       "range": {
         "startLine": 15,
         "startChar": 6,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "450d7397_6d03ace3",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T17:16:21Z",
+      "side": 1,
+      "message": "fine. To be super accurate to the description in docs, arguably when $revisionId is not zero, and there is no lookup it should throw StorageException instead of returning null.\nI am ignoring this for now and just return null. Is it bad?",
+      "parentUuid": "d02fe86e_6c59aee7",
+      "range": {
+        "startLine": 29,
+        "startChar": 17,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62c82ace_73812e8f",
         "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2019-01-25T15:54:03Z",
       "side": 1,
       "message": "This doesn\u0027t return null? It actually throws",
+      "range": {
+        "startLine": 47,
+        "startChar": 33,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "a2334b3b744fd9f1aa8e46bd89eefcb4ac31ebe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95f99a98_2a47f4e8",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T17:16:21Z",
+      "side": 1,
+      "message": "changed to return null.",
+      "parentUuid": "62c82ace_73812e8f",
       "range": {
         "startLine": 47,
         "startChar": 33,
