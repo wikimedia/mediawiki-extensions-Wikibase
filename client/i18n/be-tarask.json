@@ -74,7 +74,7 @@
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
 	"wikibase-otherprojects-beta-description": "Дадае на бакавую панэль разьдзел «{{int:wikibase-otherprojects}}», які ўтрымлівае спасылкі на іншыя праекты фундацыі «Вікімэдыя», заснаваныя на зьвестках з {{WBREPONAME}}.",
-	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|далучаная}} да {{PLURAL:$4|-1=элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}|элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}} $4}}, які мае зьвесткі датычныя тэмы.",
+	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|далучаная}} да {{PLURAL:$4|-1=элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}|элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}} $4}}, дзе могуць быць знойдзеныя зьвесткі датычныя тэмы.",
 	"notification-subject-page-connection": "Старонка ў {{GRAMMAR:месны|{{SITENAME}}}}, якую вы {{GENDER:$3|стварылі}}, была {{GENDER:$2|далучаная}} да элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}",
 	"unresolved-property-category": "Старонкі зь недаступнымі ўласьцівасьцямі",
 	"connected-redirect-category": "Перанакіраваньні, злучаныя з элемэнтам {{grammar:родны|{{WBREPONAME}}}}"

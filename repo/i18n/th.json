@@ -209,7 +209,7 @@
 	"wikibase-setsitelink-remove-failed": "ไม่สามารถลบการเชื่อมโยงข้ามไซต์ออกได้",
 	"wikibase-modifyentity-id": "ไอดี:",
 	"wikibase-modifyterm-language": "รหัสภาษา:",
-	"special-mergeitems": "รวมทั้งสองรายการเข้าด้วยกัน",
+	"special-mergeitems": "ผสานรวมทั้งสองรายการเข้าด้วยกัน",
 	"wikibase-mergeitems-intro": "หากคุณรวมทั้งสองรายการเข้าด้วยกัน ป้ายชื่อ คำอธิบาย ชื่ออื่นๆ การเชื่อมโยงข้ามไซต์ และประพจน์ทั้งหมดจะถูกย้ายจากรายการหนึ่งไปยังอีกรายการหนึ่ง",
 	"wikibase-mergeitems-fromid": "รวมไอดีนี้",
 	"wikibase-mergeitems-toid": "เข้ากับไอดีนี้",

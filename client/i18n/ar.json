@@ -119,7 +119,7 @@
 	"wikibase-otherprojects-beta-description": "يضيف قسم \"{{int:wikibase-otherprojects}}\" إلى الشريط الجانبي لعرض وصلات لمشاريع ويكيميديا الأخرى استنادا إلى معطيات {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|اتصال|اتصالات}} مع {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "أخطرني عندما يقوم شخص ما بتوصيل صفحة {{GENDER:|أنشأتها}} لعنصر {{WBREPONAME}}.",
-	"notification-header-page-connection": "الصفحة <strong>$3</strong> تم {{GENDER:$2|ربطها}} ب{{PLURAL:$4|-1=a {{WBREPONAME}} item|العنصر {{WBREPONAME}} $4}}، الذي يحتوي على بيانات ذات صلة بالموضوع.",
+	"notification-header-page-connection": "الصفحة <strong>$3</strong> تم {{GENDER:$2|ربطها}} ب{{PLURAL:$4|-1=a {{WBREPONAME}} item|العنصر {{WBREPONAME}} $4}}، حيث يمكن جمع البيانات ذات الصلة بالموضوع..",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> و {{PLURAL:$4|صفحة واحدة أخرى|$4 صفحات أخرى|100=99+ صفحات أخرى}} تم {{GENDER:$2|توصيلها}} لعناصر {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|اعرض}} العنصر",
 	"notification-subject-page-connection": "الصفحة على {{SITENAME}} التي قمت {{GENDER:$3|بإنشائها}} تم {{GENDER:$2|وصلها}} إلى عنصر {{WBREPONAME}}",

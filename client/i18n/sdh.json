@@ -12,7 +12,11 @@
 	"wikibase-editlinkstitle": "بەسیارەیل نێوانویکی وێراشتە بکە",
 	"wikibase-linkitem-input-site": "زوان:",
 	"wikibase-linkitem-input-page": "پەڕە:",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "بشارەو",
+	"wikibase-rc-hide-wikidata-show": "نیشانی بیە",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "وێراشتەکاری {{WBREPONAME}}",
-	"wikibase-unconnectedpages-submit": "بچوو"
+	"wikibase-unconnectedpages-submit": "بچوو",
+	"wikibase-otherprojects": "لە پرۆژەگان تر"
 }
