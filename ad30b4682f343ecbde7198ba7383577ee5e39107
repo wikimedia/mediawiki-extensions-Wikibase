@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ebf757a2_25940a25",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-25T16:19:55Z",
+      "side": 1,
+      "message": "yup. Also as the chain intentionally does not change any of the \"repository\" aware code but introduces the parallel path, setting/state of the flag would need to be added to use the right condition in all those integrity checks.",
+      "parentUuid": "9e1e3ed3_27c2f0c8",
+      "range": {
+        "startLine": 94,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 9
+      },
+      "revId": "ad30b4682f343ecbde7198ba7383577ee5e39107",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56292d90_dbb35299",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 3
