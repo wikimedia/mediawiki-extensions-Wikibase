@@ -97,6 +97,14 @@ final class RepoHooks {
 	}
 
 	/**
+	 * @param WikibaseRepo $wikibaseRepo
+	 * @return boolean is CirrusSearch functionality disabled?
+	 */
+	private static function disableCirrusSearch( WikibaseRepo $wikibaseRepo ) {
+		return $wikibaseRepo->getSettings()->getSetting( 'disableCirrus' );
+	}
+
+	/**
 	 * Handler for the SetupAfterCache hook, completing the content and namespace setup.
 	 * This updates the $wgContentHandlers and $wgNamespaceContentModels registries
 	 * according to information provided by entity type definitions and the entityNamespaces
@@ -135,6 +143,9 @@ final class RepoHooks {
 				$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 				return $entityContentFactory->getContentHandlerForType( $entityType );
 			};
+		}
+		if ( self::disableCirrusSearch( $wikibaseRepo ) ) {
+			return true;
 		}
 		$request = RequestContext::getMain()->getRequest();
 		$settings = $wikibaseRepo->getSettings();
@@ -1045,6 +1056,10 @@ final class RepoHooks {
 	 * @param AnalysisConfigBuilder $builder
 	 */
 	public static function onCirrusSearchAnalysisConfig( &$config, AnalysisConfigBuilder $builder ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		if ( self::disableCirrusSearch( $repo ) ) {
+			return true;
+		}
 		static $inHook;
 		if ( $inHook ) {
 			// Do not call this hook repeatedly, since ConfigBuilder calls AnalysisConfigBuilder
@@ -1079,7 +1094,6 @@ final class RepoHooks {
 		];
 
 		// Language analyzers for descriptions
-		$repo = WikibaseRepo::getDefaultInstance();
 		$wbBuilder = new ConfigBuilder( $repo->getTermsLanguages()->getLanguages(),
 			$repo->getSettings()->getSetting( 'entitySearch' ),
 			$builder
@@ -1098,7 +1112,11 @@ final class RepoHooks {
 	 * @param SearchProfileService $service
 	 */
 	public static function onCirrusSearchProfileService( SearchProfileService $service ) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'entitySearch' );
+		$repo = WikibaseRepo::getDefaultInstance();
+		if ( self::disableCirrusSearch( $repo ) ) {
+			return true;
+		}
+		$settings = $repo->getSettings()->getSetting( 'entitySearch' );
 		self::registerSearchProfiles( $service, $settings );
 	}
 
@@ -1108,6 +1126,9 @@ final class RepoHooks {
 	 * @param array $entitySearchConfig
 	 */
 	public static function registerSearchProfiles( SearchProfileService $service, array $entitySearchConfig ) {
+		if ( self::disableCirrusSearch( WikibaseRepo::getDefaultInstance() ) ) {
+			return true;
+		}
 		$stmtBoost = isset( $entitySearchConfig['statementBoost'] ) ? $entitySearchConfig['statementBoost'] : [];
 		// register base profiles available on all wikibase installs
 		$service->registerFileRepository( SearchProfileService::RESCORE,
@@ -1206,11 +1227,14 @@ final class RepoHooks {
 		FullTextQueryBuilder &$builder,
 		SearchContext $context
 	) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		if ( self::disableCirrusSearch( $repo ) ) {
+			return;
+		}
 		if ( !$context->getConfig()->isLocalWiki() ) {
 			// don't mess with interwiki searches
 			return;
 		}
-		$repo = WikibaseRepo::getDefaultInstance();
 		$settings = $repo->getSettings()->getSetting( 'entitySearch' );
 		if ( !$settings || empty( $settings['useCirrus'] ) ) {
 			return;
@@ -1240,12 +1264,15 @@ final class RepoHooks {
 		$term,
 		SearchContext $context
 	) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		if ( self::disableCirrusSearch( $repo ) ) {
+			return;
+		}
 		if ( !$context->getConfig()->isLocalWiki() ) {
 			// don't mess with interwiki searches
 			return;
 		}
 
-		$repo = WikibaseRepo::getDefaultInstance();
 		$settings = $repo->getSettings()->getSetting( 'entitySearch' );
 		if ( !$settings || empty( $settings['useCirrus'] ) ) {
 			// Right now our specialized search is Cirrus, so no point in
@@ -1265,8 +1292,12 @@ final class RepoHooks {
 	 * @param array $extraFeatures
 	 */
 	public static function onCirrusSearchAddQueryFeatures( $config, array &$extraFeatures ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		if ( self::disableCirrusSearch( $repo ) ) {
+			return;
+		}
 		$foreignRepoNames = [];
-		$foreignRepos = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+		$foreignRepos = $repo->getSettings()->getSetting(
 			'foreignRepositories'
 		);
 		if ( !empty( $foreignRepos ) ) {

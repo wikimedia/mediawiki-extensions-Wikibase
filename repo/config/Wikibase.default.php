@@ -248,6 +248,10 @@ return [
 	// Name of the lock manager for dispatch changes coordinator
 	'dispatchingLockManager' => null,
 
+	// Disables all CirrusSearch functionality
+	// Temporary switch for https://phabricator.wikimedia.org/T190022
+	// Will be deleted after migration is complete.
+	'disableCirrus' => true,
 	// Configurations for searching entities
 	'entitySearch' => [
 		// Use CirrusSearch (ElasticSearch) for searching
