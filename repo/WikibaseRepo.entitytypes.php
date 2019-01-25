@@ -159,7 +159,7 @@ return [
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
 			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
-			if ( $searchSettings['useCirrus'] ) {
+			if ( $searchSettings['useCirrus'] && !$repoSettings->getSetting( 'disableCirrus' ) ) {
 				return new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
 					$repo->getLanguageFallbackChainFactory(),
 					$repo->getEntityIdParser(),
@@ -291,7 +291,7 @@ return [
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
 			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
-			if ( $searchSettings['useCirrus'] ) {
+			if ( $searchSettings['useCirrus'] && !$repoSettings->getSetting( 'disableCirrus' ) ) {
 				return new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
 					$repo->getLanguageFallbackChainFactory(),
 					$repo->getEntityIdParser(),
