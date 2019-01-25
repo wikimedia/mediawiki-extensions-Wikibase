@@ -5,6 +5,11 @@ namespace Wikibase\DataAccess;
 use Wikimedia\Assert\Assert;
 
 /**
+ * An EntitySource includes information needed to interact with one or more entity types at a given source.
+ * EntitySource can only currently be used via direct database access.
+ *
+ * @see EntitySourceDefinitions for defining multiple EntitySources within a single site.
+ *
  * @license GPL-2.0-or-later
  */
 class EntitySource {
@@ -15,7 +20,7 @@ class EntitySource {
 	private $sourceName;
 
 	/**
-	 * @var string|false
+	 * @var string|false The name of the database to use (use false for the local db)
 	 */
 	private $databaseName;
 
@@ -35,8 +40,9 @@ class EntitySource {
 	private $entitySlots;
 
 	/**
-	 * @param string $name
-	 * @param string|false $databaseName
+	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
+	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
+	 * @param string|false $databaseName The name of the database to use (use false for the local db)
 	 * @param array $entityNamespaceIdsAndSlots Associative array indexed by entity type (string), values are
 	 * array of form [ 'namespaceId' => int, 'slot' => string ]
 	 */
