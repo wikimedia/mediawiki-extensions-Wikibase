@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2a7af58_e70b0a81",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-25T15:46:57Z",
+      "side": 1,
+      "message": "The conflict here is in this file (its an easy merge conflict to solve once the chain is rebased)",
+      "range": {
+        "startLine": 355,
+        "startChar": 2,
+        "endLine": 355,
+        "endChar": 32
+      },
+      "revId": "f02e9a5c1c6a380dbab8aa496831086abbaa8f94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
