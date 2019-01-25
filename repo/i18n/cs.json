@@ -168,7 +168,7 @@
 	"wikibase-gotolinkedpage-error-page-not-found": "Pro danou kombinaci položky a projektu nebyla nalezena žádná stránka",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "Zadaný identifikátor položky není platný",
 	"wikibase-gotolinkedpage-error-item-not-found": "Položka nebyla nalezena",
-	"special-itemdisambiguation": "Položka rozcestníku",
+	"special-itemdisambiguation": "Rozcestník položek",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Hledat položky podle jazyka a štítku",
 	"wikibase-itemdisambiguation-lookup-language": "Kód jazyka:",
 	"wikibase-itemdisambiguation-lookup-label": "Štítek:",

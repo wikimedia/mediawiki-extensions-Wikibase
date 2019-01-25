@@ -113,7 +113,7 @@
 	"wikibase-otherprojects-beta-description": "Adiciona uma seção \"{{int:wikibase-otherprojects}}\" na barra lateral que fornece links para outros projetos Wikimedia com base em dados {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexão|Conexões}} com {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notifique-me quando alguém conecta uma página {{GENDER:|que eu criei}} para um item {{WBREPONAME}}.",
-	"notification-header-page-connection": "A página <strong> $3</strong> foi {{GENDER: $2|conectada}} para {{PLURAL:$4|-1=a {{WBREPONAME}} item|o {{WBREPONAME }} item $4}}, que contém dados relevantes para o tópico.",
+	"notification-header-page-connection": "A página <strong> $3</strong> foi {{GENDER: $2|conectada}} para {{PLURAL:$4|-1=a {{WBREPONAME}} item|o {{WBREPONAME }} item $4}}, onde os dados relevantes para o tópico podem ser coletados.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|uma outra página|$4 outras páginas|100=+ de 99 outras páginas}} foram {{GENDER: $2|conectado}} para {{ WBREPONAME}} itens.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} item",
 	"notification-subject-page-connection": "Uma página em {{SITENAME}} que você {{GENDER: $3|criou}} foi {{GENDER: $2|conectada}} para um item {{WBREPONAME}}",

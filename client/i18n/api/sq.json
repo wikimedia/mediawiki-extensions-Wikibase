@@ -1,8 +1,43 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjakupi"
+			"Bjakupi",
+			"Besnik b"
 		]
 	},
-	"apihelp-query+description-extended-description": "Pershkrimi eshte tekst i plote, ne nje linje te vetme, mirepo ne te kunderten arbitrarisht (ne menyre potenciale duke perfshire HTML shenja identifikim te paperpunuara, te cilat gjithashtu duhet te interpretohen si tekst i plote). Nuk duhet te perdoret si ne HTML te pa-largueshme!"
+	"apihelp-query+wbentityusage-description": "Sjell krejt ID njësish të përdorura në faqet e dhëna.",
+	"apihelp-query+wbentityusage-summary": "Sjell krejt ID njësish të përdorura në faqet e dhëna.",
+	"apihelp-query+wbentityusage-param-aspect": "Sill vetëm me ID njësish që kanë përdorur këtë aspekt.",
+	"apihelp-query+wbentityusage-param-prop": "Veti për t’u shtuar te përfundimi.",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Në u aktivizoftë, do të shtohet URL-ja e njësisë",
+	"apihelp-query+wbentityusage-param-entities": "Sill vetëm faqen që ka përdorur këto njësi.",
+	"apihelp-query+wbentityusage-param-limit": "Sa përdorime njësie të sillen.",
+	"apihelp-query+wbentityusage-example-simple": "Merrni njësi të përdorura në faqen <kbd>Faqja Kryesore</kbd>.",
+	"apihelp-query+wblistentityusage-description": "Sjell krejt faqet që përdorin ID-të e njësisë së dhënë.",
+	"apihelp-query+wblistentityusage-summary": "Sjell krejt faqet që përdorin ID-të e dhëna të njësisë.",
+	"apihelp-query+wblistentityusage-param-prop": "Veti për t’u shtuar te përfundimi.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Në u aktivizoftë, URL-ja e njësisë do të shtohet te përfundimi.",
+	"apihelp-query+wblistentityusage-param-aspect": "Sill vetëm ID njësish që kanë përdorur këtë aspekt.",
+	"apihelp-query+wblistentityusage-param-entities": "Njësi që janë përdorur.",
+	"apihelp-query+wblistentityusage-param-limit": "Sa përdorime njësie të sillen.",
+	"apihelp-query+wblistentityusage-example-simple": "Merrni faqe që përdorin njësinë <kbd>Q2</kbd>.",
+	"apihelp-query+wblistentityusage-example-url": "Merrni faqe që përdorin njësinë <kbd>Q2</kbd>, përfshi URL-në.",
+	"apihelp-query+wblistentityusage-example-aspect": "Merrni faqe që përdorin njësinë <kbd>Q2</kbd> dhe për të cilat aspekti ishte lidhje sajti ose pohim.",
+	"apihelp-query+pageterms-description": "Merrni termat e {{WBREPONAME}} (kryesisht etiketa, përshkrime dhe aliase) të përshoqëruar me një faqe përmes një lidhjeje sajti. Në vetë faqen e njësisë, termat përdoren drejtpërsëdrejti. Kujdes: Në një wiki depo, ky modul funksionon vetëm drejtpërsëdrejti në faqe njësish, jo në faqe të lidhura te një njësi përmes një lidhje sajti. Kjo mund të ndryshojë në të ardhmen.",
+	"apihelp-query+pageterms-summary": "Merrni termat e {{WBREPONAME}} (kryesisht etiketa, përshkrime dhe aliase) të përshoqëruar me një faqe përmes një lidhjeje sajti. Në vetë faqen e njësisë, termat përdoren drejtpërsëdrejti. Kujdes: Në një wiki depo, ky modul funksionon vetëm drejtpërsëdrejti në faqe njësish, jo në faqe të lidhura te një njësi përmes një lidhje sajti. Kjo mund të ndryshojë në të ardhmen.",
+	"apihelp-query+pageterms-example-simple": "Merrni krejt termat përshoqëruar me faqen 'London', në gjuhën e përdoruesit.",
+	"apihelp-query+pageterms-example-label-en": "Merrni etiketa dhe aliase përshoqëruar me faqen 'London', në anglisht.",
+	"apihelp-query+pageterms-example-item": "Merrni etiketa dhe aliase të objektit Q84.",
+	"apihelp-query+pageterms-param-terms": "Llojet e termave që duhen marrë, p.sh. 'përshkrim', secili i sjellë si një matricë vargjesh të dhënë sipas llojit të tyre, p.sh. {\"përshkrim\": [\"foo\"]}. Nëse s’përcaktohet, sillen krejt llojet.",
+	"apihelp-query+description-summary": "Merrni një përshkrim të shkurtër, i njohur edhe si nëntitull, që shpjegon se për çfarë është faqja në fjalë.",
+	"apihelp-query+description-extended-description": "Përshkrimi është tekst i thjeshtë, në një rresht, por ama edhe arbitrar (duke përfshirë, potencialisht, etiketa HTML shqeto, të cilat edhe këto duhen interpretuar si tekst i thjeshtë). Në HTML s’duhet të përdoret pa u paraprirë!",
+	"apihelp-query+description-param-prefersource": "Cili burim përshkrimi të parapëlqehet, në pastë:",
+	"apihelp-query+description-paramvalue-prefersource-local": "Përshkrime vendore përmes funksioni <code><nowiki>{{SHORTDESC:...}}</nowiki></code> përtypësi te teksti wiki i faqes.",
+	"apihelp-query+description-paramvalue-prefersource-central": "Përshkrime qendrore nga objekt {{WBREPONAME}} i përshoqëruar.",
+	"apihelp-query+description-example": "Merrni përshkrimin për faqen 'London'.",
+	"apihelp-query+description-example-central": "Merrni përshkrimin për faqen 'London', duke parapëlqyer përshkrimin qendror, në ekzistoftë.",
+	"apihelp-query+wikibase-description": "Merrni informacion mbi klientin Wikibase dhe depon Wikibase përshoqëruar atij.",
+	"apihelp-query+wikibase-summary": "Merrni informacion mbi klientin Wikibase dhe depon Wikibase përshoqëruar atij.",
+	"apihelp-query+wikibase-example": "Merrni shteg URL-je dhe informacion tjetër mbi klientin dhe depon Wikibase.",
+	"apihelp-query+wikibase-param-prop": "Cilat veti të merren:\n;<kbd>url</kbd>: URL bazë, shteg programthi dhe shteg artikulli të depos Wikibase.\n;<kbd>siteid</kbd>: ID sajti e këtij sajti."
 }

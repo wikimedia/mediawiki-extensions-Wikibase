@@ -76,6 +76,6 @@
 	"wikibase-otherprojects": "V drugih projektih",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezava|Povezavi|Povezave|Povezav}} z {{GRAMMAR:orodnik|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Obvesti me, ko nekdo poveže stran, ki {{GENDER:|sem jo ustvaril}} z njenim objektom na {{WBREPONAME}}.",
-	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} z {{PLURAL:$4|objektom v {{WBREPONAME}}}}, ki vsebuje podatke, povezane s temo.",
+	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} z {{PLURAL:$4|objektom v {{WBREPONAME}}}}, kjer je možno zbirati podatke, povezane s temo.",
 	"notification-subject-page-connection": "Stran {{SITENAME}}, ki so jo {{GENDER:$3|ustvaril|ustvarila}}, je bila  {{GENDER:$2|povezana}} s svojim objetom v {{WBREPONAME}}"
 }

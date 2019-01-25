@@ -20,7 +20,8 @@
 			"Alexey zakharenkov",
 			"Facenapalm",
 			"Stjn",
-			"Vlad5250"
+			"Vlad5250",
+			"Vcohen"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -111,7 +112,7 @@
 	"wikibase-otherprojects-beta-description": "Добавляет на боковую панель раздел «{{int:wikibase-otherprojects}}», который содержит ссылки на другие проекты Фонда Викимедиа на основе данных {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Соединение|Соединения}} с элементом {{grammar:genitive|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Уведомлять меня, когда кто-то соединяет {{GENDER:|созданную мной}} страницу к элементу {{grammar:genitive|{{WBREPONAME}}}}.",
-	"notification-header-page-connection": "Страница <strong>$3</strong> была {{GENDER:$2|соединена}} к {{PLURAL:$4|-1=элементу {{grammar:genitive|{{WBREPONAME}}}}|элементу {{grammar:genitive|{{WBREPONAME}}}} $4}}, который содержит данные, относящиеся к её теме.",
+	"notification-header-page-connection": "Страница <strong>$3</strong> была {{GENDER:$2|присоединена}} к {{PLURAL:$4|-1=элементу {{grammar:genitive|{{WBREPONAME}}}}|элементу {{grammar:genitive|{{WBREPONAME}}}} $4}}, который содержит данные, относящиеся к её теме.",
 	"notification-link-text-view-item": "{{GENDER:$1|Посмотреть}} элемент",
 	"unresolved-property-category": "Страницы с недоступными свойствами",
 	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени.",

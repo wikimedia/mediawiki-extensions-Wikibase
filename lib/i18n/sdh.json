@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kurdbuddha"
+			"Kurdbuddha",
+			"Paraw2"
 		]
 	},
+	"wikibase-sitelinks-wikipedia": "ویکیپیدیا",
 	"wikibase-sitelinks-sitename-columnheading": "زوان"
 }

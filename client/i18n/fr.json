@@ -123,7 +123,7 @@
 	"wikibase-otherprojects-beta-description": "Ajoute une section « {{int:wikibase-otherprojects}} » à la barre latérale qui fournit des liens vers les autres  projets de Wikimédia basés sur les données {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexion|Connexions}} avec {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "M’avertir quand quelqu’un connecte une page que {{GENDER:|j’ai créée}} à l’élément {{WBREPONAME}}.",
-	"notification-header-page-connection": "La page <strong>$3</strong> a été {{GENDER:$2|reliée}} à {{PLURAL:$4|-1=un élément {{WBREPONAME}}|l'élément {{WBREPONAME}} $4}}, qui contient les données relatives au sujet.",
+	"notification-header-page-connection": "La page <strong>$3</strong> a été {{GENDER:$2|reliée}} à {{PLURAL:$4|-1=un élément {{WBREPONAME}}|l’élément {{WBREPONAME}} $4}}, où les données relatives au sujet peuvent être récupérées.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> et {{PLURAL:$4|une autre page|$4 autres pages|100=99+ autres pages}} ont été {{GENDER:$2|reliées}} à des éléments {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|}}Afficher l'élément",
 	"notification-subject-page-connection": "Une page sur {{SITENAME}} que vous avez {{GENDER:$3|créée}} a été {{GENDER:$2|reliée}} à l’élément {{WBREPONAME}}",
