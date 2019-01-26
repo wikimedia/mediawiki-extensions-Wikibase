@@ -16,6 +16,24 @@
       "revId": "30c9a25face78599fa0f41d76fb4675efb0c4797",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d81f8060_d92d3a56",
+        "filename": "lib/includes/Store/ChunkCache.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-01-26T09:26:36Z",
+      "side": 0,
+      "message": "Sure. I would say: the fact that this questions comes up is reason enough to remove the comment. ;-)",
+      "parentUuid": "d4840617_f56a958f",
+      "revId": "30c9a25face78599fa0f41d76fb4675efb0c4797",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
