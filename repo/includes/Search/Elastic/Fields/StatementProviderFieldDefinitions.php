@@ -3,11 +3,12 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
 use Wikibase\SettingsArray;
 
 /**
  * Fields for an object that has statements.
- *
+ * FIXME: move to new FieldDefinitions after Lexemes are fixed
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
