@@ -120,7 +120,7 @@
 	"wikibase-otherprojects-beta-description": "在側邊欄加入 \"{{int:wikibase-otherprojects}}\" 區塊，可根據 {{WBREPONAME}} 中的資料提供連結可連至其他維基媒體專案。",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|連接}}到{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "當有人將我{{GENDER:|建立的}}頁面連結到 {{WBREPONAME}} 項目時通知我。",
-	"notification-header-page-connection": "頁面 <strong>$3</strong> {{GENDER:$2|已連結}}到{{PLURAL:$4|-1=一個{{WBREPONAME}}項目|{{WBREPONAME}}項目 $4}}，其包含與主題相關的資料。",
+	"notification-header-page-connection": "頁面<strong>$3</strong>{{GENDER:$2|已連結}}到{{PLURAL:$4|-1=一個{{WBREPONAME}}項目|{{WBREPONAME}}項目 $4}}，在那可收集與主題相關的資料。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> 及 {{PLURAL:$4|一個其他頁面|$4 個其他頁面|100=99+ 個其他頁面}}{{GENDER:$2|已連結}}到 {{WBREPONAME}} 項目。",
 	"notification-link-text-view-item": "{{GENDER:$1|檢視}}項目",
 	"notification-subject-page-connection": "您於 {{SITENAME}} 上{{GENDER:$3|建立的}}頁面{{GENDER:$2|已連結}}到 {{WBREPONAME}} 項目",
