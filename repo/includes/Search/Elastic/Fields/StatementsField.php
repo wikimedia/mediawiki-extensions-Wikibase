@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**
  * Field indexing statements for particular item.

@@ -1,5 +1,5 @@
 <?php
-namespace Wikibase\Repo\Search\Elastic\Fields;
+namespace Wikibase\Repo\Search\Fields;
 
 /**
  * Class for empty field definitions

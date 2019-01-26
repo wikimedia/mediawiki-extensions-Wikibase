@@ -2,6 +2,9 @@
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use Wikibase\Repo\Search\Fields\FieldDefinitions;
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
+
 /**
  * Search fields that are used for properties.
  *
