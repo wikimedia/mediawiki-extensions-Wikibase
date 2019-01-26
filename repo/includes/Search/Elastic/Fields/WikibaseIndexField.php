@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
-use SearchEngine;
-use Wikibase\DataModel\Entity\EntityDocument;
-
+// phpcs:disable Wikibase.Namespaces.FullQualifiedClassName.Found
 /**
  * Each field is intended to be used by CirrusSearch as an
  * additional property of a page.
@@ -15,26 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @deprecated Use Wikibase\Repo\Search\Fields\WikibaseIndexField
  */
-interface WikibaseIndexField {
-
-	/**
-	 * Produce specific field mapping
-	 *
-	 * @param SearchEngine $engine
-	 * @param string $name
-	 *
-	 * @return \SearchIndexField|null Null if mapping is not supported
-	 */
-	public function getMappingField( SearchEngine $engine, $name );
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return mixed Get the value of the field to be indexed when a page/document
-	 *               is indexed. This might be an array with nested data, if the field
-	 *               is defined with nested type or an int or string for simple field types.
-	 */
-	public function getFieldData( EntityDocument $entity );
-
+interface WikibaseIndexField extends \Wikibase\Repo\Search\Fields\WikibaseIndexField {
 }
