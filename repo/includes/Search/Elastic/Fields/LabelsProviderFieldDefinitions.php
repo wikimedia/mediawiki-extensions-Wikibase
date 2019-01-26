@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
+
 /**
  * Definitions for any entity that has labels.
- *
+ * FIXME: move to new FieldDefinitions after all dependencies are fixed
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */

@@ -7,7 +7,7 @@ use Wikibase\SettingsArray;
 
 /**
  * Fields for an object that has statements.
- *
+ * FIXME: move to new FieldDefinitions after all dependencies are fixed
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
