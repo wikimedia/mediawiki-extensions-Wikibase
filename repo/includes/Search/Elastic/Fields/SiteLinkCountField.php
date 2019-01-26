@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\Search\Fields\WikibaseNumericField;
 
 /**
  * @license GPL-2.0-or-later

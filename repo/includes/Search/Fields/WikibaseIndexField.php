@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Search\Elastic\Fields;
+namespace Wikibase\Repo\Search\Fields;
 
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;

@@ -1,5 +1,5 @@
 <?php
-namespace Wikibase\Repo\Search\Elastic\Fields;
+namespace Wikibase\Repo\Search\Fields;
 
 /**
  * This is a collection of field definitions.
