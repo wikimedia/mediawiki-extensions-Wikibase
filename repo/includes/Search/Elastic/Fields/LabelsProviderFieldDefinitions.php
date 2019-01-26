@@ -2,6 +2,9 @@
 
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
+use Wikibase\Repo\Search\Fields\FieldDefinitions;
+
 /**
  * Definitions for any entity that has labels.
  *

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Search\Elastic\Fields;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
+use Wikibase\Repo\Search\Fields\WikibaseNumericField;
 
 /**
  * @covers \Wikibase\Repo\Search\Elastic\Fields\LabelCountField

@@ -39,7 +39,7 @@ use WikiPage;
 
 /**
  * Base handler class for Entity content classes.
- *
+ * FIXME: Switch to use \Wikibase\Repo\Search\Fields\FieldDefinitions once dependencies are updated
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

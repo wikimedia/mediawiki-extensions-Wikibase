@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;

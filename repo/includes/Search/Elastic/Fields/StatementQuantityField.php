@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**
  * Additional field to index statements with their qualifiers and the qualifier value where the

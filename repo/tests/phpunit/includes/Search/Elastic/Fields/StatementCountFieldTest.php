@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
+use Wikibase\Repo\Search\Fields\WikibaseNumericField;
 
 /**
  * @covers \Wikibase\Repo\Search\Elastic\Fields\StatementCountField

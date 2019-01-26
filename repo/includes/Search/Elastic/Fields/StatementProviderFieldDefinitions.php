@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\SettingsArray;
 
 /**
