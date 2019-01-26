@@ -396,7 +396,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 * @param array $value
 	 * @return array
 	 */
-	private function expectionPlaceholder( array $value ) {
+	private function exceptionPlaceholder( array $value ) {
 		foreach ( $value as &$site ) {
 			if ( !isset( $site['badges'] ) ) {
 					continue;
@@ -442,7 +442,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		// Replace the placeholder item ids in the expected results... this sucks
 		if ( is_array( $expected['value'] ) ) {
-			$expected['value'] = $this->expectionPlaceholder( $expected['value'] );
+			$expected['value'] = $this->exceptionPlaceholder( $expected['value'] );
 		}
 
 		// -- check the result ------------------------------------------------
