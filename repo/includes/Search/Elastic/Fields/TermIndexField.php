@@ -8,6 +8,7 @@ use CirrusSearch\SearchConfig;
 use SearchEngine;
 use SearchIndexField;
 use SearchIndexFieldDefinition;
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**
  * Generic class for fields that index terms such as labels.
