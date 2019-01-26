@@ -6,12 +6,12 @@ use DummySearchIndexFieldDefinition;
 use PHPUnit4And6Compat;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField;
+use Wikibase\Repo\Search\Fields\WikibaseNumericField;
 
 /**
  * Base class for testing numeric fields.
  *
- * @covers \Wikibase\Repo\Search\Elastic\Fields\WikibaseNumericField
+ * @covers \Wikibase\Repo\Search\Fields\WikibaseNumericField
  *
  * @license GPL-2.0-or-later
  * @author Stas Malyshev

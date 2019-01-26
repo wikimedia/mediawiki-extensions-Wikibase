@@ -1,5 +1,5 @@
 <?php
-namespace Wikibase\Repo\Search\Elastic\Fields;
+namespace Wikibase\Repo\Search\Fields;
 
 /**
  * This is a collection of field definitions.
@@ -8,7 +8,13 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
  *
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
- * @deprecated Use Wikibase\Repo\Search\Fields\FieldDefinitions
  */
-interface FieldDefinitions extends \Wikibase\Repo\Search\Fields\FieldDefinitions {
+interface FieldDefinitions {
+
+	/**
+	 * Get the list of definitions
+	 * @return WikibaseIndexField[] key is field name, value is WikibaseIndexField
+	 */
+	public function getFields();
+
 }
