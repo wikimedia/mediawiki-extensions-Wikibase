@@ -1,9 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Search\Elastic\Fields;
+namespace Wikibase\Repo\Search\Fields;
+
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 
+// phpcs:disable Wikibase.Namespaces.FullQualifiedClassName.Found
 /**
  * Each field is intended to be used by CirrusSearch as an
  * additional property of a page.
@@ -14,9 +16,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @deprecated Use Wikibase\Repo\Search\Fields\WikibaseIndexField
  */
-interface WikibaseIndexField {
+interface WikibaseIndexField extends \Wikibase\Repo\Search\Elastic\Fields\WikibaseIndexField {
 
 	/**
 	 * Produce specific field mapping
@@ -36,4 +37,5 @@ interface WikibaseIndexField {
 	 *               is defined with nested type or an int or string for simple field types.
 	 */
 	public function getFieldData( EntityDocument $entity );
+
 }
