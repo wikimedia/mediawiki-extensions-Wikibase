@@ -38,9 +38,7 @@ return call_user_func( function() {
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => 'ToolbarFactory.js',
 			'dependencies' => [
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.edittoolbar',
-				'jquery.wikibase.removetoolbar',
+				'jquery.wikibase.changetoolbar',
 				'wikibase.view.__namespace',
 			]
 		],

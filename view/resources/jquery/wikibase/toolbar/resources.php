@@ -14,50 +14,30 @@ return call_user_func( function() {
 
 	$modules = [
 
-		'jquery.wikibase.addtoolbar' => $moduleTemplate + [
+		'jquery.wikibase.changetoolbar' => $moduleTemplate + [
 			'scripts' => [
 				'jquery.wikibase.addtoolbar.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.singlebuttontoolbar',
-			],
-			'messages' => [
-				'wikibase-add',
-			],
-		],
-
-		'jquery.wikibase.edittoolbar' => $moduleTemplate + [
-			'scripts' => [
 				'jquery.wikibase.edittoolbar.js',
+				'jquery.wikibase.removetoolbar.js',
 			],
 			'styles' => [
 				'themes/default/jquery.wikibase.edittoolbar.css',
 			],
 			'dependencies' => [
+				'jquery.wikibase.singlebuttontoolbar',
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
 				'jquery.wikibase.wbtooltip',
 				'wikibase.api.RepoApiError',
 			],
 			'messages' => [
+				'wikibase-add',
 				'wikibase-cancel',
 				'wikibase-edit',
 				'wikibase-remove',
 				'wikibase-remove-inprogress',
 				'wikibase-save',
 				'wikibase-publish',
-			],
-		],
-
-		'jquery.wikibase.removetoolbar' => $moduleTemplate + [
-			'scripts' => [
-				'jquery.wikibase.removetoolbar.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.singlebuttontoolbar',
-			],
-			'messages' => [
-				'wikibase-remove',
 			],
 		],
 
