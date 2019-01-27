@@ -443,11 +443,51 @@ return call_user_func( function() {
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
+
+		'jquery.wikibase.snakview' => $moduleTemplate + [
+			'scripts' => [
+				'snakview/snakview.ViewState.js',
+				'snakview/snakview.variations.js',
+				'snakview/snakview.variations.Variation.js',
+				'snakview/snakview.variations.NoValue.js',
+				'snakview/snakview.variations.SomeValue.js',
+				'snakview/snakview.variations.Value.js',
+				'snakview/snakview.js',
+				'snakview/snakview.SnakTypeSelector.js',
+			],
+			'styles' => [
+				'snakview/themes/default/snakview.SnakTypeSelector.css',
+			],
+			'dependencies' => [
+				'dataValues.DataValue',
+				'dataValues',
+				'jquery.event.special.eachchange',
+				'jquery.ui.EditableTemplatedWidget',
+				'jquery.ui.position',
+				'jquery.wikibase.entityselector',
+				'mediawiki.legacy.shared',
+				'mw.config.values.wbRepo',
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.SnakDeserializer',
+				'wikibase.serialization.SnakSerializer',
+			],
+			'messages' => [
+				'wikibase-snakview-property-input-placeholder',
+				'wikibase-snakview-choosesnaktype',
+				'wikibase-snakview-snaktypeselector-value',
+				'wikibase-snakview-snaktypeselector-somevalue',
+				'wikibase-snakview-snaktypeselector-novalue',
+				'wikibase-snakview-variation-datavaluetypemismatch',
+				'wikibase-snakview-variation-datavaluetypemismatch-details',
+				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-variations-somevalue-label',
+			],
 	];
 
 	return array_merge(
 		$modules,
-		require __DIR__ . '/snakview/resources.php',
 		require __DIR__ . '/toolbar/resources.php'
 	);
 } );
