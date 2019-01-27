@@ -47,24 +47,15 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.statementgrouplabelscroll' => $moduleTemplate + [
+		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery.wikibase.statementgrouplabelscroll.js',
+				'jquery.wikibase.statementgrouplistview.js',
 			],
 			'dependencies' => [
 				'jquery.ui.position',
 				'jquery.ui.widget',
-			],
-		],
-
-		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery.wikibase.statementgrouplistview.js',
-			],
-			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
-				'jquery.ui.widget',
-				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.StatementGroupSet',
 			],

@@ -34,17 +34,9 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.statementgrouplabelscroll.tests' => $moduleBase + [
-			'scripts' => [
-				'jquery.wikibase.statementgrouplabelscroll.tests.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.statementgrouplabelscroll',
-			],
-		],
-
 		'jquery.wikibase.statementgrouplistview.tests' => $moduleBase + [
 			'scripts' => [
+				'jquery.wikibase.statementgrouplabelscroll.tests.js',
 				'jquery.wikibase.statementgrouplistview.tests.js',
 			],
 			'dependencies' => [
