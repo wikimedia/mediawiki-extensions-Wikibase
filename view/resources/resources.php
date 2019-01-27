@@ -7,7 +7,6 @@
 return call_user_func( function() {
 	return array_merge(
 		require __DIR__ . '/jquery/resources.php',
-		require __DIR__ . '/jquery/ui/resources.php',
 		require __DIR__ . '/jquery/wikibase/resources.php',
 		require __DIR__ . '/wikibase/resources.php',
 		require __DIR__ . '/wikibase/entityChangers/resources.php',
