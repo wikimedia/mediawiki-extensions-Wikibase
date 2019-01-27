@@ -16,6 +16,12 @@ return call_user_func( function() {
 	return [
 		'jquery.wikibase.snakview' => $moduleTemplate + [
 			'scripts' => [
+				'snakview.ViewState.js',
+				'snakview.variations.js',
+				'snakview.variations.Variation.js',
+				'snakview.variations.NoValue.js',
+				'snakview.variations.SomeValue.js',
+				'snakview.variations.Value.js',
 				'snakview.js',
 				'snakview.SnakTypeSelector.js',
 			],
@@ -24,14 +30,14 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'dataValues.DataValue',
+				'dataValues',
 				'jquery.event.special.eachchange',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.position',
 				'jquery.wikibase.entityselector',
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.ViewState',
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
+				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
@@ -41,35 +47,12 @@ return call_user_func( function() {
 				'wikibase-snakview-choosesnaktype',
 				'wikibase-snakview-snaktypeselector-value',
 				'wikibase-snakview-snaktypeselector-somevalue',
-				'wikibase-snakview-snaktypeselector-novalue'
-			],
-		],
-
-		'jquery.wikibase.snakview.variations' => $moduleTemplate + [
-			'scripts' => [
-				'snakview.variations.js',
-				'snakview.variations.Variation.js',
-				'snakview.variations.NoValue.js',
-				'snakview.variations.SomeValue.js',
-				'snakview.variations.Value.js',
-			],
-			'dependencies' => [
-				'dataValues',
-				'util.inherit',
-				'wikibase.datamodel',
-			],
-			'messages' => [
+				'wikibase-snakview-snaktypeselector-novalue',
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
 				'wikibase-snakview-variations-novalue-label',
 				'wikibase-snakview-variations-somevalue-label',
-			],
-		],
-
-		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + [
-			'scripts' => [
-				'snakview.ViewState.js',
 			],
 		],
 	];
