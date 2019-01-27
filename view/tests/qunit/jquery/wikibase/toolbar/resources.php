@@ -14,30 +14,14 @@ return call_user_func( function() {
 
 	$resources = [
 
-		'jquery.wikibase.addtoolbar.tests' => $moduleTemplate + [
+		'jquery.wikibase.changetoolbar.tests' => $moduleTemplate + [
 			'scripts' => [
 				'jquery.wikibase.addtoolbar.tests.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.addtoolbar',
-			],
-		],
-
-		'jquery.wikibase.edittoolbar.tests' => $moduleTemplate + [
-			'scripts' => [
 				'jquery.wikibase.edittoolbar.tests.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.edittoolbar',
-			],
-		],
-
-		'jquery.wikibase.removetoolbar.tests' => $moduleTemplate + [
-			'scripts' => [
 				'jquery.wikibase.removetoolbar.tests.js',
 			],
 			'dependencies' => [
-				'jquery.wikibase.removetoolbar',
+				'jquery.wikibase.changetoolbar',
 			],
 		],
 
