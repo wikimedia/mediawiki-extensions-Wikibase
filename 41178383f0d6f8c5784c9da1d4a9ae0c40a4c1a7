@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92eb902e_e150b7e4",
+        "filename": "data-access/src/GenericServices.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-28T17:06:21Z",
+      "side": 1,
+      "message": "Not true, especially when we are talking about db access to get page content etc, then a secondary wiki can use the nsid and slot etc, and those are all of the details that are needed.\n\nBut this definitely shouldn\u0027t be generic services.",
+      "range": {
+        "startLine": 78,
+        "startChar": 49,
+        "endLine": 78,
+        "endChar": 105
+      },
+      "revId": "41178383f0d6f8c5784c9da1d4a9ae0c40a4c1a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
