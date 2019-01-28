@@ -264,5 +264,7 @@
 	"apihelp-wbsetqualifier-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «{{int:group-bot}}».",
 	"apihelp-wbsetqualifier-example-1": "Усталёўвае кваліфікатар з зададзеным сьцьверджаньнем для ўласьцівасьці <samp>P1</samp> на радковае значэньне <var>GdyjxP8I6XB3</var>",
 	"apihelp-wbsetreference-description": "Стварае зноску ці ўсталёўвае значэньне існай.",
-	"apihelp-wbsetreference-summary": "Стварае зноску ці ўсталёўвае значэньне існай."
+	"apihelp-wbsetreference-summary": "Стварае зноску ці ўсталёўвае значэньне існай.",
+	"apihelp-wbsetreference-param-statement": "GUID, які вызначае сьцьверджаньне, для якога ўсталёўваецца крыніца",
+	"apihelp-wbsetreference-param-snaks": "Снэкі, да якіх вызначыць крыніцы. JSON-аб’ект з ідэнтыфікатарамі ўласьцівасьці, якія паказваць на масівы, што ўтрымліваюць снэкі для гэтай уласьцівасьці"
 }
