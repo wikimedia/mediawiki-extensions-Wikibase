@@ -15,7 +15,7 @@
 	"wikibase-itemdisambiguation-nothing-found": "Mit der vorherigen Suche konnte kein Datenobjekt ermittelt werden. Bitte verfeinern Sie die Abfrage.",
 	"wikibase-itemdisambiguation-create": "Sie können auch [$1 ein Datenobjekt erstellen].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Die angegebene Sprachkennung ist dem System leider nicht bekannt. Bitte verwenden Sie eine gültige Kennung, wie bspw. „de“.",
-	"wikibase-setlabel-introfull": "Sie legen die Bezeichnung für [[$1]] in der Sprache $2 fest.",
+	"wikibase-setlabel-introfull": "Sie legen die Bezeichnung für [[:$1]] in der Sprache $2 fest.",
 	"wikibase-setlabel-intro": "Dieses Formular ermöglicht es Ihnen, die Bezeichnungen eines Objektes festzulegen. Sie müssen eine Kennung für dieses Objekt (z. B. „Q23“), einen Sprachcode (z. B. „de“) und die festzulegende Bezeichnung angeben.",
 	"wikibase-noentity": "Dieser Datensatz ist nicht vorhanden. Sie können die <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden, was mit ihm passiert ist.",
 	"wikibase-noentity-createone": "Sie können auch [[$1|einen neuen erstellen]]."

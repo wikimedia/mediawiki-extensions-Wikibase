@@ -67,7 +67,7 @@
 	"wikibase-empty-undo": "Ne može se ništa poništiti.",
 	"wikibase-undo-revision-error": "Poništavanje nije uspjelo",
 	"wikibase-undo-samerev": "Morate navesti dvije različite izmjene da biste poništili izmjenu.",
-	"wikibase-undo-badpage": "Neispravna izmjena: Izmjena $2 ne pripada stranici [[$1]].",
+	"wikibase-undo-badpage": "Neispravna izmjena: Izmjena $2 ne pripada stranici [[:$1]].",
 	"wikibase-undo-firstrev": "Nije bilo moguće poništiti pravljenje stranice",
 	"wikibase-disambiguation-title": "Čvor za \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nova stavka $1 napravljena je i preusmjerena na ovu stranicu. Nazad na $2.",
