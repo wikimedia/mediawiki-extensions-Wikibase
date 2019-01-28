@@ -70,7 +70,7 @@ class EntityUsageTable {
 	 * @param int $batchSize Batch size for database queries on the entity usage table, including
 	 *  INSERTs, SELECTs, and DELETEs. Defaults to 100.
 	 * @param string|null $tableName defaults to wbc_entity_usage
-	 * @param int $addUsagesBatchSize Batch size for adding entity usage records
+	 * @param int $addUsagesBatchSize Batch size for adding entity usage records. Can also be set after construction.
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -480,6 +480,8 @@ class EntityUsageTable {
 	}
 
 	/**
+	 * Set the batch size for adding entity usage records.
+	 * This can also be set in the constructor.
 	 * @param int $addUsagesBatchSize
 	 */
 	public function setAddUsagesBatchSize( $addUsagesBatchSize ) {
