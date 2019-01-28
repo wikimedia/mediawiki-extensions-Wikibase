@@ -25,6 +25,7 @@ class EntityTermsViewFactoryTest extends TestCase {
 			->newEntityTermsView(
 				new Item( new ItemId( 'Q42' ) ),
 				Language::factory( 'en' ),
+				new LanguageFallbackChain( [] ),
 				new LanguageFallbackChain( [] )
 			);
 
@@ -36,6 +37,7 @@ class EntityTermsViewFactoryTest extends TestCase {
 			->newEntityTermsView(
 				new Item( new ItemId( 'Q42' ) ),
 				Language::factory( 'en' ),
+				new LanguageFallbackChain( [] ),
 				new LanguageFallbackChain( [] ),
 				true
 			);

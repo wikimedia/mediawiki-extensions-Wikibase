@@ -30,6 +30,7 @@ class EntityTermsViewFactory {
 	 * @param EntityDocument $entity
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
+	 * @param LanguageFallbackChain $userLanguages - user-specific, likely derived from Babel preferences etc.
 	 * @param bool $useTermbox
 	 *
 	 * @return CacheableEntityTermsView
@@ -38,9 +39,10 @@ class EntityTermsViewFactory {
 		EntityDocument $entity,
 		Language $language,
 		LanguageFallbackChain $fallbackChain,
+		LanguageFallbackChain $userLanguages,
 		$useTermbox = false
 	) {
-		return $useTermbox ? $this->newTermboxView( $language, $fallbackChain )
+		return $useTermbox ? $this->newTermboxView( $language, $userLanguages )
 			: $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
 	}
 
