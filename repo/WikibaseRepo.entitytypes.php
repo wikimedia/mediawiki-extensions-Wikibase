@@ -75,6 +75,8 @@ return [
 						$entity,
 						$language,
 						$fallbackChain,
+						$wikibaseRepo->getLanguageFallbackChainFactory()
+							->newFromContext( RequestContext::getMain() ),
 						TermboxFlag::getInstance()->shouldRenderTermbox()
 					)
 			);
@@ -237,6 +239,8 @@ return [
 						$entity,
 						$language,
 						$fallbackChain,
+						$wikibaseRepo->getLanguageFallbackChainFactory()
+							->newFromContext( RequestContext::getMain() ),
 						TermboxFlag::getInstance()->shouldRenderTermbox()
 					)
 			);
