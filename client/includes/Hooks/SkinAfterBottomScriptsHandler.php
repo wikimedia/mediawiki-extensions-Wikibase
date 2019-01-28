@@ -135,9 +135,9 @@ class SkinAfterBottomScriptsHandler {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
 			return null;
 		}
+
 		/** @suppress PhanUndeclaredStaticMethod Static call to undeclared method */
-		$image = \PageImages::getPageImage( $title );
-		return $image ? $image : null;
+		return \PageImages::getPageImage( $title ) ?: null;
 	}
 
 	/**

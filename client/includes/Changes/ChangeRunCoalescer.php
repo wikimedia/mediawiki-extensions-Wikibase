@@ -182,7 +182,7 @@ class ChangeRunCoalescer {
 		//     instead of re-calculating.
 		$change = $this->changeFactory->newFromUpdate(
 			$parentRev ? EntityChange::UPDATE : EntityChange::ADD,
-			$parentRev === null ? null : $parentRev->getEntity(),
+			$parentRev ? $parentRev->getEntity() : null,
 			$entityRev->getEntity()
 		);
 
