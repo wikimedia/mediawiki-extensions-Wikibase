@@ -1911,7 +1911,7 @@ class WikibaseRepo {
 			new WikiPagePropertyOrderProvider(
 				Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' )
 			),
-			wfGetMainCache()
+			ObjectCache::getLocalClusterInstance()
 		);
 
 		return new ViewFactory(
