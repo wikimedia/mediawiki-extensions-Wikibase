@@ -218,6 +218,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 	 * @dataProvider settingsProvider
 	 */
 	public function testDefaults( array $settings, array $wg, $repoIsLocal, $expected ) {
+		$this->markTestSkipped( 'flaky, see T214761' );
 		$this->setMwGlobals( $wg );
 
 		$defaults = include WBC_DIR . '/config/WikibaseClient.default.php';
