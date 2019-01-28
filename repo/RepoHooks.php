@@ -576,8 +576,8 @@ final class RepoHooks {
 
 			// XXX FIXME: ApiEditPage doesn't expose the slot, but this 'magically' works if the edit is
 			// to a MAIN slot and the entity is stored in a non-MAIN slot, because it falls back.
-			// To be done properly once T200570 is done in MediaWiki itself
-			$slot = $params['slot'] ?? SlotRecord::MAIN;
+			// To be verified that this keeps working once T200570 is done in MediaWiki itself.
+			$slots = $params['slots'] ?? [ SlotRecord::MAIN ];
 
 			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 			$entityTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
@@ -593,7 +593,7 @@ final class RepoHooks {
 
 				if (
 					$handler->getEntityNamespace() === $namespace &&
-					$handler->getEntitySlotRole() === $slot
+					in_array( $handler->getEntitySlotRole(), $slots, true )
 				) {
 					// XXX: This is most probably redundant with setting
 					// ContentHandler::supportsDirectApiEditing to false.
