@@ -37,6 +37,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
+if ( defined( 'WBC_VERSION' ) ) {
+	throw new \Exception( 'client file loaded twice?' );
+}
+
 define( 'WBC_VERSION', '0.5 alpha' );
 
 // Needs to be 1.26c because version_compare() works in confusing ways.

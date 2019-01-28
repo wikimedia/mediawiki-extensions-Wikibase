@@ -35,6 +35,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+if ( defined( 'WBL_VERSION' ) ) {
+	throw new \Exception( 'lib file loaded twice?' );
+}
+
 // Needs to be 1.26c because version_compare() works in confusing ways.
 if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
