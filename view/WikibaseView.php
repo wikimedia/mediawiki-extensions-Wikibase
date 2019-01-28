@@ -4,6 +4,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+if ( defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+	throw new \Exception( 'view file loaded twice?' );
+}
+
 define( 'WIKIBASE_VIEW_VERSION', '0.1-dev' );
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded

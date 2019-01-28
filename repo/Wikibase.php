@@ -35,6 +35,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+if ( defined( 'WB_VERSION' ) ) {
+	throw new \Exception( 'repo file loaded twice?' );
+}
+
 define( 'WB_VERSION', '0.5 alpha' );
 
 // Needs to be 1.31c because version_compare() works in confusing ways.
