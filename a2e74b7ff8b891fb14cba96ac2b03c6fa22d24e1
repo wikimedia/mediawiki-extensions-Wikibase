@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6cc50540_7f58de0e",
+        "filename": "data-access/src/SingleEntitySourceServices.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-29T15:28:48Z",
+      "side": 1,
+      "message": "it would be quite nice (for testing reasons) to just inject a factory that could be called to create things like the entitymetadataccessor etc.",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 1
+      },
+      "revId": "a2e74b7ff8b891fb14cba96ac2b03c6fa22d24e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14f53818_417f70ef",
         "filename": "data-access/src/SingleEntitySourceServices.php",
         "patchSetId": 6
