@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ec2844_6c9a8af6",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-01-29T10:11:59Z",
+      "side": 1,
+      "message": "Can you perhaps add a blank line before this? I’m worried that someone might add extra initialization code at the end of this function which wouldn’t run if we return early here.",
+      "revId": "fc3e5965cc604460f1a677a401a892a574ed6eae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
