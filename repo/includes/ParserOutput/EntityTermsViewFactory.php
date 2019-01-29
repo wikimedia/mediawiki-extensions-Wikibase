@@ -84,6 +84,14 @@ class EntityTermsViewFactory {
 		);
 	}
 
+	/**
+	 * Note that $fallbackChain passed here does not include any user-specified languages, such as
+	 * their Babel preferences. This is because the objects created from this factory are assumed to
+	 * write into ParserOutput which should not include any user-specific markup.
+	 *
+	 * See BabelUserLanguageLookup or LanguageFallbackChainFactory::newFromContext for getting the
+	 * list of preferred languages for the user.
+	 */
 	private function newTermboxView( Language $language, LanguageFallbackChain $fallbackChain ) {
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 
