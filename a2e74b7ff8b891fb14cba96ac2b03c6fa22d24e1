@@ -22,6 +22,30 @@
       "revId": "a2e74b7ff8b891fb14cba96ac2b03c6fa22d24e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95595c5e_5ed9a422",
+        "filename": "data-access/src/SingleEntitySourceServices.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-29T12:55:54Z",
+      "side": 1,
+      "message": "But that is indeed okay, as the service only purges its own MapCacheLRU cache. If we used a different cache here it would be another issue though. I\u0027ll add a note.",
+      "parentUuid": "14f53818_417f70ef",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 2
+      },
+      "revId": "a2e74b7ff8b891fb14cba96ac2b03c6fa22d24e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
