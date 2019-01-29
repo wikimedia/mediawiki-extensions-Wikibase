@@ -8,8 +8,21 @@ use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikimedia\Assert\Assert;
 
 /**
+ * An EntityRevisionLookup that dispatches by entity type to inner EntityRevisionLookups.
+ * If no lookup is registered for the entity type the the lookup will fail in an un exceptional
+ * way.
+ *
  * TODO Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup is similar, but a bit different,
  * also conceptually. The other class could maybe be renamed or so?
+ *
+ * TODO this has been introduced into data-access with a couple of points that still bind to
+ * wikibase lib and other parts of mediawiki, these should be cleaned up:
+ *  - Wikibase\Lib\Store\EntityRevisionLookup;
+ *   - Wikibase\Lib\Store\RevisionedUnresolvedRedirectException
+ *   - Wikibase\Lib\Store\StorageException
+ *    - MWException
+ *    - Status
+ *  - Wikibase\Lib\Store\LatestRevisionIdResult;
  *
  * @license GPL-2.0-or-later
  */
