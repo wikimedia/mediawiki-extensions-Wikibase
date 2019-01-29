@@ -119,24 +119,15 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.statementgrouplabelscroll' => $moduleTemplate + [
+		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
+				'jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
 			],
 			'dependencies' => [
 				'jquery.ui.position',
 				'jquery.ui.widget',
-			],
-		],
-
-		'jquery.wikibase.statementgrouplistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
-			],
-			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
-				'jquery.ui.widget',
-				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.StatementGroupSet',
 			],
@@ -518,6 +509,12 @@ return call_user_func( function() {
 
 		'jquery.wikibase.snakview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/snakview/snakview.variations.js',
+				'jquery/wikibase/snakview/snakview.variations.Variation.js',
+				'jquery/wikibase/snakview/snakview.variations.NoValue.js',
+				'jquery/wikibase/snakview/snakview.variations.SomeValue.js',
+				'jquery/wikibase/snakview/snakview.variations.Value.js',
+				'jquery/wikibase/snakview/snakview.ViewState.js',
 				'jquery/wikibase/snakview/snakview.js',
 				'jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
 			],
@@ -531,47 +528,25 @@ return call_user_func( function() {
 				'jquery.ui.position',
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.ViewState',
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
 				'wikibase.datamodel',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
+				'dataValues',
+				'util.inherit',
 			],
 			'messages' => [
 				'wikibase-snakview-property-input-placeholder',
 				'wikibase-snakview-choosesnaktype',
 				'wikibase-snakview-snaktypeselector-value',
 				'wikibase-snakview-snaktypeselector-somevalue',
-				'wikibase-snakview-snaktypeselector-novalue'
-			],
-		],
-
-		'jquery.wikibase.snakview.variations' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/snakview/snakview.variations.js',
-				'jquery/wikibase/snakview/snakview.variations.Variation.js',
-				'jquery/wikibase/snakview/snakview.variations.NoValue.js',
-				'jquery/wikibase/snakview/snakview.variations.SomeValue.js',
-				'jquery/wikibase/snakview/snakview.variations.Value.js',
-			],
-			'dependencies' => [
-				'dataValues',
-				'util.inherit',
-				'wikibase.datamodel',
-			],
-			'messages' => [
+				'wikibase-snakview-snaktypeselector-novalue',
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
 				'wikibase-snakview-variations-novalue-label',
 				'wikibase-snakview-variations-somevalue-label',
-			],
-		],
-
-		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/snakview/snakview.ViewState.js',
 			],
 		],
 
