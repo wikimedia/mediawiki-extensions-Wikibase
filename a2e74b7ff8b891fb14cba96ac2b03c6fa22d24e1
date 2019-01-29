@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14f53818_417f70ef",
+        "filename": "data-access/src/SingleEntitySourceServices.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-29T12:54:01Z",
+      "side": 1,
+      "message": "These methods have a situation where if entityMetaDataAccessor has not been set, then nothing will happen, and it will be silent, which is probably not intended.",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 2
+      },
+      "revId": "a2e74b7ff8b891fb14cba96ac2b03c6fa22d24e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
