@@ -219,6 +219,12 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 				'target-is-incompatible',
 				[]
 			],
+			'target and source are the same' => [
+				new ItemId( 'Q11' ),
+				new ItemId( 'Q11' ),
+				'source-and-target-are-the-same',
+				[]
+			],
 
 			'source not empty' => [
 				new ItemId( 'Q12' ),

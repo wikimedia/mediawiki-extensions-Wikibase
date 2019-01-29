@@ -357,6 +357,7 @@
 	"wikibase-redirect-no-such-entity": "Error message shown when trying to create a redirect but the given Entity does not exist.\nParameters:\n* $1: the ID of the entity",
 	"wikibase-redirect-cant-load-entity-content": "Error message shown when one of the items involved in the merge could not be loaded. This likely indicates some kind of database corruption.",
 	"wikibase-redirect-target-is-incompatible": "Error message shown when redirect is attempted between incompatible entity types",
+	"wikibase-redirect-source-and-target-are-the-same": "Error message shown when an entity is being redirected to itself",
 	"wikibase-redirect-target-is-redirect": "Error message shown when target of redirect is a redirect.\nParameters:\n* $1: the ID of the entity that is the target of the redirect",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "Error message shown when redirect fails because of edit filter hook",
 	"wikibase-redirect-cant-redirect": "Error message shown when redirect fails because of technical problems",
