@@ -37,6 +37,15 @@ class EntityRedirectTest extends \PHPUnit_Framework_TestCase {
 		new EntityRedirect( $entityId, $targetId );
 	}
 
+	public function testConstruction_sameEntity() {
+		$this->expectException( InvalidArgumentException::class );
+
+		$entityId = new ItemId( 'Q123' );
+		$targetId = new ItemId( 'Q123' );
+
+		new EntityRedirect( $entityId, $targetId );
+	}
+
 	public function equalsProvider() {
 		$q123 = new ItemId( 'Q123' );
 		$q345 = new ItemId( 'Q345' );

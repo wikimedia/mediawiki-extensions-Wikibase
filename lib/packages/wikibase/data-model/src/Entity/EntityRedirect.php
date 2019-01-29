@@ -37,6 +37,10 @@ class EntityRedirect {
 			);
 		}
 
+		if ( $entityId->getSerialization() === $targetId->getSerialization() ) {
+			throw new InvalidArgumentException( '$entityId and $targetId can not be the same.' );
+		}
+
 		$this->entityId = $entityId;
 		$this->targetId = $targetId;
 	}
