@@ -108,6 +108,7 @@ abstract class EntityRedirectCreationInteractor {
 
 		$this->checkExistsNoRedirect( $toId );
 		$this->checkCanCreateRedirect( $fromId );
+		$this->checkSourceAndTargetNotTheSame( $fromId, $toId );
 
 		$summary = new Summary( 'wbcreateredirect' );
 		$summary->addAutoCommentArgs( $fromId->getSerialization(), $toId->getSerialization() );
@@ -212,6 +213,15 @@ abstract class EntityRedirectCreationInteractor {
 			throw new RedirectCreationException(
 				'Incompatible entity types',
 				'target-is-incompatible'
+			);
+		}
+	}
+
+	private function checkSourceAndTargetNotTheSame( EntityId $fromId, EntityId $toId ) {
+		if ( $fromId->getSerialization() === $toId->getSerialization() ) {
+			throw new RedirectCreationException(
+				'Cannot redirect an entity to itself.',
+				'source-and-target-are-the-same'
 			);
 		}
 	}
