@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef33be4c_77b8cf5c",
+        "filename": "data-access/src/ByTypeDispatchingEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-01-29T12:10:53Z",
+      "side": 1,
+      "message": "typo?",
+      "range": {
+        "startLine": 12,
+        "startChar": 81,
+        "endLine": 12,
+        "endChar": 95
+      },
+      "revId": "8c9e1f0a074c2bb57c3a920f035821efae1be1bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
