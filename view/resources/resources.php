@@ -518,6 +518,7 @@ return call_user_func( function() {
 
 		'jquery.wikibase.snakview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/snakview/snakview.ViewState.js',
 				'jquery/wikibase/snakview/snakview.js',
 				'jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
 			],
@@ -531,7 +532,6 @@ return call_user_func( function() {
 				'jquery.ui.position',
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.ViewState',
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
 				'wikibase.datamodel',
@@ -566,12 +566,6 @@ return call_user_func( function() {
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
 				'wikibase-snakview-variations-novalue-label',
 				'wikibase-snakview-variations-somevalue-label',
-			],
-		],
-
-		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/snakview/snakview.ViewState.js',
 			],
 		],
 
