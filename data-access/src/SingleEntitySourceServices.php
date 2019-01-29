@@ -23,8 +23,15 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\WikibaseSettings;
+use Wikimedia\Assert\Assert;
 
 /**
+ * Collection of services for a single EntitySource.
+ * Some GenericServices are injected alongside some more specific services for the EntitySource.
+ * Various logic then pulls these services together into more composed services.
+ *
+ * TODO fixme, lots of things in this class bind to wikibase lib and mediawiki directly.
+ *
  * @license GPL-2.0-or-later
  */
 class SingleEntitySourceServices implements EntityStoreWatcher {
@@ -72,6 +79,17 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks
 	) {
+		Assert::parameterElementType(
+			'callable',
+			$deserializerFactoryCallbacks,
+			'$deserializerFactoryCallbacks'
+		);
+		Assert::parameterElementType(
+			'callable',
+			$entityMetaDataAccessorCallbacks,
+			'$entityMetaDataAccessorCallbacks'
+		);
+
 		$this->genericServices = $genericServices;
 		$this->entityIdParser = $entityIdParser;
 		$this->dataValueDeserializer = $dataValueDeserializer;
@@ -170,6 +188,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	public function entityUpdated( EntityRevision $entityRevision ) {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
+
+		// Only notify entityMetaDataAccessor if the service is created, as the EntityStoreWatcher
+		// is only used ofr purging of an in process cache.
 		if ( $this->entityMetaDataAccessor !== null ) {
 			$this->entityMetaDataAccessor->entityUpdated( $entityRevision );
 		}
@@ -178,6 +199,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
+
+		// Only notify entityMetaDataAccessor if the service is created, as the EntityStoreWatcher
+		// is only used ofr purging of an in process cache.
 		if ( $this->entityMetaDataAccessor !== null ) {
 			$this->entityMetaDataAccessor->redirectUpdated( $entityRedirect, $revisionId );
 		}
@@ -186,6 +210,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	public function entityDeleted( EntityId $entityId ) {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
+
+		// Only notify entityMetaDataAccessor if the service is created, as the EntityStoreWatcher
+		// is only used ofr purging of an in process cache.
 		if ( $this->entityMetaDataAccessor !== null ) {
 			$this->entityMetaDataAccessor->entityDeleted( $entityId );
 		}
