@@ -45,6 +45,54 @@
       "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51d41209_91b567be",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-01-30T12:01:34Z",
+      "side": 1,
+      "message": "That\u0027s a good point. What do you suggest?\n\nIntuitively it seems wrong to me to cache the PO in case the service is down and cannot produce a useful result. Throwing an error also seems a bit drastic.\n\nWhat we already do as a fallback mechanism in case something goes wrong with the request (i.e. status !\u003d 200) is to return an empty element so that the client-side Termbox can still work. This will of course only be helpful if the client has JavaScript enabled. I could see us falling back to something slightly more helpful than an empty element, maybe e.g. a label + description in the interface language?",
+      "parentUuid": "93d36c4c_8bf18308",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 114
+      },
+      "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f302e63_4db99236",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-01-30T12:01:34Z",
+      "side": 1,
+      "message": "Added a sentence for that!",
+      "parentUuid": "86db4b15_397dddc5",
+      "range": {
+        "startLine": 19,
+        "startChar": 114,
+        "endLine": 19,
+        "endChar": 282
+      },
+      "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
