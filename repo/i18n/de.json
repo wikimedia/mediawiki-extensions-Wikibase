@@ -333,6 +333,7 @@
 	"wikibase-redirect-no-such-entity": "Das Objekt $1 konnte nicht gefunden werden",
 	"wikibase-redirect-cant-load-entity-content": "Auf den Inhalt kann nicht zugegriffen werden. Die Version könnte gelöscht worden sein.",
 	"wikibase-redirect-target-is-incompatible": "Inkompatible Objekttypen",
+	"wikibase-redirect-source-and-target-are-the-same": "Es ist nicht möglich, ein Objekt auf sich selbst weiterzuleiten.",
 	"wikibase-redirect-target-is-redirect": "Das Objekt $1 ist eine Weiterleitung",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook hat die Erstellung der Weiterleitung gestoppt",
 	"wikibase-redirect-cant-redirect": "Die Erstellung der Weiterleitung ist aufgrund technischer Probleme fehlgeschlagen",

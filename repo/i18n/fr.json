@@ -358,6 +358,7 @@
 	"wikibase-redirect-no-such-entity": "Impossible de trouver l’entité $1",
 	"wikibase-redirect-cant-load-entity-content": "Impossible d’accéder au contenu, la révision a peut-être été supprimée.",
 	"wikibase-redirect-target-is-incompatible": "Types d’entité incompatibles",
+	"wikibase-redirect-source-and-target-are-the-same": "Il n’est pas possible de rediriger une entité vers elle-même",
 	"wikibase-redirect-target-is-redirect": "L’entité $1 est une redirection",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook a arrêté la création de redirections",
 	"wikibase-redirect-cant-redirect": "La création de redirection a échoué du fait de problèmes techniques",

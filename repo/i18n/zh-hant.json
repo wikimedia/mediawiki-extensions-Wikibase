@@ -331,6 +331,7 @@
 	"wikibase-redirect-no-such-entity": "找不到實體 $1",
 	"wikibase-redirect-cant-load-entity-content": "無法存取內容，修訂可能已被移除。",
 	"wikibase-redirect-target-is-incompatible": "不相容的實體類型",
+	"wikibase-redirect-source-and-target-are-the-same": "實體不能重新導向到它本身",
 	"wikibase-redirect-target-is-redirect": "實體 $1 是重新導向",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook 已停止重新導向建立",
 	"wikibase-redirect-cant-redirect": "出於技術問題，重新導向建立失敗",
