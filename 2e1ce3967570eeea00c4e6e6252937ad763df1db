@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b8c5770_b3f85a17",
+        "filename": "data-access/tests/phpunit/MultipleEntitySourceServicesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-30T16:17:17Z",
+      "side": 1,
+      "message": "this is not that nice, as it here encodes the information on the source name, which is defined in newMultiple... method",
+      "range": {
+        "startLine": 34,
+        "startChar": 56,
+        "endLine": 34,
+        "endChar": 63
+      },
+      "revId": "2e1ce3967570eeea00c4e6e6252937ad763df1db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
