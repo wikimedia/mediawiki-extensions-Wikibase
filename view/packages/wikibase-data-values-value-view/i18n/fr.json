@@ -10,7 +10,8 @@
 			"Verdy p",
 			"Wladek92",
 			"Yasten",
-			"Hashar"
+			"Hashar",
+			"Alno"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La manipulation des valeurs de données « $1 » n’est pas encore prise en charge.",
@@ -27,6 +28,6 @@
 	"valueview-expertextender-languageselector-label": "Langue (obligatoire) :",
 	"valueview-expertextender-unitsuggester-label": "Unité (facultatif) :",
 	"valueview-preview-label": "sera affiché comme :",
-	"valueview-preview-novalue": "aucune valeur valide reconnu",
+	"valueview-preview-novalue": "aucune valeur valide reconnue",
 	"valueview-listrotator-manually": "définir manuellement"
 }
