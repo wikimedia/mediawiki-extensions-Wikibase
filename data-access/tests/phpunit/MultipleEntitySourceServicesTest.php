@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * @covers \Wikibase\DataAccess\MultipleEntitySourceServices
@@ -21,6 +22,34 @@ use Wikibase\Lib\Store\EntityRevision;
 class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 
 	use \PHPUnit4And6Compat;
+
+	public function testGetEntityRevisionLookupReturnsLookupThatReturnsExpectedRevisionData() {
+		$itemRevisionData = 'item revision data';
+		$itemRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$itemRevisionLookup->method( 'getEntityRevision' )
+			->willReturn( $itemRevisionData );
+
+		$itemServices = $this->createMock( SingleEntitySourceServices::class );
+		$itemServices->method( 'getEntityRevisionLookup' )
+			->willReturn( $itemRevisionLookup );
+
+		$propertyServices = $this->createMock( SingleEntitySourceServices::class );
+		$propertyServices->method( 'getEntityRevisionLookup' )
+			->willReturn( $this->newThrowingEntityRevisionLookup() );
+
+		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
+
+		$lookup = $services->getEntityRevisionLookup();
+
+		$this->assertSame( $itemRevisionData, $lookup->getEntityRevision( new ItemId( 'Q123' ) ) );
+	}
+
+	private function newThrowingEntityRevisionLookup() {
+		$propertyRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$propertyRevisionLookup->method( $this->anything() )
+			->willThrowException( new \LogicException( 'This service should not be used' ) );
+		return $propertyRevisionLookup;
+	}
 
 	public function testEntityFromKnownSourceUpdated_entityUpdatedPassedToRelevantServiceContainer() {
 		$itemRevision = new EntityRevision( new Item( new ItemId( 'Q1' ) ) );
