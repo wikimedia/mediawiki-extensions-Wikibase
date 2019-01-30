@@ -99,7 +99,7 @@
 	"wikibase-otherprojects-beta-description": "Lisab külgribale alaosa \"{{int:wikibase-otherprojects}}\", mis sisaldab Vikiandmetest pärit linke teistesse Wikimedia projektidesse.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Ühendamine|Ühendamised}} Vikiandmetega",
 	"echo-pref-tooltip-wikibase-action": "Teavita mind, kui keegi ühendab minu alustatud lehekülje Vikiandmete üksusega.",
-	"notification-header-page-connection": "Lehekülg \"<strong>$3</strong>\" {{GENDER:$2|ühendati}} {{PLURAL:$4|-1=Vikiandmete üksusega|Vikiandmete üksusega $4}}, mis sisaldab teemasse puutuvaid andmeid.",
+	"notification-header-page-connection": "Lehekülg \"<strong>$3</strong>\" {{GENDER:$2|ühendati}} {{PLURAL:$4|-1=Vikiandmete üksusega|Vikiandmete üksusega $4}}, kuhu saab koondada teemaga seotud andmeid.",
 	"notification-bundle-header-page-connection": "\"<strong>$3</strong>\" ja {{PLURAL:$4|veel üks lehekülg|veel $4 lehekülge|100=üle 99 muu lehekülje}} {{GENDER:$2|ühendati}} Vikiandmete üksustega.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vaata}} üksust",
 	"notification-subject-page-connection": "Lehekülg, mida {{GRAMMAR:inessive|{{SITENAME}}}} {{GENDER:$3|alustasid}}, {{GENDER:$2|ühendati}} Vikiandmete üksusega.",

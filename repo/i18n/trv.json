@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Iyuqciyang"
+		]
+	},
+	"wikibase-cancel": "pkungat",
+	"wikibase-add": "Mrana bgurah",
+	"wikibase-entitytermsforlanguagelistview-description": "Pgkla rmngaw",
+	"wikibase-label-empty": "Ini ptsmui rqci pnskraya na",
+	"wikibase-description-empty": "Ini pgkla pusu na",
+	"wikibase-diffview-rank-normal": "hmut pnsnakan hnigan",
+	"wikibase-diffview-description": "Pgkla rmngaw",
+	"wikibase-sitelink-page-edit-placeholder": "ruwahan patas",
+	"wikibase-sitelinks-special": "Duma daka kaji qnawal",
+	"wikibase-remove": "hdlun pkungat",
+	"wikibase-move-up": "hdlun isil mkquri baraw",
+	"wikibase-move-down": "hdlun isil mquri truma",
+	"wikibase-statementview-rank-normal": "hmut pnsnakan hnigan",
+	"wikibase-entityselector-more": "knlala",
+	"wikibase-itembytitle-lookup-page": "ruwahan patas:",
+	"wikibase-itembytitle-submit": "miying",
+	"wikibase-gotolinkedpage-submit": "muda",
+	"wikibase-itemdisambiguation-submit": "miying",
+	"wikibase-newentity-description": "Pgkla rmngaw:",
+	"wikibase-setlabeldescriptionaliases-description-label": "Pgkla rmngaw:"
+}

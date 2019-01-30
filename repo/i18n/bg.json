@@ -117,6 +117,7 @@
 	"wikibase-setlabeldescriptionaliases-label-label": "Етикети:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Описание:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Псевдоними:",
+	"wikibase-setsitelink-introfull": "Задавате уики връзката $2 на [[:$1]].",
 	"wikibase-setsitelink-not-badge": "Елемент $1 не е значка.",
 	"wikibase-modifyterm-language": "Езиков код:",
 	"special-mergeitems": "Сливане на два обекта",

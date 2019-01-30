@@ -207,7 +207,7 @@
 	"wikibase-setlabel-label": "레이블:",
 	"wikibase-setlabel-submit": "레이블 설정",
 	"special-setdescription": "설명 설정",
-	"wikibase-setdescription-introfull": "[[:$1]]에 대한 $2에 설명을 설정합니다.",
+	"wikibase-setdescription-introfull": "[[:$1]]에 대한 $2의 설명을 설정합니다.",
 	"wikibase-setdescription-intro": "이 양식은 개체의 설명을 설정할 수 있습니다. 개체(예를 들어 Q23), 언어 코드(예를 들어 \"ko\")와 설정하는 설명의 ID를 제공해야 합니다.",
 	"wikibase-setdescription-label": "설명:",
 	"wikibase-setdescription-submit": "설명 설정",

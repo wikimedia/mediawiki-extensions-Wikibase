@@ -331,6 +331,7 @@
 	"wikibase-redirect-no-such-entity": "تعذر العثور على الكيان $1",
 	"wikibase-redirect-cant-load-entity-content": "لا يمكن الوصول إلى المحتوى; قد تكون المراجعة قد حُذِفت.",
 	"wikibase-redirect-target-is-incompatible": "أنواع الكيانات غير المتوافقة",
+	"wikibase-redirect-source-and-target-are-the-same": "لا يمكن تحويل الكيان إلى نفسه",
 	"wikibase-redirect-target-is-redirect": "الكيان $1 تحويلة",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "أوقف خطاف مرشح الإساءة إعادة إنشاء التحويلات",
 	"wikibase-redirect-cant-redirect": "فشلت إعادة إنشاء التحويلة بسبب مشاكل فنية",
