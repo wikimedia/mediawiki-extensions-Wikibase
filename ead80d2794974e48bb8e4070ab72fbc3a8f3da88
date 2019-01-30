@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93d36c4c_8bf18308",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-30T10:43:00Z",
+      "side": 1,
+      "message": "It needs to be decided here what to put in the ParserOutput or how to handle the situation of the SSR service being down?\n\n - Some sort of fallback ? \n - Don\u0027t cache in the PO in that situation?\n - Just throw an error all the way down the request?",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 114
+      },
+      "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86db4b15_397dddc5",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-30T10:43:00Z",
+      "side": 1,
+      "message": "It would be worth noting here that a fallback to the cached output can be used if the service is down or too slow.",
+      "range": {
+        "startLine": 19,
+        "startChar": 114,
+        "endLine": 19,
+        "endChar": 282
+      },
+      "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
