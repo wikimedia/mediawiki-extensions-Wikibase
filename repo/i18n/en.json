@@ -322,6 +322,7 @@
 	"wikibase-redirect-no-such-entity": "Could not find entity $1",
 	"wikibase-redirect-cant-load-entity-content": "Cannot access content, revision may be deleted.",
 	"wikibase-redirect-target-is-incompatible": "Incompatible entity types",
+	"wikibase-redirect-source-and-target-are-the-same": "It's not possible to redirect an entity to itself",
 	"wikibase-redirect-target-is-redirect": "Entity $1 is a redirect",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook stopped redirect creation",
 	"wikibase-redirect-cant-redirect": "Redirect creation failed due to technical problems",
