@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "e991678b_b6d32994",
+        "filename": "data-access/tests/phpunit/SingleEntitySourceServicesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-30T17:17:09Z",
+      "side": 1,
+      "message": "btw, do we need @group Wikibase here in those tests or not?\nI remember some tests in Wikibase shouting it should always be there. Or did I dream it?",
+      "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0046c85_d506eb90",
+        "filename": "data-access/tests/phpunit/SingleEntitySourceServicesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-30T17:17:09Z",
+      "side": 1,
+      "message": "I understand this is built with further additions to the class in mind, so I will just make a remark here that I\u0027d be happy to check at the end of the whole work whether this conditional assertion based on $expectSame is needed or not.\n\nI am personally not a friend of this kind of DRY application, but  I am fine as long as it serves a purpose.\nLet\u0027s see in 30 patches!",
+      "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ffede10_1aa3749e",
         "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 4
