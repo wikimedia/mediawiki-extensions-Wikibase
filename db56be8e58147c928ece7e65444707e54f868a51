@@ -22,6 +22,30 @@
       "revId": "db56be8e58147c928ece7e65444707e54f868a51",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "296e65ea_56267253",
+        "filename": "data-access/src/ByTypeDispatchingEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-30T18:05:48Z",
+      "side": 1,
+      "message": "right, so this already does that.\nAdded a tests which (hopefully) explicitly shows what is the behaviour.",
+      "parentUuid": "eb82b7ca_c570c6bc",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 49
+      },
+      "revId": "db56be8e58147c928ece7e65444707e54f868a51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

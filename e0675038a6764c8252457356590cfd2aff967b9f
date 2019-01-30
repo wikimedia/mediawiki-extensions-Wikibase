@@ -16,6 +16,24 @@
       "revId": "e0675038a6764c8252457356590cfd2aff967b9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fc2d2d3_b390708a",
+        "filename": "data-access/src/ByTypeDispatchingEntityInfoBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-30T18:05:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b7e3606_22b1ae11",
+      "revId": "e0675038a6764c8252457356590cfd2aff967b9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
