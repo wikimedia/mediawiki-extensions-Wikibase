@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ffede10_1aa3749e",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-01-30T17:10:29Z",
+      "side": 1,
+      "message": "hmm, the comment itself is not wrong, but that class is not the only place which makes such assumption I think.\n\nI remember discussing this with Daniel back in 2016/7, and the point was: if the service (like this accessor) has not been created prior some changes were made to entities it \"tracks\", the service should not be \"retro-actively\" be pinged about such changes once it is created. The idea is that the service has \"the fresh\" data on entities state once it is instantiated. Seems sensible to me.\n\nDid you have another understanding of EntityStoreWatcher before seeing this code? I mean, just to understand how unobvious this all might be (I vaguely remember I was struggling to grasp it myself as well).",
+      "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
