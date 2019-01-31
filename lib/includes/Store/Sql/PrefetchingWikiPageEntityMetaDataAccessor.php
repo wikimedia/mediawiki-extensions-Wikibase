@@ -120,6 +120,9 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	/**
 	 * @see EntityStoreWatcher::entityDeleted
 	 *
+	 * SingleEntitySourceServices assumes that this only needs to be called if the service has
+	 * been created as a MapCacheLRU is used internally.
+	 *
 	 * @param EntityId $entityId
 	 */
 	public function entityDeleted( EntityId $entityId ) {
@@ -129,6 +132,9 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	/**
 	 * @see EntityStoreWatcher::entityDeleted
 	 *
+	 * SingleEntitySourceServices assumes that this only needs to be called if the service has
+	 * been created as a MapCacheLRU is used internally.
+	 *
 	 * @param EntityRevision $entityRevision
 	 */
 	public function entityUpdated( EntityRevision $entityRevision ) {
@@ -137,6 +143,9 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 
 	/**
 	 * @see EntityStoreWatcher::redirectUpdated
+	 *
+	 * SingleEntitySourceServices assumes that this only needs to be called if the service has
+	 * been created as a MapCacheLRU is used internally.
 	 *
 	 * @param EntityRedirect $entityRedirect
 	 * @param int $revisionId
