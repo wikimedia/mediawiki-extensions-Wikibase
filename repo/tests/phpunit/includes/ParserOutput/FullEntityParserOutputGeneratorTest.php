@@ -8,6 +8,8 @@ use MediaWikiTestCase;
 use Psr\Log\NullLogger;
 use SpecialPage;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -223,7 +225,9 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				$entityIdParser,
 				new EntityIdComposer( [] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
-				new NullLogger()
+				new NullLogger(),
+				new UnusableEntitySource(),
+				new DataAccessSettings( 100, false, false, false )
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
@@ -460,7 +464,9 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 					}
 				] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
-				new NullLogger()
+				new NullLogger(),
+				new UnusableEntitySource(),
+				new DataAccessSettings( 100, false, false, false )
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
