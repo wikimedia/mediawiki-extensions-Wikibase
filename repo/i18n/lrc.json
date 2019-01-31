@@ -5,7 +5,8 @@
 			"Mogoeilor",
 			"Macofe",
 			"Ladsgroup",
-			"Beyronvan"
+			"Beyronvan",
+			"Lorestani"
 		]
 	},
 	"wikibase-entity-item": "قلم",
@@ -21,7 +22,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "زون",
 	"wikibase-label-empty": "هیچ ریترازی تا ایسه دیاری نکرده",
 	"wikibase-label-edit-placeholder": "دئن یه گل ریتراز",
-	"wikibase-description-empty": "تا ایساْ هیچ توزیهؽ دیاری نٱکردٱ",
+	"wikibase-description-empty": "تا ایساْ هیچ تۉزیهؽ دؽاری نٱکردٱ",
 	"wikibase-diffview-reference": "سرچشمه",
 	"wikibase-diffview-label": "ریتراز",
 	"wikibase-diffview-link": "هوم پیوندیا",
@@ -58,7 +59,7 @@
 	"wikibase-newentity-label": "ریتراز:",
 	"wikibase-newentity-submit": "راس كردن",
 	"special-setlabel": "میزوکاری ریتراز",
-	"wikibase-setlabel-introfull": "شما یه گل ریتراز د $2 سی [[:$1]] نیائیته.",
+	"wikibase-setlabel-introfull": "شما یاٛ ریتراز د $2 سی [[:$1]] نؽایتٱ",
 	"wikibase-setlabel-label": "ریتراز:",
 	"wikibase-setlabel-submit": "میزوکاری ری دیار",
 	"special-setsitelink": "یه گل هوم پیوند سیلجا بنیت",

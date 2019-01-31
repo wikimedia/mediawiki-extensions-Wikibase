@@ -314,6 +314,7 @@
 	"wikibase-redirect-origin-not-empty": "비어있는 엔티티 $1에 넘겨주기를 만들 수 없습니다",
 	"wikibase-redirect-no-such-entity": "$1 엔티티를 찾을 수 없습니다",
 	"wikibase-redirect-cant-load-entity-content": "내용에 접근할 수 없습니다. 판이 삭제된 것 같습니다.",
+	"wikibase-redirect-source-and-target-are-the-same": "엔티티를 자기 자신에게로 넘겨줄 수 없습니다",
 	"wikibase-redirect-target-is-redirect": "$1 엔티티는 넘겨주기입니다",
 	"wikibase-redirect-permissiondenied": "권한이 없습니다",
 	"special-mylanguagefallbackchain": "내 언어 폴백 체인",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Gott wisst",
 			"JJohnson1701",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Hogweard"
 		]
 	},
 	"wikibase-edit": "ādihtan",
@@ -12,5 +13,6 @@
 	"wikibase-description-empty": "Nǣnig gemearcung nis gīet gemearcod.",
 	"wikibase-sitelinks-special": "Ōðre webbstedas",
 	"wikibase-statementview-rank-normal": "Gewunelic hād",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|fruma|frumena}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|fruma|frumena}}",
+	"wikibase-redirect-source-and-target-are-the-same": "Hit is unmeaht to forþwisienne an þing to him sylfum"
 }

@@ -320,6 +320,7 @@
 	"wikibase-redirect-no-such-entity": "Nelze nalézt entitu $1",
 	"wikibase-redirect-cant-load-entity-content": "Nelze načíst obsah, revize mohla být smazána.",
 	"wikibase-redirect-target-is-incompatible": "Nekompatibilní typy entit",
+	"wikibase-redirect-source-and-target-are-the-same": "Entitu nelze přesměrovat samu na sebe",
 	"wikibase-redirect-target-is-redirect": "Entita $1 je přesměrování",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "Založení přesměrování zastavil EditFilterHook",
 	"wikibase-redirect-cant-redirect": "Vytvoření přesměrování se kvůli technickým potížím nezdařilo",
