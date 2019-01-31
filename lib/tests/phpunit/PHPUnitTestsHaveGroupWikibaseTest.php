@@ -36,6 +36,7 @@ class PHPUnitTestsHaveGroupWikibaseTest extends \PHPUnit\Framework\TestCase {
 	public function dirProvider() {
 		return [
 			[ 'client' ],
+			[ 'data-access' ],
 			[ 'lib' ],
 			[ 'repo' ],
 			[ 'view' ],
