@@ -5,6 +5,9 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 use InvalidArgumentException;
 use Psr\Log\NullLogger;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\NeverToBeUsedEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -34,6 +37,9 @@ use Wikipage;
  * @author Daniel Kinzler
  */
 class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
+
+	const REPOSITORY_PREFIX_BASED_FEDERATION = false;
+	const ENTITY_SOURCE_BASED_FEDERATION = true;
 
 	protected function setUp() {
 		parent::setUp();
@@ -191,7 +197,9 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				},
 			] ),
 			$this->getEntityNamespaceLookup(),
-			new NullLogger()
+			new NullLogger(),
+			new EntitySource( 'source', false, [] ),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION )
 		);
 	}
 
@@ -232,6 +240,8 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
+			new NeverToBeUsedEntitySource(),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
 			$databaseName,
 			$repositoryName
 		);
@@ -246,8 +256,29 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
+			new EntitySource( 'source', false, [] ),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
 			false,
 			''
+		);
+
+		$entityInfo = $builder->collectEntityInfo( [ $itemId, $propertyId ], [] );
+
+		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
+		$this->assertFalse( $entityInfo->hasEntityInfo( $propertyId ) );
+	}
+
+	public function testIgnoresEntityIdsFromOtherEntitySources() {
+		$itemId = new ItemId( 'Q1' );
+		$propertyId = new PropertyId( 'P2' );
+
+		$builder = new SqlEntityInfoBuilder(
+			new BasicEntityIdParser(),
+			$this->getIdComposer(),
+			$this->getEntityNamespaceLookup(),
+			new NullLogger(),
+			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ] ),
+			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
 		);
 
 		$entityInfo = $builder->collectEntityInfo( [ $itemId, $propertyId ], [] );
@@ -315,6 +346,8 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			] ),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
+			new EntitySource( 'source', false, [] ),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
 			false,
 			'foo'
 		);

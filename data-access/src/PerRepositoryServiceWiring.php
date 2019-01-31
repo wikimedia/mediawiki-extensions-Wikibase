@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Logger\LoggerFactory;
+use Wikibase\DataAccess\NeverToBeUsedEntitySource;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
@@ -39,6 +40,8 @@ return [
 			$services->getEntityIdComposer(),
 			$genericServices->getEntityNamespaceLookup(),
 			LoggerFactory::getInstance( 'Wikibase' ),
+			new NeverToBeUsedEntitySource(),
+			$settings,
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
