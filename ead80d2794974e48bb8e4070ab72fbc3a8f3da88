@@ -93,6 +93,30 @@
       "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4b8fc59_54339178",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-31T13:53:57Z",
+      "side": 1,
+      "message": "I guess the fallback needs to be discussed with product really to see what they want.\n\nYes caching when the service is down is a bad idea.\n\nAlso thinking around this same point, we could keep the old termbox in the PO and then rollout as a Beta feature only to logged in users overwriting what is in the termbox PO by default with the same method, oooh! :)",
+      "parentUuid": "51d41209_91b567be",
+      "range": {
+        "startLine": 19,
+        "startChar": 67,
+        "endLine": 19,
+        "endChar": 114
+      },
+      "revId": "ead80d2794974e48bb8e4070ab72fbc3a8f3da88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
