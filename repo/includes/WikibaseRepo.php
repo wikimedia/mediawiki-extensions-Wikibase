@@ -2125,7 +2125,8 @@ class WikibaseRepo {
 		return new DataAccessSettings(
 			$this->settings->getSetting( 'maxSerializedEntitySize' ),
 			$this->settings->getSetting( 'useTermsTableSearchFields' ),
-			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' )
+			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
 		);
 	}
 
