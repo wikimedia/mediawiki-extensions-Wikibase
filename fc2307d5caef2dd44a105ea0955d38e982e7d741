@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a48e84fb_d8f601b6",
+        "filename": "data-access/tests/phpunit/SingleEntitySourceServicesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-31T14:37:25Z",
+      "side": 1,
+      "message": "We don\u0027t need it any more afaik and as far as i can see",
+      "parentUuid": "e991678b_b6d32994",
+      "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0046c85_d506eb90",
         "filename": "data-access/tests/phpunit/SingleEntitySourceServicesTest.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "78f30542_67eef77c",
+        "filename": "data-access/tests/phpunit/SingleEntitySourceServicesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-31T14:37:25Z",
+      "side": 1,
+      "message": "Yup, lets see in 30 patches :)",
+      "parentUuid": "a0046c85_d506eb90",
+      "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ffede10_1aa3749e",
         "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2019-01-30T17:10:29Z",
       "side": 1,
       "message": "hmm, the comment itself is not wrong, but that class is not the only place which makes such assumption I think.\n\nI remember discussing this with Daniel back in 2016/7, and the point was: if the service (like this accessor) has not been created prior some changes were made to entities it \"tracks\", the service should not be \"retro-actively\" be pinged about such changes once it is created. The idea is that the service has \"the fresh\" data on entities state once it is instantiated. Seems sensible to me.\n\nDid you have another understanding of EntityStoreWatcher before seeing this code? I mean, just to understand how unobvious this all might be (I vaguely remember I was struggling to grasp it myself as well).",
+      "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d263aa2f_81c5f9dc",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-01-31T14:37:25Z",
+      "side": 1,
+      "message": "So, I havn\u0027t looked at the whole EntityWatcher thing in a while, and for this specific case it doesn\u0027t really matter, for for example if the PrefetchingWikiPageEntityMetaDataAccessor switched to a shared cache, all of a sudden this would matter (hence I added the note).\n\nReally i was looking at this as, the MetaDataAccessor is a service in Wikibase, and it is registered (kind of) as caring about changes to entities.\nThus, if we change an entity, we should tell it, so I would always call watched methods even if another code path has not yet instantized the service.",
+      "parentUuid": "8ffede10_1aa3749e",
       "revId": "fc2307d5caef2dd44a105ea0955d38e982e7d741",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
