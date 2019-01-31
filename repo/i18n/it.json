@@ -313,6 +313,7 @@
 	"wikibase-redirectentity-fromid": "L'ID da cui reindirizzare",
 	"wikibase-redirectentity-toid": "L'ID a cui reindirizzare",
 	"wikibase-redirectentity-submit": "Reindirizza",
+	"wikibase-redirect-source-and-target-are-the-same": "Non è possibile reindirizzare un'entità a se stessa",
 	"special-mylanguagefallbackchain": "Catena delle lingue di riserva",
 	"wikibase-mylanguagefallbackchain-text": "La catena delle lingue di riserva che usi per visualizzare le etichette delle entità è mostrata di seguito.",
 	"wikibase-mylanguagefallbackchain-babel": "Puoi modificarla inserendo <nowiki>{{#babel: }}</nowiki> nella {{GENDER:$1|tua}} [[Special:MyPage|pagina utente]].",

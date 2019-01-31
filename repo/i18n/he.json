@@ -316,6 +316,7 @@
 	"wikibase-redirect-no-such-entity": "לא היה ניתן למצוא את הישור $1",
 	"wikibase-redirect-cant-load-entity-content": "לא ניתן לגשת לתוכן, ייתכן שהגרסה נמחקה.",
 	"wikibase-redirect-target-is-incompatible": "סוגי ישויות בלתי־תואמים",
+	"wikibase-redirect-source-and-target-are-the-same": "לא ניתן להפנות ישות לעצמה",
 	"wikibase-redirect-target-is-redirect": "הישות $1 היא הפניה",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook מנע יצירה של הפניה",
 	"wikibase-redirect-cant-redirect": "יצירת ההפניה נכשלה בשל בעיות טכניות",
