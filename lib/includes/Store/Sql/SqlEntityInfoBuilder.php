@@ -6,6 +6,8 @@ use DBAccessBase;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -115,6 +117,15 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $logger;
 
 	/**
+	 * @var EntitySource
+	 */
+	private $entitySource;
+
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+	/**
 	 * @var string
 	 */
 	private $repositoryName;
@@ -124,6 +135,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LoggerInterface $logger
+	 * @param EntitySource $entitySource
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
@@ -133,6 +145,8 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		LoggerInterface $logger,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings,
 		$wiki = false,
 		$repositoryName = ''
 	) {
@@ -141,7 +155,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		}
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
-		parent::__construct( $wiki );
+		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wiki;
+
+		parent::__construct( $databaseName );
 
 		$this->termTable = 'wb_terms';
 
@@ -150,6 +166,23 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->repositoryName = $repositoryName;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->logger = $logger;
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
+	}
+
+	/**
+	 * Filters out entity IDs irrelevant for the builder (belonging to another repository
+	 * or entity source).
+	 *
+	 * @param EntityId[] $ids
+	 * @return EntityId[]
+	 */
+	private function filterIrrelevantEntityIds( array $ids ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			return $this->filterEntitiesFromOtherSource( $ids );
+		}
+
+		return $this->filterForeignEntityIds( $ids );
 	}
 
 	/**
@@ -167,6 +200,21 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$ids,
 			function( EntityId $id ) use ( $repositoryName ) {
 				return $id->getRepositoryName() === $repositoryName;
+			}
+		);
+	}
+
+	/**
+	 * @param EntityId[] $ids
+	 * @return EntityId[]
+	 */
+	private function filterEntitiesFromOtherSource( array $ids ) {
+		$knownTypes = $this->entitySource->getEntityTypes();
+
+		return array_filter(
+			$ids,
+			function( EntityId $id ) use ( $knownTypes ) {
+				return in_array( $id->getEntityType(), $knownTypes );
 			}
 		);
 	}
@@ -643,8 +691,16 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->unsetEntityInfo( $remove );
 	}
 
+	/**
+	 * Note: IDs that the service cannot handle (e.g. coming from different source/repository) are not
+	 * included in the result.
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string[] $languageCodes
+	 * @return EntityInfo
+	 */
 	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
-		$ids = $this->filterForeignEntityIds( $entityIds );
+		$ids = $this->filterIrrelevantEntityIds( $entityIds );
 
 		$this->setEntityIds( $ids );
 
