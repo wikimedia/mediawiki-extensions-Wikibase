@@ -60,7 +60,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false ),
+			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySource( 'source', 'sourcedb', [] ),
 			[ null ],
 			[]
@@ -74,7 +74,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false ),
+			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySource( 'source', 'sourcedb', [] ),
 			[],
 			[ null ]
@@ -87,7 +87,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new BasicEntityIdParser(),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false ),
+			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySource( 'source', 'sourcedb', [] ),
 			[],
 			[]
