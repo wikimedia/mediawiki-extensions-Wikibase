@@ -2122,10 +2122,13 @@ class WikibaseRepo {
 	}
 
 	private function getDataAccessSettings() {
+		$doNotUseEntitySourceBasedFederation = false;
+
 		return new DataAccessSettings(
 			$this->settings->getSetting( 'maxSerializedEntitySize' ),
 			$this->settings->getSetting( 'useTermsTableSearchFields' ),
-			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' )
+			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			$doNotUseEntitySourceBasedFederation
 		);
 	}
 

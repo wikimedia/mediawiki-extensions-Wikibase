@@ -14,7 +14,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConvertsMaxSerializedEntitySizeFromKiloBytesToBytes() {
-		$settings = new DataAccessSettings( 1, true, false );
+		$settings = new DataAccessSettings( 1, true, false, false );
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
 	}
@@ -23,7 +23,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideTwoBooleans
 	 */
 	public function testSearchFieldsGetters( $useSearchFields, $forceWriteSearchFields ) {
-		$settings = new DataAccessSettings( 1, $useSearchFields, $forceWriteSearchFields );
+		$settings = new DataAccessSettings( 1, $useSearchFields, $forceWriteSearchFields, false );
 
 		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
 		$this->assertSame( $forceWriteSearchFields, $settings->forceWriteSearchFields() );

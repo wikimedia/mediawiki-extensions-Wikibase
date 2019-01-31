@@ -64,7 +64,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false ),
+			new DataAccessSettings( 10, true, false, false ),
 			new EntitySource( 'source', 'sourcedb', [] ),
 			[ null ],
 			[]
@@ -79,7 +79,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false ),
+			new DataAccessSettings( 10, true, false, false ),
 			new EntitySource( 'source', 'sourcedb', [] ),
 			[],
 			[ null ]
@@ -93,7 +93,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false ),
+			new DataAccessSettings( 10, true, false, false ),
 			new EntitySource( 'source', 'sourcedb', [] ),
 			[],
 			[]
