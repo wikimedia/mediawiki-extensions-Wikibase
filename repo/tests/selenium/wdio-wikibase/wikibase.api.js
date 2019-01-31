@@ -1,9 +1,14 @@
 'use strict';
 
-const MWBot = require( 'mwbot' ),
-	bot = new MWBot( {
-		apiUrl: browser.options.baseUrl + '/api.php'
+const MWBot = require( 'mwbot' );
+
+let getBot = () => {
+	return new MWBot( {
+		apiUrl: browser.options.baseUrl + '/api.php',
+		username: browser.options.username,
+		password: browser.options.password
 	} );
+};
 
 class WikibaseApi {
 
@@ -15,8 +20,10 @@ class WikibaseApi {
 	 * @return {Promise}
 	 */
 	createItem( label, data ) {
-		let labels = {},
+		let bot = getBot(),
+			labels = {},
 			itemData = {};
+
 		if ( label ) {
 			labels = {
 				en: {
@@ -27,15 +34,14 @@ class WikibaseApi {
 		}
 
 		Object.assign( itemData, { labels }, data );
-
-		return bot.getEditToken()
-			.then( () => {
+		return bot.loginGetEditToken()
+			.then( ( response ) => {
 				return new Promise( ( resolve, reject ) => {
 					bot.request( {
 						action: 'wbeditentity',
 						'new': 'item',
 						data: JSON.stringify( itemData ),
-						token: bot.editToken
+						token: response.csrftoken
 					} ).then( ( response ) => {
 						resolve( response.entity.id );
 					}, reject );
@@ -44,18 +50,19 @@ class WikibaseApi {
 	}
 
 	createProperty( datatype, data ) {
-		let propertyData = {};
+		let bot = getBot(),
+			propertyData = {};
 
 		propertyData = Object.assign( {}, { datatype }, data );
 
-		return bot.getEditToken()
-			.then( () => {
+		return bot.loginGetEditToken()
+			.then( ( response ) => {
 				return new Promise( ( resolve, reject ) => {
 					bot.request( {
 						action: 'wbeditentity',
 						'new': 'property',
 						data: JSON.stringify( propertyData ),
-						token: bot.editToken
+						token: response.csrftoken
 					} ).then( ( response ) => {
 						resolve( response.entity.id );
 					}, reject );
@@ -64,6 +71,8 @@ class WikibaseApi {
 	}
 
 	getEntity( id ) {
+		let bot = getBot();
+
 		return new Promise( ( resolve, reject ) => {
 			bot.request( {
 				ids: id,
@@ -76,6 +85,8 @@ class WikibaseApi {
 	}
 
 	protectEntity( entityId ) {
+		let bot = getBot();
+
 		return Promise.all( [
 			bot.login( {
 				username: browser.options.username,
