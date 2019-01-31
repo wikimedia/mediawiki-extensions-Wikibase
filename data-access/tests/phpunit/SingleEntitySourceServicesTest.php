@@ -22,6 +22,10 @@ use Wikimedia\Assert\ParameterElementTypeException;
 class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
+	public function testFailingBad() {
+		$this->assertTrue( false );
+	}
+
 	public function testValidConstruction() {
 		$this->newSingleEntitySourceServices();
 		$this->assertTrue( true );
