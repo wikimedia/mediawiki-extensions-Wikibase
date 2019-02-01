@@ -9,6 +9,8 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use Psr\Log\LoggerInterface;
 use Traversable;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -81,9 +83,20 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $maxConflicts = 500;
 
 	/**
+	 * @var EntitySource
+	 */
+	private $entitySource;
+
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+
+	/**
 	 * @param StringNormalizer $stringNormalizer
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntitySource $entitySource
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
 	 */
@@ -91,17 +104,23 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		EntityIdParser $entityIdParser,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings,
 		$wikiDb = false,
 		$repositoryName = ''
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
-		parent::__construct( $wikiDb );
+		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wikiDb;
+
+		parent::__construct( $databaseName );
 
 		$this->repositoryName = $repositoryName;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdParser = $entityIdParser;
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->tableName = 'wb_terms';
 		// TODO: Inject
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
@@ -156,7 +175,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityId = $entity->getId();
 		Assert::parameterType( EntityId::class, $entityId, '$entityId' );
 
-		$this->assertEntityIdFromRightRepository( $entityId );
+		$this->assertCanHandleEntityId( $entityId );
 
 		//First check whether there's anything to update
 		$newTerms = $this->getEntityTerms( $entity );
@@ -208,6 +227,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		return $ok;
 	}
 
+	private function assertCanHandleEntityId( EntityId $id ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertEntityIdFromKnownSource( $id );
+			return;
+		}
+
+		$this->assertEntityIdFromRightRepository( $id );
+	}
+
 	/**
 	 * @param EntityId $entityId
 	 *
@@ -217,6 +245,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		if ( $entityId->getRepositoryName() !== $this->repositoryName ) {
 			throw new MWException(
 				'Entity ID: ' . $entityId->getSerialization() . ' does not belong to repository: ' . $this->repositoryName
+			);
+		}
+	}
+
+	private function assertEntityIdFromKnownSource( EntityId $id ) {
+		if ( !in_array( $id->getEntityType(), $this->entitySource->getEntityTypes() ) ) {
+			// TODO: is it really necessary to throw MWException here?
+			throw new MWException(
+				'Entity ID: ' . $id->getSerialization() . ' of type: ' . $id->getEntityType() . ' is not provided by source: ' . $this->entitySource->getSourceName()
 			);
 		}
 	}
@@ -320,7 +357,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
 		$id = $entity->getId();
-		$this->assertEntityIdFromRightRepository( $id );
+		$this->assertCanHandleEntityId( $id );
 
 		$terms = [];
 
@@ -498,7 +535,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return bool Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId ) {
-		$this->assertEntityIdFromRightRepository( $entityId );
+		$this->assertCanHandleEntityId( $entityId );
 
 		$dbw = $this->getConnection( DB_MASTER );
 
@@ -540,7 +577,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
-		$this->assertEntityIdFromRightRepository( $entityId );
+		$this->assertCanHandleEntityId( $entityId );
 
 		return $this->getTermsOfEntities(
 			[ $entityId ],
@@ -567,7 +604,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $languageCodes = null
 	) {
 		foreach ( $entityIds as $id ) {
-			$this->assertEntityIdFromRightRepository( $id );
+			$this->assertCanHandleEntityId( $id );
 		}
 
 		// Fetch up to 9 (as suggested by the DBA) terms each time:
