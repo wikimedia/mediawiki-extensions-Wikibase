@@ -33,13 +33,9 @@ class ByTypeDispatchingEntityInfoBuilder implements EntityInfoBuilder {
 	 * @return EntityInfo
 	 */
 	public function collectEntityInfo( array $entityIds, array $languageCodes ) {
-		$entityIdsByType = [];
-		foreach ( $entityIds as $entityId ) {
-			$entityIdsByType[$entityId->getEntityType()][] = $entityId;
-		}
-
 		$info = [];
-		foreach ( $entityIdsByType as $type => $ids ) {
+
+		foreach ( $this->groupByEntityType( $entityIds ) as $type => $ids ) {
 			if ( array_key_exists( $type, $this->builders ) ) {
 				$info = array_merge(
 					$info,
@@ -49,6 +45,16 @@ class ByTypeDispatchingEntityInfoBuilder implements EntityInfoBuilder {
 		}
 
 		return new EntityInfo( $info );
+	}
+
+	private function groupByEntityType( array $entityIds ) {
+		$idsByType = [];
+
+		foreach ( $entityIds as $entityId ) {
+			$idsByType[$entityId->getEntityType()][] = $entityId;
+		}
+
+		return $idsByType;
 	}
 
 }
