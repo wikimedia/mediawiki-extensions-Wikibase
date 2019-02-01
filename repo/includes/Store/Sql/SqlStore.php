@@ -7,6 +7,8 @@ use MediaWiki\MediaWikiServices;
 use ObjectCache;
 use Revision;
 use Hooks;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -180,6 +182,8 @@ class SqlStore implements Store {
 	 */
 	private $forceWriteSearchFields;
 
+	private $dataAccessSettings;
+
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
@@ -216,6 +220,13 @@ class SqlStore implements Store {
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
+
+		$this->dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+		);
 	}
 
 	/**
@@ -246,11 +257,14 @@ class SqlStore implements Store {
 	private function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
 		//      Can't really pass this via the constructor...
+		// TODO: why this creating its own instance? It probably should have the "multi repository/source" one?
 		$stringNormalizer = new StringNormalizer();
 		$termSqlIndex = new TermSqlIndex(
 			$stringNormalizer,
 			$this->entityIdComposer,
 			$this->entityIdParser,
+			new UnusableEntitySource(),
+			$this->dataAccessSettings,
 			false,
 			''
 		);
