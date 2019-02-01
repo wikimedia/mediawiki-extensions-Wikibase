@@ -188,7 +188,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Tests\\Store\\MockChunkAccess' => __DIR__ . '/tests/phpunit/Store/MockChunkAccess.php',
 	'Wikibase\\Lib\\Tests\\Store\\MockPropertyInfoLookup' => __DIR__ . '/tests/phpunit/Store/MockPropertyInfoLookup.php',
 	'Wikibase\\Lib\\Tests\\Store\\MockTermIndex' => __DIR__ . '/tests/phpunit/Store/MockTermIndex.php',
-	'Wikibase\\Lib\\Tests\\Store\\TermIndexTestCase' => __DIR__ . '/tests/phpunit/Store/TermIndexTestCase.php',
 	'Wikibase\\Lib\\Tests\\Store\\WikiTextPropertyOrderProviderTestHelper' => __DIR__ . '/tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
 	'Wikibase\\Lib\\TimeDetailsFormatter' => __DIR__ . '/includes/Formatters/TimeDetailsFormatter.php',
 	'Wikibase\\Lib\\UnDeserializableValueFormatter' => __DIR__ . '/includes/Formatters/UnDeserializableValueFormatter.php',
