@@ -76,6 +76,9 @@ class WikibaseApi {
 	}
 
 	protectEntity( entityId ) {
+		let bot = new MWBot( {
+			apiUrl: browser.options.baseUrl + '/api.php'
+		} );
 		return Promise.all( [
 			bot.login( {
 				username: browser.options.username,
