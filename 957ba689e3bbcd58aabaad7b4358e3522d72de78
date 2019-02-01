@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "670bb00a_0440a3f7",
+        "filename": "data-access/src/ByTypeDispatchingEntityInfoBuilder.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-01T04:48:00Z",
+      "side": 1,
+      "message": "I got triggered by all the variables and mutations here so decided to try reduce the stuff. Did not get far though. https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/487461",
+      "revId": "957ba689e3bbcd58aabaad7b4358e3522d72de78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
