@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use Maintenance;
 use MediaWiki\MediaWikiServices;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -130,10 +132,19 @@ class RebuildTermSqlIndex extends Maintenance {
 		EntityIdParser $entityIdParser,
 		SettingsArray $settings
 	) {
+		$dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+		);
+
 		$termSqlIndex = new TermSqlIndex(
 			new StringNormalizer(),
 			$entityIdComposer,
 			$entityIdParser,
+			new UnusableEntitySource(),
+			$dataAccessSettings,
 			false,
 			''
 		);

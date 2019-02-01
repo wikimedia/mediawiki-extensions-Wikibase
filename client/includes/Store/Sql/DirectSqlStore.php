@@ -9,6 +9,8 @@ use Psr\Log\LoggerInterface;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
@@ -197,6 +199,8 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private $addEntityUsagesBatchSize;
 
+	private $dataAccessSettings;
+
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
@@ -239,6 +243,14 @@ class DirectSqlStore implements ClientStore {
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 		$this->addEntityUsagesBatchSize = $settings->getSetting( 'addEntityUsagesBatchSize' );
+
+		// TODO: inject or so, this is a temporary hack
+		$this->dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+		);
 	}
 
 	/**
@@ -415,10 +427,13 @@ class DirectSqlStore implements ClientStore {
 		if ( $this->termIndex === null ) {
 			// TODO: Get StringNormalizer from WikibaseClient?
 			// Can't really pass this via the constructor...
+			// TODO: why this creating its own instance? It probably should have the "multi repository/source" one?
 			$this->termIndex = new TermSqlIndex(
 				new StringNormalizer(),
 				$this->entityIdComposer,
 				$this->entityIdParser,
+				new UnusableEntitySource(),
+				$this->dataAccessSettings,
 				$this->repoWiki,
 				''
 			);
