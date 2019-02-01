@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b991e87e_936fba3b",
+        "filename": "data-access/tests/phpunit/MultipleEntitySourceServicesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-01T04:28:25Z",
+      "side": 1,
+      "message": "You could extract the details of the creation of each test double into its own function. Especially for the thing that always throws an exception since it is easy to understand on a high level. newThrowingEntityRevisionLookup or something like that.\n\n...\n\nJust noticed this is only used as return value for another test double. Then extraction is definitely good.",
+      "revId": "8265ccd2c584678b6a57c4ca74e4660618cc2e8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1700df79_e4f78669",
+        "filename": "data-access/tests/phpunit/MultipleEntitySourceServicesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-01T04:28:25Z",
+      "side": 1,
+      "message": "such assertSame",
+      "revId": "8265ccd2c584678b6a57c4ca74e4660618cc2e8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
