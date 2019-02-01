@@ -16,6 +16,23 @@
       "revId": "957ba689e3bbcd58aabaad7b4358e3522d72de78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64886a89_17d20175",
+        "filename": "data-access/tests/phpunit/ByTypeDispatchingEntityInfoBuilderTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-01T05:32:25Z",
+      "side": 1,
+      "message": "I had a go at making these tests more readable, less fragile and more complete. See https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/487462",
+      "revId": "957ba689e3bbcd58aabaad7b4358e3522d72de78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
