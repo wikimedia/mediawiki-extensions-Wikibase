@@ -1,9 +1,6 @@
 'use strict';
 
-const MWBot = require( 'mwbot' ),
-	bot = new MWBot( {
-		apiUrl: browser.options.baseUrl + '/api.php'
-	} );
+const MWBot = require( 'mwbot' );
 
 class WikibaseApi {
 
@@ -28,6 +25,10 @@ class WikibaseApi {
 
 		Object.assign( itemData, { labels }, data );
 
+		let bot = new MWBot( {
+			apiUrl: browser.options.baseUrl + '/api.php'
+		} );
+
 		return bot.getEditToken()
 			.then( () => {
 				return new Promise( ( resolve, reject ) => {
@@ -48,6 +49,10 @@ class WikibaseApi {
 
 		propertyData = Object.assign( {}, { datatype }, data );
 
+		let bot = new MWBot( {
+			apiUrl: browser.options.baseUrl + '/api.php'
+		} );
+
 		return bot.getEditToken()
 			.then( () => {
 				return new Promise( ( resolve, reject ) => {
@@ -64,6 +69,9 @@ class WikibaseApi {
 	}
 
 	getEntity( id ) {
+		let bot = new MWBot( {
+			apiUrl: browser.options.baseUrl + '/api.php'
+		} );
 		return new Promise( ( resolve, reject ) => {
 			bot.request( {
 				ids: id,
@@ -76,38 +84,30 @@ class WikibaseApi {
 	}
 
 	protectEntity( entityId ) {
-		return Promise.all( [
-			bot.login( {
+		let bot = new MWBot( {
+			apiUrl: browser.options.baseUrl + '/api.php'
+		} ),
+			entityTitle;
+
+		return bot.request( {
+			action: 'wbgetentities',
+			format: 'json',
+			ids: entityId,
+			props: 'info'
+		} ).then( getEntitiesResponse => {
+			entityTitle = getEntitiesResponse.entities[ entityId ].title;
+			return bot.loginGetEditToken( {
 				username: browser.options.username,
 				password: browser.options.password
-			} ).then( () => {
-				return bot.request( {
-					action: 'query',
-					meta: 'tokens',
-					format: 'json'
-				} ).then( csrfTokenResponse => {
-					return csrfTokenResponse.query.tokens.csrftoken;
-				} );
-			} ),
-			bot.request( {
-				action: 'wbgetentities',
-				format: 'json',
-				ids: entityId,
-				props: 'info'
-			} ).then( getEntitiesResponse => {
-				return getEntitiesResponse.entities[ entityId ].title;
-			} )
-		] )
-			.then( ( results ) => {
-				const csrfToken = results[ 0 ],
-					entityTitle = results[ 1 ];
-				return bot.request( {
-					action: 'protect',
-					title: entityTitle,
-					protections: 'edit=sysop',
-					token: csrfToken
-				} );
 			} );
+		} ).then( () => {
+			return bot.request( {
+				action: 'protect',
+				title: entityTitle,
+				protections: 'edit=sysop',
+				token: bot.editToken
+			} );
+		} );
 	}
 
 	getProperty( datatype ) {
