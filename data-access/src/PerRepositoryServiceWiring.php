@@ -133,6 +133,8 @@ return [
 			$genericServices->getStringNormalizer(),
 			$services->getEntityIdComposer(),
 			$services->getEntityIdParser(),
+			new UnusableEntitySource(),
+			$settings,
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
