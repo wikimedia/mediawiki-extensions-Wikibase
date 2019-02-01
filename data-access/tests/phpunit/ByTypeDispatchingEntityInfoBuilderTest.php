@@ -17,7 +17,6 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  * @license GPL-2.0-or-later
  */
 class ByTypeDispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase {
-
 	use PHPUnit4And6Compat;
 
 	/**
@@ -34,50 +33,32 @@ class ByTypeDispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase
 		new ByTypeDispatchingEntityInfoBuilder( [ $this->createMock( EntityInfoBuilder::class ) ] );
 	}
 
-	public function testCollectEntityInfoPassesRequestToBuildersDefinedForRelevantEntityTypes() {
-		$itemId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'P1' );
-
-		$itemInfoBuilder = $this->createMock( EntityInfoBuilder::class );
-		$itemInfoBuilder->expects( $this->atLeastOnce() )
-			->method( 'collectEntityInfo' )
-			->with( [ $itemId ] )
-			->willReturn( new EntityInfo( [] ) );
-
-		$propertyInfoBuilder = $this->createMock( EntityInfoBuilder::class );
-		$propertyInfoBuilder->expects( $this->atLeastOnce() )
-			->method( 'collectEntityInfo' )
-			->with( [ $propertyId ] )
-			->willReturn( new EntityInfo( [] ) );
-
-		$builder = new ByTypeDispatchingEntityInfoBuilder( [ 'item' => $itemInfoBuilder, 'property' => $propertyInfoBuilder ] );
-
-		$builder->collectEntityInfo( [ $itemId, $propertyId ], [ 'en' ] );
-	}
-
 	public function testCollectEntityInfoMergesResultsFromAllBuilders() {
-		$itemId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'P1' );
+		$builder = new ByTypeDispatchingEntityInfoBuilder( [
+			'item' => new FakeEntityInfoBuilder( [
+				'Q1' => [ 'id' => 'Q1', 'type' => 'item' ]
+			] ),
+			'property' => new FakeEntityInfoBuilder( [
+				'P1' => [ 'id' => 'P1', 'type' => 'property' ]
+			] )
+		] );
 
-		$itemInfoBuilder = $this->createMock( EntityInfoBuilder::class );
-		$itemInfoBuilder->method( 'collectEntityInfo' )
-			->willReturn( new EntityInfo( [ 'Q1' => [ 'id' => 'Q1', 'type' => 'item' ] ] ) );
-
-		$propertyInfoBuilder = $this->createMock( EntityInfoBuilder::class );
-		$propertyInfoBuilder->method( 'collectEntityInfo' )
-			->willReturn( new EntityInfo( [ 'P1' => [ 'id' => 'P1', 'type' => 'property' ] ] ) );
-
-		$builder = new ByTypeDispatchingEntityInfoBuilder( [ 'item' => $itemInfoBuilder, 'property' => $propertyInfoBuilder ] );
-
-		$this->assertEquals(
+		$this->assertSame(
 			new EntityInfo( [
 				'Q1' => [ 'id' => 'Q1', 'type' => 'item' ],
 				'P1' => [ 'id' => 'P1', 'type' => 'property' ],
 			] ),
-			$builder->collectEntityInfo( [ $itemId, $propertyId ], [ 'en' ] )
+			$builder->collectEntityInfo(
+				[
+					new ItemId( 'Q1' ),
+					new PropertyId( 'P1' )
+				],
+				[]
+			)
 		);
 	}
 
+	// TODO: update
 	public function testCollectEntityInfoOmitsEntitiesOfUnknownType() {
 		$itemId = new ItemId( 'Q1' );
 		$propertyId = new PropertyId( 'P1' );
@@ -92,5 +73,7 @@ class ByTypeDispatchingEntityInfoBuilderTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertFalse( $entityInfo->hasEntityInfo( $propertyId ) );
 	}
+
+	// TODO: add test for language codes
 
 }

@@ -18,5 +18,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\DataAccess\\PerRepositoryServiceContainerFactory' => __DIR__ . '/src/PerRepositoryServiceContainerFactory.php',
 	'Wikibase\\DataAccess\\Serializer\\ForbiddenSerializer' => __DIR__ . '/src/Serializer/ForbiddenSerializer.php',
 	'Wikibase\\DataAccess\\SingleEntitySourceServices' => __DIR__ . '/src/SingleEntitySourceServices.php',
+	'Wikibase\\DataAccess\\Tests\\FakeEntityInfoBuilder' => __DIR__ . '/tests/phpunit/FakeEntityInfoBuilder.php',
 	'Wikibase\\DataAccess\\WikibaseServices' => __DIR__ . '/src/WikibaseServices.php',
 ];
