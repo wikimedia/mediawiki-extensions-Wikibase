@@ -161,7 +161,8 @@ return [
 
 	'WikiPageEntityMetaDataAccessor' => function (
 		PerRepositoryServiceContainer $services,
-		GenericServices $genericServices
+		GenericServices $genericServices,
+		DataAccessSettings $settings
 	) {
 		$entityNamespaceLookup = $genericServices->getEntityNamespaceLookup();
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
@@ -173,6 +174,8 @@ return [
 						$entityNamespaceLookup,
 						$services->getSlotRoleStore()
 					),
+					new UnusableEntitySource(),
+					$settings,
 					$services->getDatabaseName(),
 					$services->getRepositoryName()
 				),
