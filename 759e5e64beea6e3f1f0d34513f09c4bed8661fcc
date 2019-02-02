@@ -22,6 +22,30 @@
       "revId": "759e5e64beea6e3f1f0d34513f09c4bed8661fcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "447e1d2a_83903c6c",
+        "filename": "data-access/src/ByTypeDispatchingPrefetchingTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-02T19:10:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14090069_9be1efc7",
+      "range": {
+        "startLine": 19,
+        "startChar": 30,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "759e5e64beea6e3f1f0d34513f09c4bed8661fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
