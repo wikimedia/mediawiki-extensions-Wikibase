@@ -12,6 +12,8 @@ use RawMessage;
 use Revision;
 use Status;
 use User;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -95,6 +97,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 
 		$nsLookup = $wikibaseRepo->getEntityNamespaceLookup();
+
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
@@ -102,7 +105,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				new EntityIdLocalPartPageTableEntityQuery(
 					$nsLookup,
 					MediaWikiServices::getInstance()->getSlotRoleStore()
-				)
+				),
+				new UnusableEntitySource(),
+				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
 			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
