@@ -86,13 +86,11 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	/**
 	 * @return WikiPageEntityMetaDataLookup
 	 */
-	private function getWikiPageEntityMetaDataLookup( $nsLookup = null, $slotRoleStore = null ) {
+	private function getWikiPageEntityMetaDataLookup( $nsLookup = null ) {
 		if ( $nsLookup === null ) {
 			$nsLookup = $this->getEntityNamespaceLookup();
 		}
-		if ( $slotRoleStore === null ) {
-			$slotRoleStore = MediaWikiServices::getInstance()->getSlotRoleStore();
-		}
+		$slotRoleStore = MediaWikiServices::getInstance()->getSlotRoleStore();
 
 		return new WikiPageEntityMetaDataLookup(
 			$nsLookup,
