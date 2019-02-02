@@ -8,6 +8,7 @@ use Exception;
 use InvalidArgumentException;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\IdGenerator;
@@ -766,6 +767,8 @@ class WikibaseRepo {
 						$entityNamespaceLookup,
 						MediaWikiServices::getInstance()->getSlotRoleStore()
 					),
+					new UnusableEntitySource(),
+					$this->getDataAccessSettings(),
 					$dbName,
 					$repoName
 				),

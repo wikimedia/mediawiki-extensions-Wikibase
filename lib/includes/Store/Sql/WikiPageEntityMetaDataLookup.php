@@ -7,6 +7,8 @@ use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use stdClass;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -48,21 +50,40 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private $repositoryName;
 
 	/**
+	 * @var EntitySource
+	 */
+	private $entitySource;
+
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+
+	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param PageTableEntityQuery $pageTableEntityConditionGenerator
+	 * @param EntitySource $entitySource
+	 * @param DataAccessSettings $dataAccessSettings
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 * @param string $repositoryName The name of the repository to lookup from (use an empty string for the local repository)
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		PageTableEntityQuery $pageTableEntityConditionGenerator,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings,
 		$wiki = false,
 		$repositoryName = ''
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
-		parent::__construct( $wiki );
+
+		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wiki;
+
+		parent::__construct( $databaseName );
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->repositoryName = $repositoryName;
 
 		// TODO: Inject
@@ -84,7 +105,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		$rows = [];
 
-		$this->assertEntityIdsFromRightRepository( $entityIds );
+		$this->assertCanHandleEntityIds( $entityIds );
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_REPLICA );
@@ -128,7 +149,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$revisionId,
 		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
 	) {
-		$this->assertEntityIdFromRightRepository( $entityId );
+		$this->assertCanHandleEntityId( $entityId );
 
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_REPLICA );
 
@@ -164,7 +185,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	public function loadLatestRevisionIds( array $entityIds, $mode ) {
 		$revisionIds = [];
 
-		$this->assertEntityIdsFromRightRepository( $entityIds );
+		$this->assertCanHandleEntityIds( $entityIds );
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
 			$revisionIds = $this->selectLatestRevisionIdsMultiple( $entityIds, DB_REPLICA );
@@ -192,6 +213,35 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	}
 
 	/**
+	 * @param EntityId[] $entityIds
+	 *
+	 * @throws InvalidArgumentException When some of $entityIds cannot be handled by this lookup
+	 */
+	private function assertCanHandleEntityIds( array $entityIds ) {
+		foreach ( $entityIds as $entityId ) {
+			$this->assertCanHandleEntityId( $entityId );
+		}
+	}
+
+	private function assertCanHandleEntityId( EntityId $entityId ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertEntityIdFromKnownSource( $entityId );
+			return;
+		}
+
+		$this->assertEntityIdFromRightRepository( $entityId );
+	}
+
+	private function assertEntityIdFromKnownSource( EntityId $entityId ) {
+		if ( !in_array( $entityId->getEntityType(), $this->entitySource->getEntityTypes() ) ) {
+			throw new InvalidArgumentException(
+				'Could not load data from the database of entity source: ' .
+				$this->entitySource->getSourceName()
+			);
+		}
+	}
+
+	/**
 	 * @param EntityId $entityId
 	 *
 	 * @return bool
@@ -211,17 +261,6 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 				'Could not load data from the database of repository: ' .
 				$entityId->getRepositoryName()
 			);
-		}
-	}
-
-	/**
-	 * @param EntityId[] $entityIds
-	 *
-	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
-	 */
-	private function assertEntityIdsFromRightRepository( array $entityIds ) {
-		foreach ( $entityIds as $entityId ) {
-			$this->assertEntityIdFromRightRepository( $entityId );
 		}
 	}
 
