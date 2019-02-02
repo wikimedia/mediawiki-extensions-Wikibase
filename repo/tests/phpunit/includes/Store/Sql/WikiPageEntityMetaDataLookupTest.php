@@ -505,4 +505,15 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
 	}
 
+	public function testGivenEntityFromOtherRepository_loadLatestRevisionIdsThrowsException() {
+		$lookup = $this->getWikiPageEntityMetaDataLookup();
+
+		$this->expectException( InvalidArgumentException::class );
+
+		$lookup->loadLatestRevisionIds(
+			[ new ItemId( 'foo:Q123' ) ],
+			EntityRevisionLookup::LATEST_FROM_REPLICA
+		);
+	}
+
 }
