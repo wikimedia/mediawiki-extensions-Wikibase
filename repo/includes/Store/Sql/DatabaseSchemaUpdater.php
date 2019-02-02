@@ -6,6 +6,8 @@ use DatabaseUpdater;
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
@@ -191,6 +193,15 @@ class DatabaseSchemaUpdater {
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
 
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$doNotUseEntitySourceBasedFederation = false;
+		$dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			$doNotUseEntitySourceBasedFederation
+		);
+
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
@@ -199,6 +210,8 @@ class DatabaseSchemaUpdater {
 					$wikibaseRepo->getEntityNamespaceLookup(),
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
+				new UnusableEntitySource(),
+				$dataAccessSettings,
 				false
 			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
