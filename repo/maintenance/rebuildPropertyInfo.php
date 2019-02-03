@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Repo\WikibaseRepo;
@@ -45,9 +46,17 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+		$doNotUseEntitySourceBasedFederation = false;
+		$dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			$doNotUseEntitySourceBasedFederation
+		);
 
 		$builder = new PropertyInfoTableBuilder(
-			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() ),
+			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), new UnusableEntitySource(), $dataAccessSettings ),
 			$wikibaseRepo->getEntityLookup(),
 			$wikibaseRepo->newPropertyInfoBuilder(),
 			$wikibaseRepo->getEntityIdComposer(),
