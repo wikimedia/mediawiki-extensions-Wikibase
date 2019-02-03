@@ -188,12 +188,8 @@ class DatabaseSchemaUpdater {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
 
-		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
-		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = $wikibaseRepo->getSettings();
 		$doNotUseEntitySourceBasedFederation = false;
 		$dataAccessSettings = new DataAccessSettings(
 			$settings->getSetting( 'maxSerializedEntitySize' ),
@@ -201,6 +197,12 @@ class DatabaseSchemaUpdater {
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 			$doNotUseEntitySourceBasedFederation
 		);
+		$entitySource = new UnusableEntitySource();
+
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource, $dataAccessSettings );
+
+		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
+		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
@@ -210,7 +212,7 @@ class DatabaseSchemaUpdater {
 					$wikibaseRepo->getEntityNamespaceLookup(),
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
-				new UnusableEntitySource(),
+				$entitySource,
 				$dataAccessSettings,
 				false
 			),
