@@ -20,7 +20,8 @@
 			"Felipe L. Ewald",
 			"Ladsgroup",
 			"Eduardo Addad de Oliveira",
-			"Trigonometria87"
+			"Trigonometria87",
+			"Opraco"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -328,6 +329,7 @@
 	"wikibase-redirect-no-such-entity": "Não foi possível encontrar a entidade $1",
 	"wikibase-redirect-cant-load-entity-content": "Não foi possível aceder ao conteúdo, a revisão pode ter sido eliminada.",
 	"wikibase-redirect-target-is-incompatible": "Tipos de entidade incompatíveis",
+	"wikibase-redirect-source-and-target-are-the-same": "Não é possível redirecionar uma entidade para si",
 	"wikibase-redirect-target-is-redirect": "A entidade $1 é um redirecionamento",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "O EditFilterHook impediu a criação do redirecionamento",
 	"wikibase-redirect-cant-redirect": "A criação do redirecionamento falhou devido a problemas técnicos",
@@ -355,8 +357,8 @@
 	"wikibase-conflict-patched": "Sua edição se tornou a versão mais recente.",
 	"wikibase-save-unresolved-redirect": "Encontrou um redirecionamento não resolvido de $1 a $2 ao tentar salvar uma alteração.",
 	"wikibase-restoreold": "restaurar",
-	"wikibase-entity-summary-restore": "Restaurar a revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"wikibase-entity-summary-undo": "Restaurar a revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|discussão]])",
+	"wikibase-entity-summary-restore": "Restaurada a revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-undo": "Desfeita a edição $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|discussão]])",
 	"wikibase-non-entity-diff": "Não é possível comparar uma entidade com um conteúdo que não seja uma entidade.",
 	"wikibase-no-direct-editing": "A edição direta está desabilitada no espaço nominal $1",
 	"wikibase-noentity": "Esta entidade não existe. Você pode [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar nos registros relacionados] para descobrir o que ocorreu.",

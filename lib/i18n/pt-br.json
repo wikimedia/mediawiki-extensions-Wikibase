@@ -12,7 +12,8 @@
 			"Felipe L. Ewald",
 			"!Silent",
 			"O andarilho",
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"Opraco"
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
@@ -128,7 +129,7 @@
 	"wikibase-entity-summary-wbsetreference": "Definir um referência",
 	"wikibase-entity-summary-wbsetreference-add": "Incluída referência para a afirmação",
 	"wikibase-entity-summary-wbsetreference-set": "Modificada referência da reinvindicação",
-	"wikibase-entity-summary-wbsetlabel-add": "Adicionado [$2] legenda",
+	"wikibase-entity-summary-wbsetlabel-add": "Adicionada legenda [$2]",
 	"wikibase-entity-summary-wbsetlabel-set": "Alterado o rótulo [$2]",
 	"wikibase-entity-summary-wbsetlabel-remove": "Removido o rótulo [$2]",
 	"wikibase-entity-summary-wbsetdescription-add": "Adicionada a descrição em $2",
@@ -164,7 +165,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-references": "Alterado {{PLURAL:$4|uma referência|$4 referências}} de {{PLURAL:$3|reivindicação|reivindicações}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Alterou a classificação de {{PLURAL:$3|alegação|alegações}}",
 	"wikibase-entity-summary-clientsitelink-update": "Página movida de [$3] para [$4]",
-	"wikibase-entity-summary-clientsitelink-remove": "Páginas em $3 excluída",
+	"wikibase-entity-summary-clientsitelink-remove": "Página excluída em $3",
 	"wikibase-entity-summary-wbsetqualifier-add": "Adicionado {{PLURAL:$1|qualificador|qualificadores}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "Alterado {{PLURAL:$1|qualificador|qualificadores}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Removido {{PLURAL:$1|qualificador|qualificadores}}",

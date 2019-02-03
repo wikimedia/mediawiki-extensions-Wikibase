@@ -95,6 +95,8 @@
 	"wikibase-entityselector-more": "още",
 	"wikibase-entityselector-notfound": "Няма открити съвпадения.",
 	"wikibase-anonymouseditwarning": "Вснимание: Не сте влезли в акаунта си.\nВашият IP адрес ще бъде запазен в историята на редакциите на този обект.",
+	"wikibase-validator-illegal-file-chars": "Имената на файловете не може да имат символи като две точки и наклони.",
+	"wikibase-validator-check-file-type": "Липсва файлово разширение.",
 	"wikibase-itembytitle-lookup-fieldset": "Търсене на обекти по сайт и заглавие",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Страница:",

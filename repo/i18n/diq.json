@@ -8,7 +8,8 @@
 			"Macofe",
 			"Kumkumuk",
 			"Asmen",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Orbot707"
 		]
 	},
 	"wikibase-entity-item": "unsur",
@@ -21,10 +22,13 @@
 	"wikibase-addreference": "referans cı ke",
 	"wikibase-save-inprogress": "Starêno...",
 	"wikibase-remove-inprogress": "Wedarêno",
+	"wikibase-entitytermsforlanguagelistview-language": "Zıwan",
+	"wikibase-entitytermsforlanguagelistview-more": "Est biyaye zıwani pêro",
 	"wikibase-label-empty": "Hewna etiket tede çıniyo",
 	"wikibase-label-edit-placeholder": "etiket cı ke",
 	"wikibase-description-empty": "Rakerdış nêvêniya",
 	"wikibase-description-edit-placeholder": "arezekerdış cı ke",
+	"wikibase-content-language-edit-label": "Zıwan:",
 	"wikibase-diffview-reference": "referans",
 	"wikibase-diffview-rank": "rêze",
 	"wikibase-diffview-qualifier": "kalifikator",
@@ -51,6 +55,8 @@
 	"wikibase-itembytitle-lookup-site": "Sita:",
 	"wikibase-itembytitle-lookup-page": "Pele:",
 	"wikibase-itembytitle-submit": "Cı geyre",
+	"wikibase-gotolinkedpage-lookup-site": "Site:",
+	"wikibase-gotolinkedpage-lookup-item": "ID'a obcey:",
 	"wikibase-gotolinkedpage-submit": "Şo",
 	"wikibase-itemdisambiguation-lookup-language": "Kodê zıwani:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiket:",
