@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -34,27 +36,48 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	private $entityIdComposer;
 
 	/**
+	 * @var EntitySource
+	 */
+	private $entitySource;
+
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+
+	/**
 	 * @var string
 	 */
 	private $repositoryName;
 
 	/**
 	 * @param EntityIdComposer $entityIdComposer
+	 * @param EntitySource $entitySource
+	 * @param DataAccessSettings $dataAccessSettings
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 * @param string $repositoryName
 	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdComposer $entityIdComposer, $wiki = false, $repositoryName = '' ) {
+	public function __construct(
+		EntityIdComposer $entityIdComposer,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings,
+		$wiki = false,
+		$repositoryName = ''
+	) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
-		parent::__construct( $wiki );
+		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wiki;
+
+		parent::__construct( $databaseName );
 		$this->tableName = 'wb_property_info';
 		$this->entityIdComposer = $entityIdComposer;
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->repositoryName = $repositoryName;
 	}
 
@@ -120,7 +143,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 * @throws DBError
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		$this->assertPropertyIdFromCorrectRepository( $propertyId );
+		$this->assertCanHandlePropertyId( $propertyId );
 
 		$dbr = $this->getConnection( DB_REPLICA );
 
@@ -208,7 +231,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoLookup::KEY_DATA_TYPE );
 		}
 
-		$this->assertPropertyIdFromCorrectRepository( $propertyId );
+		$this->assertCanHandlePropertyId( $propertyId );
 
 		$type = $info[ PropertyInfoLookup::KEY_DATA_TYPE ];
 		$json = json_encode( $info );
@@ -239,7 +262,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 * @return bool
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
-		$this->assertPropertyIdFromCorrectRepository( $propertyId );
+		$this->assertCanHandlePropertyId( $propertyId );
 
 		$dbw = $this->getConnection( DB_MASTER );
 
@@ -253,6 +276,21 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 		$this->releaseConnection( $dbw );
 
 		return $c > 0;
+	}
+
+	private function assertCanHandlePropertyId( PropertyId $id ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertEntitySourceProvidesProperties();
+			return;
+		}
+
+		$this->assertPropertyIdFromCorrectRepository( $id );
+	}
+
+	private function assertEntitySourceProvidesProperties() {
+		if ( !in_array( Property::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
+			throw new InvalidArgumentException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does not provide properties.' );
+		}
 	}
 
 	private function assertPropertyIdFromCorrectRepository( PropertyId $id ) {
