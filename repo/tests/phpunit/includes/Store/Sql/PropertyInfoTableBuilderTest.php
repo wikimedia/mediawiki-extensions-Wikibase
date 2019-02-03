@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use DataValues\StringValue;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -83,7 +86,60 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	public function testRebuildPropertyInfo() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer() );
+		$settings = $wikibaseRepo->getSettings();
+		$dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+		);
+
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), new UnusableEntitySource(), $dataAccessSettings );
+		$this->resetPropertyInfoTable( $table );
+		$properties = $this->initProperties();
+
+		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
+		//       so we should also use the EntityLookup from WikibaseRepo.
+		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED );
+
+		$propertyInfoBuilder = new PropertyInfoBuilder( [
+			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
+			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P1640' )
+		] );
+		$builder = new PropertyInfoTableBuilder(
+			$table,
+			$entityLookup,
+			$propertyInfoBuilder,
+			$wikibaseRepo->getEntityIdComposer(),
+			$wikibaseRepo->getEntityNamespaceLookup()
+		);
+		$builder->setBatchSize( 3 );
+
+		$builder->setRebuildAll( true );
+
+		$builder->rebuildPropertyInfo();
+
+		$this->assertTableHasProperties( $properties, $table );
+	}
+
+	public function testRebuildPropertyInfo_entitySourceBasedFederation() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+		$dataAccessSettings = new DataAccessSettings(
+			$settings->getSetting( 'maxSerializedEntitySize' ),
+			$settings->getSetting( 'useTermsTableSearchFields' ),
+			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION
+		);
+		$irrelevantPropertyNamespaceId = 200;
+		$irrelevantPropertySlotName = 'main';
+		$entitySource = new EntitySource(
+			'testsource',
+			false,
+			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ]
+		);
+
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource, $dataAccessSettings );
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 
