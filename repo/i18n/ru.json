@@ -33,7 +33,8 @@
 			"Jack who built the house",
 			"Stjn",
 			"Vlad5250",
-			"Nk88"
+			"Nk88",
+			"Athena Atterdag"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -149,7 +150,7 @@
 	"wikibase-validator-label-conflict": "У свойства «$3» уже есть название «$1», связанное с кодом языка «$2».",
 	"wikibase-validator-label-with-description-conflict": "У элемента «$3» уже есть название «$1», связанное с кодом языка «$2» и использующее в качестве описания тот же самый текст.",
 	"wikibase-validator-label-no-entityid": "Метка не должна совпадать с действительным идентификатором сущности.",
-	"wikibase-validator-illegal-file-chars": "Файловые имена не могут содержать символы, такие как двоеточие и косые черты. Вставляйте имя после «Файл:» или «File:».",
+	"wikibase-validator-illegal-file-chars": "Файловые имена не могут содержать символы, такие как двоеточие и косые черты.",
 	"wikibase-validator-check-file-type": "Расширение файла отсутствует.",
 	"wikibase-validator-no-such-media": "На [https://commons.wikimedia.org/ Викискладе] не существует файла с именем «$1».",
 	"wikibase-validator-no-such-sitelink": "Не удалось найти ссылку на «$1» при попытке отредактировать значки.",
@@ -327,6 +328,7 @@
 	"wikibase-redirectentity-toid": "Идентификатор, на который идёт перенаправление",
 	"wikibase-redirectentity-submit": "Перенаправление",
 	"wikibase-redirect-no-such-entity": "Не удалось найти объект $1",
+	"wikibase-redirect-source-and-target-are-the-same": "Объект не может перенаправлять сам на себя.",
 	"wikibase-redirect-cant-redirect": "Не удалось создать перенаправление из-за технических проблем",
 	"wikibase-redirect-permissiondenied": "Доступ запрещён",
 	"special-mylanguagefallbackchain": "Моя цепочка резервных языков",

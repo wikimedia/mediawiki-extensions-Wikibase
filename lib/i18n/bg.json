@@ -48,6 +48,7 @@
 	"datatypes-type-time": "Момент във времето",
 	"datatypes-type-wikibase-item": "Обект",
 	"datatypes-type-commonsMedia": "Файл от Общомедия",
+	"wikibase-time-calendar-gregorian": "Григориански",
 	"wikibase-entity-summary-wbsetitem": "Създаване на нов обект",
 	"wikibase-entity-summary-wbcreateredirect": "Пренасочване към $4",
 	"wikibase-entity-summary-wbsetlabel-set": "Променен [$2] етикет",
