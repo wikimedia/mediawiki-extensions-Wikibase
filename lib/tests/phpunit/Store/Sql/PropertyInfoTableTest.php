@@ -4,6 +4,9 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use InvalidArgumentException;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -24,6 +27,9 @@ use Wikibase\WikibaseSettings;
  */
 class PropertyInfoTableTest extends MediaWikiTestCase {
 
+	const REPOSITORY_PREFIX_BASED_FEDERATION = false;
+	const ENTITY_SOURCE_BASED_FEDERATION = true;
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -35,11 +41,41 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	}
 
 	private function newPropertyInfoTable( $repository = '' ) {
-		return new PropertyInfoTable( $this->getEntityComposer(), false, $repository );
+		return new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new UnusableEntitySource(),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			false,
+			$repository
+		);
+	}
+
+	private function newPropertyInfoTableForSourceBasedFederation() {
+		$irrelevantPropertyNamespaceId = 200;
+
+		return new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new EntitySource(
+				'testsource',
+				false,
+				[
+					'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => 'main' ],
+				]
+			),
+			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
+		);
 	}
 
 	public function testGivenNoDataTypeInInfo_setPropertyInfoThrowsException() {
 		$table = $this->newPropertyInfoTable();
+
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		$table->setPropertyInfo( new PropertyId( 'P123' ), [ 'foo' => 'bar' ] );
+	}
+
+	public function testGivenNoDataTypeInInfo_setPropertyInfoThrowsException_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
 
 		$this->setExpectedException( InvalidArgumentException::class );
 
@@ -52,8 +88,26 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->assertNull( $table->getPropertyInfo( new PropertyId( 'P123' ) ) );
 	}
 
-	public function testGivenKnownPropertyId_getPropertyInfoTheInfo() {
+	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
+
+		$this->assertNull( $table->getPropertyInfo( new PropertyId( 'P123' ) ) );
+	}
+
+	public function testGivenKnownPropertyId_getPropertyInfoReturnsTheInfo() {
 		$table = $this->newPropertyInfoTable();
+		$propertyId = new PropertyId( 'P123' );
+
+		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ] );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+			$table->getPropertyInfo( $propertyId )
+		);
+	}
+
+	public function testGivenKnownPropertyId_getPropertyInfoReturnsTheInfo_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
 		$propertyId = new PropertyId( 'P123' );
 
 		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ] );
@@ -70,8 +124,34 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->assertSame( [], $table->getAllPropertyInfo() );
 	}
 
+	public function testGivenNoInfo_getAllPropertyInfoReturnsEmptyList_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
+
+		$this->assertSame( [], $table->getAllPropertyInfo() );
+	}
+
 	public function testGivenSomeProperties_getAllPropertyInfoReturnsAllInfo() {
 		$table = $this->newPropertyInfoTable();
+		$table->setPropertyInfo(
+			new PropertyId( 'P123' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
+		);
+		$table->setPropertyInfo(
+			new PropertyId( 'P456' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ]
+		);
+
+		$this->assertSame(
+			[
+				'P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
+				'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ],
+			],
+			$table->getAllPropertyInfo()
+		);
+	}
+
+	public function testGivenSomeProperties_getAllPropertyInfoReturnsAllInfo_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
 		$table->setPropertyInfo(
 			new PropertyId( 'P123' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
@@ -100,8 +180,37 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->assertSame( [], $table->getPropertyInfoForDataType( 'external-id' ) );
 	}
 
+	public function testGivenDataTypeNotUsedInProperties_getPropertyInfoForDataTypeReturnsEmptyList_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
+		$table->setPropertyInfo(
+			new PropertyId( 'P123' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
+		);
+
+		$this->assertSame( [], $table->getPropertyInfoForDataType( 'external-id' ) );
+	}
+
 	public function testGivenDataTypeUsedInSomeProperties_getPropertyInfoForDataTypeReturnsInfoForRelevantProperties() {
 		$table = $this->newPropertyInfoTable();
+		$table->setPropertyInfo(
+			new PropertyId( 'P123' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
+		);
+		$table->setPropertyInfo(
+			new PropertyId( 'P456' ),
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ]
+		);
+
+		$this->assertSame(
+			[
+				'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ],
+			],
+			$table->getPropertyInfoForDataType( 'external-id' )
+		);
+	}
+
+	public function testGivenDataTypeUsedInSomeProperties_getPropertyInfoForDataTypeReturnsInfoForRelevantOnes_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
 		$table->setPropertyInfo(
 			new PropertyId( 'P123' ),
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ]
@@ -135,8 +244,35 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
 	}
 
+	public function testGivenKnownPropertyId_removePropertyInfoRemovesTheEntryAndReturnsTrue_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
+		$propertyId = new PropertyId( 'P123' );
+
+		$table->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$table->getPropertyInfo( $propertyId )
+		);
+
+		$this->assertTrue( $table->removePropertyInfo( $propertyId ) );
+
+		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
+	}
+
 	public function testGivenUnknownPropertyId_removePropertyInfoReturnsFalse() {
 		$table = $this->newPropertyInfoTable();
+		$propertyId = new PropertyId( 'P123' );
+
+		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
+
+		$this->assertFalse( $table->removePropertyInfo( $propertyId ) );
+
+		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
+	}
+
+	public function testGivenUnknownPropertyId_removePropertyInfoReturnsFalse_entitySourceBasedFederation() {
+		$table = $this->newPropertyInfoTableForSourceBasedFederation();
 		$propertyId = new PropertyId( 'P123' );
 
 		$this->assertNull( $table->getPropertyInfo( $propertyId ) );
@@ -171,12 +307,43 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
 	}
 
+	public function testSettingAndRemovingPropertyInfoIsPersistent_entitySourceBasedFederation() {
+		$tableOne = $this->newPropertyInfoTableForSourceBasedFederation();
+		$tableTwo = $this->newPropertyInfoTableForSourceBasedFederation();
+		$propertyId = new PropertyId( 'P123' );
+
+		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
+		$this->assertNull( $tableTwo->getPropertyInfo( $propertyId ) );
+
+		$tableOne->setPropertyInfo( $propertyId, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$tableOne->getPropertyInfo( $propertyId )
+		);
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$tableTwo->getPropertyInfo( $propertyId )
+		);
+
+		$tableTwo->removePropertyInfo( $propertyId );
+
+		$this->assertNull( $tableTwo->getPropertyInfo( $propertyId ) );
+		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
+	}
+
 	/**
 	 * @dataProvider invalidRepositoryNameProvider
 	 */
 	public function testGivenInvalidRepositoryName_throwsException( $name ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new PropertyInfoTable( $this->getEntityComposer(), false, $name );
+		return new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new UnusableEntitySource(),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			false,
+			$name
+		);
 	}
 
 	public function invalidRepositoryNameProvider() {
@@ -195,7 +362,13 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_setPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new UnusableEntitySource(),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			false,
+			$repositoryName
+		);
 		$infoTable->setPropertyInfo( $id, [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
@@ -205,7 +378,13 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_getPropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new UnusableEntitySource(),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			false,
+			$repositoryName
+		);
 		$infoTable->getPropertyInfo( $id );
 	}
 
@@ -215,8 +394,52 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 	public function testGivenPropertyIdFromWrongRepository_removePropertyInfoThrowsException( $repositoryName, PropertyId $id ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		$infoTable = new PropertyInfoTable( $this->getEntityComposer(), false, $repositoryName );
+		$infoTable = new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new UnusableEntitySource(),
+			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			false,
+			$repositoryName
+		);
 		$infoTable->removePropertyInfo( $id );
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_setPropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+		$infoTable->setPropertyInfo( new PropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_getPropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+		$infoTable->getPropertyInfo( new PropertyId( 'P1' ) );
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_removePropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
+	}
+
+	private function newPropertyInfoTableForItemOnlySource() {
+		$irrelevantItemNamespaceId = 100;
+
+		return new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new EntitySource(
+				'testsource',
+				false,
+				[ 'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ]
+			),
+			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
+		);
 	}
 
 	public function incompatibleRepositoryNameAndPropertyIdProvider() {

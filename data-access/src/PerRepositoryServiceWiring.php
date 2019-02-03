@@ -108,10 +108,13 @@ return [
 
 	'PropertyInfoLookup' => function (
 		PerRepositoryServiceContainer $services,
-		GenericServices $genericServices
+		GenericServices $genericServices,
+		DataAccessSettings $settings
 	) {
 		return new PropertyInfoTable(
 			$services->getEntityIdComposer(),
+			new UnusableEntitySource(),
+			$settings,
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
