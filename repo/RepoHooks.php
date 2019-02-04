@@ -1062,6 +1062,9 @@ final class RepoHooks {
 		if ( self::disableCirrusSearch( $repo ) ) {
 			return true;
 		}
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return;
+		}
 		static $inHook;
 		if ( $inHook ) {
 			// Do not call this hook repeatedly, since ConfigBuilder calls AnalysisConfigBuilder
