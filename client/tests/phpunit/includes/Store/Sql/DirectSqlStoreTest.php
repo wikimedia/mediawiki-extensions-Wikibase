@@ -14,7 +14,6 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
-use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -84,7 +83,6 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			[ 'getSiteLinkLookup', SiteLinkLookup::class ],
 			[ 'getEntityLookup', EntityLookup::class ],
 			[ 'getTermIndex', TermIndex::class ],
-			[ 'getPropertyLabelResolver', PropertyLabelResolver::class ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'getUsageTracker', UsageTracker::class ],
 			[ 'getUsageLookup', UsageLookup::class ],

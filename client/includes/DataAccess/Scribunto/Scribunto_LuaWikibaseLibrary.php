@@ -163,7 +163,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		if ( $this->propertyIdResolver === null ) {
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
 			$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-			$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
+			$propertyLabelResolver = $wikibaseClient->getPropertyLabelResolver();
 
 			$this->propertyIdResolver = new PropertyIdResolver(
 				$entityLookup,

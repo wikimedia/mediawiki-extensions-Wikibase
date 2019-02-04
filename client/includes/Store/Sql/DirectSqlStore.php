@@ -15,7 +15,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndex;
-use Wikibase\Lib\Store\TermPropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
@@ -457,28 +456,6 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->entityIdLookup;
-	}
-
-	/**
-	 * @see ClientStore::getPropertyLabelResolver
-	 *
-	 * @return PropertyLabelResolver
-	 */
-	public function getPropertyLabelResolver() {
-		if ( $this->propertyLabelResolver === null ) {
-			// Cache key needs to be language specific
-			$cacheKey = $this->cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $this->languageCode;
-
-			$this->propertyLabelResolver = new TermPropertyLabelResolver(
-				$this->languageCode,
-				$this->getTermIndex(),
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			);
-		}
-
-		return $this->propertyLabelResolver;
 	}
 
 	/**
