@@ -14,6 +14,7 @@ use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -106,6 +107,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\Lib\Store\TermPropertyLabelResolver;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -267,6 +269,8 @@ final class WikibaseClient {
 	private $itemTermIndex = null;
 
 	private $descriptionLookup = null;
+
+	private $propertyLabelResolver = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1298,7 +1302,7 @@ final class WikibaseClient {
 	 */
 	private function getStatementGroupRendererFactory() {
 		return new StatementGroupRendererFactory(
-			$this->getStore()->getPropertyLabelResolver(),
+			$this->getPropertyLabelResolver(),
 			new SnaksFinder(),
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
@@ -1588,6 +1592,67 @@ final class WikibaseClient {
 			$this->descriptionLookup = new DescriptionLookup( $this->getStore()->getEntityIdLookup(), $this->getItemTermIndex() );
 		}
 		return $this->descriptionLookup;
+	}
+
+	public function getPropertyLabelResolver() {
+		if ( $this->propertyLabelResolver === null ) {
+			$languageCode = $this->getContentLanguage()->getCode();
+			$cacheKeyPrefix = $this->settings->getSetting( 'sharedCacheKeyPrefix' );
+			$cacheType = $this->settings->getSetting( 'sharedCacheType' );
+			$cacheDuration = $this->settings->getSetting( 'sharedCacheDuration' );
+
+			// Cache key needs to be language specific
+			$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
+
+			$this->propertyLabelResolver = new TermPropertyLabelResolver(
+				$languageCode,
+				$this->getPropertyTermIndex(),
+				ObjectCache::getInstance( $cacheType ),
+				$cacheDuration,
+				$cacheKey
+			);
+		}
+
+		return $this->propertyLabelResolver;
+	}
+
+	private function getPropertyTermIndex() {
+		// TODO: Add special 'optimization' for case item and properties come from the single source to save
+		// an instance? Uses of both seem rather exclusive, though, don't they?
+
+		$dataAccessSettings = $this->getDataAccessSettings();
+		$propertySource = $this->getPropertySource( $dataAccessSettings );
+		$propertyDatabaseName = $dataAccessSettings->useEntitySourceBasedFederation() ?
+			$propertySource->getDatabaseName() :
+			$this->getRepositoryDefinitions()->getDatabaseNames()[''];
+		$propertyRepositoryName = '';
+
+		$index = new TermSqlIndex(
+			$this->getStringNormalizer(),
+			$this->getEntityIdComposer(),
+			$this->getEntityIdParser(),
+			$propertySource,
+			$dataAccessSettings,
+			$propertyDatabaseName,
+			$propertyRepositoryName
+		);
+
+		// TODO: Are these important? Copied blindly over from DirectSqlStore::getTermIndex
+		$index->setUseSearchFields( $this->settings->getSetting( 'useTermsTableSearchFields' ) );
+		$index->setForceWriteSearchFields( $this->settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
+
+		return $index;
+	}
+
+	private function getPropertySource( DataAccessSettings $dataAccessSettings ) {
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+			if ( $propertySource !== null ) {
+				return $propertySource;
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 }
