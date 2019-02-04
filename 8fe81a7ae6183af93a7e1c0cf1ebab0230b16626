@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c4bc51c_871ea79c",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T13:06:33Z",
+      "side": 1,
+      "message": "I prefer doing setExpectedException in the code.\n\nAs if something in getWikiPageEntityMetaDataLookup right now starts throwing an InvalidArgumentException then this code test will still pass\n\nI\u0027ll alter this patch :)",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 47
+      },
+      "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
