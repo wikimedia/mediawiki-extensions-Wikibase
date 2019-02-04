@@ -101,7 +101,7 @@ class InfoActionHookHandler {
 			$wikibaseClient->getTermBuffer()
 		);
 		$idParser = $wikibaseClient->getEntityIdParser();
-		$descriptionLookup = $wikibaseClient->getStore()->getDescriptionLookup();
+		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
 
 		$self = new self(
 			$namespaceChecker,
