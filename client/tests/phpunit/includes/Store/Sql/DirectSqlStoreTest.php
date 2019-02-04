@@ -22,7 +22,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 use Wikibase\WikibaseSettings;
 
 /**
@@ -82,7 +81,6 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		return [
 			[ 'getSiteLinkLookup', SiteLinkLookup::class ],
 			[ 'getEntityLookup', EntityLookup::class ],
-			[ 'getTermIndex', TermIndex::class ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'getUsageTracker', UsageTracker::class ],
 			[ 'getUsageLookup', UsageLookup::class ],
