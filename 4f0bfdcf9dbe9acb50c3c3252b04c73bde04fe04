@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ba11e39_8a01d010",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T13:36:13Z",
+      "side": 1,
+      "message": "Should this not be $useEntitySourceBasedFederation ?\n\nWhy the negative? :D",
+      "range": {
+        "startLine": 423,
+        "startChar": 2,
+        "endLine": 423,
+        "endChar": 38
+      },
+      "revId": "4f0bfdcf9dbe9acb50c3c3252b04c73bde04fe04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
