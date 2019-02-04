@@ -8,7 +8,6 @@ use ObjectCache;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
-use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -458,15 +457,6 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->entityIdLookup;
-	}
-
-	/**
-	 * @see ClientStore::getDescriptionLookup
-	 *
-	 * @return DescriptionLookup
-	 */
-	public function getDescriptionLookup() {
-		return new DescriptionLookup( $this->getEntityIdLookup(), $this->getTermIndex() );
 	}
 
 	/**

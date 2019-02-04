@@ -244,7 +244,7 @@ call_user_func( function() {
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
 			$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
-			$descriptionLookup = $client->getStore()->getDescriptionLookup();
+			$descriptionLookup = $client->getDescriptionLookup();
 			return new Wikibase\Client\Api\Description(
 				$apiQuery,
 				$moduleName,

@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
@@ -109,11 +108,6 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getEntityIdLookup() {
 		// FIXME: Incomplete
-	}
-
-	public function getDescriptionLookup() {
-		// FIXME: Incomplete
-		return new DescriptionLookup( $this->getEntityIdLookup(), $this->getTermIndex() );
 	}
 
 	/**
