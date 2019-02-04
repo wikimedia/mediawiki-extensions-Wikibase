@@ -84,7 +84,6 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			[ 'getSiteLinkLookup', SiteLinkLookup::class ],
 			[ 'getEntityLookup', EntityLookup::class ],
 			[ 'getTermIndex', TermIndex::class ],
-			[ 'getPropertyLabelResolver', PropertyLabelResolver::class ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'getUsageTracker', UsageTracker::class ],
 			[ 'getUsageLookup', UsageLookup::class ],

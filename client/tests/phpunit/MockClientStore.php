@@ -10,7 +10,6 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Tests\MockPropertyLabelResolver;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
@@ -77,18 +76,6 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getSubscriptionManager() {
 		return new NullSubscriptionManager();
-	}
-
-	/**
-	 * @see ClientStore::getPropertyLabelResolver
-	 *
-	 * @return MockPropertyLabelResolver
-	 */
-	public function getPropertyLabelResolver() {
-		return new MockPropertyLabelResolver(
-			$this->languageCode ?: 'en',
-			$this->getMockRepository()
-		);
 	}
 
 	/**
