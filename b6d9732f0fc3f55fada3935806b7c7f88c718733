@@ -22,6 +22,30 @@
       "revId": "b6d9732f0fc3f55fada3935806b7c7f88c718733",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e944d52_ea9b6848",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-04T10:23:16Z",
+      "side": 1,
+      "message": "I think it\u0027s like using master and replica. In small wikis they translate to the same thing. I\u0027m not super sure though :/",
+      "parentUuid": "e31853bd_a4b7b831",
+      "range": {
+        "startLine": 358,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 24
+      },
+      "revId": "b6d9732f0fc3f55fada3935806b7c7f88c718733",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
