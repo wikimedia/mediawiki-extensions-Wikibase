@@ -48,8 +48,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : Whether to use the search-related fields (<code>term_search_key</code> and <code>term_weight</code>) of the <code>wb_terms</code> table. This should not be disabled unless some other search backend is used (see <code>entitySearch</code> below).
 ; forceWriteTermsTableSearchFields
 : If true, write search-related fields of the <code>wb_terms</code> table even if they are not used. Useful if you want to experiment with <code>useTermsTableSearchFields</code> and don’t want missed updates in the table.
-; addEntityUsagesBatchSize
-: Batch size for adding entity usage records. Default is 500
 
 == Repository Settings ==
 
@@ -322,3 +320,5 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : Whether to track Lua function calls with a per-sitegroup key, like <code>MediaWiki.wikipedia.wikibase.client.scribunto.wikibase.functionName.call</code>.
 ; trackLuaFunctionCallsPerWiki
 : Whether to track Lua function calls with a per-site key, like <code>MediaWiki.dewiki.wikibase.client.scribunto.wikibase.functionName.call</code>.
+; addEntityUsagesBatchSize
+: Batch size for adding entity usage records. Default is 500
