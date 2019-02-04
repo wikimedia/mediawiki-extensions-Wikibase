@@ -243,7 +243,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	private function assertEntityIdFromRightRepository( EntityId $entityId ) {
 		if ( $entityId->getRepositoryName() !== $this->repositoryName ) {
-			throw new MWException(
+			throw new InvalidArgumentException(
 				'Entity ID: ' . $entityId->getSerialization() . ' does not belong to repository: ' . $this->repositoryName
 			);
 		}
