@@ -226,7 +226,7 @@ call_user_func( function() {
 				$entityIdLookup = $repo->getEntityContentFactory();
 			} else {
 				$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
-				$termIndex = $client->getStore()->getTermIndex();
+				$termIndex = $client->getItemTermIndex();
 				$entityIdLookup = $client->getStore()->getEntityIdLookup();
 			}
 
