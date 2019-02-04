@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d907ca8_8eb0f8a6",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T12:26:01Z",
+      "side": 1,
+      "message": "this is not fantastic, needs to have two settings in sync (lots of fun in production, a lot of extra scaffolding for testing). Maybe a source would rather be marked as \"local\" or \"writeable\" or something in source defs instead?",
+      "revId": "2b26874a972f529125c84a8b2312ddc591c24647",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
