@@ -3,14 +3,15 @@
 		"authors": [
 			"Fohanno",
 			"Y-M D",
-			"Fulup"
+			"Fulup",
+			"StanProg"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "goullo",
 	"valueview-expert-globecoordinateinput-precision": "Resisted :",
 	"valueview-expert-globecoordinateinput-nullprecision": "Anspisaet",
 	"valueview-expert-globecoordinateinput-customprecision": "dibar($1)",
-	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+	"valueview-expert-timevalue-calendar-gregorian": "",
 	"valueview-expert-timevalue-calendar-julian": "Juluan",
 	"valueview-expert-timeinput-precision": "Resisted :",
 	"valueview-expert-timeinput-calendar": "Deiziadur :",
