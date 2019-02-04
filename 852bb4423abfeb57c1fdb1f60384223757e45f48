@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6d0812f7_5a051b76",
+        "filename": "lib/includes/Formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2019-02-04T20:33:20Z",
+      "side": 1,
+      "message": "It\u0027s what I did.",
+      "parentUuid": "bd45d5c7_a8bc14f0",
+      "range": {
+        "startLine": 452,
+        "startChar": 2,
+        "endLine": 452,
+        "endChar": 71
+      },
+      "revId": "852bb4423abfeb57c1fdb1f60384223757e45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d6ce3cf_3855fd27",
         "filename": "lib/includes/Formatters/WikitextGlobeCoordinateFormatter.php",
         "patchSetId": 5
