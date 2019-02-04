@@ -12,6 +12,7 @@ use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Test\MockClientStore;
+use Wikibase\WikibaseSettings;
 
 /**
  * Simple integration test for the {{#property:…}} parser function.
@@ -34,6 +35,8 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
+
+		$this->tablesUsed[] = 'wb_terms';
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$store = $wikibaseClient->getStore();
@@ -58,6 +61,23 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$this->setAllowDataAccessInUserLanguage( false );
 	}
 
+	public function addDBDataOnce() {
+		$db = wfGetDB( DB_MASTER );
+
+		$db->insert(
+			'wb_terms',
+			[
+				'term_full_entity_id' => 'P342',
+				'term_entity_id' => 342,
+				'term_entity_type' => 'property',
+				'term_language' => 'de',
+				'term_type' => 'label',
+				'term_text' => 'LuaTestStringProperty',
+				'term_search_key' => 'fooo'
+			]
+		);
+	}
+
 	protected function tearDown() {
 		parent::tearDown();
 
@@ -74,6 +94,11 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	}
 
 	public function testPropertyParserFunction_byPropertyLabel() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$result = $this->parseWikitextToHtml( '{{#property:LuaTestStringProperty}}' );
 
 		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );

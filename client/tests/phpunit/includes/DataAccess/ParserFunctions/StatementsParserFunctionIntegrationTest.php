@@ -21,6 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Test\MockClientStore;
+use Wikibase\WikibaseSettings;
 
 /**
  * Simple integration test for the {{#statements:…}} parser function.
@@ -49,6 +50,8 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->tablesUsed[] = 'wb_terms';
+
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$store = $wikibaseClient->getStore();
 
@@ -74,6 +77,23 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$this->setAllowDataAccessInUserLanguage( false );
 	}
 
+	public function addDBDataOnce() {
+		$db = wfGetDB( DB_MASTER );
+
+		$db->insert(
+			'wb_terms',
+			[
+				'term_full_entity_id' => 'P342',
+				'term_entity_id' => 342,
+				'term_entity_type' => 'property',
+				'term_language' => 'de',
+				'term_type' => 'label',
+				'term_text' => 'LuaTestStringProperty',
+				'term_search_key' => 'fooo'
+			]
+		);
+	}
+
 	protected function tearDown() {
 		parent::tearDown();
 
@@ -90,6 +110,11 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	}
 
 	public function testStatementsParserFunction_byPropertyLabel() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$result = $this->parseWikitextToHtml( '{{#statements:LuaTestStringProperty}}' );
 
 		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );

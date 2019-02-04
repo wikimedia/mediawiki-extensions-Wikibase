@@ -9,6 +9,7 @@ use Scribunto_LuaStandaloneInterpreterFunction;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\WikibaseSettings;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -128,6 +129,11 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	}
 
 	public function testFormatPropertyValues_noPropertyId() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->assertSame(
@@ -182,6 +188,11 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	}
 
 	public function testFormatStatements_noPropertyId() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->assertSame(
