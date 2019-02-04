@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e735422_081abcd5",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T16:04:06Z",
+      "side": 1,
+      "message": "No probably not, untangling this code, and some of the code in other patches from MWException could probably happen once this chain gets in.",
+      "range": {
+        "startLine": 1136,
+        "startChar": 3,
+        "endLine": 1139,
+        "endChar": 5
+      },
+      "revId": "20766fc6816a74c8b05bb73c2188252945b4d27f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
