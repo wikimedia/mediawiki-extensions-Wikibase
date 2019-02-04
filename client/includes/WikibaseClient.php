@@ -5,6 +5,7 @@ namespace Wikibase\Client;
 use CachedBagOStuff;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\GenericServices;
@@ -262,6 +263,8 @@ final class WikibaseClient {
 	private $entitySourceDefinitions;
 
 	private $itemTermIndex = null;
+
+	private $descriptionLookup = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1448,6 +1451,17 @@ final class WikibaseClient {
 		}
 
 		return new UnusableEntitySource();
+	}
+
+	/**
+	 * @return DescriptionLookup
+	 */
+	public function getDescriptionLookup() {
+		if ( $this->descriptionLookup === null ) {
+			// TODO: EntityIdLookup should probably also not come from ClientStore?
+			$this->descriptionLookup = new DescriptionLookup( $this->getStore()->getEntityIdLookup(), $this->getItemTermIndex() );
+		}
+		return $this->descriptionLookup;
 	}
 
 }
