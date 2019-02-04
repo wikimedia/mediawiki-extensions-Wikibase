@@ -70,6 +70,30 @@
       "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47aff7af_997ae965",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:44:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07f0e42d_75e2b09a",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 47
+      },
+      "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
