@@ -46,6 +46,30 @@
       "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07f0e42d_75e2b09a",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T15:18:59Z",
+      "side": 1,
+      "message": "I just hit +2 on https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/487149/ so maybe we can change this before we merge it :)",
+      "parentUuid": "f3f3557a_7db00e8a",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 47
+      },
+      "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
