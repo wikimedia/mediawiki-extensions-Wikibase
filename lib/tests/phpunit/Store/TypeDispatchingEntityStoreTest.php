@@ -107,7 +107,8 @@ class TypeDispatchingEntityStoreTest extends MediaWikiTestCase {
 
 	public function testGivenUnknownEntityType_saveRedirectForwardsToDefaultService() {
 		$id = new PropertyId( 'P1' );
-		$redirect = new EntityRedirect( $id, $id );
+		$id2 = new PropertyId( 'P2' );
+		$redirect = new EntityRedirect( $id, $id2 );
 		$user = $this->newUser();
 		$store = new TypeDispatchingEntityStore(
 			[],
@@ -121,7 +122,8 @@ class TypeDispatchingEntityStoreTest extends MediaWikiTestCase {
 
 	public function testGivenCustomEntityType_saveRedirectInstantiatesCustomService() {
 		$id = new PropertyId( 'P1' );
-		$redirect = new EntityRedirect( $id, $id );
+		$id2 = new PropertyId( 'P2' );
+		$redirect = new EntityRedirect( $id, $id2 );
 		$user = $this->newUser();
 		$store = new TypeDispatchingEntityStore(
 			[
