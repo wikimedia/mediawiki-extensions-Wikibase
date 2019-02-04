@@ -111,11 +111,6 @@ class MockClientStore implements ClientStore {
 		// FIXME: Incomplete
 	}
 
-	public function getDescriptionLookup() {
-		// FIXME: Incomplete
-		return new DescriptionLookup( $this->getEntityIdLookup(), $this->getTermIndex() );
-	}
-
 	/**
 	 * @see ClientStore::clear
 	 */
