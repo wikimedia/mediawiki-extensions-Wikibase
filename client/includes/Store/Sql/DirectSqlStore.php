@@ -9,13 +9,10 @@ use Psr\Log\LoggerInterface;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
-use Wikibase\StringNormalizer;
 use Wikibase\TermIndex;
-use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -183,16 +180,6 @@ class DirectSqlStore implements ClientStore {
 	private $entityUsagePerPageLimit;
 
 	/**
-	 * @var bool
-	 */
-	private $useSearchFields;
-
-	/**
-	 * @var bool
-	 */
-	private $forceWriteSearchFields;
-
-	/**
 	 * @var int
 	 */
 	private $addEntityUsagesBatchSize;
@@ -238,8 +225,6 @@ class DirectSqlStore implements ClientStore {
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );
 		$this->entityUsagePerPageLimit = $settings->getSetting( 'entityUsagePerPageLimit' );
-		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
-		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
 		$this->addEntityUsagesBatchSize = $settings->getSetting( 'addEntityUsagesBatchSize' );
 
 		// TODO: inject or so, this is a temporary hack
@@ -414,32 +399,6 @@ class DirectSqlStore implements ClientStore {
 		$hashCachingLookup->setVerifyRevision( false );
 
 		return $hashCachingLookup;
-	}
-
-	/**
-	 * @see ClientStore::getTermIndex
-	 *
-	 * @return TermIndex
-	 */
-	public function getTermIndex() {
-		if ( $this->termIndex === null ) {
-			// TODO: Get StringNormalizer from WikibaseClient?
-			// Can't really pass this via the constructor...
-			// TODO: why this creating its own instance? It probably should have the "multi repository/source" one?
-			$this->termIndex = new TermSqlIndex(
-				new StringNormalizer(),
-				$this->entityIdComposer,
-				$this->entityIdParser,
-				new UnusableEntitySource(),
-				$this->dataAccessSettings,
-				$this->repoWiki,
-				''
-			);
-			$this->termIndex->setUseSearchFields( $this->useSearchFields );
-			$this->termIndex->setForceWriteSearchFields( $this->forceWriteSearchFields );
-		}
-
-		return $this->termIndex;
 	}
 
 	/**
