@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bd56e88_3d5bfa1f",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:48:41Z",
+      "side": 1,
+      "message": "use constant",
+      "revId": "0f8667de4af060e60bdb0433a8ab67a6f15c4bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "958900ea_3cad42a5",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:48:41Z",
+      "side": 1,
+      "message": "use DataAccessSettings constants",
+      "revId": "0f8667de4af060e60bdb0433a8ab67a6f15c4bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "668576dd_96d26a24",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:48:41Z",
+      "side": 1,
+      "message": "use constant",
+      "revId": "0f8667de4af060e60bdb0433a8ab67a6f15c4bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "811c1a3b_835bda75",
+        "filename": "repo/tests/phpunit/includes/Store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:48:41Z",
+      "side": 1,
+      "message": "use constant",
+      "revId": "0f8667de4af060e60bdb0433a8ab67a6f15c4bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
