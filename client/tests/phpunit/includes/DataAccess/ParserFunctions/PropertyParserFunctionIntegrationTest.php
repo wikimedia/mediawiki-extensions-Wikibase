@@ -35,6 +35,12 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+		$this->tablesUsed[] = 'wb_terms';
+
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$store = $wikibaseClient->getStore();
 
@@ -56,6 +62,23 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->oldAllowDataAccessInUserLanguage = $wikibaseClient->getSettings()->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
+	}
+
+	public function addDBDataOnce() {
+		$db = wfGetDB( DB_MASTER );
+
+		$db->insert(
+			'wb_terms',
+			[
+				'term_full_entity_id' => 'P342',
+				'term_entity_id' => 342,
+				'term_entity_type' => 'property',
+				'term_language' => 'de',
+				'term_type' => 'label',
+				'term_text' => 'LuaTestStringProperty',
+				'term_search_key' => 'fooo'
+			]
+		);
 	}
 
 	protected function tearDown() {
