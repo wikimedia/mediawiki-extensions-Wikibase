@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7cf21722_f6981ec0",
+        "filename": "lib/tests/phpunit/Store/Sql/PropertyInfoTableTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T17:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb6eb8cd_bdb3fd14",
+      "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e59f2b65_fc130e35",
         "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-02-04T17:07:05Z",
       "side": 1,
       "message": "use constant",
+      "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1272521b_a45e94d2",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T17:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e59f2b65_fc130e35",
       "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "25df5b62_b2d0d7bd",
+        "filename": "repo/maintenance/rebuildPropertyInfo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T17:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5509bfa_8ddf8213",
+      "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfb12e2b_43dc80ac",
         "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ca7c19c6_9106d6a6",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T17:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfb12e2b_43dc80ac",
+      "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75fdd3db_fb68a8c6",
         "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2019-02-04T17:07:05Z",
       "side": 1,
       "message": "use constant",
+      "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4eec3b8_6371ec67",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T17:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75fdd3db_fb68a8c6",
       "revId": "b85dd6e1988438b54f41b1d7e33d0290fad4d962",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
