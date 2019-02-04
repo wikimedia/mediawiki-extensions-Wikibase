@@ -10,6 +10,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Test\MockClientStore;
+use Wikibase\WikibaseSettings;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	/**
@@ -128,7 +129,14 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	}
 
 	protected function setUp() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+		$this->tablesUsed[] = 'wb_terms';
+
 		parent::setUp();
+
 		self::doMock();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -140,6 +148,20 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		);
 
 		$this->setContentLang( 'de' );
+
+		$db = wfGetDB( DB_MASTER );
+		$db->insert(
+			'wb_terms',
+			[
+				'term_full_entity_id' => 'P342',
+				'term_entity_id' => 342,
+				'term_entity_type' => 'property',
+				'term_language' => 'de',
+				'term_type' => 'label',
+				'term_text' => 'LuaTestStringProperty',
+				'term_search_key' => 'fooo'
+			]
+		);
 	}
 
 	protected function tearDown() {
