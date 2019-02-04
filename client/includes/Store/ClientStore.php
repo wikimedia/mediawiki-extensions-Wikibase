@@ -9,7 +9,6 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -59,11 +58,6 @@ interface ClientStore {
 	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup();
-
-	/**
-	 * @return PropertyLabelResolver
-	 */
-	public function getPropertyLabelResolver();
 
 	/**
 	 * @return TermIndex

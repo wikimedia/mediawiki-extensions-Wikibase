@@ -81,18 +81,6 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::getPropertyLabelResolver
-	 *
-	 * @return MockPropertyLabelResolver
-	 */
-	public function getPropertyLabelResolver() {
-		return new MockPropertyLabelResolver(
-			$this->languageCode ?: 'en',
-			$this->getMockRepository()
-		);
-	}
-
-	/**
 	 * @see ClientStore::getTermIndex
 	 *
 	 * @return TermIndex
