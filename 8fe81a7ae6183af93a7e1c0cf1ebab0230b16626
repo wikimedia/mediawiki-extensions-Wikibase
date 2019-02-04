@@ -22,6 +22,30 @@
       "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3f3557a_7db00e8a",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T13:09:29Z",
+      "side": 1,
+      "message": "fine, although I only use annotation style because I don\u0027t want to do setExpectedException as it is phpunit \u003e\u003d 6 incompatible :)\nI\u0027d rather do $this-\u003eexpectException here instead annotation, but it does not work, at least until https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/487149/ or something smarter gets added",
+      "parentUuid": "8c4bc51c_871ea79c",
+      "range": {
+        "startLine": 509,
+        "startChar": 4,
+        "endLine": 509,
+        "endChar": 47
+      },
+      "revId": "8fe81a7ae6183af93a7e1c0cf1ebab0230b16626",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
