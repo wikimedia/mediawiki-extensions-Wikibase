@@ -5,6 +5,12 @@ namespace Wikibase\Client;
 use CachedBagOStuff;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MultipleEntitySourceServices;
+use Wikibase\DataAccess\SingleEntitySourceServices;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -96,6 +102,7 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -248,6 +255,13 @@ final class WikibaseClient {
 	 * @var WikibaseContentLanguages|null
 	 */
 	private $wikibaseContentLanguages = null;
+
+	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
+	private $itemTermIndex = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1398,6 +1412,42 @@ final class WikibaseClient {
 		);
 
 		return $cache;
+	}
+
+	public function getItemTermIndex() {
+		if ( $this->itemTermIndex === null ) {
+			$dataAccessSettings = $this->getDataAccessSettings();
+			$itemSource = $this->getItemSource( $dataAccessSettings );
+			$itemDatabaseName = $dataAccessSettings->useEntitySourceBasedFederation() ?
+				$itemSource->getDatabaseName() :
+				$this->getRepositoryDefinitions()->getDatabaseNames()[''];
+			$itemRepositoryPrefix = '';
+
+			$this->itemTermIndex = new TermSqlIndex(
+				$this->getStringNormalizer(),
+				$this->getEntityIdComposer(),
+				$this->getEntityIdParser(),
+				$itemSource,
+				$dataAccessSettings,
+				$itemDatabaseName,
+				$itemRepositoryPrefix
+			);
+			$this->itemTermIndex->setUseSearchFields( $this->settings->getSetting( 'useTermsTableSearchFields' ) );
+			$this->itemTermIndex->setForceWriteSearchFields( $this->settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
+		}
+
+		return $this->itemTermIndex;
+	}
+
+	private function getItemSource( DataAccessSettings $dataAccessSettings ) {
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
+			if ( $itemSource !== null ) {
+				return $itemSource;
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 }
