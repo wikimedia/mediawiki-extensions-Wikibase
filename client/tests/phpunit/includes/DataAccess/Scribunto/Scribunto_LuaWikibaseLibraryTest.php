@@ -13,6 +13,7 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\WikibaseSettings;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -414,6 +415,11 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testResolvePropertyId() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$cacheSplit = false;
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 
@@ -434,6 +440,11 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testResolvePropertyId_labelNotFound() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$this->assertSame(
