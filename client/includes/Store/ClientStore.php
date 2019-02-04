@@ -60,11 +60,6 @@ interface ClientStore {
 	public function getEntityRevisionLookup();
 
 	/**
-	 * @return TermIndex
-	 */
-	public function getTermIndex();
-
-	/**
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup();
