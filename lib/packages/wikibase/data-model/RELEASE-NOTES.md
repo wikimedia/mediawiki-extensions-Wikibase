@@ -3,6 +3,7 @@
 ## Version 9.1.0 (2019-01-24)
 
 * Raised minimum PHP version to 7.0 or HHVM
+* Redirecting an entity to itself now causes an exception
 
 ## Version 9.0.1 (2018-11-09)
 
