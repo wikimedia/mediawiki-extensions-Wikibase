@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55603444_a9b349e2",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T15:34:56Z",
+      "side": 0,
+      "message": "Per my further up comment, as we are already doing the filtering here, i guess we keep it that way!",
+      "range": {
+        "startLine": 647,
+        "startChar": 16,
+        "endLine": 647,
+        "endChar": 38
+      },
+      "revId": "08bcb0ff00445e2503d018315c76cb1dff905f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

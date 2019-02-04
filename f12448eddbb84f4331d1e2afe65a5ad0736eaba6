@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d3131fa_ccabca53",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T15:34:56Z",
+      "side": 1,
+      "message": "I wonder if this filtering should even be in here? or if the service should only expect entities that it can handle?",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 186,
+        "endChar": 2
+      },
+      "revId": "f12448eddbb84f4331d1e2afe65a5ad0736eaba6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25b7011c_d6acb1f2",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T15:34:56Z",
+      "side": 1,
+      "message": "I know this is private but a type hint of array and phpdoc for EntityId[] wouldn\u0027t hurt",
+      "range": {
+        "startLine": 207,
+        "startChar": 49,
+        "endLine": 207,
+        "endChar": 53
+      },
+      "revId": "f12448eddbb84f4331d1e2afe65a5ad0736eaba6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d29e3fb_2e6f0255",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T15:34:56Z",
+      "side": 1,
+      "message": "It would be good to document here, or on the interface, what happens / should happen when entity ids are passed that can not be handled by the builder",
+      "range": {
+        "startLine": 690,
+        "startChar": 17,
+        "endLine": 690,
+        "endChar": 34
+      },
+      "revId": "f12448eddbb84f4331d1e2afe65a5ad0736eaba6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
