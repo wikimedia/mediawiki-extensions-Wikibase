@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e31853bd_a4b7b831",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-04T09:51:07Z",
+      "side": 1,
+      "message": "Not even sure if this is true, smaller wikibases may still prefer to have this all in the same db connection?",
+      "range": {
+        "startLine": 358,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 24
+      },
+      "revId": "b6d9732f0fc3f55fada3935806b7c7f88c718733",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
