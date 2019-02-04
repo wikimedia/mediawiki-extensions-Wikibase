@@ -33,6 +33,8 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	private $oldAllowDataAccessInUserLanguage;
 
 	protected function setUp() {
+		$this->tablesUsed[] = 'wb_terms';
+
 		parent::setUp();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
@@ -56,6 +58,23 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->oldAllowDataAccessInUserLanguage = $wikibaseClient->getSettings()->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
+	}
+
+	public function addDBDataOnce() {
+		$db = wfGetDB( DB_MASTER );
+
+		$db->insert(
+			'wb_terms',
+			[
+				'term_full_entity_id' => 'P342',
+				'term_entity_id' => 342,
+				'term_entity_type' => 'property',
+				'term_language' => 'de',
+				'term_type' => 'label',
+				'term_text' => 'LuaTestStringProperty',
+				'term_search_key' => 'fooo'
+			]
+		);
 	}
 
 	protected function tearDown() {
