@@ -76,11 +76,6 @@ interface ClientStore {
 	public function getEntityIdLookup();
 
 	/**
-	 * @return DescriptionLookup
-	 */
-	public function getDescriptionLookup();
-
-	/**
 	 * @return PageRandomLookup
 	 */
 	public function getPageRandomLookup();
