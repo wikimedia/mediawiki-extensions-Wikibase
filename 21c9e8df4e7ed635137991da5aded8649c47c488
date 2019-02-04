@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1a5193a_58b374da",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:28:14Z",
+      "side": 1,
+      "message": "switch to constant",
+      "revId": "21c9e8df4e7ed635137991da5aded8649c47c488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e72dbfa_b8122210",
+        "filename": "lib/tests/phpunit/Store/Sql/TermSqlIndexTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:28:14Z",
+      "side": 1,
+      "message": "use constant from DataAccessSettings",
+      "revId": "21c9e8df4e7ed635137991da5aded8649c47c488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6237da41_33cf10f4",
+        "filename": "repo/includes/Store/Sql/SqlStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:28:14Z",
+      "side": 1,
+      "message": "use the constant",
+      "revId": "21c9e8df4e7ed635137991da5aded8649c47c488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7f06c33_2967fc44",
+        "filename": "repo/maintenance/rebuildTermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-04T16:28:14Z",
+      "side": 1,
+      "message": "use constant",
+      "revId": "21c9e8df4e7ed635137991da5aded8649c47c488",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
