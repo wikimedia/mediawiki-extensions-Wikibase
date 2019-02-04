@@ -719,6 +719,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return [];
 		}
 
+		var_dump($this->wiki);
 		$dbr = $this->getReadDb();
 
 		$termConditions = $this->criteriaToConditions( $dbr, $criteria, $termType, $entityType, $options );
