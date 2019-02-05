@@ -111,7 +111,6 @@ return [
 			'jquery.wikibase.sitelinkview',
 			'jquery.wikibase.snaklistview',
 			'jquery.wikibase.snakview',
-			'jquery.wikibase.statementgrouplabelscroll',
 			'jquery.wikibase.statementgrouplistview',
 			'jquery.wikibase.statementgroupview',
 			'jquery.wikibase.statementlistview',
