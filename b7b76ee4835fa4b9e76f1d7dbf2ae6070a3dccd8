@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d6a75d99_9a47f4e7",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T18:07:16Z",
+      "side": 1,
+      "message": "I wonder how much this is actually used.\nSplitting the parser cache for this would suck greatly.",
+      "parentUuid": "bf21524f_30bf871d",
+      "range": {
+        "startLine": 11,
+        "startChar": 305,
+        "endLine": 11,
+        "endChar": 383
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "55706e1e_d5985631",
         "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
         "patchSetId": 3
@@ -151,6 +175,30 @@
       "writtenOn": "2019-02-05T14:45:32Z",
       "side": 1,
       "message": "Not in the parser cache that is.",
+      "range": {
+        "startLine": 25,
+        "startChar": 157,
+        "endLine": 25,
+        "endChar": 165
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56640596_d325e476",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T18:07:16Z",
+      "side": 1,
+      "message": "The key motivation is the more the cache is split, the less it will be hit.\nSplits should be avoided unless actually needed.\nAs far as I know we would be the first people splitting the parser cache on a per user basis, and it is potentially something that we can do, but we would need to investigate this area more first.",
+      "parentUuid": "f9294c14_74772b7e",
       "range": {
         "startLine": 25,
         "startChar": 157,
