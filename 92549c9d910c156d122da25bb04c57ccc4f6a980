@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c029c13_c8141fdb",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseIndexField.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2019-02-05T17:59:20Z",
+      "side": 1,
+      "message": "why some are deprecated and others moved?\n\nIf there are deps (lexeme) should we try to empty this interface and mark it as extends Wikibase\\Repo\\Search\\Fields\\WikibaseIndexField ?",
+      "revId": "92549c9d910c156d122da25bb04c57ccc4f6a980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
