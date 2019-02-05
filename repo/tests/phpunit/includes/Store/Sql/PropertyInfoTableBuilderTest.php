@@ -136,7 +136,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$entitySource = new EntitySource(
 			'testsource',
 			false,
-			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ]
+			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
+			''
 		);
 
 		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource, $dataAccessSettings );

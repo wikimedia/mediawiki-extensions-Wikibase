@@ -441,6 +441,7 @@ class WikibaseRepo {
 	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
 		$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
 		$localDatabaseName = $settings->getSetting( 'changesDatabase' );
+		$localConceptBaseUri = $settings->getSetting( 'conceptBaseUri' );
 
 		$sources = [];
 
@@ -452,7 +453,7 @@ class WikibaseRepo {
 				'slot' => $slot,
 			];
 		}
-		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData );
+		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData, $localConceptBaseUri );
 
 		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
 
@@ -473,7 +474,8 @@ class WikibaseRepo {
 			$sources[] = new EntitySource(
 				$repository,
 				$repositorySettings['repoDatabase'],
-				$namespaceSlotData
+				$namespaceSlotData,
+				$repositorySettings['baseUri']
 			);
 		}
 

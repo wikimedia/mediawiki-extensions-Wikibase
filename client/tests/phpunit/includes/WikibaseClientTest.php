@@ -408,7 +408,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		return new EntitySourceDefinitions( [ new EntitySource(
 			'test',
 			false,
-			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ]
+			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
+			''
 		) ] );
 	}
 

@@ -57,7 +57,8 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 				false,
 				[
 					'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => 'main' ],
-				]
+				],
+				''
 			),
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
 		);
@@ -433,7 +434,8 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 			new EntitySource(
 				'testsource',
 				false,
-				[ 'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ]
+				[ 'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ],
+				''
 			),
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
 		);

@@ -34,4 +34,8 @@ class UnusableEntitySource extends EntitySource {
 		throw new \LogicException( __CLASS__ . ' should never be used' );
 	}
 
+	public function getConceptBaseUri() {
+		throw new \LogicException( __CLASS__ . ' should never be used' );
+	}
+
 }

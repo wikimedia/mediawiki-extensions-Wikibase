@@ -22,6 +22,8 @@ class EntitySourceDefinitions {
 	 */
 	private $entityTypeToSourceMapping = null;
 
+	private $sourceToConceptBaseUriMap = null;
+
 	/**
 	 * @param EntitySource[] $sources with unique names. An single entity type can not be used in two different sources.
 	 */
@@ -98,6 +100,19 @@ class EntitySourceDefinitions {
 			}
 		}
 		return $this->entityTypeToSourceMapping;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getConceptBaseUris() {
+		if ( $this->sourceToConceptBaseUriMap === null ) {
+			$this->sourceToConceptBaseUriMap = [];
+			foreach ( $this->sources as $source ) {
+				$this->sourceToConceptBaseUriMap[$source->getSourceName()] = $source->getConceptBaseUri();
+			}
+		}
+		return $this->sourceToConceptBaseUriMap;
 	}
 
 }
