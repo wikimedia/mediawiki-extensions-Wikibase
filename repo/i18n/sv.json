@@ -319,6 +319,7 @@
 	"wikibase-redirect-no-such-entity": "Kunde inte hitta entiteten $1",
 	"wikibase-redirect-cant-load-entity-content": "Kan inte komma åt innehåll, sidversionen kanske raderas.",
 	"wikibase-redirect-target-is-incompatible": "Inkompatibla entitetstyper",
+	"wikibase-redirect-source-and-target-are-the-same": "Det är inte möjligt att omdirigera en entitet till dig själv",
 	"wikibase-redirect-target-is-redirect": "Entiteten $1 är en omdirigering",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook förhindrade att omdirigering skapades",
 	"wikibase-redirect-cant-redirect": "Omdirigering misslyckades att skapas p.g.a. tekniska problem",
