@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6e1a7c2_db51df7e",
+        "filename": "data-access/tests/phpunit/UnusableEntitySourceTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T17:18:46Z",
+      "side": 1,
+      "message": "Not really related to this commit, but sure!",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "adb2c8cc8d93acc5439f24611067dda59627261a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67285193_504a027d",
+        "filename": "data-access/tests/phpunit/UnusableEntitySourceTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T17:18:46Z",
+      "side": 1,
+      "message": "Ahh, i see, you touched it because you added this :)",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 2
+      },
+      "revId": "adb2c8cc8d93acc5439f24611067dda59627261a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
