@@ -9,6 +9,8 @@ use Language;
 use MediaWikiTestCase;
 use RequestContext;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -218,7 +220,9 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$dataTypeLookup,
 			new StaticContentLanguages( [ 'en' ] ),
 			[ 'item', 'property' ],
-			[ '' => 'conceptBaseUri:' ]
+			[ '' => 'conceptBaseUri:' ],
+			new EntitySourceDefinitions( [] ),
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
 		);
 
 		$apiModule->execute();

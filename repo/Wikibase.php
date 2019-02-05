@@ -212,7 +212,9 @@ call_user_func( function() {
 				$repo->getPropertyDataTypeLookup(),
 				$repo->getTermsLanguages(),
 				$repo->getEnabledEntityTypes(),
-				$repo->getConceptBaseUris()
+				$repo->getConceptBaseUris(),
+				$repo->getEntitySourceDefinitions(),
+				$repo->getDataAccessSettings()
 			);
 		},
 	];

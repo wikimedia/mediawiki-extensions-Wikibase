@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use LogicException;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -50,6 +52,19 @@ class SearchEntities extends ApiBase {
 	private $conceptBaseUris;
 
 	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
+
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+
+	/**
+	 * TODO: $entityTypes and $conceptBaseUris could be replaced by EntitySourceDefinitions as are actually redundant
+	 * (and also are redundant in the repository prefix scenario, as RepositoryDefinitions have the information needed)
+	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param EntitySearchHelper $entitySearchHelper
@@ -58,7 +73,8 @@ class SearchEntities extends ApiBase {
 	 * @param ContentLanguages $termLanguages
 	 * @param string[] $entityTypes
 	 * @param string[] $conceptBaseUris Associative array mapping repository names to base URIs of concept URIs
-	 *
+	 * @param EntitySourceDefinitions $entitySourceDefinitions
+	 * @param DataAccessSettings $dataAccessSettings
 	 * @see ApiBase::__construct
 	 */
 	public function __construct(
@@ -69,7 +85,9 @@ class SearchEntities extends ApiBase {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,
-		array $conceptBaseUris
+		array $conceptBaseUris,
+		EntitySourceDefinitions $entitySourceDefinitions,
+		DataAccessSettings $dataAccessSettings
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -79,6 +97,8 @@ class SearchEntities extends ApiBase {
 		$this->termsLanguages = $termLanguages;
 		$this->entityTypes = $entityTypes;
 		$this->conceptBaseUris = $conceptBaseUris;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->dataAccessSettings = $dataAccessSettings;
 	}
 
 	/**
@@ -191,6 +211,17 @@ class SearchEntities extends ApiBase {
 	 * @return string
 	 */
 	private function getConceptBaseUri( EntityId $entityId ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
+			if ( !isset( $this->conceptBaseUris[$source->getSourceName()] ) ) {
+				throw new LogicException(
+					'No base URI for for concept URI for source: ' . $source->getSourceName()
+				);
+			}
+
+			return $this->conceptBaseUris[$source->getSourceName()];
+		}
+
 		if ( !isset( $this->conceptBaseUris[$entityId->getRepositoryName()] ) ) {
 			throw new LogicException(
 				'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName()
