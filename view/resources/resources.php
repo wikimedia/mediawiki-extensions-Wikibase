@@ -13,12 +13,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'jquery.removeClassByRegex' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.removeClassByRegex.js',
-			],
-		],
-
 		'jquery.sticknode' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/jquery.sticknode.js',
@@ -350,10 +344,10 @@ return call_user_func( function() {
 
 		'jquery.wikibase.referenceview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/jquery.removeClassByRegex.js',
 				'jquery/wikibase/jquery.wikibase.referenceview.js',
 			],
 			'dependencies' => [
-				'jquery.removeClassByRegex',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
