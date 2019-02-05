@@ -8,6 +8,9 @@ use MWException;
 use OutOfBoundsException;
 use Title;
 use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -48,6 +51,10 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 */
 	private $entityHandlers = [];
 
+	private $entitySourceDefinitions;
+	private $localEntitySource;
+	private $dataAccessSettings;
+
 	/**
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
 	 * @param callable[] $entityHandlerFactoryCallbacks Entity type ID to callback mapping for
@@ -57,6 +64,9 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	public function __construct(
 		array $entityContentModels,
 		array $entityHandlerFactoryCallbacks,
+		EntitySourceDefinitions $entitySourceDefinitions,
+		EntitySource $localEntitySource,
+		DataAccessSettings $dataAccessSettings,
 		InterwikiLookup $interwikiLookup = null
 	) {
 		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
@@ -64,6 +74,9 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 
 		$this->entityContentModels = $entityContentModels;
 		$this->entityHandlerFactoryCallbacks = $entityHandlerFactoryCallbacks;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->localEntitySource = $localEntitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->interwikiLookup = $interwikiLookup;
 	}
 
@@ -103,6 +116,20 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			if ( $this->entityNotFromLocalEntitySource( $id ) ) {
+				// TODO: the interwiki prefix is NOT expected to be the same as the source name (there is no
+				// way to enforce it either), so probably adding "interwiki" key to source config would be better
+				$interwiki = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() )->getSourceName();
+				if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
+					$pageName = 'EntityPage/' . $id->getSerialization();
+
+					// TODO: use a TitleFactory
+					return Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
+				}
+			}
+
+		}
 		if ( $id->isForeign() ) {
 			// TODO: The interwiki prefix *should* be the same as the repo name,
 			//        but we have no way to know or guarantee this! See T153496.
@@ -118,6 +145,11 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 
 		$handler = $this->getContentHandlerForType( $id->getEntityType() );
 		return $handler->getTitleForId( $id );
+	}
+
+	private function entityNotFromLocalEntitySource( EntityId $id ) {
+		$entitySource = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() );
+		return $entitySource->getSourceName() !== $this->localEntitySource->getSourceName();
 	}
 
 	/**

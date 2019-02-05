@@ -13,6 +13,8 @@ use Revision;
 use Status;
 use User;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -114,6 +116,19 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			false
 		);
 
+		$localSource = new EntitySource(
+			'local',
+			false,
+			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
+			''
+		);
+		$customSource = new EntitySource(
+			'custom',
+			'customdb',
+			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
+			''
+		);
+
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
 				[
@@ -131,7 +146,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					'custom-type' => function() use ( $wikibaseRepo ) {
 						return $this->newCustomEntityHandler();
 					},
-				]
+				],
+				new EntitySourceDefinitions( [ $localSource, $customSource ] ),
+				$localSource,
+				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),
