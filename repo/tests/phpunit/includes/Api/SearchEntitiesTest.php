@@ -7,6 +7,9 @@ use FauxRequest;
 use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -146,7 +149,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
-			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ]
+			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
+			new EntitySourceDefinitions( [] ),
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
 		);
 
 		$module->execute();
@@ -367,6 +372,129 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $result['search'] );
 	}
 
+	public function provideTestSearchEntities_entitySourceBasedFederation() {
+		$itemMatch = new TermSearchResult(
+			new Term( 'qid', 'Q111' ),
+			'entityId',
+			new ItemId( 'Q111' ),
+			new Term( 'pt', 'ptLabel' ),
+			new Term( 'pt', 'ptDescription' )
+		);
+
+		$propertyMatch = new TermSearchResult(
+			new Term( 'en', 'PropertyLabel' ),
+			'label',
+			new PropertyId( 'P123' ),
+			new Term( 'en', 'PropertyLabel' )
+		);
+
+		$itemExpectedResult = [
+			'repository' => '',
+			'id' => 'Q111',
+			'concepturi' => 'http://acme.test/concept/Q111',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'ptLabel',
+			'description' => 'ptDescription',
+			'aliases' => [ 'Q111' ],
+			'match' => [
+				'type' => 'entityId',
+				'text' => 'Q111',
+			],
+		];
+
+		yield 'Exact EntityId match' => [
+			[ 'search' => 'Q111' ],
+			[ $itemMatch ],
+			[ $itemExpectedResult ],
+		];
+
+		$propertyResult = [
+			'repository' => '', // TODO: should use source name as value here
+			'id' => 'P123',
+			'concepturi' => 'http://foreign.wiki/concept/P123',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'datatype' => 'PropertyDataType',
+			'label' => 'PropertyLabel',
+			'match' => [
+				'type' => 'label',
+				'language' => 'en',
+				'text' => 'PropertyLabel',
+			],
+		];
+
+		yield 'Property from other source matched' => [
+			[ 'search' => 'SomeText' ],
+			[ $propertyMatch ],
+			[ $propertyResult ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideTestSearchEntities_entitySourceBasedFederation
+	 */
+	public function testSearchEntities_entitySourceBasedFederation( array $overrideParams, array $interactorReturn, array $expected ) {
+		$params = array_merge( [
+			'action' => 'wbsearchentities',
+			'search' => 'Foo',
+			'type' => 'item',
+			'language' => 'en'
+		], $overrideParams );
+
+		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, $interactorReturn );
+
+		$result = $this->callApiModuleForSourceBasedFederation( $params, $entitySearchHelper );
+
+		$this->assertResultLooksGood( $result );
+		$this->assertEquals( $expected, $result['search'] );
+	}
+
+	/**
+	 * @param array $params
+	 * @param EntitySearchHelper|null $entitySearchHelper
+	 *
+	 * @return array[]
+	 */
+	private function callApiModuleForSourceBasedFederation( array $params, EntitySearchHelper $entitySearchHelper = null ) {
+		$module = new SearchEntities(
+			$this->getApiMain( $params ),
+			'wbsearchentities',
+			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
+			$this->getMockTitleLookup(),
+			$this->getMockPropertyDataTypeLookup(),
+			$this->getContentLanguages(),
+			[ 'item', 'property' ],
+			[ 'local' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
+					'http://acme.test/concept/'
+				),
+				new EntitySource(
+					'foreign',
+					'otherdb',
+					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
+					'http://acme.test/concept/'
+				)
+			] ),
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+		);
+
+		$module->execute();
+
+		$result = $module->getResult();
+		return $result->getResultData( null, [
+			'BC' => [],
+			'Types' => [],
+			'Strip' => 'all',
+		] );
+	}
+
 	private function assertResultLooksGood( $result ) {
 		$this->assertArrayHasKey( 'searchinfo', $result );
 		$this->assertArrayHasKey( 'search', $result['searchinfo'] );
@@ -415,7 +543,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'kitten' ],
-			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ]
+			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
+			new EntitySourceDefinitions( [] ),
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
 		);
 
 		$module->execute();

@@ -349,6 +349,11 @@ class WikibaseRepo {
 	 */
 	private $entitySourceDefinitions;
 
+	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -2215,9 +2220,12 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return string[] Associative array mapping repository names to base URIs of concept URIs.
+	 * @return string[] Associative array mapping repository or entity source names to base URIs of concept URIs.
 	 */
 	public function getConceptBaseUris() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			return $this->entitySourceDefinitions->getConceptBaseUris();
+		}
 		return $this->repositoryDefinitions->getConceptBaseUris();
 	}
 
@@ -2277,13 +2285,20 @@ class WikibaseRepo {
 		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
 	}
 
-	private function getDataAccessSettings() {
-		return new DataAccessSettings(
-			$this->settings->getSetting( 'maxSerializedEntitySize' ),
-			$this->settings->getSetting( 'useTermsTableSearchFields' ),
-			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$this->settings->getSetting( 'useEntitySourceBasedFederation' )
-		);
+	public function getDataAccessSettings() {
+		if ( $this->dataAccessSettings === null ) {
+			$this->dataAccessSettings = new DataAccessSettings(
+				$this->settings->getSetting( 'maxSerializedEntitySize' ),
+				$this->settings->getSetting( 'useTermsTableSearchFields' ),
+				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
+				$this->settings->getSetting( 'useEntitySourceBasedFederation' )
+			);
+		}
+		return $this->dataAccessSettings;
+	}
+
+	public function getEntitySourceDefinitions() {
+		return $this->entitySourceDefinitions;
 	}
 
 	private function getMultiRepositoryServiceWiring() {
