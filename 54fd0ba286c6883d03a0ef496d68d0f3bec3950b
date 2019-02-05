@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2564ff7d_44dc3201",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T16:35:49Z",
+      "side": 1,
+      "message": "This condition means that since commons became a repo, the pageterms api module no longer works for pages linked to wikidata items.\nThat isn\u0027t fixed or broken in this change but i figured i would write it down.",
+      "range": {
+        "startLine": 223,
+        "startChar": 3,
+        "endLine": 231,
+        "endChar": 4
+      },
+      "revId": "54fd0ba286c6883d03a0ef496d68d0f3bec3950b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
