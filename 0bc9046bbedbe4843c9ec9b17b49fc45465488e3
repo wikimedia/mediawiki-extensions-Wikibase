@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7bddd692_6803d84b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-02-05T12:13:57Z",
+      "side": 1,
+      "message": "Also T209494 \u003d)",
+      "revId": "0bc9046bbedbe4843c9ec9b17b49fc45465488e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
