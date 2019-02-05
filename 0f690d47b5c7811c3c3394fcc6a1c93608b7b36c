@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f27d29f1_2738d7cc",
+        "filename": "client/tests/phpunit/MockClientStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T16:55:40Z",
+      "side": 1,
+      "message": "This could totally be removed once https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/487968/ is fixed to remove the getDescriptionLookup method in this class",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 2
+      },
+      "revId": "0f690d47b5c7811c3c3394fcc6a1c93608b7b36c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
