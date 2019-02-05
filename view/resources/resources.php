@@ -13,21 +13,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'jquery.removeClassByRegex' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.removeClassByRegex.js',
-			],
-		],
-
-		'jquery.sticknode' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.sticknode.js',
-			],
-			'dependencies' => [
-				'jquery.util.EventSingletonManager',
-			],
-		],
-
 		'jquery.util.EventSingletonManager' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/jquery.util.EventSingletonManager.js',
@@ -46,20 +31,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
-			],
-		],
-
-		'jquery.ui.tagadata' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/ui/jquery.ui.tagadata.js',
-			],
-			'styles' => [
-				'jquery/ui/jquery.ui.tagadata.css',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.inputautoexpand',
-				'jquery.ui.widget',
 			],
 		],
 
@@ -87,14 +58,17 @@ return call_user_func( function() {
 
 		'jquery.wikibase.aliasesview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/ui/jquery.ui.tagadata.js',
 				'jquery/wikibase/jquery.wikibase.aliasesview.js',
 			],
 			'styles' => [
+				'jquery/ui/jquery.ui.tagadata.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
 			],
 			'dependencies' => [
+				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
-				'jquery.ui.tagadata',
+				'jquery.ui.widget',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.MultiTerm',
@@ -350,10 +324,10 @@ return call_user_func( function() {
 
 		'jquery.wikibase.referenceview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/jquery.removeClassByRegex.js',
 				'jquery/wikibase/jquery.wikibase.referenceview.js',
 			],
 			'dependencies' => [
-				'jquery.removeClassByRegex',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
@@ -376,15 +350,15 @@ return call_user_func( function() {
 
 		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/jquery.sticknode.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js'
 			],
 			'styles' => [
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
 			],
 			'dependencies' => [
-				'jquery.sticknode',
-				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.sitelinkgroupview.mw-collapsible.styles',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
@@ -650,7 +624,9 @@ return call_user_func( function() {
 			],
 		],
 
-		// common styles independent from JavaScript being enabled or disabled
+		// Common styles independent from JavaScript being enabled or disabled.
+		//
+		// FIXME: Registered for WikibaseClient, but only loaded by WikibaseRepo.
 		'wikibase.common' => $moduleTemplate + [
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
@@ -670,6 +646,7 @@ return call_user_func( function() {
 			]
 		],
 
+		// FIXME: Registered for WikibaseClient, but only loaded by WikibaseRepo.
 		'wikibase.mobile' => $moduleTemplate + [
 			'styles' => [
 				'wikibase/wikibase.mobile.css'
@@ -680,6 +657,7 @@ return call_user_func( function() {
 			'targets' => 'mobile'
 		],
 
+		// FIXME: Never loaded. Only used by wikibase.ui.entityViewInit (WikibaseRepo).
 		'wikibase.RevisionStore' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/wikibase.RevisionStore.js',
@@ -697,16 +675,7 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.ValueViewBuilder' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/wikibase.ValueViewBuilder.js',
-			],
-			'dependencies' => [
-				'wikibase',
-				'jquery.valueview',
-			],
-		],
-
+		// FIXME: Never loaded. Only used by wikibase.formatters.ApiValueFormatterFactory (WikibaseRepo).
 		'wikibase.ValueFormatterFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/wikibase.ValueFormatterFactory.js',
@@ -1044,9 +1013,12 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase/wikibase.ValueViewBuilder.js',
 				'wikibase/view/ViewFactory.js'
 			],
 			'dependencies' => [
+				'wikibase',
+				'jquery.valueview',
 				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.itemview',
@@ -1062,7 +1034,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.Term',
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
-				'wikibase.ValueViewBuilder'
 			],
 			'messages' => [
 				'wikibase-entitytermsview-input-help-message',
