@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf21524f_30bf871d",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "\"toogle state\" AKA \"stickyness\". It is worth noting that this setting also exists (persisted in a cookie; see https://phabricator.wikimedia.org/T209496) for anonymous, i.e. non-logged-in users, and not only for logged-in users (see https://phabricator.wikimedia.org/T211771).\n_If_ the /cookie value/ is supposed to be taken into consideration when rendering /on the server side/ then this would *have to* be a cache dimension (albeit a binary one).",
+      "range": {
+        "startLine": 11,
+        "startChar": 305,
+        "endLine": 11,
+        "endChar": 383
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55706e1e_d5985631",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "I\u0027m sure this sentence is trying to say the right thing but somehow it does not resonate with me.\nTo render the traditional termbox `EntityViewPlaceholderExpander` uses component-level template definitions (\"how\") that can be interpolated in the PHP runtime based on entity information and logic implemented in wikibase (\"what\").\nThe new service only allows to render the termbox as a whole, not its parts on a component level, and also encapsulates the business logic \"what\" to render, not only \"how\".\n\nConsequently, a placeholder approach is only viable as in \"one placeholder for the entire new termbox\", i.e. deferring the termbox rendering until after the page is retrieved from the parse cache, as proposed for logged-in users in the decision section of this ADR.",
+      "range": {
+        "startLine": 13,
+        "startChar": 463,
+        "endLine": 13,
+        "endChar": 592
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9755693f_1dfd8c77",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "i.e. `preferredLanguages !\u003d\u003d [ primaryLanguage ]`?",
+      "range": {
+        "startLine": 15,
+        "startChar": 367,
+        "endLine": 15,
+        "endChar": 429
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a78cf6f9_02dc8726",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "The most ugly of prototypes: I65b3715e318939797b219178e10428bc39bc1290",
+      "range": {
+        "startLine": 19,
+        "startChar": 155,
+        "endLine": 19,
+        "endChar": 186
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf2140f1_68495a0b",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "This would be an (optional) bonus feature.\n(Maybe we should start to name the \"fallback\" levels to avoid confusing others and ourselves.)",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 97
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3aa36b0_8a549cb5",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "As this is a recurring pattern: What is the key motivation to avoid \"further\" splitting the parser cache?",
+      "range": {
+        "startLine": 25,
+        "startChar": 57,
+        "endLine": 25,
+        "endChar": 91
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9294c14_74772b7e",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "Not in the parser cache that is.",
+      "range": {
+        "startLine": 25,
+        "startChar": 157,
+        "endLine": 25,
+        "endChar": 165
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d29c58a_4f1097e4",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-05T14:45:32Z",
+      "side": 1,
+      "message": "The termbox service is stateless (even more so after https://phabricator.wikimedia.org/T210615) and as such transparently adding caching technologies between the node service it exposes and mediawiki are a definite option (related umbrella ticket https://phabricator.wikimedia.org/T208381).",
+      "range": {
+        "startLine": 27,
+        "startChar": 50,
+        "endLine": 27,
+        "endChar": 95
+      },
+      "revId": "b7b76ee4835fa4b9e76f1d7dbf2ae6070a3dccd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
