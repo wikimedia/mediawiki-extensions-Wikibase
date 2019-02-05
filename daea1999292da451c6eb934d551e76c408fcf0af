@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d10f4dfc_fc4d295b",
+        "filename": "lib/includes/Store/Sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T11:49:23Z",
+      "side": 1,
+      "message": "Not worth fixing this now, but this could do with some cleanup.\nMost of the stuff in the settings are about writing for example, and everywhere we are passing in both an EntitySource and these settings.",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 41
+      },
+      "revId": "daea1999292da451c6eb934d551e76c408fcf0af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
