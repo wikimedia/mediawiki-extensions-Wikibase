@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd9279f1_93b74952",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T16:41:44Z",
+      "side": 1,
+      "message": "Yes",
+      "range": {
+        "startLine": 1587,
+        "startChar": 3,
+        "endLine": 1587,
+        "endChar": 74
+      },
+      "revId": "6c814c2a9c15bd06eefb036ff52990f57a2d8764",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
