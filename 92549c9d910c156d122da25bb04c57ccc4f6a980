@@ -16,6 +16,24 @@
       "revId": "92549c9d910c156d122da25bb04c57ccc4f6a980",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8292433_6da67352",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseIndexField.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-02-05T18:11:51Z",
+      "side": 1,
+      "message": "For compatibility. There could be extensions still using the old class (in fact, there are, e.g. lexeme). So, we keep the old class, but after moving the clients to the new class we\u0027ll drop it.\n\nEmptying unfortunately breaks tests (phpunit would not mock empty interface properly).",
+      "parentUuid": "3c029c13_c8141fdb",
+      "revId": "92549c9d910c156d122da25bb04c57ccc4f6a980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
