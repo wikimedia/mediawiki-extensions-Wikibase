@@ -79,11 +79,8 @@ return [
 		],
 		'dependencies' => [
 			'dataValues.values',
-			'jquery.removeClassByRegex',
-			'jquery.sticknode',
 			'jquery.ui.closeable',
 			'jquery.ui.EditableTemplatedWidget',
-			'jquery.ui.tagadata',
 			'jquery.ui.TemplatedWidget',
 			'jquery.util.EventSingletonManager',
 			'jquery.util.getDirectionality',
