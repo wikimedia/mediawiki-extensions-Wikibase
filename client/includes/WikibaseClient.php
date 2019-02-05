@@ -827,12 +827,14 @@ final class WikibaseClient {
 		) {
 			$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
 			$localDatabaseName = $settings->getSetting( 'repoDatabase' );
+			$localConceptBaseUri = $settings->getSetting( 'repoConceptBaseUri' );
 			unset( $repoSettingsArray[''] );
 		}
 
 		if ( array_key_exists( '', $repoSettingsArray ) ) {
 			$localEntityNamespaces = $repoSettingsArray['']['entityNamespaces'];
 			$localDatabaseName = $repoSettingsArray['']['repoDatabase'];
+			$localConceptBaseUri = $repoSettingsArray['']['baseUri'];
 			unset( $repoSettingsArray[''] );
 		}
 
@@ -846,7 +848,7 @@ final class WikibaseClient {
 				'slot' => $slot,
 			];
 		}
-		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData );
+		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData, $localConceptBaseUri );
 
 		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
 			$namespaceSlotData = [];
@@ -860,7 +862,8 @@ final class WikibaseClient {
 			$sources[] = new EntitySource(
 				$repository,
 				$repositorySettings['repoDatabase'],
-				$namespaceSlotData
+				$namespaceSlotData,
+				$repositorySettings['baseUri']
 			);
 		}
 
