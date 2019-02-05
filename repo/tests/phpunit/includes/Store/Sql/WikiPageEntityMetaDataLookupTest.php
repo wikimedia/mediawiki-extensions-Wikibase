@@ -40,10 +40,6 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
-	// TODO use constants from DataAccessSettings
-	const REPOSITORY_PREFIX_BASED_FEDERATION = false;
-	const ENTITY_SOURCE_BASED_FEDERATION = true;
-
 	/**
 	 * @var EntityRevision[]
 	 */
