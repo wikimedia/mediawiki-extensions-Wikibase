@@ -13,49 +13,54 @@ use Wikibase\DataAccess\UnusableEntitySource;
  */
 class UnusableEntitySourceTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @expectedException \LogicException
-	 */
+	use \PHPUnit4And6Compat;
+
 	public function testGetDatabaseNameThrowsException() {
 		$source = new UnusableEntitySource();
+
+		$this->expectException( \LogicException::class );
 
 		$source->getDatabaseName();
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 */
 	public function testGetSourceNameThrowsException() {
 		$source = new UnusableEntitySource();
+
+		$this->expectException( \LogicException::class );
 
 		$source->getSourceName();
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 */
 	public function testGetEntitySlotNamesThrowsException() {
 		$source = new UnusableEntitySource();
+
+		$this->expectException( \LogicException::class );
 
 		$source->getEntitySlotNames();
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 */
 	public function testGetEntityTypesThrowsException() {
 		$source = new UnusableEntitySource();
+
+		$this->expectException( \LogicException::class );
 
 		$source->getEntityTypes();
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 */
 	public function testGetEntityNamespaceIdsThrowsException() {
 		$source = new UnusableEntitySource();
 
+		$this->expectException( \LogicException::class );
+
 		$source->getEntityNamespaceIds();
+	}
+
+	public function testGetConceptBaseUriThrowsException() {
+		$source = new UnusableEntitySource();
+
+		$this->expectException( \LogicException::class );
+
+		$source->getConceptBaseUri();
 	}
 
 }
