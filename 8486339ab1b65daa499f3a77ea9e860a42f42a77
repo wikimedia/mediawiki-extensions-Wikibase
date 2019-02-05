@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a096fd86_3040e1dd",
+        "filename": "data-access/src/MultipleEntitySourceServices.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T11:51:05Z",
+      "side": 1,
+      "message": "Yes",
+      "range": {
+        "startLine": 170,
+        "startChar": 3,
+        "endLine": 171,
+        "endChar": 20
+      },
+      "revId": "8486339ab1b65daa499f3a77ea9e860a42f42a77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
