@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1e23db_6efa9e7b",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T14:38:53Z",
+      "side": 1,
+      "message": "+1",
+      "range": {
+        "startLine": 800,
+        "startChar": 1,
+        "endLine": 802,
+        "endChar": 60
+      },
+      "revId": "c3dfe816370e4f0bf6ca36def6ab3c9c304a3061",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d5f3689_f41b3415",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-05T14:38:53Z",
+      "side": 1,
+      "message": "It would be good to be able to use this same block of code between client and repo, to avoid forgetting things in either one.\nIt might be worth adding a note?",
+      "range": {
+        "startLine": 803,
+        "startChar": 25,
+        "endLine": 803,
+        "endChar": 63
+      },
+      "revId": "c3dfe816370e4f0bf6ca36def6ab3c9c304a3061",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
