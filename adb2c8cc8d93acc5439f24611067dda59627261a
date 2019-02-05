@@ -45,6 +45,30 @@
       "revId": "adb2c8cc8d93acc5439f24611067dda59627261a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04b150b0_de6b62cd",
+        "filename": "data-access/tests/phpunit/UnusableEntitySourceTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-05T17:29:50Z",
+      "side": 1,
+      "message": "yes!",
+      "parentUuid": "67285193_504a027d",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 2
+      },
+      "revId": "adb2c8cc8d93acc5439f24611067dda59627261a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
