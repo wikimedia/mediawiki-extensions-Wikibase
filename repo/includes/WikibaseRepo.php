@@ -785,6 +785,9 @@ class WikibaseRepo {
 		return new EntityContentFactory(
 			$this->getContentModelMappings(),
 			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks(),
+			$this->entitySourceDefinitions,
+			$this->getLocalEntitySource(),
+			$this->getDataAccessSettings(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
