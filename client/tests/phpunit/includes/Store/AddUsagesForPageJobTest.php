@@ -124,7 +124,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 
 		$title = $this->getMock( Title::class );
 		$title->expects( $this->once() )
-			->method( 'getArticleId' )
+			->method( 'getArticleID' )
 			->will( $this->returnValue( 17 ) );
 
 		$usages = [ $usageQ5X ];

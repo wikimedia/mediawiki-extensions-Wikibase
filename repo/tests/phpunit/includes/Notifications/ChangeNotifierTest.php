@@ -82,7 +82,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$title->method( 'getArticleId' )
+		$title->method( 'getArticleID' )
 			->will( $this->returnValue( 7 ) );
 
 		$title->method( 'getLatestRevId' )

@@ -53,7 +53,7 @@ class AddUsagesForPageJob extends Job {
 		}, $usages );
 
 		$jobParams = [
-			'pageId' => $title->getArticleId(),
+			'pageId' => $title->getArticleID(),
 			'usages' => $usages
 		];
 
