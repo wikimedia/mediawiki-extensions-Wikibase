@@ -78,6 +78,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 				'test',
 				'testdb',
 				[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+				'',
 				''
 			) ] )
 		);

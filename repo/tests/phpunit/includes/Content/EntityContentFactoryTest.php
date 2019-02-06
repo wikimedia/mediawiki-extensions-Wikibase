@@ -99,8 +99,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function newFactory() {
-		$itemSource = new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '' );
-		$propertySource = new EntitySource( 'properties', 'propertydbx	', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '' );
+		$itemSource = new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '', '' );
+		$propertySource = new EntitySource( 'properties', 'propertydbx	', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '', '' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -171,8 +171,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function newFactoryForSourceBasedFederation() {
-		$itemSource = new EntitySource( 'itemwiki', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '' );
-		$propertySource = new EntitySource( 'propertywiki', 'propertydbx	', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '' );
+		$itemSource = new EntitySource( 'itemwiki', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '', '' );
+		$propertySource = new EntitySource( 'propertywiki', 'propertydb', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '', '' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 

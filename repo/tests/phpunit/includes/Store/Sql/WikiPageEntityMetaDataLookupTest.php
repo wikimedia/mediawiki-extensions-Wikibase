@@ -136,6 +136,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => $irrelevantItemSlotName ],
 				'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ],
 			],
+			'',
 			''
 		);
 	}
@@ -596,6 +597,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			[
 				'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => $irrelevantItemSlotName ],
 			],
+			'',
 			''
 		);
 
