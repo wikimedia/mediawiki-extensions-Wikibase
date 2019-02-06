@@ -56,56 +56,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.statementgroupview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.statementgroupview.js',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
-				'jquery.ui.widget',
-				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.StatementList',
-			],
-		],
-
-		'jquery.wikibase.statementlistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.statementlistview.js',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
-				'jquery.ui.widget',
-				'jquery.wikibase.listview',
-				'wikibase.datamodel.StatementList',
-			],
-			'messages' => [
-					'wikibase-statementlistview-add',
-					'wikibase-statementlistview-add-tooltip',
-			],
-		],
-
-		'jquery.wikibase.descriptionview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.descriptionview.js',
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
-			],
-			'dependencies' => [
-				'jquery.inputautoexpand',
-				'jquery.ui.core',
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.util.getDirectionality',
-				'wikibase.datamodel.Term',
-				'wikibase.getLanguageNameByCode',
-			],
-			'messages' => [
-				'wikibase-description-edit-placeholder',
-				'wikibase-description-edit-placeholder-language-aware',
-				'wikibase-description-empty',
-			],
-		],
-
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',
@@ -187,11 +137,13 @@ return call_user_func( function() {
 
 		'jquery.wikibase.entitytermsforlanguageview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.descriptionview.js',
 				'jquery/ui/jquery.ui.tagadata.js',
 				'jquery/wikibase/jquery.wikibase.aliasesview.js',
 				'jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js',
 			],
 			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'jquery/ui/jquery.ui.tagadata.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
@@ -200,17 +152,22 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
 				'jquery.ui.widget',
+				'jquery.ui.core',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.getDirectionality',
 				'wikibase.datamodel.MultiTerm',
-				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.labelview',
+				'wikibase.datamodel.Term',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.templates',
 			],
 			'messages' => [
 				'wikibase-aliases-input-help-message',
 				'wikibase-alias-edit-placeholder',
+				'wikibase-description-edit-placeholder',
+				'wikibase-description-edit-placeholder-language-aware',
+				'wikibase-description-empty',
+			],
 			],
 		],
 
@@ -973,6 +930,8 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.statementgroupview.js',
+				'jquery/wikibase/jquery.wikibase.statementlistview.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
 				'wikibase/wikibase.ValueViewBuilder.js',
@@ -989,11 +948,11 @@ return call_user_func( function() {
 				'jquery.wikibase.propertyview',
 				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.sitelinklistview',
-				'jquery.wikibase.statementgroupview',
-				'jquery.wikibase.statementlistview',
 				'jquery.wikibase.statementview',
 				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
@@ -1005,6 +964,8 @@ return call_user_func( function() {
 				'wikibase-aliases-separator',
 				'wikibase-statementgrouplistview-add',
 				'wikibase-statementgrouplistview-add-tooltip',
+				'wikibase-statementlistview-add',
+				'wikibase-statementlistview-add-tooltip',
 			]
 		],
 	];
