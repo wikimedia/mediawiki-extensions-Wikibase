@@ -16,12 +16,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Test\MockClientStore;
-use Wikibase\WikibaseSettings;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * Simple integration test for the {{#statements:…}} parser function.
@@ -50,11 +51,10 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'wb_terms';
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-		$store = $wikibaseClient->getStore();
+		$this->maskPropertyLabelResolver( $wikibaseClient );
 
+		$store = $wikibaseClient->getStore();
 		if ( !( $store instanceof MockClientStore ) ) {
 			$store = new MockClientStore( 'de' );
 			$wikibaseClient->overrideStore( $store );
@@ -77,21 +77,18 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$this->setAllowDataAccessInUserLanguage( false );
 	}
 
-	public function addDBDataOnce() {
-		$db = wfGetDB( DB_MASTER );
+	private function maskPropertyLabelResolver( WikibaseClient $wikibaseClient ) {
+		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
 
-		$db->insert(
-			'wb_terms',
-			[
-				'term_full_entity_id' => 'P342',
-				'term_entity_id' => 342,
-				'term_entity_type' => 'property',
-				'term_language' => 'de',
-				'term_type' => 'label',
-				'term_text' => 'LuaTestStringProperty',
-				'term_search_key' => 'fooo'
-			]
-		);
+		$propertyLabelResolver = $this->getMock( PropertyLabelResolver::class );
+		$propertyLabelResolver->expects( $this->any() )
+			->method( 'getPropertyIdsForLabels' )
+			->with( [ 'LuaTestStringProperty' ] )
+			->will( $this->returnValue(
+				[ 'LuaTestStringProperty' => new PropertyId( 'P342' ) ]
+			) );
+
+		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
 	}
 
 	protected function tearDown() {
@@ -110,11 +107,6 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	}
 
 	public function testStatementsParserFunction_byPropertyLabel() {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because a local wb_terms table"
-				. " is not available on a WikibaseClient only instance." );
-		}
-
 		$result = $this->parseWikitextToHtml( '{{#statements:LuaTestStringProperty}}' );
 
 		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
