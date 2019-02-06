@@ -218,7 +218,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 */
 	private function assertTrackedUsages( array $expected, Title $title, $msg = '' ) {
 		$lookup = WikibaseClient::getDefaultInstance()->getStore()->getUsageLookup();
-		$actual = $lookup->getUsagesForPage( $title->getArticleId() );
+		$actual = $lookup->getUsagesForPage( $title->getArticleID() );
 
 		$expectedUsageStrings = $this->getUsageStrings( $expected );
 		$actualUsageStrings = $this->getUsageStrings( $actual );

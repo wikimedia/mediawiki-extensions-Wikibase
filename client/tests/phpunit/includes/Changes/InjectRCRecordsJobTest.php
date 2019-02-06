@@ -382,7 +382,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		$pages = [];
 
 		foreach ( $titles as $title ) {
-			$id = $title->getArticleId();
+			$id = $title->getArticleID();
 			$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
 		}
 
@@ -479,7 +479,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	private function getTitleIDs( array $titles ) {
 		return array_map(
 			function( Title $title ) {
-				return $title->getArticleId();
+				return $title->getArticleID();
 			},
 			$titles
 		);

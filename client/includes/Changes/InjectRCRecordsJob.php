@@ -83,7 +83,7 @@ class InjectRCRecordsJob extends Job {
 		$pages = [];
 
 		foreach ( $titles as $t ) {
-			$id = $t->getArticleId();
+			$id = $t->getArticleID();
 			$pages[$id] = [ $t->getNamespace(), $t->getDBkey() ];
 		}
 
