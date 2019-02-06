@@ -192,6 +192,7 @@ use Wikibase\UpsertSqlIdGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
+use Wikibase\WikibaseSummaryFormatter;
 use Wikimedia\ObjectFactory;
 
 /**
@@ -1416,7 +1417,7 @@ class WikibaseRepo {
 			$options
 		);
 
-		$formatter = new SummaryFormatter(
+		$formatter = new WikibaseSummaryFormatter(
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,

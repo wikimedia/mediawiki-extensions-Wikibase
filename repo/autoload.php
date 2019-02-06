@@ -457,6 +457,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Store\\Sql\\SqlChangeDispatchCoordinator' => __DIR__ . '/includes/Store/Sql/SqlChangeDispatchCoordinator.php',
 	'Wikibase\\Store\\Sql\\SqlSubscriptionLookup' => __DIR__ . '/includes/Store/Sql/SqlSubscriptionLookup.php',
 	'Wikibase\\Store\\SubscriptionLookup' => __DIR__ . '/includes/Store/SubscriptionLookup.php',
+	'Wikibase\\StringSummaryFormatter' => __DIR__ . '/includes/StringSummaryFormatter.php',
 	'Wikibase\\SubmitEntityAction' => __DIR__ . '/includes/Actions/SubmitEntityAction.php',
 	'Wikibase\\SummaryFormatter' => __DIR__ . '/includes/SummaryFormatter.php',
 	'Wikibase\\TermSearchKeyBuilder' => __DIR__ . '/includes/Store/Sql/TermSearchKeyBuilder.php',
@@ -464,4 +465,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
 	'Wikibase\\UpsertSqlIdGenerator' => __DIR__ . '/includes/Store/Sql/UpsertSqlIdGenerator.php',
 	'Wikibase\\ViewEntityAction' => __DIR__ . '/includes/Actions/ViewEntityAction.php',
+	'Wikibase\\WikibaseSummaryFormatter' => __DIR__ . '/includes/WikibaseSummaryFormatter.php',
 ];
