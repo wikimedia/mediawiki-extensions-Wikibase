@@ -22,6 +22,30 @@
       "revId": "31b04a17e8db0f93391e29aa8edf2734642380b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1fd9890_d62d4ec5",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-06T09:11:26Z",
+      "side": 1,
+      "message": "that\u0027s what I tried to say in TODO.\nI would add in the separate patch though.\n\nAlso, this is as evil as the the assumption made below that repository prefix is interwiki. I want to get rid of \"magic\" assumptions as they\u0027re pure evil, but as a first step I thought let\u0027s do it like that.\nIf it it makes sense to do it with interwiki added to source def right away, can do,that would mean one patch added before this one.",
+      "parentUuid": "645b40ad_b69bd8f6",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 113
+      },
+      "revId": "31b04a17e8db0f93391e29aa8edf2734642380b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
