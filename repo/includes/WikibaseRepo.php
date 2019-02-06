@@ -608,7 +608,8 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getKartographerEmbeddingHandler()
+			$this->getKartographerEmbeddingHandler(),
+			$this->settings->getSetting( 'useKartographerMaplinkInWikitext' )
 		);
 	}
 

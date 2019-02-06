@@ -314,7 +314,8 @@ final class WikibaseClient {
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
 				$entityTitleLookup,
-				$kartographerEmbeddingHandler
+				$kartographerEmbeddingHandler,
+				$this->settings->getSetting( 'useKartographerMaplinkInWikitext' )
 			);
 		}
 
