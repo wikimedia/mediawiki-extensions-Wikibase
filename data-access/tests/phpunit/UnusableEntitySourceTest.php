@@ -63,4 +63,12 @@ class UnusableEntitySourceTest extends \PHPUnit_Framework_TestCase {
 		$source->getConceptBaseUri();
 	}
 
+	public function testGetInterwikiPrefixThrowsException() {
+		$source = new UnusableEntitySource();
+
+		$this->expectException( \LogicException::class );
+
+		$source->getInterwikiPrefix();
+	}
+
 }

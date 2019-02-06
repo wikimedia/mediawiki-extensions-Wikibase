@@ -458,7 +458,7 @@ class WikibaseRepo {
 				'slot' => $slot,
 			];
 		}
-		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData, $localConceptBaseUri );
+		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData, $localConceptBaseUri, '' );
 
 		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
 
@@ -480,7 +480,8 @@ class WikibaseRepo {
 				$repository,
 				$repositorySettings['repoDatabase'],
 				$namespaceSlotData,
-				$repositorySettings['baseUri']
+				$repositorySettings['baseUri'],
+				$repository // TODO: this is a "magic" default/assumption
 			);
 		}
 

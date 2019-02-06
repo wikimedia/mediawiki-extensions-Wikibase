@@ -473,13 +473,15 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'local',
 					false,
 					[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
-					'http://acme.test/concept/'
+					'http://acme.test/concept/',
+					''
 				),
 				new EntitySource(
 					'foreign',
 					'otherdb',
 					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
-					'http://acme.test/concept/'
+					'http://acme.test/concept/',
+					'otherwiki'
 				)
 			] ),
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )

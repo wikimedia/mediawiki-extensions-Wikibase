@@ -621,6 +621,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			'test',
 			false,
 			[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+			'',
 			''
 		) ] );
 	}

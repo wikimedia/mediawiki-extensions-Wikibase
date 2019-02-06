@@ -113,6 +113,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 					'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ],
 					'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => 'main' ],
 				],
+				'',
 				''
 			),
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
@@ -2004,7 +2005,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 				},
 			] ),
 			new BasicEntityIdParser(),
-			new EntitySource( 'testsource', false, [ $entityType => [ 'namespaceId' => $irrelevantNamespaceId, 'slot' => 'main' ] ], '' ),
+			new EntitySource( 'testsource', false, [ $entityType => [ 'namespaceId' => $irrelevantNamespaceId, 'slot' => 'main' ] ], '', '' ),
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			false,
 			''
