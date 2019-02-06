@@ -25,6 +25,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\WikibaseSummaryFormatter;
 
 /**
  * @license GPL-2.0-or-later
@@ -44,7 +45,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	}
 
 	protected function getSummaryFormatter() {
-		return new SummaryFormatter(
+		return new WikibaseSummaryFormatter(
 			$this->getIdFormatter(),
 			$this->getValueFormatter(),
 			$this->getSnakFormatter(),

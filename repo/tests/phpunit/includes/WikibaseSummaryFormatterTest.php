@@ -19,9 +19,10 @@ use Wikibase\RepoHooks;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
+use Wikibase\WikibaseSummaryFormatter;
 
 /**
- * @covers \Wikibase\SummaryFormatter
+ * @covers \Wikibase\WikibaseSummaryFormatter
  *
  * @group Wikibase
  * @group Database
@@ -30,7 +31,7 @@ use Wikibase\SummaryFormatter;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class SummaryFormatterTest extends MediaWikiLangTestCase {
+class WikibaseSummaryFormatterTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param EntityIdValue|EntityId $id
@@ -78,7 +79,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @return SummaryFormatter
+	 * @return WikibaseSummaryFormatter
 	 */
 	private function newFormatter() {
 		$idFormatter = $this->getMock( EntityIdFormatter::class );
@@ -101,7 +102,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 
 		$language = Language::factory( 'en' );
 
-		$formatter = new SummaryFormatter(
+		$formatter = new WikibaseSummaryFormatter(
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
