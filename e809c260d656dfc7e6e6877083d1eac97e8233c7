@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "715baa0b_be5b544c",
+        "filename": "lib/includes/Formatters/GlobeCoordinateInlineWikitextKartographerFormatter.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2019-02-06T17:27:43Z",
+      "side": 1,
+      "message": "Indeed. It\u0027s fixed.",
+      "parentUuid": "e4b262c7_3e8d9045",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "e809c260d656dfc7e6e6877083d1eac97e8233c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25b57fd3_5befda7b",
         "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 11
@@ -45,6 +69,30 @@
       "revId": "e809c260d656dfc7e6e6877083d1eac97e8233c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d71e55c_c8595351",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2019-02-06T17:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25b57fd3_5befda7b",
+      "range": {
+        "startLine": 393,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 8
+      },
+      "revId": "e809c260d656dfc7e6e6877083d1eac97e8233c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
