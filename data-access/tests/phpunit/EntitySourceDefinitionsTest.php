@@ -26,7 +26,7 @@ class EntitySourceDefinitionsTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenEntityTypeProvidedByMultipleSources_constructorThrowsException() {
 		$itemSourceOne = $this->newItemSource();
-		$itemSourceTwo = new EntitySource( 'dupe test', 'foodb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '' );
+		$itemSourceTwo = new EntitySource( 'dupe test', 'foodb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '' );
 
 		new EntitySourceDefinitions( [ $itemSourceOne, $itemSourceTwo ] );
 	}
@@ -35,8 +35,8 @@ class EntitySourceDefinitionsTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \InvalidArgumentException
 	 */
 	public function testTwoSourcesWithSameName_constructorThrowsException() {
-		$sourceOne = new EntitySource( 'same name', 'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '' );
-		$sourceTwo = new EntitySource( 'same name', 'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ], '' );
+		$sourceOne = new EntitySource( 'same name', 'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '' );
+		$sourceTwo = new EntitySource( 'same name', 'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ], '', '' );
 
 		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ] );
 	}
@@ -77,11 +77,11 @@ class EntitySourceDefinitionsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newItemSource() {
-		return new EntitySource( 'items', false, [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], 'itemsource:' );
+		return new EntitySource( 'items', false, [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], 'itemsource:', '' );
 	}
 
 	private function newPropertySource() {
-		return new EntitySource( 'properties', false, [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], 'propertysource:' );
+		return new EntitySource( 'properties', false, [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], 'propertysource:', '' );
 	}
 
 }
