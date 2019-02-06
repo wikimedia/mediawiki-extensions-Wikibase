@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use RuntimeException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -49,6 +49,7 @@ class SqlIdGenerator implements IdGenerator {
 	 *
 	 * @param string $type normally is content model id (e.g. wikibase-item or wikibase-property)
 	 *
+	 * @throws RuntimeException if getting an unique ID failed
 	 * @return int
 	 */
 	public function getNewId( $type ) {
@@ -67,7 +68,7 @@ class SqlIdGenerator implements IdGenerator {
 	 * @param string $type
 	 * @param bool $retry Retry once in case of e.g. race conditions. Defaults to true.
 	 *
-	 * @throws MWException
+	 * @throws RuntimeException
 	 * @return int
 	 */
 	private function generateNewId( IDatabase $database, $type, $retry = true ) {
@@ -111,7 +112,7 @@ class SqlIdGenerator implements IdGenerator {
 		$database->endAtomic( __METHOD__ );
 
 		if ( !$success ) {
-			throw new MWException( 'Could not generate a reliably unique ID.' );
+			throw new RuntimeException( 'Could not generate a reliably unique ID.' );
 		}
 
 		if ( array_key_exists( $type, $this->idBlacklist ) && in_array( $id, $this->idBlacklist[$type] ) ) {
