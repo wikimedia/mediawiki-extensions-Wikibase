@@ -70,6 +70,30 @@
       "revId": "31b04a17e8db0f93391e29aa8edf2734642380b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138cbc97_9bb27a44",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-06T09:20:51Z",
+      "side": 1,
+      "message": "will do (although I\u0027ll probably add it to EntitySource right away, to give Jenkins a bit of breathe)",
+      "parentUuid": "00f76815_9d172819",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 113
+      },
+      "revId": "31b04a17e8db0f93391e29aa8edf2734642380b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
