@@ -56,18 +56,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.statementgroupview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.statementgroupview.js',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
-				'jquery.ui.widget',
-				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.StatementList',
-			],
-		],
-
 		'jquery.wikibase.statementlistview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.statementlistview.js',
@@ -973,6 +961,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.statementgroupview.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
 				'wikibase/wikibase.ValueViewBuilder.js',
@@ -989,11 +978,12 @@ return call_user_func( function() {
 				'jquery.wikibase.propertyview',
 				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.sitelinklistview',
-				'jquery.wikibase.statementgroupview',
 				'jquery.wikibase.statementlistview',
 				'jquery.wikibase.statementview',
 				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementGroupSet',
+				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
