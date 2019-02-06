@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4b262c7_3e8d9045",
+        "filename": "lib/includes/Formatters/GlobeCoordinateInlineWikitextKartographerFormatter.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-02-06T12:10:27Z",
+      "side": 1,
+      "message": "I think this should be rawElement – in this case, it doesn’t make a difference, since we only encode a simple point, but in general it seems that you can put Wikitext markup in parts of the JSON, and they should not be HTML-escaped (example: https://www.mediawiki.org/wiki/Special:PermanentLink/3082024).",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "e809c260d656dfc7e6e6877083d1eac97e8233c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25b57fd3_5befda7b",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-02-06T12:10:27Z",
+      "side": 1,
+      "message": "shouldn’t this be “wikitext coordinate” or something?",
+      "range": {
+        "startLine": 393,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 8
+      },
+      "revId": "e809c260d656dfc7e6e6877083d1eac97e8233c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
