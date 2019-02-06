@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "645b40ad_b69bd8f6",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-06T08:58:45Z",
+      "side": 1,
+      "message": "This is evil, the source definition should probably include an optional interwiki that can be set for links?",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 113
+      },
+      "revId": "31b04a17e8db0f93391e29aa8edf2734642380b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
