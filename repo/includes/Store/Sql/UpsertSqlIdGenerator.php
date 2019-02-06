@@ -5,7 +5,6 @@ namespace Wikibase;
 use MWException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
-use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * Unique Id generator implemented using an SQL table and an UPSERT query.
@@ -25,7 +24,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 class UpsertSqlIdGenerator implements IdGenerator {
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
 
@@ -47,12 +46,12 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	private $separateDbConnection;
 
 	/**
-	 * @param LoadBalancer $loadBalancer
+	 * @param ILoadBalancer $loadBalancer
 	 * @param array[] $idBlacklist
 	 * @param bool $separateDbConnection
 	 */
 	public function __construct(
-		LoadBalancer $loadBalancer,
+		ILoadBalancer $loadBalancer,
 		array $idBlacklist = [],
 		$separateDbConnection = false
 	) {
