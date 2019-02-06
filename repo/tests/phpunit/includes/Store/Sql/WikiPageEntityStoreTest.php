@@ -120,12 +120,14 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			'local',
 			false,
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
+			'',
 			''
 		);
 		$customSource = new EntitySource(
 			'custom',
 			'customdb',
 			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
+			'',
 			''
 		);
 

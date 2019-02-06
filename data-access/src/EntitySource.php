@@ -45,21 +45,31 @@ class EntitySource {
 	private $conceptBaseUri;
 
 	/**
+	 * @var string
+	 */
+	private $interwikiPrefix;
+
+	/**
 	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
 	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
 	 * @param string|false $databaseName The name of the database to use (use false for the local db)
 	 * @param array $entityNamespaceIdsAndSlots Associative array indexed by entity type (string), values are
 	 * array of form [ 'namespaceId' => int, 'slot' => string ]
 	 * @param string $conceptBaseUri
+	 * @param string $interwikiPrefix
 	 */
-	public function __construct( $name, $databaseName, array $entityNamespaceIdsAndSlots, $conceptBaseUri ) {
+	public function __construct( $name, $databaseName, array $entityNamespaceIdsAndSlots, $conceptBaseUri, $interwikiPrefix ) {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameter( is_string( $databaseName ) || $databaseName === false, '$databaseName', 'must be a string or false' );
 		Assert::parameterType( 'string', $conceptBaseUri, '$conceptBaseUri' );
+		Assert::parameterType( 'string', $interwikiPrefix, '$interwikiPrefix' );
 		$this->assertEntityNamespaceIdsAndSlots( $entityNamespaceIdsAndSlots );
+
 		$this->sourceName = $name;
 		$this->databaseName = $databaseName;
 		$this->conceptBaseUri = $conceptBaseUri;
+		$this->interwikiPrefix = $interwikiPrefix;
+
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
 	}
 
@@ -124,6 +134,10 @@ class EntitySource {
 
 	public function getConceptBaseUri() {
 		return $this->conceptBaseUri;
+	}
+
+	public function getInterwikiPrefix() {
+		return $this->interwikiPrefix;
 	}
 
 }
