@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use RuntimeException;
+
 /**
  * Generates a new unique numeric id for the provided type.
  * Ids are only unique per type.
@@ -15,6 +17,8 @@ interface IdGenerator {
 	 * @param string $type
 	 *
 	 * @return int
+	 *
+	 * @throws RuntimeException
 	 */
 	public function getNewId( $type );
 
