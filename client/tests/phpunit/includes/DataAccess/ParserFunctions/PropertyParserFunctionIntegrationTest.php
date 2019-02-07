@@ -62,6 +62,10 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	}
 
 	public function addDBDataOnce() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			return;
+		}
+
 		$db = wfGetDB( DB_MASTER );
 
 		$db->insert(
