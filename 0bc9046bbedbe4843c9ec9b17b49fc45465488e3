@@ -16,6 +16,24 @@
       "revId": "0bc9046bbedbe4843c9ec9b17b49fc45465488e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a5656b_9351334f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-07T10:44:11Z",
+      "side": 1,
+      "message": "That was in here indeed, T214479 was wrong and is only added through I3f40eb815c33570927b8e058ddc6d34cf1e3e035",
+      "parentUuid": "7bddd692_6803d84b",
+      "revId": "0bc9046bbedbe4843c9ec9b17b49fc45465488e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
