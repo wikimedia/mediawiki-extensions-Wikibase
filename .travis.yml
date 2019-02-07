@@ -32,8 +32,6 @@ notifications:
   email:
     recipients:
       - wikidata-ci-status@wikimedia.de
-      - leszek.manicki@wikimedia.de
-      - Ladsgroup@gmail.com
     on_success: change
     on_failure: always
   irc:
