@@ -171,8 +171,20 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function newFactoryForSourceBasedFederation() {
-		$itemSource = new EntitySource( 'itemwiki', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '', '' );
-		$propertySource = new EntitySource( 'propertywiki', 'propertydb', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '', '' );
+		$itemSource = new EntitySource(
+			'itemwiki',
+			'itemdb',
+			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
+			'',
+			''
+		);
+		$propertySource = new EntitySource(
+			'propertywiki',
+			'propertydb',
+			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
+			'',
+			'propertywiki'
+		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
