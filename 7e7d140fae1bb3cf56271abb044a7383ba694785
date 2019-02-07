@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7d58ff83_7470ff70",
+        "filename": "repo/includes/StringSummaryFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-07T09:53:20Z",
+      "side": 1,
+      "message": "If the only binding to mediawiki is this commaList function, then its easy to put that behind an interface and have the library not depend on a million lines of code and a database.",
+      "revId": "7e7d140fae1bb3cf56271abb044a7383ba694785",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9642bd4_03f4b52a",
         "filename": "repo/includes/WikibaseSummaryFormatter.php",
         "patchSetId": 2
