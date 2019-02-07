@@ -54,6 +54,7 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 				'util.inherit',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'jquery.wikibase.statementgroupview' => $moduleTemplate + [
@@ -136,6 +137,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'jquery.wikibase.entitytermsview' => $moduleTemplate + [
@@ -631,7 +633,8 @@ return call_user_func( function() {
 			'scripts' => 'wikibase/templates.js',
 			'dependencies' => [
 				'jquery.getAttrs'
-			]
+			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		// FIXME: Never loaded. Only used by wikibase.formatters.ApiValueFormatterFactory (WikibaseRepo).
@@ -869,6 +872,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.utilities.GuidGenerator',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.utilities.GuidGenerator' => $moduleTemplate + [
@@ -879,6 +883,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.utilities',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.utilities' => $moduleTemplate + [
@@ -894,6 +899,7 @@ return call_user_func( function() {
 				'mediawiki.language',
 				'mediawiki.jqueryMsg'
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.view.__namespace' => $moduleTemplate + [
