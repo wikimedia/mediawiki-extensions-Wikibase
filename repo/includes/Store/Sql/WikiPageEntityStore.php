@@ -13,6 +13,8 @@ use Status;
 use Title;
 use User;
 use WatchAction;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -63,17 +65,25 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private $revisionStore;
 
+	private $entitySource;
+
+	private $dataAccessSettings;
+
 	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param IdGenerator $idGenerator
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
+	 * @param EntitySource $entitySource
+	 * @param DataAccessSettings $dataAccessSettings
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
 		IdGenerator $idGenerator,
 		EntityIdComposer $entityIdComposer,
-		RevisionStore $revisionStore
+		RevisionStore $revisionStore,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
@@ -82,6 +92,18 @@ class WikiPageEntityStore implements EntityStore {
 
 		$this->entityIdComposer = $entityIdComposer;
 		$this->revisionStore = $revisionStore;
+
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
+	}
+
+	private function assertCanStoreEntity( EntityId $id ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertEntityIdFromKnownSource( $id );
+			return;
+		}
+
+		$this->assertLocalEntityId( $id );
 	}
 
 	/**
@@ -92,6 +114,14 @@ class WikiPageEntityStore implements EntityStore {
 	private function assertLocalEntityId( EntityId $id ) {
 		if ( $id->isForeign() ) {
 			throw new InvalidArgumentException( 'The entity must not be foreign' );
+		}
+	}
+
+	private function assertEntityIdFromKnownSource( EntityId $id ) {
+		if ( !$this->entityIdFromKnownSource( $id ) ) {
+			throw new InvalidArgumentException(
+				'Entities of type: ' . $id->getEntityType() . ' is not provided by source: ' . $this->entitySource->getSourceName()
+			);
 		}
 	}
 
@@ -132,7 +162,11 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
-		if ( $id->isForeign() ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			if ( !$this->entityIdFromKnownSource( $id ) ) {
+				return false;
+			}
+		} elseif ( $id->isForeign() ) {
 			return false;
 		}
 
@@ -140,6 +174,10 @@ class WikiPageEntityStore implements EntityStore {
 		$handler = $this->contentFactory->getContentHandlerForType( $type );
 
 		return $handler->canCreateWithCustomId( $id );
+	}
+
+	private function entityIdFromKnownSource( EntityId $id ) {
+		return in_array( $id->getEntityType(), $this->entitySource->getEntityTypes() );
 	}
 
 	/**
@@ -162,7 +200,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return WikiPage
 	 */
 	public function getWikiPageForEntity( EntityId $entityId ) {
-		$this->assertLocalEntityId( $entityId );
+		$this->assertCanStoreEntity( $entityId );
 
 		$title = $this->getTitleForEntity( $entityId );
 		if ( !$title ) {
@@ -201,7 +239,7 @@ class WikiPageEntityStore implements EntityStore {
 			$this->assignFreshId( $entity );
 		}
 
-		$this->assertLocalEntityId( $entity->getId() );
+		$this->assertCanStoreEntity( $entity->getId() );
 
 		$content = $this->contentFactory->newFromEntity( $entity );
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
@@ -238,8 +276,8 @@ class WikiPageEntityStore implements EntityStore {
 		$flags = 0,
 		$baseRevId = false
 	) {
-		$this->assertLocalEntityId( $redirect->getEntityId() );
-		$this->assertLocalEntityId( $redirect->getTargetId() );
+		$this->assertCanStoreEntity( $redirect->getEntityId() );
+		$this->assertCanStoreEntity( $redirect->getTargetId() );
 
 		$content = $this->contentFactory->newFromRedirect( $redirect );
 		if ( !$content ) {
@@ -405,7 +443,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws StorageException
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
-		$this->assertLocalEntityId( $entityId );
+		$this->assertCanStoreEntity( $entityId );
 		$page = $this->getWikiPageForEntity( $entityId );
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
 
@@ -432,7 +470,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return bool
 	 */
 	public function userWasLastToEdit( User $user, EntityId $id, $lastRevId ) {
-		$this->assertLocalEntityId( $id );
+		$this->assertCanStoreEntity( $id );
 		$revision = $this->revisionStore->getRevisionById( $lastRevId );
 		if ( !$revision ) {
 			return false;
@@ -471,7 +509,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @note keep in sync with logic in EditPage
 	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch ) {
-		$this->assertLocalEntityId( $id );
+		$this->assertCanStoreEntity( $id );
 
 		$title = $this->getTitleForEntity( $id );
 
@@ -496,7 +534,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return bool
 	 */
 	public function isWatching( User $user, EntityId $id ) {
-		$this->assertLocalEntityId( $id );
+		$this->assertCanStoreEntity( $id );
 
 		$title = $this->getTitleForEntity( $id );
 		return ( $title && $user->isWatched( $title ) );
