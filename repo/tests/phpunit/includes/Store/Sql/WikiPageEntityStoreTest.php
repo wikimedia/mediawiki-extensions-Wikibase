@@ -86,8 +86,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @see EntityLookupTest::newEntityLoader()
-	 *
 	 * @return array [ EntityStore, EntityLookup ]
 	 */
 	protected function createStoreAndLookup() {
