@@ -118,9 +118,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	public function getTitleForId( EntityId $id ) {
 		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
 			if ( $this->entityNotFromLocalEntitySource( $id ) ) {
-				// TODO: the interwiki prefix is NOT expected to be the same as the source name (there is no
-				// way to enforce it either), so probably adding "interwiki" key to source config would be better
-				$interwiki = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() )->getSourceName();
+				$interwiki = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() )->getInterwikiPrefix();
 				if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
 					$pageName = 'EntityPage/' . $id->getSerialization();
 
