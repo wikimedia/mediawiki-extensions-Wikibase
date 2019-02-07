@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a0c69510_bcb43ad7",
+        "filename": "repo/includes/WikibaseSummaryFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-07T09:56:00Z",
+      "side": 1,
+      "message": "Good point. Looking at StringSummaryFormatter, the public interface of the proposed library is huge compared to the functionality it provides (mostly because all the protected stuff).",
+      "parentUuid": "b9642bd4_03f4b52a",
+      "revId": "7e7d140fae1bb3cf56271abb044a7383ba694785",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c77f1b5c_05f6585c",
         "filename": "repo/includes/WikibaseSummaryFormatter.php",
         "patchSetId": 2
