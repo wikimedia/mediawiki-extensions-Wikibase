@@ -167,7 +167,8 @@ class ValidatorBuilders {
 	public function getEntityValidators( $entityType = null ) {
 		return [
 			new TypeValidator( EntityIdValue::class ),
-			new ForeignEntityValidator( $this->supportedEntityTypes ),
+			// TODO this will need to be removed for the EntitySource approach
+			//new ForeignEntityValidator( $this->supportedEntityTypes ),
 			new EntityExistsValidator( $this->entityLookup, $entityType ),
 		];
 	}
