@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05ac7a9f_9d46bf21",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-08T11:58:27Z",
+      "side": 1,
+      "message": "Would be good to note this was measured in Jan 2019",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 86
+      },
+      "revId": "bb7d01340d128dae82526d8f47bcc994852a3481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81ea3449_a476f583",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-08T11:58:27Z",
+      "side": 1,
+      "message": "Depending on how this ends up getting used, we could add some sort of caching to these user specific term boxes too, but right now it is unclear if that will be needed at all.\n\nRight now the workflow of wikidata while editing would normally be:\n 1 - Load a page\n 2 - Make edits (JS changes what it needs to on the page), no further page loads\n\nI did a little investigation into this today, seeing how often pages are repeatedly loaded by a single logged in user.\nThe results can be found at: https://docs.google.com/spreadsheets/d/13oLeuGWBQ54n_S7MdV5-S1C1smKSDHxVFwK-PVYKGjs/edit?usp\u003dsharing\n\nI looked at 2 weeks, (1-7 dec 2018, 1-7 jan 2019) and found that at most by adding extra caching we could reduce the number of termbox renders for users requiring custom options by around 35-40%.\nThis does not take into account entity edits / purges, so the % would likely be lower.\n\nAnother interesting number once the patch gets merged will be the % hit rate for the item content type in the parser cache.\nWe will have this one https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/486323/ is merged and deployed and will shed even more light on the situation.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 254
+      },
+      "revId": "bb7d01340d128dae82526d8f47bcc994852a3481",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
