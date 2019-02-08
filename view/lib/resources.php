@@ -74,6 +74,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase', // Just for the namespace
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Claim' => $wikibaseDatamodelPaths + [
@@ -85,6 +86,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Entity' => $wikibaseDatamodelPaths + [
@@ -95,6 +97,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.FingerprintableEntity' => $wikibaseDatamodelPaths + [
@@ -128,6 +131,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.MultiTermMap',
 				'wikibase.datamodel.TermMap',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Group' => $wikibaseDatamodelPaths + [
@@ -137,6 +141,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.GroupableCollection' => $wikibaseDatamodelPaths + [
@@ -147,6 +152,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Item' => $wikibaseDatamodelPaths + [
@@ -172,6 +178,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.GroupableCollection',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Map' => $wikibaseDatamodelPaths + [
@@ -181,6 +188,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.MultiTerm' => $wikibaseDatamodelPaths + [
@@ -190,6 +198,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.MultiTermMap' => $wikibaseDatamodelPaths + [
@@ -202,6 +211,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Map',
 				'wikibase.datamodel.MultiTerm',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Property' => $wikibaseDatamodelPaths + [
@@ -226,6 +236,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Snak',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.PropertySomeValueSnak' => $wikibaseDatamodelPaths + [
@@ -237,6 +248,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Snak',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.PropertyValueSnak' => $wikibaseDatamodelPaths + [
@@ -249,6 +261,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Snak',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Reference' => $wikibaseDatamodelPaths + [
@@ -259,6 +272,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.SnakList',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.ReferenceList' => $wikibaseDatamodelPaths + [
@@ -271,6 +285,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.List',
 				'wikibase.datamodel.Reference',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.SiteLink' => $wikibaseDatamodelPaths + [
@@ -301,6 +316,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.SnakList' => $wikibaseDatamodelPaths + [
@@ -313,6 +329,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.List',
 				'wikibase.datamodel.Snak',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Statement' => $wikibaseDatamodelPaths + [
@@ -324,6 +341,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ReferenceList',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.StatementGroup' => $wikibaseDatamodelPaths + [
@@ -336,6 +354,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Group',
 				'wikibase.datamodel.StatementList',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.StatementGroupSet' => $wikibaseDatamodelPaths + [
@@ -348,6 +367,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.Set',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.StatementList' => $wikibaseDatamodelPaths + [
@@ -360,6 +380,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.List',
 				'wikibase.datamodel.Statement',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Term' => $wikibaseDatamodelPaths + [
@@ -369,6 +390,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.TermMap' => $wikibaseDatamodelPaths + [
@@ -381,6 +403,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Map',
 				'wikibase.datamodel.Term',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Set' => $wikibaseDatamodelPaths + [
@@ -392,6 +415,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.GroupableCollection',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'globeCoordinate.js' => $wikibaseDatavaluesLibPaths + [
@@ -399,6 +423,7 @@ return call_user_func( function() {
 				'globeCoordinate/globeCoordinate.js',
 				'globeCoordinate/globeCoordinate.GlobeCoordinate.js',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 		'util.inherit' => $wikibaseDatavaluesLibPaths + [
 			'scripts' => [
@@ -411,6 +436,7 @@ return call_user_func( function() {
 			'scripts' => [
 				'dataValues.js',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
@@ -421,6 +447,7 @@ return call_user_func( function() {
 				'dataValues',
 				'util.inherit',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'dataValues.values' => $wikibaseDatavaluesSrcPaths + [
@@ -445,6 +472,7 @@ return call_user_func( function() {
 				'globeCoordinate.js', // required by GlobeCoordinateValue
 				'util.inherit',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'dataValues.TimeValue' => $wikibaseDatavaluesSrcPaths + [
@@ -455,6 +483,7 @@ return call_user_func( function() {
 				'dataValues.DataValue',
 				'util.inherit',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'valueFormatters' => $wikibaseDatavaluesSrcPaths + [
@@ -539,6 +568,7 @@ return call_user_func( function() {
 				'dependencies' => [
 					'wikibase',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 
 		'wikibase.serialization.DeserializerFactory' => $wikibaseSerializationPaths + [
@@ -620,6 +650,7 @@ return call_user_func( function() {
 					'wikibase.serialization.SnakListDeserializer',
 					'wikibase.serialization.SnakDeserializer',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 
 		'wikibase.serialization.Deserializer' => $wikibaseSerializationPaths + [
@@ -630,6 +661,7 @@ return call_user_func( function() {
 					'util.inherit',
 					'wikibase.serialization.__namespace',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 
 		'wikibase.serialization.EntityDeserializer' => $wikibaseSerializationPaths + [
@@ -727,6 +759,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.ReferenceDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.ReferenceDeserializer' => $wikibaseSerializationPaths + [
@@ -740,6 +773,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.SnakListDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.SiteLinkSetDeserializer' => $wikibaseSerializationPaths + [
@@ -778,6 +812,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.SnakDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.SnakDeserializer' => $wikibaseSerializationPaths + [
@@ -794,6 +829,7 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementGroupSetDeserializer' => $wikibaseSerializationPaths + [
@@ -807,6 +843,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.StatementGroupDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementGroupDeserializer' => $wikibaseSerializationPaths + [
@@ -820,6 +857,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.StatementListDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementListDeserializer' => $wikibaseSerializationPaths + [
@@ -833,6 +871,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.StatementDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementDeserializer' => $wikibaseSerializationPaths + [
@@ -847,6 +886,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.ReferenceListDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.TermDeserializer' => $wikibaseSerializationPaths + [
@@ -859,6 +899,7 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.TermMapDeserializer' => $wikibaseSerializationPaths + [
@@ -872,6 +913,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Deserializer',
 				'wikibase.serialization.TermDeserializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.ClaimSerializer' => $wikibaseSerializationPaths + [
