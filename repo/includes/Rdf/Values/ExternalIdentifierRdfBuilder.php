@@ -27,7 +27,10 @@ class ExternalIdentifierRdfBuilder implements ValueSnakRdfBuilder {
 	 */
 	private $uriPatternProvider;
 
-	public function __construct( PropertyInfoProvider $uriPatternProvider ) {
+	private $rdfVocabulary;
+
+	public function __construct( RdfVocabulary $rdfVocabulary, PropertyInfoProvider $uriPatternProvider ) {
+		$this->rdfVocabulary = $rdfVocabulary;
 		$this->uriPatternProvider = $uriPatternProvider;
 	}
 
@@ -50,7 +53,7 @@ class ExternalIdentifierRdfBuilder implements ValueSnakRdfBuilder {
 
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $id );
 
-		$normalizedValueNamespace = RdfVocabulary::$normalizedPropertyValueNamespace[$propertyValueNamespace];
+		$normalizedValueNamespace = $this->rdfVocabulary->normalizedPropertyValueNamespace[$propertyValueNamespace];
 		if ( $uriPattern !== null && $normalizedValueNamespace !== null ) {
 			$uri = str_replace( '$1', wfUrlencode( $id ), $uriPattern );
 			$writer->say( $normalizedValueNamespace, $propertyValueLName )->is( $uri );

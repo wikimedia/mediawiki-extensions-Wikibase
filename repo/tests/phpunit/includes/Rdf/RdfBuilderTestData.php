@@ -6,6 +6,8 @@ use HashSiteStore;
 use InvalidArgumentException;
 use Site;
 use SiteLookup;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -161,6 +163,9 @@ class RdfBuilderTestData {
 		return new RdfVocabulary(
 			[ '' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
 			self::URI_DATA,
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			'',
 			[],
 			[],
 			[],
