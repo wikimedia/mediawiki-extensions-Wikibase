@@ -8,6 +8,8 @@ use MWException;
 use Site;
 use SiteLookup;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -196,6 +198,9 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			new RdfVocabulary(
 				[ '' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
 				self::URI_DATA,
+				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+				new EntitySourceDefinitions( [] ),
+				'',
 				[ 'test' => 'en-x-test' ]
 			),
 			$this->getEntityTitleLookup()
