@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\GeoShapeRdfBuilder;
@@ -33,7 +35,13 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddValue() {
-		$vocab = new RdfVocabulary( [ '' => 'http://test/item/' ], 'http://test/data/' );
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://test/item/' ],
+			'http://test/data/',
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
 		$builder = new GeoShapeRdfBuilder( $vocab );
 
 		$writer = new NTriplesRdfWriter();
