@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use DataValues\DataValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
@@ -13,6 +14,7 @@ use DataValues\UnboundedQuantityValue;
 use PHPUnit4And6Compat;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -44,6 +46,11 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 	const TABULAR_DATA_STORAGE_API_URL = 'http://another.wiki/api.php';
 
+	const EXISTING_ITEM_ID = 'Q8';
+	const NON_EXISTING_ITEM_ID = 'Q3';
+	const EXISTING_PROPERTY_ID = 'P8';
+	const NON_EXISTING_PROPERTY_ID = 'P3';
+
 	private function newValidatorBuilders() {
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
@@ -52,6 +59,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'http://qudt.org/vocab/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
+			new DataAccessSettings( 1000, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			[
 				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
 				'foo' => [ Item::ENTITY_TYPE ]
@@ -540,6 +548,105 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$validators = call_user_func( $validatorMap[$typeId] );
 
 		$this->assertValidation( $expected, $validators, $value );
+	}
+
+	public function testBuildItemValidators_entitySourceBasedFederation() {
+		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+
+		$validators = $builders->buildItemValidators();
+
+		$this->assertValidation( true, $validators, new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ) );
+	}
+
+	public function provideInvalidValueForItemValidators() {
+		yield 'not an EntityIdValue' => [ new StringValue( 'FOOBAR' ) ];
+		yield 'not an item ID' => [ new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ) ];
+		yield 'not existing item ID' => [ new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ) ];
+	}
+
+	/**
+	 * @dataProvider provideInvalidValueForItemValidators
+	 */
+	public function testBuildItemValidators_invalidValues_entitySourceBasedFederation( DataValue $value ) {
+		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+
+		$validators = $builders->buildItemValidators();
+
+		$this->assertValidation( false, $validators, $value );
+	}
+
+	public function testBuildPropertyValidators_entitySourceBasedFederation() {
+		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+
+		$validators = $builders->buildPropertyValidators();
+
+		$this->assertValidation( true, $validators, new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ) );
+	}
+
+	public function provideInvalidValueForPropertyValidators() {
+		yield 'not an EntityIdValue' => [ new StringValue( 'FOOBAR' ) ];
+		yield 'not a property ID' => [ new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ) ];
+		yield 'not existing property ID' => [ new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ) ];
+	}
+
+	/**
+	 * @dataProvider provideInvalidValueForPropertyValidators
+	 */
+	public function testBuildPropertyValidators_invalidValues_entitySourceBasedFederation( DataValue $value ) {
+		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+
+		$validators = $builders->buildPropertyValidators();
+
+		$this->assertValidation( false, $validators, $value );
+	}
+
+	public function provideValidValuesForEntityValidators() {
+		yield 'existing item ID' => [ new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ) ];
+		yield 'existing property ID' => [ new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ) ];
+	}
+
+	/**
+	 * @dataProvider provideValidValuesForEntityValidators
+	 */
+	public function testBuildEntityValidators_entitySourceBasedFederation( DataValue $value ) {
+		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+
+		$validators = $builders->buildEntityValidators();
+
+		$this->assertValidation( true, $validators, $value );
+	}
+
+	public function provideInvalidValueForEntityValidators() {
+		yield 'not an EntityIdValue' => [ new StringValue( 'FOOBAR' ) ];
+		yield 'not existing item ID' => [ new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ) ];
+		yield 'not existing property ID' => [ new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ) ];
+	}
+
+	/**
+	 * @dataProvider provideInvalidValueForEntityValidators
+	 */
+	public function testBuildEntityValidators_invalidValues_entitySourceBasedFederation( DataValue $value ) {
+		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+
+		$validators = $builders->buildEntityValidators();
+
+		$this->assertValidation( false, $validators, $value );
+	}
+
+	private function newValidatorBuildersForEntitySourceBasedFederation() {
+		return new ValidatorBuilders(
+			$this->getEntityLookup(),
+			new ItemIdParser(),
+			[ 'http', 'https', 'ftp', 'mailto' ],
+			'http://qudt.org/vocab/',
+			new StaticContentLanguages( [ 'contentlanguage' ] ),
+			$this->getCachingCommonsMediaFileNameLookup(),
+			new DataAccessSettings( 1000, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			[],
+			$this->getMediaWikiPageNameNormalizer(),
+			self::GEO_SHAPE_STORAGE_API_URL,
+			self::TABULAR_DATA_STORAGE_API_URL
+		);
 	}
 
 	/**
