@@ -1351,9 +1351,17 @@ class WikibaseRepo {
 
 			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
+			$dataAccessSettings = $this->getDataAccessSettings();
+			$localEntitySourceName = $dataAccessSettings->useEntitySourceBasedFederation() ? $this->getLocalEntitySource()->getSourceName() : '';
+
 			$this->rdfVocabulary = new RdfVocabulary(
-				$this->repositoryDefinitions->getConceptBaseUris(),
+				$dataAccessSettings->useEntitySourceBasedFederation() ?
+					$this->entitySourceDefinitions->getConceptBaseUris() :
+					$this->repositoryDefinitions->getConceptBaseUris(),
 				$entityDataTitle->getCanonicalURL() . '/',
+				$dataAccessSettings,
+				$this->entitySourceDefinitions,
+				$localEntitySourceName,
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris(),
 				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: [],
