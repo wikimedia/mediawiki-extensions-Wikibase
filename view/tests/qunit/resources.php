@@ -88,7 +88,6 @@ return [
 			'jquery.wikibase.edittoolbar',
 			'jquery.wikibase.entityselector',
 			'jquery.wikibase.entityview',
-			'jquery.wikibase.itemview',
 			'jquery.wikibase.labelview',
 			'jquery.wikibase.listview',
 			'jquery.wikibase.pagesuggester',

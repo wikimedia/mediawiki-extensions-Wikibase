@@ -92,16 +92,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'jquery.wikibase.itemview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.itemview.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.entityview',
-				'jquery.wikibase.sitelinkgrouplistview',
-			],
-		],
-
 		'jquery.wikibase.labelview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.labelview.js'
@@ -855,6 +845,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.itemview.js',
 				'jquery/wikibase/jquery.wikibase.descriptionview.js',
 				'jquery/ui/jquery.ui.tagadata.js',
 				'jquery/wikibase/jquery.wikibase.aliasesview.js',
@@ -888,10 +879,11 @@ return call_user_func( function() {
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
-				'jquery.wikibase.itemview',
+				'jquery.wikibase.entityview',
 				'jquery.wikibase.labelview',
 				'jquery.wikibase.listview', // For ListItemAdapter
 				'jquery.wikibase.propertyview',
+				'jquery.wikibase.sitelinkgrouplistview',
 				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.sitelinklistview',
 				'jquery.wikibase.statementview',
