@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use Closure;
 use PHPUnit4And6Compat;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\EntityRdfBuilder;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
@@ -38,7 +40,13 @@ class EntityRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideBuilderFlags
 	 */
 	public function testGetEntityRdfBuilder( $flags ) {
-		$vocab = new RdfVocabulary( [ '' => RdfBuilderTestData::URI_BASE ], RdfBuilderTestData::URI_DATA );
+		$vocab = new RdfVocabulary(
+			[ '' => RdfBuilderTestData::URI_BASE ],
+			RdfBuilderTestData::URI_DATA,
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
 		$writer = new NTriplesRdfWriter();
 		$tracker = new NullEntityMentionListener();
 		$dedupe = new NullDedupeBag();

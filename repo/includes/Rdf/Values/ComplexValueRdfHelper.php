@@ -82,7 +82,7 @@ class ComplexValueRdfHelper {
 		$valueLName = $value->getHash();
 
 		$namespaces =
-			$normalized ? RdfVocabulary::$claimToValueNormalized : RdfVocabulary::$claimToValue;
+			$normalized ? $this->vocabulary->claimToValueNormalized : $this->vocabulary->claimToValue;
 
 		$writer->say( $namespaces[$propertyValueNamespace], $propertyValueLName )
 			->is( RdfVocabulary::NS_VALUE, $valueLName );
