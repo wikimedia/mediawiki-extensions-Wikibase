@@ -4,6 +4,8 @@ namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
 use OutOfBoundsException;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
@@ -79,24 +81,11 @@ class RdfVocabulary {
 		Statement::RANK_PREFERRED => 'PreferredRank',
 	];
 	// Value properties
-	public static $claimToValue = [
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
-	];
+	public $claimToValue = [];
 	// Value properties for normalized values
-	public static $claimToValueNormalized = [
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM,
-	];
+	public $claimToValueNormalized = [];
 	// Value properties for normalized values, including for direct claims
-	public static $normalizedPropertyValueNamespace = [
-		self::NSP_DIRECT_CLAIM => self::NSP_DIRECT_CLAIM_NORM,
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM
-	];
+	public $normalizedPropertyValueNamespace = [];
 
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
@@ -138,9 +127,16 @@ class RdfVocabulary {
 
 	private $licenseUrl;
 
+	private $dataAccessSettings;
+
+	private $sourceNameByEntityType;
+
 	/**
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
 	 * @param string $dataUri Base URI for entity description URIs.
+	 * @param DataAccessSettings $dataAccessSettings
+	 * @param EntitySourceDefinitions $entitySourceDefinitions
+	 * @param string $localEntitySourceName
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
 	 *                 if different from the default mapping.
@@ -151,22 +147,39 @@ class RdfVocabulary {
 	public function __construct(
 		array $conceptUris,
 		$dataUri,
+		DataAccessSettings $dataAccessSettings,
+		EntitySourceDefinitions $entitySourceDefinitions,
+		$localEntitySourceName,
 		array $canonicalLanguageCodes = [],
 		array $dataTypeUris = [],
 		array $pagePropertyDefs = [],
 		$licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
 	) {
-		Assert::parameter(
-			array_key_exists( '', $conceptUris ),
-			'$conceptUris',
-			'must contain entry for the local repository, ie. empty-string key'
-		);
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			Assert::parameter(
+				array_key_exists( $localEntitySourceName, $conceptUris ),
+				'$conceptUris',
+				'must contain entry for the local repository, ie. ' . $localEntitySourceName
+			);
+		} else {
+			Assert::parameter(
+				array_key_exists( '', $conceptUris ),
+				'$conceptUris',
+				'must contain entry for the local repository, ie. empty-string key'
+			);
+		}
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $conceptUris, '$conceptUris' );
+
+		$this->dataAccessSettings = $dataAccessSettings;
 
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 		$this->dataTypeUris = $dataTypeUris;
 		$this->pagePropertyDefs = $pagePropertyDefs;
+
+		if ( !$dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$localEntitySourceName = '';
+		}
 
 		$this->namespaces = [
 			'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
@@ -175,7 +188,7 @@ class RdfVocabulary {
 			'owl' => 'http://www.w3.org/2002/07/owl#',
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "#",
 
-			self::NS_STATEMENT => $conceptUris[''] . 'statement/',
+			self::NS_STATEMENT => $conceptUris[$localEntitySourceName] . 'statement/',
 
 			// nodes
 			self::NS_DATA => $dataUri,
@@ -188,7 +201,7 @@ class RdfVocabulary {
 			self::NS_PROV => self::PROV_URI,
 		];
 
-		$topUri = $this->getConceptUriBase( $conceptUris[''] );
+		$topUri = $this->getConceptUriBase( $conceptUris[$localEntitySourceName] );
 
 		$this->namespaces[self::NS_REFERENCE] = $topUri . 'reference/';
 		$this->namespaces[self::NS_VALUE] = $topUri . 'value/';
@@ -209,15 +222,15 @@ class RdfVocabulary {
 			self::NSP_NOVALUE,
 		];
 
-		foreach ( $conceptUris as $repositoryName => $baseUri ) {
+		foreach ( $conceptUris as $repositoryOrSourceName => $baseUri ) {
 			$namespaceSuffix = '';
-			if ( $repositoryName !== '' ) {
-				$namespaceSuffix = '-' . $repositoryName;
+			if ( $repositoryOrSourceName !== $localEntitySourceName ) {
+				$namespaceSuffix = '-' . $repositoryOrSourceName;
 			}
 
-			$this->entityNamespaceNames[$repositoryName] = self::NS_ENTITY . $namespaceSuffix;
+			$this->entityNamespaceNames[$repositoryOrSourceName] = self::NS_ENTITY . $namespaceSuffix;
 
-			$this->propertyNamespaceNames[$repositoryName] = array_combine(
+			$this->propertyNamespaceNames[$repositoryOrSourceName] = array_combine(
 				$propertyNamespaces,
 				array_map(
 					function ( $ns ) use ( $namespaceSuffix ) {
@@ -231,6 +244,37 @@ class RdfVocabulary {
 				$this->namespaces,
 				$this->getConceptNamespaces( $namespaceSuffix, $baseUri )
 			);
+
+			$this->claimToValue = array_merge(
+				$this->claimToValue,
+				[
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE . $namespaceSuffix,
+				]
+			);
+			$this->claimToValueNormalized = array_merge(
+				$this->claimToValueNormalized,
+				[
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+				]
+			);
+			$this->normalizedPropertyValueNamespace = array_merge(
+				$this->normalizedPropertyValueNamespace,
+				[
+					self::NSP_DIRECT_CLAIM . $namespaceSuffix => self::NSP_DIRECT_CLAIM_NORM . $namespaceSuffix,
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+				]
+			);
+		}
+
+		$this->sourceNameByEntityType = [];
+		foreach ( $entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
+			$this->sourceNameByEntityType[$entityType] = $source->getSourceName();
 		}
 
 		$this->licenseUrl = $licenseUrl;
@@ -327,7 +371,9 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getEntityRepositoryName( EntityId $entityId ) {
-		return $entityId->getRepositoryName();
+		return $this->dataAccessSettings->useEntitySourceBasedFederation() ?
+			$this->sourceNameByEntityType[$entityId->getEntityType()] :
+			$entityId->getRepositoryName();
 	}
 
 	/**

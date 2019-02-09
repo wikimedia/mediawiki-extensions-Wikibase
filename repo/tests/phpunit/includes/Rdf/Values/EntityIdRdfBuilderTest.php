@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -35,7 +37,13 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddValue() {
-		$vocab = new RdfVocabulary( [ '' => 'http://test/item/' ], 'http://test/data/' );
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://test/item/' ],
+			'http://test/data/',
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
 		$builder = new EntityIdRdfBuilder( $vocab, new NullEntityMentionListener() );
 
 		$writer = new NTriplesRdfWriter();

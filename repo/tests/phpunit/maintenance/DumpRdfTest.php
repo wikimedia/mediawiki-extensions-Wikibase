@@ -7,6 +7,9 @@ use HashSiteStore;
 use MediaWikiLangTestCase;
 use TestSites;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -168,7 +171,13 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
 			$mockRepo,
-			new RdfVocabulary( [ '' => 'fooUri/' ], 'acme/EntityData/' ),
+			new RdfVocabulary(
+				[ '' => 'fooUri/' ],
+				'acme/EntityData/',
+				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+				new EntitySourceDefinitions( [] ),
+				''
+			),
 			$this->getEntityTitleLookup()
 		);
 
