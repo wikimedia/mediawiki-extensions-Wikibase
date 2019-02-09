@@ -92,38 +92,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'jquery.wikibase.itemview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.itemview.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.entityview',
-				'jquery.wikibase.sitelinkgrouplistview',
-			],
-		],
-
-		'jquery.wikibase.labelview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.labelview.js'
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.util.getDirectionality',
-				'wikibase.datamodel.Term',
-				'wikibase.getLanguageNameByCode',
-			],
-			'messages' => [
-				'parentheses',
-				'wikibase-label-edit-placeholder',
-				'wikibase-label-edit-placeholder-language-aware',
-				'wikibase-label-empty',
-				'wikibase-label-input-help-message',
-			],
-		],
-
 		'jquery.wikibase.listview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.listview.js',
@@ -132,28 +100,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
-			],
-		],
-
-		'jquery.wikibase.pagesuggester' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
-			],
-			'dependencies' => [
-				'jquery.ui.ooMenu',
-				'jquery.ui.suggester',
-				'util.highlightSubstring',
-				'wikibase.sites',
-			],
-		],
-
-		'jquery.wikibase.propertyview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.propertyview.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.entityview',
-				'wikibase.templates',
 			],
 		],
 
@@ -235,6 +181,7 @@ return call_user_func( function() {
 
 		'jquery.wikibase.sitelinkview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
 				'jquery/wikibase/jquery.wikibase.badgeselector.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkview.js',
 			],
@@ -245,11 +192,13 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
+				'jquery.ui.ooMenu',
+				'jquery.ui.suggester',
 				'jquery.util.EventSingletonManager',
-				'jquery.wikibase.pagesuggester',
 				'jquery.wikibase.siteselector',
 				'mediawiki.util',
 				'oojs-ui',
+				'util.highlightSubstring',
 				'wikibase.datamodel.SiteLink',
 				'wikibase.sites',
 				'wikibase.templates',
@@ -855,6 +804,9 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.propertyview.js',
+				'jquery/wikibase/jquery.wikibase.labelview.js',
+				'jquery/wikibase/jquery.wikibase.itemview.js',
 				'jquery/wikibase/jquery.wikibase.descriptionview.js',
 				'jquery/ui/jquery.ui.tagadata.js',
 				'jquery/wikibase/jquery.wikibase.aliasesview.js',
@@ -869,6 +821,7 @@ return call_user_func( function() {
 				'wikibase/view/ViewFactory.js'
 			],
 			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'jquery/ui/jquery.ui.tagadata.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
@@ -888,16 +841,14 @@ return call_user_func( function() {
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
-				'jquery.wikibase.itemview',
-				'jquery.wikibase.labelview',
+				'jquery.wikibase.entityview',
 				'jquery.wikibase.listview', // For ListItemAdapter
-				'jquery.wikibase.propertyview',
+				'jquery.wikibase.sitelinkgrouplistview',
 				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.sitelinklistview',
 				'jquery.wikibase.statementview',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.templates',
-				'wikibase.getLanguageNameByCode',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementGroupSet',
@@ -912,6 +863,7 @@ return call_user_func( function() {
 				'mediawiki.user',
 			],
 			'messages' => [
+				'parentheses',
 				'wikibase-entitytermsforlanguagelistview-aliases',
 				'wikibase-entitytermsforlanguagelistview-description',
 				'wikibase-entitytermsforlanguagelistview-label',
@@ -930,7 +882,10 @@ return call_user_func( function() {
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link',
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler',
+				'wikibase-label-edit-placeholder',
+				'wikibase-label-edit-placeholder-language-aware',
 				'wikibase-label-empty',
+				'wikibase-label-input-help-message',
 				'wikibase-statementgrouplistview-add-tooltip',
 				'wikibase-statementlistview-add',
 				'wikibase-statementlistview-add-tooltip',
