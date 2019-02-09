@@ -389,7 +389,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$itemExpectedResult = [
-			'repository' => '',
+			'repository' => 'local',
 			'id' => 'Q111',
 			'concepturi' => 'http://acme.test/concept/Q111',
 			'url' => 'http://fullTitleUrl',
@@ -411,7 +411,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$propertyResult = [
-			'repository' => '', // TODO: should use source name as value here
+			'repository' => 'foreign',
 			'id' => 'P123',
 			'concepturi' => 'http://foreign.wiki/concept/P123',
 			'url' => 'http://fullTitleUrl',

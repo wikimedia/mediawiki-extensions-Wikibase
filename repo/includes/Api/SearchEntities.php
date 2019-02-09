@@ -141,7 +141,7 @@ class SearchEntities extends ApiBase {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 
 		$entry = [
-			'repository' => $entityId->getRepositoryName(),
+			'repository' => $this->getRepositoryOrEntitySourceName( $entityId ),
 			'id' => $entityId->getSerialization(),
 			'concepturi' => $this->getConceptUri( $entityId ),
 			'title' => $title->getPrefixedText(),
@@ -191,6 +191,18 @@ class SearchEntities extends ApiBase {
 		}
 
 		return $entry;
+	}
+
+	private function getRepositoryOrEntitySourceName( EntityId $entityId ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
+			if ( $source === null ) {
+				return '';
+			}
+			return $source->getSourceName();
+		}
+
+		return $entityId->getRepositoryName();
 	}
 
 	/**
