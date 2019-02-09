@@ -8,6 +8,8 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Sparql\SparqlClient;
 use Title;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Rdf\RdfVocabulary;
@@ -347,8 +349,17 @@ QUERY;
 	private function createRdfVocabulary( $baseUri, $typeUris ) {
 		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
-		return new RdfVocabulary( [ '' => $baseUri ], $entityDataTitle->getCanonicalURL() . '/', [],
-			$typeUris, [] );
+		$irrelevantValue = 1000;
+		return new RdfVocabulary(
+			[ '' => $baseUri ],
+			$entityDataTitle->getCanonicalURL() . '/',
+			new DataAccessSettings( $irrelevantValue, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			'',
+			[],
+			$typeUris,
+			[]
+		);
 	}
 
 	/**
