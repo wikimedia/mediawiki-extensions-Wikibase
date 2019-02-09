@@ -566,6 +566,7 @@ class WikibaseRepo {
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
+			$this->getDataAccessSettings(),
 			$this->repositoryDefinitions->getEntityTypesPerRepository(),
 			new MediaWikiPageNameNormalizer(),
 			$this->settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
