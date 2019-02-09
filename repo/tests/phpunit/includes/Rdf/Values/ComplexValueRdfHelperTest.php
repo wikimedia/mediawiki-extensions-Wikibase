@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
@@ -32,7 +34,13 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAttachValueNode() {
-		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://acme.com/item/' ],
+			'http://acme.com/data/',
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
 
 		$snakWriter = new NTriplesRdfWriter();
 		$snakWriter->prefix( 'www', "http://www/" );

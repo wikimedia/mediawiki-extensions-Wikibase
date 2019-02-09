@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\TimeValue;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
@@ -166,7 +168,13 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideAddValue
 	 */
 	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected ) {
-		$vocab = new RdfVocabulary( [ '' => 'http://acme.com/item/' ], 'http://acme.com/data/' );
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://acme.com/item/' ],
+			'http://acme.com/data/',
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
 
 		$snakWriter = new NTriplesRdfWriter();
 		$snakWriter->prefix( 'www', "http://www/" );

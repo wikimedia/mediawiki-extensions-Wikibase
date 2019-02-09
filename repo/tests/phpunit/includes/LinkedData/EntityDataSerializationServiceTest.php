@@ -6,6 +6,8 @@ use DataValues\Serializers\DataValueSerializer;
 use HashSiteStore;
 use SiteList;
 use Title;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -114,7 +116,13 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
-			new RdfVocabulary( [ '' => self::URI_BASE ], self::URI_DATA ),
+			new RdfVocabulary(
+				[ '' => self::URI_BASE ],
+				self::URI_DATA,
+				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+				new EntitySourceDefinitions( [] ),
+				''
+			),
 			true
 		);
 
