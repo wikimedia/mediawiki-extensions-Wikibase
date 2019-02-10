@@ -9,6 +9,8 @@ use Title;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 
 /**
  * @covers \Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler
@@ -28,7 +30,12 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateSchema( $revisionTimestamp, $image, $description, $expected ) {
 		$client = WikibaseClient::getDefaultInstance();
 		$repoLinker = new RepoLinker(
-			'https://www.wikidata.org', [ '' => 'https://www.wikidata.org/entity' ], '/wiki/$1', '/w'
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			'https://www.wikidata.org',
+			[ '' => 'https://www.wikidata.org/entity' ],
+			'/wiki/$1',
+			'/w'
 		);
 		$handler = new SkinAfterBottomScriptsHandler( $client, $repoLinker );
 

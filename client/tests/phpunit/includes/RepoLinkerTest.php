@@ -5,6 +5,9 @@ namespace Wikibase\Client\Tests;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use Wikibase\Client\RepoLinker;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -46,6 +49,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
 			$settings['baseUrl'],
 			$settings['conceptBaseUri'],
 			$settings['articlePath'],
@@ -229,6 +234,46 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q1234' )
 			]
 		];
+	}
+
+	public function testGetEntityConceptUri_entityFromOtherRepository() {
+		$settings = $this->getRepoSettings()[0];
+		$settings['conceptBaseUri'] = [ '' => 'http://www.example.com/entity', 'foo' => 'http://www.foreign.com/entity' ];
+
+		$linker = $this->getRepoLinkerForSettings( $settings );
+
+		$this->assertEquals( 'http://www.foreign.com/entity/Q111', $linker->getEntityConceptUri( new ItemId( 'foo:Q111' ) ) );
+	}
+
+	public function testGivenEntitySourceDefinitions_getEntityConceptUriUsesBasedFromRightSource() {
+		$conceptBaseUris = [ 'itemwiki' => 'http://www.itemwiki.com/entity', 'propertywiki' => 'http://www.propertywiki.com/entity' ];
+
+		$linker = new RepoLinker(
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'itemwiki',
+					'itemdb',
+					[ 'item' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
+					'http://www.itemwiki.com/entity',
+					''
+				),
+				new EntitySource(
+					'propertywiki',
+					'propdb',
+					[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
+					'http://www.itemwiki.com/entity',
+					''
+				),
+			] ),
+			'BASE_URI',
+			$conceptBaseUris,
+			'ARTICLE_PATH',
+			'SCRIPT_PATH'
+		);
+
+		$this->assertEquals( 'http://www.itemwiki.com/entity/Q111', $linker->getEntityConceptUri( new ItemId( 'Q111' ) ) );
+		$this->assertEquals( 'http://www.propertywiki.com/entity/P111', $linker->getEntityConceptUri( new PropertyId( 'P111' ) ) );
 	}
 
 	/**
