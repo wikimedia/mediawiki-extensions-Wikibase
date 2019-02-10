@@ -2215,7 +2215,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return string[] Associative array mapping names of known entity types (strings) to names of
+	 * @return array[] Associative array mapping names of known entity types (strings) to lists of names of
 	 *         repositories providing entities of those types.
 	 *         Note: Currently entities of a given type are only provided by single repository. This
 	 *         assumption can be changed in the future.
@@ -2227,7 +2227,7 @@ class WikibaseRepo {
 			// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
 			// of getting this map passed from Repo
 			$entityTypes = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
-			return array_fill_keys( $entityTypes, '' );
+			return array_fill_keys( $entityTypes, [ '' ] );
 		}
 		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
 	}
