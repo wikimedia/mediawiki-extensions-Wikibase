@@ -5,6 +5,7 @@
 			"L2212"
 		]
 	},
+	"tooltip-t-wikibase": "Ligàmene a s'elementu connètidu de s'archìviu de datos",
 	"wikibase-comment-add": "Un'elementu de {{WBREPONAME}} est istadu creadu.",
 	"wikibase-comment-update": "Elementu {{WBREPONAME}} cambiadu",
 	"wikibase-dataitem": "Elementu {{WBREPONAME}}",

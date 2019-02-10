@@ -4,7 +4,8 @@
 			"Fohanno",
 			"Fulup",
 			"Y-M D",
-			"Pymouss"
+			"Pymouss",
+			"VIGNERON"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
@@ -22,6 +23,7 @@
 	"datatypes-type-globe-coordinate": "Daveennoù douaroniel",
 	"datatypes-type-time": "Mare en amzer",
 	"datatypes-type-geo-shape": "Gwiskad douaroniel",
+	"wikibase-time-precision-BCE-century": "{{PLURAL:$1|1añ kantved|$1vet kantved}} kt JK",
 	"wikibase-entity-summary-wbsetlabel-add": "Skridennad [$2] ouzhpennet",
 	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet",
 	"wikibase-entity-summary-wbsetaliases-add-remove": "Ouzhpennet ha dilamet {{PLURAL:$1|un alias|aliasoù}} [$2]",

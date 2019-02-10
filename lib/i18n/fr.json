@@ -28,7 +28,8 @@
 			"Envlh",
 			"KATRINE1992",
 			"Ayack",
-			"Jona"
+			"Jona",
+			"VIGNERON"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -128,7 +129,7 @@
 	"wikibase-time-precision-BCE-Mannum": "{{PLURAL:$1|1 million|$1 millions}} d’années av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 année|$1 années}} av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-millennium": "{{PLURAL:$1|1ᵉʳ millénaire|$1ᵉ millénaire}} av. J.⁠-⁠C.",
-	"wikibase-time-precision-BCE-century": "{{PLURAL:$1|1ᵉʳ siècle|$1ᵉ siècle}} av. J.⁠-⁠C.",
+	"wikibase-time-precision-BCE-century": "{{PLURAL:$1|1er siècle|$1e siècle}} av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-10annum": "années $1 av. J.⁠-⁠C.",
 	"wikibase-snakformatter-valuetype-mismatch": "Le type de valeur « $1 » ne correspond pas au type de propriété « $2 ».",
 	"wikibase-snakformatter-property-not-found": "Propriété $1 non trouvée, impossible de déterminer le type de données à utiliser.",
