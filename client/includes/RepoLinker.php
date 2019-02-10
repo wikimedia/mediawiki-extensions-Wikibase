@@ -5,6 +5,8 @@ namespace Wikibase\Client;
 use Html;
 use InvalidArgumentException;
 use LogicException;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -21,13 +23,28 @@ class RepoLinker {
 
 	private $scriptPath;
 
+	private $dataAccessSettings;
+
+	private $entitySourceDefinitions;
+
 	/**
+	 * @param DataAccessSettings $dataAccessSettings
+	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param string $baseUrl
 	 * @param array $conceptBaseUris
 	 * @param string $articlePath
 	 * @param string $scriptPath
 	 */
-	public function __construct( $baseUrl, array $conceptBaseUris, $articlePath, $scriptPath ) {
+	public function __construct(
+		DataAccessSettings $dataAccessSettings,
+		EntitySourceDefinitions $entitySourceDefinitions,
+		$baseUrl,
+		array $conceptBaseUris,
+		$articlePath,
+		$scriptPath
+	) {
+		$this->dataAccessSettings = $dataAccessSettings;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		$this->baseUrl = $baseUrl;
 		$this->conceptBaseUris = $conceptBaseUris;
 		$this->articlePath = $articlePath;
@@ -155,7 +172,17 @@ class RepoLinker {
 	 * @return string
 	 */
 	public function getConceptBaseUri( EntityId $entityId ) {
-		$uri = $this->conceptBaseUris[$entityId->getRepositoryName()];
+		$uri = null;
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
+			if ( $source !== null ) {
+				// TODO: info on concept base uri is in EntitySourceDefinitions, shouldn't be duplicated in the array
+				$uri = $this->conceptBaseUris[$source->getSourceName()];
+			}
+		} else {
+			$uri = $this->conceptBaseUris[$entityId->getRepositoryName()];
+		}
+
 		if ( !isset( $uri ) ) {
 			throw new LogicException(
 				'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName()
