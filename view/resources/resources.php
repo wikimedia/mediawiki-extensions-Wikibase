@@ -79,6 +79,9 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered for WikibaseClient everywhere, but never loaded.
+		// Depended on by WikibaseLexeme and WikibaseMediaInfo, candidate for
+		// potentially keeping in some form as part of a shared bundle.
 		'jquery.wikibase.entityview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityview.js',
@@ -103,6 +106,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered globally by WikibaseClient, but never loaded directly.
+		// Used by PropertySuggester.
 		'jquery.wikibase.referenceview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/jquery.removeClassByRegex.js',
@@ -112,47 +117,6 @@ return call_user_func( function() {
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
-			],
-		],
-
-		'jquery.wikibase.sitelinkgrouplistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js'
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.listview',
-				'wikibase.sites',
-			],
-		],
-
-		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.sticknode.js',
-				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js'
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.util.EventSingletonManager',
-				'jquery.wikibase.sitelinkgroupview.mw-collapsible.styles',
-				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
-				'wikibase.buildErrorOutput',
-				'wikibase.sites',
-			],
-			'messages' => [
-				'wikibase-sitelinkgroupview-input-help-message',
-			],
-		],
-
-		'jquery.wikibase.sitelinkgroupview.mw-collapsible.styles' => $moduleTemplate + [
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.mw-collapsible.css',
 			],
 		],
 
@@ -804,6 +768,9 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/jquery.sticknode.js',
+				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js'
+				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
 				'jquery/wikibase/jquery.wikibase.propertyview.js',
 				'jquery/wikibase/jquery.wikibase.labelview.js',
 				'jquery/wikibase/jquery.wikibase.itemview.js',
@@ -821,6 +788,9 @@ return call_user_func( function() {
 				'wikibase/view/ViewFactory.js'
 			],
 			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.mw-collapsible.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'jquery/ui/jquery.ui.tagadata.css',
@@ -842,12 +812,12 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
 				'jquery.wikibase.entityview',
-				'jquery.wikibase.listview', // For ListItemAdapter
-				'jquery.wikibase.sitelinkgrouplistview',
-				'jquery.wikibase.sitelinkgroupview',
+				'jquery.wikibase.listview',
 				'jquery.wikibase.sitelinklistview',
 				'jquery.wikibase.statementview',
+				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
+				'wikibase.sites',
 				'wikibase.templates',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.StatementGroup',
@@ -860,6 +830,7 @@ return call_user_func( function() {
 				'jquery.valueview',
 				'mediawiki.api',
 				'mediawiki.cookie',
+				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'mediawiki.user',
 			],
 			'messages' => [
@@ -886,6 +857,7 @@ return call_user_func( function() {
 				'wikibase-label-edit-placeholder-language-aware',
 				'wikibase-label-empty',
 				'wikibase-label-input-help-message',
+				'wikibase-sitelinkgroupview-input-help-message',
 				'wikibase-statementgrouplistview-add-tooltip',
 				'wikibase-statementlistview-add',
 				'wikibase-statementlistview-add-tooltip',
