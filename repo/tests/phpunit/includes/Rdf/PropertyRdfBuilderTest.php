@@ -111,4 +111,36 @@ class PropertyRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
+	public function testAddEntity_entitySourceBasedFederation() {
+		$entity = $this->getTestData()->getEntity( 'P2' );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer )->addEntity( $entity );
+
+		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
+	}
+
+	public function testAddEntityStub_entitySourceBasedFederation() {
+		$entity = $this->getTestData()->getEntity( 'P2' );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer )->addEntityStub( $entity );
+
+		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
+	}
+
+	/**
+	 * @param RdfWriter $writer
+	 *
+	 * @return PropertyRdfBuilder
+	 */
+	private function newBuilderForEntitySourceBasedFederation( RdfWriter $writer ) {
+		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
+
+		return new PropertyRdfBuilder(
+			$vocabulary,
+			$writer
+		);
+	}
+
 }

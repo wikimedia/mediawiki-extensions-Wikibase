@@ -61,6 +61,25 @@ class SiteLinksRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $builder;
 	}
 
+	/**
+	 * @param RdfWriter $writer
+	 * @param string[]|null $sites
+	 *
+	 * @return SiteLinksRdfBuilder
+	 */
+	private function newBuilderForEntitySourceBasedFederation( RdfWriter $writer, array $sites = null ) {
+		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
+
+		$builder = new SiteLinksRdfBuilder(
+			$vocabulary,
+			$writer,
+			$this->getTestData()->getSiteLookup()->getSites(),
+			$sites
+		);
+
+		return $builder;
+	}
+
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actual = $writer->drain();
 		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
@@ -93,6 +112,30 @@ class SiteLinksRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer, $sites )->addSiteLinks( $entity );
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
+	/**
+	 * @dataProvider provideAddEntity
+	 */
+	public function testAddEntity_entitySourceBasedFederation( $entityName, $dataSetName, array $sites = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer, $sites )->addEntity( $entity );
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
+	/**
+	 * @dataProvider provideAddEntity
+	 */
+	public function testAddSiteLinks_entitySourceBasedFederation( $entityName, $dataSetName, array $sites = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer, $sites )->addSiteLinks( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}

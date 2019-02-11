@@ -62,6 +62,24 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $builder;
 	}
 
+	/**
+	 * @param RdfWriter $writer
+	 * @param string[]|null $languages
+	 *
+	 * @return TermsRdfBuilder
+	 */
+	private function newBuilderForEntitySourceBasedFederation( RdfWriter $writer, array $languages = null ) {
+		$vocabulary = $this->getTestData()->getVocabulary();
+
+		$builder = new TermsRdfBuilder(
+			$vocabulary,
+			$writer,
+			$languages
+		);
+
+		return $builder;
+	}
+
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actual = $writer->drain();
 		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
@@ -86,6 +104,18 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
+	/**
+	 * @dataProvider provideAddEntity
+	 */
+	public function testAddEntity_entitySourceBasedFederation( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer, $languages )->addEntity( $entity );
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
 	public function provideAddEntityStub() {
 		return [
 			[ 'Q2', 'Q2_terms_stubs' ],
@@ -105,6 +135,18 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
+	/**
+	 * @dataProvider provideAddEntityStub
+	 */
+	public function testAddEntityStub_entitySourceBasedFederation( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer, $languages )->addEntityStub( $entity );
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
 	public function provideAddLabels() {
 		return [
 			[ 'Q2', 'Q2_terms_labels' ],
@@ -120,6 +162,25 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
+			->addLabels(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getLabels()
+			);
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
+	/**
+	 * @dataProvider provideAddLabels
+	 */
+	public function testAddLabels_entitySourceBasedFederation( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		TestingAccessWrapper::newFromObject(
+			$this->newBuilderForEntitySourceBasedFederation( $writer, $languages )
+		)
 			->addLabels(
 				RdfVocabulary::NS_ENTITY,
 				$entity->getId()->getLocalPart(),
@@ -153,6 +214,25 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
+	/**
+	 * @dataProvider provideAddDescriptions
+	 */
+	public function testAddDescriptions_entitySourceBasedFederation( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		TestingAccessWrapper::newFromObject(
+			$this->newBuilderForEntitySourceBasedFederation( $writer, $languages )
+		)
+			->addDescriptions(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getDescriptions()
+			);
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
 	public function provideAddAliases() {
 		return [
 			[ 'Q2', 'Q2_terms_aliases' ],
@@ -168,6 +248,25 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
+			->addAliases(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getAliasGroups()
+			);
+
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
+	/**
+	 * @dataProvider provideAddAliases
+	 */
+	public function testAddAliases_entitySourceBasedFederation( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		TestingAccessWrapper::newFromObject(
+			$this->newBuilderForEntitySourceBasedFederation( $writer, $languages )
+		)
 			->addAliases(
 				RdfVocabulary::NS_ENTITY,
 				$entity->getId()->getLocalPart(),

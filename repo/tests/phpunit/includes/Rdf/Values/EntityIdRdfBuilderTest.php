@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -43,6 +44,37 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			''
+		);
+		$builder = new EntityIdRdfBuilder( $vocab, new NullEntityMentionListener() );
+
+		$writer = new NTriplesRdfWriter();
+		$writer->prefix( 'www', "http://www/" );
+		$writer->prefix( 'acme', "http://acme/" );
+		$writer->prefix( RdfVocabulary::NS_ENTITY, 'http://test/item/' );
+
+		$writer->start();
+		$writer->about( 'www', 'Q1' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'P1' ),
+			new EntityIdValue( new ItemId( 'Q23' ) )
+		);
+
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+
+		$expected = '<http://www/Q1> <http://acme/testing> <http://test/item/Q23> .';
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
+	}
+
+	public function testAddValue_entitySourceBasedFederation() {
+		$vocab = new RdfVocabulary(
+			[ 'test' => 'http://test/item/' ],
+			'http://test/data/',
+			DataAccessSettingsTest::entitySourceBasedFederation(),
+			new EntitySourceDefinitions( [
+				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '' )
+			] ),
+			'test'
 		);
 		$builder = new EntityIdRdfBuilder( $vocab, new NullEntityMentionListener() );
 
