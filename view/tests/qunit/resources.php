@@ -92,7 +92,6 @@ return [
 			'jquery.wikibase.referenceview',
 			'jquery.wikibase.removetoolbar',
 			'jquery.wikibase.singlebuttontoolbar',
-			'jquery.wikibase.sitelinkgrouplistview',
 			'jquery.wikibase.sitelinkgroupview',
 			'jquery.wikibase.sitelinklistview',
 			'jquery.wikibase.sitelinkview',

@@ -79,6 +79,9 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered for WikibaseClient everywhere, but never loaded.
+		// Depended on by WikibaseLexeme and WikibaseMediaInfo, candidate for
+		// potentially keeping in some form as part of a shared bundle.
 		'jquery.wikibase.entityview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityview.js',
@@ -103,6 +106,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered globally by WikibaseClient, but never loaded directly.
+		// Used by PropertySuggester.
 		'jquery.wikibase.referenceview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/jquery.removeClassByRegex.js',
@@ -112,20 +117,6 @@ return call_user_func( function() {
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
-			],
-		],
-
-		'jquery.wikibase.sitelinkgrouplistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js'
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.listview',
-				'wikibase.sites',
 			],
 		],
 
@@ -804,6 +795,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
 				'jquery/wikibase/jquery.wikibase.propertyview.js',
 				'jquery/wikibase/jquery.wikibase.labelview.js',
 				'jquery/wikibase/jquery.wikibase.itemview.js',
@@ -821,6 +813,7 @@ return call_user_func( function() {
 				'wikibase/view/ViewFactory.js'
 			],
 			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'jquery/ui/jquery.ui.tagadata.css',
@@ -842,12 +835,12 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
 				'jquery.wikibase.entityview',
-				'jquery.wikibase.listview', // For ListItemAdapter
-				'jquery.wikibase.sitelinkgrouplistview',
+				'jquery.wikibase.listview',
 				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.sitelinklistview',
 				'jquery.wikibase.statementview',
 				'wikibase.getLanguageNameByCode',
+				'wikibase.sites',
 				'wikibase.templates',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.StatementGroup',
