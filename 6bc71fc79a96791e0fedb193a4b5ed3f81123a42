@@ -22,6 +22,30 @@
       "revId": "6bc71fc79a96791e0fedb193a4b5ed3f81123a42",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ae8e4dd_05b503f6",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-11T19:17:12Z",
+      "side": 1,
+      "message": "I didn\u0027t think further than looking at what assertLocalEntityId throws, so I am not going to defend this choice.\nWhat exception you suggest to throw instead?",
+      "parentUuid": "772bc282_8199fc3f",
+      "range": {
+        "startLine": 122,
+        "startChar": 13,
+        "endLine": 122,
+        "endChar": 37
+      },
+      "revId": "6bc71fc79a96791e0fedb193a4b5ed3f81123a42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
