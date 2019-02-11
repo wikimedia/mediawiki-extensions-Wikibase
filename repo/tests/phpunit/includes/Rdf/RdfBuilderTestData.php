@@ -6,6 +6,7 @@ use HashSiteStore;
 use InvalidArgumentException;
 use Site;
 use SiteLookup;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -173,6 +174,23 @@ class RdfBuilderTestData {
 		);
 	}
 
+	public function getVocabularyForEntitySourceBasedFederation() {
+		return new RdfVocabulary(
+			[ 'wikidata' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
+			self::URI_DATA,
+			DataAccessSettingsTest::entitySourceBasedFederation(),
+			new EntitySourceDefinitions( [
+				new EntitySource( 'wikidata', 'wikidatadb', [ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ], self::URI_BASE, '' ),
+				new EntitySource( 'foreign', 'foreigndb', [ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ], self::URI_BASE_FOREIGN, '' ),
+			] ),
+			'wikidata',
+			[],
+			[],
+			[],
+			'http://creativecommons.org/publicdomain/zero/1.0/'
+		);
+	}
+
 	/**
 	 * Returns a new NTriplesRdfWriter, with vocabulary namespaces registered.
 	 *
@@ -237,6 +255,25 @@ class RdfBuilderTestData {
 			[ new PropertyId( 'P11' ), 'external-id' ],
 			[ new PropertyId( 'foreign:P12' ), 'string' ],
 			[ new PropertyId( 'foreign:P13' ), 'wikibase-item' ],
+		];
+	}
+
+	/**
+	 * @return array[] A list of properties used in the test data. Each element is a pair
+	 *         of an PropertyId and a data type ID.
+	 */
+	public static function getTestProperties_noPrefixedIds() {
+		return [
+			[ new PropertyId( 'P2' ), 'wikibase-item' ],
+			[ new PropertyId( 'P3' ), 'commonsMedia' ],
+			[ new PropertyId( 'P4' ), 'globe-coordinate' ],
+			[ new PropertyId( 'P5' ), 'monolingualtext' ],
+			[ new PropertyId( 'P6' ), 'quantity' ],
+			[ new PropertyId( 'P7' ), 'string' ],
+			[ new PropertyId( 'P8' ), 'time' ],
+			[ new PropertyId( 'P9' ), 'url' ],
+			[ new PropertyId( 'P10' ), 'geo-shape' ],
+			[ new PropertyId( 'P11' ), 'external-id' ],
 		];
 	}
 
