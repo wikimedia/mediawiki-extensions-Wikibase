@@ -62,4 +62,32 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}
 
+	public function testAddValue_entitySourceBasedFederation() {
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://test/item/' ],
+			'http://test/data/',
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
+		$builder = new GeoShapeRdfBuilder( $vocab );
+
+		$writer = new NTriplesRdfWriter();
+		$writer->prefix( 'www', "http://www/" );
+		$writer->prefix( 'acme', "http://acme/" );
+
+		$writer->start();
+		$writer->about( 'www', 'Q1' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'P1' ),
+			new StringValue( 'Data:Foo.map' )
+		);
+
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+
+		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/data/main/Data:Foo.map> .';
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
+	}
+
 }
