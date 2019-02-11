@@ -156,7 +156,6 @@ class EntityDataRequestHandler {
 	 * @param WebRequest $request
 	 *
 	 * @return bool
-	 * @throws HttpError
 	 */
 	public function canHandleRequest( $doc, WebRequest $request ) {
 		if ( $doc === '' || $doc === null ) {
