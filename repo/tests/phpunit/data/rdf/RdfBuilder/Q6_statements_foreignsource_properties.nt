@@ -1,0 +1,5 @@
+<http://acme.test/Q6> <http://foreign.test/prop/P7> <http://acme.test/statement/TEST-Qualifiers> .
+<http://acme.test/statement/TEST-Qualifiers> <http://foreign.test/prop/statement/P7> "string" .
+<http://acme.test/statement/TEST-Qualifiers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#Statement> .
+<http://acme.test/statement/TEST-Qualifiers> <http://wikiba.se/ontology#rank> <http://wikiba.se/ontology#NormalRank> .
+<http://acme.test/statement/TEST-Qualifiers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology#BestRank> .
