@@ -110,6 +110,53 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $statementBuilder;
 	}
 
+	private function newBuilderForEntitySourceBasedFederation(
+		RdfWriter $writer,
+		$flavor,
+		array &$mentioned = [],
+		DedupeBag $dedupe = null
+	) {
+		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
+
+		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker->expects( $this->any() )
+			->method( 'propertyMentioned' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
+				$key = $id->getSerialization();
+				$mentioned[$key] = $id;
+			} ) );
+
+		// Note: using the actual factory here makes this an integration test!
+		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
+		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
+			$valueWriter = $writer->sub();
+		} else {
+			$valueWriter = $writer;
+		}
+
+		$statementValueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
+			$flavor,
+			$this->getTestData()->getVocabulary(),
+			$valueWriter,
+			$mentionTracker,
+			new HashDedupeBag()
+		);
+
+		$snakRdfBuilder = new SnakRdfBuilder( $vocabulary, $statementValueBuilder, $this->getTestData()->getMockRepository() );
+		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $snakRdfBuilder );
+		$statementBuilder->setDedupeBag( $dedupe ?: new NullDedupeBag() );
+
+		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES ) {
+			$snakRdfBuilder->setEntityMentionListener( $mentionTracker );
+		}
+
+		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
+		$statementBuilder->setProduceReferences( $flavor & RdfProducer::PRODUCE_REFERENCES );
+
+		return $statementBuilder;
+	}
+
 	/**
 	 * @param string|string[] $dataSetNames
 	 * @param RdfWriter $writer
@@ -160,6 +207,52 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$mentioned = [];
 		$this->newBuilder( $writer, $flavor, $mentioned )->addEntity( $entity );
+
+		$this->assertTriples( $dataSetNames, $writer );
+		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
+	}
+
+	public function provideAddEntity_entityBasedFederation() {
+		$props = array_map(
+			function ( $data ) {
+				/** @var PropertyId $propertyId */
+				$propertyId = $data[0];
+				return $propertyId->getSerialization();
+			},
+			$this->getTestData()->getTestProperties()
+		);
+
+		$q4_minimal = [ 'Q4_statements_foreignsource_properties' ];
+		$q4_all = [ 'Q4_statements', 'Q4_values' ];
+		$q4_statements = [ 'Q4_statements' ];
+		$q4_values = [ 'Q4_statements', 'Q4_values' ];
+		$q6_no_qualifiers = [ 'Q6_statements' ];
+		$q6_qualifiers = [ 'Q6_statements', 'Q6_qualifiers' ];
+		$q7_no_refs = [ 'Q7_statements' ];
+		$q7_refs = [ 'Q7_statements', 'Q7_reference_refs', 'Q7_references' ];
+
+		return [
+			[ 'Q4_no_prefixed_ids', 0, $q4_minimal, [] ],
+			/*[ 'Q4', RdfProducer::PRODUCE_ALL, $q4_all, $props ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ],
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ],*/
+		];
+	}
+
+	/**
+	 * @dataProvider provideAddEntity_entityBasedFederation
+	 */
+	public function testAddEntity_entityBasedFederation( $entityName, $flavor, $dataSetNames, array $expectedMentions ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$mentioned = [];
+		$this->newBuilderForEntitySourceBasedFederation( $writer, $flavor, $mentioned )->addEntity( $entity );
 
 		$this->assertTriples( $dataSetNames, $writer );
 		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
