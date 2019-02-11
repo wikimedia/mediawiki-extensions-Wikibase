@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use ValueValidators\ValueValidator;
+use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -103,12 +104,18 @@ class ValidatorBuilders {
 	private $tabularDataStorageApiUrl;
 
 	/**
+	 * @var DataAccessSettings
+	 */
+	private $dataAccessSettings;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
 	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
 	 * @param ContentLanguages $contentLanguages
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
+	 * @param DataAccessSettings $dataAccessSettings
 	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
 	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
 	 * @param string $geoShapeStorageApiUrl
@@ -121,6 +128,7 @@ class ValidatorBuilders {
 		$vocabularyBaseUri,
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
+		DataAccessSettings $dataAccessSettings,
 		array $supportedEntityTypes,
 		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
 		$geoShapeStorageApiUrl,
@@ -132,6 +140,7 @@ class ValidatorBuilders {
 		$this->vocabularyBaseUri = $vocabularyBaseUri;
 		$this->contentLanguages = $contentLanguages;
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->supportedEntityTypes = $supportedEntityTypes;
 		$this->mediaWikiPageNameNormalizer = $mediaWikiPageNameNormalizer;
 		$this->geoShapeStorageApiUrl = $geoShapeStorageApiUrl;
@@ -165,10 +174,20 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function getEntityValidators( $entityType = null ) {
+		$typeValidator = new TypeValidator( EntityIdValue::class );
+		$entityExistsValidator = new EntityExistsValidator( $this->entityLookup, $entityType );
+
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			return [
+				$typeValidator,
+				$entityExistsValidator,
+			];
+		}
+
 		return [
-			new TypeValidator( EntityIdValue::class ),
+			$typeValidator,
 			new ForeignEntityValidator( $this->supportedEntityTypes ),
-			new EntityExistsValidator( $this->entityLookup, $entityType ),
+			$entityExistsValidator,
 		];
 	}
 
