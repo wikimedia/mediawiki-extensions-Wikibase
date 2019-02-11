@@ -97,6 +97,49 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $builder;
 	}
 
+	/**
+	 * @param string $propertyNamespace
+	 * @param string $propertyValueLName
+	 * @param string $dataType
+	 * @param Snak|null $snak
+	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
+	 *
+	 * @return SnakRdfBuilder
+	 */
+	private function newBuilderForEntityBasedFederatiib(
+		$propertyNamespace,
+		$propertyValueLName,
+		$dataType,
+		Snak $snak = null,
+		array &$mentioned = []
+	) {
+		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker->expects( $this->any() )
+			->method( 'propertyMentioned' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
+				$key = $id->getSerialization();
+				$mentioned[$key] = $id;
+			} ) );
+
+		$valueBuilder = $this->getMock( ValueSnakRdfBuilder::class );
+
+		if ( $snak instanceof PropertyValueSnak ) {
+			$valueBuilder->expects( $this->once() )
+				->method( 'addValue' )
+				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, $snak );
+		} else {
+			$valueBuilder->expects( $this->never() )
+				->method( 'addValue' );
+		}
+
+		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
+
+		$builder = new SnakRdfBuilder( $vocabulary, $valueBuilder, $this->getTestData()->getMockRepository() );
+		$builder->setEntityMentionListener( $mentionTracker );
+
+		return $builder;
+	}
+
 	public function provideAddSnakValue() {
 		// NOTE: data types must match $this->getTestData()->getMockRepository();
 
@@ -139,6 +182,27 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 	}
 
+	/**
+	 * @dataProvider provideAddSnakValue
+	 */
+	public function testAddSnakValue_entitySourceBasedFederation( Snak $snak, $dataType ) {
+		$writer = $this->getTestData()->getNTriplesWriter();
+
+		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
+
+		$propertyId = $snak->getPropertyId();
+
+		$builder = $this->newBuilderForEntityBasedFederatiib(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$propertyId->getSerialization(),
+			$dataType,
+			$snak
+		);
+
+		// assertions are done by the mocks
+		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+	}
+
 	public function testAddSnakValue_novalue() {
 		$propertyId = new PropertyId( 'P2' );
 		$snak = new PropertyNoValueSnak( $propertyId );
@@ -161,6 +225,28 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
 	}
 
+	public function testAddSnakValue_novalue_entitySourceBasedFederation() {
+		$propertyId = new PropertyId( 'P2' );
+		$snak = new PropertyNoValueSnak( $propertyId );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
+
+		$builder = $this->newBuilderForEntityBasedFederatiib(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$propertyId->getSerialization(),
+			'wikibase-item'
+		);
+
+		$expectedTriples = [
+			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://foreign.test/prop/novalue/P2> .',
+		];
+
+		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+
+		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
+	}
+
 	public function testAddSnakValue_mention() {
 		$propertyId = new PropertyId( 'P2' );
 		$value = new EntityIdValue( new ItemId( 'Q42' ) );
@@ -171,6 +257,27 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$mentioned = [];
 		$builder = $this->newBuilder(
+			RdfVocabulary::NSP_DIRECT_CLAIM,
+			$propertyId->getSerialization(),
+			'wikibase-item',
+			$snak,
+			$mentioned
+		);
+
+		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$this->assertEquals( [ 'P2' ], array_keys( $mentioned ) );
+	}
+
+	public function testAddSnakValue_mention_entitySourceBasedFederation() {
+		$propertyId = new PropertyId( 'P2' );
+		$value = new EntityIdValue( new ItemId( 'Q42' ) );
+		$snak = new PropertyValueSnak( $propertyId, $value );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
+
+		$mentioned = [];
+		$builder = $this->newBuilderForEntityBasedFederatiib(
 			RdfVocabulary::NSP_DIRECT_CLAIM,
 			$propertyId->getSerialization(),
 			'wikibase-item',
