@@ -62,4 +62,32 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}
 
+	public function testAddValue_entitySourceBasedFederation() {
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://test/item/' ],
+			'http://test/data/',
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
+		$builder = new CommonsMediaRdfBuilder( $vocab );
+
+		$writer = new NTriplesRdfWriter();
+		$writer->prefix( 'www', "http://www/" );
+		$writer->prefix( 'acme', "http://acme/" );
+
+		$writer->start();
+		$writer->about( 'www', 'Q1' );
+
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'P1' ),
+			new StringValue( 'Bunny.jpg' )
+		);
+
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+
+		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/wiki/Special:FilePath/Bunny.jpg> .';
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
+	}
+
 }
