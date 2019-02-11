@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad3c4b9d_6d2a3d33",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-11T18:59:15Z",
+      "side": 1,
+      "message": "should this be the date of accepting the ADR, or when it was first proposed?",
+      "range": {
+        "startLine": 3,
+        "startChar": 14,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5da6d5d1_151048ea",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-11T18:59:15Z",
+      "side": 1,
+      "message": "That should be \"on\", no?\nIt is an item whose labels etc is rendered, not the item page.",
+      "range": {
+        "startLine": 11,
+        "startChar": 217,
+        "endLine": 11,
+        "endChar": 219
+      },
+      "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94a5bcd2_e06fb36b",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-11T18:59:15Z",
+      "side": 1,
+      "message": "i am not the punctuation ace, but either this comma is not needed here, or one should also be added in the sentence above (after \"identical\").",
+      "range": {
+        "startLine": 36,
+        "startChar": 78,
+        "endLine": 36,
+        "endChar": 79
+      },
+      "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
