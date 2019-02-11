@@ -86,4 +86,52 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}
 
+	public function testAddValue_entitySourceBasedFederation() {
+		$uriPatternProvider = $this->getMock( PropertyInfoProvider::class );
+		$uriPatternProvider->expects( $this->any() )
+			->method( 'getPropertyInfo' )
+			->will( $this->returnCallback( function( PropertyId $id ) {
+				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
+			} ) );
+
+		$builder = new ExternalIdentifierRdfBuilder(
+			new RdfVocabulary(
+				[ '' => '<BASE>' ],
+				'<DATA>',
+				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+				new EntitySourceDefinitions( [] ),
+				''
+			),
+			$uriPatternProvider
+		);
+
+		$writer = new NTriplesRdfWriter();
+		$writer->prefix( 'www', "http://www.test/" );
+		$writer->prefix( 'wdt', "http://acme.test/prop/" );
+		$writer->prefix( 'wdtn', "http://acme.test/prop-normalized/" );
+
+		$writer->start();
+		$writer->about( 'www', 'Q1' );
+
+		$snakP1 = new PropertyValueSnak(
+			new PropertyId( 'P1' ),
+			new StringValue( 'AB&123' )
+		);
+
+		$snakP345 = new PropertyValueSnak(
+			new PropertyId( 'P345' ),
+			new StringValue( 'XY-23' )
+		);
+
+		$builder->addValue( $writer, 'wdt', 'P1', 'DUMMY', $snakP1 );
+		$builder->addValue( $writer, 'wdt', 'P345', 'DUMMY', $snakP345 );
+
+		$expected = [
+			'<http://www.test/Q1> <http://acme.test/prop-normalized/P1> <http://xyzzy.test/vocab/AB%26123> .',
+			'<http://www.test/Q1> <http://acme.test/prop/P1> "AB&123" .',
+			'<http://www.test/Q1> <http://acme.test/prop/P345> "XY-23" .',
+		];
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
+	}
+
 }
