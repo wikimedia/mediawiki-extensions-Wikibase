@@ -110,6 +110,53 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		return $statementBuilder;
 	}
 
+	private function newBuilderForEntitySourceBasedFederation(
+		RdfWriter $writer,
+		$flavor,
+		array &$mentioned = [],
+		DedupeBag $dedupe = null
+	) {
+		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
+
+		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker->expects( $this->any() )
+			->method( 'propertyMentioned' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
+				$key = $id->getSerialization();
+				$mentioned[$key] = $id;
+			} ) );
+
+		// Note: using the actual factory here makes this an integration test!
+		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
+		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
+			$valueWriter = $writer->sub();
+		} else {
+			$valueWriter = $writer;
+		}
+
+		$statementValueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
+			$flavor,
+			$vocabulary,
+			$valueWriter,
+			$mentionTracker,
+			new HashDedupeBag()
+		);
+
+		$snakRdfBuilder = new SnakRdfBuilder( $vocabulary, $statementValueBuilder, $this->getTestData()->getMockRepository() );
+		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $snakRdfBuilder );
+		$statementBuilder->setDedupeBag( $dedupe ?: new NullDedupeBag() );
+
+		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES ) {
+			$snakRdfBuilder->setEntityMentionListener( $mentionTracker );
+		}
+
+		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
+		$statementBuilder->setProduceReferences( $flavor & RdfProducer::PRODUCE_REFERENCES );
+
+		return $statementBuilder;
+	}
+
 	/**
 	 * @param string|string[] $dataSetNames
 	 * @param RdfWriter $writer
@@ -165,6 +212,54 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
 	}
 
+	public function provideAddEntity_entityBasedFederation() {
+		$props = array_map(
+			function ( $data ) {
+				/** @var PropertyId $propertyId */
+				$propertyId = $data[0];
+				return $propertyId->getSerialization();
+			},
+			$this->getTestData()->getTestProperties_noPrefixedIds()
+		);
+
+		$q4_minimal = [ 'Q4_statements_foreignsource_properties' ];
+		$q4_all = [ 'Q4_statements_foreignsource_properties', 'Q4_values_foreignsource_properties' ];
+		$q4_statements = [ 'Q4_statements_foreignsource_properties' ];
+		$q4_values = [ 'Q4_statements_foreignsource_properties', 'Q4_values_foreignsource_properties' ];
+		$q6_no_qualifiers = [ 'Q6_statements_foreignsource_properties' ];
+		$q6_qualifiers = [ 'Q6_statements_foreignsource_properties', 'Q6_qualifiers_foreignsource_properties' ];
+		$q7_no_refs = [ 'Q7_statements_foreignsource_properties' ];
+		$q7_refs = [
+			'Q7_statements_foreignsource_properties', 'Q7_reference_refs_foreignsource_properties', 'Q7_references_foreignsource_properties'
+		];
+
+		return [
+			[ 'Q4_no_prefixed_ids', 0, $q4_minimal, [] ],
+			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL, $q4_all, $props ],
+			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS, $q4_statements, [] ],
+			[ 'Q6_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS, $q6_no_qualifiers, [] ],
+			[ 'Q6_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, $q6_qualifiers, [] ],
+			[ 'Q7_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS , $q7_no_refs, [] ],
+			[ 'Q7_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, $q7_refs, [] ],
+			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, $q4_minimal, $props ],
+			[ 'Q4_no_prefixed_ids', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, $q4_values, [] ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideAddEntity_entityBasedFederation
+	 */
+	public function testAddEntity_entityBasedFederation( $entityName, $flavor, $dataSetNames, array $expectedMentions ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$mentioned = [];
+		$this->newBuilderForEntitySourceBasedFederation( $writer, $flavor, $mentioned )->addEntity( $entity );
+
+		$this->assertTriples( $dataSetNames, $writer );
+		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
+	}
+
 	public function provideAddEntity_seen() {
 		return [
 			[ 'Q7', [ 'Q7_statements', 'Q7_reference_refs' ], [ 'f2693d55e4237eed12e76c87e54f6ae0f3d7080f' ] ],
@@ -191,6 +286,24 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTriples( $dataSetNames, $writer );
 	}
 
+	/**
+	 * @dataProvider provideAddEntity_seen
+	 */
+	public function testAddEntity_seen_entityBasedFederation() {
+		$entity = $this->getTestData()->getEntity( 'Q7_no_prefixed_ids' );
+
+		$dedupe = new HashDedupeBag();
+
+		$dedupe->alreadySeen( 'd2412760c57cacd8c8f24d9afde3b20c87161cca', 'R' );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$mentioned = [];
+		$this->newBuilderForEntitySourceBasedFederation( $writer, RdfProducer::PRODUCE_ALL, $mentioned, $dedupe )
+			->addEntity( $entity );
+
+		$this->assertTriples( [ 'Q7_statements_foreignsource_properties', 'Q7_reference_refs_foreignsource_properties' ], $writer );
+	}
+
 	public function provideAddStatements() {
 		return [
 			[ 'Q4', [ 'Q4_statements', 'Q4_values' ] ],
@@ -208,6 +321,16 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			->addStatements( $entity->getId(), $entity->getStatements() );
 
 		$this->assertTriples( $dataSetNames, $writer );
+	}
+
+	public function testAddStatements_entityBasedFederation() {
+		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$this->newBuilderForEntitySourceBasedFederation( $writer, RdfProducer::PRODUCE_ALL )
+			->addStatements( $entity->getId(), $entity->getStatements() );
+
+		$this->assertTriples( [ 'Q4_statements_foreignsource_properties', 'Q4_values_foreignsource_properties' ], $writer );
 	}
 
 }

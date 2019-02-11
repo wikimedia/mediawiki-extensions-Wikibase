@@ -306,6 +306,41 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEquals( $expected, $result );
 	}
 
+	/**
+	 * @dataProvider provideAddValue
+	 */
+	public function testAddValue_entitySourceBasedFederation(
+		PropertyValueSnak $snak,
+		$complex,
+		array $expected,
+		array $units = null
+	) {
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://acme.com/item/' ],
+			'http://acme.com/data/',
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
+
+		$snakWriter = $this->newSnakWriter();
+		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, $complex, $units );
+
+		$snakWriter->start();
+		$snakWriter->about( 'www', 'Q1' );
+
+		$builder->addValue(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			$vocab->getEntityLName( $snak->getPropertyId() ),
+			'DUMMY',
+			$snak
+		);
+
+		$result = $snakWriter->drain();
+		$this->helper->assertNTriplesEquals( $expected, $result );
+	}
+
 	public function testWriteQuantityValue() {
 		$unitId = new ItemId( 'Q2' );
 		$value = QuantityValue::newFromNumber( '+23.5', 'http://acme/' . $unitId->getSerialization(), '+23.6', '+23.4' );
@@ -314,6 +349,50 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://acme.com/item/' ],
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
+		$snakWriter = $this->newSnakWriter();
+		$valueWriter = $snakWriter->sub();
+		$builder = $this->newQuantityRdfBuilder( $valueWriter, $vocab, true, null );
+
+		$expected = [
+			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+			. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+			. '<http://acme/onto/QuantityValue> .',
+			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+			. '<http://acme/onto/quantityAmount> '
+			. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+			. '<http://acme/onto/quantityUpperBound> '
+			. '"+23.6"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+			. '<http://acme/onto/quantityLowerBound> '
+			. '"+23.4"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+			. '<http://acme/onto/quantityUnit> '
+			. '<http://acme/Q2> .'
+		];
+
+		/** @var QuantityValue $value */
+		$valueLName = $value->getHash();
+		$valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )
+			->a( RdfVocabulary::NS_ONTOLOGY, $vocab->getValueTypeName( $value ) );
+
+		$builder->writeQuantityValue( $value );
+
+		$result = $snakWriter->drain();
+		$this->helper->assertNTriplesEquals( $expected, $result );
+	}
+
+	public function testWriteQuantityValue_entitySourceBasedFederation() {
+		$unitId = new ItemId( 'Q2' );
+		$value = QuantityValue::newFromNumber( '+23.5', 'http://acme/' . $unitId->getSerialization(), '+23.6', '+23.4' );
+
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://acme.com/item/' ],
+			'http://acme.com/data/',
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
 			''
 		);
@@ -368,6 +447,74 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$snakWriter = $this->newSnakWriter();
 		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, true,
 				[ 'factor' => 1, 'unit' => 'Q2' ] );
+
+		$snakWriter->start();
+		$snakWriter->about( 'www', 'Q1' );
+
+		$builder->addValue(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			$vocab->getEntityLName( $unboundedSnak->getPropertyId() ),
+			'DUMMY',
+			$unboundedSnak
+		);
+		// And once more
+		$builder->addValue(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			$vocab->getEntityLName( $unboundedSnak2->getPropertyId() ),
+			'DUMMY',
+			$unboundedSnak2
+		);
+
+		$expected = [
+			'<http://www/Q1> ' . '<http://acme/statement/P7> ' .
+			'"-79.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value/P7> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value-norm/P7> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://www/Q1> ' . '<http://acme/statement/P9> ' .
+			'"-79.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value/P9> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://www/Q1> ' . '<http://acme/statement/value-norm/P9> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ' .
+			'<http://acme/onto/QuantityValue> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://acme/onto/quantityAmount> ' .
+			'"-79.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://acme/onto/quantityUnit> ' . '<Q2> .',
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> ' .
+			'<http://acme/onto/quantityNormalized> ' .
+			'<http://acme/value/526c2826a6dfd29d460ea348b5d124a6> .',
+		];
+
+		$result = $snakWriter->drain();
+		$this->helper->assertNTriplesEquals( $expected, $result );
+	}
+
+	/**
+	 * @see http://phabricator.wikimedia.org/T150877
+	 */
+	public function testWriteTwice_entitySourceBasedFederation() {
+		$unboundedValue = UnboundedQuantityValue::newFromNumber( '-79.1', 'Q2' );
+		$unboundedSnak = new PropertyValueSnak( new PropertyId( 'P7' ), $unboundedValue );
+		$unboundedSnak2 = new PropertyValueSnak( new PropertyId( 'P9' ), $unboundedValue );
+
+		$vocab = new RdfVocabulary(
+			[ '' => 'http://acme.com/item/' ],
+			'http://acme.com/data/',
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [] ),
+			''
+		);
+		$snakWriter = $this->newSnakWriter();
+		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, true,
+			[ 'factor' => 1, 'unit' => 'Q2' ] );
 
 		$snakWriter->start();
 		$snakWriter->about( 'www', 'Q1' );
