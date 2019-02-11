@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "772bc282_8199fc3f",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-02-11T10:16:59Z",
+      "side": 1,
+      "message": "Throwing InvalidArgumentExceptions here seems a bit odd, expecially given this is thrown from assertCanStoreEntity, I would expect some other exception really.",
+      "range": {
+        "startLine": 122,
+        "startChar": 13,
+        "endLine": 122,
+        "endChar": 37
+      },
+      "revId": "6bc71fc79a96791e0fedb193a4b5ed3f81123a42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
