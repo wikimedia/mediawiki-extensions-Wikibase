@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Site;
 use SiteLookup;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -166,6 +167,23 @@ class RdfBuilderTestData {
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
 			'',
+			[],
+			[],
+			[],
+			'http://creativecommons.org/publicdomain/zero/1.0/'
+		);
+	}
+
+	public function getVocabularyForEntitySourceBasedFederation() {
+		return new RdfVocabulary(
+			[ 'wikidata' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
+			self::URI_DATA,
+			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			new EntitySourceDefinitions( [
+				new EntitySource( 'wikidata', 'wikidatadb', [ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ], self::URI_BASE, '' ),
+				new EntitySource( 'foreign', 'foreigndb', [ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ], self::URI_BASE_FOREIGN, '' ),
+			] ),
+			'wikidata',
 			[],
 			[],
 			[],
