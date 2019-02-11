@@ -93,12 +93,7 @@ class RdfVocabulary {
 		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM,
 	];
 	// Value properties for normalized values, including for direct claims
-	public static $normalizedPropertyValueNamespace = [
-		self::NSP_DIRECT_CLAIM => self::NSP_DIRECT_CLAIM_NORM,
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM
-	];
+	public $normalizedPropertyValueNamespace = [];
 
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
@@ -256,6 +251,16 @@ class RdfVocabulary {
 			$this->namespaces = array_merge(
 				$this->namespaces,
 				$this->getConceptNamespaces( $namespaceSuffix, $baseUri )
+			);
+
+			$this->normalizedPropertyValueNamespace = array_merge(
+				$this->normalizedPropertyValueNamespace,
+				[
+					self::NSP_DIRECT_CLAIM . $namespaceSuffix => self::NSP_DIRECT_CLAIM_NORM . $namespaceSuffix,
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+				]
 			);
 		}
 
