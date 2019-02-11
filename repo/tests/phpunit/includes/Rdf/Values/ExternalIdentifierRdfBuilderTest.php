@@ -4,8 +4,11 @@ namespace Wikibase\Test\Rdf;
 
 use DataValues\StringValue;
 use PHPUnit4And6Compat;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\PropertyInfoProvider;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ExternalIdentifierRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
@@ -43,7 +46,16 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
 			} ) );
 
-		$builder = new ExternalIdentifierRdfBuilder( $uriPatternProvider );
+		$builder = new ExternalIdentifierRdfBuilder(
+			new RdfVocabulary(
+				[ '' => '<BASE>' ],
+				'<DATA>',
+				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+				new EntitySourceDefinitions( [] ),
+				''
+			),
+			$uriPatternProvider
+		);
 
 		$writer = new NTriplesRdfWriter();
 		$writer->prefix( 'www', "http://www.test/" );

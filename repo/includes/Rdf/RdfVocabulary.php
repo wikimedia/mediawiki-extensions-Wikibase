@@ -81,24 +81,11 @@ class RdfVocabulary {
 		Statement::RANK_PREFERRED => 'PreferredRank',
 	];
 	// Value properties
-	public static $claimToValue = [
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
-	];
+	public $claimToValue = [];
 	// Value properties for normalized values
-	public static $claimToValueNormalized = [
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM,
-	];
+	public $claimToValueNormalized = [];
 	// Value properties for normalized values, including for direct claims
-	public static $normalizedPropertyValueNamespace = [
-		self::NSP_DIRECT_CLAIM => self::NSP_DIRECT_CLAIM_NORM,
-		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
-		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
-		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM
-	];
+	public $normalizedPropertyValueNamespace = [];
 
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
@@ -256,6 +243,32 @@ class RdfVocabulary {
 			$this->namespaces = array_merge(
 				$this->namespaces,
 				$this->getConceptNamespaces( $namespaceSuffix, $baseUri )
+			);
+
+			$this->claimToValue = array_merge(
+				$this->claimToValue,
+				[
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE . $namespaceSuffix,
+				]
+			);
+			$this->claimToValueNormalized = array_merge(
+				$this->claimToValueNormalized,
+				[
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+				]
+			);
+			$this->normalizedPropertyValueNamespace = array_merge(
+				$this->normalizedPropertyValueNamespace,
+				[
+					self::NSP_DIRECT_CLAIM . $namespaceSuffix => self::NSP_DIRECT_CLAIM_NORM . $namespaceSuffix,
+					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
+					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
+					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+				]
 			);
 		}
 
