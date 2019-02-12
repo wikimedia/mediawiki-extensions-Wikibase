@@ -339,9 +339,9 @@ class DateFormatParser extends StringValueParser {
 	private function parseDate( $input ) {
 		$pattern = $this->parseDateFormat( $this->getDateFormat() );
 
-		MediaWiki\suppressWarnings();
+		Wikimedia\suppressWarnings();
 		$success = preg_match( $pattern, $input, $matches );
-		MediaWiki\restoreWarnings();
+		Wikimedia\restoreWarnings();
 
 		if ( !$success ) {
 			throw new ParseException(
