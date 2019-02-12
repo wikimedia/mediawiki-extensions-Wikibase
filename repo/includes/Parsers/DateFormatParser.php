@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Parsers;
 
 use DataValues\IllegalValueException;
 use DataValues\TimeValue;
-use MediaWiki;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
+use Wikimedia;
 
 /**
  * This parser is in essence the inverse operation of MediaWiki's Language::sprintfDate.
@@ -339,9 +339,9 @@ class DateFormatParser extends StringValueParser {
 	private function parseDate( $input ) {
 		$pattern = $this->parseDateFormat( $this->getDateFormat() );
 
-		MediaWiki\suppressWarnings();
+		Wikimedia\suppressWarnings();
 		$success = preg_match( $pattern, $input, $matches );
-		MediaWiki\restoreWarnings();
+		Wikimedia\restoreWarnings();
 
 		if ( !$success ) {
 			throw new ParseException(
