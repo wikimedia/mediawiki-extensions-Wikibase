@@ -192,6 +192,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\EntityReferenceExtractors\\EntityReferenceExtractorDelegator' => __DIR__ . '/includes/EntityReferenceExtractors/EntityReferenceExtractorDelegator.php',
 	'Wikibase\\Repo\\EntityReferenceExtractors\\SiteLinkBadgeItemReferenceExtractor' => __DIR__ . '/includes/EntityReferenceExtractors/SiteLinkBadgeItemReferenceExtractor.php',
 	'Wikibase\\Repo\\EntityReferenceExtractors\\StatementEntityReferenceExtractor' => __DIR__ . '/includes/EntityReferenceExtractors/StatementEntityReferenceExtractor.php',
+	'Wikibase\\Repo\\EntitySourceDefinitionsLegacyRepoSettingsParser' => __DIR__  . '/includes/EntitySourceDefinitionsLegacyRepoSettingsParser.php',
 	'Wikibase\\Repo\\FingerprintSearchTextGenerator' => __DIR__ . '/includes/FingerprintSearchTextGenerator.php',
 	'Wikibase\\Repo\\GenericEventDispatcher' => __DIR__ . '/includes/GenericEventDispatcher.php',
 	'Wikibase\\Repo\\Hooks\\Formatters\\DefaultEntityLinkFormatter' => __DIR__ . '/includes/Hooks/Formatters/DefaultEntityLinkFormatter.php',
