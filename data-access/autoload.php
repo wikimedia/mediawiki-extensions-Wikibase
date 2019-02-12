@@ -12,6 +12,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\DataAccess\\DataAccessSettings' => __DIR__ . '/src/DataAccessSettings.php',
 	'Wikibase\\DataAccess\\EntitySource' => __DIR__ . '/src/EntitySource.php',
 	'Wikibase\\DataAccess\\EntitySourceDefinitions' => __DIR__ . '/src/EntitySourceDefinitions.php',
+	'Wikibase\\DataAccess\\EntitySourceDefinitionsConfigParser' => __DIR__ . '/src/EntitySourceDefinitionsConfigParser.php',
 	'Wikibase\\DataAccess\\GenericServices' => __DIR__ . '/src/GenericServices.php',
 	'Wikibase\\DataAccess\\MultiRepositoryServices' => __DIR__ . '/src/MultiRepositoryServices.php',
 	'Wikibase\\DataAccess\\MultipleEntitySourceServices' => __DIR__ . '/src/MultipleEntitySourceServices.php',
