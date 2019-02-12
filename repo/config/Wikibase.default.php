@@ -344,6 +344,8 @@ return [
 
 	'useEntitySourceBasedFederation' => false,
 
+	'entitySources' => [],
+
 	'localEntitySourceName' => 'local',
 
 ];
