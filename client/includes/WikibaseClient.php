@@ -10,6 +10,7 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -824,6 +825,12 @@ final class WikibaseClient {
 	// Having a "entitySources" or so setting might be better, and would also allow unifying
 	// the way these are configured in Repo and in Client parts
 	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
+			$configParser = new EntitySourceDefinitionsConfigParser();
+
+			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ) );
+		}
+
 		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
 			? $settings->getSetting( 'foreignRepositories' )
 			: $settings->getSetting( 'repositories' );
