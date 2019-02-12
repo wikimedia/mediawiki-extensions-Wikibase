@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ea595f5b_19f540e0",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-12T10:24:45Z",
+      "side": 1,
+      "message": "In my understanding this should be the date on which we commited to it, i.e. all changes to the repo from this date forward should be in line with the ADR. Consequently this should have been adjusted when the status was changed to accepted.",
+      "parentUuid": "ad3c4b9d_6d2a3d33",
+      "range": {
+        "startLine": 3,
+        "startChar": 14,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5da6d5d1_151048ea",
         "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59f57ca3_cfe82653",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-12T10:24:45Z",
+      "side": 1,
+      "message": "I tried really hard but for me both versions (\"of\"/\"on\") work almost interchangeably, with slight preference for \"of\" as termbox only renders this part \"of\" the page, not the complete one - that is composed inside wikibase.",
+      "parentUuid": "5da6d5d1_151048ea",
+      "range": {
+        "startLine": 11,
+        "startChar": 217,
+        "endLine": 11,
+        "endChar": 219
+      },
+      "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     },
     {
       "key": {
