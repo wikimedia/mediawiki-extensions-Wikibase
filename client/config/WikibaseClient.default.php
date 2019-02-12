@@ -122,6 +122,7 @@ return call_user_func( function() {
 		'trackLuaFunctionCallsPerWiki' => false,
 
 		'useEntitySourceBasedFederation' => false,
+		'entitySources' => [],
 	];
 
 	// Some defaults depend on information not available at this time.
