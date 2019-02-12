@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ffebe93e_996aab84",
+        "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-12T10:34:56Z",
+      "side": 1,
+      "message": "thanks for taking time to elaborate on this. This actually makes sense to me, so yes, \"of\" is better. Apologies for the noise, I now shut up.",
+      "parentUuid": "59f57ca3_cfe82653",
+      "range": {
+        "startLine": 11,
+        "startChar": 217,
+        "endLine": 11,
+        "endChar": 219
+      },
+      "revId": "f67ed2ebccde637214ead0ce6a746c88cc9d6594",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94a5bcd2_e06fb36b",
         "filename": "docs/adr/0003-Termbox-ParserCache-Integration.md",
         "patchSetId": 5
