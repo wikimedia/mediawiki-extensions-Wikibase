@@ -22,7 +22,7 @@ function apply_common_before_settings {
   echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
   echo '$wgLanguageCode = "'$LANG'";' >> LocalSettings.php
   echo '$wgDebugLogFile = "mw-debug.log";' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/cldr/cldr.php";' >> LocalSettings.php
+  echo 'wfLoadExtension( "cldr" );' >> LocalSettings.php
   echo '$wgEnableWikibaseClient = false;' >> LocalSettings.php
   echo '$wgEnableWikibaseRepo = false;' >> LocalSettings.php
 }
