@@ -275,5 +275,6 @@
 	"apihelp-wbsetreference-param-bot": "Пазначыць гэтую праўку як зробленую робатам. Гэты URL-сьцяг будзе ўлічвацца, толькі калі ўдзельнік належыць да групы «bot».",
 	"apihelp-wbsetreference-example-1": "Стварыць новую крыніцу для сьцьверджаньня з GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF",
 	"apihelp-wbsetreference-example-2": "Усталяваць крыніцу сьцьверджаньня з GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF і з хэшам 1eb8793c002b1d9820c833d234a1b54c8e94187e",
-	"apihelp-wbsetreference-example-3": "Стварае новую крыніцу для сьцьверджаньня з GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF і ўстаўляе новую крыніцу ўверх сьпісу крыніц замест дадаваньня ў канец."
+	"apihelp-wbsetreference-example-3": "Стварае новую крыніцу для сьцьверджаньня з GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF і ўстаўляе новую крыніцу ўверх сьпісу крыніц замест дадаваньня ў канец.",
+	"apihelp-wbsetsitelink-description": "Злучае старонку ў вікі з элемэнтам Вікібазы ці выдаляе ўжо зробленае злучэньне."
 }

@@ -8,9 +8,11 @@
 	},
 	"wikibase-edit": "витнемс-петнемс",
 	"wikibase-add": "поладомс",
+	"wikibase-diffview-link-badges": "тешкскеть",
 	"wikibase-sitelinks-special": "Лия сайтат",
 	"wikibase-statementview-rank-normal": "Эрьва чинь ранг",
 	"wikibase-itemdisambiguation-lookup-language": "Келень кодось:",
+	"wikibase-setsitelink-badges": "Тешкскетне:",
 	"wikibase-modifyterm-language": "Келень кодось:",
 	"wikibase-entitieswithoutlabel-label-language": "Келень кодось:",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» аволь стандартонь келень код."
