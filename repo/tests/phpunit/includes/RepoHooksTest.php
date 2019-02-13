@@ -22,6 +22,7 @@ use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use Wikibase\SettingsArray;
+use Wikibase\Repo\ParserOutput\TermboxView;
 use WikiImporter;
 
 /**
@@ -309,7 +310,7 @@ XML
 		$out = new OutputPage( $context );
 
 		$parserOutput = $this->getMock( ParserOutput::class );
-		$parserOutput->expects( $this->exactly( 4 ) )
+		$parserOutput->expects( $this->exactly( 5 ) )
 			->method( 'getExtensionData' )
 			->will( $this->returnCallback( function ( $key ) use ( $altLinks ) {
 				if ( $key === 'wikibase-alternate-links' ) {
@@ -321,6 +322,7 @@ XML
 
 		RepoHooks::onOutputPageParserOutput( $out, $parserOutput );
 
+		$this->assertSame( TermboxView::TERMBOX_MARKUP_BLOB, $out->getProperty( TermboxView::TERMBOX_MARKUP_BLOB ) );
 		$this->assertSame( 'wikibase-view-chunks', $out->getProperty( 'wikibase-view-chunks' ) );
 		$this->assertSame( 'wikibase-meta-tags', $out->getProperty( 'wikibase-meta-tags' ) );
 		$this->assertSame( $altLinks, $out->getLinkTags() );

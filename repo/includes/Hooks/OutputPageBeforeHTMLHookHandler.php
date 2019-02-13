@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use Language;
 use OutputPage;
-use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
@@ -16,10 +14,13 @@ use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
-use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\Repo\ParserOutput\TermboxView;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
@@ -69,6 +70,11 @@ class OutputPageBeforeHTMLHookHandler {
 	 */
 	private $cookiePrefix;
 
+	/**
+	 * @var bool
+	 */
+	private $isExternallyRendered;
+
 	public function __construct(
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
@@ -77,7 +83,8 @@ class OutputPageBeforeHTMLHookHandler {
 		LanguageNameLookup $languageNameLookup,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
-		$cookiePrefix
+		$cookiePrefix,
+		$isExternallyRendered = false
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -87,6 +94,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
 		$this->cookiePrefix = $cookiePrefix;
+		$this->isExternallyRendered = $isExternallyRendered;
 	}
 
 	/**
@@ -108,7 +116,8 @@ class OutputPageBeforeHTMLHookHandler {
 				$wikibaseRepo->getEntityIdParser()
 			),
 			$wikibaseRepo->getEntityFactory(),
-			$wgCookiePrefix
+			$wgCookiePrefix,
+			TermboxFlag::getInstance()->shouldRenderTermbox()
 		);
 	}
 
@@ -160,16 +169,17 @@ class OutputPageBeforeHTMLHookHandler {
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		if ( $entityId instanceof EntityId ) {
-			$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
-			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termsListItemsHtml !== null );
+			$entity = $this->getEntity(
+				$entityId,
+				$out
+			);
 			if ( $entity instanceof EntityDocument ) {
-				$expander = $this->getEntityViewPlaceholderExpander(
-					$entity,
-					$out->getUser(),
-					$this->getTermsLanguagesCodes( $out ),
-					$termsListItemsHtml,
-					$out->getLanguage()
-				);
+				$expander = $this->isExternallyRendered
+					? $this->getExternallyRenderedEntityViewPlaceholderExpander( $out )
+					: $this->getLocallyRenderedEntityViewPlaceholderExpander(
+						$entity,
+						$out
+					);
 				$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
 			}
 		}
@@ -179,18 +189,17 @@ class OutputPageBeforeHTMLHookHandler {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param int $revisionId
-	 * @param bool $termsListPrerendered
+	 * @param OutputPage $out
 	 *
 	 * @return EntityDocument|null
 	 */
-	private function getEntity( EntityId $entityId, $revisionId, $termsListPrerendered ) {
-		if ( $termsListPrerendered ) {
+	private function getEntity( EntityId $entityId, OutputPage $out ) {
+		if ( $this->isPrerendered( $out ) ) {
 			$entity = $this->entityFactory->newEmpty( $entityId->getEntityType() );
 		} else {
 			// The parser cache content is too old to contain the terms list items
 			// Pass the correct entity to generate terms list items on the fly
-			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
+			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $out->getRevisionId() );
 			if ( !( $entityRev instanceof EntityRevision ) ) {
 				return null;
 			}
@@ -214,31 +223,49 @@ class OutputPageBeforeHTMLHookHandler {
 
 	/**
 	 * @param EntityDocument $entity
-	 * @param User $user
-	 * @param string[] $termsLanguages
-	 * @param string[]|null $termsListItemsHtml
-	 * @param Language $language
+	 * @param OutputPage $out
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function getEntityViewPlaceholderExpander(
+	private function getLocallyRenderedEntityViewPlaceholderExpander(
 		EntityDocument $entity,
-		User $user,
-		array $termsLanguages,
-		array $termsListItemsHtml = null,
-		Language $language
+		OutputPage $out
 	) {
+		$language = $out->getLanguage();
+
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
-			$user,
+			$out->getUser(),
 			$entity,
-			array_unique( array_merge( [ $language->getCode() ], $termsLanguages ) ),
+			array_unique( array_merge( [ $language->getCode() ], $this->getTermsLanguagesCodes( $out ) ) ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $language ),
 			$this->cookiePrefix,
-			$termsListItemsHtml ?: []
+			$this->getEntityTermsListHtml( $out ) ?: []
 		);
+	}
+
+	private function getExternallyRenderedEntityViewPlaceholderExpander( $out ) {
+		return new ExternallyRenderedEntityViewPlaceholderExpander(
+			$this->getExternallyRenderedHtmlBlob( $out )
+		);
+	}
+
+	/**
+	 * @param OutputPage $out
+	 * @return string|null
+	 */
+	private function getExternallyRenderedHtmlBlob( OutputPage $out ) {
+		return $out->getProperty( TermboxView::TERMBOX_MARKUP_BLOB );
+	}
+
+	private function isPrerendered( OutputPage $out ) {
+		return $this->getEntityTermsListHtml( $out ) || $this->getExternallyRenderedHtmlBlob( $out );
+	}
+
+	private function getEntityTermsListHtml( OutputPage $out ) {
+		return $out->getProperty( 'wikibase-terms-list-items' );
 	}
 
 }
