@@ -257,6 +257,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ParserOutput\\EntityTermsViewFactory' => __DIR__ . '/includes/ParserOutput/EntityTermsViewFactory.php',
 	'Wikibase\\Repo\\ParserOutput\\EntityViewPlaceholderExpander' => __DIR__ . '/includes/ParserOutput/EntityViewPlaceholderExpander.php',
 	'Wikibase\\Repo\\ParserOutput\\ExternalLinksDataUpdater' => __DIR__ . '/includes/ParserOutput/ExternalLinksDataUpdater.php',
+	'Wikibase\\Repo\\ParserOutput\\ExternallyRenderedEntityViewPlaceholderExpander' => __DIR__ . '/includes/ParserOutput/ExternallyRenderedEntityViewPlaceholderExpander.php',
 	'Wikibase\\Repo\\ParserOutput\\FallbackHintHtmlTermRenderer' => __DIR__ . '/includes/ParserOutput/FallbackHintHtmlTermRenderer.php',
 	'Wikibase\\Repo\\ParserOutput\\FullEntityParserOutputGenerator' => __DIR__ . '/includes/ParserOutput/FullEntityParserOutputGenerator.php',
 	'Wikibase\\Repo\\ParserOutput\\GeoDataDataUpdater' => __DIR__ . '/includes/ParserOutput/GeoDataDataUpdater.php',

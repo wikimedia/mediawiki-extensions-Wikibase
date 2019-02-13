@@ -102,7 +102,8 @@ class EntityTermsViewFactory {
 				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
 			),
 			$textProvider,
-			new RepoSpecialPageLinker()
+			new RepoSpecialPageLinker(),
+			new TextInjector()
 		);
 	}
 
