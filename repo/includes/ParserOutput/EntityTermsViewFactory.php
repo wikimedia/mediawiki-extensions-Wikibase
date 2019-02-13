@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
@@ -17,7 +18,6 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
-use Wikibase\View\Termbox\TermboxView;
 use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -40,7 +40,7 @@ class EntityTermsViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		$useTermbox = false
 	) {
-		return $useTermbox ? $this->newTermboxView( $language, $fallbackChain )
+		return $useTermbox ? $this->newTermboxView( $language )
 			: $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
 	}
 
@@ -85,24 +85,23 @@ class EntityTermsViewFactory {
 	}
 
 	/**
-	 * Note that $fallbackChain passed here does not include any user-specified languages, such as
-	 * their Babel preferences. This is because the objects created from this factory are assumed to
+	 * Note that this always builds a view with the main user interface language
+	 * as the only parameter influencing the markup.
+	 * This is because the objects created from this factory are assumed to
 	 * write into ParserOutput which should not include any user-specific markup.
-	 *
-	 * See BabelUserLanguageLookup or LanguageFallbackChainFactory::newFromContext for getting the
-	 * list of preferred languages for the user.
 	 */
-	private function newTermboxView( Language $language, LanguageFallbackChain $fallbackChain ) {
+	private function newTermboxView( Language $language ) {
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
 
 		return new TermboxView(
-			$fallbackChain,
+			new LanguageFallbackChainFactory(),
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
 			),
 			$textProvider,
-			new RepoSpecialPageLinker()
+			new RepoSpecialPageLinker(),
+			new TextInjector()
 		);
 	}
 

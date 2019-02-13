@@ -49,6 +49,7 @@ use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\Search\Elastic\Query\WbStatementQuantityFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 use WikiPage;
 
@@ -738,6 +739,12 @@ final class RepoHooks {
 		// on page view.
 		$meta = $parserOutput->getExtensionData( 'wikibase-meta-tags' );
 		$out->setProperty( 'wikibase-meta-tags', $meta );
+
+		// TODO
+		$out->setProperty(
+			TermboxView::TERMBOX_MARKUP_BLOB,
+			$parserOutput->getExtensionData( TermboxView::TERMBOX_MARKUP_BLOB )
+		);
 
 		// Array with <link rel="alternate"> tags for the page HEAD.
 		$alternateLinks = $parserOutput->getExtensionData( 'wikibase-alternate-links' );
