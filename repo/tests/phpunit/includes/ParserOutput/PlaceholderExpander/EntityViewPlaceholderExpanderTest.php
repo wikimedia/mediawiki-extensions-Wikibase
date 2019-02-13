@@ -1,19 +1,19 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use PHPUnit4And6Compat;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander
+ * @covers \Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander
  *
  * @uses \Wikibase\View\TermsListView
  * @uses \Wikibase\View\Template\Template

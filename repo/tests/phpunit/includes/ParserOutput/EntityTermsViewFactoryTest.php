@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
-use Wikibase\View\Termbox\TermboxView;
+use Wikibase\Repo\ParserOutput\TermboxView;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\EntityTermsViewFactory
