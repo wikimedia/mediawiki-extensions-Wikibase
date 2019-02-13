@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\ParserOutput;
+namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use InvalidArgumentException;
 use MWException;
@@ -27,7 +27,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class EntityViewPlaceholderExpander {
+class EntityViewPlaceholderExpander implements PlaceholderExpander {
 
 	/**
 	 * @var TemplateFactory

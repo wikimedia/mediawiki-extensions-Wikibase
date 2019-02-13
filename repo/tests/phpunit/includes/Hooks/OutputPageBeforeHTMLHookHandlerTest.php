@@ -18,6 +18,7 @@ use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\Repo\ParserOutput\TermboxView;
 
 /**
  * @covers \Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler
@@ -57,25 +58,13 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$itemId = new ItemId( 'Q1' );
 
-		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$outputPageEntityIdReader->expects( $this->once() )
-			->method( 'getEntityIdFromOutputPage' )
-			->will( $this->returnValue( $itemId ) );
-
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
-		$entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
-
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
 			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
-			$entityRevisionLookup,
+			$this->getEntityRevisionLookupReturningEntity( $itemId ),
 			$languageNameLookup,
-			$outputPageEntityIdReader,
+			$this->getOutputPageEntityIdReaderReturningEntity( $itemId ),
 			new EntityFactory( [] ),
 			''
 		);
@@ -107,14 +96,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
-		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->any() )
-			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [] ) );
-		$userLanguageLookup->expects( $this->any() )
-			->method( 'getAllUserLanguages' )
-			->will( $this->returnValue( [] ) );
-
 		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -124,7 +105,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$handler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
-			$userLanguageLookup,
+			$this->newUserLanguageLookup(),
 			new StaticContentLanguages( [] ),
 			$this->getMock( EntityRevisionLookup::class ),
 			$this->getMock( LanguageNameLookup::class ),
@@ -139,6 +120,74 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$html = '$1';
 		$handler->doOutputPageBeforeHTML( $out, $html );
 		$this->assertSame( '', $html );
+	}
+
+	public function testGivenExternallyRenderedMarkupBlob_usesRespectivePlaceholderExpander() {
+		$entity = new ItemId( 'Q123' );
+		$entityFactory = $this->createMock( EntityFactory::class );
+		$entityFactory->expects( $this->once() )
+			->method( 'newEmpty' )
+			->willReturn( new Item( $entity ) );
+		$handler = new OutputPageBeforeHTMLHookHandler(
+			TemplateFactory::getDefaultInstance(),
+			$this->newUserLanguageLookup(),
+			new StaticContentLanguages( [] ),
+			$this->createMock( EntityRevisionLookup::class ),
+			$this->getMock( LanguageNameLookup::class ),
+			$this->getOutputPageEntityIdReaderReturningEntity( $entity ),
+			$entityFactory,
+			'',
+			true
+		);
+
+		$expectedHtml = '<div>termbox</div>';
+		$placeholder = '$1';
+
+		$out = $this->newOutputPage();
+		$out->setProperty( TermboxView::TERMBOX_MARKUP_BLOB, $expectedHtml );
+		$out->setProperty( 'wikibase-view-chunks', [ $placeholder => [ TermboxView::TERMBOX_PLACEHOLDER ] ] );
+
+		$html = $placeholder;
+		$handler->doOutputPageBeforeHTML( $out, $html );
+
+		$this->assertSame( $expectedHtml, $html );
+	}
+
+	private function newUserLanguageLookup() {
+		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
+		$userLanguageLookup->expects( $this->any() )
+			->method( 'getUserSpecifiedLanguages' )
+			->will( $this->returnValue( [] ) );
+		$userLanguageLookup->expects( $this->any() )
+			->method( 'getAllUserLanguages' )
+			->will( $this->returnValue( [] ) );
+		return $userLanguageLookup;
+	}
+
+	/**
+	 * @param $itemId
+	 * @return \PHPUnit\Framework\MockObject\MockObject
+	 */
+	private function getOutputPageEntityIdReaderReturningEntity( $itemId ) {
+		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$outputPageEntityIdReader->expects( $this->once() )
+			->method( 'getEntityIdFromOutputPage' )
+			->will( $this->returnValue( $itemId ) );
+		return $outputPageEntityIdReader;
+	}
+
+	/**
+	 * @param $itemId
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getEntityRevisionLookupReturningEntity( $itemId ) {
+		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
+		return $entityRevisionLookup;
 	}
 
 }
