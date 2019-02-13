@@ -17,9 +17,11 @@ use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\ExternallyRenderedEntityViewPlaceholderExpander;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Termbox\TermboxView;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
@@ -161,20 +163,31 @@ class OutputPageBeforeHTMLHookHandler {
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		if ( $entityId instanceof EntityId ) {
 			$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
-			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termsListItemsHtml !== null );
+			$entity = $this->getEntity(
+				$entityId,
+				$out->getRevisionId(),
+				$termsListItemsHtml !== null // FIXME why!?
+				|| $this->isExternallyRenderedEntityView( $out )
+			);
 			if ( $entity instanceof EntityDocument ) {
-				$expander = $this->getEntityViewPlaceholderExpander(
-					$entity,
-					$out->getUser(),
-					$this->getTermsLanguagesCodes( $out ),
-					$termsListItemsHtml,
-					$out->getLanguage()
-				);
+				$expander = $this->isExternallyRenderedEntityView( $out )
+					? $this->getExternallyRenderedEntityViewPlaceholderExpander( $out )
+					: $this->getLocallyRenderedEntityViewPlaceholderExpander(
+						$entity,
+						$out->getUser(),
+						$this->getTermsLanguagesCodes( $out ),
+						$termsListItemsHtml,
+						$out->getLanguage()
+					);
 				$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
 			}
 		}
 
 		$html = $injector->inject( $html, $getHtmlCallback );
+	}
+
+	private function isExternallyRenderedEntityView( OutputPage $out ) {
+		return $this->getExternallyRenderedHtmlBlob( $out ) !== null;
 	}
 
 	/**
@@ -221,7 +234,7 @@ class OutputPageBeforeHTMLHookHandler {
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function getEntityViewPlaceholderExpander(
+	private function getLocallyRenderedEntityViewPlaceholderExpander(
 		EntityDocument $entity,
 		User $user,
 		array $termsLanguages,
@@ -239,6 +252,20 @@ class OutputPageBeforeHTMLHookHandler {
 			$this->cookiePrefix,
 			$termsListItemsHtml ?: []
 		);
+	}
+
+	private function getExternallyRenderedEntityViewPlaceholderExpander( $out ) {
+		return new ExternallyRenderedEntityViewPlaceholderExpander(
+			$this->getExternallyRenderedHtmlBlob( $out )
+		);
+	}
+
+	/**
+	 * @param OutputPage $out
+	 * @return string|null
+	 */
+	private function getExternallyRenderedHtmlBlob( OutputPage $out ) {
+		return $out->getProperty( TermboxView::TERMBOX_MARKUP_BLOB );
 	}
 
 }

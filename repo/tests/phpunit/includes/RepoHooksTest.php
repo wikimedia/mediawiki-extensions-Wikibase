@@ -321,6 +321,7 @@ XML
 
 		RepoHooks::onOutputPageParserOutput( $out, $parserOutput );
 
+		// TODO new termbox html blob
 		$this->assertSame( 'wikibase-view-chunks', $out->getProperty( 'wikibase-view-chunks' ) );
 		$this->assertSame( 'wikibase-meta-tags', $out->getProperty( 'wikibase-meta-tags' ) );
 		$this->assertSame( $altLinks, $out->getLinkTags() );
