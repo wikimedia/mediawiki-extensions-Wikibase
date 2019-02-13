@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use RuntimeException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -66,6 +66,8 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	 * @param string $type normally is content model id (e.g. wikibase-item or wikibase-property)
 	 *
 	 * @return int
+	 *
+	 * @throws RuntimeException
 	 */
 	public function getNewId( $type ) {
 		$flags = ( $this->separateDbConnection === true ) ? ILoadBalancer::CONN_TRX_AUTOCOMMIT : 0;
@@ -74,7 +76,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 		$idGenerations = 0;
 		do {
 			if ( $idGenerations >= $this->blacklistAttempts ) {
-				throw new MWException(
+				throw new RuntimeException(
 					"Could not generate a non blacklisted ID of type '{$type}', tried {$this->blacklistAttempts} times."
 				);
 			}
@@ -98,7 +100,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	 * @param IDatabase $database
 	 * @param string $type
 	 *
-	 * @throws MWException
+	 * @throws RuntimeException
 	 * @return int
 	 */
 	private function generateNewId( IDatabase $database, $type ) {
@@ -112,7 +114,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 		}
 
 		if ( !$success ) {
-			throw new MWException( 'Could not generate a reliably unique ID.' );
+			throw new RuntimeException( 'Could not generate a reliably unique ID.' );
 		}
 
 		$id = $database->insertId();
