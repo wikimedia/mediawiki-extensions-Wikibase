@@ -35,7 +35,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\Termbox\\Renderer\\TermboxRenderer' => __DIR__ . '/src/Termbox/Renderer/TermboxRenderer.php',
 	'Wikibase\\View\\Termbox\\Renderer\\TermboxRenderingException' => __DIR__ . '/src/Termbox/Renderer/TermboxRenderingException.php',
 	'Wikibase\\View\\Termbox\\TermboxDependencyLoader' => __DIR__ . '/src/Termbox/TermboxDependencyLoader.php',
-	'Wikibase\\View\\Termbox\\TermboxView' => __DIR__ . '/src/Termbox/TermboxView.php',
 	'Wikibase\\View\\TermsListView' => __DIR__ . '/src/TermsListView.php',
 	'Wikibase\\View\\Tests\\EntityMetaTagsCreatorTestCase' => __DIR__ . '/tests/phpunit/EntityMetaTagsCreatorTestCase.php',
 	'Wikibase\\View\\Tests\\EntityViewTestCase' => __DIR__ . '/tests/phpunit/EntityViewTestCase.php',
