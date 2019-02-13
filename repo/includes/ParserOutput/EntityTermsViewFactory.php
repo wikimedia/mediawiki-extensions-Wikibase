@@ -17,7 +17,6 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
-use Wikibase\View\Termbox\TermboxView;
 use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -102,7 +101,8 @@ class EntityTermsViewFactory {
 				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
 			),
 			$textProvider,
-			new RepoSpecialPageLinker()
+			new RepoSpecialPageLinker(),
+			new TextInjector()
 		);
 	}
 

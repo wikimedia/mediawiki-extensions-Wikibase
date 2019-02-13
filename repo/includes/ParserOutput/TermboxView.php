@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View\Termbox;
+namespace Wikibase\Repo\ParserOutput;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -22,9 +22,14 @@ class TermboxView implements CacheableEntityTermsView {
 	// render the root element and give client side re-rendering a chance
 	/* public */ const FALLBACK_HTML = '<div class="wikibase-entitytermsview renderer-fallback"></div>';
 
+	/* public */ const TERMBOX_PLACEHOLDER = 'wb-ui';
+
+	/* public */ const TERMBOX_MARKUP_BLOB = 'termbox-markup';
+
 	private $fallbackChain;
 	private $renderer;
 	private $specialPageLinker;
+	private $textInjector;
 
 	/**
 	 * @var LocalizedTextProvider
@@ -35,12 +40,14 @@ class TermboxView implements CacheableEntityTermsView {
 		LanguageFallbackChain $fallbackChain,
 		TermboxRenderer $renderer,
 		LocalizedTextProvider $textProvider,
-		SpecialPageLinker $specialPageLinker
+		SpecialPageLinker $specialPageLinker,
+		TextInjector $textInjector
 	) {
 		$this->fallbackChain = $fallbackChain;
 		$this->renderer = $renderer;
 		$this->textProvider = $textProvider;
 		$this->specialPageLinker = $specialPageLinker;
+		$this->textInjector = $textInjector;
 	}
 
 	public function getHtml(
@@ -50,20 +57,7 @@ class TermboxView implements CacheableEntityTermsView {
 		AliasGroupList $aliasGroups = null,
 		EntityId $entityId = null
 	) {
-		try {
-			return $this->renderer->getContent(
-				$entityId,
-				$mainLanguageCode,
-				$this->specialPageLinker->getLink(
-					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
-					[ $entityId->getSerialization() ]
-				),
-				$this->fallbackChain
-			);
-		} catch ( TermboxRenderingException $exception ) {
-			// TODO Log
-			return self::FALLBACK_HTML;
-		}
+		return $this->textInjector->newMarker( self::TERMBOX_PLACEHOLDER );
 	}
 
 	public function getTitleHtml( EntityId $entityId = null ) {
@@ -79,7 +73,33 @@ class TermboxView implements CacheableEntityTermsView {
 		EntityDocument $entity,
 		$languageCode
 	) {
-		return [];
+		return [
+			'wikibase-view-chunks' => $this->textInjector->getMarkers(),
+			self::TERMBOX_MARKUP_BLOB => $this->renderTermbox( $languageCode, $entity->getId() ),
+		];
+	}
+
+	/**
+	 * @param string $mainLanguageCode
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	private function renderTermbox( $mainLanguageCode, EntityId $entityId ) {
+		try {
+			return $this->renderer->getContent(
+				$entityId,
+				$mainLanguageCode,
+				$this->specialPageLinker->getLink(
+					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
+					[ $entityId->getSerialization() ]
+				),
+				$this->fallbackChain
+			);
+		} catch ( TermboxRenderingException $exception ) {
+			// TODO Log
+			return self::FALLBACK_HTML;
+		}
 	}
 
 }

@@ -5,19 +5,20 @@ namespace Wikibase\View\Tests\Termbox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PHPUnit4And6Compat;
-use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
-use Wikibase\View\Termbox\TermboxView;
+use Wikibase\Repo\ParserOutput\TermboxView;
 
 /**
- * @covers \Wikibase\View\Termbox\TermboxView
+ * @covers \Wikibase\Repo\ParserOutput\TermboxView
  *
  * @group Wikibase
  *
@@ -27,9 +28,53 @@ class TermboxViewTest extends TestCase {
 
 	use PHPUnit4And6Compat;
 
-	public function testGetHtmlWithClientStringResponse_returnsContent() {
+	public function testGetHtmlReturnsPlaceholderMarker() {
+		$marker = 'termbox-marker';
+		$textInjector = $this->createMock( TextInjector::class );
+		$textInjector->expects( $this->once() )
+			->method( 'newMarker' )
+			->with( TermboxView::TERMBOX_PLACEHOLDER )
+			->willReturn( $marker );
+
+		$termbox = new TermboxView(
+			$this->createMock( LanguageFallbackChain::class ),
+			$this->newTermboxRenderer(),
+			$this->newLocalizedTextProvider(),
+			$this->newSpecialPageLinker(),
+			$textInjector
+		);
+
+		$this->assertSame( $marker, $termbox->getHtml(
+			'en',
+			new TermList( [] ),
+			new TermList( [] ),
+			null,
+			new ItemId( 'Q42' )
+		) );
+	}
+
+	public function testGetPlaceholdersContainsMarkers() {
+		$markers = [ 'marker' => 'marker-name' ];
+
+		$textInjector = $this->createMock( TextInjector::class );
+		$textInjector->expects( $this->once() )
+			->method( 'getMarkers' )
+			->willReturn( $markers );
+
+		$termbox = new TermboxView(
+			$this->createMock( LanguageFallbackChain::class ),
+			$this->newTermboxRenderer(),
+			$this->newLocalizedTextProvider(),
+			$this->newSpecialPageLinker(),
+			$textInjector
+		);
+
+		$this->assertContains( $markers, $termbox->getPlaceholders( new Item( new ItemId( 'Q123' ) ), 'en' ) );
+	}
+
+	public function testPlaceHolderWithMarkupWithClientStringResponse_returnsContent() {
 		$language = 'en';
-		$entityId = new ItemId( 'Q42' );
+		$item = new Item( new ItemId( 'Q42' ) );
 		$editLinkUrl = '/edit/Q42';
 		$fallbackChain = $this->createMock( LanguageFallbackChain::class );
 
@@ -38,44 +83,41 @@ class TermboxViewTest extends TestCase {
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->with( $entityId, $language, $editLinkUrl, $fallbackChain )
+			->with( $item->getId(), $language, $editLinkUrl, $fallbackChain )
 			->willReturn( $response );
+
+		$placeholders = $this->newTermbox(
+			$renderer,
+			$this->newLocalizedTextProvider(),
+			$this->newLinkingSpecialPageLinker( $item->getId(), $editLinkUrl ),
+			$fallbackChain
+		)->getPlaceholders(
+			$item,
+			$language
+		);
 
 		$this->assertSame(
 			$response,
-			$this->newTermbox(
-				$renderer,
-				$this->newLocalizedTextProvider(),
-				$this->newLinkingSpecialPageLinker( $entityId, $editLinkUrl ),
-				$fallbackChain
-			)->getHtml(
-				$language,
-				new TermList( [] ),
-				new TermList( [] ),
-				null,
-				$entityId
-			)
+			$placeholders[ TermboxView::TERMBOX_MARKUP_BLOB ]
 		);
 	}
 
-	public function testGetHtmlWithClientThrowingException_returnsFallbackContent() {
+	public function testPlaceHolderWithMarkupWithClientThrowingException_returnsFallbackContent() {
 		$language = 'en';
-		$entityId = new ItemId( 'Q42' );
+		$item = new Item( new ItemId( 'Q42' ) );
 
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
 			->willThrowException( new TermboxRenderingException( 'specific reason of failure' ) );
 
+		$placeholders = $this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getPlaceholders(
+			$item,
+			$language
+		);
 		$this->assertSame(
 			TermboxView::FALLBACK_HTML,
-			$this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getHtml(
-				$language,
-				new TermList( [] ),
-				new TermList( [] ),
-				null,
-				$entityId
-			)
+			$placeholders[ TermboxView::TERMBOX_MARKUP_BLOB ]
 		);
 	}
 
@@ -100,22 +142,6 @@ class TermboxViewTest extends TestCase {
 		);
 	}
 
-	public function testGetPlaceholders_returnsNone() {
-		$entity = $this->getMock( EntityDocument::class );
-		$languageCode = 'en';
-
-		$termbox = $this->newTermbox(
-			$this->newTermboxRenderer(),
-			$this->newLocalizedTextProvider(),
-			$this->newSpecialPageLinker()
-		);
-
-		$this->assertSame(
-			[],
-			$termbox->getPlaceholders( $entity, $languageCode )
-		);
-	}
-
 	/**
 	 * @return TermboxRenderer|MockObject
 	 */
@@ -134,13 +160,15 @@ class TermboxViewTest extends TestCase {
 		TermboxRenderer $renderer,
 		LocalizedTextProvider $textProvider,
 		SpecialPageLinker $specialPageLinker,
-		LanguageFallbackChain $fallbackChain = null
+		LanguageFallbackChain $fallbackChain = null,
+		TextInjector $textInjector = null
 	): TermboxView {
 		return new TermboxView(
 			$fallbackChain ?: new LanguageFallbackChain( [] ),
 			$renderer,
 			$textProvider,
-			$specialPageLinker
+			$specialPageLinker,
+			$textInjector ?: new TextInjector()
 		);
 	}
 
