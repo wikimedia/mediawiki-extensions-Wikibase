@@ -34,6 +34,24 @@
       "revId": "905f8b7fe8bf82ff94e9ad80a562c40cdb5d5370",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db3f2fce_1e8da6c7",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2019-02-14T16:39:04Z",
+      "side": 1,
+      "message": "I believe we are here \"unwilling to supply a default representation\" because we want to return an error instead of the JSON encoding to help clients developers understand more easily what is going on. If there were only a JSON encoding for all Wikibase entities, then returning it would have made sense because it would be more an intended behavior.\n\nMy error code suggestion is more or less \"bikeshedding\" imho so feel free to not edit your change and keep the 400 code if you prefer.",
+      "parentUuid": "a88e7ee3_3f1bdb58",
+      "revId": "905f8b7fe8bf82ff94e9ad80a562c40cdb5d5370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
