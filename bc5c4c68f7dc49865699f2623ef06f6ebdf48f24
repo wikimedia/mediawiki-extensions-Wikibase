@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "06838286_65a6b78b",
+        "filename": "view/src/Termbox/TermboxView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-02-14T17:30:56Z",
+      "side": 1,
+      "message": "This is a very good point, will do. I will move it, and also created T216156, because I almost forgot that we likely don\u0027t want to return anything that could end up in `ParserOutput` in case the request to the SSR service is unsuccessful.",
+      "parentUuid": "58514d0f_46ddfb28",
+      "range": {
+        "startLine": 24,
+        "startChar": 20,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "bc5c4c68f7dc49865699f2623ef06f6ebdf48f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b1462d13_03263982",
         "filename": "view/src/Termbox/TermboxView.php",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2019-02-13T19:17:21Z",
       "side": 1,
       "message": "We determined that we do not want user-specific languages at this point, but rather only the fallback chain that can be determined from the primaryLanguage.\nMaybe it would add clarity about this if we did not inject an existing fallbackChain but the tool to build it (`LanguageFallbackChainFactory`) and constructed the chain here from only `$mainLanguageCode`.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 24
+      },
+      "revId": "bc5c4c68f7dc49865699f2623ef06f6ebdf48f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87673f89_bc11d508",
+        "filename": "view/src/Termbox/TermboxView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-02-14T17:30:56Z",
+      "side": 1,
+      "message": "I like it. Will do!",
+      "parentUuid": "bdf9f2f4_12f23201",
       "range": {
         "startLine": 97,
         "startChar": 4,
