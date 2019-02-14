@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b60f0971_acd1271c",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2019-02-14T12:22:37Z",
+      "side": 1,
+      "message": "I believe that the 406 \"Not Acceptable\" error code would be more appropriate here. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406",
+      "revId": "905f8b7fe8bf82ff94e9ad80a562c40cdb5d5370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
