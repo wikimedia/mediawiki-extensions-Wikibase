@@ -61,7 +61,8 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	}
 
 	private function getDumpRdf(
-		array $existingEntityTypes
+		array $existingEntityTypes,
+		array $entityTypesWithoutRdfOutput
 	) {
 		$dumpScript = new DumpRdf();
 
@@ -150,7 +151,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			->getMock();
 		$sqlEntityIdPagerFactory->expects( $this->once() )
 			->method( 'newSqlEntityIdPager' )
-			->with( $existingEntityTypes, EntityIdPager::INCLUDE_REDIRECTS )
+			->with( array_diff( $existingEntityTypes, $entityTypesWithoutRdfOutput ), EntityIdPager::INCLUDE_REDIRECTS )
 			->will( $this->returnValue( $mockEntityIdPager ) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -160,6 +161,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		$dumpScript->setServices(
 			$sqlEntityIdPagerFactory,
 			$existingEntityTypes,
+			$entityTypesWithoutRdfOutput,
 			new NullEntityPrefetcher(),
 			new HashSiteStore( TestSites::getSites() ),
 			$this->getMockPropertyDataTypeLookup(),
@@ -178,16 +180,25 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			'dump everything' => [
 				[ 'item', 'property' ],
 				[],
+				[],
 				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
 				__DIR__ . '/../data/maintenance/dumpRdf-out.txt',
 			],
 			'dump with part-id' => [
 				[ 'item', 'property' ],
+				[],
 				[
 					'part-id' => 'blah',
 				],
 				__DIR__ . '/../data/maintenance/dumpRdf-log.txt',
 				__DIR__ . '/../data/maintenance/dumpRdf-part-id-blah-out.txt',
+			],
+			'dump with no rdf output available for properties' => [
+				[ 'item', 'property' ],
+				[ 'property' ],
+				[],
+				__DIR__ . '/../data/maintenance/dumpRdf-no-rdf-for-property-log.txt',
+				__DIR__ . '/../data/maintenance/dumpRdf-no-rdf-for-property-out.txt',
 			],
 		];
 	}
@@ -197,11 +208,12 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 */
 	public function testScript(
 		array $existingEntityTypes,
+		array $entityTypesWithoutRdfOutput,
 		array $opts,
 		$expectedLogFile,
 		$expectedOutFile
 	) {
-		$dumpScript = $this->getDumpRdf( $existingEntityTypes );
+		$dumpScript = $this->getDumpRdf( $existingEntityTypes, $entityTypesWithoutRdfOutput );
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
 		$outFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );
