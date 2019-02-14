@@ -512,6 +512,30 @@ class EntityDataTestProvider {
 			]
 		];
 
+		$cases['RDF output not available for properties'] = [
+			'',
+			[ 'id' => 'P42', 'format' => 'rdf' ],
+			[],
+			'!wikibase-entitydata-rdf-not-available: property!',
+			400,
+		];
+
+		$cases['TTL (RDF) output not available for properties'] = [
+			'',
+			[ 'id' => 'P42', 'format' => 'ttl' ],
+			[],
+			'!wikibase-entitydata-rdf-not-available: property!',
+			400,
+		];
+
+		$cases['NT (RDF) output not available for properties'] = [
+			'',
+			[ 'id' => 'P42', 'format' => 'nt' ],
+			[],
+			'!wikibase-entitydata-rdf-not-available: property!',
+			400,
+		];
+
 		return $cases;
 	}
 

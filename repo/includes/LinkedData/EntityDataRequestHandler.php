@@ -112,6 +112,7 @@ class EntityDataRequestHandler {
 	 * @param EntityDataSerializationService $serializationService
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param LoggerInterface $logger
+	 * @param string[] $entityTypesWithoutRdfOutput
 	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useSquids do we have web caches configured?
@@ -126,6 +127,7 @@ class EntityDataRequestHandler {
 		EntityDataSerializationService $serializationService,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		LoggerInterface $logger,
+		array $entityTypesWithoutRdfOutput,
 		$defaultFormat,
 		$maxAge,
 		$useSquids,
@@ -139,6 +141,7 @@ class EntityDataRequestHandler {
 		$this->serializationService = $serializationService;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->logger = $logger;
+		$this->entityTypesWithoutRdfOutput = $entityTypesWithoutRdfOutput;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
 		$this->useSquids = $useSquids;
@@ -211,6 +214,12 @@ class EntityDataRequestHandler {
 			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
+		if ( $this->rdfOutputRequested( $format ) && in_array( $entityId->getEntityType(), $this->entityTypesWithoutRdfOutput ) ) {
+			// TODO: HTTP response code 303 suggested in https://phabricator.wikimedia.org/T213483#4879192
+			// but to what Location we would redirect the caller?
+			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-rdf-not-available', $entityId->getEntityType() ) );
+		}
+
 		//XXX: allow for logged in users only?
 		if ( $request->getText( 'action' ) === 'purge' ) {
 			$this->purgeWebCache( $entityId );
@@ -252,6 +261,10 @@ class EntityDataRequestHandler {
 		}
 
 		$this->showData( $request, $output, $format, $entityId, $revision );
+	}
+
+	private function rdfOutputRequested( $format ) {
+		return $format === 'rdf' || $format === 'ttl' || $format === 'nt';
 	}
 
 	/**

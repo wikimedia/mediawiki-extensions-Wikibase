@@ -152,6 +152,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$titleLookup
 		);
 
+		$entityTypesWithRdfOutputAvailable = [ 'property' ];
+
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
@@ -161,6 +163,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$service,
 			$entityDataFormatProvider,
 			new NullLogger(),
+			$entityTypesWithRdfOutputAvailable,
 			'json',
 			1800,
 			false,
