@@ -185,6 +185,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ; dumpDBDefaultGroup
 : This is the default database group to use in dump maintenance scripts, it defaults to “dump”. Set to <code>null</code> to use the value from <code>$wgDBDefaultGroup</code>.
 : ''DEFAULT'': is <code>'dump'</code>
+; entityTypesWithoutRdfOutput
+: Array of entity type names which are not available to be output as RDF, default: empty list, meaning RDF is available for all entity types.
 ; termboxEnabled
 : Enable/Disable the server-side-rendered (SSR) termbox. The default setting is <code>false</code>, so the SSR feature for termbox is disabled.
 : ''DEFAULT'': <code>false</code>
