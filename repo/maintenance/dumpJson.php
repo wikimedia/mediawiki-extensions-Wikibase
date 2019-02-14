@@ -68,7 +68,8 @@ class DumpJson extends DumpEntities {
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
-			$existingEntityTypes
+			$existingEntityTypes,
+			[]
 		);
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;

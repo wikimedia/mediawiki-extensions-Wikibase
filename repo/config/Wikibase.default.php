@@ -342,6 +342,8 @@ return [
 	 */
 	'idGeneratorSeparateDbConnection' => false,
 
+	'entityTypesWithoutRdfOutput' => [],
+
 	'useEntitySourceBasedFederation' => false,
 
 	'localEntitySourceName' => 'local',
