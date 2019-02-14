@@ -40,19 +40,19 @@
 
 .wikibase-toolbar-button .wb-icon {
 	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
-	display: inline-block;
+	background-size: 20px 20px;
 	width: 20px;
 	height: 20px;
+	display: inline-block;
 	vertical-align: middle;
-	opacity: 0.87;
+	opacity: 0.7;
 }
 
 .wikibase-toolbar-button a:hover .wb-icon {
-	opacity: 1;
+	opacity: 0.9;
 }
 
+.wikibase-toolbar-button.ui-state-disabled .wb-icon,
 .wikibase-toolbar-button.ui-state-disabled a:hover .wb-icon {
 	opacity: 0.5;
 }
@@ -64,31 +64,32 @@
  * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique
  */
 .wikibase-toolbar-button-edit .wb-icon {
-	background-image: url( images/icons/ooui/edit.png );
+	background-image: url( images/icons/oojs-ui/edit-ltr.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/edit.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/edit-ltr.svg );
+	background-position: 0 40%;
 }
 
 .wikibase-toolbar-button-save .wb-icon {
-	background-image: url( images/icons/ooui/check.png );
+	background-image: url( images/icons/oojs-ui/check.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/check.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/check.svg );
 }
 
 .wikibase-toolbar-button-remove .wb-icon {
-	background-image: url( images/icons/ooui/trash.png );
+	background-image: url( images/icons/oojs-ui/remove.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/trash.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/remove.svg );
 }
 
 .wikibase-toolbar-button-cancel .wb-icon {
-	background-image: url( images/icons/ooui/close.png );
+	background-image: url( images/icons/oojs-ui/close-ltr.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/close.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/close-ltr.svg );
 }
 
 .wikibase-toolbar-button-add .wb-icon {
-	background-image: url( images/icons/ooui/add.png );
+	background-image: url( images/icons/oojs-ui/add.png );
 	/* @embed */
-	background-image: linear-gradient( transparent, transparent ), url( images/icons/ooui/add.svg );
+	background-image: linear-gradient( transparent, transparent ), url( images/icons/oojs-ui/add.svg );
 }
