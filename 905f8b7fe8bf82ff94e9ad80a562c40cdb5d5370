@@ -16,6 +16,24 @@
       "revId": "905f8b7fe8bf82ff94e9ad80a562c40cdb5d5370",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a88e7ee3_3f1bdb58",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-02-14T15:46:46Z",
+      "side": 1,
+      "message": "Sounds fine, although I don\u0027t consider myself HTTP code responses expert. I\u0027ll change to 406 later today, but I am fine someone anyone who feels confident changes the patch to use different code and merge it.\n\nActually, Tpt, when using 406 code, the message shouldn\u0027t probably say \"use JSON instead\"? Per \"and that the server is unwilling to supply a default representation.\" part of the code definition.",
+      "parentUuid": "b60f0971_acd1271c",
+      "revId": "905f8b7fe8bf82ff94e9ad80a562c40cdb5d5370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
