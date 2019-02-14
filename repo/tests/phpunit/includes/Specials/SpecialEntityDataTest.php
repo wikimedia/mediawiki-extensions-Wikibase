@@ -117,6 +117,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$useSquid = false;
 		$apiFrameOptions = 'DENY';
 
+		$entityTypesWithRdfOutputAvailable = [ 'property' ];
+
 		return new EntityDataRequestHandler(
 			$uriManager,
 			$titleLookup,
@@ -126,6 +128,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$serializationService,
 			$entityDataFormatProvider,
 			new NullLogger(),
+			$entityTypesWithRdfOutputAvailable,
 			$defaultFormat,
 			0,
 			$useSquid,
