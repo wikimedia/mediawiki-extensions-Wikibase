@@ -53,7 +53,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$sidebarLinkBadgeDisplay,
 			$this->getUsageAccumulator(),
-			$siteIdsToOutput
+			$siteIdsToOutput,
+			false
 		);
 
 		$this->assertEquals(
@@ -125,7 +126,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			$siteIdsToOutput
+			$siteIdsToOutput,
+			false
 		);
 
 		$this->assertEquals(
@@ -154,7 +156,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			$siteIdsToOutput
+			$siteIdsToOutput,
+			false
 		);
 
 		if ( $suppressErrors ) {
@@ -292,7 +295,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			[ 'enwiki' ]
+			[ 'enwiki' ],
+			false
 		);
 
 		$this->assertSame(
@@ -321,7 +325,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			[ 'unknown-site' ]
+			[ 'unknown-site' ],
+			false
 		);
 
 		$this->assertSame(

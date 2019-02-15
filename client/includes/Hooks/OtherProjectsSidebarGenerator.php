@@ -59,6 +59,11 @@ class OtherProjectsSidebarGenerator {
 	private $siteIdsToOutput;
 
 	/**
+	 * @var bool
+	 */
+	private $withHook;
+
+	/**
 	 * @param string $localSiteId
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLookup $siteLookup
@@ -66,6 +71,7 @@ class OtherProjectsSidebarGenerator {
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param string[] $siteIdsToOutput
+	 * @param boolean $withHook
 	 */
 	public function __construct(
 		$localSiteId,
@@ -74,7 +80,8 @@ class OtherProjectsSidebarGenerator {
 		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
 		UsageAccumulator $usageAccumulator,
-		array $siteIdsToOutput
+		array $siteIdsToOutput,
+		$withHook = true
 	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -83,6 +90,7 @@ class OtherProjectsSidebarGenerator {
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->siteIdsToOutput = $siteIdsToOutput;
+		$this->withHook = $withHook;
 	}
 
 	/**
@@ -124,6 +132,10 @@ class OtherProjectsSidebarGenerator {
 	 * @return array
 	 */
 	private function runHook( ItemId $itemId, array $sidebar ) {
+		if ( !$this->withHook ) {
+			return $sidebar;
+		}
+
 		$newSidebar = $sidebar;
 
 		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [
