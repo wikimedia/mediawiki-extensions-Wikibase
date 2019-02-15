@@ -871,7 +871,7 @@ class WikibaseRepo {
 						$entityNamespaceLookup,
 						MediaWikiServices::getInstance()->getSlotRoleStore()
 					),
-					new UnusableEntitySource(),
+					$this->getLocalEntitySource(),
 					$this->getDataAccessSettings(),
 					$dbName,
 					$repoName
