@@ -59,6 +59,9 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
 	 * @param callable[] $entityHandlerFactoryCallbacks Entity type ID to callback mapping for
 	 *  creating ContentHandler objects.
+	 * @param EntitySourceDefinitions $entitySourceDefinitions
+	 * @param EntitySource $localEntitySource
+	 * @param DataAccessSettings $dataAccessSettings
 	 * @param InterwikiLookup|null $interwikiLookup
 	 */
 	public function __construct(
