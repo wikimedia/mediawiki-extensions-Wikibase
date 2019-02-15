@@ -42,4 +42,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\View\\ViewContent' => __DIR__ . '/src/ViewContent.php',
 	'Wikibase\\View\\ViewFactory' => __DIR__ . '/src/ViewFactory.php',
 	'Wikibase\\View\\ViewPlaceHolderEmitter' => __DIR__ . '/src/ViewPlaceHolderEmitter.php',
+	'Wikibase\\View\\ViewPlaceholderEmitterException' => __DIR__ . '/src/ViewPlaceholderEmitterException.php',
 ];

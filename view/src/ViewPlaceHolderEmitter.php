@@ -16,6 +16,14 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 interface ViewPlaceHolderEmitter {
 
+	/**
+	 * @param EntityDocument $entity
+	 * @param string $languageCode
+	 *
+	 * @return array - added to ParserOutput extension data
+	 *
+	 * @throws ViewPlaceholderEmitterException
+	 */
 	public function getPlaceholders(
 		EntityDocument $entity,
 		$languageCode

@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewPlaceholderEmitterException;
 
 /**
  * Creates the parser output for an entity.
@@ -227,9 +228,13 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$viewContent = $entityView->getContent( $entity );
 		$parserOutput->setText( $viewContent->getHtml() );
 
-		$placeholders = $viewContent->getPlaceholders();
-		foreach ( $placeholders as $key => $value ) {
-			$parserOutput->setExtensionData( $key, $value );
+		try {
+			$placeholders = $viewContent->getPlaceholders();
+			foreach ( $placeholders as $key => $value ) {
+				$parserOutput->setExtensionData( $key, $value );
+			}
+		} catch ( ViewPlaceholderEmitterException $e ) {
+			$parserOutput->updateCacheExpiry( 0 );
 		}
 	}
 

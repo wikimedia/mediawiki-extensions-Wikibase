@@ -42,9 +42,11 @@ use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
+use Wikibase\View\ViewPlaceholderEmitterException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
+use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\ViewContent;
 use Wikibase\View\Template\TemplateFactory;
@@ -59,6 +61,17 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
+
+	/**
+	 * @var DispatchingEntityViewFactory
+	 */
+	private $entityViewFactory;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->entityViewFactory = $this->mockEntityViewFactory( false );
+	}
 
 	public function provideTestGetParserOutput() {
 		return [
@@ -94,7 +107,8 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		array $images,
 		array $referencedEntities
 	) {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( true, $titleText );
+		$this->entityViewFactory = $this->mockEntityViewFactory( true );
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( $titleText );
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entity );
 
@@ -165,7 +179,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function testGetParserOutput_dontGenerateHtml() {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( false );
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
 		$item = $this->newItem();
 
@@ -176,8 +190,31 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->assertFalse( $parserOutput->isCacheable() );
 	}
 
+	public function testGivenViewPlaceholderEmitterException_parserOutputBecomesUncacheable() {
+		$viewContent = $this->createMock( ViewContent::class );
+		$viewContent->expects( $this->once() )
+			->method( 'getPlaceholders' )
+			->willThrowException( new ViewPlaceholderEmitterException() );
+
+		$entityView = $this->createMock( EntityView::class );
+		$entityView->expects( $this->once() )
+			->method( 'getContent' )
+			->willReturn( $viewContent );
+
+		$this->entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );
+		$this->entityViewFactory->expects( $this->once() )
+			->method( 'newEntityView' )
+			->willReturn( $entityView );
+
+		$parserOutput = $this->newEntityParserOutputGenerator()
+			->getParserOutput( new Item( new ItemId( 'Q42' ) ), true );
+
+		$this->assertFalse( $parserOutput->isCacheable() );
+	}
+
 	public function testTitleText_ItemHasNoLabel() {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( true, 'Q7799929', 'a kitten' );
+		$this->entityViewFactory = $this->mockEntityViewFactory( true );
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( 'Q7799929', 'a kitten' );
 
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setDescription( 'en', 'a kitten' );
@@ -193,7 +230,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function newEntityParserOutputGenerator( $createView = true, $title = null, $description = null ) {
+	private function newEntityParserOutputGenerator( $title = null, $description = null ) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'ntriples' ] );
 
@@ -217,7 +254,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		];
 
 		return new FullEntityParserOutputGenerator(
-			$this->getEntityViewFactory( $createView ),
+			$this->entityViewFactory,
 			$this->getEntityMetaTagsFactory( $title, $description ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
@@ -290,7 +327,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	 *
 	 * @return DispatchingEntityViewFactory
 	 */
-	private function getEntityViewFactory( $createView ) {
+	private function mockEntityViewFactory( $createView ) {
 		$entityViewFactory = $this->getMockBuilder( DispatchingEntityViewFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
