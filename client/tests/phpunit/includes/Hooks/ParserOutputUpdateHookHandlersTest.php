@@ -311,6 +311,10 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		array $expectedSisterLinks,
 		array $expectedBadges = null
 	) {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [],
+		] );
+
 		$parserOutput = $this->newParserOutput( $pagePropsBefore, [] );
 		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
 
