@@ -13,6 +13,7 @@ use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
+use Wikibase\View\ViewPlaceholderEmitterException;
 
 /**
  * @license GPL-2.0-or-later
@@ -94,8 +95,8 @@ class TermboxView implements CacheableEntityTermsView {
 				$this->fallbackChainFactory->newFromLanguageCode( $mainLanguageCode )
 			);
 		} catch ( TermboxRenderingException $exception ) {
+			throw new ViewPlaceholderEmitterException( 'Termbox rendering failed' );
 			// TODO Log
-			return null;
 		}
 	}
 

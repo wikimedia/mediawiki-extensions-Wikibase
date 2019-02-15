@@ -115,25 +115,6 @@ class TermboxViewTest extends TestCase {
 		);
 	}
 
-	public function testPlaceHolderWithMarkupWithClientThrowingException_returnsNull() {
-		$language = 'en';
-		$item = new Item( new ItemId( 'Q42' ) );
-
-		$renderer = $this->newTermboxRenderer();
-		$renderer->expects( $this->once() )
-			->method( 'getContent' )
-			->willThrowException( new TermboxRenderingException( 'specific reason of failure' ) );
-
-		$placeholders = $this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getPlaceholders(
-			$item,
-			$language
-		);
-		$this->assertSame(
-			null,
-			$placeholders[ TermboxView::TERMBOX_MARKUP_BLOB ]
-		);
-	}
-
 	public function testGetTitleHtml_returnsHtmlWithEntityId() {
 		$entityId = new ItemId( 'Q42' );
 		$decoratedIdSerialization = '( ' . $entityId->getSerialization() . ')';
@@ -153,6 +134,19 @@ class TermboxViewTest extends TestCase {
 			$decoratedIdSerialization,
 			$termbox->getTitleHtml( $entityId )
 		);
+	}
+
+	/**
+	 * @expectedException \Wikibase\View\ViewPlaceholderEmitterException
+	 */
+	public function testGetHtmlWithClientThrowingException_throwsViewPlaceholderEmitterException() {
+		$renderer = $this->newTermboxRenderer();
+		$renderer->expects( $this->once() )
+			->method( 'getContent' )
+			->willThrowException( new TermboxRenderingException( 'specific reason of failure' ) );
+
+		$this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )
+			->getPlaceholders( new Item( new ItemId( 'Q23' ) ), 'en' );
 	}
 
 	/**
