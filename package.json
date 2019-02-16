@@ -1,17 +1,10 @@
 {
-	"name": "Wikibase",
-	"version": "0.0.0",
+	"private": true,
 	"scripts": {
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "wdio repo/tests/selenium/wdio.conf.js",
 		"test": "grunt test"
 	},
-	"repository": {
-		"type": "git",
-		"url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase"
-	},
-	"author": "The Wikidata team",
-	"license": "GPL-2.0-or-later",
 	"devDependencies": {
 		"eslint-config-wikimedia": "0.9.0",
 		"eslint-plugin-qunit": "3.3.1",
