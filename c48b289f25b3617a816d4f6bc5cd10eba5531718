@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6c7c96_d28236cc",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-02-17T20:54:43Z",
+      "side": 1,
+      "message": "This message appears about a dozen times in code. Some places use it with an explicit Message::parse(), which is necessary to properly parse wikitext links and markup. Most places use this message with a magic string cast, which is a bit iffy (and actually wrong in most situations, because these places are wrongly documented to return strings instead of Message objects), but luckily calls Message::parse() internally. So these should all work with this new message.\n\nHowever, there is at least one place in SpecialMergeLexemes that uses this message with Message::escape(), which would output this wikitext as escaped plain text. This place (and possibly more, please check) needs to be updated before this message can be updated.\n\nNote: Luckily \u003cstrong\u003e is valid in wikitext, so it\u0027s not necessary to allow HTML.",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 31
+      },
+      "revId": "c48b289f25b3617a816d4f6bc5cd10eba5531718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69a48ce6_1eeab12b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-02-17T20:54:43Z",
+      "side": 1,
+      "message": "I think any extra emphasis inside of this message that is already presented in a clearly visible popup window is obsolete and distracts more than it helps. The fact that the user is \"not logged in\" is not even the most important information here, in my opinion.",
+      "range": {
+        "startLine": 128,
+        "startChar": 44,
+        "endLine": 128,
+        "endChar": 52
+      },
+      "revId": "c48b289f25b3617a816d4f6bc5cd10eba5531718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
