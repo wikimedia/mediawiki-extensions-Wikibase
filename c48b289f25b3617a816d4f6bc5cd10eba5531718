@@ -45,6 +45,54 @@
       "revId": "c48b289f25b3617a816d4f6bc5cd10eba5531718",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "176b2423_8e495e47",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1081
+      },
+      "writtenOn": "2019-02-17T21:07:43Z",
+      "side": 1,
+      "message": "Okay, I\u0027ll move the issue to Phabricator. Thanks!",
+      "parentUuid": "9a6c7c96_d28236cc",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 31
+      },
+      "revId": "c48b289f25b3617a816d4f6bc5cd10eba5531718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f432709_ca4c2224",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1081
+      },
+      "writtenOn": "2019-02-17T21:07:43Z",
+      "side": 1,
+      "message": "Okay. The intention was just to reproduce Wikipedia\u0027s message, https://phabricator.wikimedia.org/T215039#4926898, but I agree that the fact of being a pop-up can give enough emphasis.",
+      "parentUuid": "69a48ce6_1eeab12b",
+      "range": {
+        "startLine": 128,
+        "startChar": 44,
+        "endLine": 128,
+        "endChar": 52
+      },
+      "revId": "c48b289f25b3617a816d4f6bc5cd10eba5531718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
