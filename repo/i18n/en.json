@@ -10,7 +10,8 @@
 			"Michał Łazowik",
 			"Addshore",
 			"Bene*",
-			"Lucie-Aimée Kaffee"
+			"Lucie-Aimée Kaffee",
+			"Abián"
 		]
 	},
 	"wikibase-desc": "Structured data repository",
@@ -124,7 +125,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "I accept these terms for my future edits. Do not show this message again.",
 	"wikibase-entityselector-more": "more",
 	"wikibase-entityselector-notfound": "No match was found",
-	"wikibase-anonymouseditwarning": "Warning: You are not logged in.\nYour IP address will be recorded in the edit history of this entity.",
+	"wikibase-anonymouseditwarning": "Warning: <strong>You are not logged in</strong>.\nYour [[w:en:IP address|IP address]] will be publicly visible if you make any edits.\nIf you <strong>[[Special:UserLogin|log in]]</strong> or <strong>[[Special:CreateAccount|create an account]]</strong>, your edits will be attributed to a user name, among other benefits.",
 	"wikibase-move-error": "You cannot move pages that are in a data namespace, and you cannot move pages into it.",
 	"wikibase-validator-sitelink-conflict": "The link $1 is already used by Item $2. You may remove it from $2 if it does not belong there or merge the Items if they are about the exact same topic.",
 	"wikibase-validator-label-conflict": "Property $3 already has label \"$1\" associated with language code $2.",
