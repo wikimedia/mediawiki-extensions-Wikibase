@@ -277,5 +277,8 @@
 	"apihelp-wbsetreference-example-2": "Усталяваць крыніцу сьцьверджаньня з GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF і з хэшам 1eb8793c002b1d9820c833d234a1b54c8e94187e",
 	"apihelp-wbsetreference-example-3": "Стварае новую крыніцу для сьцьверджаньня з GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF і ўстаўляе новую крыніцу ўверх сьпісу крыніц замест дадаваньня ў канец.",
 	"apihelp-wbsetsitelink-description": "Злучае старонку ў вікі з элемэнтам Вікібазы ці выдаляе ўжо зробленае злучэньне.",
-	"apihelp-wbsetsitelink-summary": "Злучае старонку ў вікі з элемэнтам Вікібазы ці выдаляе ўжо зробленае злучэньне."
+	"apihelp-wbsetsitelink-summary": "Злучае старонку ў вікі з элемэнтам Вікібазы ці выдаляе ўжо зробленае злучэньне.",
+	"apihelp-wbsetsitelink-param-id": "Ідэнтыфікатар элемэнту з прэфіксам.\nУжывайце <var>id</var> ці <var>site</var> і <var>title</var> разам.",
+	"apihelp-wbsetsitelink-param-new": "Калі ўсталявана, будзе створаны новы элемэнт.\nПазначце тут тып элемэнту, які вы жадаеце стварыць.",
+	"apihelp-wbsetsitelink-param-site": "Ідэнтыфікатар сайту, на якім знаходзіцца старонка.\nУжывайце разам з <var>title</var>, каб зрабіць поўную спасылку на сайт."
 }

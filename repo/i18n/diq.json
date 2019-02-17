@@ -23,6 +23,7 @@
 	"wikibase-save-inprogress": "Starêno...",
 	"wikibase-remove-inprogress": "Wedarêno",
 	"wikibase-entitytermsforlanguagelistview-description": "Şınasnayış",
+	"wikibase-entitytermsforlanguagelistview-label": "Etiket",
 	"wikibase-entitytermsforlanguagelistview-language": "Zıwan",
 	"wikibase-entitytermsforlanguagelistview-more": "Est biyaye zıwani pêro",
 	"wikibase-label-empty": "Hewna etiket tede çıniyo",
@@ -70,6 +71,7 @@
 	"wikibase-setlabel-label": "Etiket:",
 	"wikibase-setdescription-label": "Şınasnayış:",
 	"wikibase-setaliases-label": "Nameyê bini:",
+	"wikibase-setlabeldescriptionaliases-label-label": "Etiket:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Şınasnayış:",
 	"wikibase-setsitelink-site": "Kamiya sita:",
 	"wikibase-setsitelink-label": "Gıreyê sita:",
@@ -106,5 +108,6 @@
 	"content-model-wikibase-property": "Wikibase xısusiyet",
 	"content-model-wikibase-query": "Wikibase pers",
 	"right-item-merge": "objan yew ke",
-	"right-property-create": "Xısusiyeti vıraze"
+	"right-property-create": "Xısusiyeti vıraze",
+	"wikibase-pageinfo-subscription-none": "Çıniyo"
 }
