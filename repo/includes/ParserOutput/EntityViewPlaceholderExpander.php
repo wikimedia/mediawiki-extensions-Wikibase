@@ -29,6 +29,8 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class EntityViewPlaceholderExpander {
 
+	/* public */ const INITIALLY_COLLAPSED_SETTING_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
+
 	/**
 	 * @var TemplateFactory
 	 */
@@ -156,15 +158,11 @@ class EntityViewPlaceholderExpander {
 	 * @return bool If the terms list should be initially collapsed for the current user.
 	 */
 	private function isInitiallyCollapsed() {
-		$name = 'wikibase-entitytermsview-showEntitytermslistview';
-
 		if ( $this->user->isAnon() ) {
-			$cookieName = $this->cookiePrefix . $name;
-			if ( isset( $_COOKIE[$cookieName] ) ) {
-				return $_COOKIE[$cookieName] === 'false';
-			}
+			$cookieName = $this->cookiePrefix . self::INITIALLY_COLLAPSED_SETTING_NAME;
+			return isset( $_COOKIE[$cookieName] ) && $_COOKIE[$cookieName] === 'false';
 		} else {
-			return !$this->user->getOption( $name, true );
+			return !$this->user->getOption( self::INITIALLY_COLLAPSED_SETTING_NAME, true );
 		}
 	}
 
