@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;
@@ -14,7 +14,6 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  * @license GPL-2.0-or-later
  */
 class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
-
 	public function testGivenWbUiPlaceholder_getHtmlForPlaceholderReturnsMarkupBlob() {
 		$html = '<div>termbox</div>';
 		$expander = new ExternallyRenderedEntityViewPlaceholderExpander( $html );
