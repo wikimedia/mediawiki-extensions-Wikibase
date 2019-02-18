@@ -122,7 +122,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( '', $html );
 	}
 
-	public function testGivenExternallyRenderedMarkupBlob_usesRespectivePlaceholderExpander() {
+	public function testGivenExternallyRenderedMarkup_usesRespectivePlaceholderExpander() {
 		$entity = new ItemId( 'Q123' );
 		$entityFactory = $this->createMock( EntityFactory::class );
 		$entityFactory->expects( $this->once() )
@@ -144,7 +144,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$placeholder = '$1';
 
 		$out = $this->newOutputPage();
-		$out->setProperty( TermboxView::TERMBOX_MARKUP_BLOB, $expectedHtml );
+		$out->setProperty( TermboxView::TERMBOX_MARKUP, $expectedHtml );
 		$out->setProperty( 'wikibase-view-chunks', [ $placeholder => [ TermboxView::TERMBOX_PLACEHOLDER ] ] );
 
 		$html = $placeholder;
