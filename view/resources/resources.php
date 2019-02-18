@@ -120,29 +120,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.sitelinklistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.sitelinklistview.js',
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.util.EventSingletonManager',
-				'jquery.wikibase.listview',
-				'jquery.wikibase.sitelinkview',
-				'wikibase.datamodel.SiteLink',
-				'wikibase.sites',
-				'wikibase.utilities', // wikibase.utilities.ui
-			],
-			'messages' => [
-				'parentheses',
-				'wikibase-sitelinks-counter',
-			],
-		],
-
 		'jquery.wikibase.sitelinkview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
@@ -768,6 +745,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.sitelinklistview.js',
 				'jquery/jquery.sticknode.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
@@ -788,6 +766,7 @@ return call_user_func( function() {
 				'wikibase/view/ViewFactory.js'
 			],
 			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.mw-collapsible.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
@@ -813,17 +792,19 @@ return call_user_func( function() {
 				'jquery.inputautoexpand',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.listview',
-				'jquery.wikibase.sitelinklistview',
+				'jquery.wikibase.sitelinkview',
 				'jquery.wikibase.statementview',
 				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
 				'wikibase.templates',
 				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
+				'wikibase.utilities', // wikibase.utilities.ui
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
 				'wikibase',
@@ -858,6 +839,7 @@ return call_user_func( function() {
 				'wikibase-label-empty',
 				'wikibase-label-input-help-message',
 				'wikibase-sitelinkgroupview-input-help-message',
+				'wikibase-sitelinks-counter',
 				'wikibase-statementgrouplistview-add-tooltip',
 				'wikibase-statementlistview-add',
 				'wikibase-statementlistview-add-tooltip',
