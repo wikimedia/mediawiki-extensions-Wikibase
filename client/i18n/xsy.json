@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lalotahes"
+		]
+	},
+	"tooltip-t-wikibase": " linotor pa’oSa’en ila ray kina:at kaSili’an Sinraehoe’",
+	"wikibase-comment-update": "sinapih ila {{WBREPONAME}}ka Sinraehoe’",
+	"wikibase-dataitem": "{{WBREPONAME}} Sinraehoe’",
+	"wikibase-editlinks": " bienji kalotoran",
+	"wikibase-editlinkstitle": " bienji kaSkoraeh ka ka:i’ kalotoran",
+	"wikibase-linkitem-input-page": "ye:myen：",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": " Sa:il",
+	"wikibase-rc-hide-wikidata-show": " pinakita’",
+	"wikibase-rc-wikibase-edit-letter": "su’wei:",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bienji",
+	"wikibase-otherprojects": " ’aroma’ zhwan’an"
+}

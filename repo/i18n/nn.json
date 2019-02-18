@@ -151,6 +151,7 @@
 	"wikibase-newentity-description": "Skildring:",
 	"wikibase-newentity-submit": "Opprett",
 	"special-setlabel": "Set ein merkelapp",
+	"wikibase-search-result-stats": "{{PLURAL:$1|éi utsegn|$1 utsegner}}, {{PLURAL:$2|éi sidelenkje|$2 sidelenkjer}}",
 	"wikibase-setlabel-introfull": "Du set merkelappen for $2 på [[:$1]].",
 	"wikibase-setlabel-intro": "Dette skjemaet lèt deg setja merkelappen til ei eining. Du lyt oppgje ID-en til eininga (t.d. Q23), ein språkkode (t.d. «nn») og merkelappen som skal setjast.",
 	"wikibase-setlabel-label": "Merkelapp:",

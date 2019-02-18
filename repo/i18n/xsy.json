@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lalotahes"
+		]
+	},
+	"wikibase-edit": " bienji",
+	"wikibase-cancel": "kayni’",
+	"wikibase-add": "baba:aw rinpa:",
+	"wikibase-entitytermsforlanguagelistview-description": " papapnabih",
+	"wikibase-label-empty": "’i’ini’ pina’iyaka:i’ kakSekla’an",
+	"wikibase-description-empty": " ’i’ini’ pa’iyaka:i’i ka pinapapnabih",
+	"wikibase-diffview-rank-normal": " pinakhingha’ ka kin’ibabaw SikoSa’",
+	"wikibase-diffview-description": " papapnabih",
+	"wikibase-sitelinks-special": " ’aroma’ wangzhan",
+	"wikibase-remove": "tilkoraeh",
+	"wikibase-move-up": "tilkoraeh babaw",
+	"wikibase-move-down": "tilkoraeh wahoer",
+	"wikibase-statementview-rank-normal": " pinakhingha’ ka kin’ibabaw SikoSa’",
+	"wikibase-entityselector-more": "akoy",
+	"wikibase-itembytitle-lookup-page": "ye:myen：",
+	"wikibase-itembytitle-submit": "komi:im",
+	"wikibase-gotolinkedpage-submit": " patawaw",
+	"wikibase-itemdisambiguation-submit": "komi:im",
+	"wikibase-newentity-description": " papapnabih:",
+	"wikibase-newentity-submit": "paskayzaeh",
+	"wikibase-setlabeldescriptionaliases-description-label": " papapnabih:"
+}
