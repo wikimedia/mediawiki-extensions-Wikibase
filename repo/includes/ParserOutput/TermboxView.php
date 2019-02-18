@@ -21,7 +21,7 @@ class TermboxView implements CacheableEntityTermsView {
 
 	/* public */ const TERMBOX_PLACEHOLDER = 'wb-ui';
 
-	/* public */ const TERMBOX_MARKUP_BLOB = 'termbox-markup';
+	/* public */ const TERMBOX_MARKUP = 'termbox-markup';
 
 	private $fallbackChainFactory;
 	private $renderer;
@@ -72,7 +72,7 @@ class TermboxView implements CacheableEntityTermsView {
 	) {
 		return [
 			'wikibase-view-chunks' => $this->textInjector->getMarkers(),
-			self::TERMBOX_MARKUP_BLOB => $this->renderTermbox( $languageCode, $entity->getId() ),
+			self::TERMBOX_MARKUP => $this->renderTermbox( $languageCode, $entity->getId() ),
 		];
 	}
 
@@ -80,7 +80,7 @@ class TermboxView implements CacheableEntityTermsView {
 	 * @param string $mainLanguageCode
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	private function renderTermbox( $mainLanguageCode, EntityId $entityId ) {
 		try {

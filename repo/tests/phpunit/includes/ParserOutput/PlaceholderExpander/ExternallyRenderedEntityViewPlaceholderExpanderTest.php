@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;

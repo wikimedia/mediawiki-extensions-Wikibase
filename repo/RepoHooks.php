@@ -741,8 +741,8 @@ final class RepoHooks {
 		$out->setProperty( 'wikibase-meta-tags', $meta );
 
 		$out->setProperty(
-			TermboxView::TERMBOX_MARKUP_BLOB,
-			$parserOutput->getExtensionData( TermboxView::TERMBOX_MARKUP_BLOB )
+			TermboxView::TERMBOX_MARKUP,
+			$parserOutput->getExtensionData( TermboxView::TERMBOX_MARKUP )
 		);
 
 		// Array with <link rel="alternate"> tags for the page HEAD.

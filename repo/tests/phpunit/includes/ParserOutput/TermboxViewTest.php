@@ -111,7 +111,7 @@ class TermboxViewTest extends TestCase {
 
 		$this->assertSame(
 			$response,
-			$placeholders[ TermboxView::TERMBOX_MARKUP_BLOB ]
+			$placeholders[ TermboxView::TERMBOX_MARKUP ]
 		);
 	}
 
@@ -130,7 +130,7 @@ class TermboxViewTest extends TestCase {
 		);
 		$this->assertSame(
 			null,
-			$placeholders[ TermboxView::TERMBOX_MARKUP_BLOB ]
+			$placeholders[ TermboxView::TERMBOX_MARKUP ]
 		);
 	}
 
