@@ -346,6 +346,7 @@ class EditEntityAction extends ViewEntityAction {
 			'maxLength' => 200,
 			'size' => 60,
 			'spellcheck' => 'true',
+			'accessKey'=> 'b',
 		] + Linker::tooltipAndAccesskeyAttribs( 'summary' );
 		return ( new FieldLayout(
 			new TextInputWidget( $inputAttrs ),
