@@ -322,7 +322,7 @@ XML
 
 		RepoHooks::onOutputPageParserOutput( $out, $parserOutput );
 
-		$this->assertSame( TermboxView::TERMBOX_MARKUP_BLOB, $out->getProperty( TermboxView::TERMBOX_MARKUP_BLOB ) );
+		$this->assertSame( TermboxView::TERMBOX_MARKUP, $out->getProperty( TermboxView::TERMBOX_MARKUP ) );
 		$this->assertSame( 'wikibase-view-chunks', $out->getProperty( 'wikibase-view-chunks' ) );
 		$this->assertSame( 'wikibase-meta-tags', $out->getProperty( 'wikibase-meta-tags' ) );
 		$this->assertSame( $altLinks, $out->getLinkTags() );

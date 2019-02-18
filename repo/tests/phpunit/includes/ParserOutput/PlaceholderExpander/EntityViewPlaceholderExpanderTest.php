@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\Repo\Tests\ParserOutput\PlaceholderExpander;
 
 use PHPUnit4And6Compat;
 use User;
