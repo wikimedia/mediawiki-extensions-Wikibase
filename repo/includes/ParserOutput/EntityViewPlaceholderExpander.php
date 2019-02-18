@@ -29,6 +29,8 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class EntityViewPlaceholderExpander {
 
+	/* public */ const COOKIE_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
+
 	/**
 	 * @var TemplateFactory
 	 */
@@ -160,9 +162,7 @@ class EntityViewPlaceholderExpander {
 
 		if ( $this->user->isAnon() ) {
 			$cookieName = $this->cookiePrefix . $name;
-			if ( isset( $_COOKIE[$cookieName] ) ) {
-				return $_COOKIE[$cookieName] === 'false';
-			}
+			return isset( $_COOKIE[$cookieName] ) && $_COOKIE[$cookieName] === 'false';
 		} else {
 			return !$this->user->getOption( $name, true );
 		}

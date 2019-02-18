@@ -28,7 +28,7 @@ use Wikibase\View\Template\TemplateFactory;
 class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
-	const COOKIE_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
+	/* private */ const COOKIE_PREFIX = 'testwiki-';
 
 	/**
 	 * @param User $user
@@ -109,41 +109,35 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenCookieSetToTrue_placeholderIsInitiallyExpanded() {
-		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
+		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), self::COOKIE_PREFIX );
 
-		$_COOKIE['testwiki-' . self::COOKIE_NAME] = 'true';
+		$cookieName = self::COOKIE_PREFIX . EntityViewPlaceholderExpander::COOKIE_NAME;
+		$_COOKIE[$cookieName] = 'true';
 
 		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
 
 		$this->assertEquals( '', $html );
+
+		unset( $_COOKIE[$cookieName] ); // avoid side effects
 	}
 
 	public function testGivenCookieSetToFalse_placeholderIsInitiallyCollapsed() {
-		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
+		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), self::COOKIE_PREFIX );
 
-		$_COOKIE['testwiki-' . self::COOKIE_NAME] = 'false';
+		$cookieName = self::COOKIE_PREFIX . EntityViewPlaceholderExpander::COOKIE_NAME;
+		$_COOKIE[$cookieName] = 'false';
 
 		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
 
 		$this->assertEquals( 'wikibase-initially-collapsed', $html );
-	}
 
-	public function testPrefixedCookieHasPrecedenceOverOldCookie() {
-		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
-
-		$_COOKIE['testwiki-' . self::COOKIE_NAME] = 'true';
-		$_COOKIE[self::COOKIE_NAME] = 'false';
-
-		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
-
-		$this->assertEquals( '', $html );
+		unset( $_COOKIE[self::COOKIE_PREFIX . EntityViewPlaceholderExpander::COOKIE_NAME] ); // avoid side effects
 	}
 
 	public function testGivenNoCookie_placeholderIsInitiallyExpanded() {
-		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), 'testwiki-' );
+		$expander = $this->newExpander( $this->newUser( true ), $this->newItem(), self::COOKIE_PREFIX );
 
-		unset( $_COOKIE['testwiki-' . self::COOKIE_NAME] );
-		unset( $_COOKIE[self::COOKIE_NAME] );
+		unset( $_COOKIE[self::COOKIE_PREFIX . EntityViewPlaceholderExpander::COOKIE_NAME] );
 
 		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
 
