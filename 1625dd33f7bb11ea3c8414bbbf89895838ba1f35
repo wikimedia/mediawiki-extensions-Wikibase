@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6936d011_290fd74d",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-19T10:07:24Z",
+      "side": 1,
+      "message": "I think we should do `$this-\u003emsg( \u0027accesskey-summary )-\u003eplain()` here instead of \u0027b\u0027, to make sure we account for other locales.",
+      "revId": "1625dd33f7bb11ea3c8414bbbf89895838ba1f35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
