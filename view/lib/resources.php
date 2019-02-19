@@ -120,6 +120,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Fingerprint' => $wikibaseDatamodelPaths + [
@@ -1049,6 +1050,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.SiteLinkSerializer' => $wikibaseSerializationPaths + [
@@ -1139,6 +1141,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.StatementSerializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementSerializer' => $wikibaseSerializationPaths + [
