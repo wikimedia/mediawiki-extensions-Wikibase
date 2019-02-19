@@ -46,6 +46,10 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		array $result,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [],
+		] );
+
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
@@ -118,6 +122,10 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	 * @dataProvider projectLinkSidebarProvider
 	 */
 	public function testBuildProjectLinkSidebarFromItemId( array $siteIdsToOutput, array $result ) {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [],
+		] );
+
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
