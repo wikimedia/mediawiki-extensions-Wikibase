@@ -171,7 +171,7 @@ class RepoLinker {
 	 *
 	 * @return string
 	 */
-	public function getConceptBaseUri( EntityId $entityId ) {
+	private function getConceptBaseUri( EntityId $entityId ) {
 		$uri = null;
 		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
 			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
