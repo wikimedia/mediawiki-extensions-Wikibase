@@ -120,6 +120,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.datamodel.Fingerprint' => $wikibaseDatamodelPaths + [
@@ -928,6 +929,7 @@ return call_user_func( function() {
 				'wikibase.serialization.SnakListSerializer',
 				'wikibase.serialization.SnakSerializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.EntitySerializer' => $wikibaseSerializationPaths + [
@@ -1026,6 +1028,7 @@ return call_user_func( function() {
 				'wikibase.serialization.ReferenceSerializer',
 				'wikibase.serialization.Serializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.ReferenceSerializer' => $wikibaseSerializationPaths + [
@@ -1039,6 +1042,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.SnakListSerializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.Serializer' => $wikibaseSerializationPaths + [
@@ -1049,6 +1053,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.__namespace',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.SiteLinkSerializer' => $wikibaseSerializationPaths + [
@@ -1064,17 +1069,17 @@ return call_user_func( function() {
 		],
 
 		'wikibase.serialization.SiteLinkSetSerializer' => $wikibaseSerializationPaths + [
-		'scripts' => [
-			'Serializers/SiteLinkSetSerializer.js',
+			'scripts' => [
+				'Serializers/SiteLinkSetSerializer.js',
+			],
+			'dependencies' => [
+				'util.inherit',
+				'wikibase.datamodel.SiteLinkSet',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.SiteLinkSerializer',
+			],
 		],
-		'dependencies' => [
-			'util.inherit',
-			'wikibase.datamodel.SiteLinkSet',
-			'wikibase.serialization.__namespace',
-			'wikibase.serialization.Serializer',
-			'wikibase.serialization.SiteLinkSerializer',
-		],
-	],
 
 		'wikibase.serialization.SnakListSerializer' => $wikibaseSerializationPaths + [
 			'scripts' => [
@@ -1087,6 +1092,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.SnakSerializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.SnakSerializer' => $wikibaseSerializationPaths + [
@@ -1100,6 +1106,7 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementGroupSerializer' => $wikibaseSerializationPaths + [
@@ -1139,6 +1146,7 @@ return call_user_func( function() {
 				'wikibase.serialization.Serializer',
 				'wikibase.serialization.StatementSerializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.StatementSerializer' => $wikibaseSerializationPaths + [
@@ -1153,6 +1161,7 @@ return call_user_func( function() {
 				'wikibase.serialization.ReferenceListSerializer',
 				'wikibase.serialization.Serializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.serialization.TermMapSerializer' => $wikibaseSerializationPaths + [
