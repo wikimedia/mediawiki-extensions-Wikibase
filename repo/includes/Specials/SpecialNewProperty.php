@@ -170,7 +170,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 				$this->msg(
 					'wikibase-anonymouseditwarning',
 					$this->msg( 'wikibase-entity-property' )
-				),
+				)->parse(),
 			];
 		}
 

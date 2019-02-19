@@ -213,7 +213,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	protected function getWarnings() {
 		if ( $this->getUser()->isAnon() ) {
 			return [
-				$this->msg( 'wikibase-anonymouseditwarning', $this->msg( 'wikibase-entity-item' ) ),
+				$this->msg( 'wikibase-anonymouseditwarning', $this->msg( 'wikibase-entity-item' ) )->parse(),
 			];
 		}
 

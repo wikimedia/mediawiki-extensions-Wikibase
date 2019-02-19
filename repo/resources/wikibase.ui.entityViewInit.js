@@ -167,7 +167,7 @@
 			if ( !$.find( '.mw-notification-content' ).length
 				&& !mw.cookie.get( 'wikibase-no-anonymouseditwarning' )
 			) {
-				var message = mw.msg(
+				var message = mw.message(
 					'wikibase-anonymouseditwarning',
 					mw.msg( 'wikibase-entity-' + entityType )
 				);

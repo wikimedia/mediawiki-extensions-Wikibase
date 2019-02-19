@@ -197,7 +197,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$output->addHTML( $this->getCopyrightHTML() );
 
 		foreach ( $this->getWarnings() as $warning ) {
-			$output->addHTML( Html::element( 'div', [ 'class' => 'warning' ], $warning ) );
+			$output->addHTML( Html::rawElement( 'div', [ 'class' => 'warning' ], $warning ) );
 		}
 	}
 
