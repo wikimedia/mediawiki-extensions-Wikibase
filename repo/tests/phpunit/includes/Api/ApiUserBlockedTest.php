@@ -47,7 +47,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'property' => [ [ EntityTestHelper::class, 'getId' ], 'StringProp' ],
 				'value' => '"abc"',
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -65,7 +65,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'new' => 'item',
 				'data' => json_encode( [] ),
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -74,7 +74,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'id' => [ [ EntityTestHelper::class, 'getId' ], 'Berlin' ],
 				'data' => json_encode( [] ),
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -85,7 +85,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'tosite' => 'dewiki',
 				'totitle' => 'Wasserstoff',
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -102,7 +102,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'claim' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -111,7 +111,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'claim' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
 				'qualifiers' => [ [ 'self', 'getEntityClaimQualifierHash' ], 'Berlin' ],
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -120,7 +120,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'statement' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
 				'references' => [ [ 'self', 'getEntityClaimReferenceHash' ], 'Berlin' ],
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -130,7 +130,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'add' => 'foo',
 				'language' => 'en',
 			],
-			[ 'wikibase-api-permissiondenied', 'blockedtext' ],
+			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
 
 		yield [
@@ -140,7 +140,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'add' => 'en alias',
 				'language' => 'en'
 			],
-			[ 'wikibase-api-permissiondenied', 'blockedtext' ],
+			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
 
 		yield [
@@ -148,7 +148,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			[
 				'claim' => [ [ 'self' , 'buildTestClaimJSON' ], 'Oslo' ],
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -158,7 +158,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'value' => '"foobar"',
 				'snaktype' => 'value'
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -168,7 +168,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'language' => 'de',
 				'value' => 'FizzBuzz'
 			],
-			[ 'wikibase-api-permissiondenied', 'blockedtext' ],
+			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
 
 		yield [
@@ -178,7 +178,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'language' => 'de',
 				'value' => 'Bärlin',
 			],
-			[ 'wikibase-api-permissiondenied', 'blockedtext' ],
+			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
 
 		yield [
@@ -189,7 +189,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'snaktype' => 'value',
 				'value' => '"baz"',
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -198,7 +198,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'statement' => [ [ 'self', 'getEntityClaimGUID' ], 'Berlin' ],
 				'snaks' => [ [ 'self' , 'buildTestReferenceSnakJSON' ] ],
 			],
-			[ 'wikibase-api-failed-save', 'blockedtext', 'no-permission' ],
+			[ 'wikibase-api-failed-save', 'apierror-blocked', 'no-permission' ],
 		];
 
 		yield [
@@ -208,7 +208,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 				'linksite' => 'enwiki',
 				'linktitle' => 'Berlin',
 			],
-			[ 'wikibase-api-permissiondenied', 'blockedtext' ],
+			[ 'wikibase-api-permissiondenied', 'apierror-blocked' ],
 		];
 	}
 
@@ -240,8 +240,12 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 			$this->fail( 'Expected api error to be raised' );
 		} catch ( ApiUsageException $exception ) {
 			foreach ( $expectedMessages as $message ) {
-				$this->assertTrue( $exception->getStatusValue()->hasMessage( $message ),
-					'Expected message ' . $message );
+				$hasMessage = $exception->getStatusValue()->hasMessage( $message );
+				if ( $message === 'apierror-blocked' ) {
+					// back compat for pre-I14887b6d MediaWiki
+					$hasMessage = $hasMessage || $exception->getStatusValue()->hasMessage( 'blockedtext' );
+				}
+				$this->assertTrue( $hasMessage, 'Expected message ' . $message );
 			}
 		}
 	}
