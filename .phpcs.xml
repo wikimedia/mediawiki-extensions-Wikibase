@@ -78,6 +78,7 @@
 	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<file>.</file>
+	<arg name="bootstrap" value="./vendor/mediawiki/mediawiki-codesniffer/utils/bootstrap-ci.php"/>
 	<exclude-pattern>tests/phan/stubs</exclude-pattern>
 	<exclude-pattern>repo/tests/browser</exclude-pattern>
 	<exclude-pattern>view/lib/wikibase-api/WikibaseJavaScriptApi.php</exclude-pattern>
