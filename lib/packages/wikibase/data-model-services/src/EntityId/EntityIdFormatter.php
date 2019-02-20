@@ -17,7 +17,7 @@ interface EntityIdFormatter {
 	 * @param EntityId $value
 	 *
 	 * @return string Either plain text, wikitext or HTML.
-	 * @throws \IllegalArgumentException
+	 * @throws \IllegalArgumentException when value falls out of supported patterns by the formatter
 	 */
 	public function formatEntityId( EntityId $value );
 
