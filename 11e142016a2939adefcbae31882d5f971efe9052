@@ -22,6 +22,30 @@
       "revId": "11e142016a2939adefcbae31882d5f971efe9052",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8621e6ba_9f0b920c",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-20T12:06:23Z",
+      "side": 1,
+      "message": "msg returns a string (plain parsed version of the Message object) while message returns the Message object letting mw.notify to parse it.",
+      "parentUuid": "34b04028_c0b61fe2",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 29
+      },
+      "revId": "11e142016a2939adefcbae31882d5f971efe9052",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
