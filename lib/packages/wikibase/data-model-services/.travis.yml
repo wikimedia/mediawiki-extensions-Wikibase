@@ -4,7 +4,7 @@ matrix:
   fast_finish: true
   include:
     - env: DM=~6.3
-      php: hhvm-3.30
+      php: hhvm-3.18
     - env: DM=~7.5
       php: 7
     - env: DM=~8.0
