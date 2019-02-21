@@ -56,9 +56,10 @@ abstract class EntityViewTestCase extends \PHPUnit\Framework\TestCase {
 	public function testGetHtml(
 		EntityView $view,
 		EntityDocument $entity,
-		$regexp
+		$regexp,
+		$revision = null
 	) {
-		$output = $view->getContent( $entity );
+		$output = $view->getContent( $entity, $revision );
 
 		$this->assertSame( [], $output->getPlaceholders() );
 

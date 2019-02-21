@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
@@ -47,6 +48,9 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 	/** @var LanguageFallbackChainFactory|MockObject */
 	private $languageFallbackChainFactory;
 
+	/** @var OutputPageRevisionIdReader|MockObject */
+	private $revisionIdReader;
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -56,6 +60,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$this->entityIdReader = $this->newEntityIdReaderReturningEntityId( new ItemId( 'Q42' ) );
 		$this->specialPageLinker = $this->createMock( RepoSpecialPageLinker::class );
 		$this->languageFallbackChainFactory = $this->newLanguageFallbackChainFactory();
+		$this->revisionIdReader = $this->newOutputPageRevisionIdReader();
 	}
 
 	public function testGivenWbUiPlaceholderAndDefaultRequest_getHtmlForPlaceholderReturnsInjectedMarkup() {
@@ -98,6 +103,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$html = '<div>html coming from SSR service</div>';
 
 		$language = 'en';
+		$revision = 4711;
 		$this->outputPage->expects( $this->once() )
 			->method( 'getLanguage' )
 			->willReturn( Language::factory( $language ) );
@@ -117,10 +123,13 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			->with( $this->outputPage )
 			->willReturn( $languageFallbackChain );
 
+		$this->revisionIdReader = $this->newOutputPageRevisionIdReader( $revision );
+
 		$this->termboxRenderer->expects( $this->once() )
 			->method( 'getContent' )
 			->with(
 				$entityId,
+				$revision,
 				$language,
 				$editPageLink,
 				$languageFallbackChain
@@ -138,6 +147,18 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		);
 	}
 
+	public function testGivenRevisionIdReaderReturnsNull_getHtmlForPlaceholderReturnsFallbackHtml() {
+		$this->revisionIdReader = $this->newOutputPageRevisionIdReader( null );
+
+		$this->termboxRenderer->expects( $this->never() )
+			->method( 'getContent' );
+
+		$this->assertSame(
+			ExternallyRenderedEntityViewPlaceholderExpander::FALLBACK_HTML,
+			$this->newPlaceholderExpander()->getHtmlForPlaceholder( TermboxView::TERMBOX_PLACEHOLDER )
+		);
+	}
+
 	public function testGivenRerenderCausesException_getHtmlForPlaceholderReturnsFallbackHtml() {
 		$this->termboxRenderer->expects( $this->once() )
 			->method( 'getContent' )
@@ -151,6 +172,8 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			->method( 'isDefaultRequest' )
 			->with( $this->outputPage )
 			->willReturn( false );
+
+		$this->revisionIdReader = $this->newOutputPageRevisionIdReader( 4711 );
 
 		$this->assertSame(
 			ExternallyRenderedEntityViewPlaceholderExpander::FALLBACK_HTML,
@@ -172,7 +195,8 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			$this->termboxRenderer,
 			$this->entityIdReader,
 			$this->specialPageLinker,
-			$this->languageFallbackChainFactory
+			$this->languageFallbackChainFactory,
+			$this->revisionIdReader
 		);
 	}
 
@@ -196,6 +220,18 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			->willReturn( $this->createMock( LanguageFallbackChain::class ) );
 
 		return $factory;
+	}
+
+	/**
+	 * @return MockObject|OutputPageRevisionIdReader
+	 */
+	protected function newOutputPageRevisionIdReader( $revisionId = null ) {
+		$reader = $this->createMock( OutputPageRevisionIdReader::class );
+		$reader
+			->method( 'getRevisionFromOutputPage' )
+			->willReturn( $revisionId );
+
+		return $reader;
 	}
 
 }
