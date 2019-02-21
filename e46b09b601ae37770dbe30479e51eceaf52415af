@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b2dd86e_a8aafc03",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-21T10:45:46Z",
+      "side": 1,
+      "message": "Since InvalidArgumentException might be thrown for more than one reason, I used a generic message.",
+      "revId": "e46b09b601ae37770dbe30479e51eceaf52415af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
