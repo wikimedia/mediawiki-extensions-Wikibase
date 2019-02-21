@@ -96,7 +96,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	) {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( true, $titleText );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entity );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entity, 4711 );
 
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
@@ -169,7 +169,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$item = $this->newItem();
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item, false );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item, 4711, false );
 
 		$this->assertSame( '', $parserOutput->getText() );
 		// ParserOutput without HTML must not end up in the cache.
@@ -182,7 +182,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setDescription( 'en', 'a kitten' );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item, 4711 );
 
 		$this->assertSame(
 			[
@@ -427,13 +427,13 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$user = $this->getTestUser()->getUser();
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, 'test item', $user );
+		$revision = $store->saveEntity( $item, 'test item', $user );
 		$store->saveEntity( $redirectSource, 'test item', $user );
 		$store->saveEntity( $redirectTarget, 'test item', $user );
 		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
 
 		$entityParserOutputGenerator = $this->getGeneratorForRedirectTest();
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item, $revision->getRevisionId() );
 
 		$foo = $parserOutput->getText();
 

@@ -51,6 +51,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 
 	public function testParserOutputContainsLinksForItemsUsedAsQuantity() {
 		$propertyId = 'P123';
+		$revision = 4711;
 		$unitItemId = 'Q42';
 		$this->saveItem( $unitItemId );
 		$this->saveProperty( $propertyId );
@@ -64,7 +65,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 			)
 		) );
 
-		$output = $this->newParserOutputGenerator()->getParserOutput( $item );
+		$output = $this->newParserOutputGenerator()->getParserOutput( $item, $revision );
 
 		$this->assertArrayHasKey(
 			$propertyId,
@@ -81,6 +82,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 
 		$output = $parserOutputGenerator->getParserOutput(
 			NewItem::withId( 'Q42' )->build(),
+			4711,
 			true
 		);
 
