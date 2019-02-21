@@ -136,6 +136,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 */
 	public function getParserOutput(
 		EntityDocument $entity,
+		$revision,
 		$generateHtml = true
 	) {
 		$parserOutput = new ParserOutput();
@@ -154,6 +155,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entity,
+				$revision,
 				$this->getEntityInfo( $parserOutput )
 			);
 		} else {
@@ -211,6 +213,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityDocument $entity,
+		$revision,
 		EntityInfo $entityInfo
 	) {
 		$entityView = $this->entityViewFactory->newEntityView(
@@ -224,7 +227,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$titleHtml = $entityView->getTitleHtml( $entity );
 		$parserOutput->setTitleText( $titleHtml );
 
-		$viewContent = $entityView->getContent( $entity );
+		$viewContent = $entityView->getContent( $entity, $revision );
 		$parserOutput->setText( $viewContent->getHtml() );
 
 		$placeholders = $viewContent->getPlaceholders();

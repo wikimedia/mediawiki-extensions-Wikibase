@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
@@ -28,6 +30,8 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 class TermboxViewTest extends TestCase {
 
 	use PHPUnit4And6Compat;
+
+	private $entityRevisionLookup;
 
 	public function testGetHtmlReturnsPlaceholderMarker() {
 		$marker = 'termbox-marker';
@@ -77,12 +81,14 @@ class TermboxViewTest extends TestCase {
 			$textInjector
 		);
 
-		$this->assertContains( $markers, $termbox->getPlaceholders( new Item( new ItemId( 'Q123' ) ), $languageCode ) );
+		$this->assertContains( $markers, $termbox->getPlaceholders( new Item( new ItemId( 'Q123' ) ), 4711, $languageCode ) );
 	}
 
 	public function testPlaceHolderWithMarkupWithClientStringResponse_returnsContent() {
 		$language = 'en';
-		$item = new Item( new ItemId( 'Q42' ) );
+		$itemId = new ItemId( 'Q42' );
+		$item = new Item( $itemId );
+		$revision = 4711;
 		$editLinkUrl = '/edit/Q42';
 		$response = 'termbox says hi';
 
@@ -96,7 +102,7 @@ class TermboxViewTest extends TestCase {
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->with( $item->getId(), $language, $editLinkUrl, $fallbackChain )
+			->with( $item->getId(), $revision, $language, $editLinkUrl, $fallbackChain )
 			->willReturn( $response );
 
 		$placeholders = $this->newTermbox(
@@ -106,6 +112,7 @@ class TermboxViewTest extends TestCase {
 			$fallbackChainFactory
 		)->getPlaceholders(
 			$item,
+			$revision,
 			$language
 		);
 
@@ -118,6 +125,7 @@ class TermboxViewTest extends TestCase {
 	public function testPlaceHolderWithMarkupWithClientThrowingException_returnsNull() {
 		$language = 'en';
 		$item = new Item( new ItemId( 'Q42' ) );
+		$revision = 4711;
 
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
@@ -126,6 +134,7 @@ class TermboxViewTest extends TestCase {
 
 		$placeholders = $this->newTermbox( $renderer, $this->newLocalizedTextProvider(), $this->newSpecialPageLinker() )->getPlaceholders(
 			$item,
+			$revision,
 			$language
 		);
 		$this->assertSame(
