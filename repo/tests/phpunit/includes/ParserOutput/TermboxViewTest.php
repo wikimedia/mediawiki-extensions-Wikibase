@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
@@ -29,6 +31,14 @@ class TermboxViewTest extends TestCase {
 
 	use PHPUnit4And6Compat;
 
+	private $entityRevisionLookup;
+
+	public function setUp() {
+		$this->entityRevisionLookup = $this->newEntityRevisionLookup();
+		$this->entityRevisionLookup->method( 'getEntityRevision' )
+			->willReturn( $this->getMock( EntityRevision::class, [], [], '', false ) );
+	}
+
 	public function testGetHtmlReturnsPlaceholderMarker() {
 		$marker = 'termbox-marker';
 		$textInjector = $this->createMock( TextInjector::class );
@@ -42,7 +52,8 @@ class TermboxViewTest extends TestCase {
 			$this->newTermboxRenderer(),
 			$this->newLocalizedTextProvider(),
 			$this->newSpecialPageLinker(),
-			$textInjector
+			$textInjector,
+			$this->entityRevisionLookup
 		);
 
 		$this->assertSame( $marker, $termbox->getHtml(
@@ -74,7 +85,8 @@ class TermboxViewTest extends TestCase {
 			$this->newTermboxRenderer(),
 			$this->newLocalizedTextProvider(),
 			$this->newSpecialPageLinker(),
-			$textInjector
+			$textInjector,
+			$this->entityRevisionLookup
 		);
 
 		$this->assertContains( $markers, $termbox->getPlaceholders( new Item( new ItemId( 'Q123' ) ), $languageCode ) );
@@ -82,7 +94,9 @@ class TermboxViewTest extends TestCase {
 
 	public function testPlaceHolderWithMarkupWithClientStringResponse_returnsContent() {
 		$language = 'en';
-		$item = new Item( new ItemId( 'Q42' ) );
+		$itemId = new ItemId( 'Q42' );
+		$item = new Item( $itemId );
+		$revision = 4711;
 		$editLinkUrl = '/edit/Q42';
 		$response = 'termbox says hi';
 
@@ -96,8 +110,15 @@ class TermboxViewTest extends TestCase {
 		$renderer = $this->newTermboxRenderer();
 		$renderer->expects( $this->once() )
 			->method( 'getContent' )
-			->with( $item->getId(), $language, $editLinkUrl, $fallbackChain )
+			->with( $item->getId(), $revision, $language, $editLinkUrl, $fallbackChain )
 			->willReturn( $response );
+
+		$this->entityRevisionLookup = $this->newEntityRevisionLookup();
+		$this->entityRevisionLookup
+			->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $itemId )
+			->willReturn( new EntityRevision( $item, $revision ) );
 
 		$placeholders = $this->newTermbox(
 			$renderer,
@@ -181,7 +202,8 @@ class TermboxViewTest extends TestCase {
 			$renderer,
 			$textProvider,
 			$specialPageLinker,
-			$textInjector ?: new TextInjector()
+			$textInjector ?: new TextInjector(),
+			$this->entityRevisionLookup
 		);
 	}
 
@@ -199,6 +221,13 @@ class TermboxViewTest extends TestCase {
 	 */
 	private function newSpecialPageLinker() {
 		return $this->createMock( SpecialPageLinker::class );
+	}
+
+	/**
+	 * @return MockObject|EntityRevisionLookup
+	 */
+	private function newEntityRevisionLookup() {
+		return $this->getMock( EntityRevisionLookup::class );
 	}
 
 }

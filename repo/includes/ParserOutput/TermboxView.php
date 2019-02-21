@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
@@ -27,6 +28,7 @@ class TermboxView implements CacheableEntityTermsView {
 	private $renderer;
 	private $specialPageLinker;
 	private $textInjector;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var LocalizedTextProvider
@@ -38,13 +40,15 @@ class TermboxView implements CacheableEntityTermsView {
 		TermboxRenderer $renderer,
 		LocalizedTextProvider $textProvider,
 		SpecialPageLinker $specialPageLinker,
-		TextInjector $textInjector
+		TextInjector $textInjector,
+		EntityRevisionLookup $entityRevisionLookup
 	) {
 		$this->fallbackChainFactory = $fallbackChainFactory;
 		$this->renderer = $renderer;
 		$this->textProvider = $textProvider;
 		$this->specialPageLinker = $specialPageLinker;
 		$this->textInjector = $textInjector;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 	}
 
 	public function getHtml(
@@ -72,7 +76,10 @@ class TermboxView implements CacheableEntityTermsView {
 	) {
 		return [
 			'wikibase-view-chunks' => $this->textInjector->getMarkers(),
-			self::TERMBOX_MARKUP => $this->renderTermbox( $languageCode, $entity->getId() ),
+			self::TERMBOX_MARKUP => $this->renderTermbox(
+				$languageCode,
+				$entity->getId()
+			),
 		];
 	}
 
@@ -86,6 +93,9 @@ class TermboxView implements CacheableEntityTermsView {
 		try {
 			return $this->renderer->getContent(
 				$entityId,
+				$this->entityRevisionLookup // TODO more efficient way to get to this/latest revision id?
+					->getEntityRevision( $entityId ) // correct for post-save, when only latest revision is relevant
+					->getRevisionId(),
 				$mainLanguageCode,
 				$this->specialPageLinker->getLink(
 					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
