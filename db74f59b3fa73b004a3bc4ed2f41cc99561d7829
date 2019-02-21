@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "195a7f8c_52a8046c",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-02-21T15:38:17Z",
+      "side": 1,
+      "message": "For the sake of future generations let\u0027s not call it BLOB even though we currently know that\u0027s more of a metaphor. CLOB would work for me but for some reason we stopped naming variables by their data type a long time ago so I think we should just lose it.",
+      "range": {
+        "startLine": 24,
+        "startChar": 20,
+        "endLine": 24,
+        "endChar": 39
+      },
+      "revId": "db74f59b3fa73b004a3bc4ed2f41cc99561d7829",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
