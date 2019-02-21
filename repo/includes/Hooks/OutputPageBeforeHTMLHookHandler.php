@@ -251,9 +251,10 @@ class OutputPageBeforeHTMLHookHandler {
 		);
 	}
 
-	private function getExternallyRenderedEntityViewPlaceholderExpander( $out ) {
+	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
-			$this->getExternallyRenderedHtml( $out )
+			$this->getExternallyRenderedHtml( $out ),
+			$out->getRevisionId()
 		);
 	}
 
