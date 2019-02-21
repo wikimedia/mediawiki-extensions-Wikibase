@@ -297,4 +297,31 @@ class FormatSnakValueTest extends ApiTestCase {
 		$this->doApiRequest( $params );
 	}
 
+	public function provideInvalidParameters() {
+		return [
+			[
+				[
+					'action' => 'wbformatvalue',
+					'generate' => SnakFormatter::FORMAT_HTML,
+					'datatype' => 'wikibase-entityid',
+					'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"L1-F1"}}',
+					'datatype' => 'wikibase-lexeme',
+					'options' => json_encode( [ 'lang' => 'qqx' ] )
+				]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider provideInvalidParameters
+	 */
+	public function testApiRequest_reportsApiErrorOnInvalidParameters( $params ) {
+		$this->setExpectedException(
+			ApiUsageException::class,
+			'An illegal set of parameters have been used.'
+		);
+
+		$this->doApiRequest( $params );
+	}
+
 }

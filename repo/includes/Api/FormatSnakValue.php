@@ -99,12 +99,21 @@ class FormatSnakValue extends ApiBase {
 		if ( $snak ) {
 			$snakFormatter = $this->getSnakFormatter();
 			$formattedValue = $snakFormatter->formatSnak( $snak );
-		} elseif ( $valueFormatter instanceof TypedValueFormatter ) {
-			// use data type id, if we can
-			$formattedValue = $valueFormatter->formatValue( $value, $dataTypeId );
 		} else {
-			// rely on value type
-			$formattedValue = $valueFormatter->format( $value );
+			try {
+				if ( $valueFormatter instanceof TypedValueFormatter ) {
+					// use data type id, if we can
+					$formattedValue = $valueFormatter->formatValue( $value, $dataTypeId );
+				} else {
+					// rely on value type
+					$formattedValue = $valueFormatter->format( $value );
+				}
+			} catch ( \InvalidArgumentException $invalidArgumentException ) {
+				$this->errorReporter->dieException(
+					$invalidArgumentException,
+					'param-illegal'
+				);
+			}
 		}
 
 		$this->getResult()->addValue(
