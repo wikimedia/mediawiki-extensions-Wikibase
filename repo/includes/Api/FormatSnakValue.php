@@ -86,25 +86,15 @@ class FormatSnakValue extends ApiBase {
 		$params = $this->extractRequestParams();
 		$this->requireMaxOneParameter( $params, 'property', 'datatype' );
 
-		$value = $this->decodeDataValue( $params['datavalue'] );
-		$dataTypeId = $this->getDataTypeId( $params );
-
-		$valueFormatter = $this->getValueFormatter();
-
-		$snak = null;
-		if ( isset( $params['property'] ) ) {
-			$snak = $this->decodeSnak( $params['property'], $value );
-		}
-
-		if ( $snak ) {
-			$snakFormatter = $this->getSnakFormatter();
-			$formattedValue = $snakFormatter->formatSnak( $snak );
-		} elseif ( $valueFormatter instanceof TypedValueFormatter ) {
-			// use data type id, if we can
-			$formattedValue = $valueFormatter->formatValue( $value, $dataTypeId );
-		} else {
-			// rely on value type
-			$formattedValue = $valueFormatter->format( $value );
+		try {
+			$value = $this->decodeDataValue( $params['datavalue'] );
+			$dataTypeId = $this->getDataTypeId( $params );
+			$formattedValue = $this->formatValue( $params, $value, $dataTypeId );
+		} catch ( \InvalidArgumentException $invalidArgumentException ) {
+			$this->errorReporter->dieException(
+				$invalidArgumentException,
+				'param-illegal'
+			);
 		}
 
 		$this->getResult()->addValue(
@@ -114,13 +104,35 @@ class FormatSnakValue extends ApiBase {
 		);
 	}
 
+	private function formatValue( $params, $value, $dataTypeId ) {
+		$snak = null;
+		if ( isset( $params['property'] ) ) {
+			$snak = $this->decodeSnak( $params['property'], $value );
+		}
+
+		if ( $snak ) {
+			$snakFormatter = $this->getSnakFormatter( $params );
+			$formattedValue = $snakFormatter->formatSnak( $snak );
+		} else {
+			$valueFormatter = $this->getValueFormatter( $params );
+
+			if ( $valueFormatter instanceof TypedValueFormatter ) {
+				// use data type id, if we can
+				$formattedValue = $valueFormatter->formatValue( $value, $dataTypeId );
+			} else {
+				// rely on value type
+				$formattedValue = $valueFormatter->format( $value );
+			}
+		}
+
+		return $formattedValue;
+	}
+
 	/**
 	 * @throws LogicException
 	 * @return ValueFormatter
 	 */
-	private function getValueFormatter() {
-		$params = $this->extractRequestParams();
-
+	private function getValueFormatter( $params ) {
 		$options = $this->getOptionsObject( $params['options'] );
 		$formatter = $this->valueFormatterFactory->getValueFormatter( $params['generate'], $options );
 
@@ -139,9 +151,7 @@ class FormatSnakValue extends ApiBase {
 	 * @throws LogicException
 	 * @return SnakFormatter
 	 */
-	private function getSnakFormatter() {
-		$params = $this->extractRequestParams();
-
+	private function getSnakFormatter( $params ) {
 		$options = $this->getOptionsObject( $params['options'] );
 		$formatter = $this->snakFormatterFactory->getSnakFormatter( $params['generate'], $options );
 
