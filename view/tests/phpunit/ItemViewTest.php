@@ -77,7 +77,7 @@ class ItemViewTest extends EntityViewTestCase {
 		$placeholders = [ 'a' => 'b' ];
 		$itemView = $this->newItemView( $placeholders );
 
-		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ) );
+		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ), 4711 );
 
 		$this->assertSame( $placeholders, $view->getPlaceholders() );
 	}
