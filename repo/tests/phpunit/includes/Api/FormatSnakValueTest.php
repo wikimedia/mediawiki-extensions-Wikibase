@@ -4,16 +4,22 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
 use DataValues\DataValue;
+use DataValues\DataValueFactory;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ApiUsageException;
 use DataValues\UnboundedQuantityValue;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\FormatSnakValue;
 
 /**
  * @covers \Wikibase\Repo\Api\FormatSnakValue
@@ -295,6 +301,58 @@ class FormatSnakValueTest extends ApiTestCase {
 			'The parameters "datatype" and "property" can not be used together.'
 		);
 		$this->doApiRequest( $params );
+	}
+
+	public function testExecute_throwsApiErrorOnFormatFailure() {
+		$valueFormatterMock = $this->getMockBuilder( ValueFormatter::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$valueFormatterMock->method( 'format' )
+			->will( $this->throwException( new \InvalidArgumentException() ) );
+
+		$valueFormatterFactoryMock = $this->getMockBuilder( OutputFormatValueFormatterFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$valueFormatterFactoryMock->method( 'getValueFormatter' )
+			->willReturn( $valueFormatterMock );
+
+		$requestContext = new \RequestContext();
+		$requestContext->setRequest( new \FauxRequest( [
+				'action' => 'wbformatvalue',
+				'generate' => SnakFormatter::FORMAT_HTML,
+				'datatype' => 'wikibase-entityid',
+				'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"L10-F3"}}',
+				'datatype' => 'wikibase-item',
+				'options' => json_encode( [ 'lang' => 'qqx' ] )
+			] ) );
+
+		$apiMain = new \ApiMain( $requestContext );
+
+		$formatSnakValue = new FormatSnakValue(
+			$apiMain,
+			'wbformatvalue',
+			$valueFormatterFactoryMock,
+			$this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
+				->disableOriginalConstructor()
+				->getMock(),
+			$this->getMockBuilder( DataValueFactory::class )
+				->disableOriginalConstructor()
+				->getMock(),
+			// ApiErrorReporter wasn't mocked here as it is the one responsible of throwing the asserted
+			// exception. Mocking is possible but that'll require more configuration of the mock.
+			new ApiErrorReporter(
+				$apiMain,
+				WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
+				\Language::factory( 'en' )
+			)
+		);
+
+		$this->setExpectedException(
+			ApiUsageException::class,
+			'An illegal set of parameters have been used.'
+		);
+
+		$formatSnakValue->execute();
 	}
 
 }
