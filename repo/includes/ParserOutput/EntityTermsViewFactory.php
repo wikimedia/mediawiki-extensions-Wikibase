@@ -101,7 +101,8 @@ class EntityTermsViewFactory {
 			),
 			$textProvider,
 			new RepoSpecialPageLinker(),
-			new TextInjector()
+			new TextInjector(),
+			WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup()
 		);
 	}
 
