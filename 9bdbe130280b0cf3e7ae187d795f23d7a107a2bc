@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2552fc0f_9a217752",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-21T14:48:45Z",
+      "side": 1,
+      "message": "is the word \u0027expected\u0027 missing somewhere in the sentence \u0027an integer namespace index, or a canonical amespace name, or have the form \u003cnamespace\u003e/\u003cslot-name\u003e.\u0027",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec59c02_6faa8509",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-21T14:48:45Z",
+      "side": 1,
+      "message": "Not quite sure what this means. If we are coupling in terms of logic, then coupling in terms of classes is a minor issue. It might be even better in some cases, but don\u0027t know if this is one of them.\n\nI couldn\u0027t grasp the concept of namespace index/name thing here. Would love if I get a quick explanation.",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b514f2d3_e462771b",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-21T14:48:45Z",
+      "side": 1,
+      "message": "We don\u0027t have to support PHP5?",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
