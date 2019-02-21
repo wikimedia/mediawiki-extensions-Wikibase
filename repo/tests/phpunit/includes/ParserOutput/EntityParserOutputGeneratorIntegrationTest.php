@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
@@ -51,6 +52,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 
 	public function testParserOutputContainsLinksForItemsUsedAsQuantity() {
 		$propertyId = 'P123';
+		$revision = 4711;
 		$unitItemId = 'Q42';
 		$this->saveItem( $unitItemId );
 		$this->saveProperty( $propertyId );
@@ -64,7 +66,7 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 			)
 		) );
 
-		$output = $this->newParserOutputGenerator()->getParserOutput( $item );
+		$output = $this->newParserOutputGenerator()->getParserOutput( new EntityRevision( $item, $revision ) );
 
 		$this->assertArrayHasKey(
 			$propertyId,
@@ -80,7 +82,10 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 		$parserOutputGenerator = $this->newParserOutputGenerator();
 
 		$output = $parserOutputGenerator->getParserOutput(
-			NewItem::withId( 'Q42' )->build(),
+			new EntityRevision(
+				NewItem::withId( 'Q42' )->build(),
+				4711
+			),
 			true
 		);
 
