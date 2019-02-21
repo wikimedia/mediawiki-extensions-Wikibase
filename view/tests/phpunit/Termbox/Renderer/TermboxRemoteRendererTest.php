@@ -28,7 +28,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 	/** private */ const SSR_URL = 'https://ssr/termbox';
 
-	public function testGetContentWithEntityIdAndLanguage_returnsRequestResponse() {
+	public function testGetContentWithSaneParameters_returnsRequestResponse() {
 		$content = 'hello from server!';
 
 		$request = $this->newSuccessfulRequest();
@@ -44,6 +44,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			$content,
 			$client->getContent(
 				new ItemId( 'Q42' ),
+				4711,
 				'de',
 				'/edit/Q42',
 				$this->newLanguageFallbackChain()
@@ -51,9 +52,10 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 	}
 
-	public function testGetContentBuildsRequestUrl() {
+	public function testGetContentWithSaneParameters_factorsParametersIntoRequestUrl() {
 		$language = 'de';
 		$itemId = 'Q42';
+		$revision = 4711;
 		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
 		$preferredLanguages = [ 'en', 'fr', 'es' ];
 		$fallbackChain = $this->newLanguageFallbackChain( $preferredLanguages );
@@ -65,6 +67,7 @@ class TermboxRemoteRendererTest extends TestCase {
 				self::SSR_URL
 				. '?' . http_build_query( [
 					'entity' => $itemId,
+					'revision' => $revision,
 					'language' => $language,
 					'editLink' => $editLinkUrl,
 					'preferredLanguages' => "$preferredLanguages[0]|$preferredLanguages[1]|$preferredLanguages[2]",
@@ -76,11 +79,12 @@ class TermboxRemoteRendererTest extends TestCase {
 		( new TermboxRemoteRenderer(
 			$requestFactory,
 			self::SSR_URL
-		) )->getContent( new ItemId( $itemId ), $language, $editLinkUrl, $fallbackChain );
+		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
 	}
 
 	public function testGetContentEncounteringUpstreamException_bubblesRequestException() {
 		$entityId = new ItemId( 'Q42' );
+		$revision = 4711;
 		$language = 'de';
 		$editLinkUrl = '/edit/Q42';
 
@@ -97,7 +101,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
+			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -108,6 +112,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 	public function testGetContentEncounteringServerErrorResponse_throwsException() {
 		$entityId = new ItemId( 'Q42' );
+		$revision = 4711;
 		$language = 'de';
 		$editLinkUrl = '/edit/Q42';
 
@@ -124,7 +129,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
+			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
@@ -134,6 +139,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 	public function testGetContentEncounteringNotFoundResponse_throwsException() {
 		$entityId = new ItemId( 'Q4711' );
+		$revision = 4711;
 		$language = 'de';
 		$editLinkUrl = '/edit/Q4711';
 
@@ -150,7 +156,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		);
 
 		try {
-			$client->getContent( $entityId, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
+			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
