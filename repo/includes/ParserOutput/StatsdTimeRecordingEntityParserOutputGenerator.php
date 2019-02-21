@@ -35,6 +35,7 @@ class StatsdTimeRecordingEntityParserOutputGenerator implements EntityParserOutp
 	 * Creates the parser output for the given entity.
 	 *
 	 * @param EntityDocument $entity
+	 * @param int $revision The revision of the entity to render
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
@@ -42,10 +43,11 @@ class StatsdTimeRecordingEntityParserOutputGenerator implements EntityParserOutp
 	 */
 	public function getParserOutput(
 		EntityDocument $entity,
+		$revision,
 		$generateHtml = true
 	) {
 		$start = microtime( true );
-		$po = $this->inner->getParserOutput( $entity, $generateHtml );
+		$po = $this->inner->getParserOutput( $entity, $revision, $generateHtml );
 		$end = microtime( true );
 
 		$htmlMetricPart = $generateHtml ? 'html' : 'nohtml';
