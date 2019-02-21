@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ⲁϩⲙⲉⲧ"
+			"Ⲁϩⲙⲉⲧ",
+			"Bloomaround"
 		]
 	},
-	"wikibase-edit": "ⲫⲱⲛϩ"
+	"wikibase-edit": "ⲫⲱⲛϩ",
+	"wikibase-add": "ⲧⲟⲩϩⲟ"
 }

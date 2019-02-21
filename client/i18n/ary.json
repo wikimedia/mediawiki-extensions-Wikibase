@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Reda Benkhadra",
-			"Anass Sedrati"
+			"Anass Sedrati",
+			"Meno25"
 		]
 	},
-	"wikibase-editlinks": "عدًل روابط",
+	"wikibase-editlinks": "عدل وصلات",
 	"wikibase-rc-hide-wikidata-hide": "خبي"
 }

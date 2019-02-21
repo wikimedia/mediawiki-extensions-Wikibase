@@ -39,7 +39,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Þú þarft að vera skráð/ur inn",
 	"wikibase-linkitem-not-loggedin": "Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.",
 	"wikibase-linkitem-success-link": "Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn með tenglunum í [$1 samnýtta þekkingargrunninum].",
-	"limitreport-entityaccesscount": "Fjöldi hlaðinna Wikibase eininga",
+	"limitreport-entityaccesscount": "Fjöldi hlaðinna Wikibase-eininga",
 	"wikibase-property-notfound": "Eginleikinn „$1“ fannst ekki.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fela",

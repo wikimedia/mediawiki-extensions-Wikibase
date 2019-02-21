@@ -10,6 +10,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Datuen biltegi elementu batera lotuta",
+	"wikibase-after-page-delete": "Orri honetarako loturak ezabatuta egon beharko luke [$1 elkartutako {{WBREPONAME}} itema] gunetik. Mesedez, egiazta ezazu hala izan dela.",
 	"wikibase-comment-add": "{{WBREPONAME}} elementua sortu da.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementua aldatua",
 	"wikibase-comment-sitelink-add": "Hizkuntza loturak gehituak:$1",

@@ -185,7 +185,7 @@
 	"wikibase-itemdisambiguation-lookup-label": "التسمية:",
 	"wikibase-itemdisambiguation-submit": "بحث",
 	"wikibase-itemdisambiguation-form-hints": "لاحظ أنه لا أكثر من $1 {{PLURAL:$1|نتيجة|نتائج}} سيتم عرضها.",
-	"wikibase-itemdisambiguation-nothing-found": "عذراً، لم تم العثور على أي بند بهذه التسمية.",
+	"wikibase-itemdisambiguation-nothing-found": "عذرا، لم يتم العثور على أي عنصر بهذه التسمية.",
 	"wikibase-itemdisambiguation-search": "يمكنك  [$1 البحث عن هذا العنصر].",
 	"wikibase-itemdisambiguation-create": "يمكنك [$1 إنشاء العنصر].",
 	"wikibase-itemdisambiguation-invalid-langcode": "رمز اللغة الذي قدمته يجهله النظام. الرجاء استخدام رمز لغة معروف للنظام، مثل «en».",

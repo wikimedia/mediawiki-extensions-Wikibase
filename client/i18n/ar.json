@@ -31,10 +31,10 @@
 	"wikibase-after-page-delete": "ينبغي أن تكون الوصلة إلى هذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط] قد أزيلت. نطلب منك التحقق من حدوث هذا.",
 	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
-	"wikibase-comment-remove": "تم حذف بند {{WBREPONAME}} المرتبطة. و تم إزالة ارتباطات اللغة.",
+	"wikibase-comment-remove": "تم حذف عنصر {{WBREPONAME}} المرتبط. تمت إزالة وصلات اللغة.",
 	"wikibase-comment-linked": "تم ربط عنصر {{WBREPONAME}} مع هذه الصفحة.",
-	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من بند {{WBREPONAME}}. تم إزالة روابط اللغة.",
-	"wikibase-comment-restore": "تم استرجاع بند {{WBREPONAME}} المرتبط. روابط اللغة أعيدت.",
+	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. تمت إزالة وصلات اللغة.",
+	"wikibase-comment-restore": "تم استرجاع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
 	"wikibase-comment-sitelink-add": "وصلة اللغة المُضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
@@ -43,7 +43,7 @@
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-editlinkstitle": "تحرير الروابط ما بين اللغات",
-	"wikibase-addlinkstitle": "إضافة روابط بين اللغات",
+	"wikibase-addlinkstitle": "إضافة وصلات بين اللغات",
 	"wikibase-linkitem-addlinks": "أضف وصلات",
 	"wikibase-linkitem-alreadylinked": "هذه الصفحة التي تريد ربطها مرتبطة بالفعل ب[$1 مادة] في المستودع المركزي للبيانات والتي يرتبط ب$2 على هذا الموقع. بإمكان المواد إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.",
 	"wikibase-linkitem-close": "أغلق مربع الحوار وأعد تحميل الصفحة",
@@ -126,5 +126,5 @@
 	"unresolved-property-category": "الصفحات بخصائص غير محلولة",
 	"unresolved-property-category-desc": "هذا التصنيف يعرض الصفحات التي تستخدم خصائص {{WBREPONAME}} التي لا يمكن إيجادها بواسطة رقم الخاصية ولا بواسطة العلامة الخاصة بها.",
 	"connected-redirect-category": "تحويلات متصلة بعنصر {{WBREPONAME}}",
-	"connected-redirect-category-desc": "تسرد هذه الفئة صفحات إعادة التوجيه المرتبطة ب {{WBREPONAME}} بند"
+	"connected-redirect-category-desc": "هذا التصنيف يعرض صفحات التحويل المرتبطة بعنصر {{WBREPONAME}}."
 }
