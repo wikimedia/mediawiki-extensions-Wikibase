@@ -69,24 +69,35 @@ class TermboxView implements CacheableEntityTermsView {
 	 */
 	public function getPlaceholders(
 		EntityDocument $entity,
+		$revision,
 		$languageCode
 	) {
 		return [
 			'wikibase-view-chunks' => $this->textInjector->getMarkers(),
-			self::TERMBOX_MARKUP => $this->renderTermbox( $languageCode, $entity->getId() ),
+			self::TERMBOX_MARKUP => $this->renderTermbox(
+				$entity->getId(),
+				$revision,
+				$languageCode
+			),
 		];
 	}
 
 	/**
-	 * @param string $mainLanguageCode
 	 * @param EntityId $entityId
+	 * @param int $revision
+	 * @param string $mainLanguageCode
 	 *
 	 * @return string|null
 	 */
-	private function renderTermbox( $mainLanguageCode, EntityId $entityId ) {
+	private function renderTermbox( EntityId $entityId, $revision, $mainLanguageCode ) {
+		if ( $revision === null ) {
+			return ViewPlaceHolderEmitter::ERRONEOUS_PLACEHOLDER_VALUE;
+		}
+
 		try {
 			return $this->renderer->getContent(
 				$entityId,
+				$revision,
 				$mainLanguageCode,
 				$this->specialPageLinker->getLink(
 					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
