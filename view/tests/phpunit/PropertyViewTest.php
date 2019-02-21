@@ -91,7 +91,7 @@ class PropertyViewTest extends EntityViewTestCase {
 		$placeholders = [ 'a' => 'b' ];
 		$itemView = $this->newPropertyView( $placeholders );
 
-		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ) );
+		$view = $itemView->getContent( $this->makeEntity( $this->makeEntityId( 42 ) ), 4711 );
 
 		$this->assertSame( $placeholders, $view->getPlaceholders() );
 	}

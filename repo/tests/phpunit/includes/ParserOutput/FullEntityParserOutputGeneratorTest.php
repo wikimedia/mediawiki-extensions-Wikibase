@@ -25,6 +25,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
@@ -110,7 +111,9 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->entityViewFactory = $this->mockEntityViewFactory( true );
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( $titleText );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entity );
+		$entityRevision = new EntityRevision( $entity, 4711 );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entityRevision );
 
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
@@ -183,7 +186,9 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$item = $this->newItem();
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item, false );
+		$entityRevision = new EntityRevision( $item, 4711 );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entityRevision, false );
 
 		$this->assertSame( '', $parserOutput->getText() );
 		// ParserOutput without HTML must not end up in the cache.
@@ -206,8 +211,10 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->method( 'newEntityView' )
 			->willReturn( $entityView );
 
+		$entityRevision = new EntityRevision( new Item( new ItemId( 'Q42' ) ), 4711 );
+
 		$parserOutput = $this->newEntityParserOutputGenerator()
-			->getParserOutput( new Item( new ItemId( 'Q42' ) ), true );
+			->getParserOutput( $entityRevision, true );
 
 		$this->assertFalse( $parserOutput->isCacheable() );
 	}
@@ -219,7 +226,9 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setDescription( 'en', 'a kitten' );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
+		$entityRevision = new EntityRevision( $item, 4711 );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $entityRevision );
 
 		$this->assertSame(
 			[
@@ -464,13 +473,14 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$user = $this->getTestUser()->getUser();
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, 'test item', $user );
+		$revision = $store->saveEntity( $item, 'test item', $user );
 		$store->saveEntity( $redirectSource, 'test item', $user );
 		$store->saveEntity( $redirectTarget, 'test item', $user );
 		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
 
 		$entityParserOutputGenerator = $this->getGeneratorForRedirectTest();
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 
 		$foo = $parserOutput->getText();
 

@@ -4,6 +4,8 @@ namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use OutputPage;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
@@ -31,13 +33,16 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 
 	private $languageFallbackChainFactory;
 
+	private $revisionIdReader;
+
 	public function __construct(
 		OutputPage $outputPage,
 		TermboxRequestInspector $requestInspector,
 		TermboxRenderer $termboxRenderer,
 		OutputPageEntityIdReader $entityIdReader,
 		RepoSpecialPageLinker $specialPageLinker,
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		OutputPageRevisionIdReader $revisionIdReader
 	) {
 		$this->outputPage = $outputPage;
 		$this->requestInspector = $requestInspector;
@@ -45,6 +50,7 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		$this->entityIdReader = $entityIdReader;
 		$this->specialPageLinker = $specialPageLinker;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->revisionIdReader = $revisionIdReader;
 	}
 
 	public function getHtmlForPlaceholder( $name ) {
@@ -65,10 +71,17 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 	 * @return string|null
 	 */
 	private function rerenderTermbox() {
+		$revision = $this->revisionIdReader->getRevisionFromOutputPage( $this->outputPage );
+
+		if ( $revision === EntityRevision::UNSAVED_REVISION ) {
+			return null;
+		}
+
 		try {
 			$entityId = $this->entityIdReader->getEntityIdFromOutputPage( $this->outputPage );
 			return $this->termboxRenderer->getContent(
 				$entityId,
+				$revision,
 				$this->outputPage->getLanguage()->getCode(),
 				$this->specialPageLinker->getLink(
 					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,

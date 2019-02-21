@@ -128,6 +128,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 
 	public function getPlaceholders(
 		EntityDocument $entity,
+		$revision,
 		$languageCode
 	) {
 		return [
