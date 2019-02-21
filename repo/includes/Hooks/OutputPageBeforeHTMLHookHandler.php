@@ -15,6 +15,7 @@ use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
+use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
@@ -306,7 +307,8 @@ class OutputPageBeforeHTMLHookHandler {
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),
-			$languageFallbackChainFactory
+			$languageFallbackChainFactory,
+			new OutputPageRevisionIdReader()
 		);
 	}
 
