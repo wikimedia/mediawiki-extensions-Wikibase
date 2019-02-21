@@ -94,13 +94,14 @@ class ItemView extends EntityView {
 	 * Builds and returns the main content representing a whole WikibaseEntity
 	 *
 	 * @param EntityDocument $entity the entity to render
+	 * @param int $revision The revision of the entity to render
 	 *
 	 * @return ViewContent
 	 */
-	public function getContent( EntityDocument $entity ): ViewContent {
+	public function getContent( EntityDocument $entity, $revision ): ViewContent {
 		return new ViewContent(
 			$this->renderEntityView( $entity ),
-			$this->entityTermsView->getPlaceholders( $entity, $this->languageCode )
+			$this->entityTermsView->getPlaceholders( $entity, $revision, $this->languageCode )
 		);
 	}
 

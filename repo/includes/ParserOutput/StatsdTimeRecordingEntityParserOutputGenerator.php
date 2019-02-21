@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use InvalidArgumentException;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use ParserOutput;
-use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\Store\EntityRevision;
 
 /**
  * @license GPL-2.0-or-later
@@ -34,23 +34,23 @@ class StatsdTimeRecordingEntityParserOutputGenerator implements EntityParserOutp
 	/**
 	 * Creates the parser output for the given entity.
 	 *
-	 * @param EntityDocument $entity
+	 * @param EntityRevision $entityRevision
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
-		EntityDocument $entity,
+		EntityRevision $entityRevision,
 		$generateHtml = true
 	) {
 		$start = microtime( true );
-		$po = $this->inner->getParserOutput( $entity, $generateHtml );
+		$po = $this->inner->getParserOutput( $entityRevision, $generateHtml );
 		$end = microtime( true );
 
 		$htmlMetricPart = $generateHtml ? 'html' : 'nohtml';
 		$this->stats->timing(
-			"{$this->timingPrefix}.getParserOutput.{$htmlMetricPart}.{$entity->getType()}",
+			"{$this->timingPrefix}.getParserOutput.{$htmlMetricPart}.{$entityRevision->getEntity()->getType()}",
 			( $end - $start ) * 1000
 		);
 
