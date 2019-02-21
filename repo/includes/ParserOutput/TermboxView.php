@@ -2,11 +2,14 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use OutputPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
@@ -72,20 +75,29 @@ class TermboxView implements CacheableEntityTermsView {
 	) {
 		return [
 			'wikibase-view-chunks' => $this->textInjector->getMarkers(),
-			self::TERMBOX_MARKUP => $this->renderTermbox( $languageCode, $entity->getId() ),
+			self::TERMBOX_MARKUP => $this->renderTermbox(
+				$languageCode,
+				$entity->getId(),
+				WikibaseRepo::getDefaultInstance()
+					->getEntityRevisionLookup()
+					->getEntityRevision( $entity->getId() )
+					->getRevisionId() // TODO this is wrong (latest revision). How to get to current one (OutputPage)?
+			),
 		];
 	}
 
 	/**
 	 * @param string $mainLanguageCode
 	 * @param EntityId $entityId
+	 * @param integer $revision
 	 *
 	 * @return string|null
 	 */
-	private function renderTermbox( $mainLanguageCode, EntityId $entityId ) {
+	private function renderTermbox( $mainLanguageCode, EntityId $entityId, $revision ) {
 		try {
 			return $this->renderer->getContent(
 				$entityId,
+				$revision,
 				$mainLanguageCode,
 				$this->specialPageLinker->getLink(
 					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,
