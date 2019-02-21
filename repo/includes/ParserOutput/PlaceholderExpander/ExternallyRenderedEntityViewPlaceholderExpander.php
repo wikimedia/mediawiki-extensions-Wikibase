@@ -69,6 +69,7 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 			$entityId = $this->entityIdReader->getEntityIdFromOutputPage( $this->outputPage );
 			return $this->termboxRenderer->getContent(
 				$entityId,
+				$this->outputPage->getRevisionId(),
 				$this->outputPage->getLanguage()->getCode(),
 				$this->specialPageLinker->getLink(
 					EntityTermsView::TERMS_EDIT_SPECIAL_PAGE,

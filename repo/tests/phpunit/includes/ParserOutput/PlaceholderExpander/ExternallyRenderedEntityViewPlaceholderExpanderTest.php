@@ -98,9 +98,14 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$html = '<div>html coming from SSR service</div>';
 
 		$language = 'en';
+		$revision = 4711;
 		$this->outputPage->expects( $this->once() )
 			->method( 'getLanguage' )
 			->willReturn( Language::factory( $language ) );
+
+		$this->outputPage->expects( $this->once() )
+			->method( 'getRevisionId' )
+			->willReturn( $revision );
 
 		$entityId = new ItemId( 'Q123' );
 		$this->entityIdReader = $this->newEntityIdReaderReturningEntityId( $entityId );
@@ -121,6 +126,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			->method( 'getContent' )
 			->with(
 				$entityId,
+				$revision,
 				$language,
 				$editPageLink,
 				$languageFallbackChain
