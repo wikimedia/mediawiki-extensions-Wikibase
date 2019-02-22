@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "27a8126b_40588229",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-02-22T02:56:45Z",
+      "side": 1,
+      "message": "MediaWiki handles namespaces as an index internally. The name of the namespace is the bit before the : in Talk:Example_Page. That name can be changed and internationalized if I recall correctly. Why the code can get both an integer and a NS name here I have no idea.",
+      "parentUuid": "6ec59c02_6faa8509",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b514f2d3_e462771b",
         "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
         "patchSetId": 7
