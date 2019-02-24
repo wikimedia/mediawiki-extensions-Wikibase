@@ -13,15 +13,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'jquery.util.EventSingletonManager' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.util.EventSingletonManager.js',
-			],
-			'dependencies' => [
-				'jquery.throttle-debounce',
-			],
-		],
-
 		'jquery.ui.closeable' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/ui/jquery.ui.closeable.js',
@@ -120,45 +111,63 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.snaklistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.snaklistview.js',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.wikibase.listview',
-				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.SnakList',
-			],
-		],
-
 		'jquery.wikibase.statementview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/snakview/snakview.variations.js',
+				'jquery/wikibase/snakview/snakview.variations.Variation.js',
+				'jquery/wikibase/snakview/snakview.variations.NoValue.js',
+				'jquery/wikibase/snakview/snakview.variations.SomeValue.js',
+				'jquery/wikibase/snakview/snakview.variations.Value.js',
+				'jquery/wikibase/snakview/snakview.ViewState.js',
+				'jquery/wikibase/snakview/snakview.js',
+				'jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
+				'jquery/wikibase/jquery.wikibase.snaklistview.js',
 				'jquery/wikibase/jquery.wikibase.statementview.js',
 				'jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
 			],
+			'styles' => [
+				'jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
+			],
 			'dependencies' => [
+				'jquery.event.special.eachchange',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.position',
 				'jquery.ui.toggler',
 				'util.inherit',
+				'jquery.wikibase.entityselector',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
-				'jquery.wikibase.snakview',
-				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.statementview.RankSelector.styles',
+				'wikibase.datamodel',
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
 				'wikibase.datamodel.Statement',
+				'wikibase.serialization.SnakDeserializer',
+				'wikibase.serialization.SnakSerializer',
 				'wikibase.utilities',
+				'dataValues',
+				'dataValues.DataValue', // For snakview
+				'mediawiki.legacy.shared', // For snakview
+				'mw.config.values.wbRepo',
 			],
 			'messages' => [
 				'wikibase-addqualifier',
 				'wikibase-addreference',
 				'wikibase-claimview-snak-tooltip',
 				'wikibase-claimview-snak-new-tooltip',
+				'wikibase-snakview-property-input-placeholder',
+				'wikibase-snakview-choosesnaktype',
+				'wikibase-snakview-snaktypeselector-value',
+				'wikibase-snakview-snaktypeselector-somevalue',
+				'wikibase-snakview-snaktypeselector-novalue',
+				'wikibase-snakview-variation-datavaluetypemismatch',
+				'wikibase-snakview-variation-datavaluetypemismatch-details',
+				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-variations-somevalue-label',
 				'wikibase-statementview-rank-preferred',
 				'wikibase-statementview-rank-tooltip-preferred',
 				'wikibase-statementview-rank-normal',
@@ -174,48 +183,6 @@ return call_user_func( function() {
 				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'jquery.wikibase.snakview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/snakview/snakview.variations.js',
-				'jquery/wikibase/snakview/snakview.variations.Variation.js',
-				'jquery/wikibase/snakview/snakview.variations.NoValue.js',
-				'jquery/wikibase/snakview/snakview.variations.SomeValue.js',
-				'jquery/wikibase/snakview/snakview.variations.Value.js',
-				'jquery/wikibase/snakview/snakview.ViewState.js',
-				'jquery/wikibase/snakview/snakview.js',
-				'jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
-			],
-			'styles' => [
-				'jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'jquery.event.special.eachchange',
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.ui.position',
-				'jquery.wikibase.entityselector',
-				'mediawiki.legacy.shared',
-				'mw.config.values.wbRepo',
-				'wikibase.datamodel',
-				'wikibase.serialization.SnakDeserializer',
-				'wikibase.serialization.SnakSerializer',
-				'dataValues',
-				'util.inherit',
-			],
-			'messages' => [
-				'wikibase-snakview-property-input-placeholder',
-				'wikibase-snakview-choosesnaktype',
-				'wikibase-snakview-snaktypeselector-value',
-				'wikibase-snakview-snaktypeselector-somevalue',
-				'wikibase-snakview-snaktypeselector-novalue',
-				'wikibase-snakview-variation-datavaluetypemismatch',
-				'wikibase-snakview-variation-datavaluetypemismatch-details',
-				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
-				'wikibase-snakview-variations-novalue-label',
-				'wikibase-snakview-variations-somevalue-label',
-			],
 		],
 
 		'jquery.wikibase.addtoolbar' => $moduleTemplate + [
@@ -713,6 +680,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/jquery.util.EventSingletonManager.js',
 				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
 				'jquery/wikibase/jquery.wikibase.badgeselector.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkview.js',
@@ -762,10 +730,10 @@ return call_user_func( function() {
 				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 				'jquery.ui.toggler',
-				'jquery.util.EventSingletonManager',
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
+				'jquery.throttle-debounce',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.siteselector',
