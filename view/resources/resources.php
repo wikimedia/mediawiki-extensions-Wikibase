@@ -13,15 +13,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'jquery.util.EventSingletonManager' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.util.EventSingletonManager.js',
-			],
-			'dependencies' => [
-				'jquery.throttle-debounce',
-			],
-		],
-
 		'jquery.ui.closeable' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/ui/jquery.ui.closeable.js',
@@ -120,20 +111,9 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.snaklistview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.snaklistview.js',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.wikibase.listview',
-				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.SnakList',
-			],
-		],
-
 		'jquery.wikibase.statementview' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.snaklistview.js',
 				'jquery/wikibase/jquery.wikibase.statementview.js',
 				'jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
 			],
@@ -146,10 +126,10 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.snakview',
-				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.statementview.RankSelector.styles',
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
 				'wikibase.datamodel.Statement',
 				'wikibase.utilities',
@@ -713,6 +693,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/jquery.util.EventSingletonManager.js',
 				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
 				'jquery/wikibase/jquery.wikibase.badgeselector.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkview.js',
@@ -762,10 +743,10 @@ return call_user_func( function() {
 				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 				'jquery.ui.toggler',
-				'jquery.util.EventSingletonManager',
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
+				'jquery.throttle-debounce',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.siteselector',
