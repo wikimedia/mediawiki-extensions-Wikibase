@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a34e607e_67dd931f",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-02-25T17:36:25Z",
+      "side": 1,
+      "message": "This reads so much better!",
+      "revId": "8379bf3b1f6fce46a1c59538a972618b755d7446",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
