@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc2c1d04_6ebeab78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-25T22:53:33Z",
+      "side": 1,
+      "message": "Typo?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8361de0_7d789b97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-25T22:53:33Z",
+      "side": 1,
+      "message": "This is 100 characters. Subject line of commit messages is better to be less than 80 characters: https://www.mediawiki.org/wiki/Gerrit/Commit_message_guidelines#Structure",
+      "range": {
+        "startLine": 7,
+        "startChar": 80,
+        "endLine": 7,
+        "endChar": 99
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "000fc46f_02aa60c5",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-25T22:53:33Z",
+      "side": 1,
+      "message": "Awesome, I love making methods smaller!",
+      "range": {
+        "startLine": 92,
+        "startChar": 21,
+        "endLine": 92,
+        "endChar": 39
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06d887e5_f944f342",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-25T22:53:33Z",
+      "side": 1,
+      "message": "You can import this.",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 37
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24bf4859_55be1fa2",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-25T22:53:33Z",
+      "side": 1,
+      "message": "While moving the code, you changed the logic here. Is it intentional?",
+      "range": {
+        "startLine": 122,
+        "startChar": 3,
+        "endLine": 122,
+        "endChar": 11
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
