@@ -6,7 +6,8 @@
 			"Macofe",
 			"Conquistador",
 			"Srdjan m",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Vlad5250"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
@@ -133,5 +134,10 @@
 	"wikibase-noentity-createone": "Također možete [[$1|možete stvoriti novi]].",
 	"content-model-wikibase-item": "Wikibazina stavka",
 	"content-model-wikibase-property": "Wikibazino polje",
-	"content-model-wikibase-query": "Wikibazin upit"
+	"content-model-wikibase-query": "Wikibazin upit",
+	"right-item-term": "Mijenjanje uslova predmeta (natpisi, opisi, istoznačnice)",
+	"right-item-merge": "Spajanje predmeta",
+	"right-item-redirect": "Pravljenje preusmjerenja predmeta",
+	"right-property-term": "Mijenjanje uslova svojstava (natpisi, opisi, istoznačnice)",
+	"right-property-create": "Pravljenje svojstava"
 }

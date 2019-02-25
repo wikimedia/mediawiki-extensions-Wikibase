@@ -7,7 +7,8 @@
 			"Macofe",
 			"Jon Harald Søby",
 			"Njardarlogar",
-			"Kjetil r"
+			"Kjetil r",
+			"Kingu"
 		]
 	},
 	"wikibase-desc": "Tjenertutvidelse for Wikibase, det strukturerte datalageret",
@@ -117,7 +118,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Jeg godtar disse vilkårene for mine fremtidige redigeringer. Ikke vis denne meldingen igjen.",
 	"wikibase-entityselector-more": "mer",
 	"wikibase-entityselector-notfound": "Ingen treff funnet",
-	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke innlogga.\nIP-adressen din vil bli lagret i redigeringshistorikken.",
+	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke innlogga. in [https://en.wikipedia.org/wiki/IP_address IP-adresse] vil bli lagret i redigeringshistorikken hvis du gjør endringer. Hvis du <strong>[[Special:UserLogin|logger inn]]</strong> eller <strong>[[Special:CreateAccount|oppretter en konto]]</strong>, vil endringene dine tilskrives et brukernavn, sammen med andre gunstige fordeler.",
 	"wikibase-move-error": "Du kan ikke flytte sider som er i et datanavnerom, og du kan ikke flytte sider inn i ett.",
 	"wikibase-validator-sitelink-conflict": "Lenken $1 er allerede i bruk av elementet $2. Du kan fjerne den fra $2 hvis den ikke hører hjemme der, eller flette elementene hvis de omhandler samme tema.",
 	"wikibase-validator-label-conflict": "Egenskapen $3 har allerede etiketten «$1» knyttet til språkkoden $2.",

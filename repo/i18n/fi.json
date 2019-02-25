@@ -190,6 +190,7 @@
 	"wikibase-setaliases-label": "Aliakset",
 	"wikibase-setaliases-submit": "Aseta aliakset",
 	"special-setlabeldescriptionaliases": "Aseta nimi, kuvaus ja aliaksia",
+	"wikibase-setlabeldescriptionaliases-introfull": "Olet asettamassa nimeä, kuvausta ja aliaksia kohteelle [[:$1]] kielellä $2. Useat aliakset erotetaan pystyviivalla (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Nimi:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Kuvaus:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliakset:",
