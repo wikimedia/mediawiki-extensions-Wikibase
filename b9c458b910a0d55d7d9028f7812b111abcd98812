@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4faebde2_6fb5f010",
+        "filename": "repo/tests/phpunit/includes/Api/FormatSnakValueTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-25T09:26:30Z",
+      "side": 1,
+      "message": "Note for my future self.\nThis patch was kept here so that I can come back and refer to it later, as it forms a great example how the singleton used in WikibaseRepo makes certain cases more difficult to test (esp. API/Request tests).",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 30
+      },
+      "revId": "b9c458b910a0d55d7d9028f7812b111abcd98812",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
