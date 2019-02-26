@@ -114,7 +114,8 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
-			new RdfVocabulary( [ '' => self::URI_BASE ], self::URI_DATA )
+			new RdfVocabulary( [ '' => self::URI_BASE ], self::URI_DATA ),
+			true
 		);
 
 		return $service;
@@ -144,6 +145,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'end' => '!\}\s*$!s',
 					'label' => '!"value"\s*:\s*"Label42"!s',
 					'item-ref' => '!"numeric-id":2233!s',
+					'empty-description' => '/"descriptions"\:\{\}/',
 				],
 				[],
 				'application/json', // expected mime
