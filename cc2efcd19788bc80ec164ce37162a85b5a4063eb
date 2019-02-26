@@ -162,6 +162,30 @@
       "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e627e3_6304b754",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-26T11:49:13Z",
+      "side": 1,
+      "message": "The elseif bit is turned to a nested if. It\u0027s not logic change (my bad, sorry). but it would increase indentation of the code (code smell)",
+      "parentUuid": "53b5c05f_0e01f6a2",
+      "range": {
+        "startLine": 122,
+        "startChar": 3,
+        "endLine": 122,
+        "endChar": 11
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
