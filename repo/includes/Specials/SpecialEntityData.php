@@ -92,7 +92,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getCompactBaseDataModelSerializerFactory(),
 			$wikibaseRepo->getCompactEntitySerializer(),
 			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getRdfVocabulary()
+			$wikibaseRepo->getRdfVocabulary(),
+			$wikibaseRepo->getSettings()->getSetting( 'tmpSerializeEmptyContainersProperly' )
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );
