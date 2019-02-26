@@ -210,6 +210,30 @@
       "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "951e3396_cd0f5bd7",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-26T12:15:24Z",
+      "side": 1,
+      "message": "A extremely cleaner version is to separate formatter with snakformatter from formatting a value in two separate functions.. which I did then reverted as it felt too many methods. If you vote for it, I would be more inclined to make that change again.",
+      "parentUuid": "6f56fbe6_82cfe3cc",
+      "range": {
+        "startLine": 122,
+        "startChar": 3,
+        "endLine": 122,
+        "endChar": 11
+      },
+      "revId": "cc2efcd19788bc80ec164ce37162a85b5a4063eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
