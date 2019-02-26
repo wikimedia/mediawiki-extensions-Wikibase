@@ -11,7 +11,7 @@ CREATE TABLE /*_*/wb_terms_tmp (
 ) /*$wgDBTableOptions*/;
 
 INSERT INTO /*_*/wb_terms_tmp( term_entity_id, term_entity_type, term_language, term_type, term_text, term_search_key )
-  SELECT term_entity_id, term_entity_type, term_language, term_type, term_text, term_text FROM wb_terms;
+  SELECT term_entity_id, term_entity_type, term_language, term_type, term_text, term_text FROM /*_*/wb_terms;
 
 DROP TABLE /*_*/wb_terms;
 

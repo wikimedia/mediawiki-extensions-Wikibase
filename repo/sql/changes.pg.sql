@@ -7,7 +7,7 @@ BEGIN;
 CREATE SEQUENCE wb_changes_change_id_seq;
 
 -- Change feed.
-CREATE TABLE wb_changes (
+CREATE TABLE /*_*/wb_changes (
   change_id                  INTEGER             NOT NULL PRIMARY KEY DEFAULT nextval('wb_changes_change_id_seq'), -- Id of change
   change_type                TEXT                NOT NULL, -- Type of the change
   change_time                TIMESTAMPTZ         NOT NULL, -- Time the change was made
@@ -17,10 +17,10 @@ CREATE TABLE wb_changes (
   change_info                TEXT                NOT NULL -- Holds additional info about the change, inc diff and stuff
 );
 
-CREATE INDEX /*i*/wb_changes_change_type ON wb_changes (change_type);
-CREATE INDEX /*i*/wb_changes_change_time ON wb_changes (change_time);
-CREATE INDEX /*i*/wb_changes_change_object_id ON wb_changes (change_object_id);
-CREATE INDEX /*i*/wb_changes_change_user_id ON wb_changes (change_user_id);
-CREATE INDEX /*i*/wb_changes_change_revision_id ON wb_changes (change_revision_id);
+CREATE INDEX /*i*/wb_changes_change_type ON /*_*/wb_changes (change_type);
+CREATE INDEX /*i*/wb_changes_change_time ON /*_*/wb_changes (change_time);
+CREATE INDEX /*i*/wb_changes_change_object_id ON /*_*/wb_changes (change_object_id);
+CREATE INDEX /*i*/wb_changes_change_user_id ON /*_*/wb_changes (change_user_id);
+CREATE INDEX /*i*/wb_changes_change_revision_id ON /*_*/wb_changes (change_revision_id);
 
 COMMIT;
