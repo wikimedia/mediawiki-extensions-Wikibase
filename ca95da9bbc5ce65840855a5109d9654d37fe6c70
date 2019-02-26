@@ -16,6 +16,24 @@
       "revId": "ca95da9bbc5ce65840855a5109d9654d37fe6c70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30adc9ef_0131b342",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-02-26T11:41:25Z",
+      "side": 1,
+      "message": "but \"lexem\" is wrong and need an extra character :P",
+      "parentUuid": "8fa2b1c0_f18cdd03",
+      "revId": "ca95da9bbc5ce65840855a5109d9654d37fe6c70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
