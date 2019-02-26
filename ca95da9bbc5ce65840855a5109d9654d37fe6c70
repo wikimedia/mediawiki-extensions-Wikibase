@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fa2b1c0_f18cdd03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-02-26T11:30:38Z",
+      "side": 1,
+      "message": "It is exactly 80 now :)",
+      "revId": "ca95da9bbc5ce65840855a5109d9654d37fe6c70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
