@@ -106,6 +106,11 @@ class EntityDataSerializationService {
 	 */
 	private $entityRdfBuilderFactory;
 
+	/**
+	 * @var bool Whether to serialize empty containers (e.g. descriptions) as {} instead of []
+	 */
+	private $serializeEmptyListsAsObjects;
+
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
@@ -117,7 +122,8 @@ class EntityDataSerializationService {
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
-		RdfVocabulary $rdfVocabulary
+		RdfVocabulary $rdfVocabulary,
+		$serializeEmptyListsAsObjects = false
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -130,6 +136,7 @@ class EntityDataSerializationService {
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
 		$this->rdfVocabulary = $rdfVocabulary;
+		$this->serializeEmptyListsAsObjects = $serializeEmptyListsAsObjects;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -399,6 +406,9 @@ class EntityDataSerializationService {
 		// function gets called multiple times during testing, etc.
 		$res->reset();
 
+		// Translating $this->serializeEmptyListsAsObjects to addMetadata
+		// This is a hack to put hidden elements into containers to let json serializer know it's an associative array
+		// so it would output {} instead of [] in case of empty containers
 		$resultBuilder = new ResultBuilder(
 			$res,
 			$this->entityTitleLookup,
@@ -406,7 +416,7 @@ class EntityDataSerializationService {
 			$this->entitySerializer,
 			$this->siteLookup,
 			$this->propertyLookup,
-			false // Never add meta data for this service
+			$this->serializeEmptyListsAsObjects
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision );
 
