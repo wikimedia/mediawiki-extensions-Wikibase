@@ -16,6 +16,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 interface ViewPlaceHolderEmitter {
 
+	const ERRONEOUS_PLACEHOLDER_VALUE = null;
+
 	public function getPlaceholders(
 		EntityDocument $entity,
 		$languageCode

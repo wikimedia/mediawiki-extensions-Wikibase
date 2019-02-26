@@ -13,6 +13,7 @@ use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
+use Wikibase\View\ViewPlaceHolderEmitter;
 
 /**
  * @license GPL-2.0-or-later
@@ -95,7 +96,7 @@ class TermboxView implements CacheableEntityTermsView {
 			);
 		} catch ( TermboxRenderingException $exception ) {
 			// TODO Log
-			return null;
+			return ViewPlaceHolderEmitter::ERRONEOUS_PLACEHOLDER_VALUE;
 		}
 	}
 
