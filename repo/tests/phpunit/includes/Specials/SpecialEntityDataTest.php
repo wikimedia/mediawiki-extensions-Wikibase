@@ -97,7 +97,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
-			new RdfVocabulary( [ '' => self::URI_BASE ], self::URI_DATA )
+			new RdfVocabulary( [ '' => self::URI_BASE ], self::URI_DATA ),
+			true
 		);
 
 		$formats = [ 'json', 'rdfxml', 'ntriples' ];
