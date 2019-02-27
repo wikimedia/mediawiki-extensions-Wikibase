@@ -185,53 +185,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'jquery.wikibase.addtoolbar' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.singlebuttontoolbar',
-			],
-			'messages' => [
-				'wikibase-add',
-			],
-		],
-
-		'jquery.wikibase.edittoolbar' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
-			],
-			'styles' => [
-				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
-			],
-			'dependencies' => [
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbutton',
-				'jquery.wikibase.wbtooltip',
-				'wikibase.api.RepoApiError',
-			],
-			'messages' => [
-				'wikibase-cancel',
-				'wikibase-edit',
-				'wikibase-remove',
-				'wikibase-remove-inprogress',
-				'wikibase-save',
-				'wikibase-publish',
-			],
-		],
-
-		'jquery.wikibase.removetoolbar' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.singlebuttontoolbar',
-			],
-			'messages' => [
-				'wikibase-remove',
-			],
-		],
-
 		'jquery.wikibase.singlebuttontoolbar' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
@@ -628,13 +581,32 @@ return call_user_func( function() {
 		],
 
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/ToolbarFactory.js',
+			'scripts' => [
+				'jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
+				'jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
+				'jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
+				'wikibase/view/ToolbarFactory.js',
+			],
+			'styles' => [
+				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
+			],
 			'dependencies' => [
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.edittoolbar',
-				'jquery.wikibase.removetoolbar',
+				'jquery.wikibase.singlebuttontoolbar',
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbarbutton',
+				'jquery.wikibase.wbtooltip',
+				'wikibase.api.RepoApiError',
 				'wikibase.view.__namespace',
-			]
+			],
+			'messages' => [
+				'wikibase-add',
+				'wikibase-cancel',
+				'wikibase-edit',
+				'wikibase-remove',
+				'wikibase-remove-inprogress',
+				'wikibase-save',
+				'wikibase-publish',
+			],
 		],
 
 		'wikibase.view.ToolbarViewController' => $moduleTemplate + [
