@@ -68,7 +68,6 @@ class RdfVocabulary {
 	/**
 	 * URI for unit "1"
 	 * See: https://phabricator.wikimedia.org/T105432
-	 * @var string
 	 */
 	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
