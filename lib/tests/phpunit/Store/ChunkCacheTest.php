@@ -15,13 +15,14 @@ use Wikibase\Lib\Store\ChunkCache;
  */
 class ChunkCacheTest extends \MediaWikiTestCase {
 
-	protected static function getTestData() {
+	/**
+	 * @return string[]
+	 */
+	private function getTestData() {
 		static $data = [];
 
-		if ( empty( $data ) ) {
-			for ( $i = 0; $i < 100; $i++ ) {
-				$data[$i] = strval( $i );
-			}
+		if ( $data === [] ) {
+			$data = array_map( 'strval', range( 0, 99 ) );
 		}
 
 		return $data;
@@ -36,8 +37,8 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 	 * @param string $info Description.
 	 * @return array
 	 */
-	protected static function makeCacheAction( $start, $length, array $expectedAccess, $info ): array {
-		$data = self::getTestData();
+	private function makeCacheAction( $start, $length, array $expectedAccess, $info ): array {
+		$data = $this->getTestData();
 
 		return [
 			'start' => $start,
@@ -54,9 +55,9 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 				10,  // chunkSize
 				50, // maxSize
 				[
-					self::makeCacheAction( 0, 4, [ [ 0, 10 ] ], 'start at the start' ),
-					self::makeCacheAction( 10, 4, [ [ 10, 10 ] ], 'start at ten' ),
-					self::makeCacheAction( 98, 5, [ [ 98, 10 ] ], 'exceed end' ),
+					$this->makeCacheAction( 0, 4, [ [ 0, 10 ] ], 'start at the start' ),
+					$this->makeCacheAction( 10, 4, [ [ 10, 10 ] ], 'start at ten' ),
+					$this->makeCacheAction( 98, 5, [ [ 98, 10 ] ], 'exceed end' ),
 				]
 			],
 
@@ -64,19 +65,19 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 				4,  // chunkSize
 				50, // maxSize
 				[
-					self::makeCacheAction( 20, 4, [ [ 20, 4 ] ], 'start in the middle' ),
+					$this->makeCacheAction( 20, 4, [ [ 20, 4 ] ], 'start in the middle' ),
 
-					self::makeCacheAction( 16, 4,  [ [ 16, 4 ] ], 'fit block before' ),
-					self::makeCacheAction( 24, 4,  [ [ 24, 4 ] ], 'fit block after' ),
+					$this->makeCacheAction( 16, 4,  [ [ 16, 4 ] ], 'fit block before' ),
+					$this->makeCacheAction( 24, 4,  [ [ 24, 4 ] ], 'fit block after' ),
 
-					self::makeCacheAction( 14, 4, [ [ 14, 2 ] ], 'overlap block before' ),
-					self::makeCacheAction( 26, 4, [ [ 28, 4 ] ], 'overlap block after' ),
+					$this->makeCacheAction( 14, 4, [ [ 14, 2 ] ], 'overlap block before' ),
+					$this->makeCacheAction( 26, 4, [ [ 28, 4 ] ], 'overlap block after' ),
 
-					self::makeCacheAction( 7, 4,  [ [ 7, 4 ] ], 'detached block before' ),
-					self::makeCacheAction( 33, 4,  [ [ 33, 4 ] ], 'detached block after' ),
+					$this->makeCacheAction( 7, 4,  [ [ 7, 4 ] ], 'detached block before' ),
+					$this->makeCacheAction( 33, 4,  [ [ 33, 4 ] ], 'detached block after' ),
 
-					self::makeCacheAction( 21, 2,  [], 'single chunk match' ),
-					self::makeCacheAction( 18, 8,  [], 'multi chunk match' ),
+					$this->makeCacheAction( 21, 2,  [], 'single chunk match' ),
+					$this->makeCacheAction( 18, 8,  [], 'multi chunk match' ),
 				]
 			],
 
@@ -85,17 +86,17 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 				7, // maxSize
 				[
 					// note that length-4 access chunks below are actually two cache chunks
-					self::makeCacheAction( 3, 3, [ [ 3, 3 ] ], 'first chunk fits' ),
-					self::makeCacheAction( 0, 3, [ [ 0, 3 ] ], 'second chunk fits' ),
-					self::makeCacheAction( 2, 4, [], 'third chunk hits' ),
-					self::makeCacheAction( 16, 4, [ [ 16, 3 ], [ 19, 3 ] ], 'fourth chunk evicts first+second' ),
-					self::makeCacheAction( 22, 4, [ [ 22, 3 ], [ 25, 3 ] ], 'fifth chunk evicts fourth' ),
-					self::makeCacheAction( 22, 4, [], 'fifth chunk hits' ),
-					self::makeCacheAction( 16, 4, [ [ 16, 3 ], [ 19, 3 ] ], 'fourth chunk evicts fifth' ),
-					self::makeCacheAction( 22, 4, [ [ 22, 3 ], [ 25, 3 ] ], 'fifth chunk evicts fourth' ),
-					self::makeCacheAction( 26, 4, [ [ 28, 3 ] ], 'sixth chunk evicts fifth' ),
-					self::makeCacheAction( 2, 4, [ [ 2, 3 ], [ 5, 3 ] ], 'third chunk misses' ),
-					self::makeCacheAction( 2, 4, [], 'third chunk hits' ),
+					$this->makeCacheAction( 3, 3, [ [ 3, 3 ] ], 'first chunk fits' ),
+					$this->makeCacheAction( 0, 3, [ [ 0, 3 ] ], 'second chunk fits' ),
+					$this->makeCacheAction( 2, 4, [], 'third chunk hits' ),
+					$this->makeCacheAction( 16, 4, [ [ 16, 3 ], [ 19, 3 ] ], 'fourth chunk evicts first+second' ),
+					$this->makeCacheAction( 22, 4, [ [ 22, 3 ], [ 25, 3 ] ], 'fifth chunk evicts fourth' ),
+					$this->makeCacheAction( 22, 4, [], 'fifth chunk hits' ),
+					$this->makeCacheAction( 16, 4, [ [ 16, 3 ], [ 19, 3 ] ], 'fourth chunk evicts fifth' ),
+					$this->makeCacheAction( 22, 4, [ [ 22, 3 ], [ 25, 3 ] ], 'fifth chunk evicts fourth' ),
+					$this->makeCacheAction( 26, 4, [ [ 28, 3 ] ], 'sixth chunk evicts fifth' ),
+					$this->makeCacheAction( 2, 4, [ [ 2, 3 ], [ 5, 3 ] ], 'third chunk misses' ),
+					$this->makeCacheAction( 2, 4, [], 'third chunk hits' ),
 				]
 			],
 
@@ -106,7 +107,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 	 * @dataProvider provideLoadChunk
 	 */
 	public function testLoadChunk( $chunkSize, $maxSize, $sequence ) {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		$realStore = new MockChunkAccess( $data );
 		$store = $this->getMock( ChunkAccess::class );
@@ -137,7 +138,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 	 * Fuzz test for discovering unexpected issues
 	 */
 	public function testFuzz() {
-		$data = self::getTestData();
+		$data = $this->getTestData();
 
 		$store = new MockChunkAccess( $data );
 		$cache = new ChunkCache( $store, 10, 50 );
