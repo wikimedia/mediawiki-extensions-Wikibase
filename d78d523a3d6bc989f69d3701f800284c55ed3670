@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0500c12_e54771ab",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-02-27T12:25:55Z",
+      "side": 1,
+      "message": "typo: descriptions",
+      "range": {
+        "startLine": 110,
+        "startChar": 58,
+        "endLine": 110,
+        "endChar": 71
+      },
+      "revId": "d78d523a3d6bc989f69d3701f800284c55ed3670",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4e48bf7_753a2e2d",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-02-27T12:25:55Z",
+      "side": 1,
+      "message": "typo: addMetaData",
+      "range": {
+        "startLine": 409,
+        "startChar": 60,
+        "endLine": 409,
+        "endChar": 70
+      },
+      "revId": "d78d523a3d6bc989f69d3701f800284c55ed3670",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
