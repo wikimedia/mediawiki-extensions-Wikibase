@@ -8,8 +8,6 @@ use Title;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Tests for the ApiWikibase class.
- *
  * This testset only checks the validity of the calls and correct handling of tokens and users.
  * Note that we creates an empty database and then starts manipulating testusers.
  *
