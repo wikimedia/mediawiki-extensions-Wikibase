@@ -115,6 +115,7 @@ class WikibaseContentLanguages {
 					'smn', // T188580
 					'sms', // T188579
 					'ssf', // T174236
+					'tlb', // T216798
 					'trv', // T174228
 					'tzl', // T98314
 					'uga', // T155431
