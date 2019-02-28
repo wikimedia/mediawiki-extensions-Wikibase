@@ -19,8 +19,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 
 	/**
 	 * Max server side caching time in seconds.
-	 *
-	 * @var int
 	 */
 	const CACHE_TTL_IN_SECONDS = 10;
 
