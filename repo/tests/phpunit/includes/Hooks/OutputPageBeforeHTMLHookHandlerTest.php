@@ -35,7 +35,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return OutputPage
 	 */
 	private function newOutputPage() {
-		return new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+		$requestContext = RequestContext::getMain();
+		$requestContext->setTitle( new Title() );
+		return new OutputPage( new DerivativeContext( $requestContext ) );
 	}
 
 	/**

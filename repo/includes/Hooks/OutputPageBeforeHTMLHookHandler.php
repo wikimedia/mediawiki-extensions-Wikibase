@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use Title;
+use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevision;
@@ -21,6 +23,7 @@ use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
@@ -142,17 +145,8 @@ class OutputPageBeforeHTMLHookHandler {
 
 		if ( !empty( $placeholders ) ) {
 			$this->replacePlaceholders( $placeholders, $out, $html );
-
-			$out->addJsConfigVars(
-				'wbUserSpecifiedLanguages',
-				// All user-specified languages, that are valid term languages
-				// Reindex the keys so that javascript still works if an unknown
-				// language code in the babel box causes an index to miss
-				array_values( array_intersect(
-					$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
-					$this->termsLanguages->getLanguages()
-				) )
-			);
+			$this->addJsUserLanguages( $out );
+			$html = $this->showOrHideEditLinks( $out, $html );
 		}
 	}
 
@@ -271,6 +265,63 @@ class OutputPageBeforeHTMLHookHandler {
 
 	private function getEntityTermsListHtml( OutputPage $out ) {
 		return $out->getProperty( 'wikibase-terms-list-items' );
+	}
+
+	private function addJsUserLanguages( OutputPage $out ) {
+		$out->addJsConfigVars(
+			'wbUserSpecifiedLanguages',
+			// All user-specified languages, that are valid term languages
+			// Reindex the keys so that javascript still works if an unknown
+			// language code in the babel box causes an index to miss
+			array_values( array_intersect(
+				$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
+				$this->termsLanguages->getLanguages()
+			) )
+		);
+	}
+
+	private function showOrHideEditLinks( OutputPage $out, $html ) {
+		return ToolbarEditSectionGenerator::enableSectionEditLinks(
+			$html,
+			$this->isEditable( $out )
+		);
+	}
+
+	private function isEditable( OutputPage $out ) {
+		return $this->isProbablyEditable( $out->getUser(), $out->getTitle() )
+			&& $this->isEditView( $out );
+	}
+
+	/**
+	 * This is duplicated from
+	 * @see OutputPage::getJSVars - wgIsProbablyEditable
+	 *
+	 * @param User $user
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	private function isProbablyEditable( User $user, Title $title ) {
+		return $title->quickUserCan( 'edit', $user )
+			&& ( $title->exists() || $title->quickUserCan( 'create', $user ) );
+	}
+
+	/**
+	 * This is mostly a duplicate of
+	 * @see \Wikibase\ViewEntityAction::isEditable
+	 *
+	 * @param OutputPage $out
+	 *
+	 * @return bool
+	 */
+	private function isEditView( OutputPage $out ) {
+		return $out->getRevisionId() === $out->getTitle()->getLatestRevID()
+			&& !$this->isDiff( $out )
+			&& !$out->getOutput()->isPrintable();
+	}
+
+	private function isDiff( OutputPage $out ) {
+		return $out->getRequest()->getCheck( 'diff' );
 	}
 
 }
