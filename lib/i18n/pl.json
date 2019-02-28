@@ -115,7 +115,7 @@
 	"wikibase-time-precision-BCE-millennium": "$1 {{PLURAL:$1|tysiąclecie|tysiąclecia|tysiącleci}} p.n.e.",
 	"wikibase-time-precision-BCE-century": "$1 {{PLURAL:$1|wiek|wieki|wieków}} p.n.e.",
 	"wikibase-snakformatter-valuetype-mismatch": "Typ wartości „$1” nie jest zgodny z typem właściwości „$2”.",
-	"wikibase-snakformatter-property-not-found": "Właściwość „$1” nie została znaleziona, nie można określić typ danych.",
+	"wikibase-snakformatter-property-not-found": "Właściwość „$1” nie została znaleziona, nie można określić typu danych.",
 	"wikibase-snakformatter-formatting-exception": "Błąd formatowania: $1.",
 	"wikibase-entity-summary-wbsetitem": "Utworzono nowy element",
 	"wikibase-entity-summary-wbcreateredirect": "Przekierowano do $4",

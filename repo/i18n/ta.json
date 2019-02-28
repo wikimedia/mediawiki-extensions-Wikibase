@@ -10,7 +10,8 @@
 			"கலைவாணன்",
 			"Jayarathina",
 			"தமிழ்க்குரிசில்",
-			"ElangoRamanujam"
+			"ElangoRamanujam",
+			"Nisha"
 		]
 	},
 	"wikibase-entity-item": "உருப்படி",
@@ -43,6 +44,11 @@
 	"wikibase-newitem-fieldset": "ஒரு புது உருப்படியை உருவாக்குக",
 	"wikibase-newentity-language": "மொழி:",
 	"wikibase-newentity-description": "விளக்கம்:",
+	"special-setlabel": "உருப்படி/சொத்து விவரத்துணுக்கை அமைக்கவும்",
+	"special-setdescription": "உருப்படி/சொத்து விளக்கத்தை அமைக்கவும்",
+	"special-setaliases": "உருப்படி/சொத்து மறுபெயரை அமைக்கவும்",
+	"special-setlabeldescriptionaliases": "உருப்படி/சொத்து விவரத்துணுக்கு, விளக்கம் மற்றும் மறுபெயரை அமைக்கவும்",
+	"special-setsitelink": "தளஇணைப்பின் உறுப்படியை அமைக்கவும்",
 	"wikibase-modifyentity-id": "அடையாளவிலக்கம்",
 	"wikibase-modifyterm-language": "மொழிக் குறியீடு:",
 	"wikibase-entitieswithoutlabel-label-language": "மொழிக் குறியீடு:",
