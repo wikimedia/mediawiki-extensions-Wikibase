@@ -15,6 +15,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
@@ -35,7 +36,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return OutputPage
 	 */
 	private function newOutputPage() {
-		return new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+		$requestContext = RequestContext::getMain();
+		$requestContext->setTitle( new Title() );
+		return new OutputPage( new DerivativeContext( $requestContext ) );
 	}
 
 	/**
@@ -66,7 +69,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$languageNameLookup,
 			$this->getOutputPageEntityIdReaderReturningEntity( $itemId ),
 			new EntityFactory( [] ),
-			''
+			'',
+			$this->newEntityContentFactory()
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -111,7 +115,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LanguageNameLookup::class ),
 			$outputPageEntityIdReader,
 			new EntityFactory( [] ),
-			''
+			'',
+			$this->newEntityContentFactory()
 		);
 
 		$out = $this->newOutputPage();
@@ -137,6 +142,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->getOutputPageEntityIdReaderReturningEntity( $entity ),
 			$entityFactory,
 			'',
+			$this->newEntityContentFactory(),
 			true
 		);
 
@@ -188,6 +194,18 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getEntityRevision' )
 			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
 		return $entityRevisionLookup;
+	}
+
+	/**
+	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityContentFactory
+	 */
+	private function newEntityContentFactory() {
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		$entityContentFactory->expects( $this->once() )
+			->method( 'isEntityContentModel' )
+			->willReturn( true );
+
+		return $entityContentFactory;
 	}
 
 }
