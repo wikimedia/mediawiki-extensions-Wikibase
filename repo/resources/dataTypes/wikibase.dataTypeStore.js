@@ -7,7 +7,7 @@ wikibase.dataTypeStore = ( function ( wb ) {
 	'use strict';
 
 	var dataTypeStore = new wb.dataTypes.DataTypeStore(),
-		dataTypeDefinitions = mw.config.get( 'wbDataTypes' ) || {};
+		dataTypeDefinitions = mw.config.get( 'wbDataTypes' ) || {}; // check if mw.config is always loaded
 
 	// eslint-disable-next-line jquery/no-each-util
 	$.each( dataTypeDefinitions, function ( dtTypeId, dtDefinition ) {
