@@ -188,6 +188,26 @@
 						propertyId = fetchedProperty ? fetchedProperty.getId() : null;
 
 					if ( fetchedProperty && !dataType ) {
+						// Note: Could not find a link between the caching problem and localStorage
+						// and this issue (T216728).
+						// However, clearning resourceloader storage prior to a hard refresh sounded
+						// a good idea at the time if odds that this is causing an issue under
+						// some edge circumstances.
+						mw.loader.store.clear();
+
+						mw.notify(
+							mw.msg(
+								'wikibase-refresh-for-missing-datatype',
+								fetchedProperty.getDataTypeId()
+							),
+							{
+								autoHide: false,
+								title: mw.message( 'wikibase-outdated-client-script' ),
+								type: 'warn',
+								tag: 'wikibase-outdated-datatypes'
+							}
+						);
+
 						mw.log.warn(
 							'Found property ' + fetchedProperty.getId() + ' in entityStore but couldn\'t find ' +
 							'the datatype "' + fetchedProperty.getDataTypeId() + '" in dataTypeStore. ' +
