@@ -191,6 +191,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "The language code.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "The autonym of the language, that is, the name of the language in that language. May not be known for all languages.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "The name of the language in the current language (specified via the <var>uselang</var> parameter), with language fallbacks applied if necessary. Usually, at least an English name is known for all content languages Wikibase accepts.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-fallbacks": "The fallback languages codes for the language, if any. The default fallback to <code>en</code> that MediaWiki applies to all interface languages is <em>not</em> included, so for many languages this is an empty array.",
 	"apihelp-query+wbcontentlanguages-example-1": "Get the valid language codes for the terms of an entity.",
 	"apihelp-query+wbcontentlanguages-example-2": "Get the valid languages, with language code and autonym, for monolingual text values.",
 	"apihelp-query+wbsearch-description": "Searches for entities using labels and aliases.\nThis can be used as a generator for other queries.\nReturns the matched term that should be displayed.",
