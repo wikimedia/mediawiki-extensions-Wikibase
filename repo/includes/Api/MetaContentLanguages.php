@@ -56,6 +56,7 @@ class MetaContentLanguages extends ApiQueryBase {
 		$includeCode = in_array( 'code', $props );
 		$includeAutonym = in_array( 'autonym', $props );
 		$includeName = in_array( 'name', $props );
+		$includeFallbacks = in_array( 'fallbacks', $props );
 
 		foreach ( $languageCodes as $languageCode ) {
 			$path = [
@@ -87,6 +88,11 @@ class MetaContentLanguages extends ApiQueryBase {
 				}
 				$result->addValue( $path, 'name', $name );
 			}
+
+			if ( $includeFallbacks ) {
+				$fallbacks = Language::getFallbacksFor( $languageCode, Language::STRICT_FALLBACKS );
+				$result->addValue( $path, 'fallbacks', $fallbacks );
+			}
 		}
 	}
 
@@ -117,6 +123,7 @@ class MetaContentLanguages extends ApiQueryBase {
 					'code',
 					'autonym',
 					'name',
+					'fallbacks',
 				],
 				self::PARAM_HELP_MSG_PER_VALUE => [],
 			]

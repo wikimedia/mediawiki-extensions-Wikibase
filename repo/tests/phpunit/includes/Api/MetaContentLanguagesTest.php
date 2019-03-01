@@ -74,7 +74,7 @@ class MetaContentLanguagesTest extends TestCase {
 
 	private function getContentLanguages() {
 		return new WikibaseContentLanguages( [
-			'term' => new StaticContentLanguages( [ 'en', 'de', 'es' ] ),
+			'term' => new StaticContentLanguages( [ 'en', 'de', 'de-formal', 'es' ] ),
 			'test' => new StaticContentLanguages( [ 'en', 'mis', 'und' ] ),
 		] );
 	}
@@ -85,6 +85,7 @@ class MetaContentLanguagesTest extends TestCase {
 			[
 				'en' => [ 'code' => 'en' ],
 				'de' => [ 'code' => 'de' ],
+				'de-formal' => [ 'code' => 'de-formal' ],
 				'es' => [ 'code' => 'es' ],
 			],
 		];
@@ -105,6 +106,16 @@ class MetaContentLanguagesTest extends TestCase {
 				'en' => [ 'name' => $haveCldr ? 'Englisch' : 'English' ],
 				'mis' => [ 'name' => $haveCldr ? 'nicht unterstützte Sprache' : null ],
 				'und' => [ 'name' => $haveCldr ? 'Unbekannte Sprache' : null ],
+			],
+		];
+
+		yield 'default context, with fallbacks' => [
+			[ 'wbclprop' => 'fallbacks' ],
+			[
+				'en' => [ 'fallbacks' => [] ],
+				'de' => [ 'fallbacks' => [] ],
+				'de-formal' => [ 'fallbacks' => [ 'de' ] ],
+				'es' => [ 'fallbacks' => [] ],
 			],
 		];
 	}

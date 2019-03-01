@@ -213,6 +213,7 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "{{doc-apihelp-paramvalue|query+wbcontentlanguages|prop|code}}",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-autonym": "{{doc-apihelp-paramvalue|query+wbcontentlanguages|prop|autonym}}",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "{{doc-apihelp-paramvalue|query+wbcontentlanguages|prop|name}}",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-fallbacks": "{{doc-apihelp-paramvalue|query+wbcontentlanguages|prop|fallbacks}}",
 	"apihelp-query+wbcontentlanguages-example-1": "{{doc-apihelp-example|query+wbcontentlanguages}}",
 	"apihelp-query+wbcontentlanguages-example-2": "{{doc-apihelp-example|query+wbcontentlanguages}}",
 	"apihelp-query+wbsearch-description": "{{doc-apihelp-description|query+wbsearch}}",
