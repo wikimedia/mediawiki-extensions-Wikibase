@@ -388,9 +388,5 @@
 	"action-item-merge": "fusionar elementos",
 	"action-property-create": "crear propiedades",
 	"wikibase-pageinfo-subscription": "Wikis suscritos a esta entidad",
-	"wikibase-pageinfo-subscription-none": "Ninguno",
-	"wikibase-search-bad-entity-type": "Tipo de entidad erróneo: $1",
-	"wikibase-search-bad-profile-name": "Nombre de perfil de búsqueda erróneo: $1",
-	"wikibase-search-namespace-mix": "No se admite mezclar los espacios de nombres de las entidades y de los artículos. Solo se buscará en el espacio de nombres de las entidades.",
-	"wikibase-haswbstatement-feature-no-valid-statements": "La palabra clave «haswbstatement» no contiene declaraciones válidas"
+	"wikibase-pageinfo-subscription-none": "Ninguno"
 }

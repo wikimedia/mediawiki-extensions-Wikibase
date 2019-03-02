@@ -363,6 +363,5 @@
 	"right-property-create": "プロパティを作成",
 	"action-item-merge": "項目を統合",
 	"action-property-create": "プロパティを作成",
-	"wikibase-pageinfo-subscription-none": "なし",
-	"wikibase-search-namespace-mix": "現在、エンティティとそれ以外の名前空間を同時に検索することができません。エンティティの検索結果のみを示しています。"
+	"wikibase-pageinfo-subscription-none": "なし"
 }

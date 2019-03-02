@@ -379,11 +379,5 @@
 	"action-item-merge": "fusionar elementos",
 	"action-property-create": "crear propiedaes",
 	"wikibase-pageinfo-subscription": "Wikis soscrites a esta entidá",
-	"wikibase-pageinfo-subscription-none": "Nenguna",
-	"wikibase-search-bad-entity-type": "Tipu incorreutu d'entidá $1",
-	"wikibase-search-bad-profile-name": "Nome incorreutu de perfil de gueta: $1",
-	"wikibase-search-namespace-mix": "Nun s'almite entemecer nes busques los espacios de nomes de les entidaes y de los artículos. Solo va buscase nel espaciu de nomes de les entidaes.",
-	"wikibase-search-config-notfound": "Nun s'alcontró la configuración de la gueta de testu completu: $1",
-	"wikibase-search-config-badclass": "Clase de constructor de consultes incorreuta: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "La palabra clave «haswbstatement» nun contien declaraciones válides"
+	"wikibase-pageinfo-subscription-none": "Nenguna"
 }

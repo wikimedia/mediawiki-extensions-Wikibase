@@ -311,6 +311,5 @@
 	"right-property-create": "pravljenje svojstava",
 	"action-item-merge": "objedinjavate stavke",
 	"action-property-create": "pravite svojstva",
-	"wikibase-pageinfo-subscription-none": "Nema",
-	"wikibase-search-bad-entity-type": "Pogrešna vrsta entiteta: $1"
+	"wikibase-pageinfo-subscription-none": "Nema"
 }

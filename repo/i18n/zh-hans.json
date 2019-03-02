@@ -394,10 +394,6 @@
 	"wikibase-concept-uri": "概念URI",
 	"wikibase-concept-uri-tooltip": "识别此项描述概念的URI",
 	"wikibase-pageimage-helptext": "此图片来自该项的声明。您可以通过更改声明调整图片。",
-	"wikibase-rescore-profile-prefix": "默认用于完成搜索的重新计分详情",
-	"wikibase-rescore-profile-prefix-boost": "语句增强的完成搜索重评分配置文件",
-	"wikibase-rescore-profile-fulltext": "默认用于全文搜索的重新计分详情",
-	"wikibase-rescore-profile-fulltext-phrase": "短语评分全文检索的Rescore简介",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "维基数据库项",
 	"content-model-wikibase-property": "维基数据库属性",
@@ -412,9 +408,5 @@
 	"action-item-merge": "合并项",
 	"action-property-create": "创建属性",
 	"wikibase-pageinfo-subscription": "订阅至此实体的Wiki",
-	"wikibase-pageinfo-subscription-none": "无",
-	"wikibase-search-bad-entity-type": "错误实体类型：$1",
-	"wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
-	"wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。",
-	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 关键字不包含有效语句"
+	"wikibase-pageinfo-subscription-none": "无"
 }

@@ -379,10 +379,6 @@
 	"wikibase-concept-uri": "כתובת URI לרעיון",
 	"wikibase-concept-uri-tooltip": "כתובת URI שמזהה את הרעיון שהפריט הזה מתאר",
 	"wikibase-pageimage-helptext": "התמונה לקוחה מתוך הקביעות על הפריט הזה. באפשרותך לשנות את התמונה באמצעות שינוי הקביעה.",
-	"wikibase-rescore-profile-prefix": "פרופיל דירוג משני התחלתי לחיפוש השלמה",
-	"wikibase-rescore-profile-prefix-boost": "פרופיל להשלמת החיפוש עם הצהרה מוגברת",
-	"wikibase-rescore-profile-fulltext": "פרופיל דירוג משני לחיפוש בטקסט מלא",
-	"wikibase-rescore-profile-fulltext-phrase": "פרופיל דירוג משני לחיפוש בטקסט מלא עם דירוג משפטים",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "פריט Wikibase",
 	"content-model-wikibase-property": "מאפיין Wikibase",
@@ -397,11 +393,5 @@
 	"action-item-merge": "למזג פריטים",
 	"action-property-create": "ליצור מאפיינים",
 	"wikibase-pageinfo-subscription": "אתרי ויקי שמנויים לישות הזאת",
-	"wikibase-pageinfo-subscription-none": "אין",
-	"wikibase-search-bad-entity-type": "סוג ישות רע: $1",
-	"wikibase-search-bad-profile-name": "שם פרופיל חיפוש רע: $1",
-	"wikibase-search-namespace-mix": "כרגע לא ניתן לערבב בין מרחב השם של הישות לבין מרחב השם של הערך. יתבצע חיפוש רק עבור מרחבי השם של הישות.",
-	"wikibase-search-config-notfound": "הגדרות החיפוש המלא לא נמצאו: $1",
-	"wikibase-search-config-badclass": "מחלקת מבנה שאילתה שגויה: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "מילת המפתח haswbstatement אינה מכילה קביעות תקינות"
+	"wikibase-pageinfo-subscription-none": "אין"
 }

@@ -380,6 +380,5 @@
 	"action-item-merge": "ادغام آیتم‌ها",
 	"action-property-create": "ایجاد خصوصیت‌ها",
 	"wikibase-pageinfo-subscription": "ویکی‌هایی که به این صفحه مشترک هستند",
-	"wikibase-pageinfo-subscription-none": "هیچ کدام",
-	"wikibase-search-bad-entity-type": "نوع موجود بد: $1"
+	"wikibase-pageinfo-subscription-none": "هیچ کدام"
 }

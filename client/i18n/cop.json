@@ -7,6 +7,8 @@
 	},
 	"wikibase-dataitem": "ϩⲱⲃ `ⲛⲧⲉ {{WBREPONAME}}",
 	"wikibase-editlinks": " ϣⲉⲃⲓⲱ ϩⲁⲛⲗⲱⲟⲩ",
+	"wikibase-editlinkstitle": "ⲫⲱⲛϩ ϩⲁⲛⲗⲱⲟⲩ `ⲛⲟⲩⲧⲉⲁⲥⲡⲓ",
 	"wikibase-rc-hide-wikidata-hide": "ⲕⲱⲡ",
-	"wikibase-rc-hide-wikidata-show": "ⲟⲩⲱⲛϩ"
+	"wikibase-rc-hide-wikidata-show": "ⲟⲩⲱⲛϩ",
+	"wikibase-rc-wikibase-edit-title": "ϫⲓⲛⲫⲱⲛϩ `ⲛ{{WBREPONAME}}"
 }

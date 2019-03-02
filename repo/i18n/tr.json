@@ -388,7 +388,5 @@
 	"action-item-merge": "ögeleri birleştir",
 	"action-property-create": "özellikleri oluştur",
 	"wikibase-pageinfo-subscription": "Bu varlığa abone olan Vikiler",
-	"wikibase-pageinfo-subscription-none": "Yok",
-	"wikibase-search-bad-entity-type": "Bozuk varlık türü: $1",
-	"wikibase-search-bad-profile-name": "Aramada bozuk profil adı: $1"
+	"wikibase-pageinfo-subscription-none": "Yok"
 }
