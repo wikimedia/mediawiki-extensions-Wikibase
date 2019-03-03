@@ -509,6 +509,11 @@ class WikibaseRepo {
 	public function newValidatorBuilders() {
 		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
 
+		$dataAccessSettings = $this->getDataAccessSettings();
+		$legacyRepoBasedSupportedEntityTypes = $dataAccessSettings->useEntitySourceBasedFederation() ?
+			[] :
+			$this->repositoryDefinitions->getEntityTypesPerRepository();
+
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
 			$this->getEntityIdParser(),
@@ -516,8 +521,8 @@ class WikibaseRepo {
 			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			$this->getDataAccessSettings(),
-			$this->repositoryDefinitions->getEntityTypesPerRepository(),
+			$dataAccessSettings,
+			$legacyRepoBasedSupportedEntityTypes,
 			new MediaWikiPageNameNormalizer(),
 			$this->settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
 			$this->settings->getSetting( 'tabularDataStorageApiEndpointUrl' )
