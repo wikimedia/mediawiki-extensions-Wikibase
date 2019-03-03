@@ -998,10 +998,16 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	private function getRepoItemUriParser() {
-		// B/C compatibility, should be removed soon
-		// TODO: Move to check repo that has item entity not the default repo
+		$dataAccessSettings = $this->getDataAccessSettings();
+
+		$itemConceptUriBase = $dataAccessSettings->useEntitySourceBasedFederation() ?
+			$this->getItemSource( $dataAccessSettings )->getConceptBaseUri() :
+			// B/C compatibility, should be removed soon
+			// TODO: Move to check repo that has item entity not the default repo
+			$this->getRepositoryDefinitions()->getConceptBaseUris()[''];
+
 		return new SuffixEntityIdParser(
-			$this->getRepositoryDefinitions()->getConceptBaseUris()[''],
+			$itemConceptUriBase,
 			new ItemIdParser()
 		);
 	}
