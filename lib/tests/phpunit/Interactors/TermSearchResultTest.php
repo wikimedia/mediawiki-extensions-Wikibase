@@ -25,7 +25,6 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q1234' ),
 				new Term( 'pt', 'ImaLabel' ),
 				new Term( 'en', 'ImaDescription' ),
-				''
 			],
 			[
 				new Term( 'en-gb', 'FooText' ),
@@ -33,7 +32,6 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new PropertyId( 'P777' ),
 				null,
 				null,
-				''
 			],
 			[
 				new Term( 'en-gb', 'FooText' ),
@@ -41,7 +39,6 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new PropertyId( 'foo:P777' ),
 				null,
 				null,
-				'foo'
 			],
 		];
 	}
@@ -54,8 +51,7 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 		$matchedTermType,
 		$entityId,
 		$displayLabel,
-		$displayDescription,
-		$expectedRepositoryName
+		$displayDescription
 	) {
 		$result = new TermSearchResult(
 			$matchedTerm,
@@ -68,7 +64,6 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $matchedTerm, $result->getMatchedTerm() );
 		$this->assertEquals( $matchedTermType, $result->getMatchedTermType() );
 		$this->assertEquals( $entityId, $result->getEntityId() );
-		$this->assertEquals( $expectedRepositoryName, $result->getRepositoryName() );
 		$this->assertEquals( $displayLabel, $result->getDisplayLabel() );
 		$this->assertEquals( $displayDescription, $result->getDisplayDescription() );
 	}
