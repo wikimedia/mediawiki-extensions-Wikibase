@@ -382,6 +382,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
 			] ]
 		);
+		$settings->setSetting( 'useEntitySourceBasedFederation', false );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
 		$wikibaseRepo = new WikibaseRepo(
@@ -396,6 +397,51 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		);
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
+		$this->assertContains( 'foo', $localEntityTypes );
+		$this->assertContains( 'bar', $localEntityTypes );
+		$this->assertContains( 'lexeme', $localEntityTypes );
+		// Sub entities should appear in the list
+		$this->assertContains( 'form', $localEntityTypes );
+	}
+
+	public function testGetLocalEntityTypes_entitySourceBasedFederation() {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'useEntitySourceBasedFederation', true );
+		$settings->setSetting( 'localEntitySourceName', 'local' );
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$irrelevantRepositoryDefinition = [ '' => [
+			'database' => null,
+			'base-uri' => null,
+			'prefix-mapping' => [ '' => '' ],
+			'entity-namespaces' => [],
+		] ];
+
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				$irrelevantRepositoryDefinition,
+				$entityTypeDefinitions
+			),
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[
+						'foo' => [ 'namespaceId' => 100, 'slot' => 'main' ],
+						'bar' => [ 'namespaceId' => 102, 'slot' => 'main' ],
+						'lexeme' => [ 'namespaceId' => 104, 'slot' => 'main' ],
+					],
+					'',
+					''
+				)
+			] )
+		);
+
+		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
+
 		$this->assertContains( 'foo', $localEntityTypes );
 		$this->assertContains( 'bar', $localEntityTypes );
 		$this->assertContains( 'lexeme', $localEntityTypes );

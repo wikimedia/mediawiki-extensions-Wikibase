@@ -1505,6 +1505,24 @@ class WikibaseRepo {
 	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
 	 */
 	public function getLocalEntityTypes() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$localSource = $this->getLocalEntitySource();
+			$types = $localSource->getEntityTypes();
+			$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
+
+			return array_reduce(
+				$types,
+				function ( $carry, $x ) use ( $subEntityTypes ) {
+					$carry[] = $x;
+					if ( array_key_exists( $x, $subEntityTypes ) ) {
+						$carry = array_merge( $carry, $subEntityTypes[$x] );
+					}
+					return $carry;
+				},
+				[]
+			);
+		}
+
 		// A blank string represents the local repo
 		return $this->repositoryDefinitions->getEntityTypesPerRepository()[''];
 	}
