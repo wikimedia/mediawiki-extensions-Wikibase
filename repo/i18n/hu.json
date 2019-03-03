@@ -75,7 +75,7 @@
 	"wikibase-entitytermsview-input-help-message": "Írj be egy címkét, rövid leírást és más neveket nyelvenként ehhez az elemhez.",
 	"wikibase-statementsection-statements": "Állítások",
 	"wikibase-sitelinks": "Ehhez a fogalomhoz kapcsolt lapok listája",
-	"wikibase-sitelinks-counter": "$1 bejegyzés",
+	"wikibase-sitelinks-counter": "$1 kapcsolat",
 	"wikibase-sitelinks-empty": "Ehhez a fogalomhoz nincs kapcsolt lap.",
 	"wikibase-sitelinks-special": "Más wikiken",
 	"wikibase-badgeselector-badge-placeholder-title": "Kattints ide egy jelvény hozzáadásához.",

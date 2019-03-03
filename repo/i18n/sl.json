@@ -105,7 +105,7 @@
 	"wikibase-shortcopyrightwarning": "S klikom na gumb »$1« se strinjaš s [[$2|pogoji uporabe]] in nepreklicno soglašaš z objavo svojega prispevka pod licenco $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-entityselector-more": "več",
-	"wikibase-anonymouseditwarning": "Opozorilo: niste prijavljeni.\nV povzetku urejanja tega predmeta bo shranjen vaš IP-naslov.",
+	"wikibase-anonymouseditwarning": "Opozorilo: niste prijavljeni. Vaš [https://sl.wikipedia.org/wiki/IP-naslov IP-naslov] bo javno viden, če naredite kakršno koli urejanje. Če se <strong>[[Special:UserLogin|prijavite]]</strong> ali <strong>[[Special:CreateAccount|ustvarite račun]]</strong>, bodo vaša urejanja pripisana vašemu uporabniškemu imenu skupaj z drugimi prednostmi.",
 	"wikibase-move-error": "Strani v imenskem prostoru podatkov ne morete prestavljati, prav tako tudi ne morete strani prestavljati vanj.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 je preusmeritev.",
 	"special-availablebadges": "Razpoložljive značke",
