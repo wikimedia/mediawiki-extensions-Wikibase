@@ -374,5 +374,10 @@
 	"right-property-create": "속성 만들기",
 	"action-item-merge": "항목 병합",
 	"action-property-create": "속성을 만들",
-	"wikibase-pageinfo-subscription-none": "없음"
+	"wikibase-pageinfo-subscription-none": "없음",
+	"wikibase-search-bad-entity-type": "잘못된 엔티티 유형: $1",
+	"wikibase-search-bad-profile-name": "잘못된 검색 프로파일 이름: $1",
+	"wikibase-search-config-notfound": "전문 검색 구성을 찾을 수 없습니다: $1",
+	"wikibase-search-config-badclass": "잘못된 쿼리 빌더 클래스: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 키워드에 유효한 문장이 포함되어 있지 않습니다"
 }

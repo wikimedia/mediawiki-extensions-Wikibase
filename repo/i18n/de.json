@@ -396,6 +396,10 @@
 	"wikibase-concept-uri": "Konzept-URI",
 	"wikibase-concept-uri-tooltip": "URI, die das von diesem Objekt beschriebene Konzept identifiziert.",
 	"wikibase-pageimage-helptext": "Dieses Bild wurde von den Aussagen dieses Objekts abgerufen. Du kannst das Bild anpassen, indem du die Aussage änderst.",
+	"wikibase-rescore-profile-prefix": "Standard-Rescore-Profil für die Vervollständigungssuche",
+	"wikibase-rescore-profile-prefix-boost": "Rescore-Profil für die Vervollständigungssuche mit Aussagenverstärkung",
+	"wikibase-rescore-profile-fulltext": "Standard-Rescore-Profil für die Volltextsuche",
+	"wikibase-rescore-profile-fulltext-phrase": "Rescore-Profil für die Volltextsuche mit Ausdrucksbewertung",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-Datenobjekt",
 	"content-model-wikibase-property": "Wikibase-Eigenschaft",
@@ -410,5 +414,11 @@
 	"action-item-merge": "Objekte zusammenzuführen",
 	"action-property-create": "Eigenschaften zu erstellen",
 	"wikibase-pageinfo-subscription": "Wikis, die mit diesem Objekt verbunden sind",
-	"wikibase-pageinfo-subscription-none": "Keines"
+	"wikibase-pageinfo-subscription-none": "Keines",
+	"wikibase-search-bad-entity-type": "Ungültiger Objekttyp: $1",
+	"wikibase-search-bad-profile-name": "Ungültiger Suchprofilname: $1",
+	"wikibase-search-namespace-mix": "Das Vermischen der Objekt- und Artikelnamensräume in der Suche wird derzeit nicht unterstützt. Es werden nur die Objektnamensräume durchsucht.",
+	"wikibase-search-config-notfound": "Volltext-Suchkonfiguration nicht gefunden: $1",
+	"wikibase-search-config-badclass": "Ungültige Abfragenbuilder-Klasse: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Das Schlüsselwort haswbstatement enthält keine gültigen Aussagen"
 }

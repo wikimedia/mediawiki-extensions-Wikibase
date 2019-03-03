@@ -372,5 +372,7 @@
 	"action-item-merge": "спојување на предмети",
 	"action-property-create": "создавање на својства",
 	"wikibase-pageinfo-subscription": "Викија претплатени на оваа единица",
-	"wikibase-pageinfo-subscription-none": "Ниедно"
+	"wikibase-pageinfo-subscription-none": "Ниедно",
+	"wikibase-search-bad-entity-type": "Неисправен тип на единица: $1",
+	"wikibase-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1"
 }

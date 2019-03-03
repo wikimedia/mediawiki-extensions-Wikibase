@@ -393,6 +393,10 @@
 	"wikibase-concept-uri": "URI do conceito",
 	"wikibase-concept-uri-tooltip": "URI que identifica o conceito descrito por este item",
 	"wikibase-pageimage-helptext": "Esta imagem é tirada das declarações deste item. Você pode ajustar a imagem alterando a instrução.",
+	"wikibase-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
+	"wikibase-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
+	"wikibase-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
+	"wikibase-rescore-profile-fulltext-phrase": "Perfil Rescore para pesquisa de texto completo com pontuação de frase",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Item do Wikibase",
 	"content-model-wikibase-property": "Propriedade do Wikibase",
@@ -407,5 +411,11 @@
 	"action-item-merge": "fundir itens",
 	"action-property-create": "criar propriedades",
 	"wikibase-pageinfo-subscription": "Wikis que subscrevem esta entidade",
-	"wikibase-pageinfo-subscription-none": "Nenhum"
+	"wikibase-pageinfo-subscription-none": "Nenhum",
+	"wikibase-search-bad-entity-type": "Tipo da entidade incorreto: $1",
+	"wikibase-search-bad-profile-name": "Nome do perfil de pesquisa ruim: $1",
+	"wikibase-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",
+	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
+	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida"
 }

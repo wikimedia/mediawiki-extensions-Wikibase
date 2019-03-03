@@ -386,6 +386,10 @@
 	"wikibase-concept-uri": "URI-концепції",
 	"wikibase-concept-uri-tooltip": "URI, який ідентифікує концепції, описані в цьому елементі",
 	"wikibase-pageimage-helptext": "Зображення береться із тверджень у цьому елементі. Ви можете налаштувати зображення, змінивши твердження.",
+	"wikibase-rescore-profile-prefix": "Стандартний профіль переоцінювання для доповнення пошуку",
+	"wikibase-rescore-profile-prefix-boost": "Профіль переоцінювання для доповнення пошуку з підсиленням тверджень",
+	"wikibase-rescore-profile-fulltext": "Стандартний профіль переоцінювання для повнотекстового пошуку",
+	"wikibase-rescore-profile-fulltext-phrase": "Профіль переоцінювання для повнотекстового пошуку з оцінюванням фраз",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Елемент вікібази",
 	"content-model-wikibase-property": "Властивість елемента вікібази",
@@ -400,5 +404,11 @@
 	"action-item-merge": "об’єднання елементів",
 	"action-property-create": "створення властивостей",
 	"wikibase-pageinfo-subscription": "Вікі, підписані на цю сутність",
-	"wikibase-pageinfo-subscription-none": "Немає"
+	"wikibase-pageinfo-subscription-none": "Немає",
+	"wikibase-search-bad-entity-type": "Хибний тип сутності: $1",
+	"wikibase-search-bad-profile-name": "Хибна назва пошукового профілю: $1",
+	"wikibase-search-namespace-mix": "Суміщення просторів сутностей та статей у пошуку наразі не підтримується. Пошук буде здійснено лише за простором назв для сутностей.",
+	"wikibase-search-config-notfound": "Конфігурацію повнотекстового пошуку не знайдено: $1",
+	"wikibase-search-config-badclass": "Поганий клас конструктора запитів: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Ключове слово haswbstatement не містить жодних дійсних тверджень"
 }

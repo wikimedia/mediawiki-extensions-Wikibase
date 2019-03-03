@@ -348,5 +348,6 @@
 	"wikibase-entity-not-viewable-title": "Niezgodność typu treści: Nie można wyświetlić treści",
 	"action-item-merge": "połącz elementy",
 	"action-property-create": "tworzenia właściwości",
-	"wikibase-pageinfo-subscription-none": "Brak"
+	"wikibase-pageinfo-subscription-none": "Brak",
+	"wikibase-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1"
 }

@@ -390,5 +390,8 @@
 	"action-item-merge": "sloučit položky",
 	"action-property-create": "vytvářet vlastnosti",
 	"wikibase-pageinfo-subscription": "Wiki odebírající tuto entitu",
-	"wikibase-pageinfo-subscription-none": "Žádné"
+	"wikibase-pageinfo-subscription-none": "Žádné",
+	"wikibase-search-bad-entity-type": "Chybný typ entity: $1",
+	"wikibase-search-namespace-mix": "Směšování jmenných prostorů pro entity a články v jednom vyhledávání není zatím podporováno. Bude se hledat jen ve jmenných prostorech pro entity.",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Klíčové slovo haswbstatement neobsahuje žádné platné výroky"
 }

@@ -106,5 +106,7 @@
 	"wikibase-listdatatypes-wikibase-property-head": "Propietatea",
 	"content-model-wikibase-property": "Wikibase propietatea",
 	"right-property-term": "Aldatu propietatearen terminoak  (etiketak, deskribapenak, goitizenak)",
-	"wikibase-pageinfo-subscription-none": "Bat ere ez"
+	"wikibase-pageinfo-subscription-none": "Bat ere ez",
+	"wikibase-search-bad-entity-type": "Entitate mota txarra: $1",
+	"wikibase-search-bad-profile-name": "Profilaren izenaren bilaketa txarra: $1"
 }

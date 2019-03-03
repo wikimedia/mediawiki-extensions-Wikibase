@@ -378,5 +378,7 @@
 	"action-item-merge": "hợp nhất khoản mục",
 	"action-property-create": "tạo thuộc tính",
 	"wikibase-pageinfo-subscription": "Wiki theo dõi khoản mục này",
-	"wikibase-pageinfo-subscription-none": "Không có"
+	"wikibase-pageinfo-subscription-none": "Không có",
+	"wikibase-search-bad-entity-type": "Kiểu thực thể hỏng: $1",
+	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1"
 }

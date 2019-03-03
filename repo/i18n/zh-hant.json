@@ -394,6 +394,10 @@
 	"wikibase-concept-uri": "概念 URI",
 	"wikibase-concept-uri-tooltip": "URI 用來辨識此項目所描述的概念",
 	"wikibase-pageimage-helptext": "此圖片取用來自此項目的聲明。您可以透過更改聲明來調整圖片。",
+	"wikibase-rescore-profile-prefix": "用於完整搜尋的預設重新計分配置",
+	"wikibase-rescore-profile-prefix-boost": "用於陳述推進完整搜尋的重新計分配置",
+	"wikibase-rescore-profile-fulltext": "用於全文搜尋的預設重新計分配置",
+	"wikibase-rescore-profile-fulltext-phrase": "用於詞語計分全文搜尋的重新計分配置",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase 項目",
 	"content-model-wikibase-property": "Wikibase 屬性",
@@ -408,5 +412,11 @@
 	"action-item-merge": "合併項目",
 	"action-property-create": "建立屬性",
 	"wikibase-pageinfo-subscription": "訂閱至此實體的 wiki",
-	"wikibase-pageinfo-subscription-none": "無"
+	"wikibase-pageinfo-subscription-none": "無",
+	"wikibase-search-bad-entity-type": "錯誤實體類型：$1",
+	"wikibase-search-bad-profile-name": "錯誤搜尋配置名稱：$1",
+	"wikibase-search-namespace-mix": "搜尋裡目前不支援混合實體與條目命名空間。僅會搜尋實體命名空間。",
+	"wikibase-search-config-notfound": "查無全文搜尋設置：$1",
+	"wikibase-search-config-badclass": "錯誤查詢生成類別：$1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 關鍵字不包含有效陳述"
 }

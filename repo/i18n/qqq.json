@@ -457,6 +457,10 @@
 	"wikibase-concept-uri": "Label for a link in the toolbox on entity pages. Target of the link is the one and specific URI for the entity's concept (\"canonical concept link\").",
 	"wikibase-concept-uri-tooltip": "Text for the canonical concept link in toolbox on entity pages.",
 	"wikibase-pageimage-helptext": "Help message giving information about where data for page image has been retrieved from",
+	"wikibase-rescore-profile-prefix": "Default rescore profile for completion search. (See [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html Rescoring] in the Elastic documentation for explanation.)",
+	"wikibase-rescore-profile-prefix-boost": "\"Rescore\" is not a verb. So translate as \"profile of rescore\" and not as \"to rescore a profile\".\n:''([https://www.mediawiki.org/w/index.php?title=Extension:CirrusSearch/Profiles#Wikibase Reference] states: \"Added '''rescore profiles''' that are used for Wikibase entities\")''\n\n\"Completion search\" referred [[MediaWiki:Wikibaselexeme-rescore-profile-prefix/en|here]] as \"Prefix (completion) search\" is a search to find possible completions for the existing typed characters (the \"prefix\", one guesses).\n:''([https://www.mediawiki.org/w/index.php?title=Extension:CirrusSearch/Profiles#Context Reference] states: \"a '''rescore profile''' can be applied to regular search, '''prefix search''', Wikibase search, etc.\")''\n\nApparently related:\n* [[MediaWiki:Wikibaselexeme-rescore-profile-prefix/en]]",
+	"wikibase-rescore-profile-fulltext": "Default rescore profile for fulltext search. (See [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html Rescoring] in the Elastic documentation for explanation.)",
+	"wikibase-rescore-profile-fulltext-phrase": "Default rescore profile for fulltext search with phrase rescoring. (See [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html Rescoring] in the Elastic documentation for explanation.)",
 	"datatypes-type-url": "Unused at this time.\n{{related|Datatypes-type}}\n{{Identical|URL}}",
 	"content-model-wikibase-item": "The name for Wikibase item content model, used when describing what type of content a page contains.",
 	"content-model-wikibase-property": "The name for Wikibase property content model, used when describing what type of content a page contains.",
@@ -471,5 +475,11 @@
 	"action-item-merge": "{{Doc-action|item-merge}}",
 	"action-property-create": "{{Doc-action|property-create}}",
 	"wikibase-pageinfo-subscription": "Text to put in action=info for entity usage",
-	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity\n{{Identical|None}}"
+	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity\n{{Identical|None}}",
+	"wikibase-search-bad-entity-type": "Error message displayed when user supplies bad entity type to wbsearchentities",
+	"wikibase-search-bad-profile-name": "Error message displayed when user supplies bad search profile name",
+	"wikibase-search-namespace-mix": "Warning when using mixed namespaces in fulltext search",
+	"wikibase-search-config-notfound": "Error message displayed when configured search profile can not be loaded",
+	"wikibase-search-config-badclass": "Error message displayed when configured query builder can not be found or has wrong type",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Error message when haswbstatement keyword has no valid arguments"
 }

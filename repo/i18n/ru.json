@@ -388,5 +388,6 @@
 	"right-property-create": "Создание свойств",
 	"action-item-merge": "объединение элементов",
 	"action-property-create": "создание свойств",
-	"wikibase-pageinfo-subscription-none": "Нет"
+	"wikibase-pageinfo-subscription-none": "Нет",
+	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1"
 }
