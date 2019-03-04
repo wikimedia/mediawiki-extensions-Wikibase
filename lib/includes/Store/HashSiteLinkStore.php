@@ -63,6 +63,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 
 		foreach ( $this->linksByItemId as $prefixedId => $siteLinks ) {
 			/** @var SiteLink $siteLink */
+			'@phan-var SiteLink $siteLink';
 			foreach ( $siteLinks as $siteLink ) {
 				$itemId = new ItemId( $prefixedId );
 

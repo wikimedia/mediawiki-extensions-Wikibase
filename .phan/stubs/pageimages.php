@@ -8,4 +8,11 @@
 
 class PageImages {
 	const PROP_NAME_FREE = 'page_image_free';
+
+	/**
+	 * @param Title $title
+	 * @return File|null
+	 */
+	public static function getPageImage( Title $title ) {
+	}
 }
