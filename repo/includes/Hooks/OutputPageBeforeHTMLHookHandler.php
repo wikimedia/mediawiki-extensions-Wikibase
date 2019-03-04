@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use Language;
 use OutputPage;
+use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -20,6 +21,7 @@ use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
@@ -129,30 +131,20 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param string &$html
 	 */
 	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
-		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
-
-		if ( !empty( $placeholders ) ) {
-			$this->replacePlaceholders( $placeholders, $out, $html );
-
-			$out->addJsConfigVars(
-				'wbUserSpecifiedLanguages',
-				// All user-specified languages, that are valid term languages
-				// Reindex the keys so that javascript still works if an unknown
-				// language code in the babel box causes an index to miss
-				array_values( array_intersect(
-					$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
-					$this->termsLanguages->getLanguages()
-				) )
-			);
-		}
+		$this->replacePlaceholders( $out, $html );
+		$this->addJsUserLanguages( $out );
+		$html = $this->showOrHideEditLinks( $out, $html );
 	}
 
 	/**
-	 * @param string[] $placeholders
 	 * @param OutputPage $out
 	 * @param string &$html
 	 */
-	private function replacePlaceholders( array $placeholders, OutputPage $out, &$html ) {
+	private function replacePlaceholders( OutputPage $out, &$html ) {
+		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
+		if ( !$placeholders ) {
+			return;
+		}
 		$injector = new TextInjector( $placeholders );
 		$getHtmlCallback = function() {
 			return '';
@@ -175,6 +167,19 @@ class OutputPageBeforeHTMLHookHandler {
 		}
 
 		$html = $injector->inject( $html, $getHtmlCallback );
+	}
+
+	private function addJsUserLanguages( OutputPage $out ) {
+		$out->addJsConfigVars(
+			'wbUserSpecifiedLanguages',
+			// All user-specified languages, that are valid term languages
+			// Reindex the keys so that javascript still works if an unknown
+			// language code in the babel box causes an index to miss
+			array_values( array_intersect(
+				$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
+				$this->termsLanguages->getLanguages()
+			) )
+		);
 	}
 
 	/**
@@ -239,6 +244,55 @@ class OutputPageBeforeHTMLHookHandler {
 			$this->cookiePrefix,
 			$termsListItemsHtml ?: []
 		);
+	}
+
+	private function showOrHideEditLinks( OutputPage $out, $html ) {
+		return ToolbarEditSectionGenerator::enableSectionEditLinks(
+			$html,
+			$this->isEditable( $out )
+		);
+	}
+
+	private function isEditable( OutputPage $out ) {
+		return $this->isProbablyEditable( $out->getUser(), $out->getTitle() )
+			&& $this->isEditView( $out );
+	}
+
+	/**
+	 * This is duplicated from
+	 * @see OutputPage::getJSVars - wgIsProbablyEditable
+	 *
+	 * @param User $user
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	private function isProbablyEditable( User $user, Title $title ) {
+		return $title->quickUserCan( 'edit', $user )
+			&& ( $title->exists() || $title->quickUserCan( 'create', $user ) );
+	}
+
+	/**
+	 * This is mostly a duplicate of
+	 * @see \Wikibase\ViewEntityAction::isEditable
+	 *
+	 * @param OutputPage $out
+	 *
+	 * @return bool
+	 */
+	private function isEditView( OutputPage $out ) {
+		return $this->isLatestRevision( $out )
+			&& !$this->isDiff( $out )
+			&& !$out->isPrintable();
+	}
+
+	private function isDiff( OutputPage $out ) {
+		return $out->getRequest()->getCheck( 'diff' );
+	}
+
+	private function isLatestRevision( OutputPage $out ) {
+		return !$out->getRevisionId() // the revision id can be null on a ParserCache hit, but only for the latest revision
+			|| $out->getRevisionId() === $out->getTitle()->getLatestRevID();
 	}
 
 }
