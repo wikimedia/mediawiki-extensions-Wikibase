@@ -7,6 +7,7 @@ use OutputPage;
 use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
+use WebRequest;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
@@ -34,7 +35,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return OutputPage
 	 */
 	private function newOutputPage() {
-		return new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+		$outputPage = new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+		$outputPage->setTitle( new Title() );
+
+		return $outputPage;
 	}
 
 	/**
@@ -139,6 +143,90 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$html = '$1';
 		$handler->doOutputPageBeforeHTML( $out, $html );
 		$this->assertSame( '', $html );
+	}
+
+	public function testGivenPageIsEditable_keepsEditButtonsAndRemovesSpecialMarkup() {
+		$contentBetweenEditLinks = 'hello';
+		$editLink1 = 'edit link 1';
+		$editLink2 = 'edit link 2';
+		$html = "<wb:sectionedit>$editLink1</wb:sectionedit> $contentBetweenEditLinks <wb:sectionedit>$editLink2</wb:sectionedit>";
+		$out = $this->newOutputPage();
+
+		$hookHandler = new OutputPageBeforeHTMLHookHandler(
+			TemplateFactory::getDefaultInstance(),
+			$this->newUserLanguageLookup(),
+			new StaticContentLanguages( [] ),
+			$this->createMock( EntityRevisionLookup::class ),
+			$this->createMock( LanguageNameLookup::class ),
+			$this->createMock( OutputPageEntityIdReader::class ),
+			$this->createMock( EntityFactory::class ),
+			''
+		);
+
+		$hookHandler->doOutputPageBeforeHTML( $out, $html );
+
+		$this->assertEquals( "$editLink1 $contentBetweenEditLinks $editLink2", $html );
+	}
+
+	/**
+	 * @dataProvider nonEditableOutputPageProvider
+	 */
+	public function testGivenPageIsNotEditable_removesEditButtonsAndSpecialMarkup( $outputPage ) {
+		$contentBetweenEditLinks = 'hello';
+		$html = "<wb:sectionedit>edit link 1</wb:sectionedit>$contentBetweenEditLinks<wb:sectionedit>edit link 2</wb:sectionedit>";
+		$hookHandler = new OutputPageBeforeHTMLHookHandler(
+			TemplateFactory::getDefaultInstance(),
+			$this->newUserLanguageLookup(),
+			new StaticContentLanguages( [] ),
+			$this->createMock( EntityRevisionLookup::class ),
+			$this->createMock( LanguageNameLookup::class ),
+			$this->createMock( OutputPageEntityIdReader::class ),
+			$this->createMock( EntityFactory::class ),
+			''
+		);
+		$hookHandler->doOutputPageBeforeHTML( $outputPage, $html );
+		$this->assertSame( $contentBetweenEditLinks, $html );
+	}
+
+	public function nonEditableOutputPageProvider() {
+		$out = $this->newOutputPage();
+		$title = $this->createMock( Title::class );
+		$title->expects( $this->once() )
+			->method( 'quickUserCan' )
+			->willReturn( false );
+		$out->setTitle( $title );
+		yield 'user does not have edit permission' => [ $out ];
+		$request = $this->createMock( WebRequest::class );
+		$request->expects( $this->once() )
+			->method( 'getCheck' )
+			->with( 'diff' )
+			->willReturn( true );
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setRequest( $request );
+		$context->setTitle( new Title() );
+		yield 'diff page' => [ new OutputPage( $context ) ];
+		$out = $this->newOutputPage();
+		$out->setRevisionId( 123 );
+		$title = $this->createMock( Title::class );
+		$title->expects( $this->once() )
+			->method( 'getLatestRevID' )
+			->willReturn( 321 );
+		$out->setTitle( $title );
+		yield 'not latest revision' => [ $out ];
+		$out = $this->newOutputPage();
+		$out->setPrintable();
+		yield 'print view' => [ $out ];
+	}
+
+	private function newUserLanguageLookup() {
+		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
+		$userLanguageLookup->expects( $this->any() )
+			->method( 'getUserSpecifiedLanguages' )
+			->will( $this->returnValue( [] ) );
+		$userLanguageLookup->expects( $this->any() )
+			->method( 'getAllUserLanguages' )
+			->will( $this->returnValue( [] ) );
+		return $userLanguageLookup;
 	}
 
 }
