@@ -177,7 +177,7 @@ class SiteLinkCommentCreator {
 		/* Messages used:
 			wikibase-comment-sitelink-add wikibase-comment-sitelink-change wikibase-comment-sitelink-remove
 		*/
-		$params['message'] = $messagePrefix . 'change';
+		$params = [ 'message' => $messagePrefix . 'change' ];
 
 		foreach ( $diffs as $siteId => $diff ) {
 			// backwards compatibility in case of old, pre-badges changes in the queue
