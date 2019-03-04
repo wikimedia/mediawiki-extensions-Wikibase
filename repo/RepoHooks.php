@@ -49,7 +49,6 @@ use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\Search\Elastic\Query\WbStatementQuantityFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
-use Wikibase\View\ToolbarEditSectionGenerator;
 use WikiPage;
 
 /**
@@ -1032,24 +1031,6 @@ final class RepoHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
-	}
-
-	/**
-	 * Post-cache transformation for Wikibase section-edit markers
-	 *
-	 * @param ParserOutput $out
-	 * @param string &$text Text being transformed
-	 * @param array &$options Transformation options
-	 */
-	public static function onParserOutputPostCacheTransform(
-		ParserOutput $out,
-		&$text,
-		array &$options
-	) {
-		$text = ToolbarEditSectionGenerator::enableSectionEditLinks(
-			$text,
-			$options['enableSectionEditLinks']
-		);
 	}
 
 	/**
