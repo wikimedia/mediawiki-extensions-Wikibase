@@ -56,15 +56,15 @@ return [
 		'view/WikibaseView.php',
 		'Wikibase.php',
 		// Include extension stubs so we don't require extensions to be available locally.
-		'tests/phan/stubs/babel.php',
-		'tests/phan/stubs/cirrussearch.php',
-		'tests/phan/stubs/echo.php',
-		'tests/phan/stubs/geodata.php',
-		'tests/phan/stubs/math.php',
-		'tests/phan/stubs/mobilefrontend.php',
-		'tests/phan/stubs/monolog.php',
-		'tests/phan/stubs/pageimages.php',
-		'tests/phan/stubs/scribunto.php',
+		'.phan/stubs/babel.php',
+		'.phan/stubs/cirrussearch.php',
+		'.phan/stubs/echo.php',
+		'.phan/stubs/geodata.php',
+		'.phan/stubs/math.php',
+		'.phan/stubs/mobilefrontend.php',
+		'.phan/stubs/monolog.php',
+		'.phan/stubs/pageimages.php',
+		'.phan/stubs/scribunto.php',
 	],
 
 	/**
@@ -86,10 +86,10 @@ return [
 			'repo/maintenance',
 			'lib/maintenance',
 			'view/src',
-			'./../../includes',
-			'./../../languages',
-			'./../../maintenance',
-			'./../../vendor',
+			'../../includes',
+			'../../languages',
+			'../../maintenance',
+			'../../vendor',
 		],
 		// "Local" vendor dir not needed when all dependencies are merged in core's vendor dir.
 		is_dir( 'vendor' ) ? [ 'vendor' ] : []
@@ -111,12 +111,12 @@ return [
 	 */
 	"exclude_analysis_directory_list" => array_merge(
 		[
-			'tests/phan/stubs',
-			'./../../includes',
-			'./../../languages',
-			'./../../maintenance',
-			'./../../vendor',
-			'./../../extensions',
+			'.phan/stubs',
+			'../../includes',
+			'../../languages',
+			'../../maintenance',
+			'../../vendor',
+			'../../extensions',
 		],
 		// "Local" vendor dir not needed when all dependencies are merged in core's vendor dir.
 		is_dir( 'vendor' ) ? [ 'vendor' ] : []
