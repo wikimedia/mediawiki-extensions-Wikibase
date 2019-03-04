@@ -23,6 +23,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
+global $wgHooks;
+
 $wgHooks['WikibaseTextForSearchIndex'][] = function( EntityContent $entityContent, &$text ) {
 	if ( !( $entityContent instanceof ItemContent ) ) {
 		return;

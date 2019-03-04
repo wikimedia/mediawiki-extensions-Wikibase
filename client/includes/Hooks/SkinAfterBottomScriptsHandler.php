@@ -136,7 +136,6 @@ class SkinAfterBottomScriptsHandler {
 			return null;
 		}
 
-		/** @suppress PhanUndeclaredStaticMethod Static call to undeclared method */
 		return \PageImages::getPageImage( $title ) ?: null;
 	}
 

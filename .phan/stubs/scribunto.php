@@ -70,7 +70,7 @@ class Scribunto_LuaLibraryBase {
 
 }
 
-class ScribuntoException {
+class ScribuntoException extends MWException {
 
 	/**
 	 * @param string $messageName
