@@ -55,7 +55,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param FingerprintProvider|EntityDocument $entity
 	 *
 	 * @return string|null
 	 */

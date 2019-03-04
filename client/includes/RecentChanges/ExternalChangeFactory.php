@@ -243,8 +243,10 @@ class ExternalChangeFactory {
 		// NOTE: We want to get rid of the comment and composite-comment fields in $changeParams
 		// in the future, see https://phabricator.wikimedia.org/T101836#1414639 part 3.
 		if ( array_key_exists( 'composite-comment', $changeParams ) ) {
-			$comment['key'] = 'wikibase-comment-multi';
-			$comment['numparams'] = $this->countCompositeComments( $changeParams['composite-comment'] );
+			$comment = [
+				'key' => 'wikibase-comment-multi',
+				'numparams' => $this->countCompositeComments( $changeParams['composite-comment'] ),
+			];
 
 			return $this->formatComment( $comment );
 		} elseif ( array_key_exists( 'comment', $changeParams ) ) {

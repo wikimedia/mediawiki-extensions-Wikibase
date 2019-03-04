@@ -6,7 +6,6 @@ use ApiMain;
 use Deserializers\Deserializer;
 use Title;
 use ApiUsageException;
-use Wikibase\DataModel\Entity\Clearable;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
@@ -220,7 +219,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 *
-	 * @param EntityDocument|Clearable &$entity
+	 * @param EntityDocument &$entity
 	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
