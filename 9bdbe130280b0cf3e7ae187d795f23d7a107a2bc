@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "5778f5ec_b6c43a36",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-04T15:23:56Z",
+      "side": 1,
+      "message": "Introduced origionally in Ia66f8ffcc74a4786acdab813abe4d52dbd59e82e\n\nThe name can indeed be internationalized, but there is always a canonical string name that can be used.\n\nAFAIK we only actually use ints here in production, we could remove the complexity of allowing strings, but we should do that everywhere at once.",
+      "parentUuid": "27a8126b_40588229",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b514f2d3_e462771b",
         "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
         "patchSetId": 7
