@@ -212,6 +212,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// TODO: WikiPageEntityMetaDataLookup should use RevisionStore::getQueryInfo,
 		// then we could use RevisionStore::newRevisionFromRow here!
 		$revision = $this->revisionStore->getRevisionById( $row->rev_id, $revStoreFlags );
+		if ( $revision === null ) {
+			return [ null, null ];
+		}
+
 		$slotRole = $row->role_name ?? 'main';
 
 		// NOTE: Support for cross-wiki content access in RevisionStore is incomplete when,
