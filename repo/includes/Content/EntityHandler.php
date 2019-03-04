@@ -252,8 +252,8 @@ abstract class EntityHandler extends ContentHandler {
 	 * to make sure they never overwrite our autosummaries (which look like the automatic summary
 	 * prefixes with a section title, and so could be overwritten).
 	 *
-	 * @param Content $oldContent
-	 * @param Content $newContent
+	 * @param Content|null $oldContent
+	 * @param Content|null $newContent
 	 * @param int $flags
 	 *
 	 * @return string Empty string
@@ -658,7 +658,6 @@ abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * @param EntityContent $content
-	 * @param Title $title
 	 * @return DataUpdate[]
 	 * @throws MWException
 	 */

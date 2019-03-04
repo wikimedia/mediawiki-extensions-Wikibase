@@ -220,7 +220,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 *
-	 * @param EntityDocument|Clearable &$entity
+	 * @param EntityDocument &$entity
 	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *

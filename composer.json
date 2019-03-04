@@ -46,7 +46,8 @@
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.3.1",
 		"wikibase/wikibase-codesniffer": "^0.5.1",
-		"cache/integration-tests": "^0.16.0"
+		"cache/integration-tests": "^0.16.0",
+		"mediawiki/mediawiki-phan-config": "0.6.1"
 	},
 	"suggest": {
 		"ext-calendar": "Needed for dumpRdf script"

@@ -139,7 +139,7 @@ class EntityDiffChangedAspectsFactory {
 
 		foreach ( $claimsDiff as $pid => $diffOp ) {
 			/* @var $statement Statement */
-
+			'@phan-var $statement Statement';
 			if ( $diffOp instanceof DiffOpAdd ) {
 				$statement = $diffOp->getNewValue();
 			} elseif ( $diffOp instanceof DiffOpRemove ) {

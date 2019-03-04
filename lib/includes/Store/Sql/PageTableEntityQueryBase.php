@@ -68,7 +68,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 	}
 
 	/**
-	 * @param EntityId $entityIds
+	 * @param EntityId[] $entityIds
 	 * @param IDatabase $db
 	 * @return array [ string $whereCondition, array $extraTables ]
 	 */

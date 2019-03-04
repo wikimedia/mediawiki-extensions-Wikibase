@@ -66,7 +66,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @param ILoadBalancer $loadBalancer database connection accessor
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids
-	 * @param LoggerInterface $logger
+	 * @param LoggerInterface|null $logger
 	 * @param int $flags {@see self::FLAG_IGNORE_REPLICA}
 	 */
 	public function __construct(

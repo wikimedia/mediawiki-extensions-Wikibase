@@ -44,7 +44,7 @@ class PidLock {
 		$processes = explode( "\n", shell_exec( 'tasklist.exe' ) );
 		if ( is_array( $processes ) ) {
 			foreach ( $processes as $process ) {
-				if ( strpos( 'Image Name', $process ) === 0 || strpos( '===', $process ) === 0 ) {
+				if ( strpos( $process, 'Image Name' ) === 0 || strpos( '===', $process ) === 0 ) {
 					continue;
 				}
 
