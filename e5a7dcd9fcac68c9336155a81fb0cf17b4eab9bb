@@ -22,6 +22,30 @@
       "revId": "e5a7dcd9fcac68c9336155a81fb0cf17b4eab9bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c26a6fd9_eb616a9e",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-04T13:39:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4d387c_8c6f278b",
+      "range": {
+        "startLine": 84,
+        "startChar": 18,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "e5a7dcd9fcac68c9336155a81fb0cf17b4eab9bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
