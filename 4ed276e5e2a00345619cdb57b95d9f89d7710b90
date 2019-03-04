@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41f72066_f923b719",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-04T15:03:56Z",
+      "side": 1,
+      "message": "This should indeed probably never happen, as loadEntity is private and should only be called when the revision itself has already been selected, hence why we have $row.\n\nProbably better to throw an exception in this case indicating the issue than hiding it",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 3
+      },
+      "revId": "4ed276e5e2a00345619cdb57b95d9f89d7710b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
