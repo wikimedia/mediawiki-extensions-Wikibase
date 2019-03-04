@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d2b15af2_86490c97",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-03-04T07:08:21Z",
+      "side": 1,
+      "message": "good catch, I copied this whole throw statement from somewhere else, will fix!",
+      "parentUuid": "2552fc0f_9a217752",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec59c02_6faa8509",
         "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
         "patchSetId": 7
@@ -65,6 +83,24 @@
       "writtenOn": "2019-02-21T14:48:45Z",
       "side": 1,
       "message": "We don\u0027t have to support PHP5?",
+      "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c43a8f0_e9cda059",
+        "filename": "data-access/src/EntitySourceDefinitionsConfigParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-03-04T07:08:21Z",
+      "side": 1,
+      "message": "Yes and no :). We have to support PHP \u003e\u003d 7.0 and HHVM with php7 \"mode\" disabled. null coalescing operator is (surprisingly to me, I have to say) available in both.",
+      "parentUuid": "b514f2d3_e462771b",
       "revId": "9bdbe130280b0cf3e7ae187d795f23d7a107a2bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
