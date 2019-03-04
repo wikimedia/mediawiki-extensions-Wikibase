@@ -9,7 +9,8 @@
 			"Vodnokon4e",
 			"Лорд Бъмбъри",
 			"Termininja",
-			"ShockD"
+			"ShockD",
+			"Ted Masters"
 		]
 	},
 	"tooltip-t-wikibase": "Препратка към свързаният обект от хранилището за данни",
@@ -69,5 +70,6 @@
 	"wikibase-pageinfo-entity-usage-T": "Заглавие",
 	"wikibase-pageinfo-entity-usage-O": "Други (изявления)",
 	"wikibase-otherprojects": "В други проекти",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Свързване|Свързвания}} с {{WBREPONAME}}"
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Свързване|Свързвания}} с {{WBREPONAME}}",
+	"unresolved-property-category": "Страници с неразрешени свойства"
 }
