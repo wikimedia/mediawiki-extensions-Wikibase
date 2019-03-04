@@ -206,6 +206,9 @@ namespace CirrusSearch\Profile {
 }
 
 namespace CirrusSearch\Query {
+
+	use CirrusSearch\Search\SearchContext;
+
 	interface FilterQueryFeature {
 	}
 
@@ -216,7 +219,7 @@ namespace CirrusSearch\Query {
 
 	}
 	class MoreLikeFeature {
-		protected function doApply( $context, $key, $value, $quotedValue, $negated ) {
+		protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
 		}
 	}
 }
