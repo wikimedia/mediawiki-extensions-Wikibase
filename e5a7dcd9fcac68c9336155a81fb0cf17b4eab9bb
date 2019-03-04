@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab4d387c_8c6f278b",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-04T11:40:58Z",
+      "side": 1,
+      "message": "As hurtful as it is but documenting this return value describes the essence of this change:\n`@return string|int`\nWould it be foolish to set the const to null instead? null is sort of an accepted magic value (though sure not quite as good as not having any at all) and would compare to null later...",
+      "range": {
+        "startLine": 84,
+        "startChar": 18,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "e5a7dcd9fcac68c9336155a81fb0cf17b4eab9bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
