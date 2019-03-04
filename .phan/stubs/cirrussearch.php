@@ -12,6 +12,9 @@ namespace {
 }
 
 namespace CirrusSearch {
+
+	use User;
+
 	class CirrusDebugOptions {
 		public static function fromRequest( \WebRequest $request ) {
 		}
@@ -21,6 +24,10 @@ namespace CirrusSearch {
 	}
 
 	class ElasticsearchIntermediary {
+
+		public function __construct( Connection $connection, User $user = null, $slowSeconds = null, $extraBackendLatency = 0 ) {
+		}
+
 		/**
 		 * @param mixed|null
 		 * @return Status
@@ -91,6 +98,9 @@ namespace CirrusSearch {
 		 * @param string|null $param3
 		 */
 		function addWarning( $message, $param1 = null, $param2 = null, $param3 = null );
+	}
+
+	interface RequestLog {
 	}
 }
 
@@ -206,6 +216,9 @@ namespace CirrusSearch\Profile {
 }
 
 namespace CirrusSearch\Query {
+
+	use CirrusSearch\Search\SearchContext;
+
 	interface FilterQueryFeature {
 	}
 
@@ -216,7 +229,7 @@ namespace CirrusSearch\Query {
 
 	}
 	class MoreLikeFeature {
-		protected function doApply( $context, $key, $value, $quotedValue, $negated ) {
+		protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
 		}
 	}
 }

@@ -15,6 +15,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -336,7 +337,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @throws ScribuntoException
+	 * @throws \ScribuntoException
 	 * @return EntityId
 	 */
 	private function parseUserGivenEntityId( $idSerialization ) {

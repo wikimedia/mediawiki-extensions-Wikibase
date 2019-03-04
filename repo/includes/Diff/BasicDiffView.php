@@ -77,7 +77,7 @@ class BasicDiffView implements DiffView {
 			}
 		} else {
 			$html = '';
-			foreach ( $op as $key => $subOp ) {
+			foreach ( $op->toArray() as $key => $subOp ) {
 				$html .= $this->generateOpHtml(
 					array_merge( $path, [ $key ] ),
 					$subOp
