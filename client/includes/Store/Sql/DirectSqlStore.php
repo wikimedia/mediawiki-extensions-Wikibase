@@ -184,8 +184,6 @@ class DirectSqlStore implements ClientStore {
 	 */
 	private $addEntityUsagesBatchSize;
 
-	private $dataAccessSettings;
-
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
@@ -226,14 +224,6 @@ class DirectSqlStore implements ClientStore {
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );
 		$this->entityUsagePerPageLimit = $settings->getSetting( 'entityUsagePerPageLimit' );
 		$this->addEntityUsagesBatchSize = $settings->getSetting( 'addEntityUsagesBatchSize' );
-
-		// TODO: inject or so, this is a temporary hack
-		$this->dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$settings->getSetting( 'useEntitySourceBasedFederation' )
-		);
 	}
 
 	/**
