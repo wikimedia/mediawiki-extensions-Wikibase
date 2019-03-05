@@ -11,11 +11,13 @@ use WebRequest;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
@@ -70,7 +72,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$languageNameLookup,
 			$this->getOutputPageEntityIdReaderReturningEntity( $itemId ),
 			new EntityFactory( [] ),
-			''
+			'',
+			$this->newMockEntityContentFactory()
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -115,7 +118,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LanguageNameLookup::class ),
 			$outputPageEntityIdReader,
 			new EntityFactory( [] ),
-			''
+			'',
+			$this->newMockEntityContentFactory()
 		);
 
 		$out = $this->newOutputPage();
@@ -141,6 +145,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->getOutputPageEntityIdReaderReturningEntity( $entity ),
 			$entityFactory,
 			'',
+			$this->newMockEntityContentFactory(),
 			true
 		);
 
@@ -209,7 +214,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( LanguageNameLookup::class ),
 			$this->createMock( OutputPageEntityIdReader::class ),
 			$this->createMock( EntityFactory::class ),
-			''
+			'',
+			$this->newMockEntityContentFactory()
 		);
 
 		$hookHandler->doOutputPageBeforeHTML( $out, $html );
@@ -231,7 +237,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( LanguageNameLookup::class ),
 			$this->createMock( OutputPageEntityIdReader::class ),
 			$this->createMock( EntityFactory::class ),
-			''
+			'',
+			$this->newMockEntityContentFactory()
 		);
 
 		$hookHandler->doOutputPageBeforeHTML( $outputPage, $html );
@@ -270,6 +277,47 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$out = $this->newOutputPage();
 		$out->setPrintable();
 		yield 'print view' => [ $out ];
+	}
+
+	public function testGivenNotAnEntityPage_doesNothing() {
+		$out = $this->newOutputPage();
+		$out->setTitle( new Title() );
+
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		$entityContentFactory->expects( $this->once() )
+			->method( 'isEntityContentModel' )
+			->willReturn( false );
+
+		$hookHandler = new OutputPageBeforeHTMLHookHandler(
+			$this->newNeverCalledMock( TemplateFactory::class ),
+			$this->newNeverCalledMock( UserLanguageLookup::class ),
+			$this->newNeverCalledMock( ContentLanguages::class ),
+			$this->newNeverCalledMock( EntityRevisionLookup::class ),
+			$this->newNeverCalledMock( LanguageNameLookup::class ),
+			$this->newNeverCalledMock( OutputPageEntityIdReader::class ),
+			$this->newNeverCalledMock( EntityFactory::class ),
+			'',
+			$entityContentFactory
+		);
+
+		$hookHandler->doOutputPageBeforeHTML( $out, $html );
+	}
+
+	private function newNeverCalledMock( $className ) {
+		$mock = $this->createMock( $className );
+		$mock->expects( $this->never() )
+			->method( $this->anything() );
+
+		return $mock;
+	}
+
+	private function newMockEntityContentFactory() {
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		$entityContentFactory->expects( $this->once() )
+			->method( 'isEntityContentModel' )
+			->willReturn( true );
+
+		return $entityContentFactory;
 	}
 
 }
