@@ -156,6 +156,8 @@ return call_user_func( function() {
 			'messages' => [
 				'wikibase-addqualifier',
 				'wikibase-addreference',
+				'wikibase-outdated-client-script',
+				'wikibase-refresh-for-missing-datatype',
 				'wikibase-claimview-snak-tooltip',
 				'wikibase-claimview-snak-new-tooltip',
 				'wikibase-snakview-property-input-placeholder',
