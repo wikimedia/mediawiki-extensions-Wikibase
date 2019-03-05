@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02378b78_67f88f74",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-05T16:41:32Z",
+      "side": 1,
+      "message": "Is there a reason to inject the entity and revision id separately as opposed to the EntityRevision?",
+      "range": {
+        "startLine": 289,
+        "startChar": 47,
+        "endLine": 289,
+        "endChar": 89
+      },
+      "revId": "2b2bf85c57c9373cb8c38005d2b27aac47975bf4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
