@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "899406e7_d0c941cb",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-03-05T10:50:03Z",
+      "side": 1,
+      "message": "?",
+      "revId": "cc94f576aaacb87f300cfdea3138567b40971612",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
