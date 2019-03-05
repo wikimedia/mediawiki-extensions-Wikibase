@@ -417,5 +417,7 @@
 	"wikibase-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",
 	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida"
+	"wikibase-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida",
+	"wikibase-refresh-for-missing-datatype": "O tipo de dados $1 não foi encontrado no script do cliente local. Isso pode ser resultado de um script em cache desatualizado. Tente atualizar seu navegador, ignorando o cache local (Ctrl-Shift-R ou Cmd-Shift-R na maioria dos navegadores) para resolver o problema.",
+	"wikibase-outdated-client-script": "Uh-oh, uma atualização difícil é devida!"
 }

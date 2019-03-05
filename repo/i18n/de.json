@@ -420,5 +420,7 @@
 	"wikibase-search-namespace-mix": "Das Vermischen der Objekt- und Artikelnamensräume in der Suche wird derzeit nicht unterstützt. Es werden nur die Objektnamensräume durchsucht.",
 	"wikibase-search-config-notfound": "Volltext-Suchkonfiguration nicht gefunden: $1",
 	"wikibase-search-config-badclass": "Ungültige Abfragenbuilder-Klasse: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "Das Schlüsselwort haswbstatement enthält keine gültigen Aussagen"
+	"wikibase-haswbstatement-feature-no-valid-statements": "Das Schlüsselwort haswbstatement enthält keine gültigen Aussagen",
+	"wikibase-refresh-for-missing-datatype": "Der Datentyp $1 wurde nicht im lokalen Skript des Clients gefunden. Dies könnte ein Ergebnis eines veralteten gecachten Skriptes sein. Versuche, deinen Browser durch Umgehung des lokalen Caches (Strg-Shift-R oder Cmd-Shift-R in den meisten Browsern) komplett zu aktualisieren, um das Problem zu lösen.",
+	"wikibase-outdated-client-script": "Hoppla, es ist eine harte Aktualisierung fällig!"
 }
