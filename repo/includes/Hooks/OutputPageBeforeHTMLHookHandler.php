@@ -131,20 +131,23 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param string &$html
 	 */
 	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
-		$this->replacePlaceholders( $out, $html );
+		$html = $this->replacePlaceholders( $out, $html );
 		$this->addJsUserLanguages( $out );
 		$html = $this->showOrHideEditLinks( $out, $html );
 	}
 
 	/**
 	 * @param OutputPage $out
-	 * @param string &$html
+	 * @param string $html
+	 *
+	 * @return string
 	 */
-	private function replacePlaceholders( OutputPage $out, &$html ) {
+	private function replacePlaceholders( OutputPage $out, $html ) {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 		if ( !$placeholders ) {
-			return;
+			return $html;
 		}
+
 		$injector = new TextInjector( $placeholders );
 		$getHtmlCallback = function() {
 			return '';
@@ -166,7 +169,7 @@ class OutputPageBeforeHTMLHookHandler {
 			}
 		}
 
-		$html = $injector->inject( $html, $getHtmlCallback );
+		return $injector->inject( $html, $getHtmlCallback );
 	}
 
 	private function addJsUserLanguages( OutputPage $out ) {
