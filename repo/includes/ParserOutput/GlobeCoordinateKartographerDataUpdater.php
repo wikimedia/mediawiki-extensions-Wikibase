@@ -81,7 +81,6 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 		$parserOutput->addJsConfigVars( $kartographerParserOutput->getJsConfigVars() );
 		$parserOutput->addModules( $kartographerParserOutput->getModules() );
 		$parserOutput->addModuleStyles( $kartographerParserOutput->getModuleStyles() );
-		$parserOutput->addModuleScripts( $kartographerParserOutput->getModuleScripts() );
 
 		$parserOutput->setProperty(
 			'kartographer',
