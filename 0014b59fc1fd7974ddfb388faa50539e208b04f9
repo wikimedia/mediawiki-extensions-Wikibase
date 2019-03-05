@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8cf4b5f8_20997440",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-05T09:25:45Z",
+      "side": 1,
+      "message": "I do agree that guarding a generic hook from scenarios we did not foresee or expect it to consume resources in makes absolute sense. With respect to Murphy\u0027s law we should probably add it as a dedicated patch though.",
+      "range": {
+        "startLine": 142,
+        "startChar": 15,
+        "endLine": 142,
+        "endChar": 27
+      },
+      "revId": "0014b59fc1fd7974ddfb388faa50539e208b04f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13d710d3_789b5590",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-05T09:25:45Z",
+      "side": 1,
+      "message": "Rule #3 (things you did not change): Next we should change replacePlaceholders() to also return the modified HTML instead of modifying it by reference.",
+      "range": {
+        "startLine": 148,
+        "startChar": 2,
+        "endLine": 148,
+        "endChar": 7
+      },
+      "revId": "0014b59fc1fd7974ddfb388faa50539e208b04f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54b730b8_b9e1bdfe",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-05T09:25:45Z",
+      "side": 1,
+      "message": "This is really unfortunate - in the old hook we received \"enableSectionEditLinks\" via ParserOutput options that had its value set by `Article::view`, now we need to redundantly figure out the values here.\n- `isProbablyEditable()` could be made a method of `OutputPage`, or better yet there could be a `TitleEditabilityAuthorizer` service, and reused - but the existing coverage is poor and adding it would require lots of reading to be in line with certainly existing paradigms\n- `isLatestRevision()` could be made into a `OutputPage::showsLatestRevision()` but I lack knownledge if it has a place there in such generalized from (what happens on pages that don\u0027t show revision-based content?)\n- diff, as print, is a form of presentation I would have hoped to find existing variables for but could not either\n\nIt feels really uncomfortable duplicating this here but upstreaming the ideas(!) seems to blow our task entirely out of proportion as this is the bread and butter of what the framework should do for us and such changes should not be taken lightly.",
+      "range": {
+        "startLine": 268,
+        "startChar": 3,
+        "endLine": 268,
+        "endChar": 28
+      },
+      "revId": "0014b59fc1fd7974ddfb388faa50539e208b04f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
