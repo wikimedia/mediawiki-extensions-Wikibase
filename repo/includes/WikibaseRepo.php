@@ -1500,6 +1500,23 @@ class WikibaseRepo {
 	 *  Optionally the list also contains entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$types = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
+			$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
+
+			return array_reduce(
+				$types,
+				function ( $carry, $x ) use ( $subEntityTypes ) {
+					$carry[] = $x;
+					if ( array_key_exists( $x, $subEntityTypes ) ) {
+						$carry = array_merge( $carry, $subEntityTypes[$x] );
+					}
+					return $carry;
+				},
+				[]
+			);
+		}
+
 		return $this->repositoryDefinitions->getAllEntityTypes();
 	}
 
