@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "382a3f05_b6558879",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-06T12:32:36Z",
+      "side": 1,
+      "message": "Somehow return \u0027\u0027 makes me nervous in the new context but it probably should not more than before.",
+      "revId": "40f86b94c1ddd94ba6c3266b2b34d9dc65f815be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
