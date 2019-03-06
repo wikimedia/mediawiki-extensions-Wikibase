@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use DerivativeContext;
 use OutputPage;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
-use WebRequest;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
@@ -18,6 +18,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
@@ -33,6 +34,24 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  */
 class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+
+	/**
+	 * @var OutputPageEditability|MockObject
+	 */
+	private $editablity;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->editablity = $this->mockEditability();
+	}
+
+	public function testNewFromGlobalState_returnsSelf() {
+		$this->assertInstanceOf(
+			OutputPageBeforeHTMLHookHandler::class,
+			OutputPageBeforeHTMLHookHandler::newFromGlobalState()
+		);
+	}
 
 	/**
 	 * @return OutputPage
@@ -73,7 +92,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->getOutputPageEntityIdReaderReturningEntity( $itemId ),
 			new EntityFactory( [] ),
 			'',
-			$this->newMockEntityContentFactory()
+			$this->newMockEntityContentFactory(),
+			$this->editablity
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -119,7 +139,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$outputPageEntityIdReader,
 			new EntityFactory( [] ),
 			'',
-			$this->newMockEntityContentFactory()
+			$this->newMockEntityContentFactory(),
+			$this->editablity
 		);
 
 		$out = $this->newOutputPage();
@@ -146,6 +167,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$entityFactory,
 			'',
 			$this->newMockEntityContentFactory(),
+			$this->editablity,
 			true
 		);
 
@@ -215,7 +237,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( OutputPageEntityIdReader::class ),
 			$this->createMock( EntityFactory::class ),
 			'',
-			$this->newMockEntityContentFactory()
+			$this->newMockEntityContentFactory(),
+			$this->editablity
 		);
 
 		$hookHandler->doOutputPageBeforeHTML( $out, $html );
@@ -223,12 +246,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( "$editLink1 $contentBetweenEditLinks $editLink2", $html );
 	}
 
-	/**
-	 * @dataProvider nonEditableOutputPageProvider
-	 */
-	public function testGivenPageIsNotEditable_removesEditButtonsAndSpecialMarkup( $outputPage ) {
+	public function testGivenPageIsNotEditable_removesEditButtonsAndSpecialMarkup() {
 		$contentBetweenEditLinks = 'hello';
 		$html = "<wb:sectionedit>edit link 1</wb:sectionedit>$contentBetweenEditLinks<wb:sectionedit>edit link 2</wb:sectionedit>";
+		$out = $this->newOutputPage();
+
 		$hookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$this->newUserLanguageLookup(),
@@ -238,45 +260,23 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( OutputPageEntityIdReader::class ),
 			$this->createMock( EntityFactory::class ),
 			'',
-			$this->newMockEntityContentFactory()
+			$this->newMockEntityContentFactory(),
+			$this->mockEditabilityDismissive()
 		);
 
-		$hookHandler->doOutputPageBeforeHTML( $outputPage, $html );
+		$hookHandler->doOutputPageBeforeHTML( $out, $html );
 
 		$this->assertSame( $contentBetweenEditLinks, $html );
 	}
 
-	public function nonEditableOutputPageProvider() {
-		$out = $this->newOutputPage();
-		$title = $this->createMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'quickUserCan' )
-			->willReturn( false );
-		$out->setTitle( $title );
-		yield 'user does not have edit permission' => [ $out ];
+	private function mockEditability( $permissive = true ) {
+		$editability = $this->getMock( OutputPageEditability::class );
+		$editability->method( 'validate' )->willReturn( $permissive );
+		return $editability;
+	}
 
-		$request = $this->createMock( WebRequest::class );
-		$request->expects( $this->once() )
-			->method( 'getCheck' )
-			->with( 'diff' )
-			->willReturn( true );
-		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setRequest( $request );
-		$context->setTitle( new Title() );
-		yield 'diff page' => [ new OutputPage( $context ) ];
-
-		$out = $this->newOutputPage();
-		$out->setRevisionId( 123 );
-		$title = $this->createMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'getLatestRevID' )
-			->willReturn( 321 );
-		$out->setTitle( $title );
-		yield 'not latest revision' => [ $out ];
-
-		$out = $this->newOutputPage();
-		$out->setPrintable();
-		yield 'print view' => [ $out ];
+	private function mockEditabilityDismissive() {
+		return $this->mockEditability( false );
 	}
 
 	public function testGivenNotAnEntityPage_doesNothing() {
@@ -297,7 +297,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->newNeverCalledMock( OutputPageEntityIdReader::class ),
 			$this->newNeverCalledMock( EntityFactory::class ),
 			'',
-			$entityContentFactory
+			$entityContentFactory,
+			$this->editablity
 		);
 
 		$hookHandler->doOutputPageBeforeHTML( $out, $html );
