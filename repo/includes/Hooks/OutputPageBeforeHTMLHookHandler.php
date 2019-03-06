@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EntityFactory;
@@ -13,6 +12,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
@@ -74,6 +74,11 @@ class OutputPageBeforeHTMLHookHandler {
 	private $cookiePrefix;
 
 	/**
+	 * @var OutputPageEditability
+	 */
+	private $editability;
+
+	/**
 	 * @var bool
 	 */
 	private $isExternallyRendered;
@@ -87,6 +92,7 @@ class OutputPageBeforeHTMLHookHandler {
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
 		$cookiePrefix,
+		OutputPageEditability $editability,
 		$isExternallyRendered = false
 	) {
 		$this->templateFactory = $templateFactory;
@@ -97,6 +103,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
 		$this->cookiePrefix = $cookiePrefix;
+		$this->editability = $editability;
 		$this->isExternallyRendered = $isExternallyRendered;
 	}
 
@@ -120,6 +127,7 @@ class OutputPageBeforeHTMLHookHandler {
 			),
 			$wikibaseRepo->getEntityFactory(),
 			$wgCookiePrefix,
+			new OutputPageEditability(),
 			TermboxFlag::getInstance()->shouldRenderTermbox()
 		);
 	}
@@ -274,50 +282,8 @@ class OutputPageBeforeHTMLHookHandler {
 	private function showOrHideEditLinks( OutputPage $out, $html ) {
 		return ToolbarEditSectionGenerator::enableSectionEditLinks(
 			$html,
-			$this->isEditable( $out )
+			$this->editability->validate( $out )
 		);
-	}
-
-	private function isEditable( OutputPage $out ) {
-		return $this->isProbablyEditable( $out->getUser(), $out->getTitle() )
-			&& $this->isEditView( $out );
-	}
-
-	/**
-	 * This is duplicated from
-	 * @see OutputPage::getJSVars - wgIsProbablyEditable
-	 *
-	 * @param User $user
-	 * @param Title $title
-	 *
-	 * @return bool
-	 */
-	private function isProbablyEditable( User $user, Title $title ) {
-		return $title->quickUserCan( 'edit', $user )
-			&& ( $title->exists() || $title->quickUserCan( 'create', $user ) );
-	}
-
-	/**
-	 * This is mostly a duplicate of
-	 * @see \Wikibase\ViewEntityAction::isEditable
-	 *
-	 * @param OutputPage $out
-	 *
-	 * @return bool
-	 */
-	private function isEditView( OutputPage $out ) {
-		return $this->isLatestRevision( $out )
-			&& !$this->isDiff( $out )
-			&& !$out->isPrintable();
-	}
-
-	private function isDiff( OutputPage $out ) {
-		return $out->getRequest()->getCheck( 'diff' );
-	}
-
-	private function isLatestRevision( OutputPage $out ) {
-		return !$out->getRevisionId() // the revision id can be null on a ParserCache hit, but only for the latest revision
-			|| $out->getRevisionId() === $out->getTitle()->getLatestRevID();
 	}
 
 }
