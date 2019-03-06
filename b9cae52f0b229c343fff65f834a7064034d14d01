@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32a2d62a_5e2f9dcf",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-06T13:24:33Z",
+      "side": 1,
+      "message": "I made a small change here after realizing that the entity is really only needed for the \"old\" termbox when there are no \"wikibase-terms-list-items\". Fetching the entity for the new termbox when it is never used seems silly.",
+      "range": {
+        "startLine": 190,
+        "startChar": 14,
+        "endLine": 190,
+        "endChar": 27
+      },
+      "revId": "b9cae52f0b229c343fff65f834a7064034d14d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
