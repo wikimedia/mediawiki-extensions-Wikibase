@@ -17,6 +17,7 @@ use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\View\ViewPlaceHolderEmitter;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\TermboxView
@@ -115,7 +116,7 @@ class TermboxViewTest extends TestCase {
 		);
 	}
 
-	public function testPlaceHolderWithMarkupWithClientThrowingException_returnsNull() {
+	public function testPlaceHolderWithMarkupWithClientThrowingException_returnsErrorValue() {
 		$language = 'en';
 		$item = new Item( new ItemId( 'Q42' ) );
 
@@ -129,7 +130,7 @@ class TermboxViewTest extends TestCase {
 			$language
 		);
 		$this->assertSame(
-			null,
+			ViewPlaceHolderEmitter::ERRONEOUS_PLACEHOLDER_VALUE,
 			$placeholders[ TermboxView::TERMBOX_MARKUP ]
 		);
 	}
