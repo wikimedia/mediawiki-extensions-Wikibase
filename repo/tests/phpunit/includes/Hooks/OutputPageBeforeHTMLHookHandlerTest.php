@@ -89,7 +89,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
 			$this->getEntityRevisionLookupReturningEntity( $itemId ),
 			$languageNameLookup,
-			$this->getOutputPageEntityIdReaderReturningEntity( $itemId ),
+			$this->getOutputPageEntityIdReaderReturningEntity( $itemId, 1 ),
 			new EntityFactory( [] ),
 			'',
 			$this->newMockEntityContentFactory(),
@@ -163,7 +163,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			new StaticContentLanguages( [] ),
 			$this->createMock( EntityRevisionLookup::class ),
 			$this->getMock( LanguageNameLookup::class ),
-			$this->getOutputPageEntityIdReaderReturningEntity( $entity ),
+			$this->getOutputPageEntityIdReaderReturningEntity( $entity, 2 ),
 			$entityFactory,
 			'',
 			$this->newMockEntityContentFactory(),
@@ -199,11 +199,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @param $itemId
 	 * @return \PHPUnit\Framework\MockObject\MockObject
 	 */
-	private function getOutputPageEntityIdReaderReturningEntity( $itemId ) {
+	private function getOutputPageEntityIdReaderReturningEntity( $itemId, $numberOfCalls ) {
 		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$outputPageEntityIdReader->expects( $this->once() )
+		$outputPageEntityIdReader->expects( $this->exactly( $numberOfCalls ) )
 			->method( 'getEntityIdFromOutputPage' )
 			->will( $this->returnValue( $itemId ) );
 		return $outputPageEntityIdReader;
