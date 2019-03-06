@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use DerivativeContext;
 use OutputPage;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
@@ -16,6 +17,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
@@ -30,6 +32,17 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
+
+	/**
+	 * @var OutputPageEditability|MockObject
+	 */
+	private $editablity;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->editablity = $this->mockEditability();
+	}
 
 	/**
 	 * @return OutputPage
@@ -81,7 +94,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$languageNameLookup,
 			$outputPageEntityIdReader,
 			new EntityFactory( [] ),
-			''
+			'',
+			$this->editablity
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -134,7 +148,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->getMock( LanguageNameLookup::class ),
 			$outputPageEntityIdReader,
 			new EntityFactory( [] ),
-			''
+			'',
+			$this->editablity
 		);
 
 		$out = $this->newOutputPage();
@@ -160,7 +175,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( LanguageNameLookup::class ),
 			$this->createMock( OutputPageEntityIdReader::class ),
 			$this->createMock( EntityFactory::class ),
-			''
+			'',
+			$this->editablity
 		);
 
 		$hookHandler->doOutputPageBeforeHTML( $out, $html );
@@ -168,9 +184,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( "$editLink1 $contentBetweenEditLinks $editLink2", $html );
 	}
 
-	/**
-	 * @dataProvider nonEditableOutputPageProvider
-	 */
 	public function testGivenPageIsNotEditable_removesEditButtonsAndSpecialMarkup( $outputPage ) {
 		$contentBetweenEditLinks = 'hello';
 		$html = "<wb:sectionedit>edit link 1</wb:sectionedit>$contentBetweenEditLinks<wb:sectionedit>edit link 2</wb:sectionedit>";
@@ -182,45 +195,13 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( LanguageNameLookup::class ),
 			$this->createMock( OutputPageEntityIdReader::class ),
 			$this->createMock( EntityFactory::class ),
-			''
+			'',
+			$this->mockEditabilityDismissive()
 		);
 
 		$hookHandler->doOutputPageBeforeHTML( $outputPage, $html );
 
 		$this->assertSame( $contentBetweenEditLinks, $html );
-	}
-
-	public function nonEditableOutputPageProvider() {
-		$out = $this->newOutputPage();
-		$title = $this->createMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'quickUserCan' )
-			->willReturn( false );
-		$out->setTitle( $title );
-		yield 'user does not have edit permission' => [ $out ];
-
-		$request = $this->createMock( WebRequest::class );
-		$request->expects( $this->once() )
-			->method( 'getCheck' )
-			->with( 'diff' )
-			->willReturn( true );
-		$context = new DerivativeContext( RequestContext::getMain() );
-		$context->setRequest( $request );
-		$context->setTitle( new Title() );
-		yield 'diff page' => [ new OutputPage( $context ) ];
-
-		$out = $this->newOutputPage();
-		$out->setRevisionId( 123 );
-		$title = $this->createMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'getLatestRevID' )
-			->willReturn( 321 );
-		$out->setTitle( $title );
-		yield 'not latest revision' => [ $out ];
-
-		$out = $this->newOutputPage();
-		$out->setPrintable();
-		yield 'print view' => [ $out ];
 	}
 
 	private function newUserLanguageLookup() {
@@ -233,6 +214,16 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->will( $this->returnValue( [] ) );
 
 		return $userLanguageLookup;
+	}
+
+	private function mockEditability( $permissive = true ) {
+		$editability = $this->getMock( OutputPageEditability::class );
+		$editability->method( 'isEditable' )->willReturn( $permissive );
+		return $editability;
+	}
+
+	private function mockEditabilityDismissive() {
+		return $this->mockEditability( false );
 	}
 
 }
