@@ -15,14 +15,14 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  */
 class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 
-	public function testGivenWbUiPlaceholder_getHtmlForPlaceholderReturnsMarkupBlob() {
+	public function testGivenWbUiPlaceholderAndDefaultRequest_getHtmlForPlaceholderReturnsInjectedMarkup() {
 		$html = '<div>termbox</div>';
 		$expander = new ExternallyRenderedEntityViewPlaceholderExpander( $html );
 
 		$this->assertSame( $html, $expander->getHtmlForPlaceholder( TermboxView::TERMBOX_PLACEHOLDER ) );
 	}
 
-	public function testGivenWbUiPlaceholderAndNoHtmlBlob_getHtmlForPlaceholderReturnsFallbackHtml() {
+	public function testGivenWbUiPlaceholderAndNoHtml_getHtmlForPlaceholderReturnsFallbackHtml() {
 		$expander = new ExternallyRenderedEntityViewPlaceholderExpander( null );
 
 		$this->assertSame(
