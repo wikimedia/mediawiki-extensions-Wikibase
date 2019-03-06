@@ -197,6 +197,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Hooks\\Formatters\\DefaultEntityLinkFormatter' => __DIR__ . '/includes/Hooks/Formatters/DefaultEntityLinkFormatter.php',
 	'Wikibase\\Repo\\Hooks\\Formatters\\EntityLinkFormatter' => __DIR__ . '/includes/Hooks/Formatters/EntityLinkFormatter.php',
 	'Wikibase\\Repo\\Hooks\\Formatters\\EntityLinkFormatterFactory' => __DIR__ . '/includes/Hooks/Formatters/EntityLinkFormatterFactory.php',
+	'Wikibase\\Repo\\Hooks\\Helpers\\OutputPageEditability' => __DIR__ . '/includes/Hooks/Helpers/OutputPageEditability.php',
 	'Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererBeginHookHandler' => __DIR__ . '/includes/Hooks/HtmlPageLinkRendererBeginHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\InfoActionHookHandler' => __DIR__ . '/includes/Hooks/InfoActionHookHandler.php',
 	'Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandlers' => __DIR__ . '/includes/Hooks/LabelPrefetchHookHandlers.php',
