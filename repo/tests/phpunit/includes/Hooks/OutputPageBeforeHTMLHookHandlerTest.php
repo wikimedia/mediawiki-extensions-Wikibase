@@ -200,12 +200,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return \PHPUnit\Framework\MockObject\MockObject
 	 */
 	private function getOutputPageEntityIdReaderReturningEntity( $itemId ) {
-		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class );
 		$outputPageEntityIdReader->expects( $this->once() )
 			->method( 'getEntityIdFromOutputPage' )
-			->will( $this->returnValue( $itemId ) );
+			->willReturn( $itemId );
+
 		return $outputPageEntityIdReader;
 	}
 

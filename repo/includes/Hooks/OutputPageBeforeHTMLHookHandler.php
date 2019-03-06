@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
@@ -18,12 +20,14 @@ use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\PlaceholderExpander;
+use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TextInjector;
+use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\View\ToolbarEditSectionGenerator;
+use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
@@ -215,7 +219,7 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return EntityDocument|null
 	 */
 	private function getEntity( OutputPage $out ) {
-		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
+		$entityId = $this->getEntityId( $out );
 
 		if ( !$entityId ) {
 			return null;
@@ -290,8 +294,19 @@ class OutputPageBeforeHTMLHookHandler {
 	}
 
 	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$languageFallbackChainFactory = $repo->getLanguageFallbackChainFactory();
+
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
-			$out->getProperty( TermboxView::TERMBOX_MARKUP )
+			$out,
+			new TermboxRequestInspector( $languageFallbackChainFactory ),
+			new TermboxRemoteRenderer(
+				MediaWikiServices::getInstance()->getHttpRequestFactory(),
+				$repo->getSettings()->getSetting( 'ssrServerUrl' )
+			),
+			$this->outputPageEntityIdReader,
+			new RepoSpecialPageLinker(),
+			$languageFallbackChainFactory
 		);
 	}
 
@@ -304,6 +319,15 @@ class OutputPageBeforeHTMLHookHandler {
 			$html,
 			$this->editability->validate( $out )
 		);
+	}
+
+	/**
+	 * @param OutputPage $out
+	 *
+	 * @return EntityId|null
+	 */
+	private function getEntityId( OutputPage $out ) {
+		return $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 	}
 
 }
