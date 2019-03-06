@@ -22,6 +22,30 @@
       "revId": "2b2bf85c57c9373cb8c38005d2b27aac47975bf4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35061c7b_7394e7d1",
+        "filename": "repo/includes/Content/EntityContent.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-06T11:24:02Z",
+      "side": 1,
+      "message": "No particular reason, but you are right. I originally decided against it because stopping to pass it at some point in the layers below did feel arbitrary, too. Did it up to EntityDocumentView now where changing the interface for a very similar method felt excessive but them having different parameters also seems unintuitive.",
+      "parentUuid": "02378b78_67f88f74",
+      "range": {
+        "startLine": 289,
+        "startChar": 47,
+        "endLine": 289,
+        "endChar": 89
+      },
+      "revId": "2b2bf85c57c9373cb8c38005d2b27aac47975bf4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
