@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bb9a80a_f510462e",
+        "filename": "view/resources/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-03-07T09:47:28Z",
+      "side": 1,
+      "message": "Remove this dependency. ;-)",
+      "range": {
+        "startLine": 553,
+        "startChar": 5,
+        "endLine": 553,
+        "endChar": 40
+      },
+      "revId": "f171bc26d12ed03790f0567f97ec15117b46df02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
