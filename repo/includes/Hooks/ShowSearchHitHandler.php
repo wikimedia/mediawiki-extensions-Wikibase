@@ -215,7 +215,7 @@ class ShowSearchHitHandler {
 	 * @param string $displayLanguage
 	 * @param array $text Text description array, with language in ['language']
 	 */
-	private static function addLanguageAttrs( array &$attr, $displayLanguage, array $text ) {
+	protected static function addLanguageAttrs( array &$attr, $displayLanguage, array $text ) {
 		if ( $text['language'] !== $displayLanguage ) {
 			try {
 				$language = Language::factory( $text['language'] );
@@ -233,7 +233,7 @@ class ShowSearchHitHandler {
 	 * @param string[] $description Description as [language, value] array
 	 * @param SpecialSearch $searchPage
 	 */
-	private static function addDescription( &$html, array $description, SpecialSearch $searchPage ) {
+	protected static function addDescription( &$html, array $description, SpecialSearch $searchPage ) {
 		RequestContext::getMain()->getOutput()->addModuleStyles( [ 'wikibase.common' ] );
 		$displayLanguage = $searchPage->getLanguage()->getCode();
 		$description = self::withLanguage( $description, $displayLanguage );
@@ -297,7 +297,7 @@ class ShowSearchHitHandler {
 	 * @param array &$attributes Link tag attributes, can add more
 	 * @param string $displayLanguage
 	 */
-	private function getLink(
+	protected function getLink(
 		EntityResult $result,
 		Title $title,
 		&$html,
@@ -330,7 +330,7 @@ class ShowSearchHitHandler {
 	 * @param string $displayLanguage
 	 * @return string[] ['language' => LANG, 'value' => TEXT]
 	 */
-	private static function withLanguage( $text, $displayLanguage ) {
+	protected static function withLanguage( $text, $displayLanguage ) {
 		if ( $text['language'] == $displayLanguage || $text['value'] == '' ) {
 			return $text;
 		}
