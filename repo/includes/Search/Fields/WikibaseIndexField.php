@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 
 // phpcs:disable Wikibase.Namespaces.FullQualifiedClassName.Found
 /**
- * Each field is intended to be used by CirrusSearch as an
+ * Each field is intended to be used by the search engine as an
  * additional property of a page.
  *
  * The data returned by the field must match the field
