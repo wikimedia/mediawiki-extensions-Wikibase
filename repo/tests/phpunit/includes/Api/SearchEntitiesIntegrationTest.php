@@ -3,9 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
-use CirrusSearch;
 use FauxRequest;
-use Language;
 use MediaWikiTestCase;
 use RequestContext;
 use Title;
@@ -30,12 +28,10 @@ use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
 
 /**
  * @covers \Wikibase\Repo\Api\EntityTermSearchHelper
  * @covers \Wikibase\Repo\Api\SearchEntities
- * @covers \Wikibase\Repo\Search\Elastic\EntitySearchElastic
  *
  * @group API
  * @group Wikibase
@@ -112,76 +108,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 
 		$resultData = $this->executeApiModule( $searchHelper, $query );
 		$this->assertSameSearchResults( $resultData, $expectedIds );
-	}
-
-	/**
-	 * @dataProvider provideQueriesForEntityIds
-	 */
-	public function testElasticSearchIntegration( $query, array $expectedIds ) {
-		if ( !class_exists( CirrusSearch::class ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
-
-		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
-				->disableOriginalConstructor()
-				->setMethods( [ 'getRankedSearchResults' ] )
-				->getMock();
-
-		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
-			->willReturnCallback( $this->makeElasticSearchCallback() );
-
-		$resultData = $this->executeApiModule( $mockEntitySearchElastic, $query );
-		$this->assertSameSearchResults( $resultData, $expectedIds );
-	}
-
-	/**
-	 * Create callback that transforms JSON query return to TermSearchResult[]
-	 *
-	 * @return \Closure
-	 */
-	private function makeElasticSearchCallback() {
-		$entitySearchElastic = $this->newEntitySearchElastic();
-
-		return function ( $text, $languageCode, $entityType, $limit, $strictLanguage )
-				use ( $entitySearchElastic ) {
-			$result = $entitySearchElastic->getRankedSearchResults(
-				$text,
-				$languageCode,
-				$entityType,
-				$limit,
-				$strictLanguage
-			);
-			// comes out as JSON data
-			$resultData = json_decode( $result, true );
-			// FIXME: this is very brittle, but I don't know how to make it better.
-			$matchId = $resultData['query']['query']['bool']['should'][1]['term']['title.keyword'];
-			try {
-				$entityId = $this->idParser->parse( $matchId );
-			} catch ( EntityIdParsingException $ex ) {
-				return [];
-			}
-
-			return [ new TermSearchResult( new Term( $languageCode, $matchId ), '', $entityId ) ];
-		};
-	}
-
-	/**
-	 * @return EntitySearchElastic
-	 */
-	private function newEntitySearchElastic() {
-		global $wgWBRepoSettings;
-
-		$entitySearchElastic = new EntitySearchElastic(
-			$this->newLanguageFallbackChainFactory(),
-			$this->idParser,
-			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
-			[ 'item' => 'wikibase-item' ],
-			$wgWBRepoSettings['entitySearch'],
-			new FauxRequest(),
-			CirrusSearch\CirrusDebugOptions::forDumpingQueriesInUnitTests()
-		);
-
-		return $entitySearchElastic;
 	}
 
 	/**

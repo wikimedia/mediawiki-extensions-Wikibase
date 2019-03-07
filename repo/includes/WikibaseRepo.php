@@ -133,9 +133,6 @@ use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
-use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -1765,37 +1762,6 @@ class WikibaseRepo {
 		);
 
 		return $handler;
-	}
-
-	/**
-	 * @deprecated for T190022
-	 * @return FieldDefinitions
-	 */
-	public function getLabelProviderDefinitions() {
-		return new LabelsProviderFieldDefinitions( $this->getTermsLanguages()->getLanguages() );
-	}
-
-	/**
-	 * @deprecated for T190022
-	 * @return FieldDefinitions
-	 */
-	public function getDescriptionProviderDefinitions() {
-		return new DescriptionsProviderFieldDefinitions(
-			$this->getTermsLanguages()->getLanguages(),
-			$this->getSettings()->getSetting( 'entitySearch' )
-		);
-	}
-
-	/**
-	 * @deprecated for T190022
-	 * @return FieldDefinitions
-	 */
-	public function getStatementProviderDefinitions() {
-		return StatementProviderFieldDefinitions::newFromSettings(
-			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
-			$this->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
-			$this->settings
-		);
 	}
 
 	/**

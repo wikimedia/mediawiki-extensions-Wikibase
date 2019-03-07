@@ -22,7 +22,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\Lib\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
@@ -43,13 +42,7 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
-use Wikibase\Repo\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\ItemFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\PropertyFieldDefinitions;
-use Wikibase\Repo\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
 use Wikibase\View\FingerprintableEntityMetaTagsCreator;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -140,36 +133,10 @@ return [
 				$basicEntityDiffVisualizer
 			);
 		},
-		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			return new ItemFieldDefinitions( [
-				new LabelsProviderFieldDefinitions( $languageCodes ),
-				new DescriptionsProviderFieldDefinitions( $languageCodes,
-					$searchSettings->getSetting( 'entitySearch' ) ),
-				StatementProviderFieldDefinitions::newFromSettings(
-					new InProcessCachingDataTypeLookup( $repo->getPropertyDataTypeLookup() ),
-					$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
-					$searchSettings
-				)
-			] );
-		},
 		'entity-search-callback' => function ( WebRequest $request ) {
-			// FIXME: this code should be split into extension for T190022
-			// Leaving only EntitySearchTermIndex here
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
-			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
-			if ( $searchSettings['useCirrus'] && !$repoSettings->getSetting( 'disableCirrus' ) ) {
-				return new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
-					$repo->getLanguageFallbackChainFactory(),
-					$repo->getEntityIdParser(),
-					$repo->getUserLanguage(),
-					$repo->getContentModelMappings(),
-					$searchSettings,
-					$request
-				);
-			} else {
-				if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
+			if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
 					wfLogWarning(
 						'Using wb_terms table for wbsearchentities API action ' .
 						'but not using search-related fields of terms table. ' .
@@ -177,7 +144,7 @@ return [
 						'please enable the useTermsTableSearchFields setting.'
 					);
 				}
-				return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+			return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
 					[
 						new Wikibase\Repo\Api\EntityIdSearchHelper(
 							$repo->getEntityLookup(),
@@ -192,8 +159,7 @@ return [
 							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
 						)
 					]
-				);
-			}
+			);
 		},
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
@@ -214,7 +180,6 @@ return [
 				new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getLocalItemUriParser() )
 			] );
 		},
-		'fulltext-search-context' => \Wikibase\Repo\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	],
 	'property' => [
 		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -272,45 +237,19 @@ return [
 				$writer
 			);
 		},
-		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			return new PropertyFieldDefinitions( [
-				new LabelsProviderFieldDefinitions( $languageCodes ),
-				new DescriptionsProviderFieldDefinitions( $languageCodes,
-					$searchSettings->getSetting( 'entitySearch' ) ),
-				StatementProviderFieldDefinitions::newFromSettings(
-					new InProcessCachingDataTypeLookup( $repo->getPropertyDataTypeLookup() ),
-					$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
-					$searchSettings
-				)
-			] );
-		},
 		'entity-search-callback' => function ( WebRequest $request ) {
-			// FIXME: this code should be split into extension for T190022
-			// Leaving only EntitySearchTermIndex here
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
-			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
-			if ( $searchSettings['useCirrus'] && !$repoSettings->getSetting( 'disableCirrus' ) ) {
-				return new Wikibase\Repo\Search\Elastic\EntitySearchElastic(
-					$repo->getLanguageFallbackChainFactory(),
-					$repo->getEntityIdParser(),
-					$repo->getUserLanguage(),
-					$repo->getContentModelMappings(),
-					$searchSettings,
-					$request
+			if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
+				wfLogWarning(
+					'Using wb_terms table for wbsearchentities API action ' .
+					'but not using search-related fields of terms table. ' .
+					'This results in degraded search experience, ' .
+					'please enable the useTermsTableSearchFields setting.'
 				);
-			} else {
-				if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
-					wfLogWarning(
-						'Using wb_terms table for wbsearchentities API action ' .
-						'but not using search-related fields of terms table. ' .
-						'This results in degraded search experience, ' .
-						'please enable the useTermsTableSearchFields setting.'
-					);
-				}
+			}
 
-				return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+			return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
 					[
 						new Wikibase\Repo\Api\EntityIdSearchHelper(
 							$repo->getEntityLookup(),
@@ -325,8 +264,7 @@ return [
 							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
 						)
 					]
-				);
-			}
+			);
 		},
 		'link-formatter-callback' => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
@@ -344,6 +282,5 @@ return [
 		'entity-reference-extractor-callback' => function() {
 			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getLocalItemUriParser() );
 		},
-		'fulltext-search-context' => \Wikibase\Repo\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	]
 ];

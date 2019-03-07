@@ -18,7 +18,6 @@ use stdClass;
 use Title;
 use TitleValue;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use Wikibase\SettingsArray;
@@ -363,17 +362,6 @@ XML
 			'/(?:^|!)wb=' . preg_quote( EntityHandler::PARSER_VERSION, '/' ) . '(?:!|$)/',
 			$pOpts2->optionsHash( [ 'wb' ] )
 		);
-	}
-
-	/**
-	 * @depends CirrusSearch
-	 */
-	public function testOnCirrusSearchAddQueryFeatures() {
-		$extraFeatures = [];
-		RepoHooks::onCirrusSearchAddQueryFeatures( [], $extraFeatures );
-
-		$this->assertCount( 1, $extraFeatures );
-		$this->assertInstanceOf( HasWbStatementFeature::class, $extraFeatures[0] );
 	}
 
 	public function provideOnContentModelCanBeUsedOn() {
