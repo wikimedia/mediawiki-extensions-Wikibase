@@ -111,6 +111,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered globally by WikibaseClient, but never loaded directly.
+		// Used by PropertySuggester.
 		'jquery.wikibase.statementview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/snakview/snakview.variations.js',
@@ -187,16 +189,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'jquery.wikibase.singlebuttontoolbar' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbutton',
-			],
-		],
-
 		'jquery.wikibase.toolbar' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/toolbar/jquery.wikibase.toolbar.js',
@@ -207,6 +199,7 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered via WikibaseView on all WikibaseClient wikis, but only used by WikibaseRepo.
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
@@ -223,6 +216,7 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered via WikibaseView on all WikibaseClient wikis, but only used by WikibaseRepo.
 		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
@@ -470,41 +464,12 @@ return call_user_func( function() {
 		],
 
 		// FIXME: Never loaded. Only used by wikibase.ui.entityViewInit (WikibaseRepo).
-		'wikibase.store.ApiEntityStore' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/store/store.ApiEntityStore.js',
-			],
-			'dependencies' => [
-				'wikibase.store',
-				'wikibase.store.EntityStore',
-			],
-		],
-
-		'wikibase.store.CachingEntityStore' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/store/store.CachingEntityStore.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.store',
-				'wikibase.store.EntityStore',
-			],
-		],
-
-		'wikibase.store.CombiningEntityStore' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/store/store.CombiningEntityStore.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.store',
-				'wikibase.store.EntityStore',
-			],
-		],
-
 		'wikibase.store.EntityStore' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/store/store.EntityStore.js',
+				'wikibase/store/store.ApiEntityStore.js',
+				'wikibase/store/store.CachingEntityStore.js',
+				'wikibase/store/store.CombiningEntityStore.js',
 			],
 			'dependencies' => [
 				'util.inherit',
@@ -523,17 +488,8 @@ return call_user_func( function() {
 
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
 			'scripts' => [
-				'wikibase/utilities/wikibase.utilities.ClaimGuidGenerator.js',
-			],
-			'dependencies' => [
-				'wikibase.utilities.GuidGenerator',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.utilities.GuidGenerator' => $moduleTemplate + [
-			'scripts' => [
 				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
+				'wikibase/utilities/wikibase.utilities.ClaimGuidGenerator.js',
 			],
 			'dependencies' => [
 				'util.inherit',
@@ -584,6 +540,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
@@ -593,7 +550,6 @@ return call_user_func( function() {
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
 			],
 			'dependencies' => [
-				'jquery.wikibase.singlebuttontoolbar',
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
 				'jquery.wikibase.wbtooltip',
