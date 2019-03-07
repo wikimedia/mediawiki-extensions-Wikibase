@@ -1011,10 +1011,6 @@ call_user_func( function() {
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText';
 	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
-	$wgHooks['CirrusSearchAnalysisConfig'][] = '\Wikibase\RepoHooks::onCirrusSearchAnalysisConfig';
-	$wgHooks['CirrusSearchProfileService'][] = '\Wikibase\RepoHooks::onCirrusSearchProfileService';
-	$wgHooks['CirrusSearchFulltextQueryBuilderComplete'][] = '\Wikibase\RepoHooks::onCirrusSearchFulltextQueryBuilderComplete';
-	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\RepoHooks::onCirrusSearchAddQueryFeatures';
 	$wgHooks['ApiMaxLagInfo'][] = '\Wikibase\RepoHooks::onApiMaxLagInfo';
 	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\RepoHooks::onParserOptionsRegister';
 
