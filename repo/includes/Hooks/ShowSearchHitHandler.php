@@ -24,7 +24,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
-use Wikibase\Repo\Search\Elastic\EntityResult;
 use Wikibase\Repo\Search\ExtendedResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
@@ -57,32 +56,18 @@ class ShowSearchHitHandler {
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
-	/**
-	 * @var EntityLinkFormatter
-	 */
-	private $linkFormatter;
-	/**
-	 * Whether CirrusSearch-related functionality is enabled.
-	 * TODO: this is temporary for WikibaseCirrusSearch migration and will be removed
-	 * when migration is complete.
-	 * @var bool
-	 */
-	private $cirrusEnabled;
 
 	public function __construct(
 		EntityContentFactory $entityContentFactory,
 		LanguageFallbackChain $languageFallbackChain,
 		EntityIdLookup $entityIdLookup,
 		EntityLookup $entityLookup,
-		EntityLinkFormatter $linkFormatter,
-		$cirrusEnabled = true
+		EntityLinkFormatter $linkFormatter
 	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityLookup = $entityLookup;
-		$this->linkFormatter = $linkFormatter;
-		$this->cirrusEnabled = $cirrusEnabled;
 	}
 
 	/**
@@ -98,8 +83,7 @@ class ShowSearchHitHandler {
 			$languageFallbackChainFactory->newFromContext( $context ),
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityLookup(),
-			new DefaultEntityLinkFormatter( $context->getLanguage() ),
-			empty( $wikibaseRepo->getSettings()->getSetting( 'disableCirrus' ) )
+			new DefaultEntityLinkFormatter( $context->getLanguage() )
 		);
 	}
 
@@ -118,18 +102,12 @@ class ShowSearchHitHandler {
 			return;
 		}
 		$self = self::newFromGlobalState( $searchPage->getContext() );
-		if ( $result instanceof EntityResult ) {
-			$self->showEntityResultHit( $searchPage, $result, $terms,
-				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
-		} else {
-			$self->showPlainSearchHit( $searchPage, $result, $terms, $link, $redirect, $section, $extract,
+		$self->showPlainSearchHit( $searchPage, $result, $terms, $link, $redirect, $section, $extract,
 				$score, $size, $date, $related, $html );
-		}
 	}
 
 	/**
-	 * Show result hit which is the result of non-Cirrus search - either
-	 * search in non-Cirrus space or CirrusSearch is not enabled.
+	 * Show result hit display
 	 */
 	private function showPlainSearchHit( SpecialSearch $searchPage, SearchResult $result, array $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
@@ -200,38 +178,6 @@ class ShowSearchHitHandler {
 	}
 
 	/**
-	 * Show result hit which is the result of Cirrus-driven entity search.
-	 */
-	private function showEntityResultHit( SpecialSearch $searchPage, EntityResult $result, array $terms,
-		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
-	) {
-		if ( !$this->cirrusEnabled ) {
-			$this->showPlainSearchHit( $searchPage, $result, $terms, $link, $redirect, $section,
-				$extract, $score, $size, $date, $related, $html );
-			return;
-		}
-		$extract = '';
-		$displayLanguage = $searchPage->getLanguage()->getCode();
-		// Put highlighted description of the item as the extract
-		self::addDescription( $extract, $result->getDescriptionHighlightedData(), $searchPage );
-		// Add extra data
-		$extra = $result->getExtraDisplay();
-		if ( $extra ) {
-			$attr = [ 'class' => 'wb-itemlink-description' ];
-			$extra = self::withLanguage( $extra, $displayLanguage );
-			self::addLanguageAttrs( $attr, $displayLanguage, $extra );
-			$section = $searchPage->msg( 'colon-separator' )->escaped();
-			$section .= Html::rawElement( 'span', $attr, HtmlArmor::getHtml( $extra['value'] ) );
-		}
-		// set $size to size metrics
-		$size = $searchPage->msg(
-			'wikibase-search-result-stats',
-			$result->getStatementCount(),
-			$result->getSitelinkCount()
-		)->escaped();
-	}
-
-	/**
 	 * Add attributes appropriate for language of this text.
 	 * @param array &$attr Link attributes, to be modified if needed
 	 * @param string $displayLanguage
@@ -268,7 +214,7 @@ class ShowSearchHitHandler {
 	}
 
 	/**
-	 * Remove span tag (added by Cirrus) placed around title search hit for entity titles
+	 * Remove span tag placed around title search hit for entity titles
 	 * to highlight matches in bold.
 	 *
 	 * @todo Add highlighting when Q##-id matches and not label text.
@@ -294,16 +240,11 @@ class ShowSearchHitHandler {
 			return;
 		}
 		$self = self::newFromGlobalState( $specialSearch->getContext() );
-		if ( $result instanceof EntityResult ) {
-			$self->getLink( $result, $title, $titleSnippet, $attributes,
-				$specialSearch->getLanguage()->getCode() );
-		} else {
-			$self->showPlainSearchTitle( $title, $titleSnippet );
-		}
+		$self->showPlainSearchTitle( $title, $titleSnippet );
 	}
 
 	/**
-	 * Handle search result title when it's not generated by CirrusSearch.
+	 * Handle search result title
 	 * @param Title $title
 	 * @param string &$titleSnippet
 	 */
@@ -312,44 +253,6 @@ class ShowSearchHitHandler {
 			$titleSnippet = $title->getFullText();
 		}
 		// The rest of the plain title work is done in LinkBeginHookHandler
-	}
-
-	/**
-	 * Generate link text for Title link in search hit.
-	 * @param EntityResult $result
-	 * @param Title $title
-	 * @param string|HtmlArmor &$html Variable where HTML will be placed
-	 * @param array &$attributes Link tag attributes, can add more
-	 * @param string $displayLanguage
-	 */
-	private function getLink(
-		EntityResult $result,
-		Title $title,
-		&$html,
-		&$attributes,
-		$displayLanguage
-	) {
-		if ( !$this->cirrusEnabled ) {
-			$this->showPlainSearchTitle( $title, $html );
-			return;
-		}
-
-		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
-		if ( !$entityId ) {
-			return;
-		}
-		// Highlighter already encodes and marks up the HTML
-		$html = new HtmlArmor(
-			$this->linkFormatter->getHtml( $entityId,
-				self::withLanguage( $result->getLabelHighlightedData(), $displayLanguage )
-			)
-		);
-
-		$attributes['title'] = $this->linkFormatter->getTitleAttribute(
-			$title,
-			$result->getLabelData(),
-			$result->getDescriptionData()
-		);
 	}
 
 	/**

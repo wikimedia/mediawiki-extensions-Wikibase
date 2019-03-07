@@ -198,7 +198,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	}
 
 	protected function getExpectedSearchIndexFields() {
-		return [ 'label_count', 'statement_count', 'sitelink_count' ];
+		return [];
 	}
 
 	/**
@@ -282,9 +282,8 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$page = $this->getMockWikiPage( $handler );
 
 		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
-		$this->assertSame( 1, $data['label_count'], 'label_count' );
-		$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
-		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
+		$this->assertSame( CONTENT_MODEL_WIKIBASE_ITEM, $data['content_model'], 'content_modek' );
+		$this->assertSame( "Kitten\nKitten", $data['text'], 'text' );
 	}
 
 }
