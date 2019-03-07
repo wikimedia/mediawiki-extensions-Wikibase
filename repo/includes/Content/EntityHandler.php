@@ -28,7 +28,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
-use Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions;
+use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -39,7 +39,6 @@ use WikiPage;
 
 /**
  * Base handler class for Entity content classes.
- * FIXME: Switch to use \Wikibase\Repo\Search\Fields\FieldDefinitions once dependencies are updated
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
