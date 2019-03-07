@@ -122,7 +122,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	}
 
 	protected function getExpectedSearchIndexFields() {
-		return [ 'label_count', 'statement_count' ];
+		return [];
 	}
 
 	public function testDataForSearchIndex() {
@@ -132,8 +132,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$page = $this->getMockWikiPage( $handler );
 
 		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
-		$this->assertSame( 1, $data['label_count'], 'label_count' );
-		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
+		$this->assertArrayEquals( [], $data );
 	}
 
 }
