@@ -596,10 +596,15 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 			} ) );
 
 		$fields = $handler->getFieldsForSearchIndex( $searchEngine );
-		foreach ( $this->getExpectedSearchIndexFields() as $expected ) {
-			$this->assertInstanceOf( \SearchIndexField::class, $fields[$expected] );
-			$mapping = $fields[$expected]->getMapping( $searchEngine );
-			$this->assertEquals( $expected, $mapping['name'] );
+		$expectedFields = $this->getExpectedSearchIndexFields();
+		if ( empty( $expectedFields ) ) {
+			$this->assertSame( [], $fields );
+		} else {
+			foreach ( $expectedFields as $expected ) {
+				$this->assertInstanceOf( \SearchIndexField::class, $fields[$expected] );
+				$mapping = $fields[$expected]->getMapping( $searchEngine );
+				$this->assertEquals( $expected, $mapping['name'] );
+			}
 		}
 	}
 
