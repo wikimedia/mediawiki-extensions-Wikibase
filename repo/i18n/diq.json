@@ -102,6 +102,7 @@
 	"wikibase-entitieswithoutlabel-submit": "Bıvin",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\"  raveyrdi qoda zıwani niya.",
 	"wikibase-restoreold": "reset kerê",
+	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]]i ([[User talk:$4|werênayış]]) vurnayışê $3i peyser gırewt",
 	"wikibase-listdatatypes-wikibase-item-head": "obje",
 	"wikibase-listdatatypes-string-head": "La",
 	"wikibase-listdatatypes-time-head": "Zeman",

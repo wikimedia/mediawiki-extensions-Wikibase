@@ -418,5 +418,7 @@
 	"wikibase-search-namespace-mix": "搜尋裡目前不支援混合實體與條目命名空間。僅會搜尋實體命名空間。",
 	"wikibase-search-config-notfound": "查無全文搜尋設置：$1",
 	"wikibase-search-config-badclass": "錯誤查詢生成類別：$1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 關鍵字不包含有效陳述"
+	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 關鍵字不包含有效陳述",
+	"wikibase-refresh-for-missing-datatype": "在本地客戶端手稿裡查無$1資料類型，這可能是因快取手稿逾期所造成的結果。請嘗試將您的瀏覽器重新載入、繞過本地端快取（在多數瀏覽器是同時按下 Ctrl-Shift-R 鍵或是 Cmd-Shift-R 鍵）來解決問題。",
+	"wikibase-outdated-client-script": "哎呀，應得重新載入略過已快取內容！"
 }

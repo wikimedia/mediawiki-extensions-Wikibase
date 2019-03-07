@@ -52,5 +52,8 @@
 	"wikibase-modifyentity-id": "அடையாளவிலக்கம்",
 	"wikibase-modifyterm-language": "மொழிக் குறியீடு:",
 	"wikibase-entitieswithoutlabel-label-language": "மொழிக் குறியீடு:",
-	"wikibase-entitieswithoutlabel-submit": "கண்டுபிடி"
+	"wikibase-entitieswithoutlabel-submit": "கண்டுபிடி",
+	"wikibase-rescore-profile-fulltext": "முழு உரை தேடலுக்கான இயல்புநிலை மதிப்பெண் திருத்தி சுயவிவரம்",
+	"wikibase-search-bad-profile-name": "தவறான தேடல் சுயவிவரப் பெயர்: $1",
+	"wikibase-search-config-badclass": "தவறான கேள்வி/வினவல் பில்டர் வர்க்கம்/வகை: $1"
 }

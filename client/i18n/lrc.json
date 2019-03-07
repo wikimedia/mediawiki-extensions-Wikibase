@@ -25,7 +25,7 @@
 	"wikibase-linkitem-confirmitem-button": "پش راست کردن",
 	"wikibase-linkitem-not-loggedin-title": "شما با بیایت وامین",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "قام كردن",
+	"wikibase-rc-hide-wikidata-hide": "قایم كردن",
 	"wikibase-rc-hide-wikidata-show": "نشوݩ داٛئن",
 	"wikibase-rc-show-wikidata-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
 	"wikibase-rc-wikibase-edit-letter": "د",
@@ -33,5 +33,5 @@
 	"wikibase-watchlist-show-changes-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
 	"wikibase-unconnectedpages-submit": "رو",
 	"wikibase-pageinfo-entity-id-none": "هيش كوم",
-	"wikibase-otherprojects": "پوروجٱیا هٱنی"
+	"wikibase-otherprojects": "پرۉژٱیا هنی"
 }

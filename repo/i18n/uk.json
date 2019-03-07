@@ -20,7 +20,8 @@
 			"Dars",
 			"Macofe",
 			"Ladsgroup",
-			"Movses"
+			"Movses",
+			"Vlad5250"
 		]
 	},
 	"wikibase-desc": "Сховище структурованих даних",
@@ -324,6 +325,7 @@
 	"wikibase-redirect-no-such-entity": "Не вдалося знайти сутність $1",
 	"wikibase-redirect-cant-load-entity-content": "Не вдалося отримати доступ до контенту, версію можна вилучити.",
 	"wikibase-redirect-target-is-incompatible": "Несумісні типи сутностей",
+	"wikibase-redirect-source-and-target-are-the-same": "Неможливо перенаправити сутність на себе",
 	"wikibase-redirect-target-is-redirect": "Сутність $1 є перенаправленням",
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook припинив створення перенаправлень",
 	"wikibase-redirect-cant-redirect": "Створення перенаправлень зазнало невдачі через технічні проблеми",
