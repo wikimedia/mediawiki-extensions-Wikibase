@@ -50,6 +50,16 @@ class EntitySource {
 	private $interwikiPrefix;
 
 	/**
+	 * @var string|null
+	 */
+	private $apiEndpoint;
+
+	/**
+	 * @var bool
+	 */
+	private $useApiForSearch;
+
+	/**
 	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
 	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
 	 * @param string|false $databaseName The name of the database to use (use false for the local db)
@@ -57,18 +67,32 @@ class EntitySource {
 	 * array of form [ 'namespaceId' => int, 'slot' => string ]
 	 * @param string $conceptBaseUri
 	 * @param string $interwikiPrefix
+	 * @param string|null $apiEndpoint
+	 * @param bool $useApiForSearch
 	 */
-	public function __construct( $name, $databaseName, array $entityNamespaceIdsAndSlots, $conceptBaseUri, $interwikiPrefix ) {
+	public function __construct(
+		$name,
+		$databaseName,
+		array $entityNamespaceIdsAndSlots,
+		$conceptBaseUri,
+		$interwikiPrefix,
+		$apiEndpoint = null,
+		$useApiForSearch = false
+	) {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameter( is_string( $databaseName ) || $databaseName === false, '$databaseName', 'must be a string or false' );
 		Assert::parameterType( 'string', $conceptBaseUri, '$conceptBaseUri' );
 		Assert::parameterType( 'string', $interwikiPrefix, '$interwikiPrefix' );
+		Assert::parameter( is_string( $apiEndpoint ) || $apiEndpoint === null, '$apiEndpoint', 'must be a string or null' );
+		Assert::parameterType( 'bool', $useApiForSearch, '$useApiForSearch' );
 		$this->assertEntityNamespaceIdsAndSlots( $entityNamespaceIdsAndSlots );
 
 		$this->sourceName = $name;
 		$this->databaseName = $databaseName;
 		$this->conceptBaseUri = $conceptBaseUri;
 		$this->interwikiPrefix = $interwikiPrefix;
+		$this->apiEndpoint = $apiEndpoint;
+		$this->useApiForSearch = $useApiForSearch;
 
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
 	}
@@ -138,6 +162,14 @@ class EntitySource {
 
 	public function getInterwikiPrefix() {
 		return $this->interwikiPrefix;
+	}
+
+	public function getApiEndpoint(){
+		return $this->apiEndpoint;
+	}
+
+	public function useApiForSearch() {
+		return $this->useApiForSearch;
 	}
 
 }

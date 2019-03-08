@@ -153,10 +153,16 @@ return [
 				)
 			] );
 		},
-		'entity-search-callback' => function ( WebRequest $request ) {
+			'entity-search-callback' => function ( WebRequest $request ) {
 			// FIXME: this code should be split into extension for T190022
 			// Leaving only EntitySearchTermIndex here
 			$repo = WikibaseRepo::getDefaultInstance();
+
+			$itemSource = $repo->getEntitySourceDefinitions()->getSourceForEntityType( 'item' );
+			if ( $itemSource && $itemSource->getApiEndpoint() && $itemSource->useApiForSearch() ) {
+				// TODO return API based EntitySearchHelper implementation
+			}
+
 			$repoSettings = $repo->getSettings();
 			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
 			if ( $searchSettings['useCirrus'] && !$repoSettings->getSetting( 'disableCirrus' ) ) {
@@ -289,6 +295,13 @@ return [
 			// FIXME: this code should be split into extension for T190022
 			// Leaving only EntitySearchTermIndex here
 			$repo = WikibaseRepo::getDefaultInstance();
+
+
+			$itemSource = $repo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
+			if ( $itemSource && $itemSource->getApiEndpoint() && $itemSource->useApiForSearch() ) {
+				// TODO return API based EntitySearchHelper implementation
+			}
+
 			$repoSettings = $repo->getSettings();
 			$searchSettings = $repoSettings->getSetting( 'entitySearch' );
 			if ( $searchSettings['useCirrus'] && !$repoSettings->getSetting( 'disableCirrus' ) ) {
