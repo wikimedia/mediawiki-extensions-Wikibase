@@ -177,6 +177,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
 			[ 'item' => 'wikibase-item' ],
 			$wgWBRepoSettings['entitySearch'],
+			[],
 			new FauxRequest(),
 			CirrusSearch\CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);

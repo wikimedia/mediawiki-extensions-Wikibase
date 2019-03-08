@@ -39,6 +39,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 			$userLang,
 			$repo->getContentModelMappings(),
 			$repo->getSettings()->getSetting( 'entitySearch' ),
+			[],
 			new \FauxRequest(),
 			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);

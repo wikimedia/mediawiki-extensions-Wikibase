@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use CachedBagOStuff;
+use Config;
 use Deserializers\DispatchableDeserializer;
 use Exception;
 use InvalidArgumentException;
@@ -2321,6 +2322,14 @@ class WikibaseRepo {
 	 */
 	public function getEntitySearchHelperCallbacks() {
 		return $this->entityTypeDefinitions->getEntitySearchHelperCallbacks();
+	}
+
+	/**
+	 * @return Config[]
+	 */
+	public function getEntityTypeCustomCirrusConfigMap() {
+		// TODO populate with custom map
+		return [];
 	}
 
 	public function getEntityLinkFormatterFactory( Language $language ) {

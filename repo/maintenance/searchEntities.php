@@ -174,7 +174,8 @@ class SearchEntities extends Maintenance {
 					$this->repo->getEntityIdParser(),
 					$this->repo->getUserLanguage(),
 					$this->repo->getContentModelMappings(),
-					$settings
+					$settings,
+					$this->repo->getEntityTypeCustomCirrusConfigMap()
 				);
 			default:
 				throw new \MWException( "Unknown engine: $engine, valid values: sql, elastic." );

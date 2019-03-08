@@ -4,12 +4,14 @@ namespace Wikibase\Repo\Search\Elastic;
 
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\Search\SearchContext;
+use Config;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\DisMax;
 use Elastica\Query\Match;
 use Elastica\Query\Term;
 use Language;
+use MediaWiki\MediaWikiServices;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
@@ -101,6 +103,11 @@ class EntitySearchElastic implements EntitySearchHelper {
 	private $debugOptions;
 
 	/**
+	 * @var Config[] Entity type to custom cirrus config mapping for search
+	 */
+	private $entityTypeCirrusConfig;
+
+	/**
 	 * @param LanguageFallbackChainFactory $languageChainFactory
 	 * @param EntityIdParser $idParser
 	 * @param Language $userLang
@@ -116,6 +123,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		Language $userLang,
 		array $contentModelMap,
 		array $settings,
+		array $entityTypeCirrusConfig = [],
 		WebRequest $request = null,
 		CirrusDebugOptions $options = null
 	) {
@@ -124,6 +132,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$this->userLang = $userLang;
 		$this->contentModelMap = $contentModelMap;
 		$this->settings = $settings;
+		$this->entityTypeCirrusConfig = $entityTypeCirrusConfig;
 		$this->request = $request ?: new \FauxRequest();
 		$this->debugOptions = $options ?: CirrusDebugOptions::fromRequest( $this->request );
 	}
@@ -301,7 +310,13 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$limit,
 		$strictLanguage
 	) {
-		$searcher = new WikibasePrefixSearcher( 0, $limit, $this->debugOptions );
+		if ( array_key_exists( $entityType, $this->entityTypeCirrusConfig ) ) {
+			$config = $this->entityTypeCirrusConfig[$entityType];
+		} else {
+			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CirrusSearch' );
+		}
+
+		$searcher = new WikibasePrefixSearcher( 0, $limit, $config, $this->debugOptions );
 		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
 				$searcher->getSearchContext() );
 
