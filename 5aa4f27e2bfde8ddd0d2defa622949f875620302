@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8b2a5e1_6444864c",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2019-03-08T16:55:13Z",
+      "side": 1,
+      "message": "It\u0027s not clear why this switches classes, i would have expected if this was only adding a hook for other engines that the sql engine would still be defined in the same way.",
+      "revId": "5aa4f27e2bfde8ddd0d2defa622949f875620302",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
