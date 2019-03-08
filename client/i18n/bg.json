@@ -71,5 +71,8 @@
 	"wikibase-pageinfo-entity-usage-O": "Други (изявления)",
 	"wikibase-otherprojects": "В други проекти",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Свързване|Свързвания}} с {{WBREPONAME}}",
-	"unresolved-property-category": "Страници с неразрешени свойства"
+	"unresolved-property-category": "Страници с несигурни свойства",
+	"unresolved-property-category-desc": "Тази категория обхваща страници с референции към елементи на {{WBREPONAME}}, които не могат да бъдат намерени нито чрез идентификационния номер на свойството, нито чрез етикета.",
+	"connected-redirect-category": "Пренасочвания, свързани към елемент на {{WBREPONAME}}",
+	"connected-redirect-category-desc": "Тази категория обхваща пренасочващи страници, свързани към елемент на {{WBREPONAME}}."
 }
