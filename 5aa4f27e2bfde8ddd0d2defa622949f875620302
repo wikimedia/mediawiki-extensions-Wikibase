@@ -16,6 +16,24 @@
       "revId": "5aa4f27e2bfde8ddd0d2defa622949f875620302",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaafb72f_950bf74d",
+        "filename": "repo/maintenance/searchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-08T17:58:34Z",
+      "side": 1,
+      "message": "Because in the meantime, Wikibase changed how it does entity searches, and this code was never updated. I am not sure it even works anymore...",
+      "parentUuid": "e8b2a5e1_6444864c",
+      "revId": "5aa4f27e2bfde8ddd0d2defa622949f875620302",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
