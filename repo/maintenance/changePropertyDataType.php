@@ -64,7 +64,7 @@ class ChangePropertyDataType extends Maintenance {
 		try {
 			$propertyDataTypeChanger->changeDataType( $propertyId, $user, $newDataType );
 		} catch ( Exception $e ) {
-			$this->error( "An error occured: " . $e->getMessage(), 1 );
+			$this->error( "An error occurred: " . $e->getMessage(), 1 );
 		}
 
 		$this->output( "Successfully updated the property data type to $newDataType.\n" );
