@@ -2,12 +2,12 @@
 
 namespace Wikibase;
 
+use Hooks;
+use MWException;
 use OrderedStreamingForkController;
 use Maintenance;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\EntityTermSearchHelper;
-use Wikibase\Repo\Search\Elastic\EntitySearchElastic;
+use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -151,34 +151,30 @@ class SearchEntities extends Maintenance {
 	 * Get appropriate searcher.
 	 * @param string $engine
 	 * @return EntitySearchHelper
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	private function getSearchHelper( $engine ) {
-		$settings = $this->repo->getSettings()->getSetting( 'entitySearch' );
+		$engines = [
+			'sql' => function() {
+				return new TypeDispatchingEntitySearchHelper(
+					$this->repo->getEntitySearchHelperCallbacks(),
+					new \FauxRequest()
+				);
+			}
+		];
 
-		switch ( $engine ) {
-			case 'sql':
-				return new EntityTermSearchHelper(
-					$this->repo->getEntityLookup(),
-					$this->repo->getEntityIdParser(),
-					$this->repo->newTermSearchInteractor( $this->repo->getUserLanguage()->getCode() ),
-					new LanguageFallbackLabelDescriptionLookup(
-						$this->repo->getTermLookup(),
-						$this->repo->getLanguageFallbackChainFactory()->newFromLanguage( $this->repo->getUserLanguage() )
-					),
-					$this->repo->getEntityTypeToRepositoryMapping()
-				);
-			case 'elastic':
-				return new EntitySearchElastic(
-					$this->repo->getLanguageFallbackChainFactory(),
-					$this->repo->getEntityIdParser(),
-					$this->repo->getUserLanguage(),
-					$this->repo->getContentModelMappings(),
-					$settings
-				);
-			default:
-				throw new \MWException( "Unknown engine: $engine, valid values: sql, elastic." );
+		Hooks::run( 'WikibaseSearchEntitiesEngines', [ $this->repo, &$engines ] );
+
+		if ( !isset( $engines[$engine] ) ) {
+			throw new MWException( "Unknown engine: $engine, valid values: "
+				. implode( ", ", array_keys( $engines ) ) );
 		}
+
+		if ( !is_callable( $engines[$engine] ) ) {
+			throw new MWException( "Bad engine callback for $engine" );
+		}
+
+		return $engines[$engine]();
 	}
 
 }
