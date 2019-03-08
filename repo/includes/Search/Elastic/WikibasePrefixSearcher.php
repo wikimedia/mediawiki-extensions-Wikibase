@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Search\Elastic;
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\Connection;
 use CirrusSearch\Searcher;
+use Config;
 use Elastica\Query;
 use Elastica\Query\AbstractQuery;
 use MediaWiki\MediaWikiServices;
@@ -26,10 +27,10 @@ class WikibasePrefixSearcher extends Searcher {
 	/**
 	 * @param int $offset Search offset.
 	 * @param int $limit Search limit.
+	 * @param Config $config
 	 * @param CirrusDebugOptions $options
 	 */
-	public function __construct( $offset, $limit, CirrusDebugOptions $options = null ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CirrusSearch' );
+	public function __construct( $offset, $limit, Config $config, CirrusDebugOptions $options = null ) {
 		$connection = new Connection( $config );
 		parent::__construct( $connection, $offset, $limit, $config, null, null, null, $options );
 	}
