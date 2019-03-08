@@ -60,19 +60,28 @@ class ShowSearchHitHandler {
 	 * @var EntityLinkFormatter
 	 */
 	private $linkFormatter;
+	/**
+	 * Whether CirrusSearch-related functionality is enabled.
+	 * TODO: this is temporary for WikibaseCirrusSearch migration and will be removed
+	 * when migration is complete.
+	 * @var bool
+	 */
+	private $cirrusEnabled;
 
 	public function __construct(
 		EntityContentFactory $entityContentFactory,
 		LanguageFallbackChain $languageFallbackChain,
 		EntityIdLookup $entityIdLookup,
 		EntityLookup $entityLookup,
-		EntityLinkFormatter $linkFormatter
+		EntityLinkFormatter $linkFormatter,
+		$cirrusEnabled = true
 	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityLookup = $entityLookup;
 		$this->linkFormatter = $linkFormatter;
+		$this->cirrusEnabled = $cirrusEnabled;
 	}
 
 	/**
@@ -88,7 +97,8 @@ class ShowSearchHitHandler {
 			$languageFallbackChainFactory->newFromContext( $context ),
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityLookup(),
-			new DefaultEntityLinkFormatter( $context->getLanguage() )
+			new DefaultEntityLinkFormatter( $context->getLanguage() ),
+			empty( $wikibaseRepo->getSettings()->getSetting( 'disableCirrus' ) )
 		);
 	}
 
@@ -188,6 +198,11 @@ class ShowSearchHitHandler {
 	private function showEntityResultHit( SpecialSearch $searchPage, EntityResult $result, array $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
 	) {
+		if ( !$this->cirrusEnabled ) {
+			$this->showPlainSearchHit( $searchPage, $result, $terms, $link, $redirect, $section,
+				$extract, $score, $size, $date, $related, $html );
+			return;
+		}
 		$extract = '';
 		$displayLanguage = $searchPage->getLanguage()->getCode();
 		// Put highlighted description of the item as the extract
@@ -304,6 +319,11 @@ class ShowSearchHitHandler {
 		&$attributes,
 		$displayLanguage
 	) {
+		if ( !$this->cirrusEnabled ) {
+			$this->showPlainSearchTitle( $title, $html );
+			return;
+		}
+
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 		if ( !$entityId ) {
 			return;
