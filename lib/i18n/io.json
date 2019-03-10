@@ -7,6 +7,7 @@
 	"wikibase-error-ui-no-external-page": "Ne esis posibla trovar la pagino \"$2\" en \"$1\".",
 	"wikibase-sitelinks-wikipedia": "Wikipedio",
 	"wikibase-sitelinks-link-columnheading": "Pagino ligata",
+	"datatypes-type-quantity": "Quanto",
 	"wikibase-entity-summary-wbsetlabel-add": "Adjuntita etiketo [$2]",
 	"wikibase-entity-summary-clientsitelink-update": "Pagino movita de [$3] a [$4]"
 }
