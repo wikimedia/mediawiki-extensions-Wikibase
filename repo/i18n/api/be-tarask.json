@@ -301,5 +301,6 @@
 	"apihelp-wbformatentities-param-ids": "Ідэнтыфікатар элемэнту для фарматаваньня.",
 	"apihelp-wbformatentities-example-1": "Фарматаваць ідэнтыфікатар аднаго элемэнту.",
 	"apihelp-wbformatentities-example-2": "Фарматаваць ідэнтыфікатар элемэнту і ідэнтыфікатар уласьцівасьці.",
-	"apihelp-wbformatentities-example-3": "Фарматаваць ідэнтыфікатары элемэнту, уласьцівасьці і лексэмы."
+	"apihelp-wbformatentities-example-3": "Фарматаваць ідэнтыфікатары элемэнту, уласьцівасьці і лексэмы.",
+	"apihelp-wbformatentities-example-4": "Фарматаваць тры ідэнтыфікатары элемэнтаў францускай мовай."
 }

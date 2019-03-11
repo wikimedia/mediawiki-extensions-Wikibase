@@ -33,6 +33,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Linguala kodexo:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiketo:",
 	"wikibase-newproperty-datatype": "Tipo di dato:",
+	"special-newitem": "Krear nova artiklo",
 	"wikibase-newitem-site": "URL dil unesma pagino ligita",
 	"wikibase-newitem-no-external-page": "La pagino \"$2\" ne trovesis en \"$1\".",
 	"wikibase-newentity-language": "Linguo:",
