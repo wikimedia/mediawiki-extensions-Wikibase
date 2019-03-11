@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "724824b8_e5aff677",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "`$repo`",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 305,
+        "endChar": 38
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2af26713_a8ac98d4",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "No strong opinion and it does not make much practical difference but I would prefer to either\n- not (redundantly) injected what can be determined from OutputPage (entityId, languageFallbackChain), or\n- inject everything that can be determined from OutputPage individually (language, \"default markup\")\n\nOr is there a system I missed?",
+      "range": {
+        "startLine": 34,
+        "startChar": 17,
+        "endLine": 34,
+        "endChar": 28
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea6af4c8_223efcc0",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "Not your fault but maybe we can switch that to a guard against exceptions instead of the other way around.",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb9d651d_0292d323",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspector.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "Maybe going with WbUi (while we use PHP classes with a \"Termbox~\" prefix, too) is too soon... Admittedly sticking to Termbox opens room for confusion with respect to termbox v1.\n\nMaybe \"TermboxEditionSplitter\" making for \n\n``` inside ExternallyRenderedEntityViewPlaceholderExpander\n\n$this-\u003eeditionSplitter-\u003eisUserSpecific( $context )\n  ? $this-\u003ererenderTermbox()\n  : $this-\u003eoutputPage-\u003egetProperty( TermboxView::TERMBOX_MARKUP )",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c88b081_372e5f91",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "getMock possible ff.",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 39
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d293c3e9_59816e94",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "getMock possible",
+      "range": {
+        "startLine": 28,
+        "startChar": 41,
+        "endLine": 28,
+        "endChar": 51
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af743dd7_b8d8f332",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "getMock possible",
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8778a1d1_ab06d702",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-11T16:17:36Z",
+      "side": 1,
+      "message": "getMock possible",
+      "range": {
+        "startLine": 69,
+        "startChar": 20,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
