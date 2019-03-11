@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e344920b_cce3f38b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-03-11T13:00:21Z",
+      "side": 1,
+      "message": "Usually, there should be a blank line between the “subject” (the first line of the commit message) and the rest of the message. In this case I think either of these lines is enough as the commit message, and you could remove the other one.",
+      "revId": "0003da6e017e2c84523b747555bd39a9a1fb0ac0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
