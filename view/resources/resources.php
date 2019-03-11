@@ -298,101 +298,26 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.entityChangers.__namespace' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/namespace.js',
-			],
-			'dependencies' => [
-				'wikibase',
-			],
-		],
-
-		'wikibase.entityChangers.AliasesChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/AliasesChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.MultiTerm',
-				'wikibase.entityChangers.__namespace',
-				'wikibase.api.RepoApiError',
-			],
-		],
-
-		'wikibase.entityChangers.StatementsChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/StatementsChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
-				'wikibase.api.RepoApiError',
-			],
-		],
-
-		'wikibase.entityChangers.DescriptionsChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/DescriptionsChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
-				'wikibase.api.RepoApiError',
-			]
-		],
-
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase/entityChangers/namespace.js',
+
+				'wikibase/entityChangers/AliasesChanger.js',
+				'wikibase/entityChangers/StatementsChanger.js',
+				'wikibase/entityChangers/DescriptionsChanger.js',
+				'wikibase/entityChangers/EntityTermsChanger.js',
+				'wikibase/entityChangers/LabelsChanger.js',
+				'wikibase/entityChangers/SiteLinksChanger.js',
+				'wikibase/entityChangers/SiteLinkSetsChanger.js',
+
 				'wikibase/entityChangers/EntityChangersFactory.js',
 			],
 			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
-				'wikibase.entityChangers.AliasesChanger',
-				'wikibase.entityChangers.DescriptionsChanger',
-				'wikibase.entityChangers.EntityTermsChanger',
-				'wikibase.entityChangers.LabelsChanger',
-				'wikibase.entityChangers.SiteLinkSetsChanger',
-				'wikibase.entityChangers.StatementsChanger',
-				'wikibase.serialization.StatementDeserializer',
-				'wikibase.serialization.StatementSerializer',
-			]
-		],
-
-		'wikibase.entityChangers.EntityTermsChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/EntityTermsChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
+				'wikibase',
 				'wikibase.api.RepoApiError',
-			]
-		],
-
-		'wikibase.entityChangers.LabelsChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/LabelsChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
-				'wikibase.api.RepoApiError',
-			]
-		],
-
-		'wikibase.entityChangers.SiteLinksChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/SiteLinksChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
-				'wikibase.api.RepoApiError',
-			]
-		],
-
-		'wikibase.entityChangers.SiteLinkSetsChanger' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityChangers/SiteLinkSetsChanger.js',
-			],
-			'dependencies' => [
-				'wikibase.entityChangers.__namespace',
-				'wikibase.entityChangers.SiteLinksChanger',
-				'wikibase.api.RepoApiError',
+				'wikibase.datamodel.MultiTerm', // for AliasesChanger.js
+				'wikibase.serialization.StatementDeserializer', // for EntityChangersFactory.js
+				'wikibase.serialization.StatementSerializer', // for EntityChangersFactory.js
 			]
 		],
 
