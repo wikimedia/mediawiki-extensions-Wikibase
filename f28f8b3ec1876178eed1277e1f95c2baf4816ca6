@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6d67ca7_2c2afed6",
+        "filename": "repo/includes/Hooks/Helpers/OutputPageRevisionIdReader.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T16:15:05Z",
+      "side": 1,
+      "message": "It\u0027s good to have this extracted and not flying around in multiple places!",
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c225913_2159ab4a",
+        "filename": "repo/includes/Hooks/Helpers/OutputPageRevisionIdReader.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T16:15:05Z",
+      "side": 1,
+      "message": "This is true only for $out-\u003egetRevisionId(), but I don\u0027t know in which cases $out-\u003egetTitle()-\u003egetLatestRevID() returns 0.",
+      "range": {
+        "startLine": 19,
+        "startChar": 5,
+        "endLine": 19,
+        "endChar": 98
+      },
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5b6e1d1_fd4b0f0c",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T16:15:05Z",
+      "side": 1,
+      "message": "Looking at this, I would really like to know in which cases this happens. Do you think it\u0027s worth looking into?",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c92b767d_c09e4ab5",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T16:15:05Z",
+      "side": 1,
+      "message": "This looks very similar to https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/491962#75\n\nWhat do you think about just passing the revision on to the renderer and let it throw an exception if it\u0027s not happy with the given value?",
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "912ad867_a7326f66",
+        "filename": "view/src/Termbox/Renderer/TermboxRenderer.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T16:15:05Z",
+      "side": 1,
+      "message": "int?",
+      "range": {
+        "startLine": 17,
+        "startChar": 11,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
