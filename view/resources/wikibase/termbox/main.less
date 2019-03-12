@@ -9,6 +9,7 @@
 		height: @star-area-size;
 		min-width: @star-area-size;
 		right: -9px;
+		padding-bottom: 0.5em;
 
 		&:before {
 			margin: 0;
@@ -26,10 +27,14 @@
 
 	&.wb-entitypage #page-actions {
 		position: absolute;
-		top: -0.5em;
+		top: 0;
 		border-top: 0 none;
-		height: 1em + 2 * @heading-holder-padding;
 		overflow: visible;
+		right: 0;
+
+		.language-selector {
+			float: right; 
+		}
 	}
 
 	&.wb-entitypage .pre-content h1 {
