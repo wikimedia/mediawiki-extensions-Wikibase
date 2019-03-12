@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "0eefaecb_07cbce60",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspector.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-12T11:30:06Z",
+      "side": 1,
+      "message": "Sometimes only the prospect of losing something makes you realize you liked it as it was.",
+      "parentUuid": "f44bcba2_939332ef",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c88b081_372e5f91",
         "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
         "patchSetId": 5
@@ -210,6 +234,30 @@
       "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b40ffe2_d0154e52",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-12T11:30:06Z",
+      "side": 1,
+      "message": "That was not helpful, had the deprecation backwards.",
+      "parentUuid": "4c88b081_372e5f91",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 39
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -236,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "502f45de_7d0d5026",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-12T11:30:06Z",
+      "side": 1,
+      "message": "That was not helpful, had the deprecation backwards.",
+      "parentUuid": "d293c3e9_59816e94",
+      "range": {
+        "startLine": 28,
+        "startChar": 41,
+        "endLine": 28,
+        "endChar": 51
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af743dd7_b8d8f332",
         "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
         "patchSetId": 5
@@ -250,6 +322,24 @@
       "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "859732dc_516c501c",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-12T11:30:06Z",
+      "side": 1,
+      "message": "That was not helpful, had the deprecation backwards.",
+      "parentUuid": "af743dd7_b8d8f332",
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -273,6 +363,30 @@
       "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "461570b4_540da393",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspectorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-12T11:30:06Z",
+      "side": 1,
+      "message": "That was not helpful, had the deprecation backwards.",
+      "parentUuid": "8778a1d1_ab06d702",
+      "range": {
+        "startLine": 69,
+        "startChar": 20,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
