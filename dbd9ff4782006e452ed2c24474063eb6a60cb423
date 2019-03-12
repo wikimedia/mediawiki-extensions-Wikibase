@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d02a6c1a_0eae59b4",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T13:09:33Z",
+      "side": 1,
+      "message": "For some reason I\u0027m failing to reproduce this locally at the moment, but if I remember correctly this may return null.\nhttps://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/Wikibase/+/master/repo/includes/Hooks/Helpers/OutputPageEditability.php#61\n\nSo something like `$out-\u003egetRevisionId() ?: $out-\u003egetTitle()-\u003egetLatestRevID()`?",
+      "range": {
+        "startLine": 72,
+        "startChar": 23,
+        "endLine": 72,
+        "endChar": 36
+      },
+      "revId": "dbd9ff4782006e452ed2c24474063eb6a60cb423",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
