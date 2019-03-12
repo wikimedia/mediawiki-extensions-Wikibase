@@ -269,6 +269,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ParserOutput\\PlaceholderExpander\\EntityViewPlaceholderExpander' => __DIR__ . '/includes/ParserOutput/PlaceholderExpander/EntityViewPlaceholderExpander.php',
 	'Wikibase\\Repo\\ParserOutput\\PlaceholderExpander\\ExternallyRenderedEntityViewPlaceholderExpander' => __DIR__ . '/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php',
 	'Wikibase\\Repo\\ParserOutput\\PlaceholderExpander\\PlaceholderExpander' => __DIR__ . '/includes/ParserOutput/PlaceholderExpander/PlaceholderExpander.php',
+	'Wikibase\\Repo\\ParserOutput\\PlaceholderExpander\\TermboxRequestInspector' => __DIR__ . '/includes/ParserOutput/PlaceholderExpander/TermboxRequestInspector.php',
 	'Wikibase\\Repo\\ParserOutput\\PropertyParserOutputUpdater' => __DIR__ . '/includes/ParserOutput/PropertyParserOutputUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\ReferencedEntitiesDataUpdater' => __DIR__ . '/includes/ParserOutput/ReferencedEntitiesDataUpdater.php',
 	'Wikibase\\Repo\\ParserOutput\\StatementDataUpdater' => __DIR__ . '/includes/ParserOutput/StatementDataUpdater.php',
