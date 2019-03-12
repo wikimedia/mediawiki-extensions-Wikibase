@@ -25,6 +25,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
 use Wikibase\Repo\Search\Elastic\EntityResult;
+use Wikibase\Repo\Search\ExtendedResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 
@@ -113,6 +114,9 @@ class ShowSearchHitHandler {
 		array $terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
 		&$html
 	) {
+		if ( $result instanceof ExtendedResult ) {
+			return;
+		}
 		$self = self::newFromGlobalState( $searchPage->getContext() );
 		if ( $result instanceof EntityResult ) {
 			$self->showEntityResultHit( $searchPage, $result, $terms,
@@ -130,6 +134,9 @@ class ShowSearchHitHandler {
 	private function showPlainSearchHit( SpecialSearch $searchPage, SearchResult $result, array $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
 	) {
+		if ( $result instanceof ExtendedResult ) {
+			return;
+		}
 		$title = $result->getTitle();
 
 		if ( !$this->isTitleEntity( $title ) ) {
@@ -283,6 +290,9 @@ class ShowSearchHitHandler {
 		array &$query,
 		array &$attributes
 	) {
+		if ( $result instanceof ExtendedResult ) {
+			return;
+		}
 		$self = self::newFromGlobalState( $specialSearch->getContext() );
 		if ( $result instanceof EntityResult ) {
 			$self->getLink( $result, $title, $titleSnippet, $attributes,

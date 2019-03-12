@@ -318,6 +318,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Search\\Elastic\\Query\\HasWbStatementFeature' => __DIR__ . '/includes/Search/Elastic/Query/HasWbStatementFeature.php',
 	'Wikibase\\Repo\\Search\\Elastic\\Query\\WbStatementQuantityFeature' => __DIR__ . '/includes/Search/Elastic/Query/WbStatementQuantityFeature.php',
 	'Wikibase\\Repo\\Search\\Elastic\\WikibasePrefixSearcher' => __DIR__ . '/includes/Search/Elastic/WikibasePrefixSearcher.php',
+	'Wikibase\\Repo\\Search\\ExtendedResult' => __DIR__ . '/includes/Search/ExtendedResult.php',
 	'Wikibase\\Repo\\Search\\Fields\\FieldDefinitions' => __DIR__ . '/includes/Search/Fields/FieldDefinitions.php',
 	'Wikibase\\Repo\\Search\\Fields\\NoFieldDefinitions' => __DIR__ . '/includes/Search/Fields/NoFieldDefinitions.php',
 	'Wikibase\\Repo\\Search\\Fields\\WikibaseIndexField' => __DIR__ . '/includes/Search/Fields/WikibaseIndexField.php',
