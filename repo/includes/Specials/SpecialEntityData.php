@@ -127,6 +127,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$serializationService,
 			$this->entityDataFormatProvider,
 			$wikibaseRepo->getLogger(),
+			$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
 			$maxAge,
 			$wgUseSquid,

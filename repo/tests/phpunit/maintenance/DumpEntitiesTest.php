@@ -22,6 +22,7 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 	public function testGetEntityTypes_yieldsRelevantTypes(
 		array $expected,
 		array $existingEntityTypes,
+		array $entityTypesToExcludeFromOutput,
 		array $cliEntityTypes
 	) {
 		$dumper = $this->getMockForAbstractClass( DumpEntities::class );
@@ -29,7 +30,8 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 			$this->getMockBuilder( SqlEntityIdPagerFactory::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			$existingEntityTypes
+			$existingEntityTypes,
+			$entityTypesToExcludeFromOutput
 		);
 
 		$argv = [ 'dumpRdf.php' ];
@@ -49,28 +51,45 @@ class DumpEntitiesTest extends MediaWikiTestCase {
 		yield [
 			[ 'item', 'property' ],
 			[ 'item', 'property' ],
+			[],
 			[]
 		];
 		yield [
 			[ 'item', 'property', 'lexeme' ],
 			[ 'item', 'property', 'lexeme' ],
 			[],
+			[],
 			[]
 		];
 		yield [
 			[ 'lexeme' ],
 			[ 'item', 'property', 'lexeme' ],
+			[],
 			[ 'lexeme' ]
 		];
 		yield [
 			[ 'item', 'property' ],
 			[ 'item', 'property', 'lexeme' ],
+			[],
 			[ 'item', 'property' ]
 		];
 		yield [
 			[ 'item' ],
 			[ 'item', 'property', 'lexeme' ],
+			[],
 			[ 'item' ]
+		];
+		yield 'no output available for properties' => [
+			[ 'item' ],
+			[ 'item', 'property' ],
+			[ 'property' ],
+			[]
+		];
+		yield 'no output available for properties, property type requested in CLI' => [
+			[],
+			[ 'item', 'property' ],
+			[ 'property' ],
+			[ 'property' ]
 		];
 	}
 
