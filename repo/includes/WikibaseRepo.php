@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -440,10 +441,13 @@ class WikibaseRepo {
 		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
 	}
 
-	// TODO: current settings (especially foreign repositories blob) might be quite confusing
-	// Having a "entitySources" or so setting might be better, and would also allow unifying
-	// the way these are configured in Repo and in Client parts
 	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
+			$configParser = new EntitySourceDefinitionsConfigParser();
+
+			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ) );
+		}
+
 		$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
 		$localDatabaseName = $settings->getSetting( 'changesDatabase' );
 		$localConceptBaseUri = $settings->getSetting( 'conceptBaseUri' );
