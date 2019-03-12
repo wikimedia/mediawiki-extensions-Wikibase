@@ -636,7 +636,7 @@ class SqlStore implements Store {
 				$cacheKey
 			),
 			ObjectCache::getLocalServerInstance(),
-			10,
+			20,
 			$cacheKey
 		);
 	}
