@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16da47bc_1a740e65",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T11:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "724824b8_e5aff677",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 305,
+        "endChar": 38
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2af26713_a8ac98d4",
         "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-11T16:17:36Z",
       "side": 1,
       "message": "No strong opinion and it does not make much practical difference but I would prefer to either\n- not (redundantly) injected what can be determined from OutputPage (entityId, languageFallbackChain), or\n- inject everything that can be determined from OutputPage individually (language, \"default markup\")\n\nOr is there a system I missed?",
+      "range": {
+        "startLine": 34,
+        "startChar": 17,
+        "endLine": 34,
+        "endChar": 28
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b4dda53_66a21c27",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T11:00:28Z",
+      "side": 1,
+      "message": "Makes sense, I went with option b)!",
+      "parentUuid": "2af26713_a8ac98d4",
       "range": {
         "startLine": 34,
         "startChar": 17,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "19a98347_e154e47f",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T11:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea6af4c8_223efcc0",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 53
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb9d651d_0292d323",
         "filename": "repo/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspector.php",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2019-03-11T16:17:36Z",
       "side": 1,
       "message": "Maybe going with WbUi (while we use PHP classes with a \"Termbox~\" prefix, too) is too soon... Admittedly sticking to Termbox opens room for confusion with respect to termbox v1.\n\nMaybe \"TermboxEditionSplitter\" making for \n\n``` inside ExternallyRenderedEntityViewPlaceholderExpander\n\n$this-\u003eeditionSplitter-\u003eisUserSpecific( $context )\n  ? $this-\u003ererenderTermbox()\n  : $this-\u003eoutputPage-\u003egetProperty( TermboxView::TERMBOX_MARKUP )",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "2e8bdcb5fb6cb5a59dbc0892c3753130c870a12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f44bcba2_939332ef",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/WbUiRequestInspector.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T11:00:28Z",
+      "side": 1,
+      "message": "I share the WbUi prefix concern and renamed it to `TermboxRequestInspector` for now. The name is starting to grow on me, and I personally prefer inspector over splitter, as it better describes the passive role it takes in the process.",
+      "parentUuid": "eb9d651d_0292d323",
       "range": {
         "startLine": 16,
         "startChar": 6,
