@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad16d60_632a74a6",
+        "filename": "view/resources/wikibase/termbox/_variables.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "Now that they no longer describe only the star but also the other page action icons, this variable name should change accordingly.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 23
+      },
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7ac4153_c425aea7",
+        "filename": "view/resources/wikibase/termbox/_variables.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "It seems that this is no longer used. If that\u0027s the case, we can delete it :)",
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58dd05d4_82513d87",
+        "filename": "view/resources/wikibase/termbox/main.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "What is this needed for?",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 3
+      },
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10384219_88c7ce50",
+        "filename": "view/resources/wikibase/termbox/main.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "This looks like it is not needed.",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8e16faf_0881e7b1",
+        "filename": "view/resources/wikibase/termbox/main.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "I believe this selector is wrong. The :before is on the a-element, not on the li-element. \n4:39 PM https://usercontent.irccloud-cdn.com/file/CUgoOSEE/Screenshot%20from%202019-03-12%2016-37-05.png\n\n`\u0026:before` should be `\u003e a:before`.",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6381bdd7_85574738",
+        "filename": "view/resources/wikibase/termbox/main.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "Does this need to change?",
+      "range": {
+        "startLine": 29,
+        "startChar": 21,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0468ce20_5d1faac2",
+        "filename": "view/resources/wikibase/termbox/main.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-12T15:44:12Z",
+      "side": 1,
+      "message": "This looks like it is not needed.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "8a6756d2b91b8ce2a2a7f95c976b0a03920157f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
