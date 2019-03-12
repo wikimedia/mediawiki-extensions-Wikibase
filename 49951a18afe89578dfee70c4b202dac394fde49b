@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3deddc36_ee3663bf",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-03-12T12:41:01Z",
+      "side": 1,
+      "message": "suggestion: rename to tmpSerializeEmptyListsAsObjects or something.\nTo not trigger bikeshedding over \"what are containers\" and especially \"what does properly mean\"",
+      "range": {
+        "startLine": 357,
+        "startChar": 2,
+        "endLine": 357,
+        "endChar": 37
+      },
+      "revId": "49951a18afe89578dfee70c4b202dac394fde49b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
