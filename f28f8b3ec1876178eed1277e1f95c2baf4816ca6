@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "93568bda_17adf977",
+        "filename": "repo/includes/Hooks/Helpers/OutputPageRevisionIdReader.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-13T10:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c225913_2159ab4a",
+      "range": {
+        "startLine": 19,
+        "startChar": 5,
+        "endLine": 19,
+        "endChar": 98
+      },
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5b6e1d1_fd4b0f0c",
         "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
         "patchSetId": 25
@@ -82,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "3e8f37f6_0dabcbe5",
+        "filename": "repo/includes/ParserOutput/TermboxView.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-13T10:05:02Z",
+      "side": 1,
+      "message": "I understand what you mean but I think it would be the wrong approach to dilute the TermboxRenderer interface to allow  invalid values only to centralize validation.\nIdeally we would reach a level of confidence that there is no scenario in which a null value would hit this spot but I\u0027m not there. Should we systematically walk through the scenarios?",
+      "parentUuid": "c92b767d_c09e4ab5",
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "912ad867_a7326f66",
         "filename": "view/src/Termbox/Renderer/TermboxRenderer.php",
         "patchSetId": 25
@@ -102,6 +144,30 @@
       "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fde7e543_040f8eaf",
+        "filename": "view/src/Termbox/Renderer/TermboxRenderer.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-13T10:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "912ad867_a7326f66",
+      "range": {
+        "startLine": 17,
+        "startChar": 11,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "f28f8b3ec1876178eed1277e1f95c2baf4816ca6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
