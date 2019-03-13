@@ -2364,6 +2364,8 @@ class WikibaseRepo {
 			$cacheSecret
 		);
 
+		$cache->setLogger( $this->getLogger() );
+
 		$cache = new StatsdMissRecordingSimpleCache(
 			$cache,
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),
