@@ -16,27 +16,6 @@
 	}
 
 	/**
-	 * @return {string[]} An ordered list of languages the user wants to use, the first being her
-	 *                    preferred language, and thus the UI language (currently wgUserLanguage).
-	 */
-	function getUserLanguages() {
-		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
-			isUlsDefined = mw.uls && $.uls && $.uls.data,
-			languages;
-
-		if ( !userLanguages.length && isUlsDefined ) {
-			languages = mw.uls.getFrequentLanguageList().slice( 1, 4 );
-		} else {
-			languages = userLanguages.slice();
-			languages.splice( userLanguages.indexOf( mw.config.get( 'wgUserLanguage' ) ), 1 );
-		}
-
-		languages.unshift( mw.config.get( 'wgUserLanguage' ) );
-
-		return languages;
-	}
-
-	/**
 	 * @param {wikibase.api.RepoApi} repoApi
 	 * @param {string} languageCode The language code of the ui language
 	 * @return {wikibase.store.CachingEntityStore}
@@ -65,7 +44,7 @@
 			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
 			repoApi = new wb.api.RepoApi( mwApi ),
-			userLanguages = getUserLanguages(),
+			userLanguages = wb.getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[ 0 ] ),
 			contentLanguages = new wikibase.WikibaseContentLanguages(),
 			formatterFactory = new wb.formatters.ApiValueFormatterFactory(

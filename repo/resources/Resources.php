@@ -121,6 +121,16 @@ return call_user_func( function() {
 			]
 		],
 
+		'wikibase.getUserLanguages' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.getUserLanguages.js'
+			],
+			'dependencies' => [
+				'wikibase',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.ui.entityViewInit.js'
@@ -156,7 +166,8 @@ return call_user_func( function() {
 				'wikibase.view.ViewFactoryFactory',
 				'wikibase.view.StructureEditorFactory',
 				'wikibase.view.ToolbarFactory',
-				'wikibase.WikibaseContentLanguages'
+				'wikibase.WikibaseContentLanguages',
+				'wikibase.getUserLanguages'
 			],
 			'messages' => [
 				'pagetitle',
