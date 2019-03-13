@@ -16,6 +16,24 @@
       "revId": "b71a97cd20be0ddf04c6d5e747d4df9d8c592d41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9e33159_905e1a6c",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-13T15:32:00Z",
+      "side": 1,
+      "message": "\u003e This marker is meant to tell Wikibase that an extension has a better onShowSearchHit hook?\n\nyes, basically\n\n\u003e I think it\u0027d be more appropriate to leave the hook mechanism here but let extension declare a customized ShowSearchHitHandler.\n\nNot sure what you mean here - declare it how? \n\n\u003e How will you deal with this problem inside WBCS when you\u0027ll receive LexemeResult\n\nWBCS will ignore everything that is not its EntityResult type. So if Lexeme uses different result type, WBCS will do nothing. Here it\u0027s not possible to do the same because Wikidata does not have its own result type (knowing nothing about Cirrus \u0026 result types).",
+      "parentUuid": "542aaaaa_5e91361c",
+      "revId": "b71a97cd20be0ddf04c6d5e747d4df9d8c592d41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
