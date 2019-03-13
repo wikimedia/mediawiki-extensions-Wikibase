@@ -115,7 +115,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new RdfVocabulary(
 				[ '' => EntityDataSerializationServiceTest::URI_BASE ],
 				EntityDataSerializationServiceTest::URI_DATA
-			)
+			),
+			true
 		);
 
 		$entityDataFormatProvider->setFormatWhiteList(
