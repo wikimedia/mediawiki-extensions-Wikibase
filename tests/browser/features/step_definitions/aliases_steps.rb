@@ -26,7 +26,11 @@ When(/^I enter (.+) as new aliases$/) do |values|
 end
 
 When(/^I change the first alias to (.+)$/) do |value|
-  on(ItemPage).aliases_input_first = value
+  # Assigning the value directly to the input somehow lead to the alias disappearing.
+  # See https://phabricator.wikimedia.org/T218204
+
+  on(ItemPage).aliases_input_first_element.double_click # to select all text
+  on(ItemPage).aliases_input_first_element.send_keys value
 end
 
 Then(/^Aliases UI should be there$/) do
