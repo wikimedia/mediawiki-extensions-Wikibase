@@ -121,6 +121,15 @@ return call_user_func( function() {
 			]
 		],
 
+		'wikibase.getUserLanguages' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.getUserLanguages.js'
+			],
+			'dependencies' => [
+				'wikibase',
+			]
+		],
+
 		'wikibase.ui.entityViewInit' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.ui.entityViewInit.js'
