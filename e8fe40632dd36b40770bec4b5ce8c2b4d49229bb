@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dc4592e_b2094d82",
+        "filename": "view/resources/wikibase/termbox/_variables.less",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-13T19:01:55Z",
+      "side": 1,
+      "message": "`@heading-holder-height` fell unused and can be removed.",
+      "revId": "e8fe40632dd36b40770bec4b5ce8c2b4d49229bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15a95526_ba47f8c8",
+        "filename": "view/resources/wikibase/termbox/_variables.less",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-13T19:01:55Z",
+      "side": 1,
+      "message": "As it is only describing half of the padding (vertical) I\u0027d refrain from generalizing this, especially under this name, and just use the value instead.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 23
+      },
+      "revId": "e8fe40632dd36b40770bec4b5ce8c2b4d49229bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
