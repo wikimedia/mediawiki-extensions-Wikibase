@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ae8f1e6_5b4f71a2",
+        "filename": "repo/includes/Hooks/Helpers/OutputPageRevisionIdReader.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2019-03-13T10:16:07Z",
+      "side": 1,
+      "message": "Perhaps just a nitpick but to me all the ternaries aren\u0027t that clear. I\u0027d probably rather they were expanded out",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 11
+      },
+      "revId": "00527dc9d5090fb229f601477461fc10808b0014",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
