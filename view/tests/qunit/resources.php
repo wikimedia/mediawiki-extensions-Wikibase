@@ -82,6 +82,7 @@ return [
 			'wikibase/view/ViewFactoryFactory.tests.js',
 			'wikibase/view/ToolbarFactory.tests.js',
 			'wikibase/wikibase.WikibaseContentLanguages.tests.js',
+			'wikibase/wikibase.getUserLanguages.tests.js',
 			'wikibase/wikibase.getLanguageNameByCode.tests.js',
 			'wikibase/templates.tests.js',
 			'wikibase/wikibase.ValueViewBuilder.tests.js',
@@ -145,6 +146,7 @@ return [
 			'wikibase.view.ViewFactoryFactory',
 			'wikibase.view.tests.getMockListItemAdapter',
 			'wikibase.WikibaseContentLanguages',
+			'wikibase.getUserLanguages',
 		],
 	],
 ];
