@@ -312,6 +312,7 @@
 	"wikibase-entitydata-not-acceptable": "Nenhum formato correspondente encontrado. Tipos MIME suportados: $1",
 	"wikibase-entitydata-bad-revision": "Não foi possível exibir a revisão $2 da entidade $1.",
 	"wikibase-entitydata-bad-id": "ID inválido: $1.",
+	"wikibase-entitydata-rdf-not-available": "A saída de RDF não está disponível atualmente para entidades do tipo: $1. Por favor, solicite o formato JSON.",
 	"wikibase-entitydata-unsupported-format": "O formato de dados $1 não é suportado por esta interface.",
 	"wikibase-entitydata-storage-error": "Falha ao carregar a entidade $1.",
 	"wikibase-entitydata-title": "Dados da Entidade",

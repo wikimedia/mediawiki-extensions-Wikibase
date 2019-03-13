@@ -53,6 +53,7 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Праўкі, якія паходзяць з {{grammar:родны|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены {{WBREPONAME}} у Вашым сьпісе назіраньня",
+	"wikibase-error-deserialize-error": "Не атрымалася дэсэрыялізаваць зьвесткі.",
 	"wikibase-error-serialize-error": "Не ўдалося сэрыялізаваць зьвесткі",
 	"wikibase-error-invalid-entity-id": "Ідэнтыфікатар «$2» не вядомы сыстэме. Калі ласка, выкарыстоўвайце існыя ідэнтыфікатары аб’ектаў.",
 	"unconnectedpages": "Старонкі, ня злучаныя з аб’ектамі",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Waihorace",
 			"Yueman",
-			"CRCHF"
+			"CRCHF",
+			"Hello903hello"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
@@ -23,5 +24,6 @@
 	"wikibase-rc-hide-wikidata-show": "顯示",
 	"wikibase-rc-wikibase-edit-letter": "數",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 修改",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}改動",
 	"wikibase-otherprojects": "第啲項目"
 }
