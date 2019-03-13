@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c35ab659_64d76f5f",
+        "filename": "view/resources/wikibase/termbox/main.less",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-03-13T11:43:30Z",
+      "side": 1,
+      "message": "In the latest minerva version all list items including the disabled language selector have the icon set on an element with the `mw-ui-icon` class. So we could go with the slightly cleaner looking, nested version of this:\n\n\t.mw-ui-icon {\n\t\tmin-width: @icon-width;\n\n\t\t\u0026:before {\n\t\t\tmargin: 0;\n\t\t\tbackground-position: 0 0;\n\t\t\tbackground-size: 100% auto;\n\t\t\twidth: @icon-width;\n\t\t\theight: @icon-height;\n\t\t}\n\t}",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "e92dca764b167a57cb0549007cc134272a0a5ac0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
