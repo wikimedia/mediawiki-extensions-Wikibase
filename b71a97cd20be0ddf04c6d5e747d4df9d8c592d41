@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "542aaaaa_5e91361c",
+        "filename": "repo/includes/Hooks/ShowSearchHitHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2019-03-13T09:36:05Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow.\n\nThis marker is meant to tell Wikibase that an extension has a better onShowSearchHit hook?\n\nI think it\u0027d be more appropriate to leave the hook mechanism here but let extension declare a customized ShowSearchHitHandler. This would let you to add some room to add logic to deal with competing ShowSearchHitHandler (EntityResult vs LexemeResult)\n\nHow will you deal with this problem inside WBCS when you\u0027ll receive LexemeResult, will you need another markup class to ignore them?",
+      "revId": "b71a97cd20be0ddf04c6d5e747d4df9d8c592d41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
