@@ -16,9 +16,9 @@ use Wikibase\SettingsArray;
 class SitesModuleWorker {
 
 	/**
-	 * How many seconds the result of self::getModifiedHash is cached.
+	 * How many seconds the result of getSiteDetails() is cached.
 	 */
-	const SITES_HASH_CACHE_DURATION = 600; // 10 minutes
+	const SITE_DETAILS_TTL = 600; // 10 minutes
 
 	/**
 	 * @var SettingsArray
@@ -63,27 +63,6 @@ class SitesModuleWorker {
 	}
 
 	/**
-	 * Get a hash representing the sites table. This must change if e.g. new sites get added to the
-	 * sites table.
-	 *
-	 * @return string
-	 */
-	private function getSitesHash() {
-		$data = '';
-		$sites = (array)$this->getSites();
-		sort( $sites );
-
-		/**
-		 * @var Site $site
-		 */
-		foreach ( $sites as $site ) {
-			$data .= json_encode( (array)$site );
-		}
-
-		return sha1( $data );
-	}
-
-	/**
 	 * Used to propagate information about sites to JavaScript.
 	 * Sites infos will be available in 'wbSiteDetails' config var.
 	 * @see ResourceLoaderModule::getScript
@@ -122,10 +101,26 @@ class SitesModuleWorker {
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
 	 * @param string $languageCode
+	 * @return string[]
+	 */
+	protected function getSiteDetails( MediaWikiSite $site, array $specialGroups, $languageCode ) {
+		return $this->cache->getWithSetCallback(
+			$this->cache->makeKey( 'wikibase-sites-module', 'site-details' ),
+			self::SITE_DETAILS_TTL,
+			function () use ( $site, $specialGroups, $languageCode ) {
+					return $this->computeSiteDetails( $site, $specialGroups, $languageCode );
+			}
+		);
+	}
+
+	/**
+	 * @param MediaWikiSite $site
+	 * @param string[] $specialGroups
+	 * @param string $languageCode
 	 *
 	 * @return string[]
 	 */
-	private function getSiteDetails( MediaWikiSite $site, array $specialGroups, $languageCode ) {
+	protected function computeSiteDetails( MediaWikiSite $site, array $specialGroups, $languageCode ) {
 		$languageNameLookup = new LanguageNameLookup();
 
 		$group = $site->getGroup();
@@ -191,43 +186,6 @@ class SitesModuleWorker {
 	 */
 	private function shouldSiteBeIncluded( Site $site, array $groups ) {
 		return $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $site->getGroup(), $groups );
-	}
-
-	/**
-	 * @return string
-	 */
-	private function computeModifiedHash() {
-		$data = [
-			$this->getSiteLinkGroups(),
-			$this->getSpecialSiteLinkGroups(),
-			$this->getSitesHash()
-		];
-
-		return sha1( json_encode( $data ) );
-	}
-
-	/**
-	 * This returns our additions to the default definition summary.
-	 * We add a hash which should change whenever either a relevant setting
-	 * or the list of sites changes. Because computing this list is quite heavy and
-	 * it barely changes, cache that hash for a short bit.
-	 *
-	 * @see ResourceLoaderModule::getDefinitionSummary
-	 *
-	 * @return array
-	 */
-	public function getDefinitionSummary() {
-		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
-		$hash = $this->cache->get( $cacheKey );
-
-		if ( $hash === false ) {
-			$hash = $this->computeModifiedHash();
-			$this->cache->set( $cacheKey, $hash, self::SITES_HASH_CACHE_DURATION );
-		}
-
-		return [
-			'dataHash' => $hash
-		];
 	}
 
 }
