@@ -69,6 +69,7 @@
 	"entityusage": "Выкарыстаньне аб’ектаў",
 	"entityusage-summary": "Гэтая старонка пералічвае старонкі, што выкарыстоўваюць дадзены элемэнт (напр. Q42). Сьпіс сартаваны паводле адваротнага парадку ідэнтыфікатараў, таму навейшыя старонкі знаходзяцца ў ягоным пачатку.",
 	"wikibase-entityusage-legend": "Сьпіс старонак, што выкарыстоўваюць дадзены элемэнт",
+	"wikibase-entityusage-entity": "Элемэнт:",
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-pageinfo-entity-usage": "Аб’екты {{WBREPONAME}}, якія ўжываюцца на гэтай старонцы",
