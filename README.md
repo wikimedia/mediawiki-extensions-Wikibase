@@ -1,4 +1,7 @@
 - - -
+
+Dummy to abuse CI tests
+
 Introduction to Wikibase
 ====================
 
