@@ -2,10 +2,15 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
-use Language;
+use HashBagOStuff;
+use HashSiteStore;
+use MediaWikiSite;
 use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use Wikibase\SitesModule;
+use Wikibase\SettingsArray;
+use Wikibase\Lib\SitesModuleWorker;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\SitesModule
@@ -28,9 +33,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 
 		$context->expects( $this->any() )
 			->method( 'getLanguage' )
-			->will( $this->returnCallback( function() {
-				return Language::factory( 'en' );
-			} ) );
+			->willReturn( 'en' );
 
 		return $context;
 	}
@@ -42,12 +45,72 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringEndsWith( '});', $script );
 	}
 
-	public function testGetDefinitionSummary() {
-		$module = new SitesModule();
-		$summary = $module->getDefinitionSummary( $this->getContext() );
-		$this->assertInternalType( 'array', $summary );
-		$this->assertArrayHasKey( 0, $summary );
-		$this->assertArrayHasKey( 'dataHash', $summary[0] );
+	public function testGetVersionHash() {
+		$workerLists = $this->getWorkersForVersionHash();
+		$namesByHash = [];
+
+		/** @var SitesModuleWorker[] $workers */
+		foreach ( $workerLists as $name => $workers ) {
+			$hashes = [];
+			foreach ( $workers as $worker ) {
+				$module = new SitesModule();
+				$moduleAccess = TestingAccessWrapper::newFromObject( $module );
+				$moduleAccess->worker = $worker;
+
+				$hashes[] = $module->getVersionHash( $this->getContext() );
+			}
+			$this->assertSame(
+				array_unique( $hashes ),
+				[ $hashes[0] ],
+				'same version hash for equivalent settings'
+			);
+
+			$namesByHash[ $hashes[0] ][] = $name;
+		}
+
+		$namesWithUniqueHash = [];
+		foreach ( $namesByHash as $hash => $names ) {
+			if ( count( $names ) === 1 ) {
+				$namesWithUniqueHash[] = $names[0];
+			}
+		}
+
+		$this->assertSame(
+			array_keys( $workerLists ),
+			$namesWithUniqueHash,
+			'different hash for different settings'
+		);
+	}
+
+	private function getWorkersForVersionHash() {
+		$site = new MediaWikiSite();
+		$site->setGlobalId( 'siteid' );
+		$site->setGroup( 'allowedgroup' );
+
+		return [
+			'empty result' => [
+				$this->newSitesModuleWorker( [], [] ),
+				$this->newSitesModuleWorker( [], [] ),
+				// Same as empty, given $site's group is not specified
+				$this->newSitesModuleWorker( [ $site ], [] ),
+				$this->newSitesModuleWorker( [ $site ], [] ),
+			],
+			'single site with configured group' => [
+				$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] ),
+				$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] )
+			],
+		];
+	}
+
+	private function newSitesModuleWorker( array $sites, array $groups ) {
+		return new SitesModuleWorker(
+			new SettingsArray( [
+				'siteLinkGroups' => $groups,
+				'specialSiteLinkGroups' => []
+			] ),
+			new HashSiteStore( $sites ),
+			new HashBagOStuff()
+		);
 	}
 
 }
