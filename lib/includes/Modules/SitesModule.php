@@ -41,17 +41,10 @@ class SitesModule extends ResourceLoaderModule {
 		return $this->worker->getScript( $context->getLanguage() );
 	}
 
-	/**
-	 * @see ResourceLoaderModule::getDefinitionSummary
-	 *
-	 * @param ResourceLoaderContext $context
-	 *
-	 * @return array
-	 */
-	public function getDefinitionSummary( ResourceLoaderContext $context ) {
-		$summary = parent::getDefinitionSummary( $context );
-		$summary[] = $this->worker->getDefinitionSummary();
-		return $summary;
+	/** @return bool */
+	public function enableModuleContentVersion() {
+		// Let getVersionHash() invoke getScript() and hash that directly.
+		return true;
 	}
 
 }
