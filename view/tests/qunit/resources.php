@@ -4,13 +4,22 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
+$moduleBase = [
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'Wikibase/view/tests/qunit',
+];
 
 return [
-	'wikibase.view.tests' => [
-		'localBasePath' => __DIR__,
-		'remoteExtPath' => 'Wikibase/view/tests/qunit',
+	'wikibase.view.tests.getMockListItemAdapter' => $moduleBase + [
+		'scripts' => 'getMockListItemAdapter.js',
+		'dependencies' => [
+			'jquery.wikibase.listview',
+			'wikibase.tests',
+		]
+	],
+
+	'wikibase.view.tests' => $moduleBase + [
 		'scripts' => [
-			'getMockListItemAdapter.js',
 			'experts/wikibase.experts.modules.tests.js',
 			'jquery/ui/jquery.ui.closeable.tests.js',
 			'jquery/ui/jquery.ui.tagadata.tests.js',
@@ -134,6 +143,7 @@ return [
 			'wikibase.view.ViewController',
 			'wikibase.view.ViewFactory',
 			'wikibase.view.ViewFactoryFactory',
+			'wikibase.view.tests.getMockListItemAdapter',
 			'wikibase.WikibaseContentLanguages',
 		],
 	],
