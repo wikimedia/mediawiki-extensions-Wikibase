@@ -22,6 +22,30 @@
       "revId": "00527dc9d5090fb229f601477461fc10808b0014",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8360a0b8_cfab4465",
+        "filename": "repo/includes/Hooks/Helpers/OutputPageRevisionIdReader.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2019-03-14T12:18:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ae8f1e6_5b4f71a2",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 11
+      },
+      "revId": "00527dc9d5090fb229f601477461fc10808b0014",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
