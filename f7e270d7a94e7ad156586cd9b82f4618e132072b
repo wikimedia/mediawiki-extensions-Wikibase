@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a50c4e77_e833112f",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T10:56:26Z",
+      "side": 1,
+      "message": "The \"wikibase.termbox\" (L1841) module in `view/lib/resources.php` is missing that exact same dependency for I87de65582e2a0f0b83a43b9ca47d320d6aded365 to work.",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 31
+      },
+      "revId": "f7e270d7a94e7ad156586cd9b82f4618e132072b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
