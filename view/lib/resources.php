@@ -1849,6 +1849,7 @@ return call_user_func( function() {
 				'wikibase.entityPage.entityLoaded',
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.termbox.messages',
+				'wikibase.getUserLanguages',
 			],
 		],
 
