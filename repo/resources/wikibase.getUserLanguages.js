@@ -5,7 +5,6 @@
 	'use strict';
 
 	/**
-	 * relocated from repo/resources/wikibase.ui.entityViewInit.js
 	 * @return {string[]} An ordered list of languages the user wants to use, the first being her
 	 * preferred language, and thus the UI language (currently wgUserLanguage).
 	 */
