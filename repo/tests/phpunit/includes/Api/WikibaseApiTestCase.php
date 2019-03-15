@@ -84,7 +84,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$tokenType = 'csrf'
 	) {
 		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
+			$user = \RequestContext::getMain()->getUser();
 		}
 
 		if ( !array_key_exists( 'token', $params ) ) {
