@@ -22,6 +22,30 @@
       "revId": "f7e270d7a94e7ad156586cd9b82f4618e132072b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d60baa29_afc491e4",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "Did I19a194ecde1bb206f510e0ae87d1b4380f0687fe to have this as an isolated step.",
+      "parentUuid": "a50c4e77_e833112f",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 31
+      },
+      "revId": "f7e270d7a94e7ad156586cd9b82f4618e132072b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

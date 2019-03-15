@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da45cf6a_e70ecc36",
+        "filename": "repo/resources/wikibase.getUserLanguages.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "The first line is a fact but I\u0027m unsure if it will provide value beyond this patch that we don\u0027t get from annotations.",
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01dd700_9e661a35",
+        "filename": "view/tests/qunit/resources.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "Nitpick, but these were pretending to be in alphabetical order before.",
+      "range": {
+        "startLine": 149,
+        "startChar": 3,
+        "endLine": 149,
+        "endChar": 5
+      },
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee66dcd7_29fd9e5e",
+        "filename": "view/tests/qunit/wikibase/wikibase.getUserLanguages.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of the license tags and it does not seem to be linted, but all the other files do have an \"@license GPL-2.0-or-later\"...",
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e5b7994_73553175",
+        "filename": "view/tests/qunit/wikibase/wikibase.getUserLanguages.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "A lot of this should be solvable via sinon.\nI created I9311c7aa5e4c951dc1193fa4e7a61ee169b0b035 to show how I would imagine it - please check if it does what you imagined.",
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c479c3a_f90c0f27",
+        "filename": "view/tests/qunit/wikibase/wikibase.getUserLanguages.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "Somehow propEqual (3x) puts me off - we are dealing with array, deepEqual should be fine.\nFor either parameter order is actual, expected instead of the other way around.\nhttps://api.qunitjs.com/assert/deepEqual",
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aacc86da_215cd24a",
+        "filename": "view/tests/qunit/wikibase/wikibase.getUserLanguages.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "Such boilerplate can be avoided by using sinon sandbox in conjunction with an afterEach, as can be see in e.g. `view/tests/qunit/wikibase/view/ViewFactoryFactory.tests.js`.\n\nhttps://sinonjs.org/releases/latest/sandbox/",
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "938e12dd_9a43e0cb",
+        "filename": "view/tests/qunit/wikibase/wikibase.getUserLanguages.tests.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-03-15T14:24:03Z",
+      "side": 1,
+      "message": "We could certainly think of some more test cases but given there were none at all before we are on the right track, I think.",
+      "revId": "0e46538e223770fd7b074c4227198f9f3dd71736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
