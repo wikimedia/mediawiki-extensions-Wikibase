@@ -94,12 +94,12 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			'Returned incorrect language'
 		);
 
-		if ( array_key_exists( $params['language'], $expected['value'] ) ) {
+		if ( $expected['value'] ) {
 			$this->assertEquals(
 				$expected['value'][ $params['language'] ],
 				$result['entity'][$attribute][$params['language']]['value'], "Returned incorrect attribute {$attribute}"
 			);
-		} elseif ( empty( $value ) ) {
+		} else {
 			$this->assertArrayHasKey(
 				'removed',
 				$result['entity'][$attribute][ $params['language'] ],
