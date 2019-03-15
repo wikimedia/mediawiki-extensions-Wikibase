@@ -31,6 +31,7 @@
 	 * @param {wikibase.datamodel.Statement|null} [options.value=null]
 	 *        The `Statement` displayed by the view.
 	 * @param {Function} options.getReferenceListItemAdapter
+	 * @param {Function} options.getTabbedReferenceListItemAdapter
 	 * @param {Function} options.buildSnakView
 	 * @param {wikibase.utilities.ClaimGuidGenerator} options.guidGenerator
 	 *        Required for dynamically generating GUIDs for new `Statement`s.
@@ -117,6 +118,13 @@
 		_referencesListview: null,
 
 		/**
+		 * Shortcut to the `listview` managing the `tabbedreferenceview`s.
+		 * @property {jQuery.wikibase.listview|null}
+		 * @private
+		 */
+		_tabbedReferencesListview: null,
+
+		/**
 		 * Reference to the `listview` widget managing the qualifier `snaklistview`s.
 		 * @property {jQuery.wikibase.listview|null}
 		 * @private
@@ -144,6 +152,7 @@
 		 */
 		_create: function () {
 			if ( !this.options.getReferenceListItemAdapter
+				|| !this.options.getTabbedReferenceListItemAdapter
 				|| !this.options.buildSnakView
 				|| !this.options.entityIdPlainFormatter
 				|| !this.options.guidGenerator
@@ -323,6 +332,55 @@
 			this._createReferencesToggler();
 		},
 
+		/**
+		 * @private
+		 *
+		 * @param {wikibase.datamodel.Reference[]} [references]
+		 */
+		_createTabbedReferencesListview: function ( references ) {
+			var self = this;
+
+			var $listview = this.$references.children( '.wikibase-listview' );
+
+			console.log( 'create' );
+
+			if ( !$listview.length ) {
+				console.log( 'short' );
+				$listview = $( '<div/>' ).prependTo( this.$references );
+			} else if ( $listview.data( 'listview' ) ) {
+				console.log( 'return' );
+				return;
+			}
+
+			console.log( 'create' );
+
+			var lia = this.options.getTabbedReferenceListItemAdapter(
+				function ( tabbedreferenceview ) {
+					self._tabbedReferencesListview.removeItem( tabbedreferenceview.element );
+					self._drawReferencesCounter();
+					self._trigger( 'change' );
+				}
+			);
+
+			console.log( 'create' );
+
+			$listview.listview( {
+				listItemAdapter: lia,
+				value: references
+			} );
+
+			this._tabbedReferencesListview = $listview.data( 'listview' );
+
+			$listview
+			.on( lia.prefixedEvent( 'change.' + this.widgetName ), function ( event ) {
+				event.stopPropagation();
+				self._drawReferencesCounter(); // We do want to count any items in this list in the counter
+				self._trigger( 'change' );
+			} );
+
+			// this._createReferencesToggler();
+		},
+
 		_createReferencesToggler: function () {
 			if ( this._$toggler ) {
 				return;
@@ -456,7 +514,9 @@
 			this._createReferencesListview(
 				this.options.value ? this.options.value.getReferences().toArray() : []
 			);
-
+			this._createTabbedReferencesListview(
+				this.options.value ? this.options.value.getReferences().toArray() : []
+			);
 			return $.Deferred().resolve().promise();
 		},
 
@@ -497,15 +557,41 @@
 		},
 
 		_enterNewReference: function () {
-			var listview = this._referencesListview,
-				lia = listview.listItemAdapter();
+			console.log( this._tabbedReferencesListview ); // TODO: null, fix
+			var listview = this._tabbedReferencesListview,
+				lia = listview.listItemAdapter(),
+				index = new OO.ui.IndexLayout(),
+				referenceview;
+
+			// var newref = $.widget( "wikibase.referenceview", {}); // <-- breaks it
 
 			listview.enterNewItem().done( function ( $referenceview ) {
-				var referenceview = lia.liInstance( $referenceview );
+				referenceview = lia.liInstance( $referenceview );
 
-				// Enter first item into the referenceview.
-				referenceview.enterNewItem();
+				// Create new layout with the reference view in it
+				function ManualTabLayout( name, config ) {
+					ManualTabLayout.super.call( this, name, config );
+					// this.$element.append( newref ); // <-- breaks it
+					// this.$element.append( $referenceview ); // <-- breaks it
+				}
+
+				OO.inheritClass( ManualTabLayout, OO.ui.TabPanelLayout );
+
+				ManualTabLayout.prototype.setupTabItem = function () {
+					this.tabItem.setLabel( 'Manual' );
+				};
+
+				var manualTab = new ManualTabLayout( 'manual' );
+
+				index.addTabPanels( [ manualTab ] );
+
+				$referenceview.prepend( index.$element );
+
 			} ).done( this._drawReferencesCounter.bind( this ) );
+
+			// Enter first item into the referenceview.
+			referenceview.enterNewItem();
+
 		},
 
 		/**
