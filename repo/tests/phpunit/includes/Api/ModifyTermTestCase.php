@@ -99,7 +99,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				$expected['value'][ $params['language'] ],
 				$result['entity'][$attribute][$params['language']]['value'], "Returned incorrect attribute {$attribute}"
 			);
-		} elseif ( empty( $value ) ) {
+		} else {
 			$this->assertArrayHasKey(
 				'removed',
 				$result['entity'][$attribute][ $params['language'] ],
@@ -118,6 +118,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
 		$this->assertArrayHasKey( $attribute, $dbEntity );
 		$dbLabels = $this->flattenArray( $dbEntity[$attribute], 'language', 'value', true );
+		$this->assertCount( count( $expected['value'] ), $dbLabels, 'Database contains exact number of terms' );
 		foreach ( $expected['value'] as $valueLanguage => $value ) {
 			$this->assertArrayHasKey( $valueLanguage, $dbLabels );
 			$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
