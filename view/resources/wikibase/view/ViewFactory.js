@@ -486,6 +486,7 @@
 				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
 				getQualifiersListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceListItemAdapter: this.getListItemAdapterForReferenceView.bind( this, startEditingCallback ),
+				getTabbedReferenceListItemAdapter: this.getListItemAdapterForTabbedReferenceView.bind( this, startEditingCallback ),
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId )
 			}
 		);
@@ -500,6 +501,22 @@
 	SELF.prototype.getListItemAdapterForReferenceView = function ( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.referenceview,
+			getNewItem: function ( value, dom ) {
+				return this.getReferenceView( startEditingCallback, removeCallback, value, $( dom ) );
+			}.bind( this )
+		} );
+	};
+
+	/**
+	 * Construct a `ListItemAdapter` for `referenceview`s
+	 * //TODO make this not a copy of above!
+	 *
+	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
+	 */
+	SELF.prototype.getListItemAdapterForTabbedReferenceView = function ( startEditingCallback, removeCallback ) {
+		console.log( 'gothere' );
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.tabbedreferenceview,
 			getNewItem: function ( value, dom ) {
 				return this.getReferenceView( startEditingCallback, removeCallback, value, $( dom ) );
 			}.bind( this )
@@ -530,6 +547,29 @@
 		return view;
 	};
 
+	SELF.prototype.getTabbedReferenceView = function ( startEditingCallback, removeCallback, value, $dom ) {
+		var structureEditorFactory = this._structureEditorFactory;
+		var view;
+		var doRemove = function () {
+			return removeCallback( view );
+		};
+		view = this._getView(
+			'tabbedreferenceview',
+			$dom,
+			{
+				value: value || null,
+				getAdder: this.getAdderWithStartEditing( startEditingCallback ),
+				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
+				getTabbedReferenceRemover: function ( $dom ) {
+					return structureEditorFactory.getRemover( function () {
+						return startEditingCallback().then( doRemove );
+					}, $dom );
+				},
+				removeCallback: doRemove
+			}
+		);
+		return view;
+	};
 	/**
 	 * Construct a `ListItemAdapter` for `snaklistview`s
 	 *
