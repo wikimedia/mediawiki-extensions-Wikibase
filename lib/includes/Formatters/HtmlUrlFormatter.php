@@ -25,7 +25,7 @@ class HtmlUrlFormatter implements ValueFormatter {
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct( FormatterOptions $options = null ) {
-		//TODO: configure from options
+		// TODO: configure from options; see also HtmlExternalIdentifierFormatter
 		$this->attributes = [
 			'rel' => 'nofollow',
 			'class' => 'external free'

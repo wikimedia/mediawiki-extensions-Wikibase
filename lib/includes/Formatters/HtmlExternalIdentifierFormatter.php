@@ -55,6 +55,9 @@ class HtmlExternalIdentifierFormatter implements SnakFormatter {
 			return Html::element( 'span', $attr, $id );
 		} else {
 			$attr['href'] = $url;
+			// TODO: configure from options; see also HtmlUrlFormatter
+			$attr['class'] .= ' external';
+			$attr['rel'] = 'nofollow';
 			return Html::element( 'a', $attr, $id );
 		}
 	}
