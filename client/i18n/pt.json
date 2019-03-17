@@ -21,7 +21,8 @@
 			"MokaAkashiyaPT",
 			"Athena in Wonderland",
 			"Guycn2",
-			"Ldacosta"
+			"Ldacosta",
+			"CaiusSPQR"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -119,7 +120,7 @@
 	"wikibase-otherprojects-beta-description": "Adiciona uma secção \"{{int:wikibase-otherprojects}}\" à barra lateral que fornece ligações para outros projetos Wikimedia baseados em dados {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Ligação|Ligações}} com {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notificar-me quando alguém ligar uma página que {{GENDER:|eu tenha criado}} a um elemento {{WBREPONAME}}.",
-	"notification-header-page-connection": "A página <strong>$3</strong> foi {{GENDER:$2|ligada}} {{PLURAL:$4|-1=a um elemento {{WBREPONAME}}|ao elemento {{WBREPONAME}} $4}} que contém dados relevantes para o assunto.",
+	"notification-header-page-connection": "A página <strong>$3</strong> foi {{GENDER:$2|conectada}} {{PLURAL:$4|-1=a um item {{WBREPONAME}}|ao item {{WBREPONAME}} $4}}, em que dados relevantes ao tópico podem ser coletados.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|outra página|outras $4 páginas|100=mais de 99 páginas}} foram {{GENDER:$2|ligadas}} a elementos {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
 	"notification-subject-page-connection": "A página que {{GENDER:$3|criou}} na wiki {{SITENAME}} foi {{GENDER:$2|ligada}} a um elemento {{WBREPONAME}}",
