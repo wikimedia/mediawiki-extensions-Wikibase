@@ -22,6 +22,30 @@
       "revId": "1113a3cccb33afdd49d59bad7478013190010522",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "876454db_795b8ca5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-03-18T09:01:50Z",
+      "side": 1,
+      "message": "As far as I know the Lua output is using a Wikitext formatter, not the HTML formatter touched in this patch.",
+      "parentUuid": "c9e967cd_847e6bd9",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "1113a3cccb33afdd49d59bad7478013190010522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
