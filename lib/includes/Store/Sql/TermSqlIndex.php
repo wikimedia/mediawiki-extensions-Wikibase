@@ -835,7 +835,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			if ( $a['weight'] === $b['weight'] ) {
 				return strcmp( $a['string'], $b['string'] );
 			}
-			return ( $a['weight'] < $b['weight'] ) ? 1 : -1;
+			return -( $a['weight'] <=> $b['weight'] );
 		} );
 
 		if ( $limit > 0 ) {
