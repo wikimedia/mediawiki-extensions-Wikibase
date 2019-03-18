@@ -28,7 +28,7 @@ abstract class ModifyTerm extends ModifyEntity {
 		$set = isset( $params['value'] ) && 0 < strlen( $params['value'] );
 
 		$summary = parent::createSummary( $params );
-		$summary->setAction( ( $set ? 'set' : 'remove' ) );
+		$summary->setAction( $set ? 'set' : 'remove' );
 		$summary->setLanguage( $params['language'] );
 
 		return $summary;
