@@ -132,7 +132,7 @@ class TermIndexEntry {
 
 		foreach ( self::$fieldNames as $n ) {
 			if ( $aValues[$n] !== $bValues[$n] ) {
-				return $aValues[$n] > $bValues[$n] ? 1 : -1;
+				return $aValues[$n] <=> $bValues[$n];
 			}
 		}
 
