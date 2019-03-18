@@ -102,7 +102,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 
-		// Language
 		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
 
 		if ( $this->languageCode === '' ) {
@@ -111,7 +110,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 		$this->checkSubPageLanguage();
 
-		// Value
 		$this->value = $this->getPostedValue();
 		if ( $this->value === null ) {
 			$this->value = $request->getVal( 'value' );

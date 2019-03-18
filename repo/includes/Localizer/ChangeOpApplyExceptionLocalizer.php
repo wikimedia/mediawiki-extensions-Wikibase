@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Repo\Localizer;
 
 use Exception;
