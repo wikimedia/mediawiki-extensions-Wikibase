@@ -1,6 +1,7 @@
 {
 	"private": true,
 	"scripts": {
+		"doc": "jsduck",
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "wdio repo/tests/selenium/wdio.conf.js",
 		"test": "grunt test"
