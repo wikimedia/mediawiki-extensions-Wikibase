@@ -51,6 +51,7 @@
 	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Праўкі {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Праўкі, якія паходзяць з {{grammar:родны|{{WBREPONAME}}}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Гэты фільтар канфліктуе з адным ці болей фільтраў якасьці ўнёску ці намераў удзельніка. Прадказаньні якасьці і намераў недаступныя для правак {{grammar:родны|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены {{WBREPONAME}} у Вашым сьпісе назіраньня",
 	"wikibase-error-deserialize-error": "Не атрымалася дэсэрыялізаваць зьвесткі.",

@@ -299,6 +299,7 @@
 	"wikibase-entitydata-not-acceptable": "לא נמצא תסדיר מתאים. סוגי MIME נתמכים: $1",
 	"wikibase-entitydata-bad-revision": "לא ניתן להציג את הגרסה $2 של הישות $1.",
 	"wikibase-entitydata-bad-id": "מזהה בלתי־תקין: $1.",
+	"wikibase-entitydata-rdf-not-available": "פלט RDF אינו זמין לישויות מסוג: $1. נא לבקש תסדיר JSON במקום זה.",
 	"wikibase-entitydata-unsupported-format": "תסדיר $1 אינו נתמך בממשק הזה.",
 	"wikibase-entitydata-storage-error": "שגיאה בטעינת הישות $1.",
 	"wikibase-entitydata-title": "נתוני ישות",
@@ -404,5 +405,6 @@
 	"wikibase-search-config-notfound": "הגדרות החיפוש המלא לא נמצאו: $1",
 	"wikibase-search-config-badclass": "מחלקת מבנה שאילתה שגויה: $1",
 	"wikibase-haswbstatement-feature-no-valid-statements": "מילת המפתח haswbstatement אינה מכילה קביעות תקינות",
+	"wikibase-refresh-for-missing-datatype": "סוג הנתונים $1 לא נמצא בתסריט המקומי בלקוח. ייתכן שזה קורה כתוצאה בתסריט מיושן במטמון. נא לנסות לבצע רענון עמוק בדפדפן שלך, שעוקף את המטמון המקומי (Ctrl-Shift-R או Cmd-Shift-R ברוב הדפדפנים) כדי לפתור את הבעיה.",
 	"wikibase-outdated-client-script": "אוי, נחוץ רענון עמוק!"
 }
