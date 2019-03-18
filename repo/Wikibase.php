@@ -974,7 +974,6 @@ call_user_func( function() {
 	$wgJobClasses['UpdateRepoOnMove'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob::class;
 	$wgJobClasses['UpdateRepoOnDelete'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob::class;
 
-	// Hooks
 	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
 	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater::onSchemaUpdate';
 	$wgHooks['UnitTestsList'][] = 'Wikibase\RepoHooks::registerUnitTests';
