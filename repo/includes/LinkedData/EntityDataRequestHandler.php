@@ -478,8 +478,7 @@ class EntityDataRequestHandler {
 	 * @throws HttpError
 	 */
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
-
-		$flavor = $request->getVal( "flavor" );
+		$flavor = $request->getRawVal( 'flavor' );
 
 		/** @var EntityRevision $entityRevision */
 		/** @var RedirectRevision $followedRedirectRevision */

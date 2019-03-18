@@ -152,7 +152,7 @@ final class RepoHooks {
 		$request = RequestContext::getMain()->getRequest();
 		$settings = $wikibaseRepo->getSettings();
 		$searchSettings = $settings->getSetting( 'entitySearch' );
-		$useCirrus = $request->getVal( 'useCirrus' );
+		$useCirrus = $request->getRawVal( 'useCirrus' );
 		if ( $useCirrus !== null ) {
 			// if we have request one, use it
 			$searchSettings['useCirrus'] =
