@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\DataAccess;
 
 use MediaWiki\Storage\NameTableStoreFactory;

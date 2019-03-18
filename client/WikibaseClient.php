@@ -104,7 +104,6 @@ call_user_func( function() {
 	$wgTrackingCategories[] = 'unresolved-property-category';
 	$wgTrackingCategories[] = 'connected-redirect-category';
 
-	// Hooks
 	$wgHooks['UnitTestsList'][] = '\Wikibase\ClientHooks::registerUnitTests';
 	$wgHooks['BaseTemplateToolbox'][] = '\Wikibase\ClientHooks::onBaseTemplateToolbox';
 	$wgHooks['OldChangesListRecentChangesLine'][] =
