@@ -70,7 +70,6 @@ call_user_func( function() {
 	// i18n
 	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
 
-	// Hooks
 	$wgHooks['UnitTestsList'][] = 'Wikibase\LibHooks::registerPhpUnitTests';
 	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\LibHooks::registerQUnitTests';
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\LibHooks::onResourceLoaderRegisterModules';
