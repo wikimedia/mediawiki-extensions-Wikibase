@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Specials;
 use OutputPage;
 use SiteLookup;
 use Status;
-use WebRequest;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
@@ -76,16 +75,6 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
-	 * @param WebRequest $request
-	 *
-	 * @return bool
-	 */
-	private function isSiteLinkProvided( WebRequest $request ) {
-		return $request->getVal( self::FIELD_SITE ) !== null
-			   && $request->getVal( self::FIELD_PAGE ) !== null;
-	}
-
-	/**
 	 * @see SpecialNewEntity::createEntityFromFormData
 	 *
 	 * @param array $formData
@@ -144,10 +133,11 @@ class SpecialNewItem extends SpecialNewEntity {
 			],
 		];
 
-		if ( $this->isSiteLinkProvided( $this->getRequest() ) ) {
+		$request = $this->getRequest();
+		if ( $request->getCheck( self::FIELD_SITE ) && $request->getCheck( self::FIELD_PAGE ) ) {
 			$formFields[ self::FIELD_SITE ] = [
 				'name' => self::FIELD_SITE,
-				'default' => $this->getRequest()->getVal( self::FIELD_SITE ),
+				'default' => $request->getVal( self::FIELD_SITE ),
 				'type' => 'text',
 				'id' => 'wb-newitem-site',
 				'readonly' => 'readonly',
@@ -165,7 +155,7 @@ class SpecialNewItem extends SpecialNewEntity {
 
 			$formFields[ self::FIELD_PAGE ] = [
 				'name' => self::FIELD_PAGE,
-				'default' => $this->getRequest()->getVal( self::FIELD_PAGE ),
+				'default' => $request->getVal( self::FIELD_PAGE ),
 				'type' => 'text',
 				'id' => 'wb-newitem-page',
 				'readonly' => 'readonly',

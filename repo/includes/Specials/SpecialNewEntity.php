@@ -157,7 +157,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$saveStatus = $this->saveEntity(
 						$entity,
 						$summary,
-						$form->getRequest()->getVal( 'wpEditToken' ),
+						$form->getRequest()->getRawVal( 'wpEditToken' ),
 						EDIT_NEW
 					);
 
