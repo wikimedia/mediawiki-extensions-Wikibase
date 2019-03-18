@@ -43,8 +43,13 @@ class DispatchingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @throws DBError
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		$lookup = $this->getLookupForPropertyId( $propertyId );
-		return !is_null( $lookup ) ? $lookup->getPropertyInfo( $propertyId ) : null;
+		$repo = $propertyId->getRepositoryName();
+
+		if ( !isset( $this->lookups[$repo] ) ) {
+			return null;
+		}
+
+		return $this->lookups[$repo]->getPropertyInfo( $propertyId );
 	}
 
 	/**
@@ -79,16 +84,6 @@ class DispatchingPropertyInfoLookup implements PropertyInfoLookup {
 		return array_reduce( $this->lookups, function( array $info, PropertyInfoLookup $lookup ) {
 			return array_merge( $info, $lookup->getAllPropertyInfo() );
 		}, [] );
-	}
-
-	/**
-	 * @param PropertyId $id
-	 *
-	 * @return PropertyInfoLookup|null
-	 */
-	private function getLookupForPropertyId( PropertyId $id ) {
-		$repo = $id->getRepositoryName();
-		return isset( $this->lookups[$repo] ) ? $this->lookups[$repo] : null;
 	}
 
 }
