@@ -92,7 +92,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		// update primary store
 		$this->store->setPropertyInfo( $propertyId, $info );
 
-		$propertyInfo = $this->cache->get( $this->cacheKey );
+		$propertyInfo = $this->cache->get( $this->getSinglePropertyCacheKey( $propertyId ) );
 		$id = $propertyId->getSerialization();
 
 		$propertyInfo[$id] = $info;
@@ -106,6 +106,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
+		$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $propertyInfo, $this->cacheDuration );
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 	}
 
@@ -127,7 +128,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			return false;
 		}
 
-		$propertyInfo = $this->cache->get( $this->cacheKey );
+		$propertyInfo = $this->cache->get( $this->getSinglePropertyCacheKey( $propertyId ) );
 
 		unset( $propertyInfo[$id] );
 
@@ -140,9 +141,14 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
+		$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $propertyInfo, $this->cacheDuration );
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 
 		return true;
+	}
+
+	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
+		return $this->cacheKey . $propertyId->getSerialization();
 	}
 
 }
