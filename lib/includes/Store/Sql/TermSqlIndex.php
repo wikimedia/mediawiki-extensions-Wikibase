@@ -613,6 +613,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdBatches = array_chunk( $entityIds, 9 );
 		$terms = [];
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.wb_terms.process.TermSqlIndex_getTermsOfEntities'
+		);
+
 		foreach ( $entityIdBatches as $entityIdBatch ) {
 			$terms = array_merge(
 				$terms,
