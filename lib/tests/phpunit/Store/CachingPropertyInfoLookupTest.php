@@ -19,10 +19,16 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  */
 class CachingPropertyInfoLookupTest extends \MediaWikiTestCase {
 
-	private function newCachingPropertyInfoLookup( array $info = [] ) {
+	const CACHE_DURATION = 3600;
+	const CACHE_KEY = 'SOME_KEY';
+
+	private function newCachingPropertyInfoLookup( array $info = [], $cacheStuff = [] ) {
 		$mock = new MockPropertyInfoLookup( $info );
-		$cache = new HashBagOStuff();
-		return new CachingPropertyInfoLookup( $mock, $cache );
+		$this->cache = new HashBagOStuff();
+		foreach ( $cacheStuff as $key => $value) {
+			$this->cache->set( $key, $value );
+		}
+		return new CachingPropertyInfoLookup( $mock, $this->cache, self::CACHE_DURATION, self::CACHE_KEY );
 	}
 
 	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull() {
@@ -31,12 +37,37 @@ class CachingPropertyInfoLookupTest extends \MediaWikiTestCase {
 		$this->assertNull( $lookup->getPropertyInfo( new PropertyId( 'P32' ) ) );
 	}
 
+	public function testGivenKnownPropertyId_getPropertyInfoUsesAvailablePerPropertyCache() {
+		$lookup = $this->newCachingPropertyInfoLookup(
+			[],
+			[ self::CACHE_KEY . 'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ]
+		);
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
+		);
+	}
+
 	public function testGivenKnownPropertyId_getPropertyInfoReturnsTheInfo() {
 		$lookup = $this->newCachingPropertyInfoLookup( [ 'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ] );
 
 		$this->assertSame(
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
+		);
+	}
+
+	public function testGivenKnownPropertyId_getPropertyInfoUpdatesAvailablePerPropertyCache() {
+		$lookup = $this->newCachingPropertyInfoLookup(
+			[ 'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ]
+		);
+
+		$lookup->getPropertyInfo( new PropertyId( 'P23' ) );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$this->cache->get( self::CACHE_KEY . 'P23' )
 		);
 	}
 
