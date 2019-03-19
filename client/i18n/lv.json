@@ -48,6 +48,7 @@
 	"wikibase-entityusage-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
 	"wikibase-pageinfo-entity-id-none": "Nav",
+	"wikibase-pageinfo-description-central": "Centralizētais apraksts",
 	"wikibase-pageinfo-entity-usage": "Šajā lapā izmantotās {{WBREPONAME}} entītijas",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Apraksts: $1",
 	"wikibase-pageinfo-entity-usage-T": "Nosaukums",
