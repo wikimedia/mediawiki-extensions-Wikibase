@@ -152,8 +152,7 @@ class ViewEntityAction extends ViewAction {
 	 * @param string $titleText
 	 */
 	private function setHTMLTitle( OutputPage $outputPage, $titleText ) {
-		// Prevent replacing {{...}} by using rawParams() instead of params():
-		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $titleText ) );
+		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->plaintextParams( $titleText ) );
 	}
 
 	/**
