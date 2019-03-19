@@ -88,10 +88,17 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array|null
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
+		$propertyInfo = $this->cache->get( $this->getSinglePropertyCacheKey( $propertyId ) );
+
+		if ( $propertyInfo ) {
+			return $propertyInfo;
+		}
+
 		$propertyInfo = $this->getAllPropertyInfo();
 		$id = $propertyId->getSerialization();
 
 		if ( isset( $propertyInfo[$id] ) ) {
+			$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $propertyInfo[$id] );
 			return $propertyInfo[$id];
 		}
 
@@ -141,6 +148,10 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 		}
 
 		return $this->propertyInfo;
+	}
+
+	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
+		return $this->cacheKey . $propertyId->getSerialization();
 	}
 
 }
