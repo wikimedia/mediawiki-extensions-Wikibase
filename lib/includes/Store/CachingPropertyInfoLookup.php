@@ -18,6 +18,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class CachingPropertyInfoLookup implements PropertyInfoLookup {
 
+	const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
+
 	/**
 	 * @var PropertyInfoLookup
 	 */
@@ -88,6 +90,11 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array|null
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
+		$info = $this->cache->get( $this->getSinglePropertyCacheKey( $propertyId ) );
+		if ( $info ) {
+			return $info;
+		}
+
 		$propertyInfo = $this->getAllPropertyInfo();
 		$id = $propertyId->getSerialization();
 
@@ -141,6 +148,12 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 		}
 
 		return $this->propertyInfo;
+	}
+
+	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
+		return $this->cacheKey
+			. self::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
+			. $propertyId->getSerialization();
 	}
 
 }
