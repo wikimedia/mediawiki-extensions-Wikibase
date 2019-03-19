@@ -22,6 +22,30 @@
       "revId": "8361ae31ea8bcb3095d3657651a495e91f1b8649",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db57dd6b_7df83e1d",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-03-19T15:01:48Z",
+      "side": 1,
+      "message": "Indeed! Looks like my brain got somehow stuck here. ;-) Thanks for the suggestion.",
+      "parentUuid": "483b7f0d_f1d8d8f0",
+      "range": {
+        "startLine": 838,
+        "startChar": 10,
+        "endLine": 838,
+        "endChar": 44
+      },
+      "revId": "8361ae31ea8bcb3095d3657651a495e91f1b8649",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
