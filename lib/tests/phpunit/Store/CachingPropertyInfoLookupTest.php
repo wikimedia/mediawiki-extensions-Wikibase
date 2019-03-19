@@ -19,10 +19,16 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  */
 class CachingPropertyInfoLookupTest extends \MediaWikiTestCase {
 
-	private function newCachingPropertyInfoLookup( array $info = [] ) {
+	const CACHE_DURATION = 3600;
+	const CACHE_KEY = 'SOME_KEY';
+
+	private function newCachingPropertyInfoLookup( array $info = [], $cacheStuff = [] ) {
 		$mock = new MockPropertyInfoLookup( $info );
-		$cache = new HashBagOStuff();
-		return new CachingPropertyInfoLookup( $mock, $cache );
+		$this->cache = new HashBagOStuff();
+		foreach ( $cacheStuff as $key => $value ) {
+			$this->cache->set( $key, $value );
+		}
+		return new CachingPropertyInfoLookup( $mock, $this->cache, self::CACHE_DURATION, self::CACHE_KEY );
 	}
 
 	public function testGivenUnknownPropertyId_getPropertyInfoReturnsNull() {
@@ -31,12 +37,43 @@ class CachingPropertyInfoLookupTest extends \MediaWikiTestCase {
 		$this->assertNull( $lookup->getPropertyInfo( new PropertyId( 'P32' ) ) );
 	}
 
+	public function testGivenKnownPropertyId_getPropertyInfoUsesAvailablePerPropertyCache() {
+		$cacheKey = self::CACHE_KEY
+				  . CachingPropertyInfoLookup::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
+				  . 'P23';
+		$lookup = $this->newCachingPropertyInfoLookup(
+			[],
+			[ $cacheKey => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ]
+		);
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
+		);
+	}
+
 	public function testGivenKnownPropertyId_getPropertyInfoReturnsTheInfo() {
 		$lookup = $this->newCachingPropertyInfoLookup( [ 'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ] );
 
 		$this->assertSame(
 			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 			$lookup->getPropertyInfo( new PropertyId( 'P23' ) )
+		);
+	}
+
+	private function testGivenKnownPropertyId_getPropertyInfoUpdatesAvailablePerPropertyCache() {
+		$cacheKey = self::CACHE_KEY
+				  . CachingPropertyInfoLookup::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
+				  . 'P23';
+		$lookup = $this->newCachingPropertyInfoLookup(
+			[ 'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ]
+		);
+
+		$lookup->getPropertyInfo( new PropertyId( 'P23' ) );
+
+		$this->assertSame(
+			[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+			$this->cache->get( $cacheKey )
 		);
 	}
 
