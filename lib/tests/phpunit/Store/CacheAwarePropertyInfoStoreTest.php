@@ -30,7 +30,7 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
 		$mockStore->expects( $this->any() )
 			->method( 'removePropertyInfo' )
 			->will(
-				$this->returnCallback( function( PropertyId $propertyId ) {
+				$this->returnCallback( function ( PropertyId $propertyId ) {
 					if ( $propertyId->getSerialization() === 'P100' ) {
 						return true;
 					}
@@ -53,9 +53,14 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
 				$this->returnValue( [ 'P100' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ] )
 			);
 		$cache->expects( $this->once() )
+			->method( 'delete' )
+			->with(
+				__CLASS__ . CacheAwarePropertyInfoStore::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR . 'P100'
+			);
+		$cache->expects( $this->once() )
 			->method( 'set' )
 			->with(
-				__CLASS__,
+				$this->stringContains( __CLASS__ ),
 				[],
 				$this->isType( 'int' )
 			);
@@ -87,10 +92,17 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
 			->will(
 				$this->returnValue( [] )
 			);
-		$cache->expects( $this->once() )
+		$cache->expects( $this->at( 1 ) )
 			->method( 'set' )
 			->with(
-				__CLASS__,
+				__CLASS__ . CacheAwarePropertyInfoStore::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR . 'P111',
+				[ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
+				$this->isType( 'int' )
+			);
+		$cache->expects( $this->at( 2 ) )
+			->method( 'set' )
+			->with(
+				$this->stringContains( __CLASS__ ),
 				[ 'P111' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ],
 				$this->isType( 'int' )
 			);
