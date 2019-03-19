@@ -48,14 +48,14 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
 		$cache = $this->getMock( BagOStuff::class );
 		$cache->expects( $this->once() )
 			->method( 'get' )
-			->with( __CLASS__ )
+			->with( __CLASS__ . 'P100' )
 			->will(
 				$this->returnValue( [ 'P100' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ] )
 			);
 		$cache->expects( $this->once() )
 			->method( 'set' )
 			->with(
-				__CLASS__,
+				__CLASS__ . 'P100',
 				[],
 				$this->isType( 'int' )
 			);
@@ -83,14 +83,14 @@ class CacheAwarePropertyInfoStoreTest extends \PHPUnit\Framework\TestCase {
 		$cache = $this->getMock( BagOStuff::class );
 		$cache->expects( $this->once() )
 			->method( 'get' )
-			->with( __CLASS__ )
+			->with( __CLASS__ . 'P111' )
 			->will(
 				$this->returnValue( [] )
 			);
 		$cache->expects( $this->once() )
 			->method( 'set' )
 			->with(
-				__CLASS__,
+				__CLASS__ . 'P111',
 				[ 'P111' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] ],
 				$this->isType( 'int' )
 			);
