@@ -99,6 +99,8 @@ class SetLabelTest extends ModifyTermTestCase {
 	}
 
 	public function testUserCannotSetLabelWhenTheyLackPermission() {
+		$this->markTestSkipped( 'Disabled due to flakiness JDF 2019-03-19 T218378' );
+
 		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
