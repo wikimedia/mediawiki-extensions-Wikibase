@@ -108,86 +108,40 @@ class SitesModuleWorkerTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider getDefinitionSummaryProvider
-	 */
-	public function testGetDefinitionSummary( array $workerLists ) {
-		$results = [];
-
-		// Verify the dataHash
-
-		/** @var SitesModuleWorker[] $workers */
-		foreach ( $workerLists as $name => $workers ) {
-			foreach ( $workers as $worker ) {
-				$summary = $worker->getDefinitionSummary();
-				$this->assertCount( 1, $summary );
-				$hash = $summary['dataHash'];
-				if ( isset( $results[ $name ] ) ) {
-					$this->assertEquals(
-						$results[ $name ], $hash, 'getDefinitionSummary should return the same data hash for equivalent settings'
-					);
-				} else {
-					$results[ $name ] = $hash;
-				}
-			}
-		}
-
-		$collidingValues = array_diff_key( $results, array_unique( $results ) );
-		$this->assertEmpty( $collidingValues, 'Different settings lead to same hash' );
-	}
-
-	public function getDefinitionSummaryProvider() {
-		$site = new MediaWikiSite();
-		$site->setGlobalId( 'siteid' );
-		$site->setGroup( 'allowedgroup' );
-
-		$site2 = new MediaWikiSite();
-		$site2->setGlobalId( 'site2id' );
-		$site2->setGroup( 'allowedgroup' );
-
-		$nonMwSite = new Site();
-		$nonMwSite->setGlobalId( 'siteid' );
-		$nonMwSite->setGroup( 'allowedgroup' );
-
-		return [
-			[
-				[
-					'empty workers' => [
-						$this->newSitesModuleWorker(),
-						$this->newSitesModuleWorker(),
-					// Should ignore non-MW-sites
-					// $this->newSitesModuleWorker( [ $nonMwSite ] ),
-					],
-					'single site' => [
-						$this->newSitesModuleWorker( [ $site ] ),
-						$this->newSitesModuleWorker( [ $site ] ),
-					// Should ignore non-MW-sites
-					// $this->newSitesModuleWorker( [ $site, $nonMwSite ] ),
-					// $this->newSitesModuleWorker( [ $nonMwSite, $site ] )
-					],
-					'single site with configured group' => [
-						$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] ),
-						$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] )
-					],
-				]
-			]
-		];
-	}
-
-	public function testGetDefinitionSummary_caching() {
-		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
+	public function testGetSpecialSiteLinkGroups_caching() {
 		$cache = new HashBagOStuff();
-		$worker = $this->newSitesModuleWorker( [], [ 'foo' ], [], $cache );
 
-		// Make sure whatever hash is computed ends up in the cache
-		$summary = $worker->getDefinitionSummary();
-		$this->assertSame( $summary['dataHash'], $cache->get( $cacheKey ) );
+		// Call twice. Expect 1 compute.
+		$worker1 = $this->newMockWorker( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
+		$worker1->expects( $this->once() )->method( 'computeSiteDetails' )
+			->willReturn( [ 'mock details to use' ] );
+		$worker1->getScript( 'qqx' );
+		$worker1->getScript( 'qqx' );
 
-		$cache->set( $cacheKey, 'cache all the things!' );
+		// Call twice on a different instance with same cache. Expect 0 compute.
+		$worker2 = $this->newMockWorker( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
+		$worker2->expects( $this->never() )->method( 'computeSiteDetails' );
+		$worker1->getScript( 'qqx' );
+		$worker1->getScript( 'qqx' );
+	}
 
-		// Verify that cached results are returned
-		$summary = $worker->getDefinitionSummary();
-		$this->assertSame( 'cache all the things!', $summary['dataHash'] );
+	/**
+	 * @param Site[] $sites
+	 * @param BagOStuff $cache
+	 * @return SitesModuleWorker
+	 */
+	private function newMockWorker( array $sites, array $groups, BagOStuff $cache ) {
+		return $this->getMockBuilder( SitesModuleWorker::class )
+			->setConstructorArgs( [
+				new SettingsArray( [
+					'siteLinkGroups' => $groups,
+					'specialSiteLinkGroups' => [],
+				] ),
+				new HashSiteStore( $sites ),
+				$cache
+			] )
+			->setMethods( [ 'computeSiteDetails' ] )
+			->getMock();
 	}
 
 }
