@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e63ae970_1052fd2b",
+        "filename": "repo/tests/phpunit/includes/Api/ModifyTermTestCase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-20T10:25:19Z",
+      "side": 0,
+      "message": "It looks like this should check for $expected[\u0027value\u0027] \u003d\u003d [] ?",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 30
+      },
+      "revId": "1c7731f2a05dfff35b77ea9258d30feb2d5681b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
