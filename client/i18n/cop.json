@@ -5,11 +5,11 @@
 			"Bloomaround"
 		]
 	},
-	"tooltip-t-wikibase": "ⲉⲣⲗⲱⲟⲩ `ⲉⲟⲩϩⲱⲃ `ⲛⲁϩⲟⲣ `ⲛⲟⲩⲧⲁⲙⲟ ⲉⲧⲧⲟⲙⲓ",
-	"wikibase-dataitem": "ϩⲱⲃ `ⲛⲧⲉ {{WBREPONAME}}",
+	"tooltip-t-wikibase": "ⲉⲣⲗⲱⲟⲩ ⲉ̀ⲟⲩϩⲱⲃ ⲛ̀ⲁϩⲟⲣ ⲛ̀ⲟⲩⲧⲁⲙⲟ ⲉⲧⲧⲟⲙⲓ",
+	"wikibase-dataitem": "ϩⲱⲃ ⲛ̀ⲧⲉ {{WBREPONAME}}",
 	"wikibase-editlinks": " ϣⲉⲃⲓⲱ ϩⲁⲛⲗⲱⲟⲩ",
-	"wikibase-editlinkstitle": "ⲫⲱⲛϩ ϩⲁⲛⲗⲱⲟⲩ `ⲛⲟⲩⲧⲉⲁⲥⲡⲓ",
+	"wikibase-editlinkstitle": "ⲫⲱⲛϩ ϩⲁⲛⲗⲱⲟⲩ ⲛ̀ⲟⲩⲧⲉⲁⲥⲡⲓ",
 	"wikibase-rc-hide-wikidata-hide": "ⲕⲱⲡ",
 	"wikibase-rc-hide-wikidata-show": "ⲟⲩⲱⲛϩ",
-	"wikibase-rc-wikibase-edit-title": "ϫⲓⲛⲫⲱⲛϩ `ⲛ{{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "ϫⲓⲛⲫⲱⲛϩ ⲛ̀{{WBREPONAME}}"
 }

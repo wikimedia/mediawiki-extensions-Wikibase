@@ -302,6 +302,7 @@
 	"wikibase-entitydata-not-acceptable": "Inga matchande format finns. MIME-typer som stöds:$1",
 	"wikibase-entitydata-bad-revision": "Kan inte visa versionen $2 av enheten $1.",
 	"wikibase-entitydata-bad-id": "Ogiltigt ID: $1.",
+	"wikibase-entitydata-rdf-not-available": "RDF-utmatningen är för tillfället inte tillgänglig för entitetstypen: $1. Var god begär JSON-formatet istället.",
 	"wikibase-entitydata-unsupported-format": "Dataformatet $1 stöds inte av detta gränssnitt.",
 	"wikibase-entitydata-storage-error": "Misslyckades att läsa in enheten $1.",
 	"wikibase-entitydata-title": "Enhetsdata",
@@ -406,5 +407,7 @@
 	"wikibase-search-namespace-mix": "Det finns för tillfället inget stöd för att blanda entitet- och artikelnamnrymder i sökningen. Endast entitetsnamnrymder kommer att sökas igenom.",
 	"wikibase-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
 	"wikibase-search-config-badclass": "Dålig byggklass för frågor: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden"
+	"wikibase-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden",
+	"wikibase-refresh-for-missing-datatype": "Datatypen $1 hittades inte i det lokala klientskriptet. Detta kan bero på ett utdaterat cachelagrat skript. Försök att göra en hård uppdatering i din webbläsare, som kringgår den lokala cachen (Ctrl-Shift-R eller Cmd-Shift-R i de flesta webbläsarna) för att lösa problemet.",
+	"wikibase-outdated-client-script": "Ojdå, det är dags för en hård uppdatering!"
 }
