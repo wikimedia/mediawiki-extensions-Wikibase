@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e976be80_62117288",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-20T11:41:33Z",
+      "side": 1,
+      "message": "Yup, but it is still correct once the other patch is corrected. right?",
+      "parentUuid": "96da22a5_bfd946ae",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 24
+      },
+      "revId": "c25e71e1bfdba5c2d9878a0543568e381a217029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6798247a_71540b2b",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-20T11:13:06Z",
       "side": 1,
       "message": "my comment regarding the separator also applies here (from the other patch)",
+      "range": {
+        "startLine": 154,
+        "startChar": 25,
+        "endLine": 154,
+        "endChar": 27
+      },
+      "revId": "c25e71e1bfdba5c2d9878a0543568e381a217029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee8f982_83be6da7",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-20T11:41:33Z",
+      "side": 1,
+      "message": "will use \u0027:\u0027",
+      "parentUuid": "6798247a_71540b2b",
       "range": {
         "startLine": 154,
         "startChar": 25,
