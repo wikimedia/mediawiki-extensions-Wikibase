@@ -29,10 +29,10 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	/**
 	 * @inheritDoc
 	 */
-	public function getContent( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+	public function getContent( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
 		try {
 			$request = $this->requestFactory->create(
-				$this->formatUrl( $entityId, $language, $editLink, $preferredLanguages ),
+				$this->formatUrl( $entityId, $revision, $language, $editLink, $preferredLanguages ),
 				[ /* TODO attach required data */ ]
 			);
 			$request->execute();
@@ -48,14 +48,15 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		return $request->getContent();
 	}
 
-	private function formatUrl( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+	private function formatUrl( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
 		return $this->ssrServerUrl . '?' .
-			http_build_query( $this->getRequestParams( $entityId, $language, $editLink, $preferredLanguages ) );
+			http_build_query( $this->getRequestParams( $entityId, $revision, $language, $editLink, $preferredLanguages ) );
 	}
 
-	private function getRequestParams( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+	private function getRequestParams( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
 		return [
 			'entity' => $entityId->getSerialization(),
+			'revision' => $revision,
 			'language' => $language,
 			'editLink' => $editLink,
 			'preferredLanguages' => implode( '|', $this->getLanguageCodes( $preferredLanguages ) ),

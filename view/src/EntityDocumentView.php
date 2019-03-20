@@ -15,10 +15,11 @@ interface EntityDocumentView {
 	 * Builds and returns the HTML representing a whole WikibaseEntity.
 	 *
 	 * @param EntityDocument $entity the entity to render
+	 * @param int $revision the revision of the entity to render
 	 *
 	 * @return ViewContent
 	 */
-	public function getContent( EntityDocument $entity ): ViewContent;
+	public function getContent( EntityDocument $entity, $revision ): ViewContent;
 
 	/**
 	 * Returns the html used for the title of the page.

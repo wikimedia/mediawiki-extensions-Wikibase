@@ -24,7 +24,7 @@ class EntityRevisionTest extends \PHPUnit\Framework\TestCase {
 		$revision = new EntityRevision( $entity );
 
 		$this->assertSame( $entity, $revision->getEntity() );
-		$this->assertSame( 0, $revision->getRevisionId() );
+		$this->assertSame( EntityRevision::UNSAVED_REVISION, $revision->getRevisionId() );
 		$this->assertSame( '', $revision->getTimestamp() );
 	}
 

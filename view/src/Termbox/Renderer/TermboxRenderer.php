@@ -14,12 +14,13 @@ interface TermboxRenderer {
 	 * @throws TermboxRenderingException
 	 *
 	 * @param EntityId $entityId
+	 * @param int $revision
 	 * @param string $language
 	 * @param string $editLink
 	 * @param LanguageFallbackChain $preferredLanguages
 	 *
 	 * @return string
 	 */
-	public function getContent( EntityId $entityId, $language, $editLink, LanguageFallbackChain $preferredLanguages );
+	public function getContent( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages );
 
 }

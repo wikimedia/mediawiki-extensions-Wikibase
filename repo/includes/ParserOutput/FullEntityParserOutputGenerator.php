@@ -6,11 +6,11 @@ use InvalidArgumentException;
 use Language;
 use ParserOutput;
 use SpecialPage;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\LocalizedTextProvider;
@@ -129,16 +129,18 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	/**
 	 * Creates the parser output for the given entity revision.
 	 *
-	 * @param EntityDocument $entity
+	 * @param EntityRevision $entityRevision
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
-		EntityDocument $entity,
+		EntityRevision $entityRevision,
 		$generateHtml = true
 	) {
+		$entity = $entityRevision->getEntity();
+
 		$parserOutput = new ParserOutput();
 
 		$updaterCollection = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
@@ -154,7 +156,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
-				$entity,
+				$entityRevision,
 				$this->getEntityInfo( $parserOutput )
 			);
 		} else {
@@ -211,9 +213,11 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
-		EntityDocument $entity,
+		EntityRevision $entityRevision,
 		EntityInfo $entityInfo
 	) {
+		$entity = $entityRevision->getEntity();
+
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->language,
 			$this->languageFallbackChain,
@@ -225,7 +229,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$titleHtml = $entityView->getTitleHtml( $entity );
 		$parserOutput->setTitleText( $titleHtml );
 
-		$viewContent = $entityView->getContent( $entity );
+		$viewContent = $entityView->getContent( $entity, $entityRevision->getRevisionId() );
 		$parserOutput->setText( $viewContent->getHtml() );
 
 		$placeholders = $viewContent->getPlaceholders();

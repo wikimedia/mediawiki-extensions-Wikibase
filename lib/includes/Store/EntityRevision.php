@@ -18,6 +18,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class EntityRevision {
 
+	/* public */ const UNSAVED_REVISION = 0;
+
 	/**
 	 * @var EntityDocument
 	 */
@@ -40,7 +42,7 @@ class EntityRevision {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityDocument $entity, $revisionId = 0, $mwTimestamp = '' ) {
+	public function __construct( EntityDocument $entity, $revisionId = self::UNSAVED_REVISION, $mwTimestamp = '' ) {
 		if ( !is_int( $revisionId ) || $revisionId < 0 ) {
 			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
 		}

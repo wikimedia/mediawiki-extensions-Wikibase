@@ -20,6 +20,7 @@ interface ViewPlaceHolderEmitter {
 
 	public function getPlaceholders(
 		EntityDocument $entity,
+		$revisionId,
 		$languageCode
 	);
 
