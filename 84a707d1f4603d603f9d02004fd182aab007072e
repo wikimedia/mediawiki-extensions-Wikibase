@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9343adf_e9cd1bc1",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-20T10:51:42Z",
+      "side": 1,
+      "message": "This is setting the WHOLE property info array in the cache?\nThis should probably only set the value for the 1 property in of the key?",
+      "range": {
+        "startLine": 109,
+        "startChar": 70,
+        "endLine": 109,
+        "endChar": 83
+      },
+      "revId": "84a707d1f4603d603f9d02004fd182aab007072e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8358679a_af669323",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-20T10:51:42Z",
+      "side": 1,
+      "message": "this probably needs to get the whole cache, and remove the single value before setting it again.\nFor the single value cache keys this just needs to be unset / removed / deleted?",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 87
+      },
+      "revId": "84a707d1f4603d603f9d02004fd182aab007072e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026870b_22964758",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-20T10:51:42Z",
+      "side": 1,
+      "message": "would be good to add a separator to the cache key to make them more human readable for the people that need to look at them, a : perhaps to line up with what is done with the WikiPageEntityRevisionLookup cache key",
+      "range": {
+        "startLine": 151,
+        "startChar": 24,
+        "endLine": 151,
+        "endChar": 28
+      },
+      "revId": "84a707d1f4603d603f9d02004fd182aab007072e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
