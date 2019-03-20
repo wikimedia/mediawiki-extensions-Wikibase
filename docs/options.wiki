@@ -17,6 +17,12 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : ''NOTE'': This setting replaces the old '''siteLinkGroup'''' setting, which only allowed for a single group.
 ; specialSiteLinkGroups
 : This maps one or more site groups into a single “special” group. This is useful if sites from multiple site groups should be shown in a single “special” section on item pages, instead of one section per site group. To show these site-groups you have to add the group “special” to the '''siteLinkGroups''' setting (see above).
+; entitySources
+: An associative array mapping entity source names to settings relevant to the particular source. Configuration of each source is an associative array containing the following keys:
+:; 'entityNamespaces': A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces (IDs or canonical names) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax <namespace>/<slot> can be used to define which slot to use.
+:; 'repoDatabase': A symbolic database identifier (string) that MediaWiki's LBFactory class understands. Note that <code>false</code> would mean “this wiki's database”.
+:; 'baseUri': A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
+:; 'interwikiPrefix': An interwiki prefix configured in the local wiki referring to the wiki related to the entity source.
 
 === Expert Settings ===
 
@@ -48,6 +54,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : Whether to use the search-related fields (<code>term_search_key</code> and <code>term_weight</code>) of the <code>wb_terms</code> table. This should not be disabled unless some other search backend is used (see <code>entitySearch</code> below).
 ; forceWriteTermsTableSearchFields
 : If true, write search-related fields of the <code>wb_terms</code> table even if they are not used. Useful if you want to experiment with <code>useTermsTableSearchFields</code> and don’t want missed updates in the table.
+; useEntitySourceBasedFederation
+: Temporary flag defining whether the repository-prefix-based or entity-source-based federation mechanism (i.e. use of entities from multiple Wikibase instances) should be used. Use <code>true</code> to use entity-source-based federation. Default: <code>false</code>.
 
 == Repository Settings ==
 
@@ -92,6 +100,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ; enableEntitySearchUI
 : Boolean to determine if entity search UI should be enabled or not.
 : ''DEFAULT'': <code>true</code>
+; localEntitySourceName
+: Name of the entity source name of the "local" repo, i.e. the repo of the local wiki. Should be the name of the entity source defined in <code>entitySources</code> setting. Default: <code>local</code>.
 
 === Expert Settings ===
 
