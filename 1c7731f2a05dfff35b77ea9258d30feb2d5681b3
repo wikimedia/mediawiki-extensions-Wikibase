@@ -22,6 +22,30 @@
       "revId": "1c7731f2a05dfff35b77ea9258d30feb2d5681b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8c887a6_02934b6f",
+        "filename": "repo/tests/phpunit/includes/Api/ModifyTermTestCase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-03-20T10:43:49Z",
+      "side": 0,
+      "message": "Yes, correct. We played around with this in previous patch sets. But as it turns out this is not needed at all. All test cases either provide an expected value, or are successfully passing the \"removed\" assertion below.",
+      "parentUuid": "e63ae970_1052fd2b",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 30
+      },
+      "revId": "1c7731f2a05dfff35b77ea9258d30feb2d5681b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
