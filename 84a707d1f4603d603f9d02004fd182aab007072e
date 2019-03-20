@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e8fb4b1_dacbb6a7",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-20T11:38:34Z",
+      "side": 1,
+      "message": "True.. didn\u0027t notice this before. This should be $info, and line 95 should not be touched actually.",
+      "parentUuid": "a9343adf_e9cd1bc1",
+      "range": {
+        "startLine": 109,
+        "startChar": 70,
+        "endLine": 109,
+        "endChar": 83
+      },
+      "revId": "84a707d1f4603d603f9d02004fd182aab007072e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8358679a_af669323",
         "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
         "patchSetId": 5
