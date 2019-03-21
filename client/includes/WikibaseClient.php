@@ -1556,6 +1556,8 @@ final class WikibaseClient {
 			$cacheSecret
 		);
 
+		$cache->setLogger( $this->getLogger() );
+
 		$cache = new StatsdMissRecordingSimpleCache(
 			$cache,
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),
