@@ -13,7 +13,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
@@ -75,11 +74,6 @@ class OutputPageBeforeHTMLHookHandler {
 	private $cookiePrefix;
 
 	/**
-	 * @var EntityContentFactory
-	 */
-	private $entityContentFactory;
-
-	/**
 	 * @var bool
 	 */
 	private $isExternallyRendered;
@@ -93,7 +87,6 @@ class OutputPageBeforeHTMLHookHandler {
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
 		$cookiePrefix,
-		EntityContentFactory $entityContentFactory,
 		$isExternallyRendered = false
 	) {
 		$this->templateFactory = $templateFactory;
@@ -104,7 +97,6 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
 		$this->cookiePrefix = $cookiePrefix;
-		$this->entityContentFactory = $entityContentFactory;
 		$this->isExternallyRendered = $isExternallyRendered;
 	}
 
@@ -115,7 +107,6 @@ class OutputPageBeforeHTMLHookHandler {
 		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 
 		return new self(
 			TemplateFactory::getDefaultInstance(),
@@ -124,12 +115,11 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
-				$entityContentFactory,
+				$wikibaseRepo->getEntityContentFactory(),
 				$wikibaseRepo->getEntityIdParser()
 			),
 			$wikibaseRepo->getEntityFactory(),
 			$wgCookiePrefix,
-			$entityContentFactory,
 			TermboxFlag::getInstance()->shouldRenderTermbox()
 		);
 	}
@@ -151,17 +141,9 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param string &$html
 	 */
 	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
-		if ( !$this->isEntityPage( $out ) ) {
-			return;
-		}
-
 		$html = $this->replacePlaceholders( $out, $html );
 		$this->addJsUserLanguages( $out );
 		$html = $this->showOrHideEditLinks( $out, $html );
-	}
-
-	private function isEntityPage( OutputPage $out ) {
-		return $this->entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() );
 	}
 
 	/**
