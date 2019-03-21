@@ -21,7 +21,7 @@ mv mediawiki-$MW phase3
 cd phase3/extensions
 
 if [ "$WB" != "repo" ]; then
-	git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Scribunto.git --depth 1
+	git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/Scribunto.git --depth 1
 fi
 git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr --depth 1
 

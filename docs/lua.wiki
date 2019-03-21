@@ -261,7 +261,7 @@ mw.logObject( mw.wikibase.getBestStatements( 'Q16354758', 'P1324' ) )
       ["datatype"] = "url",
       ["datavalue"] = {
         ["type"] = "string",
-        ["value"] = "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git",
+        ["value"] = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase.git",
       },
       ["property"] = "P1324",
       ["snaktype"] = "value",
@@ -406,7 +406,7 @@ The following is a (heavily shortened) example, from the Wikidata item about Wik
         ["id"] = "Q16354758$d09b1475-46d7-bbd3-ce7a-4698212a4a99",
         ["mainsnak"] = {
           ["datatype"] = "url",
-          ["datavalue"] = { ["type"] = "string", ["value"] = "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git", },
+          ["datavalue"] = { ["type"] = "string", ["value"] = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Wikibase.git", },
           ["property"] = "P1324",
           ["snaktype"] = "value",
         },
