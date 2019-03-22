@@ -2180,12 +2180,6 @@ class WikibaseRepo {
 			ValueFormatter::OPT_LANG => $langCode
 		] );
 
-		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$this->getLanguageFallbackChainFactory(),
-			$termLookup
-		);
-
 		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();
 		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
 
