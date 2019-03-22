@@ -22,7 +22,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
-use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -564,34 +563,10 @@ class SqlStore implements Store {
 	 */
 	public function getPropertyInfoLookup() {
 		if ( !$this->propertyInfoLookup ) {
-			$this->propertyInfoLookup = $this->newPropertyInfoLookup();
+			$this->propertyInfoLookup = $this->newPropertyInfoStore();
 		}
 
 		return $this->propertyInfoLookup;
-	}
-
-	/**
-	 * Note: cache key used by the lookup should be the same as the cache key used
-	 * by CachedPropertyInfoStore.
-	 *
-	 * @return PropertyInfoLookup
-	 */
-	private function newPropertyInfoLookup() {
-		$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
-
-		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
-
-		return new CachingPropertyInfoLookup(
-			new CachingPropertyInfoLookup(
-				$nonCachingLookup,
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			),
-			ObjectCache::getLocalServerInstance(),
-			15,
-			$cacheKey
-		);
 	}
 
 	/**
@@ -612,7 +587,7 @@ class SqlStore implements Store {
 	 * Note: cache key used by the lookup should be the same as the cache key used
 	 * by CachedPropertyInfoLookup.
 	 *
-	 * @return PropertyInfoStore
+	 * @return CacheAwarePropertyInfoStore
 	 */
 	private function newPropertyInfoStore() {
 		// TODO: this should be changed so it uses the same PropertyInfoTable instance which is used by
@@ -629,14 +604,9 @@ class SqlStore implements Store {
 		// TODO: we might want to register the CacheAwarePropertyInfoLookup instance created by
 		// newPropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
 		return new CacheAwarePropertyInfoStore(
-			new CacheAwarePropertyInfoStore(
-				$table,
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			),
-			ObjectCache::getLocalServerInstance(),
-			20,
+			$table,
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			$this->cacheDuration,
 			$cacheKey
 		);
 	}

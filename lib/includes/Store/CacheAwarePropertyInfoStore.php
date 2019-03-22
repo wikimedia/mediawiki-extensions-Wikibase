@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
 use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
+use WANObjectCache;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -19,17 +19,17 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class CacheAwarePropertyInfoStore implements PropertyInfoStore {
+class CacheAwarePropertyInfoStore implements PropertyInfoStore, PropertyInfoLookup {
 
 	const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
 
 	/**
 	 * @var PropertyInfoStore
 	 */
-	protected $store;
+	protected $primaryStore;
 
 	/**
-	 * @var BagOStuff
+	 * @var WANObjectCache
 	 */
 	protected $cache;
 
@@ -49,8 +49,8 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	protected $cacheKey;
 
 	/**
-	 * @param PropertyInfoStore $store The info store to call back to.
-	 * @param BagOStuff $cache         The cache to use for labels (typically from wfGetMainCache())
+	 * @param PropertyInfoStore $primaryStore The info store to call back to.
+	 * @param WANObjectCache $cache
 	 * @param int $cacheDuration       Number of seconds to keep the cached version for.
 	 *                                 Defaults to 3600 seconds = 1 hour.
 	 * @param string|null $cacheKey    The cache key to use, auto-generated per default.
@@ -58,12 +58,12 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	 *                                 of the wiki that maintains the properties.
 	 */
 	public function __construct(
-		PropertyInfoStore $store,
-		BagOStuff $cache,
+		PropertyInfoStore $primaryStore,
+		WANObjectCache $cache,
 		$cacheDuration = 3600,
 		$cacheKey = null
 	) {
-		$this->store = $store;
+		$this->primaryStore = $primaryStore;
 		$this->cache = $cache;
 		$this->cacheDuration = $cacheDuration;
 
@@ -92,7 +92,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		}
 
 		// update primary store
-		$this->store->setPropertyInfo( $propertyId, $info );
+		$this->primaryStore->setPropertyInfo( $propertyId, $info );
 
 		$propertyInfo = $this->cache->get( $this->cacheKey );
 		$id = $propertyId->getSerialization();
@@ -108,8 +108,31 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
-		$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $info, $this->cacheDuration );
-		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
+		$this->deleteAndSetIndividualCachedPropertyInfo( $propertyId, $info );
+		$this->deleteAndSetCachedPropertyInfo( $propertyInfo );
+	}
+
+	private function deleteAndSetIndividualCachedPropertyInfo( PropertyId $id, $info ) {
+		$propertyCacheKey = $this->getSinglePropertyCacheKey( $id );
+		$this->cache->delete( $propertyCacheKey );
+		$this->cache->getWithSetCallback(
+			$propertyCacheKey,
+			$this->cacheDuration,
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $info ) {
+				return $info;
+			}
+		);
+	}
+
+	private function deleteAndSetCachedPropertyInfo( $propertyInfo ) {
+		$this->cache->delete( $this->cacheKey );
+		$this->cache->getWithSetCallback(
+			$this->cacheKey,
+			$this->cacheDuration,
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $propertyInfo ) {
+				return $propertyInfo;
+			}
+		);
 	}
 
 	/**
@@ -123,7 +146,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$id = $propertyId->getSerialization();
 
 		// update primary store
-		$ok = $this->store->removePropertyInfo( $propertyId );
+		$ok = $this->primaryStore->removePropertyInfo( $propertyId );
 
 		if ( !$ok ) {
 			// nothing changed, nothing to do
@@ -144,8 +167,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		);
 
 		$this->cache->delete( $this->getSinglePropertyCacheKey( $propertyId ) );
-		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
-
+		$this->deleteAndSetCachedPropertyInfo( $propertyInfo );
 		return true;
 	}
 
@@ -153,6 +175,69 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		return $this->cacheKey
 			. self::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
 			. $propertyId->getSerialization();
+	}
+
+	/**
+	 * @see PropertyInfoLookup::getPropertyInfo
+	 *
+	 * @param PropertyId $propertyId
+	 *
+	 * @return array|null
+	 */
+	public function getPropertyInfo( PropertyId $propertyId ) {
+		$info = $this->cache->getWithSetCallback(
+			$this->getSinglePropertyCacheKey( $propertyId ),
+			$this->cacheDuration,
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $propertyId ) {
+				$propertyInfo = $this->getAllPropertyInfo();
+				$id = $propertyId->getSerialization();
+				if ( isset( $propertyInfo[$id] ) ) {
+					return $propertyInfo[$id];
+				}
+				return false;
+			}
+		);
+
+		if( $info === false ) {
+			return null;
+		}
+
+		return $info;
+	}
+
+	/**
+	 * @see PropertyInfoLookup::getPropertyInfoForDataType
+	 *
+	 * @param string $dataType
+	 *
+	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
+	 */
+	public function getPropertyInfoForDataType( $dataType ) {
+		$propertyInfo = $this->getAllPropertyInfo();
+		$propertyInfoForDataType = [];
+
+		foreach ( $propertyInfo as $id => $info ) {
+			if ( $info[PropertyInfoLookup::KEY_DATA_TYPE] === $dataType ) {
+				$propertyInfoForDataType[$id] = $info;
+			}
+		}
+
+		return $propertyInfoForDataType;
+	}
+
+	/**
+	 * @see PropertyInfoLookup::getAllPropertyInfo
+	 *
+	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
+	 */
+	public function getAllPropertyInfo() {
+		return $this->cache->getWithSetCallback(
+			$this->cacheKey,
+			$this->cacheDuration,
+			function ( $oldValue, &$ttl, array &$setOpts ) {
+				return $this->primaryStore->getAllPropertyInfo();
+			}
+		);
 	}
 
 }
