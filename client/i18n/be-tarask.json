@@ -52,6 +52,8 @@
 	"wikibase-rcfilters-hide-wikibase-label": "Праўкі {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Праўкі, якія паходзяць з {{grammar:родны|{{WBREPONAME}}}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Гэты фільтар канфліктуе з адным ці болей фільтраў якасьці ўнёску ці намераў удзельніка. Прадказаньні якасьці і намераў недаступныя для правак {{grammar:родны|{{WBREPONAME}}}}.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Фільтар «Рэдагаваньні {{grammar:родны|{{WBREPONAME}}}}» канфліктуе з адным ці болей фільтрамі якасьці ўнёску ці намеру ўдзельнікаў. Прадказаньні якасьці і намераў недаступныя для рэдагаваньняў {{grammar:родны|{{WBREPONAME}}}}. Канфліктныя фільтры пазначаныя ў полі актыўных фільтраў вышэй.",
+	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Прадказаньні якасьці ўнёску недаступныя для пэўных тыпаў зьменаў, таму гэты фільтар канфліктуе з {{PLURAL:$2|1=наступным фільтрам|наступнымі фільтрамі}} тыпу зьменаў: $1",
 	"wikibase-replicationnote": "Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены {{WBREPONAME}} у Вашым сьпісе назіраньня",
 	"wikibase-error-deserialize-error": "Не атрымалася дэсэрыялізаваць зьвесткі.",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Kolega2357",
 			"OC Ripper",
-			"Conquistador"
+			"Conquistador",
+			"Vlad5250"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
@@ -17,6 +18,6 @@
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
-	"wikibase-otherprojects": "Drugi projekti",
+	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
 }
