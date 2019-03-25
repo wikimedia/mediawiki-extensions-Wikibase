@@ -134,6 +134,7 @@ return [
 	 * client is enabled on the same wiki.
 	 */
 	'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-' . $GLOBALS['wgDBname'],
+	'sharedCacheKeyGroup' => $GLOBALS['wgDBname'],
 
 	/**
 	 * The duration of the object cache, in seconds.
