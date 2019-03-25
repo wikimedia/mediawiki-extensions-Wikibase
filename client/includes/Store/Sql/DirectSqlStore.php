@@ -95,6 +95,11 @@ class DirectSqlStore implements ClientStore {
 	private $cacheKeyPrefix;
 
 	/**
+	 * @var string
+	 */
+	private $cacheKeyGroup;
+
+	/**
 	 * @var int|string
 	 */
 	private $cacheType;
@@ -220,6 +225,7 @@ class DirectSqlStore implements ClientStore {
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
@@ -459,13 +465,12 @@ class DirectSqlStore implements ClientStore {
 	public function getPropertyInfoLookup() {
 		if ( $this->propertyInfoLookup === null ) {
 			$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
-			$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
 				$propertyInfoLookup,
-				ObjectCache::getInstance( $this->cacheType ),
+				MediaWikiServices::getInstance()->getMainWANObjectCache(),
 				$this->cacheDuration,
-				$cacheKey
+				$this->cacheKeyGroup
 			);
 		}
 
