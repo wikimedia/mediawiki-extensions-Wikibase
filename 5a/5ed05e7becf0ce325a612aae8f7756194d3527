@@ -1,0 +1,7 @@
+Code-Review+2: Lucas Werkmeister (WMDE) <lucas.werkmeister@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 25 Mar 2019 11:30:19 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/498354
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/wmf/1.33.0-wmf.22
