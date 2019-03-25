@@ -582,14 +582,9 @@ class SqlStore implements Store {
 		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 		return new CachingPropertyInfoLookup(
-			new CachingPropertyInfoLookup(
-				$nonCachingLookup,
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			),
-			ObjectCache::getLocalServerInstance(),
-			15,
+			$nonCachingLookup,
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			$this->cacheDuration,
 			$cacheKey
 		);
 	}
@@ -629,14 +624,9 @@ class SqlStore implements Store {
 		// TODO: we might want to register the CacheAwarePropertyInfoLookup instance created by
 		// newPropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
 		return new CacheAwarePropertyInfoStore(
-			new CacheAwarePropertyInfoStore(
-				$table,
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			),
-			ObjectCache::getLocalServerInstance(),
-			20,
+			$table,
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			$this->cacheDuration,
 			$cacheKey
 		);
 	}
