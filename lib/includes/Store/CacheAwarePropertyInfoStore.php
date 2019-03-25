@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
 use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
+use WANObjectCache;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -23,13 +23,15 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
 	const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
 
+	const CACHE_CLASS = 'CacheAwarePropertyInfoStore';
+
 	/**
 	 * @var PropertyInfoStore
 	 */
-	protected $store;
+	protected $innerStore;
 
 	/**
-	 * @var BagOStuff
+	 * @var WANObjectCache
 	 */
 	protected $cache;
 
@@ -46,34 +48,30 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 	/**
 	 * @var string
 	 */
-	protected $cacheKey;
+	protected $cacheKeyGroup;
 
 	/**
 	 * @param PropertyInfoStore $store The info store to call back to.
-	 * @param BagOStuff $cache         The cache to use for labels (typically from wfGetMainCache())
+	 * @param WANObjectCache $cache
 	 * @param int $cacheDuration       Number of seconds to keep the cached version for.
 	 *                                 Defaults to 3600 seconds = 1 hour.
-	 * @param string|null $cacheKey    The cache key to use, auto-generated per default.
-	 *                                 Should be set to something including the wiki name
-	 *                                 of the wiki that maintains the properties.
+	 * @param string $cacheKeyGroup    Group name of the Wikibases to be used when generating global cache keys
 	 */
 	public function __construct(
 		PropertyInfoStore $store,
-		BagOStuff $cache,
+		WANObjectCache $cache,
 		$cacheDuration = 3600,
-		$cacheKey = null
+		$cacheKeyGroup = ''
 	) {
-		$this->store = $store;
+		$this->innerStore = $store;
 		$this->cache = $cache;
 		$this->cacheDuration = $cacheDuration;
 
-		if ( $cacheKey === null ) {
-			// share cached data between wikis, only vary on language code.
-			// XXX: should really include wiki ID of the wiki that maintains this!
-			$cacheKey = __CLASS__;
+		if ( $cacheKeyGroup === '' ) {
+			throw new \InvalidArgumentException( '$cacheKeyGroup should be specified' );
 		}
 
-		$this->cacheKey = $cacheKey;
+		$this->cacheKeyGroup = $cacheKeyGroup;
 		// TODO: Inject
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
@@ -92,14 +90,12 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		}
 
 		// update primary store
-		$this->store->setPropertyInfo( $propertyId, $info );
+		$this->innerStore->setPropertyInfo( $propertyId, $info );
 
-		$propertyInfo = $this->cache->get( $this->cacheKey );
+		$allPropertyInfo = $this->cache->get( $this->getFullTableCacheKey() );
 		$id = $propertyId->getSerialization();
 
-		$propertyInfo[$id] = $info;
-
-		// Update external cache
+		// Update per property cache
 		$this->logger->debug(
 			'{method}: updating cache after updating property {id}',
 			[
@@ -108,8 +104,13 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
+		// Deletes for all DCs
+		$this->deleteCacheKeyForProperty( $propertyId );
+		$this->deleteFullTableCacheKey();
+
+		// Set for current DC only
 		$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $info, $this->cacheDuration );
-		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
+		$this->cache->set( $this->getFullTableCacheKey(), $allPropertyInfo, $this->cacheDuration );
 	}
 
 	/**
@@ -123,16 +124,12 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 		$id = $propertyId->getSerialization();
 
 		// update primary store
-		$ok = $this->store->removePropertyInfo( $propertyId );
+		$ok = $this->innerStore->removePropertyInfo( $propertyId );
 
 		if ( !$ok ) {
 			// nothing changed, nothing to do
 			return false;
 		}
-
-		$propertyInfo = $this->cache->get( $this->cacheKey );
-
-		unset( $propertyInfo[$id] );
 
 		// Update external cache
 		$this->logger->debug(
@@ -143,16 +140,34 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
-		$this->cache->delete( $this->getSinglePropertyCacheKey( $propertyId ) );
-		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
+		// Delete for all DCs
+		$this->deleteCacheKeyForProperty( $propertyId );
+		$this->deleteFullTableCacheKey();
 
 		return true;
 	}
 
+	private function getFullTableCacheKey() {
+		return $this->cache->makeGlobalKey(
+			self::CACHE_CLASS,
+			$this->cacheKeyGroup
+		);
+	}
+
 	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
-		return $this->cacheKey
-			. self::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
-			. $propertyId->getSerialization();
+		return $this->cache->makeGlobalKey(
+			self::CACHE_CLASS,
+			$this->cacheKeyGroup,
+			$propertyId->getSerialization()
+		);
+	}
+
+	private function deleteFullTableCacheKey() {
+		$this->cache->delete( $this->getFullTableCacheKey() );
+	}
+
+	private function deleteCacheKeyForProperty( PropertyId $propertyId ) {
+		$this->cache->delete( $this->getSinglePropertyCacheKey( $propertyId ) );
 	}
 
 }
