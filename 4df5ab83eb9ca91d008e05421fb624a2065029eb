@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2b75535_1da968d0",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:37:48Z",
+      "side": 1,
+      "message": "this needs an index, for lookup from item id",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "034da042_7b0ab6b9",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:37:48Z",
+      "side": 1,
+      "message": "index needed for joins",
+      "range": {
+        "startLine": 4,
+        "startChar": 2,
+        "endLine": 4,
+        "endChar": 17
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7929d369_d3e6ec9a",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:37:48Z",
+      "side": 1,
+      "message": "this needs an index, for lookup from property id",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45a3309d_61dc6b6c",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:37:48Z",
+      "side": 1,
+      "message": "index needed for joins",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "203ad521_28223bef",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:37:48Z",
+      "side": 1,
+      "message": "type name also needs an index",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
