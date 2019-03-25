@@ -158,6 +158,11 @@ class SqlStore implements Store {
 	private $cacheKeyPrefix;
 
 	/**
+	 * @var string
+	 */
+	private $cacheKeyGroup;
+
+	/**
 	 * @var int
 	 */
 	private $cacheType;
@@ -221,6 +226,7 @@ class SqlStore implements Store {
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
+		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
@@ -577,20 +583,11 @@ class SqlStore implements Store {
 	 * @return PropertyInfoLookup
 	 */
 	private function newPropertyInfoLookup() {
-		$nonCachingLookup = $this->wikibaseServices->getPropertyInfoLookup();
-
-		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
-
 		return new CachingPropertyInfoLookup(
-			new CachingPropertyInfoLookup(
-				$nonCachingLookup,
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			),
-			ObjectCache::getLocalServerInstance(),
-			15,
-			$cacheKey
+			$this->wikibaseServices->getPropertyInfoLookup(),
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			$this->cacheDuration,
+			$this->cacheKeyGroup
 		);
 	}
 
@@ -624,20 +621,14 @@ class SqlStore implements Store {
 		// for both store and lookup - no change needed here.
 
 		$table = $this->getPropertyInfoTable();
-		$cacheKey = $this->cacheKeyPrefix . ':CacheAwarePropertyInfoStore';
 
 		// TODO: we might want to register the CacheAwarePropertyInfoLookup instance created by
 		// newPropertyInfoLookup as a watcher to this CacheAwarePropertyInfoStore instance.
 		return new CacheAwarePropertyInfoStore(
-			new CacheAwarePropertyInfoStore(
-				$table,
-				ObjectCache::getInstance( $this->cacheType ),
-				$this->cacheDuration,
-				$cacheKey
-			),
-			ObjectCache::getLocalServerInstance(),
-			20,
-			$cacheKey
+			$table,
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			$this->cacheDuration,
+			$this->cacheKeyGroup
 		);
 	}
 
