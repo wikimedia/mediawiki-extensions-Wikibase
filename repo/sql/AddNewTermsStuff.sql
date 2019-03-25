@@ -16,16 +16,24 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_term_in_lang (
   text_in_lang_id                 INT unsigned       NOT NULL
 ) /*$wgDBTableOptions*/;
 
+CREATE INDEX /*i*/wb_term_in_lang_type ON /*_*/wb_term_in_lang (term_type);
+CREATE INDEX /*i*/wb_term_in_lang_text_in_lang ON /*_*/wb_term_in_lang (text_in_lang_id);
+
 CREATE TABLE IF NOT EXISTS /*_*/wb_text_in_lang (
   id                              INT unsigned       NOT NULL PRIMARY KEY AUTO_INCREMENT,
   text_language                   VARCHAR(10)        NOT NULL,
   term_text_id                    INT unsigned       NOT NULL
 ) /*$wgDBTableOptions*/;
 
+CREATE INDEX /*i*/wb_text_in_lang_language ON /*_*/wb_text_in_lang (text_language);
+CREATE INDEX /*i*/wb_text_in_lang_text_id ON /*_*/wb_text_in_lang (term_text_id);
+
 CREATE TABLE IF NOT EXISTS /*_*/wb_term_text (
   id                              INT unsigned       NOT NULL PRIMARY KEY AUTO_INCREMENT,
   text                            VARCHAR(255)       NOT NULL
 ) /*$wgDBTableOptions*/;
+
+CREATE INDEX /*i*/wb_term_text ON /*_*/wb_term_text (text);
 
 CREATE TABLE IF NOT EXISTS /*_*/wb_term_type (
   id                              INT unsigned       NOT NULL PRIMARY KEY AUTO_INCREMENT,
