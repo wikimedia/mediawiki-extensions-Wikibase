@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cd3e13ac_112bad68",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2b75535_1da968d0",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "034da042_7b0ab6b9",
         "filename": "repo/sql/AddNewTermsStuff.sql",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-25T14:37:48Z",
       "side": 1,
       "message": "index needed for joins",
+      "range": {
+        "startLine": 4,
+        "startChar": 2,
+        "endLine": 4,
+        "endChar": 17
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "807abb64_d46a17de",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "034da042_7b0ab6b9",
       "range": {
         "startLine": 4,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bd084f17_d891799d",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7929d369_d3e6ec9a",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45a3309d_61dc6b6c",
         "filename": "repo/sql/AddNewTermsStuff.sql",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "ef90fa3d_02afe98a",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45a3309d_61dc6b6c",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0526498_f207149d",
         "filename": "repo/sql/AddNewTermsStuff.sql",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2019-03-25T14:38:38Z",
       "side": 1,
       "message": "Should / could be unique index.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 59
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "296756a5_9b99a841",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0526498_f207149d",
       "range": {
         "startLine": 36,
         "startChar": 0,
@@ -152,6 +272,30 @@
       "side": 1,
       "message": "should be unique",
       "parentUuid": "203ad521_28223bef",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01db18f3_aff57a16",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac98ed7b_c3057c50",
       "range": {
         "startLine": 40,
         "startChar": 2,
