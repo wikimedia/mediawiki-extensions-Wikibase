@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32f3f1e1_d8081ff1",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T21:46:17Z",
+      "side": 1,
+      "message": "this condition is actually matching the wrong thing",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 26
+      },
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
