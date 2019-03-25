@@ -94,6 +94,29 @@
     },
     {
       "key": {
+        "uuid": "b0526498_f207149d",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:38:38Z",
+      "side": 1,
+      "message": "Should / could be unique index.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 59
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "203ad521_28223bef",
         "filename": "repo/sql/AddNewTermsStuff.sql",
         "patchSetId": 1
@@ -105,6 +128,30 @@
       "writtenOn": "2019-03-25T14:37:48Z",
       "side": 1,
       "message": "type name also needs an index",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "4df5ab83eb9ca91d008e05421fb624a2065029eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac98ed7b_c3057c50",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-25T14:38:38Z",
+      "side": 1,
+      "message": "should be unique",
+      "parentUuid": "203ad521_28223bef",
       "range": {
         "startLine": 40,
         "startChar": 2,
