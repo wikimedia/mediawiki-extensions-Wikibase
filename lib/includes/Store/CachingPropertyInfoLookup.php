@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
-use BagOStuff;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
+use WANObjectCache;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -26,7 +26,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	protected $lookup;
 
 	/**
-	 * @var BagOStuff
+	 * @var WANObjectCache
 	 */
 	protected $cache;
 
@@ -43,7 +43,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	/**
 	 * @var string
 	 */
-	protected $cacheKey;
+	protected $cacheKeyGroup;
 
 	/**
 	 * Maps properties to info arrays
@@ -54,30 +54,26 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 
 	/**
 	 * @param PropertyInfoLookup $lookup The info lookup to call back to.
-	 * @param BagOStuff $cache           The cache to use for labels (typically from wfGetMainCache())
+	 * @param WANObjectCache $cache
 	 * @param int $cacheDuration         Number of seconds to keep the cached version for.
 	 *                                   Defaults to 3600 seconds = 1 hour.
-	 * @param string|null $cacheKey      The cache key to use, auto-generated per default.
-	 *                                   Should be set to something including the wiki name
-	 *                                   of the wiki that maintains the properties.
+	 * @param string|null $cacheKeyGroup Group name of the Wikibases to be used when generating global cache keys
 	 */
 	public function __construct(
 		PropertyInfoLookup $lookup,
-		BagOStuff $cache,
+		WANObjectCache $cache,
 		$cacheDuration = 3600,
-		$cacheKey = null
+		$cacheKeyGroup = null
 	) {
 		$this->lookup = $lookup;
 		$this->cache = $cache;
 		$this->cacheDuration = $cacheDuration;
 
-		if ( $cacheKey === null ) {
-			// share cached data between wikis, only vary on language code.
-			// XXX: should really include wiki ID of the wiki that maintains this!
-			$cacheKey = __CLASS__;
+		if ( $cacheKeyGroup === null ) {
+			throw new \InvalidArgumentException( '$cacheKeyGroup should be specified' );
 		}
 
-		$this->cacheKey = $cacheKey;
+		$this->cacheKeyGroup = $cacheKeyGroup;
 		// TODO: Inject
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
@@ -90,19 +86,48 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array|null
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		$info = $this->cache->get( $this->getSinglePropertyCacheKey( $propertyId ) );
-		if ( $info ) {
-			return $info;
+		// If we have a populated local class cache, use that, else fallback.
+		// If we call getPropertyInfoFromWANCache already, the getWithSetCallback there will use the class
+		// cache anyway when it calls $this->getAllPropertyInfo
+		if ( $this->hasClassBackedCache() && isset( $this->propertyInfo[$propertyId->getSerialization()] ) ) {
+			$this->logger->debug(
+				'{method}: using in class cached property info table', [ 'method' => __METHOD__ ]
+			);
+			return $this->propertyInfo[$propertyId->getSerialization()];
 		}
 
-		$propertyInfo = $this->getAllPropertyInfo();
-		$id = $propertyId->getSerialization();
+		return $this->getPropertyInfoFromWANCache( $propertyId );
+	}
 
-		if ( isset( $propertyInfo[$id] ) ) {
-			return $propertyInfo[$id];
+	/**
+	 * @see PropertyInfoLookup::getPropertyInfo
+	 *
+	 * @param PropertyId $propertyId
+	 *
+	 * @return array|null
+	 */
+	public function getPropertyInfoFromWANCache( PropertyId $propertyId ) {
+		$info = $this->cache->getWithSetCallback(
+			$this->getSinglePropertyCacheKey( $propertyId ),
+			$this->cacheDuration,
+			function ( $oldValue, &$ttl, array &$setOpts ) use ( $propertyId ) {
+				$allInfo = $this->getAllPropertyInfo();
+				$propertyIdString = $propertyId->getSerialization();
+
+				if ( isset( $allInfo[$propertyIdString] ) ) {
+					return $allInfo[$propertyIdString];
+				}
+
+				// If there is no property, return false to not cache
+				return false;
+			}
+		);
+
+		if ( $info === false ) {
+			return null;
 		}
 
-		return null;
+		return $info;
 	}
 
 	/**
@@ -131,16 +156,21 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 */
 	public function getAllPropertyInfo() {
-		if ( $this->propertyInfo === null ) {
-			$this->propertyInfo = $this->cache->get( $this->cacheKey );
+		if ( !$this->hasClassBackedCache() ) {
+			$cacheHit = true;
+			$this->propertyInfo = $this->cache->getWithSetCallback(
+				$this->getWholeStoreCacheKey(),
+				$this->cacheDuration,
+				function ( $oldValue, &$ttl, array &$setOpts ) use ( &$cacheHit ) {
+					$this->logger->debug(
+						'{method}: caching fresh property info table', [ 'method' => __METHOD__ ]
+					);
+					$cacheHit = false;
+					return $this->lookup->getAllPropertyInfo();
+				}
+			);
 
-			if ( !is_array( $this->propertyInfo ) ) {
-				$this->propertyInfo = $this->lookup->getAllPropertyInfo();
-				$this->cache->set( $this->cacheKey, $this->propertyInfo, $this->cacheDuration );
-				$this->logger->debug(
-					'{method}: cached fresh property info table', [ 'method' => __METHOD__ ]
-				);
-			} else {
+			if ( $cacheHit ) {
 				$this->logger->debug(
 					'{method}: using cached property info table', [ 'method' => __METHOD__ ]
 				);
@@ -150,10 +180,23 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 		return $this->propertyInfo;
 	}
 
+	private function hasClassBackedCache() {
+		return $this->propertyInfo !== null;
+	}
+
+	private function getWholeStoreCacheKey() {
+		return $this->cache->makeGlobalKey(
+			CacheAwarePropertyInfoStore::CACHE_CLASS,
+			$this->cacheKeyGroup
+		);
+	}
+
 	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
-		return $this->cacheKey
-			. self::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
-			. $propertyId->getSerialization();
+		return $this->cache->makeGlobalKey(
+			CacheAwarePropertyInfoStore::CACHE_CLASS,
+			$this->cacheKeyGroup,
+			$propertyId->getSerialization()
+		);
 	}
 
 }
