@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "439016bd_9f664615",
+        "filename": "repo/sql/AddNewTermsStuff.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-25T14:58:22Z",
+      "side": 1,
+      "message": "Done if follow up",
+      "parentUuid": "7a294a7f_46dc1a17",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 4
+      },
+      "revId": "f2a2245d27c91b474108de9aeb6a20f64984c39b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fdbc5b2f_6587cd33",
         "filename": "repo/sql/AddNewTermsStuff.sql",
         "patchSetId": 2
