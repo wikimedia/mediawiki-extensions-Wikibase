@@ -69,6 +69,7 @@ return call_user_func( function() {
 		 * it set in both $wgWBClientSettings and $wgWBRepoSettings.
 		 */
 		'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-' . $GLOBALS['wgDBname'],
+		'sharedCacheKeyGroup' => $GLOBALS['wgDBname'],
 
 		/**
 		 * The duration of the object cache, in seconds.
