@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "274500d5_3e805b67",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-26T15:52:55Z",
+      "side": 1,
+      "message": "It\u0027s mediawiki\u0027s SQL convention, all tables need to have prefix in their indexes and columns https://www.mediawiki.org/wiki/Manual:Coding_conventions/Database",
+      "parentUuid": "b8ad38f9_4a920ec8",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85cdc060_ccf22a6c",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
