@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "61aaa1e7_4cebb260",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-26T16:58:15Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to follow those conventions if they do not suit us. Wikibase Repo is not MediaWiki.",
+      "parentUuid": "274500d5_3e805b67",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85cdc060_ccf22a6c",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
