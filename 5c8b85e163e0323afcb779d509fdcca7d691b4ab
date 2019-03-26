@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a00225d_ac808959",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T13:25:26Z",
+      "side": 1,
+      "message": "nice idea.. though it need not be exactly as the class name nor named `CACHE_CLASS` right?",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0879a49e_eb699198",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T13:25:26Z",
+      "side": 1,
+      "message": "since `null` throws an exception, param type shouldn\u0027t include null",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "272de725_b36303ed",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T13:25:26Z",
+      "side": 1,
+      "message": "can this default value be an empty string.. then throw an exception whenever the value is empty (if empty string shouldn\u0027t be allowed).\n\nThat way we don\u0027t need a default value that is not actually allowed, and the doc above becomes more honest ;)",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4404690d_709dd672",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T13:25:26Z",
+      "side": 1,
+      "message": "We can actually use a trait for these functions .. constant would be accessed then as __class__::CACHE_CLASS and should be present in both classes .. hmm not sure which is better so up to you :)",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "947840cc_b6a7d3d3",
+        "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T13:25:26Z",
+      "side": 1,
+      "message": "should be private",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2bbfb3a_2a794504",
+        "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T13:25:26Z",
+      "side": 1,
+      "message": "should ~~not~~",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
