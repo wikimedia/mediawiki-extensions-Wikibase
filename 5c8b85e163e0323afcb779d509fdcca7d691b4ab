@@ -19,6 +19,80 @@
     },
     {
       "key": {
+        "uuid": "b3d38b4a_15241b3b",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-03-26T18:35:03Z",
+      "side": 1,
+      "message": "These set()s would at least need a comment that they are for the current DC only and the deletes are not",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f055f3_584aa608",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-03-26T18:35:03Z",
+      "side": 1,
+      "message": "This name still has \"FullTable\" in it, but not the key name method",
+      "range": {
+        "startLine": 161,
+        "startChar": 18,
+        "endLine": 161,
+        "endChar": 41
+      },
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ff344ba_35129c58",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-03-26T18:35:03Z",
+      "side": 1,
+      "message": "How hot is this particular key (roughly)? Does it take a long time to generate? Might be useful to use touchCheckKey() instead of delete(). This would require that get() use the \"check keys\" argument.",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "407b1f34_745cffe8",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-03-26T18:35:03Z",
+      "side": 1,
+      "message": "Are there property keys that take a long time (\u003e1 sec) to generate?",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0879a49e_eb699198",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 9
