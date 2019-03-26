@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b8ad38f9_4a920ec8",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T15:50:24Z",
+      "side": 1,
+      "message": "I have a feeling that using table names is much clearer when I look again on the prefixes we have .. how about we drop them?",
+      "parentUuid": "b5f9cc98_26bfa884",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85cdc060_ccf22a6c",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
