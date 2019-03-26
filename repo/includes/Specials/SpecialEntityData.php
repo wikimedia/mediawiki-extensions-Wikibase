@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
+use ObjectCache;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -72,7 +74,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @return EntityDataRequestHandler
 	 */
 	private function newDefaultRequestHandler() {
-		global $wgUseSquid, $wgApiFrameOptions;
+		global $wgApiFrameOptions, $wgSecretKey;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -80,6 +82,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityRedirectLookup = $wikibaseRepo->getStore()->getEntityRedirectLookup();
 		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
+		$settings = $wikibaseRepo->getSettings();
 
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getStore()->getEntityLookup(),
@@ -93,11 +96,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getCompactEntitySerializer(),
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getRdfVocabulary(),
-			$wikibaseRepo->getSettings()->getSetting( 'tmpSerializeEmptyListsAsObjects' )
+			$settings->getSetting( 'tmpSerializeEmptyListsAsObjects' )
 		);
 
-		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );
-		$formats = $wikibaseRepo->getSettings()->getSetting( 'entityDataFormats' );
+		$maxAge = $settings->getSetting( 'dataSquidMaxage' );
+		$formats = $settings->getSetting( 'entityDataFormats' );
 		$this->entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
@@ -119,20 +122,35 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$titleLookup
 		);
 
+		$cachedSize = $settings->getSetting( 'entityDataMaxCacheSize' );
+		if ( $cachedSize > 0 ) {
+			$cacheType = $settings->getSetting( 'sharedCacheType' );
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$bagOStuff = ObjectCache::getInstance( $cacheType );
+
+			$cache = new SimpleCacheWithBagOStuff(
+				$bagOStuff,
+				$settings->getSetting( 'sharedCacheKeyPrefix' ) . 'wikibase.repo.entitydata.',
+				$cacheSecret
+			);
+		} else {
+			$cache = null;
+		}
+
 		return new EntityDataRequestHandler(
 			$uriManager,
-			$titleLookup,
 			$entityIdParser,
 			$entityRevisionLookup,
 			$entityRedirectLookup,
 			$serializationService,
 			$this->entityDataFormatProvider,
 			$wikibaseRepo->getLogger(),
-			$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
+			$settings->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
 			$maxAge,
-			$wgUseSquid,
-			$wgApiFrameOptions
+			$wgApiFrameOptions,
+			$cache,
+			$cachedSize
 		);
 	}
 

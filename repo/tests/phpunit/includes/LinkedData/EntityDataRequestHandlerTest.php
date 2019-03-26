@@ -157,7 +157,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
-			$titleLookup,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,
@@ -167,8 +166,9 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$entityTypesWithoutRdfOutput,
 			'json',
 			1800,
-			false,
-			null
+			null,
+			null,
+			0
 		);
 
 		return $handler;

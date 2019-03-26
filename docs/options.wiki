@@ -56,7 +56,9 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : If true, write search-related fields of the <code>wb_terms</code> table even if they are not used. Useful if you want to experiment with <code>useTermsTableSearchFields</code> and don’t want missed updates in the table.
 ; useEntitySourceBasedFederation
 : Temporary flag defining whether the repository-prefix-based or entity-source-based federation mechanism (i.e. use of entities from multiple Wikibase instances) should be used. Use <code>true</code> to use entity-source-based federation. Default: <code>false</code>.
-
+; entityDataMaxCacheSize
+: Maximum size of the EntityData object that can be cacched. <=0 means no caching.
+: ''DEFAULT'':0
 == Repository Settings ==
 
 === Basic Settings ===
