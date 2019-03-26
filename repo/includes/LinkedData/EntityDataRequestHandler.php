@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\LinkedData;
 
+use BagOStuff;
 use HttpError;
 use OutputPage;
 use CdnCacheUpdate;
 use Psr\Log\LoggerInterface;
+use Psr\SimpleCache\CacheInterface;
 use WebRequest;
 use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
@@ -69,11 +71,6 @@ class EntityDataRequestHandler {
 	private $entityRedirectLookup;
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
 	 * @var EntityDataFormatProvider
 	 */
 	private $entityDataFormatProvider;
@@ -94,18 +91,24 @@ class EntityDataRequestHandler {
 	private $maxAge;
 
 	/**
-	 * @var bool
-	 */
-	private $useSquids;
-
-	/**
 	 * @var string|null
 	 */
 	private $frameOptionsHeader;
+	/**
+	 * @var string[]
+	 */
+	private $entityTypesWithoutRdfOutput;
+	/**
+	 * @var CacheInterface
+	 */
+	private $cache;
+	/**
+	 * @var int
+	 */
+	private $maxCached;
 
 	/**
 	 * @param EntityDataUriManager $uriManager
-	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
@@ -115,12 +118,12 @@ class EntityDataRequestHandler {
 	 * @param string[] $entityTypesWithoutRdfOutput
 	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
-	 * @param bool $useSquids do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
+	 * @param CacheInterface $cache Cache for RDF results
+	 * @param int $maxCachedSize Maximum cached object size
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
-		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,
@@ -130,11 +133,11 @@ class EntityDataRequestHandler {
 		array $entityTypesWithoutRdfOutput,
 		$defaultFormat,
 		$maxAge,
-		$useSquids,
-		$frameOptionsHeader
+		$frameOptionsHeader,
+		CacheInterface $cache,
+		$maxCachedSize
 	) {
 		$this->uriManager = $uriManager;
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityRedirectLookup = $entityRedirectLookup;
@@ -144,8 +147,9 @@ class EntityDataRequestHandler {
 		$this->entityTypesWithoutRdfOutput = $entityTypesWithoutRdfOutput;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
-		$this->useSquids = $useSquids;
 		$this->frameOptionsHeader = $frameOptionsHeader;
+		$this->cache = $cache;
+		$this->maxCached = $maxCachedSize;
 	}
 
 	/**
@@ -466,6 +470,17 @@ class EntityDataRequestHandler {
 		}
 	}
 
+
+	/**
+	 * @param EntityId $id
+	 * @param int $revision
+	 * @param string $flavor
+	 * @return string
+	 */
+	private function getCacheKey( EntityId $id, $revision, $flavor ) {
+		return 'wikibase-entity-data-' . $id->getSerialization() . '@' . $revision . '@' . $flavor;
+	}
+
 	/**
 	 * Output entity data.
 	 *
@@ -496,21 +511,37 @@ class EntityDataRequestHandler {
 			}
 		}
 
-		if ( $flavor === 'dump' || $revision > 0 ) {
-			// In dump mode and when fetching a specific revision, don't include incoming redirects.
-			$incomingRedirects = [];
-		} else {
-			// Get the incoming redirects of the entity (if we followed a redirect, use the target id).
-			$incomingRedirects = $this->getIncomingRedirects( $entityRevision->getEntity()->getId() );
+		$cached = false;
+		if ( $this->cache ) {
+			$key = $this->getCacheKey( $id, $revision, $flavor );
+			$cached = $this->cache->get( $key );
+			if ( $cached ) {
+				list( $data, $contentType ) = $cached;
+			}
 		}
 
-		list( $data, $contentType ) = $this->serializationService->getSerializedData(
-			$format,
-			$entityRevision,
-			$followedRedirectRevision,
-			$incomingRedirects,
-			$flavor
-		);
+		if ( !$cached ) {
+			if ( $flavor === 'dump' || $revision > 0 ) {
+				// In dump mode and when fetching a specific revision, don't include incoming redirects.
+				$incomingRedirects = [];
+			} else {
+				// Get the incoming redirects of the entity (if we followed a redirect, use the target id).
+				$incomingRedirects =
+					$this->getIncomingRedirects( $entityRevision->getEntity()->getId() );
+			}
+
+			list( $data, $contentType ) = $this->serializationService->getSerializedData(
+				$format,
+				$entityRevision,
+				$followedRedirectRevision,
+				$incomingRedirects,
+				$flavor
+			);
+
+			if ( $this->cache && strlen( $data ) <= $this->maxCached ) {
+				$this->cache->set( $key, [ $data, $contentType ], $this->maxAge );
+			}
+		}
 
 		$output->disable();
 		$this->outputData(
