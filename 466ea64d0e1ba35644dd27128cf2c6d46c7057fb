@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e6f79a27_47759eaf",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T10:47:49Z",
+      "side": 1,
+      "message": "If it left for getAllPropertyInfo in the lookup now.\n, however we could also set on the full cached table here, which might be the better thing to do.\n\nThe delete will make sure that the key is purged from all DCs, and then the set, at least in the local DC will set it right away ignoring the tomb stoning logic.\n\nI\u0027ll probably add the table set back in the following commit.",
+      "parentUuid": "d116ed17_1f4af22f",
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b40edcab_797bf196",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-03-26T10:38:18Z",
       "side": 1,
       "message": "yeah it is surely unnecessary if we know that this method won\u0027t be called more than onces or twice per request, after populating the instance field.. hmm worth actually keeping it and measure hit-rate somehow? do we have a service that we can push such measurement data to actually?",
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1be9b01_32e52fa0",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T10:47:49Z",
+      "side": 1,
+      "message": "I left the logging so that we could just do a little bit of testing after this is merged and deployed.\nThere is indeed a service that we could fire number to if we wanted to go down that route.\n\nRight now I have no idea about the patterns of access that will end up hitting this method.\n\nThinking about this again now, BagOstuff actuall tracks duplicate gets to the same key and logs this already, that is, when a bagostuff is created with the reportDupes option, although it looks like this is false for us in production, so probably worth keeping some amount of our own tracking here.",
+      "parentUuid": "b40edcab_797bf196",
       "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -71,6 +107,30 @@
       "side": 1,
       "message": "it should just be changed to `!$usedCacheCallback` right?\nmaybe we can also rename it to smth like `$fullTableCacheMiss` to be closer to describe it\u0027s purpose? or actually better `$fullTableCacheHit` and then we don\u0027t need to negate it in the condition?",
       "parentUuid": "32f3f1e1_d8081ff1",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 26
+      },
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bffa167_4eed6b37",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T10:47:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25dd4ebb_1a655769",
       "range": {
         "startLine": 176,
         "startChar": 8,
