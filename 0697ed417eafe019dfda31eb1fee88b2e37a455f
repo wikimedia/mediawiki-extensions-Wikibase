@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d79b5a67_54b5dbdd",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 0,
+      "message": "I remove the setting of cache for property info removals here, but I could actually add the set back for the full table cache key here for the local DC.",
+      "range": {
+        "startLine": 147,
+        "startChar": 2,
+        "endLine": 147,
+        "endChar": 76
+      },
+      "revId": "0697ed417eafe019dfda31eb1fee88b2e37a455f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

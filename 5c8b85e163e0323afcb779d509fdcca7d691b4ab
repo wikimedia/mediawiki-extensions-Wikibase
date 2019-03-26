@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7a331f90_3d421ef4",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "I kept the string the same as before simply so that when people see this in logs they still know what it means.\n\nAs for CACHE_CLASS, the class here actually refers to the class parameter that is passed to makeGlobalKey ;) rather than the fact it is the name of this class.",
+      "parentUuid": "3a00225d_ac808959",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3d38b4a_15241b3b",
         "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2019-03-26T18:35:03Z",
       "side": 1,
       "message": "These set()s would at least need a comment that they are for the current DC only and the deletes are not",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1723a7b6_d1609476",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3d38b4a_15241b3b",
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "b7278d94_f4da0027",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Changes to full name everywhere",
+      "parentUuid": "68f055f3_584aa608",
+      "range": {
+        "startLine": 161,
+        "startChar": 18,
+        "endLine": 161,
+        "endChar": 41
+      },
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ff344ba_35129c58",
         "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
         "patchSetId": 9
@@ -70,6 +130,24 @@
       "writtenOn": "2019-03-26T18:35:03Z",
       "side": 1,
       "message": "How hot is this particular key (roughly)? Does it take a long time to generate? Might be useful to use touchCheckKey() instead of delete(). This would require that get() use the \"check keys\" argument.",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edd12ac4_94a7f637",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Lots of reads, not many writes / purges / changes.\nRegeneration of this key is 1 SQL select (of a whole table, with a row for each wikidata property).",
+      "parentUuid": "0ff344ba_35129c58",
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "6eb7d347_cf008244",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "No, these do not take that long to generate.\nAll property keys should take the same amount of time to generate, and actually are all generated from the cache key for the full table before falling back to SQL.",
+      "parentUuid": "407b1f34_745cffe8",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0879a49e_eb699198",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 9
@@ -104,6 +200,24 @@
       "writtenOn": "2019-03-26T13:25:26Z",
       "side": 1,
       "message": "since `null` throws an exception, param type shouldn\u0027t include null",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcf0cda3_f658d736",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0879a49e_eb699198",
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "537e4652_1b785e39",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "272de725_b36303ed",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4404690d_709dd672",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 9
@@ -138,6 +270,24 @@
       "writtenOn": "2019-03-26T13:25:26Z",
       "side": 1,
       "message": "We can actually use a trait for these functions .. constant would be accessed then as __class__::CACHE_CLASS and should be present in both classes .. hmm not sure which is better so up to you :)",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "676af0a7_65e8f3bb",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Yup, I thought about that, but figured I might do it in a followup!",
+      "parentUuid": "4404690d_709dd672",
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "285a9070_981a9edb",
+        "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "947840cc_b6a7d3d3",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2bbfb3a_2a794504",
         "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
         "patchSetId": 9
@@ -172,6 +340,24 @@
       "writtenOn": "2019-03-26T13:25:26Z",
       "side": 1,
       "message": "should ~~not~~",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a2f90d8_93f4a23b",
+        "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-26T18:50:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2bbfb3a_2a794504",
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
