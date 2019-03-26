@@ -197,7 +197,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Опис:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Псеудоними:",
 	"wikibase-setlabeldescriptionaliases-submit": "Постави ознаку, опис и псеудоним",
-	"special-setsitelink": "Постављање везе до сајта",
+	"special-setsitelink": "Постављање везе ставке на сајт",
 	"wikibase-setsitelink-introfull": "Постављате везу ка сајту $2 за [[:$1]].",
 	"wikibase-setsitelink-intro": "Овај образац омогућава постављање везе ставке. Треба да унесете ID ставке (нпр. Q23), ID сајта (нпр. enwiki) и везу која ће да се постави.",
 	"wikibase-setsitelink-intro-badges": "Додатно можете да поставите разне значке за ову везу а које су на списку испод.",

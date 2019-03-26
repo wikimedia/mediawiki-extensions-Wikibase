@@ -7,7 +7,8 @@
 			"Sudo77(new)",
 			"TomášPolonec",
 			"Kusavica",
-			"LacoR"
+			"LacoR",
+			"Robert Važan"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
@@ -48,6 +49,8 @@
 	"wikibase-rc-show-wikidata-pref": "Zobraziť úpravy Wikiúdajov v posledných úpravách",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Úprava Wikiúdajov",
+	"wikibase-rcfilters-hide-wikibase-label": "Úpravy {{GRAMMAR:2sg|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Úpravy pochádzajúce z {{GRAMMAR:2sg|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.",
 	"wikibase-watchlist-show-changes-pref": "Zobraziť úpravy Wikiúdajov v sledovaných stránkach",
 	"unconnectedpages": "Stránky bez prepojení",
@@ -67,6 +70,7 @@
 	"wikibase-entityusage-submit": "Zobraziť stránky",
 	"wikibase-pageinfo-entity-id": "ID položky Wikiúdajov",
 	"wikibase-pageinfo-entity-id-none": "Žiadne",
+	"wikibase-pageinfo-description-central": "Centrálny popis",
 	"wikibase-pageinfo-entity-usage": "Entity {{GRAMMAR:2sg|{{WBREPONAME}}}} použité na tejto stránke",
 	"wikibase-pageinfo-entity-usage-S": "Odkaz na stránku",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Štítok: $1",
