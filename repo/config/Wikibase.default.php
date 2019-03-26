@@ -89,6 +89,10 @@ return [
 		'html',
 	],
 
+	// Max object size for caching EntityData output
+	// <=0 means no caching
+	'entityDataMaxCacheSize' => 0,
+
 	'enableEntitySearchUI' => true,
 
 	'dataRightsUrl' => function() {

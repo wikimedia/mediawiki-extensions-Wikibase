@@ -115,14 +115,12 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$titleLookup
 		);
 
-		$useSquid = false;
 		$apiFrameOptions = 'DENY';
 
 		$entityTypesWithRdfOutputAvailable = [ 'property' ];
 
 		return new EntityDataRequestHandler(
 			$uriManager,
-			$titleLookup,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,
@@ -132,8 +130,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$entityTypesWithRdfOutputAvailable,
 			$defaultFormat,
 			0,
-			$useSquid,
-			$apiFrameOptions
+			$apiFrameOptions,
+			null,
+			0
 		);
 	}
 
