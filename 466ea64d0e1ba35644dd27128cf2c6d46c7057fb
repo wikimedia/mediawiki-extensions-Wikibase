@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "d116ed17_1f4af22f",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T10:38:18Z",
+      "side": 1,
+      "message": "so now we always delete the full table cache? is it because we expect users of this class to store it again? or we just leave it for next getAllPropertyInfo() on the lookup?\n\nI\u0027m just wondering if that\u0027s a good strategy for caching .. sounds like it\u0027s gonna increase miss rate for full table access, but I have also no knowledge how it was before.",
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b40edcab_797bf196",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T10:38:18Z",
+      "side": 1,
+      "message": "yeah it is surely unnecessary if we know that this method won\u0027t be called more than onces or twice per request, after populating the instance field.. hmm worth actually keeping it and measure hit-rate somehow? do we have a service that we can push such measurement data to actually?",
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32f3f1e1_d8081ff1",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 2
@@ -22,6 +56,30 @@
       "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25dd4ebb_1a655769",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-26T10:38:18Z",
+      "side": 1,
+      "message": "it should just be changed to `!$usedCacheCallback` right?\nmaybe we can also rename it to smth like `$fullTableCacheMiss` to be closer to describe it\u0027s purpose? or actually better `$fullTableCacheHit` and then we don\u0027t need to negate it in the condition?",
+      "parentUuid": "32f3f1e1_d8081ff1",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 26
+      },
+      "revId": "466ea64d0e1ba35644dd27128cf2c6d46c7057fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
