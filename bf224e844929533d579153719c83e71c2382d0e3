@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "34c7a322_73418112",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-27T19:31:27Z",
+      "side": 1,
+      "message": "The file needs rename to comply with PSR-4",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "bf224e844929533d579153719c83e71c2382d0e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c51f4e26_03db62e2",
         "filename": "lib/includes/Store/TermStoreWriter.php",
         "patchSetId": 2
@@ -31,6 +54,24 @@
       "side": 1,
       "message": "correction\n\n\"I would love to go with EntityId and TermLst|Term[] ...\"",
       "parentUuid": "c51f4e26_03db62e2",
+      "revId": "bf224e844929533d579153719c83e71c2382d0e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3165904_7385337c",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-27T19:31:27Z",
+      "side": 1,
+      "message": "I would go EntityDocument IMO :D",
+      "parentUuid": "f0ca949a_5a7c46a2",
       "revId": "bf224e844929533d579153719c83e71c2382d0e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
