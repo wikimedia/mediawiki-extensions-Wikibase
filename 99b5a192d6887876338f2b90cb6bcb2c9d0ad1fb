@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "ca2539b1_3f7f74e8",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:27:41Z",
+      "side": 1,
+      "message": "I agree with Jeroen. Question is will DBAs or anyone from WMF block us from doing so? otherwise I will just look again and try to make prfixes consistent and clear",
+      "parentUuid": "61aaa1e7_4cebb260",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85cdc060_ccf22a6c",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "wb_terms:\n\nterm_text                  VARCHAR(255) binary",
       "parentUuid": "85cdc060_ccf22a6c",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 54
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79469101_556f2443",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:27:41Z",
+      "side": 1,
+      "message": "Amir do we need the `binary` option here?",
+      "parentUuid": "49038ed5_cd06103c",
       "range": {
         "startLine": 113,
         "startChar": 41,
