@@ -55,6 +55,8 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Фільтар «Рэдагаваньні {{grammar:родны|{{WBREPONAME}}}}» канфліктуе з адным ці болей фільтрамі якасьці ўнёску ці намеру ўдзельнікаў. Прадказаньні якасьці і намераў недаступныя для рэдагаваньняў {{grammar:родны|{{WBREPONAME}}}}. Канфліктныя фільтры пазначаныя ў полі актыўных фільтраў вышэй.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Прадказаньні якасьці ўнёску недаступныя для пэўных тыпаў зьменаў, таму гэты фільтар канфліктуе з {{PLURAL:$2|1=наступным фільтрам|наступнымі фільтрамі}} тыпу зьменаў: $1",
 	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "Прадказаньні намераў удзельнікаў недаступныя для пэўных тыпаў зьменаў, таму гэты фільтар канфліктуе з {{PLURAL:$2|1=наступным фільтрам|наступнымі фільтрамі}} тыпаў зьменаў: $1",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Усе праўкі {{grammar:родны|{{WBREPONAME}}}} пазначаюцца як «дробныя», таму фільтар «Праўкі {{grammar:родны|{{WBREPONAME}}}}» канфліктуе зь фільтрам «Нядробныя праўкі».",
+	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Усе праўкі {{grammar:родны|{{WBREPONAME}}}} пазначаюцца як «дробныя», таму фільтар «Праўкі {{grammar:родны|{{WBREPONAME}}}}» канфліктуе зь фільтрам «Нядробныя праўкі».",
 	"wikibase-replicationnote": "Калі ласка заўважце, што зьмены могуць зьявіцца ў вікі-праектах толькі празь некалькі хвілін.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены {{WBREPONAME}} у Вашым сьпісе назіраньня",
 	"wikibase-error-deserialize-error": "Не атрымалася дэсэрыялізаваць зьвесткі.",
