@@ -1,44 +1,46 @@
 @import "_variables";
 
 .skin-minerva {
-	&.wb-entitypage .pre-content.heading-holder {
-		padding: 0.4em 0;
-	}
-
-	&.wb-entitypage #page-actions {
-		position: absolute;
-		border-top: 0 none;
-		overflow: visible;
-		top: 12px;
-		right: 0;
-
-		> li {
-			height: @icon-height;
-			width: @icon-width;
-			min-width: @icon-width;
-			margin-left: 0.3em;
-			float: right;
+	&.wb-entitypage {
+		.pre-content.heading-holder {
+			padding: 0.4em 0;
 		}
 
-		.mw-ui-icon {
-			min-width: @icon-width;
+		#page-actions {
+			position: absolute;
+			border-top: 0 none;
+			overflow: visible;
+			top: 12px;
+			right: 0;
 
-			&:before {
-				margin: 0;
-				background-position: 0 0;
-				background-size: 100% auto;
-				width: @icon-width;
+			> li {
 				height: @icon-height;
+				width: @icon-width;
+				min-width: @icon-width;
+				margin-left: 0.3em;
+				float: right;
+			}
+
+			.mw-ui-icon {
+				min-width: @icon-width;
+
+				&:before {
+					margin: 0;
+					background-position: 0 0;
+					background-size: 100% auto;
+					width: @icon-width;
+					height: @icon-height;
+				}
 			}
 		}
-	}
 
-	&.wb-entitypage .pre-content h1 {
-		font-size: 1em;
-		color: @color-light-azureish-gray;
-	}
+		.pre-content h1 {
+			font-size: 1em;
+			color: @color-light-azureish-gray;
+		}
 
-	&.wb-entitypage #bodyContent {
-		margin-top: 0.3em;
+		#bodyContent {
+			margin-top: 0.3em;
+		}
 	}
 }
