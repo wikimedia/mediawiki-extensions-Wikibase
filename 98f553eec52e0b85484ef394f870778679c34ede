@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee1b76d3_be72b4c4",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:35:22Z",
+      "side": 1,
+      "message": "if this is called `EntityTermStoreWriter` then the methods do not need the `OfEntity` suffix .. guess that might be more readable? also will make it clear that there is no other `saveTerms` of something other than Entities",
+      "revId": "98f553eec52e0b85484ef394f870778679c34ede",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "143c0d02_ab42944c",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:35:22Z",
+      "side": 1,
+      "message": "just imo, I don\u0027t think we should use exceptions in interfaces.. it could be that there will be an implementation that actually allows entities without IDs, for instance by acquiring them. exceptions are too implementation suggestive to be interfaces ;)",
+      "revId": "98f553eec52e0b85484ef394f870778679c34ede",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
