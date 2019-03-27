@@ -174,11 +174,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 					throw new RevisionedUnresolvedRedirectException( $id, $redirects[$key] );
 				}
 
-				if ( isset( $entities[$key] ) ) {
-					return $entities[$key];
-				}
-
-				return null;
+				return $entities[$key] ?? null;
 			} ) );
 
 		$entityRevisionLookup->expects( $this->any() )

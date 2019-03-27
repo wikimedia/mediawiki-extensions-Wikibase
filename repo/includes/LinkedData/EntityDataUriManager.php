@@ -55,11 +55,7 @@ class EntityDataUriManager {
 			return '';
 		}
 
-		if ( isset( $this->supportedExtensions[ $format ] ) ) {
-			return $this->supportedExtensions[ $format ];
-		}
-
-		return null;
+		return $this->supportedExtensions[$format] ?? null;
 	}
 
 	/**
@@ -80,12 +76,7 @@ class EntityDataUriManager {
 		}
 
 		$formats = array_flip( $this->supportedExtensions );
-
-		if ( isset( $formats[ $extension ] ) ) {
-			return $formats[ $extension ];
-		}
-
-		return null;
+		return $formats[$extension] ?? null;
 	}
 
 	/**
