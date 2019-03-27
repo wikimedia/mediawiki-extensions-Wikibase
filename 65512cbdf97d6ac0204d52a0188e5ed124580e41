@@ -116,6 +116,30 @@
       "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a386c68_1647369f",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-27T18:00:16Z",
+      "side": 1,
+      "message": "From what I understand, sharedCacheKeyGroup is meant to be shared between different wikis (it\u0027s initially set to wiki name, but the comments imply it is meant to group wikis) - which I do not want, since different wikis would have different entities. \n\nWe do not need to keep the entries in the cache longer than a week (loading data that old is not frequent) - maybe I need to use different setting than maxAge? - but rotation between releases is an interesting question. It shouldn\u0027t be a huge deal though since we\u0027d have at most 2 versions around. \n\nI definitely do not want the cache split between hhvm and php, that\u0027d make no sense. Maybe I should use custom string? But then there probably was some idea behind splitting between hhvm and php?",
+      "parentUuid": "9b88530e_70d07a05",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 82
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
