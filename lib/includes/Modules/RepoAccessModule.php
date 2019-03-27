@@ -15,6 +15,8 @@ use ResourceLoaderModule;
  */
 class RepoAccessModule extends ResourceLoaderModule {
 
+	protected $targets = [ 'desktop', 'mobile' ];
+
 	/**
 	 * This one lets the client JavaScript know where it can find
 	 * the API and the article path of the repo

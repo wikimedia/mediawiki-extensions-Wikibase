@@ -1850,6 +1850,7 @@ return call_user_func( function() {
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.termbox.messages',
 				'wikibase.getUserLanguages',
+				'mw.config.values.wbRepo'
 			],
 		],
 
