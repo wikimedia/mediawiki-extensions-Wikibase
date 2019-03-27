@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "ca9ba1ff_0af4ad58",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-27T09:58:54Z",
+      "side": 1,
+      "message": "The convention is applied on all of mediawiki extensions including wikibase. Wikibase repo is not part of mediawiki core but it\u0027s part of mediawiki.",
+      "parentUuid": "ca2539b1_3f7f74e8",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85cdc060_ccf22a6c",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "Amir do we need the `binary` option here?",
       "parentUuid": "49038ed5_cd06103c",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 54
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f137e2d9_24012b17",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-27T09:58:54Z",
+      "side": 1,
+      "message": "That\u0027s a question for DBAs",
+      "parentUuid": "79469101_556f2443",
       "range": {
         "startLine": 113,
         "startChar": 41,
