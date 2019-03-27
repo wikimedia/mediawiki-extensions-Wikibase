@@ -16,6 +16,24 @@
       "revId": "bf224e844929533d579153719c83e71c2382d0e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0ca949a_5a7c46a2",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T16:21:52Z",
+      "side": 1,
+      "message": "correction\n\n\"I would love to go with EntityId and TermLst|Term[] ...\"",
+      "parentUuid": "c51f4e26_03db62e2",
+      "revId": "bf224e844929533d579153719c83e71c2382d0e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
