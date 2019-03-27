@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e0cd7e55_54139a60",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:40:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7a331f90_3d421ef4",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3d38b4a_15241b3b",
         "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
         "patchSetId": 9
@@ -224,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "4f7de6bf_f837bb11",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:40:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bcf0cda3_f658d736",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "272de725_b36303ed",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 9
@@ -256,6 +292,24 @@
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60a10d7a_fff97fa7",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:40:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "537e4652_1b785e39",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -294,6 +348,24 @@
     },
     {
       "key": {
+        "uuid": "b9f59cf6_38a69fd8",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:40:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "676af0a7_65e8f3bb",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "947840cc_b6a7d3d3",
         "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
         "patchSetId": 9
@@ -329,6 +401,24 @@
     },
     {
       "key": {
+        "uuid": "96e56a2d_38f1a2fb",
+        "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:40:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "285a9070_981a9edb",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2bbfb3a_2a794504",
         "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
         "patchSetId": 9
@@ -361,6 +451,24 @@
       "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98ab4108_b14db0dd",
+        "filename": "repo/tests/phpunit/includes/Store/CachingPropertyInfoTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T09:40:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6a2f90d8_93f4a23b",
+      "revId": "5c8b85e163e0323afcb779d509fdcca7d691b4ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
