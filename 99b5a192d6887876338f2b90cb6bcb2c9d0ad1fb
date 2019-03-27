@@ -284,6 +284,30 @@
       "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73a9f8ac_516688cf",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 3731
+      },
+      "writtenOn": "2019-03-27T10:18:14Z",
+      "side": 1,
+      "message": "Is there any specific reason to use varchar over varbinary?\nFurther, we use varbinary on wb_terms",
+      "parentUuid": "f137e2d9_24012b17",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 54
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
