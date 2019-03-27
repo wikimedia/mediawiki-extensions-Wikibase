@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "fc8867bb_b508d0fe",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3731
+      },
+      "writtenOn": "2019-03-27T10:21:24Z",
+      "side": 1,
+      "message": "this is varbinary on wb_term",
+      "range": {
+        "startLine": 100,
+        "startChar": 41,
+        "endLine": 100,
+        "endChar": 48
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6443336b_2a91ca8d",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
@@ -308,6 +331,29 @@
       "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a400ee0c_ad091f22",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 3731
+      },
+      "writtenOn": "2019-03-27T10:21:24Z",
+      "side": 1,
+      "message": "this is varbinary on wb_terms",
+      "range": {
+        "startLine": 123,
+        "startChar": 41,
+        "endLine": 123,
+        "endChar": 48
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
