@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "411a9374_27de9b82",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-27T10:09:05Z",
+      "side": 1,
+      "message": "That\u0027s a good idea but it means the methods won\u0027t stay the same with the TermIndex interface, meaning we need to change lots of calls.\nI\u0027m fine with that though just want to point out before doing it.",
+      "parentUuid": "ee1b76d3_be72b4c4",
+      "revId": "98f553eec52e0b85484ef394f870778679c34ede",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "143c0d02_ab42944c",
         "filename": "lib/includes/Store/TermStoreWriter.php",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "98f553eec52e0b85484ef394f870778679c34ede",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08805f48_488a4491",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-03-27T10:09:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "143c0d02_ab42944c",
+      "revId": "98f553eec52e0b85484ef394f870778679c34ede",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
