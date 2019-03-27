@@ -97,12 +97,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 
 		$propertyInfo = $this->getAllPropertyInfo();
 		$id = $propertyId->getSerialization();
-
-		if ( isset( $propertyInfo[$id] ) ) {
-			return $propertyInfo[$id];
-		}
-
-		return null;
+		return $propertyInfo[$id] ?? null;
 	}
 
 	/**

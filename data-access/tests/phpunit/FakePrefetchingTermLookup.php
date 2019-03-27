@@ -51,10 +51,8 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
-		if ( isset( $this->buffer[$entityId->getSerialization()][$termType][$languageCode] ) ) {
-			return $this->buffer[$entityId->getSerialization()][$termType][$languageCode];
-		}
-		return null;
+		$id = $entityId->getSerialization();
+		return $this->buffer[$id][$termType][$languageCode] ?? null;
 	}
 
 	public function getLabel( EntityId $entityId, $languageCode ) {

@@ -90,12 +90,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 			->method( 'getMessage' )
 			->with( $this->isType( 'string' ) )
 			->will( $this->returnCallback( function( $msg ) {
-				$messages = $this->getMessages();
-				if ( isset( $messages[$msg] ) ) {
-					return $messages[$msg];
-				} else {
-					return 'kitten';
-				}
+				return $this->getMessages()[$msg] ?? 'kitten';
 			} ) );
 
 		return $lang;

@@ -49,11 +49,7 @@ abstract class BaseUnitStorage implements UnitStorage {
 		if ( !isset( $this->storageData[$unit] ) ) {
 			return false;
 		}
-		if ( isset( $this->storageData[$unit]['unit'] ) ) {
-			return $this->storageData[$unit]['unit'] === $unit;
-		} else {
-			return $this->storageData[$unit][1] === $unit;
-		}
+		return ( $this->storageData[$unit]['unit'] ?? $this->storageData[$unit][1] ) === $unit;
 	}
 
 	/**
