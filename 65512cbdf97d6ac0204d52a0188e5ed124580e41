@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0a537ee_ee796261",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-27T16:05:50Z",
+      "side": 1,
+      "message": "Ahh, I thought revision is already fetched here... I guess it needs to be pushed down the stack when it\u0027s already done.",
+      "parentUuid": "d7e6974b_f7bbf28a",
+      "range": {
+        "startLine": 513,
+        "startChar": 35,
+        "endLine": 513,
+        "endChar": 44
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9ccac7a_96c24abd",
         "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
         "patchSetId": 3
