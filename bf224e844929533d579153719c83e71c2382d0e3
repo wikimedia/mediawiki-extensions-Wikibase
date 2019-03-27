@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c51f4e26_03db62e2",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T16:20:39Z",
+      "side": 1,
+      "message": "I\u0027m thinking here whether this method should instead accept EntityId and TermList|Term[] arguments instead.\n\nOn one hand, just accepting EntityDocument is abstract enough for such an interface. On the other, it is requiring too much of the user (EntityDocuemnt is much more than just the EntityId and the collection of Terms to be saved).\n\nI would love to do the later from a interface design practice, but I know in practice this might lead to separate calls to this method (3 specifically) to save all terms of item or property terms (one for each of the current term types).\n\nI sound like I\u0027m trying too clean now.. so maybe it\u0027s a good balance as it is now. Thoughts/votes?",
+      "revId": "bf224e844929533d579153719c83e71c2382d0e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
