@@ -321,70 +321,21 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.entityIdFormatter.__namespace' => $moduleTemplate + [
+		// FIXME: Registered on WikibaseClient but never loaded.
+		// Only used by WikibaseRepo (wikibase.ui.entityViewInit).
+		'wikibase.entityIdFormatter' => $moduleTemplate + [
 			'scripts' => [
-				'wikibase/entityIdFormatter/namespace.js'
+				'wikibase/entityIdFormatter/namespace.js',
+				'wikibase/entityIdFormatter/EntityIdHtmlFormatter.js',
+				'wikibase/entityIdFormatter/EntityIdPlainFormatter.js',
+				'wikibase/entityIdFormatter/CachingEntityIdHtmlFormatter.js',
+				'wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js',
+				'wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js',
+				'wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js',
 			],
 			'dependencies' => [
 				'wikibase.view.__namespace',
-			]
-		],
-		'wikibase.entityIdFormatter.CachingEntityIdHtmlFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/CachingEntityIdHtmlFormatter.js'
-			],
-			'dependencies' => [
 				'util.inherit',
-				'wikibase.entityIdFormatter.__namespace',
-				'wikibase.entityIdFormatter.EntityIdHtmlFormatter',
-			]
-		],
-		'wikibase.entityIdFormatter.CachingEntityIdPlainFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js'
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.entityIdFormatter.__namespace',
-				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
-			]
-		],
-		'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js'
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.entityIdFormatter.__namespace',
-				'wikibase.entityIdFormatter.EntityIdHtmlFormatter',
-			]
-		],
-		'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js'
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.entityIdFormatter.__namespace',
-				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
-			]
-		],
-		'wikibase.entityIdFormatter.EntityIdHtmlFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/EntityIdHtmlFormatter.js'
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.entityIdFormatter.__namespace',
-			]
-		],
-		'wikibase.entityIdFormatter.EntityIdPlainFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/EntityIdPlainFormatter.js'
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.entityIdFormatter.__namespace',
 			]
 		],
 
