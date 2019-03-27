@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ccda65ce_cb416f9d",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-27T16:04:31Z",
+      "side": 1,
+      "message": "If $this-\u003ecache is set, then $key will be set by the code above. \n\n\u003e the cached value will always be retrieved, even if the entity has been updated\n\nHow can you update a past revision? I thought it\u0027s not possible. \n\n\u003e There is no need to cache JSON responses here, the shared cache is already enough for that, also the request rate is much lower,\n\nIf the request rate is low, should we really bother to exclude JSON? It\u0027d complicate the code but have not much performance effect.",
+      "parentUuid": "b9ccac7a_96c24abd",
+      "range": {
+        "startLine": 539,
+        "startChar": 23,
+        "endLine": 539,
+        "endChar": 27
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b88530e_70d07a05",
         "filename": "repo/includes/Specials/SpecialEntityData.php",
         "patchSetId": 3
