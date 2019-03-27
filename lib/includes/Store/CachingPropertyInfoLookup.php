@@ -86,22 +86,22 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array|null
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
+		$id = $propertyId->getSerialization();
+
 		// If we have a populated local class cache, use that, else fallback.
 		// If we call getPropertyInfoFromWANCache already, the getWithSetCallback there will use the class
 		// cache anyway when it calls $this->getAllPropertyInfo
-		if ( $this->hasClassBackedCache() && isset( $this->propertyInfo[$propertyId->getSerialization()] ) ) {
+		if ( $this->hasClassBackedCache() && isset( $this->propertyInfo[$id] ) ) {
 			$this->logger->debug(
 				'{method}: using in class cached property info table', [ 'method' => __METHOD__ ]
 			);
-			return $this->propertyInfo[$propertyId->getSerialization()];
+			return $this->propertyInfo[$id];
 		}
 
 		return $this->getPropertyInfoFromWANCache( $propertyId );
 	}
 
 	/**
-	 * @see PropertyInfoLookup::getPropertyInfo
-	 *
 	 * @param PropertyId $propertyId
 	 *
 	 * @return array|null
@@ -112,22 +112,14 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 			$this->cacheDuration,
 			function ( $oldValue, &$ttl, array &$setOpts ) use ( $propertyId ) {
 				$allInfo = $this->getAllPropertyInfo();
-				$propertyIdString = $propertyId->getSerialization();
-
-				if ( isset( $allInfo[$propertyIdString] ) ) {
-					return $allInfo[$propertyIdString];
-				}
+				$id = $propertyId->getSerialization();
 
 				// If there is no property, return false to not cache
-				return false;
+				return $allInfo[$id] ?? false;
 			}
 		);
 
-		if ( $info === false ) {
-			return null;
-		}
-
-		return $info;
+		return $info ?: null;
 	}
 
 	/**
