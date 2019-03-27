@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ae5766c1_f46a4d6b",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T11:15:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47172541_bab733b4",
+      "range": {
+        "startLine": 56,
+        "startChar": 41,
+        "endLine": 56,
+        "endChar": 44
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc8867bb_b508d0fe",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-27T10:21:24Z",
       "side": 1,
       "message": "this is varbinary on wb_term",
+      "range": {
+        "startLine": 100,
+        "startChar": 41,
+        "endLine": 100,
+        "endChar": 48
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cda2b31_5047053f",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T11:15:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fc8867bb_b508d0fe",
       "range": {
         "startLine": 100,
         "startChar": 41,
@@ -215,6 +263,30 @@
     },
     {
       "key": {
+        "uuid": "434cd9be_1b87c148",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T11:15:55Z",
+      "side": 1,
+      "message": "Ack.. will refine table-names/prefixes for consistency and clarity",
+      "parentUuid": "ca9ba1ff_0af4ad58",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85cdc060_ccf22a6c",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
@@ -334,6 +406,30 @@
     },
     {
       "key": {
+        "uuid": "fabe44d7_ce44969c",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T11:15:55Z",
+      "side": 1,
+      "message": "Ack.. will use varbinary then",
+      "parentUuid": "73a9f8ac_516688cf",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 54
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a400ee0c_ad091f22",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 5
@@ -345,6 +441,30 @@
       "writtenOn": "2019-03-27T10:21:24Z",
       "side": 1,
       "message": "this is varbinary on wb_terms",
+      "range": {
+        "startLine": 123,
+        "startChar": 41,
+        "endLine": 123,
+        "endChar": 48
+      },
+      "revId": "99b5a192d6887876338f2b90cb6bcb2c9d0ad1fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfa2a8de_0d7918fc",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-27T11:15:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a400ee0c_ad091f22",
       "range": {
         "startLine": 123,
         "startChar": 41,
