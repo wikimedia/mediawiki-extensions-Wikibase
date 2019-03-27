@@ -496,7 +496,7 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @see Content::getPageViewLanguage
+	 * @see ContentHandler::getPageViewLanguage
 	 *
 	 * This implementation returns the user language, because entities get rendered in
 	 * the user's language. The PageContentLanguage hook is bypassed.
@@ -513,7 +513,7 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @see Content::getPageLanguage
+	 * @see ContentHandler::getPageLanguage
 	 *
 	 * This implementation unconditionally returns the wiki's content language.
 	 * The PageContentLanguage hook is bypassed.
