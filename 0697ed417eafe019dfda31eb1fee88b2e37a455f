@@ -94,6 +94,30 @@
       "revId": "0697ed417eafe019dfda31eb1fee88b2e37a455f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17ab3e94_1cac1c8f",
+        "filename": "lib/tests/phpunit/Store/CachingPropertyInfoLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:36:39Z",
+      "side": 1,
+      "message": "bah, i remember spotting this in review at some point....",
+      "parentUuid": "44487e5c_9d2dbff7",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "0697ed417eafe019dfda31eb1fee88b2e37a455f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
