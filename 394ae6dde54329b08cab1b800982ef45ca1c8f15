@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02be8cdd_6e02daa8",
+        "filename": "lib/tests/phpunit/Store/CacheAwarePropertyInfoStoreTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T13:35:41Z",
+      "side": 1,
+      "message": "Why not `$this-\u003eonce()` ?",
+      "range": {
+        "startLine": 55,
+        "startChar": 19,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "394ae6dde54329b08cab1b800982ef45ca1c8f15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
