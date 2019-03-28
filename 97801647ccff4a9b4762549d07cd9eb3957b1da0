@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "44d9ea68_d8c36be4",
+        "filename": "docs/options.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "Well, both :)\nIt is the same idea as in sharedCacheKeyPrefix (the docs there may also not be that clear)\n\nSo wikibases that are in the same group should have the same shared cache group and shared cache key",
+      "parentUuid": "fce4a6f3_7d0d98be",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 208
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4d30168_720750d8",
         "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-28T15:47:00Z",
       "side": 1,
       "message": "I assume this means DataCenter? I feel this is not obvious, would it be possible to not shorten this?\n(also in the method below)",
+      "range": {
+        "startLine": 107,
+        "startChar": 21,
+        "endLine": 107,
+        "endChar": 23
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2b91d7f_cae5e071",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "Yes, I can fix that!",
+      "parentUuid": "b4d30168_720750d8",
       "range": {
         "startLine": 107,
         "startChar": 21,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "24f847ee_bb20f49b",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "So, the inefficiencies described in the related tickets are:\n - When loading from this store, the cache of the full table is loaded lots, creating lots of traffic (that will be solved by also having per property caching)\n - When this key expires of gets evicted many servers simultaneously send SET commands trying to set the key again, again causing a flood of requests that are an issue.\n\nWANCache has lots of funky logic to avoid the latter such as not trying to set (during lookup) keys of values that have just changed for a short time.\n\nThe 2 sets below actually mean that in most cases a lookup will never actually trigger a set, unless the cache entry is evicted.",
+      "parentUuid": "5fb7b67a_193fb5da",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 35
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b48ee832_d8c06359",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2019-03-28T15:47:00Z",
       "side": 1,
       "message": "If we are throwing an exception in this case anyway, what prevents us from making this parameter non-optional?",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "528f38d5_9e1031af",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "php will not let us, unless we change the order of the args, and that is a pain :)",
+      "parentUuid": "b48ee832_d8c06359",
       "range": {
         "startLine": 66,
         "startChar": 16,
@@ -129,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "0b0f32e3_6e3d6e79",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "This ends up having some possibilities of quite a complex fallback, this condition is designed to remove some of those fallback cases.\nPerhaps actually if $this-\u003ehasClassBackedCache() is true this should return the element from the class backed cache or null, and never fallback to getPropertyInfoFromWANCache.\n\ngetPropertyInfoFromWANCache itself has a fallback to the class backed cache within the getWithSet callback.\n\nEssentially, to maintain the same behaviour as before, once the first get / lookup has happened in this class, we should always use the class cached value.\nThis PS differs from that ever so slightly, allowing lookup of the individual property from memcached if it is not in the local class cache, although if there is no data in memcached it will again fallback to the local class cache.",
+      "parentUuid": "44cc013e_d9e78228",
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cd3bb097_6dd2f6c9",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 13
@@ -152,6 +266,30 @@
     },
     {
       "key": {
+        "uuid": "094a0eb8_3fc24d34",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "Good catch, Copy paste error, this should not be public, will fix",
+      "parentUuid": "cd3bb097_6dd2f6c9",
+      "range": {
+        "startLine": 109,
+        "startChar": 1,
+        "endLine": 109,
+        "endChar": 7
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80ec82d1_6006f0f6",
         "filename": "view/lib/wikibase-termbox",
         "patchSetId": 13
@@ -163,6 +301,30 @@
       "writtenOn": "2019-03-28T15:47:00Z",
       "side": 1,
       "message": "Why does this change the termbox version?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02b40ac0_bbb642c5",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T16:57:30Z",
+      "side": 1,
+      "message": "balls, fill fix",
+      "parentUuid": "80ec82d1_6006f0f6",
       "range": {
         "startLine": 1,
         "startChar": 0,
