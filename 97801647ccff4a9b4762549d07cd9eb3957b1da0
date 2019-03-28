@@ -238,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "f0ce1d23_52b5d512",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T17:20:50Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/499824",
+      "parentUuid": "5fa467e5_7e110edc",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1227ade9_a5c28cee",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 13
