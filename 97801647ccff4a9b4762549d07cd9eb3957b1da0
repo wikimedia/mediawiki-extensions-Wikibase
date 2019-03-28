@@ -214,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "5fa467e5_7e110edc",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T17:17:57Z",
+      "side": 1,
+      "message": "Yes, good point, as I changed the behaviour of this class to require a group to be specified, but before there was a fallback to __CLASS__.\n\nI\u0027ll make a followup moving the parameters around.",
+      "parentUuid": "54320412_47e194a1",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1227ade9_a5c28cee",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 13
