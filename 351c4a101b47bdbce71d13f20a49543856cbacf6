@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62180dbf_4bfc4da1",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-03-28T17:08:11Z",
+      "side": 1,
+      "message": "I was saying to Addshore that I\u0027d encourage this to be an explicit isRemote() method or similar rather than rely on the current implicit link of not setting a string for the local db.",
+      "range": {
+        "startLine": 782,
+        "startChar": 7,
+        "endLine": 782,
+        "endChar": 49
+      },
+      "revId": "351c4a101b47bdbce71d13f20a49543856cbacf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
