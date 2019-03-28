@@ -772,6 +772,12 @@ final class RepoHooks {
 		// Find any entity type that is mapped to the title namespace
 		$expectedEntityType = $namespaceLookup->getEntityType( $title->getNamespace() );
 
+		// If the entity type is not from the local source, don't check anything else
+		$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( $expectedEntityType );
+		if( $entitySource->getDatabaseName() !== false ) {
+			return true;
+		}
+
 		// If we don't expect an entity type, then don't check anything else.
 		if ( $expectedEntityType === null ) {
 			return true;
