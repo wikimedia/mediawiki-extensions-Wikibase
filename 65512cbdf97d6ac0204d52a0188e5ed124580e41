@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d068a97c_64e15d32",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-28T17:51:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2e18e644_fdf91de2",
+      "range": {
+        "startLine": 513,
+        "startChar": 35,
+        "endLine": 513,
+        "endChar": 44
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9ccac7a_96c24abd",
         "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
         "patchSetId": 3
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Re $key, yes, sorry, it\u0027s just slightly hard to follow with a quick eye due to the differing indent levels and conditions.\n\n\u003e How can you update a past revision? I thought it\u0027s not possible. \n\nHmm, a past wikidata entity revision? They can not be changed.\n\nI believe I only want down this route as I thought the intention was that current revisions would be stored with a key of revid \u003d 0\n\n\u003e If the request rate is low, should we really bother to exclude JSON? It\u0027d complicate the code but have not much performance effect.\n\nSo request rate is low, but the potential size of cache here is large.\nSoon the wikidata termbox SSR service will be loading entities via Specia:Entitydata, which would essentially lead to double storage of wikidata entities in slightly different forms in the shared cache.",
       "parentUuid": "ccda65ce_cb416f9d",
+      "range": {
+        "startLine": 539,
+        "startChar": 23,
+        "endLine": 539,
+        "endChar": 27
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca84cb48_c8c29151",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-03-28T17:51:03Z",
+      "side": 1,
+      "message": "Well, if we\u0027re caching them here maybe we wouldn\u0027t need to cache them outside? Anyway, if we limit cache size by 10k, maybe it\u0027s not that big of a deal? I can of course add another config variable to select which flavors are cacheable, it\u0027s just more things in a code that is already very hairy.",
+      "parentUuid": "c62db806_a0cc1578",
       "range": {
         "startLine": 539,
         "startChar": 23,
