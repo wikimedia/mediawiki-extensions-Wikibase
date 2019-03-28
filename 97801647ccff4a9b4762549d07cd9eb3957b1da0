@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1227ade9_a5c28cee",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-28T12:00:34Z",
+      "side": 1,
+      "message": "I\u0027m wondering if we should hide class cache check and retrieval logic behind one method (could eventually replace the existing `hasClassBackedCache()` as check and retrieve is quite simple still)\n\n```\n$propertyInfo \u003d $this-\u003egetFromClassBackedCache( $proeprtyId );\nif ( $propertyInfo ) {\n                        $this-\u003elogger-\u003edebug(\n\t\t\t\t\u0027{method}: using in class cached property info table\u0027, [ \u0027method\u0027 \u003d\u003e __METHOD__ ]\n\t\t\t);\n\t\t\treturn $propertyInfo;\n}\n```\n\nas now we have a method for checking that we have a class cache, but then we access it directly.",
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
