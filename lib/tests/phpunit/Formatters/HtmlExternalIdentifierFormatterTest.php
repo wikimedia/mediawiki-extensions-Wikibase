@@ -43,7 +43,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 			'formatter URL' => [
 				$formatterUrlExpander,
 				new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'abc&123' ) ),
-				'<a class="wb-external-id" href="http://acme.test/stuff/abc%26123">abc&amp;123</a>'
+				'<a class="wb-external-id external" href="http://acme.test/stuff/abc%26123" rel="nofollow">abc&amp;123</a>'
 			],
 			'unknown property' => [
 				$formatterUrlExpander,
