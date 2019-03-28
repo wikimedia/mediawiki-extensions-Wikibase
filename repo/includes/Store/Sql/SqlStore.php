@@ -585,8 +585,8 @@ class SqlStore implements Store {
 		return new CachingPropertyInfoLookup(
 			$this->wikibaseServices->getPropertyInfoLookup(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
-			$this->cacheDuration,
-			$this->cacheKeyGroup
+			$this->cacheKeyGroup,
+			$this->cacheDuration
 		);
 	}
 
