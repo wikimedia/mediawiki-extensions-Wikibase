@@ -1,6 +1,8 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\RepoAccessModule;
+use Wikibase\Settings;
 use Wikibase\SitesModule;
 
 /**
@@ -19,7 +21,13 @@ return call_user_func( function() {
 	$modules = [
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
-			'class' => SitesModule::class,
+			'factory' => function () {
+				return new SitesModule(
+					Settings::singleton(),
+					MediaWikiServices::getInstance()->getSiteStore(),
+					MediaWikiServices::getInstance()->getLocalServerObjectCache()
+				);
+			},
 		],
 
 		'mw.config.values.wbRepo' => $moduleTemplate + [
