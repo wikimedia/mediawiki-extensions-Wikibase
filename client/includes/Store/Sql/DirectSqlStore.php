@@ -468,8 +468,8 @@ class DirectSqlStore implements ClientStore {
 			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
 				$propertyInfoLookup,
 				MediaWikiServices::getInstance()->getMainWANObjectCache(),
-				$this->cacheDuration,
-				$this->cacheKeyGroup
+				$this->cacheKeyGroup,
+				$this->cacheDuration
 			);
 		}
 
