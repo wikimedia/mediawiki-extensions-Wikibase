@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ce99d25_50d2eb68",
+        "filename": "lib/includes/Store/TermStoreWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-28T08:18:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34c7a322_73418112",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "bf224e844929533d579153719c83e71c2382d0e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c51f4e26_03db62e2",
         "filename": "lib/includes/Store/TermStoreWriter.php",
         "patchSetId": 2
