@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8676fa5d_4cb7ac11",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-03-28T22:58:56Z",
+      "side": 0,
+      "message": "This was broken previously. ResourceLoaderContext::getLanguage returns a string, and the code expects a string.\n\nPreviously it worked by accident because the broken part partly stubbed out, and partly tolerant to both (Message::inLanguage accepts either).\n\nThis bug was revealed when I started using $languageCode in the cache key.",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 37
+      },
+      "revId": "a6e6e4882f28b54ff7f734cbde521dde7f0ea2be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
