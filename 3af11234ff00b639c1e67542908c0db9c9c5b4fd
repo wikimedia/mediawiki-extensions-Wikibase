@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30f30d80_b21c2f5e",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-03-28T16:54:17Z",
+      "side": 1,
+      "message": "Shouldn’t this condition be below the next one? getSourceForEntityType() isn’t documented to accept non-string arguments (though the current implementation happens to support `null`, I think).",
+      "revId": "3af11234ff00b639c1e67542908c0db9c9c5b4fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
