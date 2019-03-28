@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "fce4a6f3_7d0d98be",
+        "filename": "docs/options.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "I find this to be somewhat confusing. Would one set this setting to group several Wikibase installations together or to separate groups of Wikibase installations from each other?",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 208
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4d30168_720750d8",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "I assume this means DataCenter? I feel this is not obvious, would it be possible to not shorten this?\n(also in the method below)",
+      "range": {
+        "startLine": 107,
+        "startChar": 21,
+        "endLine": 107,
+        "endChar": 23
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fb7b67a_193fb5da",
+        "filename": "lib/includes/Store/CacheAwarePropertyInfoStore.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "This throws away a big cache value and resets it below with a minimally modified value. As I understand, this is the inefficient part that we want ultimately replace, right?",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 109,
+        "endChar": 35
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b48ee832_d8c06359",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "If we are throwing an exception in this case anyway, what prevents us from making this parameter non-optional?",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1227ade9_a5c28cee",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 13
@@ -13,6 +105,70 @@
       "writtenOn": "2019-03-28T12:00:34Z",
       "side": 1,
       "message": "I\u0027m wondering if we should hide class cache check and retrieval logic behind one method (could eventually replace the existing `hasClassBackedCache()` as check and retrieve is quite simple still)\n\n```\n$propertyInfo \u003d $this-\u003egetFromClassBackedCache( $proeprtyId );\nif ( $propertyInfo ) {\n                        $this-\u003elogger-\u003edebug(\n\t\t\t\t\u0027{method}: using in class cached property info table\u0027, [ \u0027method\u0027 \u003d\u003e __METHOD__ ]\n\t\t\t);\n\t\t\treturn $propertyInfo;\n}\n```\n\nas now we have a method for checking that we have a class cache, but then we access it directly.",
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44cc013e_d9e78228",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "Makes sense as the current condition is on different levels of abstraction and quite hard to understand.\n\nAlternatively, we could just drop `$this-\u003ehasClassBackedCache()` as it doesn\u0027t seem to add anything to the condition and the isset works perfectly without it?",
+      "parentUuid": "1227ade9_a5c28cee",
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd3bb097_6dd2f6c9",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "I\u0027m confused as to why is this public? Shouldn\u0027t consumers always call the interface method `getPropertyInfo()`?",
+      "range": {
+        "startLine": 109,
+        "startChar": 1,
+        "endLine": 109,
+        "endChar": 7
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80ec82d1_6006f0f6",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T15:47:00Z",
+      "side": 1,
+      "message": "Why does this change the termbox version?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
       "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
