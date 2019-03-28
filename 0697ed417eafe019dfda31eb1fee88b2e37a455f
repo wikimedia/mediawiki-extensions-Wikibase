@@ -22,6 +22,30 @@
       "revId": "0697ed417eafe019dfda31eb1fee88b2e37a455f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95c3639e_71d5cd84",
+        "filename": "lib/tests/phpunit/Store/CachingPropertyInfoLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-03-28T14:03:57Z",
+      "side": 1,
+      "message": "oh there\u0027s no motivation of making this a field anymore actually (was needed in a previous patch, just forgot to revert this change).\n\nas for making it a lass fields, phpunit allows you to add fields on the fly and does not require them to be previously defined.. basically to keep things shorter in tests I assume (maybe also just a legacy feature).",
+      "parentUuid": "775aefb2_5e0b2d01",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "0697ed417eafe019dfda31eb1fee88b2e37a455f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
