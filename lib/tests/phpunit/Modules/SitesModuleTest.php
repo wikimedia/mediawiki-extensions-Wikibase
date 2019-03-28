@@ -2,15 +2,15 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
+use BagOStuff;
 use HashBagOStuff;
 use HashSiteStore;
 use MediaWikiSite;
 use PHPUnit4And6Compat;
 use ResourceLoaderContext;
-use Wikibase\SitesModule;
+use Site;
 use Wikibase\SettingsArray;
-use Wikibase\Lib\SitesModuleWorker;
-use Wikimedia\TestingAccessWrapper;
+use Wikibase\SitesModule;
 
 /**
  * @covers \Wikibase\SitesModule
@@ -26,37 +26,112 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return ResourceLoaderContext
 	 */
-	private function getContext() {
+	private function getContext( $languageCode = 'qqx' ) {
 		$context = $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$context->expects( $this->any() )
 			->method( 'getLanguage' )
-			->willReturn( 'en' );
+			->willReturn( $languageCode );
 
 		return $context;
 	}
 
-	public function testGetScript() {
-		$module = new SitesModule();
+	public function testGetScript_structure() {
+		$module = $this->newSitesModule( [], [] );
 		$script = $module->getScript( $this->getContext() );
 		$this->assertStringStartsWith( 'mw.config.set({"wbSiteDetails":', $script );
 		$this->assertStringEndsWith( '});', $script );
 	}
 
+	/**
+	 * @dataProvider provideScriptDetails
+	 */
+	public function testGetScript_details(
+		array $sites,
+		array $groups,
+		array $specialGroups,
+		$languageCode,
+		$expected
+	) {
+		$module = $this->newSitesModule( $sites, $groups, $specialGroups );
+
+		$result = $module->getScript( $this->getContext( $languageCode ) );
+		$this->assertEquals( 'mw.config.set({"wbSiteDetails":' . $expected . '});', $result );
+	}
+
+	public function provideScriptDetails() {
+		$site1 = new MediaWikiSite();
+		$site1->setGlobalId( 'mywiki' );
+		$site1->setGroup( 'allowedgroup' );
+		$site1->setLinkPath( 'https://my.test/$1' );
+
+		$site2 = new MediaWikiSite();
+		$site2->setGlobalId( 'otherwiki' );
+		$site2->setGroup( 'othergroup' );
+		$site2->setLinkPath( 'https://other.test/$1' );
+
+		$nonMwSite = new Site();
+		$nonMwSite->setGlobalId( 'mysite' );
+		$nonMwSite->setGroup( 'allowedgroup' );
+
+		return [
+			'no sites' => [ [], [], [], 'qqx', '[]' ],
+			'no site in sitelinkgroups' => [ [ $site1, $site2 ], [], [], 'qqx', '[]' ],
+			'single site in sitelinkgroups' => [
+				[ $site1, $site2 ],
+				[ 'allowedgroup', 'othergroup' ],
+				[],
+				'qqx',
+				'{"mywiki":{"shortName":"","name":"","id":"mywiki","pageUrl":"//my.test/$1",' .
+				'"apiUrl":"","languageCode":null,"group":"allowedgroup"},' .
+				'"otherwiki":{"shortName":"","name":"","id":"otherwiki","pageUrl":"//other.test/$1",' .
+				'"apiUrl":"","languageCode":null,"group":"othergroup"}}'
+			],
+			'single site in special group' => [
+				[ $site1 ],
+				[ 'special' ],
+				[ 'allowedgroup' ],
+				'ar',
+				'{"mywiki":{"shortName":"mywiki","name":"mywiki","id":"mywiki","pageUrl":"//my.test/$1",' .
+				'"apiUrl":"","languageCode":null,"group":"special"}}'
+			],
+			'single non-MediaWiki site in sitelinkgroups' => [
+				[ $nonMwSite ],
+				[ 'allowedgroup' ],
+				[],
+				'qqx',
+				'[]'
+			],
+		];
+	}
+
+	public function testMakeScript_caching() {
+		$cache = new HashBagOStuff();
+
+		// Call twice. Expect 1 compute.
+		$module1 = $this->newMockModule( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
+		$module1->expects( $this->once() )->method( 'makeScript' )
+			->willReturn( [ 'mock details to use' ] );
+		$module1->getScript( $this->getContext( 'qqx' ) );
+		$module1->getScript( $this->getContext( 'qqx' ) );
+
+		// Call twice on a different instance with same cache. Expect 0 compute.
+		$module2 = $this->newMockModule( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
+		$module2->expects( $this->never() )->method( 'makeScript' );
+		$module2->getScript( $this->getContext( 'qqx' ) );
+		$module2->getScript( $this->getContext( 'qqx' ) );
+	}
+
 	public function testGetVersionHash() {
-		$workerLists = $this->getWorkersForVersionHash();
+		$moduleLists = $this->getModulesForVersionHash();
 		$hashesByName = [];
 
-		/** @var SitesModuleWorker[] $workers */
-		foreach ( $workerLists as $name => $workers ) {
+		/** @var SitesModule[] $moduleLists */
+		foreach ( $moduleLists as $name => $modules ) {
 			$hashes = [];
-			foreach ( $workers as $worker ) {
-				$module = new SitesModule();
-				$moduleAccess = TestingAccessWrapper::newFromObject( $module );
-				$moduleAccess->worker = $worker;
-
+			foreach ( $modules as $module ) {
 				$hashes[] = $module->getVersionHash( $this->getContext() );
 			}
 			$this->assertSame(
@@ -69,13 +144,13 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$this->assertSame(
-			array_keys( $workerLists ),
+			array_keys( $moduleLists ),
 			array_keys( $hashesByName ),
 			'different settings lead to same hash'
 		);
 	}
 
-	public function getWorkersForVersionHash() {
+	public function getModulesForVersionHash() {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'siteid' );
 		$site->setGroup( 'allowedgroup' );
@@ -85,30 +160,44 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$site2->setGroup( 'allowedgroup' );
 
 		return [
-			'empty workers' => [
-				$this->newSitesModuleWorker( [], [] ),
-				$this->newSitesModuleWorker( [], [] ),
+			'empty site store' => [
+				$this->newSitesModule( [], [] ),
+				$this->newSitesModule( [], [] ),
 			],
 			'single site' => [
-				$this->newSitesModuleWorker( [ $site ], [] ),
-				$this->newSitesModuleWorker( [ $site ], [] ),
+				$this->newSitesModule( [ $site ], [] ),
+				$this->newSitesModule( [ $site ], [] ),
 			],
 			'single site with configured group' => [
-				$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] ),
-				$this->newSitesModuleWorker( [ $site ], [ 'allowedgroup' ] )
+				$this->newSitesModule( [ $site ], [ 'allowedgroup' ] ),
+				$this->newSitesModule( [ $site ], [ 'allowedgroup' ] )
 			],
 		];
 	}
 
-	private function newSitesModuleWorker( array $sites, array $groups ) {
-		return new SitesModuleWorker(
+	private function newSitesModule( array $sites, array $groups, array $specials = [] ) {
+		return new SitesModule(
 			new SettingsArray( [
 				'siteLinkGroups' => $groups,
-				'specialSiteLinkGroups' => []
+				'specialSiteLinkGroups' => $specials
 			] ),
 			new HashSiteStore( $sites ),
 			new HashBagOStuff()
 		);
+	}
+
+	private function newMockModule( array $sites, array $groups, BagOStuff $cache ) {
+		return $this->getMockBuilder( SitesModule::class )
+			->setConstructorArgs( [
+				new SettingsArray( [
+					'siteLinkGroups' => $groups,
+					'specialSiteLinkGroups' => [],
+				] ),
+				new HashSiteStore( $sites ),
+				$cache
+			] )
+			->setMethods( [ 'makeScript' ] )
+			->getMock();
 	}
 
 }
