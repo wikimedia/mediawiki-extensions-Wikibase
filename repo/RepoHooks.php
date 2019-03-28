@@ -777,6 +777,12 @@ final class RepoHooks {
 			return true;
 		}
 
+		// If the entity type is not from the local source, don't check anything else
+		$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( $expectedEntityType );
+		if ( $entitySource->getDatabaseName() !== false ) {
+			return true;
+		}
+
 		// XXX: If the slot is not the main slot, then assume someone isn't somehow trying
 		// to add another content type there. We want to actually check per slot type here.
 		// This should be fixed with https://gerrit.wikimedia.org/r/#/c/mediawiki/core/+/434544/
