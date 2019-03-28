@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "54320412_47e194a1",
+        "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-03-28T17:14:37Z",
+      "side": 1,
+      "message": "But, since it is not possible to not set the last parameter, it is also not possible to not set the last two parameters. Neither of the two are in fact optional. Currently, $cacheDuration cannot default to 3600.\nOr am I missing something?",
+      "parentUuid": "528f38d5_9e1031af",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "97801647ccff4a9b4762549d07cd9eb3957b1da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1227ade9_a5c28cee",
         "filename": "lib/includes/Store/CachingPropertyInfoLookup.php",
         "patchSetId": 13
