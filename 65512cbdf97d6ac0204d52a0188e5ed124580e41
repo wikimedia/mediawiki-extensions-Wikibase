@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2e18e644_fdf91de2",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T17:35:36Z",
+      "side": 1,
+      "message": "$entityRevision-\u003egetRevisionId() would do the trick in the current position",
+      "parentUuid": "d0a537ee_ee796261",
+      "range": {
+        "startLine": 513,
+        "startChar": 35,
+        "endLine": 513,
+        "endChar": 44
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9ccac7a_96c24abd",
         "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
         "patchSetId": 3
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "c62db806_a0cc1578",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T17:35:36Z",
+      "side": 1,
+      "message": "Re $key, yes, sorry, it\u0027s just slightly hard to follow with a quick eye due to the differing indent levels and conditions.\n\n\u003e How can you update a past revision? I thought it\u0027s not possible. \n\nHmm, a past wikidata entity revision? They can not be changed.\n\nI believe I only want down this route as I thought the intention was that current revisions would be stored with a key of revid \u003d 0\n\n\u003e If the request rate is low, should we really bother to exclude JSON? It\u0027d complicate the code but have not much performance effect.\n\nSo request rate is low, but the potential size of cache here is large.\nSoon the wikidata termbox SSR service will be loading entities via Specia:Entitydata, which would essentially lead to double storage of wikidata entities in slightly different forms in the shared cache.",
+      "parentUuid": "ccda65ce_cb416f9d",
+      "range": {
+        "startLine": 539,
+        "startChar": 23,
+        "endLine": 539,
+        "endChar": 27
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b88530e_70d07a05",
         "filename": "repo/includes/Specials/SpecialEntityData.php",
         "patchSetId": 3
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "From what I understand, sharedCacheKeyGroup is meant to be shared between different wikis (it\u0027s initially set to wiki name, but the comments imply it is meant to group wikis) - which I do not want, since different wikis would have different entities. \n\nWe do not need to keep the entries in the cache longer than a week (loading data that old is not frequent) - maybe I need to use different setting than maxAge? - but rotation between releases is an interesting question. It shouldn\u0027t be a huge deal though since we\u0027d have at most 2 versions around. \n\nI definitely do not want the cache split between hhvm and php, that\u0027d make no sense. Maybe I should use custom string? But then there probably was some idea behind splitting between hhvm and php?",
       "parentUuid": "9b88530e_70d07a05",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 82
+      },
+      "revId": "65512cbdf97d6ac0204d52a0188e5ed124580e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf9fc8f8_5e38a93f",
+        "filename": "repo/includes/Specials/SpecialEntityData.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2019-03-28T17:35:36Z",
+      "side": 1,
+      "message": "So the group is meant to group clusters of wikibases that work together. It works in the same way as the shared cache key that has been around for some time.\n\nSo, wikidata and commons (repos) and all clients of those, will share the same shared cache key and cache group.\nHowever testwikidata, testcommons and other test sites sharea  different cache key and group.\n\nI think a smaller maxage would make sense here.\nThe majority of the things in the shared cache are for tables that are accessed on a high % of requests, or for the shared entity revision cache, where keys are reused thus old entity revisions are not left hanging around.\n\nThe only reason the key differs in the general big cache between mw versions and also php vs hhvm is because php serialize() is used and class changes can thus impact the deserialization. And also this serialization can differ between hhvm and json? \u003ccitation needed\u003e.",
+      "parentUuid": "1a386c68_1647369f",
       "range": {
         "startLine": 133,
         "startChar": 4,
