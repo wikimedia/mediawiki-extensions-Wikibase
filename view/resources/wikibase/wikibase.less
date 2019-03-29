@@ -140,6 +140,11 @@ h2.wb-section-heading {
 	width: auto;
 }
 
+.ui-tabs-panel > .wikibase-toolbar-container {
+	position: static;
+	width: auto;
+}
+
 .wb-empty {
 	color: #a2a9b1;
 }
@@ -542,21 +547,21 @@ span.wikibase-snakview-variation-novaluesnak {
 	background: #f8f9fa;
 	overflow: hidden;
 	margin-bottom: 0.5em;
-}
 
-.wikibase-referenceview .wikibase-referenceview-listview {
-	padding-top: 0.3em;
-}
+	.wikibase-referenceview-listview {
+		padding-top: 0.3em;
+	}
 
-.wikibase-referenceview .wikibase-referenceview-heading {
-	min-height: 1.5em;
-	padding: 5px;
-	background-color: #eaecf0;
-	display: none;
-}
+	.wikibase-referenceview-heading {
+		min-height: 1.5em;
+		padding: 5px;
+		background-color: #eaecf0;
+		display: none;
 
-.wikibase-referenceview .wikibase-referenceview-heading .wikibase-toolbar-container {
-	top: 5px;
+		.wikibase-toolbar-container {
+			top: 5px;
+		}
+	}
 }
 
 .wikibase-referenceview.wb-edit {
@@ -651,6 +656,102 @@ span.wikibase-snakview-variation-novaluesnak {
 .wikibase-statementview-references > .wikibase-toolbar-container {
 	float: right;
 	position: static;
+}
+
+/* Styles for tabs */
+.wikibase-referenceview.ui-widget-content {
+	font-size: 100%;
+	background-image: none;
+}
+
+.wikibase-referenceview-tabs.ui-corner-all {
+	border-radius: 0px;
+}
+
+.ui-tabs.wikibase-referenceview-tabs {
+	font-size: 100%;
+}
+.ui-tabs-panel.wikibase-referenceview-tabs {
+	font-size: 100%
+}
+.ui-tabs-nav.wikibase-referenceview-tabs {
+	font-size: 100%;
+}
+.ui-tabs-tab.wikibase-referenceview-tabs {
+	font-size: 100%;
+}
+
+.ui-tabs-active.wikibase-referenceview-tabs {
+	font-size: 100%;
+}
+
+.ui-tabs-anchor.wikibase-referenceview-tabs {
+	font-weight: bold;
+}
+
+li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active.wikibase-referenceview-tabs {
+	background-color: #eaecf0;
+	background-image: none;
+}
+
+.wikibase-referenceview-tabs {
+	background-image: none;
+}
+
+.wikibase-referenceview-tabs.ui-widget-header {
+	border: 0px;
+	font-size: 100%;
+}
+
+.wikibase-referenceview-tabs.ui-corner-tl{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-tr{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-bl{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-br{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-top{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-bottom{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-right{
+	border-radius: 0px;
+	border: 0px;
+}
+.wikibase-referenceview-tabs.ui-corner-left{
+	border-radius: 0px;
+	border: 0px;
+}
+
+li.wikibase-referenceview.ui-state-default {
+	border: 0px;
+	background-color: #b6c8ec;
+	background-image: none;
+}
+
+wikibase-referenceview-tabs.ui-state-active {
+	border: 0px;
+	background-color: #eaecf0;
+	background-image: none;
+}
+
+li.wikibase-referenceview.ui-tabs-active {
+	border: 0px;
+	background-color: #eaecf0;
+	background-image: none;
 }
 
 /***** /REFERENCES *****/
