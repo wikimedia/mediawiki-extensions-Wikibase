@@ -71,8 +71,9 @@
 
 			PARENT.prototype._create.call( this );
 
-			var self = this;
-			var listview;
+			var self = this,
+				listview;
+
 			this.$listview.listview( {
 				listItemAdapter: this.options.getListItemAdapter( function ( snaklistview ) {
 					listview.removeItem( snaklistview.element );
@@ -84,7 +85,30 @@
 				} ),
 				value: this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : []
 			} );
+
 			listview = this.$listview.data( 'listview' );
+
+			this.$tabButtons = $( '<ul><li><a href="#manual">Manual</a></li></ul>' );
+
+			this.$manual = $( '<div class="wikibase-referenceview-manual" id="manual">' );
+
+			this.$manual.append( this.$listview );
+			this.element.append( this.$tabButtons, this.$manual );
+
+			// Supposed to add this class to all these elements but not working for some reason
+			this.element.tabs( {
+				classes: {
+					'ui-tabs': 'wikibase-referenceview-tabs',
+					'ui-tabs-panel': 'wikibase-referenceview-tabs',
+					'ui-tabs-nav': 'wikibase-referenceview-tabs',
+					'ui-tabs-tab': 'wikibase-referenceview-tabs',
+					'ui-tabs-active': 'wikibase-referenceview-tabs',
+					'ui-tabs-anchor': 'wikibase-referenceview-tabs'
+				}
+			} );
+
+			// Hack as above doesn't work
+			this.element.find( '*' ).addClass( 'wikibase-referenceview-tabs' );
 
 			this._updateReferenceHashClass( this.value() );
 		},
@@ -108,7 +132,7 @@
 
 			this.$listview
 			.on( changeEvents.join( ' ' ), function ( event ) {
-				// Propagate "change" event.
+				// Propagate 'change' event.
 				self._trigger( 'change' );
 			} );
 		},
@@ -189,7 +213,7 @@
 			this._attachEditModeEventHandlers();
 
 			this._referenceRemover = this.options.getReferenceRemover( this.$heading );
-			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.$manual );
 
 			return this.$listview.data( 'listview' ).startEditing();
 		},
@@ -204,6 +228,11 @@
 			this._referenceRemover = null;
 			this._snakListAdder.destroy();
 			this._snakListAdder = null;
+
+			// TODO: this function doesn't seem to be getting called on cancel
+			this.element.tabs( 'destroy' );
+			this.$tabButtons.remove();
+			this.$tabButtons = null;
 
 			// FIXME: There should be a listview::stopEditing method
 			this._stopEditingReferenceSnaks();
@@ -239,7 +268,7 @@
 				.done( function ( $snakview ) {
 					// Since the new snakview will be initialized empty which invalidates the
 					// snaklistview, external components using the snaklistview will be noticed via
-					// the "change" event.
+					// the 'change' event.
 					self._trigger( 'change' );
 					$snakview.data( 'snakview' ).focus();
 				} );
