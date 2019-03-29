@@ -102,6 +102,7 @@
 	"wikibase-property-footer": "",
 	"wikibase-claimview-snak-tooltip": "Enter a value corresponding to the Property named \"$1\". If the Property has no designated value or the actual value is not known, you can choose an alternative value type by clicking the icon before the input box.",
 	"wikibase-claimview-snak-new-tooltip": "After specifying a Property you can enter a corresponding value. If the Property has no designated value or the actual value is not known, you can choose an alternative value type by clicking the icon before the input box.",
+	"wikibase-referenceview-tabs-manual": "Manual",
 	"wikibase-statementview-rank-preferred": "Preferred rank",
 	"wikibase-statementview-rank-tooltip-preferred": "Valid and up-to-date value",
 	"wikibase-statementview-rank-normal": "Normal rank",
