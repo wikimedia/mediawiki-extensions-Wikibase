@@ -505,7 +505,18 @@
 
 				// Enter first item into the referenceview.
 				referenceview.enterNewItem();
+
+				var $tabs = $referenceview.parent();
+				$tabs.prepend(' <ul><li><a href="#manual">Manual</a></li></ul>' );
+				$referenceview.attr( 'id', 'manual' );
+				$tabs.addClass( 'tabs' );
+
+				$tabs.tabs({
+					active: 1
+				});
+
 			} ).done( this._drawReferencesCounter.bind( this ) );
+
 		},
 
 		/**
