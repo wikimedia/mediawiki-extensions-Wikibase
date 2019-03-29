@@ -21,6 +21,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
+	const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
+
 	/**
 	 * @var PropertyInfoStore
 	 */
@@ -106,6 +108,7 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
+		$this->cache->set( $this->getSinglePropertyCacheKey( $propertyId ), $info, $this->cacheDuration );
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 	}
 
@@ -140,9 +143,16 @@ class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 			]
 		);
 
+		$this->cache->delete( $this->getSinglePropertyCacheKey( $propertyId ) );
 		$this->cache->set( $this->cacheKey, $propertyInfo, $this->cacheDuration );
 
 		return true;
+	}
+
+	private function getSinglePropertyCacheKey( PropertyId $propertyId ) {
+		return $this->cacheKey
+			. self::SINGLE_PROPERTY_CACHE_KEY_SEPARATOR
+			. $propertyId->getSerialization();
 	}
 
 }
