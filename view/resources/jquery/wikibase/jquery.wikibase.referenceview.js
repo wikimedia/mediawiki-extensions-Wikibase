@@ -69,10 +69,13 @@
 				throw new Error( 'Required option not specified properly' );
 			}
 
+			this.enableTabs = mw.config.get( 'wbRefTabsEnabled' );
+
 			PARENT.prototype._create.call( this );
 
 			var self = this;
 			var listview;
+
 			this.$listview.listview( {
 				listItemAdapter: this.options.getListItemAdapter( function ( snaklistview ) {
 					listview.removeItem( snaklistview.element );
@@ -84,9 +87,40 @@
 				} ),
 				value: this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : []
 			} );
-			listview = this.$listview.data( 'listview' );
 
 			this._updateReferenceHashClass( this.value() );
+
+		},
+
+		/**
+		 * Creates tabs if reference tabs are enabled
+		 *
+		 * @private
+		 */
+		_createTabs: function () {
+			var manualSection,
+				manualLink,
+				manualLabel = mw.msg( 'wikibase-referenceview-tabs-manual' );
+
+			this.$manual = $( '<div>' ).addClass( 'wikibase-referenceview-manual' ).uniqueId();
+
+			manualSection = '#' + this.$manual.attr( 'id' );
+			manualLink = $( '<a />', {
+				href: manualSection,
+				text: manualLabel
+			} );
+			this.$tabButtons = $( '<ul>' ).append(
+				$( '<li>' ).append( manualLink )
+			);
+
+			this.$manual.append( this.$listview );
+			this.element.append( this.$tabButtons, this.$manual );
+
+			this.element.tabs();
+
+			// TODO: Figure out why templateParams classes in options obj doesn't work
+			this.element.addClass( 'wikibase-referenceview-tabs' );
+
 		},
 
 		/**
@@ -189,24 +223,34 @@
 			this._attachEditModeEventHandlers();
 
 			this._referenceRemover = this.options.getReferenceRemover( this.$heading );
-			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+
+			if ( this.enableTabs ) {
+				this._createTabs();
+				this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.$manual );
+			} else {
+				this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+			}
 
 			return this.$listview.data( 'listview' ).startEditing();
 		},
 
 		/**
-		 * Stops the widget's edit mode.
+		 * @private
 		 */
 		_stopEditing: function () {
+
 			this._detachEditModeEventHandlers();
 
 			this._referenceRemover.destroy();
 			this._referenceRemover = null;
+
 			this._snakListAdder.destroy();
 			this._snakListAdder = null;
 
-			// FIXME: There should be a listview::stopEditing method
-			this._stopEditingReferenceSnaks();
+			if ( this.enableTabs ) {
+				this._stopEditingTabs();
+			}
+
 			return $.Deferred().resolve().promise();
 		},
 
@@ -216,6 +260,19 @@
 		_stopEditingReferenceSnaks: function () {
 			var listview = this.$listview.data( 'listview' );
 			listview.value( this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : [] );
+		},
+
+		/**
+		 * @private
+		 */
+		_stopEditingTabs: function () {
+			if ( this.element.tabs() ) {
+				this.element.tabs( 'destroy' );
+			}
+			this.element.find( '*' ).removeClass( 'wikibase-referenceview-tabs' );
+			// Removes tabs with selector, as when this is template computed, this.$tabbuttons is null
+			this.element.find( 'ul' ).remove();
+			this.$tabButtons = null;
 		},
 
 		/**
