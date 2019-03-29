@@ -43,10 +43,10 @@ class ChangeNotificationJob extends Job {
 	 * @see      Job::factory.
 	 *
 	 * @param Title $title
-	 * @param array|bool $params Needs to have two keys: "repo": the id of the repository,
+	 * @param array $params Needs to have two keys: "repo": the id of the repository,
 	 *     "changeIds": array of change ids.
 	 */
-	public function __construct( Title $title, $params = false ) {
+	public function __construct( Title $title, array $params = [] ) {
 		parent::__construct( 'ChangeNotification', $title, $params );
 
 		Assert::parameterType( 'array', $params, '$params' );
