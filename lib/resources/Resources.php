@@ -38,7 +38,7 @@ return call_user_func( function() {
 			'scripts' => [
 				'wikibase.js',
 			],
-			'targets' => [ 'desktop', 'mobile' ],
+			'targets' => [ 'desktop', 'mobile' ]
 		],
 
 		'wikibase.buildErrorOutput' => $moduleTemplate + [

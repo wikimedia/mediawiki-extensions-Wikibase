@@ -230,25 +230,28 @@ div.wikibase-snakview .wikibase-snakview-value-container {
 	min-height: 1.6em; /* reduces jumping when clicking edit */
 }
 
-.wikibase-snakview {
-	.wikibase-snakview-value,
-	.wikibase-snakview-indicators {
-		display: inline;
-	}
+.wikibase-referenceview .wikibase-referenceview-listview {
+	padding-top: 0.3em;
+}
 
-	.wikibase-snakview-value .valueview {
-		display: inherit; /* inline from above or block from below */
-	}
+.wikibase-referenceview .wikibase-referenceview-heading {
+	min-height: 1.5em;
+	padding: 5px;
+	background-color: #eaecf0;
+	display: none;
+}
 
-	&.wb-edit {
-		.wikibase-snakview-value {
-			display: block;
-		}
+.wikibase-referenceview .wikibase-referenceview-heading .wikibase-toolbar-container {
+	top: 5px;
+}
 
-		.wikibase-snakview-indicators {
-			display: none;
-		}
-	}
+.wikibase-referenceview.wb-edit {
+	background-color: #eaf3ff;
+}
+
+.wikibase-referenceview.wb-edit > .wikibase-referenceview-heading {
+	background-color: #b6c8ec;
+	display: block;
 }
 
 div .wikibase-snakview-value span.error.wb-format-error {
@@ -542,21 +545,21 @@ span.wikibase-snakview-variation-novaluesnak {
 	background: #f8f9fa;
 	overflow: hidden;
 	margin-bottom: 0.5em;
-}
 
-.wikibase-referenceview .wikibase-referenceview-listview {
-	padding-top: 0.3em;
-}
+	.wikibase-referenceview-listview {
+		padding-top: 0.3em;
+	}
 
-.wikibase-referenceview .wikibase-referenceview-heading {
-	min-height: 1.5em;
-	padding: 5px;
-	background-color: #eaecf0;
-	display: none;
-}
+	.wikibase-referenceview-heading {
+		min-height: 1.5em;
+		padding: 5px;
+		background-color: #eaecf0;
+		display: none;
 
-.wikibase-referenceview .wikibase-referenceview-heading .wikibase-toolbar-container {
-	top: 5px;
+		.wikibase-toolbar-container {
+			top: 5px;
+		}
+	}
 }
 
 .wikibase-referenceview.wb-edit {
@@ -654,6 +657,85 @@ span.wikibase-snakview-variation-novaluesnak {
 }
 
 /***** /REFERENCES *****/
+
+/***** TABBED REFERENCES *****/
+
+.ui-tabs-panel > .wikibase-toolbar-container {
+	position: static;
+	width: auto;
+}
+
+/* "add" link in one reference's snak list in tabs format */
+.wikibase-referenceview-tabs > .wikibase-addtoolbar-container {
+	float: right;
+	margin-bottom: 1em;
+	position: static;
+	padding-right: 15em; // hack
+}
+
+/* Styles for tabbed references */
+.wikibase-referenceview.ui-widget-content {
+	font-size: 100%;
+	background-image: none;
+}
+
+/* Tab link style */
+.ui-state-default > .ui-tabs-anchor.wikibase-referenceview-tabs {
+	color: #000;
+}
+
+/* Active tab link text style */
+.ui-tabs-active > .ui-tabs-anchor.wikibase-referenceview-tabs {
+	font-weight: bold;
+}
+
+/* Make tabs more visually defined from div */
+li.wikibase-referenceview-tabs.ui-tabs.ui-tabs-nav {
+	margin-left: 0.4em;
+}
+
+/* Style for tabs */
+li.ui-state-default.wikibase-referenceview-tabs {
+	border: 0;
+	background-color: #b6c8ec;
+	background-image: none;
+}
+
+/* Style for active tab */
+li.ui-state-default.ui-tabs-active.ui-state-active.wikibase-referenceview-tabs {
+	background-color: #eaf3ff;
+}
+
+/* Style for disabled tab */
+li.ui-state-default.ui-tabs-active.ui-state-disabled.wikibase-referenceview-tabs {
+	border: 0;
+}
+
+/* Clear tabs ui styling */
+div.listview-item.wikibase-referenceview.ui-tabs.ui-widget.ui-widget-content {
+	padding: 0;
+	border-radius: 0;
+	border: 0;
+}
+
+/* Remove padding so snaks line up with other buttons */
+div.ui-tabs-panel.ui-widget-content.wikibase-referenceview-tabs {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* Add padding around tabs */
+ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.wikibase-referenceview-tabs {
+	padding-left: 10px;
+	padding-top: 5px;
+}
+
+.wikibase-referenceview-tabs.ui-widget-header {
+	border: 0;
+	font-size: 100%;
+}
+
+/***** /TABBED REFERENCES *****/
 
 /***** INDICATORS *****/
 
