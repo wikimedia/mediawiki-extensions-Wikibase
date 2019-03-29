@@ -637,8 +637,7 @@
 		},
 
 		_stopEditing: function ( dropValue ) {
-			// FIXME: Should not be necessary if _setOption would do the right thing for values
-			this._recreateReferences();
+			this._stopEditingReferences( dropValue );
 
 			if ( !dropValue ) {
 				this.element.find( '.wikibase-snakview-indicators' ).empty();
@@ -659,6 +658,17 @@
 				? this.options.value.getReferences().toArray() : [] );
 
 			this._drawReferencesCounter();
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {boolean} [dropValue=false]
+		 */
+		_stopEditingReferences: function ( dropValue ) {
+			// FIXME: Should not be necessary if _setOption would do the right thing for values
+			this._recreateReferences();
+			this._referencesListview.stopEditing( dropValue );
 		},
 
 		/**
