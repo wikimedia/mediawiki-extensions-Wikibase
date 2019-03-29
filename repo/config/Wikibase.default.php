@@ -282,6 +282,9 @@ return [
 
 	'useKartographerMaplinkInWikitext' => false,
 
+	// Temporary, see: T199197
+	'enableRefTabs' => false,
+
 	/**
 	 * @note This config options is primarily added for Wikidata transition use-case and can be
 	 * considered temporary. It could be removed in the future with no warning.
