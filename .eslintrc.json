@@ -5,6 +5,7 @@
 		"wikimedia/jquery"
 	],
 	"globals": {
+		"mediaWiki": false,
 		"mw": false,
 		"module": false,
 		"dataTypes": false,
