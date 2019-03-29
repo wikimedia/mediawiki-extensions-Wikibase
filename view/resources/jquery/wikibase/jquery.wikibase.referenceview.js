@@ -86,6 +86,18 @@
 			} );
 			listview = this.$listview.data( 'listview' );
 
+			var $tabButtons = $( '<ul><li><a href="#manual">Manual</a></li><li><a href="#citoid">Citoid</a></li></ul>' ),
+				$citoid = $( '<div id="citoid">CITOID!</div>' );
+
+			this.$manual = $( '<div id="manual">' );
+
+			this.$manual.append( this.$listview );
+			this.element.append( $tabButtons, this.$manual, $citoid );
+
+			this.element.addClass( 'tabs' ).tabs( { active: 0 } );
+
+			// this.$manual.removeClass( 'ui-tabs-panel' );
+
 			this._updateReferenceHashClass( this.value() );
 		},
 
@@ -189,7 +201,7 @@
 			this._attachEditModeEventHandlers();
 
 			this._referenceRemover = this.options.getReferenceRemover( this.$heading );
-			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.$manual );
 
 			return this.$listview.data( 'listview' ).startEditing();
 		},
