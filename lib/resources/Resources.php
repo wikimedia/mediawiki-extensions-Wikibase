@@ -39,6 +39,9 @@ return call_user_func( function() {
 				'wikibase.js',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
+			'dependencies' => [
+				'jquery.ui.tabs',
+			],
 		],
 
 		'wikibase.buildErrorOutput' => $moduleTemplate + [

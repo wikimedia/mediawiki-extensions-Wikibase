@@ -140,6 +140,11 @@ h2.wb-section-heading {
 	width: auto;
 }
 
+.ui-tabs-panel > .wikibase-toolbar-container {
+	position: static;
+	width: auto;
+}
+
 .wb-empty {
 	color: #a2a9b1;
 }
@@ -542,21 +547,21 @@ span.wikibase-snakview-variation-novaluesnak {
 	background: #f8f9fa;
 	overflow: hidden;
 	margin-bottom: 0.5em;
-}
 
-.wikibase-referenceview .wikibase-referenceview-listview {
-	padding-top: 0.3em;
-}
+	.wikibase-referenceview-listview {
+		padding-top: 0.3em;
+	}
 
-.wikibase-referenceview .wikibase-referenceview-heading {
-	min-height: 1.5em;
-	padding: 5px;
-	background-color: #eaecf0;
-	display: none;
-}
+	.wikibase-referenceview-heading {
+		min-height: 1.5em;
+		padding: 5px;
+		background-color: #eaecf0;
+		display: none;
 
-.wikibase-referenceview .wikibase-referenceview-heading .wikibase-toolbar-container {
-	top: 5px;
+		.wikibase-toolbar-container {
+			top: 5px;
+		}
+	}
 }
 
 .wikibase-referenceview.wb-edit {
