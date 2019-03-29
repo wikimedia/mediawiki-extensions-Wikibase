@@ -618,7 +618,7 @@ span.wikibase-snakview-variation-novaluesnak {
 	position: relative;
 	line-height: 1.2;
 	min-height: 1.7em;
-	padding-top: 0;
+	padding-top: 5px; // line up with remove toolbar which is also offset 5px
 	padding-bottom: 0.3em;
 }
 
@@ -654,6 +654,76 @@ span.wikibase-snakview-variation-novaluesnak {
 }
 
 /***** /REFERENCES *****/
+
+/***** TABBED REFERENCES *****/
+
+/* Styles for tabbed references */
+
+/* Clear default tabs ui styling */
+div.listview-item.wikibase-referenceview-tabs.ui-tabs.ui-widget.ui-widget-content {
+	font-size: 100%;
+	background-image: none;
+	padding: 0;
+	border-radius: 0;
+	border: 0;
+}
+
+.wikibase-referenceview-tabs {
+
+	/* Remove padding so snak remove button lines up with other buttons */
+	div.ui-tabs-panel.ui-widget-content {
+		padding-right: 0;
+	}
+
+	/* Fix position of "add" link for new snaks in one reference's snak */
+	.wikibase-addtoolbar-container {
+		float: right;
+		margin-bottom: 1em;
+		position: static;
+		padding-right: 15em;
+		width: auto;
+	}
+
+	/* Remove default border for tabs */
+	.ui-widget-header {
+		border: 0;
+	}
+
+	/* Tab link style */
+	.ui-state-default > .ui-tabs-anchor {
+		color: #000;
+	}
+
+	/* Active tab link text style */
+	.ui-tabs-active > .ui-tabs-anchor {
+		font-weight: bold;
+	}
+
+	/* Add padding around tabs */
+	ul.ui-tabs-nav.ui-widget-header {
+		padding-left: 10px;
+		padding-top: 5px;
+	}
+
+	/* Make tabs more visually defined from div */
+	li.ui-tabs.ui-tabs-nav {
+		margin-left: 0.5em;
+	}
+
+	/* Style for tabs */
+	li.ui-state-default {
+		border: 0;
+		background-color: #b6c8ec;
+		background-image: none;
+
+		/* Style for active tab */
+		&.ui-tabs-active.ui-state-active {
+			background-color: #eaf3ff;
+		}
+	}
+}
+
+/***** /TABBED REFERENCES *****/
 
 /***** INDICATORS *****/
 
