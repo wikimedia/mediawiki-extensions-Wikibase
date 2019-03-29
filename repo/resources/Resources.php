@@ -60,6 +60,17 @@ return call_user_func( function() {
 			},
 		],
 
+		// Temporary, see: T199197
+		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
+			'class' => MediaWikiConfigModule::class,
+			'getconfigvalueprovider' => function () {
+				return WikibaseRepo::getDefaultInstance()->getSettingsValueProvider(
+					'wbRefTabsEnabled',
+					'enableRefTabs'
+				);
+			},
+		],
+
 		'mw.config.values.wbTabularDataStorageApiEndpoint' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
 			'getconfigvalueprovider' => function () {
