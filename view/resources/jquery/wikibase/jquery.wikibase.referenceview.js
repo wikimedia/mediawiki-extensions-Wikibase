@@ -71,8 +71,9 @@
 
 			PARENT.prototype._create.call( this );
 
-			var self = this;
-			var listview;
+			var self = this,
+				listview;
+
 			this.$listview.listview( {
 				listItemAdapter: this.options.getListItemAdapter( function ( snaklistview ) {
 					listview.removeItem( snaklistview.element );
@@ -85,6 +86,16 @@
 				value: this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : []
 			} );
 			listview = this.$listview.data( 'listview' );
+
+			this.$tabButtons = $( '<ul class="wikibase-referenceview"><li><a href="#manual">Manual</a></li></ul>' );
+
+			this.$manual = $( '<div class="wikibase-referenceview wikibase-referencepanel wikibase-referenceview-manual" id="manual">' );
+
+			this.$manual.append( this.$listview );
+			this.element.append( this.$tabButtons, this.$manual );
+
+			this.element.tabs();
+			this.element.css( 'background-image', 'none' ); // CSS hack - TODO REMOVE
 
 			this._updateReferenceHashClass( this.value() );
 		},
@@ -189,7 +200,7 @@
 			this._attachEditModeEventHandlers();
 
 			this._referenceRemover = this.options.getReferenceRemover( this.$heading );
-			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.$manual );
 
 			return this.$listview.data( 'listview' ).startEditing();
 		},
