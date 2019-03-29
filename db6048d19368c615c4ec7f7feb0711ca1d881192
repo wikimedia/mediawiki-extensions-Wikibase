@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77e6af70_551f4626",
+        "filename": "lib/includes/Store/Sql/PropertyTermStoreWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-29T21:08:53Z",
+      "side": 1,
+      "message": "DBAccessBase: not keen on code reuse via inheritance, esp from a framework class.",
+      "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14bc9440_c9c792ed",
+        "filename": "lib/includes/Store/Sql/PropertyTermStoreWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-03-29T21:08:53Z",
+      "side": 1,
+      "message": "If we really have to create an implementation of EntityTermStoreWriter then I think it would be good to have it just be a facade. That way PropertyTermStoreWriter, or whatever it gets called, does not need to deal with getting something of type EntityDocument.",
+      "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
