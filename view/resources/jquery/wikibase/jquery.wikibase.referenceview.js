@@ -86,6 +86,16 @@
 			} );
 			listview = this.$listview.data( 'listview' );
 
+			var $tabButtons = $( '<ul class="wikibase-referenceview"><li><a href="#manual">Manual</a></li></ul>' );
+
+			this.$manual = $( '<div class="wikibase-referenceview wikibase-referencepanel wikibase-referenceview-manual" id="manual">' );
+
+			this.$manual.append( this.$listview );
+			this.element.append( $tabButtons, this.$manual );
+
+			this.element.addClass( 'tabs' ).tabs();
+			this.element.css( 'background-image', 'none' ); // CSS hack - TODO REMOVE
+
 			this._updateReferenceHashClass( this.value() );
 		},
 
@@ -189,7 +199,7 @@
 			this._attachEditModeEventHandlers();
 
 			this._referenceRemover = this.options.getReferenceRemover( this.$heading );
-			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.$manual );
 
 			return this.$listview.data( 'listview' ).startEditing();
 		},
