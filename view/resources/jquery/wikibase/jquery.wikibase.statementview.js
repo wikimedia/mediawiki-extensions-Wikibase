@@ -637,7 +637,6 @@
 		},
 
 		_stopEditing: function ( dropValue ) {
-
 			if ( !dropValue ) {
 				this.element.find( '.wikibase-snakview-indicators' ).empty();
 			}
