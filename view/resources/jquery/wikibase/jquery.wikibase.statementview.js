@@ -506,6 +506,7 @@
 				// Enter first item into the referenceview.
 				referenceview.enterNewItem();
 			} ).done( this._drawReferencesCounter.bind( this ) );
+
 		},
 
 		/**

@@ -118,7 +118,7 @@ h2.wb-section-heading {
 
 .wikibase-entityview textarea {
 	font-family: inherit;
-}
+ }
 
 /* horizontal rule below the description */
 .wb-hr {
@@ -136,6 +136,11 @@ h2.wb-section-heading {
 }
 
 .wikibase-entityview .wikibase-toolbar-container > .wikibase-toolbar-container {
+	position: static;
+	width: auto;
+}
+
+.ui-tabs-panel > .wikibase-toolbar-container {
 	position: static;
 	width: auto;
 }
@@ -747,3 +752,19 @@ table.diff table.wb-details td {
 }
 
 /********** /PAGEIMAGE **********/
+
+/* References in tabs */
+.ui-tabs-panel {
+	background: #eaf3fe;
+	background-image: none;
+}
+
+.ui-tabs-content {
+	background: #eaf3fe;
+	background-image: none;
+}
+
+.ui-tabs-panel .ui-widget-content .ui-corner-bottom {
+	background: #eaf3fe;
+	background-image: none;
+}
