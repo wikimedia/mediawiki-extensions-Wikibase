@@ -86,6 +86,16 @@
 			} );
 			listview = this.$listview.data( 'listview' );
 
+			var $tabButtons = $( '<ul class="reference"><li><a href="#manual">Manual</a></li></ul>' );
+
+			this.$manual = $( '<div id="manual">' );
+
+			this.$manual.append( this.$listview );
+			this.element.append( $tabButtons, this.$manual );
+
+			// Needs to be done AFTER all new li/divs have been created, unfortunately, making it difficult to dynamically add tabs
+			//this.element.addClass( 'tabs' ).tabs( { active: 0 } );
+
 			this._updateReferenceHashClass( this.value() );
 		},
 
@@ -189,7 +199,7 @@
 			this._attachEditModeEventHandlers();
 
 			this._referenceRemover = this.options.getReferenceRemover( this.$heading );
-			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
+			this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.$manual );
 
 			return this.$listview.data( 'listview' ).startEditing();
 		},
