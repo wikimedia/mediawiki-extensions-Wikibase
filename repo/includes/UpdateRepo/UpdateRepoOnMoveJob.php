@@ -48,9 +48,9 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	 * @see UpdateRepoJob::__construct
 	 *
 	 * @param Title $title
-	 * @param array|bool $params
+	 * @param array $params
 	 */
-	public function __construct( Title $title, $params = false ) {
+	public function __construct( Title $title, array $params = [] ) {
 		parent::__construct( 'UpdateRepoOnMove', $title, $params );
 
 		$this->initRepoJobServicesFromGlobalState();
