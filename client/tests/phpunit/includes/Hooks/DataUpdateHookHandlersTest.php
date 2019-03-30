@@ -110,7 +110,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 				->with( $this->callback( function ( $job ) use ( $params, $title ) {
 					$jobParams = $job->getParams();
 					// Unrelated parameter used by mw core to tie together logging of jobs
-					unset( $jobParams['requestId'] );
+					$jobParams = array_intersect_key( $jobParams, $params );
 
 					self::assertEquals( 'wikibase-addUsagesForPage', $job->getType() );
 					self::assertSame( $title, $job->getTitle() );
