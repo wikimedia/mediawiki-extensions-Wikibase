@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"DonCamillo"
+			"DonCamillo",
+			"Ammarpad"
 		]
 	},
 	"wikibase-editlinks": "Gyara mahaɗa",
 	"wikibase-rc-hide-wikidata-hide": "Ɓoye",
-	"wikibase-rc-hide-wikidata-show": "Nuna"
+	"wikibase-rc-hide-wikidata-show": "Nuna",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Gyaran {{WBREPONAME}}"
 }

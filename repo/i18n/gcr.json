@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"LeGuyanaisPure"
+			"LeGuyanaisPure",
+			"Léon973"
 		]
 	},
-	"wikibase-edit": "chanjé",
+	"wikibase-edit": "modifyé",
 	"wikibase-add": "ajouté",
 	"wikibase-label-empty": "Pa di libélé défini",
 	"wikibase-description-empty": "Pyès dèskripsyon fourni",
