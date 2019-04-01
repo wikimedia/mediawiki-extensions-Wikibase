@@ -87,6 +87,24 @@
       "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e89bcb23_c678815f",
+        "filename": "lib/includes/Store/Sql/PropertyTermStoreWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-01T20:28:55Z",
+      "side": 1,
+      "message": "Maybe we have different understanding for facades (or maybe not). A facade is an interface that allows you indirect access to several underlying interfaces. In our case, we need interfaces and implementation for writing, reading and deleting and several implementations eventually for different targets (Db, elastic, Memcached .. etc).\n\nThe facade will come into the picture to combine those different interfaces into one (possibly a simplified one), That facade could have several methods per type, or fewer methods by taking advantage of their abstraction (like EntityDocument and EntityId so far in our case).",
+      "parentUuid": "35e2e20d_65df29d8",
+      "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
