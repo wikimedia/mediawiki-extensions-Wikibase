@@ -196,6 +196,10 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function addAll( /* iterable */ $terms ) {
+		if ( !is_array( $terms ) && !( $terms instanceof \Traversable ) ) {
+			throw new InvalidArgumentException( '$terms must be iterable' );
+		}
+
 		foreach ( $terms as $term ) {
 			if ( !( $term instanceof Term ) ) {
 				throw new InvalidArgumentException( 'Every element in $terms must be an instance of Term' );

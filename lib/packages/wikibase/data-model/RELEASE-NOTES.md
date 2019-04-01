@@ -1,5 +1,10 @@
 # Wikibase DataModel release notes
 
+## Version 9.2.0 (dev)
+
+* `TermList` now throws `InvalidArgumentException` when given non-iterable rather than failing silently
+* `SiteLinkList` now throws `InvalidArgumentException` when given non-iterable rather than failing silently
+
 ## Version 9.1.0 (2019-01-24)
 
 * Raised minimum PHP version to 7.0 or HHVM

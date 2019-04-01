@@ -346,4 +346,9 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testWhenProvidingNonIterable_constructorThrowsException() {
+		$this->setExpectedException( InvalidArgumentException::class );
+		new SiteLinkList( new SiteLink( 'enwiki', 'foo' ) );
+	}
+
 }

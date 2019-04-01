@@ -479,4 +479,11 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->addAll( [ 'no-a-term' ] );
 	}
 
+	public function testWhenProvidingNonIterable_addAllThrowsException() {
+		$list = new TermList( [] );
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$list->addAll( new Term( 'en', 'foo' ) );
+	}
+
 }
