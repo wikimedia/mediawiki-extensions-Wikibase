@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a37446c6_cdb52fba",
+        "filename": "lib/includes/Store/Sql/PropertyTermStoreWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-01T19:58:02Z",
+      "side": 1,
+      "message": "yeap me neither .. I\u0027m just starting with the old one (TermSqlIndex thing) and move there bit by bit",
+      "parentUuid": "77e6af70_551f4626",
+      "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14bc9440_c9c792ed",
         "filename": "lib/includes/Store/Sql/PropertyTermStoreWriter.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2019-03-29T21:08:53Z",
       "side": 1,
       "message": "If we really have to create an implementation of EntityTermStoreWriter then I think it would be good to have it just be a facade. That way PropertyTermStoreWriter, or whatever it gets called, does not need to deal with getting something of type EntityDocument.",
+      "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05ebf7db_22efa100",
+        "filename": "lib/includes/Store/Sql/PropertyTermStoreWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-01T19:58:02Z",
+      "side": 1,
+      "message": "I didn\u0027t think of that interface as being the facade\u0027s interface.. nor anyone else when we were discussing it.\n\nA facade will later combine the few different methods we have around writing, reading and clearing terms for different entities. so I would expect to have a few methods for the different cases, such as `savePropertyTerms(Property $p)` `saveItemTerms(Item $i)` `getPropertyTerms(PropertyId $pid)` `getItemTerms(ItemId $iid)` and so on.",
+      "parentUuid": "14bc9440_c9c792ed",
       "revId": "db6048d19368c615c4ec7f7feb0711ca1d881192",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
