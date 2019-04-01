@@ -88,6 +88,7 @@
 	"wikibase-pageinfo-entity-usage": "Аб’екты {{WBREPONAME}}, якія ўжываюцца на гэтай старонцы",
 	"wikibase-pageinfo-entity-usage-S": "Спасылка на сайт",
 	"wikibase-pageinfo-entity-usage-L": "Некаторыя меткі",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Метка: $1",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
