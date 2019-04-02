@@ -592,8 +592,18 @@ final class RepoHooks {
 			// To be verified that this keeps working once T200570 is done in MediaWiki itself.
 			$slots = $params['slots'] ?? [ SlotRecord::MAIN ];
 
-			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-			$entityTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+			$entityTypes = $wikibaseRepo->getEnabledEntityTypes();
+
+			// If the entity type is not from the local source, don't check anything else
+			if (
+				$wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType(
+					$wikibaseRepo->getEntityNamespaceLookup()->getEntityType( $namespace )
+				)->getDatabaseName() !== false
+			) {
+				return true;
+			}
 
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */
