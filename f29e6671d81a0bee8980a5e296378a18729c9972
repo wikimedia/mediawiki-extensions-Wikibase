@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "42f7f1ca_19416f3f",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T21:59:08Z",
+      "side": 1,
+      "message": "Is this a Wikibase coding convention? I have found on very rare occasions that a test did this, and always assumed it was a mistake or oversight to use $message as a way to make text appear when the test fails.\n\nInstead both in PHPUnit and other test frameworks, I\u0027ve always seen and myself used it to describe the subject and/or expected outcome.\n\nAnyway, happy to change. Just beware that it is different from MediaWiki core and most other extensions. Just want to double check before I change it.",
+      "parentUuid": "eb94d808_d950441c",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3b27ddc_a215c82c",
         "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
         "patchSetId": 3
