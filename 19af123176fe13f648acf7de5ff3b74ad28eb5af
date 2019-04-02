@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1eefaaaa_5ec17358",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T22:00:47Z",
+      "side": 1,
+      "message": "testGetScript_structure asserts the structure and \"wbSiteDetails\" response.\n\ntestGetScript_details asserts the actual \"details\" part of \"wbSiteDetails\".\n\nI could call this \"data\", \"info\" or \"content\" as well. Any preferences?",
+      "parentUuid": "9079f540_b742b7d8",
+      "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "316f6b59_3b8fee91",
         "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
         "patchSetId": 5
