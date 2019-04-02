@@ -49,7 +49,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		// save term
 		$termCache->clear();
-		$termCache->saveTermsOfEntity( $item );
+		$termCache->saveTerms( $item );
 
 		// remove search key
 		$dbw = wfGetDB( DB_MASTER );
