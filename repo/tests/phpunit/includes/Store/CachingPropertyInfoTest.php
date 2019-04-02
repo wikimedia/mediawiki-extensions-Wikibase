@@ -74,10 +74,7 @@ class CachingPropertyInfoTest extends \MediaWikiTestCase {
 			'group'
 		);
 		$lookup = new CachingPropertyInfoLookup(
-			$table,
-			$cache,
-			3600,
-			'group'
+			$table, $cache, 'group', 3600
 		);
 
 		return [ $table, $cache, $store, $lookup ];
