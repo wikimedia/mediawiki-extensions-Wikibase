@@ -22,6 +22,29 @@
       "revId": "a6e6e4882f28b54ff7f734cbde521dde7f0ea2be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0422cb3d_2ab1fb26",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleWorkerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T22:02:48Z",
+      "side": 0,
+      "message": "(ref*)",
+      "range": {
+        "startLine": 162,
+        "startChar": 5,
+        "endLine": 170,
+        "endChar": 66
+      },
+      "revId": "a6e6e4882f28b54ff7f734cbde521dde7f0ea2be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

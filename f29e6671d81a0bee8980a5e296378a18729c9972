@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "63f5ce9d_a821bca0",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T22:02:48Z",
+      "side": 1,
+      "message": "Not 100% sure. This is copied as-is from SitesModuleWorkerTest. I consider it out of scope of this commit to change what the tests expect.",
+      "parentUuid": "49f9d150_72f96560",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3d191fc4_f6cfc2f9",
         "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
         "patchSetId": 3
