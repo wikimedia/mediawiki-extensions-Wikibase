@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d202d1d4_55f75b94",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T13:06:27Z",
+      "side": 1,
+      "message": "so you mean we should do it now for this one and others when needed, right?",
+      "parentUuid": "881fead7_90ed8f23",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 85
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cc14da3_06430bc7",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2019-04-02T12:18:57Z",
       "side": 1,
       "message": "you can just go with \"wbxl_text_id\", it should be fine. Index and columns can have the same name, it\u0027s actually cleaner this way",
+      "range": {
+        "startLine": 105,
+        "startChar": 18,
+        "endLine": 105,
+        "endChar": 21
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15fac81_b44fffcf",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T13:06:27Z",
+      "side": 1,
+      "message": "same as reply below",
+      "parentUuid": "1cc14da3_06430bc7",
       "range": {
         "startLine": 105,
         "startChar": 18,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ec952440_b1881c6d",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T13:06:27Z",
+      "side": 1,
+      "message": "I have no strong opinion, but I prefer index names to follow convention \u0027tablename_columnnames\u0027 .. here need to be fixed by adding `_text` for that convention.. but we can also go with yours",
+      "parentUuid": "655059dc_542048c2",
+      "range": {
+        "startLine": 116,
+        "startChar": 25,
+        "endLine": 116,
+        "endChar": 28
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ed29780_05dc0c6b",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2019-04-02T12:18:57Z",
       "side": 1,
       "message": "wby?",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 28
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77a98cd1_d0d9a433",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T13:06:27Z",
+      "side": 1,
+      "message": "same as reply above",
+      "parentUuid": "3ed29780_05dc0c6b",
       "range": {
         "startLine": 126,
         "startChar": 25,
