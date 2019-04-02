@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\TermIndex;
@@ -24,7 +25,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MockTermIndex implements TermIndex, LabelConflictFinder {
+class MockTermIndex implements TermIndex, LabelConflictFinder, EntityTermStoreWriter {
 
 	/**
 	 * @var TermIndexEntry[]
@@ -191,7 +192,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @return bool
 	 * @throws Exception always
 	 */
-	public function saveTermsOfEntity( EntityDocument $entity ) {
+	public function saveTerms( EntityDocument $entity ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
@@ -201,7 +202,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @return bool
 	 * @throws Exception always
 	 */
-	public function deleteTermsOfEntity( EntityId $entityId ) {
+	public function deleteTerms( EntityId $entityId ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
