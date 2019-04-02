@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "26e1537f_0c8cfe49",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T22:06:27Z",
+      "side": 1,
+      "message": "Good point. It is testing getScript not makeScript.\n\nMy idea was that this function is to \"test makeScript caching\" - the caching of makeScript output. But I agree that is confusing and inconsistent, I do not know why I chose it :)",
+      "parentUuid": "316f6b59_3b8fee91",
+      "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bb18127_22fea68e",
         "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
         "patchSetId": 5
@@ -65,6 +83,30 @@
       "writtenOn": "2019-04-02T09:58:49Z",
       "side": 1,
       "message": "The method should is actually testing ::getScript, but reaching in to probe ::makeScript` when it is protected, and probably should be private in the first place if it weren\u0027t for this test.\n\nis it possible to test against\u0027 cache Mock here? like instead of calling twice and check for one call to `makeScript`, you\u0027d assert that the cache has the entry after the first call. That\u0027s not the ideal, but at least it keeps the test at the boundaries of the method.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 52
+      },
+      "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f54a935a_d6254a14",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T22:06:27Z",
+      "side": 1,
+      "message": "I\u0027m opposed to testing side-effects. My experience has taught me that it leads to tests which don\u0027t carry much meaning or confidence because they 1) duplicate the source logic and thus require more maintenance and 2) might not fail when the behaviour is broken.\n\nIt is imho irrelevant what happens to $cache. What matters is that the computation is not repeated. Hence I am asserting the observable behaviour and contract that the logic is meant to fulfil.",
+      "parentUuid": "4bb18127_22fea68e",
       "range": {
         "startLine": 117,
         "startChar": 0,
