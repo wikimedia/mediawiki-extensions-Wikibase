@@ -42,8 +42,7 @@
 		"psr-4": {
 			"Wikibase\\DataModel\\Fixtures\\": "tests/fixtures",
 			"Wikibase\\DataModel\\Tests\\": [
-				"tests/unit",
-				"tests/component"
+				"tests/unit"
 			]
 		}
 	},
