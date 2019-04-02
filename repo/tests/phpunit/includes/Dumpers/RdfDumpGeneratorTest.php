@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -157,37 +156,24 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @return RdfDumpGenerator
 	 * @throws MWException
 	 */
-	protected function newDumpGenerator( $flavor, array $entities = [], array $redirects = [] ) {
+	protected function newDumpGenerator( $flavor, array $entityRevisions = [], array $redirects = [] ) {
 		$out = fopen( 'php://output', 'w' );
 
-		$entityLookup = $this->getMock( EntityLookup::class );
 		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
 
 		$dataTypeLookup = $this->getTestData()->getMockRepository();
 
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $entities, $redirects ) {
+		$entityRevisionLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $redirects ) {
 				$key = $id->getSerialization();
 
 				if ( isset( $redirects[$key] ) ) {
 					throw new RevisionedUnresolvedRedirectException( $id, $redirects[$key] );
 				}
 
-				return $entities[$key] ?? null;
+				return $entityRevisions[$key] ?? null;
 			} ) );
-
-		$entityRevisionLookup->expects( $this->any() )
-			->method( 'getEntityRevision' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $entityLookup ) {
-				/** @var EntityLookup $entityLookup */
-				$entity = $entityLookup->getEntity( $id );
-				if ( !$entity ) {
-					return null;
-				}
-				return new EntityRevision( $entity, 12, wfTimestamp( TS_MW, 1000000 ) );
-			}
-		) );
 
 		$siteLookup = $this->getSiteLookup();
 
@@ -237,9 +223,9 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 */
 	public function testGenerateDump( array $ids, $flavor, $dumpname ) {
 		$jsonTest = new JsonDumpGeneratorTest();
-		$entities = $jsonTest->makeEntities( $ids );
+		$entityRevisions = $jsonTest->makeEntityRevisions( $ids );
 		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
-		$dumper = $this->newDumpGenerator( $flavor, $entities, $redirects );
+		$dumper = $this->newDumpGenerator( $flavor, $entityRevisions, $redirects );
 		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
@@ -264,14 +250,14 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @param string $dumpname
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
-		$entities = [];
+		$entityRevisions = [];
 
 		foreach ( $ids as $id ) {
 			$id = $id->getSerialization();
-			$entities[$id] = $this->getTestData()->getEntity( $id );
+			$entityRevisions[$id] = new EntityRevision( $this->getTestData()->getEntity( $id ), 12, '19700112134640' );
 		}
 
-		$dumper = $this->newDumpGenerator( 'full-dump', $entities );
+		$dumper = $this->newDumpGenerator( 'full-dump', $entityRevisions );
 		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );

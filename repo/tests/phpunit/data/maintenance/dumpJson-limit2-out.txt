@@ -1,4 +1,4 @@
 [
-{"type":"item","id":"Q1","labels":{},"descriptions":{},"aliases":{},"claims":{},"sitelinks":{}},
-{"type":"property","datatype":"string","id":"P1","labels":{},"descriptions":{},"aliases":{},"claims":{}}
+{"type":"item","id":"Q1","labels":{},"descriptions":{},"aliases":{},"claims":{},"sitelinks":{},"lastrevid":1},
+{"type":"property","datatype":"string","id":"P1","labels":{},"descriptions":{},"aliases":{},"claims":{},"lastrevid":2}
 ]

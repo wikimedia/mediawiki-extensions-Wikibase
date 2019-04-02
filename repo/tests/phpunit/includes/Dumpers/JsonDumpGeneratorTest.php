@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use MWContentSerializationException;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +16,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
@@ -63,19 +63,20 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param EntityId[] $ids
 	 *
-	 * @return EntityDocument[]
+	 * @return EntityRevision[]
 	 */
-	public function makeEntities( array $ids ) {
-		$entities = [];
+	public function makeEntityRevisions( array $ids ) {
+		$entityRevisions = [];
 
 		foreach ( $ids as $id ) {
 			$entity = $this->makeEntity( $id );
+			$entityRevision = new EntityRevision( $entity, 12, '19700112134640' );
 
 			$key = $id->getSerialization();
-			$entities[$key] = $entity;
+			$entityRevisions[$key] = $entityRevision;
 		}
 
-		return $entities;
+		return $entityRevisions;
 	}
 
 	/**
@@ -111,12 +112,12 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		$serializer = $this->serializerFactory->newEntitySerializer();
 
-		$entities = $this->makeEntities( $ids );
+		$entityRevisions = $this->makeEntityRevisions( $ids );
 
-		$entityLookup = $this->getMock( EntityLookup::class );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
+		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $missingIds, $redirectedIds ) {
 				if ( in_array( $id, $missingIds ) ) {
 					return null;
 				}
@@ -125,12 +126,12 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 				}
 
 				$key = $id->getSerialization();
-				return $entities[$key];
+				return $entityRevisions[$key];
 			} ) );
 
 		return new JsonDumpGenerator(
 			$out,
-			$entityLookup,
+			$entityRevisionLookup,
 			$serializer,
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup()
@@ -211,7 +212,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider idProvider
 	 */
-	public function testGenerateDump_HandlesEntityLookupException( array $ids ) {
+	public function testGenerateDump_HandlesEntityRevisionLookupException( array $ids ) {
 		$ex = new EntityLookupException( new ItemId( 'Q2' ), 'Whatever' );
 		$jsonDumper = $this->getJsonDumperWithExceptionHandler( $ids, $ex );
 		$pager = $this->makeIdPager( $ids );
@@ -225,13 +226,13 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getJsonDumperWithExceptionHandler( array $ids, Exception $ex ) {
-		$entityLookup = $this->getEntityLookupThrows( $ex );
+		$entityRevisionLookup = $this->getEntityRevisionLookupThrows( $ex );
 		$out = fopen( 'php://output', 'w' );
 		$serializer = $this->serializerFactory->newItemSerializer();
 
 		$jsonDumper = new JsonDumpGenerator(
 			$out,
-			$entityLookup,
+			$entityRevisionLookup,
 			$serializer,
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup()
@@ -264,17 +265,17 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param Exception $ex
 	 *
-	 * @return EntityLookup
+	 * @return EntityRevisionLookup
 	 */
-	private function getEntityLookupThrows( Exception $ex ) {
-		$entityLookup = $this->getMock( EntityLookup::class );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
+	private function getEntityRevisionLookupThrows( Exception $ex ) {
+		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $ex ) {
 				throw $ex;
 			} ) );
 
-		return $entityLookup;
+		return $entityRevisionLookup;
 	}
 
 	public function idProvider() {
