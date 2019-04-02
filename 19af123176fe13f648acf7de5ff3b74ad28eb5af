@@ -116,6 +116,30 @@
       "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "708f5a39_db7deb78",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-02T22:10:44Z",
+      "side": 1,
+      "message": "Regarding \"keeps the test at the boundaries of the method\" that is an anti-pattern I very deliberately avoided. I have never seen a unit test of an instance method (not static) that met the following three criteria:\n\n* the source class is well-written.\n* the test really only interacted with 1 method.\n* the test is asserting all relevant behaviour that method is intended to fulfil for that class.\n\nIn general what happens in my experience is that the test will actually call two or three different methods. For example, testing \"getFoo\" will typically call \"addFoo\" and then test that it is returned by \"getFoo\". That is imho very good and incredibly useful and what a unit test should be. But, it also means the unit test does not map 1:1 with a source method. Instead, they map to use cases. The unit is the class, not the method.\n\nAnyway, I\u0027m fine making the unit smaller as desired. Let me know how I can do that whilst still guaranteeing  that the method is working correctly.",
+      "parentUuid": "f54a935a_d6254a14",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 52
+      },
+      "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
