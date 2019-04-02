@@ -61,7 +61,7 @@ class SpecialPagesWithBadges extends QueryPage {
 	/**
 	 * @see QueryPage::execute
 	 *
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
 		$this->prepareParams( $subPage );
