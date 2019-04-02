@@ -294,7 +294,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$lookup = $this->getTermIndex();
 
 		foreach ( $entities as $entitiy ) {
-			$lookup->saveTermsOfEntity( $entitiy );
+			$lookup->saveTerms( $entitiy );
 		}
 
 		$actual = $lookup->getMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
@@ -324,7 +324,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$lookup = $this->newTermSqlIndexForSourceBasedFederation();
 
 		foreach ( $entities as $entitiy ) {
-			$lookup->saveTermsOfEntity( $entitiy );
+			$lookup->saveTerms( $entitiy );
 		}
 
 		$actual = $lookup->getMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
@@ -455,7 +455,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$lookup = $this->getTermIndex();
 
 		foreach ( $entities as $entitiy ) {
-			$lookup->saveTermsOfEntity( $entitiy );
+			$lookup->saveTerms( $entitiy );
 		}
 
 		$actual = $lookup->getTopMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
@@ -480,7 +480,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$lookup = $this->newTermSqlIndexForSourceBasedFederation();
 
 		foreach ( $entities as $entitiy ) {
-			$lookup->saveTermsOfEntity( $entitiy );
+			$lookup->saveTerms( $entitiy );
 		}
 
 		$actual = $lookup->getTopMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
@@ -491,7 +491,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedTermKeys, $actualTermKeys );
 	}
 
-	public function testDeleteTermsForEntity() {
+	public function testDeleteTerms() {
 		$lookup = $this->getTermIndex();
 
 		$id = new ItemId( 'Q10' );
@@ -500,16 +500,16 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'abc' );
 		$item->setLabel( 'de', 'def' );
 		$item->setLabel( 'nl', 'ghi' );
-		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
+		$item->setDescription( 'en', 'testDeleteTerms' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
-		$lookup->saveTermsOfEntity( $item );
+		$lookup->saveTerms( $item );
 
-		$this->assertTermExists( $lookup, 'testDeleteTermsForEntity' );
+		$this->assertTermExists( $lookup, 'testDeleteTerms' );
 
-		$this->assertTrue( $lookup->deleteTermsOfEntity( $item->getId() ) !== false );
+		$this->assertTrue( $lookup->deleteTerms( $item->getId() ) !== false );
 
-		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
+		$this->assertNotTermExists( $lookup, 'testDeleteTerms' );
 
 		$abc = new TermIndexSearchCriteria( [ 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ] );
 		$matchedTerms = $lookup->getMatchingTerms( [ $abc ], [ TermIndexEntry::TYPE_LABEL ], Item::ENTITY_TYPE );
@@ -520,7 +520,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testDeleteTermsForEntity_entitySourceBasedFederation() {
+	public function testDeleteTerms_entitySourceBasedFederation() {
 		$lookup = $this->newTermSqlIndexForSourceBasedFederation();
 
 		$id = new ItemId( 'Q10' );
@@ -529,16 +529,16 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'abc' );
 		$item->setLabel( 'de', 'def' );
 		$item->setLabel( 'nl', 'ghi' );
-		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
+		$item->setDescription( 'en', 'testDeleteTerms' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
-		$lookup->saveTermsOfEntity( $item );
+		$lookup->saveTerms( $item );
 
-		$this->assertTermExists( $lookup, 'testDeleteTermsForEntity' );
+		$this->assertTermExists( $lookup, 'testDeleteTerms' );
 
-		$this->assertTrue( $lookup->deleteTermsOfEntity( $item->getId() ) !== false );
+		$this->assertTrue( $lookup->deleteTerms( $item->getId() ) !== false );
 
-		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
+		$this->assertNotTermExists( $lookup, 'testDeleteTerms' );
 
 		$abc = new TermIndexSearchCriteria( [ 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ] );
 		$matchedTerms = $lookup->getMatchingTerms( [ $abc ], [ TermIndexEntry::TYPE_LABEL ], Item::ENTITY_TYPE );
@@ -549,7 +549,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testSaveTermsOfEntity() {
+	public function testSaveTerms() {
 		$lookup = $this->getTermIndex();
 
 		$item = new Item( new ItemId( 'Q568431314' ) );
@@ -560,7 +560,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'en', 'testSaveTermsForEntity' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$this->assertTermExists( $lookup,
 			'testSaveTermsForEntity',
@@ -585,7 +585,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		// save again - this should hit an optimized code path
 		// that avoids re-saving the terms if they are the same as before.
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$this->assertTermExists( $lookup,
 			'testSaveTermsForEntity',
@@ -611,7 +611,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		// modify and save again - this should NOT skip saving,
 		// and make sure the modified term is in the database.
 		$item->setLabel( 'nl', 'xyz' );
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$this->assertTermExists( $lookup,
 			'testSaveTermsForEntity',
@@ -635,7 +635,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testSaveTermsOfEntity_entitySourceBasedFederation() {
+	public function testSaveTerms_entitySourceBasedFederation() {
 		$lookup = $this->newTermSqlIndexForSourceBasedFederation();
 
 		$item = new Item( new ItemId( 'Q568431314' ) );
@@ -646,7 +646,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'en', 'testSaveTermsForEntity' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$this->assertTermExists( $lookup,
 			'testSaveTermsForEntity',
@@ -671,7 +671,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		// save again - this should hit an optimized code path
 		// that avoids re-saving the terms if they are the same as before.
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$this->assertTermExists( $lookup,
 			'testSaveTermsForEntity',
@@ -697,7 +697,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		// modify and save again - this should NOT skip saving,
 		// and make sure the modified term is in the database.
 		$item->setLabel( 'nl', 'xyz' );
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$this->assertTermExists( $lookup,
 			'testSaveTermsForEntity',
@@ -736,7 +736,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setAliases( 'nl', [ 'GHI', '_', 'Z' ] );
 
 		$lookup = $this->getTermIndex();
-		$lookup->saveTermsOfEntity( $item );
+		$lookup->saveTerms( $item );
 
 		// modify the item and save new set of terms
 		$item = new Item( new ItemId( 'Q568431314' ) );
@@ -750,7 +750,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setAliases( 'de', [ 'DEF', 'Y' ] );
 		$item->setAliases( 'nl', [ '_', 'Z', 'foo' ] );
 
-		$lookup->saveTermsOfEntity( $item );
+		$lookup->saveTerms( $item );
 
 		// check that the stored terms are the ones in the modified items
 		$expectedTerms = $lookup->getEntityTerms( $item );
@@ -778,7 +778,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setAliases( 'nl', [ 'GHI', '_', 'Z' ] );
 
 		$lookup = $this->newTermSqlIndexForSourceBasedFederation();
-		$lookup->saveTermsOfEntity( $item );
+		$lookup->saveTerms( $item );
 
 		// modify the item and save new set of terms
 		$item = new Item( new ItemId( 'Q568431314' ) );
@@ -792,7 +792,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setAliases( 'de', [ 'DEF', 'Y' ] );
 		$item->setAliases( 'nl', [ '_', 'Z', 'foo' ] );
 
-		$lookup->saveTermsOfEntity( $item );
+		$lookup->saveTerms( $item );
 
 		// check that the stored terms are the ones in the modified items
 		$expectedTerms = $lookup->getEntityTerms( $item );
@@ -903,7 +903,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$termIndex->clear();
 
 		foreach ( $entities as $entity ) {
-			$termIndex->saveTermsOfEntity( $entity );
+			$termIndex->saveTerms( $entity );
 		}
 
 		//TODO: move this test case to LabelConflictFinderContractTester
@@ -927,7 +927,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$termIndex->clear();
 
 		foreach ( $entities as $entity ) {
-			$termIndex->saveTermsOfEntity( $entity );
+			$termIndex->saveTerms( $entity );
 		}
 
 		//TODO: move this test case to LabelConflictFinderContractTester
@@ -1009,7 +1009,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$termIndex->clear();
 
 		foreach ( $entities as $entity ) {
-			$termIndex->saveTermsOfEntity( $entity );
+			$termIndex->saveTerms( $entity );
 		}
 
 		// FIXME: This tests the LabelConflictFinder interface!
@@ -1035,7 +1035,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$termIndex->clear();
 
 		foreach ( $entities as $entity ) {
-			$termIndex->saveTermsOfEntity( $entity );
+			$termIndex->saveTerms( $entity );
 		}
 
 		// FIXME: This tests the LabelConflictFinder interface!
@@ -1063,7 +1063,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'en', 'testGetTermsOfEntity' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$labelTerms = $lookup->getTermsOfEntity( $item->getId(), [ 'label' ] );
 		$this->assertEquals( 3, count( $labelTerms ), "expected 3 labels" );
@@ -1113,7 +1113,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'en', 'testGetTermsOfEntity' );
 		$item->setAliases( 'fr', [ 'o', '_', 'O' ] );
 
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+		$this->assertTrue( $lookup->saveTerms( $item ) );
 
 		$labelTerms = $lookup->getTermsOfEntity( $item->getId(), [ 'label' ] );
 		$this->assertEquals( 3, count( $labelTerms ), "expected 3 labels" );
@@ -1171,8 +1171,8 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item2->setDescription( 'en', 'another description' );
 		$item2->setAliases( 'fr', [ 'X', '~', 'x' ] );
 
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item1 ) );
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item2 ) );
+		$this->assertTrue( $lookup->saveTerms( $item1 ) );
+		$this->assertTrue( $lookup->saveTerms( $item2 ) );
 
 		$itemIds = [ $item1->getId(), $item2->getId() ];
 
@@ -1239,8 +1239,8 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item2->setDescription( 'en', 'another description' );
 		$item2->setAliases( 'fr', [ 'X', '~', 'x' ] );
 
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item1 ) );
-		$this->assertTrue( $lookup->saveTermsOfEntity( $item2 ) );
+		$this->assertTrue( $lookup->saveTerms( $item1 ) );
+		$this->assertTrue( $lookup->saveTerms( $item2 ) );
 
 		$itemIds = [ $item1->getId(), $item2->getId() ];
 
@@ -1366,7 +1366,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( $languageCode, $termText );
 
-		$termIndex->saveTermsOfEntity( $item );
+		$termIndex->saveTerms( $item );
 
 		$term = new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
@@ -1396,7 +1396,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( $languageCode, $termText );
 
-		$termIndex->saveTermsOfEntity( $item );
+		$termIndex->saveTerms( $item );
 
 		$term = new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
@@ -1434,7 +1434,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( $languageCode, $termText );
 
-		$termIndex->saveTermsOfEntity( $item );
+		$termIndex->saveTerms( $item );
 
 		$term = new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
@@ -1465,7 +1465,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( $languageCode, $termText );
 
-		$termIndex->saveTermsOfEntity( $item );
+		$termIndex->saveTerms( $item );
 
 		$term = new TermIndexSearchCriteria( [ 'termLanguage' => $languageCode, 'termText' => $searchText ] );
 
@@ -1517,7 +1517,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q300' ) );
 		$item->setLabel( 'en', 'Foo' );
 
-		$localTermIndex->saveTermsOfEntity( $item );
+		$localTermIndex->saveTerms( $item );
 
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
@@ -1559,7 +1559,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$termIndex->clear();
 
 		foreach ( $entities as $entity ) {
-			$termIndex->saveTermsOfEntity( $entity );
+			$termIndex->saveTerms( $entity );
 		}
 
 		$matches = $termIndex->getLabelWithDescriptionConflicts( $entityType, $labels, $descriptions );
@@ -1585,7 +1585,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$termIndex->clear();
 
 		foreach ( $entities as $entity ) {
-			$termIndex->saveTermsOfEntity( $entity );
+			$termIndex->saveTerms( $entity );
 		}
 
 		$matches = $termIndex->getLabelWithDescriptionConflicts( $entityType, $labels, $descriptions );
@@ -1655,7 +1655,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setFingerprint( $fingerprint );
 
-		$termIndex->saveTermsOfEntity( $item );
+		$termIndex->saveTerms( $item );
 
 		$actual = $termIndex->getMatchingTerms( $queryTerms, null, null, $options );
 
@@ -1692,7 +1692,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setFingerprint( $fingerprint );
 
-		$termIndex->saveTermsOfEntity( $item );
+		$termIndex->saveTerms( $item );
 
 		$actual = $termIndex->getMatchingTerms( $queryTerms, null, null, $options );
 
@@ -1875,7 +1875,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q300' ) );
 		$item->setLabel( 'en', 'Foo' );
 
-		$localTermIndex->saveTermsOfEntity( $item );
+		$localTermIndex->saveTerms( $item );
 
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
@@ -1913,7 +1913,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$fooTermIndex->getEntityTerms( new Item( new ItemId( 'Q300' ) ) );
 	}
 
-	public function testGivenEntityFromAnotherRepository_saveTermsOfEntityThrowsException() {
+	public function testGivenEntityFromAnotherRepository_saveTermsThrowsException() {
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
 		$item = new Item( new ItemId( 'Q300' ) );
@@ -1921,15 +1921,15 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		$this->setExpectedException( MWException::class );
 
-		$fooTermIndex->saveTermsOfEntity( $item );
+		$fooTermIndex->saveTerms( $item );
 	}
 
-	public function testGivenEntityFromAnotherRepository_deleteTermsOfEntityThrowsException() {
+	public function testGivenEntityFromAnotherRepository_deleteTermsThrowsException() {
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
 		$this->setExpectedException( MWException::class );
 
-		$fooTermIndex->deleteTermsOfEntity( new ItemId( 'Q300' ) );
+		$fooTermIndex->deleteTerms( new ItemId( 'Q300' ) );
 	}
 
 	public function testGivenEntityIdFromAnotherSource_getTermsOfEntitiesThrowsException() {
@@ -1956,7 +1956,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$fooTermIndex->getEntityTerms( new Property( new PropertyId( 'P300' ), null, 'string' ) );
 	}
 
-	public function testGivenEntityFromAnotherSource_saveTermsOfEntityThrowsException() {
+	public function testGivenEntityFromAnotherSource_saveTermsThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
 		$property = new Property( new PropertyId( 'P300' ), null, 'string' );
@@ -1964,15 +1964,15 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		$this->setExpectedException( MWException::class );
 
-		$fooTermIndex->saveTermsOfEntity( $property );
+		$fooTermIndex->saveTerms( $property );
 	}
 
-	public function testGivenEntityFromAnotherSource_deleteTermsOfEntityThrowsException() {
+	public function testGivenEntityFromAnotherSource_deleteTermsThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
 		$this->setExpectedException( MWException::class );
 
-		$fooTermIndex->deleteTermsOfEntity( new PropertyId( 'P300' ) );
+		$fooTermIndex->deleteTerms( new PropertyId( 'P300' ) );
 	}
 
 	public function testGivenEntityFromAnotherSource_getLabelConflictsThrowsException() {
