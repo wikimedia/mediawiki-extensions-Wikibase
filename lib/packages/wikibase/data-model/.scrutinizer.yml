@@ -1,4 +1,8 @@
-build: true
+build:
+     environment:
+        php:
+            version: '7.1'
+
 inherit: true
 
 before_commands:
