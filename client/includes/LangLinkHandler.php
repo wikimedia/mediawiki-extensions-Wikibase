@@ -281,22 +281,22 @@ class LangLinkHandler {
 	 */
 	private function localLinksToArray( array $flatLinks ) {
 		$links = [];
+		$sites = $this->siteLookup->getSites();
 
 		foreach ( $flatLinks as $s ) {
 			$parts = explode( ':', $s, 2 );
+			if ( count( $parts ) !== 2 ) {
+				continue;
+			}
 
-			if ( count( $parts ) === 2 ) {
-				$lang = $parts[0];
-				$page = $parts[1];
+			list( $lang, $page ) = $parts;
 
-				$sites = $this->siteLookup->getSites();
-				if ( $sites->hasNavigationId( $lang ) ) {
-					$site = $sites->getSiteByNavigationId( $lang );
-					$wiki = $site->getGlobalId();
-					$links[$wiki] = $page;
-				} else {
-					wfWarn( "Failed to map interlanguage prefix $lang to a global site ID." );
-				}
+			if ( $sites->hasNavigationId( $lang ) ) {
+				$site = $sites->getSiteByNavigationId( $lang );
+				$wiki = $site->getGlobalId();
+				$links[$wiki] = $page;
+			} else {
+				wfWarn( "Failed to map interlanguage prefix $lang to a global site ID." );
 			}
 		}
 
