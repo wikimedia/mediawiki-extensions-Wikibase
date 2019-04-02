@@ -9,12 +9,11 @@ use Serializers\Serializer;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRevisionLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
-use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 
@@ -38,7 +37,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	private $entitySerializer;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
 	private $entityLookup;
 
@@ -64,7 +63,7 @@ class JsonDumpGenerator extends DumpGenerator {
 
 	/**
 	 * @param resource $out
-	 * @param EntityLookup $lookup Must not resolve redirects
+	 * @param EntityRevisionLookup $lookup
 	 * @param Serializer $entitySerializer
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param PropertyDataTypeLookup $dataTypeLookup
@@ -73,15 +72,12 @@ class JsonDumpGenerator extends DumpGenerator {
 	 */
 	public function __construct(
 		$out,
-		EntityLookup $lookup,
+		EntityRevisionLookup $lookup,
 		Serializer $entitySerializer,
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $dataTypeLookup
 	) {
 		parent::__construct( $out, $entityPrefetcher );
-		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
-			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
-		}
 
 		$this->entitySerializer = $entitySerializer;
 		$this->entityLookup = $lookup;
@@ -129,17 +125,27 @@ class JsonDumpGenerator extends DumpGenerator {
 	 */
 	protected function generateDumpForEntityId( EntityId $entityId ) {
 		try {
-			$entity = $this->entityLookup->getEntity( $entityId );
+			$revision = $this->entityLookup->getEntityRevision( $entityId );
 
-			if ( !$entity ) {
+			if ( !$revision ) {
 				throw new EntityLookupException( $entityId, 'Entity not found: ' . $entityId->getSerialization() );
 			}
+
 		} catch ( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			// Redirects aren't supposed to be in the JSON dumps
 			return null;
 		}
+
+		$entity = $revision->getEntity();
+
+		$metadata = [];
+		$metadata['lastrevid'] = $revision->getRevisionId();
+		// We could potentially add more metadata here:
+		// timestamp, page id, namespace, title.
+		// The cost of retrieval and the dump size increase could be considered.
+		// See Api/ResultBuilder.php for how it is done in the API.
 
 		$data = $this->entitySerializer->serialize( $entity );
 
@@ -152,7 +158,9 @@ class JsonDumpGenerator extends DumpGenerator {
 			}
 		}
 
-		$json = $this->encode( $data );
+		$record = array_merge( $metadata, $data );
+
+		$json = $this->encode( $record );
 
 		return $json;
 	}
