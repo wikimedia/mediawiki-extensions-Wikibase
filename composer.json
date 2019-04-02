@@ -34,6 +34,7 @@
 		"wikibase/data-model-serialization": "^2.9.1",
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.10.0",
+		"wikibase/term-store": "dev-master",
 		"diff/diff": "^2.3.0",
 		"wikimedia/purtle": "^1.0.7",
 		"psr/simple-cache": "^1.0.1",
@@ -46,6 +47,13 @@
 		"wikibase/wikibase-codesniffer": "^0.5.1",
 		"cache/integration-tests": "dev-master"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/wmde/wikibase-term-store",
+			"no-api": true
+		}
+	],
 	"suggest": {
 		"ext-calendar": "Needed for dumpRdf script"
 	},
