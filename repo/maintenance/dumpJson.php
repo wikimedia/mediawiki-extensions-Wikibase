@@ -4,11 +4,10 @@ namespace Wikibase;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\Lib\Store\RevisionBasedEntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,9 +21,9 @@ require_once __DIR__ . '/DumpEntities.php';
 class DumpJson extends DumpEntities {
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var Serializer
@@ -63,7 +62,7 @@ class DumpJson extends DumpEntities {
 		array $existingEntityTypes,
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		Serializer $entitySerializer
 	) {
 		parent::setDumpEntitiesServices(
@@ -73,7 +72,7 @@ class DumpJson extends DumpEntities {
 		);
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entitySerializer = $entitySerializer;
 		$this->hasHadServicesSet = true;
 	}
@@ -94,7 +93,7 @@ class DumpJson extends DumpEntities {
 				$wikibaseRepo->getEnabledEntityTypes(),
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
-				new RevisionBasedEntityLookup( $revisionLookup ),
+				$revisionLookup,
 				$wikibaseRepo->getCompactEntitySerializer()
 			);
 		}
@@ -111,7 +110,7 @@ class DumpJson extends DumpEntities {
 
 		$dumper = new JsonDumpGenerator(
 			$output,
-			$this->entityLookup,
+			$this->entityRevisionLookup,
 			$this->entitySerializer,
 			$this->entityPrefetcher,
 			$dataTypeLookup
