@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1c4f383_abdf9ef8",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-04-02T19:00:15Z",
+      "side": 1,
+      "message": "Not a big fan of this name - what \"last\" would mean here? It certainly can\u0027t guarantee this revision is actually the last one when I am reading the dump. And since we don\u0027t have any other revision IDs, it\u0027s in fact the only revision ID, so not clear why it\u0027s \"last\". I\u0027d just name it \"revid\".",
+      "range": {
+        "startLine": 144,
+        "startChar": 13,
+        "endLine": 144,
+        "endChar": 22
+      },
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
