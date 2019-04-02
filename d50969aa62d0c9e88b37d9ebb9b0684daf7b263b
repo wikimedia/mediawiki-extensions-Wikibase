@@ -22,6 +22,30 @@
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "385f9094_1c23373b",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5361
+      },
+      "writtenOn": "2019-04-02T19:08:57Z",
+      "side": 1,
+      "message": "I am not a big fan of the \"last\" either but it has the merit of being consistent with the output of the API (Special:EntityData, action\u003dwbgetentities both use this name). This means that consumers will be able to use the same deserialization code for both sources.",
+      "parentUuid": "c1c4f383_abdf9ef8",
+      "range": {
+        "startLine": 144,
+        "startChar": 13,
+        "endLine": 144,
+        "endChar": 22
+      },
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
