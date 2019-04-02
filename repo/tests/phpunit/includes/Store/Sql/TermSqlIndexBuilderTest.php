@@ -195,7 +195,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 				EDIT_NEW
 			);
 
-			$termSqlIndex->saveTermsOfEntity( $entity );
+			$termSqlIndex->saveTerms( $entity );
 		}
 	}
 

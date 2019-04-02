@@ -22,6 +22,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\StringNormalizer;
@@ -35,7 +36,7 @@ use Wikimedia\Rdbms\IDatabase;
  *
  * @license GPL-2.0-or-later
  */
-class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
+class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder, EntityTermStoreWriter {
 
 	/**
 	 * @var string
@@ -161,7 +162,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @see TermIndex::saveTermsOfEntity
+	 * @see EntityTermStoreWriter::saveTerms
 	 *
 	 * @param EntityDocument $entity Must have an ID, and optionally any combination of terms as
 	 *  declared by the TermIndexEntry::TYPE_... constants.
@@ -171,7 +172,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return bool Success indicator
 	 */
-	public function saveTermsOfEntity( EntityDocument $entity ) {
+	public function saveTerms( EntityDocument $entity ) {
 		$entityId = $entity->getId();
 		Assert::parameterType( EntityId::class, $entityId, '$entityId' );
 
@@ -207,7 +208,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				]
 			);
 
-			$ok = $this->deleteTerms( $entity->getId(), $termsToDelete, $dbw );
+			$ok = $this->deleteTermsForEntity( $entity->getId(), $termsToDelete, $dbw );
 		}
 
 		if ( $ok && $termsToInsert ) {
@@ -442,7 +443,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return bool Success indicator
 	 */
-	private function deleteTerms( EntityId $entityId, array $terms, IDatabase $dbw ) {
+	private function deleteTermsForEntity( EntityId $entityId, array $terms, IDatabase $dbw ) {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
@@ -529,13 +530,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @see TermIndex::deleteTermsOfEntity
+	 * @see EntityTermStoreWriter::deleteTerms
 	 *
 	 * @param EntityId $entityId
 	 *
 	 * @return bool Success indicator
 	 */
-	public function deleteTermsOfEntity( EntityId $entityId ) {
+	public function deleteTerms( EntityId $entityId ) {
 		$this->assertCanHandleEntityId( $entityId );
 
 		$dbw = $this->getConnection( DB_MASTER );
