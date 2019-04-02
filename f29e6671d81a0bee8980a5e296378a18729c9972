@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8c79376_7ee8254e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T09:30:00Z",
+      "side": 1,
+      "message": "little typo \"Wlel -\u003e Well\"",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb94d808_d950441c",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T09:30:00Z",
+      "side": 1,
+      "message": "messages should state the error and not the test assertion .. so this probably should be \"equivalent settings have different version hashes\"",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3b27ddc_a215c82c",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T09:30:00Z",
+      "side": 1,
+      "message": "save as above re message .. this should say smth like \"different settings have different version hashes\"",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dfe070d_b057623c",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T09:30:00Z",
+      "side": 1,
+      "message": "private ?",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f9d150_72f96560",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T09:30:00Z",
+      "side": 1,
+      "message": "$site2 ?",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d191fc4_f6cfc2f9",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-02T09:30:00Z",
+      "side": 1,
+      "message": "$site2 ?",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
