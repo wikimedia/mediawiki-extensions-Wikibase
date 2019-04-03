@@ -140,6 +140,30 @@
       "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a06c5c08_7bbb28f6",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-03T20:46:02Z",
+      "side": 1,
+      "message": "\u003e 1) duplicate the source logic and thus require more maintenance and 2) might not fail when the behaviour is broken.\n\nnot sure of 2 tbh .. in my experience, side effects are of two types .. one that do not affect your use-case behavior on later calls (so their state doesn\u0027t matter), and ones which do. Those which do affect a function behavior on later calls , make the function stateful and bound to their state. In that case I think it is actually necessary to test the side effects.\n\nAs for 1, it is the necessary maintenance for keeping tests truthful I believe. You can find a way to reduce maintenance, but that certainly shouldn\u0027t be on the expense of reducing test coverage of logic or testing internal non-public behavior (like in this case).\n\n\u003e In general what happens in my experience is that the test will actually call two or three different methods. For example, testing \"getFoo\" will typically call \"addFoo\" and then test that it is returned by \"getFoo\". That is imho very good and incredibly useful and what a unit test should be. But, it also means the unit test does not map 1:1 with a source method. Instead, they map to use cases. The unit is the class, not the method.\n\nEntirely true, and makes my point about \"cache here is a side effect that affects the behavior\" even clearer. I mean, this class behavior is dependent on cache behavior.\n\nTo make it clear and concrete, what I would be suggesting here is three separate tests (use-cases):\n1. testGetScript which asserts the correct value returned\n2. testGetScriptCachesScript which asserts the script is cached (by accessing the cache)\n3. testGetScriptUsesAvailableCachedScript which would start by setting up the cache with a value that affects the behavior, and then assert that the returned value matches what is stored in the cache.\n\nIn other words, cache state here is functioning like if it were another argument to the function than a side-effect.",
+      "parentUuid": "708f5a39_db7deb78",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 52
+      },
+      "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
