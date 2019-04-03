@@ -503,6 +503,8 @@ entity:getSitelink( 'ruwiki' ) -- Returns the item's page title in the Russian W
 
 === mw.wikibase.entity:getProperties ===
 <code>entity:getProperties()</code><br>
+:<span style="color: red;">This adds a statement usage for all statements present, therefore it should only be used if absolutely necessary.</span>
+
 Get a table with all property ids attached to the item.
 
 An example call might look like this:
