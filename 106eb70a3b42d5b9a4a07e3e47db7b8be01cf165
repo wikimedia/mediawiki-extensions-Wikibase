@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b0dcef0_7020d5ec",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2019-04-03T21:39:08Z",
+      "side": 1,
+      "message": "doesn\u0027t seem related, rebase conflict?",
+      "revId": "106eb70a3b42d5b9a4a07e3e47db7b8be01cf165",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
