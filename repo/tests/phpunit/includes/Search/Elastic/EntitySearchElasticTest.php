@@ -52,8 +52,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 			if ( json_last_error() !== JSON_ERROR_NONE ) {
 				throw new \RuntimeException( "invalid json: " . $queryFile );
 			}
-			$expectedFile = __DIR__ . "/../../../data/entitySearch/$testName-es" .
-				EntitySearchElastic::getExpectedElasticMajorVersion() . '.expected';
+			$expectedFile = __DIR__ . "/../../../data/entitySearch/$testName.expected";
 			$tests[$testName] = [ $query, $expectedFile ];
 		}
 
