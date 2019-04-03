@@ -164,6 +164,30 @@
       "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee2339d9_c399a635",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-03T20:52:05Z",
+      "side": 1,
+      "message": "correction:\nthe suggested tests do not map 1:1 to use-cases but to behaviors .. the first two are two behaviors for the same use-case",
+      "parentUuid": "a06c5c08_7bbb28f6",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 52
+      },
+      "revId": "19af123176fe13f648acf7de5ff3b74ad28eb5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
