@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4bda3419_e5228ed3",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-03T21:10:15Z",
+      "side": 1,
+      "message": "scanned through to find smth in Wikibase. In this test for instance https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/142b4622a673d06c9f72d372a419e10bed9bbb38/lib/tests/phpunit/Store/CacheRetrievingEntityRevisionLookupTest.php it seems like Wikibase is stating in the messages the expected behavior.\n\nSo I think you are right it is following mediawiki convention here. I find that not ideal myself since the printed message of a failure might be confusing sometimes depending on the phrasing (since phpunit expects it to state the error), but it is certainly out of scope here to discuss/change that.",
+      "parentUuid": "42f7f1ca_19416f3f",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3b27ddc_a215c82c",
         "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
         "patchSetId": 3
@@ -68,6 +86,24 @@
       "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba264dc_7012b988",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-03T21:10:15Z",
+      "side": 1,
+      "message": "-",
+      "parentUuid": "c3b27ddc_a215c82c",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -123,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "c6547984_057ca0d7",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-03T21:10:15Z",
+      "side": 1,
+      "message": "right I didn\u0027t notice it was exactly the same because I read them separately.. my bad",
+      "parentUuid": "63f5ce9d_a821bca0",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d191fc4_f6cfc2f9",
         "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
         "patchSetId": 3
@@ -137,6 +191,24 @@
       "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1563d4ac_dc735682",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-03T21:10:15Z",
+      "side": 1,
+      "message": "-",
+      "parentUuid": "3d191fc4_f6cfc2f9",
+      "revId": "f29e6671d81a0bee8980a5e296378a18729c9972",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
