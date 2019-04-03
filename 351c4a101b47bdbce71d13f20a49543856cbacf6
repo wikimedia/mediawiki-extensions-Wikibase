@@ -46,6 +46,30 @@
       "revId": "351c4a101b47bdbce71d13f20a49543856cbacf6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fb2ddd1_a516d6ff",
+        "filename": "repo/RepoHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-04-03T10:16:15Z",
+      "side": 1,
+      "message": "indeed, this is no good. this could potentially be solved by making WikibaseRepo::getLocalEntitySource public. I am not completely convinced by this idea.\nI\u0027ll ponder this a bit and submit some code should I happen to come up with something reasonable.",
+      "parentUuid": "abd50383_d31d549f",
+      "range": {
+        "startLine": 782,
+        "startChar": 7,
+        "endLine": 782,
+        "endChar": 49
+      },
+      "revId": "351c4a101b47bdbce71d13f20a49543856cbacf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
