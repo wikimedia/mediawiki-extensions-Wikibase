@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4cd2f35b_67fa959e",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-04T11:59:23Z",
+      "side": 1,
+      "message": "I mean we can keep it like this for now but we might need to change it later which is fine when the table is smaller.",
+      "parentUuid": "d202d1d4_55f75b94",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 85
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cc14da3_06430bc7",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "I have no strong opinion, but I prefer index names to follow convention \u0027tablename_columnnames\u0027 .. here need to be fixed by adding `_text` for that convention.. but we can also go with yours",
       "parentUuid": "655059dc_542048c2",
+      "range": {
+        "startLine": 116,
+        "startChar": 25,
+        "endLine": 116,
+        "endChar": 28
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bfaf07c_511e2911",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-04T11:59:23Z",
+      "side": 1,
+      "message": "In mediawiki it\u0027s mostly the same prefix of the columns, of course it\u0027s a mess in general. Take a look at https://github.com/wikimedia/mediawiki/blob/master/maintenance/tables.sql",
+      "parentUuid": "ec952440_b1881c6d",
       "range": {
         "startLine": 116,
         "startChar": 25,
