@@ -22,6 +22,30 @@
       "revId": "3a88ee7a4250a846e8f286a98dd0470586b8d258",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "312f0744_bc680565",
+        "filename": "docs/options.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-04-04T05:48:31Z",
+      "side": 0,
+      "message": "This should be removed too. I must have missed it. I need to test though that all settings are ported before removing all of them...",
+      "parentUuid": "e4149815_aa89ddaa",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 12
+      },
+      "revId": "3a88ee7a4250a846e8f286a98dd0470586b8d258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
