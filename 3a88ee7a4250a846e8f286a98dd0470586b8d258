@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4149815_aa89ddaa",
+        "filename": "docs/options.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-04-04T03:56:42Z",
+      "side": 0,
+      "message": "You\u0027re still setting this (but to false) in repo/config/Wikibase.default.php - though it doesn\u0027t seem to be used in this repo any more. Is it just here temporarily until a follow-up patch removes it, for CI/switchover purposes?",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 12
+      },
+      "revId": "3a88ee7a4250a846e8f286a98dd0470586b8d258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
