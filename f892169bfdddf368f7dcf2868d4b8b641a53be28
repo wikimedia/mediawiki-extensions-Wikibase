@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "6dad94b4_d5f9b1b1",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-04T20:40:19Z",
+      "side": 1,
+      "message": "What do you think would be better? change it now or after property terms migration after seeing how indexes are performing?",
+      "parentUuid": "4cd2f35b_67fa959e",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 85
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cc14da3_06430bc7",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "In mediawiki it\u0027s mostly the same prefix of the columns, of course it\u0027s a mess in general. Take a look at https://github.com/wikimedia/mediawiki/blob/master/maintenance/tables.sql",
       "parentUuid": "ec952440_b1881c6d",
+      "range": {
+        "startLine": 116,
+        "startChar": 25,
+        "endLine": 116,
+        "endChar": 28
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "672d5fe3_5dbfc05b",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-04T20:40:19Z",
+      "side": 1,
+      "message": "Do we have to keep it same as mediawiki? (I hope not :)\nI\u0027d still go with this approach if it won\u0027t block us",
+      "parentUuid": "7bfaf07c_511e2911",
       "range": {
         "startLine": 116,
         "startChar": 25,
