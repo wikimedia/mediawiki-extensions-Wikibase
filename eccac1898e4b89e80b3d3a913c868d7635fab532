@@ -22,6 +22,30 @@
       "revId": "eccac1898e4b89e80b3d3a913c868d7635fab532",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e2cf4d_3ab3c7b1",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2019-04-05T11:50:26Z",
+      "side": 1,
+      "message": "It same as \"items\". I mean, $3 and \"something\" are always at least two.",
+      "parentUuid": "bce3302c_18f25c5f",
+      "range": {
+        "startLine": 114,
+        "startChar": 217,
+        "endLine": 114,
+        "endChar": 223
+      },
+      "revId": "eccac1898e4b89e80b3d3a913c868d7635fab532",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
