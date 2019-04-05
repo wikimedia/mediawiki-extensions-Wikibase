@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "bcb1164c_cf660b7e",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3731
+      },
+      "writtenOn": "2019-04-05T05:14:49Z",
+      "side": 1,
+      "message": "I would rather do it now that the table isn\u0027t in production. Doing an schema change is complex and it is time consuming when the table is in production.",
+      "parentUuid": "6dad94b4_d5f9b1b1",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 85
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cc14da3_06430bc7",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
