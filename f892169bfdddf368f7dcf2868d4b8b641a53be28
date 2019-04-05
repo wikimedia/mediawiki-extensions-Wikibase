@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "c36633b4_ae88c162",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3731
+      },
+      "writtenOn": "2019-04-05T10:16:36Z",
+      "side": 1,
+      "message": "Yeah, it is hard to know if the covering index will be beneficial or not just on paper, as the optimizer sometimes does silly things as we have seen in the past.\n\nMy reasoning is to measure this once we have some data, but _before_ we are finished with the migration and fully in production, as the table will be \"big\" and the schema change will take time.\nOnce we have some data we\u0027ll be able to evaluate the different query plans and times.",
+      "parentUuid": "429e3ca8_a1d03f10",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 85
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cc14da3_06430bc7",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
