@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa3f2a2e_255cddb8",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-05T13:53:54Z",
+      "side": 1,
+      "message": "do we need to make these covering indexes too? (couldn\u0027t think of a case for the reverse order since anyway we will be only joining these tables)",
+      "revId": "55fb8d0ed13c22149516f79ee8d42d10210a2876",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
