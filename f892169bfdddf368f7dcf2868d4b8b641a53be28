@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "429e3ca8_a1d03f10",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-05T08:38:26Z",
+      "side": 1,
+      "message": "Marostegui thinking about it, I\u0027m just wondering the following. This schema is not optimized for read certainly, but rather for space. Having a covering index will increase space requirements and writes performance a bit, I imagine. Since we have a 10% miss rate on caches on top of existing wb_terms, which we also want to reduce in the future.\n\nI am not so expert on this level to assess whether a covering index here provides read performance gain that is great enough to justify the space usage.\n\nI\u0027m simply asking for my own educational purposes rather than suggesting an argument against the covering index (which I\u0027m adding in the meanwhile for all tables that need one :)",
+      "parentUuid": "62965f55_cfca4c69",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 85
+      },
+      "revId": "f892169bfdddf368f7dcf2868d4b8b641a53be28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cc14da3_06430bc7",
         "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
         "patchSetId": 7
