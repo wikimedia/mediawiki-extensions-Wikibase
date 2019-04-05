@@ -362,6 +362,10 @@ return [
 	'tmpSerializeEmptyListsAsObjects' => false,
 
 	'tmpWriteToOldTermStore' => true,
-	'tmpWriteToNewTermStore' => false
+	'tmpWriteToNewTermStore' => false,
+
+	// Do not enable this one in production environemtns, unless you know what you are doing when
+	// using the script there.
+	'enablePopulateWithRandomEntitiesAndTermsScript' => false,
 
 ];
