@@ -1,0 +1,10 @@
+Code-Review+2: L10n-bot <l10n-bot@translatewiki.net>
+Code-Review+2: Jforrester <jforrester@wikimedia.org>
+Code-Review+2: Tarrow <thomas.arrow_ext@wikimedia.de>
+Code-Review+2: Umherirrender <umherirrender_de.wp@web.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Sat, 06 Apr 2019 20:15:27 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/501776
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
