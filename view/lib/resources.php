@@ -1,5 +1,5 @@
 <?php
-use Wikibase\View\Termbox\TermboxDependencyLoader;
+use Wikibase\View\Termbox\TermboxModule;
 
 /**
  * @license GPL-2.0-or-later
@@ -1839,6 +1839,7 @@ return call_user_func( function() {
 		],
 
 		'wikibase.termbox' => $wikibaseTermboxPaths + [
+			'class' => TermboxModule::class,
 			'scripts' => [
 				'dist/wikibase.termbox.main.js',
 			],
@@ -1848,7 +1849,6 @@ return call_user_func( function() {
 				'wikibase.getLanguageNameByCode',
 				'wikibase.entityPage.entityLoaded',
 				'wikibase.WikibaseContentLanguages',
-				'wikibase.termbox.messages',
 				'wikibase.getUserLanguages',
 				'mw.config.values.wbRepo'
 			],
@@ -1860,12 +1860,6 @@ return call_user_func( function() {
 				'dist/wikibase.termbox.main.css',
 			],
 			'targets' => 'mobile'
-		],
-
-		'wikibase.termbox.messages' => $wikibaseTermboxPaths + [
-			'targets' => 'mobile',
-			'class' => TermboxDependencyLoader::class,
-			'data' => 'resources.json',
 		],
 	];
 	return $modules;
