@@ -298,6 +298,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered but never used on WikibaseClient.
+		// Only used by WikibaseRepo and WikibaseLexeme.
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/entityChangers/namespace.js',
@@ -342,6 +344,7 @@ return call_user_func( function() {
 		// FIXME: Never loaded. Only used by wikibase.ui.entityViewInit (WikibaseRepo).
 		'wikibase.store.EntityStore' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase/store/store.js',
 				'wikibase/store/store.EntityStore.js',
 				'wikibase/store/store.ApiEntityStore.js',
 				'wikibase/store/store.CachingEntityStore.js',
@@ -349,15 +352,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'util.inherit',
-				'wikibase.store',
-			],
-		],
-
-		'wikibase.store' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/store/store.js',
-			],
-			'dependencies' => [
 				'wikibase',
 			],
 		],
@@ -407,6 +401,7 @@ return call_user_func( function() {
 			]
 		],
 
+		// FIXME: Registered by WikibaseClient, but never used. Used by WikibaseRepo.
 		'wikibase.view.StructureEditorFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/StructureEditorFactory.js',
 			'dependencies' => [
@@ -443,30 +438,30 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.view.ToolbarViewController' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/ToolbarViewController.js',
+		// FIXME: Not loaded directly by either of WikibaseRepo or WikibaseClient.
+		// But is referenced internally by WikibaseLexeme.
+		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase/view/ToolbarViewController.js',
+				'wikibase/view/ControllerViewFactory.js',
+			],
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.view.__namespace',
 				'wikibase.view.ViewController',
-			],
-			'messages' => [
-				'wikibase-save-inprogress',
-				'wikibase-publish-inprogress',
-			]
-		],
-
-		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/ControllerViewFactory.js',
-			'dependencies' => [
 				'mediawiki.cookie',
 				'mediawiki.user',
-				'wikibase.view.__namespace',
-				'wikibase.view.ToolbarViewController',
 				'wikibase.view.ViewFactory'
-			]
+			],
+			'messages' => [
+				// For ToolbarViewController:
+				'wikibase-save-inprogress',
+				'wikibase-publish-inprogress',
+			],
 		],
 
+		// FIXME: Not loaded directly by either of WikibaseRepo or WikibaseClient.
+		// But is referenced internally by WikibaseLexeme.
 		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
 			'dependencies' => [
@@ -475,6 +470,7 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Registered on all pages via WikibaseClient but only loaded on WikibaseRepo
 		'wikibase.view.ViewFactoryFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/ViewFactoryFactory.js',
 			'dependencies' => [
