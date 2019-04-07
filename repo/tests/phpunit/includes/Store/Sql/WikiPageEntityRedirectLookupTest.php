@@ -9,7 +9,7 @@ use Title;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikimedia\Rdbms\DatabaseMysqli;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LoadBalancer;
 use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
@@ -171,9 +171,8 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$loadBalancer->expects( $this->any() )
-			->method( 'getConnection' )
-			->will( $this->returnValue( $db ) );
+		$loadBalancer->method( 'getConnection' )
+			->willReturn( $db );
 
 		return $loadBalancer;
 	}
@@ -181,16 +180,13 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	/**
 	 * @param array $row
 	 *
-	 * @return DatabaseMysqli
+	 * @return IDatabase
 	 */
 	private function getMockDatabase( array $row ) {
-		$db = $this->getMockBuilder( DatabaseMysqli::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$db = $this->getMock( IDatabase::class );
 
-		$db->expects( $this->any() )
-			->method( 'selectRow' )
-			->will( $this->returnValue( (object)$row ) );
+		$db->method( 'selectRow' )
+			->wilReturn( (object)$row );
 
 		return $db;
 	}
