@@ -6,6 +6,7 @@ use CachedBagOStuff;
 use Deserializers\DispatchableDeserializer;
 use Exception;
 use InvalidArgumentException;
+use MediaWiki\DoctrineConnection\DoctrineConnectionFactory;
 use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
@@ -189,6 +190,7 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\TermStore\DoctrineTermStore;
 use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
 use Wikibase\TermStore\ItemTermStore;
@@ -198,6 +200,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
 use Wikimedia\ObjectFactory;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1797,18 +1800,25 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
 	public function getPropertyTermStore(): PropertyTermStore {
-		return new InMemoryPropertyTermStore(); // TODO: MW or Doctrine implementation
+		return $this->getDoctrineTermStore()->newPropertyTermStore();
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
 	public function getItemTermStore(): ItemTermStore {
-		return new InMemoryItemTermStore(); // TODO: MW or Doctrine implementation
+		return $this->getDoctrineTermStore()->newItemTermStore();
+	}
+
+	public function getDoctrineTermStore(): DoctrineTermStore {
+		$db = $this->getMasterDatabase();
+
+		return new DoctrineTermStore(
+			( new DoctrineConnectionFactory() )->connectionFromDatabase( $db ),
+			$db->tablePrefix()
+		);
+	}
+
+	private function getMasterDatabase(): IDatabase {
+		return MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_MASTER );
 	}
 
 	/**

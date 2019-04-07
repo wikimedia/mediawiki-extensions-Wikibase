@@ -35,6 +35,8 @@
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.14.0",
 		"wikibase/term-store": "^1.0.0",
+		"wikibase/doctrine-term-store": "dev-master",
+		"mediawiki/doctrine-connection": "dev-master",
 		"diff/diff": "^2.3.0",
 		"wikimedia/purtle": "^1.0.7",
 		"psr/simple-cache": "^1.0.1",
