@@ -6,8 +6,9 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
+use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
-use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -25,6 +26,21 @@ class RebuildPropertyTerms extends Maintenance {
 	 */
 	private $wikibaseRepo;
 
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var SeekableEntityIdPager
+	 */
+	private $idPager;
+
+	/**
+	 * @var MessageReporter
+	 */
+	private $progressReporter;
+
 	public function __construct() {
 		parent::__construct();
 
@@ -39,17 +55,26 @@ class RebuildPropertyTerms extends Maintenance {
 
 		$this->addOption(
 			'batch-size',
-			"Number of rows to update per batch (Default: 250)",
+			"Number of rows to update per batch (Default: 10)",
 			false,
 			true
 		);
 
 		$this->addOption(
 			'sleep',
-			"Sleep time (in seconds) between every batch (Default: 10)",
+			"Sleep time (in seconds) between every batch (Default: 1)",
 			false,
 			true
 		);
+	}
+
+	public function executeWithDependencies( EntityLookup $entityLookup,
+		SeekableEntityIdPager $idPager, MessageReporter $progressReporter ) {
+		$this->idPager = $idPager;
+		$this->entityLookup = $entityLookup;
+		$this->progressReporter = $progressReporter;
+
+		$this->execute();
 	}
 
 	public function execute() {
@@ -69,17 +94,29 @@ class RebuildPropertyTerms extends Maintenance {
 			$this->getReporter(),
 			$this->getErrorReporter(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$this->wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
-			(int)$this->getOption( 'batch-size', 250 ),
-			(int)$this->getOption( 'sleep', 10 )
+			$this->getEntityLookup(),
+			(int)$this->getOption( 'batch-size', 10 ),
+			(int)$this->getOption( 'sleep', 1 )
 		);
 
 		$rebuilder->rebuild();
 
-		$this->output( "Done.\n" );
+		$this->getReporter()->reportMessage( "Done." );
 	}
 
-	private function newEntityIdPager(): SqlEntityIdPager {
+	private function getEntityLookup(): EntityLookup {
+		if ( $this->entityLookup === null ) {
+			return $this->wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY );
+		}
+
+		return $this->entityLookup;
+	}
+
+	private function newEntityIdPager(): SeekableEntityIdPager {
+		if ( $this->idPager !== null ) {
+			return $this->idPager;
+		}
+
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$this->wikibaseRepo->getEntityNamespaceLookup(),
 			$this->wikibaseRepo->getEntityIdParser()
@@ -97,6 +134,10 @@ class RebuildPropertyTerms extends Maintenance {
 	}
 
 	private function getReporter(): MessageReporter {
+		if ( $this->progressReporter !== null ) {
+			return $this->progressReporter;
+		}
+
 		return new CallbackMessageReporter(
 			function ( $message ) {
 				$this->output( "$message\n" );

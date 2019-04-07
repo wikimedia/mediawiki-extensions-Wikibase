@@ -4,11 +4,13 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
 use HashBagOStuff;
+use MediaWiki\DoctrineConnection\DoctrineConnectionFactory;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Onoi\MessageReporter\CallbackMessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
-use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -21,6 +23,7 @@ use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
+use Wikibase\TermStore\DoctrineTermStore;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
@@ -89,6 +92,7 @@ class DatabaseSchemaUpdater {
 		$this->updateTermsTable( $updater, $db );
 		$this->updateItemsPerSiteTable( $updater, $db );
 		$this->updateChangesTable( $updater, $db );
+		$this->createTermsStore( $updater, $db );
 
 		$this->registerPropertyInfoTableUpdates( $updater );
 
@@ -396,6 +400,25 @@ class DatabaseSchemaUpdater {
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
+	}
+
+	private function createTermsStore( DatabaseUpdater $updater, IDatabase $db ) {
+		$updater->output( "Installing/updating Wikibase Term Store\n" );
+
+		$this->newTermStore( $db )->install(
+			new CallbackMessageReporter(
+				function( $message ) use ( $updater ) {
+					$updater->output( "    ..." . $message . "\n" );
+				}
+			)
+		);
+	}
+
+	private function newTermStore( IDatabase $db ): DoctrineTermStore {
+		return new DoctrineTermStore(
+			( new DoctrineConnectionFactory() )->connectionFromDatabase( $db ),
+			$db->tablePrefix()
+		);
 	}
 
 }
