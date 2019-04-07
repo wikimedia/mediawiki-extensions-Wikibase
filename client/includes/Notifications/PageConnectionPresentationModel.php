@@ -81,13 +81,6 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::getSubjectMessage()
-	 */
-	public function getSubjectMessage() {
-		return parent::getSubjectMessage()->params( $this->getViewingUserForGender() );
-	}
-
-	/**
 	 * @see EchoEventPresentationModel::getPrimaryLink()
 	 */
 	public function getPrimaryLink() {
