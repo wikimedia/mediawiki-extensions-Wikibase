@@ -6,6 +6,7 @@ use CachedBagOStuff;
 use Deserializers\DispatchableDeserializer;
 use Exception;
 use InvalidArgumentException;
+use MediaWiki\DoctrineConnection\DoctrineConnectionFactory;
 use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
@@ -189,8 +190,7 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
-use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
+use Wikibase\TermStore\DoctrineTermStore;
 use Wikibase\TermStore\ItemTermStore;
 use Wikibase\TermStore\PropertyTermStore;
 use Wikibase\UpsertSqlIdGenerator;
@@ -198,6 +198,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\WikibaseSettings;
 use Wikimedia\ObjectFactory;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -328,6 +329,8 @@ class WikibaseRepo {
 	 * @var CachingKartographerEmbeddingHandler|null
 	 */
 	private $kartographerEmbeddingHandler = null;
+
+	private $container = [];
 
 	/**
 	 * @var WikibaseRepo|null
@@ -1797,18 +1800,51 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
 	public function getPropertyTermStore(): PropertyTermStore {
-		return new InMemoryPropertyTermStore(); // TODO: MW or Doctrine implementation
+		return $this->getSharedService(
+			PropertyTermStore::class,
+			function() {
+				return $this->getDoctrineTermStore()->newPropertyTermStore();
+			}
+		);
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
+	public function setPropertyTermStore( PropertyTermStore $store ) {
+		$this->container[PropertyTermStore::class] = $store;
+	}
+
 	public function getItemTermStore(): ItemTermStore {
-		return new InMemoryItemTermStore(); // TODO: MW or Doctrine implementation
+		return $this->getSharedService(
+			ItemTermStore::class,
+			function() {
+				return $this->getDoctrineTermStore()->newItemTermStore();
+			}
+		);
+	}
+
+	public function setItemTermStore( ItemTermStore $store ) {
+		$this->container[ItemTermStore::class] = $store;
+	}
+
+	public function getDoctrineTermStore(): DoctrineTermStore {
+		$db = $this->getMasterDatabase();
+
+		return new DoctrineTermStore(
+			( new DoctrineConnectionFactory() )->connectionFromDatabase( $db ),
+			$db->tablePrefix()
+		);
+	}
+
+	private function getMasterDatabase(): IDatabase {
+		return MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_MASTER );
+	}
+
+	private function getSharedService( string $serviceName, callable $constructionFunction ) {
+		if ( !array_key_exists( $serviceName, $this->container ) ) {
+			$this->container[$serviceName] = $constructionFunction();
+		}
+
+		return $this->container[$serviceName];
 	}
 
 	/**

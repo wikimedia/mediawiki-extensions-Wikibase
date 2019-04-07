@@ -39,14 +39,14 @@ class RebuildPropertyTerms extends Maintenance {
 
 		$this->addOption(
 			'batch-size',
-			"Number of rows to update per batch (Default: 250)",
+			"Number of rows to update per batch (Default: 10)",
 			false,
 			true
 		);
 
 		$this->addOption(
 			'sleep',
-			"Sleep time (in seconds) between every batch (Default: 10)",
+			"Sleep time (in seconds) between every batch (Default: 1)",
 			false,
 			true
 		);
@@ -70,8 +70,8 @@ class RebuildPropertyTerms extends Maintenance {
 			$this->getErrorReporter(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$this->wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
-			(int)$this->getOption( 'batch-size', 250 ),
-			(int)$this->getOption( 'sleep', 10 )
+			(int)$this->getOption( 'batch-size', 10 ),
+			(int)$this->getOption( 'sleep', 1 )
 		);
 
 		$rebuilder->rebuild();
