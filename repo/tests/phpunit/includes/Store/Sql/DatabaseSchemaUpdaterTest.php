@@ -6,7 +6,7 @@ use MysqlUpdater;
 use PHPUnit4And6Compat;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
 use Wikibase\Store;
-use Wikimedia\Rdbms\DatabaseMysqli;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater
@@ -26,9 +26,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 	public function testDoSchemaUpdate() {
 		$store = $this->getMock( Store::class );
 
-		$db = $this->getMockBuilder( DatabaseMysqli::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$db = $this->getMock( IDatabase::class );
 
 		$db->expects( $this->atLeastOnce() )
 			->method( 'getType' )
