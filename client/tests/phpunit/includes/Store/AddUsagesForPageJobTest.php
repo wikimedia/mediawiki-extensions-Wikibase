@@ -80,19 +80,14 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 
 		$title = Title::makeTitle( NS_MAIN, 'Bar' );
 
-		$expected = [
-			'type' => 'wikibase-addUsagesForPage',
-			'namespace' => NS_MAIN,
-			'title' => 'Bar',
-			'params' => [
-				'pageId' => 18,
-				'usages' => [ $usage->asArray() ]
-			],
-		];
-
 		$job = new AddUsagesForPageJob( $title, $params );
 
-		$this->assertEquals( $expected, $job->getDeduplicationInfo() );
+		$info = $job->getDeduplicationInfo();
+		$this->assertEquals( 'wikibase-addUsagesForPage', $info['type'] );
+		$this->assertEquals(
+			$params,
+			array_intersect_key( $info['params'], $params )
+		);
 	}
 
 	public function testRun() {
@@ -138,7 +133,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals( 'wikibase-addUsagesForPage', $spec->getType() );
 		$this->assertSame( $title, $spec->getTitle() );
-		$this->assertEquals( $expected, $spec->getParams() );
+		$this->assertEquals( $expected, array_intersect_key( $spec->getParams(), $expected ) );
 	}
 
 }
