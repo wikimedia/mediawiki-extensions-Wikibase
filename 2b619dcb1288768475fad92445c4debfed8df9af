@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39a86458_5ba132f7",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-08T14:20:16Z",
+      "side": 1,
+      "message": "What is this supposed to test?",
+      "revId": "2b619dcb1288768475fad92445c4debfed8df9af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ad4f561_e2034c85",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleWorkerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-08T14:20:16Z",
+      "side": 1,
+      "message": "should be $worker2 (also below)",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 10
+      },
+      "revId": "2b619dcb1288768475fad92445c4debfed8df9af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac2dad39_b20359e0",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleWorkerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-08T14:20:16Z",
+      "side": 1,
+      "message": "missing in phpdoc",
+      "range": {
+        "startLine": 141,
+        "startChar": 47,
+        "endLine": 141,
+        "endChar": 60
+      },
+      "revId": "2b619dcb1288768475fad92445c4debfed8df9af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
