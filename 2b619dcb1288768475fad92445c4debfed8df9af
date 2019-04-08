@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "69dbdb71_95d783da",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-08T14:39:58Z",
+      "side": 1,
+      "message": "This is migrated from the existing test in the other test suite.\n\nThe assertion inside the loop verifies that within each pair, the two instances compute the same hash (deterministically).\n\nThe assertion outside the loop here is meant to assert that the three pairs have different hashes.\n\nBut, I think I got it the wrong way around. $hashesByName should be $nameByHash, so that each pair adds or overwrites its name by hash.\nThen here we can assert with array_values that each name got its own entry.",
+      "parentUuid": "39a86458_5ba132f7",
+      "revId": "2b619dcb1288768475fad92445c4debfed8df9af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ad4f561_e2034c85",
         "filename": "lib/tests/phpunit/Modules/SitesModuleWorkerTest.php",
         "patchSetId": 6
