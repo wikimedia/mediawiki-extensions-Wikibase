@@ -93,6 +93,8 @@
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Апісаньне: $1",
 	"wikibase-pageinfo-entity-usage-T": "Назва",
 	"wikibase-pageinfo-entity-usage-C": "Некаторыя сьцьверджаньні",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Сьцьверджаньне: $1",
+	"wikibase-pageinfo-entity-usage-X": "Усе зьвесткі элемэнту",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
