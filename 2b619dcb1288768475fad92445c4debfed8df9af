@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "44011599_6e5d9eaa",
+        "filename": "lib/tests/phpunit/Modules/SitesModuleWorkerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-08T14:40:23Z",
+      "side": 1,
+      "message": "Fixed in follow-up already, but will shuffle around.",
+      "parentUuid": "9ad4f561_e2034c85",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 10
+      },
+      "revId": "2b619dcb1288768475fad92445c4debfed8df9af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2dad39_b20359e0",
         "filename": "lib/tests/phpunit/Modules/SitesModuleWorkerTest.php",
         "patchSetId": 6
