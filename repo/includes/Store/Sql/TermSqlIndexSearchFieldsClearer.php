@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\NullMessageReporter;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\NullMessageReporter;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\LBFactory;

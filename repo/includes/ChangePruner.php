@@ -3,8 +3,8 @@
 namespace Wikibase\Repo;
 
 use InvalidArgumentException;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\NullMessageReporter;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\NullMessageReporter;
 
 /**
  * Handles pruning wb_changes table, used by pruneChanges maintenance script.

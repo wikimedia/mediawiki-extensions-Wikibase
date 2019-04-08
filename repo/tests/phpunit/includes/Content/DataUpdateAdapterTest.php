@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use PHPUnit4And6Compat;
 use RuntimeException;
-use Wikibase\Lib\Reporting\MessageReporter;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Repo\Content\DataUpdateAdapter;
 

@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

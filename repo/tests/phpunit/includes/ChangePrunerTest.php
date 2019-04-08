@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Wikibase\EntityChange;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Repo\ChangePruner;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 

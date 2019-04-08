@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use DatabaseUpdater;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

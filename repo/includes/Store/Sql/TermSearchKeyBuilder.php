@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
-use Wikibase\Lib\Reporting\MessageReporter;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\IDatabase;
 

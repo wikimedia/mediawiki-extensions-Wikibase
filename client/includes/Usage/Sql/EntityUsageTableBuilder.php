@@ -4,13 +4,13 @@ namespace Wikibase\Client\Usage\Sql;
 
 use Exception;
 use InvalidArgumentException;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\LoadBalancer;
