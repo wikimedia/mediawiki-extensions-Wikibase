@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfeed6b3_acf544e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2556
+      },
+      "writtenOn": "2019-04-08T11:10:15Z",
+      "side": 1,
+      "message": "full stop, no summary",
+      "range": {
+        "startLine": 7,
+        "startChar": 45,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "64c2b64eb5c5b4a2448d387674d71a9c3f18e5fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
