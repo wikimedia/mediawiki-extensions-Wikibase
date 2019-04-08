@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63e6a2f9_3e769e20",
+        "filename": "view/lib/resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1854,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-08T18:07:14Z",
+      "side": 1,
+      "message": "I think a comment here, indicating that \u0027messages\u0027 are loaded by TermboxModule, would be useful.",
+      "revId": "833f0dbcf0f2d230f712fadd2ab127d3fd5cdafc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
