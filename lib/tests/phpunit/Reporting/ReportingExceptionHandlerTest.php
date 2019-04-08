@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Reporting;
 
+use Onoi\MessageReporter\MessageReporter;
 use PHPUnit4And6Compat;
 use RuntimeException;
-use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 
 /**

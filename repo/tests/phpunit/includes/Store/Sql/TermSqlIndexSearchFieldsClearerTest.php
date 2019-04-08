@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Repo\Store\Sql\TermSqlIndexSearchFieldsClearer;
 use Wikimedia\Rdbms\IDatabase;
 

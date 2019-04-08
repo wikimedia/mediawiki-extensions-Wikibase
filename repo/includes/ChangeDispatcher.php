@@ -4,6 +4,8 @@ namespace Wikibase\Repo;
 
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Change;
 use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,8 +13,6 @@ use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
 use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikibase\Store\SubscriptionLookup;

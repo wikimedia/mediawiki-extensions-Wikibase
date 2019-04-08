@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\Reporting\MessageReporter;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 

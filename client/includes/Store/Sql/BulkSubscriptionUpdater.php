@@ -3,12 +3,12 @@
 namespace Wikibase\Client\Store\Sql;
 
 use InvalidArgumentException;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 

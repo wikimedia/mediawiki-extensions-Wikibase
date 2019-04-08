@@ -5,7 +5,7 @@ namespace Wikibase;
 use LoggedUpdateMaintenance;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Repo\WikibaseRepo;
 

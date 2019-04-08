@@ -3,12 +3,12 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\MessageReporter;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\EntityUsageTableBuilder

@@ -4,11 +4,11 @@ namespace Wikibase;
 
 use Maintenance;
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
@@ -67,10 +67,7 @@ class UpdateSubscriptions extends Maintenance {
 
 		$startItem = $startItemOption === null ? null : $idParser->parse( $startItemOption );
 
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback(
-			[ $this, 'report' ]
-		);
+		$reporter = new CallbackMessageReporter( [ $this, 'report' ] );
 
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$updater = new BulkSubscriptionUpdater(
