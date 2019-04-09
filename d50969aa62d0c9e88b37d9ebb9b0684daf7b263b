@@ -105,6 +105,24 @@
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70200eac_ac7212ce",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-09T13:32:55Z",
+      "side": 1,
+      "message": "Right, I forgot the $data argument. (I think $data, $revision would make more sense than $revision, $data, but I’m not sure.)\n\nThe implementation of the new function could still use array_merge(), but it could also directly set $data[\u0027lastrevid\u0027]. (I’m not sure why ResultBuilder uses array_merge(), to be honest.)",
+      "parentUuid": "0c4c8542_443f6727",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
