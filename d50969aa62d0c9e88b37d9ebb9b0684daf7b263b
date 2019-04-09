@@ -87,6 +87,24 @@
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c4c8542_443f6727",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5361
+      },
+      "writtenOn": "2019-04-09T13:11:45Z",
+      "side": 1,
+      "message": "Wouldn\u0027t the `injectEntitySerializationWithMetadata` method also need to take $data as an argument?\n\nI don\u0027t know much about PHP so I just followed the same approach as in the API, where array_merge is used too. Maybe there is a way to refactor both then?",
+      "parentUuid": "704ecac8_6fcfd825",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
