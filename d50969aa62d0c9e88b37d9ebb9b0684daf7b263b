@@ -73,6 +73,47 @@
     },
     {
       "key": {
+        "uuid": "a6f79855_b02714c1",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-09T15:31:54Z",
+      "side": 1,
+      "message": "The dumps are IMO way to prominent and way to much relied upon that we should add things just for the time being. We should take the time to find a proper name for this first.",
+      "parentUuid": "5b0238af_7c38aa25",
+      "range": {
+        "startLine": 144,
+        "startChar": 13,
+        "endLine": 144,
+        "endChar": 22
+      },
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b89cdbe9_95e1e5b8",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-09T15:31:54Z",
+      "side": 1,
+      "message": "While this is true, I don\u0027t think this is the right place for this… also we shouldn\u0027t add such things unless there\u0027s a strong need (there\u0027s a cost to every piece of data added, both computational and from a maintenance perspective). So IMO just remove this and if we find that we need any further info, we will find a way.",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "704ecac8_6fcfd825",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 1
@@ -156,6 +197,23 @@
       "side": 1,
       "message": "True, I didn’t think of that.",
       "parentUuid": "bf573198_79e243b7",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9820dd90_983fdd38",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-09T15:31:54Z",
+      "side": 1,
+      "message": "I know this is purely cosmetic, but I would like to have the metadata added after the actual data… right now it\u0027s very easy to skim a JSON dump per hand, as the type+id are the first things per line, and it would be nice if we could stick to that.",
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
