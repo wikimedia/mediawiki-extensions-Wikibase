@@ -123,6 +123,24 @@
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf573198_79e243b7",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5361
+      },
+      "writtenOn": "2019-04-09T13:36:25Z",
+      "side": 1,
+      "message": "I suspect it could be used to make sure `lastrevid` appears first in the serialized output? Or is there a way to set $data[\u0027lastrevid\u0027] and make sure it is prepended to the rest, not appended?",
+      "parentUuid": "70200eac_ac7212ce",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
