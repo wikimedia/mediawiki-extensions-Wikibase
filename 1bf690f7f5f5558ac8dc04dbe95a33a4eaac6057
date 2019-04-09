@@ -34,6 +34,24 @@
       "revId": "1bf690f7f5f5558ac8dc04dbe95a33a4eaac6057",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "109a6c02_d0fa3fc1",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-09T12:58:20Z",
+      "side": 0,
+      "message": "Yeah, I think this change makes sense (given the change from EntityLookup to EntityRevisionLookup, which is necessary) – the EntityRevisionLookup explicitly says that it never resolves redirects.",
+      "parentUuid": "f3b3f63b_d737fe45",
+      "revId": "1bf690f7f5f5558ac8dc04dbe95a33a4eaac6057",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
