@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"ArmenBakkalian",
-			"Rajemian"
+			"Rajemian",
+			"Kareyac"
 		]
 	},
 	"wikibase-edit": "Խմբագրել",
+	"wikibase-cancel": "չեղարկել",
 	"wikibase-add": "աւելցնել",
 	"wikibase-label-empty": "Պիտակ նշուած չէ",
 	"wikibase-description-empty": "Նկարագրութիւնը սահմանուած չէ",
