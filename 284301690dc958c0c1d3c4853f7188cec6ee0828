@@ -16,6 +16,24 @@
       "revId": "284301690dc958c0c1d3c4853f7188cec6ee0828",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec7811b8_25e4b5f3",
+        "filename": "repo/tests/phpunit/includes/Api/SetAliasesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-10T22:00:21Z",
+      "side": 1,
+      "message": "It creates a new User object on every call (via TestUser)… but all of them share the same user name (thus represent the same user). That behavior isn\u0027t wrong in principle (as long as its not abused like in this case) and probably the best we can do for performance reasons (that user only needs to be added to the test DB once). If we want (and the performance cost is bearable, I guess), we can change that in a follow-up, though.",
+      "parentUuid": "b7e43725_dcd1cd8a",
+      "revId": "284301690dc958c0c1d3c4853f7188cec6ee0828",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
