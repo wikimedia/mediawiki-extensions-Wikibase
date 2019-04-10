@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17950bc5_4283e129",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-10T13:08:06Z",
+      "side": 1,
+      "message": "This should be clarified: “…, or if $allowRedirects is true.”\n\nI’m also not sure if $allowRedirects is the best name, but I can’t think of anything better.",
+      "revId": "5e7d2ec8450cd54a704ad9f283f30174f9ffe1eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6beaa4c_ed7372bc",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-10T13:08:06Z",
+      "side": 1,
+      "message": "I think this comment should be updated. Suggestion:\n\n\u003e If no specific revision is requested or redirects are explicitly allowed, resolve the redirect.",
+      "revId": "5e7d2ec8450cd54a704ad9f283f30174f9ffe1eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cf7e0b2_ce832018",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-10T13:08:06Z",
+      "side": 1,
+      "message": "I wonder if the third argument should be specified as constant \u0027false\u0027 here, just to be explicit?\n\n(Side note – while looking at this code I realized that this will potentially resolve infinite redirects, see T220599.)",
+      "revId": "5e7d2ec8450cd54a704ad9f283f30174f9ffe1eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
