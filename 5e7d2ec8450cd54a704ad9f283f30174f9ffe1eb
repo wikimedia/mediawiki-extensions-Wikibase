@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1811ea04_ec027a25",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-04-10T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6beaa4c_ed7372bc",
+      "revId": "5e7d2ec8450cd54a704ad9f283f30174f9ffe1eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cf7e0b2_ce832018",
         "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
         "patchSetId": 2
@@ -50,6 +68,24 @@
       "revId": "5e7d2ec8450cd54a704ad9f283f30174f9ffe1eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1476ac1_9c84c88d",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-04-10T18:27:32Z",
+      "side": 1,
+      "message": "Done.\nYes, possibility for infinite redirects exists, I have not changed that.",
+      "parentUuid": "5cf7e0b2_ce832018",
+      "revId": "5e7d2ec8450cd54a704ad9f283f30174f9ffe1eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
