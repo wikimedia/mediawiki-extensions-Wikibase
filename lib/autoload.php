@@ -114,6 +114,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\CachingSiteLinkLookup' => __DIR__ . '/includes/Store/CachingSiteLinkLookup.php',
 	'Wikibase\\Lib\\Store\\ChunkAccess' => __DIR__ . '/includes/Store/ChunkAccess.php',
 	'Wikibase\\Lib\\Store\\ChunkCache' => __DIR__ . '/includes/Store/ChunkCache.php',
+	'Wikibase\\Lib\\Store\\DelegatingEntityTermStoreWriter' => __DIR__ . '/includes/Store/DelegatingEntityTermStoreWriter.php',
 	'Wikibase\\Lib\\Store\\DispatchingEntityInfoBuilder' => __DIR__ . '/includes/Store/DispatchingEntityInfoBuilder.php',
 	'Wikibase\\Lib\\Store\\DispatchingEntityPrefetcher' => __DIR__ . '/includes/Store/DispatchingEntityPrefetcher.php',
 	'Wikibase\\Lib\\Store\\DispatchingEntityRevisionLookup' => __DIR__ . '/includes/Store/DispatchingEntityRevisionLookup.php',
