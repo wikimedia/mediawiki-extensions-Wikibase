@@ -362,11 +362,12 @@ class EntityDataRequestHandler {
 	 *
 	 * @param EntityId $id
 	 * @param int $revision The revision ID (use 0 for the current revision).
+	 * @param bool $allowRedirects Can we fetch redirects when revision is set?
 	 *
 	 * @return array list( EntityRevision, RedirectRevision|null )
 	 * @throws HttpError
 	 */
-	private function getEntityRevision( EntityId $id, $revision ) {
+	private function getEntityRevision( EntityId $id, $revision, $allowRedirects = false ) {
 		$prefixedId = $id->getSerialization();
 		$redirectRevision = null;
 
@@ -391,9 +392,9 @@ class EntityDataRequestHandler {
 				$ex->getRevisionId(), $ex->getRevisionTimestamp()
 			);
 
-			if ( $revision === 0 ) {
+			if ( $revision === 0 || $allowRedirects ) {
 				// If no specific revision is requested, resolve the redirect.
-				list( $entityRevision, ) = $this->getEntityRevision( $ex->getRedirectTargetId(), $revision );
+				list( $entityRevision, ) = $this->getEntityRevision( $ex->getRedirectTargetId(), 0 );
 			} else {
 				// The requested revision is a redirect
 				$this->logger->debug(
@@ -482,7 +483,9 @@ class EntityDataRequestHandler {
 
 		/** @var EntityRevision $entityRevision */
 		/** @var RedirectRevision $followedRedirectRevision */
-		list( $entityRevision, $followedRedirectRevision ) = $this->getEntityRevision( $id, $revision );
+		// If flavor is "dump", we allow fetching redirects by revision, since we won't
+		// be dumping the content of the target revision.
+		list( $entityRevision, $followedRedirectRevision ) = $this->getEntityRevision( $id, $revision, $flavor === 'dump' );
 
 		// handle If-Modified-Since
 		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
