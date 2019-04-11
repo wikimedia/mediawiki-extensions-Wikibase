@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
@@ -36,9 +36,9 @@ class TermSqlIndexBuilder {
 	private $loadBalancerFactory;
 
 	/**
-	 * @var TermSqlIndex
+	 * @var EntityTermStoreWriter
 	 */
-	private $termSqlIndex;
+	private $termStoreWriter;
 
 	/**
 	 * @var SqlEntityIdPagerFactory
@@ -92,7 +92,7 @@ class TermSqlIndexBuilder {
 
 	/**
 	 * @param LBFactory $loadBalancerFactory
-	 * @param TermSqlIndex $termSqlIndex
+	 * @param EntityTermStoreWriter $termStoreWriter
 	 * @param SqlEntityIdPagerFactory $entityIdPagerFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param string[] $entityTypes
@@ -100,14 +100,14 @@ class TermSqlIndexBuilder {
 	 */
 	public function __construct(
 		LBFactory $loadBalancerFactory,
-		TermSqlIndex $termSqlIndex,
+		EntityTermStoreWriter $termStoreWriter,
 		SqlEntityIdPagerFactory $entityIdPagerFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		array $entityTypes,
 		$sleep = 0
 	) {
 		$this->loadBalancerFactory = $loadBalancerFactory;
-		$this->termSqlIndex = $termSqlIndex;
+		$this->termStoreWriter = $termStoreWriter;
 		$this->entityIdPagerFactory = $entityIdPagerFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTypes = $entityTypes;
@@ -228,7 +228,7 @@ class TermSqlIndexBuilder {
 		}
 
 		if ( $this->removeDuplicateTerms ) {
-			$existingTerms = $this->termSqlIndex->getTermsOfEntity( $entityId );
+			$existingTerms = $this->termStoreWriter->getTermsOfEntity( $entityId );
 			$duplicateTerms = $this->getDuplicateTerms( $existingTerms );
 			if ( $duplicateTerms ) {
 				$this->removeDuplicateTermsOfEntity( $dbw, $entityId, $duplicateTerms );
@@ -239,7 +239,7 @@ class TermSqlIndexBuilder {
 	private function rebuildAllTermsOfEntity( EntityId $entityId ) {
 		$serializedId = $entityId->getSerialization();
 
-		$success = $this->termSqlIndex->deleteTermsOfEntity( $entityId );
+		$success = $this->termStoreWriter->deleteTermsOfEntity( $entityId );
 
 		if ( !$success ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
@@ -251,7 +251,7 @@ class TermSqlIndexBuilder {
 		}
 
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
-		$success = $this->termSqlIndex->saveTermsOfEntity( $entityRevision->getEntity() );
+		$success = $this->termStoreWriter->saveTermsOfEntity( $entityRevision->getEntity() );
 
 		if ( !$success ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
