@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\MessageReporter;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\WikibaseSettings;
@@ -10,7 +11,6 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
  * @covers \Wikibase\Client\Store\Sql\BulkSubscriptionUpdater

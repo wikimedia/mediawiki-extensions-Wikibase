@@ -8,7 +8,7 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;

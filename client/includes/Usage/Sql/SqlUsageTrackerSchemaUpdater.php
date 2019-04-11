@@ -5,8 +5,8 @@ namespace Wikibase\Client\Usage\Sql;
 use DatabaseUpdater;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
 
 /**
  * Schema updater for SqlUsageTracker
@@ -90,11 +90,13 @@ class SqlUsageTrackerSchemaUpdater {
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
 
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback( function( $msg ) use ( $dbUpdater ) {
-			$dbUpdater->output( "\t$msg\n" );
-		} );
-		$primer->setProgressReporter( $reporter );
+		$primer->setProgressReporter(
+			new CallbackMessageReporter(
+				function( $msg ) use ( $dbUpdater ) {
+					$dbUpdater->output( "\t$msg\n" );
+				}
+			)
+		);
 
 		$primer->fillUsageTable();
 	}

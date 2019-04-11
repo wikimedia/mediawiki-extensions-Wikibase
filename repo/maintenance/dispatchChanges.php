@@ -9,7 +9,7 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use MWExceptionHandler;
 use Psr\Log\LoggerInterface;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\ChunkCache;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;

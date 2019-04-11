@@ -4,9 +4,9 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
@@ -46,10 +46,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 		$startPage = (int)$this->getOption( 'start-page', 0 );
 
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback(
-			[ $this, 'report' ]
-		);
+		$reporter = new CallbackMessageReporter( [ $this, 'report' ] );
 
 		$builder = new EntityUsageTableBuilder(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser(),

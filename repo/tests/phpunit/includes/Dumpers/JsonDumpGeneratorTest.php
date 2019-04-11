@@ -22,7 +22,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Reporting\MessageReporter;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;

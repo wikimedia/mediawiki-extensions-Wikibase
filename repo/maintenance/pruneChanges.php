@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use Maintenance;
-use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Repo\ChangePruner;
 use Wikibase\Repo\PidLock;
 
