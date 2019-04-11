@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf23ee9d_85b706ce",
+        "filename": "lib/includes/Store/TermIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-11T12:05:36Z",
+      "side": 1,
+      "message": "I\u0027m wondering now why we need a new interface here. Thinking that we can use interfaces from wikibase-term-store directly here.\n\nIf ISP here (between writer and reader) is important, then it probably means it should be important in the base library too. In that case, we can split ItemTermStore and PropertyTermStore into further *TermStoreWriter and *TermStoreReader and then use them here.\n\nso then this change would be as an intermediary step:\n\n```\ninterace TermIndex\n    extends PropertyTermWriter, PropertyTermReader, ItemTermWriter, ItemTermReader\n```\n\nwyt?",
+      "revId": "685e02750594f644bedf855aa57c9108729626ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
