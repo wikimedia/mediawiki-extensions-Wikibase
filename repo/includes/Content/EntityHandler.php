@@ -666,11 +666,6 @@ abstract class EntityHandler extends ContentHandler {
 		$updates = [];
 		$entityId = $content->getEntityId();
 
-		//FIXME: we should not need this!
-		if ( $entityId === null ) {
-			$entityId = $this->getIdForTitle( $title );
-		}
-
 		if ( $content->isRedirect() ) {
 			// Remove the entity from the terms table since it's now a redirect.
 			$updates[] = new DataUpdateAdapter(
