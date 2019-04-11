@@ -307,10 +307,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	public function testUserCannotSetAliasesWhenTheyLackPermission() {
-		$this->markTestSkipped( 'Disabled due to flakiness JDF 2019-03-15 T218378' );
-
-		$userWithInsufficientPermissions = $this->createUserWithGroup( 'no-permission' );
-		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
+		$user = $this->createUserWithGroup( 'all-permission' );
 
 		$this->setMwGlobals( 'wgGroupPermissions', [
 			'no-permission' => [ 'item-term' => false ],
@@ -319,7 +316,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		] );
 
 		// And an item
-		$newItem = $this->createItemUsing( $userWithAllPermissions );
+		$newItem = $this->createItemUsing( $user );
 
 		// Then the request is denied
 		$expected = [
@@ -327,10 +324,14 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'code' => 'permissiondenied'
 		];
 
+		// Make sure our user is no longer allowed to edit terms.
+		$user->removeGroup( 'all-permission' );
+		$user->addGroup( 'no-permission' );
+
 		$this->doTestQueryExceptions(
 			$this->getAddAliasRequestParams( $newItem->getId() ),
 			$expected,
-			$userWithInsufficientPermissions
+			$user
 		);
 	}
 
@@ -386,6 +387,10 @@ class SetAliasesTest extends ModifyTermTestCase {
 	}
 
 	/**
+	 * Return a User which is part of a given group.
+	 * This will always return the same User, thus this can't
+	 * be used to create two different test users.
+	 *
 	 * @param string $groupName
 	 *
 	 * @return User
