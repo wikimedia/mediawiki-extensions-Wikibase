@@ -52,6 +52,24 @@
       "revId": "284301690dc958c0c1d3c4853f7188cec6ee0828",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b664c982_6b7781a9",
+        "filename": "repo/tests/phpunit/includes/Api/SetAliasesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-11T09:39:30Z",
+      "side": 1,
+      "message": "Perhaps WikibaseApiTestCase should be changed to use the TestUserRegistry (compare MediaWikiTestCase::getTestUser())? That can already create test users with different names. (I assume the reason why it doesn’t use it already is that WikibaseApiTestCase::createTestUser() seems to predate TestUserRegistry.)",
+      "parentUuid": "730ed71a_938972fd",
+      "revId": "284301690dc958c0c1d3c4853f7188cec6ee0828",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
