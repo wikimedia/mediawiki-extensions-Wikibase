@@ -34,6 +34,24 @@
       "revId": "284301690dc958c0c1d3c4853f7188cec6ee0828",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "730ed71a_938972fd",
+        "filename": "repo/tests/phpunit/includes/Api/SetAliasesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-11T08:04:42Z",
+      "side": 1,
+      "message": "fair enough .. maybe we can rename the function to smth like `getUserWithGroup`, also add that the \"same user\" here means same username and user in db, eventhough they are different instances of User ?\n\n----\n\nAlternative suggestions for a solution, since this test seems to have needed two different users, we can either:\n- allow that by adding a second argument to this function as the username so that callers can explicitly make two distinct users eventually, or\n- introduce function `createUniqueUserWithGroup` that randomizes the username?",
+      "parentUuid": "ec7811b8_25e4b5f3",
+      "revId": "284301690dc958c0c1d3c4853f7188cec6ee0828",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
