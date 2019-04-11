@@ -22,6 +22,30 @@
       "revId": "b84425a88938d887f239658348f5ccc327cd65ee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef72fdf_84537df4",
+        "filename": "repo/tests/phpunit/includes/Search/Elastic/Fields/StatementsFieldTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-04-11T08:08:53Z",
+      "side": 1,
+      "message": "Hm. We don\u0027t really have a strict rule for these. The MediaWiki style guide suggests to:\n* Enforce spaces when constructing an array.\n* No spaces when accessing array elements.\n\nI follow this, e.g. $map[$id] should not have spaces, in my opinion.\n\nBut this changes when the code inside of the square brackets is a function call. I find it way more readable with the extra spaces then.\n\nBut that\u0027s just my opinion, and I\u0027m still a bit undecided on that. Feel free to edit this patch. Either way is fine for me.",
+      "parentUuid": "8752669f_0b6fdb79",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 41
+      },
+      "revId": "b84425a88938d887f239658348f5ccc327cd65ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
