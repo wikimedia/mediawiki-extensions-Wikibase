@@ -90,10 +90,7 @@ class StatementsFieldTest extends \PHPUnit\Framework\TestCase {
 
 		$lookup->method( 'getDataTypeIdForProperty' )
 			->willReturnCallback( function ( PropertyId $id ) use ( $map ) {
-				if ( isset( $map[$id->getSerialization()] ) ) {
-					return $map[$id->getSerialization()];
-				}
-				return 'string';
+				return $map[ $id->getSerialization() ] ?? 'string';
 			} );
 
 		return $lookup;

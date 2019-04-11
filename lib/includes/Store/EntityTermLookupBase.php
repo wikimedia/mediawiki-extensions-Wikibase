@@ -31,12 +31,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 		);
 
 		$labels = $this->getLabels( $entityId, [ $languageCode ] );
-
-		if ( isset( $labels[$languageCode] ) ) {
-			return $labels[$languageCode];
-		}
-
-		return null;
+		return $labels[$languageCode] ?? null;
 	}
 
 	/**
@@ -71,13 +66,9 @@ abstract class EntityTermLookupBase implements TermLookup {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			"wikibase.repo.wb_terms.select.{$baseClassName}_getDescription"
 		);
+
 		$descriptions = $this->getDescriptions( $entityId, [ $languageCode ] );
-
-		if ( isset( $descriptions[$languageCode] ) ) {
-			return $descriptions[$languageCode];
-		}
-
-		return null;
+		return $descriptions[$languageCode] ?? null;
 	}
 
 	/**

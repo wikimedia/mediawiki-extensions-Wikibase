@@ -117,11 +117,7 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 			$mode === self::FROM_MASTER ? DB_MASTER : DB_REPLICA
 		);
 
-		if ( isset( $change[0] ) ) {
-			return $change[0];
-		} else {
-			return null;
-		}
+		return $change[0] ?? null;
 	}
 
 	/**

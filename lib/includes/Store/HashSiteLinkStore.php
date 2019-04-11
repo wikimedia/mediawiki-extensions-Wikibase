@@ -42,12 +42,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 		Assert::parameterType( 'string', $pageTitle, '$pageTitle' );
 
 		$key = "$globalSiteId:$pageTitle";
-
-		if ( isset( $this->itemIdsByLink[$key] ) ) {
-			return $this->itemIdsByLink[$key];
-		} else {
-			return null;
-		}
+		return $this->itemIdsByLink[$key] ?? null;
 	}
 
 	/**

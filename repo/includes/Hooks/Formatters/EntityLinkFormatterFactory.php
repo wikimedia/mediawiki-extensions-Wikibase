@@ -57,11 +57,7 @@ class EntityLinkFormatterFactory {
 	}
 
 	private function getOrCreateLinkFormatter( $type ) {
-		if ( isset( $this->cachedLinkFormatters[$type] ) ) {
-			return $this->cachedLinkFormatters[$type];
-		}
-
-		return $this->createAndCacheLinkFormatter( $type );
+		return $this->cachedLinkFormatters[$type] ?? $this->createAndCacheLinkFormatter( $type );
 	}
 
 	private function createAndCacheLinkFormatter( $type ) {

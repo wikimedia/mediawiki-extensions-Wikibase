@@ -115,11 +115,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	 * @return CoordinatesOutput
 	 */
 	private function getCoordinatesOutput( ParserOutput $parserOutput ) {
-		if ( isset( $parserOutput->geoData ) ) {
-			return $parserOutput->geoData;
-		}
-
-		return new CoordinatesOutput();
+		return $parserOutput->geoData ?? new CoordinatesOutput();
 	}
 
 	/**
