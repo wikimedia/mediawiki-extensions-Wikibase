@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
+use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
@@ -37,7 +38,6 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
-use Wikibase\Repo\Tests\Store\MockEntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
@@ -67,7 +67,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		$dumpScript = new DumpRdf();
 
 		$mockRepo = new MockRepository();
-		$mockEntityIdPager = new MockEntityIdPager();
+		$mockEntityIdPager = new InMemoryEntityIdPager();
 
 		$snakList = new SnakList();
 		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );

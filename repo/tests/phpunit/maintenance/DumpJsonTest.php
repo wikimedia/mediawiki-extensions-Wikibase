@@ -14,6 +14,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
+use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
@@ -33,7 +34,6 @@ use Wikibase\DumpJson;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
-use Wikibase\Repo\Tests\Store\MockEntityIdPager;
 
 /**
  * @covers \Wikibase\DumpJson
@@ -49,7 +49,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$dumpScript = new DumpJson();
 
 		$mockRepo = new MockRepository();
-		$mockEntityIdPager = new MockEntityIdPager();
+		$mockEntityIdPager = new InMemoryEntityIdPager();
 
 		$snakList = new SnakList();
 		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );

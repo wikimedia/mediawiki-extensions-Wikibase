@@ -5,8 +5,9 @@ namespace Wikibase\Repo\Store\Sql;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -18,7 +19,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class SqlEntityIdPager implements EntityIdPager {
+class SqlEntityIdPager implements SeekableEntityIdPager {
 
 	/**
 	 * @var EntityNamespaceLookup
