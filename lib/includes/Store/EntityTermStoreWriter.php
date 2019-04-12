@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -12,23 +11,21 @@ use Wikibase\DataModel\Entity\EntityId;
 interface EntityTermStoreWriter {
 
 	/**
-	 * Saves the terms of the provided entity in the term cache.
+	 * Saves the terms of the provided entity in the term store.
 	 *
-	 * @param EntityDocument $entity Must have an ID, and optionally any combination of terms as
-	 *  declared by the TermIndexEntry::TYPE_... constants.
+	 * @param EntityDocument $entity
 	 *
-	 * @throws InvalidArgumentException when $entity does not have an ID.
-	 * @return boolean Success indicator
+	 * @return boolean true on success, false otherwise.
 	 */
-	public function saveTermsOfEntity( EntityDocument $entity );
+	public function saveTerms( EntityDocument $entity );
 
 	/**
-	 * Deletes the terms of the provided entity from the term cache.
+	 * Deletes the terms of the provided entity from the term store.
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return boolean Success indicator
+	 * @return boolean true on success, false otherwise.
 	 */
-	public function deleteTermsOfEntity( EntityId $entityId );
+	public function deleteTerms( EntityId $entityId );
 
 }

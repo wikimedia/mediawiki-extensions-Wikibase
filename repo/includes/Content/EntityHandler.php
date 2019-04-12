@@ -27,13 +27,13 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\TermIndex;
 use Wikimedia\Assert\Assert;
 use WikiPage;
 
@@ -59,9 +59,9 @@ abstract class EntityHandler extends ContentHandler {
 	protected $fieldDefinitions;
 
 	/**
-	 * @var EntityTermStoreWriter
+	 * @var TermIndex
 	 */
-	private $termStoreWriter;
+	private $termIndex;
 
 	/**
 	 * @var EntityContentDataCodec
@@ -91,7 +91,7 @@ abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * @param string $modelId
-	 * @param EntityTermStoreWriter $termStoreWriter
+	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -105,7 +105,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function __construct(
 		$modelId,
-		EntityTermStoreWriter $termStoreWriter,
+		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -121,7 +121,7 @@ abstract class EntityHandler extends ContentHandler {
 			throw new InvalidArgumentException( '$legacyExportFormatDetector must be a callable (or null)' );
 		}
 
-		$this->termStoreWriter = $termStoreWriter;
+		$this->termIndex = $termIndex;
 		$this->contentCodec = $contentCodec;
 		$this->constraintProvider = $constraintProvider;
 		$this->errorLocalizer = $errorLocalizer;
@@ -629,7 +629,7 @@ abstract class EntityHandler extends ContentHandler {
 
 		// Unregister the entity from the terms table.
 		$updates[] = new DataUpdateAdapter(
-			[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
+			[ $this->termIndex, 'deleteTermsOfEntity' ],
 			$entityId
 		);
 
@@ -674,13 +674,13 @@ abstract class EntityHandler extends ContentHandler {
 		if ( $content->isRedirect() ) {
 			// Remove the entity from the terms table since it's now a redirect.
 			$updates[] = new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
+				[ $this->termIndex, 'deleteTermsOfEntity' ],
 				$entityId
 			);
 		} else {
 			// Register the entity in the terms table.
 			$updates[] = new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
+				[ $this->termIndex, 'saveTermsOfEntity' ],
 				$content->getEntity()
 			);
 		}
