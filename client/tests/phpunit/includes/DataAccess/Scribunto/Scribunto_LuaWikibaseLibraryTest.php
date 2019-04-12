@@ -35,7 +35,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	protected static $moduleName = 'LuaWikibaseLibraryTests';
 
 	/**
-	 * @var bool
+	 * @var bool|null
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
