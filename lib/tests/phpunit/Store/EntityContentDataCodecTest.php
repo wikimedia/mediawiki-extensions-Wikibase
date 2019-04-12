@@ -4,8 +4,11 @@ namespace Wikibase\Lib\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use DataValues\StringValue;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWikiTestCase;
 use MWContentSerializationException;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,8 +18,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\DataModel\Term\Fingerprint;
+use Psr\Log\Test\TestLogger;
 
 /**
  * @covers \Wikibase\Lib\Store\EntityContentDataCodec
@@ -28,15 +36,18 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  */
 class EntityContentDataCodecTest extends MediaWikiTestCase {
 
-	private function getCodec( $maxBlobSize = 0 ) {
+	private function getCodec( $maxBlobSize = 0, LoggerInterface $logger = null ) {
+	    if ($logger === null ) {
+	        $logger = new TestLogger();
+        }
 		$idParser = new BasicEntityIdParser();
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer(), $idParser );
-
 		return new EntityContentDataCodec(
 			$idParser,
 			$serializerFactory->newEntitySerializer(),
 			$deserializerFactory->newEntityDeserializer(),
+            $logger,
 			$maxBlobSize
 		);
 	}
@@ -74,7 +85,6 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 
 			'simple' => [ $simple, null ],
 			'simple json' => [ $simple, CONTENT_FORMAT_JSON ],
-			'simple php' => [ $simple, CONTENT_FORMAT_SERIALIZED ],
 		];
 	}
 
@@ -90,19 +100,11 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	}
 
 	public function testEncodeBigEntity() {
-		$entity = new Item( new ItemId( 'Q1' ) );
+        $logger = new TestLogger();
+	    $entity = new Item( new ItemId( 'Q1' ) );
 
-		$this->setExpectedException( MWContentSerializationException::class );
-		$this->getCodec( 6 )->encodeEntity( $entity, CONTENT_FORMAT_JSON );
-	}
-
-	public function testDecodeBigEntity() {
-		$entity = new Item( new ItemId( 'Q1' ) );
-
-		$blob = $this->getCodec()->encodeEntity( $entity, CONTENT_FORMAT_JSON );
-
-		$this->setExpectedException( MWContentSerializationException::class );
-		$this->getCodec( 6 )->decodeEntity( $blob, CONTENT_FORMAT_JSON );
+		$this->getCodec( 6, $logger)->encodeEntity( $entity, CONTENT_FORMAT_JSON );
+		$this->assertTrue($logger->hasWarning( 'Warning: entity content too big. Entity: Q1' ));
 	}
 
 	public function redirectProvider() {
