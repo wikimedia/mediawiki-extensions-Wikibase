@@ -4,7 +4,7 @@ composer.lock
 vendor/
 extensions/
 node_modules/
-
+repo/tests/selenium/log/
 easyrdf/
 
 !.*
