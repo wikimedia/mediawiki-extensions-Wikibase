@@ -133,7 +133,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @throws RuntimeException if the content object is empty or no entity ID is set
 	 * @return EntityId
 	 */
-	public function getEntityId() {
+	public function getEntityId(): EntityId {
 		if ( $this->isRedirect() ) {
 			return $this->getEntityRedirect()->getEntityId();
 		}

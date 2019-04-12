@@ -54,6 +54,9 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
+use Wikibase\Lib\Store\DelegatingEntityTermStoreWriter;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
+use Wikibase\Lib\Store\MultiTermStoreWriter;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -189,6 +192,8 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
+use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
 use Wikibase\UpsertSqlIdGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
@@ -1747,7 +1752,6 @@ class WikibaseRepo {
 	 * @return ItemHandler
 	 */
 	public function newItemHandler() {
-		$termIndex = $this->getStore()->getTermIndex();
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
@@ -1755,7 +1759,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new ItemHandler(
-			$termIndex,
+			$this->newEntityTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -1769,6 +1773,22 @@ class WikibaseRepo {
 		);
 
 		return $handler;
+	}
+
+	private function newEntityTermStoreWriter(): EntityTermStoreWriter {
+		$writeBoth = false; // TODO: create config
+
+		if ( $writeBoth ) {
+			return new MultiTermStoreWriter(
+				$this->getStore()->getTermIndex(),
+				new DelegatingEntityTermStoreWriter(
+					new InMemoryPropertyTermStore(), // TODO: MW or Doctrine implementation
+					new InMemoryItemTermStore() // TODO: MW or Doctrine implementation
+				)
+			);
+		}
+
+		return $this->getStore()->getTermIndex();
 	}
 
 	/**
@@ -1820,7 +1840,6 @@ class WikibaseRepo {
 	 * @return PropertyHandler
 	 */
 	public function newPropertyHandler() {
-		$termIndex = $this->getStore()->getTermIndex();
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
@@ -1829,7 +1848,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new PropertyHandler(
-			$termIndex,
+			$this->newEntityTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
