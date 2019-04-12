@@ -34,6 +34,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\DataAccess\\Scribunto\\WikibaseLanguageDependentLuaBindings' => __DIR__ . '/includes/DataAccess/Scribunto/WikibaseLanguageDependentLuaBindings.php',
 	'Wikibase\\Client\\DataAccess\\Scribunto\\WikibaseLanguageIndependentLuaBindings' => __DIR__ . '/includes/DataAccess/Scribunto/WikibaseLanguageIndependentLuaBindings.php',
 	'Wikibase\\Client\\DataAccess\\Scribunto\\WikibaseLuaEntityBindings' => __DIR__ . '/includes/DataAccess/Scribunto/WikibaseLuaEntityBindings.php',
+	'Wikibase\\Client\\DataAccess\\Scribunto\\WikitextPreprocessingSnakFormatter' => __DIR__ . '/includes/DataAccess/Scribunto/WikitextPreprocessingSnakFormatter.php',
 	'Wikibase\\Client\\DataAccess\\SnaksFinder' => __DIR__ . '/includes/DataAccess/SnaksFinder.php',
 	'Wikibase\\Client\\DataAccess\\StatementTransclusionInteractor' => __DIR__ . '/includes/DataAccess/StatementTransclusionInteractor.php',
 	'Wikibase\\Client\\Hooks\\BaseTemplateAfterPortletHandler' => __DIR__ . '/includes/Hooks/BaseTemplateAfterPortletHandler.php',

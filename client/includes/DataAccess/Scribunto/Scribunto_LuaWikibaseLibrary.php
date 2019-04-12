@@ -259,6 +259,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getUsageAccumulator(),
 			$type
 		);
+		if ( $type === 'rich-wikitext' ) {
+			// As Scribunto doesn't strip parser tags (like <mapframe>) itself,
+			// we need to take care of that.
+			$snakFormatter = new WikitextPreprocessingSnakFormatter(
+				$snakFormatter,
+				$this->getParser()
+			);
+		}
 
 		$snakDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakDeserializer();
 		$snaksDeserializer = $wikibaseClient->getBaseDataModelDeserializerFactory()->newSnakListDeserializer();

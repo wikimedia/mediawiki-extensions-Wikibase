@@ -198,6 +198,13 @@ local function integrationTestFormatStatementsByLabel( label )
 	return entity:formatStatements( label )
 end
 
+local function integrationTestFormatStatementsGlobeCoordinate()
+	local entity = mw.wikibase.getEntityObject( 'Q32489' )
+
+	local formattedStatement = entity:formatStatements( 'P625' ).value
+	return formattedStatement:match( "-maplink-" ) and not formattedStatement:match( "<maplink" )
+end
+
 local function integrationTestFormatStatementsNoSuchProperty( propertyLabelOrId )
 	local entity = mw.wikibase.getEntityObject( 'Q199024' )
 
@@ -536,6 +543,9 @@ local tests = {
 	{ name = 'mw.wikibase.entity.formatStatements integration (by label)', func = integrationTestFormatStatementsByLabel,
 	  args = { 'LuaTestStringProperty' },
 	  expect = { { label = 'LuaTestStringProperty', value = '<span><span>Lua :)</span></span>' } }
+	},
+	{ name = 'mw.wikibase.entity.formatStatements tag parsing', func = integrationTestFormatStatementsGlobeCoordinate,
+	  expect = { true }
 	},
 	{ name = 'mw.wikibase.entity.formatStatements by non-existing label', func = integrationTestFormatStatementsByLabel,
 	  args = { 'A label that doesn\'t exist' },
