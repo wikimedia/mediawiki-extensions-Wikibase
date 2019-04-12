@@ -1591,6 +1591,7 @@ class WikibaseRepo {
 			$this->getEntityIdParser(),
 			$this->getStorageEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
+		    LoggerFactory::getInstance( __CLASS__ ),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
