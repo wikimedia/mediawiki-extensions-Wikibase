@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2b72073_78aed932",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-12T14:36:43Z",
+      "side": 1,
+      "message": "Boah now with the uniqueness checks this is going to get really complicated .. guess I will abandon it and rely on whatever scripts we have that can import from some production/beta db",
+      "revId": "f2dc095023b10d2b5abc076c9396f73181a36c32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
