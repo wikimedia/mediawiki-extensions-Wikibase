@@ -339,7 +339,8 @@
 		 * @private
 		 */
 		_combineResults: function ( hookResults, searchResults ) {
-			var deferred = $.Deferred(),
+			var self = this,
+				deferred = $.Deferred(),
 				ids = {},
 				result = [],
 				uniqueFilter = function ( item ) {
@@ -377,13 +378,38 @@
 					result = data.concat( result );
 				} );
 
-				result.sort( ratingSorter );
+				result = self._stableSort( result, ratingSorter );
 				result = result.concat( searchResults );
 				result = result.filter( uniqueFilter );
 				deferred.resolve( result );
 			} );
 
 			return deferred.promise();
+		},
+
+		/**
+		 * @private
+		 */
+		_stableSort: function stableSort( items, compareFn ) {
+			var indices = Object.keys( items ).map( Number );
+			indices.sort( function ( index1, index2 ) {
+				var compare = compareFn( items[ index1 ], items[ index2 ] );
+				if ( compare !== 0 ) {
+					return compare;
+				}
+				// fall back to comparing indices to ensure stability
+				if ( index1 < index2 ) {
+					return -1;
+				}
+				if ( index1 > index2 ) {
+					return 1;
+				}
+				return 0;
+			} );
+			var sorted = indices.map( function ( index ) {
+				return items[ index ];
+			} );
+			return sorted;
 		},
 
 		/**
