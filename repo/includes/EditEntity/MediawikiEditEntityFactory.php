@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\WikibaseSettings;
 
 /**
  * @license GPL-2.0-or-later
@@ -97,6 +98,7 @@ class MediawikiEditEntityFactory {
 		$baseRevId = false,
 		$allowMasterConnection = true
 	) {
+		$repoSettings = WikibaseSettings::getRepoSettings();
 		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
 		return new StatsdSaveTimeRecordingEditEntity(
 			new MediawikiEditEntity( $this->titleLookup,
@@ -116,6 +118,7 @@ class MediawikiEditEntityFactory {
 					$this->stats,
 					$statsTimingPrefix . '.EditFilterHookRunner'
 				),
+				$repoSettings['maxSerializedEntitySize'],
 				$baseRevId,
 				$allowMasterConnection
 			),
