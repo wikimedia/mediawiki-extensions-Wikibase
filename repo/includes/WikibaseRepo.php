@@ -194,6 +194,8 @@ use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
+use Wikibase\TermStore\ItemTermStore;
+use Wikibase\TermStore\PropertyTermStore;
 use Wikibase\UpsertSqlIdGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
@@ -1794,9 +1796,23 @@ class WikibaseRepo {
 
 	private function getNewEntityTermStoreWriter(): EntityTermStoreWriter {
 		return new DelegatingEntityTermStoreWriter(
-			new InMemoryPropertyTermStore(), // TODO: MW or Doctrine implementation
-			new InMemoryItemTermStore() // TODO: MW or Doctrine implementation
+			$this->getPropertyTermStore(),
+			$this->getItemTermStore()
 		);
+	}
+
+	/**
+	 * Note: this is not finished and returns a dummy implementation for now
+	 */
+	public function getPropertyTermStore(): PropertyTermStore {
+		return new InMemoryPropertyTermStore(); // TODO: MW or Doctrine implementation
+	}
+
+	/**
+	 * Note: this is not finished and returns a dummy implementation for now
+	 */
+	public function getItemTermStore(): ItemTermStore {
+		return new InMemoryItemTermStore(); // TODO: MW or Doctrine implementation
 	}
 
 	/**
