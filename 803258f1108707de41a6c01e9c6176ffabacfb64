@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88388250_c960cc5d",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2019-04-12T23:02:29Z",
+      "side": 1,
+      "message": "The message key is now duplicated",
+      "range": {
+        "startLine": 446,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 47
+      },
+      "revId": "803258f1108707de41a6c01e9c6176ffabacfb64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
