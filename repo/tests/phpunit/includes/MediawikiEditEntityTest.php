@@ -22,6 +22,7 @@ use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Repo\EditEntity\MediawikiEditEntity
@@ -141,7 +142,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 		}
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
-
+		$repoSettings = WikibaseSettings::getRepoSettings();
 		return new MediawikiEditEntity(
 			$titleLookup,
 			$mockRepository,
@@ -152,6 +153,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 			$entityId,
 			$user,
 			$editFilterHookRunner,
+			$repoSettings['maxSerializedEntitySize'],
 			$baseRevId
 		);
 	}

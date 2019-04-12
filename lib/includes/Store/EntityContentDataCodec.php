@@ -6,8 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
-use MWExceptionHandler;
-use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -142,24 +140,23 @@ class EntityContentDataCodec {
 	 * @param string|null $format The desired serialization format. One of the CONTENT_FORMAT_...
 	 *  constants or null for the default.
 	 *
-	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
-	 * @return string A blob representing the given Entity.
+	 * @throws EntityContentTooBigException
+	 * @return string
 	 */
 	public function encodeEntity( EntityDocument $entity, $format ) {
 		try {
 			$data = $this->entitySerializer->serialize( $entity );
 			$blob = $this->encodeEntityContentData( $data, $format );
-
-			if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
-				throw new MWContentSerializationException( 'Content too big! Entity: ' . $entity->getId() );
-			}
-
-			return $blob;
 		} catch ( SerializationException $ex ) {
-			MWExceptionHandler::logException( $ex );
-			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+			throw new MWContentSerializationException();
 		}
+
+		if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
+			throw new EntityContentTooBigException();
+		}
+
+		return $blob;
 	}
 
 	/**
