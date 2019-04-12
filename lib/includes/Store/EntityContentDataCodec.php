@@ -6,7 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
-use MWExceptionHandler;
+use Psr\Log\LoggerInterface;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -52,10 +52,16 @@ class EntityContentDataCodec {
 	private $maxBlobSize;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param Serializer $entitySerializer A service capable of serializing EntityDocument objects.
 	 * @param Deserializer $entityDeserializer A service capable of deserializing EntityDocument
 	 *  objects.
+	 * @param LoggerInterface $logger Used to enable output in logs
 	 * @param int $maxBlobSize The maximum size of a blob to allow during
 	 *  serialization/deserialization, in bytes. Set to 0 to disable the check.
 	 */
@@ -63,11 +69,13 @@ class EntityContentDataCodec {
 		EntityIdParser $entityIdParser,
 		Serializer $entitySerializer,
 		Deserializer $entityDeserializer,
+		LoggerInterface $logger,
 		$maxBlobSize = 0
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entitySerializer = $entitySerializer;
 		$this->entityDeserializer = $entityDeserializer;
+		$this->logger = $logger;
 		$this->maxBlobSize = $maxBlobSize;
 	}
 
@@ -142,9 +150,9 @@ class EntityContentDataCodec {
 	 * @param string|null $format The desired serialization format. One of the CONTENT_FORMAT_...
 	 *  constants or null for the default.
 	 *
-	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
-	 * @return string A blob representing the given Entity.
+	 * @throws EntityEncodingException
+	 * @return string
 	 */
 	public function encodeEntity( EntityDocument $entity, $format ) {
 		try {
@@ -152,13 +160,12 @@ class EntityContentDataCodec {
 			$blob = $this->encodeEntityContentData( $data, $format );
 
 			if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
-				throw new MWContentSerializationException( 'Content too big! Entity: ' . $entity->getId() );
+				$this->logger->warning( 'Warning: entity content too big. Entity: ' . $entity->getId() );
 			}
 
 			return $blob;
 		} catch ( SerializationException $ex ) {
-			MWExceptionHandler::logException( $ex );
-			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+			throw new EntityEncodingException();
 		}
 	}
 
