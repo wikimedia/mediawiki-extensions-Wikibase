@@ -443,8 +443,6 @@
 	"right-property-create": "Create Properties",
 	"wikibase-entity-not-viewable-title": "Content type mismatch: Cannot display content",
 	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and cannot be displayed by Wikibase.",
-	"action-item-merge": "merge Items",
-	"action-property-create": "create Properties",
 	"wikibase-pageinfo-subscription": "Wikis subscribed to this entity",
 	"wikibase-pageinfo-subscription-none": "None",
 	"wikibase-search-bad-entity-type": "Bad entity type: $1",
