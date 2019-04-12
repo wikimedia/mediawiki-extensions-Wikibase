@@ -78,6 +78,7 @@ return [
 			$services->getEntityIdParser(),
 			$serializer,
 			$services->getEntityDeserializer(),
+			LoggerFactory::getInstance( 'Wikibase' ),
 			$settings->maxSerializedEntitySizeInBytes()
 		);
 
