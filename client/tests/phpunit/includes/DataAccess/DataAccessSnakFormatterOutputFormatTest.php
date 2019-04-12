@@ -62,6 +62,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 
 		$settings->setSetting( 'geoShapeStorageBaseUrl', 'https://media.something/view/' );
 		$settings->setSetting( 'tabularDataStorageBaseUrl', 'https://tabular.data/view/' );
+		$settings->setSetting( 'useKartographerMaplinkInWikitext', false );
 		$this->setUpDummyData( $store, $siteId );
 	}
 
