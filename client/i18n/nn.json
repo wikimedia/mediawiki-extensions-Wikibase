@@ -77,7 +77,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Nokre utsegner",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Utsegn: $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle einingsdata",
-	"wikibase-pageinfo-entity-usage-O": "Anna (utsegner)",
+	"wikibase-pageinfo-entity-usage-O": "Anna (påstandar)",
 	"wikibase-property-render-error": "Kunne ikkje visa eigenskapen $1: $2",
 	"wikibase-otherprojects": "På andre prosjekt",
 	"echo-pref-tooltip-wikibase-action": "Meld meg når nokon koplar ei side eg {{GENDER:|oppretta}} til eit {{WBREPONAME}}-element.",

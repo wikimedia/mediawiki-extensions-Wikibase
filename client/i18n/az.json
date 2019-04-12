@@ -24,5 +24,6 @@
 	"wikibase-watchlist-show-changes-pref": "İzləmə siyahısında {{WBREPONAME}} redaktələrini göstər",
 	"wikibase-pageinfo-entity-id": "Elementin {{WBREPONAME}} identifikatoru",
 	"wikibase-pageinfo-entity-usage": "Bu səhifədə istifadə edilən {{WBREPONAME}} vahidləri",
-	"wikibase-otherprojects": "Digər layihələr"
+	"wikibase-otherprojects": "Digər layihələr",
+	"notification-header-page-connection": "<strong>$3</strong> səhifəsi əlaqəli məlumatların toplandığı {{PLURAL:$4|-1={{WBREPONAME}} elementi|$4 nömrəli {{WBREPONAME}} elementi}} ilə {{GENDER:$2|əlaqələndirildi}}."
 }
