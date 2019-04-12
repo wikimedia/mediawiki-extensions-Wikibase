@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5343d596_c2e36910",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-12T14:00:40Z",
+      "side": 1,
+      "message": "in the migration plan, it is a little more complicated than this. (see https://phabricator.wikimedia.org/T220480)\n\nFor property terms, we will migrate with the usual process:\n\n    read old, write old\n    read old, write both \u0026 run maintenance on all Properties\n    read new, write both\n    read new, write new\n\nFor item terms, it will be even more checks:\n\n    read old, write both - run maintenance on Q1-Q2mio terms (the most accessed ones)\n    read one, write both for Q ID \u003c\u003d 2mio or write old only otherwise (timeboxed for 2 weeks to monitor performance)\n    read one, write one (until we have new master with higher capacities) \u0026 run maintenance on all items\n    read new, write new\n\n----\n\nWe will probably need two configs, such as:\n$propertyTermsWriteStrategy \u003d \u0027old\u0027 \u0027both\u0027 or \u0027new\u0027\n$propertyTermsReadStrategy \u003d \u0027old\u0027 \u0027both\u0027 or \u0027new\u0027\n\n$itemTermsWriteStrategy \u003d \u0027old\u0027 \u0027both\u0027 \u0027one\u0027 or \u0027new\u0027\n$itemTermsReadStrategy \u003d \u0027old\u0027 \u0027both\u0027 \u0027one\u0027 or \u0027new\u0027\n$itemMaxIdInNew \u003d 20,000,000 (the max id of the first chuck of items we have migrated to new schema accord. migration plan 3)\n\n----",
+      "revId": "8240e5c488e4f215442a981109c8f345943fb021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
