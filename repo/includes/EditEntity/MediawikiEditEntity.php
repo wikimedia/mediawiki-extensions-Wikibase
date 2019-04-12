@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityEncodingException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -688,8 +689,12 @@ class MediawikiEditEntity implements EditEntity {
 			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
 			return $this->status;
 		}
-
-		$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+    try {
+		  $hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+    } catch (EntityEncodingException $ex) {
+				$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+				$this->status->error( 'wikibase-error-entity-too-big', '3000kB' );
+    }
 		if ( !$hookStatus->isOK() ) {
 			$this->errorType |= EditEntity::FILTERED;
 		}
