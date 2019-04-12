@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -52,6 +54,11 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$stringProperty = $this->getTestProperty( new PropertyId( 'P342' ), 'string', 'LuaTestStringProperty' );
 		$itemProperty = $this->getTestProperty( new PropertyId( 'P456' ), 'wikibase-item', 'LuaTestItemProperty' );
+		$globeCoordinateProperty = $this->getTestProperty(
+			new PropertyId( 'P625' ),
+			'globe-coordinate',
+			'location'
+		);
 
 		$stringSnak = new PropertyValueSnak(
 			$stringProperty->getId(),
@@ -83,6 +90,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$stringProperty->getStatements()->addStatement( $statement1 );
 		$this->siteLinkLookup->putEntity( $stringProperty );
 		$this->siteLinkLookup->putEntity( $itemProperty );
+		$this->siteLinkLookup->putEntity( $globeCoordinateProperty );
 
 		$stringSnak2 = new PropertyValueSnak(
 			$stringProperty->getId(),
@@ -100,6 +108,14 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement3 = $this->getTestStatement( $itemSnak );
 		$statement3->setRank( Statement::RANK_NORMAL );
 
+		$globeCoordinateSnak = new PropertyValueSnak(
+			$globeCoordinateProperty->getId(),
+			new GlobeCoordinateValue( new LatLongValue( 1, 1 ) )
+		);
+
+		$globeCoordinateStatement = $this->getTestStatement( $globeCoordinateSnak );
+		$globeCoordinateStatement->setRank( Statement::RANK_NORMAL );
+
 		$siteLinks = [ $siteLink ];
 		$siteLinks[] = new SiteLink(
 			'fooSiteId',
@@ -115,7 +131,12 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$this->createTestItem( new ItemId( 'Q32488' ), [], [ $statement1, $statement3 ], [] );
 
-		$this->createTestItem( new ItemId( 'Q32489' ), [], [ $statement1, $statement1 ], [] );
+		$this->createTestItem(
+			new ItemId( 'Q32489' ),
+			[],
+			[ $statement1, $statement1, $globeCoordinateStatement ],
+			[]
+		);
 
 		// Create another test item to test arbitrary access
 		$this->createTestItem( new ItemId( 'Q199024' ), [ 'de' => 'Arbitrary access \o/' ] );
