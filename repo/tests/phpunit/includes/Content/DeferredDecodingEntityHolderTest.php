@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
+use Psr\Log\Test\TestLogger;
 
 /**
  * @covers \Wikibase\Content\DeferredDecodingEntityHolder
@@ -50,7 +51,8 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 		$codec = new EntityContentDataCodec(
 			new ItemIdParser(),
 			$wikibaseRepo->getStorageEntitySerializer(),
-			$wikibaseRepo->getInternalFormatEntityDeserializer()
+			$wikibaseRepo->getInternalFormatEntityDeserializer(),
+			new TestLogger()
 		);
 		$blob = $codec->encodeEntity( $entity, CONTENT_FORMAT_JSON );
 

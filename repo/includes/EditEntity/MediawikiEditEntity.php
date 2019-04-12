@@ -17,6 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityEncodingException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -117,6 +118,11 @@ class MediawikiEditEntity implements EditEntity {
 	private $errorType = 0;
 
 	/**
+	 * @var int Bit field for error types, using the EditEntity::XXX_ERROR constants.
+	 */
+	private $maxSerializedEntitySize;
+
+	/**
 	 * @var bool Can use a master connection or not
 	 */
 	private $allowMasterConnection;
@@ -139,6 +145,7 @@ class MediawikiEditEntity implements EditEntity {
 	 *        of this class changed so that "late" conflicts that arise between edit conflict
 	 *        detection and database update are always detected, and result in the update to fail.
 	 * @param bool $allowMasterConnection
+	 * @param int $maxSerializedEntitySize the maximal allowed entity size
 	 */
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
@@ -150,6 +157,7 @@ class MediawikiEditEntity implements EditEntity {
 		EntityId $entityId = null,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
+		$maxSerializedEntitySize,
 		$baseRevId = 0,
 		$allowMasterConnection = true
 	) {
@@ -178,6 +186,7 @@ class MediawikiEditEntity implements EditEntity {
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->allowMasterConnection = $allowMasterConnection;
+		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 	}
 
 	/**
@@ -689,7 +698,12 @@ class MediawikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
-		$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+		try {
+			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+		} catch ( EntityEncodingException $ex ) {
+			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->formatSize( $this->maxSerializedEntitySize * 1024 ) );
+			return $this->status;
+		}
 		if ( !$hookStatus->isOK() ) {
 			$this->errorType |= EditEntity::FILTERED;
 		}
