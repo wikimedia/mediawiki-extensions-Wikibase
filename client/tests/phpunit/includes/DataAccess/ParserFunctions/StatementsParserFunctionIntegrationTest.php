@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
+use ExtensionRegistry;
 use Language;
 use MediaWikiTestCase;
 use Parser;
@@ -39,9 +40,14 @@ use Wikimedia\TestingAccessWrapper;
 class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 	/**
-	 * @var bool
+	 * @var bool|null
 	 */
 	private $oldAllowDataAccessInUserLanguage;
+
+	/**
+	 * @var bool|null
+	 */
+	private $oldUseKartographerMaplinkInWikitext;
 
 	/**
 	 * @var MockClientStore
@@ -72,9 +78,12 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
+		$settings = $wikibaseClient->getSettings();
 
-		$this->oldAllowDataAccessInUserLanguage = $wikibaseClient->getSettings()->getSetting( 'allowDataAccessInUserLanguage' );
+		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
 		$this->setAllowDataAccessInUserLanguage( false );
+		$this->oldUseKartographerMaplinkInWikitext = $settings->getSetting( 'useKartographerMaplinkInWikitext' );
+		$settings->setSetting( 'useKartographerMaplinkInWikitext', true );
 	}
 
 	private function maskPropertyLabelResolver( WikibaseClient $wikibaseClient ) {
@@ -95,6 +104,10 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'useKartographerMaplinkInWikitext', $this->oldUseKartographerMaplinkInWikitext );
+
 		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
@@ -219,6 +232,19 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 			[],
 			array_keys( $usageAccumulator->getUsages() )
 		);
+	}
+
+	public function testStatementsParserFunction_maplink() {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {
+			$this->markTestSkipped(
+				'Kartographer is needed to test maplinks'
+			);
+		}
+		$result = $this->parseWikitextToHtml( '{{#statements:P625|from=Q32489}}' );
+
+		$text = $result->getText( [ 'unwrap' => true ] );
+		$this->assertContains( 'class="mw-kartographer-maplink"', $text );
+		$this->assertNotContains( '&lt;maplink', $text );
 	}
 
 	/**

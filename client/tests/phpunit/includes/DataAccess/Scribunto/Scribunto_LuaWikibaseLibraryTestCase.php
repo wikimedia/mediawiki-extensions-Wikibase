@@ -54,6 +54,11 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	private static $oldAllowArbitraryDataAccess = null;
 
 	/**
+	 * @var bool|null
+	 */
+	private $oldUseKartographerMaplinkInWikitext;
+
+	/**
 	 * Whether to allow arbitrary data access or not
 	 *
 	 * @return bool
@@ -148,7 +153,26 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		);
 
 		$this->setContentLang( 'de' );
+		$this->primeTermsTable();
 
+		// Make sure <maplink> can be used, even if Kartographer is not installed.
+		$this->addMaplinkParserTag();
+
+		$settings = $wikibaseClient->getSettings();
+		$this->oldUseKartographerMaplinkInWikitext = $settings->getSetting( 'useKartographerMaplinkInWikitext' );
+		$settings->setSetting( 'useKartographerMaplinkInWikitext', true );
+	}
+
+	protected function tearDown() {
+		parent::tearDown();
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'useKartographerMaplinkInWikitext', $this->oldUseKartographerMaplinkInWikitext );
+
+		self::unMock();
+	}
+
+	private function primeTermsTable() {
 		$db = wfGetDB( DB_MASTER );
 		$db->insert(
 			'wb_terms',
@@ -164,10 +188,14 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		);
 	}
 
-	protected function tearDown() {
-		parent::tearDown();
-
-		self::unMock();
+	private function addMaplinkParserTag() {
+		$engine = $this->getEngine();
+		if ( !in_array( 'maplink', $engine->getParser()->getTags() ) ) {
+			$engine->getParser()->setHook(
+				'maplink',
+				function() { return 'THIS-IS-A-MAP'; }
+			);
+		}
 	}
 
 	/**

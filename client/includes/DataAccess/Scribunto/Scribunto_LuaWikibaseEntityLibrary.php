@@ -7,6 +7,7 @@ use Language;
 use MediaWiki\MediaWikiServices;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -50,10 +51,9 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$lang,
 			$this->getUsageAccumulator()
 		);
-		$richWikitextSnakFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
-			$lang,
-			$this->getUsageAccumulator(),
-			'rich-wikitext'
+		$richWikitextSnakFormatter = $this->newRichWikitextSnakFormatter(
+			$snakFormatterFactory,
+			$lang
 		);
 
 		$entityLookup = $wikibaseClient->getRestrictedEntityLookup();
@@ -88,6 +88,30 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$lang,
 			$this->getUsageAccumulator(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
+		);
+	}
+
+	/**
+	 * @param DataAccessSnakFormatterFactory $snakFormatterFactory
+	 * @param Language $lang
+	 *
+	 * @return WikitextRecursiveTagParsingSnakFormatter
+	 */
+	private function newRichWikitextSnakFormatter(
+		DataAccessSnakFormatterFactory $snakFormatterFactory,
+		Language $lang
+	) {
+		$innerFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
+			$lang,
+			$this->getUsageAccumulator(),
+			'rich-wikitext'
+		);
+
+		// As Scribunto doesn't parse parser tags (like <mapframe>) itself,
+		// we need to take care of that.
+		return new WikitextRecursiveTagParsingSnakFormatter(
+			$innerFormatter,
+			$this->getParser()
 		);
 	}
 
