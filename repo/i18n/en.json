@@ -281,7 +281,7 @@
 	"wikibase-dispatchstats-median": "Median",
 	"wikibase-dispatchstats-average": "Average",
 	"special-listdatatypes": "List of all data types available",
-	"wikibase-listdatatypes-intro": "This is a list of all data types available on this installation:",
+	"wikibase-listdatatypes-intro": "This is a list of all data types with the corresponding data value types available on this installation:",
 	"wikibase-listdatatypes-listproperties": "List of Properties with this data type",
 	"wikibase-history-title-with-label": "Revision history of \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Revision history of ($1)",
