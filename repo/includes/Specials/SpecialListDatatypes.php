@@ -52,24 +52,28 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		// 'wikibase-listdatatypes-external-id-head'
 		// 'wikibase-listdatatypes-external-id-body'
 
-		foreach ( $this->getDataTypeIds() as $dataTypeId ) {
-			$this->getOutput()->addHTML( $this->getHtmlForDataTypeId( $dataTypeId ) );
+		foreach ( $this->getDataTypeIdsAndValues() as $dataTypeId => $valueType ) {
+			$this->getOutput()->addHTML( $this->getHtmlForDataTypeId( $dataTypeId, $valueType ) );
 		}
 
 		$this->getOutput()->addHTML( Html::closeElement( 'dl' ) );
 	}
 
-	protected function getDataTypeIds() {
-		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds();
+	protected function getDataTypeIdsAndValues() {
+		return WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getValueTypes();
 	}
 
-	protected function getHtmlForDataTypeId( $dataTypeId ) {
-		$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+	protected function getHtmlForDataTypeId( $dataTypeId, $valueType ) {
+		$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId  );
+		$baseKey2 = '(' . mb_strtolower( $valueType  ) . ')';
 
 		return Html::rawElement(
 			'dt',
 			[ 'id' => $dataTypeId ],
 			$this->msg( $baseKey . '-head' )->parse()
+				.Html::rawElement( 'dv', [],
+					' ' . $baseKey2
+				)
 		)
 		. Html::rawElement( 'dd', [],
 			$this->msg( $baseKey . '-body' )->parse()
