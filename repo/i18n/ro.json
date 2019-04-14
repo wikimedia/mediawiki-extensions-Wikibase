@@ -195,6 +195,6 @@
 	"content-model-wikibase-item": "Element Wikibase",
 	"content-model-wikibase-property": "Proprietate Wikibase",
 	"content-model-wikibase-query": "Interogare Wikibase",
-	"right-property-create": "Creează proprietăți",
-	"action-property-create": "creați proprietăți"
+	"action-property-create": "creați proprietăți",
+	"right-property-create": "Creează proprietăți"
 }

@@ -364,12 +364,12 @@
 	"content-model-wikibase-property": "Vikibaasi omadus",
 	"content-model-wikibase-query": "Vikibaasi päring",
 	"right-item-term": "Muuta üksuse liikmeid (silte, kirjeldusi, rööpkujusid)",
+	"action-item-merge": "üksusi liita",
 	"right-item-merge": "Liita üksusi",
 	"right-item-redirect": "Suunata üksusi ümber",
 	"right-property-term": "Muuta omaduse liikmeid (silte, kirjeldusi, rööpkujusid)",
+	"action-property-create": "omadusi luua",
 	"right-property-create": "Luua omadusi",
 	"wikibase-entity-not-viewable-title": "Lahknev sisutüüp: sisu ei saa kuvada",
-	"wikibase-entity-not-viewable": "Antud sisutüüp \"$1\" pole olem ja Vikibaas ei saa seda kuvada.",
-	"action-item-merge": "üksusi liita",
-	"action-property-create": "omadusi luua"
+	"wikibase-entity-not-viewable": "Antud sisutüüp \"$1\" pole olem ja Vikibaas ei saa seda kuvada."
 }

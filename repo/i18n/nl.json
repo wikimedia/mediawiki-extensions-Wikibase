@@ -369,14 +369,14 @@
 	"content-model-wikibase-property": "Wikibase-eigenschap",
 	"content-model-wikibase-query": "Wikibasezoekopdracht",
 	"right-item-term": "Itemwaarden wijzigen (labels, beschrijvingen, aliassen)",
+	"action-item-merge": "items samenvoegen",
 	"right-item-merge": "Items samenvoegen",
 	"right-item-redirect": "Item-doorverwijzingen aanmaken",
 	"right-property-term": "Eigenschapswaarden wijzigen (labels, beschrijvingen, aliassen)",
+	"action-property-create": "eigenschappen aanmaken",
 	"right-property-create": "Eigenschappen aanmaken",
 	"wikibase-entity-not-viewable-title": "Inhoudstype komt niet overeen: Inhoud kan niet worden weergegeven",
 	"wikibase-entity-not-viewable": "De gegeven inhoud van het type \"$1\" is niet een Entiteit en kan niet worden weergegeven door Wikibase.",
-	"action-item-merge": "items samenvoegen",
-	"action-property-create": "eigenschappen aanmaken",
 	"wikibase-pageinfo-subscription": "Wiki's geabonneerd op deze entiteit",
 	"wikibase-pageinfo-subscription-none": "Geen"
 }

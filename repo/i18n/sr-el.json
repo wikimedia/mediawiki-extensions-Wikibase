@@ -305,12 +305,12 @@
 	"content-model-wikibase-property": "svojstvo Vikibaze",
 	"content-model-wikibase-query": "upit Vikibaze",
 	"right-item-term": "promena termina stavke (oznake, opisi, pseudonimi)",
+	"action-item-merge": "objedinjavate stavke",
 	"right-item-merge": "objedinjavanje stavki",
 	"right-item-redirect": "pravljenje preusmerenja stavki",
 	"right-property-term": "promena uslova svojstava (oznake, opisi, pseudonimi)",
-	"right-property-create": "pravljenje svojstava",
-	"action-item-merge": "objedinjavate stavke",
 	"action-property-create": "pravite svojstva",
+	"right-property-create": "pravljenje svojstava",
 	"wikibase-pageinfo-subscription-none": "Nema",
 	"wikibase-search-bad-entity-type": "Pogrešna vrsta entiteta: $1"
 }

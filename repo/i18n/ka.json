@@ -183,8 +183,8 @@
 	"content-model-wikibase-item": "Wikibase-ის ელემენტი",
 	"content-model-wikibase-property": "Wikibase-ის თვისებები",
 	"content-model-wikibase-query": "Wikibase-ის მოთხოვნა",
-	"right-item-merge": "ელემენტების შერწყმა",
-	"right-property-create": "თვისებების შექმნა",
 	"action-item-merge": "ელემენტების შერწყმა",
-	"action-property-create": "თვისებების შექმნა"
+	"right-item-merge": "ელემენტების შერწყმა",
+	"action-property-create": "თვისებების შექმნა",
+	"right-property-create": "თვისებების შექმნა"
 }

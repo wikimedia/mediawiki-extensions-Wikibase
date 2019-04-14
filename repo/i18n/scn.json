@@ -298,12 +298,12 @@
 	"content-model-wikibase-property": "Prupità Wikibase",
 	"content-model-wikibase-query": "Ntirrugazzioni Wikibase",
 	"right-item-term": "Canciari li tèrmini dî suggetti (etichetti, discrizzioni, alias)",
+	"action-item-merge": "jùnciri suggetti",
 	"right-item-merge": "Jùnciri suggetti",
 	"right-item-redirect": "Criari rimanni ê suggetti",
 	"right-property-term": "Canciari li tèrmini dî prupità (etichetti, discrizzioni, alias)",
+	"action-property-create": "criari prupietà",
 	"right-property-create": "Criari prupità",
 	"wikibase-entity-not-viewable-title": "Nun currispunni lu tipu dû cuntinutu: Nun si pò ammustrari lu cuntinutu",
-	"wikibase-entity-not-viewable": "Lu cuntinutu spicificatu di tipu \"$1\" nun è na Ntità e nun si pò ammustrari nta Wikibase.",
-	"action-item-merge": "jùnciri suggetti",
-	"action-property-create": "criari prupietà"
+	"wikibase-entity-not-viewable": "Lu cuntinutu spicificatu di tipu \"$1\" nun è na Ntità e nun si pò ammustrari nta Wikibase."
 }

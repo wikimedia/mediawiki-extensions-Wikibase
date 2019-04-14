@@ -334,13 +334,13 @@
 	"content-model-wikibase-property": "Wikibase savybė",
 	"content-model-wikibase-query": "Wikibase užklausa",
 	"right-item-term": "Atnaujinti įrašo terminus (žymes, aprašymus, alternatyvius vardus)",
+	"action-item-merge": "apjungti įrašus",
 	"right-item-merge": "Apjungti įrašus",
 	"right-item-redirect": "Sukurti įrašo nukreipimus",
 	"right-property-term": "Atnaujinti savybės terminus (žymes, aprašymus, alternatyvius vardus)",
+	"action-property-create": "sukurti savybes",
 	"right-property-create": "Sukurti savybes",
 	"wikibase-entity-not-viewable-title": "Turinio tipo neatitikimas: Nepavyko pavaizduoti turinio",
 	"wikibase-entity-not-viewable": "Pateiktasis \"$1\" pobūdžio turinys nėra esmuo ir negali būti pavaizduotas Vikibazėje.",
-	"action-item-merge": "apjungti įrašus",
-	"action-property-create": "sukurti savybes",
 	"wikibase-pageinfo-subscription-none": "Nėra"
 }

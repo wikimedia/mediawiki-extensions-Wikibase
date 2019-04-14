@@ -258,9 +258,9 @@
 	"content-model-wikibase-item": "Wikibase-Element",
 	"content-model-wikibase-property": "Wikibase-Eegenschaft",
 	"content-model-wikibase-query": "Wikibase-Ufro",
-	"right-item-merge": "Elementer fusionéieren",
-	"right-property-create": "Eegeschaften uleeën",
 	"action-item-merge": "Elementer fusionéieren",
+	"right-item-merge": "Elementer fusionéieren",
 	"action-property-create": "Eegeschaften uleeën",
+	"right-property-create": "Eegeschaften uleeën",
 	"wikibase-pageinfo-subscription-none": "Keng"
 }

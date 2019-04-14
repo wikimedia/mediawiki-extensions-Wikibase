@@ -184,6 +184,6 @@
 	"content-model-wikibase-item": "Elemento Wikibase",
 	"content-model-wikibase-property": "Proprietà Wikibase",
 	"content-model-wikibase-query": "Interogasion Wikibase",
-	"right-property-create": "Crea proprietà",
-	"action-property-create": "crear le proprietà"
+	"action-property-create": "crear le proprietà",
+	"right-property-create": "Crea proprietà"
 }

@@ -169,7 +169,7 @@
 	"content-model-wikibase-item": "विकिबैस वस्तु",
 	"content-model-wikibase-property": "विकिबैस गुण",
 	"content-model-wikibase-query": "विकिबैस क्वारी",
-	"right-property-create": "गुण निर्मित करें",
 	"action-property-create": "गुण निर्मित करें",
+	"right-property-create": "गुण निर्मित करें",
 	"wikibase-pageinfo-subscription-none": "कोई नहीं"
 }

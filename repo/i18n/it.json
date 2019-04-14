@@ -365,14 +365,14 @@
 	"content-model-wikibase-property": "Proprietà Wikibase",
 	"content-model-wikibase-query": "Interrogazione Wikibase",
 	"right-item-term": "Modifica termini elementi (etichette, descrizioni, alias)",
+	"action-item-merge": "unisci elementi",
 	"right-item-merge": "Unisci elementi",
 	"right-item-redirect": "Crea elementi redirect",
 	"right-property-term": "Modifica termini proprietà (etichette, descrizioni, alias)",
+	"action-property-create": "creare proprietà",
 	"right-property-create": "Crea proprietà",
 	"wikibase-entity-not-viewable-title": "Tipo di contenuto non corrispondente: impossibile visualizzare il contenuto",
 	"wikibase-entity-not-viewable": "Il tipo di contenuto \"$1\" indicato non è un'entità e non può essere visualizzato da Wikibase.",
-	"action-item-merge": "unisci elementi",
-	"action-property-create": "creare proprietà",
 	"wikibase-pageinfo-subscription": "Wiki sottoscritte a questa entità",
 	"wikibase-pageinfo-subscription-none": "Nessuno"
 }

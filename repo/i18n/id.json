@@ -348,12 +348,12 @@
 	"content-model-wikibase-property": "Atribut Wikibase",
 	"content-model-wikibase-query": "Permintaan (''query'') Wikibase",
 	"right-item-term": "Ubah istilah butir (label, deskripsi, nama lain)",
+	"action-item-merge": "gabungkan butir",
 	"right-item-merge": "Gabungkan butir",
 	"right-item-redirect": "Buat pengalihan butir",
 	"right-property-term": "Ubah istilah atribut (label, deskripsi, nama lain)",
+	"action-property-create": "buat atribut",
 	"right-property-create": "Buat atribut",
 	"wikibase-entity-not-viewable-title": "Ketidaksesuaian jenis isian: Tidak dapat menampilkan isian",
-	"wikibase-entity-not-viewable": "Jenis isian $1 yang diberikan bukanlah sebuah Entitas dan tidak dapat ditampilkan oleh Wikibase.",
-	"action-item-merge": "gabungkan butir",
-	"action-property-create": "buat atribut"
+	"wikibase-entity-not-viewable": "Jenis isian $1 yang diberikan bukanlah sebuah Entitas dan tidak dapat ditampilkan oleh Wikibase."
 }

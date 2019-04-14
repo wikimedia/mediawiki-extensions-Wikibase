@@ -234,10 +234,10 @@
 	"content-model-wikibase-item": "Αντικείμενο wikibase",
 	"content-model-wikibase-property": "Ιδιότητα wikibase",
 	"content-model-wikibase-query": "Ερώτημα Wikibase",
+	"action-item-merge": "Συγχώνευση αντικειμένων",
 	"right-item-merge": "Συγχώνευση αντικειμένων",
 	"right-item-redirect": "Δημιουργία ανακατευθύνσεων αντικειμένων",
 	"right-property-term": "Αλλαγή όρων ιδιοτήτων (ετικέτες, περιγραφές, ψευδώνυμα)",
-	"right-property-create": "Δημιουργία ιδιοτήτων",
-	"action-item-merge": "Συγχώνευση αντικειμένων",
-	"action-property-create": "δημιουργία ιδιοτήτων"
+	"action-property-create": "δημιουργία ιδιοτήτων",
+	"right-property-create": "Δημιουργία ιδιοτήτων"
 }

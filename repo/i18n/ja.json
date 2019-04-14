@@ -357,12 +357,13 @@
 	"content-model-wikibase-item": "ウィキベース項目",
 	"content-model-wikibase-property": "ウィキベース プロパティ",
 	"content-model-wikibase-query": "ウィキベース クエリ",
-	"right-item-merge": "項目を統合",
-	"right-item-redirect": "項目リダイレクトの作成",
-	"right-property-term": "著作権規約の変更 (ラベル、説明、別名)",
-	"right-property-create": "プロパティを作成",
 	"action-item-merge": "項目を統合",
+	"right-item-merge": "項目を統合",
+	"action-item-redirect": "項目リダイレクトの作成",
+	"right-item-redirect": "項目リダイレクトを作成",
+	"right-property-term": "プロパティ用語を変更 (ラベル、説明、別名)",
 	"action-property-create": "プロパティを作成",
+	"right-property-create": "プロパティを作成",
 	"wikibase-pageinfo-subscription-none": "なし",
 	"wikibase-search-namespace-mix": "現在、エンティティとそれ以外の名前空間を同時に検索することができません。エンティティの検索結果のみを示しています。"
 }

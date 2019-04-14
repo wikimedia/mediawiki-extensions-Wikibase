@@ -183,8 +183,8 @@
 	"wikibase-listdatatypes-time-head": "Čas",
 	"wikibase-listdatatypes-url-head": "Spletni naslov",
 	"datatypes-type-url": "Spletni naslov",
-	"right-item-merge": "Združi Objekte",
 	"action-item-merge": "združi Objekte",
+	"right-item-merge": "Združi Objekte",
 	"action-property-create": "ustvari Lastnosti",
 	"wikibase-pageinfo-subscription-none": "Brez"
 }

@@ -169,9 +169,9 @@
 	"content-model-wikibase-item": "Wikibase репозотория элементі",
 	"content-model-wikibase-property": "Wikibase репозотория сипаты",
 	"content-model-wikibase-query": "Wikibase репозотория сұрауы",
+	"action-item-merge": "Элеметтерді біріктіру",
 	"right-item-merge": "Элеметтерді біріктіру",
 	"right-item-redirect": "Элементтер бағаттау бастау",
-	"right-property-create": "Стпаттарды бастау",
-	"action-item-merge": "Элеметтерді біріктіру",
-	"action-property-create": "Стпаттарды бастау"
+	"action-property-create": "Стпаттарды бастау",
+	"right-property-create": "Стпаттарды бастау"
 }

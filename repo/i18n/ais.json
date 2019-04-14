@@ -292,11 +292,11 @@
 	"content-model-wikibase-property": "Wikibase susin",
 	"content-model-wikibase-query": "Wikibase palalitemuh tu kawaw",
 	"right-item-term": "misumad kasacacay a kamu (aazihen-paya, sapuelac atu pacimilay ngangan)",
+	"action-item-merge": "mikabu tu kasacacay",
 	"right-item-merge": "mikabu tu kasacacay",
 	"right-item-redirect": "patizeng kasacacay miliyawtu patatuzu’",
 	"right-property-term": "misumad susin a kamu (aazihen-paya, sapuelac atu pacimilay ngangan)",
-	"right-property-create": "patizeng tu susin",
-	"action-item-merge": "mikabu tu kasacacay",
 	"action-property-create": "patizeng tu susin",
+	"right-property-create": "patizeng tu susin",
 	"wikibase-pageinfo-subscription-none": "nayi’"
 }

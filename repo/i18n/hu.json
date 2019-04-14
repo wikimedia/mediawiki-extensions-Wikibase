@@ -307,11 +307,11 @@
 	"content-model-wikibase-item": "Wikibase fogalom",
 	"content-model-wikibase-property": "Wikibase tulajdonság",
 	"content-model-wikibase-query": "Wikibase lekérdezés",
+	"action-item-merge": "elemek összeolvasztása",
 	"right-item-merge": "elemek összeolvasztása",
 	"right-item-redirect": "elemátirányítások létrehozása",
+	"action-property-create": "tulajdonságok létrehozása",
 	"right-property-create": "tulajdonságok létrehozása",
 	"wikibase-entity-not-viewable-title": "Tartalomtípus-eltérés: A tartalom nem jeleníthető meg",
-	"action-item-merge": "elemek összeolvasztása",
-	"action-property-create": "tulajdonságok létrehozása",
 	"wikibase-pageinfo-subscription-none": "Nincs"
 }

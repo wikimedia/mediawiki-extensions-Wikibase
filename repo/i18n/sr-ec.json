@@ -313,12 +313,12 @@
 	"content-model-wikibase-property": "својство Викибазе",
 	"content-model-wikibase-query": "Wikibase упит",
 	"right-item-term": "промена термина ставке (ознаке, описи, псеудоними)",
+	"action-item-merge": "обједињавате ставке",
 	"right-item-merge": "обједињавање ставки",
 	"right-item-redirect": "прављење преусмерења ставки",
 	"right-property-term": "промена услова својстава (ознаке, описи, псеудоними)",
-	"right-property-create": "прављење својстава",
-	"action-item-merge": "обједињавате ставке",
 	"action-property-create": "правите својства",
+	"right-property-create": "прављење својстава",
 	"wikibase-pageinfo-subscription-none": "Нема",
 	"wikibase-search-bad-entity-type": "Лоша врста јединице: $1"
 }

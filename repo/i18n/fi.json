@@ -123,6 +123,7 @@
 	"wikibase-shortcopyrightwarning": "Klikkaamalla ”$1” hyväksyt [[$2|käyttöehdot]] ja suostut siihen, että muokkauksesi julkaistaan lisenssin $3 alaisena.",
 	"wikibase-copyrighttooltip-acknowledge": "Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.",
 	"wikibase-entityselector-more": "lisää",
+	"wikibase-entityselector-notfound": "Ei hakutuloksia",
 	"wikibase-anonymouseditwarning": "Varoitus: Et ole kirjautunut sisään.\nIP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.",
 	"wikibase-move-error": "Et voi siirtää sivuja, jotka ovat data-nimiavaruudessa, etkä voi siirtää sivuja siihen.",
 	"wikibase-validator-sitelink-conflict": "Sivustolinkki $1 on jo käytössä kohteessa $2. Voit poistaa sen kohteesta $2, jos se ei kuulu sinne tai yhdistää kohteet, jos ne ovat täsmälleen samasta asiasta.",
@@ -195,7 +196,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Kuvaus:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliakset:",
 	"wikibase-setlabeldescriptionaliases-submit": "Aseta nimi, kuvaus ja aliakset",
-	"special-setsitelink": "Aseta sivustolinkki",
+	"special-setsitelink": "Aseta kohteen sivustolinkki",
 	"wikibase-setsitelink-introfull": "Olet asettamassa sivustolla $2 olevaa linkkiä kohteeseen [[:$1]].",
 	"wikibase-setsitelink-intro": "Tällä lomakkeella voit asettaa sivustolinkin kohteeseen. Sinun täytyy antaa kohteen tunniste (esim. Q23), sivuston tunniste (esim. ”fiwiki”) ja sivustolinkki, jonka haluat asettaa.",
 	"wikibase-setsitelink-intro-badges": "Lisäksi voit asettaa tälle sivustolinkille eri merkkejä, jotka on lueteltu alla.",
@@ -297,10 +298,10 @@
 	"content-model-wikibase-property": "Wikibase-ominaisuus",
 	"content-model-wikibase-query": "Wikibase-kysely",
 	"right-item-term": "Muuttaa kohteiden käsitteitä (nimet, kuvaukset, aliakset)",
+	"action-item-merge": "yhdistää kohteita",
 	"right-item-merge": "Yhdistää kohteita",
 	"right-item-redirect": "Luoda kohdeohjaussivuja",
 	"right-property-term": "Muuttaa ominaisuuksien käsitteitä (nimet, kuvaukset, aliakset)",
-	"right-property-create": "Luoda ominaisuuksia",
-	"action-item-merge": "yhdistää kohteita",
-	"action-property-create": "luoda ominaisuuksia"
+	"action-property-create": "luoda ominaisuuksia",
+	"right-property-create": "Luoda ominaisuuksia"
 }

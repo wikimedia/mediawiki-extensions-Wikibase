@@ -315,12 +315,12 @@
 	"content-model-wikibase-property": "Proprietà Wikibase",
 	"content-model-wikibase-query": "Interrogazione Wikibase",
 	"right-item-term": "Cagna 'e termene elemente (etichette, descriziune, aliasse)",
+	"action-item-merge": "aunisce elemente",
 	"right-item-merge": "Aunisce elemente",
 	"right-item-redirect": "Crèa elemente redirect",
 	"right-property-term": "Cagna 'e termene 'e pruprietà (etichette, descriziune, aliasse)",
+	"action-property-create": "crèa pruprietà",
 	"right-property-create": "Crea pruprietà",
 	"wikibase-entity-not-viewable-title": "Nun azzeccano 'e tipe 'e cuntenute: Nun se pò mmustà 'o cuntenuto 'e schermo",
-	"wikibase-entity-not-viewable": "'O tipo 'e cuntenuto dato \"$1\" nun è n'Entità e nun se putesse mmustà 'a Wikibase.",
-	"action-item-merge": "aunisce elemente",
-	"action-property-create": "crèa pruprietà"
+	"wikibase-entity-not-viewable": "'O tipo 'e cuntenuto dato \"$1\" nun è n'Entità e nun se putesse mmustà 'a Wikibase."
 }

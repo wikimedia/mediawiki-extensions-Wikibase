@@ -248,11 +248,11 @@
 	"content-model-wikibase-property": "Свойство в Уикиданни",
 	"content-model-wikibase-query": "Заявка към Уикиданни",
 	"right-item-term": "Променяне на условията за обектите (етикети, описи, псевдоними)",
+	"action-item-merge": "сливане на обекти",
 	"right-item-merge": "Сливане на обекти",
 	"right-item-redirect": "Създаване на пренасочвания на обекти",
 	"right-property-term": "Променяне на условията за свойствата (етикети, описи, псевдоними)",
-	"right-property-create": "Създаване на свойства",
-	"action-item-merge": "сливане на обекти",
 	"action-property-create": "създаване на свойства",
+	"right-property-create": "Създаване на свойства",
 	"wikibase-pageinfo-subscription-none": "Никакво"
 }

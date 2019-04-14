@@ -317,12 +317,12 @@
 	"content-model-wikibase-property": "Wikibase eiginleiki",
 	"content-model-wikibase-query": "Wikibase fyrirspurn",
 	"right-item-term": "Breyta hugtökum hluta (merkimiða, lýsingar, samheiti)",
+	"action-item-merge": "sameina hluti",
 	"right-item-merge": "Sameina hluti",
 	"right-item-redirect": "Búa til tilvísanir hluta",
 	"right-property-term": "Breyta hugtökum eiginleika (merkimiða, lýsingar, samheiti)",
+	"action-property-create": "búa til eiginleika",
 	"right-property-create": "Búa til eiginleika",
 	"wikibase-entity-not-viewable": "Tilgreint innihald „$1\" er ekki eining og er ekki hægt að sýna af Wikibase.",
-	"action-item-merge": "sameina hluti",
-	"action-property-create": "búa til eiginleika",
 	"wikibase-pageinfo-subscription-none": "Ekkert"
 }

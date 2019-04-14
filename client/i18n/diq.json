@@ -8,7 +8,8 @@
 			"Mirzali",
 			"Kumkumuk",
 			"Gırd",
-			"1917 Ekim Devrimi"
+			"1917 Ekim Devrimi",
+			"Orbot707"
 		]
 	},
 	"tooltip-t-wikibase": "Dola data de eleqeyın çirs gre",
@@ -37,6 +38,8 @@
 	"wikibase-rc-show-wikidata-pref": "Vırnayışanê {{WBREPONAME}} vırnayışanê peyênan de  bımocne",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Vurnayışê {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Vurnayışê {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} ra  amaye vurnayışi.",
 	"wikibase-replicationnote": "Reca kem tay bıpawe, vurnayışê şıma wikiyan dê binan dê aktiv biyayış çendndeqey rameno.",
 	"wikibase-watchlist-show-changes-pref": "Lista xoya seyrkerdışi de vırnayışanê {{WBREPONAME}} bımocne",
 	"unconnectedpages": "Peli objeyan ra bestiyay.",

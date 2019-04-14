@@ -266,8 +266,8 @@
 	"content-model-wikibase-item": "Wikibase-element",
 	"content-model-wikibase-property": "Wikibase-eigenskap",
 	"content-model-wikibase-query": "Wikibase-spørjing",
-	"right-item-merge": "Fletta saman element",
-	"right-property-create": "Oppretta eigenskapar",
 	"action-item-merge": "fletta saman element",
-	"action-property-create": "oppretta eigenskapar"
+	"right-item-merge": "Fletta saman element",
+	"action-property-create": "oppretta eigenskapar",
+	"right-property-create": "Oppretta eigenskapar"
 }
