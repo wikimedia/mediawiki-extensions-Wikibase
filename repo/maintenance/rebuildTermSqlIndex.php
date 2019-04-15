@@ -4,11 +4,12 @@ namespace Wikibase;
 
 use Maintenance;
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\CallbackMessageReporter;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Sql\TermSqlIndexBuilder;
@@ -153,28 +154,20 @@ class RebuildTermSqlIndex extends Maintenance {
 		return $termSqlIndex;
 	}
 
-	/**
-	 * @return ObservableMessageReporter
-	 */
-	private function getReporter() {
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback( function( $message ) {
-			$this->output( "$message\n" );
-		} );
-
-		return $reporter;
+	private function getReporter(): MessageReporter {
+		return new CallbackMessageReporter(
+			function( $message ) {
+				$this->output( "$message\n" );
+			}
+		);
 	}
 
-	/**
-	 * @return ObservableMessageReporter
-	 */
-	private function getErrorReporter() {
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback( function( $message ) {
-			$this->error( "[ERROR] $message" );
-		} );
-
-		return $reporter;
+	private function getErrorReporter(): MessageReporter {
+		return new CallbackMessageReporter(
+			function( $message ) {
+				$this->error( "[ERROR] $message" );
+			}
+		);
 	}
 
 }
