@@ -13,6 +13,9 @@ return [
 	// url of (termbox) ssr-server
 	'ssrServerUrl' => '',
 
+	// Timeout for SSR-Server in seconds
+	'ssrServerTimeout' => 3,
+
 	// feature flag for termbox
 	'termboxEnabled' => false,
 

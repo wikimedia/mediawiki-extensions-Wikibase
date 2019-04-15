@@ -20,10 +20,12 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	public function __construct(
 		HttpRequestFactory $requestFactory,
-		$ssrServerUrl
+		$ssrServerUrl,
+		$ssrServerTimeout
 	) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
+		$this->ssrTimeout = (int)$ssrServerTimeout;
 	}
 
 	/**
@@ -33,7 +35,8 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		try {
 			$request = $this->requestFactory->create(
 				$this->formatUrl( $entityId, $revision, $language, $editLink, $preferredLanguages ),
-				[ /* TODO attach required data */ ]
+				[ 'timeout' => $this->ssrServerTimeout,
+					/* TODO attach required data */ ]
 			);
 			$request->execute();
 		} catch ( Exception $e ) {
