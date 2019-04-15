@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be3b5207_33b0e5f1",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-15T16:13:06Z",
+      "side": 1,
+      "message": "data value types",
+      "range": {
+        "startLine": 284,
+        "startChar": 90,
+        "endLine": 284,
+        "endChar": 101
+      },
+      "revId": "930badcfd18db8396e428f7849054209369c97a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

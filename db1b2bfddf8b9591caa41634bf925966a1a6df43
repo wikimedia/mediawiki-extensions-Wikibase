@@ -140,6 +140,30 @@
       "revId": "db1b2bfddf8b9591caa41634bf925966a1a6df43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1409e6a0_7ecaceb9",
+        "filename": "repo/includes/Specials/SpecialListDatatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-15T16:13:06Z",
+      "side": 1,
+      "message": "Well, now the result looks like this:\n\n\u003e Commons media(string)\n\nThere still needs to be a space here somewhere. You could use the `word-separator` message –\n\n wfMessage( \u0027word-separator\u0027 ) . wfMessage( \u0027parentheses\u0027 )…\n\n– but I still think a dedicated message with the data type and data value type as arguments would be better.",
+      "parentUuid": "7df0ed9a_f5189f92",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "db1b2bfddf8b9591caa41634bf925966a1a6df43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
