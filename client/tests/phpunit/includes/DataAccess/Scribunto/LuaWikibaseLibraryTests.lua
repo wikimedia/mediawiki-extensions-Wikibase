@@ -73,6 +73,14 @@ local function testFormatValue()
 	return mw.wikibase.formatValue( snak )
 end
 
+local function testFormatValueGlobeCoordinate()
+	local entity = mw.wikibase.getEntityObject( 'Q32489' )
+	local snak = entity['claims']['P625'][1]['mainsnak']
+
+	local formattedValue = mw.wikibase.formatValue( snak )
+	return formattedValue:match( "-maplink-" ) and not formattedValue:match( "<maplink" )
+end
+
 local function testRenderSnaks()
 	local entity = mw.wikibase.getEntityObject( 'Q32487' )
 	local snaks = entity['claims']['P342'][1]['qualifiers']
@@ -326,6 +334,9 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.formatValue', func = testFormatValue, type='ToString',
 	  expect = { '<span>A qualifier Snak</span>' }
+	},
+	{ name = 'mw.wikibase.formatValue tag parsing', func = testFormatValueGlobeCoordinate, type='ToString',
+	  expect = { true }
 	},
 	{ name = 'mw.wikibase.formatValue (must be table)', func = mw.wikibase.formatValue,
 	  args = { 'meep' },
