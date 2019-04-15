@@ -144,7 +144,6 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			$this->getRepositoryDefinitions(),
 			$this->getSiteLookup(),
 			new EntitySourceDefinitions( [] )
 		);
@@ -166,7 +165,6 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			$this->getRepositoryDefinitions(),
 			$siteLookup,
 			new EntitySourceDefinitions( [] )
 		);
@@ -202,7 +200,6 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			$this->getRepositoryDefinitions(),
 			$siteLookup,
 			$this->getEntitySourceDefinitions()
 		);
@@ -296,7 +293,10 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetRecentChangeFactory() {
-		$recentChangeFactory = $this->getWikibaseClient()->getRecentChangeFactory();
+		$wikibaseClient = $this->getWikibaseClient();
+		$wikibaseClient->getSettings()->setSetting( 'repoDatabase', 'repo' );
+
+		$recentChangeFactory = $wikibaseClient->getRecentChangeFactory();
 		$this->assertInstanceOf( RecentChangeFactory::class, $recentChangeFactory );
 
 		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
@@ -364,9 +364,30 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetRepositoryDefinitions() {
-		$repositoryDefinitions = $this->getWikibaseClient()->getRepositoryDefinitions();
+		$wikibaseClient = $this->getWikibaseClient();
+		$settings = $wikibaseClient->getSettings();
+
+		$settings->setSetting( 'foreignRepositories', [] );
+		$settings->setSetting( 'repositories', [] );
+		$settings->setSetting( 'repoDatabase', 'repo' );
+		$settings->setSetting( 'repoConceptBaseUri', '' );
+		$settings->setSetting( 'entityNamespaces', [] );
+
+		$expected = new RepositoryDefinitions(
+			[ '' =>
+				[
+					'database' => 'repo',
+					'base-uri' => '',
+					'entity-namespaces' => [],
+					'prefix-mapping' => [ '' => '' ]
+				]
+			],
+			new EntityTypeDefinitions( [] )
+		);
+
+		$repositoryDefinitions = $wikibaseClient->getRepositoryDefinitions();
 		$this->assertInstanceOf( RepositoryDefinitions::class, $repositoryDefinitions );
-		$this->assertEquals( $this->getRepositoryDefinitions(), $repositoryDefinitions );
+		$this->assertEquals( $expected, $repositoryDefinitions );
 	}
 
 	public function testGetSidebarLinkBadgeDisplay() {
@@ -382,19 +403,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			$this->getRepositoryDefinitions(),
 			$this->getSiteLookup(),
 			$this->getEntitySourceDefinitions()
-		);
-	}
-
-	/**
-	 * @return RepositoryDefinitions
-	 */
-	private function getRepositoryDefinitions() {
-		return new RepositoryDefinitions(
-			[ '' => [ 'database' => 'repo', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
-			new EntityTypeDefinitions( [] )
 		);
 	}
 
