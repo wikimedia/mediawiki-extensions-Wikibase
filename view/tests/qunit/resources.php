@@ -136,7 +136,7 @@ return [
 			'wikibase.tests',
 			'wikibase.utilities.ClaimGuidGenerator',
 			'wikibase.view.ToolbarFactory',
-			'wikibase.view.ToolbarViewController',
+			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.ViewController',
 			'wikibase.view.ViewFactory',
 			'wikibase.view.ViewFactoryFactory',
