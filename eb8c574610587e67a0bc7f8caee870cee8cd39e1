@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c58d5e1_f67ddc1e",
+        "filename": "client/includes/DataAccess/Scribunto/WikitextPreprocessingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-15T12:11:14Z",
+      "side": 1,
+      "message": "I would leave this out – the formatter looks general enough that it could be used for non-Scribunto cases as well (though it’s fine to mention Scribunto as the main use case, like below).",
+      "range": {
+        "startLine": 11,
+        "startChar": 68,
+        "endLine": 11,
+        "endChar": 82
+      },
+      "revId": "eb8c574610587e67a0bc7f8caee870cee8cd39e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5956492e_856670dd",
+        "filename": "client/includes/DataAccess/Scribunto/WikitextPreprocessingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-15T12:11:14Z",
+      "side": 1,
+      "message": "typo: preprocesses",
+      "range": {
+        "startLine": 11,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "eb8c574610587e67a0bc7f8caee870cee8cd39e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97b69954_ccca8282",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikitextPreprocessingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-15T12:11:14Z",
+      "side": 1,
+      "message": "I think the more general InvalidArgumentException class might be more robust.",
+      "range": {
+        "startLine": 57,
+        "startChar": 31,
+        "endLine": 57,
+        "endChar": 58
+      },
+      "revId": "eb8c574610587e67a0bc7f8caee870cee8cd39e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
