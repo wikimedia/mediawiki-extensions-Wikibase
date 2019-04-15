@@ -223,7 +223,7 @@ final class WikibaseClient {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var RepositoryDefinitions
+	 * @var RepositoryDefinitions|null
 	 */
 	private $repositoryDefinitions;
 
@@ -377,14 +377,12 @@ final class WikibaseClient {
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		RepositoryDefinitions $repositoryDefinitions,
 		SiteLookup $siteLookup,
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->siteLookup = $siteLookup;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
@@ -443,7 +441,7 @@ final class WikibaseClient {
 		return new MultipleRepositoryAwareWikibaseServices(
 			$this->getEntityIdParser(),
 			$this->getEntityIdComposer(),
-			$this->repositoryDefinitions,
+			$this->getRepositoryDefinitions(),
 			$this->entityTypeDefinitions,
 			$this->getDataAccessSettings(),
 			$this->getMultiRepositoryServiceWiring(),
@@ -456,8 +454,8 @@ final class WikibaseClient {
 		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
 		$genericServices = new GenericServices(
 			$this->entityTypeDefinitions,
-			$this->repositoryDefinitions->getEntityNamespaces(),
-			$this->repositoryDefinitions->getEntitySlots()
+			$this->getRepositoryDefinitions()->getEntityNamespaces(),
+			$this->getRepositoryDefinitions()->getEntitySlots()
 		);
 
 		$singleSourceServices = [];
@@ -611,7 +609,7 @@ final class WikibaseClient {
 			$this->settings->getSetting( 'repoUrl' ),
 			$dataAccessSettings->useEntitySourceBasedFederation() ?
 				$this->entitySourceDefinitions->getConceptBaseUris() :
-				$this->repositoryDefinitions->getConceptBaseUris(),
+				$this->getRepositoryDefinitions()->getConceptBaseUris(),
 			$this->settings->getSetting( 'repoArticlePath' ),
 			$this->settings->getSetting( 'repoScriptPath' )
 		);
@@ -771,20 +769,17 @@ final class WikibaseClient {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			$entityTypeDefinitions,
-			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
 			MediaWikiServices::getInstance()->getSiteLookup(),
 			self::getEntitySourceDefinitionsFromSettings( $settings )
 		);
 	}
 
 	/**
-	 *
-	 * @param SettingsArray $settings
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 *
 	 * @return RepositoryDefinitions
 	 */
-	private static function getRepositoryDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
+	private function getRepositoryDefinitionsFromSettings() {
+		$settings = $this->settings;
+		$entityTypeDefinitions = $this->entityTypeDefinitions;
 		$definitions = [];
 
 		// Backwards compatibility: if the old "foreignRepositories" settings is there,
@@ -1531,6 +1526,10 @@ final class WikibaseClient {
 	 * @return RepositoryDefinitions
 	 */
 	public function getRepositoryDefinitions() {
+		if ( !$this->repositoryDefinitions ) {
+			$this->repositoryDefinitions = $this->getRepositoryDefinitionsFromSettings();
+		}
+
 		return $this->repositoryDefinitions;
 	}
 

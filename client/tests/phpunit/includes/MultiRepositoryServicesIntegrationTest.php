@@ -8,7 +8,6 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\SettingsArray;
 
 /**
@@ -42,10 +41,6 @@ class MultiRepositoryServicesIntegrationTest extends \MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			new RepositoryDefinitions(
-				[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
-				new EntityTypeDefinitions( [] )
-			),
 			new HashSiteStore(),
 			new EntitySourceDefinitions( [] )
 		);
