@@ -27,6 +27,7 @@ class TermboxRemoteRendererTest extends TestCase {
 	use PHPUnit4And6Compat;
 
 	/** private */ const SSR_URL = 'https://ssr/termbox';
+	/** private */ const SSR_TIMEOUT = 3;
 
 	public function testGetContentWithSaneParameters_returnsRequestResponse() {
 		$content = 'hello from server!';
@@ -38,7 +39,8 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL
+			self::SSR_URL,
+			self::SSR_TIMEOUT
 		);
 		$this->assertSame(
 			$content,
@@ -72,13 +74,14 @@ class TermboxRemoteRendererTest extends TestCase {
 					'editLink' => $editLinkUrl,
 					'preferredLanguages' => "$preferredLanguages[0]|$preferredLanguages[1]|$preferredLanguages[2]",
 				] ),
-				[]
+				[ 'timeout' => self::SSR_TIMEOUT ]
 			)
 			->willReturn( $this->newSuccessfulRequest() );
 
 		( new TermboxRemoteRenderer(
 			$requestFactory,
-			self::SSR_URL
+			self::SSR_URL,
+			self::SSR_TIMEOUT
 		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
 	}
 
@@ -97,7 +100,8 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL
+			self::SSR_URL,
+			self::SSR_TIMEOUT
 		);
 
 		try {
@@ -125,7 +129,8 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL
+			self::SSR_URL,
+			self::SSR_TIMEOUT
 		);
 
 		try {
@@ -152,7 +157,8 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL
+			self::SSR_URL,
+			self::SSR_TIMEOUT
 		);
 
 		try {
@@ -161,6 +167,35 @@ class TermboxRemoteRendererTest extends TestCase {
 		} catch ( Exception $exception ) {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 			$this->assertSame( 'Encountered bad response: 404', $exception->getMessage() );
+		}
+	}
+
+	public function testGetContentEncounteringRequestTimeout_throwsException() {
+		$language = 'de';
+		$itemId = 'Q42';
+		$entityId = new ItemId( $itemId );
+		$revision = 4711;
+		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
+		$preferredLanguages = [ 'en', 'fr', 'es' ];
+		$fallbackChain = $this->newLanguageFallbackChain( $preferredLanguages );
+
+		$request = $this->newHttpRequest();
+		$request->expects( $this->once() )
+			->method( 'getStatus' )
+			->willReturn( 0 );
+
+		$client = new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			self::SSR_TIMEOUT
+		);
+
+		try {
+			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
+			$this->fail( 'Expected exception did not occur.' );
+		} catch ( Exception $exception ) {
+			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
+			$this->assertSame( 'Encountered bad response: 0', $exception->getMessage() );
 		}
 	}
 
