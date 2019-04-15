@@ -1748,17 +1748,14 @@ class WikibaseRepo {
 		] );
 	}
 
-	/**
-	 * @return ItemHandler
-	 */
-	public function newItemHandler() {
+	public function newItemHandler(): ItemHandler {
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$siteLinkStore = $this->getStore()->newSiteLinkStore();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
-		$handler = new ItemHandler(
+		return new ItemHandler(
 			$this->newEntityTermStoreWriter(),
 			$codec,
 			$constraintProvider,
@@ -1771,24 +1768,35 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$legacyFormatDetector
 		);
-
-		return $handler;
 	}
 
 	private function newEntityTermStoreWriter(): EntityTermStoreWriter {
-		$writeBoth = false; // TODO: create config
+		$writeOld = $this->settings->getSetting( 'tmpWriteToOldTermStore' );
+		$writeNew = $this->settings->getSetting( 'tmpWriteToNewTermStore' );
 
-		if ( $writeBoth ) {
+		if ( $writeOld && $writeNew ) {
 			return new MultiTermStoreWriter(
-				$this->getStore()->getTermIndex(),
-				new DelegatingEntityTermStoreWriter(
-					new InMemoryPropertyTermStore(), // TODO: MW or Doctrine implementation
-					new InMemoryItemTermStore() // TODO: MW or Doctrine implementation
-				)
+				$this->getOldEntityTermStoreWriter(),
+				$this->getNewEntityTermStoreWriter()
 			);
 		}
 
+		if ( $writeNew ) {
+			return $this->getNewEntityTermStoreWriter();
+		}
+
+		return $this->getOldEntityTermStoreWriter();
+	}
+
+	private function getOldEntityTermStoreWriter(): EntityTermStoreWriter {
 		return $this->getStore()->getTermIndex();
+	}
+
+	private function getNewEntityTermStoreWriter(): EntityTermStoreWriter {
+		return new DelegatingEntityTermStoreWriter(
+			new InMemoryPropertyTermStore(), // TODO: MW or Doctrine implementation
+			new InMemoryItemTermStore() // TODO: MW or Doctrine implementation
+		);
 	}
 
 	/**
@@ -1836,10 +1844,7 @@ class WikibaseRepo {
 		return new NoFieldDefinitions();
 	}
 
-	/**
-	 * @return PropertyHandler
-	 */
-	public function newPropertyHandler() {
+	public function newPropertyHandler(): PropertyHandler {
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
@@ -1847,7 +1852,7 @@ class WikibaseRepo {
 		$propertyInfoBuilder = $this->newPropertyInfoBuilder();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
-		$handler = new PropertyHandler(
+		return new PropertyHandler(
 			$this->newEntityTermStoreWriter(),
 			$codec,
 			$constraintProvider,
@@ -1860,8 +1865,6 @@ class WikibaseRepo {
 			$this->getFieldDefinitionsByType( Property::ENTITY_TYPE ),
 			$legacyFormatDetector
 		);
-
-		return $handler;
 	}
 
 	/**

@@ -361,4 +361,7 @@ return [
 	 */
 	'tmpSerializeEmptyListsAsObjects' => false,
 
+	'tmpWriteToOldTermStore' => true,
+	'tmpWriteToNewTermStore' => false
+
 ];
