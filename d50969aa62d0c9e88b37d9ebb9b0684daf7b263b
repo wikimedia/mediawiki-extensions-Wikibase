@@ -156,6 +156,24 @@
     },
     {
       "key": {
+        "uuid": "71d47ee6_fedb0501",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-15T10:28:34Z",
+      "side": 1,
+      "message": "Indeed, but what is actually needed for that? If anything but the revision id is needed, we can add this on request.",
+      "parentUuid": "c916229d_1870eff6",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "704ecac8_6fcfd825",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 1
@@ -274,6 +292,24 @@
       "side": 1,
       "message": "Would you change this in the API as well then? (Or is the consistency between the dumps and the API not important to you at all?)\n\nFor me, metadata generally comes before data, so I find the order used in the API relatively natural, but it\u0027s not a hill I would die on.\n\nWould you be happier if we had type, id, lastrevid, and then the data, maybe?",
       "parentUuid": "9820dd90_983fdd38",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e79dfb2e_c99e107a",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-15T10:28:34Z",
+      "side": 1,
+      "message": "I like to skim the dumped entities by hand, so type+id first is best for that… but in the end that\u0027s just a weak preference.",
+      "parentUuid": "cabee32a_d2fb48a4",
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
