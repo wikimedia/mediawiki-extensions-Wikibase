@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fd144534_b70adbb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-15T12:11:34Z",
+      "side": 1,
+      "message": "typo: Kartographer",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "eb8c574610587e67a0bc7f8caee870cee8cd39e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c58d5e1_f67ddc1e",
         "filename": "client/includes/DataAccess/Scribunto/WikitextPreprocessingSnakFormatter.php",
         "patchSetId": 2
