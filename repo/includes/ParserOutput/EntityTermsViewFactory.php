@@ -97,7 +97,8 @@ class EntityTermsViewFactory {
 			new LanguageFallbackChainFactory(),
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
-				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' )
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' ),
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerTimeout' )
 			),
 			$textProvider,
 			new RepoSpecialPageLinker(),
