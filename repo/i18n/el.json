@@ -125,7 +125,7 @@
 	"wikibase-validator-label-no-entityid": "Η ετικέτα δεν πρέπει να είναι ένα έγκυρο αναγνωριστικό οντότητας.",
 	"wikibase-validator-illegal-file-chars": "Τα ονόματα αρχείων δεν επιτρέπεται να περιέχουν χαρακτήρες όπως χρώματα και σημεία στίξεως",
 	"wikibase-item-reference-edit-placeholder": "Εισάγετε ID θέματος π.χ Q10",
-	"wikibase-wikibaserepopage-not-itemid": "\"$1\" δεν είναι έγκυρος κωδικός αντικειμένου",
+	"wikibase-wikibaserepopage-not-itemid": "Το «$1» δεν είναι έγκυρο αναγνωριστικό αντικειμένου",
 	"wikibase-wikibaserepopage-invalid-langcode": "Το αναγνωριστικό γλώσσας \"$1\" που δώσατε δεν αναγνωρίσθηκε από το σύστημα. Παρακαλώ χρησιμοποιήστε ένα έγκυρο αναγνωριστικό όπως το \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "Το αναγνωριστικό \"$1\" είναι άγνωστο στο σύστημα. Παρακαλούμε χρησιμοποιήστε ένα έγκυρο αναγνωριστικό οντότητας.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "Η $1 είναι ανακατεύθυνση.",

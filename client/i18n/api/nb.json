@@ -29,6 +29,8 @@
 	"apihelp-query+pageterms-example-label-en": "Hent etiketter og alias assosiert med siden «London», på engelsk.",
 	"apihelp-query+pageterms-example-item": "Hent etiketter og alias fra elementet Q84.",
 	"apihelp-query+pageterms-param-terms": "Type termer som hentes, f.eks. «description»; hver av dem returneres som en tabell over strenger med typen som nøkkel, f.eks. {\"description\": [\"foo\"]}. Hvis det ikke spesifiseres, så vil alle typer bli returnert.",
+	"apihelp-query+description-summary": "Få en kort beskrivelse, også kalt undertittel, som forklarer hva målsiden handler om.",
+	"apihelp-query+description-extended-description": "Beskrivelsen er en enkelt linje med ren tekst. Merk at teksten potensielt kan inneholde rå HTML-tagger, så resultatet må ikke brukes uten HTML-escaping.",
 	"apihelp-query+description-param-prefersource": "Hvilken beskrivelseskilde som skal foretrekkes om den finnes:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Lokale beskrivelser via parserfunksjonen <code><nowiki>{{SHORTDESC:…}}</nowiki></code> i sidens wikitekst.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Sentrale beskrivelser fra det tilknyttede {{WBREPONAME}}-elementet.",
