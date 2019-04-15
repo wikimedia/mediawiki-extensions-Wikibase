@@ -662,30 +662,30 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return DataUpdate[]
 	 * @throws MWException
 	 */
-	protected function getTermIndexEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = [];
-		$entityId = $content->getEntityId();
-
-		//FIXME: we should not need this!
-		if ( $entityId === null ) {
-			$entityId = $this->getIdForTitle( $title );
+	protected function getTermIndexEntityModificationUpdates( EntityContent $content ) {
+		if ( $content->isRedirect() ) {
+			return $this->getDeleteTermUpdates( $content->getEntityId() );
 		}
 
-		if ( $content->isRedirect() ) {
-			// Remove the entity from the terms table since it's now a redirect.
-			$updates[] = new DataUpdateAdapter(
+		return $this->getSaveTermUpdates( $content->getEntity() );
+	}
+
+	private function getDeleteTermUpdates( EntityId $entityId ) {
+		return [
+			new DataUpdateAdapter(
 				[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
 				$entityId
-			);
-		} else {
-			// Register the entity in the terms table.
-			$updates[] = new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
-				$content->getEntity()
-			);
-		}
+			)
+		];
+	}
 
-		return $updates;
+	private function getSaveTermUpdates( EntityDocument $entity ) {
+		return [
+			new DataUpdateAdapter(
+				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
+				$entity
+			)
+		];
 	}
 
 	/**
