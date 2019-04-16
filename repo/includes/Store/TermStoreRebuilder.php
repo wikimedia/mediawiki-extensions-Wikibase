@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
+use Exception;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -92,7 +93,7 @@ class TermStoreRebuilder {
 			if ( $entity instanceof Item ) {
 				$this->itemTermStore->storeTerms( $entity->getId(), $entity->getFingerprint() );
 			}
-		} catch ( TermStoreException $ex ) {
+		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(
 				'Failed to save terms of entity: ' . $entity->getId()->getSerialization()
