@@ -53,7 +53,7 @@ class RebuildTermStore extends Maintenance {
 
 		$this->addOption(
 			'sleep',
-			"Sleep time (in seconds) between every batch",
+			"Sleep time (in seconds) between every batch (Default: 10)",
 			false,
 			true
 		);
