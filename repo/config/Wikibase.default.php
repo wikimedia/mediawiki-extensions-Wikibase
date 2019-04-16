@@ -249,49 +249,6 @@ return [
 	// Name of the lock manager for dispatch changes coordinator
 	'dispatchingLockManager' => null,
 
-	// Disables all CirrusSearch functionality
-	// Temporary switch for https://phabricator.wikimedia.org/T190022
-	// Will be deleted after migration is complete.
-	'disableCirrus' => false,
-	// Configurations for searching entities
-	'entitySearch' => [
-		// Use CirrusSearch (ElasticSearch) for searching
-		'useCirrus' => false,
-		// Default label scoring profile name, for prefix search
-		// See profiles in config/EntityPrefixSearchProfiles.php
-		'prefixSearchProfile' => 'default',
-		// Default profile name for fulltext search
-		// See profiles in config/EntitySearchProfiles.php
-		'fulltextSearchProfile' => 'wikibase',
-		// Custom prefix query builder profiles placeholder
-		// Field weight profiles. These profiles specify relative weights
-		// of label fields for different languages, e.g. exact language match
-		// vs. fallback language match.
-		// (See config/EntityPrefixSearchProfiles.php)
-		'prefixSearchProfiles' => [],
-		// Profile definitions for fulltext search.
-		// Note that these will be merged with Cirrus standard profiles,
-		// so namespacing is recommended.
-		'fulltextSearchProfiles' => [],
-		// Default rescore profile for prefix search
-		'defaultPrefixRescoreProfile' => 'wikibase_prefix',
-		// Default rescore profile for prefix search
-		'defaultFulltextRescoreProfile' => 'wikibase_prefix',
-		// Custom rescore profiles placeholder
-		// (See config/ElasticSearchRescoreProfiles.php)
-		'rescoreProfiles' => [],
-		// Custom function chains placeholder
-		// (See config/ElasticSearchRescoreFunctions.php)
-		'rescoreFunctionChains' => [],
-		// Type (de)boosts for rescoring functions
-		'statementBoost' => [],
-		// List of languages that we want to have stemming analyzers
-		// 'index' means we generate stemmed field on index
-		// 'query' means we use it on query
-		// See https://phabricator.wikimedia.org/T180169 for discussion.
-		'useStemming' => [],
-	],
-
 	// List of properties to be indexed
 	'searchIndexProperties' => [],
 	// List of property types to be indexed
