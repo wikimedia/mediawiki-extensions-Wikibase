@@ -190,6 +190,12 @@ class SpecialNewProperty extends SpecialNewEntity {
 			return Status::newFatal( 'wikibase-newproperty-insufficient-data' );
 		}
 
+		if ( $formData[ self::FIELD_LABEL ] !== '' &&
+			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
+		) {
+			return Status::newFatal( 'wikibase-newproperty-same-label-and-description' );
+		}
+
 		return Status::newGood();
 	}
 

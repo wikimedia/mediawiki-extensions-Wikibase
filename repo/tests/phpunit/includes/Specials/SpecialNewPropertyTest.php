@@ -219,6 +219,16 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 				],
 				'Invalid data type specified',
 			],
+			'label and description are identical' => [
+				[
+					SpecialNewProperty::FIELD_LANG => 'en',
+					SpecialNewProperty::FIELD_LABEL => 'something',
+					SpecialNewProperty::FIELD_DESCRIPTION => 'something',
+					SpecialNewProperty::FIELD_ALIASES => '',
+					SpecialNewProperty::FIELD_DATATYPE => 'string',
+				],
+				'label and description can not have the same value',
+			],
 		];
 	}
 
