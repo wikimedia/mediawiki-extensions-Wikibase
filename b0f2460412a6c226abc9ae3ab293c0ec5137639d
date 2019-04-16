@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f555e10_a6d1a64f",
+        "filename": "repo/includes/Specials/SpecialListDatatypes.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-16T11:30:18Z",
+      "side": 1,
+      "message": "If I understand the Phan error correctly, this needs to use either parse() or escaped() to make sure that if someone puts HTML in the message, we don’t output it unescaped on the page.",
+      "range": {
+        "startLine": 73,
+        "startChar": 37,
+        "endLine": 73,
+        "endChar": 41
+      },
+      "revId": "b0f2460412a6c226abc9ae3ab293c0ec5137639d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
