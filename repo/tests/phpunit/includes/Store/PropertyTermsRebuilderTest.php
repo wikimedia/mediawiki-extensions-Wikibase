@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Tests\Store;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
@@ -16,10 +14,8 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\Store\TermStoreRebuilder;
-use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
+use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
-use Wikibase\TermStore\Implementations\ThrowingItemTermStore;
 use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 
 /**
@@ -29,12 +25,7 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
  *
  * @license GPL-2.0-or-later
  */
-class TermStoreRebuilderTest extends MediaWikiTestCase {
-
-	/**
-	 * @var InMemoryItemTermStore
-	 */
-	private $itemTermStore;
+class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 
 	/**
 	 * @var InMemoryPropertyTermStore
@@ -54,7 +45,6 @@ class TermStoreRebuilderTest extends MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->itemTermStore = new InMemoryItemTermStore();
 		$this->propertyTermStore = new InMemoryPropertyTermStore();
 		$this->errorReporter = new SpyMessageReporter();
 		$this->progressReporter = new SpyMessageReporter();
@@ -63,14 +53,13 @@ class TermStoreRebuilderTest extends MediaWikiTestCase {
 	public function testStoresAllTerms() {
 		$this->newRebuilder()->rebuild();
 
-		$this->assertQ1IsStored();
 		$this->assertP1IsStored();
+		$this->assertP2IsStored();
 	}
 
 	private function newRebuilder(): TermStoreRebuilder {
-		return new TermStoreRebuilder(
+		return new PropertyTermsRebuilder(
 			$this->propertyTermStore,
-			$this->itemTermStore,
 			$this->newIdPager(),
 			$this->progressReporter,
 			$this->errorReporter,
@@ -81,13 +70,6 @@ class TermStoreRebuilderTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function assertQ1IsStored() {
-		$this->assertEquals(
-			$this->newQ1()->getFingerprint(),
-			$this->itemTermStore->getTerms( new ItemId( 'Q1' ) )
-		);
-	}
-
 	public function assertP1IsStored() {
 		$this->assertEquals(
 			$this->newP1()->getFingerprint(),
@@ -95,41 +77,27 @@ class TermStoreRebuilderTest extends MediaWikiTestCase {
 		);
 	}
 
+	private function assertP2IsStored() {
+		$this->assertEquals(
+			$this->newP2()->getFingerprint(),
+			$this->itemTermStore->getTerms( new ItemId( 'P2' ) )
+		);
+	}
+
 	private function newIdPager(): InMemoryEntityIdPager {
 		return new InMemoryEntityIdPager(
-			new ItemId( 'Q1' ),
-			new PropertyId( 'P1' )
+			new PropertyId( 'P1' ),
+			new PropertyId( 'P2' )
 		);
 	}
 
 	private function newEntityLookup(): InMemoryEntityLookup {
 		$lookup = new InMemoryEntityLookup();
 
-		$lookup->addEntity( $this->newQ1() );
 		$lookup->addEntity( $this->newP1() );
+		$lookup->addEntity( $this->newP2() );
 
 		return $lookup;
-	}
-
-	private function newQ1() {
-		return new Item(
-			new ItemId( 'Q1' ),
-			new Fingerprint(
-				new TermList( [
-					new Term( 'en', 'EnglishLabel' ),
-					new Term( 'de', 'ZeGermanLabel' ),
-					new Term( 'fr', 'LeFrenchLabel' ),
-				] ),
-				new TermList( [
-					new Term( 'en', 'EnglishDescription' ),
-					new Term( 'de', 'ZeGermanDescription' ),
-				] ),
-				new AliasGroupList( [
-					new AliasGroup( 'fr', [ 'LeFrenchAlias', 'LaFrenchAlias' ] ),
-					new AliasGroup( 'en', [ 'EnglishAlias' ] ),
-				] )
-			)
-		);
 	}
 
 	private function newP1() {
@@ -146,16 +114,37 @@ class TermStoreRebuilderTest extends MediaWikiTestCase {
 		);
 	}
 
+	private function newP2() {
+		return new Property(
+			new PropertyId( 'P2' ),
+			new Fingerprint(
+				new TermList( [
+					new Term( 'en', 'EnglishLabel' ),
+					new Term( 'de', 'ZeGermanLabel' ),
+					new Term( 'fr', 'LeFrenchLabel' ),
+				] ),
+				new TermList( [
+					new Term( 'en', 'EnglishDescription' ),
+					new Term( 'de', 'ZeGermanDescription' ),
+				] ),
+				new AliasGroupList( [
+					new AliasGroup( 'fr', [ 'LeFrenchAlias', 'LaFrenchAlias' ] ),
+					new AliasGroup( 'en', [ 'EnglishAlias' ] ),
+				] )
+			),
+			'data-type-id'
+		);
+	}
+
 	public function testErrorsAreReported() {
-		$this->itemTermStore = new ThrowingItemTermStore();
 		$this->propertyTermStore = new ThrowingPropertyTermStore();
 
 		$this->newRebuilder()->rebuild();
 
 		$this->assertSame(
 			[
-				'Failed to save terms of entity: Q1',
 				'Failed to save terms of entity: P1',
+				'Failed to save terms of entity: P2',
 			],
 			$this->errorReporter->getMessages()
 		);
@@ -166,8 +155,8 @@ class TermStoreRebuilderTest extends MediaWikiTestCase {
 
 		$this->assertSame(
 			[
-				'Processed up to page 1 (Q1)',
-				'Processed up to page 2 (P1)',
+				'Processed up to page 1 (P1)',
+				'Processed up to page 2 (P2)',
 			],
 			$this->progressReporter->getMessages()
 		);

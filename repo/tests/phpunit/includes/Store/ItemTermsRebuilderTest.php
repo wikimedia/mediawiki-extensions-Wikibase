@@ -1,0 +1,163 @@
+<?php
+
+namespace Wikibase\Repo\Tests\Store;
+
+use MediaWiki\MediaWikiServices;
+use MediaWikiTestCase;
+use Onoi\MessageReporter\SpyMessageReporter;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\Store\ItemTermsRebuilder;
+use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
+use Wikibase\TermStore\Implementations\ThrowingItemTermStore;
+
+/**
+ * @covers \Wikibase\Repo\Store\TermStoreRebuilder
+ *
+ * @group Wikibase
+ *
+ * @license GPL-2.0-or-later
+ */
+class ItemTermsRebuilderTest extends MediaWikiTestCase {
+
+	/**
+	 * @var InMemoryItemTermStore
+	 */
+	private $itemTermStore;
+
+	/**
+	 * @var SpyMessageReporter
+	 */
+	private $errorReporter;
+
+	/**
+	 * @var SpyMessageReporter
+	 */
+	private $progressReporter;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->itemTermStore = new InMemoryItemTermStore();
+		$this->errorReporter = new SpyMessageReporter();
+		$this->progressReporter = new SpyMessageReporter();
+	}
+
+	public function testStoresAllTerms() {
+		$this->newRebuilder()->rebuild();
+
+		$this->assertP1IsStored();
+		$this->assertP2IsStored();
+	}
+
+	private function newRebuilder(): TermStoreRebuilder {
+		return new ItemTermsRebuilder(
+			$this->itemTermStore,
+			$this->newIdPager(),
+			$this->progressReporter,
+			$this->errorReporter,
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$this->newEntityLookup(),
+			1,
+			0
+		);
+	}
+
+	public function assertP1IsStored() {
+		$this->assertEquals(
+			$this->newP1()->getFingerprint(),
+			$this->itemTermStore->getTerms( new ItemId( 'Q1' ) )
+		);
+	}
+
+	private function assertP2IsStored() {
+		$this->assertEquals(
+			$this->newP2()->getFingerprint(),
+			$this->itemTermStore->getTerms( new ItemId( 'Q2' ) )
+		);
+	}
+
+	private function newIdPager(): InMemoryEntityIdPager {
+		return new InMemoryEntityIdPager(
+			new ItemId( 'Q1' ),
+			new ItemId( 'Q2' )
+		);
+	}
+
+	private function newEntityLookup(): InMemoryEntityLookup {
+		$lookup = new InMemoryEntityLookup();
+
+		$lookup->addEntity( $this->newP1() );
+		$lookup->addEntity( $this->newP2() );
+
+		return $lookup;
+	}
+
+	private function newP1() {
+		return new Item(
+			new ItemId( 'Q1' ),
+			new Fingerprint(
+				new TermList( [
+					new Term( 'en', 'EnglishPropLabel' ),
+					new Term( 'de', 'GermanPropLabel' ),
+					new Term( 'nl', 'DutchPropLabel' ),
+				] )
+			)
+		);
+	}
+
+	private function newP2() {
+		return new Item(
+			new ItemId( 'Q2' ),
+			new Fingerprint(
+				new TermList( [
+					new Term( 'en', 'EnglishLabel' ),
+					new Term( 'de', 'ZeGermanLabel' ),
+					new Term( 'fr', 'LeFrenchLabel' ),
+				] ),
+				new TermList( [
+					new Term( 'en', 'EnglishDescription' ),
+					new Term( 'de', 'ZeGermanDescription' ),
+				] ),
+				new AliasGroupList( [
+					new AliasGroup( 'fr', [ 'LeFrenchAlias', 'LaFrenchAlias' ] ),
+					new AliasGroup( 'en', [ 'EnglishAlias' ] ),
+				] )
+			)
+		);
+	}
+
+	public function testErrorsAreReported() {
+		$this->itemTermStore = new ThrowingItemTermStore();
+
+		$this->newRebuilder()->rebuild();
+
+		$this->assertSame(
+			[
+				'Failed to save terms of entity: Q1',
+				'Failed to save terms of entity: Q2',
+			],
+			$this->errorReporter->getMessages()
+		);
+	}
+
+	public function testProgressIsReportedEachBatch() {
+		$this->newRebuilder()->rebuild();
+
+		$this->assertSame(
+			[
+				'Processed up to page 1 (Q1)',
+				'Processed up to page 2 (Q2)',
+			],
+			$this->progressReporter->getMessages()
+		);
+	}
+
+}
