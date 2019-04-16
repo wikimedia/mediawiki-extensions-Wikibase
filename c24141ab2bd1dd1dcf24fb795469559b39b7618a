@@ -22,6 +22,30 @@
       "revId": "c24141ab2bd1dd1dcf24fb795469559b39b7618a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fe2144c_3a4622e6",
+        "filename": "lib/includes/Store/DelegatingEntityTermStoreWriter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-04-16T14:00:31Z",
+      "side": 1,
+      "message": "Making it generic to include entities from another sub domain is an anti-pattern. See https://www.entropywins.wtf/blog/2017/05/24/generic-entity-handling-code/\n\nIdeal case is that code uses persistence services for a specific type of entity. This particular class is more generic since it is an adapter to a legacy interface. Maybe we get rid of the legacy interface and this adapter altogether in the future. Removing that technical debt might not be the most cost effective thing for us to do though.",
+      "parentUuid": "e494daf4_f6212357",
+      "range": {
+        "startLine": 28,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c24141ab2bd1dd1dcf24fb795469559b39b7618a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
