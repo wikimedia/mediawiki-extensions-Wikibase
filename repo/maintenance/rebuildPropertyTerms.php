@@ -6,9 +6,9 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
+use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
-use Wikibase\Repo\Store\TermStoreRebuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -18,7 +18,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * @license GPL-2.0-or-later
  */
-class RebuildTermStore extends Maintenance {
+class RebuildPropertyTerms extends Maintenance {
 
 	/**
 	 * @var WikibaseRepo
@@ -28,14 +28,7 @@ class RebuildTermStore extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Rebuilds the Wikibase Term Store' );
-
-		$this->addOption(
-			'entity-type',
-			'The type of entity to rebuild terms for. Either "item" or "property"',
-			true,
-			true
-		);
+		$this->addDescription( 'Rebuilds property terms from primary persistence' );
 
 		$this->addOption(
 			'from-id',
@@ -70,9 +63,8 @@ class RebuildTermStore extends Maintenance {
 
 		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$rebuilder = new TermStoreRebuilder(
+		$rebuilder = new PropertyTermsRebuilder(
 			$this->wikibaseRepo->getPropertyTermStore(),
-			$this->wikibaseRepo->getItemTermStore(),
 			$this->newEntityIdPager(),
 			$this->getReporter(),
 			$this->getErrorReporter(),
@@ -93,11 +85,7 @@ class RebuildTermStore extends Maintenance {
 			$this->wikibaseRepo->getEntityIdParser()
 		);
 
-		$pager = $sqlEntityIdPagerFactory->newSqlEntityIdPager(
-			[
-				$this->getOption( 'entity-type' )
-			]
-		);
+		$pager = $sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] );
 
 		$fromId = $this->getOption( 'from-id' );
 
@@ -126,5 +114,5 @@ class RebuildTermStore extends Maintenance {
 
 }
 
-$maintClass = RebuildTermStore::class;
+$maintClass = RebuildPropertyTerms::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
