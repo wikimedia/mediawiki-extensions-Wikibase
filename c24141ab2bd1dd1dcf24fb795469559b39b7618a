@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e494daf4_f6212357",
+        "filename": "lib/includes/Store/DelegatingEntityTermStoreWriter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-16T11:09:22Z",
+      "side": 1,
+      "message": "This code assumes there are only two types of entities and it is not extendible so later WikibaseLexeme can\u0027t use the new schema (which it should to improve performance of wikidata) the only reason we didn\u0027t use wb_terms for lexeme was that it was exploding.",
+      "range": {
+        "startLine": 28,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c24141ab2bd1dd1dcf24fb795469559b39b7618a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
