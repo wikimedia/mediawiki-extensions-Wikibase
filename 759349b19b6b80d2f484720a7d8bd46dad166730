@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de0c505e_cb2f6394",
+        "filename": "repo/includes/Store/TermStoreRebuilder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T19:50:20Z",
+      "side": 1,
+      "message": "This is one example of how those exceptions on a very high level of abstraction are quite useless. replacing TermStoreException with Exception causes 0 loss in information about what went wrong.\n\nThere could be some edge cases where this might be useful on design level, and later in implementation if users of interfaces are honest players and where distinguishing between different sources of errors in a complicated logic helps in deciding on how to deal with it (which is in most cases going to be the same thing for all of them).\n\nBut again if they cannot be enforced (which is still the case in PHP), there\u0027s nothing preventing an implementation from lying to others and throwing a different type of exception that does not get caught here. One might argue that then that implementation is wrong as it is not adhering to the public interface it is implementing, which is very true. What is also true is that live in a not-so-honest world and this makes our code more fragile by assuming so much of the others in some critical places like these (a rollback of a db commit is important not to skip when it should).",
+      "revId": "759349b19b6b80d2f484720a7d8bd46dad166730",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
