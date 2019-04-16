@@ -2,23 +2,22 @@
 
 namespace Wikibase\Repo\Store;
 
+use Exception;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\TermStore\ItemTermStore;
-use Wikibase\TermStore\PropertyTermStore;
-use Wikibase\TermStore\TermStoreException;
+use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\LBFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
-class TermStoreRebuilder {
+class ItemTermsRebuilder {
 
-	private $propertyTermStore;
 	private $itemTermStore;
 	private $idPager;
 	private $progressReporter;
@@ -28,8 +27,17 @@ class TermStoreRebuilder {
 	private $batchSize;
 	private $batchSpacingInSeconds;
 
+	/**
+	 * @param ItemTermStore $itemTermStore,
+	 * @param SeekableEntityIdPager $idPager,
+	 * @param MessageReporter $progressReporter,
+	 * @param MessageReporter $errorReporter,
+	 * @param LBFactory $loadBalancerFactory,
+	 * @param EntityLookup $entityLookup,
+	 * @param int $batchSize,
+	 * @param int $batchSpacingInSeconds
+	 */
 	public function __construct(
-		PropertyTermStore $propertyTermStore,
 		ItemTermStore $itemTermStore,
 		SeekableEntityIdPager $idPager,
 		MessageReporter $progressReporter,
@@ -39,7 +47,6 @@ class TermStoreRebuilder {
 		$batchSize,
 		$batchSpacingInSeconds
 	) {
-		$this->propertyTermStore = $propertyTermStore;
 		$this->itemTermStore = $itemTermStore;
 		$this->idPager = $idPager;
 		$this->progressReporter = $progressReporter;
@@ -54,19 +61,19 @@ class TermStoreRebuilder {
 		$ticket = $this->loadBalancerFactory->getEmptyTransactionTicket( __METHOD__ );
 
 		while ( true ) {
-			$entityIds = $this->idPager->fetchIds( $this->batchSize );
+			$itemIds = $this->idPager->fetchIds( $this->batchSize );
 
-			if ( !$entityIds ) {
+			if ( !$itemIds ) {
 				break;
 			}
 
-			$this->rebuildTermsForBatch( $entityIds );
+			$this->rebuildTermsForBatch( $itemIds );
 
 			$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			$this->progressReporter->reportMessage(
 				'Processed up to page '
-				. $this->idPager->getPosition() . ' (' . end( $entityIds ) . ')'
+				. $this->idPager->getPosition() . ' (' . end( $itemIds ) . ')'
 			);
 
 			if ( $this->batchSpacingInSeconds > 0 ) {
@@ -75,27 +82,21 @@ class TermStoreRebuilder {
 		}
 	}
 
-	private function rebuildTermsForBatch( array $entityIds ) {
-		foreach ( $entityIds as $entityId ) {
+	private function rebuildTermsForBatch( array $itemIds ) {
+		foreach ( $itemIds as $itemId ) {
 			$this->saveTerms(
-				$this->entityLookup->getEntity( $entityId )
+				$this->entityLookup->getEntity( $itemId )
 			);
 		}
 	}
 
-	private function saveTerms( EntityDocument $entity ) {
+	private function saveTerms( Item $item ) {
 		try {
-			if ( $entity instanceof Property ) {
-				$this->propertyTermStore->storeTerms( $entity->getId(), $entity->getFingerprint() );
-			}
-
-			if ( $entity instanceof Item ) {
-				$this->itemTermStore->storeTerms( $entity->getId(), $entity->getFingerprint() );
-			}
-		} catch ( TermStoreException $ex ) {
+			$this->itemTermStore->storeTerms( $item->getId(), $item->getFingerprint() );
+		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(
-				'Failed to save terms of entity: ' . $entity->getId()->getSerialization()
+				'Failed to save terms of item: ' . $item->getId()->getSerialization()
 			);
 		}
 	}
