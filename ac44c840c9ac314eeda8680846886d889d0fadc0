@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f637181f_6e2f9b86",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-16T11:19:24Z",
+      "side": 1,
+      "message": "This is wrong :P",
+      "range": {
+        "startLine": 91,
+        "startChar": 85,
+        "endLine": 91,
+        "endChar": 127
+      },
+      "revId": "ac44c840c9ac314eeda8680846886d889d0fadc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e832a5f0_c7c85a5a",
+        "filename": "repo/sql/AddNormalizedTermsTablesDDL.sql",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-16T11:19:24Z",
+      "side": 1,
+      "message": "This is wrong :D",
+      "range": {
+        "startLine": 105,
+        "startChar": 77,
+        "endLine": 105,
+        "endChar": 103
+      },
+      "revId": "ac44c840c9ac314eeda8680846886d889d0fadc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
