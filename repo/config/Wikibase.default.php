@@ -321,7 +321,13 @@ return [
 	 */
 	'tmpSerializeEmptyListsAsObjects' => false,
 
-	'tmpWriteToOldTermStore' => true,
-	'tmpWriteToNewTermStore' => false
+	/**
+	 * @note This config options is primarily added for Wikidata transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * It can be one of these stages:
+	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW
+	 */
+	'tmpTermStoreMigrationStage' => MIGRATION_OLD,
 
 ];

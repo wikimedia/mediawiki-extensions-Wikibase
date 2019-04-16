@@ -1770,17 +1770,16 @@ class WikibaseRepo {
 	}
 
 	private function newEntityTermStoreWriter(): EntityTermStoreWriter {
-		$writeOld = $this->settings->getSetting( 'tmpWriteToOldTermStore' );
-		$writeNew = $this->settings->getSetting( 'tmpWriteToNewTermStore' );
+		$termStoreMigrationStage = $this->settings->getSetting( 'tmpTermStoreMigrationStage' );
 
-		if ( $writeOld && $writeNew ) {
+		if ( $termStoreMigrationStage === MIGRATION_WRITE_BOTH ) {
 			return new MultiTermStoreWriter(
 				$this->getOldEntityTermStoreWriter(),
 				$this->getNewEntityTermStoreWriter()
 			);
 		}
 
-		if ( $writeNew ) {
+		if ( $termStoreMigrationStage === MIGRATION_WRITE_NEW ) {
 			return $this->getNewEntityTermStoreWriter();
 		}
 
