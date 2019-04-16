@@ -13,8 +13,6 @@ use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
  * Together with any additional parameters provided to the constructor an
  * instance of this methods constitutes a closure for a call to the callable.
  *
- * @todo Propose for MediaWiki core.
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
