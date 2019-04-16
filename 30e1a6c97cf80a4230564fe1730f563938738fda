@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fb9aac39_b1ece157",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "Good point.. will do that",
+      "parentUuid": "b1ee1ece_a21e6355",
+      "range": {
+        "startLine": 83,
+        "startChar": 10,
+        "endLine": 83,
+        "endChar": 58
+      },
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a7bab572_7786b56d",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 7
@@ -39,6 +63,24 @@
       "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "889e45cd_78ec69ae",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a7bab572_7786b56d",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "6896a1fb_33b70e65",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0ea11a74_bcdb981e",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2390b3b_8056f13b",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 7
@@ -70,6 +130,24 @@
       "writtenOn": "2019-04-16T07:59:10Z",
       "side": 1,
       "message": "I don\u0027t know where exactly this will be run… but this should probably wait for replication after writing the to the DB",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df77dce3_b3b4d2c4",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "how do I do that?",
+      "parentUuid": "d2390b3b_8056f13b",
       "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "ba498df1_ee04951e",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "good idea .. will change it",
+      "parentUuid": "d7938977_c2ca37d4",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d108c1e9_d762e08b",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 7
@@ -104,6 +200,24 @@
       "writtenOn": "2019-04-16T07:59:10Z",
       "side": 1,
       "message": "missing type hints (also below)",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d11f1a62_25b7b1fc",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "yeap will add them",
+      "parentUuid": "d108c1e9_d762e08b",
       "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -144,6 +258,48 @@
       "writtenOn": "2019-04-16T07:59:10Z",
       "side": 1,
       "message": "These are always going to have the same length… is that representative enough for your test?",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b29f0db5_e5a325d7",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "this should\u0027nt be a problem running it thousands of times .. in total that should not add up more than 1s to total execution in terms of time. since we are reading only 10 bytes, there shouldn\u0027t be failures either.",
+      "parentUuid": "850132be_9b270022",
+      "range": {
+        "startLine": 206,
+        "startChar": 21,
+        "endLine": 206,
+        "endChar": 33
+      },
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b902318_67c32d84",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-16T14:16:34Z",
+      "side": 1,
+      "message": "yeah so far that should be good enough for tests we want to use this script for. but could be something to improve later if there\u0027s a need for different length values",
+      "parentUuid": "8b2f6b0a_fef9e2e0",
       "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
