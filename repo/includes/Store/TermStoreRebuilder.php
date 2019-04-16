@@ -92,7 +92,7 @@ class TermStoreRebuilder {
 			if ( $entity instanceof Item ) {
 				$this->itemTermStore->storeTerms( $entity->getId(), $entity->getFingerprint() );
 			}
-		} catch ( TermStoreException $ex ) {
+		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(
 				'Failed to save terms of entity: ' . $entity->getId()->getSerialization()
