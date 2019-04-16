@@ -46,6 +46,30 @@
       "revId": "c24141ab2bd1dd1dcf24fb795469559b39b7618a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "215f8d4f_bd72ee5f",
+        "filename": "lib/includes/Store/DelegatingEntityTermStoreWriter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-16T14:22:30Z",
+      "side": 1,
+      "message": "This can be easily done in EntityTypeDefintions: https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/lib/includes/EntityTypeDefinitions.php\nI don\u0027t see it being too difficult + it\u0027s more consistent with the pattern Wikibase does entity-based actions.",
+      "parentUuid": "6fe2144c_3a4622e6",
+      "range": {
+        "startLine": 28,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c24141ab2bd1dd1dcf24fb795469559b39b7618a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
