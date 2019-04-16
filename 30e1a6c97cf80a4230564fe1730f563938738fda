@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1ee1ece_a21e6355",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "Why not use a Wikibase setting?",
+      "range": {
+        "startLine": 83,
+        "startChar": 10,
+        "endLine": 83,
+        "endChar": 58
+      },
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7bab572_7786b56d",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "missing space in parentheses",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ea11a74_bcdb981e",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "missing space in parentheses",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2390b3b_8056f13b",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "I don\u0027t know where exactly this will be run… but this should probably wait for replication after writing the to the DB",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7938977_c2ca37d4",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "Double ternary :S Why not $duplicationDegree \u003d max( min( $duplicationDegree, 1 ), 0 ); ?",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d108c1e9_d762e08b",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "missing type hints (also below)",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "850132be_9b270022",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "Is reading this much(?) data from /dev/urandom a problem performance wise?",
+      "range": {
+        "startLine": 206,
+        "startChar": 21,
+        "endLine": 206,
+        "endChar": 33
+      },
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b2f6b0a_fef9e2e0",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-16T07:59:10Z",
+      "side": 1,
+      "message": "These are always going to have the same length… is that representative enough for your test?",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
