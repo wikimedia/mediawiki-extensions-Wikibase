@@ -65,7 +65,7 @@ class TermStoreRebuilder {
 			$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			$this->progressReporter->reportMessage(
-				'Processed up to page '
+				'Processed up to entity '
 				. $this->idPager->getPosition() . ' (' . end( $entityIds ) . ')'
 			);
 
