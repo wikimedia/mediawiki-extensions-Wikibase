@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fbd1a502_1e1d7631",
+        "filename": "docs/options.wiki",
+        "patchSetId": 12
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-04-17T11:34:03Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "038fc311_19887039",
+      "range": {
+        "startLine": 209,
+        "startChar": 2,
+        "endLine": 209,
+        "endChar": 21
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eeb6cdb4_08f74192",
         "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
         "patchSetId": 12
