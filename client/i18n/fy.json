@@ -9,6 +9,9 @@
 	},
 	"tooltip-t-wikibase": "Keppeling nei ferbûn dataopslachitem",
 	"wikibase-comment-update": "{{WBREPONAME}}-item bywurke",
+	"wikibase-comment-sitelink-add": "Taalkeppeling taheakke: $1",
+	"wikibase-comment-sitelink-change": "Taalkeppeling feroare fan $1 nei $2",
+	"wikibase-comment-sitelink-remove": "Taalkeppeling weihelle: $1",
 	"wikibase-dataitem": "{{WBREPONAME}}-item",
 	"wikibase-editlinks": "Keppelings bewurkje",
 	"wikibase-editlinkstitle": "Yntertaalkeppelings bewurkje",
@@ -18,6 +21,8 @@
 	"wikibase-rc-hide-wikidata-show": "werjaan",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Bewurking fan {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Bewurkings fan {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Wizigings dy't ôfkomstich binne fan {{WBREPONAME}}.",
 	"wikibase-pageinfo-entity-id-none": "Gjin",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Lebel: $1",
 	"wikibase-otherprojects": "Yn oare projekten"

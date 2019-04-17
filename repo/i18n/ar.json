@@ -208,6 +208,7 @@
 	"wikibase-newitem-no-external-page": "الصفحة \"$2\" لم يمكن إيجادها على \"$1\".",
 	"wikibase-newitem-not-recognized-siteid": "لم يتم التعرف على معرِّف الموقع.",
 	"wikibase-newitem-same-label-and-description": "العلامة والوصف لا يمكن أن يكون لهما نفس القيمة.",
+	"wikibase-newproperty-same-label-and-description": "لا يمكن أن تكون للتسمية والوصف نفس القيمة.",
 	"wikibase-newitem-insufficient-data": "أنت تحتاج إلى أن تملأ على الأقل إما العلامة، الوصف أو الأسماء المستعارة.",
 	"wikibase-newentity-language": "اللغة:",
 	"wikibase-newentity-label": "التسمية:",
