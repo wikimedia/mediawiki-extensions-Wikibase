@@ -63,7 +63,7 @@
 	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', function ( assert ) {
 		var $entitySelector = newTestEntitySelector(),
 			entitySelector = $entitySelector.data( 'entityselector' ),
-			done = assert.async();
+			done = assert.async( 2 );
 		$entitySelector.val( 'abc' );
 
 		$entitySelector
@@ -80,6 +80,11 @@
 				'Verified selected entity using selectedEntity().'
 			);
 
+			done();
+		} )
+		.one( 'entityselectorclose', function ( ) {
+			// Make sure the selector got closed.
+			assert.ok( entitySelector.options.menu.element.is( ':hidden' ) );
 			done();
 		} );
 
