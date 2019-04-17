@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
+use MovePage;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -73,44 +75,47 @@ class ItemMoveTest extends \MediaWikiTestCase {
 
 	/**
 	 * Tests @see WikibaseItem::getIdForSiteLink
+	 * XXX That method doesn't exist
+	 *
+	 * @dataProvider provideMovePrevention
 	 */
-	public function testMovePrevention() {
+	public function testMovePrevention( LinkTarget $from, LinkTarget $to ) {
+		$mp = new MovePage( $from, $to );
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
+
+	public function provideMovePrevention() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
-
-		// Moving a regular page into data NS onto an existing item
-		$title = $this->itemTitle;
-		$this->assertInstanceOf( Title::class, $title ); // sanity check
-
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
-		// Moving a regular page into data NS to an invalid location
-		// @todo: test other types of entities too!
-		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+		return [
+			// Moving a regular page into data NS onto an existing item
+			[ $this->page->getTitle(), $this->itemTitle ],
 
-		// Moving a regular page into data NS to an empty (but valid) location
-		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+			// Moving a regular page into data NS to an invalid location
+			// @todo: test other types of entities too!
+			[ $this->page->getTitle(),
+				Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace ) ],
 
-		// Moving item page out of data NS onto an existing page
-		$title = $this->page->getTitle();
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+			// Moving a regular page into data NS to an empty (but valid) location
+			[ $this->page->getTitle(), $titleLookup->getTitleForId( new ItemId( 'Q42' ) ) ],
 
-		// Moving item page out of data NS onto a non-existing page
-		$title = Title::newFromText( 'wbmovetestitem' );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+			// Moving item page out of data NS onto an existing page
+			[ $this->itemTitle, $this->page->getTitle() ],
 
-		// Moving item to an invalid location in the data NS
-		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+			// Moving item page out of data NS onto a non-existing page
+			[ $this->itemTitle, Title::newFromText( 'wbmovetestitem' ) ],
 
-		// Moving item to an valid location in the data NS
-		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+			// Moving item to an invalid location in the data NS
+			[ $this->itemTitle,
+				Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace ) ],
+
+			// Moving item to an valid location in the data NS
+			[ $this->itemTitle, $titleLookup->getTitleForId( new ItemId( 'Q42' ) ) ],
+		];
 	}
 
 }
