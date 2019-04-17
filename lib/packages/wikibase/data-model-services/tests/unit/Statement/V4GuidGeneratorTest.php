@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Statement;
 use Wikibase\DataModel\Services\Statement\V4GuidGenerator;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\V4GuidGenerator
+ * @covers \Wikibase\DataModel\Services\Statement\V4GuidGenerator
  *
  * @license GPL-2.0-or-later
  * @author Addshore

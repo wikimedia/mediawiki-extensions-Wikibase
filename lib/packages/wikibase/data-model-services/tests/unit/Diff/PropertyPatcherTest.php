@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\PropertyPatcher
+ * @covers \Wikibase\DataModel\Services\Diff\PropertyPatcher
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

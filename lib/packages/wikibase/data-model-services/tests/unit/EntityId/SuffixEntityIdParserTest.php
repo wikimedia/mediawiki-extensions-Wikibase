@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 
 /**
- * @covers Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser
+ * @covers \Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

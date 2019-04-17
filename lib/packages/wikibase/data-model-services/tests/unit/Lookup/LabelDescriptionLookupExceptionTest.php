@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException
+ * @covers \Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

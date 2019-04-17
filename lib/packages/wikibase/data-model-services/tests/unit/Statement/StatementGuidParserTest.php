@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\StatementGuidParser
+ * @covers \Wikibase\DataModel\Services\Statement\StatementGuidParser
  *
  * @license GPL-2.0-or-later
  * @author Addshore

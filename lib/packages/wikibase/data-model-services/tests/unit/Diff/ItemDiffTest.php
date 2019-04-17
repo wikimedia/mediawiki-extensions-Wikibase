@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\ItemDiff
+ * @covers \Wikibase\DataModel\Services\Diff\ItemDiff
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

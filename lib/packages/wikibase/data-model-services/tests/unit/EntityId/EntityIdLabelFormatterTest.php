@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\LabelLookup;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * @covers Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter
+ * @covers \Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

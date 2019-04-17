@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

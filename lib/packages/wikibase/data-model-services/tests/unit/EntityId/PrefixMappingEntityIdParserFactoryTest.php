@@ -9,7 +9,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**
- * @covers Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory
+ * @covers \Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory
  *
  * @license GPL-2.0-or-later
  */

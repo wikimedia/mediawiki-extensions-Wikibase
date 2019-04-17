@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Fixtures\EntityOfUnknownType;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\EntityDiffer
+ * @covers \Wikibase\DataModel\Services\Diff\EntityDiffer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

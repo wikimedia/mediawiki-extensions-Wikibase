@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException
+ * @covers \Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

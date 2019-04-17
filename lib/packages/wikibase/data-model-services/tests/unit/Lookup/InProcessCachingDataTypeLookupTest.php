@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Services\Lookup\ExceptionIgnoringEntityLookup;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\ExceptionIgnoringEntityLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\ExceptionIgnoringEntityLookup
  *
  * @license GPL-2.0-or-later
  */

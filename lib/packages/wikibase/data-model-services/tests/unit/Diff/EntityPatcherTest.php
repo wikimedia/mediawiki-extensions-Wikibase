@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\Fixtures\EntityOfUnknownType;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\EntityPatcher
+ * @covers \Wikibase\DataModel\Services\Diff\EntityPatcher
  *
  * @license GPL-2.0-or-later
  * @author Christoph Fischer < christoph.fischer@wikimedia.de >

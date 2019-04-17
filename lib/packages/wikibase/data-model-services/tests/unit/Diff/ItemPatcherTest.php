@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\ItemPatcher
+ * @covers \Wikibase\DataModel\Services\Diff\ItemPatcher
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

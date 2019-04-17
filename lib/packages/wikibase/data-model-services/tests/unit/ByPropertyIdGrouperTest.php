@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * @covers Wikibase\DataModel\Services\ByPropertyIdGrouper
+ * @covers \Wikibase\DataModel\Services\ByPropertyIdGrouper
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >

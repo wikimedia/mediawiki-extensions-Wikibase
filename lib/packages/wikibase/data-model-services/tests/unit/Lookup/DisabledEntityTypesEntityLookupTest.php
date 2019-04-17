@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup
  *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani

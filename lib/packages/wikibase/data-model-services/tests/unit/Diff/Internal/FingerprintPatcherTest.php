@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher
+ * @covers \Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
