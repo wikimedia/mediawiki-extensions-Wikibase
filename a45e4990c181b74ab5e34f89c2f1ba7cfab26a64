@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0253876e_89b0e452",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-17T07:16:04Z",
+      "side": 1,
+      "message": "Does this make sense here? No one is actually looking at the Status after calling this method but not sure how to show the user a nice error otherwise",
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
