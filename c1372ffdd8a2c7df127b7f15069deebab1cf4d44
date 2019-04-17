@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "192ae147_1d3770c8",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:14:56Z",
+      "side": 1,
+      "message": "a property",
+      "range": {
+        "startLine": 237,
+        "startChar": 101,
+        "endLine": 237,
+        "endChar": 103
+      },
+      "revId": "c1372ffdd8a2c7df127b7f15069deebab1cf4d44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62234605_6c779285",
+        "filename": "repo/includes/Specials/SpecialNewProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:14:56Z",
+      "side": 1,
+      "message": "Per the above if this is not relevant, but I guess it\u0027s also ok to explicitly check.",
+      "range": {
+        "startLine": 193,
+        "startChar": 7,
+        "endLine": 193,
+        "endChar": 47
+      },
+      "revId": "c1372ffdd8a2c7df127b7f15069deebab1cf4d44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
