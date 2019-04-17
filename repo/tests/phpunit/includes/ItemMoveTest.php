@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
+use MovePage;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -82,7 +83,8 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$title = $this->itemTitle;
 		$this->assertInstanceOf( Title::class, $title ); // sanity check
 
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 
 		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( 'item' );
@@ -90,27 +92,33 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		// Moving a regular page into data NS to an invalid location
 		// @todo: test other types of entities too!
 		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 
 		// Moving a regular page into data NS to an empty (but valid) location
 		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 
 		// Moving item page out of data NS onto an existing page
 		$title = $this->page->getTitle();
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 
 		// Moving item page out of data NS onto a non-existing page
 		$title = Title::newFromText( 'wbmovetestitem' );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 
 		// Moving item to an invalid location in the data NS
 		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 
 		// Moving item to an valid location in the data NS
 		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+		$mp = new MovePage( $this->page->getTitle(), $title );
+		$this->assertFalse( $mp->move()->isOK() );
 	}
 
 }
