@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.15.0 (dev)
+
+* Added constructor to `InMemoryEntityLookup`
+
 ## Version 3.14.0 (2019-04-16)
 
 * Added `SeekableEntityIdPager`
