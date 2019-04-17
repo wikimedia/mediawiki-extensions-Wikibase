@@ -31,6 +31,15 @@ class InMemoryEntityLookup implements EntityLookup {
 	private $exceptions = [];
 
 	/**
+	 * @param EntityDocument ...$entities
+	 */
+	public function __construct( ...$entities ) {
+		foreach ( $entities as $entity ) {
+			$this->addEntity( $entity );
+		}
+	}
+
+	/**
 	 * @param EntityDocument $entity
 	 *
 	 * @throws InvalidArgumentException
