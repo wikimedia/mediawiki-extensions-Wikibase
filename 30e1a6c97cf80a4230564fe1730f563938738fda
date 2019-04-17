@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "fb6ac046_4db2012c",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T10:19:07Z",
+      "side": 1,
+      "message": "You can use MediaWikiServices::getInstance()-\u003egetDBLoadBalancerFactory()-\u003ewaitForReplication()",
+      "parentUuid": "df77dce3_b3b4d2c4",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7938977_c2ca37d4",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 7
