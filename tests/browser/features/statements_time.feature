@@ -26,53 +26,54 @@ Feature: Using time properties in statements
       And Time precision chooser should be there
       And Time calendar chooser should be there
 
-  Scenario Outline: Check UI for invalid values
-    Given I am on an item page
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-    When I click the statement add button
-      And I select the claim property timeprop
-      And I enter <value> in the claim value input field
-    Then Statement save button should not be there
-      And Statement cancel button should be there
-
-  Examples:
-    | value |
-    | astring |
-    | 1 11 199 9 |
-    | 1 AC |
-    | 32.12.2015 |
-#    | 1.9.1999 12:12 | TODO: currently disabled see as well T102930
-
-  Scenario Outline: Time parser in the preview and precision detection should work properly
-    Given I am on an item page
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-    When I click the statement add button
-      And I select the claim property timeprop
-      And I enter <value> in the claim value input field
-    Then Statement save button should be there
-      And Statement cancel button should be there
-      And <preview> should be displayed in the InputExtender preview
-      And <calendar> should be the time calendar setting
-      And <precision> should be the time precision setting
-
-  Examples:
-    | value | preview | calendar | precision |
-    | 1 | 1 | Julian | year |
-    | 1 1 | January 1 | Julian | month |
-    | 1 1 1999 | 1 January 1999 | Gregorian | day |
-    | 12.11.1981 | 12 November 1981 | Gregorian | day |
-    | 1 bc | 1 BCE | Julian | year |
-    | 1 b.c. | 1 BCE | Julian | year |
-    | 1 ad | 1 | Julian | year |
-    | 1 ce | 1 | Julian | year |
-    | 10000 | 10000 years CE | Gregorian | 10,000 years |
-    | 100000 | 100000 years CE | Gregorian | 100,000 years |
-    | 1000000 BC | 1 million years BCE | Julian | million years |
-    | 10000000 | 10 million years CE | Gregorian | ten million years |
-    | 100000000 | 100 million years CE | Gregorian | hundred million years |
-    | 1000000000 BCE | 1 billion years BCE | Julian | billion years |
+# T221104
+#  Scenario Outline: Check UI for invalid values
+#    Given I am on an item page
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#    When I click the statement add button
+#      And I select the claim property timeprop
+#      And I enter <value> in the claim value input field
+#    Then Statement save button should not be there
+#      And Statement cancel button should be there
+#
+#  Examples:
+#    | value |
+#    | astring |
+#    | 1 11 199 9 |
+#    | 1 AC |
+#    | 32.12.2015 |
+##    | 1.9.1999 12:12 | TODO: currently disabled see as well T102930
+#
+#  Scenario Outline: Time parser in the preview and precision detection should work properly
+#    Given I am on an item page
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#    When I click the statement add button
+#      And I select the claim property timeprop
+#      And I enter <value> in the claim value input field
+#    Then Statement save button should be there
+#      And Statement cancel button should be there
+#      And <preview> should be displayed in the InputExtender preview
+#      And <calendar> should be the time calendar setting
+#      And <precision> should be the time precision setting
+#
+#  Examples:
+#    | value | preview | calendar | precision |
+#    | 1 | 1 | Julian | year |
+#    | 1 1 | January 1 | Julian | month |
+#    | 1 1 1999 | 1 January 1999 | Gregorian | day |
+#    | 12.11.1981 | 12 November 1981 | Gregorian | day |
+#    | 1 bc | 1 BCE | Julian | year |
+#    | 1 b.c. | 1 BCE | Julian | year |
+#    | 1 ad | 1 | Julian | year |
+#    | 1 ce | 1 | Julian | year |
+#    | 10000 | 10000 years CE | Gregorian | 10,000 years |
+#    | 100000 | 100000 years CE | Gregorian | 100,000 years |
+#    | 1000000 BC | 1 million years BCE | Julian | million years |
+#    | 10000000 | 10 million years CE | Gregorian | ten million years |
+#    | 100000000 | 100 million years CE | Gregorian | hundred million years |
+#    | 1000000000 BCE | 1 billion years BCE | Julian | billion years |
 
   @integration @modify_entity
   Scenario Outline: Adding a statement of type time

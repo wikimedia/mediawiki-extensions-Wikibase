@@ -13,13 +13,14 @@ Feature: Use header
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @ui_only
-  Scenario: Header UI has all required elements
-    Then Original label should be displayed
-      And Original description should be displayed
-      And Header edit button should be there
-      And Header cancel button should not be there
-      And Header save button should not be there
+# T221104
+#  @ui_only
+#  Scenario: Header UI has all required elements
+#    Then Original label should be displayed
+#      And Original description should be displayed
+#      And Header edit button should be there
+#      And Header cancel button should not be there
+#      And Header save button should not be there
 
   @ui_only
   Scenario: Click edit button

@@ -48,38 +48,39 @@ Feature: Edit label
       | click the header save button |
       | press the RETURN key in the label input field |
 
-  @modify_entity @save_label
-  Scenario Outline: Save label and reload
-    When I click the header edit button
-      And I enter "MODIFIED LABEL" as label
-      And I <save>
-      And I reload the page
-    Then Header edit button should be there
-      And "MODIFIED LABEL" should be displayed as label
-
-    Examples:
-      | save |
-      | click the header save button |
-      | press the RETURN key in the label input field |
-
-  @modify_entity @save_label
-  Scenario Outline: Label with special input
-    When I click the header edit button
-      And I enter <label> as label
-      And I click the header save button
-    Then Header edit button should be there
-      And <expected_label> should be displayed as label
-
-    Examples:
-      | label | expected_label |
-      | "0"           | "0"                    |
-      | "   normalize me  " | "normalize me" |
-      | "<script>$('body').empty();</script>" | "<script>$('body').empty();</script>" |
-      | "{{Template:blabla}}" | "{{Template:blabla}}" |
-
-  @save_label
-  Scenario: Label with a too long value
-    When I click the header edit button
-      And I enter a long string as label
-      And I click the header save button
-    Then An error message should be displayed
+# T221104
+#  @modify_entity @save_label
+#  Scenario Outline: Save label and reload
+#    When I click the header edit button
+#      And I enter "MODIFIED LABEL" as label
+#      And I <save>
+#      And I reload the page
+#    Then Header edit button should be there
+#      And "MODIFIED LABEL" should be displayed as label
+#
+#    Examples:
+#      | save |
+#      | click the header save button |
+#      | press the RETURN key in the label input field |
+#
+#  @modify_entity @save_label
+#  Scenario Outline: Label with special input
+#    When I click the header edit button
+#      And I enter <label> as label
+#      And I click the header save button
+#    Then Header edit button should be there
+#      And <expected_label> should be displayed as label
+#
+#    Examples:
+#      | label | expected_label |
+#      | "0"           | "0"                    |
+#      | "   normalize me  " | "normalize me" |
+#      | "<script>$('body').empty();</script>" | "<script>$('body').empty();</script>" |
+#      | "{{Template:blabla}}" | "{{Template:blabla}}" |
+#
+#  @save_label
+#  Scenario: Label with a too long value
+#    When I click the header edit button
+#      And I enter a long string as label
+#      And I click the header save button
+#    Then An error message should be displayed

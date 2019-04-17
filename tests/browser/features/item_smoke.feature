@@ -43,23 +43,24 @@ Feature: Item smoke test
     | Q15905  | "Italy" | "republic in Southern Europe" | "Italia", "Italian Republic", "Italië" | 3 | 2 | false |
     | Q15905  | "Italy" | "republic in Southern Europe" | "Italia", "Italian Republic", "Italië" | 3 | 2 | true |
 
-  Scenario Outline: Click UI elements
-    When I navigate to item <item_id> with resource loader debug mode <debug_mode>
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-      And I click the header edit button
-      And I click the header cancel button
-      And I click the statement add button
-      And I click the statement cancel button
-      And I click the sitelink edit button
-      And I click the sitelink cancel button
-    Then Header edit button should be there
-      And Statement add button for group 1 should be there
-      And Statement add button should be there
-      And Sitelink edit button should be there
-
-  @wikidata.beta.wmflabs.org
-  Examples:
-    | item_id | debug_mode |
-    | Q15905  | false |
-    | Q15905  | true |
+# T221104
+#  Scenario Outline: Click UI elements
+#    When I navigate to item <item_id> with resource loader debug mode <debug_mode>
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#      And I click the header edit button
+#      And I click the header cancel button
+#      And I click the statement add button
+#      And I click the statement cancel button
+#      And I click the sitelink edit button
+#      And I click the sitelink cancel button
+#    Then Header edit button should be there
+#      And Statement add button for group 1 should be there
+#      And Statement add button should be there
+#      And Sitelink edit button should be there
+#
+#  @wikidata.beta.wmflabs.org
+#  Examples:
+#    | item_id | debug_mode |
+#    | Q15905  | false |
+#    | Q15905  | true |

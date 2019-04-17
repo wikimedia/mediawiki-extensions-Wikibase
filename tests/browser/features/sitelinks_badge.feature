@@ -14,13 +14,14 @@ Feature: Add badges to sitelinks
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @ui_only
-  Scenario: Sitelink badge UI is there
-    When I click the sitelink edit button
-      And I type en into the 1. siteid input field
-    Then Sitelink pagename input field should be there
-      And Sitelink badge selector should be there
-      And Sitelink empty badge selector should be there
+# T221104
+#  @ui_only
+#  Scenario: Sitelink badge UI is there
+#    When I click the sitelink edit button
+#      And I type en into the 1. siteid input field
+#    Then Sitelink pagename input field should be there
+#      And Sitelink badge selector should be there
+#      And Sitelink empty badge selector should be there
 
   @ui_only
   Scenario: Sitelink badge UI shows all available badges
