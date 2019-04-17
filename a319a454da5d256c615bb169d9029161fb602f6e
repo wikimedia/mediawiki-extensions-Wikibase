@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "0630164d_c13c54be",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-04-17T11:32:59Z",
+      "side": 1,
+      "message": "Not at all...after I make my exploration through the MW lib for the requests  I figured out, that timeout never is typed checked (see for example: https://doc.wikimedia.org/mediawiki-core/master/php/CurlHttpRequest_8php_source.html#55 ), which means we could basically put a float there, too I guess, but that is not in the sense of the creator ( as you can see here: https://doc.wikimedia.org/mediawiki-core/master/php/classHttp.html#a6326c783d2653ee889663ad05677a419 ).",
+      "parentUuid": "eeb6cdb4_08f74192",
+      "range": {
+        "startLine": 29,
+        "startChar": 28,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "087edacf_fda7d645",
         "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
         "patchSetId": 12
@@ -59,6 +83,30 @@
       "writtenOn": "2019-04-17T10:43:28Z",
       "side": 1,
       "message": "The person who wrote this comment (me) was confused about what goes into this array. It can now be deleted :)",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 40,
+        "endChar": 37
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14b4a432_e6447391",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-04-17T11:32:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "087edacf_fda7d645",
       "range": {
         "startLine": 39,
         "startChar": 42,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "de24e3be_db46817c",
+        "filename": "view/tests/phpunit/Termbox/Renderer/TermboxRemoteRendererTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-04-17T11:32:59Z",
+      "side": 1,
+      "message": "I am not sure if I can follow that because of ln 77.",
+      "parentUuid": "4ea87bb6_f4cb0457",
+      "range": {
+        "startLine": 173,
+        "startChar": 17,
+        "endLine": 173,
+        "endChar": 73
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4727145c_1927d70b",
         "filename": "view/tests/phpunit/Termbox/Renderer/TermboxRemoteRendererTest.php",
         "patchSetId": 12
@@ -105,6 +177,30 @@
       "writtenOn": "2019-04-17T10:43:28Z",
       "side": 1,
       "message": "Not that it makes a huge difference since anything !\u003d 200 will make it throw an exception but it actually returns 0 for me as the status.",
+      "range": {
+        "startLine": 185,
+        "startChar": 17,
+        "endLine": 185,
+        "endChar": 20
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f2f8750_08303fb1",
+        "filename": "view/tests/phpunit/Termbox/Renderer/TermboxRemoteRendererTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-04-17T11:32:59Z",
+      "side": 1,
+      "message": "Agree, and done",
+      "parentUuid": "4727145c_1927d70b",
       "range": {
         "startLine": 185,
         "startChar": 17,
