@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\EntityDiff
+ * @covers \Wikibase\DataModel\Services\Diff\EntityDiff
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

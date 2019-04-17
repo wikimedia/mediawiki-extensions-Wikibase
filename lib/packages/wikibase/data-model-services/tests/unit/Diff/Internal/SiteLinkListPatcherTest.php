@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher
+ * @covers \Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

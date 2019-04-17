@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException
+ * @covers \Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

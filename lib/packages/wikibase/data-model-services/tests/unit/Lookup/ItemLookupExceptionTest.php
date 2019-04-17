@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\ItemLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\ItemLookupException
+ * @covers \Wikibase\DataModel\Services\Lookup\ItemLookupException
  *
  * @license GPL-2.0-or-later
  * @author Addshore

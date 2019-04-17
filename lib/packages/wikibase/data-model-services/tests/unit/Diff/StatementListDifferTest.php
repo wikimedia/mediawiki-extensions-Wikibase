@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\StatementListDiffer
+ * @covers \Wikibase\DataModel\Services\Diff\StatementListDiffer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

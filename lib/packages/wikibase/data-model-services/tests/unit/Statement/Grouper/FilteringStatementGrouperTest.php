@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementFilter;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper
+ * @covers \Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

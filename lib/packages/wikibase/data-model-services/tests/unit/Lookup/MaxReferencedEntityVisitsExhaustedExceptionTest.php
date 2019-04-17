@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException
+ * @covers \Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

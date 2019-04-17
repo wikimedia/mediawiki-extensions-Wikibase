@@ -7,7 +7,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

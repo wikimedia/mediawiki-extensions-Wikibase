@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory
+ * @covers \Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

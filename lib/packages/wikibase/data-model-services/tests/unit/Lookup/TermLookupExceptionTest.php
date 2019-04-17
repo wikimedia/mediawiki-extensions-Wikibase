@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\TermLookupException
+ * @covers \Wikibase\DataModel\Services\Lookup\TermLookupException
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

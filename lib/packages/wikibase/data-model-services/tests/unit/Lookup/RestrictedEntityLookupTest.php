@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

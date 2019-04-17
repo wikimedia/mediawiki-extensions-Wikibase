@@ -9,7 +9,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\Grouper\ByPropertyIdStatementGrouper
+ * @covers \Wikibase\DataModel\Services\Statement\Grouper\ByPropertyIdStatementGrouper
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

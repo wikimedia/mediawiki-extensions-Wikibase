@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 
 /**
- * @covers Wikibase\DataModel\Services\EntityId\EntityIdComposer
+ * @covers \Wikibase\DataModel\Services\EntityId\EntityIdComposer
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

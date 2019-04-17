@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

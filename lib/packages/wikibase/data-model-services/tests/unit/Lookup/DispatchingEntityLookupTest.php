@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\DispatchingEntityLookup
  *
  * @license GPL-2.0-or-later
  */

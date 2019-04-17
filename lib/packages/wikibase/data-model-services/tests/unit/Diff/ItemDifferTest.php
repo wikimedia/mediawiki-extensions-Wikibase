@@ -12,8 +12,8 @@ use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\ItemDiffer
- * @covers Wikibase\DataModel\Services\Diff\ItemDiff
+ * @covers \Wikibase\DataModel\Services\Diff\ItemDiffer
+ * @covers \Wikibase\DataModel\Services\Diff\ItemDiff
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
 
 /**
- * @covers Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter
+ * @covers \Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

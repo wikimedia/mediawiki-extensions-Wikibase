@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper
+ * @covers \Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

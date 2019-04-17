@@ -8,7 +8,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\Filter\PropertySetStatementFilter
+ * @covers \Wikibase\DataModel\Services\Statement\Filter\PropertySetStatementFilter
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

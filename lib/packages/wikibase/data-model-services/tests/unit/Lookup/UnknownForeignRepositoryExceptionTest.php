@@ -6,7 +6,7 @@ use Exception;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException
+ * @covers \Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException
  *
  * @license GPL-2.0-or-later
  */

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\AliasGroupListPatcher
+ * @covers \Wikibase\DataModel\Services\Diff\Internal\AliasGroupListPatcher
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >

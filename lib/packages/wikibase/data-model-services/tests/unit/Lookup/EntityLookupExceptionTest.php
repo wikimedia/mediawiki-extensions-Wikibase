@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\EntityLookupException
+ * @covers \Wikibase\DataModel\Services\Lookup\EntityLookupException
  *
  * @license GPL-2.0-or-later
  * @author Addshore

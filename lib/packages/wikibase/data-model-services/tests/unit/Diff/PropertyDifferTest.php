@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\PropertyDiffer
+ * @covers \Wikibase\DataModel\Services\Diff\PropertyDiffer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

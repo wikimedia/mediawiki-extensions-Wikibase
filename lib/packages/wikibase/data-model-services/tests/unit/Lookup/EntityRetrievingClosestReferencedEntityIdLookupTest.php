@@ -24,7 +24,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  *
  * @license GPL-2.0-or-later

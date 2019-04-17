@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 
 /**
- * @covers Wikibase\DataModel\Services\Statement\StatementGuidValidator
+ * @covers \Wikibase\DataModel\Services\Statement\StatementGuidValidator
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

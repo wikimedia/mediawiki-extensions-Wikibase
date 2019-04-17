@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup
+ * @covers \Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
