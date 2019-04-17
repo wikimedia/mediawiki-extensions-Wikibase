@@ -39,37 +39,38 @@ Feature: Property smoke test
     | P694 | "instance of" | "this item is a concrete object (instance) of this class, category or object group" | "is a", "is an", "rdf:type" | 3 | Item | false |
     | P694 | "instance of" | "this item is a concrete object (instance) of this class, category or object group" | "is a", "is an", "rdf:type" | 3 | Item  | true |
 
-  @smoke
-  Scenario Outline: Click UI elements
-    When I navigate to property <property_id> with resource loader debug mode <debug_mode>
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-      And I click the header edit button
-      And I click the header cancel button
-    Then Header edit button should be there
-      And Statement add button should be there
-      And Sitelink edit button should not be there
-
-  @wikidata.beta.wmflabs.org
-  Examples:
-    | property_id | debug_mode |
-    | P694 | false |
-    | P694 | true  |
-
-  @smoke @wikidata.beta.wmflabs.org
-  Scenario: Click statement add button
-    When I navigate to property id P694
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-      And I click the statement add button
-    Then Statement add button should be there
-      And Statement cancel button should be there
-      And Statement save button should be disabled
-      And Statement help field should be there
-      And Claim entity selector input element should be there
-      And Claim value input element should not be there
-      And Rank selector for claim 1 in group 1 should be there
-      And Snaktype selector for claim 1 in group 1 should not be there
+# T221104
+#  @smoke
+#  Scenario Outline: Click UI elements
+#    When I navigate to property <property_id> with resource loader debug mode <debug_mode>
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#      And I click the header edit button
+#      And I click the header cancel button
+#    Then Header edit button should be there
+#      And Statement add button should be there
+#      And Sitelink edit button should not be there
+#
+#  @wikidata.beta.wmflabs.org
+#  Examples:
+#    | property_id | debug_mode |
+#    | P694 | false |
+#    | P694 | true  |
+#
+#  @smoke @wikidata.beta.wmflabs.org
+#  Scenario: Click statement add button
+#    When I navigate to property id P694
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#      And I click the statement add button
+#    Then Statement add button should be there
+#      And Statement cancel button should be there
+#      And Statement save button should be disabled
+#      And Statement help field should be there
+#      And Claim entity selector input element should be there
+#      And Claim value input element should not be there
+#      And Rank selector for claim 1 in group 1 should be there
+#      And Snaktype selector for claim 1 in group 1 should not be there
 
   @smoke @modify_entity
   Scenario: Save statement

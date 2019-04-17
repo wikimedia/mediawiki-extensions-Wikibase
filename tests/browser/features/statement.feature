@@ -53,68 +53,69 @@ Feature: Creating statements
     | click the statement cancel button |
     | press the ESC key in the claim entity selector input field |
 
-  @ui_only
-  Scenario: Select a property
-    Given I have the following properties with datatype:
-      | stringprop | string |
-    When I click the statement add button
-      And I select the claim property stringprop
-    Then Statement add button should be there
-      And Statement cancel button should be there
-      And Statement save button should be disabled
-      And Claim entity selector input element should be there
-      And Claim value input element should be there
-      And Rank selector for claim 1 in group 1 should be there
-      And Snaktype selector for claim 1 in group 1 should be there
-
-  @smoke @ui_only
-  Scenario: Select a property and enter a statement value
-    Given I have the following properties with datatype:
-      | stringprop | string |
-    When I click the statement add button
-      And I select the claim property stringprop
-      And I enter something in the claim value input field
-    Then Statement add button should be there
-      And Statement cancel button should be there
-      And Statement save button should be there
-      And Claim entity selector input element should be there
-      And Claim value input element should be there
-      And Rank selector for claim 1 in group 1 should be there
-      And Snaktype selector for claim 1 in group 1 should be there
-
-  @ui_only
-  Scenario Outline: Cancel statement after selecting a property
-    Given I have the following properties with datatype:
-      | stringprop | string |
-    When I click the statement add button
-      And I select the claim property stringprop
-      And I enter something in the claim value input field
-      And I <cancel>
-    Then Statement add button should be there
-      And Statement cancel button should not be there
-      And Statement save button should not be there
-      And Claim entity selector input element should not be there
-      And Claim value input element should not be there
-      And Rank selector for claim 1 in group 1 should not be there
-      And Snaktype selector for claim 1 in group 1 should not be there
-
-  Examples:
-    | cancel |
-    | click the statement cancel button |
-    | press the ESC key in the claim value input field |
-
-  @ui_only
-  Scenario: Select a property, enter a statement value and clear the property
-    Given I have the following properties with datatype:
-      | stringprop | string |
-    When I click the statement add button
-      And I select the claim property stringprop
-      And I enter something in the claim value input field
-      And I enter invalid in the claim property input field
-    Then Statement add button should be there
-      And Statement cancel button should be there
-      And Statement save button should be disabled
-      And Claim entity selector input element should be there
-      And Claim value input element should not be there
-      And Rank selector for claim 1 in group 1 should be there
-      And Snaktype selector for claim 1 in group 1 should not be there
+# T221104
+#  @ui_only
+#  Scenario: Select a property
+#    Given I have the following properties with datatype:
+#      | stringprop | string |
+#    When I click the statement add button
+#      And I select the claim property stringprop
+#    Then Statement add button should be there
+#      And Statement cancel button should be there
+#      And Statement save button should be disabled
+#      And Claim entity selector input element should be there
+#      And Claim value input element should be there
+#      And Rank selector for claim 1 in group 1 should be there
+#      And Snaktype selector for claim 1 in group 1 should be there
+#
+#  @smoke @ui_only
+#  Scenario: Select a property and enter a statement value
+#    Given I have the following properties with datatype:
+#      | stringprop | string |
+#    When I click the statement add button
+#      And I select the claim property stringprop
+#      And I enter something in the claim value input field
+#    Then Statement add button should be there
+#      And Statement cancel button should be there
+#      And Statement save button should be there
+#      And Claim entity selector input element should be there
+#      And Claim value input element should be there
+#      And Rank selector for claim 1 in group 1 should be there
+#      And Snaktype selector for claim 1 in group 1 should be there
+#
+#  @ui_only
+#  Scenario Outline: Cancel statement after selecting a property
+#    Given I have the following properties with datatype:
+#      | stringprop | string |
+#    When I click the statement add button
+#      And I select the claim property stringprop
+#      And I enter something in the claim value input field
+#      And I <cancel>
+#    Then Statement add button should be there
+#      And Statement cancel button should not be there
+#      And Statement save button should not be there
+#      And Claim entity selector input element should not be there
+#      And Claim value input element should not be there
+#      And Rank selector for claim 1 in group 1 should not be there
+#      And Snaktype selector for claim 1 in group 1 should not be there
+#
+#  Examples:
+#    | cancel |
+#    | click the statement cancel button |
+#    | press the ESC key in the claim value input field |
+#
+#  @ui_only
+#  Scenario: Select a property, enter a statement value and clear the property
+#    Given I have the following properties with datatype:
+#      | stringprop | string |
+#    When I click the statement add button
+#      And I select the claim property stringprop
+#      And I enter something in the claim value input field
+#      And I enter invalid in the claim property input field
+#    Then Statement add button should be there
+#      And Statement cancel button should be there
+#      And Statement save button should be disabled
+#      And Claim entity selector input element should be there
+#      And Claim value input element should not be there
+#      And Rank selector for claim 1 in group 1 should be there
+#      And Snaktype selector for claim 1 in group 1 should not be there

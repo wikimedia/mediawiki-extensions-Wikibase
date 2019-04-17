@@ -28,38 +28,39 @@ Feature: Special:SetLabel page
       And I am on the Special:SetLabel page
     Then Anonymous edit warning should be there
 
-  Scenario: Add a label
-    Given I have the following empty items:
-        | item1 |
-      And I am on the Special:SetLabel page
-      And I enter the ID of item item1 into the ID input field
-      And I enter en into the language input field
-      And I enter Something into the label input field
-      And I press the set label button
-      And I am on the page of item item1
-    Then Something should be displayed as label having the ID of item1
-
-  @integration @smoke
-  Scenario: Edit an existing label
-    Given I have the following items:
-        | item1 |
-      And I am on the Special:SetLabel page
-      And I enter the ID of item item1 into the ID input field
-      And I enter en into the language input field
-      And I enter Something different into the label input field
-      And I press the set label button
-      And I am on the page of item item1
-    Then Something different should be displayed as label having the ID of item1
-
-  Scenario: Edit using an invalid language fails
-    Given I have the following items:
-        | item1 |
-      And I am on the Special:SetLabel page
-      And I enter the ID of item item1 into the ID input field
-      And I enter Something invalid into the language input field
-      And I enter Something new into the label input field
-      And I press the set label button
-    Then An error message should be displayed on the special page
+# T221104
+#  Scenario: Add a label
+#    Given I have the following empty items:
+#        | item1 |
+#      And I am on the Special:SetLabel page
+#      And I enter the ID of item item1 into the ID input field
+#      And I enter en into the language input field
+#      And I enter Something into the label input field
+#      And I press the set label button
+#      And I am on the page of item item1
+#    Then Something should be displayed as label having the ID of item1
+#
+#  @integration @smoke
+#  Scenario: Edit an existing label
+#    Given I have the following items:
+#        | item1 |
+#      And I am on the Special:SetLabel page
+#      And I enter the ID of item item1 into the ID input field
+#      And I enter en into the language input field
+#      And I enter Something different into the label input field
+#      And I press the set label button
+#      And I am on the page of item item1
+#    Then Something different should be displayed as label having the ID of item1
+#
+#  Scenario: Edit using an invalid language fails
+#    Given I have the following items:
+#        | item1 |
+#      And I am on the Special:SetLabel page
+#      And I enter the ID of item item1 into the ID input field
+#      And I enter Something invalid into the language input field
+#      And I enter Something new into the label input field
+#      And I press the set label button
+#    Then An error message should be displayed on the special page
 
   Scenario: Edit using an invalid ID fails
     When I am on the Special:SetLabel page

@@ -13,27 +13,28 @@ Feature: Creating statements of type string
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @modify_entity
-  Scenario Outline: Adding a statement of type string
-    Given I have the following properties with datatype:
-      | stringprop | string |
-    When I click the statement add button
-      And I select the claim property stringprop
-      And I enter <value> in the claim value input field
-      And I <save>
-    Then Statement add button should be there
-      And Statement cancel button should not be there
-      And Statement save button should not be there
-      And Claim entity selector input element should not be there
-      And Claim value input element should not be there
-      And Statement edit button for claim 1 in group 1 should be there
-      And Statement name of group 1 should be the label of stringprop
-      And Statement string value of claim 1 in group 1 should be <value>
-
-  Examples:
-    | value                               | save                                                    |
-    | it's a string                       | press the RETURN key in the claim value input field |
-    | <script>$('body').empty();</script> | click the statement save button                         |
+# T221104
+#  @modify_entity
+#  Scenario Outline: Adding a statement of type string
+#    Given I have the following properties with datatype:
+#      | stringprop | string |
+#    When I click the statement add button
+#      And I select the claim property stringprop
+#      And I enter <value> in the claim value input field
+#      And I <save>
+#    Then Statement add button should be there
+#      And Statement cancel button should not be there
+#      And Statement save button should not be there
+#      And Claim entity selector input element should not be there
+#      And Claim value input element should not be there
+#      And Statement edit button for claim 1 in group 1 should be there
+#      And Statement name of group 1 should be the label of stringprop
+#      And Statement string value of claim 1 in group 1 should be <value>
+#
+#  Examples:
+#    | value                               | save                                                    |
+#    | it's a string                       | press the RETURN key in the claim value input field |
+#    | <script>$('body').empty();</script> | click the statement save button                         |
 
   @modify_entity
   Scenario: Adding a statement of type string and reload page

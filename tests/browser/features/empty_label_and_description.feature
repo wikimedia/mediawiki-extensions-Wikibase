@@ -13,21 +13,22 @@ Feature: Empty label and description behaviour
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @ui_only
-  Scenario: Description UI is shown correctly when description is empty
-    Then Description input element should not be there
-      And Header edit button should be there
-      And Header cancel button should not be there
-      And Header save button should not be there
-
-  @ui_only
-  Scenario: Description UI is shown correctly when description is empty
-    When I click the header edit button
-    Then Description input element should be there
-      And Description input element should be empty
-      And Header edit button should not be there
-      And Header cancel button should be there
-      And Header save button should not be there
+# T221104
+#  @ui_only
+#  Scenario: Description UI is shown correctly when description is empty
+#    Then Description input element should not be there
+#      And Header edit button should be there
+#      And Header cancel button should not be there
+#      And Header save button should not be there
+#
+#  @ui_only
+#  Scenario: Description UI is shown correctly when description is empty
+#    When I click the header edit button
+#    Then Description input element should be there
+#      And Description input element should be empty
+#      And Header edit button should not be there
+#      And Header cancel button should be there
+#      And Header save button should not be there
 
   @ui_only
   Scenario: Description UI behaves correctly when description is empty

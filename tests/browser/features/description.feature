@@ -47,36 +47,37 @@ Feature: Edit description
      | click the header save button |
      | press the RETURN key in the description input field |
 
-  @integration @save_description @modify_entity
-  Scenario Outline: Save description and reload
-    When I click the header edit button
-      And I enter "MODIFIED DESCRIPTION" as description
-      And I <save>
-      And I reload the page
-    Then "MODIFIED DESCRIPTION" should be displayed as description
-
-    Examples:
-      | save |
-      | click the header save button |
-      | press the RETURN key in the description input field |
-
-  @save_description @modify_entity
-  Scenario Outline: Description with special input
-    When I click the header edit button
-      And I enter <description> as description
-      And I click the header save button
-    Then <expected_description> should be displayed as description
-
-    Examples:
-      | description | expected_description |
-      | "0"           | "0"                    |
-      | "   norm a lize me  " | "norm a lize me" |
-      | "<script>$('body').empty();</script>" | "<script>$('body').empty();</script>" |
-      | "{{Template:blabla}}" | "{{Template:blabla}}" |
-
-  @save_description
-  Scenario: Description with a too long value
-    When I click the header edit button
-      And I enter a long string as description
-      And I click the header save button
-    Then An error message should be displayed
+# T221104
+#  @integration @save_description @modify_entity
+#  Scenario Outline: Save description and reload
+#    When I click the header edit button
+#      And I enter "MODIFIED DESCRIPTION" as description
+#      And I <save>
+#      And I reload the page
+#    Then "MODIFIED DESCRIPTION" should be displayed as description
+#
+#    Examples:
+#      | save |
+#      | click the header save button |
+#      | press the RETURN key in the description input field |
+#
+#  @save_description @modify_entity
+#  Scenario Outline: Description with special input
+#    When I click the header edit button
+#      And I enter <description> as description
+#      And I click the header save button
+#    Then <expected_description> should be displayed as description
+#
+#    Examples:
+#      | description | expected_description |
+#      | "0"           | "0"                    |
+#      | "   norm a lize me  " | "norm a lize me" |
+#      | "<script>$('body').empty();</script>" | "<script>$('body').empty();</script>" |
+#      | "{{Template:blabla}}" | "{{Template:blabla}}" |
+#
+#  @save_description
+#  Scenario: Description with a too long value
+#    When I click the header edit button
+#      And I enter a long string as description
+#      And I click the header save button
+#    Then An error message should be displayed

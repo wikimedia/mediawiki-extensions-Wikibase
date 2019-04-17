@@ -36,17 +36,18 @@ Feature: Creating statements of type item
     | item  | save                            |
     | item1 | click the statement save button |
 
-  @ui_only
-  Scenario: Select a property, use entity selector
-    Given I have the following properties with datatype:
-      | itemprop | wikibase-item |
-      And I have 3 items beginning with "q"
-    When I click the statement add button
-      And I select the claim property itemprop
-      And I enter q in the claim value input field
-      And I press the ARROWDOWN key in the claim value input field
-      And I press the ARROWDOWN key in the claim value input field
-      And I press the RETURN key in the claim value input field
-      And I memorize the value of the the claim value input field
-      And I press the RETURN key in the claim value input field
-    Then Statement value of claim 1 in group 1 should be what I memorized
+# T221104
+#  @ui_only
+#  Scenario: Select a property, use entity selector
+#    Given I have the following properties with datatype:
+#      | itemprop | wikibase-item |
+#      And I have 3 items beginning with "q"
+#    When I click the statement add button
+#      And I select the claim property itemprop
+#      And I enter q in the claim value input field
+#      And I press the ARROWDOWN key in the claim value input field
+#      And I press the ARROWDOWN key in the claim value input field
+#      And I press the RETURN key in the claim value input field
+#      And I memorize the value of the the claim value input field
+#      And I press the RETURN key in the claim value input field
+#    Then Statement value of claim 1 in group 1 should be what I memorized

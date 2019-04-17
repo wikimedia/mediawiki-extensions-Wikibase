@@ -13,22 +13,23 @@ Feature: Using url properties in statements
       | urlprop | url |
       And I am not logged in to the repo
 
-  Scenario Outline: Check UI for invalid values
-    Given I am on an item page
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-    When I click the statement add button
-      And I select the claim property urlprop
-      And I enter <value> in the claim value input field
-      And I click the statement save button
-    Then Statement save button should be there
-      And Statement cancel button should be there
-      And An error message should be displayed
-
-  Examples:
-    | value |
-    | this is no url |
-    | missing.http.org |
+# T221104
+#  Scenario Outline: Check UI for invalid values
+#    Given I am on an item page
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#    When I click the statement add button
+#      And I select the claim property urlprop
+#      And I enter <value> in the claim value input field
+#      And I click the statement save button
+#    Then Statement save button should be there
+#      And Statement cancel button should be there
+#      And An error message should be displayed
+#
+#  Examples:
+#    | value |
+#    | this is no url |
+#    | missing.http.org |
 
   @modify_entity
   Scenario Outline: Adding a statement of type url
