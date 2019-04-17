@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
+use MovePage;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -73,44 +75,62 @@ class ItemMoveTest extends \MediaWikiTestCase {
 
 	/**
 	 * Tests @see WikibaseItem::getIdForSiteLink
+	 * XXX That method doesn't exist
+	 *
+	 * @dataProvider provideMovePrevention
 	 */
-	public function testMovePrevention() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
+	public function testMovePrevention( $callback ) {
+		list( $from, $to ) = $callback( $this->page, $this->itemTitle );
+		$mp = new MovePage( $from, $to );
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		// Moving a regular page into data NS onto an existing item
-		$title = $this->itemTitle;
-		$this->assertInstanceOf( Title::class, $title ); // sanity check
+	public function provideMovePrevention() {
+		return [
+			// Moving a regular page into data NS onto an existing item
+			[ function ( $page, $itemTitle ) {
+				return [ $page->getTitle(), $itemTitle ];
+			} ],
 
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+			// Moving a regular page into data NS to an invalid location
+			// @todo: test other types of entities too!
+			[ function ( $page, $itemTitle ) {
+				$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+					->getEntityNamespace( 'item' );
+				return [ $page->getTitle(),
+					Title::newFromText( $page->getTitle()->getText(), $itemNamespace ) ];
+			} ],
 
-		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
-		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( 'item' );
+			// Moving a regular page into data NS to an empty (but valid) location
+			[ function ( $page, $itemTitle ) {
+				return [ $page->getTitle(), WikibaseRepo::getDefaultInstance()
+					->getEntityTitleLookup()->getTitleForId( new ItemId( 'Q42' ) ) ];
+			} ],
 
-		// Moving a regular page into data NS to an invalid location
-		// @todo: test other types of entities too!
-		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+			// Moving item page out of data NS onto an existing page
+			[ function ( $page, $itemTitle ) {
+				return [ $itemTitle, $page->getTitle() ];
+			} ],
 
-		// Moving a regular page into data NS to an empty (but valid) location
-		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+			// Moving item page out of data NS onto a non-existing page
+			[ function ( $page, $itemTitle ) {
+				return [ $itemTitle, Title::newFromText( 'wbmovetestitem' ) ];
+			} ],
 
-		// Moving item page out of data NS onto an existing page
-		$title = $this->page->getTitle();
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+			// Moving item to an invalid location in the data NS
+			[ function ( $page, $itemTitle ) {
+				$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+					->getEntityNamespace( 'item' );
+				return [ $itemTitle,
+					Title::newFromText( $page->getTitle()->getText(), $itemNamespace ) ];
+			} ],
 
-		// Moving item page out of data NS onto a non-existing page
-		$title = Title::newFromText( 'wbmovetestitem' );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
-
-		// Moving item to an invalid location in the data NS
-		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
-
-		// Moving item to an valid location in the data NS
-		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+			// Moving item to an valid location in the data NS
+			[ function ( $page, $itemTitle ) {
+				return [ $itemTitle, WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+					->getTitleForId( new ItemId( 'Q42' ) ) ];
+			} ],
+		];
 	}
 
 }
