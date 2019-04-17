@@ -2,6 +2,103 @@
   "comments": [
     {
       "key": {
+        "uuid": "73ffc7e3_93879e99",
+        "filename": "data-access/src/PerRepositoryServiceWiring.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "We usually try to not create new log channels unless there\u0027s a strong need. Would \"Wikibase\" also work for this?",
+      "range": {
+        "startLine": 81,
+        "startChar": 31,
+        "endLine": 81,
+        "endChar": 40
+      },
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30b66e20_3164fa88",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "Isn\u0027t that value from configuration?",
+      "range": {
+        "startLine": 24,
+        "startChar": 90,
+        "endLine": 24,
+        "endChar": 96
+      },
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed00ec86_85465a09",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "A StatusValue (simpler base class of Status) would probably also suffice",
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce63ea9f_13adfb94",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "missing phpdoc",
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91af39de_4590e2bc",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "This should always return a Status (or rather StatusValue). StatusValue can wrap the response (like Status::newGood( $blob )).",
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0253876e_89b0e452",
         "filename": "lib/includes/Store/EntityContentDataCodec.php",
         "patchSetId": 6
@@ -13,6 +110,46 @@
       "writtenOn": "2019-04-17T07:16:04Z",
       "side": 1,
       "message": "Does this make sense here? No one is actually looking at the Status after calling this method but not sure how to show the user a nice error otherwise",
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7bf7aa5_c81bc687",
+        "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "This if can be replaced with $logger ?: new TestLogger(); :)",
+      "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9539f98_d4ceeda2",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-17T07:26:50Z",
+      "side": 1,
+      "message": "We probably don\u0027t need a new log channel here, you can probably just use $this-\u003egetLogger().",
+      "range": {
+        "startLine": 1594,
+        "startChar": 31,
+        "endLine": 1594,
+        "endChar": 40
+      },
       "revId": "a45e4990c181b74ab5e34f89c2f1ba7cfab26a64",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
