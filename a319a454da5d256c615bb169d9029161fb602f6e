@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "038fc311_19887039",
+        "filename": "docs/options.wiki",
+        "patchSetId": 12
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T10:43:28Z",
+      "side": 1,
+      "message": "Missing a word (\"which\"?), I think\n\"Time after which wikibase aborts the connection to the ssr server.\"",
+      "range": {
+        "startLine": 209,
+        "startChar": 2,
+        "endLine": 209,
+        "endChar": 21
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeb6cdb4_08f74192",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T10:43:28Z",
+      "side": 1,
+      "message": "This cast is unnecessary",
+      "range": {
+        "startLine": 29,
+        "startChar": 28,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "087edacf_fda7d645",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T10:43:28Z",
+      "side": 1,
+      "message": "The person who wrote this comment (me) was confused about what goes into this array. It can now be deleted :)",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 40,
+        "endChar": 37
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ea87bb6_f4cb0457",
+        "filename": "view/tests/phpunit/Termbox/Renderer/TermboxRemoteRendererTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T10:43:28Z",
+      "side": 1,
+      "message": "This test is not taking the timeout into account at all, i.e. as far as I can tell it would pass almost as is on master, too. It needs at least one additional assertion that the timeout is actually passed to the `create` method of the HttpRequestFactory.",
+      "range": {
+        "startLine": 173,
+        "startChar": 17,
+        "endLine": 173,
+        "endChar": 73
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4727145c_1927d70b",
+        "filename": "view/tests/phpunit/Termbox/Renderer/TermboxRemoteRendererTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T10:43:28Z",
+      "side": 1,
+      "message": "Not that it makes a huge difference since anything !\u003d 200 will make it throw an exception but it actually returns 0 for me as the status.",
+      "range": {
+        "startLine": 185,
+        "startChar": 17,
+        "endLine": 185,
+        "endChar": 20
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
