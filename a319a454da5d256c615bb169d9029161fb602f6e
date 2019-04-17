@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a3c95b48_6e7785b3",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T16:00:52Z",
+      "side": 1,
+      "message": "I\u0027m afraid I don\u0027t follow. Neither of the links mention any problems with non-integers. The first one actually makes me believe that float values would be perfectly valid.\n\nI still believe not having the cast is fine. If our worry is that people put silly configuration values in here, e.g. \"THREE\", then the cast will not help us either.",
+      "parentUuid": "0630164d_c13c54be",
+      "range": {
+        "startLine": 29,
+        "startChar": 28,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "087edacf_fda7d645",
         "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
         "patchSetId": 12
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "I am not sure if I can follow that because of ln 77.",
       "parentUuid": "4ea87bb6_f4cb0457",
+      "range": {
+        "startLine": 173,
+        "startChar": 17,
+        "endLine": 173,
+        "endChar": 73
+      },
+      "revId": "a319a454da5d256c615bb169d9029161fb602f6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db22814d_39d370ed",
+        "filename": "view/tests/phpunit/Termbox/Renderer/TermboxRemoteRendererTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-04-17T16:00:52Z",
+      "side": 1,
+      "message": "Right, sorry, I missed that. I still think it would be better off in this test. The test above is testing that the http query is built correctly. As far as I can see the only reason for the timeout to pop up there is the fact that we have the mocked request factory at hand.",
+      "parentUuid": "de24e3be_db46817c",
       "range": {
         "startLine": 173,
         "startChar": 17,
