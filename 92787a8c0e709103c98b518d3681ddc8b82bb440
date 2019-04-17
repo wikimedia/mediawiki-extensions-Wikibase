@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58edc023_d6a5e807",
+        "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-17T18:08:46Z",
+      "side": 1,
+      "message": "Why does one of these lines use $( body ) and the other doesn’t? It looks like it’s not necessary.",
+      "revId": "92787a8c0e709103c98b518d3681ddc8b82bb440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
