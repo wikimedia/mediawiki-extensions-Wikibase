@@ -108,7 +108,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 				new TimeValue( '+2001-01-01T00:00:00Z', 60, 0, 1, TimeValue::PRECISION_MONTH, $gregorian ),
 				'@' . implode( '.*',
 					[
-						'<h4[^<>]*><a>HTML</a></h4>',
+						'<b[^<>]*><a>HTML</a></b>',
 						'<td[^<>]*>\+0*2001-01-01T00:00:00Z</td>',
 						'<td[^<>]*>\+01:00</td>',
 						'<td[^<>]*>\(valueview-expert-timevalue-calendar-gregorian\)</td>',

@@ -82,7 +82,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		$html = '';
 		$html .= Html::rawElement(
-			'h4',
+			'b',
 			[ 'class' => 'wb-details wb-time-details wb-time-rendered' ],
 			$this->timeFormatter->format( $value )
 		);
