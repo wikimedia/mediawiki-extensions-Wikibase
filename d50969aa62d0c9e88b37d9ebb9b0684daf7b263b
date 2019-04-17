@@ -313,6 +313,24 @@
       "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "338b3679_98b20943",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-17T15:00:37Z",
+      "side": 1,
+      "message": "side note: for properties, we put the datatype before the ID… not sure which is more important, but when looking at a dump of properties and items that kinda hides the property ID a bit IMHO",
+      "parentUuid": "e79dfb2e_c99e107a",
+      "revId": "d50969aa62d0c9e88b37d9ebb9b0684daf7b263b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
