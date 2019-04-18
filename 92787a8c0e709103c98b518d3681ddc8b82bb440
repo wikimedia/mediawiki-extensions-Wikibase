@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ad945866_9c4b58ff",
+        "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-18T07:42:15Z",
+      "side": 1,
+      "message": "I guess not all option widgets we have use OO.ui.mixin.LookupElement",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "92787a8c0e709103c98b518d3681ddc8b82bb440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58edc023_d6a5e807",
         "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
         "patchSetId": 1
@@ -13,6 +36,24 @@
       "writtenOn": "2019-04-17T18:08:46Z",
       "side": 1,
       "message": "Why does one of these lines use $( body ) and the other doesn’t? It looks like it’s not necessary.",
+      "revId": "92787a8c0e709103c98b518d3681ddc8b82bb440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8422277d_bd9c4bbd",
+        "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-18T07:42:15Z",
+      "side": 1,
+      "message": "The other also implicitly acts on body, given we just look for the selector (not as a child of element, but in the whole DOM).",
+      "parentUuid": "58edc023_d6a5e807",
       "revId": "92787a8c0e709103c98b518d3681ddc8b82bb440",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
