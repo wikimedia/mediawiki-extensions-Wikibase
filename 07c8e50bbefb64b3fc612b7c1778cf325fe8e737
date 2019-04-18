@@ -22,6 +22,30 @@
       "revId": "07c8e50bbefb64b3fc612b7c1778cf325fe8e737",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a14d9cb_ea1b4549",
+        "filename": "docs/options.wiki",
+        "patchSetId": 14
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-04-18T07:17:00Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "2e4d13d5_f9150d5b",
+      "range": {
+        "startLine": 209,
+        "startChar": 68,
+        "endLine": 209,
+        "endChar": 69
+      },
+      "revId": "07c8e50bbefb64b3fc612b7c1778cf325fe8e737",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
