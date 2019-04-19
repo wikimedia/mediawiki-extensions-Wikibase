@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d737b0ca_053af8f9",
+        "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-19T18:43:09Z",
+      "side": 1,
+      "message": "I\u0027m wondering if adding some description to this function (i.e. docblock) and the new one `setSingleValueOnMultiselectElement` would help the user here? though it\u0027s not so clear what you would say without referring to some implementation details atm, so I\u0027m also fine to leave it like this if you can\u0027t think of a good description either ;)",
+      "revId": "f5c5df2aca86d73cbf51fb01f2f9a79c12fff734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
