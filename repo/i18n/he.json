@@ -381,10 +381,6 @@
 	"wikibase-concept-uri": "כתובת URI לרעיון",
 	"wikibase-concept-uri-tooltip": "כתובת URI שמזהה את הרעיון שהפריט הזה מתאר",
 	"wikibase-pageimage-helptext": "התמונה לקוחה מתוך הקביעות על הפריט הזה. באפשרותך לשנות את התמונה באמצעות שינוי הקביעה.",
-	"wikibase-rescore-profile-prefix": "פרופיל דירוג משני התחלתי לחיפוש השלמה",
-	"wikibase-rescore-profile-prefix-boost": "פרופיל להשלמת החיפוש עם הצהרה מוגברת",
-	"wikibase-rescore-profile-fulltext": "פרופיל דירוג משני לחיפוש בטקסט מלא",
-	"wikibase-rescore-profile-fulltext-phrase": "פרופיל דירוג משני לחיפוש בטקסט מלא עם דירוג משפטים",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "פריט Wikibase",
 	"content-model-wikibase-property": "מאפיין Wikibase",
@@ -408,7 +404,6 @@
 	"wikibase-search-namespace-mix": "כרגע לא ניתן לערבב בין מרחב השם של הישות לבין מרחב השם של הערך. יתבצע חיפוש רק עבור מרחבי השם של הישות.",
 	"wikibase-search-config-notfound": "הגדרות החיפוש המלא לא נמצאו: $1",
 	"wikibase-search-config-badclass": "מחלקת מבנה שאילתה שגויה: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "מילת המפתח haswbstatement אינה מכילה קביעות תקינות",
 	"wikibase-refresh-for-missing-datatype": "סוג הנתונים $1 לא נמצא בתסריט המקומי בלקוח. ייתכן שזה קורה כתוצאה בתסריט מיושן במטמון. נא לנסות לבצע רענון עמוק בדפדפן שלך, שעוקף את המטמון המקומי (Ctrl-Shift-R או Cmd-Shift-R ברוב הדפדפנים) כדי לפתור את הבעיה.",
 	"wikibase-outdated-client-script": "אוי, נחוץ רענון עמוק!"
 }

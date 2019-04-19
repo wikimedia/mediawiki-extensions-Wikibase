@@ -375,10 +375,6 @@
 	"wikibase-concept-uri": "URI канцэпту",
 	"wikibase-concept-uri-tooltip": "URI, які ідэнтыфікуе канцэпт, апісаны гэтым элемэнтам",
 	"wikibase-pageimage-helptext": "Гэтая выява ўзятая зь сьцьверджаньняў гэтага элемэнту. Вы можаце наладзіць выяву празь зьмену сьцьверджаньня.",
-	"wikibase-rescore-profile-prefix": "Профіль rescore па змоўчаньні для запаўняльнага пошуку",
-	"wikibase-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
-	"wikibase-rescore-profile-fulltext": "Профіль rescore па змоўчаньні для паўнатэкставага пошуку",
-	"wikibase-rescore-profile-fulltext-phrase": "Профіль rescore для паўнатэкставага пошуку з ацэнкай фразаў",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Прадмет у Вікібазе",
 	"content-model-wikibase-property": "Уласьцівасьць Wikibase",
@@ -402,6 +398,5 @@
 	"wikibase-search-namespace-mix": "Адначасовае выкарыстаньне прастораў назваў элемэнтаў і артыкулаў у цяперашні час не падтрымліваецца. Пошук будзе адбывацца толькі ў прасторы назваў элемэнтаў.",
 	"wikibase-search-config-notfound": "Канфігурацыя паўнатэкставага пошуку ня знойдзеная: $1",
 	"wikibase-search-config-badclass": "Кепская кляса пабудовы запыту: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement ня ўтрымлівае слушных сьцьверджаньняў",
 	"wikibase-refresh-for-missing-datatype": "Тып зьвестак $1 ня знойдзены ў скрыпце лякальнага кліенту. Гэта можа быць вынікам кэшаваньня састарэлага скрыпту. Паспрабуйце абнавіць ваш браўзэр з абыходам кэшу (Ctrl-Shift-R ці Cmd-Shift-R у бальшыні браўзэраў), каб разьвязаць праблему."
 }

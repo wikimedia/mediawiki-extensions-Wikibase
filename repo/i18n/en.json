@@ -423,11 +423,7 @@
 	"wikibase-listdatatypes-external-id-body": "Literal data field for an external identifier. External identifiers may automatically be linked to an authoritative resource for display.",
 	"wikibase-concept-uri": "Concept URI",
 	"wikibase-concept-uri-tooltip": "URI that identifies the concept described by this Item",
-	"wikibase-pageimage-helptext" : "This image is taken from the statements of this Item. You can adjust the image by changing the statement.",
-	"wikibase-rescore-profile-prefix": "Default rescore profile for completion search",
-	"wikibase-rescore-profile-prefix-boost": "Rescore profile for completion search with statement boosting",
-	"wikibase-rescore-profile-fulltext": "Default rescore profile for fulltext search",
-	"wikibase-rescore-profile-fulltext-phrase": "Rescore profile for fulltext search with phrase scoring",
+	"wikibase-pageimage-helptext": "This image is taken from the statements of this Item. You can adjust the image by changing the statement.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase Item",
 	"content-model-wikibase-property": "Wikibase Property",
@@ -451,7 +447,6 @@
 	"wikibase-search-namespace-mix": "Mixing entity and article namespaces in search is currently not supported. Only entity namespaces will be searched.",
 	"wikibase-search-config-notfound": "Fulltext search configuration not found: $1",
 	"wikibase-search-config-badclass": "Bad query builder class: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements",
 	"wikibase-refresh-for-missing-datatype": "$1 data type was not found in local client script. This may be a result of an outdated cached script. Try to hard refresh your browser, bypassing local cache (Ctrl-Shift-R or Cmd-Shift-R in most browsers) to resolve the problem.",
 	"wikibase-outdated-client-script": "Uh-oh, a hard refresh is due!"
 }

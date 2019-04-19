@@ -384,10 +384,6 @@
 	"wikibase-concept-uri": "Koncept-URI",
 	"wikibase-concept-uri-tooltip": "URI som identifierar det koncept som beskrivs av detta objekt",
 	"wikibase-pageimage-helptext": "Denna bild har tagits från påståenden av detta objekt. Du kan justera bilden genom att ändra påståendet.",
-	"wikibase-rescore-profile-prefix": "Omvärderingsstandardprofil för kompletterande sökning",
-	"wikibase-rescore-profile-prefix-boost": "Omvärderingsprofil för kompletterande sökning med uttalandeförstärkning",
-	"wikibase-rescore-profile-fulltext": "Omvärderingsstandardprofil för fulltextsökning",
-	"wikibase-rescore-profile-fulltext-phrase": "Omvärderingsprofil för fulltextsökning med fraspoäng",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-objekt",
 	"content-model-wikibase-property": "Wikibase-egenskap",
@@ -411,7 +407,6 @@
 	"wikibase-search-namespace-mix": "Det finns för tillfället inget stöd för att blanda entitet- och artikelnamnrymder i sökningen. Endast entitetsnamnrymder kommer att sökas igenom.",
 	"wikibase-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
 	"wikibase-search-config-badclass": "Dålig byggklass för frågor: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden",
 	"wikibase-refresh-for-missing-datatype": "Datatypen $1 hittades inte i det lokala klientskriptet. Detta kan bero på ett utdaterat cachelagrat skript. Försök att göra en hård uppdatering i din webbläsare, som kringgår den lokala cachen (Ctrl-Shift-R eller Cmd-Shift-R i de flesta webbläsarna) för att lösa problemet.",
 	"wikibase-outdated-client-script": "Ojdå, det är dags för en hård uppdatering!"
 }

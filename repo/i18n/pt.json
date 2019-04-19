@@ -385,10 +385,6 @@
 	"wikibase-concept-uri": "URI do conceito",
 	"wikibase-concept-uri-tooltip": "URI que identifica o conceito descrito por este objeto",
 	"wikibase-pageimage-helptext": "Esta imagem é obtida das declarações deste objeto. Pode ajustar a imagem alterando a declaração.",
-	"wikibase-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
-	"wikibase-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
-	"wikibase-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
-	"wikibase-rescore-profile-fulltext-phrase": "Perfil de reavaliação para pesquisa completa de texto com avaliação de frases",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Objeto Wikibase",
 	"content-model-wikibase-property": "Propriedade Wikibase",
@@ -412,7 +408,6 @@
 	"wikibase-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",
 	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "A palavra-chave haswbstatement não contém nenhuma declaração válida",
 	"wikibase-refresh-for-missing-datatype": "O tipo de dados $1 não foi encontrado no ''script'' do cliente local. Isso pode resultar de um ''script'' desatualizado na ''cache''. Para resolver o problema, tente fazer uma atualização forçada do seu ''browser'' ignorando a ''cache'' local (Ctrl-Shift-R ou Cmd-Shift-R na maioria dos ''browsers'').",
 	"wikibase-outdated-client-script": "É necessária uma atualização forçada!"
 }

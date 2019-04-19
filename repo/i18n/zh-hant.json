@@ -396,10 +396,6 @@
 	"wikibase-concept-uri": "概念 URI",
 	"wikibase-concept-uri-tooltip": "URI 用來辨識此項目所描述的概念",
 	"wikibase-pageimage-helptext": "此圖片取用來自此項目的聲明。您可以透過更改聲明來調整圖片。",
-	"wikibase-rescore-profile-prefix": "用於完整搜尋的預設重新計分配置",
-	"wikibase-rescore-profile-prefix-boost": "用於陳述推進完整搜尋的重新計分配置",
-	"wikibase-rescore-profile-fulltext": "用於全文搜尋的預設重新計分配置",
-	"wikibase-rescore-profile-fulltext-phrase": "用於詞語計分全文搜尋的重新計分配置",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase 項目",
 	"content-model-wikibase-property": "Wikibase 屬性",
@@ -423,7 +419,6 @@
 	"wikibase-search-namespace-mix": "搜尋裡目前不支援混合實體與條目命名空間。僅會搜尋實體命名空間。",
 	"wikibase-search-config-notfound": "查無全文搜尋設置：$1",
 	"wikibase-search-config-badclass": "錯誤查詢生成類別：$1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 關鍵字不包含有效陳述",
 	"wikibase-refresh-for-missing-datatype": "在本地客戶端手稿裡查無$1資料類型，這可能是因快取手稿逾期所造成的結果。請嘗試將您的瀏覽器重新載入、繞過本地端快取（在多數瀏覽器是同時按下 Ctrl-Shift-R 鍵或是 Cmd-Shift-R 鍵）來解決問題。",
 	"wikibase-outdated-client-script": "哎呀，應得重新載入略過已快取內容！"
 }
