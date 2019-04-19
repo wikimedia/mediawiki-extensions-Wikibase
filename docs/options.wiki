@@ -306,10 +306,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : Maximum number of entities to visit in a <code>mw.wikibase.getReferencedEntityId</code> call.
 ; pageSchemaNamespaces
 : An array of namespace numbers defaulting to empty (disabled); pages with a matching namespace will include a JSON-LD schema script for search engine optimization (SEO).
-; pageSchemaSplitTestSamplingRatio
-: The sampling ratio for page schemas from 0, completely unsampled, to 1, completely sampled. This setting is used to control rollout as well as page schema A/B testing.
-; pageSchemaSplitTestBuckets
-: An array of split test bucket names to evaluate. For example, <code>[ 'control', 'treatment' ]</code>. At a sampling rate of 1, a two-bucket test such as <code>[ 'control', 'treatment' ]</code> will be evenly distributed to 50% / 50%. At a sampling rate of 1, a one-bucket test such as <code>[ 'treatment' ]</code> will be distributed at 100%.
 ; trackLuaFunctionCallsPerSiteGroup
 : Whether to track Lua function calls with a per-sitegroup key, like <code>MediaWiki.wikipedia.wikibase.client.scribunto.wikibase.functionName.call</code>.
 ; trackLuaFunctionCallsPerWiki
