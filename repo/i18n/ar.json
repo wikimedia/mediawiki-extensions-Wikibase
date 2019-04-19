@@ -396,10 +396,6 @@
 	"wikibase-concept-uri": "مسار المفهوم",
 	"wikibase-concept-uri-tooltip": "URI التي تعرف المفهوم الموصوف بواسطة هذا العنصر",
 	"wikibase-pageimage-helptext": "هذه الصورة مأخوذة من البيانات الخاصة بهذا العنصر. أنت يمكنك تعديل الصورة عن طريق تغيير البيان.",
-	"wikibase-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
-	"wikibase-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
-	"wikibase-rescore-profile-fulltext": "الملف الافتراضي للبحث عن النص الكامل",
-	"wikibase-rescore-profile-fulltext-phrase": "الملف للبحث عن النص الكامل مع نقاط للعبارات",
 	"datatypes-type-url": "المسار",
 	"content-model-wikibase-item": "عنصر Wikibase",
 	"content-model-wikibase-property": "خاصية Wikibase",
@@ -423,7 +419,6 @@
 	"wikibase-search-namespace-mix": "لا يتم حاليا دعم نطاقي الكيانات والمقالات في البحث معا، سيتم البحث في نطاقات الكيانات فقط.",
 	"wikibase-search-config-notfound": "لم يتم العثور على تكوين بحث النص الكامل: $1",
 	"wikibase-search-config-badclass": "فئة باني الاستعلام سيئة: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة",
 	"wikibase-refresh-for-missing-datatype": "لم يتم العثور على نوع البيانات $1 في سكريبت العميل المحلي، قد يكون هذا نتيجةً لسكريبت مخبأ قديما، حاول تحديث المتصفح بشدة، وتجاوز ذاكرة التخزين المؤقت المحلية (Ctrl-Shift-ق أو Cmd-Shift-ق في معظم المتصفحات) لحل المشكلة.",
 	"wikibase-outdated-client-script": "أوه، أوه، التحديث صعب!"
 }

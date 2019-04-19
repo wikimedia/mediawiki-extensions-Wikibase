@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Repo\Search\Fields;
 
-// phpcs:disable Wikibase.Namespaces.FullQualifiedClassName.Found
 /**
  * This is a collection of field definitions.
  * This interface should be implemented by specific definition
@@ -10,7 +9,7 @@ namespace Wikibase\Repo\Search\Fields;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-interface FieldDefinitions extends \Wikibase\Repo\Search\Elastic\Fields\FieldDefinitions {
+interface FieldDefinitions {
 
 	/**
 	 * Get the list of definitions

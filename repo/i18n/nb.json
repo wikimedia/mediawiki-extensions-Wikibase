@@ -376,10 +376,6 @@
 	"wikibase-concept-uri": "Begreps-URI",
 	"wikibase-concept-uri-tooltip": "URI som identifiserer begrepet beskrevet av dette elementet",
 	"wikibase-pageimage-helptext": "Dette bildet er tatt fra utsagnene til dette elementet. Du kan endre bilde ved å endre utsagnet.",
-	"wikibase-rescore-profile-prefix": "Standard rescore-profil for fullføringssøk",
-	"wikibase-rescore-profile-prefix-boost": "Rescore-profil for fullføringssøk med påstandsforsterkning",
-	"wikibase-rescore-profile-fulltext": "Standard rescore-profil for fulltekstsøk",
-	"wikibase-rescore-profile-fulltext-phrase": "Rescore-profil for fulltekstsøk med fraseskåring",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase element",
 	"content-model-wikibase-property": "Wikibase egenskap",
@@ -400,7 +396,6 @@
 	"wikibase-search-namespace-mix": "Blanding av entitets- og artikkelnavnerom i søk støttes for tiden ikke. Det vil kun bli søkt i entitetsnavnerom.",
 	"wikibase-search-config-notfound": "Konfigurasjon for fulltekstsøk ikke funnet: $1",
 	"wikibase-search-config-badclass": "Ugyldig spørringsbyggerklasse: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "Nøkkelordet haswbstatement inneholder ingen gyldige påstander",
 	"wikibase-refresh-for-missing-datatype": "Datatypen $1 ble ikke funnet i det lokale klientskriptet. Dette kan være på grunn av et utdatert, mellomlagret skript. Prøv å gjøre en hard oppdatering av nettleseren (Ctrl+Shift+R eller Cmd+Shift+R i de fleste nettlesere) for å løse dette problemet.",
 	"wikibase-outdated-client-script": "Ups, på tide med en hard oppdatering!"
 }
