@@ -4,9 +4,13 @@
 			"Aguve"
 		]
 	},
+	"tooltip-t-wikibase": "nyatagoe me nu ƒe kadodo",
+	"wikibase-comment-update": "{{WBREPONAME}} dzi nua trɔ",
 	"wikibase-dataitem": "{{WBREPONAME}} nu",
 	"wikibase-editlinks": " Trɔ kadodoawo",
 	"wikibase-editlinkstitle": "Trɔ gbegbɔgblɔ vovovowo ƒe kadodowo ŋu",
 	"wikibase-rc-hide-wikidata-show": "Nedze",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} tɔtrɔ",
 	"wikibase-otherprojects": "Dɔwɔna bubuwo"
 }

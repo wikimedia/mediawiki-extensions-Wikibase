@@ -294,7 +294,7 @@
 	"wikibase-dispatchstats-median": "Medio",
 	"wikibase-dispatchstats-average": "Media",
 	"special-listdatatypes": "Enumerar todos los tipos de datos disponibles",
-	"wikibase-listdatatypes-intro": "Esta es una lista de todos los tipos de datos disponibles en esta instalación:",
+	"wikibase-listdatatypes-intro": "Esta es una lista de todos los tipos de datos disponibles en esta instalación, con sus tipos de valor correspondientes:",
 	"wikibase-listdatatypes-listproperties": "Lista de propiedades con este tipo de datos",
 	"wikibase-history-title-with-label": "Historial de revisiones de «$2» ($1)",
 	"wikibase-history-title-without-label": "Historial de revisiones de ($1)",

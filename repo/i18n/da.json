@@ -12,7 +12,8 @@
 			"Macofe",
 			"Sarrus",
 			"Ladsgroup",
-			"Saederup92"
+			"Saederup92",
+			"Dipsacus fullonum"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -28,7 +29,7 @@
 	"wikibase-addqualifier": "tilføj kvalifikator",
 	"wikibase-addreference": "tilføj henvisning",
 	"wikibase-save-inprogress": "Gemmer...",
-	"wikibase-publish-inprogress": "Offentliggører…",
+	"wikibase-publish-inprogress": "Offentliggør…",
 	"wikibase-remove-inprogress": "Fjerner…",
 	"wikibase-statementlistview-add": "tilføj værdi",
 	"wikibase-statementlistview-add-tooltip": "Tilføj en ny værdi",
@@ -216,7 +217,7 @@
 	"wikibase-dispatchstats-median": "Median",
 	"wikibase-dispatchstats-average": "Gennemsnit",
 	"special-listdatatypes": "Liste over alle tilgængelige datatyper",
-	"wikibase-listdatatypes-intro": "Dette er en liste over alle de datatyper, som i øjeblikket anvendes på denne installation:",
+	"wikibase-listdatatypes-intro": "Dette er en liste over alle de datatyper med tilsvarende dataværdityper, som i øjeblikket er tilgængelige på denne installation:",
 	"wikibase-listdatatypes-listproperties": "Liste over egenskaber med denne datatype",
 	"wikibase-history-title-with-label": "Versionshistorik for \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Versionshistorik for $1",

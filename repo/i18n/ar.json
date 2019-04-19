@@ -290,7 +290,7 @@
 	"wikibase-dispatchstats-median": "الأوسط",
 	"wikibase-dispatchstats-average": "الوسطي",
 	"special-listdatatypes": "قائمة بجميع أنماط البيانات المتوفرة",
-	"wikibase-listdatatypes-intro": "هذه قائمة بكل أنواع البيانات المتوفرة في هذا التنصيب:",
+	"wikibase-listdatatypes-intro": "هذه قائمة بجميع أنواع البيانات مع أنواع قيم البيانات المقابلة المتوفرة في هذا التثبيت:",
 	"wikibase-listdatatypes-listproperties": "قائمة بالخواص بهذا النوع من البيانات",
 	"wikibase-history-title-with-label": "تاريخ مراجعات «$2» ($1)",
 	"wikibase-history-title-without-label": "تاريخ مراجعات ($1)",

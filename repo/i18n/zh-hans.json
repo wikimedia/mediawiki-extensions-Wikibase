@@ -28,7 +28,8 @@
 			"Wxyveronica",
 			"Hanyanbo98",
 			"夢蝶葬花",
-			"A Chinese Wikipedian"
+			"A Chinese Wikipedian",
+			"佛壁灯"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -210,6 +211,7 @@
 	"wikibase-newitem-page": "第一链接页面的名称",
 	"wikibase-newitem-no-external-page": "在“$1”无法找到页面“$2”。",
 	"wikibase-newitem-not-recognized-siteid": "提供的网站标识符不被认可。",
+	"wikibase-newproperty-same-label-and-description": "全域锁定/解锁",
 	"wikibase-newitem-insufficient-data": "您需要至少填写标签、描述或别名。",
 	"wikibase-newentity-language": "语言：",
 	"wikibase-newentity-label": "标签：",
@@ -291,7 +293,7 @@
 	"wikibase-dispatchstats-median": "中值",
 	"wikibase-dispatchstats-average": "均值",
 	"special-listdatatypes": "所有可用数据类型列表",
-	"wikibase-listdatatypes-intro": "这是此安装副本内所有有效数据类型的列表：",
+	"wikibase-listdatatypes-intro": "下方是此安装副本上可用的所有数据类型及相应数据值类型列表：",
 	"wikibase-listdatatypes-listproperties": "此数据类型的属性列表",
 	"wikibase-history-title-with-label": "“$2”（$1）的版本历史",
 	"wikibase-history-title-without-label": "（$1）的版本历史",
