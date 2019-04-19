@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "3be71cd1_806f66af",
+        "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-19T19:50:30Z",
+      "side": 1,
+      "message": "checking the failure in CI and inspecting the menu container on my local instance, this probably should be `.oo-ui-selectWidget.oo-ui-lookupElement-menu`",
+      "revId": "f5c5df2aca86d73cbf51fb01f2f9a79c12fff734",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d737b0ca_053af8f9",
         "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
         "patchSetId": 3
