@@ -4,7 +4,6 @@ namespace Wikibase\Client\Store\Sql;
 
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
-use Psr\Log\LoggerInterface;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -84,11 +83,6 @@ class DirectSqlStore implements ClientStore {
 	private $languageCode;
 
 	/**
-	 * @var LoggerInterface|null
-	 */
-	private $pageRandomLookupLogger;
-
-	/**
 	 * @var string
 	 */
 	private $cacheKeyPrefix;
@@ -144,11 +138,6 @@ class DirectSqlStore implements ClientStore {
 	private $propertyInfoLookup = null;
 
 	/**
-	 * @var PageRandomLookup|null
-	 */
-	private $pageRandomLookup = null;
-
-	/**
 	 * @var SiteLinkLookup|null
 	 */
 	private $siteLinkLookup = null;
@@ -200,7 +189,6 @@ class DirectSqlStore implements ClientStore {
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
 	 * @param string $languageCode
-	 * @param LoggerInterface|null $pageRandomLookupLogger
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
@@ -210,8 +198,7 @@ class DirectSqlStore implements ClientStore {
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
 		$repoWiki = false,
-		$languageCode,
-		LoggerInterface $pageRandomLookupLogger = null
+		$languageCode
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -220,7 +207,6 @@ class DirectSqlStore implements ClientStore {
 		$this->wikibaseServices = $wikibaseServices;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
-		$this->pageRandomLookupLogger = $pageRandomLookupLogger;
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -438,22 +424,6 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function rebuild() {
 		$this->clear();
-	}
-
-	/**
-	 * @see ClientStore::getPageRandomLookup
-	 *
-	 * @return PageRandomLookup
-	 */
-	public function getPageRandomLookup() {
-		if ( $this->pageRandomLookup === null ) {
-			$this->pageRandomLookup = new PageRandomLookup(
-				MediaWikiServices::getInstance()->getDBLoadBalancer(),
-				$this->pageRandomLookupLogger
-			);
-		}
-
-		return $this->pageRandomLookup;
 	}
 
 	/**
