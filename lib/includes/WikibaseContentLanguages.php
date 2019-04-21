@@ -108,11 +108,13 @@ class WikibaseContentLanguages {
 					'pwn', // T174231
 					'pyu', // T174227
 					'quc', // T155376
+					'qya', // T185194
 					'rar', // T155427
 					'shy', // T184783
 					'sia', // T217521
 					'sjd', // T188596
 					'sjk', // T217521
+					'sjn', // T185194
 					'sjt', // T217521
 					'sju', // T188599
 					'smn', // T188580
