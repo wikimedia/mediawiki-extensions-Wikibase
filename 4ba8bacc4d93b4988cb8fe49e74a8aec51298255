@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67cb1f80_169adb0e",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3915
+      },
+      "writtenOn": "2019-04-21T21:38:30Z",
+      "side": 1,
+      "message": "This should be \"el-cy\" for internal consistency – everywhere else where we use langcode-countrycode, we use small letters. See fr-ca a few lines down, and also plenty of examples in Names.php.",
+      "revId": "4ba8bacc4d93b4988cb8fe49e74a8aec51298255",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
