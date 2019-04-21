@@ -72,12 +72,14 @@ class WikibaseContentLanguages {
 
 					// Other valid codes without MediaWiki localization
 					'abe', // T150633
+					'abq', // T155367
 					'ami', // T174238
 					'bnn', // T174230
 					'brx', // T155369
 					'chn', // T155370
 					'cnr', // T185800
 					'cop', // T155371
+					'el-CY', // T198674
 					'ett', // T125066
 					'eya', // T155372
 					'fkv', // T125066
@@ -118,6 +120,7 @@ class WikibaseContentLanguages {
 					'smn', // T188580
 					'sms', // T188579
 					'ssf', // T174236
+					'syc', // T164580
 					'tlb', // T216798
 					'trv', // T174228
 					'tzl', // T98314
