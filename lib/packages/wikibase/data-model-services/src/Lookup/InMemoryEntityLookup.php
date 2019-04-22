@@ -105,27 +105,11 @@ class InMemoryEntityLookup implements EntityLookup, ItemLookup, PropertyLookup {
 	}
 
 	public function getItemForId( ItemId $itemId ) {
-		try {
-			if ( $this->hasEntity( $itemId ) ) {
-				return $this->getEntity( $itemId );
-			}
-
-			return null;
-		} catch ( \Exception $ex ) {
-			throw new ItemLookupException( $itemId, $ex->getMessage(), $ex );
-		}
+		return ( new LegacyAdapterItemLookup( $this ) )->getItemForId( $itemId );
 	}
 
 	public function getPropertyForId( PropertyId $propertyId ) {
-		try {
-			if ( $this->hasEntity( $propertyId ) ) {
-				return $this->getEntity( $propertyId );
-			}
-
-			return null;
-		} catch ( \Exception $ex ) {
-			throw new PropertyLookupException( $propertyId, $ex->getMessage(), $ex );
-		}
+		return ( new LegacyAdapterPropertyLookup( $this ) )->getpropertyForId( $propertyId );
 	}
 
 }
