@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "221e5697_470ef0f4",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2019-04-22T10:19:18Z",
+      "side": 1,
+      "message": "Insert a space between // and T.",
+      "range": {
+        "startLine": 117,
+        "startChar": 13,
+        "endLine": 117,
+        "endChar": 15
+      },
+      "revId": "44159d7f39b785e53ad5b31822aca4e05090d9de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
