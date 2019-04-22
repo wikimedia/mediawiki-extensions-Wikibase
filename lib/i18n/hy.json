@@ -14,5 +14,7 @@
 	"datatypes-type-number": "Թիվ",
 	"datatypes-type-boolean": "Տրամաբանական տիպ",
 	"datatypes-type-globe-coordinate": "Աշխարհագրական կոորդինատներ",
-	"datatypes-type-commonsMedia": "Տեսաձայնային նիշք Վիքիպահեստում"
+	"datatypes-type-commonsMedia": "Տեսաձայնային նիշք Վիքիպահեստում",
+	"wikibase-entity-summary-wbsetitem": "Նոր տարրը ստեղծված է",
+	"wikibase-item-summary-wbeditentity-create": "Նոր տարրը ստեղծված է"
 }

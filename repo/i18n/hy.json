@@ -35,6 +35,7 @@
 	"wikibase-statementview-rank-normal": "Նորմալ աստիճան",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|աղբյուր|աղբյուրներ}}",
 	"wikibase-entityselector-more": "Ավելին",
+	"wikibase-newitem-fieldset": "Ստեղծել նոր տարր",
 	"wikibase-newentity-language": "Լեզու.",
 	"special-mergeitems": "Միացնել երկու տարր"
 }

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Carma citrawati"
+		]
+	},
+	"tooltip-t-wikibase": "Pranala sané ngubungang butir ring genah ngenahang data",
+	"wikibase-comment-update": "Item {{WBREPONAME}} kauwah",
+	"wikibase-dataitem": "item ring {{WBREPONAME}}",
+	"wikibase-editlinks": "edit pranala",
+	"wikibase-editlinkstitle": "suntik pranala pantaraning basa",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "item ring {{WBREPONAME}}"
+}
