@@ -2,6 +2,8 @@
 
 ## Version 3.15.0 (dev)
 
+* Added `ItemLookup` test double by implementing it in `InMemoryEntityLookup`
+* Added `PropertyLookup` test double by implementing it in `InMemoryEntityLookup`
 * Added constructor to `InMemoryEntityLookup`
 
 ## Version 3.14.0 (2019-04-16)
