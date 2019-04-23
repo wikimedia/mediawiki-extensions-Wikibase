@@ -21,18 +21,18 @@ Feature: Use header
 #      And Header edit button should be there
 #      And Header cancel button should not be there
 #      And Header save button should not be there
-
-  @ui_only
-  Scenario: Click edit button
-    When I click the header edit button
-    Then Header edit button should not be there
-      And Header save button should not be there
-      And Header cancel button should be there
-      And Label input element should be there
-      And Label input element should contain original label
-      And Description input element should be there
-      And Description input element should contain original description
-      And New alias input field should be there
+#
+#  @ui_only
+#  Scenario: Click edit button
+#    When I click the header edit button
+#    Then Header edit button should not be there
+#      And Header save button should not be there
+#      And Header cancel button should be there
+#      And Label input element should be there
+#      And Label input element should contain original label
+#      And Description input element should be there
+#      And Description input element should contain original description
+#      And New alias input field should be there
 
   @ui_only
   Scenario: Modify label, description and aliases

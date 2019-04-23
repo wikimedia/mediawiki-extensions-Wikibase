@@ -13,38 +13,38 @@ Feature: Using geo properties in statements
       | geoprop | globe-coordinate |
       And I am not logged in to the repo
 
-  @ui_only
-  Scenario: Geo UI should work properly
-    Given I am on an item page
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-    When I click the statement add button
-      And I select the claim property geoprop
-      And I enter 1,1 in the claim value input field
-    Then Statement save button should be there
-      And Statement cancel button should be there
-      And InputExtender preview should be there
-      And Geo precision chooser should be there
-
-  @ui_only
-  Scenario Outline: Check geo UI for invalid values
-    Given I am on an item page
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-    When I click the statement add button
-      And I select the claim property geoprop
-      And I enter <value> in the claim value input field
-    Then Statement save button should not be there
-      And Statement cancel button should be there
-
-  Examples:
-    | value |
-    | astring |
-    | 1 11 199 9 |
-    | 1 |
-    | 1:1 |
-
 # T221104
+#  @ui_only
+#  Scenario: Geo UI should work properly
+#    Given I am on an item page
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#    When I click the statement add button
+#      And I select the claim property geoprop
+#      And I enter 1,1 in the claim value input field
+#    Then Statement save button should be there
+#      And Statement cancel button should be there
+#      And InputExtender preview should be there
+#      And Geo precision chooser should be there
+#
+#  @ui_only
+#  Scenario Outline: Check geo UI for invalid values
+#    Given I am on an item page
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#    When I click the statement add button
+#      And I select the claim property geoprop
+#      And I enter <value> in the claim value input field
+#    Then Statement save button should not be there
+#      And Statement cancel button should be there
+#
+#  Examples:
+#    | value |
+#    | astring |
+#    | 1 11 199 9 |
+#    | 1 |
+#    | 1:1 |
+#
 #  @ui_only
 #  Scenario Outline: Geo parser in the preview and precision detection should work properly
 #    Given I am on an item page

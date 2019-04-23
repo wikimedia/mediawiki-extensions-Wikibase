@@ -13,30 +13,30 @@ Feature: Creating statements of type item
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @integration @modify_entity
-  Scenario Outline: Adding a statement of type item
-    Given I have the following properties with datatype:
-      | itemprop | wikibase-item |
-    Given I have the following items:
-      | item1 |
-    When I click the statement add button
-      And I select the claim property itemprop
-      And I enter the label of item <item> as claim value
-      And I <save>
-    Then Statement add button should be there
-      And Statement cancel button should not be there
-      And Statement save button should not be there
-      And Claim entity selector input element should not be there
-      And Claim value input element should not be there
-      And Statement edit button for claim 1 in group 1 should be there
-      And Statement name of group 1 should be the label of itemprop
-      And Statement value of claim 1 in group 1 should be the label of item <item>
-
-  Examples:
-    | item  | save                            |
-    | item1 | click the statement save button |
-
 # T221104
+#  @integration @modify_entity
+#  Scenario Outline: Adding a statement of type item
+#    Given I have the following properties with datatype:
+#      | itemprop | wikibase-item |
+#    Given I have the following items:
+#      | item1 |
+#    When I click the statement add button
+#      And I select the claim property itemprop
+#      And I enter the label of item <item> as claim value
+#      And I <save>
+#    Then Statement add button should be there
+#      And Statement cancel button should not be there
+#      And Statement save button should not be there
+#      And Claim entity selector input element should not be there
+#      And Claim value input element should not be there
+#      And Statement edit button for claim 1 in group 1 should be there
+#      And Statement name of group 1 should be the label of itemprop
+#      And Statement value of claim 1 in group 1 should be the label of item <item>
+#
+#  Examples:
+#    | item  | save                            |
+#    | item1 | click the statement save button |
+#
 #  @ui_only
 #  Scenario: Select a property, use entity selector
 #    Given I have the following properties with datatype:

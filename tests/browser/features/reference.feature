@@ -26,47 +26,48 @@ Feature: Adding references to statements
       And Reference counter should be there
       And Reference counter should show 0
 
-  @ui_only
-  Scenario: References toggler
-    When I click the toggle references link of statement 1
-    Then Reference add button should not be there
-      And Statement save button should not be there
-      And Reference counter should be there
-      And Reference counter should show 0
-
-  @ui_only
-  Scenario: Click the Add Reference button
-    When I click the statement edit button
-      And I click the reference add button
-    Then Reference add button should be there
-      And Statement save button should be disabled
-      And Reference add snak button should be there
-      And Reference remove snak button should be there
-      And Reference remove button should be there
-      And Statement cancel button should be there
-      And Snak entity selector input element should be there
-      And Snak value input element should not be there
-
-  @ui_only
-  Scenario Outline: Cancel reference
-    When I click the statement edit button
-      And I click the reference add button
-      And I close the entity selector popup if present
-      And I <cancel>
-      And I click the statement edit button
-    Then Reference add button should be there
-      And Reference counter should be there
-      And Reference counter should show 0
-      And Statement cancel button should be there
-      And Statement save button should not be there
-      And Reference remove button should not be there
-      And Reference add snak button should not be there
-      And Reference remove snak button should not be there
-
-  Examples:
-    | cancel |
-    | click the statement cancel button |
-    | press the ESC key in the snak entity selector input field |
+# T221104
+#  @ui_only
+#  Scenario: References toggler
+#    When I click the toggle references link of statement 1
+#    Then Reference add button should not be there
+#      And Statement save button should not be there
+#      And Reference counter should be there
+#      And Reference counter should show 0
+#
+#  @ui_only
+#  Scenario: Click the Add Reference button
+#    When I click the statement edit button
+#      And I click the reference add button
+#    Then Reference add button should be there
+#      And Statement save button should be disabled
+#      And Reference add snak button should be there
+#      And Reference remove snak button should be there
+#      And Reference remove button should be there
+#      And Statement cancel button should be there
+#      And Snak entity selector input element should be there
+#      And Snak value input element should not be there
+#
+#  @ui_only
+#  Scenario Outline: Cancel reference
+#    When I click the statement edit button
+#      And I click the reference add button
+#      And I close the entity selector popup if present
+#      And I <cancel>
+#      And I click the statement edit button
+#    Then Reference add button should be there
+#      And Reference counter should be there
+#      And Reference counter should show 0
+#      And Statement cancel button should be there
+#      And Statement save button should not be there
+#      And Reference remove button should not be there
+#      And Reference add snak button should not be there
+#      And Reference remove snak button should not be there
+#
+#  Examples:
+#    | cancel |
+#    | click the statement cancel button |
+#    | press the ESC key in the snak entity selector input field |
 
   @ui_only
   Scenario: Select a property

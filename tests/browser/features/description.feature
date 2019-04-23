@@ -13,13 +13,14 @@ Feature: Edit description
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @ui_only
-  Scenario: Modify the description
-    When I click the header edit button
-      And I enter "MODIFIED DESCRIPTION" as description
-    Then Header save button should be there
-      And Header cancel button should be there
-      And Header edit button should not be there
+# T221104
+#  @ui_only
+#  Scenario: Modify the description
+#    When I click the header edit button
+#      And I enter "MODIFIED DESCRIPTION" as description
+#    Then Header save button should be there
+#      And Header cancel button should be there
+#      And Header edit button should not be there
 
   @ui_only
   Scenario Outline: Cancel description
