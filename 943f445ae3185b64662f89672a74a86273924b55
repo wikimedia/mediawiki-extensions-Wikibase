@@ -22,6 +22,30 @@
       "revId": "943f445ae3185b64662f89672a74a86273924b55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e001858_f3e03e93",
+        "filename": "repo/tests/selenium/wdio-wikibase/pagesections/ComponentInteraction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-04-23T10:11:17Z",
+      "side": 1,
+      "message": "I agree, when looking at this patch only, then this is confusing. The backstory is that in the follow-up patch the OPTION_WIDGET is renamed to LOOKUP_OPTION_WIDGET and extended to include another css class.",
+      "parentUuid": "ca617b89_bfd9fbc4",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 23,
+        "endChar": 77
+      },
+      "revId": "943f445ae3185b64662f89672a74a86273924b55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
