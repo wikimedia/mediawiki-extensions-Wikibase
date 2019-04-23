@@ -5,6 +5,8 @@ namespace Wikibase\DataModel\Services\Lookup;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * EntityLookup that uses an in memory array to retrieve the requested information.
@@ -18,7 +20,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class InMemoryEntityLookup implements EntityLookup {
+class InMemoryEntityLookup implements EntityLookup, ItemLookup, PropertyLookup {
 
 	/**
 	 * @var EntityDocument[]
@@ -100,6 +102,14 @@ class InMemoryEntityLookup implements EntityLookup {
 		if ( array_key_exists( $entityId->getSerialization(), $this->exceptions ) ) {
 			throw $this->exceptions[$entityId->getSerialization()];
 		}
+	}
+
+	public function getItemForId( ItemId $itemId ) {
+		return ( new LegacyAdapterItemLookup( $this ) )->getItemForId( $itemId );
+	}
+
+	public function getPropertyForId( PropertyId $propertyId ) {
+		return ( new LegacyAdapterPropertyLookup( $this ) )->getpropertyForId( $propertyId );
 	}
 
 }

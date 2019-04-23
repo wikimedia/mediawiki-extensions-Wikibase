@@ -2,6 +2,12 @@
 
 ## Version 3.15.0 (dev)
 
+* Added `ItemLookup` implementations
+  * `LegacyAdapterItemLookup` which is an adapter to `EntityLookup`
+  * `InMemoryEntityLookup` which is a test double
+* Added `PropertyLookup` implementations
+  * `LegacyAdapterPropertyLookup` which is an adapter to `EntityLookup`
+  * `InMemoryEntityLookup` which is a test double
 * Added constructor to `InMemoryEntityLookup`
 
 ## Version 3.14.0 (2019-04-16)
