@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9917a3e_e920717c",
+        "filename": "repo/tests/phpunit/includes/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-23T18:02:16Z",
+      "side": 1,
+      "message": "perhaps rename this to $entityRevisions or $revisions?",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 11
+      },
+      "revId": "e634e9b4585655d457ce450b01c5d181852a0f0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
