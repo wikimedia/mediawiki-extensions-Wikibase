@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement\Filter;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class DataTypeStatementFilterTest extends PHPUnit_Framework_TestCase {
+class DataTypeStatementFilterTest extends TestCase {
 
 	/**
 	 * @return PropertyDataTypeLookup

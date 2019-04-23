@@ -2,10 +2,11 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -17,7 +18,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class PrefixMappingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
+class PrefixMappingEntityIdParserTest extends TestCase {
 
 	private function getRegularParser() {
 		return new BasicEntityIdParser();

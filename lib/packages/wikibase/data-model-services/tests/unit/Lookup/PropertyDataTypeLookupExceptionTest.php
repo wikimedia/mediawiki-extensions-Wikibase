@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class PropertyDataTypeLookupExceptionTest extends PHPUnit_Framework_TestCase {
+class PropertyDataTypeLookupExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$propertyId = new PropertyId( 'P1' );

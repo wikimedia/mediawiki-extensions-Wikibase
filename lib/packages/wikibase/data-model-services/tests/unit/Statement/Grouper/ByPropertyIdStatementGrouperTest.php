@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement\Grouper;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\ByPropertyIdStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ByPropertyIdStatementGrouperTest extends PHPUnit_Framework_TestCase {
+class ByPropertyIdStatementGrouperTest extends TestCase {
 
 	public function testGroupStatements() {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );

@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class LabelDescriptionLookupExceptionTest extends PHPUnit_Framework_TestCase {
+class LabelDescriptionLookupExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$itemId = new ItemId( 'Q1' );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityPatcher;
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
-abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
+abstract class EntityDiffOldTest extends TestCase {
 
 	private static function newEntity( $entityType ) {
 		switch ( $entityType ) {

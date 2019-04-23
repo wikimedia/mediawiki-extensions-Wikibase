@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Term\Fingerprint;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
+class FingerprintPatcherTest extends TestCase {
 
 	public function testGivenEmptyDiff_fingerprintIsReturnedAsIs() {
 		$fingerprint = $this->newSimpleFingerprint();

@@ -3,12 +3,13 @@
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\Fixtures\EntityOfUnknownType;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
 
 /**
  * @covers \Wikibase\DataModel\Services\Diff\EntityDiffer
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDifferTest extends \PHPUnit_Framework_TestCase {
+class EntityDifferTest extends TestCase {
 
 	public function testGivenUnknownEntityType_exceptionIsThrown() {
 		$differ = new EntityDiffer();

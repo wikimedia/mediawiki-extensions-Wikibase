@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedExcepti
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class MaxReferencedEntityVisitsExhaustedExceptionTest extends PHPUnit_Framework_TestCase {
+class MaxReferencedEntityVisitsExhaustedExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$entityId = new ItemId( 'Q1' );

@@ -2,8 +2,9 @@
 
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
-use Wikibase\DataModel\Services\Diff\PropertyDiffer;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Diff\PropertyDiffer;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 
 /**
@@ -12,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyDifferTest extends \PHPUnit_Framework_TestCase {
+class PropertyDifferTest extends TestCase {
 
 	public function testGivenPropertyWithOnlyType_constructionDiffIsEmpty() {
 		$differ = new PropertyDiffer();

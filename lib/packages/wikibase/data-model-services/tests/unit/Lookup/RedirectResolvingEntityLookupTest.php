@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
+class RedirectResolvingEntityLookupTest extends TestCase {
 
 	/**
 	 * @param EntityId $id

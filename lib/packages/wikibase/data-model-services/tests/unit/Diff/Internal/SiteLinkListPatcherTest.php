@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher;
 use Wikibase\DataModel\SiteLinkList;
@@ -16,7 +17,7 @@ use Wikibase\DataModel\SiteLinkList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkListPatcherTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkListPatcherTest extends TestCase {
 
 	public function testGivenEmptyDiff_linksAreReturnedAsIs() {
 		$links = new SiteLinkList();

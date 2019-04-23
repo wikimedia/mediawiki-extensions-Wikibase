@@ -7,6 +7,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Diff\StatementListPatcher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -21,7 +22,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
+class StatementListPatcherTest extends TestCase {
 
 	public function patchStatementListProvider() {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );

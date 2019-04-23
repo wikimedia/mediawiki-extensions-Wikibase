@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class InProcessCachingDataTypeLookupTest extends PHPUnit_Framework_TestCase {
+class InProcessCachingDataTypeLookupTest extends TestCase {
 
 	public function testWhenCacheIsEmpty_decoratedLookupValueIsReturned() {
 		$decoratedLookup = $this->createMock( PropertyDataTypeLookup::class );

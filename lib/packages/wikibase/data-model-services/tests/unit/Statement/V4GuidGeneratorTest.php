@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Statement\V4GuidGenerator;
 
 /**
@@ -10,7 +11,7 @@ use Wikibase\DataModel\Services\Statement\V4GuidGenerator;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class V4GuidGeneratorTest extends \PHPUnit_Framework_TestCase {
+class V4GuidGeneratorTest extends TestCase {
 
 	public function testGetGuid() {
 		$guidGen = new V4GuidGenerator();

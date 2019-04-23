@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class TermLookupExceptionTest extends PHPUnit_Framework_TestCase {
+class TermLookupExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$entityId = new ItemId( 'Q1' );

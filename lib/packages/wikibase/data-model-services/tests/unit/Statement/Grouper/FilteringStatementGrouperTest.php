@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Statement\Grouper;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
+class FilteringStatementGrouperTest extends TestCase {
 
 	/**
 	 * @param string $propertyId

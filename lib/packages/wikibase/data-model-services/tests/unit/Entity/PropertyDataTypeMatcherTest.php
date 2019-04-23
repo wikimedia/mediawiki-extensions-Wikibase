@@ -2,11 +2,11 @@
 
 namespace Wikibase\DataModel\Services\Tests\Entity;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
-use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 
 /**
  * @covers \Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher
@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class PropertyDataTypeMatcherTest extends PHPUnit_Framework_TestCase {
+class PropertyDataTypeMatcherTest extends TestCase {
 
 	public function testIsMatchingDataType() {
 		$propertyDataTypeMatcher = $this->getPropertyDataTypeMatcher();

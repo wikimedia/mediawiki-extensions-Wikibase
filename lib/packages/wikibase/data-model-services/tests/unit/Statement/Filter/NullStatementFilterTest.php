@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement\Filter;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Statement\Filter\NullStatementFilter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class NullStatementFilterTest extends PHPUnit_Framework_TestCase {
+class NullStatementFilterTest extends TestCase {
 
 	public function testIsMatch() {
 		$filter = new NullStatementFilter();
