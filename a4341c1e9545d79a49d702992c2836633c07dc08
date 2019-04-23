@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d244bd27_c76b0070",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-23T16:32:08Z",
+      "side": 1,
+      "message": "Did you forget to update this or is it intentional that this is still in uppercase whereas the patch adds the lowercase version? (I don’t have any opinion on which makes more sense – internal language code or BCP 47 code.)",
+      "range": {
+        "startLine": 7,
+        "startChar": 56,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "a4341c1e9545d79a49d702992c2836633c07dc08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
