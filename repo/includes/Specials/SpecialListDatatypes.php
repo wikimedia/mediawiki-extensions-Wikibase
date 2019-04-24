@@ -64,17 +64,22 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	}
 
 	protected function getHtmlForDataTypeId( $dataTypeId, $valueType ) {
-		$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+		$dataTypeBaseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+		$valueTypeBaseKey = 'wikibase-listdatavaluetypes-';
 
 		return Html::rawElement(
-			'dt',
-			[ 'id' => $dataTypeId ],
-			$this->msg( $baseKey . '-head' )->parse()
-				. wfMessage( 'word-separator' )->escaped()
-				. wfMessage( 'parentheses' )->plaintextParams( $valueType )->parse()
-		)
+				'dt',
+				[ 'id' => $dataTypeId ],
+				$this->msg( $dataTypeBaseKey . '-head' )->parse()
+			)
 		. Html::rawElement( 'dd', [],
-			$this->msg( $baseKey . '-body' )->parse()
+			$this->msg( $dataTypeBaseKey . '-body' )->parse()
+			. Html::rawElement(
+				'dd', [],
+				$this->msg( $valueTypeBaseKey . 'generalbody' )->parse()
+				. wfMessage( 'word-separator' )->escaped()
+				. $this->msg( $valueTypeBaseKey . 'name-' . $valueType )->parse()
+			)
 			. Html::rawElement( 'p', [],
 				$this->getLinkRenderer()->makeKnownLink(
 					self::getTitleFor( 'ListProperties', $dataTypeId ),
