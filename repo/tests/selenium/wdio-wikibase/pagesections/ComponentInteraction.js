@@ -5,6 +5,7 @@ let ComponentInteraction = ( Base ) => class extends Base {
 	static get OOUI_SELECTORS() {
 		return {
 			OPTION_WIDGET: '.oo-ui-optionWidget',
+			MULTI_OPTION_WIDGET: '.oo-ui-optionWidget',
 			OPTION_WIDGET_SELECTED: '.oo-ui-optionWidget-selected',
 			OVERLAY: '.oo-ui-defaultOverlay',
 			COMBOBOX_DROPDOWN: '.oo-ui-comboBoxInputWidget-dropdownButton'
@@ -15,6 +16,12 @@ let ComponentInteraction = ( Base ) => class extends Base {
 		element.$( 'input' ).setValue( value );
 		element.waitForVisible( this.constructor.OOUI_SELECTORS.OPTION_WIDGET );
 		element.$( this.constructor.OOUI_SELECTORS.OPTION_WIDGET ).click();
+	}
+
+	setSingleValueOnMultiselectElement( element, value ) {
+		element.$( 'input' ).setValue( value );
+		element.waitForVisible( this.constructor.OOUI_SELECTORS.MULTI_OPTION_WIDGET );
+		element.$( this.constructor.OOUI_SELECTORS.MULTI_OPTION_WIDGET ).click();
 	}
 
 	setValueOnComboboxElement( element, value ) {
