@@ -51,6 +51,10 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		// 'wikibase-listdatatypes-url-body'
 		// 'wikibase-listdatatypes-external-id-head'
 		// 'wikibase-listdatatypes-external-id-body'
+		// 'wikibase-listdatatypes-wikibase-item-head'
+		// 'wikibase-listdatatypes-wikibase-item-body'
+		// 'wikibase-listdatatypes-wikibase-property-head'
+		// 'wikibase-listdatatypes-wikibase-property-body'
 
 		foreach ( $this->getDataTypeIdsAndValues() as $dataTypeId => $valueType ) {
 			$this->getOutput()->addHTML( $this->getHtmlForDataTypeId( $dataTypeId, $valueType ) );
@@ -64,17 +68,24 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	}
 
 	protected function getHtmlForDataTypeId( $dataTypeId, $valueType ) {
-		$baseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+		$dataTypeBaseKey = 'wikibase-listdatatypes-' . mb_strtolower( $dataTypeId );
+		$valueTypeBaseKey = 'wikibase-listdatavaluetypes-';
 
 		return Html::rawElement(
 			'dt',
 			[ 'id' => $dataTypeId ],
-			$this->msg( $baseKey . '-head' )->parse()
-				. wfMessage( 'word-separator' )->escaped()
-				. wfMessage( 'parentheses' )->plaintextParams( $valueType )->parse()
+			$this->msg( $dataTypeBaseKey . '-head' )->parse()
+			. $this->msg( 'word-separator' )->escaped()
+			. $this->msg( 'parentheses-start' )->parse()
+			. $this->msg( $valueTypeBaseKey . 'name-' . $valueType )->parse()
+			. $this->msg( 'parentheses-end' )->parse()
 		)
 		. Html::rawElement( 'dd', [],
-			$this->msg( $baseKey . '-body' )->parse()
+			$this->msg( $dataTypeBaseKey . '-body' )->parse()
+			. Html::rawElement(
+				'dd', [],
+				$this->msg( $valueTypeBaseKey . 'generalbody', $valueType )->parse()
+			)
 			. Html::rawElement( 'p', [],
 				$this->getLinkRenderer()->makeKnownLink(
 					self::getTitleFor( 'ListProperties', $dataTypeId ),
