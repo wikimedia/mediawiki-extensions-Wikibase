@@ -421,6 +421,7 @@
 	"wikibase-listdatatypes-url-body": "Literal data field for a URL. URLs are restricted to the protocols also supported for external links in wikitext.",
 	"wikibase-listdatatypes-external-id-head": "External identifier",
 	"wikibase-listdatatypes-external-id-body": "Literal data field for an external identifier. External identifiers may automatically be linked to an authoritative resource for display.",
+	"wikibase-listdatavaluetypes-generalbody": "The value type for this data type is $1.",
 	"wikibase-concept-uri": "Concept URI",
 	"wikibase-concept-uri-tooltip": "URI that identifies the concept described by this Item",
 	"wikibase-pageimage-helptext": "This image is taken from the statements of this Item. You can adjust the image by changing the statement.",
