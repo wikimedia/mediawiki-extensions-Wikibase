@@ -20,7 +20,7 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 In order to be allowed in this package, code needs to:
 
-* Be using Wikibase DataModel
+* Be using Wikibase DataModel and deal with the core Wikibase domain
 * Not belong to a more specific component
 * Not introduce heavy dependencies to this component
 * Not be presentation code
