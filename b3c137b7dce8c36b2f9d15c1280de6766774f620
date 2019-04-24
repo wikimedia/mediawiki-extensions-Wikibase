@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "579dd018_a4659662",
+        "filename": "repo/includes/Specials/SpecialListDatatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-24T15:51:14Z",
+      "side": 1,
+      "message": "This enforces that the (translated) data value type name is always at the end of the phrase. I don’t think that’s true for all languages – the “generalbody” message should instead accept the data value type name as a parameter. (Even in English, a full stop at the end of the sentence would be nice.)",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 69
+      },
+      "revId": "b3c137b7dce8c36b2f9d15c1280de6766774f620",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
