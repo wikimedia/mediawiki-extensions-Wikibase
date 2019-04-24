@@ -64,10 +64,10 @@ class ItemPropertyIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$term = $this->lookupEntityLabel( $entityId );
 
-		// We can skip the expensive exists() check if we found a term.
+		// We can skip the potentially expensive isKnown() check if we found a term.
 		if ( $term !== null ) {
 			$label = $term->getText();
-		} elseif ( $title->isLocal() && !$title->exists() ) {
+		} elseif ( $title->isLocal() && !$title->isKnown() ) {
 			return $this->nonExistingFormatter->formatEntityId( $entityId );
 		} else {
 			$label = $entityId->getSerialization();
