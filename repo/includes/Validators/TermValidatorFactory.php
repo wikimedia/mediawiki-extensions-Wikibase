@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\LabelDescriptionEqualDetector;
 
 /**
  * Provides validators for terms (like the maximum length of labels, etc).
@@ -37,6 +38,8 @@ class TermValidatorFactory {
 	 */
 	private $duplicateDetector;
 
+	private $equalDetector;
+
 	/**
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languageCodes A list of valid language codes
@@ -59,6 +62,7 @@ class TermValidatorFactory {
 		$this->languageCodes = $languageCodes;
 		$this->idParser = $idParser;
 		$this->duplicateDetector = $duplicateDetector;
+		$this->equalDetector = new LabelDescriptionEqualDetector();
 	}
 
 	/**
@@ -74,14 +78,19 @@ class TermValidatorFactory {
 	 * @return FingerprintValidator
 	 */
 	public function getFingerprintValidator( $entityType ) {
+		$notEqualValidator = new LabelDescriptionNotEqualValidator( $this->equalDetector );
+
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 
 		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
-				return new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
+				return new CompositeFingerprintValidator( [
+					$notEqualValidator,
+					new LabelDescriptionUniquenessValidator( $this->duplicateDetector ),
+				] );
 
 			default:
-				return new NullFingerprintValidator();
+				return $notEqualValidator;
 		}
 	}
 
