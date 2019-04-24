@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7de9800_a28694ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-04-24T15:37:48Z",
+      "side": 1,
+      "message": "There is no Phabricator ticket mentioned. What is the relevance of this change? Why is it done? What is the motivation, benefits, consequences? I mean, I\u0027m certainly able to guess most of this, but I think it\u0027s better to document it for everybody to see.",
+      "revId": "bb5ffb7ca68d3b4ac6c07600a0dd77b1e634f90e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfa5d124_0bcba621",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-04-24T15:37:48Z",
+      "side": 1,
+      "message": "I\u0027m told these globals are bad and should not be used. The MediaWikiTestCase class provides convenience functions like $this-\u003egetTestUser()-\u003egetUser() that are probably helpful here. There is also a parameter on getTestUser( $groups ), which might be necessary here because only certain user groups are allowed to move files.",
+      "range": {
+        "startLine": 79,
+        "startChar": 9,
+        "endLine": 79,
+        "endChar": 16
+      },
+      "revId": "bb5ffb7ca68d3b4ac6c07600a0dd77b1e634f90e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
