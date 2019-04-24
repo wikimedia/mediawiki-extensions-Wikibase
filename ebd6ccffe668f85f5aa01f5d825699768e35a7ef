@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcc1455b_011f8454",
+        "filename": "repo/includes/LabelDescriptionEqualDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-24T20:33:25Z",
+      "side": 1,
+      "message": "What\u0027s $ignoreEntityId? Doesn\u0027t seem to exist here",
+      "range": {
+        "startLine": 18,
+        "startChar": 33,
+        "endLine": 18,
+        "endChar": 48
+      },
+      "revId": "ebd6ccffe668f85f5aa01f5d825699768e35a7ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67b674ef_e5e84061",
+        "filename": "repo/includes/LabelDescriptionEqualDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-24T20:33:25Z",
+      "side": 1,
+      "message": "Should be: … is present in the …",
+      "range": {
+        "startLine": 19,
+        "startChar": 61,
+        "endLine": 19,
+        "endChar": 64
+      },
+      "revId": "ebd6ccffe668f85f5aa01f5d825699768e35a7ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
