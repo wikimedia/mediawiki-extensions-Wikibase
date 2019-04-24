@@ -29,23 +29,23 @@ Feature: Empty label and description behaviour
 #      And Header edit button should not be there
 #      And Header cancel button should be there
 #      And Header save button should not be there
-
-  @ui_only
-  Scenario: Description UI behaves correctly when description is empty
-    When I click the header edit button
-      And I enter "NEW DESCRIPTION" as description
-    Then Header cancel button should be there
-      And Header save button should be there
-
-  @ui_only @smoke
-  Scenario: Description UI behaves correctly when description is empty
-    When I click the header edit button
-      And I enter "NEW DESCRIPTION" as description
-      And I click the header cancel button
-    Then Header cancel button should not be there
-      And Header edit button should be there
-      And Header save button should not be there
-      And Description input element should not be there
+#
+#  @ui_only
+#  Scenario: Description UI behaves correctly when description is empty
+#    When I click the header edit button
+#      And I enter "NEW DESCRIPTION" as description
+#    Then Header cancel button should be there
+#      And Header save button should be there
+#
+#  @ui_only @smoke
+#  Scenario: Description UI behaves correctly when description is empty
+#    When I click the header edit button
+#      And I enter "NEW DESCRIPTION" as description
+#      And I click the header cancel button
+#    Then Header cancel button should not be there
+#      And Header edit button should be there
+#      And Header save button should not be there
+#      And Description input element should not be there
 
   @ui_only
   Scenario: Label UI is shown correctly when label is empty

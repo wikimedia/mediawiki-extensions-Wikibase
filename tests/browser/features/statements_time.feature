@@ -13,20 +13,20 @@ Feature: Using time properties in statements
       | timeprop | time |
       And I am not logged in to the repo
 
-  Scenario: Time UI should work properly
-    Given I am on an item page
-      And The copyright warning has been dismissed
-      And Anonymous edit warnings are disabled
-    When I click the statement add button
-      And I select the claim property timeprop
-      And I enter 1 in the claim value input field
-    Then Statement save button should be there
-      And Statement cancel button should be there
-      And InputExtender preview should be there
-      And Time precision chooser should be there
-      And Time calendar chooser should be there
-
 # T221104
+#  Scenario: Time UI should work properly
+#    Given I am on an item page
+#      And The copyright warning has been dismissed
+#      And Anonymous edit warnings are disabled
+#    When I click the statement add button
+#      And I select the claim property timeprop
+#      And I enter 1 in the claim value input field
+#    Then Statement save button should be there
+#      And Statement cancel button should be there
+#      And InputExtender preview should be there
+#      And Time precision chooser should be there
+#      And Time calendar chooser should be there
+#
 #  Scenario Outline: Check UI for invalid values
 #    Given I am on an item page
 #      And The copyright warning has been dismissed
