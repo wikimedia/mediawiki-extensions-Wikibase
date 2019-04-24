@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5ac4844d_0499f488",
+        "filename": "repo/includes/Specials/SpecialListDatatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-24T20:23:12Z",
+      "side": 1,
+      "message": "This should also use $this-\u003emsg()",
+      "range": {
+        "startLine": 80,
+        "startChar": 6,
+        "endLine": 80,
+        "endChar": 15
+      },
+      "revId": "b3c137b7dce8c36b2f9d15c1280de6766774f620",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "579dd018_a4659662",
         "filename": "repo/includes/Specials/SpecialListDatatypes.php",
         "patchSetId": 2
@@ -19,6 +42,23 @@
         "endLine": 81,
         "endChar": 69
       },
+      "revId": "b3c137b7dce8c36b2f9d15c1280de6766774f620",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d338d33_ec4f3af4",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-24T20:23:12Z",
+      "side": 1,
+      "message": "Unrelated rebase artifact, I guess?",
       "revId": "b3c137b7dce8c36b2f9d15c1280de6766774f620",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
