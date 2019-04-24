@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement\Grouper;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class NullStatementGrouperTest extends PHPUnit_Framework_TestCase {
+class NullStatementGrouperTest extends TestCase {
 
 	public function testGroupStatements() {
 		$statements = new StatementList();

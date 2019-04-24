@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Services\Fixtures\EntityOfUnknownType;
  * @author Christoph Fischer < christoph.fischer@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
+class EntityPatcherTest extends TestCase {
 
 	/**
 	 * @dataProvider itemProvider

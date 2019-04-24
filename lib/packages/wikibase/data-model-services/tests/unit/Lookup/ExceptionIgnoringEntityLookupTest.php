@@ -2,18 +2,19 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Services\Lookup\ExceptionIgnoringEntityLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 
 /**
  * @covers \Wikibase\DataModel\Services\Lookup\ExceptionIgnoringEntityLookup
  *
  * @license GPL-2.0-or-later
  */
-class ExceptionIgnoringEntityLookupTest extends \PHPUnit_Framework_TestCase {
+class ExceptionIgnoringEntityLookupTest extends TestCase {
 
 	public function testGetEntity_returnsEntity() {
 		$entity = new Item( new ItemId( 'Q1' ) );

@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EscapingEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
+class EscapingEntityIdFormatterTest extends TestCase {
 
 	public function testFormat() {
 		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );

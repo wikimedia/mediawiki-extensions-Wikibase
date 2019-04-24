@@ -6,7 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Diff\Internal\AliasGroupListPatcher;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -17,7 +17,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupListPatcherTest extends PHPUnit_Framework_TestCase {
+class AliasGroupListPatcherTest extends TestCase {
 
 	/**
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

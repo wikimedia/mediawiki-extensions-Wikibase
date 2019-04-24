@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -14,7 +15,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
+class StatementGuidParserTest extends TestCase {
 
 	/**
 	 * @dataProvider guidProvider

@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class UnresolvedEntityRedirectExceptionTest extends PHPUnit_Framework_TestCase {
+class UnresolvedEntityRedirectExceptionTest extends TestCase {
 
 	public function testConstructorWithOnlyRequiredArguments() {
 		$entityId = new ItemId( 'Q1' );

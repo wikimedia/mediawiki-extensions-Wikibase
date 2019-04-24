@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Term\Term;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
+class LanguageLabelDescriptionLookupTest extends TestCase {
 
 	public function testGetLabelCallsTermLookupAndReturnsStringAsTerm() {
 		$termLookup = $this->createMock( TermLookup::class );

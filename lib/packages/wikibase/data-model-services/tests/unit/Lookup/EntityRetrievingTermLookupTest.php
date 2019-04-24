@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
+class EntityRetrievingTermLookupTest extends TestCase {
 
 	public function testGetLabel() {
 		$termLookup = $this->getEntityRetrievingTermLookup();

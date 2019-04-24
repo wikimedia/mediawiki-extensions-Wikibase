@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
 
 /**
@@ -10,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\UnknownForeignRepositoryException;
  *
  * @license GPL-2.0-or-later
  */
-class UnknownForeignRepositoryExceptionTest extends \PHPUnit_Framework_TestCase {
+class UnknownForeignRepositoryExceptionTest extends TestCase {
 
 	public function testConstructWithRepositoryNameOnly() {
 		$exception = new UnknownForeignRepositoryException( 'foo' );

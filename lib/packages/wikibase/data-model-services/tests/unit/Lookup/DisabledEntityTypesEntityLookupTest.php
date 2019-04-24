@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\DisabledEntityTypesEntityLookup;
@@ -14,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani
  */
-class DisabledEntityTypesEntityLookupTest extends \PHPUnit_Framework_TestCase {
+class DisabledEntityTypesEntityLookupTest extends TestCase {
 
 	/**
 	 * @return EntityLookup
@@ -44,7 +46,7 @@ class DisabledEntityTypesEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException \InvalidArgumentException
+	 * @expectedException InvalidArgumentException
 	 */
 	public function testConstructor_exception() {
 		new DisabledEntityTypesEntityLookup( $this->getEntityLookup(), [ 0 ] );

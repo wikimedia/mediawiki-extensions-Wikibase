@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 
@@ -11,7 +12,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
+class StatementGuidValidatorTest extends TestCase {
 
 	private function newStatementGuidValidator() {
 		return new StatementGuidValidator( new ItemIdParser() );

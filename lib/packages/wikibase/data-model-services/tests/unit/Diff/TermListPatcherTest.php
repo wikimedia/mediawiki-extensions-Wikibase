@@ -6,7 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\Diff\TermListPatcher;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -17,7 +17,7 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class TermListPatcherTest extends PHPUnit_Framework_TestCase {
+class TermListPatcherTest extends TestCase {
 
 	/**
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

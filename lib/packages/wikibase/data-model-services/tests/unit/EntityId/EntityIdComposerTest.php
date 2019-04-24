@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class EntityIdComposerTest extends PHPUnit_Framework_TestCase {
+class EntityIdComposerTest extends TestCase {
 
 	private function getComposer() {
 		return new EntityIdComposer( [

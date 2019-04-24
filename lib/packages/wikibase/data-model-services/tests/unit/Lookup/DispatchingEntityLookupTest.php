@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Exception;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
@@ -17,7 +18,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityLookupTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityLookupTest extends TestCase {
 
 	/**
 	 * @dataProvider provideInvalidForeignLookups

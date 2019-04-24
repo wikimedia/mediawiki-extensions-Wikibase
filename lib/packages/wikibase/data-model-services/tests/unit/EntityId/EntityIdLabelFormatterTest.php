@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\Term;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
+class EntityIdLabelFormatterTest extends TestCase {
 
 	/**
 	 * @return array

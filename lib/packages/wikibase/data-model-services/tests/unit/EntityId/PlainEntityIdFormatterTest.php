@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PlainEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
+class PlainEntityIdFormatterTest extends TestCase {
 
 	public function validProvider() {
 		$argLists = [];

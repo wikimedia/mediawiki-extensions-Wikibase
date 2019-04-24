@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,7 +15,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
+class SuffixEntityIdParserTest extends TestCase {
 
 	public function validInputProvider() {
 		return [

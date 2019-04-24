@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -12,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class InMemoryDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
+class InMemoryDataTypeLookupTest extends TestCase {
 
 	public function testGetDataTypeForPropertyThatIsNotSet() {
 		$lookup = new InMemoryDataTypeLookup();

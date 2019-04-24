@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
@@ -18,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDifferTest extends \PHPUnit_Framework_TestCase {
+class ItemDifferTest extends TestCase {
 
 	public function testGivenTwoEmptyItems_emptyItemDiffIsReturned() {
 		$differ = new ItemDiffer();

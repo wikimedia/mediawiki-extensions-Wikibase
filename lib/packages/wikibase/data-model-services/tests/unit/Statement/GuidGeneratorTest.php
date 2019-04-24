@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class GuidGeneratorTest extends \PHPUnit_Framework_TestCase {
+class GuidGeneratorTest extends TestCase {
 
 	/**
 	 * @dataProvider entityIdProvider

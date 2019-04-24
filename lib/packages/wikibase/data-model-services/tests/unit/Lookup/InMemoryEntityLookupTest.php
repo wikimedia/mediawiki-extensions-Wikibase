@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Fixtures\FakeEntityDocument;
@@ -19,7 +20,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyLookupException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class InMemoryEntityLookupTest extends \PHPUnit_Framework_TestCase {
+class InMemoryEntityLookupTest extends TestCase {
 
 	public function testGivenUnknownEntityId_getEntityReturnsNull() {
 		$lookup = new InMemoryEntityLookup();

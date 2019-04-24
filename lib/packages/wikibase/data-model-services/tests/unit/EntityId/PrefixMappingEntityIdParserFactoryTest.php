@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
@@ -13,7 +14,7 @@ use Wikimedia\Assert\ParameterTypeException;
  *
  * @license GPL-2.0-or-later
  */
-class PrefixMappingEntityIdParserFactoryTest extends \PHPUnit_Framework_TestCase {
+class PrefixMappingEntityIdParserFactoryTest extends TestCase {
 
 	public function testGetIdParser_repositoryWithKnownMapping() {
 		$dummyParser = new ItemIdParser();

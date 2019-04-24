@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\DataValue;
 use DataValues\BooleanValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -19,7 +20,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ValuesFinderTest extends \PHPUnit_Framework_TestCase {
+class ValuesFinderTest extends TestCase {
 
 	private static $propertyDataTypes = [
 		'P23' => 'string',

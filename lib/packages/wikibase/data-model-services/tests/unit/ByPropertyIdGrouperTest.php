@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Tests;
 use ArrayObject;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
 use Wikibase\DataModel\Services\ByPropertyIdGrouper;
@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Kreuz
  */
-class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
+class ByPropertyIdGrouperTest extends TestCase {
 
 	/**
 	 * @dataProvider validConstructorArgumentProvider
