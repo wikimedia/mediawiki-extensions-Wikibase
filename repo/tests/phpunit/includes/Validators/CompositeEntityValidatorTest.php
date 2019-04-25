@@ -22,7 +22,7 @@ use Wikibase\Repo\Validators\EntityValidator;
 class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
-	public function validEntityProvider() {
+	public function provideValidateEntity() {
 		$success = Result::newSuccess();
 		$failure = Result::newError( [ Error::newError( 'Foo!' ) ] );
 
@@ -37,23 +37,28 @@ class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 			->will( $this->returnValue( $failure ) );
 
 		return [
-			[ [ $good, $bad ], false ],
-			[ [ $bad, $good ], false ],
-			[ [ $good, $good ], true ],
-			[ [], true ],
+			[ [], true, 0 ],
+			[ [ $good ], true, 0 ],
+			[ [ $bad ], true, 1 ],
+			[ [ $good, $bad ], true, 1 ],
+			[ [ $bad, $good ], true, 1 ],
+			[ [ $good, $good ], true, 0 ],
+			[ [ $bad, $bad ], true, 1 ],
+			[ [ $bad, $bad ], false, 2 ],
 		];
 	}
 
 	/**
-	 * @dataProvider validEntityProvider
+	 * @dataProvider provideValidateEntity
 	 */
-	public function testValidateEntity( $validators, $expected ) {
+	public function testValidateEntity( $validators, $failFast, $expectedErrorCount ) {
 		$entity = new Item();
 
-		$validator = new CompositeEntityValidator( $validators );
+		$validator = new CompositeEntityValidator( $validators, $failFast );
 		$result = $validator->validateEntity( $entity );
 
-		$this->assertEquals( $expected, $result->isValid(), 'isValid' );
+		$this->assertSame( $expectedErrorCount === 0, $result->isValid() );
+		$this->assertCount( $expectedErrorCount, $result->getErrors() );
 	}
 
 }
