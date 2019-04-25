@@ -19,10 +19,17 @@ class CompositeEntityValidator implements EntityValidator {
 	private $validators;
 
 	/**
-	 * @param EntityValidator[] $validators
+	 * @var bool
 	 */
-	public function __construct( array $validators ) {
+	private $failFast;
+
+	/**
+	 * @param EntityValidator[] $validators
+	 * @param bool $failFast If true, validation will be aborted after the first sub validator fails.
+	 */
+	public function __construct( array $validators, $failFast = true ) {
 		$this->validators = $validators;
+		$this->failFast = $failFast;
 	}
 
 	/**
@@ -35,15 +42,21 @@ class CompositeEntityValidator implements EntityValidator {
 	 * @return Result
 	 */
 	public function validateEntity( EntityDocument $entity ) {
-		foreach ( $this->validators as $validator ) {
-			$result = $validator->validateEntity( $entity );
+		$result = Result::newSuccess();
 
-			if ( !$result->isValid() ) {
-				return $result;
+		foreach ( $this->validators as $validator ) {
+			$subResult = $validator->validateEntity( $entity );
+
+			if ( !$subResult->isValid() ) {
+				if ( $this->failFast ) {
+					return $subResult;
+				} else {
+					$result = Result::merge( $result, $subResult );
+				}
 			}
 		}
 
-		return Result::newSuccess();
+		return $result;
 	}
 
 }

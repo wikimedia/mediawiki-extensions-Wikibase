@@ -19,10 +19,17 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 	private $validators;
 
 	/**
-	 * @param FingerprintValidator[] $validators
+	 * @var bool
 	 */
-	public function __construct( array $validators ) {
+	private $failFast;
+
+	/**
+	 * @param FingerprintValidator[] $validators
+	 * @param bool $failFast If true, validation will be aborted after the first sub validator fails.
+	 */
+	public function __construct( array $validators, $failFast = true ) {
 		$this->validators = $validators;
+		$this->failFast = $failFast;
 	}
 
 	/**
@@ -43,20 +50,26 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 		EntityId $entityId,
 		array $languageCodes = null
 	) {
+		$result = Result::newSuccess();
+
 		foreach ( $this->validators as $validator ) {
-			$result = $validator->validateFingerprint(
+			$subResult = $validator->validateFingerprint(
 				$labels,
 				$descriptions,
 				$entityId,
 				$languageCodes
 			);
 
-			if ( !$result->isValid() ) {
-				return $result;
+			if ( !$subResult->isValid() ) {
+				if ( $this->failFast ) {
+					return $subResult;
+				} else {
+					$result = Result::merge( $result, $subResult );
+				}
 			}
 		}
 
-		return Result::newSuccess();
+		return $result;
 	}
 
 }
