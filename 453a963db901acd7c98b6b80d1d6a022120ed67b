@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ec38ff9_ccd8fddf",
+        "filename": "lib/includes/Formatters/CachingKartographerEmbeddingHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-04-25T21:43:54Z",
+      "side": 1,
+      "message": "For a future change perhaps, this can all be reduced to:\n\n $rlModulesJson \u003d FormatJson::encode( $rlModulesArr );\n …\n - \"mw.loader.using( [ $JSRlModules ], … \"\n + \"mw.loader.using( $rlModulesJson, … \"",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 162,
+        "endChar": 4
+      },
+      "revId": "453a963db901acd7c98b6b80d1d6a022120ed67b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
