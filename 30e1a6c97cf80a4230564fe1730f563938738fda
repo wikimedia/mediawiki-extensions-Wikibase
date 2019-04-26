@@ -172,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "a0e2a461_7d26201d",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-26T12:07:25Z",
+      "side": 1,
+      "message": "this probably doesn\u0027t need to wait for replication after looking into it again. the script is meant to be run locally or some test server where probably there are no replicas, but even when there are I couldn\u0027t think of a case where waiting on replication is necessary for this script.",
+      "parentUuid": "fb6ac046_4db2012c",
+      "revId": "30e1a6c97cf80a4230564fe1730f563938738fda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7938977_c2ca37d4",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 7

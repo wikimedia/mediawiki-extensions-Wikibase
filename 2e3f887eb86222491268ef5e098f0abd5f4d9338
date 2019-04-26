@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d79eaded_6d4c5c06",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-04-26T12:07:25Z",
+      "side": 1,
+      "message": "From Wikibase\\Repo\\EditEntity\\EditEntity class\n```\n\t/**\n\t * Indicates that the edit exceeded a rate limit.\n\t */\n\t/* public */ const RATE_LIMIT \u003d 64;\n```\n\nhow many did you try to generate, maybe we have to change/bypass rate limit for this script? or at least inform users of it that they have to know they have to change it temporarily?",
+      "parentUuid": "bc4dce90_469e0afc",
+      "range": {
+        "startLine": 157,
+        "startChar": 27,
+        "endLine": 157,
+        "endChar": 46
+      },
+      "revId": "2e3f887eb86222491268ef5e098f0abd5f4d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2d0db86_3fb064f3",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 13
