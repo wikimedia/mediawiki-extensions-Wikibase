@@ -4,6 +4,11 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 3.1.1 (2019-04-26)
+
+* Fix getLocationAgnosticMwApi to use browser location not wgServer to fix bugs
+  on mobile requests.
+
 ### 3.1.0 (2018-11-13)
 
 * Made public method: `wikibase.api.RepoApi.post()`.
