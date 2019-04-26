@@ -80,6 +80,24 @@
       "revId": "b3c137b7dce8c36b2f9d15c1280de6766774f620",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73fe487a_ebf4b276",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-26T08:13:37Z",
+      "side": 1,
+      "message": "This is a submodule change. You should be able to fix this by running \"git submodule update view/lib/wikibase-termbox\" (inside your Wikibase directory)",
+      "parentUuid": "6ac80bd2_77f48d19",
+      "revId": "b3c137b7dce8c36b2f9d15c1280de6766774f620",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
