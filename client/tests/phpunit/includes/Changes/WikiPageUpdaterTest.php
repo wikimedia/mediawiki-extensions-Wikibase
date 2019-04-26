@@ -214,7 +214,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 				$title = $job->getTitle();
 
 				$id = $title->getArticleID();
-				$pages[$id] = [ $title->getNamespace(), $title->getDBkey() ];
+				$pages[] = $title->getPrefixedDBkey();
 				$rootJobParams = $job->getRootJobParams();
 			} ) );
 
@@ -240,10 +240,11 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			'uid:1'
 		);
 
-		$this->assertEquals( [ 21, 22, 23 ], array_keys( $pages ) );
-		$this->assertEquals( [ 0, 'Foo' ], $pages[21], '$pages[21]' );
-		$this->assertEquals( [ 0, 'Bar' ], $pages[22], '$pages[22]' );
-		$this->assertEquals( [ 0, 'Cuzz' ], $pages[23], '$pages[23]' );
+		$this->assertSame(
+			[ 'Foo', 'Bar', 'Cuzz' ],
+			$pages,
+			'$pages'
+		);
 
 		$this->assertEquals(
 			[
