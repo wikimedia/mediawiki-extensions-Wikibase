@@ -176,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "b5368941_1714d587",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-26T12:03:09Z",
+      "side": 1,
+      "message": "Well, you no longer prevent creating overly large entities at all AFAICT (you just log a warning in that case).\n\nMy suggestion was to keep this all unchanged /except/ to make it throw a custom Extension (a subclass of MWContentSerializationException) in case the entity is to large. That exception could then be caught in all relevant places.",
+      "parentUuid": "a72f54c0_00992a21",
+      "revId": "b3da9a6201872fa4dd6955b663a038a8b8c7d5d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35728837_80ae3078",
         "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
         "patchSetId": 10
