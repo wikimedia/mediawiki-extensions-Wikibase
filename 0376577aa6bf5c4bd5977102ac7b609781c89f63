@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32aa9fe7_7ba6a0f7",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-04-26T07:39:29Z",
+      "side": 1,
+      "message": "this does not seem to be related, and caused a bit of confusion in the WMDE camp.\nThis is the UI related library, which this submodule represents, and we\u0027ve noticed some unexpected downgrade of UI.\n\nNot blaming here, just informing.\nWith this patch itself the possibility of similar in the future is likely going to be way lower, btw.",
+      "revId": "0376577aa6bf5c4bd5977102ac7b609781c89f63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
