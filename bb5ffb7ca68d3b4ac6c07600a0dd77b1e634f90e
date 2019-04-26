@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0cbfa1fb_8187f0fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-04-26T08:14:34Z",
+      "side": 1,
+      "message": "Title::moveTo has been deprecated since 1.25. The ticket that should be mentioned is T208775.",
+      "parentUuid": "b7de9800_a28694ff",
+      "revId": "bb5ffb7ca68d3b4ac6c07600a0dd77b1e634f90e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfa5d124_0bcba621",
         "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
         "patchSetId": 4
