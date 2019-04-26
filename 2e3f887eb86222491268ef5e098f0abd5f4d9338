@@ -22,6 +22,29 @@
       "revId": "2e3f887eb86222491268ef5e098f0abd5f4d9338",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc4dce90_469e0afc",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-26T11:58:40Z",
+      "side": 1,
+      "message": "This gives me: Failed to save entity.\n\nArray\n(\n    [errorFlags] \u003d\u003e 64\n)\n\nAlso, I think it would be nice to use json_encode the object instead of print_r (but meh)",
+      "range": {
+        "startLine": 157,
+        "startChar": 27,
+        "endLine": 157,
+        "endChar": 46
+      },
+      "revId": "2e3f887eb86222491268ef5e098f0abd5f4d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
