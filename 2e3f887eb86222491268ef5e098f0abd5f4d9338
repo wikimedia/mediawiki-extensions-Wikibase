@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "e46f5b2a_28f3fb15",
+        "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-04-26T12:22:26Z",
+      "side": 1,
+      "message": "Making the status object to string (directly) would work for me, StautsValue::__toString() is comprehensive.",
+      "parentUuid": "d79eaded_6d4c5c06",
+      "range": {
+        "startLine": 157,
+        "startChar": 27,
+        "endLine": 157,
+        "endChar": 46
+      },
+      "revId": "2e3f887eb86222491268ef5e098f0abd5f4d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2d0db86_3fb064f3",
         "filename": "repo/maintenance/populateWithRandomEntitiesAndTerms.php",
         "patchSetId": 13
