@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Interactors;
 
 use ContentHandler;
 use HashSiteStore;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Status;
 use TestSites;
@@ -342,7 +343,19 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		] );
 
 		$user = $this->getTestSysop()->getUser();
-		$user->addWatch( $entityTitleLookup->getTitleForId( $fromId ) );
+
+		if ( MediaWikiServices::getInstance()->getPermissionManager()
+			->userHasRight( $user, 'editmywatchlist' )
+		) {
+			MediaWikiServices::getInstance()->getWatchedItemStore()->addWatchBatchForUser(
+				$user,
+				[
+					$entityTitleLookup->getTitleForId( $fromId )->getSubjectPage(),
+					$entityTitleLookup->getTitleForId( $fromId )->getTalkPage()
+				]
+			);
+			$user->invalidateCache();
+		}
 
 		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
 
