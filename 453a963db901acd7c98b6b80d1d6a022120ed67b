@@ -22,6 +22,30 @@
       "revId": "453a963db901acd7c98b6b80d1d6a022120ed67b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc737334_f113e964",
+        "filename": "lib/includes/Formatters/CachingKartographerEmbeddingHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2019-04-27T12:22:42Z",
+      "side": 1,
+      "message": "I created I1f83348ebcb285bdcf683fe96ef0d7f56601c327 for this.",
+      "parentUuid": "1ec38ff9_ccd8fddf",
+      "range": {
+        "startLine": 154,
+        "startChar": 2,
+        "endLine": 162,
+        "endChar": 4
+      },
+      "revId": "453a963db901acd7c98b6b80d1d6a022120ed67b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
