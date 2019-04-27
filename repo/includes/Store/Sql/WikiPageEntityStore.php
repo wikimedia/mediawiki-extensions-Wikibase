@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store;
 use ActorMigration;
 use CommentStoreComment;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MWException;
@@ -513,7 +514,17 @@ class WikiPageEntityStore implements EntityStore {
 
 		$title = $this->getTitleForEntity( $id );
 
-		if ( $user->isLoggedIn() && $title && ( $watch != $user->isWatched( $title ) ) ) {
+		if ( $user->isLoggedIn() && $title && ( $watch != (
+					$title->isWatchable() &&
+					MediaWikiServices::getInstance()->getPermissionManager()->userHasRight(
+						$user,
+						'viewmywatchlist'
+					) &&
+					MediaWikiServices::getInstance()->getWatchedItemStore()->isWatched(
+						$user,
+						$title
+					)
+				) ) ) {
 			if ( $watch ) {
 				WatchAction::doWatch( $title, $user );
 			} else {
@@ -537,7 +548,17 @@ class WikiPageEntityStore implements EntityStore {
 		$this->assertCanStoreEntity( $id );
 
 		$title = $this->getTitleForEntity( $id );
-		return ( $title && $user->isWatched( $title ) );
+		return ( $title && (
+				$title->isWatchable() &&
+				MediaWikiServices::getInstance()->getPermissionManager()->userHasRight(
+					$user,
+					'viewmywatchlist'
+				) &&
+				MediaWikiServices::getInstance()->getWatchedItemStore()->isWatched(
+					$user,
+					$title
+				)
+			) );
 	}
 
 }
