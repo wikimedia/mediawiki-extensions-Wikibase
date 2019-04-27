@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use FormatJson;
 use InvalidArgumentException;
 use Language;
 use MapCacheLRU;
@@ -151,30 +152,22 @@ class CachingKartographerEmbeddingHandler {
 		$rlModules[] = 'ext.kartographer.frame';
 		$rlModules = array_unique( $rlModules );
 
-		$JSRlModules = implode(
-			', ',
-			array_map(
-				function( $rlModuleName ) {
-					return Xml::encodeJsVar( $rlModuleName );
-				},
-				$rlModules
-			)
-		);
-		$jsMapPreviewId = Xml::encodeJsVar( '#' . $mapPreviewId );
+		$rlModulesJson = FormatJson::encode( $rlModulesArr );
+		$jsMapPreviewId = FormatJson::encode( '#' . $mapPreviewId );
 
 		// Require all needed RL modules, then call initMapframeFromElement with the injected mapframe HTML
-		$javaScript .= "mw.loader.using( [ $JSRlModules ] ).then( " .
+		$javaScript .= "mw.loader.using( $rlModulesJson ).then( " .
 				"function() { mw.loader.require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
 				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map' ).get( 0 ) ); } );";
 
-		return '<script type="text/javascript">' . $javaScript . '</script>';
+		return Html::inlineScript( $javaScript );
 	}
 
 	/**
 	 * Get JavaScript code to update/init "wgKartographerLiveData" with the given data.
 	 *
 	 * @param array $kartographerLiveData
-	 * @return string JavaScript
+	 * @return string JavaScript code
 	 */
 	private function getMWConfigJS( array $kartographerLiveData ) {
 		// Create an empty wgKartographerLiveData, if needed
@@ -183,8 +176,8 @@ class CachingKartographerEmbeddingHandler {
 		// Append $kartographerLiveData to wgKartographerLiveData, as we can't overwrite wgKartographerLiveData
 		// here, as it is already referenced, also we probably don't want to loose other entries
 		foreach ( $kartographerLiveData as $key => $value ) {
-			$jsKey = Xml::encodeJsVar( $key );
-			$jsValue = Xml::encodeJsVar( $value );
+			$jsKey = FormatJson::encode( (string)$key );
+			$jsValue = FormatJson::encode( $value );
 
 			$javaScript .= "mw.config.get( 'wgKartographerLiveData' )[$jsKey] = $jsValue;";
 		}
