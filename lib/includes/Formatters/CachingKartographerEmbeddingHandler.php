@@ -151,19 +151,11 @@ class CachingKartographerEmbeddingHandler {
 		$rlModules[] = 'ext.kartographer.frame';
 		$rlModules = array_unique( $rlModules );
 
-		$JSRlModules = implode(
-			', ',
-			array_map(
-				function( $rlModuleName ) {
-					return Xml::encodeJsVar( $rlModuleName );
-				},
-				$rlModules
-			)
-		);
+		$rlModulesJson = FormatJson::encode( $rlModulesArr );
 		$jsMapPreviewId = Xml::encodeJsVar( '#' . $mapPreviewId );
 
 		// Require all needed RL modules, then call initMapframeFromElement with the injected mapframe HTML
-		$javaScript .= "mw.loader.using( [ $JSRlModules ] ).then( " .
+		$javaScript .= "mw.loader.using( $rlModulesJson ).then( " .
 				"function() { mw.loader.require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
 				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map' ).get( 0 ) ); } );";
 
