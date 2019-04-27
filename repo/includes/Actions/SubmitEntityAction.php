@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Content;
 use IContextSource;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Page;
 use Revision;
@@ -284,7 +285,17 @@ class SubmitEntityAction extends EditEntityAction {
 
 		if ( $user->isLoggedIn()
 			&& $user->getOption( 'watchdefault' )
-			&& !$user->isWatched( $title )
+			&& !(
+				$title->isWatchable() &&
+				MediaWikiServices::getInstance()->getPermissionManager()->userHasRight(
+					$user,
+					'viewmywatchlist'
+				) &&
+				MediaWikiServices::getInstance()->getWatchedItemStore()->isWatched(
+					$user,
+					$title
+				)
+			)
 		) {
 			WatchAction::doWatch( $title, $user );
 		}
