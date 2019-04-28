@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "594afdd7_35e85eb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5843
+      },
+      "writtenOn": "2019-04-28T09:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d54cb730_0906e927",
+      "revId": "bb5ffb7ca68d3b4ac6c07600a0dd77b1e634f90e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfa5d124_0bcba621",
         "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
         "patchSetId": 4
@@ -66,6 +84,30 @@
       "writtenOn": "2019-04-24T15:37:48Z",
       "side": 1,
       "message": "I\u0027m told these globals are bad and should not be used. The MediaWikiTestCase class provides convenience functions like $this-\u003egetTestUser()-\u003egetUser() that are probably helpful here. There is also a parameter on getTestUser( $groups ), which might be necessary here because only certain user groups are allowed to move files.",
+      "range": {
+        "startLine": 79,
+        "startChar": 9,
+        "endLine": 79,
+        "endChar": 16
+      },
+      "revId": "bb5ffb7ca68d3b4ac6c07600a0dd77b1e634f90e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8d0bbe3_9bcebb2b",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5843
+      },
+      "writtenOn": "2019-04-28T09:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfa5d124_0bcba621",
       "range": {
         "startLine": 79,
         "startChar": 9,
