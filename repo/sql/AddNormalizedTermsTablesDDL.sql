@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wbt_item_terms (
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/wbt_item_terms_item_id ON /*_*/wbt_item_terms (wbit_item_id);
-CREATE INDEX /*i*/wbt_item_terms_term_in_lang_id_item_id ON /*_*/wbt_item_terms (wbit_term_in_lang_id, wbit_item_id);
+CREATE UNIQUE INDEX /*i*/wbt_item_terms_term_in_lang_id_item_id ON /*_*/wbt_item_terms (wbit_term_in_lang_id, wbit_item_id);
 
 /*
 stores a record per term per property per language.
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wbt_property_terms (
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/wbt_property_terms_property_id ON /*_*/wbt_property_terms (wbpt_property_id);
-CREATE INDEX /*i*/wbt_property_terms_term_in_lang_id_property_id ON /*_*/wbt_property_terms (wbpt_term_in_lang_id, wbpt_property_id);
+CREATE UNIQUE INDEX /*i*/wbt_property_terms_term_in_lang_id_property_id ON /*_*/wbt_property_terms (wbpt_term_in_lang_id, wbpt_property_id);
 
 /*
 stores a record per term per text per language.
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wbt_term_in_lang (
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/wbt_term_in_lang_type_id_text_in ON /*_*/wbt_term_in_lang (wbtl_type_id);
-CREATE INDEX /*i*/wbt_term_in_lang_text_in_lang_id_lang_id ON /*_*/wbt_term_in_lang (wbtl_text_in_lang_id, wbtl_type_id);
+CREATE UNIQUE INDEX /*i*/wbt_term_in_lang_text_in_lang_id_lang_id ON /*_*/wbt_term_in_lang (wbtl_text_in_lang_id, wbtl_type_id);
 
 /*
 stores a record per term text per language.
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wbt_text_in_lang (
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/wbt_text_in_lang_language ON /*_*/wbt_text_in_lang (wbxl_language);
-CREATE INDEX /*i*/wbt_text_in_lang_text_id_text_id ON /*_*/wbt_text_in_lang (wbxl_text_id, wbxl_language);
+CREATE UNIQUE INDEX /*i*/wbt_text_in_lang_text_id_text_id ON /*_*/wbt_text_in_lang (wbxl_text_id, wbxl_language);
 
 /*
 stores a record per text value that are used in different terms
