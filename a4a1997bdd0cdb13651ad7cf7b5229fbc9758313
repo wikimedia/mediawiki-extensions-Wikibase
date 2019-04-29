@@ -50,6 +50,24 @@
       "revId": "a4a1997bdd0cdb13651ad7cf7b5229fbc9758313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83ee2204_3eed3bad",
+        "filename": "repo/tests/phpunit/includes/Validators/LabelDescriptionNotEqualValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-29T15:12:03Z",
+      "side": 1,
+      "message": "I’d actually like to change this so that, if the label and description are equal in more than one language, we get more than one error as well (one per language code), instead of the current fail-early behavior. But that would be a follow-up.",
+      "parentUuid": "c063b715_8cc42863",
+      "revId": "a4a1997bdd0cdb13651ad7cf7b5229fbc9758313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
