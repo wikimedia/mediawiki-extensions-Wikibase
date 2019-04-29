@@ -338,6 +338,19 @@ class WikiPageEntityStore implements EntityStore {
 			throw new StorageException( Status::newFatal( 'edit-conflict' ) );
 		}
 
+		if (
+			$flags & EDIT_NEW === 0 &&
+			$page->getRevision() &&
+			$entityContent->equals( $page->getRevision()->getRevisionRecord()->getContent( $slotRole ) )
+		) {
+			// The size and the sha1 of entity content revisions is not always stable given they
+			// depend on PHP serialization (size) and JSON serialization (sha1). These differences
+			// will make MediaWiki not detect the null-edit.
+			// Generally content equivalence is not strong enough for MediaWiki, but for us it should
+			// be sufficent.
+			return $page->getRevision()->getRevisionRecord();
+		}
+
 		/**
 		 * @note Make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
 		 * may cause the old content to be loaded from the database again. This may be necessary,
