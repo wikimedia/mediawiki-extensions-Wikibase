@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee1f9efe_28473e8a",
+        "filename": "repo/tests/phpunit/includes/Validators/LabelDescriptionNotEqualValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-29T15:04:25Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "a4a1997bdd0cdb13651ad7cf7b5229fbc9758313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90025755_259646df",
+        "filename": "repo/tests/phpunit/includes/Validators/LabelDescriptionNotEqualValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-29T15:04:25Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "a4a1997bdd0cdb13651ad7cf7b5229fbc9758313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c063b715_8cc42863",
+        "filename": "repo/tests/phpunit/includes/Validators/LabelDescriptionNotEqualValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-29T15:04:25Z",
+      "side": 1,
+      "message": "Why bother with an array of errors if we can only ever have one?",
+      "revId": "a4a1997bdd0cdb13651ad7cf7b5229fbc9758313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
