@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "884e0e6e_c9ae5338",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-04-29T20:06:02Z",
+      "side": 1,
+      "message": "This looks odd. Wouldn\u0027t it be much more straight forward to make each of these callbacks separate test functions? That would be a few more lines of code, but also a level of indirection less, making things easier to read.",
+      "revId": "0bd18570f33ac2b86d05fffe38b766dad6621d54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
