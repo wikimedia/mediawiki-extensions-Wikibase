@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c9e7f060_29218112",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 7038
+      },
+      "writtenOn": "2019-04-29T12:23:56Z",
+      "side": 1,
+      "message": "Note sure if my latest patch solves this but I hope so. :)",
+      "parentUuid": "21b49951_31f41b58",
+      "range": {
+        "startLine": 459,
+        "startChar": 79,
+        "endLine": 459,
+        "endChar": 85
+      },
+      "revId": "16e6093b4365a2f295b5826b402e3c5751d24588",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82d4942b_6ca54bd0",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 8
