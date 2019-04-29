@@ -5,7 +5,12 @@
 		]
 	},
 	"tooltip-t-wikibase": "Tautan gasan mahubungakan butir pada ruang panyimpanan data",
+	"wikibase-comment-update": "Item {{WBREPONAME}} baubah",
 	"wikibase-dataitem": "Item di {{WBREPONAME}}",
 	"wikibase-editlinks": "Babak interwiki",
-	"wikibase-editlinkstitle": "Babak tautan interwiki"
+	"wikibase-editlinkstitle": "Babak tautan interwiki",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Tampaiakan",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Babakan {{WBREPONAME}}"
 }

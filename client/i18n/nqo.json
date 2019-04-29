@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Lanciné.kounfantoh.fofana",
-			"Youssoufkadialy"
+			"Youssoufkadialy",
+			"Lancine.kounfantoh.fofana"
 		]
 	},
+	"tooltip-t-wikibase": "ߜߊ߲߬ߞߎ߲߬ ߦߋ߫ ߞߍ߫ ߟߊ߫ ߛߘߌ߬ߜߋ߲ ߡߍ߲ ߠߊ߫ ߓߟߏߡߟߊ ߞߣߐߘߐ ߟߎ߬ ߟߊ߫",
 	"wikibase-comment-update": "{{WBREPONAME}} ߛߎ߲ ߡߊߦߟߍ߬ߡߊ߲߫ ߘߊ߫",
 	"wikibase-dataitem": "{{WBREPONAME}} ߛߎ߲",
 	"wikibase-editlinks": "ߛߘߌ߬ߜߋ߲ ߡߊߦߟߍ߬ߡߊ߲߬",
