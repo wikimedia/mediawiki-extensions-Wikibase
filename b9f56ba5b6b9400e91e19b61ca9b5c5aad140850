@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "636b35a7_aec0cf81",
+        "filename": "lib/includes/Formatters/ItemPropertyIdHtmlLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-30T18:05:17Z",
+      "side": 1,
+      "message": "So this is a bit odd. When I first read this, I assumed that Title::isLocal() means “is the Title local to this current wiki?” But in fact, a “local” Title is one on the current wiki, or on an interwiki marked as “local” – including, for example, Wikidata on Commons (and vice versa).\n\nI suspect that, when Leszek added this code in I4cf8e2e78b, he might have made the same assumption, and (mistakenly) concluded that the difference between exists() and isKnown() didn’t matter in this case. Daniel’s comment in T157003#3002683 also supports this:\n\n\u003e EntityIdHtmlLinkFormatter needs to correctly handle the fact that … Title::exists() returns false for interwiki titles. So, the existence check should be skipped if the title is not local…\n\nI think the correct implementation of that fix would have been to guard the exists() check with !$title-\u003eisExternal() instead of $title-\u003eisLocal(). But using $title-\u003eisLocal() with isKnown() should also work, as far as I can tell.",
+      "revId": "b9f56ba5b6b9400e91e19b61ca9b5c5aad140850",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
