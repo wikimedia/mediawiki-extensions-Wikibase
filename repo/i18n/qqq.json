@@ -463,7 +463,7 @@
 	"wikibase-listdatavaluetypes-name-quantity": "Value type for data types like Quantity.",
 	"wikibase-listdatavaluetypes-name-time": "Value type for data types like Time.",
 	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Value type for data types like Item, Property.",
-	"wikibase-listdatavaluetypes-generalbody": "Message declaring wikidata data value. Takes one parameter, which is the data value.",
+	"wikibase-listdatavaluetypes-generalbody": "Message declaring the value type corresponding to a data value. Takes one parameter, which is the value type.",
 	"wikibase-concept-uri": "Label for a link in the toolbox on entity pages. Target of the link is the one and specific URI for the entity's concept (\"canonical concept link\").",
 	"wikibase-concept-uri-tooltip": "Text for the canonical concept link in toolbox on entity pages.",
 	"wikibase-pageimage-helptext": "Help message giving information about where data for page image has been retrieved from",
