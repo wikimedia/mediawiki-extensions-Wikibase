@@ -242,6 +242,9 @@ class WikiPageEntityStore implements EntityStore {
 		$this->assertCanStoreEntity( $entity->getId() );
 
 		$content = $this->contentFactory->newFromEntity( $entity );
+		if ( !$content->isValid() ) {
+			throw new StorageException( 'Cannot save invalid content.' );
+		}
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
 		$entityRevision = new EntityRevision(
