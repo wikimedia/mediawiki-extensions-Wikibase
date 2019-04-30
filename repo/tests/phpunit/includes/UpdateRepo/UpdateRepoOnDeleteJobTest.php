@@ -179,7 +179,8 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory()
+				new NullStatsdDataFactory(),
+				PHP_INT_MAX
 			)
 		);
 

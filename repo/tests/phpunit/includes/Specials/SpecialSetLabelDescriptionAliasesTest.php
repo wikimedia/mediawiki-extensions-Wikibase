@@ -76,7 +76,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory()
+				new NullStatsdDataFactory(),
+				PHP_INT_MAX
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),
@@ -400,7 +401,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				new EntityDiffer(),
 				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory()
+				new NullStatsdDataFactory(),
+				PHP_INT_MAX
 			),
 			$this->getFingerprintChangeOpsFactory(),
 			new StaticContentLanguages( self::$languageCodes ),

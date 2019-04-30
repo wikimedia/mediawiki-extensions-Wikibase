@@ -1938,7 +1938,8 @@ class WikibaseRepo {
 			$this->getEntityDiffer(),
 			$this->getEntityPatcher(),
 			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
-			MediaWikiServices::getInstance()->getStatsdDataFactory()
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			$this->getSettings()->getSetting( 'maxSerializedEntitySize' )
 		);
 	}
 
