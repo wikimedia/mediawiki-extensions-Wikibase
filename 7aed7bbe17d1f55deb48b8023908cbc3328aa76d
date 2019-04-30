@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0234f2bc_dea2dec9",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T09:23:55Z",
+      "side": 1,
+      "message": "It seems to me that it\u0027s still missing (php doesn\u0027t complain if an Exception is specified that it doesn\u0027t know)",
+      "parentUuid": "8c1e6246_7cc1aa93",
+      "range": {
+        "startLine": 702,
+        "startChar": 12,
+        "endLine": 702,
+        "endChar": 40
+      },
+      "revId": "7aed7bbe17d1f55deb48b8023908cbc3328aa76d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf0b7010_b5573db1",
         "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
         "patchSetId": 24
