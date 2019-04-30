@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dd8a5a7_541532f4",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-30T12:17:11Z",
+      "side": 1,
+      "message": "This test might fail if run on a wiki with a non-English content language. Is there a simple way to set something like ?uselang\u003dqqx for this test? (MediaWikiTestCase::setContentLang() sounds promising.)",
+      "revId": "fb10415212a07fb7e87878b934cccb444cf1f106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
