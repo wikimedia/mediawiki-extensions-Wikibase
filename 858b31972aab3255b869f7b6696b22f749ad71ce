@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "669ae3fd_d381e1c3",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T10:38:14Z",
+      "side": 0,
+      "message": "this is still used",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef6aeb3d_8983336e",
         "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
         "patchSetId": 23
