@@ -151,6 +151,24 @@
       "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26a5a0b7_eea7b75d",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntityFactory.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T08:09:36Z",
+      "side": 1,
+      "message": "I would add the size as an constructor argument and the pass it in via WikibaseRepo::newEditEntityFactory (where the settings should be conveniently available)",
+      "parentUuid": "68aff6bd_fe0e893b",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
