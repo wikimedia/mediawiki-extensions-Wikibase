@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2436af85_2081d228",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-30T11:57:20Z",
+      "side": 1,
+      "message": "Perhaps `Status::newFatal( \u0027invalid-content-data\u0027 )`? That message (“Invalid content data”, documented as “indicating that the page\u0027s content can not be saved because it is invalid”) seems fairly appropriate to me.",
+      "range": {
+        "startLine": 246,
+        "startChar": 31,
+        "endLine": 246,
+        "endChar": 61
+      },
+      "revId": "6c3e66265b73dea413b0b3dab9960bfa8df26905",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
