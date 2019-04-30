@@ -130,6 +130,7 @@
 	"wikibase-validator-sitelink-conflict": "Länken $1 används redan av objekt $2. Du kan ta bort den från $2 om den inte hör hemma där eller slå samman objekten om de är om exakt samma ämne.",
 	"wikibase-validator-label-conflict": "Egenskap $3 har redan etikett \"$1\" associerad med språkkod $2.",
 	"wikibase-validator-label-with-description-conflict": "Objekt $3 har redan etikett \"$1\" associerad med språkkod $2, med samma beskrivningstext.",
+	"wikibase-validator-label-equals-description": "Etiketten och beskrivningen för språkkoden $1 kan inte ha samma värde.",
 	"wikibase-validator-label-no-entityid": "Etiketten behöver inte vara ett giltigt entitets-ID.",
 	"wikibase-validator-illegal-file-chars": "Filnamn tillåts inte till innehålla tecken som kolon eller snedstreck",
 	"wikibase-validator-check-file-type": "Filändelse saknas.",

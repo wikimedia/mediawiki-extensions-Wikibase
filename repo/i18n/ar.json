@@ -142,6 +142,7 @@
 	"wikibase-validator-sitelink-conflict": "الوصلة $1 مستخدمة للعنصر $2. يمكنك إزالتها من $2 إن لم تكن مناسبة هناك أو أن تدمج العنصرين إذا كانا عن نفس الموضوع تماماً.",
 	"wikibase-validator-label-conflict": "الخاصية $3 لها وسم «$1» مرتبط برمز اللغة $2.",
 	"wikibase-validator-label-with-description-conflict": "العنصر $3 له وسم «$1» يرتبط برمز اللغة $2 باستخدام نفس نص الوصف.",
+	"wikibase-validator-label-equals-description": "لا يمكن أن تكون للتسمية والوصف لرمز اللغة $1 نفس القيمة.",
 	"wikibase-validator-label-no-entityid": "لا يجوز أن يكون الوسم عبارة عن معرف عنصر صالح.",
 	"wikibase-validator-illegal-file-chars": "أسماء الملفات غير مسموح لها أن تحتوي على أحرف مثل النقطتين أو الشرطات.",
 	"wikibase-validator-check-file-type": "امتداد الملف مفقود.",

@@ -54,7 +54,8 @@
 			"Tubezlob",
 			"Ayack",
 			"Envlh",
-			"Pamputt"
+			"Pamputt",
+			"Jhammock"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -169,6 +170,7 @@
 	"wikibase-validator-sitelink-conflict": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il n’a rien à faire là, ou fusionner les éléments s’ils concernent exactement le même sujet.",
 	"wikibase-validator-label-conflict": "La propriété $3 a déjà un libellé «&nbsp;$1&nbsp;» associé au code de langue $2.",
 	"wikibase-validator-label-with-description-conflict": "L’élément $3 a déjà le libellé «&nbsp;$1&nbsp;» associé au code de langue $2, qui utilise exactement le même texte descriptif.",
+	"wikibase-validator-label-equals-description": "Le libellé et la description pour le code de langue $1 ne peuvent pas avoir la même valeur.",
 	"wikibase-validator-label-no-entityid": "Le libellé ne doit pas être un identifiant d’entité valide.",
 	"wikibase-validator-illegal-file-chars": "Les noms de fichier ne doivent pas contenir certains caractères comme les virgules ou les barres obliques.",
 	"wikibase-validator-check-file-type": "L’extension du fichier est absente.",
@@ -420,6 +422,8 @@
 	"wikibase-listdatatypes-url-body": "Champ de données littéral pour une URL. Les URLs sont limitées aux protocoles pris en charge aussi pour les liens externes en wikitexte.",
 	"wikibase-listdatatypes-external-id-head": "Identifiant externe",
 	"wikibase-listdatatypes-external-id-body": "Champ de donnée littéral pour un identifiant externe. Les identifiants externes peuvent être liés automatiquement à une ressource autorisée pour l’affichage.",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "Texte monolingue",
+	"wikibase-listdatavaluetypes-name-quantity": "Quantité",
 	"wikibase-concept-uri": "URI du concept",
 	"wikibase-concept-uri-tooltip": "URI qui identifie le concept décrit par cet élément",
 	"wikibase-pageimage-helptext": "Cette image est prise d’après les relevés de cet élément. Vous pouvez ajuster l’image en modifiant le relevé.",

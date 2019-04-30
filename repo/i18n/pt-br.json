@@ -136,6 +136,7 @@
 	"wikibase-validator-sitelink-conflict": "O link $1 já é usado pelo item $2. Você pode removê-lo de $2 se não pertencer lá ou unir os artigos se forem sobre exatamente o mesmo tópico.",
 	"wikibase-validator-label-conflict": "Propriedade $3 já possui o rótulo \"$1\" associado com o código de idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "Item $3 já possui o rótulo \"$1\" associado ao código de idioma $2, usando o mesmo texto de descrição.",
+	"wikibase-validator-label-equals-description": "Rótulo e descrição para o código de idioma $1 não podem ter o mesmo valor.",
 	"wikibase-validator-label-no-entityid": "O rótulo não deve ser um ID de entidade válido.",
 	"wikibase-validator-illegal-file-chars": "Os nomes de arquivo não podem conter caracteres como dois pontos ou barras.",
 	"wikibase-validator-check-file-type": "Falta a extensão do ficheiro.",
