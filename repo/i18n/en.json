@@ -427,7 +427,7 @@
 	"wikibase-listdatavaluetypes-name-monolingualtext": "monolingual text",
 	"wikibase-listdatavaluetypes-name-quantity": "quantity",
 	"wikibase-listdatavaluetypes-name-time": "time",
-	"wikibase-listdatavaluetypes-name-wikibase-entityid": "wikibase entity id",
+	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Wikibase entity id",
 	"wikibase-listdatavaluetypes-generalbody": "The value type for this data type is <code>$1</code>.",
 	"wikibase-concept-uri": "Concept URI",
 	"wikibase-concept-uri-tooltip": "URI that identifies the concept described by this Item",
