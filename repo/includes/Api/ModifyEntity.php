@@ -7,6 +7,7 @@ use ApiMain;
 use LogicException;
 use MWContentSerializationException;
 use Status;
+use UnexpectedValueException;
 use User;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
@@ -311,6 +312,10 @@ abstract class ModifyEntity extends ApiBase {
 		} catch ( MWContentSerializationException $ex ) {
 			// This happens if the $entity created via modifyEntity() above (possibly cleared
 			// before) is not sufficiently initialized and failed serialization.
+			$this->errorReporter->dieError( $ex->getMessage(), 'failed-save' );
+		} catch ( UnexpectedValueException $ex ) {
+			// This happens if the $entity created via modifyEntity() above (possibly cleared
+			// before) is not valid.
 			$this->errorReporter->dieError( $ex->getMessage(), 'failed-save' );
 		}
 
