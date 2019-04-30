@@ -16,6 +16,24 @@
       "revId": "0bd18570f33ac2b86d05fffe38b766dad6621d54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36f43b65_a90ebb80",
+        "filename": "repo/tests/phpunit/includes/ItemMoveTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5843
+      },
+      "writtenOn": "2019-04-30T09:27:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "884e0e6e_c9ae5338",
+      "revId": "0bd18570f33ac2b86d05fffe38b766dad6621d54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
