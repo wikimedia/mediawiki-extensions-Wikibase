@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "67c380ad_65f797ab",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c2e3077_7f031951",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "669c1793_23dd6e3f",
         "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
         "patchSetId": 23
@@ -33,6 +51,24 @@
       "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "782ffd32_2c9c9f51",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "669c1793_23dd6e3f",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "6cdc5b12_8e47c8ad",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a43a88b2_6ac151a7",
+      "range": {
+        "startLine": 702,
+        "startChar": 12,
+        "endLine": 702,
+        "endChar": 35
+      },
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0259a36_0b95ab64",
         "filename": "repo/includes/EditEntity/MediawikiEditEntityFactory.php",
         "patchSetId": 23
@@ -70,6 +130,24 @@
       "writtenOn": "2019-04-30T05:19:26Z",
       "side": 1,
       "message": "I think the setting value should be injected.",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68aff6bd_fe0e893b",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntityFactory.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 1,
+      "message": "I could not come up with a sensible way to do this. Do you have an idea? I\u0027m not sure where to initialise the settings object to be able to inject only this specific setting value.\n\nOr do you mean to leave this like it is but to inject an int and assign it to $repoSettings[\u0027maxSerializedEntitySize\u0027]?",
+      "parentUuid": "e0259a36_0b95ab64",
       "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b7babbac_5f32f059",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 0,
+      "message": "I\u0027m not sure why it\u0027s showing this as changed now, this was changed already in one of the earlier patches. I think before I made the changes in attemptSave I tried to catch the exception thrown in 155 so it won\u0027t be logged. This was before I realised the exception is actually thrown in encodeEntityContentData. I will revert this",
+      "parentUuid": "a5ab1001_1728673c",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef6aeb3d_8983336e",
         "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
         "patchSetId": 23
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "e4be6063_30a098a3",
+        "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 0,
+      "message": "er... not sure where this came from",
+      "parentUuid": "ef6aeb3d_8983336e",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3af6e1b3_2ea3cfca",
         "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
         "patchSetId": 23
@@ -47,6 +83,24 @@
       "writtenOn": "2019-04-30T05:19:26Z",
       "side": 0,
       "message": "Why did you remove this? AFAICT the behavior is unchanged (see EntityContentDataCodec::decodeEntity)",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71959af6_369782ec",
+        "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-04-30T08:04:37Z",
+      "side": 0,
+      "message": "Not sure when I removed this. Seemed to have gone through some sort of refactoring spree",
+      "parentUuid": "3af6e1b3_2ea3cfca",
       "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
