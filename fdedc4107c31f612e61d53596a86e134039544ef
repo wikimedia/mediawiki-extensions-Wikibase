@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f27c285_7590b5fc",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T16:28:33Z",
+      "side": 1,
+      "message": "This needs to be sizeParam… I confused the Language and the Message class when I suggested this :S",
+      "range": {
+        "startLine": 704,
+        "startChar": 71,
+        "endLine": 704,
+        "endChar": 81
+      },
+      "revId": "fdedc4107c31f612e61d53596a86e134039544ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd06461c_f7832671",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T16:28:33Z",
+      "side": 1,
+      "message": "This needs to be sizeParam",
+      "range": {
+        "startLine": 738,
+        "startChar": 71,
+        "endLine": 738,
+        "endChar": 81
+      },
+      "revId": "fdedc4107c31f612e61d53596a86e134039544ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
