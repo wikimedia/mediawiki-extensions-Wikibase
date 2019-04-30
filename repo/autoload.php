@@ -395,6 +395,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Validators\\AlternativeValidator' => __DIR__ . '/includes/Validators/AlternativeValidator.php',
 	'Wikibase\\Repo\\Validators\\CommonsMediaExistsValidator' => __DIR__ . '/includes/Validators/CommonsMediaExistsValidator.php',
 	'Wikibase\\Repo\\Validators\\CompositeEntityValidator' => __DIR__ . '/includes/Validators/CompositeEntityValidator.php',
+	'Wikibase\\Repo\\Validators\\CompositeFingerprintValidator' => __DIR__ . '/includes/Validators/CompositeFingerprintValidator.php',
 	'Wikibase\\Repo\\Validators\\CompositeValidator' => __DIR__ . '/includes/Validators/CompositeValidator.php',
 	'Wikibase\\Repo\\Validators\\DataFieldValidator' => __DIR__ . '/includes/Validators/DataFieldValidator.php',
 	'Wikibase\\Repo\\Validators\\DataValueValidator' => __DIR__ . '/includes/Validators/DataValueValidator.php',
