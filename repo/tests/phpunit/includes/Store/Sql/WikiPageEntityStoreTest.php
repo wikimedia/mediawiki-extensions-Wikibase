@@ -25,6 +25,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\IdGenerator;
+use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -347,6 +348,50 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
+	}
+
+	public function testSaveEntity_invalidContent() {
+		/** @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
+		$store = TestingAccessWrapper::newFromObject( $store );
+
+		$user = $GLOBALS['wgUser'];
+
+		$item = new Item();
+		$invalidItemContent = $this->getMock( ItemContent::class );
+		$invalidItemContent->expects( $this->once() )
+			->method( 'isValid' )
+			->will( $this->returnValue( false ) );
+
+		$contentFactory = $this->getMockBuilder( EntityContentFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$contentFactory->expects( $this->once() )
+			->method( 'getContentHandlerForType' )
+			->with( Item::ENTITY_TYPE )
+			->will(
+				$this->returnValue(
+					$store->contentFactory->getContentHandlerForType( Item::ENTITY_TYPE )
+				)
+			);
+
+		$contentFactory->expects( $this->once() )
+			->method( 'newFromEntity' )
+			->with( $item )
+			->will( $this->returnValue( $invalidItemContent ) );
+
+		$store->contentFactory = $contentFactory;
+
+		try {
+			$store->saveEntity( $item, 'create one', $user, EDIT_NEW );
+		} catch( StorageException $e ) {
+			$status = $e->getStatus();
+			$this->assertInstanceOf( Status::class, $status );
+			$this->assertTrue( $status->hasMessage( 'invalid-content-data' ) );
+			return;
+		}
+		$this->fail( 'Expected StorageException to be thrown.' );
 	}
 
 	public function provideSaveEntityError() {
