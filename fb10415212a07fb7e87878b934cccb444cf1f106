@@ -34,6 +34,24 @@
       "revId": "fb10415212a07fb7e87878b934cccb444cf1f106",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "892c8267_5e0508eb",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-04-30T12:18:51Z",
+      "side": 1,
+      "message": "Sure, that also works.",
+      "parentUuid": "928ba93c_4580bd69",
+      "revId": "fb10415212a07fb7e87878b934cccb444cf1f106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
