@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5ab1001_1728673c",
+        "filename": "lib/includes/Store/EntityContentDataCodec.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 0,
+      "message": "why did you remove this?",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6aeb3d_8983336e",
+        "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 0,
+      "message": "why did you remove this? Seems unrelated to me",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3af6e1b3_2ea3cfca",
+        "filename": "lib/tests/phpunit/Store/EntityContentDataCodecTest.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 0,
+      "message": "Why did you remove this? AFAICT the behavior is unchanged (see EntityContentDataCodec::decodeEntity)",
+      "revId": "858b31972aab3255b869f7b6696b22f749ad71ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

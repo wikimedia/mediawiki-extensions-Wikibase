@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c2e3077_7f031951",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 1,
+      "message": "copy and paste error",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "669c1793_23dd6e3f",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 1,
+      "message": "Comment should say which unit this is supposed to be in. Also the order here doesn\u0027t match the actual order in the function declaration",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a43a88b2_6ac151a7",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntity.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 1,
+      "message": "This should catch the new exception only",
+      "range": {
+        "startLine": 702,
+        "startChar": 12,
+        "endLine": 702,
+        "endChar": 35
+      },
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0259a36_0b95ab64",
+        "filename": "repo/includes/EditEntity/MediawikiEditEntityFactory.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-04-30T05:19:26Z",
+      "side": 1,
+      "message": "I think the setting value should be injected.",
+      "revId": "4b38afaf51789ad792fdad002eebaa781cb8ccfc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
