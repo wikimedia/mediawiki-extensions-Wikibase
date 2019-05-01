@@ -69,7 +69,7 @@ class RebuildPropertyTerms extends Maintenance {
 			$this->getReporter(),
 			$this->getErrorReporter(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$this->wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
+			$this->wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
 			(int)$this->getOption( 'batch-size', 250 ),
 			(int)$this->getOption( 'sleep', 10 )
 		);

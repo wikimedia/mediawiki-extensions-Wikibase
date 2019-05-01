@@ -16,6 +16,8 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
@@ -1006,6 +1008,10 @@ class WikibaseRepo {
 	 */
 	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED ) {
 		return $this->getStore()->getEntityLookup( $cache );
+	}
+
+	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
+		return new LegacyAdapterPropertyLookup( $this->getEntityLookup( $cacheMode ) );
 	}
 
 	/**
