@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -216,7 +215,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 * Gets a "lagged" database connection: We always leave out the first row on select.
 	 */
 	private function getLaggedDatabase( IDatabase $realDB, $selectCount, $selectRowCount ) {
-		$db = $this->getMockBuilder( Database::class )
+		$db = $this->getMockBuilder( IDatabase::class )
 			->disableOriginalConstructor()
 			->setMethods( [ 'select', 'selectRow' ] )
 			->setProxyTarget( $realDB )
