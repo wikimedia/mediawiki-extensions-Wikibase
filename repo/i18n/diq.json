@@ -108,6 +108,8 @@
 	"wikibase-listdatatypes-string-head": "La",
 	"wikibase-listdatatypes-time-head": "Zeman",
 	"wikibase-listdatatypes-url-head": "GRE",
+	"wikibase-listdatavaluetypes-name-quantity": "miqdar",
+	"wikibase-listdatavaluetypes-name-time": "wext",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Obceyê Wikibase",
 	"content-model-wikibase-property": "Wikibase xısusiyet",

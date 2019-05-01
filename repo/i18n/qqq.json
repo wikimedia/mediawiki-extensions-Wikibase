@@ -461,7 +461,7 @@
 	"wikibase-listdatavaluetypes-name-globecoordinate": "Value type for data types like Globe coordinate.",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "Value type for data types like Monolingual text.",
 	"wikibase-listdatavaluetypes-name-quantity": "Value type for data types like Quantity.",
-	"wikibase-listdatavaluetypes-name-time": "Value type for data types like Time.",
+	"wikibase-listdatavaluetypes-name-time": "Value type for data types like Time.\n{{Identical|Time}}",
 	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Value type for data types like Item, Property.",
 	"wikibase-listdatavaluetypes-generalbody": "Message declaring the value type corresponding to a data value. Takes one parameter, which is the value type.",
 	"wikibase-concept-uri": "Label for a link in the toolbox on entity pages. Target of the link is the one and specific URI for the entity's concept (\"canonical concept link\").",
