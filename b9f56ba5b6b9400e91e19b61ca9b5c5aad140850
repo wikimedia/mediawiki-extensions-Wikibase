@@ -16,6 +16,24 @@
       "revId": "b9f56ba5b6b9400e91e19b61ca9b5c5aad140850",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3be6d68_215f6361",
+        "filename": "lib/includes/Formatters/ItemPropertyIdHtmlLinkFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-02T21:07:27Z",
+      "side": 1,
+      "message": "Wouldn\u0027t a simple !$title-\u003eisKnown() also suffice?",
+      "parentUuid": "636b35a7_aec0cf81",
+      "revId": "b9f56ba5b6b9400e91e19b61ca9b5c5aad140850",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
