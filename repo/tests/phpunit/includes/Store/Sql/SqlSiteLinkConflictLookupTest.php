@@ -9,6 +9,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\WikibaseSettings;
 
 /**
@@ -33,7 +34,7 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 
 		$this->tablesUsed[] = 'wb_items_per_site';
 
-		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false, $this->getEntityIdLookup(), 'wikidata' );
 
 		$siteLinks = new SiteLinkList( [
 			new SiteLink( 'dewiki', 'Katze' ),
@@ -44,6 +45,19 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q9' ), null, $siteLinks );
 
 		$siteLinkTable->saveLinksOfItem( $item );
+	}
+
+	/**
+	 * @return EntityIdLookup
+	 */
+	private function getEntityIdLookup() {
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getEntityIdForTitle' )
+			->willReturn( null );
+
+		return $entityIdLookup;
 	}
 
 	public function testGetConflictsForItem() {
