@@ -120,6 +120,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\ElasticTermLookup' => __DIR__ . '/includes/Store/Elastic/ElasticTermLookup.php',
 	'Wikibase\\Lib\\Store\\EntityByLinkedTitleLookup' => __DIR__ . '/includes/Store/EntityByLinkedTitleLookup.php',
 	'Wikibase\\Lib\\Store\\EntityContentDataCodec' => __DIR__ . '/includes/Store/EntityContentDataCodec.php',
+	'Wikibase\\Lib\\Store\\EntityContentTooBigException' => __DIR__ . '/includes/Store/EntityContentTooBigException.php',
 	'Wikibase\\Lib\\Store\\EntityInfo' => __DIR__ . '/includes/Store/EntityInfo.php',
 	'Wikibase\\Lib\\Store\\EntityInfoBuilder' => __DIR__ . '/includes/Store/EntityInfoBuilder.php',
 	'Wikibase\\Lib\\Store\\EntityInfoTermLookup' => __DIR__ . '/includes/Store/EntityInfoTermLookup.php',
