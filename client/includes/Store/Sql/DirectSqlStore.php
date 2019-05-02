@@ -325,7 +325,7 @@ class DirectSqlStore implements ClientStore {
 	public function getSiteLinkLookup() {
 		if ( $this->siteLinkLookup === null ) {
 			$this->siteLinkLookup = new CachingSiteLinkLookup(
-				new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki ),
+				new SiteLinkTable( 'wb_items_per_site', true, $this->getEntityIdLookup(), wfWikiID(), $this->repoWiki ),
 				new HashBagOStuff()
 			);
 		}

@@ -3,10 +3,12 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use Title;
 use TitleValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\WikibaseSettings;
 
 /**
@@ -34,7 +36,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
 
-		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false, $this->getEntityIdLookup(), 'wikidata' );
 		$this->tablesUsed[] = 'wb_items_per_site';
 	}
 
@@ -57,6 +59,21 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$items[] = $item;
 
 		return [ $items ];
+	}
+
+	/**
+	 * @return EntityIdLookup
+	 */
+	private function getEntityIdLookup() {
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getEntityIdForTitle' )
+			->willReturnCallback( function ( Title $title ) {
+				return new ItemId( $title->getText() );
+			} );
+
+		return $entityIdLookup;
 	}
 
 	/**
@@ -157,6 +174,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 				$this->siteLinkTable->getEntityIdForLinkedTitle( $siteLink->getSiteId(), $siteLink->getPageName() )
 			);
 		}
+		$this->assertEquals(
+			$item->getId(),
+			$this->siteLinkTable->getEntityIdForLinkedTitle( 'wikidata', 'Q1' )
+		);
 	}
 
 	/**
@@ -164,8 +185,8 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 */
 	public function testDeleteLinksOfItem( Item $item ) {
 		$this->siteLinkTable->saveLinksOfItem( $item );
-		$this->assertTrue(
-			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
+		$this->assertNotFalse(
+			$this->siteLinkTable->deleteLinksOfItem( $item->getId() )
 		);
 
 		$this->assertEmpty(
