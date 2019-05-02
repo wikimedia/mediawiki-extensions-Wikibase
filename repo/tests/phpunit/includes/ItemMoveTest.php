@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
+use MovePage;
 use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -73,44 +74,78 @@ class ItemMoveTest extends \MediaWikiTestCase {
 
 	/**
 	 * Tests @see WikibaseItem::getIdForSiteLink
+	 * XXX That method doesn't exist
+	 *
+	 * Moving a regular page into data NS onto an existing item
 	 */
-	public function testMovePrevention() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
+	public function testMovePreventionRegularToExistingData() {
+		$mp = new MovePage( $this->page->getTitle(), $this->itemTitle );
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		// Moving a regular page into data NS onto an existing item
-		$title = $this->itemTitle;
-		$this->assertInstanceOf( Title::class, $title ); // sanity check
+	/**
+	 * Moving a regular page into data NS to an invalid location
+	 * @todo test other types of entities too!
+	 */
+	public function testMovePreventionRegularToInvalidData() {
+		$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+			->getEntityNamespace( 'item' );
+		$to = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
+		$mp = new MovePage( $this->page->getTitle(), $to );
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+	/**
+	 * Moving a regular page into data NS to an empty (but valid) location
+	 */
+	public function testMovePreventionRegularToValidData() {
+		$mp = new MovePage(
+			$this->page->getTitle(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+				->getTitleForId( new ItemId( 'Q42' ) )
+		);
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
-		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( 'item' );
+	/**
+	 * Moving item page out of data NS onto an existing page
+	 */
+	public function testMovePreventionDataToExistingRegular() {
+		$mp = new MovePage( $this->itemTitle, $this->page->getTitle() );
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		// Moving a regular page into data NS to an invalid location
-		// @todo: test other types of entities too!
-		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+	/**
+	 * Moving item page out of data NS onto a non-existing page
+	 */
+	public function testMovePreventionDataToNonExistingRegular() {
+		$mp = new MovePage( $this->itemTitle, Title::newFromText( 'wbmovetestitem' ) );
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		// Moving a regular page into data NS to an empty (but valid) location
-		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
+	/**
+	 * Moving item to an invalid location in the data NS
+	 */
+	public function testMovePreventionDataToInvalidData() {
+		$itemNamespace = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()
+			->getEntityNamespace( 'item' );
+		$mp = new MovePage(
+			$this->itemTitle,
+			Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace )
+		);
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
+	}
 
-		// Moving item page out of data NS onto an existing page
-		$title = $this->page->getTitle();
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
-
-		// Moving item page out of data NS onto a non-existing page
-		$title = Title::newFromText( 'wbmovetestitem' );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
-
-		// Moving item to an invalid location in the data NS
-		$title = Title::newFromText( $this->page->getTitle()->getText(), $itemNamespace );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
-
-		// Moving item to an valid location in the data NS
-		$title = $titleLookup->getTitleForId( new ItemId( 'Q42' ) );
-		$this->assertFalse( $this->itemTitle->moveTo( $title ) === true );
+	/**
+	 * Moving item to an valid location in the data NS
+	 */
+	public function testMovePreventionDataToValidData() {
+		$mp = new MovePage(
+			$this->itemTitle,
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+				->getTitleForId( new ItemId( 'Q42' ) )
+		);
+		$this->assertFalse( $mp->move( $this->getTestUser()->getUser() )->isOK() );
 	}
 
 }
