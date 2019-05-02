@@ -7,11 +7,13 @@ use InvalidArgumentException;
 use MediaWiki\Logger\LoggerFactory;
 use MWException;
 use Psr\Log\LoggerInterface;
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkStore;
+use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 
@@ -39,16 +41,25 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @var bool
 	 */
 	protected $readonly;
+	/**
+	 * @var string
+	 */
+	private $localWiki;
+	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
 
 	/**
 	 * @param string $table The table to use for the sitelinks
 	 * @param bool $readonly Whether the table can be modified.
+	 * @param EntityIdLookup $entityIdLookup
+	 * @param string $localWiki Local wiki name for which IDs can be resolved directly
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
-	 *
 	 * @throws MWException
 	 */
-	public function __construct( $table, $readonly, $wiki = false ) {
+	public function __construct( $table, $readonly, EntityIdLookup $entityIdLookup, $localWiki, $wiki = false) {
 		if ( !is_string( $table ) ) {
 			throw new MWException( '$table must be a string.' );
 		}
@@ -61,6 +72,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$this->table = $table;
 		$this->readonly = $readonly;
+		$this->localWiki = $localWiki;
+		$this->entityIdLookup = $entityIdLookup;
 		// TODO: Inject
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 
@@ -396,6 +409,9 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return EntityId|null
 	 */
 	public function getEntityIdForLinkedTitle( $globalSiteId, $pageTitle ) {
+		if ( $globalSiteId === $this->localWiki ) {
+			return $this->entityIdLookup->getEntityIdForTitle( Title::newFromText( $pageTitle ) );
+		}
 		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
