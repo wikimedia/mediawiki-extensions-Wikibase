@@ -1,0 +1,8 @@
+Code-Review+1: Daniel Kinzler <dkinzler@wikimedia.org>
+Code-Review+2: Lucas Werkmeister (WMDE) <lucas.werkmeister@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: Daniel Kinzler <dkinzler@wikimedia.org>
+Submitted-at: Thu, 02 May 2019 17:49:09 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/504545
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
