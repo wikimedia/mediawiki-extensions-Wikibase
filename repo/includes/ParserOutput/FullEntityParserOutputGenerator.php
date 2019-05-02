@@ -16,6 +16,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewPlaceHolderEmitter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Creates the parser output for an entity.
@@ -146,7 +147,10 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$updaterCollection = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
 		$updaterCollection->updateParserOutput( $entity );
 
-		$configVars = $this->configBuilder->build( $entity );
+		$configVars = $this->configBuilder->build(
+			$entity,
+			WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'string-limits' )['multilang']['length']
+		);
 		$parserOutput->addJsConfigVars( $configVars );
 
 		$entityMetaTagsCreator = $this->entityMetaTagsCreatorFactory->newEntityMetaTags( $entity->getType(), $this->language );

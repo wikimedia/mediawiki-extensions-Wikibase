@@ -41,12 +41,13 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	public function testBuildConfigItem() {
+		$multiLingualStringLimit = 23;
 		$item = new Item( new ItemId( 'Q5881' ) );
 		$this->addLabels( $item );
 		$mainSnakPropertyId = $this->addStatements( $item );
 
 		$configBuilder = new ParserOutputJsConfigBuilder( $this->newEntitySerializer() );
-		$configVars = $configBuilder->build( $item );
+		$configVars = $configBuilder->build( $item, $multiLingualStringLimit );
 
 		$this->assertWbEntityId( 'Q5881', $configVars );
 
@@ -59,15 +60,18 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 			$item,
 			json_decode( $configVars['wbEntity'], true )
 		);
+
+		$this->assertWbMultiLingualStringLimit( $multiLingualStringLimit, $configVars );
 	}
 
 	public function testBuildConfigProperty() {
 		$property = new Property( new PropertyId( 'P330' ), null, 'string' );
+		$multiLingualStringLimit = 23;
 		$this->addLabels( $property );
 		$mainSnakPropertyId = $this->addStatements( $property );
 
 		$configBuilder = new ParserOutputJsConfigBuilder( $this->newEntitySerializer() );
-		$configVars = $configBuilder->build( $property );
+		$configVars = $configBuilder->build( $property, $multiLingualStringLimit );
 
 		$this->assertWbEntityId( 'P330', $configVars );
 
@@ -80,6 +84,8 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 			$property,
 			json_decode( $configVars['wbEntity'], true )
 		);
+
+		$this->assertWbMultiLingualStringLimit( $multiLingualStringLimit, $configVars );
 	}
 
 	public function assertWbEntityId( $expectedId, array $configVars ) {
@@ -109,6 +115,14 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 		$this->assertTrue(
 			$unserializedEntity->equals( $entity ),
 			'unserialized entity equals entity'
+		);
+	}
+
+	public function assertWbMultiLingualStringLimit( $expectedLimit, array $configVars ) {
+		$this->assertEquals(
+			$expectedLimit,
+			$configVars[ 'wbMultiLingualStringLimit' ],
+			'wbMultiLingualStringLimit'
 		);
 	}
 
