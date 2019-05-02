@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d2e6b40_c8c3aac8",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-05-02T13:53:38Z",
+      "side": 1,
+      "message": "This doesn\u0027t fit any more with this change. An interface does not have a constructor, and is not abstract. I believe some calls can be removed here, if not all. Calling createMock() instead of the mock builder is probably enough.",
+      "range": {
+        "startLine": 219,
+        "startChar": 5,
+        "endLine": 222,
+        "endChar": 28
+      },
+      "revId": "ba0a5ad52e45a7488c0a18421748c701eec7d1ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
