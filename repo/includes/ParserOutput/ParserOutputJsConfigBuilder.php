@@ -22,10 +22,11 @@ class ParserOutputJsConfigBuilder {
 
 	/**
 	 * @param EntityDocument $entity
+	 * @param integer stringLimit
 	 *
 	 * @return array
 	 */
-	public function build( EntityDocument $entity ) {
+	public function build( EntityDocument $entity, $stringLimit ) {
 		global $wgEditSubmitButtonLabelPublish;
 
 		$entityId = $entity->getId();
@@ -40,6 +41,7 @@ class ParserOutputJsConfigBuilder {
 			'wbEntityId' => $entityId,
 			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity ) ),
 			'wgEditSubmitButtonLabelPublish' => $wgEditSubmitButtonLabelPublish,
+			'wbMultiLingualStringLimit' => $stringLimit,
 		];
 
 		return $configVars;
