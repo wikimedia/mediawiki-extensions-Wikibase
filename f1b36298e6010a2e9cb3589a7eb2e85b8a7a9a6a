@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23169573_44c7d71e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T15:49:14Z",
+      "side": 1,
+      "message": "I would like to see some justification for this in the commit message – it’s not clear to me from the linked task why this change is necessary.",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83622913_a32d0482",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T15:49:14Z",
+      "side": 1,
+      "message": "s/Task/Bug/",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e7b2dac_b33d4f31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T15:49:14Z",
+      "side": 1,
+      "message": "this blank line should be removed so that gerritbot will link to the change on Phabricator",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ca9dcf_76a1fa20",
+        "filename": "repo/includes/Store/PropertyTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T15:49:14Z",
+      "side": 1,
+      "message": "What’s the type of this parameter now? If it no longer has a static type hint, it needs a PHPDoc comment.",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99175a17_5c72ddfa",
+        "filename": "repo/tests/phpunit/includes/Store/PropertyTermsRebuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T15:49:14Z",
+      "side": 1,
+      "message": "shouldn’t this say “P2” if non-existent properties are skipped?",
+      "range": {
+        "startLine": 171,
+        "startChar": 48,
+        "endLine": 171,
+        "endChar": 50
+      },
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
