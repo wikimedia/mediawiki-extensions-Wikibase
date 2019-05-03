@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -25,11 +25,6 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
 
 	/**
 	 * @var string[]
@@ -54,25 +49,29 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	 * @var int|null
 	 */
 	private $cutoffPosition = null;
+	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
 
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdLookup $entityIdLookup
 	 * @param string[] $entityTypes The desired entity types, or empty array for any type.
 	 * @param string $redirectMode A EntityIdPager::XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
-		EntityIdParser $entityIdParser,
+		EntityIdLookup $entityIdLookup,
 		array $entityTypes = [],
 		$redirectMode = EntityIdPager::NO_REDIRECTS
 	) {
 		Assert::parameterElementType( 'string', $entityTypes, '$entityTypes' );
 
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->entityIdParser = $entityIdParser;
 		$this->entityTypes = $entityTypes;
 		$this->redirectMode = $redirectMode;
+		$this->entityIdLookup = $entityIdLookup;
 	}
 
 	/**
@@ -105,7 +104,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		$dbr = wfGetDB( DB_REPLICA );
 		$rows = $dbr->select(
 			$tables,
-			[ 'page_id', 'page_title' ],
+			[ 'page_id', 'page_title', 'page_namespace' ],
 			$this->getWhere( $this->position ),
 			__METHOD__,
 			[
@@ -207,11 +206,11 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		$position = null;
 
 		foreach ( $rows as $row ) {
-			try {
-				$position = (int)$row->page_id;
-				$entityIds[] = $this->entityIdParser->parse( $row->page_title );
-			} catch ( EntityIdParsingException $ex ) {
-				wfLogWarning( 'Unexpected entity id serialization "' . $row->page_title . '"' );
+			$position = (int)$row->page_id;
+			$title = Title::newFromRow( $row );
+			$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
+			if ( $entityId ) {
+				$entityIds[] = $entityId;
 			}
 		}
 

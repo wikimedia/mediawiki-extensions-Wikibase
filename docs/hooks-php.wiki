@@ -59,6 +59,13 @@ This file describes hooks defined by the Wikibase extensions. See docs/hooks.txt
 :; &$map
 :: An associative array mapping contexts ('term', 'monolingualtext', extension-specific…) to ContentLanguage objects.
 
+; 'GetEntityContentModelForTitle'
+: Called by EntityContentFactory to see what is the entity content type of the Title. Extensions can override it so entity content type does not equal page content type.
+:; $title
+:: Title object for the page
+:; &$contentType
+:: Content type for the page. Extensions can override this.
+
 == Client ==
 
 ; 'WikibaseClientDataTypes'
