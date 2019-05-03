@@ -59,6 +59,11 @@ class MediawikiEditEntityFactory {
 	 */
 	private $stats;
 
+	/**
+	 * @var int
+	 */
+	private $maxSerializedEntitySize;
+
 	public function __construct(
 		EntityTitleStoreLookup $titleLookup,
 		EntityRevisionLookup $entityLookup,
@@ -67,7 +72,8 @@ class MediawikiEditEntityFactory {
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
 		EditFilterHookRunner $editFilterHookRunner,
-		StatsdDataFactoryInterface $statsdDataFactory
+		StatsdDataFactoryInterface $statsdDataFactory,
+		$maxSerializedEntitySize
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->entityRevisionLookup = $entityLookup;
@@ -77,6 +83,7 @@ class MediawikiEditEntityFactory {
 		$this->entityPatcher = $entityPatcher;
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->stats = $statsdDataFactory;
+		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 	}
 
 	/**
@@ -118,7 +125,7 @@ class MediawikiEditEntityFactory {
 					$this->stats,
 					$statsTimingPrefix . '.EditFilterHookRunner'
 				),
-				$repoSettings['maxSerializedEntitySize'],
+				$this->maxSerializedEntitySize,
 				$baseRevId,
 				$allowMasterConnection
 			),
