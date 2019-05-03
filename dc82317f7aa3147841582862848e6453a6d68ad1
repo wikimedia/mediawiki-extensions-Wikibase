@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f4266d7_04ce244b",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiDatabaseNormalizedTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:47:27Z",
+      "side": 1,
+      "message": "not used in this class as far as I can tell",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 43
+      },
+      "revId": "dc82317f7aa3147841582862848e6453a6d68ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b292e2af_8e413dbe",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiDatabaseNormalizedTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:47:27Z",
+      "side": 1,
+      "message": "Minor nitpick: The usual names for these are $dbw and $dbr (see https://www.mediawiki.org/wiki/Manual:Database_access#Database_Abstraction_Layer). Not sure if the improved readability is worth the nonstandard names.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "dc82317f7aa3147841582862848e6453a6d68ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0605b774_f12926ae",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiDatabaseNormalizedTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:47:27Z",
+      "side": 1,
+      "message": "Is there a reason why the table name is a constant but the columns aren’t?",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 13
+      },
+      "revId": "dc82317f7aa3147841582862848e6453a6d68ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
