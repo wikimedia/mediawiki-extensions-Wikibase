@@ -160,7 +160,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			new BasicEntityIdParser()
+			$wikibaseRepo->getEntityIdLookup()
 		);
 
 		$builder = new TermSqlIndexBuilder(
