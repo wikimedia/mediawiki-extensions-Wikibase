@@ -156,6 +156,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\SiteLinkStore' => __DIR__ . '/includes/Store/SiteLinkStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\EntityChangeLookup' => __DIR__ . '/includes/Store/Sql/EntityChangeLookup.php',
 	'Wikibase\\Lib\\Store\\Sql\\EntityIdLocalPartPageTableEntityQuery' => __DIR__ . '/includes/Store/Sql/EntityIdLocalPartPageTableEntityQuery.php',
+	'Wikibase\\Lib\\Store\\Sql\\MediaWikiTermStore\\MediaWikiNormalizedTermCleaner' => __DIR__ . '/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php',
 	'Wikibase\\Lib\\Store\\Sql\\PageTableEntityQuery' => __DIR__ . '/includes/Store/Sql/PageTableEntityQuery.php',
 	'Wikibase\\Lib\\Store\\Sql\\PageTableEntityQueryBase' => __DIR__ . '/includes/Store/Sql/PageTableEntityQueryBase.php',
 	'Wikibase\\Lib\\Store\\Sql\\PrefetchingWikiPageEntityMetaDataAccessor' => __DIR__ . '/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php',
