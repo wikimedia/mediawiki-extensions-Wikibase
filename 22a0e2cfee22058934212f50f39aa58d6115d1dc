@@ -22,6 +22,30 @@
       "revId": "22a0e2cfee22058934212f50f39aa58d6115d1dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b7a2a8_83b4cf2c",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-03T09:38:21Z",
+      "side": 1,
+      "message": "I tried this (and also tried to get it working setting the original WikibaseServices as proxy object), but both failed. Partial mocking fails as WikiPageEntityStore heavily (indirectly) uses various WikibaseServices methods, using a proxy object didn\u0027t work as I failed to properly overload \"getStorageEntitySerializer\" in that case :/",
+      "parentUuid": "446c1137_de1ef006",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 0
+      },
+      "revId": "22a0e2cfee22058934212f50f39aa58d6115d1dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
