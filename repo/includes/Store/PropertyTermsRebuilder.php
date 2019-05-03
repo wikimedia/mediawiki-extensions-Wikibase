@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Store;
 use Exception;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\TermStore\PropertyTermStore;
 use Wikimedia\Rdbms\LBFactory;
@@ -16,7 +15,7 @@ use Wikimedia\Rdbms\LBFactory;
 class PropertyTermsRebuilder {
 
 	private $propertyTermStore;
-	private $idPager;
+	private $propertyIds;
 	private $progressReporter;
 	private $errorReporter;
 	private $loadBalancerFactory;
@@ -26,7 +25,7 @@ class PropertyTermsRebuilder {
 
 	public function __construct(
 		PropertyTermStore $propertyTermStore,
-		SeekableEntityIdPager $idPager,
+		\Iterator $propertyIds,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
 		LBFactory $loadBalancerFactory,
@@ -35,7 +34,7 @@ class PropertyTermsRebuilder {
 		$batchSpacingInSeconds
 	) {
 		$this->propertyTermStore = $propertyTermStore;
-		$this->idPager = $idPager;
+		$this->propertyIds = $propertyIds;
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
 		$this->loadBalancerFactory = $loadBalancerFactory;
@@ -47,20 +46,13 @@ class PropertyTermsRebuilder {
 	public function rebuild() {
 		$ticket = $this->loadBalancerFactory->getEmptyTransactionTicket( __METHOD__ );
 
-		while ( true ) {
-			$propertyIds = $this->idPager->fetchIds( $this->batchSize );
-
-			if ( !$propertyIds ) {
-				break;
-			}
-
+		foreach ( $this->getIdBatches() as $propertyIds ) {
 			$this->rebuildTermsForBatch( $propertyIds );
 
 			$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			$this->progressReporter->reportMessage(
-				'Processed up to page '
-				. $this->idPager->getPosition() . ' (' . end( $propertyIds ) . ')'
+				'Processed up to id ' . end( $propertyIds )
 			);
 
 			if ( $this->batchSpacingInSeconds > 0 ) {
@@ -69,11 +61,31 @@ class PropertyTermsRebuilder {
 		}
 	}
 
-	private function rebuildTermsForBatch( array $propertyIds ) {
+	private function getIdBatches() {
+		$idsInBatch = [];
+
+		foreach ( $this->propertyIds as $propertyId ) {
+			$idsInBatch[] = $propertyId;
+
+			if ( count( $idsInBatch ) >= $this->batchSize ) {
+				yield $idsInBatch;
+				$idsInBatch = [];
+			}
+		}
+
+		if ( $idsInBatch !== [] ) {
+			yield $idsInBatch;
+		}
+	}
+
+	private function rebuildTermsForBatch( $propertyIds ) {
 		foreach ( $propertyIds as $propertyId ) {
-			$this->saveTerms(
-				$this->propertyLookup->getPropertyForId( $propertyId )
-			);
+			// TODO: catch errors
+			$property = $this->propertyLookup->getPropertyForId( $propertyId );
+
+			if ( $property !== null ) {
+				$this->saveTerms( $property );
+			}
 		}
 	}
 

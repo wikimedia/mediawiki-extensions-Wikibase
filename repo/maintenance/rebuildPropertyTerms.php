@@ -6,9 +6,8 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
-use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
-use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -32,7 +31,14 @@ class RebuildPropertyTerms extends Maintenance {
 
 		$this->addOption(
 			'from-id',
-			"First row (page id) to start updating from",
+			"Lowest property id that should be updated",
+			false,
+			true
+		);
+
+		$this->addOption(
+			'to-id',
+			"Highest property id that should be updated",
 			false,
 			true
 		);
@@ -65,7 +71,7 @@ class RebuildPropertyTerms extends Maintenance {
 
 		$rebuilder = new PropertyTermsRebuilder(
 			$this->wikibaseRepo->getPropertyTermStore(),
-			$this->newEntityIdPager(),
+			$this->newPropertyIdIterator(),
 			$this->getReporter(),
 			$this->getErrorReporter(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
@@ -79,21 +85,13 @@ class RebuildPropertyTerms extends Maintenance {
 		$this->output( "Done.\n" );
 	}
 
-	private function newEntityIdPager(): SqlEntityIdPager {
-		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
-			$this->wikibaseRepo->getEntityNamespaceLookup(),
-			$this->wikibaseRepo->getEntityIdParser()
-		);
+	private function newPropertyIdIterator(): \Iterator {
+		$fromId = (int)$this->getOption( 'from-id', 1 );
+		$toId = (int)$this->getOption( 'to-id', 0 );
 
-		$pager = $sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] );
-
-		$fromId = $this->getOption( 'from-id' );
-
-		if ( $fromId !== null ) {
-			$pager->setPosition( (int)$fromId );
+		for ( $id = $fromId; $id !== $toId; $id++ ) {
+			yield PropertyId::newFromNumber( $id );
 		}
-
-		return $pager;
 	}
 
 	private function getReporter(): MessageReporter {
