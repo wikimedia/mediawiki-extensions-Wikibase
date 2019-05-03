@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09429d1e_2f414f37",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/EntityTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:40:46Z",
+      "side": 1,
+      "message": "“In schema” sounds very vague to me, I don’t know what that’s intended to tell me. (But perhaps that’s just because I came from another hike with a very different meaning of “schema”?)",
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1df713fc_659b4bd4",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/EntityTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:40:46Z",
+      "side": 1,
+      "message": "no longer used",
+      "range": {
+        "startLine": 11,
+        "startChar": 46,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9ab2885_ff10ca1d",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/EntityTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:40:46Z",
+      "side": 1,
+      "message": "I was pretty confused when I first read this yesterday… though I think the intended format is clear to me now, it would be helpful to provide an example:\n\n [\n     \u0027label\u0027 \u003d\u003e [\n         [ \u0027en\u0027 \u003d\u003e \u0027some label\u0027 ],\n     ],\n     \u0027alias\u0027 \u003d\u003e [\n         [ \u0027en\u0027 \u003d\u003e [ \u0027some alias\u0027, \u0027other alias\u0027 ] ],\n     ],\n ]\n\nAnd I only noticed while typing this out… isn’t there one extra layer of brackets that shouldn’t be there? Shouldn’t \u0027en\u0027 (\u0027language\u0027) be a key of the \u0027label\u0027 (\u0027type\u0027) value directly?\n\nAlso, using tabs in a doc comment isn’t nice IMHO.",
+      "range": {
+        "startLine": 20,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 6
+      },
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebd62268_1977c17f",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/EntityTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:40:46Z",
+      "side": 1,
+      "message": "update",
+      "range": {
+        "startLine": 29,
+        "startChar": 45,
+        "endLine": 29,
+        "endChar": 53
+      },
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1d9ac36_81a83c10",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/NormalizedTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:40:46Z",
+      "side": 1,
+      "message": "same comments as on the other file",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 6
+      },
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0490d36f_0cb7ba43",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/NormalizedTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-03T08:40:46Z",
+      "side": 1,
+      "message": "could include an `: array` typehint (though there’s still no consensus on how to format it, see https://www.mediawiki.org/wiki/Manual_talk:Coding_conventions/PHP#Declaring_of_return_types)",
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
