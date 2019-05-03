@@ -7,7 +7,6 @@ use MediaWikiTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -43,12 +42,19 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 	 */
 	private $progressReporter;
 
+	private $propertyIds;
+
 	public function setUp() {
 		parent::setUp();
 
 		$this->propertyTermStore = new InMemoryPropertyTermStore();
 		$this->errorReporter = new SpyMessageReporter();
 		$this->progressReporter = new SpyMessageReporter();
+
+		$this->propertyIds = [
+			new PropertyId( 'P1' ),
+			new PropertyId( 'P2' ),
+		];
 	}
 
 	public function testStoresAllTerms() {
@@ -61,7 +67,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 	private function newRebuilder(): PropertyTermsRebuilder {
 		return new PropertyTermsRebuilder(
 			$this->propertyTermStore,
-			$this->newIdPager(),
+			$this->propertyIds,
 			$this->progressReporter,
 			$this->errorReporter,
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
@@ -82,13 +88,6 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 		$this->assertEquals(
 			$this->newP2()->getFingerprint(),
 			$this->propertyTermStore->getTerms( new PropertyId( 'P2' ) )
-		);
-	}
-
-	private function newIdPager(): InMemoryEntityIdPager {
-		return new InMemoryEntityIdPager(
-			new PropertyId( 'P1' ),
-			new PropertyId( 'P2' )
 		);
 	}
 
@@ -156,10 +155,28 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 
 		$this->assertSame(
 			[
-				'Processed up to page 1 (P1)',
-				'Processed up to page 2 (P2)',
+				'Processed up to id P1',
+				'Processed up to id P2',
 			],
 			$this->progressReporter->getMessages()
+		);
+	}
+
+	public function testNonExistentPropertiesDoNotCauseAnyErrors() {
+		$this->propertyIds[] = new PropertyId( 'P3' );
+		$this->propertyIds[] = new PropertyId( 'P4' );
+
+		$this->newRebuilder()->rebuild();
+
+		$this->assertLastMessage( 'Processed up to id P4' );
+	}
+
+	private function assertLastMessage( $expectedMessage ) {
+		$messages = $this->progressReporter->getMessages();
+
+		$this->assertSame(
+			$expectedMessage,
+			end( $messages )
 		);
 	}
 
