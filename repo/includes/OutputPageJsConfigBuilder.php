@@ -29,10 +29,11 @@ class OutputPageJsConfigBuilder {
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 * @param string[] $badgeItems
+	 * @param integer stringLimit
 	 *
 	 * @return array
 	 */
-	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems ) {
+	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems, $stringLimit ) {
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
 
@@ -41,6 +42,7 @@ class OutputPageJsConfigBuilder {
 		$configVars = $this->getCopyrightConfig( $rightsUrl, $rightsText, $lang );
 
 		$configVars['wbBadgeItems'] = $badgeItems;
+		$configVars['wbMultiLingualStringLimit'] = $stringLimit;
 
 		return $configVars;
 	}
