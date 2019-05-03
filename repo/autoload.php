@@ -5,6 +5,7 @@ global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
 	'Wikibase\\AddUnitConversions' => __DIR__ . '/maintenance/addUnitConversions.php',
+	'Wikibase\\Build\\PopulateWithRandomEntitiesAndTerms' => __DIR__ . '/maintenance/populateWithRandomEntitiesAndTerms.php',
 	'Wikibase\\ChangePropertyDataType' => __DIR__ . '/maintenance/changePropertyDataType.php',
 	'Wikibase\\ClaimSummaryBuilder' => __DIR__ . '/includes/ClaimSummaryBuilder.php',
 	'Wikibase\\ClearTermSqlIndexSearchFields' => __DIR__ . '/maintenance/clearTermSqlIndexSearchFields.php',
