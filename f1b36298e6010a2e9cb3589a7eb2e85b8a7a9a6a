@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "003ffc21_ee6f611d",
+        "filename": "repo/includes/Store/PropertyTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T09:15:11Z",
+      "side": 1,
+      "message": "type is iterable, which apparently is newer than the old PHP version we use here. I prefer not having a comment with a pile of duplicated stuff, esp if soon we can add the actual parameter type, though if you care about this, by all means add it.",
+      "parentUuid": "c5ca9dcf_76a1fa20",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "99175a17_5c72ddfa",
         "filename": "repo/tests/phpunit/includes/Store/PropertyTermsRebuilderTest.php",
         "patchSetId": 2
@@ -87,6 +105,30 @@
       "writtenOn": "2019-05-03T15:49:14Z",
       "side": 1,
       "message": "shouldn’t this say “P2” if non-existent properties are skipped?",
+      "range": {
+        "startLine": 171,
+        "startChar": 48,
+        "endLine": 171,
+        "endChar": 50
+      },
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3553a003_762640ac",
+        "filename": "repo/tests/phpunit/includes/Store/PropertyTermsRebuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T09:15:11Z",
+      "side": 1,
+      "message": "No. Skipping refers to insertion into the term store. So this tests if the code does not error when a property does not exist.",
+      "parentUuid": "99175a17_5c72ddfa",
       "range": {
         "startLine": 171,
         "startChar": 48,
