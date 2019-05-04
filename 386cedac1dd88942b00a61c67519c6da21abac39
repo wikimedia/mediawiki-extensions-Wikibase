@@ -125,6 +125,24 @@
       "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e218bd8c_6481ae77",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/NormalizedTermStoreSchemaAccess.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T15:04:24Z",
+      "side": 1,
+      "message": "We have been using \"without space\" since 2016 at WMDE. https://github.com/wmde/FundraisingFrontend",
+      "parentUuid": "0490d36f_0cb7ba43",
+      "revId": "386cedac1dd88942b00a61c67519c6da21abac39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
