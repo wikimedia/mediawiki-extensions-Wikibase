@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "57a8de83_4e6069ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T09:23:35Z",
+      "side": 1,
+      "message": "Hold on... we actually do not need this. Not for properties. Apparently me and Alaa where both asleep yesterday. Good catch.",
+      "parentUuid": "7ce406e1_04dbe750",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83622913_a32d0482",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
