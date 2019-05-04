@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7ce406e1_04dbe750",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T09:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23169573_44c7d71e",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83622913_a32d0482",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "29f45537_56237859",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T09:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83622913_a32d0482",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e7b2dac_b33d4f31",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -53,6 +95,24 @@
       "writtenOn": "2019-05-03T15:49:14Z",
       "side": 1,
       "message": "this blank line should be removed so that gerritbot will link to the change on Phabricator",
+      "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa6823d4_5136cc3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T09:18:11Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. Very \u003e_\u003e",
+      "parentUuid": "2e7b2dac_b33d4f31",
       "revId": "f1b36298e6010a2e9cb3589a7eb2e85b8a7a9a6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
