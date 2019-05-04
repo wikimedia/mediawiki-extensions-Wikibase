@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0513ce9b_d178d75e",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-04T11:33:17Z",
+      "side": 1,
+      "message": "Please do not use global state. Doesn\u0027t MediaWiki provide some service you can inject?",
+      "range": {
+        "startLine": 210,
+        "startChar": 12,
+        "endLine": 210,
+        "endChar": 17
+      },
+      "revId": "9b939ea11e331b08455f15e7aa0edee210cd7328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
