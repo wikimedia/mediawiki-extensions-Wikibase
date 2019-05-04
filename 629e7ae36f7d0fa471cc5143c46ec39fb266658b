@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acd0ecde_1cb49f68",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-05-04T21:44:35Z",
+      "side": 1,
+      "message": "consider willReturn() for brevity.",
+      "range": {
+        "startLine": 382,
+        "startChar": 5,
+        "endLine": 382,
+        "endChar": 29
+      },
+      "revId": "629e7ae36f7d0fa471cc5143c46ec39fb266658b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
