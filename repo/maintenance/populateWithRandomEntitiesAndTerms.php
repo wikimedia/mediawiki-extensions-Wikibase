@@ -23,8 +23,8 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Populates the database with generated entities.
  *
- * Those entities will be populated with randomly generated terms (labes, descriptions, aliases),
- * in a set of different languuages (can be modified through options).
+ * Those entities will be populated with randomly generated terms (labels, descriptions, aliases),
+ * in a set of different languages (can be modified through options).
  */
 class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 	const SCRIPT_USER_NAME = 'script_populate_random_entities';
