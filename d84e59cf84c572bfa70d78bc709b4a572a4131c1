@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d0fed39_454672a2",
+        "filename": "lib/tests/phpunit/Store/Sql/MediaWikiTermStore/InMemoryEntityTermStoreAccess.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T11:13:56Z",
+      "side": 1,
+      "message": "CI is failing and saying this needs to be @inheritDoc",
+      "revId": "d84e59cf84c572bfa70d78bc709b4a572a4131c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "150a61ba_873b0eb4",
+        "filename": "lib/tests/phpunit/Store/Sql/MediaWikiTermStore/InMemoryEntityTermStoreAccess.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T11:13:56Z",
+      "side": 1,
+      "message": "I suspect creating an array without defining it first causes a notice or something similar, at least when running in strict mode.",
+      "revId": "d84e59cf84c572bfa70d78bc709b4a572a4131c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f1d7c24_da0bcfd2",
+        "filename": "lib/tests/phpunit/Store/Sql/MediaWikiTermStore/InMemoryNormalizedTermStoreAccess.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T11:13:56Z",
+      "side": 1,
+      "message": "CI is failing because there is no class level doc. Personally I think that is a very silly CI rule.",
+      "revId": "d84e59cf84c572bfa70d78bc709b4a572a4131c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a8375a9_9bd2c067",
+        "filename": "lib/tests/phpunit/Store/Sql/MediaWikiTermStore/InMemoryNormalizedTermStoreAccess.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T11:13:56Z",
+      "side": 1,
+      "message": "I\u0027d have inlined this\n\nforeach ( (array)$terms as $term ) {",
+      "revId": "d84e59cf84c572bfa70d78bc709b4a572a4131c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a26df456_a3a62c73",
+        "filename": "lib/tests/phpunit/Store/Sql/MediaWikiTermStore/InMemoryNormalizedTermStoreAccess.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T11:13:56Z",
+      "side": 1,
+      "message": "Simpler:\n\nif ( !isset( $this-\u003eterms[$type][$lang][$term] ) ) {\n    $this-\u003eterms[$type][$lang][$term] \u003d ++$this-\u003elastId;\n}\n\n$ids[] \u003d $this-\u003eterms[$type][$lang][$term];",
+      "revId": "d84e59cf84c572bfa70d78bc709b4a572a4131c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
