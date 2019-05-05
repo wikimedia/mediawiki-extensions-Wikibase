@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3d53590_61dead34",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T08:16:29Z",
+      "side": 1,
+      "message": "Is this MW specific syntax or something more generally supported by loggers? (Either is fine)",
+      "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d70339f_2269eaae",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-05T08:16:29Z",
+      "side": 1,
+      "message": "I spend about 10 minutes looking at this and unless I am confused (which is quite possible with code that has this many details) this does not work. As the method description says, this deletes all rows with the specified ids from wbt_term_in_lang. My understand is that the caller does not know which of those are actually unused, and that we want to run this in a job, and thus need to account for changes after the job was created.",
+      "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
