@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kipala"
+			"Kipala",
+			"Yasen igra"
 		]
 	},
-	"wikibase-timedetails-isotime": "Tarehe na saa"
+	"wikibase-timedetails-isotime": "Tarehe na saa",
+	"wikibase-sitelinks-wikipedia": "Wikipedia"
 }

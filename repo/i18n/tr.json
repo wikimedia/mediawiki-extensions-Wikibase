@@ -21,7 +21,8 @@
 			"HakanIST",
 			"Vito Genovese",
 			"Botansahin",
-			"Chansey"
+			"Chansey",
+			"Mirzali"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -371,6 +372,13 @@
 	"wikibase-listdatatypes-url-body": "Bir URL için salt metin alanı. URL'ler, vikimetin'teki harici bağlantılar için de desteklenen protokollerle sınırlandırılmıştır.",
 	"wikibase-listdatatypes-external-id-head": "Dış tanımlayıcı",
 	"wikibase-listdatatypes-external-id-body": "Dış tanımlayıcı için salt metin alanı. Dış tanımlayıcılar otomatik olarak görüntüleme için yetkili bir kaynağa bağlanabilir.",
+	"wikibase-listdatavaluetypes-name-string": "dize",
+	"wikibase-listdatavaluetypes-name-globecoordinate": "küresel koordinat",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "tek dilli metin",
+	"wikibase-listdatavaluetypes-name-quantity": "nicelik",
+	"wikibase-listdatavaluetypes-name-time": "zaman",
+	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Wiki tabanı varlık kimliği",
+	"wikibase-listdatavaluetypes-generalbody": "Bu veri türü için değer türü <code>$1</code>'dır.",
 	"wikibase-concept-uri": "URI kavramı",
 	"wikibase-concept-uri-tooltip": "Bu madde ile ifade edilen kavramı tanımlayan URI",
 	"wikibase-pageimage-helptext": "Bu görüntü, bu ögenin ifadelerinden alınmıştır. Dilerseniz ifadeyi değiştirerek görüntüyü ayarlayabilirsiniz.",

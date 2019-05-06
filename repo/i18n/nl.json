@@ -26,7 +26,8 @@
 			"Mainframe98",
 			"Festina90",
 			"Mbch331",
-			"Mar(c)"
+			"Mar(c)",
+			"Rots61"
 		]
 	},
 	"wikibase-desc": "Opslagplaats voor gestructureerde gegevens",
@@ -361,6 +362,7 @@
 	"wikibase-listdatatypes-url-body": "Letterlijke gegevensveld voor een URL. URL's zijn beperkt tot de protocollen die ook beschikbaar zijn voor externe koppelingen in wikitekst.",
 	"wikibase-listdatatypes-external-id-head": "Externe identificatiecode",
 	"wikibase-listdatatypes-external-id-body": "Letterlijk gegevensveld voor een extern ID. Externe ID's kunnen automatisch worden gekoppeld aan een gezaghebbende bron voor weergave.",
+	"wikibase-listdatavaluetypes-name-time": "tijd",
 	"wikibase-concept-uri": "Concept-URI",
 	"wikibase-concept-uri-tooltip": "URI dat het concept beschreven door dit item identificeert",
 	"wikibase-pageimage-helptext": "Deze weergave is samengesteld met verklaringen over dit item. U kunt de weergave aanpassen door de verklaring te wijzigen.",

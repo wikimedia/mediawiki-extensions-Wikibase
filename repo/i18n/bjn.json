@@ -6,5 +6,8 @@
 	},
 	"wikibase-edit": "babak",
 	"wikibase-add": "tambah",
-	"wikibase-sitelinks-special": "Situs lain"
+	"wikibase-label-empty": "Kadada label",
+	"wikibase-description-empty": "Kadada pamaparan",
+	"wikibase-sitelinks-special": "Situs lain",
+	"wikibase-statementview-rank-normal": "Paringkat nurmal"
 }

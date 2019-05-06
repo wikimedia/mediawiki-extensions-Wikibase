@@ -3,7 +3,8 @@
 		"authors": [
 			"Lanciné.kounfantoh.fofana",
 			"Youssoufkadialy",
-			"Lancine.kounfantoh.fofana"
+			"Lancine.kounfantoh.fofana",
+			"Nafadji Mory Diané"
 		]
 	},
 	"tooltip-t-wikibase": "ߜߊ߲߬ߞߎ߲߬ ߦߋ߫ ߞߍ߫ ߟߊ߫ ߛߘߌ߬ߜߋ߲ ߡߍ߲ ߠߊ߫ ߓߟߏߡߟߊ ߞߣߐߘߐ ߟߎ߬ ߟߊ߫",
@@ -11,6 +12,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} ߛߎ߲",
 	"wikibase-editlinks": "ߛߘߌ߬ߜߋ߲ ߡߊߦߟߍ߬ߡߊ߲߬",
 	"wikibase-editlinkstitle": "ߞߊ߲ ߠߎ߬ ߣߌ߫ ߢߐ߲߯ߕߍ ߛߘߌ߬ߜߋ߲ ߡߊߦߟߍ߬ߡߊ߲߬",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ߢߡߊߘߏ߲߰",
 	"wikibase-rc-hide-wikidata-show": "ߊ߬ ߦߌ߬ߘߊ߬",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ߊ߬ ߡߊߦߟߍ߬ߡߊ߲߫",

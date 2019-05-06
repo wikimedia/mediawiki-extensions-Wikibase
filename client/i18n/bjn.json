@@ -10,7 +10,9 @@
 	"wikibase-editlinks": "Babak interwiki",
 	"wikibase-editlinkstitle": "Babak tautan interwiki",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sungkupakan",
 	"wikibase-rc-hide-wikidata-show": "Tampaiakan",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Babakan {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Babakan {{WBREPONAME}}",
+	"wikibase-otherprojects": "Dalam rangka gawian lain"
 }
