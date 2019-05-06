@@ -34,9 +34,6 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 	const OPTION_DEFAULT_AT_MOST = 50;
 	const OPTION_DEFAULT_DUPLICATION_DEGREE = 0.5;
 
-	private $editEntityFactory;
-	private $isVerbose;
-
 	public function __construct() {
 		parent::__construct();
 
