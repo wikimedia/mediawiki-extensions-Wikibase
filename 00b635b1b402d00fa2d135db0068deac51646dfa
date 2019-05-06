@@ -33,6 +33,41 @@
       "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27276c55_edfbc9bc",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-06T20:13:25Z",
+      "side": 1,
+      "message": "the logic we discussed right before starting this is as following:\n- the clean up logic (this class) receives termInLang ids that either were deleted or should be deleted\n- the caller of this logic (somewhere in Wikibase updating terms of entity): should pass termInLang ids before clearing/updating them\n\nnow that Jerone raised this question, although I thought it would work, we will probably have to delete termInLang records outside this logic, then pass those ids to this class (so this class does not need to deleted them). The reason that that might be more desirable is that if we wait on deleting those term_in_lang ids, and the job gets delayed for whatever reason, requests to read terms of same entity that happen in the meanwhile will get those yet-to-be-deleted terms in their results.\n\nSo we would just need here to remove the delete and do it outside",
+      "parentUuid": "2d70339f_2269eaae",
+      "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "766ec962_461022c1",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-06T20:13:25Z",
+      "side": 1,
+      "message": "we discussed briefly whether we should read from replica or master here .. although it is very unlikely scenario, but this might perform redundant deletes/inserts from master in case the replica haven\u0027t caught up with terms that were deleted from an entity and set on another \"in parallel\". This won\u0027t cause any loss of data, just redundant delete/insert, but I suppose that the gain in not querying master here is much more important.\n\nThere\u0027s only another case that might cause loss of data, but it must be either very extreme edge-case, or might never happen if instances of same job are never run in-parallel (which it probably is).",
+      "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
