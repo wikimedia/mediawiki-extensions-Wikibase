@@ -22,6 +22,30 @@
       "revId": "901177e2693b394c6056da847dd60500db713c04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82e26b38_7bedce23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-05-06T22:21:05Z",
+      "side": 1,
+      "message": "No uncertainty :) - I usually remove multiple modules in the same commit, and I only do this for ones that are used once (and rolled up into it), or unused overall. It is meant to cover all removed modules. No uncertainty :)\n\nIn this case only one module, so no need to mention both.\n\nAs for WikibaseClient, that is correct. WikibaseView is included in all WikibaseClient wikis, which is the main reason I am doing this refactoring. There are comparatively few modules registered in client/ directly.\n\nFrom my POV, not knowing Wikibase very well, I would think that WikibaseView should not exist, and its functionality instead moved to one of \"client\", \"repo\" or (if really  needed on both) to \"lib\".\n\nHowever, the vast majority of it seems only needed for \"repo\", which is why it has been so difficult to make progress on the associated task.\n\nInsights welcome :)",
+      "parentUuid": "beec8176_151cd7d0",
+      "range": {
+        "startLine": 12,
+        "startChar": 24,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "901177e2693b394c6056da847dd60500db713c04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
