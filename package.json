@@ -7,13 +7,11 @@
 		"test": "grunt test"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.9.0",
-		"eslint-plugin-qunit": "3.3.1",
+		"eslint-config-wikimedia": "0.12.0",
 		"eslint-plugin-compat": "^2.6.3",
-		"grunt": "1.0.3",
+		"grunt": "1.0.4",
 		"grunt-banana-checker": "0.6.0",
 		"grunt-eslint": "21.0.0",
-		"grunt-jsonlint": "1.1.0",
 		"grunt-stylelint": "0.10.1",
 		"stylelint-config-wikimedia": "0.5.0",
 		"wdio-mediawiki": "0.2.0",
