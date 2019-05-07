@@ -1,6 +1,8 @@
 composer.phar
 composer.lock
 
+.eslintcache
+
 vendor/
 extensions/
 node_modules/
