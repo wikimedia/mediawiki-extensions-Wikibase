@@ -502,7 +502,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 */
 	private function givenItemDoesNotExist( $itemId ) {
 		$title = $this->prophesize( Title::class );
-		$title->exists()->willReturn( false );
+		$title->isKnown()->willReturn( false );
 		$title->isLocal()->willReturn( true );
 
 		$this->entityTitleLookup
@@ -516,7 +516,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	private function givenItemExists( $itemId ) {
 		$title = $this->prophesize( Title::class );
 		$title->isLocal()->willReturn( true );
-		$title->exists()->willReturn( true );
+		$title->isKnown()->willReturn( true );
 		$title->isRedirect()->willReturn( false );
 		$title->getLocalURL()->willReturn( $this->itemPageUrl( $itemId ) );
 		$title->getPrefixedText()->willReturn( $itemId );
@@ -558,7 +558,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 */
 	private function givenPropertyDoesNotExist( $propertyId ) {
 		$title = $this->prophesize( Title::class );
-		$title->exists()->willReturn( false );
+		$title->isKnown()->willReturn( false );
 		$title->isLocal()->willReturn( true );
 
 		$this->entityTitleLookup
@@ -572,7 +572,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	private function givenPropertyExists( $propertyId ) {
 		$title = $this->prophesize( Title::class );
 		$title->isLocal()->willReturn( true );
-		$title->exists()->willReturn( true );
+		$title->isKnown()->willReturn( true );
 		$title->isRedirect()->willReturn( false );
 		$title->getLocalURL()->willReturn( $this->propertyPageUrl( $propertyId ) );
 		$title->getPrefixedText()->willReturn( $propertyId );
