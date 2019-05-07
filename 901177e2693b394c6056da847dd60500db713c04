@@ -46,6 +46,30 @@
       "revId": "901177e2693b394c6056da847dd60500db713c04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "433964e9_a998daea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-07T05:16:07Z",
+      "side": 1,
+      "message": "\u003e From my POV, not knowing Wikibase very well, I would think that WikibaseView should not exist, and its functionality instead moved to one of \"client\", \"repo\" or (if really  needed on both) to \"lib\".\n\nThe main idea of Wikibase View is to have all things UI in one place (and independent of MediaWiki+WikibaseRepo, but not WikibaseLib). That way it should be possible to use all of its components on any WikibaseClient/WikibaseRepo wiki equally.\n\nI guess theoretically it could be put into a subnamespace within WikibaseLib, but that would make it hard to keep the boundaries.\n\n\u003e However, the vast majority of it seems only needed for \"repo\", which is why it has been so difficult to make progress on the associated task.\n\nIndeed… we never made us of most of the view JS on client :/",
+      "parentUuid": "82e26b38_7bedce23",
+      "range": {
+        "startLine": 12,
+        "startChar": 24,
+        "endLine": 12,
+        "endChar": 59
+      },
+      "revId": "901177e2693b394c6056da847dd60500db713c04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
