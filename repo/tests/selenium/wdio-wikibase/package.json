@@ -12,8 +12,8 @@
 	"engines": {
 		"node": ">=6.0"
 	},
-	"dependencies": {
-		"mwbot": "1.0.10",
-		"wdio-mediawiki": "^0.2.0"
+	"peerDependencies": {
+		"mwbot": "^1.0.10",
+		"wdio-mediawiki": "^0.3.0"
 	}
 }
