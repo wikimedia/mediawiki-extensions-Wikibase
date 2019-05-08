@@ -92,13 +92,15 @@ class EntityTermsViewFactory {
 	 */
 	private function newTermboxView( Language $language ) {
 		$textProvider = new MediaWikiLocalizedTextProvider( $language );
+		$repo = WikibaseRepo::getDefaultInstance();
 
 		return new TermboxView(
 			new LanguageFallbackChainFactory(),
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
-				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerUrl' ),
-				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'ssrServerTimeout' )
+				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
+				$repo->getSettings()->getSetting( 'ssrServerTimeout' ),
+				$repo->getLogger()
 			),
 			$textProvider,
 			new RepoSpecialPageLinker(),
