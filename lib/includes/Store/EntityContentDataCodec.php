@@ -6,8 +6,12 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
+<<<<<<< HEAD   (70ac59 Catch Exceptions where the entity can not be serialized due )
 use Psr\Log\LoggerInterface;
+=======
+>>>>>>> BRANCH (033155 Merge "Upper bound package version")
 use Serializers\Exceptions\SerializationException;
+use MWExceptionHandler;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -152,22 +156,36 @@ class EntityContentDataCodec {
 	 *  constants or null for the default.
 	 *
 	 * @throws MWContentSerializationException
+<<<<<<< HEAD   (70ac59 Catch Exceptions where the entity can not be serialized due )
 	 * @return StatusValue
+=======
+	 * @throws EntityContentTooBigException
+	 * @return string
+>>>>>>> BRANCH (033155 Merge "Upper bound package version")
 	 */
 	public function encodeEntity( EntityDocument $entity, $format ) {
 		try {
 			$data = $this->entitySerializer->serialize( $entity );
 			$blob = $this->encodeEntityContentData( $data, $format );
+<<<<<<< HEAD   (70ac59 Catch Exceptions where the entity can not be serialized due )
 
 			if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
 				$this->logger->warning( 'Warning: entity content too big. Entity: ' . $entity->getId() );
 			}
 
 			return $blob;
+=======
+>>>>>>> BRANCH (033155 Merge "Upper bound package version")
 		} catch ( SerializationException $ex ) {
 			$status = Status::newFatal( 'wikibase-error-entity-too-big' );
 			return $status->getValue();
 		}
+
+		if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
+			throw new EntityContentTooBigException();
+		}
+
+		return $blob;
 	}
 
 	/**

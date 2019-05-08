@@ -5,7 +5,12 @@ namespace Wikibase\Lib\Tests\Store;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use MediaWikiTestCase;
+<<<<<<< HEAD   (70ac59 Catch Exceptions where the entity can not be serialized due )
 use Psr\Log\LoggerInterface;
+=======
+use MWContentSerializationException;
+use Wikibase\Lib\Store\EntityContentTooBigException;
+>>>>>>> BRANCH (033155 Merge "Upper bound package version")
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -95,9 +100,21 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	public function testEncodeBigEntity() {
 		$logger = new TestLogger();
 		$entity = new Item( new ItemId( 'Q1' ) );
+<<<<<<< HEAD   (70ac59 Catch Exceptions where the entity can not be serialized due )
 
 		$this->getCodec( 6, $logger )->encodeEntity( $entity, CONTENT_FORMAT_JSON );
 		$this->assertTrue( $logger->hasWarning( 'Warning: entity content too big. Entity: Q1' ) );
+=======
+		$this->expectException( EntityContentTooBigException::class );
+		$this->getCodec( 6 )->encodeEntity( $entity, CONTENT_FORMAT_JSON );
+	}
+
+	public function testDecodeBigEntity() {
+		$entity = new Item( new ItemId( 'Q1' ) );
+		$blob = $this->getCodec()->encodeEntity( $entity, CONTENT_FORMAT_JSON );
+		$this->setExpectedException( MWContentSerializationException::class );
+		$this->getCodec( 6 )->decodeEntity( $blob, CONTENT_FORMAT_JSON );
+>>>>>>> BRANCH (033155 Merge "Upper bound package version")
 	}
 
 	public function redirectProvider() {

@@ -100,7 +100,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED );
+		$propertyLookup = $wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_DISABLED );
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( [
 			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
@@ -108,7 +108,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		] );
 		$builder = new PropertyInfoTableBuilder(
 			$table,
-			$entityLookup,
+			$propertyLookup,
 			$propertyInfoBuilder,
 			$wikibaseRepo->getEntityIdComposer(),
 			$wikibaseRepo->getEntityNamespaceLookup()
@@ -147,7 +147,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$entityLookup = $wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED );
+		$propertyLookup = $wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_DISABLED );
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( [
 			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
@@ -155,7 +155,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		] );
 		$builder = new PropertyInfoTableBuilder(
 			$table,
-			$entityLookup,
+			$propertyLookup,
 			$propertyInfoBuilder,
 			$wikibaseRepo->getEntityIdComposer(),
 			$wikibaseRepo->getEntityNamespaceLookup()

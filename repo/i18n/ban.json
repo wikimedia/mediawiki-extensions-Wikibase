@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Carma citrawati"
+			"Carma citrawati",
+			"Joseagush"
 		]
 	},
-	"wikibase-edit": "Becikang"
+	"wikibase-edit": "Becikang",
+	"wikibase-add": "tambah",
+	"wikibase-sitelinks-special": "Situs liyané"
 }

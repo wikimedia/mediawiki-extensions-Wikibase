@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use ContentHandler;
 use Exception;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
@@ -9,13 +10,16 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWikiTestCase;
 use RawMessage;
+use ReflectionClass;
 use Revision;
+use Serializers\Serializer;
 use Status;
 use User;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\UnusableEntitySource;
+use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -25,6 +29,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\IdGenerator;
+use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -51,6 +56,17 @@ use Wikimedia\TestingAccessWrapper;
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	const FAKE_NS_ID = 654;
+
+	public function tearDown() {
+		parent::tearDown();
+
+		// Make sure we never leave the testing WikibaseServices in place
+		$wikibaseRepo = TestingAccessWrapper::newFromObject( WikibaseRepo::getDefaultInstance() );
+		$wikibaseRepo->wikibaseServices = null;
+		// ContentHandler caches ContentHandler objects, but given we mess
+		// with the EntityContentDataCodec in there, we need to reset that.
+		ContentHandler::cleanupHandlersCache();
+	}
 
 	/**
 	 * @return EntityHandler
@@ -349,6 +365,50 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
 	}
 
+	public function testSaveEntity_invalidContent() {
+		/** @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
+		$store = TestingAccessWrapper::newFromObject( $store );
+
+		$user = $GLOBALS['wgUser'];
+
+		$item = new Item();
+		$invalidItemContent = $this->getMock( ItemContent::class );
+		$invalidItemContent->expects( $this->once() )
+			->method( 'isValid' )
+			->will( $this->returnValue( false ) );
+
+		$contentFactory = $this->getMockBuilder( EntityContentFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$contentFactory->expects( $this->once() )
+			->method( 'getContentHandlerForType' )
+			->with( Item::ENTITY_TYPE )
+			->will(
+				$this->returnValue(
+					$store->contentFactory->getContentHandlerForType( Item::ENTITY_TYPE )
+				)
+			);
+
+		$contentFactory->expects( $this->once() )
+			->method( 'newFromEntity' )
+			->with( $item )
+			->will( $this->returnValue( $invalidItemContent ) );
+
+		$store->contentFactory = $contentFactory;
+
+		try {
+			$store->saveEntity( $item, 'create one', $user, EDIT_NEW );
+		} catch ( StorageException $e ) {
+			$status = $e->getStatus();
+			$this->assertInstanceOf( Status::class, $status );
+			$this->assertTrue( $status->hasMessage( 'invalid-content-data' ) );
+			return;
+		}
+		$this->fail( 'Expected StorageException to be thrown.' );
+	}
+
 	public function provideSaveEntityError() {
 		$firstItem = new Item();
 		$firstItem->setLabel( 'en', 'one' );
@@ -430,6 +490,78 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// check for error
 		$this->setExpectedException( $error );
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+	}
+
+	public function testSaveEntity_equalContentYieldsNoEdit() {
+		$item = new Item();
+		$item->setLabel( 'en', 'ahaha' );
+
+		$wikibaseRepo = TestingAccessWrapper::newFromObject( WikibaseRepo::getDefaultInstance() );
+		$oldWikibaseServices = $wikibaseRepo->getWikibaseServices();
+
+		// This serializer will yield different (but valid) serializations
+		// for the same content by appending junk.
+		$storageEntitySerializer = $this->getMock( Serializer::class );
+		$storageEntitySerializer->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnCallback( function( $object ) use ( $oldWikibaseServices ) {
+				static $c = 0;
+
+				return $oldWikibaseServices->getStorageEntitySerializer()->serialize( $object )
+					+ [ 'serializationArtifact' => $c++ ];
+			} ) );
+
+		$wikibaseServices = $this->getMock( WikibaseServices::class );
+
+		// Point all WikibaseServices mock methods we don't care about to the real methods
+		$wikibaseServiceMethods = ( new ReflectionClass( WikibaseServices::class ) )->getMethods();
+		foreach ( $wikibaseServiceMethods as $method ) {
+			$method = $method->name;
+			if ( $method === 'getStorageEntitySerializer' ) {
+				continue;
+			}
+
+			$wikibaseServices->expects( $this->any() )
+				->method( $method )
+				->will( $this->returnCallback( function() use ( $oldWikibaseServices, $method ) {
+					return call_user_func_array(
+						[ $oldWikibaseServices, $method ],
+						func_get_args()
+					);
+				} ) );
+		}
+
+		$wikibaseServices->expects( $this->any() )
+			->method( 'getStorageEntitySerializer' )
+			->will( $this->returnValue( $storageEntitySerializer ) );
+
+		$wikibaseRepo->wikibaseServices = $wikibaseServices;
+		ContentHandler::cleanupHandlersCache();
+
+		/**
+		 * @var WikiPageEntityStore $store
+		 * @var EntityRevisionLookup $lookup
+		 */
+		list( $store, $lookup ) = $this->createStoreAndLookup();
+		$user = $GLOBALS['wgUser'];
+
+		// register mock watcher
+		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher->expects( $this->exactly( 2 ) )
+			->method( 'entityUpdated' );
+		$watcher->expects( $this->never() )
+			->method( 'redirectUpdated' );
+
+		$store->registerWatcher( $watcher );
+
+		$r1 = $store->saveEntity( $item, 'creation', $user, EDIT_NEW );
+
+		// Even though the serialization (and thus the sha1) differs, we
+		// don't let the edit through as the underlying content didn't change.
+		$r2 = $store->saveEntity( $item, 'null edit', $user, EDIT_UPDATE );
+		$wikibaseRepo->wikibaseServices = null;
+
+		$this->assertSame( $r1->getRevisionId(), $r2->getRevisionId() );
 	}
 
 	public function testSaveRedirect() {
@@ -582,7 +714,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$anonUser = User::newFromId( 0 );
 		$anonUser->setName( '127.0.0.1' );
-		$user = User::newFromName( "EditEntityTestUser" );
+		$user = $this->getTestUser()->getUser();
 		$item = new Item();
 
 		// check for default values, last revision by anon --------------------
@@ -650,7 +782,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$anonUser = User::newFromId( 0 );
 		$anonUser->setName( '127.0.0.1' );
-		$user = User::newFromName( "EditEntityTestUser" );
+		$user = $this->getTestUser()->getUser();
 		$item = new Item();
 
 		// check for default values, last revision by anon --------------------

@@ -3,12 +3,12 @@
 namespace Wikibase;
 
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\MessageReporter;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Onoi\MessageReporter\MessageReporter;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 
@@ -26,9 +26,9 @@ class PropertyInfoTableBuilder {
 	private $propertyInfoTable;
 
 	/**
-	 * @var EntityLookup
+	 * @var PropertyLookup
 	 */
-	private $entityLookup;
+	private $propertyLookup;
 
 	/**
 	 * @var PropertyInfoBuilder
@@ -71,13 +71,13 @@ class PropertyInfoTableBuilder {
 
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
-		EntityLookup $entityLookup,
+		PropertyLookup $propertyLookup,
 		PropertyInfoBuilder $propertyInfoBuilder,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
-		$this->entityLookup = $entityLookup;
+		$this->propertyLookup = $propertyLookup;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
@@ -215,11 +215,11 @@ class PropertyInfoTableBuilder {
 	 * @param PropertyId $id the Property to process
 	 */
 	private function updatePropertyInfo( PropertyId $id ) {
-		$property = $this->entityLookup->getEntity( $id );
+		$property = $this->propertyLookup->getPropertyForId( $id );
 
-		if ( !( $property instanceof Property ) ) {
+		if ( $property === null ) {
 			throw new RuntimeException(
-				'EntityLookup did not return a Property for id ' . $id->getSerialization()
+				'Did not find Property with id ' . $id->getSerialization()
 			);
 		}
 

@@ -650,8 +650,7 @@ final class WikibaseClient {
 				$this->getWikibaseServices(),
 				$this->getSettings(),
 				$this->getRepositoryDefinitions()->getDatabaseNames()[''],
-				$this->getContentLanguage()->getCode(),
-				$this->getLogger()
+				$this->getContentLanguage()->getCode()
 			);
 		}
 

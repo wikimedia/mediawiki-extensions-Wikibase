@@ -54,7 +54,8 @@
 			"Tubezlob",
 			"Ayack",
 			"Envlh",
-			"Pamputt"
+			"Pamputt",
+			"Jhammock"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -169,6 +170,7 @@
 	"wikibase-validator-sitelink-conflict": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il n’a rien à faire là, ou fusionner les éléments s’ils concernent exactement le même sujet.",
 	"wikibase-validator-label-conflict": "La propriété $3 a déjà un libellé «&nbsp;$1&nbsp;» associé au code de langue $2.",
 	"wikibase-validator-label-with-description-conflict": "L’élément $3 a déjà le libellé «&nbsp;$1&nbsp;» associé au code de langue $2, qui utilise exactement le même texte descriptif.",
+	"wikibase-validator-label-equals-description": "Le libellé et la description pour le code de langue $1 ne peuvent pas avoir la même valeur.",
 	"wikibase-validator-label-no-entityid": "Le libellé ne doit pas être un identifiant d’entité valide.",
 	"wikibase-validator-illegal-file-chars": "Les noms de fichier ne doivent pas contenir certains caractères comme les virgules ou les barres obliques.",
 	"wikibase-validator-check-file-type": "L’extension du fichier est absente.",
@@ -420,13 +422,16 @@
 	"wikibase-listdatatypes-url-body": "Champ de données littéral pour une URL. Les URLs sont limitées aux protocoles pris en charge aussi pour les liens externes en wikitexte.",
 	"wikibase-listdatatypes-external-id-head": "Identifiant externe",
 	"wikibase-listdatatypes-external-id-body": "Champ de donnée littéral pour un identifiant externe. Les identifiants externes peuvent être liés automatiquement à une ressource autorisée pour l’affichage.",
+	"wikibase-listdatavaluetypes-name-string": "chaîne",
+	"wikibase-listdatavaluetypes-name-globecoordinate": "coordonnées sur le globe",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "Texte monolingue",
+	"wikibase-listdatavaluetypes-name-quantity": "Quantité",
+	"wikibase-listdatavaluetypes-name-time": "heure",
+	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Id d'entité Wikibase",
+	"wikibase-listdatavaluetypes-generalbody": "Le type de valeur pour ce type de donnée est <code>$1</code>.",
 	"wikibase-concept-uri": "URI du concept",
 	"wikibase-concept-uri-tooltip": "URI qui identifie le concept décrit par cet élément",
 	"wikibase-pageimage-helptext": "Cette image est prise d’après les relevés de cet élément. Vous pouvez ajuster l’image en modifiant le relevé.",
-	"wikibase-rescore-profile-prefix": "Profil de nouvelle notation par défaut pour la recherche de complétude",
-	"wikibase-rescore-profile-prefix-boost": "Profil de nouvelle notation pour la recherche de complétude avec amélioration de déclaration",
-	"wikibase-rescore-profile-fulltext": "Profil de nouvelle notation par défaut pour la recherche en plein texte",
-	"wikibase-rescore-profile-fulltext-phrase": "Marquer à nouveau le profil pour la recherche en plein texte avec notation de phrase",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Élément Wikibase",
 	"content-model-wikibase-property": "Propriété de Wikibase",
@@ -450,7 +455,6 @@
 	"wikibase-search-namespace-mix": "Il n'est actuellement pas autorisé pour une recherche, d'utiliser les espaces de noms des entités avec ceux des articles. La recherche ne sera faite que sur l'espace de noms des entités.",
 	"wikibase-search-config-notfound": "Configuration de recherche en plein texte non trouvée : $1",
 	"wikibase-search-config-badclass": "Mauvaise classe de constructeur de requête : $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "Le mot clé haswbstatement ne contient pas d'instructions valides",
 	"wikibase-refresh-for-missing-datatype": "Le type de données $1 n’a pas été trouvé dans le script client local. Cela peut résulter d’un script en cache obsolète. Essayez de forcer le rafraîchissement de votre navigateur, en contournant le cache local (Ctrl-Shift-R ou Cmd-Shift-R dans la plupart des navigateurs) pour résoudre le problème.",
 	"wikibase-outdated-client-script": "Hou là, un rafraîchissement forcé est nécessaire !"
 }

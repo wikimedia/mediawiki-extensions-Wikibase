@@ -29,6 +29,7 @@
 	"wikibase-error-autocomplete-response": "Serverantwort: $1",
 	"wikibase-error-ui-no-external-page": "Die Seite „$2“ konnte nicht auf „$1“ gefunden werden.",
 	"wikibase-error-ui-edit-conflict": "In der Zwischenzeit wurde der gleiche Wert bearbeitet, was einen Bearbeitungskonflikt verursacht hat. Lade bitte die Seite erneut.",
+	"wikibase-error-entity-too-big": "Das Objekt ist zu groß. Die maximal erlaubte Objektgröße ist $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transkribiert)",
 	"wikibase-quantitydetails-amount": "Menge",
 	"wikibase-quantitydetails-upperbound": "Obergrenze",

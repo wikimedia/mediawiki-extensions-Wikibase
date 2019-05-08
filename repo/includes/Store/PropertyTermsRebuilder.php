@@ -6,7 +6,7 @@ use Exception;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\TermStore\PropertyTermStore;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -20,7 +20,7 @@ class PropertyTermsRebuilder {
 	private $progressReporter;
 	private $errorReporter;
 	private $loadBalancerFactory;
-	private $entityLookup;
+	private $propertyLookup;
 	private $batchSize;
 	private $batchSpacingInSeconds;
 
@@ -30,7 +30,7 @@ class PropertyTermsRebuilder {
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
 		LBFactory $loadBalancerFactory,
-		EntityLookup $entityLookup,
+		PropertyLookup $propertyLookup,
 		$batchSize,
 		$batchSpacingInSeconds
 	) {
@@ -39,7 +39,7 @@ class PropertyTermsRebuilder {
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
 		$this->loadBalancerFactory = $loadBalancerFactory;
-		$this->entityLookup = $entityLookup;
+		$this->propertyLookup = $propertyLookup;
 		$this->batchSize = $batchSize;
 		$this->batchSpacingInSeconds = $batchSpacingInSeconds;
 	}
@@ -72,7 +72,7 @@ class PropertyTermsRebuilder {
 	private function rebuildTermsForBatch( array $propertyIds ) {
 		foreach ( $propertyIds as $propertyId ) {
 			$this->saveTerms(
-				$this->entityLookup->getEntity( $propertyId )
+				$this->propertyLookup->getPropertyForId( $propertyId )
 			);
 		}
 	}

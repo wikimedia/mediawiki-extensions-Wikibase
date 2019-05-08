@@ -242,6 +242,9 @@ class WikiPageEntityStore implements EntityStore {
 		$this->assertCanStoreEntity( $entity->getId() );
 
 		$content = $this->contentFactory->newFromEntity( $entity );
+		if ( !$content->isValid() ) {
+			throw new StorageException( Status::newFatal( 'invalid-content-data' ) );
+		}
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
 		$entityRevision = new EntityRevision(
@@ -336,6 +339,20 @@ class WikiPageEntityStore implements EntityStore {
 
 		if ( $baseRevId && $updater->hasEditConflict( $baseRevId ) ) {
 			throw new StorageException( Status::newFatal( 'edit-conflict' ) );
+		}
+
+		if (
+			( $flags & EDIT_NEW ) === 0 &&
+			$page->getRevision() &&
+			$page->getRevision()->getRevisionRecord()->hasSlot( $slotRole ) &&
+			$entityContent->equals( $page->getRevision()->getRevisionRecord()->getContent( $slotRole ) )
+		) {
+			// The size and the sha1 of entity content revisions is not always stable given they
+			// depend on PHP serialization (size) and JSON serialization (sha1). These differences
+			// will make MediaWiki not detect the null-edit.
+			// Generally content equivalence is not strong enough for MediaWiki, but for us it should
+			// be sufficent.
+			return $page->getRevision()->getRevisionRecord();
 		}
 
 		/**

@@ -38,24 +38,31 @@ class OutputPageJsConfigHookHandler {
 	 * @var string[]
 	 */
 	private $badgeItems;
-
+	/**
+	 * @var integer
+	 */
+	private $stringLimit;
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string $dataRightsUrl
 	 * @param string $dataRightsText
 	 * @param string[] $badgeItems
+	 * @param integer stringLimit
 	 */
+
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		$dataRightsUrl,
 		$dataRightsText,
-		array $badgeItems
+		array $badgeItems,
+		$stringLimit
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->outputPageConfigBuilder = new OutputPageJsConfigBuilder();
 		$this->dataRightsUrl = $dataRightsUrl;
 		$this->dataRightsText = $dataRightsText;
 		$this->badgeItems = $badgeItems;
+		$this->stringLimit = $stringLimit;
 	}
 
 	/**
@@ -69,7 +76,8 @@ class OutputPageJsConfigHookHandler {
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$settings->getSetting( 'dataRightsUrl' ),
 			$settings->getSetting( 'dataRightsText' ),
-			$settings->getSetting( 'badgeItems' )
+			$settings->getSetting( 'badgeItems' ),
+			$settings->getSetting( 'string-limits' )['multilang']['length']
 		);
 	}
 
@@ -122,7 +130,8 @@ class OutputPageJsConfigHookHandler {
 			$out,
 			$this->dataRightsUrl,
 			$this->dataRightsText,
-			$this->badgeItems
+			$this->badgeItems,
+			$this->stringLimit
 		);
 	}
 

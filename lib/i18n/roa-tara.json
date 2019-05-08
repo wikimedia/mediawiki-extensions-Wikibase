@@ -22,6 +22,7 @@
 	"wikibase-error-autocomplete-response": "'U server ave resposte: $1",
 	"wikibase-error-ui-no-external-page": "'A vôsce \"$2\" non ge pò essere acchiate sus a \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Stè 'nu conflitte de cangiamende. Recareche sta pàgene e reggistre arrete.",
+	"wikibase-error-entity-too-big": "L'entità jè troppe grosse. 'U massime conzendite pa dimenzione de l'entità jè $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitterate)",
 	"wikibase-quantitydetails-amount": "'Mborte",
 	"wikibase-quantitydetails-upperbound": "Limite superiore",

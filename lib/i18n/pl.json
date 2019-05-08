@@ -14,7 +14,8 @@
 			"Sethakill",
 			"Mateon1",
 			"Woytecr",
-			"Openbk"
+			"Openbk",
+			"Railfail536"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",
@@ -33,6 +34,7 @@
 	"wikibase-error-autocomplete-response": "Serwer odpowiedział: $1",
 	"wikibase-error-ui-no-external-page": "Nie udało się odnaleźć strony „$2” w „$1”.",
 	"wikibase-error-ui-edit-conflict": "Ta sama wartość była edytowana w tym samym czasie, co spowodowało konflikt edycji. Proszę przeładować stronę.",
+	"wikibase-error-entity-too-big": "Ta jednostka jest zbyt duża. Maksymalny dozwolony rozmiar jednostki to $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterowane)",
 	"wikibase-quantitydetails-amount": "Liczność",
 	"wikibase-quantitydetails-upperbound": "Górna granica",

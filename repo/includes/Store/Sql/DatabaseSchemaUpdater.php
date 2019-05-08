@@ -9,6 +9,7 @@ use MWException;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -228,7 +229,7 @@ class DatabaseSchemaUpdater {
 
 		$builder = new PropertyInfoTableBuilder(
 			$table,
-			$entityLookup,
+			new LegacyAdapterPropertyLookup( $entityLookup ),
 			$propertyInfoBuilder,
 			$wikibaseRepo->getEntityIdComposer(),
 			$wikibaseRepo->getEntityNamespaceLookup()
