@@ -7,9 +7,10 @@ use Language;
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit4And6Compat;
-use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
+use PHPUnit4And6Compat;
+use Psr\Log\NullLogger;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
@@ -37,11 +38,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			->method( 'getContent' )
 			->willReturn( $content );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 		$this->assertSame(
 			$content,
 			$client->getContent(
@@ -81,7 +78,8 @@ class TermboxRemoteRendererTest extends TestCase {
 		( new TermboxRemoteRenderer(
 			$requestFactory,
 			self::SSR_URL,
-			self::SSR_TIMEOUT
+			self::SSR_TIMEOUT,
+			new NullLogger()
 		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
 	}
 
@@ -98,11 +96,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			->method( 'execute' )
 			->willThrowException( $upstreamException );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
@@ -124,21 +118,15 @@ class TermboxRemoteRendererTest extends TestCase {
 		$request->expects( $this->once() )
 			->method( 'getStatus' )
 			->willReturn( 500 );
-		$request->expects( $this->never() )
-			->method( 'getContent' );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
-			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 			$this->assertSame( 'Encountered bad response: 500', $exception->getMessage() );
+			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 		}
 	}
 
@@ -152,14 +140,7 @@ class TermboxRemoteRendererTest extends TestCase {
 		$request->expects( $this->once() )
 			->method( 'getStatus' )
 			->willReturn( 404 );
-		$request->expects( $this->never() )
-			->method( 'getContent' );
-
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
@@ -184,12 +165,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			->method( 'getStatus' )
 			->willReturn( 0 );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
-
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
@@ -197,6 +173,15 @@ class TermboxRemoteRendererTest extends TestCase {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 			$this->assertSame( 'Encountered bad response: 0', $exception->getMessage() );
 		}
+	}
+
+	private function newTermboxRemoteRendererWithRequest( $request ) {
+		return new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			self::SSR_TIMEOUT,
+			new NullLogger()
+		);
 	}
 
 	/**
