@@ -254,6 +254,8 @@
 	"wikibase-listdatatypes-string-head": "Zeecheketten",
 	"wikibase-listdatatypes-time-head": "Zäit",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatavaluetypes-name-globecoordinate": "Koordinaten um Globus",
+	"wikibase-listdatavaluetypes-name-time": "Zäit",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-Element",
 	"content-model-wikibase-property": "Wikibase-Eegenschaft",

@@ -19,7 +19,8 @@
 			"Woytecr",
 			"Pawel Niemczuk",
 			"InternerowyGołąb",
-			"CiaPan"
+			"CiaPan",
+			"Railfail536"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -268,7 +269,7 @@
 	"wikibase-dispatchstats-median": "Mediana",
 	"wikibase-dispatchstats-average": "Średnia",
 	"special-listdatatypes": "Lista wszystkich dostępnych typów danych",
-	"wikibase-listdatatypes-intro": "To jest lista wszystkich typów danych, dostępnych w tej instalacji:",
+	"wikibase-listdatatypes-intro": "To jest lista wszystkich typów danych z odpowiednimi typami wartości, dostępnych w tej instalacji:",
 	"wikibase-listdatatypes-listproperties": "Lista właściwości z tym typem danych",
 	"wikibase-history-title-with-label": "„$2” ($1): Historia wersji",
 	"wikibase-history-title-without-label": "($1): Historia wersji",

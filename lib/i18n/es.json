@@ -35,6 +35,7 @@
 	"wikibase-error-autocomplete-response": "El servidor respondió: $1",
 	"wikibase-error-ui-no-external-page": "No se encontró la página «$2» en «$1».",
 	"wikibase-error-ui-edit-conflict": "En el ínterin se ha editado el mismo valor, lo que ha causado un conflicto de edición. Recarga la página.",
+	"wikibase-error-entity-too-big": "La entidad es demasiado grande. El tamáño máximo permitido es de $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
 	"wikibase-quantitydetails-amount": "Cantidad",
 	"wikibase-quantitydetails-upperbound": "Límite superior",

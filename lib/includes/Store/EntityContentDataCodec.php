@@ -6,8 +6,8 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
-use Psr\Log\LoggerInterface;
 use Serializers\Exceptions\SerializationException;
+use MWExceptionHandler;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -152,22 +152,24 @@ class EntityContentDataCodec {
 	 *  constants or null for the default.
 	 *
 	 * @throws MWContentSerializationException
-	 * @return StatusValue
+	 * @throws EntityContentTooBigException
+	 * @return string
 	 */
 	public function encodeEntity( EntityDocument $entity, $format ) {
 		try {
 			$data = $this->entitySerializer->serialize( $entity );
 			$blob = $this->encodeEntityContentData( $data, $format );
 
-			if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
-				$this->logger->warning( 'Warning: entity content too big. Entity: ' . $entity->getId() );
-			}
-
-			return $blob;
 		} catch ( SerializationException $ex ) {
 			$status = Status::newFatal( 'wikibase-error-entity-too-big' );
 			return $status->getValue();
 		}
+
+		if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
+			throw new EntityContentTooBigException();
+		}
+
+		return $blob;
 	}
 
 	/**

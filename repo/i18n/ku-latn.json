@@ -5,7 +5,8 @@
 			"Macofe",
 			"Bikarhêner",
 			"Ghybu",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Mirzali"
 		]
 	},
 	"wikibase-entity-item": "obje",
@@ -73,5 +74,8 @@
 	"wikibase-entitieswithoutlabel-submit": "Bibîne",
 	"wikibase-redirectentity-submit": "Beralîkirin",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatavaluetypes-name-quantity": "jimarî",
+	"wikibase-listdatavaluetypes-name-time": "dem",
+	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Nasnameya bingeha Wiki",
 	"datatypes-type-url": "URL"
 }

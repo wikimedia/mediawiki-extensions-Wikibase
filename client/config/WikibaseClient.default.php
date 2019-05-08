@@ -35,8 +35,6 @@ return call_user_func( function() {
 		'referencedEntityIdMaxDepth' => 4,
 		'referencedEntityIdMaxReferencedEntityVisits' => 50,
 		'pageSchemaNamespaces' => [],
-		'pageSchemaSplitTestSamplingRatio' => 0,
-		'pageSchemaSplitTestBuckets' => [],
 		'allowLocalShortDesc' => false,
 		'propagateChangesToRepo' => true,
 		'propertyOrderUrl' => null,

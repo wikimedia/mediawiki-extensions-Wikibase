@@ -5,6 +5,7 @@
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Elérhető jelvényelemek lekérdezése.",
+	"apihelp-wbavailablebadges-summary": "Elérhető jelvényelemek lekérdezése.",
 	"apihelp-wbavailablebadges-example-1": "Az összes elérhető jelvényelem lekérdezése",
 	"apihelp-wbcreateclaim-description": "Wikibase-állítások létrehozása.",
 	"apihelp-wbcreateclaim-param-baserevid": "A módosítás alapjául szolgáló lapváltozat azonosítója (oldid-je).\nA szerkesztési ütközések felismerésére szolgál.",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Michawiki",
 			"Macofe",
-			"Ladsgroup"
+			"Ladsgroup",
+			"J budissin"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturowanych datow",
@@ -12,12 +13,19 @@
 	"wikibase-entity-query": "naprašowanje",
 	"wikibase-edit": "wobdźěłać",
 	"wikibase-save": "składować",
+	"wikibase-publish": "wozjewić",
 	"wikibase-cancel": "přetorhnyć",
 	"wikibase-add": "přidać",
 	"wikibase-addqualifier": "kwalifikator přidać",
 	"wikibase-addreference": "žórło přidać",
 	"wikibase-save-inprogress": "Składuje so...",
 	"wikibase-remove-inprogress": "Wotstronja so...",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "w dalšich rěčach",
+	"wikibase-entitytermsforlanguagelistview-aliases": "tež znate jako",
+	"wikibase-entitytermsforlanguagelistview-description": "wopisanje",
+	"wikibase-entitytermsforlanguagelistview-label": "pomjenowanje",
+	"wikibase-entitytermsforlanguagelistview-language": "rěč",
+	"wikibase-entitytermsforlanguagelistview-more": "wšě zapodate rěče",
 	"wikibase-label-empty": "Žane pomjenowanje definowane",
 	"wikibase-label-edit-placeholder": "pomjenowanje zapodać",
 	"wikibase-description-empty": "Žane wopisanje definowane",

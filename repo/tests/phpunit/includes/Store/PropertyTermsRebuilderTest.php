@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -64,7 +65,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 			$this->progressReporter,
 			$this->errorReporter,
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
-			$this->newEntityLookup(),
+			$this->newPropertyLookup(),
 			1,
 			0
 		);
@@ -91,7 +92,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function newEntityLookup(): InMemoryEntityLookup {
+	private function newPropertyLookup(): PropertyLookup {
 		$lookup = new InMemoryEntityLookup();
 
 		$lookup->addEntity( $this->newP1() );

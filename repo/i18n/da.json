@@ -277,6 +277,8 @@
 	"wikibase-listdatatypes-time-body": "Bogstavelige datafelt for en klokkeslætsværdi. Givet som en tid med en præcision og grænser. Tidspunktet gemmes altid internt i tilbageført gregoriansk tid, men kan bruge andre formater under parsing og formatering.(?)\n* tid – eksplicit værdi for tidspunkt, repræsenteret pr. ISO8601, året har altid 11 cifre, datoen altid med fortegn i formatet +00000002013-01-01T00:00:00Z\n* tidszone – eksplicit værdi som et heltal med fortegn. Tidszoneoplysninger som afvigelse fra UTC i minutter.\n* før – eksplicit heltalsværdi for hvor mange enheder efter den tid, det kunne være. Enheden er givet ved præcision.\n* efter – eksplicit heltalsværdi for hvor mange enheder før den tid, det kunne være. Enheden er givet ved præcision.\n* præcision – eksplicit værdi kodet i en shortint. Tallene har følgende betydning: 0 - milliarder år, 1 - hundrede millioner år,..., 6 - årtusinde, 7 - århundrede, 8 - årti, 9 - år, 10 - måned, 11 - dag, 12 - time, 13 - minut, 14 - sekund.\n* kalendermodel – eksplicit værdi givet som en URI. Den vil identificere den kalender-model, der skal bruges til at vise denne tidsværdi.",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "Bogstaveligt data felt til en URL. URLs er begrænsede til de protokoller, der også er understøttet for eksterne henvisninger i wikitekst.",
+	"wikibase-listdatavaluetypes-name-string": "streng",
+	"wikibase-listdatavaluetypes-name-time": "tid",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-emne",
 	"content-model-wikibase-property": "Wikibase-egenskab",

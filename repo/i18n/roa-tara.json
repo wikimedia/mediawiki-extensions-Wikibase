@@ -96,6 +96,11 @@
 	"wikibase-itemmerge-cant-load-entity-content": "Errore mendre ca ste carecave l'elemende.",
 	"special-listproperties": "Elenghe de le probbietà",
 	"wikibase-api-illegal-entity-remove": "Le entità non ge pinne essere scangellate da 'nu levélle ierte d'a chiave <var>remove</var>.",
+	"wikibase-listdatavaluetypes-name-string": "stringhe",
+	"wikibase-listdatavaluetypes-name-globecoordinate": "coordinate sciugrafeche",
+	"wikibase-listdatavaluetypes-name-quantity": "quantitate",
+	"wikibase-listdatavaluetypes-name-time": "orarie",
+	"wikibase-listdatavaluetypes-generalbody": "'U tipe de valore pe stu tipe de date jè <code>$1</code>",
 	"content-model-wikibase-item": "Elemende Uicchibase",
 	"content-model-wikibase-property": "Probbietà Uicchibase",
 	"content-model-wikibase-query": "'Nderrogazione UicchiBase"

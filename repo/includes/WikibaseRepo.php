@@ -16,6 +16,8 @@ use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\DataTypeFactory;
@@ -1008,6 +1010,10 @@ class WikibaseRepo {
 		return $this->getStore()->getEntityLookup( $cache );
 	}
 
+	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
+		return new LegacyAdapterPropertyLookup( $this->getEntityLookup( $cacheMode ) );
+	}
+
 	/**
 	 * @return SnakFactory
 	 */
@@ -1939,7 +1945,8 @@ class WikibaseRepo {
 			$this->getEntityDiffer(),
 			$this->getEntityPatcher(),
 			$this->newEditFilterHookRunner( $context ?: RequestContext::getMain() ),
-			MediaWikiServices::getInstance()->getStatsdDataFactory()
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			$this->getSettings()->getSetting( 'maxSerializedEntitySize' )
 		);
 	}
 

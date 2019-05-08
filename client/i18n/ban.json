@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Carma citrawati"
+			"Carma citrawati",
+			"Joseagush"
 		]
 	},
 	"tooltip-t-wikibase": "Pranala sané ngubungang butir ring genah ngenahang data",
@@ -9,6 +10,9 @@
 	"wikibase-dataitem": "item ring {{WBREPONAME}}",
 	"wikibase-editlinks": "edit pranala",
 	"wikibase-editlinkstitle": "suntik pranala pantaraning basa",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Engkebang",
+	"wikibase-rc-hide-wikidata-show": "Edengang",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "item ring {{WBREPONAME}}"
 }

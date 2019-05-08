@@ -23,6 +23,7 @@
 	"wikibase-error-autocomplete-response": "Risposta del server: $1",
 	"wikibase-error-ui-no-external-page": "Una pagina \"$2\" non è stata trovata su \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Lo stesso valore è stato modificato nel frattempo, causando un conflitto di edizione. Ricarica la pagina.",
+	"wikibase-error-entity-too-big": "L'entità è troppo grande. La dimensione massima consentita dell'entità è $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (traslitterato)",
 	"wikibase-quantitydetails-amount": "Quantità",
 	"wikibase-quantitydetails-upperbound": "Limite superiore",

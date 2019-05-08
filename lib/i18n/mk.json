@@ -22,6 +22,7 @@
 	"wikibase-error-autocomplete-response": "Одговор на опслужувачот: $1",
 	"wikibase-error-ui-no-external-page": "Страницата „$2“ не е најдена на „$1“.",
 	"wikibase-error-ui-edit-conflict": "Во меѓувреме е изменета истата вредност, предизвикувајќи спротиставеност во уредувањето. Превчитајте ја страницата.",
+	"wikibase-error-entity-too-big": "Единицата е преголема. Се допушта највеќе $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерирано)",
 	"wikibase-quantitydetails-amount": "Износ",
 	"wikibase-quantitydetails-upperbound": "Горна граница",

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\EditEntity;
 
 use InvalidArgumentException;
+use Wikibase\Lib\Store\EntityContentTooBigException;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use ReadOnlyError;
@@ -117,6 +118,11 @@ class MediawikiEditEntity implements EditEntity {
 	private $errorType = 0;
 
 	/**
+	 * @var int
+	 */
+	private $maxSerializedEntitySize;
+
+	/**
 	 * @var bool Can use a master connection or not
 	 */
 	private $allowMasterConnection;
@@ -132,6 +138,7 @@ class MediawikiEditEntity implements EditEntity {
 	 *        May be null when creating a new entity.
 	 * @param User $user the user performing the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param int $maxSerializedEntitySize the maximal allowed entity size in Kilobytes
 	 * @param int $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
 	 *        effectively disabling conflict detections. true and false will be accepted for
@@ -150,6 +157,7 @@ class MediawikiEditEntity implements EditEntity {
 		EntityId $entityId = null,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
+		$maxSerializedEntitySize,
 		$baseRevId = 0,
 		$allowMasterConnection = true
 	) {
@@ -178,6 +186,7 @@ class MediawikiEditEntity implements EditEntity {
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->allowMasterConnection = $allowMasterConnection;
+		$this->maxSerializedEntitySize = $maxSerializedEntitySize;
 	}
 
 	/**
@@ -689,7 +698,13 @@ class MediawikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
-		$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+		try {
+			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->user, $summary );
+		} catch ( EntityContentTooBigException $ex ) {
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
+			return $this->status;
+		}
 		if ( !$hookStatus->isOK() ) {
 			$this->errorType |= EditEntity::FILTERED;
 		}
@@ -720,6 +735,10 @@ class MediawikiEditEntity implements EditEntity {
 			}
 
 			$this->errorType |= EditEntity::SAVE_ERROR;
+		} catch ( EntityContentTooBigException $ex ) {
+			$this->status->setResult( false, [ 'errorFlags' => $this->errorType ] );
+			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
+			return $this->status;
 		}
 
 		$this->status->setResult( $editStatus->isOK(), $editStatus->getValue() );
