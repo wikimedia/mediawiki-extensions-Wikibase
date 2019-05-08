@@ -286,7 +286,8 @@ class OutputPageBeforeHTMLHookHandler {
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
-				$repo->getSettings()->getSetting( 'ssrServerTimeout' )
+				$repo->getSettings()->getSetting( 'ssrServerTimeout' ),
+				$repo->getLogger()
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),
