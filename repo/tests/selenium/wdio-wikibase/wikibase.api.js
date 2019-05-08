@@ -31,16 +31,14 @@ class WikibaseApi {
 
 		return bot.getEditToken()
 			.then( () => {
-				return new Promise( ( resolve, reject ) => {
-					bot.request( {
-						action: 'wbeditentity',
-						'new': 'item',
-						data: JSON.stringify( itemData ),
-						token: bot.editToken
-					} ).then( ( response ) => {
-						resolve( response.entity.id );
-					}, reject );
+				return bot.request( {
+					action: 'wbeditentity',
+					'new': 'item',
+					data: JSON.stringify( itemData ),
+					token: bot.editToken
 				} );
+			} ).then( ( response ) => {
+				return response.entity.id;
 			} );
 	}
 
