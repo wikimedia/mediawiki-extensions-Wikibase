@@ -4,6 +4,8 @@ namespace Wikibase\View\Termbox\Renderer;
 
 use Exception;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -19,6 +21,11 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	/* public */ const HTTP_STATUS_OK = 200;
 
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
 	public function __construct(
 		HttpRequestFactory $requestFactory,
 		$ssrServerUrl,
@@ -27,6 +34,9 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
 		$this->ssrServerTimeout = $ssrServerTimeout;
+
+		// Inject ?
+		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
 
 	/**
@@ -40,11 +50,26 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 			);
 			$request->execute();
 		} catch ( Exception $e ) {
+			$this->logger->error(
+				__FUNCTION__ . ' had a problem requesting from the remote server',
+				[
+					'exception' => $e,
+					'message' => $e->getMessage(),
+				]
+			);
 			throw new TermboxRenderingException( 'Encountered request problem', null, $e );
 		}
 
 		$status = $request->getStatus();
 		if ( $status !== self::HTTP_STATUS_OK ) {
+			$this->logger->error(
+				__FUNCTION__ . ' encountered a bad response from the remote renderer',
+				[
+					'status' => $status,
+					'content' => $request->getContent(),
+					'headers' => $request->getResponseHeaders()
+				]
+			);
 			throw new TermboxRenderingException( 'Encountered bad response: ' . $status );
 		}
 
