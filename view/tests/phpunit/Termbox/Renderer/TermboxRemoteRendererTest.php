@@ -4,8 +4,10 @@ namespace Wikibase\View\Tests\Termbox\Renderer;
 
 use Exception;
 use Language;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
+use NullStatsdDataFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PHPUnit4And6Compat;
@@ -33,8 +35,14 @@ class TermboxRemoteRendererTest extends TestCase {
 	 */
 	private $logger;
 
+	/**
+	 * @var StatsdDataFactoryInterface|MockObject
+	 */
+	private $stats;
+
 	public function setUp() {
 		$this->logger = $this->getMock( LoggerInterface::class );
+		$this->stats = $this->getMock( StatsdDataFactoryInterface::class );
 	}
 
 	/** private */ const SSR_URL = 'https://ssr/termbox';
@@ -89,7 +97,8 @@ class TermboxRemoteRendererTest extends TestCase {
 			$requestFactory,
 			self::SSR_URL,
 			self::SSR_TIMEOUT,
-			new NullLogger()
+			new NullLogger(),
+			new NullStatsdDataFactory()
 		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
 	}
 
@@ -116,6 +125,9 @@ class TermboxRemoteRendererTest extends TestCase {
 					'exception' => $upstreamException,
 				]
 			);
+		$this->stats->expects( $this->once() )
+			->method( 'increment' )
+			->with( 'wikibase.view.TermboxRemoteRenderer.requestError' );
 
 		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
@@ -160,6 +172,9 @@ class TermboxRemoteRendererTest extends TestCase {
 					'headers' => $responseHeaders,
 				]
 			);
+		$this->stats->expects( $this->once() )
+			->method( 'increment' )
+			->with( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' );
 
 		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
@@ -203,6 +218,9 @@ class TermboxRemoteRendererTest extends TestCase {
 					'headers' => $responseHeaders,
 				]
 			);
+		$this->stats->expects( $this->once() )
+			->method( 'increment' )
+			->with( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' );
 
 		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
@@ -236,6 +254,9 @@ class TermboxRemoteRendererTest extends TestCase {
 					'message' => 'Request failed with status 0. Usually this means network failure or timeout',
 				]
 			);
+		$this->stats->expects( $this->once() )
+			->method( 'increment' )
+			->with( 'wikibase.view.TermboxRemoteRenderer.requestError' );
 
 		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 		try {
@@ -252,7 +273,8 @@ class TermboxRemoteRendererTest extends TestCase {
 			$this->newHttpRequestFactoryWithRequest( $request ),
 			self::SSR_URL,
 			self::SSR_TIMEOUT,
-			$this->logger
+			$this->logger,
+			$this->stats
 		);
 	}
 
