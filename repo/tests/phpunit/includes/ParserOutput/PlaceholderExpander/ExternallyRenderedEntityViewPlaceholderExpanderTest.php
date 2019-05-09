@@ -62,6 +62,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$this->specialPageLinker = $this->createMock( RepoSpecialPageLinker::class );
 		$this->languageFallbackChainFactory = $this->newLanguageFallbackChainFactory();
 		$this->revisionIdReader = $this->newOutputPageRevisionIdReader();
+		$this->termboxUserSpecificSSR = true;
 	}
 
 	public function testGivenWbUiPlaceholderAndDefaultRequest_getHtmlForPlaceholderReturnsInjectedMarkup() {
@@ -189,7 +190,30 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$this->newPlaceholderExpander()->getHtmlForPlaceholder( 'unknown-placeholder' );
 	}
 
-	private function newPlaceholderExpander() {
+	public function testGivenWbUiPlaceholderAndDefaultRequest_termboxUserSpecificSSRDisabeled() {
+		$html = '<div>termbox</div>';
+
+		$this->outputPage->expects( $this->once() )
+			->method( 'getProperty' )
+			->with( TermboxView::TERMBOX_MARKUP )
+			->willReturn( $html );
+
+		$this->requestInspector->expects( $this->once() )
+			->method( 'isDefaultRequest' )
+			->with( $this->outputPage )
+			->willReturn( true );
+
+		$reader = $this->createMock( OutputPageRevisionIdReader::class );
+		$reader->expects( $this->never() )
+			 ->method( 'getRevisionFromOutputPage' );
+
+		$this->assertSame(
+			$html,
+			$this->newPlaceholderExpander( false )->getHtmlForPlaceholder( TermboxView::TERMBOX_PLACEHOLDER )
+		);
+	}
+
+	private function newPlaceholderExpander( $termboxUserSpecificSSR = true ) {
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$this->outputPage,
 			$this->requestInspector,
@@ -197,7 +221,8 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			$this->entityIdReader,
 			$this->specialPageLinker,
 			$this->languageFallbackChainFactory,
-			$this->revisionIdReader
+			$this->revisionIdReader,
+			$termboxUserSpecificSSR
 		);
 	}
 
