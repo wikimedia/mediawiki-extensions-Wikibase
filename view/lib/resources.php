@@ -503,17 +503,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'valueFormatters.formatters' => $wikibaseDatavaluesSrcPaths + [
-			'scripts' => [
-				'valueFormatters/formatters/NullFormatter.js',
-				'valueFormatters/formatters/StringFormatter.js',
-			],
-			'dependencies' => [
-				'dataValues.values',
-				'util.inherit',
-				'valueFormatters.ValueFormatter',
-			],
-		],
 		'valueParsers' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueParsers/valueParsers.js',
