@@ -28,8 +28,13 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 	public function testValidateEntity(
 		array $labels,
 		array $descriptions,
-		array $expectedErrors
+		array $expectedErrors,
+		array $languages = null
 	) {
+		if ( $languages !== null ) {
+			$this->markTestSkipped( 'No need to test specific languages check' );
+		}
+
 		$validator = new LabelDescriptionNotEqualValidator();
 		$labelsTermList = new TermList();
 		$descriptionsTermList = new TermList();
@@ -52,7 +57,8 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 	public function testValidateFingerprint(
 		array $labels,
 		array $descriptions,
-		array $expectedErrors
+		array $expectedErrors,
+		array $languages = null
 	) {
 		$validator = new LabelDescriptionNotEqualValidator();
 		$labelsTermList = new TermList();
@@ -67,7 +73,8 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 		$result = $validator->validateFingerprint(
 			$labelsTermList,
 			$descriptionsTermList,
-			new ItemId( 'Q1' )
+			new ItemId( 'Q1' ),
+			$languages
 		);
 
 		$this->assertResult( $result, $expectedErrors );
@@ -103,6 +110,21 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 				new NotEqualViolation( 'label should not be equal to description',
 					'label-equals-description', [ 'de' ] )
 			]
+		];
+		yield 'label = description in German and check only German' => [
+			[ 'de' => 'foo' ],
+			[ 'de' => 'foo' ],
+			[
+				new NotEqualViolation( 'label should not be equal to description',
+					'label-equals-description', [ 'de' ] )
+			],
+			[ 'de' ]
+		];
+		yield 'label = description in German check only English' => [
+			[ 'de' => 'foo' ],
+			[ 'de' => 'foo' ],
+			[],
+			[ 'en' ]
 		];
 		yield 'label = description with extra terms' => [
 			[ 'en' => 'foo', 'de' => 'German label' ],
