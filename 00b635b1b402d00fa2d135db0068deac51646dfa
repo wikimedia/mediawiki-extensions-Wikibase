@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fdaa2e09_8bbec908",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-09T11:03:19Z",
+      "side": 1,
+      "message": "Standard PSR-3 syntax: https://www.php-fig.org/psr/psr-3/#12-message",
+      "parentUuid": "a3d53590_61dead34",
+      "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d70339f_2269eaae",
         "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
         "patchSetId": 2
