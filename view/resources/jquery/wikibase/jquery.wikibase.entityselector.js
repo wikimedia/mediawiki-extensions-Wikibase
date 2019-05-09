@@ -219,7 +219,6 @@
 
 					if ( self._termMatchesSuggestion( requestTerm, suggestions[ 0 ] ) ) {
 						self._select( suggestions[ 0 ] );
-						self._close();
 					}
 				} );
 			}, this.options.delay );
