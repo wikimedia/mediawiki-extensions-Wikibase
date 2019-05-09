@@ -503,17 +503,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'valueFormatters.formatters' => $wikibaseDatavaluesSrcPaths + [
-			'scripts' => [
-				'valueFormatters/formatters/NullFormatter.js',
-				'valueFormatters/formatters/StringFormatter.js',
-			],
-			'dependencies' => [
-				'dataValues.values',
-				'util.inherit',
-				'valueFormatters.ValueFormatter',
-			],
-		],
 		'valueParsers' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueParsers/valueParsers.js',
@@ -539,6 +528,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: This module is registered on WikibaseClient on all page views,
+		// but only used in WikibaseRepo.
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueParsers/parsers/BoolParser.js',
@@ -1286,15 +1277,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.PurposedCallbacks',
-			],
-		],
-
-		'jquery.autocompletestring' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
-				'jquery/jquery.autocompletestring.js',
-			],
-			'dependencies' => [
-				'jquery.util.adaptlettercase',
 			],
 		],
 
