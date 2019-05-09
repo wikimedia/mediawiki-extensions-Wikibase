@@ -3,6 +3,8 @@
 namespace Wikibase\View\Termbox\Renderer;
 
 use Exception;
+use IBufferingStatsdDataFactory;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,6 +19,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	private $requestFactory;
 	private $ssrServerUrl;
 	private $logger;
+	private $stats;
 
 	private $ssrServerTimeout;
 	/* public */ const HTTP_STATUS_OK = 200;
@@ -25,12 +28,15 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		HttpRequestFactory $requestFactory,
 		$ssrServerUrl,
 		$ssrServerTimeout,
-		LoggerInterface $logger
+		LoggerInterface $logger,
+		StatsdDataFactoryInterface $stats
+
 	) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
 		$this->ssrServerTimeout = $ssrServerTimeout;
 		$this->logger = $logger;
+		$this->stats = $stats;
 	}
 
 	/**
@@ -51,6 +57,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		$status = $request->getStatus();
 
 		if ( $status !== self::HTTP_STATUS_OK ) {
+
 			if ( $status === 0 ) {
 				$this->reportFailureOfRequest( 'Request failed with status 0. Usually this means network failure or timeout' );
 			} else {
@@ -62,7 +69,9 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 						'headers' => $request->getResponseHeaders()
 					]
 				);
+				$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' );
 			}
+
 			throw new TermboxRenderingException( 'Encountered bad response: ' . $status );
 		}
 
@@ -78,6 +87,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 			__METHOD__ . ' had a problem requesting from the remote server',
 			$reportPayload
 		);
+		$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.requestError' );
 	}
 
 	private function formatUrl( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
