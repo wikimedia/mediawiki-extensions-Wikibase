@@ -287,7 +287,8 @@ class OutputPageBeforeHTMLHookHandler {
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
 				$repo->getSettings()->getSetting( 'ssrServerTimeout' ),
-				$repo->getLogger()
+				$repo->getLogger(),
+				MediaWikiServices::getInstance()->getStatsdDataFactory()
 			),
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),

@@ -3,6 +3,7 @@
 namespace Wikibase\View\Termbox\Renderer;
 
 use Exception;
+use IBufferingStatsdDataFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
@@ -20,17 +21,24 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private $ssrServerTimeout;
 	/* public */ const HTTP_STATUS_OK = 200;
+	/**
+	 * @var IBufferingStatsdDataFactory
+	 */
+	private $stats;
 
 	public function __construct(
 		HttpRequestFactory $requestFactory,
 		$ssrServerUrl,
 		$ssrServerTimeout,
-		LoggerInterface $logger
+		LoggerInterface $logger,
+		IBufferingStatsdDataFactory $stats
+
 	) {
 		$this->requestFactory = $requestFactory;
 		$this->ssrServerUrl = $ssrServerUrl;
 		$this->ssrServerTimeout = $ssrServerTimeout;
 		$this->logger = $logger;
+		$this->stats = $stats;
 	}
 
 	/**
@@ -51,6 +59,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 					'message' => $e->getMessage(),
 				]
 			);
+			$this->stats->increment( 'wikibase.repo.TermboxRemoteRenderer.requestError' );
 			throw new TermboxRenderingException( 'Encountered request problem', null, $e );
 		}
 
@@ -64,6 +73,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 					'headers' => $request->getResponseHeaders()
 				]
 			);
+			$this->stats->increment( 'wikibase.repo.TermboxRemoteRenderer.unsuccessfulResponse' );
 			throw new TermboxRenderingException( 'Encountered bad response: ' . $status );
 		}
 

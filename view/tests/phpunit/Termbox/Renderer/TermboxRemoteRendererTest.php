@@ -6,6 +6,7 @@ use Exception;
 use Language;
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
+use NullStatsdDataFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PHPUnit4And6Compat;
@@ -79,7 +80,8 @@ class TermboxRemoteRendererTest extends TestCase {
 			$requestFactory,
 			self::SSR_URL,
 			self::SSR_TIMEOUT,
-			new NullLogger()
+			new NullLogger(),
+			new NullStatsdDataFactory()
 		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
 	}
 
@@ -180,7 +182,8 @@ class TermboxRemoteRendererTest extends TestCase {
 			$this->newHttpRequestFactoryWithRequest( $request ),
 			self::SSR_URL,
 			self::SSR_TIMEOUT,
-			new NullLogger()
+			new NullLogger(),
+			new NullStatsdDataFactory()
 		);
 	}
 
