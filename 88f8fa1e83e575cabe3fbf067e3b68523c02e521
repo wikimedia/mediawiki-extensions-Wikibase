@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "709fee5e_e9643e1f",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-05-09T15:40:29Z",
+      "side": 1,
+      "message": "When running into the timeout this will log `[ status \u003d\u003e 0, content \u003d\u003e \u0027\u0027, headers \u003d\u003e [] ]`. This isn\u0027t very helpful, so we might want to sort the status \u003d\u003d\u003d 0 errors into the \"problem requesting from the remote server\" category.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 48
+      },
+      "revId": "88f8fa1e83e575cabe3fbf067e3b68523c02e521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
