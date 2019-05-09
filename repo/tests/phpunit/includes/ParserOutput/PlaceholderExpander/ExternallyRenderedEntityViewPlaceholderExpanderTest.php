@@ -52,6 +52,9 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 	/** @var OutputPageRevisionIdReader|MockObject */
 	private $revisionIdReader;
 
+	/** @var bool */
+	private $enableUserSpecificSSR;
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -62,6 +65,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$this->specialPageLinker = $this->createMock( RepoSpecialPageLinker::class );
 		$this->languageFallbackChainFactory = $this->newLanguageFallbackChainFactory();
 		$this->revisionIdReader = $this->newOutputPageRevisionIdReader();
+		$this->enableUserSpecificSSR = true;
 	}
 
 	public function testGivenWbUiPlaceholderAndDefaultRequest_getHtmlForPlaceholderReturnsInjectedMarkup() {
@@ -189,6 +193,29 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		$this->newPlaceholderExpander()->getHtmlForPlaceholder( 'unknown-placeholder' );
 	}
 
+	public function testGivenNonDefaultRequestAndDisabledUserSpecificSSR_getHtmlForPlaceholderReturnsDefaultMarkup() {
+		$this->enableUserSpecificSSR = false;
+		$html = '<div>termbox</div>';
+
+		$this->outputPage->expects( $this->once() )
+			->method( 'getProperty' )
+			->with( TermboxView::TERMBOX_MARKUP )
+			->willReturn( $html );
+
+		$this->requestInspector->expects( $this->once() )
+			->method( 'isDefaultRequest' )
+			->with( $this->outputPage )
+			->willReturn( false );
+
+		$this->termboxRenderer->expects( $this->never() )
+			->method( 'getContent' );
+
+		$this->assertSame(
+			$html,
+			$this->newPlaceholderExpander()->getHtmlForPlaceholder( TermboxView::TERMBOX_PLACEHOLDER )
+		);
+	}
+
 	private function newPlaceholderExpander() {
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$this->outputPage,
@@ -197,7 +224,8 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			$this->entityIdReader,
 			$this->specialPageLinker,
 			$this->languageFallbackChainFactory,
-			$this->revisionIdReader
+			$this->revisionIdReader,
+			$this->enableUserSpecificSSR
 		);
 	}
 
