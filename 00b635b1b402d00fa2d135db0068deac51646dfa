@@ -86,6 +86,24 @@
       "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0cf7369_b5f9ba0b",
+        "filename": "lib/includes/Store/Sql/MediaWikiTermStore/MediaWikiNormalizedTermCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-09T11:08:31Z",
+      "side": 1,
+      "message": "I don’t understand how this would happen, can you describe the scenario in more detail?",
+      "parentUuid": "766ec962_461022c1",
+      "revId": "00b635b1b402d00fa2d135db0068deac51646dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
