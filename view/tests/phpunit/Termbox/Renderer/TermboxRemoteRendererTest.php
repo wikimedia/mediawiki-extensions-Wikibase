@@ -28,6 +28,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 	/** private */ const SSR_URL = 'https://ssr/termbox';
 	/** private */ const SSR_TIMEOUT = 3;
+	/** private */ const SSR_ENABLE = true;
 
 	public function testGetContentWithSaneParameters_returnsRequestResponse() {
 		$content = 'hello from server!';
@@ -39,6 +40,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_ENABLE,
 			self::SSR_URL,
 			self::SSR_TIMEOUT
 		);
@@ -80,6 +82,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		( new TermboxRemoteRenderer(
 			$requestFactory,
+			self::SSR_ENABLE,
 			self::SSR_URL,
 			self::SSR_TIMEOUT
 		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
@@ -100,6 +103,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_ENABLE,
 			self::SSR_URL,
 			self::SSR_TIMEOUT
 		);
@@ -129,6 +133,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_ENABLE,
 			self::SSR_URL,
 			self::SSR_TIMEOUT
 		);
@@ -157,6 +162,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_ENABLE,
 			self::SSR_URL,
 			self::SSR_TIMEOUT
 		);
@@ -186,6 +192,7 @@ class TermboxRemoteRendererTest extends TestCase {
 
 		$client = new TermboxRemoteRenderer(
 			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_ENABLE,
 			self::SSR_URL,
 			self::SSR_TIMEOUT
 		);
@@ -197,6 +204,29 @@ class TermboxRemoteRendererTest extends TestCase {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 			$this->assertSame( 'Encountered bad response: 0', $exception->getMessage() );
 		}
+	}
+
+	public function testUseUserSpecificSSR() {
+		$language = 'de';
+		$itemId = 'Q42';
+		$entityId = new ItemId( $itemId );
+		$revision = 4711;
+		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
+		$preferredLanguages = [ 'en', 'fr', 'es' ];
+		$fallbackChain = $this->newLanguageFallbackChain( $preferredLanguages );
+
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
+		$requestFactory->expects( $this->never() )
+			->method( 'create' );
+
+		$client = new TermboxRemoteRenderer(
+			$requestFactory,
+			false,
+			self::SSR_URL,
+			self::SSR_TIMEOUT
+		);
+
+		$this->assertSame( '', $client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() ) );
 	}
 
 	/**

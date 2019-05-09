@@ -184,6 +184,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : The url to where the server-side-renderer server (for termbox) is running.
 ; ssrServerTimeout
 ; Time after which wikibase aborts the connection to the ssr server.
+; termboxUserSpecificSsrEnabled
+; Enable/Disable server-side rendering (SSR) for user-specific termbox markup. The default setting is <code>true</code>. It only comes into effect if the general "termboxEnabled" is <code>true</code>. If disabled, user-specific termbox markup will only be created by client-side rendering after initial diplaying of the generic termbox markup.
 
 == Client Settings ==
 
