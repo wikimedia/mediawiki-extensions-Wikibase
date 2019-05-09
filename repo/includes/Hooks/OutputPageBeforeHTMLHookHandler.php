@@ -293,7 +293,8 @@ class OutputPageBeforeHTMLHookHandler {
 			$this->outputPageEntityIdReader,
 			new RepoSpecialPageLinker(),
 			$languageFallbackChainFactory,
-			new OutputPageRevisionIdReader()
+			new OutputPageRevisionIdReader(),
+			$repo->getSettings()->getSetting( 'termboxUserSpecificSsrEnabled' )
 		);
 	}
 

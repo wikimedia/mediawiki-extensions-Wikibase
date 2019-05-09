@@ -35,6 +35,8 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 
 	private $revisionIdReader;
 
+	private $enableUserSpecificSSR;
+
 	public function __construct(
 		OutputPage $outputPage,
 		TermboxRequestInspector $requestInspector,
@@ -42,7 +44,8 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		OutputPageEntityIdReader $entityIdReader,
 		RepoSpecialPageLinker $specialPageLinker,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		OutputPageRevisionIdReader $revisionIdReader
+		OutputPageRevisionIdReader $revisionIdReader,
+		$enableUserSpecificSSR
 	) {
 		$this->outputPage = $outputPage;
 		$this->requestInspector = $requestInspector;
@@ -51,6 +54,7 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		$this->specialPageLinker = $specialPageLinker;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->revisionIdReader = $revisionIdReader;
+		$this->enableUserSpecificSSR = $enableUserSpecificSSR;
 	}
 
 	public function getHtmlForPlaceholder( $name ) {
@@ -62,7 +66,8 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 	}
 
 	private function getHtml() {
-		return $this->requestInspector->isDefaultRequest( $this->outputPage )
+		return ( $this->requestInspector->isDefaultRequest( $this->outputPage )
+			|| !$this->enableUserSpecificSSR )
 			? $this->outputPage->getProperty( TermboxView::TERMBOX_MARKUP )
 			: $this->rerenderTermbox();
 	}
