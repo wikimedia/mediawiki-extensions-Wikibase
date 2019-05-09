@@ -14,9 +14,11 @@ use Wikibase\LanguageFallbackChainFactory;
 class TermboxRequestInspector {
 
 	private $languageFallbackChainFactory;
+	private $useUserSpecificSSR;
 
-	public function __construct( LanguageFallbackChainFactory $languageFallbackChainFactory ) {
+	public function __construct( LanguageFallbackChainFactory $languageFallbackChainFactory, $useUserSpecificSSR ) {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->useUserSpecificSSR = $useUserSpecificSSR;
 	}
 
 	/**
@@ -25,6 +27,10 @@ class TermboxRequestInspector {
 	 * @return bool
 	 */
 	public function isDefaultRequest( IContextSource $context ) {
+		if ( $this->useUserSpecificSSR === false ) {
+			return true;
+		}
+
 		return $this->languageFallbackChainFactory->newFromContext( $context )->getFallbackChain()
 			=== $this->languageFallbackChainFactory->newFromLanguage( $context->getLanguage() )->getFallbackChain();
 	}

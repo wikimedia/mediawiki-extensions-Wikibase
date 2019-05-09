@@ -36,7 +36,7 @@ class TermboxRequestInspectorTest extends TestCase {
 			->with( $context )
 			->willReturn( new LanguageFallbackChain( [ $language, 'en' ] ) );
 
-		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory );
+		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory, true );
 
 		$this->assertTrue( $inspector->isDefaultRequest( $context ) );
 	}
@@ -56,9 +56,21 @@ class TermboxRequestInspectorTest extends TestCase {
 			->with( $context )
 			->willReturn( new LanguageFallbackChain( [ $language, 'de' ] ) );
 
-		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory );
+		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory, true );
 
 		$this->assertFalse( $inspector->isDefaultRequest( $context ) );
+	}
+
+	public function testUserSpecificSSR_disabled() {
+		$context = $this->createMock( IContextSource::class );
+		$context->expects( $this->never() )->method( 'getLanguage' );
+
+		$languageFallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
+		$languageFallbackChainFactory->expects( $this->never() )->method( 'newFromLanguage' );
+		$languageFallbackChainFactory->expects( $this->never() )->method( 'newFromContext' );
+
+		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory, false );
+		$this->assertTrue( $inspector->isDefaultRequest( $context ) );
 	}
 
 	/**

@@ -282,7 +282,10 @@ class OutputPageBeforeHTMLHookHandler {
 
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
 			$out,
-			new TermboxRequestInspector( $languageFallbackChainFactory ),
+			new TermboxRequestInspector(
+				$languageFallbackChainFactory,
+				$repo->getSettings()->getSetting( 'termboxUserSpecificSsrEnabled' )
+			),
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
