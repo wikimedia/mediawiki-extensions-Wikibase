@@ -14,6 +14,7 @@ use Wikibase\LanguageWithConversion;
 class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private $requestFactory;
+	private $useSSR;
 	private $ssrServerUrl;
 	private $ssrServerTimeout;
 
@@ -21,10 +22,12 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	public function __construct(
 		HttpRequestFactory $requestFactory,
+		$useSSR,
 		$ssrServerUrl,
 		$ssrServerTimeout
 	) {
 		$this->requestFactory = $requestFactory;
+		$this->useSSR = $useSSR;
 		$this->ssrServerUrl = $ssrServerUrl;
 		$this->ssrServerTimeout = $ssrServerTimeout;
 	}
@@ -33,6 +36,10 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	 * @inheritDoc
 	 */
 	public function getContent( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+		if ( !$this->useSSR ) {
+			return '';
+		}
+
 		try {
 			$request = $this->requestFactory->create(
 				$this->formatUrl( $entityId, $revision, $language, $editLink, $preferredLanguages ),

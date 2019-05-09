@@ -285,6 +285,7 @@ class OutputPageBeforeHTMLHookHandler {
 			new TermboxRequestInspector( $languageFallbackChainFactory ),
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
+				$repo->getSettings()->getSetting( 'termboxUserSpecificSsrEnabled' ),
 				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
 				$repo->getSettings()->getSetting( 'ssrServerTimeout' )
 			),

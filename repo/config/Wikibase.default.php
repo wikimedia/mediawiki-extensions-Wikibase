@@ -19,6 +19,9 @@ return [
 	// feature flag for termbox
 	'termboxEnabled' => false,
 
+	// debug flag for termbox ssr
+	'termboxUserSpecificSsrEnabled' => true,
+
 	'idBlacklist' => [],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
