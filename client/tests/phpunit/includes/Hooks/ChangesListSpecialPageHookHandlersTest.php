@@ -11,8 +11,8 @@ use PHPUnit4And6Compat;
 use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LoadBalancer;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -77,7 +77,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			'Recentchanges',
 			true
 		) );
@@ -149,7 +149,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 				[
 					$this->getRequest( [] ),
 					$this->getUser( [] ),
-					$this->getLoadBalancer(),
+					$this->getDatabase(),
 					'Recentchanges',
 					true
 				]
@@ -199,7 +199,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			$pageName,
 			true
 		) );
@@ -233,7 +233,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [] ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			'Watchlist',
 			true
 		);
@@ -262,7 +262,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			$pageName,
 			true
 		) );
@@ -329,7 +329,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			$specialPageName,
 			true
 		) );
@@ -401,7 +401,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			$specialPageName,
 			true
 		) );
@@ -460,7 +460,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( [] ),
 			$this->getUser( [ 'usenewrc' => 0 ] ),
-			$this->getLoadBalancer(),
+			$this->getDatabase(),
 			$specialPageName,
 			/* $showExternalChanges= */ false
 		) );
@@ -509,10 +509,10 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @return LoadBalancer
+	 * @return DBConnRef
 	 */
-	private function getLoadBalancer() {
-		$databaseBase = $this->createMock( IDatabase::class );
+	private function getDatabase() {
+		$databaseBase = $this->createMock( DBConnRef::class );
 
 		$databaseBase->expects( $this->any() )
 			->method( 'addQuotes' )
@@ -520,15 +520,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 				return "'$input'";
 			} ) );
 
-		$loadBalancer = $this->getMockBuilder( LoadBalancer::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$loadBalancer->expects( $this->any() )
-			->method( 'getConnection' )
-			->will( $this->returnValue( $databaseBase ) );
-
-		return $loadBalancer;
+		return $databaseBase;
 	}
 
 }
