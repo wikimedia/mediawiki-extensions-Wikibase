@@ -22,6 +22,30 @@
       "revId": "88f8fa1e83e575cabe3fbf067e3b68523c02e521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df158ff_418452bd",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2019-05-10T08:28:01Z",
+      "side": 1,
+      "message": "Ah! cool, I didn\u0027t realise that a network failure wouldn\u0027t result in request-\u003eexecute() throwing.\n\nLooking at places like https://fetch.spec.whatwg.org/#concept-network-error it seems that 0 isn\u0027t just timeout but also things such as \"host not found\" etc..",
+      "parentUuid": "709fee5e_e9643e1f",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 48
+      },
+      "revId": "88f8fa1e83e575cabe3fbf067e3b68523c02e521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
