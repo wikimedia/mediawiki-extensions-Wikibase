@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3857589f_3eebfabc",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-10T10:32:22Z",
+      "side": 1,
+      "message": "Should this not be more generic, `StatsdDataFactoryInterface`?",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "f2e5de7a1dc29cab13e58c4c78804232c18896a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "940a2606_fcb8dacf",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-10T10:32:22Z",
+      "side": 1,
+      "message": "No drama but `TermboxRemoteRenderer` is part of view, not repo. If and how this should affect the stats key I don\u0027t know.",
+      "range": {
+        "startLine": 62,
+        "startChar": 37,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "f2e5de7a1dc29cab13e58c4c78804232c18896a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
