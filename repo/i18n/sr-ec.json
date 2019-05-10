@@ -245,7 +245,7 @@
 	"wikibase-dispatchstats-average": "Просечно",
 	"special-listdatatypes": "Списак свих доступних врста података",
 	"wikibase-listdatatypes-intro": "Ово је листа свих типова података доступних на овој инсталацији:",
-	"wikibase-listdatatypes-listproperties": "Листа својстава са овим типом податка",
+	"wikibase-listdatatypes-listproperties": "Списак својстава са овом врстом податка",
 	"wikibase-history-title-with-label": "Историја измена странице „$2” ($1)",
 	"wikibase-history-title-without-label": "Историја измена за ($1)",
 	"special-listproperties": "Списак својстава",

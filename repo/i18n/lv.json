@@ -7,7 +7,8 @@
 			"Macofe",
 			"Nitalynx",
 			"Silraks",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Peridot Nation"
 		]
 	},
 	"wikibase-entity-item": "vienums",
@@ -174,6 +175,7 @@
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-external-id-head": "Ārējais identifikators",
 	"wikibase-listdatavaluetypes-name-quantity": "daudzums",
+	"wikibase-listdatavaluetypes-name-time": "laiks",
 	"wikibase-concept-uri": "Jēdziena URI",
 	"wikibase-concept-uri-tooltip": "URI, kas apzīmē šajā vienumā aprakstīto jēdzienu",
 	"datatypes-type-url": "URL",

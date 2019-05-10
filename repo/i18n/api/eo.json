@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mirin"
+		]
+	},
+	"apihelp-wbmergeitems-description": "Kunigas plurajn erojn.",
+	"apihelp-wbmergeitems-summary": "Kunigas plurajn erojn.",
+	"apihelp-wbparsevalue-param-values": "Valoroj sintaksanalizotaj",
+	"apihelp-wbsearchentities-param-search": "Serĉi tiun tekston.",
+	"apihelp-wbsearchentities-param-language": "Serĉi en tiu lingvo.",
+	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "La lingvokodo.",
+	"apihelp-query+wbsearch-param-search": "Serĉi tiun tekston.",
+	"apihelp-query+wbsearch-param-language": "Serĉi en tiu lingvo."
+}
