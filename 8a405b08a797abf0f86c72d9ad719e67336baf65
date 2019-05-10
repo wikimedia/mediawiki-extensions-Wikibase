@@ -45,6 +45,30 @@
       "revId": "8a405b08a797abf0f86c72d9ad719e67336baf65",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc4e5a7f_757d8f41",
+        "filename": "repo/tests/selenium/wdio-wikibase/wikibaseUtil.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-10T11:52:48Z",
+      "side": 1,
+      "message": "AFAICT this will never fail the promise (although a failing bot.request might), but just throw the error in case this times out.",
+      "parentUuid": "6f52eecd_d4a22331",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 3
+      },
+      "revId": "8a405b08a797abf0f86c72d9ad719e67336baf65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
