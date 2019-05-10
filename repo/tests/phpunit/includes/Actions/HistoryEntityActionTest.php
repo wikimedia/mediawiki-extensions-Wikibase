@@ -76,6 +76,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 				'UseFileCache' => false,
 				'UseMediaWikiUIEverywhere' => false,
 				'Localtimezone' => 'UTC',
+				'ShowUpdatedMarker' => true
 			] ) );
 		$context->method( 'getRequest' )
 			->willReturn( new WebRequest() );
