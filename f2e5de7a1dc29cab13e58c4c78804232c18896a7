@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "292b2b53_cd192761",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2019-05-10T14:31:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3857589f_3eebfabc",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "f2e5de7a1dc29cab13e58c4c78804232c18896a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "940a2606_fcb8dacf",
         "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "f2e5de7a1dc29cab13e58c4c78804232c18896a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eb7100b_bb826ae8",
+        "filename": "view/src/Termbox/Renderer/TermboxRemoteRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1620
+      },
+      "writtenOn": "2019-05-10T14:31:03Z",
+      "side": 1,
+      "message": "I think you make a good point and we should put this in view. I could imagine that we may one day use the termbox remote renderer on a non-repo.\n\nChanges to \u0027view\u0027",
+      "parentUuid": "940a2606_fcb8dacf",
+      "range": {
+        "startLine": 62,
+        "startChar": 37,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "f2e5de7a1dc29cab13e58c4c78804232c18896a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
