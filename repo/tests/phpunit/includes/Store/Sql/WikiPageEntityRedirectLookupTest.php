@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -162,14 +162,12 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	/**
 	 * @param array $row
 	 *
-	 * @return LoadBalancer
+	 * @return ILoadBalancer
 	 */
 	private function getMockLoadBalancer( array $row ) {
 		$db = $this->getMockDatabase( $row );
 
-		$loadBalancer = $this->getMockBuilder( LoadBalancer::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$loadBalancer = $this->createMock( ILoadBalancer::class );
 
 		$loadBalancer->method( 'getConnection' )
 			->will( $this->returnValue( $db ) );

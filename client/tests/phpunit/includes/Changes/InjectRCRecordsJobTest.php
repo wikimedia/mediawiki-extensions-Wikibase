@@ -18,7 +18,7 @@ use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -191,14 +191,10 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return LBFactory|PHPUnit_Framework_MockObject_MockObject
+	 * @return ILBFactory
 	 */
 	private function getLBFactoryMock() {
-		$LBFactory = $this->getMockBuilder( LBFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $LBFactory;
+		return $this->createMock( ILBFactory::class );
 	}
 
 	public function provideMakeJobSpecification() {

@@ -14,8 +14,8 @@ use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;
-use Wikimedia\Rdbms\LBFactory;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * SQL based implementation of ChangeDispatchCoordinator;
@@ -99,7 +99,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $repoSiteId;
 
 	/**
-	 * @var LBFactory
+	 * @var ILBFactory
 	 */
 	private $LBFactory;
 
@@ -116,13 +116,13 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
-	 * @param LBFactory $LBFactory
+	 * @param ILBFactory $LBFactory
 	 * @param LoggerInterface $logger
 	 */
 	public function __construct(
 		$repoDB,
 		$repoSiteId,
-		LBFactory $LBFactory,
+		ILBFactory $LBFactory,
 		LoggerInterface $logger
 	) {
 		Assert::parameterType( 'string|boolean', $repoDB, '$repoDB' );
@@ -231,7 +231,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return LoadBalancer the repo's database load balancer.
+	 * @return ILoadBalancer the repo's database load balancer.
 	 */
 	private function getRepoLB() {
 		return $this->LBFactory->getMainLB( $this->repoDB );

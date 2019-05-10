@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,14 +28,14 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	private $entityIdLookup;
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
 
 	public function __construct(
 		EntityTitleStoreLookup $entityTitleLookup,
 		EntityIdLookup $entityIdLookup,
-		LoadBalancer $loadBalancer
+		ILoadBalancer $loadBalancer
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdLookup = $entityIdLookup;

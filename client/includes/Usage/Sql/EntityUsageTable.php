@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Helper class for updating the wbc_entity_usage table.
@@ -45,7 +45,7 @@ class EntityUsageTable {
 	private $readConnection;
 
 	/**
-	 * @var LBFactory
+	 * @var ILBFactory
 	 */
 	private $loadBalancerFactory;
 

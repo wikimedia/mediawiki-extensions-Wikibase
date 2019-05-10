@@ -13,7 +13,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Implements initial population (priming) for the wbc_entity_usage table,
@@ -36,7 +36,7 @@ class EntityUsageTableBuilder {
 	private $idParser;
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
 
@@ -62,7 +62,7 @@ class EntityUsageTableBuilder {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param LoadBalancer $loadBalancer
+	 * @param ILoadBalancer $loadBalancer
 	 * @param int $batchSize defaults to 1000
 	 * @param string|null $usageTableName defaults to wbc_entity_usage
 	 *
@@ -70,7 +70,7 @@ class EntityUsageTableBuilder {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		LoadBalancer $loadBalancer,
+		ILoadBalancer $loadBalancer,
 		$batchSize = 1000,
 		$usageTableName = null
 	) {

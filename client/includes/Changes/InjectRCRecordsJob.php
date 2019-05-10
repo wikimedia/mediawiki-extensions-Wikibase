@@ -16,7 +16,7 @@ use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Job for injecting RecentChange records representing changes on the Wikibase repository.
@@ -29,7 +29,7 @@ use Wikimedia\Rdbms\LBFactory;
 class InjectRCRecordsJob extends Job {
 
 	/**
-	 * @var LBFactory
+	 * @var ILBFactory
 	 */
 	private $lbFactory;
 
@@ -108,7 +108,7 @@ class InjectRCRecordsJob extends Job {
 	 * Constructs an InjectRCRecordsJob for injecting a change into the recentchanges feed
 	 * for the given pages.
 	 *
-	 * @param LBFactory $lbFactory
+	 * @param ILBFactory $lbFactory
 	 * @param EntityChangeLookup $changeLookup
 	 * @param EntityChangeFactory $changeFactory
 	 * @param RecentChangeFactory $rcFactory
@@ -118,7 +118,7 @@ class InjectRCRecordsJob extends Job {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		LBFactory $lbFactory,
+		ILBFactory $lbFactory,
 		EntityChangeLookup $changeLookup,
 		EntityChangeFactory $changeFactory,
 		RecentChangeFactory $rcFactory,

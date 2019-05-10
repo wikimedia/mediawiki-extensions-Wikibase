@@ -12,7 +12,7 @@ use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Implements initial population (priming) for the wb_changes_subscription table,
@@ -25,7 +25,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 class ChangesSubscriptionTableBuilder {
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
 
@@ -60,7 +60,7 @@ class ChangesSubscriptionTableBuilder {
 	private $verbosity;
 
 	/**
-	 * @param LoadBalancer $loadBalancer
+	 * @param ILoadBalancer $loadBalancer
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param string $tableName
 	 * @param int $batchSize
@@ -69,7 +69,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		LoadBalancer $loadBalancer,
+		ILoadBalancer $loadBalancer,
 		EntityIdComposer $entityIdComposer,
 		$tableName,
 		$batchSize,
