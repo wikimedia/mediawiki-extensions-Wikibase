@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f52eecd_d4a22331",
+        "filename": "repo/tests/selenium/wdio-wikibase/wikibaseUtil.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-10T09:47:27Z",
+      "side": 1,
+      "message": "If I read this correctly, then when initially called with remainingWaitTimeMS \u003c\u003d 0, it will directly throw an error instead of returning a failed Promise as it would otherwise. Not sure if that’s a serious issue though – arguably no one should call it like that…",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 3
+      },
+      "revId": "8a405b08a797abf0f86c72d9ad719e67336baf65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
