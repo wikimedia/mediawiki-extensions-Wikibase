@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\TermStore\PropertyTermStore;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,7 +29,7 @@ class PropertyTermsRebuilder {
 		SeekableEntityIdPager $idPager,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
-		LBFactory $loadBalancerFactory,
+		ILBFactory $loadBalancerFactory,
 		PropertyLookup $propertyLookup,
 		$batchSize,
 		$batchSpacingInSeconds

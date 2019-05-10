@@ -7,7 +7,7 @@ use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Clears search-related fields in the SQL terms table.
@@ -20,7 +20,7 @@ class TermSqlIndexSearchFieldsClearer {
 	const TABLE_NAME = 'wb_terms';
 
 	/**
-	 * @var LBFactory
+	 * @var ILBFactory
 	 */
 	private $loadBalancerFactory;
 
@@ -55,11 +55,11 @@ class TermSqlIndexSearchFieldsClearer {
 	private $clearTermWeight = true;
 
 	/**
-	 * @param LBFactory $loadBalancerFactory
+	 * @param ILBFactory $loadBalancerFactory
 	 * @param int $sleep Sleep time between each batch
 	 */
 	public function __construct(
-		LBFactory $loadBalancerFactory,
+		ILBFactory $loadBalancerFactory,
 		$sleep = 0
 	) {
 		$this->loadBalancerFactory = $loadBalancerFactory;

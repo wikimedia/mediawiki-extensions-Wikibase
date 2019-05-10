@@ -6,7 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Store\EntityIdLookup;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Lookup of EntityIds based on wikibase_item entries in the page_props table.
@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\LoadBalancer;
 class PagePropsEntityIdLookup implements EntityIdLookup {
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
 
@@ -27,7 +27,7 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 	private $idParser;
 
 	public function __construct(
-		LoadBalancer $loadBalancer,
+		ILoadBalancer $loadBalancer,
 		EntityIdParser $idParser
 	) {
 		$this->loadBalancer = $loadBalancer;

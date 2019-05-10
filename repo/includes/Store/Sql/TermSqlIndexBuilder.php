@@ -11,8 +11,8 @@ use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LBFactory;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * (Re)builds term index in the SQL table.
@@ -31,7 +31,7 @@ class TermSqlIndexBuilder {
 	const TABLE_NAME = 'wb_terms';
 
 	/**
-	 * @var LBFactory
+	 * @var ILBFactory
 	 */
 	private $loadBalancerFactory;
 
@@ -91,7 +91,7 @@ class TermSqlIndexBuilder {
 	private $fromId = null;
 
 	/**
-	 * @param LBFactory $loadBalancerFactory
+	 * @param ILBFactory $loadBalancerFactory
 	 * @param TermSqlIndex $termSqlIndex
 	 * @param SqlEntityIdPagerFactory $entityIdPagerFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -99,7 +99,7 @@ class TermSqlIndexBuilder {
 	 * @param int $sleep Sleep time between each batch
 	 */
 	public function __construct(
-		LBFactory $loadBalancerFactory,
+		ILBFactory $loadBalancerFactory,
 		TermSqlIndex $termSqlIndex,
 		SqlEntityIdPagerFactory $entityIdPagerFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -204,10 +204,10 @@ class TermSqlIndexBuilder {
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param LoadBalancer $loadBalancer
+	 * @param ILoadBalancer $loadBalancer
 	 * @param mixed $transactionTicket
 	 */
-	private function rebuildTermsForBatch( array $entityIds, LoadBalancer $loadBalancer, $transactionTicket ) {
+	private function rebuildTermsForBatch( array $entityIds, ILoadBalancer $loadBalancer, $transactionTicket ) {
 		$dbr = $loadBalancer->getConnection( DB_REPLICA );
 		$dbw = $loadBalancer->getConnection( DB_MASTER );
 

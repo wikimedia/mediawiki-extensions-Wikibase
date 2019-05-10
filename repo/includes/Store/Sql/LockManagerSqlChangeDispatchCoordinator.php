@@ -6,7 +6,7 @@ use LockManager;
 use Psr\Log\LoggerInterface;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * SQL-based implementation of ChangeDispatchCoordinator when there is a
@@ -25,14 +25,14 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 
 	/**
 	 * @param LockManager $lockManager
-	 * @param LBFactory $LBFactory
+	 * @param ILBFactory $LBFactory
 	 * @param LoggerInterface $logger
 	 * @param string|false $repoDB
 	 * @param string $repoSiteId The repo's global wiki ID
 	 */
 	public function __construct(
 		LockManager $lockManager,
-		LBFactory $LBFactory,
+		ILBFactory $LBFactory,
 		LoggerInterface $logger,
 		$repoDB,
 		$repoSiteId

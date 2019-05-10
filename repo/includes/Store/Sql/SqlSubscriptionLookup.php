@@ -5,7 +5,7 @@ namespace Wikibase\Store\Sql;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\SubscriptionLookup;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Implementation of SubscriptionLookup based on a database table.
@@ -16,11 +16,11 @@ use Wikimedia\Rdbms\LoadBalancer;
 class SqlSubscriptionLookup implements SubscriptionLookup {
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $dbLoadBalancer;
 
-	public function __construct( LoadBalancer $dbLoadBalancer ) {
+	public function __construct( ILoadBalancer $dbLoadBalancer ) {
 		$this->dbLoadBalancer = $dbLoadBalancer;
 	}
 
