@@ -1038,8 +1038,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'action' => 'wbeditentity',
 			'new' => 'item',
 			'data' => '{
-				"labels": { "de": { "language": "de", "value": "LabelDescriptionConflict" } },
-				"descriptions": { "de": { "language": "de", "value": "LabelDescriptionConflict" } }
+				"labels": { "de": { "language": "de", "value": "label conflict" } },
+				"descriptions": { "de": { "language": "de", "value": "description conflict" } }
 			}',
 		];
 		$this->doApiRequestWithToken( $params );
@@ -1049,6 +1049,23 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'code' => 'modification-failed',
 		];
 		// Repeating the same request with the same label and description should fail.
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
+	public function testItemLabelEqualsDescriptionConflict() {
+		$params = [
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => '{
+				"labels": { "de": { "language": "de", "value": "label should not = description" } },
+				"descriptions": { "de": { "language": "de", "value": "label should not = description" } }
+			}',
+		];
+
+		$expectedException = [
+			'type' => ApiUsageException::class,
+			'code' => 'modification-failed',
+		];
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
