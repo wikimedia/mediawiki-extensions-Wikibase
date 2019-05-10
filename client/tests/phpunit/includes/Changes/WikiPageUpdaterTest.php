@@ -3,20 +3,15 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use HTMLCacheUpdateJob;
-use IJobSpecification;
 use Job;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Log\NullLogger;
-use MediaWiki\MediaWikiServices;
 use RefreshLinksJob;
 use Title;
 use Wikibase\Client\Changes\WikiPageUpdater;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
-use Wikimedia\Rdbms\LBFactory;
 
 /**
  * @covers \Wikibase\Client\Changes\WikiPageUpdater
@@ -41,32 +36,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->getMock();
 
 		return $jobQueueGroup;
-	}
-
-	/**
-	 * @return RecentChangeFactory
-	 */
-	private function getRCFactoryMock() {
-		$rcFactory = $this->getMockBuilder( RecentChangeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$rcFactory->expects( $this->any() )
-			->method( 'prepareChangeAttributes' )
-			->will( $this->returnValue( [] ) );
-
-		return $rcFactory;
-	}
-
-	/**
-	 * @return RecentChangesDuplicateDetector
-	 */
-	private function getRCDupeDetectorMock() {
-		$rcDupeDetector = $this->getMockBuilder( RecentChangesDuplicateDetector::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $rcDupeDetector;
 	}
 
 	/**
@@ -112,17 +81,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return LBFactory
-	 */
-	private function getLBFactoryMock() {
-		$LBFactory = $this->getMockBuilder( LBFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $LBFactory;
-	}
-
-	/**
 	 * @return StatsdDataFactoryInterface
 	 */
 	private function getStatsdDataFactoryMock( array $expectedStats ) {
@@ -162,10 +120,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
-			$this->getRCFactoryMock(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			new NullLogger(),
-			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
 				'WebCache.jobs' => 2, // 2 batches (batch size 2, 3 titles)
 				'WebCache.titles' => 3,
@@ -209,21 +164,15 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$rootJobParams = [];
 		$jobQueueGroup->expects( $this->atLeastOnce() )
 			->method( 'lazyPush' )
-			->will( $this->returnCallback( function( IJobSpecification $job ) use ( &$pages, &$rootJobParams ) {
-				$this->assertInstanceOf( RefreshLinksJob::class, $job );
-				$title = $job->getTitle();
-
-				$id = $title->getArticleID();
-				$pages[] = $title->getPrefixedDBkey();
+			->with( $this->isInstanceOf( RefreshLinksJob::class ) )
+			->will( $this->returnCallback( function( Job $job ) use ( &$pages, &$rootJobParams ) {
+				$pages[] = $job->getTitle()->getPrefixedDBkey();
 				$rootJobParams = $job->getRootJobParams();
 			} ) );
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
-			$this->getRCFactoryMock(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			new NullLogger(),
-			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
 				'RefreshLinks.jobs' => 3, // no batching
 				'RefreshLinks.titles' => 3,
@@ -282,10 +231,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$updater = new WikiPageUpdater(
 			$jobQueueGroup,
-			$this->getRCFactoryMock(),
-			$this->getLBFactoryMock(),
 			new NullLogger(),
-			$this->getRCDupeDetectorMock(),
 			$this->getStatsdDataFactoryMock( [
 				// FIXME: Because of the hot fix for T177707 we expect only the first batch.
 				'InjectRCRecords.jobs' => 1,

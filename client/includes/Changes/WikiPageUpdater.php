@@ -8,10 +8,7 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Psr\Log\LoggerInterface;
 use RefreshLinksJob;
 use Title;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\EntityChange;
-use Wikimedia\Rdbms\LBFactory;
 
 /**
  * Service object for triggering different kinds of page updates
@@ -30,16 +27,6 @@ class WikiPageUpdater implements PageUpdater {
 	private $jobQueueGroup;
 
 	/**
-	 * @var RecentChangeFactory
-	 */
-	private $recentChangeFactory;
-
-	/**
-	 * @var LBFactory
-	 */
-	private $LBFactory;
-
-	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -55,36 +42,22 @@ class WikiPageUpdater implements PageUpdater {
 	private $rcBatchSize = 300;
 
 	/**
-	 * @var RecentChangesDuplicateDetector|null
-	 */
-	private $recentChangesDuplicateDetector;
-
-	/**
 	 * @var StatsdDataFactoryInterface|null
 	 */
 	private $stats;
 
 	/**
 	 * @param JobQueueGroup $jobQueueGroup
-	 * @param RecentChangeFactory $recentChangeFactory
-	 * @param LBFactory $LBFactory
 	 * @param LoggerInterface $logger
-	 * @param RecentChangesDuplicateDetector|null $recentChangesDuplicateDetector
 	 * @param StatsdDataFactoryInterface|null $stats
 	 */
 	public function __construct(
 		JobQueueGroup $jobQueueGroup,
-		RecentChangeFactory $recentChangeFactory,
-		LBFactory $LBFactory,
 		LoggerInterface $logger,
-		RecentChangesDuplicateDetector $recentChangesDuplicateDetector = null,
 		StatsdDataFactoryInterface $stats = null
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
-		$this->recentChangeFactory = $recentChangeFactory;
-		$this->LBFactory = $LBFactory;
 		$this->logger = $logger;
-		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
 		$this->stats = $stats;
 	}
 

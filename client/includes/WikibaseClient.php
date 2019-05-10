@@ -1392,10 +1392,7 @@ final class WikibaseClient {
 
 		$pageUpdater = new WikiPageUpdater(
 			JobQueueGroup::singleton(),
-			$this->getRecentChangeFactory(),
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$logger,
-			$this->getStore()->getRecentChangesDuplicateDetector(),
 			MediaWikiServices::getInstance()->getStatsdDataFactory()
 		);
 
