@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10e7d789_2b039948",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-05-10T15:51:47Z",
+      "side": 1,
+      "message": "This can be expensive and should be deferred until where it is needed. That has been the main reason for injecting LB instead of DB objects.\n\nRequiring an active DB connection for constructing an object is a very common pitfall in terms of perf, especially for the Wikibase-flavour where expensive construction is common for hooks where you get the worse of all hooks (anything any hook needs is now constructed on all requests). Anyway, off topic, but avoid DB conns for construction :)\n\nAlternatively, one can consider using a DBConnRef here.",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "c1af0abb0a8e17a4d032d5ef4e96a69b61abc874",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
