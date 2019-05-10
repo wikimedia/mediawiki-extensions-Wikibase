@@ -512,9 +512,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	 * @return LoadBalancer
 	 */
 	private function getLoadBalancer() {
-		$databaseBase = $this->getMockBuilder( IDatabase::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$databaseBase = $this->createMock( IDatabase::class );
 
 		$databaseBase->expects( $this->any() )
 			->method( 'addQuotes' )
