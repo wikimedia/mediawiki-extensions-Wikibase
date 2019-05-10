@@ -74,14 +74,19 @@ class TermValidatorFactory {
 	 * @return FingerprintValidator
 	 */
 	public function getFingerprintValidator( $entityType ) {
+		$notEqualValidator = new LabelDescriptionNotEqualValidator();
+
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 
 		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
-				return new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
+				return new CompositeFingerprintValidator( [
+					$notEqualValidator,
+					new LabelDescriptionUniquenessValidator( $this->duplicateDetector ),
+				] );
 
 			default:
-				return new NullFingerprintValidator();
+				return $notEqualValidator;
 		}
 	}
 
