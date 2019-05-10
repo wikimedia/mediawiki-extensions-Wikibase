@@ -138,6 +138,11 @@ class ChangeOpDescription extends ChangeOpBase {
 			$descriptions = clone $entity->getDescriptions();
 			$this->updateDescriptions( $descriptions );
 
+			// Noop action, don't try to validate it yet -- T222621
+			if ( $descriptions->toTextArray() === $entity->getDescriptions()->toTextArray() ) {
+				return $result;
+			}
+
 			$result = $fingerprintValidator->validateFingerprint(
 				$entity->getLabels(),
 				$descriptions,
