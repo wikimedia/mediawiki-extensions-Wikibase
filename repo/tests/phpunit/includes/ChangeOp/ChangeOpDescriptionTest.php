@@ -47,6 +47,7 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$args = [];
 		$args['update'] = [ new ChangeOpDescription( 'en', 'myNew', $validatorFactory ), 'myNew' ];
 		$args['set to null'] = [ new ChangeOpDescription( 'en', null, $validatorFactory ), '' ];
+		$args['noop'] = [ new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ), 'DUPE' ];
 
 		return $args;
 	}
@@ -109,6 +110,7 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	private function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setLabel( 'en', 'DUPE' );
+		$item->setDescription( 'en', 'DUPE' );
 		$item->setLabel( 'fr', 'DUPE' );
 
 		return $item;
