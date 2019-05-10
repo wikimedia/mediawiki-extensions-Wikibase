@@ -14,8 +14,8 @@ use WebRequest;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
@@ -34,9 +34,9 @@ class ChangesListSpecialPageHookHandlers {
 	private $user;
 
 	/**
-	 * @var LoadBalancer
+	 * @var DBConnRef
 	 */
-	private $loadBalancer;
+	private $dbr;
 
 	/**
 	 * @var string
@@ -56,20 +56,20 @@ class ChangesListSpecialPageHookHandlers {
 	/**
 	 * @param WebRequest $request
 	 * @param User $user
-	 * @param LoadBalancer $loadBalancer
+	 * @param DBConnRef $dbr
 	 * @param string $pageName
 	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
 		WebRequest $request,
 		User $user,
-		LoadBalancer $loadBalancer,
+		DBConnRef $dbr,
 		$pageName,
 		$showExternalChanges
 	) {
 		$this->request = $request;
 		$this->user = $user;
-		$this->loadBalancer = $loadBalancer;
+		$this->dbr = $dbr;
 		$this->pageName = $pageName;
 		$this->showExternalChanges = $showExternalChanges;
 	}
@@ -91,7 +91,7 @@ class ChangesListSpecialPageHookHandlers {
 		return new self(
 			$context->getRequest(),
 			$context->getUser(),
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnectionRef( DB_REPLICA ),
 			$specialPageName,
 			$settings->getSetting( 'showExternalRecentChanges' )
 		);
@@ -180,10 +180,7 @@ class ChangesListSpecialPageHookHandlers {
 			// Force-hide if hasWikibaseChangesEnabled is false
 			// The user-facing hideWikibase is handled by
 			// ChangesListSpecialPageStructuredFilters and connected code.
-			$this->addWikibaseConditions(
-				$this->loadBalancer->getConnection( DB_REPLICA ),
-				$conds
-			);
+			$this->addWikibaseConditions( $this->dbr, $conds );
 		}
 	}
 
