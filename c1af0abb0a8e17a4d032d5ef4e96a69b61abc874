@@ -22,6 +22,30 @@
       "revId": "c1af0abb0a8e17a4d032d5ef4e96a69b61abc874",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbff8e10_4872bb61",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-05-11T11:57:23Z",
+      "side": 1,
+      "message": "From an alternative perspective the question is more why getConnection() is expensive? In situations like this I would expect it to return an existing read-only connection. That should be cheap.",
+      "parentUuid": "10e7d789_2b039948",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "c1af0abb0a8e17a4d032d5ef4e96a69b61abc874",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
