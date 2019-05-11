@@ -111,6 +111,20 @@ $specialPageAliases['pt'] = [
 	'UnconnectedPages' => [ 'Páginas_sem_conexões' ],
 ];
 
+/** Serbian Cyrillic (српски (ћирилица)) */
+$specialPageAliases['sr-ec'] = [
+	'EntityUsage' => [ 'УпотребаЕнтитета', 'Подаци_о_употреби_ентитета' ],
+	'PagesWithBadges' => [ 'СтранеСаЗначкама', 'ПретражиЗначке' ],
+	'UnconnectedPages' => [ 'НеповезанеСтране', 'Неповезане_стране' ],
+];
+
+/** Serbian Latin (srpski (latinica)) */
+$specialPageAliases['sr-el'] = [
+	'EntityUsage' => [ 'UpotrebaEntiteta', 'Podaci_o_upotrebi_entiteta' ],
+	'PagesWithBadges' => [ 'StraneSaZnačkama', 'PretražiZnačke' ],
+	'UnconnectedPages' => [ 'NepovezaneStrane', 'Nepovezane_strane' ],
+];
+
 /** Turkish (Türkçe) */
 $specialPageAliases['tr'] = [
 	'UnconnectedPages' => [ 'BağlanmamışSayfalar', 'Bağlantısız', 'SiteBağlantısız' ],
