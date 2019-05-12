@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -600,6 +601,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'writeapi' => true ]
 		] );
 
+		$this->reloadPermissionManager();
+
 		// And an item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -608,6 +611,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'type' => ApiUsageException::class,
 			'code' => 'permissiondenied'
 		];
+
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache();
 
 		$this->doTestQueryExceptions(
 			$this->getSetSiteLinkRequestParams( $newItem->getId() ),
@@ -641,6 +646,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'no-permission' => [ 'createpage' => false ],
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
+
+		$this->reloadPermissionManager();
 
 		// Then the request is denied
 		$expected = [
