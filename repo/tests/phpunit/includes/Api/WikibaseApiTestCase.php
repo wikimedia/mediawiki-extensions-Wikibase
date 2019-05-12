@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
 use OutOfBoundsException;
 use Revision;
 use TestSites;

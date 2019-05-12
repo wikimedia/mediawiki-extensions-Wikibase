@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use MediaWiki\MediaWikiServices;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -68,6 +69,8 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		// reset rights cache
 		$wgUser->addGroup( "dummy" );
 		$wgUser->removeGroup( "dummy" );
+
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 	}
 
 	protected function doPermissionsTest(
