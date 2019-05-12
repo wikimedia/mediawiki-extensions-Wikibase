@@ -315,6 +315,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
 
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+
 		// And an item
 		$newItem = $this->createItemUsing( $user );
 
@@ -327,6 +329,11 @@ class SetAliasesTest extends ModifyTermTestCase {
 		// Make sure our user is no longer allowed to edit terms.
 		$user->removeGroup( 'all-permission' );
 		$user->addGroup( 'no-permission' );
+
+		//TODO: later this can be replaced with PermissionManager::invalidateUsersRightsCache()
+		//	but for now we just reset the service one more time to avoid merge issues with
+		//	https://gerrit.wikimedia.org/r/c/mediawiki/core/+/502484
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		$this->doTestQueryExceptions(
 			$this->getAddAliasRequestParams( $newItem->getId() ),
@@ -360,6 +367,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'no-permission' => [ 'createpage' => false ],
 			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
 		] );
+
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		// Then the request is denied
 		$expected = [
