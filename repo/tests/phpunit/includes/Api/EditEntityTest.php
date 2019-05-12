@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use MediaWiki\MediaWikiServices;
 use ReadOnlyError;
 use User;
 use ApiUsageException;
@@ -430,6 +431,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
+		$this->reloadPermissionManager();
+
 		// And an existing item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -438,6 +441,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'type' => ApiUsageException::class,
 			'code' => 'permissiondenied'
 		];
+
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache();
 
 		$this->doTestQueryExceptions(
 			$this->addSiteLink( $newItem['id'] ),
@@ -456,6 +461,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
+		$this->reloadPermissionManager();
+
 		// And an existing item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -464,6 +471,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'type' => ApiUsageException::class,
 			'code' => 'permissiondenied'
 		];
+
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache();
 
 		$this->doTestQueryExceptions(
 			$this->removeLabel( $newItem['id'] ),

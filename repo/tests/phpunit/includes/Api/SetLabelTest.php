@@ -152,6 +152,8 @@ class SetLabelTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
 		] );
 
+		$this->reloadPermissionManager();
+
 		// Then the request is denied
 		$expected = [
 			'type' => ApiUsageException::class,

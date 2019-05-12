@@ -68,6 +68,8 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		// reset rights cache
 		$wgUser->addGroup( "dummy" );
 		$wgUser->removeGroup( "dummy" );
+
+		$this->reloadPermissionManager();
 	}
 
 	protected function doPermissionsTest(
