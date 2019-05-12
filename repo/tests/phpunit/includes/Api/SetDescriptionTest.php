@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use MediaWiki\MediaWikiServices;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -108,6 +109,8 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
 
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+
 		// And an item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -116,6 +119,11 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'type' => ApiUsageException::class,
 			'code' => 'permissiondenied'
 		];
+
+		//TODO: later this can be replaced with PermissionManager::invalidateUsersRightsCache()
+		//	but for now we just reset the service one more time to avoid merge issues with
+		//	https://gerrit.wikimedia.org/r/c/mediawiki/core/+/502484
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		$this->doTestQueryExceptions(
 			$this->getSetDescriptionRequestParams( $newItem->getId() ),
@@ -149,6 +157,8 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			'no-permission' => [ 'createpage' => false ],
 			'*' => [ 'read' => true, 'edit' => true, 'item-term' => true, 'writeapi' => true ]
 		] );
+
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		// Then the request is denied
 		$expected = [

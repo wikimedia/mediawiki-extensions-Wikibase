@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use MediaWiki\MediaWikiServices;
 use ReadOnlyError;
 use User;
 use ApiUsageException;
@@ -430,6 +431,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+
 		// And an existing item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -438,6 +441,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'type' => ApiUsageException::class,
 			'code' => 'permissiondenied'
 		];
+
+		//TODO: later this can be replaced with PermissionManager::invalidateUsersRightsCache()
+		//	but for now we just reset the service one more time to avoid merge issues with
+		//	https://gerrit.wikimedia.org/r/c/mediawiki/core/+/502484
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		$this->doTestQueryExceptions(
 			$this->addSiteLink( $newItem['id'] ),
@@ -456,6 +464,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'*' => [ 'read' => true, 'edit' => false, 'writeapi' => true ]
 		] );
 
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+
 		// And an existing item
 		$newItem = $this->createItemUsing( $userWithAllPermissions );
 
@@ -464,6 +474,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'type' => ApiUsageException::class,
 			'code' => 'permissiondenied'
 		];
+
+		//TODO: later this can be replaced with PermissionManager::invalidateUsersRightsCache()
+		//	but for now we just reset the service one more time to avoid merge issues with
+		//	https://gerrit.wikimedia.org/r/c/mediawiki/core/+/502484
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 
 		$this->doTestQueryExceptions(
 			$this->removeLabel( $newItem['id'] ),
