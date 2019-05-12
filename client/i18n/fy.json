@@ -19,10 +19,12 @@
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "ferbergje",
 	"wikibase-rc-hide-wikidata-show": "werjaan",
+	"wikibase-rc-show-wikidata-pref": "Bewurkings fan {{WBREPONAME}} werjaan yn Koartlyn feroare",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Bewurking fan {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Bewurkings fan {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Wizigings dy't ôfkomstich binne fan {{WBREPONAME}}.",
+	"wikibase-watchlist-show-changes-pref": "Bewurkings fan {{WBREPONAME}} werjaan yn jo folchlist",
 	"wikibase-pageinfo-entity-id-none": "Gjin",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Lebel: $1",
 	"wikibase-otherprojects": "Yn oare projekten"
