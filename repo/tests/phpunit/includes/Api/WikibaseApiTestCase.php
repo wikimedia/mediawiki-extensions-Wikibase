@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
 use OutOfBoundsException;
 use Revision;
 use TestSites;
@@ -37,6 +39,22 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$this->doLogin( 'wbeditor' );
 			$isSetup = true;
 		}
+	}
+
+	protected function reloadPermissionManager() {
+		$config = MediaWikiServices::getInstance()->getMainConfig();
+		$pm = new PermissionManager(
+			MediaWikiServices::getInstance()->getSpecialPageFactory(),
+			$config->get( 'WhitelistRead' ),
+			$config->get( 'WhitelistReadRegexp' ),
+			$config->get( 'EmailConfirmToEdit' ),
+			$config->get( 'BlockDisablesLogin' ),
+			$config->get( 'GroupPermissions' ),
+			$config->get( 'RevokePermissions' ),
+			$config->get( 'AvailableRights' ),
+			MediaWikiServices::getInstance()->getNamespaceInfo()
+		);
+		$this->setService( 'PermissionManager', $pm );
 	}
 
 	protected function createTestUser() {

@@ -315,6 +315,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 			'*' => [ 'read' => true, 'edit' => true, 'writeapi' => true ]
 		] );
 
+		$this->reloadPermissionManager();
+
 		// And an item
 		$newItem = $this->createItemUsing( $user );
 
@@ -327,6 +329,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 		// Make sure our user is no longer allowed to edit terms.
 		$user->removeGroup( 'all-permission' );
 		$user->addGroup( 'no-permission' );
+
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache();
 
 		$this->doTestQueryExceptions(
 			$this->getAddAliasRequestParams( $newItem->getId() ),
