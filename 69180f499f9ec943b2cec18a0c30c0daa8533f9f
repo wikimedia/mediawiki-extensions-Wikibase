@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "17349450_7c8e93fe",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:26:36Z",
+      "side": 1,
+      "message": "The original terms rebuilding was not doing that. My general impression of it is that it is not very robust. Some stuff already improved here, not clear how much effort we should spend on that.",
+      "parentUuid": "bb822f4e_10232c1b",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68b8f8ca_c235387b",
         "filename": "repo/includes/Store/ItemTermsRebuilder.php",
         "patchSetId": 2
@@ -64,6 +82,30 @@
       "writtenOn": "2019-05-13T15:51:00Z",
       "side": 1,
       "message": "array $itemIds",
+      "range": {
+        "startLine": 81,
+        "startChar": 40,
+        "endLine": 81,
+        "endChar": 48
+      },
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50e9bf8f_287ee07e",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:26:36Z",
+      "side": 1,
+      "message": "No. iterable. Cannot use type hint because ancient PHP",
+      "parentUuid": "68b8f8ca_c235387b",
       "range": {
         "startLine": 81,
         "startChar": 40,
@@ -93,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "1d60f2f6_aed6b7e5",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:26:36Z",
+      "side": 1,
+      "message": "This is me making explicit errors are not caught. One of those things the old code was not doing.",
+      "parentUuid": "74fa40ae_dffd2f40",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b46a7530_20fc3580",
         "filename": "repo/includes/Store/ItemTermsRebuilder.php",
         "patchSetId": 2
@@ -110,6 +170,24 @@
     },
     {
       "key": {
+        "uuid": "dde75ee8_a7f4ed90",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:26:36Z",
+      "side": 1,
+      "message": "Indeed. Does this whole rollback make sense to begin with? Again this logic comes from the original term rebuilding script. I\u0027m wondering if putting multiple items in a single transaction helps us if we use the new implementation.",
+      "parentUuid": "b46a7530_20fc3580",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f7a7b461_2004ebbb",
         "filename": "repo/maintenance/rebuildItemTerms.php",
         "patchSetId": 2
@@ -121,6 +199,24 @@
       "writtenOn": "2019-05-13T15:51:00Z",
       "side": 1,
       "message": "As far as I can tell, that’s not how the option currently works – with the default values, newItemIdIterator() won’t yield any IDs, because $id \u003c\u003d $toId is already false on the very first iteration.",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fd30180_7b4c820c",
+        "filename": "repo/maintenance/rebuildItemTerms.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:26:36Z",
+      "side": 1,
+      "message": "Good catch. I refactored the comparison from \u003d to \u003c\u003d, which broke this. Always some bug if it is not tested :)",
+      "parentUuid": "f7a7b461_2004ebbb",
       "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -184,6 +280,30 @@
       "writtenOn": "2019-05-13T15:51:00Z",
       "side": 1,
       "message": "I think these can be significantly simplified using the `NewItem` helper class, for example:\n\n return NewItem::withId( \u0027Q1\u0027 )\n \t-\u003eandLabel( \u0027en\u0027, \u0027EnglishPropLabel\u0027 )\n \t-\u003eandLabel( \u0027de\u0027, \u0027GermanPropLabel\u0027 )\n \t-\u003eandLabel( \u0027nl\u0027, \u0027DutchPropLabel\u0027 )\n \t-\u003ebuild();",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 2
+      },
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b650ac86_c648def2",
+        "filename": "repo/tests/phpunit/includes/Store/ItemTermsRebuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:26:36Z",
+      "side": 1,
+      "message": "That\u0027s cool",
+      "parentUuid": "033699ea_8fdb65f2",
       "range": {
         "startLine": 103,
         "startChar": 0,
