@@ -47,6 +47,7 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		$args = [];
 		$args['update'] = [ new ChangeOpLabel( 'en', 'myNew', $validatorFactory ), 'myNew' ];
 		$args['set to null'] = [ new ChangeOpLabel( 'en', null, $validatorFactory ), '' ];
+		$args['noop'] = [ new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ), 'DUPE' ];
 
 		return $args;
 	}
@@ -109,6 +110,7 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	private function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setDescription( 'en', 'DUPE' );
+		$item->setLabel( 'en', 'DUPE' );
 		$item->setDescription( 'fr', 'DUPE' );
 
 		return $item;

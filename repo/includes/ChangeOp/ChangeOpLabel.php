@@ -136,6 +136,11 @@ class ChangeOpLabel extends ChangeOpBase {
 			$labels = clone $entity->getLabels();
 			$this->updateLabels( $labels );
 
+			// Noop action, don't try to validate it yet -- T222621
+			if ( $labels->toTextArray() === $entity->getLabels()->toTextArray() ) {
+				return $result;
+			}
+
 			$result = $fingerprintValidator->validateFingerprint(
 				$labels,
 				$entity->getDescriptions(),
