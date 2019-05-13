@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "068ad91f_f8c1cba2",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:33:30Z",
+      "side": 1,
+      "message": "Meh. I put in array now. When I wrote this function the calling code originally passed in a generator, so it was written with iterable in mind. Which is probably still the best type for the parameter. But whatever",
+      "parentUuid": "50e9bf8f_287ee07e",
+      "range": {
+        "startLine": 81,
+        "startChar": 40,
+        "endLine": 81,
+        "endChar": 48
+      },
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74fa40ae_dffd2f40",
         "filename": "repo/includes/Store/ItemTermsRebuilder.php",
         "patchSetId": 2
