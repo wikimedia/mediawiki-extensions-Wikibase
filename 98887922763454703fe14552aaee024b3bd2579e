@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ef5049d_161cd3a7",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-05-13T18:41:38Z",
+      "side": 1,
+      "message": "Avoid typing against this, use IDatabase instead. It is compatible.",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 29
+      },
+      "revId": "98887922763454703fe14552aaee024b3bd2579e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
