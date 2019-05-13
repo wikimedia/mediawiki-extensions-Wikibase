@@ -150,7 +150,7 @@ class CachingKartographerEmbeddingHandler {
 
 		// ext.kartographer.frame contains initMapframeFromElement (which we use below)
 		$rlModules[] = 'ext.kartographer.frame';
-		$rlModules = array_unique( $rlModules );
+		$rlModulesArr = array_unique( $rlModules );
 
 		$rlModulesJson = FormatJson::encode( $rlModulesArr );
 		$jsMapPreviewId = FormatJson::encode( '#' . $mapPreviewId );
