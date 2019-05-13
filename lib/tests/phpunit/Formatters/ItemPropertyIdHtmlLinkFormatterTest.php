@@ -503,7 +503,6 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	private function givenItemDoesNotExist( $itemId ) {
 		$title = $this->prophesize( Title::class );
 		$title->isKnown()->willReturn( false );
-		$title->isLocal()->willReturn( true );
 
 		$this->entityTitleLookup
 			->getTitleForId( new ItemId( $itemId ) )

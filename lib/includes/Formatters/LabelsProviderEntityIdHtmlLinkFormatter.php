@@ -66,7 +66,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		// We can skip the potentially expensive isKnown() check if we found a term.
 		if ( $term !== null ) {
 			$label = $term->getText();
-		} elseif ( $title->isLocal() && !$title->isKnown() ) {
+		} elseif ( !$title->isKnown() ) {
 			return $this->nonExistingFormatter->formatEntityId( $entityId );
 		} else {
 			$label = $entityId->getSerialization();
