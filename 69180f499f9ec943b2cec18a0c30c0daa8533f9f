@@ -270,6 +270,30 @@
     },
     {
       "key": {
+        "uuid": "02370178_45bb76c2",
+        "filename": "repo/maintenance/rebuildItemTerms.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:43:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4020df8c_ca3c67e2",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 5
+      },
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4b43db0_4235f5ef",
         "filename": "repo/tests/phpunit/includes/Store/ItemTermsRebuilderTest.php",
         "patchSetId": 2
@@ -290,6 +314,30 @@
       "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d719637b_dfa1e38a",
+        "filename": "repo/tests/phpunit/includes/Store/ItemTermsRebuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:43:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b43db0_4235f5ef",
+      "range": {
+        "startLine": 108,
+        "startChar": 29,
+        "endLine": 108,
+        "endChar": 33
+      },
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -360,6 +408,30 @@
       "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66bb0373_a9d15377",
+        "filename": "repo/tests/phpunit/includes/Store/ItemTermsRebuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-13T23:43:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ca7c09_6a346218",
+      "range": {
+        "startLine": 163,
+        "startChar": 32,
+        "endLine": 163,
+        "endChar": 42
+      },
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
