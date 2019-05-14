@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7fa86a8_fa362991",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-05-14T20:34:49Z",
+      "side": 1,
+      "message": "The test bit is not needed IMO.",
+      "range": {
+        "startLine": 318,
+        "startChar": 9,
+        "endLine": 318,
+        "endChar": 159
+      },
+      "revId": "bb5ab75efb318f0f40a09901da6827ab8e613060",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf5c476_99bcdfd0",
+        "filename": "repo/includes/ChangeOp/Deserialization/AliasesChangeOpDeserializer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-05-14T20:34:49Z",
+      "side": 1,
+      "message": "Can this be injected? (given it\u0027s temporary, I don\u0027t mind it either way)\nAlso a more strict check would be great like $config \u003d\u003d\u003d true",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 63
+      },
+      "revId": "bb5ab75efb318f0f40a09901da6827ab8e613060",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
