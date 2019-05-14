@@ -63,7 +63,7 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 	 */
 	private function getAliasesChangeOps( array $aliases ) {
 		$indexedAliases = $this->getIndexedAliases( $aliases );
-		$aliasesChangeOps = $this->getIndexedAliasesChangeOps( $indexedAliases );
+		$aliasesChangeOps = $this->buildIndexedAliasesChangeOps( $indexedAliases );
 
 		return $aliasesChangeOps;
 	}
@@ -100,7 +100,7 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 	 *
 	 * @throws ChangeOpDeserializationException
 	 */
-	private function getIndexedAliasesChangeOps( array $indexedAliases ) {
+	private function buildIndexedAliasesChangeOps( array $indexedAliases ) {
 		$aliasesChangeOps = new ChangeOps();
 
 		foreach ( $indexedAliases as $langCode => $serializations ) {
