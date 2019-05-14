@@ -242,12 +242,12 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$fooFingerprint,
 				new FauxRequest( [
 					'language' => 'de',
-					'aliases' => "foo\xE2\x80\x82|bar",
+					'aliases' => "foo\xE2\x80\x82",
 				], true ),
 				$this->makeFingerprint(
 					[ 'de' => 'foo' ],
 					[],
-					[ 'de' => [ 'foo', 'bar' ] ]
+					[ 'de' => [ 'foo' ] ]
 				),
 			],
 		];

@@ -229,7 +229,13 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param string|null $subPage
 	 */
 	protected function processArguments( $subPage ) {
-		$this->extractInput( $subPage );
+		$containsInvalidValue = false;
+		try {
+			$this->extractInput( $subPage );
+		} catch ( InvalidArgumentException $exception ) {
+			$this->showErrorHTML( $exception->getMessage() );
+			$containsInvalidValue = true;
+		}
 
 		// Parse the 'id' parameter and throw an exception if the entity cannot be loaded
 		parent::processArguments( $subPage );
@@ -245,7 +251,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 
 		$entity = $this->getEntityForDisplay();
-		if ( $this->languageCode !== null && $entity ) {
+		if ( $this->languageCode !== null && $entity && !$containsInvalidValue ) {
 			if ( $entity instanceof FingerprintProvider ) {
 				$this->setFingerprintFields( $entity->getFingerprint() );
 			}
@@ -269,10 +275,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$aliases = $request->getVal( 'aliases', '' );
 		$aliases = $this->stringNormalizer->trimToNFC( $aliases );
-		$this->aliases = $aliases === '' ? [] : explode( '|', $aliases );
-		foreach ( $this->aliases as &$alias ) {
-			$alias = $this->stringNormalizer->trimToNFC( $alias );
+		if ( strpos( $aliases, '|' ) !== false ) {
+			throw new InvalidArgumentException( 'Alias value can not contain | character' );
 		}
+
+		$this->aliases = $aliases === '' ? [] : [ $aliases ];
 	}
 
 	private function setFingerprintFields( Fingerprint $fingerprint ) {
