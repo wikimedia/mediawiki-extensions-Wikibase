@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Html;
+use InvalidArgumentException;
 use Language;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
@@ -175,6 +176,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		try {
 			$summary = $this->setValue( $entity, $this->languageCode, $this->value );
 		} catch ( ChangeOpException $e ) {
+			$this->showErrorHTML( $e->getMessage() );
+			return false;
+		} catch ( InvalidArgumentException $e ) {
 			$this->showErrorHTML( $e->getMessage() );
 			return false;
 		}

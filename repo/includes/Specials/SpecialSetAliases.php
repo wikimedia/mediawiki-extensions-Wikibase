@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -68,7 +69,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws UserInputException|UserInputException
 	 * @return string
 	 */
 	protected function getValue( EntityDocument $entity, $languageCode ) {
@@ -78,11 +79,20 @@ class SpecialSetAliases extends SpecialModifyTerm {
 
 		$aliases = $entity->getAliasGroups();
 
-		if ( $aliases->hasGroupForLanguage( $languageCode ) ) {
-			return implode( '|', $aliases->getByLanguage( $languageCode )->getAliases() );
+		if ( !$aliases->hasGroupForLanguage( $languageCode ) ) {
+			return '';
 		}
-
-		return '';
+		$aliasesInLang = $aliases->getByLanguage( $languageCode )->getAliases();
+		foreach ( $aliasesInLang as $alias ) {
+			if ( strpos( $alias, '|' ) !== false ) {
+				throw new UserInputException(
+					'wikibase-wikibaserepopage-pipe-in-alias',
+					[],
+					$this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )
+				);
+			}
+		}
+		return implode( '|', $aliasesInLang );
 	}
 
 	/**

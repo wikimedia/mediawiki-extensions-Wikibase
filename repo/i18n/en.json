@@ -152,6 +152,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Item with this ID does not exist",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" is not a valid Item ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "The language code \"$1\" is unknown. Please use a language code known to the system, such as \"en\".",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Aliases that contain pipes can only be edit on the page of the entity itself (with javascript enabled) or via the API",
 	"wikibase-wikibaserepopage-invalid-id": "The ID \"$1\" is unknown to the system. Please use a valid entity ID.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 is a redirect.",
 	"wikibase-wikibaserepopage-storage-exception": "An error occurred while trying to load $1: $2.",

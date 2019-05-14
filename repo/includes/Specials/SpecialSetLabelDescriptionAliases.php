@@ -145,6 +145,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	protected function getForm( EntityDocument $entity = null ) {
 		if ( $entity !== null && $this->languageCode !== null ) {
+
 			$languageName = Language::fetchLanguageName(
 				$this->languageCode, $this->getLanguage()->getCode()
 			);
@@ -247,9 +248,31 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$entity = $this->getEntityForDisplay();
 		if ( $this->languageCode !== null && $entity ) {
 			if ( $entity instanceof FingerprintProvider ) {
+				$hasPipeCharacter = $this->hasPipeCharacter( $entity->getFingerprint() );
+				if ( $hasPipeCharacter ) {
+					$msg = $this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' );
+					$this->showErrorHTML( $msg->parse() );
+					$this->languageCode = null;
+					return;
+				}
+
 				$this->setFingerprintFields( $entity->getFingerprint() );
 			}
 		}
+	}
+
+	private function hasPipeCharacter( Fingerprint $fingerprint ) {
+		if ( !$fingerprint->hasAliasGroup( $this->languageCode ) ) {
+			return false;
+		}
+
+		foreach ( $fingerprint->getAliasGroup( $this->languageCode )->getAliases() as $alias ) {
+			if ( strpos( $alias, '|' ) !== false ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
