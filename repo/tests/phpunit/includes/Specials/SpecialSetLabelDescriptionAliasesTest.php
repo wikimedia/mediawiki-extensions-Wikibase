@@ -410,4 +410,20 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		);
 	}
 
+	public function testGivenItemHasPipeInAlias_errorIsShown() {
+		$item = new Item();
+		$item->setAliases( 'en', [ 'Foo|Bar' ] );
+		$this->mockRepository->putEntity( $item );
+		$subPage = $item->getId()->getSerialization() . '/en';
+
+		list( $output, ) = $this->executeSpecialPage( $subPage );
+
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
+			both( tagMatchingOutline( "<p class='error'/>" ) )
+				->andAlso( havingTextContents(
+					new Message( 'wikibase-wikibaserepopage-pipe-in-alias', [], Language::factory( self::USER_LANGUAGE ) )
+					) )
+		) ) ) );
+	}
+
 }

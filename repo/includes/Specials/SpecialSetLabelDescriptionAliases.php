@@ -6,6 +6,7 @@ use HTMLForm;
 use Html;
 use InvalidArgumentException;
 use Language;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
@@ -145,6 +146,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	protected function getForm( EntityDocument $entity = null ) {
 		if ( $entity !== null && $this->languageCode !== null ) {
+
 			$languageName = Language::fetchLanguageName(
 				$this->languageCode, $this->getLanguage()->getCode()
 			);
@@ -250,6 +252,20 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				$this->setFingerprintFields( $entity->getFingerprint() );
 			}
 		}
+	}
+
+	private function hasPipeCharacter( Fingerprint $fingerprint ) {
+		if ( !$fingerprint->hasAliasGroup( $this->languageCode ) ) {
+			return false;
+		}
+
+		foreach ( $fingerprint->getAliasGroup( $this->languageCode )->getAliases() as $alias ) {
+			if ( strpos( $alias, '|' ) !== false ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -397,6 +413,17 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			if ( !$fingerprint->hasAliasGroup( $this->languageCode )
 				|| $fingerprint->getAliasGroup( $this->languageCode )->getAliases() !== $this->aliases
 			) {
+				$aliasesInLang = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
+				foreach ( $aliasesInLang as $alias ) {
+					if ( strpos( $alias, '|' ) !== false ) {
+						throw new UserInputException(
+							'wikibase-wikibaserepopage-pipe-in-alias',
+							[],
+							$this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )
+						);
+					}
+				}
+
 				$changeOps['wbsetaliases'] = $changeOpFactory->newSetAliasesOp(
 					$this->languageCode,
 					$this->aliases
