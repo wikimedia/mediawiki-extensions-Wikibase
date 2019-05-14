@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\Sql\TermSqlIndex;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
+class TermSearchKeyBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function termProvider() {
 		$argLists = [];

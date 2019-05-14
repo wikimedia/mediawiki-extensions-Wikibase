@@ -26,7 +26,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ApiErrorReporterTest extends \MediaWikiTestCase {
+class ApiErrorReporterTest extends \PHPUnit\Framework\TestCase {
 
 	protected function assertUsageException(
 		$info,

@@ -13,7 +13,7 @@ use User;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
+class BabelUserLanguageLookupTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string $subject

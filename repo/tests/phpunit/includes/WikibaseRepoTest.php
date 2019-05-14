@@ -16,7 +16,6 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
-use MediaWikiTestCase;
 use RequestContext;
 use Serializers\Serializer;
 use User;
@@ -95,7 +94,7 @@ use Wikibase\WikibaseSettings;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class WikibaseRepoTest extends MediaWikiTestCase {
+class WikibaseRepoTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetDefaultValidatorBuilders() {
 		$first = WikibaseRepo::getDefaultValidatorBuilders();

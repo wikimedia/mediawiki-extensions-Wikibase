@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -26,7 +25,7 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
  *
  * @license GPL-2.0-or-later
  */
-class PropertyTermsRebuilderTest extends MediaWikiTestCase {
+class PropertyTermsRebuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var InMemoryPropertyTermStore

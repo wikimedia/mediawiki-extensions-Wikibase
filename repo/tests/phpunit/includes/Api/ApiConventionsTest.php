@@ -18,7 +18,7 @@ use ReflectionMethod;
  * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  */
-class ApiConventionsTest extends \MediaWikiTestCase {
+class ApiConventionsTest extends \PHPUnit\Framework\TestCase {
 
 	public function wikibaseApiModuleProvider() {
 		$argList = [];

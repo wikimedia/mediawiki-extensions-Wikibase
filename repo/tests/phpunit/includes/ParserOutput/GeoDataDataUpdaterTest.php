@@ -30,7 +30,7 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
+class GeoDataDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 
 	private function willSkipTests() {
 		return !ExtensionRegistry::getInstance()->isLoaded( 'GeoData' );

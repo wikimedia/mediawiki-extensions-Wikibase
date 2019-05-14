@@ -19,7 +19,7 @@ use Wikibase\Repo\Diff\ClaimDifference;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ClaimDifferenceTest extends \MediaWikiTestCase {
+class ClaimDifferenceTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetReferenceChanges() {
 		$expected = new Diff( [

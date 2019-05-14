@@ -15,7 +15,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class IdGeneratorTest extends \MediaWikiTestCase {
+class IdGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function instanceProvider() {
 		$instances = [ WikibaseRepo::getDefaultInstance()->newIdGenerator() ];

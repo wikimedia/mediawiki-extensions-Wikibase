@@ -18,7 +18,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
+class UrlSchemeValidatorsTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider validUrlProvider

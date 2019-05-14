@@ -15,7 +15,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */
-class EntityDataFormatProviderTest extends \MediaWikiTestCase {
+class EntityDataFormatProviderTest extends \PHPUnit\Framework\TestCase {
 
 	private static $apiMimeTypes = [
 		'application/vnd.php.serialized',

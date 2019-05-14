@@ -16,7 +16,7 @@ use Wikibase\Repo\Specials\SpecialPageCopyrightView;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
+class SpecialPageCopyrightViewTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider getHtmlProvider

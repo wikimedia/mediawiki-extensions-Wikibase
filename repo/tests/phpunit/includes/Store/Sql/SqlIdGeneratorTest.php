@@ -17,7 +17,7 @@ use Wikibase\SqlIdGenerator;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SqlIdGeneratorTest extends \MediaWikiTestCase {
+class SqlIdGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetNewId_noBlacklist() {
 		$generator = new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() );

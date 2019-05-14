@@ -21,7 +21,7 @@ use Wikibase\WikibaseSettings;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
+class SqlSiteLinkConflictLookupTest extends \PHPUnit\Framework\TestCase {
 
 	protected function setUp() {
 		parent::setUp();
