@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use MediaWikiTestCase;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -28,7 +27,7 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
+class ParserOutputJsConfigBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	private function newEntitySerializer() {
 		$serializerFactory = new SerializerFactory(
