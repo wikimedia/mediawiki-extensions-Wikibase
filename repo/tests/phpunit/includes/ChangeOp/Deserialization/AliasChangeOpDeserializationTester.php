@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -35,6 +36,20 @@ trait AliasChangeOpDeserializationTester {
 
 		$changeOp->apply( $entity, new Summary() );
 		$this->assertSame( $entity->getAliasGroups()->getByLanguage( 'en' )->getAliases(), [ $newAlias ] );
+	}
+
+	public function testGivenChangeRequestSettingAliasesToEmpty_enAliasGroupDoesNotExist() {
+		$entity = $this->getEntityWithExistingAliases();
+		$repoSettings = WikibaseRepo::getDefaultInstance()
+			->getSettings();
+		$repoSettings->setSetting( 'featureFlagWbeditentitySetAliasesToEmpty', true );
+		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
+			'aliases' => [ 'en' => [] ],
+		] );
+		$repoSettings->setSetting( 'featureFlagWbeditentitySetAliasesToEmpty', false );
+
+		$changeOp->apply( $entity, new Summary() );
+		$this->assertFalse( $entity->getAliasGroups()->hasGroupForLanguage( 'en' ) );
 	}
 
 	public function testGivenChangeRequestRemovingAllExistingEnAliases_enAliasGroupDoesNotExist() {
