@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cfe0f07c_c2677a63",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-14T00:20:24Z",
+      "side": 1,
+      "message": "I prefer not having these as I consider duplicating what is already in the constructor to be clutter.",
+      "parentUuid": "1d948f3d_eaffebb9",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "76ec5b92_3c5c567f",
         "filename": "repo/includes/Store/ItemTermsRebuilder.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-13T15:51:00Z",
       "side": 1,
       "message": "Would be nice to have phpdoc here – for example, $batchSpacingInSeconds sounds like it could be a float, but actually must be an int, since it’s passed into sleep(). (Well, you can pass in a float, but it’ll be truncated, which is probably not what you want.)",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "172ad462_31122289",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-14T00:20:24Z",
+      "side": 1,
+      "message": "Indeed. Would have added int type if we where not using ancient PHP.",
+      "parentUuid": "76ec5b92_3c5c567f",
       "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -241,6 +277,24 @@
       "side": 1,
       "message": "Good catch. I refactored the comparison from \u003d to \u003c\u003d, which broke this. Always some bug if it is not tested :)",
       "parentUuid": "f7a7b461_2004ebbb",
+      "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a65652d9_9c3a3822",
+        "filename": "repo/maintenance/rebuildItemTerms.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-14T00:20:24Z",
+      "side": 1,
+      "message": "And I did that refactor because there was an off by one error before. I extracted this little bit of logic now and added tests.",
+      "parentUuid": "1fd30180_7b4c820c",
       "revId": "69180f499f9ec943b2cec18a0c30c0daa8533f9f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
