@@ -22,6 +22,30 @@
       "revId": "09f0db658198095a8a22f50d5a2934255c80165e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8da6a235_22d448fc",
+        "filename": "repo/autoload.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2019-05-14T16:32:50Z",
+      "side": 1,
+      "message": "The time I lost because of this weird setup...",
+      "parentUuid": "eade98dd_9ce145ad",
+      "range": {
+        "startLine": 295,
+        "startChar": 60,
+        "endLine": 295,
+        "endChar": 73
+      },
+      "revId": "09f0db658198095a8a22f50d5a2934255c80165e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
