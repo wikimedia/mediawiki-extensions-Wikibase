@@ -1,0 +1,316 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "479707ed_e6119680",
+        "filename": "repo/tests/phpunit/includes/Api/ApiConventionsTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "826aca7a_bdce1fbb",
+        "filename": "repo/tests/phpunit/includes/Api/ApiErrorReporterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc6306a0_591c74d4",
+        "filename": "repo/tests/phpunit/includes/BabelUserLanguageLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec1e7d2c_43649a39",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageJsConfigHookHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should probably be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f184b388_3de90a9c",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageJsConfigHookHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "This class uses Title… and that\u0027s troublesome, as a call to Title::exists (or stuff like that) might pollute the global state with data from the actual (not a mocked) database. Probably not an issue here… but this is asking for trouble :(",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6abae8c_9543b63d",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageJsConfigHookHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "Wow, this is totally not how we should create Titles… but meh :P",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aa9f23b_ed658f91",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataFormatProviderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6f2afec_3bcad7eb",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/GeoDataDataUpdaterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f12d60f_216e88f6",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialPageCopyrightViewTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc152eff_0281d65c",
+        "filename": "repo/tests/phpunit/includes/Store/IdGeneratorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "This is actually a real SqlIdGenerator or UpsertSqlIdGenerator, thus modifying the DB",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fbb41c9_c62e3ff6",
+        "filename": "repo/tests/phpunit/includes/Store/PropertyTermsRebuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "This raises a red flag… but AFAICT PropertyTermsRebuilder uses it only for transaction management (which is a no-op wrt to the data in the DB)",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04ab2ae2_5d625b66",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/DispatchStatsTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "Definitely needs MediaWikiTestCase",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50521324_e93a4897",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlIdGeneratorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "AFAICT this is actually acting on the DB",
+      "range": {
+        "startLine": 23,
+        "startChar": 35,
+        "endLine": 23,
+        "endChar": 88
+      },
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64ef0dc3_33c7deb7",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlItemsWithoutSitelinksFinderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "definitely needs MediaWikiTestCase",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47b45d4f_430dc1cb",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSiteLinkConflictLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "Definitely needs MediaWikiTestCase",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c48d3176_863e28b6",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/TermSearchKeyBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "Seems to use the DB here",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fbccfbb_cca3f7fc",
+        "filename": "repo/tests/phpunit/includes/Validators/UrlSchemeValidatorsTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6931b567_7d86e7ff",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-14T22:41:43Z",
+      "side": 1,
+      "message": "should be removed then",
+      "revId": "db7e8c1a50146e8dd89390d12ff448185dbb66d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
