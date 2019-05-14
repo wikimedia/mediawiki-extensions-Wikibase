@@ -29,6 +29,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
+
 /**
  * @covers \Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases
  * @covers \Wikibase\Repo\Specials\SpecialModifyEntity
@@ -408,6 +409,22 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			new StaticContentLanguages( self::$languageCodes ),
 			$permissionChecker
 		);
+	}
+
+	public function testGivenItemHasPipeInAlias_errorIsShown() {
+		$request = new FauxRequest( [ 'language' => 'en', 'aliases' => 'new alias' ], true );
+		$item = new Item();
+		$item->setAliases( 'en', [ 'Foo|Bar' ] );
+		$this->mockRepository->putEntity( $item );
+		$subPage = $item->getId()->getSerialization() . '/en';
+
+		list( $output, $response ) = $this->executeSpecialPage( $subPage, $request );
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
+			both( tagMatchingOutline( "<p class='error'/>" ) )
+				->andAlso( havingTextContents(
+					new Message( 'wikibase-wikibaserepopage-pipe-in-alias', [], Language::factory( self::USER_LANGUAGE ) )
+					) )
+		) ) ) );
 	}
 
 }
