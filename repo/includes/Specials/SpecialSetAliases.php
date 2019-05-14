@@ -106,7 +106,11 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$aliases = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
 			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $aliases );
 		} else {
-			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, explode( '|', $value ) );
+			if ( strpos( $value, '|' ) !== false ) {
+				throw new InvalidArgumentException( 'Alias value can not contain | character' );
+			}
+
+			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, [ $value ] );
 		}
 
 		$this->applyChangeOp( $changeOp, $entity, $summary );
