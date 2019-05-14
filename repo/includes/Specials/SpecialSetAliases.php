@@ -5,11 +5,13 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
+use MediaWiki\Logger\LoggerFactory;
 
 /**
  * Special page for setting the aliases of a Wikibase entity.
@@ -68,7 +70,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws UserInputException|UserInputException
 	 * @return string
 	 */
 	protected function getValue( EntityDocument $entity, $languageCode ) {
@@ -78,11 +80,12 @@ class SpecialSetAliases extends SpecialModifyTerm {
 
 		$aliases = $entity->getAliasGroups();
 
-		if ( $aliases->hasGroupForLanguage( $languageCode ) ) {
-			return implode( '|', $aliases->getByLanguage( $languageCode )->getAliases() );
+		if ( !$aliases->hasGroupForLanguage( $languageCode ) ) {
+			return '';
 		}
+		$aliasesInLang = $aliases->getByLanguage( $languageCode )->getAliases();
 
-		return '';
+		return implode( '|', $aliasesInLang );
 	}
 
 	/**
@@ -106,6 +109,19 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$aliases = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
 			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $aliases );
 		} else {
+			$aliasesInLang = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
+			foreach ( $aliasesInLang as $alias ) {
+				if ( strpos( $alias, '|' ) !== false ) {
+					$logger = LoggerFactory::getInstance( 'Wikibase' );
+					$logger->error( 'Special:SetAliases attempt to save pipes in aliases' );
+					throw new UserInputException(
+						'wikibase-wikibaserepopage-pipe-in-alias',
+						[],
+						$this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )
+					);
+				}
+			}
+
 			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, explode( '|', $value ) );
 		}
 

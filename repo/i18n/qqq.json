@@ -188,6 +188,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Error message displayed when item id entered in the form field that supposed to contain item id contains id of nonexistent item.",
 	"wikibase-wikibaserepopage-not-itemid": "Error message when an entity id, other than item id, is entered. The message advises users that the id is invalid.\n\nParameters:\n* $1 - the invalid id",
 	"wikibase-wikibaserepopage-invalid-langcode": "Response informing that the language code is not valid. Could give an example of a valid language code. Feel free to change \"en\" to your language code(s).\n\nParameters:\n* $1 - the invalid code\n\n\"language identifier\" is the same as \"language code\".\nSee also:\n* {{msg-mw|wikibase-validator-not-a-language}}",
+	"wikibase-wikibaserepopage-pipe-in-alias":"Error message when user tries to edit aliases in special page in a language that contains pipe character.",
 	"wikibase-wikibaserepopage-invalid-id": "Response informing that the selected entity ID is not valid.\n\nParameters:\n* $1 - the invalid ID",
 	"wikibase-wikibaserepopage-unresolved-redirect": "Error message shown when the user supplied an entity ID that refers to a redirect.\nParameters:\n* $1 - the entity ID",
 	"wikibase-wikibaserepopage-storage-exception": "Error message shown when an entity could not be loaded due to a storage layer exception.\nParameters:\n* $1 - the entity ID\n* $2 - the (unlocalized and possibly technical) error message.",
