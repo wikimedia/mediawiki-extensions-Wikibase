@@ -6,6 +6,7 @@ use HTMLForm;
 use Html;
 use InvalidArgumentException;
 use Language;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
@@ -19,6 +20,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
+use MediaWiki\Logger\LoggerFactory;
 
 /**
  * Special page for setting label, description and aliases of a Wikibase entity that features
@@ -145,6 +147,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	protected function getForm( EntityDocument $entity = null ) {
 		if ( $entity !== null && $this->languageCode !== null ) {
+
 			$languageName = Language::fetchLanguageName(
 				$this->languageCode, $this->getLanguage()->getCode()
 			);
@@ -317,6 +320,12 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
 		}
 
+		if ( $this->assertNoPipeCharacterInAliases( $entity->getFingerprint() ) ) {
+			$logger = LoggerFactory::getInstance( 'Wikibase' );
+			$logger->error( 'Special:SpecialSetLabelDescriptionAliases attempt to save pipes in aliases' );
+			$this->showErrorHTML( $this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' ) );
+			return false;
+		}
 		$changeOps = $this->getChangeOps( $entity->getFingerprint() );
 
 		if ( empty( $changeOps ) ) {
@@ -329,6 +338,29 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$this->showErrorHTML( $ex->getMessage() );
 			return false;
 		}
+	}
+
+	/**
+	 * @param Fingerprint] $fingerprint
+	 *
+	 * @throws UserInputException
+	 * @return bool
+	 */
+	private function assertNoPipeCharacterInAliases( Fingerprint $fingerprint ) {
+		if ( !empty( $this->aliases ) ) {
+			if ( $fingerprint->hasAliasGroup( $this->languageCode )
+			) {
+				$aliasesInLang = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
+				foreach ( $aliasesInLang as $alias ) {
+					if ( strpos( $alias, '|' ) !== false ) {
+						return true;
+
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**

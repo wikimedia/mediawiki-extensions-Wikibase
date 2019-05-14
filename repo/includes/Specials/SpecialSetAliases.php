@@ -5,11 +5,13 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
+use MediaWiki\Logger\LoggerFactory;
 
 /**
  * Special page for setting the aliases of a Wikibase entity.
@@ -75,13 +77,10 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		if ( !( $entity instanceof AliasesProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be an AliasesProvider' );
 		}
-
 		$aliases = $entity->getAliasGroups();
-
 		if ( $aliases->hasGroupForLanguage( $languageCode ) ) {
 			return implode( '|', $aliases->getByLanguage( $languageCode )->getAliases() );
 		}
-
 		return '';
 	}
 
@@ -92,7 +91,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @param string $languageCode
 	 * @param string $value
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws UserInputException|InvalidArgumentException
 	 * @return Summary
 	 */
 	protected function setValue( EntityDocument $entity, $languageCode, $value ) {
@@ -101,17 +100,45 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		}
 
 		$summary = new Summary( 'wbsetaliases' );
-
 		if ( $value === '' ) {
 			$aliases = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
 			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $aliases );
 		} else {
+			$this->assertNoPipeCharacterInAliases( $entity, $languageCode );
 			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, explode( '|', $value ) );
 		}
 
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		return $summary;
+	}
+
+	/**
+	 * Screams and throws an error if any of existing aliases has pipe character
+	 *
+	 * @param EntityDocument $entity
+	 * @param string $languageCode
+	 *
+	 * @throws UserInputException
+	 */
+	private function assertNoPipeCharacterInAliases( AliasesProvider $entity, $languageCode ) {
+		$aliases = $entity->getAliasGroups();
+		if ( !$aliases->hasGroupForLanguage( $languageCode ) ) {
+			return;
+		}
+		$aliasesInLang = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
+
+		foreach ( $aliasesInLang as $alias ) {
+			if ( strpos( $alias, '|' ) !== false ) {
+				$logger = LoggerFactory::getInstance( 'Wikibase' );
+				$logger->error( 'Special:SetAliases attempt to save pipes in aliases' );
+				throw new UserInputException(
+					'wikibase-wikibaserepopage-pipe-in-alias',
+					[],
+					$this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )
+				);
+			}
+		}
 	}
 
 }
