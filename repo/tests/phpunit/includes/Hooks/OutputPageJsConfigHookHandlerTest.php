@@ -20,7 +20,7 @@ use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch
  */
-class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
+class OutputPageJsConfigHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider doOutputPageBeforeHtmlRegisterConfigProvider

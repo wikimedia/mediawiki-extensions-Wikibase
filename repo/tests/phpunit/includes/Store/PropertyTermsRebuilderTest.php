@@ -26,7 +26,7 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
  *
  * @license GPL-2.0-or-later
  */
-class PropertyTermsRebuilderTest extends MediaWikiTestCase {
+class PropertyTermsRebuilderTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var InMemoryPropertyTermStore

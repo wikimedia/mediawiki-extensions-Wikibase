@@ -95,7 +95,7 @@ use Wikibase\WikibaseSettings;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class WikibaseRepoTest extends MediaWikiTestCase {
+class WikibaseRepoTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetDefaultValidatorBuilders() {
 		$first = WikibaseRepo::getDefaultValidatorBuilders();

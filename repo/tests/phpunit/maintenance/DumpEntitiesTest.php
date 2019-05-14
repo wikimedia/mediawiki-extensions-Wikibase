@@ -14,7 +14,7 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @license GPL-2.0-or-later
  */
-class DumpEntitiesTest extends MediaWikiTestCase {
+class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideEntityTypeData

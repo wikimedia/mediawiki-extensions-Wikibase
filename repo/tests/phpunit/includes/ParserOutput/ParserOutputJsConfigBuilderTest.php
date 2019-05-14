@@ -28,7 +28,7 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
+class ParserOutputJsConfigBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	private function newEntitySerializer() {
 		$serializerFactory = new SerializerFactory(

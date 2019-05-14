@@ -20,7 +20,7 @@ use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class SqlItemsWithoutSitelinksFinderTest extends MediaWikiTestCase {
+class SqlItemsWithoutSitelinksFinderTest extends \PHPUnit\Framework\TestCase {
 
 	public function setUp() {
 		parent::setUp();
