@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5676b921_6cb497cc",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-05-14T20:36:15Z",
+      "side": 1,
+      "message": "These messages need to have counterparts in qqq.json and that\u0027s why jenkins is failing. I know it\u0027s annoying :(",
+      "range": {
+        "startLine": 58,
+        "startChar": 1,
+        "endLine": 58,
+        "endChar": 37
+      },
+      "revId": "1c2c55aaab7954c4bbed18c30024dcf68927b49d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
