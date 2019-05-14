@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\DumpEntities;
-use MediaWikiTestCase;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikimedia\TestingAccessWrapper;
 
@@ -14,7 +13,7 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @license GPL-2.0-or-later
  */
-class DumpEntitiesTest extends MediaWikiTestCase {
+class DumpEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideEntityTypeData
