@@ -312,6 +312,14 @@ return [
 	'localEntitySourceName' => 'local',
 
 	/**
+	 * transitional feature flag for T203337
+	 *
+	 * @see \Wikibase\Repo\ChangeOp\Deserialization\AliasesChangeOpDeserializer::buildIndexedAliasesChangeOps
+	 * @see \Wikibase\Repo\Tests\ChangeOp\Deserialization\AliasChangeOpDeserializationTester::testGivenChangeRequestSettingAliasesToEmpty_enAliasGroupDoesNotExist
+	 */
+	'featureFlagWbeditentitySetAliasesToEmpty' => false,
+
+	/**
 	 * @note This config options is primarily added for Wikidata transition use-case and can be
 	 * considered temporary. It could be removed in the future with no warning.
 	 *
