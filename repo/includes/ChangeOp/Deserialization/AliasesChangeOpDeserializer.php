@@ -6,6 +6,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 
 /**
@@ -106,6 +107,16 @@ class AliasesChangeOpDeserializer implements ChangeOpDeserializer {
 		foreach ( $indexedAliases as $langCode => $serializations ) {
 			$aliasesToSet = [];
 			$language = '';
+
+			if ( WikibaseRepo::getDefaultInstance()
+					->getSettings()
+					->getSetting( 'featureFlagWbeditentitySetEmptyAliases' )
+			) {
+				if ( empty( $serializations ) ) {
+					$aliasesChangeOps->add( $this->fingerprintChangeOpFactory->newSetAliasesOp( $langCode, [] ) );
+					continue;
+				}
+			}
 
 			foreach ( $serializations as $serialization ) {
 				$this->validator->validateTermSerialization( $serialization, $langCode );
