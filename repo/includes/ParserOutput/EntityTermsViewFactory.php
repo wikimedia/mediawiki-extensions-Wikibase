@@ -100,7 +100,8 @@ class EntityTermsViewFactory {
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
 				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
 				$repo->getSettings()->getSetting( 'ssrServerTimeout' ),
-				$repo->getLogger()
+				$repo->getLogger(),
+				MediaWikiServices::getInstance()->getStatsdDataFactory()
 			),
 			$textProvider,
 			new RepoSpecialPageLinker(),
