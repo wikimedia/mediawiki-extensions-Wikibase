@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65655cce_93071b61",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-15T10:56:37Z",
+      "side": 1,
+      "message": "s/the alias/an alias/",
+      "range": {
+        "startLine": 74,
+        "startChar": 74,
+        "endLine": 74,
+        "endChar": 77
+      },
+      "revId": "e302c6068bc8c8e6b781cf32e0160ce051813372",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
