@@ -7,9 +7,11 @@ use Language;
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit4And6Compat;
-use Wikibase\DataModel\Entity\ItemId;
 use PHPUnit\Framework\TestCase;
+use PHPUnit4And6Compat;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
@@ -26,6 +28,15 @@ class TermboxRemoteRendererTest extends TestCase {
 
 	use PHPUnit4And6Compat;
 
+	/**
+	 * @var LoggerInterface|MockObject
+	 */
+	private $logger;
+
+	public function setUp() {
+		$this->logger = $this->getMock( LoggerInterface::class );
+	}
+
 	/** private */ const SSR_URL = 'https://ssr/termbox';
 	/** private */ const SSR_TIMEOUT = 3;
 
@@ -37,11 +48,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			->method( 'getContent' )
 			->willReturn( $content );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 		$this->assertSame(
 			$content,
 			$client->getContent(
@@ -81,7 +88,8 @@ class TermboxRemoteRendererTest extends TestCase {
 		( new TermboxRemoteRenderer(
 			$requestFactory,
 			self::SSR_URL,
-			self::SSR_TIMEOUT
+			self::SSR_TIMEOUT,
+			new NullLogger()
 		) )->getContent( new ItemId( $itemId ), $revision, $language, $editLinkUrl, $fallbackChain );
 	}
 
@@ -98,11 +106,18 @@ class TermboxRemoteRendererTest extends TestCase {
 			->method( 'execute' )
 			->willThrowException( $upstreamException );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$this->logger->expects( $this->once() )
+			->method( 'error' )
+			->with(
+				'{class}: Problem requesting from the remote server',
+				[
+					'class' => TermboxRemoteRenderer::class,
+					'message' => $upstreamException->getMessage(),
+					'exception' => $upstreamException,
+				]
+			);
+
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
@@ -121,24 +136,39 @@ class TermboxRemoteRendererTest extends TestCase {
 		$editLinkUrl = '/edit/Q42';
 
 		$request = $this->newHttpRequest();
+		$responseStatus = 500;
 		$request->expects( $this->once() )
 			->method( 'getStatus' )
-			->willReturn( 500 );
-		$request->expects( $this->never() )
-			->method( 'getContent' );
+			->willReturn( $responseStatus );
+		$responseContent = 'boo boo';
+		$request->expects( $this->once() )
+			->method( 'getContent' )
+			->willReturn( $responseContent );
+		$responseHeaders = [ 'X-bad' => 'not found' ];
+		$request->expects( $this->once() )
+			->method( 'getResponseHeaders' )
+			->willReturn( $responseHeaders );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$this->logger->expects( $this->once() )
+			->method( 'error' )
+			->with(
+				'{class}: encountered a bad response from the remote renderer',
+				[
+					'class' => TermboxRemoteRenderer::class,
+					'status' => $responseStatus,
+					'content' => $responseContent,
+					'headers' => $responseHeaders,
+				]
+			);
+
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
 		} catch ( Exception $exception ) {
-			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 			$this->assertSame( 'Encountered bad response: 500', $exception->getMessage() );
+			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 		}
 	}
 
@@ -149,17 +179,32 @@ class TermboxRemoteRendererTest extends TestCase {
 		$editLinkUrl = '/edit/Q4711';
 
 		$request = $this->newHttpRequest();
+		$responseStatus = 404;
 		$request->expects( $this->once() )
 			->method( 'getStatus' )
-			->willReturn( 404 );
-		$request->expects( $this->never() )
-			->method( 'getContent' );
+			->willReturn( $responseStatus );
+		$responseContent = 'nothing to see here';
+		$request->expects( $this->once() )
+			->method( 'getContent' )
+			->willReturn( $responseContent );
+		$responseHeaders = [ 'X-bad' => 'not found' ];
+		$request->expects( $this->once() )
+			->method( 'getResponseHeaders' )
+			->willReturn( $responseHeaders );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$this->logger->expects( $this->once() )
+			->method( 'error' )
+			->with(
+				'{class}: encountered a bad response from the remote renderer',
+				[
+					'class' => TermboxRemoteRenderer::class,
+					'status' => $responseStatus,
+					'content' => $responseContent,
+					'headers' => $responseHeaders,
+				]
+			);
+
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
@@ -176,20 +221,23 @@ class TermboxRemoteRendererTest extends TestCase {
 		$entityId = new ItemId( $itemId );
 		$revision = 4711;
 		$editLinkUrl = "/wiki/Special:SetLabelDescriptionAliases/$itemId";
-		$preferredLanguages = [ 'en', 'fr', 'es' ];
-		$fallbackChain = $this->newLanguageFallbackChain( $preferredLanguages );
 
 		$request = $this->newHttpRequest();
 		$request->expects( $this->once() )
 			->method( 'getStatus' )
 			->willReturn( 0 );
 
-		$client = new TermboxRemoteRenderer(
-			$this->newHttpRequestFactoryWithRequest( $request ),
-			self::SSR_URL,
-			self::SSR_TIMEOUT
-		);
+		$this->logger->expects( $this->once() )
+			->method( 'error' )
+			->with(
+				'{class}: Problem requesting from the remote server',
+				[
+					'class' => TermboxRemoteRenderer::class,
+					'message' => 'Request failed with status 0. Usually this means network failure or timeout',
+				]
+			);
 
+		$client = $this->newTermboxRemoteRendererWithRequest( $request );
 		try {
 			$client->getContent( $entityId, $revision, $language, $editLinkUrl, $this->newLanguageFallbackChain() );
 			$this->fail( 'Expected exception did not occur.' );
@@ -197,6 +245,15 @@ class TermboxRemoteRendererTest extends TestCase {
 			$this->assertInstanceOf( TermboxRenderingException::class, $exception );
 			$this->assertSame( 'Encountered bad response: 0', $exception->getMessage() );
 		}
+	}
+
+	private function newTermboxRemoteRendererWithRequest( $request ) {
+		return new TermboxRemoteRenderer(
+			$this->newHttpRequestFactoryWithRequest( $request ),
+			self::SSR_URL,
+			self::SSR_TIMEOUT,
+			$this->logger
+		);
 	}
 
 	/**
