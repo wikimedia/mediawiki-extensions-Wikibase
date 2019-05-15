@@ -85,7 +85,9 @@ class PropertyTermsRebuilder {
 			$this->errorReporter->reportMessage(
 				'Failed to save terms of property: ' . $property->getId()->getSerialization()
 			);
+			return;
 		}
+		$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 	}
 
 }

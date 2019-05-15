@@ -97,7 +97,9 @@ class ItemTermsRebuilder {
 			$this->errorReporter->reportMessage(
 				'Failed to save terms of item: ' . $item->getId()->getSerialization()
 			);
+			return;
 		}
+		$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 	}
 
 }
