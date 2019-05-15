@@ -53,7 +53,13 @@ class ItemTermsRebuilder {
 
 			$this->rebuildTermsForBatch( $itemIds );
 
-			$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+			$success = $this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+			if ( !$success ) {
+				$this->errorReporter->reportMessage(
+					'commitAndWaitForReplication() timed out, aborting'
+				);
+				break;
+			}
 
 			if ( $this->batchSpacingInSeconds > 0 ) {
 				sleep( $this->batchSpacingInSeconds );

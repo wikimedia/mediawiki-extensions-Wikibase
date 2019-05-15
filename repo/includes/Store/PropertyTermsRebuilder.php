@@ -56,12 +56,19 @@ class PropertyTermsRebuilder {
 
 			$this->rebuildTermsForBatch( $propertyIds );
 
-			$this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
+			$success = $this->loadBalancerFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			$this->progressReporter->reportMessage(
 				'Processed up to page '
 				. $this->idPager->getPosition() . ' (' . end( $propertyIds ) . ')'
 			);
+
+			if ( !$success ) {
+				$this->errorReporter->reportMessage(
+					'commitAndWaitForReplication() timed out, aborting'
+				);
+				break;
+			}
 
 			if ( $this->batchSpacingInSeconds > 0 ) {
 				sleep( $this->batchSpacingInSeconds );
