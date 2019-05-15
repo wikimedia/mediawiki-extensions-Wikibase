@@ -54,7 +54,7 @@ class RebuildPropertyTerms extends Maintenance {
 
 	public function execute() {
 		if ( !defined( 'WB_VERSION' ) ) {
-			$this->error(
+			$this->fatalError(
 				"You need to have Wikibase enabled in order to use this "
 				. "maintenance script!\n\n",
 				1
