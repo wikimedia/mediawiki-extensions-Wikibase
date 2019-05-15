@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "97474085_34d3da4d",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-15T10:57:48Z",
+      "side": 1,
+      "message": "Maybe this (and the message above) should say \"Aliases …\" in order to transport that we (can) have multiple aliases and this applies to all of them?",
+      "revId": "e302c6068bc8c8e6b781cf32e0160ce051813372",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65655cce_93071b61",
         "filename": "lib/i18n/qqq.json",
         "patchSetId": 4
