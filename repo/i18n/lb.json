@@ -90,6 +90,7 @@
 	"wikibase-entityselector-more": "méi",
 	"wikibase-entityselector-notfound": "Et gouf näischt fonnt",
 	"wikibase-anonymouseditwarning": "Opgepasst: Dir sidd net ageloggt.\nDowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.",
+	"wikibase-anonymouseditwarning-heading": "Dir sidd net ageloggt",
 	"wikibase-move-error": "Dir kënnt keng Säiten déi an engem Data-Nummraum si réckelen an Dir kënnt och keng Säiten dohi réckelen.",
 	"wikibase-validator-sitelink-conflict": "De Link $1 gëtt scho vum Element $2 benotzt. Dir kënnt e vu(n) $2 ewechhuelen, wann en net do hi gehéiert, oder déi zwee Elementer fusionéieren wa si iwwer genee deeselwechte Sujet sinn.",
 	"wikibase-validator-label-conflict": "D'Eegeschaft $3 huet schonn d'Etikett \"$1\" associéiert mam Sproochcode $2.",

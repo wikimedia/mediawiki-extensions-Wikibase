@@ -6,13 +6,14 @@
 			"Metalhead64",
 			"XXN",
 			"ANDROBETA",
-			"Strainu"
+			"Strainu",
+			"Andrei Stroe"
 		]
 	},
 	"wikibase-client-desc": "Client pentru extensia Wikibase",
 	"tooltip-t-wikibase": "Legătură către elementul asociat din depozitul de date",
-	"wikibase-after-page-move": "Puteți, de asemenea, [$1 să actualizați] elementul {{WBREPONAME}} asociat pentru a menține legăturile linguale pe pagina redenumită.",
-	"wikibase-after-page-move-queued": "[$1 Elementul {{WBREPONAME}}] asociat acestei pagini va fi în curând actualizat în mod automat.",
+	"wikibase-after-page-move": "Mutarea dumneavoastră ar trebui acum să [$1 se reflecte în legătura de limbă de la itemul {{WBREPONAME}}]. Vă rugăm să verificați că așa și este.",
+	"wikibase-after-page-move-queued": "[$1 Elementul {{WBREPONAME}}] asociat acestei pagini va fi în curând actualizat în mod automat. Rețineți că este posibil ca aceasta să nu se întâmple instantaneu.",
 	"wikibase-comment-add": "Un element {{WBREPONAME}} a fost creat.",
 	"wikibase-comment-remove": "Elementul {{WBREPONAME}} asociat a fost șters. Legăturile linguale au fost înlăturate.",
 	"wikibase-comment-linked": "Un element {{WBREPONAME}} a fost legat către această pagină.",
@@ -47,7 +48,7 @@
 	"wikibase-replicationnote": "Rețineți că pot trece câteva minute până când modificările sunt vizibile pe toate wikiurile.",
 	"wikibase-watchlist-show-changes-pref": "Arată modificările de la {{WBREPONAME}} în lista dumneavoastră de pagini urmărite",
 	"wikibase-error-serialize-error": "Imposibil de serializat datele.",
-	"wikibase-error-invalid-entity-id": "ID-ul introdus nu este recunoscut de sistem. Utilizați un ID de entitate valid.",
+	"wikibase-error-invalid-entity-id": "ID-ul „$2” introdus nu este recunoscut de sistem. Utilizați un ID de entitate valid.",
 	"unconnectedpages": "Pagini neasociate cu un element",
 	"unconnectedpages-summary": "Această pagină enumeră paginile care nu sunt asociate unui element Wikidata (din spațiile de nume care suportă asocierea elementelor). Lista este ordonată descrescător după ID-ul paginii, astfel încât paginile noi sunt listate primele.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|legătură interlinguală|legături interlinguale|de legături interlinguale}} în pagină)",
