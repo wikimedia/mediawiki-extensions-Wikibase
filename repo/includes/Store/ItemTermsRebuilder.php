@@ -7,7 +7,7 @@ use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\TermStore\ItemTermStore;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,7 +28,7 @@ class ItemTermsRebuilder {
 		$itemIdIterable,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
-		LBFactory $loadBalancerFactory,
+		ILBFactory $loadBalancerFactory,
 		ItemLookup $itemLookup,
 		$batchSize,
 		$batchSpacingInSeconds
