@@ -92,6 +92,7 @@ class ItemTermsRebuilder {
 	private function saveTerms( Item $item ) {
 		try {
 			$this->itemTermStore->storeTerms( $item->getId(), $item->getFingerprint() );
+			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(

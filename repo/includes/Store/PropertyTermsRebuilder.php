@@ -80,6 +80,7 @@ class PropertyTermsRebuilder {
 	private function saveTerms( Property $property ) {
 		try {
 			$this->propertyTermStore->storeTerms( $property->getId(), $property->getFingerprint() );
+			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(
