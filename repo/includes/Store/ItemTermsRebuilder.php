@@ -14,15 +14,33 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class ItemTermsRebuilder {
 
+	/** @var ItemTermStore */
 	private $itemTermStore;
+	/** @var iterable */
 	private $itemIds;
+	/** @var MessageReporter */
 	private $progressReporter;
+	/** @var MessageReporter */
 	private $errorReporter;
+	/** @var ILBFactory */
 	private $loadBalancerFactory;
+	/** @var ItemLookup */
 	private $itemLookup;
+	/** @var int */
 	private $batchSize;
+	/** @var int */
 	private $batchSpacingInSeconds;
 
+	/**
+	 * @param ItemTermStore $itemTermStore
+	 * @param iterable $itemIdIterable
+	 * @param MessageReporter $progressReporter
+	 * @param MessageReporter $errorReporter
+	 * @param ILBFactory $loadBalancerFactory
+	 * @param ItemLookup $itemLookup
+	 * @param int $batchSize
+	 * @param int $batchSpacingInSeconds
+	 */
 	public function __construct(
 		ItemTermStore $itemTermStore,
 		$itemIdIterable,
