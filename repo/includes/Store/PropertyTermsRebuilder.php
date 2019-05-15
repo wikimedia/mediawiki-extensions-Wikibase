@@ -15,15 +15,33 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class PropertyTermsRebuilder {
 
+	/** @var PropertyTermStore */
 	private $propertyTermStore;
+	/** @var SeekableEntityIdPager */
 	private $idPager;
+	/** @var MessageReporter */
 	private $progressReporter;
+	/** @var MessageReporter */
 	private $errorReporter;
+	/** @var ILBFactory */
 	private $loadBalancerFactory;
+	/** @var PropertyLookup */
 	private $propertyLookup;
+	/** @var int */
 	private $batchSize;
+	/** @var int */
 	private $batchSpacingInSeconds;
 
+	/**
+	 * @param PropertyTermStore $propertyTermStore
+	 * @param SeekableEntityIdPager $idPager
+	 * @param MessageReporter $progressReporter
+	 * @param MessageReporter $errorReporter
+	 * @param ILBFactory $loadBalancerFactory
+	 * @param PropertyLookup $propertyLookup
+	 * @param int $batchSize
+	 * @param int $batchSpacingInSeconds
+	 */
 	public function __construct(
 		PropertyTermStore $propertyTermStore,
 		SeekableEntityIdPager $idPager,
