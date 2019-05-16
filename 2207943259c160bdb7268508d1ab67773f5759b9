@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9fad0d5_63a855a9",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-16T01:06:22Z",
+      "side": 1,
+      "message": "This should probably be outside of the try … catch, otherwise an exception from commitMasterChanges will trigger a rollback",
+      "revId": "2207943259c160bdb7268508d1ab67773f5759b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e54d61ed_a9207ff2",
+        "filename": "repo/includes/Store/PropertyTermsRebuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-16T01:06:22Z",
+      "side": 1,
+      "message": "This should probably be outside of the try … catch, otherwise an exception from commitMasterChanges will trigger a rollback",
+      "revId": "2207943259c160bdb7268508d1ab67773f5759b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
