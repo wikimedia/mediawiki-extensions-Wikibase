@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "477c43e2_e7ead16f",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-16T10:05:55Z",
+      "side": 1,
+      "message": "But if we do it after the try..catch, then we’ll do a commit after a rollback, which sounds nonsensical (though I guess it wouldn’t actually commit anything? don’t feel comfortable relying on that though).\n\nPython’s try..catch..else would work really nicely here (the else block only runs if there were no exceptions, but isn’t guarded against exceptions), but we don’t have that in PHP :/\n\nNot sure what’s better. Do you think a commit after rollback would be okay? Or should I add some sort of boolean flag that’s reset in the catch block to skip the commit?",
+      "parentUuid": "e9fad0d5_63a855a9",
+      "revId": "2207943259c160bdb7268508d1ab67773f5759b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e54d61ed_a9207ff2",
         "filename": "repo/includes/Store/PropertyTermsRebuilder.php",
         "patchSetId": 1
