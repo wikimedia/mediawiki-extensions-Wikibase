@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fce04143_81f97470",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/TermboxRequestInspector.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786
+      },
+      "writtenOn": "2019-05-16T12:29:22Z",
+      "side": 1,
+      "message": "Is there a reason to check the flag in this file, and not in `ExternallyRenderedEntityViewPlaceholderExpander`? It seems wrong to me that the request inspector would claim \"this is a default request!\" because of the flag, even if it might not be a default request by our definition. `ExternallyRenderedEntityViewPlaceholderExpander` seems the better option since its responsibility is to perform the second request, so it seems natural to also prevent it there.",
+      "revId": "c80c82a3d1d47eae25e0156540c9e748787e0487",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
