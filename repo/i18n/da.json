@@ -110,6 +110,8 @@
 	"wikibase-copyrighttooltip-acknowledge": "Jeg accepterer disse vilkår for mine fremtidige redigeringer. Vis ikke denne meddelelse igen.",
 	"wikibase-entityselector-more": "mere",
 	"wikibase-anonymouseditwarning": "Advarsel: Du er ikke logget på.\nDin IP-adresse vil blive registreret i redigeringshistorikken for denne enhed.",
+	"wikibase-anonymouseditwarning-heading": "Du er ikke logget på",
+	"wikibase-anonymouseditwarning-dismiss-button": "Rediger uden at logge på",
 	"wikibase-move-error": "Du kan ikke flytte sider, der er i data-navnerummet, og du kan ikke flytte sider ind i det.",
 	"wikibase-validator-label-conflict": "En anden egenskab ($3) har allerede etiketten \"$1\" knyttet til sprogkode $2.",
 	"wikibase-validator-label-with-description-conflict": "Et andet emne ($3) har allerede etiketten \"$1\" og beskrivelsen \"$4\" knyttet til sprogkode $2.",

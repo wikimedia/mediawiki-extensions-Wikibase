@@ -44,6 +44,7 @@
 	"wikibase-parse-error-coordinate": "Значэньне каардынатаў мае няслушны фармат.",
 	"wikibase-parse-error-entity-id": "Ідэнтыфікатар элемэнту мае няслушны фармат.",
 	"wikibase-parse-error-quantity": "Значэньне колькасьці мае няслушны фармат.",
+	"wikibase-parse-error-time": "Значэньне часу мае няслушны фармат.",
 	"wikibase-sitelinks-wikipedia": "Вікіпэдыя",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",
