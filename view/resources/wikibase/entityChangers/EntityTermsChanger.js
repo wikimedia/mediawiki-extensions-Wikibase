@@ -62,23 +62,7 @@
 				changes = [],
 				resultFingerprint = newFingerprint;
 
-			Array.prototype.push.apply( changes, this._getTermsChanges(
-				newFingerprint.getLabels(),
-				oldFingerprint.getLabels(),
-				function ( newTerm ) {
-					return function () {
-						return labelsChanger.setLabel( newTerm ).done( function ( savedLabel ) {
-							if ( savedLabel === null ) {
-								resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
-							} else {
-								resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
-							}
-						} ).fail( function ( error ) {
-							error.context = { type: 'label', value: newTerm };
-						} );
-					};
-				}
-			) );
+			// T106456
 			Array.prototype.push.apply( changes, this._getTermsChanges(
 				newFingerprint.getDescriptions(),
 				oldFingerprint.getDescriptions(),
@@ -92,6 +76,24 @@
 							}
 						} ).fail( function ( error ) {
 							error.context = { type: 'description', value: newTerm };
+						} );
+					};
+				}
+			) );
+
+			Array.prototype.push.apply( changes, this._getTermsChanges(
+				newFingerprint.getLabels(),
+				oldFingerprint.getLabels(),
+				function ( newTerm ) {
+					return function () {
+						return labelsChanger.setLabel( newTerm ).done( function ( savedLabel ) {
+							if ( savedLabel === null ) {
+								resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
+							} else {
+								resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
+							}
+						} ).fail( function ( error ) {
+							error.context = { type: 'label', value: newTerm };
 						} );
 					};
 				}
