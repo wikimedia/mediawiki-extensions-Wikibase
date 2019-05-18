@@ -13,6 +13,7 @@ use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
  * @covers \Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>

@@ -12,6 +12,7 @@ use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
  * @covers \Wikibase\Repo\Modules\MediaWikiConfigModule
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

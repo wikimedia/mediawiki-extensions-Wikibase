@@ -11,6 +11,7 @@ use Wikibase\LanguageWithConversion;
  * @covers \Wikibase\LanguageFallbackChain
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >

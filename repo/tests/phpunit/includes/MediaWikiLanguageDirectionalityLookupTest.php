@@ -8,6 +8,7 @@ use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
  * @covers \Wikibase\Repo\MediaWikiLanguageDirectionalityLookup
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

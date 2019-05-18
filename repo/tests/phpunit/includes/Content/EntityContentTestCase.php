@@ -25,6 +25,7 @@ use WikiPage;
  * @covers \Wikibase\EntityContent
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

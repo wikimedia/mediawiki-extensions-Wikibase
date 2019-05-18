@@ -12,6 +12,7 @@ use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
  * @covers \Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

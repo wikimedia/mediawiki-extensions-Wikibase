@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  *
  * @group Wikibase
  * @group WikibaseRdf
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani

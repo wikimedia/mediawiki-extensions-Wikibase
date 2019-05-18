@@ -21,6 +21,7 @@ use Wikibase\StringNormalizer;
  *
  * @group Wikibase
  * @group WikibaseAPI
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >

@@ -20,6 +20,7 @@ use Wikimedia\TestingAccessWrapper;
  * @group Wikibase
  * @group WikibaseAPI
  * @group medium
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

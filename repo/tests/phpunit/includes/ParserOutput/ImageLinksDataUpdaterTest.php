@@ -15,6 +15,7 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
  * @covers \Wikibase\Repo\ParserOutput\ImageLinksDataUpdater
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

@@ -11,6 +11,7 @@ use Wikibase\SettingsArray;
  * @covers \Wikibase\Repo\Modules\SettingsValueProvider
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

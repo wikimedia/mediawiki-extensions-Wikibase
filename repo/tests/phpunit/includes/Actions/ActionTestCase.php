@@ -22,6 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
+ * @group NotIsolatedUnitTest
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */

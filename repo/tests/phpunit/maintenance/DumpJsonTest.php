@@ -39,6 +39,7 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
  * @covers \Wikibase\DumpJson
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

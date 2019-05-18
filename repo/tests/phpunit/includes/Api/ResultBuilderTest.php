@@ -40,6 +40,7 @@ use Wikibase\Repo\Api\ResultBuilder;
  *
  * @group Wikibase
  * @group WikibaseAPI
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

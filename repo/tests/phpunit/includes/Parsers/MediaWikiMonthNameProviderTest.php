@@ -10,6 +10,7 @@ use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
  * @group ValueParsers
  * @group Wikibase
  * @group TimeParsers
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

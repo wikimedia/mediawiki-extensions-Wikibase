@@ -47,6 +47,7 @@ use WikitextContent;
  * @group Wikibase
  * @group WikibaseEntity
  * @group WikibaseEntityHandler
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

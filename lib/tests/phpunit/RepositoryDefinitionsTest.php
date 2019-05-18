@@ -11,6 +11,7 @@ use Wikibase\Lib\RepositoryDefinitions;
  * @covers \Wikibase\Lib\RepositoryDefinitions
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

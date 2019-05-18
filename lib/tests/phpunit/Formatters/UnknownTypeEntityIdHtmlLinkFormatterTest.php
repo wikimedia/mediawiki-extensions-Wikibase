@@ -15,6 +15,7 @@ use Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter;
  * @covers \Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

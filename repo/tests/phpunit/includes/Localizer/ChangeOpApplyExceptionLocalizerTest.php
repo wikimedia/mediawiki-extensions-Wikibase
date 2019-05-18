@@ -13,6 +13,7 @@ use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
  * @covers \Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

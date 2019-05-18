@@ -15,6 +15,7 @@ use Wikibase\Repo\Specials\SpecialAvailableBadges;
  * @group Wikibase
  * @group SpecialPage
  * @group WikibaseSpecialPage
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gamil.com>

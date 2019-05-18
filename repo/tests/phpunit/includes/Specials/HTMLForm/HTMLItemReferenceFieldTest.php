@@ -12,6 +12,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
  * @covers \Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

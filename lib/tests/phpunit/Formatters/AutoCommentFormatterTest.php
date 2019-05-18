@@ -9,6 +9,7 @@ use Wikibase\Lib\AutoCommentFormatter;
  * @covers \Wikibase\Lib\AutoCommentFormatter
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

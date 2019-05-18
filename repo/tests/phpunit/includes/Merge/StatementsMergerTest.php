@@ -20,6 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers \Wikibase\Repo\Merge\StatementsMerger
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

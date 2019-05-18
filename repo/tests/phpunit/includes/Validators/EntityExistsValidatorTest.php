@@ -19,6 +19,7 @@ use Wikibase\Lib\Tests\MockRepository;
  *
  * @group Wikibase
  * @group WikibaseValidators
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

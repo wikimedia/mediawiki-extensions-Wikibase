@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

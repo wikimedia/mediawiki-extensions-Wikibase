@@ -14,6 +14,7 @@ use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
  * @covers \Wikibase\AddUnitConversions
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Stas Malyshev

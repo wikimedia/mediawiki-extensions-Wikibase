@@ -16,6 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @group Wikibase
  * @group WikibaseRdf
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

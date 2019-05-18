@@ -11,6 +11,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  *
  * @group Wikibase
  * @group WikibaseValidators
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
