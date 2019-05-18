@@ -17,6 +17,7 @@ use Wikibase\Lib\Tests\MockRepository;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

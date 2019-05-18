@@ -14,6 +14,7 @@ use Wikibase\Lib\MwTimeIsoFormatter;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  */

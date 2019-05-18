@@ -12,6 +12,7 @@ use Wikibase\Lib\Units\UnitStorage;
  * @covers \Wikibase\Lib\Units\UnitConverter
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  */

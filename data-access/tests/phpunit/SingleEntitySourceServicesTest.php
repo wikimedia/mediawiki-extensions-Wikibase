@@ -24,6 +24,7 @@ use Wikimedia\Assert\ParameterElementTypeException;
  * @covers \Wikibase\DataAccess\SingleEntitySourceServices
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  */

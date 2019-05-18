@@ -16,6 +16,8 @@ use Wikibase\Lib\HtmlTimeFormatter;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group Wikibase
+ * uses wfMessage
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

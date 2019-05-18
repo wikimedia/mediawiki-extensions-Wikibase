@@ -10,6 +10,7 @@ use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
  *
  * @group ValueFormatters
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

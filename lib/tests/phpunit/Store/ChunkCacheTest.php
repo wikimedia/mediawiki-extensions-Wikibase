@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\ChunkCache;
  * @covers \Wikibase\Lib\Store\ChunkCache
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

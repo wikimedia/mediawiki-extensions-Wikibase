@@ -14,6 +14,7 @@ use Wikibase\LanguageFallbackChainFactory;
  * @covers \Wikibase\LanguageFallbackChainFactory
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >

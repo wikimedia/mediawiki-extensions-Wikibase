@@ -13,6 +13,7 @@ use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
  * @covers \Wikibase\Lib\NonExistingEntityIdHtmlFormatter
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

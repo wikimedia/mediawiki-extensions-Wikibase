@@ -16,6 +16,7 @@ use Xml;
  * @covers \Wikibase\Lib\CachingKartographerEmbeddingHandler
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
