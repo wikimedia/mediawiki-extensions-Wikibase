@@ -113,13 +113,22 @@ class WikibaseContentLanguages {
 					'quc', // T155376
 					'qya', // T185194
 					'rar', // T155427
+					'rmc', // T223524
+					'rmf', // T223524
+					'rmg', // T223524
+					'rml', // T223524
+					'rmn', // T223524
+					'rmo', // T223524
+					'rmw', // T223524
 					'shy', // T184783
 					'sia', // T217521
 					'sjd', // T188596
+					'sje', // T223524
 					'sjk', // T217521
 					'sjn', // T185194
 					'sjt', // T217521
 					'sju', // T188599
+					'smj', // T223524
 					'smn', // T188580
 					'sms', // T188579
 					'ssf', // T174236
