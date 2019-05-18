@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >

@@ -12,6 +12,7 @@ use Wikibase\Lib\LanguageNameLookup;
  *
  * @group ValueFormatters
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >

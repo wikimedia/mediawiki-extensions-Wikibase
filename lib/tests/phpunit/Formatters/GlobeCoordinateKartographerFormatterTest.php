@@ -18,6 +18,7 @@ use Wikibase\Lib\GlobeCoordinateKartographerFormatter;
  *
  * @group ValueFormatters
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

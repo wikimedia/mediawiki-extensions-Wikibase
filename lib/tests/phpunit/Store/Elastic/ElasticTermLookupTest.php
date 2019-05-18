@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\TermLookupSearcher;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */
