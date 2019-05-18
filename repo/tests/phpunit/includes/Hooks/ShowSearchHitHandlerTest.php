@@ -28,6 +28,7 @@ use Wikimedia\TestingAccessWrapper;
  * @covers \Wikibase\Repo\Hooks\ShowSearchHitHandler
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Matěj Suchánek

@@ -25,6 +25,7 @@ use Wikibase\Store\EntityIdLookup;
  * @group Action
  * @group Wikibase
  * @group WikibaseAction
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

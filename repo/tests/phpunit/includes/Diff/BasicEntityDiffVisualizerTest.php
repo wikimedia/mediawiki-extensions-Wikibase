@@ -21,6 +21,7 @@ use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
  * @covers \Wikibase\Repo\Diff\BasicEntityDiffVisualizer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

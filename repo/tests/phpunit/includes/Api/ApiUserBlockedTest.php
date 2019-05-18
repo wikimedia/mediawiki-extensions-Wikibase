@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
  * @group Wikibase
  * @group WikibaseAPI
  * @group medium
+ * @group NotIsolatedUnitTest
  */
 class ApiUserBlockedTest extends WikibaseApiTestCase {
 

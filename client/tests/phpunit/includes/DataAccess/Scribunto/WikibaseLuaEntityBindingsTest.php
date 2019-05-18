@@ -18,6 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseScribunto
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >

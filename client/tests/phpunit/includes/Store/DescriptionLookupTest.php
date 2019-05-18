@@ -20,6 +20,7 @@ use Wikimedia\ScopedCallback;
  *
  * @group Wikibase
  * @group WikibaseClient
+ * @group NotIsolatedUnitTest
  */
 class DescriptionLookupTest extends TestCase {
 

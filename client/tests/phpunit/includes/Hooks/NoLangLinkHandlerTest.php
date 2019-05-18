@@ -14,6 +14,7 @@ use Wikibase\Client\Hooks\NoLangLinkHandler;
  *
  * @group WikibaseClient
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

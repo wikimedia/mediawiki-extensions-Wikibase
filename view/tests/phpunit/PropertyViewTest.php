@@ -27,6 +27,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @group Wikibase
  * @group WikibaseView
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

@@ -10,6 +10,7 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  * @covers \Wikibase\Repo\Localizer\ParseExceptionLocalizer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

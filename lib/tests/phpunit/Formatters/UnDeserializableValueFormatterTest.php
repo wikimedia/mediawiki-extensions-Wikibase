@@ -10,6 +10,7 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  * @covers \Wikibase\Lib\UnDeserializableValueFormatter
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

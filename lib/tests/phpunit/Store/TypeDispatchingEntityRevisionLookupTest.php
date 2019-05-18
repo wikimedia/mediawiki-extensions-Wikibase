@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
  * @covers \Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

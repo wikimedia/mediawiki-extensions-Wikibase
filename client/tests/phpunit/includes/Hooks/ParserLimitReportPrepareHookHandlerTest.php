@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
  * @group WikibaseClient
  * @group Wikibase
  * @group WikibaseHooks
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

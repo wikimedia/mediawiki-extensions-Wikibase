@@ -18,6 +18,7 @@ use Wikibase\Repo\Specials\SpecialEntityPage;
  * @group Wikibase
  * @group SpecialPage
  * @group WikibaseSpecialPage
+ * @group NotIsolatedUnitTest
  *
  * @group Database
  *

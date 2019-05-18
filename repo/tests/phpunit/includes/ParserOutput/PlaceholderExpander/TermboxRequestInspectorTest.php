@@ -14,6 +14,7 @@ use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
  * @covers \Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

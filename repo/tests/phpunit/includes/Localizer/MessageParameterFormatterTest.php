@@ -20,6 +20,7 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
  * @covers \Wikibase\Repo\Localizer\MessageParameterFormatter
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

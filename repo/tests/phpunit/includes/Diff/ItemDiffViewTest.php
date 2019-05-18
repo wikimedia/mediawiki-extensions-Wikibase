@@ -17,6 +17,7 @@ use Wikibase\Repo\Diff\ItemDiffView;
  * @covers \Wikibase\Repo\Diff\ItemDiffView
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

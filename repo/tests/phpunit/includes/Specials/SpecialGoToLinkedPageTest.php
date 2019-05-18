@@ -23,6 +23,7 @@ use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
  * @group Wikibase
  * @group SpecialPage
  * @group WikibaseSpecialPage
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Jan Zerebecki

@@ -26,6 +26,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  *
  * @group WikibaseClient
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

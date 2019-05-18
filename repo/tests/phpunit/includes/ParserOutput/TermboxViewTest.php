@@ -24,6 +24,7 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  * @covers \Wikibase\Repo\ParserOutput\TermboxView
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

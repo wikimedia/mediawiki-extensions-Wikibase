@@ -10,6 +10,7 @@ use Wikibase\EntityFactory;
  * @covers \Wikibase\EntityFactory
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

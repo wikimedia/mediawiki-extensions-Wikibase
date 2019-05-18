@@ -34,6 +34,7 @@ use Wikibase\Test\MockClientStore;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseDataAccess
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

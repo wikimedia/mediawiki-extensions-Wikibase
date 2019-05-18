@@ -14,6 +14,7 @@ use Wikibase\Client\Store\DescriptionLookup;
  *
  * @group WikibaseClient
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

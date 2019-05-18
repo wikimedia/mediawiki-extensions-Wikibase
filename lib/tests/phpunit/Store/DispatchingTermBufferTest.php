@@ -15,6 +15,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

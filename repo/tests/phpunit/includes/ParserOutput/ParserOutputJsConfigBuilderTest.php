@@ -24,6 +24,7 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
  * @covers \Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

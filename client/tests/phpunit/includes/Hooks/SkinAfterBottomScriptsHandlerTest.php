@@ -18,6 +18,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
  * @group WikibaseClient
  * @group WikibaseHooks
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

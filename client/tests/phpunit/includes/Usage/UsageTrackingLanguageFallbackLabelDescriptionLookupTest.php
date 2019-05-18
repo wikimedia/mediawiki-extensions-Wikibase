@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseUsageTracking
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

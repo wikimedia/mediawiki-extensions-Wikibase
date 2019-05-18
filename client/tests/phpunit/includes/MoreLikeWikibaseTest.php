@@ -16,6 +16,7 @@ use Wikibase\Client\MoreLikeWikibase;
  * @covers \Wikibase\Client\MoreLikeWikibase
  * @group Wikibase
  * @group WikibaseClient
+ * @group NotIsolatedUnitTest
  */
 class MoreLikeWikibaseTest extends MediaWikiTestCase {
 

@@ -13,6 +13,7 @@ use Wikibase\View\EntityDocumentView;
 
 /**
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >

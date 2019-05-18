@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @group Wikibase
  * @group ValueFormatters
  * @group DataValueExtensions
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

@@ -22,6 +22,7 @@ use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
