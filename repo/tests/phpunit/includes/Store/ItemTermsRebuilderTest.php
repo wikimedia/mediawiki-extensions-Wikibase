@@ -22,6 +22,7 @@ use Wikibase\TermStore\Implementations\ThrowingItemTermStore;
  * @covers \Wikibase\Repo\Store\ItemTermsRebuilder
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

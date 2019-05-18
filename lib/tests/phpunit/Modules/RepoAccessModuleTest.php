@@ -10,6 +10,7 @@ use Wikibase\RepoAccessModule;
  * @covers \Wikibase\RepoAccessModule
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

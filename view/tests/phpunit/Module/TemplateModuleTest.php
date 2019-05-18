@@ -14,6 +14,7 @@ use Wikibase\View\Module\TemplateModule;
  *
  * @group Wikibase
  * @group WikibaseView
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

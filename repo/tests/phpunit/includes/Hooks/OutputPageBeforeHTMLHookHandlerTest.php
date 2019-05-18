@@ -26,6 +26,7 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  * @covers \Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >

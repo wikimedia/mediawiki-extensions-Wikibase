@@ -28,6 +28,7 @@ use Wikibase\Repo\Api\SearchEntities;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group NotIsolatedUnitTest
  *
  * @group medium
  *

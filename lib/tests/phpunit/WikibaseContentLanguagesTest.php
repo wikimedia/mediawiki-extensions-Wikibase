@@ -12,6 +12,7 @@ use Wikibase\Lib\WikibaseContentLanguages;
  * @covers \Wikibase\Lib\WikibaseContentLanguages
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

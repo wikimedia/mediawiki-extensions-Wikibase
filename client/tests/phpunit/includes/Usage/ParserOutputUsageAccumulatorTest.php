@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseUsageTracking
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

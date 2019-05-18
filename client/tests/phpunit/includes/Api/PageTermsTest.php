@@ -24,6 +24,7 @@ use Wikibase\TermIndexEntry;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseClient
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

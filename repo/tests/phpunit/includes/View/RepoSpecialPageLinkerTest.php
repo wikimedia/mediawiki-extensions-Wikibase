@@ -10,6 +10,7 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
  * @covers \Wikibase\Repo\View\RepoSpecialPageLinker
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>

@@ -11,6 +11,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers \Wikibase\Repo\ChangeOp\Deserialization\ClaimsChangeOpDeserializer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

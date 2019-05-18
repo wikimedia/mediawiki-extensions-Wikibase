@@ -18,6 +18,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @covers \Wikibase\Repo\Parsers\TimeParserFactory
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

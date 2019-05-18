@@ -30,6 +30,7 @@ use Wikibase\Store\SubscriptionLookup;
  *
  * @group Wikibase
  * @group WikibaseChange
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

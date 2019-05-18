@@ -8,6 +8,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
  * @covers \Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  * @license GPL-2.0-or-later
  */
 class HTMLAliasesFieldTest extends \MediaWikiTestCase {

@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @group Wikibase
  * @group WikibasePropertyInfo
  * @group WikibaseStore
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

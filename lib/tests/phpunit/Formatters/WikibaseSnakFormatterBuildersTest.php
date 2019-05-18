@@ -24,6 +24,7 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @group SnakFormatters
  * @group DataValueExtensions
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

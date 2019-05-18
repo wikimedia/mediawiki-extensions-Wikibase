@@ -13,6 +13,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
  * @covers \Wikibase\Repo\Content\EntityContentDiff
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

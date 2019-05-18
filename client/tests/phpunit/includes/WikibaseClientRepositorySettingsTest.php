@@ -9,6 +9,7 @@ use Wikibase\Client\WikibaseClient;
  *
  * @group Wikibase
  * @group WikibaseClient
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

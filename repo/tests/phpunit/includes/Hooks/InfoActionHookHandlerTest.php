@@ -20,6 +20,7 @@ use Wikibase\Store\SubscriptionLookup;
  * @covers \Wikibase\Repo\Hooks\InfoActionHookHandler
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani <ladsgroup@gmail.com>

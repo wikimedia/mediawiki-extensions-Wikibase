@@ -23,6 +23,7 @@ use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
  * @covers \Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

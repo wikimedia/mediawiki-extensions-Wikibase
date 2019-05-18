@@ -16,6 +16,7 @@ use RuntimeException;
  * @covers \Wikibase\Lib\Units\BaseUnitStorage
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

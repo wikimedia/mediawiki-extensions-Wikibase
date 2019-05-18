@@ -15,6 +15,7 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  * @covers \Wikibase\Repo\ParserOutput\EntityTermsViewFactory
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

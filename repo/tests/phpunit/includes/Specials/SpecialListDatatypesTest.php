@@ -13,6 +13,7 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
  * @group Wikibase
  * @group SpecialPage
  * @group WikibaseSpecialPage
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

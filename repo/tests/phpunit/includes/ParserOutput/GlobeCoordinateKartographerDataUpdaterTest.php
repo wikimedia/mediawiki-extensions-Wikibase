@@ -19,6 +19,7 @@ use Wikibase\Repo\ParserOutput\GlobeCoordinateKartographerDataUpdater;
  * @covers \Wikibase\Repo\ParserOutput\GlobeCoordinateKartographerDataUpdater
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch

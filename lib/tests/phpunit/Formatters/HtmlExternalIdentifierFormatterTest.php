@@ -18,6 +18,8 @@ use Wikimedia\Assert\ParameterTypeException;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group Wikibase
+ * uses Html
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

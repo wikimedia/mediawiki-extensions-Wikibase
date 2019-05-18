@@ -23,6 +23,7 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
  * @covers \Wikibase\Repo\Store\PropertyTermsRebuilder
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

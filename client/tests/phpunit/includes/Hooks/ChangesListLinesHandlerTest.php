@@ -18,6 +18,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
  *
  * @group WikibaseClient
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Matěj Suchánek

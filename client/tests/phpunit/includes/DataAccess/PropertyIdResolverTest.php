@@ -18,6 +18,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseDataAccess
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

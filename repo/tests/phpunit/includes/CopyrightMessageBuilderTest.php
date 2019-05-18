@@ -9,6 +9,7 @@ use Wikibase\CopyrightMessageBuilder;
  * @covers \Wikibase\CopyrightMessageBuilder
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

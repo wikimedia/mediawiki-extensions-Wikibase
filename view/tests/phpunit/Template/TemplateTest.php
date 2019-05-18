@@ -12,6 +12,7 @@ use Wikibase\View\Template\TemplateRegistry;
  *
  * @group Wikibase
  * @group WikibaseView
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author H. Snater <mediawiki@snater.com>
