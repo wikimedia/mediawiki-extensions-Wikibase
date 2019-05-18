@@ -13,6 +13,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @group Wikibase
  * @group WikibaseValidators
  * @group Database
+ * @group unit
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
