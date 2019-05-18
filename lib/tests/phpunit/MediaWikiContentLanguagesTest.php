@@ -8,6 +8,7 @@ use Wikibase\Lib\MediaWikiContentLanguages;
  * @covers \Wikibase\Lib\MediaWikiContentLanguages
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >

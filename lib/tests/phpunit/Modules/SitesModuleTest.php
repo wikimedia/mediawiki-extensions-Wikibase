@@ -16,6 +16,7 @@ use Wikibase\SitesModule;
  * @covers \Wikibase\SitesModule
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

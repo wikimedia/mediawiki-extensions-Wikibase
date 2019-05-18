@@ -14,6 +14,7 @@ use Wikibase\TermIndex;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  */

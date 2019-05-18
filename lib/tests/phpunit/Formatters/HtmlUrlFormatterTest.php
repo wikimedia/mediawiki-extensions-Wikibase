@@ -15,6 +15,8 @@ use Wikibase\Lib\HtmlUrlFormatter;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group Wikibase
+ * // Uses Html from Mediawiki
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

@@ -11,6 +11,7 @@ use Wikibase\Lib\Formatters\GlobeCoordinateInlineWikitextKartographerFormatter;
  * @covers Wikibase\Lib\Formatters\GlobeCoordinateInlineWikitextKartographerFormatter
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @covers \Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

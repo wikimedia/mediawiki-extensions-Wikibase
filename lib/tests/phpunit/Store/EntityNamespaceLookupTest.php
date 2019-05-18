@@ -8,6 +8,8 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
  * @covers \Wikibase\Lib\Store\EntityNamespaceLookup
  *
  * @group Wikibase
+ * uses NS_FILE
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  */

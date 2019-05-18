@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\TermPropertyLabelResolver;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

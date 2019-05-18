@@ -12,6 +12,7 @@ use Wikibase\Lib\Tests\MockRepository;
  *
  * @group Wikibase
  * @group WikibaseEntityLookup
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

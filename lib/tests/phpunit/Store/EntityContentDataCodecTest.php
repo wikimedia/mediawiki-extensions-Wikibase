@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  * @covers \Wikibase\Lib\Store\EntityContentDataCodec
  *
  * @group Wikibase
+ * @group NotLegitUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

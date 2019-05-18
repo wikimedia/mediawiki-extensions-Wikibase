@@ -14,6 +14,8 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  *
  * @covers \Wikibase\Lib\Store\EntityInfoBuilder
  *
+ * @group NotLegitUnitTest
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
