@@ -16,6 +16,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @group ValueParsers
  * @group Wikibase
  * @group TimeParsers
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore

@@ -14,6 +14,7 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
  * @covers \Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

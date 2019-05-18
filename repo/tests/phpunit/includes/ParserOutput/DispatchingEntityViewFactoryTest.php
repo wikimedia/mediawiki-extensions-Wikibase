@@ -17,6 +17,7 @@ use Wikibase\View\EntityDocumentView;
  * @covers \Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >

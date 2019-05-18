@@ -9,6 +9,7 @@ use Wikibase\Summary;
  * @covers \Wikibase\Summary
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author John Erling Blad < jeblad@gmail.com >

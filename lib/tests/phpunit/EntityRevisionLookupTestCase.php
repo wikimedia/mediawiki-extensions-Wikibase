@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\StorageException;
  * @covers \Wikibase\Lib\Store\EntityRevisionLookup
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

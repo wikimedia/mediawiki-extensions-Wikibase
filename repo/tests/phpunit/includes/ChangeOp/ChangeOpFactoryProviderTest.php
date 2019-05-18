@@ -19,6 +19,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  *
  * @group Wikibase
  * @group ChangeOp
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

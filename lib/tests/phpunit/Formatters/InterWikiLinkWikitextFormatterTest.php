@@ -9,6 +9,8 @@ use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
  * @covers \Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter
  *
  * @group Wikibase
+ * Uses wfUrlencode
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

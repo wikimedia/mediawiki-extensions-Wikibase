@@ -15,6 +15,7 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
  * @covers \Wikibase\Repo\Hooks\Helpers\OutputPageEditability
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

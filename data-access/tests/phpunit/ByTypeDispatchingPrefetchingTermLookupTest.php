@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @covers \Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

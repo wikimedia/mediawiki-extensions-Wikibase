@@ -13,6 +13,7 @@ use Wikimedia\Assert\PostconditionException;
  * @covers \Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

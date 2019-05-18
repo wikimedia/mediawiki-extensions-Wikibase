@@ -13,6 +13,7 @@ use Wikibase\SettingsArray;
  * @covers \Wikibase\Repo\ParserOutput\TermboxFlag
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  */

@@ -36,6 +36,7 @@ use Wikibase\TermIndex;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

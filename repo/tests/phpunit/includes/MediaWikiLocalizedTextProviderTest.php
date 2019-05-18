@@ -9,6 +9,7 @@ use Wikibase\Repo\MediaWikiLocalizedTextProvider;
  * @covers \Wikibase\Repo\MediaWikiLocalizedTextProvider
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>

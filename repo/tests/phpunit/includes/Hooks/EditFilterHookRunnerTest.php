@@ -26,6 +26,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
  * @covers \Wikibase\Repo\EditEntity\EditFilterHookRunner
  *
  * @group Wikibase
+ * @group NotIsolatedUnitTest
  *
  * @license GPL-2.0-or-later
  * @author Addshore
