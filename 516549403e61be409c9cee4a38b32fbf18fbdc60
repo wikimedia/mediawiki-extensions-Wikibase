@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25273168_70011ee9",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-19T08:28:43Z",
+      "side": 1,
+      "message": "This is already available in $wgExtraLanguageNames in operations/mediawiki-config.git, which makes it available for both labels/descriptions/aliases and monolingual text values, so this addition is unnecessary as far as I’m aware. (Unless the intention is to make it available to third-party Wikibase installations, where this code is still in effect but operations/mediawiki-config.git isn’t.)",
+      "revId": "516549403e61be409c9cee4a38b32fbf18fbdc60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afb71638_0f570399",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-19T08:28:43Z",
+      "side": 1,
+      "message": "This is also already in $wgExtraLanguageNames.",
+      "revId": "516549403e61be409c9cee4a38b32fbf18fbdc60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
