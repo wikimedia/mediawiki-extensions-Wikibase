@@ -35,10 +35,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-// Needs to be 1.26c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
-}
+// load parts already converted to extension registration
+wfLoadExtension( 'WikibaseLib', __DIR__ . '/../extension-lib-wip.json' );
 
 define( 'WBL_VERSION', '0.5 alpha' );
 
@@ -54,18 +52,7 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgHooks, $wgResourceModules, $wgMessagesDirs;
-
-	$wgExtensionCredits['wikibase'][] = [
-		'path' => __DIR__ . '/../README.md',
-		'name' => 'WikibaseLib',
-		'author' => [
-			'The Wikidata team',
-		],
-		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
-		'descriptionmsg' => 'wikibase-lib-desc',
-		'license-name' => 'GPL-2.0-or-later'
-	];
+	global $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 	// i18n
 	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
