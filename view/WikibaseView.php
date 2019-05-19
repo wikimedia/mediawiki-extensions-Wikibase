@@ -6,19 +6,11 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 define( 'WIKIBASE_VIEW_VERSION', '0.1-dev' );
 
+// load parts already converted to extension registration
+wfLoadExtension( 'WikibaseView', __DIR__ . '/../extension-view-wip.json' );
+
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__  . '/autoload.php';
-
-$GLOBALS['wgExtensionCredits']['wikibase'][] = [
-	'path' => __DIR__ . '/../README.md',
-	'name' => 'WikibaseView',
-	'author' => [
-		'The Wikidata team',
-	],
-	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/view/',
-	'description' => 'View component for the Wikibase Repository',
-	'license-name' => 'GPL-2.0-or-later'
-];
 
 $GLOBALS['wgResourceModules'] = array_merge(
 	$GLOBALS['wgResourceModules'],
