@@ -15,7 +15,25 @@
 		'WbContentLanguages',
 		PARENT,
 		function () {
-			this._languageMap = mw.config.get( 'wgULSLanguages' );
+			var that=this;
+			var mwApi = new mw.Api();
+			mwApi.post( {
+				action: 'query',
+				format: 'json',
+				meta: 'wbcontentlanguages',
+				wbclprop: 'code|name',
+			} ).done( function ( data ) {
+				if (data && data.query && data.query.wbcontentlanguages) {
+					var languageMap={};
+					$.each( data.query.wbcontentlanguages, function( key, val ) {
+						languageMap[key]=val.name;
+					});
+					that._languageMap=languageMap;
+					that._languageCodes=Object.keys(languageMap);
+				}
+			} ).fail( function (jqXHR, textStatus) {
+				throw Error(textStatus);
+			});
 		}
 	);
 
