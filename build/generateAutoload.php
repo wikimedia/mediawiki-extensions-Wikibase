@@ -106,15 +106,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 			]
 		);
 
-		$this->generateAutoloadForComponent(
-			'view',
-			[ 'src' ],
-			[
-				'tests/phpunit/EntityViewTestCase.php',
-				'tests/phpunit/EntityMetaTagsCreatorTestCase.php',
-			]
-		);
-
 		echo "Done.\n\n";
 	}
 
