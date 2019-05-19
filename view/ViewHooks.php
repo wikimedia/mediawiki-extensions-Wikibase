@@ -13,6 +13,20 @@ use ResourceLoader;
 final class ViewHooks {
 
 	/**
+	 * Callback called after extension registration,
+	 * for any work that cannot be done directly in extension.json.
+	 */
+	public static function onRegistration() {
+		global $wgResourceModules;
+
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			require __DIR__ . '/lib/resources.php',
+			require __DIR__ . '/resources/resources.php'
+		);
+	}
+
+	/**
 	 * Register ResourceLoader modules with dynamic dependencies.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
