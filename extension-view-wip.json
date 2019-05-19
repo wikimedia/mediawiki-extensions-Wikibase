@@ -8,6 +8,14 @@
 	"description": "View component for the Wikibase Repository",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
+		"MediaWiki": ">= 1.31"
+	},
+	"AutoloadNamespaces": {
+		"Wikibase\\View\\": "view/src/",
+		"Wikibase\\View\\Tests\\": "view/tests/phpunit/"
+	},
+	"AutoloadClasses": {
+		"Wikibase\\ViewHooks": "view/ViewHooks.php"
 	},
 	"Hooks": {
 		"ResourceLoaderRegisterModules": [
