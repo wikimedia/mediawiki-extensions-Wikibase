@@ -4,6 +4,7 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
+	'Wikibase\\ViewHooks' => __DIR__ . '/ViewHooks.php',
 	'Wikibase\\View\\CacheableEntityTermsView' => __DIR__ . '/src/CacheableEntityTermsView.php',
 	'Wikibase\\View\\DefaultMetaTagsCreator' => __DIR__ . '/src/DefaultMetaTagsCreator.php',
 	'Wikibase\\View\\DummyLocalizedTextProvider' => __DIR__ . '/src/DummyLocalizedTextProvider.php',

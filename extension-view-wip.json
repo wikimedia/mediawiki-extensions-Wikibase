@@ -9,6 +9,17 @@
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
 	},
+	"Hooks": {
+		"ResourceLoaderRegisterModules": [
+			"\\Wikibase\\ViewHooks::onResourceLoaderRegisterModules"
+		],
+		"ResourceLoaderTestModules": [
+			"\\Wikibase\\ViewHooks::onResourceLoaderTestModules"
+		],
+		"UnitTestsList": [
+			"\\Wikibase\\ViewHooks::onUnitTestsList"
+		]
+	},
 	"MessagesDirs": {
 		"WikibaseView": [
 			"view/lib/wikibase-data-values-value-view/i18n"
