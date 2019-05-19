@@ -9,5 +9,10 @@
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
 	},
+	"MessagesDirs": {
+		"WikibaseView": [
+			"view/lib/wikibase-data-values-value-view/i18n"
+		]
+	},
 	"manifest_version": 2
 }
