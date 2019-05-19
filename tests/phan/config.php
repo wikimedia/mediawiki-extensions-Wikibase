@@ -52,6 +52,7 @@ return [
 		'repo/WikibaseRepo.datatypes.php',
 		'repo/WikibaseRepo.entitytypes.php',
 		'view/resources.php',
+		'view/ViewHooks.php',
 		'view/WikibaseView.php',
 		'Wikibase.php',
 		// Include extension stubs so we don't require extensions to be available locally.
