@@ -1,0 +1,14 @@
+{
+	"name": "WikibaseClient",
+	"type": "wikibase",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Wikibase_Client",
+	"descriptionmsg": "wikibase-client-desc",
+	"license-name": "GPL-2.0-or-later",
+	"requires": {
+		"MediaWiki": ">= 1.26"
+	},
+	"manifest_version": 2
+}

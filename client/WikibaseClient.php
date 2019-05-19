@@ -39,6 +39,9 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 define( 'WBC_VERSION', '0.5 alpha' );
 
+// load parts already converted to extension registration
+wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client-wip.json' );
+
 // Needs to be 1.26c because version_compare() works in confusing ways.
 if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
@@ -55,7 +58,6 @@ call_user_func( function() {
 	global $wgAPIListModules,
 		$wgAPIMetaModules,
 		$wgAPIPropModules,
-		$wgExtensionCredits,
 		$wgExtensionFunctions,
 		$wgExtensionMessagesFiles,
 		$wgHooks,
@@ -69,17 +71,6 @@ call_user_func( function() {
 		$wgWikibaseMultiRepositoryServiceWiringFiles,
 		$wgWikibasePerRepositoryServiceWiringFiles,
 		$wgWBClientSettings;
-
-	$wgExtensionCredits['wikibase'][] = array(
-		'path' => __DIR__ . '/../README.md',
-		'name' => 'WikibaseClient',
-		'author' => array(
-			'The Wikidata team',
-		),
-		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
-		'descriptionmsg' => 'wikibase-client-desc',
-		'license-name' => 'GPL-2.0-or-later'
-	);
 
 	// Registry and definition of data types
 	$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
