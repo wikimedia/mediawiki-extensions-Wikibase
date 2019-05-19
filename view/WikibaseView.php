@@ -29,10 +29,6 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	);
 };
 
-$GLOBALS['wgMessagesDirs']['WikibaseView'] = [
-	__DIR__ . '/lib/wikibase-data-values-value-view/i18n',
-];
-
 $GLOBALS['wgHooks']['UnitTestsList'][] = function( array &$paths ) {
 	$paths[] = __DIR__ . '/tests/phpunit';
 };
