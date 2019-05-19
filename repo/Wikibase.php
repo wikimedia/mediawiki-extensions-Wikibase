@@ -37,10 +37,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 define( 'WB_VERSION', '0.5 alpha' );
 
-// Needs to be 1.34c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.34c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.34 or above.\n" );
-}
+// load parts already converted to extension registration
+wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' );
 
 /**
  * Registry of ValueParsers classes or factory callbacks, by datatype.
@@ -68,7 +66,6 @@ call_user_func( function() {
 		$wgAPIModules,
 		$wgAvailableRights,
 		$wgEventLoggingSchemas,
-		$wgExtensionCredits,
 		$wgExtensionMessagesFiles,
 		$wgGrantPermissions,
 		$wgGroupPermissions,
@@ -80,17 +77,6 @@ call_user_func( function() {
 		$wgValueParsers,
 		$wgWBRepoDataTypes,
 		$wgWBRepoSettings;
-
-	$wgExtensionCredits['wikibase'][] = [
-		'path' => __DIR__ . '/../README.md',
-		'name' => 'WikibaseRepository',
-		'author' => [
-			'The Wikidata team',
-		],
-		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Repository',
-		'descriptionmsg' => 'wikibase-desc',
-		'license-name' => 'GPL-2.0-or-later'
-	];
 
 	// Registry and definition of data types
 	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
