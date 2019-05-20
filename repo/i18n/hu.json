@@ -13,7 +13,8 @@
 			"Dj",
 			"Macofe",
 			"Máté",
-			"Bencemac"
+			"Bencemac",
+			"Misibacsi"
 		]
 	},
 	"wikibase-desc": "Strukturált adattár",
@@ -320,6 +321,7 @@
 	"wikibase-listdatatypes-time-head": "Idő",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-external-id-head": "Külső azonosító",
+	"wikibase-listdatavaluetypes-name-quantity": "mennyiség",
 	"wikibase-concept-uri-tooltip": "Az elem által leírt fogalmat azonosító URI",
 	"wikibase-pageimage-helptext": "Ez a kép az elem állításaiból származik. A kép megváltoztatásához módosítsd az állítást.",
 	"datatypes-type-url": "URL",

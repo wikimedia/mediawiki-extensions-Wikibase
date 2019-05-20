@@ -29,7 +29,8 @@
 			"Hanyanbo98",
 			"夢蝶葬花",
 			"A Chinese Wikipedian",
-			"佛壁灯"
+			"佛壁灯",
+			"科劳"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -140,6 +141,9 @@
 	"wikibase-entityselector-more": "更多",
 	"wikibase-entityselector-notfound": "找不到匹配项目",
 	"wikibase-anonymouseditwarning": "警告：您没有登录。\n您的IP地址将被记录在该实体的编辑历史中。",
+	"wikibase-anonymouseditwarning-heading": "您尚未登录。",
+	"wikibase-anonymouseditwarning-message": "保存本次编辑后，将公开显示您当前的ip地址。现在登录或注册账号，您将能以用户身份保存编辑，同时还有其他权益。",
+	"wikibase-anonymouseditwarning-dismiss-button": "不登录，直接编辑",
 	"wikibase-move-error": "您不能移动数据（data）名字空间的页面，并且您也不能移动页面至此。",
 	"wikibase-validator-sitelink-conflict": "链接$1已经被项$2使用。如果该链接不适合$2，您可以从该项移除；或如果它们有关完全相同话题的话，您可以合并两项。",
 	"wikibase-validator-label-conflict": "属性$3已经关联语言代码$2的标签“$1”。",

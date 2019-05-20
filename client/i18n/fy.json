@@ -27,5 +27,6 @@
 	"wikibase-watchlist-show-changes-pref": "Bewurkings fan {{WBREPONAME}} werjaan yn jo folchlist",
 	"wikibase-pageinfo-entity-id-none": "Gjin",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Lebel: $1",
-	"wikibase-otherprojects": "Yn oare projekten"
+	"wikibase-otherprojects": "Yn oare projekten",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Oansluting|Oanslutings}} op {{WBREPONAME}}"
 }

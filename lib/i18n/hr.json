@@ -38,11 +38,14 @@
 	"wikibase-entity-summary-wbsetsitelink-set": "Promijenjena poveznica na [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "Promijenjena poveznica i značke za [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Uklonjena poveznica prema [$2]",
+	"wikibase-entity-summary-wbcreateclaim-create": "Stvorena tvrdnja",
 	"wikibase-entity-summary-clientsitelink-update": "Premještena stranica s [$3] na [$4]",
 	"wikibase-entity-summary-clientsitelink-remove": "Izbrisana stranica na [$3]",
 	"wikibase-entity-summary-wbmergeitems-from": "Spojena stavka od $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Stavka spojena u $3",
 	"wikibase-item-summary-wbcreate-new": "Stvorena nova stavka",
 	"wikibase-item-summary-wbeditentity": "Stvorena nova stavka",
-	"wikibase-item-summary-wbeditentity-create": "Stvorena nova stavka"
+	"wikibase-item-summary-wbeditentity-create": "Stvorena nova stavka",
+	"wikibase-item-summary-wbeditentity-update": "Promijenjena stavka",
+	"wikibase-property-summary-wbeditentity-update": "Promijenjeno svojstvo"
 }

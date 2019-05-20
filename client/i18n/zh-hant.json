@@ -103,7 +103,7 @@
 	"wikibase-pageinfo-entity-id-none": "無",
 	"wikibase-pageinfo-description-local": "本地描述",
 	"wikibase-pageinfo-description-central": "中心描述",
-	"wikibase-pageinfo-entity-usage": "在此頁面使用的 {{WBREPONAME}} 實體",
+	"wikibase-pageinfo-entity-usage": "在此頁面使用的{{WBREPONAME}}實體",
 	"wikibase-pageinfo-entity-usage-S": "網站連結",
 	"wikibase-pageinfo-entity-usage-L": "一些標籤",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "標籤：$1",

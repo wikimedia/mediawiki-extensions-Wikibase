@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ezagren"
+			"Ezagren",
+			"Mnam23"
 		]
 	},
-	"tooltip-t-wikibase": "Tautan gasan mahubungakan butir pada ruang panyimpanan data",
+	"tooltip-t-wikibase": "Tautan gasan mahubungakan butir pada wadah panyimpanan data",
 	"wikibase-comment-update": "Item {{WBREPONAME}} baubah",
 	"wikibase-dataitem": "Item di {{WBREPONAME}}",
 	"wikibase-editlinks": "Babak interwiki",

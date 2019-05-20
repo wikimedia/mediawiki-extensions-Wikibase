@@ -138,6 +138,7 @@
 	"wikibase-entityselector-more": "meer",
 	"wikibase-entityselector-notfound": "Geen overeenkomsten gevonden",
 	"wikibase-anonymouseditwarning": "Waarschuwing: u bent niet aangemeld.\nUw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.",
+	"wikibase-anonymouseditwarning-heading": "U bent niet aangemeld",
 	"wikibase-move-error": "U kunt pagina's in de gegevensnaamruimte niet verplaatsen en u kunt er geen pagina naartoe verplaatsen.",
 	"wikibase-validator-sitelink-conflict": "De koppeling $1 wordt al gebruikt door item $2. U kunt het verwijderen van $2 als het daar niet thuishoort of de items samenvoegen als ze over exact hetzelfde onderwerp gaan.",
 	"wikibase-validator-label-conflict": "Het label \"$1\" is al gekoppeld met taalcode $2 aan de eigenschap $3.",

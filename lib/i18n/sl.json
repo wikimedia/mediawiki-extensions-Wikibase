@@ -53,7 +53,7 @@
 	"wikibase-validator-too-long": "Mora biti daljše od {{PLURAL:$1|enega znaka|$1 znakov}}",
 	"wikibase-validator-label-too-long": "Oznaka ne sme presegati {{PLURAL:$1|enega znaka|$1 znakov}}",
 	"wikibase-validator-description-too-long": "Opis ne sme presegati {{PLURAL:$1|enega znaka|$1 znakov}}",
-	"wikibase-validator-alias-too-long": "Druga imena ne smejo presegati {{PLURAL:$1|enega znaka|$1 znakov}}",
+	"wikibase-validator-alias-too-long": "Vsako ime ne sme presegati {{PLURAL:$1|enega znaka|$1 znakov}}",
 	"wikibase-validator-too-short": "Zahtevan je vsaj {{PLURAL:$1|en znak|$1 znaka|$1 znaki|$1 znakov}}",
 	"wikibase-validator-too-high": "Presega obseg, ne sme preseči $1",
 	"wikibase-validator-too-low": "Presega obseg, biti mora nižji od $1",

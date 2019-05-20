@@ -58,7 +58,7 @@
 	"wikibase-validator-too-long": "Non deve essere più di {{PLURAL:$1|un carattere|$1 caratteri}} di lunghezza",
 	"wikibase-validator-label-too-long": "L'etichetta non deve essere più di {{PLURAL:$1|un carattere|$1 caratteri}} di lunghezza",
 	"wikibase-validator-description-too-long": "La descrizione non deve essere più di {{PLURAL:$1|un carattere|$1 caratteri}} di lunghezza",
-	"wikibase-validator-alias-too-long": "L'alias non deve essere più di {{PLURAL:$1|un carattere|$1 caratteri}} di lunghezza",
+	"wikibase-validator-alias-too-long": "Ogni alias non deve essere più di {{PLURAL:$1|un carattere|$1 caratteri}} di lunghezza",
 	"wikibase-validator-too-short": "Deve essere almeno {{PLURAL:$1|un carattere|$1 caratteri}} di lunghezza",
 	"wikibase-validator-too-high": "Fuori intervallo, non deve essere superiore a $1",
 	"wikibase-validator-too-low": "Fuori intervallo, non deve essere inferiore a $1",
