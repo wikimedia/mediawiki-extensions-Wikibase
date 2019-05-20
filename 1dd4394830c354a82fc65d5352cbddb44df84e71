@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56d771e9_0a1de6ef",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T14:32:50Z",
+      "side": 1,
+      "message": "This should be removed once again.",
+      "range": {
+        "startLine": 211,
+        "startChar": 34,
+        "endLine": 211,
+        "endChar": 39
+      },
+      "revId": "1dd4394830c354a82fc65d5352cbddb44df84e71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
