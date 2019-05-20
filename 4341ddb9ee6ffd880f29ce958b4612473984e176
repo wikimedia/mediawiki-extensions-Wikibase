@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "870f58e9_955baa0c",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T13:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad1bfea_3ba7ea33",
+      "range": {
+        "startLine": 188,
+        "startChar": 303,
+        "endLine": 188,
+        "endChar": 312
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d990e93_1499b7af",
         "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2019-05-20T13:22:30Z",
       "side": 1,
       "message": "The namespacing is useful in the config but inside of a (termbox) class it would provide more value to be able to quickly tell this is a binary option and which way around it works: `enableUserSpecificSSR`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 32
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e934b5ae_98e1ed8a",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T13:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d990e93_1499b7af",
       "range": {
         "startLine": 38,
         "startChar": 10,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2571ae58_12fb7f39",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T13:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff4dfb2a_45c2e4ce",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8f228938_245036b2",
         "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2019-05-20T13:22:30Z",
       "side": 1,
       "message": "The idea behind the naming of these is \"whatEverConstitutesDecisiveFactors_theOutcomeThisCauses\", i.e. something like \"testGivenNonDefaultRequestAndDisabledUserSpecificSSR_getHtmlForPlaceholderReturnsDefaultMarkup\".\nI agree the existing naming of some of the existing test cases in this class leaves something to be desired.",
+      "range": {
+        "startLine": 193,
+        "startChar": 17,
+        "endLine": 193,
+        "endChar": 90
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f7b7d72_725c8af4",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T13:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f228938_245036b2",
       "range": {
         "startLine": 193,
         "startChar": 17,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "70b9ee37_a9a8a9ed",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T13:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e85fd54_04c56b80",
+      "range": {
+        "startLine": 204,
+        "startChar": 17,
+        "endLine": 204,
+        "endChar": 21
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3efccac_4c627fa3",
         "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
         "patchSetId": 6
@@ -128,6 +248,30 @@
       "writtenOn": "2019-05-20T13:22:30Z",
       "side": 1,
       "message": "This did nothing because it never reaches the PlaceholderExpander. The intention is going in the right directon though - prove that the renderer was not invoked again:\n\n```\n\t\t$this-\u003etermboxRenderer-\u003eexpects( $this-\u003enever() )\n\t\t\t-\u003emethod( \u0027getContent\u0027 );",
+      "range": {
+        "startLine": 206,
+        "startChar": 1,
+        "endLine": 208,
+        "endChar": 44
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e74d5c_9781a68b",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T13:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3efccac_4c627fa3",
       "range": {
         "startLine": 206,
         "startChar": 1,
