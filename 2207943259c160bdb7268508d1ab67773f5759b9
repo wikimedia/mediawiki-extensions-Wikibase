@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "71b8c99e_7d02d021",
+        "filename": "repo/includes/Store/ItemTermsRebuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-20T13:22:59Z",
+      "side": 1,
+      "message": "Oh, yes… nice :)",
+      "parentUuid": "28a960b9_3c4d2156",
+      "revId": "2207943259c160bdb7268508d1ab67773f5759b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e54d61ed_a9207ff2",
         "filename": "repo/includes/Store/PropertyTermsRebuilder.php",
         "patchSetId": 1
