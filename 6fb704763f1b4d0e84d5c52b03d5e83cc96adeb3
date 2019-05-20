@@ -22,6 +22,30 @@
       "revId": "6fb704763f1b4d0e84d5c52b03d5e83cc96adeb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f72a917_8a672d64",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-05-20T14:18:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "926c522c_e00f3d78",
+      "range": {
+        "startLine": 211,
+        "startChar": 42,
+        "endLine": 211,
+        "endChar": 65
+      },
+      "revId": "6fb704763f1b4d0e84d5c52b03d5e83cc96adeb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
