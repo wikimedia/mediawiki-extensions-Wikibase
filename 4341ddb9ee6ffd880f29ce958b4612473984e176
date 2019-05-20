@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ad1bfea_3ba7ea33",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:22:30Z",
+      "side": 1,
+      "message": "\"displaying\"",
+      "range": {
+        "startLine": 188,
+        "startChar": 303,
+        "endLine": 188,
+        "endChar": 312
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d990e93_1499b7af",
+        "filename": "repo/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:22:30Z",
+      "side": 1,
+      "message": "The namespacing is useful in the config but inside of a (termbox) class it would provide more value to be able to quickly tell this is a binary option and which way around it works: `enableUserSpecificSSR`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 32
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff4dfb2a_45c2e4ce",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:22:30Z",
+      "side": 1,
+      "message": "This is unused.\nI suggest we (declare it as proper property of the test case) and use it inside of `newPlaceholderExpander()` making its only parameter obsolete. You can control it\u0027s outcome by setting `$this-\u003etermboxUserSpecificSSR` before you run it and still maintain a consistent default.",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f228938_245036b2",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:22:30Z",
+      "side": 1,
+      "message": "The idea behind the naming of these is \"whatEverConstitutesDecisiveFactors_theOutcomeThisCauses\", i.e. something like \"testGivenNonDefaultRequestAndDisabledUserSpecificSSR_getHtmlForPlaceholderReturnsDefaultMarkup\".\nI agree the existing naming of some of the existing test cases in this class leaves something to be desired.",
+      "range": {
+        "startLine": 193,
+        "startChar": 17,
+        "endLine": 193,
+        "endChar": 90
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e85fd54_04c56b80",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:22:30Z",
+      "side": 1,
+      "message": "This should be false for a realistic test case.\n`isDefaultRequest` checks if this is a request that requires a user specific SSR request to begin with. If not than our new flag should not be relevant altogether.",
+      "range": {
+        "startLine": 204,
+        "startChar": 17,
+        "endLine": 204,
+        "endChar": 21
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3efccac_4c627fa3",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:22:30Z",
+      "side": 1,
+      "message": "This did nothing because it never reaches the PlaceholderExpander. The intention is going in the right directon though - prove that the renderer was not invoked again:\n\n```\n\t\t$this-\u003etermboxRenderer-\u003eexpects( $this-\u003enever() )\n\t\t\t-\u003emethod( \u0027getContent\u0027 );",
+      "range": {
+        "startLine": 206,
+        "startChar": 1,
+        "endLine": 208,
+        "endChar": 44
+      },
+      "revId": "4341ddb9ee6ffd880f29ce958b4612473984e176",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
