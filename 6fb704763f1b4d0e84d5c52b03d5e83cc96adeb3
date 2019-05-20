@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "926c522c_e00f3d78",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderExpander/ExternallyRenderedEntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-05-20T13:50:41Z",
+      "side": 1,
+      "message": "Again, that\u0027s one way to solve the challenge but I don\u0027t think it is the best one. The way I left it is the one I prefer and the way it is consistent across all parameters used inside `newPlaceholderExpander)`.",
+      "range": {
+        "startLine": 211,
+        "startChar": 42,
+        "endLine": 211,
+        "endChar": 65
+      },
+      "revId": "6fb704763f1b4d0e84d5c52b03d5e83cc96adeb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
