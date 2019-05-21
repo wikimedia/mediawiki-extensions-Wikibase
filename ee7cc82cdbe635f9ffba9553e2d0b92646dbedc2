@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "525b00dd_02eea835",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-21T16:57:53Z",
+      "side": 1,
+      "message": "Doesn’t this need to be getLazyConnectionRef() instead of getConnectionRef()? Looking at the LoadBalancer implementation, getConnectionRef() includes a call to getConnection().",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 74
+      },
+      "revId": "ee7cc82cdbe635f9ffba9553e2d0b92646dbedc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
