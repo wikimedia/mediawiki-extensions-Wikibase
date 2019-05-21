@@ -56,11 +56,14 @@ class DatabaseSchemaUpdater {
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$schemaUpdater = self::newFromGlobalState();
-		$schemaUpdater->doSchemaUpdate( $updater );
+		$updater->addExtensionUpdate( [ [ $schemaUpdater, 'doSchemaUpdate' ] ] );
 
 		return true;
 	}
 
+	/**
+	 * @param DatabaseUpdater $updater
+	 */
 	public function doSchemaUpdate( DatabaseUpdater $updater ) {
 		$db = $updater->getDB();
 		$type = $db->getType();
