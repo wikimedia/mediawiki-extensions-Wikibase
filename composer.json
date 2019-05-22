@@ -20,6 +20,12 @@
 		"issues": "https://phabricator.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/wmde/mediawiki-term-store"
+		}
+	],
 	"require": {
 		"php": ">=5.6.99",
 		"composer/installers": "^1.0.1",
@@ -35,6 +41,7 @@
 		"wikibase/internal-serialization": "^2.2.0",
 		"wikibase/data-model-services": "^3.15.0",
 		"wikibase/term-store": "^1.0.0",
+		"wikibase/mediawiki-term-store": "dev-master",
 		"diff/diff": "^2.3.0",
 		"wikimedia/purtle": "^1.0.7",
 		"psr/simple-cache": "^1.0.1",
