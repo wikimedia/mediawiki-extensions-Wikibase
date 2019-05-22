@@ -397,6 +397,12 @@ class DatabaseSchemaUpdater {
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
+
+		// TODO link to right Phabricator task
+		$updater->addExtensionTable(
+			'wbt_type',
+			$this->getUpdateScriptPath( 'AddWbtType', $db->getType() )
+		);
 	}
 
 }
