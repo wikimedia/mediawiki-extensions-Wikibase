@@ -66,3 +66,13 @@ CREATE INDEX /*i*/tmp1 ON /*_*/wb_terms (`term_language`, `term_type`, `term_ent
 
 -- T204836
 CREATE INDEX /*i*/wb_terms_entity_id ON /*_*/wb_terms (`term_entity_id`);
+
+
+
+-- normalized term type names
+CREATE TABLE IF NOT EXISTS /*_*/wbt_type (
+  wby_id                                INT unsigned         NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  wby_name                              VARBINARY(45)        NOT NULL
+) /*$wgDBTableOptions*/;
+
+CREATE UNIQUE INDEX /*i*/wbt_type_name ON /*_*/wbt_type (wby_name);
