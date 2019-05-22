@@ -4,14 +4,15 @@
 			"Lanciné.kounfantoh.fofana",
 			"Youssoufkadialy",
 			"Lancine.kounfantoh.fofana",
-			"Nafadji Mory Diané"
+			"Nafadji Mory Diané",
+			"Babamamadidiane"
 		]
 	},
-	"tooltip-t-wikibase": "ߜߊ߲߬ߞߎ߲߬ ߦߋ߫ ߞߍ߫ ߟߊ߫ ߛߘߌ߬ߜߋ߲ ߡߍ߲ ߠߊ߫ ߓߟߏߡߟߊ ߞߣߐߘߐ ߟߎ߬ ߟߊ߫",
-	"wikibase-comment-update": "{{WBREPONAME}} ߛߎ߲ ߡߊߦߟߍ߬ߡߊ߲߫ ߘߊ߫",
-	"wikibase-dataitem": "{{WBREPONAME}} ߛߎ߲",
-	"wikibase-editlinks": "ߛߘߌ߬ߜߋ߲ ߡߊߦߟߍ߬ߡߊ߲߬",
-	"wikibase-editlinkstitle": "ߞߊ߲ ߠߎ߬ ߣߌ߫ ߢߐ߲߯ߕߍ ߛߘߌ߬ߜߋ߲ ߡߊߦߟߍ߬ߡߊ߲߬",
+	"tooltip-t-wikibase": "ߜߋ߲߬ߞߘߎ߬ߟߌ ߟߐ߲ߕߊ ߟߎ߫ ߡߙߊ߬ߞߏ߲ߘߏ ߓߎ߲ߓߎ߲߫ ߜߋ߲߬ߞߘߎ߬ߣߍ߲ ߠߊ߫",
+	"wikibase-comment-update": "{{WBREPONAME}} ߓߐߛߎ߲ ߢߟߊߞߎߘߦߊ",
+	"wikibase-dataitem": "{{WBREPONAME}} ߓߎ߲ߓߎ߲",
+	"wikibase-editlinks": "ߛߘߌ߬ߜߋ߲ ߢߟߊߞߎߘߦߊ߫",
+	"wikibase-editlinkstitle": "ߞߊ߲ߣߌߢߐ߲߯ߕߍ߫ ߛߘߌߜߋ߲ ߠߎ߬ ߢߟߊߞߎߘߦߊ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ߢߡߊߘߏ߲߰",
 	"wikibase-rc-hide-wikidata-show": "ߊ߬ ߦߌ߬ߘߊ߬",

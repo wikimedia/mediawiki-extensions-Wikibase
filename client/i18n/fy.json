@@ -15,6 +15,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-item",
 	"wikibase-editlinks": "Keppelings bewurkje",
 	"wikibase-editlinkstitle": "Yntertaalkeppelings bewurkje",
+	"wikibase-addlinkstitle": "Yntertaalkeppelings taheakje",
+	"wikibase-linkitem-addlinks": "Keppelings taheakje",
 	"wikibase-linkitem-input-site": "Taal:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "ferbergje",

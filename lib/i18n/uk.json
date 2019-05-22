@@ -65,7 +65,7 @@
 	"wikibase-validator-too-long": "Довжина має бути не більша, ніж {{PLURAL:$1|один символ| $1 символи|$1 символів}}",
 	"wikibase-validator-label-too-long": "Назва має бути не довшою, ніж {{PLURAL:$1|$1 символ|$1 символи|$1 символів}}",
 	"wikibase-validator-description-too-long": "Опис має бути не довшим, ніж {{PLURAL:$1|$1 символ|$1 символи|$1 символів}}",
-	"wikibase-validator-alias-too-long": "Альтернативна назва має бути не довшою, ніж {{PLURAL:$1|$1 символ|$1 символи|$1 символів}}",
+	"wikibase-validator-alias-too-long": "Кожна альтернативна назва має бути не довшою, ніж {{PLURAL:$1|$1 символ|$1 символи|$1 символів}}",
 	"wikibase-validator-too-short": "Довжина повинна бути не менша, ніж $1 {{PLURAL:$1|символ|символи|символів}}",
 	"wikibase-validator-too-high": "Поза діапазоном, повинно бути не вище, ніж в $1",
 	"wikibase-validator-too-low": "Поза діапазоном, повинно бути не нижче, ніж у $1",

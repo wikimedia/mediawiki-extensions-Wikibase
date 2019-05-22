@@ -60,7 +60,7 @@
 	"wikibase-description-edit-placeholder": "введіть опис",
 	"wikibase-description-edit-placeholder-language-aware": "введіть опис мовою $1",
 	"wikibase-aliases-edit-placeholder": "введіть альтернативні назви",
-	"wikibase-aliases-edit-placeholder-language-aware": "введіть альтернативні назви у $1",
+	"wikibase-aliases-edit-placeholder-language-aware": "введіть альтернативні назви мовою $1",
 	"wikibase-aliases-edit-label": "Альтернативні назви, через вертикальну риску:",
 	"wikibase-content-language-edit-label": "Мова:",
 	"wikibase-content-language-edit-not-recognized-language": "Не розпізнано вказаний код мови.",
