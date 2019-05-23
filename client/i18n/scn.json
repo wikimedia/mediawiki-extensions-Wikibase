@@ -27,7 +27,7 @@
 	"wikibase-editlinkstitle": "Cancia li culligamenti di lingua",
 	"wikibase-addlinkstitle": "Agghiunci li culligamenti di lingua",
 	"wikibase-linkitem-addlinks": "Agghiùncicci culligamenti",
-	"wikibase-linkitem-alreadylinked": "La pàggina ca vulivi culligari già è assuciata a n'àutru [$1 suggettu] ntô dipòsitu cintrali dî dati, ca punta a $2 nta stu situ. Li suggetti ponnu aviri assuciata sulu na pàggina pi situ. Pi favuri scegghi n'àutra pàggina di culligari.",
+	"wikibase-linkitem-alreadylinked": "La pàggina ca vulivi culligari già è assuciata a n'àutru [$1 suggettu] ntô dipòsitu cintrali dî dati, ca punta a [[$2]] nta stu situ. Li suggetti ponnu aviri assuciata sulu na pàggina pi situ. Pi favuri scegghi n'àutra pàggina di culligari.",
 	"wikibase-linkitem-close": "Chiudi la finestra di diàlugu e ricàrrica la pàggina",
 	"wikibase-linkitem-failure": "Ammattìu n'erruri scanusciutu ntô tintativu di culligari la pàggina spicificata.",
 	"wikibase-linkitem-title": "Culligamentu a na pàggina",

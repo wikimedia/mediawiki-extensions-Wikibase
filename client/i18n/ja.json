@@ -38,7 +38,7 @@
 	"wikibase-editlinkstitle": "言語間リンクを編集する",
 	"wikibase-addlinkstitle": "言語間リンクを追加する",
 	"wikibase-linkitem-addlinks": "リンクを追加",
-	"wikibase-linkitem-alreadylinked": "あなたがリンクしようとしたページは既に中央データリポジトリの[$1 項目]と結びついており、このサイトの$2へリンクしています。項目には1つのサイトにつき1つのページしか結びつけることができません。別のページを選んでください。",
+	"wikibase-linkitem-alreadylinked": "あなたがリンクしようとしたページは既に中央データリポジトリの[$1 項目]と結びついており、このサイトの[[$2]]へリンクしています。項目には1つのサイトにつき1つのページしか結びつけることができません。別のページを選んでください。",
 	"wikibase-linkitem-close": "ダイアログを閉じてページを再読み込み",
 	"wikibase-linkitem-failure": "指定したページをリンクする際に不明なエラーが発生しました。",
 	"wikibase-linkitem-title": "ページとのリンク",

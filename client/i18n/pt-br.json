@@ -39,7 +39,7 @@
 	"wikibase-editlinkstitle": "Editar links para outros idiomas",
 	"wikibase-addlinkstitle": "Adicione links de interlínguas",
 	"wikibase-linkitem-addlinks": "Adicionar links",
-	"wikibase-linkitem-alreadylinked": "A página que você queria vincular já está anexada a um [$1 item] no repositório central de dados que vincula a $2 neste site. Itens só podem possuir uma página por site anexado. Por favor, escolha uma página diferente para vincular.",
+	"wikibase-linkitem-alreadylinked": "A página que você queria vincular já está anexada a um [$1 item] no repositório central de dados que vincula a [[$2]] neste site. Itens só podem possuir uma página por site anexado. Por favor, escolha uma página diferente para vincular.",
 	"wikibase-linkitem-close": "Recarregar a página",
 	"wikibase-linkitem-failure": "Ocorreu um erro desconhecido ao tentar vincular a determinada página.",
 	"wikibase-linkitem-title": "Link com a página",

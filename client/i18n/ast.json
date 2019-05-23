@@ -28,7 +28,7 @@
 	"wikibase-editlinkstitle": "Editar los enllaces d'interllingua",
 	"wikibase-addlinkstitle": "Amestar enllaces d'interllingua",
 	"wikibase-linkitem-addlinks": "Amestar enllaces",
-	"wikibase-linkitem-alreadylinked": "La páxina que quería enllazar con esta, yá ta enllazada con un [$1 elementu] del depósitu central de datos qu'enllaza con $2 d'esti sitiu. Los elementos sólo pueden tener enllazada una páxina por sitiu. Por favor, escueya una páxina diferente pa enllazar.",
+	"wikibase-linkitem-alreadylinked": "La páxina que quería enllazar con esta, yá ta enllazada con un [$1 elementu] del depósitu central de datos qu'enllaza con [[$2]] d'esti sitiu. Los elementos sólo pueden tener enllazada una páxina por sitiu. Por favor, escueya una páxina diferente pa enllazar.",
 	"wikibase-linkitem-close": "Zarrar el diálogu y recargar la páxina",
 	"wikibase-linkitem-failure": "Hebo un error desconocíu al intentar enllazar la páxina dada.",
 	"wikibase-linkitem-title": "Enllazar con páxina",

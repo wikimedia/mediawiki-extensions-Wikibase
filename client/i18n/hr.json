@@ -24,7 +24,7 @@
 	"wikibase-editlinkstitle": "Uredi poveznice na druge jezike",
 	"wikibase-addlinkstitle": "Dodaj poveznice na druge jezike",
 	"wikibase-linkitem-addlinks": "Dodaj međuwikije",
-	"wikibase-linkitem-alreadylinked": "Stranica koju ste željeli povezati već je povezana na [$1 međuwiki] na wikidati koja vodi na $2 na ovom projektu. Može postojati samo jedan međuwiki. Molimo izaberite drugu stranicu.",
+	"wikibase-linkitem-alreadylinked": "Stranica koju ste željeli povezati već je povezana na [$1 međuwiki] na wikidati koja vodi na [[$2]] na ovom projektu. Može postojati samo jedan međuwiki. Molimo izaberite drugu stranicu.",
 	"wikibase-linkitem-close": "Zatvori dijalog i ponovno učitaj stranicu",
 	"wikibase-linkitem-failure": "Pojavila se greška prilikom pokušaja povezivanja s danom stranicom.",
 	"wikibase-linkitem-title": "Uređivanje međuwikipoveznica",

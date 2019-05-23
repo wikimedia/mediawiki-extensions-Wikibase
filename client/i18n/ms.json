@@ -28,7 +28,7 @@
 	"wikibase-editlinks": "Sunting pautan",
 	"wikibase-editlinkstitle": "Sunting pautan antara bahasa",
 	"wikibase-linkitem-addlinks": "Tambah pautan",
-	"wikibase-linkitem-alreadylinked": "Halaman yang anda ingin pautkan itu sudah dilampirkan dengan satu [$1 perkara] di repositori data pusat yang berpaut dengan $2 di tapak ini. Setiap perkara hanya boleh berlampirkan satu halaman setapak. Sila pilih halaman yang lain untuk dipautkan.",
+	"wikibase-linkitem-alreadylinked": "Halaman yang anda ingin pautkan itu sudah dilampirkan dengan satu [$1 perkara] di repositori data pusat yang berpaut dengan [[$2]] di tapak ini. Setiap perkara hanya boleh berlampirkan satu halaman setapak. Sila pilih halaman yang lain untuk dipautkan.",
 	"wikibase-linkitem-close": "Tutup dialog dan muat semula halaman",
 	"wikibase-linkitem-failure": "Ralat di luar jangkaan berlaku apabila cuba memautkan halaman yang diberikan.",
 	"wikibase-linkitem-title": "Pautkan dengan halaman",

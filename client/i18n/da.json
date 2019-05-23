@@ -34,7 +34,7 @@
 	"wikibase-editlinkstitle": "Redigér sproglinks",
 	"wikibase-addlinkstitle": "Tilføj sproghenvisninger",
 	"wikibase-linkitem-addlinks": "Tilføj links",
-	"wikibase-linkitem-alreadylinked": "Siden du ønskede at sammenkæde med er allerede knyttet til et andet [$1 emne] i det centrale datadepot, som linker til $2 på dette websted. Emner kan kun knyttes til én side for hvert websted. Vælg venligst en anden side, der skal linkes med.",
+	"wikibase-linkitem-alreadylinked": "Siden du ønskede at sammenkæde med er allerede knyttet til et andet [$1 emne] i det centrale datadepot, som linker til [[$2]] på dette websted. Emner kan kun knyttes til én side for hvert websted. Vælg venligst en anden side, der skal linkes med.",
 	"wikibase-linkitem-close": "Luk dialogboksen og genindlæs siden igen",
 	"wikibase-linkitem-failure": "Der opstod en ukendt fejl under forsøget på at sammenkæde den angivne side.",
 	"wikibase-linkitem-title": "Link til side",

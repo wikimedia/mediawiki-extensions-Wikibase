@@ -25,7 +25,7 @@
 	"wikibase-editlinkstitle": "Redigeeri keeltevahelisi linke",
 	"wikibase-addlinkstitle": "Lisa keeltevahelised lingid",
 	"wikibase-linkitem-addlinks": "Lisa lingid",
-	"wikibase-linkitem-alreadylinked": "Lehekülg, mida proovisid linkida on juba seotud keskse andmehoidla [$1 üksusega] ja viitab siin võrgukohas leheküljele $2. Üksusega saab siduda igast võrgukohast vaid ühe lehekülje. Palun vali muu lehekülg, millele linkida.",
+	"wikibase-linkitem-alreadylinked": "Lehekülg, mida proovisid linkida on juba seotud keskse andmehoidla [$1 üksusega] ja viitab siin võrgukohas leheküljele [[$2]]. Üksusega saab siduda igast võrgukohast vaid ühe lehekülje. Palun vali muu lehekülg, millele linkida.",
 	"wikibase-linkitem-close": "Sule dialoogikast ja laadi lehekülg uuesti",
 	"wikibase-linkitem-failure": "Ette antud leheküljele linkimisel ilmnes tundmatu tõrge.",
 	"wikibase-linkitem-title": "Leheküljega linkimine",

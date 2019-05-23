@@ -39,7 +39,7 @@
 	"wikibase-editlinkstitle": "Dillerarası bağlantıları değiştir",
 	"wikibase-addlinkstitle": "Diller arası bağlantı ekle",
 	"wikibase-linkitem-addlinks": "Bağlantı ekle",
-	"wikibase-linkitem-alreadylinked": "Bağlantı kurmak istediğiniz sayfa, bu sitedeki $2 sayfasına bağlanan bir [$1 ögeye] zaten eklenmiş. Ögeler, site başına yalnızca bir sayfaya eklenebilir. Lütfen bağlanılacak farklı bir sayfa seçin.",
+	"wikibase-linkitem-alreadylinked": "Bağlantı kurmak istediğiniz sayfa, bu sitedeki [[$2]] sayfasına bağlanan bir [$1 ögeye] zaten eklenmiş. Ögeler, site başına yalnızca bir sayfaya eklenebilir. Lütfen bağlanılacak farklı bir sayfa seçin.",
 	"wikibase-linkitem-close": "Diyaloğu kapatıp sayfayı yeniden yükle",
 	"wikibase-linkitem-failure": "Verilen sayfayı bağlamaya çalışırken bilinmeyen bir hata oluştu.",
 	"wikibase-linkitem-title": "Sayfaya bağlantı",

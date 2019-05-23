@@ -30,7 +30,7 @@
 	"wikibase-editlinkstitle": "Përpunoni lidhje ndërgjuhësore",
 	"wikibase-addlinkstitle": "Shtoni lidhje ndërgjuhësore",
 	"wikibase-linkitem-addlinks": "Shtoni lidhje",
-	"wikibase-linkitem-alreadylinked": "Faqja që donit të lidhnit i është bashkëngjitur tashmë një [$1 objekti] te depoja qendrore e të dhënave që është e lidhur me $2 në këtë sajt. Objektet mund të kenë të bashkëngjitur vetëm një faqe për sajt. Ju lutemi, zgjidhni një faqe tjetër për ta lidhur.",
+	"wikibase-linkitem-alreadylinked": "Faqja që donit të lidhnit i është bashkëngjitur tashmë një [$1 objekti] te depoja qendrore e të dhënave që është e lidhur me [[$2]] në këtë sajt. Objektet mund të kenë të bashkëngjitur vetëm një faqe për sajt. Ju lutemi, zgjidhni një faqe tjetër për ta lidhur.",
 	"wikibase-linkitem-close": "Mbylleni dialogun dhe ringarkoni faqen",
 	"wikibase-linkitem-failure": "Ndodhi një gabim i panjohur teksa provohej të lidhej faqja e dhënë.",
 	"wikibase-linkitem-title": "Lidhje me faqe",

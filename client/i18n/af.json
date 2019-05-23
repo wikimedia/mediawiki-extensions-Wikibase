@@ -22,7 +22,7 @@
 	"wikibase-editlinkstitle": "Wysig skakels tussen tale",
 	"wikibase-addlinkstitle": "Voeg taalskakels by",
 	"wikibase-linkitem-addlinks": "Voeg skakels by",
-	"wikibase-linkitem-alreadylinked": "Die bladsy waarheen u wil skakel is reeds aan 'n [$1 item] in die sentrale data-resevoir gekoppel, wat skakel na $2 op hierdie webwerf. Items kan slegs na één bladsy per webwerf verwys. Kies 'n ander bladsy om na te skakel.",
+	"wikibase-linkitem-alreadylinked": "Die bladsy waarheen u wil skakel is reeds aan 'n [$1 item] in die sentrale data-resevoir gekoppel, wat skakel na [[$2]] op hierdie webwerf. Items kan slegs na één bladsy per webwerf verwys. Kies 'n ander bladsy om na te skakel.",
 	"wikibase-linkitem-close": "Sluit venster en herlaai die bladsy",
 	"wikibase-linkitem-failure": "'n Onbekende fout het tydens die skakeling na die gegewe bladsy voorgekom.",
 	"wikibase-linkitem-title": "Skakel met bladsy",

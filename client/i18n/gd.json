@@ -23,7 +23,7 @@
 	"wikibase-editlinks": "Deasaich na ceanglaichean",
 	"wikibase-editlinkstitle": "Deasaich na ceanglaichean eadar-cànain",
 	"wikibase-linkitem-addlinks": "Cuir ceanglaichean ris",
-	"wikibase-linkitem-alreadylinked": "Tha an duilleag a bha thu airson ceangal ris ceangailte ri [$1 nì] sa phrìomh ionad-tasgaidh a cheanglas ri $2 air an làrach seo. Chan fhaod ach aon duilleag o gach làrach a bhith ceangailte ri nì. Feuch an tagh thu duilleag eile gus ceangal rithe.",
+	"wikibase-linkitem-alreadylinked": "Tha an duilleag a bha thu airson ceangal ris ceangailte ri [$1 nì] sa phrìomh ionad-tasgaidh a cheanglas ri [[$2]] air an làrach seo. Chan fhaod ach aon duilleag o gach làrach a bhith ceangailte ri nì. Feuch an tagh thu duilleag eile gus ceangal rithe.",
 	"wikibase-linkitem-close": "Dùin an còmhradh 's ath-luchdaich an duilleag",
 	"wikibase-linkitem-failure": "Thachair mearachd neo-aithnichte nuair a dh'fheuch sinn ceangal ris an duilleag shònraichte.",
 	"wikibase-linkitem-title": "Ceangail ri duilleag",

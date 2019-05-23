@@ -29,7 +29,7 @@
 	"wikibase-editlinkstitle": "Endra mellomspråklege lenkjer",
 	"wikibase-addlinkstitle": "Legg til språklenkjer",
 	"wikibase-linkitem-addlinks": "Legg til lenkjer",
-	"wikibase-linkitem-alreadylinked": "Sida du ynskte å lenkja med er alt knytt til eit [$1 datasett] på det sentrale datalageret som lenkjar til $2 på denne nettstaden. Elementet kan berre ha tilknytt éi side per nettstad. Vel ei anna side å lenkja med.",
+	"wikibase-linkitem-alreadylinked": "Sida du ynskte å lenkja med er alt knytt til eit [$1 datasett] på det sentrale datalageret som lenkjar til [[$2]] på denne nettstaden. Elementet kan berre ha tilknytt éi side per nettstad. Vel ei anna side å lenkja med.",
 	"wikibase-linkitem-close": "Lat att dialog og last sida på nytt",
 	"wikibase-linkitem-failure": "Ein ukjend feil oppstod under lenkinga av sida.",
 	"wikibase-linkitem-title": "Lenk til side",

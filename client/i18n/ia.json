@@ -22,7 +22,7 @@
 	"wikibase-editlinks": "Modificar ligamines",
 	"wikibase-editlinkstitle": "Modificar ligamines a altere linguas",
 	"wikibase-linkitem-addlinks": "Adder ligamines",
-	"wikibase-linkitem-alreadylinked": "Le pagina que tu voleva ligar es jam attachate a un [$1 elemento] in le repositorio central de datos que liga a $2 in iste sito. Elementos pote solmente haber un pagina attachate per sito. Per favor elige un altere pagina pro ligar.",
+	"wikibase-linkitem-alreadylinked": "Le pagina que tu voleva ligar es jam attachate a un [$1 elemento] in le repositorio central de datos que liga a [[$2]] in iste sito. Elementos pote solmente haber un pagina attachate per sito. Per favor elige un altere pagina pro ligar.",
 	"wikibase-linkitem-close": "Clauder dialogo e recargar pagina",
 	"wikibase-linkitem-failure": "Un error incognite ha occurrite durante le tentativa de ligar le pagina indicate.",
 	"wikibase-linkitem-title": "Ligar pagina",

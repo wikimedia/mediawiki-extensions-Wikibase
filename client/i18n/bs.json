@@ -28,7 +28,7 @@
 	"wikibase-editlinkstitle": "Uredi međujezične veze",
 	"wikibase-addlinkstitle": "Dodaj međujezičke veze",
 	"wikibase-linkitem-addlinks": "Dodaj veze",
-	"wikibase-linkitem-alreadylinked": "Stranica sa kojom ste htjeli napraviti vezu je već povezana sa [$1 stavkom] u centralnom skladištu podataka koja vodi prema $2 na ovom sajtu. Stavke se mogu povezati samo sa jednom stranicom. Molimo izaberite drugu stranicu.",
+	"wikibase-linkitem-alreadylinked": "Stranica sa kojom ste htjeli napraviti vezu je već povezana sa [$1 stavkom] u centralnom skladištu podataka koja vodi prema [[$2]] na ovom sajtu. Stavke se mogu povezati samo sa jednom stranicom. Molimo izaberite drugu stranicu.",
 	"wikibase-linkitem-close": "Zatvori prozor i ponovo učitaj stranicu",
 	"wikibase-linkitem-failure": "Desila se nepoznata greška tokom povezivanja sa datom stranicom.",
 	"wikibase-linkitem-title": "Poveži sa stranicom",

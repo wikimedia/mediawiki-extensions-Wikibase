@@ -32,7 +32,7 @@
 	"wikibase-editlinkstitle": "Keisti tarpkalbines nuorodas",
 	"wikibase-addlinkstitle": "Pridėti tarpkalbines nuorodas",
 	"wikibase-linkitem-addlinks": "Pridėti nuorodas",
-	"wikibase-linkitem-alreadylinked": "Puslapis, su kuriuo susieti norėjote, jau esti priskirtas [$1 įrašui] centrinėje duomenų bazėje ir siejasi su puslapiu $2 šioje svetainėje. Įrašai gali būti susieti tik su vienu svetainės puslapiu. Prašome pasirinkti kitą puslapį susiejimui.",
+	"wikibase-linkitem-alreadylinked": "Puslapis, su kuriuo susieti norėjote, jau esti priskirtas [$1 įrašui] centrinėje duomenų bazėje ir siejasi su puslapiu [[$2]] šioje svetainėje. Įrašai gali būti susieti tik su vienu svetainės puslapiu. Prašome pasirinkti kitą puslapį susiejimui.",
 	"wikibase-linkitem-close": "Uždaryti pokalbio langą ir perkrauti puslapį",
 	"wikibase-linkitem-failure": "Bandant susieti šį puslapį, įvyko nenustatyta klaida.",
 	"wikibase-linkitem-title": "Susieti su puslapiu",

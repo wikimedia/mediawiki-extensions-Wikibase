@@ -26,7 +26,7 @@
 	"wikibase-editlinkstitle": "Besut pranala antarabasa",
 	"wikibase-addlinkstitle": "Tambah pranala antarabasa",
 	"wikibase-linkitem-addlinks": "Tambah pranala",
-	"wikibase-linkitem-alreadylinked": "Kaca sing péngin panjenengan gayutaké wis kapasang ing sawijiné [$1 wiji] ing panyimpenan dhata séntral sing nggayut $2 ing situs iki. Wijiné mung bisa kapasang ing kaca cacah siji saben situsé. Mangga pilihen kaca séjé sing arep panjenengan gayutaké.",
+	"wikibase-linkitem-alreadylinked": "Kaca sing péngin panjenengan gayutaké wis kapasang ing sawijiné [$1 wiji] ing panyimpenan dhata séntral sing nggayut [[$2]] ing situs iki. Wijiné mung bisa kapasang ing kaca cacah siji saben situsé. Mangga pilihen kaca séjé sing arep panjenengan gayutaké.",
 	"wikibase-linkitem-close": "Tutup dhialog lan balèni mot kaca",
 	"wikibase-linkitem-failure": "Ana masalah sing ora dingertèni nalika arep nggayutaké kaca.",
 	"wikibase-linkitem-title": "Gayutaké karo kaca",

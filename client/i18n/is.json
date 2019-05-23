@@ -26,7 +26,7 @@
 	"wikibase-editlinkstitle": "Breyta tungumálatenglum",
 	"wikibase-addlinkstitle": "Bæta við tungumálatenglum",
 	"wikibase-linkitem-addlinks": "Bæta við tenglum",
-	"wikibase-linkitem-alreadylinked": "Síðan sem þú vildir tengja við er þegar tengd við [$1 hlut] á miðlægum gagnagrunni sem tengir á $2 á þessari síðu. Hlutir geta eingöngu haft eina síðu per vefsvæði. Vinsamlegast veldu aðra síðu til að tengja við.",
+	"wikibase-linkitem-alreadylinked": "Síðan sem þú vildir tengja við er þegar tengd við [$1 hlut] á miðlægum gagnagrunni sem tengir á [[$2]] á þessari síðu. Hlutir geta eingöngu haft eina síðu per vefsvæði. Vinsamlegast veldu aðra síðu til að tengja við.",
 	"wikibase-linkitem-close": "Loka glugganum og endurhlaða síðunni",
 	"wikibase-linkitem-failure": "Óþekkt villa kom upp þegar reynt var að tengja í síðuna.",
 	"wikibase-linkitem-title": "Tengja í síðu",

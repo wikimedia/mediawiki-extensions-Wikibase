@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Strainu"
+		]
+	},
+	"apihelp-wbsetaliases-description": "Setează aliasuri pentru un element Wikibase.",
+	"apihelp-wbsetaliases-summary": "Setează aliasuri pentru un element Wikibase.",
+	"apihelp-wbsetaliases-param-language": "Limba pentru care să setăm aliasurile.",
+	"apihelp-wbsetlabel-param-language": "Limba etichetei",
+	"apihelp-wbsetlabel-param-value": "Valoarea etichetei"
+}

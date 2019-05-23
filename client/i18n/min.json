@@ -24,7 +24,7 @@
 	"wikibase-editlinks": "Suntiang interwiki",
 	"wikibase-editlinkstitle": "Suntiang pranala interwiki",
 	"wikibase-linkitem-addlinks": "Tambah interwiki",
-	"wikibase-linkitem-alreadylinked": "Laman nan nio Sanak tauikkan alah tatauik ka [$1 item] pado pusek panyimpanan data nan tahubuang pado $2 di situs ko. Item hanyo dapek punyo satu laman per situs nan tatauik. Silakan piliah laman lain untuak ditauikkan.",
+	"wikibase-linkitem-alreadylinked": "Laman nan nio Sanak tauikkan alah tatauik ka [$1 item] pado pusek panyimpanan data nan tahubuang pado [[$2]] di situs ko. Item hanyo dapek punyo satu laman per situs nan tatauik. Silakan piliah laman lain untuak ditauikkan.",
 	"wikibase-linkitem-close": "Tutuik dan muek ulang laman",
 	"wikibase-linkitem-failure": "Kasalahan indak dikatahui tajadi sangkek mancubo manauikkan laman.",
 	"wikibase-linkitem-title": "Tauikkan jo laman",

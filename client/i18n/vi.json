@@ -28,7 +28,7 @@
 	"wikibase-editlinkstitle": "Sửa liên kết giữa ngôn ngữ",
 	"wikibase-addlinkstitle": "Thêm liên kết giữa ngôn ngữ",
 	"wikibase-linkitem-addlinks": "Thêm liên kết",
-	"wikibase-linkitem-alreadylinked": "Bạn không thể đặt liên kết đến trang được chọn vì nó đã được liên kết đến một [$1 khoản mục] trong kho dữ liệu chung, và khoản mục đó đã liên kết đến $2 tại dịch vụ này. Các khoản mục chỉ có thể có liên kết đến mỗi dịch vụ một trang. Xin vui lòng chọn một trang khác để liên kết.",
+	"wikibase-linkitem-alreadylinked": "Bạn không thể đặt liên kết đến trang được chọn vì nó đã được liên kết đến một [$1 khoản mục] trong kho dữ liệu chung, và khoản mục đó đã liên kết đến [[$2]] tại dịch vụ này. Các khoản mục chỉ có thể có liên kết đến mỗi dịch vụ một trang. Xin vui lòng chọn một trang khác để liên kết.",
 	"wikibase-linkitem-close": "Đóng hộp thoại và tải lại trang",
 	"wikibase-linkitem-failure": "Đã xuất hiện lỗi bất ngờ khi đặt liên kết đến trang chỉ định.",
 	"wikibase-linkitem-title": "Đặt liên kết với trang",

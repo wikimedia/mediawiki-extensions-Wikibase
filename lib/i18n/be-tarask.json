@@ -59,6 +59,7 @@
 	"wikibase-validator-label-too-long": "Метка мусіць мець даўжыню ня больш за $1 {{PLURAL:$1|сымбаль|сымбалі|сымбаляў}}",
 	"wikibase-validator-label-too-short": "Метка мусіць мець даўжыню ня менш за $1 {{PLURAL:$1|сымбаль|сымбалі|сымбаляў}}",
 	"wikibase-validator-description-too-long": "Апісаньне мусіць мець даўжыню ня больш за $1 {{PLURAL:$1|сымбаль|сымбалі|сымбаляў}}",
+	"wikibase-validator-description-too-short": "Апісаньне мусіць мець даўжыню ня менш за $1 {{PLURAL:$1|сымбаль|сымбалі|сымбаляў}}",
 	"wikibase-validator-too-short": "Мусіць быць даўжынёй прынамсі $1 {{PLURAL:$1|сымбаль|сымбаля|сымбаляў}}",
 	"wikibase-validator-malformed-value": "Няслушны ўвод: $1",
 	"wikibase-validator-bad-entity-id": "Няслушны ідэнтыфікатар: $1",

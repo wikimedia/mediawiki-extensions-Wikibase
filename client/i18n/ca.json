@@ -41,7 +41,7 @@
 	"wikibase-editlinkstitle": "Modifica enllaços interlingües",
 	"wikibase-addlinkstitle": "Afegeix enllaços interlingües",
 	"wikibase-linkitem-addlinks": "Afegeix enllaços",
-	"wikibase-linkitem-alreadylinked": "La pàgina amb la que voleu enllaçar ja està definida en un [$1 element] del repositori central de dades que enllaça a $2 en aquest lloc. Els elements només poden estar relacionats amb una pàgina per lloc. Escolliu una pàgina diferent per enllaçar-hi.",
+	"wikibase-linkitem-alreadylinked": "La pàgina amb la que voleu enllaçar ja està definida en un [$1 element] del repositori central de dades que enllaça a [[$2]] en aquest lloc. Els elements només poden estar relacionats amb una pàgina per lloc. Escolliu una pàgina diferent per enllaçar-hi.",
 	"wikibase-linkitem-close": "Tanca la caixa de diàleg i recarrega la pàgina",
 	"wikibase-linkitem-failure": "S'ha produït un error desconegut en intentar enllaçar a la pàgina indicada.",
 	"wikibase-linkitem-title": "Enllaça amb la pàgina",

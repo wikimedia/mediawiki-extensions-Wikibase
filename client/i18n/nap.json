@@ -27,7 +27,7 @@
 	"wikibase-editlinkstitle": "Càgna 'e cullegamente nterlenguistece",
 	"wikibase-addlinkstitle": "Azzecca cocche cullegamento nterlenguisteco",
 	"wikibase-linkitem-addlinks": "Azzecca jonta",
-	"wikibase-linkitem-alreadylinked": "'A paggena ca vulevate cullegà sta ggià azzecata a n'[$1 item] dint'a ll'archivio centrale 'e date ca jonta 'a $2 ncopp'a stu sito. Ll'elemente se putessero culegà a na paggena surtanto pe sito. Sciglite na paggena diversa addò l'avisser'a cullegà.",
+	"wikibase-linkitem-alreadylinked": "'A paggena ca vulevate cullegà sta ggià azzecata a n'[$1 item] dint'a ll'archivio centrale 'e date ca jonta 'a [[$2]] ncopp'a stu sito. Ll'elemente se putessero culegà a na paggena surtanto pe sito. Sciglite na paggena diversa addò l'avisser'a cullegà.",
 	"wikibase-linkitem-close": "Nchiure 'a fenesta 'e dialogo e recarreca paggena",
 	"wikibase-linkitem-failure": "S'è verificato n'errore scanusciuto pe' tramente ca se faceva 'o tentativo 'e cullega 'a paggena data.",
 	"wikibase-linkitem-title": "Collega â paggena",

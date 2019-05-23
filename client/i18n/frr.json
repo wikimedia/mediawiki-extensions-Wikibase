@@ -24,7 +24,7 @@
 	"wikibase-editlinkstitle": "Ferwisangen üüb ööder spriaken bewerke",
 	"wikibase-addlinkstitle": "Nei ferwisangen tu ööder spriaken maage",
 	"wikibase-linkitem-addlinks": "Nei ferwisangen",
-	"wikibase-linkitem-alreadylinked": "Det sidj, diar dü üüb ferwise wulst, as al mä det [$1 objekt] ferbünjen, an det ferwiset üüb $2. Diar koon man ian sidj faan en wiki-projekt mä en objekt ferbünjen wurd. Gung tu en ööder sidj, huar dü üüb ferwise wel.",
+	"wikibase-linkitem-alreadylinked": "Det sidj, diar dü üüb ferwise wulst, as al mä det [$1 objekt] ferbünjen, an det ferwiset üüb [[$2]]. Diar koon man ian sidj faan en wiki-projekt mä en objekt ferbünjen wurd. Gung tu en ööder sidj, huar dü üüb ferwise wel.",
 	"wikibase-linkitem-close": "Sacht maage an det sidj nei loose",
 	"wikibase-linkitem-failure": "Bi't ferwisin üüb detdiar sidj as wat skiaf gingen.",
 	"wikibase-linkitem-title": "Mä det sidj ferbinj",

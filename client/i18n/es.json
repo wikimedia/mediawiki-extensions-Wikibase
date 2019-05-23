@@ -41,7 +41,7 @@
 	"wikibase-editlinkstitle": "Editar enlaces interlingüísticos",
 	"wikibase-addlinkstitle": "Agregar enlaces interlingüísticos",
 	"wikibase-linkitem-addlinks": "Añadir enlaces",
-	"wikibase-linkitem-alreadylinked": "La página que quieres enlazar con esta, ya está enlazada a un [$1 elemento] en el repositorio de datos central que une a $2 en este sitio. Los elementos sólo pueden tener una sola página por sitio enlazado. Por favor, elige una página diferente para enlazarlo.",
+	"wikibase-linkitem-alreadylinked": "La página que quieres enlazar con esta, ya está enlazada a un [$1 elemento] en el repositorio de datos central que une a [[$2]] en este sitio. Los elementos sólo pueden tener una sola página por sitio enlazado. Por favor, elige una página diferente para enlazarlo.",
 	"wikibase-linkitem-close": "Cerrar y recargar la página",
 	"wikibase-linkitem-failure": "Se produjo un error desconocido al intentar enlazar la página dada.",
 	"wikibase-linkitem-title": "Enlazar las páginas",

@@ -28,7 +28,7 @@
 	"wikibase-editlinkstitle": "Editar as ligazóns interlingüísticas",
 	"wikibase-addlinkstitle": "Engadir ligazóns interlingüísticas",
 	"wikibase-linkitem-addlinks": "Engadir ligazóns",
-	"wikibase-linkitem-alreadylinked": "A páxina coa que quería ligar xa está anexada a un [$1 elemento] no repositorio central de datos, que liga con \"$2\" neste sitio. Os elementos unicamente poden ter unha páxina por sitio. Escolla unha páxina diferente coa que ligar.",
+	"wikibase-linkitem-alreadylinked": "A páxina coa que quería ligar xa está anexada a un [$1 elemento] no repositorio central de datos, que liga con \"[[$2]]\" neste sitio. Os elementos unicamente poden ter unha páxina por sitio. Escolla unha páxina diferente coa que ligar.",
 	"wikibase-linkitem-close": "Pechar o diálogo e recargar a páxina",
 	"wikibase-linkitem-failure": "Houbo un erro ao intentar ligar a páxina achegada.",
 	"wikibase-linkitem-title": "Ligar coa páxina",

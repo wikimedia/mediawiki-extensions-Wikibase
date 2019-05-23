@@ -49,7 +49,7 @@
 	"wikibase-editlinkstitle": "Modifier les liens interlangues",
 	"wikibase-addlinkstitle": "Ajoutez les liens interlangues",
 	"wikibase-linkitem-addlinks": "Ajouter des liens",
-	"wikibase-linkitem-alreadylinked": "La page à laquelle vous voulez vous lier est déjà attachée à un [$1 élément] du dépôt de données central qui se lie à $2 sur ce site. Les éléments ne peuvent avoir qu’une page attachée par site. Veuillez choisir une autre page pour vous lier avec.",
+	"wikibase-linkitem-alreadylinked": "La page à laquelle vous voulez vous lier est déjà attachée à un [$1 élément] du dépôt de données central qui se lie à [[$2]] sur ce site. Les éléments ne peuvent avoir qu’une page attachée par site. Veuillez choisir une autre page pour vous lier avec.",
 	"wikibase-linkitem-close": "Fermer la boîte de dialogue et recharger la page",
 	"wikibase-linkitem-failure": "Une erreur inconnue est survenue en essayant de lier la page fournie.",
 	"wikibase-linkitem-title": "Se lier avec la page",

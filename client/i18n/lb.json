@@ -25,7 +25,7 @@
 	"wikibase-editlinkstitle": "Interwiki-Linken änneren",
 	"wikibase-addlinkstitle": "Interwiki-Linken derbäisetzen",
 	"wikibase-linkitem-addlinks": "Linken derbäisetzen",
-	"wikibase-linkitem-alreadylinked": "D'Säit, déi Dir verlinke wëllt, ass scho mat engem [$1 Objet] an eiser zentraler Datebank verbonnen, dat op $2 op dësen Internesite verlinkt ass. Et ka just eng Säit pro Internetsite mat engem Objet verbonne sinn. Sicht w.e.g. eng aner Säit, déi verlinkt gi soll.",
+	"wikibase-linkitem-alreadylinked": "D'Säit, déi Dir verlinke wëllt, ass scho mat engem [$1 Objet] an eiser zentraler Datebank verbonnen, dat op [[$2]] op dësen Internesite verlinkt ass. Et ka just eng Säit pro Internetsite mat engem Objet verbonne sinn. Sicht w.e.g. eng aner Säit, déi verlinkt gi soll.",
 	"wikibase-linkitem-close": "Maacht den Dialog zou a luet d'Säit nei",
 	"wikibase-linkitem-failure": "En onbekannte Feeler ass beim Versuch fir déi Säit déi Dir uginn hutt ze verlinken.",
 	"wikibase-linkitem-title": "Mat der Säit verlinken",

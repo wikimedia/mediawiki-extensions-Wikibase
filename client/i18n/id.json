@@ -30,7 +30,7 @@
 	"wikibase-editlinkstitle": "Sunting pranala interwiki",
 	"wikibase-addlinkstitle": "Tambahkan pranala interwiki",
 	"wikibase-linkitem-addlinks": "Tambah interwiki",
-	"wikibase-linkitem-alreadylinked": "Halaman yang ingin Anda tautkan sudah tertaut ke [$1 item] pada pusat penyimpanan data yang terhubung pada $2 di situs ini. Item hanya dapat memiliki satu halaman per situs yang tertaut. Silakan pilih halaman lain untuk ditautkan.",
+	"wikibase-linkitem-alreadylinked": "Halaman yang ingin Anda tautkan sudah tertaut ke [$1 item] pada pusat penyimpanan data yang terhubung pada [[$2]] di situs ini. Item hanya dapat memiliki satu halaman per situs yang tertaut. Silakan pilih halaman lain untuk ditautkan.",
 	"wikibase-linkitem-close": "Tutup kotak dialog dan muat ulang laman",
 	"wikibase-linkitem-failure": "Kesalahan tidak diketahui terjadi saat mencoba menautkan halaman.",
 	"wikibase-linkitem-title": "Tautkan dengan laman",

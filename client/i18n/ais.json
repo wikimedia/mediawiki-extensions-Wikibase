@@ -25,7 +25,7 @@
 	"wikibase-editlinkstitle": "mikawaway tu kalumyiti caliway han ku kamu misiket",
 	"wikibase-addlinkstitle": "micunus milakuwit kamu masasiket",
 	"wikibase-linkitem-addlinks": "micunus tu masasiket",
-	"wikibase-linkitem-alreadylinked": "maydih kisu misasiket a kasabelih masasiket tu teban kalunasulitan suped-sulu a [$1 kasacacay], i tina kakacawan misiket ku $2. \ncacacacay kasacacay dada’ kapah misiket calay-kakacawan(wangcan) a cacay kasabelih，pipili’ zuma amisasiketay a kasabelih",
+	"wikibase-linkitem-alreadylinked": "maydih kisu misasiket a kasabelih masasiket tu teban kalunasulitan suped-sulu a [$1 kasacacay], i tina kakacawan misiket ku [[$2]]. \ncacacacay kasacacay dada’ kapah misiket calay-kakacawan(wangcan) a cacay kasabelih，pipili’ zuma amisasiketay a kasabelih",
 	"wikibase-linkitem-close": "edeben sasukamu atilad atu miliyaw lisimet kasabelih",
 	"wikibase-linkitem-failure": "mitanam masasiket matuzu’ay a kasabelih matahkal ku caay kapulita a mungangaw.",
 	"wikibase-linkitem-title": "masasiket tu kasabelih",

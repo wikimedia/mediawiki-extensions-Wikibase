@@ -31,7 +31,7 @@
 	"wikibase-editlinkstitle": "Upraviť medzijazykové odkazy",
 	"wikibase-addlinkstitle": "Pridať medzijazykové odkazy",
 	"wikibase-linkitem-addlinks": "Pridať odkazy",
-	"wikibase-linkitem-alreadylinked": "Uvedená stránka je už prepojená s [$1 položkou] v centrálnom úložisku, odkazujúcou na „$2“ na tomto serveri. Položky môžu mať pre každý server len jeden odkaz. Zvoľte prosím inú stránku, prípadne upravte [$1 položku] v úložisku priamo.",
+	"wikibase-linkitem-alreadylinked": "Uvedená stránka je už prepojená s [$1 položkou] v centrálnom úložisku, odkazujúcou na „[[$2]]“ na tomto serveri. Položky môžu mať pre každý server len jeden odkaz. Zvoľte prosím inú stránku, prípadne upravte [$1 položku] v úložisku priamo.",
 	"wikibase-linkitem-close": "Zavrieť dialóg a obnoviť stránku",
 	"wikibase-linkitem-title": "Prepojiť so stránkou",
 	"wikibase-linkitem-linkpage": "Prepojiť so stránkou",

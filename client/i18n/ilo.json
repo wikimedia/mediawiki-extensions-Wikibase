@@ -22,7 +22,7 @@
 	"wikibase-editlinks": "Urnosen dagiti silpo",
 	"wikibase-editlinkstitle": "Urnosen dagiti silpo ti pagsasao",
 	"wikibase-linkitem-addlinks": "Agnayon kadagiti silpo",
-	"wikibase-linkitem-alreadylinked": "Ti panid a kinayatmo nga isilpo ket naikapeten ti maysa a [$1 banag] idiay sentral a repositorio ti datos a mangisilpo iti $2 iti daytoy a sitio. Dagiti banag mabalin laeng nga adda ti maysa a panid a naikapet ti tunggal maysa a sitio Pangngaasi nga agpili ti sabali a pangisilpuan a panid.",
+	"wikibase-linkitem-alreadylinked": "Ti panid a kinayatmo nga isilpo ket naikapeten ti maysa a [$1 banag] idiay sentral a repositorio ti datos a mangisilpo iti [[$2]] iti daytoy a sitio. Dagiti banag mabalin laeng nga adda ti maysa a panid a naikapet ti tunggal maysa a sitio Pangngaasi nga agpili ti sabali a pangisilpuan a panid.",
 	"wikibase-linkitem-close": "Irikep ti pagsaritaan ken ikarga manen ti panid",
 	"wikibase-linkitem-failure": "Adda napasamak a maysa a di ammo a biddut bayat idi agisilsilpo ti naited a panid.",
 	"wikibase-linkitem-title": "Isilpo iti panid",

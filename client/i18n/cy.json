@@ -19,7 +19,7 @@
 	"wikibase-editlinks": "Golygu cysylltau",
 	"wikibase-editlinkstitle": "Golygu cysylltau rhyngwici rhwng ieithoedd",
 	"wikibase-linkitem-addlinks": "Ychwanegu cysylltau",
-	"wikibase-linkitem-alreadylinked": "Mae'r dudalen yr ydych am gysylltu â hi eisoes wedi ei chysylltu ag [$1 eitem] ar y cof data canolog, a honno'n cysylltu â'r dudalen $2 ar y wefan hon. Dim ond un dudalen y wici sy'n gallu cael ei chysylltu ag eitem. Dewiswch dudalen arall i gysylltu â hi.",
+	"wikibase-linkitem-alreadylinked": "Mae'r dudalen yr ydych am gysylltu â hi eisoes wedi ei chysylltu ag [$1 eitem] ar y cof data canolog, a honno'n cysylltu â'r dudalen [[$2]] ar y wefan hon. Dim ond un dudalen y wici sy'n gallu cael ei chysylltu ag eitem. Dewiswch dudalen arall i gysylltu â hi.",
 	"wikibase-linkitem-close": "Cau'r deialog ac ail-lwytho'r dudalen",
 	"wikibase-linkitem-title": "Cysylltu â thudalen",
 	"wikibase-linkitem-linkpage": "Cysyllter â'r dudalen",

@@ -42,7 +42,7 @@
 	"wikibase-editlinkstitle": "Modifica collegamenti interlinguistici",
 	"wikibase-addlinkstitle": "Aggiungi collegamento interlinguistico",
 	"wikibase-linkitem-addlinks": "Aggiungi collegamenti",
-	"wikibase-linkitem-alreadylinked": "La pagina che si vuole collegare è già associata a un altro [$1 elemento] nell'archivio centrale dei dati che punta su $2 in questo sito. Gli elementi possono essere collegati a una sola pagina per sito. Scegli una pagina diversa a cui collegarla.",
+	"wikibase-linkitem-alreadylinked": "La pagina che si vuole collegare è già associata a un altro [$1 elemento] nell'archivio centrale dei dati che punta su [[$2]] in questo sito. Gli elementi possono essere collegati a una sola pagina per sito. Scegli una pagina diversa a cui collegarla.",
 	"wikibase-linkitem-close": "Chiudi la finestra di dialogo e ricarica la pagina",
 	"wikibase-linkitem-failure": "Si è verificato un errore sconosciuto durante il tentativo di collegare la pagina indicata.",
 	"wikibase-linkitem-title": "Collega con un'altra pagina",

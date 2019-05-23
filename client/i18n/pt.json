@@ -46,7 +46,7 @@
 	"wikibase-editlinkstitle": "Editar hiperligações interlínguas",
 	"wikibase-addlinkstitle": "Adicionar hiperligações interlínguas",
 	"wikibase-linkitem-addlinks": "Adicionar hiperligações",
-	"wikibase-linkitem-alreadylinked": "A página que pretende ligar a esta já está associada a um [$1 elemento] no repositório central de dados, o qual liga à página $2 neste sítio. Os elementos só podem ter associada uma página por cada sítio. Por favor, escolha uma página diferente com a qual ligar.",
+	"wikibase-linkitem-alreadylinked": "A página que pretende ligar a esta já está associada a um [$1 elemento] no repositório central de dados, o qual liga à página [[$2]] neste sítio. Os elementos só podem ter associada uma página por cada sítio. Por favor, escolha uma página diferente com a qual ligar.",
 	"wikibase-linkitem-close": "Fechar caixa de diálogo e recarregar a página",
 	"wikibase-linkitem-failure": "Ocorreu um erro desconhecido enquanto tentava ligar a determinada página.",
 	"wikibase-linkitem-title": "Ligar com página",

@@ -30,7 +30,7 @@
 	"wikibase-editlinkstitle": "Kemmañ al liammoù etreyezhel",
 	"wikibase-addlinkstitle": "Ouzhpennañ al liammoù etreyezhel",
 	"wikibase-linkitem-addlinks": "Ouzhpennañ liammoù",
-	"wikibase-linkitem-alreadylinked": "Stag eo c'hoazh ar bajenn a fell deoc'h bezañ liammet outi ouzh un [$1 elfenn] all eus ar c'havlec'h roadennoù kreiz hag a zo liammet ouzh $2 war al lec'hienn-mañ. Ne c'hall an elfennoù bezañ staget nemet ouzh ur bajenn dre lec'hienn. Dibabit ur bajenn all da vezañ liammet outi neuze.",
+	"wikibase-linkitem-alreadylinked": "Stag eo c'hoazh ar bajenn a fell deoc'h bezañ liammet outi ouzh un [$1 elfenn] all eus ar c'havlec'h roadennoù kreiz hag a zo liammet ouzh [[$2]] war al lec'hienn-mañ. Ne c'hall an elfennoù bezañ staget nemet ouzh ur bajenn dre lec'hienn. Dibabit ur bajenn all da vezañ liammet outi neuze.",
 	"wikibase-linkitem-close": "Serriñ ar prenestr hag adkargañ ar bajenn",
 	"wikibase-linkitem-failure": "C'hoarvezet ez eus ur fazi pa'z eus bet klasket en em liammañ ouzh ar bajenn merket.",
 	"wikibase-linkitem-title": "Liammañ ouzh ar bajenn",

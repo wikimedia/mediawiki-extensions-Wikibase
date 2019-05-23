@@ -21,7 +21,7 @@
 	"wikibase-editlinks": "Canbia link",
 	"wikibase-editlinkstitle": "Canbia colegamenti interlenguìsteghi",
 	"wikibase-linkitem-addlinks": "Zonta link",
-	"wikibase-linkitem-alreadylinked": "La pagina che te vol colegar la xe zà asocià a n'altro [$1 elemento] in te l'archivio sentrale dei dati che ponta su $2 in sto sito. I elementi i se pol colegar a na pagina sola par sito. Siegli na pagina difarente a cui colegarla.",
+	"wikibase-linkitem-alreadylinked": "La pagina che te vol colegar la xe zà asocià a n'altro [$1 elemento] in te l'archivio sentrale dei dati che ponta su [[$2]] in sto sito. I elementi i se pol colegar a na pagina sola par sito. Siegli na pagina difarente a cui colegarla.",
 	"wikibase-linkitem-close": "Sèra la finestra de dialogo e ricarga la pagina",
 	"wikibase-linkitem-failure": "Xe capità un eror sconossùo sercando de colegar la pagina indicà.",
 	"wikibase-linkitem-title": "Colega co n'altra pagina",

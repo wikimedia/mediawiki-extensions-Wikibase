@@ -30,7 +30,7 @@
 	"wikibase-editlinkstitle": "Rediger lenker til artikkelen på andre språk",
 	"wikibase-addlinkstitle": "Legg til språklenker",
 	"wikibase-linkitem-addlinks": "Legg til lenke",
-	"wikibase-linkitem-alreadylinked": "Siden du vil lenke til er allerede koblet til et [$1 element] i det sentrale dataregisteret som lenker til $2 på dette nettstedet. Et element kan bare lenke til én side per nettsted. Vennligst velg en annen side å lenke til.",
+	"wikibase-linkitem-alreadylinked": "Siden du vil lenke til er allerede koblet til et [$1 element] i det sentrale dataregisteret som lenker til [[$2]] på dette nettstedet. Et element kan bare lenke til én side per nettsted. Vennligst velg en annen side å lenke til.",
 	"wikibase-linkitem-close": "Lukk dialogboksen og last inn siden på nytt",
 	"wikibase-linkitem-failure": "Det oppstod en ukjent feil under forsøket på å lenke med angitt side.",
 	"wikibase-linkitem-title": "Lenk til side",
