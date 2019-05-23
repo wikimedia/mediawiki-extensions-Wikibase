@@ -97,7 +97,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	}
 
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		$coordinatesOutput = $this->getCoordinatesOutput( $parserOutput );
+		$coordinatesOutput = CoordinatesOutput::getOrBuildFromParserOutput( $parserOutput );
 		$primaryCoordKey = $this->findPrimaryCoordinateKey();
 
 		if ( $coordinatesOutput->getPrimary() === false && $primaryCoordKey !== null ) {
@@ -105,17 +105,6 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		}
 
 		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
-
-		$parserOutput->geoData = $coordinatesOutput;
-	}
-
-	/**
-	 * @param ParserOutput $parserOutput
-	 *
-	 * @return CoordinatesOutput
-	 */
-	private function getCoordinatesOutput( ParserOutput $parserOutput ) {
-		return $parserOutput->geoData ?? new CoordinatesOutput();
 	}
 
 	/**

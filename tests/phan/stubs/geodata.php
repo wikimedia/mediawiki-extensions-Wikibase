@@ -31,6 +31,18 @@ class CoordinatesOutput {
 
 	public function addSecondary( Coord $c ) {
 	}
+
+	public static function getOrBuildFromParserOutput(
+		\ParserOutput $parserOutput
+	): CoordinatesOutput {
+	}
+
+	/**
+	 * @param \ParserOutput $parserOutput
+	 * @return CoordinatesOutput|null
+	 */
+	public static function getFromParserOutput( \ParserOutput $parserOutput ) {
+	}
 }
 
 class GeoData {
