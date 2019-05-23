@@ -94,6 +94,30 @@
       "revId": "9b939ea11e331b08455f15e7aa0edee210cd7328",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac82ab33_34170fea",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-05-23T12:54:34Z",
+      "side": 1,
+      "message": "I admit I didn\u0027t look at the problem and the change as a whole, but just looking at this line, and the one before, wouldn\u0027t TitleFactory::newFromID( $row-\u003epage_id ) do the work here?",
+      "parentUuid": "4e93caa8_eecd99c1",
+      "range": {
+        "startLine": 210,
+        "startChar": 12,
+        "endLine": 210,
+        "endChar": 17
+      },
+      "revId": "9b939ea11e331b08455f15e7aa0edee210cd7328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
