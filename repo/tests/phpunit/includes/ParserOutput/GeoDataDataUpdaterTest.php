@@ -9,6 +9,7 @@ use DataValues\StringValue;
 use ExtensionRegistry;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
+use GeoData\CoordinatesParserFunction;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -177,7 +178,8 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		$parserOutput = new ParserOutput();
 		$updater->updateParserOutput( $parserOutput );
 
-		$this->assertEquals( $expected, $parserOutput->geoData );
+		$this->assertEquals( $expected,
+			CoordinatesParserFunction::getFromParserOutput( $parserOutput ) );
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
@@ -201,7 +203,8 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		$parserOutput = new ParserOutput();
 		$updater->updateParserOutput( $parserOutput );
 
-		$this->assertEquals( $expected, $parserOutput->geoData );
+		$this->assertEquals( $expected,
+			CoordinatesParserFunction::getFromParserOutput( $parserOutput ) );
 	}
 
 	public function testUpdateParserOutput_noPrimaryCoord() {
@@ -219,24 +222,24 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 		$updater->updateParserOutput( $parserOutput );
 
-		$this->assertEquals( $expected, $parserOutput->geoData );
+		$this->assertEquals( $expected,
+			CoordinatesParserFunction::getFromParserOutput( $parserOutput ) );
 	}
 
 	public function testUpdateParserOutput_withExistingCoordinates() {
-		$coordinatesOutput = new CoordinatesOutput();
+		$parserOutput = new ParserOutput();
+		$coordinatesOutput = CoordinatesParserFunction::getOrBuildFromParserOutput( $parserOutput );
 
 		$coord = new Coord( 39.0987, -70.0051 );
 		$coord->primary = true;
 
 		$coordinatesOutput->addPrimary( $coord );
 
-		$parserOutput = new ParserOutput();
-		$parserOutput->geoData = $coordinatesOutput;
-
 		$updater = $this->getUpdaterWithStatements( [ 'P625', 'P10' ] );
 		$updater->updateParserOutput( $parserOutput );
 
-		$this->assertEquals( $coord, $parserOutput->geoData->getPrimary() );
+		$this->assertEquals( $coord,
+			CoordinatesParserFunction::getFromParserOutput( $parserOutput )->getPrimary() );
 	}
 
 	private function getUpdaterWithStatements( array $preferredProperties ) {
