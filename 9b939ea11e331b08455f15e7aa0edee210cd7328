@@ -118,6 +118,30 @@
       "revId": "9b939ea11e331b08455f15e7aa0edee210cd7328",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a24f8c00_4881d8f6",
+        "filename": "repo/includes/Store/Sql/SqlEntityIdPager.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-23T16:44:36Z",
+      "side": 1,
+      "message": "TitleFactory::newFromID is an alias for Title::newFromID, which accesses database on each invocation. That\u0027s exactly what we want to avoid.",
+      "parentUuid": "ac82ab33_34170fea",
+      "range": {
+        "startLine": 210,
+        "startChar": 12,
+        "endLine": 210,
+        "endChar": 17
+      },
+      "revId": "9b939ea11e331b08455f15e7aa0edee210cd7328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
