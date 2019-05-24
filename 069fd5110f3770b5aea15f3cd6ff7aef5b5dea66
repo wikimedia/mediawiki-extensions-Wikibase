@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cecbdf31_0a133470",
+        "filename": "repo/includes/UpdateRepo/UpdateRepoOnDeleteJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2019-05-24T12:59:47Z",
+      "side": 1,
+      "message": "damn sorry, completely unrelated",
+      "parentUuid": "e2017f4b_9f58a719",
+      "revId": "069fd5110f3770b5aea15f3cd6ff7aef5b5dea66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73549be3_ea1db69d",
         "filename": "repo/includes/UpdateRepo/UpdateRepoOnMoveJob.php",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "069fd5110f3770b5aea15f3cd6ff7aef5b5dea66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae73f822_adaadab0",
+        "filename": "repo/includes/UpdateRepo/UpdateRepoOnMoveJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2019-05-24T12:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73549be3_ea1db69d",
+      "revId": "069fd5110f3770b5aea15f3cd6ff7aef5b5dea66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
