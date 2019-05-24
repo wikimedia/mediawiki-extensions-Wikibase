@@ -1,0 +1,79 @@
+{
+    "status": "success",
+    "data": {
+        "resultType": "vector",
+        "result": [{
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs",
+                "instance": "wdqs1004:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs",
+                "instance": "wdqs1005:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs",
+                "instance": "wdqs1006:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs-internal",
+                "instance": "wdqs1003:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs-internal",
+                "instance": "wdqs1007:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs-internal",
+                "instance": "wdqs1008:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs-test",
+                "instance": "wdqs1009:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs-test",
+                "instance": "wdqs1010:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time@"]
+        }]
+    }
+}

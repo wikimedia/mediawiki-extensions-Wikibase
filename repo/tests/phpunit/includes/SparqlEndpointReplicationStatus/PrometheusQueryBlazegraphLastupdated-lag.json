@@ -1,0 +1,43 @@
+{
+    "status": "success",
+    "data": {
+        "resultType": "vector",
+        "result": [{
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs-internal",
+                "instance": "wdqs1004:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time-500@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "test",
+                "instance": "wdqs1005:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time-100000@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs",
+                "instance": "wdqs1006:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time-90@"]
+        }, {
+            "metric": {
+                "__name__": "blazegraph_lastupdated",
+                "cluster": "wdqs",
+                "instance": "wdqs1007:9193",
+                "job": "blazegraph",
+                "site": "eqiad"
+            },
+            "value": [@time@, "@time-0@"]
+        }]
+    }
+}

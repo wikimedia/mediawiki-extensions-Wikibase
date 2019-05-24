@@ -143,6 +143,8 @@ use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
+use Wikibase\Repo\SparqlEndpointReplicationStatus\SparqlEndpointReplicationStatus;
+use Wikibase\Repo\SparqlEndpointReplicationStatus\SparqlEndpointReplicationStatusStateHandler;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -2397,6 +2399,27 @@ class WikibaseRepo {
 
 	public function getLogger(): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	}
+
+	public function getSparqlEndpointReplicationStatusStateHandler(): SparqlEndpointReplicationStatusStateHandler {
+		return new SparqlEndpointReplicationStatusStateHandler(
+			ObjectCache::getMainStashInstance(),
+			300, // TODO: Setting
+			15 // TODO: Setting
+		);
+	}
+
+	public function getSparqlEndpointReplicationStatus(): SparqlEndpointReplicationStatus {
+		// TODO: WikimediaPrometheusSparqlEndpointReplicationStatus is somewhat WM specific.
+		return new SparqlEndpointReplicationStatus\WikimediaPrometheusSparqlEndpointReplicationStatus(
+			new \MediaWiki\Http\HttpRequestFactory(),
+			$this->getLogger(),
+			[
+				'http://prometheus.svc.eqiad.wmnet/ops/api/v1/query?query=blazegraph_lastupdated',
+				'http://prometheus.svc.codfw.wmnet/ops/api/v1/query?query=blazegraph_lastupdated',
+			],
+			[ 'wdqs', 'wdqs-internal' ]
+		);
 	}
 
 }
