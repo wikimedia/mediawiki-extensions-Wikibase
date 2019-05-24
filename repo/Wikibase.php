@@ -973,6 +973,15 @@ call_user_func( function() {
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob::class;
 	$wgJobClasses['UpdateRepoOnDelete'] = Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob::class;
+	$wgJobClasses['SparqlEndpointReplicationStatusRefresh'] = function ( $params = [] ) {
+		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+
+		return new SparqlEndpointReplicationStatusRefreshJob(
+			$wikibaseRepo->getSparqlEndpointReplicationStatusStateHandler(),
+			$wikibaseRepo->getSparqlEndpointReplicationStatus(),
+			$params
+		);
+        };
 
 	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
 	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater::onSchemaUpdate';
