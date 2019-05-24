@@ -163,6 +163,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\Sql\\SiteLinkTable' => __DIR__ . '/includes/Store/Sql/SiteLinkTable.php',
 	'Wikibase\\Lib\\Store\\Sql\\SqlEntityInfoBuilder' => __DIR__ . '/includes/Store/Sql/SqlEntityInfoBuilder.php',
 	'Wikibase\\Lib\\Store\\Sql\\TermSqlIndex' => __DIR__ . '/includes/Store/Sql/TermSqlIndex.php',
+	'Wikibase\\Lib\\Store\\Sql\\Terms\\InMemoryTypeIdsStore' => __DIR__ . '/includes/Store/Sql/Terms/InMemoryTypeIdsStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TypeIdsAcquirer' => __DIR__ . '/includes/Store/Sql/Terms/TypeIdsAcquirer.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TypeIdsResolver' => __DIR__ . '/includes/Store/Sql/Terms/TypeIdsResolver.php',
 	'Wikibase\\Lib\\Store\\Sql\\TypeDispatchingWikiPageEntityMetaDataAccessor' => __DIR__ . '/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php',
