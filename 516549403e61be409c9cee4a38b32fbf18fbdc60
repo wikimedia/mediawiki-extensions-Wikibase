@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "67eadd45_c2d65498",
+        "filename": "lib/includes/WikibaseContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-24T16:24:06Z",
+      "side": 1,
+      "message": "Well, in T220798 the current consensus seems to be that extra languages are unlikely to be useful to third-party installations.",
+      "parentUuid": "90b0e50a_34f774da",
+      "revId": "516549403e61be409c9cee4a38b32fbf18fbdc60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afb71638_0f570399",
         "filename": "lib/includes/WikibaseContentLanguages.php",
         "patchSetId": 1
