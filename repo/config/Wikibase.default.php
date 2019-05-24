@@ -9,6 +9,8 @@
  * @license GPL-2.0-or-later
  */
 
+global $wgCdnMaxAge, $wgSquidMaxage;
+
 return [
 	// url of (termbox) ssr-server
 	'ssrServerUrl' => '',
@@ -58,7 +60,7 @@ return [
 
 	// Number of seconds for which data output shall be cached.
 	// Note: keep that low, because such caches cannot always be purged easily.
-	'dataSquidMaxage' => $GLOBALS['wgSquidMaxage'],
+	'dataSquidMaxage' => $wgCdnMaxAge ?? $wgSquidMaxage,
 
 	// list of logical database names of local client wikis.
 	// may contain mappings from site-id to db-name.
