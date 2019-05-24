@@ -196,32 +196,10 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.toolbarbutton' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.toolbaritem',
-				'jquery.wikibase.toolbarbutton.styles',
-			],
-		],
-
 		// FIXME: Registered via WikibaseView on all WikibaseClient wikis, but only used by WikibaseRepo.
 		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
-			],
-		],
-
-		'jquery.wikibase.toolbaritem' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
-			],
-			'styles' => [
-				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
 			],
 		],
 
@@ -401,6 +379,8 @@ return call_user_func( function() {
 
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
+				'jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js', // uses toolbaritem
 				'jquery/wikibase/toolbar/jquery.wikibase.toolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
@@ -409,12 +389,13 @@ return call_user_func( function() {
 				'wikibase/view/ToolbarFactory.js',
 			],
 			'styles' => [
+				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css',
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
 			],
 			'dependencies' => [
+				'jquery.ui.TemplatedWidget', // for jquery.wikibase.toolbaritem
 				'jquery.wikibase.toolbar.styles',
-				'jquery.wikibase.toolbarbutton',
-				'jquery.wikibase.toolbaritem',
+				'jquery.wikibase.toolbarbutton.styles',
 				'jquery.wikibase.wbtooltip',
 				'wikibase.api.RepoApiError',
 				'wikibase.view.__namespace',
