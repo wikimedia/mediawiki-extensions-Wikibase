@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wbt_text (
   wbx_text                           VARBINARY(255)       NOT NULL
 ) /*$wgDBTableOptions*/;
 
-CREATE UNIQUE INDEX /*i*/wbt_text ON /*_*/wbt_text (wbx_text);
+CREATE UNIQUE INDEX /*i*/wbt_text_text ON /*_*/wbt_text (wbx_text);
 
 -- normalized term type names
 CREATE TABLE IF NOT EXISTS /*_*/wbt_type (
