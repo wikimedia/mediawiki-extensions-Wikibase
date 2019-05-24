@@ -196,16 +196,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.wikibase.toolbarbutton' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.toolbaritem',
-				'jquery.wikibase.toolbarbutton.styles',
-			],
-		],
-
 		// FIXME: Registered via WikibaseView on all WikibaseClient wikis, but only used by WikibaseRepo.
 		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
 			'styles' => [
@@ -401,6 +391,7 @@ return call_user_func( function() {
 
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.toolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
 				'jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
@@ -413,7 +404,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.wikibase.toolbar.styles',
-				'jquery.wikibase.toolbarbutton',
+				'jquery.wikibase.toolbarbutton.styles',
 				'jquery.wikibase.toolbaritem',
 				'jquery.wikibase.wbtooltip',
 				'wikibase.api.RepoApiError',
