@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c8427fb_3d55d653",
+        "filename": "repo/includes/ParserOutput/GeoDataDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-24T07:31:58Z",
+      "side": 1,
+      "message": "As also mentioned in the GeoData change, this name is confusing",
+      "range": {
+        "startLine": 101,
+        "startChar": 50,
+        "endLine": 101,
+        "endChar": 76
+      },
+      "revId": "e984edcf2df0781774b76a0a400258e1e950165b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
