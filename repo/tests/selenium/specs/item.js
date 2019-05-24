@@ -1,12 +1,14 @@
 const Util = require( 'wdio-mediawiki/Util' );
 
-let WikibaseApi, EntityPage;
+let WikibaseApi, EntityPage, ItemPage;
 try {
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 	EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
+	ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
 } catch ( e ) {
 	WikibaseApi = require( '../wdio-wikibase/wikibase.api' );
 	EntityPage = require( '../wdio-wikibase/pageobjects/entity.page' );
+	ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
 }
 
 describe( 'item', function () {
@@ -19,10 +21,6 @@ describe( 'item', function () {
 		QUALIFIERS = '.wikibase-statementview-qualifiers ',
 		REFERENCES = '.wikibase-statementview-references ',
 		NTH_ITEM = ( n ) => `.wikibase-listview > .listview-item:nth-child(${n}) `;
-
-	function saveButtonEnabled() {
-		return $( MAIN_STATEMENTS + SAVE ).getAttribute( 'aria-disabled' ) === 'false';
-	}
 
 	it( 'can add a statement using the keyboard', function () {
 		// high-level overview: add statement, add qualifier, add second qualifier, add reference, save
@@ -65,7 +63,9 @@ describe( 'item', function () {
 		$( MAIN_STATEMENTS + QUALIFIERS + NTH_ITEM( 1 ) + VALUE_INPUT ).waitForExist();
 		browser.keys( 'qualifier 1' );
 
-		browser.waitUntil( saveButtonEnabled );
+		browser.waitUntil( () => {
+			return ItemPage.saveButtonEnabled
+		} );
 
 		// move focus to “add qualifier” and activate link
 		// (first Tab skips over link to remove current qualifier)
@@ -78,7 +78,9 @@ describe( 'item', function () {
 		$( MAIN_STATEMENTS + QUALIFIERS + NTH_ITEM( 2 ) + VALUE_INPUT ).waitForExist();
 		browser.keys( 'qualifier 2' );
 
-		browser.waitUntil( saveButtonEnabled );
+		browser.waitUntil( () => {
+			return ItemPage.saveButtonEnabled
+		} );
 
 		// move focus to “add reference” and activate link
 		// (first Tab skips over link to remove current qualifier, second one over link to add another qualifier)
@@ -91,7 +93,9 @@ describe( 'item', function () {
 		$( MAIN_STATEMENTS + REFERENCES + NTH_ITEM( 1 ) + NTH_ITEM( 1 ) + VALUE_INPUT ).waitForExist();
 		browser.keys( 'reference 1-1' );
 
-		browser.waitUntil( saveButtonEnabled );
+		browser.waitUntil( () => {
+			return ItemPage.saveButtonEnabled
+		} );
 
 		// focus still on reference value input, can save entire statement from there
 		browser.keys( [ 'Enter' ] );
