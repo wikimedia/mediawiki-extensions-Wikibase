@@ -72,7 +72,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @return EntityDataRequestHandler
 	 */
 	private function newDefaultRequestHandler() {
-		global $wgUseSquid, $wgApiFrameOptions;
+		global $wgUseCdn, $wgApiFrameOptions;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -96,7 +96,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getSettings()->getSetting( 'tmpSerializeEmptyListsAsObjects' )
 		);
 
-		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );
+		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataCdnMaxAge' );
 		$formats = $wikibaseRepo->getSettings()->getSetting( 'entityDataFormats' );
 		$this->entityDataFormatProvider->setFormatWhiteList( $formats );
 
@@ -131,7 +131,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
 			$maxAge,
-			$wgUseSquid,
+			$wgUseCdn,
 			$wgApiFrameOptions
 		);
 	}
