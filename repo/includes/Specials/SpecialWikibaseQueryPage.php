@@ -120,8 +120,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 				min( $this->numRows, $this->limit ),
 				$this->offset + 1 )->parseAsBlock() );
 			// Disable the "next" link when we reach the end
-			$paging = $this->getLanguage()->viewPrevNext(
-				$this->getTitleForNavigation(),
+			$paging = $this->buildPrevNextNavigation(
 				$this->offset,
 				$this->limit,
 				$query,
