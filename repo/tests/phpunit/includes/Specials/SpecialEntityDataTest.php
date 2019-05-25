@@ -115,7 +115,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$titleLookup
 		);
 
-		$useSquid = false;
+		$useCdn = false;
 		$apiFrameOptions = 'DENY';
 
 		$entityTypesWithRdfOutputAvailable = [ 'property' ];
@@ -132,7 +132,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$entityTypesWithRdfOutputAvailable,
 			$defaultFormat,
 			0,
-			$useSquid,
+			$useCdn,
 			$apiFrameOptions
 		);
 	}
