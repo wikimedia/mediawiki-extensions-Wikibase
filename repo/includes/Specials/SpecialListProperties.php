@@ -97,7 +97,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->showForm();
 
 		if ( $this->dataType !== null ) {
-			$this->showQuery();
+			$this->showQuery( [], $this->dataType );
 		}
 	}
 
@@ -243,13 +243,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		}
 
 		return $propertyInfo;
-	}
-
-	/**
-	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
-	 */
-	protected function getTitleForNavigation() {
-		return $this->getPageTitle( $this->dataType );
 	}
 
 	/**

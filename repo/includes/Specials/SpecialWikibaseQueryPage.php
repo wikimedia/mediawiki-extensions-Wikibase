@@ -99,8 +99,9 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * Output the query result
 	 *
 	 * @param array $query optional array of URL query parameter strings
+	 * @param array $subPage Optional param for specifying subpage
 	 */
-	protected function showQuery( array $query = [] ) {
+	protected function showQuery( array $query = [], $subPage = false ) {
 		$paging = false;
 		$out = $this->getOutput();
 
@@ -120,12 +121,12 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 				min( $this->numRows, $this->limit ),
 				$this->offset + 1 )->parseAsBlock() );
 			// Disable the "next" link when we reach the end
-			$paging = $this->getLanguage()->viewPrevNext(
-				$this->getTitleForNavigation(),
+			$paging = $this->buildPrevNextNavigation(
 				$this->offset,
 				$this->limit,
 				$query,
-				$this->numRows <= $this->limit
+				$this->numRows <= $this->limit,
+				$subPage
 			);
 			$out->addHTML( Html::rawElement( 'p', [], $paging ) );
 		} else {
@@ -166,15 +167,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 
 			$this->getOutput()->addHTML( $html );
 		}
-	}
-
-	/**
-	 * Return the Title of the special page with full subpages informations in order to be used for navigation.
-	 *
-	 * @return Title
-	 */
-	protected function getTitleForNavigation() {
-		return $this->getPageTitle();
 	}
 
 }

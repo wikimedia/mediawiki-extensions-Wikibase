@@ -100,7 +100,10 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->setForm();
 
 		if ( $this->requestedLanguageCode !== '' && $this->requestedEntityType !== '' ) {
-			$this->showQuery();
+			$this->showQuery(
+				[],
+				$this->requestedLanguageCode . '/' . $this->requestedEntityType
+			);
 		}
 	}
 
