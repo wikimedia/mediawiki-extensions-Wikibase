@@ -4,12 +4,23 @@
 			"Mirin"
 		]
 	},
+	"apihelp-wbeditentity-example-12": "Forigi etikedon",
 	"apihelp-wbmergeitems-description": "Kunigas plurajn erojn.",
 	"apihelp-wbmergeitems-summary": "Kunigas plurajn erojn.",
 	"apihelp-wbparsevalue-param-values": "Valoroj sintaksanalizotaj",
 	"apihelp-wbsearchentities-param-search": "Serĉi tiun tekston.",
 	"apihelp-wbsearchentities-param-language": "Serĉi en tiu lingvo.",
+	"apihelp-wbsearchentities-param-type": "Serĉi tiun tipon de ento.",
+	"apihelp-wbsearchentities-param-limit": "Maksimuma nombro de rezultoj",
+	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Unulingva teksta valoro en aserto.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "La lingvokodo.",
 	"apihelp-query+wbsearch-param-search": "Serĉi tiun tekston.",
-	"apihelp-query+wbsearch-param-language": "Serĉi en tiu lingvo."
+	"apihelp-query+wbsearch-param-language": "Serĉi en tiu lingvo.",
+	"apihelp-query+wbsearch-param-type": "Serĉi tiun tipon de ento.",
+	"apihelp-query+wbsearch-param-limit": "Maksimuma nombro de rezultoj",
+	"apihelp-query+wbsubscribers-param-prop": "Ecoj aldonotaj al rezulto",
+	"apihelp-query+wbsubscribers-param-limit": "Maksimuma nombro de rezultoj",
+	"apihelp-wbsetdescription-param-language": "Lingvo de la priskribo",
+	"apihelp-wbsetlabel-param-language": "Lingvo de la etikedo",
+	"apihelp-wbsetlabel-param-value": "La valoro de la etikedo"
 }

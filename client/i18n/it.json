@@ -18,7 +18,8 @@
 			"Horcrux92",
 			"Anto",
 			"Una giornata uggiosa '94",
-			"Sakretsu"
+			"Sakretsu",
+			"Titore"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -109,7 +110,7 @@
 	"wikibase-otherprojects-beta-description": "Aggiunge una sezione \"{{int:wikibase-otherprojects}}\" alla barra laterale che fornisce collegamenti agli altri progetti Wikimedia basati sui dati {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connessione|Connessioni}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Avvisami quando qualcuno connette una pagina che {{GENDER:|ho creato}} a un elemento {{WBREPONAME}}.",
-	"notification-header-page-connection": "La pagina <strong>$3</strong> è {{GENDER:$2|stata connessa}} a {{PLURAL:$4|-1=un elemento {{WBREPONAME}}|l'elemento {{WBREPONAME}} $4}}, dove i dati rilevanti sull'argomento possono essere raccolti.",
+	"notification-header-page-connection": "La pagina <strong>$3</strong> è {{GENDER:$2|stata connessa}} {{PLURAL:$4|-1=a un elemento {{WBREPONAME}}|all'elemento {{WBREPONAME}} $4}}, dove i dati rilevanti sull'argomento possono essere raccolti.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un'altra pagina|altre $4 pagine|100=99+ altre pagine}} sono {{GENDER:$2|state connesse}} a elementi {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vedi}} elemento",
 	"notification-subject-page-connection": "Una pagina su {{SITENAME}} che {{GENDER:$3|hai creato}} è {{GENDER:$2|stata connessa}} a un elemento {{WBREPONAME}}",

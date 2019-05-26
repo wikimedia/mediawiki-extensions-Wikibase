@@ -5,9 +5,11 @@
 			"Wertuose",
 			"Dağlı95",
 			"Serkanland",
-			"Toghrul Rahimli"
+			"Toghrul Rahimli",
+			"Neriman2003"
 		]
 	},
+	"tooltip-t-wikibase": "Bağlanan məlumatların saxlanması elementinə keçid",
 	"wikibase-after-page-move-queued": "Bu səhifə ilə əlaqəli olan [$1 {{WBREPONAME}} qeydi] tezliklə avtomatik dəyişdiriləcək. Nəzərə alın ki, bu, dərhal baş verməyə bilər.",
 	"wikibase-after-page-delete": "Bu səhifənin [$1 uyğun {{WBREPONAME}} elementi] ilə əlaqəsi kəsilmişdir. Bunun həyata keçib-keçməməsini təsdiqləməyinizi xahiş edirik.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementi dəyişdirildi",
