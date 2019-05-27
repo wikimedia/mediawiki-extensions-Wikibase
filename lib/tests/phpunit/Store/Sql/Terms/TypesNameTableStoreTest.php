@@ -5,22 +5,22 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use HashBagOStuff;
 use MediaWikiTestCase;
 use WANObjectCache;
-use Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TypesNameTableStore;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore
+ * @covers \Wikibase\Lib\Store\Sql\Terms\TypesNameTableStore
  *
  * @group Wikibase
  * @group Database
  *
  * @license GPL-2.0-or-later
  */
-class SqlTypeIdsStoreTest extends MediaWikiTestCase {
+class TypesNameTableStoreTest extends MediaWikiTestCase {
 
-	/** @var SqlTypeIdsStore */
-	private $typeIdsStore;
+	/** @var TypesNameTableStore */
+	private $typesStore;
 
 	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
 		return [
@@ -41,15 +41,15 @@ class SqlTypeIdsStoreTest extends MediaWikiTestCase {
 		$loadBalancer->method( 'getConnection' )
 			->willReturn( $this->db );
 		$cache = new WANObjectCache( [ 'cache' => new HashBagOStuff() ] );
-		$this->typeIdsStore = new SqlTypeIdsStore(
+		$this->typesStore = new TypesNameTableStore(
 			$loadBalancer,
 			$cache
 		);
 	}
 
 	public function testAcquireTypeIds_sameNamesTwice_returnsSameIds() {
-		$ids1 = $this->typeIdsStore->acquireTypeIds( [ 'label', 'description' ] );
-		$ids2 = $this->typeIdsStore->acquireTypeIds( [ 'description', 'label' ] );
+		$ids1 = $this->typesStore->acquireTypeIds( [ 'label', 'description' ] );
+		$ids2 = $this->typesStore->acquireTypeIds( [ 'description', 'label' ] );
 
 		ksort( $ids1 );
 		ksort( $ids2 );
@@ -58,8 +58,8 @@ class SqlTypeIdsStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testAcquireTypeIdsAndResolveTypeIds() {
-		$ids = $this->typeIdsStore->acquireTypeIds( [ 'label', 'description' ] );
-		$names = $this->typeIdsStore->resolveTypeIds( array_values( $ids ) );
+		$ids = $this->typesStore->acquireTypeIds( [ 'label', 'description' ] );
+		$names = $this->typesStore->resolveTypeIds( array_values( $ids ) );
 
 		$this->assertSame( $ids, array_flip( $names ) );
 	}

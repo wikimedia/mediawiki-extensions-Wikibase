@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  *
  * @license GPL-2.0-or-later
  */
-class SqlTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver {
+class TypesNameTableStore implements TypeIdsAcquirer, TypeIdsResolver {
 
 	/** @var NameTableStore */
 	private $nameTableStore;
