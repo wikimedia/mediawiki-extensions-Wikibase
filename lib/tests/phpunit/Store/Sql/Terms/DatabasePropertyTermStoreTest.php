@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore;
+use Wikibase\StringNormalizer;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
@@ -69,7 +70,8 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 			),
 			new DatabaseTermIdsCleaner(
 				$loadBalancer
-			)
+			),
+			new StringNormalizer()
 		);
 		$this->p1 = new PropertyId( 'P1' );
 		$this->fingerprint1 = new Fingerprint(
@@ -231,6 +233,22 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 	 */
 	public function testGetTerms_throwsForForeignPropertyId() {
 		$this->propertyTermStore->getTerms( new PropertyId( 'wd:P1' ) );
+	}
+
+	public function testStoresAndGetsUTF8Text() {
+		$this->fingerprint1->setDescription(
+			'utf8',
+			'ఒక వ్యక్తి లేదా సంస్థ సాధించిన రికార్డు. ఈ రికార్డును సాధించిన కోల్పోయిన తేదీలను చూపేందుకు క్'
+		);
+
+		$this->propertyTermStore->storeTerms(
+			$this->p1,
+			$this->fingerprint1
+		);
+
+		$fingerprint = $this->propertyTermStore->getTerms( $this->p1 );
+
+		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 }
