@@ -5,21 +5,21 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use HashBagOStuff;
 use MediaWikiTestCase;
 use WANObjectCache;
-use Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore
+ * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore
  *
  * @group Wikibase
  * @group Database
  *
  * @license GPL-2.0-or-later
  */
-class SqlTypeIdsStoreTest extends MediaWikiTestCase {
+class DatabaseTypeIdsStoreTest extends MediaWikiTestCase {
 
-	/** @var SqlTypeIdsStore */
+	/** @var DatabaseTypeIdsStore */
 	private $typeIdsStore;
 
 	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
@@ -46,7 +46,7 @@ class SqlTypeIdsStoreTest extends MediaWikiTestCase {
 		$loadBalancer->method( 'getConnection' )
 			->willReturn( $this->db );
 		$cache = new WANObjectCache( [ 'cache' => new HashBagOStuff() ] );
-		$this->typeIdsStore = new SqlTypeIdsStore(
+		$this->typeIdsStore = new DatabaseTypeIdsStore(
 			$loadBalancer,
 			$cache
 		);
