@@ -14,7 +14,7 @@ interface TypeIdsAcquirer {
 	 *
 	 * @param array $types list of types to acquire ids for
 	 *
-	 * @return array keys in returned array are the types passed in in $types
+	 * @return array keys in returned array are the types passed in $types
 	 *	associated with their acquired ids.
 	 *	Example:
 	 *		$typeIdsAcquirer->acquireTypeIds ( [ 'label', 'description' ] ) would return:
