@@ -21,7 +21,7 @@ class SqlTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver {
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		WANObjectCache $cache,
-		$repoDbDomain = null,
+		$repoDbDomain = false,
 		LoggerInterface $logger = null
 	) {
 		$this->nameTableStore = new NameTableStore(
