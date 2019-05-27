@@ -28,7 +28,7 @@ class SqlTypeIdsStoreTest extends MediaWikiTestCase {
 				__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql',
 			],
 			'create' => [
-				'wby_type',
+				'wbt_type',
 			],
 		];
 	}
