@@ -166,6 +166,30 @@
       "revId": "806ce891af479bac249d4e0cce98dbee6110633f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d110fcc_62bb013a",
+        "filename": "repo/tests/selenium/wdio-wikibase/pageobjects/item.page.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-05-27T08:06:56Z",
+      "side": 1,
+      "message": "I\u0027ve changed this and it works. I\u0027m not 100% sure that `isSaveButtonEnabled` is better in this case, as it is only used inside browser.waitUntil which creates some weird semantics.",
+      "parentUuid": "ce1be1c8_503f4b02",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "806ce891af479bac249d4e0cce98dbee6110633f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
