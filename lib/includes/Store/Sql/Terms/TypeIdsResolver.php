@@ -13,7 +13,7 @@ interface TypeIdsResolver {
 	/**
 	 * Resolves types for the given type IDs.
 	 *
-	 * @param int[] $typeIds
+	 * @param array $typeIds
 	 * @return string[] Array from type IDs to type names. Unknown IDs in $typeIds are omitted.
 	 */
 	public function resolveTypeIds( array $typeIds ): array;
