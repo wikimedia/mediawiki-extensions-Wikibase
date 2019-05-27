@@ -51,6 +51,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/Store/MockPropertyInfoLookup.php',
 				'tests/phpunit/Store/MockTermIndex.php',
 				'tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
+				'tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
 			]
 		);
 
