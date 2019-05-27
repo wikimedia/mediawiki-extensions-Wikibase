@@ -13,13 +13,6 @@ try {
 
 describe( 'item', function () {
 
-	const MAIN_STATEMENTS = 'div.wikibase-entityview-main > .wikibase-statementgrouplistview ',
-		PROPERTY_INPUT = '.ui-entityselector-input ',
-		VALUE_INPUT = '.valueview-input ',
-		QUALIFIERS = '.wikibase-statementview-qualifiers ',
-		REFERENCES = '.wikibase-statementview-references ',
-		NTH_ITEM = ( n ) => `.wikibase-listview > .listview-item:nth-child(${n}) `;
-
 	it( 'can add a statement using the keyboard', function () {
 		// high-level overview: add statement, add qualifier, add second qualifier, add reference, save
 		let itemId, propertyId;
@@ -44,22 +37,24 @@ describe( 'item', function () {
 		ItemPage.addStatementLink.click();
 		// enter the main value
 		// property input automatically foclused
-		$( MAIN_STATEMENTS + PROPERTY_INPUT ).waitForVisible();
+		ItemPage.propertyInputField.waitForVisible();
 		browser.keys( propertyId );
 		// value input automatically focused
-		$( MAIN_STATEMENTS + VALUE_INPUT ).waitForVisible();
+		ItemPage.valueInputField.waitForVisible();
 		browser.keys( 'main value' );
 
 		// move focus to “add qualifier” and activate link
 		browser.keys( [ 'Tab' ] );
 		browser.keys( [ 'Enter' ] );
 		// property input automatically focused
-
-		$( MAIN_STATEMENTS + QUALIFIERS + NTH_ITEM( 1 ) + PROPERTY_INPUT ).waitForVisible();
+		let statement = ItemPage.statements[0];
+		ItemPage.getNthQualifierPropertyInput(statement, 0).waitForVisible();
 		browser.keys( propertyId );
 		// value input automatically focused
-		$( MAIN_STATEMENTS + QUALIFIERS + NTH_ITEM( 1 ) + VALUE_INPUT ).waitForExist();
+		ItemPage.getNthQualifierValueInput(statement, 0).waitForExist();
+		browser.pause(1000);
 		browser.keys( 'qualifier 1' );
+		browser.pause(1000);
 
 		browser.waitUntil( () => {
 			return ItemPage.isSaveButtonEnabled();
@@ -70,11 +65,13 @@ describe( 'item', function () {
 		browser.keys( [ 'Tab', 'Tab' ] );
 		browser.keys( [ 'Enter' ] ); // this should *not* save the statement (T154869)
 		// property input automatically focused
-		$( MAIN_STATEMENTS + QUALIFIERS + NTH_ITEM( 2 ) + PROPERTY_INPUT ).waitForVisible();
+		ItemPage.getNthQualifierPropertyInput(statement, 1).waitForVisible();
 		browser.keys( propertyId );
 		// value input automatically focused
-		$( MAIN_STATEMENTS + QUALIFIERS + NTH_ITEM( 2 ) + VALUE_INPUT ).waitForExist();
+		ItemPage.getNthQualifierValueInput(statement, 1).waitForExist();
+		browser.pause(1000);
 		browser.keys( 'qualifier 2' );
+		browser.pause(1000);
 		browser.waitUntil( () => {
 			return ItemPage.isSaveButtonEnabled();
 		} );
@@ -84,20 +81,21 @@ describe( 'item', function () {
 		browser.keys( [ 'Tab', 'Tab', 'Tab' ] );
 		browser.keys( [ 'Enter' ] ); // this should also not save the statement (T154869)
 		// property input automatically focused
-		$( MAIN_STATEMENTS + REFERENCES + NTH_ITEM( 1 ) + NTH_ITEM( 1 ) + PROPERTY_INPUT ).waitForVisible();
+		ItemPage.getNthReferencePropertyInput(statement, 0).waitForVisible();
 		browser.keys( propertyId );
 		// value input automatically focused
-		$( MAIN_STATEMENTS + REFERENCES + NTH_ITEM( 1 ) + NTH_ITEM( 1 ) + VALUE_INPUT ).waitForExist();
+		ItemPage.getNthReferenceValueInput(statement, 0).waitForExist();
+		browser.pause(1000);
+		// value input automatically focused
 		browser.keys( 'reference 1-1' );
-
+		browser.pause(1000);
 		browser.waitUntil( () => {
 			return ItemPage.isSaveButtonEnabled();
 		} );
 
 		// focus still on reference value input, can save entire statement from there
 		browser.keys( [ 'Enter' ] );
-
-		$( MAIN_STATEMENTS + VALUE_INPUT ).waitForExist( null, true );
+		ItemPage.valueInputField.waitForExist( null, true );
 	} );
 
 } );
