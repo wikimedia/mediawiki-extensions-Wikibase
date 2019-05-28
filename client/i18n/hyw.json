@@ -13,11 +13,15 @@
 	"wikibase-editlinks": "Խմբագրել յղումները",
 	"wikibase-editlinkstitle": "‎Խմբագրել միջլեզուական յղումները",
 	"wikibase-linkitem-addlinks": "Ստեղծել յղումը",
+	"wikibase-linkitem-input-site": "Լեզու.",
+	"wikibase-linkitem-input-page": "Էջ.",
+	"wikibase-linkitem-confirmitem-button": "Հաստատել",
 	"wikibase-linkitem-not-loggedin-title": "Դուք պէտք է մուտք գործէք համակարգ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Թաքցնել",
 	"wikibase-rc-hide-wikidata-show": "Ցուցնել",
 	"wikibase-rc-wikibase-edit-letter": "Տ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
+	"wikibase-pageinfo-entity-id-none": "Ոչ մէկ",
 	"wikibase-otherprojects": "Այլ նախագիծերու մէջ"
 }
