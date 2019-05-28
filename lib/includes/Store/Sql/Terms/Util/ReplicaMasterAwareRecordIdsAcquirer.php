@@ -90,6 +90,9 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		[ 'columnA' => 'valueA2', 'columnB' => 'valueB2' ],
 	 *		...
 	 *	]
+	 * @param array $idsToRestore ids that are desirable to be used when inserting non-existing
+	 *	records. This function will as many of those ids as available or needed, excess in ids
+	 *	passed in this parameter will be ignored.
 	 *
 	 * @return array the array of input recrods along with their ids
 	 *	Example:
@@ -99,14 +102,18 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		...
 	 *	]
 	 */
-	public function acquireIds( array $neededRecords ) {
+	public function acquireIds(
+		array $neededRecords,
+		array $idsToRestore = []
+	) {
 		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
 			$neededRecordsCount = count( $neededRecords );
 
-			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
+			$this->insertNonExistingRecordsIntoMaster( $neededRecords, $idsToRestore );
+
 			$existingRecords = array_merge(
 				$existingRecords,
 				$this->findExistingRecords( $this->getDbMaster(), $neededRecords )
@@ -197,15 +204,29 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @param array $neededRecords
 	 * @suppress SecurityCheck-SQLInjection
 	 */
-	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
+	private function insertNonExistingRecordsIntoMaster( array $neededRecords, array $idsToRestore = [] ) {
+		$reusableIdsToRestore = $this->filterReusableIdsToRestore( $idsToRestore );
+
 		$uniqueRecords = [];
 		foreach ( $neededRecords as $record ) {
 			$recordHash = $this->calcRecordHash( $record );
 			$uniqueRecords[$recordHash] = $record;
 		}
 
+		$uniqueRecordsToInsert = array_values( $uniqueRecords );
+
+		$recordSetsToInsert = [ $uniqueRecordsToInsert ];
+		if ( count( $reusableIdsToRestore ) > 0 ) {
+			$recordSetsToInsert = $this->injectIdsToRestoreIntoRecords(
+				$uniqueRecordsToInsert,
+				$reusableIdsToRestore
+			);
+		}
+
 		try {
-			$this->getDbMaster()->insert( $this->table, array_values( $uniqueRecords ) );
+			foreach ( $recordSetsToInsert as $recordsToInsert ) {
+				$this->getDbMaster()->insert( $this->table, $recordsToInsert );
+			}
 		} catch ( DBQueryError $dbError ) {
 			$this->logger->info(
 				'{method}: Inserting records into {table} failed: {exception}',
@@ -217,6 +238,39 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 				]
 			);
 		}
+	}
+
+	private function filterReusableIdsToRestore( array $idsToRestore = [] ) {
+		if ( empty( $idsToRestore ) ) {
+			return [];
+		}
+
+		$existingIds = $this->getDbMaster()->selectFieldValues(
+			$this->table,
+			$this->idColumn,
+			[ $this->idColumn => $idsToRestore ],
+			__METHOD__
+		);
+
+		return array_values( array_diff( $idsToRestore, $existingIds ) );
+	}
+
+	private function injectIdsToRestoreIntoRecords( array $records, array $idsToRestore ) {
+		$idToRestoreIndex = count( $idsToRestore ) - 1;
+
+		$recordsWithIds = [];
+		$recordsWithoutIds = [];
+
+		foreach ( $records as $record ) {
+			if ( $idToRestoreIndex >= 0 ) {
+				$record[$this->idColumn] = $idsToRestore[$idToRestoreIndex--];
+				$recordsWithIds[] = $record;
+			} else {
+				$recordsWithoutIds[] = $record;
+			}
+		}
+
+		return [ $recordsWithIds, $recordsWithoutIds ];
 	}
 
 	private function filterNonExistingRecords( $neededRecords, $existingRecords ): array {
