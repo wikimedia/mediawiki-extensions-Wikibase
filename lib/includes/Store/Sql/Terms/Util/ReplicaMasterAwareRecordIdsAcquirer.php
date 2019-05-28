@@ -90,6 +90,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		...
 	 *	]
 	 * @param-taint $neededRecords exec_sql
+	 * @param array $idsToRestore ids that are desirable to be used when inserting non-existing
+	 *	records.
 	 *
 	 * @return array the array of input recrods along with their ids
 	 *	Example:
@@ -99,14 +101,19 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		...
 	 *	]
 	 */
-	public function acquireIds( array $neededRecords ) {
+	public function acquireIds(
+		array $neededRecords,
+		array $idsToRestore = []
+	) {
 		$this->connectReplica();
 		$existingRecords = $this->findExistingRecords( $this->dbReplica, $neededRecords );
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
 			$this->connectMaster();
-			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
+
+			$this->insertNonExistingRecordsIntoMaster( $neededRecords, $idsToRestore );
+
 			$existingRecords = array_merge(
 				$existingRecords,
 				$this->findExistingRecords( $this->dbMaster, $neededRecords )
@@ -115,6 +122,20 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		}
 
 		return $existingRecords;
+	}
+
+	private function filterReusableIdsToRestore( array $idsToRestore = [] ) {
+		if ( empty( $idsToRestore ) ) {
+			return [];
+		}
+
+		$existingIds = $this->dbMaster->selectFieldValues(
+			$this->table,
+			$this->idColumn,
+			[ $this->idColumn => $idsToRestore ]
+		);
+
+		return array_diff( $idsToRestore, $existingIds );
 	}
 
 	private function connectReplica() {
@@ -166,12 +187,16 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @param array $neededRecords
 	 * @suppress SecurityCheck-SQLInjection
 	 */
-	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
+	private function insertNonExistingRecordsIntoMaster( array $neededRecords, array $idsToRestore = [] ) {
+		$reusableIdsToRestore = $this->filterReusableIdsToRestore( $idsToRestore );
+
 		$uniqueRecords = [];
 		foreach ( $neededRecords as $record ) {
 			$recordHash = $this->calcRecordHash( $record );
 			$uniqueRecords[$recordHash] = $record;
 		}
+
+		// TODO inject reusableIdsToRestore in uniqueRecords
 
 		try {
 			$this->dbMaster->insert( $this->table, array_values( $uniqueRecords ) );
