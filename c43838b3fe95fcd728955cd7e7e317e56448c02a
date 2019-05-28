@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b603f523_16a9f247",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-05-28T11:11:56Z",
+      "side": 1,
+      "message": "would be nice to put up a follow up to this change that cleans this up, to me merged once the code patch has landed.",
+      "revId": "c43838b3fe95fcd728955cd7e7e317e56448c02a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96a8814a_25b107f5",
+        "filename": "repo/tests/phpunit/includes/Api/SetLabelTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-05-28T11:11:56Z",
+      "side": 1,
+      "message": "I\u0027m getting the impression that we may want convenience methods for changing group permissions in core.",
+      "revId": "c43838b3fe95fcd728955cd7e7e317e56448c02a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
