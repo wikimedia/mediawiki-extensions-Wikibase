@@ -89,7 +89,6 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		[ 'columnA' => 'valueA2', 'columnB' => 'valueB2' ],
 	 *		...
 	 *	]
-	 * @param-taint $neededRecords exec_sql
 	 *
 	 * @return array the array of input recrods along with their ids
 	 *	Example:
