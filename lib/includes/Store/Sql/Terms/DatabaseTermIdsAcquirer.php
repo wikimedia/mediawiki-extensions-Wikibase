@@ -10,10 +10,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
  */
 class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 
-	const TABLE_TEXT = 'wbt_text';
-	const TABLE_TEXT_IN_LANG = 'wbt_text_in_lang';
-	const TABLE_TERM_IN_LANG = 'wbt_term_in_lang';
-
 	/**
 	 * @var ILoadBalancer
 	 */
@@ -24,19 +20,43 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 */
 	private $typeIdsAcquirer;
 
+	/**
+	 * @var callable
+	 */
+	private $acquiredIdsConsumerCallback = null;
+
+	/**
+	 * @param callable|null $acquiredIdsConsumerCallback
+	 *	If a callable is not null, this implementation guarantees
+	 *	that the acquired ids returned by {@link DatabaseTermIdsAcquirer::acquireTermIds}
+	 *  will continue to exist in wbt_term_in_lang table, even if another in-parallel process
+	 *	might have deleted them before or after the callback this returned.
+	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TypeIdsAcquirer $typeIdsAcquirer
+		TypeIdsAcquirer $typeIdsAcquirer,
+		callable $acquiredIdsConsumerCallback = null
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
+		$this->acquiredIdsConsumerCallback = $acquiredIdsConsumerCallback;
 	}
 
 	public function acquireTermIds( array $termsArray ): array {
+		$originalTermsArray = $termsArray;
+
 		$termsArray = $this->mapToTextIds( $termsArray );
 		$termsArray = $this->mapToTextInLangIds( $termsArray );
 		$termsArray = $this->mapToTypeIds( $termsArray );
-		return $this->mapToTermInLangIds( $termsArray );
+		$termIds = $this->mapToTermInLangIds( $termsArray );
+
+		if ( $this->acquiredIdsConsumerCallback !== null ) {
+			($this->acquiredIdsConsumerCallback)( $termIds );
+		}
+
+		$this->restoreCleanedUpIds( $originalTermsArray, $termIds );
+
+		return $termIds;
 	}
 
 	/**
@@ -210,7 +230,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *		...
 	 *	]
 	 */
-	private function mapToTermInLangIds( array $termsArray ) {
+	private function mapToTermInLangIds(
+		array $termsArray,
+		array $idsToRestore = []
+	) {
 		$flattenedTypeTextInLangIds = [];
 		foreach ( $termsArray as $typeId => $textInLangIds ) {
 			if ( !isset( $flattenedTypeTextInLangIds[$typeId] ) ) {
@@ -225,7 +248,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			);
 		}
 
-		$termInLangIds = $this->acquireTermInLangIds( $flattenedTypeTextInLangIds );
+		$termInLangIds = $this->acquireTermInLangIds( $flattenedTypeTextInLangIds, $idsToRestore );
 
 		$newTermsArray = [];
 		foreach ( $termsArray as $typeId => $textInLangIds ) {
@@ -237,7 +260,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $newTermsArray;
 	}
 
-	private function acquireTermInLangIds( array $typeTextInLangIds ) {
+	private function acquireTermInLangIds( array $typeTextInLangIds, $idsToRestore ) {
 		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
 			$this->loadBalancer, 'wbt_term_in_lang', 'wbtl_id' );
 
@@ -251,7 +274,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			}
 		}
 
-		$acquiredIds = $termInLangIdsAcquirer->acquireIds( $termInLangRecords );
+		$acquiredIds = $termInLangIdsAcquirer->acquireIds( $termInLangRecords, $idsToRestore );
 
 		$termInLangIds = [];
 		foreach ( $acquiredIds as $acquiredId ) {
@@ -260,6 +283,26 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		}
 
 		return $termInLangIds;
+	}
+
+	private function restoreCleanedUpIds( array $termsArray, array $termIds = [] ) {
+		$uniqueTermIds = array_values( array_unique( $termIds ) );
+		sort( $uniqueTermIds );
+
+		$dbMaster = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+		$persistedTermIds = $dbMaster->selectFieldValues( 'wbt_term_in_lang', 'wbtl_id', [ 'wbtl_id' => $termIds ] );
+		sort( $persistedTermIds );
+
+		$idsToRestore = array_diff( $uniqueTermIds, $persistedTermIds );
+
+		if ( empty( $idsToRestore ) ) {
+			return;
+		}
+
+		$termsArray = $this->mapToTextIds( $termsArray );
+		$termsArray = $this->mapToTextInLangIds( $termsArray );
+		$termsArray = $this->mapToTypeIds( $termsArray );
+		$this->mapToTermInLangIds( $termsArray, $idsToRestore );
 	}
 
 }
