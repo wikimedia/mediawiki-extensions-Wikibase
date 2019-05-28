@@ -69,6 +69,10 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	public function resolveTermIds( array $termIds ): array {
 		$terms = [];
 
+		if ( $termIds === [] ) {
+			return $terms;
+		}
+
 		$this->logger->debug(
 			'{method}: getting {termCount} rows from replica',
 			[
