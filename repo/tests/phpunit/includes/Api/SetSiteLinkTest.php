@@ -612,10 +612,12 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			'code' => 'permissiondenied'
 		];
 
-		//TODO: later this can be replaced with PermissionManager::invalidateUsersRightsCache()
-		//	but for now we just reset the service one more time to avoid merge issues with
-		//	https://gerrit.wikimedia.org/r/c/mediawiki/core/+/502484
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache(
+			$userWithAllPermissions
+		);
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache(
+			$userWithInsufficientPermissions
+		);
 
 		$this->doTestQueryExceptions(
 			$this->getSetSiteLinkRequestParams( $newItem->getId() ),

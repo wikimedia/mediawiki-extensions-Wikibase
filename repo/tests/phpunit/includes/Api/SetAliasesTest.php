@@ -330,10 +330,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$user->removeGroup( 'all-permission' );
 		$user->addGroup( 'no-permission' );
 
-		//TODO: later this can be replaced with PermissionManager::invalidateUsersRightsCache()
-		//	but for now we just reset the service one more time to avoid merge issues with
-		//	https://gerrit.wikimedia.org/r/c/mediawiki/core/+/502484
-		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
+		MediaWikiServices::getInstance()->getPermissionManager()->invalidateUsersRightsCache( $user );
 
 		$this->doTestQueryExceptions(
 			$this->getAddAliasRequestParams( $newItem->getId() ),
