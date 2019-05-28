@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d93b4ad6_80354dd8",
+        "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-28T21:53:27Z",
+      "side": 1,
+      "message": "The other place where it can be placed is inside DatabaseTermIdsAcquirer::acquireTextIds().\n\nDo you think it would make more sense there?",
+      "parentUuid": "fef1d4c4_97cc3ff5",
+      "revId": "328b90b11598b635f746b4ca200d36d812b00315",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0003e179_a9a086e7",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-28T21:29:21Z",
       "side": 1,
       "message": "This (and the following) are not used in the message (but I guess they will still be send along?)… was that intended?",
+      "revId": "328b90b11598b635f746b4ca200d36d812b00315",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7fff7f_e5b89274",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-28T21:53:27Z",
+      "side": 1,
+      "message": "yes and yes ;)",
+      "parentUuid": "0003e179_a9a086e7",
       "revId": "328b90b11598b635f746b4ca200d36d812b00315",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
