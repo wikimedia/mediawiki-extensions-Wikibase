@@ -10,10 +10,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
  */
 class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 
-	const TABLE_TEXT = 'wbt_text';
-	const TABLE_TEXT_IN_LANG = 'wbt_text_in_lang';
-	const TABLE_TERM_IN_LANG = 'wbt_term_in_lang';
-
 	/**
 	 * @var ILoadBalancer
 	 */
@@ -24,12 +20,43 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 */
 	private $typeIdsAcquirer;
 
+	/**
+	 * @var callable
+	 */
+	private $acquiredIdsConsumerCallback = null;
+
+	/**
+	 * THIS implementation guarantees that in-parallel {@link DatabaseTermIdsCleaner}
+	 * will not result in deleting terms that have been acquired by this acquirer, should
+	 * these two in-parallel processes happen to overlap on some existing term ids.
+	 * The mechanism of achieving this guarantee is complete under the following two conditions:
+	 * - external linking to acquired ids (e.g. using them as foreign keys in other tables)
+	 *	 must happen inside a callback passed through $acquiredIdsConsumerCallback
+	 *	 constructor param.
+	 * - the in-parallel cleaner is called with set of ids based on the absence of any
+	 *	 links to those ids, in the same external places where the callback links to them.
+	 *
+	 * @param ILoadBalancer $loadBalancer
+	 * @param TypeIdsAcquirer $typeIdsAcquirer
+	 * @param callable|null $acquiredIdsConsumerCallback
+	 *	If callable is not null, this implementation guarantees,
+	 *	it will be called with the array of acquired ids (same one that will be returned
+	 *	by {@link acquireTermIds()}).
+	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TypeIdsAcquirer $typeIdsAcquirer
+		TypeIdsAcquirer $typeIdsAcquirer,
+		$acquiredIdsConsumerCallback = null
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
+		if ( is_callable( $acquiredIdsConsumerCallback ) ) {
+			$this->acquiredIdsConsumerCallback = $acquiredIdsConsumerCallback;
+		} else {
+			$this->acquiredIdsConsumerCallback = function () {
+				// no-op
+			};
+		}
 	}
 
 	public function acquireTermIds( array $termsArray ): array {
@@ -37,10 +64,13 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			return [];
 		}
 
-		$termsArray = $this->mapToTextIds( $termsArray );
-		$termsArray = $this->mapToTextInLangIds( $termsArray );
-		$termsArray = $this->mapToTypeIds( $termsArray );
-		return $this->mapToTermInLangIds( $termsArray );
+		$termIds = $this->mapTermsArrayToTermIds( $termsArray );
+
+		( $this->acquiredIdsConsumerCallback )( $termIds );
+
+		$this->restoreCleanedUpIds( $termsArray, $termIds );
+
+		return $termIds;
 	}
 
 	/**
@@ -114,6 +144,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		foreach ( $texts as $text ) {
 			$textRecords[] = [ 'wbx_text' => $text ];
 		}
+		$textRecords = $this->filterUniqueRecords( $textRecords );
 
 		$acquiredIds = $textIdsAcquirer->acquireIds( $textRecords );
 
@@ -185,6 +216,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 				$textInLangRecords[] = [ 'wbxl_text_id' => $textId, 'wbxl_language' => $lang ];
 			}
 		}
+		$textInLangRecords = $this->filterUniqueRecords( $textInLangRecords );
 
 		$acquiredIds = $textInLangIdsAcquirer->acquireIds( $textInLangRecords );
 
@@ -214,7 +246,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *		...
 	 *	]
 	 */
-	private function mapToTermInLangIds( array $termsArray ) {
+	private function mapToTermInLangIds(
+		array $termsArray,
+		array $idsToRestore = []
+	) {
 		$flattenedTypeTextInLangIds = [];
 		foreach ( $termsArray as $typeId => $textInLangIds ) {
 			if ( !isset( $flattenedTypeTextInLangIds[$typeId] ) ) {
@@ -229,7 +264,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			);
 		}
 
-		$termInLangIds = $this->acquireTermInLangIds( $flattenedTypeTextInLangIds );
+		$termInLangIds = $this->acquireTermInLangIds( $flattenedTypeTextInLangIds, $idsToRestore );
 
 		$newTermsArray = [];
 		foreach ( $termsArray as $typeId => $textInLangIds ) {
@@ -241,7 +276,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $newTermsArray;
 	}
 
-	private function acquireTermInLangIds( array $typeTextInLangIds ) {
+	private function acquireTermInLangIds( array $typeTextInLangIds, array $idsToRestore = [] ) {
 		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
 			$this->loadBalancer, 'wbt_term_in_lang', 'wbtl_id' );
 
@@ -254,8 +289,28 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 				];
 			}
 		}
+		$termInLangRecords = $this->filterUniqueRecords( $termInLangRecords );
 
-		$acquiredIds = $termInLangIdsAcquirer->acquireIds( $termInLangRecords );
+		$acquiredIds = $termInLangIdsAcquirer->acquireIds(
+			$termInLangRecords,
+			function ( $recordsToInsert ) use ( $idsToRestore ) {
+				if ( count( $idsToRestore ) <= 0 ) {
+					return $recordsToInsert;
+				}
+
+				if ( count( $idsToRestore ) !== count( $recordsToInsert ) ) {
+					throw new \Exception( "Count of ids " . count( $idsToRestore ) . ' is different from count of records ' .  count( $termInLangRecords ) );
+				}
+
+				return array_map(
+					function ( $record, $idToRestore ) {
+						$record['wbtl_id'] = $idToRestore;
+						return $record;
+					},
+					$recordsToInsert,
+					$idsToRestore
+				);
+			} );
 
 		$termInLangIds = [];
 		foreach ( $acquiredIds as $acquiredId ) {
@@ -264,6 +319,51 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		}
 
 		return $termInLangIds;
+	}
+
+	private function restoreCleanedUpIds( array $termsArray, array $termIds = [] ) {
+		$uniqueTermIds = array_values( array_unique( $termIds ) );
+
+		$dbMaster = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+		$persistedTermIds = $dbMaster->selectFieldValues(
+			'wbt_term_in_lang',
+			'wbtl_id',
+			[ 'wbtl_id' => $termIds ],
+			__METHOD__
+		);
+
+		sort( $uniqueTermIds );
+		sort( $persistedTermIds );
+		$idsToRestore = array_diff( $uniqueTermIds, $persistedTermIds );
+
+		if ( !empty( $idsToRestore ) ) {
+			$this->mapTermsArrayToTermIds( $termsArray, $idsToRestore );
+		}
+	}
+
+	private function mapTermsArrayToTermIds(
+		array $termsArray,
+		array $termIdsToRestore = []
+	): array {
+		$termsArray = $this->mapToTextIds( $termsArray );
+		$termsArray = $this->mapToTextInLangIds( $termsArray );
+		$termsArray = $this->mapToTypeIds( $termsArray );
+		return $this->mapToTermInLangIds( $termsArray, $termIdsToRestore );
+	}
+
+	private function calcRecordHash( array $record ) {
+		ksort( $record );
+		return md5( serialize( $record ) );
+	}
+
+	private function filterUniqueRecords( array $records ) {
+		$uniqueRecords = [];
+		foreach ( $records as $record ) {
+			$recordHash = $this->calcRecordHash( $record );
+			$uniqueRecords[$recordHash] = $record;
+		}
+
+		return array_values( $uniqueRecords );
 	}
 
 }
