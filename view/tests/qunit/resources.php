@@ -98,8 +98,6 @@ return [
 			'jquery.wikibase.listview',
 			'jquery.wikibase.referenceview',
 			'jquery.wikibase.statementview',
-			'jquery.wikibase.toolbarbutton',
-			'jquery.wikibase.toolbaritem',
 			'test.sinonjs',
 			'wikibase.datamodel.Claim',
 			'wikibase.datamodel.EntityId',
