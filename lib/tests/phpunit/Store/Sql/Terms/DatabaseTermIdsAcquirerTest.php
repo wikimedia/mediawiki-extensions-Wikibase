@@ -291,4 +291,16 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		}
 	}
 
+	public function testAcquireTermIdsWithEmptyInput() {
+		$typeIdsAcquirer = new InMemoryTypeIdsStore();
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$this->loadBalancer,
+			$typeIdsAcquirer
+		);
+
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( [] );
+
+		$this->assertEmpty( $acquiredTermIds );
+	}
+
 }
