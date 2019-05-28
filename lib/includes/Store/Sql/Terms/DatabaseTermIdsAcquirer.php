@@ -33,6 +33,9 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	}
 
 	public function acquireTermIds( array $termsArray ): array {
+		if ( $termsArray === [] ) {
+			return [];
+		}
 		$termsArray = $this->mapToTextIds( $termsArray );
 		$termsArray = $this->mapToTextInLangIds( $termsArray );
 		$termsArray = $this->mapToTypeIds( $termsArray );
