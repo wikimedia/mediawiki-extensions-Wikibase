@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fef1d4c4_97cc3ff5",
+        "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-28T21:29:21Z",
+      "side": 1,
+      "message": "Hm, I\u0027m not sure this is really the right place to perform such transformations… maybe we want to do this somewhere else in the stack (and just verify it was done here?)",
+      "revId": "328b90b11598b635f746b4ca200d36d812b00315",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0003e179_a9a086e7",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-28T21:29:21Z",
+      "side": 1,
+      "message": "This (and the following) are not used in the message (but I guess they will still be send along?)… was that intended?",
+      "revId": "328b90b11598b635f746b4ca200d36d812b00315",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
