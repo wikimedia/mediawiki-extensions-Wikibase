@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a28ce514_0f2441d1",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 273
+      },
+      "writtenOn": "2019-05-28T16:36:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b603f523_16a9f247",
+      "revId": "c43838b3fe95fcd728955cd7e7e317e56448c02a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96a8814a_25b107f5",
         "filename": "repo/tests/phpunit/includes/Api/SetLabelTest.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-28T11:11:56Z",
       "side": 1,
       "message": "I\u0027m getting the impression that we may want convenience methods for changing group permissions in core.",
+      "revId": "c43838b3fe95fcd728955cd7e7e317e56448c02a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4f4f9b6_d8376440",
+        "filename": "repo/tests/phpunit/includes/Api/SetLabelTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 273
+      },
+      "writtenOn": "2019-05-28T16:36:27Z",
+      "side": 1,
+      "message": "Do you mean as an alternative `setGroupPermissions` and `overrideUserPermissions` ?",
+      "parentUuid": "96a8814a_25b107f5",
       "revId": "c43838b3fe95fcd728955cd7e7e317e56448c02a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
