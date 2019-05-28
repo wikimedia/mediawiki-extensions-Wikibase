@@ -100,16 +100,14 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *	]
 	 */
 	public function acquireIds( array $neededRecords ) {
-		$this->connectReplica();
-		$existingRecords = $this->findExistingRecords( $this->dbReplica, $neededRecords );
+		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
-			$this->connectMaster();
 			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
 			$existingRecords = array_merge(
 				$existingRecords,
-				$this->findExistingRecords( $this->dbMaster, $neededRecords )
+				$this->findExistingRecords( $this->getDbMaster(), $neededRecords )
 			);
 			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 		}
@@ -117,16 +115,20 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return $existingRecords;
 	}
 
-	private function connectReplica() {
+	private function getDbReplica() {
 		if ( $this->dbReplica === null ) {
 			$this->dbReplica = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
 		}
+
+		return $this->dbReplica;
 	}
 
-	private function connectMaster() {
+	private function getDbMaster() {
 		if ( $this->dbMaster === null ) {
 			$this->dbMaster = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
 		}
+
+		return $this->dbMaster;
 	}
 
 	private function findExistingRecords( IDatabase $db, array $neededRecords ): array {
@@ -174,7 +176,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		}
 
 		try {
-			$this->dbMaster->insert( $this->table, array_values( $uniqueRecords ) );
+			$this->getDbMaster()->insert( $this->table, array_values( $uniqueRecords ) );
 		} catch ( DBQueryError $dbError ) {
 			$this->logger->info(
 				'{method}: Inserting records into {table} failed: {exception}',
