@@ -51,6 +51,10 @@ class FakeLoadBalancer extends LoadBalancer {
 		// no-op
 	}
 
+	public function getLocalDomainID() {
+		return 'localhost';
+	}
+
 	public function __destruct() {
 		// no-op
 	}
