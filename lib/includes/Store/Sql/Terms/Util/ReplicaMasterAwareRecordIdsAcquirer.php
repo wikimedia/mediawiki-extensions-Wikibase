@@ -90,6 +90,10 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		[ 'columnA' => 'valueA2', 'columnB' => 'valueB2' ],
 	 *		...
 	 *	]
+	 * @param callable|null $recordsToInsertDecoratorCallback a callback that will be passed
+	 *	the array of records that are about to be inserted into master database, and should
+	 *	return a new array of records to insert, allowing to enhance and/or supply more default
+	 *	values for other columns that are not supplied as part of $neededRecords array.
 	 *
 	 * @return array the array of input recrods along with their ids
 	 *	Example:
@@ -99,14 +103,22 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *		...
 	 *	]
 	 */
-	public function acquireIds( array $neededRecords ) {
+	public function acquireIds(
+		array $neededRecords,
+		$recordsToInsertDecoratorCallback = null
+	) {
 		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
+			if ( is_callable( $recordsToInsertDecoratorCallback ) ) {
+				$neededRecords = $recordsToInsertDecoratorCallback( $neededRecords );
+			}
+
 			$neededRecordsCount = count( $neededRecords );
 
 			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
+
 			$existingRecords = array_merge(
 				$existingRecords,
 				$this->findExistingRecords( $this->getDbMaster(), $neededRecords )
@@ -198,14 +210,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @suppress SecurityCheck-SQLInjection
 	 */
 	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
-		$uniqueRecords = [];
-		foreach ( $neededRecords as $record ) {
-			$recordHash = $this->calcRecordHash( $record );
-			$uniqueRecords[$recordHash] = $record;
-		}
-
 		try {
-			$this->getDbMaster()->insert( $this->table, array_values( $uniqueRecords ) );
+			$this->getDbMaster()->insert( $this->table, $neededRecords );
 		} catch ( DBQueryError $dbError ) {
 			$this->logger->info(
 				'{method}: Inserting records into {table} failed: {exception}',
@@ -213,7 +219,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 					'method' => __METHOD__,
 					'exception' => $dbError,
 					'table' => $this->table,
-					'records' => $uniqueRecords
+					'records' => $neededRecords
 				]
 			);
 		}
@@ -229,6 +235,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 		$nonExistingRecords = [];
 		foreach ( $neededRecords as $record ) {
+			unset( $record[$this->idColumn] );
 			$recordHash = $this->calcRecordHash( $record );
 
 			if ( !isset( $existingRecordsHashes[$recordHash] ) ) {
@@ -239,13 +246,6 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return $nonExistingRecords;
 	}
 
-	/**
-	 * Implementation detail, related to Note 2 on self::acquireIds():
-	 * this function relies on the fact that the given set of needed records will have
-	 * all values as strings in order to produce hashes that match up correctly with
-	 * selected records in database, because database selection will always return
-	 * values as strings.
-	 */
 	private function calcRecordHash( array $record ) {
 		ksort( $record );
 		return md5( serialize( $record ) );

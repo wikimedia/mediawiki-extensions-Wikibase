@@ -34,7 +34,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->db->sourceFile(
 			__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql' );
 		$this->loadBalancer = new FakeLoadBalancer( [
-			'dbr' => $this->db,
+			'dbr' => $this->db
 		] );
 	}
 
@@ -250,6 +250,54 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 				}
 			)
 		);
+	}
+
+	public function testRestoresAcquiredIdsWhenDeletedInParallelBeforeReturn() {
+		$typeIdsAcquirer = new InMemoryTypeIdsStore();
+		$alreadyAcquiredTypeIds = $typeIdsAcquirer->acquireTypeIds(
+			[ 'label', 'description', 'alias' ]
+		);
+
+		$termsArray = [
+			'label' => [
+				'en' => 'same',
+				'de' => 'same',
+			],
+			'description' => [ 'en' => 'same' ],
+			'alias' => [
+				'en' => [ 'same', 'same', 'another', 'yet another' ]
+			]
+		];
+
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$this->loadBalancer,
+			$typeIdsAcquirer,
+			function ( $acquiredIds ) {
+				// This callback will delete first 3 acquired ids to mimic the case
+				// in which a cleaner might be working in-parallel and deleting ids
+				// that overlap with the ones returned by this acquirer.
+				// The expected behavior is that acquirer will make sure to restore
+				// those deleted ids after they have been passed to this callback,
+				// in which they are expected to be used as foreign keys in other tables.
+
+				$idsToDelete = array_slice( $acquiredIds, 0, 3 );
+				$this->db->delete( 'wbt_term_in_lang', [ 'wbtl_id' => $idsToDelete ] );
+			}
+		);
+
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$uniqueAcquiredTermIds = array_values( array_unique( $acquiredTermIds ) );
+		$persistedTermIds = $this->db->selectFieldValues( 'wbt_term_in_lang', 'wbtl_id' );
+
+		sort( $uniqueAcquiredTermIds );
+		sort( $persistedTermIds );
+
+		$this->assertSame(
+			$uniqueAcquiredTermIds,
+			$persistedTermIds
+		);
+
+		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds );
 	}
 
 	private function assertTermsArrayExistInDb( $termsArray, $typeIds ) {
