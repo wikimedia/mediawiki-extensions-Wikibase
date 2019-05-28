@@ -4,6 +4,7 @@
 
 * `TermList` now throws `InvalidArgumentException` when given non-iterable rather than failing silently
 * `SiteLinkList` now throws `InvalidArgumentException` when given non-iterable rather than failing silently
+* Slightly optimized `EntityId::isForeign()` by using `$this->repositoryName` instead of `$this->serialization`
 
 ## Version 9.1.0 (2019-01-24)
 
