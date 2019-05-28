@@ -262,4 +262,13 @@ class DatabaseTermIdsResolverTest extends TestCase {
 		$resolver->resolveTermIds( [ $termInLangId ] );
 	}
 
+	public function testCanResolveEmptyList() {
+		$resolver = new DatabaseTermIdsResolver(
+			$this->typeIdsResolver,
+			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
+		);
+
+		$this->assertEmpty( $resolver->resolveTermIds( [] ) );
+	}
+
 }
