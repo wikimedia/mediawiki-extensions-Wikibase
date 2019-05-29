@@ -105,6 +105,24 @@
       "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c17a03f_aa7bc21e",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T16:11:17Z",
+      "side": 1,
+      "message": "Two lines above, the comment explains that it checks for use “by any other items or properties”. “Anywhere else” refers to other uses, e. g. by extensions.",
+      "parentUuid": "b0ec6e83_3a346b8c",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
