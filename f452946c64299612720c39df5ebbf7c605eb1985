@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "524b23ca_fa6d1d54",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-29T16:09:45Z",
+      "side": 1,
+      "message": "\u003e I think I left out the FOR UPDATE (in the DatabasePropertyTermStore) because I figured that MediaWiki would already prevent concurrent edits of the same page, which should be the only case where we would try to store terms concurrently as well.\n\nI\u0027m not sure about this… there might be maintenance scripts running this in the future, this also might run asynchronously in Jobs/ deferred updates (or just after the actual edit happened… which could open up two race conditions, if edits are done fast), thus it\u0027s not strictly ensured that just one instance will ever be active.",
+      "parentUuid": "dbb5e2bc_6198c8d7",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "How so?",
       "parentUuid": "79730420_889105ae",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0ec6e83_3a346b8c",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-29T16:09:45Z",
+      "side": 1,
+      "message": "This already checks for both properties and items, while the comment claims it doesn\u0027t",
+      "parentUuid": "bbf2c0e8_781397b4",
       "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
