@@ -21,6 +21,7 @@ use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
@@ -28,7 +29,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitEntityAction;
-use Wikibase\TermIndex;
 use Wikibase\ViewEntityAction;
 
 /**
@@ -62,7 +62,7 @@ class ItemHandler extends EntityHandler {
 	private $dataTypeLookup;
 
 	/**
-	 * @param TermIndex $termIndex
+	 * @param EntityTermStoreWriter $termStoreWriter
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -75,7 +75,7 @@ class ItemHandler extends EntityHandler {
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
-		TermIndex $termIndex,
+		EntityTermStoreWriter $termStoreWriter,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -89,7 +89,7 @@ class ItemHandler extends EntityHandler {
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_ITEM,
-			$termIndex,
+			$termStoreWriter,
 			$contentCodec,
 			$constraintProvider,
 			$errorLocalizer,

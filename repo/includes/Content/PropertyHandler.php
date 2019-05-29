@@ -15,6 +15,7 @@ use Wikibase\EditEntityAction;
 use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
@@ -24,7 +25,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitEntityAction;
-use Wikibase\TermIndex;
 use Wikibase\ViewEntityAction;
 
 /**
@@ -57,7 +57,7 @@ class PropertyHandler extends EntityHandler {
 	private $labelLookupFactory;
 
 	/**
-	 * @param TermIndex $termIndex
+	 * @param EntityTermStoreWriter $termStoreWriter
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -70,7 +70,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
-		TermIndex $termIndex,
+		EntityTermStoreWriter $termStoreWriter,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -84,7 +84,7 @@ class PropertyHandler extends EntityHandler {
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_PROPERTY,
-			$termIndex,
+			$termStoreWriter,
 			$contentCodec,
 			$constraintProvider,
 			$errorLocalizer,
