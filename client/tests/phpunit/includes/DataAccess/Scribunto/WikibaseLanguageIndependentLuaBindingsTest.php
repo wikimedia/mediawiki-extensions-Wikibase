@@ -3,7 +3,10 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Exception;
+use MediaWiki\MediaWikiServices;
 use PHPUnit4And6Compat;
+use TitleFormatter;
+use TitleParser;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
@@ -55,6 +58,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		UsageAccumulator $usageAccumulator = null,
 		ReferencedEntityIdLookup $referencedEntityIdLookup = null
 	) {
+		$mediaWikiServices = MediaWikiServices::getInstance();
+
 		return new WikibaseLanguageIndependentLuaBindings(
 			$siteLinkLookup ?: $this->getMock( SiteLinkLookup::class ),
 			new SettingsArray(),
@@ -63,6 +68,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			$this->getMock( TermLookup::class ),
 			new StaticContentLanguages( [] ),
 			$referencedEntityIdLookup ?: $this->getMock( ReferencedEntityIdLookup::class ),
+			$mediaWikiServices->getTitleFormatter(),
+			$mediaWikiServices->getTitleParser(),
 			'enwiki'
 		);
 	}
@@ -85,6 +92,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			$this->getMock( TermLookup::class ),
 			new StaticContentLanguages( [] ),
 			$this->getMock( ReferencedEntityIdLookup::class ),
+			$this->getMock( TitleFormatter::class ),
+			$this->getMock( TitleParser::class ),
 			'enwiki'
 		);
 
@@ -123,6 +132,14 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 
 		$id = $wikibaseLuaBindings->getEntityId( 'Rome', 'enwiki' );
 		$this->assertSame( 'Q33', $id );
+
+		// Test non-normalized title
+		$id = $wikibaseLuaBindings->getEntityId( ':Rome', 'enwiki' );
+		$this->assertSame( 'Q33', $id );
+
+		// Test invalid title
+		$id = $wikibaseLuaBindings->getEntityId( '{A}', 'enwiki' );
+		$this->assertNull( $id );
 
 		$id = $wikibaseLuaBindings->getEntityId( 'Barcelona', null );
 		$this->assertNull( $id );
@@ -202,6 +219,8 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			$termLookup,
 			new StaticContentLanguages( $hasLang ? [ $languageCode ] : [] ),
 			$this->getMock( ReferencedEntityIdLookup::class ),
+			$this->getMock( TitleFormatter::class ),
+			$this->getMock( TitleParser::class ),
 			'enwiki'
 		);
 

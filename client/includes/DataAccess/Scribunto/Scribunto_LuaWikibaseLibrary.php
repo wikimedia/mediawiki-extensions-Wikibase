@@ -301,6 +301,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	private function newLanguageIndependentLuaBindings() {
+		$mediaWikiServices = MediaWikiServices::getInstance();
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
@@ -317,6 +318,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 				$settings->getSetting( 'referencedEntityIdMaxDepth' ),
 				$settings->getSetting( 'referencedEntityIdMaxReferencedEntityVisits' )
 			),
+			$mediaWikiServices->getTitleFormatter(),
+			$mediaWikiServices->getTitleParser(),
 			$settings->getSetting( 'siteGlobalID' )
 		);
 	}
