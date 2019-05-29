@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "822fa72c_c87572ba",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T16:18:53Z",
+      "side": 1,
+      "message": "If you think a FOR UPDATE is enough to guard against this, we can add it :) it probably is, but I haven’t convinced myself of it yet.\n\nI’m unsure about how/where the transactions should happen anyways. Currently we have one in the DatabaseTermIdsCleaner, but I suspect that’s incorrect, because the two SELECTs in cleanTermsIfUnused() (in this class) should probably be covered by the same transaction. So should DatabaseTermIdsCleaner rely on its caller to establish the transaction?\n\nHere it would probably work to begin a transaction just before we get $oldTermIds, and commit it… after the wbt_item_terms INSERT or after the wbt_item_terms DELETE? Not sure.",
+      "parentUuid": "524b23ca_fa6d1d54",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
