@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "578a1ef7_0552c6ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:12:52Z",
+      "side": 1,
+      "message": "The StringNormalizer and fail-safe parts should happen in separate commits IMO.",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de151f32_d7355348",
+        "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:12:52Z",
+      "side": 1,
+      "message": "This could also be a separate line:\n\n $label \u003d $this-\u003estringNormalizer-\u003ecleanupToNFC( $label );\n\nI think that would be slightly nicer.",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62af8102_64394300",
+        "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:12:52Z",
+      "side": 1,
+      "message": "Alternative suggestion:\n\n $aliases \u003d array_map( [ $this-\u003estringNormalizer, \u0027cleanupToNFC\u0027 ], $aliases );",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f3850e_31e791f7",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:12:52Z",
+      "side": 1,
+      "message": "This condition looks pretty weird – I think it would help if $neededRecordsCount was called something like $originalNeededRecordsCount.",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ce6a447_b42bec6e",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:12:52Z",
+      "side": 1,
+      "message": "shouldn’t this be a warning?",
+      "range": {
+        "startLine": 129,
+        "startChar": 19,
+        "endLine": 129,
+        "endChar": 23
+      },
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43c0a657_2f6dbcaa",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:12:52Z",
+      "side": 1,
+      "message": "trailing comma would be nice, in case we want to add more details later",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
