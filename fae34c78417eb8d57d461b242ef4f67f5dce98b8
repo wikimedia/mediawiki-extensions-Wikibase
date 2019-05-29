@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4d487c0_a6ae60d0",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:32:42Z",
+      "side": 1,
+      "message": "This somehow only got partially updated – both queries look at item terms, not property terms.",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 4
+      },
+      "revId": "fae34c78417eb8d57d461b242ef4f67f5dce98b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
