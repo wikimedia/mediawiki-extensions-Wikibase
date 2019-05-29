@@ -11,11 +11,11 @@
 		"MediaWiki": ">= 1.31"
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\View\\": "view/src/",
-		"Wikibase\\View\\Tests\\": "view/tests/phpunit/"
+		"Wikibase\\View\\": "src/",
+		"Wikibase\\View\\Tests\\": "tests/phpunit/"
 	},
 	"AutoloadClasses": {
-		"Wikibase\\ViewHooks": "view/ViewHooks.php"
+		"Wikibase\\ViewHooks": "ViewHooks.php"
 	},
 	"Hooks": {
 		"ResourceLoaderRegisterModules": [
@@ -31,7 +31,7 @@
 	"callback": "\\Wikibase\\ViewHooks::onRegistration",
 	"MessagesDirs": {
 		"WikibaseView": [
-			"view/lib/wikibase-data-values-value-view/i18n"
+			"lib/wikibase-data-values-value-view/i18n"
 		]
 	},
 	"manifest_version": 2

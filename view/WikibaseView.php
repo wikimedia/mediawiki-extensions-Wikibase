@@ -4,4 +4,4 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-wfLoadExtension( 'WikibaseView', __DIR__ . '/../extension-view-wip.json' );
+wfLoadExtension( 'WikibaseView', __DIR__ . '/extension-view-wip.json' );
