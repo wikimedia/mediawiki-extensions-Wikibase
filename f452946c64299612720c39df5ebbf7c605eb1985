@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dbb5e2bc_6198c8d7",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T16:05:42Z",
+      "side": 1,
+      "message": "Well, the whole thing should already happen in the web request transaction, no?\n\nI think I left out the FOR UPDATE (in the DatabasePropertyTermStore) because I figured that MediaWiki would already prevent concurrent edits of the same page, which should be the only case where we would try to store terms concurrently as well.\n\nIf any transaction or FOR UPDATE stuff is missing, then I’d prefer to add it in a follow-up, to both this class and DatabasePropertyTermStore (which is already merged).",
+      "parentUuid": "6dedbb2b_bf6174c1",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-29T15:56:21Z",
       "side": 1,
       "message": "Not quite accurate",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf2c0e8_781397b4",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T16:05:42Z",
+      "side": 1,
+      "message": "How so?",
+      "parentUuid": "79730420_889105ae",
       "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
