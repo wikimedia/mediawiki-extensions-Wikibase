@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "690b372f_09c42f9f",
+        "filename": "lib/includes/Store/MultiPropertyTermStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T15:35:01Z",
+      "side": 1,
+      "message": "I’m not sure if this makes sense or not… should we instead abort early?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 68
+      },
+      "revId": "3f9e487309a4da21d54a31c3d6d25928b4a71905",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
