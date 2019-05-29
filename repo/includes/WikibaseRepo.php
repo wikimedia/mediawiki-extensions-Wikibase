@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
+use UnexpectedValueException;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
@@ -66,10 +67,16 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\MultiPropertyTermStore;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
@@ -193,8 +200,8 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\TermIndexPropertyTermStore;
 use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
-use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
 use Wikibase\TermStore\ItemTermStore;
 use Wikibase\TermStore\PropertyTermStore;
 use Wikibase\UpsertSqlIdGenerator;
@@ -1809,11 +1816,57 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
 	public function getPropertyTermStore(): PropertyTermStore {
-		return new InMemoryPropertyTermStore(); // TODO: MW or Doctrine implementation
+		$propertyTermsMigrationStage = $this->settings->getSetting(
+			'tmpPropertyTermsMigrationStage' );
+
+		switch ( $propertyTermsMigrationStage ) {
+			case MIGRATION_OLD:
+				return $this->getOldPropertyTermStore();
+			case MIGRATION_WRITE_BOTH:
+				return new MultiPropertyTermStore( [
+					$this->getOldPropertyTermStore(),
+					$this->getNewPropertyTermStore(),
+				] );
+			case MIGRATION_WRITE_NEW:
+				return new MultiPropertyTermStore( [
+					$this->getNewPropertyTermStore(),
+					$this->getOldPropertyTermStore(),
+				] );
+			case MIGRATION_NEW:
+				return $this->getNewPropertyTermStore();
+			default:
+				throw new UnexpectedValueException(
+					'Unknown migration stage: ' . $propertyTermsMigrationStage
+				);
+		}
+	}
+
+	private function getOldPropertyTermStore(): PropertyTermStore {
+		return new TermIndexPropertyTermStore( $this->getStore()->getTermIndex() );
+	}
+
+	private function getNewPropertyTermStore(): PropertyTermStore {
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$typeIdsStore = new SqlTypeIdsStore(
+			$loadBalancer,
+			MediaWikiServices::getInstance()->getMainWANObjectCache()
+		);
+
+		return new DatabasePropertyTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$loadBalancer,
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			)
+		);
 	}
 
 	/**
