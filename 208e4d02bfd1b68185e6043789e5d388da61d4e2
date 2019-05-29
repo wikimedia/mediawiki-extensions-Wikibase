@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b86dfcea_4f8bf123",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-29T13:09:12Z",
+      "side": 1,
+      "message": "Done. Updated this change to exclude WikibaseRepo changes",
+      "parentUuid": "578a1ef7_0552c6ae",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de151f32_d7355348",
         "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c40cac56_517f2df9",
+        "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-29T13:09:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de151f32_d7355348",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ffd1194_aa54c4cd",
+        "filename": "lib/includes/Store/Sql/Terms/DatabasePropertyTermStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-29T13:09:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62af8102_64394300",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9f3850e_31e791f7",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2019-05-29T11:12:52Z",
       "side": 1,
       "message": "This condition looks pretty weird – I think it would help if $neededRecordsCount was called something like $originalNeededRecordsCount.",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bff4fddd_92f66d8f",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-29T13:09:12Z",
+      "side": 1,
+      "message": "Oh good catch actually the the line 107 is misplaced and should be inside the loop. I think then the current name would still be better than orgiinal*, or?",
+      "parentUuid": "f9f3850e_31e791f7",
       "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "b35a344b_d54ea724",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-29T13:09:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ce6a447_b42bec6e",
+      "range": {
+        "startLine": 129,
+        "startChar": 19,
+        "endLine": 129,
+        "endChar": 23
+      },
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43c0a657_2f6dbcaa",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 5
@@ -107,6 +203,24 @@
       "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b8cdc0c_ca0032a2",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-29T13:09:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43c0a657_2f6dbcaa",
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
