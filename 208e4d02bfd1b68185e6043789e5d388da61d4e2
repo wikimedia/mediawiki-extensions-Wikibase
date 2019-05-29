@@ -107,6 +107,29 @@
       "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4cd5b19_3999bb2d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-05-29T11:52:30Z",
+      "side": 1,
+      "message": "this comment should be removed",
+      "range": {
+        "startLine": 1816,
+        "startChar": 1,
+        "endLine": 1818,
+        "endChar": 4
+      },
+      "revId": "208e4d02bfd1b68185e6043789e5d388da61d4e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
