@@ -3,6 +3,9 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
+use MalformedTitleException;
+use TitleFormatter;
+use TitleParser;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -67,6 +70,16 @@ class WikibaseLanguageIndependentLuaBindings {
 	private $referencedEntityIdLookup;
 
 	/**
+	 * @var TitleFormatter
+	 */
+	private $titleFormatter;
+
+	/**
+	 * @var TitleParser
+	 */
+	private $titleParser;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -79,6 +92,8 @@ class WikibaseLanguageIndependentLuaBindings {
 	 * @param TermLookup $termLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param ReferencedEntityIdLookup $referencedEntityIdLookup
+	 * @param TitleFormatter $titleFormatter
+	 * @param TitleParser $titleParser
 	 * @param string $siteId
 	 */
 	public function __construct(
@@ -89,6 +104,8 @@ class WikibaseLanguageIndependentLuaBindings {
 		TermLookup $termLookup,
 		ContentLanguages $termsLanguages,
 		ReferencedEntityIdLookup $referencedEntityIdLookup,
+		TitleFormatter $titleFormatter,
+		TitleParser $titleParser,
 		$siteId
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -98,6 +115,8 @@ class WikibaseLanguageIndependentLuaBindings {
 		$this->termLookup = $termLookup;
 		$this->termsLanguages = $termsLanguages;
 		$this->referencedEntityIdLookup = $referencedEntityIdLookup;
+		$this->titleFormatter = $titleFormatter;
+		$this->titleParser = $titleParser;
 		$this->siteId = $siteId;
 	}
 
@@ -114,6 +133,19 @@ class WikibaseLanguageIndependentLuaBindings {
 		$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $pageTitle );
 
 		if ( !$itemId ) {
+			try {
+				$normalizedPageTitle = $this->normalizePageTitle( $pageTitle );
+			} catch( MalformedTitleException $e ) {
+				return null;
+			}
+
+			if ( $normalizedPageTitle === $pageTitle ) {
+				return null;
+			}
+			$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $normalizedPageTitle );
+		}
+
+		if ( !$itemId ) {
 			return null;
 		}
 
@@ -124,6 +156,17 @@ class WikibaseLanguageIndependentLuaBindings {
 		}
 
 		return $itemId->getSerialization();
+	}
+
+	/**
+	 * @param string $pageTitle
+	 * @return string
+	 */
+	private function normalizePageTitle( $pageTitle ) {
+		// This is not necessary the right thing for non-local titles, but it's
+		// the best we can do (without the expensive MediaWikiPageNameNormalizer).
+		$pageTitleValue = $this->titleParser->parseTitle( $pageTitle );
+		return $this->titleFormatter->getPrefixedText( $pageTitleValue );
 	}
 
 	/**
