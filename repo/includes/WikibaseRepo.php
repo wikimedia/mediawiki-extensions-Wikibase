@@ -66,6 +66,11 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\SqlTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -1809,11 +1814,28 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
 	public function getPropertyTermStore(): PropertyTermStore {
-		return new InMemoryPropertyTermStore(); // TODO: MW or Doctrine implementation
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$typeIdsStore = new SqlTypeIdsStore(
+			$loadBalancer,
+			MediaWikiServices::getInstance()->getMainWANObjectCache()
+		);
+
+		return new DatabasePropertyTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$loadBalancer,
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			),
+			$this->getStringNormalizer()
+		);
 	}
 
 	/**
