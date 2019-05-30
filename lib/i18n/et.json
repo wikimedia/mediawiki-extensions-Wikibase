@@ -56,7 +56,7 @@
 	"wikibase-validator-too-long": "Ei tohi olla {{PLURAL:$1|ühest|$1}} märgist pikem.",
 	"wikibase-validator-label-too-long": "Silt ei tohi olla pikem kui {{PLURAL:$1|üks märk|$1 märki}}.",
 	"wikibase-validator-description-too-long": "Kirjeldus ei tohi olla pikem kui {{PLURAL:$1|üks märk|$1 märki}}.",
-	"wikibase-validator-alias-too-long": "Rööpkuju ei tohi olla pikem kui {{PLURAL:$1|üks märk|$1 märki}}.",
+	"wikibase-validator-alias-too-long": "Ükski rööpkuju ei tohi olla pikem kui {{PLURAL:$1|üks märk|$1 märki}}.",
 	"wikibase-validator-too-short": "Peab olema vähemalt {{PLURAL:$1|ühe|$1}} märgi pikkune.",
 	"wikibase-validator-too-high": "Pole vahemikus, ei tohi olla suurem kui $1.",
 	"wikibase-validator-too-low": "Pole vahemikus, ei tohi olla väiksem kui $1.",

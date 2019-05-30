@@ -17,7 +17,8 @@
 			"Xxmarijnw",
 			"Mainframe98",
 			"Effeietsanders",
-			"Romaine"
+			"Romaine",
+			"Bdijkstra"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -102,6 +103,7 @@
 	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie aan de zijbalk toe, met links naar andere Wikimedia-projecten op basis van {{WBREPONAME}}-gegevens.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koppeling|Koppelingen}} met {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Informeer mij wanneer iemand een pagina die {{GENDER:|ik heb aangemaakt}}, koppelt aan een {{WBREPONAME}}-item.",
+	"notification-header-page-connection": "De pagina <strong>$3</strong> werd verbonden met {{PLURAL:$4|-1=een {{WBREPONAME}}-item|het {{WBREPONAME}}-item $4}}, waar gegevens relevant voor het onderwerp kunnen worden verzameld.",
 	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
 	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen",
 	"connected-redirect-category": "Doorverwijzingen verbonden met een {{WBREPONAME}}-item"

@@ -28,6 +28,7 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Wizigings dy't ôfkomstich binne fan {{WBREPONAME}}.",
 	"wikibase-watchlist-show-changes-pref": "Bewurkings fan {{WBREPONAME}} werjaan yn jo folchlist",
 	"wikibase-pageinfo-entity-id-none": "Gjin",
+	"wikibase-pageinfo-entity-usage-S": "Websteekeppeling",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Lebel: $1",
 	"wikibase-otherprojects": "Yn oare projekten",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Oansluting|Oanslutings}} op {{WBREPONAME}}"
