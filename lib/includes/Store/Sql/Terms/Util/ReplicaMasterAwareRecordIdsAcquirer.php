@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms\Util;
 
+use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikimedia\Rdbms\DBQueryError;
@@ -103,12 +104,41 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
+			$neededRecordsCount = count( $neededRecords );
+
 			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
 			$existingRecords = array_merge(
 				$existingRecords,
 				$this->findExistingRecords( $this->getDbMaster(), $neededRecords )
 			);
 			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
+
+			if ( count( $neededRecords ) === $neededRecordsCount ) {
+				// This is a fail-safe capture in order to avoid an infinite loop when insertion
+				// fails due to duplication, but selection in the next loop iteration still
+				// cannot detect those existing records for any reason.
+				// This has one caveat that failures due to other reasons other than duplication
+				// constraint violation will also result in a failure to this function entirely.
+				$exception = new Exception(
+					'Fail-safe exception. Avoiding infinite loop due to possibily undetectable'
+					. " existing records in master.\n"
+					. ' It may be due to encoding incompatibility'
+					. ' between database values and values passed in $neededRecords parameter.'
+				);
+
+				$this->logger->warning(
+					'{method}: Acquiring record ids failed: {exception}',
+					[
+						'method' => __METHOD__,
+						'exception' => $exception,
+						'table' => $this->table,
+						'neededRecords' => $neededRecords,
+						'existingRecords' => $existingRecords,
+					]
+				);
+
+				throw $exception;
+			}
 		}
 
 		return $existingRecords;

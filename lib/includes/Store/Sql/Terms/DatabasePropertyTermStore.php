@@ -14,6 +14,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\TermStore\PropertyTermStore;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikibase\StringNormalizer;
 
 /**
  * @license GPL-2.0-or-later
@@ -32,6 +33,9 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	/** @var TermIdsCleaner */
 	private $cleaner;
 
+	/** @var StringNormalizer */
+	private $stringNormalizer;
+
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -46,12 +50,14 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		TermIdsAcquirer $acquirer,
 		TermIdsResolver $resolver,
 		TermIdsCleaner $cleaner,
+		StringNormalizer $stringNormalizer,
 		LoggerInterface $logger = null
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->acquirer = $acquirer;
 		$this->resolver = $resolver;
 		$this->cleaner = $cleaner;
+		$this->stringNormalizer = $stringNormalizer;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -82,12 +88,15 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 
 		$termsArray = [];
 		foreach ( $terms->getLabels()->toTextArray() as $language => $label ) {
+			$label = $this->stringNormalizer->cleanupToNFC( $label );
 			$termsArray['label'][$language] = $label;
 		}
 		foreach ( $terms->getDescriptions()->toTextArray() as $language => $description ) {
+			$description = $this->stringNormalizer->cleanupToNFC( $description );
 			$termsArray['description'][$language] = $description;
 		}
 		foreach ( $terms->getAliasGroups()->toTextArray() as $language => $aliases ) {
+			$aliases = array_map( [ $this->stringNormalizer, 'cleanupToNFC' ], $aliases );
 			$termsArray['alias'][$language] = $aliases;
 		}
 
