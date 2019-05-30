@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa1d40f0_72bf398a",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-30T23:21:28Z",
+      "side": 1,
+      "message": "phpdocs?",
+      "revId": "35e8f307712240c6395b0072f67a6ade0cc8b072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "225b93d6_d9bccf5e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-30T23:21:28Z",
+      "side": 1,
+      "message": "Also here.",
+      "revId": "35e8f307712240c6395b0072f67a6ade0cc8b072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4551266_3e3b674f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-30T23:21:28Z",
+      "side": 1,
+      "message": "The only thing we\u0027re using $dataAccessSettings for is calling useEntitySourceBasedFederation() on it. Maybe just pass this value instead? We don\u0027t need the whole object if one boolean is enough.",
+      "revId": "35e8f307712240c6395b0072f67a6ade0cc8b072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c8b962e_648d0b24",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-30T23:21:28Z",
+      "side": 1,
+      "message": "documentation here? It\u0027s not obvious what these parameters mean.",
+      "revId": "35e8f307712240c6395b0072f67a6ade0cc8b072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b0f8706_ae189e08",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-30T23:21:28Z",
+      "side": 1,
+      "message": "We already checked this couple of lines above - can\u0027t we make an assignment there?",
+      "revId": "35e8f307712240c6395b0072f67a6ade0cc8b072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47c5d97b_d21fd9d1",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-30T23:21:28Z",
+      "side": 1,
+      "message": "Probably would be easier as:\n$useEntitySourceBasedFederation \u003d $this-\u003egetDataAccessSettings()-\u003euseEntitySourceBasedFederation();\nand then use $useEntitySourceBasedFederation below (including replacing $dataAccessSettings with it as I commented elsewhere)",
+      "revId": "35e8f307712240c6395b0072f67a6ade0cc8b072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
