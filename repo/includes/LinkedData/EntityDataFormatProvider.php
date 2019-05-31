@@ -218,6 +218,22 @@ class EntityDataFormatProvider {
 	}
 
 	/**
+	 * Does $format specify a name for RDF format?
+	 * @param string $format
+	 * @return bool
+	 */
+	public function isRdfFormat( $format ) {
+		$formats = $this->rdfWriterFactory->getSupportedFormats();
+		if ( in_array( $format, $formats ) ) {
+			// Try direct name
+			return true;
+		}
+		// Try resolved name
+		$format = $this->rdfWriterFactory->getFormatName( $format );
+		return $format && in_array( $format, $formats );
+	}
+
+	/**
 	 * Normalizes the format specifier; Converts mime types to API format names.
 	 *
 	 * @param string $format The format as supplied in the request
