@@ -33,6 +33,24 @@
       "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "459ad29f_704e78b6",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T11:01:27Z",
+      "side": 1,
+      "message": "I just noticed, after reading a different patch commit message, that \u0027read from\u0027 is determined here by the order of term stores inside MlutiPropertyTermStore.\n\nThen this likes more okay to me than before. It is still not that explicit (maybe due to MultiPropertyTermStore is a bit more generic compared to, say MigrationPropertyTermStore that accepts only two stores, old and new). But since it is just temporary, it should be fine.",
+      "parentUuid": "ce70345b_a09c577f",
+      "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
