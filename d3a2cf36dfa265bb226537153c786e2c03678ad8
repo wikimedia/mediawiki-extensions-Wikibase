@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d174f2ce_e9ad17b7",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T10:36:43Z",
+      "side": 1,
+      "message": "So this is going to be used in the following way:\n\n- MIGRATION_OLD \u003d\u003e read old, write old\n- MIGRATION_WRITE_BOTH \u003d\u003e read old, write both\n- MIGRATION_WRITE_NEW \u003d\u003e read new, write both (maybe this needs to be called MIGRATION_READ_NEW instead?)\n- MIGRATION_NEW \u003d\u003e read new, write new\n\nright?",
+      "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce70345b_a09c577f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T10:36:43Z",
+      "side": 1,
+      "message": "MultiPropertyTermStore will need to know a little more here for lookup (resolving terms).\n\nin MIGRATION_WRITE_BOTH it above, MultiPropertyTermStore will have to continue reading only from old\nin MIGRATION_WRITE_NEW here, it will have to read from new (and keep writing to both).\n\nrelated comment https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/513158/2/repo/config/Wikibase.default.php#351\n\n---\n\nI was actually expecting write and read to have separate configuration to make things more explicit .. like\n`tmpPropertyTermsMigrationReadFrom` and `tmpPropertyTermsMigrationWriteTo`. does that sounds better to you too?\n\n---\n\nEitherway, we probably need to tell MultiPropertyTermStore somehow where to read from and write to by passing it the value of `$propertyTermsMigrationStage` here (or two values if we change to separate configuration variables).\n\nThe alternative solution is to have a separate implementation for each migration stage (which sounds a bit of an overkill for something temporary to me)",
+      "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
