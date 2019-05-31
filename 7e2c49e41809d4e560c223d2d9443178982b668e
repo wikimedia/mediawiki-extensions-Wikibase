@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "746ece4b_a302a717",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-31T11:04:37Z",
+      "side": 1,
+      "message": "Do we really need to go through all of this again? Can\u0027t we just check that $idsToRestore are still in wbtl_text_in_lang_id?",
+      "revId": "7e2c49e41809d4e560c223d2d9443178982b668e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fad48ac2_c8e07a15",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-31T11:04:37Z",
+      "side": 1,
+      "message": "This should clarify that we will assure they exist immediately after, but the caller is responsible for putting the required referencing rows in place immediately (and not via a Job or smth).",
+      "revId": "7e2c49e41809d4e560c223d2d9443178982b668e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdaf2cc8_448ef4a2",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-31T11:04:37Z",
+      "side": 1,
+      "message": "I don\u0027t think we can use callable yet (due to zend\u003c\u003ehhvm issues)",
+      "revId": "7e2c49e41809d4e560c223d2d9443178982b668e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
