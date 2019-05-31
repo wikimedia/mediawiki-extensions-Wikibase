@@ -43,7 +43,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$actual = $handler->createSchema(
 			$title, $revisionTimestamp, 'https://www.wikidata.org/entity/Q42', $image, $description
 		);
-		$this->assertEquals( $expected, $actual, 'schema' );
+		$this->assertArraySubset( $expected, $actual, 'schema' );
 	}
 
 	public function createSchemaProvider() {
@@ -54,13 +54,11 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			"url" => "https://de.wikipedia.org/wiki/Douglas_Adams",
 			"sameAs" => "https://www.wikidata.org/entity/Q42",
 			"mainEntity" => "https://www.wikidata.org/entity/Q42",
-			"author" => [ "@type" => "Organization", "name" => "" ],
+			"author" => [ "@type" => "Organization" ],
 			"publisher" => [
 				"@type" => "Organization",
-				"name" => "",
 				"logo" => [
-					"@type" => "ImageObject",
-					"url" => ""
+					"@type" => "ImageObject"
 				]
 			],
 			"datePublished" => "2002-05-27T18:26:23Z"
@@ -76,13 +74,11 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			"url" => "https://de.wikipedia.org/wiki/Douglas_Adams",
 			"sameAs" => "https://www.wikidata.org/entity/Q42",
 			"mainEntity" => "https://www.wikidata.org/entity/Q42",
-			"author" => [ "@type" => "Organization", "name" => "" ],
+			"author" => [ "@type" => "Organization" ],
 			"publisher" => [
 				"@type" => "Organization",
-				"name" => "",
 				"logo" => [
-					"@type" => "ImageObject",
-					"url" => ""
+					"@type" => "ImageObject"
 				]
 			],
 			"datePublished" => "2002-05-27T18:26:23Z",
