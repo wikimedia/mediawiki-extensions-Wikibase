@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "298cb78a_a9bd893b",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTypeIdsStoreTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T09:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e911bedd_599c7a19",
+      "range": {
+        "startLine": 22,
+        "startChar": 10,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "07cc9264c5d89d0f20e7a8ce0c4d108d05c2e3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ef85563_500d022b",
         "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTypeIdsStoreTest.php",
         "patchSetId": 3
@@ -39,6 +63,24 @@
       "revId": "07cc9264c5d89d0f20e7a8ce0c4d108d05c2e3f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff99d818_5432a7c0",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTypeIdsStoreTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T09:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ef85563_500d022b",
+      "revId": "07cc9264c5d89d0f20e7a8ce0c4d108d05c2e3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
