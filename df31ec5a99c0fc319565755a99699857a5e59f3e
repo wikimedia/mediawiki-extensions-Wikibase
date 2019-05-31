@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "566f3143_c52387ea",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2019-05-31T09:06:20Z",
+      "side": 1,
+      "message": "should a case with \u0027n3\u0027 be added?",
+      "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fe28d61_9422c967",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2019-05-31T09:06:20Z",
+      "side": 1,
+      "message": "any particular reasons to move this case here?",
+      "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
