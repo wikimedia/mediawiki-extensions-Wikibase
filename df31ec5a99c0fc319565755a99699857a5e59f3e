@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a44481c6_dcfdbd6d",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-31T16:45:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02131ef7_e7661771",
+      "range": {
+        "startLine": 218,
+        "startChar": 78,
+        "endLine": 218,
+        "endChar": 81
+      },
+      "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "566f3143_c52387ea",
         "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
         "patchSetId": 5
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "81fe4484_e5e97060",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-31T16:45:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "566f3143_c52387ea",
+      "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fe28d61_9422c967",
         "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
         "patchSetId": 5
@@ -53,6 +95,24 @@
       "writtenOn": "2019-05-31T09:06:20Z",
       "side": 1,
       "message": "any particular reasons to move this case here?",
+      "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2894bfb2_1af92577",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-05-31T16:45:29Z",
+      "side": 1,
+      "message": "no, it\u0027s a mistake.",
+      "parentUuid": "7fe28d61_9422c967",
       "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
