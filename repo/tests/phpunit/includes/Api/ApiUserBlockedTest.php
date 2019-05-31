@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
-use Block;
+use MediaWiki\Block\DatabaseBlock;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 
@@ -17,14 +17,14 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
  */
 class ApiUserBlockedTest extends WikibaseApiTestCase {
 
-	/** @var Block */
+	/** @var DatabaseBlock */
 	private $block;
 
 	protected function setUp() {
 		parent::setUp();
 
 		$testuser = self::getTestUser()->getUser();
-		$this->block = new Block( [
+		$this->block = new DatabaseBlock( [
 			'address' => $testuser,
 			'reason' => 'testing in ' . __CLASS__,
 			'by' => $testuser->getId(),
