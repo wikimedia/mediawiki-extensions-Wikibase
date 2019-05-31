@@ -231,4 +231,30 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function rfdFormatProvider() {
+		return [
+			[ 'rdf', true, ],
+			[ 'n3', true, ],
+			[ 'ttl', true, ],
+			[ 'nt', true, ],
+			[ 'jsonld', true, ],
+			[ 'rdfxml', true, ],
+			[ 'turtle', true, ],
+			[ 'ntriples', true, ],
+			[ 'rdfdata', false, ],
+			[ 'json', false, ],
+			[ 'xml', false, ],
+			[ 'html', false, ],
+			[ 'txt', false, ],
+			[ 'text', false, ],
+		];
+	}
+
+	/**
+	 * @dataProvider rfdFormatProvider
+	 */
+	public function testIsRdfFormat( $format, $expected ) {
+		$this->assertEquals( $this->getProvider()->isRdfFormat( $format ), $expected );
+	}
+
 }
