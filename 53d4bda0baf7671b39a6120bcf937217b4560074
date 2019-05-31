@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcfd4e6c_13f87856",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T10:14:12Z",
+      "side": 1,
+      "message": "should we remove wbt_type DDL from AddNormalizedTermsTablesDDL.sql then?",
+      "revId": "53d4bda0baf7671b39a6120bcf937217b4560074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "743c5d44_4da2151a",
+        "filename": "repo/includes/Store/Sql/DatabaseSchemaUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T10:14:12Z",
+      "side": 1,
+      "message": "T224036 ?",
+      "revId": "53d4bda0baf7671b39a6120bcf937217b4560074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
