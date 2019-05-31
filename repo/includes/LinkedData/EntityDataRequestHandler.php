@@ -214,7 +214,9 @@ class EntityDataRequestHandler {
 			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
-		if ( $this->rdfOutputRequested( $format ) && in_array( $entityId->getEntityType(), $this->entityTypesWithoutRdfOutput ) ) {
+		if ( $this->entityDataFormatProvider->isRdfFormat( $format ) &&
+			in_array( $entityId->getEntityType(), $this->entityTypesWithoutRdfOutput )
+		) {
 			throw new HttpError( 406, $output->msg( 'wikibase-entitydata-rdf-not-available', $entityId->getEntityType() ) );
 		}
 
@@ -259,10 +261,6 @@ class EntityDataRequestHandler {
 		}
 
 		$this->showData( $request, $output, $format, $entityId, $revision );
-	}
-
-	private function rdfOutputRequested( $format ) {
-		return $format === 'rdf' || $format === 'ttl' || $format === 'nt';
 	}
 
 	/**
