@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "dc888d82_578ff05d",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T10:00:06Z",
+      "side": 1,
+      "message": "should we move race-condition discussions and solutions into this change I86fc8bde882b4c56be9ea7fa27822fa01b63df09 (or another separate one)?\n\nsince race-conditions are happening across multiple concepts here (Acquirer, Cleaner), it would be better look at them together and solve the issue in one change after we have the implementations in-place already.",
+      "parentUuid": "cba71ea9_43003f15",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
