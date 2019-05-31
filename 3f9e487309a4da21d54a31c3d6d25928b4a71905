@@ -22,6 +22,30 @@
       "revId": "3f9e487309a4da21d54a31c3d6d25928b4a71905",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c67de8_e9db323d",
+        "filename": "lib/includes/Store/MultiPropertyTermStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T09:36:44Z",
+      "side": 1,
+      "message": "\u0027abort early\u0027 as in: once one store fails, we stop and only the ones before it persist? or as in: rollback all stores making this store operation atomic to the outside over all the stores in it?\n\nthe latter is harder to achieve of course, but the former doesn\u0027t make much sense to me because then it is just a matter of order/luck which stores get written to due to failures in others. I\u0027d either keep as it is now, perhaps changing the fact that it throws only the first exception to actually collect all and include them in the re-thrown exception at the end.",
+      "parentUuid": "690b372f_09c42f9f",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 68
+      },
+      "revId": "3f9e487309a4da21d54a31c3d6d25928b4a71905",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
