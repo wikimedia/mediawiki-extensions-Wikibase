@@ -101,7 +101,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			true
 		);
 
-		$formats = [ 'json', 'rdfxml', 'ntriples' ];
+		$formats = [ 'json', 'rdfxml', 'ntriples', 'turtle' ];
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		$defaultFormat = 'rdf';

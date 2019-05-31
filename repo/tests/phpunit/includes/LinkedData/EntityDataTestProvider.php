@@ -528,6 +528,14 @@ class EntityDataTestProvider {
 			406,
 		];
 
+		$cases['N3 (RDF) output not available for properties'] = [
+			'',
+			[ 'id' => 'P42', 'format' => 'n3s' ],
+			[],
+			'!wikibase-entitydata-rdf-not-available: property!',
+			406,
+		];
+
 		$cases['NT (RDF) output not available for properties'] = [
 			'',
 			[ 'id' => 'P42', 'format' => 'nt' ],
