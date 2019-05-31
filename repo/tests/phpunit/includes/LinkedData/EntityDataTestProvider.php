@@ -63,6 +63,14 @@ class EntityDataTestProvider {
 		$version = preg_quote( RdfVocabulary::FORMAT_VERSION );
 		$cases = [];
 
+		$cases['TTL (RDF) output not available for properties'] = [
+			'',
+			[ 'id' => 'P42', 'format' => 'ttl' ],
+			[],
+			'!wikibase-entitydata-rdf-not-available: property!',
+			406,
+		];
+
 		$cases[] = [ // #0: no params, fail
 			'',      // subpage
 			[], // parameters
@@ -515,14 +523,6 @@ class EntityDataTestProvider {
 		$cases['RDF output not available for properties'] = [
 			'',
 			[ 'id' => 'P42', 'format' => 'rdf' ],
-			[],
-			'!wikibase-entitydata-rdf-not-available: property!',
-			406,
-		];
-
-		$cases['TTL (RDF) output not available for properties'] = [
-			'',
-			[ 'id' => 'P42', 'format' => 'ttl' ],
 			[],
 			'!wikibase-entitydata-rdf-not-available: property!',
 			406,
