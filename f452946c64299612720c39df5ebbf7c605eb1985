@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "a4b40937_919f92ec",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-05-31T10:03:38Z",
+      "side": 1,
+      "message": "I mean to say, we tackle race-conditions in a separate thread not necessarily in one change alone ;)",
+      "parentUuid": "dc888d82_578ff05d",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
