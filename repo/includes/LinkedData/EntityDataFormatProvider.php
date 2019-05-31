@@ -210,11 +210,27 @@ class EntityDataFormatProvider {
 			}
 
 			// only one file extension, to keep purging simple
-			$ext = $this->rdfWriterFactory->getFileExtension( $name );
+ 			$ext = $this->rdfWriterFactory->getFileExtension( $name );
 			if ( !isset( $this->fileExtensions[$ext] ) ) {
 				$this->fileExtensions[$ext] = $name;
 			}
 		}
+	}
+
+	/**
+	 * Does $format specify a name for RDF format?
+	 * @param string $format
+	 * @return bool
+	 */
+	public function isRdfFormat( $format ) {
+		$formats = $this->rdfWriterFactory->getSupportedFormats();
+		if ( in_array( $format, $formats ) ) {
+			// Try direct name
+			return true;
+		}
+		// Try resolved name
+		$format = $this->rdfWriterFactory->getFormatName( $format );
+		return $format && in_array( $format, $formats );
 	}
 
 	/**
