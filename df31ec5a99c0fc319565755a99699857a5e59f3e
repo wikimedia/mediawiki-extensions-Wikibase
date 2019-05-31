@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "02131ef7_e7661771",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 776
+      },
+      "writtenOn": "2019-05-31T16:04:48Z",
+      "side": 1,
+      "message": "surprised the linters didn\u0027t catch it, but our php standards put \u0027) {\u0027 on a new line for multi-line conditionals.",
+      "range": {
+        "startLine": 218,
+        "startChar": 78,
+        "endLine": 218,
+        "endChar": 81
+      },
+      "revId": "df31ec5a99c0fc319565755a99699857a5e59f3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "566f3143_c52387ea",
         "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataTestProvider.php",
         "patchSetId": 5
