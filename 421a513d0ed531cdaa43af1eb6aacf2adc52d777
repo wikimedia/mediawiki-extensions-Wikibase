@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f67a887b_0cd70acf",
+        "filename": "lib/includes/Store/TermIndexPropertyTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-05-31T10:40:19Z",
+      "side": 1,
+      "message": "That\u0027s my favorite data type :)",
+      "range": {
+        "startLine": 28,
+        "startChar": 49,
+        "endLine": 28,
+        "endChar": 65
+      },
+      "revId": "421a513d0ed531cdaa43af1eb6aacf2adc52d777",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
