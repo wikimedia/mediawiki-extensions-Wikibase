@@ -151,13 +151,13 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 			[ 'maps' => 'awesome' ]
 		);
 
-		$this->assertStringStartsWith( '<script type="text/javascript">', $html );
+		$this->assertStringStartsWith( '<script>', $html );
 		$this->assertStringEndsWith( '</script>', $html );
 		$this->assertContains(
 			'mw.config.get( \'wgKartographerLiveData\' )["maps"] = "awesome"',
 			$html
 		);
-		$this->assertContains( '[ "rl-module-1", "another-rl-module", "ext.kartographer.frame" ]', $html );
+		$this->assertContains( '["rl-module-1","another-rl-module","ext.kartographer.frame"]', $html );
 		$this->assertContains( '( "#foo" )', $html );
 	}
 
@@ -171,7 +171,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 			[ 'm"a"ps' => 'awe"s"ome' ]
 		);
 
-		$this->assertStringStartsWith( '<script type="text/javascript">', $html );
+		$this->assertStringStartsWith( '<script>', $html );
 		$this->assertStringEndsWith( '</script>', $html );
 
 		$stringsToEscape = [ '#f"o"o', 'rl-"mo"dule', 'm"a"ps', 'awe"s"ome' ];
