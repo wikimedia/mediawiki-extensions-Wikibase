@@ -96,7 +96,7 @@ class EntityDataRequestHandler {
 	/**
 	 * @var bool
 	 */
-	private $useSquids;
+	private $useCdn;
 
 	/**
 	 * @var string|null
@@ -115,7 +115,7 @@ class EntityDataRequestHandler {
 	 * @param string[] $entityTypesWithoutRdfOutput
 	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
-	 * @param bool $useSquids do we have web caches configured?
+	 * @param bool $useCdn do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
 	 */
 	public function __construct(
@@ -130,7 +130,7 @@ class EntityDataRequestHandler {
 		array $entityTypesWithoutRdfOutput,
 		$defaultFormat,
 		$maxAge,
-		$useSquids,
+		$useCdn,
 		$frameOptionsHeader
 	) {
 		$this->uriManager = $uriManager;
@@ -144,7 +144,7 @@ class EntityDataRequestHandler {
 		$this->entityTypesWithoutRdfOutput = $entityTypesWithoutRdfOutput;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
-		$this->useSquids = $useSquids;
+		$this->useCdn = $useCdn;
 		$this->frameOptionsHeader = $frameOptionsHeader;
 	}
 
@@ -292,7 +292,7 @@ class EntityDataRequestHandler {
 
 	/**
 	 * Purges the entity data identified by the doc parameter from any HTTP caches.
-	 * Does nothing if $wgUseSquid is not set.
+	 * Does nothing if $wgUseCdn is not set.
 	 *
 	 * @param EntityId $id       The entity
 	 */
