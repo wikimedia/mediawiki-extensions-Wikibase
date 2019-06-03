@@ -252,34 +252,48 @@ class DatabaseItemTermStore implements ItemTermStore {
 	 * @param int[] $termIds
 	 */
 	private function cleanTermsIfUnused( array $termIds ) {
-		$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
-			'wbt_property_terms',
-			'wbpt_term_in_lang_id',
-			[ 'wbpt_term_in_lang_id' => $termIds ],
-			__METHOD__,
-			[
-				'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-				// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
-			]
-		);
-		$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
-			'wbt_item_terms',
-			'wbit_term_in_lang_id',
-			[ 'wbit_term_in_lang_id' => $termIds ],
-			__METHOD__,
-			[
-				'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-				// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
-			]
-		);
+		try {
+			$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
+				'wbt_property_terms',
+				'wbpt_term_in_lang_id',
+				[ 'wbpt_term_in_lang_id' => $termIds ],
+				__METHOD__,
+				[
+					'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+					// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
+				]
+			);
+			$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
+				'wbt_item_terms',
+				'wbit_term_in_lang_id',
+				[ 'wbit_term_in_lang_id' => $termIds ],
+				__METHOD__,
+				[
+					'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+					// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
+				]
+			);
 
-		$this->cleaner->cleanTermIds(
-			array_diff(
-				$termIds,
-				$termIdsUsedInProperties,
-				$termIdsUsedInItems
-			)
-		);
+			$this->cleaner->cleanTermIds(
+				array_diff(
+					$termIds,
+					$termIdsUsedInProperties,
+					$termIdsUsedInItems
+				)
+			);
+		} catch ( DBError $exception ) {
+			$this->loadBalancer->rollbackMasterChanges( __METHOD__ );
+			$this->logger->error(
+				'{method}: DBError while cleaning up to {termIdsCount} terms: {exception}',
+				[
+					'method' => __METHOD__,
+					'termIds' => $termIds,
+					'termIdsCount' => count( $termIds ),
+					'exception' => $exception,
+				]
+			);
+			throw $exception;
+		}
 	}
 
 	public function getTerms( ItemId $itemId ): Fingerprint {

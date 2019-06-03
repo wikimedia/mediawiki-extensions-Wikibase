@@ -44,7 +44,8 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 	 *
 	 * It is the caller’s responsibility ensure
 	 * that the term_in_lang rows are no longer referenced anywhere;
-	 * on the other hand, this class takes care that text_in_lang and text rows
+	 * callers will most likely want to wrap this call in a transaction for that.
+	 * On the other hand, this class takes care that text_in_lang and text rows
 	 * used by other term_in_lang rows are not removed.
 	 *
 	 * @param int[] $termIds
@@ -55,22 +56,7 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			$this->dbw = $this->lb->getConnection( ILoadBalancer::DB_MASTER );
 		}
 
-		try {
-			$this->lb->beginMasterChanges( __METHOD__ );
-			$this->cleanTermInLangIds( $termIds );
-			$this->lb->commitMasterChanges( __METHOD__ );
-		} catch ( DBError $exception ) {
-			$this->lb->rollbackMasterChanges( __METHOD__ );
-			$this->logger->error(
-				'{method}: DBError while cleaning terms {termIds}: {exception}',
-				[
-					'method' => __METHOD__,
-					'termIds' => $termIds,
-					'exception' => $exception
-				]
-			);
-			throw $exception;
-		}
+		$this->cleanTermInLangIds( $termIds );
 	}
 
 	/**
