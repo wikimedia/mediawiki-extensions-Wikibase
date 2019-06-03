@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "07001e63_ea48d6a4",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-03T11:55:25Z",
+      "side": 1,
+      "message": "I see. It does also sound okay to me. It translates anyway to how I thought it would be running (without the fallback option, which doesn\u0027t seem to hurt to have anyway)",
+      "parentUuid": "85527c52_430d948f",
+      "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce70345b_a09c577f",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
