@@ -131,7 +131,7 @@ class SearchEntities extends ApiBase {
 
 	/**
 	 * @param TermSearchResult $match
-	 * @param string[] $props
+	 * @param string[]|null $props
 	 *
 	 * @return array
 	 */

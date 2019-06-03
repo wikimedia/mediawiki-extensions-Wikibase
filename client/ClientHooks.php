@@ -411,7 +411,7 @@ final class ClientHooks {
 
 	/**
 	 * @param WikibaseClient $client
-	 * @param string|null $prefixId
+	 * @param string|null $prefixedId
 	 *
 	 * @return EntityId|null
 	 */

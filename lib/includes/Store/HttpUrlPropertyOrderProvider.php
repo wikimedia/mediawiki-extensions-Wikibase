@@ -30,8 +30,8 @@ class HttpUrlPropertyOrderProvider extends WikiTextPropertyOrderProvider impleme
 
 	/**
 	 * @param string $url
-	 * @param Http $logger
-	 * @param LoggerInterface $http
+	 * @param Http $http
+	 * @param LoggerInterface $logger
 	 */
 	public function __construct( $url, Http $http, LoggerInterface $logger ) {
 		$this->url = $url;

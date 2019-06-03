@@ -197,7 +197,6 @@ class RepositoryDefinitions {
 
 	/**
 	 * @param array[] $repositoryDefinitions
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 *
 	 * @throws InvalidArgumentException
 	 */
