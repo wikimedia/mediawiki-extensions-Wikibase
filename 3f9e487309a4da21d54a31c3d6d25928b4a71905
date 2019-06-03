@@ -46,6 +46,30 @@
       "revId": "3f9e487309a4da21d54a31c3d6d25928b4a71905",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b5dd8df_85dde2bb",
+        "filename": "lib/includes/Store/MultiPropertyTermStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T11:11:20Z",
+      "side": 1,
+      "message": "True, I was only thinking of the first store failing (in which case abort-early is equivalent to rollback – and even this only if we assume the first store is atomic). With your argument, the current behavior makes more sense. (I wasn’t sure how to collect multiple exceptions into one, that’s why I’m dropping them for now. Is there a built-in “collective exception” kind of class?)",
+      "parentUuid": "b7c67de8_e9db323d",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 68
+      },
+      "revId": "3f9e487309a4da21d54a31c3d6d25928b4a71905",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
