@@ -64,7 +64,7 @@ class RebuildPropertyTerms extends Maintenance {
 		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$rebuilder = new PropertyTermsRebuilder(
-			$this->wikibaseRepo->getPropertyTermStore(),
+			$this->wikibaseRepo->getNewPropertyTermStore(),
 			$this->newEntityIdPager(),
 			$this->getReporter(),
 			$this->getErrorReporter(),
