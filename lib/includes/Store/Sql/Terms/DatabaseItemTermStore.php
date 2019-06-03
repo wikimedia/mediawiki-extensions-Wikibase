@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\TermStore\ItemTermStore;
+use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikibase\StringNormalizer;
@@ -100,11 +101,50 @@ class DatabaseItemTermStore implements ItemTermStore {
 			$termsArray['alias'][$language] = $aliases;
 		}
 
+		try {
+			$this->loadBalancer->beginMasterChanges( __METHOD__ );
+			$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $termsArray );
+			$this->loadBalancer->commitMasterChanges( __METHOD__ );
+		} catch ( DBError $exception ) {
+			$this->loadBalancer->rollbackMasterChanges( __METHOD__ );
+			$this->logger->error(
+				'{method}: DBError while storing terms for {itemId}: {exception}',
+				[
+					'method' => __METHOD__,
+					'itemId' => $itemId->getSerialization(),
+					'terms' => $termsArray,
+					'exception' => $exception,
+				]
+			);
+			throw $exception;
+		}
+
+		if ( $termIdsToClean !== [] ) {
+			$this->cleanTermsIfUnused( $termIdsToClean );
+		}
+	}
+
+	/**
+	 * Acquire term IDs for the given terms array,
+	 * store them in wbt_item_terms for the given item ID,
+	 * and return term IDs that are no longer referenced
+	 * and might now need to be cleaned up.
+	 *
+	 * (The returned term IDs might still be used in wbt_item_terms rows
+	 * for other item IDs or elsewhere, and this should be checked just before cleanup.
+	 * However, that may happen in a different transaction than this call.)
+	 *
+	 * @param ItemId $itemId
+	 * @param array $termsArray
+	 * @return int[]
+	 */
+	private function acquireAndInsertTerms( ItemId $itemId, array $termsArray ): array {
 		$oldTermIds = $this->getDbw()->selectFieldValues(
 			'wbt_item_terms',
 			'wbit_term_in_lang_id',
 			[ 'wbit_item_id' => $itemId->getNumericId() ],
-			__METHOD__
+			__METHOD__,
+			[ 'FOR UPDATE' ]
 		);
 		$newTermIds = $this->acquirer->acquireTermIds( $termsArray );
 
@@ -123,6 +163,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 			$rowsToInsert,
 			__METHOD__
 		);
+
 		if ( $termIdsToClean !== [] ) {
 			$this->getDbw()->delete(
 				'wbt_item_terms',
@@ -132,18 +173,55 @@ class DatabaseItemTermStore implements ItemTermStore {
 				],
 				__METHOD__
 			);
-			$this->cleanTermsIfUnused( $termIdsToClean );
 		}
+
+		return $termIdsToClean;
 	}
 
 	public function deleteTerms( ItemId $itemId ) {
 		$this->disallowForeignItemIds( $itemId );
 
+		try {
+			$this->loadBalancer->beginMasterChanges( __METHOD__ );
+			$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
+			$this->loadBalancer->commitMasterChanges( __METHOD__ );
+		} catch ( DBError $exception ) {
+			$this->loadBalancer->rollbackMasterChanges( __METHOD__ );
+			$this->logger->error(
+				'{method}: DBError while deleting terms for {itemId}: {exception}',
+				[
+					'method' => __METHOD__,
+					'itemId' => $itemId->getSerialization(),
+					'exception' => $exception,
+				]
+			);
+			throw $exception;
+		}
+
+		if ( $termIdsToClean !== [] ) {
+			$this->cleanTermsIfUnused( $termIdsToClean );
+		}
+	}
+
+	/**
+	 * Delete wbt_item_terms rows for the given item ID,
+	 * and return term IDs that are no longer referenced
+	 * and might now need to be cleaned up.
+	 *
+	 * (The returned term IDs might still be used in wbt_item_terms rows
+	 * for other item IDs or elsewhere, and this should be checked just before cleanup.
+	 * However, that may happen in a different transaction than this call.)
+	 *
+	 * @param ItemId $itemId
+	 * @return int[]
+	 */
+	private function deleteTermsWithoutClean( ItemId $itemId ): array {
 		$res = $this->getDbw()->select(
 			'wbt_item_terms',
 			[ 'wbit_id', 'wbit_term_in_lang_id' ],
 			[ 'wbit_item_id' => $itemId->getNumericId() ],
-			__METHOD__
+			__METHOD__,
+			[ 'FOR UPDATE' ]
 		);
 
 		$rowIdsToDelete = [];
@@ -159,8 +237,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 				[ 'wbit_id' => $rowIdsToDelete ],
 				__METHOD__
 			);
-			$this->cleanTermsIfUnused( array_values( array_unique( $termIdsToCleanUp ) ) );
 		}
+
+		return array_values( array_unique( $termIdsToCleanUp ) );
 	}
 
 	/**
