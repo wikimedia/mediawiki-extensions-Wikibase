@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "85527c52_430d948f",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T11:20:45Z",
+      "side": 1,
+      "message": "You can see MediaWiki’s interpretation of these values in includes/Defines.php; in short:\n\n* MIGRATION_OLD ⇒ read/write old\n* MIGRATION_WRITE_BOTH ⇒ write both, read new falling back to old\n* MIGRATION_WRITE_NEW ⇒ write new, read new falling back to old\n* MIGRATION_NEW ⇒ read/write new\n\nHowever, in this patch the middle stages are interpreted a bit differently:\n\n* MIGRATION_WRITE_BOTH ⇒  write both, read old falling back to new\n* MIGRATION_WRITE_NEW ⇒ write both, read new falling back to old\n\nI think I’d convinced myself that this was okay, but I’m not sure why anymore.",
+      "parentUuid": "d174f2ce_e9ad17b7",
+      "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce70345b_a09c577f",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "I just noticed, after reading a different patch commit message, that \u0027read from\u0027 is determined here by the order of term stores inside MlutiPropertyTermStore.\n\nThen this likes more okay to me than before. It is still not that explicit (maybe due to MultiPropertyTermStore is a bit more generic compared to, say MigrationPropertyTermStore that accepts only two stores, old and new). But since it is just temporary, it should be fine.",
       "parentUuid": "ce70345b_a09c577f",
+      "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f2e3b81_9b3748d9",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T11:20:45Z",
+      "side": 1,
+      "message": "Yes, the order of the stores determines the read order (though it will fall back to later stores if empty fingerprints are returned).",
+      "parentUuid": "459ad29f_704e78b6",
       "revId": "d3a2cf36dfa265bb226537153c786e2c03678ad8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
