@@ -233,7 +233,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
 	 * @param EntityTitleLookup          $titleLookup
-	 * @param BNodeLabeler               $labeler
+	 * @param BNodeLabeler|null          $labeler
 	 *
 	 * @return static
 	 * @throws InvalidArgumentException

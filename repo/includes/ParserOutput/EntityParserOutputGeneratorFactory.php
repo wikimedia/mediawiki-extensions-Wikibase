@@ -113,8 +113,8 @@ class EntityParserOutputGeneratorFactory {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param Serializer $entitySerializer
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
-	 * @param StatsdDataFactoryInterface $stats
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
+	 * @param StatsdDataFactoryInterface $stats
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by

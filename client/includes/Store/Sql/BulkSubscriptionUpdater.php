@@ -136,7 +136,7 @@ class BulkSubscriptionUpdater {
 	}
 
 	/**
-	 * @param array &$continuation
+	 * @param array|null &$continuation
 	 *
 	 * @return int The number of subscriptions inserted.
 	 */
@@ -178,7 +178,7 @@ class BulkSubscriptionUpdater {
 	}
 
 	/**
-	 * @param array &$continuation
+	 * @param array|null &$continuation
 	 *
 	 * @return string[] A list of entity id strings.
 	 */
@@ -235,7 +235,7 @@ class BulkSubscriptionUpdater {
 	 * @param IResultWrapper $res A result set with the field given by $entityIdField field set for each row.
 	 *        The result is expected to be sorted by entity id, in ascending order.
 	 * @param string $entityIdField The name of the field that contains the entity id.
-	 * @param array &$continuation Updated to an array containing the last EntityId in the result.
+	 * @param array|null &$continuation Updated to an array containing the last EntityId in the result.
 	 *
 	 * @return string[] A list of entity ids strings.
 	 */
@@ -278,7 +278,7 @@ class BulkSubscriptionUpdater {
 	}
 
 	/**
-	 * @param array &$continuation
+	 * @param array|null &$continuation
 	 *
 	 * @return int The number of subscriptions deleted.
 	 */
@@ -298,7 +298,7 @@ class BulkSubscriptionUpdater {
 	/**
 	 * Returns a range of entity IDs to delete, based on this updater's batch size.
 	 *
-	 * @param array &$continuation
+	 * @param array|null &$continuation
 	 *
 	 * @return bool|string[] list( $minId, $maxId, $count ), or false if there is nothing to delete
 	 */

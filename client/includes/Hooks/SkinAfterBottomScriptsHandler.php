@@ -61,7 +61,7 @@ class SkinAfterBottomScriptsHandler {
 	 * @param Title $title
 	 * @param string|null $revisionTimestamp
 	 * @param string $entityConceptUri
-	 * @param File|null $image
+	 * @param File|null $imageFile
 	 * @param string|null $description
 	 *
 	 * @return array
