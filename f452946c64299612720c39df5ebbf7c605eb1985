@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "267160a5_c71abf44",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T13:43:51Z",
+      "side": 1,
+      "message": "Follow-ups in Iccb9983462. (Though it looks like this change can’t be merged anyways, needs a rebase for the DatabaseTypeIdsStore rename.)",
+      "parentUuid": "bfeb9489_75e7acd1",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
