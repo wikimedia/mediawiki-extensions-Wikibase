@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63f63c4f_284fd17a",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-03T11:45:38Z",
+      "side": 1,
+      "message": "the lines above are a bit annoying to have here.. without them everything still works fine, but with extra redundant processing and lookups in the lines below when there\u0027s nothing actually to restore.\n\nit also exposes again master/replica situation to this class, which was a bit cleaner before when this class didn\u0027t need to know much more about that logic than knowing and using ReplicaMasterAwareRecordsIdsAcquirer class. Maybe that can move to that class or something but I do not have any simple way to do that in my mind. thoughts/suggestions?",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
