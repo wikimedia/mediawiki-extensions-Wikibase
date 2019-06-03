@@ -50,6 +50,24 @@
       "revId": "7e2c49e41809d4e560c223d2d9443178982b668e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c56c2f1_32839ce9",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "Yeah, HHVM will think you mean a \\callable class :/",
+      "parentUuid": "fdaf2cc8_448ef4a2",
+      "revId": "7e2c49e41809d4e560c223d2d9443178982b668e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }

@@ -2,6 +2,224 @@
   "comments": [
     {
       "key": {
+        "uuid": "f8563640_e3d03c07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "foreign",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5b523f_2455f44a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "Acquirer",
+      "range": {
+        "startLine": 17,
+        "startChar": 51,
+        "endLine": 17,
+        "endChar": 60
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f70913b_2ae97595",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "in?",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eedf7f4_6babfac6",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "mechanism",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 17
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d4351bb_abf05b5c",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "extra word?",
+      "range": {
+        "startLine": 34,
+        "startChar": 5,
+        "endLine": 34,
+        "endChar": 7
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39efa8fa_88998528",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "absence",
+      "range": {
+        "startLine": 36,
+        "startChar": 69,
+        "endLine": 36,
+        "endChar": 76
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "014f42ba_7532475c",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "I would suggest supplying a default, no-op value here, so that you don’t need to check if the callback is null or not when calling it.",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cda095b_035aba3b",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "there should probably be spaces inside these parentheses",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 38
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e988a2c_63660e79",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "array typehint?",
+      "range": {
+        "startLine": 278,
+        "startChar": 66,
+        "endLine": 278,
+        "endChar": 79
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8cbd397_1ab2d5a5",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "missing __METHOD__ argument",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "63f63c4f_284fd17a",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
         "patchSetId": 3
@@ -13,6 +231,103 @@
       "writtenOn": "2019-06-03T11:45:38Z",
       "side": 1,
       "message": "the lines above are a bit annoying to have here.. without them everything still works fine, but with extra redundant processing and lookups in the lines below when there\u0027s nothing actually to restore.\n\nit also exposes again master/replica situation to this class, which was a bit cleaner before when this class didn\u0027t need to know much more about that logic than knowing and using ReplicaMasterAwareRecordsIdsAcquirer class. Maybe that can move to that class or something but I do not have any simple way to do that in my mind. thoughts/suggestions?",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd394d87_bbff550c",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "I wonder if this should have FOR UPDATE?",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9d8d2fa_499fd3ba",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "missing __METHOD__ argument",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c246bed_e9d5075a",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "array typehint?",
+      "range": {
+        "startLine": 254,
+        "startChar": 49,
+        "endLine": 254,
+        "endChar": 57
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc357487_15116ee5",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "array typehint?",
+      "range": {
+        "startLine": 254,
+        "startChar": 59,
+        "endLine": 254,
+        "endChar": 72
+      },
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09fd5488_4d715980",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTermIdsAcquirerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T15:53:11Z",
+      "side": 1,
+      "message": "unrelated change?",
       "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
