@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "bfeb9489_75e7acd1",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-03T11:06:50Z",
+      "side": 1,
+      "message": "\u003e Yeah, they need to be in the same transaction together, but I guess they could be in a separate transaction from the storeTerms one (as they themselves check that rows are unused)\n\nI think it definitely needs to be in a separate transaction, because we wanted to do it in a post-request update.\n\nThis also made me realize that the “implement post-request cleanup by injecting a deferring TermIdsCleaner into this class” idea isn’t going to work out if the cleanup needs to be part of a transaction that’s begun and committed in deleteTerms() :/\n\n\u003e I mean to say, we tackle race-conditions in a separate thread not necessarily in one change alone ;)\n\nI agree, let’s merge this change for now.",
+      "parentUuid": "a4b40937_919f92ec",
+      "revId": "f452946c64299612720c39df5ebbf7c605eb1985",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79730420_889105ae",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
         "patchSetId": 3
