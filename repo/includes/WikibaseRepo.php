@@ -61,7 +61,6 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\DelegatingEntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\MultiTermStoreWriter;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
@@ -1791,27 +1790,6 @@ class WikibaseRepo {
 	}
 
 	private function newEntityTermStoreWriter(): EntityTermStoreWriter {
-		$termStoreMigrationStage = $this->settings->getSetting( 'tmpTermStoreMigrationStage' );
-
-		if ( $termStoreMigrationStage === MIGRATION_WRITE_BOTH ) {
-			return new MultiTermStoreWriter(
-				$this->getOldEntityTermStoreWriter(),
-				$this->getNewEntityTermStoreWriter()
-			);
-		}
-
-		if ( $termStoreMigrationStage === MIGRATION_WRITE_NEW ) {
-			return $this->getNewEntityTermStoreWriter();
-		}
-
-		return $this->getOldEntityTermStoreWriter();
-	}
-
-	private function getOldEntityTermStoreWriter(): EntityTermStoreWriter {
-		return $this->getStore()->getTermIndex();
-	}
-
-	private function getNewEntityTermStoreWriter(): EntityTermStoreWriter {
 		return new DelegatingEntityTermStoreWriter(
 			$this->getPropertyTermStore(),
 			$this->getItemTermStore()
