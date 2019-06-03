@@ -17,7 +17,7 @@
 		"grunt-stylelint": "0.10.1",
 		"stylelint-config-wikimedia": "0.5.0",
 		"wdio-mediawiki": "0.2.0",
-		"wdio-mocha-framework": "0.6.1",
+		"wdio-mocha-framework": "0.6.4",
 		"wdio-spec-reporter": "0.1.4",
 		"wdio-wikibase": "file:repo/tests/selenium/wdio-wikibase",
 		"webdriverio": "4.13.1"
