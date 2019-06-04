@@ -4,6 +4,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\RepoAccessModule;
 use Wikibase\Settings;
 use Wikibase\SitesModule;
+use Wikibase\ViewModule;
 
 /**
  * @license GPL-2.0-or-later
@@ -34,6 +35,10 @@ return call_user_func( function() {
 			'class' => RepoAccessModule::class,
 		],
 
+		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
+			'class' => ViewModule::class,
+		],
+
 		'wikibase' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.js',
@@ -55,6 +60,7 @@ return call_user_func( function() {
 				'wikibase.sites.js',
 			],
 			'dependencies' => [
+				'mw.config.values.wbRefTabsEnabled',
 				'mw.config.values.wbSiteDetails',
 				'wikibase',
 				'wikibase.Site',
