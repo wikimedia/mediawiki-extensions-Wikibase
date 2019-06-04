@@ -22,6 +22,30 @@
       "revId": "f75201b13919fdea01e7d098b30502cdc5cd6092",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a07a3ad_a77a2eee",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-04T09:15:23Z",
+      "side": 1,
+      "message": "Place your bets if this message will turn out anything close to what it currently reads.",
+      "parentUuid": "35712855_aa61f5af",
+      "range": {
+        "startLine": 131,
+        "startChar": 83,
+        "endLine": 131,
+        "endChar": 85
+      },
+      "revId": "f75201b13919fdea01e7d098b30502cdc5cd6092",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
