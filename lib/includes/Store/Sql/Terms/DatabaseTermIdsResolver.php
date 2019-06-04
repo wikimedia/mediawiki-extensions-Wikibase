@@ -111,8 +111,60 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	}
 
 	public function resolveTermIdsBatches( array $termIdsBatches ): array {
-		// TODO more efficient implementation
-		return array_map( [ $this, 'resolveTermIds' ], $termIdsBatches );
+		$termBatches = [];
+
+		$batchesByTermIds = [];
+		foreach ( $termIdsBatches as $batch => $termIds ) {
+			$termBatches[$batch] = [];
+			foreach ( $termIds as $termId ) {
+				$batchesByTermIds[$termId][] = $batch;
+			}
+		}
+		$allTermIds = array_keys( $batchesByTermIds );
+
+		if ( $allTermIds === [] ) {
+			return $termBatches;
+		}
+
+		$this->logger->debug(
+			'{method}: getting {termCount} rows from replica',
+			[
+				'method' => __METHOD__,
+				'termCount' => count( $allTermIds ),
+			]
+		);
+		$replicaResult = $this->selectTerms( $this->getDbr(), $allTermIds );
+		$this->preloadTypes( $replicaResult );
+		$replicaTermIds = [];
+
+		foreach ( $replicaResult as $row ) {
+			$replicaTermIds[] = $row->wbtl_id;
+			foreach ( $batchesByTermIds[$row->wbtl_id] as $batch ) {
+				$this->addResultTerms( $termBatches[$batch], $row );
+			}
+		}
+
+		if ( $this->allowMasterFallback && count( $replicaTermIds ) !== count( $allTermIds ) ) {
+			$this->logger->info(
+				'{method}: replica only returned {replicaCount} out of {termCount} rows, ' .
+				'falling back to master',
+				[
+					'method' => __METHOD__,
+					'replicaCount' => count( $replicaTermIds ),
+					'termCount' => count( $allTermIds ),
+				]
+			);
+			$masterTermIds = array_values( array_diff( $allTermIds, $replicaTermIds ) );
+			$masterResult = $this->selectTerms( $this->getDbw(), $masterTermIds );
+			$this->preloadTypes( $masterResult );
+			foreach ( $masterResult as $row ) {
+				foreach ( $batchesByTermIds[$row->wbtl_id] as $batch ) {
+					$this->addResultTerms( $termBatches[$batch], $row );
+				}
+			}
+		}
+
+		return $termBatches;
 	}
 
 	private function selectTerms( IDatabase $db, array $termIds ): IResultWrapper {
