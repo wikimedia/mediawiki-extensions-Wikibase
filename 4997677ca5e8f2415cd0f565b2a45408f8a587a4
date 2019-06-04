@@ -301,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "87d931f6_a0b16613",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T10:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "014f42ba_7532475c",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6cda095b_035aba3b",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
         "patchSetId": 3
@@ -458,6 +476,24 @@
       "writtenOn": "2019-06-03T15:53:11Z",
       "side": 1,
       "message": "I wonder if this should have FOR UPDATE?",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "880ef55c_3cb883fc",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T10:07:36Z",
+      "side": 1,
+      "message": "that raises a very good point .. those that exist at this point, are not guaranteed to continue to exist after insertion, even if we use \u0027FOR UPDATE` here (as cleaner will be just locked until this is finished and then will go ahead and remove them).\n\nHopefully such case will be caught by the outer-loop on line 112 (which was implemented that way for such situations). Though I say hopefully as we haven\u0027t really explored all possible scenarios here so we have to check those.",
+      "parentUuid": "bd394d87_bbff550c",
       "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
