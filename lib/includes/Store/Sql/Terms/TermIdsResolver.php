@@ -34,4 +34,19 @@ interface TermIdsResolver {
 	 */
 	public function resolveTermIds( array $termIds ): array;
 
+	/**
+	 * Resolves terms for the given batches of term IDs.
+	 *
+	 * The input is an array of term ID arrays, with arbitrary keys.
+	 * The return value is an array of terms structures, with the same keys,
+	 * where the values belong to the term IDs corresponding to that key.
+	 * One call to this method is effectively equivalent to multiple calls to
+	 * {@link resolveTermIds} with the individual term ID arrays, but may be
+	 * more efficient than that.
+	 *
+	 * @param int[][] $termIdsBatches
+	 * @return array[]
+	 */
+	public function resolveTermIdsBatches( array $termIdsBatches ): array;
+
 }

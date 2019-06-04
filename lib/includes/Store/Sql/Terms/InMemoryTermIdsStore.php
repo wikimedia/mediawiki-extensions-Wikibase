@@ -44,6 +44,10 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 		return $terms;
 	}
 
+	public function resolveTermIdsBatches( array $termIdsBatches ): array {
+		return array_map( [ $this, 'resolveTermIds' ], $termIdsBatches );
+	}
+
 	public function cleanTermIds( array $termIds ) {
 		$termIdsAsKeys = array_flip( $termIds );
 		foreach ( $this->terms as $type => &$termsOfType ) {

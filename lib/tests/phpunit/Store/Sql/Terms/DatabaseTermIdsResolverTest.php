@@ -271,4 +271,53 @@ class DatabaseTermIdsResolverTest extends TestCase {
 		$this->assertEmpty( $resolver->resolveTermIds( [] ) );
 	}
 
+	public function testBatch() {
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'text' ] );
+		$text1Id = $this->db->insertId();
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'Text' ] );
+		$text2Id = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$textInLang1Id = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$textInLang2Id = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$termInLang1Id = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$termInLang2Id = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$termInLang3Id = $this->db->insertId();
+
+		$resolver = new DatabaseTermIdsResolver(
+			$this->typeIdsResolver,
+			new FakeLoadBalancer( [
+				'dbr' => $this->db,
+			] )
+		);
+		$terms = $resolver->resolveTermIdsBatches( [
+			'Q1' => [ $termInLang1Id, $termInLang2Id ],
+			'Q2' => [ $termInLang3Id ]
+		] );
+
+		$this->assertSame( [
+			'label' => [
+				'en' => [ 'text' ],
+			],
+			'description' => [
+				'en' => [ 'text' ],
+			],
+		], $terms['Q1'] );
+		$this->assertSame( [
+			'label' => [
+				'de' => [ 'Text' ],
+			],
+		], $terms['Q2'] );
+	}
+
 }
