@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72cc8e20_18ce25d3",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T19:57:29Z",
+      "side": 1,
+      "message": "nitpick maybe.. I would\u0027ve expected this to be called something like `batchResolveTermIds` or resolveTermIdsInBatch` as it resolves \"grouped\" term ids in \"one\" batch (here batch refers to one access to the backend storage of the implementation) instead of doing multiple ones if one would use resolveTermIds() for each group. does that make any sense to you too?",
+      "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
