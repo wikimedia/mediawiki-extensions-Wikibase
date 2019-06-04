@@ -5,6 +5,7 @@ global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
 	'DataValues\\DataValueFactory' => __DIR__ . '/includes/DataValueFactory.php',
+	'Wikibase\\ByIdDispatchingItemTermStore' => __DIR__ . '/includes/Store/ByIdDispatchingItemTermStore.php',
 	'Wikibase\\Change' => __DIR__ . '/includes/Changes/Change.php',
 	'Wikibase\\ChangeRow' => __DIR__ . '/includes/Changes/ChangeRow.php',
 	'Wikibase\\DiffChange' => __DIR__ . '/includes/Changes/DiffChange.php',
