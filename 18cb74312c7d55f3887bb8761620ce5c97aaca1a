@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0808279_bbac49a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-04T10:40:35Z",
+      "side": 1,
+      "message": "My two typo fixes in here got reverted somehow?",
+      "revId": "18cb74312c7d55f3887bb8761620ce5c97aaca1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9274b0f_35c92ba5",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-04T10:40:35Z",
+      "side": 1,
+      "message": "phpcs wants even trivial no-op functions on multiple lines :/",
+      "revId": "18cb74312c7d55f3887bb8761620ce5c97aaca1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01c99670_39ed3401",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-04T10:40:35Z",
+      "side": 1,
+      "message": "not sure what happened here, the parameter name changed?",
+      "range": {
+        "startLine": 305,
+        "startChar": 45,
+        "endLine": 305,
+        "endChar": 56
+      },
+      "revId": "18cb74312c7d55f3887bb8761620ce5c97aaca1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
