@@ -107,6 +107,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
+				'mw.config.values.wbRefTabsEnabled',
 				'wikibase.datamodel',
 			],
 		],
