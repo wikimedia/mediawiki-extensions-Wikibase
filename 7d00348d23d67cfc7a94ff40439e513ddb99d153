@@ -16,6 +16,24 @@
       "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6551bf43_75441109",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-04T10:45:50Z",
+      "side": 1,
+      "message": "I’m not sure… I guess it would be safe to do, because we re-throw the exception at the end, even if it’s something totally unexpected.",
+      "parentUuid": "74f1fb1d_4d7d1f48",
+      "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
