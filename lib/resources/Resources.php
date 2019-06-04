@@ -4,6 +4,8 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\RepoAccessModule;
 use Wikibase\Settings;
 use Wikibase\SitesModule;
+use Wikibase\ViewModule;
+
 
 /**
  * @license GPL-2.0-or-later
@@ -13,6 +15,7 @@ use Wikibase\SitesModule;
  * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
+
 	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'Wikibase/lib/resources',
@@ -32,6 +35,10 @@ return call_user_func( function() {
 
 		'mw.config.values.wbRepo' => $moduleTemplate + [
 			'class' => RepoAccessModule::class,
+		],
+
+		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
+			'class' => ViewModule::class,
 		],
 
 		'wikibase' => $moduleTemplate + [
