@@ -34,6 +34,24 @@
       "revId": "80d9385b977d800c92f3df883120a33891dc6d44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4339c2a_e3895753",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-04T10:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40140c4f_7841a2ea",
+      "revId": "80d9385b977d800c92f3df883120a33891dc6d44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
