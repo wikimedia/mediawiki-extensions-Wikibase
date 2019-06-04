@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a9effc0_875d8c4d",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T10:44:13Z",
+      "side": 1,
+      "message": "shouldn\u0027t this begin and commit the transactions too?",
+      "revId": "80d9385b977d800c92f3df883120a33891dc6d44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
