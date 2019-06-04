@@ -244,6 +244,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Modules\\MediaWikiConfigModule' => __DIR__ . '/includes/Modules/MediaWikiConfigModule.php',
 	'Wikibase\\Repo\\Modules\\MediaWikiConfigValueProvider' => __DIR__ . '/includes/Modules/MediaWikiConfigValueProvider.php',
 	'Wikibase\\Repo\\Modules\\PropertyValueExpertsModule' => __DIR__ . '/includes/Modules/PropertyValueExpertsModule.php',
+	'Wikibase\\Repo\\Modules\\ViewModule' => __DIR__ . '/includes/Modules/ViewModule.php',
 	'Wikibase\\Repo\\Modules\\SettingsValueProvider' => __DIR__ . '/includes/Modules/SettingsValueProvider.php',
 	'Wikibase\\Repo\\Notifications\\ChangeNotificationSender' => __DIR__ . '/includes/Notifications/ChangeNotificationSender.php',
 	'Wikibase\\Repo\\Notifications\\ChangeNotifier' => __DIR__ . '/includes/Notifications/ChangeNotifier.php',

@@ -2,6 +2,7 @@
 
 use Wikibase\Repo\Modules\DataTypesModule;
 use Wikibase\Repo\Modules\MediaWikiConfigModule;
+use Wikibase\Repo\Modules\ViewModule;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -58,6 +59,11 @@ return call_user_func( function() {
 					'geoShapeStorageApiEndpointUrl'
 				);
 			},
+		],
+
+		// Temporary, see: T199197
+		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
+			'class' => ViewModule::class,
 		],
 
 		'mw.config.values.wbTabularDataStorageApiEndpoint' => $moduleTemplate + [
