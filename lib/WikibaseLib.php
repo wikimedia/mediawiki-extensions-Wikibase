@@ -35,9 +35,9 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-// Needs to be 1.26c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
+// Needs to be 1.31c because version_compare() works in confusing ways.
+if ( version_compare( $GLOBALS['wgVersion'], '1.31c', '<' ) ) {
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.31 or above.\n" );
 }
 
 define( 'WBL_VERSION', '0.5 alpha' );
