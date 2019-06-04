@@ -34,4 +34,20 @@ interface TermIdsResolver {
 	 */
 	public function resolveTermIds( array $termIds ): array;
 
+	/**
+	 * Resolves terms for the given groups of term IDs.
+	 *
+	 * The input is an array of term ID arrays, with arbitrary keys.
+	 * The return value is an array of terms structures, with the same keys,
+	 * where the values belong to the term IDs corresponding to that key.
+	 * One call to this method is effectively equivalent to multiple calls to
+	 * {@link resolveTermIds} with the individual term ID arrays, but may be
+	 * more efficient than that, e. g. resolving all the term IDs in one batch
+	 * and then grouping them correctly afterwards.
+	 *
+	 * @param int[][] $groupedTermIds
+	 * @return array[]
+	 */
+	public function resolveGroupedTermIds( array $groupedTermIds ): array;
+
 }

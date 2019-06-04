@@ -135,6 +135,45 @@ class InMemoryTermIdsStoreTest extends TestCase {
 		], $terms2 );
 	}
 
+	public function testResolveGroupedTermIds_returnsCorrectGroups() {
+		$termIdsStore = new InMemoryTermIdsStore();
+
+		$termIds1 = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'en' => 'some label',
+				'de' => 'eine Beschriftung',
+			],
+		] );
+		$termIds2 = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'de' => 'eine Beschriftung',
+			],
+			'alias' => [
+				'de' => [ 'ein Alias', 'noch ein Alias' ],
+			],
+		] );
+
+		$terms = $termIdsStore->resolveGroupedTermIds( [
+			'terms1' => $termIds1,
+			'terms2' => $termIds2,
+		] );
+
+		$this->assertSame( [
+			'label' => [
+				'en' => [ 'some label' ],
+				'de' => [ 'eine Beschriftung' ],
+			],
+		], $terms['terms1'] );
+		$this->assertSame( [
+			'label' => [
+				'de' => [ 'eine Beschriftung' ],
+			],
+			'alias' => [
+				'de' => [ 'ein Alias', 'noch ein Alias' ],
+			],
+		], $terms['terms2'] );
+	}
+
 	public function testCleanTermIds_doesNotReuseIds() {
 		$termIdsStore = new InMemoryTermIdsStore();
 

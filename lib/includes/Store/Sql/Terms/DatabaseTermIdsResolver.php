@@ -110,6 +110,11 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		return $terms;
 	}
 
+	public function resolveGroupedTermIds( array $groupedTermIds ): array {
+		// TODO more efficient implementation
+		return array_map( [ $this, 'resolveTermIds' ], $groupedTermIds );
+	}
+
 	private function selectTerms( IDatabase $db, array $termIds ): IResultWrapper {
 		return $db->select(
 			[ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ],
