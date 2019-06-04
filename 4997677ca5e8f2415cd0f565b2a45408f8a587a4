@@ -500,6 +500,24 @@
     },
     {
       "key": {
+        "uuid": "2202ba3b_b5cbfb8c",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-04T10:29:39Z",
+      "side": 1,
+      "message": "Hm, I’m not sure if the loop in L112 helps here. If we did use FOR UPDATE here, I believe the loop would just mean that the cleaner might stay locked for longer, since the loop is still part of the same transaction. Without FOR UPDATE… no idea.\n\nHowever, the cleaner actually shouldn’t clean these IDs anyways, right? All the IDs in $idsToRestore should now be referenced in wbt_item_terms (or wherever) thanks to the callback, and they can’t be deleted from there either until this transaction finishes, so nobody else should call the cleaner *again* with those IDs.\n\nSince you’re right that FOR UPDATE alone doesn’t help us here (I didn’t think that through), I guess we should leave it out.",
+      "parentUuid": "880ef55c_3cb883fc",
+      "revId": "4997677ca5e8f2415cd0f565b2a45408f8a587a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9d8d2fa_499fd3ba",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 3
