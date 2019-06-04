@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65e34838_31e93d50",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T16:57:01Z",
+      "side": 1,
+      "message": "So this is how it looks now with split inserts. I don\u0027t like it much, so the alternative I can think of is to move unique records logic outside of this class and let its users do that (or encapsulate it inside another utility class). Then we can in users assert that ids to reuse are actually injected prior to using this class, and passed through the $neededRecrods already (removing all this logic from here).",
+      "revId": "e332ec04df4b15012a7c5e261aa16719871939ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
