@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d1a78f0_e5e59ab2",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T23:20:22Z",
+      "side": 1,
+      "message": "(better to read this comment after full-review is done)\n\nnow that I\u0027m looking at this again, it may be possible to extract restoration logic outside of the acquirer. this means, the user of acquirer should know whether restoration is needed (as in that context the user probably knows whether concurrent cleanups are happening at all).\n\nThe effect of that would be:\n- introduce a class, say `DatabaseDeletedTermIdsRestorer` that has this function public and all bits needed for it\n- no need for a callback in acquirer\n- the user of this acquirer implementation will have to be provided by means to know about the Restorer class and logic so that it knows that it needs to run it.\n\nThe advantages:\n- simplifies again this class\n- avoids running restoration logic always, even when it might not be needed (arguably in such cases the overhead is low, but it is still at least one select query on master, so..)\n\nThe disadvantages:\n- will need a new implementation of TermIdsAcquirer, say `ConcurrencyAwareDatabaseTermIdsAcquirer`, that knows about this implementation and the Restorer class, and that provides the callback. Hmm not sure now that that\u0027s an advantage, but it might just mean another layer in the decoration hierarchy (that isn\u0027t bad, is it?).\n- there might not be a use-case when concurrency isn\u0027t available? (and such change will be YAGNI)\n\n----\n\nI think this can be anyway done either as a follow up change if time allows or considered much later as possible improvement when this needs to be touched. So wouldn\u0027t do it right now.",
+      "revId": "dc48c0a85fadc4610cc1b4439c90a7b3bf52fda0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35d8df0c_6b196922",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T23:20:22Z",
+      "side": 1,
+      "message": "better method name suggestion?",
+      "revId": "dc48c0a85fadc4610cc1b4439c90a7b3bf52fda0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
