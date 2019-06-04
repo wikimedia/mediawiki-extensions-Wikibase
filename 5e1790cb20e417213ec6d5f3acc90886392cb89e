@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8719ca49_e954f563",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-04T15:51:26Z",
+      "side": 1,
+      "message": "FOR UPDATE? Otherwise some of these might be inserted while we are going, leading to a key conflict above.",
+      "revId": "5e1790cb20e417213ec6d5f3acc90886392cb89e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e82bbced_2637563b",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-04T15:51:26Z",
+      "side": 1,
+      "message": "How will the MW DB layer react when the key $this-\u003eidColumn is sometimes set, but not always? I suppose it will fill it with null which should be fine?",
+      "revId": "5e1790cb20e417213ec6d5f3acc90886392cb89e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
