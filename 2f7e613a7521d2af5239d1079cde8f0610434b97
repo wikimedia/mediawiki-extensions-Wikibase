@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "140133e4_70a0a1de",
+        "filename": "lib/tests/phpunit/Store/ByIdDispatchingItemTermStoreTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T13:53:24Z",
+      "side": 1,
+      "message": "took me quite some time to read and understand this test.. but it could be that it might take some amount of time if testing different methods were tested in separate test cases.",
+      "revId": "2f7e613a7521d2af5239d1079cde8f0610434b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
