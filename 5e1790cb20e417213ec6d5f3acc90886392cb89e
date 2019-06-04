@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3b5d31d3_23703773",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T16:12:56Z",
+      "side": 1,
+      "message": "Not sure I get this.. here\u0027s my thought as far as I understand the comment: why some of these will be inserted by others if they exist already (assuming that other are as well checking for existence first as they should)?",
+      "parentUuid": "8719ca49_e954f563",
+      "revId": "5e1790cb20e417213ec6d5f3acc90886392cb89e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e82bbced_2637563b",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2019-06-04T15:51:26Z",
       "side": 1,
       "message": "How will the MW DB layer react when the key $this-\u003eidColumn is sometimes set, but not always? I suppose it will fill it with null which should be fine?",
+      "revId": "5e1790cb20e417213ec6d5f3acc90886392cb89e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d390e55_9202c70d",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-04T16:12:56Z",
+      "side": 1,
+      "message": "it might crash depending on the implementation..\n\nFrom IDatabase.php:922:\n\" An array with numeric keys, holding a list of associative arrays.\n\t *     This causes a multi-row INSERT on DBMSs that support it. The keys in\n\t *     each subarray must be identical to each other, and in the same order.\"\n\nwe will have split it into two separate inserts for ones with ids and ones without.. or I\u0027m thinking as well of removing this function entirely and rely on the consumer to supply id columns in the passed $neededRecords at the entry point (acquireIds) instead.",
+      "parentUuid": "e82bbced_2637563b",
       "revId": "5e1790cb20e417213ec6d5f3acc90886392cb89e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
