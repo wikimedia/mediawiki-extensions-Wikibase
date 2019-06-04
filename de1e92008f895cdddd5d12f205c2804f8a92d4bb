@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "700ec40c_a4fb6a9c",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4983
+      },
+      "writtenOn": "2019-06-04T19:04:09Z",
+      "side": 1,
+      "message": "Words „Странице” and „Стране” are interchangeable and both are regularly used in translations to Serbian.",
+      "parentUuid": "9d3a98b0_ff56bab0",
+      "range": {
+        "startLine": 117,
+        "startChar": 25,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "de1e92008f895cdddd5d12f205c2804f8a92d4bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e096d4f2_23da80fb",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4983
+      },
+      "writtenOn": "2019-06-04T19:04:09Z",
+      "side": 1,
+      "message": "No, QueryBadges does not translate to „ЗначкеУпита”",
+      "parentUuid": "16d24cf7_5119ca82",
+      "range": {
+        "startLine": 117,
+        "startChar": 45,
+        "endLine": 117,
+        "endChar": 59
+      },
+      "revId": "de1e92008f895cdddd5d12f205c2804f8a92d4bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f04968f7_730199fa",
         "filename": "client/WikibaseClient.i18n.alias.php",
         "patchSetId": 2
