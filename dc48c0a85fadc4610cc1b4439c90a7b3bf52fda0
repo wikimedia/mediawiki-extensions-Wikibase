@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "50f5694a_2961d9c7",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-05T00:37:45Z",
+      "side": 1,
+      "message": "correction, in first disadvantage:\n.. Hmm not sure now that that\u0027s **a disadvantage**, ...",
+      "parentUuid": "6d1a78f0_e5e59ab2",
+      "revId": "dc48c0a85fadc4610cc1b4439c90a7b3bf52fda0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35d8df0c_6b196922",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
         "patchSetId": 15
