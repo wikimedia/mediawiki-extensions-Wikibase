@@ -70,6 +70,24 @@
       "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a6482ac_e1a98de3",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-05T12:11:25Z",
+      "side": 1,
+      "message": "wow you submitted your reply before I submitted mine .. haha \"great minds think alike\" is so due here :P\n\nso for the method name, maybe resolveGroupedTermIds sounds the most straigh-forward to the meaning to me!",
+      "parentUuid": "6bca42a8_c7e9c407",
+      "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
