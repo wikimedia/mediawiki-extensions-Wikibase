@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c235485_12954961",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-05T12:20:50Z",
+      "side": 1,
+      "message": "Hm, this will still write to both, is that intended?",
+      "revId": "9edb8c5f144a05aaec5a95247c8411d67b6ba640",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
