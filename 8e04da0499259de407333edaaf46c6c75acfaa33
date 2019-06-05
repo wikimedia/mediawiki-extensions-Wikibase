@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9dab4fc2_903de8bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-05T17:33:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e01f8eb_67a1f506",
+      "revId": "8e04da0499259de407333edaaf46c6c75acfaa33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24a565f3_3dec484d",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2019-06-05T16:23:14Z",
       "side": 1,
       "message": "Since the rest of the message comes from `wikibase-shortcopyrightwarning`, this should be called `wikibase-shortcopyrightwarning-heading` IMO.",
+      "range": {
+        "startLine": 499,
+        "startChar": 2,
+        "endLine": 499,
+        "endChar": 35
+      },
+      "revId": "8e04da0499259de407333edaaf46c6c75acfaa33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80050e5a_89a7703d",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-05T17:33:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24a565f3_3dec484d",
       "range": {
         "startLine": 499,
         "startChar": 2,
