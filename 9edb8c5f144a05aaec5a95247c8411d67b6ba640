@@ -16,6 +16,24 @@
       "revId": "9edb8c5f144a05aaec5a95247c8411d67b6ba640",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "118edc9c_157bf760",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-05T12:34:10Z",
+      "side": 1,
+      "message": "yeap it will write to both, and you are right it is not exactly matching the original migration plan .. we originally thought we would slow down the growth of wb_terms by writing those first 10% only to new schema at this stage, but it does not seem that the growth rate of wb_terms currently is that dramatic, so probably keep writing to both until we switch to next stage won\u0027t be a big deal.",
+      "parentUuid": "6c235485_12954961",
+      "revId": "9edb8c5f144a05aaec5a95247c8411d67b6ba640",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
