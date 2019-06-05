@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Tests\Store;
 
 use CirrusSearch;

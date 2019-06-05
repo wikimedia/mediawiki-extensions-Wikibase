@@ -20,8 +20,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\DataTypeValidatorFactory;
 
 /**
- * Class SnakValidator for validating Snaks.
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */

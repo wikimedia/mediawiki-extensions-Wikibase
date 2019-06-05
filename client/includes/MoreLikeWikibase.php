@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client;
 
 use CirrusSearch\Query\MoreLikeFeature;
