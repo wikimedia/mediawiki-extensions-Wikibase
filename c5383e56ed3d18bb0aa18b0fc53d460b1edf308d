@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51d4b2fa_20e72ab7",
+        "filename": "repo/includes/Specials/SpecialSetAliases.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 6708
+      },
+      "writtenOn": "2019-06-05T09:31:29Z",
+      "side": 1,
+      "message": "I can\u0027t get logging to work locally. I have the right log file configured in my LocalSettings and was able to see log output in the past. It doesn\u0027t work in this case. Any ideas?",
+      "revId": "c5383e56ed3d18bb0aa18b0fc53d460b1edf308d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
