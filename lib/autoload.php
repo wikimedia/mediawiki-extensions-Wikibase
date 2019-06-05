@@ -172,6 +172,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\DatabaseTypeIdsStore' => __DIR__ . '/includes/Store/Sql/Terms/DatabaseTypeIdsStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\InMemoryTermIdsStore' => __DIR__ . '/includes/Store/Sql/Terms/InMemoryTermIdsStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\InMemoryTypeIdsStore' => __DIR__ . '/includes/Store/Sql/Terms/InMemoryTypeIdsStore.php',
+	'Wikibase\\Lib\\Store\\Sql\\Terms\\PropertyTermLookup' => __DIR__ . '/includes/Store/Sql/Terms/PropertyTermLookup.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\StaticTypeIdsStore' => __DIR__ . '/includes/Store/Sql/Terms/StaticTypeIdsStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TermIdsAcquirer' => __DIR__ . '/includes/Store/Sql/Terms/TermIdsAcquirer.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TermIdsCleaner' => __DIR__ . '/includes/Store/Sql/Terms/TermIdsCleaner.php',
