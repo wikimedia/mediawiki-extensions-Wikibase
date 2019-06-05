@@ -88,6 +88,24 @@
       "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16820b7_00ea9bb3",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-05T10:55:43Z",
+      "side": 1,
+      "message": "\u003e Other cases of transaction start/end methods, like those of LoadBalancer and LB-managed Database instances, are managed by LBFactory alone.\n\nOh, that’s good to know, thanks. Would be even better if it was clear from the documentation :/\n\nI’ll upload a follow-up patch to inject an ILBFactory instead, I guess.",
+      "parentUuid": "c1996261_8434bbe0",
+      "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
