@@ -57,6 +57,10 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		$this->logger = $logger ?: new NullLogger();
 	}
 
+	public function resolveTermIds( array $termIds ): array {
+		return $this->resolveGroupedTermIds( [ '' => $termIds ] )[''];
+	}
+
 	/*
 	 * Term data is first read from the replica; if that returns less rows than we asked for, then
 	 * there are some new rows in the master that were not yet replicated, and we fall back to the
@@ -66,50 +70,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	 * got the list of term IDs they pass into this method from: if it’s from a replica, they may
 	 * still see outdated data overall.
 	 */
-	public function resolveTermIds( array $termIds ): array {
-		$terms = [];
-
-		if ( $termIds === [] ) {
-			return $terms;
-		}
-
-		$this->logger->debug(
-			'{method}: getting {termCount} rows from replica',
-			[
-				'method' => __METHOD__,
-				'termCount' => count( $termIds ),
-			]
-		);
-		$replicaResult = $this->selectTerms( $this->getDbr(), $termIds );
-		$this->preloadTypes( $replicaResult );
-		$replicaTermIds = [];
-
-		foreach ( $replicaResult as $row ) {
-			$replicaTermIds[] = $row->wbtl_id;
-			$this->addResultTerms( $terms, $row );
-		}
-
-		if ( $this->allowMasterFallback && count( $replicaTermIds ) !== count( $termIds ) ) {
-			$this->logger->info(
-				'{method}: replica only returned {replicaCount} out of {termCount} rows, ' .
-					'falling back to master',
-				[
-					'method' => __METHOD__,
-					'replicaCount' => count( $replicaTermIds ),
-					'termCount' => count( $termIds ),
-				]
-			);
-			$masterTermIds = array_values( array_diff( $termIds, $replicaTermIds ) );
-			$masterResult = $this->selectTerms( $this->getDbw(), $masterTermIds );
-			$this->preloadTypes( $masterResult );
-			foreach ( $masterResult as $row ) {
-				$this->addResultTerms( $terms, $row );
-			}
-		}
-
-		return $terms;
-	}
-
 	public function resolveGroupedTermIds( array $groupedTermIds ): array {
 		$groupedTerms = [];
 
