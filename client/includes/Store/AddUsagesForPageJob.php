@@ -19,16 +19,6 @@ use Wikimedia\Assert\Assert;
 class AddUsagesForPageJob extends Job {
 
 	/**
-	 * @var integer
-	 */
-	private $pageId;
-
-	/**
-	 * @var EntityUsage[]
-	 */
-	private $usages;
-
-	/**
 	 * @var UsageUpdater
 	 */
 	private $usageUpdater;
@@ -87,9 +77,6 @@ class AddUsagesForPageJob extends Job {
 			$params['usages'],
 			'$params["usages"]' );
 
-		$this->pageId = $params['pageId'];
-		$this->usages = $params['usages'];
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$usageUpdater = $wikibaseClient->getStore()->getUsageUpdater();
 		$idParser = $wikibaseClient->getEntityIdParser();
@@ -120,7 +107,7 @@ class AddUsagesForPageJob extends Job {
 				$usageArray['aspect'],
 				$usageArray['modifier']
 			);
-		}, $this->usages );
+		}, $this->params['usages'] );
 
 		return $usages;
 	}
@@ -132,7 +119,7 @@ class AddUsagesForPageJob extends Job {
 	 */
 	public function run() {
 		$this->usageUpdater->addUsagesForPage(
-			$this->pageId,
+			$this->params['pageId'],
 			$this->getUsages()
 		);
 
