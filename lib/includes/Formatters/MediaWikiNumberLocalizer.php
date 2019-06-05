@@ -32,8 +32,7 @@ class MediaWikiNumberLocalizer implements NumberLocalizer {
 	 * @return string
 	 */
 	public function localizeNumber( $number ) {
-		$localizedNumber = $this->language->formatNum( $number );
-		return $localizedNumber;
+		return $this->language->formatNum( $number );
 	}
 
 }

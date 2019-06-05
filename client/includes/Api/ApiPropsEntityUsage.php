@@ -142,10 +142,10 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 
 		if ( !is_null( $params['continue'] ) ) {
 			$db = $this->getDB();
-			$continueParams = explode( '|', $params['continue'] );
-			$pageContinue = intval( $continueParams[0] );
-			$entityContinue = $db->addQuotes( $continueParams[1] );
-			$aspectContinue = $db->addQuotes( $continueParams[2] );
+			list( $pageContinueSql, $entityContinueSql, $aspectContinueSql ) = explode( '|', $params['continue'], 3 );
+			$pageContinue = (int)$pageContinueSql;
+			$entityContinue = $db->addQuotes( $entityContinueSql );
+			$aspectContinue = $db->addQuotes( $aspectContinueSql );
 			// Filtering out results that have been shown already and
 			// starting the query from where it ended.
 			$this->addWhere(
