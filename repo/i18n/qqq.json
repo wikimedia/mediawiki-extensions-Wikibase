@@ -495,5 +495,6 @@
 	"wikibase-search-config-notfound": "Error message displayed when configured search profile can not be loaded",
 	"wikibase-search-config-badclass": "Error message displayed when configured query builder can not be found or has wrong type",
 	"wikibase-refresh-for-missing-datatype": "Error message displayed when a value data type could not be retrieved from client-side loaded datatypes and the reason may be an outdated cached script",
-	"wikibase-outdated-client-script": "Generic title used for error messages where refreshing the page might solve the original error"
+	"wikibase-outdated-client-script": "Generic title used for error messages where refreshing the page might solve the original error",
+	"wikibase-shortcopyrightwarning-heading": "Heading of the license agreement warning.\nSee also:\n* {{msg-mw|wikibase-shortcopyrightwarning}}"
 }
