@@ -52,6 +52,24 @@
       "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90fa8c58_b266f24a",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-05T10:43:32Z",
+      "side": 1,
+      "message": "I’m not sure what you mean. This code is based on https://www.mediawiki.org/wiki/Manual:Database_access#Lock_contention … looking at LoadBalancer.php, it looks like we might need finalizeMasterChanges() + approveMasterChanges(), but does that mean that the documentation is wrong?",
+      "parentUuid": "06ab2dcb_9b24d16d",
+      "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
