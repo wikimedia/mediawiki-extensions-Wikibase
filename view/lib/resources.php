@@ -1,4 +1,5 @@
 <?php
+
 use Wikibase\View\Termbox\TermboxModule;
 
 /**

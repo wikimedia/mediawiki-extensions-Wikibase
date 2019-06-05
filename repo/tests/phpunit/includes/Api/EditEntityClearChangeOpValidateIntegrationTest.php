@@ -26,8 +26,6 @@ use Wikibase\Store;
  */
 class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase {
 
-	use PHPUnit4And6Compat;
-
 	public function testGivenNotClearedEntity_validateReturnsSuccess() {
 		$item = $this->newItem();
 

@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
-use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\Scribunto\WikitextPreprocessingSnakFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -26,7 +25,6 @@ use Wikibase\Lib\SnakFormatter;
  * @author Marius Hoch
  */
 class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param Snak $expectedSnak

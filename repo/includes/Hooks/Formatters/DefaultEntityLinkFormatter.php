@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Hooks\Formatters;
 
 use HtmlArmor;
