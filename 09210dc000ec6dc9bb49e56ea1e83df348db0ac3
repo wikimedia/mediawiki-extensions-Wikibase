@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "15299f20_62233ddd",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-05T14:14:30Z",
+      "side": 1,
+      "message": "Could be done, yeah. I kind of like the idea that resolveTermIds() would stay around as a more readable version of resolveGroupedTermIds(), instead of having to read through the grouping stuff just to figure out how the function works… but on the other hand, that adds a big risk that the two functions will start getting out of sync.\n\nI’ll upload a separate patch to make resolveTermIds() wrap resolveGroupedTermIds().",
+      "parentUuid": "45de9bf2_b635196d",
+      "revId": "09210dc000ec6dc9bb49e56ea1e83df348db0ac3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2df3df0f_f97dd4f5",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-06-05T13:40:41Z",
       "side": 1,
       "message": "This seems to exploit the fact that PHP treats numerical strings as numbers when used as access keys… convenient, yet scary.",
+      "revId": "09210dc000ec6dc9bb49e56ea1e83df348db0ac3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ffad9d8_735e610f",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-05T14:14:30Z",
+      "side": 1,
+      "message": "I’m not sure what you mean… shouldn’t $row-\u003ewbtl_id be an int? Or does IDatabase turn int columns into string values?",
+      "parentUuid": "2df3df0f_f97dd4f5",
       "revId": "09210dc000ec6dc9bb49e56ea1e83df348db0ac3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
