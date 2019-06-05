@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45de9bf2_b635196d",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-05T13:40:41Z",
+      "side": 1,
+      "message": "Why not turn this into a resolveGroupedTermIds-wrapper? return $this-\u003eresolveGroupedTermIds( [ \u0027foo\u0027 \u003d\u003e $termIds ] )[\u0027foo\u0027];",
+      "revId": "09210dc000ec6dc9bb49e56ea1e83df348db0ac3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df3df0f_f97dd4f5",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-05T13:40:41Z",
+      "side": 1,
+      "message": "This seems to exploit the fact that PHP treats numerical strings as numbers when used as access keys… convenient, yet scary.",
+      "revId": "09210dc000ec6dc9bb49e56ea1e83df348db0ac3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54c6e249_2ee12d37",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTermIdsResolverTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-05T13:40:41Z",
+      "side": 1,
+      "message": "Could even use a phpunit interface mock here to make sure this doesn\u0027t use the DB… but then again, why bother?",
+      "revId": "09210dc000ec6dc9bb49e56ea1e83df348db0ac3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
