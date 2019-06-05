@@ -236,10 +236,10 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 */
 	private function addContinue( $continueParam ) {
 		$db = $this->getDB();
-		$continueParams = explode( '|', $continueParam );
-		$pageContinueSql = intval( $continueParams[0] );
-		$entityContinueSql = $db->addQuotes( $continueParams[1] );
-		$aspectContinueSql = $db->addQuotes( $continueParams[2] );
+		list( $pageContinueSql, $entityContinueSql, $aspectContinueSql ) = explode( '|', $continueParam, 3 );
+		$pageContinueSql = (int)$pageContinueSql;
+		$entityContinueSql = $db->addQuotes( $entityContinueSql );
+		$aspectContinueSql = $db->addQuotes( $aspectContinueSql );
 		// Filtering out results that have been shown already and
 		// starting the query from where it ended.
 		$this->addWhere(

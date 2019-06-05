@@ -113,8 +113,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	}
 
 	private function getTextParam( $name ) {
-		$value = $this->getRequest()->getText( $name, '' );
-		return trim( $value );
+		return trim( $this->getRequest()->getText( $name, '' ) );
 	}
 
 	/**

@@ -201,13 +201,7 @@ class EntityUsage {
 	 * @return string[] list( $aspect, $modifier )
 	 */
 	public static function splitAspectKey( $aspectKey ) {
-		$parts = explode( '.', $aspectKey, 2 );
-
-		if ( !isset( $parts[1] ) ) {
-			$parts[1] = null;
-		}
-
-		return $parts;
+		return array_pad( explode( '.', $aspectKey, 2 ), 2, null );
 	}
 
 	/**

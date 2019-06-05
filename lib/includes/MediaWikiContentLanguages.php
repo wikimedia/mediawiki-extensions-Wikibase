@@ -22,8 +22,7 @@ class MediaWikiContentLanguages implements ContentLanguages {
 	 * @return string[] Array of language codes supported as content language
 	 */
 	public function getLanguages() {
-		$languageCodes = array_keys( $this->getLanguageMap() );
-		return $languageCodes;
+		return array_keys( $this->getLanguageMap() );
 	}
 
 	/**
