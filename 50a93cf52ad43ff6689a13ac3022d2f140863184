@@ -16,6 +16,24 @@
       "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5877cd18_b7eeda76",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-05T10:20:17Z",
+      "side": 1,
+      "message": "Yeah I wasn’t too happy with the name either… but in the database implementation we need a name for the key of the outer array, and currently I’ve used “batch” for that. With `batchResolveTermIds` or `resolveTermIdsInBatch` that doesn’t work so well anymore, I think. I’ll try to see if I can find another pattern that works.",
+      "parentUuid": "72cc8e20_18ce25d3",
+      "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
