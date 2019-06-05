@@ -39,16 +39,8 @@ class FakeLoadBalancer extends LoadBalancer {
 		}
 	}
 
-	public function beginMasterChanges( $fname = __METHOD__ ) {
-		// no-op
-	}
-
-	public function commitMasterChanges( $fname = __METHOD__ ) {
-		// no-op
-	}
-
-	public function rollbackMasterChanges( $fname = __METHOD__ ) {
-		// no-op
+	public function forEachOpenMasterConnection( $callback, array $params = [] ) {
+		( $callback )( $this->dbw, ...$params );
 	}
 
 	public function getLocalDomainID() {

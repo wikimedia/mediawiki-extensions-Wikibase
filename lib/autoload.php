@@ -237,6 +237,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\TermIndexEntry' => __DIR__ . '/includes/TermIndexEntry.php',
 	'Wikibase\\TermIndexItemTermStore' => __DIR__ . '/includes/Store/TermIndexItemTermStore.php',
 	'Wikibase\\TermIndexPropertyTermStore' => __DIR__ . '/includes/Store/TermIndexPropertyTermStore.php',
+	'Wikibase\\TermStore\\MediaWiki\\Tests\\Util\\FakeLBFactory' => __DIR__ . '/tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php',
 	'Wikibase\\TermStore\\MediaWiki\\Tests\\Util\\FakeLoadBalancer' => __DIR__ . '/tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
 	'Wikibase\\WikibaseSettings' => __DIR__ . '/includes/WikibaseSettings.php',
 ];
