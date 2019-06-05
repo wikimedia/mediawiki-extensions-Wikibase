@@ -34,6 +34,24 @@
       "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01c6e9f3_c7baee89",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-05T12:03:50Z",
+      "side": 1,
+      "message": "I think “group” would work well as a term here, though I’m not yet sure what the method name should be. Suggestions:\n\n* resolveTermIdsGroups\n* resolveTermIdGroups\n* groupResolveTermIds\n* resolveTermIdsInGroups\n* resolveGroupedTermIds",
+      "parentUuid": "5877cd18_b7eeda76",
+      "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
