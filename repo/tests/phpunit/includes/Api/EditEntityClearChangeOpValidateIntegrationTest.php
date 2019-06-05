@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use PHPUnit4And6Compat;
 use ReflectionClass;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -25,8 +24,6 @@ use Wikibase\Store;
  * @license GPL-2.0-or-later
  */
 class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase {
-
-	use PHPUnit4And6Compat;
 
 	public function testGivenNotClearedEntity_validateReturnsSuccess() {
 		$item = $this->newItem();
