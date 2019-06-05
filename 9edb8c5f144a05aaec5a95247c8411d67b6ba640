@@ -34,6 +34,24 @@
       "revId": "9edb8c5f144a05aaec5a95247c8411d67b6ba640",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6c01088_b41e5991",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-05T12:42:18Z",
+      "side": 1,
+      "message": "Sounds sensible, thanks for the explanation.",
+      "parentUuid": "118edc9c_157bf760",
+      "revId": "9edb8c5f144a05aaec5a95247c8411d67b6ba640",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
