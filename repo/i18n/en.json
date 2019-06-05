@@ -460,5 +460,6 @@
 	"wikibase-search-config-notfound": "Fulltext search configuration not found: $1",
 	"wikibase-search-config-badclass": "Bad query builder class: $1",
 	"wikibase-refresh-for-missing-datatype": "$1 data type was not found in local client script. This may be a result of an outdated cached script. Try to hard refresh your browser, bypassing local cache (Ctrl-Shift-R or Cmd-Shift-R in most browsers) to resolve the problem.",
-	"wikibase-outdated-client-script": "Uh-oh, a hard refresh is due!"
+	"wikibase-outdated-client-script": "Uh-oh, a hard refresh is due!",
+	"wikibase-licenseagreement-heading": "License Attribution"
 }
