@@ -10,8 +10,6 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 
 /**
- * Class ValidatorErrorLocalizer
- *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */

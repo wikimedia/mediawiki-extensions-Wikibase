@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Repo\Api;
 
 use WebRequest;
