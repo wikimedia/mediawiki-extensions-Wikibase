@@ -52,6 +52,24 @@
       "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bca42a8_c7e9c407",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-05T12:09:03Z",
+      "side": 1,
+      "message": "Yeap when I read the next patch in chain I felt the same. If it helps, I\u0027ll share how I read it again in my head:\nI thought of them in terms of grouping rather than batches .. so each entry in the array of arrays is a group of term ids (as in each entry is a group of term ids that are grouped by some keys that have meaning to the outside caller)..\nthen we can refer to it internally as `groupKey \u003d\u003e groupTermIds`. It is a bit generic but kinda worked for me when I was reading it in my head.",
+      "parentUuid": "5877cd18_b7eeda76",
+      "revId": "50a93cf52ad43ff6689a13ac3022d2f140863184",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
