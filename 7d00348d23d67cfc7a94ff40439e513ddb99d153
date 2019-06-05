@@ -70,6 +70,24 @@
       "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1996261_8434bbe0",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseItemTermStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-06-05T10:47:05Z",
+      "side": 1,
+      "message": "The documentation was (or should be if it isn\u0027t) talking about LBFactory methods. Those can easily have their *MasterChanges() methods called. Individual Database instances can also have their begin/commit methods used *if* they where manually made via Database::factory(), which is rare. Other cases of transaction start/end methods, like those of LoadBalancer and LB-managed Database instances, are managed by LBFactory alone.",
+      "parentUuid": "90fa8c58_b266f24a",
+      "revId": "7d00348d23d67cfc7a94ff40439e513ddb99d153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
