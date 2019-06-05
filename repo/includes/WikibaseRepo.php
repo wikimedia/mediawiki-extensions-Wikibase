@@ -10,12 +10,14 @@ use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use UnexpectedValueException;
+use Wikibase\ByIdDispatchingItemTermStore;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterItemLookup;
@@ -67,6 +69,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
@@ -76,6 +79,7 @@ use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\MultiItemTermStore;
 use Wikibase\MultiPropertyTermStore;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataAccess\WikibaseServices;
@@ -200,8 +204,8 @@ use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\TermIndexItemTermStore;
 use Wikibase\TermIndexPropertyTermStore;
-use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 use Wikibase\TermStore\ItemTermStore;
 use Wikibase\TermStore\PropertyTermStore;
 use Wikibase\UpsertSqlIdGenerator;
@@ -1871,11 +1875,69 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * Note: this is not finished and returns a dummy implementation for now
-	 */
 	public function getItemTermStore(): ItemTermStore {
-		return new InMemoryItemTermStore(); // TODO: MW or Doctrine implementation
+		$itemTermsTwoMillionMigrationStage = $this->settings->getSetting(
+			'tmpItemTermsTwoMillionMigrationStage' );
+
+		/** ItemTermStore $twoMillionItemTermStore store for items up to Q2000000 */
+		switch ( $itemTermsTwoMillionMigrationStage ) {
+			case MIGRATION_OLD:
+				$twoMillionItemTermStore = $this->getOldItemTermStore();
+				break;
+			case MIGRATION_WRITE_BOTH:
+				$twoMillionItemTermStore = new MultiItemTermStore( [
+					$this->getOldItemTermStore(),
+					$this->getNewItemTermStore(),
+				] );
+				break;
+			case MIGRATION_WRITE_NEW:
+				$twoMillionItemTermStore = new MultiItemTermStore( [
+					$this->getNewItemTermStore(),
+					$this->getOldItemTermStore(),
+				] );
+				break;
+			case MIGRATION_NEW:
+				$twoMillionItemTermStore = $this->getNewItemTermStore();
+				break;
+			default:
+				throw new UnexpectedValueException(
+					'Unknown migration stage: ' . $itemTermsTwoMillionMigrationStage
+				);
+		}
+
+		return new ByIdDispatchingItemTermStore( [
+			2000000 => $twoMillionItemTermStore,
+			Int32EntityId::MAX => $this->getOldItemTermStore(),
+		] );
+	}
+
+	private function getOldItemTermStore(): ItemTermStore {
+		return new TermIndexItemTermStore( $this->getStore()->getTermIndex() );
+	}
+
+	public function getNewItemTermStore(): ItemTermStore {
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			MediaWikiServices::getInstance()->getMainWANObjectCache()
+		);
+
+		return new DatabaseItemTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$loadBalancer,
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			),
+			$this->getStringNormalizer(),
+			$this->getLogger()
+		);
 	}
 
 	/**
