@@ -336,7 +336,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_REPLICA or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return array Array mapping entity ID serializations to either objects or false if an entity
+	 * @return (stdClass|false)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  could not be found.
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
@@ -398,9 +398,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * Takes an array of rows and returns a result where every given entity ID has some value.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param array $rows indexed by entity id serialization
+	 * @param stdClass[] $rows indexed by entity id serialization
 	 *
-	 * @return array Array mapping entity ID serializations to either objects or false if an entity
+	 * @return (stdClass|false)[] Array mapping entity ID serializations to either objects or false if an entity
 	 *  is not present in $res.
 	 */
 	private function processRows( array $entityIds, array $rows ) {
