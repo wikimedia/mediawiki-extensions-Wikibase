@@ -120,7 +120,25 @@ final class ClientHooks {
 	 */
 	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$skin = $baseTemplate->getSkin();
+		$entityId = self::getEntityId( $baseTemplate->getSkin(), $wikibaseClient );
+
+		if ( $entityId !== null ) {
+			$repoLinker = $wikibaseClient->newRepoLinker();
+			$toolbox['wikibase'] = [
+				'text' => $baseTemplate->getMsg( 'wikibase-dataitem' )->text(),
+				'href' => $repoLinker->getEntityUrl( $entityId ),
+				'id' => 't-wikibase'
+			];
+		}
+	}
+
+	/**
+	 * @param Skin $skin
+	 * @param WikibaseClient $wikibaseClient
+	 *
+	 * @return EntityId|null;
+	 */
+	private static function getEntityId( Skin $skin, WikibaseClient $wikibaseClient ) {
 		$title = $skin->getTitle();
 		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
 		$entityId = null;
@@ -134,14 +152,7 @@ final class ClientHooks {
 			$entityId = self::getEntityIdForTitle( $title );
 		}
 
-		if ( $entityId !== null ) {
-			$repoLinker = $wikibaseClient->newRepoLinker();
-			$toolbox['wikibase'] = [
-				'text' => $baseTemplate->getMsg( 'wikibase-dataitem' )->text(),
-				'href' => $repoLinker->getEntityUrl( $entityId ),
-				'id' => 't-wikibase'
-			];
-		}
+		return $entityId;
 	}
 
 	/**
@@ -157,6 +168,38 @@ final class ClientHooks {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$entityIdLookup = $wikibaseClient->getStore()->getEntityIdLookup();
 		return $entityIdLookup->getEntityIdForTitle( $title );
+	}
+
+	/**
+	 * @param string $type
+	 * @param \MediaWiki\Minerva\Menu\Group $group
+	 *
+	 * @return EntityId|null;
+	 */
+	public static function onMobileMenu($type, $group) {
+		// We only want to add a link to the overflow menu
+		if ($type !== 'pageactions.overflow' ) {
+			return;
+		}
+
+		// If $type is pageactions.overflow, assume Minerva is running the hook
+		$context = \RequestContext::getMain();
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$entityId = self::getEntityId($context->getSkin(), $wikibaseClient);
+
+		if ( $entityId === null ) {
+			return;
+		}
+
+		$repoLinker = $wikibaseClient->newRepoLinker();
+		$entry = new \MediaWiki\Minerva\Menu\PageActions\PageActionMenuEntry(
+			'page-actions-overflow-wikidata',
+			$repoLinker->getEntityUrl( $entityId ),
+			\MinervaUI::iconClass( '', 'before', 'wikimedia-ui-logo-Wikidata-base20' ),
+			$context->msg('wikibase-dataitem')
+		);
+		/** @var MediaWiki\Minerva\Menu\Group $group **/
+		$group->insertEntry( $entry);
 	}
 
 	/**

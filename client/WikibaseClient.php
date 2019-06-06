@@ -121,6 +121,7 @@ call_user_func( function() {
 	$wgHooks['SkinTemplateOutputPageBeforeExec'][] =
 		'\Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler::onSkinTemplateOutputPageBeforeExec';
 	$wgHooks['SpecialMovepageAfterMove'][] = '\Wikibase\Client\Hooks\MovePageNotice::onSpecialMovepageAfterMove';
+	$wgHooks['MobileMenu'][] = '\Wikibase\ClientHooks::onMobileMenu';
 	$wgHooks['GetPreferences'][] = '\Wikibase\ClientHooks::onGetPreferences';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplay';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
