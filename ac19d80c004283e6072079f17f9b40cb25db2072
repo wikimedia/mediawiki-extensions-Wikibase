@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a506ad3_e78f6d43",
+        "filename": "lib/includes/Store/Sql/Terms/PrefetchingPropertyTermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-06T11:36:43Z",
+      "side": 1,
+      "message": "should this return here if $propertyIdsToFetch is empty to avoid the query (not sure what happens to the query if it gets an empty array in that field)?",
+      "revId": "ac19d80c004283e6072079f17f9b40cb25db2072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73b3f3bc_8e38d728",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/PrefetchingPropertyTermLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-06T11:36:43Z",
+      "side": 1,
+      "message": "I\u0027m thinking here that maybe we should not depend on that class in this unit test. Arguable we are testing its functionality at the same time and if it fails this unit test fails too.\n\nThat should be fine for external dependencies and/or things you want to take for granted as being provided by the system/environment/framework you are writing the software in. So to make this test again more resilient, I suggest we do not use it and we populate db tables as we did in other test units \"by-hand\" here (copy-paste from other test cases would probably suffice)",
+      "revId": "ac19d80c004283e6072079f17f9b40cb25db2072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
