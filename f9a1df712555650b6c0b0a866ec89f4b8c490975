@@ -99,6 +99,24 @@
       "revId": "f9a1df712555650b6c0b0a866ec89f4b8c490975",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d448e620_81e213ad",
+        "filename": "lib/includes/Store/Sql/Terms/PropertyTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-06T13:59:43Z",
+      "side": 1,
+      "message": "Well, in that case they would be violating the contract of the TermBuffer interface, not just the one of this class, so I’m not as concerned about that case.",
+      "parentUuid": "dd7ab94c_5f3899e5",
+      "revId": "f9a1df712555650b6c0b0a866ec89f4b8c490975",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }

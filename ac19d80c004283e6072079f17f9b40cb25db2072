@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "935b20fe_ad5a323f",
+        "filename": "lib/includes/Store/Sql/Terms/PrefetchingPropertyTermLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-06T13:59:43Z",
+      "side": 1,
+      "message": "Indeed, otherwise it fails. I’m adding a test for this.",
+      "parentUuid": "3a506ad3_e78f6d43",
+      "revId": "ac19d80c004283e6072079f17f9b40cb25db2072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73b3f3bc_8e38d728",
         "filename": "lib/tests/phpunit/Store/Sql/Terms/PrefetchingPropertyTermLookupTest.php",
         "patchSetId": 5
