@@ -302,6 +302,24 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds );
 	}
 
+	public function testCallsCallbackEvenWhenAcquiringNoTerms() {
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$this->loadBalancer,
+			new InMemoryTypeIdsStore()
+		);
+		$called = false;
+
+		$dbTermIdsAcquirer->acquireTermIds(
+			[],
+			function ( $termIds ) use ( &$called ) {
+				$called = true;
+				$this->assertEmpty( $termIds );
+			}
+		);
+
+		$this->assertTrue( $called, 'callback should have been called' );
+	}
+
 	private function assertTermsArrayExistInDb( $termsArray, $typeIds ) {
 		foreach ( $termsArray as $type => $textsPerLang ) {
 			foreach ( $textsPerLang as $lang => $texts ) {

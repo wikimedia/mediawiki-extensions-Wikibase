@@ -35,6 +35,9 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 
 	public function acquireTermIds( array $termsArray, $callback = null ): array {
 		if ( $termsArray === [] ) {
+			if ( $callback !== null ) {
+				( $callback )( [] );
+			}
 			return [];
 		}
 
