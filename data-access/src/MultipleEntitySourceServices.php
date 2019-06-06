@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess;
 
+use MediaWiki\Services\ServiceContainer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
@@ -18,7 +19,7 @@ use Wikimedia\Assert\Assert;
  *
  * @license GPL-2.0-or-later
  */
-class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatcher {
+class MultipleEntitySourceServices extends ServiceContainer implements WikibaseServices, EntityStoreWatcher {
 
 	/**
 	 * @var EntitySourceDefinitions
