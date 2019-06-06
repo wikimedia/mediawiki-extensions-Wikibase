@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -160,7 +159,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			new BasicEntityIdParser()
+			$wikibaseRepo->getEntityIdLookup()
 		);
 
 		$builder = new TermSqlIndexBuilder(

@@ -63,7 +63,7 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$stream = new SqlEntityIdPager(
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getEntityIdLookup(),
 			[ 'item' ]
 		);
 

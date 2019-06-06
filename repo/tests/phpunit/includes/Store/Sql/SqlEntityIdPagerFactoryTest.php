@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use Wikibase\DataModel\Entity\ItemIdParser;
+use Title;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory
@@ -21,11 +23,26 @@ class SqlEntityIdPagerFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewSqlEntityIdPager() {
 		$factory = new SqlEntityIdPagerFactory(
 			new EntityNamespaceLookup( [] ),
-			new ItemIdParser()
+			$this->getMockEntityIdLookup()
 		);
 		$pager = $factory->newSqlEntityIdPager();
 
 		$this->assertInstanceOf( SqlEntityIdPager::class, $pager );
+	}
+
+	/**
+	 * @return EntityIdLookup
+	 */
+	private function getMockEntityIdLookup() {
+		$entityIdLookup = $this->getMockBuilder( EntityIdLookup::class )->getMock();
+
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getEntityIdForTitle' )
+			->willReturnCallback( function ( Title $title ) {
+				return new ItemId( $title->getText() );
+			} );
+
+		return $entityIdLookup;
 	}
 
 }

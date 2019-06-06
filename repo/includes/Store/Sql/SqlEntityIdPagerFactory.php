@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * Factory for SqlEntityIdPager objects.
@@ -20,16 +20,16 @@ class SqlEntityIdPagerFactory {
 	private $entityNamespaceLookup;
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityIdLookup
 	 */
-	private $entityIdParser;
+	private $entityIdLookup;
 
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
-		EntityIdParser $entityIdParser
+		EntityIdLookup $entityIdLookup
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
-		$this->entityIdParser = $entityIdParser;
+		$this->entityIdLookup = $entityIdLookup;
 	}
 
 	/**
@@ -41,7 +41,7 @@ class SqlEntityIdPagerFactory {
 	public function newSqlEntityIdPager( array $entityTypes = [], $redirectMode = EntityIdPager::NO_REDIRECTS ) {
 		return new SqlEntityIdPager(
 			$this->entityNamespaceLookup,
-			$this->entityIdParser,
+			$this->entityIdLookup,
 			$entityTypes,
 			$redirectMode
 		);

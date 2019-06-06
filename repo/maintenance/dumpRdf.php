@@ -118,7 +118,7 @@ class DumpRdf extends DumpEntities {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 				$wikibaseRepo->getEntityNamespaceLookup(),
-				$wikibaseRepo->getEntityIdParser()
+				$wikibaseRepo->getEntityIdLookup()
 			);
 
 			$this->setServices(

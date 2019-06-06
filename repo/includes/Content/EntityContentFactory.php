@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Content;
 
+use Hooks;
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MWException;
@@ -165,6 +166,8 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 */
 	public function getEntityIdForTitle( Title $title ) {
 		$contentModel = $title->getContentModel();
+
+		Hooks::run( 'GetEntityContentModelForTitle', [ $title, &$contentModel ] );
 
 		try {
 			$handler = $this->getEntityHandlerForContentModel( $contentModel );
