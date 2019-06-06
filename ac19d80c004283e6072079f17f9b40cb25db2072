@@ -51,6 +51,24 @@
       "revId": "ac19d80c004283e6072079f17f9b40cb25db2072",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10fabb5e_b659d6af",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/PrefetchingPropertyTermLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-06T14:05:29Z",
+      "side": 1,
+      "message": "Well, if we inject an InMemoryTermIdsStore instead, then we don’t need any database writes, right? The test would only use the wbt_property_terms table then (referencing other IDs that only exist in memory, not in the database, but that’s fine).",
+      "parentUuid": "73b3f3bc_8e38d728",
+      "revId": "ac19d80c004283e6072079f17f9b40cb25db2072",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
