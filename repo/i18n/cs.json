@@ -130,6 +130,7 @@
 	"wikibase-anonymouseditwarning": "Varování: Nejste přihlášen(a). Pokud uložíte jakoukoli editaci, vaše [https://cs.wikipedia.org/wiki/IP_adresa IP adresa] bude zveřejněna v historii této stránky. Pokud se <strong>[[Special:UserLogin|přihlásíte]]</strong> nebo si <strong>[[Special:CreateAccount|vytvoříte účet]]</strong>, vaše editace budou připsány vašemu uživatelskému jménu a získáte i další výhody.",
 	"wikibase-anonymouseditwarning-heading": "Nejste přihlášen(a)",
 	"wikibase-anonymouseditwarning-message": "Pokud uložíte jakoukoli editaci, vaše IP adresa bude zveřejněna v historii této stránky. Pokud se přihlásíte nebo si vytvoříte účet, vaše editace budou připsány vašemu uživatelskému jménu a získáte i další výhody.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Upozorněte mě, kdykoliv nejsem přihlášený.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Editovat bez přihlášení",
 	"wikibase-move-error": "Nemůžete přesouvat stránky v datovém jmenném prostoru, ani nemůžete stránky přesouvat do něj.",
 	"wikibase-validator-sitelink-conflict": "Odkaz na stránku $1 se už používá v položce $2. Pokud do položky $2 nepatří, můžete ho odtamtud odstranit; pokud jsou položky o totožném tématu, můžete je sloučit.",

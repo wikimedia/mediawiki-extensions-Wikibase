@@ -133,6 +133,7 @@
 	"wikibase-entityselector-more": "続き",
 	"wikibase-entityselector-notfound": "該当するものはありません",
 	"wikibase-anonymouseditwarning": "'''警告:''' ログインしていません。編集を行うと、あなたの IP アドレスが公開されます。<strong>[[Special:UserLogin|lログイン]]</strong>または<strong>[[Special:CreateAccount|アカウントを作成]]</strong>すれば、あなたの編集はその利用者名とともに表示されるほか、その他の利点もあります。",
+	"wikibase-anonymouseditwarning-dismiss-persist": "ログインしていないときは必ず警告する",
 	"wikibase-move-error": "データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。",
 	"wikibase-validator-sitelink-conflict": "リンク「$1」は既に項目「$2」で使われています。「$2」で使われているのが誤りならばそこから除去できますし、まったく同じ話題に関するものならば項目を統合することができます。",
 	"wikibase-validator-label-conflict": "言語コード $2 に関連付けられたラベル「$1」を持つプロパティ ($3) が既にあります。",

@@ -134,6 +134,7 @@
 	"wikibase-anonymouseditwarning": "Aviso: Você não entrou. Seu [https://en.wikipedia.org/wiki/IP_address endereço de IP] será visível publicamente se você fizer edições. Se você <strong>[[Special:UserLogin|entrar]]</strong> ou <strong>[[Special:CreateAccount|criar uma conta]]</strong>, suas edições serão atribuídas a um nome de usuário, entre outros benefícios.",
 	"wikibase-anonymouseditwarning-heading": "Não tem entrado",
 	"wikibase-anonymouseditwarning-message": "Neste momento, o seu endereço IP será publicamente visível se fizer alguma edição. Se iniciar uma sessão ou criar uma conta, as suas edições serão atribuídas ao seu nome de usuário, entre outras vantagens.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Avise-me sempre que eu não estiver entrado.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Edite sem entrar",
 	"wikibase-move-error": "Você não pode mover páginas que estão em um espaço nominal de dados nem mover páginas para dentro desse espaço nominal.",
 	"wikibase-validator-sitelink-conflict": "O link $1 já é usado pelo item $2. Você pode removê-lo de $2 se não pertencer lá ou unir os artigos se forem sobre exatamente o mesmo tópico.",
@@ -430,5 +431,6 @@
 	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
 	"wikibase-refresh-for-missing-datatype": "O tipo de dados $1 não foi encontrado no script do cliente local. Isso pode ser resultado de um script em cache desatualizado. Tente atualizar seu navegador, ignorando o cache local (Ctrl-Shift-R ou Cmd-Shift-R na maioria dos navegadores) para resolver o problema.",
-	"wikibase-outdated-client-script": "Uh-oh, uma atualização difícil é devida!"
+	"wikibase-outdated-client-script": "Uh-oh, uma atualização difícil é devida!",
+	"wikibase-shortcopyrightwarning-heading": "Atribuição de licença"
 }

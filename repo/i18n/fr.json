@@ -168,6 +168,7 @@
 	"wikibase-anonymouseditwarning": "Attention&nbsp;: Vous n’êtes pas connecté.\nVotre [https://en.wikipedia.org/wiki/IP_address adresse IP] sera visible publiquement si vous apportez des modifications. Si vous <strong>[[Special:UserLogin|vous connectez]]</strong> ou si vous <strong>[[Special:CreateAccount|créez un compte]]</strong>, vos modifications seront attribuées à un nom d'utilisateur, parmi d'autres avantages.",
 	"wikibase-anonymouseditwarning-heading": "Vous n'êtes pas connecté",
 	"wikibase-anonymouseditwarning-message": "Votre adresse IP sera actuellement visible publiquement si vous faites des modifications. Si vous vous connectez ou créez un compte, vos modifications seront attribuées à votre nom d'utilisateur, parmi d'autres avantages.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "M’avertir si je ne suis pas connecté.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Modifier sans se connecter",
 	"wikibase-move-error": "Vous ne pouvez pas déplacer des pages situées dans un espace de données, ni déplacer des pages vers cet espace.",
 	"wikibase-validator-sitelink-conflict": "Le lien $1 est déjà utilisé par l’élément $2. Vous pouvez le supprimer de $2 s’il n’a rien à faire là, ou fusionner les éléments s’ils concernent exactement le même sujet.",

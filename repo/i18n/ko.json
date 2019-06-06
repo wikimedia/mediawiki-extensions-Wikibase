@@ -127,6 +127,7 @@
 	"wikibase-anonymouseditwarning": "경고: 로그인이 되어 있지 않습니다.\nIP 주소가 문서의 역사에 남게 됩니다.",
 	"wikibase-anonymouseditwarning-heading": "로그인하고 있지 않습니다",
 	"wikibase-anonymouseditwarning-message": "지금 편집을 하면 IP 주소가 공개됩니다. 로그인하거나 계정을 만들면 편집 시 사용자 이름이 대신 표시되는 등의 장점이 있습니다.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "로그인되어 있지 않으면 내게 경고합니다.",
 	"wikibase-anonymouseditwarning-dismiss-button": "로그인 없이 편집",
 	"wikibase-move-error": "데이터 이름공간에 있는 문서를 이동할 수 없으며 그것으로 문서를 이동할 수 없습니다.",
 	"wikibase-validator-sitelink-conflict": "$1 링크는 $2 항목에 의해 이미 사용되고 있습니다. 소속되어 있지 않으면 $2에서 제거할 수 있으며 정확히 동일한 주제를 다루고 있다면 항목들을 병합할 수 있습니다.",
