@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ec678ce_53f3a05b",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-06T19:19:30Z",
+      "side": 1,
+      "message": "I\u0027d prefer for this to be a bit-flag (self::IGNORE_REPLICA) or a string (\"ignoreReplica\"). Passing a bool makes it fairly hard to grasp what this does.",
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
