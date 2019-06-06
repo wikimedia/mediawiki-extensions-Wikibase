@@ -343,11 +343,12 @@
 				visible: expanded
 			} );
 
-			if ( this.$refsHeading.text() ) {
-				this._$toggler.find( '.ui-toggler-label' ).text( this.$refsHeading.text() );
-				this.$refsHeading.html( this._$toggler );
+			var text = this.$refsHeading.text();
+			if ( text ) {
+				this._$toggler.find( '.ui-toggler-label' ).text( text );
+				this.$refsHeading.empty().append( this._$toggler );
 			} else {
-				this.$refsHeading.html( this._$toggler );
+				this.$refsHeading.empty().append( this._$toggler );
 				this._drawReferencesCounter();
 			}
 		},
