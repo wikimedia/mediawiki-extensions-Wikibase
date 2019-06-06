@@ -11,19 +11,20 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\StringNormalizer;
 use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
-use Wikibase\StringNormalizer;
 
 /**
  * @license GPL-2.0-or-later
  */
 class DatabaseItemTermStore implements ItemTermStore {
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
+	/** @var ILBFactory */
+	private $loadBalancerFactory;
 
 	/** @var TermIdsAcquirer */
 	private $acquirer;
@@ -47,14 +48,14 @@ class DatabaseItemTermStore implements ItemTermStore {
 	private $dbw = null;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		ILBFactory $loadBalancerFactory,
 		TermIdsAcquirer $acquirer,
 		TermIdsResolver $resolver,
 		TermIdsCleaner $cleaner,
 		StringNormalizer $stringNormalizer,
 		LoggerInterface $logger = null
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->loadBalancerFactory = $loadBalancerFactory;
 		$this->acquirer = $acquirer;
 		$this->resolver = $resolver;
 		$this->cleaner = $cleaner;
@@ -64,14 +65,16 @@ class DatabaseItemTermStore implements ItemTermStore {
 
 	private function getDbr(): IDatabase {
 		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+			$loadBalancer = $this->loadBalancerFactory->getMainLB();
+			$this->dbr = $loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
 		}
 		return $this->dbr;
 	}
 
 	private function getDbw(): IDatabase {
 		if ( $this->dbw === null ) {
-			$this->dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+			$loadBalancer = $this->loadBalancerFactory->getMainLB();
+			$this->dbw = $loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
 		}
 		return $this->dbw;
 	}
@@ -102,11 +105,11 @@ class DatabaseItemTermStore implements ItemTermStore {
 		}
 
 		try {
-			$this->loadBalancer->beginMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->beginMasterChanges( __METHOD__ );
 			$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $termsArray );
-			$this->loadBalancer->commitMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( DBError $exception ) {
-			$this->loadBalancer->rollbackMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->logger->error(
 				'{method}: DBError while storing terms for {itemId}: {exception}',
 				[
@@ -182,11 +185,11 @@ class DatabaseItemTermStore implements ItemTermStore {
 		$this->disallowForeignItemIds( $itemId );
 
 		try {
-			$this->loadBalancer->beginMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->beginMasterChanges( __METHOD__ );
 			$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
-			$this->loadBalancer->commitMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( DBError $exception ) {
-			$this->loadBalancer->rollbackMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->logger->error(
 				'{method}: DBError while deleting terms for {itemId}: {exception}',
 				[
@@ -253,7 +256,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 	 */
 	private function cleanTermsIfUnused( array $termIds ) {
 		try {
-			$this->loadBalancer->beginMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->beginMasterChanges( __METHOD__ );
 
 			$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
 				'wbt_property_terms',
@@ -284,9 +287,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 				)
 			);
 
-			$this->loadBalancer->commitMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( DBError $exception ) {
-			$this->loadBalancer->rollbackMasterChanges( __METHOD__ );
+			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->logger->error(
 				'{method}: DBError while cleaning up to {termIdsCount} terms: {exception}',
 				[
