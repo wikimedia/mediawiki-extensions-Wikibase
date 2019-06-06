@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -22,15 +24,45 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	private $typeIdsAcquirer;
 
 	/**
+	 * @var callable
+	 */
+	private $acquiredIdsConsumerCallback = null;
+
+	/** @var LoggerInterface */
+	private $logger;
+
+	/**
+	 * THIS implementation guarantees that in-parallel {@link DatabaseTermIdsCleaner}
+	 * will not result in deleting terms that have been acquired by this acquirer, should
+	 * these two in-parallel processes happen to overlap on some existing term ids.
+	 * The mechanism of achieving this guarantee is complete under the following two conditions:
+	 * - external linking to acquired ids (e.g. using them as foreign keys in other tables)
+	 *	 must happen inside a callback passed through $acquiredIdsConsumerCallback
+	 *	 constructor param.
+	 * - the in-parallel cleaner is called with set of ids based on the absence of any
+	 *	 links to those ids, in the same external places where the callback links to them.
+	 *
 	 * @param ILoadBalancer $loadBalancer
 	 * @param TypeIdsAcquirer $typeIdsAcquirer
+	 * @param callable|null $acquiredIdsConsumerCallback
+	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TypeIdsAcquirer $typeIdsAcquirer
+		TypeIdsAcquirer $typeIdsAcquirer,
+		$acquiredIdsConsumerCallback = null,
+		LoggerInterface $logger = null
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
+		if ( is_callable( $acquiredIdsConsumerCallback ) ) {
+			$this->acquiredIdsConsumerCallback = $acquiredIdsConsumerCallback;
+		} else {
+			$this->acquiredIdsConsumerCallback = function () {
+				// no-op
+			};
+		}
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	public function acquireTermIds( array $termsArray, $callback = null ): array {
@@ -99,14 +131,17 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *		], ...
 	 *	]
 	 */
-	private function mapToTextIds( array $termsArray ) {
+	private function mapToTextIds(
+		array $termsArray,
+		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
+	) {
 		$texts = [];
 
 		array_walk_recursive( $termsArray, function ( $text ) use ( &$texts ) {
 			$texts[] = $text;
 		} );
 
-		$textIds = $this->acquireTextIds( $texts );
+		$textIds = $this->acquireTextIds( $texts, $textIdsAcquirer );
 
 		array_walk_recursive( $termsArray, function ( &$text ) use ( $textIds ) {
 			$text = $textIds[$text];
@@ -115,10 +150,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $termsArray;
 	}
 
-	private function acquireTextIds( array $texts ) {
-		$textIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->loadBalancer, 'wbt_text', 'wbx_id' );
-
+	private function acquireTextIds(
+		array $texts,
+		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
+	) {
 		$textRecords = [];
 		foreach ( $texts as $text ) {
 			$textRecords[] = [ 'wbx_text' => $text ];
@@ -152,7 +187,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *		...
 	 *	]
 	 */
-	private function mapToTextInLangIds( array $termsArray ) {
+	private function mapToTextInLangIds(
+		array $termsArray,
+		ReplicaMasterAwareRecordIdsAcquirer $textInLangIdsAcquirer
+	) {
 		$flattenedLangTextIds = [];
 		foreach ( $termsArray as $langTextIds ) {
 			foreach ( $langTextIds as $lang => $textIds ) {
@@ -170,7 +208,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			}
 		}
 
-		$textInLangIds = $this->acquireTextInLangIds( $flattenedLangTextIds );
+		$textInLangIds = $this->acquireTextInLangIds(
+			$flattenedLangTextIds,
+			$textInLangIdsAcquirer
+		);
 
 		$newTermsArray = [];
 		foreach ( $termsArray as $type => $langTextIds ) {
@@ -185,10 +226,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $newTermsArray;
 	}
 
-	private function acquireTextInLangIds( array $langTextIds ) {
-		$textInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->loadBalancer, 'wbt_text_in_lang', 'wbxl_id' );
-
+	private function acquireTextInLangIds(
+		array $langTextIds,
+		ReplicaMasterAwareRecordIdsAcquirer $textInLangIdsAcquirer
+	) {
 		$textInLangRecords = [];
 		foreach ( $langTextIds as $lang => $textIds ) {
 			foreach ( $textIds as $textId ) {
@@ -227,6 +268,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 */
 	private function mapToTermInLangIds(
 		array $termsArray,
+		ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer,
 		array $idsToRestore = []
 	) {
 		$flattenedTypeTextInLangIds = [];
@@ -243,7 +285,11 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			);
 		}
 
-		$termInLangIds = $this->acquireTermInLangIds( $flattenedTypeTextInLangIds, $idsToRestore );
+		$termInLangIds = $this->acquireTermInLangIds(
+			$flattenedTypeTextInLangIds,
+			$termInLangIdsAcquirer,
+			$idsToRestore
+		);
 
 		$newTermsArray = [];
 		foreach ( $termsArray as $typeId => $textInLangIds ) {
@@ -255,10 +301,11 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $newTermsArray;
 	}
 
-	private function acquireTermInLangIds( array $typeTextInLangIds, array $idsToRestore = [] ) {
-		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->loadBalancer, 'wbt_term_in_lang', 'wbtl_id' );
-
+	private function acquireTermInLangIds(
+		array $typeTextInLangIds,
+		ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer,
+		array $idsToRestore = []
+	) {
 		$termInLangRecords = [];
 		foreach ( $typeTextInLangIds as $typeId => $textInLangIds ) {
 			foreach ( $textInLangIds as $textInLangId ) {
@@ -334,18 +381,30 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		$idsToRestore = array_diff( $uniqueTermIds, $persistedTermIds );
 
 		if ( !empty( $idsToRestore ) ) {
-			$this->mapTermsArrayToTermIds( $termsArray, $idsToRestore );
+			$this->mapTermsArrayToTermIds( $termsArray, $idsToRestore, true );
 		}
 	}
 
 	private function mapTermsArrayToTermIds(
 		array $termsArray,
-		array $termIdsToRestore = []
+		array $termIdsToRestore = [],
+		$ignoreReplica = false
 	): array {
-		$termsArray = $this->mapToTextIds( $termsArray );
-		$termsArray = $this->mapToTextInLangIds( $termsArray );
-		$termsArray = $this->mapToTypeIds( $termsArray );
-		return $this->mapToTermInLangIds( $termsArray, $termIdsToRestore );
+		$textIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
+			$this->loadBalancer, 'wbt_text', 'wbx_id', $this->logger,
+			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::IGNORE_REPLICA : 0x0 );
+		$textInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
+			$this->loadBalancer, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
+			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::IGNORE_REPLICA : 0x0 );
+		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
+			$this->loadBalancer, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
+			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::IGNORE_REPLICA : 0x0  );
+
+		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );
+		$termsArray = $this->mapToTextInLangIds( $termsArray, $textInLangIdsAcquirer );
+		$termsArray = $this->mapToTypeIds( $termsArray, $termInLangIdsAcquirer );
+
+		return $this->mapToTermInLangIds( $termsArray, $termInLangIdsAcquirer, $termIdsToRestore );
 	}
 
 	private function calcRecordHash( array $record ) {
