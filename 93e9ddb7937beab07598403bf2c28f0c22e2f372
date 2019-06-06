@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5b814f3_1497ee4c",
+        "filename": "lib/resources/Resources.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-06T09:51:37Z",
+      "side": 1,
+      "message": "If this module is only responsible for a single config variable, then perhaps it should have a more specific name? RepoAccessModule above seems a bit more directly related to a wbRepo variable.\n\nOn the other hand, we’re supposed to use less and larger ResourceLoader modules as far as I know, because having a highly fragmented module hierarchy hurts performance, so perhaps these should also be consolidated into a single module that exports several variables. But that can also be done later.",
+      "range": {
+        "startLine": 39,
+        "startChar": 14,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "93e9ddb7937beab07598403bf2c28f0c22e2f372",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
