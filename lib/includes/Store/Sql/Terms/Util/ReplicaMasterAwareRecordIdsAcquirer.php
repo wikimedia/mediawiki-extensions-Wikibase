@@ -21,6 +21,13 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class ReplicaMasterAwareRecordIdsAcquirer {
 
 	/**
+	 * This flag changes this object's behavior so that it always queries
+	 * master database to find existing items, bypassing replica database
+	 * completely.
+	 */
+	const FLAG_IGNORE_REPLICA = 0x1;
+
+	/**
 	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
@@ -51,21 +58,29 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private $logger;
 
 	/**
+	 * @var int
+	 */
+	private $flags;
+
+	/**
 	 * @param ILoadBalancer $loadBalancer database connection accessor
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids
 	 * @param LoggerInterface $logger
+	 * @param int $flags {@see self::FLAG_IGNORE_REPLICA}
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		$table,
 		$idColumn,
-		LoggerInterface $logger = null
+		LoggerInterface $logger = null,
+		$flags = 0x0
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->table = $table;
 		$this->idColumn = $idColumn;
 		$this->logger = $logger ?? new NullLogger();
+		$this->flags = $flags;
 	}
 
 	/**
@@ -74,13 +89,13 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *
 	 * Note 1: this function assumes that all records given in $neededRecords specify
 	 * the same columns. If some records specify less, more or different columns than
-	 * the first one does, the behavior is not defined.
+	 * the first one does, the behavior is not defined. The first element keys will be
+	 * used as the set of columns to select in database and to provide back in the returned array.
 	 *
 	 * Note 2: this function assumes that all records given in $neededRecords have
 	 * their values as strings. If some values are of different type (e.g. integer ids)
-	 * this can cause infinite loops due to mismatch in identifying records selected in
-	 * database with their corresponding needed records. The first element keys will be
-	 * used as the set of columns to select in database and to provide back in the returned array.
+	 * this can cause a false mismatch in identifying records selected in
+	 * database with their corresponding needed records.
 	 *
 	 * @param array $neededRecords array of records to be looked-up or inserted.
 	 *	Each entry in this array should an associative array of column => value pairs.
@@ -107,7 +122,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		array $neededRecords,
 		$recordsToInsertDecoratorCallback = null
 	) {
-		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
+		$dbr = $this->isIgnoringReplica() ? $this->getDbMaster() : $this->getDbReplica();
+		$existingRecords = $this->findExistingRecords( $dbr, $neededRecords );
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
@@ -249,6 +265,10 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private function calcRecordHash( array $record ) {
 		ksort( $record );
 		return md5( serialize( $record ) );
+	}
+
+	private function isIgnoringReplica() {
+		return ( $this->flags & self::FLAG_IGNORE_REPLICA ) !== 0x0;
 	}
 
 }
