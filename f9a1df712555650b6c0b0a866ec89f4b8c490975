@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "27f02649_43ebdd1f",
+        "filename": "lib/includes/Store/Sql/Terms/PropertyTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-06T10:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6db1e26e_d2f912e3",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "f9a1df712555650b6c0b0a866ec89f4b8c490975",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e18c9fc_5f14e50b",
         "filename": "lib/includes/Store/Sql/Terms/PropertyTermLookup.php",
         "patchSetId": 4
