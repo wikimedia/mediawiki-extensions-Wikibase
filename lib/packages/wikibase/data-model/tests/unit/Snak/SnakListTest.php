@@ -144,9 +144,7 @@ class SnakListTest extends PHPUnit_Framework_TestCase {
 	public function testAddSnak( SnakList $array ) {
 		$elementCount = $array->count();
 
-		$elements = $this->elementInstancesProvider();
-		$element = array_shift( $elements );
-		$element = $element[0][0];
+		$element = $this->elementInstancesProvider()[0][0][0];
 
 		if ( !$array->hasSnak( $element ) ) {
 			++$elementCount;

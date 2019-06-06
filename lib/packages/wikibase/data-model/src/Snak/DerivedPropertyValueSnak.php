@@ -72,11 +72,7 @@ class DerivedPropertyValueSnak extends PropertyValueSnak {
 	 * @return DataValue|null
 	 */
 	public function getDerivedDataValue( $key ) {
-		if ( isset( $this->derivedDataValues[$key] ) ) {
-			return $this->derivedDataValues[$key];
-		}
-
-		return null;
+		return $this->derivedDataValues[$key] ?? null;
 	}
 
 	/**

@@ -224,8 +224,7 @@ abstract class EntityId implements Comparable, Serializable {
 	 * @return string[] Array of form [ string $repositoryName, string $localPart ]
 	 */
 	protected static function extractRepositoryNameAndLocalPart( $serialization ) {
-		$parts = explode( ':', $serialization, 2 );
-		return isset( $parts[1] ) ? $parts : [ '', $parts[0] ];
+		return array_pad( explode( ':', $serialization, 2 ), -2, '' );
 	}
 
 }
