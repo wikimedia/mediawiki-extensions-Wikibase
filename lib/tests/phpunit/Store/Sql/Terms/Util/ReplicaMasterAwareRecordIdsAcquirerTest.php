@@ -111,6 +111,25 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		$this->assertNoRecordsInDb( $recordsInMaster, $this->dbReplica );
 	}
 
+	public function testWhenIgnoringReplica() {
+		$records = $this->getTestRecords();
+
+		$this->dbReplica->insert(
+			self::TABLE_NAME,
+			$records
+		);
+		$this->assertSameRecordsInDb( $records, $this->dbReplica );
+
+		$idsAcquirer = $this->getTestSubjectInstance( true );
+		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
+
+		$this->assertSame(
+			count( $acquiredRecordsWithIds ),
+			count( $records )
+		);
+		$this->assertSameRecordsInDb( $records, $this->dbMaster );
+	}
+
 	private function assertNoRecordsInDb( array $records, IDatabase $db ) {
 		$recordsInDbCount = $db->selectRowCount(
 			self::TABLE_NAME,
@@ -140,14 +159,16 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		return $db->makeList( $conditionPairs, IDatabase::LIST_OR );
 	}
 
-	private function getTestSubjectInstance() {
+	private function getTestSubjectInstance( $ignoreReplica = false ) {
 		return new ReplicaMasterAwareRecordIdsAcquirer(
 			new FakeLoadBalancer( [
 				'dbr' => $this->dbReplica,
 				'dbw' => $this->dbMaster,
 			] ),
 			self::TABLE_NAME,
-			self::ID_COLUMN
+			self::ID_COLUMN,
+			null,
+			$ignoreReplica
 		);
 	}
 
