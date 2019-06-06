@@ -81,6 +81,24 @@
       "revId": "f9a1df712555650b6c0b0a866ec89f4b8c490975",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd7ab94c_5f3899e5",
+        "filename": "lib/includes/Store/Sql/Terms/PropertyTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-06T12:28:44Z",
+      "side": 1,
+      "message": "I thought someone might pass a non-entity id object in here (null, entity id as string, …). That\u0027s going to fail then anyway (although in a not so nice way).",
+      "parentUuid": "d6809825_65e8426c",
+      "revId": "f9a1df712555650b6c0b0a866ec89f4b8c490975",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
