@@ -30,12 +30,18 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	private $loadBalancer;
 
 	public function setUp() {
-		$this->db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
-		$this->db->sourceFile(
-			__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql' );
+		$this->db = $this->setUpNewDb();
 		$this->loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db
 		] );
+	}
+
+	private function setUpNewDb() {
+		$db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
+		$db->sourceFile(
+			__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql' );
+
+		return $db;
 	}
 
 	public function testAcquireTermIdsReturnsArrayOfIdsForAllTerms() {
@@ -302,6 +308,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds );
 	}
 
+
 	public function testCallsCallbackEvenWhenAcquiringNoTerms() {
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
 			$this->loadBalancer,
@@ -320,11 +327,96 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->assertTrue( $called, 'callback should have been called' );
 	}
 
-	private function assertTermsArrayExistInDb( $termsArray, $typeIds ) {
+	public function testIgnoresReplicaInRestoration() {
+		$dbMaster = $this->setUpNewDb();
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+			'dbw' => $dbMaster
+		] );
+
+		$typeIdsAcquirer = new InMemoryTypeIdsStore();
+		$alreadyAcquiredTypeIds = $typeIdsAcquirer->acquireTypeIds(
+			[ 'label', 'description', 'alias' ]
+		);
+
+		$termsArray = [
+			'label' => [ 'en' => 'same' ],
+			'description' => [ 'en' => 'same' ],
+			'alias' => [
+				'en' => [ 'same', 'another' ]
+			]
+		];
+
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$loadBalancer,
+			$typeIdsAcquirer
+		);
+
+		$dbTermIdsAcquirer->acquireTermIds(
+			$termsArray, function ( $acquiredIds ) use ( $dbMaster ) {
+				// This is going to:
+				// 1. insert into replica all records that exist in master
+				//    mimicing replication.
+				// 2. delete everything in master, but keep replica as-is,
+				//    mimicing a state where replication of new master state
+				//    has not happened yet
+				// Expected behavior of the acquirer is that it will entirely
+				// ignore the state of replica when restoring cleaned up ids.
+				// Meaning that since no records exist in master after this callback,
+				// the acquirer will restore those records in master again.
+
+				// 1. Replicating master records into replica
+				$recordsInMaster = $dbMaster->select( 'wbt_text', [ 'wbx_id', 'wbx_text' ] );
+				$recordsToInsertIntoReplica = [];
+				foreach ( $recordsInMaster as $record ) {
+					$recordsToInsertIntoReplica[] = [
+						'wbx_id' => $record->wbx_id,
+						'wbx_text' => $record->wbx_text
+					];
+				}
+				$this->db->insert( 'wbt_text', $recordsToInsertIntoReplica );
+
+				$recordsInMaster = $dbMaster->select(
+					'wbt_text_in_lang', [ 'wbxl_id', 'wbxl_text_id', 'wbxl_language' ] );
+				$recordsToInsertIntoReplica = [];
+				foreach ( $recordsInMaster as $record ) {
+					$recordsToInsertIntoReplica[] = [
+						'wbxl_id' => $record->wbxl_id,
+						'wbxl_text_id' => $record->wbxl_text_id,
+						'wbxl_language' => $record->wbxl_language
+					];
+				}
+				$this->db->insert( 'wbt_text_in_lang', $recordsToInsertIntoReplica );
+
+
+				$recordsInMaster = $dbMaster->select(
+					'wbt_term_in_lang', [ 'wbtl_id', 'wbtl_text_in_lang_id', 'wbtl_type_id' ] );
+				$recordsToInsertIntoReplica = [];
+				foreach ( $recordsInMaster as $record ) {
+					$recordsToInsertIntoReplica[] = [
+						'wbtl_id' => $record->wbtl_id,
+						'wbtl_text_in_lang_id' => $record->wbtl_text_in_lang_id,
+						'wbtl_type_id' => $record->wbtl_type_id
+					];
+				}
+				$this->db->insert( 'wbt_term_in_lang', $recordsToInsertIntoReplica );
+
+				// 2. Deleting records from master
+				$dbMaster->delete( 'wbt_text', '*' );
+				$dbMaster->delete( 'wbt_text_in_lang', '*' );
+				$dbMaster->delete( 'wbt_term_in_lang', '*' );
+			} );
+
+		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds, $dbMaster );
+	}
+
+	private function assertTermsArrayExistInDb( $termsArray, $typeIds, $db = null ) {
+		$db = $db ?? $this->db;
+
 		foreach ( $termsArray as $type => $textsPerLang ) {
 			foreach ( $textsPerLang as $lang => $texts ) {
 				foreach ( (array)$texts as $text ) {
-					$textId = $this->db->selectField(
+					$textId = $db->selectField(
 						'wbt_text',
 						'wbx_id',
 						[ 'wbx_text' => $text ]
@@ -335,7 +427,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 						"Expected record for text '$text' is not in wbt_text"
 					);
 
-					$textInLangId = $this->db->selectField(
+					$textInLangId = $db->selectField(
 						'wbt_text_in_lang',
 						'wbxl_id',
 						[ 'wbxl_language' => $lang, 'wbxl_text_id' => $textId ]
@@ -347,10 +439,13 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 					);
 
 					$this->assertNotEmpty(
-						$this->db->selectField(
+						$db->selectField(
 							'wbt_term_in_lang',
 							'wbtl_id',
-							[ 'wbtl_type_id' => $typeIds[$type], 'wbtl_text_in_lang_id' => $textInLangId ]
+							[
+								'wbtl_type_id' => $typeIds[$type],
+								'wbtl_text_in_lang_id' => $textInLangId
+							]
 						),
 						"Expected $type '$text' in language '$lang' is not in wbt_term_in_lang"
 					);
