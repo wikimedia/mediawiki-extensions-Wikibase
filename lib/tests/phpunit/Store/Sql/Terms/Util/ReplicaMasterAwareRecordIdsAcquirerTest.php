@@ -120,7 +120,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		);
 		$this->assertSameRecordsInDb( $records, $this->dbReplica );
 
-		$idsAcquirer = $this->getTestSubjectInstance( true );
+		$idsAcquirer = $this->getTestSubjectInstance( ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA );
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
 		$this->assertSame(
@@ -159,7 +159,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		return $db->makeList( $conditionPairs, IDatabase::LIST_OR );
 	}
 
-	private function getTestSubjectInstance( $ignoreReplica = false ) {
+	private function getTestSubjectInstance( $flags = 0x0 ) {
 		return new ReplicaMasterAwareRecordIdsAcquirer(
 			new FakeLoadBalancer( [
 				'dbr' => $this->dbReplica,
@@ -168,7 +168,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 			self::TABLE_NAME,
 			self::ID_COLUMN,
 			null,
-			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0
+			$flags
 		);
 	}
 
