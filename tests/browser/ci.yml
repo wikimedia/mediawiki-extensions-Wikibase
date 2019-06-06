@@ -1,0 +1,9 @@
+BROWSER:
+  - chrome
+
+MEDIAWIKI_ENVIRONMENT:
+  - beta
+  - test
+
+PLATFORM:
+  - Linux

@@ -1,0 +1,17 @@
+source 'https://rubygems.org'
+
+gem 'activesupport', '~> 4.2', '>= 4.2.6'
+# Locking data_magic to version 1.1 because 1.2 requires Ruby version >= 2.2 and
+# Jenkins is on 2.1.0
+gem 'data_magic', '~> 1.1.0'
+gem 'mediawiki_api-wikidata', '~> 0.2.0', '>= 0.2.1'
+gem 'mediawiki_selenium', '~> 1.7', '>= 1.7.1'
+gem 'parallel_tests', '~> 2.5'
+# Locking rake to version 11.1 because Jenkins is failing with:
+# NameError: uninitialized constant MediawikiSelenium::RakeTask::Shellwords
+gem 'rake', '~> 11.1.0', '>= 11.1.2'
+gem 'require_all', '~> 1.3', '>= 1.3.3'
+gem 'rubocop', '~> 0.51.0', require: false
+# Locking Selenium to version 2 because Jenkins is failing with:
+# Unable to find Mozilla geckodriver
+gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
