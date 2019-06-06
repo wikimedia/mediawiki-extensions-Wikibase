@@ -30,12 +30,18 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	private $loadBalancer;
 
 	public function setUp() {
-		$this->db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
-		$this->db->sourceFile(
-			__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql' );
+		$this->db = $this->setUpNewDb();
 		$this->loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db
 		] );
+	}
+
+	private function setUpNewDb() {
+		$db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
+		$db->sourceFile(
+			__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql' );
+
+		return $db;
 	}
 
 	public function testAcquireTermIdsReturnsArrayOfIdsForAllTerms() {
@@ -300,11 +306,78 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds );
 	}
 
-	private function assertTermsArrayExistInDb( $termsArray, $typeIds ) {
+	public function testIgnoresReplicaInRestoration() {
+		$dbMaster = $this->setUpNewDb();
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+			'dbw' => $dbMaster
+		] );
+
+		$typeIdsAcquirer = new InMemoryTypeIdsStore();
+		$alreadyAcquiredTypeIds = $typeIdsAcquirer->acquireTypeIds(
+			[ 'label', 'description', 'alias' ]
+		);
+
+		$termsArray = [
+			'label' => [ 'en' => 'same' ],
+			'description' => [ 'en' => 'same' ],
+			'alias' => [
+				'en' => [ 'same', 'another' ]
+			]
+		];
+
+		$this->db->insert( 'wbt_text', [ 'wbx_text' => 'same' ] );
+		$sameTextId = $this->db->insertId();
+
+		$this->db->insert(
+			'wbt_text_in_lang',
+			[ 'wbxl_text_id' => $sameTextId, 'wbxl_language' => 'en' ]
+		);
+		$enSameTextInLangId = $this->db->insertId();
+
+		$this->db->insert(
+			'wbt_term_in_lang',
+			[ 'wbtl_text_in_lang_id' => $enSameTextInLangId,
+			  'wbtl_type_id' => $alreadyAcquiredTypeIds['label'] ]
+		);
+		$labelEnSameTermInLangId = (string)$this->db->insertId();
+
+		$this->db->insert(
+			'wbt_term_in_lang',
+			[ 'wbtl_text_in_lang_id' => $enSameTextInLangId,
+			  'wbtl_type_id' => $alreadyAcquiredTypeIds['alias'] ]
+		);
+		$aliasEnSameTermInLangId = (string)$this->db->insertId();
+
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$loadBalancer,
+			$typeIdsAcquirer,
+			function ( $acquiredIds ) use ( $dbMaster ) {
+				// This is going to delete everything in master db.
+				// Expected behavior is that the term ids acquirer will ignore replica entirely
+				// during restoration, which should result in restoring the deleted ids
+				// in master eventhough they already existed in replica,
+				// mimicing delayed replication of clean up that happened in master.
+
+				$idsToDelete = array_slice( $acquiredIds, 0, 3 );
+				$dbMaster->delete( 'wbt_text', '*' );
+				$dbMaster->delete( 'wbt_text_in_lang', '*' );
+				$dbMaster->delete( 'wbt_term_in_lang', '*' );
+			}
+		);
+
+		$dbTermIdsAcquirer->acquireTermIds( $termsArray );
+
+		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds, $dbMaster );
+	}
+
+	private function assertTermsArrayExistInDb( $termsArray, $typeIds, $db = null ) {
+		$db = $db ?? $this->db;
+
 		foreach ( $termsArray as $type => $textsPerLang ) {
 			foreach ( $textsPerLang as $lang => $texts ) {
 				foreach ( (array)$texts as $text ) {
-					$textId = $this->db->selectField(
+					$textId = $db->selectField(
 						'wbt_text',
 						'wbx_id',
 						[ 'wbx_text' => $text ]
@@ -315,7 +388,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 						"Expected record for text '$text' is not in wbt_text"
 					);
 
-					$textInLangId = $this->db->selectField(
+					$textInLangId = $db->selectField(
 						'wbt_text_in_lang',
 						'wbxl_id',
 						[ 'wbxl_language' => $lang, 'wbxl_text_id' => $textId ]
@@ -327,7 +400,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 					);
 
 					$this->assertNotEmpty(
-						$this->db->selectField(
+						$db->selectField(
 							'wbt_term_in_lang',
 							'wbtl_id',
 							[ 'wbtl_type_id' => $typeIds[$type], 'wbtl_text_in_lang_id' => $textInLangId ]
