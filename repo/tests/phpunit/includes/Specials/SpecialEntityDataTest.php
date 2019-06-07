@@ -104,7 +104,9 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				self::URI_DATA,
 				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
-				''
+				'',
+				[ '' => '' ],
+				[ '' => '' ]
 			),
 			true
 		);
