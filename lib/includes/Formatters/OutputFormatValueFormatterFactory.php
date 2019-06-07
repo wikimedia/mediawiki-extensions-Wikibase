@@ -170,6 +170,3 @@ class OutputFormatValueFormatterFactory {
 	}
 
 }
-
-/** @deprecated */
-class_alias( OutputFormatValueFormatterFactory::class, 'Wikibase\Lib\OutputFormatValueFormatterFactory' );
