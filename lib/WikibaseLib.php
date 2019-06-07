@@ -52,10 +52,7 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 }
 
 call_user_func( function() {
-	global $wgHooks, $wgResourceModules, $wgMessagesDirs;
-
-	// i18n
-	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
+	global $wgHooks, $wgResourceModules;
 
 	$wgHooks['UnitTestsList'][] = 'Wikibase\LibHooks::registerPhpUnitTests';
 	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\LibHooks::registerQUnitTests';
