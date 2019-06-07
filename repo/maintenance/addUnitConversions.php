@@ -356,6 +356,8 @@ QUERY;
 			new DataAccessSettings( $irrelevantValue, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION, false ),
 			new EntitySourceDefinitions( [] ),
 			'',
+			[ '' => 'wd' ],
+			[ '' => '' ],
 			[],
 			$typeUris,
 			[]

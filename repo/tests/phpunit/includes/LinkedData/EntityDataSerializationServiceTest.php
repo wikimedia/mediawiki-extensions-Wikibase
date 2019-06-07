@@ -121,7 +121,9 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				self::URI_DATA,
 				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
-				''
+				'',
+				[ '' => 'wd' ],
+				[ '' => '' ]
 			),
 			true
 		);

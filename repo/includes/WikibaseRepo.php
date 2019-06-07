@@ -1363,6 +1363,16 @@ class WikibaseRepo {
 
 			$dataAccessSettings = $this->getDataAccessSettings();
 			$localEntitySourceName = $dataAccessSettings->useEntitySourceBasedFederation() ? $this->getLocalEntitySource()->getSourceName() : '';
+			$nodeNamespacePrefixes = [];
+			$predicateNamespacePrefixes = [];
+			if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+				$nodeNamespacePrefixes = $this->entitySourceDefinitions->getRdfNodeNamespacePrefixes();
+				$predicateNamespacePrefixes = $this->entitySourceDefinitions->getRdfPredicateNamespacePrefixes();
+			} else {
+				// TODO: hard-coded, should be configurable
+				$nodeNamespacePrefixes[$localEntitySourceName] = 'wd';
+				$predicateNamespacePrefixes[$localEntitySourceName] = '';
+			}
 
 			$this->rdfVocabulary = new RdfVocabulary(
 				$dataAccessSettings->useEntitySourceBasedFederation() ?
@@ -1372,6 +1382,8 @@ class WikibaseRepo {
 				$dataAccessSettings,
 				$this->entitySourceDefinitions,
 				$localEntitySourceName,
+				$nodeNamespacePrefixes,
+				$predicateNamespacePrefixes,
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris(),
 				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: [],
