@@ -24,39 +24,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 	public function execute() {
 		$this->generateAutoloadForComponent(
-			'data-access',
-			[ 'src' ],
-			[
-				'tests/phpunit/EntityPrefetcherSpy.php',
-				'tests/phpunit/FakePrefetchingTermLookup.php',
-			]
-		);
-
-		$this->generateAutoloadForComponent(
-			'lib',
-			[ 'includes', 'maintenance' ],
-			[
-				'tests/phpunit/EntityRevisionLookupTestCase.php',
-				'tests/phpunit/MockPropertyLabelResolver.php',
-				'tests/phpunit/MockRepository.php',
-				'tests/phpunit/Changes/ChangeRowTest.php',
-				'tests/phpunit/Changes/EntityChangeTest.php',
-				'tests/phpunit/Changes/MockRepoClientCentralIdLookup.php',
-				'tests/phpunit/Changes/TestChanges.php',
-				'tests/phpunit/Store/EntityInfoBuilderTestCase.php',
-				'tests/phpunit/Store/EntityTermLookupTest.php',
-				'tests/phpunit/Store/GenericEntityInfoBuilder.php',
-				'tests/phpunit/Store/HttpUrlPropertyOrderProviderTestMockHttp.php',
-				'tests/phpunit/Store/MockChunkAccess.php',
-				'tests/phpunit/Store/MockPropertyInfoLookup.php',
-				'tests/phpunit/Store/MockTermIndex.php',
-				'tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
-				'tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
-				'tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php',
-			]
-		);
-
-		$this->generateAutoloadForComponent(
 			'repo',
 			[ 'includes', 'maintenance' ],
 			[
