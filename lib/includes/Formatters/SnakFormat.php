@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
 
@@ -84,3 +84,6 @@ class SnakFormat {
 	}
 
 }
+
+/** @deprecated */
+class_alias( SnakFormat::class, 'Wikibase\Lib\SnakFormat' );

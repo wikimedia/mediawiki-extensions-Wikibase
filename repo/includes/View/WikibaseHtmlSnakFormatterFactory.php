@@ -6,9 +6,9 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\HtmlSnakFormatterFactory;
 
 /**

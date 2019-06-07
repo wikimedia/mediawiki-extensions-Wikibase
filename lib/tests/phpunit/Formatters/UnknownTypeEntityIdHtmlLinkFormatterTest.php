@@ -7,12 +7,12 @@ use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
+use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
+use Wikibase\Lib\Formatters\UnknownTypeEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter;
 
 /**
- * @covers \Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\UnknownTypeEntityIdHtmlLinkFormatter
  *
  * @group Wikibase
  *

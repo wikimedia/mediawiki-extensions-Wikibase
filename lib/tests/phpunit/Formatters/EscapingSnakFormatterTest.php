@@ -6,11 +6,11 @@ use DataValues\StringValue;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\EscapingSnakFormatter;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\EscapingSnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
- * @covers \Wikibase\Lib\EscapingSnakFormatter
+ * @covers \Wikibase\Lib\Formatters\EscapingSnakFormatter
  *
  * @group SnakFormatters
  * @group DataValueExtensions

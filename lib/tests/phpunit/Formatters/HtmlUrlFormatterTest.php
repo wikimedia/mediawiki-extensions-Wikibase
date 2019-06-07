@@ -7,10 +7,10 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Lib\HtmlUrlFormatter;
+use Wikibase\Lib\Formatters\HtmlUrlFormatter;
 
 /**
- * @covers \Wikibase\Lib\HtmlUrlFormatter
+ * @covers \Wikibase\Lib\Formatters\HtmlUrlFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

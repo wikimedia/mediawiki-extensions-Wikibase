@@ -27,16 +27,16 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\WikibaseValueFormatterBuilders;
 
 /**
- * @covers \Wikibase\Lib\WikibaseValueFormatterBuilders
+ * @covers \Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders
  *
  * @group ValueFormatters
  * @group DataValueExtensions

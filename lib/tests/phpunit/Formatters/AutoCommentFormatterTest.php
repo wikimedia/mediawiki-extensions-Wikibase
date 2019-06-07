@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use Language;
-use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Formatters\AutoCommentFormatter;
 
 /**
- * @covers \Wikibase\Lib\AutoCommentFormatter
+ * @covers \Wikibase\Lib\Formatters\AutoCommentFormatter
  *
  * @group Wikibase
  *

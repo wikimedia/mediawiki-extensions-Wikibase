@@ -10,11 +10,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdPlainLinkFormatter;
+use Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers \Wikibase\Lib\EntityIdPlainLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\EntityIdPlainLinkFormatter
  *
  * @group Wikibase
  *

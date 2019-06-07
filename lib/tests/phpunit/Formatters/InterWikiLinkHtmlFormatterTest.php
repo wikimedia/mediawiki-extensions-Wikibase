@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\Lib\CommonsLinkFormatter;
+use Wikibase\Lib\Formatters\CommonsLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 
 /**

@@ -10,11 +10,11 @@ use ValueParsers\IsoTimestampParser;
 use ValueParsers\MonthNameProvider;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Lib\Formatters\MwTimeIsoFormatter;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
- * @covers \Wikibase\Lib\MwTimeIsoFormatter
+ * @covers \Wikibase\Lib\Formatters\MwTimeIsoFormatter
  * @covers \Wikibase\Repo\Parsers\TimeParserFactory
  *
  * @group Wikibase
