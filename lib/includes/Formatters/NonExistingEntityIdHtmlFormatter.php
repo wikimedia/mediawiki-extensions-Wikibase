@@ -43,6 +43,3 @@ class NonExistingEntityIdHtmlFormatter implements EntityIdFormatter {
 	}
 
 }
-
-/** @deprecated */
-class_alias( NonExistingEntityIdHtmlFormatter::class, 'Wikibase\Lib\NonExistingEntityIdHtmlFormatter' );

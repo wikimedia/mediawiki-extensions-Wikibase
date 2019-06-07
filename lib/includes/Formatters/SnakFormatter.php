@@ -67,6 +67,3 @@ interface SnakFormatter {
 	public function getFormat();
 
 }
-
-/** @deprecated */
-class_alias( SnakFormatter::class, 'Wikibase\Lib\SnakFormatter' );
