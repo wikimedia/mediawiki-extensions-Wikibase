@@ -7,10 +7,10 @@ use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
+use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
 
 /**
- * @covers \Wikibase\Lib\NonExistingEntityIdHtmlFormatter
+ * @covers \Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter
  *
  * @group Wikibase
  *

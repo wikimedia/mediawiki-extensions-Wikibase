@@ -16,14 +16,14 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityIdValueFormatter;
-use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\EntityIdValueFormatter;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\DispatchingValueFormatter;
-use Wikibase\Lib\OutputFormatValueFormatterFactory;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
- * @covers \Wikibase\Lib\OutputFormatValueFormatterFactory
+ * @covers \Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions

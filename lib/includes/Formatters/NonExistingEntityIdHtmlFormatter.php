@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use Html;
 use Wikibase\DataModel\Entity\EntityId;
@@ -43,3 +43,6 @@ class NonExistingEntityIdHtmlFormatter implements EntityIdFormatter {
 	}
 
 }
+
+/** @deprecated */
+class_alias( NonExistingEntityIdHtmlFormatter::class, 'Wikibase\Lib\NonExistingEntityIdHtmlFormatter' );

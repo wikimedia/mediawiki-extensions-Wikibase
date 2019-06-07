@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\VocabularyUriFormatter;
+use Wikibase\Lib\Formatters\VocabularyUriFormatter;
 
 /**
- * @covers \Wikibase\Lib\VocabularyUriFormatter
+ * @covers \Wikibase\Lib\Formatters\VocabularyUriFormatter
  *
  * @group Wikibase
  *

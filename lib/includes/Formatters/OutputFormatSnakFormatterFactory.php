@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
 use Message;
@@ -8,7 +8,7 @@ use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter;
+use Wikibase\Lib\DataTypeFactory;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -169,3 +169,6 @@ class OutputFormatSnakFormatterFactory {
 	}
 
 }
+
+/** @deprecated */
+class_alias( OutputFormatSnakFormatterFactory::class, 'Wikibase\Lib\OutputFormatSnakFormatterFactory' );

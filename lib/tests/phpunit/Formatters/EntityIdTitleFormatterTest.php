@@ -10,11 +10,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdTitleFormatter;
+use Wikibase\Lib\Formatters\EntityIdTitleFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
- * @covers \Wikibase\Lib\EntityIdTitleFormatter
+ * @covers \Wikibase\Lib\Formatters\EntityIdTitleFormatter
  *
  * @group Wikibase
  * @group ValueFormatters

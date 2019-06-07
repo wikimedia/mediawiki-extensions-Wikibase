@@ -11,7 +11,7 @@ use Wikibase\Client\DataAccess\Scribunto\WikitextPreprocessingSnakFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\WikitextPreprocessingSnakFormatter

@@ -5,11 +5,11 @@ namespace Wikibase\Lib\Tests\Formatters;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use ReflectionClass;
-use Wikibase\Lib\SnakFormat;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormat;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
- * @covers \Wikibase\Lib\SnakFormat
+ * @covers \Wikibase\Lib\Formatters\SnakFormat
  * @group Wikibase
  *
  * @license GPL-2.0-or-later

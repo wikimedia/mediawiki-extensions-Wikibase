@@ -9,11 +9,11 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\MessageSnakFormatter;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\MessageSnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
- * @covers \Wikibase\Lib\MessageSnakFormatter
+ * @covers \Wikibase\Lib\Formatters\MessageSnakFormatter
  * @uses Wikibase\DataModel\Entity\PropertyId
  * @uses Wikibase\DataModel\Snak\PropertyNoValueSnak
  * @uses Wikibase\DataModel\Snak\PropertySomeValueSnak

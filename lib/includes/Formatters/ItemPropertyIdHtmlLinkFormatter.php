@@ -11,7 +11,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**

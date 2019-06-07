@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\DataValue;
 use ValueFormatters\FormatterOptions;
@@ -43,3 +43,6 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	}
 
 }
+
+/** @deprecated */
+class_alias( UnDeserializableValueFormatter::class, 'Wikibase\Lib\UnDeserializableValueFormatter' );
