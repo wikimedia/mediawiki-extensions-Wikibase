@@ -84,6 +84,3 @@ class SnakFormat {
 	}
 
 }
-
-/** @deprecated */
-class_alias( SnakFormat::class, 'Wikibase\Lib\SnakFormat' );

@@ -43,6 +43,3 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	}
 
 }
-
-/** @deprecated */
-class_alias( UnDeserializableValueFormatter::class, 'Wikibase\Lib\UnDeserializableValueFormatter' );

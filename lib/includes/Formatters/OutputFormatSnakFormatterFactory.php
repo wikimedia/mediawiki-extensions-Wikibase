@@ -169,6 +169,3 @@ class OutputFormatSnakFormatterFactory {
 	}
 
 }
-
-/** @deprecated */
-class_alias( OutputFormatSnakFormatterFactory::class, 'Wikibase\Lib\OutputFormatSnakFormatterFactory' );
