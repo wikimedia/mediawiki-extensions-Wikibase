@@ -16,6 +16,24 @@
       "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f7de5d_dc40f4f9",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-07T10:56:27Z",
+      "side": 1,
+      "message": "Yup good idea .. will do",
+      "parentUuid": "1ec678ce_53f3a05b",
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
