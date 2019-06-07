@@ -39,7 +39,9 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = new NTriplesRdfWriter();
@@ -92,7 +94,9 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = new NTriplesRdfWriter();
