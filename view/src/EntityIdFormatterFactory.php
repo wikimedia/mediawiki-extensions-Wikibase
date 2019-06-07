@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
  * A factory interface for generating EntityIdFormatters.

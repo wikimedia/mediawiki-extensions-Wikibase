@@ -27,7 +27,7 @@ use SkinTemplate;
 use StubUserLang;
 use Title;
 use User;
-use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;

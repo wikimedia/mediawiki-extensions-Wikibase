@@ -4,10 +4,10 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\UnDeserializableValueFormatter;
+use Wikibase\Lib\Formatters\UnDeserializableValueFormatter;
 
 /**
- * @covers \Wikibase\Lib\UnDeserializableValueFormatter
+ * @covers \Wikibase\Lib\Formatters\UnDeserializableValueFormatter
  *
  * @group Wikibase
  *

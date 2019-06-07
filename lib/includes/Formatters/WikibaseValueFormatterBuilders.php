@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Formatters\LatLongFormatter;
@@ -17,16 +17,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Formatters\MonolingualHtmlFormatter;
-use Wikibase\Formatters\MonolingualTextFormatter;
-use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
-use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
-use Wikibase\Lib\Formatters\EntityIdSiteLinkFormatter;
-use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
-use Wikibase\Lib\Formatters\InterWikiLinkWikitextFormatter;
-use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
-use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
-use Wikibase\Lib\Formatters\GlobeCoordinateInlineWikitextKartographerFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;

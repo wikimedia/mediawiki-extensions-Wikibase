@@ -6,10 +6,10 @@ use Language;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\NonExistingEntityIdHtmlFormatter;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\UnknownTypeEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\UnknownTypeEntityIdHtmlLinkFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikimedia\Assert\Assert;
 

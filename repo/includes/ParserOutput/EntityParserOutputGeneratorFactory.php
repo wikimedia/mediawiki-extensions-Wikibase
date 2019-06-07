@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;

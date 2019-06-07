@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\TimeValue;
 use Html;
@@ -12,7 +12,7 @@ use ValueFormatters\ValueFormatterBase;
 /**
  * Formatter for rendering the details of a TimeValue (most useful for diffs) in HTML.
  *
- * @see Wikibase\Lib\HtmlTimeFormatter
+ * @see \Wikibase\Lib\Formatters\HtmlTimeFormatter
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

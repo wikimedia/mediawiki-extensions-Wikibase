@@ -10,10 +10,10 @@ use PHPUnit4And6Compat;
 use ValueFormatters\BasicNumberLocalizer;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\QuantityDetailsFormatter;
+use Wikibase\Lib\Formatters\QuantityDetailsFormatter;
 
 /**
- * @covers \Wikibase\Lib\QuantityDetailsFormatter
+ * @covers \Wikibase\Lib\Formatters\QuantityDetailsFormatter
  *
  * @group ValueFormatters
  * @group Wikibase

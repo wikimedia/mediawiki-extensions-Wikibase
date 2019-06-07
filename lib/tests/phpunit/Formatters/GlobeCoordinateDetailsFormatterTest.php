@@ -9,10 +9,10 @@ use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
+use Wikibase\Lib\Formatters\GlobeCoordinateDetailsFormatter;
 
 /**
- * @covers \Wikibase\Lib\GlobeCoordinateDetailsFormatter
+ * @covers \Wikibase\Lib\Formatters\GlobeCoordinateDetailsFormatter
  *
  * @group ValueFormatters
  * @group Wikibase

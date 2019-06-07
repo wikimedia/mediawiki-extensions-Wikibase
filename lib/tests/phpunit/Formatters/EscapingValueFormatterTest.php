@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use Wikibase\Lib\EscapingValueFormatter;
+use Wikibase\Lib\Formatters\EscapingValueFormatter;
 
 /**
- * @covers \Wikibase\Lib\EscapingValueFormatter
+ * @covers \Wikibase\Lib\Formatters\EscapingValueFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

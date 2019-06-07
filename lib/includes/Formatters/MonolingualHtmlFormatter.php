@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Formatters;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
