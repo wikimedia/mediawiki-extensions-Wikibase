@@ -16,6 +16,19 @@ use ResourceLoader;
 final class LibHooks {
 
 	/**
+	 * Callback called after extension registration,
+	 * for any work that cannot be done directly in extension.json.
+	 */
+	public static function onRegistration() {
+		global $wgResourceModules;
+
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			require __DIR__ . '/resources/Resources.php'
+		);
+	}
+
+	/**
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *

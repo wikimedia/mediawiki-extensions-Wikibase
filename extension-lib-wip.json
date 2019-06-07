@@ -98,6 +98,7 @@
 			"\\Wikibase\\LibHooks::onExtensionTypes"
 		]
 	},
+	"callback": "\\Wikibase\\LibHooks::onRegistration",
 	"MessagesDirs": {
 		"WikibaseLib": [
 			"lib/i18n"
