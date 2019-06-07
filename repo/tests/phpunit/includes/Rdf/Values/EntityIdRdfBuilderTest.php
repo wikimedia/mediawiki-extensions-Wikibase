@@ -43,7 +43,9 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://test/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			['' => ''],
+			['' => '']
 		);
 		$builder = new EntityIdRdfBuilder( $vocab, new NullEntityMentionListener() );
 
@@ -74,7 +76,9 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new EntitySourceDefinitions( [
 				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '' )
 			] ),
-			'test'
+			'test',
+			['test' => ''],
+			['test' => '']
 		);
 		$builder = new EntityIdRdfBuilder( $vocab, new NullEntityMentionListener() );
 
