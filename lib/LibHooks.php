@@ -83,4 +83,20 @@ final class LibHooks {
 		return true;
 	}
 
+	/**
+	 * Called when generating the extensions credits, use this to change the tables headers.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
+	 *
+	 * @param array &$extensionTypes
+	 *
+	 * @return boolean
+	 */
+	public static function onExtensionTypes( array &$extensionTypes ) {
+		// @codeCoverageIgnoreStart
+		$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
+
+		return true;
+		// @codeCoverageIgnoreEnd
+	}
+
 }

@@ -10,6 +10,20 @@
 	"requires": {
 		"MediaWiki": ">= 1.26"
 	},
+	"Hooks": {
+		"UnitTestsList": [
+			"\\Wikibase\\LibHooks::registerPhpUnitTests"
+		],
+		"ResourceLoaderTestModules": [
+			"\\Wikibase\\LibHooks::registerQUnitTests"
+		],
+		"ResourceLoaderRegisterModules": [
+			"\\Wikibase\\LibHooks::onResourceLoaderRegisterModules"
+		],
+		"ExtensionTypes": [
+			"\\Wikibase\\LibHooks::onExtensionTypes"
+		]
+	},
 	"MessagesDirs": {
 		"WikibaseLib": [
 			"lib/i18n"
