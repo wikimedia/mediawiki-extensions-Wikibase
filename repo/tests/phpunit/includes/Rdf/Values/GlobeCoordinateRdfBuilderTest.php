@@ -156,7 +156,9 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = new NTriplesRdfWriter();
@@ -200,7 +202,9 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			DataAccessSettingsTest::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = new NTriplesRdfWriter();
