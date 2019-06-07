@@ -35,7 +35,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			'<DATA>',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => 'wd', 'foo' => 'foo' ],
+			[ '' => '', 'foo' => 'foo' ]
 		);
 	}
 
@@ -50,7 +52,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
 				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
 			] ),
-			'local'
+			'local',
+			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
+			[ 'localwiki' => '', 'otherwiki' => 'other' ]
 		);
 	}
 
@@ -61,6 +65,8 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
 			'',
+			[ '' => 'wd', 'foo' => 'foo' ],
+			[ '' => '', 'foo' => 'foo' ],
 			[ 'German' => 'de' ],
 			[ 'acme' => 'http://acme.test/vocab/ACME' ],
 			[],
@@ -78,6 +84,8 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				new EntitySource( 'otherwiki', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-other>', 'other' ,'other', '' ),
 			] ),
 			'localwiki',
+			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
+			[ 'localwiki' => '', 'otherwiki' => 'other' ],
 			[ 'German' => 'de' ],
 			[ 'acme' => 'http://acme.test/vocab/ACME' ],
 			[],
@@ -179,7 +187,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$all = $vocab->getNamespaces();
 
 		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( RdfVocabulary::NS_DATA ) );
-		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( RdfVocabulary::NS_ENTITY ) );
+		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( $vocab->entityNamespaceNames[''] ) );
 
 		foreach ( $all as $ns => $uri ) {
 			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
@@ -194,7 +202,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$all = $vocab->getNamespaces();
 
 		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( RdfVocabulary::NS_DATA ) );
-		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( RdfVocabulary::NS_ENTITY ) );
+		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( $vocab->entityNamespaceNames['localwiki'] ) );
 
 		foreach ( $all as $ns => $uri ) {
 			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
@@ -207,13 +215,13 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 	public function testEntityNamespaceNames() {
 		$vocabulary = $this->newInstance();
 
-		$this->assertEquals( [ '' => 'wd', 'foo' => 'wd-foo' ], $vocabulary->entityNamespaceNames );
+		$this->assertEquals( [ '' => 'wd', 'foo' => 'foo' ], $vocabulary->entityNamespaceNames );
 	}
 
 	public function testEntityNamespaceNames_entitySourceBasedFederation() {
 		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
 
-		$this->assertEquals( [ 'localwiki' => 'wd', 'otherwiki' => 'wd-otherwiki' ], $vocabulary->entityNamespaceNames );
+		$this->assertEquals( [ 'localwiki' => 'wd', 'otherwiki' => 'other' ], $vocabulary->entityNamespaceNames );
 	}
 
 	public function testPropertyNamespaceNames() {
@@ -222,7 +230,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals(
 			[
 				'' => [
-					'wdt' => 'wdt',
+					't' => 'wdt',
 					'p' => 'p',
 					'ps' => 'ps',
 					'psv' => 'psv',
@@ -233,23 +241,23 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'pr' => 'pr',
 					'prv' => 'prv',
 					'prn' => 'prn',
-					'wdno' => 'wdno',
-					'wdtn' => 'wdtn',
+					'no' => 'wdno',
+					'tn' => 'wdtn',
 				],
 				'foo' => [
-					'wdt' => 'wdt-foo',
-					'p' => 'p-foo',
-					'ps' => 'ps-foo',
-					'psv' => 'psv-foo',
-					'psn' => 'psn-foo',
-					'pq' => 'pq-foo',
-					'pqv' => 'pqv-foo',
-					'pqn' => 'pqn-foo',
-					'pr' => 'pr-foo',
-					'prv' => 'prv-foo',
-					'prn' => 'prn-foo',
-					'wdno' => 'wdno-foo',
-					'wdtn' => 'wdtn-foo',
+					't' => 'foot',
+					'p' => 'foop',
+					'ps' => 'foops',
+					'psv' => 'foopsv',
+					'psn' => 'foopsn',
+					'pq' => 'foopq',
+					'pqv' => 'foopqv',
+					'pqn' => 'foopqn',
+					'pr' => 'foopr',
+					'prv' => 'fooprv',
+					'prn' => 'fooprn',
+					'no' => 'foono',
+					'tn' => 'footn',
 				],
 			],
 			$vocabulary->propertyNamespaceNames
@@ -262,7 +270,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals(
 			[
 				'localwiki' => [
-					'wdt' => 'wdt',
+					't' => 'wdt',
 					'p' => 'p',
 					'ps' => 'ps',
 					'psv' => 'psv',
@@ -273,23 +281,23 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'pr' => 'pr',
 					'prv' => 'prv',
 					'prn' => 'prn',
-					'wdno' => 'wdno',
-					'wdtn' => 'wdtn',
+					'no' => 'wdno',
+					'tn' => 'wdtn',
 				],
 				'otherwiki' => [
-					'wdt' => 'wdt-otherwiki',
-					'p' => 'p-otherwiki',
-					'ps' => 'ps-otherwiki',
-					'psv' => 'psv-otherwiki',
-					'psn' => 'psn-otherwiki',
-					'pq' => 'pq-otherwiki',
-					'pqv' => 'pqv-otherwiki',
-					'pqn' => 'pqn-otherwiki',
-					'pr' => 'pr-otherwiki',
-					'prv' => 'prv-otherwiki',
-					'prn' => 'prn-otherwiki',
-					'wdno' => 'wdno-otherwiki',
-					'wdtn' => 'wdtn-otherwiki',
+					't' => 'othert',
+					'p' => 'otherp',
+					'ps' => 'otherps',
+					'psv' => 'otherpsv',
+					'psn' => 'otherpsn',
+					'pq' => 'otherpq',
+					'pqv' => 'otherpqv',
+					'pqn' => 'otherpqn',
+					'pr' => 'otherpr',
+					'prv' => 'otherprv',
+					'prn' => 'otherprn',
+					'no' => 'otherno',
+					'tn' => 'othertn',
 				],
 			],
 			$vocabulary->propertyNamespaceNames
@@ -304,9 +312,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psv',
 				'pq' => 'pqv',
 				'pr' => 'prv',
-				'ps-foo' => 'psv-foo',
-				'pq-foo' => 'pqv-foo',
-				'pr-foo' => 'prv-foo',
+				'foops' => 'foopsv',
+				'foopq' => 'foopqv',
+				'foopr' => 'fooprv',
 			],
 			$vocabulary->claimToValue
 		);
@@ -320,9 +328,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psv',
 				'pq' => 'pqv',
 				'pr' => 'prv',
-				'ps-otherwiki' => 'psv-otherwiki',
-				'pq-otherwiki' => 'pqv-otherwiki',
-				'pr-otherwiki' => 'prv-otherwiki',
+				'otherps' => 'otherpsv',
+				'otherpq' => 'otherpqv',
+				'otherpr' => 'otherprv',
 			],
 			$vocabulary->claimToValue
 		);
@@ -336,9 +344,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psn',
 				'pq' => 'pqn',
 				'pr' => 'prn',
-				'ps-foo' => 'psn-foo',
-				'pq-foo' => 'pqn-foo',
-				'pr-foo' => 'prn-foo',
+				'foops' => 'foopsn',
+				'foopq' => 'foopqn',
+				'foopr' => 'fooprn',
 			],
 			$vocabulary->claimToValueNormalized
 		);
@@ -352,9 +360,9 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psn',
 				'pq' => 'pqn',
 				'pr' => 'prn',
-				'ps-otherwiki' => 'psn-otherwiki',
-				'pq-otherwiki' => 'pqn-otherwiki',
-				'pr-otherwiki' => 'prn-otherwiki',
+				'otherps' => 'otherpsn',
+				'otherpq' => 'otherpqn',
+				'otherpr' => 'otherprn',
 			],
 			$vocabulary->claimToValueNormalized
 		);
@@ -369,10 +377,10 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psn',
 				'pq' => 'pqn',
 				'pr' => 'prn',
-				'wdt-foo' => 'wdtn-foo',
-				'ps-foo' => 'psn-foo',
-				'pq-foo' => 'pqn-foo',
-				'pr-foo' => 'prn-foo',
+				'foot' => 'footn',
+				'foops' => 'foopsn',
+				'foopq' => 'foopqn',
+				'foopr' => 'fooprn',
 			],
 			$vocabulary->normalizedPropertyValueNamespace
 		);
@@ -387,10 +395,10 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psn',
 				'pq' => 'pqn',
 				'pr' => 'prn',
-				'wdt-otherwiki' => 'wdtn-otherwiki',
-				'ps-otherwiki' => 'psn-otherwiki',
-				'pq-otherwiki' => 'pqn-otherwiki',
-				'pr-otherwiki' => 'prn-otherwiki',
+				'othert' => 'othertn',
+				'otherps' => 'otherpsn',
+				'otherpq' => 'otherpqn',
+				'otherpr' => 'otherprn',
 			],
 			$vocabulary->normalizedPropertyValueNamespace
 		);

@@ -175,7 +175,9 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 				'acme/EntityData/',
 				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 				new EntitySourceDefinitions( [] ),
-				''
+				'',
+				[ '' => '' ],
+				[ '' => '' ]
 			),
 			$this->getEntityTitleLookup()
 		);
