@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "34068e5c_72799f36",
+        "filename": "lib/includes/Store/Sql/PageTableEntityQuery.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-06-07T11:44:32Z",
+      "side": 1,
+      "message": "This class here is in a namespace, therefor everything thats not in a namespace either needs this backslash or an entry in the \"use\" section. I\u0027m fine with either. Please, anybody feel free to update this patch. I won\u0027t be around to update it for a while.",
+      "parentUuid": "53d3d0bf_9fc9d32c",
+      "range": {
+        "startLine": 21,
+        "startChar": 12,
+        "endLine": 21,
+        "endChar": 13
+      },
+      "revId": "d4b981401110d938f6bd64e6a392542089e68d7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11179783_ffab4136",
         "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
         "patchSetId": 1
