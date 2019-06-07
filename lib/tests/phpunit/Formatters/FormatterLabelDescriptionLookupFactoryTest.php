@@ -14,10 +14,10 @@ use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 
 /**
- * @covers \Wikibase\Lib\FormatterLabelDescriptionLookupFactory
+ * @covers \Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions

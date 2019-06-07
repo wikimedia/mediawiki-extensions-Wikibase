@@ -31,7 +31,7 @@ use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use WikiPage;
 
 /**

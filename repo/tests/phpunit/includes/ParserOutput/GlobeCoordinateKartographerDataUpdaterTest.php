@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Repo\ParserOutput\GlobeCoordinateKartographerDataUpdater;
 
 /**

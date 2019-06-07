@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
@@ -13,8 +13,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
-use Wikibase\Lib\Formatters\TypedValueFormatter;
 
 /**
  * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. This is essentially a

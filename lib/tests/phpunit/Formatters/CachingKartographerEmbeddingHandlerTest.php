@@ -8,12 +8,12 @@ use ExtensionRegistry;
 use Language;
 use Parser;
 use ParserOutput;
-use Wikibase\Lib\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikimedia\TestingAccessWrapper;
 use Xml;
 
 /**
- * @covers \Wikibase\Lib\CachingKartographerEmbeddingHandler
+ * @covers \Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler
  *
  * @group Wikibase
  *

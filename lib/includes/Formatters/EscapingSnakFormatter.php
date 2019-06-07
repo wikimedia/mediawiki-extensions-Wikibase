@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use Wikibase\DataModel\Snak\Snak;
 use Wikimedia\Assert\Assert;

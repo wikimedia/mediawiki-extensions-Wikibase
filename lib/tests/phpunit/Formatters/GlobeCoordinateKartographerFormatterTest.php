@@ -10,11 +10,11 @@ use Language;
 use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\GlobeCoordinateKartographerFormatter;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\GlobeCoordinateKartographerFormatter;
 
 /**
- * @covers \Wikibase\Lib\GlobeCoordinateKartographerFormatter
+ * @covers \Wikibase\Lib\Formatters\GlobeCoordinateKartographerFormatter
  *
  * @group ValueFormatters
  * @group Wikibase

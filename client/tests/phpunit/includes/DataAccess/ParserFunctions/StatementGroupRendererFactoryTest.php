@@ -28,8 +28,8 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 

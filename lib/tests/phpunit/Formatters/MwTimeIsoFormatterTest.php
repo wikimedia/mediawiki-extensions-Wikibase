@@ -6,10 +6,10 @@ use DataValues\TimeValue;
 use MediaWikiTestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Lib\Formatters\MwTimeIsoFormatter;
 
 /**
- * @covers \Wikibase\Lib\MwTimeIsoFormatter
+ * @covers \Wikibase\Lib\Formatters\MwTimeIsoFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

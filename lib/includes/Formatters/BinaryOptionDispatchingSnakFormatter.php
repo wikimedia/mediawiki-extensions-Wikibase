@@ -6,7 +6,6 @@ use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
 use Wikimedia\Assert\Assert;
 
 /**
