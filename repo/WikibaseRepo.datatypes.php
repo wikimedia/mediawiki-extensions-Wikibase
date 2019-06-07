@@ -36,8 +36,9 @@ use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter;
-use Wikibase\Lib\SnakFormat;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormat;
+use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Rdf\DedupeBag;
@@ -394,7 +395,7 @@ return call_user_func( function() {
 
 						$formatter->setLogger( $logger );
 
-						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+						return new \Wikibase\Lib\Formatters\EntityIdValueFormatter( $formatter );
 					} catch ( \Exception $e ) {
 						$logger->error(
 							"Failed to construct ItemIdHtmlLinkFormatter: {exception_message}",
@@ -437,7 +438,7 @@ return call_user_func( function() {
 
 						$formatter->setLogger( $logger );
 
-						return new \Wikibase\Lib\EntityIdValueFormatter( $formatter );
+						return new \Wikibase\Lib\Formatters\EntityIdValueFormatter( $formatter );
 					} catch ( \Exception $e ) {
 						$logger->error(
 							"Failed to construct ItemPropertyIdHtmlLinkFormatter: {exception_message}",

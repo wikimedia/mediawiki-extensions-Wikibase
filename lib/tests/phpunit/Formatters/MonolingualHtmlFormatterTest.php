@@ -3,11 +3,11 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
-use Wikibase\Formatters\MonolingualHtmlFormatter;
+use Wikibase\Lib\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 
 /**
- * @covers \Wikibase\Formatters\MonolingualHtmlFormatter
+ * @covers \Wikibase\Lib\Formatters\MonolingualHtmlFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

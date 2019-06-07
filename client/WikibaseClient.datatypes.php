@@ -25,6 +25,7 @@
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
+use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 
 return call_user_func( function() {
 	// NOTE: 'formatter-factory-callback' callbacks act as glue between the high level interface

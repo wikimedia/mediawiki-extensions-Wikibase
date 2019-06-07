@@ -3,6 +3,8 @@
 namespace Wikibase\Lib;
 
 use UnexpectedValueException;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikimedia\Assert\Assert;
 
 /**

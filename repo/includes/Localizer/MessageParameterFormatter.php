@@ -11,7 +11,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\MediaWikiNumberLocalizer;
+use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 
 /**
  * ValueFormatter for formatting objects that may be encountered in

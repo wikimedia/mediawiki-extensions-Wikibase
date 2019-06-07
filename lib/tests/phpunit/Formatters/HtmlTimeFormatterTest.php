@@ -8,10 +8,10 @@ use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\HtmlTimeFormatter;
+use Wikibase\Lib\Formatters\HtmlTimeFormatter;
 
 /**
- * @covers \Wikibase\Lib\HtmlTimeFormatter
+ * @covers \Wikibase\Lib\Formatters\HtmlTimeFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

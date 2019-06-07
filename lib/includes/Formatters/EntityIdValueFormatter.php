@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
 use ValueFormatters\ValueFormatter;
@@ -45,3 +45,6 @@ class EntityIdValueFormatter implements ValueFormatter {
 	}
 
 }
+
+/** @deprecated */
+class_alias( EntityIdValueFormatter::class, 'Wikibase\Lib\EntityIdValueFormatter' );
