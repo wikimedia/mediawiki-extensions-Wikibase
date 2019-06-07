@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0030bbac_31cbc87a",
+        "filename": "lib/tests/phpunit/Formatters/UnknownTypeEntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-07T20:53:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this go up? no big deal though.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 65
+      },
+      "revId": "8885f6f9eb3ff004febe603c986beb32af8cb3fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfdee00e_165987de",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-07T20:53:13Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 59
+      },
+      "revId": "8885f6f9eb3ff004febe603c986beb32af8cb3fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
