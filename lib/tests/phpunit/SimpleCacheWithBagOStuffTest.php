@@ -19,7 +19,9 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 	use \PHPUnit4And6Compat;
 
 	protected $skippedTests = [
-		'testClear' => 'Not possible to implement for BagOStuff'
+		'testClear' => 'Not possible to implement for BagOStuff',
+		'testSetTtl' => 'Really slow test',
+		'testSetMultipleTtl' => 'Really slow test'
 	];
 
 	/**
@@ -119,7 +121,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 		list( $signature, $data ) = json_decode( $value );
 		$inner->set( 'prefix_key', json_encode( [ 'wrong signature', $data ] ) );
 
-		$got = $cache->get( 'key', 'some default value' );
+		$cache->get( 'key', 'some default value' );
 
 		$logger->alert( Argument::any(), Argument::any() )->shouldHaveBeenCalled();
 	}
