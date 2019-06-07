@@ -45,6 +45,3 @@ class EntityIdValueFormatter implements ValueFormatter {
 	}
 
 }
-
-/** @deprecated */
-class_alias( EntityIdValueFormatter::class, 'Wikibase\Lib\EntityIdValueFormatter' );
