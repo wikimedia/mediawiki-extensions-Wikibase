@@ -285,7 +285,9 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = $this->newSnakWriter();
@@ -320,7 +322,9 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = $this->newSnakWriter();
@@ -350,7 +354,9 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$snakWriter = $this->newSnakWriter();
 		$valueWriter = $snakWriter->sub();
@@ -394,7 +400,9 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$snakWriter = $this->newSnakWriter();
 		$valueWriter = $snakWriter->sub();
@@ -442,7 +450,9 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$snakWriter = $this->newSnakWriter();
 		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, true,
@@ -510,7 +520,9 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$snakWriter = $this->newSnakWriter();
 		$builder = $this->newQuantityRdfBuilder( $snakWriter->sub(), $vocab, true,
