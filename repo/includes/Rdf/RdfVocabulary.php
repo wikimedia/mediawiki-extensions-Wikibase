@@ -26,14 +26,14 @@ class RdfVocabulary {
 	const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
 	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
 	// Nodes
-	const NS_ENTITY = 'wd'; // concept uris
-	const NS_DATA = 'wdata'; // document uris
-	const NS_STATEMENT = 'wds'; // statement
-	const NS_REFERENCE = 'wdref'; // reference
-	const NS_VALUE = 'wdv'; // value
+	const NS_ENTITY = ''; // concept uris
+	const NS_DATA = 'data'; // document uris
+	const NS_STATEMENT = 's'; // statement
+	const NS_REFERENCE = 'ref'; // reference
+	const NS_VALUE = 'v'; // value
 	// Predicates
-	const NSP_DIRECT_CLAIM = 'wdt'; // direct assertion entity -> value
-	const NSP_DIRECT_CLAIM_NORM = 'wdtn'; // direct assertion entity -> value, normalized
+	const NSP_DIRECT_CLAIM = 't'; // direct assertion entity -> value
+	const NSP_DIRECT_CLAIM_NORM = 'tn'; // direct assertion entity -> value, normalized
 	const NSP_CLAIM = 'p'; // entity -> statement
 	const NSP_CLAIM_STATEMENT = 'ps'; // statement -> simple value
 	const NSP_CLAIM_VALUE = 'psv'; // statement -> deep value
@@ -44,7 +44,7 @@ class RdfVocabulary {
 	const NSP_REFERENCE = 'pr'; // reference -> simple value
 	const NSP_REFERENCE_VALUE = 'prv'; // reference -> deep value
 	const NSP_REFERENCE_VALUE_NORM = 'prn'; // reference -> deep value, normalized
-	const NSP_NOVALUE = 'wdno'; // novalue class
+	const NSP_NOVALUE = 'no'; // novalue class
 	// other prefixes
 	const NS_SKOS = 'skos'; // SKOS vocabulary
 	const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
@@ -137,6 +137,8 @@ class RdfVocabulary {
 	 * @param DataAccessSettings $dataAccessSettings
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param string $localEntitySourceName
+	 * @param string[] $rdfTurtleNodePrefixes
+	 * @param string[] $rdfTurtlePredicatePrefixes
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
 	 *                 if different from the default mapping.
@@ -150,6 +152,8 @@ class RdfVocabulary {
 		DataAccessSettings $dataAccessSettings,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		$localEntitySourceName,
+		array $rdfTurtleNodePrefixes,
+		array $rdfTurtlePredicatePrefixes,
 		array $canonicalLanguageCodes = [],
 		array $dataTypeUris = [],
 		array $pagePropertyDefs = [],
@@ -207,8 +211,6 @@ class RdfVocabulary {
 		$this->namespaces[self::NS_VALUE] = $topUri . 'value/';
 
 		$propertyNamespaces = [
-			self::NSP_DIRECT_CLAIM,
-			self::NSP_DIRECT_CLAIM_NORM,
 			self::NSP_CLAIM,
 			self::NSP_CLAIM_STATEMENT,
 			self::NSP_CLAIM_VALUE,
@@ -219,55 +221,66 @@ class RdfVocabulary {
 			self::NSP_REFERENCE,
 			self::NSP_REFERENCE_VALUE,
 			self::NSP_REFERENCE_VALUE_NORM,
+		];
+		$propertyNamespacesUseNodePrefix = [
+			self::NSP_DIRECT_CLAIM,
+			self::NSP_DIRECT_CLAIM_NORM,
 			self::NSP_NOVALUE,
 		];
 
 		foreach ( $conceptUris as $repositoryOrSourceName => $baseUri ) {
-			$namespaceSuffix = '';
-			if ( $repositoryOrSourceName !== $localEntitySourceName ) {
-				$namespaceSuffix = '-' . $repositoryOrSourceName;
-			}
+			$nodeNamespacePrefix = $rdfTurtleNodePrefixes[$repositoryOrSourceName];
+			$predicateNamespacePrefix = $rdfTurtlePredicatePrefixes[$repositoryOrSourceName];
 
-			$this->entityNamespaceNames[$repositoryOrSourceName] = self::NS_ENTITY . $namespaceSuffix;
+			$this->entityNamespaceNames[$repositoryOrSourceName] = $nodeNamespacePrefix . self::NS_ENTITY;
 
 			$this->propertyNamespaceNames[$repositoryOrSourceName] = array_combine(
 				$propertyNamespaces,
 				array_map(
-					function ( $ns ) use ( $namespaceSuffix ) {
-						return $ns . $namespaceSuffix;
+					function ( $ns ) use ( $predicateNamespacePrefix ) {
+						return $predicateNamespacePrefix . $ns;
 					},
 					$propertyNamespaces
+				)
+			);
+			$this->propertyNamespaceNames[$repositoryOrSourceName] += array_combine(
+				$propertyNamespacesUseNodePrefix,
+				array_map(
+					function ( $ns ) use ( $nodeNamespacePrefix ) {
+						return $nodeNamespacePrefix . $ns;
+					},
+					$propertyNamespacesUseNodePrefix
 				)
 			);
 
 			$this->namespaces = array_merge(
 				$this->namespaces,
-				$this->getConceptNamespaces( $namespaceSuffix, $baseUri )
+				$this->getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri )
 			);
 
 			$this->claimToValue = array_merge(
 				$this->claimToValue,
 				[
-					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE . $namespaceSuffix,
-					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE . $namespaceSuffix,
-					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE . $namespaceSuffix,
+					$predicateNamespacePrefix . self::NSP_CLAIM_STATEMENT => $predicateNamespacePrefix . self::NSP_CLAIM_VALUE,
+					$predicateNamespacePrefix . self::NSP_QUALIFIER => $predicateNamespacePrefix . self::NSP_QUALIFIER_VALUE,
+					$predicateNamespacePrefix . self::NSP_REFERENCE => $predicateNamespacePrefix . self::NSP_REFERENCE_VALUE,
 				]
 			);
 			$this->claimToValueNormalized = array_merge(
 				$this->claimToValueNormalized,
 				[
-					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
-					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
-					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+					$predicateNamespacePrefix . self::NSP_CLAIM_STATEMENT => $predicateNamespacePrefix . self::NSP_CLAIM_VALUE_NORM,
+					$predicateNamespacePrefix . self::NSP_QUALIFIER => $predicateNamespacePrefix . self::NSP_QUALIFIER_VALUE_NORM,
+					$predicateNamespacePrefix . self::NSP_REFERENCE => $predicateNamespacePrefix . self::NSP_REFERENCE_VALUE_NORM,
 				]
 			);
 			$this->normalizedPropertyValueNamespace = array_merge(
 				$this->normalizedPropertyValueNamespace,
 				[
-					self::NSP_DIRECT_CLAIM . $namespaceSuffix => self::NSP_DIRECT_CLAIM_NORM . $namespaceSuffix,
-					self::NSP_CLAIM_STATEMENT . $namespaceSuffix => self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix,
-					self::NSP_QUALIFIER . $namespaceSuffix => self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix,
-					self::NSP_REFERENCE . $namespaceSuffix => self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix,
+					$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM => $nodeNamespacePrefix . self::NSP_DIRECT_CLAIM_NORM,
+					$predicateNamespacePrefix . self::NSP_CLAIM_STATEMENT => $predicateNamespacePrefix . self::NSP_CLAIM_VALUE_NORM,
+					$predicateNamespacePrefix . self::NSP_QUALIFIER => $predicateNamespacePrefix . self::NSP_QUALIFIER_VALUE_NORM,
+					$predicateNamespacePrefix . self::NSP_REFERENCE => $predicateNamespacePrefix . self::NSP_REFERENCE_VALUE_NORM,
 				]
 			);
 		}
@@ -281,34 +294,34 @@ class RdfVocabulary {
 	}
 
 	/**
-	 * Generates mapping of concept namespaces (including the namespace suffix) to URIs
+	 * Generates mapping of concept namespaces (including the prefix) to URIs
 	 * using the given URI base.
 	 *
 	 * @param string $namespaceSuffix
 	 * @param string $baseUri
 	 * @return string[]
 	 */
-	private function getConceptNamespaces( $namespaceSuffix, $baseUri ) {
+	private function getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri ) {
 		$topUri = $this->getConceptUriBase( $baseUri );
 
 		$propUri = $topUri . 'prop/';
 
 		return [
-			self::NS_ENTITY . $namespaceSuffix => $baseUri,
+			$nodeNamespacePrefix . self::NS_ENTITY => $baseUri,
 			// predicates
-			self::NSP_DIRECT_CLAIM . $namespaceSuffix => $propUri . 'direct/',
-			self::NSP_DIRECT_CLAIM_NORM . $namespaceSuffix => $propUri . 'direct-normalized/',
-			self::NSP_CLAIM . $namespaceSuffix => $propUri,
-			self::NSP_CLAIM_STATEMENT . $namespaceSuffix => $propUri . 'statement/',
-			self::NSP_CLAIM_VALUE . $namespaceSuffix => $propUri . 'statement/value/',
-			self::NSP_CLAIM_VALUE_NORM . $namespaceSuffix => $propUri . 'statement/value-normalized/',
-			self::NSP_QUALIFIER . $namespaceSuffix => $propUri . 'qualifier/',
-			self::NSP_QUALIFIER_VALUE . $namespaceSuffix => $propUri . 'qualifier/value/',
-			self::NSP_QUALIFIER_VALUE_NORM . $namespaceSuffix => $propUri . 'qualifier/value-normalized/',
-			self::NSP_REFERENCE . $namespaceSuffix => $propUri . 'reference/',
-			self::NSP_REFERENCE_VALUE . $namespaceSuffix => $propUri . 'reference/value/',
-			self::NSP_REFERENCE_VALUE_NORM . $namespaceSuffix => $propUri . 'reference/value-normalized/',
-			self::NSP_NOVALUE . $namespaceSuffix => $propUri . 'novalue/',
+			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
+			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',
+			$predicateNamespacePrefix . self::NSP_CLAIM => $propUri,
+			$predicateNamespacePrefix . self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
+			$predicateNamespacePrefix . self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
+			$predicateNamespacePrefix . self::NSP_CLAIM_VALUE_NORM => $propUri . 'statement/value-normalized/',
+			$predicateNamespacePrefix . self::NSP_QUALIFIER => $propUri . 'qualifier/',
+			$predicateNamespacePrefix . self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
+			$predicateNamespacePrefix . self::NSP_QUALIFIER_VALUE_NORM => $propUri . 'qualifier/value-normalized/',
+			$predicateNamespacePrefix . self::NSP_REFERENCE => $propUri . 'reference/',
+			$predicateNamespacePrefix . self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
+			$predicateNamespacePrefix . self::NSP_REFERENCE_VALUE_NORM => $propUri . 'reference/value-normalized/',
+			$nodeNamespacePrefix . self::NSP_NOVALUE => $propUri . 'novalue/',
 		];
 	}
 
