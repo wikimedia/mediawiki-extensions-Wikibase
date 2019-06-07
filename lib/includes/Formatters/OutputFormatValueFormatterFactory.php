@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
 use Language;
@@ -8,7 +8,6 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Formatters\DispatchingValueFormatter;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -171,3 +170,6 @@ class OutputFormatValueFormatterFactory {
 	}
 
 }
+
+/** @deprecated */
+class_alias( OutputFormatValueFormatterFactory::class, 'Wikibase\Lib\OutputFormatValueFormatterFactory' );

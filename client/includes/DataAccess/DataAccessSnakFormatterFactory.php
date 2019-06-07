@@ -12,10 +12,10 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
-use Wikibase\Lib\EscapingSnakFormatter;
-use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\EscapingSnakFormatter;
+use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**

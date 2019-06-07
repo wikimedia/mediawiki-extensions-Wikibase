@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use DataValues\TimeValue;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use ValueFormatters\ValueFormatterBase;
  * from what the parsers would detect (where 1582 and before is Julian, and 1583 and later is
  * Gregorian).
  *
- * @see Wikibase\Lib\TimeDetailsFormatter
+ * @see \Wikibase\Lib\Formatters\TimeDetailsFormatter
  *
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>

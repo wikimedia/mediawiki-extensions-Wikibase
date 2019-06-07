@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Snak\Snak;
@@ -67,3 +67,6 @@ interface SnakFormatter {
 	public function getFormat();
 
 }
+
+/** @deprecated */
+class_alias( SnakFormatter::class, 'Wikibase\Lib\SnakFormatter' );

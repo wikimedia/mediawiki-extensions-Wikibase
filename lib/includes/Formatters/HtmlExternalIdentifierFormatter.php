@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Formatters;
 use Html;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\SnakUrlExpander;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterTypeException;

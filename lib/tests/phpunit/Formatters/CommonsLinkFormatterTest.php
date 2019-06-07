@@ -6,10 +6,10 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Lib\CommonsLinkFormatter;
+use Wikibase\Lib\Formatters\CommonsLinkFormatter;
 
 /**
- * @covers \Wikibase\Lib\CommonsLinkFormatter
+ * @covers \Wikibase\Lib\Formatters\CommonsLinkFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

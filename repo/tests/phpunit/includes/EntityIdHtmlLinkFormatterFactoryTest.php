@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 

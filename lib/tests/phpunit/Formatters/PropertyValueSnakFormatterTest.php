@@ -20,12 +20,12 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Formatters\DispatchingValueFormatter;
 use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
-use Wikibase\Lib\PropertyValueSnakFormatter;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\UnDeserializableValueFormatter;
+use Wikibase\Lib\Formatters\PropertyValueSnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\UnDeserializableValueFormatter;
 
 /**
- * @covers \Wikibase\Lib\PropertyValueSnakFormatter
+ * @covers \Wikibase\Lib\Formatters\PropertyValueSnakFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

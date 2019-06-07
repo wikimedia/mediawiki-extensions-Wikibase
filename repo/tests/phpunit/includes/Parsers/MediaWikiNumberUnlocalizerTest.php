@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use Language;
-use Wikibase\Lib\MediaWikiNumberLocalizer;
+use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 
 /**
- * @covers \Wikibase\Lib\MediaWikiNumberLocalizer
+ * @covers \Wikibase\Lib\Formatters\MediaWikiNumberLocalizer
  * @covers \Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer
  *
  * @group ValueParsers

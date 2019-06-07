@@ -6,7 +6,7 @@ use Deserializers\Deserializer;
 use Language;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
  * Functionality needed to render snaks as provided through Lua.

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
  * @covers \Wikibase\Lib\Formatters\BinaryOptionDispatchingSnakFormatter

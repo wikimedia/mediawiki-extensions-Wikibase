@@ -11,12 +11,12 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\DispatchingSnakFormatter;
-use Wikibase\Lib\MessageSnakFormatter;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\DispatchingSnakFormatter;
+use Wikibase\Lib\Formatters\MessageSnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
- * @covers \Wikibase\Lib\DispatchingSnakFormatter
+ * @covers \Wikibase\Lib\Formatters\DispatchingSnakFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
