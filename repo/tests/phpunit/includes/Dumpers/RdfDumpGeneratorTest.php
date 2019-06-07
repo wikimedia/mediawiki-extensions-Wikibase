@@ -201,6 +201,8 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
 				'',
+				[ '' => 'wd', 'foreign' => 'foreign' ],
+				[ '' => '', 'foreign' => 'foreign' ],
 				[ 'test' => 'en-x-test' ]
 			),
 			$this->getEntityTitleLookup()

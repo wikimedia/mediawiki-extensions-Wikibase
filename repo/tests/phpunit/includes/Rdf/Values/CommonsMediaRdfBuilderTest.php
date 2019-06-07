@@ -40,7 +40,9 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://test/data/',
 			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$builder = new CommonsMediaRdfBuilder( $vocab );
 
@@ -68,7 +70,9 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://test/data/',
 			DataAccessSettingsTest::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$builder = new CommonsMediaRdfBuilder( $vocab );
 

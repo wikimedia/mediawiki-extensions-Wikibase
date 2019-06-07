@@ -173,7 +173,9 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = new NTriplesRdfWriter();
@@ -217,7 +219,9 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://acme.com/data/',
 			DataAccessSettingsTest::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 
 		$snakWriter = new NTriplesRdfWriter();

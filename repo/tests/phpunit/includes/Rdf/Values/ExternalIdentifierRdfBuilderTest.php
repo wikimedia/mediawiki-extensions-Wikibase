@@ -46,21 +46,26 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
 			} ) );
 
+		$vocabulary = new RdfVocabulary(
+			[ '' => '<BASE>' ],
+			'<DATA>',
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
+		);
 		$builder = new ExternalIdentifierRdfBuilder(
-			new RdfVocabulary(
-				[ '' => '<BASE>' ],
-				'<DATA>',
-				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [] ),
-				''
-			),
+			$vocabulary,
 			$uriPatternProvider
 		);
 
+		$directClaimNamespace = $vocabulary->propertyNamespaceNames[''][RdfVocabulary::NSP_DIRECT_CLAIM];
+
 		$writer = new NTriplesRdfWriter();
 		$writer->prefix( 'www', "http://www.test/" );
-		$writer->prefix( 'wdt', "http://acme.test/prop/" );
-		$writer->prefix( 'wdtn', "http://acme.test/prop-normalized/" );
+		$writer->prefix( $directClaimNamespace, "http://acme.test/prop/" );
+		$writer->prefix( $vocabulary->propertyNamespaceNames[''][RdfVocabulary::NSP_DIRECT_CLAIM_NORM], "http://acme.test/prop-normalized/" );
 
 		$writer->start();
 		$writer->about( 'www', 'Q1' );
@@ -75,8 +80,8 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'XY-23' )
 		);
 
-		$builder->addValue( $writer, 'wdt', 'P1', 'DUMMY', $snakP1 );
-		$builder->addValue( $writer, 'wdt', 'P345', 'DUMMY', $snakP345 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', $snakP1 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', $snakP345 );
 
 		$expected = [
 			'<http://www.test/Q1> <http://acme.test/prop-normalized/P1> <http://xyzzy.test/vocab/AB%26123> .',
@@ -94,21 +99,26 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				return $id->getSerialization() === 'P1' ? 'http://xyzzy.test/vocab/$1' : null;
 			} ) );
 
+		$vocabulary = new RdfVocabulary(
+			[ '' => '<BASE>' ],
+			'<DATA>',
+			DataAccessSettingsTest::entitySourceBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
+		);
 		$builder = new ExternalIdentifierRdfBuilder(
-			new RdfVocabulary(
-				[ '' => '<BASE>' ],
-				'<DATA>',
-				DataAccessSettingsTest::entitySourceBasedFederation(),
-				new EntitySourceDefinitions( [] ),
-				''
-			),
+			$vocabulary,
 			$uriPatternProvider
 		);
 
+		$directClaimNamespace = $vocabulary->propertyNamespaceNames[''][RdfVocabulary::NSP_DIRECT_CLAIM];
+
 		$writer = new NTriplesRdfWriter();
 		$writer->prefix( 'www', "http://www.test/" );
-		$writer->prefix( 'wdt', "http://acme.test/prop/" );
-		$writer->prefix( 'wdtn', "http://acme.test/prop-normalized/" );
+		$writer->prefix( $directClaimNamespace, "http://acme.test/prop/" );
+		$writer->prefix( $vocabulary->propertyNamespaceNames[''][RdfVocabulary::NSP_DIRECT_CLAIM_NORM], "http://acme.test/prop-normalized/" );
 
 		$writer->start();
 		$writer->about( 'www', 'Q1' );
@@ -123,8 +133,8 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'XY-23' )
 		);
 
-		$builder->addValue( $writer, 'wdt', 'P1', 'DUMMY', $snakP1 );
-		$builder->addValue( $writer, 'wdt', 'P345', 'DUMMY', $snakP345 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', $snakP1 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', $snakP345 );
 
 		$expected = [
 			'<http://www.test/Q1> <http://acme.test/prop-normalized/P1> <http://xyzzy.test/vocab/AB%26123> .',
