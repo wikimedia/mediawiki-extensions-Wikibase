@@ -40,9 +40,6 @@ wfLoadExtension( 'WikibaseLib', __DIR__ . '/../extension-lib-wip.json' );
 
 define( 'WBL_VERSION', '0.5 alpha' );
 
-// Load autoload info as long as extension classes are not PSR-4-autoloaded
-require_once __DIR__  . '/autoload.php';
-require_once __DIR__  . '/../data-access/autoload.php';
 // Nasty hack: some lib's tests rely on ItemContent class defined in Repo! Load it in client-only mode to have tests pass
 if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 	global $wgAutoloadClasses;
