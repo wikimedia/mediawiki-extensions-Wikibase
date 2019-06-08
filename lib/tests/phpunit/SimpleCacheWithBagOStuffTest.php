@@ -18,6 +18,8 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 
 	use \PHPUnit4And6Compat;
 
+	private $now;
+
 	protected $skippedTests = [
 		'testClear' => 'Not possible to implement for BagOStuff'
 	];
@@ -26,7 +28,18 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 	 * @return CacheInterface that is used in the tests
 	 */
 	public function createSimpleCache() {
-		return new SimpleCacheWithBagOStuff( new HashBagOStuff(), 'somePrefix', 'some secret' );
+		$inner = new HashBagOStuff();
+		$inner->setMockTime( $this->now );
+		return new SimpleCacheWithBagOStuff( $inner, 'somePrefix', 'some secret' );
+	}
+
+	public function advanceTime( $seconds ) {
+		$this->now += $seconds;
+	}
+
+	protected function setUp() {
+		parent::setUp();
+		$this->now = microtime( true );
 	}
 
 	public function testUsesPrefixWhenSetting() {
