@@ -181,7 +181,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
 		$rdfBuilderFactory = $wikibaseRepo->getValueSnakRdfBuilderFactory();
-		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ) );
+		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
 
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
