@@ -334,12 +334,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		// @see https://phabricator.wikimedia.org/T201453
 		if ( $ttl instanceof \DateInterval ) {
 			$date = new \DateTime();
+			$date->setTimestamp( (int)$this->inner->getCurrentTime() + 1 );
 			$date->add( $ttl );
-			return $date->getTimestamp() + 1;
+			return $date->getTimestamp();
 		} elseif ( $ttl === 0 ) {
-			return time();
+			return (int)$this->inner->getCurrentTime() + 1;
 		} elseif ( is_int( $ttl ) ) {
-			return $ttl + time() + 1;
+			return $ttl + $this->inner->getCurrentTime() + 1;
 		} elseif ( $ttl === null ) {
 			return \BagOStuff::TTL_INDEFINITE;
 		} else {
