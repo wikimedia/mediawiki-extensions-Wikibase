@@ -286,4 +286,13 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'search-field-definitions' );
 	}
 
+	/**
+	 * @return string[][][] An array mapping entity type identifiers
+	 * to list of predicates, [ ns, local ] for each label predicate.
+	 * Contains only types that have non-default predicates.
+	 */
+	public function getLabelPredicates() {
+		return $this->getMapForDefinitionField( 'rdf-builder-label-predicates' );
+	}
+
 }
