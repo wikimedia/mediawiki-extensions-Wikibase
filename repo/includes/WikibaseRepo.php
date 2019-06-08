@@ -2274,7 +2274,8 @@ class WikibaseRepo {
 	public function getEntityRdfBuilderFactory() {
 		if ( $this->entityRdfBuilderFactory === null ) {
 			$this->entityRdfBuilderFactory = new EntityRdfBuilderFactory(
-				$this->entityTypeDefinitions->getRdfBuilderFactoryCallbacks()
+				$this->entityTypeDefinitions->getRdfBuilderFactoryCallbacks(),
+				$this->entityTypeDefinitions->getLabelPredicates()
 			);
 		}
 

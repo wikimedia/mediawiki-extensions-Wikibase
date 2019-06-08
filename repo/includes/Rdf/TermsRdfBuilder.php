@@ -34,14 +34,35 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	private $languages;
 
 	/**
+	 * @var string[][][] Map of type to array of [ ns, local ] for each label predicate
+	 */
+	private $labelPredicates;
+
+	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $writer
+	 * @param string[][][] Map of type to array of [ ns, local ] for each label predicate
 	 * @param string[]|null $languages
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, array $languages = null ) {
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer,
+	                             array $labelPredicates = [], array $languages = null ) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
 		$this->languages = $languages === null ? null : array_flip( $languages );
+		$this->labelPredicates = $labelPredicates;
+	}
+
+	/**
+	 * Get predicates that will be used for labels.
+	 * @param EntityDocument $entity
+	 * @return string[][] array of [ ns, local ] for each label predicate
+	 */
+	private function getLabelPredicates( EntityDocument $entity ) {
+		return $this->labelPredicates[$entity->getType()] ?? [
+				[ 'rdfs', 'label' ],
+				[ RdfVocabulary::NS_SKOS, 'prefLabel' ],
+				[ RdfVocabulary::NS_SCHEMA_ORG, 'name' ],
+			];
 	}
 
 	/**
@@ -50,19 +71,22 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	 * @param string $entityNamespace
 	 * @param string $entityLName
 	 * @param TermList $labels
+	 * @param string[][] $labelPredicates array of [ ns, local ] for each label predicate
 	 */
-	private function addLabels( $entityNamespace, $entityLName, TermList $labels ) {
+	private function addLabels( $entityNamespace, $entityLName, TermList $labels, array $labelPredicates ) {
+		if ( empty( $labelPredicates ) ) {
+			// If we want no predicates, no need to bother with the rest.
+			return;
+		}
 		foreach ( $labels->toTextArray() as $languageCode => $labelText ) {
 			if ( $this->languages !== null && !isset( $this->languages[$languageCode] ) ) {
 				continue;
 			}
 
-			$this->writer->about( $entityNamespace, $entityLName )
-				->say( 'rdfs', 'label' )->text( $labelText, $languageCode )
-				->say( RdfVocabulary::NS_SKOS, 'prefLabel' )->text( $labelText, $languageCode )
-				->say( RdfVocabulary::NS_SCHEMA_ORG, 'name' )->text( $labelText, $languageCode );
-
-			//TODO: vocabs to use for labels should be configurable
+			$this->writer->about( $entityNamespace, $entityLName );
+			foreach ( $labelPredicates as $predicate ) {
+				$this->writer->say( $predicate[0], $predicate[1] )->text( $labelText, $languageCode );
+			}
 		}
 	}
 
@@ -122,7 +146,8 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 		$entityNamespace = $this->vocabulary->entityNamespaceNames[$entityRepoName];
 
 		if ( $entity instanceof LabelsProvider ) {
-			$this->addLabels( $entityNamespace, $entityLName, $entity->getLabels() );
+			$this->addLabels( $entityNamespace, $entityLName, $entity->getLabels(),
+				$this->getLabelPredicates( $entity ) );
 		}
 
 		if ( $entity instanceof DescriptionsProvider ) {
