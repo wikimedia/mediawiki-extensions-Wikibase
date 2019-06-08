@@ -56,6 +56,7 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder = new TermsRdfBuilder(
 			$vocabulary,
 			$writer,
+			[],
 			$languages
 		);
 
@@ -112,6 +113,12 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
+	private static $DEFAULT_LABELS = [
+		[ 'rdfs', 'label' ],
+		[ RdfVocabulary::NS_SKOS, 'prefLabel' ],
+		[ RdfVocabulary::NS_SCHEMA_ORG, 'name' ]
+	];
+
 	/**
 	 * @dataProvider provideAddLabels
 	 */
@@ -123,10 +130,29 @@ class TermsRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			->addLabels(
 				RdfVocabulary::NS_ENTITY,
 				$entity->getId()->getLocalPart(),
-				$entity->getFingerprint()->getLabels()
+				$entity->getFingerprint()->getLabels(),
+				self::$DEFAULT_LABELS
 			);
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
+	}
+
+	/**
+	 * @dataProvider provideAddLabels
+	 */
+	public function testAddLabelsPredicates( $entityName, $dataSetName, array $languages = null ) {
+		$entity = $this->getTestData()->getEntity( $entityName );
+
+		$writer = $this->getTestData()->getNTriplesWriter();
+		TestingAccessWrapper::newFromObject( $this->newBuilder( $writer, $languages ) )
+			->addLabels(
+				RdfVocabulary::NS_ENTITY,
+				$entity->getId()->getLocalPart(),
+				$entity->getFingerprint()->getLabels(),
+				[ [ 'wikibase', 'test' ] ]
+			);
+
+		$this->assertOrCreateNTriples( "predicate." . $dataSetName, $writer );
 	}
 
 	public function provideAddDescriptions() {
