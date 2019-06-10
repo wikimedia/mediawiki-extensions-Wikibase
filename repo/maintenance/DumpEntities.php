@@ -77,6 +77,12 @@ abstract class DumpEntities extends Maintenance {
 			false,
 			true
 		);
+		$this->addOption(
+			'ignore-missing',
+			'Ignore missing IDs, do not report errors on them',
+			false,
+			false
+		);
 	}
 
 	public function setDumpEntitiesServices(
@@ -192,7 +198,8 @@ abstract class DumpEntities extends Maintenance {
 		$progressReporter->registerReporterCallback( [ $this, 'logMessage' ] );
 		$dumper->setProgressReporter( $progressReporter );
 
-		$exceptionReporter = new ReportingExceptionHandler( $progressReporter );
+		$ignored = $this->hasOption( 'ignore-missing' ) ? [ 'failed-to-dump' ] : [];
+		$exceptionReporter = new ReportingExceptionHandler( $progressReporter, $ignored );
 		$dumper->setExceptionHandler( $exceptionReporter );
 
 		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,
