@@ -134,7 +134,6 @@ return [
 			'wikibase.utilities.ClaimGuidGenerator',
 			'wikibase.view.ToolbarFactory',
 			'wikibase.view.ControllerViewFactory',
-			'wikibase.view.ViewController',
 			'wikibase.view.ViewFactory',
 			'wikibase.view.ViewFactoryFactory',
 			'wikibase.view.tests.getMockListItemAdapter',

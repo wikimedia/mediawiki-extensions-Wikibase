@@ -324,6 +324,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Never loaded. Used indirectly by WikibaseMediaInfo.
+		// TODO: Decide which shared module to bundle this with.
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
@@ -358,14 +360,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase'
-			]
-		],
-
-		'wikibase.view.ViewController' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/ViewController.js',
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.view.__namespace',
 			]
 		],
 
@@ -415,13 +409,13 @@ return call_user_func( function() {
 		// But is referenced internally by WikibaseLexeme.
 		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase/view/ViewController.js',
 				'wikibase/view/ToolbarViewController.js',
 				'wikibase/view/ControllerViewFactory.js',
 			],
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.view.__namespace',
-				'wikibase.view.ViewController',
 				'mediawiki.cookie',
 				'mediawiki.user',
 				'wikibase.view.ViewFactory'
