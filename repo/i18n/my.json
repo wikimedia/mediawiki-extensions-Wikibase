@@ -43,6 +43,8 @@
 	"wikibase-statementview-references-counter": "$1\n{{PLURAL:$1|ရည်ညွှန်းချက်|ရည်ညွှန်းချက်များ}}",
 	"wikibase-entityselector-more": "ပို၍",
 	"wikibase-entityselector-notfound": "ကိုက်ညီသောရလဒ် မတွေ့ပါ",
+	"wikibase-anonymouseditwarning-heading": "သင်သည် အကောင့်သို့ မဝင်ထားပါ။",
+	"wikibase-anonymouseditwarning-dismiss-button": "အကောင့်ထဲမဝင်ဘဲ တည်းဖြတ်ရန်",
 	"wikibase-validator-page-not-exists": "စာမျက်နှာ \"$1\" မတည်ရှိပါ။",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 သည် ပြန်ညွှန်းတစ်ခုဖြစ်သည်။",
 	"wikibase-itembytitle-lookup-site": "ဆိုဒ်:",

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jun Misugi"
+		]
+	},
+	"tooltip-t-wikibase": "Liaddura a connected data repository item",
+	"wikibase-comment-update": "L'oggettu {{WBREPONAME}} è isthaddu mudifiggaddu.",
+	"wikibase-dataitem": "Erementu {{WBREPONAME}}",
+	"wikibase-editlinks": "Mudifiggà liadduri",
+	"wikibase-editlinkstitle": "Mudifiggà liadduri interwiki",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Cuà",
+	"wikibase-rc-hide-wikidata-show": "Ammusthrà",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "mudìfigga {{WBREPONAME}}",
+	"wikibase-otherprojects": "In althri prugetti"
+}

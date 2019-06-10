@@ -2,10 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Paulu",
-			"Jumpy01"
+			"Jumpy01",
+			"Jun Misugi"
 		]
 	},
 	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "piattà",
+	"wikibase-rc-hide-wikidata-show": "muscià",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Quessa hè una mudifica nantu à {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Quessa hè una mudifica nantu à {{WBREPONAME}}",
+	"wikibase-otherprojects": "In altri prugetti"
 }

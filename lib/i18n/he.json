@@ -105,7 +105,7 @@
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 שנים}} לספירה",
 	"wikibase-time-precision-millennium": "$1 מילניום",
 	"wikibase-time-precision-century": "המאה ה־$1",
-	"wikibase-time-precision-10annum": "$1 עשורים",
+	"wikibase-time-precision-10annum": "העשור של $1",
 	"wikibase-time-precision-BCE-Gannum": "$1 מיליארד שנה לפני הספירה",
 	"wikibase-time-precision-BCE-Mannum": "$1 מיליון שנה לפני הספירה",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 שנים}} לפני הספירה",
