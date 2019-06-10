@@ -18,8 +18,15 @@ class ReportingExceptionHandler implements ExceptionHandler {
 	 */
 	protected $reporter;
 
-	public function __construct( MessageReporter $reporter ) {
+	/**
+	 * Exception classes that should be ignored.
+	 * @var string[]
+	 */
+	private $ignored;
+
+	public function __construct( MessageReporter $reporter, array $ignored = [] ) {
 		$this->reporter = $reporter;
+		$this->ignored = $ignored;
 	}
 
 	/**
@@ -32,6 +39,12 @@ class ReportingExceptionHandler implements ExceptionHandler {
 	 * @param string $explanation
 	 */
 	public function handleException( Exception $exception, $errorCode, $explanation ) {
+		foreach ( $this->ignored as $ignored ) {
+			if ( $exception instanceof $ignored ) {
+				return;
+			}
+		}
+
 		$msg = $exception->getMessage();
 
 		$msg = '[' . $errorCode . ']: ' . $explanation . ' (' . $msg . ')';
