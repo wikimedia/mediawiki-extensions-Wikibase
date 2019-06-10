@@ -21,7 +21,6 @@ return call_user_func( function() {
 				'dataValues.values',
 				'util.inherit',
 				'valueParsers.parsers',
-				'valueParsers.ValueParser',
 				'valueParsers.ValueParserStore',
 				'wikibase',
 				'wikibase.api.ParseValueCaller',

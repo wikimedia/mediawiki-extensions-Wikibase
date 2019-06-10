@@ -510,16 +510,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'valueParsers.ValueParser' => $wikibaseDatavaluesSrcPaths + [
-			'scripts' => [
-				'valueParsers/parsers/ValueParser.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'valueParsers',
-			],
-		],
-
 		'valueParsers.ValueParserStore' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueParsers/ValueParserStore.js',
@@ -533,6 +523,8 @@ return call_user_func( function() {
 		// but only used in WikibaseRepo.
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
+				'valueParsers/parsers/ValueParser.js',
+
 				'valueParsers/parsers/BoolParser.js',
 				'valueParsers/parsers/FloatParser.js',
 				'valueParsers/parsers/IntParser.js',
@@ -542,7 +534,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'dataValues.values',
 				'util.inherit',
-				'valueParsers.ValueParser',
+				'valueParsers',
 			],
 		],
 
