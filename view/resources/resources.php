@@ -142,11 +142,6 @@ return call_user_func( function() {
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.statementview.RankSelector.styles',
 				'wikibase.datamodel',
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ReferenceList',
-				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.SnakList',
-				'wikibase.datamodel.Statement',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
 				'wikibase.utilities',
@@ -324,6 +319,8 @@ return call_user_func( function() {
 			],
 		],
 
+		// FIXME: Never loaded. Used indirectly by WikibaseMediaInfo.
+		// TODO: Decide which shared module to bundle this with.
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
@@ -361,14 +358,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.view.ViewController' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/ViewController.js',
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.view.__namespace',
-			]
-		],
-
 		// FIXME: Registered by WikibaseClient, but never used. Used by WikibaseRepo.
 		'wikibase.view.StructureEditorFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/StructureEditorFactory.js',
@@ -377,6 +366,7 @@ return call_user_func( function() {
 			]
 		],
 
+		// FIXME: Registered by WikibaseClient, but never used. Used by WikibaseRepo.
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
@@ -415,13 +405,13 @@ return call_user_func( function() {
 		// But is referenced internally by WikibaseLexeme.
 		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase/view/ViewController.js',
 				'wikibase/view/ToolbarViewController.js',
 				'wikibase/view/ControllerViewFactory.js',
 			],
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.view.__namespace',
-				'wikibase.view.ViewController',
 				'mediawiki.cookie',
 				'mediawiki.user',
 				'wikibase.view.ViewFactory'
@@ -517,12 +507,7 @@ return call_user_func( function() {
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
 				'wikibase.templates',
-				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.SiteLink',
-				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.StatementGroupSet',
-				'wikibase.datamodel.StatementList',
-				'wikibase.datamodel.Term',
+				'wikibase.datamodel',
 				'wikibase.utilities', // wikibase.utilities.ui
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
