@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51b418ec_2a270bbf",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-06-10T21:37:25Z",
+      "side": 1,
+      "message": "These two methods are quite literally what html() does - short of some edge cases and perf optimisations for the \"common\" case of passing a string.\n\nFrom jquery.js:\n\n \n jQuery.fn.extend( {\n   html: function( value ) {\n     // use access() to normalise a callable \u0027value\u0027 arg\n     return this.access( …, function( value ) {\n       if ( /* setting a value */ ) {\n         return this.empty().append( value );\n       }\n     }, …, value, … );\n  }, …\n } );",
+      "range": {
+        "startLine": 349,
+        "startChar": 22,
+        "endLine": 349,
+        "endChar": 37
+      },
+      "revId": "721c7be8b7e57a5d98824c879248213e4357276d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
