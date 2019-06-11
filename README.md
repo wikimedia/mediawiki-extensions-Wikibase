@@ -1,5 +1,6 @@
 - - -
 Introduction to Wikibase
+
 ====================
 
 [![Build Status](https://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase.svg)](http://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase/)
