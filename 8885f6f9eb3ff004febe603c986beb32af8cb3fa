@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "adf3be03_cb1c3840",
+        "filename": "lib/tests/phpunit/Formatters/UnknownTypeEntityIdHtmlLinkFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T11:34:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0030bbac_31cbc87a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 65
+      },
+      "revId": "8885f6f9eb3ff004febe603c986beb32af8cb3fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfdee00e_165987de",
         "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "8885f6f9eb3ff004febe603c986beb32af8cb3fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41185835_5b5023b0",
+        "filename": "lib/tests/phpunit/Formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T11:34:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfdee00e_165987de",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 59
+      },
+      "revId": "8885f6f9eb3ff004febe603c986beb32af8cb3fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
