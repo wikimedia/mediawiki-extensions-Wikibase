@@ -15,7 +15,6 @@ use Wikibase\StringNormalizer;
 use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -23,8 +22,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
  */
 class DatabaseItemTermStore implements ItemTermStore {
 
-	/** @var ILBFactory */
-	private $loadBalancerFactory;
+	/** @var ILoadBalancer */
+	private $loadBalancer;
 
 	/** @var TermIdsAcquirer */
 	private $acquirer;
@@ -48,14 +47,14 @@ class DatabaseItemTermStore implements ItemTermStore {
 	private $dbw = null;
 
 	public function __construct(
-		ILBFactory $loadBalancerFactory,
+		ILoadBalancer $loadBalancer,
 		TermIdsAcquirer $acquirer,
 		TermIdsResolver $resolver,
 		TermIdsCleaner $cleaner,
 		StringNormalizer $stringNormalizer,
 		LoggerInterface $logger = null
 	) {
-		$this->loadBalancerFactory = $loadBalancerFactory;
+		$this->loadBalancer = $loadBalancer;
 		$this->acquirer = $acquirer;
 		$this->resolver = $resolver;
 		$this->cleaner = $cleaner;
@@ -65,16 +64,14 @@ class DatabaseItemTermStore implements ItemTermStore {
 
 	private function getDbr(): IDatabase {
 		if ( $this->dbr === null ) {
-			$loadBalancer = $this->loadBalancerFactory->getMainLB();
-			$this->dbr = $loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
 		}
 		return $this->dbr;
 	}
 
 	private function getDbw(): IDatabase {
 		if ( $this->dbw === null ) {
-			$loadBalancer = $this->loadBalancerFactory->getMainLB();
-			$this->dbw = $loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+			$this->dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
 		}
 		return $this->dbw;
 	}

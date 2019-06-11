@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
 use Wikibase\Lib\Store\Sql\Terms\InMemoryTermIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\StringNormalizer;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
@@ -47,7 +46,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 		);
 
 		$propertyTermStore = new DatabasePropertyTermStore(
-			new FakeLBFactory( [ 'lb' => $loadBalancer ] ),
+			$loadBalancer,
 			$termIdsStore,
 			$termIdsStore,
 			$termIdsStore,
