@@ -70,6 +70,52 @@
       "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6a82e07_afb37edd",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T12:26:40Z",
+      "side": 1,
+      "message": "wrong constant",
+      "range": {
+        "startLine": 123,
+        "startChar": 48,
+        "endLine": 123,
+        "endChar": 52
+      },
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ed0844e_e415c994",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T12:26:40Z",
+      "side": 1,
+      "message": "wrong default value",
+      "range": {
+        "startLine": 162,
+        "startChar": 59,
+        "endLine": 162,
+        "endChar": 64
+      },
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
