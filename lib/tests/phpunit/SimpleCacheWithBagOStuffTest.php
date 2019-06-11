@@ -86,7 +86,6 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 	 */
 	public function testGet_GivenSignatureIsWrong_ReturnsDefaultValue() {
 		$inner = new HashBagOStuff();
-		$initialValue = new \DateTime();
 
 		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
 		$cache->set( 'key', 'some_string' );
@@ -153,6 +152,38 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 		$value = $inner->get( $key );
 		list( $signature, $data ) = json_decode( $value );
 		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
+	}
+
+	public function testSetTtl() {
+		$inner = new HashBagOStuff();
+		$now = microtime( true );
+		$inner->setMockTime( $now );
+
+		$prefix = 'somePrefix_';
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
+
+		$result = $cache->set( 'key1', 'value', 1 );
+		$this->assertTrue( $result, 'set() must return true if success' );
+		$this->assertEquals( 'value', $cache->get( 'key1' ) );
+		$now += 3;
+		$this->assertNull( $cache->get( 'key1' ), 'Value must expire after ttl.' );
+	}
+
+	public function testSetMultipleTtl() {
+		$inner = new HashBagOStuff();
+		$now = microtime( true );
+		$inner->setMockTime( $now );
+
+		$prefix = 'somePrefix_';
+		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
+
+		$cache->setMultiple( [ 'key2' => 'value2', 'key3' => 'value3' ], 1 );
+		$this->assertEquals( 'value2', $cache->get( 'key2' ) );
+		$this->assertEquals( 'value3', $cache->get( 'key3' ) );
+
+		$now += 3;
+		$this->assertNull( $cache->get( 'key2' ), 'Value must expire after ttl.' );
+		$this->assertNull( $cache->get( 'key3' ), 'Value must expire after ttl.' );
 	}
 
 }
