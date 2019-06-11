@@ -87,6 +87,30 @@
       "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee52d02d_09f84e52",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-06-11T17:40:08Z",
+      "side": 1,
+      "message": "Lots of messages like:\n\n[failed-to-dump]: Failed to dump M10565 (Entity not found: M10565)\n[failed-to-dump]: Failed to dump M10578 (Entity not found: M10578)\n[failed-to-dump]: Failed to dump M10579 (Entity not found: M10579)\n\nTry running php extensions/Wikibase/repo/maintenance/dumpRdf.php --entity-type mediainfo --limit 10 on federated-commons machine to reproduce.",
+      "parentUuid": "3c4f1b34_87fc0179",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
