@@ -7,10 +7,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\TermIndexEntry;
-use Wikibase\Lib\Store\TermPropertyLabelResolver;
+use Wikibase\Lib\Store\TermIndexPropertyLabelResolver;
 
 /**
- * @covers \Wikibase\Lib\Store\TermPropertyLabelResolver
+ * @covers \Wikibase\Lib\Store\TermIndexPropertyLabelResolver
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\TermPropertyLabelResolver;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
+class TermIndexPropertyLabelResolverTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $lang
@@ -27,7 +27,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 	 * @return PropertyLabelResolver
 	 */
 	public function getResolver( $lang, array $terms ) {
-		$resolver = new TermPropertyLabelResolver(
+		$resolver = new TermIndexPropertyLabelResolver(
 			$lang,
 			new MockTermIndex( $terms ),
 			new HashBagOStuff(),

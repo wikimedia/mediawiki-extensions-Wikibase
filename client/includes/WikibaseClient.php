@@ -108,7 +108,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
-use Wikibase\Lib\Store\TermPropertyLabelResolver;
+use Wikibase\Lib\Store\TermIndexPropertyLabelResolver;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -1620,7 +1620,7 @@ final class WikibaseClient {
 			// Cache key needs to be language specific
 			$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
 
-			$this->propertyLabelResolver = new TermPropertyLabelResolver(
+			$this->propertyLabelResolver = new TermIndexPropertyLabelResolver(
 				$languageCode,
 				$this->getPropertyTermIndex(),
 				ObjectCache::getInstance( $cacheType ),
