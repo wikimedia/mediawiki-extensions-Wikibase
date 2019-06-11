@@ -105,11 +105,8 @@ class DatabaseItemTermStore implements ItemTermStore {
 		}
 
 		try {
-			$this->loadBalancerFactory->beginMasterChanges( __METHOD__ );
 			$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $termsArray );
-			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( DBError $exception ) {
-			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->logger->error(
 				'{method}: DBError while storing terms for {itemId}: {exception}',
 				[
@@ -191,11 +188,8 @@ class DatabaseItemTermStore implements ItemTermStore {
 		$this->disallowForeignItemIds( $itemId );
 
 		try {
-			$this->loadBalancerFactory->beginMasterChanges( __METHOD__ );
 			$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
-			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( DBError $exception ) {
-			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->logger->error(
 				'{method}: DBError while deleting terms for {itemId}: {exception}',
 				[
@@ -262,8 +256,6 @@ class DatabaseItemTermStore implements ItemTermStore {
 	 */
 	private function cleanTermsIfUnused( array $termIds ) {
 		try {
-			$this->loadBalancerFactory->beginMasterChanges( __METHOD__ );
-
 			$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
 				'wbt_property_terms',
 				'wbpt_term_in_lang_id',
@@ -292,10 +284,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 					$termIdsUsedInItems
 				)
 			);
-
-			$this->loadBalancerFactory->commitMasterChanges( __METHOD__ );
 		} catch ( DBError $exception ) {
-			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->logger->error(
 				'{method}: DBError while cleaning up to {termIdsCount} terms: {exception}',
 				[
