@@ -39,6 +39,30 @@
       "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f48151_4f5a0104",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2019-06-11T11:37:21Z",
+      "side": 1,
+      "message": "Ah, I assumed that capability exists. Can we not add it before this goes live?",
+      "parentUuid": "75de9f00_247e1220",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
