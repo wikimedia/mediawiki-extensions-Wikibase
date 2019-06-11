@@ -16,6 +16,24 @@
       "revId": "11774167b3907e9c691ab40d31baa77eae6c9f53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58dce356_385218d2",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-11T13:58:55Z",
+      "side": 1,
+      "message": "good point.. I actually, in my head, wanted to throw an exception if it isn\u0027t a callable but I don\u0027t remember why I didn\u0027t implement that. But that\u0027s same as crashing so gonna just change it back",
+      "parentUuid": "6effc6c4_4c43473d",
+      "revId": "11774167b3907e9c691ab40d31baa77eae6c9f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
