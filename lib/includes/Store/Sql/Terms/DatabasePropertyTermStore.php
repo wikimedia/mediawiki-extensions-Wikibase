@@ -149,22 +149,28 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 			__METHOD__,
 			[ 'FOR UPDATE' ]
 		);
-		$newTermIds = $this->acquirer->acquireTermIds( $termsArray );
 
-		$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
-		$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
-		$rowsToInsert = [];
-		foreach ( $termIdsToInsert as $termIdToInsert ) {
-			$rowsToInsert[] = [
-				'wbpt_property_id' => $propertyId->getNumericId(),
-				'wbpt_term_in_lang_id' => $termIdToInsert,
-			];
-		}
+		$termIdsToClean = [];
 
-		$this->getDbw()->insert(
-			'wbt_property_terms',
-			$rowsToInsert,
-			__METHOD__
+		$this->acquirer->acquireTermIds(
+			$termsArray,
+			function ( array $newTermIds ) use ( $propertyId, $oldTermIds, &$termIdsToClean ) {
+				$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
+				$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
+				$rowsToInsert = [];
+				foreach ( $termIdsToInsert as $termIdToInsert ) {
+					$rowsToInsert[] = [
+						'wbpt_property_id' => $propertyId->getNumericId(),
+						'wbpt_term_in_lang_id' => $termIdToInsert,
+					];
+				}
+
+				$this->getDbw()->insert(
+					'wbt_property_terms',
+					$rowsToInsert,
+					__METHOD__
+				);
+			}
 		);
 
 		if ( $termIdsToClean !== [] ) {

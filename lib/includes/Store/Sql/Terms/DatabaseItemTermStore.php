@@ -149,22 +149,28 @@ class DatabaseItemTermStore implements ItemTermStore {
 			__METHOD__,
 			[ 'FOR UPDATE' ]
 		);
-		$newTermIds = $this->acquirer->acquireTermIds( $termsArray );
 
-		$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
-		$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
-		$rowsToInsert = [];
-		foreach ( $termIdsToInsert as $termIdToInsert ) {
-			$rowsToInsert[] = [
-				'wbit_item_id' => $itemId->getNumericId(),
-				'wbit_term_in_lang_id' => $termIdToInsert,
-			];
-		}
+		$termIdsToClean = [];
 
-		$this->getDbw()->insert(
-			'wbt_item_terms',
-			$rowsToInsert,
-			__METHOD__
+		$this->acquirer->acquireTermIds(
+			$termsArray,
+			function ( array $newTermIds ) use ( $itemId, $oldTermIds, &$termIdsToClean ) {
+				$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
+				$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
+				$rowsToInsert = [];
+				foreach ( $termIdsToInsert as $termIdToInsert ) {
+					$rowsToInsert[] = [
+						'wbit_item_id' => $itemId->getNumericId(),
+						'wbit_term_in_lang_id' => $termIdToInsert,
+					];
+				}
+
+				$this->getDbw()->insert(
+					'wbt_item_terms',
+					$rowsToInsert,
+					__METHOD__
+				);
+			}
 		);
 
 		if ( $termIdsToClean !== [] ) {
