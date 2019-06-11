@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Language;
 use MediaWikiTestCase;
 use Psr\Log\NullLogger;
+use RepoGroup;
 use SpecialPage;
 use Title;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -246,12 +247,13 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
+		$repoGroup = $this->createMock( RepoGroup::class );
 
 		$entityIdParser = new BasicEntityIdParser();
 
 		$statementUpdater = new CompositeStatementDataUpdater(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher, $repoGroup )
 		);
 
 		$dataUpdaters = [

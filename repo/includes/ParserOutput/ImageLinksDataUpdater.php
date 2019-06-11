@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\StringValue;
 use ParserOutput;
+use RepoGroup;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -25,13 +26,22 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 	private $propertyDataTypeMatcher;
 
 	/**
+	 * @var RepoGroup
+	 */
+	private $repoGroup;
+
+	/**
 	 * @var null[] Hash set of the file name strings found while processing statements. Only the
 	 * array keys are used for performance reasons, the values are meaningless.
 	 */
 	private $fileNames = [];
 
-	public function __construct( PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
+	public function __construct(
+		PropertyDataTypeMatcher $propertyDataTypeMatcher,
+		RepoGroup $repoGroup
+	) {
 		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
+		$this->repoGroup = $repoGroup;
 	}
 
 	/**
@@ -69,7 +79,7 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
 		foreach ( $this->fileNames as $fileName => $null ) {
-			$file = wfFindFile( $fileName );
+			$file = $this->repoGroup->findFile( $fileName );
 
 			$parserOutput->addImage(
 				$fileName,

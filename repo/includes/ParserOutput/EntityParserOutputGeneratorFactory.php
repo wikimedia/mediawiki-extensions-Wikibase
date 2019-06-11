@@ -7,6 +7,7 @@ use Hooks;
 use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use PageImages;
+use RepoGroup;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -103,6 +104,11 @@ class EntityParserOutputGeneratorFactory {
 	private $stats;
 
 	/**
+	 * @var RepoGroup
+	 */
+	private $repoGroup;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityInfoBuilder $entityInfoBuilder
@@ -115,6 +121,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param StatsdDataFactoryInterface $stats
+	 * @param RepoGroup $repoGroup
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
@@ -133,6 +140,7 @@ class EntityParserOutputGeneratorFactory {
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
 		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
 		StatsdDataFactoryInterface $stats,
+		RepoGroup $repoGroup,
 		array $preferredGeoDataProperties = [],
 		array $preferredPageImagesProperties = [],
 		array $globeUris = []
@@ -149,6 +157,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 		$this->stats = $stats;
+		$this->repoGroup = $repoGroup;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
@@ -198,7 +207,7 @@ class EntityParserOutputGeneratorFactory {
 
 		$statementUpdater = new CompositeStatementDataUpdater(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher, $this->repoGroup )
 		);
 
 		if ( !empty( $this->preferredPageImagesProperties )
