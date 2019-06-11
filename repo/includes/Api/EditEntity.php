@@ -231,6 +231,7 @@ class EditEntity extends ModifyEntity {
 
 		$exists = $this->entityExists( $entity->getId() );
 
+		$this->extractLanguagesCodeFromQuery( $data );
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$this->dieIfNotClearable( $entity );
 			$entity->clear();
@@ -270,6 +271,19 @@ class EditEntity extends ModifyEntity {
 			$summary->setAction( 'create-' . $entity->getType() );
 		}
 		return $summary;
+	}
+
+	protected function extractLanguagesCodeFromQuery( array $data ) {
+		$terms = array_keys( $data );
+		$langCodes = array();
+
+		for( $i = 0; $i < count( $terms ); $i++ ) {
+			$singleChangeOp = $terms[ $i ];
+			$changeOpValue = $data[ $singleChangeOp ];
+			$langCodes = array_merge( $langCodes, array_keys($changeOpValue) );
+		}
+
+		return array_unique($langCodes);
 	}
 
 	/**
