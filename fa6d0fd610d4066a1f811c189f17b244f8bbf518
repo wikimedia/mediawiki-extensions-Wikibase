@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7132593_4e12886d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2019-06-11T14:27:06Z",
+      "side": 1,
+      "message": "There\u0027s a typo in `Depnds`. Since the commit is merged, it can be removed.\n\nFor future reference, as far as I know, Depends-On is used to specify dependencies from another repository. There\u0027s no need to use it if a commit depends on another commit from the same repository. You can just create a branch with several commits, and push them all to gerrit. It will automatically recognize parent and child commits, using power of git. ;)",
+      "revId": "fa6d0fd610d4066a1f811c189f17b244f8bbf518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
