@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * Allows acquiring ids of records in database table,
  * by inspecting a given read-only replica database to initially
  * find existing records with their ids, and insert non-existing
- * records into a read-write master databas and getting those
+ * records into a read-write master database and getting those
  * ids as well from the master database after insertion.
  *
  * @license GPL-2.0-or-later
@@ -95,7 +95,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *	return a new array of records to insert, allowing to enhance and/or supply more default
 	 *	values for other columns that are not supplied as part of $neededRecords array.
 	 *
-	 * @return array the array of input recrods along with their ids
+	 * @return array the array of input records along with their ids
 	 *	Example:
 	 *	[
 	 *		[ 'columnA' => 'valueA1', 'columnB' => 'valueB1', 'idColumn' => '1' ],
