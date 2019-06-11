@@ -2108,6 +2108,8 @@ class WikibaseRepo {
 		$formats = $this->settings->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
+		$services = MediaWikiServices::getInstance();
+
 		return new EntityParserOutputGeneratorFactory(
 			$this->getEntityViewFactory(),
 			$this->getEntityMetaTagsCreatorFactory(),
@@ -2125,7 +2127,8 @@ class WikibaseRepo {
 				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
 			),
 			$this->getKartographerEmbeddingHandler(),
-			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			$services->getStatsdDataFactory(),
+			$services->getRepoGroup(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )
