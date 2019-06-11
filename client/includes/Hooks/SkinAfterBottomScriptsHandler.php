@@ -4,7 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use ExtensionRegistry;
 use File;
-use HTML;
+use Html;
 use Title;
 
 use Wikibase\Client\RepoLinker;

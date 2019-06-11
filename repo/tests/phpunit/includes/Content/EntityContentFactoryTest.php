@@ -270,7 +270,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$model = $factory->getContentModelForType( $type );
 			$handler = $factory->getContentHandlerForType( $type );
 
-			$this->assertEquals( $model, $handler->getModelId() );
+			$this->assertEquals( $model, $handler->getModelID() );
 			$this->assertEquals( $type, $handler->getEntityType() );
 		}
 
