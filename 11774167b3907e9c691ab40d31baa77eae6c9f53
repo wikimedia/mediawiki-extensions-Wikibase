@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6effc6c4_4c43473d",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T13:46:08Z",
+      "side": 1,
+      "message": "Why this change? $callback isn’t supposed to be anything other than a callable or null, and if users pass in something else, I think it would be better to crash rather than silently ignore the callback.",
+      "revId": "11774167b3907e9c691ab40d31baa77eae6c9f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
