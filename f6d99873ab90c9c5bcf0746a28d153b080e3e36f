@@ -46,6 +46,30 @@
       "revId": "f6d99873ab90c9c5bcf0746a28d153b080e3e36f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f00b6f0_1979bf17",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-11T13:37:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c54dfed9_d0dd3f6e",
+      "range": {
+        "startLine": 162,
+        "startChar": 42,
+        "endLine": 162,
+        "endChar": 64
+      },
+      "revId": "f6d99873ab90c9c5bcf0746a28d153b080e3e36f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
