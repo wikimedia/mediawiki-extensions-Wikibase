@@ -221,7 +221,7 @@ class ByPropertyIdArray extends ArrayObject {
 		$propertyId = $object->getPropertyId();
 
 		$numericIndices = $this->getFlatArrayIndices( $propertyId );
-		$lastIndex = $numericIndices[count( $numericIndices ) - 1];
+		$lastIndex = end( $numericIndices );
 
 		if ( $toIndex > $lastIndex + 1 || $toIndex < $numericIndices[0] ) {
 			throw new OutOfBoundsException( 'Object cannot be moved to ' . $toIndex );
@@ -398,7 +398,7 @@ class ByPropertyIdArray extends ArrayObject {
 		} else {
 			$edgeIndex = ( $toIndex <= $propertyIndices[0] )
 				? $propertyIndices[0]
-				: $propertyIndices[count( $propertyIndices ) - 1];
+				: end( $propertyIndices );
 
 			$this->moveObjectInPropertyGroup( $object, $edgeIndex );
 			$this->movePropertyGroup( $object->getPropertyId(), $toIndex );
@@ -465,11 +465,11 @@ class ByPropertyIdArray extends ArrayObject {
 		}
 
 		// Add index to allow placing object after the last object of the "property group":
-		$validIndices[] = $validIndices[count( $validIndices ) - 1] + 1;
+		$validIndices[] = end( $validIndices ) + 1;
 
 		if ( $index === null ) {
 			// If index is null, append object to "property group".
-			$index = $validIndices[count( $validIndices ) - 1];
+			$index = end( $validIndices );
 		}
 
 		if ( in_array( $index, $validIndices ) ) {
