@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * Allows acquiring ids of records in database table,
  * by inspecting a given read-only replica database to initially
  * find existing records with their ids, and insert non-existing
- * records into a read-write master databas and getting those
+ * records into a read-write master database and getting those
  * ids as well from the master database after insertion.
  *
  * @license GPL-2.0-or-later
