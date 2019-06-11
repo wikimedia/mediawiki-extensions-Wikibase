@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f17b8b7d_022501f5",
+        "filename": "extension-lib-wip.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2019-06-11T16:38:31Z",
+      "side": 1,
+      "message": "Just so you know, hooks can also be registered as \"HookName\": \"CallbackFunction\"\n\nIt makes the file slightly shorter but removing two lines per hook.",
+      "revId": "5f96da28f5e0cd133a4fe4aadd4bb397cd33d15d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
