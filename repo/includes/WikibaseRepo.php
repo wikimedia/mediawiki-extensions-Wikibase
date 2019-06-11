@@ -1829,15 +1829,14 @@ class WikibaseRepo {
 	}
 
 	public function getNewPropertyTermStore(): PropertyTermStore {
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$loadBalancer = $lbFactory->getMainLB();
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$loadBalancer,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
 		return new DatabasePropertyTermStore(
-			$lbFactory,
+			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
 				$loadBalancer,
 				$typeIdsStore
@@ -1895,15 +1894,14 @@ class WikibaseRepo {
 	}
 
 	public function getNewItemTermStore(): ItemTermStore {
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$loadBalancer = $lbFactory->getMainLB();
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$loadBalancer,
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
 		return new DatabaseItemTermStore(
-			$lbFactory,
+			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
 				$loadBalancer,
 				$typeIdsStore
