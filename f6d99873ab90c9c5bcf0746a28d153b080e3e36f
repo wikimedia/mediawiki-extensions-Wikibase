@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "876ecccf_fd966787",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T13:25:44Z",
+      "side": 1,
+      "message": "I think this should also be $flags – if boolean parameters are bad in the constructor, why would they be better here? – but that can be done afterwards.",
+      "range": {
+        "startLine": 162,
+        "startChar": 42,
+        "endLine": 162,
+        "endChar": 64
+      },
+      "revId": "f6d99873ab90c9c5bcf0746a28d153b080e3e36f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
