@@ -16,6 +16,24 @@
       "revId": "d35bef64b6df01890736f72a258193882a7eec8c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2687b428_1f60ae06",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-11T12:41:33Z",
+      "side": 1,
+      "message": "I avoided renaming it as $flags intentionally as we don\u0027t know yet if it will host more flags. It can be renamed without breaking anything later, but can do that now as well. My preference was to not assume that it will be reused for other stuff until the next time we do want to reuse it.",
+      "parentUuid": "01f4c34d_3e136bf3",
+      "revId": "d35bef64b6df01890736f72a258193882a7eec8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }

@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "b4f9253d_dd5604e5",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-11T12:41:33Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion myself here .. boolean, bit flag or string all do the job with slight difference in readability and extensibility without introducing breaking change to the API.\n\nSo yeah let\u0027s get this merged. It can still be changed in next touch if needed",
+      "parentUuid": "aa05bf8d_f4a9ab3d",
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e6a82e07_afb37edd",
         "filename": "lib/tests/phpunit/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirerTest.php",
         "patchSetId": 1
