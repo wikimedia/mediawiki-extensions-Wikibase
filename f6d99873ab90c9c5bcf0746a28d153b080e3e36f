@@ -70,6 +70,30 @@
       "revId": "f6d99873ab90c9c5bcf0746a28d153b080e3e36f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8deb9f4d_5ee3b1cc",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T13:43:04Z",
+      "side": 1,
+      "message": "…and moved to the right change now :)\n\nedit: oh wait, sorry, you did the same thing",
+      "parentUuid": "0f00b6f0_1979bf17",
+      "range": {
+        "startLine": 162,
+        "startChar": 42,
+        "endLine": 162,
+        "endChar": 64
+      },
+      "revId": "f6d99873ab90c9c5bcf0746a28d153b080e3e36f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
