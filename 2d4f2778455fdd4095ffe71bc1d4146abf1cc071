@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22fbe5cd_820f7d4e",
+        "filename": "lib/includes/Reporting/ReportingExceptionHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T11:17:35Z",
+      "side": 1,
+      "message": "As an optimization, you could apply array_flip() here and then use array_key_exists() or isset() below. But I guess if we only ignore a single message in practice, that doesn’t really matter.",
+      "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75de9f00_247e1220",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T11:17:35Z",
+      "side": 1,
+      "message": "It’s unfortunate that we can’t (currently) distinguish between failed-to-dump due to missing entity and failed-to-dump due to any other error :/",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
