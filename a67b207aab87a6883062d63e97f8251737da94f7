@@ -52,6 +52,24 @@
       "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa05bf8d_f4a9ab3d",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T12:25:59Z",
+      "side": 1,
+      "message": "I’m not a huge fan of bit flags, a string would be nicer in my opinion – but we can merge the bit flag version too.",
+      "parentUuid": "5a7e7b6a_87b4ee68",
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }

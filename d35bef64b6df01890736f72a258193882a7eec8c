@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01f4c34d_3e136bf3",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T12:25:59Z",
+      "side": 1,
+      "message": "This is missing a variable declaration above. Also, shouldn’t it be called $flags if it’s supposed to potentially accommodate more than just IGNORE_REPLICA?",
+      "revId": "d35bef64b6df01890736f72a258193882a7eec8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
