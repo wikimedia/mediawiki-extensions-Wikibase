@@ -63,6 +63,30 @@
       "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c4f1b34_87fc0179",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T14:47:28Z",
+      "side": 1,
+      "message": "DumpGenerator already catches EntityLookupException, StorageException and LogicException separately, so I assume it should be possible to adjust the error code in each case. Nothing else seems to rely on those codes yet – at least, nothing I can find with MediaWiki code search.\n\nBut I just checked, and an EntityLookup is supposed to return null when an entity does not exist, and as far as I can tell DumpGenerator continues silently in that case… Stas, what kind of error are you getting?",
+      "parentUuid": "67f48151_4f5a0104",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
