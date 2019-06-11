@@ -34,6 +34,24 @@
       "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a7e7b6a_87b4ee68",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-11T12:08:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f7de5d_dc40f4f9",
+      "revId": "a67b207aab87a6883062d63e97f8251737da94f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
