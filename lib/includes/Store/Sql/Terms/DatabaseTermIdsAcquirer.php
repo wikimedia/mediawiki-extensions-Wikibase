@@ -22,52 +22,27 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	private $typeIdsAcquirer;
 
 	/**
-	 * @var callable
-	 */
-	private $acquiredIdsConsumerCallback = null;
-
-	/**
-	 * THIS implementation guarantees that in-parallel {@link DatabaseTermIdsCleaner}
-	 * will not result in deleting terms that have been acquired by this acquirer, should
-	 * these two in-parallel processes happen to overlap on some existing term ids.
-	 * The mechanism of achieving this guarantee is complete under the following two conditions:
-	 * - external linking to acquired ids (e.g. using them as foreign keys in other tables)
-	 *	 must happen inside a callback passed through $acquiredIdsConsumerCallback
-	 *	 constructor param.
-	 * - the in-parallel cleaner is called with set of ids based on the absence of any
-	 *	 links to those ids, in the same external places where the callback links to them.
-	 *
 	 * @param ILoadBalancer $loadBalancer
 	 * @param TypeIdsAcquirer $typeIdsAcquirer
-	 * @param callable|null $acquiredIdsConsumerCallback
-	 *	If callable is not null, it will be called with the array of acquired ids
-	 *	right before attempting to restore any of those acquired ids that might
-	 *	have been deleted before {@link acquireTermIds()} has returned by another process.
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TypeIdsAcquirer $typeIdsAcquirer,
-		$acquiredIdsConsumerCallback = null
+		TypeIdsAcquirer $typeIdsAcquirer
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
-		if ( is_callable( $acquiredIdsConsumerCallback ) ) {
-			$this->acquiredIdsConsumerCallback = $acquiredIdsConsumerCallback;
-		} else {
-			$this->acquiredIdsConsumerCallback = function () {
-				// no-op
-			};
-		}
 	}
 
-	public function acquireTermIds( array $termsArray ): array {
+	public function acquireTermIds( array $termsArray, $callback = null ): array {
 		if ( $termsArray === [] ) {
 			return [];
 		}
 
 		$termIds = $this->mapTermsArrayToTermIds( $termsArray );
 
-		( $this->acquiredIdsConsumerCallback )( $termIds );
+		if ( $callback !== null ) {
+			( $callback )( $termIds );
+		}
 
 		$this->restoreCleanedUpIds( $termsArray, $termIds );
 

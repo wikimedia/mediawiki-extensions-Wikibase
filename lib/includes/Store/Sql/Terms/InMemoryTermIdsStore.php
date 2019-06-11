@@ -10,7 +10,7 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 	private $terms = [];
 	private $lastId = 0;
 
-	public function acquireTermIds( array $termsArray ): array {
+	public function acquireTermIds( array $termsArray, $callback = null ): array {
 		$ids = [];
 
 		foreach ( $termsArray as $type => $termsOfType ) {
@@ -25,6 +25,10 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 					$ids[] = $this->terms[$type][$lang][$term];
 				}
 			}
+		}
+
+		if ( $callback !== null ) {
+			( $callback )( $ids );
 		}
 
 		return $ids;

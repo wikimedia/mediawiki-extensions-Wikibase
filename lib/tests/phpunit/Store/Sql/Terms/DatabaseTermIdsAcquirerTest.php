@@ -271,7 +271,11 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
 			$this->loadBalancer,
-			$typeIdsAcquirer,
+			$typeIdsAcquirer
+		);
+
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds(
+			$termsArray,
 			function ( $acquiredIds ) {
 				// This callback will delete first 3 acquired ids to mimic the case
 				// in which a cleaner might be working in-parallel and deleting ids
@@ -284,8 +288,6 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 				$this->db->delete( 'wbt_term_in_lang', [ 'wbtl_id' => $idsToDelete ] );
 			}
 		);
-
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
 		$uniqueAcquiredTermIds = array_values( array_unique( $acquiredTermIds ) );
 		$persistedTermIds = $this->db->selectFieldValues( 'wbt_term_in_lang', 'wbtl_id' );
 
