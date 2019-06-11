@@ -28,6 +28,7 @@
 			"\\Wikibase\\ViewHooks::onUnitTestsList"
 		]
 	},
+	"callback": "\\Wikibase\\ViewHooks::onRegistration",
 	"MessagesDirs": {
 		"WikibaseView": [
 			"view/lib/wikibase-data-values-value-view/i18n"
