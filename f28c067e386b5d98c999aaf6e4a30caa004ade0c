@@ -22,6 +22,30 @@
       "revId": "f28c067e386b5d98c999aaf6e4a30caa004ade0c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8552bbef_ea6b58bf",
+        "filename": "lib/tests/phpunit/SimpleCacheWithBagOStuffTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-11T12:05:05Z",
+      "side": 1,
+      "message": "I think when I tried that, some tests failed… but I’m not sure anymore, this went through a lot of revisions before I uploaded the change and perhaps what I remember no longer applies.",
+      "parentUuid": "b31b13ba_259f5560",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "f28c067e386b5d98c999aaf6e4a30caa004ade0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
