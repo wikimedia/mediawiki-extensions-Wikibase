@@ -135,6 +135,76 @@ class InMemoryTermIdsStoreTest extends TestCase {
 		], $terms2 );
 	}
 
+	public function testResolveTermIds_filterLanguages() {
+		$termIdsStore = new InMemoryTermIdsStore();
+
+		$termIds = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'en' => 'some label',
+				'de' => 'eine Beschriftung',
+			],
+		] );
+
+		$terms = $termIdsStore->resolveTermIds( $termIds, null, [ 'en' ] );
+
+		$this->assertSame( [
+			'label' => [
+				'en' => [ 'some label' ],
+			],
+		], $terms );
+	}
+
+	public function testResolveTermIds_filterGroups() {
+		$termIdsStore = new InMemoryTermIdsStore();
+
+		$termIds = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'en' => 'some label',
+				'de' => 'eine Beschriftung',
+			],
+			'alias' => [
+				'de' => [ 'ein Alias', 'noch ein Alias' ],
+			],
+		] );
+
+		$terms = $termIdsStore->resolveTermIds( $termIds, [ 'alias' ] );
+
+		$this->assertSame( [
+			'alias' => [
+				'de' => [ 'ein Alias', 'noch ein Alias' ],
+			],
+		], $terms );
+	}
+
+	public function testResolveTermIds_filterGroupsAndLanguages() {
+		$termIdsStore = new InMemoryTermIdsStore();
+
+		$termIds = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'en' => 'some label',
+				'de' => 'eine Beschriftung',
+			],
+			'description' => [
+				'de' => 'Beschreibung',
+			],
+			'alias' => [
+				'de' => [ 'ein Alias', 'noch ein Alias' ],
+				'es' => [ 'foo' ],
+			],
+		] );
+
+		$terms = $termIdsStore->resolveTermIds( $termIds, [ 'label', 'alias' ], [ 'en', 'es' ] );
+
+		$this->assertSame( [
+			'label' => [
+				'en' => [ 'some label' ],
+			],
+			'alias' => [
+				'es' => [ 'foo' ],
+			],
+		], $terms );
+	}
+
 	public function testResolveGroupedTermIds_returnsCorrectGroups() {
 		$termIdsStore = new InMemoryTermIdsStore();
 
@@ -170,6 +240,41 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			],
 			'alias' => [
 				'de' => [ 'ein Alias', 'noch ein Alias' ],
+			],
+		], $terms['terms2'] );
+	}
+
+	public function testResolveGroupedTermIds_filterGroupsAndLanguages() {
+		$termIdsStore = new InMemoryTermIdsStore();
+
+		$termIds1 = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'en' => 'some label',
+				'de' => 'eine Beschriftung',
+			],
+		] );
+		$termIds2 = $termIdsStore->acquireTermIds( [
+			'label' => [
+				'de' => 'eine Beschriftung',
+			],
+			'alias' => [
+				'de' => [ 'ein Alias', 'noch ein Alias' ],
+			],
+		] );
+
+		$terms = $termIdsStore->resolveGroupedTermIds( [
+			'terms1' => $termIds1,
+			'terms2' => $termIds2,
+		], [ 'label' ], [ 'de' ] );
+
+		$this->assertSame( [
+			'label' => [
+				'de' => [ 'eine Beschriftung' ],
+			],
+		], $terms['terms1'] );
+		$this->assertSame( [
+			'label' => [
+				'de' => [ 'eine Beschriftung' ],
 			],
 		], $terms['terms2'] );
 	}

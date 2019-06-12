@@ -281,16 +281,18 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$repoDbDomain = $this->entitySource->getDatabaseName();
 				$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
 				$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
+				$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+					$loadBalancer,
+					$mediaWikiServices->getMainWANObjectCache(),
+					$repoDbDomain,
+					$logger
+				);
 
 				$propertyTermLookup = new PrefetchingPropertyTermLookup(
 					$loadBalancer,
 					new DatabaseTermIdsResolver(
-						new DatabaseTypeIdsStore(
-							$loadBalancer,
-							$mediaWikiServices->getMainWANObjectCache(),
-							$repoDbDomain,
-							$logger
-						),
+						$databaseTypeIdsStore,
+						$databaseTypeIdsStore,
 						$loadBalancer,
 						$logger
 					)
