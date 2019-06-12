@@ -20,6 +20,9 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	/** @var TypeIdsResolver */
 	private $typeIdsResolver;
 
+	/** @var TypeIdsAcquirer */
+	private $typeIdsAcquirer;
+
 	/** @var ILoadBalancer */
 	private $lb;
 
@@ -34,32 +37,35 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 
 	/**
 	 * @param TypeIdsResolver $typeIdsResolver
+	 * @param TypeIdsAcquirer $typeIdsAcquirer
 	 * @param ILoadBalancer $lb
+	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
 		TypeIdsResolver $typeIdsResolver,
+		TypeIdsAcquirer $typeIdsAcquirer,
 		ILoadBalancer $lb,
 		LoggerInterface $logger = null
 	) {
 		$this->typeIdsResolver = $typeIdsResolver;
+		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->lb = $lb;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
-	public function resolveTermIds( array $termIds ): array {
-		return $this->resolveGroupedTermIds( [ '' => $termIds ] )[''];
+	public function resolveTermIds(
+		array $termIds,
+		array $types = null,
+		array $languages = null
+	): array {
+		return $this->resolveGroupedTermIds( [ '' => $termIds ], $types, $languages )[''];
 	}
 
-	/*
-	 * Term data is first read from the replica; if that returns less rows than we asked for, then
-	 * there are some new rows in the master that were not yet replicated, and we fall back to the
-	 * master if allowed. As the internal relations of the term store never change (for example, a
-	 * term_in_lang row will never suddenly point to a different text_in_lang), a master fallback
-	 * should never be necessary in any other case. However, callers need to consider where they
-	 * got the list of term IDs they pass into this method from: if it’s from a replica, they may
-	 * still see outdated data overall.
-	 */
-	public function resolveGroupedTermIds( array $groupedTermIds ): array {
+	public function resolveGroupedTermIds(
+		array $groupedTermIds,
+		array $types = null,
+		array $languages = null
+	): array {
 		$groupedTerms = [];
 
 		$groupNamesByTermIds = [];
@@ -71,7 +77,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		}
 		$allTermIds = array_keys( $groupNamesByTermIds );
 
-		if ( $allTermIds === [] ) {
+		if ( $allTermIds === [] || $types === [] || $languages === [] ) {
 			return $groupedTerms;
 		}
 
@@ -82,7 +88,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 				'termCount' => count( $allTermIds ),
 			]
 		);
-		$replicaResult = $this->selectTerms( $this->getDbr(), $allTermIds );
+		$replicaResult = $this->selectTerms( $this->getDbr(), $allTermIds, $types, $languages );
 		$this->preloadTypes( $replicaResult );
 		$replicaTermIds = [];
 
@@ -96,7 +102,20 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		return $groupedTerms;
 	}
 
-	private function selectTerms( IDatabase $db, array $termIds ): IResultWrapper {
+	private function selectTerms(
+		IDatabase $db,
+		array $termIds,
+		array $types = null,
+		array $languages = null
+	): IResultWrapper {
+		$additionalConditions = [];
+		if ( $languages !== null ) {
+			$additionalConditions['wbxl_language'] = $languages;
+		}
+		if ( $types !== null ) {
+			$additionalConditions['wbtl_type_id'] = $this->lookupTypeIds( $types );
+		}
+
 		return $db->select(
 			[ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ],
 			[ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ],
@@ -105,7 +124,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 				// join conditions
 				'wbtl_text_in_lang_id=wbxl_id',
 				'wbxl_text_id=wbx_id',
-			],
+			] + $additionalConditions,
 			__METHOD__
 		);
 	}
@@ -122,19 +141,40 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	}
 
 	private function addResultTerms( array &$terms, stdClass $row ) {
-		$type = $this->lookupType( $row->wbtl_type_id );
+		$type = $this->lookupTypeName( $row->wbtl_type_id );
 		$lang = $row->wbxl_language;
 		$text = $row->wbx_text;
 		$terms[$type][$lang][] = $text;
 	}
 
-	private function lookupType( $typeId ) {
+	private function lookupTypeName( $typeId ) {
 		$typeName = $this->typeNames[$typeId] ?? null;
 		if ( $typeName === null ) {
 			throw new InvalidArgumentException(
 				'Type ID ' . $typeId . ' was requested but not preloaded!' );
 		}
 		return $typeName;
+	}
+
+	private function lookupTypeIds( array $typeNames ) {
+		$typeIds = [];
+		$additionalTypeIds = [];
+		$unknownTypeIds = [];
+
+		foreach ( $typeNames as $typeName ) {
+			$typeId = array_search( $typeName, $this->typeNames );
+			if ( $typeId === false ) {
+				$unknownTypeIds[] = $typeName;
+				continue;
+			}
+			$typeIds[] = $typeId;
+		}
+		if ( $unknownTypeIds ) {
+			$additionalTypeIds = $this->typeIdsAcquirer->acquireTypeIds( $unknownTypeIds );
+			$this->typeNames += array_flip( $additionalTypeIds );
+		}
+
+		return $typeIds + $additionalTypeIds;
 	}
 
 	private function getDbr() {
