@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdb4371b_c2737c34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-12T13:00:45Z",
+      "side": 1,
+      "message": "It turns out that a ByTypeDispatchingPrefetchingTermLookup already exists, so this commit isn’t as necessary as I thought it would be, and this part of the commit message is perhaps a bit confusing. Should I update the change or abandon it?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "67e74bb9816db1a6795730d60d7d6b4deda845c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
