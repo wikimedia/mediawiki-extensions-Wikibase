@@ -4,21 +4,21 @@ namespace Wikibase\Lib\Tests\Interactors;
 
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractor;
+use Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers \Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory
+ * @covers \Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractorFactory
  *
  * @group Wikibase
  * @group WikibaseLib
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
+class ByTypeDispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function provideInvalidConstructorArguments() {
@@ -38,7 +38,7 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\Test
 	public function testGivenInvalidArguments_constructorThrowsException( $factories ) {
 		$this->setExpectedException( ParameterAssertionException::class );
 
-		new DispatchingTermSearchInteractorFactory( $factories );
+		new ByTypeDispatchingTermSearchInteractorFactory( $factories );
 	}
 
 	public function testNewInteractorReturnsDispatchingTermSearchInteractorInstance() {
@@ -56,12 +56,12 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\Test
 				$this->returnValue( $this->getMock( TermSearchInteractor::class ) )
 			);
 
-		$dispatchingFactory = new DispatchingTermSearchInteractorFactory( [
+		$dispatchingFactory = new ByTypeDispatchingTermSearchInteractorFactory( [
 			'item' => $fooInteractorFactory,
 			'property' => $localInteractorFactory,
 		] );
 
-		$this->assertInstanceOf( DispatchingTermSearchInteractor::class, $dispatchingFactory->newInteractor( 'en' ) );
+		$this->assertInstanceOf( ByTypeDispatchingTermSearchInteractor::class, $dispatchingFactory->newInteractor( 'en' ) );
 	}
 
 }

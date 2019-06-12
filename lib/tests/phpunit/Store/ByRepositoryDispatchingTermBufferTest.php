@@ -7,18 +7,18 @@ use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\Store\DispatchingTermBuffer;
+use Wikibase\Lib\Store\ByRepositoryDispatchingTermBuffer;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers \Wikibase\Lib\Store\DispatchingTermBuffer
+ * @covers \Wikibase\Lib\Store\ByRepositoryDispatchingTermBuffer
  *
  * @group Wikibase
  * @group WikibaseStore
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
+class ByRepositoryDispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	/**
@@ -26,7 +26,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidTermBuffers_exceptionIsThrown( array $termBuffers ) {
 		$this->setExpectedException( ParameterAssertionException::class );
-		new DispatchingTermBuffer( $termBuffers, new NullLogger() );
+		new ByRepositoryDispatchingTermBuffer( $termBuffers, new NullLogger() );
 	}
 
 	public function invalidTermBufferProvider() {
@@ -80,7 +80,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 				return true;
 			} ) );
 
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[ 'foo' => $fooTermBuffer, '' => $localTermBuffer ],
 			new NullLogger()
 		);
@@ -106,7 +106,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetPrefetchedTerm() {
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[
 				'' => $this->getTermBufferWithTerms( [
 					'label' => [ 'en' => 'Vienna', 'de' => 'Wien' ],
@@ -139,7 +139,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownRepository_getPrefetchedTermReturnsNull() {
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[
 				'foo' => $this->getMock( TermBuffer::class ),
 			],
@@ -150,7 +150,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetLabel() {
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[
 				'' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Vienna', 'de' => 'Wien' ] ] ),
 				'foo' => $this->getTermBufferWithTerms( [ 'label' => [ 'en' => 'Rome', 'de' => 'Rom' ] ] ),
@@ -164,7 +164,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetLabels() {
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[
 				'' => $this->getTermBufferWithTerms(
 					[ 'label' => [ 'en' => 'Vienna', 'de' => 'Wien', 'fr' => 'Vienne' ] ]
@@ -193,7 +193,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 			->method( 'prefetchTerms' )
 			->with( [ $entityId ], [ 'label' ], $languageCodes );
 
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[
 				'foo' => $termBuffer,
 			],
@@ -210,7 +210,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownTerm_termDoesNotAppearInResults() {
-		$dispatcher = new DispatchingTermBuffer(
+		$dispatcher = new ByRepositoryDispatchingTermBuffer(
 			[
 				'' => $this->getTermBufferWithTerms(
 					[ 'label' => [ 'en' => 'Vienna', 'fr' => 'Vienne', 'de' => false ] ]

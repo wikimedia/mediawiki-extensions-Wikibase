@@ -2,12 +2,12 @@
 
 use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataAccess\MultiRepositoryServices;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
-use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
-use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
-use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
-use Wikibase\Lib\Store\DispatchingTermBuffer;
+use Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Store\ByRepositoryDispatchingEntityInfoBuilder;
+use Wikibase\Lib\Store\ByRepositoryDispatchingEntityPrefetcher;
+use Wikibase\Lib\Store\ByRepositoryDispatchingEntityRevisionLookup;
+use Wikibase\Lib\Store\ByRepositoryDispatchingPropertyInfoLookup;
+use Wikibase\Lib\Store\ByRepositoryDispatchingTermBuffer;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -17,31 +17,31 @@ use Wikimedia\Assert\Assert;
 return [
 
 	'EntityInfoBuilder' => function( MultiRepositoryServices $multiRepositoryServices ) {
-		return new DispatchingEntityInfoBuilder(
+		return new ByRepositoryDispatchingEntityInfoBuilder(
 			$multiRepositoryServices->getServiceMap( 'EntityInfoBuilder' )
 		);
 	},
 
 	'EntityPrefetcher' => function( MultiRepositoryServices $multiRepositoryServices ) {
-		return new DispatchingEntityPrefetcher(
+		return new ByRepositoryDispatchingEntityPrefetcher(
 			$multiRepositoryServices->getServiceMap( 'EntityPrefetcher' )
 		);
 	},
 
 	'EntityRevisionLookup' => function( MultiRepositoryServices $multiRepositoryServices ) {
-		return new DispatchingEntityRevisionLookup(
+		return new ByRepositoryDispatchingEntityRevisionLookup(
 			$multiRepositoryServices->getServiceMap( 'EntityRevisionLookup' )
 		);
 	},
 
 	'PropertyInfoLookup' => function( MultiRepositoryServices $multiRepositoryServices ) {
-		return new DispatchingPropertyInfoLookup(
+		return new ByRepositoryDispatchingPropertyInfoLookup(
 			$multiRepositoryServices->getServiceMap( 'PropertyInfoLookup' )
 		);
 	},
 
 	'TermBuffer' => function( MultiRepositoryServices $multiRepositoryServices ) {
-		return new DispatchingTermBuffer(
+		return new ByRepositoryDispatchingTermBuffer(
 			$multiRepositoryServices->getServiceMap( 'PrefetchingTermLookup' ),
 			LoggerFactory::getInstance( 'Wikibase' )
 		);
@@ -61,7 +61,7 @@ return [
 			$factories[$entityType] = $repoSpecificFactories[$repository];
 		}
 
-		return new DispatchingTermSearchInteractorFactory( $factories );
+		return new ByTypeDispatchingTermSearchInteractorFactory( $factories );
 	},
 
 ];

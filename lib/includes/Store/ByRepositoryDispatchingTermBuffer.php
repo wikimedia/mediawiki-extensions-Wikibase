@@ -10,9 +10,12 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikimedia\Assert\Assert;
 
 /**
+ * Dispatches to several other term buffers
+ * depending on the repository of entity IDs.
+ *
  * @license GPL-2.0-or-later
  */
-class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingTermLookup {
+class ByRepositoryDispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingTermLookup {
 
 	/**
 	 * @var TermBuffer[]
@@ -25,7 +28,7 @@ class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingT
 	private $logger;
 
 	/**
-	 * @param TermBuffer[] $termBuffers
+	 * @param TermBuffer[] $termBuffers Map of repository name strings to TermBuffer
 	 * @param LoggerInterface $logger
 	 *
 	 * @throws InvalidArgumentException

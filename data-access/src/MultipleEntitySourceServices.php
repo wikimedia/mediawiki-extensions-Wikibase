@@ -5,7 +5,7 @@ namespace Wikibase\DataAccess;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikimedia\Assert\Assert;
@@ -97,7 +97,7 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 				$factoriesByType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getTermSearchInteractorFactory();
 			}
 
-			$this->termSearchInteractorFactory = new DispatchingTermSearchInteractorFactory( $factoriesByType );
+			$this->termSearchInteractorFactory = new ByTypeDispatchingTermSearchInteractorFactory( $factoriesByType );
 		}
 
 		return $this->termSearchInteractorFactory;

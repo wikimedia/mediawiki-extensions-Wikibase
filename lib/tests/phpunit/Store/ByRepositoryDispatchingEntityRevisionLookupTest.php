@@ -6,21 +6,21 @@ use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\DispatchingEntityRevisionLookup;
+use Wikibase\Lib\Store\ByRepositoryDispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers \Wikibase\Lib\Store\DispatchingEntityRevisionLookup
+ * @covers \Wikibase\Lib\Store\ByRepositoryDispatchingEntityRevisionLookup
  *
  * @group WikibaseStore
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
+class ByRepositoryDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	/**
@@ -49,7 +49,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( $foreignItemId )
 			->willReturn( new EntityRevision( $foreignItem, 100 ) );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup(
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup(
 			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
@@ -78,7 +78,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( $this->anything() )
 			->willReturn( null );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup(
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup(
 			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
@@ -90,7 +90,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 		$localLookup = $this->getDummyEntityRevisionLookup();
 		$localLookup->expects( $this->never() )->method( 'getEntityRevision' );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
 		$this->assertNull( $dispatchingLookup->getEntityRevision( new ItemId( 'foo:Q123' ) ) );
 	}
@@ -108,7 +108,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( new ItemId( 'foo:Q303' ) )
 			->willReturn( 100 );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup(
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup(
 			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
@@ -129,7 +129,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 			->with( $this->anything() )
 			->willReturn( false );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup(
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup(
 			[ '' => $localLookup, 'foo' => $fooLookup, ]
 		);
 
@@ -141,7 +141,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 		$localLookup = $this->getDummyEntityRevisionLookup();
 		$localLookup->expects( $this->never() )->method( 'getLatestRevisionId' );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
 		$latestRevisionIdResult = $dispatchingLookup->getLatestRevisionId(
 			new ItemId( 'foo:Q123' )
@@ -155,7 +155,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 			->method( $this->anything() )
 			->willThrowException( new StorageException( 'No such revision for entity Q123: 124' ) );
 
-		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
+		$dispatchingLookup = new ByRepositoryDispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
 		$this->setExpectedException( StorageException::class );
 		$dispatchingLookup->getEntityRevision( new ItemId( 'Q123' ), 124 );
@@ -166,7 +166,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidForeignLookups_exceptionIsThrown( array $lookups ) {
 		$this->setExpectedException( ParameterAssertionException::class );
-		new DispatchingEntityRevisionLookup( $lookups );
+		new ByRepositoryDispatchingEntityRevisionLookup( $lookups );
 	}
 
 	public function provideInvalidForeignLookups() {

@@ -5,18 +5,18 @@ namespace Wikibase\Lib\Tests\Store;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
+use Wikibase\Lib\Store\ByRepositoryDispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
- * @covers \Wikibase\Lib\Store\DispatchingPropertyInfoLookup
+ * @covers \Wikibase\Lib\Store\ByRepositoryDispatchingPropertyInfoLookup
  *
  * @group WikibaseStore
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
+class ByRepositoryDispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	private $localPropertyInfo;
@@ -34,7 +34,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownRepository_getPropertyInfoReturnsNull() {
-		$lookup = new DispatchingPropertyInfoLookup( [
+		$lookup = new ByRepositoryDispatchingPropertyInfoLookup( [
 			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
 			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
@@ -43,7 +43,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenDifferentPropertyIds_getPropertyInfoDispatchesAccordingToRepository() {
-		$lookup = new DispatchingPropertyInfoLookup( [
+		$lookup = new ByRepositoryDispatchingPropertyInfoLookup( [
 			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
 			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
@@ -59,7 +59,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenMultiplePropertyInfoLookups_getAllPropertyInfoCombinesResults() {
-		$lookup = new DispatchingPropertyInfoLookup( [
+		$lookup = new ByRepositoryDispatchingPropertyInfoLookup( [
 			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
 			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
@@ -71,7 +71,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenMultiplePropertyInfoLookups_getPropertyInfoForDataTypeCombinesResults() {
-		$lookup = new DispatchingPropertyInfoLookup( [
+		$lookup = new ByRepositoryDispatchingPropertyInfoLookup( [
 			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
 			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
@@ -95,7 +95,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidPropertyInfoLookup_exceptionIsThrown( $lookups ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new DispatchingPropertyInfoLookup( $lookups );
+		new ByRepositoryDispatchingPropertyInfoLookup( $lookups );
 	}
 
 	public function provideInvalidForeignLookups() {

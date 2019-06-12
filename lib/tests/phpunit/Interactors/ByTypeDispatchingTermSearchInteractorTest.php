@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
-use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
+use Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -15,13 +15,13 @@ use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers \Wikibase\Lib\Interactors\DispatchingTermSearchInteractor
+ * @covers \Wikibase\Lib\Interactors\ByTypeDispatchingTermSearchInteractor
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
+class ByTypeDispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function provideInvalidInteractorConfig() {
@@ -40,7 +40,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidInteractorConfig_exceptionIsThrown( array $interactors ) {
 		$this->setExpectedException( ParameterAssertionException::class );
-		new DispatchingTermSearchInteractor( $interactors );
+		new ByTypeDispatchingTermSearchInteractor( $interactors );
 	}
 
 	private function getTermSearchInteractor( array $resultsByEntityType ) {
@@ -92,7 +92,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 			]
 		] );
 
-		$interactor = new DispatchingTermSearchInteractor( [
+		$interactor = new ByTypeDispatchingTermSearchInteractor( [
 			'item' => $interactorOne,
 			'property' => $interactorTwo,
 		] );
@@ -140,7 +140,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 			->method( 'setTermSearchOptions' )
 			->with( $searchOptions );
 
-		$dispatchingInteractor = new DispatchingTermSearchInteractor( [ 'item' => $itemInteractor ] );
+		$dispatchingInteractor = new ByTypeDispatchingTermSearchInteractor( [ 'item' => $itemInteractor ] );
 
 		$dispatchingInteractor->setTermSearchOptions( $searchOptions );
 

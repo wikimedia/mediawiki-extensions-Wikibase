@@ -13,7 +13,7 @@ use Wikimedia\Rdbms\DBError;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingPropertyInfoLookup implements PropertyInfoLookup {
+class ByRepositoryDispatchingPropertyInfoLookup implements PropertyInfoLookup {
 
 	/**
 	 * @var PropertyInfoLookup[] indexed by repository name

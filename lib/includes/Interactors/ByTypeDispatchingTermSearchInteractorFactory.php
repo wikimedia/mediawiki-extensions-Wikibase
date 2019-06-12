@@ -10,7 +10,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingTermSearchInteractorFactory implements TermSearchInteractorFactory {
+class ByTypeDispatchingTermSearchInteractorFactory implements TermSearchInteractorFactory {
 
 	/**
 	 * @var TermSearchInteractorFactory[]
@@ -34,10 +34,10 @@ class DispatchingTermSearchInteractorFactory implements TermSearchInteractorFact
 	/**
 	 * @param string $displayLanguageCode
 	 *
-	 * @return DispatchingTermSearchInteractor
+	 * @return ByTypeDispatchingTermSearchInteractor
 	 */
 	public function newInteractor( $displayLanguageCode ) {
-		return new DispatchingTermSearchInteractor(
+		return new ByTypeDispatchingTermSearchInteractor(
 			array_map(
 				function( TermSearchInteractorFactory $factory ) use ( $displayLanguageCode ) {
 					return $factory->newInteractor( $displayLanguageCode );

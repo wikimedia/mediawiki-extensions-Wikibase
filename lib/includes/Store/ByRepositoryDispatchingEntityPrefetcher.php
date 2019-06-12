@@ -14,7 +14,7 @@ use Wikimedia\Assert\Assert;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityPrefetcher implements EntityPrefetcher {
+class ByRepositoryDispatchingEntityPrefetcher implements EntityPrefetcher {
 
 	/**
 	 * @var EntityPrefetcher[]

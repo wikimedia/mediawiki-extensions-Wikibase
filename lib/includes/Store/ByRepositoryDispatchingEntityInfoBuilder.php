@@ -10,7 +10,7 @@ use Wikimedia\Assert\Assert;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityInfoBuilder implements EntityInfoBuilder {
+class ByRepositoryDispatchingEntityInfoBuilder implements EntityInfoBuilder {
 
 	/**
 	 * @var EntityInfoBuilder[]

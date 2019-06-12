@@ -13,7 +13,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
+class ByRepositoryDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 
 	/**
 	 * @var EntityRevisionLookup[]

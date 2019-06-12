@@ -6,17 +6,17 @@ use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
+use Wikibase\Lib\Store\ByRepositoryDispatchingEntityPrefetcher;
 
 /**
- * @covers \Wikibase\Lib\Store\DispatchingEntityPrefetcher
+ * @covers \Wikibase\Lib\Store\ByRepositoryDispatchingEntityPrefetcher
  *
  * @group Wikibase
  * @group WikibaseStore
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
+class ByRepositoryDispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testPrefetchGroupsIdsByRepositoryAndDelegatesPrefetchingToRepositorySpecificPrefetcher() {
@@ -34,7 +34,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 			->method( 'prefetch' )
 			->with( [ $foreignIdOne ] );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new ByRepositoryDispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 			'foo' => $fooPrefetcher,
 		] );
@@ -51,7 +51,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 			->method( 'prefetch' )
 			->with( [ $localId ] );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new ByRepositoryDispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 		] );
 
@@ -69,7 +69,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 			->method( 'purge' )
 			->with( $foreignId );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new ByRepositoryDispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 			'foo' => $fooPrefetcher,
 		] );
@@ -83,7 +83,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->never() )->method( 'purge' );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new ByRepositoryDispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 		] );
 
@@ -97,7 +97,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 		$fooPrefetcher = $this->getMock( EntityPrefetcher::class );
 		$fooPrefetcher->expects( $this->atLeastOnce() )->method( 'purgeAll' );
 
-		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
+		$dispatchingPrefetcher = new ByRepositoryDispatchingEntityPrefetcher( [
 			'' => $localPrefetcher,
 			'foo' => $fooPrefetcher,
 		] );
@@ -120,7 +120,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenInvalidArgumentsConstructorThrowsException( $args ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new DispatchingEntityPrefetcher( $args );
+		new ByRepositoryDispatchingEntityPrefetcher( $args );
 	}
 
 }

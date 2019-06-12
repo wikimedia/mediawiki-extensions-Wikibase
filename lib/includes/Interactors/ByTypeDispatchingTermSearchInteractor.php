@@ -9,10 +9,8 @@ use Wikimedia\Assert\ParameterAssertionException;
  * Picks a TermSearchInteractor configured for the particular entity type when searching for entities.
  *
  * @license GPL-2.0-or-later
- *
- * TODO: rename to DispatchingByEntityTypeTermSearchInteractor ?
  */
-class DispatchingTermSearchInteractor implements ConfigurableTermSearchInteractor {
+class ByTypeDispatchingTermSearchInteractor implements ConfigurableTermSearchInteractor {
 
 	/**
 	 * @var TermSearchInteractor[]

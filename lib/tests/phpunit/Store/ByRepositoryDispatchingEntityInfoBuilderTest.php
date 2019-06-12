@@ -5,19 +5,19 @@ namespace Wikibase\Lib\Tests\Store;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
+use Wikibase\Lib\Store\ByRepositoryDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 
 /**
- * @covers \Wikibase\Lib\Store\DispatchingEntityInfoBuilder
+ * @covers \Wikibase\Lib\Store\ByRepositoryDispatchingEntityInfoBuilder
  *
  * @group Wikibase
  * @group WikibaseStore
  *
  * @license GPL-2.0-or-later
  */
-class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
+class ByRepositoryDispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function provideInvalidConstructorArguments() {
@@ -34,7 +34,7 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenInvalidArguments_constructorThrowsException( array $args ) {
 		$this->setExpectedException( InvalidArgumentException::class );
 
-		new DispatchingEntityInfoBuilder( $args );
+		new ByRepositoryDispatchingEntityInfoBuilder( $args );
 	}
 
 	public function testCollectEntityInfoMergesEntityInfoFromAllBuilders() {
@@ -52,7 +52,7 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 				'other:Q22' => [ 'id' => 'other:Q22', 'type' => 'item' ],
 			] ) ) );
 
-		$dispatchingBuilder = new DispatchingEntityInfoBuilder( [
+		$dispatchingBuilder = new ByRepositoryDispatchingEntityInfoBuilder( [
 			'' => $localBuilder, 'other' => $otherBuilder
 		] );
 
