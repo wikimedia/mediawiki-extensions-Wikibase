@@ -10,5 +10,10 @@
 	"requires": {
 		"MediaWiki": ">= 1.26"
 	},
+	"MessagesDirs": {
+		"WikibaseLib": [
+			"lib/i18n"
+		]
+	},
 	"manifest_version": 2
 }
