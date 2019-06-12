@@ -66,6 +66,7 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 			),
 			new DatabaseTermIdsResolver(
 				$typeIdsStore,
+				$typeIdsStore,
 				$loadBalancer
 			),
 			new DatabaseTermIdsCleaner(
