@@ -24,9 +24,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	/** @var ILoadBalancer */
 	private $lb;
 
-	/** @var bool */
-	private $allowMasterFallback;
-
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -42,18 +39,15 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	/**
 	 * @param TypeIdsResolver $typeIdsResolver
 	 * @param ILoadBalancer $lb
-	 * @param bool $allowMasterFallback Whether to fall back to the master database if the data from
 	 * the replica database is detected to be stale.
 	 */
 	public function __construct(
 		TypeIdsResolver $typeIdsResolver,
 		ILoadBalancer $lb,
-		$allowMasterFallback = false,
 		LoggerInterface $logger = null
 	) {
 		$this->typeIdsResolver = $typeIdsResolver;
 		$this->lb = $lb;
-		$this->allowMasterFallback = $allowMasterFallback;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -101,26 +95,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 			$replicaTermIds[] = $row->wbtl_id;
 			foreach ( $groupNamesByTermIds[$row->wbtl_id] as $groupName ) {
 				$this->addResultTerms( $groupedTerms[$groupName], $row );
-			}
-		}
-
-		if ( $this->allowMasterFallback && count( $replicaTermIds ) !== count( $allTermIds ) ) {
-			$this->logger->info(
-				'{method}: replica only returned {replicaCount} out of {termCount} rows, ' .
-				'falling back to master',
-				[
-					'method' => __METHOD__,
-					'replicaCount' => count( $replicaTermIds ),
-					'termCount' => count( $allTermIds ),
-				]
-			);
-			$masterTermIds = array_values( array_diff( $allTermIds, $replicaTermIds ) );
-			$masterResult = $this->selectTerms( $this->getDbw(), $masterTermIds );
-			$this->preloadTypes( $masterResult );
-			foreach ( $masterResult as $row ) {
-				foreach ( $groupNamesByTermIds[$row->wbtl_id] as $groupName ) {
-					$this->addResultTerms( $groupedTerms[$groupName], $row );
-				}
 			}
 		}
 
@@ -174,18 +148,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		}
 
 		return $this->dbr;
-	}
-
-	private function getDbw() {
-		if ( !$this->allowMasterFallback ) {
-			throw new LogicException( 'Master fallback not allowed!' );
-		}
-
-		if ( $this->dbw === null ) {
-			$this->dbw = $this->lb->getConnection( ILoadBalancer::DB_MASTER );
-		}
-
-		return $this->dbw;
 	}
 
 }
