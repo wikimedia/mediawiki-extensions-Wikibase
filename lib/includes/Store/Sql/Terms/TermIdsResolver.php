@@ -16,6 +16,8 @@ interface TermIdsResolver {
 	 * returns arrays of strings.
 	 *
 	 * @param int[] $termIds
+	 * @param null|string[] $types If not null, only include results of these types
+	 * @param null|string[] $languages If not null, only include results in these languages
 	 * @return array containing terms per type per language.
 	 *  Example:
 	 * 	[
@@ -32,7 +34,11 @@ interface TermIdsResolver {
 	 *		...
 	 *  ]
 	 */
-	public function resolveTermIds( array $termIds ): array;
+	public function resolveTermIds(
+		array $termIds,
+		array $types = null,
+		array $languages = null
+	): array;
 
 	/**
 	 * Resolves terms for the given groups of term IDs.
@@ -46,8 +52,14 @@ interface TermIdsResolver {
 	 * and then grouping them correctly afterwards.
 	 *
 	 * @param int[][] $groupedTermIds
+	 * @param null|string[] $types If not null, only include results of these types
+	 * @param null|string[] $languages If not null, only include results in these languages
 	 * @return array[]
 	 */
-	public function resolveGroupedTermIds( array $groupedTermIds ): array;
+	public function resolveGroupedTermIds(
+		array $groupedTermIds,
+		array $types = null,
+		array $languages = null
+	): array;
 
 }
