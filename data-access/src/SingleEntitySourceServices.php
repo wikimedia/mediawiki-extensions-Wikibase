@@ -23,6 +23,9 @@ use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -266,7 +269,38 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getPrefetchingTermLookup() {
 		if ( $this->prefetchingTermLookup === null ) {
-			$this->prefetchingTermLookup = new BufferingTermLookup( $this->getTermIndex(), 1000 ); // TODO: customize buffer sizes
+			$this->prefetchingTermLookup = new BufferingTermLookup(
+				$this->getTermIndex(),
+				1000 // TODO: customize buffer sizes
+			);
+
+			if ( $this->settings->useNormalizedPropertyTerms() ) {
+				$mediaWikiServices = MediaWikiServices::getInstance();
+				$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+				$repoDbDomain = $this->entitySource->getDatabaseName();
+				$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
+				$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
+
+				$propertyTermLookup = new PrefetchingPropertyTermLookup(
+					$loadBalancer,
+					new DatabaseTermIdsResolver(
+						new DatabaseTypeIdsStore(
+							$loadBalancer,
+							$mediaWikiServices->getMainWANObjectCache(),
+							$repoDbDomain,
+							$logger
+						),
+						$loadBalancer,
+						false, // TODO allow master fallback?
+						$logger
+					)
+				);
+				$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup(
+					[ 'property' => $propertyTermLookup ],
+					$this->prefetchingTermLookup
+				);
+			}
 		}
 		return $this->prefetchingTermLookup;
 	}
