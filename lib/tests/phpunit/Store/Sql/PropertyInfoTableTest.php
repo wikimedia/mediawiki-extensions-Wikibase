@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use InvalidArgumentException;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -41,7 +41,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repository
 		);
@@ -61,7 +61,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 				'',
 				''
 			),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 	}
 
@@ -339,7 +339,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$name
 		);
@@ -364,7 +364,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$infoTable = new PropertyInfoTable(
 			$this->getEntityComposer(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repositoryName
 		);
@@ -380,7 +380,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$infoTable = new PropertyInfoTable(
 			$this->getEntityComposer(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repositoryName
 		);
@@ -396,7 +396,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$infoTable = new PropertyInfoTable(
 			$this->getEntityComposer(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repositoryName
 		);
@@ -439,7 +439,7 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 				'',
 				''
 			),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 	}
 

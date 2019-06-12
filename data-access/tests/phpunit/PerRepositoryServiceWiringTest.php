@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit4And6Compat;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -49,7 +48,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
-			new DataAccessSettings( 0, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			[],
 			[],
 			$this->getNameTableStoreProphecy()
