@@ -158,7 +158,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		if ( $expected === null ) {
 			$this->assertNull( $link );
 		} else {
-			$this->assertRegexp( $expected, $link );
+			$this->assertRegExp( $expected, $link );
 		}
 	}
 
