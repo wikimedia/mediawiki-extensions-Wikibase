@@ -22,6 +22,30 @@
       "revId": "9b27571d8f93475039a1366b8445ef3bcf0dad46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50d82d49_136e5c90",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1889,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-12T13:19:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3368712_5e2c9d6a",
+      "range": {
+        "startLine": 1889,
+        "startChar": 15,
+        "endLine": 1889,
+        "endChar": 25
+      },
+      "revId": "9b27571d8f93475039a1366b8445ef3bcf0dad46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
