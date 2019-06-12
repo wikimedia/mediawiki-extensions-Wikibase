@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7df98a2b_827f122f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-12T13:11:17Z",
+      "side": 1,
+      "message": "The DataAccessSettings constructor is called tons of times (mainly from tests), that’s why I’m a bit reluctant to add another constructor argument. Perhaps all those test calls can be extracted somewhere first, so that we don’t need to adjust all of them when actually making the normalized term storage configurable.",
+      "range": {
+        "startLine": 10,
+        "startChar": 15,
+        "endLine": 10,
+        "endChar": 71
+      },
+      "revId": "70eda93fc4301674785d6be8c51f290eefa6baa8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
