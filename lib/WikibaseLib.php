@@ -52,27 +52,7 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 }
 
 call_user_func( function() {
-	global $wgHooks, $wgResourceModules;
-
-	$wgHooks['UnitTestsList'][] = 'Wikibase\LibHooks::registerPhpUnitTests';
-	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\LibHooks::registerQUnitTests';
-	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\LibHooks::onResourceLoaderRegisterModules';
-
-	/**
-	 * Called when generating the extensions credits, use this to change the tables headers.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
-	 *
-	 * @param array &$extensionTypes
-	 *
-	 * @return boolean
-	 */
-	$wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
-		// @codeCoverageIgnoreStart
-		$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
-
-		return true;
-		// @codeCoverageIgnoreEnd
-	};
+	global $wgResourceModules;
 
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge(
