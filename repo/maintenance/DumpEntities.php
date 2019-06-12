@@ -5,6 +5,7 @@ namespace Wikibase;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Onoi\MessageReporter\ObservableMessageReporter;
@@ -76,6 +77,12 @@ abstract class DumpEntities extends Maintenance {
 			'Page id of the last page to possibly include in the dump. Not compatible with --list-file.',
 			false,
 			true
+		);
+		$this->addOption(
+			'ignore-missing',
+			'Ignore missing IDs, do not report errors on them',
+			false,
+			false
 		);
 	}
 
@@ -192,7 +199,10 @@ abstract class DumpEntities extends Maintenance {
 		$progressReporter->registerReporterCallback( [ $this, 'logMessage' ] );
 		$dumper->setProgressReporter( $progressReporter );
 
-		$exceptionReporter = new ReportingExceptionHandler( $progressReporter );
+		$ignored = $this->hasOption( 'ignore-missing' ) ?
+			[ EntityLookupException::class ] :
+			[];
+		$exceptionReporter = new ReportingExceptionHandler( $progressReporter, $ignored );
 		$dumper->setExceptionHandler( $exceptionReporter );
 
 		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,
