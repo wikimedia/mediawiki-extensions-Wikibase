@@ -1886,6 +1886,8 @@ class WikibaseRepo {
 
 			if ( $maxId === 'max' ) {
 				$maxId = Int32EntityId::MAX;
+			} elseif ( !is_int( $maxId ) ) {
+				throw new Exception( "'{$maxId}' in tmpItemTermsMigrationStages is not integer" );
 			}
 			$itemTermStores[$maxId] = $itemTermStore;
 		}
