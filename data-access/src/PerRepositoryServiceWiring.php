@@ -1,6 +1,8 @@
 <?php
 
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
+use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -14,6 +16,9 @@ use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -98,12 +103,46 @@ return [
 
 	'PrefetchingTermLookup' => function (
 		PerRepositoryServiceContainer $services,
-		GenericServices $genericServices
+		GenericServices $genericServices,
+		DataAccessSettings $settings
 	) {
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
 
-		return new BufferingTermLookup( $termIndex, 1000 ); // TODO: customize buffer sizes
+		$termLookup = new BufferingTermLookup(
+			$termIndex, // TODO: customize buffer sizes
+			1000
+		);
+
+		if ( $settings->useNormalizedPropertyTerms() ) {
+			$mediaWikiServices = MediaWikiServices::getInstance();
+			$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+			$repoDbDomain = $services->getDatabaseName();
+			$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
+			$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
+
+			$propertyTermLookup = new PrefetchingPropertyTermLookup(
+				$loadBalancer,
+				new DatabaseTermIdsResolver(
+					new DatabaseTypeIdsStore(
+						$loadBalancer,
+						$mediaWikiServices->getMainWANObjectCache(),
+						$repoDbDomain,
+						$logger
+					),
+					$loadBalancer,
+					false, // TODO allow master fallback?
+					$logger
+				)
+			);
+			$termLookup = new ByTypeDispatchingPrefetchingTermLookup(
+				[ 'property' => $propertyTermLookup ],
+				$termLookup
+			);
+		}
+
+		return $termLookup;
 	},
 
 	'PropertyInfoLookup' => function (

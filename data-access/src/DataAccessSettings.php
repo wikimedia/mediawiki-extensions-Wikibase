@@ -82,4 +82,11 @@ class DataAccessSettings {
 		return $this->useEntitySourceBasedFederation;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function useNormalizedPropertyTerms() {
+		return false; // TODO make configurable
+	}
+
 }
