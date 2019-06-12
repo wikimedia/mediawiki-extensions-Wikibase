@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3368712_5e2c9d6a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1889,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-12T10:08:04Z",
+      "side": 1,
+      "message": "I think this should use is_int() – we don’t want to allow floats or numeric strings.",
+      "range": {
+        "startLine": 1889,
+        "startChar": 15,
+        "endLine": 1889,
+        "endChar": 25
+      },
+      "revId": "9b27571d8f93475039a1366b8445ef3bcf0dad46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
