@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "79575968_73d314fd",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-12T14:45:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa8b057d_2a5eda3f",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "6c38289857fd4d8581805a74f90489387d854859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4571f56_efb1551b",
         "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTermIdsResolverTest.php",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "6c38289857fd4d8581805a74f90489387d854859",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31dda7a4_7d9f9ba8",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTermIdsResolverTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-12T14:45:33Z",
+      "side": 1,
+      "message": "Done. Removed whole test case as it doesn\u0027t make sense anymore. The rest of it is covered by the test case `testCanResolveEverything()`",
+      "parentUuid": "e4571f56_efb1551b",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 53
+      },
+      "revId": "6c38289857fd4d8581805a74f90489387d854859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
