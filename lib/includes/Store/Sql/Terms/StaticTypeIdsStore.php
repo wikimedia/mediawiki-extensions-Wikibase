@@ -9,7 +9,7 @@ use DomainException;
  *
  * @license GPL-2.0-or-later
  */
-class StaticTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver {
+class StaticTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver, TypeIdsLookup {
 
 	/** @var int[] */
 	private $typeIdsByName;
@@ -42,6 +42,18 @@ class StaticTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver {
 		foreach ( $typeIds as $typeId ) {
 			if ( array_key_exists( $typeId, $this->typeNamesById ) ) {
 				$ret[$typeId] = $this->typeNamesById[$typeId];
+			}
+		}
+		return $ret;
+	}
+
+	public function lookupTypeIds( array $types ): array {
+		$ret = [];
+		foreach ( $types as $typeName ) {
+			if ( array_key_exists( $typeName, $this->typeIdsByName ) ) {
+				$ret[$typeName] = $this->typeIdsByName[$typeName];
+			} else {
+				$ret[$typeName] = null;
 			}
 		}
 		return $ret;
