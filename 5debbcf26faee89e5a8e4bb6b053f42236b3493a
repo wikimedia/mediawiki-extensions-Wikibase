@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6951049b_903b4e06",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2019-06-12T14:34:28Z",
+      "side": 1,
+      "message": "On cancel, this doesn\u0027t appear to be getting called for some reason; I need to destroy the tabs on cancel because otherwise the tab still appears after stopping editing - any ideas?",
+      "revId": "5debbcf26faee89e5a8e4bb6b053f42236b3493a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
