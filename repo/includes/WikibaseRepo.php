@@ -1843,6 +1843,7 @@ class WikibaseRepo {
 			),
 			new DatabaseTermIdsResolver(
 				$typeIdsStore,
+				$typeIdsStore,
 				$loadBalancer
 			),
 			new DatabaseTermIdsCleaner(
@@ -1913,6 +1914,7 @@ class WikibaseRepo {
 				$typeIdsStore
 			),
 			new DatabaseTermIdsResolver(
+				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),

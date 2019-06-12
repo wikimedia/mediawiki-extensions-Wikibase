@@ -34,10 +34,22 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 		return $ids;
 	}
 
-	public function resolveTermIds( array $termIds ): array {
+	public function resolveTermIds(
+		array $termIds,
+		array $types = null,
+		array $languages = null
+	): array {
 		$terms = [];
 		foreach ( $this->terms as $type => $termsOfType ) {
+			if ( $types && !in_array( $type, $types ) ) {
+				continue;
+			}
+
 			foreach ( $termsOfType as $lang => $termsOfLang ) {
+				if ( $languages && !in_array( $lang, $languages ) ) {
+					continue;
+				}
+
 				foreach ( $termsOfLang as $term => $id ) {
 					if ( in_array( $id, $termIds ) ) {
 						$terms[$type][$lang][] = $term;
@@ -48,8 +60,17 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 		return $terms;
 	}
 
-	public function resolveGroupedTermIds( array $groupedTermIds ): array {
-		return array_map( [ $this, 'resolveTermIds' ], $groupedTermIds );
+	public function resolveGroupedTermIds(
+		array $groupedTermIds,
+		array $types = null,
+		array $languages = null
+	): array {
+		return array_map(
+			function ( $termIdGroup ) use ( $types, $languages ) {
+				return $this->resolveTermIds( $termIdGroup, $types, $languages );
+			},
+			$groupedTermIds
+		);
 	}
 
 	public function cleanTermIds( array $termIds ) {
