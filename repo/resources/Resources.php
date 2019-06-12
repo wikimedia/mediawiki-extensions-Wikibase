@@ -41,6 +41,7 @@ return call_user_func( function() {
 				return WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 			},
 			'datatypesconfigvarname' => 'wbDataTypes',
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'mw.config.values.wbEntityTypes' => $moduleTemplate + [
