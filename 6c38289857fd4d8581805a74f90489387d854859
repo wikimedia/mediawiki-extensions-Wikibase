@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa8b057d_2a5eda3f",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-12T14:26:34Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "6c38289857fd4d8581805a74f90489387d854859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4571f56_efb1551b",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseTermIdsResolverTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-12T14:26:34Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 53
+      },
+      "revId": "6c38289857fd4d8581805a74f90489387d854859",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
