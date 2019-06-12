@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MWException;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -65,7 +65,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			new EntityIdComposer( [] ),
 			new BasicEntityIdParser(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repositoryName
 		);
@@ -87,7 +87,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] ),
 			new BasicEntityIdParser(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 	}
 
@@ -116,7 +116,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 				'',
 				''
 			),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 	}
 
@@ -1505,7 +1505,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] ),
 			new PrefixMappingEntityIdParser( [ '' => $repository ], new BasicEntityIdParser() ),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repository
 		);
@@ -2006,7 +2006,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] ),
 			new BasicEntityIdParser(),
 			new EntitySource( 'testsource', false, [ $entityType => [ 'namespaceId' => $irrelevantNamespaceId, 'slot' => 'main' ] ], '', '' ),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			DataAccessSettingsTest::entitySourceBasedFederation(),
 			false,
 			''
 		);

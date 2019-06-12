@@ -8,7 +8,7 @@ use MediaWikiTestCase;
 use Psr\Log\NullLogger;
 use SpecialPage;
 use Title;
-use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -273,7 +273,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
 				new UnusableEntitySource(),
-				new DataAccessSettings( 100, false, false, false )
+				DataAccessSettingsTest::repositoryPrefixBasedFederation()
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
@@ -513,7 +513,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
 				new UnusableEntitySource(),
-				new DataAccessSettings( 100, false, false, false )
+				DataAccessSettingsTest::repositoryPrefixBasedFederation()
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
