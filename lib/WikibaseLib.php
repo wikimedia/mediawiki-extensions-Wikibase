@@ -50,13 +50,3 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 	$wgAutoloadClasses['Wikibase\\EntityContent'] = __DIR__ . '/../repo/includes/Content/EntityContent.php';
 	$wgAutoloadClasses['Wikibase\\Repo\\Content\\EntityContentDiff'] = __DIR__ . '/../repo/includes/Content/EntityContentDiff.php';
 }
-
-call_user_func( function() {
-	global $wgResourceModules;
-
-	// Resource Loader Modules:
-	$wgResourceModules = array_merge(
-		$wgResourceModules,
-		require __DIR__ . '/resources/Resources.php'
-	);
-} );
