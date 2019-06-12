@@ -17,8 +17,8 @@ use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
@@ -49,7 +49,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		] );
 
 		$this->repoLinker = new RepoLinker(
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'http://www.wikidata.org',
 			[ '' => 'https://www.wikidata.org/entity' ],

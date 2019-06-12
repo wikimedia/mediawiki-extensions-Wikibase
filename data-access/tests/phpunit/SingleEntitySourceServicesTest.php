@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit4And6Compat;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -74,7 +73,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false, false ),
+			DataAccessSettingsTest::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '' ),
 			[ null ],
 			[]
@@ -91,7 +90,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '' ),
 			[ null ],
 			[]
@@ -106,7 +105,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '' ),
 			[],
 			[ null ]
@@ -120,7 +119,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
-			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '' ),
 			[],
 			[]

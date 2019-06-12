@@ -5,8 +5,8 @@ namespace Wikibase\Client\Tests;
 use Title;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Client\NamespaceChecker;
 
@@ -30,7 +30,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			$baseUrl,
 			$conceptBaseUri,
