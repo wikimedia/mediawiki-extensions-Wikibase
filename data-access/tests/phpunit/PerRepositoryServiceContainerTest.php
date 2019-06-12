@@ -48,7 +48,7 @@ class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
-			new DataAccessSettings( 0, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			[],
 			[],
 			$this->getNameTableStoreProphecy()

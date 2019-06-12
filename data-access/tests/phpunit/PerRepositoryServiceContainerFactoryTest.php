@@ -51,7 +51,7 @@ class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCa
 			[ '' => false ],
 			[],
 			new GenericServices( $entityTypeDefinitions, [] ),
-			new DataAccessSettings( 0, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			$entityTypeDefinitions,
 			$this->getNameTableStoreFactoryProphecy()
 		);

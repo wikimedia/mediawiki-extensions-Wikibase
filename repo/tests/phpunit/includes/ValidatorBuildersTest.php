@@ -15,6 +15,7 @@ use PHPUnit4And6Compat;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -59,7 +60,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'http://qudt.org/vocab/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			new DataAccessSettings( 1000, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			[
 				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
 				'foo' => [ Item::ENTITY_TYPE ]
@@ -641,7 +642,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'http://qudt.org/vocab/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			new DataAccessSettings( 1000, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
+			DataAccessSettingsTest::entitySourceBasedFederation(),
 			[],
 			$this->getMediaWikiPageNameNormalizer(),
 			self::GEO_SHAPE_STORAGE_API_URL,

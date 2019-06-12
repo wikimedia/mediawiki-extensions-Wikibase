@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Store;
 use HashBagOStuff;
 use WANObjectCache;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -41,12 +42,7 @@ class CachingPropertyInfoTest extends \MediaWikiTestCase {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
 			new UnusableEntitySource(),
-			new DataAccessSettings(
-				100,
-				false,
-				false,
-				DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
-			),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			$repository
 		);

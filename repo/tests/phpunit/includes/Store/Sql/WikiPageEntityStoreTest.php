@@ -18,6 +18,7 @@ use User;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -123,7 +124,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				new UnusableEntitySource(),
-				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+				DataAccessSettingsTest::repositoryPrefixBasedFederation()
 			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			MediaWikiServices::getInstance()->getBlobStore(),
@@ -165,13 +166,13 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				],
 				new EntitySourceDefinitions( [ $localSource, $customSource ] ),
 				$localSource,
-				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+				DataAccessSettingsTest::repositoryPrefixBasedFederation()
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 1000, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 
 		return [ $store, $lookup ];
@@ -205,7 +206,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			''
 		);
 
-		$dataAccessSettings = new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION );
+		$dataAccessSettings = DataAccessSettingsTest::entitySourceBasedFederation();
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
@@ -1519,7 +1520,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			''
 		);
 
-		$dataAccessSettings = new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION );
+		$dataAccessSettings = DataAccessSettingsTest::entitySourceBasedFederation();
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
@@ -1562,7 +1563,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			''
 		);
 
-		$dataAccessSettings = new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION );
+		$dataAccessSettings = DataAccessSettingsTest::entitySourceBasedFederation();
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(

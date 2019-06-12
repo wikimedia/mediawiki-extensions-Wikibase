@@ -11,6 +11,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 
 /**
  * @covers \Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler
@@ -30,7 +31,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateSchema( $revisionTimestamp, $image, $description, $expected ) {
 		$client = WikibaseClient::getDefaultInstance();
 		$repoLinker = new RepoLinker(
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'https://www.wikidata.org',
 			[ '' => 'https://www.wikidata.org/entity' ],

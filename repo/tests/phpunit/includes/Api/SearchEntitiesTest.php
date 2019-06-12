@@ -10,6 +10,7 @@ use Title;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -151,7 +152,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			[ 'item', 'property' ],
 			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
 			new EntitySourceDefinitions( [] ),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 
 		$module->execute();
@@ -484,7 +485,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'otherwiki'
 				)
 			] ),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 
 		$module->execute();
@@ -547,7 +548,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			[ 'kitten' ],
 			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
 			new EntitySourceDefinitions( [] ),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 
 		$module->execute();

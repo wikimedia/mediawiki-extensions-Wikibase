@@ -11,6 +11,7 @@ use PHPUnit_Framework_MockObject_MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -73,7 +74,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 	}
 
