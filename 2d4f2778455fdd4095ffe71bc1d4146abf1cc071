@@ -135,6 +135,30 @@
       "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c21cf0c9_d50a3379",
+        "filename": "repo/maintenance/DumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-12T17:00:53Z",
+      "side": 1,
+      "message": "Okay, it looks like RdfDumpGenerator and JsonDumpGenerator raise that EntityLookupException when the Entity(Revision)Lookup return null.\n\n\u003e It’s unfortunate that we can’t (currently) distinguish between failed-to-dump due to missing entity and failed-to-dump due to any other error :/\n\nI think this isn’t actually true – you’d just have to adjust the ReportingExceptionHandler to filter based on the type of $exception instead of on the $errorCode. Then you can check if it’s a subclass of EntityLookupException (ignore) or not.",
+      "parentUuid": "031bc5be_b81c4ae0",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "2d4f2778455fdd4095ffe71bc1d4146abf1cc071",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
