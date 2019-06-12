@@ -132,7 +132,6 @@ return [
 						$logger
 					),
 					$loadBalancer,
-					false, // TODO allow master fallback?
 					$logger
 				)
 			);
