@@ -20,6 +20,9 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	/** @var TypeIdsResolver */
 	private $typeIdsResolver;
 
+	/** @var TypeIdsLookup */
+	private $typeIdsLookup;
+
 	/** @var ILoadBalancer */
 	private $lb;
 
@@ -34,23 +37,35 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 
 	/**
 	 * @param TypeIdsResolver $typeIdsResolver
+	 * @param TypeIdsLookup $typeIdsLookup
 	 * @param ILoadBalancer $lb
+	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
 		TypeIdsResolver $typeIdsResolver,
+		TypeIdsLookup $typeIdsLookup,
 		ILoadBalancer $lb,
 		LoggerInterface $logger = null
 	) {
 		$this->typeIdsResolver = $typeIdsResolver;
+		$this->typeIdsLookup = $typeIdsLookup;
 		$this->lb = $lb;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
-	public function resolveTermIds( array $termIds ): array {
-		return $this->resolveGroupedTermIds( [ '' => $termIds ] )[''];
+	public function resolveTermIds(
+		array $termIds,
+		array $types = null,
+		array $languages = null
+	): array {
+		return $this->resolveGroupedTermIds( [ '' => $termIds ], $types, $languages )[''];
 	}
 
-	public function resolveGroupedTermIds( array $groupedTermIds ): array {
+	public function resolveGroupedTermIds(
+		array $groupedTermIds,
+		array $types = null,
+		array $languages = null
+	): array {
 		$groupedTerms = [];
 
 		$groupNamesByTermIds = [];
@@ -62,7 +77,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		}
 		$allTermIds = array_keys( $groupNamesByTermIds );
 
-		if ( $allTermIds === [] ) {
+		if ( $allTermIds === [] || $types === [] || $languages === [] ) {
 			return $groupedTerms;
 		}
 
@@ -73,7 +88,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 				'termCount' => count( $allTermIds ),
 			]
 		);
-		$result = $this->selectTermsById( $allTermIds );
+		$result = $this->selectTermsById( $allTermIds, $types, $languages );
 		$this->preloadTypes( $result );
 
 		foreach ( $result as $row ) {
@@ -119,14 +134,18 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		$joinTable,
 		$joinColumn,
 		$groupColumn,
-		array $conditions
+		array $conditions,
+		array $types = null,
+		array $languages = null
 	): array {
 		$conditions[] = $this->getDbr()->addIdentifierQuotes( $joinColumn ) . ' = wbtl_id';
 
 		$records = $this->selectTermsViaJoin(
 			[ $joinTable ],
 			[ $groupColumn ],
-			$conditions
+			$conditions,
+			$types,
+			$languages
 		);
 
 		$this->preloadTypes( $records );
@@ -142,15 +161,25 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		return $termsByKeyColumn;
 	}
 
-	private function selectTermsById( array $termIds ): IResultWrapper {
-		return $this->selectTermsViaJoin( [], [], [ 'wbtl_id' => $termIds ] );
+	private function selectTermsById( array $termIds, $types, $languages ): IResultWrapper {
+		return $this->selectTermsViaJoin(
+			[], [], [ 'wbtl_id' => $termIds ], $types, $languages );
 	}
 
 	private function selectTermsViaJoin(
 		array $joinTables,
 		array $columns,
-		array $conditions
+		array $conditions,
+		array $types = null,
+		array $languages = null
 	): IResultWrapper {
+		if ( $types !== null ) {
+			$conditions['wbtl_type_id'] = $this->lookupTypeIds( $types );
+		}
+		if ( $languages !== null ) {
+			$conditions['wbxl_language'] = $languages;
+		}
+
 		return $this->getDbr()->select(
 			array_merge( [ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ], $joinTables ),
 			array_merge( [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ], $columns ),
@@ -174,19 +203,23 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	}
 
 	private function addResultTerms( array &$terms, stdClass $row ) {
-		$type = $this->lookupType( $row->wbtl_type_id );
+		$type = $this->lookupTypeName( $row->wbtl_type_id );
 		$lang = $row->wbxl_language;
 		$text = $row->wbx_text;
 		$terms[$type][$lang][] = $text;
 	}
 
-	private function lookupType( $typeId ) {
+	private function lookupTypeName( $typeId ) {
 		$typeName = $this->typeNames[$typeId] ?? null;
 		if ( $typeName === null ) {
 			throw new InvalidArgumentException(
 				'Type ID ' . $typeId . ' was requested but not preloaded!' );
 		}
 		return $typeName;
+	}
+
+	private function lookupTypeIds( array $typeNames ) {
+		return $this->typeIdsLookup->lookupTypeIds( $typeNames );
 	}
 
 	private function getDbr() {
