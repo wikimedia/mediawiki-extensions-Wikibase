@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess\Tests;
 use MediaWiki\Storage\NameTableStore;
 use MediaWiki\Storage\NameTableStoreFactory;
 use PHPUnit4And6Compat;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
@@ -51,7 +50,7 @@ class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCa
 			[ '' => false ],
 			[],
 			new GenericServices( $entityTypeDefinitions, [] ),
-			new DataAccessSettings( 0, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			$entityTypeDefinitions,
 			$this->getNameTableStoreFactoryProphecy()
 		);

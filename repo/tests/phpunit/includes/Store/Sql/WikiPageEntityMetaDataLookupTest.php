@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use stdClass;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -102,7 +102,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				$slotRoleStore
 			),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 	}
 
@@ -118,7 +118,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 	}
 
@@ -159,7 +159,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				new UnusableEntitySource(),
-				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+				DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			] )
 			->setMethods( [ 'getConnection' ] )
 			->getMock();
@@ -190,7 +190,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
 				$this->newEntitySource(),
-				new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+				DataAccessSettingsTest::entitySourceBasedFederation(),
 			] )
 			->setMethods( [ 'getConnection' ] )
 			->getMock();
@@ -607,7 +607,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			$itemSource,
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 	}
 
@@ -624,7 +624,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			'foo'
 		);
@@ -657,7 +657,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			'foo'
 		);

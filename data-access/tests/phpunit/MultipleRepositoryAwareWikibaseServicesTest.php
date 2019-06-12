@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess\Tests;
 use MediaWiki\Storage\NameTableStoreFactory;
 use PHPUnit4And6Compat;
 use Serializers\Serializer;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -47,7 +46,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 			new EntityIdComposer( [] ),
 			$this->getRepositoryDefinitions(),
 			new EntityTypeDefinitions( [] ),
-			new DataAccessSettings( 1, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::anySettings(),
 			$this->getMultiRepoServiceWiring(),
 			[],
 			$this->getNameTableStoreFactoryProphecy()
