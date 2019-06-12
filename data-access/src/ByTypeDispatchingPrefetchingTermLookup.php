@@ -19,11 +19,24 @@ class ByTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase implem
 	 */
 	private $lookups;
 
-	public function __construct( array $lookups ) {
+	/**
+	 * @var PrefetchingTermLookup|null
+	 */
+	private $defaultLookup;
+
+	/**
+	 * @param PrefetchingTermLookup[] $lookups
+	 * @param PrefetchingTermLookup|null $defaultLookup
+	 */
+	public function __construct(
+		array $lookups,
+		PrefetchingTermLookup $defaultLookup = null
+	) {
 		Assert::parameterElementType( PrefetchingTermLookup::class, $lookups, '$lookups' );
 		Assert::parameterElementType( 'string', array_keys( $lookups ), 'keys of $lookups' );
 
 		$this->lookups = $lookups;
+		$this->defaultLookup = $defaultLookup;
 	}
 
 	/**
@@ -69,7 +82,7 @@ class ByTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase implem
 			return $this->lookups[$entityType];
 		}
 
-		return null;
+		return $this->defaultLookup;
 	}
 
 	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes ) {

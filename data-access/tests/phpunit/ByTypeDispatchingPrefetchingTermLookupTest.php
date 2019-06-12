@@ -78,6 +78,23 @@ class ByTypeDispatchingPrefetchingTermLookupTest extends \PHPUnit_Framework_Test
 		$this->assertNull( $lookup->getPrefetchedTerm( $propertyId, 'label', 'de' ) );
 	}
 
+	public function testGivenPreviouslyPrefetchedTerm_getPrefetchedTermReturnsTermStrings_withDefault() {
+		$lookup = new ByTypeDispatchingPrefetchingTermLookup(
+			[
+				'item' => new FakePrefetchingTermLookup(),
+			],
+			new FakePrefetchingTermLookup()
+		);
+
+		$itemId = new ItemId( 'Q1' );
+		$propertyId = new PropertyId( 'P1' );
+
+		$lookup->prefetchTerms( [ $itemId, $propertyId ], [ 'label' ], [ 'en' ] );
+
+		$this->assertSame( 'Q1 en label', $lookup->getPrefetchedTerm( $itemId, 'label', 'en' ) );
+		$this->assertSame( 'P1 en label', $lookup->getPrefetchedTerm( $propertyId, 'label', 'en' ) );
+	}
+
 	public function testGetLabel() {
 		$innerLookup = new FakePrefetchingTermLookup();
 		$lookup = new ByTypeDispatchingPrefetchingTermLookup( [ 'item' => $innerLookup ] );
