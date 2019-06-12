@@ -1854,39 +1854,43 @@ class WikibaseRepo {
 	}
 
 	public function getItemTermStore(): ItemTermStore {
-		$itemTermsTwoMillionMigrationStage = $this->settings->getSetting(
-			'tmpItemTermsTwoMillionMigrationStage' );
+		$itemTermsMigrationStages = $this->settings->getSetting(
+			'tmpItemTermsMigrationStages' );
 
-		/** ItemTermStore $twoMillionItemTermStore store for items up to Q2000000 */
-		switch ( $itemTermsTwoMillionMigrationStage ) {
-			case MIGRATION_OLD:
-				$twoMillionItemTermStore = $this->getOldItemTermStore();
-				break;
-			case MIGRATION_WRITE_BOTH:
-				$twoMillionItemTermStore = new MultiItemTermStore( [
-					$this->getOldItemTermStore(),
-					$this->getNewItemTermStore(),
-				] );
-				break;
-			case MIGRATION_WRITE_NEW:
-				$twoMillionItemTermStore = new MultiItemTermStore( [
-					$this->getNewItemTermStore(),
-					$this->getOldItemTermStore(),
-				] );
-				break;
-			case MIGRATION_NEW:
-				$twoMillionItemTermStore = $this->getNewItemTermStore();
-				break;
-			default:
-				throw new UnexpectedValueException(
-					'Unknown migration stage: ' . $itemTermsTwoMillionMigrationStage
-				);
+		$itemTermStores = [];
+		foreach ( $itemTermsMigrationStages as $maxId => $migrationStage ) {
+			switch ( $migrationStage ) {
+				case MIGRATION_OLD:
+					$itemTermStore = $this->getOldItemTermStore();
+					break;
+				case MIGRATION_WRITE_BOTH:
+					$itemTermStore = new MultiItemTermStore( [
+						$this->getOldItemTermStore(),
+						$this->getNewItemTermStore(),
+					] );
+					break;
+				case MIGRATION_WRITE_NEW:
+					$itemTermStore = new MultiItemTermStore( [
+						$this->getNewItemTermStore(),
+						$this->getOldItemTermStore(),
+					] );
+					break;
+				case MIGRATION_NEW:
+					$itemTermStore = $this->getNewItemTermStore();
+					break;
+				default:
+					throw new UnexpectedValueException(
+						'Unknown migration stage: ' . $migrationStage
+					);
+			}
+
+			if ( $maxId === 'max' ) {
+				$maxId = Int32EntityId::MAX;
+			}
+			$itemTermStores[$maxId] = $itemTermStore;
 		}
 
-		return new ByIdDispatchingItemTermStore( [
-			2000000 => $twoMillionItemTermStore,
-			Int32EntityId::MAX => $this->getOldItemTermStore(),
-		] );
+		return new ByIdDispatchingItemTermStore( $itemTermStores );
 	}
 
 	private function getOldItemTermStore(): ItemTermStore {
