@@ -284,4 +284,64 @@ class DatabaseTermIdsResolverTest extends TestCase {
 		], $terms['Q4'] );
 	}
 
+	public function testResolveTermsViaJoin() {
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'text' ] );
+		$text1Id = $this->db->insertId();
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'Text' ] );
+		$text2Id = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
+		$textInLang1Id = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
+		$textInLang2Id = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$termInLang1Id = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => self::TYPE_DESCRIPTION, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
+		$termInLang2Id = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
+		$termInLang3Id = $this->db->insertId();
+		$this->db->insert( 'wbt_property_terms', [
+			'wbpt_property_id' => 1,
+			'wbpt_term_in_lang_id' => $termInLang1Id
+		] );
+		$this->db->insert( 'wbt_property_terms', [
+			'wbpt_property_id' => 1,
+			'wbpt_term_in_lang_id' => $termInLang2Id
+		] );
+		$this->db->insert( 'wbt_property_terms', [
+			'wbpt_property_id' => 2,
+			'wbpt_term_in_lang_id' => $termInLang3Id
+		] );
+
+		$resolver = new DatabaseTermIdsResolver(
+			$this->typeIdsResolver,
+			new FakeLoadBalancer( [
+				'dbr' => $this->db,
+			] )
+		);
+
+		$termIds = $resolver->resolveTermsViaJoin(
+			'wbt_property_terms',
+			'wbpt_property_id',
+			[ 'wbpt_term_in_lang_id = wbtl_id', 'wbpt_property_id' => [ 1, 2 ] ]
+		);
+
+		$this->assertSame(
+			[
+				1 => [
+					'label' => [ 'en' => [ 'text' ] ],
+					'description' => [ 'en' => [ 'text' ] ]
+				],
+				2 => [ 'label' => [ 'de' => [ 'Text' ] ] ]
+			],
+			$termIds
+		);
+	}
+
 }
