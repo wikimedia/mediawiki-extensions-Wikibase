@@ -82,7 +82,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 				'termCount' => count( $allTermIds ),
 			]
 		);
-		$replicaResult = $this->selectTerms( $this->getDbr(), $allTermIds );
+		$replicaResult = $this->selectTermsById( $allTermIds );
 		$this->preloadTypes( $replicaResult );
 		$replicaTermIds = [];
 
@@ -96,16 +96,60 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		return $groupedTerms;
 	}
 
-	private function selectTerms( IDatabase $db, array $termIds ): IResultWrapper {
-		return $db->select(
-			[ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ],
-			[ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ],
-			[
-				'wbtl_id' => $termIds,
-				// join conditions
+	/**
+	 * Resolves terms by joining internal term ids table against another external table
+	 * to allow maximum optimization to the user over how many queries would be performed.
+	 *
+	 *
+	 * @param string $joinTable
+	 * @param string $joinColumnName Column name in $joinTable that stores term ids to join on
+	 * @param string|null $keyColumn Resolved terms will be grouped by values
+	 *	of this column in $joinTable.
+	 * @param array $conditions
+	 * @return array
+	 */
+	public function resolveTermsViaJoin(
+		$joinTable,
+		$joinColumn,
+		$keyColumn,
+		array $conditions
+	): array {
+		$conditions[] = $joinColumn . ' = wbtl_id';
+
+		$records = $this->selectTermsViaJoin(
+			[ $joinTable ],
+			[ $keyColumn ],
+			$conditions
+		);
+
+		$this->preloadTypes( $records );
+
+		$termsByKeyColumn = [];
+		foreach ( $records as $record ) {
+			if ( !isset ( $termsByKeyColumn[$record->$keyColumn] ) ) {
+				$termsByKeyColumn[$record->$keyColumn] = [];
+			}
+			$this->addResultTerms( $termsByKeyColumn[$record->$keyColumn], $record );
+		}
+		return $termsByKeyColumn;
+	}
+
+	private function selectTermsById( array $termIds ): IResultWrapper {
+		return $this->selectTermsViaJoin( [], [], [ 'wbtl_id' => $termIds ] );
+	}
+
+	private function selectTermsViaJoin(
+		array $joinTables,
+		array $columns,
+		array $conditions
+	): IResultWrapper {
+		return $this->getDbr()->select(
+			array_merge( [ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ], $joinTables ),
+			array_merge( [ 'wbtl_id', 'wbtl_type_id', 'wbxl_language', 'wbx_text' ], $columns ),
+			array_merge( [
 				'wbtl_text_in_lang_id=wbxl_id',
 				'wbxl_text_id=wbx_id',
-			],
+			], $conditions ),
 			__METHOD__
 		);
 	}
