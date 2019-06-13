@@ -22,7 +22,8 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			100,
 			true,
 			false,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED
 		);
 	}
 
@@ -31,12 +32,19 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			100,
 			true,
 			false,
-			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION
+			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
+			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED
 		);
 	}
 
 	public function testConvertsMaxSerializedEntitySizeFromKiloBytesToBytes() {
-		$settings = new DataAccessSettings( 1, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION );
+		$settings = new DataAccessSettings(
+			1,
+			true,
+			false,
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED
+		);
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
 	}
@@ -49,7 +57,8 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			1,
 			$useSearchFields,
 			$forceWriteSearchFields,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED
 		);
 
 		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
@@ -63,6 +72,25 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			[ true, false ],
 			[ true, true ],
 		];
+	}
+
+	/**
+	 * @dataProvider provideBoolean
+	 */
+	public function testNormalizedPropertyTerms( $useNormalizedPropertyTerms ) {
+		$settings = new DataAccessSettings(
+			1,
+			true,
+			false,
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+			$useNormalizedPropertyTerms
+		);
+
+		$this->assertSame( $useNormalizedPropertyTerms, $settings->useNormalizedPropertyTerms() );
+	}
+
+	public function provideBoolean() {
+		return [ [ false ], [ true ] ];
 	}
 
 }
