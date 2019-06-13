@@ -6,7 +6,7 @@ use Title;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTestDoubleFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -35,7 +35,7 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsTestDoubleFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			$baseUrl,
 			$conceptBaseUri,

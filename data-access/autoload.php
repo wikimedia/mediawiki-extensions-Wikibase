@@ -21,6 +21,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\DataAccess\\PerRepositoryServiceContainerFactory' => __DIR__ . '/src/PerRepositoryServiceContainerFactory.php',
 	'Wikibase\\DataAccess\\Serializer\\ForbiddenSerializer' => __DIR__ . '/src/Serializer/ForbiddenSerializer.php',
 	'Wikibase\\DataAccess\\SingleEntitySourceServices' => __DIR__ . '/src/SingleEntitySourceServices.php',
+	'Wikibase\\DataAccess\\Tests\\DataAccessSettingsTestDoubleFactory' => __DIR__ . '/tests/phpunit/DataAccessSettingsTestDoubleFactory.php',
 	'Wikibase\\DataAccess\\Tests\\EntityPrefetcherSpy' => __DIR__ . '/tests/phpunit/EntityPrefetcherSpy.php',
 	'Wikibase\\DataAccess\\Tests\\FakePrefetchingTermLookup' => __DIR__ . '/tests/phpunit/FakePrefetchingTermLookup.php',
 	'Wikibase\\DataAccess\\UnusableEntitySource' => __DIR__ . '/src/UnusableEntitySource.php',
