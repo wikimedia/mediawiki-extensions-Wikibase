@@ -2418,7 +2418,8 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'maxSerializedEntitySize' ),
 				$this->settings->getSetting( 'useTermsTableSearchFields' ),
 				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-				$this->settings->getSetting( 'useEntitySourceBasedFederation' )
+				$this->settings->getSetting( 'useEntitySourceBasedFederation' ),
+				$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW
 			);
 		}
 		return $this->dataAccessSettings;
