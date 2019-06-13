@@ -8,7 +8,7 @@ use Title;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -38,7 +38,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			$baseUrl,
 			$conceptBaseUri,
