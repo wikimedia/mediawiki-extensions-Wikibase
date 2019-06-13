@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b063178_25fdc4d2",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-13T11:12:00Z",
+      "side": 1,
+      "message": "this should probably not return if types or languages are empty arrays, right?\n\nor do you want to read empty arrays, provided by the user, as if they intend to select anything? and nulls if they want to select all types/languages?",
+      "revId": "06ffb04d8c72ff7649ff4e798eca3b1d30aed1fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fe06f22_1e3804a2",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-13T11:12:00Z",
+      "side": 1,
+      "message": "if we allow empty arrays to pass through here, as previous comment implies, then those checks of types and languages should assert that the arrays are not empty rather than not being null",
+      "revId": "06ffb04d8c72ff7649ff4e798eca3b1d30aed1fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
