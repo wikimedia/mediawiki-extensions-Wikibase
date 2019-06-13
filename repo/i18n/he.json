@@ -119,7 +119,7 @@
 	"wikibase-snakview-snaktypeselector-value": "ערך מותאם אישית",
 	"wikibase-snakformat-invalid-value": "ערך בלתי־תקין.",
 	"wikibase-snakformat-propertynotfound": "המאפיין לא נמצא.",
-	"wikibase-shortcopyrightwarning": "בלחיצה על \"$1\" היא הסכמה ל[[$2|תנאי השימוש]] ולשחרור של תרומתך לפי $3.",
+	"wikibase-shortcopyrightwarning": "לחיצה על \"$1\" היא הסכמה ל[[$2|תנאי השימוש]] ולשחרור של תרומתך לפי $3.",
 	"wikibase-copyrighttooltip-acknowledge": "קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.",
 	"wikibase-entityselector-more": "עוד",
 	"wikibase-entityselector-notfound": "לא נמצאה התאמה",
@@ -418,5 +418,6 @@
 	"wikibase-search-config-notfound": "הגדרות החיפוש המלא לא נמצאו: $1",
 	"wikibase-search-config-badclass": "מחלקת מבנה שאילתה שגויה: $1",
 	"wikibase-refresh-for-missing-datatype": "סוג הנתונים $1 לא נמצא בתסריט המקומי בלקוח. ייתכן שזה קורה כתוצאה בתסריט מיושן במטמון. נא לנסות לבצע רענון עמוק בדפדפן שלך, שעוקף את המטמון המקומי (Ctrl-Shift-R או Cmd-Shift-R ברוב הדפדפנים) כדי לפתור את הבעיה.",
-	"wikibase-outdated-client-script": "אוי, נחוץ רענון עמוק!"
+	"wikibase-outdated-client-script": "אוי, נחוץ רענון עמוק!",
+	"wikibase-shortcopyrightwarning-heading": "ייחוס רישיון"
 }

@@ -26,7 +26,8 @@
 			"Ladsgroup",
 			"Hello903hello",
 			"Mutolisp",
-			"Kly"
+			"Kly",
+			"A2093064"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -139,6 +140,7 @@
 	"wikibase-anonymouseditwarning": "警告：您尚未登入。若您有做出任何編輯，會以您的 [https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80 IP 位址]來公開出。若您有<strong>[[Special:UserLogin|登入]]</strong>或是<strong>[[Special:CreateAccount|建立帳號]]</strong>，您做出的編輯會歸在您的使用者名稱之下。",
 	"wikibase-anonymouseditwarning-heading": "您尚未登入",
 	"wikibase-anonymouseditwarning-message": "若您做出任何編輯，您目前的 IP 位址會公開可見。若您有登入或是建立帳號，您做出的編輯會歸在您的使用者名稱之下。",
+	"wikibase-anonymouseditwarning-dismiss-persist": "每當我沒有登入時警告我。",
 	"wikibase-anonymouseditwarning-dismiss-button": "不登入編輯",
 	"wikibase-move-error": "您無法移出資料 (data) 命名空間中的頁面，您也不能將頁面移入至該命名空間。",
 	"wikibase-validator-sitelink-conflict": "連結 $1 已被項目 $2 使用。 若該連結不屬於該項目，您可從 $2 中移除該連結，或若主題完全相同，您可合併項目。",
@@ -195,7 +197,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "抱歉，您提供的語言代碼系統無法辨識。請使用有效的語言代碼，如 \"zh\"。",
 	"wikibase-itemdisambiguation-description": "用於搜尋的數值必須是完整的文字條目。語言使用識別碼，如 \"zh\"。",
 	"wikibase-itemdisambiguation-summary": "搜尋所有標籤完全相同的項目。",
-	"special-newproperty": "建立一個新屬性。",
+	"special-newproperty": "建立一個新屬性",
 	"wikibase-newproperty-summary": "請確認己檢查屬性是否已經存在！<br />您應為所有新屬性建立 [[{{int:Wikibase-label-helppage}}|標籤]] 及 [[{{int:Wikibase-description-helppage}}|描述]]，並加上一個有效的屬性型態。",
 	"wikibase-newproperty-fieldset": "建立新屬性",
 	"wikibase-newproperty-datatype": "資料型態：",
@@ -431,5 +433,6 @@
 	"wikibase-search-config-notfound": "查無全文搜尋設置：$1",
 	"wikibase-search-config-badclass": "錯誤查詢生成類別：$1",
 	"wikibase-refresh-for-missing-datatype": "在本地客戶端手稿裡查無$1資料類型，這可能是因快取手稿逾期所造成的結果。請嘗試將您的瀏覽器重新載入、繞過本地端快取（在多數瀏覽器是同時按下 Ctrl-Shift-R 鍵或是 Cmd-Shift-R 鍵）來解決問題。",
-	"wikibase-outdated-client-script": "哎呀，應得重新載入略過已快取內容！"
+	"wikibase-outdated-client-script": "哎呀，應得重新載入略過已快取內容！",
+	"wikibase-shortcopyrightwarning-heading": "授權條款"
 }

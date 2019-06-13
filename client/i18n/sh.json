@@ -10,7 +10,7 @@
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
 	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
 	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
-	"wikibase-dataitem": "{{WBREPONAME}} stavka",
+	"wikibase-dataitem": "Stavka na Wikipodacima",
 	"wikibase-editlinks": "Uredi veze",
 	"wikibase-editlinkstitle": "Uredi međujezične poveznice",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
