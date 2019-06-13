@@ -7,7 +7,7 @@ use PHPUnit4And6Compat;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -49,7 +49,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			$settings['baseUrl'],
 			$settings['conceptBaseUri'],
@@ -249,7 +249,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		$conceptBaseUris = [ 'itemwiki' => 'http://www.itemwiki.com/entity', 'propertywiki' => 'http://www.propertywiki.com/entity' ];
 
 		$linker = new RepoLinker(
-			DataAccessSettingsTest::entitySourceBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'itemwiki',
