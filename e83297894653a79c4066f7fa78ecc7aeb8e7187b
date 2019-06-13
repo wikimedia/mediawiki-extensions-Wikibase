@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "185c94fe_2ee7d35e",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/PrefetchingItemTermLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-13T08:18:53Z",
+      "side": 1,
+      "message": "should be PrefetchingItemTermLookup",
+      "range": {
+        "startLine": 20,
+        "startChar": 41,
+        "endLine": 20,
+        "endChar": 70
+      },
+      "revId": "e83297894653a79c4066f7fa78ecc7aeb8e7187b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
