@@ -69,4 +69,16 @@ class DatabaseTypeIdsStoreTest extends MediaWikiTestCase {
 		$this->assertSame( $ids, array_flip( $names ) );
 	}
 
+	public function testLookupTypeIds() {
+		$acquireIds = $this->typeIdsStore->acquireTypeIds( [ 'label', 'description' ] );
+		$lookupIds = $this->typeIdsStore->lookupTypeIds( [ 'label', 'description' ] );
+
+		$this->assertSame( $acquireIds, $lookupIds );
+	}
+
+	public function testLookupTypeIds_withUnknownTypes_associatesUnknownTypesWithNull() {
+		$lookupIds = $this->typeIdsStore->lookupTypeIds( [ 'label' ] );
+		$this->assertSame( [ 'label' => null ], $lookupIds );
+	}
+
 }

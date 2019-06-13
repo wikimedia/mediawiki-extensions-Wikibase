@@ -180,6 +180,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TermIdsCleaner' => __DIR__ . '/includes/Store/Sql/Terms/TermIdsCleaner.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TermIdsResolver' => __DIR__ . '/includes/Store/Sql/Terms/TermIdsResolver.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TypeIdsAcquirer' => __DIR__ . '/includes/Store/Sql/Terms/TypeIdsAcquirer.php',
+	'Wikibase\\Lib\\Store\\Sql\\Terms\\TypeIdsLookup' => __DIR__ . '/includes/Store/Sql/Terms/TypeIdsLookup.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\TypeIdsResolver' => __DIR__ . '/includes/Store/Sql/Terms/TypeIdsResolver.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\Util\\ReplicaMasterAwareRecordIdsAcquirer' => __DIR__ . '/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php',
 	'Wikibase\\Lib\\Store\\Sql\\TypeDispatchingWikiPageEntityMetaDataAccessor' => __DIR__ . '/includes/Store/Sql/TypeDispatchingWikiPageEntityMetaDataAccessor.php',
