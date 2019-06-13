@@ -10,7 +10,7 @@ use MediaWiki\Storage\SlotRecord;
 use PHPUnit_Framework_MockObject_MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTestDoubleFactory;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -73,7 +73,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
 			new UnusableEntitySource(),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsTestDoubleFactory::repositoryPrefixBasedFederation()
 		);
 	}
 

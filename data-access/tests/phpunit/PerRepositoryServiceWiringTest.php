@@ -48,7 +48,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdComposer( [] ),
 			new DataValueDeserializer( [] ),
 			new GenericServices( new EntityTypeDefinitions( [] ), [] ),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsTestDoubleFactory::repositoryPrefixBasedFederation(),
 			[],
 			[],
 			$this->getNameTableStoreProphecy()
