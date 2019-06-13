@@ -9,7 +9,7 @@ use RequestContext;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTestDoubleFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -151,7 +151,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			[ 'item', 'property' ],
 			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
 			new EntitySourceDefinitions( [] ),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsTestDoubleFactory::repositoryPrefixBasedFederation()
 		);
 
 		$module->execute();
@@ -484,7 +484,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'otherwiki'
 				)
 			] ),
-			DataAccessSettingsTest::entitySourceBasedFederation()
+			DataAccessSettingsTestDoubleFactory::entitySourceBasedFederation()
 		);
 
 		$module->execute();
@@ -547,7 +547,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			[ 'kitten' ],
 			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
 			new EntitySourceDefinitions( [] ),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsTestDoubleFactory::repositoryPrefixBasedFederation()
 		);
 
 		$module->execute();
