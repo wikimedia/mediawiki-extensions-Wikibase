@@ -55,7 +55,7 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			[ '' => false ],
 			require __DIR__ . '/../../src/PerRepositoryServiceWiring.php',
 			new GenericServices( $entityTypeDefinitions, [] ),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			$entityTypeDefinitions,
 			$this->getNameTableStoreFactoryProphecy()
 		);

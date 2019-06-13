@@ -9,7 +9,7 @@ use OutOfBoundsException;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -45,7 +45,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$callbacks,
 			new EntitySourceDefinitions( [] ),
 			new UnusableEntitySource(),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 
 		$this->assertEquals(
@@ -84,7 +84,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$callbacks,
 			new EntitySourceDefinitions( [] ),
 			new UnusableEntitySource(),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 	}
 
@@ -119,7 +119,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			],
 			new EntitySourceDefinitions( [ $itemSource, $propertySource ] ),
 			$itemSource,
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
@@ -203,7 +203,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			],
 			new EntitySourceDefinitions( [ $itemSource, $propertySource ] ),
 			$itemSource,
-			DataAccessSettingsTest::entitySourceBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}

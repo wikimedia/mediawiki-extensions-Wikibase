@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MWException;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -65,7 +65,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			new EntityIdComposer( [] ),
 			new BasicEntityIdParser(),
 			new UnusableEntitySource(),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			false,
 			$repositoryName
 		);
@@ -87,7 +87,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] ),
 			new BasicEntityIdParser(),
 			new UnusableEntitySource(),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 	}
 
@@ -116,7 +116,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 				'',
 				''
 			),
-			DataAccessSettingsTest::entitySourceBasedFederation()
+			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 	}
 
@@ -1505,7 +1505,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] ),
 			new PrefixMappingEntityIdParser( [ '' => $repository ], new BasicEntityIdParser() ),
 			new UnusableEntitySource(),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			false,
 			$repository
 		);
@@ -2006,7 +2006,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] ),
 			new BasicEntityIdParser(),
 			new EntitySource( 'testsource', false, [ $entityType => [ 'namespaceId' => $irrelevantNamespaceId, 'slot' => 'main' ] ], '', '' ),
-			DataAccessSettingsTest::entitySourceBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			false,
 			''
 		);
