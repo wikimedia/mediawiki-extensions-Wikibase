@@ -223,20 +223,15 @@ class SqlStore implements Store {
 		$this->entitySource = $entitySource;
 
 		//TODO: inject settings
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$repo = WikibaseRepo::getDefaultInstance();
+		$settings = $repo->getSettings();
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
 		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
-
-		$this->dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$settings->getSetting( 'useEntitySourceBasedFederation' )
-		);
+		$this->dataAccessSettings = $repo->getDataAccessSettings();
 	}
 
 	/**
