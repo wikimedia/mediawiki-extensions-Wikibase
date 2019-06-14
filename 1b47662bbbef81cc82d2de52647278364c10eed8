@@ -16,6 +16,47 @@
       "revId": "1b47662bbbef81cc82d2de52647278364c10eed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "453aaf32_15c53f22",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-14T14:07:10Z",
+      "side": 1,
+      "message": "I would add some more generic text to the interface documentation – users don’t need to know all the details mentioned here.",
+      "parentUuid": "b335eeb2_c528522c",
+      "revId": "1b47662bbbef81cc82d2de52647278364c10eed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "929e85c1_f12de051",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-14T14:07:10Z",
+      "side": 1,
+      "message": "It would be nicer to use Language::truncateForDatabase() here. However, I’m not sure which Language to use for that… calling Language::factory() for each language code used in an entity’s terms might be too expensive. I guess the content language ($wgContLang) will do for now?",
+      "range": {
+        "startLine": 142,
+        "startChar": 20,
+        "endLine": 142,
+        "endChar": 43
+      },
+      "revId": "1b47662bbbef81cc82d2de52647278364c10eed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
