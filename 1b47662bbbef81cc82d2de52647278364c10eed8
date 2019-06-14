@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e98e39a2_48e3c148",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T14:22:10Z",
+      "side": 1,
+      "message": "yes indeed I did not mean necessarily the exact msg ;)",
+      "parentUuid": "453aaf32_15c53f22",
+      "revId": "1b47662bbbef81cc82d2de52647278364c10eed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "929e85c1_f12de051",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
         "patchSetId": 1
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "Okay, I checked:\n\n* Yes, if the l10n cache is not set up and populated, getting a Language instance for every possible term language can take minutes.\n* Language::truncateForDatabase() is actually independent of the particular language, as far as I can see, except that if $ellipsis is \u0027...\u0027 (which is the default value – i. e., instead of just truncating, replace the last few chars with an ellipsis), then it localizes the ellipsis in the current language.\n\nThere’s also some discussion on how the truncation should work in T142691, so I’ll read up on that – but I think for now we can probably get away with $wgContLang-\u003etruncateForDatabase( $text, 255, \u0027\u0027 ).",
       "parentUuid": "929e85c1_f12de051",
+      "range": {
+        "startLine": 142,
+        "startChar": 20,
+        "endLine": 142,
+        "endChar": 43
+      },
+      "revId": "1b47662bbbef81cc82d2de52647278364c10eed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a035918_7d7ce1ee",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T14:22:10Z",
+      "side": 1,
+      "message": "sounds better indeed",
+      "parentUuid": "c2682b1e_66049bb3",
       "range": {
         "startLine": 142,
         "startChar": 20,
