@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c53be57_4ff58e21",
+        "filename": "data-access/tests/phpunit/DataAccessSettingsTestDoubleFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-14T10:57:27Z",
+      "side": 1,
+      "message": "Why should they? DataAccessSettings is a pure data class with no internal logic (other than multiplying a constructor argument by 1024, I suppose), what’s the point in mocking it?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 92
+      },
+      "revId": "a980ed356c344104fdb93848d57645ad7df88094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
