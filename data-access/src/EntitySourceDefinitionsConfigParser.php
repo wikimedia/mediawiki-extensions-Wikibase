@@ -34,6 +34,8 @@ class EntitySourceDefinitionsConfigParser {
 				$sourceData['repoDatabase'],
 				$namespaceSlotData,
 				$sourceData['baseUri'],
+				$sourceData['rdfNodeNamespacePrefix'],
+				$sourceData['rdfPredicateNamespacePrefix'],
 				$sourceData['interwikiPrefix']
 			);
 		}

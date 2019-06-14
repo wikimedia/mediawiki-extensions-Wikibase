@@ -47,8 +47,8 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			'<DATA>',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [
-				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', '' ),
-				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', '' ),
+				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
+				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
 			] ),
 			'local'
 		);
@@ -74,8 +74,24 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			'<DATA>',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [
-				new EntitySource( 'localwiki', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', '' ),
-				new EntitySource( 'otherwiki', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-other>', '' ),
+				new EntitySource(
+					'localwiki',
+					'localdb',
+					[ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+					'<BASE>',
+					'wd',
+					'',
+					''
+				),
+				new EntitySource(
+					'otherwiki',
+					'otherdb',
+					[ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ],
+					'<BASE-other>',
+					'other',
+					'other',
+					''
+				),
 			] ),
 			'localwiki',
 			[ 'German' => 'de' ],
