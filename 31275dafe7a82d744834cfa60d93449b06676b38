@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e82f8e25_d228399d",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-14T15:19:47Z",
+      "side": 1,
+      "message": "Where did this come from? I don’t see how this method would work if the $groupColumn is null.",
+      "range": {
+        "startLine": 106,
+        "startChar": 17,
+        "endLine": 106,
+        "endChar": 22
+      },
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90923b53_bb993d53",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-14T15:19:47Z",
+      "side": 1,
+      "message": "Would be nice to explain a bit here, for example:\n\n\u003e Array of terms arrays as returned by {@link resolveGroupedTermIds},\n\u003e with the $groupColumn value as key.\n\nAlso, we could use array[] instead of array, to match resolveGroupedTermIds().",
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
