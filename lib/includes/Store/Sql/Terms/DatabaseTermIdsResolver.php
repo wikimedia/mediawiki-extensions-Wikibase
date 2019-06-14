@@ -89,7 +89,8 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 			]
 		);
 
-		$replicaResult = $this->selectTermsById( $allTermIds, $types, $languages );
+		$replicaResult = $this->selectTermsViaJoin(
+			[], [], [ 'wbtl_id' => $allTermIds ], $types, $languages );
 
 		$this->preloadTypes( $replicaResult );
 		$replicaTermIds = [];
@@ -163,11 +164,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		}
 
 		return $termsByKeyColumn;
-	}
-
-	private function selectTermsById( array $termIds, $types, $languages ): IResultWrapper {
-		return $this->selectTermsViaJoin(
-			[], [], [ 'wbtl_id' => $termIds ], $types, $languages );
 	}
 
 	private function selectTermsViaJoin(
