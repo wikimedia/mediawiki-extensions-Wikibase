@@ -165,6 +165,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\Sql\\SiteLinkTable' => __DIR__ . '/includes/Store/Sql/SiteLinkTable.php',
 	'Wikibase\\Lib\\Store\\Sql\\SqlEntityInfoBuilder' => __DIR__ . '/includes/Store/Sql/SqlEntityInfoBuilder.php',
 	'Wikibase\\Lib\\Store\\Sql\\TermSqlIndex' => __DIR__ . '/includes/Store/Sql/TermSqlIndex.php',
+	'Wikibase\\Lib\\Store\\Sql\\Terms\\CachedDatabasePropertyLabelResolver' => __DIR__ . '/includes/Store/Sql/Terms/CachedDatabasePropertyLabelResolver.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\DatabaseItemTermStore' => __DIR__ . '/includes/Store/Sql/Terms/DatabaseItemTermStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\DatabasePropertyTermStore' => __DIR__ . '/includes/Store/Sql/Terms/DatabasePropertyTermStore.php',
 	'Wikibase\\Lib\\Store\\Sql\\Terms\\DatabaseTermIdsAcquirer' => __DIR__ . '/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php',
