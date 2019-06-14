@@ -201,7 +201,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			] ),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
-			new EntitySource( 'source', false, [], '', '' ),
+			new EntitySource( 'source', false, [], '', '', '', '' ),
 			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION )
 		);
 	}
@@ -259,7 +259,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
-			new EntitySource( 'source', false, [], '', '' ),
+			new EntitySource( 'source', false, [], '', '', '', '' ),
 			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
 			false,
 			''
@@ -280,7 +280,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
-			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '' ),
+			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
 			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
 		);
 
@@ -349,7 +349,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			] ),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
-			new EntitySource( 'source', false, [], '', '' ),
+			new EntitySource( 'source', false, [], '', '', '', '' ),
 			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
 			false,
 			'foo'
@@ -466,7 +466,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			] ),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
-			new EntitySource( 'testsource', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '' ),
+			new EntitySource( 'testsource', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
 			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
 		);
 	}

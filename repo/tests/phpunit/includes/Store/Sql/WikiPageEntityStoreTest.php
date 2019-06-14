@@ -135,6 +135,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			false,
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
 			'',
+			'',
+			'',
 			''
 		);
 		$customSource = new EntitySource(
@@ -142,6 +144,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			'customdb',
 			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
 			'',
+			'cus',
+			'cus',
 			''
 		);
 
@@ -195,6 +199,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			false,
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
 			'',
+			'',
+			'',
 			''
 		);
 		$customSource = new EntitySource(
@@ -202,6 +208,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			'customdb',
 			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
 			'',
+			'c',
+			'c',
 			''
 		);
 
@@ -1516,6 +1524,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			false,
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
 			'',
+			'',
+			'',
 			''
 		);
 
@@ -1558,6 +1568,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			'custom',
 			'customdb',
 			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
+			'',
+			'',
 			'',
 			''
 		);

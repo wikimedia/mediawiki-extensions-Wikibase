@@ -75,7 +75,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false, false ),
-			new EntitySource( 'source', 'sourcedb', [], '', '' ),
+			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[ null ],
 			[]
 		);
@@ -92,7 +92,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
-			new EntitySource( 'source', 'sourcedb', [], '', '' ),
+			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[ null ],
 			[]
 		);
@@ -107,7 +107,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
-			new EntitySource( 'source', 'sourcedb', [], '', '' ),
+			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[],
 			[ null ]
 		);
@@ -121,7 +121,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new DataValueDeserializer( [] ),
 			$this->getMockNameTableStore(),
 			new DataAccessSettings( 10, true, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION ),
-			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '' ),
+			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '','' ),
 			[],
 			[]
 		);
