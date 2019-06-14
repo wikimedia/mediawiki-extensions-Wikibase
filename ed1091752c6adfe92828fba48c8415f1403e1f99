@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82843842_40f484b5",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialSetAliasesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-06-14T11:18:54Z",
+      "side": 1,
+      "message": "arguably, this could be replaced with calling SpecialModifyTermTestCase::createNewItemWithTerms on the condition that said method is made protected in the parent class.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 23
+      },
+      "revId": "ed1091752c6adfe92828fba48c8415f1403e1f99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
