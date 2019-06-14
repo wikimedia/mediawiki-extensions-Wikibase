@@ -39,6 +39,29 @@
       "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48881485_767e51df",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-14T16:33:02Z",
+      "side": 1,
+      "message": "Should use IDatabase::addIdentifierQuotes, I guess… passing this direct into an SQL query seems unexpected to me.",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
