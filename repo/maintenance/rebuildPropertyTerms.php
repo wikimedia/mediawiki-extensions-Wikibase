@@ -82,7 +82,7 @@ class RebuildPropertyTerms extends Maintenance {
 	private function newEntityIdPager(): SqlEntityIdPager {
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$this->wikibaseRepo->getEntityNamespaceLookup(),
-			$this->wikibaseRepo->getEntityIdParser()
+			$this->wikibaseRepo->getEntityIdLookup()
 		);
 
 		$pager = $sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] );
