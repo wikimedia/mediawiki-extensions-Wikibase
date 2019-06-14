@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetAliases;
 use Wikibase\Repo\WikibaseRepo;
@@ -39,6 +40,30 @@ class SpecialSetAliasesTest extends SpecialModifyTermTestCase {
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getEntityPermissionChecker()
 		);
+	}
+
+	public function testGivenItemWithAliasContainingPipeCharacter_editingResultsTriggersError() {
+		$item = new Item();
+		$languageCode = 'en';
+		$item->setAliases( $languageCode, [ 'piped|alias' ] );
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $item, __METHOD__, $this->getTestUser()->getUser(), EDIT_NEW );
+
+		$id = $item->getId();
+
+		$editRequest = new \FauxRequest( [ 'id' => $id, 'language' => $languageCode, 'value' => 'test' ], true );
+
+		list( $output, ) = $this->executeSpecialPage(
+			$id->getSerialization() . '/' . $languageCode,
+			$editRequest,
+			'qqx'
+		);
+
+		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
+			both( tagMatchingOutline( "<p class='error'/>" ) )
+				->andAlso( havingTextContents( '(wikibase-wikibaserepopage-pipe-in-alias)' ) )
+		) ) ) );
 	}
 
 }
