@@ -29,7 +29,7 @@ class WikibaseApi {
 			apiUrl: browser.options.baseUrl + '/api.php'
 		} );
 
-		return bot.getEditToken()
+		return bot.loginGetEditToken( { username: browser.options.username, password: browser.options.password } )
 			.then( () => {
 				return bot.request( {
 					action: 'wbeditentity',
