@@ -77,7 +77,7 @@ class SqlStoreTest extends MediaWikiTestCase {
 			new EntityNamespaceLookup( [] ),
 			$this->getMock( IdGenerator::class ),
 			$wikibaseServices,
-			new EntitySource( 'testsource', 'testdb', [], '', '' )
+			new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
 		);
 	}
 
