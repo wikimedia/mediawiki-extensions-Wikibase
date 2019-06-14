@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b335eeb2_c528522c",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T13:50:24Z",
+      "side": 1,
+      "message": "should we add this as a note to class docblock or public acquireTermIds method docblock to make it visible to the user?",
+      "revId": "1b47662bbbef81cc82d2de52647278364c10eed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
