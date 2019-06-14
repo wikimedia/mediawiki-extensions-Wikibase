@@ -88,7 +88,8 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 				'termCount' => count( $allTermIds ),
 			]
 		);
-		$result = $this->selectTermsById( $allTermIds, $types, $languages );
+		$result = $this->selectTermsViaJoin(
+			[], [], [ 'wbtl_id' => $allTermIds ], $types, $languages );
 		$this->preloadTypes( $result );
 
 		foreach ( $result as $row ) {
@@ -159,11 +160,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		}
 
 		return $termsByKeyColumn;
-	}
-
-	private function selectTermsById( array $termIds, $types, $languages ): IResultWrapper {
-		return $this->selectTermsViaJoin(
-			[], [], [ 'wbtl_id' => $termIds ], $types, $languages );
 	}
 
 	private function selectTermsViaJoin(
