@@ -21,6 +21,8 @@ class EntitySourceDefinitionsConfigParserTest extends \PHPUnit_Framework_TestCas
 				'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
 				'repoDatabase' => false,
 				'baseUri' => 'http://example.com/entity/',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => '',
 				'interwikiPrefix' => 'localwiki'
 			]
 		];
@@ -47,12 +49,16 @@ class EntitySourceDefinitionsConfigParserTest extends \PHPUnit_Framework_TestCas
 				'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
 				'repoDatabase' => 'wikidatadb',
 				'baseUri' => 'http://wikidata.xyz/entity/',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => '',
 				'interwikiPrefix' => 'wikidata'
 			],
 			'commons' => [
 				'entityNamespaces' => [ 'mediainfo' => '100/mediainfo' ],
 				'repoDatabase' => 'commonsdb',
 				'baseUri' => 'http://commons.xyz/entity/',
+				'rdfNodeNamespacePrefix' => 'sdc',
+				'rdfPredicateNamespacePrefix' => 'sdc',
 				'interwikiPrefix' => 'commons'
 			]
 		];
