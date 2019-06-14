@@ -40,6 +40,8 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
+use Wikibase\Lib\Store\TermIndexPropertyLabelResolver;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
@@ -374,12 +376,52 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
 	}
 
+	public function testGetPropertyLabelResolver_oldSchemaMigrationStage() {
+		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'tmpPropertyTermsMigrationStage', MIGRATION_OLD );
+
+		$wikibaseClient = $this->getWikibaseClient( $settings );
+		$this->assertInstanceOf(
+			TermIndexPropertyLabelResolver::class,
+			$wikibaseClient->getPropertyLabelResolver()
+		);
+	}
+
+	/**
+	 * @dataProvider getPropertyLabelResolverClassPerMigrationStage
+	 */
+	public function testGetPropertyLabelResolver_newSchemaMigrationStage(
+		$migrationStage,
+		$propertyResolverClassName
+	) {
+		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'tmpPropertyTermsMigrationStage', $migrationStage );
+
+		$wikibaseClient = $this->getWikibaseClient( $settings );
+		$this->assertInstanceOf(
+			$propertyResolverClassName,
+			$wikibaseClient->getPropertyLabelResolver()
+		);
+	}
+
+	public function getPropertyLabelResolverClassPerMigrationStage() {
+		return [
+			[ MIGRATION_OLD, TermIndexPropertyLabelResolver::class ],
+			[ MIGRATION_WRITE_BOTH, TermIndexPropertyLabelResolver::class ],
+			[ MIGRATION_WRITE_NEW, CachedDatabasePropertyLabelResolver::class ],
+			[ MIGRATION_NEW, CachedDatabasePropertyLabelResolver::class ]
+		];
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */
-	private function getWikibaseClient() {
+	private function getWikibaseClient( SettingsArray $settings = null ) {
+		if ( $settings === null ) {
+			$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		}
 		return new WikibaseClient(
-			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			new SettingsArray( $settings->getArrayCopy() ),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
 			$this->getRepositoryDefinitions(),
