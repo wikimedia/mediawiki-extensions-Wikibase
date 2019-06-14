@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9af7ee8d_c821e44c",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T20:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf8daa5_8394dc7f",
+      "range": {
+        "startLine": 106,
+        "startChar": 17,
+        "endLine": 106,
+        "endChar": 22
+      },
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90923b53_bb993d53",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
         "patchSetId": 6
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "90923b53_bb993d53",
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ef91d3f_49e022aa",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T20:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3914e197_0b4e8bb2",
       "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -128,6 +170,30 @@
       "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f454c1e3_d0a260c7",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T20:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa496852_4c226e5b",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
