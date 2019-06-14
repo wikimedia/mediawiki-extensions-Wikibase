@@ -16,6 +16,24 @@
       "revId": "fcc50de80b3629c330ff9cfc4f3df541c3ab5758",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8477bd8_3e6992b6",
+        "filename": "repo/tests/selenium/wdio-wikibase/wikibase.api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-14T14:13:03Z",
+      "side": 1,
+      "message": "o.O\n\nThese are literally the same options we use three methods down in `protectEntity()` and in Lexeme. And it works fine locally! *sigh*",
+      "parentUuid": "7d54d105_c1c251b9",
+      "revId": "fcc50de80b3629c330ff9cfc4f3df541c3ab5758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
