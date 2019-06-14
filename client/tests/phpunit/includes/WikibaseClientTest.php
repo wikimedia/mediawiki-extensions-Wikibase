@@ -441,6 +441,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			false,
 			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
 			'',
+			'',
+			'',
 			''
 		) ] );
 	}

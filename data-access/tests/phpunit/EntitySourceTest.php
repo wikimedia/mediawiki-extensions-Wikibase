@@ -22,9 +22,19 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 		$databaseName,
 		array $entityNamespaceIdsAndSlots,
 		$conceptBaseUri,
+		$validRdfNodeNamespacePrefix,
+		$validRdfPredicateNamespacePrefix,
 		$interwikiPrefix
 	) {
-		new EntitySource( $slotName, $databaseName, $entityNamespaceIdsAndSlots, $conceptBaseUri, $interwikiPrefix );
+		new EntitySource(
+			$slotName,
+			$databaseName,
+			$entityNamespaceIdsAndSlots,
+			$conceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
+			$interwikiPrefix
+		);
 	}
 
 	public function provideInvalidConstructorArguments() {
@@ -34,6 +44,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
 			'property' => [ 'namespaceId' => 666, 'slot' => 'otherslot' ]
 		];
+		$validRdfNodeNamespacePrefix = 'wd';
+		$validRdfPredicateNamespacePrefix = '';
 		$validConceptBaseUri = 'concept:';
 		$validInterwikiPrefix = 'test';
 
@@ -42,6 +54,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			$validEntityData,
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'database name not a string nor false' => [
@@ -49,6 +63,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			303,
 			$validEntityData,
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'database name true' => [
@@ -56,6 +72,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			true,
 			$validEntityData,
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'entity type not a string' => [
@@ -63,6 +81,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			[ 1 => [ 'namespaceId' => 'foo', 'slot' => 'main' ] ],
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'entity type namespace and slot data not an array' => [
@@ -70,6 +90,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			[ 'item' => 1000 ],
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'entity namespace ID not defined' => [
@@ -77,6 +99,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			[ 'item' => [ 'slot' => 'main' ] ],
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'entity slot name not defined' => [
@@ -84,6 +108,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			[ 'item' => [ 'slot' => 'main' ] ],
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'entity namespace ID not an int' => [
@@ -91,6 +117,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			[ 'item' => [ 'namespaceId' => 'foo', 'slot' => 'main' ] ],
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'entity slot name not a string' => [
@@ -98,12 +126,34 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			[ 'item' => [ 'namespaceId' => 100, 'slot' => 123 ] ],
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			$validInterwikiPrefix,
 		];
 		yield 'Concept base URI not a string' => [
 			$validSourceName,
 			$validDatabaseName,
 			$validEntityData,
+			100,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
+			$validInterwikiPrefix,
+		];
+		yield 'RDF node namespace prefix not a string' => [
+			$validSourceName,
+			$validDatabaseName,
+			$validEntityData,
+			$validConceptBaseUri,
+			100,
+			$validRdfPredicateNamespacePrefix,
+			$validInterwikiPrefix,
+		];
+		yield 'RDF predicate namespace prefix not a string' => [
+			$validSourceName,
+			$validDatabaseName,
+			$validEntityData,
+			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
 			100,
 			$validInterwikiPrefix,
 		];
@@ -112,6 +162,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			$validDatabaseName,
 			$validEntityData,
 			$validConceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
 			100
 		];
 	}
@@ -122,6 +174,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			'foodb',
 			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
 			'concept:',
+			'wd',
+			'',
 			'testwiki'
 		);
 
@@ -134,6 +188,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			'foodb',
 			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
 			'concept:',
+			'wd',
+			'',
 			'testwiki'
 		);
 
@@ -146,6 +202,8 @@ class EntitySourceTest extends \PHPUnit_Framework_TestCase {
 			'foodb',
 			[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'other' ] ],
 			'concept:',
+			'wd',
+			'',
 			'testwiki'
 		);
 

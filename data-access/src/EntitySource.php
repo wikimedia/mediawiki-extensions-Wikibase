@@ -44,6 +44,10 @@ class EntitySource {
 	 */
 	private $conceptBaseUri;
 
+	private $rdfNodeNamespacePrefix;
+
+	private $rdfPredicateNamespacePrefix;
+
 	/**
 	 * @var string
 	 */
@@ -56,18 +60,32 @@ class EntitySource {
 	 * @param array $entityNamespaceIdsAndSlots Associative array indexed by entity type (string), values are
 	 * array of form [ 'namespaceId' => int, 'slot' => string ]
 	 * @param string $conceptBaseUri
+	 * @param string $rdfNodeNamespacePrefix
+	 * @param string $rdfPredicateNamespacePrefix
 	 * @param string $interwikiPrefix
 	 */
-	public function __construct( $name, $databaseName, array $entityNamespaceIdsAndSlots, $conceptBaseUri, $interwikiPrefix ) {
+	public function __construct(
+		$name,
+		$databaseName,
+		array $entityNamespaceIdsAndSlots,
+		$conceptBaseUri,
+		$rdfNodeNamespacePrefix,
+		$rdfPredicateNamespacePrefix,
+		$interwikiPrefix
+	) {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameter( is_string( $databaseName ) || $databaseName === false, '$databaseName', 'must be a string or false' );
 		Assert::parameterType( 'string', $conceptBaseUri, '$conceptBaseUri' );
+		Assert::parameterType( 'string', $rdfNodeNamespacePrefix, '$rdfNodeNamespacePrefix' );
+		Assert::parameterType( 'string', $rdfPredicateNamespacePrefix, '$rdfPredicateNamespacePrefix' );
 		Assert::parameterType( 'string', $interwikiPrefix, '$interwikiPrefix' );
 		$this->assertEntityNamespaceIdsAndSlots( $entityNamespaceIdsAndSlots );
 
 		$this->sourceName = $name;
 		$this->databaseName = $databaseName;
 		$this->conceptBaseUri = $conceptBaseUri;
+		$this->rdfNodeNamespacePrefix = $rdfNodeNamespacePrefix;
+		$this->rdfPredicateNamespacePrefix = $rdfPredicateNamespacePrefix;
 		$this->interwikiPrefix = $interwikiPrefix;
 
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
@@ -134,6 +152,14 @@ class EntitySource {
 
 	public function getConceptBaseUri() {
 		return $this->conceptBaseUri;
+	}
+
+	public function getRdfNodeNamespacePrefix() {
+		return $this->rdfNodeNamespacePrefix;
+	}
+
+	public function getRdfPredicateNamespacePrefix() {
+		return $this->rdfPredicateNamespacePrefix;
 	}
 
 	public function getInterwikiPrefix() {
