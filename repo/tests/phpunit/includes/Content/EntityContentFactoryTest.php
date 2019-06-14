@@ -99,8 +99,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function newFactory() {
-		$itemSource = new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '', '' );
-		$propertySource = new EntitySource( 'properties', 'propertydbx	', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '', '' );
+		$itemSource = new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ], '', '', '', '' );
+		$propertySource = new EntitySource( 'properties', 'propertydbx	', [ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ], '', '', '', '' );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -176,6 +176,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			'itemdb',
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
 			'',
+			'',
+			'',
 			''
 		);
 		$propertySource = new EntitySource(
@@ -183,6 +185,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			'propertydb',
 			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
 			'',
+			'p',
+			'p',
 			'propertywiki'
 		);
 

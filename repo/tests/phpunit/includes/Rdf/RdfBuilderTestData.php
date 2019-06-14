@@ -180,8 +180,24 @@ class RdfBuilderTestData {
 			self::URI_DATA,
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [
-				new EntitySource( 'wikidata', 'wikidatadb', [ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ], self::URI_BASE, '' ),
-				new EntitySource( 'foreign', 'foreigndb', [ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ], self::URI_BASE_FOREIGN, '' ),
+				new EntitySource(
+					'wikidata',
+					'wikidatadb',
+					[ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ],
+					self::URI_BASE,
+					'wd',
+					'',
+					''
+				),
+				new EntitySource(
+					'foreign',
+					'foreigndb',
+					[ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ],
+					self::URI_BASE_FOREIGN,
+					'for',
+					'for',
+					''
+				),
 			] ),
 			'wikidata',
 			[],

@@ -72,7 +72,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://test/data/',
 			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION ),
 			new EntitySourceDefinitions( [
-				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '' )
+				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '', '', '' )
 			] ),
 			'test'
 		);
