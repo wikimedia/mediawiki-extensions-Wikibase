@@ -81,6 +81,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
@@ -107,6 +108,9 @@ use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\TermIndexPropertyLabelResolver;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -1611,26 +1615,72 @@ final class WikibaseClient {
 		return $this->descriptionLookup;
 	}
 
-	public function getPropertyLabelResolver() {
+	public function getPropertyLabelResolver(): PropertyLabelResolver {
 		if ( $this->propertyLabelResolver === null ) {
 			$languageCode = $this->getContentLanguage()->getCode();
 			$cacheKeyPrefix = $this->settings->getSetting( 'sharedCacheKeyPrefix' );
 			$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 			$cacheDuration = $this->settings->getSetting( 'sharedCacheDuration' );
+			$useNormalizedStore = $this->settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW;
 
 			// Cache key needs to be language specific
 			$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
 
-			$this->propertyLabelResolver = new TermIndexPropertyLabelResolver(
-				$languageCode,
-				$this->getPropertyTermIndex(),
-				ObjectCache::getInstance( $cacheType ),
-				$cacheDuration,
-				$cacheKey
-			);
+			if ( $useNormalizedStore ) {
+				$this->propertyLabelResolver = $this->getCachedDatabasePropertyLabelResolver(
+					$languageCode,
+					ObjectCache::getInstance( $cacheType ),
+					$cacheDuration,
+					$cacheKey
+				);
+			} else {
+				$this->propertyLabelResolver = new TermIndexPropertyLabelResolver(
+					$languageCode,
+					$this->getPropertyTermIndex(),
+					ObjectCache::getInstance( $cacheType ),
+					$cacheDuration,
+					$cacheKey
+				);
+			}
 		}
 
 		return $this->propertyLabelResolver;
+	}
+
+	private function getCachedDatabasePropertyLabelResolver(
+		$languageCode,
+		$cache,
+		$cacheDuration,
+		$cacheKey
+	): CachedDatabasePropertyLabelResolver {
+		$loadBalancer = $this->getLoadBalancerForConfiguredPropertySource();
+		$wanObjectCache = $this->getWANObjectCache();
+		$typeIdsStore = new DatabaseTypeIdsStore( $loadBalancer, $wanObjectCache );
+		$databaseTermIdsResolver = new DatabaseTermIdsResolver(
+			$typeIdsStore, $typeIdsStore, $loadBalancer );
+
+		return new CachedDatabasePropertyLabelResolver(
+			$languageCode,
+			$databaseTermIdsResolver,
+			$cache,
+			$cacheDuration,
+			$cacheKey
+		);
+	}
+
+	private function getLoadBalancerForConfiguredPropertySource() {
+		$dataAccessSettings = $this->getDataAccessSettings();
+		$propertySource = $this->getPropertySource( $dataAccessSettings );
+		$propertyDatabaseName = $dataAccessSettings->useEntitySourceBasedFederation() ?
+			$propertySource->getDatabaseName() :
+			$this->getRepositoryDefinitions()->getDatabaseNames()[''];
+
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		return $lbFactory->getMainLB( $propertyDatabaseName );
+	}
+
+	private function getWANObjectCache() {
+		return MediaWikiServices::getInstance()->getMainWANObjectCache();
 	}
 
 	private function getPropertyTermIndex() {
