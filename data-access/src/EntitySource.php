@@ -44,6 +44,10 @@ class EntitySource {
 	 */
 	private $conceptBaseUri;
 
+	private $rdfNodeNamespacePrefix;
+
+	private $rdfPredicateNamespacePrefix;
+
 	/**
 	 * @var string
 	 */
@@ -68,6 +72,8 @@ class EntitySource {
 		$this->sourceName = $name;
 		$this->databaseName = $databaseName;
 		$this->conceptBaseUri = $conceptBaseUri;
+		$this->rdfNodeNamespacePrefix = 'wd';
+		$this->rdfPredicateNamespacePrefix = '';
 		$this->interwikiPrefix = $interwikiPrefix;
 
 		$this->setEntityTypeData( $entityNamespaceIdsAndSlots );
@@ -134,6 +140,14 @@ class EntitySource {
 
 	public function getConceptBaseUri() {
 		return $this->conceptBaseUri;
+	}
+
+	public function getRdfNodeNamespacePrefix() {
+		return $this->rdfNodeNamespacePrefix;
+	}
+
+	public function getRdfPredicateNamespacePrefix() {
+		return $this->rdfPredicateNamespacePrefix;
 	}
 
 	public function getInterwikiPrefix() {

@@ -24,6 +24,10 @@ class EntitySourceDefinitions {
 
 	private $sourceToConceptBaseUriMap = null;
 
+	private $sourceToRdfNodeNamespacePrefixMap = null;
+
+	private $sourceToRdfPredicateNamespacePrefixMap = null;
+
 	/**
 	 * @param EntitySource[] $sources with unique names. An single entity type can not be used in two different sources.
 	 */
@@ -113,6 +117,32 @@ class EntitySourceDefinitions {
 			}
 		}
 		return $this->sourceToConceptBaseUriMap;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getRdfNodeNamespacePrefixes() {
+		if ( $this->sourceToRdfNodeNamespacePrefixMap === null ) {
+			$this->sourceToRdfNodeNamespacePrefixMap = [];
+			foreach ( $this->sources as $source ) {
+				$this->sourceToRdfNodeNamespacePrefixMap[$source->getSourceName()] = $source->getRdfNodeNamespacePrefix();
+			}
+		}
+		return $this->sourceToRdfNodeNamespacePrefixMap;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getRdPredicateNamespacePrefixes() {
+		if ( $this->sourceToRdfPredicateNamespacePrefixMap === null ) {
+			$this->sourceToRdfPredicateNamespacePrefixMap = [];
+			foreach ( $this->sources as $source ) {
+				$this->sourceToRdfPredicateNamespacePrefixMap[$source->getSourceName()] = $source->getRdfPredicateNamespacePrefix();
+			}
+		}
+		return $this->sourceToRdfPredicateNamespacePrefixMap;
 	}
 
 }
