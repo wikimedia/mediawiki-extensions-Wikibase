@@ -22,6 +22,30 @@
       "revId": "a980ed356c344104fdb93848d57645ad7df88094",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56083f64_3966cbe8",
+        "filename": "data-access/tests/phpunit/DataAccessSettingsTestDoubleFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-14T20:10:18Z",
+      "side": 1,
+      "message": "Users of the class do not know, ideally, whether it is just a data class or not. I mean it could be communicated that it is as such (conventionally or in its documentation), then yes it doens\u0027t make much sense to provide a double for it.",
+      "parentUuid": "1c53be57_4ff58e21",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 92
+      },
+      "revId": "a980ed356c344104fdb93848d57645ad7df88094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
