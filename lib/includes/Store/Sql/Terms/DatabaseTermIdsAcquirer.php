@@ -126,21 +126,40 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $termsArray;
 	}
 
+	/*
+	 * Since the wbx_text column can hold at most 255 bytes, we truncate the
+	 * the texts to that length before sending them to the acquirer.
+	 * Additional mappings ensure that we can still return a map from full,
+	 * untruncated texts to text IDs (though multiple texts may share the same
+	 * ID if they only differ after more than 255 bytes).
+	 */
 	private function acquireTextIds(
 		array $texts,
 		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
 	) {
-		$textRecords = [];
+		$truncatedTexts = [];
 		foreach ( $texts as $text ) {
-			$textRecords[] = [ 'wbx_text' => $text ];
+			$truncatedText = substr( $text, 0, 255 );
+			$truncatedTexts[$text] = $truncatedText;
 		}
-		$textRecords = $this->filterUniqueRecords( $textRecords );
 
-		$acquiredIds = $textIdsAcquirer->acquireIds( $textRecords );
+		$truncatedTextRecords = [];
+		foreach ( $truncatedTexts as $truncatedText ) {
+			$truncatedTextRecords[] = [ 'wbx_text' => $truncatedText ];
+		}
+		$truncatedTextRecords = $this->filterUniqueRecords( $truncatedTextRecords );
+
+		$truncatedTextRecordsWithIds = $textIdsAcquirer->acquireIds( $truncatedTextRecords );
+		$truncatedTextIds = [];
+		foreach ( $truncatedTextRecordsWithIds as $truncatedTextRecordWithId ) {
+			$truncatedText = $truncatedTextRecordWithId['wbx_text'];
+			$truncatedTextId = $truncatedTextRecordWithId['wbx_id'];
+			$truncatedTextIds[$truncatedText] = $truncatedTextId;
+		}
 
 		$textIds = [];
-		foreach ( $acquiredIds as $acquiredId ) {
-			$textIds[$acquiredId['wbx_text']] = $acquiredId['wbx_id'];
+		foreach ( $truncatedTexts as $text => $truncatedText ) {
+			$textIds[$text] = $truncatedTextIds[$truncatedText];
 		}
 
 		return $textIds;

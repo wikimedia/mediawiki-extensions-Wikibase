@@ -408,6 +408,33 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds, $dbMaster );
 	}
 
+	public function testWithLongTexts() {
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$this->loadBalancer,
+			new InMemoryTypeIdsStore()
+		);
+
+		$termsArray = [
+			'label' => [
+				'en' => str_repeat( 'a', 255 ) . ' label',
+				'de' => str_repeat( 'a', 255 ) . ' label',
+				'fr' => str_repeat( 'á', 255 ) . ' label',
+			],
+			'description' => [
+				'en' => str_repeat( 'a', 255 ) . ' description',
+			],
+			'alias' => [
+				'en' => [ str_repeat( 'a', 255 ) . ' alias' ]
+			]
+		];
+
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$textIdsCount = $this->db->selectRowCount( 'wbt_text' );
+
+		$this->assertCount( 5, $acquiredTermIds );
+		$this->assertSame( 2, $textIdsCount );
+	}
+
 	private function assertTermsArrayExistInDb( $termsArray, $typeIds, $db = null ) {
 		$db = $db ?? $this->db;
 
