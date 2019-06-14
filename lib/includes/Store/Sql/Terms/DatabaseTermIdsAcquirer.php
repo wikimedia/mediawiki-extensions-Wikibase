@@ -9,6 +9,13 @@ use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
+ * A {@link TermIdsAcquirer} implementation using the database tables
+ * wbt_term_in_lang, wbt_text_in_lang, and wbt_text.
+ * Because the wbt_text.wbx_text column can only hold up to 255 bytes,
+ * terms longer than that (typically non-Latin descriptions)
+ * will be truncated, and different terms that only differ after the first
+ * 255 bytes will get the same ID.
+ *
  * @license GPL-2.0-or-later
  */
 class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
@@ -126,21 +133,42 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $termsArray;
 	}
 
+	/*
+	 * Since the wbx_text column can hold at most 255 bytes, we truncate the
+	 * the texts to that length before sending them to the acquirer.
+	 * Additional mappings ensure that we can still return a map from full,
+	 * untruncated texts to text IDs (though multiple texts may share the same
+	 * ID if they only differ after more than 255 bytes).
+	 */
 	private function acquireTextIds(
 		array $texts,
 		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
 	) {
-		$textRecords = [];
-		foreach ( $texts as $text ) {
-			$textRecords[] = [ 'wbx_text' => $text ];
-		}
-		$textRecords = $this->filterUniqueRecords( $textRecords );
+		global $wgContLang;
 
-		$acquiredIds = $textIdsAcquirer->acquireIds( $textRecords );
+		$truncatedTexts = [];
+		foreach ( $texts as $text ) {
+			$truncatedText = $wgContLang->truncateForDatabase( $text, 255, '' );
+			$truncatedTexts[$text] = $truncatedText;
+		}
+
+		$truncatedTextRecords = [];
+		foreach ( $truncatedTexts as $truncatedText ) {
+			$truncatedTextRecords[] = [ 'wbx_text' => $truncatedText ];
+		}
+		$truncatedTextRecords = $this->filterUniqueRecords( $truncatedTextRecords );
+
+		$truncatedTextRecordsWithIds = $textIdsAcquirer->acquireIds( $truncatedTextRecords );
+		$truncatedTextIds = [];
+		foreach ( $truncatedTextRecordsWithIds as $truncatedTextRecordWithId ) {
+			$truncatedText = $truncatedTextRecordWithId['wbx_text'];
+			$truncatedTextId = $truncatedTextRecordWithId['wbx_id'];
+			$truncatedTextIds[$truncatedText] = $truncatedTextId;
+		}
 
 		$textIds = [];
-		foreach ( $acquiredIds as $acquiredId ) {
-			$textIds[$acquiredId['wbx_text']] = $acquiredId['wbx_id'];
+		foreach ( $truncatedTexts as $text => $truncatedText ) {
+			$textIds[$text] = $truncatedTextIds[$truncatedText];
 		}
 
 		return $textIds;

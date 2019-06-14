@@ -42,7 +42,9 @@ interface TermIdsAcquirer {
 	 * attempting to restore any of those acquired IDs that might have been
 	 * deleted by another process before {@link acquireTermIds()} has returned.
 	 *
-	 * @return array returns ids of acquired terms in the store
+	 * @return int[] List of IDs of acquired terms in the store.
+	 * Due to limitations in the underlying store,
+	 * in rare cases the same ID might be returned for different terms.
 	 */
 	public function acquireTermIds( array $termsArray, $callback = null ): array;
 
