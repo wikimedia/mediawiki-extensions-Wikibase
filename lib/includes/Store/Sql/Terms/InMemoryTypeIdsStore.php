@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
  *
  * @license GPL-2.0-or-later
  */
-class InMemoryTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver {
+class InMemoryTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver, TypeIdsLookup {
 	private $types = [];
 	private $lastId = 0;
 
@@ -31,6 +31,15 @@ class InMemoryTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver {
 			}
 		}
 		return $types;
+	}
+
+	public function lookupTypeIds( array $types ): array {
+		$ids = [];
+		foreach ( $types as $type ) {
+			$ids[$type] = $this->types[$type] ?? null;
+		}
+
+		return $ids;
 	}
 
 }
