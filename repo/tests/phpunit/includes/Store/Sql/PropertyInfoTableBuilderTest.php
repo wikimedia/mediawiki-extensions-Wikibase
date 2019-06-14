@@ -140,6 +140,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			false,
 			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
 			'',
+			'',
+			'',
 			''
 		);
 

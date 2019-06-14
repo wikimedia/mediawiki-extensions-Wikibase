@@ -593,12 +593,16 @@ XML
 				'entityNamespaces' => [ 'item' => $itemNamespace ],
 				'repoDatabase' => 'itemdb',
 				'baseUri' => 'http://concept/',
+				'rdfNodeNamespacePrefix' => 'i',
+				'rdfPredicateNamespacePrefix' => 'i',
 				'interwikiPrefix' => 'iwiki',
 			],
 			'props' => [
 				'entityNamespaces' => [ 'property' => $propertyNamespace ],
 				'repoDatabase' => 'propdb',
 				'baseUri' => 'http://propconcept/',
+				'rdfNodeNamespacePrefix' => 'p',
+				'rdfPredicateNamespacePrefix' => 'p',
 				'interwikiPrefix' => 'pwiki',
 			],
 		];

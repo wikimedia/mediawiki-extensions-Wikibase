@@ -256,6 +256,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 					'itemdb',
 					[ 'item' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
 					'http://www.itemwiki.com/entity',
+					'',
+					'',
 					''
 				),
 				new EntitySource(
@@ -263,6 +265,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 					'propdb',
 					[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
 					'http://www.itemwiki.com/entity',
+					'',
+					'',
 					''
 				),
 			] ),
