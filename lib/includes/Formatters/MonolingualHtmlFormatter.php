@@ -4,6 +4,7 @@ namespace Wikibase\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
+use LanguageCode;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 
@@ -41,7 +42,7 @@ class MonolingualHtmlFormatter implements ValueFormatter {
 
 		return wfMessage( 'wikibase-monolingualtext',
 			wfEscapeWikiText( $text ),
-			wfEscapeWikiText( $languageCode ),
+			wfEscapeWikiText( LanguageCode::bcp47( $languageCode ) ),
 			wfEscapeWikiText( $languageName )
 		)->parse();
 	}
