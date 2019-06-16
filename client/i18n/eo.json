@@ -40,6 +40,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Vi bezonas esti ensalutinta",
 	"wikibase-linkitem-not-loggedin": "Vi bezonas esti ensalutinta en tiu ĉi vikio kaj en  [$1 centra datuma deponejo] por uzi tiun ĉi funkcion.",
 	"wikibase-linkitem-success-link": "La paĝoj estas sukcese interligitaj. Eron, kiu enhavas la ligilojn, vi povas trovi en nia [$1 centra datuma deponejo].",
+	"limitreport-entityaccesscount": "Nombro de ŝargitaj entoj de Vikibazo",
 	"wikibase-property-notfound": "Atributo $1 ne estas trovita.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}n",
 	"wikibase-rc-hide-wikidata-hide": "Kaŝi",

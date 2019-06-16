@@ -67,7 +67,7 @@
 	"apihelp-wbcreateredirect-description": "{{doc-apihelp-description|wbcreateredirect}}",
 	"apihelp-wbcreateredirect-summary": "{{doc-apihelp-summary|wbcreateredirect}}",
 	"apihelp-wbcreateredirect-param-from": "{{doc-apihelp-param|wbcreateredirect|from}}",
-	"apihelp-wbcreateredirect-param-to": "{{doc-apihelp-param|wbcreateredirect|to}}\n\nfor Indonesian: \nThe Entity ID that will be the redirect target (proper English)",
+	"apihelp-wbcreateredirect-param-to": "{{doc-apihelp-param|wbcreateredirect|to}}",
 	"apihelp-wbcreateredirect-param-bot": "{{doc-apihelp-param|wbcreateredirect|bot}}",
 	"apihelp-wbcreateredirect-example-1": "{{doc-apihelp-example|wbcreateredirect}}",
 	"apihelp-wbeditentity-description": "{{doc-apihelp-description|wbeditentity}}",
