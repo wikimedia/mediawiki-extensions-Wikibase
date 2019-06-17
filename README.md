@@ -1,3 +1,4 @@
+TEST
 - - -
 Introduction to Wikibase
 ====================
