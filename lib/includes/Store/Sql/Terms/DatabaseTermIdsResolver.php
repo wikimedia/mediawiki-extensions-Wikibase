@@ -50,15 +50,6 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		return $this->resolveGroupedTermIds( [ '' => $termIds ] )[''];
 	}
 
-	/*
-	 * Term data is first read from the replica; if that returns less rows than we asked for, then
-	 * there are some new rows in the master that were not yet replicated, and we fall back to the
-	 * master if allowed. As the internal relations of the term store never change (for example, a
-	 * term_in_lang row will never suddenly point to a different text_in_lang), a master fallback
-	 * should never be necessary in any other case. However, callers need to consider where they
-	 * got the list of term IDs they pass into this method from: if it’s from a replica, they may
-	 * still see outdated data overall.
-	 */
 	public function resolveGroupedTermIds( array $groupedTermIds ): array {
 		$groupedTerms = [];
 
@@ -82,12 +73,10 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 				'termCount' => count( $allTermIds ),
 			]
 		);
-		$replicaResult = $this->selectTerms( $this->getDbr(), $allTermIds );
-		$this->preloadTypes( $replicaResult );
-		$replicaTermIds = [];
+		$result = $this->selectTerms( $this->getDbr(), $allTermIds );
+		$this->preloadTypes( $result );
 
-		foreach ( $replicaResult as $row ) {
-			$replicaTermIds[] = $row->wbtl_id;
+		foreach ( $result as $row ) {
 			foreach ( $groupNamesByTermIds[$row->wbtl_id] as $groupName ) {
 				$this->addResultTerms( $groupedTerms[$groupName], $row );
 			}
