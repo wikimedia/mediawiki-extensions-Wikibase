@@ -71,6 +71,51 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOpLabel = new ChangeOpLabel( 'en', 'foo', $this->getTermValidatorFactory() );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpLabel->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$entity = $this->provideNewEntity();
+		$entity->setLabel( 'en', 'foo' );
+
+		$noChangeOpLabel1 = new ChangeOpLabel( 'en', 'foo', $this->getTermValidatorFactory() );
+		$noChangeOpLabel2 = new ChangeOpLabel( 'fr', null, $this->getTermValidatorFactory() );
+		$changeOpLabel = new ChangeOpLabel( 'de', 'bar', $this->getTermValidatorFactory() );
+
+		return [
+			[ // #1 - setting same label on same language
+				$entity,
+				$noChangeOpLabel1,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #2 - removing non-existing label
+				$entity,
+				$noChangeOpLabel2,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #3 - setting a label on a language to a new value
+				$entity,
+				$changeOpLabel,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpLabel, $expectedState ) {
+		$changeOpLabel->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpLabel->getState() );
+	}
+
 	public function validateProvider() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();

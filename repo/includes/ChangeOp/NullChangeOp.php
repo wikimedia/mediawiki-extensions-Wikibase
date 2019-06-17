@@ -11,6 +11,8 @@ use Wikibase\Summary;
  */
 class NullChangeOp implements ChangeOp {
 
+	private $state = self::STATE_NOT_APPLIED;
+
 	/**
 	 * @see ChangeOp::validate
 	 *
@@ -30,6 +32,7 @@ class NullChangeOp implements ChangeOp {
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		// no op
+		$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
 	}
 
 	/**
@@ -39,6 +42,10 @@ class NullChangeOp implements ChangeOp {
 	 */
 	public function getActions() {
 		return [];
+	}
+
+	protected function setState( $state ) {
+		$this->state = $state;
 	}
 
 }

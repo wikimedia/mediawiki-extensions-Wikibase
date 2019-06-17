@@ -19,6 +19,22 @@ use Wikibase\Summary;
 interface ChangeOp {
 
 	/**
+	 * The change op has been initialized and ready to be applied. {@link self::apply()} has not been called yet.
+	 */
+	const STATE_NOT_APPLIED = 'not_applied';
+
+	/**
+	 * The change op has applied changes to the {@link EntityDocument} as a result of calling {@link self::apply()}.
+	 */
+	const STATE_DOCUMENT_CHANGED = 'document_changed';
+
+	/**
+	 * The change op has detected that the {@link EntityDocument} is up-to-date with the change, and has not applied
+	 * any changes to it after calling {@link self::apply()}.
+	 */
+	const STATE_DOCUMENT_NOT_CHANGED = 'document_not_changed';
+
+	/**
 	 * Returns a list of actions, defined as EntityPermissionChecker::ACTION_ constants,
 	 * that the change op involves, so user permissions can be checked accordingly prior
 	 * to validating and/or applying the change op.
@@ -51,5 +67,11 @@ interface ChangeOp {
 	 *  same data was edited in the meantime.
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null );
+
+	/**
+	 * @return string one of:
+	 * 	{@link self::STATE_NOT_APPLIED}, {@link self::STATE_DOCUMENT_CHANGED} or {@link self::STATE_DOCUMENT_NOT_CHANGED}
+	 */
+	public function getState();
 
 }
