@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
+use MediaWiki\Block\AbstractBlock;
 use RequestContext;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -50,6 +51,31 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
 		$this->assertEntityMatchesFormData( $formData, $entity );
+	}
+
+	public function testExceptionWhenUserBlockedOnNamespace() {
+		$block = $this->getMockBuilder( AbstractBlock::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$block->expects( $this->once() )
+			->method( 'appliesToNamespace' )
+			->with( $this->isType( 'integer' ) )
+			->willReturn( true );
+		$block->method( 'isSitewide' )
+			->willReturn( false );
+		$block->method( 'getPermissionsError' )
+			->willReturn( [ 'foo' ] );
+
+		$user = $this->getMockBuilder( \User::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$user->method( 'getBlock' )
+			->willReturn( $block );
+		$user->method( 'isAllowed' )
+			->willReturn( true );
+
+		$this->setExpectedException( \UserBlockedError::class );
+		$this->executeSpecialPage( '', null, null, $user );
 	}
 
 	/**
