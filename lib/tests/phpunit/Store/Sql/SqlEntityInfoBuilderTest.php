@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 use InvalidArgumentException;
 use Psr\Log\NullLogger;
 use Title;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -202,7 +202,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [], '', '' ),
-			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION )
+			DataAccessSettingsTest::repositoryPrefixBasedFederation()
 		);
 	}
 
@@ -244,7 +244,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new UnusableEntitySource(),
-			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			$databaseName,
 			$repositoryName
 		);
@@ -260,7 +260,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [], '', '' ),
-			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			''
 		);
@@ -281,7 +281,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '' ),
-			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 
 		$entityInfo = $builder->collectEntityInfo( [ $itemId, $propertyId ], [] );
@@ -350,7 +350,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [], '', '' ),
-			new DataAccessSettings( 100, false, false, self::REPOSITORY_PREFIX_BASED_FEDERATION ),
+			DataAccessSettingsTest::repositoryPrefixBasedFederation(),
 			false,
 			'foo'
 		);
@@ -467,7 +467,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'testsource', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '' ),
-			new DataAccessSettings( 100, false, false, self::ENTITY_SOURCE_BASED_FEDERATION )
+			DataAccessSettingsTest::entitySourceBasedFederation()
 		);
 	}
 
