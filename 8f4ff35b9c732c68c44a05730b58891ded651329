@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f20f5212_f21e45c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 1,
+      "message": "This is no longer the case after the rebase, right?",
+      "revId": "8f4ff35b9c732c68c44a05730b58891ded651329",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0b9c74_4c076d1b",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 1,
+      "message": "`array` typehints (needs `\u003d null` too in that case, I guess)",
+      "range": {
+        "startLine": 168,
+        "startChar": 51,
+        "endLine": 168,
+        "endChar": 69
+      },
+      "revId": "8f4ff35b9c732c68c44a05730b58891ded651329",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

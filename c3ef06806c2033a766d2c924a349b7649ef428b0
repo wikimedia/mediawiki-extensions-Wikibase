@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e938fabc_5492e2b6",
+        "filename": "lib/includes/Store/Sql/Terms/InMemoryTermIdsStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 1,
+      "message": "I don’t think this does the right thing if $types is the empty array.",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 17
+      },
+      "revId": "c3ef06806c2033a766d2c924a349b7649ef428b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "508dbedd_5eee52dd",
+        "filename": "lib/includes/Store/Sql/Terms/InMemoryTermIdsStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 1,
+      "message": "Likewise, I think this incorrectly doesn’t filter anything if $languages is the empty array.",
+      "range": {
+        "startLine": 49,
+        "startChar": 10,
+        "endLine": 49,
+        "endChar": 19
+      },
+      "revId": "c3ef06806c2033a766d2c924a349b7649ef428b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d61c8ca_c8f8dce7",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 1,
+      "message": "If not null, only include…",
+      "revId": "c3ef06806c2033a766d2c924a349b7649ef428b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d69b1a4_afbbbd64",
+        "filename": "lib/includes/Store/Sql/Terms/TermIdsResolver.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 1,
+      "message": "If not null, only include…",
+      "revId": "c3ef06806c2033a766d2c924a349b7649ef428b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d217afa4_1dca4e3a",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:13:52Z",
+      "side": 0,
+      "message": "this is already removed in another change",
+      "revId": "5192fde5523af0861733d376b244bb257a8b07d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
