@@ -4,12 +4,14 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpQualifierRemove;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpQualifierRemove
@@ -79,6 +81,47 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		return $item;
+	}
+
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOpQualifierRemove = new ChangeOpQualifierRemove( 'GUID', 'snakHash' );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpQualifierRemove->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
+
+		$item = $this->newItemWithClaim( 'q345', $snak );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
+		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
+		$statement->getQualifiers()->addSnak( $newQualifier );
+
+		$changeOpQualifierRemove = new ChangeOpQualifierRemove( $guid, $newQualifier->getHash() );
+
+		return[
+			[ // #1 - removing an existing qualifier
+				$item,
+				$changeOpQualifierRemove,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply($entity, $changeOpQualifierRemoved, $expectedState ) {
+		$changeOpQualifierRemoved->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpQualifierRemoved->getState() );
 	}
 
 	public function testGetActions() {
