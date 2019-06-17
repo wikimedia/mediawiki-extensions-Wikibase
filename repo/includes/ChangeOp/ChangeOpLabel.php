@@ -64,10 +64,32 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @param TermList $labels
 	 */
 	private function updateLabels( TermList $labels ) {
+		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+			$oldLabel = $labels->getByLanguage( $this->languageCode );
+		} else {
+			$oldLabel = null;
+		}
+
 		if ( $this->label === null ) {
 			$labels->removeByLanguage( $this->languageCode );
 		} else {
 			$labels->setTextForLanguage( $this->languageCode, $this->label );
+		}
+
+		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+			$newLabel = $labels->getByLanguage( $this->languageCode );
+		} else {
+			$newLabel = null;
+		}
+
+		if (
+			( $newLabel !== null && $newLabel->equals( $oldLabel ) ) ||
+			( $oldLabel !== null && $oldLabel->equals( $newLabel ) ) ||
+			$oldLabel === $newLabel // both are null
+		) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
 		}
 	}
 

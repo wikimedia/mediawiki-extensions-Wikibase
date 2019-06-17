@@ -110,6 +110,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		$this->statementGuid = $this->guidGenerator->newGuid( $entityId );
 		$statements->addNewStatement( $this->snak, null, null, $this->statementGuid );
 		$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
+		$this->setState( self::STATE_DOCUMENT_CHANGED );
 	}
 
 	/**
@@ -134,8 +135,17 @@ class ChangeOpMainSnak extends ChangeOpBase {
 				. $this->snak->getPropertyId() );
 		}
 
+		$oldSnak = $statement->getMainSnak();
+
 		$statement->setMainSnak( $this->snak );
 		$this->updateSummary( $summary, null, '', $this->getClaimSummaryArgs( $this->snak ) );
+
+		$newSnak = $statement->getMainSnak();
+		if ( $newSnak->equals( $oldSnak ) ) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
+		}
 	}
 
 	/**
