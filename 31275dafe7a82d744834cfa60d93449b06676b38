@@ -194,6 +194,30 @@
       "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bca4c084_ddc971c4",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:09:07Z",
+      "side": 1,
+      "message": "\u003e I think I had in mind that, although this is a parameter here which calls for attention to escaping, it isn\u0027t really a user input parameter.\n\nThat makes sense to me – after all, Database::select() doesn’t fully escape the table or column names either: you’re not supposed to feed user input into them in the first place.",
+      "parentUuid": "f454c1e3_d0a260c7",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "31275dafe7a82d744834cfa60d93449b06676b38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
