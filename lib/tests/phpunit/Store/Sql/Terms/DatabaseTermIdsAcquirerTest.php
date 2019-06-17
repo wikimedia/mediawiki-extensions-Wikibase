@@ -408,6 +408,64 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds, $dbMaster );
 	}
 
+	public function testWithLongTexts() {
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$this->loadBalancer,
+			new InMemoryTypeIdsStore()
+		);
+
+		$termsArray = [
+			'label' => [
+				'en' => str_repeat( 'a', 255 ) . ' label',
+				'de' => str_repeat( 'a', 255 ) . ' label',
+				'fr' => str_repeat( 'á', 255 ) . ' label',
+			],
+			'description' => [
+				'en' => str_repeat( 'a', 255 ) . ' description',
+			],
+			'alias' => [
+				'en' => [
+					str_repeat( 'a', 255 ) . ' alias',
+					str_repeat( 'a', 255 ) . ' another alias',
+				]
+			]
+		];
+
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$textIdsCount = $this->db->selectRowCount( 'wbt_text' );
+
+		$this->assertCount(
+			6, // six term IDs, even though two will be identical
+			$acquiredTermIds
+		);
+		$this->assertCount(
+			5, // the two aliases were truncated into just one term
+			array_unique( $acquiredTermIds )
+		);
+		$this->assertSame(
+			2, // only two distinct texts, a... and á...
+			$textIdsCount
+		);
+	}
+
+	public function testWithLongTexts_doesNotSplitUtf8Bytes() {
+		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+			$this->loadBalancer,
+			new InMemoryTypeIdsStore()
+		);
+
+		$termsArray = [
+			'label' => [
+				'de' => str_repeat( 'a', 254 ) . 'ä', # 256 bytes
+			],
+		];
+
+		$dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$text = $this->db->selectField( 'wbt_text', 'wbx_text' );
+
+		$this->assertSame( str_repeat( 'a', 254 ), $text );
+	}
+
 	private function assertTermsArrayExistInDb( $termsArray, $typeIds, $db = null ) {
 		$db = $db ?? $this->db;
 
