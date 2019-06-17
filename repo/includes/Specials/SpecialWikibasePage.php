@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\MediaWikiServices;
 use SpecialPage;
 use UserBlockedError;
 use Wikibase\StringNormalizer;
@@ -79,12 +80,13 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	}
 
 	/**
-	 * Checks if user is blocked, and if he is blocked throws a UserBlocked.
+	 * Checks if user is blocked, and if blocked throws a UserBlocked.
 	 *
 	 * @throws UserBlockedError
 	 */
 	protected function checkBlocked() {
-		if ( $this->getUser()->isBlocked() ) {
+		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+		if ( $permissionManager->isBlockedFrom( $this->getUser(), $this->getPageTitle() ) ) {
 			throw new UserBlockedError( $this->getUser()->getBlock() );
 		}
 	}
