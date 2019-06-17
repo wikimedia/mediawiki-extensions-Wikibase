@@ -112,6 +112,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 		$qualifiers->addSnak( $this->snak );
 		//TODO: add the mainsnak as autocomment-arg & change messages
 		$this->updateSummary( $summary, 'add', '', $this->getSnakSummaryArgs( $this->snak ) );
+		$this->setState( self::STATE_DOCUMENT_CHANGED );
 	}
 
 	/**
@@ -127,9 +128,20 @@ class ChangeOpQualifier extends ChangeOpBase {
 		if ( $qualifiers->hasSnak( $this->snak ) ) {
 			throw new ChangeOpException( 'The statement has already a qualifier with hash ' . $this->snak->getHash() );
 		}
+
+		$oldSnak = $qualifiers->getSnak( $this->snakHash );
+
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$qualifiers->addSnak( $this->snak );
 		$this->updateSummary( $summary, 'update', '', $this->getSnakSummaryArgs( $this->snak ) );
+
+		$newSnak = $qualifiers->getSnak( $this->snakHash );
+
+		if ( $newSnak === $oldSnak ) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
+		}
 	}
 
 	/**

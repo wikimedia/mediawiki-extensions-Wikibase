@@ -95,6 +95,7 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 		if ( $summary !== null ) {
 			$summary->addAutoCommentArgs( 1 ); //atomic edit, only one reference changed
 		}
+		$this->setState( self::STATE_DOCUMENT_CHANGED );
 	}
 
 	/**

@@ -14,6 +14,8 @@ use Wikibase\Summary;
  */
 abstract class ChangeOpBase implements ChangeOp {
 
+	private $state = self::STATE_NOT_APPLIED;
+
 	/**
 	 * @param Summary|null $summary
 	 * @param string $action
@@ -37,6 +39,14 @@ abstract class ChangeOpBase implements ChangeOp {
 	 */
 	public function getActions() {
 		return [ EntityPermissionChecker::ACTION_EDIT ];
+	}
+
+	protected function setState( $state ) {
+		$this->state = $state;
+	}
+
+	public function getState() {
+		return $this->state;
 	}
 
 }
