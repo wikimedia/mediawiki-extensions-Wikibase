@@ -10,6 +10,7 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpBase;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
@@ -123,6 +124,59 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		$args[] = [ $changeOps, $language, 'newLabel', 'newDescription' ];
 
 		return $args;
+	}
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOps = new ChangeOps();
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOps->getState() );
+	}
+
+	public function changeOpsAndStatesProvider() {
+		$noChangeOp1 = $this->getMockBuilder( ChangeOpBase::class )
+			->setMethods( [ 'getState', 'validate', 'apply' ] )
+			->getMock();
+		$noChangeOp1->method( 'getState' )->willReturn( ChangeOp::STATE_DOCUMENT_NOT_CHANGED );
+
+		$noChangeOp2 = $this->getMockBuilder( ChangeOpBase::class )
+			->setMethods( [ 'getState', 'validate', 'apply' ] )
+			->getMock();
+		$noChangeOp2->method( 'getState' )->willReturn( ChangeOp::STATE_DOCUMENT_NOT_CHANGED );
+
+		$changeOp = $this->getMockBuilder( ChangeOpBase::class )
+			->setMethods( [ 'getState', 'validate', 'apply' ] )
+			->getMock();
+		$changeOp->method( 'getState' )->willReturn( ChangeOp::STATE_DOCUMENT_CHANGED );
+
+		return [
+			[ // #1 - no change ops
+				[],
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #2 - all internal change ops has document_not_changed state
+				[ $noChangeOp1, $noChangeOp2 ],
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #3 - some internal change ops has document_changed state
+				[ $changeOp, $noChangeOp2 ],
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpsAndStatesProvider
+	 */
+	public function testGetState_afterApply( array $internalChangeOps, $expectedState ) {
+		$changeOps = new ChangeOps();
+		$changeOps->add( $internalChangeOps );
+
+		$changeOps->apply(
+			$this->prophesize( EntityDocument::class )->reveal(),
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOps->getState() );
 	}
 
 	/**
