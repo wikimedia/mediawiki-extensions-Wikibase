@@ -52,7 +52,8 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			$settings->getSetting( 'maxSerializedEntitySize' ),
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION
+			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW
 		);
 
 		$builder = new PropertyInfoTableBuilder(
