@@ -90,7 +90,7 @@ class RebuildPropertyTerms extends Maintenance {
 		$fromId = $this->getOption( 'from-id' );
 
 		if ( $fromId !== null ) {
-			$pager->setPosition( (int)$fromId );
+			$pager->setPosition( (int)$fromId - 1 );
 		}
 
 		return $pager;
