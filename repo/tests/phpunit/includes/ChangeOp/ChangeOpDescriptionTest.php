@@ -71,6 +71,51 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOpDescription = new ChangeOpDescription( 'en', 'foo', $this->getTermValidatorFactory() );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpDescription->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$entity = $this->provideNewEntity();
+		$entity->setDescription( 'en', 'foo' );
+
+		$noChangeOpDescription1 = new ChangeOpDescription( 'en', 'foo', $this->getTermValidatorFactory() );
+		$noChangeOpDescription2 = new ChangeOpDescription( 'fr', null, $this->getTermValidatorFactory() );
+		$changeOpDescription = new ChangeOpDescription( 'de', 'bar', $this->getTermValidatorFactory() );
+
+		return [
+			[ // #1 - setting same description on same language
+				$entity,
+				$noChangeOpDescription1,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #2 - removing non-existing description
+				$entity,
+				$noChangeOpDescription2,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #3 - setting a Description on a language to a new value
+				$entity,
+				$changeOpDescription,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpDescription, $expectedState ) {
+		$changeOpDescription->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpDescription->getState() );
+	}
+
 	public function validateProvider() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
