@@ -90,6 +90,7 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 		$removedQualifier = $qualifiers->getSnak( $this->snakHash );
 		$qualifiers->removeSnakHash( $this->snakHash );
 		$this->updateSummary( $summary, 'remove', '', $this->getSnakSummaryArgs( $removedQualifier ) );
+		$this->setState( self::STATE_DOCUMENT_CHANGED );
 	}
 
 	/**

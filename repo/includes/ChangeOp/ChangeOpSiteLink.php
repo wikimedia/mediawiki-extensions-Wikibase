@@ -114,8 +114,10 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			if ( $siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
 				$this->updateSummary( $summary, 'remove', $this->siteId, $siteLinks->getBySiteId( $this->siteId )->getPageName() );
 				$siteLinks->removeLinkWithSiteId( $this->siteId );
+				$this->setState( self::STATE_DOCUMENT_CHANGED );
 			} else {
 				//TODO: throw error, or ignore silently?
+				$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
 			}
 		} else {
 			$commentArgs = [];
@@ -133,9 +135,17 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
 
+			$oldSiteLink = $siteLinks->getBySiteId( $this->siteId );
 			// FIXME: Use SiteLinkList::setNewSiteLink.
 			$siteLinks->removeLinkWithSiteId( $this->siteId );
 			$siteLinks->addNewSiteLink( $this->siteId, $pageName, $badges );
+			$newSiteLink = $siteLinks->getBySiteId( $this->siteId );
+
+			if( $newSiteLink->equals( $oldSiteLink ) ){
+				$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+			} else {
+				$this->setState( self::STATE_DOCUMENT_CHANGED );
+			}
 		}
 	}
 

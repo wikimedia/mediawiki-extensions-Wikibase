@@ -64,10 +64,32 @@ class ChangeOpDescription extends ChangeOpBase {
 	 * @param TermList $descriptions
 	 */
 	private function updateDescriptions( TermList $descriptions ) {
+		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
+			$oldDescripton = $descriptions->getByLanguage( $this->languageCode );
+		} else {
+			$oldDescripton = null;
+		}
+		
 		if ( $this->description === null ) {
 			$descriptions->removeByLanguage( $this->languageCode );
 		} else {
 			$descriptions->setTextForLanguage( $this->languageCode, $this->description );
+		}
+
+		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
+			$newDescription = $descriptions->getByLanguage( $this->languageCode );
+		} else {
+			$newDescription = null;
+		}
+
+		if (
+			( $newDescription !== null && $newDescription->equals( $oldDescripton ) ) ||
+			( $oldDescripton !== null && $oldDescripton->equals( $newDescription ) ) ||
+			$oldDescripton === $newDescription // both are null
+		) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
 		}
 	}
 

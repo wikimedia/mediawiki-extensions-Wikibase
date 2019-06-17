@@ -93,6 +93,13 @@ class ChangeOpAliases extends ChangeOpBase {
 		}
 
 		$aliases->setAliasesForLanguage( $this->languageCode, $newAliases );
+
+		$newAliases = $aliases->getByLanguage( $this->languageCode )->getAliases();
+		if ( array_diff( $newAliases, $oldAliases ) === [] ) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
+		}
 	}
 
 	/**
