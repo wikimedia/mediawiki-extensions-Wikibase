@@ -6,6 +6,7 @@ use Html;
 use HTMLForm;
 use OutputPage;
 use Status;
+use UserBlockedError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -93,6 +94,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 		$this->checkPermissions();
 		$this->checkBlocked();
+		$this->checkBlockedOnNamespace();
 		$this->checkReadOnly();
 
 		$this->parts = ( $subPage === '' ? [] : explode( '/', $subPage ) );
@@ -214,6 +216,17 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$title = $this->getEntityTitle( $entity->getId() );
 		$entityUrl = $title->getFullURL();
 		$this->getOutput()->redirect( $entityUrl );
+	}
+
+	/**
+	 * @throws UserBlockedError
+	 */
+	private function checkBlockedOnNamespace() {
+		$namespace = $this->entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
+		$block = $this->getUser()->getBlock();
+		if ( $block && $block->appliesToNamespace( $namespace ) ) {
+			throw new UserBlockedError( $block );
+		}
 	}
 
 }
