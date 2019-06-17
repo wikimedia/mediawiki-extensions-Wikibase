@@ -70,6 +70,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 
 		$removedSnak = $statement->getMainSnak();
 		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
+		$this->setState( self::STATE_DOCUMENT_CHANGED );
 	}
 
 	/**
