@@ -16,6 +16,8 @@ use Wikibase\Summary;
  */
 class ChangeOps implements ChangeOp {
 
+	private $state = self::STATE_NOT_APPLIED;
+
 	/**
 	 * @var ChangeOp[]
 	 */
@@ -71,8 +73,14 @@ class ChangeOps implements ChangeOp {
 	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
+		$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+
 		if ( count( $this->changeOps ) === 1 ) {
 			reset( $this->changeOps )->apply( $entity, $summary );
+
+			if ( $this->changeOps[0]->getState() === self::STATE_DOCUMENT_CHANGED ) {
+				$this->setState( self::STATE_DOCUMENT_CHANGED );
+			}
 		} elseif ( count( $this->changeOps ) === 0 ) {
 			return;
 		} else {
@@ -81,6 +89,10 @@ class ChangeOps implements ChangeOp {
 				// here, as this loop cannot know how to combine summaries like "removed A" and
 				// "added B" to a still meaningful summary. "Updated A, B" would be wrong.
 				$changeOp->apply( $entity, null );
+
+				if ( $changeOp->getState() === self::STATE_DOCUMENT_CHANGED ) {
+					$this->setState( self::STATE_DOCUMENT_CHANGED );
+				}
 			}
 			if ( $summary ) {
 				$summary->setAction( 'update' );
@@ -128,6 +140,14 @@ class ChangeOps implements ChangeOp {
 			},
 			[]
 		) );
+	}
+
+	protected function setState( $state ) {
+		$this->state = $state;
+	}
+
+	public function getState() {
+		return $this->state;
 	}
 
 }

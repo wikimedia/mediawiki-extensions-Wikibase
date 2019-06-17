@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
 
 /**
@@ -37,6 +38,36 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 
 	private function expectNoMethodWillBeEverCalledOn( PHPUnit_Framework_MockObject_MockObject $entityMock ) {
 		$entityMock->expects( $this->never() )->method( self::anything() );
+	}
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$nullChangeOp = new NullChangeOp();
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $nullChangeOp->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$nullChangeOp = new nullChangeOp();
+
+		/** @var EntityDocument $entityDocument */
+		$entityDocument = $this->getMock( EntityDocument::class );
+
+		return [
+			[ // #0
+				$entityDocument,
+				$nullChangeOp,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $nullChangeOp, $expectedState ) {
+		$nullChangeOp->apply( $entity );
+
+		$this->assertSame( $expectedState, $nullChangeOp->getState() );
 	}
 
 	public function testGetActions() {

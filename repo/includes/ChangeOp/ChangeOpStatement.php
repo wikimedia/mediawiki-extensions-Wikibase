@@ -121,6 +121,15 @@ class ChangeOpStatement extends ChangeOpBase {
 		}
 
 		$this->updateSummary( $summary, $oldIndex === null ? 'create' : 'update' );
+		if (
+			( $this->index !== null && $this->index === $oldIndex ) ||
+			( $oldIndex !== null && $oldIndex === $this->index ) ||
+			$oldIndex === $this->index // both are null
+		) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
+		}
 	}
 
 	/**
@@ -159,6 +168,7 @@ class ChangeOpStatement extends ChangeOpBase {
 				$oldIndex = $index;
 				$oldStatement = $statement;
 				$statements->removeStatementsWithGuid( $guid );
+				$this->setState( self::STATE_DOCUMENT_CHANGED );
 				break;
 			}
 		}

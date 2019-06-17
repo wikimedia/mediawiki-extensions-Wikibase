@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpStatement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -28,6 +29,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpStatement
@@ -294,6 +296,49 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 			$this->mockProvider->getMockSnakValidator(),
 			$index
 		);
+	}
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$snak = new PropertyNoValueSnak( 67573284 );
+		$changeOpDescription = $this->newChangeOpStatement( new Statement( $snak ), null );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpDescription->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$snak = new PropertyNoValueSnak( 67573284 );
+		$item = $this->makeNewItemWithStatement( 'Q777', $snak );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+
+		$changeOpStatement = $this->newChangeOpStatement( $statement );
+		$changeOpStatement1 = $this->newChangeOpStatement( $statement, 1 );
+
+		return [
+			[ // #0 - setting a new statement with null index
+				$item,
+				$changeOpStatement,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #1 - setting a new statement with new index
+				$item,
+				$changeOpStatement1,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpStatement, $expectedState ) {
+		$changeOpStatement->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpStatement->getState() );
 	}
 
 	public function provideInvalidApply() {
