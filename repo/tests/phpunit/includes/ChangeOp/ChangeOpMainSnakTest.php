@@ -20,6 +20,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpMainSnak
@@ -89,6 +90,18 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	/**
+	 * @return Item
+	 */
+	private function provideNewEntity() {
+		$item = new Item( new ItemId( 'Q23' ) );
+		$item->setDescription( 'en', 'DUPE' );
+		$item->setLabel( 'en', 'DUPE' );
+		$item->setDescription( 'fr', 'DUPE' );
+
+		return $item;
+	}
+
 	public function provideChangeOps() {
 		$snak = $this->makeSnak( 'P5', 'test' );
 		$args = [];
@@ -127,6 +140,61 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertEquals( $expected, $statement->getMainSnak()->getDataValue() );
 		}
+	}
+
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$snak = $this->makeSnak( 'P5', 'test' );
+
+		$changeOpMainSnak = $this->newChangeOpMainSnak( 'guid', $snak );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpMainSnak->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$snak = $this->makeSnak( 'P50', 'test1' );
+		$item = $this->makeNewItemWithClaim('Q111', $snak);
+		$statements = $item->getStatements()->toArray();
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
+
+		$snak1 = $this->makeSnak( 'P50', 'test2' );
+
+		$snak2 = $this->makeSnak( 'P50', 'test3' );
+
+		$noChangeOpMainSnak = $this->newChangeOpMainSnak( $guid, $snak);
+		$changeOpMainSnak1 = $this->newChangeOpMainSnak( $guid, $snak1);
+		$changeOpMainSnak2 = $this->newChangeOpMainSnak( '', $snak2 );
+
+		return [
+			[ // #0 - set same snak with same $guid
+				$item,
+				$noChangeOpMainSnak,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #1 - set a new snak
+				$item,
+				$changeOpMainSnak1,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #2 - set a new snak on not existing statement (This should create a statement before setting the snak)
+				$item,
+				$changeOpMainSnak2,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpMainSnak, $expectedState ) {
+		$changeOpMainSnak->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpMainSnak->getState() );
 	}
 
 	public function provideInvalidApply() {

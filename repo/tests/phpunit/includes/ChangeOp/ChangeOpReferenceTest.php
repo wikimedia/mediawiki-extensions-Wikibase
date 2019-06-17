@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpReference;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -20,6 +21,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpReference
@@ -246,6 +248,93 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), 'Reference not found' );
 	}
 
+
+	public function testGetState_beforeApplyReferenceSet_returnsNotApplied() {
+		$changeOpReference = new ChangeOpReference( 'GUID', new Reference(), '', $this->mockProvider->getMockSnakValidator() );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpReference->getState() );
+	}
+
+	private function newItemWithReference( $snak ) {
+		$item = $this->newItem( $snak );
+
+		$snaks = new SnakList();
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'existingReference' ) );
+		$reference = new Reference( $snaks );
+
+		$statement =  $item->getStatements()->toArray()[0];
+		$statement->getReferences()->addReference( $reference );
+
+		return $item;
+	}
+	public function changeOpAndStatesProvider() {
+		$item1 = $this->newItemWithReference( new PropertyValueSnak( 2754236, new StringValue( 'test' ) ) );
+		$item2 = $this->newItemWithReference( new PropertyValueSnak( 2754236, new StringValue( 'test' ) ) );
+		$item3 = $this->newItemWithReference( new PropertyValueSnak( 2754236, new StringValue( 'test' ) ) );
+
+		$snaks = new SnakList();
+		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newReference' ) );
+		$newReference = new Reference( $snaks );
+
+		$statement =  $item2->getStatements()->toArray()[0];
+		$changeOpReference = new ChangeOpReference(
+			$statement->getGuid(),
+			$newReference,
+			'',
+			$this->mockProvider->getMockSnakValidator()
+		);
+
+		$statement =  $item2->getStatements()->toArray()[0];
+		$references = $statement->getReferences();
+		$reference = iterator_to_array( $references->getIterator() )[0];
+		$changeOpReference1 = new ChangeOpReference(
+			$statement->getGuid(),
+			$newReference,
+			$reference->getHash(),
+			$this->mockProvider->getMockSnakValidator()
+		);
+
+		$statement =  $item3->getStatements()->toArray()[0];
+		$references = $statement->getReferences();
+		$reference = iterator_to_array( $references->getIterator() )[0];
+		$changeOpReference3 = new ChangeOpReference(
+			$statement->getGuid(),
+			$reference,
+			$reference->getHash(),
+			$this->mockProvider->getMockSnakValidator(),
+			1
+		);
+
+		return [
+			[ // #0 - adding a new reference
+				$item1,
+				$changeOpReference,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #1 - updating existing reference
+				$item2,
+				$changeOpReference1,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #2 - updating index of existing reference
+				$item3,
+				$changeOpReference3,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpReference, $expectedState ) {
+		$changeOpReference->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpReference->getState() );
+	}
 	/**
 	 * @param Snak $snak
 	 *
