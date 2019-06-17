@@ -46,6 +46,30 @@
       "revId": "a980ed356c344104fdb93848d57645ad7df88094",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f47d69e_b1353b21",
+        "filename": "data-access/tests/phpunit/DataAccessSettingsTestDoubleFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-17T17:25:55Z",
+      "side": 1,
+      "message": "I’m trying to wrap my head around this, but it’s not working very well :D\n\nI think this would make more sense if DataAccessSettings was an interface, and the current class was one implementation (perhaps called StaticDataAccessSettings), but there could also be other implementations – for example, the current class is usually initialized with the same snippet of $settings-\u003eget( \u0027four settings for four constructor arguments\u0027 ), so an alternative implementation could just accept a single Settings object and deduplicate that logic.\n\nBut even then, I don’t see the point of mocking the interface when a perfectly suitable real implementation is already available (StaticDataAccessSettings). Unless, perhaps, you want to ensure that only certain settings are accessed, and throw an exception if any other getter is called?",
+      "parentUuid": "56083f64_3966cbe8",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 92
+      },
+      "revId": "a980ed356c344104fdb93848d57645ad7df88094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
