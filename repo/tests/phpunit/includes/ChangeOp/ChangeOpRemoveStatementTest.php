@@ -5,12 +5,14 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpRemoveStatement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpRemoveStatement
@@ -68,6 +70,43 @@ class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNotEmpty( $changeOp->getGuid() );
 		$statements = $item->getStatements();
 		$this->assertEquals( $expected, $statements->getFirstStatementWithGuid( $changeOp->getGuid() ) );
+	}
+
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOpRemoveStatement = new ChangeOpRemoveStatement( 'GUID' );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpRemoveStatement->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
+		$item = $this->newItemWithClaim('q234', $snak );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+
+		$changeOpRemoveStatement = new ChangeOpRemoveStatement($statement->getGuid() );
+
+		return [
+			[ // #1 - removing existing statement
+				$item,
+				$changeOpRemoveStatement,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpRemoveStatement, $expectedState ) {
+		$changeOpRemoveStatement->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpRemoveStatement->getState() );
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {

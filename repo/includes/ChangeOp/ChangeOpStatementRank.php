@@ -72,6 +72,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 
 		$oldRank = $statement->getRank();
 		$statement->setRank( $this->rank );
+		$newRank = $statement->getRank();
 		$this->updateSummary( $summary, null, '', $this->getSnakSummaryArgs( $statement->getMainSnak() ) );
 
 		if ( $summary !== null ) {
@@ -82,6 +83,16 @@ class ChangeOpStatementRank extends ChangeOpBase {
 					$statementRankSerializer->serialize( $this->rank )
 				]
 			);
+		}
+
+		if (
+			( $newRank !== null && $newRank === $oldRank ) ||
+			( $oldRank !== null && $oldRank === $newRank ) ||
+			$oldRank === $newRank // both are null
+		) {
+			$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+		} else {
+			$this->setState( self::STATE_DOCUMENT_CHANGED );
 		}
 	}
 

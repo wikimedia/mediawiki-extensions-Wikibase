@@ -114,8 +114,10 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			if ( $siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
 				$this->updateSummary( $summary, 'remove', $this->siteId, $siteLinks->getBySiteId( $this->siteId )->getPageName() );
 				$siteLinks->removeLinkWithSiteId( $this->siteId );
+				$this->setState( self::STATE_DOCUMENT_CHANGED );
 			} else {
 				//TODO: throw error, or ignore silently?
+				$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
 			}
 		} else {
 			$commentArgs = [];
@@ -132,10 +134,30 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			$badges = $this->applyBadges( $siteLinks, $action, $commentArgs );
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
+			if ( $siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
+				$oldSiteLink = $siteLinks->getBySiteId( $this->siteId );
+			} else {
+				$oldSiteLink = null;
+			}
 
 			// FIXME: Use SiteLinkList::setNewSiteLink.
 			$siteLinks->removeLinkWithSiteId( $this->siteId );
 			$siteLinks->addNewSiteLink( $this->siteId, $pageName, $badges );
+
+			if ( $siteLinks->hasLinkWithSiteId( $this->siteId ) ) {
+				$newSiteLink = $siteLinks->getBySiteId( $this->siteId );
+			} else {
+				$newSiteLink = null;
+			}
+
+			if ( ( $newSiteLink !== null && $newSiteLink->equals( $oldSiteLink ) ) ||
+				( $oldSiteLink !== null && $oldSiteLink->equals( $newSiteLink ) ) ||
+				$newSiteLink === $oldSiteLink
+			) {
+				$this->setState( self::STATE_DOCUMENT_NOT_CHANGED );
+			} else {
+				$this->setState( self::STATE_DOCUMENT_CHANGED );
+			}
 		}
 	}
 

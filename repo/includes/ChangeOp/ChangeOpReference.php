@@ -92,6 +92,9 @@ class ChangeOpReference extends ChangeOpBase {
 	 * - a new reference gets added when $referenceHash is empty and $reference is set
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 *
+	 * If $reference->getHash() is same as $referenceHash and $index is not changed,
+	 * this will throw ChangeOpException
+	 *
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
@@ -123,6 +126,13 @@ class ChangeOpReference extends ChangeOpBase {
 		}
 
 		$statement->setReferences( $references );
+
+		// This change op either adds a new reference, or changes an existing reference
+		// (by changing either its contents or its index or both).
+		// The only case that might cause no change conceptually is trying to update
+		// an existing reference with same exact content (exact calculated hash) without
+		// changing its index. This case is guarded against by throwing a ChangeOpException
+		$this->setState( self::STATE_DOCUMENT_CHANGED );
 	}
 
 	/**
@@ -163,6 +173,7 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new ChangeOpException( 'The statement has already a reference with hash '
 			. $this->reference->getHash() . ' and index (' . $currentIndex . ') is not changed' );
 		}
+
 		$references->removeReferenceHash( $this->referenceHash );
 		$references->addReference( $this->reference, $this->index );
 		$this->updateSummary( $summary, 'set' );

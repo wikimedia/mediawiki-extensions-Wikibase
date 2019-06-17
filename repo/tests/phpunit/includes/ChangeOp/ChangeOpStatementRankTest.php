@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpStatementRank;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -11,6 +12,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpStatementRank
@@ -76,6 +78,48 @@ class ChangeOpStatementRankTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedRank, $rank, "No reference with expected hash" );
 	}
 
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOpDescription = new ChangeOpStatementRank( 'GUID', 123);
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpDescription->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
+		$item = $this->newItemWithClaim( 'q123', $snak );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$rank = 1;
+		$newRank = 2;
+		$noChangeOpStatementRank = new ChangeOpStatementRank( $statement->getGuid(), $rank );
+		$ChangeOpstatementRank = new ChangeOpStatementRank( $statement->getGuid(), $newRank );
+
+		return [
+			[ // #0 - setting already existing rank on statement
+				$item,
+				$noChangeOpStatementRank,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #1 - adding a rank on a statement
+				$item,
+				$ChangeOpstatementRank,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply($entity, $changeOpStatementRank, $expectedState ) {
+		$changeOpStatementRank->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpStatementRank->getState() );
+	}
 	private function newItemWithClaim( $itemIdString, $mainSnak ) {
 		$item = new Item( new ItemId( $itemIdString ) );
 

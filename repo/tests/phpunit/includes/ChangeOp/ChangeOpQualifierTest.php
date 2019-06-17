@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpQualifier;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -19,6 +20,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpQualifier
@@ -144,6 +146,54 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 		$statement = reset( $statements );
 		$qualifiers = $statement->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), 'Qualifier not found' );
+	}
+
+	/**
+	 * @dataProvider changeOpAddProvider
+	 */
+
+	public function testGetState_beforeApply_returnsNotApplied( Item $item, ChangeOpQualifier $changeOpQualifier) {
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpQualifier->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
+		$item = $this->newItem( $snak );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$statementGuid = $statement->getGuid();
+		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
+		$snakHash = $newQualifier->getHash();
+		$changedQualifier = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
+
+		$noChangeopQualifier = new ChangeOpQualifier( $statementGuid, $newQualifier, '', $this->mockProvider->getMockSnakValidator() );
+		$changeOpQualifier = new ChangeOpQualifier( $statementGuid, $changedQualifier, $snakHash, $this->mockProvider->getMockSnakValidator() );
+
+		return [
+			[ // #0 - setting new  Qualifier
+				$item,
+				$noChangeopQualifier,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #1 - Changing existing Qualifier
+				$item,
+				$changeOpQualifier,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply($entity, $changeOpQualifier, $expectedState ) {
+		$changeOpQualifier->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpQualifier->getState() );
 	}
 
 	/**
