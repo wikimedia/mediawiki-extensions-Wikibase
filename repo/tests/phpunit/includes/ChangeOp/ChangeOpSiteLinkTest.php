@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -128,6 +129,55 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 			$expectedSiteLinks,
 			array_values( $item->getSiteLinkList()->toArray() )
 		);
+	}
+
+
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$changeOpSiteLink = new ChangeOpSiteLink( 'en', 'foo' );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpSiteLink->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', [ new ItemId( 'Q149' ) ] );
+		$existingSiteLinks = [ $enSiteLink ];
+
+		$item = new Item();
+		$item->setSiteLinkList( new SiteLinkList( $existingSiteLinks ) );
+
+		$changeOpSiteLink1 = new ChangeOpSiteLink( 'plwiki', 'Berlin' );
+		$changeOpSiteLink2 = new ChangeOpSiteLink( 'enwiki', null );
+		$noChangeOpSiteLink = new ChangeOpSiteLink( 'de', null );
+
+		return [
+			[ // #0 - setting a siteLink
+				$item,
+				$changeOpSiteLink1,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #1 - removing a siteLink
+				$item,
+				$changeOpSiteLink2,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			],
+			[ // #2 - removing not existing sitelink
+				$item,
+				$noChangeOpSiteLink,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( $entity, $changeOpDescription, $expectedState ) {
+		$changeOpDescription->apply(
+			$entity,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpDescription->getState() );
 	}
 
 	public function testGivenNoSitelinkOnSiteAndBadgeChangeRequested_validateReturnsError() {

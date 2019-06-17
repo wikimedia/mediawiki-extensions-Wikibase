@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpAliases;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Content\EntityInstanceHolder;
@@ -11,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpAliases
@@ -103,6 +105,57 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertEquals( $expectedAliases, $fingerprint->getAliasGroup( 'en' )->getAliases() );
 		}
+	}
+
+	/**
+	 *
+	 */
+	public function testGetState_beforeApply_returnsNotApplied() {
+		$enAliases = [ 'en-alias1', 'en-alias2', 'en-alias3' ];
+		$changeOpLabel = new ChangeOpAliases( 'en', $enAliases, 'add', $this->getTermValidatorFactory() );
+
+		$this->assertSame( ChangeOp::STATE_NOT_APPLIED, $changeOpLabel->getState() );
+	}
+
+	public function changeOpAndStatesProvider() {
+		$existingEnAliases = [ 'en-existingAlias1', 'en-existingAlias2' ];
+		$itemContent = new ItemContent( new EntityInstanceHolder( new Item() ) );
+		$item = $itemContent->getEntity();
+		$item->setAliases( 'en', $existingEnAliases );
+
+		$nochangeOpAliases1 = new ChangeOpAliases( 'en', $existingEnAliases, 'add', $this->getTermValidatorFactory() );
+		$nochangeOpAliases2 = new ChangeOpAliases( 'en', [ 'foo' ], 'remove', $this->getTermValidatorFactory() );
+		$changeOpAliases = new ChangeOpAliases( 'de', [ 'bar' ], 'set', $this->getTermValidatorFactory() );
+
+		return [
+			[ // #1 - adding already existing aliasGroup on same language
+				$item,
+				$nochangeOpAliases1,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #2 - removing non-existing aliasGroup
+				$item,
+				$nochangeOpAliases2,
+				ChangeOp::STATE_DOCUMENT_NOT_CHANGED
+			],
+			[ // #3 - setting aliasGroup on a language to a new value
+				$item,
+				$changeOpAliases,
+				ChangeOp::STATE_DOCUMENT_CHANGED
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider changeOpAndStatesProvider
+	 */
+	public function testGetState_afterApply( Item $item, $changeOpAliases, $expectedState ) {
+		$changeOpAliases->apply(
+			$item,
+			$this->prophesize( Summary::class )->reveal()
+		);
+
+		$this->assertSame( $expectedState, $changeOpAliases->getState() );
 	}
 
 	public function validateProvider() {
