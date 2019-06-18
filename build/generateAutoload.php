@@ -27,6 +27,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 			'data-access',
 			[ 'src' ],
 			[
+				'tests/phpunit/DataAccessSettingsTest.php',
 				'tests/phpunit/EntityPrefetcherSpy.php',
 				'tests/phpunit/FakePrefetchingTermLookup.php',
 			]
