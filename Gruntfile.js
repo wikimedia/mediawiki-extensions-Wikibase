@@ -19,7 +19,8 @@ module.exports = function ( grunt ) {
 				'!view/lib/**',
 				'!node_modules/**',
 				'!vendor/**',
-				'!extensions/**'
+				'!extensions/**',
+				'!client/data-bridge/**'
 			]
 		},
 		stylelint: {
@@ -30,7 +31,8 @@ module.exports = function ( grunt ) {
 				'!view/lib/**',
 				'!node_modules/**',
 				'!vendor/**',
-				'!extensions/**'
+				'!extensions/**',
+				'!client/data-bridge/**'
 			]
 		},
 		banana: {
