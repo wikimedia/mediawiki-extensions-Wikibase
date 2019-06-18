@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d60f72da_f5a2f1a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-18T12:31:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f20f5212_f21e45c9",
+      "revId": "8f4ff35b9c732c68c44a05730b58891ded651329",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c0b9c74_4c076d1b",
         "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsResolver.php",
         "patchSetId": 10
