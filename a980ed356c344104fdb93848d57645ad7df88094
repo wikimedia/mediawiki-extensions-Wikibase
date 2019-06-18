@@ -70,6 +70,30 @@
       "revId": "a980ed356c344104fdb93848d57645ad7df88094",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28b2db5f_42a7c4f7",
+        "filename": "data-access/tests/phpunit/DataAccessSettingsTestDoubleFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-18T09:09:53Z",
+      "side": 1,
+      "message": "oh that\u0027s a left-over that I should\u0027ve removed .. after the previous discussion that this is more of a value object here than an entity or service, then yes this comment should be removed as there\u0027s no need to provide mocking facility around this, and tests can just use the class directly to setup their tests and assertions.\n\nSorry about the confusion I created by forgetting to remove this comment.",
+      "parentUuid": "4f47d69e_b1353b21",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 92
+      },
+      "revId": "a980ed356c344104fdb93848d57645ad7df88094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
