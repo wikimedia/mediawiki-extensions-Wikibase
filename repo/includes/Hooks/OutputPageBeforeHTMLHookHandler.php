@@ -153,6 +153,10 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param string &$html
 	 */
 	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
+		if ( !$out->isArticle() ) {
+			return;
+		}
+
 		$html = $this->replacePlaceholders( $out, $html );
 		$this->addJsUserLanguages( $out );
 		$html = $this->showOrHideEditLinks( $out, $html );
