@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a31c6b15_5e21a847",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-18T18:52:22Z",
+      "side": 1,
+      "message": "Not true, ignore that",
+      "parentUuid": "7eb4dab2_5ade7935",
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ff6a926_c3fb5354",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 7
