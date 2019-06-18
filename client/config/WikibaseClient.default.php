@@ -122,6 +122,7 @@ return call_user_func( function() {
 
 		'useEntitySourceBasedFederation' => false,
 		'entitySources' => [],
+		'dataBridgeEnabled' => false,
 
 		/**
 		 * @note This config option is primarily added for Wikidata transition use-case and can be
