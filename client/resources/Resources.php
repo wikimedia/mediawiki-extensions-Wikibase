@@ -32,6 +32,7 @@ return call_user_func( function() {
 
 		'wikibase.client.data-bridge.init' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase.client.data-bridge.init.js'
 			],
 		],
 
