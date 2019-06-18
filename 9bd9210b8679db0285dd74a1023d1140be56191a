@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb633290_6b647e7c",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-06-18T19:43:48Z",
+      "side": 1,
+      "message": "Again, the only method of this we are even using is $this-\u003edataAccessSettings-\u003euseEntitySourceBasedFederation(). Why pass the whole object?",
+      "revId": "9bd9210b8679db0285dd74a1023d1140be56191a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
