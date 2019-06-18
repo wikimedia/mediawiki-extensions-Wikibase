@@ -6,6 +6,7 @@ use OutputPage;
 use Title;
 use User;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later
@@ -18,8 +19,14 @@ class BeforePageDisplayHandler {
 	 */
 	private $namespaceChecker;
 
-	public function __construct( NamespaceChecker $namespaceChecker ) {
+	/**
+	 * @var SettingsArray
+	 */
+	protected $settings;
+
+	public function __construct( NamespaceChecker $namespaceChecker, SettingsArray $settings ) {
 		$this->namespaceChecker = $namespaceChecker;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -51,6 +58,10 @@ class BeforePageDisplayHandler {
 			// Add the JavaScript which lazy-loads the link item widget
 			// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 			$out->addModules( 'wikibase.client.linkitem.init' );
+		}
+
+		if ( $this->settings->getSetting( 'dataBridgeEnabled' ) ) {
+			$out->addModules( 'wikibase.client.data-bridge.init' );
 		}
 	}
 

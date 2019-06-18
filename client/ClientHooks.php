@@ -182,7 +182,8 @@ final class ClientHooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
-		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker, $settings );
 
 		$actionName = Action::getActionName( $skin->getContext() );
 		$beforePageDisplayHandler->addModules( $out, $actionName );
