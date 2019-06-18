@@ -57,6 +57,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	private function newOutputPage() {
 		$outputPage = new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
 		$outputPage->setTitle( new Title() );
+		$outputPage->setArticleFlag( true );
 
 		return $outputPage;
 	}
@@ -109,6 +110,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			'wikibase-view-chunks',
 			[ '$1' => [ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ] ]
 		);
+		$out->setArticleFlag( true );
 
 		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
 
@@ -117,6 +119,43 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
 
 		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
+	}
+
+	public function testOutputPageBeforeHTMLHookHandlerShouldNotWorkOnNonArticles() {
+		$out = $this->newOutputPage();
+		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
+		$userLanguageLookup->expects( $this->never() )
+			->method( 'getUserSpecifiedLanguages' );
+		$userLanguageLookup->expects( $this->never() )
+			->method( 'getAllUserLanguages' );
+
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
+		$itemId = new ItemId( 'Q1' );
+
+		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
+			TemplateFactory::getDefaultInstance(),
+			$userLanguageLookup,
+			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
+			$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class ),
+			$languageNameLookup,
+			$outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class ),
+			new EntityFactory( [] ),
+			'',
+			$this->editablity
+		);
+
+		$html = '';
+		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
+		$out->setArticleFlag( false );
+
+		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
+
+		// Verify the wbUserSpecifiedLanguages JS variable
+		$jsConfigVars = $out->getJsConfigVars();
+		$this->assertFalse( isset( $jsConfigVars['wbUserSpecifiedLanguages'] ) );
 	}
 
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
@@ -141,6 +180,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$out = $this->newOutputPage();
 		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
+		$out->setArticleFlag( true );
 
 		$html = '$1';
 		$handler->doOutputPageBeforeHTML( $out, $html );
@@ -172,6 +212,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$out = $this->newOutputPage();
 		$out->setProperty( TermboxView::TERMBOX_MARKUP, $expectedHtml );
 		$out->setProperty( 'wikibase-view-chunks', [ $placeholder => [ TermboxView::TERMBOX_PLACEHOLDER ] ] );
+		$out->setArticleFlag( true );
 
 		$html = $placeholder;
 		$handler->doOutputPageBeforeHTML( $out, $html );
