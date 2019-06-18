@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7eb4dab2_5ade7935",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-18T18:50:54Z",
+      "side": 1,
+      "message": "I just realized that this is a repo setting and we can\u0027t just use it in client",
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ff6a926_c3fb5354",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-18T18:50:54Z",
+      "side": 1,
+      "message": "this is totally redundant with the test below",
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a5b054e_395a991f",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-18T18:50:54Z",
+      "side": 1,
+      "message": "this tests all schema migration stages",
+      "range": {
+        "startLine": 396,
+        "startChar": 45,
+        "endLine": 396,
+        "endChar": 69
+      },
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
