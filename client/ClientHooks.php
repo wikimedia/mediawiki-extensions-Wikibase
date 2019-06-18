@@ -181,8 +181,11 @@ final class ClientHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
-		$beforePageDisplayHandler = new BeforePageDisplayHandler( $namespaceChecker );
+		$clientInstance = WikibaseClient::getDefaultInstance();
+		$beforePageDisplayHandler = new BeforePageDisplayHandler(
+			$clientInstance->getNamespaceChecker(),
+			$clientInstance->getSettings()->getSetting( 'dataBridgeEnabled' )
+		);
 
 		$actionName = Action::getActionName( $skin->getContext() );
 		$beforePageDisplayHandler->addModules( $out, $actionName );
