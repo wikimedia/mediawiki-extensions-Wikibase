@@ -4,4 +4,10 @@ $( function () {
 	} );
 	// eslint-disable-next-line no-console
 	console.log( 'Number of links potentially usable for wikidata bridge: ' + $validLinks.length );
+
+	if ( $validLinks.length > 0 ) {
+		mw.loader.using( [ 'wikibase.client.data-bridge.app' ] ).then( function () {
+			/* FIXME */
+		} );
+	}
 } );

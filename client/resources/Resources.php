@@ -36,6 +36,14 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.client.data-bridge.app' => [
+			'localBasePath' => __DIR__ . '/../data-bridge/dist',
+			'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
+			'scripts' => [
+				'data-bridge.app.js'
+			],
+		],
+
 		'wikibase.client.currentSite' => $moduleTemplate + [
 			'class' => SiteModule::class
 		],
