@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eccced8d_66c8ec65",
+        "filename": "client/resources/wikibase.client.data-bridge.init.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-18T14:28:24Z",
+      "side": 1,
+      "message": "I wouldn’t really call jQuery “vanilla ES5 javascript” :) instead, you could use something like `document.querySelectorAll( \u0027a[href]\u0027 )`.",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "a52ae8701c1a72b24876acbb2c4dd0f77a51c51b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
