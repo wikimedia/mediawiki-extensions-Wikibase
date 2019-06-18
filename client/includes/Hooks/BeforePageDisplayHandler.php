@@ -18,8 +18,14 @@ class BeforePageDisplayHandler {
 	 */
 	private $namespaceChecker;
 
-	public function __construct( NamespaceChecker $namespaceChecker ) {
+	/**
+	 * @var bool
+	 */
+	private $dataBridgeEnabled;
+
+	public function __construct( NamespaceChecker $namespaceChecker, $dataBridgeEnabled ) {
 		$this->namespaceChecker = $namespaceChecker;
+		$this->dataBridgeEnabled = $dataBridgeEnabled;
 	}
 
 	/**
@@ -51,6 +57,10 @@ class BeforePageDisplayHandler {
 			// Add the JavaScript which lazy-loads the link item widget
 			// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 			$out->addModules( 'wikibase.client.linkitem.init' );
+		}
+
+		if ( $this->dataBridgeEnabled ) {
+			$out->addModules( 'wikibase.client.data-bridge.init' );
 		}
 	}
 
