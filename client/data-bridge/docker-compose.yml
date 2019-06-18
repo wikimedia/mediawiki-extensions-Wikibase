@@ -14,3 +14,10 @@ services:
       - NODE_ENV
       - NODE_DEBUG
       - DEBUG
+
+  csr:
+    extends:
+      service: node
+    ports:
+      - '${CSR_PORT}:8080'
+    command: 'npm run-script serve'
