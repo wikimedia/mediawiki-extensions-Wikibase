@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a74f5abd_833eec61",
+        "filename": "lib/tests/phpunit/Store/Sql/Terms/CachedDatabasePropertyLabelResolverTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2019-06-18T18:42:07Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 50,
+        "startChar": 44,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "a486e5fe25554461c467dcb35b2ad47512c7ea0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
