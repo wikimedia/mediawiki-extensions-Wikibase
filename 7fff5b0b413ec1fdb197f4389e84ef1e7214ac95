@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d0209d9_46ff1cf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-18T14:31:37Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "7fff5b0b413ec1fdb197f4389e84ef1e7214ac95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b3f53f0_5ca9c462",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-18T14:31:37Z",
+      "side": 1,
+      "message": "Should this mention Wikidata, or be more general (e. g. “edit values on the repo directly from the client wiki”)?",
+      "revId": "7fff5b0b413ec1fdb197f4389e84ef1e7214ac95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
