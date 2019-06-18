@@ -314,3 +314,5 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 : Whether to track Lua function calls with a per-site key, like <code>MediaWiki.dewiki.wikibase.client.scribunto.wikibase.functionName.call</code>.
 ; addEntityUsagesBatchSize
 : Batch size for adding entity usage records. Default is 500
+; dataBridgeEnabled
+: Enables the Wikidata Bridge to edit values on Wikidata directly from the client wiki
