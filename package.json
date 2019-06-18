@@ -25,7 +25,8 @@
 	"eslintIgnore": [
 		"extensions/**",
 		"vendor/**",
-		"view/lib/**"
+		"view/lib/**",
+		"client/data-bridge/"
 	],
 	"browserslist": [
 		"ie 11"

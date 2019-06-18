@@ -6,3 +6,23 @@
 docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) node
 docker-compose run --rm node npm install
 ```
+
+### Compiles and hot-reloads for development
+```
+docker-compose up
+```
+
+### Compiles and minifies for production
+```
+docker-compose run --rm node npm run build
+```
+
+### Run your tests
+```
+docker-compose run --rm node npm run test
+```
+
+### Lints and fixes files
+```
+docker-compose run --rm node npm run lint
+```
