@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 dist/*
+!dist/data-bridge.app.js
+!dist/data-bridge.app.css
 
 # local env files
 .env.local
