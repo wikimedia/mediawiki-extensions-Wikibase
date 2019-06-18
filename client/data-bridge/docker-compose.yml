@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  node:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile-node
+    image: wmde/data-bridge-node
+    volumes:
+      - '~/.npm:/.npm'
+      - './:/app'
+    working_dir: /app
+    environment:
+      - NODE_ENV
+      - NODE_DEBUG
+      - DEBUG
