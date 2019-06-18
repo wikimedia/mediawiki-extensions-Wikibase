@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f87c94d_e28e80da",
+        "filename": "repo/includes/Specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-18T15:55:47Z",
+      "side": 1,
+      "message": "usually `assert` prefixed functions are \"reserved\" for those that throw/panic (just like the one in SpecialSetAliases).\n\nI would rename this to something like `hasPipeCharacterInAliases`.",
+      "revId": "2b4b75b88abdc4576c0fe9539bb11158619287d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
