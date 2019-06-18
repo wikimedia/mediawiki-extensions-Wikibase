@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "754d3c5c_baef8300",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-18T14:30:20Z",
+      "side": 1,
+      "message": "could be extracted (previous line has the same code)",
+      "range": {
+        "startLine": 185,
+        "startChar": 14,
+        "endLine": 185,
+        "endChar": 50
+      },
+      "revId": "5afd54078f3b4d2f95eebf10ffba903e250a55c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93f8bf1c_05c0944a",
+        "filename": "client/includes/Hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-18T14:30:20Z",
+      "side": 1,
+      "message": "Is there a reason for making this protected rather than private?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "5afd54078f3b4d2f95eebf10ffba903e250a55c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e8be4a3_cdec1d87",
+        "filename": "client/includes/Hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-18T14:30:20Z",
+      "side": 1,
+      "message": "As far as I’m aware, it’s more common to have individual parameters for things controlled by settings, rather than injecting a full SettingsArray.",
+      "range": {
+        "startLine": 27,
+        "startChar": 66,
+        "endLine": 27,
+        "endChar": 89
+      },
+      "revId": "5afd54078f3b4d2f95eebf10ffba903e250a55c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
