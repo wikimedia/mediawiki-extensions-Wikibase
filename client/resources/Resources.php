@@ -30,6 +30,11 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.client.data-bridge.init' => $moduleTemplate + [
+			'scripts' => [
+			],
+		],
+
 		'wikibase.client.currentSite' => $moduleTemplate + [
 			'class' => SiteModule::class
 		],
