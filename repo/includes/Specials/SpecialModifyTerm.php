@@ -17,6 +17,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
+use Wikibase\Lib\UserInputException;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.
@@ -175,6 +176,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		try {
 			$summary = $this->setValue( $entity, $this->languageCode, $this->value );
 		} catch ( ChangeOpException $e ) {
+			$this->showErrorHTML( $e->getMessage() );
+			return false;
+		} catch ( UserInputException $e ) {
 			$this->showErrorHTML( $e->getMessage() );
 			return false;
 		}
