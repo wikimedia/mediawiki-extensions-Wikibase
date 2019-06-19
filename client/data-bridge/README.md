@@ -17,12 +17,17 @@ docker-compose up
 docker-compose run --rm node npm run build
 ```
 
-### Run your tests
+### Automatically fix code style violations
+```
+docker-compose run --rm node npm run fix
+```
+
+### Run all code quality tools
 ```
 docker-compose run --rm node npm run test
 ```
 
-### Lints and fixes files
+### Lints files for code style violations
 ```
-docker-compose run --rm node npm run lint
+docker-compose run --rm node npm run test:lint
 ```
