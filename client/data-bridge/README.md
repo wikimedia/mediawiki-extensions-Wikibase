@@ -27,6 +27,15 @@ docker-compose run --rm node npm run fix
 docker-compose run --rm node npm run test
 ```
 
+### Run jest unit tests
+```
+docker-compose run --rm node npm run test:unit
+```
+Jest can watch the filesystem and run the tests affecting your files changed after the last commit with:
+```
+docker-compose run --rm node npm run test:unit -- --watch
+```
+
 ### Lints files for code style violations
 ```
 docker-compose run --rm node npm run test:lint
