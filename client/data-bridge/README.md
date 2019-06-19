@@ -35,3 +35,8 @@ docker-compose run --rm node npm run test:unit -- --watchAll
 ```
 docker-compose run --rm node npm run lint
 ```
+
+### Storybook
+```
+docker-compose run --rm node npm run storybook
+```
