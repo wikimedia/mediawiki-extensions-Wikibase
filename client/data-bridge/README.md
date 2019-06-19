@@ -40,3 +40,8 @@ docker-compose run --rm node npm run test:unit -- --watch
 ```
 docker-compose run --rm node npm run test:lint
 ```
+
+### Storybook
+```
+docker-compose run --rm node npm run storybook
+```
