@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a3b3a31_04c3c153",
+        "filename": "client/data-bridge/jest.config.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T11:38:21Z",
+      "side": 1,
+      "message": "I would like to have this file in alphabetic order. So it\u0027s easier to make and track changes.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 25
+      },
+      "revId": "f8fe50d23722eb003b4bc68789fa181518abef29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f93d493d_58e3af15",
+        "filename": "client/data-bridge/jest.config.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T11:38:21Z",
+      "side": 1,
+      "message": "We actually do not need this feature",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 4
+      },
+      "revId": "f8fe50d23722eb003b4bc68789fa181518abef29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36257d21_8e927d13",
+        "filename": "client/data-bridge/jest.config.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T11:38:21Z",
+      "side": 1,
+      "message": "I am not sure if we need that feature: https://github.com/jest-community/jest-watch-typeahead",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 4
+      },
+      "revId": "f8fe50d23722eb003b4bc68789fa181518abef29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08cafcf1_b617eeed",
+        "filename": "client/data-bridge/jest.config.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T11:38:21Z",
+      "side": 1,
+      "message": "probably we just import here the tsconfig:\n```\nglobals: {\n       \u0027ts-jest\u0027: {\n            tsConfig: \u0027./tsconfig.json\u0027,\n        },\n}\n```",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "f8fe50d23722eb003b4bc68789fa181518abef29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "834dfa74_7cd960ae",
+        "filename": "client/data-bridge/tests/unit/.eslintrc.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T11:38:21Z",
+      "side": 1,
+      "message": "Probably the wrong place...I guess we want that on the top level",
+      "revId": "f8fe50d23722eb003b4bc68789fa181518abef29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
