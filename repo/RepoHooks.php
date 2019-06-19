@@ -197,7 +197,10 @@ final class RepoHooks {
 		}
 
 		if ( $namespaceLookup->isEntityNamespace( $namespace ) ) {
-			return true;
+			$localNamespaces = $wikibaseRepo->getLocalEntityNamespaces();
+			if ( in_array( $namespace, $localNamespaces ) ) {
+				return true;
+			}
 		}
 
 		return false;
