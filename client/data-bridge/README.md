@@ -19,7 +19,7 @@ docker-compose run --rm node npm run build
 
 ### Run your tests
 ```
-docker-compose run --rm node npm run test
+docker-compose run --rm node npm run test:unit
 ```
 
 ### Lints and fixes files
