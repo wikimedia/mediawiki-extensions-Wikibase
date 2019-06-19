@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa01f1c3_843604e6",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T08:12:16Z",
+      "side": 1,
+      "message": "Could we extend that description a bit...like adding possible values:\n```\nEnable/Disable the Data Bridge Service, which allows editing a repository directly form a client mediawiki. In comes in effect if the value is set to \u003ccode\u003etrue\u003c/code\u003e. The default setting is \u003ccode\u003efalse\u003c/code\u003e. \n```",
+      "range": {
+        "startLine": 318,
+        "startChar": 2,
+        "endLine": 318,
+        "endChar": 82
+      },
+      "revId": "61d261b162a06699ac130030841fb9d020e29e45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
