@@ -513,9 +513,6 @@ XML
 	}
 
 	public function testGivenNonLocalEntityInMainNamespace_onNamespaceIsMovableAllowsMovingPagesInMainNamespace_sourceBasedFederation() {
-		// see https://phabricator.wikimedia.org/T224303
-		$this->markTestSkipped( 'This behaviour is currently broken, and the test would fail' );
-
 		$mainNamespace = 0;
 		$propertyNamespace = 200;
 

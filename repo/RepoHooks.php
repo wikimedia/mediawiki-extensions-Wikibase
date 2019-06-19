@@ -161,11 +161,46 @@ final class RepoHooks {
 	 * @param bool &$movable
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		if ( $namespaceLookup->isEntityNamespace( $ns ) ) {
+		if ( self::isNamespaceUsedByLocalEntities( $ns ) ) {
 			$movable = false;
 		}
+	}
+
+	private static function isNamespaceUsedByLocalEntities( $namespace ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+
+		// TODO: this logic seems badly misplaced, probably WikibaseRepo should be asked and be
+		// providing different and more appropriate EntityNamespaceLookup instance
+		// However looking at the current use of EntityNamespaceLookup, it seems to be used
+		// for different kinds of things, which calls for more systematic audit and changes.
+		if ( $wikibaseRepo->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$entityType = $namespaceLookup->getEntityType( $namespace );
+
+			if ( $entityType === null ) {
+				return false;
+			}
+
+			$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType(
+				$entityType
+			);
+			if ( $entitySource === null ) {
+				return false;
+			}
+
+			$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+			if ( $entitySource->getSourceName() === $localEntitySourceName ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		if ( $namespaceLookup->isEntityNamespace( $namespace ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
