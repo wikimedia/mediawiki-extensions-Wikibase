@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bc7236fa_6bad8308",
+        "filename": "client/data-bridge/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T07:45:14Z",
+      "side": 1,
+      "message": "We did this in termbox but having only one image (can\u0027t see a second one on the horizon) it creates indirection without value (i.e. congnitive load). If there is no compelling reason against it, _the_ Dockerfile in _the_ root folder describes _the_ service.\nYes, this logic could (maybe should) apply to termbox, too. When setting it up back when I expected a second image to eventually be added there.",
+      "parentUuid": "3b09d959_d09297d5",
+      "revId": "6e887e646552c4238e0061be1675a5886309b229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452366da_cc52cde5",
         "filename": "client/data-bridge/README.md",
         "patchSetId": 2
