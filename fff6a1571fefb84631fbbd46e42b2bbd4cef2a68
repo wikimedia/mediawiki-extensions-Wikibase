@@ -135,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "2889d4c1_cdd3e945",
+        "filename": "client/data-bridge/src/shims-tsx.d.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T12:33:50Z",
+      "side": 1,
+      "message": "I12f37fad69edd6aaa51049d4d34fc752040de9a3",
+      "parentUuid": "80a7913e_95e08f77",
+      "revId": "fff6a1571fefb84631fbbd46e42b2bbd4cef2a68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f57bca3_793575da",
         "filename": "client/data-bridge/tsconfig.json",
         "patchSetId": 1
