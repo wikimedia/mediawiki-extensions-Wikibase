@@ -39,10 +39,5 @@
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
   }
 }
