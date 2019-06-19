@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "97248ae1_74934f32",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "ce403a8f_7939e098",
+      "revId": "fff6a1571fefb84631fbbd46e42b2bbd4cef2a68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c10a37f_e0de9419",
         "filename": "client/data-bridge/package.json",
         "patchSetId": 1
@@ -96,6 +114,41 @@
       "revId": "fff6a1571fefb84631fbbd46e42b2bbd4cef2a68",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80a7913e_95e08f77",
+        "filename": "client/data-bridge/src/shims-tsx.d.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "I would like to stick with the termbox approach...so we have a similar structure and not confusing people...maybe it is worth to write those basic decisions somewhere down for future projects?",
+      "parentUuid": "ad5790f4_883c222a",
+      "revId": "fff6a1571fefb84631fbbd46e42b2bbd4cef2a68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f57bca3_793575da",
+        "filename": "client/data-bridge/tsconfig.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "Do we also want to use js files or we make this decision on the run?",
+      "revId": "fff6a1571fefb84631fbbd46e42b2bbd4cef2a68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

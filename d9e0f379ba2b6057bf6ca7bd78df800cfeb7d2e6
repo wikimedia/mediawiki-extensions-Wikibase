@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4dcef9e_6e2b1cd2",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "Perhaps this should be renamed in fix or add the --no-fix flag to the command...so we get this right from scratch.",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd510758_0a1ec162",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "+1 to move that out",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 4
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50ca9966_5833f6e3",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "+1 to move that out",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 1
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ee66e1c_1d9d7dd5",
+        "filename": "client/data-bridge/src/shims-tsx.d.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "+1 to have a dedicated place for types",
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c785021d_ad14ed19",
+        "filename": "client/data-bridge/src/shims-vue.d.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "+1 to have a dedicated place for types",
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c441d01d_154e97de",
+        "filename": "client/data-bridge/tsconfig.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "Probably we want to use \n```\n\"skipLibCheck\": true,\n\"noUnusedLocals\": true, \n``` as well",
+      "range": {
+        "startLine": 3,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84b4a89e_4a3b857d",
+        "filename": "client/data-bridge/tsconfig.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T10:11:19Z",
+      "side": 1,
+      "message": "I guess we need es5, too...if I remember correctly this would be necessary if we want to use Promises.",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
