@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0203c30c_bc1978c9",
+        "filename": "client/data-bridge/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T07:49:47Z",
+      "side": 1,
+      "message": "The second image could be the browser testing part (of we want ever to try pipeline browser testing). But sure for now it could stay as it is.",
+      "parentUuid": "bc7236fa_6bad8308",
+      "revId": "6e887e646552c4238e0061be1675a5886309b229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452366da_cc52cde5",
         "filename": "client/data-bridge/README.md",
         "patchSetId": 2
