@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d501bd7f_3192e4c5",
+        "filename": "client/data-bridge/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T13:25:27Z",
+      "side": 1,
+      "message": "This will need some restructuring once this meets with I7be94b4e1114e52041627762587f7ceca400fb74",
+      "range": {
+        "startLine": 22,
+        "startChar": 42,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "e4baa2f3051d75ff204bf7459436c312a65e45b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b53250eb_97d6f633",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T13:25:27Z",
+      "side": 1,
+      "message": "Introduced a catch-all test script in I7be94b4e1114e52041627762587f7ceca400fb74 that will match this, too. Cool.",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "c8a04f52bba88fd3c364084161a5d869befbcf39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eabd4c0a_bce6867c",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T13:25:27Z",
+      "side": 1,
+      "message": "No strong opinion:\nIt does not make a difference in the actually used version, as that is specified in the lock file, but the next time we run an update the change to `package.json` will look like we took a huge leap forward - but didn\u0027t.\nIn Termbox e.g. \"ts-jest\" would state \"^23.10.5\" in `package.json` to avoid this effect.",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "c8a04f52bba88fd3c364084161a5d869befbcf39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
