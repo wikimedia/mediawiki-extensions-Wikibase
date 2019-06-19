@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48ef5863_ca17b8d6",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-19T13:06:29Z",
+      "side": 1,
+      "message": "This intentionally includes upcoming test:unit ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 33
+      },
+      "revId": "a9a03baea18ccaf0579b12a741e2a84aba5644af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
