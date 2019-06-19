@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bc64490_6dc21dd2",
+        "filename": "client/resources/wikibase.client.data-bridge.init.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T08:25:41Z",
+      "side": 1,
+      "message": "Just to trigger a discussion:\n\nI am relatively sure we could do this somehow in the app, if we want to do that. We could spare then the second load of a module. Downside is of course, it is probably less vueish and put some overload in the package for this tiny particular reason.",
+      "revId": "dce94ad334b4098117f5f9ffdb8c76f2c02bde98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
