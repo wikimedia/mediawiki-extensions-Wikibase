@@ -408,4 +408,182 @@ XML
 		$this->assertSame( 'someSlot', $nsLookup->getEntitySlotRole( $type ) );
 	}
 
+	public function testGivenEntityNamespace_onNamespaceIsMovableBlocksMovingPagesInThatNamespace() {
+		global $wgWBRepoSettings;
+
+		$itemNamespace = 120;
+
+		$settings = $wgWBRepoSettings;
+
+		$settings['useEntitySourceBasedFederation'] = false;
+		$settings['entitySources'] = [];
+		$settings['entityNamespaces'] = [ 'item' => $itemNamespace ];
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $itemNamespace, $canBeMoved );
+
+		$this->assertFalse( $canBeMoved );
+	}
+
+	public function testGivenEntityInMainNamespace_onNamespaceIsMovableBlocksMovingMainNamespacePages() {
+		global $wgWBRepoSettings;
+
+		$mainNamespace = 0;
+
+		$settings = $wgWBRepoSettings;
+
+		$settings['useEntitySourceBasedFederation'] = false;
+		$settings['entitySources'] = [];
+		$settings['entityNamespaces'] = [ 'item' => $mainNamespace ];
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+
+		$this->assertFalse( $canBeMoved );
+	}
+
+	public function testGivenWikitextInMainNamespace_onNamespaceIsMovableAllowsMovingPagesInMainNamespace() {
+		global $wgWBRepoSettings;
+
+		$mainNamespace = 0;
+
+		$settings = $wgWBRepoSettings;
+
+		$settings['useEntitySourceBasedFederation'] = false;
+		$settings['entitySources'] = [];
+		$settings['entityNamespaces'] = [ 'item' => 120 ];
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+
+		$this->assertTrue( $canBeMoved );
+	}
+
+	public function testGivenLocalEntityNamespace_onNamespaceIsMovableBlocksMovingPagesInThatNamespace_sourceBasedFederation() {
+		$itemNamespace = 120;
+		$propertyNamespace = 200;
+
+		$settings = $this->newEntitySourceBasedFederationSettings( $itemNamespace, $propertyNamespace );
+
+		$settings['localEntitySourceName'] = 'items';
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $itemNamespace, $canBeMoved );
+
+		$this->assertFalse( $canBeMoved );
+	}
+
+	public function testGivenLocalEntityInMainNamespace_onNamespaceIsMovableBlocksMovingMainNamespacePages_sourceBasedFederation() {
+		$mainNamespace = 0;
+		$propertyNamespace = 200;
+
+		$settings = $this->newEntitySourceBasedFederationSettings( $mainNamespace, $propertyNamespace );
+
+		$settings['localEntitySourceName'] = 'items';
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+
+		$this->assertFalse( $canBeMoved );
+	}
+
+	public function testGivenNonLocalEntityInMainNamespace_onNamespaceIsMovableAllowsMovingPagesInMainNamespace_sourceBasedFederation() {
+		// see https://phabricator.wikimedia.org/T224303
+		$this->markTestSkipped( 'This behaviour is currently broken, and the test would fail' );
+
+		$mainNamespace = 0;
+		$propertyNamespace = 200;
+
+		$settings = $this->newEntitySourceBasedFederationSettings( $mainNamespace, $propertyNamespace );
+
+		$settings['localEntitySourceName'] = 'props';
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+
+		$this->assertTrue( $canBeMoved );
+	}
+
+	public function testGivenWikitextInMainNamespace_onNamespaceIsMovableAllowsMovingPagesInMainNamespace_sourceBasedFederation() {
+		$mainNamespace = 0;
+		$itemNamespace = 120;
+		$propertyNamespace = 200;
+
+		$settings = $this->newEntitySourceBasedFederationSettings( $itemNamespace, $propertyNamespace );
+		$settings['localEntitySourceName'] = 'items';
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+
+		$this->assertTrue( $canBeMoved );
+	}
+
+	private function newEntitySourceBasedFederationSettings( $itemNamespace, $propertyNamespace ) {
+		global $wgWBRepoSettings;
+
+		$settings = $wgWBRepoSettings;
+
+		$settings['useEntitySourceBasedFederation'] = true;
+		$settings['entitySources'] = [
+			'items' => [
+				'entityNamespaces' => [ 'item' => $itemNamespace ],
+				'repoDatabase' => 'itemdb',
+				'baseUri' => 'http://concept/',
+				'interwikiPrefix' => 'iwiki',
+			],
+			'props' => [
+				'entityNamespaces' => [ 'property' => $propertyNamespace ],
+				'repoDatabase' => 'propdb',
+				'baseUri' => 'http://propconcept/',
+				'interwikiPrefix' => 'pwiki',
+			],
+		];
+		$settings['repositories'] = [
+			'items' => [
+				'entityNamespaces' => [ 'item' => $itemNamespace ],
+			],
+			'props' => [
+				'entityNamespaces' => [ 'property' => $propertyNamespace ],
+			],
+		];
+		unset( $settings['entityNamespaces'] );
+
+		return $settings;
+	}
+
 }
