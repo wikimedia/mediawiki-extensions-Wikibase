@@ -24,7 +24,11 @@ docker-compose run --rm node npm run fix
 
 ### Run all code quality tools
 ```
-docker-compose run --rm node npm run test
+docker-compose run --rm node npm run test:unit
+```
+Jest can watch the filesystem and run the tests affecting your files changed after the last commit with:
+```
+docker-compose run --rm node npm run test:unit -- --watch
 ```
 
 ### Lints files for code style violations
