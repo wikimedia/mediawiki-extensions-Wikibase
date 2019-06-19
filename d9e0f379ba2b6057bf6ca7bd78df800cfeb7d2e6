@@ -176,6 +176,30 @@
     },
     {
       "key": {
+        "uuid": "bd21934d_3959f2a4",
+        "filename": "client/data-bridge/tsconfig.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T16:29:36Z",
+      "side": 1,
+      "message": "Looked into that.\n\nskipLibCheck has no recognizable performance impact in termbox but _could_ have down sides. I suggest we only add it if we find a need for it. I was about to submit a change for termbox but realized that build-server there has problems w/o it, as e.g. node_modules/vue/types/options.d.ts talks about HTMLElement which is clearly client-only. Ugly.\n\nnoUnusedLocals will be covered by eslint\u0027s no-unused-vars once we have it up. Likewise for unused parameters, ... \u003d\u003e I91f96180d392ab40c66d472c4d4c7b39bb835f9e",
+      "parentUuid": "c441d01d_154e97de",
+      "range": {
+        "startLine": 3,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84b4a89e_4a3b857d",
         "filename": "client/data-bridge/tsconfig.json",
         "patchSetId": 2
