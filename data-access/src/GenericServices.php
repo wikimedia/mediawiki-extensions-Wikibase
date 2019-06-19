@@ -168,7 +168,9 @@ class GenericServices {
 	public function getCompactBaseDataModelSerializerFactory() {
 		return new SerializerFactory(
 			new DataValueSerializer(),
+			// @phan-suppress-next-line
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			// @phan-suppress-next-line
 				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 	}
