@@ -16,6 +16,11 @@ use ResourceLoaderModule;
 class MediaWikiConfigModule extends ResourceLoaderModule {
 
 	/**
+	 * @var string[]
+	 */
+	protected $targets = [ 'desktop', 'mobile' ];
+
+	/**
 	 * @var callable
 	 */
 	private $getConfigValueProvider;
