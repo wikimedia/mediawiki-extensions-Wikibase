@@ -452,6 +452,38 @@ XML
 		$this->assertFalse( $canBeMoved );
 	}
 
+	public function testGivenNonLocalEntityInMainNamespace_onNamespaceIsMovableAllowsMovingPagesInMainNamespace() {
+		global $wgWBRepoSettings;
+
+		$mainNamespace = 0;
+		$propertyNamespace = 200;
+
+		$settings = $wgWBRepoSettings;
+
+		$settings['useEntitySourceBasedFederation'] = false;
+		$settings['entitySources'] = [];
+		$settings['foreignRepositories'] = [
+			'other' => [
+				'repoDatabase' => 'otherdb',
+				'baseUri' => 'xyz',
+				'supportedEntityTypes' => [ 'item' ],
+				'prefixMapping' => [],
+				'entityNamespaces' => [ 'item' => $mainNamespace ]
+			],
+		];
+		$settings['entityNamespaces'] = [ 'property' => $propertyNamespace ];
+
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+
+		WikibaseRepo::resetClassStatics();
+
+		$canBeMoved = true;
+
+		RepoHooks::onNamespaceIsMovable( $mainNamespace, $canBeMoved );
+
+		$this->assertTrue( $canBeMoved );
+	}
+
 	public function testGivenWikitextInMainNamespace_onNamespaceIsMovableAllowsMovingPagesInMainNamespace() {
 		global $wgWBRepoSettings;
 
