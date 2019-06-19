@@ -24,7 +24,16 @@ docker-compose run --rm node npm run fix
 
 ### Run all code quality tools
 ```
-docker-compose run --rm node npm run test
+docker-compose run --rm node npm run test:unit
+```
+Jest can watch the filesystem and run the tests affecting your files changed after the last commit with:
+```
+npm run test:unit -- --watch
+```
+Since docker isolates node from git, it is not possible to use information about which files changed since the last commit.
+However, one can still automatically run all tests when a file changes:
+```
+docker-compose run --rm node npm run test:unit -- --watchAll
 ```
 
 ### Lints files for code style violations
