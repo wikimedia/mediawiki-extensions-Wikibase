@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "3b09d959_d09297d5",
+        "filename": "client/data-bridge/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-19T07:34:04Z",
+      "side": 1,
+      "message": "This could go in a dedicated subdir...but this is more a soft suggestion",
+      "revId": "6e887e646552c4238e0061be1675a5886309b229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452366da_cc52cde5",
         "filename": "client/data-bridge/README.md",
         "patchSetId": 2
