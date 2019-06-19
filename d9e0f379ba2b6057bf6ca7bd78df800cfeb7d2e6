@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d7dc369a_e234a636",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T12:55:00Z",
+      "side": 1,
+      "message": "I7be94b4e1114e52041627762587f7ceca400fb74",
+      "parentUuid": "c4dcef9e_6e2b1cd2",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd510758_0a1ec162",
         "filename": "client/data-bridge/package.json",
         "patchSetId": 2
@@ -59,6 +83,30 @@
       "writtenOn": "2019-06-19T10:11:19Z",
       "side": 1,
       "message": "+1 to move that out",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 1
+      },
+      "revId": "d9e0f379ba2b6057bf6ca7bd78df800cfeb7d2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8079d1a1_4fb098bd",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-19T12:55:00Z",
+      "side": 1,
+      "message": "I9ee40df08ad2de68d22b5f6128086de314db1d78 \u0026 Ie961e0f4196fe3880ad8c1c041f4203506c5f40d",
+      "parentUuid": "50ca9966_5833f6e3",
       "range": {
         "startLine": 43,
         "startChar": 2,
