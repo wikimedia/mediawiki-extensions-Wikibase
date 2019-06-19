@@ -24,6 +24,11 @@ use ResourceLoaderModule;
 class DataTypesModule extends ResourceLoaderModule {
 
 	/**
+	 * @var string[]
+	 */
+	protected $targets = [ 'desktop', 'mobile' ];
+
+	/**
 	 * @var DataType[]
 	 */
 	protected $dataTypes;
