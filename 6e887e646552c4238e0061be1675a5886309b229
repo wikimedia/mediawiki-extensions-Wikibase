@@ -123,6 +123,30 @@
       "revId": "6e887e646552c4238e0061be1675a5886309b229",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b785647_88205581",
+        "filename": "client/data-bridge/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T12:14:30Z",
+      "side": 1,
+      "message": "Nah, I think this is fine if it’s added in the next commit.",
+      "parentUuid": "d032b368_6e153fc4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "6e887e646552c4238e0061be1675a5886309b229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
