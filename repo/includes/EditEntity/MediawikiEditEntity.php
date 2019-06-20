@@ -437,7 +437,7 @@ class MediawikiEditEntity implements EditEntity {
 
 		$conflicts = $patch->count() - $cleanPatch->count();
 
-		if ( $conflicts > 0 ) {
+		if ( $conflicts !== 0 ) {
 			// patch doesn't apply cleanly
 			if ( $this->userWasLastToEdit( $this->user, $newEntity->getId(), $this->getBaseRevisionId() ) ) {
 				// it's a self-conflict
