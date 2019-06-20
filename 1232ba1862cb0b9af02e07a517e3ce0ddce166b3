@@ -16,6 +16,24 @@
       "revId": "1232ba1862cb0b9af02e07a517e3ce0ddce166b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e66bee5_71600664",
+        "filename": "client/data-bridge/tests/unit/.eslintrc.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T15:03:09Z",
+      "side": 1,
+      "message": "I’m not sure what the connection between the changes is – with that one, the .eslintrc.js file here is unnecessary, is that it?\n\n(Though I think it would make sense to only allow `jest` access in the tests, so a separate file here might still make sense – but perhaps it would need to explicitly extend the main .eslintrc.js in that case, or something like that.)",
+      "parentUuid": "ec18631c_ac222024",
+      "revId": "1232ba1862cb0b9af02e07a517e3ce0ddce166b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
