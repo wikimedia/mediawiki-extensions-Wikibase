@@ -22,6 +22,30 @@
       "revId": "61d261b162a06699ac130030841fb9d020e29e45",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c84b0750_93367b07",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T11:44:34Z",
+      "side": 1,
+      "message": "\u003e In comes in effect if the value is set to \u003ccode\u003etrue\u003c/code\u003e.\n\n(or, in PS4)\n\n\u003e Set to \u003ccode\u003etrue\u003c/code\u003e to enable it.\n\nIs it really not obvious that setting an option called “xEnabled” to `true` enables X? IMHO we should drop that part.\n\n\u003e a client mediawiki\n\nI’m not sure what “mediawiki” is supposed to mean here. “mediawiki installation” would be clearer, but I think we usually just call these “wiki”.",
+      "parentUuid": "fa01f1c3_843604e6",
+      "range": {
+        "startLine": 318,
+        "startChar": 2,
+        "endLine": 318,
+        "endChar": 82
+      },
+      "revId": "61d261b162a06699ac130030841fb9d020e29e45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
