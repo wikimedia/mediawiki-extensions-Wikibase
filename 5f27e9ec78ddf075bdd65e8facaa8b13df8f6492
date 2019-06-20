@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "388229dc_2a905109",
+        "filename": ".eslintrc.json",
+        "patchSetId": 24
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-06-20T11:15:43Z",
+      "side": 1,
+      "message": "remove this, always use \u0027mw\u0027",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db5c5c1b_cd7f0d51",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-06-20T11:15:43Z",
+      "side": 1,
+      "message": "just \u0027\u003ca\u003e\u0027",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c9e2627_bbd55bfc",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-06-20T11:15:43Z",
+      "side": 1,
+      "message": "can you make this selector more specific than \u0027*\u0027?",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f8d548a_d2a3b48f",
+        "filename": "view/resources/wikibase/wikibase.less",
+        "patchSetId": 24
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-06-20T11:15:43Z",
+      "side": 1,
+      "message": "As you\u0027re in a LESS file you could nest some of these rules:\n\n li.ui-state-default.wikibase-referenceview-tabs {\n   border: 0\n\n   \u0026.ui-tabs-active-ui-state-active {\n     ...\n   }\n }\n\netc.",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ea4445_fbb45379",
+        "filename": "view/resources/wikibase/wikibase.less",
+        "patchSetId": 24
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-06-20T11:15:43Z",
+      "side": 1,
+      "message": "This appears to be a no-op",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
