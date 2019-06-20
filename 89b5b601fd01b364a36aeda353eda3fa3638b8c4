@@ -16,6 +16,24 @@
       "revId": "89b5b601fd01b364a36aeda353eda3fa3638b8c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b7b38ff_127e4046",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T13:57:14Z",
+      "side": 1,
+      "message": "Nevermind, you already updated this just before I sent the comment :)",
+      "parentUuid": "518da028_1aaaa18b",
+      "revId": "89b5b601fd01b364a36aeda353eda3fa3638b8c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
