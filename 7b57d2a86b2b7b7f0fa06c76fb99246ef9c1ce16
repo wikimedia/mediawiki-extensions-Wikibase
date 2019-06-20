@@ -16,6 +16,24 @@
       "revId": "7b57d2a86b2b7b7f0fa06c76fb99246ef9c1ce16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "702c801a_05382e3b",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageBeforeHTMLHookHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-20T09:27:31Z",
+      "side": 1,
+      "message": "Good point, Done",
+      "parentUuid": "59d6278e_04e670e9",
+      "revId": "7b57d2a86b2b7b7f0fa06c76fb99246ef9c1ce16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
