@@ -75,6 +75,30 @@
       "revId": "6e887e646552c4238e0061be1675a5886309b229",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cba1528_9f855335",
+        "filename": "client/data-bridge/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T11:50:53Z",
+      "side": 1,
+      "message": "So, should this be merged already or not?",
+      "parentUuid": "452366da_cc52cde5",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "6e887e646552c4238e0061be1675a5886309b229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
