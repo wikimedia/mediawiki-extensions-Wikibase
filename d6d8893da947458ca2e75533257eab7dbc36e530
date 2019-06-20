@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5572591_f781d6ec",
+        "filename": "client/data-bridge/src/presentation/App.vue",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-20T14:57:07Z",
+      "side": 1,
+      "message": "Could provide a example, which you see not go into components but in presentation?",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74f53d30_364b7576",
+        "filename": "client/data-bridge/src/presentation/assets/logo.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-20T14:57:07Z",
+      "side": 1,
+      "message": "We already solved that during the termbox hike. Please see: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/vue.config.js#55\nand https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
