@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2257c04_10fecf80",
+        "filename": "client/data-bridge/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T13:49:36Z",
+      "side": 1,
+      "message": "FWIW, this seems to work fine on my Docker-less setup :)",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 123
+      },
+      "revId": "eb15f5d5fd354c4d988e2298119940aa420253a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "091921a6_85b674ce",
+        "filename": "client/data-bridge/tests/unit/example.spec.ts",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T13:49:36Z",
+      "side": 1,
+      "message": "In App.vue and HelloWorld.vue we have spaces here:\n\n import { shallowMount } from \u0027@vue/test-utils\u0027;",
+      "range": {
+        "startLine": 1,
+        "startChar": 7,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "eb15f5d5fd354c4d988e2298119940aa420253a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
