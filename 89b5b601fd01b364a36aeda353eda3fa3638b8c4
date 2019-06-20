@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "518da028_1aaaa18b",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T13:56:04Z",
+      "side": 1,
+      "message": "I’m already getting a warning in the terminal that this is outdated, v5.1.9 [1] is available (released 13 hours ago).\n\n[1]: https://github.com/storybookjs/storybook/releases/tag/v5.1.9",
+      "revId": "89b5b601fd01b364a36aeda353eda3fa3638b8c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
