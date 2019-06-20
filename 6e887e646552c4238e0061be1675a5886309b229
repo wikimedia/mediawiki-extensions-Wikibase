@@ -99,6 +99,30 @@
       "revId": "6e887e646552c4238e0061be1675a5886309b229",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d032b368_6e153fc4",
+        "filename": "client/data-bridge/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-20T12:02:51Z",
+      "side": 1,
+      "message": "This was an attempt to highlight the futility of separating the creation of an infrastructure and actually using it - while still having more or less readable, small patches. The next commit in the chain has the package.json.\n\nhttps://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/517639/3/package.json\n\nLet me know if you think it should be moved over there.",
+      "parentUuid": "7cba1528_9f855335",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "6e887e646552c4238e0061be1675a5886309b229",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
