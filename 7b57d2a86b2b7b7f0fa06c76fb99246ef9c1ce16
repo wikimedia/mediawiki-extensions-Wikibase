@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59d6278e_04e670e9",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageBeforeHTMLHookHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-20T09:06:07Z",
+      "side": 1,
+      "message": "another test case for the non-article pages is missing ;)",
+      "revId": "7b57d2a86b2b7b7f0fa06c76fb99246ef9c1ce16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
