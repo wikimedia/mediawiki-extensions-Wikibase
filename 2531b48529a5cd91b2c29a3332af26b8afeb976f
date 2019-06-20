@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5cc0367_3036bf8c",
+        "filename": "client/data-bridge/src/presentation/assets/logo.png",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-20T13:26:55Z",
+      "side": 0,
+      "message": "It\u0027s might be worth to discuss if assets are even part of the src or we just want to keep then completely outside of the codebase (so just under the root level)",
+      "revId": "2531b48529a5cd91b2c29a3332af26b8afeb976f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

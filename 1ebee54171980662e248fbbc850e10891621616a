@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fda6955_7c62960d",
+        "filename": "client/data-bridge/src/presentation/App.vue",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-20T13:26:55Z",
+      "side": 1,
+      "message": "Did we not said (in some chat), we might wanna stick to the termbox structure?\nSo the dir should probably named components then not presentation",
+      "revId": "1ebee54171980662e248fbbc850e10891621616a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
