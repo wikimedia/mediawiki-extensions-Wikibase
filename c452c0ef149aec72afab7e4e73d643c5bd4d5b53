@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "16e52785_6676ac22",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-20T07:47:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a31c6b15_5e21a847",
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ff6a926_c3fb5354",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 7
@@ -51,6 +69,24 @@
       "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cccedea2_62edc799",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-20T07:47:34Z",
+      "side": 1,
+      "message": "Good catch, removing .. didn\u0027t see this test case at all when adding the new one \u0027:)",
+      "parentUuid": "5ff6a926_c3fb5354",
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     },
     {
       "key": {
@@ -74,6 +110,30 @@
       "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e0c638c_1213c20f",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-20T07:47:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a5b054e_395a991f",
+      "range": {
+        "startLine": 396,
+        "startChar": 45,
+        "endLine": 396,
+        "endChar": 69
+      },
+      "revId": "c452c0ef149aec72afab7e4e73d643c5bd4d5b53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
