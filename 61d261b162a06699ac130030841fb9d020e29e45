@@ -71,6 +71,30 @@
       "revId": "61d261b162a06699ac130030841fb9d020e29e45",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f99d55f7_5e08b8cb",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-20T12:18:55Z",
+      "side": 1,
+      "message": "\u003e \u003e Is it really not obvious that setting an option called “xEnabled” to `true` enables X? IMHO we should drop that part.\n\u003e \n\u003e Yes, I think that part is optional. However, one could see it as making clear that it should be set to boolean true instead of an configuration array or something.\n\nOkay, that makes sense.",
+      "parentUuid": "f0bcd492_d74ef9b7",
+      "range": {
+        "startLine": 318,
+        "startChar": 2,
+        "endLine": 318,
+        "endChar": 82
+      },
+      "revId": "61d261b162a06699ac130030841fb9d020e29e45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
