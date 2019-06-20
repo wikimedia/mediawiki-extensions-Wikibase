@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1e8843c_c755878c",
+        "filename": "client/data-bridge/tests/unit/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-20T10:00:05Z",
+      "side": 1,
+      "message": "With the lint patch, this will be located on the root level in any case. My thought was more to extend a given file instead of moving it and then extend it...but because it\u0027s allready there it make not really a difference.",
+      "revId": "246be50f0bee87d26960da6be26abfbeb5f0adc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
