@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec18631c_ac222024",
+        "filename": "client/data-bridge/tests/unit/.eslintrc.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-20T14:58:01Z",
+      "side": 1,
+      "message": "Please see: I2df9b5e31d90546db458e9c8dfabb0d3601b2434",
+      "revId": "1232ba1862cb0b9af02e07a517e3ce0ddce166b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
