@@ -39,6 +39,30 @@
       "revId": "aa1425a971216781dfadd475251f76abcbe7d6c2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8117e50e_4f544b3a",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T12:31:05Z",
+      "side": 1,
+      "message": "Huh, I could’ve sworn it was necessary. I guess I didn’t try removing it in the final .eslintignore configuration.",
+      "parentUuid": "d7f30c5d_0aadec02",
+      "range": {
+        "startLine": 10,
+        "startChar": 50,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "aa1425a971216781dfadd475251f76abcbe7d6c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
