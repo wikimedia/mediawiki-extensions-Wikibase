@@ -103,7 +103,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			],
 			self::FIELD_LABEL => [
 				'name' => self::FIELD_LABEL,
-				'default' => isset( $this->parts[0] ) ? $this->parts[0] : '',
+				'default' => $this->parts[0] ?? '',
 				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-label',
 				'placeholder-message' => 'wikibase-label-edit-placeholder',
@@ -111,7 +111,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			],
 			self::FIELD_DESCRIPTION => [
 				'name' => self::FIELD_DESCRIPTION,
-				'default' => isset( $this->parts[1] ) ? $this->parts[1] : '',
+				'default' => $this->parts[1] ?? '',
 				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-description',
 				'placeholder-message' => 'wikibase-description-edit-placeholder',
@@ -136,7 +136,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$formFields[ self::FIELD_DATATYPE ] = [
 			'name' => self::FIELD_DATATYPE,
 			'type' => 'select',
-			'default' => isset( $this->parts[2] ) ? $this->parts[2] : '',
+			'default' => $this->parts[2] ?? '',
 			'options' => array_merge( $options, $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
 			'validation-callback' => function ( $dataType, $formData, $form ) {

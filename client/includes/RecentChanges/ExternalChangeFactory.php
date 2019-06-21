@@ -63,7 +63,7 @@ class ExternalChangeFactory {
 		$changeParams = $this->extractChangeData( $rc_params );
 
 		// If a pre-formatted comment exists, pass it on.
-		$changeHtml = isset( $rc_params['comment-html'] ) ? $rc_params['comment-html'] : null;
+		$changeHtml = $rc_params['comment-html'] ?? null;
 
 		$entityId = $this->extractEntityId( $changeParams['object_id'] );
 		$changeType = $this->extractChangeType( $changeParams['type'] );
@@ -80,8 +80,7 @@ class ExternalChangeFactory {
 	 * @return RevisionData
 	 */
 	private function newRevisionData( RecentChange $recentChange, array $changeParams, $commentHtml = null ) {
-		$repoId = isset( $changeParams['site_id'] )
-			? $changeParams['site_id'] : $this->repoSiteId;
+		$repoId = $changeParams['site_id'] ?? $this->repoSiteId;
 
 		$comment = $recentChange->getAttribute( 'rc_comment' );
 

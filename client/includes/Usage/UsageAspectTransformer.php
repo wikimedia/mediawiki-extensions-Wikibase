@@ -47,7 +47,7 @@ class UsageAspectTransformer {
 	 */
 	public function getRelevantAspects( EntityId $entityId ) {
 		$key = $entityId->getSerialization();
-		return isset( $this->relevantAspectsPerEntity[$key] ) ? $this->relevantAspectsPerEntity[$key] : [];
+		return ? $this->relevantAspectsPerEntity[$key] ?? [];
 	}
 
 	/**
