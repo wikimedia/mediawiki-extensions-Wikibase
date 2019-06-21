@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0342bea6_b65ac169",
+        "filename": "client/data-bridge/.eslintrc",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T11:28:32Z",
+      "side": 1,
+      "message": "The .eslintrc name is deprecated according to https://eslint.org/docs/user-guide/configuring#configuration-file-formats, should we switch to .eslintrc.json?",
+      "revId": "9fe9802f93eee84341215b6f34ef541a921af2ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "945ae9de_16c6b621",
+        "filename": "client/data-bridge/.eslintrc",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T11:28:32Z",
+      "side": 1,
+      "message": "spaces in brackets",
+      "range": {
+        "startLine": 58,
+        "startChar": 11,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "9fe9802f93eee84341215b6f34ef541a921af2ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
