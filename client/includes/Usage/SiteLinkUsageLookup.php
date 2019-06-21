@@ -111,6 +111,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @param EntityId[] $ids
 	 *
 	 * @return int[]
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	private function getNumericItemIds( array $ids ) {
 		$ids = array_filter( $ids, function ( EntityId $id ) {

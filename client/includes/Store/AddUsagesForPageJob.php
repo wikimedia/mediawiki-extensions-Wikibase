@@ -109,6 +109,7 @@ class AddUsagesForPageJob extends Job {
 
 	/**
 	 * @return EntityUsage[]
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	private function getUsages() {
 		// Turn serialized usage info into EntityUsage objects

@@ -107,6 +107,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Result
+	 * @suppress PhanUndeclaredMethod Many calls to method that LabelsProvider doesn't have
 	 */
 	public function validate( EntityDocument $entity ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {

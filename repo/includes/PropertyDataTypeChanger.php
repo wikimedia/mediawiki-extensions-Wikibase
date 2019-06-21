@@ -52,6 +52,7 @@ class PropertyDataTypeChanger {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function changeDataType( PropertyId $propertyId, User $user, $dataTypeId ) {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision(

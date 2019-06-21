@@ -48,6 +48,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param PropertyValueSnak $snak
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function addValue(
 		RdfWriter $writer,

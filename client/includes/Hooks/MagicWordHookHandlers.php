@@ -76,8 +76,6 @@ class MagicWordHookHandlers {
 	 * @param array $cache
 	 * @param string $magicWordId
 	 * @param string &$ret
-	 *
-	 * @return bool
 	 */
 	public static function onParserGetVariableValueSwitch( Parser $parser, $cache, $magicWordId, &$ret ) {
 		$handler = self::newFromGlobalState();

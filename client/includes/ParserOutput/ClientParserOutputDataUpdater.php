@@ -132,6 +132,7 @@ class ClientParserOutputDataUpdater {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
 
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
 			// Probably some sort of race condition or data inconsistency, better log a warning
 			wfLogWarning(
@@ -142,6 +143,7 @@ class ClientParserOutputDataUpdater {
 			return;
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
 
 		foreach ( $siteLink->getBadges() as $badge ) {

@@ -46,6 +46,7 @@ class ChangeOpDeserializationExceptionLocalizer implements ExceptionLocalizer {
 		}
 
 		/** @var ChangeOpDeserializationException $exception  */
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		return new Message( 'wikibase-api-' . $exception->getErrorCode(), $exception->getParams() );
 	}
 

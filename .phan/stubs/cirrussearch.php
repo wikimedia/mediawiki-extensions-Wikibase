@@ -11,6 +11,32 @@ namespace {
 	}
 }
 
+namespace Elastica {
+	class Client {
+
+	}
+}
+
+namespace Elastica\Exception {
+	interface ExceptionInterface {
+
+	}
+	class InvalidException extends \InvalidArgumentException implements ExceptionInterface {
+
+	}
+}
+
+namespace {
+	class ElasticaConnection {
+		/**
+		 * Fetch a connection.
+		 * @return \Elastica\Client
+		 */
+		public function getClient() {
+		}
+	}
+}
+
 namespace CirrusSearch {
 
 	use User;
@@ -20,23 +46,27 @@ namespace CirrusSearch {
 		}
 	}
 
-	class Connection {
+	class Connection extends \ElasticaConnection {
 	}
 
 	class ElasticsearchIntermediary {
+		/**
+		 * @var Connection
+		 */
+		protected $connection;
 
 		public function __construct( Connection $connection, User $user = null, $slowSeconds = null, $extraBackendLatency = 0 ) {
 		}
 
 		/**
 		 * @param mixed|null
-		 * @return Status
+		 * @return \Status
 		 */
 		public function success( $result = null ) {
 		}
 
 		/**
-		 * @return Status
+		 * @return \Status
 		 */
 		public function failure( \Elastica\Exception\ExceptionInterface $exception = null ) {
 		}
@@ -67,7 +97,15 @@ namespace CirrusSearch {
 		}
 	}
 
-	class SearchRequestLog {
+	interface RequestLog {
+
+	}
+
+	class BaseRequestLog implements RequestLog {
+
+	}
+
+	class SearchRequestLog extends BaseRequestLog {
 	}
 
 	class Searcher {
@@ -98,9 +136,6 @@ namespace CirrusSearch {
 		 * @param string|null $param3
 		 */
 		function addWarning( $message, $param1 = null, $param2 = null, $param3 = null );
-	}
-
-	interface RequestLog {
 	}
 }
 
@@ -218,6 +253,7 @@ namespace CirrusSearch\Profile {
 namespace CirrusSearch\Query {
 
 	use CirrusSearch\Search\SearchContext;
+	use CirrusSearch\SearchConfig;
 
 	interface FilterQueryFeature {
 	}
@@ -229,6 +265,8 @@ namespace CirrusSearch\Query {
 
 	}
 	class MoreLikeFeature {
+		public function __construct( SearchConfig $config ) {
+		}
 		protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
 		}
 	}

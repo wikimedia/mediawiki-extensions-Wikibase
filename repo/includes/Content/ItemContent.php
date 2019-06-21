@@ -218,6 +218,7 @@ class ItemContent extends EntityContent {
 			$item = $this->getItem();
 			$properties['wb-claims'] = $item->getStatements()->count();
 			$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			$properties['wb-identifiers'] = $this->getContentHandler()
 				->getIdentifiersCount( $item->getStatements() );
 		}

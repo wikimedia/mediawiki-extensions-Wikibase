@@ -223,6 +223,7 @@ class TypeDispatchingEntityStore implements EntityStore {
 			throw new \LogicException( 'Do not use' );
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		return $store->getWikiPageForEntity( $entityId );
 	}
 

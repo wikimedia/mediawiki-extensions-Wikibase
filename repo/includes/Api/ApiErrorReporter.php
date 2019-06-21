@@ -150,6 +150,7 @@ class ApiErrorReporter {
 			return null;
 		}
 		$msg = ApiMessage::create( $errors[0] )
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			->inLanguage( 'en' )
 			->useDatabase( false );
 		return ApiErrorFormatter::stripMarkup( $msg->text() );
@@ -285,6 +286,7 @@ class ApiErrorReporter {
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
 
+		// @phan-suppress-next-line PhanTypeMismatchArgument
 		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
@@ -309,7 +311,7 @@ class ApiErrorReporter {
 
 		$messageData = $this->convertMessageToResult( $message );
 
-		$messageList = isset( $data['messages'] ) ? $data['messages'] : [];
+		$messageList = $data['messages'] ?? [];
 		ApiResult::setIndexedTagName( $messageList, 'message' );
 
 		$messageList[] = $messageData;
@@ -494,7 +496,7 @@ class ApiErrorReporter {
 				$params = array_slice( $messageSpec, 1 );
 			} else {
 				// it's an assoc array, find message key and params in fields.
-				$params = isset( $messageSpec['params'] ) ? $messageSpec['params'] : null;
+				$params = $messageSpec['params'] ?? null;
 
 				if ( isset( $messageSpec['message'] ) ) {
 					if ( $messageSpec['message'] instanceof Message ) {

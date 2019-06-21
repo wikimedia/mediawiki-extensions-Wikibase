@@ -21,6 +21,7 @@ class LabelDescriptionNotEqualValidator implements EntityValidator, FingerprintV
 	 * @param EntityDocument $entity
 	 *
 	 * @return Result
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function validateEntity( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {

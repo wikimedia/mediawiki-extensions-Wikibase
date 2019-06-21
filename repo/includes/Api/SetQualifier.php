@@ -172,7 +172,7 @@ class SetQualifier extends ApiBase {
 		}
 		$newQualifier = $this->modificationHelper->getSnakInstance( $params, $propertyId );
 
-		$snakHash = isset( $params['snakhash'] ) ? $params['snakhash'] : '';
+		$snakHash = $params['snakhash'] ?? '';
 		$changeOp = $this->statementChangeOpFactory->newSetQualifierOp( $guid, $newQualifier, $snakHash );
 
 		return $changeOp;

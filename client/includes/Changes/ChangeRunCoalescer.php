@@ -219,6 +219,7 @@ class ChangeRunCoalescer {
 	 * @return bool
 	 */
 	private function isBadgesOnlyChange( DiffOp $siteLinkDiffOp ) {
+		// @phan-suppress-next-line PhanTypeMismatchArgumentInternal
 		return $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp );
 	}
 

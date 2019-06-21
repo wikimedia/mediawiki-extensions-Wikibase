@@ -18,7 +18,7 @@ interface SiteLinkStore extends SiteLinkLookup, EntityByLinkedTitleLookup {
 	 *
 	 * @param Item $item
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function saveLinksOfItem( Item $item );
 
@@ -27,14 +27,14 @@ interface SiteLinkStore extends SiteLinkLookup, EntityByLinkedTitleLookup {
 	 *
 	 * @param ItemId $itemId
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function deleteLinksOfItem( ItemId $itemId );
 
 	/**
 	 * Clears all sitelinks from the cache.
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function clear();
 

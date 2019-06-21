@@ -160,6 +160,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
+	 * @suppress PhanParamSignatureMismatch
 	 */
 	protected function formatRow( EntityId $propertyId ) {
 		$title = $this->titleLookup->getTitleForId( $propertyId );

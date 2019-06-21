@@ -29,7 +29,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	private $loadBalancer;
 
 	/**
-	 * @var int[]
+	 * @var int[][]
 	 */
 	private $idBlacklist;
 
@@ -47,7 +47,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 
 	/**
 	 * @param ILoadBalancer $loadBalancer
-	 * @param array[] $idBlacklist
+	 * @param int[][] $idBlacklist
 	 * @param bool $separateDbConnection
 	 */
 	public function __construct(

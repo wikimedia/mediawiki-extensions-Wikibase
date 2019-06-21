@@ -32,6 +32,7 @@ class SqlChangeStore implements ChangeStore {
 	 * @param Change $change
 	 *
 	 * @throws DBQueryError
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function saveChange( Change $change ) {
 		Assert::parameterType( ChangeRow::class, $change, '$change' );

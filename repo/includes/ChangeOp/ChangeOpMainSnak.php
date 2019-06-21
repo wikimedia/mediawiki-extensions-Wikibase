@@ -95,6 +95,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		$statements = $entity->getStatements();
 
 		if ( empty( $this->statementGuid ) ) {
+			// @phan-suppress-next-line PhanUndeclaredMethod StatementListProvider::getId doesn't exist
 			$this->addStatement( $statements, $entity->getId(), $summary );
 		} else {
 			$this->setStatement( $statements, $summary );

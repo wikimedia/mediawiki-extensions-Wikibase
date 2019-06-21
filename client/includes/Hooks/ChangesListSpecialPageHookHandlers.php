@@ -15,6 +15,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LoadBalancer;
 
 /**
@@ -56,14 +57,14 @@ class ChangesListSpecialPageHookHandlers {
 	/**
 	 * @param WebRequest $request
 	 * @param User $user
-	 * @param LoadBalancer $loadBalancer
+	 * @param ILoadBalancer $loadBalancer
 	 * @param string $pageName
 	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
 		WebRequest $request,
 		User $user,
-		LoadBalancer $loadBalancer,
+		ILoadBalancer $loadBalancer,
 		$pageName,
 		$showExternalChanges
 	) {

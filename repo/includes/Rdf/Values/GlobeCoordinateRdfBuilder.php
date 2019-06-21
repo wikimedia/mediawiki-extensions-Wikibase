@@ -37,6 +37,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param PropertyValueSnak $snak
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function addValue(
 		RdfWriter $writer,

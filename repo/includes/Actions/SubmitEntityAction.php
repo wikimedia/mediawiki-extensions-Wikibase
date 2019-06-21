@@ -142,6 +142,7 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @param Revision $latestRevision
 	 *
 	 * @return EntityContent
+	 * @suppress PhanUndeclaredMethod
 	 */
 	private function getPatchContent(
 		Revision $olderRevision,

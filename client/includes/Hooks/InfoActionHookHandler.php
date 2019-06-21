@@ -239,6 +239,7 @@ class InfoActionHookHandler {
 			$aspectContent .= Html::rawElement(
 				'li',
 				[],
+				// @phan-suppress-next-line PhanParamTooMany T191666
 				$context->msg( $msgKey, $aspect[1] )->parse()
 			);
 		}

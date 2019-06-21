@@ -46,6 +46,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param PropertyValueSnak $snak
+	 * @suppress PhanUndeclaredMethod,PhanTypeMismatchArgument
 	 */
 	public function addValue(
 		RdfWriter $writer,

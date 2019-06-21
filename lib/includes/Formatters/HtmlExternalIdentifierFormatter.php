@@ -42,6 +42,7 @@ class HtmlExternalIdentifierFormatter implements SnakFormatter {
 	 * @throws ParameterTypeException if $snak is not a PropertyValueSnak, or if $snak->getDataValue()
 	 * does not return a StringValue.
 	 * @return string HTML
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function formatSnak( Snak $snak ) {
 		Assert::parameterType( PropertyValueSnak::class, $snak, '$snak' );
