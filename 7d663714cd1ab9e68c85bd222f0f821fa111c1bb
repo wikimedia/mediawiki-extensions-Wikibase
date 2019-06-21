@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42fa810b_8f7fdcd8",
+        "filename": "client/data-bridge/src/mediawiki/data-bridge.init.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T14:53:29Z",
+      "side": 1,
+      "message": ":void ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "7d663714cd1ab9e68c85bd222f0f821fa111c1bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "139d2073_274f41a2",
+        "filename": "client/data-bridge/src/mediawiki/data-bridge.init.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T14:53:29Z",
+      "side": 1,
+      "message": ": boolean",
+      "range": {
+        "startLine": 10,
+        "startChar": 39,
+        "endLine": 10,
+        "endChar": 42
+      },
+      "revId": "7d663714cd1ab9e68c85bd222f0f821fa111c1bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a9cb9f2_9548d1b0",
+        "filename": "client/data-bridge/src/mediawiki/data-bridge.init.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T14:53:29Z",
+      "side": 1,
+      "message": "Could also use a template literal (TypeScript translates it automatically):\n\n `Number of links potentially usable for data bridge: ${ validLinks.length }`",
+      "range": {
+        "startLine": 14,
+        "startChar": 14,
+        "endLine": 14,
+        "endChar": 92
+      },
+      "revId": "7d663714cd1ab9e68c85bd222f0f821fa111c1bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
