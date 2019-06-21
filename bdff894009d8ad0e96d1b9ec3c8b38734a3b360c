@@ -22,6 +22,30 @@
       "revId": "bdff894009d8ad0e96d1b9ec3c8b38734a3b360c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b3304e_d9f4402d",
+        "filename": "view/lib/wikibase-termbox",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6097
+      },
+      "writtenOn": "2019-06-21T14:02:17Z",
+      "side": 1,
+      "message": "Good catch, sorry about that.",
+      "parentUuid": "883e2768_38fcf78e",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "bdff894009d8ad0e96d1b9ec3c8b38734a3b360c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
