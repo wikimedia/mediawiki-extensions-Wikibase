@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "1f3f47b0_5eab97c0",
+        "filename": "client/data-bridge/src/presentation/App.vue",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-21T15:04:48Z",
+      "side": 1,
+      "message": "Sounds good to me 👍",
+      "parentUuid": "e9240457_3badcc63",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74f53d30_364b7576",
         "filename": "client/data-bridge/src/presentation/assets/logo.png",
         "patchSetId": 4
