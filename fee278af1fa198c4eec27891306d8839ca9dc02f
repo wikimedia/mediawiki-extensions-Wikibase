@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cae43f65_c22ff6b3",
+        "filename": "client/data-bridge/tests/unit/example.spec.ts",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T11:17:48Z",
+      "side": 1,
+      "message": "should still have spaces (though that can also be cleaned up with the later eslint change)",
+      "range": {
+        "startLine": 1,
+        "startChar": 7,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "fee278af1fa198c4eec27891306d8839ca9dc02f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

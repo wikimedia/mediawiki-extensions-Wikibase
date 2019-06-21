@@ -34,6 +34,24 @@
       "revId": "1232ba1862cb0b9af02e07a517e3ce0ddce166b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "818bad1d_2bdd0a6b",
+        "filename": "client/data-bridge/tests/unit/.eslintrc.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T11:17:48Z",
+      "side": 1,
+      "message": "Can this change be merged already, or does it need to wait for that one or something?",
+      "parentUuid": "1e66bee5_71600664",
+      "revId": "1232ba1862cb0b9af02e07a517e3ce0ddce166b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
