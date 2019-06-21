@@ -39,6 +39,7 @@ class StatementEntityReferenceExtractor implements EntityReferenceExtractor {
 	 * @param EntityDocument|StatementListProvider $entity
 	 *
 	 * @return EntityId[]
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function extractEntityIds( EntityDocument $entity ) {
 		foreach ( $entity->getStatements() as $statement ) {

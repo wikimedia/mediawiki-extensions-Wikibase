@@ -43,6 +43,7 @@ class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 		}
 
 		/** @var ChangeOpValidationException $exception */
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$result = $exception->getValidationResult();
 
 		foreach ( $result->getErrors() as $error ) {

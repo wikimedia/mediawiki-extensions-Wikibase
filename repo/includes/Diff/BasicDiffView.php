@@ -53,6 +53,7 @@ class BasicDiffView implements DiffView {
 	 *
 	 * @return string
 	 * @throws MWException
+	 * @suppress PhanUndeclaredMethod
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {

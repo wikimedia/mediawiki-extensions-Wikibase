@@ -126,6 +126,10 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 		return $termsListItems;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @suppress PhanUndeclaredMethod
+	 */
 	public function getPlaceholders(
 		EntityDocument $entity,
 		$revision,

@@ -99,6 +99,7 @@ class ChangeOpStatement extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod StatementListProvider::getId doesn't exist
 		$entityId = $entity->getId();
 
 		if ( $this->statement->getGuid() === null ) {

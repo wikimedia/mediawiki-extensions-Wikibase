@@ -230,6 +230,7 @@ class OtherProjectsSidebarGenerator {
 			return [];
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		return $item->getSiteLinkList()->toArray();
 	}
 

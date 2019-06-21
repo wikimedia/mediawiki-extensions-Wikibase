@@ -71,7 +71,8 @@ class PropertyView extends EntityView {
 	}
 
 	/**
-	 * @see EntityView::getTitleHtml()
+	 * @inheritDoc
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider ) {
@@ -170,6 +171,7 @@ class PropertyView extends EntityView {
 	 * @param EntityDocument $entity
 	 *
 	 * @return string HTML
+	 * @suppress PhanUndeclaredMethod
 	 */
 	private function getHtmlForTerms( EntityDocument $entity ) {
 		$id = $entity->getId();

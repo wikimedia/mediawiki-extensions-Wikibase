@@ -122,6 +122,7 @@ class EditActionHookHandler {
 			if ( $aspect[1] !== null ) {
 				$msgKey .= '-with-modifier';
 			}
+			// @phan-suppress-next-line PhanParamTooMany T191666
 			$aspects[] = $this->context->msg( $msgKey, $aspect[1] )->parse();
 		}
 

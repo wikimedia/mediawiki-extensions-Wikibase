@@ -49,6 +49,7 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 	 * @throws ParameterTypeException if $snak is not a PropertyValueSnak, or if $snak->getDataValue()
 	 * does not return a StringValue.
 	 * @return string Wikitext
+	 * @suppress PhanUndeclaredMethod,PhanTypeMismatchArgument
 	 */
 	public function formatSnak( Snak $snak ) {
 		Assert::parameterType( PropertyValueSnak::class, $snak, '$snak' );

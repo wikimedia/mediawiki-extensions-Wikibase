@@ -84,6 +84,11 @@ class EntityDataRequestHandler {
 	private $logger;
 
 	/**
+	 * @var string[]
+	 */
+	private $entityTypesWithoutRdfOutput;
+
+	/**
 	 * @var string
 	 */
 	private $defaultFormat;

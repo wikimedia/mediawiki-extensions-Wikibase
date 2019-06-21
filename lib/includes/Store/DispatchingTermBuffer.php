@@ -140,9 +140,7 @@ class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingT
 	 * @return TermBuffer
 	 */
 	private function getTermBufferForRepository( $repository ) {
-		return isset( $this->termBuffers[$repository] ) ?
-			$this->termBuffers[$repository]
-			: null;
+		return $this->termBuffers[$repository] ?? null;
 	}
 
 }

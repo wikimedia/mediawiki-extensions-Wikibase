@@ -97,6 +97,7 @@ class CreateClaim extends ApiBase {
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getStatementGuid() );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );

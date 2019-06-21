@@ -86,8 +86,6 @@ abstract class UpdateRepoJob extends Job {
 	 * Apply the changes needed to the given Item.
 	 *
 	 * @param Item $item
-	 *
-	 * @return bool
 	 */
 	abstract protected function applyChanges( Item $item );
 

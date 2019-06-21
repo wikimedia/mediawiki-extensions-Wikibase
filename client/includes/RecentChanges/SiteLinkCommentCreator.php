@@ -157,6 +157,7 @@ class SiteLinkCommentCreator {
 		} else {
 			$diffOpCount = count( $diffOps );
 			if ( $diffOpCount === 1 ) {
+				// @phan-suppress-next-line PhanTypeMismatchArgument
 				$params = $this->getSiteLinkChangeParams( $diffOps );
 			} else {
 				// multiple changes, use original message

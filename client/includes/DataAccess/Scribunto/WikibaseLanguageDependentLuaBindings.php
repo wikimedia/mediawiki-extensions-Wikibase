@@ -70,6 +70,7 @@ class WikibaseLanguageDependentLuaBindings {
 		}
 
 		// NOTE: This tracks a label usage in the wiki's content language.
+		// @phan-suppress-next-line PhanUndeclaredMethod It seems it expects $term is a TermFallback
 		return [ $term->getText(), $term->getActualLanguageCode() ];
 	}
 
@@ -99,6 +100,7 @@ class WikibaseLanguageDependentLuaBindings {
 			return [ null, null ];
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod It seems it expects $term is a TermFallback
 		return [ $term->getText(), $term->getActualLanguageCode() ];
 	}
 

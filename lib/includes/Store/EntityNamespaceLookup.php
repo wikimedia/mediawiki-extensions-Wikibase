@@ -52,9 +52,7 @@ class EntityNamespaceLookup {
 	 *  $entityType is not a know entity type identifier.
 	 */
 	public function getEntityNamespace( $entityType ) {
-		return isset( $this->entityNamespaces[$entityType] )
-			? $this->entityNamespaces[$entityType]
-			: null;
+		return $this->entityNamespaces[$entityType] ?? null;
 	}
 
 	/**
@@ -66,9 +64,7 @@ class EntityNamespaceLookup {
 	 *         pages.
 	 */
 	public function getEntitySlotRole( $entityType ) {
-		return isset( $this->entitySlots[$entityType] )
-			? $this->entitySlots[$entityType]
-			: 'main';
+		return $this->entitySlots[$entityType] ?? 'main';
 	}
 
 	/**

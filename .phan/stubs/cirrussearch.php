@@ -11,6 +11,40 @@ namespace {
 	}
 }
 
+namespace Elastica {
+	class Client {
+	}
+	class Type {
+	}
+}
+
+namespace Elastica\Exception {
+	interface ExceptionInterface {
+
+	}
+	class InvalidException extends \InvalidArgumentException implements ExceptionInterface {
+
+	}
+}
+
+namespace {
+	class ElasticaConnection {
+		/**
+		 * Fetch a connection.
+		 * @return \Elastica\Client
+		 */
+		public function getClient() {
+		}
+		/**
+		 * @param int $timeout Timeout in seconds
+		 *
+		 * @return $this
+		 */
+		public function setTimeout($timeout) {
+		}
+	}
+}
+
 namespace CirrusSearch {
 
 	use User;
@@ -20,23 +54,52 @@ namespace CirrusSearch {
 		}
 	}
 
-	class Connection {
+	class Connection extends \ElasticaConnection {
+		/**
+		 * @param SearchConfig $config
+		 * @param string|null $cluster
+		 */
+		public function __construct( SearchConfig $config, $cluster = null ) {
+		}
+		/**
+		 * @param int[]|null $namespaces
+		 * @return string|false
+		 */
+		public function pickIndexTypeForNamespaces( array $namespaces = null ) {
+		}
+		/**
+		 * @param int[]|null $namespaces
+		 * @return string[]
+		 */
+		public function getAllIndexSuffixesForNamespaces( $namespaces = null ) {
+		}
+		/**
+		 * @param mixed $name
+		 * @param mixed $type
+		 * @return \Elastica\Type
+		 */
+		public function getPageType( $name, $type = false ) {
+		}
 	}
 
 	class ElasticsearchIntermediary {
+		/**
+		 * @var Connection
+		 */
+		protected $connection;
 
 		public function __construct( Connection $connection, User $user = null, $slowSeconds = null, $extraBackendLatency = 0 ) {
 		}
 
 		/**
 		 * @param mixed|null
-		 * @return Status
+		 * @return \Status
 		 */
 		public function success( $result = null ) {
 		}
 
 		/**
-		 * @return Status
+		 * @return \Status
 		 */
 		public function failure( \Elastica\Exception\ExceptionInterface $exception = null ) {
 		}
@@ -67,7 +130,23 @@ namespace CirrusSearch {
 		}
 	}
 
-	class SearchRequestLog {
+	interface RequestLog {
+
+	}
+
+	class BaseRequestLog implements RequestLog {
+
+	}
+
+	class SearchRequestLog extends BaseRequestLog {
+		/**
+		 * @param \Elastica\Client $client
+		 * @param string $description
+		 * @param string $queryType
+		 * @param array $extra
+		 */
+		public function __construct( \Elastica\Client $client, $description, $queryType, array $extra = [] ) {
+		}
 	}
 
 	class Searcher {
@@ -98,9 +177,6 @@ namespace CirrusSearch {
 		 * @param string|null $param3
 		 */
 		function addWarning( $message, $param1 = null, $param2 = null, $param3 = null );
-	}
-
-	interface RequestLog {
 	}
 }
 
@@ -218,6 +294,7 @@ namespace CirrusSearch\Profile {
 namespace CirrusSearch\Query {
 
 	use CirrusSearch\Search\SearchContext;
+	use CirrusSearch\SearchConfig;
 
 	interface FilterQueryFeature {
 	}
@@ -229,6 +306,8 @@ namespace CirrusSearch\Query {
 
 	}
 	class MoreLikeFeature {
+		public function __construct( SearchConfig $config ) {
+		}
 		protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
 		}
 	}

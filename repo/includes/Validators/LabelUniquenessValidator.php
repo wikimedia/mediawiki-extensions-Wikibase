@@ -31,6 +31,7 @@ class LabelUniquenessValidator implements EntityValidator {
 	 * @param EntityDocument $entity
 	 *
 	 * @return Result
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function validateEntity( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider ) {

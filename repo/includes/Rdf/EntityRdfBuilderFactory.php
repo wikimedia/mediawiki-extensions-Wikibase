@@ -19,7 +19,7 @@ class EntityRdfBuilderFactory {
 	 */
 	private $factoryCallbacks;
 	/**
-	 * @var string[][]
+	 * @var string[][][]
 	 */
 	private $labelPredicates;
 

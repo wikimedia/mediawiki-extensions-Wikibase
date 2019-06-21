@@ -309,9 +309,11 @@ final class RepoHooks {
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$wikibaseRepo->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
 		$notifier = $wikibaseRepo->getChangeNotifier();
+		// @phan-suppress-next-line PhanTypeMismatchArgument
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
 	}
 
@@ -578,6 +580,7 @@ final class RepoHooks {
 	 *                            This can be a message key or an array as expected by ApiBase::dieUsageMsg().
 	 *
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public static function onApiCheckCanExecute( ApiBase $module, User $user, &$message ) {
 		if ( $module instanceof ApiEditPage ) {

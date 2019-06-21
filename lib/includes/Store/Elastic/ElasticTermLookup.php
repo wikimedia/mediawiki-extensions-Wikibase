@@ -55,6 +55,7 @@ class ElasticTermLookup implements PrefetchingTermLookup {
 		$connection = new Connection( $config );
 		$searcher = new TermLookupSearcher( $connection, $config->get( SearchConfig::INDEX_BASE_NAME ),
 				$config->get( 'CirrusSearchSlowSearch' ),
+				// @phan-suppress-next-line PhanUndeclaredMethod
 				$config->getElement( 'CirrusSearchClientSideSearchTimeout', 'default' )
 		);
 		return new static( $searcher, $titleLookup, $idParser );

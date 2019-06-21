@@ -249,14 +249,15 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getLabelConflictFinder
 	 *
-	 * @return LabelConflictFinder
+	 * @return TermIndex
+	 * @suppress PhanParamSignatureMismatch
 	 */
 	public function getLabelConflictFinder() {
 		return $this->getTermIndex();
 	}
 
 	/**
-	 * @return TermIndex|LabelConflictFinder
+	 * @return TermSqlIndex
 	 */
 	private function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseRepo?
@@ -485,6 +486,7 @@ class SqlStore implements Store {
 	 *
 	 * @return EntityRevisionLookup[] A two-element array with a "raw", non-caching and a caching
 	 *  EntityRevisionLookup.
+	 * @suppress PhanUndeclaredMethod
 	 */
 	private function newEntityRevisionLookup() {
 		// Maintain a list of watchers to be notified of changes to any entities,

@@ -109,6 +109,7 @@ class LangLinkHandler {
 			$item = $this->entityLookup->getEntity( $itemId );
 
 			if ( $item ) {
+				// @phan-suppress-next-line PhanUndeclaredMethod
 				$links = iterator_to_array( $item->getSiteLinkList() );
 				$links = $this->indexLinksBySiteId( $links );
 			} else {

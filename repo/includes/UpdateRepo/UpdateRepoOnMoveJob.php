@@ -189,8 +189,6 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	 * Apply the changes needed to the given Item.
 	 *
 	 * @param Item $item
-	 *
-	 * @return bool
 	 */
 	protected function applyChanges( Item $item ) {
 		$params = $this->getParams();

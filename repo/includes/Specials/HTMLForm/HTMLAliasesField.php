@@ -9,6 +9,7 @@ use Wikibase\StringNormalizer;
  * Class representing generic alias field
  *
  * @license GPL-2.0-or-later
+ * @phan-file-suppress PhanParamSignatureMismatch
  */
 class HTMLAliasesField extends HTMLTextField {
 

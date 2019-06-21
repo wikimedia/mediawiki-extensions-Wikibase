@@ -39,7 +39,7 @@ class EntityLinkFormatterFactory {
 	}
 
 	/**
-	 * @param $type string entity type
+	 * @param string $type entity type
 	 * @return EntityLinkFormatter
 	 */
 	public function getLinkFormatter( $type ): EntityLinkFormatter {
@@ -52,19 +52,26 @@ class EntityLinkFormatterFactory {
 		return $this->getOrCreateLinkFormatter( $type );
 	}
 
+	/**
+	 * @return EntityLinkFormatter
+	 */
 	private function getDefaultLinkFormatter() {
 		return $this->getOrCreateLinkFormatter( 'default' );
 	}
 
+	/**
+	 * @param string $type
+	 * @return EntityLinkFormatter
+	 */
 	private function getOrCreateLinkFormatter( $type ) {
 		return $this->cachedLinkFormatters[$type] ?? $this->createAndCacheLinkFormatter( $type );
 	}
 
+	/**
+	 * @param string $type
+	 * @return EntityLinkFormatter
+	 */
 	private function createAndCacheLinkFormatter( $type ) {
-		if ( !isset( $this->cachedLinkFormatters[$type] ) ) {
-			$this->cachedLinkFormatters[$type] = [];
-		}
-
 		$this->cachedLinkFormatters[$type] = $this->callbacks[$type]( $this->language );
 
 		return $this->cachedLinkFormatters[$type];

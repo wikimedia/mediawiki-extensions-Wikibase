@@ -19,7 +19,7 @@ use Wikimedia\Assert\Assert;
 class HashSiteLinkStore implements SiteLinkStore {
 
 	/**
-	 * @var SiteLink[] indexed by prefixed ItemId
+	 * @var SiteLink[][] indexed by prefixed ItemId
 	 */
 	private $linksByItemId = [];
 
@@ -179,11 +179,12 @@ class HashSiteLinkStore implements SiteLinkStore {
 	}
 
 	/**
-	 * @see SiteLinkStore::clear
+	 * @inheritDoc
 	 */
 	public function clear() {
 		$this->linksByItemId = [];
 		$this->itemIdsByLink = [];
+		return true;
 	}
 
 	private function indexByLink( ItemId $itemId, SiteLink $siteLink ) {

@@ -6,7 +6,15 @@
  * @codingStandardsIgnoreFile
  */
 
-class Scribunto_LuaEngine {
+class ScribuntoEngineBase {
+	/**
+	 * @return Parser
+	 */
+	public function getParser() {
+	}
+}
+
+class Scribunto_LuaEngine extends ScribuntoEngineBase {
 
 	/**
 	 * @param string $moduleFileName
@@ -20,7 +28,7 @@ class Scribunto_LuaEngine {
 
 }
 
-class Scribunto_LuaError {
+class Scribunto_LuaError extends ScribuntoException {
 }
 
 class Scribunto_LuaLibraryBase {
