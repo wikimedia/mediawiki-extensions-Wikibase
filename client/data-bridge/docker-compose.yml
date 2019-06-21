@@ -9,6 +9,7 @@ services:
     volumes:
       - '~/.npm:/.npm'
       - './:/app'
+      - './../../.git:/app/.git:ro' # allows jest-watch-typeahead to detect changes
     working_dir: /app
     environment:
       - NODE_ENV
