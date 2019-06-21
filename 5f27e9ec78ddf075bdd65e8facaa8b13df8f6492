@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5e15a00a_fe290bbc",
+        "filename": ".eslintrc.json",
+        "patchSetId": 24
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2019-06-21T10:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "388229dc_2a905109",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db5c5c1b_cd7f0d51",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
         "patchSetId": 24
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "a74097aa_3c33d24e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2019-06-21T10:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c9e2627_bbd55bfc",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f8d548a_d2a3b48f",
         "filename": "view/resources/wikibase/wikibase.less",
         "patchSetId": 24
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "093baa55_e7efc6fd",
+        "filename": "view/resources/wikibase/wikibase.less",
+        "patchSetId": 24
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2019-06-21T10:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8d548a_d2a3b48f",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4ea4445_fbb45379",
         "filename": "view/resources/wikibase/wikibase.less",
         "patchSetId": 24
@@ -81,6 +135,24 @@
       "writtenOn": "2019-06-20T11:15:43Z",
       "side": 1,
       "message": "This appears to be a no-op",
+      "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0161020_2a3d388e",
+        "filename": "view/resources/wikibase/wikibase.less",
+        "patchSetId": 24
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2019-06-21T10:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ea4445_fbb45379",
       "revId": "5f27e9ec78ddf075bdd65e8facaa8b13df8f6492",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
