@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b1d0d44_7ab15288",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-21T12:03:32Z",
+      "side": 1,
+      "message": "Do we not want this to be `\"root\": true` to scope it?\nI can see that it - in theory - it would be beneficial to inherit wb style definitions but that would have to happen consciously then (saving us some redundant definition in here indeed).\n\nhttps://eslint.org/docs/user-guide/configuring#using-configuration-files-1",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "689e747b73f1a7bd0fbcebfce7408a10aac8cfe2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "504ce139_f94e5cbf",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-21T12:03:32Z",
+      "side": 1,
+      "message": "comma-dangle does not seem to apply to this file itself - even though it is JS by now. ಠ_ಠ",
+      "range": {
+        "startLine": 41,
+        "startChar": 33,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "689e747b73f1a7bd0fbcebfce7408a10aac8cfe2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a3aea51_d8e4a95f",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-21T12:03:32Z",
+      "side": 1,
+      "message": "Please explain why this is necessary.",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 11
+      },
+      "revId": "689e747b73f1a7bd0fbcebfce7408a10aac8cfe2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31ab35cb_fb9d4402",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-21T12:03:32Z",
+      "side": 1,
+      "message": "This, as a by-product, makes us use less - which is fine but we are not quite there yet.\nSwitching HelloWorld to `lang\u003d\"less\"` makes the build die (\"Failed to resolve loader: less-loader\").",
+      "range": {
+        "startLine": 10,
+        "startChar": 72,
+        "endLine": 10,
+        "endChar": 76
+      },
+      "revId": "689e747b73f1a7bd0fbcebfce7408a10aac8cfe2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
