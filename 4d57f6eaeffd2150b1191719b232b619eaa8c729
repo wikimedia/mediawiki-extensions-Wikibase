@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93d70f48_c34c35d5",
+        "filename": "client/data-bridge/docker-compose.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-21T11:15:11Z",
+      "side": 1,
+      "message": "Does it still make sense to call this “app” when the “real” app is two levels below this directory?",
+      "range": {
+        "startLine": 11,
+        "startChar": 18,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "4d57f6eaeffd2150b1191719b232b619eaa8c729",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
