@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3fb5fb40_7912f931",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T12:17:52Z",
+      "side": 1,
+      "message": "The problem is depending on and it is a open issue see:\nhttps://github.com/typescript-eslint/typescript-eslint/issues/131 \nand\nhttps://github.com/eslint/typescript-eslint-parser/issues/437",
+      "parentUuid": "7a3aea51_d8e4a95f",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 11
+      },
+      "revId": "689e747b73f1a7bd0fbcebfce7408a10aac8cfe2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31ab35cb_fb9d4402",
         "filename": "client/data-bridge/package.json",
         "patchSetId": 10
