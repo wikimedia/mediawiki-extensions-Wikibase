@@ -34,6 +34,7 @@ return call_user_func( function() {
 			'localBasePath' => __DIR__ . '/../data-bridge/dist',
 			'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 			'scripts' => [
+				'data-bridge.init.js'
 			],
 		],
 
