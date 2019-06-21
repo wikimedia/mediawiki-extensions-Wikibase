@@ -145,7 +145,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->showErrorHTML( $msg->parse() );
 		}
 
-		$this->site = trim( $request->getVal( 'site', isset( $parts[1] ) ? $parts[1] : '' ) );
+		$this->site = trim( $request->getVal( 'site', $parts[1] ?? '' ) );
 
 		if ( $this->site === '' ) {
 			$this->site = null;

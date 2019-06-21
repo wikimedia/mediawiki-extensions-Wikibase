@@ -34,7 +34,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	private $entityLookup;
 
 	/**
-	 * @var string[] Associative array mapping entity type names (strings) to names of repositories providing
+	 * @var string[][] Associative array mapping entity type names (strings) to names of repositories providing
 	 *               entities of this type.
 	 */
 	private $entityTypeToRepositoryMapping;

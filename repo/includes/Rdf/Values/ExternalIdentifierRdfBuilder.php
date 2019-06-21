@@ -45,6 +45,7 @@ class ExternalIdentifierRdfBuilder implements ValueSnakRdfBuilder {
 		$dataType,
 		PropertyValueSnak $snak
 	) {
+		// @phan-suppress-next-line PhanTypeMismatchArgument
 		$id = $this->getValueId( $snak->getDataValue() );
 		$uriPattern = $this->uriPatternProvider->getPropertyInfo( $snak->getPropertyId() );
 

@@ -53,6 +53,7 @@ class BasicDiffView implements DiffView {
 	 *
 	 * @return string
 	 * @throws MWException
+	 * @suppress PhanUndeclaredMethod
 	 */
 	protected function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
@@ -77,6 +78,7 @@ class BasicDiffView implements DiffView {
 			}
 		} else {
 			$html = '';
+			// @phan-suppress-next-line PhanTypeNoPropertiesForeach
 			foreach ( $op as $key => $subOp ) {
 				$html .= $this->generateOpHtml(
 					array_merge( $path, [ $key ] ),

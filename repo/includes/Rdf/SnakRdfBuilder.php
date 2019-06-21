@@ -74,6 +74,7 @@ class SnakRdfBuilder {
 	 * @param string $propertyNamespace
 	 *
 	 * @throws InvalidArgumentException
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace ) {
 		$propertyId = $snak->getPropertyId();

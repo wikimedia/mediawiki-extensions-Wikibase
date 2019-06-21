@@ -37,6 +37,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param PropertyValueSnak $snak
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function addValue(
 		RdfWriter $writer,
@@ -65,6 +66,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 			->value( $point, RdfVocabulary::NS_GEO, "wktLiteral" );
 
 		if ( $this->complexValueHelper !== null ) {
+			// @phan-suppress-next-line PhanTypeMismatchArgument
 			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
 		}
 	}

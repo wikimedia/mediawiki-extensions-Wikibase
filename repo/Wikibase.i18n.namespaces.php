@@ -6,6 +6,7 @@
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @phan-file-suppress PhanUndeclaredConstant
  */
 
 // For all well known Wikibase namespace constants, check if they are defined.

@@ -77,6 +77,7 @@ class RebuildTermSqlIndex extends Maintenance {
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
+			// @phan-suppress-next-line PhanTypeMismatchArgument Though this seems a bug
 			$idParser
 		);
 

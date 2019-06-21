@@ -227,6 +227,7 @@ class EntityChange extends DiffChange {
 		if ( !$this->hasField( 'object_id' ) ) {
 			/** @var EntityContent $content */
 			$content = $revision->getContent(); // potentially expensive!
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			$entityId = $content->getEntityId();
 
 			$this->setFields( [

@@ -926,6 +926,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			}
 
 			if ( $options['prefixSearch'] ) {
+				// @phan-suppress-next-line PhanParamTooMany T191668
 				$conditions[] = $textField . $db->buildLike( $text, $db->anyString() );
 			} else {
 				$conditions[$textField] = $text;

@@ -124,7 +124,7 @@ class DataAccessSnakFormatterFactory {
 
 	/**
 	 * @param FormatterOptions $options
-	 * @return BinaryOptionDispatchingSnakFormatter
+	 * @return EscapingSnakFormatter
 	 */
 	private function getRichWikitextSnakFormatterForOptions( FormatterOptions $options ) {
 		$snakFormatter = $this->snakFormatterFactory->getSnakFormatter(

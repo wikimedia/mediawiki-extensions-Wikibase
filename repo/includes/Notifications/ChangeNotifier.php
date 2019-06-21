@@ -95,6 +95,7 @@ class ChangeNotifier {
 	 * @param Revision $revision
 	 *
 	 * @return EntityChange|null
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function notifyOnPageUndeleted( Revision $revision ) {
 		/** @var EntityContent $content */
@@ -136,6 +137,7 @@ class ChangeNotifier {
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 * @return EntityChange|null
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function notifyOnPageCreated( Revision $revision ) {
 		/** @var EntityContent $content */

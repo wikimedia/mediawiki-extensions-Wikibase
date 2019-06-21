@@ -17,6 +17,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * ids as well from the master database after insertion.
  *
  * @license GPL-2.0-or-later
+ * @phan-file-suppress PhanUndeclaredProperty
  */
 class ReplicaMasterAwareRecordIdsAcquirer {
 

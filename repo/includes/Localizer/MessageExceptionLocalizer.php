@@ -28,6 +28,7 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 		}
 
 		/** @var MessageException $exception */
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		return new Message( $exception->getKey(), $exception->getParams() );
 	}
 

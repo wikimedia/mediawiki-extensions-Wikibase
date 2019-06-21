@@ -27,8 +27,6 @@ class NoLangLinkHandler {
 	 *
 	 * @param Parser $parser
 	 * @param string [$languageCode,...] Language codes or '*'
-	 *
-	 * @return string
 	 */
 	public static function handle( Parser $parser /*...*/ ) {
 		$langs = func_get_args();

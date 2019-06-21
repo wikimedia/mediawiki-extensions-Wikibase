@@ -86,10 +86,10 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 		$sites = array_map(
 			[ $this->stringNormalizer, 'trimToNFC' ],
-			explode( ',', $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) )
+			explode( ',', $request->getVal( 'site', $parts[0] ?? '' ) )
 		);
 		$itemString = $this->stringNormalizer->trimToNFC(
-			$request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : '' )
+			$request->getVal( 'itemid', $parts[1] ?? '' )
 		);
 
 		return [ $sites, $itemString ];

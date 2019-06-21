@@ -42,6 +42,7 @@ class StatementRankSerializer implements Serializer, Deserializer {
 	 *
 	 * @throws DeserializationException
 	 * @return int
+	 * @suppress PhanParamSignatureMismatch
 	 */
 	public function deserialize( $serializedRank ) {
 		$ranks = array_flip( self::$rankMap );

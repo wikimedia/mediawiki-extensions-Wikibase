@@ -247,7 +247,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected function processArguments( $subPage ) {
 		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
-		$idString = $this->getRequest()->getVal( 'id', isset( $parts[0] ) ? $parts[0] : null );
+		$idString = $this->getRequest()->getVal( 'id', $parts[0] ?? null );
 		$baseRevId = $this->getRequest()->getInt( 'revid', 0 );
 
 		if ( !$idString ) {

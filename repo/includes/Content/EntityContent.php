@@ -50,6 +50,7 @@ use WikiPage;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @phan-file-suppress PhanUndeclaredMethod
  */
 abstract class EntityContent extends AbstractContent {
 

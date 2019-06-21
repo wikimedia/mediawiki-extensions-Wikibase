@@ -146,7 +146,7 @@ class TimeParserFactory {
 		$separatorMap = $language->separatorTransformTable();
 		$canonical = YearTimeParser::CANONICAL_DIGIT_GROUP_SEPARATOR;
 
-		return isset( $separatorMap[$canonical] ) ? $separatorMap[$canonical] : $canonical;
+		return $separatorMap[$canonical] ?? $canonical;
 	}
 
 }

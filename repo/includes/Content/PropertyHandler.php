@@ -100,7 +100,7 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
-	 * @return string[]
+	 * @return array
 	 */
 	public function getActionOverrides() {
 		return [
@@ -174,6 +174,7 @@ class PropertyHandler extends EntityHandler {
 		$updates = [];
 
 		/** @var PropertyContent $content */
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$property = $content->getProperty();
 		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 

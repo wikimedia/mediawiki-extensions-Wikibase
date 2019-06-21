@@ -89,6 +89,8 @@ class LinkTitles extends ApiBase {
 
 	/**
 	 * Main method. Does the actual work and sets the result.
+	 *
+	 * @suppress PhanUndeclaredMethod
 	 */
 	public function execute() {
 		$lookup = $this->revisionLookup;

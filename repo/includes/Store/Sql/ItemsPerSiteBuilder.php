@@ -76,6 +76,7 @@ class ItemsPerSiteBuilder {
 				break;
 			}
 
+			// @phan-suppress-next-line PhanTypeMismatchArgument
 			$total += $this->rebuildSiteLinks( $ids );
 			$this->report( 'Processed ' . $total . ' entities.' );
 		};

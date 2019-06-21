@@ -5,8 +5,9 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -129,8 +130,8 @@ class ChangeOpDescription extends ChangeOpBase {
 			return $result;
 		}
 
-		// TODO: Don't bind against LabelsProvider here, rather use general builders for validators
-		if ( $entity instanceof LabelsProvider ) {
+		// TODO: Don't bind against Item/Property here, rather use general builders for validators
+		if ( $entity instanceof Item || $entity instanceof Property ) {
 			$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 			// Check if the new fingerprint of the entity is valid (e.g. if the combination

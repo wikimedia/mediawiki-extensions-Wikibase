@@ -229,7 +229,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * Get map of page properties used by this builder
 	 *
-	 * @return string[]
+	 * @return string[][]
 	 */
 	public function getPageProperties() {
 		return $this->vocabulary->getPageProperties();

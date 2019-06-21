@@ -133,6 +133,7 @@ class EntityDiffChangedAspectsFactory {
 	 * @param Diff $claimsDiff
 	 *
 	 * @return string[]
+	 * @suppress PhanNonClassMethodCall
 	 */
 	private function getChangedStatements( Diff $claimsDiff ) {
 		$changedStatements = [];

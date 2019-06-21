@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use MessageLocalizer;
 use SiteLookup;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 
@@ -88,10 +89,12 @@ class ItemDiffVisualizer implements EntityDiffVisualizer {
 	 * @return string
 	 */
 	protected function visualizeEntityDiff( EntityDiff $diff ) {
+		/** @var ItemDiff $diff */
 		return ( new ItemDiffView(
 			[],
 			new Diff(
 				[
+					// @phan-suppress-next-line PhanUndeclaredMethod
 					$this->messageLocalizer->msg( 'wikibase-diffview-link' )->text() => $diff->getSiteLinkDiff(),
 				],
 				true
