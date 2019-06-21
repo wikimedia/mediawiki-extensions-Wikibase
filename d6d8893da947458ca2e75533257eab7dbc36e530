@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7059bede_0f0c8d22",
+        "filename": "client/data-bridge/src/presentation/App.vue",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-21T14:12:46Z",
+      "side": 1,
+      "message": "ideally all business logic, the vuex store, interactions with the Wikibase API, etc.",
+      "parentUuid": "4e7f8e39_5f18ca2e",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74f53d30_364b7576",
         "filename": "client/data-bridge/src/presentation/assets/logo.png",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Maybe let remove it (with the img tag) so we even have not to struggle with this discussion.",
       "parentUuid": "bdf27bb7_696eb188",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7952ca85_cd643b24",
+        "filename": "client/data-bridge/src/presentation/assets/logo.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-21T14:12:46Z",
+      "side": 1,
+      "message": "👍",
+      "parentUuid": "373c260e_60dbf900",
       "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
