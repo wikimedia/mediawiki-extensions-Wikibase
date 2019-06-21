@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "859491a2_111cdfb4",
+        "filename": "client/data-bridge/.eslintrc",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-21T09:39:04Z",
+      "side": 1,
+      "message": "Everything seems to still pass linting even without this. Could we remove it for now and add it when we actually have code that requires it?",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 15
+      },
+      "revId": "f2baaf5079f70021b7fbc677ab0c2f2fb207d583",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
