@@ -8,8 +8,9 @@ services:
     image: wmde/data-bridge-node
     volumes:
       - '~/.npm:/.npm'
-      - './:/app'
-    working_dir: /app
+      - './../..:/src:ro' # grant read access to allow e.g. jest watch to detect changes
+      - '.:/src/client/data-bridge'
+    working_dir: /src/client/data-bridge
     environment:
       - NODE_ENV
       - NODE_DEBUG
