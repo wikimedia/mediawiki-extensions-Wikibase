@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "36977086_5e60200a",
+        "filename": "client/data-bridge/tests/unit/.eslintrc.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T11:24:44Z",
+      "side": 1,
+      "message": "solved with I2df9b5e31d90546db458e9c8dfabb0d3601b2434",
+      "revId": "fee278af1fa198c4eec27891306d8839ca9dc02f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cae43f65_c22ff6b3",
         "filename": "client/data-bridge/tests/unit/example.spec.ts",
         "patchSetId": 11
