@@ -80,7 +80,7 @@ class DispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	 */
 	private function getLookupForEntityId( EntityId $entityId ) {
 		$repo = $entityId->getRepositoryName();
-		return isset( $this->lookups[$repo] ) ? $this->lookups[$repo] : null;
+		return $this->lookups[$repo] ?? null;
 	}
 
 }

@@ -187,8 +187,8 @@ class SetReference extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		$guid = $params['statement'];
-		$hash = isset( $params['reference'] ) ? $params['reference'] : '';
-		$index = isset( $params['index'] ) ? $params['index'] : null;
+		$hash = $params['reference'] ?? '';
+		$index = $params['index'] ?? null;
 
 		return $this->statementChangeOpFactory->newSetReferenceOp( $guid, $reference, $hash, $index );
 	}

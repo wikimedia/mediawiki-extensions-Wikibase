@@ -130,7 +130,7 @@ class SetClaim extends ApiBase {
 
 		$summary = $this->getSummary( $params, $statement, $entity->getStatements() );
 
-		$index = isset( $params['index'] ) ? $params['index'] : null;
+		$index = $params['index'] ?? null;
 		$changeop = $this->statementChangeOpFactory->newSetStatementOp( $statement, $index );
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
