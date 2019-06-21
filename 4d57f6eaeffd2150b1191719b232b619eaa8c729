@@ -22,6 +22,30 @@
       "revId": "4d57f6eaeffd2150b1191719b232b619eaa8c729",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11e3eae1_229ba327",
+        "filename": "client/data-bridge/docker-compose.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-21T12:20:54Z",
+      "side": 1,
+      "message": "Switched it to `/src`.\nNot sure if that helps much to overcome that it is indeed weird to make something available that sits in a folder above us (just think about moving/renaming).",
+      "parentUuid": "93d70f48_c34c35d5",
+      "range": {
+        "startLine": 11,
+        "startChar": 18,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "4d57f6eaeffd2150b1191719b232b619eaa8c729",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
