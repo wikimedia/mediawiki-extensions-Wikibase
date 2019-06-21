@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4780c61_a232f1ee",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T12:26:19Z",
+      "side": 1,
+      "message": "We could even get rid of the \"\u0027\" in most cases",
+      "revId": "aa1425a971216781dfadd475251f76abcbe7d6c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7f30c5d_0aadec02",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T12:26:19Z",
+      "side": 1,
+      "message": "I guess we do not need that. Please see: https://eslint.org/docs/2.0.0/user-guide/configuring#configuration-cascading-and-hierarchy\nBut we should probably set then \"root\": true in the eslintrc",
+      "range": {
+        "startLine": 10,
+        "startChar": 50,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "aa1425a971216781dfadd475251f76abcbe7d6c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
