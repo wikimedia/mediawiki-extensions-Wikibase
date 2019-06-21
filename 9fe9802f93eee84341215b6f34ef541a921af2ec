@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "43f047bd_276b7b51",
+        "filename": "client/data-bridge/.eslintrc",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T11:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0342bea6_b65ac169",
+      "revId": "9fe9802f93eee84341215b6f34ef541a921af2ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "945ae9de_16c6b621",
         "filename": "client/data-bridge/.eslintrc",
         "patchSetId": 8
@@ -48,6 +66,30 @@
       "writtenOn": "2019-06-21T11:28:32Z",
       "side": 1,
       "message": "spaces in brackets",
+      "range": {
+        "startLine": 58,
+        "startChar": 11,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "9fe9802f93eee84341215b6f34ef541a921af2ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7a1b9ce_fa259b06",
+        "filename": "client/data-bridge/.eslintrc",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T11:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "945ae9de_16c6b621",
       "range": {
         "startLine": 58,
         "startChar": 11,
