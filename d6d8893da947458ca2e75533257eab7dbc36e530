@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7f8e39_5f18ca2e",
+        "filename": "client/data-bridge/src/presentation/App.vue",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T14:08:55Z",
+      "side": 1,
+      "message": "And what lives outside of presentation?",
+      "parentUuid": "1ef31207_3868c15e",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74f53d30_364b7576",
         "filename": "client/data-bridge/src/presentation/assets/logo.png",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "If our assets do not need to be transformed, then that should be good enough indeed.",
       "parentUuid": "74f53d30_364b7576",
+      "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "373c260e_60dbf900",
+        "filename": "client/data-bridge/src/presentation/assets/logo.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-21T14:08:55Z",
+      "side": 1,
+      "message": "Maybe let remove it (with the img tag) so we even have not to struggle with this discussion.",
+      "parentUuid": "bdf27bb7_696eb188",
       "revId": "d6d8893da947458ca2e75533257eab7dbc36e530",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
