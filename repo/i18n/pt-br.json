@@ -159,6 +159,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Item com este ID não existe",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" não é um ID de um item válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "O código de idioma \"$1\" é desconhecido. Utilize um código de idioma reconhecido pelo sistema, tal como \"en\".",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Os aliases que contêm pipes só podem ser editados na página da própria entidade (com javascript habilitado) ou por meio da API",
 	"wikibase-wikibaserepopage-invalid-id": "O ID \"$1\" não foi reconhecido pelo sistema. Por favor, utilize um ID válido para a entidade.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 é um redirecionamento.",
 	"wikibase-wikibaserepopage-storage-exception": "Ocorreu um erro ao tentar carregar $1: $2.",

@@ -149,6 +149,7 @@
 	"wikibase-entityselector-more": "más",
 	"wikibase-entityselector-notfound": "No se encontraron coincidencias",
 	"wikibase-anonymouseditwarning": "Atención: no has accedido a tu cuenta. Tu [https://es.wikipedia.org/wiki/Dirección_IP dirección IP] será visible públicamente si realizas ediciones. Si <strong>[[Special:UserLogin|accedes]]</strong> o <strong>[[Special:CreateAccount|creas una cuenta]]</strong>, tus ediciones se atribuirán a un nombre de usuario, entre otros beneficios.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Avisarme cuando no haya accedido a mi cuenta.",
 	"wikibase-move-error": "No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.",
 	"wikibase-validator-label-conflict": "La propiedad $3 ya tiene la etiqueta «$1» asociada con el código de idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "El elemento $3 ya tiene la etiqueta \"$1\" asociada con el código de idioma $2, usando el mismo texto de descripción.",

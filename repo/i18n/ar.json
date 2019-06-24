@@ -161,6 +161,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "العنصر بهذا الرقم غير موجود",
 	"wikibase-wikibaserepopage-not-itemid": "«$1» ليس معرف عنصر صالحاً.",
 	"wikibase-wikibaserepopage-invalid-langcode": "رمز اللغة «$1» مجهول. الرجاء استخدام رمز لغة معروف للنظام، مثل «en».",
+	"wikibase-wikibaserepopage-pipe-in-alias": "لا يمكن تحرير الأسماء المستعارة التي تحتوي على أنابيب إلا على صفحة الكيان نفسه (مع تمكين جافا سكريبت) أو عبر واجهة برمجة التطبيقات",
 	"wikibase-wikibaserepopage-invalid-id": "المعرِّف «$1» غير معروف للنظام. الرجاء استخدام معرف عنصر صالح.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 هي صفحة تحويل.",
 	"wikibase-wikibaserepopage-storage-exception": "وقع خطأ خلال محاولة تحميل $1: $2.",

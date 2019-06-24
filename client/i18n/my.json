@@ -10,6 +10,7 @@
 	"wikibase-after-page-move": "သင်၏ ရွှေ့ပြောင်းမှုသည် ယခုဆိုလျှင် [$1 {{WBREPONAME}} item ထဲတွင် ရောင်ပြန်ဟပ်သင့်ပြီ]ဖြစ်သည်။ ဤကိစ္စဖြစ်ပွားခဲ့သည်ကို စစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
 	"wikibase-after-page-delete": "ဤစာမျက်နှာသို့ ချိတ်ဆက်ထားသောလင့်ခ်ကို [$1 ဆက်နွယ်သည့် {{WBREPONAME}} item] မှ ဖယ်ရှားခဲ့သင့်သည်။ ဤကိစ္စ ဖြစ်ပွားခဲ့သည်ကိုစစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
 	"wikibase-comment-update": "{{WBREPONAME}} item ပြောင်းလဲခဲ့သည်",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|ပြောင်းလဲမှု|ပြောင်းလဲမှုများ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "လင့်ခ်များကို တည်းဖြတ်ရန်",
 	"wikibase-editlinkstitle": "ဘာသာစကားလင့်ခ်များကို တည်းဖြတ်ရန်",
@@ -22,6 +23,7 @@
 	"wikibase-linkitem-input-page": "စာမျက်နှာ:",
 	"wikibase-linkitem-confirmitem-text": "သင်ရွေးချယ်လိုက်သော စာမျက်နှာသည် [$1 ကျွန်ုပ်တို့၏ ဗဟိုဒေတာဘဏ်တိုက်ရှိ item] တစ်ခုနှင့် ဆက်စပ်ထားပြီး ဖြစ်သည်။ အောက်တွင် ပြထားသော {{PLURAL:$2|စာမျက်နှာ|စာမျက်နှာများ}}သည် ဤစာမျက်နှာနှင့် သင်{{PLURAL:$2|ချိတ်ဆက်လိုသည်|ချိတ်ဆက်လိုသည်များ}} ဟုတ်မဟုတ် ကျေးဇူးပြု၍ အတည်ပြုပေးပါ။",
 	"wikibase-linkitem-confirmitem-button": "အတည်ပြု",
+	"wikibase-linkitem-not-loggedin-title": "အကောင့်ထဲသို့ဝင်ထားရန် လိုအပ်သည်",
 	"wikibase-linkitem-success-link": "စာမျက်နှာများအား ချိတ်ဆက်ပြီးပါပြီ။ လင့်ခ်များပါဝင်သော item ကို ကျွန်ုပ်တို့၏ [$1 ဗဟိုဒေတာဘဏ်တိုက်]တွင် ရှာဖွေနိုင်ပါသည်။",
 	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1ရန်",
@@ -50,5 +52,6 @@
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "ဖော်ပြချက်: $1",
 	"wikibase-pageinfo-entity-usage-T": "ခေါင်းစဉ်",
 	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}}ဖြင့် {{PLURAL:$1|ချိတ်ဆက်မှု|ချိတ်ဆက်မှုများ}}",
 	"connected-redirect-category": "{{WBREPONAME}} item တစ်ခုသို့ ချိတ်ဆက်ထားသော ပြန်ညွှန်းများ"
 }

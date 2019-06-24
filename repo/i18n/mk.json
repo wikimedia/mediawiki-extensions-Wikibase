@@ -138,6 +138,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Не постои предмет со таква назнака",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ не претставува важечка назнака на предмет.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Јазичниот код „$1“ е непознат. Внесете јазичен код што му е позната на системот, како на пр. „mk“.",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Истозначниците кои содржат праци црти можат да се уредуваат само на страницата на самиот предмет (со овозможен JavaScript) или преку приложникот",
 	"wikibase-wikibaserepopage-invalid-id": "Назнаката „$1“ не му е позната на системот. Внесете важечка назнака.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 е пренасочување.",
 	"wikibase-wikibaserepopage-storage-exception": "Настана грешка при вчитувањето на $1: $2.",

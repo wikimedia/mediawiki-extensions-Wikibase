@@ -189,6 +189,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Il n’y a pas d’élément avec cet identifiant",
 	"wikibase-wikibaserepopage-not-itemid": "«&nbsp;$1&nbsp;» n’est pas un identifiant d’élément valide.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Le code de langue «&nbsp;$1&nbsp;» n’est pas connu. Veuillez utiliser un code de langue connu du système, comme «&nbsp;fr&nbsp;».",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Les alias qui contiennent des barres verticales peuvent seulement être modifiés sur la page de l’entité elle-même (avec javascript activé) ou via l’API",
 	"wikibase-wikibaserepopage-invalid-id": "L’identifiant «&nbsp;$1&nbsp;» est inconnu du système. Veuillez utiliser un identifiant d’entité valide.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 est une redirection.",
 	"wikibase-wikibaserepopage-storage-exception": "Une erreur s’est produite lors d’un essai de chargement de $1&nbsp;: $2.",

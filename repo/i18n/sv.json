@@ -126,6 +126,10 @@
 	"wikibase-entityselector-more": "mer",
 	"wikibase-entityselector-notfound": "Ingen träff hittades",
 	"wikibase-anonymouseditwarning": "Varning: Du är inte inloggad. Din [https://sv.wikipedia.org/wiki/IP-adress IP-adress] kommer att publiceras offentligt om du gör några redigeringar. Om du <strong>[[Special:UserLogin|loggar in]]</strong> eller <strong>[[Special:CreateAccount|skapar ett konto]]</strong> kommer dina redigeringar tilldelas till ett användarnamn, bland andra fördelar.",
+	"wikibase-anonymouseditwarning-heading": "Du är inte inloggad",
+	"wikibase-anonymouseditwarning-message": "Din nuvarande IP-adress kommer att offentliggöras om du redigerar. Om du loggar in eller skapar ett konto kommer dina redigeringar tillskrivas till ditt användarnamn, tillsammans med andra fördelar.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Varna mig när jag inte är inloggad.",
+	"wikibase-anonymouseditwarning-dismiss-button": "Redigera utan att logga in",
 	"wikibase-move-error": "Du kan inte flytta sidor som finns i en datanamnrymd, och du kan inte flytta sidor in i den.",
 	"wikibase-validator-sitelink-conflict": "Länken $1 används redan av objekt $2. Du kan ta bort den från $2 om den inte hör hemma där eller slå samman objekten om de är om exakt samma ämne.",
 	"wikibase-validator-label-conflict": "Egenskap $3 har redan etikett \"$1\" associerad med språkkod $2.",
@@ -416,5 +420,6 @@
 	"wikibase-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
 	"wikibase-search-config-badclass": "Dålig byggklass för frågor: $1",
 	"wikibase-refresh-for-missing-datatype": "Datatypen $1 hittades inte i det lokala klientskriptet. Detta kan bero på ett utdaterat cachelagrat skript. Försök att göra en hård uppdatering i din webbläsare, som kringgår den lokala cachen (Ctrl-Shift-R eller Cmd-Shift-R i de flesta webbläsarna) för att lösa problemet.",
-	"wikibase-outdated-client-script": "Ojdå, det är dags för en hård uppdatering!"
+	"wikibase-outdated-client-script": "Ojdå, det är dags för en hård uppdatering!",
+	"wikibase-shortcopyrightwarning-heading": "Licenstillskrivelse"
 }

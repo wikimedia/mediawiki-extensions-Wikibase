@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Michawiki"
+			"Michawiki",
+			"J budissin"
 		]
 	},
 	"wikibase-client-desc": "Klient za rozšěrjenje Wikibase",
@@ -22,7 +23,7 @@
 	"wikibase-editlinks": "Wotkazy wobdźěłać",
 	"wikibase-editlinkstitle": "Mjezyrěčne wotkazy wobdźěłać",
 	"wikibase-linkitem-addlinks": "Wotkazy přidać",
-	"wikibase-linkitem-alreadylinked": "Strona, z kotrejž chceš zwjazać, słuša hižo k [$1 elementej] w centralnym datowym repozitoriju, kotryž  na [[$2]] na tutym sydle pokazuje. Elementy móža jenož jednu stronu na sydło měć. Prošu wubjer druhu stronu, z kotrejž so zwjazuje.",
+	"wikibase-linkitem-alreadylinked": "Strona, z kotrejž chceš zwjazać, słuša hižo k [$1 elementej] w centralnym datowym repozitoriju, kotryž  na [[$2]] na tutym sydle pokazuje. Elementy móža so jenož z jednej stronu na sydło zwjazać. Prošu wubjer druhu stronu, z kotrejž so zwjazuje.",
 	"wikibase-linkitem-close": "Dialog začinić a stronu znowa začitać",
 	"wikibase-linkitem-failure": "Při pospyće z datej stronu zwjazać, je njeznaty zmylk wustupił.",
 	"wikibase-linkitem-title": "Ze stronu zwjazać",

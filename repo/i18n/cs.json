@@ -151,6 +151,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Položka s tímto ID neexistuje",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ není platný identifikátor položky",
 	"wikibase-wikibaserepopage-invalid-langcode": "Neznámý kód jazyka „$1“. Použijte kód jazyka, který systém zná, například „en“.",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Aliasy, které obsahují svislítka, lze editovat pouze přímo na stránce entity (se zapnutým JavaScriptem) nebo přes API",
 	"wikibase-wikibaserepopage-invalid-id": "Systém nezná zadané ID „$1“. Prosím, zadejte platné ID entity.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 je přesměrování.",
 	"wikibase-wikibaserepopage-storage-exception": "Při pokusu o načtení $1 se objevila chyba: $2",

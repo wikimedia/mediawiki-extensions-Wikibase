@@ -24,7 +24,8 @@
 			"Bersam",
 			"Huji",
 			"Alifakoor",
-			"Arash.pt"
+			"Arash.pt",
+			"FarsiNevis"
 		]
 	},
 	"wikibase-desc": "مخزن داده‌های ساخت‌یافته",
@@ -112,7 +113,7 @@
 	"wikibase-claimview-snak-tooltip": "مقدار مربوط به خصوصیت «$1» را وارد کنید. اگر خصوصیت فاقد مقدار است یا مقدار کنونی در دسترس نیست، می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبهٔ مقدار وارد کنید.",
 	"wikibase-claimview-snak-new-tooltip": "بعد از تعیین یک خصوصیت، شما می‌توانید مقدار مربوطه را نیز وارد کنید. اگر خصوصیت فاقد مقدار بود یا مقدار در دسترس نبود، شما می‌توانید با کلیک کردن روی دکمهٔ کنار جعبه مقدار، مقدار مورد نظر خود را وارد کنید.",
 	"wikibase-statementview-rank-preferred": "رتبهٔ عالی",
-	"wikibase-statementview-rank-tooltip-preferred": "مقدار معتبر و به‌روز",
+	"wikibase-statementview-rank-tooltip-preferred": "مقدار معتبر و روزآمد",
 	"wikibase-statementview-rank-normal": "رتبه معمولی",
 	"wikibase-statementview-rank-tooltip-normal": "مقدار معتبر ولی احتمالاً کهن",
 	"wikibase-statementview-rank-deprecated": "رتبه پایین",

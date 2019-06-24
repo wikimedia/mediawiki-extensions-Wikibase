@@ -5,7 +5,8 @@
 			"Robin0van0der0vliet",
 			"Macofe",
 			"Robin van der Vliet",
-			"Ladsgroup"
+			"Ladsgroup",
+			"PiefPafPier"
 		]
 	},
 	"wikibase-entity": "entiteit",
@@ -15,6 +16,8 @@
 	"wikibase-cancel": "Annulearje",
 	"wikibase-add": "tafoegje",
 	"wikibase-addqualifier": "kwalifikaasje tafoegje",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Lebels, aliassen en beskriuwings werjaan yn al myn talen by it laden fan 'e side",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Persoanlike talen, oanfoljend op de taal fan it meidoggersoerflak, kinne ynsteld wurde mei de syntaks fan 'e [[mw:Extension:Babel|Babel-útwreiding]] op de meidoggerside.",
 	"wikibase-label-empty": "Gjin label definearre",
 	"wikibase-diffview-qualifier": "kwalifikaasje",
 	"wikibase-statementsection-statements": "Ferklearringen",

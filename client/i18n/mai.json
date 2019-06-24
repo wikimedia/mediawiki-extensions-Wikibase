@@ -12,7 +12,7 @@
 	"wikibase-comment-linked": "{{WBREPONAME}} वस्तु ई पन्नास जुडल गेल अछि।",
 	"wikibase-comment-unlink": "इ पन्नाके विकिडेटा आइटमस हटाओल गेल अछि । भाषा लिंक हटाओल गेल।",
 	"wikibase-comment-restore": "जुडल {{WBREPONAME}} वस्तु नै मेटाओल गेल अछि । भाषास जुडल लिंक मौलिक रुपमे आनल गेल।",
-	"wikibase-comment-update": "{{WBREPONAME}} बिषय परिवर्तित",
+	"wikibase-comment-update": "{{WBREPONAME}} विषय परिवर्तित",
 	"wikibase-comment-sitelink-add": "भाषा लिङ्क जुडल: $1",
 	"wikibase-comment-sitelink-change": "भाषा लिङ्क $1 सँ $2 मे बदलल गेल",
 	"wikibase-comment-sitelink-remove": "भाषा लिंक हटाओल गेल: $1",
