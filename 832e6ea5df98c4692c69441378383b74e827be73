@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c36a70f_1a6b752d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T10:40:06Z",
+      "side": 1,
+      "message": "Since we already have the second build script in the next change, I would phrase this a bit less hypothetically, for example:\n\n\u003e We will want to have several different build scripts; the current one applies to the app itself, but Ia0ab4326d will add a separate one for the initial code to find and overload the links, and more might follow in the future.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 71
+      },
+      "revId": "832e6ea5df98c4692c69441378383b74e827be73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
