@@ -1,12 +1,7 @@
-import { selectLinks, filterLinksByHref } from './selectLinks';
-
-function countLinks(): void {
-	// eslint-disable-next-line no-console
-	console.log( `Number of links potentially usable for data bridge: ${ filterLinksByHref( selectLinks() ).length }` );
-}
+import init from './init';
 
 if ( document.readyState === 'loading' ) {
-	document.addEventListener( 'DOMContentLoaded', countLinks );
+	document.addEventListener( 'DOMContentLoaded', init );
 } else {
-	countLinks();
+	init();
 }
