@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7374e20f_df6f65ad",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialNewEntityTestCase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-06-24T11:39:56Z",
+      "side": 1,
+      "message": "do we care about this method being called exactly once?",
+      "revId": "00496e079b86028c93ee19cdce68d0458a837e9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
