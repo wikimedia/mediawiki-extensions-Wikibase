@@ -1,11 +1,8 @@
-function countLinks(): void {
-	const linkRegexp = /^https:\/\/www\.wikidata\.org\/wiki\/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)/;
-	const validLinks = Array.from( document.querySelectorAll( 'a[href]' ) )
-		.filter( function ( element: Element ): boolean {
-			return !!( element as HTMLAnchorElement ).href.match( linkRegexp );
-		} );
+import { selectLinks, filterLinksByHref } from './selectLinks';
+
+function countLinks() {
 	// eslint-disable-next-line no-console
-	console.log( `Number of links potentially usable for data bridge: ${ validLinks.length }` );
+	console.log( `Number of links potentially usable for data bridge: ${ filterLinksByHref( selectLinks() ).length }` );
 }
 
 if ( document.readyState === 'loading' ) {
