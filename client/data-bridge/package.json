@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npm-run-all build:*",
-    "build:app": "NODE_ENV=production vue-cli-service build",
-    "build:init": "tsc src/mediawiki/data-bridge.init.ts --outDir dist/",
+    "build": "NODE_ENV=production vue-cli-service build",
     "fix": "vue-cli-service lint .",
     "test": "npm-run-all test:*",
     "test:lint": "vue-cli-service lint --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
