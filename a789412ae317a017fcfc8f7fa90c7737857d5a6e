@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f42a420_f81bc6d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:46:52Z",
+      "side": 1,
+      "message": "My understanding is that all of these drawbacks are only because the tested code is part of the initialization logic, and that they don’t apply to the rest of the app. Is that true? In that case, I think it could be acceptable if we don’t find a better alternative.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 30
+      },
+      "revId": "a789412ae317a017fcfc8f7fa90c7737857d5a6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
