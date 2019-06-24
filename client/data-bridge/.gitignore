@@ -2,6 +2,7 @@
 node_modules
 dist/*
 !dist/data-bridge.init.js
+!dist/selectLinks.js
 !dist/data-bridge.app.js
 !dist/data-bridge.app.css
 
