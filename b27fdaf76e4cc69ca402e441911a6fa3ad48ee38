@@ -63,6 +63,24 @@
       "revId": "b27fdaf76e4cc69ca402e441911a6fa3ad48ee38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7e15e6a_cfeb58bf",
+        "filename": "client/data-bridge/jest.config.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:15:14Z",
+      "side": 1,
+      "message": "(to clarify, we can look into this later, I don’t want to block the merge on this part)",
+      "parentUuid": "ba2fb2bc_2d3cb021",
+      "revId": "b27fdaf76e4cc69ca402e441911a6fa3ad48ee38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
