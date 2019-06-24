@@ -16,6 +16,24 @@
       "revId": "7c2360417ce5de2b8450c44f11b282182e1ffa78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc3c5178_6ce1bd83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-24T14:10:47Z",
+      "side": 1,
+      "message": "Yep, makes sense in my eyes.",
+      "parentUuid": "fc6dda3d_bcaf1d48",
+      "revId": "7c2360417ce5de2b8450c44f11b282182e1ffa78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
