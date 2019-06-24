@@ -20,7 +20,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase',
 				'util.inherit',
-				'valueFormatters.ValueFormatter',
+				'valueFormatters',
 			],
 		],
 
