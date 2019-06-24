@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54e3fcd8_b5194af0",
+        "filename": "client/data-bridge/jest.config.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:37:03Z",
+      "side": 1,
+      "message": "Oh, right, I forgot it’s not part of CI yet.",
+      "parentUuid": "41526311_262c61ba",
+      "revId": "f43b963794fc134ab0f0f681b2a7d0777bdcecf4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
