@@ -7,7 +7,7 @@ cd ../phase3
 function apply_client_settings {
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
   echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
+  echo 'wfLoadExtension( "Scribunto" );' >> LocalSettings.php
 }
 
 function apply_repo_settings {
