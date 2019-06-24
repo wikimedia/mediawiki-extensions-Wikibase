@@ -23,13 +23,23 @@ module.exports = {
 	rules: {
 		'function-paren-newline': [ 'error', 'consistent' ],
 		'@typescript-eslint/type-annotation-spacing': [ 'error' ],
+		'@typescript-eslint/explicit-function-return-type': [ 'error', {
+			allowExpressions: true,
+			allowTypedFunctionExpressions: true,
+			allowHigherOrderFunctions: true,
+		} ],
+		'generic-type-naming': '^[A-Z]+$',
+		'@typescript-eslint/no-empty-interface': [ 'error', { 'allowSingleExtends': true } ],
+		'@typescript-eslint/no-misused-new': 'error',
+		'@typescript-eslint/no-this-alias': 'error',
+		'no-useless-constructor': 'error',
 		'filenames/match-exported': 'error',
 		'object-shorthand': [ 'error', 'always' ],
-		'@typescript-eslint/explicit-member-accessibility': [ 'error', { 'accessibility': 'explicit' } ],
+		'@typescript-eslint/explicit-member-accessibility': [ 'error', { accessibility: 'explicit' } ],
 
 		// problematic in TypeScript / ES6
 		'no-unused-vars': 'off',
-		'@typescript-eslint/no-unused-vars': [ 'error', { 'argsIgnorePattern': '^_' } ],
+		'@typescript-eslint/no-unused-vars': [ 'error', { argsIgnorePattern: '^_' } ],
 		'no-undef': 'error',
 
 		// diverging from Wikimedia rule set
