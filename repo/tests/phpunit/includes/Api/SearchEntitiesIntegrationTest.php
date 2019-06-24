@@ -8,7 +8,7 @@ use MediaWikiTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsTest;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -148,7 +148,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			[ 'item', 'property' ],
 			[ '' => 'conceptBaseUri:' ],
 			new EntitySourceDefinitions( [] ),
-			DataAccessSettingsTest::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 
 		$apiModule->execute();
