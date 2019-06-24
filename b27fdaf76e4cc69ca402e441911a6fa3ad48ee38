@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "45b158cd_26a46ed8",
+        "filename": "client/data-bridge/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T10:44:51Z",
+      "side": 1,
+      "message": "Suggested change: leave L27 as it is and add “For the unit tests, Jest can watch…”.",
+      "parentUuid": "103f7df3_693b48d4",
+      "range": {
+        "startLine": 27,
+        "startChar": 41,
+        "endLine": 27,
+        "endChar": 46
+      },
+      "revId": "b27fdaf76e4cc69ca402e441911a6fa3ad48ee38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba2fb2bc_2d3cb021",
         "filename": "client/data-bridge/jest.config.js",
         "patchSetId": 13
