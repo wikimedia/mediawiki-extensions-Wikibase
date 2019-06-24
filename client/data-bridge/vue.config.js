@@ -5,6 +5,10 @@ module.exports = {
 		output: {
 			filename: `${filePrefix}[name].js`,
 		},
+		entry: {
+			app: './src/main.ts',
+			init: './src/mediawiki/data-bridge.init.ts',
+		},
 	} ),
 	chainWebpack: ( config ) => {
 		config.optimization.delete( 'splitChunks' );
