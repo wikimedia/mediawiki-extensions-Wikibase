@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e03d1d94_aa0e726e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:04:28Z",
+      "side": 1,
+      "message": "Can some of these be split off into separate changes? That would make them easier to review and merge.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "787f76fa_23907268",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:04:28Z",
+      "side": 1,
+      "message": "@param {boolean} dropValue should probably be added",
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ac12cf8_3a83de3d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:04:28Z",
+      "side": 1,
+      "message": "in jquery.ui.EditableTemplatedWidget.js, this is resolved with {dropValue}, though I’m not sure if that’s the same function",
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e99a52c8_74c29439",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-24T11:04:28Z",
+      "side": 1,
+      "message": "I would remove this part, since this function itself doesn’t check if reference tabs are enabled or not.",
+      "range": {
+        "startLine": 96,
+        "startChar": 17,
+        "endLine": 96,
+        "endChar": 47
+      },
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
