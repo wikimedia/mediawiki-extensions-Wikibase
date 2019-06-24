@@ -4,14 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npm-run-all build:*",
-    "build:app": "NODE_ENV=production vue-cli-service build",
-    "build:init": "tsc src/mediawiki/data-bridge.init.ts --outDir dist/",
+    "build": "NODE_ENV=production vue-cli-service build",
     "fix": "vue-cli-service lint .",
     "test": "npm-run-all test:*",
     "test:lint": "vue-cli-service lint --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
     "test:unit": "vue-cli-service test:unit",
-    "test:distnodiff": "npm run build:app -- --dest /tmp/dist && npm run build:init -- --outDir /tmp/dist && diff -q ./dist/data-bridge.app.js /tmp/dist/data-bridge.app.js && diff -q ./dist/data-bridge.app.css /tmp/dist/data-bridge.app.css && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js",
+    "test:distnodiff": "npm run build -- --dest /tmp/dist && npm run build -- --outDir /tmp/dist && diff -q ./dist/data-bridge.app.js /tmp/dist/data-bridge.app.js && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook"
   },
