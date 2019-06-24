@@ -19,7 +19,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = 'Generates Wikibase autoload data';
+		$this->addDescription( 'Generates Wikibase autoload data' );
 	}
 
 	public function execute() {
