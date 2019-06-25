@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79a316da_d689cced",
+        "filename": "package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-25T10:35:46Z",
+      "side": 1,
+      "message": "This should be `ci` instead of `install` -- See https://docs.npmjs.com/cli/ci.html\n\nI only saw this just now, when looking into the reproducible npm build question that came up in IRC.",
+      "range": {
+        "startLine": 5,
+        "startChar": 53,
+        "endLine": 5,
+        "endChar": 60
+      },
+      "revId": "03d1ddabf7b755a6750808aefd52ebff8bff816d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
