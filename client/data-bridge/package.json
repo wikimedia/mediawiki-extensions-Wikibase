@@ -10,7 +10,8 @@
     "fix": "vue-cli-service lint .",
     "test": "npm-run-all test:*",
     "test:lint": "vue-cli-service lint --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "test:distnodiff": "npm run build:app -- --dest /tmp/dist && npm run build:init -- --outDir /tmp/dist && diff -q ./dist/data-bridge.app.js /tmp/dist/data-bridge.app.js && diff -q ./dist/data-bridge.app.css /tmp/dist/data-bridge.app.css && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
