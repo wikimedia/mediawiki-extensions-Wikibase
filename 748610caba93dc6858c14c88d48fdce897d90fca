@@ -298,6 +298,30 @@
     },
     {
       "key": {
+        "uuid": "d8ff8662_e11d7802",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-25T11:41:41Z",
+      "side": 1,
+      "message": "This would be in my eyes a second test case then.",
+      "parentUuid": "221c5984_d5373071",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1717bd10_bd091945",
         "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
         "patchSetId": 2
