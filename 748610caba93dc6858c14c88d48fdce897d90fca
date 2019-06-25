@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ead5cfd_5f00a55d",
+        "filename": "client/data-bridge/src/mediawiki/selectLinks.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:02:11Z",
+      "side": 1,
+      "message": "This should be sourced from `mw.config.get( \u0027wbRepo\u0027 )`.\nI\u0027m not sure how you imagine this to proceed - maybe you want to iteratively improve it, so it would be fair to add it this way now, but then we should track the todo so we don\u0027t forget.\nPersonally I could also do with going slower but having a full featured implementation when we are \"done\".",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 56
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0681c42_3471716a",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:02:11Z",
+      "side": 1,
+      "message": "File name should be `selectLinks.spec.ts` to ease finding the spec to the source.",
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0901fbc7_e71127a0",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:02:11Z",
+      "side": 1,
+      "message": "There is `@` at our disposal to import using a friendly absolute path.",
+      "range": {
+        "startLine": 1,
+        "startChar": 25,
+        "endLine": 1,
+        "endChar": 37
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86656c0e_6745a14d",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:02:11Z",
+      "side": 1,
+      "message": "\u0027find relevant links in mark-up\u0027 maybe.",
+      "range": {
+        "startLine": 3,
+        "startChar": 7,
+        "endLine": 3,
+        "endChar": 10
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34be5e96_b1f26006",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:02:11Z",
+      "side": 1,
+      "message": "I\u0027m shocked that this \"just works\" - looking into \"why\" and pros/cons using something like https://github.com/jsdom/jsdom instead.",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1717bd10_bd091945",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:02:11Z",
+      "side": 1,
+      "message": "We should assert that the right link is found.\nGenerally, as this is our bread and butter, this will need to be beefed up a lot.\nAgain - I\u0027m not sure which working mode you envisioned. Cowboy first, clean later; or clean right away.",
+      "range": {
+        "startLine": 16,
+        "startChar": 38,
+        "endLine": 16,
+        "endChar": 42
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
