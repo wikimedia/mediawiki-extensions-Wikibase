@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "983dfacd_0a237095",
+        "filename": "client/data-bridge/src/mediawiki/selectLinks.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-25T11:37:29Z",
+      "side": 1,
+      "message": "Well, since it’s totally unrelated to this change, I don’t think even a TODO should be added here. (We can upload a separate change to do that, of course, until we’ve implemented the proper solution.)",
+      "parentUuid": "ef577bf7_034f39a4",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 56
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da53dad6_ff3bb44b",
         "filename": "client/data-bridge/src/mediawiki/selectLinks.ts",
         "patchSetId": 2
@@ -247,6 +271,30 @@
       "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "221c5984_d5373071",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-25T11:37:29Z",
+      "side": 1,
+      "message": "I think testing with the real querySelectorAll() on some fake DOM is a lot better than mocking querySelectorAll, otherwise we’re not testing the selector itself.",
+      "parentUuid": "0582f550_0a318341",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     },
     {
       "key": {
