@@ -420,6 +420,30 @@
     },
     {
       "key": {
+        "uuid": "22ea9155_8e515433",
+        "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T11:47:13Z",
+      "side": 1,
+      "message": "I read up and found out that through the default config we are actually using jsdom, and we get test isolation for free as this also taken care of for us. The more you know.\nhttps://jestjs.io/docs/en/configuration#testenvironment-string\n\nAs the element selection is done for us by 3rd party code there is little use in testing that itself. We rather want to focus on the subsequent filtering of the links. Maybe we can incorporate Matthias suggestion so that we have one integration test incl mark-up, the others based on a mocked `querySelectorAll` result.",
+      "parentUuid": "34be5e96_b1f26006",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "748610caba93dc6858c14c88d48fdce897d90fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0582f550_0a318341",
         "filename": "client/data-bridge/tests/unit/mediawiki/linkSelection.spec.ts",
         "patchSetId": 2
