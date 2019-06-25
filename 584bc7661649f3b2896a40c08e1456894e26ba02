@@ -22,6 +22,30 @@
       "revId": "584bc7661649f3b2896a40c08e1456894e26ba02",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d7fd2e6_22420ab4",
+        "filename": "package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-25T15:37:28Z",
+      "side": 1,
+      "message": "Moved it into a dedicated line to isolate the concern but there is, of course, nothing stopping us from inlining it.\nI think the key still describes well what it does but that\u0027s probably a matter of interpretation.",
+      "parentUuid": "303cc1ab_5ed71e15",
+      "range": {
+        "startLine": 5,
+        "startChar": 3,
+        "endLine": 5,
+        "endChar": 17
+      },
+      "revId": "584bc7661649f3b2896a40c08e1456894e26ba02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
