@@ -22,6 +22,30 @@
       "revId": "f309e2f37cab05ec7d58e33241df8f2c9ade4843",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af5f2af8_ce2938b6",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-25T10:12:30Z",
+      "side": 1,
+      "message": "Well, at the moment that complains that the following files and directories are missing in dist/ (assuming you don’t have them from a local build):\n\n- data-bridge.app.js.map\n- favicon.ico\n- img\n- index.html\n\nWe can make it ignore some of those with `--exclude \u0027*.map\u0027 --exclude \u0027*.ico\u0027`, but I think it has a point about img/ and index.html – shouldn’t we be committing those? (Or will they be gone after we get rid of the Hello World boilerplate?)",
+      "parentUuid": "c2b65def_757284e5",
+      "range": {
+        "startLine": 14,
+        "startChar": 109,
+        "endLine": 14,
+        "endChar": 307
+      },
+      "revId": "f309e2f37cab05ec7d58e33241df8f2c9ade4843",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
