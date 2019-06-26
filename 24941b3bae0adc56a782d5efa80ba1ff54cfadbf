@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07146fb8_9bc15026",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-26T13:34:42Z",
+      "side": 1,
+      "message": "It would be great if you put a new line character here, so the link will be in a new line (so the line length won\u0027t exceed 100 characters)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "24941b3bae0adc56a782d5efa80ba1ff54cfadbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b948fff9_0efef119",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-26T13:34:42Z",
+      "side": 1,
+      "message": "It wasn\u0027t for testing purpose, it was done as part of \"public interface policy\" which requires us to announce and make breaking changes backward compatible and after giving enough time to tool developers to fix their codes and then dropping the old thing. For example see: https://phabricator.wikimedia.org/T203337#5179814",
+      "revId": "24941b3bae0adc56a782d5efa80ba1ff54cfadbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52163478_cb2d2209",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasChangeOpDeserializationTester.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-26T13:34:42Z",
+      "side": 1,
+      "message": "This line also needs to be deleted.",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 78
+      },
+      "revId": "24941b3bae0adc56a782d5efa80ba1ff54cfadbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fe7d176_3c2fa958",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/Deserialization/AliasChangeOpDeserializationTester.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-26T13:34:42Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "24941b3bae0adc56a782d5efa80ba1ff54cfadbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
