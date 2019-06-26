@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30463c7f_81f38e4e",
+        "filename": "client/data-bridge/tsconfig.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T12:19:34Z",
+      "side": 1,
+      "message": "Apparently this is disabled by default for a reason, since it can have a large memory cost (https://github.com/Microsoft/TypeScript/pull/22167#issuecomment-385479553). Do we need it for anything?",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 30
+      },
+      "revId": "7f416e8b1ad12d37eae84947f8993fa3a7f4ab3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
