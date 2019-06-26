@@ -1,6 +1,8 @@
 <?php
 
+use Wikibase\Client\DataBridge\DataBridgeConfigValueProvider;
 use Wikibase\Client\Modules\SiteModule;
+use Wikibase\Repo\Modules\MediaWikiConfigModule;
 
 return call_user_func( function() {
 	$moduleTemplate = [
@@ -36,6 +38,16 @@ return call_user_func( function() {
 			'scripts' => [
 				'data-bridge.init.js'
 			],
+			'dependencies' => [
+				'mw.config.values.wbDataBridgeConfig',
+			],
+		],
+
+		'mw.config.values.wbDataBridgeConfig' => $moduleTemplate + [
+			'class' => MediaWikiConfigModule::class,
+			'getconfigvalueprovider' => function () {
+				return new DataBridgeConfigValueProvider();
+			},
 		],
 
 		'wikibase.client.currentSite' => $moduleTemplate + [
