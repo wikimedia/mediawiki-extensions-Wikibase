@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "173c882d_a981a11a",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T12:38:24Z",
+      "side": 1,
+      "message": "To clarify, because it wasn’t clear to me on initial reading: this rule is only for *generic* type names (type parameter names), for example:\n\n interface MyMap\u003cKEY, VALUE\u003e {\n     // ....\n }\n\nKEY and VALUE have to be all-uppercase, MyMap doesn’t.\n\nI think this is an interesting suggestion… it reminds me of manpages, where parameters are also in uppercase:\n\n\u003e  cat [OPTION]... [FILE]...\n\u003e\n\u003e Concatenate FILE(s) to standard output.\n\u003e\n\u003e With no FILE, or when FILE is -, read standard input.\n\nIs this the convention followed in termbox as well?",
+      "parentUuid": "37b4ce15_d457763e",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 33
+      },
+      "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77af9867_137f6a70",
         "filename": "client/data-bridge/.eslintrc.js",
         "patchSetId": 2
