@@ -227,7 +227,22 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 */
 	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
 		try {
-			$this->getDbMaster()->insert( $this->table, $neededRecords );
+			$dbMaster = $this->getDbMaster();
+
+			// We want internal database implementation to not report errors on
+			// duplicate entry insert attempts, as they are expected to happen
+			// in case of lagging replica.
+			$dbMaster->setFlag(
+				IDatabase::QUERY_SILENCE_ERRORS,
+				IDatabase::REMEMBER_PRIOR
+			);
+
+			$dbMaster->insert( $this->table, $neededRecords );
+
+			$dbMaster->clearFlag(
+				IDatabase::QUERY_SILENCE_ERRORS,
+				IDatabase::REMEMBER_PRIOR
+			);
 		} catch ( DBQueryError $dbError ) {
 			$this->logger->info(
 				'{method}: Inserting records into {table} failed: {exception}',
