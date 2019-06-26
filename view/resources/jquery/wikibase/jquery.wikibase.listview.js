@@ -325,6 +325,21 @@
 			return $.when.apply( $, this.value().map( function ( listitem ) {
 				return listitem.startEditing();
 			} ) );
+		},
+
+		/**
+		 * Stops the list item's edit modes.
+		 *
+		 * @param {boolean} dropValue
+		 * @return {Object} jQuery.Promise
+		 *         No resolved parameters.
+		 *         Rejected parameters:
+		 *         - {Error}
+		 */
+		stopEditing: function ( dropValue ) {
+			return $.when.apply( $, this.value().map( function ( listitem ) {
+				return listitem.stopEditing( dropValue );
+			} ) );
 		}
 
 	} );
