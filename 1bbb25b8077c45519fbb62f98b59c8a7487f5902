@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "85019daf_bec3513c",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-26T12:28:20Z",
+      "side": 1,
+      "message": "So, we will never have two-word \"variables\" there, only things like \"TYPE\" and \"KEY\" as in the example? Then thats ok, I guess. (otherwise I would suggest to either also allow an underscore or lowercase characters)",
+      "parentUuid": "37b4ce15_d457763e",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 33
+      },
+      "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77af9867_137f6a70",
         "filename": "client/data-bridge/.eslintrc.js",
         "patchSetId": 2
@@ -141,6 +165,30 @@
       "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e76bb1e2_edfe4e24",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-26T12:28:20Z",
+      "side": 1,
+      "message": "I don\u0027t really get those examples, but it seems that there is a need for this. So it is fine from my side.",
+      "parentUuid": "ba1daec7_fd927d0a",
+      "range": {
+        "startLine": 42,
+        "startChar": 52,
+        "endLine": 42,
+        "endChar": 75
+      },
+      "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
