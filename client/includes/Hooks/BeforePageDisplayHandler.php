@@ -61,6 +61,12 @@ class BeforePageDisplayHandler {
 
 		if ( $this->dataBridgeEnabled ) {
 			$out->addModules( 'wikibase.client.data-bridge.init' );
+			$out->addJsConfigVars(
+				'wbDataBridgeConfig',
+				[
+					'hrefRegExp' => 'https://www\.wikidata\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+				]
+			);
 		}
 	}
 
