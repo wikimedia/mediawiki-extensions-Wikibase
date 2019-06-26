@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f535a0bb_0bb1e7e1",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 33
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T13:06:02Z",
+      "side": 0,
+      "message": "I think this change can also be removed now.",
+      "revId": "0a6f1620c7092845e84c71028ccdbf408a23728f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

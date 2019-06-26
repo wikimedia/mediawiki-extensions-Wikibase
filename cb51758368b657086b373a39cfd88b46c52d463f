@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "142fa94b_44ea2a60",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 33
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T13:06:02Z",
+      "side": 1,
+      "message": "I think this added blank line can be removed again now (I assume it’s left over from tweaking the reference stopEditing code)\u0027",
+      "revId": "cb51758368b657086b373a39cfd88b46c52d463f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

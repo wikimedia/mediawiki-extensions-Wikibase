@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "fa672f73_11613a9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T13:06:02Z",
+      "side": 1,
+      "message": "Thanks :) I think this means parts of the commit message can be removed now.",
+      "parentUuid": "72d8ebc5_8cb80df0",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "787f76fa_23907268",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
         "patchSetId": 29
@@ -137,6 +161,24 @@
       "side": 1,
       "message": "Each of the individual promises resolve the dropValue, but here the main promise doesn\u0027t resolve a value; the dropValue is available from each of the individual resolved promises. There might be some scenarios where these are needed explicitly, but not in the current use case, I believe? If that were the case I think you\u0027d just write a custom fcn that extends the listview stopediting in order to handles those.",
       "parentUuid": "6ac12cf8_3a83de3d",
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f5d93ee_1d1ddd33",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T13:06:02Z",
+      "side": 1,
+      "message": "Yeah, good point.",
+      "parentUuid": "3f8b1f04_551474d8",
       "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
