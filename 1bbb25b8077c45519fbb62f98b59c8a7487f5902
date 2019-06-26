@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "37b4ce15_d457763e",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-26T12:07:37Z",
+      "side": 1,
+      "message": "The question is probably about shouting the TYPE.\nhttps://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/generic-type-naming.md#user-content-options has an example.",
+      "parentUuid": "9dba4bfd_5e9663ba",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 33
+      },
+      "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77af9867_137f6a70",
         "filename": "client/data-bridge/.eslintrc.js",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Like we have to use the virtual DOM of Vue (in tests)",
       "parentUuid": "77af9867_137f6a70",
+      "range": {
+        "startLine": 42,
+        "startChar": 52,
+        "endLine": 42,
+        "endChar": 75
+      },
+      "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba1daec7_fd927d0a",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-26T12:07:37Z",
+      "side": 1,
+      "message": "Allows us to maintain an argument even if it unused as long as it is prefixed by an underscore.\nTechnically it is of course superfluous in this situation but sometimes it feels nicer to leave in what is at our disposal: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/client/data-access/EntityRepository.ts#16\nThere are also funny cases which may have only been a defect of the sniff at the time and are fixed in the mean time: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/store/language/getters.ts#12",
+      "parentUuid": "94abbde4_3ebf1bad",
       "range": {
         "startLine": 42,
         "startChar": 52,
