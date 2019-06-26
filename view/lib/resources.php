@@ -491,16 +491,10 @@ return call_user_func( function() {
 		'valueFormatters' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueFormatters/valueFormatters.js',
-			],
-		],
-
-		'valueFormatters.ValueFormatter' => $wikibaseDatavaluesSrcPaths + [
-			'scripts' => [
 				'valueFormatters/formatters/ValueFormatter.js',
 			],
 			'dependencies' => [
 				'util.inherit',
-				'valueFormatters',
 			],
 		],
 
@@ -1542,7 +1536,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.EmptyValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'util.Notifier',
-				'valueFormatters.ValueFormatter',
+				'valueFormatters',
 				'valueParsers.ValueParserStore',
 			],
 		],
