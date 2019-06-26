@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b1badd9_28b3f98d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-26T13:00:05Z",
+      "side": 1,
+      "message": "@return {Object} jQuery.Promise ?",
+      "revId": "0a6f1620c7092845e84c71028ccdbf408a23728f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
