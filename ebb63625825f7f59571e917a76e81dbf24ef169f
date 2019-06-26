@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "981fde83_ebe2ba1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-26T11:14:50Z",
+      "side": 1,
+      "message": "That is very generic. Could we be a bit more specific with something like \"Add stricter checking rules to tsconfig\"? Then I might better understand what this is about when reading only the first line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "ebb63625825f7f59571e917a76e81dbf24ef169f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
