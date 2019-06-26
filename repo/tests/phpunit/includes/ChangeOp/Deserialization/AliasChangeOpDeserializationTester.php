@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -40,35 +39,12 @@ trait AliasChangeOpDeserializationTester {
 
 	public function testGivenChangeRequestSettingAliasesToEmpty_enAliasGroupDoesNotExist() {
 		$entity = $this->getEntityWithExistingAliases();
-		$repoSettings = WikibaseRepo::getDefaultInstance()
-			->getSettings();
-		$originalSetting = $repoSettings->getSetting( 'featureFlagWbeditentitySetEmptyAliases' );
-		$repoSettings->setSetting( 'featureFlagWbeditentitySetEmptyAliases', true );
 		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
 			'aliases' => [ 'en' => [] ],
 		] );
-		$repoSettings->setSetting( 'featureFlagWbeditentitySetEmptyAliases', $originalSetting );
 
 		$changeOp->apply( $entity, new Summary() );
 		$this->assertFalse( $entity->getAliasGroups()->hasGroupForLanguage( 'en' ) );
-	}
-
-	public function testGivenChangeRequestSettingAliasesToEmpty_AliasesAreNotChanged_WithFeatureFlagFalse() {
-		$entity = $this->getEntityWithExistingAliases();
-		$preExistingAliases = $entity->getAliasGroups()->getByLanguage( 'en' )->getAliases();
-
-		$repoSettings = WikibaseRepo::getDefaultInstance()
-			->getSettings();
-		$originalSetting = $repoSettings->getSetting( 'featureFlagWbeditentitySetEmptyAliases' );
-		$repoSettings->setSetting( 'featureFlagWbeditentitySetEmptyAliases', false );
-		$changeOp = $this->getChangeOpDeserializer()->createEntityChangeOp( [
-			'aliases' => [ 'en' => [] ],
-		] );
-		$repoSettings->setSetting( 'featureFlagWbeditentitySetEmptyAliases', $originalSetting );
-
-		$changeOp->apply( $entity, new Summary() );
-
-		$this->assertSame( $preExistingAliases, $entity->getAliasGroups()->getByLanguage( 'en' )->getAliases() );
 	}
 
 	public function testGivenChangeRequestRemovingAllExistingEnAliases_enAliasGroupDoesNotExist() {
