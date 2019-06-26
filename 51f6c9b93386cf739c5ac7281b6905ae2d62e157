@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "72d8ebc5_8cb80df0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2019-06-26T09:34:00Z",
+      "side": 1,
+      "message": "statement view / listview stuff now in I615ef9b43f1b8e035abad8c99691831b8b229ae9",
+      "parentUuid": "e03d1d94_aa0e726e",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "51f6c9b93386cf739c5ac7281b6905ae2d62e157",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "787f76fa_23907268",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
         "patchSetId": 29
