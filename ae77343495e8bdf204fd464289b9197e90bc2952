@@ -22,6 +22,30 @@
       "revId": "ae77343495e8bdf204fd464289b9197e90bc2952",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa06b4c5_c7d10dbf",
+        "filename": "client/data-bridge/tsconfig.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-27T12:50:30Z",
+      "side": 1,
+      "message": "See: https://github.com/vuejs/vetur/issues/1261",
+      "parentUuid": "cdb47292_8e6752fb",
+      "range": {
+        "startLine": 15,
+        "startChar": 22,
+        "endLine": 15,
+        "endChar": 27
+      },
+      "revId": "ae77343495e8bdf204fd464289b9197e90bc2952",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
