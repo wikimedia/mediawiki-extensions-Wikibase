@@ -19,13 +19,16 @@ class BeforePageDisplayHandler {
 	private $namespaceChecker;
 
 	/**
-	 * @var bool
+	 * @var array|null
 	 */
-	private $dataBridgeEnabled;
+	private $dataBridgeConfig;
 
-	public function __construct( NamespaceChecker $namespaceChecker, $dataBridgeEnabled ) {
+	public function __construct(
+		NamespaceChecker $namespaceChecker,
+		array $dataBridgeConfig = null
+	) {
 		$this->namespaceChecker = $namespaceChecker;
-		$this->dataBridgeEnabled = $dataBridgeEnabled;
+		$this->dataBridgeConfig = $dataBridgeConfig;
 	}
 
 	/**
@@ -59,14 +62,9 @@ class BeforePageDisplayHandler {
 			$out->addModules( 'wikibase.client.linkitem.init' );
 		}
 
-		if ( $this->dataBridgeEnabled ) {
+		if ( $this->dataBridgeConfig !== null ) {
 			$out->addModules( 'wikibase.client.data-bridge.init' );
-			$out->addJsConfigVars(
-				'wbDataBridgeConfig',
-				[
-					'hrefRegExp' => 'https://www\.wikidata\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
-				]
-			);
+			$out->addJsConfigVars( 'wbDataBridgeConfig', $this->dataBridgeConfig );
 		}
 	}
 
