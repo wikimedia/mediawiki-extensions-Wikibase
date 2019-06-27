@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikibase\Lib\Store\Sql\ReplicaMasterAwareRecordIdsAcquirer;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DatabaseSqlite;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer
+ * @covers \Wikibase\Lib\Store\Sql\ReplicaMasterAwareRecordIdsAcquirer
  *
  * @group Wikibase
  *

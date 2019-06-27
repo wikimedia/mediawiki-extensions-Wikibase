@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikibase\Lib\Store\Sql\ReplicaMasterAwareRecordIdsAcquirer;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**

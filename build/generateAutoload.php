@@ -29,7 +29,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 			[
 				'tests/phpunit/EntityPrefetcherSpy.php',
 				'tests/phpunit/FakePrefetchingTermLookup.php',
-				'tests/phpunit/DataAccessSettingsTestDoubleFactory.php'
 			]
 		);
 
@@ -53,7 +52,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/Store/MockTermIndex.php',
 				'tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
 				'tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
-				'tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php',
 			]
 		);
 

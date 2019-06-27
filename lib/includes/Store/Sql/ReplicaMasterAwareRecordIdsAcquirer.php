@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store\Sql\Terms\Util;
+namespace Wikibase\Lib\Store\Sql;
 
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -18,7 +18,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  *
  * @license GPL-2.0-or-later
  */
-class ReplicaMasterAwareRecordIdsAcquirer {
+class ReplicaMasterAwareRecordIdsAcquirer implements RecordIdsAcquirer {
 
 	/**
 	 * This flag changes this object's behavior so that it always queries
@@ -84,9 +84,6 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	}
 
 	/**
-	 * Acquire ids of needed records in the table, inserting non-existing
-	 * ones into master database.
-	 *
 	 * Note 1: this function assumes that all records given in $neededRecords specify
 	 * the same columns. If some records specify less, more or different columns than
 	 * the first one does, the behavior is not defined. The first element keys will be
@@ -96,27 +93,6 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * their values as strings. If some values are of different type (e.g. integer ids)
 	 * this can cause a false mismatch in identifying records selected in
 	 * database with their corresponding needed records.
-	 *
-	 * @param array $neededRecords array of records to be looked-up or inserted.
-	 *	Each entry in this array should an associative array of column => value pairs.
-	 *	Example:
-	 *	[
-	 *		[ 'columnA' => 'valueA1', 'columnB' => 'valueB1' ],
-	 *		[ 'columnA' => 'valueA2', 'columnB' => 'valueB2' ],
-	 *		...
-	 *	]
-	 * @param callable|null $recordsToInsertDecoratorCallback a callback that will be passed
-	 *	the array of records that are about to be inserted into master database, and should
-	 *	return a new array of records to insert, allowing to enhance and/or supply more default
-	 *	values for other columns that are not supplied as part of $neededRecords array.
-	 *
-	 * @return array the array of input recrods along with their ids
-	 *	Example:
-	 *	[
-	 *		[ 'columnA' => 'valueA1', 'columnB' => 'valueB1', 'idColumn' => '1' ],
-	 *		[ 'columnA' => 'valueA2', 'columnB' => 'valueB2', 'idColumn' => '2' ],
-	 *		...
-	 *	]
 	 */
 	public function acquireIds(
 		array $neededRecords,
