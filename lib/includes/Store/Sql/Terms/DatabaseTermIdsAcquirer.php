@@ -6,6 +6,7 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -26,6 +27,11 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	private $loadBalancer;
 
 	/**
+	 * @var ILBFactory
+	 */
+	private $lbFactory;
+
+	/**
 	 * @var TypeIdsAcquirer
 	 */
 	private $typeIdsAcquirer;
@@ -34,16 +40,16 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	private $logger;
 
 	/**
-	 * @param ILoadBalancer $loadBalancer
+	 * @param ILBFactory $lbFactory
 	 * @param TypeIdsAcquirer $typeIdsAcquirer
 	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		ILBFactory $lbFactory,
 		TypeIdsAcquirer $typeIdsAcquirer,
 		LoggerInterface $logger = null
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->lbFactory = $lbFactory;
 		$this->typeIdsAcquirer = $typeIdsAcquirer;
 		$this->logger = $logger ?? new NullLogger();
 	}
@@ -65,6 +71,14 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		$this->restoreCleanedUpIds( $termsArray, $termIds );
 
 		return $termIds;
+	}
+
+	private function getLoadBalancer(): ILoadBalancer {
+		if ( $this->loadBalancer === null ) {
+			$this->loadBalancer = $this->lbFactory->getMainLB();
+		}
+
+		return $this->loadBalancer;
 	}
 
 	/**
@@ -372,7 +386,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	private function restoreCleanedUpIds( array $termsArray, array $termIds = [] ) {
 		$uniqueTermIds = array_values( array_unique( $termIds ) );
 
-		$dbMaster = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+		$dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
 		$persistedTermIds = $dbMaster->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_id',
@@ -395,13 +409,13 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		$ignoreReplica = false
 	): array {
 		$textIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->loadBalancer, 'wbt_text', 'wbx_id', $this->logger,
+			$this->lbFactory, 'wbt_text', 'wbx_id', $this->logger,
 			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$textInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->loadBalancer, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
+			$this->lbFactory, 'wbt_text_in_lang', 'wbxl_id', $this->logger,
 			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 		$termInLangIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
-			$this->loadBalancer, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
+			$this->lbFactory, 'wbt_term_in_lang', 'wbtl_id', $this->logger,
 			$ignoreReplica ? ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA : 0x0 );
 
 		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );
