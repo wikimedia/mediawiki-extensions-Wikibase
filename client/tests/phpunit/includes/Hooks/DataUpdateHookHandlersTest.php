@@ -10,6 +10,7 @@ use Wikibase\Client\Hooks\DataUpdateHookHandlers;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -40,13 +41,14 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		array $expectedUsages = null,
 		$prune = true,
 		$add = true,
-		$replace = false
+		$replace = false,
+		$skipUsage = false
 	) {
 		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		if ( $expectedUsages === null || $replace || !$add ) {
+		if ( $expectedUsages === null || $replace || !$add || $skipUsage ) {
 			$usageUpdater->expects( $this->never() )
 				->method( 'addUsagesForPage' );
 		} else {
@@ -126,6 +128,26 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
+	 * @param array|null $currentUsages
+	 *
+	 * @return UsageLookup
+	 */
+	private function newUsageLookup(
+		array $currentUsages = null
+	) {
+		$usageLookup = $this->getMockBuilder( UsageLookup::class )
+			->getMock();
+		$currentUsages = ( $currentUsages == null ) ? [] : $currentUsages;
+
+		$usageLookup->expects( $this->any() )
+			->method( 'getUsagesForPage' )
+			->willReturn( $currentUsages );
+
+		return $usageLookup;
+	}
+
+	/**
+	 * @param Title $title
 	 * @param EntityUsage[]|null $expectedUsages
 	 * @param bool $prune whether pruneUsagesForPage() should be used
 	 * @param bool $asyncAdd whether addUsagesForPage() should be called via the job queue
@@ -138,14 +160,18 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		array $expectedUsages = null,
 		$prune = true,
 		$asyncAdd = false,
-		$replace = false
+		$replace = false,
+		array $currentUsages = null,
+		$skipUsage = false
 	) {
-		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $prune, !$asyncAdd, $replace );
+		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $prune, !$asyncAdd, $replace, $skipUsage );
 		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $asyncAdd );
+		$usageLookup = $this->newUsageLookup( $currentUsages );
 
 		return new DataUpdateHookHandlers(
 			$usageUpdater,
-			$jobScheduler
+			$jobScheduler,
+			$usageLookup
 		);
 	}
 
@@ -262,6 +288,18 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usages, false, true );
+		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+	}
+
+	public function testDoParserCacheSaveCompleteNoChangeEntityUsage() {
+		$usages = [
+			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE )
+		];
+		$parserOutput = $this->newParserOutput( $usages );
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
+
+		// Assertions are done by the UsageUpdater mock
+		$handler = $this->newDataUpdateHookHandlers( $title, $usages, false, false, false, $usages, true );
 		$handler->doParserCacheSaveComplete( $parserOutput, $title );
 	}
 
