@@ -37,6 +37,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Client\\DataAccess\\Scribunto\\WikitextPreprocessingSnakFormatter' => __DIR__ . '/includes/DataAccess/Scribunto/WikitextPreprocessingSnakFormatter.php',
 	'Wikibase\\Client\\DataAccess\\SnaksFinder' => __DIR__ . '/includes/DataAccess/SnaksFinder.php',
 	'Wikibase\\Client\\DataAccess\\StatementTransclusionInteractor' => __DIR__ . '/includes/DataAccess/StatementTransclusionInteractor.php',
+	'Wikibase\\Client\\DataBridge\\DataBridgeConfigValueProvider' => __DIR__ . '/includes/DataBridge/DataBridgeConfigValueProvider.php',
 	'Wikibase\\Client\\Hooks\\BaseTemplateAfterPortletHandler' => __DIR__ . '/includes/Hooks/BaseTemplateAfterPortletHandler.php',
 	'Wikibase\\Client\\Hooks\\BeforePageDisplayHandler' => __DIR__ . '/includes/Hooks/BeforePageDisplayHandler.php',
 	'Wikibase\\Client\\Hooks\\ChangesListLinesHandler' => __DIR__ . '/includes/Hooks/ChangesListLinesHandler.php',
