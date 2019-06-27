@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdd7d34f_2b0fc6e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-27T12:46:10Z",
+      "side": 1,
+      "message": "remove this blank line so that jenkins-bot recognizes the Bug: lines (apparently they’re called “trailers”? see git-interpret-trailers(1))",
+      "revId": "01442ffce45fa85761d7ec45cdaeea9b717c6f81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6449e11_1ad67a82",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-27T12:46:10Z",
+      "side": 1,
+      "message": "different name (app?)",
+      "range": {
+        "startLine": 41,
+        "startChar": 31,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "01442ffce45fa85761d7ec45cdaeea9b717c6f81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
