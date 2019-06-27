@@ -101,11 +101,12 @@ trait HtmlAssertionHelpers {
 
 	protected function assertHtmlContainsErrorMessage( $html, $messageText ) {
 		$formErrorMessage = tagMatchingOutline( '<div class="error"/>' );
-		$ooUiErrorMessage = tagMatchingOutline( '<li class="oo-ui-fieldLayout-messages-error"/>' );
+		$ooUiErrorMessageOld = tagMatchingOutline( '<li class="oo-ui-fieldLayout-messages-error"/>' );
+		$ooUiErrorMessage = tagMatchingOutline( '<div class="oo-ui-messageWidget oo-ui-flaggedElement-error"/>' );
 
 		$this->assertThatHamcrest( $html, is( htmlPiece(
 			havingChild(
-				both( either( $formErrorMessage )->orElse( $ooUiErrorMessage ) )
+				both( either( $formErrorMessage )->orElse( either( $ooUiErrorMessageOld )->orElse( $ooUiErrorMessage ) ) )
 					->andAlso( havingTextContents( containsString( $messageText )->ignoringCase() ) ) ) ) ) );
 	}
 
