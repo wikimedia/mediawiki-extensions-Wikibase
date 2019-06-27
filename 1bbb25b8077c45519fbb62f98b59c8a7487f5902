@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "5441e226_93e94e5c",
+        "filename": "client/data-bridge/.eslintrc.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-27T10:30:42Z",
+      "side": 1,
+      "message": "No there is no convention...so we can make one.",
+      "parentUuid": "173c882d_a981a11a",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 33
+      },
+      "revId": "1bbb25b8077c45519fbb62f98b59c8a7487f5902",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77af9867_137f6a70",
         "filename": "client/data-bridge/.eslintrc.js",
         "patchSetId": 2
