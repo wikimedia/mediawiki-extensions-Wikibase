@@ -15,6 +15,7 @@ use User;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use WikiPage;
 
@@ -42,12 +43,18 @@ class DataUpdateHookHandlers {
 	private $jobScheduler;
 
 	/**
+	 * @var UsageLookup
+	 */
+	private $usageLookup;
+
+	/**
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
 		return new self(
 			WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater(),
-			JobQueueGroup::singleton()
+			JobQueueGroup::singleton(),
+			WikibaseClient::getDefaultInstance()->getStore()->getUsageLookup()
 		);
 	}
 
@@ -116,10 +123,12 @@ class DataUpdateHookHandlers {
 
 	public function __construct(
 		UsageUpdater $usageUpdater,
-		JobQueueGroup $jobScheduler
+		JobQueueGroup $jobScheduler,
+		UsageLookup $usageLookup
 	) {
 		$this->usageUpdater = $usageUpdater;
 		$this->jobScheduler = $jobScheduler;
+		$this->usageLookup = $usageLookup;
 	}
 
 	/**
@@ -162,7 +171,10 @@ class DataUpdateHookHandlers {
 		// schedule the usage updates in the job queue, to avoid writing to the database
 		// during a GET request.
 
-		//TODO: Before posting a job, check replica database. If no changes are needed, skip update.
+		$currentUsages = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
+		if ( $currentUsages == $usages ) {
+			return;
+		}
 
 		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usages );
 		$this->jobScheduler->lazyPush( $addUsagesForPageJob );
