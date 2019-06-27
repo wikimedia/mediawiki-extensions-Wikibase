@@ -185,6 +185,11 @@ abstract class DumpEntities extends Maintenance {
 		}
 
 		$entityTypes = $this->getEntityTypes();
+		if ( empty( $entityTypes ) ) {
+			$this->logMessage( "No entity types to dump" );
+			$this->closeLogFile();
+			return;
+		}
 
 		$this->logMessage( 'Dumping entities of type ' . implode( ', ', $entityTypes ) );
 
