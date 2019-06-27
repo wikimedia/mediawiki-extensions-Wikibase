@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\StringNormalizer;
+use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
@@ -54,6 +55,9 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
+		$lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
+		] );
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$loadBalancer,
 			WANObjectCache::newEmpty()
@@ -61,7 +65,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$this->propertyTermStore = new DatabaseItemTermStore(
 			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
-				$loadBalancer,
+				$lbFactory,
 				$typeIdsStore
 			),
 			new DatabaseTermIdsResolver(
