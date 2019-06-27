@@ -5,10 +5,11 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\InMemoryTypeIdsStore;
+use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer
@@ -25,14 +26,17 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	private $db;
 
 	/**
-	 * @var ILoadBalancer
+	 * @var ILBFactory
 	 */
-	private $loadBalancer;
+	private $loadBalancerFactory;
 
 	public function setUp() {
 		$this->db = $this->setUpNewDb();
-		$this->loadBalancer = new FakeLoadBalancer( [
+		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db
+		] );
+		$this->lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
 		] );
 	}
 
@@ -48,7 +52,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -76,7 +80,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		);
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -100,7 +104,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -127,7 +131,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -154,7 +158,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -226,7 +230,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		$aliasEnSameTermInLangId = (string)$this->db->insertId();
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -276,7 +280,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		];
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -310,7 +314,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 
 	public function testCallsCallbackEvenWhenAcquiringNoTerms() {
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			new InMemoryTypeIdsStore()
 		);
 		$called = false;
@@ -332,6 +336,9 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			'dbr' => $this->db,
 			'dbw' => $dbMaster
 		] );
+		$lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
+		] );
 
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 		$alreadyAcquiredTypeIds = $typeIdsAcquirer->acquireTypeIds(
@@ -347,7 +354,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		];
 
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$loadBalancer,
+			$lbFactory,
 			$typeIdsAcquirer
 		);
 
@@ -410,7 +417,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 
 	public function testWithLongTexts() {
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			new InMemoryTypeIdsStore()
 		);
 
@@ -450,7 +457,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 
 	public function testWithLongTexts_doesNotSplitUtf8Bytes() {
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			new InMemoryTypeIdsStore()
 		);
 
@@ -513,7 +520,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	public function testAcquireTermIdsWithEmptyInput() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
-			$this->loadBalancer,
+			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
