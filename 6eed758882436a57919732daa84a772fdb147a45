@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd2ff9b6_301262b4",
+        "filename": "client/data-bridge/tests/unit/mediawiki/selectLinks.spec.ts",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-27T13:45:09Z",
+      "side": 1,
+      "message": "Perhaps the config should be injected into selectLinks in some better way, and accessing mw.config should be left in data-bridge.init.ts… but perhaps that doesn’t have to happen in this change.",
+      "revId": "6eed758882436a57919732daa84a772fdb147a45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
