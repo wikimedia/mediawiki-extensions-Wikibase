@@ -4,9 +4,11 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DatabaseSqlite;
+use Wikimedia\Rdbms\DBError;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer
@@ -55,22 +57,6 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbReplica );
 	}
 
-	public function testWhenAllRecordsExistInMaster() {
-		$records = $this->getTestRecords();
-
-		$this->dbMaster->insert(
-			self::TABLE_NAME,
-			$records
-		);
-		$this->assertSameRecordsInDb( $records, $this->dbMaster );
-
-		$idsAcquirer = $this->getTestSubjectInstance();
-		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
-
-		$this->assertNoRecordsInDb( $records, $this->dbReplica );
-		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbMaster );
-	}
-
 	public function testWhenAllRecordsDoNotExistInReplicaOrMaster() {
 		$records = $this->getTestRecordsWithDuplicate();
 
@@ -81,8 +67,13 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		$this->assertSameRecordsInDb( $acquiredRecordsWithIds, $this->dbMaster );
 	}
 
-	public function testWhenSomeRecordsDoNotExistInReplicaButExistInMaster() {
-		$records = $this->getTestRecordsWithDuplicate();
+	/**
+	 * Some records exist in master but do not exist in replica,
+	 * even after waiting for replication
+	 * @expectedException DBError
+	 */
+	public function testWhenReplicaIsLaggingLong() {
+		$records = $this->getTestRecords();
 
 		$recordsInReplica = [ $records[0], $records[1] ];
 		$recordsInMaster = [ $records[2] ];
@@ -101,14 +92,6 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
-
-		$this->assertSame(
-			count( $acquiredRecordsWithIds ),
-			count( array_unique( $records, SORT_REGULAR ) )
-		);
-		$this->assertSameRecordsInDb( [ $records[3] ], $this->dbMaster );
-		$this->assertNoRecordsInDb( $recordsInReplica, $this->dbMaster );
-		$this->assertNoRecordsInDb( $recordsInMaster, $this->dbReplica );
 	}
 
 	public function testWhenIgnoringReplica() {
@@ -160,11 +143,14 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	}
 
 	private function getTestSubjectInstance( $flags = 0x0 ) {
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->dbReplica,
+			'dbw' => $this->dbMaster,
+		] );
+		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
+
 		return new ReplicaMasterAwareRecordIdsAcquirer(
-			new FakeLoadBalancer( [
-				'dbr' => $this->dbReplica,
-				'dbw' => $this->dbMaster,
-			] ),
+			$lbFactory,
 			self::TABLE_NAME,
 			self::ID_COLUMN,
 			null,
