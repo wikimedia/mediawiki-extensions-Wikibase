@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c6b9844_4fa8d32a",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-27T15:10:49Z",
+      "side": 1,
+      "message": "It turns out this class is not in MediaWiki core, but in Wikibase repo, so we can’t use it as-is in the client…",
+      "range": {
+        "startLine": 47,
+        "startChar": 14,
+        "endLine": 47,
+        "endChar": 35
+      },
+      "revId": "3b9698d98e293a27d4ee86325d10583d5fad887c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
