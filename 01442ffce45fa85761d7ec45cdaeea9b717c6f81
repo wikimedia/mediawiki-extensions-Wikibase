@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "22d5e514_5a60daa8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-27T12:53:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdd7d34f_2b0fc6e1",
+      "revId": "01442ffce45fa85761d7ec45cdaeea9b717c6f81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6449e11_1ad67a82",
         "filename": "client/resources/Resources.php",
         "patchSetId": 8
@@ -30,6 +48,30 @@
       "writtenOn": "2019-06-27T12:46:10Z",
       "side": 1,
       "message": "different name (app?)",
+      "range": {
+        "startLine": 41,
+        "startChar": 31,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "01442ffce45fa85761d7ec45cdaeea9b717c6f81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83d4f949_6b857cad",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-06-27T12:53:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6449e11_1ad67a82",
       "range": {
         "startLine": 41,
         "startChar": 31,
