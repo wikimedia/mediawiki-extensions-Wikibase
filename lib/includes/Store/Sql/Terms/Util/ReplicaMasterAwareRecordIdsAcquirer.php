@@ -132,8 +132,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			}
 
 			$neededRecordsCount = count( $neededRecords );
-
-			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
+			$this->insertNonExistingRecordsIntoMaster( array_unique( $neededRecords, SORT_REGULAR ) );
 
 			$existingRecords = array_merge(
 				$existingRecords,
