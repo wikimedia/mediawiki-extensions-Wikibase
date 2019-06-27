@@ -35,7 +35,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -74,7 +74,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -101,7 +101,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		$output = $this->getOutputPage( $skin, [ 'de:Rom' ], 'Q4', [ '*' ] );
 		$namespaceChecker = $this->getNamespaceChecker( true );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( [], $output->getModules(), 'js modules' );
@@ -119,7 +119,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -150,7 +150,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -181,7 +181,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -212,7 +212,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$namespaceChecker = $this->getNamespaceChecker( $enabledForNamespace );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, false );
 		$handler->addModules( $output, 'history' );
 
 		$this->assertEquals( $expectedJsModules, $output->getModules(), 'js modules' );
@@ -233,47 +233,42 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider handleDataBridgeConfigProvider
+	 * @dataProvider handleDataBridgeEnabledProvider
 	 */
-	public function testHandle_dataBridgeConfig(
-		$expectedJsModules, $expectedCssModules, $expectedJsConfigVars,
-		$dataBridgeConfig, $wikibaseEnabled
+	public function testHandle_dataBridgeEnabled(
+		$expectedJsModules, $expectedCssModules,
+		$dataBridgeEnabled, $wikibaseEnabled
 	) {
 		$skin = $this->getSkin( false, false );
 		$output = $this->getOutputPage( $skin, [] );
 		$namespaceChecker = $this->getNamespaceChecker( $wikibaseEnabled );
 
-		$handler = new BeforePageDisplayHandler( $namespaceChecker, $dataBridgeConfig );
+		$handler = new BeforePageDisplayHandler( $namespaceChecker, $dataBridgeEnabled );
 		$handler->addModules( $output, 'view' );
 
 		$this->assertSame( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertSame( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
-		$this->assertSame( $expectedJsConfigVars, $output->getJsConfigVars(), 'js config vars' );
 	}
 
-	public function handleDataBridgeConfigProvider() {
+	public function handleDataBridgeEnabledProvider() {
 		yield 'disabled' => [
 			[],
 			[],
-			[],
-			null, // data bridge disabled
+			false, // data bridge disabled
 			true, // Wikibase enabled
 		];
 
-		$dataBridgeConfig = [ 'hrefRegExp' => '.*' ];
 		yield 'enabled' => [
 			[ 'wikibase.client.data-bridge.init' ],
 			[],
-			[ 'wbDataBridgeConfig' => $dataBridgeConfig ],
-			$dataBridgeConfig, // data bridge enabled
+			true, // data bridge enabled
 			true, // Wikibase enabled
 		];
 
 		yield 'enabled but Wikibase disabled' => [
 			[],
 			[],
-			[],
-			$dataBridgeConfig, // data bridge enabled
+			true, // data bridge enabled
 			false, // Wikibase disabled
 		];
 	}

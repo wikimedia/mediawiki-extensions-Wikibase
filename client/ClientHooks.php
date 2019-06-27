@@ -182,16 +182,9 @@ final class ClientHooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$clientInstance = WikibaseClient::getDefaultInstance();
-		if ( $clientInstance->getSettings()->getSetting( 'dataBridgeEnabled' ) ) {
-			$dataBridgeConfig = [
-				'hrefRegExp' => $clientInstance->getSettings()->getSetting( 'dataBridgeHrefRegExp' ),
-			];
-		} else {
-			$dataBridgeConfig = null;
-		}
 		$beforePageDisplayHandler = new BeforePageDisplayHandler(
 			$clientInstance->getNamespaceChecker(),
-			$dataBridgeConfig
+			$clientInstance->getSettings()->getSetting( 'dataBridgeEnabled' )
 		);
 
 		$actionName = Action::getActionName( $skin->getContext() );
