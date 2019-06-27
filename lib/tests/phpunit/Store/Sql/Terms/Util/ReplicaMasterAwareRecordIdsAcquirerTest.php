@@ -72,7 +72,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	}
 
 	public function testWhenAllRecordsDoNotExistInReplicaOrMaster() {
-		$records = $this->getTestRecords();
+		$records = $this->getTestRecordsWithDuplicate();
 
 		$idsAcquirer = $this->getTestSubjectInstance();
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
@@ -82,7 +82,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	}
 
 	public function testWhenSomeRecordsDoNotExistInReplicaButExistInMaster() {
-		$records = $this->getTestRecords();
+		$records = $this->getTestRecordsWithDuplicate();
 
 		$recordsInReplica = [ $records[0], $records[1] ];
 		$recordsInMaster = [ $records[2] ];
@@ -104,7 +104,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 
 		$this->assertSame(
 			count( $acquiredRecordsWithIds ),
-			count( $records )
+			count( array_unique( $records, SORT_REGULAR ) )
 		);
 		$this->assertSameRecordsInDb( [ $records[3] ], $this->dbMaster );
 		$this->assertNoRecordsInDb( $recordsInReplica, $this->dbMaster );
@@ -176,6 +176,16 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		return [
 			[ 'column_value' => 'valueA1', 'column_id' => '1' ],
 			[ 'column_value' => 'valueA2', 'column_id' => '2' ],
+			[ 'column_value' => 'valueA3', 'column_id' => '3' ],
+			[ 'column_value' => 'valueA4', 'column_id' => '4' ]
+		];
+	}
+
+	private function getTestRecordsWithDuplicate() {
+		return [
+			[ 'column_value' => 'valueA1', 'column_id' => '1' ],
+			[ 'column_value' => 'valueA2', 'column_id' => '2' ],
+			[ 'column_value' => 'valueA3', 'column_id' => '3' ],
 			[ 'column_value' => 'valueA3', 'column_id' => '3' ],
 			[ 'column_value' => 'valueA4', 'column_id' => '4' ]
 		];
