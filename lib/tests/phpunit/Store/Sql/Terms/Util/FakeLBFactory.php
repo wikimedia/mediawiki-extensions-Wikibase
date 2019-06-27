@@ -35,6 +35,10 @@ class FakeLBFactory extends LBFactory {
 		return $this->newMainLB( $domain );
 	}
 
+	public function waitForReplication( array $ops = [] ) {
+		// no-op
+	}
+
 	public function newExternalLB( $cluster ) {
 		throw new InvalidArgumentException( 'no external cluster supported' );
 	}

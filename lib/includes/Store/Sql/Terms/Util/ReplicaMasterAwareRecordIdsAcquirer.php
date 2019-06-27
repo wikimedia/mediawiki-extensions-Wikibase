@@ -2,11 +2,10 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms\Util;
 
-use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -28,9 +27,9 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	const FLAG_IGNORE_REPLICA = 0x1;
 
 	/**
-	 * @var ILoadBalancer
+	 * @var ILBFactory
 	 */
-	private $loadBalancer;
+	private $lbFactory;
 
 	/**
 	 * @var IDatabase master database to insert non-existing records into
@@ -63,24 +62,31 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private $flags;
 
 	/**
-	 * @param ILoadBalancer $loadBalancer database connection accessor
+	 * @param ILBFactory $lbFactory
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids
 	 * @param LoggerInterface|null $logger
 	 * @param int $flags {@see self::FLAG_IGNORE_REPLICA}
+	 * @param int $waitForReplicationTimeout in seconds, the timeout on waiting for replication
 	 */
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		ILBFactory $lbFactory,
 		$table,
 		$idColumn,
 		LoggerInterface $logger = null,
-		$flags = 0x0
+		$flags = 0x0,
+		$waitForReplicationTimeout = 2
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->lbFactory = $lbFactory;
 		$this->table = $table;
 		$this->idColumn = $idColumn;
 		$this->logger = $logger ?? new NullLogger();
 		$this->flags = $flags;
+		$this->waitForReplicationTimeout = $waitForReplicationTimeout;
+	}
+
+	private function getLoadBalancer(): ILoadBalancer {
+		return $this->lbFactory->getMainLB();
 	}
 
 	/**
@@ -122,50 +128,52 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		array $neededRecords,
 		$recordsToInsertDecoratorCallback = null
 	) {
-		$dbr = $this->isIgnoringReplica() ? $this->getDbMaster() : $this->getDbReplica();
-		$existingRecords = $this->findExistingRecords( $dbr, $neededRecords );
+		if ( $this->isIgnoringReplica() ) {
+			$existingRecords = $this->fetchExistingRecordsFromMaster( $neededRecords );
+		} else {
+			$existingRecords = $this->fetchExistingRecordsFromReplica( $neededRecords );
+		}
+
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
-		while ( !empty( $neededRecords ) ) {
+		if ( !empty( $neededRecords ) ) {
 			if ( is_callable( $recordsToInsertDecoratorCallback ) ) {
 				$neededRecords = $recordsToInsertDecoratorCallback( $neededRecords );
 			}
 
-			$neededRecordsCount = count( $neededRecords );
 			$this->insertNonExistingRecordsIntoMaster( array_unique( $neededRecords, SORT_REGULAR ) );
 
 			$existingRecords = array_merge(
 				$existingRecords,
-				$this->findExistingRecords( $this->getDbMaster(), $neededRecords )
+				$this->fetchExistingRecordsFromMaster( $neededRecords )
 			);
+		}
+
+		return $existingRecords;
+	}
+
+	private function fetchExistingRecordsFromMaster( array $neededRecords ): array {
+		return $this->findExistingRecords( $this->getDbMaster(), $neededRecords );
+	}
+
+	private function fetchExistingRecordsFromReplica( array $neededRecords ): array {
+		// Fetching existing records from replica
+		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
+		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
+
+		// If not all needed records exist in replica,
+		// try wait for replication and fetch again from replica
+		if ( !empty( $neededRecords ) ) {
+			$this->lbFactory->waitForReplication( [
+				'timeout' => $this->waitForReplicationTimeout
+			] );
+
+			$existingRecords = array_merge(
+				$existingRecords,
+				$this->findExistingRecords( $this->getDbReplica(), $neededRecords )
+			);
+
 			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
-
-			if ( count( $neededRecords ) === $neededRecordsCount ) {
-				// This is a fail-safe capture in order to avoid an infinite loop when insertion
-				// fails due to duplication, but selection in the next loop iteration still
-				// cannot detect those existing records for any reason.
-				// This has one caveat that failures due to other reasons other than duplication
-				// constraint violation will also result in a failure to this function entirely.
-				$exception = new Exception(
-					'Fail-safe exception. Avoiding infinite loop due to possibily undetectable'
-					. " existing records in master.\n"
-					. ' It may be due to encoding incompatibility'
-					. ' between database values and values passed in $neededRecords parameter.'
-				);
-
-				$this->logger->warning(
-					'{method}: Acquiring record ids failed: {exception}',
-					[
-						'method' => __METHOD__,
-						'exception' => $exception,
-						'table' => $this->table,
-						'neededRecords' => $neededRecords,
-						'existingRecords' => $existingRecords,
-					]
-				);
-
-				throw $exception;
-			}
 		}
 
 		return $existingRecords;
@@ -173,7 +181,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 	private function getDbReplica() {
 		if ( $this->dbReplica === null ) {
-			$this->dbReplica = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+			$this->dbReplica = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_REPLICA );
 		}
 
 		return $this->dbReplica;
@@ -181,7 +189,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 	private function getDbMaster() {
 		if ( $this->dbMaster === null ) {
-			$this->dbMaster = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+			$this->dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
 		}
 
 		return $this->dbMaster;
@@ -225,19 +233,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @suppress SecurityCheck-SQLInjection
 	 */
 	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
-		try {
-			$this->getDbMaster()->insert( $this->table, $neededRecords );
-		} catch ( DBQueryError $dbError ) {
-			$this->logger->info(
-				'{method}: Inserting records into {table} failed: {exception}',
-				[
-					'method' => __METHOD__,
-					'exception' => $dbError,
-					'table' => $this->table,
-					'records' => $neededRecords
-				]
-			);
-		}
+		$this->getDbMaster()->insert( $this->table, $neededRecords );
 	}
 
 	private function filterNonExistingRecords( $neededRecords, $existingRecords ): array {
