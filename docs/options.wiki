@@ -315,4 +315,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ; addEntityUsagesBatchSize
 : Batch size for adding entity usage records. Default is 500
 ; dataBridgeEnabled
-: Enables the Data Bridge Feature, which allows editing a repository directly from a client wiki. Set to <code>true</code> to enable it. Default: <code>false</code>
+: Enables the Data Bridge Feature, which allows editing a repository directly from a client wiki. To enable it, set this setting to <code>true</code> and also configure <code>dataBridgeHrefRegExp</code> (see below). Default: <code>false</code>
+; dataBridgeHrefRegExp
+: Regular expression to match edit links for which the Data Bridge is enabled. Uses JavaScript syntax, with the first capturing group containing the entity ID and the second one containing the property ID to edit. Mandatory if <code>dataBridgeEnabled</code> is set to <code>true</code> – there is no default value.
