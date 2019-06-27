@@ -1,7 +1,9 @@
 <?php
 
+use Wikibase\Client\DataBridge\DataBridgeConfigValueProvider;
 use Wikibase\Client\Modules\SiteModule;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Modules\MediaWikiConfigModule;
 
 return call_user_func( function() {
 	$moduleTemplate = [
@@ -42,11 +44,30 @@ return call_user_func( function() {
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop' ] :
 							[],
+						'dependencies' => [
+							'mw.config.values.wbDataBridgeConfig',
+						],
 					],
 					__DIR__ . '/../data-bridge/dist',
 					'Wikibase/client/data-bridge/dist'
 				);
 			},
+		],
+
+		'mw.config.values.wbDataBridgeConfig' => [
+			'factory' => function () {
+				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+				return new MediaWikiConfigModule(
+					[
+						'getconfigvalueprovider' => function() {
+							return new DataBridgeConfigValueProvider();
+						},
+						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
+							[ 'desktop' ] :
+							[],
+					]
+				);
+			}
 		],
 
 		'wikibase.client.currentSite' => $moduleTemplate + [
