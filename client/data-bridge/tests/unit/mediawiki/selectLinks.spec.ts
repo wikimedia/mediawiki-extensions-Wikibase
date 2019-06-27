@@ -2,6 +2,16 @@ import { selectLinks, filterLinksByHref } from '@/mediawiki/selectLinks';
 
 describe( 'selectLinks', () => {
 
+	( window as any ).mw = {
+		config: {
+			get() {
+				return {
+					hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+				};
+			},
+		},
+	};
+
 	it( 'find relevant links in mark-up', () => {
 		document.body.innerHTML = `
 		<div>
