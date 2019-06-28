@@ -70,6 +70,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f094ab_6023d9c3",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T11:47:02Z",
+      "side": 1,
+      "message": "\u003e I have a suggestion to move forward, let\u0027s query rc table of a hot wiki (commons, enwiki) and check if the timestamp of at least two edits is the same down to the second or even five, on the same page. Get the total number and check the ratio to get the feeling if that\u0027s something worth fixing.\n\nEight hundred and something edits to the same page within less than two seconds on enwiki. I just rebooted so I no longer have the exact number, but I already ran the query. Took some 16 minutes on the stats machines.",
+      "parentUuid": "4132143a_9a7c48a2",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
