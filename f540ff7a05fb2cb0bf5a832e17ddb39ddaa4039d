@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de6f82fe_a583e24d",
+        "filename": "client/data-bridge/src/@types/mediawiki/MwWindow.ts",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T16:14:15Z",
+      "side": 1,
+      "message": "Wouldn’t this be the more conventional syntax?\n\n using( module: string|string[] ): Promise\u003cany\u003e;\n\nI think that’s the syntax for an interface method, whereas the code currently in the change describes a property that happens to have a callable type.",
+      "revId": "f540ff7a05fb2cb0bf5a832e17ddb39ddaa4039d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72585e32_8b62d8f2",
+        "filename": "client/data-bridge/tests/unit/mediawiki/init.spec.ts",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T16:14:15Z",
+      "side": 1,
+      "message": "Copy+paste from https://stackoverflow.com/a/52770749/1420237? There’s no otherFn here :)",
+      "range": {
+        "startLine": 20,
+        "startChar": 57,
+        "endLine": 20,
+        "endChar": 75
+      },
+      "revId": "f540ff7a05fb2cb0bf5a832e17ddb39ddaa4039d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b195379_41803a66",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T16:14:15Z",
+      "side": 1,
+      "message": "If we’re going to have more than two modules, it would probably make sense to extract this into a variable similar to $moduleTemplate. But that doesn’t have to happen yet (and I’m not sure if we’ll have any other modules besides these two).",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 57
+      },
+      "revId": "f540ff7a05fb2cb0bf5a832e17ddb39ddaa4039d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
