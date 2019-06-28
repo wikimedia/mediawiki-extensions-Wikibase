@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "729dfef7_05671633",
+        "filename": "client/data-bridge/src/@types/mediawiki/MwWindow.ts",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T18:08:29Z",
+      "side": 1,
+      "message": "(It returns a jQuery promise, but MediaWiki since 1.29 uses jQuery v3, whose deferreds/promises are ES6 compatible: https://jquery.com/upgrade-guide/3.0/#breaking-change-and-feature-jquery-deferred-is-now-promises-a-compatible)",
+      "range": {
+        "startLine": 2,
+        "startChar": 35,
+        "endLine": 2,
+        "endChar": 47
+      },
+      "revId": "757e20cdabf40534efe73ce6dee49b6077361526",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55b516f4_b31a1d45",
+        "filename": "client/data-bridge/tests/unit/mediawiki/init.spec.ts",
+        "patchSetId": 12
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T18:08:29Z",
+      "side": 1,
+      "message": "Is the extra space here intentional? We should probably add ^ and $ anchors to the regular expression somewhere so that it doesn’t match hrefs like this.",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "757e20cdabf40534efe73ce6dee49b6077361526",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
