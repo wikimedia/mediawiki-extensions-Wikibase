@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f55c5887_db56b040",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-28T10:08:39Z",
+      "side": 1,
+      "message": "Moving this into a dedicated method would go a long way.",
+      "range": {
+        "startLine": 185,
+        "startChar": 2,
+        "endLine": 191,
+        "endChar": 3
+      },
+      "revId": "97b27d2b19678c3daef1d9fee8fb6b9b63157125",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
