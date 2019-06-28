@@ -175,6 +175,10 @@ final class RepoHooks {
 		// However looking at the current use of EntityNamespaceLookup, it seems to be used
 		// for different kinds of things, which calls for more systematic audit and changes.
 		if ( $wikibaseRepo->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			if ( !$namespaceLookup->isEntityNamespace( $namespace ) ) {
+				return false;
+			}
+
 			$entityType = $namespaceLookup->getEntityType( $namespace );
 
 			if ( $entityType === null ) {
