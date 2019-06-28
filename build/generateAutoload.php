@@ -29,7 +29,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 			[
 				'tests/phpunit/EntityPrefetcherSpy.php',
 				'tests/phpunit/FakePrefetchingTermLookup.php',
-				'tests/phpunit/DataAccessSettingsTestDoubleFactory.php'
+				'tests/phpunit/DataAccessSettingsFactory.php',
 			]
 		);
 
