@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Modules;
+namespace Wikibase\Lib\Modules;
 
 use ResourceLoaderContext;
 use Wikibase\Lib\DataTypeDefinitions;

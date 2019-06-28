@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Modules;
+namespace Wikibase\Lib\Tests\Modules;
 
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Repo\Modules\EntityTypesConfigValueProvider;
-use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
+use Wikibase\Lib\Modules\EntityTypesConfigValueProvider;
+use Wikibase\Lib\Modules\MediaWikiConfigValueProvider;
 
 /**
- * @covers \Wikibase\Repo\Modules\EntityTypesConfigValueProvider
+ * @covers \Wikibase\Lib\Modules\EntityTypesConfigValueProvider
  *
  * @group Wikibase
  *
