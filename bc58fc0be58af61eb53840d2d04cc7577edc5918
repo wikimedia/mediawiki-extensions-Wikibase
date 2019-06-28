@@ -124,6 +124,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f898e2d3_d1d11a35",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T14:48:59Z",
+      "side": 1,
+      "message": "Even if only 9% of those edits change the entity usage that’s dozens of missed updates per month. I don’t think this is acceptable.\n\nI ran the query again, by the way:\n\n MariaDB [enwiki]\u003e SELECT COUNT(*) FROM recentchanges AS rc1 JOIN recentchanges AS rc2 ON rc1.rc_cur_id \u003d rc2.rc_cur_id WHERE rc1.rc_type \u003d 0 AND rc2.rc_type \u003d 0 AND rc2.rc_timestamp \u003e rc1.rc_timestamp AND rc2.rc_timestamp - rc1.rc_timestamp \u003c 2;\n +----------+\n | COUNT(*) |\n +----------+\n |      851 |\n +----------+\n 1 row in set (16 min 14.54 sec)",
+      "parentUuid": "fcb6a44a_5a585068",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
