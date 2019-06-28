@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97a0c340_06ca518f",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T10:21:53Z",
+      "side": 1,
+      "message": "This should not be invoked here, this is basically a \"sleep()\" here and should be called once we can\u0027t find it in replica so we need to try again but this makes it to wait for unneeded reasons.",
+      "range": {
+        "startLine": 144,
+        "startChar": 3,
+        "endLine": 146,
+        "endChar": 7
+      },
+      "revId": "c1b735395a8a204e8feafccd9df63ac26ff95b19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
