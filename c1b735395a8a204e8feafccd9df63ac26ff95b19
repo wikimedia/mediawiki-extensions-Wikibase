@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d4381b9b_e213baa5",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-28T11:18:02Z",
+      "side": 1,
+      "message": "Also makes sense.. though we were \"caching\" it before by being passed and stored in a property. But that\u0027s less code for the win ;) will remove it",
+      "parentUuid": "b6d784f4_69e1b479",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 2
+      },
+      "revId": "c1b735395a8a204e8feafccd9df63ac26ff95b19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cca85707_3e81085a",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0769ceb1_3027262f",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-28T11:18:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cca85707_3e81085a",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 2
+      },
+      "revId": "c1b735395a8a204e8feafccd9df63ac26ff95b19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97a0c340_06ca518f",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2019-06-28T10:21:53Z",
       "side": 1,
       "message": "This should not be invoked here, this is basically a \"sleep()\" here and should be called once we can\u0027t find it in replica so we need to try again but this makes it to wait for unneeded reasons.",
+      "range": {
+        "startLine": 144,
+        "startChar": 3,
+        "endLine": 146,
+        "endChar": 7
+      },
+      "revId": "c1b735395a8a204e8feafccd9df63ac26ff95b19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b5ed053_bc037cdb",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-06-28T11:18:02Z",
+      "side": 1,
+      "message": "Yeah good idea.. I suppose two queries to Replica is nothing to worry about.",
+      "parentUuid": "97a0c340_06ca518f",
       "range": {
         "startLine": 144,
         "startChar": 3,
