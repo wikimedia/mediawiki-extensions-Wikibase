@@ -18,7 +18,7 @@ class MediaWikiConfigModule extends ResourceLoaderModule {
 	/**
 	 * @var string[]
 	 */
-	protected $targets = [ 'desktop', 'mobile' ];
+	protected $targets;
 
 	/**
 	 * @var callable
@@ -28,9 +28,11 @@ class MediaWikiConfigModule extends ResourceLoaderModule {
 	/**
 	 * @param array $options ResourceLoader module options. Must include a "getconfigvalueprovider"
 	 *  callable that returns a MediaWikiConfigValueProvider when called.
+	 *  May include 'targets'. No other options supported yet.
 	 */
 	public function __construct( array $options ) {
 		$this->getConfigValueProvider = $options['getconfigvalueprovider'];
+		$this->targets = $options['targets'] ?? [ 'desktop', 'mobile' ];
 	}
 
 	/**

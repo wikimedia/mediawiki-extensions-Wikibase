@@ -57,4 +57,21 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 		} ] );
 	}
 
+	public function testTargets_default() {
+		$module = new MediaWikiConfigModule( [
+			'getconfigvalueprovider' => function () {
+			},
+		] );
+		$this->assertSame( [ 'desktop', 'mobile' ], $module->getTargets() );
+	}
+
+	public function testTargets_custom() {
+		$module = new MediaWikiConfigModule( [
+			'getconfigvalueprovider' => function () {
+			},
+			'targets' => [],
+		] );
+		$this->assertEmpty( $module->getTargets() );
+	}
+
 }
