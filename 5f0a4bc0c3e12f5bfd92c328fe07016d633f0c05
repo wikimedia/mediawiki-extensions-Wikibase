@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9af0e4b5_89e39e45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T14:16:51Z",
+      "side": 1,
+      "message": "I don’t think this is true. Waiting for replication doesn’t make the replica equivalent to the master – it waits until the replica has caught up to the master position at the time of the call, but that doesn’t freeze the master, so by the time the call completes there may still be new terms in the master that we won’t see in the replica yet.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 15
+      },
+      "revId": "5f0a4bc0c3e12f5bfd92c328fe07016d633f0c05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
