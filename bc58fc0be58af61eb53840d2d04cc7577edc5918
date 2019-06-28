@@ -160,6 +160,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfba330d_8a3b3068",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T16:09:57Z",
+      "side": 1,
+      "message": "\"If you don\u0027t agree, we can ask opinion of an expert in database like Krinkle or Aaron\" I meant someone better than both of us. I might be very wrong here too.",
+      "parentUuid": "b4f34b7b_df01f155",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
