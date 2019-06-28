@@ -88,6 +88,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d40235_bcbab2d8",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T11:51:56Z",
+      "side": 1,
+      "message": "total number of rows in enwiki is 7639658, which means the ratio is at most 0.012%",
+      "parentUuid": "69f094ab_6023d9c3",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
