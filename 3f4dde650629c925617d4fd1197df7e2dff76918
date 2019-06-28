@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "125de0b9_19fd5191",
+        "filename": "client/data-bridge/package.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-28T13:42:03Z",
+      "side": 1,
+      "message": "That might be added to this commit by mistake. Also, `vue-cli-service build` doesn\u0027t seem to have an option `--outDir`.",
+      "range": {
+        "startLine": 12,
+        "startChar": 58,
+        "endLine": 12,
+        "endChar": 96
+      },
+      "revId": "3f4dde650629c925617d4fd1197df7e2dff76918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fc5032d_c6062ed0",
+        "filename": "client/data-bridge/tests/unit/mediawiki/init.spec.ts",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-06-28T13:42:03Z",
+      "side": 1,
+      "message": "I don\u0027t think these await do anything, since the init never returns a promise.",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 7
+      },
+      "revId": "3f4dde650629c925617d4fd1197df7e2dff76918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
