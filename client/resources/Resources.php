@@ -59,8 +59,8 @@ return call_user_func( function() {
 				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
 				return new MediaWikiConfigModule(
 					[
-						'getconfigvalueprovider' => function() {
-							return new DataBridgeConfigValueProvider();
+						'getconfigvalueprovider' => function() use ( $clientSettings ) {
+							return new DataBridgeConfigValueProvider( $clientSettings );
 						},
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop' ] :
