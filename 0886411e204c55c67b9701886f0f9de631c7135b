@@ -68,6 +68,30 @@
       "revId": "0886411e204c55c67b9701886f0f9de631c7135b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "928a57b3_dbf4c8b8",
+        "filename": "client/includes/Hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T16:28:36Z",
+      "side": 1,
+      "message": "For some reason I thought that this would be difficult to test because the JS var would already be munged into the JavaScript code and I’d have to check if the string matches a certain regex 🤦 thanks",
+      "parentUuid": "960ae64f_b6973439",
+      "range": {
+        "startLine": 64,
+        "startChar": 9,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "0886411e204c55c67b9701886f0f9de631c7135b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
