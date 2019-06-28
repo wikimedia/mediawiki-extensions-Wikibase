@@ -52,6 +52,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4132143a_9a7c48a2",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T11:39:58Z",
+      "side": 1,
+      "message": "\u003eI don’t think a “really low” chance of this happening is good enough, nor is relying on what the replication lag “usually” is.\n\nLet me explain this way: 1- If replication lag for any of replicas is more than 5 seconds, the master goes read-only and stops any edits. 2- Bots and gadgets should and almost all of them have throttling enabled, pywikibot for example waits around 10 seconds between every edit. Same goes for gadgets, the only exception here is wikidata\u0027s old term box that\u0027s actually biting us in another area.\n\nI have a suggestion to move forward, let\u0027s query rc table of a hot wiki (commons, enwiki) and check if the timestamp of at least two edits is the same down to the second or even five, on the same page. Get the total number and check the ratio to get the feeling if that\u0027s something worth fixing.",
+      "parentUuid": "e6016d35_86bfc1cd",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
