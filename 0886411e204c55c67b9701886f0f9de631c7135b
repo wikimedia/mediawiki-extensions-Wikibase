@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ef1a5e3_f0748a30",
+        "filename": "client/data-bridge/src/mediawiki/selectLinks.ts",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-28T08:38:40Z",
+      "side": 1,
+      "message": "The compiler can only help us ITLR if we avoid this.\nCreating a discrete type and using it in the places where we know that we deal with it is the way to go even if \"other code should probably not access it\". In fact, it is the only way to ensure just that.",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 19
+      },
+      "revId": "0886411e204c55c67b9701886f0f9de631c7135b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feff1be8_eee4c84b",
+        "filename": "client/data-bridge/src/mediawiki/selectLinks.ts",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-28T08:38:40Z",
+      "side": 1,
+      "message": "Irrespective of when in the patch chain this happens it already becomes evident that this should become a service which gets configured in the entry point (init) and does not access global state here.",
+      "range": {
+        "startLine": 8,
+        "startChar": 26,
+        "endLine": 8,
+        "endChar": 28
+      },
+      "revId": "0886411e204c55c67b9701886f0f9de631c7135b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "960ae64f_b6973439",
+        "filename": "client/includes/Hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-06-28T08:38:40Z",
+      "side": 1,
+      "message": "I would have expected this addition to be reflected in `BeforePageDisplayHandlerTest` (effectively an assertion of `$output-\u003egetJSVars()[\u0027wbDataBridgeConfig\u0027]`).\nI505248e8bb71bfd8c83be5e56b08875bbb595756 does some test refactoring which would make this easier but lacks the assertion, too.",
+      "range": {
+        "startLine": 64,
+        "startChar": 9,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "0886411e204c55c67b9701886f0f9de631c7135b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
