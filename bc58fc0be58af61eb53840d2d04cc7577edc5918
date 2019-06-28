@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72593c72_751d13c3",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T10:13:58Z",
+      "side": 1,
+      "message": "If we get the current usages from a replica, isn’t it possible that we incorrectly conclude that no changes are needed and skip the update even when it would have been necessary?\n\nFor example: An anonymous user blanks a page and is immediately reverted by some patrolling bot. When the patrol bot’s edit is processed, the replica hasn’t caught up with the anonymous edit yet and still has all the entity usages for the page; we conclude that the entity usages didn’t change, don’t schedule a job, and the empty entity usages remain in the master (and, eventually, in the replica too).",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
