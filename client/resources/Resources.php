@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Client\Modules\SiteModule;
+use Wikibase\Client\WikibaseClient;
 
 return call_user_func( function() {
 	$moduleTemplate = [
@@ -31,21 +32,39 @@ return call_user_func( function() {
 		],
 
 		'wikibase.client.data-bridge.init' => [
-			'localBasePath' => __DIR__ . '/../data-bridge/dist',
-			'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
-			'scripts' => [
-				'data-bridge.init.js'
-			],
-			'targets' => [ 'desktop', 'mobile' ],
+			'factory' => function () {
+				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'data-bridge.init.js'
+						],
+						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
+							[ 'desktop', 'mobile' ] :
+							[],
+					],
+					__DIR__ . '/../data-bridge/dist',
+					'Wikibase/client/data-bridge/dist'
+				);
+			},
 		],
 
 		'wikibase.client.data-bridge.app' => [
-			'localBasePath' => __DIR__ . '/../data-bridge/dist',
-			'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
-			'scripts' => [
-				'data-bridge.app.js'
-			],
-			'targets' => [ 'desktop', 'mobile' ],
+			'factory' => function () {
+				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'data-bridge.app.js'
+						],
+						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
+							[ 'desktop', 'mobile' ] :
+							[],
+					],
+					__DIR__ . '/../data-bridge/dist',
+					'Wikibase/client/data-bridge/dist'
+				);
+			},
 		],
 
 		'wikibase.client.currentSite' => $moduleTemplate + [
