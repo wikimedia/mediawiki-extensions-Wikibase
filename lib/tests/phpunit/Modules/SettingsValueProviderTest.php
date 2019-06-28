@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Modules;
+namespace Wikibase\Lib\Tests\Modules;
 
 use PHPUnit4And6Compat;
 use Prophecy\Prophecy\ObjectProphecy;
-use Wikibase\Repo\Modules\SettingsValueProvider;
+use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\SettingsArray;
 
 /**
- * @covers \Wikibase\Repo\Modules\SettingsValueProvider
+ * @covers \Wikibase\Lib\Modules\SettingsValueProvider
  *
  * @group Wikibase
  *

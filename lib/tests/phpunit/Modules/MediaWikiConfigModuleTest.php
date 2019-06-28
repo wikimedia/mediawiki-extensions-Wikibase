@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Modules;
+namespace Wikibase\Lib\Tests\Modules;
 
 use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
-use Wikibase\Repo\Modules\MediaWikiConfigModule;
-use Wikibase\Repo\Modules\MediaWikiConfigValueProvider;
+use Wikibase\Lib\Modules\MediaWikiConfigModule;
+use Wikibase\Lib\Modules\MediaWikiConfigValueProvider;
 
 /**
- * @covers \Wikibase\Repo\Modules\MediaWikiConfigModule
+ * @covers \Wikibase\Lib\Modules\MediaWikiConfigModule
  *
  * @group Wikibase
  *
