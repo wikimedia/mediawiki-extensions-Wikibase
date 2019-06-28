@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69750b57_d05f2ce7",
+        "filename": "docs/adr/0004-add-apply-state-to-changeop.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-06-28T14:06:46Z",
+      "side": 1,
+      "message": "I believe the author(s) of the ADR suggest choosing option II, don\u0027t they?\nFor clarity it would be good to put it here already, and put under discussion.",
+      "revId": "7661f76114e224f5bdc4904dd9dac344f066e15a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e648aab_66c98fd7",
+        "filename": "docs/adr/0004-add-apply-state-to-changeop.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2019-06-28T14:06:46Z",
+      "side": 1,
+      "message": "Here I could also imagine the next steps for Wikibase outlined (on rather general level). Might be that this would be preferred to be also part of the Decision section. I\u0027d personally also outline the \"what we will do next\" in the Decision part.",
+      "revId": "7661f76114e224f5bdc4904dd9dac344f066e15a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
