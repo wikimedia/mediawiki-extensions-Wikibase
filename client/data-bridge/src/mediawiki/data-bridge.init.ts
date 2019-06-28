@@ -1,6 +1,6 @@
 import { selectLinks, filterLinksByHref } from './selectLinks';
 
-function countLinks() {
+function countLinks(): void {
 	// eslint-disable-next-line no-console
 	console.log( `Number of links potentially usable for data bridge: ${ filterLinksByHref( selectLinks() ).length }` );
 }
