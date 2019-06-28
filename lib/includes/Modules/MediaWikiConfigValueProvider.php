@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Modules;
+namespace Wikibase\Lib\Modules;
 
 /**
  * Provider to pass information to mw.config.

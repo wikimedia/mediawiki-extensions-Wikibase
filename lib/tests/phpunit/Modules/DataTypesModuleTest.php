@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Modules;
+namespace Wikibase\Lib\Tests\Modules;
 
 use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use Exception;
 use ResourceLoaderContext;
-use Wikibase\Repo\Modules\DataTypesModule;
+use Wikibase\Lib\Modules\DataTypesModule;
 
 /**
  * @covers \WikibaseRepo\Modules\DataTypesModule
