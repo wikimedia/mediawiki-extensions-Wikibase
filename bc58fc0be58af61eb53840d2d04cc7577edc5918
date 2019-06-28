@@ -16,6 +16,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f143c249_9561b237",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T10:25:11Z",
+      "side": 1,
+      "message": "I saw that might happen but the chance of it happening is really low (the lag is usually less than one second, the time between any edit is waaay more than that). Specially given that these data are secondary data and will be fixed and reparsed in the next edit in case that happens (which will be less than 0.1%)",
+      "parentUuid": "72593c72_751d13c3",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
