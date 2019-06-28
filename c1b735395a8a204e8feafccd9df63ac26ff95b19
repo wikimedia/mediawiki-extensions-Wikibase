@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "b6d784f4_69e1b479",
+        "filename": "lib/includes/Store/Sql/Terms/DatabaseTermIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T10:54:06Z",
+      "side": 1,
+      "message": "Caching the ILoadBalancer instance should be the ILBFactory’s job (that’s why you call getMainLB() and not newMainLB()), so I don’t think that should be duplicated here.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 2
+      },
+      "revId": "c1b735395a8a204e8feafccd9df63ac26ff95b19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cca85707_3e81085a",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T10:54:06Z",
+      "side": 1,
+      "message": "Same comment here, it’s not our job to cache the ILoadBalancer.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 2
+      },
+      "revId": "c1b735395a8a204e8feafccd9df63ac26ff95b19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97a0c340_06ca518f",
         "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
         "patchSetId": 5
