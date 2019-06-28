@@ -142,6 +142,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f34b7b_df01f155",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T15:10:34Z",
+      "side": 1,
+      "message": "We lose so much more (like one or two orders of magnitude higher) due to network partition, system issues and other things. 80 cases a month is really not much, not mention is lower than that because replica lag is barely around 2 seconds and usually is way lower.\n\nIf you don\u0027t agree, we can ask opinion of an expert in database like Krinkle or Aaron",
+      "parentUuid": "f898e2d3_d1d11a35",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
