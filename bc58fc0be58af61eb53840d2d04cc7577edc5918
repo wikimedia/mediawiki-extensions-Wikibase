@@ -106,6 +106,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcb6a44a_5a585068",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2019-06-28T11:53:52Z",
+      "side": 1,
+      "message": "And only 9% of those edits actually change the entity usage (the error rate would be 0.001% then) also keep in mind the replication lag is not always two seconds. Most of cases it\u0027s around several hundred milliseconds",
+      "parentUuid": "60d40235_bcbab2d8",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
