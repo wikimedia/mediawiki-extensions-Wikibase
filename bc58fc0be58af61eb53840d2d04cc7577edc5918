@@ -34,6 +34,24 @@
       "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6016d35_86bfc1cd",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-06-28T11:21:41Z",
+      "side": 1,
+      "message": "This code runs on every edit on every client wiki. I don’t think a “really low” chance of this happening is good enough, nor is relying on what the replication lag “usually” is. Between tools and bots, there are plenty of cases where the same page may be  edited multiple times in the same second; at the same time, if there are no other edits to the page after that, it might take up to thirty days for the next parser cache update (I think).\n\nSince one of the arguments the hook passes to us is a $revId (presumably the one that triggered this update, if not null), we might be able to check if the replica already has a row for this revision, and in that case assume it’s sufficiently up-to-date. (Though I’m not sure if that would be enough.) But I have a feeling that we should just bite the bullet and use a master connection here. (Or is this a context where we’re not allowed to contact the master because it might be a GET request?)",
+      "parentUuid": "f143c249_9561b237",
+      "revId": "bc58fc0be58af61eb53840d2d04cc7577edc5918",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
