@@ -20,7 +20,8 @@
 			"Cwek",
 			"A2093064",
 			"Eflyjason",
-			"A Chinese Wikipedian"
+			"A Chinese Wikipedian",
+			"神樂坂秀吉"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
@@ -118,7 +119,7 @@
 	"wikibase-otherprojects-beta-description": "在边栏添加“{{int:wikibase-otherprojects}}”节，它包含连入{{WBREPONAME}}数据的其他维基媒体项目的页面连接。",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|连接}}到{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "当有人将我{{GENDER:|创建}}的页面连接到{{WBREPONAME}}项时通知我。",
-	"notification-header-page-connection": "页面<strong>$3</strong>已{{GENDER:$2|连接}}到{{PLURAL:$4|-1=一个{{WBREPONAME}}项|{{WBREPONAME}}项$4}}中，其包含与主题相关的数据。",
+	"notification-header-page-connection": "页面<strong>$3</strong>已{{GENDER:$2|连接}}到{{PLURAL:$4|-1=一个{{WBREPONAME}}项|{{WBREPONAME}}项$4}}中，在那可收集与主题相关的数据。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>和{{PLURAL:$4|$4个|100=超过99个}}其他页面已{{GENDER:$2|连接}}到{{WBREPONAME}}项中。",
 	"notification-link-text-view-item": "{{GENDER:$1|查看}}项",
 	"notification-subject-page-connection": "您在{{SITENAME}}上{{GENDER:$3|创建}}的一个页面已{{GENDER:$2|连接}}至{{WBREPONAME}}项中",

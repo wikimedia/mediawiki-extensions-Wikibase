@@ -93,6 +93,7 @@
 	"wikibase-aliases-input-help-message": "এই সত্তা সহজে খুঁজে বের করার জন্য, আপনি কয়েকটি বিকল্প নাম লিখতে পারেন।",
 	"wikibase-propertypage-datatype": "উপাত্তের ধরন",
 	"wikibase-propertypage-bad-datatype": "উপাত্তের ধরন অজানা: $1",
+	"wikibase-referenceview-tabs-manual": "হাতদ্বারা",
 	"wikibase-statementview-rank-preferred": "পছন্দের ক্রম",
 	"wikibase-statementview-rank-tooltip-preferred": "বৈধ ও হালনাগাদকৃত মান",
 	"wikibase-statementview-rank-normal": "সাধারন র‍্যাঙ্ক",

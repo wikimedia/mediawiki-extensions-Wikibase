@@ -4,7 +4,8 @@
 			"Bjankuloski06",
 			"Macofe",
 			"Ladsgroup",
-			"Stryn"
+			"Stryn",
+			"Vlad5250"
 		]
 	},
 	"wikibase-desc": "Складиште на структурирани податоци",
@@ -92,6 +93,7 @@
 	"wikibase-propertypage-bad-datatype": "Непознат податочен тип: $1",
 	"wikibase-claimview-snak-tooltip": "Внесете вредност што одговара на својството наречено „$1“. Ако својството нема назначена вредност или таа не е позната, можете да внесете ваша вредност стискајќи на иконата пред полето за вредност.",
 	"wikibase-claimview-snak-new-tooltip": "Откако ќе укажете својство, можете да ја внесете вашата вредност. Ако својството нема назначена вредност или таа не е позната, можете да внесете ваша вредност стискајќи на иконата пред полето за вредност.",
+	"wikibase-referenceview-tabs-manual": "Рачно",
 	"wikibase-statementview-rank-preferred": "Претпочитано",
 	"wikibase-statementview-rank-tooltip-preferred": "Важечка и тековна вредност",
 	"wikibase-statementview-rank-normal": "Нормално",
@@ -111,6 +113,7 @@
 	"wikibase-snakformat-invalid-value": "Неважечка вредност.",
 	"wikibase-snakformat-propertynotfound": "Не го пронајдов својството.",
 	"wikibase-shortcopyrightwarning": "Стискајќи на „$1“, се согласувате со [[$2|условите на употреба]] и неотповикливо се согласувате вашите придонеси да се нудат под условите на $3.",
+	"wikibase-shortcopyrightwarning-accept-persist": "Ги прифаќам овие услови што ќе важат за идните уредувања. Повеќе не ја прикажувај поракава.",
 	"wikibase-copyrighttooltip-acknowledge": "Ги прифаќам овие услови што ќе важат за идните уредувања. Повеќе не ја прикажувај поракава.",
 	"wikibase-entityselector-more": "уште",
 	"wikibase-entityselector-notfound": "Нема совпаѓања",

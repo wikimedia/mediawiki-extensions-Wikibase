@@ -127,6 +127,7 @@
 	"wikibase-propertypage-bad-datatype": "Tipo de dato desconocido: $1",
 	"wikibase-claimview-snak-tooltip": "Escribe un valor correspondiente a la propiedad llamada \"$1\". Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir un tipo de valor alternativo haciendo clic en el icono previo a la casilla de entrada.",
 	"wikibase-claimview-snak-new-tooltip": "Después de especificar una propiedad, puedes escribir un valor correspondiente. Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir un tipo de valor alternativo haciendo clic en el ícono previo a la casilla de entrada.",
+	"wikibase-referenceview-tabs-manual": "Manual",
 	"wikibase-statementview-rank-preferred": "Nivel preferido",
 	"wikibase-statementview-rank-tooltip-preferred": "Valor válido y actualizado",
 	"wikibase-statementview-rank-normal": "Calificación normal",

@@ -27,7 +27,8 @@
 			"Hello903hello",
 			"Mutolisp",
 			"Kly",
-			"A2093064"
+			"A2093064",
+			"神樂坂秀吉"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -115,6 +116,7 @@
 	"wikibase-propertypage-bad-datatype": "未知的資料型態：$1",
 	"wikibase-claimview-snak-tooltip": "請輸入屬性名稱為「$1」所對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以點選數值輸入框前的圖示來選擇一個值類型替代。",
 	"wikibase-claimview-snak-new-tooltip": "指定屬性後你可以輸入對應的數值。若該屬性沒有指定的數值或實際數值為未知，您可以透過點選輸入框旁的圖示來挑選替代的數值類型。",
+	"wikibase-referenceview-tabs-manual": "手冊",
 	"wikibase-statementview-rank-preferred": "最佳等級",
 	"wikibase-statementview-rank-tooltip-preferred": "有效且最新的值",
 	"wikibase-statementview-rank-normal": "一般等級",

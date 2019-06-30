@@ -30,7 +30,8 @@
 			"夢蝶葬花",
 			"A Chinese Wikipedian",
 			"佛壁灯",
-			"科劳"
+			"科劳",
+			"神樂坂秀吉"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -118,6 +119,7 @@
 	"wikibase-propertypage-bad-datatype": "未知的数据类型：$1",
 	"wikibase-claimview-snak-tooltip": "请输入属性“$1”对应的值。如果该属性没有指定的值或实际值是未知的，您可以通过点击输入框之前的图标来选择一个替代的值类型。",
 	"wikibase-claimview-snak-new-tooltip": "指定一个属性后您可以输入对应的值。如果该属性没有指定的值或实际值是未知的，您可以通过点击输入框之前的图标来选择一个替代的值类型。",
+	"wikibase-referenceview-tabs-manual": "手册",
 	"wikibase-statementview-rank-preferred": "首选级",
 	"wikibase-statementview-rank-tooltip-preferred": "有效并保持最新的值",
 	"wikibase-statementview-rank-normal": "普通级",
@@ -137,6 +139,7 @@
 	"wikibase-snakformat-invalid-value": "无效值。",
 	"wikibase-snakformat-propertynotfound": "未找到属性。",
 	"wikibase-shortcopyrightwarning": "点击“$1”即表示您接受[[$2|使用条款]]，并不可撤销地接受以$3发布您的贡献。",
+	"wikibase-shortcopyrightwarning-accept-persist": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-entityselector-more": "更多",
 	"wikibase-entityselector-notfound": "找不到匹配项目",
@@ -149,7 +152,7 @@
 	"wikibase-validator-label-conflict": "属性$3已经关联语言代码$2的标签“$1”。",
 	"wikibase-validator-label-with-description-conflict": "项$3已经关联语言代码$2的标签“$1”，使用同一描述文本。",
 	"wikibase-validator-label-no-entityid": "该标签不是有效的实体ID。",
-	"wikibase-validator-illegal-file-chars": "文件名不允许保护冒号或斜杠字符。请只粘贴“File:”之后的文件名。",
+	"wikibase-validator-illegal-file-chars": "文件名不允许保护冒号或斜杠字符。",
 	"wikibase-validator-illegal-geo-shape-title": "值必须以<code>Data:</code>开头，并以<code>.map</code>结尾。另外标题不应包含冒号、哈希或管道字符。",
 	"wikibase-validator-illegal-tabular-data-title": "值必须以<code>Data:</code>开头，并以<code>.tab</code>结尾。另外标题不应包含冒号、哈希或管道字符。",
 	"wikibase-validator-no-such-media": "文件“$1”在[https://commons.wikimedia.org/ 维基共享资源]不存在。",
@@ -244,7 +247,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "描述：",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "别名：",
 	"wikibase-setlabeldescriptionaliases-submit": "设置标签、描述和别名",
-	"special-setsitelink": "设置网站链接",
+	"special-setsitelink": "设置项目网站链接",
 	"wikibase-setsitelink-introfull": "您正在设置[[:$1]]的$2网站链接。",
 	"wikibase-setsitelink-intro": "该表格允许您设置项的网站链接。您需要提供项的ID（如Q23）、网站ID（如“zhwiki”）和要设置的网站链接。",
 	"wikibase-setsitelink-intro-badges": "另外您可以对下面列出的该网站链接设置各种徽章。",
@@ -397,6 +400,11 @@
 	"wikibase-listdatatypes-url-body": "一个URL的文本数据字段。协议中限制使用的URL支持以外部链接的方式写在维基文本中。",
 	"wikibase-listdatatypes-external-id-head": "外部标识符",
 	"wikibase-listdatatypes-external-id-body": "用于外部标识符文字数据字段。外部标识符可能会自动链接至权威资源以便显示。",
+	"wikibase-listdatavaluetypes-name-string": "字符串",
+	"wikibase-listdatavaluetypes-name-globecoordinate": "地球坐标",
+	"wikibase-listdatavaluetypes-name-monolingualtext": "单语文本",
+	"wikibase-listdatavaluetypes-name-quantity": "数量",
+	"wikibase-listdatavaluetypes-name-time": "时间",
 	"wikibase-concept-uri": "概念URI",
 	"wikibase-concept-uri-tooltip": "识别此项描述概念的URI",
 	"wikibase-pageimage-helptext": "此图片来自该项的声明。您可以通过更改声明调整图片。",
@@ -407,7 +415,9 @@
 	"right-item-term": "更改项术语（标签、说明、别名）",
 	"action-item-merge": "合并项",
 	"right-item-merge": "合并项",
+	"action-item-redirect": "创建项重定向",
 	"right-item-redirect": "创建项重定向",
+	"action-property-term": "更改属性术语（标签、说明、别名）",
 	"right-property-term": "更改属性术语（标签、说明、别名）",
 	"action-property-create": "创建属性",
 	"right-property-create": "创建属性",
@@ -417,5 +427,6 @@
 	"wikibase-pageinfo-subscription-none": "无",
 	"wikibase-search-bad-entity-type": "错误实体类型：$1",
 	"wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
-	"wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。"
+	"wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。",
+	"wikibase-shortcopyrightwarning-heading": "授权条款"
 }
