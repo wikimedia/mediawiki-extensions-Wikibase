@@ -22,6 +22,30 @@
       "revId": "97b27d2b19678c3daef1d9fee8fb6b9b63157125",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d45aac64_8f9a23b7",
+        "filename": "client/ClientHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-07-01T12:44:07Z",
+      "side": 1,
+      "message": "If9bb21ce0b effectively goes a bit further into that direction.",
+      "parentUuid": "f55c5887_db56b040",
+      "range": {
+        "startLine": 185,
+        "startChar": 2,
+        "endLine": 191,
+        "endChar": 3
+      },
+      "revId": "97b27d2b19678c3daef1d9fee8fb6b9b63157125",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
