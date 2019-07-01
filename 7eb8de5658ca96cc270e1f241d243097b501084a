@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bc1a113e_ebfe44e5",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-07-01T20:18:00Z",
+      "side": 1,
+      "message": "ok, will reformat.",
+      "parentUuid": "cd6d16cc_3bcbfe5a",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "7eb8de5658ca96cc270e1f241d243097b501084a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e62f59ba_0a6c1d7d",
         "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-01T16:51:21Z",
       "side": 1,
       "message": "I think we now require a sufficiently recent PHP version that this could use `...$predicate`, if you want :)",
+      "range": {
+        "startLine": 88,
+        "startChar": 24,
+        "endLine": 88,
+        "endChar": 52
+      },
+      "revId": "7eb8de5658ca96cc270e1f241d243097b501084a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc5541c1_3c732708",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-07-01T20:18:00Z",
+      "side": 1,
+      "message": "Here I would prefer the explicit form so it\u0027d be clear which part does what. Otherwise it\u0027s a bit obscure what is happening here.",
+      "parentUuid": "e62f59ba_0a6c1d7d",
       "range": {
         "startLine": 88,
         "startChar": 24,
