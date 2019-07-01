@@ -163,6 +163,7 @@
 	"wikibase-snakformat-invalid-value": "Valeur non valide.",
 	"wikibase-snakformat-propertynotfound": "Propriété non trouvée.",
 	"wikibase-shortcopyrightwarning": "En cliquant sur «&nbsp;$1&nbsp;», vous acceptez les [[$2|conditions d’utilisation]] et acceptez de placer irrévocablement votre contribution sous $3.",
+	"wikibase-shortcopyrightwarning-accept-persist": "J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.",
 	"wikibase-copyrighttooltip-acknowledge": "J’accepte ces conditions pour mes prochaines modifications. Ne plus afficher ce message.",
 	"wikibase-entityselector-more": "plus",
 	"wikibase-entityselector-notfound": "Aucune correspondance trouvée",

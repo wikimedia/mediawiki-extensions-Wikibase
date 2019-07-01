@@ -5,7 +5,8 @@
 			"Iwan Novirion",
 			"පසිඳු කාවින්ද",
 			"Beeyan",
-			"Rachmat04"
+			"Rachmat04",
+			"Taylor"
 		]
 	},
 	"wikibase-lib-desc": "Menangani fungsi umum untuk Wikibase dan ekstensi klien Wikibase",
@@ -104,7 +105,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|$4 kualifikasi}} berubah dari {{PLURAL:$3|klaim}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|$4 referensi}} berubah dari {{PLURAL:$3|klaim}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Rangking {{PLURAL:$3|klaim}} berubah",
-	"wikibase-entity-summary-clientsitelink-update": "Laman dipindahkan dari [$3] ke [$4]",
+	"wikibase-entity-summary-clientsitelink-update": "Halaman dipindahkan dari [$3] ke [$4]",
 	"wikibase-entity-summary-clientsitelink-remove": "Laman pada [$3] dihapus",
 	"wikibase-entity-summary-wbsetqualifier-add": "Tambahkan {{PLURAL:$1|penjelas}}",
 	"wikibase-entity-summary-wbmergeitems-from": "Gabungkan butir dari $3",
