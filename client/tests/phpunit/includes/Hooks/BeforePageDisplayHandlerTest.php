@@ -236,7 +236,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider handleDataBridgeEnabledProvider
 	 */
 	public function testHandle_dataBridgeEnabled(
-		$expectedJsModules, $expectedCssModules,
+		$expectedJsModules, $expectedCssModules, $expectedJsConfigVars,
 		$dataBridgeEnabled, $wikibaseEnabled
 	) {
 		$skin = $this->getSkin( false, false );
@@ -248,10 +248,12 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertSame( $expectedJsModules, $output->getModules(), 'js modules' );
 		$this->assertSame( $expectedCssModules, $output->getModuleStyles(), 'css modules' );
+		$this->assertSame( $expectedJsConfigVars, $output->getJsConfigVars(), 'js config vars' );
 	}
 
 	public function handleDataBridgeEnabledProvider() {
 		yield 'disabled' => [
+			[],
 			[],
 			[],
 			false, // data bridge disabled
@@ -261,11 +263,17 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 		yield 'enabled' => [
 			[ 'wikibase.client.data-bridge.init' ],
 			[],
+			[
+				'wbDataBridgeConfig' => [
+					'hrefRegExp' => 'https://www\.wikidata\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+				],
+			],
 			true, // data bridge enabled
 			true, // Wikibase enabled
 		];
 
 		yield 'enabled but Wikibase disabled' => [
+			[],
 			[],
 			[],
 			true, // data bridge enabled
