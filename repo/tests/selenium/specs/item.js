@@ -1,6 +1,7 @@
 const Util = require( 'wdio-mediawiki/Util' );
-
+const assert = require( 'assert' );
 let WikibaseApi, EntityPage, ItemPage;
+
 try {
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 	EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
@@ -98,4 +99,19 @@ describe( 'item', function () {
 		ItemPage.valueInputField.waitForExist( null, true );
 	} );
 
+	it( 'old revisions do not have an edit link', function () {
+		let itemId;
+
+		browser.call( () => {
+			return WikibaseApi.createItem( Util.getTestString( 'T95406-' ) )
+				.then( ( id ) => {
+					itemId = id;
+				} );
+		} );
+
+		EntityPage.open( itemId );
+		ItemPage.editItemDescription( 'revision 1' );
+		ItemPage.goToPreviousRevision();
+		assert( !ItemPage.editButton.isExisting() );
+	} );
 } );
