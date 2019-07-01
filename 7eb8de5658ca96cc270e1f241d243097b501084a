@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd6d16cc_3bcbfe5a",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-07-01T16:51:21Z",
+      "side": 1,
+      "message": "We don’t usually indent parameter lists like that – I think the more conventional formatting would be:\n\n public function __construct(\n \tRdfVocabulary $vocabulary,\n \tRdfWriter $writer,\n \tarray $labelPredicates \u003d [],\n \tarray $languages \u003d null\n ) {",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "7eb8de5658ca96cc270e1f241d243097b501084a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e62f59ba_0a6c1d7d",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-07-01T16:51:21Z",
+      "side": 1,
+      "message": "I think we now require a sufficiently recent PHP version that this could use `...$predicate`, if you want :)",
+      "range": {
+        "startLine": 88,
+        "startChar": 24,
+        "endLine": 88,
+        "endChar": 52
+      },
+      "revId": "7eb8de5658ca96cc270e1f241d243097b501084a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
