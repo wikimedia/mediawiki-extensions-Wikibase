@@ -36,6 +36,7 @@ return call_user_func( function() {
 			'scripts' => [
 				'data-bridge.init.js'
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.client.data-bridge.app' => [
@@ -44,6 +45,7 @@ return call_user_func( function() {
 			'scripts' => [
 				'data-bridge.app.js'
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.client.currentSite' => $moduleTemplate + [
