@@ -19,7 +19,7 @@ describe( 'init', () => {
 		mockMwEnv( using );
 		const mock = jest.spyOn( linker, 'filterLinksByHref' );
 		mock.mockReturnValue( [
-			{ href: ' https://www.wikidata.org/wiki/Q123#P321' },
+			{ href: 'https://www.wikidata.org/wiki/Q123#P321' },
 		] as any );
 
 		init();
