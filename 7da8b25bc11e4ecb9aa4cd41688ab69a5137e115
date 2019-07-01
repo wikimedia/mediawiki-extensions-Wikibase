@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90c8a513_c746c9c8",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6546
+      },
+      "writtenOn": "2019-07-01T08:55:37Z",
+      "side": 1,
+      "message": "I guess we should start loading our js in mobile at some point, but this patch is probably not the right place. It created a task for it: https://phabricator.wikimedia.org/T226964",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 20
+      },
+      "revId": "7da8b25bc11e4ecb9aa4cd41688ab69a5137e115",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
