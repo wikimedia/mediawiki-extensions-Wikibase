@@ -1,14 +1,18 @@
+import MwWindow from '@/@types/mediawiki/MwWindow';
 import { selectLinks, filterLinksByHref } from '@/mediawiki/selectLinks';
 
 describe( 'selectLinks', () => {
 
-	( window as any ).mw = {
+	( window as MwWindow ).mw = {
 		config: {
 			get() {
 				return {
 					hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
 				};
 			},
+		},
+		loader: {
+			using: jest.fn(),
 		},
 	};
 

@@ -7,6 +7,9 @@ function mockMwEnv( using: () => Promise<any> ): void {
 		loader: {
 			using,
 		},
+		config: {
+			get: jest.fn(),
+		},
 	};
 }
 
