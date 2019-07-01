@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5afd7765_19024ec4",
+        "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2019-07-01T22:01:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc1a113e_ebfe44e5",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "7eb8de5658ca96cc270e1f241d243097b501084a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e62f59ba_0a6c1d7d",
         "filename": "repo/includes/Rdf/TermsRdfBuilder.php",
         "patchSetId": 4
