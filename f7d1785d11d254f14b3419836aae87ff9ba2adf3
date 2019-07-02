@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "685508e7_7a81eb04",
+        "filename": "client/includes/DataBridge/DataBridgeConfigValueProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4699
+      },
+      "writtenOn": "2019-07-02T15:05:09Z",
+      "side": 1,
+      "message": "done in Id267c44919",
+      "parentUuid": "703cc106_4ce2fca4",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 37
+      },
+      "revId": "f7d1785d11d254f14b3419836aae87ff9ba2adf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0d86bbe7_8a9b5aab",
         "filename": "client/includes/DataBridge/DataBridgeConfigValueProvider.php",
         "patchSetId": 1
