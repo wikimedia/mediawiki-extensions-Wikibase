@@ -126,7 +126,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->titleLookup = $titleLookup;
 
 		// XXX: move construction of sub-builders to a factory class.
-		$this->builders[] = new TermsRdfBuilder( $vocabulary, $writer );
+		$this->builders[] = $entityRdfBuilderFactory->getTermRdfBuilder( $vocabulary, $writer );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ) {
 			$this->builders[] = $this->newTruthyStatementRdfBuilder();

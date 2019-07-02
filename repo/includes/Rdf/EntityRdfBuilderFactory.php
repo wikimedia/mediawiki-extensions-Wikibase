@@ -18,17 +18,23 @@ class EntityRdfBuilderFactory {
 	 * @var callable[]
 	 */
 	private $factoryCallbacks;
+	/**
+	 * @var string[][]
+	 */
+	private $labelPredicates;
 
 	/**
 	 * @param callable[] $factoryCallbacks Factory callback functions as returned by
 	 *        EntityTypeDefinitions::getRdfBuilderFactoryCallbacks(). Callbacks will be invoked
 	 *        with the signature ($mode, RdfVocabulary, RdfWrite, EntityMentionListener, DedupeBag)
 	 *        and must return a EntityRdfBuilder (or null).
+	 * @param string[][][] $labelPredicates
 	 */
-	public function __construct( array $factoryCallbacks ) {
+	public function __construct( array $factoryCallbacks, array $labelPredicates ) {
 		Assert::parameterElementType( 'callable', $factoryCallbacks, '$factoryCallbacks' );
 
 		$this->factoryCallbacks = $factoryCallbacks;
+		$this->labelPredicates = $labelPredicates;
 	}
 
 	/**
@@ -93,6 +99,16 @@ class EntityRdfBuilderFactory {
 		}
 
 		return $builders;
+	}
+
+	/**
+	 * Produce new TermRdfWriter
+	 * @param RdfVocabulary $vocabulary
+	 * @param RdfWriter $writer
+	 * @return TermsRdfBuilder
+	 */
+	public function getTermRdfBuilder( RdfVocabulary $vocabulary, RdfWriter $writer ) {
+		return new TermsRdfBuilder( $vocabulary, $writer, $this->labelPredicates );
 	}
 
 }
