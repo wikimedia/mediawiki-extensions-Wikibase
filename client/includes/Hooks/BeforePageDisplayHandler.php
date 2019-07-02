@@ -19,16 +19,13 @@ class BeforePageDisplayHandler {
 	private $namespaceChecker;
 
 	/**
-	 * @var array|null
+	 * @var bool
 	 */
-	private $dataBridgeConfig;
+	private $dataBridgeEnabled;
 
-	public function __construct(
-		NamespaceChecker $namespaceChecker,
-		array $dataBridgeConfig = null
-	) {
+	public function __construct( NamespaceChecker $namespaceChecker, $dataBridgeEnabled ) {
 		$this->namespaceChecker = $namespaceChecker;
-		$this->dataBridgeConfig = $dataBridgeConfig;
+		$this->dataBridgeEnabled = $dataBridgeEnabled;
 	}
 
 	/**
@@ -62,9 +59,8 @@ class BeforePageDisplayHandler {
 			$out->addModules( 'wikibase.client.linkitem.init' );
 		}
 
-		if ( $this->dataBridgeConfig !== null ) {
+		if ( $this->dataBridgeEnabled ) {
 			$out->addModules( 'wikibase.client.data-bridge.init' );
-			$out->addJsConfigVars( 'wbDataBridgeConfig', $this->dataBridgeConfig );
 		}
 	}
 
