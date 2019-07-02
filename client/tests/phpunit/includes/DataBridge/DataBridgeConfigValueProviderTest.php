@@ -41,7 +41,7 @@ class DataBridgeConfigValueProviderTest extends TestCase {
 		$value = $provider->getValue();
 		$this->assertSame(
 			[
-				'hrefRegExp' => '(?!)data bridge config incomplete: dataBridgeHrefRegExp missing',
+				'hrefRegExp' => null,
 			],
 			$value
 		);

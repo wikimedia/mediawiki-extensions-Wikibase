@@ -10,6 +10,11 @@ function mockMwEnv( using: () => Promise<any> ): void {
 		config: {
 			get: jest.fn(),
 		},
+		log: {
+			deprecate: jest.fn(),
+			error: jest.fn(),
+			warn: jest.fn(),
+		},
 	};
 }
 
