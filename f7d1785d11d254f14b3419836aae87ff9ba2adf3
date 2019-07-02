@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d86bbe7_8a9b5aab",
+        "filename": "client/includes/DataBridge/DataBridgeConfigValueProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-07-02T10:59:05Z",
+      "side": 1,
+      "message": "That\u0027s actually a nice idea",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "f7d1785d11d254f14b3419836aae87ff9ba2adf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16dbb79f_0d131035",
+        "filename": "client/includes/DataBridge/DataBridgeConfigValueProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-07-02T10:59:05Z",
+      "side": 1,
+      "message": "As agreed this should be tackled in certain patch",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 3
+      },
+      "revId": "f7d1785d11d254f14b3419836aae87ff9ba2adf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebb73999_bdae69a7",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5897
+      },
+      "writtenOn": "2019-07-02T10:59:05Z",
+      "side": 1,
+      "message": "Nice idea",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 71,
+        "endChar": 4
+      },
+      "revId": "f7d1785d11d254f14b3419836aae87ff9ba2adf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
