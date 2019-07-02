@@ -22,6 +22,30 @@
       "revId": "5f0a4bc0c3e12f5bfd92c328fe07016d633f0c05",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e601a34d_c499eb9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-07-02T08:56:09Z",
+      "side": 1,
+      "message": "Yeah this statement is not fully correct. We can remove it. Do you thing we will also need to keep the loop solution for these cases as well? That won\u0027t hurt I think.",
+      "parentUuid": "9af0e4b5_89e39e45",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 15
+      },
+      "revId": "5f0a4bc0c3e12f5bfd92c328fe07016d633f0c05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
