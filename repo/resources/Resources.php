@@ -1,7 +1,7 @@
 <?php
 
-use Wikibase\Repo\Modules\DataTypesModule;
-use Wikibase\Repo\Modules\MediaWikiConfigModule;
+use Wikibase\Lib\Modules\DataTypesModule;
+use Wikibase\Lib\Modules\MediaWikiConfigModule;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
