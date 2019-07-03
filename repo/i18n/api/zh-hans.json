@@ -5,7 +5,8 @@
 			"Wxyveronica",
 			"Yfdyh000",
 			"夢蝶葬花",
-			"A Chinese Wikipedian"
+			"A Chinese Wikipedian",
+			"神樂坂秀吉"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项。",
@@ -166,7 +167,7 @@
 	"apihelp-wbsearchentities-example-5": "搜索英语“alphabet”，省略url参数",
 	"apihelp-wbsearchentities-example-6": "搜索英语中的“Q1234”，以匹配实体ID。",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "语言代码。",
-	"apihelp-query+wbsearch-description": "使用标签和别名搜索实体。\n这可被用作其他查询使用的生成器。\n返回应被显示的匹配关键字。",
+	"apihelp-query+wbsearch-description": "使用标签和别名搜索实体。\n这可用作其他查询使用的生成器。\n返回应显示的匹配关键字。",
 	"apihelp-query+wbsearch-summary": "使用标签和别名搜索实体。",
 	"apihelp-query+wbsearch-extended-description": "这可被用作其他查询使用的生成器。\n返回应被显示的匹配关键字。",
 	"apihelp-query+wbsearch-param-search": "搜索此文本。",
