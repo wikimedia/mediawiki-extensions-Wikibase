@@ -47,9 +47,9 @@ return call_user_func( function() {
 						'dependencies' => [
 							'mw.config.values.wbDataBridgeConfig',
 						],
+						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 					],
-					__DIR__ . '/../data-bridge/dist',
-					'Wikibase/client/data-bridge/dist'
+					__DIR__ . '/../data-bridge/dist'
 				);
 			},
 		],
@@ -81,9 +81,9 @@ return call_user_func( function() {
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
 							[],
+						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 					],
-					__DIR__ . '/../data-bridge/dist',
-					'Wikibase/client/data-bridge/dist'
+					__DIR__ . '/../data-bridge/dist'
 				);
 			},
 		],
