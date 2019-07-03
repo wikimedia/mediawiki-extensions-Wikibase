@@ -6,11 +6,9 @@ describe( 'selectLinks', () => {
 	beforeEach( () => {
 		( window as MwWindow ).mw = {
 			config: {
-				get() {
-					return {
-						hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
-					};
-				},
+				get: () => ( {
+					hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+				} ),
 			},
 			loader: {
 				using: jest.fn(),
@@ -73,7 +71,7 @@ describe( 'selectLinks', () => {
 		const actualSelectedLinks = filterLinksByHref( [ linkToBeNotSelected ] );
 
 		expect( actualSelectedLinks.length ).toBe( 0 );
-		expect( warn.mock.calls.length ).toBe( 1 );
+		expect( warn ).toHaveBeenCalledTimes( 1 );
 	} );
 
 } );
