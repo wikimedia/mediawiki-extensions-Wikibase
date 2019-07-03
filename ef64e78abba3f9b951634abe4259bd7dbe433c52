@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eff9e112_188490e3",
+        "filename": "client/data-bridge/src/mediawiki/selectLinks.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-07-03T15:22:15Z",
+      "side": 1,
+      "message": "ITLR I think we should have a method that is only occupied with config verification which gets invoked in init, then (amongst possible others) constructs the \"link filtering service\" using this config, which then gets used. I don\u0027t think that is a blocker however.",
+      "range": {
+        "startLine": 9,
+        "startChar": 34,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "ef64e78abba3f9b951634abe4259bd7dbe433c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed860ed0_b4f1646f",
+        "filename": "client/data-bridge/tests/unit/mediawiki/selectLinks.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-07-03T15:22:15Z",
+      "side": 1,
+      "message": "General TS remark: This could be\n\n```\n\tget: () \u003d\u003e ( {\n\t\threfRegExp: \u0027https://www\\\\.wikidata\\\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)\u0027,\n\t} ),",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "ef64e78abba3f9b951634abe4259bd7dbe433c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c20339cc_e40e6074",
+        "filename": "client/data-bridge/tests/unit/mediawiki/selectLinks.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-07-03T15:22:15Z",
+      "side": 1,
+      "message": "Could be `expect( warn ).toHaveBeenCalledTimes( 1 );`.",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 45
+      },
+      "revId": "ef64e78abba3f9b951634abe4259bd7dbe433c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e28c8ce_33f48dea",
+        "filename": "client/includes/DataBridge/DataBridgeConfigValueProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-07-03T15:22:15Z",
+      "side": 1,
+      "message": "A true shame that `getSetting()` does not (optionally) support a default value - would make this way more readable.",
+      "range": {
+        "startLine": 25,
+        "startChar": 24,
+        "endLine": 25,
+        "endChar": 34
+      },
+      "revId": "ef64e78abba3f9b951634abe4259bd7dbe433c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
