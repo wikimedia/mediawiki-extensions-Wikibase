@@ -113,6 +113,7 @@ class WikibaseContentLanguages {
 					'quc', // T155376
 					'qya', // T185194
 					'rar', // T155427
+					'rmf', // T226701
 					'shy', // T184783
 					'sia', // T217521
 					'sjd', // T188596
