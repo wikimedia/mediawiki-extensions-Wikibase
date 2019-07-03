@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a06a8bac_b7e55cc4",
+        "filename": "client/data-bridge/tests/unit/mediawiki/selectLinks.spec.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5121
+      },
+      "writtenOn": "2019-07-03T16:18:11Z",
+      "side": 1,
+      "message": "The parenthesis make sure the brackets are not considered to be a function body.\nI3c90bc4855ff4187040321934e33ded3cf196aaa",
+      "parentUuid": "74ee63b6_b9b9a73c",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "ef64e78abba3f9b951634abe4259bd7dbe433c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c20339cc_e40e6074",
         "filename": "client/data-bridge/tests/unit/mediawiki/selectLinks.spec.ts",
         "patchSetId": 2
