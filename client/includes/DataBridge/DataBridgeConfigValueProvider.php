@@ -25,10 +25,9 @@ class DataBridgeConfigValueProvider implements MediaWikiConfigValueProvider {
 		if ( $this->settings->hasSetting( 'dataBridgeHrefRegExp' ) ) {
 			$hrefRegExp = $this->settings->getSetting( 'dataBridgeHrefRegExp' );
 		} else {
-			// in this case, the module should never get loaded,
-			// but let’s leave a brief comment in the “regexp”
-			$hrefRegExp = '(?!)' . // empty negated lookahead will never match anything
-				'data bridge config incomplete: dataBridgeHrefRegExp missing';
+			// in this case, the module should never get loaded –
+			// client-side code checks for null and logs a warning
+			$hrefRegExp = null;
 		}
 
 		return [
