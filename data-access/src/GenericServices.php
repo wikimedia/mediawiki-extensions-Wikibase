@@ -168,7 +168,10 @@ class GenericServices {
 	public function getCompactBaseDataModelSerializerFactory() {
 		return new SerializerFactory(
 			new DataValueSerializer(),
-			SerializerFactory::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH
+			// FIXME: Hard coded constant values, to not fail phan
+			// SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			// SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+			2 + 8
 		);
 	}
 
