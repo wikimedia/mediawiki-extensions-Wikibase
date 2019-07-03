@@ -73,6 +73,23 @@
     },
     {
       "key": {
+        "uuid": "ff333529_a92e1df3",
+        "filename": "lib/includes/Store/Sql/Terms/Util/ReplicaMasterAwareRecordIdsAcquirer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 6768
+      },
+      "writtenOn": "2019-07-03T08:54:40Z",
+      "side": 1,
+      "message": "removed this in favor of achieving the same effect inside filterNonExistingRecords(), as that should\u0027ve been its responsibility in the first place (by original design) but somehow slipped through implementation (as users of this class were already filtering for uniqueness all needed records that get passed into this class).",
+      "revId": "5f0a4bc0c3e12f5bfd92c328fe07016d633f0c05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7472c4e_b8bd9177",
         "filename": "lib/tests/phpunit/Store/Sql/Terms/DatabaseItemTermStoreTest.php",
         "patchSetId": 6
