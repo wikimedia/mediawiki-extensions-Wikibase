@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
+use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
 use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DatabaseSqlite;
@@ -120,7 +121,8 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 		);
 		$this->assertSameRecordsInDb( $records, $this->dbReplica );
 
-		$idsAcquirer = $this->getTestSubjectInstance( ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA );
+		$idsAcquirer = $this->getTestSubjectInstance(
+			ReplicaMasterAwareRecordIdsAcquirer::FLAG_IGNORE_REPLICA );
 		$acquiredRecordsWithIds = $idsAcquirer->acquireIds( $records );
 
 		$this->assertSame(
@@ -160,11 +162,14 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	}
 
 	private function getTestSubjectInstance( $flags = 0x0 ) {
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->dbReplica,
+			'dbw' => $this->dbMaster,
+		] );
+		$lbFactory = new FakeLBFactory( [ 'lb' => $loadBalancer ] );
+
 		return new ReplicaMasterAwareRecordIdsAcquirer(
-			new FakeLoadBalancer( [
-				'dbr' => $this->dbReplica,
-				'dbw' => $this->dbMaster,
-			] ),
+			$lbFactory,
 			self::TABLE_NAME,
 			self::ID_COLUMN,
 			null,

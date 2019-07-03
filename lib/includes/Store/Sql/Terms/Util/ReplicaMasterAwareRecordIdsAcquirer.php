@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -28,9 +29,9 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	const FLAG_IGNORE_REPLICA = 0x1;
 
 	/**
-	 * @var ILoadBalancer
+	 * @var ILBFactory
 	 */
-	private $loadBalancer;
+	private $lbFactory;
 
 	/**
 	 * @var IDatabase master database to insert non-existing records into
@@ -63,24 +64,31 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private $flags;
 
 	/**
-	 * @param ILoadBalancer $loadBalancer database connection accessor
+	 * @param ILBFactory $lbFactory
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids
 	 * @param LoggerInterface|null $logger
 	 * @param int $flags {@see self::FLAG_IGNORE_REPLICA}
+	 * @param int $waitForReplicationTimeout in seconds, the timeout on waiting for replication
 	 */
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		ILBFactory $lbFactory,
 		$table,
 		$idColumn,
 		LoggerInterface $logger = null,
-		$flags = 0x0
+		$flags = 0x0,
+		$waitForReplicationTimeout = 2
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->lbFactory = $lbFactory;
 		$this->table = $table;
 		$this->idColumn = $idColumn;
 		$this->logger = $logger ?? new NullLogger();
 		$this->flags = $flags;
+		$this->waitForReplicationTimeout = $waitForReplicationTimeout;
+	}
+
+	private function getLoadBalancer(): ILoadBalancer {
+		return $this->lbFactory->getMainLB();
 	}
 
 	/**
@@ -122,8 +130,12 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		array $neededRecords,
 		$recordsToInsertDecoratorCallback = null
 	) {
-		$dbr = $this->isIgnoringReplica() ? $this->getDbMaster() : $this->getDbReplica();
-		$existingRecords = $this->findExistingRecords( $dbr, $neededRecords );
+		if ( $this->isIgnoringReplica() ) {
+			$existingRecords = $this->fetchExistingRecordsFromMaster( $neededRecords );
+		} else {
+			$existingRecords = $this->fetchExistingRecordsFromReplica( $neededRecords );
+		}
+
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		while ( !empty( $neededRecords ) ) {
@@ -132,12 +144,14 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			}
 
 			$neededRecordsCount = count( $neededRecords );
-			$this->insertNonExistingRecordsIntoMaster( array_unique( $neededRecords, SORT_REGULAR ) );
+
+			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
 
 			$existingRecords = array_merge(
 				$existingRecords,
-				$this->findExistingRecords( $this->getDbMaster(), $neededRecords )
+				$this->fetchExistingRecordsFromMaster( $neededRecords )
 			);
+
 			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 			if ( count( $neededRecords ) === $neededRecordsCount ) {
@@ -171,9 +185,36 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		return $existingRecords;
 	}
 
+	private function fetchExistingRecordsFromMaster( array $neededRecords ): array {
+		return $this->findExistingRecords( $this->getDbMaster(), $neededRecords );
+	}
+
+	private function fetchExistingRecordsFromReplica( array $neededRecords ): array {
+		// Fetching existing records from replica
+		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
+		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
+
+		// If not all needed records exist in replica,
+		// try wait for replication and fetch again from replica
+		if ( !empty( $neededRecords ) ) {
+			$this->lbFactory->waitForReplication( [
+				'timeout' => $this->waitForReplicationTimeout
+			] );
+
+			$existingRecords = array_merge(
+				$existingRecords,
+				$this->findExistingRecords( $this->getDbReplica(), $neededRecords )
+			);
+
+			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
+		}
+
+		return $existingRecords;
+	}
+
 	private function getDbReplica() {
 		if ( $this->dbReplica === null ) {
-			$this->dbReplica = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+			$this->dbReplica = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_REPLICA );
 		}
 
 		return $this->dbReplica;
@@ -181,7 +222,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 	private function getDbMaster() {
 		if ( $this->dbMaster === null ) {
-			$this->dbMaster = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
+			$this->dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
 		}
 
 		return $this->dbMaster;
@@ -254,11 +295,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			$recordHash = $this->calcRecordHash( $record );
 
 			if ( !isset( $existingRecordsHashes[$recordHash] ) ) {
-				$nonExistingRecords[] = $record;
+				$nonExistingRecords[$recordHash] = $record;
 			}
 		}
 
-		return $nonExistingRecords;
+		return array_values( $nonExistingRecords );
 	}
 
 	private function calcRecordHash( array $record ) {
