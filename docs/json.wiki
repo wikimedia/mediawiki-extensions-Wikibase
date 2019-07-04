@@ -51,7 +51,7 @@ The JSON representation consists of the following fields in the top level struct
 ; aliases
 : Contains aliases in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
 ; claims
-: Contains any number of claims or statements, groups by property. See [[#Claims and Statements|Claims and Statements]] below.
+: Contains any number of statements, groups by property. See [[#Statements|Statements]] below.
 ; sitelinks
 : Contains site links to pages on different sites describing the item, see ''[[#Site Links|Site Links]]'' below.
 ; lastrevid
@@ -198,7 +198,7 @@ Site links are given as records for each site identifier. Each such record conta
 ; ''url''
 : Optionally, the full URL of the page may be included.
 
-== Claims and Statements ==
+== Statements ==
 
     {
         "claims": {
@@ -223,24 +223,27 @@ Site links are given as records for each site identifier. Each such record conta
         }
     }
 
-A Claim consists of a main value (or main Snak) and a number of qualifier Snaks. A Statement is a Claim that also contains a (possibly empty) list of references.
-A claim is always associated with a Property (semantically, the Claim is ''about'' the Property), and there can be multiple Claims about the same Property in a single Entity.
-This is represented by a map structure that uses Property IDs as keys, and maps them to lists of Claim records.
+A Statement consists of a main Snak, a (possibly empty) list of qualifier Snaks, and a (possibly empty) list of references.
+A Statement is always associated with a Property (semantically, the Statement is ''about'' the Property), and there can be multiple Statements about the same Property in a single Entity.
+This is represented by a map structure that uses Property IDs as keys, and maps them to lists of Statement records.
 
-A Claim record uses the following fields:
+A Statement record uses the following fields:
 
 ; id
-: An arbitrary identifier for the claim, which is unique across the repository. No assumptions can and shall be made about the identifier's structure, and no guarantees are given that the format will stay the same.
+: An arbitrary identifier for the Statement, which is unique across the repository. No assumptions can and shall be made about the identifier's structure, and no guarantees are given that the format will stay the same.
 ; type
-: The type of the claim - currently either ''statement'' or ''claim''.
+: Always ''statement''. (Historically, ''claim'' used to be another valid value here.)
 ; ''mainsnak''
-: If the claim has the type ''value'', it has a ''mainsnak'' field that contains the Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the property the Claim is associated with. That is, if a value claim is provided for property P17, its main Snak will specify P17 as the property the value is assigned to.
+: If the Statement has the type ''value'', it has a ''mainsnak'' field that contains the Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the Property the Statement is associated with. That is, if a value Statement is provided for Property P17, its main Snak will specify P17 as the Property the value is assigned to.
 ; rank
 : The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either ''preferred'', ''normal'' or ''deprecated''.
 ; qualifiers
 : Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See [[#Qualifiers|Qualifiers]] below.
 ; ''references''
-: If the Claim's type is ''statement'', there may be a list of references, given as a list of reference records. See [[#References|References]] below.
+: References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see [[#References|References]] below.
+
+(Historically, there was a distinction between Claims, which had only a main snak and qualifiers, and Statements, which also had references.
+Traces of this distinction may still be found in the serialization or in outdated documentation.)
 
 === Snaks ===
 
@@ -490,7 +493,7 @@ Time values are given as a map with the following fields:
                         ]
                     }
 
-Qualifiers provide context for a Claim's value, such as a point in time, a method of measurement, etc.
+Qualifiers provide context for a Statement's value, such as a point in time, a method of measurement, etc.
 Qualifiers are given as snaks. The set of qualifiers for a statement is provided grouped by property ID,
 resulting in a map which associates property IDs with one list of snaks each.
 
@@ -536,9 +539,9 @@ resulting in a map which associates property IDs with one list of snaks each.
                     }
                 ]
 
-References provide provenance/authority information for individual claims. Each reference
-is a set of Snaks structured in a similar way to how qualifiers are represented: Snaks about the same
-property are grouped together in a list and made accessible by putting all these lists into a map,
+References provide provenance/authority information for the main Snak and qualifiers of an individual Statement.
+Each reference is a set of Snaks structured in a similar way to how qualifiers are represented:
+Snaks about the same property are grouped together in a list and made accessible by putting all these lists into a map,
 using the property IDs as keys. By ''snaks-order'' the order of those snaks is shown by their property IDs.
 
 == Example ==
