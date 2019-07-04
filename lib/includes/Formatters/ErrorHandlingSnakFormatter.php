@@ -11,7 +11,6 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
 
 /**
  * Decorator for SnakFormatter that handles PropertyDataTypeLookupException and

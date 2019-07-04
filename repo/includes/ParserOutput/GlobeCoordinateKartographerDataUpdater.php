@@ -8,7 +8,7 @@ use ParserOutput;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\CachingKartographerEmbeddingHandler;
+use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 
 /**
  * Add required data for Kartographer to the ParserOutput.

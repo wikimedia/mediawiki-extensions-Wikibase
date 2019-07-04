@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
-use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
+use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\PropertyInfoSnakUrlExpander;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 

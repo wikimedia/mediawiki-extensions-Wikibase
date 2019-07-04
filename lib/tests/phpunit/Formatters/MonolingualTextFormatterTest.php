@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
-use Wikibase\Formatters\MonolingualTextFormatter;
+use Wikibase\Lib\Formatters\MonolingualTextFormatter;
 
 /**
- * @covers \Wikibase\Formatters\MonolingualTextFormatter
+ * @covers \Wikibase\Lib\Formatters\MonolingualTextFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

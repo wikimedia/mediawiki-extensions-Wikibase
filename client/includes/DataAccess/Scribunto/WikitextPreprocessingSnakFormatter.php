@@ -4,7 +4,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Parser;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikimedia\Assert\Assert;
 
 /**
