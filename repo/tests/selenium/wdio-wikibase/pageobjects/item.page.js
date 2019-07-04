@@ -102,6 +102,7 @@ class ItemPage extends PageMixture {
 		this.lastChangeHistory.waitForExist( 1000 );
 		this.lastChangeHistory.click();
 		let revisionList = $( this.constructor.ITEM_WIDGET_SELECTORES.REVISION );
+		revisionList.$( this.constructor.ITEM_WIDGET_SELECTORES.REVISION_DATE_LINK ).waitForExist();
 		revisionList.$( this.constructor.ITEM_WIDGET_SELECTORES.REVISION_DATE_LINK ).click();
 	}
 

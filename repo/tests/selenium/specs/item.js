@@ -99,7 +99,7 @@ describe( 'item', function () {
 		ItemPage.valueInputField.waitForExist( null, true );
 	} );
 
-	it.skip( 'old revisions do not have an edit link', function () {
+	it( 'old revisions do not have an edit link', function () {
 		let itemId;
 
 		browser.call( () => {
