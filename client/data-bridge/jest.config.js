@@ -31,13 +31,5 @@ module.exports = {
 		'jest-watch-typeahead/filename',
 		'jest-watch-typeahead/testname',
 	],
-	collectCoverageFrom: [
-		'src/**/*.{ts,vue}',
-		'!src/@types/**',
-		'!src/datamodel/**',
-		'!src/definitions/**',
-		'!src/mock-data/**',
-		'!src/mock-entry.ts',
-	],
 	clearMocks: true,
 };
