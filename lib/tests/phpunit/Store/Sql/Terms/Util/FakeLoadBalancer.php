@@ -47,6 +47,10 @@ class FakeLoadBalancer extends LoadBalancer {
 		return 'localhost';
 	}
 
+	public function resolveDomainID( $domain ) {
+		return ( $domain === false ) ? $this->getLocalDomainID() : (string)$domain;
+	}
+
 	public function __destruct() {
 		// no-op
 	}
