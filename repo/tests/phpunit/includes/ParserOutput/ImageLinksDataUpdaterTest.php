@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use DataValues\StringValue;
 use PHPUnit4And6Compat;
 use ParserOutput;
+use RepoGroup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -34,8 +35,9 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->will( $this->returnCallback( function( PropertyId $id, $type ) {
 				return $id->getSerialization() === 'P1';
 			} ) );
+		$repoGroup = $this->createMock( RepoGroup::class );
 
-		return new ImageLinksDataUpdater( $matcher );
+		return new ImageLinksDataUpdater( $matcher, $repoGroup );
 	}
 
 	/**
