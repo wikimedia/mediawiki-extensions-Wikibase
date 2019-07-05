@@ -89,9 +89,7 @@ return [
 		],
 		'dependencies' => [
 			'dataValues.values',
-			'jquery.ui.closeable',
 			'jquery.ui.EditableTemplatedWidget',
-			'jquery.ui.TemplatedWidget',
 			'jquery.util.getDirectionality',
 			'jquery.wikibase.entityselector',
 			'jquery.wikibase.entityview',
