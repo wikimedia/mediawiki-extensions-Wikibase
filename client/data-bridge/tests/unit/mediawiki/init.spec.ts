@@ -20,9 +20,11 @@ function mockMwEnv( using: () => Promise<any> ): void {
 
 describe( 'init', () => {
 	it( 'loads `wikibase.client.data-bridge.app`, if it found supported links', () => {
-		const using = jest.fn( () => {
-			return new Promise<void>( ( resolve ) => resolve() );
-		} );
+		const app = { launch: jest.fn() },
+			require = jest.fn( () => app ),
+			using = jest.fn( () => {
+				return new Promise( ( resolve ) => resolve( require ) );
+			} );
 
 		mockMwEnv( using );
 		const mock = jest.spyOn( linker, 'filterLinksByHref' );
@@ -30,10 +32,12 @@ describe( 'init', () => {
 			{ href: 'https://www.wikidata.org/wiki/Q123#P321' },
 		] as any );
 
-		init();
-		expect( using ).toBeCalledTimes( 1 );
-		expect( using ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
-
+		return init().then( () => {
+			expect( using ).toBeCalledTimes( 1 );
+			expect( using ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
+			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
+			expect( app.launch ).toBeCalledTimes( 1 );
+		} );
 	} );
 
 	it( 'loads does nothing if no supported links are found', () => {

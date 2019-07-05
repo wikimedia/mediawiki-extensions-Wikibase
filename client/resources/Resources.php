@@ -76,7 +76,7 @@ return call_user_func( function() {
 				return new ResourceLoaderFileModule(
 					[
 						'scripts' => [
-							'data-bridge.app.js'
+							'data-bridge.common.js'
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
