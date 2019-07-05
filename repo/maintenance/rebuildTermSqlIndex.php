@@ -77,7 +77,7 @@ class RebuildTermSqlIndex extends Maintenance {
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			$idParser
+			$wikibaseRepo->getEntityIdLookup()
 		);
 
 		$termIndex = $this->getTermSqlIndex( $entityIdComposer, $idParser, $repoSettings );
