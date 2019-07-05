@@ -130,31 +130,67 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		array $neededRecords,
 		$recordsToInsertDecoratorCallback = null
 	) {
-		if ( $this->isIgnoringReplica() ) {
-			$existingRecords = $this->fetchExistingRecordsFromMaster( $neededRecords );
-		} else {
-			$existingRecords = $this->fetchExistingRecordsFromReplica( $neededRecords );
+		$existingRecords = $this->fetchExistingRecords( $neededRecords );
+		$nonExistingRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
+		$insertedRecords = $this->insertNonExistingRecords(
+			$nonExistingRecords, $recordsToInsertDecoratorCallback );
+
+		return array_merge(
+			$existingRecords,
+			$insertedRecords
+		);
+	}
+
+	private function fetchExistingRecords( array $neededRecords ): array {
+		$existingRecords = [];
+
+		// First fetch from replica, unless we are ignoring it
+		if ( !$this->isIgnoringReplica() ) {
+			$existingRecords = array_merge(
+				$existingRecords,
+				$this->fetchExistingRecordsFromReplica( $neededRecords )
+			);
+			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 		}
 
-		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
-
-		while ( !empty( $neededRecords ) ) {
-			if ( is_callable( $recordsToInsertDecoratorCallback ) ) {
-				$neededRecords = $recordsToInsertDecoratorCallback( $neededRecords );
-			}
-
-			$neededRecordsCount = count( $neededRecords );
-
-			$this->insertNonExistingRecordsIntoMaster( $neededRecords );
-
+		// Then fetch from master
+		if ( !empty( $neededRecords ) ) {
 			$existingRecords = array_merge(
 				$existingRecords,
 				$this->fetchExistingRecordsFromMaster( $neededRecords )
 			);
+		}
 
-			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
+		return $existingRecords;
+	}
 
-			if ( count( $neededRecords ) === $neededRecordsCount ) {
+	private function insertNonExistingRecords(
+		array $records,
+		$recordsToInsertDecoratorCallback = null
+	): array {
+		if ( empty( $records ) ) {
+			return [];
+		}
+
+		if ( is_callable( $recordsToInsertDecoratorCallback ) ) {
+			$records = $recordsToInsertDecoratorCallback( $records );
+		}
+
+		$insertedRecords = [];
+		while ( !empty( $records ) ) {
+
+			$recordsCount = count( $records );
+
+			$this->insertNonExistingRecordsIntoMaster( $records );
+
+			$insertedRecords = array_merge(
+				$insertedRecords,
+				$this->fetchExistingRecordsFromMaster( $records )
+			);
+
+			$records = $this->filterNonExistingRecords( $records, $insertedRecords );
+
+			if ( count( $records ) === $recordsCount ) {
 				// This is a fail-safe capture in order to avoid an infinite loop when insertion
 				// fails due to duplication, but selection in the next loop iteration still
 				// cannot detect those existing records for any reason.
@@ -173,8 +209,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 						'method' => __METHOD__,
 						'exception' => $exception,
 						'table' => $this->table,
-						'neededRecords' => $neededRecords,
-						'existingRecords' => $existingRecords,
+						'records' => $records,
+						'insertedRecords' => $insertedRecords,
 					]
 				);
 
@@ -182,7 +218,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			}
 		}
 
-		return $existingRecords;
+		return $insertedRecords;
 	}
 
 	private function fetchExistingRecordsFromMaster( array $neededRecords ): array {
