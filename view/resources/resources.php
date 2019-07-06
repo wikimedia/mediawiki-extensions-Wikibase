@@ -13,32 +13,17 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'jquery.ui.closeable' => $moduleTemplate + [
+		// Also used by WikibaseLexeme.
+		// TODO: Rename to "jquery.ui.TemplatedWidget" or merge into a higher-level
+		// module bundle that is shared between WikibaseRepo and WikibaseLexeme.
+		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + [
 			'scripts' => [
+				'jquery/ui/jquery.ui.TemplatedWidget.js',
 				'jquery/ui/jquery.ui.closeable.js',
+				'jquery/ui/jquery.ui.EditableTemplatedWidget.js',
 			],
 			'styles' => [
 				'jquery/ui/jquery.ui.closeable.css',
-			],
-			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
-			],
-		],
-
-		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/ui/jquery.ui.EditableTemplatedWidget.js',
-			],
-			'dependencies' => [
-				'jquery.ui.closeable',
-				'jquery.ui.TemplatedWidget',
-				'util.inherit',
-			],
-		],
-
-		'jquery.ui.TemplatedWidget' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/ui/jquery.ui.TemplatedWidget.js',
 			],
 			'dependencies' => [
 				'wikibase.templates',
@@ -81,7 +66,7 @@ return call_user_func( function() {
 				'jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
 			],
 			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
@@ -92,7 +77,7 @@ return call_user_func( function() {
 				'jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js',
 			],
 			'dependencies' => [
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.widget',
 			],
 		],
@@ -388,7 +373,7 @@ return call_user_func( function() {
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
 			],
 			'dependencies' => [
-				'jquery.ui.TemplatedWidget', // for jquery.wikibase.toolbaritem
+				'jquery.ui.EditableTemplatedWidget', // for jquery.wikibase.toolbaritem
 				'jquery.wikibase.toolbar.styles',
 				'jquery.wikibase.toolbarbutton.styles',
 				'jquery.wikibase.wbtooltip',
@@ -493,8 +478,6 @@ return call_user_func( function() {
 				'jquery.ui.position',
 				'jquery.ui.widget',
 				'jquery.ui.core',
-				'jquery.ui.TemplatedWidget',
-				'jquery.ui.closeable',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.ooMenu',
