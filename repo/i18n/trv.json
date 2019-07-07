@@ -4,8 +4,9 @@
 			"Iyuqciyang"
 		]
 	},
-	"wikibase-cancel": "pkungat",
-	"wikibase-add": "Mrana bgurah",
+	"wikibase-edit": "smmalu patas",
+	"wikibase-cancel": "Pkungat",
+	"wikibase-add": "mrana bgurah",
 	"wikibase-entitytermsforlanguagelistview-description": "Pgkla rmngaw",
 	"wikibase-label-empty": "Ini ptsmui rqci pnskraya na",
 	"wikibase-description-empty": "Ini pgkla pusu na",
@@ -16,7 +17,7 @@
 	"wikibase-remove": "hdlun pkungat",
 	"wikibase-move-up": "hdlun isil mkquri baraw",
 	"wikibase-move-down": "hdlun isil mquri truma",
-	"wikibase-statementview-rank-normal": "hmut pnsnakan hnigan",
+	"wikibase-statementview-rank-normal": "Hmut pnsnakan hnigan",
 	"wikibase-entityselector-more": "knlala",
 	"wikibase-itembytitle-lookup-page": "ruwahan patas:",
 	"wikibase-itembytitle-submit": "miying",

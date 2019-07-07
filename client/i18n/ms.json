@@ -8,11 +8,12 @@
 			"Pizza1016",
 			"Muhdnurhidayat",
 			"Jeluang Terluang",
-			"MNH48"
+			"MNH48",
+			"Zulfadli51"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
-	"tooltip-t-wikibase": "Pautan ke perkara repositori data yang bersambungan",
+	"tooltip-t-wikibase": "Pautan ke item repositori data yang bersambung",
 	"wikibase-after-page-move": "Anda juga boleh [$1 mengemaskinikan] perkara Wikidata yang berkenaan untuk memelihara pautan bahasa pada halaman yang dipindahkan.",
 	"wikibase-after-page-move-queued": "[$1 Perkara Wikidata] yang dikaitkan dengan halaman ini akan dikemaskinikan secara automatik tidak lama lagi.",
 	"wikibase-comment-remove": "Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.",

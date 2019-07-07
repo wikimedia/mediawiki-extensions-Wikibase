@@ -4,5 +4,10 @@
 			"Geoleplubo"
 		]
 	},
+	"wikibase-edit": "éditer",
+	"wikibase-add": "ajouter",
+	"wikibase-description-empty": "Autchune déscripcion fournie",
+	"wikibase-sitelinks-special": "Eutes sites",
+	"wikibase-statementview-rank-normal": "Rang normal",
 	"wikibase-validator-illegal-file-chars": "Chés noms d' fichier n' doévétte poin contenir chertains caractères conme chés virgules o chés obliques barres."
 }

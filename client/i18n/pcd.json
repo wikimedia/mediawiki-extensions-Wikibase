@@ -4,5 +4,15 @@
 			"Geoleplubo"
 		]
 	},
-	"wikibase-rc-wikibase-edit-title": "Modificacion éd {{WBREPONAME}}."
+	"tooltip-t-wikibase": "Loyen vers chl’élémint d' référinciel d'chés données connéctées",
+	"wikibase-comment-update": "Élémint {{WBREPONAME}} modifié",
+	"wikibase-dataitem": "Élémint {{WBREPONAME}}",
+	"wikibase-editlinks": "Modifier chés loyens",
+	"wikibase-editlinkstitle": "Modifier chés loyens intarlangues",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Mucher",
+	"wikibase-rc-hide-wikidata-show": "Montrer",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Modificacion éd {{WBREPONAME}}.",
+	"wikibase-otherprojects": "Dins d’eutes projets"
 }
