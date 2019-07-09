@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="data-bridge-app">
 		<HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
 	</div>
 </template>
@@ -16,13 +16,12 @@ import HelloWorld from './components/HelloWorld.vue';
 export default class App extends Vue {}
 </script>
 
-<style>
+<style scoped>
 div {
 	font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
-	margin-top: 60px;
 }
 </style>

@@ -1,0 +1,3 @@
+# contain files from different sources which, even when processed by webpack, may have mixed CR/LF
+dist/*.js binary
+
