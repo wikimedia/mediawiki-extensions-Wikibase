@@ -1,10 +1,14 @@
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import { selectLinks, filterLinksByHref } from './selectLinks';
 
-export default (): void => {
+const APP_MODULE = 'wikibase.client.data-bridge.app';
+
+export default async (): Promise<void> => {
 	if ( filterLinksByHref( selectLinks() ).length > 0 ) {
-		( window as MwWindow ).mw.loader.using( 'wikibase.client.data-bridge.app' ).then( () => {
-			/* nothing to do yet */
+		const require = await ( window as MwWindow ).mw.loader.using( APP_MODULE ),
+			app = require( APP_MODULE );
+		app.launch( {
+			'greeting': 'Hello from wikidata-data-bridge!',
 		} );
 	}
 };
