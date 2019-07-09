@@ -65,6 +65,6 @@
 		"process-timeout": 600
 	},
 	"extra": {
-		"phan-taint-check-plugin": "1.5.0"
+		"phan-taint-check-plugin": "2.0.2"
 	}
 }

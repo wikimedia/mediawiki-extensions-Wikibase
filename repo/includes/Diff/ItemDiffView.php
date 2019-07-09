@@ -196,12 +196,12 @@ class ItemDiffView implements DiffView {
 	 */
 	private function getChangedLine( $tag, $value, array $path ) {
 		if ( $path[2] === 'badges' ) {
-			$value = $this->getBadgeLinkElement( $value );
+			$content = $this->getBadgeLinkElement( $value );
 		} else {
-			$value = $this->getSiteLinkElement( $path[1], $value );
+			$content = $this->getSiteLinkElement( $path[1], $value );
 		}
 
-		return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $value );
+		return Html::rawElement( $tag, [ 'class' => 'diffchange diffchange-inline' ], $content );
 	}
 
 	/**
