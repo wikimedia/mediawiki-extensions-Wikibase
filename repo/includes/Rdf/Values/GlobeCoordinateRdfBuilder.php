@@ -18,6 +18,12 @@ use Wikimedia\Purtle\RdfWriter;
 class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 
 	/**
+	 * Coordinate precision.
+	 * See https://phabricator.wikimedia.org/T174504
+	 * Do we need to make it configurable?
+	 */
+	const COORDINATE_PRECISION = 4;
+	/**
 	 * @var ComplexValueRdfHelper|null
 	 */
 	private $complexValueHelper;
@@ -47,7 +53,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	) {
 		/** @var GlobeCoordinateValue $value */
 		$value = $snak->getDataValue();
-		$point = "Point({$value->getLongitude()} {$value->getLatitude()})";
+		$point = "Point({$this->formatCoordinate($value->getLongitude())} {$this->formatCoordinate($value->getLatitude())})";
 		$globe = $value->getGlobe();
 
 		if ( $globe && $globe !== GlobeCoordinateValue::GLOBE_EARTH ) {
@@ -67,6 +73,15 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		if ( $this->complexValueHelper !== null ) {
 			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
 		}
+	}
+
+	/**
+	 * Format coordinate
+	 * @param float $coord
+	 * @return string Formatted coordinate
+	 */
+	private function formatCoordinate( $coord ) {
+		return rtrim( number_format( $coord, self::COORDINATE_PRECISION, ".", "" ), '0' );
 	}
 
 	/**
@@ -101,10 +116,10 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoLatitude' )
-			->value( $value->getLatitude(), 'xsd', 'double' );
+			->value( $this->formatCoordinate( $value->getLatitude() ), 'xsd', 'double' );
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoLongitude' )
-			->value( $value->getLongitude(), 'xsd', 'double' );
+			->value( $this->formatCoordinate( $value->getLongitude() ), 'xsd', 'double' );
 
 		// Disallow nulls in precision, see T123392
 		$precision = $value->getPrecision();
