@@ -6,7 +6,9 @@
 namespace Wikibase\Build;
 
 use AutoloadGenerator;
+use ExtensionRegistry;
 use Maintenance;
+use UnexpectedValueException;
 
 require_once getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' ) . '/maintenance/Maintenance.php'
@@ -120,6 +122,28 @@ class GenerateWikibaseAutoload extends Maintenance {
 	private function generateAutoloadForComponent( $componentDir, array $dirs, array $files = [] ) {
 		$base = __DIR__ . '/../' . $componentDir;
 		$generator = new AutoloadGenerator( $base );
+
+		$extensionJsonPath = realpath( __DIR__ . '/../extension-' . $componentDir . '-wip.json' );
+		if ( $extensionJsonPath !== false ) {
+			$extensionJson = file_get_contents( $extensionJsonPath );
+			$extensionInfo = json_decode( $extensionJson, true );
+			$extensionJsonDir = dirname( $extensionJsonPath );
+
+			$autoloadClasses = [];
+			$autoloadNamespaces = [];
+			ExtensionRegistry::exportAutoloadClassesAndNamespaces(
+				$extensionJsonDir,
+				$extensionInfo,
+				$autoloadClasses,
+				$autoloadNamespaces
+			);
+
+			if ( $autoloadClasses !== [] ) {
+				throw new UnexpectedValueException( 'We do not use AutoloadClasses in extension.json!' );
+			}
+			$generator->setPsr4Namespaces( $autoloadNamespaces );
+		}
+
 		foreach ( $dirs as $componentDir ) {
 			$generator->readDir( $base . '/' . $componentDir );
 		}
