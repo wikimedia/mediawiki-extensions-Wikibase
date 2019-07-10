@@ -322,4 +322,16 @@ class DataTypeDefinitions {
 		return $this->getMapForDefinitionField( 'search-index-data-formatter-callback' );
 	}
 
+	/**
+	 * Produce array of types for RDF.
+	 * Using PropertyRdfBuilder constants for data types is recommended.
+	 * @return string[]
+	 */
+	public function getRdfDataTypes() {
+		return $this->getFilteredByPrefix(
+			$this->getMapForDefinitionField( 'rdf-data-type' ),
+			'PT:'
+		);
+	}
+
 }

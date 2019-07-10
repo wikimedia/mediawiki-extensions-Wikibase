@@ -144,7 +144,8 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			) {
 				return new PropertyRdfBuilder(
 					$vocabulary,
-					$writer
+					$writer,
+					WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getRdfDataTypes()
 				);
 			}
 		];

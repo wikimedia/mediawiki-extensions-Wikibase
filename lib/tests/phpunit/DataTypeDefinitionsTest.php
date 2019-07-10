@@ -31,6 +31,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
 				'snak-formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooSnakFormatter',
+				'rdf-data-type' => 'acme-test',
 			],
 			'VT:BAR' => [
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getBarValueValidator',
@@ -61,6 +62,11 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	public function testGetRdfTypeUris() {
 		$defs = $this->getDataTypeDefinitions();
 		$this->assertSame( [ 'foo' => 'http://acme.test/vocab/Foo' ], $defs->getRdfTypeUris() );
+	}
+
+	public function testGetRdfDataTypes() {
+		$defs = $this->getDataTypeDefinitions();
+		$this->assertSame( [ 'foo' => 'acme-test' ], $defs->getRdfDataTypes() );
 	}
 
 	public function testGetValidatorFactoryCallbacks() {
