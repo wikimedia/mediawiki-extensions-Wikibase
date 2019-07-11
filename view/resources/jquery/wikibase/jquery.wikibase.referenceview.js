@@ -269,8 +269,10 @@
 		_stopEditingTabs: function () {
 			this.element.tabs( 'destroy' );
 			this.element.removeClass( 'wikibase-referenceview-tabs' );
-			this.$tabButtons.destroy();
-			this.$tabButtons = null;
+			if ( this.$tabButtons ) {
+				this.$tabButtons.remove();
+				this.$tabButtons = null;
+			}
 		},
 
 		/**
