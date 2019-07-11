@@ -82,6 +82,9 @@ return call_user_func( function() {
 							[ 'desktop', 'mobile' ] :
 							[],
 						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
+						'dependencies' => [
+							'vue2',
+						],
 					],
 					__DIR__ . '/../data-bridge/dist'
 				);

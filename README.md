@@ -93,6 +93,33 @@ composer run-script test
 
 > As this uses development dependencies and custom configuration, executing it from the MediaWiki root folder (via `composer run-script test extensions/Wikibase`) will not work satisfactorily
 
+#### JavaScript
+
+Wikibase makes use of frontend software from various eras - resulting in a heterogenous technological landscape.
+
+Some notable (not a comprehensive list) mentions are
+* the use of [ResourceLoader](https://www.mediawiki.org/wiki/ResourceLoader) to
+  * allow for concatenation and minification of code neatly organized in separate files
+  * translate less to CSS
+  * model module inter-dependencies
+  * handle delivery to the client through MediaWiki
+* use of the [Javascript interfaces exposed by MediaWiki](https://www.mediawiki.org/wiki/Manual:Interface/JavaScript); e.g. `mw.hook` in [EntityInitializer](./repo/resources/wikibase.EntityInitializer.js)
+* frontend components making heavy use of jQuery; e.g. for so called [experts](repo/resources/experts/Entity.js)
+* the use of qunit to test this code; e.g. in `repo/tests/qunit`, available [via a special page](https://www.mediawiki.org/wiki/Manual:JavaScript_unit_testing)
+* [vue.js](https://vuejs.org/v2/guide/) as a frontend framework; e.g. in [data-bridge](./client/data-bridge), the [Lexeme](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/WikibaseLexeme/) extension, and [termbox](https://gerrit.wikimedia.org/g/wikibase/termbox)
+
+##### Updating vue
+
+Wikibase [exposes vue as a ResourceLoader](./lib/resources/Resources.php) module so it can be shared between applications. As ResourceLoader in the production environment does not have access to files only acquired through a Javascript package manager (npm), we keep a copy of its source in our repository.
+
+To update that copy you can run the following command and commit the changes to git.
+
+```bash
+npm update vue
+cp node_modules/vue/dist/vue.common.prod.js lib/resources/vendor/vue2.common.prod.js
+git add -f lib/resources/vendor/vue2.common.prod.js
+```
+
 ## The Wikibase software
 
 These extensions are part of the [Wikibase software](http://wikiba.se/) created by the Wikidata team
