@@ -4,9 +4,9 @@ namespace Wikibase\Client\Usage;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 
@@ -18,7 +18,7 @@ use Wikibase\LanguageFallbackChain;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class UsageTrackingLanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
+class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLabelDescriptionLookup {
 
 	/**
 	 * @var LanguageFallbackLabelDescriptionLookup

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
@@ -15,7 +14,7 @@ use Wikibase\LanguageFallbackChain;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
+class LanguageFallbackLabelDescriptionLookup implements FallbackLabelDescriptionLookup {
 
 	/**
 	 * @var TermLookup
