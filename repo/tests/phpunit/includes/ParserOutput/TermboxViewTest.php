@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View\Tests\Termbox;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

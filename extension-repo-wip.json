@@ -10,5 +10,28 @@
 	"requires": {
 		"MediaWiki": ">= 1.34"
 	},
+	"AutoloadNamespaces": {
+		"Wikibase\\Repo\\Api\\": "repo/includes/Api/",
+		"Wikibase\\Repo\\ChangeOp\\": "repo/includes/ChangeOp/",
+		"Wikibase\\Repo\\Diff\\": "repo/includes/Diff/",
+		"Wikibase\\Repo\\EditEntity\\": "repo/includes/EditEntity/",
+		"Wikibase\\Repo\\EntityReferenceExtractors\\": "repo/includes/EntityReferenceExtractors/",
+		"Wikibase\\Repo\\Hooks\\": "repo/includes/Hooks/",
+		"Wikibase\\Repo\\IO\\": "repo/includes/IO/",
+		"Wikibase\\Repo\\Interactors\\": "repo/includes/Interactors/",
+		"Wikibase\\Repo\\LinkedData\\": "repo/includes/LinkedData/",
+		"Wikibase\\Repo\\Localizer\\": "repo/includes/Localizer/",
+		"Wikibase\\Repo\\Maintenance\\": "repo/includes/Maintenance/",
+		"Wikibase\\Repo\\Merge\\": "repo/includes/Merge/",
+		"Wikibase\\Repo\\Notifications\\": "repo/includes/Notifications/",
+		"Wikibase\\Repo\\ParserOutput\\": "repo/includes/ParserOutput/",
+		"Wikibase\\Repo\\Parsers\\": "repo/includes/Parsers/",
+		"Wikibase\\Repo\\Search\\": "repo/includes/Search/",
+		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
+		"Wikibase\\Repo\\Specials\\": "repo/includes/Specials/",
+		"Wikibase\\Repo\\UpdateRepo\\": "repo/includes/UpdateRepo/",
+		"Wikibase\\Repo\\Validators\\": "repo/includes/Validators/",
+		"Wikibase\\Repo\\View\\": "repo/includes/View/"
+	},
 	"manifest_version": 2
 }

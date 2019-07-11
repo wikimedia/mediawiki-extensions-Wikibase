@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\ChangeOp;
+namespace Wikibase\Repo\Tests\Merge;
 
 use HashSiteStore;
 use PHPUnit4And6Compat;
@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\Merge\StatementsMerger;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
