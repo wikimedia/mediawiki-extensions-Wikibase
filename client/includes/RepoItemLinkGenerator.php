@@ -180,22 +180,22 @@ class RepoItemLinkGenerator {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string HTML unsafe
 	 */
 	private function getEntityUrl( EntityId $entityId ) {
-		$fragment = '#sitelinks-' . htmlspecialchars( $this->langLinkSiteGroup, ENT_QUOTES );
+		$fragment = '#sitelinks-' . $this->langLinkSiteGroup;
 		return $this->repoLinker->getEntityUrl( $entityId ) . $fragment;
 	}
 
 	/**
-	 * @param array $link
+	 * @param array $linkAttribs
 	 * @param string $action
 	 * @param string $text
 	 *
 	 * @return string HTML
 	 */
-	private function formatLink( array $link, $action, $text ) {
-		$link = Html::element( 'a', $link, $text );
+	private function formatLink( array $linkAttribs, $action, $text ) {
+		$link = Html::element( 'a', $linkAttribs, $text );
 
 		$html = Html::rawElement(
 			'span',

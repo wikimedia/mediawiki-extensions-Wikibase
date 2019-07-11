@@ -92,6 +92,7 @@ class ViewEntityAction extends ViewAction {
 
 		if ( $this->isDiff() ) {
 			if ( isset( $meta['title'] ) ) {
+				// @phan-suppress-next-line SecurityCheck-DoubleEscaped
 				$this->setDiffPageTitle( $outputPage, $meta['title'] );
 			}
 
