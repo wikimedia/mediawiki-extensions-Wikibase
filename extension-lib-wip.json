@@ -30,5 +30,10 @@
 			"lib/i18n"
 		]
 	},
+	"AutoloadNamespaces": {
+		"Wikibase\\Lib\\Interactors\\": "lib/includes/Interactors/",
+		"Wikibase\\Lib\\Units\\": "lib/includes/Units/",
+		"Wikibase\\Lib\\Store\\Sql\\": "lib/includes/Store/Sql/"
+	},
 	"manifest_version": 2
 }
