@@ -4,7 +4,6 @@ namespace  Wikibase\Lib\Store;
 
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackChain;
@@ -45,7 +44,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private $redirectResolvingRevisionLookup;
 
 	/**
-	 * @var LabelDescriptionLookup
+	 * @var FallbackLabelDescriptionLookup
 	 */
 	private $labelDescriptionLookup;
 
@@ -62,14 +61,14 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	/**
 	 * @param CacheInterface $cache
 	 * @param RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param FallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param int $cacheTtlInSeconds
 	 */
 	public function __construct(
 		CacheInterface $cache,
 		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		FallbackLabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $languageFallbackChain,
 		$cacheTtlInSeconds
 	) {
