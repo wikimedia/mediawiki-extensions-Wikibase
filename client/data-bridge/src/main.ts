@@ -9,13 +9,11 @@ import AppInformation from '@/definitions/AppInformation';
 Vue.config.productionTip = false;
 
 export function launch( applicationConfig: ApplicationConfig, information: AppInformation ): void {
-	// eslint-disable-next-line no-console
-	console.log( information );
 
 	services.setEntityRepository( new SpecialPageEntityRepository(
 		( window as MwWindow ).$,
 		applicationConfig.specialEntityDataUrl,
 	) );
 
-	new App().$mount( applicationConfig.containerSelector );
+	new App( { data: information } ).$mount( applicationConfig.containerSelector );
 }

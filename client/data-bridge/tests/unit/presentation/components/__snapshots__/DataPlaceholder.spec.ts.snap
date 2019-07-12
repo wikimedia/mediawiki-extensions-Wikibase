@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataPlaceholder renders correctly 1`] = `
+<div>
+  <ul>
+    <li>
+      Entity ID: 
+      <strong
+        id="data-bridge-entityId"
+      >
+        Q123
+      </strong>
+    </li>
+     
+    <li>
+      Property ID: 
+      <strong
+        id="data-bridge-propertyId"
+      >
+        P456
+      </strong>
+    </li>
+     
+    <li>
+      edit flow: 
+      <strong
+        id="data-bridge-editFlow"
+      >
+        overwrite
+      </strong>
+    </li>
+  </ul>
+</div>
+`;
