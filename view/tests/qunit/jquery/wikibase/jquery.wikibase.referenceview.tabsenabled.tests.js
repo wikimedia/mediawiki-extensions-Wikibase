@@ -23,7 +23,8 @@
 	);
 
 	/**
-	 * Generates a referenceview widget suitable for testing.
+	 * Generates a referenceview widget suitable for testing,
+	 * with tabs enabled
 	 *
 	 * @param {Object} [options]
 	 * @return {jQuery}
@@ -53,8 +54,8 @@
 			.referenceview( options );
 	}
 
-	QUnit.module( 'jquery.wikibase.referenceview', window.QUnit.newMwEnvironment( {
-		config: { wbRefTabsEnabled: false },
+	QUnit.module( 'jquery.wikibase.referenceview.tabsenabled', window.QUnit.newMwEnvironment( {
+		config: { wbRefTabsEnabled: true },
 		teardown: function () {
 			$( '.test_referenceview' ).each( function ( i, node ) {
 				var $node = $( node ),

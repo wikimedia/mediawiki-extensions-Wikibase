@@ -51,6 +51,7 @@ return [
 			'jquery/wikibase/jquery.wikibase.pagesuggester.tests.js',
 			'jquery/wikibase/jquery.wikibase.propertyview.tests.js',
 			'jquery/wikibase/jquery.wikibase.referenceview.tests.js',
+			'jquery/wikibase/jquery.wikibase.referenceview.tabsenabled.tests.js',
 			'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.tests.js',
 			'jquery/wikibase/jquery.wikibase.sitelinkgroupview.tests.js',
 			'jquery/wikibase/jquery.wikibase.sitelinklistview.tests.js',
