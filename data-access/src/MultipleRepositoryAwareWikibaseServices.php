@@ -181,6 +181,9 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 			'TermBuffer' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getTermBuffer();
 			},
+			'PrefetchingTermLookup' => function() use ( $multiRepositoryServices ) {
+				return $multiRepositoryServices->getTermBuffer();
+			},
 			'TermSearchInteractorFactory' => function() use ( $multiRepositoryServices ) {
 				return $multiRepositoryServices->getTermSearchInteractorFactory();
 			},
@@ -304,6 +307,10 @@ class MultipleRepositoryAwareWikibaseServices extends ServiceContainer implement
 
 	public function getMultiRepositoryServices() {
 		return $this->multiRepositoryServices;
+	}
+
+	public function getPrefetchingTermLookup() {
+		return $this->getService( 'PrefetchingTermLookup' );
 	}
 
 }

@@ -171,6 +171,10 @@ class MultiRepositoryServices extends ServiceContainer implements DataAccessServ
 		return $this->getService( 'TermBuffer' );
 	}
 
+	public function getPrefetchingTermLookup() {
+		return $this->getService( 'PrefetchingTermLookup' );
+	}
+
 	/**
 	 * @return TermSearchInteractorFactory
 	 */

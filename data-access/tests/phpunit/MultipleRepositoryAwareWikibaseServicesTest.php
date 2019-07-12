@@ -207,6 +207,7 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 				'CompactBaseDataModelSerializerFactory',
 				'StringNormalizer',
 				'TermBuffer',
+				'PrefetchingTermLookup',
 				'TermSearchInteractorFactory',
 			],
 			$serviceNames
