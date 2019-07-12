@@ -10,5 +10,17 @@
 	"requires": {
 		"MediaWiki": ">= 1.26"
 	},
+	"AutoloadNamespaces": {
+		"Wikibase\\Client\\Api\\": "client/includes/Api/",
+		"Wikibase\\Client\\Changes\\": "client/includes/Changes/",
+		"Wikibase\\Client\\DataAccess\\": "client/includes/DataAccess/",
+		"Wikibase\\Client\\DataBridge\\": "client/includes/DataBridge/",
+		"Wikibase\\Client\\Hooks\\": "client/includes/Hooks/",
+		"Wikibase\\Client\\RecentChanges\\": "client/includes/RecentChanges/",
+		"Wikibase\\Client\\Serializer\\": "client/includes/Serializer/",
+		"Wikibase\\Client\\Specials\\": "client/includes/Specials/",
+		"Wikibase\\Client\\Store\\": "client/includes/Store/",
+		"Wikibase\\Client\\UpdateRepo\\": "client/includes/UpdateRepo/"
+	},
 	"manifest_version": 2
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Rdf;
+namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
 use PHPUnit4And6Compat;
