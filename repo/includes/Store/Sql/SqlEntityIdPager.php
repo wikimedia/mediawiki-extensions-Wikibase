@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use LinkCache;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
@@ -53,18 +54,24 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 	 * @var EntityIdLookup
 	 */
 	private $entityIdLookup;
+	/**
+	 * @var LinkCache|null
+	 */
+	private $linkCache;
 
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param string[] $entityTypes The desired entity types, or empty array for any type.
 	 * @param string $redirectMode A EntityIdPager::XXX_REDIRECTS constant (default is NO_REDIRECTS).
+	 * @param LinkCache|null $linkCache
 	 */
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		EntityIdLookup $entityIdLookup,
 		array $entityTypes = [],
-		$redirectMode = EntityIdPager::NO_REDIRECTS
+		$redirectMode = EntityIdPager::NO_REDIRECTS,
+		LinkCache $linkCache = null
 	) {
 		Assert::parameterElementType( 'string', $entityTypes, '$entityTypes' );
 
@@ -72,6 +79,7 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		$this->entityTypes = $entityTypes;
 		$this->redirectMode = $redirectMode;
 		$this->entityIdLookup = $entityIdLookup;
+		$this->linkCache = $linkCache;
 	}
 
 	/**
@@ -102,9 +110,11 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		}
 
 		$dbr = wfGetDB( DB_REPLICA );
+		$fields = array_unique( array_merge( LinkCache::getSelectFields(),
+				[ 'page_id', 'page_title', 'page_namespace' ] ) );
 		$rows = $dbr->select(
 			$tables,
-			[ 'page_id', 'page_title', 'page_namespace' ],
+			$fields,
 			$this->getWhere( $this->position ),
 			__METHOD__,
 			[
@@ -208,6 +218,10 @@ class SqlEntityIdPager implements SeekableEntityIdPager {
 		foreach ( $rows as $row ) {
 			$position = (int)$row->page_id;
 			$title = Title::newFromRow( $row );
+			// Register with the cache so that getEntityIdForTitle and others can use it
+			if ( $this->linkCache ) {
+				$this->linkCache->addGoodLinkObjFromRow( $title, $row );
+			}
 			$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 			if ( $entityId ) {
 				$entityIds[] = $entityId;

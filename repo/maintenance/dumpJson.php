@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use MediaWiki\MediaWikiServices;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -82,7 +83,8 @@ class DumpJson extends DumpEntities {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 				$wikibaseRepo->getEntityNamespaceLookup(),
-				$wikibaseRepo->getEntityIdLookup()
+				$wikibaseRepo->getEntityIdLookup(),
+				MediaWikiServices::getInstance()->getLinkCache()
 			);
 			$revisionLookup = $wikibaseRepo->getEntityRevisionLookup(
 				$this->getEntityRevisionLookupCacheMode()
