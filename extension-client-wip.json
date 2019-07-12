@@ -20,6 +20,7 @@
 		"Wikibase\\Client\\Serializer\\": "client/includes/Serializer/",
 		"Wikibase\\Client\\Specials\\": "client/includes/Specials/",
 		"Wikibase\\Client\\Store\\": "client/includes/Store/",
+		"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes/",
 		"Wikibase\\Client\\UpdateRepo\\": "client/includes/UpdateRepo/"
 	},
 	"manifest_version": 2
