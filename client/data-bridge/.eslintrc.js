@@ -2,9 +2,7 @@ module.exports = {
 	extends: [
 		'wikimedia',
 		'wikimedia/node',
-		'wikimedia/client',
-		'wikimedia/language/es6',
-		'wikimedia/language/es2017',
+		'wikimedia/language/rules-es2017', // the not-* parts are obsolete after transpiling and polyfills
 		'plugin:vue/strongly-recommended',
 	],
 	plugins: [
@@ -64,13 +62,17 @@ module.exports = {
 			},
 		} ],
 
-		'no-restricted-properties': 'off',
-
-		/* remove the following if
-		 * https://github.com/wikimedia/eslint-config-wikimedia/pull/171
-		 * is active in eslint-config-wikimedia
+		/* copied from eslint-config-wikimedia/client.json;
+		 * TODO extend (part of) client.json again
+		 * once it doesn’t pull in es5.json
 		 */
-		'prefer-const': 'error',
+		'no-alert': 'error',
+		'no-console': 'error',
+		'no-implied-eval': 'error',
+	},
+	env: {
+		/* TODO also copied from eslint-config-wikimedia/client.json */
+		browser: true,
 	},
 	overrides: {
 		files: [ '**/*.ts' ],
