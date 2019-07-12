@@ -1,5 +1,6 @@
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
+import { SelectedElement } from '@/mediawiki/SelectedElement';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 
@@ -12,11 +13,20 @@ export default async (): Promise<void> => {
 		return;
 	}
 	const bridgeElementSelector = new BridgeDomElementsSelector( dataBridgeConfig.hrefRegExp );
-	if ( bridgeElementSelector.selectElementsToOverload().length > 0 ) {
+	const linksToOverload: SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
+	if ( linksToOverload.length > 0 ) {
 		const require = await ( window as MwWindow ).mw.loader.using( APP_MODULE ),
 			app = require( APP_MODULE );
-		app.launch( {
-			'greeting': 'Hello from wikidata-data-bridge!',
+		linksToOverload.map( ( selectedElement: SelectedElement ) => {
+			selectedElement.link.addEventListener( 'click', ( event: Event ) => {
+				event.preventDefault();
+				event.stopPropagation();
+				app.launch( {
+					entityID: selectedElement.entityID,
+					propertyID: selectedElement.propertyID,
+					editFlow: selectedElement.editFlow,
+				} );
+			} );
 		} );
 	}
 };

@@ -24,9 +24,8 @@ jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 
 describe( 'init', () => {
 
-	it( 'loads `wikibase.client.data-bridge.app`, if it found supported links', () => {
-		const app = { launch: jest.fn() },
-			require = jest.fn( () => app ),
+	it( 'loads `wikibase.client.data-bridge.app` and adds click handler', () => {
+		const require = jest.fn(),
 			using = jest.fn( () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} );
@@ -35,17 +34,18 @@ describe( 'init', () => {
 		} );
 		mockMwEnv( using, get, jest.fn() );
 
-		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => {
-			return {
-				selectElementsToOverload: () => [ {} ],
-			};
-		} );
+		const link = {
+			addEventListener: jest.fn(),
+		};
+		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
+			selectElementsToOverload: () => [ { link } ],
+		} ) );
 
 		return init().then( () => {
 			expect( using ).toBeCalledTimes( 1 );
 			expect( using ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
 			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
-			expect( app.launch ).toBeCalledTimes( 1 );
+			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );
 		} );
 	} );
 
