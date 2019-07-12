@@ -134,6 +134,7 @@ return [
 					$databaseTypeIdsStore,
 					$databaseTypeIdsStore,
 					$loadBalancer,
+					$repoDbDomain,
 					$logger
 				)
 			);
