@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use Html;
 use IContextSource;
+use PageProps;
 use PHPUnit4And6Compat;
 use RequestContext;
 use SiteLookup;
@@ -37,7 +38,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		array $subscriptions
 	) {
 		$hookHandler = $this->newHookHandler( $subscriptions, $context );
-		$pageInfo = $hookHandler->handle( $context, [] );
+		$pageInfo = $hookHandler->handle( $context, [ 'header-basic' => [] ] );
 
 		$this->assertEquals( $expected, $pageInfo );
 	}
@@ -51,32 +52,50 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		return [
 			'dewiki and enwiki' => [
-				[ 'header-properties' => [
-					[
-						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
-						"<ul><li>$elementDewiki</li><li>$elementEnwiki</li></ul>",
+				[
+					'header-properties' => [
+						[
+							'(wikibase-pageinfo-subscription)',
+							"<ul><li>$elementDewiki</li><li>$elementEnwiki</li></ul>",
+						],
 					],
-				] ],
+					'header-basic' => [
+						[ '(wikibase-pageinfo-wb-claims)', '5' ],
+						[ '(wikibase-pageinfo-wb-identifiers)', '4' ]
+					],
+				],
 				$context,
 				[ 'dewiki', 'enwiki' ]
 			],
 			'elwiki' => [
-				[ 'header-properties' => [
-					[
-						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
-						"<ul><li>$elementElwiki</li></ul>",
+				[
+					'header-properties' => [
+						[
+							'(wikibase-pageinfo-subscription)',
+							"<ul><li>$elementElwiki</li></ul>",
+						],
 					],
-				] ],
+					'header-basic' => [
+						[ '(wikibase-pageinfo-wb-claims)', '5' ],
+						[ '(wikibase-pageinfo-wb-identifiers)', '4' ]
+					],
+				],
 				$context,
 				[ 'elwiki' ]
 			],
 			'no subscription' => [
-				[ 'header-properties' => [
-					[
-						$context->msg( 'wikibase-pageinfo-subscription' )->escaped(),
-						$context->msg( 'wikibase-pageinfo-subscription-none' )->escaped()
-					]
-				] ],
+				[
+					'header-properties' => [
+						[
+							'(wikibase-pageinfo-subscription)',
+							'(wikibase-pageinfo-subscription-none)'
+						]
+					],
+					'header-basic' => [
+						[ '(wikibase-pageinfo-wb-claims)', '5' ],
+						[ '(wikibase-pageinfo-wb-identifiers)', '4' ]
+					],
+				],
 				$context,
 				[]
 			]
@@ -104,12 +123,21 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->with( $context->getTitle() )
 			->will( $this->returnValue( $itemId ) );
 
+		$pageProps = $this->getMockBuilder( PageProps::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$pageProps->expects( $this->once() )
+			->method( 'getProperties' )
+			->with( $context->getTitle() )
+			->willReturn( [ 1234 => [ 'wb-claims' => 5, 'wb-identifiers' => 4 ] ] );
+
 		return new InfoActionHookHandler(
 			new EntityNamespaceLookup( [ Item::ENTITY_TYPE => NS_MAIN ] ),
 			$subLookup,
 			$this->newSiteLookup(),
 			$entityIdLookup,
-			$context
+			$context,
+			$pageProps
 		);
 	}
 
@@ -150,7 +178,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
-		$context->setLanguage( 'en' );
+		$context->setLanguage( 'qqx' );
 
 		return $context;
 	}

@@ -492,6 +492,8 @@
 	"wikibase-entity-not-viewable": "Error message saying that some content can't be rendered. $1 is the content model of the content that can't be displayed (e.g. wikitext).",
 	"wikibase-pageinfo-subscription": "Text to put in action=info for entity usage",
 	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity\n{{Identical|None}}",
+	"wikibase-pageinfo-wb-claims": "Text to put in action=info for number of statements in the page",
+	"wikibase-pageinfo-wb-identifiers": "Text to put in action=info for number of external identifiers in the page",
 	"wikibase-search-bad-entity-type": "Error message displayed when user supplies bad entity type to wbsearchentities",
 	"wikibase-search-bad-profile-name": "Error message displayed when user supplies bad search profile name",
 	"wikibase-search-namespace-mix": "Warning when using mixed namespaces in fulltext search",

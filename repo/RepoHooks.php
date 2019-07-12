@@ -18,6 +18,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MWException;
 use OutputPage;
+use PageProps;
 use ParserOutput;
 use RecentChange;
 use ResourceLoader;
@@ -1047,7 +1048,8 @@ final class RepoHooks {
 			$subscriptionLookup,
 			$siteLookup,
 			$entityIdLookup,
-			$context
+			$context,
+			PageProps::getInstance()
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );

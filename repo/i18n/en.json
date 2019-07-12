@@ -457,6 +457,8 @@
 	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and cannot be displayed by Wikibase.",
 	"wikibase-pageinfo-subscription": "Wikis subscribed to this entity",
 	"wikibase-pageinfo-subscription-none": "None",
+	"wikibase-pageinfo-wb-claims": "Number of statements in this entity",
+	"wikibase-pageinfo-wb-identifiers": "Number of external identifier statements in this entity",
 	"wikibase-search-bad-entity-type": "Bad entity type: $1",
 	"wikibase-search-bad-profile-name": "Bad search profile name: $1",
 	"wikibase-search-namespace-mix": "Mixing entity and article namespaces in search is currently not supported. Only entity namespaces will be searched.",

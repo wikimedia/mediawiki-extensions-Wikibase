@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use Html;
 use IContextSource;
+use PageProps;
 use SiteLookup;
 use Title;
 use Wikibase\Store\SubscriptionLookup;
@@ -41,18 +42,25 @@ class InfoActionHookHandler {
 	 */
 	private $context;
 
+	/**
+	 * @var PageProps
+	 */
+	private $pageProps;
+
 	public function __construct(
 		EntityNamespaceLookup $namespaceChecker,
 		SubscriptionLookup $subscriptionLookup,
 		SiteLookup $siteLookup,
 		EntityIdLookup $entityIdLookup,
-		IContextSource $context
+		IContextSource $context,
+		PageProps $pageProps
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->subscriptionLookup = $subscriptionLookup;
 		$this->siteLookup = $siteLookup;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->context = $context;
+		$this->pageProps = $pageProps;
 	}
 
 	/**
@@ -68,7 +76,8 @@ class InfoActionHookHandler {
 		if ( $this->namespaceChecker->isNamespaceWithEntities( $title->getNamespace() )
 			&& $title->exists()
 		) {
-			$pageInfo['header-properties'][] = $this->getPageInfoRow( $title );
+			$pageInfo['header-properties'][] = $this->getSubscriptionsInfo( $title );
+			$pageInfo['header-basic'] = array_merge( $pageInfo['header-basic'], $this->getStatementsInfo( $title ) );
 		}
 
 		return $pageInfo;
@@ -79,7 +88,7 @@ class InfoActionHookHandler {
 	 *
 	 * @return string[] HTML
 	 */
-	private function getPageInfoRow( Title $title ) {
+	private function getSubscriptionsInfo( Title $title ) {
 		$entity = $this->entityIdLookup->getEntityIdForTitle( $title );
 
 		if ( $entity === null ) {
@@ -93,6 +102,42 @@ class InfoActionHookHandler {
 		}
 
 		return $this->getNoSubscriptionText();
+	}
+
+	/**
+	 * @param Title $title
+	 *
+	 * @return string[] HTML
+	 */
+	private function getStatementsInfo( Title $title ) {
+
+		$properties = $this->pageProps->getProperties( $title, [ 'wb-claims', 'wb-identifiers' ] );
+
+		if ( $properties ) {
+			return $this->formatProperties( $properties );
+		}
+
+		return [];
+	}
+
+	/**
+	 * @param array $properties
+	 *
+	 * @return string[] HTML
+	 */
+	private function formatProperties( array $properties ) {
+		$output = [];
+
+		foreach ( $properties as $pageId => $pageProperties ) {
+			foreach ( $pageProperties as $property => $value ) {
+				$output[] = [
+					$this->context->msg( 'wikibase-pageinfo-' . $property )->parse(),
+					$this->context->getLanguage()->formatNum( (int)$value )
+				];
+			}
+		}
+
+		return $output;
 	}
 
 	/**
