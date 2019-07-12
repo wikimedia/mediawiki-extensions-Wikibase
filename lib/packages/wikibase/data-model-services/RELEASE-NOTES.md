@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.16.0 (dev)
+
+* Added `FallbackLabelDescriptionLookup` interface
+
 ## Version 3.15.0 (2019-04-24)
 
 * Added `ItemLookup` implementations
