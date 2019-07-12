@@ -104,6 +104,7 @@
 	"wikibase-propertypage-bad-datatype": "Tipo de dados desconhecido: $1",
 	"wikibase-claimview-snak-tooltip": "Introduza um valor correspondente à propriedade denominada \"$1\". Se a propriedade não tem nenhum valor designado, ou o valor real não é conhecido, pode escolher um tipo de valor alternativo se clicar o ícone que aparece antes da caixa de introdução de dados.",
 	"wikibase-claimview-snak-new-tooltip": "Depois de especificar uma propriedade, pode introduzir um valor correspondente. Se a propriedade não tem nenhum valor designado, ou o valor real não é conhecido, pode escolher um tipo de valor alternativo se clicar o ícone que aparece antes da caixa de introdução de dados.",
+	"wikibase-referenceview-tabs-manual": "Manual",
 	"wikibase-statementview-rank-preferred": "Classificação preferencial",
 	"wikibase-statementview-rank-tooltip-preferred": "Valor válido e atualizado",
 	"wikibase-statementview-rank-normal": "Classificação normal",
@@ -123,12 +124,14 @@
 	"wikibase-snakformat-invalid-value": "Valor inválido.",
 	"wikibase-snakformat-propertynotfound": "Propriedade não encontrada.",
 	"wikibase-shortcopyrightwarning": "Ao clicar \"$1\", concorda com as [[$2|condições de uso]], e concorda irrevogavelmente em disponibilizar a sua contribuição ao abrigo da licença $3.",
+	"wikibase-shortcopyrightwarning-accept-persist": "Aceito estas condições para as minhas edições futuras. Não mostrar esta mensagem novamente.",
 	"wikibase-copyrighttooltip-acknowledge": "Aceito estas condições para as minhas edições futuras. Não mostrar esta mensagem novamente.",
 	"wikibase-entityselector-more": "mais",
 	"wikibase-entityselector-notfound": "Não foi encontrada nenhuma correspondência",
 	"wikibase-anonymouseditwarning": "Aviso: Não se autenticou. O seu [https://pt.wikipedia.org/wiki/Endere%C3%A7o_IP endereço IP] poderá ser visto por todos se fizer alguma edição. Se se <strong>[[Special:UserLogin|autenticar]]</strong> ou <strong>[[Special:CreateAccount|criar uma conta]]</strong>, as suas edições serão atribuídas a um nome de utilizador, além de desfrutar de outras vantagens.",
 	"wikibase-anonymouseditwarning-heading": "Não tem sessão iniciada",
 	"wikibase-anonymouseditwarning-message": "Neste momento, o seu endereço IP será publicamente visível se fizer alguma edição. Se iniciar uma sessão ou criar uma conta, as suas edições serão atribuídas ao seu nome de utilizador, entre outras vantagens.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Avisar-me sempre que não tenha iniciado uma sessão.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Editar sem iniciar sessão",
 	"wikibase-move-error": "Não pode mover páginas para fora, nem de fora para dentro, de um espaço nominal de dados.",
 	"wikibase-validator-sitelink-conflict": "A hiperligação $1 já está a ser utilizada pelo objeto $2. Pode removê-la de $2 se ela não pertence nele ou fundir os objetos se forem exatamente sobre o mesmo tópico.",
@@ -149,6 +152,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Não existe um objeto com este identificador",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" não é um identificador de objeto válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "O código de língua \"$1\" é desconhecido. Use um código de língua reconhecido pelo sistema, como por exemplo \"pt\", por favor.",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Os nomes alternativos que contêm barras verticais (|) só podem ser editados na página da própria entidade (com o JavaScript ativado) ou através da API",
 	"wikibase-wikibaserepopage-invalid-id": "O identificador \"$1\" é desconhecido pelo sistema. Utilize um identificador de entidade válido, por favor.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 é um redirecionamento.",
 	"wikibase-wikibaserepopage-storage-exception": "Ocorreu um erro ao tentar carregar $1: $2.",
@@ -420,5 +424,6 @@
 	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
 	"wikibase-refresh-for-missing-datatype": "O tipo de dados $1 não foi encontrado no ''script'' do cliente local. Isso pode resultar de um ''script'' desatualizado na ''cache''. Para resolver o problema, tente fazer uma atualização forçada do seu ''browser'' ignorando a ''cache'' local (Ctrl-Shift-R ou Cmd-Shift-R na maioria dos ''browsers'').",
-	"wikibase-outdated-client-script": "É necessária uma atualização forçada!"
+	"wikibase-outdated-client-script": "É necessária uma atualização forçada!",
+	"wikibase-shortcopyrightwarning-heading": "Atribuição da licença"
 }

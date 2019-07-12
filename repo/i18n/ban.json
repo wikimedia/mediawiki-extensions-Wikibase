@@ -3,11 +3,15 @@
 		"authors": [
 			"Carma citrawati",
 			"Joseagush",
-			"NoiX180"
+			"NoiX180",
+			"Luh Gede Krismayanti"
 		]
 	},
 	"wikibase-edit": "uah",
 	"wikibase-add": "tambah",
+	"wikibase-label-empty": "nenten wenten label",
+	"wikibase-description-empty": "Nenten madue daging",
 	"wikibase-sitelinks-special": "Situs lianan",
-	"wikibase-referenceview-tabs-manual": "Manual"
+	"wikibase-referenceview-tabs-manual": "Manual",
+	"wikibase-statementview-rank-normal": "Tincapan sane sedeng"
 }
