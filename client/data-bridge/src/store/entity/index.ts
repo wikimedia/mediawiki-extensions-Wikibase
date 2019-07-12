@@ -2,6 +2,7 @@ import { Module } from 'vuex';
 import EntityState from '@/store/entity/EntityState';
 import { mutations } from '@/store/entity/mutations';
 import { getters } from '@/store/entity/getters';
+import { actions } from '@/store/entity/actions';
 
 export default function (): Module<EntityState, any> {
 	const state: EntityState = {
@@ -16,5 +17,6 @@ export default function (): Module<EntityState, any> {
 		state,
 		getters,
 		mutations,
+		actions,
 	};
 }
