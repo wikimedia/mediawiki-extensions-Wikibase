@@ -7,6 +7,7 @@ use BaseTemplate;
 use ContentHandler;
 use EditPage;
 use ExtensionRegistry;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Parser;
 use ParserOutput;
@@ -428,6 +429,42 @@ final class ClientHooks {
 		} catch ( EntityIdParsingException $ex ) {
 			return null;
 		}
+	}
+
+	/**
+	 * Used to propagate information about the current site to JavaScript.
+	 * This is used in "wikibase.client.linkitem.init" module
+	 */
+	public static function getSiteConfiguration() {
+		$cache = MediaWikiServices::getInstance()->getLocalServerObjectCache();
+		$key = $cache->makeKey(
+			'wikibase-client',
+			'siteConfiguration'
+		);
+		return $cache->getWithSetCallback(
+			$key,
+			$cache::TTL_DAY,
+			function () {
+				$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+				/**
+				 * @var \MediaWikiSite $site
+				 */
+				$site = $wikibaseClient->getSite();
+
+				$currentSite = [];
+				if ( $site ) {
+					$currentSite = [
+						'globalSiteId' => $site->getGlobalId(),
+						'languageCode' => $site->getLanguageCode(),
+						'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
+					];
+				}
+
+				return [ 'currentSite' => $currentSite ];
+			},
+			[ 'lockTSE' => 10, 'pcTTL' => $cache::TTL_PROC_LONG ]
+		);
 	}
 
 }
