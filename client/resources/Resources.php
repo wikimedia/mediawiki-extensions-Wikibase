@@ -92,12 +92,11 @@ return call_user_func( function() {
 			'class' => SiteModule::class
 		],
 
-		'wikibase.client.page-move' => $moduleTemplate + [
-			'styles' => 'wikibase.client.page-move.css'
-		],
-
-		'wikibase.client.changeslist.css' => $moduleTemplate + [
-			'styles' => 'wikibase.client.changeslist.css'
+		'wikibase.client.miscStyles' => $moduleTemplate + [
+				'styles' => [
+					'wikibase.client.page-move.css',
+					'wikibase.client.changeslist.css',
+				]
 		],
 
 		'wikibase.client.linkitem.init' => $moduleTemplate + [
@@ -113,18 +112,10 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.client.PageConnector' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.client.PageConnector.js'
-			],
-			'dependencies' => [
-				'wikibase.sites'
-			],
-		],
-
 		'jquery.wikibase.linkitem' => $moduleTemplate + [
 			'scripts' => [
-				'jquery.wikibase/jquery.wikibase.linkitem.js'
+				'jquery.wikibase/jquery.wikibase.linkitem.js',
+				'wikibase.client.PageConnector.js'
 			],
 			'styles' => [
 				'jquery.wikibase/jquery.wikibase.linkitem.css'
@@ -139,11 +130,9 @@ return call_user_func( function() {
 				'mediawiki.util',
 				'mediawiki.jqueryMsg',
 				'jquery.event.special.eachchange',
-				'wikibase.client.currentSite',
 				'wikibase.sites',
 				'wikibase.api.RepoApi',
 				'wikibase.api.RepoApiError',
-				'wikibase.client.PageConnector'
 			],
 			'messages' => [
 				'wikibase-error-unexpected',

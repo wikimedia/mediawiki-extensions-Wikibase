@@ -74,7 +74,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 
 		$outputPage->expects( $this->once() )
 				->method( 'addModules' )
-				->with( 'wikibase.client.page-move' );
+				->with( 'wikibase.client.miscStyles' );
 
 		$movePageForm = $this->getMock( MovePageForm::class );
 		$movePageForm->expects( $this->once() )

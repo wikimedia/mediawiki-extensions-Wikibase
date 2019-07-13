@@ -203,7 +203,7 @@ class ChangesListSpecialPageHookHandlers {
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
 
 		$specialPage->getOutput()->addModules( 'wikibase.client.jqueryMsg' );
-		$specialPage->getOutput()->addModuleStyles( 'wikibase.client.changeslist.css' );
+		$specialPage->getOutput()->addModuleStyles( 'wikibase.client.miscStyles' );
 
 		$wikidataFilter = new ChangesListBooleanFilter( [
 			'name' => $filterName,

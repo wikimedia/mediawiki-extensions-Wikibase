@@ -88,7 +88,7 @@ class MovePageNotice {
 		Title &$newTitle
 	) {
 		$out = $movePage->getOutput();
-		$out->addModules( 'wikibase.client.page-move' );
+		$out->addModules( 'wikibase.client.miscStyles' );
 		$out->addHTML( $this->getPageMoveNoticeHtml( $oldTitle, $newTitle ) );
 	}
 
