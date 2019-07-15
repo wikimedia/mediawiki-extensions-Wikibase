@@ -37,26 +37,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 		$this->generateAutoloadForComponent(
 			'lib',
-			[ 'includes', 'maintenance' ],
-			[
-				'tests/phpunit/EntityRevisionLookupTestCase.php',
-				'tests/phpunit/MockPropertyLabelResolver.php',
-				'tests/phpunit/MockRepository.php',
-				'tests/phpunit/Changes/ChangeRowTest.php',
-				'tests/phpunit/Changes/EntityChangeTest.php',
-				'tests/phpunit/Changes/MockRepoClientCentralIdLookup.php',
-				'tests/phpunit/Changes/TestChanges.php',
-				'tests/phpunit/Store/EntityInfoBuilderTestCase.php',
-				'tests/phpunit/Store/EntityTermLookupTest.php',
-				'tests/phpunit/Store/GenericEntityInfoBuilder.php',
-				'tests/phpunit/Store/HttpUrlPropertyOrderProviderTestMockHttp.php',
-				'tests/phpunit/Store/MockChunkAccess.php',
-				'tests/phpunit/Store/MockPropertyInfoLookup.php',
-				'tests/phpunit/Store/MockTermIndex.php',
-				'tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
-				'tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
-				'tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php',
-			]
+			[ 'includes', 'maintenance' ]
 		);
 
 		$this->generateAutoloadForComponent(
@@ -100,16 +81,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 		$this->generateAutoloadForComponent(
 			'client',
-			[ 'includes', 'maintenance' ],
-			[
-				'tests/phpunit/includes/Changes/MockPageUpdater.php',
-				'tests/phpunit/includes/DataAccess/WikibaseDataAccessTestItemSetUpHelper.php',
-				'tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTestCase.php',
-				'tests/phpunit/includes/MockClientStore.php',
-				'tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php',
-				'tests/phpunit/includes/Usage/UsageLookupContractTester.php',
-				'tests/phpunit/includes/Usage/UsageTrackerContractTester.php',
-			]
+			[ 'includes', 'maintenance' ]
 		);
 
 		echo "Done.\n\n";
