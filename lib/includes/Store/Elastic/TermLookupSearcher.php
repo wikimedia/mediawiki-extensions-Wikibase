@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Lib\Store\Elastic;
 
 use CirrusSearch\Connection;
 use CirrusSearch\ElasticsearchIntermediary;

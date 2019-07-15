@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Lib\Store\Elastic;
 
 use CirrusSearch\Connection;
 use CirrusSearch\SearchConfig;
@@ -9,6 +9,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\TermIndexEntry;
 
 /**
