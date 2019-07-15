@@ -18,6 +18,11 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/lib/resources',
 	];
 
+	$wikibaseApiPaths = [
+		'localBasePath' => __DIR__ . '/wikibase-api/src',
+		'remoteExtPath' => 'Wikibase/lib/resources/wikibase-api/src',
+	];
+
 	$modules = [
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
@@ -61,6 +66,86 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
+			'scripts' => [
+				'RepoApi.js',
+			],
+			'dependencies' => [
+				'wikibase.api.__namespace',
+			],
+			'targets' => [
+				'desktop',
+				'mobile'
+			]
+		],
+
+		'wikibase.api.RepoApiError' => $wikibaseApiPaths + [
+			'scripts' => [
+				'RepoApiError.js',
+			],
+			'messages' => [
+				'wikibase-error-unexpected',
+				'wikibase-error-save-generic',
+				'wikibase-error-remove-generic',
+				'wikibase-error-save-timeout',
+				'wikibase-error-remove-timeout',
+				'wikibase-error-ui-no-external-page',
+				'wikibase-error-ui-edit-conflict',
+			],
+			'dependencies' => [
+				'util.inherit',
+				'wikibase.api.__namespace',
+			],
+			'targets' => [
+				'desktop',
+				'mobile'
+			],
+		],
+		'wikibase.api.__namespace' => $wikibaseApiPaths + [
+			'scripts' => [
+				'namespace.js'
+			],
+			'targets' => [
+				'desktop',
+				'mobile'
+			],
+		],
+
+		'wikibase.api.FormatValueCaller' => $wikibaseApiPaths + [
+			'scripts' => [
+				'FormatValueCaller.js',
+			],
+			'dependencies' => [
+				'dataValues.DataValue',
+				'wikibase.api.__namespace',
+				'wikibase.api.RepoApiError',
+			]
+		],
+
+		'wikibase.api.getLocationAgnosticMwApi' => $wikibaseApiPaths + [
+			'scripts' => [
+				'getLocationAgnosticMwApi.js',
+			],
+			'dependencies' => [
+				'mediawiki.api',
+				'mediawiki.ForeignApi',
+				'wikibase.api.__namespace',
+			],
+			'targets' => [
+				'desktop',
+				'mobile'
+			],
+		],
+
+		'wikibase.api.ParseValueCaller' => $wikibaseApiPaths + [
+			'scripts' => [
+				'ParseValueCaller.js',
+			],
+			'dependencies' => [
+				'wikibase.api.__namespace',
+				'wikibase.api.RepoApiError',
+			]
+		],
 	];
 
 	$modules = array_merge(

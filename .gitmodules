@@ -1,9 +1,6 @@
 [submodule "view/lib/wikibase-data-values-value-view"]
 	path = view/lib/wikibase-data-values-value-view
 	url = https://gerrit.wikimedia.org/r/data-values/value-view
-[submodule "view/lib/wikibase-api"]
-	path = view/lib/wikibase-api
-	url = https://gerrit.wikimedia.org/r/wikibase/javascript-api
 [submodule "view/lib/wikibase-serialization"]
 	path = view/lib/wikibase-serialization
 	url = https://phabricator.wikimedia.org/source/wikibase-serialization.git
@@ -17,3 +14,6 @@
 	path = view/lib/wikibase-termbox
 	url = https://phabricator.wikimedia.org/source/wikibase-termbox
 
+[submodule "lib/resources/wikibase-api"]
+	path = lib/resources/wikibase-api
+	url = https://gerrit.wikimedia.org/r/wikibase/javascript-api
