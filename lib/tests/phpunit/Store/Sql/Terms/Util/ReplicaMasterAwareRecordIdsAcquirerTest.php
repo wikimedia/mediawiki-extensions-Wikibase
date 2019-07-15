@@ -4,8 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DatabaseSqlite;
 

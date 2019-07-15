@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**

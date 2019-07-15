@@ -14,9 +14,9 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\StringNormalizer;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLBFactory;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**

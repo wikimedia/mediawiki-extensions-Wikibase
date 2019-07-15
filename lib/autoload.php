@@ -182,6 +182,8 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Tests\\Store\\MockChunkAccess' => __DIR__ . '/tests/phpunit/Store/MockChunkAccess.php',
 	'Wikibase\\Lib\\Tests\\Store\\MockPropertyInfoLookup' => __DIR__ . '/tests/phpunit/Store/MockPropertyInfoLookup.php',
 	'Wikibase\\Lib\\Tests\\Store\\MockTermIndex' => __DIR__ . '/tests/phpunit/Store/MockTermIndex.php',
+	'Wikibase\\Lib\\Tests\\Store\\Sql\\Terms\\Util\\FakeLBFactory' => __DIR__ . '/tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php',
+	'Wikibase\\Lib\\Tests\\Store\\Sql\\Terms\\Util\\FakeLoadBalancer' => __DIR__ . '/tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
 	'Wikibase\\Lib\\Tests\\Store\\WikiTextPropertyOrderProviderTestHelper' => __DIR__ . '/tests/phpunit/Store/WikiTextPropertyOrderProviderTestHelper.php',
 	'Wikibase\\Lib\\UnionContentLanguages' => __DIR__ . '/includes/UnionContentLanguages.php',
 	'Wikibase\\Lib\\UserInputException' => __DIR__ . '/includes/UserInputException.php',
@@ -202,7 +204,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\TermIndexEntry' => __DIR__ . '/includes/TermIndexEntry.php',
 	'Wikibase\\TermIndexItemTermStore' => __DIR__ . '/includes/Store/TermIndexItemTermStore.php',
 	'Wikibase\\TermIndexPropertyTermStore' => __DIR__ . '/includes/Store/TermIndexPropertyTermStore.php',
-	'Wikibase\\TermStore\\MediaWiki\\Tests\\Util\\FakeLBFactory' => __DIR__ . '/tests/phpunit/Store/Sql/Terms/Util/FakeLBFactory.php',
-	'Wikibase\\TermStore\\MediaWiki\\Tests\\Util\\FakeLoadBalancer' => __DIR__ . '/tests/phpunit/Store/Sql/Terms/Util/FakeLoadBalancer.php',
 	'Wikibase\\WikibaseSettings' => __DIR__ . '/includes/WikibaseSettings.php',
 ];
