@@ -102,10 +102,10 @@ class GenerateWikibaseAutoload extends Maintenance {
 			'client',
 			[ 'includes', 'maintenance' ],
 			[
-				'tests/phpunit/MockClientStore.php',
 				'tests/phpunit/includes/Changes/MockPageUpdater.php',
 				'tests/phpunit/includes/DataAccess/WikibaseDataAccessTestItemSetUpHelper.php',
 				'tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTestCase.php',
+				'tests/phpunit/includes/MockClientStore.php',
 				'tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php',
 				'tests/phpunit/includes/Usage/UsageLookupContractTester.php',
 				'tests/phpunit/includes/Usage/UsageTrackerContractTester.php',

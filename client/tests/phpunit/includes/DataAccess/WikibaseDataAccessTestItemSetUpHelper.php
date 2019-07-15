@@ -6,6 +6,7 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,7 +19,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Test\MockClientStore;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**

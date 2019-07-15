@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\UsageUpdater;
@@ -206,3 +206,6 @@ class MockClientStore implements ClientStore {
 	}
 
 }
+
+/** @deprecated */
+class_alias( MockClientStore::class, 'Wikibase\Test\MockClientStore' );

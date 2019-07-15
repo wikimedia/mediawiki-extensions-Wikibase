@@ -6,10 +6,10 @@ use PHPUnit_Framework_TestSuite;
 use Scribunto_LuaEngineTestBase;
 use Title;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
+use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Test\MockClientStore;
 use Wikibase\WikibaseSettings;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {

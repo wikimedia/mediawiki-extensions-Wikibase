@@ -9,11 +9,11 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
+use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
-use Wikibase\Test\MockClientStore;
 use Wikimedia\TestingAccessWrapper;
 
 /**

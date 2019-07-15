@@ -8,8 +8,8 @@ use Parser;
 use ParserOptions;
 use Title;
 use User;
+use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Test\MockClientStore;
 
 /**
  * @covers \Wikibase\Client\Hooks\ParserClearStateHookHandler

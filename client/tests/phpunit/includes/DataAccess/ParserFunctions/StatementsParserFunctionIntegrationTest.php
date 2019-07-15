@@ -11,6 +11,7 @@ use ParserOutput;
 use Title;
 use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
+use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
@@ -22,7 +23,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
-use Wikibase\Test\MockClientStore;
 use Wikimedia\TestingAccessWrapper;
 
 /**

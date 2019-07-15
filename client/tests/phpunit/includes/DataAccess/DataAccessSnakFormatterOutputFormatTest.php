@@ -14,6 +14,7 @@ use PHPUnit4And6Compat;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
@@ -25,7 +26,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
-use Wikibase\Test\MockClientStore;
 
 /**
  * Regression tests for the output produced by data access functionality.
