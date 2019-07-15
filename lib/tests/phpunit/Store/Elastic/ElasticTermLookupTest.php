@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\Lib\Tests\Store\Elastic;
 
 use CirrusSearch;
 use Elastica\Result;
@@ -10,12 +10,13 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\Lib\Store\ElasticTermLookup;
+use Wikibase\Lib\Store\Elastic\ElasticTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\TermLookupSearcher;
+use Wikibase\Lib\Store\Elastic\TermLookupSearcher;
+use Wikibase\Lib\Tests\Store\EntityTermLookupTest;
 
 /**
- * @covers \Wikibase\Lib\Store\ElasticTermLookup
+ * @covers \Wikibase\Lib\Store\Elastic\ElasticTermLookup
  *
  * @group Wikibase
  * @group WikibaseStore
