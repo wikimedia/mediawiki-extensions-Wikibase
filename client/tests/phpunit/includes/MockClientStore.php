@@ -206,6 +206,3 @@ class MockClientStore implements ClientStore {
 	}
 
 }
-
-/** @deprecated */
-class_alias( MockClientStore::class, 'Wikibase\Test\MockClientStore' );
