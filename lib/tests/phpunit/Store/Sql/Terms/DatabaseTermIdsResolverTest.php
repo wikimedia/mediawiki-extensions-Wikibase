@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
-use Wikibase\TermStore\MediaWiki\Tests\Util\FakeLoadBalancer;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
 

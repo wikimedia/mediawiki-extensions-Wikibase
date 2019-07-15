@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\TermStore\MediaWiki\Tests\Util;
+namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use InvalidArgumentException;
 use Wikimedia\Rdbms\ILoadBalancer;
