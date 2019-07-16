@@ -1,5 +1,6 @@
 import { Module } from 'vuex';
 import EntityState from '@/store/entity/EntityState';
+import { mutations } from '@/store/entity/mutations';
 
 export default function (): Module<EntityState, any> {
 	const state: EntityState = {
@@ -12,5 +13,6 @@ export default function (): Module<EntityState, any> {
 	return {
 		namespaced,
 		state,
+		mutations,
 	};
 }
