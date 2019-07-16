@@ -7,6 +7,7 @@ import EntityState from '@/store/entity/EntityState';
 import EntityRevision from '@/datamodel/EntityRevision';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 import newEntityState from './newEntityState';
+import StatementMap from '@/datamodel/StatementMap';
 
 describe( 'entity/mutations', () => {
 	describe( ENTITY_UPDATE, () => {
@@ -17,6 +18,15 @@ describe( 'entity/mutations', () => {
 
 			mutations[ ENTITY_UPDATE ]( state, entityRevision.entity );
 			expect( state.id ).toBe( entityRevision.entity.id );
+		} );
+
+		it( 'contains entity data statements after initialization', () => {
+			const statements: StatementMap = { P31: [] },
+				state = newEntityState(),
+				entityRevision = newMockableEntityRevision( { statements } );
+
+			mutations[ ENTITY_UPDATE ]( state, entityRevision.entity );
+			expect( state.statements ).toBe( statements );
 		} );
 	} );
 

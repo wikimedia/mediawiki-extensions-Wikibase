@@ -8,6 +8,7 @@ export default function (): Module<EntityState, any> {
 	const state: EntityState = {
 		id: '',
 		baseRevision: 0,
+		statements: null,
 	};
 
 	const namespaced = true;

@@ -19,7 +19,6 @@ export const actions = {
 		).then( ( entity ) => {
 			context.commit( ENTITY_REVISION_UPDATE, entity.revisionId );
 			context.commit( ENTITY_UPDATE, entity.entity );
-			// TODO
 		} );
 	},
 };
