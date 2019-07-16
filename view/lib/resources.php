@@ -22,10 +22,7 @@ return call_user_func( function() {
 		'localBasePath' => __DIR__ . '/wikibase-serialization/src',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
 	];
-	$wikibaseApiPaths = [
-		'localBasePath' => __DIR__ . '/wikibase-api/src',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-api/src',
-	];
+
 	$wikibaseDatavaluesValueviewLibPaths = [
 		'localBasePath' => __DIR__ . '/wikibase-data-values-value-view/lib',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/lib',
@@ -1164,88 +1161,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.Term',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
-			],
-		],
-
-		'wikibase.api.__namespace' => $wikibaseApiPaths + [
-			'scripts' => [
-				'namespace.js'
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
-			],
-		],
-
-		'wikibase.api.FormatValueCaller' => $wikibaseApiPaths + [
-			'scripts' => [
-				'FormatValueCaller.js',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'wikibase.api.__namespace',
-				'wikibase.api.RepoApiError',
-			]
-		],
-
-		'wikibase.api.getLocationAgnosticMwApi' => $wikibaseApiPaths + [
-			'scripts' => [
-				'getLocationAgnosticMwApi.js',
-			],
-			'dependencies' => [
-				'mediawiki.api',
-				'mediawiki.ForeignApi',
-				'wikibase.api.__namespace',
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
-			],
-		],
-
-		'wikibase.api.ParseValueCaller' => $wikibaseApiPaths + [
-			'scripts' => [
-				'ParseValueCaller.js',
-			],
-			'dependencies' => [
-				'wikibase.api.__namespace',
-				'wikibase.api.RepoApiError',
-			]
-		],
-
-		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
-			'scripts' => [
-				'RepoApi.js',
-			],
-			'dependencies' => [
-				'wikibase.api.__namespace',
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
-			]
-		],
-
-		'wikibase.api.RepoApiError' => $wikibaseApiPaths + [
-			'scripts' => [
-				'RepoApiError.js',
-			],
-			'messages' => [
-				'wikibase-error-unexpected',
-				'wikibase-error-save-generic',
-				'wikibase-error-remove-generic',
-				'wikibase-error-save-timeout',
-				'wikibase-error-remove-timeout',
-				'wikibase-error-ui-no-external-page',
-				'wikibase-error-ui-edit-conflict',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.api.__namespace',
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
 			],
 		],
 
