@@ -257,7 +257,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		// FIXME: Separate the JavaScript that is also needed in read-only mode from
 		// the JavaScript that is only necessary for editing.
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
-		$parserOutput->addModules( 'wikibase.entityPage.entityLoaded' );
 	}
 
 	/**

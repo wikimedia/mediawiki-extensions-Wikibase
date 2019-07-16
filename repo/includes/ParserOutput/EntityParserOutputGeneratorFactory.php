@@ -167,7 +167,7 @@ class EntityParserOutputGeneratorFactory {
 		$pog = new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
-			$this->newParserOutputJsConfigBuilder(),
+			new ParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilder,
 			$this->getLanguageFallbackChain( $userLanguage ),
@@ -185,10 +185,6 @@ class EntityParserOutputGeneratorFactory {
 		);
 
 		return $pog;
-	}
-
-	private function newParserOutputJsConfigBuilder() {
-		return new ParserOutputJsConfigBuilder( $this->entitySerializer );
 	}
 
 	private function getLanguageFallbackChain( Language $language ): LanguageFallbackChain {
