@@ -1,10 +1,12 @@
 import lockState from './lockState';
 import Application from '@/store/Application';
+import ApplicationStatus from '@/store/ApplicationStatus';
 
 export default function ( fields?: any ): Application {
 	let AppState: Application = {
 		targetProperty: '',
 		editFlow: '',
+		applicationStatus: ApplicationStatus.INITIALIZING,
 	};
 
 	if ( fields !== null ) {
