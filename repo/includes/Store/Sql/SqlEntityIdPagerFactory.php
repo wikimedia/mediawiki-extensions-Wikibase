@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use LinkCache;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Store\EntityIdLookup;
@@ -23,13 +24,19 @@ class SqlEntityIdPagerFactory {
 	 * @var EntityIdLookup
 	 */
 	private $entityIdLookup;
+	/**
+	 * @var LinkCache|null
+	 */
+	private $linkCache;
 
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
-		EntityIdLookup $entityIdLookup
+		EntityIdLookup $entityIdLookup,
+		LinkCache $linkCache = null
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->entityIdLookup = $entityIdLookup;
+		$this->linkCache = $linkCache;
 	}
 
 	/**
@@ -43,7 +50,8 @@ class SqlEntityIdPagerFactory {
 			$this->entityNamespaceLookup,
 			$this->entityIdLookup,
 			$entityTypes,
-			$redirectMode
+			$redirectMode,
+			$this->linkCache
 		);
 	}
 
