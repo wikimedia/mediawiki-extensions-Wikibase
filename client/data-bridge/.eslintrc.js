@@ -30,6 +30,7 @@ module.exports = {
 		'@typescript-eslint/no-empty-interface': [ 'error', { 'allowSingleExtends': true } ],
 		'@typescript-eslint/no-misused-new': 'error',
 		'@typescript-eslint/no-this-alias': 'error',
+		'@typescript-eslint/member-delimiter-style': 'error',
 		'no-useless-constructor': 'error',
 		'filenames/match-exported': 'error',
 		'object-shorthand': [ 'error', 'always' ],

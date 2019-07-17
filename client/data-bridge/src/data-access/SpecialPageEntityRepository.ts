@@ -12,10 +12,10 @@ import StatementMap from '@/datamodel/StatementMap';
 interface SpecialPageApiResponse {
 	entities: {
 		[x: string]: {
-			claims: StatementMap,
-			lastrevid: number,
+			claims: StatementMap;
+			lastrevid: number;
 		};
-	}
+	};
 }
 
 export default class SpecialPageEntityRepository implements EntityRepository {

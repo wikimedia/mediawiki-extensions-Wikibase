@@ -19,9 +19,9 @@ export const actions = {
 	[ BRIDGE_INIT ](
 		context: ActionContext<Application, any>,
 		payload: {
-			editFlow: string,
-			targetProperty: string,
-			targetEntity: string,
+			editFlow: string;
+			targetProperty: string;
+			targetEntity: string;
 		},
 	): Promise<void> {
 		context.commit( EDITFLOW_SET, payload.editFlow );

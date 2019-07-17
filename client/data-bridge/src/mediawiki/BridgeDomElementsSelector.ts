@@ -12,7 +12,7 @@ export default class BridgeDomElementsSelector {
 		this.hrefRegExp = new RegExp( hrefRegExp );
 	}
 
-	private extractDataFromLink( link: HTMLAnchorElement ): { entityID: string, propertyID: string } | null {
+	private extractDataFromLink( link: HTMLAnchorElement ): { entityID: string; propertyID: string } | null {
 		const match = link.href.match( this.hrefRegExp );
 		if ( match && match[ this.ENTITY_ID_REGEX_INDEX ] && match[ this.PROPERTY_ID_REGEX_INDEX ] ) {
 			return {
