@@ -294,6 +294,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 						$databaseTypeIdsStore,
 						$databaseTypeIdsStore,
 						$loadBalancer,
+						$repoDbDomain,
 						$logger
 					)
 				);

@@ -26,6 +26,9 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	/** @var ILoadBalancer */
 	private $lb;
 
+	/** @var bool|string */
+	private $databaseDomain;
+
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -39,17 +42,20 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	 * @param TypeIdsResolver $typeIdsResolver
 	 * @param TypeIdsLookup $typeIdsLookup
 	 * @param ILoadBalancer $lb
+	 * @param string|bool $databaseDomain
 	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
 		TypeIdsResolver $typeIdsResolver,
 		TypeIdsLookup $typeIdsLookup,
 		ILoadBalancer $lb,
+		$databaseDomain = false,
 		LoggerInterface $logger = null
 	) {
 		$this->typeIdsResolver = $typeIdsResolver;
 		$this->typeIdsLookup = $typeIdsLookup;
 		$this->lb = $lb;
+		$this->databaseDomain = $databaseDomain;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -220,7 +226,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 
 	private function getDbr() {
 		if ( $this->dbr === null ) {
-			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA );
+			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA, $this->databaseDomain );
 		}
 
 		return $this->dbr;
