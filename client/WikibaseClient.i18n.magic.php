@@ -108,6 +108,10 @@ $magicWords['hi'] = [
 $magicWords['ko'] = [
 	'noexternallanglinks' => [ 0, '바깥언어링크없음', '바깥언어고리없음' ],
 	'property' => [ 0, '속성' ],
+	'statements' => [ 0, '서술' ],
+	'wbreponame' => [ 0, '위키베이스저장소이름' ],
+	'shortdesc' => [ 1, '짧은설명' ],
+	'shortdesc_noreplace' => [ 0, '대체금지' ],
 ];
 
 /** Luxembourgish (Lëtzebuergesch) */

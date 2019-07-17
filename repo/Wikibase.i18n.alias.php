@@ -280,22 +280,27 @@ $specialPageAliases['ja'] = [
 
 /** Korean (한국어) */
 $specialPageAliases['ko'] = [
+	'AvailableBadges' => [ '사용가능한뱃지' ],
 	'DispatchStats' => [ '전송통계' ],
 	'EntitiesWithoutDescription' => [ '설명없는개체' ],
 	'EntitiesWithoutLabel' => [ '레이블없는개체' ],
 	'EntityData' => [ '개체데이터' ],
+	'EntityPage' => [ '개체문서', '개체페이지' ],
 	'GoToLinkedPage' => [ '링크된문서로가기', '링크된문서로이동' ],
 	'ItemByTitle' => [ '제목별항목' ],
 	'ItemDisambiguation' => [ '레이블별항목', '라벨별항목' ],
 	'ItemsWithoutSitelinks' => [ '사이트링크없는개체' ],
 	'ListDatatypes' => [ '데이터유형목록' ],
+	'ListProperties' => [ '속성목록' ],
 	'MergeItems' => [ '항목병합' ],
 	'MyLanguageFallbackChain' => [ '내언어폴백체인' ],
 	'NewItem' => [ '새항목', '항목만들기' ],
+	'RedirectEntity' => [ '개체넘겨주기', '항목넘겨주기' ],
 	'NewProperty' => [ '새속성', '속성만들기' ],
 	'SetAliases' => [ '별칭설정' ],
 	'SetDescription' => [ '설명설정' ],
 	'SetLabel' => [ '레이블설정' ],
+	'SetLabelDescriptionAliases' => [ '레이블설명별칭설정' ],
 	'SetSiteLink' => [ '사이트링크설정' ],
 ];
 
