@@ -45,4 +45,5 @@ return [
 	 * The final entry should use the key 'max' and applies to all other item IDs.
 	 */
 	'tmpItemTermsMigrationStages' => [ 'max' => MIGRATION_OLD ],
+
 ];

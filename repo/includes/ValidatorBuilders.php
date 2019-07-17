@@ -30,6 +30,7 @@ use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\UrlValidator;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
+use Wikibase\Repo\Validators\WikiLinkExistsValidator;
 
 /**
  * Defines validators for the basic well known data types supported by Wikibase.
@@ -290,6 +291,27 @@ class ValidatorBuilders {
 				$this->tabularDataStorageApiUrl
 			);
 		}
+
+		$topValidator = new DataValueValidator(
+			new CompositeValidator( $validators )
+		);
+
+		return [ new TypeValidator( DataValue::class ), $topValidator ];
+	}
+
+	/**
+	 * @return ValueValidator[]
+	 */
+	public function buildEntitySchemaValidators() {
+		$validators = [];
+		$validators[] = new RegexValidator(
+			'/^E\d+$/u',
+			false,
+			'illegal-entity-schema-title'
+		);
+		$validators[] = new WikiLinkExistsValidator(
+			640
+		);
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators )

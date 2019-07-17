@@ -333,4 +333,6 @@ return [
 	// using the script there.
 	'enablePopulateWithRandomEntitiesAndTermsScript' => false,
 
+	// Namespace id for entity schema data type
+	'entitySchemaNamespace' => 640,
 ];
