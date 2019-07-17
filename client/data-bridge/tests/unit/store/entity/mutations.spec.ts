@@ -21,7 +21,7 @@ describe( 'entity/mutations', () => {
 	} );
 
 	it( ENTITY_REVISION_UPDATE, () => {
-		const state = newEntityState( { revision: 0 } );
+		const state = newEntityState( { baseRevision: 0 } );
 		const revision = 4711;
 		mutations[ ENTITY_REVISION_UPDATE ]( state, revision );
 		expect( state.baseRevision ).toBe( revision );
