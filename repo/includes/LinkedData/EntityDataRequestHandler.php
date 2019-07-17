@@ -198,7 +198,6 @@ class EntityDataRequestHandler {
 		// get entity id and format from request parameter
 		$format = $request->getText( 'format', $format );
 		$id = $request->getText( 'id', $id );
-		$revision = $request->getInt( 'oldid', $revision );
 		$revision = $request->getInt( 'revision', $revision );
 		$redirectMode = $request->getText( 'redirect' );
 		//TODO: malformed revision IDs should trigger a code 400
