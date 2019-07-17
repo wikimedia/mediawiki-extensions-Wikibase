@@ -3,10 +3,20 @@ import HttpStatus from 'http-status-codes';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import jqXHR = JQuery.jqXHR;
 import EntityRepository from '@/definitions/data-access/EntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
+import jqXHR = JQuery.jqXHR;
+import StatementMap from '@/datamodel/StatementMap';
+
+interface SpecialPageApiResponse {
+	entities: {
+		[x: string]: {
+			claims: StatementMap,
+			lastrevid: number,
+		};
+	}
+}
 
 export default class SpecialPageEntityRepository implements EntityRepository {
 	private readonly $: JQueryStatic;
@@ -18,31 +28,30 @@ export default class SpecialPageEntityRepository implements EntityRepository {
 	}
 
 	public getEntity( entityId: string, _rev?: number ): Promise<EntityRevision> {
-		return new Promise<EntityRevision>( ( resolve, reject ) => {
+		return Promise.resolve( this.$.get( this.buildRequestUrl( entityId ) ) )
+			.then( ( data: unknown ): EntityRevision => {
+				if ( !this.isWellFormedResponse( data ) ) {
+					throw new TechnicalProblem( 'Result not well formed.' );
+				}
+				if ( !data.entities[ entityId ] ) {
+					throw new EntityNotFound( 'Result does not contain relevant entity.' );
+				}
+				return new EntityRevision(
+					new Entity( entityId, data.entities[ entityId ].claims ),
+					data.entities[ entityId ].lastrevid,
+				);
+			}, ( error: jqXHR ): never => {
+				if ( error.status && error.status === HttpStatus.NOT_FOUND ) {
+					throw new EntityNotFound( 'Entity flagged missing in response.' );
+				}
 
-			return this.$.get( this.buildRequestUrl( entityId ) )
-				.then( ( data ) => {
-					if ( typeof data !== 'object' || !data.entities ) {
-						reject( new TechnicalProblem( 'Result not well formed.' ) );
-						return;
-					}
-					if ( !data.entities[ entityId ] ) {
-						reject( new EntityNotFound( 'Result does not contain relevant entity.' ) );
-						return;
-					}
-					resolve( new EntityRevision(
-						new Entity( entityId, data.entities[ entityId ].claims ),
-						data.entities[ entityId ].lastrevid,
-					) );
-				} )
-				.catch( ( error: jqXHR ): void => {
-					if ( error.status && error.status === HttpStatus.NOT_FOUND ) {
-						reject( new EntityNotFound( 'Entity flagged missing in response.' ) );
-					}
+				throw new JQueryTechnicalError( error );
+			} );
 
-					reject( new JQueryTechnicalError( error ) );
-				} );
-		} );
+	}
+
+	private isWellFormedResponse( data: unknown ): data is SpecialPageApiResponse {
+		return typeof data === 'object' && data !== null && 'entities' in data;
 	}
 
 	private buildRequestUrl( entityId: string ): string {
