@@ -23,7 +23,7 @@ describe( 'root/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			actions[ BRIDGE_INIT ]( context, {
+			return actions[ BRIDGE_INIT ]( context, {
 				editFlow,
 				targetProperty: '',
 				targetEntity: '',
@@ -41,7 +41,7 @@ describe( 'root/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			actions[ BRIDGE_INIT ]( context, {
+			return actions[ BRIDGE_INIT ]( context, {
 				editFlow: '',
 				targetProperty,
 				targetEntity: '',
@@ -59,7 +59,7 @@ describe( 'root/actions', () => {
 				dispatch: jest.fn(),
 			} );
 
-			actions[ BRIDGE_INIT ]( context, {
+			return actions[ BRIDGE_INIT ]( context, {
 				editFlow: '',
 				targetProperty: '',
 				targetEntity,
