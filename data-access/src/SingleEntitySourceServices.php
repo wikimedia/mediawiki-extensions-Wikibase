@@ -296,7 +296,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 						$loadBalancer,
 						$repoDbDomain,
 						$logger
-					)
+					),
+					$repoDbDomain
 				);
 				$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup(
 					[ 'property' => $propertyTermLookup ],

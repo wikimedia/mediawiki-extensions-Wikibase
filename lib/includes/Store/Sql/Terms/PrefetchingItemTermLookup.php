@@ -30,15 +30,26 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/** @var IDatabase|null */
 	private $dbr;
 
+	/** @var bool|string */
+	private $databaseDomain;
+
 	/** @var array[] serialization -> terms array */
 	private $terms = [];
 
+	/**
+	 * PrefetchingItemTermLookup constructor.
+	 * @param ILoadBalancer $loadBalancer
+	 * @param TermIdsResolver $termIdsResolver
+	 * @param bool|string $databaseDomain
+	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TermIdsResolver $termIdsResolver
+		TermIdsResolver $termIdsResolver,
+		$databaseDomain = false
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->termIdsResolver = $termIdsResolver;
+		$this->databaseDomain = $databaseDomain;
 	}
 
 	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes ) {
@@ -104,7 +115,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 
 	private function getDbr(): IDatabase {
 		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, $this->databaseDomain );
 		}
 		return $this->dbr;
 	}

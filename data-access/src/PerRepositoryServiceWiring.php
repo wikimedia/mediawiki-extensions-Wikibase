@@ -136,7 +136,8 @@ return [
 					$loadBalancer,
 					$repoDbDomain,
 					$logger
-				)
+				),
+				$repoDbDomain
 			);
 			$termLookup = new ByTypeDispatchingPrefetchingTermLookup(
 				[ 'property' => $propertyTermLookup ],
