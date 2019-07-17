@@ -11,14 +11,15 @@
 	},
 	"devDependencies": {
 		"eslint-config-wikimedia": "0.9.0",
-		"eslint-plugin-qunit": "3.3.1",
 		"eslint-plugin-compat": "^2.6.3",
+		"eslint-plugin-qunit": "3.3.1",
 		"grunt": "1.0.3",
 		"grunt-banana-checker": "0.6.0",
 		"grunt-eslint": "21.0.0",
 		"grunt-jsonlint": "1.1.0",
 		"grunt-stylelint": "0.10.1",
 		"stylelint-config-wikimedia": "0.5.0",
+		"vue": "^2.6.10",
 		"wdio-mediawiki": "0.2.0",
 		"wdio-mocha-framework": "0.6.4",
 		"wdio-spec-reporter": "0.1.4",
@@ -29,7 +30,8 @@
 		"extensions/**",
 		"vendor/**",
 		"view/lib/**",
-		"client/data-bridge/"
+		"client/data-bridge/",
+		"lib/resources/vendor/**"
 	],
 	"browserslist": [
 		"ie 11"

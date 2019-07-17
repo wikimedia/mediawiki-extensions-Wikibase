@@ -146,6 +146,12 @@ return call_user_func( function() {
 				'wikibase.api.RepoApiError',
 			]
 		],
+
+		'vue2' => $moduleTemplate + [
+			'scripts' => 'vendor/vue2.common.prod.js',
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
 	];
 
 	$modules = array_merge(

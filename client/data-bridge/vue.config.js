@@ -9,6 +9,14 @@ module.exports = {
 			app: './src/main.ts',
 			init: './src/mediawiki/data-bridge.init.ts',
 		},
+		externals: {
+			vue: {
+				commonjs: 'vue2',
+				commonjs2: 'vue2',
+				amd: 'vue2',
+				root: 'vue2',
+			},
+		},
 	} ),
 	chainWebpack: ( config ) => {
 		config.optimization.delete( 'splitChunks' );
