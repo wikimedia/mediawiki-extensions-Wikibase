@@ -561,8 +561,7 @@ final class WikibaseClient {
 	 */
 	private function getPrefetchingTermLookup() {
 		if ( !$this->prefetchingTermLookup ) {
-			// TODO: This should not assume the TermBuffer instance to be a PrefetchingTermLookup
-			$this->prefetchingTermLookup = $this->getWikibaseServices()->getTermBuffer();
+			$this->prefetchingTermLookup = $this->getWikibaseServices()->getPrefetchingTermLookup();
 		}
 
 		return $this->prefetchingTermLookup;

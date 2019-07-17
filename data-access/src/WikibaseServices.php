@@ -12,6 +12,7 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\StringNormalizer;
 
@@ -116,5 +117,10 @@ interface WikibaseServices {
 	 * @return TermSearchInteractorFactory
 	 */
 	public function getTermSearchInteractorFactory();
+
+	/**
+	 * @return PrefetchingTermLookup
+	 */
+	public function getPrefetchingTermLookup();
 
 }
