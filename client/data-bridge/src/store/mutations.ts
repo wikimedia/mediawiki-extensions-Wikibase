@@ -3,7 +3,9 @@ import Application from '@/store/Application';
 import {
 	PROPERTY_TARGET_SET,
 	EDITFLOW_SET,
+	APPLICATION_STATUS_SET,
 } from '@/store/mutationTypes';
+import ApplicationStatus from '@/store/ApplicationStatus';
 
 export const mutations: MutationTree<Application> = {
 	[ PROPERTY_TARGET_SET ]( state: Application, targetProperty: string ): void {
@@ -12,5 +14,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ EDITFLOW_SET ]( state: Application, editFlow: string ): void {
 		state.editFlow = editFlow;
+	},
+
+	[ APPLICATION_STATUS_SET ]( state: Application, status: ApplicationStatus ): void {
+		state.applicationStatus = status;
 	},
 };

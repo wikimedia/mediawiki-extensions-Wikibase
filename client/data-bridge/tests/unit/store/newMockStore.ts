@@ -12,7 +12,7 @@ export default function newMockStore(
 ): ActionContext<any, any> {
 	return {
 		commit: commit || jest.fn(),
-		dispatch: dispatch || jest.fn(),
+		dispatch: dispatch || jest.fn( () => Promise.resolve() ),
 		state: state || {},
 		getters: getters || {},
 		rootState: rootState || {},

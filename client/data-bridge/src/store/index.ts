@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import Vuex, { StoreOptions, Store } from 'vuex';
+import Vuex, { Store, StoreOptions } from 'vuex';
+import ApplicationStatus from '@/store/ApplicationStatus';
 import Application from '@/store/Application';
 import { actions } from '@/store/actions';
 import { getters } from '@/store/getters';
@@ -15,6 +16,7 @@ export function createStore(): Store<Application> {
 	const state: Application = {
 		targetProperty: '',
 		editFlow: '',
+		applicationStatus: ApplicationStatus.INITIALIZING,
 	};
 
 	const storeBundle: StoreOptions<Application> = {
