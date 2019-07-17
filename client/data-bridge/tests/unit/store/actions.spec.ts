@@ -62,7 +62,7 @@ describe( 'root/actions', () => {
 			} ).then( () => {
 				expect( context.dispatch ).toBeCalledWith(
 					namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
-					targetEntity,
+					{ 'entity': targetEntity },
 				);
 			} );
 		} );
