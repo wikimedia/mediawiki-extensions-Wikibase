@@ -26,9 +26,7 @@ describe( 'init', () => {
 
 	it( 'loads `wikibase.client.data-bridge.app` and adds click handler', () => {
 		const require = jest.fn(),
-			using = jest.fn( () => {
-				return new Promise( ( resolve ) => resolve( require ) );
-			} );
+			using = jest.fn( () => Promise.resolve( require ) );
 		const get = (): any => ( {
 			hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
 		} );
@@ -56,15 +54,13 @@ describe( 'init', () => {
 		} );
 		mockMwEnv( using, get, jest.fn() );
 
-		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => {
-			return {
-				selectElementsToOverload: () => [],
-			};
-		} );
+		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
+			selectElementsToOverload: () => [],
+		} ) );
 
 		init();
-		expect( using ).toBeCalledTimes( 0 );
 
+		expect( using ).toBeCalledTimes( 0 );
 	} );
 
 	it( 'warns on missing hrefRegExp', () => {

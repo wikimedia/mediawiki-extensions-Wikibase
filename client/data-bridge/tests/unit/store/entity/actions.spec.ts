@@ -24,7 +24,7 @@ describe( 'entity/actions', () => {
 			} );
 		} );
 
-		it( `commits to ${ENTITY_UPDATE} on successful Entity lookup`, ( done ) => {
+		it( `commits to ${ENTITY_UPDATE} on successful Entity lookup`, () => {
 			const id = 'Q42';
 			const revisionId = 4711;
 			const entity = newMockableEntityRevision( { id, revisionId } );
@@ -41,12 +41,11 @@ describe( 'entity/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			actions[ ENTITY_INIT ]( context, { entity: id, revision: revisionId } ).then( () => {
+			return actions[ ENTITY_INIT ]( context, { entity: id, revision: revisionId } ).then( () => {
 				expect( context.commit ).toBeCalledWith(
 					ENTITY_UPDATE,
 					entity.entity,
 				);
-				done();
 			} );
 		} );
 
@@ -54,9 +53,7 @@ describe( 'entity/actions', () => {
 			const revisionId = 4711;
 			const entity = newMockableEntityRevision( { revisionId } );
 			services.setEntityRepository( {
-				getEntity: () => {
-					return Promise.resolve( entity );
-				},
+				getEntity: () => Promise.resolve( entity ),
 			} );
 
 			const context = newMockStore( {
