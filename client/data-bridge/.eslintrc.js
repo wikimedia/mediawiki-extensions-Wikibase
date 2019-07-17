@@ -53,6 +53,10 @@ module.exports = {
 		'quote-props': 'off',
 		'valid-jsdoc': 'off',
 
+		// replacing from Wikimedia rule set
+		'semi': 'off',
+		'@typescript-eslint/semi': [ 'error', 'always' ],
+
 		'vue/html-indent': [ 'error', 'tab' ],
 		'vue/max-attributes-per-line': [ 'error', {
 			singleline: 3,
