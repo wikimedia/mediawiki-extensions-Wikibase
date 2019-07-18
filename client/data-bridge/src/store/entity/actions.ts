@@ -12,7 +12,7 @@ import { services } from '@/services';
 export const actions = {
 	[ ENTITY_INIT ](
 		context: ActionContext<EntityState, any>,
-		payload: { entity: string, revision?: number },
+		payload: { entity: string; revision?: number },
 	): Promise<void> {
 		return Promise.resolve(
 			services.getEntityRepository().getEntity( payload.entity, payload.revision ),
