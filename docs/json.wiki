@@ -234,7 +234,7 @@ A Statement record uses the following fields:
 ; type
 : Always ''statement''. (Historically, ''claim'' used to be another valid value here.)
 ; ''mainsnak''
-: If the Statement has the type ''value'', it has a ''mainsnak'' field that contains the Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the Property the Statement is associated with. That is, if a value Statement is provided for Property P17, its main Snak will specify P17 as the Property the value is assigned to.
+: The Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
 ; rank
 : The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either ''preferred'', ''normal'' or ''deprecated''.
 ; qualifiers
