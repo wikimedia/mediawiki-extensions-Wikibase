@@ -255,6 +255,7 @@ A Claim record uses the following fields:
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q30",
                                 "numeric-id": 30
                             },
                             "type": "wikibase-entityid"
@@ -302,6 +303,7 @@ A Snak is represented by providing the following fields:
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q30",
                                 "numeric-id": 30
                             },
                             "type": "wikibase-entityid"
@@ -335,6 +337,7 @@ Strings are given as simple string literals.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q30",
                                 "numeric-id": 30
                             },
                             "type": "wikibase-entityid"
@@ -344,13 +347,10 @@ Entity IDs are used to reference entities on the same repository. They are repre
 by a map structure containing two fields:
 
 * ''entity-type'': defines the type of the entity, such as ''item'' or ''property''.
-* ''numeric-id'': the is the actual ID number.
+* ''id'': the full entity ID.
+* ''numeric-id'': for some entity types, the numeric part of the entity ID.
 
-''WARNING'': ''wikibase-entityid'' may in the future change to be represented as a single
-string literal, or may even be dropped in favor of using the ''string'' value type to reference entities.
-
-''NOTE'': There is currently no reliable mechanism for clients to generate a prefixed ID or a
-URL from the information in the data value.
+''WARNING'': not all entity IDs have a numeric ID – using the full ID is highly recommended.
 
 ===== globecoordinate =====
 
@@ -508,6 +508,7 @@ resulting in a map which associates property IDs with one list of snaks each.
                                                             "datavalue": {
                                                                     "value": {
                                                                             "entity-type": "item",
+                                                                            "id": "Q328",
                                                                             "numeric-id": 328
                                                                     },
                                                                     "type": "wikibase-entityid"
@@ -631,6 +632,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q6342720",
                                 "numeric-id": 6342720
                             },
                             "type": "wikibase-entityid"
@@ -672,6 +674,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                                         "datavalue": {
                                             "value": {
                                                 "entity-type": "item",
+                                                "id": "Q328",
                                                 "numeric-id": 328
                                             },
                                             "type": "wikibase-entityid"
@@ -696,6 +699,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q11299",
                                 "numeric-id": 11299
                             },
                             "type": "wikibase-entityid"
@@ -713,6 +717,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q18419",
                                 "numeric-id": 18419
                             },
                             "type": "wikibase-entityid"
@@ -730,6 +735,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q18424",
                                 "numeric-id": 18424
                             },
                             "type": "wikibase-entityid"
@@ -747,6 +753,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q18426",
                                 "numeric-id": 18426
                             },
                             "type": "wikibase-entityid"
@@ -764,6 +771,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q18432",
                                 "numeric-id": 18432
                             },
                             "type": "wikibase-entityid"
@@ -783,6 +791,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q4911497",
                                 "numeric-id": 4911497
                             },
                             "type": "wikibase-entityid"
@@ -824,6 +833,7 @@ Below is an example of an extract of a complete entity represented in JSON.
                         "datavalue": {
                             "value": {
                                 "entity-type": "item",
+                                "id": "Q607",
                                 "numeric-id": 607
                             },
                             "type": "wikibase-entityid"
