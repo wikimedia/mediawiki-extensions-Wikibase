@@ -32,10 +32,10 @@ describe( 'init', () => {
 		} );
 		mockMwEnv( using, get );
 
-		const entityID = 'Q5';
-		const propertyID = 'P4711';
+		const entityId = 'Q5';
+		const propertyId = 'P4711';
 		const editFlow = EditFlow.OVERWRITE;
-		const testLinkHref = `https://www.wikidata.org/wiki/${entityID}?uselang=en#${propertyID}`;
+		const testLinkHref = `https://www.wikidata.org/wiki/${entityId}?uselang=en#${propertyId}`;
 		document.body.innerHTML = `
 <span data-bridge-edit-flow="${editFlow}">
 	<a rel="nofollow" class="external text" href="${testLinkHref}">a link to be selected</a>
@@ -46,8 +46,8 @@ describe( 'init', () => {
 			testLink!.click();
 
 			const expected: AppInformation = {
-				entityID,
-				propertyID,
+				entityId,
+				propertyId,
 				editFlow,
 			};
 			expect( app.launch ).toHaveBeenCalledWith( expected );

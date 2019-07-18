@@ -12,12 +12,12 @@ export default class BridgeDomElementsSelector {
 		this.hrefRegExp = new RegExp( hrefRegExp );
 	}
 
-	private extractDataFromLink( link: HTMLAnchorElement ): { entityID: string; propertyID: string } | null {
+	private extractDataFromLink( link: HTMLAnchorElement ): { entityId: string; propertyId: string } | null {
 		const match = link.href.match( this.hrefRegExp );
 		if ( match && match[ this.ENTITY_ID_REGEX_INDEX ] && match[ this.PROPERTY_ID_REGEX_INDEX ] ) {
 			return {
-				entityID: match[ this.ENTITY_ID_REGEX_INDEX ],
-				propertyID: match[ this.PROPERTY_ID_REGEX_INDEX ],
+				entityId: match[ this.ENTITY_ID_REGEX_INDEX ],
+				propertyId: match[ this.PROPERTY_ID_REGEX_INDEX ],
 			};
 		}
 

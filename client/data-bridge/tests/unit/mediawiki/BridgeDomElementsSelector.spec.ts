@@ -35,12 +35,12 @@ describe( 'domBridgeElementSelector', () => {
 
 		expect( actualSelectedElementsWithData.length ).toBe( 2 );
 
-		expect( actualSelectedElementsWithData[ 0 ].entityID ).toBe( 'Q4115189' );
-		expect( actualSelectedElementsWithData[ 0 ].propertyID ).toBe( 'P31' );
+		expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( 'Q4115189' );
+		expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( 'P31' );
 		expect( actualSelectedElementsWithData[ 0 ].editFlow ).toBe( 'overwrite' );
 
-		expect( actualSelectedElementsWithData[ 1 ].entityID ).toBe( 'Q11235' );
-		expect( actualSelectedElementsWithData[ 1 ].propertyID ).toBe( 'P314' );
+		expect( actualSelectedElementsWithData[ 1 ].entityId ).toBe( 'Q11235' );
+		expect( actualSelectedElementsWithData[ 1 ].propertyId ).toBe( 'P314' );
 		expect( actualSelectedElementsWithData[ 1 ].editFlow ).toBe( 'overwrite' );
 	} );
 
@@ -107,8 +107,8 @@ describe( 'domBridgeElementSelector', () => {
 
 			expect( actualSelectedElementsWithData.length ).toBe( 1 );
 
-			expect( actualSelectedElementsWithData[ 0 ].entityID ).toBe( expectedEntityId );
-			expect( actualSelectedElementsWithData[ 0 ].propertyID ).toBe( expectedPropertyId );
+			expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( expectedEntityId );
+			expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( expectedPropertyId );
 			expect( actualSelectedElementsWithData[ 0 ].editFlow ).toBe( editFlow );
 		} );
 

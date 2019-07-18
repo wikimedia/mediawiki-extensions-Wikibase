@@ -23,8 +23,8 @@ export default async (): Promise<void> => {
 				event.preventDefault();
 				event.stopPropagation();
 				const information: AppInformation = {
-					entityID: selectedElement.entityID,
-					propertyID: selectedElement.propertyID,
+					entityId: selectedElement.entityId,
+					propertyId: selectedElement.propertyId,
 					editFlow: selectedElement.editFlow,
 				};
 				app.launch( information );
