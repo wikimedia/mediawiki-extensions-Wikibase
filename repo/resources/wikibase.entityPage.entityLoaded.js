@@ -31,7 +31,7 @@
  *     } );
  * } );
  */
-( function () {
+( function ( mwConfig ) {
 	'use strict';
 
 	/**
@@ -58,13 +58,12 @@
 		return Object.freeze( obj );
 	}
 
-	var config = mw.config,
-		entityId = config.get( 'wbEntityId' ),
+	var entityId = mwConfig.get( 'wbEntityId' ),
 		url;
 
 	// Load from Special:EntityData because it gets cached in several layers
-	url = config.get( 'wbRepo' ).url + config.get( 'wbRepo' ).articlePath.replace( /\$1/g, 'Special:EntityData' );
-	url += '/' + entityId + '.json?revision=' + config.get( 'wgRevisionId' );
+	url = mwConfig.get( 'wbRepo' ).url + mwConfig.get( 'wbRepo' ).articlePath.replace( /\$1/g, 'Special:EntityData' );
+	url += '/' + entityId + '.json?revision=' + mwConfig.get( 'wgRevisionId' );
 
 	$.getJSON( url, function ( data ) {
 		var wbEntity;
@@ -80,4 +79,4 @@
 		}
 	} );
 
-}() );
+}( mw.config ) );
