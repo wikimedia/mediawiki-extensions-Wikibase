@@ -31,7 +31,7 @@
  *     } );
  * } );
  */
-( function ( mwConfig ) {
+( function ( mwConfig, mwUri ) {
 	'use strict';
 
 	/**
@@ -59,13 +59,17 @@
 	}
 
 	var entityId = mwConfig.get( 'wbEntityId' ),
-		url;
+		url,
+		specialEntityDataPath;
 
 	// Load from Special:EntityData because it gets cached in several layers
-	url = mwConfig.get( 'wbRepo' ).url + mwConfig.get( 'wbRepo' ).articlePath.replace( /\$1/g, 'Special:EntityData' );
-	url += '/' + entityId + '.json?revision=' + mwConfig.get( 'wgRevisionId' );
+	specialEntityDataPath = mwConfig.get( 'wbRepo' ).url + mwConfig.get( 'wbRepo' ).articlePath.replace(
+		/\$1/g, 'Special:EntityData/' + entityId + '.json'
+	);
+	url = new mwUri( specialEntityDataPath );
+	url.extend( { revision: mwConfig.get( 'wgRevisionId' ) } );
 
-	$.getJSON( url, function ( data ) {
+	$.getJSON( url.toString(), function ( data ) {
 		var wbEntity;
 
 		if ( !data || !data.entities || !data.entities[ entityId ] ) {
@@ -79,4 +83,4 @@
 		}
 	} );
 
-}( mw.config ) );
+}( mw.config, mw.Uri ) );
