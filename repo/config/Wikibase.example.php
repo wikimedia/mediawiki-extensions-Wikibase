@@ -65,6 +65,12 @@ call_user_func( function() {
 
 	// these are the site_group codes as listed in the sites table
 	$wgWBRepoSettings['specialSiteLinkGroups'] = [ 'commons', 'wikidata' ];
+
+	// Example configuration for enabling termbox
+	// both exemplary and used to enable it for CI tests
+	$wgWBRepoSettings['termboxEnabled'] = true;
+	$wgWBRepoSettings['ssrServerUrl'] = 'http://termbox-ssr.example.com';
+	$wgWBRepoSettings['ssrServerTimeout'] = 0.1;
 } );
 
 /*
