@@ -1,4 +1,5 @@
 import MwWindow from '@/@types/mediawiki/MwWindow';
+import AppInformation from '@/definitions/AppInformation';
 import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 
@@ -21,11 +22,12 @@ export default async (): Promise<void> => {
 			selectedElement.link.addEventListener( 'click', ( event: Event ) => {
 				event.preventDefault();
 				event.stopPropagation();
-				app.launch( {
+				const information: AppInformation = {
 					entityID: selectedElement.entityID,
 					propertyID: selectedElement.propertyID,
 					editFlow: selectedElement.editFlow,
-				} );
+				};
+				app.launch( information );
 			} );
 		} );
 	}

@@ -1,4 +1,4 @@
-import EditFlow from '@/datamodel/EditFlow';
+import EditFlow from '@/definitions/EditFlow';
 
 export interface SelectedElement {
 	link: HTMLAnchorElement;

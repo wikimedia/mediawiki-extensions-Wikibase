@@ -1,5 +1,5 @@
+import EditFlow from '@/definitions/EditFlow';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
-import EditFlow from '@/datamodel/EditFlow';
 
 export default class BridgeDomElementsSelector {
 

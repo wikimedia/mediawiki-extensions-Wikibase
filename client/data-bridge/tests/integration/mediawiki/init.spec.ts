@@ -1,3 +1,5 @@
+import AppInformation from '@/definitions/AppInformation';
+import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 
@@ -32,7 +34,7 @@ describe( 'init', () => {
 
 		const entityID = 'Q5';
 		const propertyID = 'P4711';
-		const editFlow = 'overwrite';
+		const editFlow = EditFlow.OVERWRITE;
 		const testLinkHref = `https://www.wikidata.org/wiki/${entityID}?uselang=en#${propertyID}`;
 		document.body.innerHTML = `
 <span data-bridge-edit-flow="${editFlow}">
@@ -43,11 +45,12 @@ describe( 'init', () => {
 		return init().then( () => {
 			testLink!.click();
 
-			expect( app.launch ).toHaveBeenCalledWith( {
+			const expected: AppInformation = {
 				entityID,
 				propertyID,
 				editFlow,
-			} );
+			};
+			expect( app.launch ).toHaveBeenCalledWith( expected );
 		} );
 	} );
 } );
