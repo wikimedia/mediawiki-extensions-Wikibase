@@ -34,17 +34,6 @@
 ( function () {
 	'use strict';
 
-	var wbEntity = mw.config.get( 'wbEntity' );
-
-	if ( typeof mw.config.values === 'object' && 'wbEntity' in mw.config.values ) {
-		mw.log.deprecate(
-			mw.config.values,
-			'wbEntity',
-			mw.config.values.wbEntity,
-			'Use the wikibase.entityPage.entityLoaded hook instead.'
-		);
-	}
-
 	/**
 	 * Copied from https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
 	 *
@@ -69,9 +58,26 @@
 		return Object.freeze( obj );
 	}
 
-	if ( wbEntity ) {
-		// Note this assumes "wbEntity" contains valid JSON, and will throw an error otherwise.
-		mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( deepFreeze( JSON.parse( wbEntity ) ) );
-	}
+	var config = mw.config,
+		entityId = config.get( 'wbEntityId' ),
+		url;
+
+	// Load from Special:EntityData because it gets cached in several layers
+	url = config.get( 'wbRepo' ).url + config.get( 'wbRepo' ).articlePath.replace( /\$1/g, 'Special:EntityData' );
+	url += '/' + entityId + '.json?revision=' + config.get( 'wgRevisionId' );
+
+	$.getJSON( url, function ( data ) {
+		var wbEntity;
+
+		if ( !data || !data.entities || !data.entities[ entityId ] ) {
+			return;
+		}
+		wbEntity = data.entities[ entityId ];
+
+		if ( wbEntity ) {
+			// Note this assumes "wbEntity" contains valid JSON, and will throw an error otherwise.
+			mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( deepFreeze( wbEntity ) );
+		}
+	} );
 
 }() );

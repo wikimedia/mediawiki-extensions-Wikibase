@@ -2,23 +2,12 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use FormatJson;
-use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * @license GPL-2.0-or-later
  */
 class ParserOutputJsConfigBuilder {
-
-	/**
-	 * @var Serializer
-	 */
-	private $entitySerializer;
-
-	public function __construct( Serializer $entitySerializer ) {
-		$this->entitySerializer = $entitySerializer;
-	}
 
 	/**
 	 * @param EntityDocument $entity
@@ -38,20 +27,10 @@ class ParserOutputJsConfigBuilder {
 
 		$configVars = [
 			'wbEntityId' => $entityId,
-			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity ) ),
 			'wgEditSubmitButtonLabelPublish' => $wgEditSubmitButtonLabelPublish,
 		];
 
 		return $configVars;
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return string
-	 */
-	private function getSerializedEntity( EntityDocument $entity ) {
-		return $this->entitySerializer->serialize( $entity );
 	}
 
 }

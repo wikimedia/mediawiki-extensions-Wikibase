@@ -120,6 +120,9 @@ return call_user_func( function() {
 				'wikibase.entityPage.entityLoaded.js',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
+			'dependencies' => [
+				'wikibase',
+			],
 		],
 
 		'wikibase.EntityInitializer' => $moduleTemplate + [
@@ -162,6 +165,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.EntityId',
 				'wikibase.dataTypeStore',
 				'wikibase.entityChangers.EntityChangersFactory',
+				'wikibase.entityPage.entityLoaded',
 				'wikibase.EntityInitializer',
 				'wikibase.experts.getStore',
 				'wikibase.formatters.ApiValueFormatterFactory',
