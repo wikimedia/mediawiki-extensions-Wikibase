@@ -15,7 +15,8 @@ interface BridgeDialog extends Dialog {
  * @see https://doc.wikimedia.org/oojs-ui/master/js/#!/api/OO.ui.Dialog
  */
 export default function prepareContainer( OO: MwWindowOO, $: JQueryStatic, id: string ): BridgeDialog {
-	const BridgeDialog = <any> function ( this: BridgeDialog, config: object ) {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const BridgeDialog: any = function ( this: BridgeDialog, config: object ) {
 		BridgeDialog.parent.call( this, config );
 	};
 	OO.inheritClass( BridgeDialog, OO.ui.Dialog );

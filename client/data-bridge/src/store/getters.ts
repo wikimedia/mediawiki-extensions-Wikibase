@@ -5,7 +5,7 @@ import { NS_ENTITY } from '@/store/namespaces';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 import { ENTITY_ONLY_MAIN_STRING_VALUE } from '@/store/entity/getterTypes';
 
-export const getters: GetterTree<Application, any> = {
+export const getters: GetterTree<Application, Application> = {
 	editFlow( state: Application ): string {
 		return state.editFlow;
 	},
@@ -18,6 +18,7 @@ export const getters: GetterTree<Application, any> = {
 		return state.applicationStatus;
 	},
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	targetValue( _state: Application, getters: any ): string|null {
 		const getter: ( propertyId: string ) => string|null
 			= getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ONLY_MAIN_STRING_VALUE ) ];

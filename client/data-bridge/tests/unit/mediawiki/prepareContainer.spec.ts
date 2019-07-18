@@ -13,7 +13,7 @@ function mockOOEnv(): any {
 	};
 
 	// simulating base Dialog
-	const Dialog = <any> function ( this: any, _config: object ) {
+	const Dialog: any = function ( this: any, _config: object ) {
 		this.initialize();
 	};
 	Dialog.prototype.initialize = function () {

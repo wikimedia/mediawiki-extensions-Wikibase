@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface MwConfig {
 	get( key: string ): any;
 }
@@ -54,3 +55,4 @@ interface MwWindow extends Window {
 }
 
 export default MwWindow;
+/* eslint-enable @typescript-eslint/no-explicit-any */

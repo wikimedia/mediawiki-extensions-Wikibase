@@ -1,4 +1,5 @@
 import { GetterTree } from 'vuex';
+import Application from '@/store/Application';
 import EntityState from '@/store/entity/EntityState';
 import {
 	ENTITY_ID,
@@ -6,7 +7,7 @@ import {
 	ENTITY_REVISION,
 } from '@/store/entity/getterTypes';
 
-export const getters: GetterTree<EntityState, any> = {
+export const getters: GetterTree<EntityState, Application> = {
 	[ ENTITY_ID ]( state: EntityState ): string {
 		return state.id;
 	},
@@ -38,6 +39,8 @@ export const getters: GetterTree<EntityState, any> = {
 		if ( snak.snaktype !== 'value' ) {
 			throw new Error( 'unsupported snak type' );
 		}
+
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const datavalue = snak.datavalue!; // type guard instead of assertion would be neat
 		if ( datavalue.type !== 'string' ) {
 			throw new Error( 'unsupported data value type' );

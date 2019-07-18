@@ -19,7 +19,7 @@ import ApplicationStatus from '@/store/ApplicationStatus';
 
 export const actions = {
 	[ BRIDGE_INIT ](
-		context: ActionContext<Application, any>,
+		context: ActionContext<Application, Application>,
 		payload: {
 			editFlow: string;
 			targetProperty: string;

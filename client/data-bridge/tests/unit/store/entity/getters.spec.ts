@@ -1,4 +1,5 @@
 import { getters } from '@/store/entity/getters';
+import newApplicationState from '../newApplicationState';
 import newEntityState from './newEntityState';
 import {
 	ENTITY_ID,
@@ -10,18 +11,22 @@ import Statement from '@/datamodel/Statement';
 
 describe( 'entity/Getters', () => {
 	it( 'has an id', () => {
-		expect( getters[ ENTITY_ID ]( newEntityState( { id: 'Q123' } ), null, null, null ) )
-			.toBe( 'Q123' );
+		expect( getters[ ENTITY_ID ](
+			newEntityState( { id: 'Q123' } ), null, newApplicationState( {} ), null,
+		) ).toBe( 'Q123' );
 	} );
 	it( 'has a baseRevision id', () => {
-		expect( getters[ ENTITY_REVISION ]( newEntityState( { baseRevision: 23 } ), null, null, null ) )
-			.toBe( 23 );
+		expect( getters[ ENTITY_REVISION ](
+			newEntityState( { baseRevision: 23 } ), null, newApplicationState( {} ), null,
+		) ).toBe( 23 );
 	} );
 
 	describe( ENTITY_ONLY_MAIN_STRING_VALUE, () => {
 		function callGetter( statements: StatementMap|null ): string|null {
 			const entityState = newEntityState( { statements } );
-			return getters[ ENTITY_ONLY_MAIN_STRING_VALUE ]( entityState, null, null, null )( 'P1' );
+			return getters[ ENTITY_ONLY_MAIN_STRING_VALUE ](
+				entityState, null, newApplicationState( {} ), null,
+			)( 'P1' );
 		}
 		const stringStatement: Statement = {
 			id: 'statement ID',

@@ -8,22 +8,26 @@ import ApplicationStatus from '@/store/ApplicationStatus';
 describe( 'root/getters', () => {
 	it( 'has an targetProperty', () => {
 		const targetProperty = 'P23';
+		const applicationState = newApplicationState( { targetProperty } );
 		expect( getters.targetProperty(
-			newApplicationState( { targetProperty } ), null, null, null,
+			applicationState, null, applicationState, null,
 		) ).toBe( targetProperty );
 	} );
 
 	it( 'has an editFlow', () => {
 		const editFlow = 'Heraklid';
+		const applicationState = newApplicationState( { editFlow } );
 		expect( getters.editFlow(
-			newApplicationState( { editFlow } ), null, null, null,
+			applicationState, null, applicationState, null,
 		) ).toBe( editFlow );
 	} );
 
 	it( 'has an application status', () => {
 		const applicationStatus = ApplicationStatus.READY;
-		expect( getters.applicationStatus( newApplicationState( { applicationStatus } ), null, null, null ) )
-			.toBe( ApplicationStatus.READY );
+		const applicationState = newApplicationState( { applicationStatus } );
+		expect( getters.applicationStatus(
+			applicationState, null, applicationState, null,
+		) ).toBe( ApplicationStatus.READY );
 	} );
 
 	it( 'returns the target value', () => {
@@ -33,8 +37,10 @@ describe( 'root/getters', () => {
 				targetProperty,
 				[ namespacedStoreEvent( NS_ENTITY, ENTITY_ONLY_MAIN_STRING_VALUE ) ]: getter,
 			};
-		expect( getters.targetValue( newApplicationState( { targetProperty } ), otherGetters, null, null ) )
-			.toBe( 'a string value' );
+		const applicationState = newApplicationState( { targetProperty } );
+		expect( getters.targetValue(
+			applicationState, otherGetters, applicationState, null,
+		) ).toBe( 'a string value' );
 		expect( getter ).toHaveBeenCalledWith( targetProperty );
 	} );
 } );

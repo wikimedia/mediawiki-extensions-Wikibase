@@ -1,4 +1,5 @@
 import { ActionContext } from 'vuex';
+import Application from '@/store/Application';
 import EntityState from '@/store/entity/EntityState';
 import {
 	ENTITY_INIT,
@@ -11,7 +12,7 @@ import { services } from '@/services';
 
 export const actions = {
 	[ ENTITY_INIT ](
-		context: ActionContext<EntityState, any>,
+		context: ActionContext<EntityState, Application>,
 		payload: { entity: string; revision?: number },
 	): Promise<void> {
 		return Promise.resolve(
