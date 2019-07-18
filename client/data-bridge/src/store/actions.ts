@@ -30,7 +30,7 @@ export const actions = {
 		context.commit( PROPERTY_TARGET_SET, payload.targetProperty );
 		return context.dispatch(
 			namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
-			payload.targetEntity,
+			{ entity: payload.targetEntity },
 		).then( () => {
 			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
 		} ).catch( ( error ) => {
