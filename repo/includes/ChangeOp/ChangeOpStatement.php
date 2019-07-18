@@ -121,6 +121,8 @@ class ChangeOpStatement extends ChangeOpBase {
 		}
 
 		$this->updateSummary( $summary, $oldIndex === null ? 'create' : 'update' );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

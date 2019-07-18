@@ -75,6 +75,8 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 		$this->removeQualifier( $qualifiers, $summary );
 
 		$statement->setQualifiers( $qualifiers );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

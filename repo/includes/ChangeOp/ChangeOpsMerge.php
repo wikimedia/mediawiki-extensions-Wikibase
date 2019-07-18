@@ -155,6 +155,8 @@ class ChangeOpsMerge {
 		//      validation of individual change ops, since we are merging
 		//      two valid items.
 		$this->applyConstraintChecks( $this->toItem, $this->fromItem->getId() );
+
+		return new DummyChangeOpResult();
 	}
 
 	private function generateChangeOps() {

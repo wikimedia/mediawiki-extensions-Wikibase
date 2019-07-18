@@ -112,6 +112,8 @@ class ChangeOpAliases extends ChangeOpBase {
 		$this->updateSummary( $summary, $this->action, $this->languageCode, $this->aliases );
 
 		$this->updateAliases( $entity->getAliasGroups() );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

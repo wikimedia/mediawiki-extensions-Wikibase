@@ -99,6 +99,8 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		} else {
 			$this->setStatement( $statements, $summary );
 		}
+
+		return new DummyChangeOpResult();
 	}
 
 	/**
