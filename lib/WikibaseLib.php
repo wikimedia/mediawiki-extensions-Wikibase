@@ -38,6 +38,12 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseLib', __DIR__ . '/../extension-lib-wip.json' );
 
+call_user_func( function() {
+	global $wgMessagesDirs;
+	// Keep i18n globals so mergeMessageFileList.php doesn't break
+	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
+} );
+
 define( 'WBL_VERSION', '0.5 alpha' );
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
