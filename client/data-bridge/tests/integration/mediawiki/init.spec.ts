@@ -35,6 +35,7 @@ describe( 'init', () => {
 
 			const appConfig: ApplicationConfig = {
 				containerSelector: '#data-bridge-container',
+				specialEntityDataUrl: 'http://localhost/wiki/Special:EntityData',
 			};
 			const appInformation: AppInformation = {
 				entityId,

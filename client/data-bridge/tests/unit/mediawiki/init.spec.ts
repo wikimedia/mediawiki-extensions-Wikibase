@@ -25,7 +25,7 @@ describe( 'init', () => {
 
 		return init().then( () => {
 			expect( using ).toBeCalledTimes( 1 );
-			expect( using ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
+			expect( using ).toBeCalledWith( [ 'wikibase.client.data-bridge.app', 'mw.config.values.wbRepo' ] );
 			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
 			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );
 		} );
