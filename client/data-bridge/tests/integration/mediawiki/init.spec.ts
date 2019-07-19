@@ -2,6 +2,13 @@ import AppInformation from '@/definitions/AppInformation';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
+import ApplicationConfig from '@/definitions/ApplicationConfig';
+
+const mockPrepareContainer = jest.fn();
+jest.mock( '@/mediawiki/prepareContainer', () => ( {
+	__esModule: true, // this property makes it work
+	default: ( oo: any, $: any ) => mockPrepareContainer( oo, $ ),
+} ) );
 
 function mockMwEnv( using: () => Promise<any>, get: () => any ): void {
 	( window as MwWindow ).mw = {
@@ -45,12 +52,19 @@ describe( 'init', () => {
 		return init().then( () => {
 			testLink!.click();
 
-			const expected: AppInformation = {
+			const appConfig: ApplicationConfig = {
+				containerSelector: '#data-bridge-container',
+			};
+			const appInformation: AppInformation = {
 				entityId,
 				propertyId,
 				editFlow,
 			};
-			expect( app.launch ).toHaveBeenCalledWith( expected );
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			expect( app.launch ).toHaveBeenCalledWith(
+				appConfig,
+				appInformation,
+			);
 		} );
 	} );
 } );

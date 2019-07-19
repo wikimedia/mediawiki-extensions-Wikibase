@@ -2,13 +2,17 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import AppInformation from '@/definitions/AppInformation';
 import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
+import prepareContainer from '@/mediawiki/prepareContainer';
+import ApplicationConfig from '@/definitions/ApplicationConfig';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
+const APP_DOM_CONTAINER_ID = 'data-bridge-container';
 
 export default async (): Promise<void> => {
-	const dataBridgeConfig = ( window as MwWindow ).mw.config.get( 'wbDataBridgeConfig' );
+	const mwWindow = window as MwWindow,
+		dataBridgeConfig = mwWindow.mw.config.get( 'wbDataBridgeConfig' );
 	if ( dataBridgeConfig.hrefRegExp === null ) {
-		( window as MwWindow ).mw.log.warn(
+		mwWindow.mw.log.warn(
 			'data bridge config incomplete: dataBridgeHrefRegExp missing',
 		);
 		return;
@@ -16,18 +20,24 @@ export default async (): Promise<void> => {
 	const bridgeElementSelector = new BridgeDomElementsSelector( dataBridgeConfig.hrefRegExp );
 	const linksToOverload: SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
 	if ( linksToOverload.length > 0 ) {
-		const require = await ( window as MwWindow ).mw.loader.using( APP_MODULE ),
+		const require = await mwWindow.mw.loader.using( APP_MODULE ),
 			app = require( APP_MODULE );
 		linksToOverload.map( ( selectedElement: SelectedElement ) => {
 			selectedElement.link.addEventListener( 'click', ( event: Event ) => {
 				event.preventDefault();
 				event.stopPropagation();
+
+				prepareContainer( mwWindow.OO, mwWindow.$, APP_DOM_CONTAINER_ID );
+
+				const configuration: ApplicationConfig = {
+					containerSelector: `#${APP_DOM_CONTAINER_ID}`,
+				};
 				const information: AppInformation = {
 					entityId: selectedElement.entityId,
 					propertyId: selectedElement.propertyId,
 					editFlow: selectedElement.editFlow,
 				};
-				app.launch( information );
+				app.launch( configuration, information );
 			} );
 		} );
 	}

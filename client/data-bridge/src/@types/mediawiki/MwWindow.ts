@@ -19,8 +19,38 @@ interface MediaWiki {
 	log: MwLog;
 }
 
+export interface WindowManager {
+	addWindows( elements: OOElement[] ): void;
+	openWindow( element: OOElement ): void;
+	$element: JQuery;
+}
+
+export interface OOElement {
+	initialize(): void;
+}
+
+export interface Dialog extends OOElement {
+	$body: JQuery;
+	getBodyHeight(): number;
+}
+
+export interface PanelLayout {
+	$element: JQuery;
+}
+
+export interface MwWindowOO {
+	ui: {
+		Dialog: new( options: object ) => Dialog;
+		PanelLayout: new( options: object ) => PanelLayout;
+		WindowManager: new() => WindowManager;
+	};
+	inheritClass( child: any, parent: any ): void; // takes "classes" as arguments
+}
+
 interface MwWindow extends Window {
 	mw: MediaWiki;
+	OO: MwWindowOO;
+	$: JQueryStatic;
 }
 
 export default MwWindow;

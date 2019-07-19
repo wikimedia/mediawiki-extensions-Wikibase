@@ -45,6 +45,7 @@ return call_user_func( function() {
 							[ 'desktop', 'mobile' ] :
 							[],
 						'dependencies' => [
+							'oojs-ui-windows',
 							'mw.config.values.wbDataBridgeConfig',
 						],
 						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
@@ -77,6 +78,9 @@ return call_user_func( function() {
 					[
 						'scripts' => [
 							'data-bridge.common.js'
+						],
+						'styles' => [
+							'data-bridge.app.css',
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
