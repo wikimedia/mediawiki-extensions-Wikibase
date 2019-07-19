@@ -1287,7 +1287,9 @@ final class WikibaseClient {
 			$this->getStore()->getSiteLinkLookup(),
 			$this->siteLookup,
 			$this->getStore()->getEntityLookup(),
-			$this->getSidebarLinkBadgeDisplay()
+			$this->getSidebarLinkBadgeDisplay(),
+			$this->newRepoLinker(),
+			$this->getRepositoryDefinitions()->getDatabaseNames()['']
 		);
 	}
 
