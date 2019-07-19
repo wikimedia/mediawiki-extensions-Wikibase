@@ -5,8 +5,10 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -72,6 +74,28 @@ class ChangeOpDescription extends ChangeOpBase {
 	}
 
 	/**
+	 * @param EntityId|null $entityId
+	 * @param Term|null $oldDescription
+	 * @param Term|null $newDescription
+	 * @return ChangeOpDescriptionResult
+	 */
+	private function buildResult( EntityId $entityId = null, Term $oldDescription = null, Term $newDescription = null ) {
+
+		$isEntityChanged = false;
+		$oldDescriptionText = $oldDescription ? $oldDescription->getText() : '';
+		$newDescriptionText = $newDescription ? $newDescription->getText() : '';
+
+		if ( $newDescription ) {
+			$isEntityChanged = !$newDescription->equals( $oldDescription );
+		} elseif ( $oldDescription ) {
+			// $newDescription is null, but $oldDescription is not so entity has changed for sure
+			$isEntityChanged = true;
+		}
+
+		return new ChangeOpDescriptionResult( $entityId, $this->languageCode, $oldDescriptionText, $newDescriptionText, $isEntityChanged );
+	}
+
+	/**
 	 * @see ChangeOp::apply()
 	 *
 	 * @param EntityDocument $entity
@@ -94,13 +118,22 @@ class ChangeOpDescription extends ChangeOpBase {
 			} else {
 				$this->updateSummary( $summary, 'set', $this->languageCode, $this->description );
 			}
+
+			$oldDescription = $descriptions->getByLanguage( $this->languageCode );
 		} else {
+			$oldDescription = null;
 			$this->updateSummary( $summary, 'add', $this->languageCode, $this->description );
 		}
 
 		$this->updateDescriptions( $descriptions );
 
-		return new DummyChangeOpResult();
+		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
+			$newDescription = $descriptions->getByLanguage( $this->languageCode );
+		} else {
+			$newDescription = null;
+		}
+
+		return $this->buildResult( $entity->getId(), $oldDescription, $newDescription );
 	}
 
 	/**

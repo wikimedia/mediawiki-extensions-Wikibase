@@ -5,6 +5,7 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -96,6 +97,24 @@ class ChangeOpAliases extends ChangeOpBase {
 	}
 
 	/**
+	 * @param EntityId|null $entityId
+	 * @param array $oldAliases
+	 * @param array $newAliases
+	 * @return ChangeOpAliasesResult
+	 */
+	private function buildResult( EntityId $entityId = null, $oldAliases = [], $newAliases = [] ) {
+		//see array_diff documentation
+		if (
+			( $this->action !== "remove" && $newAliases != [] && array_diff( $newAliases, $oldAliases ) === [] ) ||
+			( $this->action === "remove" && array_diff( $oldAliases, $newAliases ) === [] )
+		) {
+			return new ChangeOpAliasesResult( $entityId, $this->languageCode, $oldAliases, $newAliases );
+		}
+
+		return new ChangeOpAliasesResult( $entityId, $this->languageCode, $oldAliases, $newAliases, true );
+	}
+
+	/**
 	 * @see ChangeOp::apply()
 	 *
 	 * @param EntityDocument $entity
@@ -109,11 +128,24 @@ class ChangeOpAliases extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a AliasesProvider' );
 		}
 
+		$aliases = $entity->getAliasGroups();
+		if ( $aliases->hasGroupForLanguage( $this->languageCode ) ) {
+			$oldAliases = $aliases->getByLanguage( $this->languageCode )->getAliases();
+		} else {
+			$oldAliases = [];
+		}
+
 		$this->updateSummary( $summary, $this->action, $this->languageCode, $this->aliases );
 
 		$this->updateAliases( $entity->getAliasGroups() );
 
-		return new DummyChangeOpResult();
+		if ( $aliases->hasGroupForLanguage( $this->languageCode ) ) {
+			$newAliases = $aliases->getByLanguage( $this->languageCode )->getAliases();
+		} else {
+			$newAliases = [];
+		}
+
+		return $this->buildResult( $entity->getId(), $oldAliases, $newAliases );
 	}
 
 	/**
