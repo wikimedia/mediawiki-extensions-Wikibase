@@ -1,30 +1,14 @@
 import AppInformation from '@/definitions/AppInformation';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
-import MwWindow from '@/@types/mediawiki/MwWindow';
 import ApplicationConfig from '@/definitions/ApplicationConfig';
+import { mockMwEnv } from '../../util/mocks';
 
 const mockPrepareContainer = jest.fn();
 jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	__esModule: true, // this property makes it work
 	default: ( oo: any, $: any ) => mockPrepareContainer( oo, $ ),
 } ) );
-
-function mockMwEnv( using: () => Promise<any>, get: () => any ): void {
-	( window as MwWindow ).mw = {
-		loader: {
-			using,
-		},
-		config: {
-			get,
-		},
-		log: {
-			deprecate: jest.fn(),
-			error: jest.fn(),
-			warn: jest.fn(),
-		},
-	};
-}
 
 describe( 'init', () => {
 
@@ -34,10 +18,7 @@ describe( 'init', () => {
 			using = jest.fn( () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} );
-		const get = (): any => ( {
-			hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
-		} );
-		mockMwEnv( using, get );
+		mockMwEnv( using );
 
 		const entityId = 'Q5';
 		const propertyId = 'P4711';
