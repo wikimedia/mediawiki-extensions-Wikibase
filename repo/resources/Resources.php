@@ -122,6 +122,7 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 			'dependencies' => [
 				'wikibase',
+				'mediawiki.Uri',
 			],
 		],
 
