@@ -30,6 +30,8 @@ class NullChangeOp implements ChangeOp {
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		// no op
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

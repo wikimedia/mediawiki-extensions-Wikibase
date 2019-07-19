@@ -97,6 +97,8 @@ class ChangeOpQualifier extends ChangeOpBase {
 		}
 
 		$statement->setQualifiers( $qualifiers );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

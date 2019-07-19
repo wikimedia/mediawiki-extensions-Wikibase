@@ -83,6 +83,8 @@ class ChangeOpStatementRank extends ChangeOpBase {
 				]
 			);
 		}
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

@@ -49,6 +49,7 @@ interface ChangeOp {
 	 * @throws InvalidArgumentException when called with an unexpected entity type.
 	 * @throws ChangeOpException when the change can not be applied to the entity, e.g. because the
 	 *  same data was edited in the meantime.
+	 * @return ChangeOpResult
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null );
 

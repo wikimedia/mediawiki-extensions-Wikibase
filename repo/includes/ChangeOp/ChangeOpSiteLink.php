@@ -137,6 +137,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			$siteLinks->removeLinkWithSiteId( $this->siteId );
 			$siteLinks->addNewSiteLink( $this->siteId, $pageName, $badges );
 		}
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

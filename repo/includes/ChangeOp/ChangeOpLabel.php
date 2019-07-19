@@ -98,6 +98,8 @@ class ChangeOpLabel extends ChangeOpBase {
 		}
 
 		$this->updateLabels( $labels );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

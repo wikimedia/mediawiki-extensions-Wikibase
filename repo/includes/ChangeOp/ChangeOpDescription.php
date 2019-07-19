@@ -99,6 +99,8 @@ class ChangeOpDescription extends ChangeOpBase {
 		}
 
 		$this->updateDescriptions( $descriptions );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**

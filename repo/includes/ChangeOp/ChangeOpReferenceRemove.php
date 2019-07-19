@@ -78,6 +78,8 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 		}
 
 		$statement->setReferences( $references );
+
+		return new DummyChangeOpResult();
 	}
 
 	/**
