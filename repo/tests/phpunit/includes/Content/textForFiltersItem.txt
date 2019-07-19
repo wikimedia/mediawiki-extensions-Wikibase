@@ -1,4 +1,3 @@
-Q123
 label1
 label2
 descen
@@ -25,7 +24,6 @@ P6654
 11
 http://www.wikidata.org/entity/Q1985727
 P6654
-imaguid
 normal
 somevalue
 P987

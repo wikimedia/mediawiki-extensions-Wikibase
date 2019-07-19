@@ -53,6 +53,7 @@ class PropertyContent extends EntityContent {
 			'site',
 			'type',
 			'hash',
+			'id',
 		];
 	}
 
