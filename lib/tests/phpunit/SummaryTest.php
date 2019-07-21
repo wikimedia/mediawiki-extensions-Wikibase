@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Tests;
 
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
 
@@ -14,7 +16,9 @@ use Wikibase\Summary;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class SummaryTest extends \MediaWikiTestCase {
+class SummaryTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	public function testAddAutoCommentArgs() {
 		$summary = new Summary( 'summarytest' );

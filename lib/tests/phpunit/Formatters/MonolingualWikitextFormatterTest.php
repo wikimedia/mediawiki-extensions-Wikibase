@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\MonolingualTextValue;
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
 
 /**
@@ -14,7 +16,9 @@ use Wikibase\Lib\Formatters\MonolingualWikitextFormatter;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class MonolingualWikitextFormatterTest extends \MediaWikiTestCase {
+class MonolingualWikitextFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider monolingualWikitextProvider

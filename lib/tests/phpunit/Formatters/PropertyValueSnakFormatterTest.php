@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
@@ -30,12 +32,13 @@ use Wikibase\Lib\Formatters\UnDeserializableValueFormatter;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
+class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider constructorErrorsProvider

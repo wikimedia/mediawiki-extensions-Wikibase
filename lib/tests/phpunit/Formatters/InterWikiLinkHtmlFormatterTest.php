@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\Lib\Formatters\CommonsLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 
@@ -12,12 +14,13 @@ use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
  * @covers \Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter
  *
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Jonas Kress
  */
-class InterWikiLinkHtmlFormatterTest extends \MediaWikiTestCase {
+class InterWikiLinkHtmlFormatterTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	public function linkFormatProvider() {
 		return [

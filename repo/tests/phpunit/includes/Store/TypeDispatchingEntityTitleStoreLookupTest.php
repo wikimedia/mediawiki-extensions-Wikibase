@@ -2,7 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
-use MediaWikiTestCase;
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -17,7 +18,9 @@ use Wikimedia\Assert\PostconditionException;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class TypeDispatchingEntityTitleStoreLookupTest extends MediaWikiTestCase {
+class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	/**
 	 * @covers \Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup::getLookup
