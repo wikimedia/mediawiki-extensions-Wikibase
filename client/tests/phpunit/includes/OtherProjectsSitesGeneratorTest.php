@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests;
 
 use HashSiteStore;
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Site;
 use SiteLookup;
 use Wikibase\Client\OtherProjectsSitesGenerator;
@@ -19,7 +21,9 @@ use Wikibase\Client\OtherProjectsSitesGenerator;
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */
-class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
+class OtherProjectsSitesGeneratorTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider otherProjectSitesProvider

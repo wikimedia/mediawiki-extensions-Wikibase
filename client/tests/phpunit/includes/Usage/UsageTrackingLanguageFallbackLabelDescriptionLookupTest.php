@@ -2,7 +2,8 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
-use MediaWikiTestCase;
+use MediaWikiCoversValidator;
+use PHPUnit4And6Compat;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -21,7 +22,9 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
+class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\Framework\TestCase {
+	use PHPUnit4And6Compat;
+	use MediaWikiCoversValidator;
 
 	public function provideGetLabel() {
 		return $this->provideGetTermFallback( 'L' );
