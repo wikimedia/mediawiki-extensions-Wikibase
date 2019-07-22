@@ -226,7 +226,7 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 
 	private function getDbr() {
 		if ( $this->dbr === null ) {
-			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA, $this->databaseDomain );
+			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
 		}
 
 		return $this->dbr;

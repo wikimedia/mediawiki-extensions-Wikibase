@@ -115,7 +115,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 
 	private function getDbr(): IDatabase {
 		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, $this->databaseDomain );
+			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
 		}
 		return $this->dbr;
 	}
