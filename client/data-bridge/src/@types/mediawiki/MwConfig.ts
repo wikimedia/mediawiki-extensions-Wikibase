@@ -1,7 +1,9 @@
 import DataBridgeConfig from '@/@types/wikibase/DataBridgeConfig';
+import WbRepo from '@/@types/wikibase/WbRepo';
 
 interface MwConfigValues {
 	wbDataBridgeConfig: DataBridgeConfig;
+	wbRepo: WbRepo;
 }
 
 interface MwConfig {

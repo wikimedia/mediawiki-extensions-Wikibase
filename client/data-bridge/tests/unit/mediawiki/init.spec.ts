@@ -1,22 +1,9 @@
 import init from '@/mediawiki/init';
 import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
-import MwWindow from '@/@types/mediawiki/MwWindow';
-
-function mockMwEnv( using: () => Promise<any>, get: () => any, warn: () => void ): void {
-	( window as MwWindow ).mw = {
-		loader: {
-			using,
-		},
-		config: {
-			get,
-		},
-		log: {
-			deprecate: jest.fn(),
-			error: jest.fn(),
-			warn,
-		},
-	};
-}
+import {
+	mockMwConfig,
+	mockMwEnv,
+} from '../../util/mocks';
 
 jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 	return jest.fn().mockImplementation( () => {} );
@@ -27,10 +14,7 @@ describe( 'init', () => {
 	it( 'loads `wikibase.client.data-bridge.app` and adds click handler', () => {
 		const require = jest.fn(),
 			using = jest.fn( () => Promise.resolve( require ) );
-		const get = (): any => ( {
-			hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
-		} );
-		mockMwEnv( using, get, jest.fn() );
+		mockMwEnv( using );
 
 		const link = {
 			addEventListener: jest.fn(),
@@ -49,10 +33,7 @@ describe( 'init', () => {
 
 	it( 'loads does nothing if no supported links are found', () => {
 		const using = jest.fn();
-		const get = (): any => ( {
-			hrefRegExp: 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
-		} );
-		mockMwEnv( using, get, jest.fn() );
+		mockMwEnv( using );
 
 		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
 			selectElementsToOverload: () => [],
@@ -65,11 +46,8 @@ describe( 'init', () => {
 
 	it( 'warns on missing hrefRegExp', () => {
 		const using = jest.fn();
-		const get = (): any => ( {
-			hrefRegExp: null,
-		} );
 		const warn = jest.fn();
-		mockMwEnv( using, get, warn );
+		mockMwEnv( using, mockMwConfig( { hrefRegExp: null } ), warn );
 
 		init();
 		expect( using ).toBeCalledTimes( 0 );
