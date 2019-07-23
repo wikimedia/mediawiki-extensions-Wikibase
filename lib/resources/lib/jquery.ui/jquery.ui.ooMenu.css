@@ -1,0 +1,25 @@
+/**
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.ui-ooMenu {
+	border: 1px solid #C9C9C9;
+	list-style: none;
+	margin: 0;
+}
+
+.ui-ooMenu li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	clear: left;
+	width: 100%;
+}
+
+.ui-ooMenu li a {
+	display: block;
+}
+
+.ui-ooMenu li.ui-ooMenu-customItem-action {
+	cursor: pointer;
+}
