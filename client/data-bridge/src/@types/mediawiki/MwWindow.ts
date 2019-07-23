@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-interface MwConfig {
-	get( key: string ): any;
-}
+import MwConfig from '@/@types/mediawiki/MwConfig';
 
 interface ResourceLoader {
 	using( module: string|string[] ): Promise<any>;
