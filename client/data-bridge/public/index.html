@@ -6,12 +6,42 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>data-bridge</title>
+    <style>
+      /**
+       * TODO needs to become more clever to properly simulate prod
+       * OO reuse maybe? Also think about breakpoints, base font size
+       */
+      .oo-ui-window-frame {
+        max-height: calc( 100% - 2em );
+        border: 1px solid #a2a9b1;
+        border-radius: 2px;
+        box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.25 );
+        width: 500px;
+        height: 486.2px;
+        margin: auto;
+      }
+      .oo-ui-window-body {
+        overflow: auto;
+        box-sizing: border-box;
+      }
+      .oo-ui-panelLayout-padded {
+        padding: 1.14285714em;
+      }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but data-bridge doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div>
+        <div class="oo-ui-window-frame">
+            <div class="oo-ui-window-body">
+                <div class="oo-ui-panelLayout-padded">
+                    <div id="data-bridge-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>

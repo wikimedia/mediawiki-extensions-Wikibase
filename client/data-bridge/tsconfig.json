@@ -13,6 +13,7 @@
     "noImplicitReturns": true,
     "noUnusedParameters": true,
     "noUnusedLocals": false,
+	"resolveJsonModule": true,
     "baseUrl": ".",
     "types": [
       "webpack-env",
