@@ -12,6 +12,13 @@ docker-compose run --rm node npm install
 docker-compose up
 ```
 
+This uses the values from `.env` for configuration - create a `.env.local` file if you desire diverging values.
+
+* `CSR_PORT` is the port at which you can reach the development server on your machine to live-preview changes to the application
+* `STORYBOOK_PORT` is the port at which you can reach the storybook server on your machine to live-preview changes in the component library
+* `NODE_ENV` is the environment to set for node.js
+
+
 ### Compiles and minifies for production
 ```
 docker-compose run --rm node npm run build
