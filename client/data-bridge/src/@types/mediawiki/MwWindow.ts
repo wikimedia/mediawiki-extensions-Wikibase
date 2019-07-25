@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import MwConfig from '@/@types/mediawiki/MwConfig';
 
 interface ResourceLoader {
