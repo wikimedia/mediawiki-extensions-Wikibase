@@ -47,7 +47,21 @@ export default class App extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+/**
+ * All components' CSS selectors are prefixed by postcss-prefixwrap. This both
+ * * ensures the following reset is restricted to the inside of our application
+ * * allows component styles to overcome this reset
+ */
+@import '~reset-css/sass/_reset';
+
+ul,
+ol { // overcome very strong selector, e.g. .content ul li
+	li {
+		margin: 0;
+	}
+}
+
 .wb-db-app {
 	width: 458px;
 	height: 448px;

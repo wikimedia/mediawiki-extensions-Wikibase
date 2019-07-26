@@ -1,6 +1,6 @@
 module.exports = {
 	plugins: {
-		autoprefixer: {
-		},
+		autoprefixer: {},
+		'postcss-prefixwrap': '.wb-db-app', // base selector; see App.vue
 	},
 };
