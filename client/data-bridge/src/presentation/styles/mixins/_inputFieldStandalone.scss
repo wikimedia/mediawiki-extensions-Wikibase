@@ -1,0 +1,13 @@
+@mixin inputFieldStandalone() {
+	border: 1px solid $border-color-base;
+	border-radius: 2px;
+	padding: 7px;
+
+	&:focus,
+	&:focus-within,
+	&--focus-within {
+		outline: 0;
+		border-color: $color-primary--focus;
+		box-shadow: inset 0 0 0 1px $color-primary--focus;
+	}
+}

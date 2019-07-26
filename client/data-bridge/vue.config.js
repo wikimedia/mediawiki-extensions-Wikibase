@@ -41,7 +41,7 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			sass: {
-				data: '@import "@/styles/_main.scss";',
+				data: '@import "@/presentation/styles/_main.scss";',
 			},
 		},
 	},

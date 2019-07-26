@@ -1,0 +1,16 @@
+@mixin inputFieldBase() {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	resize: none;
+	overflow: auto;
+	background-color: transparent;
+	font-size: inherit;
+	margin: 0;
+	margin-top: 0.75rem;
+
+	&::placeholder {
+		font-style: italic;
+		color: $color-placeholder;
+	}
+}

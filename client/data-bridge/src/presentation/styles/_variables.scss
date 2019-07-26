@@ -1,0 +1,12 @@
+@import '~wikimedia-ui-base/wikimedia-ui-base';
+
+// TODO taken from: https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/src/themes/wikimediaui/common.less
+$base-font-size-desired: 0.875rem;
+
+// TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
+$color-placeholder: $wmui-color-base30;
+
+// project specific
+$breakpoint: 499;
+
+$grid-breakpoints: ( breakpoint: $breakpoint );

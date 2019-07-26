@@ -58,15 +58,13 @@ ol { // overcome very strong selector, e.g. .content ul li
 .wb-db-app {
 	width: 458px;
 	height: 448px;
-	font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;
+	font-family: $font-family-system-sans;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
-}
 
-@media screen and ( max-width: 499px ) {
-	.wb-db-app {
+	@include media-breakpoint-up(breakpoint) {
 		width: 100%;
 		height: 100%;
 	}

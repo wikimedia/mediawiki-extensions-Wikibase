@@ -20,5 +20,3 @@ export default class DataBridge extends Vue {
 	public targetValue!: string;
 }
 </script>
-
-<style scoped></style>
