@@ -35,6 +35,7 @@
     "@typescript-eslint/parser": "^1.13.0",
     "@vue/cli-plugin-babel": "^3.9.2",
     "@vue/cli-plugin-eslint": "^3.9.2",
+    "@types/uuid": "^3.4.5",
     "@vue/cli-plugin-unit-jest": "^3.9.0",
     "@vue/cli-service": "^3.9.3",
     "@vue/eslint-config-typescript": "^4.0.0",
