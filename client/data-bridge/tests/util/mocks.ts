@@ -45,4 +45,5 @@ export function mockMwEnv(
 			warn,
 		},
 	};
+	( window as MwWindow ).$ = new ( jest.fn() )();
 }
