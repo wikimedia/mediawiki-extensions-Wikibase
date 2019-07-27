@@ -15,5 +15,5 @@ export function launch( applicationConfig: ApplicationConfig, information: AppIn
 		applicationConfig.specialEntityDataUrl,
 	) );
 
-	new App( { data: information } ).$mount( applicationConfig.containerSelector );
+	new App( { propsData: information } ).$mount( applicationConfig.containerSelector );
 }
