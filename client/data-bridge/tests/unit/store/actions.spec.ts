@@ -18,7 +18,6 @@ import ApplicationStatus from '@/store/ApplicationStatus';
 
 describe( 'root/actions', () => {
 	describe( BRIDGE_INIT, () => {
-
 		it( `commits to ${EDITFLOW_SET}`, () => {
 			const editFlow = 'Heraklid';
 			const context = newMockStore( {} );
@@ -67,31 +66,32 @@ describe( 'root/actions', () => {
 			} );
 		} );
 
-		it( `commits to ${APPLICATION_STATUS_SET} on successful entity lookup`, () => {
-			const context = newMockStore( {} );
+		describe( 'ApplicationStatus', () => {
+			it( `commits to ${APPLICATION_STATUS_SET} on successful entity lookup`, () => {
+				const context = newMockStore( {} );
 
-			return actions[ BRIDGE_INIT ]( context, {
-				editFlow: 'overwrite',
-				targetProperty: 'P123',
-				targetEntity: 'Q123',
-			} ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+				return actions[ BRIDGE_INIT ]( context, {
+					editFlow: 'overwrite',
+					targetProperty: 'P123',
+					targetEntity: 'Q123',
+				} ).then( () => {
+					expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+				} );
+			} );
+
+			it( `commits to ${APPLICATION_STATUS_SET} on fail entity lookup`, () => {
+				const context = newMockStore( {
+					dispatch: () => Promise.reject(),
+				} );
+
+				return actions[ BRIDGE_INIT ]( context, {
+					editFlow: 'overwrite',
+					targetProperty: 'P123',
+					targetEntity: 'Q123',
+				} ).catch( () => {
+					expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+				} );
 			} );
 		} );
-
-		it( `commits to ${APPLICATION_STATUS_SET} on fail entity lookup`, () => {
-			const context = newMockStore( {
-				dispatch: () => Promise.reject(),
-			} );
-
-			return actions[ BRIDGE_INIT ]( context, {
-				editFlow: 'overwrite',
-				targetProperty: 'P123',
-				targetEntity: 'Q123',
-			} ).catch( () => {
-				expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
-			} );
-		} );
-
 	} );
 } );
