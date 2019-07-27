@@ -1,48 +1,48 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
-		<DataPlaceholder
-			:entity-id="entityId"
-			:property-id="propertyId"
-			:edit-flow="editFlow"
+		<ErrorWrapper v-if="hasError" />
+		<component
+			:is="isInit ? 'DataBridge' : 'Initializing'"
+			v-else
 		/>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import DataPlaceholder from '@/presentation/components/DataPlaceholder.vue';
+import {
+	Component,
+	Vue,
+} from 'vue-property-decorator';
+import DataBridge from '@/presentation/components/DataBridge.vue';
+import Initializing from '@/presentation/components/Initializing.vue';
+import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import {
 	BRIDGE_INIT,
 } from '@/store/actionTypes';
-import {
-	NS_ENTITY,
-} from '@/store/namespaces';
-import {
-	ENTITY_ID,
-} from '@/store/entity/getterTypes';
-import { Getter, namespace } from 'vuex-class';
+import { Getter } from 'vuex-class';
 
 @Component( {
 	components: {
-		DataPlaceholder,
+		DataBridge,
+		ErrorWrapper,
+		Initializing,
 	},
 } )
 export default class App extends Vue {
 	@Getter( 'applicationStatus' )
 	public applicationStatus!: ApplicationStatus;
 
-	@namespace( NS_ENTITY ).Getter( ENTITY_ID )
-	public entityId!: string;
-
-	@Getter( 'editFlow' )
-	public editFlow!: string;
-
-	@Getter( 'targetProperty' )
-	public propertyId!: string;
-
 	public created() {
 		this.$store.dispatch( BRIDGE_INIT );
+	}
+
+	public get isInit() {
+		return this.applicationStatus === ApplicationStatus.READY;
+	}
+
+	public get hasError() {
+		return this.applicationStatus === ApplicationStatus.ERROR;
 	}
 }
 </script>

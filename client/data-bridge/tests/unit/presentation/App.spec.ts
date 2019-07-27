@@ -1,6 +1,9 @@
 import Vuex, { Store } from 'vuex';
 import Entities from '@/mock-data/data/Q42.data.json';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import {
+	createLocalVue,
+	shallowMount,
+} from '@vue/test-utils';
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
@@ -9,21 +12,14 @@ import {
 } from '@/store/actionTypes';
 import {
 	APPLICATION_STATUS_SET,
-	EDITFLOW_SET,
-	PROPERTY_TARGET_SET,
 } from '@/store/mutationTypes';
-import {
-	NS_ENTITY,
-} from '@/store/namespaces';
-import {
-	ENTITY_UPDATE,
-} from '@/store/entity/mutationTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
 import EditFlow from '@/definitions/EditFlow';
-import DataPlaceholder from '@/presentation/components/DataPlaceholder.vue';
+import DataBridge from '@/presentation/components/DataBridge.vue';
+import Initializing from '@/presentation/components/Initializing.vue';
+import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import { services } from '@/services';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -44,7 +40,7 @@ describe( 'App.vue', () => {
 	beforeEach( () => {
 		store = createStore();
 		entityId = 'Q42';
-		propertyId = 'P23';
+		propertyId = 'P349';
 		editFlow = EditFlow.OVERWRITE;
 
 		services.setApplicationInformationRepository( {
@@ -70,64 +66,35 @@ describe( 'App.vue', () => {
 		expect( wrapper.classes() ).toContain( 'wb-db-app' );
 	} );
 
-	it( 'mount Placeholder, when store is ready', () => {
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-		} );
-		expect( wrapper.find( DataPlaceholder ).exists() ).toBeTruthy();
-	} );
-
-	describe( 'property delegation', () => {
-		beforeEach( () => {
+	describe( 'component switch', () => {
+		it( 'mounts DataBridge, when store is ready', () => {
 			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
-		} );
-
-		it( 'delegates entityId to the Placeholder', () => {
-			entityId = 'Q123';
-			store.commit(
-				namespacedStoreEvent( NS_ENTITY, ENTITY_UPDATE ),
-				{
-					id: entityId,
-					statements: {},
-				},
-			);
 			const wrapper = shallowMount( App, {
 				store,
 				localVue,
 			} );
 
-			expect(
-				wrapper.find( DataPlaceholder ).props( 'entityId' ),
-			).toBe( entityId );
+			expect( wrapper.find( DataBridge ).exists() ).toBeTruthy();
 		} );
 
-		it( 'delegates editFlow to the Placeholder', () => {
-			editFlow = EditFlow.OVERWRITE;
-			store.commit( EDITFLOW_SET, editFlow );
-
+		it( 'mounts ErrorWrapper, if a error occures', () => {
+			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 			const wrapper = shallowMount( App, {
 				store,
 				localVue,
 			} );
 
-			expect(
-				wrapper.find( DataPlaceholder ).props( 'editFlow' ),
-			).toBe( editFlow );
+			expect( wrapper.find( ErrorWrapper ).exists() ).toBeTruthy();
 		} );
 
-		it( 'delegates editFlow to the Placeholder', () => {
-			propertyId = 'P42';
-			store.commit( PROPERTY_TARGET_SET, propertyId );
-
+		it( 'mounts Initializing, if the store is not ready', () => {
+			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.INITIALIZING );
 			const wrapper = shallowMount( App, {
 				store,
 				localVue,
 			} );
 
-			expect(
-				wrapper.find( DataPlaceholder ).props( 'propertyId' ),
-			).toBe( propertyId );
+			expect( wrapper.find( Initializing ).exists() ).toBeTruthy();
 		} );
 	} );
 
