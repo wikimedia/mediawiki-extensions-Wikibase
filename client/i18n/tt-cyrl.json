@@ -5,7 +5,8 @@
 			"Умар",
 			"Derslek",
 			"Ильнар",
-			"Marat-avgust"
+			"Marat-avgust",
+			"Ерней"
 		]
 	},
 	"tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
@@ -24,7 +25,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Сез теркәлергә тиешсез",
 	"wikibase-property-notfound": "$1 табылмады",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Яшер",
+	"wikibase-rc-hide-wikidata-hide": "Яшерү",
 	"wikibase-rc-hide-wikidata-show": "Күрсәтү",
 	"wikibase-rc-show-wikidata-pref": "Тикшерелгән үзгәртүләр {{grammar:genitive|{{WBREPONAME}}}} проектының яңа үзгәртүләр исемлегендә курсәтелсен",
 	"wikibase-rc-wikibase-edit-letter": "м",

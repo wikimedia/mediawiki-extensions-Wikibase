@@ -409,6 +409,8 @@
 	"wikibase-entity-not-viewable": "Zadaný typ obsahu „$1“ není entita a Wikibase ho nemůže zobrazit.",
 	"wikibase-pageinfo-subscription": "Wiki odebírající tuto entitu",
 	"wikibase-pageinfo-subscription-none": "Žádné",
+	"wikibase-pageinfo-wb-claims": "Počet tvrzení o této entitě",
+	"wikibase-pageinfo-wb-identifiers": "Počet tvrzení o externích identifikátorech této entity",
 	"wikibase-search-bad-entity-type": "Chybný typ entity: $1",
 	"wikibase-search-namespace-mix": "Směšování jmenných prostorů pro entity a články v jednom vyhledávání není zatím podporováno. Bude se hledat jen ve jmenných prostorech pro entity."
 }

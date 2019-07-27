@@ -416,6 +416,8 @@
 	"wikibase-entity-not-viewable": "סוג התוכן \"$1\" אינו ישות ולכן אי־אפשר להציג אותו בוויקיבייס.",
 	"wikibase-pageinfo-subscription": "אתרי ויקי שמנויים לישות הזאת",
 	"wikibase-pageinfo-subscription-none": "אין",
+	"wikibase-pageinfo-wb-claims": "מספר הקביעות בישות הזאת",
+	"wikibase-pageinfo-wb-identifiers": "מספר קביעות המזהים החיצוניים בישות הזאת",
 	"wikibase-search-bad-entity-type": "סוג ישות רע: $1",
 	"wikibase-search-bad-profile-name": "שם פרופיל חיפוש רע: $1",
 	"wikibase-search-namespace-mix": "כרגע לא ניתן לערבב בין מרחב השם של הישות לבין מרחב השם של הערך. יתבצע חיפוש רק עבור מרחבי השם של הישות.",

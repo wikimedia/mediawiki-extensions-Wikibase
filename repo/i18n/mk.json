@@ -408,6 +408,8 @@
 	"wikibase-entity-not-viewable": "Дадениот тип на содржина „$1“ не претставува Единица и затоа  Викибазата не може да го прикаже.",
 	"wikibase-pageinfo-subscription": "Викија претплатени на оваа единица",
 	"wikibase-pageinfo-subscription-none": "Ниедно",
+	"wikibase-pageinfo-wb-claims": "Број на искази во единицава",
+	"wikibase-pageinfo-wb-identifiers": "Број на искази со надворешни назнаки во единицава",
 	"wikibase-search-bad-entity-type": "Неисправен тип на единица: $1",
 	"wikibase-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1",
 	"wikibase-search-namespace-mix": "Тековно не е поддржано мешањето на именските простори за единица и именски простор во пребарувањата. Ќе се пребараат само единици.",

@@ -428,6 +428,8 @@
 	"wikibase-entity-not-viewable": "O conteúdo fornecido do tipo \"$1\" não é uma Entidade e não pode ser exibido pelo Wikibase.",
 	"wikibase-pageinfo-subscription": "Wikis que subscrevem esta entidade",
 	"wikibase-pageinfo-subscription-none": "Nenhum",
+	"wikibase-pageinfo-wb-claims": "Número de declarações nesta entidade",
+	"wikibase-pageinfo-wb-identifiers": "Número de declarações de identificador externo nesta entidade",
 	"wikibase-search-bad-entity-type": "Tipo da entidade incorreto: $1",
 	"wikibase-search-bad-profile-name": "Nome do perfil de pesquisa ruim: $1",
 	"wikibase-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",

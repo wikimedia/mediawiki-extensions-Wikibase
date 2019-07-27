@@ -4,7 +4,8 @@
 			"ArmenBakkalian",
 			"Azniv Stepanian",
 			"Rajemian",
-			"Kareyac"
+			"Kareyac",
+			"Դավիթ Սարոյան"
 		]
 	},
 	"tooltip-t-wikibase": "Յղում տուեալներու աղբիւրի համապատասխան գրառման",
@@ -22,6 +23,7 @@
 	"wikibase-rc-hide-wikidata-show": "Ցուցնել",
 	"wikibase-rc-wikibase-edit-letter": "Տ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
+	"unconnectedpages": "Նիւթերու չկապուած էջեր",
 	"wikibase-pageinfo-entity-id-none": "Ոչ մէկ",
 	"wikibase-otherprojects": "Այլ նախագիծերու մէջ"
 }

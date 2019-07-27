@@ -418,6 +418,8 @@
 	"wikibase-entity-not-viewable": "O tipo do conteúdo indicado, \"$1\", não é uma entidade e não pode ser apresentado pela extensão Wikibase.",
 	"wikibase-pageinfo-subscription": "Wikis que subscrevem esta entidade",
 	"wikibase-pageinfo-subscription-none": "Nenhuma",
+	"wikibase-pageinfo-wb-claims": "Número de declarações nesta entidade",
+	"wikibase-pageinfo-wb-identifiers": "Número de declarações de identificador externo nesta entidade",
 	"wikibase-search-bad-entity-type": "Tipo de entidade inválido: $1",
 	"wikibase-search-bad-profile-name": "Nome de perfil de pesquisa inválido: $1",
 	"wikibase-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",

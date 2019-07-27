@@ -457,6 +457,8 @@
 	"wikibase-entity-not-viewable": "Le contenu fourni de type \"$1\" n'est pas une Entité ne peut pas être affiché par Wikibase.",
 	"wikibase-pageinfo-subscription": "Wikis abonnés à cette entité",
 	"wikibase-pageinfo-subscription-none": "Aucun",
+	"wikibase-pageinfo-wb-claims": "Nombre de déclarations dans cette entité",
+	"wikibase-pageinfo-wb-identifiers": "Nombre de déclarations d’identifiant externe dans cette entité",
 	"wikibase-search-bad-entity-type": "Type invalide d'entité: $1",
 	"wikibase-search-bad-profile-name": "Nom de profil recherché invalide: $1",
 	"wikibase-search-namespace-mix": "Il n'est actuellement pas autorisé pour une recherche, d'utiliser les espaces de noms des entités avec ceux des articles. La recherche ne sera faite que sur l'espace de noms des entités.",

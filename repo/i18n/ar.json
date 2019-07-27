@@ -27,7 +27,8 @@
 			"Mido",
 			"Ladsgroup",
 			"أحمد",
-			"ديفيد"
+			"ديفيد",
+			"Habib-d"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -429,6 +430,8 @@
 	"wikibase-entity-not-viewable": "المحتوى المعطى من النوع \"$1\" ليس كيانا ولا يمكن عرضه بواسطة Wikibase.",
 	"wikibase-pageinfo-subscription": "الويكيات المشتركة بهذا الكيان",
 	"wikibase-pageinfo-subscription-none": "لا شيء",
+	"wikibase-pageinfo-wb-claims": "عدد التقارير في هذا المجال",
+	"wikibase-pageinfo-wb-identifiers": "عدد تقارير التعريف الخارجية في هذا المجال",
 	"wikibase-search-bad-entity-type": "نوع كيان سيء: $1",
 	"wikibase-search-bad-profile-name": "اسم ملف بحث سيء: $1",
 	"wikibase-search-namespace-mix": "لا يتم حاليا دعم نطاقي الكيانات والمقالات في البحث معا، سيتم البحث في نطاقات الكيانات فقط.",

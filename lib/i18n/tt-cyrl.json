@@ -2,19 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Ильнар",
-			"Marat-avgust"
+			"Marat-avgust",
+			"Ерней"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Википедия",
-	"datatypes-type-string": "Юл",
-	"datatypes-type-quantity": "Микъдары",
+	"datatypes-type-string": "Рәт",
+	"datatypes-type-quantity": "Микъдар",
 	"datatypes-type-monolingualtext": "Бертелле текст",
 	"datatypes-type-multilingualtext": "Күптелле текст",
-	"datatypes-type-number": "Саны",
-	"datatypes-type-mediawiki-title": "MediaWiki исеме",
-	"datatypes-type-unknown": "Ачыкланмаган",
-	"datatypes-type-boolean": "Логик мәгънәсе",
-	"datatypes-type-globe-coordinate": "Географик координаталар",
-	"datatypes-type-time": "Вакыт мәле",
+	"datatypes-type-number": "Сан",
+	"datatypes-type-mediawiki-title": "MediaWiki башисеме",
+	"datatypes-type-unknown": "Аныкланмаган",
+	"datatypes-type-boolean": "Мәгънә",
+	"datatypes-type-globe-coordinate": "Географик координатлар",
+	"datatypes-type-time": "Мизгел",
 	"wikibase-time-precision-10annum": "$1-"
 }

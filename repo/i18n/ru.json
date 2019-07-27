@@ -35,7 +35,8 @@
 			"Vlad5250",
 			"Nk88",
 			"Athena Atterdag",
-			"Diralik"
+			"Diralik",
+			"Saimongoltinio"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -391,5 +392,7 @@
 	"action-property-create": "создание свойств",
 	"right-property-create": "Создание свойств",
 	"wikibase-pageinfo-subscription-none": "Нет",
+	"wikibase-pageinfo-wb-claims": "Количестве утверждений в этом объекте",
+	"wikibase-pageinfo-wb-identifiers": "количестве внешних идентификаторов в этом объекте",
 	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1"
 }
