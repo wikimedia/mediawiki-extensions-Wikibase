@@ -1,28 +1,25 @@
-import MwWindow from '@/@types/mediawiki/MwWindow';
 import {
 	BRIDGE_INIT,
 } from '@/store/actionTypes';
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
-import { services } from '@/services';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
-import ApplicationConfig from '@/definitions/ApplicationConfig';
 import AppInformation from '@/definitions/AppInformation';
+import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
+import ServiceRepositories from '@/services/ServiceRepositories';
 
 Vue.config.productionTip = false;
 
-export function launch( applicationConfig: ApplicationConfig, information: AppInformation ): void {
+export function launch(
+	config: AppConfiguration,
+	information: AppInformation,
+	services: ServiceRepositories,
+): void {
 
-	services.setEntityRepository( new SpecialPageEntityRepository(
-		( window as MwWindow ).$,
-		applicationConfig.specialEntityDataUrl,
-	) );
-
-	const store = createStore();
+	const store = createStore( services );
 	store.dispatch( BRIDGE_INIT, information );
 
 	new App( {
 		store,
-	} ).$mount( applicationConfig.containerSelector );
+	} ).$mount( config.containerSelector );
 }

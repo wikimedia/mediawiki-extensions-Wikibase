@@ -9,10 +9,11 @@ import createEntity from './entity';
 import {
 	NS_ENTITY,
 } from '@/store/namespaces';
+import ServiceRepositories from '@/services/ServiceRepositories';
 
 Vue.use( Vuex );
 
-export function createStore(): Store<Application> {
+export function createStore( services: ServiceRepositories ): Store<Application> {
 	const state: Application = {
 		targetProperty: '',
 		editFlow: '',
@@ -26,7 +27,7 @@ export function createStore(): Store<Application> {
 		mutations,
 		strict: process.env.NODE_ENV !== 'production',
 		modules: {
-			[ NS_ENTITY ]: createEntity(),
+			[ NS_ENTITY ]: createEntity( services.getEntityRepository() ),
 		},
 	};
 

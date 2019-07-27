@@ -1,4 +1,6 @@
-import { ActionContext } from 'vuex';
+import {
+	ActionContext,
+} from 'vuex';
 import Application from '@/store/Application';
 import {
 	BRIDGE_INIT,
