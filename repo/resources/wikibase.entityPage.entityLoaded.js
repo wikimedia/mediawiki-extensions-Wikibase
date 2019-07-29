@@ -63,7 +63,7 @@
 		specialEntityDataPath;
 
 	// Load from Special:EntityData because it gets cached in several layers
-	specialEntityDataPath = mwConfig.get( 'wbRepo' ).url + mwConfig.get( 'wbRepo' ).articlePath.replace(
+	specialEntityDataPath = mwConfig.get( 'wgArticlePath' ).replace(
 		/\$1/g, 'Special:EntityData/' + entityId + '.json'
 	);
 	url = new mwUri( specialEntityDataPath );
