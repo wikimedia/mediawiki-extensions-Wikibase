@@ -5,5 +5,8 @@
 		"no-duplicate-selectors": null,
 		"no-descending-specificity": null,
 		"declaration-no-important": null
-	}
+	},
+	"ignoreFiles": [
+		"lib/resources/lib/**"
+	]
 }

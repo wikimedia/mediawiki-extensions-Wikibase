@@ -1,0 +1,43 @@
+/**
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ * @author Daniel Werner < daniel.a.r.werner@gmail.com >
+ */
+
+.ui-toggler.ui-state-default {
+	background: none;
+	border: 0;
+	color: #0645ad; /* Reset jQuery UI theme color "back" to MediaWiki's standard link color */
+	display: block;
+	margin-top: .5em;
+	white-space: nowrap;
+}
+
+.ui-toggler .ui-toggler-icon,
+.ui-toggler .ui-toggler-label {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.ui-toggler .ui-toggler-label:hover {
+	text-decoration: underline;
+}
+
+.ui-toggler .ui-toggler-icon3dtrans {
+	-webkit-transition: transform .2s ease-out;
+	transition: transform .2s ease-out;
+}
+
+/* rotate toggle icon in ltr languages */
+.ui-toggler.ui-toggler-toggle-collapsed .ui-toggler-icon3dtrans {
+	-webkit-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+/* rotate toggle icon in rtl languages (overwrite above) */
+body.rtl .ui-toggler.ui-toggler-toggle-collapsed .ui-toggler-icon3dtrans {
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+}

@@ -1,0 +1,20 @@
+/**
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.ui-preview-novalue {
+	font-style: italic;
+}
+
+.ui-preview .small-spinner {
+	/* @embed */
+	background-image: url(images/spinner.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: relative;
+	top: 0;
+	left: 0;
+	padding: 10px !important;
+	margin-right: 0.6em;
+}

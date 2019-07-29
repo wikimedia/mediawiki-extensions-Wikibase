@@ -23,6 +23,11 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/lib/resources/wikibase-api/src',
 	];
 
+	$libPaths = [
+		'localBasePath' => __DIR__ . '/lib',
+		'remoteExtPath' => 'Wikibase/lib/resources',
+	];
+
 	$modules = [
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
@@ -149,6 +154,248 @@ return call_user_func( function() {
 
 		'vue2' => $moduleTemplate + [
 			'scripts' => 'vendor/vue2.common.prod.js',
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
+		'jquery.animateWithEvent' => $libPaths + [
+			'scripts' => [
+				'jquery/jquery.animateWithEvent.js',
+			],
+			'dependencies' => [
+				'jquery.AnimationEvent',
+			],
+		],
+
+		'jquery.AnimationEvent' => $libPaths + [
+			'scripts' => [
+				'jquery/jquery.AnimationEvent.js',
+			],
+			'dependencies' => [
+				'jquery.PurposedCallbacks',
+			],
+		],
+
+		'jquery.focusAt' => $libPaths + [
+			'scripts' => [
+				'jquery/jquery.focusAt.js',
+			],
+		],
+
+		'jquery.inputautoexpand' => $libPaths + [
+			'scripts' => [
+				'jquery/jquery.inputautoexpand.js',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+			],
+		],
+
+		'jquery.PurposedCallbacks' => $libPaths + [
+			'scripts' => [
+				'jquery/jquery.PurposedCallbacks.js',
+			],
+		],
+
+		'jquery.event.special.eachchange' => $libPaths + [
+			'scripts' => [
+				'jquery.event/jquery.event.special.eachchange.js'
+			],
+			'dependencies' => [
+				'jquery.client',
+			],
+		],
+
+		'jquery.ui.inputextender' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.inputextender.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.inputextender.css',
+			],
+			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.event.special.eachchange',
+				'jquery.ui.position',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.listrotator' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.listrotator.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.listrotator.css',
+			],
+			'dependencies' => [
+				'jquery.ui.autocomplete', // needs jquery.ui.menu
+				'jquery.ui.widget',
+				'jquery.ui.position',
+			],
+			'messages' => [
+				'valueview-listrotator-manually',
+			],
+		],
+
+		'jquery.ui.ooMenu' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.ooMenu.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.ooMenu.css',
+			],
+			'dependencies' => [
+				'jquery.ui.widget',
+				'jquery.util.getscrollbarwidth',
+				'util.inherit',
+			],
+		],
+
+		'jquery.ui.preview' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.preview.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.preview.css',
+			],
+			'dependencies' => [
+				'jquery.ui.widget',
+				'util.CombiningMessageProvider',
+				'util.HashMessageProvider'
+			],
+		],
+
+		'jquery.ui.suggester' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.suggester.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.suggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.core',
+				'jquery.ui.ooMenu',
+				'jquery.ui.position',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.commonssuggester' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.commonssuggester.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.commonssuggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+				'util.highlightSubstring',
+			],
+		],
+
+		'jquery.ui.languagesuggester' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.languagesuggester.js',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.toggler' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.toggler.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.toggler.css',
+			],
+			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.ui.core',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.unitsuggester' => $libPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.unitsuggester.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.unitsuggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.util.adaptlettercase' => $libPaths + [
+			'scripts' => [
+				'jquery.util/jquery.util.adaptlettercase.js',
+			],
+		],
+
+		'jquery.util.getscrollbarwidth' => $libPaths + [
+			'scripts' => [
+				'jquery.util/jquery.util.getscrollbarwidth.js',
+			],
+		],
+
+		'util.ContentLanguages' => $libPaths + [
+			'scripts' => [
+				'util/util.ContentLanguages.js',
+			],
+			'dependencies' => [
+				'util.inherit',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
+		'util.Extendable' => $libPaths + [
+			'scripts' => [
+				'util/util.Extendable.js',
+			],
+		],
+
+		'util.highlightSubstring' => $libPaths + [
+			'scripts' => [
+				'util/util.highlightSubstring.js',
+			],
+		],
+
+		'util.MessageProvider' => $libPaths + [
+			'scripts' => [
+				'util/util.MessageProvider.js',
+			],
+		],
+		'util.HashMessageProvider' => $libPaths + [
+			'scripts' => [
+				'util/util.HashMessageProvider.js',
+			],
+		],
+		'util.CombiningMessageProvider' => $libPaths + [
+			'scripts' => [
+				'util/util.CombiningMessageProvider.js',
+			],
+		],
+		'util.PrefixingMessageProvider' => $libPaths + [
+			'scripts' => [
+				'util/util.PrefixingMessageProvider.js',
+			],
+		],
+
+		'util.Notifier' => $libPaths + [
+			'scripts' => [
+				'util/util.Notifier.js',
+			],
+		],
+
+		'util.inherit' => $libPaths + [
+			'scripts' => [
+				'util/util.inherit.js',
+			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 

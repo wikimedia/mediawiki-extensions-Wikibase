@@ -49,7 +49,6 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.31c', '<' ) ) {
 
 // Sub-extensions needed by WikibaseClient
 require_once __DIR__ . '/../lib/WikibaseLib.php';
-require_once __DIR__ . '/../view/WikibaseView.php';
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__  . '/autoload.php';
