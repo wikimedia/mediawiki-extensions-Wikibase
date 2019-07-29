@@ -35,6 +35,8 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
+use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\ParserOutput\TermboxView;
@@ -1106,6 +1108,13 @@ final class RepoHooks {
 		$inCacheKey['wb'] = true;
 		$lazyOptions['wb'] = function () {
 			return EntityHandler::PARSER_VERSION;
+		};
+		$defaults['termboxVersion'] = null;
+		$inCacheKey['termboxVersion'] = true;
+		$lazyOptions['termboxVersion'] = function () {
+			return TermboxFlag::getInstance()->shouldRenderTermbox() ?
+				TermboxView::TERMBOX_VERSION :
+				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION;
 		};
 	}
 

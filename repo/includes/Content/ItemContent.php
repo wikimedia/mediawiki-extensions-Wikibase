@@ -6,6 +6,7 @@ use Hooks;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
+use ParserOptions;
 use Title;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
@@ -225,6 +226,12 @@ class ItemContent extends EntityContent {
 		}
 
 		return $properties;
+	}
+
+	protected function getParserOutputFromEntityView( $revisionId = null, ParserOptions $options, $generateHtml = true ) {
+		$output = parent::getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
+		$output->recordOption( 'termboxVersion' );
+		return $output;
 	}
 
 }
