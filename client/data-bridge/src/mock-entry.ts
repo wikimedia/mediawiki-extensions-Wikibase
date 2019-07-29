@@ -25,4 +25,4 @@ services.setEntityRepository(
 	),
 );
 
-new App( { data: information } ).$mount( '#data-bridge-container' );
+new App( { propsData: information } ).$mount( '#data-bridge-container' );

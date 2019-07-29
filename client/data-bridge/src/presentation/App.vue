@@ -13,20 +13,16 @@ import { Component, Vue } from 'vue-property-decorator';
 import DataPlaceholder from '@/presentation/components/DataPlaceholder.vue';
 
 @Component( {
+	props: {
+		entityId: String,
+		propertyId: String,
+		editFlow: String,
+	},
 	components: {
 		DataPlaceholder,
 	},
 } )
-export default class App extends Vue {
-
-	data() {
-		return {
-			entityId: null,
-			propertyId: null,
-			editFlow: null,
-		};
-	}
-}
+export default class App extends Vue {}
 </script>
 
 <style scoped>
