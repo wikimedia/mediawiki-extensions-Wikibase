@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use LogicException;
+use ParserOptions;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
@@ -133,6 +134,12 @@ class PropertyContent extends EntityContent {
 	 */
 	public function isEmpty() {
 		return !$this->isRedirect() && ( !$this->propertyHolder || $this->getProperty()->isEmpty() );
+	}
+
+	protected function getParserOutputFromEntityView( $revisionId = null, ParserOptions $options, $generateHtml = true ) {
+		$output = parent::getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
+		$output->recordOption( 'termboxVersion' );
+		return $output;
 	}
 
 }

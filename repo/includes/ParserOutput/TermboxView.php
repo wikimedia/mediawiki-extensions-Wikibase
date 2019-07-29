@@ -25,6 +25,8 @@ class TermboxView implements CacheableEntityTermsView {
 
 	/* public */ const TERMBOX_MARKUP = 'termbox-markup';
 
+	/* public */ const TERMBOX_VERSION = 2;
+
 	private $fallbackChainFactory;
 	private $renderer;
 	private $specialPageLinker;
