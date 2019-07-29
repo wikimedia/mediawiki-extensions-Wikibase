@@ -5,8 +5,10 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -72,6 +74,27 @@ class ChangeOpLabel extends ChangeOpBase {
 	}
 
 	/**
+	 * @param EntityId|null $entityId
+	 * @param Term|null $oldLabel
+	 * @param Term|null $newLabel
+	 * @return ChangeOpLabelResult
+	 */
+	private function buildResult( EntityId $entityId = null, Term $oldLabel = null, Term $newLabel = null ) {
+		$isEntityChanged = false;
+		$oldLabelText = $oldLabel ? $oldLabel->getText() : '';
+		$newLabelText = $newLabel ? $newLabel->getText() : '';
+
+		if ( $newLabel ) {
+			$isEntityChanged = !$newLabel->equals( $oldLabel );
+		} elseif ( $oldLabel ) {
+			// $newLabel is null, but $oldDescription is not so entity has changed for sure
+			$isEntityChanged = true;
+		}
+
+		return new ChangeOpLabelResult( $entityId, $this->languageCode, $oldLabelText, $newLabelText, $isEntityChanged );
+	}
+
+	/**
 	 * @see ChangeOp::apply()
 	 *
 	 * @param EntityDocument $entity
@@ -93,13 +116,21 @@ class ChangeOpLabel extends ChangeOpBase {
 			} else {
 				$this->updateSummary( $summary, 'set', $this->languageCode, $this->label );
 			}
+			$oldLabel = $labels->getByLanguage( $this->languageCode );
 		} else {
+			$oldLabel = null;
 			$this->updateSummary( $summary, 'add', $this->languageCode, $this->label );
 		}
 
 		$this->updateLabels( $labels );
 
-		return new DummyChangeOpResult();
+		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+			$newLabel = $labels->getByLanguage( $this->languageCode );
+		} else {
+			$newLabel = null;
+		}
+
+		return $this->buildResult( $entity->getId(), $oldLabel, $newLabel );
 	}
 
 	/**

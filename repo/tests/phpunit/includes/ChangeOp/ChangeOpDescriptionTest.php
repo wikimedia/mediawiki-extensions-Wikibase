@@ -9,6 +9,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpDescription;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\ChangeOp\ChangeOpDescriptionResult;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
@@ -69,6 +70,69 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertEquals( $expectedDescription, $entity->getDescriptions()->getByLanguage( 'en' )->getText() );
 		}
+	}
+
+	public function changeOpDescriptionAndResultProvider() {
+		// "INVALID" is invalid
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		$item = new Item( new ItemId( 'Q23' ) );
+		$args = [
+			'set Description is a change' => [
+				$item,
+				new ChangeOpDescription( 'en', 'myNew', $validatorFactory ),
+				new ChangeOpDescriptionResult( $item->getId(), 'en', null, 'myNew', true )
+			],
+			'update Description is a change' => [
+				$item,
+				new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ),
+				new ChangeOpDescriptionResult( $item->getId(), 'en', 'myNew', 'DUPE', true )
+			],
+			'update to existing Description is a no change' => [
+				$item,
+				new ChangeOpDescription( 'en', 'DUPE', $validatorFactory ),
+				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', 'DUPE', false )
+
+			],
+			'set to null is a change' => [
+				$item,
+				new ChangeOpDescription( 'en', null, $validatorFactory ),
+				new ChangeOpDescriptionResult( $item->getId(), 'en', 'DUPE', null, true )
+
+			],
+			'set null to null is a no change' => [
+				$item,
+				new ChangeOpDescription( 'en', null, $validatorFactory ),
+				new ChangeOpDescriptionResult( $item->getId(), 'en', null, null, false )
+
+			]
+		];
+		return $args;
+	}
+
+	/**
+	 * @param Item $item
+	 * @param ChangeOpDescription $changeOpLabel
+	 * @param ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
+	 * @dataProvider changeOpDescriptionAndResultProvider
+	 */
+	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item,  $changeOpLabel,  $expectedChangeOpDescriptionResult ) {
+		$changeOpResult = $changeOpLabel->apply( $item );
+
+		$this->assertEquals( $expectedChangeOpDescriptionResult->isEntityChanged(), $changeOpResult->isEntityChanged() );
+	}
+
+	/**
+	 * @param Item $item
+	 * @param ChangeOpDescription $changeOpLabel
+	 * @param ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
+	 * @dataProvider changeOpDescriptionAndResultProvider
+	 */
+	public function testApplySetsDescriptionsCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpDescriptionResult ) {
+		$changeOpResult = $changeOpLabel->apply( $item );
+
+		$this->assertEquals( $expectedChangeOpDescriptionResult->getNewDescription(), $changeOpResult->getNewDescription() );
+		$this->assertEquals( $expectedChangeOpDescriptionResult->getOldDescription(), $changeOpResult->getOldDescription() );
 	}
 
 	public function validateProvider() {

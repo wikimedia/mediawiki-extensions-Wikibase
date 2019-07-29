@@ -9,6 +9,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\ChangeOp\ChangeOpLabelResult;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 
@@ -69,6 +70,70 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertEquals( $expectedLabel, $entity->getLabels()->getByLanguage( 'en' )->getText() );
 		}
+	}
+
+	public function changeOpLabelAndResultProvider() {
+		// "INVALID" is invalid
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		$item = new Item( new ItemId( 'Q23' ) );
+
+		$args = [
+			'add Label is a change' => [
+				$item,
+				new ChangeOpLabel( 'en', 'myNew', $validatorFactory ),
+				new ChangeOpLabelResult( $item->getId(), 'en', null, 'myNew', true )
+			],
+			'update Label is a change' => [
+				$item,
+				new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ),
+				new ChangeOpLabelResult( $item->getId(), 'en', 'myNew', 'DUPE', true )
+
+			],
+			'add existing label is a no change' => [
+				$item,
+				new ChangeOpLabel( 'en', 'DUPE', $validatorFactory ),
+				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', 'DUPE', false )
+
+			],
+			'set Label to null is a change' => [
+				$item,
+				new ChangeOpLabel( 'en', null, $validatorFactory ),
+				new ChangeOpLabelResult( $item->getId(), 'en', 'DUPE', null, true )
+			],
+			'set null Label to null is a no change' => [
+				$item,
+				new ChangeOpLabel( 'en', null, $validatorFactory ),
+				new ChangeOpLabelResult( $item->getId(), 'en', null, null, false )
+			]
+		];
+
+		return $args;
+	}
+
+	/**
+	 * @param Item $item
+	 * @param ChangeOpLabel $changeOpLabel
+	 * @param ChangeOpLabelResult $expectedChangeOpLabelResult
+	 * @dataProvider changeOpLabelAndResultProvider
+	 */
+	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item,  $changeOpLabel,  $expectedChangeOpLabelResult ) {
+		$changeOpResult = $changeOpLabel->apply( $item );
+
+		$this->assertEquals( $expectedChangeOpLabelResult->isEntityChanged(), $changeOpResult->isEntityChanged() );
+	}
+
+	/**
+	 * @param Item $item
+	 * @param ChangeOpLabel $changeOpLabel
+	 * @param ChangeOpLabelResult $expectedChangeOpLabelResult
+	 * @dataProvider changeOpLabelAndResultProvider
+	 */
+	public function testApplySetsLabelsCorrectlyOnResult( $item,  $changeOpLabel,  $expectedChangeOpLabelResult ) {
+		$changeOpResult = $changeOpLabel->apply( $item );
+
+		$this->assertEquals( $expectedChangeOpLabelResult->getNewLabel(), $changeOpResult->getNewLabel() );
+		$this->assertEquals( $expectedChangeOpLabelResult->getOldLabel(), $changeOpResult->getOldLabel() );
 	}
 
 	public function validateProvider() {

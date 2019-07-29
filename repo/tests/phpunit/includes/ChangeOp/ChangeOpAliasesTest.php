@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use InvalidArgumentException;
 use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOpAliases;
+use Wikibase\Repo\ChangeOp\ChangeOpAliasesResult;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -103,6 +104,98 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertEquals( $expectedAliases, $fingerprint->getAliasGroup( 'en' )->getAliases() );
 		}
+	}
+
+	public function changeOpAliasesAndResultProvider() {
+		// "INVALID" is invalid
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		$enAliases = [ 'en-alias1', 'en-alias2', 'en-alias3' ];
+		$existingEnAliases = [ 'en-existingAlias1', 'en-existingAlias2' ];
+		$itemContent = new ItemContent( new EntityInstanceHolder( new Item() ) );
+		$item = $itemContent->getEntity();
+		$item->setAliases( 'en', $existingEnAliases );
+
+		return [
+			'add new aliases' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', $enAliases, 'add', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					array_merge( $existingEnAliases, $enAliases ),
+					true
+				)
+			],
+			'set new aliases' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', $enAliases, 'set', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					$enAliases,
+					true
+				)
+			],
+			'remove existing aliases' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', $existingEnAliases, 'remove', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					[],
+					true
+				)
+			],
+			'set to no aliases' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', [], 'set', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					[],
+					true
+				)
+			],
+			'add no aliases' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', [], 'add', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					$existingEnAliases,
+					false
+				)
+			],
+			'remove none' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', [], 'remove', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					$existingEnAliases,
+					false
+				)
+			],
+		];
+	}
+
+	/**
+	 * @param Item $item
+	 * @param ChangeOpAliases $changeOpAliases
+	 * @param ChangeOpAliasesResult $expectedChangeOpAliasesResult
+	 * @dataProvider changeOpAliasesAndResultProvider
+	 */
+	public function testApplyReturnsCorrectChangeOpResult( $item,  $changeOpAliases,  $expectedChangeOpAliasesResult ) {
+		$changeOpAliasesResult = $changeOpAliases->apply( $item );
+
+		$this->assertEquals( $expectedChangeOpAliasesResult, $changeOpAliasesResult );
 	}
 
 	public function validateProvider() {
