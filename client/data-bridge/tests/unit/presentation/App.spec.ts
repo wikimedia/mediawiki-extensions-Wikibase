@@ -1,3 +1,4 @@
+import EditFlow from '@/definitions/EditFlow';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import App from '@/presentation/App.vue';
 import DataPlaceholder from '@/presentation/components/DataPlaceholder.vue';
@@ -48,7 +49,7 @@ describe( 'App.vue', () => {
 		} );
 
 		it( 'delegates editFlow to the Placeholder', () => {
-			const editFlow = 'Heraklid ';
+			const editFlow = EditFlow.OVERWRITE;
 			propsData.editFlow = editFlow;
 
 			const wrapper = shallowMount( App, {
