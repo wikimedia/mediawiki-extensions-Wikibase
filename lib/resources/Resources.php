@@ -25,7 +25,7 @@ return call_user_func( function() {
 
 	$libPaths = [
 		'localBasePath' => __DIR__ . '/lib',
-		'remoteExtPath' => 'Wikibase/lib/resources',
+		'remoteExtPath' => 'Wikibase/lib/resources/lib',
 	];
 
 	$modules = [
