@@ -55,9 +55,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Registered for WikibaseClient everywhere, but never loaded.
-		// Depended on by WikibaseLexeme and WikibaseMediaInfo, candidate for
-		// potentially keeping in some form as part of a shared bundle.
 		'jquery.wikibase.entityview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityview.js',
@@ -82,8 +79,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Registered globally by WikibaseClient, but never loaded directly.
-		// Used by PropertySuggester.
 		'jquery.wikibase.referenceview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/jquery.removeClassByRegex.js',
@@ -101,8 +96,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Registered globally by WikibaseClient, but never loaded directly.
-		// Used by PropertySuggester.
 		'jquery.wikibase.statementview' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/snakview/snakview.variations.js',
@@ -174,14 +167,12 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		// FIXME: Registered via WikibaseView on all WikibaseClient wikis, but only used by WikibaseRepo.
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
 			],
 		],
 
-		// FIXME: Registered via WikibaseView on all WikibaseClient wikis, but only used by WikibaseRepo.
 		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
@@ -189,8 +180,6 @@ return call_user_func( function() {
 		],
 
 		// Common styles independent from JavaScript being enabled or disabled.
-		//
-		// FIXME: Registered for WikibaseClient, but only loaded by WikibaseRepo.
 		'wikibase.common' => $moduleTemplate + [
 			'styles' => [
 				// Order must be hierarchical, do not order alphabetically
@@ -210,7 +199,6 @@ return call_user_func( function() {
 			]
 		],
 
-		// FIXME: Registered for WikibaseClient, but only loaded by WikibaseRepo.
 		'wikibase.mobile' => $moduleTemplate + [
 			'styles' => [
 				'wikibase/wikibase.mobile.css'
@@ -221,7 +209,6 @@ return call_user_func( function() {
 			'targets' => 'mobile'
 		],
 
-		// FIXME: Never loaded. Only used by wikibase.ui.entityViewInit (WikibaseRepo).
 		'wikibase.RevisionStore' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/wikibase.RevisionStore.js',
@@ -240,7 +227,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		// FIXME: Never loaded. Only used by wikibase.formatters.ApiValueFormatterFactory (WikibaseRepo).
 		'wikibase.ValueFormatterFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/wikibase.ValueFormatterFactory.js',
@@ -251,8 +237,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Registered but never used on WikibaseClient.
-		// Only used by WikibaseRepo and WikibaseLexeme.
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/entityChangers/namespace.js',
@@ -276,8 +260,6 @@ return call_user_func( function() {
 			]
 		],
 
-		// FIXME: Registered on WikibaseClient but never loaded.
-		// Only used by WikibaseRepo (wikibase.ui.entityViewInit).
 		'wikibase.entityIdFormatter' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/entityIdFormatter/namespace.js',
@@ -294,7 +276,6 @@ return call_user_func( function() {
 			]
 		],
 
-		// FIXME: Never loaded. Only used by wikibase.ui.entityViewInit (WikibaseRepo).
 		'wikibase.store.EntityStore' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/store/store.js',
@@ -309,8 +290,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Never loaded. Used indirectly by WikibaseMediaInfo.
-		// TODO: Decide which shared module to bundle this with.
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
@@ -348,7 +327,6 @@ return call_user_func( function() {
 			]
 		],
 
-		// FIXME: Registered by WikibaseClient, but never used. Used by WikibaseRepo.
 		'wikibase.view.StructureEditorFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/StructureEditorFactory.js',
 			'dependencies' => [
@@ -356,7 +334,6 @@ return call_user_func( function() {
 			]
 		],
 
-		// FIXME: Registered by WikibaseClient, but never used. Used by WikibaseRepo.
 		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
@@ -391,8 +368,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Not loaded directly by either of WikibaseRepo or WikibaseClient.
-		// But is referenced internally by WikibaseLexeme.
 		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/view/ViewController.js',
@@ -413,8 +388,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Not loaded directly by either of WikibaseRepo or WikibaseClient.
-		// But is referenced internally by WikibaseLexeme.
 		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
 			'dependencies' => [
@@ -423,7 +396,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: Registered on all pages via WikibaseClient but only loaded on WikibaseRepo
 		'wikibase.view.ViewFactoryFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/ViewFactoryFactory.js',
 			'dependencies' => [
