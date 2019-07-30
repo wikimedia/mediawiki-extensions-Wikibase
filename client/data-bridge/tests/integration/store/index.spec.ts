@@ -1,4 +1,5 @@
 import EntityRevision from '@/datamodel/EntityRevision';
+import AppInformation from '@/definitions/AppInformation';
 import { services } from '@/services';
 import { createStore } from '@/store';
 import { BRIDGE_INIT } from '@/store/actionTypes';
@@ -31,15 +32,20 @@ describe( 'store', () => {
 				};
 			},
 		} );
+		services.setApplicationInformationRepository( {
+			getInformation: (): Promise<AppInformation> => {
+				return Promise.resolve( {
+					editFlow: 'overwrite',
+					propertyId: 'P31',
+					entityId: 'Q42',
+				} as AppInformation );
+			} } );
+
 		const store = createStore();
 
 		expect( store.getters.targetValue ).toBe( null );
 
-		return store.dispatch( BRIDGE_INIT, {
-			editFlow: 'overwrite',
-			targetProperty: 'P31',
-			targetEntity: 'Q42',
-		} ).then( () => {
+		return store.dispatch( BRIDGE_INIT ).then( () => {
 			expect( store.getters.targetValue ).toBe( 'a string value' );
 		} );
 	} );
