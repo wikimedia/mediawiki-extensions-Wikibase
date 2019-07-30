@@ -4873,6 +4873,20 @@ function () {
         throw new Error('EntityRepository is undefined');
       }
     }
+  }, {
+    key: "setApplicationInformationRepository",
+    value: function setApplicationInformationRepository(lookup) {
+      this.applicationInformationRepository = lookup;
+    }
+  }, {
+    key: "getApplicationInformationRepository",
+    value: function getApplicationInformationRepository() {
+      if (this.applicationInformationRepository) {
+        return this.applicationInformationRepository;
+      } else {
+        throw new Error('ApplicationInformationRepository is undefined');
+      }
+    }
   }]);
 
   return ServiceRepositories;
