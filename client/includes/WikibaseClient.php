@@ -318,6 +318,7 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'sharedCacheDuration' ),
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
+				$this->settings->getSetting( 'entitySchemaNamespace' ),
 				$entityTitleLookup,
 				$kartographerEmbeddingHandler,
 				$this->settings->getSetting( 'useKartographerMaplinkInWikitext' )

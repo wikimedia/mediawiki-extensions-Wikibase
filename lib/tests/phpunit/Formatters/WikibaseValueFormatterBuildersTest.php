@@ -104,6 +104,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			self::CACHE_TTL_IN_SECONDS,
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( EntityRevisionLookup::class ),
+			1,
 			$entityTitleLookup,
 			$this->newKartographerEmbeddingHandler(),
 			true
@@ -195,6 +196,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			'newCommonsMediaFormatter',
 			'newGeoShapeFormatter',
 			'newTabularDataFormatter',
+			'newEntitySchemaFormatter',
 			'newEntityIdFormatter',
 			'newMonolingualFormatter',
 			'newTimeFormatter',
@@ -381,6 +383,28 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					'[//commons2.wikimedia.org/wiki/Data:TabularData.tab Data:TabularData.tab]',
 					'@'
 				) . '@',
+			],
+			// entity-schema
+			'plain entity-schema' => [
+				'EntitySchema',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new StringValue( 'E45' ),
+				'@^E45$@',
+			],
+			'html entity-schema' => [
+				'EntitySchema',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( 'E45' ),
+				'@^<a href=".+?:E45">E45</a>$@',
+			],
+			'wikitext entity-schema' => [
+				'EntitySchema',
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions(),
+				new StringValue( 'E45' ),
+				'@^\[\[.+?:E45\|E45]]$@',
 			],
 			// GlobeCoordinate
 			'plain coordinate' => [

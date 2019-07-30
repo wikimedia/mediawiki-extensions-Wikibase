@@ -631,6 +631,7 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'sharedCacheDuration' ),
 			$this->getEntityLookup(),
 			$this->getEntityRevisionLookup(),
+			$this->settings->getSetting( 'entitySchemaNamespace' ),
 			$this->getEntityTitleLookup(),
 			$this->getKartographerEmbeddingHandler(),
 			$this->settings->getSetting( 'useKartographerMaplinkInWikitext' )
