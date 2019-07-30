@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorWrapper renders correctly 1`] = `
+<section
+  class="wb-db-error"
+>
+  <h1>
+    An error occurred
+  </h1>
+</section>
+`;
