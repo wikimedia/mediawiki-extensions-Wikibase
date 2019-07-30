@@ -95,6 +95,7 @@
 	"wikibase-entityselector-more": "кхин",
 	"wikibase-entityselector-notfound": "ХӀума цакарина",
 	"wikibase-validator-sitelink-conflict": "$1 хьажорг хӀинцале $2 элементас лелош ю. Хьа йиш ю $2 чура и дӀаяккха, и оцу чохь хилла езаш яцахь, я элементаш вовшахтоха, уьш цхьаттера елахь.",
+	"wikibase-wikibaserepopage-invalid-langcode": "Евзаш йоцу меттан код «$1». Дехар-до, лелае системехь евзаш йолчарах цхьаъ меттан код, масала «ce».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 дӀасахьажорг.",
 	"special-itembytitle": "Элементаш коьртамогӀомца",
 	"wikibase-itembytitle-lookup-fieldset": "Лаха элемент сайтаца а, коьртамгӀанца а",
