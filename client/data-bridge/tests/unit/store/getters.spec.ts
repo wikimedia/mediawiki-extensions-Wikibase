@@ -4,7 +4,7 @@ import { getters } from '@/store/getters';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 import { NS_ENTITY } from '@/store/namespaces';
 import newApplicationState from './newApplicationState';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 describe( 'root/getters', () => {
 	it( 'has an targetProperty', () => {

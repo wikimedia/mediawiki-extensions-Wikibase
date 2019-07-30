@@ -2,7 +2,7 @@ import {
 	NS_ENTITY,
 } from './namespaces';
 import EntityState from '@/store/entity/EntityState';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 interface Application {
 	editFlow: string;

@@ -7,7 +7,7 @@ import {
 } from '@/store/mutationTypes';
 import Application from '@/store/Application';
 import newApplicationState from './newApplicationState';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 describe( 'root/mutations', () => {
 	it( 'changes the targetProperty of the store', () => {

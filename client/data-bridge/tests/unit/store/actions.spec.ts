@@ -15,7 +15,7 @@ import {
 } from '@/store/mutationTypes';
 import newMockStore from './newMockStore';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 describe( 'root/actions', () => {
 	describe( BRIDGE_INIT, () => {

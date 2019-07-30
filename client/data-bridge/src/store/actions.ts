@@ -15,7 +15,7 @@ import {
 	ENTITY_INIT,
 } from '@/store/entity/actionTypes';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 export const actions = {
 	[ BRIDGE_INIT ](

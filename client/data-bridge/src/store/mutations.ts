@@ -5,7 +5,7 @@ import {
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
 } from '@/store/mutationTypes';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 export const mutations: MutationTree<Application> = {
 	[ PROPERTY_TARGET_SET ]( state: Application, targetProperty: string ): void {

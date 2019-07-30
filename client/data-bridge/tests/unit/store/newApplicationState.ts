@@ -1,6 +1,6 @@
 import lockState from './lockState';
 import Application from '@/store/Application';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 export default function ( fields?: any ): Application {
 	let AppState: Application = {

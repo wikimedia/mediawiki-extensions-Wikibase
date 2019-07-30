@@ -1,6 +1,6 @@
 import { GetterTree } from 'vuex';
 import Application from '@/store/Application';
-import ApplicationStatus from '@/store/ApplicationStatus';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { NS_ENTITY } from '@/store/namespaces';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 import { ENTITY_ONLY_MAIN_STRING_VALUE } from '@/store/entity/getterTypes';
