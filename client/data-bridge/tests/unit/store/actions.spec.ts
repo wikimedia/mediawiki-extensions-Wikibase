@@ -1,3 +1,4 @@
+import EditFlow from '@/definitions/EditFlow';
 import { actions } from '@/store/actions';
 import {
 	NS_ENTITY,
@@ -20,7 +21,7 @@ describe( 'root/actions', () => {
 	describe( BRIDGE_INIT, () => {
 
 		it( `commits to ${EDITFLOW_SET}`, () => {
-			const editFlow = 'Heraklid';
+			const editFlow = EditFlow.OVERWRITE;
 			const context = newMockStore( {} );
 
 			return actions[ BRIDGE_INIT ]( context, {

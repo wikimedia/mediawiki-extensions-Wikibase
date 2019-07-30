@@ -1,3 +1,4 @@
+import EditFlow from '@/definitions/EditFlow';
 import { ENTITY_ONLY_MAIN_STRING_VALUE } from '@/store/entity/getterTypes';
 import { getters } from '@/store/getters';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
@@ -15,7 +16,7 @@ describe( 'root/getters', () => {
 	} );
 
 	it( 'has an editFlow', () => {
-		const editFlow = 'Heraklid';
+		const editFlow = EditFlow.OVERWRITE;
 		const applicationState = newApplicationState( { editFlow } );
 		expect( getters.editFlow(
 			applicationState, null, applicationState, null,

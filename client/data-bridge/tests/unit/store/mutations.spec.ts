@@ -1,3 +1,4 @@
+import EditFlow from '@/definitions/EditFlow';
 import { mutations } from '@/store/mutations';
 import {
 	PROPERTY_TARGET_SET,
@@ -16,9 +17,10 @@ describe( 'root/mutations', () => {
 	} );
 
 	it( 'changes the editFlow of the store', () => {
-		const store: Application = newApplicationState();
-		mutations[ EDITFLOW_SET ]( store, 'Heraklid' );
-		expect( store.editFlow ).toBe( 'Heraklid' );
+		const store: Application = newApplicationState(),
+			editFlow: EditFlow = EditFlow.OVERWRITE;
+		mutations[ EDITFLOW_SET ]( store, editFlow );
+		expect( store.editFlow ).toBe( editFlow );
 	} );
 
 	it( 'changes the applicationStatus of the store', () => {
