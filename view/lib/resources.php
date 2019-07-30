@@ -500,8 +500,6 @@ return call_user_func( function() {
 			],
 		],
 
-		// FIXME: This module is registered on WikibaseClient on all page views,
-		// but only used in WikibaseRepo.
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueParsers/parsers/ValueParser.js',
