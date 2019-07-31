@@ -73,10 +73,8 @@ return call_user_func( function() {
 
 		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
 			'scripts' => [
+				'namespace.js',
 				'RepoApi.js',
-			],
-			'dependencies' => [
-				'wikibase.api.__namespace',
 			],
 			'targets' => [
 				'desktop',
@@ -86,6 +84,7 @@ return call_user_func( function() {
 
 		'wikibase.api.RepoApiError' => $wikibaseApiPaths + [
 			'scripts' => [
+				'namespace.js',
 				'RepoApiError.js',
 			],
 			'messages' => [
@@ -99,16 +98,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'util.inherit',
-				'wikibase.api.__namespace',
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
-			],
-		],
-		'wikibase.api.__namespace' => $wikibaseApiPaths + [
-			'scripts' => [
-				'namespace.js'
 			],
 			'targets' => [
 				'desktop',
@@ -118,23 +107,23 @@ return call_user_func( function() {
 
 		'wikibase.api.FormatValueCaller' => $wikibaseApiPaths + [
 			'scripts' => [
+				'namespace.js',
 				'FormatValueCaller.js',
 			],
 			'dependencies' => [
 				'dataValues.DataValue',
-				'wikibase.api.__namespace',
 				'wikibase.api.RepoApiError',
 			]
 		],
 
 		'wikibase.api.getLocationAgnosticMwApi' => $wikibaseApiPaths + [
 			'scripts' => [
+				'namespace.js',
 				'getLocationAgnosticMwApi.js',
 			],
 			'dependencies' => [
 				'mediawiki.api',
 				'mediawiki.ForeignApi',
-				'wikibase.api.__namespace',
 			],
 			'targets' => [
 				'desktop',
@@ -144,10 +133,10 @@ return call_user_func( function() {
 
 		'wikibase.api.ParseValueCaller' => $wikibaseApiPaths + [
 			'scripts' => [
+				'namespace.js',
 				'ParseValueCaller.js',
 			],
 			'dependencies' => [
-				'wikibase.api.__namespace',
 				'wikibase.api.RepoApiError',
 			]
 		],
