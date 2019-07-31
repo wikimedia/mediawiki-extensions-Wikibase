@@ -115,6 +115,7 @@ class ItemContent extends EntityContent {
 			'site',
 			'type',
 			'hash',
+			'id',
 		];
 	}
 
