@@ -52,6 +52,7 @@ class PropertyContent extends EntityContent {
 			'language',
 			'site',
 			'type',
+			'hash',
 		];
 	}
 
