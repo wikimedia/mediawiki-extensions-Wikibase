@@ -57,8 +57,8 @@ class ByIdDispatchingItemTermStoreTest extends TestCase {
 
 		$store = new ByIdDispatchingItemTermStore( [
 			1000 => $store1,
-			100000 => $store2,
 			200000 => $store3,
+			100000 => $store2,
 			Int32EntityId::MAX => $store4,
 		] );
 
