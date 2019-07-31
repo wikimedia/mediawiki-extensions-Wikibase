@@ -26,8 +26,8 @@ class ByIdDispatchingItemTermStore implements ItemTermStore {
 	 * The dispatcher iterates over this array,
 	 * dispatching to the first store whose key is greater than
 	 * or equal to the numeric item ID for which the store is called.
-	 * It follows that entries should be in ascending order by key,
-	 * and the final one should cover all possible IDs.
+	 * It orders the key entries so the lowest one wins first.
+	 * At least one of the keys must cover all possible IDs.
 	 * Example:
 	 *
 	 * [ 1000000 => $newStore, 2000000 => $mixedStore, Int32EntityId::MAX => $oldStore ]
@@ -40,6 +40,7 @@ class ByIdDispatchingItemTermStore implements ItemTermStore {
 		);
 		Assert::parameter( $itemTermStores !== [], '$itemTermStores', 'must not be empty' );
 		$this->itemTermStores = $itemTermStores;
+		ksort( $this->itemTermStores );
 	}
 
 	private function getItemTermStore( ItemId $itemId ): ItemTermStore {
