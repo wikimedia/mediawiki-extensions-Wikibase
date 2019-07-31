@@ -161,6 +161,33 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 
+	public function testApplyReturnsCorrectChangeOpResult() {
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		$item = new Item();
+		$changeOps = new ChangeOps();
+		$changeOpsArray = [
+			new ChangeOpLabel( 'en', 'newLabel', $validatorFactory ),
+			new ChangeOpDescription( 'en', 'newDescription', $validatorFactory )
+		];
+		$changeOps->add( $changeOpsArray );
+		$changeOpsResult = $changeOps->apply( $item->copy() );
+
+		$changeOpsResultsArray = [
+			$changeOpsArray[0]->apply( $item->copy() ),
+			$changeOpsArray[1]->apply( $item->copy() ),
+		];
+
+		$actualChangeOpsResult = [
+			$changeOpsResult->isEntityChanged(),
+			$changeOpsResult->getChangeOpsResults(),
+			$changeOpsResult->getEntityId()
+		];
+		$expectedChangeOpsResult = [ true, $changeOpsResultsArray, $item->getId() ];
+
+		$this->assertEquals( $expectedChangeOpsResult, $actualChangeOpsResult );
+	}
+
 	public function testValidate_() {
 		$item = new Item();
 

@@ -105,7 +105,7 @@ class ChangeOpAliases extends ChangeOpBase {
 	private function buildResult( EntityId $entityId = null, $oldAliases = [], $newAliases = [] ) {
 		//see array_diff documentation
 		if (
-			( $this->action !== "remove" && $newAliases != [] && array_diff( $newAliases, $oldAliases ) === [] ) ||
+			( $this->action !== "remove" && $newAliases !== [] && array_diff( $newAliases, $oldAliases ) === [] ) ||
 			( $this->action === "remove" && array_diff( $oldAliases, $newAliases ) === [] )
 		) {
 			return new ChangeOpAliasesResult( $entityId, $this->languageCode, $oldAliases, $newAliases );
