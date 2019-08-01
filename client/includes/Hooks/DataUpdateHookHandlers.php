@@ -4,6 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use DeferredUpdates;
+use InvalidArgumentException;
 use JobQueueGroup;
 use LinksUpdate;
 use LogEntry;
@@ -14,6 +15,7 @@ use Title;
 use User;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
@@ -158,7 +160,7 @@ class DataUpdateHookHandlers {
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		$usages = $usageAcc->getUsages();
+		$usages = $this->reindexEntityUsages( $usageAcc->getUsages() );
 		if ( $usages === [] ) {
 			// no usages or no title, bail out
 			return;
@@ -171,13 +173,40 @@ class DataUpdateHookHandlers {
 		// schedule the usage updates in the job queue, to avoid writing to the database
 		// during a GET request.
 
-		$currentUsages = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
-		if ( $currentUsages == $usages ) {
+		$currentUsages = $this->reindexEntityUsages(
+			$this->usageLookup->getUsagesForPage( $title->getArticleID() )
+		);
+		$newUsages = array_diff_key( $usages, $currentUsages );
+		if ( $newUsages === [] ) {
 			return;
 		}
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usages );
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $newUsages );
 		$this->jobScheduler->lazyPush( $addUsagesForPageJob );
+	}
+
+	/**
+	 * Re-indexes the given list of EntityUsages so that each EntityUsage can be found by using its
+	 * string representation as a key.
+	 *
+	 * @param EntityUsage[] $usages
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityUsage[]
+	 */
+	private function reindexEntityUsages( array $usages ) {
+		$reindexed = [];
+
+		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
+			$key = $usage->getIdentityString();
+			$reindexed[$key] = $usage;
+		}
+
+		return $reindexed;
 	}
 
 	/**
