@@ -48,6 +48,20 @@ describe( 'StringDataValue', () => {
 		} );
 	} );
 
+	it( 'passes a placeholder down', () => {
+		const placeholder = 'a placeholder',
+			wrapper = shallowMount( StringDataValue, {
+				propsData: {
+					label: '',
+					dataValue: null,
+					placeholder,
+				},
+			} );
+
+		expect( wrapper.find( ResizingTextField ).attributes( 'placeholder' ) )
+			.toBe( placeholder );
+	} );
+
 	/* it( 'passes a maxlength down', () => {
 
 	} );*/

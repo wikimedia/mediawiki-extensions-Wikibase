@@ -7,6 +7,7 @@
 		<ResizingTextField
 			:id="id"
 			class="wb-db-stringValue__input"
+			:placeholder="placeholder"
 			v-model="value"
 		/>
 	</div>
@@ -32,6 +33,9 @@ export default class StringDataValue extends Vue {
 
 	@Prop( { required: true } )
 	public label!: string;
+
+	@Prop( { required: false } )
+	public placeholder?: string;
 
 	get value() {
 		if ( !this.dataValue ) {

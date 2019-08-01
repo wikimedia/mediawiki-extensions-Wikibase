@@ -26,4 +26,28 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue"/>
 		</div>`,
+	} ) )
+
+	.add( 'readonly empty', () => ( {
+		data() { return { sampleLabel: 'empty', sampleValue: { type: 'string', value: '' } }; },
+		components: { StringDataValue },
+		template:
+		`<div>
+			<StringDataValue :label="sampleLabel" :dataValue="sampleValue"/>
+		</div>`,
+	} ) )
+
+	.add( 'readonly empty placeholder', () => ( {
+		data() {
+			return {
+				sampleLabel: 'empty',
+				sampleValue: { type: 'string', value: '' },
+				placeholder: 'placeholder',
+			};
+		},
+		components: { StringDataValue },
+		template:
+		`<div>
+			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :placeholder="placeholder"/>
+		</div>`,
 	} ) );
