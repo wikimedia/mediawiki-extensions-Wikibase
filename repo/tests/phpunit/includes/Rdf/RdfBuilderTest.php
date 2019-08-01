@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 use PageProps;
 use SiteLookup;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -666,7 +667,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	public function testPageProps( $name, $props ) {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
-			RdfBuilderTestData::URI_DATA,
+			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -693,9 +694,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	public function testPageProps_entitySourceBasedFederation( $name, $props ) {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
-			RdfBuilderTestData::URI_DATA,
+			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [
+				new EntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
+			] ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ],
@@ -721,7 +724,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		];
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
-			RdfBuilderTestData::URI_DATA,
+			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -757,7 +760,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		];
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
-			RdfBuilderTestData::URI_DATA,
+			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',

@@ -35,6 +35,7 @@ class RdfBuilderTestData {
 	const URI_DATA = 'http://data.acme.test/';
 
 	const URI_BASE_FOREIGN = 'http://foreign.test/';
+	const URI_DATA_FOREIGN = 'http://data.foreign.test/';
 
 	/**
 	 * @var EntityContentDataCodec|null
@@ -163,7 +164,7 @@ class RdfBuilderTestData {
 	public function getVocabulary() {
 		return new RdfVocabulary(
 			[ '' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
-			self::URI_DATA,
+			[ '' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -179,7 +180,7 @@ class RdfBuilderTestData {
 	public function getVocabularyForEntitySourceBasedFederation() {
 		return new RdfVocabulary(
 			[ 'wikidata' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
-			self::URI_DATA,
+			[ 'wikidata' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource(

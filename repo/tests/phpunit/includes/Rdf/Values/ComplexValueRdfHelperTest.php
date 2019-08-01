@@ -36,7 +36,7 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testAttachValueNode() {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -91,7 +91,7 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testAttachValueNode_entitySourceBasedFederation() {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',

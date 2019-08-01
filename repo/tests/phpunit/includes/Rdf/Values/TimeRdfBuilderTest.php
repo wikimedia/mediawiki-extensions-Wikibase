@@ -170,7 +170,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected ) {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -216,7 +216,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue_entitySourceBasedFederation( PropertyValueSnak $snak, $complex, array $expected ) {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',

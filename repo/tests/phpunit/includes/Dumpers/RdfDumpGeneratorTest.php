@@ -198,7 +198,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 			new NullEntityPrefetcher(),
 			new RdfVocabulary(
 				[ '' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
-				self::URI_DATA,
+				[ '' => self::URI_DATA, 'foreign' => 'http://data.foreign.test/' ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
 				'',

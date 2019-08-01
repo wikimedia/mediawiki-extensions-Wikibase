@@ -316,7 +316,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$entityRepositoryName = $this->vocabulary->getEntityRepositoryName( $entityId );
 
-		$this->writer->about( RdfVocabulary::NS_DATA, $entityLName )
+		$this->writer->about( $this->vocabulary->dataNamespaceNames[$entityRepositoryName], $entityLName )
 			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )
 			->is( $this->vocabulary->entityNamespaceNames[$entityRepositoryName], $entityLName );
@@ -364,6 +364,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			return;
 		}
 
+		$entityRepositoryName = $this->vocabulary->getEntityRepositoryName( $entityId );
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
 		foreach ( $entityProps as $name => $value ) {
@@ -375,7 +376,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				settype( $value, $props[$name]['type'] );
 			}
 
-			$this->writer->about( RdfVocabulary::NS_DATA, $entityLName )
+			$this->writer->about( $this->vocabulary->dataNamespaceNames[$entityRepositoryName], $entityLName )
 				->say( RdfVocabulary::NS_ONTOLOGY, $props[$name]['name'] )
 				->value( $value );
 		}
