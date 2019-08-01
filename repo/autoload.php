@@ -95,6 +95,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\ItemSearchTextGenerator' => __DIR__ . '/includes/ItemSearchTextGenerator.php',
 	'Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId' => __DIR__ . '/maintenance/populateTermFullEntityId.php',
 	'Wikibase\\Repo\\Maintenance\\RebuildItemsPerSite' => __DIR__ . '/maintenance/rebuildItemsPerSite.php',
+	'Wikibase\\Repo\\Maintenance\\RemoveTermsInLanguage' => __DIR__ . '/maintenance/RemoveTermsInLanguage.php',
 	'Wikibase\\Repo\\MediaWikiLanguageDirectionalityLookup' => __DIR__ . '/includes/MediaWikiLanguageDirectionalityLookup.php',
 	'Wikibase\\Repo\\MediaWikiLocalizedTextProvider' => __DIR__ . '/includes/MediaWikiLocalizedTextProvider.php',
 	'Wikibase\\Repo\\PidLock' => __DIR__ . '/includes/PidLock.php',
