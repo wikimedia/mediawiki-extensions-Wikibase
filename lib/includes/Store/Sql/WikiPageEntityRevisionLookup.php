@@ -144,8 +144,14 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			}
 
 			if ( $entityRevision === null ) {
-				// This happens when there is a problem with the external store or if access is forbidden
-				wfLogWarning( __METHOD__ . ': Entity not loaded for ' . $entityId );
+				// This happens when:
+				// - there is a problem with the external store; or
+				// - if access is forbidden; or
+				// - revision has no entity slot
+				$this->logger->debug(
+					'{method}: Entity not loaded for {entityId}',
+					[ 'method' => __METHOD__, 'entityId' => $entityId ]
+				);
 			}
 		}
 
