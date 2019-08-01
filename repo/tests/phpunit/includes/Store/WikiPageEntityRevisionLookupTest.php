@@ -287,13 +287,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			false
 		);
 
-		/**
-		 * We need to suppressWarnings as getEntityRevision will warn before throwing the exception that we want.
-		 * We need to try catch instead of setting expected exception so that we can turn warnings back on after.
-		 */
-		\Wikimedia\suppressWarnings();
 		$result = $lookup->getEntityRevision( $entityId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
-		\Wikimedia\suppressWarnings( true );
 		$this->assertNull( $result );
 	}
 
@@ -322,21 +316,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			false
 		);
 
-		/**
-		 * We need to suppressWarnings as getEntityRevision will warn before throwing the exception that we want.
-		 * We need to try catch instead of setting expected exception so that we can turn warnings back on after.
-		 */
-		\Wikimedia\suppressWarnings();
-		try {
-			$lookup->getEntityRevision( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER );
-			$this->fail( 'getEntityRevision failed to throw an exception.' );
-		} catch ( StorageException $e ) {
-			$this->assertEquals(
-				"No such revision found for {$entityId->getSerialization()}: {$revId}",
-				$e->getMessage()
-			);
-		}
-		\Wikimedia\suppressWarnings( true );
+		$this->setExpectedException( StorageException::class );
+		$lookup->getEntityRevision( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER );
 	}
 
 	public function testGetLatestRevisionId_ReturnsNullForNonExistingEntityRevision() {
