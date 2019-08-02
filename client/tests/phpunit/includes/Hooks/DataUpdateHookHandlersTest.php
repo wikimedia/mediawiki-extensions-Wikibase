@@ -296,13 +296,46 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$parserOutput = $this->newParserOutput( $usages );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
-		// Assertions are done by the UsageUpdater mock
+		// Assertions are done by the JobScheduler mock
 		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$jobScheduler = $this->newJobScheduler( $title, $usages, false );
 		$usageLookup = $this->newUsageLookup( $usages );
+
+		$handler = new DataUpdateHookHandlers(
+			$usageUpdater,
+			$jobScheduler,
+			$usageLookup
+		);
+		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+	}
+
+	public function testDoParserCacheSaveCompletePartialUpdate() {
+		$newUsages = [
+			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
+			'Q2#O' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::OTHER_USAGE ),
+			'Q2#L' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::LABEL_USAGE ),
+		];
+		$currentUsages = [
+			'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
+			'Q2#T' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::TITLE_USAGE ),
+			'Q2#L' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::LABEL_USAGE ),
+		];
+		$expected = [
+			'Q2#O' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::OTHER_USAGE ),
+		];
+		$parserOutput = $this->newParserOutput( $newUsages );
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
+
+		// Assertions are done by the JobScheduler mock
+		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$jobScheduler = $this->newJobScheduler( $title, $expected, true );
+		$usageLookup = $this->newUsageLookup( $currentUsages );
 
 		$handler = new DataUpdateHookHandlers(
 			$usageUpdater,
