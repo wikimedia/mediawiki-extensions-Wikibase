@@ -47,7 +47,7 @@ class StoreTest extends \MediaWikiTestCase {
 				new EntityNamespaceLookup( [] ),
 				$this->getMock( IdGenerator::class ),
 				$this->getMock( WikibaseServices::class ),
-				new EntitySource( 'testsource', 'testdb', [], '', '' )
+				new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
 			)
 		];
 

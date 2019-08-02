@@ -866,7 +866,15 @@ final class WikibaseClient {
 				'slot' => $slot,
 			];
 		}
-		$sources[] = new EntitySource( 'local', $localDatabaseName, $localEntityNamespaceSlotData, $localConceptBaseUri, '' );
+		$sources[] = new EntitySource(
+			'local',
+			$localDatabaseName,
+			$localEntityNamespaceSlotData,
+			$localConceptBaseUri,
+			'wd', // TODO: make configurable
+			'', // TODO: make configurable
+			''
+		);
 
 		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
 			$namespaceSlotData = [];
@@ -882,6 +890,8 @@ final class WikibaseClient {
 				$repositorySettings['repoDatabase'],
 				$namespaceSlotData,
 				$repositorySettings['baseUri'],
+				$repository, // TODO: make configurable
+				$repository, // TODO: make configurable
 				$repository // TODO: this is a "magic" default/assumption
 			);
 		}

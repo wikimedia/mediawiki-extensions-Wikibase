@@ -474,6 +474,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					false,
 					[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
 					'http://acme.test/concept/',
+					'',
+					'',
 					''
 				),
 				new EntitySource(
@@ -481,6 +483,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'otherdb',
 					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
 					'http://acme.test/concept/',
+					'o',
+					'o',
 					'otherwiki'
 				)
 			] ),
