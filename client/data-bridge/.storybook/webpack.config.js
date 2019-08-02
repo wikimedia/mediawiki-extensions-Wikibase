@@ -1,5 +1,6 @@
 const path = require( 'path' );
 const ForkTsCheckerWebpackPlugin = require( 'fork-ts-checker-webpack-plugin' );
+const ourVueConfig = require( '../vue.config' );
 
 module.exports = async ( { config } ) => {
 	config.resolve.alias[ '@' ] = path.resolve( __dirname, '../src' );
@@ -25,6 +26,7 @@ module.exports = async ( { config } ) => {
 			'css-loader',
 			{
 				loader: 'sass-loader',
+				options: ourVueConfig.css.loaderOptions.sass,
 			},
 		],
 	} );
