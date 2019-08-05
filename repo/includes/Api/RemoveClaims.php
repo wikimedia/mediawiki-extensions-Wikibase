@@ -214,6 +214,10 @@ class RemoveClaims extends ApiBase {
 				'summary' => [
 					self::PARAM_TYPE => 'string',
 				],
+				'tags' => [
+					self::PARAM_TYPE => 'tags',
+					self::PARAM_ISMULTI => true,
+				],
 				'token' => null,
 				'baserevid' => [
 					self::PARAM_TYPE => 'integer',

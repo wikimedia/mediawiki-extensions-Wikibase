@@ -422,6 +422,10 @@ abstract class ModifyEntity extends ApiBase {
 			'summary' => [
 				self::PARAM_TYPE => 'string',
 			],
+			'tags' => [
+				self::PARAM_TYPE => 'tags',
+				self::PARAM_ISMULTI => true,
+			],
 			'token' => null,
 			'bot' => false,
 		];

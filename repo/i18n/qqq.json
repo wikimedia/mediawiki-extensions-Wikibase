@@ -424,6 +424,7 @@
 	"wikibase-api-param-illegal": "!!DO NOT TRANSLATE!! An illegal set of parameters have been used, General message for when the parameters passed in a request conflict or do not pass the initial tests",
 	"wikibase-api-permissiondenied": "!!DO NOT TRANSLATE!! the user making the request does not have the correct permissions or rights to carry out the request",
 	"wikibase-api-wrong-class": "!!DO NOT TRANSLATE!! The wrong class type has been detected when trying to make the request, this could be and item isntead of a property.",
+	"wikibase-api-tags-invalid": "API error message indicating that the parameter for change tags was invalid.",
 	"wikibase-api-target-not-empty": "API error message indicating that the target entity of a redirect is required to be empty.",
 	"wikibase-api-target-is-redirect": "API error message indicating that the target entity of a redirect is already a redirect.",
 	"wikibase-api-target-is-incompatible": "API error message indicating that the target entity of a redirect has the wrong type.",
