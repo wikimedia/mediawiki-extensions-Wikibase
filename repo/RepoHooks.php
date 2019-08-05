@@ -19,6 +19,7 @@ use MediaWiki\Revision\SlotRecord;
 use MWException;
 use OutputPage;
 use PageProps;
+use ParserOptions;
 use ParserOutput;
 use RecentChange;
 use ResourceLoader;
@@ -37,6 +38,7 @@ use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
+use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\ParserOutput\TermboxView;
@@ -1116,6 +1118,11 @@ final class RepoHooks {
 				TermboxView::TERMBOX_VERSION :
 				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION;
 		};
+	}
+
+	public static function onRejectParserCacheValue( ParserOutput $parserValue, WikiPage $wikiPage, ParserOptions $parserOpts ) {
+		$rejector = new TermboxVersionParserCacheValueRejector( TermboxFlag::getInstance() );
+		return $rejector->keepCachedValue( $parserValue, $parserOpts );
 	}
 
 	public static function onMediaWikiPHPUnitTestStartTest( $test ) {
