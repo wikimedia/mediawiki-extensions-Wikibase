@@ -1,16 +1,8 @@
 const Util = require( 'wdio-mediawiki/Util' );
 const assert = require( 'assert' );
-let WikibaseApi, EntityPage, ItemPage;
-
-try {
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
-	EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
-	ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
-} catch ( e ) {
-	WikibaseApi = require( '../wdio-wikibase/wikibase.api' );
-	EntityPage = require( '../wdio-wikibase/pageobjects/entity.page' );
-	ItemPage = require( '../wdio-wikibase/pageobjects/item.page' );
-}
+const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+const EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
+const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
 
 describe( 'item', function () {
 
