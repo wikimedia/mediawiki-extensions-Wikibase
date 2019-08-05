@@ -76,26 +76,33 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenUnknownEntityType_saveEntityForwardsToDefaultService() {
 		$entity = Property::newFromType( 'string' );
 		$user = $this->newUser();
+		$flags = EDIT_MINOR;
+		$baseRevId = 0;
+		$tags = [ 'tag' ];
 		$store = new TypeDispatchingEntityStore(
 			[],
-			$this->newDefaultService( 'saveEntity', [ $entity, 'summary', $user ] ),
+			$this->newDefaultService( 'saveEntity',
+				[ $entity, 'summary', $user, $flags, $baseRevId, $tags ] ),
 			$this->newEntityRevisionLookup()
 		);
 
-		$result = $store->saveEntity( $entity, 'summary', $user );
+		$result = $store->saveEntity( $entity, 'summary', $user, $flags, $baseRevId, $tags );
 		$this->assertSame( 'fromDefaultService', $result );
 	}
 
 	public function testGivenCustomEntityType_saveEntityInstantiatesCustomService() {
 		$entity = Property::newFromType( 'string' );
 		$user = $this->newUser();
+		$flags = EDIT_MINOR;
+		$baseRevId = 0;
+		$tags = [ 'tag' ];
 		$store = new TypeDispatchingEntityStore(
 			[
-				'property' => function ( EntityStore $defaultService ) use ( $entity, $user ) {
+				'property' => function ( EntityStore $defaultService ) use ( $entity, $user, $flags, $baseRevId, $tags ) {
 					$customService = $this->getMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'saveEntity' )
-						->with( $entity, 'summary', $user )
+						->with( $entity, 'summary', $user, $flags, $baseRevId, $tags )
 						->willReturn( 'fromCustomService' );
 					return $customService;
 				},
@@ -104,7 +111,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 			$this->newEntityRevisionLookup()
 		);
 
-		$result = $store->saveEntity( $entity, 'summary', $user );
+		$result = $store->saveEntity( $entity, 'summary', $user, $flags, $baseRevId, $tags );
 		$this->assertSame( 'fromCustomService', $result );
 	}
 

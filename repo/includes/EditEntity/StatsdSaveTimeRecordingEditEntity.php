@@ -67,10 +67,11 @@ class StatsdSaveTimeRecordingEditEntity implements EditEntity {
 		$summary,
 		$flags,
 		$token,
-		$watch = null
+		$watch = null,
+		array $tags = []
 	) {
 		$attemptSaveStart = microtime( true );
-		$result = $this->inner->attemptSave( $newEntity, $summary, $flags, $token, $watch );
+		$result = $this->inner->attemptSave( $newEntity, $summary, $flags, $token, $watch, $tags );
 		$attemptSaveEnd = microtime( true );
 
 		$this->stats->timing(

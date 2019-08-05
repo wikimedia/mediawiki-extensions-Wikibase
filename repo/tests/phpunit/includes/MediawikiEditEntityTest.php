@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -813,6 +814,31 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 		);
 
 		$this->assertEquals( $hookReturnStatus->isGood(), $saveStatus->isGood() );
+	}
+
+	public function testSaveWithTags() {
+		$repo = $this->getMockRepository();
+		$edit = $this->makeEditEntity(
+			$repo,
+			null,
+			$this->getEntityTitleLookup()
+		);
+		$user = $this->getUser( 'EditEntityTestUser' );
+
+		$status = $edit->attemptSave(
+			new Item(),
+			'summary',
+			EDIT_MINOR,
+			$user->getEditToken(),
+			null,
+			[ 'mw-replace' ]
+		);
+
+		$this->assertTrue( $status->isGood() );
+		/** @var EntityRevision $entityRevision */
+		$entityRevision = $status->getValue()['revision'];
+		$tags = $repo->getLogEntry( $entityRevision->getRevisionId() )['tags'];
+		$this->assertSame( [ 'mw-replace' ], $tags );
 	}
 
 }

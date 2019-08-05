@@ -158,6 +158,8 @@ interface EditEntity {
 	 *                                Null will fail the token text, as will the empty string.
 	 * @param bool|null $watch Whether the user wants to watch the entity.
 	 *                                Set to null to apply default according to getWatchDefault().
+	 * @param string[] $tags Change tags to add to the edit.
+	 * Callers are responsible for checking that the user is permitted to add these tags.
 	 *
 	 * @return Status
 	 *
@@ -172,7 +174,8 @@ interface EditEntity {
 		$summary,
 		$flags,
 		$token,
-		$watch = null
+		$watch = null,
+		array $tags = []
 	);
 
 }
