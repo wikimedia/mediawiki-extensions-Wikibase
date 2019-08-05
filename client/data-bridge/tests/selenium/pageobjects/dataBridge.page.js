@@ -29,31 +29,31 @@ class DataBridgePage extends Page {
 	}
 
 	get overloadedLink() {
-		return browser.element( 'a=Edit this on Wikidata' );
+		return $( 'a=Edit this on Wikidata' );
 	}
 
 	get dialog() {
-		return browser.element( '.oo-ui-dialog' );
+		return $( '.oo-ui-dialog' );
 	}
 
 	get app() {
-		return this.dialog.element( '#data-bridge-app' );
+		return $( '#data-bridge-app' );
 	}
 
 	get int() {
-		return browser.element(
+		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.INIT}`
 		);
 	}
 
 	get error() {
-		return browser.element(
+		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.ERROR}`
 		);
 	}
 
 	get bridge() {
-		return browser.element(
+		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}`
 		);
 	}

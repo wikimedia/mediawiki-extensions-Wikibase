@@ -1,9 +1,16 @@
 /* eslint-disable */
 module.exports = {
 	/**
-	 * @deprecated Use Util.waitForModuleState()
-	 * once I95cf06a4d6a677ca14b56f11f5c6bd98aa0abd05 is in wdio-mediawiki
-	 * which this is a literal copy of
+	 * @deprecated Use Util.waitForModuleState() once it is released with webdriverio 5. compatiblity
+	 * This is an adjusted copy of Util.waitForModuleState() from wdio-mediawiki.
+	 * It has been adjusted for compatibility with webdriverio version 5 by replacing
+	 * ```
+	 * return result.value;
+	 * ```
+	 * with
+	 * ```
+	 * return result;
+	 * ```
 	 *
 	 * Wait for a given module to reach a specific state
 	 * @param {string} moduleName The name of the module to wait for
@@ -16,7 +23,7 @@ module.exports = {
 				return typeof mw !== 'undefined' &&
 					mw.loader.getState( module.name ) === module.status;
 			}, { status: moduleStatus, name: moduleName } );
-			return result.value;
+			return result;
 		}, timeout, 'Failed to wait for ' + moduleName + ' to be ' + moduleStatus + ' after ' + timeout + ' ms.' );
 	}
 };

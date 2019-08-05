@@ -18,11 +18,9 @@ If there is no `WIKIBASE_PROPERTY_STRING` in the environment
 (see the general Wikibase selenium README for details),
 that user must also have the permissions necessary to create new properties.
 
-You can use the default MediaWiki WDIO configuration,
-so a full test command could look somewhat like this
-(running from the Wikibase directory, otherwise adjust the paths):
+Data Bridge is already using the current version 5 of webdriverio,
+while Mediawiki core and Wikibase repo still need migration to that version.
 
-    MW_SERVER=http://localhost MW_SCRIPT_PATH=/wiki/ MEDIAWIKI_USER='...' MEDIAWIKI_PASSWORD='...' node_modules/.bin/wdio ../../tests/selenium/wdio.conf.js --spec client/data-bridge/tests/selenium/specs/
+A complete test command run from the data-bridge directory could be:
 
-The browser tests are not yet set up in any `package.json`,
-nor do they run automatically in CI.
+    MW_SERVER=http://localhost MW_SCRIPT_PATH=/wiki/ MEDIAWIKI_USER='...' MEDIAWIKI_PASSWORD='...' npm run selenium-test

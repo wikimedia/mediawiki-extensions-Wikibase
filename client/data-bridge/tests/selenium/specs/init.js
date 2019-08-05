@@ -5,7 +5,7 @@ const assert = require( 'assert' ),
 
 describe( 'init', () => {
 	beforeEach( () => {
-		browser.deleteCookie();
+		browser.deleteCookies();
 	} );
 
 	it( 'opens app in OOUI dialog', () => {
@@ -28,14 +28,14 @@ describe( 'init', () => {
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 		browser.call( () => {
-			return Api.edit( title, content );
+			return Api.edit( title, content, browser.config.username, browser.config.password );
 		} );
 
 		DataBridgePage.open( title );
 		DataBridgePage.overloadedLink.click();
-		DataBridgePage.dialog.waitForVisible();
+		DataBridgePage.dialog.waitForDisplayed();
 
-		assert.ok( DataBridgePage.app.isVisible() );
+		assert.ok( DataBridgePage.app.isDisplayed() );
 	} );
 
 	describe( 'Errors-Init-Value-Switch', () => {
@@ -54,14 +54,14 @@ describe( 'init', () => {
 |}`;
 
 			browser.call( () => {
-				return Api.edit( title, content );
+				return Api.edit( title, content, browser.config.username, browser.config.password );
 			} );
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
-			DataBridgePage.error.waitForVisible();
+			DataBridgePage.error.waitForDisplayed();
 
-			assert.ok( DataBridgePage.error.isVisible() );
+			assert.ok( DataBridgePage.error.isDisplayed() );
 		} );
 
 		it( 'shows the current targetValue', () => {
@@ -85,14 +85,14 @@ describe( 'init', () => {
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 			browser.call( () => {
-				return Api.edit( title, content );
+				return Api.edit( title, content, browser.config.username, browser.config.password );
 			} );
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
-			DataBridgePage.bridge.waitForVisible();
+			DataBridgePage.bridge.waitForDisplayed();
 
-			assert.ok( DataBridgePage.bridge.isVisible() );
+			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			// TODO test on value
 		} );
 	} );
