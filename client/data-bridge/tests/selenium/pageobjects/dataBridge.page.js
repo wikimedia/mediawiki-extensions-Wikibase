@@ -20,7 +20,7 @@ class DataBridgePage extends Page {
 	}
 
 	getDummyTitle() {
-		return Util.getTestString( 'Data-bridge-test-page-' );
+		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
 
 	open( title ) {

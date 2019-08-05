@@ -1,21 +1,22 @@
 # Data Bridge browser tests
 
-Currently, these tests assume that your wiki is set up as a client of Beta Wikidata,
-which means that you need something like this in your `LocalSettings.php`:
+Currently, these tests assume that your wiki doesn’t care about the domain of the links that bridge is overloading,
+and that the wiki is both a Wikibase repo and a client of itself.
+This means that you need something like this in your `LocalSettings.php`:
 
-    $wgWBClientSettings['dataBridgeHrefRegExp'] = '^https://wikidata\.beta\.wmflabs\.org/wiki/Item:(Q[1-9][0-9]*).*#(P[1-9][0-9]*)$';
-    $wgWBClientSettings['repoUrl'] = 'https://wikidata.beta.wmflabs.org';
-    $wgWBClientSettings['repoScriptPath'] = '/w';
-    $wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
+    $wgEnableWikibaseRepo = true;
+    $wgEnableWikibaseClient = true;
+    $wgWBClientSettings['dataBridgeEnabled'] = true;
+    $wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=](?:Item:)?(Q[1-9][0-9]*).*#(P[1-9][0-9]*)$';
 
-No edits will be made on Beta Wikidata,
-but a test page will be created on the local wiki each time you run the tests,
-with some data bridge links to Beta Wikidata.
-The test pages are created in the main namespace,
-which must support wikitext pages
-(i. e., if your wiki is also a Wikibase repository, it must have a separate Item namespace);
-in order to create them, the test runner needs to log in,
+The test pages are created in the talk namespace of the main namespace,
+so your wiki must allow these talk pages to contain wikitext.
+In order to create the test pages and target items,
+the test runner needs to log in,
 which is usually done by providing a suitable `MEDIAWIKI_USER` and `MEDIAWIKI_PASSWORD` in the environment.
+If there is no `WIKIBASE_PROPERTY_STRING` in the environment
+(see the general Wikibase selenium README for details),
+that user must also have the permissions necessary to create new properties.
 
 You can use the default MediaWiki WDIO configuration,
 so a full test command could look somewhat like this
