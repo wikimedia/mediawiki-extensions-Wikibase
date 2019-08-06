@@ -14,6 +14,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 use Wikibase\TermStore\Implementations\ThrowingItemTermStore;
@@ -96,6 +97,9 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 
 		$lookup->addEntity( $this->newQ1() );
 		$lookup->addEntity( $this->newQ2() );
+		$lookup->addException(
+			new RevisionedUnresolvedRedirectException( new ItemId( 'Q7251' ), new ItemId( 'Q1' ) )
+		);
 
 		return $lookup;
 	}
