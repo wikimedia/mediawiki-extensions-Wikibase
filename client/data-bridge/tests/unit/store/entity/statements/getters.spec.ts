@@ -8,6 +8,7 @@ import {
 	STATEMENTS_IS_AMBIGUOUS,
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/entity/statements/getterTypes';
+import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 
 describe( 'statements/Getters', () => {
 	it( 'determines if statements are contained for are given entity id', () => {
@@ -83,5 +84,19 @@ describe( 'statements/Getters', () => {
 		expect( getters[ STATEMENTS_IS_AMBIGUOUS ](
 			newStatementsState( statements ), null, newApplicationState(), null,
 		)( entityId, 'P21' ) ).toBe( false );
+	} );
+
+	it( 'integrates the snak unit', () => {
+		expect( getters[ mainSnakGetterTypes.dataType ] ).toBeDefined();
+		expect( typeof getters[ mainSnakGetterTypes.dataType ] ).toBe( 'function' );
+
+		expect( getters[ mainSnakGetterTypes.dataValue ] ).toBeDefined();
+		expect( typeof getters[ mainSnakGetterTypes.dataValue ] ).toBe( 'function' );
+
+		expect( getters[ mainSnakGetterTypes.snakType ] ).toBeDefined();
+		expect( typeof getters[ mainSnakGetterTypes.snakType ] ).toBe( 'function' );
+
+		expect( getters[ mainSnakGetterTypes.dataValueType ] ).toBeDefined();
+		expect( typeof getters[ mainSnakGetterTypes.dataValueType ] ).toBe( 'function' );
 	} );
 } );

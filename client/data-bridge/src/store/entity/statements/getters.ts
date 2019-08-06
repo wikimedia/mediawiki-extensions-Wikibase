@@ -1,24 +1,17 @@
 import { GetterTree } from 'vuex';
 import Application from '@/store/Application';
-import {
-	STATEMENTS_CONTAINS_ENTITY,
-	STATEMENTS_IS_AMBIGUOUS,
-	STATEMENTS_PROPERTY_EXISTS,
-} from '@/store/entity/statements/getterTypes';
 import StatementsState from '@/store/entity/statements/StatementsState';
-import StatementMap from '@/datamodel/StatementMap';
+import { statementGetters } from '@/store/entity/statements/statementGetters';
+import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
+import resolveMainSnak from '@/store/entity/statements/resolveMainSnak';
+import buildMainSnakGetters from '@/store/entity/statements/snaks/getters';
+import MainSnakPath from '@/store/entity/statements/MainSnakPath';
+
+const mainSnakGetters = buildMainSnakGetters<MainSnakPath>(
+	mainSnakGetterTypes, resolveMainSnak,
+);
 
 export const getters: GetterTree<StatementsState, Application> = {
-	[ STATEMENTS_CONTAINS_ENTITY ]: ( state: StatementsState ) => ( entityId: string ): boolean => {
-		return state[ entityId ] !== undefined;
-	},
-
-	[ STATEMENTS_PROPERTY_EXISTS ]: ( state: StatementsState ) => ( entityId: string, propertyId: string ): boolean => {
-		return ( state[ entityId ] as StatementMap )[ propertyId ] !== undefined;
-	},
-
-	[ STATEMENTS_IS_AMBIGUOUS ]: ( state: StatementsState ) => ( entityId: string, propertyId: string ): boolean => {
-		return ( state[ entityId ] as StatementMap )[ propertyId ] !== undefined
-			&& ( state[ entityId ] as StatementMap )[ propertyId ].length > 1;
-	},
+	...statementGetters,
+	...mainSnakGetters,
 };
