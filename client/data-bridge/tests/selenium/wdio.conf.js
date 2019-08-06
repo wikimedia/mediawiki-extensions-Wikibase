@@ -2,7 +2,7 @@
  * See also: http://webdriver.io/guide/testrunner/configurationfile.html
  */
 const fs = require( 'fs' ),
-	saveScreenshot = require( 'wdio-mediawiki' ).saveScreenshot;
+	saveScreenshot = require( './ForwardCompatUtil' ).saveScreenshot;
 
 exports.config = {
 
