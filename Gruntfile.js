@@ -11,7 +11,22 @@ module.exports = function ( grunt ) {
 			options: {
 				reportUnusedDisableDirectives: true
 			},
-			all: '.'
+			all: '.',
+			fix: {
+				options: {
+					fix: true
+				},
+				src: [
+					'**/*.js',
+					'!Gruntfile.js',
+					'!node_modules/**',
+					'!client/data-bridge/**',
+					'!view/resources/jquery/ui/**',
+					'!view/lib/**',
+					'!lib/resources/vendor/**',
+					'!lib/tests/**'
+				]
+			}
 		},
 		jsonlint: {
 			all: [
@@ -51,5 +66,6 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'test', [ 'eslint', 'jsonlint', 'banana', 'stylelint' ] );
+	grunt.registerTask( 'fix', 'eslint:fix' );
 	grunt.registerTask( 'default', 'test' );
 };
