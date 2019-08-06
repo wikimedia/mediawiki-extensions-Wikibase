@@ -63,6 +63,7 @@ class ChangeOps implements ChangeOp {
 	}
 
 	/**
+	 * @see ChangeOp::apply()
 	 * Applies all changes to the given entity
 	 *
 	 * @param EntityDocument $entity
@@ -71,21 +72,24 @@ class ChangeOps implements ChangeOp {
 	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
+		$changeOpsResults = [];
+
 		if ( count( $this->changeOps ) === 1 ) {
-			reset( $this->changeOps )->apply( $entity, $summary );
-		} elseif ( count( $this->changeOps ) === 0 ) {
-			return;
-		} else {
+			$changeOpsResults[] = $this->changeOps[0]->apply( $entity, $summary );
+		} elseif ( count( $this->changeOps ) > 1 ) {
+			// The individual ChangeOps are intentionally not allowed to update the summary
+			// here, as this loop cannot know how to combine summaries like "removed A" and
+			// "added B" to a still meaningful summary. "Updated A, B" would be wrong.
+			// So we are setting the action to just 'update' here.
 			foreach ( $this->changeOps as $changeOp ) {
-				// The individual ChangeOps are intentionally not allowed to update the summary
-				// here, as this loop cannot know how to combine summaries like "removed A" and
-				// "added B" to a still meaningful summary. "Updated A, B" would be wrong.
-				$changeOp->apply( $entity, null );
+				$changeOpsResults[] = $changeOp->apply( $entity, null );
 			}
 			if ( $summary ) {
 				$summary->setAction( 'update' );
 			}
 		}
+
+		return new ChangeOpsResult( $entity->getId(), $changeOpsResults );
 	}
 
 	/**
