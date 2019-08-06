@@ -105,5 +105,6 @@
 	"wikibase-listdatavaluetypes-generalbody": "'U tipe de valore pe stu tipe de date jè <code>$1</code>",
 	"content-model-wikibase-item": "Elemende Uicchibase",
 	"content-model-wikibase-property": "Probbietà Uicchibase",
-	"content-model-wikibase-query": "'Nderrogazione UicchiBase"
+	"content-model-wikibase-query": "'Nderrogazione UicchiBase",
+	"wikibase-entity-save-error-heading": "Quacche cose ha sciute stuèrte"
 }

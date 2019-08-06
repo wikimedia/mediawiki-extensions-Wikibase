@@ -412,5 +412,7 @@
 	"wikibase-pageinfo-wb-claims": "Počet tvrzení o této entitě",
 	"wikibase-pageinfo-wb-identifiers": "Počet tvrzení o externích identifikátorech této entity",
 	"wikibase-search-bad-entity-type": "Chybný typ entity: $1",
-	"wikibase-search-namespace-mix": "Směšování jmenných prostorů pro entity a články v jednom vyhledávání není zatím podporováno. Bude se hledat jen ve jmenných prostorech pro entity."
+	"wikibase-search-namespace-mix": "Směšování jmenných prostorů pro entity a články v jednom vyhledávání není zatím podporováno. Bude se hledat jen ve jmenných prostorech pro entity.",
+	"wikibase-entity-save-error-heading": "Něco se pokazilo",
+	"wikibase-entity-save-error-message": "Vaši změnu nebylo možné zveřejnit. Můžete zkusit znovu kliknout na tlačítko zveřejnit."
 }

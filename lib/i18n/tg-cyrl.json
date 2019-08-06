@@ -6,8 +6,14 @@
 			"Vashgird"
 		]
 	},
+	"specialpages-group-wikibase": "Википойгоҳ",
 	"wikibase-deletedentity-item": "Элементи ҳазфшуда",
 	"wikibase-deletedentity-property": "Хусусияти ҳазфшуда",
+	"wikibase-deletedentity-query": "Маълумоти ҳазфшуда",
+	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерӣ)",
+	"wikibase-timedetails-before": "Пештар",
+	"wikibase-timedetails-after": "Баъдтар",
+	"wikibase-globedetails-globe": "Саросарият",
 	"wikibase-sitelinks-wikipedia": "Википедия",
 	"wikibase-sitelinks-sitename-columnheading": "Забон",
 	"datatypes-type-wikibase-item": "Элемент",

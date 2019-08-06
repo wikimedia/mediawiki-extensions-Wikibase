@@ -29,6 +29,7 @@
 	"wikibase-error-autocomplete-response": "Odpověď serveru: $1",
 	"wikibase-error-ui-no-external-page": "Stránka „$2“ nebyla na „$1“ nalezena.",
 	"wikibase-error-ui-edit-conflict": "Tato hodnota byla mezitím upravena, čímž došlo k editačnímu konfliktu. Prosím obnovte stránku.",
+	"wikibase-error-entity-too-big": "Entity je příliš velká. Největší dovolená velikost entity je $1.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterováno)",
 	"wikibase-quantitydetails-amount": "Množství",
 	"wikibase-quantitydetails-upperbound": "Horní mez",

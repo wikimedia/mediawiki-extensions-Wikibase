@@ -7,7 +7,8 @@
 			"Leeheonjin",
 			"Stranger195",
 			"Emem.calist",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Brazal.dang"
 		]
 	},
 	"wikibase-desc": "Repositoryo ng datong may kayarian",
@@ -74,5 +75,6 @@
 	"special-entitypage": "Pinagmulang pagina",
 	"wikibase-api-no-external-page": "Hindi nagbigay ng pahina ng impormasyon ang pook ng panlabas na kliyente.",
 	"wikibase-restoreold": "itakdang muli",
-	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]"
+	"wikibase-entity-summary-restore": "Ipanumbalik ang rebisyong $3 ni [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-save-error-heading": "May pagkakamali"
 }

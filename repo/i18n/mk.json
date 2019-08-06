@@ -417,5 +417,6 @@
 	"wikibase-search-config-badclass": "Неисправна срочувачка класа за барето: $1",
 	"wikibase-refresh-for-missing-datatype": "Не го најдов податочниот тип $1 во месната клиентска скрипта. Ова може да биде поради застареноста на скриптата ако е меѓускладирана. За да го решите проблемот, темелно превчитајте го прелистувачот, пречистувајќи го месниот меѓусклад (Ctrl-Shift-R или Cmd-Shift-R кај највеќето прелистувачи).",
 	"wikibase-outdated-client-script": "Упс. Ќе ви треба цврсто превчитување!",
-	"wikibase-shortcopyrightwarning-heading": "Лиценцен припис"
+	"wikibase-shortcopyrightwarning-heading": "Лиценцен припис",
+	"wikibase-entity-save-error-heading": "Нешто не е во ред"
 }

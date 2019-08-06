@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"बिप्लब आनन्द",
-			"राम प्रसाद जोशी"
+			"राम प्रसाद जोशी",
+			"सरोज कुमार ढकाल"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
@@ -43,7 +44,7 @@
 	"wikibase-rc-wikibase-edit-letter": "डि",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन",
 	"wikibase-replicationnote": "कृपया ध्यान दिनुहोला जुन पृष्ठ तपईंले अहिले जोड्नु भएको हुनुहुन्छ त्यो अन्य विकिमा देखिन केही समय लाग्न सक्छ।",
-	"wikibase-watchlist-show-changes-pref": "तपाईं आफ्नो निगरानीसूचीमा {{WBREPONAME}} सम्पादन देखाउनुहोस्",
+	"wikibase-watchlist-show-changes-pref": "तपाईँ आफ्नो निगरानीसूचीमा {{WBREPONAME}} सम्पादन देखाउनुहोस्",
 	"wikibase-error-serialize-error": "डाटालाई मिलाउन असफल।",
 	"unconnectedpages": "पृष्ठ आइटम सँग जोडिएन",
 	"wikibase-unconnectedpages-submit": "जाउ",

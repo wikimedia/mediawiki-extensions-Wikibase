@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Awangba Mangang"
+			"Awangba Mangang",
+			"Afingba Mangang"
 		]
 	},
 	"wikibase-edit": "ꯁꯦꯝꯒꯠꯄꯥ",
@@ -9,5 +10,6 @@
 	"wikibase-label-empty": "ꯃꯃꯤꯡ ꯐꯖꯅꯥ ꯊꯥꯕ ꯂꯩꯇꯦ",
 	"wikibase-description-empty": "ꯐꯖꯅꯥ ꯁꯟꯗꯣꯛꯅꯥ ꯇꯥꯛꯄꯥ ꯂꯩꯇꯦ",
 	"wikibase-sitelinks-special": "ꯑꯇꯣꯞꯄꯥ ꯃꯐꯝꯗꯥ",
-	"wikibase-statementview-rank-normal": "ꯅꯣꯔꯃꯦꯜ ꯔꯦꯡ"
+	"wikibase-statementview-rank-normal": "ꯅꯣꯔꯃꯦꯜ ꯔꯦꯡ",
+	"wikibase-entity-save-error-heading": "ꯀꯔꯤꯒꯨꯕꯥ ꯈꯔꯥ ꯁꯣꯏꯔꯦ"
 }

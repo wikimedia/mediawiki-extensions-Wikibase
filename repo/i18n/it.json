@@ -389,5 +389,6 @@
 	"wikibase-pageinfo-subscription": "Wiki sottoscritte a questa entità",
 	"wikibase-pageinfo-subscription-none": "Nessuno",
 	"wikibase-pageinfo-wb-claims": "Numero di dichiarazioni in questa entità",
-	"wikibase-pageinfo-wb-identifiers": "Numero di dichiarazioni per identificativi esterni in questa entità"
+	"wikibase-pageinfo-wb-identifiers": "Numero di dichiarazioni per identificativi esterni in questa entità",
+	"wikibase-entity-save-error-heading": "Qualcosa è andato storto"
 }
