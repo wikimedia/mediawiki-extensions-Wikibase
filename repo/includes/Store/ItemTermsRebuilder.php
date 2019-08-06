@@ -6,6 +6,7 @@ use Exception;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\ILBFactory;
 
@@ -104,8 +105,12 @@ class ItemTermsRebuilder {
 
 	private function rebuildTermsForBatch( array $itemIds ) {
 		foreach ( $itemIds as $itemId ) {
-			// TODO: catch errors
-			$item = $this->itemLookup->getItemForId( $itemId );
+			try {
+				$item = $this->itemLookup->getItemForId( $itemId );
+			} catch ( UnresolvedEntityRedirectException $entityRedirectException ) {
+				// Nothing to do, ignore
+				continue;
+			}
 
 			if ( $item !== null ) {
 				$this->saveTerms( $item );
