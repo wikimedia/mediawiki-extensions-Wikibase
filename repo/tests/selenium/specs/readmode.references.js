@@ -1,13 +1,6 @@
 const Util = require( 'wdio-mediawiki/Util' );
-
-let WikibaseApi, ItemPage;
-try {
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
-	ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
-} catch ( e ) {
-	WikibaseApi = require( '../wdio-wikibase/wikibase.api' );
-	ItemPage = require( '../wdio-wikibase/pageobjects/item.page' );
-}
+const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
 
 describe( 'WikibaseReferenceOnProtectedPage', function () {
 
