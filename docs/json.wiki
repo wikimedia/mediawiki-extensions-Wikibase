@@ -347,7 +347,7 @@ Strings are given as simple string literals.
                         }
 
 Entity IDs are used to reference entities on the same repository. They are represented
-by a map structure containing two fields:
+by a map structure containing three fields:
 
 * ''entity-type'': defines the type of the entity, such as ''item'' or ''property''.
 * ''id'': the full entity ID.
