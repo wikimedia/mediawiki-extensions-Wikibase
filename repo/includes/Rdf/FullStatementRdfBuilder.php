@@ -154,18 +154,28 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 		// XXX: separate builder for references?
 		if ( $this->produceReferences ) {
+			$entityRepository = $this->vocabulary->getEntityRepositoryName( $entityId );
 			/** @var Reference $reference */
 			foreach ( $statement->getReferences() as $reference ) { //FIXME: split body into separate method
 				$hash = $reference->getSnaks()->getHash();
 				$refLName = $hash;
 
-				$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
-					->say( RdfVocabulary::NS_PROV, 'wasDerivedFrom' )->is( RdfVocabulary::NS_REFERENCE, $refLName );
+				$this->statementWriter->about(
+					$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_STATEMENT],
+					$statementLName
+				)
+					->say( RdfVocabulary::NS_PROV, 'wasDerivedFrom' )->is(
+						$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_REFERENCE],
+						$refLName
+					);
 				if ( $this->dedupeBag->alreadySeen( $hash, 'R' ) !== false ) {
 					continue;
 				}
 
-				$this->referenceWriter->about( RdfVocabulary::NS_REFERENCE, $refLName )
+				$this->referenceWriter->about(
+					$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_REFERENCE],
+					$refLName
+				)
 					->a( RdfVocabulary::NS_ONTOLOGY, 'Reference' );
 
 				foreach ( $reference->getSnaks() as $refSnak ) {
@@ -205,9 +215,12 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 				$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_CLAIM],
 				$propertyLName
 			)
-			->is( RdfVocabulary::NS_STATEMENT, $statementLName );
+			->is( $this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_STATEMENT], $statementLName );
 
-		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
+		$this->statementWriter->about(
+			$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_STATEMENT],
+			$statementLName
+		)
 			->a( RdfVocabulary::NS_ONTOLOGY, 'Statement' );
 
 		$rank = $statement->getRank();
@@ -215,7 +228,10 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			if ( $isBest ) {
 				$this->statementWriter->a( RdfVocabulary::NS_ONTOLOGY, RdfVocabulary::WIKIBASE_RANK_BEST );
 			}
-			$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
+			$this->statementWriter->about(
+				$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_STATEMENT],
+				$statementLName
+			)
 				->say( RdfVocabulary::NS_ONTOLOGY, 'rank' )->is( RdfVocabulary::NS_ONTOLOGY, RdfVocabulary::$rankMap[$rank] );
 		} else {
 			wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );

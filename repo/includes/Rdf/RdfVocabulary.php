@@ -100,6 +100,8 @@ class RdfVocabulary {
 
 	public $dataNamespaceNames = [];
 
+	public $statementNamespaceNames = [];
+
 	/**
 	 * @var array Associative array mapping repository names to maps, each mapping the "general" property
 	 * namespace name to the name specific to the particular repository (ie. containing repository suffix).
@@ -216,8 +218,6 @@ class RdfVocabulary {
 			'owl' => 'http://www.w3.org/2002/07/owl#',
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "#",
 
-			self::NS_STATEMENT => $conceptUris[$localEntitySourceName] . 'statement/',
-
 			// external
 			self::NS_SKOS => self::SKOS_URI,
 			self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
@@ -228,7 +228,6 @@ class RdfVocabulary {
 
 		$topUri = $this->getConceptUriBase( $conceptUris[$localEntitySourceName] );
 
-		$this->namespaces[self::NS_REFERENCE] = $topUri . 'reference/';
 		$this->namespaces[self::NS_VALUE] = $topUri . 'value/';
 
 		$propertyNamespaces = [
@@ -255,6 +254,10 @@ class RdfVocabulary {
 
 			$this->entityNamespaceNames[$repositoryOrSourceName] = $nodeNamespacePrefix . self::NS_ENTITY;
 			$this->dataNamespaceNames[$repositoryOrSourceName] = $predicateNamespacePrefix . self::NS_DATA;
+			$this->statementNamespaceNames[$repositoryOrSourceName] = [
+				self::NS_STATEMENT => $predicateNamespacePrefix . self::NS_STATEMENT,
+				self::NS_REFERENCE => $predicateNamespacePrefix . self::NS_REFERENCE,
+			];
 
 			$this->propertyNamespaceNames[$repositoryOrSourceName] = array_combine(
 				$propertyNamespaces,
@@ -334,6 +337,8 @@ class RdfVocabulary {
 		return [
 			$nodeNamespacePrefix . self::NS_ENTITY => $baseUri,
 			$predicateNamespacePrefix . self::NS_DATA => $dataUri,
+			$predicateNamespacePrefix . self::NS_STATEMENT => $baseUri . 'statement/',
+			$predicateNamespacePrefix . self::NS_REFERENCE => $topUri . 'reference/',
 			// predicates
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',
