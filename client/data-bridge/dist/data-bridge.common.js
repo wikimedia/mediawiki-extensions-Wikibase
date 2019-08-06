@@ -5466,6 +5466,8 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
+// CONCATENATED MODULE: ./src/store/actionTypes.ts
+var BRIDGE_INIT = 'initBridge';
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
 
@@ -5842,31 +5844,6 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/data-access/StaticApplicationInformationRepository.ts
-
-
-
-
-var StaticApplicationInformationRepository_StaticApplicationInformationRepository =
-/*#__PURE__*/
-function () {
-  function StaticApplicationInformationRepository(information) {
-    _classCallCheck(this, StaticApplicationInformationRepository);
-
-    this.information = information;
-  }
-
-  _createClass(StaticApplicationInformationRepository, [{
-    key: "getInformation",
-    value: function getInformation() {
-      return Promise.resolve(this.information);
-    }
-  }]);
-
-  return StaticApplicationInformationRepository;
-}();
-
-
 // CONCATENATED MODULE: ./src/services/index.ts
 
 
@@ -5917,12 +5894,12 @@ var services = new services_ServiceRepositories();
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1d15376a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=0576dfcc&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1d15376a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=6d51ecd0&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[(_vm.hasError)?_c('ErrorWrapper'):_c(_vm.isInit ? 'DataBridge' : 'Initializing',{tag:"component"})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=0576dfcc&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=6d51ecd0&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -6669,10 +6646,7 @@ var ApplicationStatus;
 })(ApplicationStatus || (ApplicationStatus = {}));
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
-// CONCATENATED MODULE: ./src/store/actionTypes.ts
-var BRIDGE_INIT = 'initBridge';
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=script&lang=ts&
-
 
 
 
@@ -6698,11 +6672,6 @@ function (_Vue) {
   }
 
   _createClass(App, [{
-    key: "created",
-    value: function created() {
-      this.$store.dispatch(BRIDGE_INIT);
-    }
-  }, {
     key: "isInit",
     get: function get() {
       return this.applicationStatus === definitions_ApplicationStatus.READY;
@@ -6796,20 +6765,17 @@ var ENTITY_INIT = 'entityInit';
 
 
 
+var actions = _defineProperty({}, BRIDGE_INIT, function (context, information) {
+  context.commit(EDITFLOW_SET, information.editFlow);
+  context.commit(PROPERTY_TARGET_SET, information.propertyId);
+  return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
+    entity: information.entityId
+  }).then(function () {
+    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+  }).catch(function (error) {
+    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
-var actions = _defineProperty({}, BRIDGE_INIT, function (context) {
-  return services.getApplicationInformationRepository().getInformation().then(function (information) {
-    context.commit(EDITFLOW_SET, information.editFlow);
-    context.commit(PROPERTY_TARGET_SET, information.propertyId);
-    return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
-      entity: information.entityId
-    }).then(function () {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
-    }).catch(function (error) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-
-      throw error;
-    });
+    throw error;
   });
 });
 // CONCATENATED MODULE: ./src/store/entity/getterTypes.ts
@@ -6977,9 +6943,10 @@ function createStore() {
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(applicationConfig, information) {
   services.setEntityRepository(new SpecialPageEntityRepository_SpecialPageEntityRepository(window.$, applicationConfig.specialEntityDataUrl));
-  services.setApplicationInformationRepository(new StaticApplicationInformationRepository_StaticApplicationInformationRepository(information));
+  var store = createStore();
+  store.dispatch(BRIDGE_INIT, information);
   new presentation_App({
-    store: createStore()
+    store: store
   }).$mount(applicationConfig.containerSelector);
 }
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js

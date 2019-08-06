@@ -1,6 +1,8 @@
 import MwWindow from '@/@types/mediawiki/MwWindow';
+import {
+	BRIDGE_INIT,
+} from '@/store/actionTypes';
 import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
-import StaticApplicationInformationRepository from '@/data-access/StaticApplicationInformationRepository.ts';
 import { services } from '@/services';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
@@ -17,11 +19,10 @@ export function launch( applicationConfig: ApplicationConfig, information: AppIn
 		applicationConfig.specialEntityDataUrl,
 	) );
 
-	services.setApplicationInformationRepository( new StaticApplicationInformationRepository(
-		information,
-	) );
+	const store = createStore();
+	store.dispatch( BRIDGE_INIT, information );
 
 	new App( {
-		store: createStore(),
+		store,
 	} ).$mount( applicationConfig.containerSelector );
 }
