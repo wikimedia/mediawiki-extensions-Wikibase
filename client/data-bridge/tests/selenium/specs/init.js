@@ -1,6 +1,7 @@
 const assert = require( 'assert' ),
 	Api = require( 'wdio-mediawiki/Api' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' );
+	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
+	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 describe( 'init', () => {
 	beforeEach( () => {
@@ -9,10 +10,32 @@ describe( 'init', () => {
 
 	it( 'opens app in OOUI dialog', () => {
 		const title = DataBridgePage.getDummyTitle();
+		let propertyId;
+		browser.call( () => {
+			return WikibaseApi.getProperty( 'string' ).then( ( idFromApi ) => {
+				propertyId = idFromApi;
+			} );
+		} );
+		let entityId;
+		browser.call( () => {
+			return WikibaseApi.createItem( 'data bridge browser test item', {
+				'claims': [ {
+					'mainsnak': {
+						'snaktype': 'value',
+						'property': propertyId,
+						'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+					},
+					'type': 'statement',
+					'rank': 'normal',
+				} ],
+			} ).then( ( idFromApi ) => {
+				entityId = idFromApi;
+			} );
+		} );
 		const content = `{|class="wikitable"
 |-
 | official website
-| {{#statements:P443|from=Q11}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://wikidata.beta.wmflabs.org/wiki/Item:Q11?uselang=en#P443 Edit this on Wikidata]</span>
+| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 		browser.call( () => {
 			return Api.edit( title, content );
@@ -31,13 +54,18 @@ describe( 'init', () => {
 
 		it( 'shows the occurence of errors', () => {
 			const title = DataBridgePage.getDummyTitle();
-			const entityId = 'Q23';
-			const propertyId = 'P123';
+			let propertyId;
+			browser.call( () => {
+				return WikibaseApi.getProperty( 'string' ).then( ( idFromApi ) => {
+					propertyId = idFromApi;
+				} );
+			} );
+			const nonExistantEntityId = 'Q999999999';
 			const editFlow = 'overwrite';
 			const content = `{|class="wikitable"
 |-
-| official website
-| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://wikidata.beta.wmflabs.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
+| shows the occurence of errors
+| {{#statements:${propertyId}|from=${nonExistantEntityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${nonExistantEntityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 
 			browser.call( () => {
@@ -53,13 +81,33 @@ describe( 'init', () => {
 
 		it( 'shows the current targetValue', () => {
 			const title = DataBridgePage.getDummyTitle();
-			const entityId = 'Q11';
-			const propertyId = 'P443';
+			let propertyId;
+			browser.call( () => {
+				return WikibaseApi.getProperty( 'string' ).then( ( idFromApi ) => {
+					propertyId = idFromApi;
+				} );
+			} );
+			let entityId;
+			browser.call( () => {
+				return WikibaseApi.createItem( 'data bridge browser test item', {
+					'claims': [ {
+						'mainsnak': {
+							'snaktype': 'value',
+							'property': propertyId,
+							'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+						},
+						'type': 'statement',
+						'rank': 'normal',
+					} ],
+				} ).then( ( idFromApi ) => {
+					entityId = idFromApi;
+				} );
+			} );
 			const editFlow = 'overwrite';
 			const content = `{|class="wikitable"
 |-
 | official website
-| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://wikidata.beta.wmflabs.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
+| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 			browser.call( () => {
 				return Api.edit( title, content );
