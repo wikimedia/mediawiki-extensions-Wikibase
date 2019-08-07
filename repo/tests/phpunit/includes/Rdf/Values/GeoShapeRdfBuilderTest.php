@@ -40,7 +40,9 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://test/data/',
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$builder = new GeoShapeRdfBuilder( $vocab );
 
@@ -68,7 +70,9 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'http://test/data/',
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$builder = new GeoShapeRdfBuilder( $vocab );
 

@@ -45,7 +45,9 @@ class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 			RdfBuilderTestData::URI_DATA,
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
-			''
+			'',
+			[ '' => '' ],
+			[ '' => '' ]
 		);
 		$writer = new NTriplesRdfWriter();
 		$tracker = new NullEntityMentionListener();

@@ -119,7 +119,9 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				EntityDataSerializationServiceTest::URI_DATA,
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
-				''
+				'',
+				[ '' => 'wd' ],
+				[ '' => '' ]
 			),
 			true
 		);
