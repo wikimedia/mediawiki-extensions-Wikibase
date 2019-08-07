@@ -6,6 +6,7 @@ use HashBagOStuff;
 use MediaWikiTestCase;
 use WANObjectCache;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
@@ -43,8 +44,12 @@ class DatabaseTypeIdsStoreTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbt_type';
 
 		$loadBalancer = $this->createMock( ILoadBalancer::class );
-		$loadBalancer->method( 'getConnection' )
-			->willReturn( $this->db );
+		$loadBalancer->method( 'getConnection' )->willReturn( $this->db );
+		$loadBalancer->method( 'getConnectionRef' )->willReturnCallback(
+			function ( $i, $g, $domain, $flg ) use ( $loadBalancer ) {
+				return new DBConnRef( $loadBalancer, $this->db, $i );
+			}
+		);
 		$cache = new WANObjectCache( [ 'cache' => new HashBagOStuff() ] );
 		$this->typeIdsStore = new DatabaseTypeIdsStore(
 			$loadBalancer,
