@@ -387,6 +387,7 @@
 	"wikibase-listdatatypes-geo-shape-body": "链接到存储在维基共享资源（或其他配置的wiki）上的地理图数据。参见“https://www.mediawiki.org/wiki/Help:Map_Data”获取更多有关地图数据的文档。",
 	"wikibase-listdatatypes-tabular-data-head": "表格数据",
 	"wikibase-listdatatypes-tabular-data-body": "链接到存储在维基共享资源（或其他配置的wiki）上的表格数据。参见“https://www.mediawiki.org/wiki/Help:Tabular_Data”获取更多有关表格数据的文档。",
+	"wikibase-listdatatypes-entity-schema-head": "Entity Schema",
 	"wikibase-listdatatypes-quantity-head": "数量",
 	"wikibase-listdatatypes-quantity-body": "一些精确定义单位的数值的原始数据字段。实际单位也输入到数据中。\n* 数额——字符串的暗示部分（单位前缀的映射未知）\n* 单位——默认为“1”字符串的暗示部分（映射的规范实体未知）\n* 上限——量的最高界限\n* 下限——量的最低界限",
 	"wikibase-listdatatypes-monolingualtext-head": "单语文本",
