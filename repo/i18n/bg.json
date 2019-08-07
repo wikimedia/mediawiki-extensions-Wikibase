@@ -215,7 +215,7 @@
 	"wikibase-history-title-with-label": "История на редакциите на „$2“ ($1)",
 	"wikibase-history-title-without-label": "История на промените на ($1)",
 	"special-listproperties": "Списък на свойства",
-	"wikibase-listproperties-legend": "Дай списък на свойства по типове на данните",
+	"wikibase-listproperties-legend": "Връщане на списък на свойства по типове на данните",
 	"wikibase-listproperties-datatype": "Тип на данните:",
 	"wikibase-listproperties-all": "Всички типове данни",
 	"wikibase-listproperties-submit": "Търсене",

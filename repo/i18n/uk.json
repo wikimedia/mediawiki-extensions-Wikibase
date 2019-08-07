@@ -383,6 +383,7 @@
 	"wikibase-listdatatypes-tabular-data-head": "Табличні дані",
 	"wikibase-listdatatypes-tabular-data-body": "Посилання на табличні дані, які зберігаються на Вікісховищі (чи іншій налаштованій вікі). Див. «https://www.mediawiki.org/wiki/Help:Tabular_Data», щоб знайти більше документації на тему табличних даних.",
 	"wikibase-listdatatypes-entity-schema-head": "Entity Schema",
+	"wikibase-listdatatypes-entity-schema-body": "Посилання на Схеми сутностей (Entity Schemas) у відповідному просторі назв цієї вікі. Значення має бути без префіксу \"EntitySchema:\"",
 	"wikibase-listdatatypes-quantity-head": "Кількість",
 	"wikibase-listdatatypes-quantity-body": "Символьне поле для введення кількості, заданої у цілком певних одиницях. Конкретні одиниці вказані у введених значеннях даних.\n* amount — неявна частина рядка (обробка префікса одиниці незрозуміла)\n* unit — неявна частина рядка, типово — «1» (зв'язок з еталоном незрозумілий)\n* upperbound — верхня межа кількості\n* lowerbound — нижня межа кількості",
 	"wikibase-listdatatypes-monolingualtext-head": "Одномовний текст",
