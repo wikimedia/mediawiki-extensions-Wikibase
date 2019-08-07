@@ -34,6 +34,8 @@ describe( 'App.vue', () => {
 		propertyId = 'P349';
 		editFlow = EditFlow.OVERWRITE;
 		const services = new ServiceRepositories();
+		( Entities.entities.Q42 as any ).statements = Entities.entities.Q42.claims;
+
 		services.setEntityRepository( {
 			getEntity: () => {
 				return Promise.resolve( {

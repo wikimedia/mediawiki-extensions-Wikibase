@@ -14,7 +14,7 @@ describe( 'store', () => {
 					entity: {
 						id: 'Q42',
 						statements: {
-							'P31': [ {
+							P31: [ {
 								type: 'statement',
 								id: 'opaque statement ID',
 								rank: 'normal',
