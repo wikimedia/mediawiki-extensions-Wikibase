@@ -1,16 +1,16 @@
-import Vue from 'vue';
 import { MutationTree } from 'vuex';
 import StatementsState from '@/store/entity/statements/StatementsState';
-import StatementMap from '@/datamodel/StatementMap';
-import {
-	STATEMENTS_SET,
-} from '@/store/entity/statements/mutationTypes';
+import { statementMutations } from '@/store/entity/statements/statementMutations';
+import { mainSnakMutationTypes } from '@/store/entity/statements/mainSnakMutationTypes';
+import resolveMainSnak from '@/store/entity/statements/resolveMainSnak';
+import buildMainSnakMutations from '@/store/entity/statements/snaks/mutations';
+import MainSnakPath from '@/store/entity/statements/MainSnakPath';
+
+const mainSnakMutations = buildMainSnakMutations<MainSnakPath>(
+	mainSnakMutationTypes, resolveMainSnak,
+);
 
 export const mutations: MutationTree<StatementsState> = {
-	[ STATEMENTS_SET ](
-		state: StatementsState,
-		payload: { entityId: string; statements: StatementMap },
-	): void {
-		Vue.set( state, payload.entityId, payload.statements );
-	},
+	...statementMutations,
+	...mainSnakMutations,
 };

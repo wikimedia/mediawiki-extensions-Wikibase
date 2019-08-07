@@ -5,6 +5,7 @@ import { mutations } from '@/store/entity/statements/mutations';
 import newStatementsState from './newStatementsState';
 import StatementMap from '@/datamodel/StatementMap';
 import Snak from '@/datamodel/Snak';
+import { mainSnakMutationTypes } from '@/store/entity/statements/mainSnakMutationTypes';
 
 describe( 'statements/mutations', () => {
 	describe( STATEMENTS_SET, () => {
@@ -46,5 +47,12 @@ describe( 'statements/mutations', () => {
 			mutations[ STATEMENTS_SET ]( state, { entityId: 'Q42', statements } );
 			expect( state ).toStrictEqual( { Q42: statements } );
 		} );
+	} );
+
+	it( 'binds the snak mutation unit', () => {
+		expect( mutations[ mainSnakMutationTypes.setDataValue ] ).toBeDefined();
+		expect( typeof mutations[ mainSnakMutationTypes.setDataValue ] ).toBe( 'function' );
+		expect( mutations[ mainSnakMutationTypes.setSnakType ] ).toBeDefined();
+		expect( typeof mutations[ mainSnakMutationTypes.setSnakType ] ).toBe( 'function' );
 	} );
 } );
