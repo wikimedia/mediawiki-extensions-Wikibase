@@ -283,32 +283,30 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EntitySavingHelper
 	 */
 	protected function newEntitySavingHelper( array $config ) {
-		$apiModule = $this->getMockApiBase( isset( $config['params'] ) ? $config['params'] : [] );
+		$apiModule = $this->getMockApiBase( $config['params'] ?? [] );
 		$apiModule->expects( $this->any() )
 			->method( 'isWriteMode' )
-			->will( $this->returnValue(
-				isset( $config['writeMode'] ) ? $config['writeMode'] : true
-			) );
+			->will( $this->returnValue( $config['writeMode'] ?? true ) );
 
 		$helper = new EntitySavingHelper(
 			$apiModule,
-			isset( $config['EntityIdParser'] ) ? $config['EntityIdParser'] : new ItemIdParser(),
+			$config['EntityIdParser'] ?? new ItemIdParser(),
 			$this->getMockEntityRevisionLookup(
-				isset( $config['entityId'] ) ? $config['entityId'] : null,
-				isset( $config['revision'] ) ? $config['revision'] : null,
-				isset( $config['exception'] ) ? $config['exception'] : null
+				$config['entityId'] ?? null,
+				$config['revision'] ?? null,
+				$config['exception'] ?? null
 			),
 			$this->getMockErrorReporter(
-				isset( $config['dieExceptionCode'] ) ? $config['dieExceptionCode'] : null,
-				isset( $config['dieErrorCode'] ) ? $config['dieErrorCode'] : null
+				$config['dieExceptionCode'] ?? null,
+				$config['dieErrorCode'] ?? null
 			),
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory(
-				isset( $config['newEditEntityCalls'] ) ? $config['newEditEntityCalls'] : null
+				$config['newEditEntityCalls'] ?? null
 			)
 		);
 
-		if ( isset( $config['allowCreation'] ) && $config['allowCreation'] ) {
+		if ( $config['allowCreation'] ?? false ) {
 			$helper->setEntityFactory( WikibaseRepo::getDefaultInstance()->getEntityFactory() );
 			$helper->setEntityStore( $this->getMockEntityStore() );
 		}
