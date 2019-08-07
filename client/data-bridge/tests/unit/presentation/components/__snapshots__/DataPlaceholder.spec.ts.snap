@@ -1,9 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataPlaceholder renders correctly 1`] = `
-<p>
+<p
+  class="wb-db-placeholder"
+>
   
-	Target Value: some string
-
+	Target Value:
+	
+  <span
+    class="wb-db-placeholder__value"
+  >
+    some string
+  </span>
 </p>
 `;

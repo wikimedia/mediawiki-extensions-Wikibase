@@ -67,12 +67,13 @@ describe( 'init', () => {
 		it( 'shows the current targetValue', () => {
 			const title = DataBridgePage.getDummyTitle();
 			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+			const stringPropertyExampleValue = 'ExampleString';
 			const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
 				'claims': [ {
 					'mainsnak': {
 						'snaktype': 'value',
 						'property': propertyId,
-						'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+						'datavalue': { 'value': stringPropertyExampleValue, 'type': 'string' },
 					},
 					'type': 'statement',
 					'rank': 'normal',
@@ -93,7 +94,7 @@ describe( 'init', () => {
 			DataBridgePage.bridge.waitForDisplayed();
 
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
-			// TODO test on value
+			assert.strictEqual( DataBridgePage.value.getText(), stringPropertyExampleValue );
 		} );
 	} );
 } );

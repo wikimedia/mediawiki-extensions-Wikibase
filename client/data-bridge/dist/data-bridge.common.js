@@ -4753,12 +4753,12 @@ function merge(a, b) {
 // CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
 
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a151461-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataPlaceholder.vue?vue&type=template&id=53f5ede4&scoped=true&
-var DataPlaceholdervue_type_template_id_53f5ede4_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_vm._v("\n\tTarget Value: "+_vm._s(_vm.targetValue)+"\n")])}
-var DataPlaceholdervue_type_template_id_53f5ede4_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a151461-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataPlaceholder.vue?vue&type=template&id=999205c8&scoped=true&
+var DataPlaceholdervue_type_template_id_999205c8_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',{staticClass:"wb-db-placeholder"},[_vm._v("\n\tTarget Value:\n\t"),_c('span',{staticClass:"wb-db-placeholder__value"},[_vm._v(_vm._s(_vm.targetValue))])])}
+var DataPlaceholdervue_type_template_id_999205c8_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataPlaceholder.vue?vue&type=template&id=53f5ede4&scoped=true&
+// CONCATENATED MODULE: ./src/presentation/components/DataPlaceholder.vue?vue&type=template&id=999205c8&scoped=true&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataPlaceholder.vue?vue&type=script&lang=ts&
 
@@ -4895,11 +4895,11 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_DataPlaceholdervue_type_script_lang_ts_,
-  DataPlaceholdervue_type_template_id_53f5ede4_scoped_true_render,
-  DataPlaceholdervue_type_template_id_53f5ede4_scoped_true_staticRenderFns,
+  DataPlaceholdervue_type_template_id_999205c8_scoped_true_render,
+  DataPlaceholdervue_type_template_id_999205c8_scoped_true_staticRenderFns,
   false,
   null,
-  "53f5ede4",
+  "999205c8",
   null
   
 )

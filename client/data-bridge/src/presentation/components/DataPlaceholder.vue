@@ -1,6 +1,7 @@
 <template>
-	<p>
-		Target Value: {{ targetValue }}
+	<p class="wb-db-placeholder">
+		Target Value:
+		<span class="wb-db-placeholder__value">{{ targetValue }}</span>
 	</p>
 </template>
 
