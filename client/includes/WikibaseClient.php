@@ -284,7 +284,8 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	public static function getDefaultValueFormatterBuilders() {
-		return self::getDefaultInstance()->newWikibaseValueFormatterBuilders();
+		global $wgThumbLimits;
+		return self::getDefaultInstance()->newWikibaseValueFormatterBuilders( $wgThumbLimits );
 	}
 
 	/**
@@ -293,9 +294,11 @@ final class WikibaseClient {
 	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
+	 * @param array $thumbLimits
+	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	private function newWikibaseValueFormatterBuilders() {
+	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
 		if ( $this->valueFormatterBuilders === null ) {
 			$entityTitleLookup = new ClientSiteLinkTitleLookup(
 				$this->getStore()->getSiteLinkLookup(),
@@ -321,7 +324,8 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'entitySchemaNamespace' ),
 				$entityTitleLookup,
 				$kartographerEmbeddingHandler,
-				$this->settings->getSetting( 'useKartographerMaplinkInWikitext' )
+				$this->settings->getSetting( 'useKartographerMaplinkInWikitext' ),
+				$thumbLimits
 			);
 		}
 

@@ -107,7 +107,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			1,
 			$entityTitleLookup,
 			$this->newKartographerEmbeddingHandler(),
-			true
+			true,
+			[ 120 ]
 		);
 	}
 

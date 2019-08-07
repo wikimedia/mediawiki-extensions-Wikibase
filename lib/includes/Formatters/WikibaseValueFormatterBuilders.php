@@ -139,6 +139,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param bool $useKartographerMaplinkInWikitext
+	 * @param array $thumbLimits
 	 */
 	public function __construct(
 		Language $defaultLanguage,
@@ -154,7 +155,8 @@ class WikibaseValueFormatterBuilders {
 		$entitySchemaNamespace,
 		EntityTitleLookup $entityTitleLookup = null,
 		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
-		$useKartographerMaplinkInWikitext = false
+		$useKartographerMaplinkInWikitext = false,
+		$thumbLimits = []
 	) {
 		Assert::parameterType(
 			'string',
@@ -186,6 +188,12 @@ class WikibaseValueFormatterBuilders {
 			'$entitySchemaNamespace'
 		);
 
+		Assert::parameterType(
+			'array',
+			$thumbLimits,
+			'$thumbLimits'
+		);
+
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
@@ -201,6 +209,7 @@ class WikibaseValueFormatterBuilders {
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;
 		$this->useKartographerMaplinkInWikitext = $useKartographerMaplinkInWikitext;
 		$this->entitySchemaNamespace = $entitySchemaNamespace;
+		$this->thumbLimits = $thumbLimits;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -329,11 +338,10 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
-		global $wgThumbLimits;
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format ) ) {
 			return new CommonsInlineImageFormatter(
 				RequestContext::getMain()->getOutput()->parserOptions(),
-				$wgThumbLimits,
+				$this->thumbLimits,
 				$options
 			);
 		}
