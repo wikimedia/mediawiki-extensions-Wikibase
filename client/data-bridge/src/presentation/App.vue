@@ -17,9 +17,6 @@ import DataBridge from '@/presentation/components/DataBridge.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import {
-	BRIDGE_INIT,
-} from '@/store/actionTypes';
 import { Getter } from 'vuex-class';
 
 @Component( {
@@ -32,10 +29,6 @@ import { Getter } from 'vuex-class';
 export default class App extends Vue {
 	@Getter( 'applicationStatus' )
 	public applicationStatus!: ApplicationStatus;
-
-	public created() {
-		this.$store.dispatch( BRIDGE_INIT );
-	}
 
 	public get isInit() {
 		return this.applicationStatus === ApplicationStatus.READY;

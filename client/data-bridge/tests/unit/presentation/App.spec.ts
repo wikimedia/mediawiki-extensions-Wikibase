@@ -14,7 +14,6 @@ import {
 	APPLICATION_STATUS_SET,
 } from '@/store/mutationTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import AppInformation from '@/definitions/AppInformation';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
@@ -29,13 +28,6 @@ describe( 'App.vue', () => {
 	let entityId: string;
 	let propertyId: string;
 	let editFlow: EditFlow;
-	const getInformation = (): Promise<AppInformation> => {
-		return Promise.resolve( {
-			propertyId,
-			entityId,
-			editFlow,
-		} );
-	};
 
 	beforeEach( () => {
 		store = createStore();
@@ -43,9 +35,11 @@ describe( 'App.vue', () => {
 		propertyId = 'P349';
 		editFlow = EditFlow.OVERWRITE;
 
-		services.setApplicationInformationRepository( {
-			getInformation,
-		} );
+		const information = {
+			entityId,
+			propertyId,
+			editFlow,
+		};
 
 		services.setEntityRepository( {
 			getEntity: () => {
@@ -55,6 +49,9 @@ describe( 'App.vue', () => {
 				} as any );
 			},
 		} );
+
+		store.dispatch( BRIDGE_INIT, information );
+
 	} );
 
 	it( 'renders the mountable root element', () => {
@@ -96,23 +93,5 @@ describe( 'App.vue', () => {
 
 			expect( wrapper.find( Initializing ).exists() ).toBeTruthy();
 		} );
-	} );
-
-	it( 'initalize the store on create', () => {
-		store.dispatch = jest.fn( () => {
-			return Promise.resolve();
-		} );
-
-		const wrapper = shallowMount( App, {// eslint-disable-line @typescript-eslint/no-unused-vars
-			store,
-			localVue,
-		} );
-
-		expect( store.dispatch ).toHaveBeenCalledTimes( 1 );
-		expect(
-			store.dispatch,
-		).toHaveBeenCalledWith(
-			BRIDGE_INIT,
-		);
 	} );
 } );

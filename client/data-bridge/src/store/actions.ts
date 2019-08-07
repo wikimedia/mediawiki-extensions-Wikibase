@@ -17,28 +17,24 @@ import {
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
-import { services } from '@/services';
 
 export const actions = {
 	[ BRIDGE_INIT ](
 		context: ActionContext<Application, Application>,
+		information: AppInformation,
 	): Promise<void> {
-		return services.getApplicationInformationRepository().getInformation().then(
-			( information: AppInformation ) => {
-				context.commit( EDITFLOW_SET, information.editFlow );
-				context.commit( PROPERTY_TARGET_SET, information.propertyId );
+		context.commit( EDITFLOW_SET, information.editFlow );
+		context.commit( PROPERTY_TARGET_SET, information.propertyId );
 
-				return context.dispatch(
-					namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
-					{ entity: information.entityId },
-				).then( () => {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
-				} ).catch( ( error ) => {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
-					// TODO: store information about the error somewhere and show it!
-					throw error;
-				} );
-			},
-		);
+		return context.dispatch(
+			namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
+			{ entity: information.entityId },
+		).then( () => {
+			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+		} ).catch( ( error ) => {
+			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+			// TODO: store information about the error somewhere and show it!
+			throw error;
+		} );
 	},
 };
