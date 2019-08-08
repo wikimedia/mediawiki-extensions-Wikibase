@@ -221,6 +221,7 @@
 	"wikibase-listproperties-datatype": "Datentipo:",
 	"wikibase-listproperties-all": "Ĉiuj datentipoj",
 	"wikibase-listproperties-submit": "Serĉi",
+	"wikibase-listproperties-invalid-datatype": "\"$1\" ne estas valida datentipo.",
 	"special-entitieswithoutdescription": "Entoj sen priskribo",
 	"wikibase-entitieswithoutdescription-legend": "Listigi entojn sen priskribo",
 	"special-entitieswithoutlabel": "Entoj sen etikedo",
