@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use Html;
 use Closure;
 use HashSiteStore;
 use Language;
@@ -12,6 +13,8 @@ use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\RepoLinker;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -57,7 +60,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$sidebarLinkBadgeDisplay,
 			$this->getUsageAccumulator(),
-			$siteIdsToOutput
+			$this->getRepoLinker(),
+			$siteIdsToOutput,
+			'wikidatawiki'
 		);
 
 		$this->assertEquals(
@@ -88,6 +93,12 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'itemtitle' => self::BADGE_ITEM_LABEL,
 		];
 
+		$wikidataItemLink = [
+			'msg' => 'wikibase-dataitem',
+			'class' => 'wb-otherproject-link',
+			'href' => '<a href="https://www.wikidata.org/wiki/Q123">Q123</a>',
+		];
+
 		return [
 			[
 				[],
@@ -105,8 +116,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				$this->getSidebarLinkBadgeDisplay()
 			],
 			[
-				[ 'enwiki' ],
-				[ $wikipediaLink ],
+				[ 'enwiki', 'wikidatawiki' ],
+				[ $wikidataItemLink, $wikipediaLink ],
 				$this->getSidebarLinkBadgeDisplay()
 			],
 			[
@@ -133,7 +144,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			$siteIdsToOutput
+			$this->getRepoLinker(),
+			$siteIdsToOutput,
+			'wikidatawiki'
 		);
 
 		$this->assertEquals(
@@ -162,12 +175,15 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			$siteIdsToOutput
+			$this->getRepoLinker(),
+			$siteIdsToOutput,
+			'wikidatawiki'
 		);
 
 		if ( $suppressErrors ) {
 			\Wikimedia\suppressWarnings();
 		}
+
 		$this->assertEquals(
 			$result,
 			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
@@ -210,12 +226,12 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 		return [
 			'Noop hook, gets the right data' => [
-				function( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ) {
+				function ( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ) {
 					$this->assertSame(
 						[
 							'wikiquote' => [ 'enwikiquote' => $wikiquoteLink ],
 							'wikipedia' => [ 'enwiki' => $wikipediaLink ],
-							'wiktionary' => [ 'enwiktionary' => $wiktionaryLink ]
+							'wiktionary' => [ 'enwiktionary' => $wiktionaryLink ],
 						],
 						$sidebar
 					);
@@ -225,14 +241,14 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ]
 			],
 			'Hook changes enwiki link' => [
-				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+				function ( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$sidebar['wikipedia']['enwiki']['href'] = $changedWikipedaLink['href'];
 				},
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
 				[ $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink ]
 			],
 			'Hook inserts enwiki link' => [
-				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+				function ( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$this->assertArrayNotHasKey(
 						'wikipedia',
 						$sidebar,
@@ -245,7 +261,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				[ $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink ]
 			],
 			'Invalid hook #1, original data is being used' => [
-				function( ItemId $itemId, array &$sidebar ) {
+				function ( ItemId $itemId, array &$sidebar ) {
 					$sidebar = null;
 				},
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
@@ -253,7 +269,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				true
 			],
 			'Invalid hook #2, original data is being used' => [
-				function( ItemId $itemId, array &$sidebar ) {
+				function ( ItemId $itemId, array &$sidebar ) {
 					$sidebar[0]['msg'] = [];
 				},
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
@@ -261,7 +277,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				true
 			],
 			'Invalid hook #3, original data is being used' => [
-				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+				function ( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$sidebar['wikipedia']['enwiki']['href'] = 1.2;
 				},
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
@@ -269,7 +285,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				true
 			],
 			'Invalid hook #4, original data is being used' => [
-				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+				function ( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
 					$sidebar['wikipedia'][] = $changedWikipedaLink;
 				},
 				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
@@ -300,7 +316,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			[ 'enwiki' ]
+			$this->getRepoLinker(),
+			[ 'enwiki' ],
+			'wikidatawiki'
 		);
 
 		$this->assertSame(
@@ -316,7 +334,10 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'WikibaseClientOtherProjectsSidebar' => [
 				function ( ItemId $itemId, $sidebar ) use ( &$called ) {
 					$this->assertSame( self::TEST_ITEM_ID, $itemId->getSerialization() );
-					$this->assertSame( [], $sidebar );
+					$this->assertSame(
+						[],
+						$sidebar
+					);
 					$called = true;
 				},
 			],
@@ -329,7 +350,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
-			[ 'unknown-site' ]
+			$this->getRepoLinker(),
+			[ 'unknown-site' ],
+			'wikidatawiki'
 		);
 
 		$this->assertSame(
@@ -394,6 +417,26 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 	private function getUsageAccumulator() {
 		return $this->getMock( UsageAccumulator::class );
+	}
+
+	private function getRepoLinker() {
+		$repoLinker = $this->getMockBuilder( RepoLinker::class )
+			->disableOriginalConstructor()
+			->setMethods( [ 'getEntityUrl' ] )
+			->getMock();
+		$repoLinker->expects( $this->any() )
+			->method( 'getEntityUrl' )
+			->will( $this->returnCallback( function (
+				EntityId $entityId,
+				array $classes = [],
+				$text = null
+			) {
+				return Html::rawElement( 'a', [
+					'href' => 'https://www.wikidata.org/wiki/' . $entityId,
+					'class' => implode( ' ', $classes ),
+				], $text ?: $entityId );
+			} ) );
+		return $repoLinker;
 	}
 
 	/**

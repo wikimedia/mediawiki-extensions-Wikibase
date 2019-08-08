@@ -15,6 +15,7 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
@@ -218,7 +219,9 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$siteLinkLookup,
 			$this->getSiteLookup(),
 			$this->getEntityLookup( $siteLinkData ),
-			$sidebarLinkBadgeDisplay
+			$sidebarLinkBadgeDisplay,
+			$this->getMock( RepoLinker::class, [], [], '', false ),
+			'wikidatawiki'
 		);
 	}
 
@@ -256,6 +259,12 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			'hreflang' => 'en',
 		];
 
+		$wikidataOxygen = [
+			'msg' => 'wikibase-dataitem',
+			'class' => 'wb-otherproject-link',
+			'href' => null
+		];
+
 		$badgesQ1 = [
 			'class' => 'badge-Q17 featured',
 			'label' => 'featured',
@@ -267,7 +276,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				'Q1',
 				[],
 				[ 'de:Sauerstoff' ],
-				[ $commonsOxygen ],
+				[ $commonsOxygen, $wikidataOxygen ],
 				[ 'de' => $badgesQ1 ],
 			],
 
@@ -276,7 +285,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				'Q1',
 				[ 'noexternallanglinks' => serialize( [ '*' ] ) ],
 				[],
-				[ $commonsOxygen ],
+				[ $commonsOxygen, $wikidataOxygen ],
 				null,
 			],
 
@@ -285,7 +294,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				'Q1',
 				[ 'noexternallanglinks' => serialize( [ 'de' ] ) ],
 				[],
-				[ $commonsOxygen ],
+				[ $commonsOxygen, $wikidataOxygen ],
 				[],
 			],
 
@@ -294,7 +303,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				'Q1',
 				[ 'noexternallanglinks' => serialize( [ 'ja' ] ) ],
 				[ 'de:Sauerstoff' ],
-				[ $commonsOxygen ],
+				[ $commonsOxygen, $wikidataOxygen ],
 				[ 'de' => $badgesQ1 ],
 			],
 		];
