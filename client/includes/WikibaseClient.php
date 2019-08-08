@@ -1671,7 +1671,11 @@ final class WikibaseClient {
 		$wanObjectCache = $this->getWANObjectCache();
 		$typeIdsStore = new DatabaseTypeIdsStore( $loadBalancer, $wanObjectCache );
 		$databaseTermIdsResolver = new DatabaseTermIdsResolver(
-			$typeIdsStore, $typeIdsStore, $loadBalancer );
+			$typeIdsStore,
+			$typeIdsStore,
+			$loadBalancer,
+			$this->getDatabaseDomainForPropertySource()
+		);
 
 		return new CachedDatabasePropertyLabelResolver(
 			$languageCode,
@@ -1683,14 +1687,17 @@ final class WikibaseClient {
 	}
 
 	private function getLoadBalancerForConfiguredPropertySource() {
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		return $lbFactory->getMainLB( $this->getDatabaseDomainForPropertySource() );
+	}
+
+	private function getDatabaseDomainForPropertySource() {
 		$dataAccessSettings = $this->getDataAccessSettings();
 		$propertySource = $this->getPropertySource( $dataAccessSettings );
-		$propertyDatabaseName = $dataAccessSettings->useEntitySourceBasedFederation() ?
+
+		return $dataAccessSettings->useEntitySourceBasedFederation() ?
 			$propertySource->getDatabaseName() :
 			$this->getRepositoryDefinitions()->getDatabaseNames()[''];
-
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		return $lbFactory->getMainLB( $propertyDatabaseName );
 	}
 
 	private function getWANObjectCache() {
@@ -1703,9 +1710,6 @@ final class WikibaseClient {
 
 		$dataAccessSettings = $this->getDataAccessSettings();
 		$propertySource = $this->getPropertySource( $dataAccessSettings );
-		$propertyDatabaseName = $dataAccessSettings->useEntitySourceBasedFederation() ?
-			$propertySource->getDatabaseName() :
-			$this->getRepositoryDefinitions()->getDatabaseNames()[''];
 		$propertyRepositoryName = '';
 
 		$index = new TermSqlIndex(
@@ -1714,7 +1718,7 @@ final class WikibaseClient {
 			$this->getEntityIdParser(),
 			$propertySource,
 			$dataAccessSettings,
-			$propertyDatabaseName,
+			$this->getDatabaseDomainForPropertySource(),
 			$propertyRepositoryName
 		);
 
