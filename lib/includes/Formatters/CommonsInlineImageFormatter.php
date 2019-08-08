@@ -8,6 +8,7 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use Linker;
+use ParserOptions;
 use RepoGroup;
 use Title;
 use ValueFormatters\FormatterOptions;
@@ -34,15 +35,35 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 	private $repoGroup;
 
 	/**
+	 * @var ParserOptions
+	 */
+	private $parserOptions;
+
+	/**
+	 * @var array
+	 */
+	private $thumbLimits;
+
+	/**
+	 * @param ParserOptions $parserOptions Options for thumbnail size
+	 * @param array $thumbLimits Mapping of thumb number to the limit like [ 0 => 120, 1 => 240, ...]
 	 * @param FormatterOptions|null $options
 	 * @param RepoGroup|null $repoGroup
+	 * @throws \MWException
 	 */
-	public function __construct( FormatterOptions $options = null, RepoGroup $repoGroup = null ) {
+	public function __construct(
+		ParserOptions $parserOptions,
+		array $thumbLimits,
+		FormatterOptions $options = null,
+		RepoGroup $repoGroup = null
+	) {
 		parent::__construct( $options );
 
 		$languageCode = $this->getOption( ValueFormatter::OPT_LANG );
 		$this->language = Language::factory( $languageCode );
 		$this->repoGroup = $repoGroup ?: RepoGroup::singleton();
+		$this->parserOptions = $parserOptions;
+		$this->thumbLimits = $thumbLimits;
 	}
 
 	/**
@@ -68,8 +89,8 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 		}
 
 		$transformOptions = [
-			'width' => 310,
-			'height' => 180
+			'width' => $this->thumbLimits[$this->parserOptions->getThumbSize()],
+			'height' => 1000
 		];
 
 		$file = $this->repoGroup->findFile( $fileName );

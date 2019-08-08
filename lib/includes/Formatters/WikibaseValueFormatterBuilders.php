@@ -7,6 +7,7 @@ use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use Language;
 use Psr\SimpleCache\CacheInterface;
+use RequestContext;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
@@ -328,8 +329,13 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
+		global $wgThumbLimits;
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format ) ) {
-			return new CommonsInlineImageFormatter( $options );
+			return new CommonsInlineImageFormatter(
+				RequestContext::getMain()->getOutput()->parserOptions(),
+				$wgThumbLimits,
+				$options
+			);
 		}
 
 		switch ( $this->snakFormat->getBaseFormat( $format ) ) {

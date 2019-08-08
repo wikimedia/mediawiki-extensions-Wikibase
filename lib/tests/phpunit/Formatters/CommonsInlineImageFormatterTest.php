@@ -6,6 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWikiTestCase;
+use ParserOptions;
 use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -25,9 +26,11 @@ use ValueFormatters\ValueFormatter;
 class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 
 	public function commonsInlineImageFormatterProvider() {
-		$exampleJpgHtmlRegex = '@<div .*<a[^>]+href="https://commons\.wikimedia\.org/wiki/File:Example\.jpg"[^>]*>' .
-				'<img.*src=".*//upload\.wikimedia\.org/wikipedia/commons/.*/Example\.jpg".*/></a></div>.*' .
-				'<div .*><a[^>]+href="https://commons\.wikimedia\.org/wiki/File:Example\.jpg"[^>]*>Example\.jpg</a>.*\d+.*</div>@s';
+		$fileUrl = '.*//upload\.wikimedia\.org/wikipedia/commons/.*/120px-Example\.jpg';
+		$pageUrl = 'https://commons\.wikimedia\.org/wiki/File:Example\.jpg';
+		$exampleJpgHtmlRegex = '@<div .*<a[^>]+href="' . $pageUrl . '"[^>]*>' .
+				'<img.*src="' . $fileUrl . '".*/></a></div>.*' .
+				'<div .*><a[^>]+href="' . $pageUrl . '"[^>]*>Example\.jpg</a>.*\d+.*</div>@s';
 
 		return [
 			[
@@ -63,7 +66,15 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
-		$formatter = new CommonsInlineImageFormatter( $this->newFormatterOptions() );
+		$parserOptions = new ParserOptions();
+		$parserOptions->setThumbSize( 0 );
+		$thumbLimits = [ 0 => 120 ];
+
+		$formatter = new CommonsInlineImageFormatter(
+			$parserOptions,
+			$thumbLimits,
+			$this->newFormatterOptions()
+		);
 
 		$html = $formatter->format( $value );
 		if ( $shouldContain ) {
@@ -74,7 +85,12 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = new CommonsInlineImageFormatter( $this->newFormatterOptions() );
+		$thumbLimits = [ 0 => 120 ];
+		$formatter = new CommonsInlineImageFormatter(
+			new ParserOptions(),
+			$thumbLimits,
+			$this->newFormatterOptions()
+		);
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( InvalidArgumentException::class );
