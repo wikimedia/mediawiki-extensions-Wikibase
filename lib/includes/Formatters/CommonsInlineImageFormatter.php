@@ -24,6 +24,8 @@ use ValueFormatters\ValueFormatterBase;
  */
 class CommonsInlineImageFormatter extends ValueFormatterBase {
 
+	const FALLBACK_THUMBNAIL_WIDTH = 320; // 320 the was default hardcoded value. Removed in T224189
+
 	/**
 	 * @var Language
 	 */
@@ -89,7 +91,7 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 		}
 
 		$transformOptions = [
-			'width' => $this->thumbLimits[$this->parserOptions->getThumbSize()],
+			'width' => $this->getThumbWidth( $this->parserOptions->getThumbSize() ),
 			'height' => 1000
 		];
 
@@ -105,6 +107,10 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 		Linker::processResponsiveImages( $file, $thumb, $transformOptions );
 
 		return $this->wrapThumb( $title, $thumb->toHtml() ) . $this->getCaptionHtml( $title, $file );
+	}
+
+	private function getThumbWidth( $thumbSize ) {
+		return $this->thumbLimits[$thumbSize] ?? self::FALLBACK_THUMBNAIL_WIDTH;
 	}
 
 	/**

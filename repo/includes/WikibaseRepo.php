@@ -614,8 +614,9 @@ class WikibaseRepo {
 	 */
 	public static function getDefaultValueFormatterBuilders() {
 		if ( self::$valueFormatterBuilders === null ) {
+			global $wgThumbLimits;
 			$wikibaseRepo = self::getDefaultInstance();
-			self::$valueFormatterBuilders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
+			self::$valueFormatterBuilders = $wikibaseRepo->newWikibaseValueFormatterBuilders( $wgThumbLimits );
 		}
 
 		return self::$valueFormatterBuilders;
@@ -627,9 +628,11 @@ class WikibaseRepo {
 	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
+	 * @param array $thumbLimits
+	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	private function newWikibaseValueFormatterBuilders() {
+	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
 		return new WikibaseValueFormatterBuilders(
 			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
@@ -644,7 +647,8 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'entitySchemaNamespace' ),
 			$this->getEntityTitleLookup(),
 			$this->getKartographerEmbeddingHandler(),
-			$this->settings->getSetting( 'useKartographerMaplinkInWikitext' )
+			$this->settings->getSetting( 'useKartographerMaplinkInWikitext' ),
+			$thumbLimits
 		);
 	}
 

@@ -66,15 +66,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
-		$parserOptions = new ParserOptions();
-		$parserOptions->setThumbSize( 0 );
-		$thumbLimits = [ 0 => 120 ];
-
-		$formatter = new CommonsInlineImageFormatter(
-			$parserOptions,
-			$thumbLimits,
-			$this->newFormatterOptions()
-		);
+		$formatter = $this->newSubjectInstance();
 
 		$html = $formatter->format( $value );
 		if ( $shouldContain ) {
@@ -85,16 +77,37 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 	}
 
 	public function testFormatError() {
-		$thumbLimits = [ 0 => 120 ];
-		$formatter = new CommonsInlineImageFormatter(
-			new ParserOptions(),
-			$thumbLimits,
-			$this->newFormatterOptions()
-		);
+		$formatter = $this->newSubjectInstance();
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
+	}
+
+	public function testFormat_whenThumbsizeNotAvailable_usesFallback() {
+		$formatter = $this->newSubjectInstance( 1, [ 0 => 120 ] );
+		$html = $formatter->format( new StringValue( 'example.jpg' ) );
+
+		// fallback to using CommonsInLineImageFormatter::FALLBACK_THUMBNAIL_WIDTH
+		$this->assertRegExp( '/320px-Example\.jpg/', $html );
+	}
+
+	private function newSubjectInstance(
+		$thumbSize = 0,
+		$thumbLimits = [ 120 ]
+	): CommonsInLineImageFormatter {
+		if ( !wfFindFile( 'Example.jpg' ) ) {
+			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
+		}
+
+		$parserOptions = new ParserOptions();
+		$parserOptions->setThumbSize( $thumbSize );
+
+		return new CommonsInlineImageFormatter(
+			$parserOptions,
+			$thumbLimits,
+			$this->newFormatterOptions()
+		);
 	}
 
 	private function newFormatterOptions() {
