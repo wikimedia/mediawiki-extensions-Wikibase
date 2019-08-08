@@ -6,7 +6,7 @@ const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
 
 describe( 'item', function () {
 
-	it( 'can add a statement using the keyboard', function () {
+	it.skip( 'can add a statement using the keyboard', function () {
 		// high-level overview: add statement, add qualifier, add second qualifier, add reference, save
 		let itemId, propertyId;
 
