@@ -1,4 +1,4 @@
-import { ServiceRepositories } from '@/services';
+import ServiceRepositories from '@/services/ServiceRepositories';
 import EntityRepository from '@/definitions/data-access/EntityRepository';
 
 function newServices(): ServiceRepositories {

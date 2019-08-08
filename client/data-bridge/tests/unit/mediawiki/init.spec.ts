@@ -10,7 +10,6 @@ jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 } );
 
 describe( 'init', () => {
-
 	it( 'loads `wikibase.client.data-bridge.app` and adds click handler', () => {
 		const require = jest.fn(),
 			using = jest.fn( () => Promise.resolve( require ) );

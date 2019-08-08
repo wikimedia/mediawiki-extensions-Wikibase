@@ -1,11 +1,12 @@
 import EditFlow from '@/definitions/EditFlow';
 import EntityRevision from '@/datamodel/EntityRevision';
-import { services } from '@/services';
+import ServiceRepositories from '@/services/ServiceRepositories';
 import { createStore } from '@/store';
 import { BRIDGE_INIT } from '@/store/actionTypes';
 
 describe( 'store', () => {
 	it( 'returns correct target value', () => {
+		const services = new ServiceRepositories();
 		services.setEntityRepository( {
 			async getEntity( _id: string, _revision?: number ): Promise<EntityRevision> {
 				return {
@@ -33,7 +34,7 @@ describe( 'store', () => {
 			},
 		} );
 
-		const store = createStore();
+		const store = createStore( services );
 
 		expect( store.getters.targetValue ).toBe( null );
 

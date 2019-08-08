@@ -1,9 +1,9 @@
 import MwWindow from '@/@types/mediawiki/MwWindow';
-import AppInformation from '@/definitions/AppInformation';
 import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 import prepareContainer from '@/mediawiki/prepareContainer';
-import ApplicationConfig from '@/definitions/ApplicationConfig';
+import ServiceRepositories from '@/services/ServiceRepositories';
+import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
@@ -36,16 +36,21 @@ export default async (): Promise<void> => {
 
 				prepareContainer( mwWindow.OO, mwWindow.$, APP_DOM_CONTAINER_ID );
 
-				const configuration: ApplicationConfig = {
-					containerSelector: `#${APP_DOM_CONTAINER_ID}`,
+				const services = new ServiceRepositories();
+				services.setEntityRepository( new SpecialPageEntityRepository(
+					mwWindow.$,
 					specialEntityDataUrl,
-				};
-				const information: AppInformation = {
-					entityId: selectedElement.entityId,
-					propertyId: selectedElement.propertyId,
-					editFlow: selectedElement.editFlow,
-				};
-				app.launch( configuration, information );
+				) );
+
+				app.launch(
+					{ containerSelector: `#${APP_DOM_CONTAINER_ID}` },
+					{
+						entityId: selectedElement.entityId,
+						propertyId: selectedElement.propertyId,
+						editFlow: selectedElement.editFlow,
+					},
+					services,
+				);
 			} );
 		} );
 	}

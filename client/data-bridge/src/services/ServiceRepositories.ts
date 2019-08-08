@@ -1,6 +1,6 @@
 import EntityRepository from '@/definitions/data-access/EntityRepository';
 
-class ServiceRepositories {
+export default class ServiceRepositories {
 	private entityRepository?: EntityRepository;
 
 	public setEntityRepository( lookup: EntityRepository ): void {
@@ -15,10 +15,3 @@ class ServiceRepositories {
 		}
 	}
 }
-
-const services = new ServiceRepositories();
-
-export {
-	services,
-	ServiceRepositories,
-};

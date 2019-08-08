@@ -1,16 +1,11 @@
-import Vue from 'vue';
+import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
 import Entities from '@/mock-data/data/Q42.data.json';
 import EditFlow from '@/definitions/EditFlow';
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
-import { services } from '@/services';
-import App from '@/presentation/App.vue';
-import { createStore } from '@/store';
-import {
-	BRIDGE_INIT,
-} from '@/store/actionTypes';
+import ServiceRepositories from '@/services/ServiceRepositories';
+import { launch } from '@/main';
 
-Vue.config.productionTip = false;
+const services = new ServiceRepositories();
 
 services.setEntityRepository(
 	new SpecialPageEntityRepository(
@@ -29,7 +24,8 @@ const information = {
 	editFlow: EditFlow.OVERWRITE,
 };
 
-const store = createStore();
-store.dispatch( BRIDGE_INIT, information );
+const config = {
+	containerSelector: '#data-bridge-container',
+};
 
-new App( { store } ).$mount( '#data-bridge-container' );
+launch( config, information, services );

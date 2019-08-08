@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import ServiceRepositories from '@/services/ServiceRepositories';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import {
 	createLocalVue,
@@ -18,7 +19,11 @@ localVue.use( Vuex );
 
 describe( 'DataBridge', () => {
 	beforeEach( () => {
-		store = createStore();
+		store = createStore( {
+			getEntityRepository() {
+				return {};
+			},
+		} as ServiceRepositories );
 	} );
 
 	it( 'mounts DataPlaceholder', () => {

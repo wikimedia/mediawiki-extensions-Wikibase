@@ -18,7 +18,7 @@ import EditFlow from '@/definitions/EditFlow';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
-import { services } from '@/services';
+import ServiceRepositories from '@/services/ServiceRepositories';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -30,17 +30,10 @@ describe( 'App.vue', () => {
 	let editFlow: EditFlow;
 
 	beforeEach( () => {
-		store = createStore();
 		entityId = 'Q42';
 		propertyId = 'P349';
 		editFlow = EditFlow.OVERWRITE;
-
-		const information = {
-			entityId,
-			propertyId,
-			editFlow,
-		};
-
+		const services = new ServiceRepositories();
 		services.setEntityRepository( {
 			getEntity: () => {
 				return Promise.resolve( {
@@ -50,8 +43,15 @@ describe( 'App.vue', () => {
 			},
 		} );
 
-		store.dispatch( BRIDGE_INIT, information );
+		store = createStore( services );
 
+		const information = {
+			entityId,
+			propertyId,
+			editFlow,
+		};
+
+		store.dispatch( BRIDGE_INIT, information );
 	} );
 
 	it( 'renders the mountable root element', () => {
