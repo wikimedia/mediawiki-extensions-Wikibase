@@ -10,6 +10,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
+use ParserOutput;
 use Title;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
@@ -613,6 +614,30 @@ class ItemContentTest extends EntityContentTestCase {
 			trim( file_get_contents( __DIR__ . '/textForFiltersItem.txt' ) ),
 			$output
 		);
+	}
+
+	public function testGetParserOutput() {
+		$content = $this->newBlank();
+
+		//@todo: Use a fake ID, no need to hit the database once we
+		//       got rid of the rest of the storage logic.
+		$this->entityStore->assignFreshId( $content->getEntity() );
+
+		$title = Title::newFromText( 'Foo' );
+		$parserOutput = $content->getParserOutput( $title );
+
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
+		$actualOptions = $parserOutput->getUsedOptions();
+		$this->assertEquals(
+			$expectedUsedOptions,
+			$actualOptions,
+			'Cache-split flags are not what they should be',
+			0.0,
+			1,
+			true
+		);
+
+		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 	}
 
 }

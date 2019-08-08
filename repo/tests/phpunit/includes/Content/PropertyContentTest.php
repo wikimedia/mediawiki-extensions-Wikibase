@@ -7,6 +7,8 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use InvalidArgumentException;
+use ParserOutput;
+use Title;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityId;
@@ -183,6 +185,30 @@ class PropertyContentTest extends EntityContentTestCase {
 			trim( file_get_contents( __DIR__ . '/textForFiltersProperty.txt' ) ),
 			$output
 		);
+	}
+
+	public function testGetParserOutput() {
+		$content = $this->newBlank();
+
+		//@todo: Use a fake ID, no need to hit the database once we
+		//       got rid of the rest of the storage logic.
+		$this->entityStore->assignFreshId( $content->getEntity() );
+
+		$title = Title::newFromText( 'Foo' );
+		$parserOutput = $content->getParserOutput( $title );
+
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
+		$actualOptions = $parserOutput->getUsedOptions();
+		$this->assertEquals(
+			$expectedUsedOptions,
+			$actualOptions,
+			'Cache-split flags are not what they should be',
+			0.0,
+			1,
+			true
+		);
+
+		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 	}
 
 }

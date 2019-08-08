@@ -7,7 +7,6 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
-use ParserOutput;
 use RuntimeException;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -39,7 +38,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	/**
 	 * @var EntityStore
 	 */
-	private $entityStore;
+	protected $entityStore;
 
 	protected function setUp() {
 		global $wgGroupPermissions, $wgUser;
@@ -155,30 +154,6 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
-	}
-
-	public function testGetParserOutput() {
-		$content = $this->newBlank();
-
-		//@todo: Use a fake ID, no need to hit the database once we
-		//       got rid of the rest of the storage logic.
-		$this->entityStore->assignFreshId( $content->getEntity() );
-
-		$title = Title::newFromText( 'Foo' );
-		$parserOutput = $content->getParserOutput( $title );
-
-		$expectedUsedOptions = [ 'userlang', 'wb' ];
-		$actualOptions = $parserOutput->getUsedOptions();
-		$this->assertEquals(
-			$expectedUsedOptions,
-			$actualOptions,
-			'Cache-split flags are not what they should be',
-			0.0,
-			1,
-			true
-		);
-
-		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 	}
 
 	public function providePageProperties() {

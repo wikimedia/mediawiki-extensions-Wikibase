@@ -38,6 +38,8 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 	 */
 	private $textInjector;
 
+	const TERMBOX_VERSION = 1;
+
 	public function __construct(
 		HtmlTermRenderer $htmlTermRenderer,
 		LabelDescriptionLookup $labelDescriptionLookup,

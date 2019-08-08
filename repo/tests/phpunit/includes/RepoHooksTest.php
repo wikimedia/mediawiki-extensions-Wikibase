@@ -334,11 +334,21 @@ XML
 
 		RepoHooks::onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
 
-		$this->assertSame( [ 'wb' => null ], $defaults );
-		$this->assertSame( [ 'wb' => true ], $inCacheKey );
-		$this->assertSame( [ 'wb' ], array_keys( $lazyOptions ) );
-		$this->assertInternalType( 'callable', $lazyOptions['wb'] );
-		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions['wb']() );
+		$this->assertSame( [
+			'wb' => null,
+			'termboxVersion' => null,
+			], $defaults );
+		$this->assertSame( [
+			'wb' => true,
+			'termboxVersion' => true,
+		], $inCacheKey );
+		$this->assertSame( [
+			'wb',
+			'termboxVersion',
+		], array_keys( $lazyOptions ) );
+		$this->assertInternalType( 'callable', $lazyOptions[ 'wb' ] );
+		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions[ 'wb' ]() );
+		$this->assertInternalType( 'callable', $lazyOptions[ 'termboxVersion' ] );
 	}
 
 	public function testOnParserOptionsRegister_hook() {
