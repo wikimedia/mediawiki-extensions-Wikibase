@@ -999,6 +999,7 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
 	$wgHooks['ApiMaxLagInfo'][] = '\Wikibase\RepoHooks::onApiMaxLagInfo';
 	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\RepoHooks::onParserOptionsRegister';
+	$wgHooks['RejectParserCacheValue'][] = '\Wikibase\RepoHooks::onRejectParserCacheValue';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
