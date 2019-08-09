@@ -19,6 +19,10 @@ class DataBridgePage extends Page {
 		};
 	}
 
+	static get PLACEHOLDER_VALUE() {
+		return '.wb-db-placeholder .wb-db-placeholder__value';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -55,6 +59,12 @@ class DataBridgePage extends Page {
 	get bridge() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}`
+		);
+	}
+
+	get value() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE} ${DataBridgePage.PLACEHOLDER_VALUE}`
 		);
 	}
 }
