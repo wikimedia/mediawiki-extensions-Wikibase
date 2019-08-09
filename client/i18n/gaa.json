@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Flixtey",
-			"Mybluberet"
+			"Mybluberet",
+			"Amire80"
 		]
 	},
-	"wikibase-comment-update": "{{WBREPOGBɛI}} atsake nii lɛ",
-	"wikibase-dataitem": "{{WBREPOGBƐI}} nii",
+	"wikibase-comment-update": "{{WBREPONAME}} atsake nii lɛ",
+	"wikibase-dataitem": "{{WBREPONAME}} nii",
 	"wikibase-editlinks": "Tsakemɔ tsalɔi",
 	"wikibase-rc-hide-wikidata-hide": "Kɛto",
 	"wikibase-rc-hide-wikidata-show": "Tsɔɔmɔ",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPOGBɛI}} tsakemɔ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} tsakemɔ",
 	"wikibase-otherprojects": "Yɛ gbɛjianɔtoi krokomɛi"
 }

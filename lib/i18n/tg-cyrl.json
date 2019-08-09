@@ -31,5 +31,6 @@
 	"wikibase-entity-summary-wbcreateclaim-create": "Тасдиқ эҷод шуд",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$3|шуд|шуданд}}",
 	"wikibase-entity-summary-wbmergeitems-to": "Элементи муттаҳидшуда дар $3",
-	"wikibase-item-summary-wbeditentity-create": "Элементи нав сохта шуд"
+	"wikibase-item-summary-wbeditentity-create": "Элементи нав сохта шуд",
+	"wikibase-item-summary-wbeditentity-update": "Элемент тағйир дода шуд"
 }

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Taxandru",
-			"L2212"
+			"L2212",
+			"Pierpao"
 		]
 	},
 	"tooltip-t-wikibase": "Ligàmene a s'elementu connètidu de s'archìviu de datos",
@@ -15,6 +16,7 @@
 	"wikibase-rc-hide-wikidata-show": "Ammustra",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modìfica fata in {{WBREPONAME}}",
+	"unconnectedpages": "Pàginas non ligadas a elementos",
 	"wikibase-pageinfo-entity-id": "ID elementu {{WBREPONAME}}",
 	"wikibase-otherprojects": "In àteros progetos"
 }
