@@ -5,20 +5,8 @@ const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
 describe( 'WikibaseReferenceOnProtectedPage', function () {
 
 	it( 'can expand collapsed references on a protected page as unprivileged user', function () {
-		let itemId, propertyId;
-
-		browser.call( () => {
-			return WikibaseApi.createItem( Util.getTestString( 'T186006-' ) )
-				.then( ( id ) => {
-					itemId = id;
-				} );
-		} );
-		browser.call( () => {
-			return WikibaseApi.getProperty( 'string' )
-				.then( ( id ) => {
-					propertyId = id;
-				} );
-		} );
+		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T186006-' ) ) );
+		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 
 		ItemPage.open( itemId );
 		ItemPage.addMainStatement( propertyId, 'mval' );

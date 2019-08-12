@@ -8,20 +8,9 @@ describe( 'item', function () {
 
 	it.skip( 'can add a statement using the keyboard', function () {
 		// high-level overview: add statement, add qualifier, add second qualifier, add reference, save
-		let itemId, propertyId;
 
-		browser.call( () => {
-			return WikibaseApi.createItem( Util.getTestString( 'T154869-' ) )
-				.then( ( id ) => {
-					itemId = id;
-				} );
-		} );
-		browser.call( () => {
-			return WikibaseApi.getProperty( 'string' )
-				.then( ( id ) => {
-					propertyId = id;
-				} );
-		} );
+		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T154869-' ) ) );
+		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 
 		EntityPage.open( itemId );
 
@@ -49,9 +38,7 @@ describe( 'item', function () {
 		browser.keys( 'qualifier 1' );
 		browser.pause( 1000 );
 
-		browser.waitUntil( () => {
-			return ItemPage.isSaveButtonEnabled();
-		} );
+		browser.waitUntil( () => ItemPage.isSaveButtonEnabled() );
 
 		// move focus to “add qualifier” and activate link
 		// (first Tab skips over link to remove current qualifier)
@@ -93,14 +80,7 @@ describe( 'item', function () {
 
 	// skip this until further investigation of flakiness T227266
 	it.skip( 'old revisions do not have an edit link', function () {
-		let itemId;
-
-		browser.call( () => {
-			return WikibaseApi.createItem( Util.getTestString( 'T95406-' ) )
-				.then( ( id ) => {
-					itemId = id;
-				} );
-		} );
+		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T95406-' ) ) );
 
 		EntityPage.open( itemId );
 		ItemPage.editItemDescription( 'revision 1' );
