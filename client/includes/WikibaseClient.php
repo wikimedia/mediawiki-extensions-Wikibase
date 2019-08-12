@@ -1671,7 +1671,11 @@ final class WikibaseClient {
 	): CachedDatabasePropertyLabelResolver {
 		$loadBalancer = $this->getLoadBalancerForConfiguredPropertySource();
 		$wanObjectCache = $this->getWANObjectCache();
-		$typeIdsStore = new DatabaseTypeIdsStore( $loadBalancer, $wanObjectCache );
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$wanObjectCache,
+			$this->getDatabaseDomainForPropertySource()
+		);
 		$databaseTermIdsResolver = new DatabaseTermIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
