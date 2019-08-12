@@ -43,6 +43,7 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
+use Wikibase\Rdf\PropertyRdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
@@ -110,6 +111,7 @@ return call_user_func( function() {
 			) {
 				return new CommonsMediaRdfBuilder( $vocab );
 			},
+			'rdf-data-type' => PropertyRdfBuilder::OBJECT_PROPERTY,
 		],
 		'PT:geo-shape' => [
 			'expert-module' => 'jquery.valueview.experts.GeoShape',
@@ -133,6 +135,7 @@ return call_user_func( function() {
 			) {
 				return new GeoShapeRdfBuilder( $vocab );
 			},
+			'rdf-data-type' => PropertyRdfBuilder::OBJECT_PROPERTY,
 		],
 		'PT:tabular-data' => [
 			'expert-module' => 'jquery.valueview.experts.TabularData',
@@ -156,6 +159,7 @@ return call_user_func( function() {
 			) {
 				return new TabularDataRdfBuilder( $vocab );
 			},
+			'rdf-data-type' => PropertyRdfBuilder::OBJECT_PROPERTY,
 		],
 		'PT:entity-schema' => [
 			'validator-factory-callback' => function() {
@@ -339,6 +343,7 @@ return call_user_func( function() {
 			) {
 				return new ObjectUriRdfBuilder();
 			},
+			'rdf-data-type' => PropertyRdfBuilder::OBJECT_PROPERTY,
 		],
 		'PT:external-id' => [
 			// NOTE: for 'formatter-factory-callback', we fall back to plain text formatting
@@ -429,6 +434,7 @@ return call_user_func( function() {
 
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
+			'rdf-data-type' => PropertyRdfBuilder::OBJECT_PROPERTY,
 		],
 		'PT:wikibase-property' => [
 			'expert-module' => 'wikibase.experts.Property',
@@ -472,6 +478,7 @@ return call_user_func( function() {
 
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
+			'rdf-data-type' => PropertyRdfBuilder::OBJECT_PROPERTY,
 		]
 	];
 } );

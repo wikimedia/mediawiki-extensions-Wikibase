@@ -41,6 +41,8 @@ Each key is associated with a map that provides the following fields:
 : A callable that acts as a factory for SnakFormatters for use with this data type. If not defined, a SnakFormatter is created from the ValueFormatter for the given data type.
 ; rdf-builder-factory-callback (repo only)
 : A callable that acts as a factory for ValueSnakRdfBuilder for use with this data type.
+; rdf-data-type (repo only)
+: RDF/OWL data type of a property having this data type (either ObjectProperty or DatatypeProperty, use constants from PropertyRdfBuilder). Default is DatatypeProperty.
 
 Since for each property data type the associated value type is known, this provides a convenient fallback mechanism: If a desired callback field isn't defined for a given property data type, we can fall back to using the callback that is defined for the value type. For example, if there is no formatter-factory-callback field associated with the PT:url key, we may use the one defined for VT:string, since the url property data type is based on the string value type.
 

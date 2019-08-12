@@ -27,17 +27,22 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 * @var RdfWriter
 	 */
 	private $writer;
+	/**
+	 * @var array
+	 */
+	private $dataTypes;
 
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer ) {
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, array $dataTypes = [] ) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
+		$this->dataTypes = $dataTypes;
 	}
 
 	/**
 	 * Write predicates linking property entity to property predicates
 	 * @param string $localName
 	 * @param string $repositoryName
-	 * @param boolean $propertyRdfType Is the property data or object property?
+	 * @param string $propertyRdfType OWL data type (OBJECT_PROPERTY or DATATYPE_PROPERTY)
 	 * @param string|null $normalizedPropertyRdfType Does the property have normalized predicates,
 	 *  and if so does the property normalize to data or objects?
 	 */
@@ -159,24 +164,10 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 * or just data item.
 	 *
 	 * @param Property $property
-	 *
-	 * @return string
+	 * @return string RDF/OWL type name for this property.
 	 */
 	private function getPropertyRdfType( Property $property ) {
-		$propertyTypesToBeObjects = [
-			'wikibase-item',
-			'wikibase-property',
-			'url',
-			'commonsMedia',
-			'geo-shape',
-			'tabular-data',
-		];
-
-		if ( in_array( $property->getDataTypeId(), $propertyTypesToBeObjects ) ) {
-			return self::OBJECT_PROPERTY;
-		} else {
-			return self::DATATYPE_PROPERTY;
-		}
+		return $this->dataTypes[$property->getDataTypeId()] ?? self::DATATYPE_PROPERTY;
 	}
 
 	/**

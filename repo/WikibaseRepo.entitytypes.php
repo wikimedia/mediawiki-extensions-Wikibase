@@ -234,7 +234,8 @@ return [
 		) {
 			return new PropertyRdfBuilder(
 				$vocabulary,
-				$writer
+				$writer,
+				WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getRdfDataTypes()
 			);
 		},
 		'entity-search-callback' => function ( WebRequest $request ) {
