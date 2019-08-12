@@ -12,12 +12,12 @@ import Statement from '@/datamodel/Statement';
 describe( 'entity/Getters', () => {
 	it( 'has an id', () => {
 		expect( getters[ ENTITY_ID ](
-			newEntityState( { id: 'Q123' } ), null, newApplicationState( {} ), null,
+			newEntityState( { id: 'Q123' } ), null, newApplicationState(), null,
 		) ).toBe( 'Q123' );
 	} );
 	it( 'has a baseRevision id', () => {
 		expect( getters[ ENTITY_REVISION ](
-			newEntityState( { baseRevision: 23 } ), null, newApplicationState( {} ), null,
+			newEntityState( { baseRevision: 23 } ), null, newApplicationState(), null,
 		) ).toBe( 23 );
 	} );
 

@@ -1,5 +1,4 @@
 import EntityState from '@/store/entity/EntityState';
-import lockState from '../lockState';
 
 export default function newEntityState( entity: any = null ): EntityState {
 	let state = {
@@ -10,7 +9,6 @@ export default function newEntityState( entity: any = null ): EntityState {
 
 	if ( entity !== null ) {
 		state = { ...state, ...entity };
-		lockState( state );
 	}
 	return state;
 }
