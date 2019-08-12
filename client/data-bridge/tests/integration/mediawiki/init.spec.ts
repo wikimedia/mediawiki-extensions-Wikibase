@@ -19,11 +19,13 @@ describe( 'init', () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} );
 		mockMwEnv( using );
-		const get = (): any => {};
-		( window as MwWindow ).$ = {
-			get,
-		} as any;
-
+		const expectedServices = new ServiceRepositories();
+		expectedServices.setEntityRepository(
+			new SpecialPageEntityRepository(
+				( window as MwWindow ).$,
+				'http://localhost/wiki/Special:EntityData',
+			),
+		);
 		const entityId = 'Q5';
 		const propertyId = 'P4711';
 		const editFlow = EditFlow.OVERWRITE;
@@ -33,19 +35,9 @@ describe( 'init', () => {
 	<a rel="nofollow" class="external text" href="${testLinkHref}">a link to be selected</a>
 </span>`;
 		const testLink = document.querySelector( 'a' );
-		const services = new ServiceRepositories();
 
 		return init().then( () => {
 			testLink!.click();
-
-			services.setEntityRepository(
-				new SpecialPageEntityRepository(
-					{
-						get,
-					} as any,
-					'http://localhost/wiki/Special:EntityData',
-				),
-			);
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			expect( app.launch ).toHaveBeenCalledWith(
@@ -55,7 +47,7 @@ describe( 'init', () => {
 					propertyId,
 					editFlow,
 				},
-				services,
+				expectedServices,
 			);
 		} );
 	} );

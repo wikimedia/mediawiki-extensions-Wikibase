@@ -4,9 +4,20 @@ import {
 	mockMwConfig,
 	mockMwEnv,
 } from '../../util/mocks';
+import EditFlow from '@/definitions/EditFlow';
+import Dispatcher from '@/mediawiki/Dispatcher';
 
 jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 	return jest.fn().mockImplementation( () => {} );
+} );
+
+const mockDispatcher = {
+	dispatch: jest.fn(),
+};
+jest.mock( '@/mediawiki/Dispatcher', () => {
+	return jest.fn().mockImplementation( () => {
+		return mockDispatcher;
+	} );
 } );
 
 describe( 'init', () => {
@@ -27,6 +38,42 @@ describe( 'init', () => {
 			expect( using ).toBeCalledWith( [ 'wikibase.client.data-bridge.app', 'mw.config.values.wbRepo' ] );
 			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
 			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );
+			expect( link.addEventListener.mock.calls[ 0 ][ 0 ] ).toBe( 'click' );
+			expect( typeof link.addEventListener.mock.calls[ 0 ][ 1 ] ).toBe( 'function' );
+		} );
+	} );
+
+	it( 'loads `wikibase.client.data-bridge.app` and dispatches it on click', () => {
+		const app = {},
+			require = jest.fn().mockReturnValue( app ),
+			using = jest.fn( () => Promise.resolve( require ) ),
+			entityId = 'Q5',
+			propertyId = 'P4711',
+			editFlow = EditFlow.OVERWRITE;
+		mockMwEnv( using );
+
+		const selectedElement = {
+			link: {
+				addEventListener: jest.fn(),
+			},
+			entityId,
+			propertyId,
+			editFlow,
+		};
+		const event = {
+			preventDefault: jest.fn(),
+			stopPropagation: jest.fn(),
+		};
+		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
+			selectElementsToOverload: () => [ selectedElement ],
+		} ) );
+
+		return init().then( () => {
+			selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
+			expect( event.preventDefault ).toHaveBeenCalled();
+			expect( event.stopPropagation ).toHaveBeenCalled();
+			expect( Dispatcher ).toHaveBeenCalledWith( window, app );
+			expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		} );
 	} );
 
