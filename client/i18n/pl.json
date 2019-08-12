@@ -14,7 +14,8 @@
 			"The Polish",
 			"Rzuwig",
 			"Woytecr",
-			"Sp5uhe"
+			"Sp5uhe",
+			"Openbk"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
@@ -110,5 +111,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Zobacz}} element",
 	"notification-subject-page-connection": "Strona na {{SITENAME}}, którą {{GENDER:$3|utworzyłeś|utworzyłaś}} została {{GENDER:$2|powiązana}} z elementem Wikidanych",
 	"unresolved-property-category": "Strony z nierozwiązanymi właściwościami",
-	"unresolved-property-category-desc": "Ta kategoria zawiera strony, które odwołują się do właściwości Wikidanych, których nie można było odnaleźć ani po numerze właściwości, ani po etykiecie."
+	"unresolved-property-category-desc": "Ta kategoria zawiera strony, które odwołują się do właściwości Wikidanych, których nie można było odnaleźć ani po numerze właściwości, ani po etykiecie.",
+	"connected-redirect-category": "Przekierowania połączone z elementem Wikidanych",
+	"connected-redirect-category-desc": "Ta kategoria zawiera przekierowania, które są połączone z elementem Wikidanych."
 }

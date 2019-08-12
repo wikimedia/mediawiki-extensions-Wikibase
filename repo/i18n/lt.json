@@ -342,5 +342,7 @@
 	"right-property-create": "Sukurti savybes",
 	"wikibase-entity-not-viewable-title": "Turinio tipo neatitikimas: Nepavyko pavaizduoti turinio",
 	"wikibase-entity-not-viewable": "Pateiktasis \"$1\" pobūdžio turinys nėra esmuo ir negali būti pavaizduotas Vikibazėje.",
-	"wikibase-pageinfo-subscription-none": "Nėra"
+	"wikibase-pageinfo-subscription-none": "Nėra",
+	"wikibase-entity-save-error-heading": "Kažkas nutiko ne taip",
+	"wikibase-entity-save-error-message": "Jūsų pakeitimo nepavyko publikuoti. Galite pabandyti paspausti publikavimo mygtuką dar kartą."
 }
