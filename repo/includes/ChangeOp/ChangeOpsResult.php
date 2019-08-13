@@ -11,18 +11,15 @@ use Wikibase\DataModel\Entity\EntityId;
 class ChangeOpsResult implements ChangeOpResult {
 
 	private $changeOpsResults;
-	private $isEntityChange;
 	private $entityId;
 
 	/**
 	 * @param EntityId|null $entityId
 	 * @param array $changeOpsResults
-	 * @param bool $isEntityChange
 	 */
-	public function __construct( EntityId $entityId = null, $changeOpsResults = [], $isEntityChange = false ) {
+	public function __construct( EntityId $entityId = null, $changeOpsResults = [] ) {
 		$this->entityId = $entityId;
 		$this->changeOpsResults = $changeOpsResults;
-		$this->isEntityChange = $isEntityChange;
 	}
 
 	public function getChangeOpsResults() {
