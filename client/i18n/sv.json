@@ -93,7 +93,7 @@
 	"wikibase-pageinfo-entity-usage-X": "All entitetsdata",
 	"wikibase-pageinfo-entity-usage-O": "Annat (påstående)",
 	"wikibase-property-render-error": "Misslyckades att rendera egenskapen $1: $2",
-	"wikibase-otherprojects": "I andra projekt",
+	"wikibase-otherprojects": "På andra projekt",
 	"wikibase-otherprojects-beta-message": "Sidopanel för andra projekt",
 	"wikibase-otherprojects-beta-description": "Lägger till ett \"{{int:wikibase-otherprojects}}\"-avsnitt till sidofältet som innehåller länkar till andra Wikimedia-projekten utifrån {{WBREPONAME}}-data.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Anslutning|Anslutningar}} med {{WBREPONAME}}",
