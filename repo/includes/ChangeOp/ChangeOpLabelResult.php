@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Class ChangeOpLabelResult
  */
-class ChangeOpLabelResult implements ChangeOpResult {
+class ChangeOpLabelResult implements LanguageBoundChangeOpResult {
 
 	private $languageCode;
 	private $newLabel;

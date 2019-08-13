@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ChangeOp;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Each ChangeOp applied will return a an instance of ChangeOpResult
+ * Each ChangeOp applied will return an instance of ChangeOpResult
  * @see https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/518721/
  */
 interface ChangeOpResult {
