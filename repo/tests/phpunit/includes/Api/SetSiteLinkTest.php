@@ -512,6 +512,16 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testSetSiteLinkWithTag() {
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbsetsitelink',
+			'site' => 'dewiki',
+			'title' => 'Berlin',
+			'linksite' => 'nowiki',
+			'linktitle' => 'berlin'
+		] );
+	}
+
 	/**
 	 * @param array[] $expectedSiteLinks
 	 * @param array[] $dbSiteLinks

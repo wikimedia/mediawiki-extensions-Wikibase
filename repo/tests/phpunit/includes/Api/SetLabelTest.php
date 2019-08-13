@@ -80,6 +80,10 @@ class SetLabelTest extends ModifyTermTestCase {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
 
+	public function testSetLabelWithTag() {
+		$this->assertCanTagSuccessfulRequest( $this->getCreateItemAndSetLabelRequestParams() );
+	}
+
 	public function testUserCanEditWhenTheyHaveSufficientPermission() {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 

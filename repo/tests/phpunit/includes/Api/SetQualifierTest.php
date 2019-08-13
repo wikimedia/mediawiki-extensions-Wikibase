@@ -131,6 +131,25 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 	}
 
+	public function testSetQualifierWithTag() {
+		$item = $this->getTestItem();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
+
+		$snak = $this->getTestSnak( PropertyValueSnak::class, new StringValue( 'o_O' ) );
+		$newQualifier = new PropertyValueSnak( $snak->getPropertyId(), new StringValue( __METHOD__ ) );
+
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbsetqualifier',
+			'claim' => $guid,
+			'snaktype' => $newQualifier->getType(),
+			'property' => $newQualifier->getPropertyId()->getSerialization(),
+			'value' => FormatJson::encode( $newQualifier->getDataValue()->getArrayValue() )
+		] );
+	}
+
 	public function provideChangeRequests() {
 		return [ [ PropertyValueSnak::class, new StringValue( 'o_O' ) ] ];
 	}

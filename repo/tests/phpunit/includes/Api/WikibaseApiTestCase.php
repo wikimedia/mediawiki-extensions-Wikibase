@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use ChangeTags;
 use OutOfBoundsException;
 use Revision;
 use TestSites;
@@ -408,6 +409,46 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		$comment = $rev->getComment();
 		$this->assertRegExp( $regex, $comment );
+	}
+
+	protected function assertCanTagSuccessfulRequest(
+		array $params,
+		array $session = null,
+		User $user = null,
+		$tokenType = 'csrf'
+	) {
+		$dummyTag = __METHOD__ . '-dummy-tag';
+		ChangeTags::defineTag( $dummyTag );
+
+		$params[ 'tags' ] = $dummyTag;
+
+		list( $result, , ) = $this->doApiRequestWithToken( $params, $session, $user, $tokenType );
+
+		$this->assertArrayNotHasKey( 'warnings', $result, json_encode( $result ) );
+		$this->assertArrayHasKey( 'success', $result );
+		$lastRevid = $this->getLastRevIdFromResult( $result );
+		if ( $lastRevid === null ) {
+			$this->fail(
+				'API result does not have lastrevid. Actual result: '
+				. json_encode( $result, JSON_PRETTY_PRINT )
+			);
+		}
+
+		$this->assertTrue( in_array(
+			$dummyTag,
+			ChangeTags::getTags( wfGetDB( DB_MASTER ), null, $lastRevid )
+		) );
+	}
+
+	private function getLastRevIdFromResult( array $result ) {
+		if ( isset( $result['entity']['lastrevid'] ) ) {
+			return $result['entity']['lastrevid'];
+		}
+		if ( isset( $result['pageinfo']['lastrevid'] ) ) {
+			return $result['pageinfo']['lastrevid'];
+		}
+
+		return null;
 	}
 
 }
