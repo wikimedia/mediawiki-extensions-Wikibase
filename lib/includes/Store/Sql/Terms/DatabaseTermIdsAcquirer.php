@@ -183,7 +183,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 * replace ( lang => [ textId, ... ] ) entries with their respective ids
 	 * in wbt_text_in_lang table and return resulting array
 	 *
-	 * @param array $termsArray text ids per type per langauge
+	 * @param array $termsArray text ids per type per language
 	 *	[
 	 *		'type' => [
 	 *			[ 'language' => [ <textId1>, <textId2>, ... ] ], ...
