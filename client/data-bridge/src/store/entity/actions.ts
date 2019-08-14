@@ -19,12 +19,12 @@ export default function actions( entityRepository: EntityRepository ): ActionTre
 			context: ActionContext<EntityState, Application>,
 			payload: { entity: string; revision?: number },
 		): Promise<void> {
-			return Promise.resolve(
-				entityRepository.getEntity( payload.entity, payload.revision ),
-			).then( ( entity ) => {
-				context.commit( ENTITY_REVISION_UPDATE, entity.revisionId );
-				context.commit( ENTITY_UPDATE, entity.entity );
-			} );
+			return entityRepository
+				.getEntity( payload.entity, payload.revision )
+				.then( ( entity ) => {
+					context.commit( ENTITY_REVISION_UPDATE, entity.revisionId );
+					context.commit( ENTITY_UPDATE, entity.entity );
+				} );
 		},
 	};
 }
