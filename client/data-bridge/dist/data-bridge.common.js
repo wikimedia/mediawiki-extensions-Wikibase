@@ -4138,9 +4138,8 @@ function actions_actions(entityRepository) {
     baseRevision: 0,
     statements: null
   };
-  var namespaced = true;
   return {
-    namespaced: namespaced,
+    namespaced: true,
     state: state,
     getters: entity_getters_getters,
     mutations: entity_mutations_mutations,

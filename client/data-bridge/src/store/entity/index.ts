@@ -13,10 +13,8 @@ export default function ( entityRepository: EntityRepository ): Module<EntitySta
 		statements: null,
 	};
 
-	const namespaced = true;
-
 	return {
-		namespaced,
+		namespaced: true,
 		state,
 		getters,
 		mutations,
