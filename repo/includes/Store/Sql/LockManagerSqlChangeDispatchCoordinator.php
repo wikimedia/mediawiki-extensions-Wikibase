@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Store\Sql;
 
 use LockManager;
 use Psr\Log\LoggerInterface;
-use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 

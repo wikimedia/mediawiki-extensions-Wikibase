@@ -7,10 +7,10 @@ use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 
 /**
- * @covers \Wikibase\Store\Sql\SqlSubscriptionLookup
+ * @covers \Wikibase\Repo\Store\Sql\SqlSubscriptionLookup
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -44,7 +44,7 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 
 		$this->insertSubscriptions( $subscriptions );
 
-		$lookup = new SqlSubscriptionLookup( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$lookup = new \Wikibase\Repo\Store\Sql\SqlSubscriptionLookup( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$subscriptions = $lookup->getSubscriptions( 'enwiki', [
 			new PropertyId( 'P1' ),

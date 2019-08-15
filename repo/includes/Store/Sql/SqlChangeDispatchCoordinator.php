@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Store\Sql;
+namespace Wikibase\Repo\Store\Sql;
 
 use Exception;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;

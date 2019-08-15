@@ -17,8 +17,8 @@ use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
-use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
-use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikimedia\Assert\Assert;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
