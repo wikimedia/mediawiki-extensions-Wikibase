@@ -56,6 +56,9 @@ interface EntityStore {
 	 *        Additionally, the EntityContent::EDIT_XXX constants can be used.
 	 * @param int|bool $baseRevId the revision ID $entity is based on. Saving should fail if
 	 * $baseRevId is no longer the current revision.
+	 * @param string[] $tags Change tags to add to the edit.
+	 * Callers are responsible for permission checks
+	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
 	 * @see WikiPage::doEditContent
 	 *
@@ -63,7 +66,7 @@ interface EntityStore {
 	 * @throws StorageException
 	 * @throws PermissionsError
 	 */
-	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevId = false );
+	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevId = false, array $tags = [] );
 
 	/**
 	 * Saves the given EntityRedirect to some underlying storage mechanism.

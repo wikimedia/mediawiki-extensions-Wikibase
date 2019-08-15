@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use ChangeTags;
 use ContentHandler;
 use Exception;
 use InvalidArgumentException;
@@ -313,13 +314,17 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$empty->setId( $entityId );
 		$empty->getFingerprint()->setLabel( 'en', 'UPDATED' );
 
-		$r2 = $store->saveEntity( $empty, 'update one', $user, EDIT_UPDATE );
+		$r2 = $store->saveEntity( $empty, 'update one', $user, EDIT_UPDATE, false, [ 'mw-replace' ] );
 		$this->assertNotEquals( $r1->getRevisionId(), $r2->getRevisionId(), 'expected new revision id' );
 
 		$r2actual = $lookup->getEntityRevision( $entityId );
 		$this->assertEquals( $r2->getRevisionId(), $r2actual->getRevisionId(), 'revid' );
 		$this->assertEquals( $r2->getTimestamp(), $r2actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
+
+		// check that the tags were applied
+		$r2tags = ChangeTags::getTags( $this->db, null, $r2->getRevisionId() );
+		$this->assertEmpty( array_diff( [ 'mw-replace' ], $r2tags ) );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();

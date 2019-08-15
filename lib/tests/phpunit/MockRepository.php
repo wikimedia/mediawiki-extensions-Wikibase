@@ -59,7 +59,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 
 	/**
 	 * Log entries. Each entry has the following fields:
-	 * revision, entity, summary, user
+	 * revision, entity, summary, user, tags
 	 *
 	 * @var array[]
 	 */
@@ -468,13 +468,14 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
 	 * @param int|bool $baseRevisionId the revision ID $entity is based on. Saving should fail if
 	 * $baseRevId is no longer the current revision.
+	 * @param string[] $tags added to log entry
 	 *
 	 * @see WikiPage::doEditContent
 	 *
 	 * @return EntityRevision
 	 * @throws StorageException
 	 */
-	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
+	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false, array $tags = [] ) {
 		$entityId = $entity->getId();
 
 		$status = Status::newGood();
@@ -502,7 +503,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 
 		$revision = $this->putEntity( $entity, 0, 0, $user );
 
-		$this->putLog( $revision->getRevisionId(), $entity->getId(), $summary, $user->getName() );
+		$this->putLog( $revision->getRevisionId(), $entity->getId(), $summary, $user->getName(), $tags );
 		return $revision;
 	}
 
@@ -652,8 +653,9 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 * @param EntityId|string $entityId
 	 * @param string $summary
 	 * @param User|string $user
+	 * @param string[] $tags
 	 */
-	private function putLog( $revisionId, $entityId, $summary, $user ) {
+	private function putLog( $revisionId, $entityId, $summary, $user, array $tags = [] ) {
 		if ( $entityId instanceof EntityId ) {
 			$entityId = $entityId->getSerialization();
 		}
@@ -667,6 +669,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 			'entity' => $entityId,
 			'summary' => $summary,
 			'user' => $user,
+			'tags' => $tags,
 		];
 	}
 
@@ -676,7 +679,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 * @param int $revisionId
 	 *
 	 * @return array|null An associative array containing the fields
-	 * 'revision', 'entity', 'summary', and 'user'.
+	 * 'revision', 'entity', 'summary', 'user', and 'tags'.
 	 */
 	public function getLogEntry( $revisionId ) {
 		return array_key_exists( $revisionId, $this->log ) ? $this->log[$revisionId] : null;
@@ -689,7 +692,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 * @param EntityId|string $entityId
 	 *
 	 * @return array|null An associative array containing the fields
-	 * 'revision', 'entity', 'summary', and 'user'.
+	 * 'revision', 'entity', 'summary', 'user', and 'tags'.
 	 */
 	public function getLatestLogEntryFor( $entityId ) {
 		if ( $entityId instanceof EntityId ) {

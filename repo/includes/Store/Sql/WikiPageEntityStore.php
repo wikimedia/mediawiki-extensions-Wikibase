@@ -219,6 +219,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param User $user
 	 * @param int $flags
 	 * @param int|bool $baseRevId
+	 * @param string[] $tags
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws StorageException
@@ -229,7 +230,8 @@ class WikiPageEntityStore implements EntityStore {
 		$summary,
 		User $user,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
 		if ( $entity->getId() === null ) {
 			if ( !( $flags & EDIT_NEW ) ) {
@@ -245,7 +247,7 @@ class WikiPageEntityStore implements EntityStore {
 		if ( !$content->isValid() ) {
 			throw new StorageException( Status::newFatal( 'invalid-content-data' ) );
 		}
-		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
+		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId, $tags );
 
 		$entityRevision = new EntityRevision(
 			$entity,
@@ -289,6 +291,7 @@ class WikiPageEntityStore implements EntityStore {
 				' to ' . $redirect->getTargetId()->getSerialization() );
 		}
 
+		// TODO pass $tags into saveEntityContent()
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
 		$this->dispatcher->dispatch( 'redirectUpdated', $redirect, $revision->getId() );
@@ -311,6 +314,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param null|User $user
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
 	 * @param int|bool $baseRevId
+	 * @param string[] $tags
 	 *
 	 * @throws StorageException
 	 * @return RevisionRecord The new revision (or the latest one, in case of a null edit).
@@ -320,7 +324,8 @@ class WikiPageEntityStore implements EntityStore {
 		$summary = '',
 		User $user = null,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
 		global $wgUseNPPatrol, $wgUseRCPatrol;
 
@@ -330,6 +335,7 @@ class WikiPageEntityStore implements EntityStore {
 		$slotRole = $this->contentFactory->getSlotRoleForType( $id->getEntityType() );
 
 		$updater = $page->newPageUpdater( $user );
+		$updater->addTags( $tags );
 
 		$flags = $this->adjustFlagsForMCR(
 			$flags,

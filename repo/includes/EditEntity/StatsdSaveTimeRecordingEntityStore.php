@@ -43,10 +43,11 @@ class StatsdSaveTimeRecordingEntityStore implements EntityStore {
 		$summary,
 		User $user,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
 		$attemptSaveSaveStart = microtime( true );
-		$result = $this->entityStore->saveEntity( $entity, $summary, $user, $flags, $baseRevId );
+		$result = $this->entityStore->saveEntity( $entity, $summary, $user, $flags, $baseRevId, $tags );
 		$attemptSaveSaveEnd = microtime( true );
 
 		$this->stats->timing(

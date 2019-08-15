@@ -67,6 +67,7 @@ class TypeDispatchingEntityStore implements EntityStore {
 	 * @param User $user
 	 * @param int $flags
 	 * @param int|bool $baseRevId
+	 * @param string[] $tags
 	 *
 	 * @throws StorageException
 	 * @throws PermissionsError
@@ -77,14 +78,16 @@ class TypeDispatchingEntityStore implements EntityStore {
 		$summary,
 		User $user,
 		$flags = 0,
-		$baseRevId = false
+		$baseRevId = false,
+		array $tags = []
 	) {
 		return $this->getStore( $entity->getType() )->saveEntity(
 			$entity,
 			$summary,
 			$user,
 			$flags,
-			$baseRevId
+			$baseRevId,
+			$tags
 		);
 	}
 

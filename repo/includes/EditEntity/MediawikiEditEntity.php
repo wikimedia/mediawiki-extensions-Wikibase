@@ -612,6 +612,9 @@ class MediawikiEditEntity implements EditEntity {
 	 *                                Null will fail the token text, as will the empty string.
 	 * @param bool|null $watch Whether the user wants to watch the entity.
 	 *                                Set to null to apply default according to getWatchDefault().
+	 * @param string[] $tags Change tags to add to the edit.
+	 * Callers are responsible for checking that the user is permitted to add these tags
+	 * (typically using {@link ChangeTags::canAddTagsAccompanyingChange}).
 	 *
 	 * @return Status
 	 *
@@ -621,7 +624,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @see    WikiPage::doEditContent
 	 * @see    EntityStore::saveEntity
 	 */
-	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null ) {
+	public function attemptSave( EntityDocument $newEntity, $summary, $flags, $token, $watch = null, array $tags = [] ) {
 		$this->checkReadOnly( $newEntity );
 		$this->checkEntityId( $newEntity->getId() );
 
@@ -721,7 +724,8 @@ class MediawikiEditEntity implements EditEntity {
 				$summary,
 				$this->user,
 				$flags | EDIT_AUTOSUMMARY,
-				$raceProtectionRevId
+				$raceProtectionRevId,
+				$tags
 			);
 
 			$this->entityId = $newEntity->getId();
