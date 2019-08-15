@@ -2,6 +2,7 @@ import { Module } from 'vuex';
 import Application from '@/store/Application';
 import StatementsState from '@/store/entity/statements/StatementsState';
 import { mutations } from '@/store/entity/statements/mutations';
+import { getters } from '@/store/entity/statements/getters';
 
 export default function (): Module<StatementsState, Application> {
 	const state: StatementsState = {};
@@ -10,5 +11,6 @@ export default function (): Module<StatementsState, Application> {
 		namespaced: true,
 		state,
 		mutations,
+		getters,
 	};
 }
