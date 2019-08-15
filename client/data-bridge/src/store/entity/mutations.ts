@@ -9,7 +9,6 @@ import Entity from '@/datamodel/Entity';
 export const mutations: MutationTree<EntityState> = {
 	[ ENTITY_UPDATE ]( state: EntityState, entity: Entity ): void {
 		state.id = entity.id;
-		state.statements = entity.statements;
 	},
 
 	[ ENTITY_REVISION_UPDATE ]( state: EntityState, revision: number ) {
