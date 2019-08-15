@@ -289,6 +289,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * * 'bot' for setting the bot flag
 	 * * 'baserevid' for determining the edit's base revision for conflict resolution
 	 * * 'token' for the edit token
+	 * * 'tags' for change tags, assuming they were already permission checked by ApiBase
+	 *   (i.e. PARAM_TYPE => 'tags')
 	 *
 	 * If an error occurs, it is automatically reported and execution of the API module
 	 * is terminated using the ApiErrorReporter (via handleStatus()). If there were any
@@ -334,6 +336,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$this->baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : 0;
 		}
 
+		$tags = $params['tags'] ?? [];
+
 		$editEntityHandler = $this->editEntityFactory->newEditEntity(
 			$user,
 			$entity->getId(),
@@ -347,7 +351,9 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$entity,
 			$summary,
 			$this->entitySavingFlags | $flags,
-			$token
+			$token,
+			null,
+			$tags
 		);
 
 		$this->handleSaveStatus( $status );

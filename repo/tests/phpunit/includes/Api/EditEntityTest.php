@@ -997,6 +997,31 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'message-key' => 'wikibase-api-illegal-entity-remove',
 				] ],
 			],
+			'invalid tag (one)' => [
+				'p' => [
+					'new' => 'item',
+					'data' => '{}',
+					'tags' => 'test tag that definitely does not exist',
+				],
+				'e' => [ 'exception' => [
+					'type' => ApiUsageException::class,
+					'code' => 'tags-apply-not-allowed-one',
+				] ],
+			],
+			'invalid tag (multi)' => [
+				'p' => [
+					'new' => 'item',
+					'data' => '{}',
+					'tags' => implode( '|', [
+						'test tag that definitely does not exist',
+						'second test that that does not exist either',
+					] ),
+				],
+				'e' => [ 'exception' => [
+					'type' => ApiUsageException::class,
+					'code' => 'tags-apply-not-allowed-multi',
+				] ],
+			],
 		];
 	}
 
