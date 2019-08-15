@@ -8,12 +8,12 @@ interface CondensedEntityRevision {
 	revisionId?: number;
 }
 
-export default function ( fields: CondensedEntityRevision ): EntityRevision {
+export default function ( fields?: CondensedEntityRevision ): EntityRevision {
 	return new EntityRevision(
 		new Entity(
-			fields.id || 'Q1',
-			fields.statements || {},
+			fields && fields.id || 'Q1',
+			fields && fields.statements || {},
 		),
-		fields.revisionId || 0,
+		fields && fields.revisionId || 0,
 	);
 }
