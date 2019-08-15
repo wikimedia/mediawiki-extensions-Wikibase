@@ -1,25 +1,17 @@
-import { ActionContext } from 'vuex';
-import Application from '@/store/Application';
-import {
-	STATEMENTS_INIT,
-} from '@/store/entity/statements/actionTypes';
-import {
-	STATEMENTS_SET,
-} from '@/store/entity/statements/mutationTypes';
-import StatementsState from '@/store/entity/statements/StatementsState';
-import StatementMap from '@/datamodel/StatementMap';
+import { statementActions } from '@/store/entity/statements/statementActions';
+import buildMainSnakActions from '@/store/entity/statements/snaks/actions';
+import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
+import { mainSnakMutationTypes } from '@/store/entity/statements/mainSnakMutationTypes';
+import resolveMainSnak from '@/store/entity/statements/resolveMainSnak';
+import MainSnakPath from '@/store/entity/statements/MainSnakPath';
+
+const mainSnakActions = buildMainSnakActions<MainSnakPath>(
+	mainSnakActionTypes,
+	mainSnakMutationTypes,
+	resolveMainSnak,
+);
 
 export const actions = {
-	[ STATEMENTS_INIT ](
-		context: ActionContext<StatementsState, Application>,
-		payload: {
-			entityId: string;
-			statements: StatementMap;
-		},
-	): void {
-		context.commit( STATEMENTS_SET, {
-			entityId: payload.entityId,
-			statements: payload.statements,
-		} );
-	},
+	...statementActions,
+	...mainSnakActions,
 };

@@ -6,6 +6,7 @@ import {
 	STATEMENTS_SET,
 } from '@/store/entity/statements/mutationTypes';
 import StatementMap from '@/datamodel/StatementMap';
+import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import newMockStore from '../../newMockStore';
 
 describe( 'statements/actions', () => {
@@ -45,5 +46,10 @@ describe( 'statements/actions', () => {
 				payload,
 			);
 		} );
+	} );
+
+	it( 'binds the snak action unit', () => {
+		expect( ( actions as any )[ mainSnakActionTypes.setStringDataValue ] ).toBeDefined();
+		expect( typeof ( actions as any )[ mainSnakActionTypes.setStringDataValue ] ).toBe( 'function' );
 	} );
 } );
