@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "node"
     ],
     "typeRoots": [
         "./node_modules/@types",
