@@ -26,6 +26,7 @@ return call_user_func( function() {
 			'skinStyles' => [
 				'modern' => 'wikibase.client.css',
 				'monobook' => 'wikibase.client.css',
+				'timeless' => 'wikibase.client.css',
 				'vector' => [
 					'wikibase.client.css',
 					'wikibase.client.vector.css'
