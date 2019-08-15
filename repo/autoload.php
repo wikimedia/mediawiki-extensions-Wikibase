@@ -128,6 +128,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Store\\Sql\\SqlSiteLinkConflictLookup' => __DIR__ . '/includes/Store/Sql/SqlSiteLinkConflictLookup.php',
 	'Wikibase\\Repo\\Store\\Sql\\TermSqlIndexBuilder' => __DIR__ . '/includes/Store/Sql/TermSqlIndexBuilder.php',
 	'Wikibase\\Repo\\Store\\Sql\\TermSqlIndexSearchFieldsClearer' => __DIR__ . '/includes/Store/Sql/TermSqlIndexSearchFieldsClearer.php',
+	'Wikibase\\Repo\\Store\\Sql\\UpsertSqlIdGenerator' => __DIR__ . '/includes/Store/Sql/UpsertSqlIdGenerator.php',
 	'Wikibase\\Repo\\Store\\Sql\\WikiPageEntityRedirectLookup' => __DIR__ . '/includes/Store/Sql/WikiPageEntityRedirectLookup.php',
 	'Wikibase\\Repo\\Store\\TypeDispatchingEntityTitleStoreLookup' => __DIR__ . '/includes/Store/TypeDispatchingEntityTitleStoreLookup.php',
 	'Wikibase\\Repo\\Store\\WikiPageEntityStore' => __DIR__ . '/includes/Store/Sql/WikiPageEntityStore.php',
@@ -150,6 +151,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\TermSearchKeyBuilder' => __DIR__ . '/includes/Store/Sql/TermSearchKeyBuilder.php',
 	'Wikibase\\Test\\MockAddUnits' => __DIR__ . '/tests/phpunit/maintenance/MockAddUnits.php',
 	'Wikibase\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
-	'Wikibase\\UpsertSqlIdGenerator' => __DIR__ . '/includes/Store/Sql/UpsertSqlIdGenerator.php',
 	'Wikibase\\ViewEntityAction' => __DIR__ . '/includes/Actions/ViewEntityAction.php',
 ];
