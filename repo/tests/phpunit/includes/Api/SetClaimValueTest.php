@@ -107,6 +107,22 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testSetClaimNewWithTag() {
+		$property = Property::newFromType( 'commonsMedia' );
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );
+
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbsetclaimvalue',
+			'claim' => $entity->getStatements()->toArray()[0]->getGuid(),
+			'value' => FormatJson::encode( ( new StringValue( 'Kittens.png' ) )->getArrayValue() ),
+			'snaktype' => 'value',
+		] );
+	}
+
 	public function doTestValidRequest( EntityId $entityId, $guid, $value, $expectedSummary ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityLookup = $wikibaseRepo->getEntityLookup();

@@ -225,6 +225,25 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		return $serializedReference;
 	}
 
+	public function testSetReferenceWithTag() {
+		$references = [
+			new Reference( new SnakList( [ new PropertySomeValueSnak( self::$propertyIds[0] ) ] ) ),
+			new Reference( new SnakList( [ new PropertySomeValueSnak( self::$propertyIds[1] ) ] ) ),
+		];
+		$statement = $this->getNewStatement( $references );
+
+		$newReference = new Reference(
+			new SnakList( [ new PropertySomeValueSnak( self::$propertyIds[2] ) ] )
+		);
+		$serializedReference = $this->serializeReference( $newReference );
+
+		$this->assertCanTagSuccessfulRequest( $this->generateRequestParams(
+			$statement->getGuid(),
+			json_encode( $serializedReference['snaks'] ),
+			json_encode( $serializedReference['snaks-order'] )
+		) );
+	}
+
 	protected function makeInvalidRequest(
 		$statementGuid,
 		$referenceHash,

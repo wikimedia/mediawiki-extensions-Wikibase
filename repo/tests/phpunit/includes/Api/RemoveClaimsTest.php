@@ -90,6 +90,16 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testRemoveClaimsWithTag() {
+		$item = $this->addStatementsAndSave( new Item() );
+		$statements = $item->getStatements()->toArray();
+		$statement = array_shift( $statements );
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbremoveclaims',
+			'claim' => $statement->getGuid(),
+		] );
+	}
+
 	public function doTestValidRequestSingle( Item $item ) {
 		$statements = $item->getStatements()->toArray();
 		$obtainedStatements = null;

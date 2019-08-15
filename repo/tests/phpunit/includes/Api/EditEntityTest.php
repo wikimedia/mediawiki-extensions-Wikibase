@@ -1071,6 +1071,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'success', $result );
 	}
 
+	public function testItemCreationWithTag() {
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => '{}',
+		] );
+	}
+
 	public function testItemLabelDescriptionConflict() {
 		$this->markTestSkippedOnMySql();
 

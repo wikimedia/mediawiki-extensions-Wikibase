@@ -162,6 +162,22 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testSetClaimWithTag() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$item = new Item();
+		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbsetclaim',
+			'claim' => '{
+				"id":"' . $item->getId() . '$5627445f-43cb-ed6d-3adb-760e85bd17ee",
+				"type":"claim",
+				"mainsnak":{"snaktype":"value","property":"'. self::$propertyIds[0] .'","datavalue":{"value":"City","type":"string"}}
+			}',
+		] );
+	}
+
 	private function getInvalidCases() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 

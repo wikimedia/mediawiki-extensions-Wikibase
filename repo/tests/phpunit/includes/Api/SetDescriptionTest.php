@@ -73,6 +73,10 @@ class SetDescriptionTest extends ModifyTermTestCase {
 		self::doTestSetTerm( 'descriptions', $params, $expected );
 	}
 
+	public function testSetDescriptionWithTag() {
+		$this->assertCanTagSuccessfulRequest( $this->getCreateItemAndSetDescriptionRequestParams() );
+	}
+
 	/**
 	 * @dataProvider provideExceptionData
 	 */

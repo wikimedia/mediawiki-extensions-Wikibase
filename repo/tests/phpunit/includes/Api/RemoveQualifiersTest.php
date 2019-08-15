@@ -109,6 +109,36 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testRemoveQualifiersWithTag() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$item = new Item();
+
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$statement = $this->statementProvider()[2];
+		$guidGenerator = new GuidGenerator();
+		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
+		$item->getStatements()->addStatement( $statement );
+
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+
+		$this->assertInternalType( 'string', $statement->getGuid() );
+
+		$qualifiers = $statement->getQualifiers();
+		$hashes = array_map(
+			function( Snak $qualifier ) {
+				return $qualifier->getHash();
+			},
+			iterator_to_array( $qualifiers )
+		);
+
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbremovequalifiers',
+			'claim' => $statement->getGuid(),
+			'qualifiers' => implode( '|', $hashes ),
+		] );
+	}
+
 	protected function makeValidRequest( $statementGuid, array $hashes ) {
 		$params = [
 			'action' => 'wbremovequalifiers',

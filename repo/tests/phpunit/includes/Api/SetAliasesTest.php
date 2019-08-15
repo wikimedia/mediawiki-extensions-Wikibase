@@ -104,6 +104,15 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$this->assertArrayEquals( explode( '|', $params['set'] ), $resAliases[ $params['language'] ] );
 	}
 
+	public function testSetAliasesWithTag() {
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => self::$testAction,
+			'new' => 'item',
+			'language' => 'en',
+			'set' => 'Foo',
+		] );
+	}
+
 	public function provideData() {
 		return [
 			// p => params, e => expected

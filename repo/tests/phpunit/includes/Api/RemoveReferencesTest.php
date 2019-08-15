@@ -109,6 +109,35 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testRemoveReferencesWithTag() {
+		$item = new Item();
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$statement = $this->statementProvider()[1];
+		$guidGenerator = new GuidGenerator();
+		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
+		$item->getStatements()->addStatement( $statement );
+
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+
+		$references = $statement->getReferences();
+
+		$hashes = array_map(
+			function( Reference $reference ) {
+				return $reference->getHash();
+			},
+			iterator_to_array( $references )
+		);
+
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbremovereferences',
+			'statement' => $statement->getGuid(),
+			'references' => implode( '|', $hashes ),
+		] );
+	}
+
 	protected function makeValidRequest( $statementGuid, array $hashes ) {
 		$params = [
 			'action' => 'wbremovereferences',

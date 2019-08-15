@@ -79,6 +79,22 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $claim['id'] ) );
 	}
 
+	public function testCreateClaimWithTag() {
+		/**
+		 * @var Item $item
+		 * @var Property $property
+		 */
+		list( $item, $property ) = self::getNewItemAndProperty();
+
+		$this->assertCanTagSuccessfulRequest( [
+			'action' => 'wbcreateclaim',
+			'entity' => $item->getId()->getSerialization(),
+			'snaktype' => 'value',
+			'property' => $property->getId()->getSerialization(),
+			'value' => '"Foo.png"',
+		] );
+	}
+
 	public function invalidRequestProvider() {
 		$argLists = [];
 
