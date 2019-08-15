@@ -9,24 +9,10 @@ module.exports = function ( grunt ) {
 	grunt.initConfig( {
 		eslint: {
 			options: {
-				reportUnusedDisableDirectives: true
+				reportUnusedDisableDirectives: true,
+				fix: grunt.option( 'fix' )
 			},
-			all: '.',
-			fix: {
-				options: {
-					fix: true
-				},
-				src: [
-					'**/*.js',
-					'!Gruntfile.js',
-					'!node_modules/**',
-					'!client/data-bridge/**',
-					'!view/resources/jquery/ui/**',
-					'!view/lib/**',
-					'!lib/resources/vendor/**',
-					'!lib/tests/**'
-				]
-			}
+			all: '.'
 		},
 		jsonlint: {
 			all: [
@@ -66,6 +52,9 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'test', [ 'eslint', 'jsonlint', 'banana', 'stylelint' ] );
-	grunt.registerTask( 'fix', 'eslint:fix' );
+	grunt.registerTask( 'fix', function () {
+		grunt.config.set( 'eslint.options.fix', true );
+		grunt.task.run( 'eslint' );
+	} );
 	grunt.registerTask( 'default', 'test' );
 };
