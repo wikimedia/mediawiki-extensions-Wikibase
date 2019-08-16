@@ -362,6 +362,7 @@
 	"wikibase-api-no-such-entity": "تعذر العثور على كيان يحمل المعرف \"$1\".",
 	"wikibase-api-no-such-sitelink": "لم يمكن العثور على وصلة موقع إلى \"$1\" عند محاولة تعديل الشارات.",
 	"wikibase-api-not-recognized-datatype": "نوع البيانات كان متوقع، ولكنها إما مفقودة أو غير معروفه.",
+	"wikibase-api-tags-invalid": "وسوم الوسائط غير صالحة.",
 	"wikibase-api-target-not-empty": "يُمكن إنشاء التحويلة فقط تحت اسم كيان فارغ أو محذوف.",
 	"wikibase-api-target-is-redirect": "لا يجوز أن يكون هدف التحويلة تحويلة أخرى.",
 	"wikibase-api-target-is-incompatible": "محاولة التحويل إلى كائن من نمط مختلف.",

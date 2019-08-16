@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Eduardo Addad de Oliveira",
-			"Felipe L. Ewald"
+			"Felipe L. Ewald",
+			"Jurema Oliveira"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta os itens de emblema disponíveis.",
@@ -204,6 +205,7 @@
 	"apihelp-wbsetaliases-param-remove": "Lista de nomes alternativos a remover (pode ser combinado com <var>add</var>)",
 	"apihelp-wbsetaliases-param-set": "Uma lista de nomes alternativos que substituirão a lista atual (não pode ser combinado com <var>add</var> nem <var>remove</var>)",
 	"apihelp-wbsetaliases-param-language": "O idioma para o qual deseja definir os nomes alternativos",
+	"apihelp-wbsetaliases-param-tags": "Altere as tags para aplicar à revisão.",
 	"apihelp-wbsetaliases-example-1": "Defina os nomes alternativos ingleses para a entidade com ID <samp>Q1</samp> para <var>Foo</var> e <var>Bar</var>",
 	"apihelp-wbsetaliases-example-2": "Adicionar <var>Foo</var> e <var>Bar</var> à lista inglesa de nomes alternativos para a entidade com ID <samp>Q1</samp>",
 	"apihelp-wbsetaliases-example-3": "Remover <var>Foo</var> e <var>Bar</var> da lista de nomes alternativos em inglês para a entidade com ID <samp>Q1</samp>",
@@ -215,6 +217,7 @@
 	"apihelp-wbsetclaim-param-summary": "Resumo para a edição. \nSerá antecedido por um comentário gerado automaticamente. O limite de comprimento do comentário automático juntamente com o sumário é de 260 caracteres. Esteja ciente de que tudo que exceder este limite será cortado.",
 	"apihelp-wbsetclaim-param-baserevid": "O identificador numérico da revisão na qual será baseada a modificação.\nIsto é usado para detectar conflitos durante o gravação.",
 	"apihelp-wbsetclaim-param-bot": "Marcar esta edição como sendo feita por um robô. Esta etiqueta URL só será respeitado se o usuário pertencer ao grupo \"{{int:group-bot}}\".",
+	"apihelp-wbsetclaim-param-tags": "Altere as tags para aplicar à revisão.",
 	"apihelp-wbsetclaim-example-1": "Defina a reivindicação com o ID fornecido para a propriedade <samp>P1</samp> com um valor de string de \"<var>City</var>\"",
 	"apihelp-wbsetclaim-example-2": "Defina a reivindicação com o ID especificado para a propriedade <samp>P1</samp> com um valor de string de \"<var>City</var>\" e mova a reivindicação para a posição mais alta dentro do subgrupo da entidade de reivindicações que apresentam a propriedade Snak principal <samp>P1</samp>. Além disso, mova todo o subgrupo para o topo de todos os subgrupos agregados por propriedade.",
 	"apihelp-wbsetclaim-example-3": "Defina a instrução com o ID especificado para Propriedade <samp>P1</samp> com um valor de string de \"<var>City</var>\" e defina Referências da instrução para uma referência única com o valor de string \"<var>The Economy of Cities</var>\" atribuído à Propriedade <samp>P2</samp>.",
@@ -263,6 +266,7 @@
 	"apihelp-wbsetqualifier-param-summary": "Resumo para a edição. \nSerá antecedido por um comentário gerado automaticamente. O limite de comprimento do comentário automático juntamente com o sumário é de 260 caracteres. Esteja ciente de que tudo que exceder este limite será cortado.",
 	"apihelp-wbsetqualifier-param-baserevid": "O identificador numérico da revisão na qual será baseada a modificação.\nIsto é usado para detectar conflitos durante o gravação.",
 	"apihelp-wbsetqualifier-param-bot": "Marcar esta edição como sendo feita por um robô. Esta etiqueta URL só será respeitado se o usuário pertencer ao grupo \"{{int:group-bot}}\".",
+	"apihelp-wbsetqualifier-param-tags": "Altere as tags para aplicar à revisão.",
 	"apihelp-wbsetqualifier-example-1": "Defina o qualificador para a reivindicação dada com a propriedade <samp>P1</samp> para o valor de string <var>GdyjxP8I6XB3</var>",
 	"apihelp-wbsetreference-description": "Criar uma referência ou definir o valor de uma existente.",
 	"apihelp-wbsetreference-summary": "Criar uma referência ou definir o valor de uma existente.",
