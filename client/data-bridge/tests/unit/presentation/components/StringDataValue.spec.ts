@@ -10,6 +10,7 @@ describe( 'StringDataValue', () => {
 				propsData: {
 					label,
 					dataValue: null,
+					setDataValue: () => {},
 				},
 			} );
 
@@ -22,21 +23,36 @@ describe( 'StringDataValue', () => {
 				propsData: {
 					label: '',
 					dataValue,
+					setDataValue: () => {},
 				},
 			} );
 
 			expect( wrapper.find( ResizingTextField ).props( 'value' ) ).toBe( dataValue.value );
 		} );
 
-		/* it( `triggers ${STATEMENT_MAINSNAK_STRING_VALUE_EDIT} when it is edited`, () => {
+		it( 'triggers the setter with the new value when it is edited', () => {
+			const dataValue = { type: 'string', value: 'Töfften' };
+			const mockSetter = jest.fn();
+			const wrapper = shallowMount( StringDataValue, {
+				propsData: {
+					label: '',
+					dataValue,
+					setDataValue: mockSetter,
+				},
+			} );
+			const testString = 'newString';
 
-		} );*/
+			wrapper.find( ResizingTextField ).vm.$emit( 'input', testString );
+
+			expect( mockSetter ).toBeCalledWith( { type: 'string', value: testString } );
+		} );
 
 		it( 'binds label and editField', () => {
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
 					label: '',
 					dataValue: null,
+					setDataValue: () => {},
 				},
 			} );
 
@@ -55,6 +71,7 @@ describe( 'StringDataValue', () => {
 					label: '',
 					dataValue: null,
 					placeholder,
+					setDataValue: () => {},
 				},
 			} );
 

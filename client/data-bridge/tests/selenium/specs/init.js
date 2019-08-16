@@ -94,7 +94,7 @@ describe( 'init', () => {
 			DataBridgePage.bridge.waitForDisplayed();
 
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
-			assert.strictEqual( DataBridgePage.value.getText(), stringPropertyExampleValue );
+			assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 		} );
 	} );
 } );

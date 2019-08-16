@@ -9,7 +9,7 @@ import { createStore } from '@/store';
 import Vuex, {
 	Store,
 } from 'vuex';
-import DataPlaceholder from '@/presentation/components/DataPlaceholder.vue';
+import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import Application from '@/store/Application';
 
 let store: Store<Application>;
@@ -26,27 +26,30 @@ describe( 'DataBridge', () => {
 		} as ServiceRepositories );
 	} );
 
-	it( 'mounts DataPlaceholder', () => {
-		const targetValue = { type: 'string', value: 'Töfften' };
-		Vue.set( store, 'getters', { targetValue } );
-
+	it( 'mounts StringDataValue', () => {
+		Vue.set( store, 'getters', {
+			targetValue: { type: 'string', value: '' },
+			targetProperty: 'P123',
+		} );
 		const wrapper = shallowMount( DataBridge, {
 			store,
 			localVue,
 		} );
 
-		expect( wrapper.find( DataPlaceholder ).exists() ).toBeTruthy();
+		expect( wrapper.find( StringDataValue ).exists() ).toBeTruthy();
 	} );
 
-	it( 'delegates the targetValue to DataPlaceholder', () => {
+	it( 'delegates the necessary props to StringDataValue', () => {
 		const targetValue = { type: 'string', value: 'Töfften' };
-		Vue.set( store, 'getters', { targetValue } );
+		const targetProperty = 'P123';
+		Vue.set( store, 'getters', { targetValue, targetProperty } );
 
 		const wrapper = shallowMount( DataBridge, {
 			store,
 			localVue,
 		} );
 
-		expect( wrapper.find( DataPlaceholder ).props( 'targetValue' ) ).toBe( targetValue.value );
+		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toBe( targetValue );
+		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetProperty );
 	} );
 } );

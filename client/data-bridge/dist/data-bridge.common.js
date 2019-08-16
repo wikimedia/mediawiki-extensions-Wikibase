@@ -357,6 +357,46 @@ __webpack_require__("ce7e")('getPrototypeOf', function () {
 
 /***/ }),
 
+/***/ "02f4":
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__("4588");
+var defined = __webpack_require__("be13");
+// true  -> String#at
+// false -> String#codePointAt
+module.exports = function (TO_STRING) {
+  return function (that, pos) {
+    var s = String(defined(that));
+    var i = toInteger(pos);
+    var l = s.length;
+    var a, b;
+    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+
+/***/ }),
+
+/***/ "0390":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var at = __webpack_require__("02f4")(true);
+
+ // `AdvanceStringIndex` abstract operation
+// https://tc39.github.io/ecma262/#sec-advancestringindex
+module.exports = function (S, index, unicode) {
+  return index + (unicode ? at(S, index).length : 1);
+};
+
+
+/***/ }),
+
 /***/ "0395":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -383,6 +423,13 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 /***/ }),
 
+/***/ "0598":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "061b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -401,6 +448,27 @@ module.exports = function (it, key) {
 
 /***/ }),
 
+/***/ "0bfb":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 21.2.5.3 get RegExp.prototype.flags
+var anObject = __webpack_require__("cb7c");
+module.exports = function () {
+  var that = anObject(this);
+  var result = '';
+  if (that.global) result += 'g';
+  if (that.ignoreCase) result += 'i';
+  if (that.multiline) result += 'm';
+  if (that.unicode) result += 'u';
+  if (that.sticky) result += 'y';
+  return result;
+};
+
+
+/***/ }),
+
 /***/ "0fc9":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -411,6 +479,21 @@ module.exports = function (index, length) {
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
+
+
+/***/ }),
+
+/***/ "11c1":
+/***/ (function(module, exports, __webpack_require__) {
+
+var v1 = __webpack_require__("c437");
+var v4 = __webpack_require__("c64e");
+
+var uuid = v4;
+uuid.v1 = v1;
+uuid.v4 = v4;
+
+module.exports = uuid;
 
 
 /***/ }),
@@ -611,6 +694,110 @@ module.exports = function (iterator, fn, value, entries) {
 
 /***/ }),
 
+/***/ "214f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+__webpack_require__("b0c5");
+var redefine = __webpack_require__("2aba");
+var hide = __webpack_require__("32e9");
+var fails = __webpack_require__("79e5");
+var defined = __webpack_require__("be13");
+var wks = __webpack_require__("2b4c");
+var regexpExec = __webpack_require__("520a");
+
+var SPECIES = wks('species');
+
+var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
+  // #replace needs built-in support for named groups.
+  // #match works fine because it just return the exec results, even if it has
+  // a "grops" property.
+  var re = /./;
+  re.exec = function () {
+    var result = [];
+    result.groups = { a: '7' };
+    return result;
+  };
+  return ''.replace(re, '$<a>') !== '7';
+});
+
+var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = (function () {
+  // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
+  var re = /(?:)/;
+  var originalExec = re.exec;
+  re.exec = function () { return originalExec.apply(this, arguments); };
+  var result = 'ab'.split(re);
+  return result.length === 2 && result[0] === 'a' && result[1] === 'b';
+})();
+
+module.exports = function (KEY, length, exec) {
+  var SYMBOL = wks(KEY);
+
+  var DELEGATES_TO_SYMBOL = !fails(function () {
+    // String methods call symbol-named RegEp methods
+    var O = {};
+    O[SYMBOL] = function () { return 7; };
+    return ''[KEY](O) != 7;
+  });
+
+  var DELEGATES_TO_EXEC = DELEGATES_TO_SYMBOL ? !fails(function () {
+    // Symbol-named RegExp methods call .exec
+    var execCalled = false;
+    var re = /a/;
+    re.exec = function () { execCalled = true; return null; };
+    if (KEY === 'split') {
+      // RegExp[@@split] doesn't call the regex's exec method, but first creates
+      // a new one. We need to return the patched regex when creating the new one.
+      re.constructor = {};
+      re.constructor[SPECIES] = function () { return re; };
+    }
+    re[SYMBOL]('');
+    return !execCalled;
+  }) : undefined;
+
+  if (
+    !DELEGATES_TO_SYMBOL ||
+    !DELEGATES_TO_EXEC ||
+    (KEY === 'replace' && !REPLACE_SUPPORTS_NAMED_GROUPS) ||
+    (KEY === 'split' && !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC)
+  ) {
+    var nativeRegExpMethod = /./[SYMBOL];
+    var fns = exec(
+      defined,
+      SYMBOL,
+      ''[KEY],
+      function maybeCallNative(nativeMethod, regexp, str, arg2, forceStringMethod) {
+        if (regexp.exec === regexpExec) {
+          if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
+            // The native String method already delegates to @@method (this
+            // polyfilled function), leasing to infinite recursion.
+            // We avoid it by directly calling the native @@method method.
+            return { done: true, value: nativeRegExpMethod.call(regexp, str, arg2) };
+          }
+          return { done: true, value: nativeMethod.call(str, regexp, arg2) };
+        }
+        return { done: false };
+      }
+    );
+    var strfn = fns[0];
+    var rxfn = fns[1];
+
+    redefine(String.prototype, KEY, strfn);
+    hide(RegExp.prototype, SYMBOL, length == 2
+      // 21.2.5.8 RegExp.prototype[@@replace](string, replaceValue)
+      // 21.2.5.11 RegExp.prototype[@@split](string, limit)
+      ? function (string, arg) { return rxfn.call(string, this, arg); }
+      // 21.2.5.6 RegExp.prototype[@@match](string)
+      // 21.2.5.9 RegExp.prototype[@@search](string)
+      : function (string) { return rxfn.call(string, this); }
+    );
+  }
+};
+
+
+/***/ }),
+
 /***/ "230e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -621,6 +808,37 @@ var is = isObject(document) && isObject(document.createElement);
 module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
+
+
+/***/ }),
+
+/***/ "2366":
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
+}
+
+module.exports = bytesToUuid;
 
 
 /***/ }),
@@ -1767,6 +1985,17 @@ var index_esm = {
 
 /***/ }),
 
+/***/ "2f88":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StringDataValue_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0598");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StringDataValue_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StringDataValue_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StringDataValue_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "30f1":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2117,6 +2346,18 @@ module.exports = __webpack_require__("dc62");
 
 /***/ }),
 
+/***/ "4bf8":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.13 ToObject(argument)
+var defined = __webpack_require__("be13");
+module.exports = function (it) {
+  return Object(defined(it));
+};
+
+
+/***/ }),
+
 /***/ "4d16":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2148,6 +2389,72 @@ var $exports = module.exports = function (name) {
 };
 
 $exports.store = store;
+
+
+/***/ }),
+
+/***/ "520a":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var regexpFlags = __webpack_require__("0bfb");
+
+var nativeExec = RegExp.prototype.exec;
+// This always refers to the native implementation, because the
+// String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+// which loads this file before patching the method.
+var nativeReplace = String.prototype.replace;
+
+var patchedExec = nativeExec;
+
+var LAST_INDEX = 'lastIndex';
+
+var UPDATES_LAST_INDEX_WRONG = (function () {
+  var re1 = /a/,
+      re2 = /b*/g;
+  nativeExec.call(re1, 'a');
+  nativeExec.call(re2, 'a');
+  return re1[LAST_INDEX] !== 0 || re2[LAST_INDEX] !== 0;
+})();
+
+// nonparticipating capturing group, copied from es5-shim's String#split patch.
+var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
+
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED;
+
+if (PATCH) {
+  patchedExec = function exec(str) {
+    var re = this;
+    var lastIndex, reCopy, match, i;
+
+    if (NPCG_INCLUDED) {
+      reCopy = new RegExp('^' + re.source + '$(?!\\s)', regexpFlags.call(re));
+    }
+    if (UPDATES_LAST_INDEX_WRONG) lastIndex = re[LAST_INDEX];
+
+    match = nativeExec.call(re, str);
+
+    if (UPDATES_LAST_INDEX_WRONG && match) {
+      re[LAST_INDEX] = re.global ? match.index + match[0].length : lastIndex;
+    }
+    if (NPCG_INCLUDED && match && match.length > 1) {
+      // Fix browsers whose `exec` methods don't consistently return `undefined`
+      // for NPCG, like IE8. NOTE: This doesn' work for /(.?)?/
+      // eslint-disable-next-line no-loop-func
+      nativeReplace.call(match[0], reCopy, function () {
+        for (i = 1; i < arguments.length - 2; i++) {
+          if (arguments[i] === undefined) match[i] = undefined;
+        }
+      });
+    }
+
+    return match;
+  };
+}
+
+module.exports = patchedExec;
 
 
 /***/ }),
@@ -2619,6 +2926,35 @@ module.exports = function (exec, skipClosing) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("d8d6");
+
+/***/ }),
+
+/***/ "5f1b":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var classof = __webpack_require__("23c6");
+var builtinExec = RegExp.prototype.exec;
+
+ // `RegExpExec` abstract operation
+// https://tc39.github.io/ecma262/#sec-regexpexec
+module.exports = function (R, S) {
+  var exec = R.exec;
+  if (typeof exec === 'function') {
+    var result = exec.call(R, S);
+    if (typeof result !== 'object') {
+      throw new TypeError('RegExp exec method returned something other than an Object or null');
+    }
+    return result;
+  }
+  if (classof(R) !== 'RegExp') {
+    throw new TypeError('RegExp#exec called on incompatible receiver');
+  }
+  return builtinExec.call(R, S);
+};
+
 
 /***/ }),
 
@@ -3559,6 +3895,132 @@ module.exports = navigator && navigator.userAgent || '';
 
 /***/ }),
 
+/***/ "a481":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var anObject = __webpack_require__("cb7c");
+var toObject = __webpack_require__("4bf8");
+var toLength = __webpack_require__("9def");
+var toInteger = __webpack_require__("4588");
+var advanceStringIndex = __webpack_require__("0390");
+var regExpExec = __webpack_require__("5f1b");
+var max = Math.max;
+var min = Math.min;
+var floor = Math.floor;
+var SUBSTITUTION_SYMBOLS = /\$([$&`']|\d\d?|<[^>]*>)/g;
+var SUBSTITUTION_SYMBOLS_NO_NAMED = /\$([$&`']|\d\d?)/g;
+
+var maybeToString = function (it) {
+  return it === undefined ? it : String(it);
+};
+
+// @@replace logic
+__webpack_require__("214f")('replace', 2, function (defined, REPLACE, $replace, maybeCallNative) {
+  return [
+    // `String.prototype.replace` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.replace
+    function replace(searchValue, replaceValue) {
+      var O = defined(this);
+      var fn = searchValue == undefined ? undefined : searchValue[REPLACE];
+      return fn !== undefined
+        ? fn.call(searchValue, O, replaceValue)
+        : $replace.call(String(O), searchValue, replaceValue);
+    },
+    // `RegExp.prototype[@@replace]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@replace
+    function (regexp, replaceValue) {
+      var res = maybeCallNative($replace, regexp, this, replaceValue);
+      if (res.done) return res.value;
+
+      var rx = anObject(regexp);
+      var S = String(this);
+      var functionalReplace = typeof replaceValue === 'function';
+      if (!functionalReplace) replaceValue = String(replaceValue);
+      var global = rx.global;
+      if (global) {
+        var fullUnicode = rx.unicode;
+        rx.lastIndex = 0;
+      }
+      var results = [];
+      while (true) {
+        var result = regExpExec(rx, S);
+        if (result === null) break;
+        results.push(result);
+        if (!global) break;
+        var matchStr = String(result[0]);
+        if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+      }
+      var accumulatedResult = '';
+      var nextSourcePosition = 0;
+      for (var i = 0; i < results.length; i++) {
+        result = results[i];
+        var matched = String(result[0]);
+        var position = max(min(toInteger(result.index), S.length), 0);
+        var captures = [];
+        // NOTE: This is equivalent to
+        //   captures = result.slice(1).map(maybeToString)
+        // but for some reason `nativeSlice.call(result, 1, result.length)` (called in
+        // the slice polyfill when slicing native arrays) "doesn't work" in safari 9 and
+        // causes a crash (https://pastebin.com/N21QzeQA) when trying to debug it.
+        for (var j = 1; j < result.length; j++) captures.push(maybeToString(result[j]));
+        var namedCaptures = result.groups;
+        if (functionalReplace) {
+          var replacerArgs = [matched].concat(captures, position, S);
+          if (namedCaptures !== undefined) replacerArgs.push(namedCaptures);
+          var replacement = String(replaceValue.apply(undefined, replacerArgs));
+        } else {
+          replacement = getSubstitution(matched, S, position, captures, namedCaptures, replaceValue);
+        }
+        if (position >= nextSourcePosition) {
+          accumulatedResult += S.slice(nextSourcePosition, position) + replacement;
+          nextSourcePosition = position + matched.length;
+        }
+      }
+      return accumulatedResult + S.slice(nextSourcePosition);
+    }
+  ];
+
+    // https://tc39.github.io/ecma262/#sec-getsubstitution
+  function getSubstitution(matched, str, position, captures, namedCaptures, replacement) {
+    var tailPos = position + matched.length;
+    var m = captures.length;
+    var symbols = SUBSTITUTION_SYMBOLS_NO_NAMED;
+    if (namedCaptures !== undefined) {
+      namedCaptures = toObject(namedCaptures);
+      symbols = SUBSTITUTION_SYMBOLS;
+    }
+    return $replace.call(replacement, symbols, function (match, ch) {
+      var capture;
+      switch (ch.charAt(0)) {
+        case '$': return '$';
+        case '&': return matched;
+        case '`': return str.slice(0, position);
+        case "'": return str.slice(tailPos);
+        case '<':
+          capture = namedCaptures[ch.slice(1, -1)];
+          break;
+        default: // \d\d?
+          var n = +ch;
+          if (n === 0) return match;
+          if (n > m) {
+            var f = floor(n / 10);
+            if (f === 0) return match;
+            if (f <= m) return captures[f - 1] === undefined ? ch.charAt(1) : captures[f - 1] + ch.charAt(1);
+            return match;
+          }
+          capture = captures[n - 1];
+      }
+      return capture === undefined ? '' : capture;
+    });
+  }
+});
+
+
+/***/ }),
+
 /***/ "a4bb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3618,6 +4080,23 @@ module.exports = function (bitmap, value) {
 
 /***/ }),
 
+/***/ "b0c5":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var regexpExec = __webpack_require__("520a");
+__webpack_require__("5ca1")({
+  target: 'RegExp',
+  proto: true,
+  forced: regexpExec !== /./.exec
+}, {
+  exec: regexpExec
+});
+
+
+/***/ }),
+
 /***/ "b447":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3653,6 +4132,18 @@ module.exports = function (C, x) {
   var resolve = promiseCapability.resolve;
   resolve(x);
   return promiseCapability.promise;
+};
+
+
+/***/ }),
+
+/***/ "be13":
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
 };
 
 
@@ -3756,6 +4247,158 @@ var enumBugKeys = __webpack_require__("1691");
 module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
 };
+
+
+/***/ }),
+
+/***/ "c437":
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__("e1f4");
+var bytesToUuid = __webpack_require__("2366");
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+var _nodeId;
+var _clockseq;
+
+// Previous uuid creation time
+var _lastMSecs = 0;
+var _lastNSecs = 0;
+
+// See https://github.com/broofa/node-uuid for API details
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || [];
+
+  options = options || {};
+  var node = options.node || _nodeId;
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+  // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+  if (node == null || clockseq == null) {
+    var seedBytes = rng();
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [
+        seedBytes[0] | 0x01,
+        seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]
+      ];
+    }
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  }
+
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+  // Time since last uuid creation (in msecs)
+  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+  // Per 4.2.1.2, Bump clockseq on clock regression
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  }
+
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  }
+
+  // Per 4.2.1.2 Throw error if too many uuids are requested
+  if (nsecs >= 10000) {
+    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq;
+
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+  msecs += 12219292800000;
+
+  // `time_low`
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff;
+
+  // `time_mid`
+  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff;
+
+  // `time_high_and_version`
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+  b[i++] = tmh >>> 16 & 0xff;
+
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+  b[i++] = clockseq >>> 8 | 0x80;
+
+  // `clock_seq_low`
+  b[i++] = clockseq & 0xff;
+
+  // `node`
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf ? buf : bytesToUuid(b);
+}
+
+module.exports = v1;
+
+
+/***/ }),
+
+/***/ "c64e":
+/***/ (function(module, exports, __webpack_require__) {
+
+var rng = __webpack_require__("e1f4");
+var bytesToUuid = __webpack_require__("2366");
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof(options) == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+  options = options || {};
+
+  var rnds = options.random || (options.rng || rng)();
+
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+  // Copy bytes to buffer, if provided
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+module.exports = v4;
 
 
 /***/ }),
@@ -3966,6 +4609,47 @@ module.exports = function (target, src, safe) {
   for (var key in src) redefine(target, key, src[key], safe);
   return target;
 };
+
+
+/***/ }),
+
+/***/ "e1f4":
+/***/ (function(module, exports) {
+
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+if (getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+  module.exports = function whatwgRNG() {
+    getRandomValues(rnds8);
+    return rnds8;
+  };
+} else {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+
+  module.exports = function mathRNG() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
 
 
 /***/ }),
@@ -4276,12 +4960,12 @@ var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=3a16d637&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=ba32c22e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[(_vm.hasError)?_c('ErrorWrapper'):_c(_vm.isInit ? 'DataBridge' : 'Initializing',{tag:"component"})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=3a16d637&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=ba32c22e&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -4735,12 +5419,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=62847af1&
-var DataBridgevue_type_template_id_62847af1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('DataPlaceholder',{attrs:{"target-value":_vm.targetValue.value}})],1)}
-var DataBridgevue_type_template_id_62847af1_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=f2caa80a&
+var DataBridgevue_type_template_id_f2caa80a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetProperty,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue}})],1)}
+var DataBridgevue_type_template_id_f2caa80a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=62847af1&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=f2caa80a&
 
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
@@ -4825,43 +5509,93 @@ function merge(a, b) {
 // CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
 
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataPlaceholder.vue?vue&type=template&id=999205c8&scoped=true&
-var DataPlaceholdervue_type_template_id_999205c8_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',{staticClass:"wb-db-placeholder"},[_vm._v("\n\tTarget Value:\n\t"),_c('span',{staticClass:"wb-db-placeholder__value"},[_vm._v(_vm._s(_vm.targetValue))])])}
-var DataPlaceholdervue_type_template_id_999205c8_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=7f156cb2&
+var StringDataValuevue_type_template_id_7f156cb2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('label',{staticClass:"wb-db-stringValue__label",attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
+var StringDataValuevue_type_template_id_7f156cb2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataPlaceholder.vue?vue&type=template&id=999205c8&scoped=true&
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=7f156cb2&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataPlaceholder.vue?vue&type=script&lang=ts&
-
-
-
-
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ResizingTextField.vue?vue&type=template&id=1a4180d9&
+var ResizingTextFieldvue_type_template_id_1a4180d9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('textarea',{domProps:{"value":_vm.value},on:{"input":_vm.setValue,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();}}})}
+var ResizingTextFieldvue_type_template_id_1a4180d9_staticRenderFns = []
 
 
+// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue?vue&type=template&id=1a4180d9&
 
-var DataPlaceholdervue_type_script_lang_ts_DataPlaceholder =
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ResizingTextField.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+var ResizingTextFieldvue_type_script_lang_ts_ResizingTextField =
 /*#__PURE__*/
 function (_Vue) {
-  _inherits(DataPlaceholder, _Vue);
+  _inherits(ResizingTextField, _Vue);
 
-  function DataPlaceholder() {
-    _classCallCheck(this, DataPlaceholder);
+  function ResizingTextField() {
+    _classCallCheck(this, ResizingTextField);
 
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(DataPlaceholder).apply(this, arguments));
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ResizingTextField).apply(this, arguments));
   }
 
-  return DataPlaceholder;
+  _createClass(ResizingTextField, [{
+    key: "mounted",
+    value: function mounted() {
+      this.resizeTextField();
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(event) {
+      var _this = this;
+
+      this.$emit('input', this.removeNewlines(event.target.value)); // make sure that even nodiff changes to the state will update our textarea
+      // a nodiff could be caused by pasting newlines only
+
+      this.$forceUpdate();
+      this.$nextTick().then(function () {
+        _this.resizeTextField();
+      });
+    }
+  }, {
+    key: "removeNewlines",
+    value: function removeNewlines(value) {
+      return value.replace(/\r?\n/g, '');
+    }
+  }, {
+    key: "resizeTextField",
+    value: function resizeTextField() {
+      var textarea = this.$el;
+      textarea.style.height = '0';
+      var border = this.getPropertyValueInPx(textarea, 'border-top-width') + this.getPropertyValueInPx(textarea, 'border-bottom-width');
+      textarea.style.height = "".concat(this.$el.scrollHeight + border, "px");
+    }
+  }, {
+    key: "getPropertyValueInPx",
+    value: function getPropertyValueInPx(element, property) {
+      return parseInt(window.getComputedStyle(element).getPropertyValue(property));
+    }
+  }]);
+
+  return ResizingTextField;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-__decorate([Prop({
-  required: true
-})], DataPlaceholdervue_type_script_lang_ts_DataPlaceholder.prototype, "targetValue", void 0);
+__decorate([Prop()], ResizingTextFieldvue_type_script_lang_ts_ResizingTextField.prototype, "value", void 0);
 
-DataPlaceholdervue_type_script_lang_ts_DataPlaceholder = __decorate([vue_class_component_common_default.a], DataPlaceholdervue_type_script_lang_ts_DataPlaceholder);
-/* harmony default export */ var DataPlaceholdervue_type_script_lang_ts_ = (DataPlaceholdervue_type_script_lang_ts_DataPlaceholder);
-// CONCATENATED MODULE: ./src/presentation/components/DataPlaceholder.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_DataPlaceholdervue_type_script_lang_ts_ = (DataPlaceholdervue_type_script_lang_ts_); 
+ResizingTextFieldvue_type_script_lang_ts_ResizingTextField = __decorate([vue_class_component_common_default.a], ResizingTextFieldvue_type_script_lang_ts_ResizingTextField);
+/* harmony default export */ var ResizingTextFieldvue_type_script_lang_ts_ = (ResizingTextFieldvue_type_script_lang_ts_ResizingTextField);
+// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ResizingTextFieldvue_type_script_lang_ts_ = (ResizingTextFieldvue_type_script_lang_ts_); 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -4957,7 +5691,7 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./src/presentation/components/DataPlaceholder.vue
+// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue
 
 
 
@@ -4966,18 +5700,118 @@ function normalizeComponent (
 /* normalize component */
 
 var component = normalizeComponent(
-  components_DataPlaceholdervue_type_script_lang_ts_,
-  DataPlaceholdervue_type_template_id_999205c8_scoped_true_render,
-  DataPlaceholdervue_type_template_id_999205c8_scoped_true_staticRenderFns,
+  components_ResizingTextFieldvue_type_script_lang_ts_,
+  ResizingTextFieldvue_type_template_id_1a4180d9_render,
+  ResizingTextFieldvue_type_template_id_1a4180d9_staticRenderFns,
   false,
   null,
-  "999205c8",
+  null,
   null
   
 )
 
-/* harmony default export */ var components_DataPlaceholder = (component.exports);
+/* harmony default export */ var components_ResizingTextField = (component.exports);
+// EXTERNAL MODULE: ./node_modules/uuid/index.js
+var uuid = __webpack_require__("11c1");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+var StringDataValuevue_type_script_lang_ts_StringDataValue =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(StringDataValue, _Vue);
+
+  function StringDataValue() {
+    var _this;
+
+    _classCallCheck(this, StringDataValue);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(StringDataValue).apply(this, arguments));
+    _this.id = Object(uuid["v4"])();
+    return _this;
+  }
+
+  _createClass(StringDataValue, [{
+    key: "value",
+    get: function get() {
+      if (!this.dataValue) {
+        return '';
+      } else {
+        return this.dataValue.value;
+      }
+    },
+    set: function set(value) {
+      this.setDataValue({
+        type: 'string',
+        value: value
+      });
+    }
+  }]);
+
+  return StringDataValue;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Prop({
+  required: true
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "dataValue", void 0);
+
+__decorate([Prop({
+  required: true
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "label", void 0);
+
+__decorate([Prop({
+  required: false
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "placeholder", void 0);
+
+__decorate([Prop({
+  required: true,
+  type: Function
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "setDataValue", void 0);
+
+StringDataValuevue_type_script_lang_ts_StringDataValue = __decorate([vue_class_component_common_default()({
+  components: {
+    ResizingTextField: components_ResizingTextField
+  }
+})], StringDataValuevue_type_script_lang_ts_StringDataValue);
+/* harmony default export */ var StringDataValuevue_type_script_lang_ts_ = (StringDataValuevue_type_script_lang_ts_StringDataValue);
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_StringDataValuevue_type_script_lang_ts_ = (StringDataValuevue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=style&index=0&lang=scss&
+var StringDataValuevue_type_style_index_0_lang_scss_ = __webpack_require__("2f88");
+
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue
+
+
+
+
+
+
+/* normalize component */
+
+var StringDataValue_component = normalizeComponent(
+  components_StringDataValuevue_type_script_lang_ts_,
+  StringDataValuevue_type_template_id_7f156cb2_render,
+  StringDataValuevue_type_template_id_7f156cb2_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_StringDataValue = (StringDataValue_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -5004,9 +5838,13 @@ function (_Vue) {
 
 __decorate([Getter('targetValue')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetValue", void 0);
 
+__decorate([Getter('targetProperty')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetProperty", void 0);
+
+__decorate([Action(BRIDGE_SET_TARGET_VALUE)], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "setDataValue", void 0);
+
 DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_common_default()({
   components: {
-    DataPlaceholder: components_DataPlaceholder
+    StringDataValue: components_StringDataValue
   }
 })], DataBridgevue_type_script_lang_ts_DataBridge);
 /* harmony default export */ var DataBridgevue_type_script_lang_ts_ = (DataBridgevue_type_script_lang_ts_DataBridge);
@@ -5022,8 +5860,8 @@ DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_c
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_62847af1_render,
-  DataBridgevue_type_template_id_62847af1_staticRenderFns,
+  DataBridgevue_type_template_id_f2caa80a_render,
+  DataBridgevue_type_template_id_f2caa80a_staticRenderFns,
   false,
   null,
   null,

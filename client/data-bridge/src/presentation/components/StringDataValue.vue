@@ -37,12 +37,24 @@ export default class StringDataValue extends Vue {
 	@Prop( { required: false } )
 	public placeholder?: string;
 
+	@Prop( { required: true, type: Function } )
+	public setDataValue!: ( dataValue: DataValue ) => void;
+
 	get value() {
 		if ( !this.dataValue ) {
 			return '';
 		} else {
-			return this.dataValue.value;
+			return this.dataValue.value as string;
 		}
+	}
+
+	set value( value: string ) {
+		this.setDataValue(
+			{
+				type: 'string',
+				value,
+			},
+		);
 	}
 }
 </script>

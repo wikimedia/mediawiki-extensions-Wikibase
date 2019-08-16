@@ -61,7 +61,6 @@ ol { // overcome very strong selector, e.g. .content ul li
 	font-family: $font-family-system-sans;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
 	color: #2c3e50;
 
 	@include media-breakpoint-up(breakpoint) {
