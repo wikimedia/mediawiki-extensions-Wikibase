@@ -22,7 +22,8 @@
 			"Vito Genovese",
 			"Botansahin",
 			"Chansey",
-			"Mirzali"
+			"Mirzali",
+			"Suvarioglu"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -332,6 +333,7 @@
 	"wikibase-api-no-such-entity": "\"$1\" ID numaralı varlık bulunamadı.",
 	"wikibase-api-no-such-sitelink": "Rozetlerin düzenlenmesi esnasında \"$1\" için bir sitebağlantısı bulunamadı.",
 	"wikibase-api-not-recognized-datatype": "Bir veri türü bekleniyor ancak eksik ya da tanınmıyor.",
+	"wikibase-api-tags-invalid": "Etiketlerin değişkenleri geçersiz.",
 	"wikibase-api-target-not-empty": "Yönlendirme sadece boş veya silinmiş varlığın üstünde oluşturulabilir.",
 	"wikibase-api-target-is-redirect": "Yönlendirmenin hedefi başka bir yönlendirme olmamalıdır.",
 	"wikibase-api-target-is-incompatible": "Farklı türde bir varlığa yönlendirme denemesi.",

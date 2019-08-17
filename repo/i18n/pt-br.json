@@ -361,7 +361,7 @@
 	"wikibase-api-no-such-entity": "Não foi possível encontrar uma entidade com o identificador \"$1\".",
 	"wikibase-api-no-such-sitelink": "Não foi possível encontrar um sitelink para \"$1\" ao tentar editar emblemas.",
 	"wikibase-api-not-recognized-datatype": "Um tipo de dados era esperado, mas está faltando ou não foi reconhecido.",
-	"wikibase-api-tags-invalid": "Tags ou Etiquetas de parâmetro inválido.",
+	"wikibase-api-tags-invalid": "Etiquetas de parâmetro inválido.",
 	"wikibase-api-target-not-empty": "O redirecionamento só pode ser criado em cima de uma entidade vazia ou excluída.",
 	"wikibase-api-target-is-redirect": "O destino do redirecionamento não deve ser um redirecionamento também.",
 	"wikibase-api-target-is-incompatible": "Tentativa de redirecionar para uma entidade de um tipo diferente.",
