@@ -87,7 +87,9 @@ $specialPageAliases['ja'] = [
 
 /** Korean (한국어) */
 $specialPageAliases['ko'] = [
-	'UnconnectedPages' => [ '연결안된문서' ],
+	'EntityUsage' => [ '개체사용량', '개체사용량데이터' ],
+	'UnconnectedPages' => [ '연결안된문서', '사이트링크없는문서' ],
+	'PagesWithBadges' => [ '뱃지있는문서', '뱃지조회' ],
 ];
 
 /** Luxembourgish (Lëtzebuergesch) */
