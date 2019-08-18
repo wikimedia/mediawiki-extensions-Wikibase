@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Ukabia",
-			"Uzoma Ozurumba"
+			"Uzoma Ozurumba",
+			"Oby Ezeilo"
 		]
 	},
+	"tooltip-t-wikibase": "link eji ejikọta Data edebere nke ọma",
 	"wikibase-comment-update": "{{WBREPONAME}} ihe a gbanwere",
 	"wikibase-dataitem": "{{WBREPONAME}} ihe",
 	"wikibase-editlinks": "Dezie njikọ ndi a",
