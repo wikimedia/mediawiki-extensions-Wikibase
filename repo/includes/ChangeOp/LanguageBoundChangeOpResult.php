@@ -11,7 +11,7 @@ namespace Wikibase\Repo\ChangeOp;
 interface LanguageBoundChangeOpResult extends ChangeOpResult {
 
 	/**
-	 * The language code of edit
+	 * The language code of the entity part that changed
 	 * @return string
 	 */
 	public function getLanguageCode();
