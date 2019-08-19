@@ -4,12 +4,11 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use DOMElement;
-use DOMNode;
 use IBufferingStatsdDataFactory;
-use RemexHtml\DOM\DOMBuilder;
 use RemexHtml\HTMLData;
 use RemexHtml\Serializer\HtmlFormatter;
+use RemexHtml\Serializer\Serializer;
+use RemexHtml\Serializer\SerializerNode;
 use RemexHtml\Tokenizer\Tokenizer;
 use RemexHtml\TreeBuilder\Dispatcher;
 use RemexHtml\TreeBuilder\TreeBuilder;
@@ -121,44 +120,37 @@ class FormatEntities extends ApiBase {
 	 * @return string
 	 */
 	private static function makeLinksAbsolute( $html ) {
-		$domBuilder = new DOMBuilder();
-		$treeBuilder = new TreeBuilder( $domBuilder, [] );
+		$formatter = new class extends HtmlFormatter {
+
+			public function element( SerializerNode $parent, SerializerNode $node, $contents ) {
+				if ( $node->namespace === HTMLData::NS_HTML
+					&& $node->name === 'a'
+					&& isset( $node->attrs['href'] )
+				) {
+					$node = clone $node;
+					$node->attrs = clone $node->attrs;
+					$node->attrs['href'] = wfExpandUrl( $node->attrs['href'], PROTO_CANONICAL );
+				}
+				return parent::element( $parent, $node, $contents );
+			}
+
+			public function startDocument( $fragmentNamespace, $fragmentName ) {
+				return '';
+			}
+
+		};
+
+		$serializer = new Serializer( $formatter );
+		$treeBuilder = new TreeBuilder( $serializer );
 		$dispatcher = new Dispatcher( $treeBuilder );
-		$tokenizer = new Tokenizer( $dispatcher, $html, [] );
+		$tokenizer = new Tokenizer( $dispatcher, $html );
 
 		$tokenizer->execute( [
 			'fragmentNamespace' => HTMLData::NS_HTML,
 			'fragmentName' => 'body',
 		] );
-		/** @var DOMNode $node */
-		$node = $domBuilder->getFragment();
-		self::makeLinksAbsoluteDOM( $node );
 
-		$formatter = new HtmlFormatter();
-		$absoluteHtml = $formatter->formatDOMNode( $node );
-		if ( substr( $absoluteHtml, 0, 6 ) === '<html>' ) {
-			$absoluteHtml = substr( $absoluteHtml, 6 );
-		}
-		if ( substr( $absoluteHtml, -7 ) === '</html>' ) {
-			$absoluteHtml = substr( $absoluteHtml, 0, -7 );
-		}
-		return $absoluteHtml;
-	}
-
-	private static function makeLinksAbsoluteDOM( DOMNode $node ) {
-		if (
-			$node instanceof DOMElement &&
-			$node->nodeName === 'a' &&
-			$node->hasAttribute( 'href' )
-		) {
-			$href = wfExpandUrl( $node->getAttribute( 'href' ), PROTO_CANONICAL );
-			$node->setAttribute( 'href', $href );
-		}
-		if ( $node->hasChildNodes() ) {
-			for ( $index = 0; $index < $node->childNodes->length; $index ++ ) {
-				self::makeLinksAbsoluteDOM( $node->childNodes->item( $index ) );
-			}
-		}
+		return $serializer->getResult();
 	}
 
 	protected function getAllowedParams() {
