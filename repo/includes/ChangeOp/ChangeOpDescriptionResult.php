@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Class ChangeOpDescriptionResult
  */
-class ChangeOpDescriptionResult implements ChangeOpResult {
+class ChangeOpDescriptionResult implements LanguageBoundChangeOpResult {
 	private $languageCode;
 	private $entityId;
 	private $oldDescription;
