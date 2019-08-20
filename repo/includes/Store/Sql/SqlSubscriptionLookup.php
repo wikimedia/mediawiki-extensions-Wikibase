@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Store\Sql;
+namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\SubscriptionLookup;

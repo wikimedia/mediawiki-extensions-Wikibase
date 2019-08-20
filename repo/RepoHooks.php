@@ -40,7 +40,7 @@ use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use WikiPage;
 

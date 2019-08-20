@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Log\NullLogger;
-use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 
 /**
- * @covers \Wikibase\Store\Sql\SqlChangeDispatchCoordinator
+ * @covers \Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator
  *
  * @group Wikibase
  * @group WikibaseStore

@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 use Wikibase\Store\ChangeDispatchCoordinator;
-use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
