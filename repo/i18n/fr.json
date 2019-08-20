@@ -418,7 +418,7 @@
 	"wikibase-listdatatypes-tabular-data-head": "Données tabulaires",
 	"wikibase-listdatatypes-tabular-data-body": "Lien vers les données tabulaires stockées sur Wikimedia Commons (ou un autre wiki configuré). Voir « https://www.mediawiki.org/wiki/Help:Tabular_Data » pour plus d’information sur les données tabulaires.",
 	"wikibase-listdatatypes-entity-schema-head": "Schéma d’entité",
-	"wikibase-listdatatypes-entity-schema-body": "Lien vers les schémas d’entité stockés dans l’espace de noms configuré dans le même wiki. La valeur doit être sans le préfixe d’espace de noms « EntitySchema ».",
+	"wikibase-listdatatypes-entity-schema-body": "Lien vers les schémas d’entité stockés dans l’espace de noms configuré dans le même wiki. La valeur doit être sans le préfixe d’espace de noms « EntitySchema: ».",
 	"wikibase-listdatatypes-quantity-head": "Quantité",
 	"wikibase-listdatatypes-quantity-body": "Champ de donnée littérale pour une quantité qui se rapporte à un type d’unité bien défini. L’unité réelle va dans les valeurs de donnée qui sont entrées.\n* montant — partie implicite de la chaîne (l’application du préfixe de l’unité n’est pas clair)\n* unité — partie implicite de la chaîne, « 1 » par défaut (l’application du corps standardisé n’est pas claire)\n* majorant — majorant de la quantité",
 	"wikibase-listdatatypes-monolingualtext-head": "Texte monolingue",

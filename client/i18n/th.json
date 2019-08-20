@@ -70,7 +70,7 @@
 	"wikibase-pageinfo-entity-usage-X": "ข้อมูลทั้งหมดของสนเทศรายการนี้",
 	"wikibase-pageinfo-entity-usage-O": "อื่นๆ (ประพจน์)",
 	"wikibase-otherprojects": "ในโครงการอื่น",
-	"echo-category-title-wikibase-action": "มี{{PLURAL:$1|การเชื่อมโยง}}เข้ากับ {{WBREPONAME}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|การเชื่อมโยง}}กับ{{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|ดู}}สิ่งนี้",
 	"notification-subject-page-connection": "หน้าหนึ่งบน {{SITENAME}} ที่คุณ{{GENDER:$3|ได้สร้างไว้}} ได้{{GENDER:$2|เชื่อมโยง}}เข้ากับรายการของสิ่งหนึ่งใน {{WBREPONAME}}"
 }
