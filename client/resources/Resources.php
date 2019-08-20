@@ -1,7 +1,6 @@
 <?php
 
 use Wikibase\Client\DataBridge\DataBridgeConfigValueProvider;
-use Wikibase\Client\Modules\SiteModule;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 
@@ -95,20 +94,20 @@ return call_user_func( function() {
 			},
 		],
 
-		'wikibase.client.currentSite' => $moduleTemplate + [
-			'class' => SiteModule::class
-		],
-
 		'wikibase.client.miscStyles' => $moduleTemplate + [
-				'styles' => [
-					'wikibase.client.page-move.css',
-					'wikibase.client.changeslist.css',
-				]
+			'styles' => [
+				'wikibase.client.page-move.css',
+				'wikibase.client.changeslist.css',
+			]
 		],
 
 		'wikibase.client.linkitem.init' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.client.linkitem.init.js'
+			"packageFiles" => [
+				"wikibase.client.linkitem.init.js",
+				[
+					"name" => "config.json",
+					"callback" => "Wikibase\\ClientHooks::getSiteConfiguration"
+				]
 			],
 			'messages' => [
 				'unknown-error'
@@ -137,7 +136,6 @@ return call_user_func( function() {
 				'mediawiki.util',
 				'mediawiki.jqueryMsg',
 				'jquery.event.special.eachchange',
-				'wikibase.client.currentSite',
 				'wikibase.sites',
 				'wikibase.api.RepoApi',
 				'wikibase.api.RepoApiError',
