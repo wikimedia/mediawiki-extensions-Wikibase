@@ -97,6 +97,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'msg' => 'wikibase-dataitem',
 			'class' => 'wb-otherproject-link wb-otherproject-wikibase-item',
 			'href' => '<a href="https://www.wikidata.org/wiki/Q123">Q123</a>',
+			'id' => 't-wikibase',
 		];
 
 		return [
