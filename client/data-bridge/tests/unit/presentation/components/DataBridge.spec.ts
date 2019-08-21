@@ -27,6 +27,9 @@ describe( 'DataBridge', () => {
 	} );
 
 	it( 'mounts DataPlaceholder', () => {
+		const targetValue = { type: 'string', value: 'Töfften' };
+		Vue.set( store, 'getters', { targetValue } );
+
 		const wrapper = shallowMount( DataBridge, {
 			store,
 			localVue,
@@ -36,7 +39,7 @@ describe( 'DataBridge', () => {
 	} );
 
 	it( 'delegates the targetValue to DataPlaceholder', () => {
-		const targetValue = 'Töfften';
+		const targetValue = { type: 'string', value: 'Töfften' };
 		Vue.set( store, 'getters', { targetValue } );
 
 		const wrapper = shallowMount( DataBridge, {
@@ -44,6 +47,6 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( DataPlaceholder ).props( 'targetValue' ) ).toBe( targetValue );
+		expect( wrapper.find( DataPlaceholder ).props( 'targetValue' ) ).toBe( targetValue.value );
 	} );
 } );

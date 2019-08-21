@@ -4734,12 +4734,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=6187a13b&
-var DataBridgevue_type_template_id_6187a13b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('DataPlaceholder',{attrs:{"target-value":_vm.targetValue}})],1)}
-var DataBridgevue_type_template_id_6187a13b_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5d6661df-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=62847af1&
+var DataBridgevue_type_template_id_62847af1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('DataPlaceholder',{attrs:{"target-value":_vm.targetValue.value}})],1)}
+var DataBridgevue_type_template_id_62847af1_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=6187a13b&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=62847af1&
 
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
@@ -5021,8 +5021,8 @@ DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_c
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_6187a13b_render,
-  DataBridgevue_type_template_id_6187a13b_staticRenderFns,
+  DataBridgevue_type_template_id_62847af1_render,
+  DataBridgevue_type_template_id_62847af1_staticRenderFns,
   false,
   null,
   null,
@@ -5321,6 +5321,8 @@ var actions = _defineProperty({}, BRIDGE_INIT, function (context, information) {
 
 
 
+
+
 var getters_getters = {
   editFlow: function editFlow(state) {
     return state.editFlow;
@@ -5332,9 +5334,18 @@ var getters_getters = {
     return state.applicationStatus;
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  targetValue: function targetValue(_state, getters) {
-    var getter = getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ONLY_MAIN_STRING_VALUE)];
-    return getter(getters.targetProperty);
+  targetValue: function targetValue(state, getters) {
+    if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
+      return null;
+    }
+
+    var entityId = getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+    var path = {
+      entityId: entityId,
+      propertyId: state.targetProperty,
+      index: 0
+    };
+    return getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue)](path);
   }
 };
 // CONCATENATED MODULE: ./src/store/mutations.ts

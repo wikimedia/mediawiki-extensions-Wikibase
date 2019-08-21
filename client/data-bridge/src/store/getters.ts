@@ -1,9 +1,17 @@
 import { GetterTree } from 'vuex';
+import Status from '@/definitions/ApplicationStatus';
+import DataValue from '@/datamodel/DataValue';
 import Application from '@/store/Application';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import { NS_ENTITY } from '@/store/namespaces';
+import {
+	NS_ENTITY,
+	NS_STATEMENTS,
+} from '@/store/namespaces';
+import {
+	ENTITY_ID,
+} from '@/store/entity/getterTypes';
+import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
-import { ENTITY_ONLY_MAIN_STRING_VALUE } from '@/store/entity/getterTypes';
 
 export const getters: GetterTree<Application, Application> = {
 	editFlow( state: Application ): string {
@@ -19,9 +27,20 @@ export const getters: GetterTree<Application, Application> = {
 	},
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	targetValue( _state: Application, getters: any ): string|null {
-		const getter: ( propertyId: string ) => string|null
-			= getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ONLY_MAIN_STRING_VALUE ) ];
-		return getter( getters.targetProperty );
+	targetValue( state: Application, getters: { [ key: string ]: any } ): DataValue|null {
+		if ( state.applicationStatus !== Status.READY ) {
+			return null;
+		}
+
+		const entityId = getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ];
+		const path = {
+			entityId,
+			propertyId: state.targetProperty,
+			index: 0,
+		};
+
+		return getters[
+			namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
+		]( path );
 	},
 };

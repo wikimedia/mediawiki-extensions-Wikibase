@@ -119,7 +119,7 @@ describe( 'store', () => {
 		expect( store.getters.targetValue ).toBe( null );
 
 		return store.dispatch( BRIDGE_INIT, info ).then( () => {
-			expect( store.getters.targetValue ).toBe( 'a string value' );
+			expect( store.getters.targetValue ).toBe( testSet.entity.statements.P31[ 0 ].mainsnak.datavalue );
 		} );
 	} );
 
