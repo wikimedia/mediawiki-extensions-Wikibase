@@ -40,7 +40,8 @@ class EntityTermsViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		$useTermbox = false
 	) {
-		return $useTermbox ? $this->newTermboxView( $language )
+		// FIXME: Hack introduced for T230937 - preventing trying to use remote termbox when entity hasn't been saved
+		return $useTermbox && $entity->getId() ? $this->newTermboxView( $language )
 			: $this->newPlaceHolderEmittingEntityTermsView( $entity, $language, $fallbackChain );
 	}
 
