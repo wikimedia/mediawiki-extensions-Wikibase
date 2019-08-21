@@ -7,10 +7,6 @@ export default function resolveMainSnak( state: StatementsState, coordinates: Ma
 		return null;
 	}
 
-	if ( !state[ coordinates.entityId ] ) {
-		return null;
-	}
-
 	if ( !state[ coordinates.entityId ][ coordinates.propertyId ] ) {
 		return null;
 	}

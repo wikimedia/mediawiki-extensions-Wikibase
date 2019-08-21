@@ -5494,10 +5494,6 @@ function resolveMainSnak(state, coordinates) {
     return null;
   }
 
-  if (!state[coordinates.entityId]) {
-    return null;
-  }
-
   if (!state[coordinates.entityId][coordinates.propertyId]) {
     return null;
   }
