@@ -29,7 +29,7 @@ describe( 'App.vue', () => {
 	let propertyId: string;
 	let editFlow: EditFlow;
 
-	beforeEach( () => {
+	beforeEach( async () => {
 		entityId = 'Q42';
 		propertyId = 'P349';
 		editFlow = EditFlow.OVERWRITE;
@@ -53,7 +53,7 @@ describe( 'App.vue', () => {
 			editFlow,
 		};
 
-		store.dispatch( BRIDGE_INIT, information );
+		await store.dispatch( BRIDGE_INIT, information );
 	} );
 
 	it( 'renders the mountable root element', () => {

@@ -5248,6 +5248,21 @@ var APPLICATION_STATUS_SET = 'setApplicationStatus';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
+// CONCATENATED MODULE: ./src/store/entity/statements/getterTypes.ts
+var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
+var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
+var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
+// CONCATENATED MODULE: ./src/store/entity/statements/mainSnakGetterTypes.ts
+var mainSnakGetterTypes = {
+  dataType: 'mainSnakDataType',
+  dataValue: 'mainSnakDataValue',
+  dataValueType: 'mainSnakDataValueType',
+  snakType: 'mainSnakSnakType'
+};
+// CONCATENATED MODULE: ./src/store/entity/getterTypes.ts
+var ENTITY_ID = 'id';
+var ENTITY_REVISION = 'revision';
+var ENTITY_ONLY_MAIN_STRING_VALUE = 'onlyMainStringValue';
 // CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
 var ENTITY_INIT = 'entityInit';
 // CONCATENATED MODULE: ./src/store/namespacedStoreEvent.ts
@@ -5269,23 +5284,39 @@ var ENTITY_INIT = 'entityInit';
 
 
 
+
+
+
 var actions = _defineProperty({}, BRIDGE_INIT, function (context, information) {
   context.commit(EDITFLOW_SET, information.editFlow);
   context.commit(PROPERTY_TARGET_SET, information.propertyId);
   return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
     entity: information.entityId
   }).then(function () {
-    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+    var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+    var path = {
+      entityId: entityId,
+      propertyId: context.state.targetProperty,
+      index: 0
+    };
+
+    if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+    } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+    } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+    } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+    } else {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+    }
   }).catch(function (error) {
     context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
     throw error;
   });
 });
-// CONCATENATED MODULE: ./src/store/entity/getterTypes.ts
-var ENTITY_ID = 'id';
-var ENTITY_REVISION = 'revision';
-var ENTITY_ONLY_MAIN_STRING_VALUE = 'onlyMainStringValue';
 // CONCATENATED MODULE: ./src/store/getters.ts
 
 
@@ -5333,17 +5364,6 @@ var entity_mutations_mutations = (mutations_mutations = {}, _defineProperty(muta
 }), _defineProperty(mutations_mutations, ENTITY_REVISION_UPDATE, function (state, revision) {
   state.baseRevision = revision;
 }), mutations_mutations);
-// CONCATENATED MODULE: ./src/store/entity/statements/getterTypes.ts
-var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
-var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
-var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
-// CONCATENATED MODULE: ./src/store/entity/statements/mainSnakGetterTypes.ts
-var mainSnakGetterTypes = {
-  dataType: 'mainSnakDataType',
-  dataValue: 'mainSnakDataValue',
-  dataValueType: 'mainSnakDataValueType',
-  snakType: 'mainSnakSnakType'
-};
 // CONCATENATED MODULE: ./src/store/entity/getters.ts
 
 
