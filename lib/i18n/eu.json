@@ -5,13 +5,15 @@
 			"Subi",
 			"Sator",
 			"An13sa",
-			"Theklan"
+			"Theklan",
+			"Xabier Armendaritz"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Elementu ezabatua",
 	"wikibase-deletedentity-property": "Propietate ezabatua",
 	"wikibase-deletedentity-query": "Kontsulta ezabatua",
+	"wikibase-error-unexpected": "Errorea: $1.",
 	"wikibase-error-save-generic": "Errore baten ondorioz ezin izan dira aldaketak gorde.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteratuta)",
 	"wikibase-timedetails-timezone": "Ordu-eremua",
@@ -38,8 +40,8 @@
 	"datatypes-type-wikibase-property": "Propietatea",
 	"datatypes-type-commonsMedia": "Commons multimedia fitxategia",
 	"version-wikibase": "Wikibase",
-	"wikibase-time-calendar-gregorian": "gregoriar",
-	"wikibase-time-calendar-julian": "juliotar",
+	"wikibase-time-calendar-gregorian": "egutegi gregorianoa",
+	"wikibase-time-calendar-julian": "juliotar egutegia",
 	"wikibase-time-precision-Gannum": "$1 mila milioi urte K.o.",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|urte $1|$1 urte}} KO",
 	"wikibase-time-precision-millennium": "Milaurteko $1",

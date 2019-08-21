@@ -2,18 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Krol111",
-			"Przem(1)s"
+			"Przem(1)s",
+			"Uostofchuodnego"
 		]
 	},
-	"tooltip-t-wikibase": "Link do powjůnzanygo elemyntu we zbjorze danych",
-	"wikibase-comment-update": "Půmjyńono tajla Wikidanych",
-	"wikibase-dataitem": "Tajla we Wikidata",
+	"tooltip-t-wikibase": "Link do powiōnzanego elymyntu we repozytorium danych",
+	"wikibase-comment-update": "Elymynt na {{grammar:6sg|{{WBREPONAME}}}} bōł zmiyniōny",
+	"wikibase-dataitem": "Elymynt {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Edytuj linki",
-	"wikibase-editlinkstitle": "Edytuj linki do inkszych gŏdek.",
+	"wikibase-editlinkstitle": "Edytuj metajynzykowe linki",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Schrůń",
 	"wikibase-rc-hide-wikidata-show": "Pokoż",
 	"wikibase-rc-wikibase-edit-letter": "d",
-	"wikibase-rc-wikibase-edit-title": "Edycyjŏ we Wikidanych",
-	"wikibase-otherprojects": "Inksze projekty"
+	"wikibase-rc-wikibase-edit-title": "Edycyjŏ {{grammar:2sg|{{WBREPONAME}}}}",
+	"wikibase-otherprojects": "We inkszych projektach"
 }
