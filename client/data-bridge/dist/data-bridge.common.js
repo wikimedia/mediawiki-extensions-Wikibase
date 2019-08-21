@@ -4271,6 +4271,7 @@ if (typeof window !== 'undefined') {
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var BRIDGE_INIT = 'initBridge';
+var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 // EXTERNAL MODULE: external {"commonjs":"vue2","commonjs2":"vue2","amd":"vue2","root":"vue2"}
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
@@ -5241,6 +5242,9 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var PROPERTY_TARGET_SET = 'setPropertyPointer';
 var EDITFLOW_SET = 'setEditFlow';
@@ -5258,6 +5262,10 @@ var mainSnakGetterTypes = {
   dataValue: 'mainSnakDataValue',
   dataValueType: 'mainSnakDataValueType',
   snakType: 'mainSnakSnakType'
+};
+// CONCATENATED MODULE: ./src/store/entity/statements/mainSnakActionTypes.ts
+var mainSnakActionTypes = {
+  setStringDataValue: 'setMainSnakStringDataValue'
 };
 // CONCATENATED MODULE: ./src/store/entity/getterTypes.ts
 var ENTITY_ID = 'id';
@@ -5280,6 +5288,7 @@ var ENTITY_INIT = 'entityInit';
 
 
 
+var _actions;
 
 
 
@@ -5287,7 +5296,11 @@ var ENTITY_INIT = 'entityInit';
 
 
 
-var actions = _defineProperty({}, BRIDGE_INIT, function (context, information) {
+
+
+
+
+var actions = (_actions = {}, _defineProperty(_actions, BRIDGE_INIT, function (context, information) {
   context.commit(EDITFLOW_SET, information.editFlow);
   context.commit(PROPERTY_TARGET_SET, information.propertyId);
   return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
@@ -5316,7 +5329,26 @@ var actions = _defineProperty({}, BRIDGE_INIT, function (context, information) {
 
     throw error;
   });
-});
+}), _defineProperty(_actions, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
+  if (context.state.applicationStatus === definitions_ApplicationStatus.ERROR) {
+    return Promise.reject(null);
+  }
+
+  var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+  var path = {
+    entityId: entityId,
+    propertyId: context.state.targetProperty,
+    index: 0
+  };
+  return context.dispatch(namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
+    path: path,
+    value: dataValue
+  }).catch(function (error) {
+    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+
+    throw error;
+  });
+}), _actions);
 // CONCATENATED MODULE: ./src/store/getters.ts
 
 
@@ -5619,9 +5651,6 @@ var statementActions = _defineProperty({}, STATEMENTS_INIT, function (context, p
     statements: payload.statements
   });
 });
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
 // CONCATENATED MODULE: ./src/definitions/storeActionErrors/SnakActionErrors.ts
 var SnakActionErrors;
 
@@ -5664,10 +5693,6 @@ function snaks_actions_actions(actionTypesAliases, mutationTypesAliases, travelT
     });
   });
 }
-// CONCATENATED MODULE: ./src/store/entity/statements/mainSnakActionTypes.ts
-var mainSnakActionTypes = {
-  setStringDataValue: 'setMainSnakStringDataValue'
-};
 // CONCATENATED MODULE: ./src/store/entity/statements/actions.ts
 
 

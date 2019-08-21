@@ -9,6 +9,7 @@ import {
 } from '@/store/entity/actionTypes';
 import {
 	BRIDGE_INIT,
+	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import {
 	PROPERTY_TARGET_SET,
@@ -23,6 +24,7 @@ import {
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/entity/statements/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
+import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import newMockStore from './newMockStore';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
@@ -285,6 +287,101 @@ describe( 'root/actions', () => {
 						);
 					} );
 				} );
+			} );
+		} );
+	} );
+
+	describe( BRIDGE_SET_TARGET_VALUE, () => {
+		it( 'rejects if the store is in error state', async () => {
+			const context = newMockStore( {
+				state: {
+					applicationStatus: ApplicationStatus.ERROR,
+				},
+			} );
+			await expect(
+				( actions as any )[ BRIDGE_SET_TARGET_VALUE ](
+					context,
+					{
+						path: null,
+						value: {
+							type: 'string',
+							value: 'a string',
+						},
+					},
+				),
+			).rejects.toBeDefined();
+			expect( context.dispatch ).toBeCalledTimes( 0 );
+		} );
+
+		it( 'propagtes errors and switch into error state', async () => {
+			const sampleError = 'sampleError';
+			const context = newMockStore( {
+				state: {
+					applicationStatus: ApplicationStatus.READY,
+				},
+				dispatch: jest.fn( () => {
+					return new Promise( () => {
+						throw new Error( sampleError );
+					} );
+				} ),
+			} );
+
+			await expect(
+				( actions as any )[ BRIDGE_SET_TARGET_VALUE ](
+					context,
+					{
+						value: {
+							type: 'string',
+							value: 'a string',
+						},
+					},
+				),
+			).rejects.toStrictEqual( Error( sampleError ) );
+			expect( context.commit ).toHaveBeenCalledWith(
+				APPLICATION_STATUS_SET,
+				ApplicationStatus.ERROR,
+			);
+		} );
+
+		it( 'determine the current path and passes down the new data value', () => {
+			const entityId = 'Q42';
+			const targetProperty = 'P23';
+			const context = newMockStore( {
+				state: {
+					applicationStatus: ApplicationStatus.READY,
+					targetProperty,
+				},
+				getters: {
+					[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
+				} as any,
+			} );
+
+			const dataValue = {
+				type: 'string',
+				value: 'Töfften',
+			};
+
+			const payload = {
+				path: {
+					entityId,
+					propertyId: targetProperty,
+					index: 0,
+				},
+				value: dataValue,
+			};
+
+			return ( actions as any )[ BRIDGE_SET_TARGET_VALUE ](
+				context,
+				dataValue,
+			).then( () => {
+				expect( context.dispatch ).toHaveBeenCalledWith(
+					namespacedStoreEvent(
+						NS_ENTITY,
+						NS_STATEMENTS,
+						mainSnakActionTypes.setStringDataValue,
+					),
+					payload,
+				);
 			} );
 		} );
 	} );

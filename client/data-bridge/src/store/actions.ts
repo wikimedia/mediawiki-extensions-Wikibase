@@ -4,6 +4,7 @@ import {
 import Application from '@/store/Application';
 import {
 	BRIDGE_INIT,
+	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
@@ -21,12 +22,14 @@ import {
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/entity/statements/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
+import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import {
 	ENTITY_ID,
 } from '@/store/entity/getterTypes';
 import {
 	ENTITY_INIT,
 } from '@/store/entity/actionTypes';
+import DataValue from '@/datamodel/DataValue';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 
 export const actions = {
@@ -77,6 +80,36 @@ export const actions = {
 			}
 
 		} ).catch( ( error ) => {
+			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+			// TODO: store information about the error somewhere and show it!
+			throw error;
+		} );
+	},
+
+	[ BRIDGE_SET_TARGET_VALUE ](
+		context: ActionContext<Application, Application>,
+		dataValue: DataValue,
+	): Promise<void> {
+		if ( context.state.applicationStatus === ApplicationStatus.ERROR ) {
+			return Promise.reject( null );
+		}
+
+		const entityId = context.getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ];
+		const path = {
+			entityId,
+			propertyId: context.state.targetProperty,
+			index: 0,
+		};
+		return context.dispatch(
+			namespacedStoreEvent(
+				NS_ENTITY,
+				NS_STATEMENTS,
+				mainSnakActionTypes.setStringDataValue,
+			), {
+				path,
+				value: dataValue,
+			},
+		).catch( ( error ) => {
 			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 			// TODO: store information about the error somewhere and show it!
 			throw error;
