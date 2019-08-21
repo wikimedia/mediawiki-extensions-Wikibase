@@ -144,7 +144,8 @@ class OtherProjectsSidebarGenerator {
 			$this->repoId => [
 				'msg' => 'wikibase-dataitem',
 				'class' => 'wb-otherproject-link wb-otherproject-wikibase-item',
-				'href' => $this->repoLinker->getEntityUrl( $itemId )
+				'href' => $this->repoLinker->getEntityUrl( $itemId ),
+				'id' => 't-wikibase',
 			]
 		];
 	}

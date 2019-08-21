@@ -262,7 +262,8 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$wikidataOxygen = [
 			'msg' => 'wikibase-dataitem',
 			'class' => 'wb-otherproject-link wb-otherproject-wikibase-item',
-			'href' => null
+			'href' => null,
+			'id' => 't-wikibase',
 		];
 
 		$badgesQ1 = [
