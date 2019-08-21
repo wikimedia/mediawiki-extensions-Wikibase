@@ -5270,7 +5270,6 @@ var mainSnakActionTypes = {
 // CONCATENATED MODULE: ./src/store/entity/getterTypes.ts
 var ENTITY_ID = 'id';
 var ENTITY_REVISION = 'revision';
-var ENTITY_ONLY_MAIN_STRING_VALUE = 'onlyMainStringValue';
 // CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
 var ENTITY_INIT = 'entityInit';
 // CONCATENATED MODULE: ./src/store/namespacedStoreEvent.ts
@@ -5413,46 +5412,10 @@ var entity_mutations_mutations = (mutations_mutations = {}, _defineProperty(muta
 var _getters;
 
 
-
-
-
-
-
 var entity_getters_getters = (_getters = {}, _defineProperty(_getters, ENTITY_ID, function (state) {
   return state.id;
 }), _defineProperty(_getters, ENTITY_REVISION, function (state) {
   return state.baseRevision;
-}), _defineProperty(_getters, ENTITY_ONLY_MAIN_STRING_VALUE, function (state, getters, // eslint-disable-line @typescript-eslint/no-explicit-any
-applicationState) {
-  return function (propertyId) {
-    var path = {
-      entityId: state.id,
-      propertyId: propertyId,
-      index: 0
-    };
-
-    if (applicationState.applicationStatus !== definitions_ApplicationStatus.READY) {
-      return null;
-    }
-
-    if (getters[namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](state.id, propertyId) === false) {
-      throw new Error('no statement for property');
-    }
-
-    if (getters[namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](state.id, propertyId) === true) {
-      throw new Error('ambiguous statement');
-    }
-
-    if (getters[namespacedStoreEvent(NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
-      throw new Error('unsupported snak type');
-    }
-
-    if (getters[namespacedStoreEvent(NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
-      throw new Error('unsupported data value type');
-    }
-
-    return getters[namespacedStoreEvent(NS_STATEMENTS, mainSnakGetterTypes.dataValue)](path).value;
-  };
 }), _getters);
 // CONCATENATED MODULE: ./src/store/entity/statements/actionTypes.ts
 var STATEMENTS_INIT = 'initStatements';
