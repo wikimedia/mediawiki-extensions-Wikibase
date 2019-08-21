@@ -6,4 +6,4 @@ storiesOf( 'DataPlaceholder', module )
 	.add( 'with example data', () => ( {
 		components: { DataPlaceholder },
 		template: '<DataPlaceholder target-value="example string"/>',
-	} ) );
+	} ), { info: true } );

@@ -6,4 +6,4 @@ storiesOf( 'Initializing', module )
 	.add( 'loading view', () => ( {
 		components: { Initializing },
 		template: '<Initializing />',
-	} ) );
+	} ), { info: true } );

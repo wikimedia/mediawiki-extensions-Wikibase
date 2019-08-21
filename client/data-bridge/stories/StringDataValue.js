@@ -9,7 +9,7 @@ storiesOf( 'StringDataValue', module )
 			`<div>
 				<StringDataValue :label="sampleLabel" :dataValue="sampleValue"/>
 			</div>`,
-	} ) )
+	} ), { info: true } )
 
 	.add( 'readonly long values', () => ( {
 		data() {
@@ -26,7 +26,7 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue"/>
 		</div>`,
-	} ) )
+	} ), { info: true } )
 
 	.add( 'readonly empty', () => ( {
 		data() { return { sampleLabel: 'empty', sampleValue: { type: 'string', value: '' } }; },
@@ -35,7 +35,7 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue"/>
 		</div>`,
-	} ) )
+	} ), { info: true } )
 
 	.add( 'readonly empty placeholder', () => ( {
 		data() {
@@ -50,4 +50,4 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :placeholder="placeholder"/>
 		</div>`,
-	} ) );
+	} ), { info: true } );
