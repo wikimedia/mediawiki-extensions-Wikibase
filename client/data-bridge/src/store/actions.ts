@@ -90,7 +90,7 @@ export const actions = {
 		context: ActionContext<Application, Application>,
 		dataValue: DataValue,
 	): Promise<void> {
-		if ( context.state.applicationStatus === ApplicationStatus.ERROR ) {
+		if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
 			return Promise.reject( null );
 		}
 
