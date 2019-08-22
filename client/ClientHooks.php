@@ -113,6 +113,38 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add Wikibase item link in toolbox
+	 *
+	 * @param BaseTemplate $baseTemplate
+	 * @param array[] &$toolbox
+	 */
+	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$skin = $baseTemplate->getSkin();
+		$title = $skin->getTitle();
+		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
+		$entityId = null;
+
+		if ( $idString !== null ) {
+			$entityIdParser = $wikibaseClient->getEntityIdParser();
+			$entityId = $entityIdParser->parse( $idString );
+		} elseif ( $title && Action::getActionName( $skin ) !== 'view' && $title->exists() ) {
+			// Try to load the item ID from Database, but only do so on non-article views,
+			// (where the article's OutputPage isn't available to us).
+			$entityId = self::getEntityIdForTitle( $title );
+		}
+
+		if ( $entityId !== null ) {
+			$repoLinker = $wikibaseClient->newRepoLinker();
+			$toolbox['wikibase'] = [
+				'text' => $baseTemplate->getMsg( 'wikibase-dataitem' )->text(),
+				'href' => $repoLinker->getEntityUrl( $entityId ),
+				'id' => 't-wikibase'
+			];
+		}
+	}
+
+	/**
 	 * @param Title|null $title
 	 *
 	 * @return EntityId|null
