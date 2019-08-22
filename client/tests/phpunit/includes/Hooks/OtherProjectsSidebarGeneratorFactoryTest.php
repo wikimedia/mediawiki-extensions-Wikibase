@@ -8,7 +8,6 @@ use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
-use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -45,9 +44,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 			$siteLinkLookup,
 			$siteStore,
 			$this->getMock( EntityLookup::class ),
-			$sidebarLinkBadgeDisplay,
-			$this->getMock( RepoLinker::class, [], [], '', false ),
-			'wikidatawiki'
+			$sidebarLinkBadgeDisplay
 		);
 
 		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator( $this->getMock( UsageAccumulator::class ) );

@@ -7,7 +7,6 @@ use Hooks;
 use Site;
 use SiteLookup;
 use Title;
-use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -55,19 +54,9 @@ class OtherProjectsSidebarGenerator {
 	private $usageAccumulator;
 
 	/**
-	 * @var RepoLinker
-	 */
-	private $repoLinker;
-
-	/**
 	 * @var string[]
 	 */
 	private $siteIdsToOutput;
-
-	/**
-	 * @var string
-	 */
-	private $repoId;
 
 	/**
 	 * @param string $localSiteId
@@ -76,9 +65,7 @@ class OtherProjectsSidebarGenerator {
 	 * @param EntityLookup $entityLookup
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 * @param UsageAccumulator $usageAccumulator
-	 * @param RepoLinker $repoLinker
 	 * @param string[] $siteIdsToOutput
-	 * @param string $repoId
 	 */
 	public function __construct(
 		$localSiteId,
@@ -87,9 +74,7 @@ class OtherProjectsSidebarGenerator {
 		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
 		UsageAccumulator $usageAccumulator,
-		RepoLinker $repoLinker,
-		array $siteIdsToOutput,
-		$repoId
+		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -97,9 +82,7 @@ class OtherProjectsSidebarGenerator {
 		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->repoLinker = $repoLinker;
 		$this->siteIdsToOutput = $siteIdsToOutput;
-		$this->repoId = $repoId;
 	}
 
 	/**
@@ -129,25 +112,9 @@ class OtherProjectsSidebarGenerator {
 	 */
 	public function buildProjectLinkSidebarFromItemId( ItemId $itemId ) {
 		$sidebar = $this->buildPreliminarySidebarFromSiteLinks( $this->getSiteLinks( $itemId ) );
-		if ( in_array( $this->repoId, $this->siteIdsToOutput ) ) {
-			$itemLink = $this->generateItemLink( $itemId );
-			$sidebar['wikibase'] = $itemLink;
-
-		}
 		$sidebar = $this->runHook( $itemId, $sidebar );
 
 		return $this->sortAndFlattenSidebar( $sidebar );
-	}
-
-	private function generateItemLink( ItemId $itemId ) {
-		return [
-			$this->repoId => [
-				'msg' => 'wikibase-dataitem',
-				'class' => 'wb-otherproject-link wb-otherproject-wikibase-item',
-				'href' => $this->repoLinker->getEntityUrl( $itemId ),
-				'id' => 't-wikibase',
-			]
-		];
 	}
 
 	/**
