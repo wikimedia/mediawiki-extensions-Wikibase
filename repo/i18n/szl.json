@@ -3,15 +3,16 @@
 		"authors": [
 			"Krol111",
 			"Ladsgroup",
-			"Przem(1)s"
+			"Przem(1)s",
+			"Uostofchuodnego"
 		]
 	},
 	"wikibase-edit": "edytuj",
 	"wikibase-add": "wkludź",
-	"wikibase-label-empty": "Uopis ńy uostoł podany",
-	"wikibase-description-empty": "Niy wkludzōno ôpisa",
+	"wikibase-label-empty": "Żŏdnŏ etyketa niy była zdefiniowanŏ",
+	"wikibase-description-empty": "Ôpis niy bōł wkludzōny",
 	"wikibase-statementsection-statements": "Auszagi",
 	"wikibase-sitelinks-special": "Inksze projekty",
-	"wikibase-statementview-rank-normal": "Normalno ranga",
+	"wikibase-statementview-rank-normal": "Normalnŏ ranga",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|przipisy|przipisy|przipisůw}}"
 }
