@@ -17,6 +17,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
+use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\View\Template\TemplateFactory;
@@ -33,15 +34,47 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
+	private $editability;
+	private $uiLanguageCode;
+	private $userLanguageLookup;
+	private $entityRevisionLookup;
+	private $outputPageEntityIdReader;
+	private $entityFactory;
+
 	/**
-	 * @var OutputPageEditability|MockObject
+	 * @var ItemId
 	 */
-	private $editablity;
+	private $itemId;
+	private $languageNameLookup;
+	private $preferredLanguageLookup;
+
+	/**
+	 * @var StaticContentLanguages
+	 */
+	private $contentLanguages;
+
+	/**
+	 * @var bool
+	 */
+	private $isExternallyRendered;
 
 	public function setUp() {
 		parent::setUp();
+		$this->itemId = new ItemId( 'Q1' );
+		$this->uiLanguageCode = 'en';
 
-		$this->editablity = $this->mockEditability();
+		$this->userLanguageLookup = $this->createMock( UserLanguageLookup::class );
+		$this->contentLanguages = new StaticContentLanguages( [ 'en', 'es', 'ru' ] );
+		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$this->languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$this->outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class );
+		$this->entityFactory = $this->createMock( EntityFactory::class );
+		$this->editability = $this->mockEditability();
+		$this->isExternallyRendered = false;
+
+		$this->preferredLanguageLookup = $this->createMock( UserPreferredContentLanguagesLookup::class );
+		$this->preferredLanguageLookup->method( 'getLanguages' )
+			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
 	}
 
 	public function testNewFromGlobalState_returnsSelf() {
@@ -62,39 +95,20 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		return $outputPage;
 	}
 
-	/**
-	 * @param string $uiLanguageCode
-	 *
-	 * @return OutputPageBeforeHTMLHookHandler
-	 */
-	private function getHookHandler( $uiLanguageCode ) {
-		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->once() )
-			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [ 'de', 'es', 'ru' ] ) );
-		$userLanguageLookup->expects( $this->once() )
-			->method( 'getAllUserLanguages' )
-			->will( $this->returnValue( array_unique( [ $uiLanguageCode, 'de', 'es', 'ru' ] ) ) );
-
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
-			->method( 'getName' );
-
-		$itemId = new ItemId( 'Q1' );
-
-		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
+	private function getHookHandler() {
+		return new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
-			$userLanguageLookup,
-			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
-			$this->getEntityRevisionLookupReturningEntity( $itemId ),
-			$languageNameLookup,
-			$this->getOutputPageEntityIdReaderReturningEntity( $itemId ),
-			new EntityFactory( [] ),
+			$this->userLanguageLookup,
+			$this->contentLanguages,
+			$this->entityRevisionLookup,
+			$this->languageNameLookup,
+			$this->outputPageEntityIdReader,
+			$this->entityFactory,
 			'',
-			$this->editablity
+			$this->editability,
+			$this->isExternallyRendered,
+			$this->preferredLanguageLookup
 		);
-
-		return $outputPageBeforeHTMLHookHandler;
 	}
 
 	/**
@@ -102,7 +116,20 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testOutputPageBeforeHTMLHookHandler() {
 		$out = $this->newOutputPage();
-		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $out->getLanguage()->getCode() );
+
+		$this->userLanguageLookup = $this->getUserLanguageLookupReturnsSpecifiedLangs();
+		$this->languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
+		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
+		$this->entityRevisionLookup = $this->getEntityRevisionLookupReturningEntity( $this->itemId );
+
+		$this->preferredLanguageLookup->expects( $this->once() )
+			->method( 'getLanguages' )
+			->with( $this->uiLanguageCode, $out->getUser() )
+			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
+
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
 
 		$html = '';
 		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
@@ -123,35 +150,16 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testOutputPageBeforeHTMLHookHandlerShouldNotWorkOnNonArticles() {
 		$out = $this->newOutputPage();
-		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->never() )
+		$this->userLanguageLookup->expects( $this->never() )
 			->method( 'getUserSpecifiedLanguages' );
-		$userLanguageLookup->expects( $this->never() )
+		$this->userLanguageLookup->expects( $this->never() )
 			->method( 'getAllUserLanguages' );
-
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
-			->method( 'getName' );
-
-		$itemId = new ItemId( 'Q1' );
-
-		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
-			TemplateFactory::getDefaultInstance(),
-			$userLanguageLookup,
-			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
-			$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class ),
-			$languageNameLookup,
-			$outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class ),
-			new EntityFactory( [] ),
-			'',
-			$this->editablity
-		);
 
 		$html = '';
 		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
 		$out->setArticleFlag( false );
 
-		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
+		$this->getHookHandler()->doOutputPageBeforeHTML( $out, $html );
 
 		// Verify the wbUserSpecifiedLanguages JS variable
 		$jsConfigVars = $out->getJsConfigVars();
@@ -159,52 +167,31 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
-		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$outputPageEntityIdReader->expects( $this->once() )
+		$this->outputPageEntityIdReader->expects( $this->once() )
 			->method( 'getEntityIdFromOutputPage' )
 			->will( $this->returnValue( null ) );
 
-		$handler = new OutputPageBeforeHTMLHookHandler(
-			TemplateFactory::getDefaultInstance(),
-			$this->newUserLanguageLookup(),
-			new StaticContentLanguages( [] ),
-			$this->getMock( EntityRevisionLookup::class ),
-			$this->getMock( LanguageNameLookup::class ),
-			$outputPageEntityIdReader,
-			new EntityFactory( [] ),
-			'',
-			$this->editablity
-		);
+		$this->userLanguageLookup = $this->getUserLanguageLookupReturnsSpecifiedLangs();
 
 		$out = $this->newOutputPage();
 		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
 		$out->setArticleFlag( true );
 
 		$html = '$1';
-		$handler->doOutputPageBeforeHTML( $out, $html );
+		$this->getHookHandler()->doOutputPageBeforeHTML( $out, $html );
 		$this->assertSame( '', $html );
 	}
 
 	public function testGivenExternallyRenderedMarkup_usesRespectivePlaceholderExpander() {
-		$entity = new ItemId( 'Q123' );
-		$entityFactory = $this->createMock( EntityFactory::class );
-		$entityFactory->expects( $this->once() )
+		$this->entityFactory->expects( $this->once() )
 			->method( 'newEmpty' )
-			->willReturn( new Item( $entity ) );
-		$handler = new OutputPageBeforeHTMLHookHandler(
-			TemplateFactory::getDefaultInstance(),
-			$this->newUserLanguageLookup(),
-			new StaticContentLanguages( [] ),
-			$this->createMock( EntityRevisionLookup::class ),
-			$this->getMock( LanguageNameLookup::class ),
-			$this->getOutputPageEntityIdReaderReturningEntity( $entity ),
-			$entityFactory,
-			'',
-			$this->editablity,
-			true
-		);
+			->willReturn( new Item( $this->itemId ) );
+		$this->userLanguageLookup->expects( $this->once() )
+			->method( 'getUserSpecifiedLanguages' )
+			->will( $this->returnValue( [] ) );
+		$this->isExternallyRendered = true;
+
+		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
 
 		$expectedHtml = '<div>termbox</div>';
 		$placeholder = '$1';
@@ -215,7 +202,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$out->setArticleFlag( true );
 
 		$html = $placeholder;
-		$handler->doOutputPageBeforeHTML( $out, $html );
+		$this->getHookHandler()->doOutputPageBeforeHTML( $out, $html );
 
 		$this->assertSame( $expectedHtml, $html );
 	}
@@ -248,7 +235,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @param $itemId
 	 * @return \PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getEntityRevisionLookupReturningEntity( $itemId ) {
+	private function getEntityRevisionLookupReturningEntity( $itemId ): EntityRevisionLookup {
 		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
@@ -262,20 +249,9 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$editLink2 = 'edit link 2';
 		$html = "<wb:sectionedit>$editLink1</wb:sectionedit> $contentBetweenEditLinks <wb:sectionedit>$editLink2</wb:sectionedit>";
 		$out = $this->newOutputPage();
+		$this->userLanguageLookup = $this->newUserLanguageLookup();
 
-		$hookHandler = new OutputPageBeforeHTMLHookHandler(
-			TemplateFactory::getDefaultInstance(),
-			$this->newUserLanguageLookup(),
-			new StaticContentLanguages( [] ),
-			$this->createMock( EntityRevisionLookup::class ),
-			$this->createMock( LanguageNameLookup::class ),
-			$this->createMock( OutputPageEntityIdReader::class ),
-			$this->createMock( EntityFactory::class ),
-			'',
-			$this->editablity
-		);
-
-		$hookHandler->doOutputPageBeforeHTML( $out, $html );
+		$this->getHookHandler()->doOutputPageBeforeHTML( $out, $html );
 
 		$this->assertEquals( "$editLink1 $contentBetweenEditLinks $editLink2", $html );
 	}
@@ -284,20 +260,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$contentBetweenEditLinks = 'hello';
 		$html = "<wb:sectionedit>edit link 1</wb:sectionedit>$contentBetweenEditLinks<wb:sectionedit>edit link 2</wb:sectionedit>";
 		$out = $this->newOutputPage();
+		$this->userLanguageLookup = $this->newUserLanguageLookup();
+		$this->editability = $this->mockEditabilityDismissive();
 
-		$hookHandler = new OutputPageBeforeHTMLHookHandler(
-			TemplateFactory::getDefaultInstance(),
-			$this->newUserLanguageLookup(),
-			new StaticContentLanguages( [] ),
-			$this->createMock( EntityRevisionLookup::class ),
-			$this->createMock( LanguageNameLookup::class ),
-			$this->createMock( OutputPageEntityIdReader::class ),
-			$this->createMock( EntityFactory::class ),
-			'',
-			$this->mockEditabilityDismissive()
-		);
-
-		$hookHandler->doOutputPageBeforeHTML( $out, $html );
+		$this->getHookHandler()->doOutputPageBeforeHTML( $out, $html );
 
 		$this->assertSame( $contentBetweenEditLinks, $html );
 	}
@@ -310,6 +276,14 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	private function mockEditabilityDismissive() {
 		return $this->mockEditability( false );
+	}
+
+	private function getUserLanguageLookupReturnsSpecifiedLangs() : UserLanguageLookup {
+		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
+		$userLanguageLookup->expects( $this->once() )
+			->method( 'getUserSpecifiedLanguages' )
+			->will( $this->returnValue( [ 'de', 'es', 'ru' ] ) );
+		return $userLanguageLookup;
 	}
 
 }
