@@ -50,7 +50,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
-use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Rdbms\DBQueryError;

@@ -13,12 +13,12 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\PropertyInfoTableBuilder;
+use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 
 /**
- * @covers \Wikibase\PropertyInfoTableBuilder
+ * @covers \Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

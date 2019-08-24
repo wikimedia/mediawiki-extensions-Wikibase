@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Store;
+namespace Wikibase\Repo\Store\Sql;
 
 use ActorMigration;
 use CommentStoreComment;
