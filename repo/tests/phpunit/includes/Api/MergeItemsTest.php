@@ -7,6 +7,7 @@ use ApiUsageException;
 use FauxRequest;
 use HashSiteStore;
 use Language;
+use MediaWiki\MediaWikiServices;
 use SiteLookup;
 use Status;
 use TestSites;
@@ -200,7 +201,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$wikibaseRepo->getSummaryFormatter(),
 				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
-				$this->getEntityTitleLookup()
+				$this->getEntityTitleLookup(),
+				MediaWikiServices::getInstance()->getPermissionManager()
 			),
 			$errorReporter,
 			function ( $module ) use ( $apiResultBuilder ) {

@@ -434,7 +434,8 @@ class SqlStore implements Store {
 			$this->entityIdComposer,
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$this->entitySource,
-			$this->dataAccessSettings
+			$this->dataAccessSettings,
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
 

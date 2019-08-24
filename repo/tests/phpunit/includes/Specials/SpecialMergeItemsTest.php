@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use Exception;
 use HashSiteStore;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MediaWikiServices;
 use PermissionsError;
 use PHPUnit_Framework_Error;
 use RawMessage;
@@ -172,7 +173,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$this->mockRepository,
 						$this->getMockEntityTitleLookup()
 				),
-				$titleLookup
+				$titleLookup,
+				MediaWikiServices::getInstance()->getPermissionManager()
 			),
 			$titleLookup
 		);

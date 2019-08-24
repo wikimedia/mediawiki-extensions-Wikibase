@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use MediaWiki\Permissions\PermissionManager;
 use Serializers\Serializer;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -79,6 +80,11 @@ class ApiHelperFactory {
 	private $idParser;
 
 	/**
+	 * @var PermissionManager
+	 */
+	private $permissionManager;
+
+	/**
 	 * @var EntityByLinkedTitleLookup|null
 	 */
 	private $entityByLinkedTitleLookup;
@@ -119,6 +125,7 @@ class ApiHelperFactory {
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		EntityIdParser $idParser,
+		PermissionManager $permissionManager,
 		EntityByLinkedTitleLookup $entityByLinkedTitleLookup = null,
 		EntityFactory $entityFactory = null,
 		EntityStore $entityStore = null
@@ -133,6 +140,7 @@ class ApiHelperFactory {
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
 		$this->idParser = $idParser;
+		$this->permissionManager = $permissionManager;
 		$this->entityByLinkedTitleLookup = $entityByLinkedTitleLookup;
 		$this->entityFactory = $entityFactory;
 		$this->entityStore = $entityStore;
@@ -189,7 +197,8 @@ class ApiHelperFactory {
 			$this->entityRevisionLookup,
 			$this->getErrorReporter( $apiBase ),
 			$this->summaryFormatter,
-			$this->editEntityFactory
+			$this->editEntityFactory,
+			$this->permissionManager
 		);
 
 		if ( $this->entityByLinkedTitleLookup ) {

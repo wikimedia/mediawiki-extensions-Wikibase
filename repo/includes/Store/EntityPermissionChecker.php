@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store;
 
 use InvalidArgumentException;
+use MediaWiki\Permissions\PermissionManager;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -35,8 +36,10 @@ interface EntityPermissionChecker {
 	 * @param User $user
 	 * @param string $action
 	 * @param EntityDocument $entity
-	 * @param string $quick Flag for allowing quick permission checking. If set to
-	 * 'quick', implementations may return inaccurate results if determining the accurate result
+	 * @param string $rigor Flag for allowing quick permission checking.
+	 * One of the PermissionManager::RIGOR_* constants.
+	 * If set to 'PermissionManager::RIGOR_QUICK', implementations may return
+	 * inaccurate results if determining the accurate result
 	 * would be slow (e.g. checking for cascading protection).
 	 * This is intended as an optimization for non-critical checks,
 	 * e.g. for showing or hiding UI elements.
@@ -45,7 +48,11 @@ interface EntityPermissionChecker {
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
-	public function getPermissionStatusForEntity( User $user, $action, EntityDocument $entity, $quick = '' );
+	public function getPermissionStatusForEntity(
+		User $user,
+		$action,
+		EntityDocument $entity,
+		$rigor = PermissionManager::RIGOR_SECURE );
 
 	/**
 	 * Check whether the given user has the permission to perform the given action on an entity.
@@ -54,8 +61,10 @@ interface EntityPermissionChecker {
 	 * @param User $user
 	 * @param string $action
 	 * @param EntityId $entityId
-	 * @param string $quick Flag for allowing quick permission checking. If set to
-	 * 'quick', implementations may return inaccurate results if determining the accurate result
+	 * @param string $rigor Flag for allowing quick permission checking.
+	 * One of the PermissionManager::RIGOR_* constants.
+	 * If set to 'PermissionManager::RIGOR_QUICK', implementations may return
+	 * inaccurate results if determining the accurate result
 	 * would be slow (e.g. checking for cascading protection).
 	 * This is intended as an optimization for non-critical checks,
 	 * e.g. for showing or hiding UI elements.
@@ -64,6 +73,10 @@ interface EntityPermissionChecker {
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
-	public function getPermissionStatusForEntityId( User $user, $action, EntityId $entityId, $quick = '' );
+	public function getPermissionStatusForEntityId(
+		User $user,
+		$action,
+		EntityId $entityId,
+		$rigor = PermissionManager::RIGOR_SECURE );
 
 }

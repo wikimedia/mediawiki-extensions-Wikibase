@@ -177,7 +177,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			new UnusableEntitySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
 		return [ $store, $lookup ];
@@ -258,7 +259,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$localSource,
-			$dataAccessSettings
+			$dataAccessSettings,
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
 		return [ $store, $lookup ];
@@ -1155,7 +1157,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$this->prophesize( EntityIdComposer::class )->reveal(),
 			$this->prophesize( RevisionStore::class )->reveal(),
 			new UnusableEntitySource(),
-			$this->prophesize( DataAccessSettings::class )->reveal()
+			$this->prophesize( DataAccessSettings::class )->reveal(),
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 		$store = TestingAccessWrapper::newFromObject( $store );
 
@@ -1559,7 +1562,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$itemSource,
-			$dataAccessSettings
+			$dataAccessSettings,
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
 		return $store;
@@ -1600,7 +1604,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$customSource,
-			$dataAccessSettings
+			$dataAccessSettings,
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
 		return $store;

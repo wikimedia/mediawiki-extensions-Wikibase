@@ -448,7 +448,8 @@ final class RepoHooks {
 
 		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $wikiPage->getLatest() !== $rev->getId()
-			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
+			&& MediaWikiServices::getInstance()->getPermissionManager()
+					->quickUserCan( 'edit', $history->getUser(), $rev->getTitle() )
 			&& !$rev->isDeleted( RevisionRecord::DELETED_TEXT )
 		) {
 			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
@@ -482,7 +483,9 @@ final class RepoHooks {
 			unset( $links['views']['edit'] );
 			unset( $links['views']['viewsource'] );
 
-			if ( $title->quickUserCan( 'edit', $skinTemplate->getUser() ) ) {
+			if ( MediaWikiServices::getInstance()->getPermissionManager()
+					->quickUserCan( 'edit', $skinTemplate->getUser(), $title )
+			) {
 				$request = $skinTemplate->getRequest();
 				$old = !$skinTemplate->isRevisionCurrent()
 					&& !$request->getCheck( 'diff' );

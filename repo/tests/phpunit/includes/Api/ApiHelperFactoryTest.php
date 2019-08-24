@@ -6,6 +6,7 @@ use ApiBase;
 use ApiResult;
 use HashSiteStore;
 use Language;
+use MediaWiki\MediaWikiServices;
 use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -58,7 +59,7 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			$serializerFactory,
 			$this->getMock( Serializer::class ),
 			new ItemIdParser(),
-			null
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 	}
 

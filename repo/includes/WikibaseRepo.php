@@ -1523,6 +1523,7 @@ class WikibaseRepo {
 		return new WikiPageEntityStorePermissionChecker(
 			$this->getEntityNamespaceLookup(),
 			$this->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getPermissionManager(),
 			$wgAvailableRights
 		);
 	}
@@ -2089,6 +2090,7 @@ class WikibaseRepo {
 			$this->getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
 			$this->getEntityIdParser(),
+			MediaWikiServices::getInstance()->getPermissionManager(),
 			$this->getStore()->getEntityByLinkedTitleLookup(),
 			$this->getEntityFactory(),
 			$this->getEntityStore()
@@ -2130,7 +2132,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newItemRedirectCreationInteractor( $user, $context ),
-			$this->getEntityTitleLookup()
+			$this->getEntityTitleLookup(),
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 	}
 

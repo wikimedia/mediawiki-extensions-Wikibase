@@ -6,6 +6,7 @@ use ApiBase;
 use ApiMain;
 use ApiResult;
 use ApiUsageException;
+use MediaWiki\Permissions\PermissionManager;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -36,6 +37,11 @@ class CreateRedirect extends ApiBase {
 	private $interactor;
 
 	/**
+	 * @var PermissionManager
+	 */
+	private $permissionManager;
+
+	/**
 	 * @see ApiBase::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -43,19 +49,22 @@ class CreateRedirect extends ApiBase {
 	 * @param EntityIdParser $idParser
 	 * @param ApiErrorReporter $errorReporter
 	 * @param ItemRedirectCreationInteractor $interactor
+	 * @param PermissionManager $permissionManager
 	 */
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
-		ItemRedirectCreationInteractor $interactor
+		ItemRedirectCreationInteractor $interactor,
+		PermissionManager $permissionManager
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
 		$this->idParser = $idParser;
 		$this->errorReporter = $errorReporter;
 		$this->interactor = $interactor;
+		$this->permissionManager = $permissionManager;
 	}
 
 	/**
@@ -63,7 +72,7 @@ class CreateRedirect extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
-		$bot = $this->getUser()->isAllowed( 'bot' ) && $params['bot'];
+		$bot = $this->permissionManager->userHasRight( $this->getUser(), 'bot' ) && $params['bot'];
 
 		try {
 			$fromId = $this->idParser->parse( $params['from'] );

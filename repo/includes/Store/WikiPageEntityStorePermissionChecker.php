@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store;
 
 use InvalidArgumentException;
+use MediaWiki\Permissions\PermissionManager;
 use Status;
 use Title;
 use User;
@@ -34,6 +35,11 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	private $titleLookup;
 
 	/**
+	 * @var PermissionManager
+	 */
+	private $permissionManager;
+
+	/**
 	 * @var string[]
 	 */
 	private $availableRights;
@@ -46,10 +52,12 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	public function __construct(
 		EntityNamespaceLookup $namespaceLookup,
 		EntityTitleLookup $titleLookup,
+		PermissionManager $permissionManager,
 		array $availableRights
 	) {
 		$this->namespaceLookup = $namespaceLookup;
 		$this->titleLookup = $titleLookup;
+		$this->permissionManager = $permissionManager;
 		$this->availableRights = $availableRights;
 	}
 
@@ -59,7 +67,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	 * @param User $user
 	 * @param string $action
 	 * @param EntityDocument $entity
-	 * @param string $quick
+	 * @param string $rigor
 	 *
 	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
@@ -69,7 +77,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		User $user,
 		$action,
 		EntityDocument $entity,
-		$quick = ''
+		$rigor = PermissionManager::RIGOR_SECURE
 	) {
 		$id = $entity->getId();
 
@@ -78,11 +86,11 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 				$user,
 				[ $action, self::ACTION_MW_CREATE ],
 				$entity->getType(),
-				$quick
+				$rigor
 			);
 		}
 
-		return $this->getPermissionStatusForEntityId( $user, $action, $id, $quick );
+		return $this->getPermissionStatusForEntityId( $user, $action, $id, $rigor );
 	}
 
 	/**
@@ -91,7 +99,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	 * @param User $user
 	 * @param string $action
 	 * @param EntityId $entityId
-	 * @param string $quick
+	 * @param string $rigor
 	 *
 	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
@@ -101,7 +109,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		User $user,
 		$action,
 		EntityId $entityId,
-		$quick = ''
+		$rigor = PermissionManager::RIGOR_SECURE
 	) {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 
@@ -110,12 +118,12 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 				$user,
 				[ $action, self::ACTION_MW_CREATE ],
 				$entityId->getEntityType(),
-				$quick
+				$rigor
 			);
 
 		}
 
-		return $this->checkPermissionsForActions( $user, [ $action ], $title, $entityId->getEntityType(), $quick );
+		return $this->checkPermissionsForActions( $user, [ $action ], $title, $entityId->getEntityType(), $rigor );
 	}
 
 	/**
@@ -128,8 +136,10 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	 * @param User $user
 	 * @param string[] $actions
 	 * @param string $type
-	 * @param string $quick Flag for allowing quick permission checking. If set to
-	 * 'quick', implementations may return inaccurate results if determining the accurate result
+	 * @param string $rigor Flag for allowing quick permission checking.
+	 * One of the PermissionManager::RIGOR_* constants.
+	 * If set to 'PermissionManager::RIGOR_QUICK', implementations may return
+	 * inaccurate results if determining the accurate result
 	 * would be slow (e.g. checking for cascading protection).
 	 * This is intended as an optimization for non-critical checks,
 	 * e.g. for showing or hiding UI elements.
@@ -142,11 +152,11 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		User $user,
 		array $actions,
 		$type,
-		$quick = ''
+		$rigor = PermissionManager::RIGOR_SECURE
 	) {
 		$title = $this->getPageTitleInEntityNamespace( $type );
 
-		return $this->checkPermissionsForActions( $user, $actions, $title, $type, $quick );
+		return $this->checkPermissionsForActions( $user, $actions, $title, $type, $rigor );
 	}
 
 	/**
@@ -160,7 +170,13 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		return Title::makeTitle( $namespace, '/' );
 	}
 
-	private function checkPermissionsForActions( User $user, array $actions, Title $title, $entityType, $quick ='' ) {
+	private function checkPermissionsForActions(
+		User $user,
+		array $actions,
+		Title $title,
+		$entityType,
+		$rigor = PermissionManager::RIGOR_SECURE
+	) {
 		$status = Status::newGood();
 
 		$mediaWikiPermissions = [];
@@ -175,7 +191,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		$mediaWikiPermissions = array_unique( $mediaWikiPermissions );
 
 		foreach ( $mediaWikiPermissions as $mwPermission ) {
-			$partialStatus = $this->getPermissionStatus( $user, $mwPermission, $title, $quick );
+			$partialStatus = $this->getPermissionStatus( $user, $mwPermission, $title, $rigor );
 			$status->merge( $partialStatus );
 		}
 
@@ -240,10 +256,15 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		return in_array( $permission, $this->availableRights );
 	}
 
-	private function getPermissionStatus( User $user, $permission, Title $title, $quick = '' ) {
+	private function getPermissionStatus( User $user,
+		$permission,
+		Title $title,
+		$rigor = PermissionManager::RIGOR_SECURE
+	) {
 		$status = Status::newGood();
 
-		$errors = $title->getUserPermissionsErrors( $permission, $user, $quick !== 'quick' );
+		$errors = $this->permissionManager->getPermissionErrors(
+			$permission, $user, $title, $rigor );
 
 		if ( $errors ) {
 			$status->setResult( false );
