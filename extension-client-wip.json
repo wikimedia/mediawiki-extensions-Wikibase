@@ -21,7 +21,8 @@
 		"Wikibase\\Client\\Specials\\": "client/includes/Specials/",
 		"Wikibase\\Client\\Store\\": "client/includes/Store/",
 		"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes/",
-		"Wikibase\\Client\\UpdateRepo\\": "client/includes/UpdateRepo/"
+		"Wikibase\\Client\\UpdateRepo\\": "client/includes/UpdateRepo/",
+		"Wikibase\\Client\\Usage\\Sql\\": "client/includes/Usage/Sql/"
 	},
 	"manifest_version": 2
 }
