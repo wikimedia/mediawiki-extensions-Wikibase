@@ -25,6 +25,7 @@
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
 	"wikibase-statementview-rank-normal": "عام درجو",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|حوالو|حوالا}}",
+	"wikibase-redirectentity-submit": "چوريو",
 	"wikibase-listdatatypes-wikibase-item-head": "جزو",
 	"wikibase-search-bad-profile-name": "کوٽو ڳولها پروفائل نالو: $1",
 	"wikibase-search-config-badclass": "کوٽو ڪيوري بلڊر ڪلاس: $1"

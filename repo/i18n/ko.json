@@ -333,6 +333,7 @@
 	"wikibase-api-no-such-entity": "ID \"$1\"의 엔티티를 찾을 수 없습니다.",
 	"wikibase-api-no-such-sitelink": "배지 편집을 시도할 때 \"$1\"에 대한 사이트링크를 찾을 수 없었습니다.",
 	"wikibase-api-not-recognized-datatype": "자료형을 예측했으나 존재하지 않거나 인식하지 못했습니다.",
+	"wikibase-api-tags-invalid": "태그 변수가 유효하지 않습니다.",
 	"wikibase-api-target-is-redirect": "넘겨주기의 대상 또한 넘겨주기가 될 수 없습니다.",
 	"wikibase-self-conflict-patched": "편집을 최신 버전으로 고쳤으며 중간 바뀜이 무시됩니다.",
 	"wikibase-conflict-patched": "편집을 최신 버전으로 고쳤습니다.",
