@@ -4,7 +4,7 @@ Date: 2019-08-14
 
 ## Status
 
-Proposed
+accepted
 
 ## Context
 When changes to the markup used on entity pages are made we often end up with outdated content in the ParserCache. This can result in user facing errors from either the backend code attempting to perform processing on ParserCache output or frontend Javascript attempting to access parts of the DOM that have changed.
