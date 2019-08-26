@@ -8,11 +8,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermSearchKeyBuilder;
+use Wikibase\Repo\Store\Sql\TermSearchKeyBuilder;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 
 /**
- * @covers \Wikibase\TermSearchKeyBuilder
+ * @covers \Wikibase\Repo\Store\Sql\TermSearchKeyBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

@@ -39,6 +39,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
+use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\ParserOutput\TermboxView;

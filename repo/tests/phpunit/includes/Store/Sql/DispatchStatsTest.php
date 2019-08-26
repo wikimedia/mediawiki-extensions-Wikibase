@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use stdClass;
-use Wikibase\DispatchStats;
+use Wikibase\Repo\Store\Sql\DispatchStats;
 
 /**
- * @covers \Wikibase\DispatchStats
+ * @covers \Wikibase\Repo\Store\Sql\DispatchStats
  *
  * @group Database
  * @group Wikibase
@@ -21,7 +21,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	 * Creates and loads a DispatchStats object, injecting test data into
 	 * the database as needed.
 	 *
-	 * @return DispatchStats
+	 * @return \Wikibase\Repo\Store\Sql\DispatchStats
 	 */
 	private function getDispatchStats() {
 		$data = $this->getTestData();

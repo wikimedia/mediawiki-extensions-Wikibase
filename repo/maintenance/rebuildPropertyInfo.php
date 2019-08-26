@@ -7,6 +7,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

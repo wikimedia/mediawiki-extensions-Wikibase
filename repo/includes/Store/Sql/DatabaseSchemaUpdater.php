@@ -17,7 +17,6 @@ use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
-use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
 use Wikibase\Repo\WikibaseRepo;

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use Wikibase\DispatchStats;
+use Wikibase\Repo\Store\Sql\DispatchStats;
 
 /**
  * Page for displaying diagnostics about the dispatch process.

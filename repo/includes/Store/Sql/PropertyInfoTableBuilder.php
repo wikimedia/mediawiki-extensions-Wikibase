@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\PropertyInfoBuilder;
 
 /**
  * Utility class for rebuilding the wb_property_info table.

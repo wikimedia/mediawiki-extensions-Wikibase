@@ -41,13 +41,13 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Repo\Store\WikiPageEntityStore
+ * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore
  *
  * @group Database
  * @group Wikibase
@@ -1361,7 +1361,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideCanCreateWithCustomId
-	 * @covers \Wikibase\Repo\Store\WikiPageEntityStore::canCreateWithCustomId
+	 * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore::canCreateWithCustomId
 	 */
 	public function testCanCreateWithCustomId( EntityId $id, $expected ) {
 		/** @var WikiPageEntityStore $store */
@@ -1372,7 +1372,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideCanCreateWithCustomId
-	 * @covers \Wikibase\Repo\Store\WikiPageEntityStore::canCreateWithCustomId
+	 * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore::canCreateWithCustomId
 	 */
 	public function testCanCreateWithCustomId_entitySourceBasedFederation( EntityId $id, $expected ) {
 		/** @var WikiPageEntityStore $store */

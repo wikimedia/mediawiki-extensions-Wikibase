@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;

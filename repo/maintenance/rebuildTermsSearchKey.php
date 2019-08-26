@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\Repo\Store\Sql\TermSearchKeyBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
-use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -321,7 +321,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		/** @var WikiPageEntityStore $entityStore */
+		/** @var \Wikibase\Repo\Store\Sql\WikiPageEntityStore $entityStore */
 		$entityStore = $wikibaseRepo->getEntityStore();
 
 		$itemPage = $entityStore->getWikiPageForEntity( $item->getId() );
@@ -353,7 +353,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdLookup()
 		);
 
-		/** @var WikiPageEntityStore $entityStore */
+		/** @var \Wikibase\Repo\Store\Sql\WikiPageEntityStore $entityStore */
 		$entityStore = $wikibaseRepo->getEntityStore();
 
 		$itemPage = $entityStore->getWikiPageForEntity( $entities[2]->getId() );

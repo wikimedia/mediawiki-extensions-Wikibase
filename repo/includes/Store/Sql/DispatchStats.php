@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\Sql;
 
 /**
  * Utility class for collecting dispatch statistics.
