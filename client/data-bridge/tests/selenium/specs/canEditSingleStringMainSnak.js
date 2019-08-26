@@ -5,7 +5,7 @@ const assert = require( 'assert' ),
 
 describe( 'App', () => {
 
-	it.skip( 'can edit a single string mainsnak value', () => {
+	it( 'can edit a single string mainsnak value', () => {
 		const title = DataBridgePage.getDummyTitle();
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 		const stringPropertyExampleValue = 'ExampleString';
@@ -38,12 +38,15 @@ describe( 'App', () => {
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
 		const extraCharacters = ' added characters';
-		DataBridgePage.value.click();
 		browser.waitUntil( () => {
+			DataBridgePage.value.click();
 			return DataBridgePage.value.isFocused();
 		} );
 
-		browser.keys( extraCharacters );
+		browser.call( () => {
+			return browser.keys( extraCharacters );
+		} );
+
 		assert.strictEqual( DataBridgePage.value.getValue(), `${stringPropertyExampleValue}${extraCharacters}` );
 	} );
 } );
