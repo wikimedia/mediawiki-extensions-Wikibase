@@ -6,6 +6,7 @@ use Exception;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
+use Wikibase\DataModel\Services\Lookup\ItemLookupException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\ILBFactory;
@@ -109,6 +110,9 @@ class ItemTermsRebuilder {
 				$item = $this->itemLookup->getItemForId( $itemId );
 			} catch ( RevisionedUnresolvedRedirectException $entityRedirectException ) {
 				// Nothing to do, ignore
+				continue;
+			} catch ( ItemLookupException $exception ) {
+				// Unresolved redirects, nothing to do.
 				continue;
 			}
 
