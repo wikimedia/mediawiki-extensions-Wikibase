@@ -94,6 +94,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 				'tests/phpunit/includes/Specials/SpecialWikibaseRepoPageTestBase.php',
 				'tests/phpunit/includes/Validators/TestValidator.php',
 				'tests/phpunit/maintenance/MockAddUnits.php',
+				'tests/phpunit/includes/ChangeOp/LanguageBoundChangeOpResultStub.php',
 			]
 		);
 
