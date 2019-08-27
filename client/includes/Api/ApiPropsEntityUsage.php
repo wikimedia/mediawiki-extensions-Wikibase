@@ -215,7 +215,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Wikibase/API#wbentityusage';
+		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/API#wbentityusage';
 	}
 
 }

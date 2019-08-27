@@ -301,7 +301,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Wikibase/API#wblistentityusage';
+		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/API';
 	}
 
 }
