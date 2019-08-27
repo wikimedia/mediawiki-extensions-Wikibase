@@ -22,6 +22,21 @@
 	"apihelp-query+wblistentityusage-example-simple": "Pigghie le pàggene ca ausane l'endità <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Pigghie le pàggene ca ausane l'endità <kbd>Q2</kbd> cu l'URL 'ngluse.",
 	"apihelp-query+wblistentityusage-example-aspect": "Pigghie le pàggene ca ausane l'endità <kbd>Q2</kbd> e l'aspette ere 'nu collegamende a 'u site o 'na dichiarazione.",
+	"apihelp-query+pageterms-description": "Pigghie le termine {{WBREPONAME}} (normalmende etichette, descriziune e alias) associate a 'na pàgene ausanne 'nu collegamende a 'u site. Sus 'a pàgene de 'n'endità wikibase, ste termine avènene ausate direttamende.\nIapre l'uecchije: sus a 'nu archivije uicchi, stu module funzione sulamende ce ausate direttamende sus a le pàggene de l'endità, none sus a le pàggene collegate a 'n'endità cu 'nu collegamende a 'u site. Sta cose pò cangià cchiù nnande.",
+	"apihelp-query+pageterms-summary": "Pigghie le termine {{WBREPONAME}} (normalmende etichette, descriziune e alias) associate a 'na pàgene ausanne 'nu collegamende a 'u site. Sus 'a pàgene de 'n'endità wikibase, ste termine avènene ausate direttamende.\nIapre l'uecchije: sus a 'nu archivije uicchi, stu module funzione sulamende ce ausate direttamende sus a le pàggene de l'endità, none sus a le pàggene collegate a 'n'endità cu 'nu collegamende a 'u site. Sta cose pò cangià cchiù nnande.",
+	"apihelp-query+pageterms-example-simple": "Pigghie tutte le vôsce associate cu 'a pàgene 'London', jndr'à lènghe de l'utende.",
+	"apihelp-query+pageterms-example-label-en": "Pigghie le atichette e le alias associate a 'a pàgene 'London', in inglese.",
+	"apihelp-query+pageterms-example-item": "Pigghie le etichette e le alias d'a vôsce Q84.",
+	"apihelp-query+pageterms-param-terms": "Le tipe de le termine da pigghià, pe esembie 'description', ognune turnate cumme 'na matrice de stringhe cu chiave 'u tipe lore, pe esembie {\"description\": [\"foo\"]}. Ce non g'avène specificate, avènene restituite tutte le tipe.",
+	"apihelp-query+description-summary": "Pigghie 'na descrizione corte a.k.a. sottotitole spieganne qual è 'a pàgene de destinazione.",
+	"apihelp-query+description-extended-description": "'A descrizione jè 'nu teste semblice, sus a 'na sola linèe, o anghe arbitrarie (ca tène potenzialmende le tag HTML grezze, ca avessera essere 'nderpretate cumme teste piane). Non g'adda essere ausate jndr'à l'HTML cumme teste senze escape!",
+	"apihelp-query+description-param-prefersource": "Cè sorgende d'a descrizione preferisce ce presende:",
+	"apihelp-query+description-paramvalue-prefersource-local": "Descriziune locale cu 'a funzione analizzatrice <code><nowiki>{{SHORTDESC:...}}</nowiki></code> jndr'à 'u uicchiteste d'a pàgene.",
+	"apihelp-query+description-paramvalue-prefersource-central": "Descriziune cendrale da 'a vôsce associate {{WBREPONAME}}.",
 	"apihelp-query+description-example": "Pigghie 'a descrizione d'a pàgene 'Londre'.",
-	"apihelp-query+description-example-central": "Pigghie 'a descrizione d'a pàgene 'Londre', preferenne 'a descrizione cendralizzate ce esiste."
+	"apihelp-query+description-example-central": "Pigghie 'a descrizione d'a pàgene 'Londre', preferenne 'a descrizione cendralizzate ce esiste.",
+	"apihelp-query+wikibase-description": "Pigghie le 'mbormaziune sus a 'u client Wikibase e l'archivije Wikibase associate.",
+	"apihelp-query+wikibase-summary": "Pigghie le 'mbormaziune sus a 'u client Wikibase e l'archivije Wikibase associate.",
+	"apihelp-query+wikibase-example": "Pigghie 'u percorse URL e otre 'mbormaziune sus a 'u client e l'archivije Wikibase.",
+	"apihelp-query+wikibase-param-prop": "Ce probbietà ha pigghià:\n;<kbd>url</kbd>: URL base, percorse de script e de le vôsce de l'archivije Wikibase\n;<kbd>siteid</kbd>: l'idendificatore de stu site."
 }

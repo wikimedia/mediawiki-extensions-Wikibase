@@ -6,5 +6,7 @@
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "وڪيپيڊيا",
-	"datatypes-type-wikibase-item": "جزو"
+	"datatypes-type-wikibase-item": "جزو",
+	"wikibase-entity-summary-wbsetdescription-remove": "[$2] تشريح ھٽائي",
+	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] ڏانھن ڳنڍڻو ھٽايو ويو"
 }
