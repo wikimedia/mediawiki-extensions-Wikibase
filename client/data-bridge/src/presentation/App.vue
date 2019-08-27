@@ -62,6 +62,7 @@ ol { // overcome very strong selector, e.g. .content ul li
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #2c3e50;
+	padding: $padding-panel-form;
 
 	@include media-breakpoint-up(breakpoint) {
 		width: 100%;

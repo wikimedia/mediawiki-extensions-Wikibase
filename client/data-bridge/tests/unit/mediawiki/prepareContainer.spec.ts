@@ -28,10 +28,11 @@ function mockOOEnv(): any {
 		} as unknown as JQuery,
 	};
 
+	const panelLayoutConstructor = jest.fn( () => panelLayout );
 	const OO: MwWindowOO = {
 		ui: {
 			Dialog,
-			PanelLayout: jest.fn( () => panelLayout ),
+			PanelLayout: panelLayoutConstructor,
 			WindowManager: jest.fn( () => windowManager ),
 		},
 		inheritClass: jest.fn( ( child: any, parent: any ) => {
@@ -53,6 +54,7 @@ function mockOOEnv(): any {
 		$,
 		windowManager,
 		panelLayout,
+		panelLayoutConstructor,
 		documentBodyAppend,
 	};
 }
@@ -64,12 +66,15 @@ describe( 'prepareContainer', () => {
 			$,
 			windowManager,
 			panelLayout,
+			panelLayoutConstructor,
 			documentBodyAppend,
 		} = mockOOEnv();
 		const APP_DOM_CONTAINER_ID = 'data-bridge-container';
 
 		const myDialog = prepareContainer( OO, $, APP_DOM_CONTAINER_ID );
 
+		expect( panelLayoutConstructor )
+			.toHaveBeenCalledWith( { padded: false, expanded: false } );
 		expect( panelLayout.$element.append )
 			.toHaveBeenCalledWith( `<div id="${APP_DOM_CONTAINER_ID}"></div>` );
 

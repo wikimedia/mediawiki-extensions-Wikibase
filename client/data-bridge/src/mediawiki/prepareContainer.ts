@@ -24,7 +24,7 @@ export default function prepareContainer( OO: MwWindowOO, $: JQueryStatic, id: s
 	BridgeDialog.static.escapable = false;
 	BridgeDialog.prototype.initialize = function (): void {
 		BridgeDialog.parent.prototype.initialize.call( this );
-		this.content = new OO.ui.PanelLayout( { padded: true, expanded: false } );
+		this.content = new OO.ui.PanelLayout( { padded: false, expanded: false } );
 		this.content.$element.append( `<div id="${id}"></div>` );
 		this.$body.append( this.content.$element );
 	};

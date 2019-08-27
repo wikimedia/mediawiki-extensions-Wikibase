@@ -7,6 +7,9 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>data-bridge</title>
     <style>
+      .oo-ui-windowManager {
+        font-size: 0.875em; /* = $container-relative-font-size + em */
+      }
       /**
        * TODO needs to become more clever to properly simulate prod
        * OO reuse maybe? Also think about breakpoints, base font size
@@ -24,19 +27,16 @@
         overflow: auto;
         box-sizing: border-box;
       }
-      .oo-ui-panelLayout-padded {
-        padding: 1.14285714em;
-      }
     </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but data-bridge doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div>
+    <div class="oo-ui-windowManager">
         <div class="oo-ui-window-frame">
             <div class="oo-ui-window-body">
-                <div class="oo-ui-panelLayout-padded">
+                <div class="oo-ui-panelLayout">
                     <div id="data-bridge-container"></div>
                 </div>
             </div>
