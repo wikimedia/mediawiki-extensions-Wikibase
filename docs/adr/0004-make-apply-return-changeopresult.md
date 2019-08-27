@@ -8,7 +8,7 @@ Discussion Deadline: 2019-07-09
 
 ## Status
 
-Approved
+accepted
 
 ## Context
 
