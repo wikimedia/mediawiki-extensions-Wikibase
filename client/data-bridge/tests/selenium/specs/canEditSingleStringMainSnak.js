@@ -43,10 +43,15 @@ describe( 'App', () => {
 			return DataBridgePage.value.isFocused();
 		} );
 
-		browser.call( () => {
-			return browser.keys( extraCharacters );
-		} );
+		browser.keys( extraCharacters );
 
-		assert.strictEqual( DataBridgePage.value.getValue(), `${stringPropertyExampleValue}${extraCharacters}` );
+		const expectedContent = `${stringPropertyExampleValue}${extraCharacters}`;
+		browser.waitUntil(
+			() => {
+				return DataBridgePage.value.getValue() === expectedContent;
+			},
+			5000,
+			`${DataBridgePage.value.getValue()} is not equal to ${expectedContent}`
+		);
 	} );
 } );
