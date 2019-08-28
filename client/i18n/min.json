@@ -44,6 +44,7 @@
 	"wikibase-rc-show-wikidata-pref": "Tunjuakan suntiangan Wikidata di parubahan baru",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Suntiang {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Suntiangan {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "Tambahan suntiangan Wikidata pado daftar pantau",
 	"wikibase-error-invalid-entity-id": "ID nan dimasuakan indak dikenal sistem. Gunoan entitas ID nan valid.",
 	"unconnectedpages": "Laman nan alun tapauik ka Wikidata",
@@ -51,5 +52,6 @@
 	"wikibase-unconnectedpages-submit": "Lanjut",
 	"wikibase-pageinfo-entity-id": "ID Item Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Indak ado",
-	"wikibase-otherprojects": "Dalam proyek lain"
+	"wikibase-otherprojects": "Dalam proyek lain",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} jo {{WBREPONAME}}"
 }

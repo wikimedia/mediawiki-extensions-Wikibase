@@ -52,6 +52,7 @@
 	"wikibase-rc-show-wikidata-pref": "Tampilkan suntingan {{WBREPONAME}} di perubahan terbaru",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Suntingan {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Suntingan {{WBREPONAME}}",
 	"wikibase-replicationnote": "Harap diperhatikan bahwa memerlukan beberapa menit sampai perubahan terlihat pada semua wiki",
 	"wikibase-watchlist-show-changes-pref": "Tampilkan suntingan {{WBREPONAME}} pada daftar pantauan Anda",
 	"wikibase-error-serialize-error": "Gagal menghubungkan data.",
