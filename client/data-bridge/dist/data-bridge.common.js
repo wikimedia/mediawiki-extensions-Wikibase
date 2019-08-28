@@ -6168,6 +6168,7 @@ var actions = (_actions = {}, _defineProperty(_actions, BRIDGE_INIT, function (c
   });
 }), _defineProperty(_actions, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
   if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
+    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
     return Promise.reject(null);
   }
 

@@ -292,10 +292,10 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( BRIDGE_SET_TARGET_VALUE, () => {
-		it( 'rejects if the store is in error state', async () => {
+		it( 'rejects if the store is not ready and switch into error state', async () => {
 			const context = newMockStore( {
 				state: {
-					applicationStatus: ApplicationStatus.ERROR,
+					applicationStatus: ApplicationStatus.INITIALIZING,
 				},
 			} );
 			await expect(
@@ -311,6 +311,10 @@ describe( 'root/actions', () => {
 				),
 			).rejects.toBeDefined();
 			expect( context.dispatch ).toBeCalledTimes( 0 );
+			expect( context.commit ).toHaveBeenCalledWith(
+				APPLICATION_STATUS_SET,
+				ApplicationStatus.ERROR,
+			);
 		} );
 
 		it( 'propagtes errors and switch into error state', async () => {

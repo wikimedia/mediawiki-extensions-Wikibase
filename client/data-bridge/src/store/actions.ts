@@ -91,6 +91,7 @@ export const actions = {
 		dataValue: DataValue,
 	): Promise<void> {
 		if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
+			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 			return Promise.reject( null );
 		}
 
