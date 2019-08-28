@@ -127,6 +127,50 @@ describe( 'ForeignApiWritingRepository', () => {
 			} );
 	} );
 
+	it( 'delegates anonymous user to the foreignApi', () => {
+		const foreignApi = mockForeignApi();
+		jest.spyOn( foreignApi, 'postWithEditToken' );
+		const toBeWrittenEntity = {
+			revisionId: 123,
+			entity: {
+				id: 'Q123',
+				statements: {
+					P20: [ {
+						mainsnak: {
+							snaktype: 'value',
+							property: 'P20',
+							datavalue: {
+								value: 'String for Wikidata bridge',
+								type: 'string',
+							},
+							datatype: 'string',
+						},
+						type: 'statement',
+						id: 'Q123$36ae6854-4e74-d74c-d583-701bc130166f',
+						rank: 'normal',
+					} ],
+				} as any,
+			},
+		};
+
+		const assertuser = null;
+		const entityWriter = new ForeignApiWritingRepository( foreignApi, assertuser );
+
+		return entityWriter.saveEntity( toBeWrittenEntity )
+			.then( () => {
+				expect( foreignApi.postWithEditToken ).toBeCalledTimes( 1 );
+				expect( foreignApi.postWithEditToken ).toBeCalledWith( {
+					action: 'wbeditentity',
+					assertuser: undefined,
+					baserevid: toBeWrittenEntity.revisionId,
+					id: toBeWrittenEntity.entity.id,
+					data: JSON.stringify( {
+						claims: toBeWrittenEntity.entity.statements,
+					} ),
+				} );
+			} );
+	} );
+
 	it( 'can delagate tags to the foreignApi', () => {
 		const foreignApi = mockForeignApi();
 		jest.spyOn( foreignApi, 'postWithEditToken' );
