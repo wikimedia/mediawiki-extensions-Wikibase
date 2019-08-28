@@ -487,7 +487,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getExamplesMessages() {
 		return [
-			// Creating new entites
+			// Creating new entities
 			'action=wbeditentity&new=item&data={}'
 				=> 'apihelp-wbeditentity-example-1',
 			'action=wbeditentity&new=item&data={"labels":{'
