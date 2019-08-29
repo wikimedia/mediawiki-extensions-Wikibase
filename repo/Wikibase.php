@@ -232,7 +232,9 @@ call_user_func( function() {
 				$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 				$changeOpFactoryProvider->getStatementChangeOpFactory(),
 				$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
-				$wikibaseRepo->getEntityChangeOpProvider()
+				$wikibaseRepo->getEntityChangeOpProvider(),
+				new Wikibase\Repo\ChangeOp\ChangedLanguagesCounter(),
+				new Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter()
 			);
 		}
 	];
