@@ -45,7 +45,7 @@ class ObjectUriRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'http://en.wikipedia.org/wiki/Wikidata' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://en.wikipedia.org/wiki/Wikidata> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );

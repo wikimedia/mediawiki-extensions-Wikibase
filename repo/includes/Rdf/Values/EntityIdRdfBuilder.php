@@ -49,6 +49,7 @@ class EntityIdRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		$value = $snak->getDataValue();

@@ -21,6 +21,7 @@ interface ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
+	 * @param string $snakNamespace
 	 * @param PropertyValueSnak $snak
 	 */
 	public function addValue(
@@ -28,6 +29,7 @@ interface ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	);
 

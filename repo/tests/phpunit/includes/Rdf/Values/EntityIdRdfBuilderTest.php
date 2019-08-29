@@ -63,7 +63,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdValue( new ItemId( 'Q23' ) )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://test/item/Q23> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
@@ -96,7 +96,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new EntityIdValue( new ItemId( 'Q23' ) )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://test/item/Q23> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );

@@ -228,8 +228,6 @@ class RdfVocabulary {
 
 		$topUri = $this->getConceptUriBase( $conceptUris[$localEntitySourceName] );
 
-		$this->namespaces[self::NS_VALUE] = $topUri . 'value/';
-
 		$propertyNamespaces = [
 			self::NSP_CLAIM,
 			self::NSP_CLAIM_STATEMENT,
@@ -257,6 +255,7 @@ class RdfVocabulary {
 			$this->statementNamespaceNames[$repositoryOrSourceName] = [
 				self::NS_STATEMENT => $predicateNamespacePrefix . self::NS_STATEMENT,
 				self::NS_REFERENCE => $predicateNamespacePrefix . self::NS_REFERENCE,
+				self::NS_VALUE => $predicateNamespacePrefix . self::NS_VALUE,
 			];
 
 			$this->propertyNamespaceNames[$repositoryOrSourceName] = array_combine(
@@ -339,6 +338,7 @@ class RdfVocabulary {
 			$predicateNamespacePrefix . self::NS_DATA => $dataUri,
 			$predicateNamespacePrefix . self::NS_STATEMENT => $baseUri . 'statement/',
 			$predicateNamespacePrefix . self::NS_REFERENCE => $topUri . 'reference/',
+			$predicateNamespacePrefix . self::NS_VALUE => $topUri . 'value/',
 			// predicates
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',

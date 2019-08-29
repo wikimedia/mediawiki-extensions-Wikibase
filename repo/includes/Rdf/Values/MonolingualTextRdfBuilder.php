@@ -30,6 +30,7 @@ class MonolingualTextRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		/** @var MonolingualTextValue $value */

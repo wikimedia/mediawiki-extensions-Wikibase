@@ -52,6 +52,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		/** @var UnboundedQuantityValue $value */
@@ -67,6 +68,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 				$propertyValueNamespace,
 				$propertyValueLName,
 				$dataType,
+				$snakNamespace,
 				$value
 			);
 
@@ -82,18 +84,19 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 						$propertyValueNamespace,
 						$propertyValueLName,
 						$dataType,
+						$snakNamespace,
 						$newValue,
 						true
 					);
 					if ( $newValue->equals( $value ) ) {
 						// The normalized value is always its own normalization.
-						$this->linkNormalizedValue( $valueLName, $valueLName );
+						$this->linkNormalizedValue( $snakNamespace, $valueLName, $valueLName );
 					} else {
 						// The normalized value is always its own normalization.
-						$this->linkNormalizedValue( $normLName, $normLName );
+						$this->linkNormalizedValue( $snakNamespace, $normLName, $normLName );
 
 						// Connect the normalized value to the unnormalized value
-						$this->linkNormalizedValue( $valueLName, $normLName );
+						$this->linkNormalizedValue( $snakNamespace, $valueLName, $normLName );
 					}
 				}
 			}
@@ -106,14 +109,14 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string|null $valueLName
 	 * @param string|null $normLName
 	 */
-	private function linkNormalizedValue( $valueLName, $normLName ) {
+	private function linkNormalizedValue( $valueNamespace, $valueLName, $normLName ) {
 		if ( is_null( $valueLName ) || is_null( $normLName ) ) {
 			return;
 		}
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
-		$valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )
+		$valueWriter->about( $valueNamespace, $valueLName )
 			->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
-			->is( RdfVocabulary::NS_VALUE, $normLName );
+			->is( $valueNamespace, $normLName );
 	}
 
 	/**
@@ -135,6 +138,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$valueNamespace,
 		UnboundedQuantityValue $value,
 		$normalized = false
 	) {
@@ -143,6 +147,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 			$propertyValueNamespace,
 			$propertyValueLName,
 			$dataType,
+			$valueNamespace,
 			$value,
 			$normalized
 		);

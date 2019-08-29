@@ -73,7 +73,7 @@ class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->start();
 		$writer->about( 'www', 'Q1' );
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}

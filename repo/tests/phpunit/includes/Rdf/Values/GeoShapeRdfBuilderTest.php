@@ -59,7 +59,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Data:Foo.map' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/data/main/Data:Foo.map> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
@@ -89,7 +89,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Data:Foo.map' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/data/main/Data:Foo.map> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );

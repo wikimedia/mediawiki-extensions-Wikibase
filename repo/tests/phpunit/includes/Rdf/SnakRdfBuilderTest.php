@@ -81,7 +81,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$valueBuilder->expects( $this->once() )
 				->method( 'addValue' )
-				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, $snak );
+				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, RdfVocabulary::NS_VALUE, $snak );
 		} else {
 			$valueBuilder->expects( $this->never() )
 				->method( 'addValue' );
@@ -124,7 +124,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$valueBuilder->expects( $this->once() )
 				->method( 'addValue' )
-				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, $snak );
+				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, RdfVocabulary::NS_VALUE, $snak );
 		} else {
 			$valueBuilder->expects( $this->never() )
 				->method( 'addValue' );
@@ -177,7 +177,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		// assertions are done by the mocks
-		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 	}
 
 	/**
@@ -198,7 +198,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		// assertions are done by the mocks
-		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 	}
 
 	public function testAddSnakValue_novalue() {
@@ -218,7 +218,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P2> .',
 		];
 
-		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 
 		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
 	}
@@ -240,7 +240,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://foreign.test/prop/novalue/P2> .',
 		];
 
-		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 
 		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
 	}
@@ -262,7 +262,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			$mentioned
 		);
 
-		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 		$this->assertEquals( [ 'P2' ], array_keys( $mentioned ) );
 	}
 
@@ -283,7 +283,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			$mentioned
 		);
 
-		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 		$this->assertEquals( [ 'P2' ], array_keys( $mentioned ) );
 	}
 

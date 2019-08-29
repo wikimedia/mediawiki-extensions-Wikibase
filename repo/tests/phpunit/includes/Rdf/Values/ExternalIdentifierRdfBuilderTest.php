@@ -79,8 +79,8 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'XY-23' )
 		);
 
-		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', $snakP1 );
-		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', $snakP345 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', RdfVocabulary::NS_VALUE, $snakP1 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', RdfVocabulary::NS_VALUE, $snakP345 );
 
 		$expected = [
 			'<http://www.test/Q1> <http://acme.test/prop-normalized/P1> <http://xyzzy.test/vocab/AB%26123> .',
@@ -132,8 +132,8 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'XY-23' )
 		);
 
-		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', $snakP1 );
-		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', $snakP345 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', RdfVocabulary::NS_VALUE, $snakP1 );
+		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', RdfVocabulary::NS_VALUE, $snakP345 );
 
 		$expected = [
 			'<http://www.test/Q1> <http://acme.test/prop-normalized/P1> <http://xyzzy.test/vocab/AB%26123> .',

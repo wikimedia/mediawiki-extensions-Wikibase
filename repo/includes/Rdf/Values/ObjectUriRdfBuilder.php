@@ -30,6 +30,7 @@ class ObjectUriRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		$uri = $this->getValueUri( $snak->getDataValue() );

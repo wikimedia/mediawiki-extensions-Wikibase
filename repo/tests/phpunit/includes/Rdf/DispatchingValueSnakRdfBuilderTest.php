@@ -31,20 +31,20 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$ptBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 		$ptBuilder->expects( $this->once() )
 			->method( 'addValue' )
-			->with( $writer, $namespace, $lname, 'foo', $snak );
+			->with( $writer, $namespace, $lname, 'foo', 'v', $snak );
 
 		$vtBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 		$vtBuilder->expects( $this->once() )
 			->method( 'addValue' )
-			->with( $writer, $namespace, $lname, 'bar', $snak );
+			->with( $writer, $namespace, $lname, 'bar', 'v', $snak );
 
 		$dispatchingBuilder = new DispatchingValueSnakRdfBuilder( [
 			'PT:foo' => $ptBuilder,
 			'VT:string' => $vtBuilder
 		] );
 
-		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', $snak );
-		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'bar', $snak );
+		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', 'v', $snak );
+		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'bar', 'v', $snak );
 	}
 
 }

@@ -205,6 +205,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $snak->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$snak
 		);
 
@@ -251,6 +252,7 @@ class TimeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $snak->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$snak
 		);
 

@@ -54,6 +54,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		$writer->say( $propertyValueNamespace, $propertyValueLName );
@@ -64,7 +65,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 		$this->sayDateLiteral( $writer, $value );
 
 		if ( $this->complexValueHelper !== null ) {
-			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $snakNamespace, $value );
 		}
 	}
 
@@ -85,6 +86,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
+	 * @param string $snakNamespace
 	 * @param TimeValue $value
 	 */
 	private function addValueNode(
@@ -92,6 +94,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		TimeValue $value
 	) {
 		$valueLName = $this->complexValueHelper->attachValueNode(
@@ -99,6 +102,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 			$propertyValueNamespace,
 			$propertyValueLName,
 			$dataType,
+			$snakNamespace,
 			$value
 		);
 

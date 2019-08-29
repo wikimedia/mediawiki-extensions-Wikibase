@@ -53,6 +53,7 @@ class LiteralValueRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		$literalValue = $this->getLiteralValue( $snak->getDataValue() );

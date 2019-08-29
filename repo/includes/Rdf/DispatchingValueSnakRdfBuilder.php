@@ -44,13 +44,14 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		$valueType = $snak->getDataValue()->getType();
 		$builder = $this->getValueBuilder( $dataType, $valueType );
 
 		if ( $builder ) {
-			$builder->addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $snak );
+			$builder->addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $snakNamespace, $snak );
 		}
 	}
 
