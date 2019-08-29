@@ -98,6 +98,8 @@ class RdfVocabulary {
 	 */
 	public $entityNamespaceNames = [];
 
+	public $dataNamespaceNames = [];
+
 	/**
 	 * @var array Associative array mapping repository names to maps, each mapping the "general" property
 	 * namespace name to the name specific to the particular repository (ie. containing repository suffix).
@@ -133,7 +135,7 @@ class RdfVocabulary {
 
 	/**
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
-	 * @param string $dataUri Base URI for entity description URIs.
+	 * @param string[] $dataUris Associative array mapping source/repository names to base URIs for entity description URIs.
 	 * @param DataAccessSettings $dataAccessSettings
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param string $localEntitySourceName
@@ -148,7 +150,7 @@ class RdfVocabulary {
 	 */
 	public function __construct(
 		array $conceptUris,
-		$dataUri,
+		array $dataUris,
 		DataAccessSettings $dataAccessSettings,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		$localEntitySourceName,
@@ -175,6 +177,28 @@ class RdfVocabulary {
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $conceptUris, '$conceptUris' );
 
+		Assert::parameterElementType( 'string', $dataUris, '$dataUris' );
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			Assert::parameter(
+				array_key_exists( $localEntitySourceName, $dataUris ),
+				'$dataUris',
+				'must contain entry for the local entity source, ie. ' . $localEntitySourceName
+			);
+		} else {
+			Assert::parameter(
+				array_key_exists( '', $dataUris ),
+				'$dataUris',
+				'must contain entry for the local repository, ie. empty-string key'
+			);
+			RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $dataUris, '$dataUris' );
+		}
+
+		Assert::parameter(
+			array_keys( $conceptUris ) === array_keys( $dataUris ),
+			'$dataUris',
+			'must have values defined for all keys that $conceptUris'
+		);
+
 		$this->dataAccessSettings = $dataAccessSettings;
 
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
@@ -193,9 +217,6 @@ class RdfVocabulary {
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "#",
 
 			self::NS_STATEMENT => $conceptUris[$localEntitySourceName] . 'statement/',
-
-			// nodes
-			self::NS_DATA => $dataUri,
 
 			// external
 			self::NS_SKOS => self::SKOS_URI,
@@ -233,6 +254,7 @@ class RdfVocabulary {
 			$predicateNamespacePrefix = $rdfTurtlePredicatePrefixes[$repositoryOrSourceName];
 
 			$this->entityNamespaceNames[$repositoryOrSourceName] = $nodeNamespacePrefix . self::NS_ENTITY;
+			$this->dataNamespaceNames[$repositoryOrSourceName] = $predicateNamespacePrefix . self::NS_DATA;
 
 			$this->propertyNamespaceNames[$repositoryOrSourceName] = array_combine(
 				$propertyNamespaces,
@@ -253,9 +275,10 @@ class RdfVocabulary {
 				)
 			);
 
+			$dataUri = $dataUris[$repositoryOrSourceName];
 			$this->namespaces = array_merge(
 				$this->namespaces,
-				$this->getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri )
+				$this->getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri, $dataUri )
 			);
 
 			$this->claimToValue = array_merge(
@@ -300,15 +323,17 @@ class RdfVocabulary {
 	 * @param string $nodeNamespacePrefix
 	 * @param string $predicateNamespacePrefix
 	 * @param string $baseUri
+	 * @param string $dataUri
 	 * @return string[]
 	 */
-	private function getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri ) {
+	private function getConceptNamespaces( $nodeNamespacePrefix, $predicateNamespacePrefix, $baseUri, $dataUri ) {
 		$topUri = $this->getConceptUriBase( $baseUri );
 
 		$propUri = $topUri . 'prop/';
 
 		return [
 			$nodeNamespacePrefix . self::NS_ENTITY => $baseUri,
+			$predicateNamespacePrefix . self::NS_DATA => $dataUri,
 			// predicates
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
 			$nodeNamespacePrefix . self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',

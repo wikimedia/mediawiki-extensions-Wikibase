@@ -352,7 +352,7 @@ QUERY;
 		$irrelevantValue = 1000;
 		return new RdfVocabulary(
 			[ '' => $baseUri ],
-			$entityDataTitle->getCanonicalURL() . '/',
+			[ '' => $entityDataTitle->getCanonicalURL() . '/' ],
 			new DataAccessSettings( $irrelevantValue, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION, false ),
 			new EntitySourceDefinitions( [] ),
 			'',

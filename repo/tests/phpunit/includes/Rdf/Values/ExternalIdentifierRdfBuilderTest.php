@@ -48,7 +48,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$vocabulary = new RdfVocabulary(
 			[ '' => '<BASE>' ],
-			'<DATA>',
+			[ '' => '<DATA>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -101,7 +101,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$vocabulary = new RdfVocabulary(
 			[ '' => '<BASE>' ],
-			'<DATA>',
+			[ '' => '<DATA>' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',

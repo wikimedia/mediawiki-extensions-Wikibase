@@ -32,7 +32,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 		new RdfVocabulary(
 			[ 'foo' => '<BASE-foo>' ],
-			'<DATA>',
+			[ '' => '<DATA>', 'foo' => '<DATA-foo>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -46,7 +46,38 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 		new RdfVocabulary(
 			[ 'foo' => '<BASE-foo>' ],
-			'<DATA>',
+			[ 'local' => '<DATA>', 'foo' => '<DATA-foo>' ],
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
+			new EntitySourceDefinitions( [
+				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
+				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
+			] ),
+			'local',
+			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
+			[ 'localwiki' => '', 'otherwiki' => 'other' ]
+		);
+	}
+
+	public function testGivenNoDocumentBaseUriNotDefinedForDefaultRepository_constructorThrowsException() {
+		$this->expectException( \InvalidArgumentException::class );
+
+		new RdfVocabulary(
+			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
+			[ 'foo' => '<DATA-foo>' ],
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [] ),
+			'',
+			[ '' => 'wd', 'foo' => 'foo' ],
+			[ '' => '', 'foo' => 'foo' ]
+		);
+	}
+
+	public function testGivenNoDocumentBaseUriDefinedForLocalEntitySource_constructorThrowsException() {
+		$this->expectException( \InvalidArgumentException::class );
+
+		new RdfVocabulary(
+			[ 'local' => '<BASE>', 'foo' => '<BASE-foo>' ],
+			[ 'foo' => '<DATA-foo>' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
@@ -61,7 +92,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 	private function newInstance() {
 		return new RdfVocabulary(
 			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
-			'<DATA>',
+			[ '' => '<DATA>', 'foo' => '<DATA-foo>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -77,7 +108,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 	private function newInstanceForEntitySourceBasedFederation() {
 		return new RdfVocabulary(
 			[ 'localwiki' => '<BASE>', 'otherwiki' => '<BASE-other>' ],
-			'<DATA>',
+			[ 'localwiki' => '<DATA>', 'otherwiki' => '<DATA-other>' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -202,7 +233,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$vocab = $this->newInstance();
 		$all = $vocab->getNamespaces();
 
-		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( RdfVocabulary::NS_DATA ) );
+		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( $vocab->dataNamespaceNames[''] ) );
 		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( $vocab->entityNamespaceNames[''] ) );
 
 		foreach ( $all as $ns => $uri ) {
@@ -217,7 +248,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$vocab = $this->newInstanceForEntitySourceBasedFederation();
 		$all = $vocab->getNamespaces();
 
-		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( RdfVocabulary::NS_DATA ) );
+		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( $vocab->dataNamespaceNames['localwiki'] ) );
 		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( $vocab->entityNamespaceNames['localwiki'] ) );
 
 		foreach ( $all as $ns => $uri ) {
@@ -238,6 +269,18 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
 
 		$this->assertEquals( [ 'localwiki' => 'wd', 'otherwiki' => 'other' ], $vocabulary->entityNamespaceNames );
+	}
+
+	public function testDataNamespaceNames() {
+		$vocabulary = $this->newInstance();
+
+		$this->assertEquals( [ '' => 'data', 'foo' => 'foodata' ], $vocabulary->dataNamespaceNames );
+	}
+
+	public function testDataNamespaceNames_entitySourceBasedFederation() {
+		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
+
+		$this->assertEquals( [ 'localwiki' => 'data', 'otherwiki' => 'otherdata' ], $vocabulary->dataNamespaceNames );
 	}
 
 	public function testPropertyNamespaceNames() {

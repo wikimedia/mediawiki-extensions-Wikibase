@@ -40,7 +40,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue() {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://test/item/' ],
-			'http://test/data/',
+			[ '' => 'http://test/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -71,7 +71,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue_entitySourceBasedFederation() {
 		$vocab = new RdfVocabulary(
 			[ 'test' => 'http://test/item/' ],
-			'http://test/data/',
+			[ 'test' => 'http://test/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '', '', '' )

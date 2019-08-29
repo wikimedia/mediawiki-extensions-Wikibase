@@ -13,6 +13,7 @@ use UnexpectedValueException;
 use Wikibase\ByIdDispatchingItemTermStore;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
@@ -1364,8 +1365,6 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'canonicalLanguageCodes' )
 			);
 
-			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
-
 			$dataAccessSettings = $this->getDataAccessSettings();
 			$localEntitySourceName = $dataAccessSettings->useEntitySourceBasedFederation() ? $this->getLocalEntitySource()->getSourceName() : '';
 			$nodeNamespacePrefixes = [];
@@ -1383,7 +1382,7 @@ class WikibaseRepo {
 				$dataAccessSettings->useEntitySourceBasedFederation() ?
 					$this->entitySourceDefinitions->getConceptBaseUris() :
 					$this->repositoryDefinitions->getConceptBaseUris(),
-				$entityDataTitle->getCanonicalURL() . '/',
+				$this->getCanonicalDocumentUrls(),
 				$dataAccessSettings,
 				$this->entitySourceDefinitions,
 				$localEntitySourceName,
@@ -1397,6 +1396,26 @@ class WikibaseRepo {
 		}
 
 		return $this->rdfVocabulary;
+	}
+
+	private function getCanonicalDocumentUrls() {
+		$dataAccessSettings = $this->getDataAccessSettings();
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$urlProvider = new EntitySourceDocumentUrlProvider();
+
+			return $urlProvider->getCanonicalDocumentsUrls( $this->entitySourceDefinitions );
+		}
+
+		$documentUrls = [];
+
+		// TODO: This is backwards-compatability branch. Probably not worth improving until the deprecated
+		// configuration is removed.
+		foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repository ) {
+			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData', '', $repository );
+			$documentUrls[$repository] = $entityDataTitle->getCanonicalURL() . '/';
+		}
+
+		return $documentUrls;
 	}
 
 	/**

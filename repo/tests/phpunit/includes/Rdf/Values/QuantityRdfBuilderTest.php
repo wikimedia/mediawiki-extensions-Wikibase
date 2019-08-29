@@ -282,7 +282,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -319,7 +319,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -351,7 +351,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -397,7 +397,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -447,7 +447,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -517,7 +517,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
-			'http://acme.com/data/',
+			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',

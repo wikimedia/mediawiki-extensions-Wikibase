@@ -37,7 +37,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue() {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://test/item/' ],
-			'http://test/data/',
+			[ '' => 'http://test/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',
@@ -67,7 +67,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	public function testAddValue_entitySourceBasedFederation() {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://test/item/' ],
-			'http://test/data/',
+			[ '' => 'http://test/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [] ),
 			'',

@@ -43,6 +43,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_BASE_PROPS = 'http://prop.test/';
 	const URI_DATA = 'http://data.acme.test/';
+	const URI_DATA_PROPS = 'http://data.prop.test/';
 
 	/**
 	 * Returns a MockRepository. The following entities are defined:
@@ -120,7 +121,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			new HashSiteStore(),
 			new RdfVocabulary(
 				[ '' => self::URI_BASE ],
-				self::URI_DATA,
+				[ '' => self::URI_DATA ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
 				'',
@@ -750,7 +751,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			new HashSiteStore(),
 			new RdfVocabulary(
 				[ 'items' => self::URI_BASE, 'props' => self::URI_BASE_PROPS, ],
-				self::URI_DATA,
+				[ 'items' => self::URI_DATA, 'props' => self::URI_DATA_PROPS, ],
 				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				new EntitySourceDefinitions( [
 					new EntitySource(

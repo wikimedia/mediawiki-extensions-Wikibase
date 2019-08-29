@@ -116,7 +116,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new HashSiteStore(),
 			new RdfVocabulary(
 				[ '' => EntityDataSerializationServiceTest::URI_BASE ],
-				EntityDataSerializationServiceTest::URI_DATA,
+				[ '' => EntityDataSerializationServiceTest::URI_DATA ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
 				'',

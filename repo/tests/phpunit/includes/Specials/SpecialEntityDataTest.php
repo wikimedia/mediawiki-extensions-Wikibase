@@ -101,7 +101,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			new HashSiteStore(),
 			new RdfVocabulary(
 				[ '' => self::URI_BASE ],
-				self::URI_DATA,
+				[ '' => self::URI_DATA ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 				new EntitySourceDefinitions( [] ),
 				'',
