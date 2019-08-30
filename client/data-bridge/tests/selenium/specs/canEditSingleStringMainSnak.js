@@ -5,7 +5,7 @@ const assert = require( 'assert' ),
 
 describe( 'App', () => {
 
-	it( 'can edit a single string mainsnak value', () => {
+	it.skip( 'can edit a single string mainsnak value', () => {
 		const title = DataBridgePage.getDummyTitle();
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 		const stringPropertyExampleValue = 'ExampleString';
