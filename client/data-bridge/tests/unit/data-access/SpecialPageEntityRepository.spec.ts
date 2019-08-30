@@ -88,20 +88,18 @@ describe( 'SpecialPageEntityRepository', () => {
 			const jQueryMock = jQueryGetMock( '<some><random><html>' );
 
 			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
-			return entityDataSupplier.getEntity( 'Q123' ).catch( ( reason ) => {
-				expect( reason ).toBeInstanceOf( TechnicalProblem );
-				expect( reason.message ).toBe( 'Result not well formed.' );
-			} );
+			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+				.rejects
+				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
 		} );
 
 		it( 'rejects on result missing entities key', () => {
 			const jQueryMock = jQueryGetMock( {} );
 
 			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
-			return entityDataSupplier.getEntity( 'Q123' ).catch( ( reason ) => {
-				expect( reason ).toBeInstanceOf( TechnicalProblem );
-				expect( reason.message ).toBe( 'Result not well formed.' );
-			} );
+			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+				.rejects
+				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
 		} );
 
 		it( 'rejects on result missing relevant entity in entities', () => {
@@ -112,30 +110,27 @@ describe( 'SpecialPageEntityRepository', () => {
 			} );
 
 			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
-			return entityDataSupplier.getEntity( 'Q123' ).catch( ( reason ) => {
-				expect( reason ).toBeInstanceOf( EntityNotFound );
-				expect( reason.message ).toBe( 'Result does not contain relevant entity.' );
-			} );
+			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+				.rejects
+				.toStrictEqual( new EntityNotFound( 'Result does not contain relevant entity.' ) );
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing', () => {
 			const jQueryMock = jQueryGetMock( null, { status: 404 } );
 
 			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
-			return entityDataSupplier.getEntity( 'Q123' ).catch( ( reason ) => {
-				expect( reason ).toBeInstanceOf( EntityNotFound );
-				expect( reason.message ).toBe( 'Entity flagged missing in response.' );
-			} );
+			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+				.rejects
+				.toStrictEqual( new EntityNotFound( 'Entity flagged missing in response.' ) );
 		} );
 
 		it( 'rejects if there was a serverside problem with the API', () => {
 			const jQueryMock = jQueryGetMock( null, { status: 500 } );
 
 			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
-			return entityDataSupplier.getEntity( 'Q123' ).catch( ( reason ) => {
-				expect( reason ).toBeInstanceOf( JQueryTechnicalError );
-				expect( reason.message ).toBe( 'request error' );
-			} );
+			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+				.rejects
+				.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );
 		} );
 	} );
 } );
