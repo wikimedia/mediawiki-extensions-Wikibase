@@ -119,12 +119,13 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		ChangeOpReference $changeOp,
 		$referenceHash
 	) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$references = $statement->getReferences();
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), 'Reference not found' );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function changeOpAddProviderWithIndex() {
@@ -170,12 +171,13 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		Reference $newReference,
 		$expectedIndex
 	) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$references = $statement->getReferences();
 		$this->assertEquals( $expectedIndex, $references->indexOf( $newReference ) );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function changeOpSetProvider() {
@@ -238,12 +240,13 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		ChangeOpReference $changeOp,
 		$referenceHash
 	) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$references = $statement->getReferences();
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), 'Reference not found' );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	/**

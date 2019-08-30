@@ -103,12 +103,13 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider changeOpAddProvider
 	 */
 	public function testApplyAddNewQualifier( Item $item, ChangeOpQualifier $changeOp, $snakHash ) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$qualifiers = $statement->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), 'Qualifier not found' );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function changeOpSetProvider() {
@@ -138,12 +139,13 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider changeOpSetProvider
 	 */
 	public function testApplySetQualifier( Item $item, ChangeOpQualifier $changeOp, $snakHash ) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$qualifiers = $statement->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), 'Qualifier not found' );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	/**

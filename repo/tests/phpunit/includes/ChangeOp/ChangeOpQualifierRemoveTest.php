@@ -60,12 +60,13 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider changeOpRemoveProvider
 	 */
 	public function testApplyRemoveQualifier( Item $item, ChangeOpQualifierRemove $changeOp, $snakHash ) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$qualifiers = $statement->getQualifiers();
 		$this->assertFalse( $qualifiers->hasSnakHash( $snakHash ), "Qualifier still exists" );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {

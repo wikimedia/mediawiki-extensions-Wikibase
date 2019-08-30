@@ -68,12 +68,13 @@ class ChangeOpStatementRankTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider changeOpProvider
 	 */
 	public function testApplyStatementRank( Item $item, ChangeOpStatementRank $changeOp, $expectedRank ) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$rank = $statement->getRank();
 		$this->assertEquals( $expectedRank, $rank, "No reference with expected hash" );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	private function newItemWithClaim( $itemIdString, $mainSnak ) {

@@ -118,7 +118,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideChangeOps
 	 */
 	public function testApply( Item $item, ChangeOpMainSnak $changeOp, DataValue $expected = null ) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$this->assertNotEmpty( $changeOp->getStatementGuid() );
 		$statements = $item->getStatements();
 		$statement = $statements->getFirstStatementWithGuid( $changeOp->getStatementGuid() );
@@ -127,6 +127,8 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		} else {
 			$this->assertEquals( $expected, $statement->getMainSnak()->getDataValue() );
 		}
+		// this module always changes the entity, adding or updating main snak value
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function provideInvalidApply() {

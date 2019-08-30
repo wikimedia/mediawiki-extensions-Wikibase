@@ -71,7 +71,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 		$removedSnak = $statement->getMainSnak();
 		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 
 	/**

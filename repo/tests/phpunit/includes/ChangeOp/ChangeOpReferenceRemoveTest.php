@@ -49,10 +49,11 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit\Framework\TestCase {
 		$statement->getReferences()->addReference( $reference );
 		$changeOp = new ChangeOpReferenceRemove( $statement->getGuid(), $reference->getHash() );
 
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 
 		$newStatement = $item->getStatements()->toArray()[0];
 		$this->assertTrue( $newStatement->getReferences()->isEmpty() );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function testApplyWithDuplicateReferencePreservesOne() {
@@ -67,11 +68,12 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit\Framework\TestCase {
 		$statement->getReferences()->addReference( clone $reference );
 		$changeOp = new ChangeOpReferenceRemove( $statement->getGuid(), $referenceHash );
 
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 
 		$newStatement = $item->getStatements()->toArray()[0];
 		$this->assertTrue( $newStatement->getReferences()->hasReferenceHash( $referenceHash ) );
 		$this->assertCount( 1, $newStatement->getReferences() );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	private function newItemWithClaim( $itemIdString, Snak $snak ) {

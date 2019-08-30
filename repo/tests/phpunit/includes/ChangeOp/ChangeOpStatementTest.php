@@ -90,11 +90,12 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$index = null
 	) {
 		$changeOpStatement = $this->newChangeOpStatement( $statement, $index );
-		$changeOpStatement->apply( $entity );
+		$changeOpResult = $changeOpStatement->apply( $entity );
 
 		$expectedStatementList = new StatementList( $expected );
 		$this->assertEquals( $expectedStatementList, $entity->getStatements() );
 		$this->assertTrue( $entity->getStatements()->equals( $expectedStatementList ) );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function provideTestApply() {
@@ -228,9 +229,10 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 		$expected = new StatementList( [ $statement ] );
 
 		$changeOpStatement = $this->newChangeOpStatement( $statement );
-		$changeOpStatement->apply( $property );
+		$changeOpResult = $changeOpStatement->apply( $property );
 
 		$this->assertTrue( $property->getStatements()->equals( $expected ) );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	/**

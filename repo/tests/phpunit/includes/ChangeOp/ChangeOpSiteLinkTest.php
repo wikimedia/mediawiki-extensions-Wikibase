@@ -122,12 +122,13 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$item = new Item();
 		$item->setSiteLinkList( new SiteLinkList( $existingSiteLinks ) );
 
-		$changeOpSiteLink->apply( $item );
+		$changeOpResult = $changeOpSiteLink->apply( $item );
 
 		$this->assertEquals(
 			$expectedSiteLinks,
 			array_values( $item->getSiteLinkList()->toArray() )
 		);
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	public function testGivenNoSitelinkOnSiteAndBadgeChangeRequested_validateReturnsError() {
