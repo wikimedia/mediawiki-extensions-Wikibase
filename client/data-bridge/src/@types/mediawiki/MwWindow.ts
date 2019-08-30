@@ -19,8 +19,8 @@ interface ApiOptions {
 }
 
 /** see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
+export type ForeignApiConstructor = new( url: string, options?: ApiOptions ) => ForeignApi;
 export interface ForeignApi {
-	new( url: string, options?: ApiOptions ): any;
 	get: ( parameters: unknown, ajaxOptions?: unknown ) => JQuery.Promise<any>;
 	getEditToken(): JQuery.Promise<any>;
 	getToken( type: string, assert?: string ): JQuery.Promise<any>;
@@ -36,7 +36,7 @@ interface MediaWiki {
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log */
 	log: MwLog;
 	/** @see https://www.mediawiki.org/wiki/Manual:CORS */
-	ForeignApi?: ForeignApi;
+	ForeignApi?: ForeignApiConstructor;
 }
 
 export interface WindowManager {
