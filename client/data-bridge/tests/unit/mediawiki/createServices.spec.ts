@@ -14,7 +14,7 @@ describe( 'createServices', () => {
 	it( 'pulls wbRepo from mw.config, creates EntityRepository with it', () => {
 		const get = jest.fn().mockImplementation( () => ( {
 			url: 'http://localhost',
-			scriptPath: '/w/',
+			scriptPath: '/w',
 			articlePath: '/wiki/$1',
 		} ) );
 		const $ = new ( jest.fn() )();
