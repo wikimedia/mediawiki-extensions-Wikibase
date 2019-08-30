@@ -71,7 +71,7 @@ class EntityInfo {
 	 * @return array An array structure representing information about the given entity.
 	 *         Refer to the class level documentation for information about the structure.
 	 */
-	public function getEntityInfo( EntityId $entityId ) {
+	private function getEntityInfo( EntityId $entityId ) {
 		$key = $entityId->getSerialization();
 
 		if ( !array_key_exists( $key, $this->info ) ) {
