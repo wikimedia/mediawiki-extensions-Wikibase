@@ -27,9 +27,7 @@ describe( 'init', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-		browser.call( () => {
-			return Api.edit( title, content, browser.config.username, browser.config.password );
-		} );
+		browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
 		DataBridgePage.open( title );
 		DataBridgePage.overloadedLink.click();
@@ -53,9 +51,7 @@ describe( 'init', () => {
 | {{#statements:${propertyId}|from=${nonExistantEntityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${nonExistantEntityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 
-			browser.call( () => {
-				return Api.edit( title, content, browser.config.username, browser.config.password );
-			} );
+			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
@@ -85,9 +81,7 @@ describe( 'init', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-			browser.call( () => {
-				return Api.edit( title, content, browser.config.username, browser.config.password );
-			} );
+			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
