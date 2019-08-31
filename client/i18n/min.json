@@ -35,7 +35,7 @@
 	"wikibase-linkitem-confirmitem-text": "Laman nan Sanak piliah alah tapauik pado [$1 item di pusek panyimpanan data kami]. Silahkan dikonfirmasi laman nan ditampilan dibawah ko adolah laman nan nio Sanak tauikkan.",
 	"wikibase-linkitem-confirmitem-button": "Tarimo",
 	"wikibase-linkitem-not-loggedin-title": "Sanak musti masuak log",
-	"wikibase-linkitem-not-loggedin": "Sanak musti masuak log pado wiki ko dan pado [$1 pusek panyimpanan data] untuak manggunoan fitur iko.",
+	"wikibase-linkitem-not-loggedin": "Sanak musti masuak log di wiki ko dan pado [$1 pusek panyimpanan data] untuak manggunoan fitua ko.",
 	"wikibase-linkitem-success-link": "Laman alah barasil ditauikkan. Sanak dapek manamukan item barisi tautan tarsabuik pado [$1 pusek panyimpanan data] kami.",
 	"wikibase-property-notfound": "Properti $1 indak basobok.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

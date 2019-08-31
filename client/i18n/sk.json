@@ -8,7 +8,8 @@
 			"TomášPolonec",
 			"Kusavica",
 			"LacoR",
-			"Robert Važan"
+			"Robert Važan",
+			"Luky001"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
@@ -83,6 +84,7 @@
 	"wikibase-otherprojects-beta-description": "Pridáva na postranný panel sekciu „{{int:wikibase-otherprojects}}“ obsahujúcu odkazy na ostatné projekty Wikimedia podľa údajov na {{grammar:6sg|{{WBREPONAME}}}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|prepojenie}} s {{GRAMMAR:7sg|{{WBREPONAME}}}}",
 	"notification-header-page-connection": "Stránka <strong>$3</strong> bola {{GENDER:$2|prepojená}} s položkou {{PLURAL:$4|-1=na {{GRAMMAR:6sg|{{WBREPONAME}}}}|$4 na {{GRAMMAR:6sg|{{WBREPONAME}}}}}}, ktorá obsahuje údaje súvisiace s jej témou.",
+	"notification-link-text-view-item": "{{GENDER:$1|Zobraziť}} položku",
 	"connected-redirect-category": "Presmerovania prepojené s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Táto kategória obsahuje presmerovania prepojené s položkou na {{GRAMMAR:6sg|{{WBREPONAME}}}}."
 }
