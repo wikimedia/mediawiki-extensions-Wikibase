@@ -22,6 +22,8 @@ export function mockMwConfig( values: {
 						scriptPath: '/w',
 						articlePath: '/wiki/$1',
 					};
+				case 'wgUserName':
+					return 'Test User';
 				default:
 					throw new Error( `unexpected config key ${key}` );
 			}
