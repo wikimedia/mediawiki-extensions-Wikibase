@@ -1,13 +1,20 @@
 import EntityRevision from '@/datamodel/EntityRevision';
+import EntityRepository from '@/definitions/data-access/EntityRepository';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import actions from '@/store/entity/actions';
 import {
 	ENTITY_INIT,
+	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
+import {
+	ENTITY_ID,
+	ENTITY_REVISION,
+} from '@/store/entity/getterTypes';
 import {
 	ENTITY_UPDATE,
 	ENTITY_REVISION_UPDATE,
 } from '@/store/entity/mutationTypes';
+import { STATEMENTS_MAP } from '@/store/entity/statements/getterTypes';
 import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
@@ -21,11 +28,25 @@ import newMockableEntityRevision from '../newMockableEntityRevision';
 describe( 'entity/actions', () => {
 	describe( ENTITY_INIT, () => {
 
+		const neverReadingEntityRepository: EntityRepository = {
+			getEntity( _id: string, _revision: number ): Promise<EntityRevision> {
+				throw new Error( 'should not use EntityRepository' );
+			},
+		};
+
 		const neverWritingEntityRepository: WritingEntityRepository = {
 			saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
 				// note: this deliberately throws an error
 				// instead of returning a rejected promise
 				throw new Error( 'should not use WritingEntityRepository' );
+			},
+		};
+
+		const revidIncrementingWritingEntityRepository: WritingEntityRepository = {
+			saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
+				return Promise.resolve(
+					new EntityRevision( entity.entity, entity.revisionId + 1 ),
+				);
 			},
 		};
 
@@ -129,6 +150,62 @@ describe( 'entity/actions', () => {
 					expect( error.message ).toBe( errorMsg );
 				} );
 			} );
+		} );
+
+		it( 'updates entity and statements on successful save', () => {
+			const entityId = 'Q42',
+				statements = {},
+				entity = { id: entityId, statements },
+				revision = 1234,
+				statementsGetter = jest.fn( () => statements ),
+				context = newMockStore( {
+					commit: jest.fn(),
+					getters: {
+						[ ENTITY_ID ]: entityId,
+						[ ENTITY_REVISION ]: revision,
+						[ namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
+					},
+				} );
+
+			const action = actions(
+				neverReadingEntityRepository,
+				revidIncrementingWritingEntityRepository,
+			)[ ENTITY_SAVE ];
+			return ( action as Function )( context )
+				.then( () => {
+					expect( context.commit ).toHaveBeenCalledWith( ENTITY_UPDATE, entity );
+					expect( context.commit ).toHaveBeenCalledWith( ENTITY_REVISION_UPDATE, revision + 1 );
+					expect( context.dispatch ).toHaveBeenCalledWith(
+						namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_INIT ),
+						{ entityId, statements },
+					);
+				} );
+		} );
+
+		it( 'propagates error on failed save', () => {
+			const entityId = 'Q42',
+				statements = {},
+				revision = 1234,
+				statementsGetter = jest.fn( () => statements ),
+				context = newMockStore( {
+					commit: jest.fn(),
+					getters: {
+						[ ENTITY_ID ]: entityId,
+						[ ENTITY_REVISION ]: revision,
+						[ namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
+					},
+				} ),
+				error = new Error( 'this should be propagated' ),
+				writingEntityRepository = {
+					saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+						return Promise.reject( error );
+					},
+				};
+
+			const action = actions( neverReadingEntityRepository, writingEntityRepository )[ ENTITY_SAVE ];
+			return expect( ( action as Function )( context ) )
+				.rejects
+				.toStrictEqual( error );
 		} );
 	} );
 } );

@@ -6636,6 +6636,7 @@ var ENTITY_ID = 'id';
 var ENTITY_REVISION = 'revision';
 // CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
 var ENTITY_INIT = 'entityInit';
+var ENTITY_SAVE = 'entitySave';
 // CONCATENATED MODULE: ./src/store/namespacedStoreEvent.ts
 /**
  * @param namespacesAndName namespace1, namespace2, ..., mutationOrActionName
@@ -6782,6 +6783,17 @@ var entity_getters_getters = (_getters = {}, _defineProperty(_getters, ENTITY_ID
 }), _defineProperty(_getters, ENTITY_REVISION, function (state) {
   return state.baseRevision;
 }), _getters);
+// CONCATENATED MODULE: ./src/datamodel/EntityRevision.ts
+
+
+var EntityRevision_EntityRevision = function EntityRevision(entity, revisionId) {
+  _classCallCheck(this, EntityRevision);
+
+  this.entity = entity;
+  this.revisionId = revisionId;
+};
+
+
 // CONCATENATED MODULE: ./src/store/entity/statements/actionTypes.ts
 var STATEMENTS_INIT = 'initStatements';
 // CONCATENATED MODULE: ./src/store/entity/actions.ts
@@ -6791,17 +6803,35 @@ var STATEMENTS_INIT = 'initStatements';
 
 
 
-function actions_actions(entityRepository, _writingEntityRepository) {
-  return _defineProperty({}, ENTITY_INIT, function (context, payload) {
-    return entityRepository.getEntity(payload.entity, payload.revision).then(function (entity) {
-      context.commit(ENTITY_REVISION_UPDATE, entity.revisionId);
-      context.commit(ENTITY_UPDATE, entity.entity);
-      return context.dispatch(namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_INIT), {
-        entityId: entity.entity.id,
-        statements: entity.entity.statements
-      });
+
+
+
+function actions_actions(entityRepository, writingEntityRepository) {
+  var _ref;
+
+  function updateEntity(context, entity) {
+    context.commit(ENTITY_REVISION_UPDATE, entity.revisionId);
+    context.commit(ENTITY_UPDATE, entity.entity);
+    return context.dispatch(namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_INIT), {
+      entityId: entity.entity.id,
+      statements: entity.entity.statements
     });
-  });
+  }
+
+  return _ref = {}, _defineProperty(_ref, ENTITY_INIT, function (context, payload) {
+    return entityRepository.getEntity(payload.entity, payload.revision).then(function (entity) {
+      return updateEntity(context, entity);
+    });
+  }), _defineProperty(_ref, ENTITY_SAVE, function (context) {
+    var entityId = context.getters[ENTITY_ID],
+        entityRevision = new EntityRevision_EntityRevision({
+      id: entityId,
+      statements: context.getters[namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_MAP)](entityId)
+    }, context.getters[ENTITY_REVISION]);
+    return writingEntityRepository.saveEntity(entityRevision).then(function (entity) {
+      return updateEntity(context, entity);
+    });
+  }), _ref;
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
