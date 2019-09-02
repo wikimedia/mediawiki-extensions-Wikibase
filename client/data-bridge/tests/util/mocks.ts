@@ -73,4 +73,9 @@ export function mockMwEnv(
 		},
 	};
 	( window as MwWindow ).$ = new ( jest.fn() )();
+	( window as MwWindow ).$.uls = {
+		data: {
+			getDir: jest.fn(),
+		},
+	};
 }
