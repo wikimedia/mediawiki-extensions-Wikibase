@@ -102,6 +102,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
+	 *
+	 * @return ChangeOpResult
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof Item ) ) {

@@ -1,11 +1,12 @@
 <?php
 
-
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use Wikibase\Repo\ChangeOp\DummyChangeOpResult;
 
 /**
+ * @covers \Wikibase\Repo\ChangeOp\DummyChangeOpResult
+ *
  * @group Wikibase
  * @group ChangeOp
  */
