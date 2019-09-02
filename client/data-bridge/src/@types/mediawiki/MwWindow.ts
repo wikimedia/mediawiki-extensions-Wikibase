@@ -67,10 +67,22 @@ export interface MwWindowOO {
 	inheritClass( child: any, parent: any ): void; // takes "classes" as arguments
 }
 
+export interface UlsData {
+	getDir: ( languageCode?: string ) => 'ltr'|'rtl';
+}
+
+interface JQUls {
+	data: UlsData;
+}
+
+interface MWJQueryExtension {
+	uls?: JQUls;
+}
+
 interface MwWindow extends Window {
 	mw: MediaWiki;
 	OO: MwWindowOO;
-	$: JQueryStatic;
+	$: JQueryStatic&MWJQueryExtension;
 }
 
 export default MwWindow;
