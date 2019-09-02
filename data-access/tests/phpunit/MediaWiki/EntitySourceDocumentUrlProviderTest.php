@@ -18,6 +18,7 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 
 	public function testGivenLocalWikiSource_urlOfLocalWikiIsUsed() {
 		$this->setService( 'InterwikiLookup', $this->getMock( InterwikiLookup::class ) );
+		$this->setContentLang( 'de' );
 		$this->setMwGlobals( 'wgArticlePath', 'http://foo.test/wiki/$1' );
 
 		$sources = new EntitySourceDefinitions( [
@@ -35,7 +36,7 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 		$urlProvider = new EntitySourceDocumentUrlProvider();
 
 		$this->assertEquals(
-			[ 'local' => 'http://foo.test/wiki/Special:EntityData/' ],
+			[ 'local' => 'http://foo.test/wiki/Spezial:EntityData/' ],
 			$urlProvider->getCanonicalDocumentsUrls( $sources )
 		);
 	}
@@ -47,6 +48,7 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 			->with( 'nonlocal' )
 			->willReturn( $interwiki );
 		$this->setService( 'InterwikiLookup', $interwikiLookup );
+		$this->setContentLang( 'de' );
 
 		$sources = new EntitySourceDefinitions( [
 			new EntitySource(
