@@ -131,6 +131,14 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
+	public function testGivenAttemptToRemoveNonExistentSiteLink_applyIndicatesNoChange() {
+		$changeOp = new ChangeOpSiteLink( 'enwiki', null );
+
+		$changeOpResult = $changeOp->apply( new Item() );
+
+		$this->assertFalse( $changeOpResult->isEntityChanged() );
+	}
+
 	public function testGivenNoSitelinkOnSiteAndBadgeChangeRequested_validateReturnsError() {
 		$item = new Item();
 		$item->setSiteLinkList( new SiteLinkList( [ new SiteLink( 'plwiki', 'Berlin', [ new ItemId( 'Q42' ) ] ) ] ) );
