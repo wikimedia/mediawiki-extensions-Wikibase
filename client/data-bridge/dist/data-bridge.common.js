@@ -6619,6 +6619,7 @@ var NS_STATEMENTS = 'statements';
 var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
 var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
 var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
+var STATEMENTS_MAP = 'statementsMap';
 // CONCATENATED MODULE: ./src/store/entity/statements/mainSnakGetterTypes.ts
 var mainSnakGetterTypes = {
   dataType: 'mainSnakDataType',
@@ -6892,6 +6893,10 @@ var statementGetters = (_statementGetters = {}, _defineProperty(_statementGetter
 }), _defineProperty(_statementGetters, STATEMENTS_IS_AMBIGUOUS, function (state) {
   return function (entityId, propertyId) {
     return state[entityId][propertyId] !== undefined && state[entityId][propertyId].length > 1;
+  };
+}), _defineProperty(_statementGetters, STATEMENTS_MAP, function (state) {
+  return function (entityId) {
+    return state[entityId];
   };
 }), _statementGetters);
 // CONCATENATED MODULE: ./src/store/entity/statements/snaks/getters.ts
