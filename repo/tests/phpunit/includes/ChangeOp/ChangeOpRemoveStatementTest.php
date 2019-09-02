@@ -64,10 +64,11 @@ class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider changeOpProvider
 	 */
 	public function testApplyAddNewClaim( Item $item, ChangeOpRemoveStatement $changeOp, DataValue $expected = null ) {
-		$changeOp->apply( $item );
+		$changeOpResult = $changeOp->apply( $item );
 		$this->assertNotEmpty( $changeOp->getGuid() );
 		$statements = $item->getStatements();
 		$this->assertEquals( $expected, $statements->getFirstStatementWithGuid( $changeOp->getGuid() ) );
+		$this->assertTrue( $changeOpResult->isEntityChanged() );
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {

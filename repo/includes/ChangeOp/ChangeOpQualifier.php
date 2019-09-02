@@ -98,7 +98,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 
 		$statement->setQualifiers( $qualifiers );
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 
 	/**

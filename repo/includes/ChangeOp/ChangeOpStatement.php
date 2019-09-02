@@ -122,7 +122,7 @@ class ChangeOpStatement extends ChangeOpBase {
 
 		$this->updateSummary( $summary, $oldIndex === null ? 'create' : 'update' );
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entityId, true );
 	}
 
 	/**

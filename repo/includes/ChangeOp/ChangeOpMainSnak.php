@@ -100,7 +100,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 			$this->setStatement( $statements, $summary );
 		}
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 
 	/**

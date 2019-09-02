@@ -79,7 +79,7 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 
 		$statement->setReferences( $references );
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 
 	/**

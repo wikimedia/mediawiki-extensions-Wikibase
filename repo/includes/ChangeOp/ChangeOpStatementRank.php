@@ -84,7 +84,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 			);
 		}
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 
 	/**

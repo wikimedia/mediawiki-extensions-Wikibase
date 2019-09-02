@@ -115,7 +115,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				$this->updateSummary( $summary, 'remove', $this->siteId, $siteLinks->getBySiteId( $this->siteId )->getPageName() );
 				$siteLinks->removeLinkWithSiteId( $this->siteId );
 			} else {
-				//TODO: throw error, or ignore silently?
+				//TODO: throw error? currently ignoring and declaring no changes to entity
+				return new GenericChangeOpResult( $entity->getId(), false );
 			}
 		} else {
 			$commentArgs = [];
@@ -138,7 +139,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 			$siteLinks->addNewSiteLink( $this->siteId, $pageName, $badges );
 		}
 
-		return new DummyChangeOpResult();
+		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 
 	/**

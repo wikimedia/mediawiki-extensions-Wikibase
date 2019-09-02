@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\DataModel\Entity\EntityId;
