@@ -39,7 +39,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		$this->block->delete();
 	}
 
-	public function dataProvider() {
+	public function blockCases() {
 		yield [
 			'wbcreateclaim',
 			[
@@ -214,39 +214,41 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @dataProvider dataProvider
-	 *
 	 * @param $apiKey
 	 * @param $otherApiData
 	 */
-	public function testBlock( $apiKey, $otherApiData, $expectedMessages ) {
+	public function testBlock() {
 		$testuser = self::getTestUser()->getUser();
 
 		$this->assertTrue( $testuser->isBlocked(), 'User is expected to be blocked' );
 
-		foreach ( $otherApiData as $key => &$value ) {
-			if ( !is_array( $value ) ) {
-				continue;
-			}
-			$value = call_user_func( ...$value );
-		}
-		unset( $value );
+		foreach ( $this->blockCases() as $case ) {
+			list( $apiKey, $otherApiData, $expectedMessages ) = $case;
 
-		try {
-			$this->doApiRequestWithToken(
-				array_merge(
-					[ 'action' => $apiKey ],
-					$otherApiData
-				), null, $testuser );
-			$this->fail( 'Expected api error to be raised' );
-		} catch ( ApiUsageException $exception ) {
-			foreach ( $expectedMessages as $message ) {
-				$hasMessage = $exception->getStatusValue()->hasMessage( $message );
-				if ( $message === 'apierror-blocked' ) {
-					// back compat for pre-I14887b6d MediaWiki
-					$hasMessage = $hasMessage || $exception->getStatusValue()->hasMessage( 'blockedtext' );
+			foreach ( $otherApiData as $key => &$value ) {
+				if ( !is_array( $value ) ) {
+					continue;
 				}
-				$this->assertTrue( $hasMessage, 'Expected message ' . $message );
+				$value = call_user_func( ...$value );
+			}
+			unset( $value );
+
+			try {
+				$this->doApiRequestWithToken(
+					array_merge(
+						[ 'action' => $apiKey ],
+						$otherApiData
+					), null, $testuser );
+				$this->fail( 'Expected api error to be raised' );
+			} catch ( ApiUsageException $exception ) {
+				foreach ( $expectedMessages as $message ) {
+					$hasMessage = $exception->getStatusValue()->hasMessage( $message );
+					if ( $message === 'apierror-blocked' ) {
+						// back compat for pre-I14887b6d MediaWiki
+						$hasMessage = $hasMessage || $exception->getStatusValue()->hasMessage( 'blockedtext' );
+					}
+					$this->assertTrue( $hasMessage, 'Expected message ' . $message );
+				}
 			}
 		}
 	}
