@@ -73,10 +73,12 @@ class WikibaseContentLanguages {
 					// Other valid codes without MediaWiki localization
 					'abe', // T150633
 					'abq', // T155367
+					'alc', // T190981
 					'ami', // T174238
 					'bnn', // T174230
 					'brx', // T155369
 					'chn', // T155370
+					'clc', // T222020
 					'cnr', // T185800
 					'cop', // T155371
 					'el-cy', // T198674
@@ -94,6 +96,7 @@ class WikibaseContentLanguages {
 					'haz', // T155374
 					'hbo', // T155368
 					'kjh', // T155377
+					'kld', // T198366
 					'koy', // T125066
 					'lag', // T161983
 					'lkt', // T125066
@@ -106,6 +109,7 @@ class WikibaseContentLanguages {
 					'nxm', // T167745
 					'ood', // T155423
 					'otk', // T137809
+					'peo', // T189427
 					'pjt', // T155426
 					'ppu', // T174233
 					'pwn', // T174231
@@ -125,6 +129,7 @@ class WikibaseContentLanguages {
 					'ssf', // T174236
 					'syc', // T164580
 					'tlb', // T216798
+					'tli', // T230145
 					'trv', // T174228
 					'tzl', // T98314
 					'uga', // T155431
