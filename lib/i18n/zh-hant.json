@@ -14,7 +14,8 @@
 			"TMg",
 			"Wehwei",
 			"Hello903hello",
-			"Kly"
+			"Kly",
+			"A2093064"
 		]
 	},
 	"wikibase-lib-desc": "Wikibase 與 Wikibase 用戶端擴充套件所共用的功能",
@@ -164,7 +165,7 @@
 	"wikibase-entity-summary-wbremoveclaims-update": "已移除{{PLURAL:$1|聲稱|聲稱}}",
 	"wikibase-entity-summary-special-create-item": "已建立含{{PLURAL:$1|數值}}的 [$2] 項目",
 	"wikibase-entity-summary-wbcreateclaim-create": "建立聲稱",
-	"wikibase-entity-summary-wbsetclaim-update": "已變更 {{PLURAL:$3|聲稱|聲稱}}",
+	"wikibase-entity-summary-wbsetclaim-update": "已變更{{PLURAL:$3|聲稱|聲稱}}",
 	"wikibase-entity-summary-wbsetclaim-create": "已建立{{PLURAL:$3|聲稱|聲稱}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "已更改{{PLURAL:$3|聲稱|聲稱}}的{{PLURAL:$4|1 個量詞|$4 個量詞}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "已更改{{PLURAL:$3|聲稱|聲稱}}的{{PLURAL:$4|1 個參考文獻|$4 個參考文獻}}",

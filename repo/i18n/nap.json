@@ -88,7 +88,7 @@
 	"wikibase-statementview-rank-deprecated": "Classificato scunzigliato",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|riferimento|riferimente}}",
 	"wikibase-snakview-property-input-placeholder": "proprietà",
-	"wikibase-snakview-unsupportedsnaktype": "Snak 'e tipo \"$1\". 'A gistiona pe' stu tipo 'e snak nun è ancora suppurtata.",
+	"wikibase-snakview-unsupportedsnaktype": "Snak 'e tipo \"$1\". 'A gistiona pe stu tipo 'e snak nun è suppurtata eziamme.",
 	"wikibase-snakview-choosesnaktype": "Sceglie nu tipo 'e valore.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "'O valore nun ce azzeccasse c' 'a definiziona 'e proprietà",
 	"wikibase-snakview-variation-datavaluetypemismatch-details": "Cunflitto nun aspettato nfa tipo 'e proprietà \"$2\" e tipo 'e valore \"$1\".",
