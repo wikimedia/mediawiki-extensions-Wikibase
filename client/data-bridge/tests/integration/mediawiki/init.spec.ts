@@ -1,9 +1,13 @@
+import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
-import { mockMwEnv } from '../../util/mocks';
+import {
+	mockForeignApiConstructor,
+	mockMwEnv,
+} from '../../util/mocks';
 
 const mockPrepareContainer = jest.fn();
 jest.mock( '@/mediawiki/prepareContainer', () => ( {
@@ -17,14 +21,19 @@ describe( 'init', () => {
 			require = jest.fn( () => app ),
 			using = jest.fn( () => {
 				return new Promise( ( resolve ) => resolve( require ) );
-			} );
-		mockMwEnv( using );
+			} ),
+			ForeignApiConstructor = mockForeignApiConstructor( 'http://localhost/w/api.php' ),
+			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' );
+		mockMwEnv( using, undefined, undefined, ForeignApiConstructor );
 		const expectedServices = new ServiceRepositories();
 		expectedServices.setEntityRepository(
 			new SpecialPageEntityRepository(
 				( window as MwWindow ).$,
 				'http://localhost/wiki/Special:EntityData',
 			),
+		);
+		expectedServices.setWritingEntityRepository(
+			new ForeignApiWritingRepository( ForeignApi, 'Test User' ),
 		);
 		const entityId = 'Q5';
 		const propertyId = 'P4711';

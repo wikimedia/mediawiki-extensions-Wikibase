@@ -1,4 +1,7 @@
-import MwWindow from '@/@types/mediawiki/MwWindow';
+import MwWindow, {
+	ForeignApi,
+	ForeignApiConstructor,
+} from '@/@types/mediawiki/MwWindow';
 import MwConfig from '@/@types/mediawiki/MwConfig';
 import WbRepo from '@/@types/wikibase/WbRepo';
 
@@ -31,10 +34,28 @@ export function mockMwConfig( values: {
 	};
 }
 
+export function mockForeignApiConstructor( expectedUrl?: string ): ForeignApiConstructor {
+	return class MockForeignApi implements ForeignApi {
+		public constructor( url: string, _options?: any ) {
+			if ( expectedUrl ) {
+				expect( url ).toBe( expectedUrl );
+			}
+		}
+		public get( ..._args: any[] ): any { return jest.fn(); }
+		public getEditToken( ..._args: any[] ): any { return jest.fn(); }
+		public getToken( ..._args: any[] ): any { return jest.fn(); }
+		public post( ..._args: any[] ): any { return jest.fn(); }
+		public postWithEditToken( ..._args: any[] ): any { return jest.fn(); }
+		public postWithToken( ..._args: any[] ): any { return jest.fn(); }
+		public login( ..._args: any[] ): any { return jest.fn(); }
+	};
+}
+
 export function mockMwEnv(
 	using: () => Promise<any> = jest.fn(),
 	config: MwConfig = mockMwConfig(),
 	warn: () => void = jest.fn(),
+	ForeignApi: ForeignApiConstructor = mockForeignApiConstructor(),
 ): void {
 	( window as MwWindow ).mw = {
 		loader: {
@@ -46,6 +67,7 @@ export function mockMwEnv(
 			error: jest.fn(),
 			warn,
 		},
+		ForeignApi,
 	};
 	( window as MwWindow ).$ = new ( jest.fn() )();
 }

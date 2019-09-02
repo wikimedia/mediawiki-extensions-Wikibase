@@ -27,7 +27,10 @@ export function createStore( services: ServiceRepositories ): Store<Application>
 		mutations,
 		strict: process.env.NODE_ENV !== 'production',
 		modules: {
-			[ NS_ENTITY ]: createEntity( services.getEntityRepository() ),
+			[ NS_ENTITY ]: createEntity(
+				services.getEntityRepository(),
+				services.getWritingEntityRepository(),
+			),
 		},
 	};
 
