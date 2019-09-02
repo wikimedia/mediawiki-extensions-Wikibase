@@ -5,6 +5,7 @@ import Dispatcher from '@/mediawiki/Dispatcher';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
+const FOREIGNAPI_MODULE = 'mediawiki.ForeignApi';
 
 function stopNativeClickHandling( event: Event ): void {
 	event.preventDefault();
@@ -23,7 +24,11 @@ export default async (): Promise<void> => {
 	const bridgeElementSelector = new BridgeDomElementsSelector( dataBridgeConfig.hrefRegExp );
 	const linksToOverload: SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
 	if ( linksToOverload.length > 0 ) {
-		const require = await mwWindow.mw.loader.using( [ APP_MODULE, WBREPO_MODULE ] ),
+		const require = await mwWindow.mw.loader.using( [
+				APP_MODULE,
+				WBREPO_MODULE,
+				FOREIGNAPI_MODULE,
+			] ),
 			app = require( APP_MODULE ),
 			dispatcher = new Dispatcher( mwWindow, app );
 
