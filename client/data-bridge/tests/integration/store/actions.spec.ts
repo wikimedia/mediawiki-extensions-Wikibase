@@ -6,7 +6,10 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import AppInformation from '@/definitions/AppInformation';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import { createStore } from '@/store';
-import { BRIDGE_INIT } from '@/store/actionTypes';
+import {
+	BRIDGE_INIT,
+	BRIDGE_SET_TARGET_VALUE,
+} from '@/store/actionTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import {
 	NS_ENTITY,
@@ -56,19 +59,6 @@ describe( 'store/actions', () => {
 						},
 					} ],
 					P23: [ {
-						type: 'statement',
-						id: 'opaque statement ID',
-						rank: 'normal',
-						mainsnak: {
-							snaktype: 'value',
-							property: 'P23',
-							datatype: 'string',
-							datavalue: {
-								type: 'string',
-								value: 'a string value',
-							},
-						},
-					}, {
 						type: 'statement',
 						id: 'other opaque statement ID',
 						rank: 'normal',
@@ -122,6 +112,82 @@ describe( 'store/actions', () => {
 			const successStore = createStore( services );
 			return successStore.dispatch( BRIDGE_INIT, info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );
+			} );
+		} );
+
+		describe( 'transitions to error state', () => {
+			it( 'switches into error state if the statement not existing on the entity', () => {
+				const errorStore = createStore( services );
+				const misleadingInfo = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId: 'P2312',
+					entityId: 'Q42',
+				};
+
+				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				} );
+			} );
+
+			it( 'switches into error state if the statement is ambiguous', () => {
+				const errorStore = createStore( services );
+				const misleadingInfo = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId: 'P60',
+					entityId: 'Q42',
+				};
+				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				} );
+			} );
+
+			it( 'switches into error state if has not a `value` as snak type', () => {
+				const errorStore = createStore( services );
+				const misleadingInfo = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId: 'P23',
+					entityId: 'Q42',
+				};
+				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				} );
+			} );
+
+			it( 'switch into error state if is not a string data value type', () => {
+				const errorStore = createStore( services );
+				const misleadingInfo = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId: 'P42',
+					entityId: 'Q42',
+				};
+				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				} );
+			} );
+		} );
+	} );
+
+	describe( 'alias actions', () => {
+		describe( BRIDGE_SET_TARGET_VALUE, () => {
+			it( 'rejects if the store is not ready and switches to error state', async () => {
+				const notReadyStore = createStore( services );
+				await expect( notReadyStore.dispatch(
+					BRIDGE_SET_TARGET_VALUE,
+					{ type: 'string', dataValue: 'passing string' },
+				) ).rejects.toBeDefined();
+				expect( notReadyStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+			} );
+
+			it( 'sets the new data value', () => {
+				const dataValue = { type: 'string', value: 'Töften as passing string' };
+				return store.dispatch(
+					BRIDGE_SET_TARGET_VALUE,
+					dataValue,
+				).then( () => {
+					expect(
+						( store.state as any ).entity.statements.Q42.P31[ 0 ].mainsnak.datavalue,
+					).toBe( dataValue );
+				} );
 			} );
 		} );
 	} );
