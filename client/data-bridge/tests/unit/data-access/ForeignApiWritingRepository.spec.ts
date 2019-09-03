@@ -231,10 +231,9 @@ describe( 'ForeignApiWritingRepository', () => {
 			const mock = mockForeignApi( 'noObject' );
 
 			const entityWriter = new ForeignApiWritingRepository( mock, 'user' );
-			return entityWriter.saveEntity( toBeWrittenEntity ).then(
-				() => expect( false ).toBe( true ),
-				( reason ) => expect( reason ).toStrictEqual( new TechnicalProblem( 'unknown response type.' ) ),
-			);
+			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
+				.rejects
+				.toStrictEqual( new TechnicalProblem( 'unknown response type.' ) );
 		} );
 
 		it( 'rejects on exsiting error field', () => {
@@ -247,35 +246,27 @@ describe( 'ForeignApiWritingRepository', () => {
 			const mock = mockForeignApi( error );
 
 			const entityWriter = new ForeignApiWritingRepository( mock, 'nuterin' );
-			return entityWriter.saveEntity( toBeWrittenEntity ).then(
-				() => expect( false ).toBe( true ),
-				( reason ) => expect( reason ).toStrictEqual( new TechnicalProblem( error.error.code ) ),
-			);
+			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
+				.rejects
+				.toStrictEqual( new TechnicalProblem( error.error.code ) );
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing', () => {
 			const mock = mockForeignApi( null, { status: 404 } );
 
 			const entityWriter = new ForeignApiWritingRepository( mock, 'user' );
-			return entityWriter.saveEntity( toBeWrittenEntity ).then(
-				() => expect( false ).toBe( true ),
-				( reason ) => expect( reason ).toStrictEqual(
-					new EntityNotFound( 'The given api page does not exist.' ),
-				),
-			);
+			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
+				.rejects
+				.toStrictEqual( new EntityNotFound( 'The given api page does not exist.' ) );
 		} );
 
 		it( 'rejects if there was a serverside problem with the API', () => {
 			const mock = mockForeignApi( null, { status: 500 } );
 
 			const entityWriter = new ForeignApiWritingRepository( mock, 'user' );
-			return entityWriter.saveEntity( toBeWrittenEntity ).then(
-				() => expect( false ).toBe( true ),
-				( reason ) => {
-					expect( reason ).toBeInstanceOf( JQueryTechnicalError );
-					expect( reason.message ).toBe( 'request error' );
-				},
-			);
+			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
+				.rejects
+				.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );
 		} );
 	} );
 } );
