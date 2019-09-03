@@ -37,6 +37,12 @@ if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnable
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		// Use example config for testing
 		require_once __DIR__ . '/repo/config/Wikibase.example.php';
+
+		// Wikibase Cirrus search should not be used in browser tests
+		$wgWBCSUseCirrus = false;
+
+		// CirrusSearch should not perform any updates
+		$wgDisableSearchUpdate = true;
 	}
 }
 
