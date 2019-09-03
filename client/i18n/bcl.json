@@ -6,8 +6,8 @@
 			"ShimunUfesoj"
 		]
 	},
-	"tooltip-t-wikibase": "Takod sa konektadong bagay sa repositoryo nin data",
-	"wikibase-comment-update": "{{WBREPONAME}} aytem pinagliwat",
+	"tooltip-t-wikibase": "Takod sa konektadong bagay sa repositoryo nin datus",
+	"wikibase-comment-update": "Pinagliwat an aytem na {{WBREPONAME}}",
 	"wikibase-dataitem": "{{WBREPONAME}} na bagay",
 	"wikibase-editlinks": "Liwaton an mga takod",
 	"wikibase-editlinkstitle": "Liwaton an mga interlengwaheng takod",
