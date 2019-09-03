@@ -1,13 +1,14 @@
-import DirectionalityRepository from '@/definitions/data-access/DirectionalityRepository';
+import Language from '@/datamodel/Language';
+import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import inlanguageConstructor from '@/presentation/directives/inlanguage';
 
 describe( 'inlanguage directive', () => {
 	it( 'adds language properties to element\'s attributes', () => {
 		const languageCode = 'de';
-		const directionality = 'ltr';
+		const language: Language = { code: languageCode, directionality: 'ltr' };
 		const element = document.createElement( 'div' );
-		const resolver: DirectionalityRepository = {
-			resolve: jest.fn( (): 'rtl'|'ltr' => directionality ),
+		const resolver: LanguageInfoRepository = {
+			resolve: jest.fn( (): Language => language ),
 		};
 		element.setAttribute = jest.fn();
 		const inlanguage = inlanguageConstructor( resolver );
@@ -24,7 +25,7 @@ describe( 'inlanguage directive', () => {
 
 		expect( resolver.resolve ).toHaveBeenCalledWith( languageCode );
 		expect( resolver.resolve ).toBeCalledTimes( 1 );
-		expect( element.setAttribute ).toHaveBeenCalledWith( 'lang', languageCode );
-		expect( element.setAttribute ).toHaveBeenCalledWith( 'dir', directionality );
+		expect( element.setAttribute ).toHaveBeenCalledWith( 'lang', language.code );
+		expect( element.setAttribute ).toHaveBeenCalledWith( 'dir', language.directionality );
 	} );
 } );

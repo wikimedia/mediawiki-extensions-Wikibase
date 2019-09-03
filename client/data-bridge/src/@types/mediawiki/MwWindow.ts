@@ -5,6 +5,10 @@ interface ResourceLoader {
 	using( module: string|string[] ): Promise<any>;
 }
 
+export interface MwLanguage {
+	bcp47( languageTag: string ): string;
+}
+
 interface MwLog {
 	deprecate( obj: object, key: string, val: any, msg?: string, logName?: string ): void;
 	error( ...msg: any[] ): void;
@@ -37,6 +41,8 @@ interface MediaWiki {
 	log: MwLog;
 	/** @see https://www.mediawiki.org/wiki/Manual:CORS */
 	ForeignApi?: ForeignApiConstructor;
+	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language */
+	language: MwLanguage;
 }
 
 export interface WindowManager {
