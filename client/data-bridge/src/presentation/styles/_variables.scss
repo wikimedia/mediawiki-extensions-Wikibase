@@ -2,6 +2,10 @@
 
 // TODO taken from: https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/src/themes/wikimediaui/common.less
 $base-font-size-desired: 0.875rem;
+$base-font-size-browser: 16;
+
+$size-dialog-bar--desktop: 40 / $base-font-size-browser * $base-font-size-desired;
+$font-size-dialog-process-title: 1.1 * $base-font-size-desired;
 
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;
