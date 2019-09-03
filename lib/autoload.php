@@ -8,6 +8,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\ByIdDispatchingItemTermStore' => __DIR__ . '/includes/Store/ByIdDispatchingItemTermStore.php',
 	'Wikibase\\Change' => __DIR__ . '/includes/Changes/Change.php',
 	'Wikibase\\ChangeRow' => __DIR__ . '/includes/Changes/ChangeRow.php',
+	'Wikibase\\ContentLanguagesLanguageFallbackChainFilterer' => __DIR__ . '/includes/ContentLanguagesLanguageFallbackChainFilterer.php',
 	'Wikibase\\DiffChange' => __DIR__ . '/includes/Changes/DiffChange.php',
 	'Wikibase\\EntityChange' => __DIR__ . '/includes/Changes/EntityChange.php',
 	'Wikibase\\EntityFactory' => __DIR__ . '/includes/EntityFactory.php',
