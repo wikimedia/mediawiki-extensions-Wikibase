@@ -16,6 +16,7 @@ use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\BadRevisionException;
+use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -162,7 +163,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 			// Get the revision id we actually loaded, if none was passed explicitly
 			$revisionId = $revisionId ?: $entityRevision->getRevisionId();
-			throw new BadRevisionException( "Revision $revisionId belongs to $actualEntityId instead of expected $entityId" );
+			throw new DivergingEntityIdException(
+				$entityRevision,
+				"Revision $revisionId belongs to $actualEntityId instead of expected $entityId"
+			);
 		}
 
 		if ( $revisionId > 0 && $entityRevision === null ) {
