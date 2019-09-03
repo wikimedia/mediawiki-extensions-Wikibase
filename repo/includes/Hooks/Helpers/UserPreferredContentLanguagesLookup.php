@@ -36,10 +36,16 @@ class UserPreferredContentLanguagesLookup {
 		$this->wikiDefaultContentLanguage = $wikiDefaultContentLanguage;
 	}
 
-	public function getLanguages( $language, User $user ) {
+	/**
+	 * @param $uiLanguage - user interface language; will be returned as the first language in the list if valid
+	 * @param User $user
+	 *
+	 * @return array - language codes
+	 */
+	public function getLanguages( $uiLanguage, User $user ) {
 		$validLanguages = array_filter(
 			array_unique( array_merge(
-				[ $language ],
+				[ $uiLanguage ],
 				$this->userLanguageLookup->getAllUserLanguages( $user )
 			) ),
 			function ( $language ) {
