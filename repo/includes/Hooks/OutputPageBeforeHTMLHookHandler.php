@@ -15,6 +15,7 @@ use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
+use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\EntityViewPlaceholderExpander;
@@ -87,6 +88,11 @@ class OutputPageBeforeHTMLHookHandler {
 	 */
 	private $isExternallyRendered;
 
+	/**
+	 * @var UserPreferredContentLanguagesLookup
+	 */
+	private $userPreferredTermsLanguages;
+
 	public function __construct(
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
@@ -97,7 +103,8 @@ class OutputPageBeforeHTMLHookHandler {
 		EntityFactory $entityFactory,
 		$cookiePrefix,
 		OutputPageEditability $editability,
-		$isExternallyRendered = false
+		$isExternallyRendered = false,
+		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -109,6 +116,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->cookiePrefix = $cookiePrefix;
 		$this->isExternallyRendered = $isExternallyRendered;
 		$this->editability = $editability;
+		$this->userPreferredTermsLanguages = $userPreferredTermsLanguages;
 	}
 
 	/**
@@ -118,11 +126,13 @@ class OutputPageBeforeHTMLHookHandler {
 		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$termLanguages = $wikibaseRepo->getTermsLanguages();
+		$babelUserLanguageLookup = new BabelUserLanguageLookup();
 
 		return new self(
 			TemplateFactory::getDefaultInstance(),
-			new BabelUserLanguageLookup,
-			$wikibaseRepo->getTermsLanguages(),
+			$babelUserLanguageLookup,
+			$termLanguages,
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
@@ -132,7 +142,12 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getEntityFactory(),
 			$wgCookiePrefix,
 			new OutputPageEditability(),
-			TermboxFlag::getInstance()->shouldRenderTermbox()
+			TermboxFlag::getInstance()->shouldRenderTermbox(),
+			new UserPreferredContentLanguagesLookup(
+				$termLanguages,
+				$babelUserLanguageLookup,
+				MediaWikiServices::getInstance()->getContentLanguage()->getCode()
+			)
 		);
 	}
 
@@ -230,19 +245,6 @@ class OutputPageBeforeHTMLHookHandler {
 		return !$this->isExternallyRendered && !$this->getEntityTermsListHtml( $out );
 	}
 
-	/**
-	 * @param OutputPage $out
-	 *
-	 * @return string[]
-	 */
-	private function getTermsLanguagesCodes( OutputPage $out ) {
-		// All user languages that are valid term languages
-		return array_intersect(
-			$this->userLanguageLookup->getAllUserLanguages( $out->getUser() ),
-			$this->termsLanguages->getLanguages()
-		);
-	}
-
 	private function getPlaceholderExpander(
 		EntityDocument $entity,
 		OutputPage $out
@@ -266,12 +268,13 @@ class OutputPageBeforeHTMLHookHandler {
 		OutputPage $out
 	) {
 		$language = $out->getLanguage();
+		$user = $out->getUser();
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
-			$out->getUser(),
+			$user,
 			$entity,
-			array_unique( array_merge( [ $language->getCode() ], $this->getTermsLanguagesCodes( $out ) ) ),
+			$this->userPreferredTermsLanguages->getLanguages( $language->getCode(), $user ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $language ),
