@@ -19,7 +19,7 @@ export function mockMwConfig( values: {
 				case 'wbRepo':
 					return values.wbRepo || {
 						url: 'http://localhost',
-						scriptPath: '/w/',
+						scriptPath: '/w',
 						articlePath: '/wiki/$1',
 					};
 				default:
