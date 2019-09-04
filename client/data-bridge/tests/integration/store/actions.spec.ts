@@ -1,6 +1,6 @@
 import { Store } from 'vuex';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import Application from '@/store/Application';
+import Application, { InitializedApplicationState } from '@/store/Application';
 import EditFlow from '@/definitions/EditFlow';
 import EntityRevision from '@/datamodel/EntityRevision';
 import AppInformation from '@/definitions/AppInformation';
@@ -242,9 +242,10 @@ describe( 'store/actions', () => {
 
 			expect( resolver ).toBeCalledWith( testSet );
 
-			expect( ( store.state as any ).entity.statements ).toStrictEqual( { Q42: response.entity.statements } );
-			expect( ( store.state as any ).entity.id ).toBe( response.entity.id );
-			expect( ( store.state as any ).entity.baseRevision ).toBe( response.revisionId );
+			const state = store.state as InitializedApplicationState;
+			expect( state.entity.statements ).toStrictEqual( { Q42: response.entity.statements } );
+			expect( state.entity.id ).toBe( response.entity.id );
+			expect( state.entity.baseRevision ).toBe( response.revisionId );
 		} );
 	} );
 
@@ -265,9 +266,8 @@ describe( 'store/actions', () => {
 					BRIDGE_SET_TARGET_VALUE,
 					dataValue,
 				).then( () => {
-					expect(
-						( store.state as any ).entity.statements.Q42.P31[ 0 ].mainsnak.datavalue,
-					).toBe( dataValue );
+					const state = ( store.state as InitializedApplicationState );
+					expect( state.entity.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( dataValue );
 				} );
 			} );
 		} );
@@ -337,10 +337,11 @@ describe( 'store/actions', () => {
 
 				expect( resolver ).toBeCalledWith( testSet );
 
-				expect( ( store.state as any ).entity.statements.Q42 ).toBe( response.entity.statements );
-				expect( ( store.state as any ).entity.id ).toBe( response.entity.id );
-				expect( ( store.state as any ).entity.baseRevision ).toBe( response.revisionId );
-				expect( store.state.applicationStatus ).toBe( ApplicationStatus.READY );
+				const state = ( store.state as InitializedApplicationState );
+				expect( state.entity.statements.Q42 ).toBe( response.entity.statements );
+				expect( state.entity.id ).toBe( response.entity.id );
+				expect( state.entity.baseRevision ).toBe( response.revisionId );
+				expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
 			} );
 		} );
 	} );
@@ -456,9 +457,8 @@ describe( 'store/actions', () => {
 							value,
 						},
 					).then( () => {
-						expect(
-							( store.state as any ).entity.statements.Q42.P31[ 0 ].mainsnak.datavalue,
-						).toBe( value );
+						const state = store.state as InitializedApplicationState;
+						expect( state.entity.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( value );
 					} );
 				} );
 
@@ -479,9 +479,8 @@ describe( 'store/actions', () => {
 							value,
 						},
 					).then( () => {
-						expect(
-							( store.state as any ).entity.statements.Q42.P60[ 0 ].mainsnak.snaktype,
-						).toBe( 'value' );
+						const state = store.state as InitializedApplicationState;
+						expect( state.entity.statements.Q42.P60[ 0 ].mainsnak.snaktype ).toBe( 'value' );
 					} );
 				} );
 			} );
