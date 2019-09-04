@@ -6,9 +6,11 @@ import {
 } from '@/store/namespaces';
 import {
 	ENTITY_INIT,
+	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import {
 	BRIDGE_INIT,
+	BRIDGE_SAVE,
 	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import {
@@ -386,6 +388,64 @@ describe( 'root/actions', () => {
 					),
 					payload,
 				);
+			} );
+		} );
+	} );
+
+	describe( BRIDGE_SAVE, () => {
+		it( 'rejects if the store is not ready and switch into error state', async () => {
+			const context = newMockStore( {
+				state: {
+					applicationStatus: ApplicationStatus.INITIALIZING,
+				},
+			} );
+
+			await expect(
+				( actions as any )[ BRIDGE_SAVE ]( context ),
+			).rejects.toBeDefined();
+			expect( context.dispatch ).toBeCalledTimes( 0 );
+			expect( context.commit ).toHaveBeenCalledWith(
+				APPLICATION_STATUS_SET,
+				ApplicationStatus.ERROR,
+			);
+		} );
+
+		it( 'propagtes errors and switch into error state', async () => {
+			const sampleError = new Error( 'sampleError' );
+			const context = newMockStore( {
+				state: {
+					applicationStatus: ApplicationStatus.READY,
+				},
+				dispatch: jest.fn( () => {
+					return new Promise( () => {
+						throw sampleError;
+					} );
+				} ),
+			} );
+
+			await expect(
+				( actions as any )[ BRIDGE_SAVE ]( context ),
+			).rejects.toBe( sampleError );
+
+			expect( context.commit ).toHaveBeenCalledWith(
+				APPLICATION_STATUS_SET,
+				ApplicationStatus.ERROR,
+			);
+		} );
+
+		it( `dispatches ${ENTITY_SAVE}`, () => {
+			const context = newMockStore( {
+				state: {
+					applicationStatus: ApplicationStatus.READY,
+				},
+				dispatch: jest.fn( () => {
+					return Promise.resolve();
+				} ),
+			} );
+
+			return ( actions as any )[ BRIDGE_SAVE ]( context ).then( () => {
+				expect( context.dispatch ).toBeCalledWith( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
+				expect( context.dispatch ).toBeCalledTimes( 1 );
 			} );
 		} );
 	} );

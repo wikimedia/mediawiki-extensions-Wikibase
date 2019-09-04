@@ -5480,6 +5480,7 @@ if (typeof window !== 'undefined') {
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var BRIDGE_INIT = 'initBridge';
+var BRIDGE_SAVE = 'saveBridge';
 var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 // EXTERNAL MODULE: external {"commonjs":"vue2","commonjs2":"vue2","amd":"vue2","root":"vue2"}
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
@@ -6708,6 +6709,19 @@ var actions = (_actions = {}, _defineProperty(_actions, BRIDGE_INIT, function (c
   return context.dispatch(namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
     path: path,
     value: dataValue
+  }).catch(function (error) {
+    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+
+    throw error;
+  });
+}), _defineProperty(_actions, BRIDGE_SAVE, function (context) {
+  if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
+    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+    return Promise.reject(null);
+  }
+
+  return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_SAVE)).then(function () {
+    /* TODO close on success */
   }).catch(function (error) {
     context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
