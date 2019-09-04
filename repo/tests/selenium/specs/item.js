@@ -59,7 +59,7 @@ describe( 'item', function () {
 	} );
 
 	// skip this until further investigation of flakiness T227266
-	it.skip( 'old revisions do not have an edit link', function () {
+	it( 'old revisions do not have an edit link', function () {
 		const itemId = browser.call( () => WikibaseApi.createItem( Util.getTestString( 'T95406-' ) ) );
 
 		EntityPage.open( itemId );
