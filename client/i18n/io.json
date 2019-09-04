@@ -34,6 +34,8 @@
 	"wikibase-rc-show-wikidata-pref": "Montrez la redakti che {{WBREPONAME}} en la recenta chanji",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Redakto en {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "Redakturi che {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Redakturi qui originis de {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Atencez ke povas bezonar kelka minuti, til ke omna modifiki divenos videbla en omna Wiki.",
 	"unconnectedpages": "Pagino sen konekto ad artikli",
 	"pageswithbadges": "Pagini kun insigni",
