@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 coverage/
+storybook-static/
 dist/*
 !dist/data-bridge.init.js
 !dist/data-bridge.common.js
