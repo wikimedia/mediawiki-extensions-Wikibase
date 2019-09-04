@@ -12,11 +12,20 @@ jest.mock( '@/data-access/SpecialPageEntityRepository', () => {
 
 describe( 'createServices', () => {
 	it( 'pulls wbRepo from mw.config, creates EntityRepository with it', () => {
-		const get = jest.fn().mockImplementation( () => ( {
-			url: 'http://localhost',
-			scriptPath: '/w',
-			articlePath: '/wiki/$1',
-		} ) );
+		const get = jest.fn().mockImplementation( ( key ) => {
+			switch ( key ) {
+				case 'wbRepo':
+					return {
+						url: 'http://localhost',
+						scriptPath: '/w',
+						articlePath: '/wiki/$1',
+					};
+				case 'wgUserName':
+					return 'Test User';
+				default:
+					throw new Error( `Unexpected config key ${key}!` );
+			}
+		} );
 		const $ = new ( jest.fn() )();
 		const mwWindow = {
 			mw: {
