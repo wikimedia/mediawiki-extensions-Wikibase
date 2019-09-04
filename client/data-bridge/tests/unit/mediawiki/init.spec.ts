@@ -35,7 +35,11 @@ describe( 'init', () => {
 
 		return init().then( () => {
 			expect( using ).toBeCalledTimes( 1 );
-			expect( using ).toBeCalledWith( [ 'wikibase.client.data-bridge.app', 'mw.config.values.wbRepo' ] );
+			expect( using ).toBeCalledWith( [
+				'wikibase.client.data-bridge.app',
+				'mw.config.values.wbRepo',
+				'mediawiki.ForeignApi',
+			] );
 			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
 			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );
 			expect( link.addEventListener.mock.calls[ 0 ][ 0 ] ).toBe( 'click' );
