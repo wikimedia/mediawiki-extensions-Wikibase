@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 
 /**
  * An implementation of EntityLookup based on an EntityRevisionLookup.
@@ -64,10 +65,15 @@ class RevisionBasedEntityLookup implements EntityLookup {
 		};
 
 		try {
-			$latestRevisionIdResult = $this->lookup->getLatestRevisionId( $entityId );
-			return $latestRevisionIdResult->onRedirect( $returnFalse )
-				->onNonexistentEntity( $returnFalse )
+			$revisionIdResult = $this->lookup->getLatestRevisionId( $entityId );
+
+			return $revisionIdResult
 				->onConcreteRevision( $returnTrue )
+				->onNonexistentEntity( $returnFalse )
+				->onRedirect( function ( $revisionId, EntityId $redirectsTo ) use ( $entityId ) {
+
+					throw new UnresolvedEntityRedirectException( $entityId, $redirectsTo );
+				} )
 				->map();
 		} catch ( EntityLookupException $ex ) {
 			throw $ex;

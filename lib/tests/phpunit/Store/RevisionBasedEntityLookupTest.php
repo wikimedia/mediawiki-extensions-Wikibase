@@ -7,9 +7,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -88,7 +88,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenEntityLookupExceptionIsThrown_getEntityPassesItAlong() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
+		$this->setExpectedException( UnresolvedEntityRedirectException::class );
 		$entityLookup->getEntity( new ItemId( 'Q1' ) );
 	}
 
@@ -100,14 +100,14 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
-			->will( $this->throwException( new RevisionedUnresolvedRedirectException(
+			->will( $this->throwException( new UnresolvedEntityRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
 			) ) );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getLatestRevisionId' )
-			->will( $this->throwException( new RevisionedUnresolvedRedirectException(
+			->will( $this->throwException( new UnresolvedEntityRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q2' )
 			) ) );
@@ -118,7 +118,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenEntityLookupExceptionIsThrown_hasEntityPassesItAlong() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
+		$this->setExpectedException( UnresolvedEntityRedirectException::class );
 		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
 	}
 
