@@ -1,12 +1,12 @@
 import createEntityModule from '@/store/entity';
 import EntityState from '@/store/entity/EntityState';
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 
 describe( 'store/entity/index', () => {
 	it( 'creates the entity module', () => {
 		const module = createEntityModule(
-			{} as EntityRepository,
+			{} as ReadingEntityRepository,
 			{} as WritingEntityRepository,
 		);
 		expect( module ).toBeDefined();

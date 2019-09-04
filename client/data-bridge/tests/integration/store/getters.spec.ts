@@ -99,7 +99,7 @@ describe( 'store/getters', () => {
 			},
 		};
 
-		services.setEntityRepository( {
+		services.setReadingEntityRepository( {
 			async getEntity( _id: string, _revision?: number ): Promise<EntityRevision> {
 				return testSet;
 			},

@@ -1,6 +1,6 @@
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 import ServiceRepositories from '@/services/ServiceRepositories';
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
+import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 
 export default function createServices( mwWindow: MwWindow ): ServiceRepositories {
@@ -12,7 +12,7 @@ export default function createServices( mwWindow: MwWindow ): ServiceRepositorie
 			'Special:EntityData',
 		);
 
-	services.setEntityRepository( new SpecialPageEntityRepository(
+	services.setReadingEntityRepository( new SpecialPageReadingEntityRepository(
 		mwWindow.$,
 		specialEntityDataUrl,
 	) );

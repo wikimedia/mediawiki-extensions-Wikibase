@@ -1,19 +1,19 @@
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 
 export default class ServiceRepositories {
-	private entityRepository?: EntityRepository;
+	private readingEntityRepository?: ReadingEntityRepository;
 	private writingEntityRepository?: WritingEntityRepository;
 
-	public setEntityRepository( lookup: EntityRepository ): void {
-		this.entityRepository = lookup;
+	public setReadingEntityRepository( lookup: ReadingEntityRepository ): void {
+		this.readingEntityRepository = lookup;
 	}
 
-	public getEntityRepository(): EntityRepository {
-		if ( this.entityRepository ) {
-			return this.entityRepository;
+	public getReadingEntityRepository(): ReadingEntityRepository {
+		if ( this.readingEntityRepository ) {
+			return this.readingEntityRepository;
 		} else {
-			throw new Error( 'EntityRepository is undefined' );
+			throw new Error( 'ReadingEntityRepository is undefined' );
 		}
 	}
 

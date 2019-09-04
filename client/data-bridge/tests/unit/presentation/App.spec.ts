@@ -37,7 +37,7 @@ describe( 'App.vue', () => {
 		const services = new ServiceRepositories();
 		( Entities.entities.Q42 as any ).statements = Entities.entities.Q42.claims;
 
-		services.setEntityRepository( {
+		services.setReadingEntityRepository( {
 			getEntity: () => {
 				return Promise.resolve( {
 					revisionId: 984899757,

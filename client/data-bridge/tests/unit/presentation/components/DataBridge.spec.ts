@@ -20,7 +20,7 @@ localVue.use( Vuex );
 describe( 'DataBridge', () => {
 	beforeEach( () => {
 		store = createStore( {
-			getEntityRepository() {
+			getReadingEntityRepository() {
 				return {};
 			},
 			getWritingEntityRepository() {

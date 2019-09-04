@@ -3,7 +3,7 @@ import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
+import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import {
 	mockForeignApiConstructor,
 	mockMwEnv,
@@ -26,8 +26,8 @@ describe( 'init', () => {
 			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' );
 		mockMwEnv( using, undefined, undefined, ForeignApiConstructor );
 		const expectedServices = new ServiceRepositories();
-		expectedServices.setEntityRepository(
-			new SpecialPageEntityRepository(
+		expectedServices.setReadingEntityRepository(
+			new SpecialPageReadingEntityRepository(
 				( window as MwWindow ).$,
 				'http://localhost/wiki/Special:EntityData',
 			),

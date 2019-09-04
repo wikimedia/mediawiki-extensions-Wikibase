@@ -91,7 +91,7 @@ describe( 'store/actions', () => {
 			},
 		};
 
-		services.setEntityRepository( {
+		services.setReadingEntityRepository( {
 			async getEntity( _id: string, _revision?: number ): Promise<EntityRevision> {
 				return testSet;
 			},

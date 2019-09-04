@@ -6806,7 +6806,7 @@ var STATEMENTS_INIT = 'initStatements';
 
 
 
-function actions_actions(entityRepository, writingEntityRepository) {
+function actions_actions(readingEntityRepository, writingEntityRepository) {
   var _ref;
 
   function updateEntity(context, entity) {
@@ -6819,7 +6819,7 @@ function actions_actions(entityRepository, writingEntityRepository) {
   }
 
   return _ref = {}, _defineProperty(_ref, ENTITY_INIT, function (context, payload) {
-    return entityRepository.getEntity(payload.entity, payload.revision).then(function (entity) {
+    return readingEntityRepository.getEntity(payload.entity, payload.revision).then(function (entity) {
       return updateEntity(context, entity);
     });
   }), _defineProperty(_ref, ENTITY_SAVE, function (context) {
@@ -7084,7 +7084,7 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
 
 
 
-/* harmony default export */ var store_entity = (function (entityRepository, writingEntityRepository) {
+/* harmony default export */ var store_entity = (function (readingEntityRepository, writingEntityRepository) {
   var state = {
     id: '',
     baseRevision: 0
@@ -7094,7 +7094,7 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
     state: state,
     getters: entity_getters_getters,
     mutations: entity_mutations_mutations,
-    actions: actions_actions(entityRepository, writingEntityRepository),
+    actions: actions_actions(readingEntityRepository, writingEntityRepository),
     modules: _defineProperty({}, NS_STATEMENTS, statements())
   };
 });
@@ -7121,7 +7121,7 @@ function createStore(services) {
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',
-    modules: _defineProperty({}, NS_ENTITY, store_entity(services.getEntityRepository(), services.getWritingEntityRepository()))
+    modules: _defineProperty({}, NS_ENTITY, store_entity(services.getReadingEntityRepository(), services.getWritingEntityRepository()))
   };
   return new vuex_esm["a" /* Store */](storeBundle);
 }
