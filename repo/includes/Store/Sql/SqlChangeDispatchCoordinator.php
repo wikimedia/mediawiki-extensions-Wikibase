@@ -241,21 +241,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @return IDatabase A connection to the repo's master database
 	 */
 	private function getRepoMaster() {
-		return $this->getRepoLB()->getConnection( DB_MASTER, [], $this->repoDB );
+		return $this->getRepoLB()->getConnectionRef( DB_MASTER, [], $this->repoDB );
 	}
 
 	/**
 	 * @return IDatabase A connection to the repo's replica database
 	 */
 	private function getRepoReplica() {
-		return $this->getRepoLB()->getConnection( DB_REPLICA, [], $this->repoDB );
-	}
-
-	/**
-	 * @param IDatabase $db The repo database connection to release for re-use.
-	 */
-	private function releaseRepoDb( IDatabase $db ) {
-		$this->getRepoLB()->reuseConnection( $db );
+		return $this->getRepoLB()->getConnectionRef( DB_REPLICA, [], $this->repoDB );
 	}
 
 	/**
@@ -377,7 +370,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			]
 		);
 
-		$this->releaseRepoDb( $dbr );
 		return $candidates;
 	}
 
@@ -403,7 +395,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$untracked = array_diff_key( $clientWikiDBs, array_flip( $trackedSiteIds ) );
 
 		if ( empty( $untracked ) ) {
-			$this->releaseRepoDb( $dbr );
 			return;
 		}
 
@@ -433,9 +424,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				]
 			);
 		}
-
-		$this->releaseRepoDb( $dbr );
-		$this->releaseRepoDb( $dbw );
 	}
 
 	/**
@@ -467,8 +455,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				__METHOD__
 			);
 
-			$this->releaseRepoDb( $dbr );
-
 			if ( !$state ) {
 				$this->warn( "ERROR: $siteID is not in the dispatch table." );
 				return false;
@@ -493,7 +479,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				return false;
 			}
 		} catch ( Exception $ex ) {
-			$this->releaseRepoDb( $dbr );
 			throw $ex;
 		}
 
@@ -543,7 +528,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			);
 		} catch ( Exception $ex ) {
 			$db->rollback( __METHOD__ );
-			$this->releaseRepoDb( $db );
 			throw $ex;
 		}
 		$db->commit( __METHOD__ );
@@ -551,8 +535,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		// Wait for all database replicas to be updated, but only for repo db. The
 		// "domain" argument is documented at ILBFactory::waitForReplication.
 		$this->LBFactory->waitForReplication( [ 'domain' => $this->repoDB ] );
-
-		$this->releaseRepoDb( $db );
 
 		$this->trace( "Released $wikiDB for site $siteID at {$state['chd_seen']}." );
 	}
@@ -586,8 +568,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		} else {
 			$success = $dbw->lock( $lock, __METHOD__ );
 		}
-
-		$this->releaseRepoDb( $dbw );
 
 		return $success;
 	}
