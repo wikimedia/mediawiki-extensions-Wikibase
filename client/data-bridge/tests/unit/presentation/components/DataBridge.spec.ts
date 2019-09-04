@@ -23,6 +23,9 @@ describe( 'DataBridge', () => {
 			getEntityRepository() {
 				return {};
 			},
+			getWritingEntityRepository() {
+				return {};
+			},
 		} as ServiceRepositories );
 	} );
 

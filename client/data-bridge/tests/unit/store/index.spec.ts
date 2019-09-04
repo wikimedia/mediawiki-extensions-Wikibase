@@ -7,6 +7,9 @@ describe( 'store/index', () => {
 			getEntityRepository() {
 				return {};
 			},
+			getWritingEntityRepository() {
+				return {};
+			},
 		} as ServiceRepositories );
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();

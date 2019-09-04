@@ -1,3 +1,4 @@
+import EntityRevision from '@/datamodel/EntityRevision';
 import Vuex, { Store } from 'vuex';
 import Entities from '@/mock-data/data/Q42.data.json';
 import {
@@ -42,6 +43,14 @@ describe( 'App.vue', () => {
 					revisionId: 984899757,
 					entity: Entities.entities.Q42,
 				} as any );
+			},
+		} );
+		services.setWritingEntityRepository( {
+			saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
+				return Promise.resolve( new EntityRevision(
+					entity.entity,
+					entity.revisionId + 1,
+				) );
 			},
 		} );
 

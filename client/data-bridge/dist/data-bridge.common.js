@@ -6791,7 +6791,7 @@ var STATEMENTS_INIT = 'initStatements';
 
 
 
-function actions_actions(entityRepository) {
+function actions_actions(entityRepository, _writingEntityRepository) {
   return _defineProperty({}, ENTITY_INIT, function (context, payload) {
     return entityRepository.getEntity(payload.entity, payload.revision).then(function (entity) {
       context.commit(ENTITY_REVISION_UPDATE, entity.revisionId);
@@ -7054,7 +7054,7 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
 
 
 
-/* harmony default export */ var store_entity = (function (entityRepository) {
+/* harmony default export */ var store_entity = (function (entityRepository, writingEntityRepository) {
   var state = {
     id: '',
     baseRevision: 0
@@ -7064,7 +7064,7 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
     state: state,
     getters: entity_getters_getters,
     mutations: entity_mutations_mutations,
-    actions: actions_actions(entityRepository),
+    actions: actions_actions(entityRepository, writingEntityRepository),
     modules: _defineProperty({}, NS_STATEMENTS, statements())
   };
 });
@@ -7091,7 +7091,7 @@ function createStore(services) {
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',
-    modules: _defineProperty({}, NS_ENTITY, store_entity(services.getEntityRepository()))
+    modules: _defineProperty({}, NS_ENTITY, store_entity(services.getEntityRepository(), services.getWritingEntityRepository()))
   };
   return new vuex_esm["a" /* Store */](storeBundle);
 }

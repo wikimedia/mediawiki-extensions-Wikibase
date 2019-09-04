@@ -2,6 +2,7 @@ import createServices from '@/mediawiki/createServices';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
+import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 
 const mockEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageEntityRepository', () => {
@@ -10,8 +11,14 @@ jest.mock( '@/data-access/SpecialPageEntityRepository', () => {
 	} );
 } );
 
+const mockWritingEntityRepository = {};
+jest.mock( '@/data-access/ForeignApiWritingRepository', () => {
+	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
+} );
+
 describe( 'createServices', () => {
-	it( 'pulls wbRepo from mw.config, creates EntityRepository with it', () => {
+	it( 'pulls wbRepo and wgUserName from mw.config, ' +
+		'creates EntityRepository and WritingEntityRepository with it', () => {
 		const get = jest.fn().mockImplementation( ( key ) => {
 			switch ( key ) {
 				case 'wbRepo':
@@ -32,6 +39,7 @@ describe( 'createServices', () => {
 				config: {
 					get,
 				},
+				ForeignApi: jest.fn(),
 			},
 			$,
 		} as unknown as MwWindow;
@@ -45,5 +53,12 @@ describe( 'createServices', () => {
 		expect( ( SpecialPageEntityRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBe( 'http://localhost/wiki/Special:EntityData' );
 		expect( services.getEntityRepository() ).toBe( mockEntityRepository );
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			.toBe( 'Test User' );
+		expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
 	} );
 } );

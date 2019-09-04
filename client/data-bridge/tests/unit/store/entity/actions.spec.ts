@@ -1,3 +1,5 @@
+import EntityRevision from '@/datamodel/EntityRevision';
+import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import actions from '@/store/entity/actions';
 import {
 	ENTITY_INIT,
@@ -19,6 +21,14 @@ import newMockableEntityRevision from '../newMockableEntityRevision';
 describe( 'entity/actions', () => {
 	describe( ENTITY_INIT, () => {
 
+		const neverWritingEntityRepository: WritingEntityRepository = {
+			saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+				// note: this deliberately throws an error
+				// instead of returning a rejected promise
+				throw new Error( 'should not use WritingEntityRepository' );
+			},
+		};
+
 		it( `commits to ${ENTITY_UPDATE} on successful Entity lookup`, () => {
 			const id = 'Q42';
 			const revisionId = 4711;
@@ -36,7 +46,7 @@ describe( 'entity/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			return ( actions( entityRepository )[ ENTITY_INIT ] as Function )( context, {
+			return ( actions( entityRepository, neverWritingEntityRepository )[ ENTITY_INIT ] as Function )( context, {
 				entity: id,
 				revision: revisionId,
 			} ).then( () => {
@@ -58,7 +68,7 @@ describe( 'entity/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			return ( actions( entityRepository )[ ENTITY_INIT ] as Function )( context, {
+			return ( actions( entityRepository, neverWritingEntityRepository )[ ENTITY_INIT ] as Function )( context, {
 				entity: 'Q123',
 				revision: revisionId,
 			} ).then( () => {
@@ -78,7 +88,8 @@ describe( 'entity/actions', () => {
 					getEntity: () => Promise.resolve( entity ),
 				};
 
-				return ( actions( entityRepository )[ ENTITY_INIT ] as Function )( context, {
+				const action = actions( entityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+				return ( action as Function )( context, {
 					entity: id,
 					revision: revisionId,
 				} ).then( () => {
@@ -108,7 +119,7 @@ describe( 'entity/actions', () => {
 					getEntity: () => Promise.resolve( entity ),
 				};
 
-				return ( actions( entityRepository ) as any )[ ENTITY_INIT ](
+				return ( actions( entityRepository, neverWritingEntityRepository ) as any )[ ENTITY_INIT ](
 					context,
 					{
 						entity: id,

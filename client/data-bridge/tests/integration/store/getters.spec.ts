@@ -105,6 +105,12 @@ describe( 'store/getters', () => {
 			},
 		} );
 
+		services.setWritingEntityRepository( {
+			async saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+				throw new Error( 'These tests should not write any entities' );
+			},
+		} );
+
 		info = {
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',

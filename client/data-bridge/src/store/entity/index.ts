@@ -1,3 +1,4 @@
+import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import { Module } from 'vuex';
 import Application from '@/store/Application';
 import EntityState from '@/store/entity/EntityState';
@@ -10,7 +11,10 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 
-export default function ( entityRepository: EntityRepository ): Module<EntityState, Application> {
+export default function (
+	entityRepository: EntityRepository,
+	writingEntityRepository: WritingEntityRepository,
+): Module<EntityState, Application> {
 	const state: EntityState = {
 		id: '',
 		baseRevision: 0,
@@ -21,7 +25,7 @@ export default function ( entityRepository: EntityRepository ): Module<EntitySta
 		state,
 		getters,
 		mutations,
-		actions: actions( entityRepository ),
+		actions: actions( entityRepository, writingEntityRepository ),
 		modules: {
 			[ NS_STATEMENTS ]: createStatements(),
 		},

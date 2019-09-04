@@ -1,3 +1,4 @@
+import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import {
 	ActionContext,
 	ActionTree,
@@ -20,7 +21,11 @@ import {
 } from '@/store/entity/statements/actionTypes';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 
-export default function actions( entityRepository: EntityRepository ): ActionTree<EntityState, Application> {
+export default function actions(
+	entityRepository: EntityRepository,
+	_writingEntityRepository: WritingEntityRepository,
+): ActionTree<EntityState, Application> {
+
 	return {
 		[ ENTITY_INIT ](
 			context: ActionContext<EntityState, Application>,
