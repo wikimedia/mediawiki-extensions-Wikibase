@@ -10,6 +10,7 @@ import {
 	BRIDGE_INIT,
 	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
+import { ENTITY_SAVE } from '@/store/entity/actionTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import {
 	NS_ENTITY,
@@ -170,6 +171,68 @@ describe( 'store/actions', () => {
 					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
 				} );
 			} );
+		} );
+	} );
+
+	describe( ENTITY_SAVE, () => {
+		it( 'rejects if the request fails', async () => {
+			const rejectError = new Error( 'no' );
+			const resolver = jest.fn( () => Promise.reject( rejectError ) );
+
+			services.setWritingEntityRepository( {
+				saveEntity: resolver as any,
+			} );
+
+			store = createStore( services );
+			await store.dispatch( BRIDGE_INIT, info );
+			await expect(
+				store.dispatch(
+					namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ),
+				),
+			).rejects.toBe( rejectError );
+
+			expect( resolver ).toBeCalledWith( testSet );
+		} );
+
+		it( 'stores the responded entity, if the request succeeded', async () => {
+			const response = {
+				revisionId: 1,
+				entity: {
+					id: 'Q42',
+					statements: {
+						P31: [ {
+							type: 'statement',
+							id: 'opaque statement ID',
+							rank: 'normal',
+							mainsnak: {
+								snaktype: 'value',
+								property: 'P31',
+								datatype: 'string',
+								datavalue: {
+									type: 'string',
+									value: 'a string value',
+								},
+							},
+						} ],
+					},
+				},
+			};
+
+			const resolver = jest.fn( () => Promise.resolve( response ) );
+
+			services.setWritingEntityRepository( {
+				saveEntity: resolver as any,
+			} );
+
+			store = createStore( services );
+			await store.dispatch( BRIDGE_INIT, info );
+			await store.dispatch( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
+
+			expect( resolver ).toBeCalledWith( testSet );
+
+			expect( ( store.state as any ).entity.statements ).toStrictEqual( { Q42: response.entity.statements } );
+			expect( ( store.state as any ).entity.id ).toBe( response.entity.id );
+			expect( ( store.state as any ).entity.baseRevision ).toBe( response.revisionId );
 		} );
 	} );
 
