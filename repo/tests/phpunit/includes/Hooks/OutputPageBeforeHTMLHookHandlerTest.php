@@ -2,12 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use DerivativeContext;
+use Language;
+use MediaWikiIntegrationTestCase;
 use OutputPage;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
+use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
@@ -31,7 +32,7 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
+class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	use PHPUnit4And6Compat;
 
 	private $editability;
@@ -88,7 +89,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return OutputPage
 	 */
 	private function newOutputPage() {
-		$outputPage = new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+		$mockContext = $this->createMock( RequestContext::class );
+		$mockContext->method( 'getLanguage' )->willReturn( new Language( 'qqx' ) );
+		$mockContext->method( 'getUser' )->willReturn( new User() );
+		$outputPage = new OutputPage( $mockContext );
 		$outputPage->setTitle( new Title() );
 		$outputPage->setArticleFlag( true );
 
