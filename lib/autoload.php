@@ -72,6 +72,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\DispatchingEntityRevisionLookup' => __DIR__ . '/includes/Store/DispatchingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\DispatchingPropertyInfoLookup' => __DIR__ . '/includes/Store/DispatchingPropertyInfoLookup.php',
 	'Wikibase\\Lib\\Store\\DispatchingTermBuffer' => __DIR__ . '/includes/Store/DispatchingTermBuffer.php',
+	'Wikibase\\Lib\\Store\\DivergingEntityIdException' => __DIR__ . '/includes/Store/DivergingEntityIdException.php',
 	'Wikibase\\Lib\\Store\\Elastic\\ElasticTermLookup' => __DIR__ . '/includes/Store/Elastic/ElasticTermLookup.php',
 	'Wikibase\\Lib\\Store\\Elastic\\TermLookupSearcher' => __DIR__ . '/includes/Store/Elastic/TermLookupSearcher.php',
 	'Wikibase\\Lib\\Store\\EntityByLinkedTitleLookup' => __DIR__ . '/includes/Store/EntityByLinkedTitleLookup.php',

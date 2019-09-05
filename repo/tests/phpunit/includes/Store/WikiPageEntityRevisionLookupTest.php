@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\MutableRevisionRecord;
@@ -13,10 +14,13 @@ use Title;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\DivergingEntityIdException;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -320,6 +324,90 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$lookup->getEntityRevision( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER );
 	}
 
+	public function testGetEntityRevision_ThrowsWhenFoundEntityRevisionContainsDivergingEntityId() {
+		// For all we know this only happened IRL with MediaInfo entities.
+		// The following would be MediaInfoId consequently.
+		$newEntityId = $this->getMockEntityId( 'M1235' );
+		$oldEntityId = $this->getMockEntityId( 'M1234' );
+		$oldEntity = $this->getMockBuilder( EntityDocument::class )
+			->getMock();
+		$oldEntity
+			->method( 'getId' )
+			->willReturn( $oldEntityId );
+		$revId = 4711;
+		$lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+
+		$slotRecord = $this->getMockBuilder( SlotRecord::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$revision = $this->getMockBuilder( RevisionRecord::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$revision
+			->method( 'hasSlot' )
+			->willReturn( true );
+		$revision
+			->method( 'audienceCan' )
+			->willReturn( true );
+		$revision
+			->method( 'getSlot' )
+			->willReturn( $slotRecord );
+		$revision
+			->method( 'getId' )
+			->willReturn( $revId );
+		$revision
+			->method( 'getTimestamp' )
+			->willReturn( 20160114180301 );
+
+		$revisionStore = $this->getMockBuilder( RevisionStore::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$revisionStore->expects( $this->once() )
+			->method( 'getRevisionById' )
+			->with( $revId )
+			->willReturn( $revision );
+
+		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor
+			->loadRevisionInformation( [ $newEntityId ], $lookupMode )
+			->willReturn( [ $newEntityId->getSerialization() => (object)[ 'rev_id' => $revId ] ] );
+		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
+
+		$codec = $this->getMockBuilder( EntityContentDataCodec::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$codec->method( 'decodeEntity' )
+			->willReturn( $oldEntity );
+
+		$blobStore = $this->getMock( BlobStore::class );
+		$blobStore->expects( $this->once() )
+			->method( 'getBlob' )
+			->willReturn( true ); // codec mocks the entity
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			$codec,
+			$mockMetaDataAccessor,
+			$revisionStore,
+			$blobStore,
+			false
+		);
+
+		try {
+			$lookup->getEntityRevision( $newEntityId, 0, $lookupMode );
+			$this->fail( 'Should throw specific exception' );
+		} catch ( DivergingEntityIdException $exception ) {
+			$this->assertInstanceOf( DivergingEntityIdException::class, $exception );
+			$this->assertSame(
+				'Revision 4711 belongs to M1234 instead of expected M1235',
+				$exception->getMessage()
+			);
+			$this->assertSame( $oldEntity, $exception->getEntityRevision()->getEntity() );
+		}
+	}
+
 	public function testGetLatestRevisionId_ReturnsNullForNonExistingEntityRevision() {
 		$entityId = new ItemId( 'Q6654' );
 
@@ -358,6 +446,20 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 					$this->fail( 'Result should trigger onNonexistentEntity' );
 				}
 			)->map();
+	}
+
+	private function getMockEntityId( $idString ) {
+		$entityId = $this->getMockBuilder( EntityId::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$entityId->method( '__toString' )->willReturn( $idString );
+		$entityId->method( 'getSerialization' )->willReturn( $idString );
+		$entityId->method( 'equals' )->will(
+			$this->returnCallback( function ( EntityId $otherEntityId ) use ( $entityId ) {
+				return $otherEntityId->getSerialization() === $entityId->getSerialization();
+			} )
+		);
+		return $entityId;
 	}
 
 }
