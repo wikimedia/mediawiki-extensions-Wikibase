@@ -1,13 +1,13 @@
-import { ActionContext, Commit, Dispatch, GetterTree } from 'vuex';
+import { ActionContext, Commit, Dispatch } from 'vuex';
 
 export default function newMockStore(
 	{ commit, dispatch, state, getters, rootState, rootGetters }: {
 		commit?: Commit;
 		dispatch?: Dispatch;
 		state?: any;
-		getters?: GetterTree<any, any>;
+		getters?: object;
 		rootState?: any;
-		rootGetters?: GetterTree<any, any>;
+		rootGetters?: object;
 	},
 ): ActionContext<any, any> {
 	return {
