@@ -1,7 +1,7 @@
 import EntityRevision from '@/datamodel/EntityRevision';
 
-interface EntityRepository {
+interface ReadingEntityRepository {
 	getEntity( id: string, revision?: number ): Promise<EntityRevision>;
 }
 
-export default EntityRepository;
+export default ReadingEntityRepository;

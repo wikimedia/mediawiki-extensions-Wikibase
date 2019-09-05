@@ -1,5 +1,5 @@
 import EntityRevision from '@/datamodel/EntityRevision';
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import actions from '@/store/entity/actions';
 import {
@@ -28,9 +28,9 @@ import newMockableEntityRevision from '../newMockableEntityRevision';
 describe( 'entity/actions', () => {
 	describe( ENTITY_INIT, () => {
 
-		const neverReadingEntityRepository: EntityRepository = {
+		const neverReadingEntityRepository: ReadingEntityRepository = {
 			getEntity( _id: string, _revision: number ): Promise<EntityRevision> {
-				throw new Error( 'should not use EntityRepository' );
+				throw new Error( 'should not use ReadingEntityRepository' );
 			},
 		};
 
@@ -55,7 +55,7 @@ describe( 'entity/actions', () => {
 			const revisionId = 4711;
 			const entity = newMockableEntityRevision( { id, revisionId } );
 
-			const entityRepository = {
+			const readingEntityRepository = {
 				getEntity: ( thisEntityId: string, thisRevision: number ) => {
 					expect( thisEntityId ).toBe( id );
 					expect( thisRevision ).toBe( revisionId );
@@ -67,7 +67,8 @@ describe( 'entity/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			return ( actions( entityRepository, neverWritingEntityRepository )[ ENTITY_INIT ] as Function )( context, {
+			const action = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+			return ( action as Function )( context, {
 				entity: id,
 				revision: revisionId,
 			} ).then( () => {
@@ -81,7 +82,7 @@ describe( 'entity/actions', () => {
 		it( `commits to ${ENTITY_REVISION_UPDATE} on successful entity lookup`, () => {
 			const revisionId = 4711;
 			const entity = newMockableEntityRevision( { revisionId } );
-			const entityRepository = {
+			const readingEntityRepository = {
 				getEntity: () => Promise.resolve( entity ),
 			};
 
@@ -89,7 +90,8 @@ describe( 'entity/actions', () => {
 				commit: jest.fn(),
 			} );
 
-			return ( actions( entityRepository, neverWritingEntityRepository )[ ENTITY_INIT ] as Function )( context, {
+			const action = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+			return ( action as Function )( context, {
 				entity: 'Q123',
 				revision: revisionId,
 			} ).then( () => {
@@ -105,11 +107,11 @@ describe( 'entity/actions', () => {
 				const dispatch = jest.fn();
 				const context = newMockStore( { dispatch } );
 				const entity = newMockableEntityRevision( { id, revisionId, statements } );
-				const entityRepository = {
+				const readingEntityRepository = {
 					getEntity: () => Promise.resolve( entity ),
 				};
 
-				const action = actions( entityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+				const action = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
 				return ( action as Function )( context, {
 					entity: id,
 					revision: revisionId,
@@ -136,17 +138,15 @@ describe( 'entity/actions', () => {
 				} );
 				const context = newMockStore( { dispatch } );
 				const entity = newMockableEntityRevision( { id, revisionId, statements } );
-				const entityRepository = {
+				const readingEntityRepository = {
 					getEntity: () => Promise.resolve( entity ),
 				};
 
-				return ( actions( entityRepository, neverWritingEntityRepository ) as any )[ ENTITY_INIT ](
-					context,
-					{
-						entity: id,
-						revision: revisionId,
-					},
-				).catch( ( error: Error ) => {
+				const action = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+				return ( action as Function )( context, {
+					entity: id,
+					revision: revisionId,
+				} ).catch( ( error: Error ) => {
 					expect( error.message ).toBe( errorMsg );
 				} );
 			} );

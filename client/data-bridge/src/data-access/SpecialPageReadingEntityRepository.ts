@@ -3,7 +3,7 @@ import HttpStatus from 'http-status-codes';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 import jqXHR = JQuery.jqXHR;
@@ -18,7 +18,7 @@ interface SpecialPageApiResponse {
 	};
 }
 
-export default class SpecialPageEntityRepository implements EntityRepository {
+export default class SpecialPageReadingEntityRepository implements ReadingEntityRepository {
 	private readonly $: JQueryStatic;
 	private readonly specialEntityDataUrl: string;
 

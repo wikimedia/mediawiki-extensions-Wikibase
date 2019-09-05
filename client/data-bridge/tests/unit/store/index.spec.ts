@@ -4,7 +4,7 @@ import ServiceRepositories from '@/services/ServiceRepositories';
 describe( 'store/index', () => {
 	it( 'creates the store', () => {
 		const store = createStore( {
-			getEntityRepository() {
+			getReadingEntityRepository() {
 				return {};
 			},
 			getWritingEntityRepository() {

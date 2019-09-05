@@ -1,4 +1,4 @@
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
+import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import Entities from '@/mock-data/data/Q42.data.json';
 import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
@@ -7,8 +7,8 @@ import { launch } from '@/main';
 
 const services = new ServiceRepositories();
 
-services.setEntityRepository(
-	new SpecialPageEntityRepository(
+services.setReadingEntityRepository(
+	new SpecialPageReadingEntityRepository(
 		{
 			get: () => {
 				return Entities;

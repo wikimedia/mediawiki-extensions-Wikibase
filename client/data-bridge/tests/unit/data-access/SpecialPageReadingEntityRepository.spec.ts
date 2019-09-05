@@ -1,4 +1,4 @@
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
+import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
@@ -16,7 +16,7 @@ function jQueryGetMock( successObject: null | unknown, rejectData?: unknown ): J
 	return ( jQueryMock as unknown ) as JQueryStatic;
 }
 
-describe( 'SpecialPageEntityRepository', () => {
+describe( 'SpecialPageReadingEntityRepository', () => {
 	it( 'returns well formatted answer as expected', async () => {
 		const jQueryMock = jQueryGetMock( {
 			'entities': {
@@ -54,7 +54,10 @@ describe( 'SpecialPageEntityRepository', () => {
 
 		jest.spyOn( jQueryMock, 'get' );
 
-		const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'index.php?title=Special:EntityData/' );
+		const entityDataSupplier = new SpecialPageReadingEntityRepository(
+			jQueryMock,
+			'index.php?title=Special:EntityData/',
+		);
 
 		const actualResultData = await entityDataSupplier.getEntity( 'Q123' );
 
@@ -87,7 +90,7 @@ describe( 'SpecialPageEntityRepository', () => {
 		it( 'rejects on result that does not contain an object', () => {
 			const jQueryMock = jQueryGetMock( '<some><random><html>' );
 
-			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
+			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
 			return expect( entityDataSupplier.getEntity( 'Q123' ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
@@ -96,7 +99,7 @@ describe( 'SpecialPageEntityRepository', () => {
 		it( 'rejects on result missing entities key', () => {
 			const jQueryMock = jQueryGetMock( {} );
 
-			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
+			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
 			return expect( entityDataSupplier.getEntity( 'Q123' ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
@@ -109,7 +112,7 @@ describe( 'SpecialPageEntityRepository', () => {
 				},
 			} );
 
-			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
+			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
 			return expect( entityDataSupplier.getEntity( 'Q123' ) )
 				.rejects
 				.toStrictEqual( new EntityNotFound( 'Result does not contain relevant entity.' ) );
@@ -118,7 +121,7 @@ describe( 'SpecialPageEntityRepository', () => {
 		it( 'rejects on result indicating relevant entity as missing', () => {
 			const jQueryMock = jQueryGetMock( null, { status: 404 } );
 
-			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
+			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
 			return expect( entityDataSupplier.getEntity( 'Q123' ) )
 				.rejects
 				.toStrictEqual( new EntityNotFound( 'Entity flagged missing in response.' ) );
@@ -127,7 +130,7 @@ describe( 'SpecialPageEntityRepository', () => {
 		it( 'rejects if there was a serverside problem with the API', () => {
 			const jQueryMock = jQueryGetMock( null, { status: 500 } );
 
-			const entityDataSupplier = new SpecialPageEntityRepository( jQueryMock, 'testurl' );
+			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
 			return expect( entityDataSupplier.getEntity( 'Q123' ) )
 				.rejects
 				.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );

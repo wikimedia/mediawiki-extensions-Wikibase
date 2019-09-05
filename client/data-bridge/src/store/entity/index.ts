@@ -5,14 +5,14 @@ import EntityState from '@/store/entity/EntityState';
 import { mutations } from '@/store/entity/mutations';
 import { getters } from '@/store/entity/getters';
 import actions from '@/store/entity/actions';
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import createStatements from '@/store/entity/statements';
 import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 
 export default function (
-	entityRepository: EntityRepository,
+	readingEntityRepository: ReadingEntityRepository,
 	writingEntityRepository: WritingEntityRepository,
 ): Module<EntityState, Application> {
 	const state: EntityState = {
@@ -25,7 +25,7 @@ export default function (
 		state,
 		getters,
 		mutations,
-		actions: actions( entityRepository, writingEntityRepository ),
+		actions: actions( readingEntityRepository, writingEntityRepository ),
 		modules: {
 			[ NS_STATEMENTS ]: createStatements(),
 		},

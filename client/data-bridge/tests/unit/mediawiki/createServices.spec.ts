@@ -1,13 +1,13 @@
 import createServices from '@/mediawiki/createServices';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
-import SpecialPageEntityRepository from '@/data-access/SpecialPageEntityRepository';
+import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 
-const mockEntityRepository = {};
-jest.mock( '@/data-access/SpecialPageEntityRepository', () => {
+const mockReadingEntityRepository = {};
+jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
 	return jest.fn().mockImplementation( () => {
-		return mockEntityRepository;
+		return mockReadingEntityRepository;
 	} );
 } );
 
@@ -18,7 +18,7 @@ jest.mock( '@/data-access/ForeignApiWritingRepository', () => {
 
 describe( 'createServices', () => {
 	it( 'pulls wbRepo and wgUserName from mw.config, ' +
-		'creates EntityRepository and WritingEntityRepository with it', () => {
+		'creates ReadingEntityRepository and WritingEntityRepository with it', () => {
 		const get = jest.fn().mockImplementation( ( key ) => {
 			switch ( key ) {
 				case 'wbRepo':
@@ -48,11 +48,11 @@ describe( 'createServices', () => {
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( get ).toHaveBeenCalledWith( 'wbRepo' );
-		expect( ( SpecialPageEntityRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+		expect( ( SpecialPageReadingEntityRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBe( $ );
-		expect( ( SpecialPageEntityRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+		expect( ( SpecialPageReadingEntityRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBe( 'http://localhost/wiki/Special:EntityData' );
-		expect( services.getEntityRepository() ).toBe( mockEntityRepository );
+		expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
 		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )

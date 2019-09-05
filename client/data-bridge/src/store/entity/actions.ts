@@ -19,7 +19,7 @@ import {
 	ENTITY_UPDATE,
 	ENTITY_REVISION_UPDATE,
 } from '@/store/entity/mutationTypes';
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
@@ -29,7 +29,7 @@ import {
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 
 export default function actions(
-	entityRepository: EntityRepository,
+	readingEntityRepository: ReadingEntityRepository,
 	writingEntityRepository: WritingEntityRepository,
 ): ActionTree<EntityState, Application> {
 
@@ -53,7 +53,7 @@ export default function actions(
 			context: ActionContext<EntityState, Application>,
 			payload: { entity: string; revision?: number },
 		): Promise<unknown> {
-			return entityRepository
+			return readingEntityRepository
 				.getEntity( payload.entity, payload.revision )
 				.then( ( entity ) => updateEntity( context, entity ) );
 		},

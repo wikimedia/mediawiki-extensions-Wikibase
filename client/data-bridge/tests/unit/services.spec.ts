@@ -1,25 +1,25 @@
 import ServiceRepositories from '@/services/ServiceRepositories';
-import EntityRepository from '@/definitions/data-access/EntityRepository';
+import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 
 function newServices(): ServiceRepositories {
 	return new ServiceRepositories();
 }
 
-function newMockEntityRepository(): EntityRepository {
-	return {} as EntityRepository;
+function newMockReadingEntityRepository(): ReadingEntityRepository {
+	return {} as ReadingEntityRepository;
 }
 
 describe( 'ServiceRepositories', () => {
-	describe( 'EntityRepository', () => {
+	describe( 'ReadingEntityRepository', () => {
 		it( 'throws an error if it is not set', () => {
-			expect( () => newServices().getEntityRepository() ).toThrow();
+			expect( () => newServices().getReadingEntityRepository() ).toThrow();
 		} );
 
-		it( 'can set and get an EntityRepository', () => {
+		it( 'can set and get an ReadingEntityRepository', () => {
 			const services = newServices();
-			const mockEntityRepository = newMockEntityRepository();
-			services.setEntityRepository( mockEntityRepository );
-			expect( services.getEntityRepository() ).toBe( mockEntityRepository );
+			const mockReadingEntityRepository = newMockReadingEntityRepository();
+			services.setReadingEntityRepository( mockReadingEntityRepository );
+			expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
 		} );
 	} );
 } );
