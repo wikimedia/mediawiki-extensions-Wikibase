@@ -23,7 +23,7 @@ class FakeLBFactory extends LBFactory {
 		$this->lb = $params['lb'];
 	}
 
-	public function newMainLB( $domain = false ) {
+	public function newMainLB( $domain = false, $owner = null ) {
 		if ( $domain === false ) {
 			return $this->lb;
 		} else {
@@ -39,7 +39,7 @@ class FakeLBFactory extends LBFactory {
 		// no-op
 	}
 
-	public function newExternalLB( $cluster ) {
+	public function newExternalLB( $cluster, $owner = null ) {
 		throw new InvalidArgumentException( 'no external cluster supported' );
 	}
 
