@@ -140,9 +140,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$revisionId = $testEntityRevision->getRevisionId();
 
 		$realMetaDataLookup = $this->getMetaDataLookup();
-		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$metaDataLookup = $this->createMock( WikiPageEntityMetaDataLookup::class );
 
 		$metaDataLookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
@@ -189,9 +187,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$revision->setTimestamp( wfTimestampNow() );
 		$revision->setSlot( $slot );
 
-		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$metaDataLookup = $this->createMock( WikiPageEntityMetaDataLookup::class );
 
 		$metaDataLookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
@@ -200,9 +196,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				(object)[ 'rev_id' => $revisionId, 'role_name' => 'kittens' ]
 			) );
 
-		$revisionStore = $this->getMockBuilder( RevisionStore::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$revisionStore = $this->createMock( RevisionStore::class );
 
 		$revisionStore->expects( $this->once() )
 			->method( 'getRevisionById' )
@@ -337,13 +331,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$revId = 4711;
 		$lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
-		$slotRecord = $this->getMockBuilder( SlotRecord::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$slotRecord = $this->createMock( SlotRecord::class );
 
-		$revision = $this->getMockBuilder( RevisionRecord::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$revision = $this->createMock( RevisionRecord::class );
 		$revision
 			->method( 'hasSlot' )
 			->willReturn( true );
@@ -360,9 +350,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->method( 'getTimestamp' )
 			->willReturn( 20160114180301 );
 
-		$revisionStore = $this->getMockBuilder( RevisionStore::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$revisionStore = $this->createMock( RevisionStore::class );
 
 		$revisionStore->expects( $this->once() )
 			->method( 'getRevisionById' )
@@ -376,9 +364,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->willReturn( [ $newEntityId->getSerialization() => (object)[ 'rev_id' => $revId ] ] );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
-		$codec = $this->getMockBuilder( EntityContentDataCodec::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$codec = $this->createMock( EntityContentDataCodec::class );
 		$codec->method( 'decodeEntity' )
 			->willReturn( $oldEntity );
 
@@ -449,9 +435,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	}
 
 	private function getMockEntityId( $idString ) {
-		$entityId = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entityId = $this->createMock( EntityId::class );
 		$entityId->method( '__toString' )->willReturn( $idString );
 		$entityId->method( 'getSerialization' )->willReturn( $idString );
 		$entityId->method( 'equals' )->will(
