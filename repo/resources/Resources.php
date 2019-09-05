@@ -71,16 +71,6 @@ return call_user_func( function() {
 			},
 		],
 
-		'mw.config.values.wbTabularDataStorageApiEndpoint' => $moduleTemplate + [
-			'class' => MediaWikiConfigModule::class,
-			'getconfigvalueprovider' => function () {
-				return WikibaseRepo::getDefaultInstance()->getSettingsValueProvider(
-					'wbTabularDataStorageApiEndpoint',
-					'tabularDataStorageApiEndpointUrl'
-				);
-			},
-		],
-
 		'wikibase.dataTypes.__namespace' => $moduleTemplate + [
 			'scripts' => 'dataTypes/__namespace.js',
 			'dependencies' => [

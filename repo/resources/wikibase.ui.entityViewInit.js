@@ -107,8 +107,7 @@
 			parserStore,
 			userLanguages,
 			repoApiUrl,
-			mw.config.get( 'wbGeoShapeStorageApiEndpoint' ),
-			mw.config.get( 'wbTabularDataStorageApiEndpoint' )
+			mw.config.get( 'wbGeoShapeStorageApiEndpoint' )
 		];
 		var hookResults = [];
 		mw.hook( 'wikibase.entityPage.entityView.viewFactoryFactory.required' ).fire(
