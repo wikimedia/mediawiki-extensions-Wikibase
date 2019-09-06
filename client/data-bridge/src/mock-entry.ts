@@ -5,6 +5,7 @@ import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import { launch } from '@/main';
+import EntityRevision from '@/datamodel/EntityRevision';
 
 const services = new ServiceRepositories();
 
@@ -17,6 +18,14 @@ services.setReadingEntityRepository(
 		} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
 		'',
 	),
+);
+
+services.setWritingEntityRepository(
+	{
+		saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+			return Promise.reject();
+		},
+	},
 );
 
 services.setLanguageInfoRepository(
