@@ -72,7 +72,8 @@ class CreateRedirect extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
-		$bot = $this->permissionManager->userHasRight( $this->getUser(), 'bot' ) && $params['bot'];
+		$bot = $params['bot'] &&
+			$this->permissionManager->userHasRight( $this->getUser(), 'bot' );
 
 		try {
 			$fromId = $this->idParser->parse( $params['from'] );
