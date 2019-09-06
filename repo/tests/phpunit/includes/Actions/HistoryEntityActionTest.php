@@ -83,8 +83,8 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 		$context->method( 'getUser' )
 			->willReturn( new User() );
 		$context->method( 'msg' )
-			->willReturnCallback( function() {
-				return wfMessage( ...func_get_args() )
+			->willReturnCallback( function( ...$args ) {
+				return wfMessage( ...$args )
 					->inLanguage( self::DUMMY_LANGUAGE );
 			} );
 

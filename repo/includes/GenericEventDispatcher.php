@@ -78,17 +78,14 @@ class GenericEventDispatcher {
 	 *
 	 * @param string $event the name of the event, that is,
 	 *        the name of the method to call on the watchers.
-	 * @param mixed [$arg,...] Any extra parameters are passed to the watcher method.
+	 * @param mixed ...$args Any extra parameters are passed to the watcher method.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function dispatch( $event /*...*/ ) {
+	public function dispatch( $event, ...$args ) {
 		if ( !is_string( $event ) ) {
 			throw new InvalidArgumentException( '$event must be a string' );
 		}
-
-		$args = func_get_args();
-		$event = array_shift( $args );
 
 		foreach ( $this->watchers as $watcher ) {
 			$watcher->$event( ...$args );

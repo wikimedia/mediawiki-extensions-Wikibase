@@ -104,10 +104,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 	 *
 	 * @return string Formatted warning, in the format specified by getFormat()
 	 */
-	private function formatWarning( $key ) {
-		$args = func_get_args();
-		array_shift( $args );
-
+	private function formatWarning( $key, ...$args ) {
 		$warning = wfMessage( $key, $args );
 
 		if ( $this->language !== null ) {

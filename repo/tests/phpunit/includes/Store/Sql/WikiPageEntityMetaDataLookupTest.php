@@ -224,9 +224,9 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$db->expects( $this->exactly( $selectCount ) )
 			->method( 'select' )
-			->will( $this->returnCallback( function() use ( $realDB ) {
+			->will( $this->returnCallback( function( ...$args ) use ( $realDB ) {
 				// Get the actual result
-				$res = $realDB->select( ...func_get_args() );
+				$res = $realDB->select( ...$args );
 
 				// Return the real result minus the first row
 				$data = [];

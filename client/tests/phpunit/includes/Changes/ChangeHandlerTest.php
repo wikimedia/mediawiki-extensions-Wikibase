@@ -155,9 +155,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideHandleChanges
 	 */
-	public function testHandleChanges() {
-		$changes = func_get_args();
-
+	public function testHandleChanges( ...$changes ) {
 		$spy = new \stdClass();
 		$spy->handleChangeCallCount = 0;
 		$spy->handleChangesCallCount = 0;

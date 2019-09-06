@@ -45,8 +45,7 @@ class TextInjectorTest extends \PHPUnit\Framework\TestCase {
 
 		$expected = 'Good morning to you!';
 
-		$actual = $injector->inject( $text, function () {
-			$args = func_get_args();
+		$actual = $injector->inject( $text, function ( ...$args ) {
 			return implode( ' ', $args );
 		} );
 
