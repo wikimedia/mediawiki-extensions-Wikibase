@@ -59,7 +59,7 @@ class DataUpdateAdapter extends DataUpdate {
 	 */
 	public function doUpdate() {
 		try {
-			call_user_func_array( $this->doUpdateFunction, $this->arguments );
+			( $this->doUpdateFunction )( ...$this->arguments );
 		} catch ( Exception $ex ) {
 			$this->exceptionHandler->handleException( $ex, 'data-update-failed',
 				'A data update callback triggered an exception' );

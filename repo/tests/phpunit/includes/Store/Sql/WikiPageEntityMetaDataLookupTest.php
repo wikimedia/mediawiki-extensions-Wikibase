@@ -226,10 +226,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			->method( 'select' )
 			->will( $this->returnCallback( function() use ( $realDB ) {
 				// Get the actual result
-				$res = call_user_func_array(
-					[ $realDB, 'select' ],
-					func_get_args()
-				);
+				$res = $realDB->select( ...func_get_args() );
 
 				// Return the real result minus the first row
 				$data = [];

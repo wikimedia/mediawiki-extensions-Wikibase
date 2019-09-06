@@ -540,10 +540,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseServices->expects( $this->any() )
 				->method( $method )
 				->will( $this->returnCallback( function() use ( $oldWikibaseServices, $method ) {
-					return call_user_func_array(
-						[ $oldWikibaseServices, $method ],
-						func_get_args()
-					);
+					return $oldWikibaseServices->$method( ...func_get_args() );
 				} ) );
 		}
 

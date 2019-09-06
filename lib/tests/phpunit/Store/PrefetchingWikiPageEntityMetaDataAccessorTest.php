@@ -436,7 +436,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 
 		$this->assertSame( 'Foo', $result );
 
-		call_user_func_array( [ $accessor, $method ], $params );
+		$accessor->$method( ...$params );
 
 		// Load it again after purge
 		$rows = $accessor->loadRevisionInformation( [ $q1 ], $fromReplica );

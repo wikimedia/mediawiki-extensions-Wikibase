@@ -95,15 +95,15 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		foreach ( $entity->getStatements()->toArray() as $statement ) {
 			$value = new StringValue( 'Kittens.png' );
 			$argLists[] = [
-				'entityId' => $entity->getId(),
-				'guid' => $statement->getGuid(),
-				'value' => $value->getArrayValue(),
-				'expectedSummary' => $this->getExpectedSummary( $statement, $value )
+				$entity->getId(),
+				$statement->getGuid(),
+				$value->getArrayValue(),
+				$this->getExpectedSummary( $statement, $value )
 			];
 		}
 
 		foreach ( $argLists as $argList ) {
-			call_user_func_array( [ $this, 'doTestValidRequest' ], $argList );
+			$this->doTestValidRequest( ...$argList );
 		}
 	}
 

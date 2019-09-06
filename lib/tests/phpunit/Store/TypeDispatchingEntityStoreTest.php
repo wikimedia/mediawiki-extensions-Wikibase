@@ -333,10 +333,10 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$defaultService = $this->getMock( EntityStore::class );
 
 		if ( $expectedArguments ) {
-			$mocker = $defaultService->expects( $this->once() )
+			$defaultService->expects( $this->once() )
 				->method( $expectedMethod )
+				->with( ...$expectedArguments )
 				->willReturn( 'fromDefaultService' );
-			call_user_func_array( [ $mocker, 'with' ], $expectedArguments );
 		} else {
 			$defaultService->expects( $this->never() )
 				->method( $expectedMethod );

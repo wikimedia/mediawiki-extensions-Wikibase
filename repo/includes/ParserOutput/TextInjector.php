@@ -77,7 +77,7 @@ class TextInjector {
 		$replace = [];
 
 		foreach ( $this->markers as $marker => $args ) {
-			$subst = call_user_func_array( $callback, $args );
+			$subst = $callback( ...$args );
 
 			if ( is_string( $subst ) ) {
 				$search[] = $marker;

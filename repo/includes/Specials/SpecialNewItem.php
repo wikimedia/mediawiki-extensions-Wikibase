@@ -266,7 +266,7 @@ class SpecialNewItem extends SpecialNewEntity {
 
 	private function createStatusFromValidatorError( $error ) {
 		$params = array_merge( [ 'wikibase-validator-' . $error->getCode() ],  $error->getParameters() );
-		return call_user_func_array( 'Status::newFatal', $params );
+		return Status::newFatal( ...$params );
 	}
 
 	/**
