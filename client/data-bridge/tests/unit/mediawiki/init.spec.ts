@@ -39,6 +39,8 @@ describe( 'init', () => {
 				'wikibase.client.data-bridge.app',
 				'mw.config.values.wbRepo',
 				'mediawiki.ForeignApi',
+				'jquery.uls.data',
+				'mediawiki.language',
 			] );
 			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
 			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );

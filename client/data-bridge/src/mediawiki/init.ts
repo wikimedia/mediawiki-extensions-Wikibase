@@ -6,6 +6,8 @@ import Dispatcher from '@/mediawiki/Dispatcher';
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
 const FOREIGNAPI_MODULE = 'mediawiki.ForeignApi';
+const ULS_MODULE = 'jquery.uls.data';
+const MWLANGUAGE_MODULE = 'mediawiki.language';
 
 function stopNativeClickHandling( event: Event ): void {
 	event.preventDefault();
@@ -28,6 +30,8 @@ export default async (): Promise<void> => {
 				APP_MODULE,
 				WBREPO_MODULE,
 				FOREIGNAPI_MODULE,
+				ULS_MODULE,
+				MWLANGUAGE_MODULE,
 			] ),
 			app = require( APP_MODULE ),
 			dispatcher = new Dispatcher( mwWindow, app );

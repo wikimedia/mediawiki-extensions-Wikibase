@@ -1,4 +1,5 @@
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
+import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import Entities from '@/mock-data/data/Q42.data.json';
 import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
@@ -15,6 +16,21 @@ services.setReadingEntityRepository(
 			},
 		} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
 		'',
+	),
+);
+
+services.setLanguageInfoRepository(
+	new MwLanguageInfoRepository(
+		{
+			bcp47: () => {
+				return 'de';
+			},
+		},
+		{
+			getDir: () => {
+				return 'ltr';
+			},
+		},
 	),
 );
 

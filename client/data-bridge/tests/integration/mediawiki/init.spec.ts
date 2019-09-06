@@ -4,6 +4,7 @@ import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
+import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import {
 	mockForeignApiConstructor,
 	mockMwEnv,
@@ -34,6 +35,12 @@ describe( 'init', () => {
 		);
 		expectedServices.setWritingEntityRepository(
 			new ForeignApiWritingRepository( ForeignApi, 'Test User' ),
+		);
+		expectedServices.setLanguageInfoRepository(
+			new MwLanguageInfoRepository(
+				( window as MwWindow ).mw.language,
+				( window as MwWindow ).$.uls!.data,
+			),
 		);
 		const entityId = 'Q5';
 		const propertyId = 'P4711';

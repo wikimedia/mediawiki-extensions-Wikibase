@@ -1,9 +1,11 @@
 import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
+import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 
 export default class ServiceRepositories {
 	private readingEntityRepository?: ReadingEntityRepository;
 	private writingEntityRepository?: WritingEntityRepository;
+	private languageInfoRepository?: LanguageInfoRepository;
 
 	public setReadingEntityRepository( lookup: ReadingEntityRepository ): void {
 		this.readingEntityRepository = lookup;
@@ -26,6 +28,18 @@ export default class ServiceRepositories {
 			return this.writingEntityRepository;
 		} else {
 			throw new Error( 'WritingEntityRepository is undefined' );
+		}
+	}
+
+	public setLanguageInfoRepository( lookup: LanguageInfoRepository ): void {
+		this.languageInfoRepository = lookup;
+	}
+
+	public getLanguageInfoRepository(): LanguageInfoRepository {
+		if ( this.languageInfoRepository ) {
+			return this.languageInfoRepository;
+		} else {
+			throw new Error( 'LanguageInfoRepository is undefined' );
 		}
 	}
 }

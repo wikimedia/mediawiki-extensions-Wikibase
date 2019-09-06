@@ -1,6 +1,7 @@
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
+import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 
 export default function createServices( mwWindow: MwWindow ): ServiceRepositories {
@@ -29,5 +30,13 @@ export default function createServices( mwWindow: MwWindow ): ServiceRepositorie
 		// TODO tags from some config
 	) );
 
+	if ( mwWindow.$.uls === undefined ) {
+		throw new Error( '$.uls was not loaded!' );
+	}
+
+	services.setLanguageInfoRepository( new MwLanguageInfoRepository(
+		mwWindow.mw.language,
+		mwWindow.$.uls.data,
+	) );
 	return services;
 }

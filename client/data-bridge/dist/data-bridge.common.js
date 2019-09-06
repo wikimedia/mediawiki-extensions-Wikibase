@@ -7125,13 +7125,27 @@ function createStore(services) {
   };
   return new vuex_esm["a" /* Store */](storeBundle);
 }
+// CONCATENATED MODULE: ./src/presentation/directives/inlanguage.ts
+/* harmony default export */ var inlanguage = (function (resolver) {
+  return function (el, binding, _vnode) {
+    if (!binding.value) {
+      return;
+    }
+
+    var language = resolver.resolve(binding.value);
+    el.setAttribute('lang', language.code);
+    el.setAttribute('dir', language.directionality);
+  };
+});
 // CONCATENATED MODULE: ./src/main.ts
+
 
 
 
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(services.getLanguageInfoRepository()));
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   new presentation_App({
