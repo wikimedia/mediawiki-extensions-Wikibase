@@ -122,7 +122,7 @@ class NTriplesRdfTestHelper {
 		$dataSetNames = (array)$dataSetNames;
 		$joinedName = implode( '-', $dataSetNames );
 
-		$expected = $testData->getNTriples( $dataSetNames );
+		$expected = $testData->getNTriples( ...$dataSetNames );
 		$expected = $this->normalizeNTriples( $expected );
 		$actual = $this->normalizeNTriples( $actual );
 
@@ -176,7 +176,7 @@ class NTriplesRdfTestHelper {
 			$message = "Data set $prettyName";
 		}
 
-		$expected = $testData->getNTriples( $dataSetNames );
+		$expected = $testData->getNTriples( ...$dataSetNames );
 		$this->assertNTriplesEquals( $expected, $actual, $message );
 	}
 
