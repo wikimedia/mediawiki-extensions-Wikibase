@@ -3,6 +3,7 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
+import WbRepo from '@/@types/wikibase/WbRepo';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -16,49 +17,84 @@ jest.mock( '@/data-access/ForeignApiWritingRepository', () => {
 	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
 } );
 
-describe( 'createServices', () => {
-	it( 'pulls wbRepo and wgUserName from mw.config, ' +
-		'creates ReadingEntityRepository and WritingEntityRepository with it', () => {
-		const get = jest.fn().mockImplementation( ( key ) => {
-			switch ( key ) {
-				case 'wbRepo':
-					return {
+function mockMwWindow( options: {
+	wbRepo?: WbRepo;
+	wgUserName?: string;
+} = {} ): MwWindow {
+	const get = jest.fn().mockImplementation( ( key ) => {
+		switch ( key ) {
+			case 'wbRepo':
+				return {
+					...{
 						url: 'http://localhost',
 						scriptPath: '/w',
 						articlePath: '/wiki/$1',
-					};
-				case 'wgUserName':
-					return 'Test User';
-				default:
-					throw new Error( `Unexpected config key ${key}!` );
-			}
-		} );
-		const $ = new ( jest.fn() )();
-		const mwWindow = {
-			mw: {
-				config: {
-					get,
-				},
-				ForeignApi: jest.fn(),
-			},
-			$,
-		} as unknown as MwWindow;
+					},
+					...options.wbRepo,
+				};
+			case 'wgUserName':
+				return options.wgUserName || null;
+			default:
+				throw new Error( `Unexpected config key ${key}!` );
+		}
+	} );
 
+	return {
+		mw: {
+			config: {
+				get,
+			},
+			ForeignApi: jest.fn(),
+		},
+		$: new ( jest.fn() )(),
+	} as unknown as MwWindow;
+}
+
+describe( 'createServices', () => {
+	beforeEach( () => {
+		( SpecialPageReadingEntityRepository as jest.Mock ).mockClear();
+		( ForeignApiWritingRepository as unknown as jest.Mock ).mockClear();
+	} );
+
+	it( 'pulls wbRepo and wgUserName from mw.config, ', () => {
+		const wbRepo = {
+			url: 'http://localhost',
+			scriptPath: '/w',
+			articlePath: '/wiki/$1',
+		};
+		const mwWindow = mockMwWindow( {
+			wbRepo,
+		} );
 		const services = createServices( mwWindow );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
-		expect( get ).toHaveBeenCalledWith( 'wbRepo' );
+		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
 		expect( ( SpecialPageReadingEntityRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
-			.toBe( $ );
+			.toBe( mwWindow.$ );
 		expect( ( SpecialPageReadingEntityRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBe( 'http://localhost/wiki/Special:EntityData' );
 		expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
+	} );
+
+	it( 'creates EntityRepository and WritingEntityRepository with it', () => {
+		const wgUserName = 'TestUser';
+		const wbRepo = {
+			url: 'http://localhost',
+			scriptPath: '/w',
+			articlePath: '',
+		};
+		const mwWindow = mockMwWindow( {
+			wbRepo,
+			wgUserName,
+		} );
+		const services = createServices( mwWindow );
+
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
 		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toBe( 'Test User' );
+			.toBe( wgUserName );
 		expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
 	} );
 } );
