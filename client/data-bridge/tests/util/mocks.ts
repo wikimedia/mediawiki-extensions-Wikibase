@@ -68,6 +68,9 @@ export function mockMwEnv(
 			warn,
 		},
 		ForeignApi,
+		language: {
+			bcp47: jest.fn(),
+		},
 	};
 	( window as MwWindow ).$ = new ( jest.fn() )();
 }

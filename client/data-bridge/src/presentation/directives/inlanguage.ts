@@ -1,16 +1,15 @@
 import { DirectiveBinding } from 'vue/types/options';
 import { VNode } from 'vue/types/vnode';
-import DirectionalityRepository from '@/definitions/data-access/DirectionalityRepository';
+import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 
-export default ( resolver: DirectionalityRepository ) => {
+export default ( resolver: LanguageInfoRepository ) => {
 	return ( el: HTMLElement, binding: DirectiveBinding, _vnode: VNode ) => {
 		if ( !binding.value ) {
 			return;
 		}
 
-		const languageCode: string = binding.value;
-		const directionality: string = resolver.resolve( languageCode );
-		el.setAttribute( 'lang', languageCode );
-		el.setAttribute( 'dir', directionality );
+		const language = resolver.resolve( binding.value );
+		el.setAttribute( 'lang', language.code );
+		el.setAttribute( 'dir', language.directionality );
 	};
 };
