@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use FauxRequest;
 use Language;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Status;
 use Title;
@@ -152,7 +153,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 			'wbcreateredirect',
 			new BasicEntityIdParser(),
 			$errorReporter,
-			$interactor
+			$interactor,
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 	}
 

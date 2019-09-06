@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use ActorMigration;
 use CommentStoreComment;
 use InvalidArgumentException;
+use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MWException;
@@ -70,12 +71,18 @@ class WikiPageEntityStore implements EntityStore {
 	private $dataAccessSettings;
 
 	/**
+	 * @var PermissionManager
+	 */
+	private $permissionManager;
+
+	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param IdGenerator $idGenerator
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
 	 * @param EntitySource $entitySource
 	 * @param DataAccessSettings $dataAccessSettings
+	 * @param PermissionManager $permissionManager
 	 */
 	public function __construct(
 		EntityContentFactory $contentFactory,
@@ -83,7 +90,8 @@ class WikiPageEntityStore implements EntityStore {
 		EntityIdComposer $entityIdComposer,
 		RevisionStore $revisionStore,
 		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings
+		DataAccessSettings $dataAccessSettings,
+		PermissionManager $permissionManager
 	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
@@ -95,6 +103,8 @@ class WikiPageEntityStore implements EntityStore {
 
 		$this->entitySource = $entitySource;
 		$this->dataAccessSettings = $dataAccessSettings;
+
+		$this->permissionManager = $permissionManager;
 	}
 
 	private function assertCanStoreEntity( EntityId $id ) {
@@ -247,7 +257,7 @@ class WikiPageEntityStore implements EntityStore {
 		if ( !$content->isValid() ) {
 			throw new StorageException( Status::newFatal( 'invalid-content-data' ) );
 		}
-		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId, $tags );
+		$revision = $this->saveEntityContent( $content, $user, $summary, $flags, $baseRevId, $tags );
 
 		$entityRevision = new EntityRevision(
 			$entity,
@@ -292,7 +302,7 @@ class WikiPageEntityStore implements EntityStore {
 		}
 
 		// TODO pass $tags into saveEntityContent()
-		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
+		$revision = $this->saveEntityContent( $content, $user, $summary, $flags, $baseRevId );
 
 		$this->dispatcher->dispatch( 'redirectUpdated', $redirect, $revision->getId() );
 
@@ -310,8 +320,8 @@ class WikiPageEntityStore implements EntityStore {
 	 * @see WikiPage::doEditContent
 	 *
 	 * @param EntityContent $entityContent the entity to save.
+	 * @param User $user
 	 * @param string $summary
-	 * @param null|User $user
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
 	 * @param int|bool $baseRevId
 	 * @param string[] $tags
@@ -321,8 +331,8 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private function saveEntityContent(
 		EntityContent $entityContent,
+		User $user,
 		$summary = '',
-		User $user = null,
 		$flags = 0,
 		$baseRevId = false,
 		array $tags = []
@@ -379,7 +389,9 @@ class WikiPageEntityStore implements EntityStore {
 		// with 1.31 behavior. Applying the 'autopatrol' right should be done in the same
 		// place the 'bot' right is handled and passed down, perhaps via the $flags parameter.
 		// Relevant callers are EditEntity, PropertyDataTypeChanger, and ItemMergeInteractor.
-		if ( $needsPatrol && $page->getTitle()->userCan( 'autopatrol', $user ) ) {
+		if ( $needsPatrol && $this->permissionManager
+				->userCan( 'autopatrol', $user, $page->getTitle() )
+		) {
 			$updater->setRcPatrolStatus( RecentChange::PRC_AUTOPATROLLED );
 		}
 

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use FauxRequest;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Status;
 use ApiUsageException;
@@ -303,7 +304,8 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory(
 				$config['newEditEntityCalls'] ?? null
-			)
+			),
+			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
 		if ( $config['allowCreation'] ?? false ) {

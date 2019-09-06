@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Interactors;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
 use User;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
@@ -70,6 +71,11 @@ class ItemMergeInteractor {
 	 */
 	private $entityTitleLookup;
 
+	/**
+	 * @var PermissionManager
+	 */
+	private $permissionManager;
+
 	public function __construct(
 		MergeFactory $mergeFactory,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -78,7 +84,8 @@ class ItemMergeInteractor {
 		SummaryFormatter $summaryFormatter,
 		User $user,
 		ItemRedirectCreationInteractor $interactorRedirect,
-		EntityTitleStoreLookup $entityTitleLookup
+		EntityTitleStoreLookup $entityTitleLookup,
+		PermissionManager $permissionManager
 	) {
 		$this->mergeFactory = $mergeFactory;
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -88,6 +95,7 @@ class ItemMergeInteractor {
 		$this->user = $user;
 		$this->interactorRedirect = $interactorRedirect;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->permissionManager = $permissionManager;
 	}
 
 	/**
@@ -272,7 +280,7 @@ class ItemMergeInteractor {
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
 		// for reference)
 		$flags = EDIT_UPDATE | EntityContent::EDIT_IGNORE_CONSTRAINTS;
-		if ( $bot && $this->user->isAllowed( 'bot' ) ) {
+		if ( $bot && $this->permissionManager->userHasRight( $this->user, 'bot' ) ) {
 			$flags |= EDIT_FORCE_BOT;
 		}
 

@@ -5,6 +5,7 @@ namespace Wikibase;
 use Html;
 use IContextSource;
 use Linker;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use OOUI\ButtonInputWidget;
 use OOUI\ButtonWidget;
@@ -69,10 +70,10 @@ class EditEntityAction extends ViewEntityAction {
 	 */
 	protected function showPermissionError( $action ) {
 		$rigor = $this->getRequest()->wasPosted() ? 'secure' : 'full';
-
-		if ( !$this->getTitle()->userCan( $action, $this->getUser(), $rigor ) ) {
+		$pm = MediaWikiServices::getInstance()->getPermissionManager();
+		if ( !$pm->userCan( $action, $this->getUser(), $this->getTitle(), $rigor ) ) {
 			$this->getOutput()->showPermissionsErrorPage(
-				$this->getTitle()->getUserPermissionsErrors( $action, $this->getUser(), $rigor ),
+				$pm->getPermissionErrors( $action, $this->getUser(), $this->getTitle(), $rigor ),
 				$action
 			);
 

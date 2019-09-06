@@ -3,11 +3,13 @@
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
 use DerivativeContext;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
 use Title;
+use User;
 use WebRequest;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 
@@ -31,11 +33,13 @@ class OutputPageEditabilityTest extends TestCase {
 
 	public function nonEditableOutputPageProvider() {
 		$out = $this->newOutputPage();
-		$title = $this->getMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'quickUserCan' )
-			->willReturn( false );
-		$out->setTitle( $title );
+		$noRightsUser = User::newFromName( 'Test' );
+		MediaWikiServices::getInstance()->getPermissionManager()
+			->overrideUserRightsForTesting( $noRightsUser, [] );
+		$noRightsUserContext = new DerivativeContext( RequestContext::getMain() );
+		$noRightsUserContext->setUser( $noRightsUser );
+		$out->setContext( $noRightsUserContext );
+		$out->setTitle( Title::newFromText( 'Test' ) );
 		yield 'user does not have edit permission' => [ $out ];
 
 		$request = $this->getMock( WebRequest::class );
@@ -54,6 +58,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$title->expects( $this->once() )
 			->method( 'getLatestRevID' )
 			->willReturn( 321 );
+		$title->method( 'getRestrictions' )->willReturn( [] );
 		$out->setTitle( $title );
 		yield 'not latest revision' => [ $out ];
 
@@ -79,15 +84,15 @@ class OutputPageEditabilityTest extends TestCase {
 	private function getDefaultEditableOutputPage() {
 		$outputPage = $this->newOutputPage();
 
-		$title = $this->getMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'quickUserCan' )
-			->with( 'edit' )
-			->willReturn( true );
+		$user = User::newFromName( 'TestUser' );
+		MediaWikiServices::getInstance()->getPermissionManager()
+			->overrideUserRightsForTesting( $user, [ 'edit' ] );
 
+		$title = $this->getMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( true );
+		$title->method( 'getRestrictions' )->willReturn( [] );
 
 		$request = $this->getMock( WebRequest::class );
 		$request->expects( $this->once() )
@@ -95,6 +100,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->with( 'diff' )
 			->willReturn( false );
 		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setUser( $user );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
 
@@ -111,12 +117,12 @@ class OutputPageEditabilityTest extends TestCase {
 	private function getNullRevisionEditableOutputPage() {
 		$outputPage = $this->newOutputPage();
 
-		$title = $this->getMock( Title::class );
-		$title->expects( $this->once() )
-			->method( 'quickUserCan' )
-			->with( 'edit' )
-			->willReturn( true );
+		$user = User::newFromName( 'TestUser' );
+		MediaWikiServices::getInstance()->getPermissionManager()
+			->overrideUserRightsForTesting( $user, [ 'edit' ] );
 
+		$title = $this->getMock( Title::class );
+		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( true );
@@ -127,6 +133,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->with( 'diff' )
 			->willReturn( false );
 		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setUser( $user );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
 
@@ -140,14 +147,15 @@ class OutputPageEditabilityTest extends TestCase {
 	private function getNonExistingTitleEditableOutputPage() {
 		$outputPage = $this->newOutputPage();
 
+		$user = User::newFromName( 'TestUser' );
+		MediaWikiServices::getInstance()->getPermissionManager()
+			->overrideUserRightsForTesting( $user, [ 'edit', 'create' ] );
+
 		$title = $this->getMock( Title::class );
+		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( false );
-		$title->expects( $this->exactly( 2 ) )
-			->method( 'quickUserCan' )
-			->withConsecutive( [ 'edit' ], [ 'create' ] )
-			->willReturn( true );
 
 		$request = $this->getMock( WebRequest::class );
 		$request->expects( $this->once() )
@@ -157,6 +165,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
+		$context->setUser( $user );
 
 		$outputPage->setRevisionId( 123 );
 		$title->expects( $this->once() )

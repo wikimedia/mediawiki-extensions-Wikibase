@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Hooks\Helpers;
 
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Title;
 use User;
@@ -34,8 +35,9 @@ class OutputPageEditability {
 	 * @return bool
 	 */
 	private function isProbablyEditable( User $user, Title $title ) {
-		return $title->quickUserCan( 'edit', $user )
-			&& ( $title->exists() || $title->quickUserCan( 'create', $user ) );
+		$pm = MediaWikiServices::getInstance()->getPermissionManager();
+		return $pm->quickUserCan( 'edit', $user, $title )
+			&& ( $title->exists() || $pm->quickUserCan( 'create', $user, $title ) );
 	}
 
 	/**

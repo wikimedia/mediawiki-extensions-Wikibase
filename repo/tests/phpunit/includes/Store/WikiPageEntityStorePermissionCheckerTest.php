@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Title;
 use TitleValue;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -598,6 +599,7 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 		return new WikiPageEntityStorePermissionChecker(
 			$this->getNamespaceLookup(),
 			$this->getTitleLookup(),
+			MediaWikiServices::getInstance()->getPermissionManager(),
 			[
 				'read',
 				'edit',

@@ -100,7 +100,9 @@ class EntityContentDiffView extends DifferenceEngine {
 			[ 'oldid' => $rev->getId() ] );
 
 		if ( $rev->userCan( RevisionRecord::DELETED_TEXT, $user ) ) {
-			if ( $title->quickUserCan( 'edit', $user ) && !$rev->isCurrent() ) {
+			if ( MediaWikiServices::getInstance()->getPermissionManager()
+					->quickUserCan( 'edit', $user, $title ) && !$rev->isCurrent()
+			) {
 				$editQuery = [
 					'action' => 'edit',
 					'restore' => $rev->getId()

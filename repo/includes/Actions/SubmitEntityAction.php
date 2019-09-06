@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use Content;
 use IContextSource;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionManager;
 use MWException;
 use Page;
 use Revision;
@@ -234,14 +236,17 @@ class SubmitEntityAction extends EditEntityAction {
 	 *
 	 * @param string $permission
 	 * @param Title $title
-	 * @param string $quick
+	 * @param string $rigor
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
-	private function getPermissionStatus( $permission, Title $title, $quick = '' ) {
-		//XXX: would be nice to be able to pass the $short flag too,
-		//     as used by getUserPermissionsErrorsInternal. But Title doesn't expose that.
-		$errors = $title->getUserPermissionsErrors( $permission, $this->getUser(), $quick !== 'quick' );
+	private function getPermissionStatus(
+		$permission,
+		Title $title,
+		$rigor = PermissionManager::RIGOR_SECURE
+	) {
+		$errors = MediaWikiServices::getInstance()->getPermissionManager()
+			->getPermissionErrors( $permission, $this->getUser(), $title, $rigor );
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {

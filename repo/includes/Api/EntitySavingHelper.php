@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Permissions\PermissionManager;
 use OutOfBoundsException;
 use Status;
 use ApiUsageException;
@@ -38,6 +39,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @var MediawikiEditEntityFactory
 	 */
 	private $editEntityFactory;
+
+	/**
+	 * @var PermissionManager
+	 */
+	private $permissionManager;
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; This is set by loadEntity() to EDIT_NEW
@@ -81,12 +87,14 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory,
+		PermissionManager $permissionManager
 	) {
 		parent::__construct( $apiModule, $idParser, $entityRevisionLookup, $errorReporter );
 
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
+		$this->permissionManager = $permissionManager;
 
 		$this->defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_MASTER;
 	}
@@ -328,7 +336,9 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$params = $this->apiModule->extractRequestParams();
 		$user = $this->apiModule->getContext()->getUser();
 
-		if ( isset( $params['bot'] ) && $params['bot'] && $user->isAllowed( 'bot' ) ) {
+		if ( isset( $params['bot'] ) && $params['bot'] &&
+			$this->permissionManager->userHasRight( $user, 'bot' )
+		) {
 			$flags |= EDIT_FORCE_BOT;
 		}
 

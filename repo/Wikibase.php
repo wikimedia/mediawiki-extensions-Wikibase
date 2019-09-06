@@ -607,7 +607,8 @@ call_user_func( function() {
 				$moduleName,
 				$wikibaseRepo->getEntityIdParser(),
 				$apiHelperFactory->getErrorReporter( $apiMain ),
-				$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() )
+				$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() ),
+				\MediaWiki\MediaWikiServices::getInstance()->getPermissionManager()
 			);
 		}
 	];
