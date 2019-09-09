@@ -119,7 +119,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$summary = new Summary( $module, $action, $language );
 
 		if ( !empty( $parts ) ) {
-			call_user_func_array( [ $summary, 'addAutoCommentArgs' ], $parts );
+			$summary->addAutoCommentArgs( ...$parts );
 		}
 
 		$formatter = $this->newFormatter();
@@ -310,11 +310,11 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		}
 
 		if ( $commentArgs ) {
-			call_user_func_array( [ $summary, 'addAutoCommentArgs' ], $commentArgs );
+			$summary->addAutoCommentArgs( ...$commentArgs );
 		}
 
 		if ( $summaryArgs ) {
-			call_user_func_array( [ $summary, 'addAutoSummaryArgs' ], $summaryArgs );
+			$summary->addAutoSummaryArgs( ...$summaryArgs );
 		}
 
 		if ( $userSummary !== null ) {

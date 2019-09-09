@@ -269,7 +269,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		if ( $errors ) {
 			$status->setResult( false );
 			foreach ( $errors as $error ) {
-				call_user_func_array( [ $status, 'fatal' ], $error );
+				$status->fatal( ...$error );
 			}
 		}
 

@@ -250,7 +250,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
-			call_user_func_array( [ $status, 'fatal' ], $error );
+			$status->fatal( ...$error );
 			$status->setResult( false );
 		}
 

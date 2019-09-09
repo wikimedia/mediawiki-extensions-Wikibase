@@ -341,8 +341,7 @@ class TermIndexSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$interactor = $this->newTermSearchInteractor( $caseSensitive, $prefixSearch, $limit );
 
-		// $interactor->searchForEntities() call
-		$results = call_user_func_array( [ $interactor, 'searchForEntities' ], $params );
+		$results = $interactor->searchForEntities( ...$params );
 
 		$this->assertCount(
 			count( $expectedTermsDetails ),
