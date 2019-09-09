@@ -142,5 +142,6 @@ describe( 'createServices', () => {
 		expect(
 			( MwLanguageInfoRepository as jest.Mock ).mock.calls[ 0 ][ 1 ],
 		).toBe( ulsData );
+		expect( services.getLanguageInfoRepository() ).toBe( mockMwLanguageInfoRepository );
 	} );
 } );
