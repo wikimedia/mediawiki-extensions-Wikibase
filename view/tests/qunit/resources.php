@@ -65,6 +65,7 @@ return [
 			'jquery/jquery.util.getDirectionality.tests.js',
 			'wikibase/entityChangers/AliasesChanger.tests.js',
 			'wikibase/entityChangers/StatementsChanger.tests.js',
+			'wikibase/entityChangers/StatementsChangerState.tests.js',
 			'wikibase/entityChangers/DescriptionsChanger.tests.js',
 			'wikibase/entityChangers/EntityTermsChanger.tests.js',
 			'wikibase/entityChangers/LabelsChanger.tests.js',

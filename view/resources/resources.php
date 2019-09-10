@@ -243,6 +243,7 @@ return call_user_func( function() {
 
 				'wikibase/entityChangers/AliasesChanger.js',
 				'wikibase/entityChangers/StatementsChanger.js',
+				'wikibase/entityChangers/StatementsChangerState.js',
 				'wikibase/entityChangers/DescriptionsChanger.js',
 				'wikibase/entityChangers/EntityTermsChanger.js',
 				'wikibase/entityChangers/LabelsChanger.js',

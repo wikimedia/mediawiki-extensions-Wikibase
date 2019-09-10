@@ -12,7 +12,7 @@
 	 *
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {wikibase.entityChangers.StatementsChangerState} statementsChangerState
 	 * @param {wikibase.serialization.StatementSerializer} statementSerializer
 	 * @param {wikibase.serialization.StatementDeserializer} statementDeserializer
 	 * @param {Function} [fireHook] called after a statement has been saved (wikibase.statement.saved) or deleted (wikibase.statement.deleted), with the hook name (wikibase.…), entity ID and statement ID as arguments.
@@ -20,14 +20,14 @@
 	var SELF = MODULE.StatementsChanger = function WbEntityChangersStatementsChanger(
 		api,
 		revisionStore,
-		entity,
+		statementsChangerState,
 		statementSerializer,
 		statementDeserializer,
 		fireHook
 	) {
 		this._api = api;
 		this._revisionStore = revisionStore;
-		this._entity = entity;
+		this._statementsChangerState = statementsChangerState;
 		this._statementSerializer = statementSerializer;
 		this._statementDeserializer = statementDeserializer;
 		this._fireHook = fireHook || function () {
@@ -46,9 +46,9 @@
 		_revisionStore: null,
 
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {wikibase.entityChangers.StatementsChangerState}
 		 */
-		_entity: null,
+		_statementsChangerState: null,
 
 		/**
 		 * @type {wikibase.serialization.StatementSerializer}
@@ -81,11 +81,15 @@
 			.done( function ( response ) {
 				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
-				// FIXME: Set statement on this._entity
+				// FIXME: Set statement on this._statementsChangerState
 
 				deferred.resolve();
 
-				self._fireHook( 'wikibase.statement.removed', self._entity.getId(), guid );
+				self._fireHook(
+					'wikibase.statement.removed',
+					self._statementsChangerState.getEntityId(),
+					guid
+				);
 			} )
 			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
@@ -118,11 +122,16 @@
 				// Update revision store:
 				self._revisionStore.setClaimRevision( pageInfo.lastrevid, guid );
 
-				// FIXME: Set statement on this._entity
-
 				deferred.resolve( savedStatement );
 
-				self._fireHook( 'wikibase.statement.saved', self._entity.getId(), guid );
+				self._fireHook(
+					'wikibase.statement.saved',
+					self._statementsChangerState.getEntityId(),
+					guid
+				);
+
+				// FIXME: Set statement on this._statementsChangerState
+
 			} )
 			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );

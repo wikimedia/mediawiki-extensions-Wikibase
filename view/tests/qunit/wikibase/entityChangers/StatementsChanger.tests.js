@@ -8,7 +8,10 @@
 	QUnit.module( 'wikibase.entityChangers.StatementsChanger' );
 
 	var SUBJECT = wikibase.entityChangers.StatementsChanger;
-	var entity = new wikibase.datamodel.Item( 'Q1' );
+	var statementsChangerState = new wikibase.entityChangers.StatementsChangerState(
+		'Q1',
+		new wikibase.datamodel.StatementGroupSet()
+	);
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.strictEqual(
@@ -31,7 +34,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; } },
-			entity
+			statementsChangerState
 		);
 
 		statementsChanger.remove(
@@ -58,7 +61,7 @@
 				getClaimRevision: function () { return 0; },
 				setClaimRevision: function () {}
 			},
-			entity
+			statementsChangerState
 		);
 
 		return statementsChanger.remove(
@@ -85,7 +88,7 @@
 				getClaimRevision: function () { return 0; },
 				setClaimRevision: function () {}
 			},
-			entity
+			statementsChangerState
 		);
 
 		var done = assert.async();
@@ -120,7 +123,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
-			entity,
+			statementsChangerState,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer(),
 			fireHook
@@ -152,7 +155,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; } },
-			entity,
+			statementsChangerState,
 			new wb.serialization.StatementSerializer()
 		);
 
@@ -180,7 +183,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
-			entity,
+			statementsChangerState,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
@@ -212,7 +215,7 @@
 				getClaimRevision: function () { return 0; },
 				setClaimRevision: function () {}
 			},
-			entity,
+			statementsChangerState,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
@@ -249,7 +252,7 @@
 		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
-			entity,
+			statementsChangerState,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer(),
 			fireHook
