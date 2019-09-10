@@ -4,6 +4,7 @@ import {
 import Application from '@/store/Application';
 import {
 	BRIDGE_INIT,
+	BRIDGE_SAVE,
 	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
@@ -28,6 +29,7 @@ import {
 } from '@/store/entity/getterTypes';
 import {
 	ENTITY_INIT,
+	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import DataValue from '@/datamodel/DataValue';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
@@ -115,5 +117,26 @@ export const actions = {
 			// TODO: store information about the error somewhere and show it!
 			throw error;
 		} );
+	},
+
+	[ BRIDGE_SAVE ](
+		context: ActionContext<Application, Application>,
+	): Promise<void> {
+		if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
+			context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+			return Promise.reject( null );
+		}
+
+		return context.dispatch(
+			namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ),
+		)
+			.then( () => {
+			/* TODO close on success */
+			} )
+			.catch( ( error: Error ) => {
+				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+				// TODO: store information about the error somewhere and show it!
+				throw error;
+			} );
 	},
 };
