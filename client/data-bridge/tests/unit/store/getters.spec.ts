@@ -82,4 +82,25 @@ describe( 'root/getters', () => {
 			} );
 		} );
 	} );
+
+	describe( 'targetLabel', () => {
+		it( 'returns the targetProperty and no linguistic content' +
+			', if no targetLabel is set.', () => {
+			const targetProperty = 'P23';
+			const applicationState = newApplicationState( { targetProperty } );
+
+			expect( getters.targetLabel(
+				applicationState, null, applicationState, null,
+			) ).toStrictEqual( { value: targetProperty, language: 'zxx' } );
+		} );
+
+		it( 'returns the targetLabel term', () => {
+			const targetLabel = { language: 'zh', value: '土豆' };
+			const applicationState = newApplicationState( { targetLabel } );
+
+			expect( getters.targetLabel(
+				applicationState, null, applicationState, null,
+			) ).toBe( targetLabel );
+		} );
+	} );
 } );

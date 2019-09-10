@@ -19,10 +19,12 @@ import {
 } from '@/store/namespaces';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import Term from '@/datamodel/Term';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
 	let testSet: EntityRevision;
+	let labelTerm: Term;
 	const services = new ServiceRepositories();
 	let info: AppInformation;
 	// fill repository
@@ -93,6 +95,8 @@ describe( 'store/actions', () => {
 			},
 		};
 
+		labelTerm = { language: 'en', value: 'potato' };
+
 		services.setReadingEntityRepository( {
 			async getEntity( _id: string, _revision?: number ): Promise<EntityRevision> {
 				return testSet;
@@ -102,6 +106,12 @@ describe( 'store/actions', () => {
 		services.setWritingEntityRepository( {
 			async saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
 				throw new Error( 'These tests should not write any entities' );
+			},
+		} );
+
+		services.setEntityLabelRepository( {
+			async getLabel( _id: string ): Promise<Term> {
+				return labelTerm;
 			},
 		} );
 
@@ -120,6 +130,7 @@ describe( 'store/actions', () => {
 			const successStore = createStore( services );
 			return successStore.dispatch( BRIDGE_INIT, info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );
+				expect( successStore.state.targetLabel ).toBe( labelTerm );
 			} );
 		} );
 

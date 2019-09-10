@@ -43,6 +43,13 @@ services.setLanguageInfoRepository(
 	),
 );
 
+// TODO: Wire this correctly
+services.setEntityLabelRepository( {
+	getLabel( _x ) {
+		return Promise.resolve( { language: 'de', value: 'Kartoffel' } );
+	},
+} );
+
 const information = {
 	entityId: 'Q42',
 	propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,

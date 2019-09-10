@@ -12,6 +12,7 @@ import {
 } from '@/store/entity/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import Term from '@/datamodel/Term';
 
 export const getters: GetterTree<Application, Application> = {
 	editFlow( state: Application ): string {
@@ -42,5 +43,16 @@ export const getters: GetterTree<Application, Application> = {
 		return getters[
 			namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
 		]( path );
+	},
+
+	targetLabel( state: Application ): Term {
+		if ( state.targetLabel === null ) {
+			return {
+				language: 'zxx',
+				value: state.targetProperty,
+			};
+		}
+
+		return state.targetLabel;
 	},
 };

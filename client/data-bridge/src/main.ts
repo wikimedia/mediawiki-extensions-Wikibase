@@ -16,6 +16,12 @@ export function launch(
 	information: AppInformation,
 	services: ServiceRepositories,
 ): void {
+	// TODO remove next line after it is correctly wired up
+	services.setEntityLabelRepository( {
+		getLabel( _x ) {
+			return Promise.reject();
+		},
+	} );
 	Vue.directive( 'inlanguage', inlanguage( services.getLanguageInfoRepository() ) );
 	const store = createStore( services );
 	store.dispatch( BRIDGE_INIT, information );

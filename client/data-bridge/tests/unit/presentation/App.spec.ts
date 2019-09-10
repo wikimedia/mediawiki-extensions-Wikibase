@@ -53,6 +53,11 @@ describe( 'App.vue', () => {
 				) );
 			},
 		} );
+		services.setEntityLabelRepository( {
+			getLabel( _id ) {
+				return Promise.reject();
+			},
+		} );
 
 		store = createStore( services );
 
