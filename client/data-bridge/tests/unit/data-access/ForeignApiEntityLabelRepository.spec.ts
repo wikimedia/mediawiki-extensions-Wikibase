@@ -4,6 +4,7 @@ import Term from '@/datamodel/Term';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
+import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWithoutLabelInLanguageException';
 
 function mockForeignApi( successObject?: unknown, rejectData?: unknown ): ForeignApi {
 	return {
@@ -113,6 +114,25 @@ describe( 'ForeignApiEntityLabelRepository', () => {
 	} );
 
 	describe( 'if there is a problem', () => {
+		it( 'rejects on property which does not contain label in given language', () => {
+			const foreignApi = mockForeignApi( {
+				entities: {
+					Q4711: {
+						type: 'item',
+						id: 'Q4711',
+						labels: {},
+					},
+				}, success: 1,
+			} );
+
+			const entityLabelReader = new ForeignApiEntityLabelRepository( 'de', foreignApi );
+			return expect( entityLabelReader.getLabel( 'Q4711' ) )
+				.rejects
+				.toStrictEqual(
+					new EntityWithoutLabelInLanguageException( "Could not find label for language 'de'." ),
+				);
+		} );
+
 		it( 'rejects on result that does not contain an object', () => {
 			const foreignApi = mockForeignApi( 'noObject' );
 
