@@ -12,6 +12,9 @@
 global $wgCdnMaxAge;
 
 return [
+	// feature flag for tainted references
+	'taintedReferencesEnabled' => false,
+
 	// url of (termbox) ssr-server
 	'ssrServerUrl' => '',
 
