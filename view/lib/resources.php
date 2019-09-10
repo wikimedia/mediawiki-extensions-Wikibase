@@ -23,6 +23,11 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
 	];
 
+	$wikibaseDatavaluesValueviewLibPaths = [
+		'localBasePath' => __DIR__ . '/wikibase-data-values-value-view/lib',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/lib',
+	];
+
 	$wikibaseDatavaluesValueviewSrcPaths = [
 		'localBasePath' => __DIR__ . '/wikibase-data-values-value-view/src',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/src',
@@ -426,6 +431,194 @@ return call_user_func( function() {
 				'dataValues.js',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
+		],
+
+		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery/jquery.animateWithEvent.js',
+			],
+			'dependencies' => [
+				'jquery.AnimationEvent',
+			],
+		],
+
+		'jquery.AnimationEvent' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery/jquery.AnimationEvent.js',
+			],
+			'dependencies' => [
+				'jquery.PurposedCallbacks',
+			],
+		],
+
+		'jquery.focusAt' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery/jquery.focusAt.js',
+			],
+		],
+
+		'jquery.inputautoexpand' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery/jquery.inputautoexpand.js',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+			],
+		],
+
+		'jquery.PurposedCallbacks' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery/jquery.PurposedCallbacks.js',
+			],
+		],
+
+		'jquery.ui.inputextender' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.inputextender.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.inputextender.css',
+			],
+			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.event.special.eachchange',
+				'jquery.ui.position',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.listrotator' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.listrotator.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.listrotator.css',
+			],
+			'dependencies' => [
+				'jquery.ui.autocomplete', // needs jquery.ui.menu
+				'jquery.ui.widget',
+				'jquery.ui.position',
+			],
+			'messages' => [
+				'valueview-listrotator-manually',
+			],
+		],
+
+		'jquery.ui.commonssuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.commonssuggester.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.commonssuggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+				'util.highlightSubstring',
+			],
+		],
+
+		'jquery.ui.languagesuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.languagesuggester.js',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.toggler' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.toggler.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.toggler.css',
+			],
+			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.ui.core',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.unitsuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.unitsuggester.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.unitsuggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.util.adaptlettercase' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.util/jquery.util.adaptlettercase.js',
+			],
+		],
+
+		'util.ContentLanguages' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.ContentLanguages.js',
+			],
+			'dependencies' => [
+				'util.inherit',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
+		'util.Extendable' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.Extendable.js',
+			],
+		],
+
+		'util.MessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.MessageProvider.js',
+			],
+		],
+
+		'util.HashMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.HashMessageProvider.js',
+			],
+		],
+
+		'util.CombiningMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.CombiningMessageProvider.js',
+			],
+		],
+
+		'jquery.ui.preview' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.preview.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.preview.css',
+			],
+			'dependencies' => [
+				'jquery.ui.widget',
+				'util.CombiningMessageProvider',
+				'util.HashMessageProvider'
+			],
+		],
+
+		'util.Notifier' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.Notifier.js',
+			],
+		],
+
+		'util.PrefixingMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.PrefixingMessageProvider.js',
+			],
 		],
 
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
