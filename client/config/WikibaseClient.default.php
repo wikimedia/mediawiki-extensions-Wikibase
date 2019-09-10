@@ -6,6 +6,10 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
 use Wikibase\WikibaseSettings;
 
+// manually load EntityUsage so we can use its constants below –
+// extension.json AutoloadNamespaces has not been processed yet
+require_once __DIR__ . '/../includes/Usage/EntityUsage.php';
+
 /**
  * This file assigns the default values to all Wikibase Client settings.
  *
