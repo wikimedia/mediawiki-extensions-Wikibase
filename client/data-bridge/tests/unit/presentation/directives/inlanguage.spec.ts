@@ -1,14 +1,14 @@
-import Language from '@/datamodel/Language';
+import Bcp47Language from '@/datamodel/Bcp47Language';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import inlanguageConstructor from '@/presentation/directives/inlanguage';
 
 describe( 'inlanguage directive', () => {
 	it( 'adds language properties to element\'s attributes', () => {
 		const languageCode = 'de';
-		const language: Language = { code: languageCode, directionality: 'ltr' };
+		const language: Bcp47Language = { code: languageCode, directionality: 'ltr' };
 		const element = document.createElement( 'div' );
 		const resolver: LanguageInfoRepository = {
-			resolve: jest.fn( (): Language => language ),
+			resolve: jest.fn( (): Bcp47Language => language ),
 		};
 		element.setAttribute = jest.fn();
 		const inlanguage = inlanguageConstructor( resolver );

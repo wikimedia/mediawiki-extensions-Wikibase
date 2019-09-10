@@ -2,7 +2,7 @@ import {
 	UlsData,
 	MwLanguage,
 } from '@/@types/mediawiki/MwWindow';
-import Language from '@/datamodel/Language';
+import Bcp47Language from '@/datamodel/Bcp47Language';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 
 export default class MwLanguageInfoRepository implements LanguageInfoRepository {
@@ -17,7 +17,7 @@ export default class MwLanguageInfoRepository implements LanguageInfoRepository 
 		this.bcp47Resolver = mwLanguage.bcp47;
 	}
 
-	public resolve( languageCode: string ): Language {
+	public resolve( languageCode: string ): Bcp47Language {
 		return {
 			code: this.bcp47Resolver( languageCode ),
 			directionality: this.directionalityResolver( languageCode ),
