@@ -56,8 +56,7 @@ ol { // overcome very strong selector, e.g. .content ul li
 }
 
 .wb-db-app {
-	width: 458px;
-	height: 448px;
+	height: 100%;
 	font-family: $font-family-system-sans;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -65,8 +64,7 @@ ol { // overcome very strong selector, e.g. .content ul li
 	padding: $padding-panel-form;
 
 	@include media-breakpoint-up(breakpoint) {
-		width: 100%;
-		height: 100%;
+		height: 448px;
 	}
 }
 </style>
