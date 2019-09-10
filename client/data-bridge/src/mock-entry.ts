@@ -12,7 +12,7 @@ const services = new ServiceRepositories();
 services.setReadingEntityRepository(
 	new SpecialPageReadingEntityRepository(
 		{
-			get: () => {
+			get() {
 				return Entities;
 			},
 		} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -31,12 +31,12 @@ services.setWritingEntityRepository(
 services.setLanguageInfoRepository(
 	new MwLanguageInfoRepository(
 		{
-			bcp47: () => {
+			bcp47() {
 				return 'de';
 			},
 		},
 		{
-			getDir: () => {
+			getDir() {
 				return 'ltr';
 			},
 		},

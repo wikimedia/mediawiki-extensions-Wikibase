@@ -25,7 +25,7 @@ interface ApiOptions {
 /** see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
 export type ForeignApiConstructor = new( url: string, options?: ApiOptions ) => ForeignApi;
 export interface ForeignApi {
-	get: ( parameters: unknown, ajaxOptions?: unknown ) => JQuery.Promise<any>;
+	get( parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	getEditToken(): JQuery.Promise<any>;
 	getToken( type: string, assert?: string ): JQuery.Promise<any>;
 	post( parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
@@ -45,6 +45,7 @@ interface MediaWiki {
 	language: MwLanguage;
 }
 
+export type WindowManagerConstructor = new() => WindowManager;
 export interface WindowManager {
 	addWindows( elements: OOElement[] ): void;
 	openWindow( element: OOElement ): void;
@@ -55,26 +56,28 @@ export interface OOElement {
 	initialize(): void;
 }
 
+export type DialogConstructor = new( options: object ) => Dialog;
 export interface Dialog extends OOElement {
 	$body: JQuery;
 	getBodyHeight(): number;
 }
 
+export type PanelLayoutConstructor = new( options: object ) => PanelLayout;
 export interface PanelLayout {
 	$element: JQuery;
 }
 
 export interface MwWindowOO {
 	ui: {
-		Dialog: new( options: object ) => Dialog;
-		PanelLayout: new( options: object ) => PanelLayout;
-		WindowManager: new() => WindowManager;
+		Dialog: DialogConstructor;
+		PanelLayout: PanelLayoutConstructor;
+		WindowManager: WindowManagerConstructor;
 	};
 	inheritClass( child: any, parent: any ): void; // takes "classes" as arguments
 }
 
 export interface UlsData {
-	getDir: ( languageCode?: string ) => 'ltr'|'rtl';
+	getDir( languageCode?: string ): 'ltr'|'rtl';
 }
 
 interface JQUls {
