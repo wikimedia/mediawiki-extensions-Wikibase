@@ -97,7 +97,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -2361,12 +2360,6 @@ class WikibaseRepo {
 			//TODO: fallback chain
 			ValueFormatter::OPT_LANG => $langCode
 		] );
-
-		$termLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
-		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
-			$this->getLanguageFallbackChainFactory(),
-			$termLookup
-		);
 
 		$htmlFormatterFactory = $this->getEntityIdHtmlLinkFormatterFactory();
 		$entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $contextSource->getLanguage() );
