@@ -1,5 +1,6 @@
 import ServiceRepositories from '@/services/ServiceRepositories';
 import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
+import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 
 function newServices(): ServiceRepositories {
@@ -8,6 +9,10 @@ function newServices(): ServiceRepositories {
 
 function newMockReadingEntityRepository(): ReadingEntityRepository {
 	return {} as ReadingEntityRepository;
+}
+
+function newMockWritingEntityRepository(): WritingEntityRepository {
+	return {} as WritingEntityRepository;
 }
 
 function newMockLanguageInfoRepository(): LanguageInfoRepository {
@@ -25,6 +30,20 @@ describe( 'ServiceRepositories', () => {
 			const mockReadingEntityRepository = newMockReadingEntityRepository();
 			services.setReadingEntityRepository( mockReadingEntityRepository );
 			expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
+		} );
+	} );
+
+	describe( 'WritingEntityRepository', () => {
+		it( 'throws an error if it is not set', () => {
+			expect( () => newServices().getWritingEntityRepository() ).toThrow();
+		} );
+
+		it( 'can set and get an WritingEntityRepository', () => {
+			const services = newServices();
+			const mockWritingEntityRepository = newMockWritingEntityRepository();
+
+			services.setWritingEntityRepository( mockWritingEntityRepository );
+			expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
 		} );
 	} );
 
