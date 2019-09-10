@@ -1,7 +1,9 @@
+import EntityId from '@/datamodel/EntityId';
+
 interface WikibaseEntityId {
 	'entity-type': string;
 	'numeric-id'?: number;
-	id: string; // https://github.com/Microsoft/TypeScript/issues/6579 is accepted
+	id: EntityId;
 }
 
 export default WikibaseEntityId;

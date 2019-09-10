@@ -1,5 +1,7 @@
+import EntityId from '@/datamodel/EntityId';
+
 export default interface MainSnakPath {
-	entityId: string;
-	propertyId: string;
+	entityId: EntityId;
+	propertyId: EntityId;
 	index: number;
 }

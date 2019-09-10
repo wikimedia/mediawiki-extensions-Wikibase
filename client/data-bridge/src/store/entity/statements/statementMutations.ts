@@ -5,11 +5,12 @@ import StatementMap from '@/datamodel/StatementMap';
 import {
 	STATEMENTS_SET,
 } from '@/store/entity/statements/mutationTypes';
+import EntityId from '@/datamodel/EntityId';
 
 export const statementMutations: MutationTree<StatementsState> = {
 	[ STATEMENTS_SET ](
 		state: StatementsState,
-		payload: { entityId: string; statements: StatementMap },
+		payload: { entityId: EntityId; statements: StatementMap },
 	): void {
 		Vue.set( state, payload.entityId, payload.statements );
 	},

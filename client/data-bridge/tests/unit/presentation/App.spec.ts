@@ -26,13 +26,14 @@ import ServiceRepositories from '@/services/ServiceRepositories';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
 import MessageKeys from '@/definitions/MessageKeys';
+import EntityId from '@/datamodel/EntityId';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
 
 describe( 'App.vue', () => {
 	let store: Store<Application>;
-	let entityId: string;
+	let entityId: EntityId;
 	let propertyId: string;
 	let editFlow: EditFlow;
 	const services = new ServiceRepositories();

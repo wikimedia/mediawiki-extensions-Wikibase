@@ -8,12 +8,13 @@ import {
 } from '@/store/entity/statements/mutationTypes';
 import StatementsState from '@/store/entity/statements/StatementsState';
 import StatementMap from '@/datamodel/StatementMap';
+import EntityId from '@/datamodel/EntityId';
 
 export const statementActions = {
 	[ STATEMENTS_INIT ](
 		context: ActionContext<StatementsState, Application>,
 		payload: {
-			entityId: string;
+			entityId: EntityId;
 			statements: StatementMap;
 		},
 	): void {
