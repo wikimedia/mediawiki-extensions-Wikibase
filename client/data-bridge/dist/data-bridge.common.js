@@ -2501,6 +2501,13 @@ $export($export.S + $export.F * !__webpack_require__("8e60"), 'Object', { define
 
 /***/ }),
 
+/***/ "4706":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "47ee":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3983,6 +3990,17 @@ exports.f = __webpack_require__("9e1e") ? Object.defineProperty : function defin
   return O;
 };
 
+
+/***/ }),
+
+/***/ "87a9":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PropertyLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4706");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PropertyLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PropertyLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PropertyLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -5945,12 +5963,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=f2caa80a&
-var DataBridgevue_type_template_id_f2caa80a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetProperty,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue}})],1)}
-var DataBridgevue_type_template_id_f2caa80a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=0d43dffe&
+var DataBridgevue_type_template_id_0d43dffe_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue}})],1)}
+var DataBridgevue_type_template_id_0d43dffe_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=f2caa80a&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=0d43dffe&
 
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
@@ -6035,24 +6053,21 @@ function merge(a, b) {
 // CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
 
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=7f156cb2&
-var StringDataValuevue_type_template_id_7f156cb2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('label',{staticClass:"wb-db-stringValue__label",attrs:{"for":_vm.id}},[_vm._v(_vm._s(_vm.label))]),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
-var StringDataValuevue_type_template_id_7f156cb2_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=109b7411&
+var StringDataValuevue_type_template_id_109b7411_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('PropertyLabel',{attrs:{"term":_vm.label,"html-for":_vm.id}}),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
+var StringDataValuevue_type_template_id_109b7411_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=7f156cb2&
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=109b7411&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ResizingTextField.vue?vue&type=template&id=1a4180d9&
-var ResizingTextFieldvue_type_template_id_1a4180d9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('textarea',{domProps:{"value":_vm.value},on:{"input":_vm.setValue,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();}}})}
-var ResizingTextFieldvue_type_template_id_1a4180d9_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
+var PropertyLabelvue_type_template_id_352b5eee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{directives:[{name:"inlanguage",rawName:"v-inlanguage",value:(_vm.term.language),expression:"term.language"}],staticClass:"wb-db-PropertyLabel",attrs:{"for":_vm.htmlFor}},[_vm._v(_vm._s(_vm.term.value))])}
+var PropertyLabelvue_type_template_id_352b5eee_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue?vue&type=template&id=1a4180d9&
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ResizingTextField.vue?vue&type=script&lang=ts&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
 
 
 
@@ -6060,68 +6075,35 @@ var es6_regexp_replace = __webpack_require__("a481");
 
 
 
-
-
-
-
-var ResizingTextFieldvue_type_script_lang_ts_ResizingTextField =
+var PropertyLabelvue_type_script_lang_ts_PropertyLabel =
 /*#__PURE__*/
 function (_Vue) {
-  _inherits(ResizingTextField, _Vue);
+  _inherits(PropertyLabel, _Vue);
 
-  function ResizingTextField() {
-    _classCallCheck(this, ResizingTextField);
+  function PropertyLabel() {
+    _classCallCheck(this, PropertyLabel);
 
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ResizingTextField).apply(this, arguments));
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(PropertyLabel).apply(this, arguments));
   }
 
-  _createClass(ResizingTextField, [{
-    key: "mounted",
-    value: function mounted() {
-      this.resizeTextField();
-    }
-  }, {
-    key: "setValue",
-    value: function setValue(event) {
-      var _this = this;
-
-      this.$emit('input', this.removeNewlines(event.target.value)); // make sure that even nodiff changes to the state will update our textarea
-      // a nodiff could be caused by pasting newlines only
-
-      this.$forceUpdate();
-      this.$nextTick().then(function () {
-        _this.resizeTextField();
-      });
-    }
-  }, {
-    key: "removeNewlines",
-    value: function removeNewlines(value) {
-      return value.replace(/\r?\n/g, '');
-    }
-  }, {
-    key: "resizeTextField",
-    value: function resizeTextField() {
-      var textarea = this.$el;
-      textarea.style.height = '0';
-      var border = this.getPropertyValueInPx(textarea, 'border-top-width') + this.getPropertyValueInPx(textarea, 'border-bottom-width');
-      textarea.style.height = "".concat(this.$el.scrollHeight + border, "px");
-    }
-  }, {
-    key: "getPropertyValueInPx",
-    value: function getPropertyValueInPx(element, property) {
-      return parseInt(window.getComputedStyle(element).getPropertyValue(property));
-    }
-  }]);
-
-  return ResizingTextField;
+  return PropertyLabel;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-__decorate([Prop()], ResizingTextFieldvue_type_script_lang_ts_ResizingTextField.prototype, "value", void 0);
+__decorate([Prop({
+  required: true
+})], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "term", void 0);
 
-ResizingTextFieldvue_type_script_lang_ts_ResizingTextField = __decorate([vue_class_component_common_default.a], ResizingTextFieldvue_type_script_lang_ts_ResizingTextField);
-/* harmony default export */ var ResizingTextFieldvue_type_script_lang_ts_ = (ResizingTextFieldvue_type_script_lang_ts_ResizingTextField);
-// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ResizingTextFieldvue_type_script_lang_ts_ = (ResizingTextFieldvue_type_script_lang_ts_); 
+__decorate([Prop({
+  required: true
+})], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "htmlFor", void 0);
+
+PropertyLabelvue_type_script_lang_ts_PropertyLabel = __decorate([vue_class_component_common_default()({})], PropertyLabelvue_type_script_lang_ts_PropertyLabel);
+/* harmony default export */ var PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_PropertyLabel);
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=style&index=0&lang=scss&
+var PropertyLabelvue_type_style_index_0_lang_scss_ = __webpack_require__("87a9");
+
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -6217,7 +6199,8 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue
+
 
 
 
@@ -6226,6 +6209,106 @@ function normalizeComponent (
 /* normalize component */
 
 var component = normalizeComponent(
+  components_PropertyLabelvue_type_script_lang_ts_,
+  PropertyLabelvue_type_template_id_352b5eee_render,
+  PropertyLabelvue_type_template_id_352b5eee_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_PropertyLabel = (component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28969507-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ResizingTextField.vue?vue&type=template&id=1a4180d9&
+var ResizingTextFieldvue_type_template_id_1a4180d9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('textarea',{domProps:{"value":_vm.value},on:{"input":_vm.setValue,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();}}})}
+var ResizingTextFieldvue_type_template_id_1a4180d9_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue?vue&type=template&id=1a4180d9&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ResizingTextField.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+var ResizingTextFieldvue_type_script_lang_ts_ResizingTextField =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ResizingTextField, _Vue);
+
+  function ResizingTextField() {
+    _classCallCheck(this, ResizingTextField);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ResizingTextField).apply(this, arguments));
+  }
+
+  _createClass(ResizingTextField, [{
+    key: "mounted",
+    value: function mounted() {
+      this.resizeTextField();
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(event) {
+      var _this = this;
+
+      this.$emit('input', this.removeNewlines(event.target.value)); // make sure that even nodiff changes to the state will update our textarea
+      // a nodiff could be caused by pasting newlines only
+
+      this.$forceUpdate();
+      this.$nextTick().then(function () {
+        _this.resizeTextField();
+      });
+    }
+  }, {
+    key: "removeNewlines",
+    value: function removeNewlines(value) {
+      return value.replace(/\r?\n/g, '');
+    }
+  }, {
+    key: "resizeTextField",
+    value: function resizeTextField() {
+      var textarea = this.$el;
+      textarea.style.height = '0';
+      var border = this.getPropertyValueInPx(textarea, 'border-top-width') + this.getPropertyValueInPx(textarea, 'border-bottom-width');
+      textarea.style.height = "".concat(this.$el.scrollHeight + border, "px");
+    }
+  }, {
+    key: "getPropertyValueInPx",
+    value: function getPropertyValueInPx(element, property) {
+      return parseInt(window.getComputedStyle(element).getPropertyValue(property));
+    }
+  }]);
+
+  return ResizingTextField;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Prop()], ResizingTextFieldvue_type_script_lang_ts_ResizingTextField.prototype, "value", void 0);
+
+ResizingTextFieldvue_type_script_lang_ts_ResizingTextField = __decorate([vue_class_component_common_default.a], ResizingTextFieldvue_type_script_lang_ts_ResizingTextField);
+/* harmony default export */ var ResizingTextFieldvue_type_script_lang_ts_ = (ResizingTextFieldvue_type_script_lang_ts_ResizingTextField);
+// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ResizingTextFieldvue_type_script_lang_ts_ = (ResizingTextFieldvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/ResizingTextField.vue
+
+
+
+
+
+/* normalize component */
+
+var ResizingTextField_component = normalizeComponent(
   components_ResizingTextFieldvue_type_script_lang_ts_,
   ResizingTextFieldvue_type_template_id_1a4180d9_render,
   ResizingTextFieldvue_type_template_id_1a4180d9_staticRenderFns,
@@ -6236,11 +6319,12 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ var components_ResizingTextField = (component.exports);
+/* harmony default export */ var components_ResizingTextField = (ResizingTextField_component.exports);
 // EXTERNAL MODULE: ./node_modules/uuid/index.js
 var uuid = __webpack_require__("11c1");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -6306,6 +6390,7 @@ __decorate([Prop({
 
 StringDataValuevue_type_script_lang_ts_StringDataValue = __decorate([vue_class_component_common_default()({
   components: {
+    PropertyLabel: components_PropertyLabel,
     ResizingTextField: components_ResizingTextField
   }
 })], StringDataValuevue_type_script_lang_ts_StringDataValue);
@@ -6326,8 +6411,8 @@ var StringDataValuevue_type_style_index_0_lang_scss_ = __webpack_require__("2f88
 
 var StringDataValue_component = normalizeComponent(
   components_StringDataValuevue_type_script_lang_ts_,
-  StringDataValuevue_type_template_id_7f156cb2_render,
-  StringDataValuevue_type_template_id_7f156cb2_staticRenderFns,
+  StringDataValuevue_type_template_id_109b7411_render,
+  StringDataValuevue_type_template_id_109b7411_staticRenderFns,
   false,
   null,
   null,
@@ -6366,6 +6451,8 @@ __decorate([Getter('targetValue')], DataBridgevue_type_script_lang_ts_DataBridge
 
 __decorate([Getter('targetProperty')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetProperty", void 0);
 
+__decorate([Getter('targetLabel')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetLabel", void 0);
+
 __decorate([Action(BRIDGE_SET_TARGET_VALUE)], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "setDataValue", void 0);
 
 DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_common_default()({
@@ -6386,8 +6473,8 @@ DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_c
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_f2caa80a_render,
-  DataBridgevue_type_template_id_f2caa80a_staticRenderFns,
+  DataBridgevue_type_template_id_0d43dffe_render,
+  DataBridgevue_type_template_id_0d43dffe_staticRenderFns,
   false,
   null,
   null,

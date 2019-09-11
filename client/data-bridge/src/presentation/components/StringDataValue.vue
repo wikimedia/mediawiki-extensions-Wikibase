@@ -1,9 +1,9 @@
 <template>
 	<div class="wb-db-stringValue">
-		<label
-			class="wb-db-stringValue__label"
-			:for="id"
-		>{{ label }}</label>
+		<PropertyLabel
+			:term="label"
+			:html-for="id"
+		/>
 		<ResizingTextField
 			:id="id"
 			class="wb-db-stringValue__input"
@@ -19,11 +19,13 @@ import {
 } from 'vue-property-decorator';
 import { Prop } from 'vue-property-decorator';
 import DataValue from '@/datamodel/DataValue';
+import Term from '@/datamodel/Term';
+import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
 import { v4 as uuid } from 'uuid';
 
 @Component( {
-	components: { ResizingTextField },
+	components: { PropertyLabel, ResizingTextField },
 } )
 export default class StringDataValue extends Vue {
 	public readonly id = uuid();
@@ -32,7 +34,7 @@ export default class StringDataValue extends Vue {
 	public dataValue!: DataValue|null;
 
 	@Prop( { required: true } )
-	public label!: string;
+	public label!: Term;
 
 	@Prop( { required: false } )
 	public placeholder?: string;
@@ -61,11 +63,6 @@ export default class StringDataValue extends Vue {
 <style lang="scss">
 .wb-db-stringValue {
 	@include marginInputComponent();
-
-	&__label {
-		@include inputFieldLabel();
-		@include hyphens();
-	}
 
 	&__input {
 		@include transitions();

@@ -36,6 +36,7 @@ describe( 'DataBridge', () => {
 		Vue.set( store, 'getters', {
 			targetValue: { type: 'string', value: '' },
 			targetProperty: 'P123',
+			targetLabel: { value: 'P123', language: 'zxx' },
 		} );
 		const wrapper = shallowMount( DataBridge, {
 			store,
@@ -48,7 +49,8 @@ describe( 'DataBridge', () => {
 	it( 'delegates the necessary props to StringDataValue', () => {
 		const targetValue = { type: 'string', value: 'Töfften' };
 		const targetProperty = 'P123';
-		Vue.set( store, 'getters', { targetValue, targetProperty } );
+		const targetLabel = { value: 'P123', language: 'zxx' };
+		Vue.set( store, 'getters', { targetValue, targetProperty, targetLabel } );
 
 		const wrapper = shallowMount( DataBridge, {
 			store,
@@ -56,6 +58,6 @@ describe( 'DataBridge', () => {
 		} );
 
 		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toBe( targetValue );
-		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetProperty );
+		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetLabel );
 	} );
 } );

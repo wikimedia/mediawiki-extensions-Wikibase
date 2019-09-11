@@ -1,11 +1,12 @@
+import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
 import { shallowMount } from '@vue/test-utils';
 
 describe( 'StringDataValue', () => {
 	describe( 'label and editfield', () => {
-		it( 'has a label', () => {
-			const label = 'P123';
+		it( 'passes the label down', () => {
+			const label = { value: 'P123', language: 'zxx' };
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
 					label,
@@ -14,7 +15,7 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-			expect( wrapper.find( '.wb-db-stringValue__label' ).text() ).toBe( label );
+			expect( wrapper.find( PropertyLabel ).props( 'term' ) ).toBe( label );
 		} );
 
 		it( 'passes the DataValue down', () => {
@@ -57,7 +58,7 @@ describe( 'StringDataValue', () => {
 			} );
 
 			expect(
-				wrapper.find( '.wb-db-stringValue__label' ).attributes( 'for' ),
+				wrapper.find( PropertyLabel ).props( 'htmlFor' ),
 			).toBe(
 				wrapper.find( ResizingTextField ).attributes( 'id' ),
 			);
