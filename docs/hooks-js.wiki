@@ -10,7 +10,7 @@ This file describes JavaScript hooks defined by the Wikibase extensions.
 : Listener callbacks should expect the entity as a native JavaScript object (the parsed JSON serialization) passed as the first argument.
 
 ; 'wikibase.statement.saved' (StatementsChanger.js)
-: Called after a statement has been saved. Entity ID and statement ID are passed as arguments.
+: Called after a statement has been saved. Entity ID, statement ID, the old statement (null in case of a new statement) and the updated one are passed as arguments.
 
 ; 'wikibase.statement.removed' (StatementsChanger.js)
 : Called after a statement has been removed. Entity ID and statement ID are passed as arguments.

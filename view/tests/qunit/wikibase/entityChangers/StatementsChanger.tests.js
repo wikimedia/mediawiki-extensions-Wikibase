@@ -281,7 +281,8 @@
 		);
 		var guid = 'Q1$a69d8233-b677-43e6-a7c6-519f525eab0c';
 
-		statementsChanger.save( newNoValueSnakStatement( guid ) );
+		var statement = newNoValueSnakStatement( guid );
+		statementsChanger.save( statement );
 
 		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
 
@@ -295,7 +296,16 @@
 		} );
 
 		assert.ok( fireHook.calledOnce, 'hook should have fired' );
-		assert.ok( fireHook.calledWith( 'wikibase.statement.saved', 'Q1', guid ), 'hook should have correct arguments' );
+		assert.ok(
+			fireHook.calledWithExactly(
+				'wikibase.statement.saved',
+				'Q1',
+				guid,
+				null,
+				statement
+			),
+			'hook should have correct arguments'
+		);
 	} );
 
 	QUnit.test( 'save properly updates StatementsChangerState', function ( assert ) {
