@@ -18,6 +18,6 @@ $padding-panel-form: px-to-em( 16px );
 $color-placeholder: $wmui-color-base30;
 
 // project specific
-$breakpoint: 499;
+$breakpoint: 500px;// 499+1
 
 $grid-breakpoints: ( breakpoint: $breakpoint );
