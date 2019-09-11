@@ -13,6 +13,12 @@
 		new wikibase.datamodel.StatementGroupSet()
 	);
 
+	function newNoValueSnakStatement( guid ) {
+		return new wb.datamodel.Statement( new wb.datamodel.Claim(
+			new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, guid
+		) );
+	}
+
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.strictEqual(
 			typeof SUBJECT,
@@ -37,11 +43,7 @@
 			statementsChangerState
 		);
 
-		statementsChanger.remove(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		);
+		statementsChanger.remove( newNoValueSnakStatement() );
 
 		assert.ok( api.removeClaim.calledOnce );
 	} );
@@ -64,11 +66,7 @@
 			statementsChangerState
 		);
 
-		return statementsChanger.remove(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		)
+		return statementsChanger.remove( newNoValueSnakStatement() )
 		.done( function () {
 			assert.ok( true, 'remove succeeded' );
 		} );
@@ -93,11 +91,7 @@
 
 		var done = assert.async();
 
-		statementsChanger.remove(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		)
+		statementsChanger.remove( newNoValueSnakStatement() )
 		.done( function () {
 			assert.ok( false, 'remove should have failed' );
 		} )
@@ -130,13 +124,7 @@
 		);
 		var guid = 'Q1$ffbcf247-0c66-4f97-81a0-9d25822104b8';
 
-		statementsChanger.remove(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-				null,
-				guid
-			) )
-		);
+		statementsChanger.remove( newNoValueSnakStatement( guid ) );
 
 		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
 
@@ -144,6 +132,52 @@
 
 		assert.ok( fireHook.calledOnce, 'hook should have fired' );
 		assert.ok( fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid ), 'hook should have correct arguments' );
+	} );
+
+	QUnit.test( 'remove properly updates StatementsChangerState', function ( assert ) {
+		var deferred = $.Deferred();
+		var api = {
+			removeClaim: function () {
+				return deferred.promise();
+			}
+		};
+		var statement1 = newNoValueSnakStatement( 'apple' );
+		var statement2 = newNoValueSnakStatement( 'pie' );
+		var statementsChangerState = new wb.entityChangers.StatementsChangerState(
+			'Q1',
+			new wb.datamodel.StatementGroupSet( [
+				new wb.datamodel.StatementGroup(
+					'P1',
+					new wb.datamodel.StatementList( [ statement1, statement2 ] )
+				)
+			] )
+		);
+		var statementsChangerStatements = statementsChangerState.getStatements();
+		var statementsChanger = new SUBJECT(
+			api,
+			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			statementsChangerState
+		);
+
+		assert.strictEqual(
+			statementsChangerStatements.getItemByKey( 'P1' ).getItemContainer().length,
+			2
+		);
+		statementsChanger.remove( statement1 );
+		deferred.resolve( { pageinfo: { lastrevid: 12 } } );
+
+		var actualStatements = statementsChangerStatements.getItemByKey( 'P1' ).getItemContainer().toArray();
+		assert.strictEqual( actualStatements.length, 1 );
+		assert.strictEqual( actualStatements[ 0 ].getClaim().getGuid(), 'pie' );
+
+		statementsChanger.remove( statement2 );
+		deferred.resolve( { pageinfo: { lastrevid: 13 } } );
+
+		assert.ok( statementsChangerStatements.isEmpty() );
+		assert.strictEqual(
+			statementsChangerStatements.getItemByKey( 'P1' ),
+			null
+		);
 	} );
 
 	QUnit.test( 'save performs correct API call', function ( assert ) {
@@ -159,11 +193,7 @@
 			new wb.serialization.StatementSerializer()
 		);
 
-		statementsChanger.save(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		);
+		statementsChanger.save( newNoValueSnakStatement() );
 
 		assert.ok( api.setClaim.calledOnce );
 	} );
@@ -188,11 +218,7 @@
 			new wb.serialization.StatementDeserializer()
 		);
 
-		return statementsChanger.save(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		)
+		return statementsChanger.save( newNoValueSnakStatement() )
 		.done( function ( savedStatement ) {
 			assert.ok(
 				savedStatement instanceof wb.datamodel.Statement,
@@ -222,11 +248,7 @@
 
 		var done = assert.async();
 
-		statementsChanger.save(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		)
+		statementsChanger.save( newNoValueSnakStatement() )
 		.done( function ( savedStatement ) {
 			assert.ok( false, 'save should have failed' );
 		} )
@@ -259,13 +281,7 @@
 		);
 		var guid = 'Q1$a69d8233-b677-43e6-a7c6-519f525eab0c';
 
-		statementsChanger.save(
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-				null,
-				guid
-			) )
-		);
+		statementsChanger.save( newNoValueSnakStatement( guid ) );
 
 		assert.ok( fireHook.notCalled, 'hook should only fire when API call returns' );
 
@@ -280,6 +296,94 @@
 
 		assert.ok( fireHook.calledOnce, 'hook should have fired' );
 		assert.ok( fireHook.calledWith( 'wikibase.statement.saved', 'Q1', guid ), 'hook should have correct arguments' );
+	} );
+
+	QUnit.test( 'save properly updates StatementsChangerState', function ( assert ) {
+		var deferred;
+		var api = {
+			setClaim: function () {
+				deferred = $.Deferred();
+				return deferred.promise();
+			}
+		};
+		var statement1 = newNoValueSnakStatement( 'apple' );
+		var statement2 = newNoValueSnakStatement( 'pie' );
+		var statementsChangerState = new wb.entityChangers.StatementsChangerState(
+			'Q1',
+			new wb.datamodel.StatementGroupSet()
+		);
+		var statementsChangerStatements = statementsChangerState.getStatements();
+		var statementsChanger = new SUBJECT(
+			api,
+			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
+			statementsChangerState,
+			new wb.serialization.StatementSerializer(),
+			new wb.serialization.StatementDeserializer()
+		);
+
+		assert.strictEqual( statementsChangerStatements.getItemByKey( 'P1' ), null );
+
+		statementsChanger.save( statement1 );
+		deferred.resolve( {
+			claim: {
+				mainsnak: { snaktype: 'novalue', property: 'P1' },
+				id: statement1.getClaim().getGuid(),
+				rank: 'normal'
+			},
+			pageinfo: {}
+		} );
+
+		assert.strictEqual(
+			statementsChangerStatements.getItemByKey( 'P1' ).getItemContainer().length,
+			1
+		);
+
+		statementsChanger.save( statement2 );
+		deferred.resolve( {
+			claim: {
+				mainsnak: { snaktype: 'novalue', property: 'P1' },
+				id: statement2.getClaim().getGuid(),
+				rank: 'normal'
+			},
+			pageinfo: {}
+		} );
+
+		assert.strictEqual(
+			statementsChangerStatements.getItemByKey( 'P1' ).getItemContainer().length,
+			2
+		);
+
+		// Change statement1 to contain a somevalue snak
+		statement1.setClaim(
+			new wb.datamodel.Claim(
+				new wb.datamodel.PropertySomeValueSnak( 'P1' ),
+				null,
+				statement1.getClaim().getGuid()
+			)
+		);
+		statementsChanger.save( statement1 );
+		deferred.resolve( {
+			claim: {
+				mainsnak: { snaktype: 'somevalue', property: 'P1' },
+				id: statement1.getClaim().getGuid(),
+				rank: 'normal'
+			},
+			pageinfo: {}
+		} );
+		assert.strictEqual(
+			statementsChangerStatements.getItemByKey( 'P1' ).getItemContainer().length,
+			2
+		);
+
+		var actualStatements = statementsChangerStatements.getItemByKey( 'P1' ).getItemContainer().toArray();
+		assert.strictEqual(
+			actualStatements[ 0 ].getClaim().getMainSnak().getType(),
+			'novalue'
+		);
+		assert.strictEqual(
+			actualStatements[ 1 ].getClaim().getMainSnak().getType(),
+			'somevalue'
+		);
 	} );
 
 }( wikibase ) );

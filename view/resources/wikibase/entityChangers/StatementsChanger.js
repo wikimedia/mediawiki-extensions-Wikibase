@@ -79,9 +79,9 @@
 
 			this._api.removeClaim( guid, this._revisionStore.getClaimRevision( guid ) )
 			.done( function ( response ) {
-				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
+				var propertyId = statement.getClaim().getMainSnak().getPropertyId();
 
-				// FIXME: Set statement on this._statementsChangerState
+				self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
 				deferred.resolve();
 
@@ -90,12 +90,42 @@
 					self._statementsChangerState.getEntityId(),
 					guid
 				);
+
+				self._updateChangerStateOnRemoval( propertyId, guid );
 			} )
 			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
 			} );
 
 			return deferred.promise();
+		},
+
+		/**
+		 * @param {string} propertyId
+		 * @param {string} guid
+		 * @private
+		 */
+		_updateChangerStateOnRemoval: function ( propertyId, guid ) {
+			var statementsForPropertyId, statementsForPropertyIdArray;
+
+			statementsForPropertyId = this._statementsChangerState.getStatements().getItemByKey( propertyId );
+			if ( statementsForPropertyId === null ) {
+				// Removed a statement we don't know… warn?
+				return;
+			}
+
+			statementsForPropertyId = statementsForPropertyId.getItemContainer();
+			statementsForPropertyIdArray = statementsForPropertyId.toArray();
+			for ( var i in statementsForPropertyIdArray ) {
+				if ( statementsForPropertyIdArray[ i ].getClaim().getGuid() === guid ) {
+					statementsForPropertyId.removeItem( statementsForPropertyIdArray[ i ] );
+					break;
+				}
+			}
+			if ( statementsForPropertyId.isEmpty() ) {
+				// No more statements with this Property id, remove the whole thing.
+				this._statementsChangerState.getStatements().removeItemByKey( propertyId );
+			}
 		},
 
 		/**
@@ -117,6 +147,7 @@
 			.done( function ( result ) {
 				var savedStatement = self._statementDeserializer.deserialize( result.claim ),
 					guid = savedStatement.getClaim().getGuid(),
+					propertyId = statement.getClaim().getMainSnak().getPropertyId(),
 					pageInfo = result.pageinfo;
 
 				// Update revision store:
@@ -130,14 +161,42 @@
 					guid
 				);
 
-				// FIXME: Set statement on this._statementsChangerState
-
+				self._updateChangerStateOnSetClaim( savedStatement, propertyId, guid );
 			} )
 			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 			} );
 
 			return deferred.promise();
+		},
+
+		/**
+		 * @param {wikibase.datamodel.Statement} statement
+		 * @param {string} propertyId
+		 * @param {string} guid
+		 * @private
+		 */
+		_updateChangerStateOnSetClaim: function ( statement, propertyId, guid ) {
+			var statementsForPropertyId = this._statementsChangerState.getStatements().getItemByKey( propertyId ),
+				statementsForPropertyIdArray;
+
+			if ( statementsForPropertyId ) {
+				statementsForPropertyIdArray = statementsForPropertyId.getItemContainer().toArray();
+				for ( var i in statementsForPropertyIdArray ) {
+					if ( statementsForPropertyIdArray[ i ].getClaim().getGuid() === guid ) {
+						// Remove (the new statement will be re-added)
+						statementsForPropertyId.removeItem( statementsForPropertyIdArray[ i ] );
+						break;
+					}
+				}
+			} else {
+				// No statement with this property id yet, start a new group
+				this._statementsChangerState.getStatements().addItem(
+					new wb.datamodel.StatementGroup( propertyId, new wikibase.datamodel.StatementList() )
+				);
+				statementsForPropertyId = this._statementsChangerState.getStatements().getItemByKey( propertyId );
+			}
+			statementsForPropertyId.addItem( statement );
 		}
 	} );
 
