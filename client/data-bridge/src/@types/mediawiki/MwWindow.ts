@@ -45,10 +45,17 @@ interface MediaWiki {
 	language: MwLanguage;
 }
 
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */
+export interface WindowInstance {
+	isClosed(): boolean;
+}
+
 export type WindowManagerConstructor = new() => WindowManager;
 export interface WindowManager {
 	addWindows( elements: OOElement[] ): void;
 	openWindow( element: OOElement ): void;
+	clearWindows(): JQuery.Promise<unknown, unknown, unknown>;
+	destroy(): void;
 	$element: JQuery;
 }
 
@@ -56,10 +63,13 @@ export interface OOElement {
 	initialize(): void;
 }
 
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Dialog */
 export type DialogConstructor = new( options: object ) => Dialog;
 export interface Dialog extends OOElement {
 	$body: JQuery;
 	getBodyHeight(): number;
+	close( data?: object ): WindowInstance;
+	getManager(): WindowManager;
 }
 
 export type PanelLayoutConstructor = new( options: object ) => PanelLayout;

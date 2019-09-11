@@ -6,6 +6,7 @@ import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import { launch } from '@/main';
 import EntityRevision from '@/datamodel/EntityRevision';
+import Events from '@/events';
 
 const services = new ServiceRepositories();
 
@@ -59,4 +60,7 @@ const config = {
 	containerSelector: '#data-bridge-container',
 };
 
-launch( config, information, services );
+const emitter = launch( config, information, services );
+emitter.on( Events.onSaved, () => {
+	console.info( 'saved' ); // eslint-disable-line no-console
+} );

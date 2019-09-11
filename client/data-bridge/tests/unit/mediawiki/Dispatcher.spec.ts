@@ -3,7 +3,13 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import AppBridge from '@/definitions/AppBridge';
 import EditFlow from '@/definitions/EditFlow';
 
-const mockPrepareContainer = jest.fn();
+const manager = jest.fn();
+const dialog = {
+	getManager: jest.fn( () => manager ),
+};
+const mockPrepareContainer = jest.fn( ( _x?: any, _y?: any, _z?: any ) => {
+	return dialog;
+} );
 jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	__esModule: true,
 	default: ( oo: any, $: any, id: any ) => mockPrepareContainer( oo, $, id ),
@@ -13,6 +19,12 @@ const mockCreateServices = jest.fn();
 jest.mock( '@/mediawiki/createServices', () => ( {
 	__esModule: true,
 	default: ( mwWindow: any ) => mockCreateServices( mwWindow ),
+} ) );
+
+const mockSubscribeToAppEvents = jest.fn();
+jest.mock( '@/mediawiki/subscribeToAppEvents', () => ( {
+	__esModule: true,
+	default: ( emitter: any, windowManager: any ) => mockSubscribeToAppEvents( emitter, windowManager ),
 } ) );
 
 describe( 'Dispatcher', () => {
@@ -48,18 +60,22 @@ describe( 'Dispatcher', () => {
 
 		it( 'triggers service creation and launches app', () => {
 			const mwWindow = new ( jest.fn() )();
+			const emitter = jest.fn();
 			const app = {
-				launch: jest.fn(),
+				launch: jest.fn( () => {
+					return emitter;
+				} ),
 			};
 			const entityId = 'Q4711';
 			const propertyId = 'P815';
 			const editFlow = EditFlow.OVERWRITE;
 			const mockServices = {};
 			mockCreateServices.mockImplementation( () => mockServices );
+			mockSubscribeToAppEvents.mockClear();
 
 			const dispatcher = new Dispatcher(
 				mwWindow,
-				app,
+				app as any,
 			);
 
 			dispatcher.dispatch( {
@@ -71,7 +87,9 @@ describe( 'Dispatcher', () => {
 
 			expect( mockCreateServices ).toHaveBeenCalledWith( mwWindow );
 			expect( app.launch ).toHaveBeenCalledWith(
-				{ containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}` },
+				{
+					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
+				},
 				{
 					entityId,
 					propertyId,
@@ -79,6 +97,8 @@ describe( 'Dispatcher', () => {
 				},
 				mockServices,
 			);
+
+			expect( mockSubscribeToAppEvents ).toBeCalledWith( emitter, manager );
 		} );
 	} );
 } );
