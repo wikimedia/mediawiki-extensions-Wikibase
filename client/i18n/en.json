@@ -22,8 +22,6 @@
 	"wikibase-comment-unlink": "This page has been unlinked from {{WBREPONAME}} item. Language links removed.",
 	"wikibase-comment-restore": "Associated {{WBREPONAME}} item undeleted. Language links restored.",
 	"wikibase-comment-update": "{{WBREPONAME}} item changed",
-	"wikibase-comment-update-languages": "{{WBREPONAME}} Changed label, description and/or aliases in $1 {{PLURAL:$1|language|languages}}.",
-	"wikibase-comment-update-languages-and-other": "{{WBREPONAME}} Changed label, description and/or aliases in $1 {{PLURAL:$1|language|languages}}, and other parts.",
 	"wikibase-comment-sitelink-add": "Language link added: $1",
 	"wikibase-comment-sitelink-change": "Language link changed from $1 to $2",
 	"wikibase-comment-sitelink-remove": "Language link removed: $1",
