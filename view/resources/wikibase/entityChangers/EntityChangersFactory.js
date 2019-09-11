@@ -67,10 +67,13 @@
 		 * @return {wikibase.entityChangers.StatementsChanger}
 		 */
 		getStatementsChanger: function () {
+			if ( typeof this._entity.getStatements !== 'function' ) {
+				throw new Error( 'Statements Changer requires entity with statements' );
+			}
 			return new MODULE.StatementsChanger(
 				this._api,
 				this._revisionStore,
-				this._entity,
+				new wb.entityChangers.StatementsChangerState( this._entity.getId(), this._entity.getStatements() ),
 				new wb.serialization.StatementSerializer(),
 				new wb.serialization.StatementDeserializer(),
 				this._fireHook
