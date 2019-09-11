@@ -5478,6 +5478,9 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var BRIDGE_INIT = 'initBridge';
 var BRIDGE_SAVE = 'saveBridge';
@@ -6606,13 +6609,11 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var PROPERTY_TARGET_SET = 'setPropertyPointer';
 var EDITFLOW_SET = 'setEditFlow';
 var APPLICATION_STATUS_SET = 'setApplicationStatus';
+var TARGET_LABEL_SET = 'setTargetLabel';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -6653,7 +6654,6 @@ var ENTITY_SAVE = 'entitySave';
 
 
 
-var _actions;
 
 
 
@@ -6663,71 +6663,77 @@ var _actions;
 
 
 
+function actions(entityLabelRepository) {
+  var _ref;
 
+  return _ref = {}, _defineProperty(_ref, BRIDGE_INIT, function (context, information) {
+    context.commit(EDITFLOW_SET, information.editFlow);
+    context.commit(PROPERTY_TARGET_SET, information.propertyId);
+    entityLabelRepository.getLabel(information.propertyId).then(function (label) {
+      context.commit(TARGET_LABEL_SET, label);
+    }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
+    });
+    return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
+      entity: information.entityId
+    }).then(function () {
+      var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+      var path = {
+        entityId: entityId,
+        propertyId: context.state.targetProperty,
+        index: 0
+      };
 
-var actions = (_actions = {}, _defineProperty(_actions, BRIDGE_INIT, function (context, information) {
-  context.commit(EDITFLOW_SET, information.editFlow);
-  context.commit(PROPERTY_TARGET_SET, information.propertyId);
-  return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
-    entity: information.entityId
-  }).then(function () {
+      if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      } else {
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+      }
+    }, function (error) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+
+      throw error;
+    });
+  }), _defineProperty(_ref, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
+    if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+      return Promise.reject(null);
+    }
+
     var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
     var path = {
       entityId: entityId,
       propertyId: context.state.targetProperty,
       index: 0
     };
+    return context.dispatch(namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
+      path: path,
+      value: dataValue
+    }).catch(function (error) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
-    if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-    } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-    } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-    } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-    } else {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+      throw error;
+    });
+  }), _defineProperty(_ref, BRIDGE_SAVE, function (context) {
+    if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+      return Promise.reject(null);
     }
-  }).catch(function (error) {
-    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
-    throw error;
-  });
-}), _defineProperty(_actions, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
-  if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
-    return Promise.reject(null);
-  }
+    return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_SAVE)).then(function () {
+      /* TODO close on success */
+    }).catch(function (error) {
+      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
-  var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
-  var path = {
-    entityId: entityId,
-    propertyId: context.state.targetProperty,
-    index: 0
-  };
-  return context.dispatch(namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
-    path: path,
-    value: dataValue
-  }).catch(function (error) {
-    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-
-    throw error;
-  });
-}), _defineProperty(_actions, BRIDGE_SAVE, function (context) {
-  if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
-    return Promise.reject(null);
-  }
-
-  return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_SAVE)).then(function () {
-    /* TODO close on success */
-  }).catch(function (error) {
-    context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-
-    throw error;
-  });
-}), _actions);
+      throw error;
+    });
+  }), _ref;
+}
 // CONCATENATED MODULE: ./src/store/getters.ts
 
 
@@ -6757,6 +6763,16 @@ var getters_getters = {
       index: 0
     };
     return getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue)](path);
+  },
+  targetLabel: function targetLabel(state) {
+    if (state.targetLabel === null) {
+      return {
+        language: 'zxx',
+        value: state.targetProperty
+      };
+    }
+
+    return state.targetLabel;
   }
 };
 // CONCATENATED MODULE: ./src/store/mutations.ts
@@ -6771,6 +6787,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   state.editFlow = editFlow;
 }), _defineProperty(_mutations, APPLICATION_STATUS_SET, function (state, status) {
   state.applicationStatus = status;
+}), _defineProperty(_mutations, TARGET_LABEL_SET, function (state, label) {
+  state.targetLabel = label;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
 var ENTITY_UPDATE = 'updateEntity';
@@ -7125,13 +7143,14 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(vuex_esm["b" /* default */]);
 function createStore(services) {
   var state = {
+    targetLabel: null,
     targetProperty: '',
     editFlow: '',
     applicationStatus: definitions_ApplicationStatus.INITIALIZING
   };
   var storeBundle = {
     state: state,
-    actions: actions,
+    actions: actions(services.getEntityLabelRepository()),
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',
@@ -7157,8 +7176,15 @@ function createStore(services) {
 
 
 
+
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
+  // TODO remove next line after it is correctly wired up
+  services.setEntityLabelRepository({
+    getLabel: function getLabel(_x) {
+      return Promise.reject();
+    }
+  });
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(services.getLanguageInfoRepository()));
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);

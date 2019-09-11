@@ -4,8 +4,10 @@ import {
 	PROPERTY_TARGET_SET,
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
+	TARGET_LABEL_SET,
 } from '@/store/mutationTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
+import Term from '@/datamodel/Term';
 
 export const mutations: MutationTree<Application> = {
 	[ PROPERTY_TARGET_SET ]( state: Application, targetProperty: string ): void {
@@ -18,5 +20,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ APPLICATION_STATUS_SET ]( state: Application, status: ApplicationStatus ): void {
 		state.applicationStatus = status;
+	},
+
+	[ TARGET_LABEL_SET ]( state: Application, label: Term ): void {
+		state.targetLabel = label;
 	},
 };

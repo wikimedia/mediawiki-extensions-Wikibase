@@ -12,6 +12,7 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import Term from '@/datamodel/Term';
 
 describe( 'store/getters', () => {
 	let store: Store<Application>;
@@ -108,6 +109,12 @@ describe( 'store/getters', () => {
 		services.setWritingEntityRepository( {
 			async saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
 				throw new Error( 'These tests should not write any entities' );
+			},
+		} );
+
+		services.setEntityLabelRepository( {
+			async getLabel( _id ): Promise<Term> {
+				return { value: 'ignore me', language: 'en' };
 			},
 		} );
 

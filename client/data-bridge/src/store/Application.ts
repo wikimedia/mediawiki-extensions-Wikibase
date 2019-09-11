@@ -3,10 +3,12 @@ import {
 } from './namespaces';
 import { InitializedEntityState } from '@/store/entity/EntityState';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
+import Term from '@/datamodel/Term';
 
 interface Application {
 	editFlow: string;
 	targetProperty: string;
+	targetLabel: Term|null;
 	applicationStatus: ApplicationStatus;
 }
 

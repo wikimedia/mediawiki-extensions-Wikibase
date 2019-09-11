@@ -4,6 +4,7 @@ import {
 	PROPERTY_TARGET_SET,
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
+	TARGET_LABEL_SET,
 } from '@/store/mutationTypes';
 import Application from '@/store/Application';
 import newApplicationState from './newApplicationState';
@@ -27,5 +28,12 @@ describe( 'root/mutations', () => {
 		const store: Application = newApplicationState();
 		mutations[ APPLICATION_STATUS_SET ]( store, ApplicationStatus.READY );
 		expect( store.applicationStatus ).toBe( ApplicationStatus.READY );
+	} );
+
+	it( 'changes the targetLabel of the store', () => {
+		const targetLabel = { language: 'el', value: 'πατατα' };
+		const store: Application = newApplicationState();
+		mutations[ TARGET_LABEL_SET ]( store, targetLabel );
+		expect( store.targetLabel ).toBe( targetLabel );
 	} );
 } );

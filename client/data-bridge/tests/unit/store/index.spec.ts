@@ -10,6 +10,9 @@ describe( 'store/index', () => {
 			getWritingEntityRepository() {
 				return {};
 			},
+			getEntityLabelRepository() {
+				return {};
+			},
 		} as ServiceRepositories );
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();

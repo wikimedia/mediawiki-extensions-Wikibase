@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex, { Store, StoreOptions } from 'vuex';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import Application from '@/store/Application';
-import { actions } from '@/store/actions';
+import actions from '@/store/actions';
 import { getters } from '@/store/getters';
 import { mutations } from '@/store/mutations';
 import createEntity from './entity';
@@ -15,6 +15,7 @@ Vue.use( Vuex );
 
 export function createStore( services: ServiceRepositories ): Store<Application> {
 	const state: Application = {
+		targetLabel: null,
 		targetProperty: '',
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
@@ -22,7 +23,7 @@ export function createStore( services: ServiceRepositories ): Store<Application>
 
 	const storeBundle: StoreOptions<Application> = {
 		state,
-		actions,
+		actions: actions( services.getEntityLabelRepository() ),
 		getters,
 		mutations,
 		strict: process.env.NODE_ENV !== 'production',

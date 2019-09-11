@@ -1,5 +1,5 @@
 import EditFlow from '@/definitions/EditFlow';
-import { actions } from '@/store/actions';
+import actions from '@/store/actions';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,
@@ -17,6 +17,7 @@ import {
 	PROPERTY_TARGET_SET,
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
+	TARGET_LABEL_SET,
 } from '@/store/mutationTypes';
 import {
 	ENTITY_ID,
@@ -32,6 +33,10 @@ import namespacedStoreEvent from '@/store/namespacedStoreEvent';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 describe( 'root/actions', () => {
+	const entityLabelRepository = {
+		getLabel: jest.fn( () => Promise.resolve() ),
+	};
+
 	describe( BRIDGE_INIT, () => {
 		function mockedStore(
 			targetProperty?: string,
@@ -85,7 +90,7 @@ describe( 'root/actions', () => {
 				entityId: '',
 			};
 
-			return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
 				expect( context.commit ).toBeCalledWith(
 					EDITFLOW_SET,
 					editFlow,
@@ -103,7 +108,7 @@ describe( 'root/actions', () => {
 				entityId: '',
 			};
 
-			return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
 				expect( context.commit ).toBeCalledWith(
 					PROPERTY_TARGET_SET,
 					propertyId,
@@ -121,11 +126,70 @@ describe( 'root/actions', () => {
 				entityId,
 			};
 
-			return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
 				expect( context.dispatch ).toBeCalledWith(
 					namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
 					{ 'entity': entityId },
 				);
+			} );
+		} );
+
+		describe( TARGET_LABEL_SET, () => {
+			it( `commits to ${TARGET_LABEL_SET}, on successful label request`, () => {
+				const propertyId = 'P42';
+				const context = mockedStore();
+
+				const information = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId,
+					entityId: '',
+				};
+
+				const term = {
+					language: 'zxx',
+					value: propertyId,
+				};
+				const entityLabelRepository = {
+					getLabel: jest.fn( () => {
+						return Promise.resolve( term );
+					} ),
+				};
+
+				return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+					context,
+					information,
+				).then( () => {
+					expect( context.commit ).toHaveBeenCalledWith(
+						TARGET_LABEL_SET,
+						term,
+					);
+					expect( entityLabelRepository.getLabel ).toBeCalledWith( propertyId );
+				} );
+			} );
+
+			it( 'does nothing on reject', () => {
+				const propertyId = 'P42';
+				const context = mockedStore();
+
+				const information = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId,
+					entityId: '',
+				};
+
+				const entityLabelRepository = {
+					getLabel: jest.fn( () => {
+						return Promise.reject( 'Fehler' );
+					} ),
+				};
+
+				return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+					context,
+					information,
+				).then( () => {
+					expect( context.commit ).not.toHaveBeenCalledWith( TARGET_LABEL_SET );
+					expect( entityLabelRepository.getLabel ).toBeCalledWith( propertyId );
+				} );
 			} );
 		} );
 
@@ -139,7 +203,10 @@ describe( 'root/actions', () => {
 			it( `commits to ${APPLICATION_STATUS_SET} on successful entity lookup`, () => {
 				const context = mockedStore();
 
-				return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+				return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+					context,
+					information,
+				).then( () => {
 					expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.READY );
 				} );
 			} );
@@ -150,7 +217,10 @@ describe( 'root/actions', () => {
 						dispatch: () => Promise.reject(),
 					} );
 
-					return actions[ BRIDGE_INIT ]( context, information ).catch( () => {
+					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+						context,
+						information,
+					).catch( () => {
 						expect( context.commit ).toHaveBeenCalledWith(
 							APPLICATION_STATUS_SET,
 							ApplicationStatus.ERROR,
@@ -176,7 +246,10 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+						context,
+						information,
+					).then( () => {
 						expect(
 							context.getters[ namespacedStoreEvent(
 								NS_ENTITY,
@@ -209,7 +282,10 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+						context,
+						information,
+					).then( () => {
 						expect(
 							context.getters[ namespacedStoreEvent(
 								NS_ENTITY,
@@ -242,7 +318,10 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+						context,
+						information,
+					).then( () => {
 						expect(
 							context.getters[ namespacedStoreEvent(
 								NS_ENTITY,
@@ -275,7 +354,9 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return actions[ BRIDGE_INIT ]( context, information ).then( () => {
+					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
+						context, information,
+					).then( () => {
 						expect(
 							context.getters[ namespacedStoreEvent(
 								NS_ENTITY,
@@ -301,7 +382,7 @@ describe( 'root/actions', () => {
 				},
 			} );
 			await expect(
-				( actions as any )[ BRIDGE_SET_TARGET_VALUE ](
+				( actions as Function )( entityLabelRepository )[ BRIDGE_SET_TARGET_VALUE ](
 					context,
 					{
 						path: null,
@@ -333,7 +414,7 @@ describe( 'root/actions', () => {
 			} );
 
 			await expect(
-				( actions as any )[ BRIDGE_SET_TARGET_VALUE ](
+				( actions as Function )( entityLabelRepository )[ BRIDGE_SET_TARGET_VALUE ](
 					context,
 					{
 						value: {
@@ -376,7 +457,7 @@ describe( 'root/actions', () => {
 				value: dataValue,
 			};
 
-			return ( actions as any )[ BRIDGE_SET_TARGET_VALUE ](
+			return ( actions as Function )( entityLabelRepository )[ BRIDGE_SET_TARGET_VALUE ](
 				context,
 				dataValue,
 			).then( () => {
@@ -401,7 +482,7 @@ describe( 'root/actions', () => {
 			} );
 
 			await expect(
-				( actions as any )[ BRIDGE_SAVE ]( context ),
+				( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ),
 			).rejects.toBeDefined();
 			expect( context.dispatch ).toBeCalledTimes( 0 );
 			expect( context.commit ).toHaveBeenCalledWith(
@@ -424,7 +505,7 @@ describe( 'root/actions', () => {
 			} );
 
 			await expect(
-				( actions as any )[ BRIDGE_SAVE ]( context ),
+				( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ),
 			).rejects.toBe( sampleError );
 
 			expect( context.commit ).toHaveBeenCalledWith(
@@ -443,7 +524,7 @@ describe( 'root/actions', () => {
 				} ),
 			} );
 
-			return ( actions as any )[ BRIDGE_SAVE ]( context ).then( () => {
+			return ( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ).then( () => {
 				expect( context.dispatch ).toBeCalledWith( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
 				expect( context.dispatch ).toBeCalledTimes( 1 );
 			} );
