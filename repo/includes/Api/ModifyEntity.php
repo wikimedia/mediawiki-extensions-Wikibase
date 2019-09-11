@@ -10,6 +10,7 @@ use Status;
 use User;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -175,6 +176,8 @@ abstract class ModifyEntity extends ApiBase {
 	 * @param ChangeOp $changeOp
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary The summary object to update with information about the change.
+	 *
+	 * @return ChangeOpResult
 	 */
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		try {
@@ -207,7 +210,7 @@ abstract class ModifyEntity extends ApiBase {
 				throw new ChangeOpValidationException( $result );
 			}
 
-			$changeOp->apply( $entity, $summary );
+			return $changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $ex ) {
 			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}
