@@ -4,6 +4,7 @@ import Term from '@/datamodel/Term';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
+import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWithoutLabelInLanguageException';
 
 interface WellFormedResponse {
 	entities: {
@@ -56,6 +57,11 @@ export default class ForeignApiEntityLabelRepository implements EntityLabelRepos
 			const entity = response.entities[ entityId ];
 			if ( 'missing' in entity ) {
 				throw new EntityNotFound( 'Entity flagged missing in response.' );
+			}
+			if ( !( this.forLanguageCode in entity.labels ) ) {
+				throw new EntityWithoutLabelInLanguageException(
+					`Could not find label for language '${this.forLanguageCode}'.`,
+				);
 			}
 			const label = entity.labels[ this.forLanguageCode ];
 			return {
