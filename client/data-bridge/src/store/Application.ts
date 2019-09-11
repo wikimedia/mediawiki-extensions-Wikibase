@@ -1,7 +1,7 @@
 import {
 	NS_ENTITY,
 } from './namespaces';
-import EntityState from '@/store/entity/EntityState';
+import { InitializedEntityState } from '@/store/entity/EntityState';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 interface Application {
@@ -13,5 +13,5 @@ interface Application {
 export default Application;
 
 export interface InitializedApplicationState extends Application {
-	[ NS_ENTITY ]: EntityState;
+	[ NS_ENTITY ]: InitializedEntityState;
 }
