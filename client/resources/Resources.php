@@ -11,15 +11,6 @@ return call_user_func( function() {
 	];
 
 	return [
-		'wikibase.client.getMwApiForRepo' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.client.getMwApiForRepo.js'
-			],
-			'dependencies' => [
-				'mw.config.values.wbRepo',
-				'wikibase.api.getLocationAgnosticMwApi',
-			]
-		],
 
 		'wikibase.client.init' => $moduleTemplate + [
 			'skinStyles' => [
@@ -120,6 +111,7 @@ return call_user_func( function() {
 
 		'jquery.wikibase.linkitem' => $moduleTemplate + [
 			'scripts' => [
+				'wikibase.client.getMwApiForRepo.js',
 				'jquery.wikibase/jquery.wikibase.linkitem.js',
 				'wikibase.client.PageConnector.js'
 			],
@@ -127,6 +119,7 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.linkitem.css'
 			],
 			'dependencies' => [
+				'wikibase.api.getLocationAgnosticMwApi',
 				'jquery.spinner',
 				'jquery.ui.dialog',
 				'jquery.ui.suggester',
