@@ -5478,9 +5478,6 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var BRIDGE_INIT = 'initBridge';
 var BRIDGE_SAVE = 'saveBridge';
@@ -6609,6 +6606,9 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var PROPERTY_TARGET_SET = 'setPropertyPointer';
 var EDITFLOW_SET = 'setEditFlow';
@@ -7176,15 +7176,8 @@ function createStore(services) {
 
 
 
-
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  // TODO remove next line after it is correctly wired up
-  services.setEntityLabelRepository({
-    getLabel: function getLabel(_x) {
-      return Promise.reject();
-    }
-  });
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(services.getLanguageInfoRepository()));
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);

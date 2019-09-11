@@ -3,6 +3,7 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
+import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
 
@@ -16,6 +17,11 @@ jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
 const mockWritingEntityRepository = {};
 jest.mock( '@/data-access/ForeignApiWritingRepository', () => {
 	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
+} );
+
+const mockEntityLabelRepository = {};
+jest.mock( '@/data-access/ForeignApiEntityLabelRepository', () => {
+	return jest.fn().mockImplementation( () => mockEntityLabelRepository );
 } );
 
 const mockMwLanguageInfoRepository = {};
@@ -34,6 +40,7 @@ function mockMwWindow( options: {
 	mwLanguage?: {
 		bcp47(): string;
 	};
+	wgPageContentLanguage?: string;
 } = {} ): MwWindow {
 	const get = jest.fn().mockImplementation( ( key ) => {
 		switch ( key ) {
@@ -48,6 +55,8 @@ function mockMwWindow( options: {
 				};
 			case 'wgUserName':
 				return options.wgUserName || null;
+			case 'wgPageContentLanguage':
+				return options.wgPageContentLanguage || 'en';
 			default:
 				throw new Error( `Unexpected config key ${key}!` );
 		}
@@ -75,6 +84,7 @@ describe( 'createServices', () => {
 		( SpecialPageReadingEntityRepository as jest.Mock ).mockClear();
 		( ForeignApiWritingRepository as unknown as jest.Mock ).mockClear();
 		( MwLanguageInfoRepository as jest.Mock ).mockClear();
+		( ForeignApiEntityLabelRepository as jest.Mock ).mockClear();
 	} );
 
 	it( 'pulls wbRepo and wgUserName from mw.config, ', () => {
@@ -144,4 +154,24 @@ describe( 'createServices', () => {
 		).toBe( ulsData );
 		expect( services.getLanguageInfoRepository() ).toBe( mockMwLanguageInfoRepository );
 	} );
+
+	it( 'creates EntityLabelRepository', () => {
+		const wgPageContentLanguage = 'de';
+
+		const mwWindow = mockMwWindow( {
+			wgPageContentLanguage,
+		} );
+
+		const services = createServices( mwWindow );
+
+		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect(
+			( ForeignApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
+		).toBe( wgPageContentLanguage );
+
+		expect( ( ForeignApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( services.getEntityLabelRepository() ).toBe( mockEntityLabelRepository );
+	} );
+
 } );

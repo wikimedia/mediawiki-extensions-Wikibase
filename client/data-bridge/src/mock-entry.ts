@@ -43,7 +43,6 @@ services.setLanguageInfoRepository(
 	),
 );
 
-// TODO: Wire this correctly
 services.setEntityLabelRepository( {
 	getLabel( _x ) {
 		return Promise.resolve( { language: 'de', value: 'Kartoffel' } );
