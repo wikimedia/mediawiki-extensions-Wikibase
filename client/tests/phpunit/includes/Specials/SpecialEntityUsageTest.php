@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Specials;
 
+use Language;
 use MediaWiki\MediaWikiServices;
-use RequestContext;
 use SpecialPageTestBase;
 use Title;
 use Wikibase\Client\Specials\SpecialEntityUsage;
@@ -66,16 +66,16 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteWithValidParam() {
-		list( $result, ) = $this->executeSpecialPage( 'Q3' );
+		$lang = Language::factory( 'qqx' );
+		list( $result, ) = $this->executeSpecialPage( 'Q3', null, $lang );
 		$aspectsTehran = [
-			wfMessage( 'wikibase-pageinfo-entity-usage-O' )->parse(),
-			wfMessage( 'wikibase-pageinfo-entity-usage-L-with-modifier', 'fa' )->parse(),
+			'(wikibase-pageinfo-entity-usage-O: )',
+			'(wikibase-pageinfo-entity-usage-L-with-modifier: fa)',
 		];
 		$aspectsAthena = [
-			wfMessage( 'wikibase-pageinfo-entity-usage-S' )->parse(),
+			'(wikibase-pageinfo-entity-usage-S: )',
 		];
 
-		$lang = RequestContext::getMain()->getLanguage();
 		$aspectListTehran = $lang->commaList( $aspectsTehran );
 		$aspectListAthena = $lang->commaList( $aspectsAthena );
 
@@ -85,18 +85,15 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$expected = MediaWikiServices::getInstance()->getSpecialPageFactory()
 			->getLocalNameFor( 'EntityUsage', 'Q3' );
 		$this->assertContains( $expected, $result );
-		$this->assertContains( ': ' . $aspectListTehran . '</li>', $result );
-		$this->assertContains( ': ' . $aspectListAthena . '</li>', $result );
+		$this->assertContains( '(colon-separator)' . $aspectListTehran . '</li>', $result );
+		$this->assertContains( '(colon-separator)' . $aspectListAthena . '</li>', $result );
 	}
 
 	public function testExecuteWithInvalidParam() {
-		list( $result, ) = $this->executeSpecialPage( 'FooBar' );
+		list( $result, ) = $this->executeSpecialPage( 'FooBar', null, 'qqx' );
 
 		$this->assertContains( '<p class="error"', $result );
-		$this->assertContains(
-			wfMessage( 'wikibase-entityusage-invalid-id', 'FooBar' )->text(),
-			$result
-		);
+		$this->assertContains( '(wikibase-entityusage-invalid-id: FooBar)', $result );
 	}
 
 	public function testReallyDoQuery() {
