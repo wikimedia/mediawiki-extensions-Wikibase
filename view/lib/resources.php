@@ -555,12 +555,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.util.adaptlettercase' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
-				'jquery.util/jquery.util.adaptlettercase.js',
-			],
-		],
-
 		'util.ContentLanguages' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'util/util.ContentLanguages.js',
