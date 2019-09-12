@@ -96,7 +96,7 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
@@ -107,26 +107,54 @@ describe( 'createServices', () => {
 		expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
 	} );
 
-	it( 'creates EntityRepository and WritingEntityRepository with it', () => {
-		const wgUserName = 'TestUser';
-		const wbRepo = {
-			url: 'http://localhost',
-			scriptPath: '/w',
-			articlePath: '',
-		};
-		const mwWindow = mockMwWindow( {
-			wbRepo,
-			wgUserName,
-		} );
-		const services = createServices( mwWindow );
+	describe( 'WritingEntityRepository', () => {
+		it( 'creates WritingEntityRepository with it', () => {
+			const wgUserName = 'TestUser';
+			const wbRepo = {
+				url: 'http://localhost',
+				scriptPath: '/w',
+				articlePath: '',
+			};
+			const mwWindow = mockMwWindow( {
+				wbRepo,
+				wgUserName,
+			} );
+			const tags: string[] = [ 'a' ];
 
-		expect( mwWindow.mw.ForeignApi )
-			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
-		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
-			.toBeInstanceOf( mwWindow.mw.ForeignApi );
-		expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toBe( wgUserName );
-		expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
+			const services = createServices( mwWindow, tags );
+
+			expect( services ).toBeInstanceOf( ServiceRepositories );
+			expect( mwWindow.mw.ForeignApi )
+				.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+				.toBeInstanceOf( mwWindow.mw.ForeignApi );
+			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+				.toBe( wgUserName );
+			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
+				.toBe( tags );
+			expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
+		} );
+
+		it( 'add undefinded to tags, if they are a empty list', () => {
+			const wgUserName = 'TestUser';
+			const wbRepo = {
+				url: 'http://localhost',
+				scriptPath: '/w',
+				articlePath: '',
+			};
+
+			const mwWindow = mockMwWindow( {
+				wbRepo,
+				wgUserName,
+			} );
+			const tags: string[] = [];
+			const services = createServices( mwWindow, tags );
+
+			expect( services ).toBeInstanceOf( ServiceRepositories );
+			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
+				.toBeUndefined();
+			expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
+		} );
 	} );
 
 	it( 'creates LanguageInfoRepository', () => {
@@ -143,7 +171,7 @@ describe( 'createServices', () => {
 			mwLanguage,
 		} );
 
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect(
@@ -162,7 +190,7 @@ describe( 'createServices', () => {
 			wgPageContentLanguage,
 		} );
 
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect(

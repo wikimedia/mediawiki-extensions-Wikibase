@@ -18,7 +18,7 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 const mockCreateServices = jest.fn();
 jest.mock( '@/mediawiki/createServices', () => ( {
 	__esModule: true,
-	default: ( mwWindow: any ) => mockCreateServices( mwWindow ),
+	default: ( mwWindow: any, tags: any ) => mockCreateServices( mwWindow, tags ),
 } ) );
 
 const mockSubscribeToAppEvents = jest.fn();
@@ -28,6 +28,11 @@ jest.mock( '@/mediawiki/subscribeToAppEvents', () => ( {
 } ) );
 
 describe( 'Dispatcher', () => {
+	beforeEach( () => {
+		mockCreateServices.mockClear();
+		mockPrepareContainer.mockClear();
+	} );
+
 	it( 'can be constructed with mwWindow and app definition', () => {
 		const dispatcher = new Dispatcher(
 			{} as MwWindow,
@@ -70,12 +75,14 @@ describe( 'Dispatcher', () => {
 			const propertyId = 'P815';
 			const editFlow = EditFlow.OVERWRITE;
 			const mockServices = {};
+			const tags: string[] = [];
 			mockCreateServices.mockImplementation( () => mockServices );
 			mockSubscribeToAppEvents.mockClear();
 
 			const dispatcher = new Dispatcher(
 				mwWindow,
 				app as any,
+				tags,
 			);
 
 			dispatcher.dispatch( {
@@ -85,7 +92,7 @@ describe( 'Dispatcher', () => {
 				editFlow,
 			} );
 
-			expect( mockCreateServices ).toHaveBeenCalledWith( mwWindow );
+			expect( mockCreateServices ).toHaveBeenCalledWith( mwWindow, tags );
 			expect( app.launch ).toHaveBeenCalledWith(
 				{
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,

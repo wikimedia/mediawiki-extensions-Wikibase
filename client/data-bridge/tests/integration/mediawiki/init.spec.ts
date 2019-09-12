@@ -7,6 +7,7 @@ import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReading
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import {
 	mockForeignApiConstructor,
+	mockMwConfig,
 	mockMwEnv,
 } from '../../util/mocks';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
@@ -43,8 +44,14 @@ describe( 'init', () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} ),
 			ForeignApiConstructor = mockForeignApiConstructor( 'http://localhost/w/api.php' ),
-			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' );
-		mockMwEnv( using, undefined, undefined, ForeignApiConstructor );
+			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' ),
+			editTags = [ 'a tag' ];
+		mockMwEnv(
+			using,
+			mockMwConfig( { editTags } ),
+			undefined,
+			ForeignApiConstructor,
+		);
 		const expectedServices = new ServiceRepositories();
 		expectedServices.setReadingEntityRepository(
 			new SpecialPageReadingEntityRepository(
@@ -53,7 +60,7 @@ describe( 'init', () => {
 			),
 		);
 		expectedServices.setWritingEntityRepository(
-			new ForeignApiWritingRepository( ForeignApi, 'Test User' ),
+			new ForeignApiWritingRepository( ForeignApi, 'Test User', editTags ),
 		);
 		expectedServices.setLanguageInfoRepository(
 			new MwLanguageInfoRepository(

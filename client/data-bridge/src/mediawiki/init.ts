@@ -34,7 +34,7 @@ export default async (): Promise<void> => {
 				MWLANGUAGE_MODULE,
 			] ),
 			app = require( APP_MODULE ),
-			dispatcher = new Dispatcher( mwWindow, app );
+			dispatcher = new Dispatcher( mwWindow, app, dataBridgeConfig.editTags );
 
 		linksToOverload.map( ( selectedElement: SelectedElement ) => {
 			selectedElement.link.addEventListener( 'click', ( event: Event ) => {
