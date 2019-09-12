@@ -30,8 +30,15 @@ class DataBridgeConfigValueProvider implements MediaWikiConfigValueProvider {
 			$hrefRegExp = null;
 		}
 
+		if ( $this->settings->hasSetting( 'dataBridgeEditTags' ) ) {
+			$editTags = $this->settings->getSetting( 'dataBridgeEditTags' );
+		} else {
+			$editTags = [];
+		}
+
 		return [
 			'hrefRegExp' => $hrefRegExp,
+			'editTags' => $editTags,
 		];
 	}
 
