@@ -9,6 +9,7 @@ import {
 	mockForeignApiConstructor,
 	mockMwEnv,
 } from '../../util/mocks';
+import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 
 const mockPrepareContainer = jest.fn();
 jest.mock( '@/mediawiki/prepareContainer', () => ( {
@@ -41,6 +42,9 @@ describe( 'init', () => {
 				( window as MwWindow ).mw.language,
 				( window as MwWindow ).$.uls!.data,
 			),
+		);
+		expectedServices.setEntityLabelRepository(
+			new ForeignApiEntityLabelRepository( 'en', ForeignApi ),
 		);
 		const entityId = 'Q5';
 		const propertyId = 'P4711';

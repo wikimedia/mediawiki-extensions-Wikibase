@@ -5,6 +5,7 @@ interface MwConfigValues {
 	wbDataBridgeConfig: DataBridgeConfig;
 	wbRepo: WbRepo;
 	wgUserName: string;
+	wgPageContentLanguage: string;
 }
 
 interface MwConfig {

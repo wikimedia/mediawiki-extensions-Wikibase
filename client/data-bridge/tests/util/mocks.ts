@@ -27,6 +27,8 @@ export function mockMwConfig( values: {
 					};
 				case 'wgUserName':
 					return 'Test User';
+				case 'wgPageContentLanguage':
+					return 'en';
 				default:
 					throw new Error( `unexpected config key ${key}` );
 			}

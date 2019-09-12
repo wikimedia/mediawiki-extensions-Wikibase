@@ -3,6 +3,7 @@ import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
+import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 
 export default function createServices( mwWindow: MwWindow ): ServiceRepositories {
 	const services = new ServiceRepositories();
@@ -22,13 +23,22 @@ export default function createServices( mwWindow: MwWindow ): ServiceRepositorie
 		throw new Error( 'mw.ForeignApi was not loaded!' );
 	}
 
+	const repoForeignApi = new mwWindow.mw.ForeignApi(
+		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
+	);
+
 	services.setWritingEntityRepository( new ForeignApiWritingRepository(
-		new mwWindow.mw.ForeignApi(
-			`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
-		),
+		repoForeignApi,
 		mwWindow.mw.config.get( 'wgUserName' ),
 		// TODO tags from some config
 	) );
+
+	services.setEntityLabelRepository(
+		new ForeignApiEntityLabelRepository(
+			mwWindow.mw.config.get( 'wgPageContentLanguage' ),
+			repoForeignApi,
+		),
+	);
 
 	if ( mwWindow.$.uls === undefined ) {
 		throw new Error( '$.uls was not loaded!' );
