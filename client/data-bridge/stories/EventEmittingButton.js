@@ -5,6 +5,15 @@ storiesOf( 'EventEmittingButton', module )
 		components: { EventEmittingButton },
 		template: '<EventEmittingButton type="primaryProgressive" message="primaryProgressive" />',
 	} ), { info: true } )
+	.add( 'primaryProgressive as link', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="primaryProgressive"
+			message="primaryProgressive"
+			href="https://www.mediawiki.org/wiki/Wikidata_Bridge"
+			:preventDefault="false"
+		/>`,
+	} ), { info: true } )
 	.add( 'squary primaryProgressive', () => ( {
 		components: { EventEmittingButton },
 		template: `<EventEmittingButton
