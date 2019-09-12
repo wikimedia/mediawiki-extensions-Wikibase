@@ -144,9 +144,6 @@ export default function actions(
 			return context.dispatch(
 				namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ),
 			)
-				.then( () => {
-				/* TODO close on success */
-				} )
 				.catch( ( error: Error ) => {
 					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 					// TODO: store information about the error somewhere and show it!

@@ -1,5 +1,16 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
+		<ProcessDialogHeader title="data-bridge">
+			<template v-slot:default>
+				<EventEmittingButton
+					message="save"
+					type="primaryProgressive"
+					:squary="true"
+					@click="saveAndClose"
+				/>
+			</template>
+		</ProcessDialogHeader>
+
 		<ErrorWrapper v-if="hasError" />
 		<component
 			:is="isInit ? 'DataBridge' : 'Initializing'"
@@ -13,17 +24,23 @@ import {
 	Component,
 	Vue,
 } from 'vue-property-decorator';
+import Events from '@/events';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import { Getter } from 'vuex-class';
+import { Getter, Action } from 'vuex-class';
+import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
+import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
+import { BRIDGE_SAVE } from '@/store/actionTypes';
 
 @Component( {
 	components: {
 		DataBridge,
 		ErrorWrapper,
 		Initializing,
+		EventEmittingButton,
+		ProcessDialogHeader,
 	},
 } )
 export default class App extends Vue {
@@ -36,6 +53,19 @@ export default class App extends Vue {
 
 	public get hasError() {
 		return this.applicationStatus === ApplicationStatus.ERROR;
+	}
+
+	@Action( BRIDGE_SAVE )
+	public save!: () => Promise<void>;
+
+	public saveAndClose(): void {
+		this.save()
+			.then( () => {
+				this.$emit( Events.onSaved );
+			} )
+			.catch( ( _error ) => {
+				// TODO store already sets application into error state. Do we need to do anything else?
+			} );
 	}
 }
 </script>
@@ -61,7 +91,6 @@ ol { // overcome very strong selector, e.g. .content ul li
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #2c3e50;
-	padding: $padding-panel-form;
 
 	@include media-breakpoint-up(breakpoint) {
 		height: 448px;

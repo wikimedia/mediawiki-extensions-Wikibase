@@ -10,16 +10,21 @@ import { createStore } from '@/store';
 import Application from '@/store/Application';
 import {
 	BRIDGE_INIT,
+	BRIDGE_SAVE,
 } from '@/store/actionTypes';
 import {
 	APPLICATION_STATUS_SET,
 } from '@/store/mutationTypes';
+import Events from '@/events';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridge from '@/presentation/components/DataBridge.vue';
+import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ServiceRepositories from '@/services/ServiceRepositories';
+import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
+import hotUpdateDeep from 'wmde-vuex-helpers/dist/hotUpdateDeep';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -29,12 +34,12 @@ describe( 'App.vue', () => {
 	let entityId: string;
 	let propertyId: string;
 	let editFlow: EditFlow;
+	const services = new ServiceRepositories();
 
 	beforeEach( async () => {
 		entityId = 'Q42';
 		propertyId = 'P349';
 		editFlow = EditFlow.OVERWRITE;
-		const services = new ServiceRepositories();
 		( Entities.entities.Q42 as any ).statements = Entities.entities.Q42.claims;
 
 		services.setReadingEntityRepository( {
@@ -77,6 +82,36 @@ describe( 'App.vue', () => {
 		} );
 
 		expect( wrapper.classes() ).toContain( 'wb-db-app' );
+	} );
+
+	it( 'shows the header', () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+		} );
+
+		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBeTruthy();
+	} );
+
+	it( 'saves on save button click', async () => {
+		const bridgeSave = jest.fn();
+		const localStore = hotUpdateDeep( store, {
+			actions: {
+				[ BRIDGE_SAVE ]: bridgeSave,
+			},
+		} );
+		localStore.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+		const wrapper = shallowMount( App, {
+			store: localStore,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+		await localVue.nextTick();
+
+		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
+		expect( wrapper.emitted( Events.onSaved ) ).toBeTruthy();
 	} );
 
 	describe( 'component switch', () => {

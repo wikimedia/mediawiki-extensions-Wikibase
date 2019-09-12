@@ -36,3 +36,9 @@ export default class DataBridge extends Vue {
 	public setDataValue!: ( dataValue: DataValue ) => void;
 }
 </script>
+
+<style lang="scss">
+.wb-db-bridge {
+	padding: $padding-panel-form;
+}
+</style>

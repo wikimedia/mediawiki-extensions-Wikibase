@@ -23,7 +23,8 @@ services.setReadingEntityRepository(
 
 services.setWritingEntityRepository(
 	{
-		saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+		saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
+			console.log( 'save', entity ); // eslint-disable-line no-console
 			return Promise.reject();
 		},
 	},
