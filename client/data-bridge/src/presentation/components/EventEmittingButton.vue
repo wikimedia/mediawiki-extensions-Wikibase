@@ -1,7 +1,7 @@
 <template>
 	<a
 		class="wb-ui-event-emitting-button"
-		:class="`wb-ui-event-emitting-button--${type}`"
+		:class="[ `wb-ui-event-emitting-button--${this.type}`, { 'wb-ui-event-emitting-button--squary': squary } ]"
 		:href="href"
 		:title="message"
 		@click="click"
@@ -36,6 +36,9 @@ export default class EventEmittingButton extends Vue {
 
 	@Prop( { required: false, default: true, type: Boolean } )
 	public preventDefault!: boolean;
+
+	@Prop( { required: false, default: false, type: Boolean } )
+	public squary!: boolean;
 
 	public click( event: MouseEvent ) {
 		if ( this.preventDefault ) {
@@ -92,6 +95,10 @@ $block: '.wb-ui-event-emitting-button';
 		&:active:focus {
 			box-shadow: none;
 		}
+	}
+
+	&--squary {
+		border-radius: 0;
 	}
 }
 </style>
