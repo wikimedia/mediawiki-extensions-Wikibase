@@ -148,7 +148,22 @@
 				var savedStatement = self._statementDeserializer.deserialize( result.claim ),
 					guid = savedStatement.getClaim().getGuid(),
 					propertyId = statement.getClaim().getMainSnak().getPropertyId(),
-					pageInfo = result.pageinfo;
+					pageInfo = result.pageinfo,
+					oldStatement = null;
+				var statementsForPropertyId = self._statementsChangerState.getStatements().getItemByKey( propertyId );
+
+				if ( statementsForPropertyId !== null ) {
+
+					statementsForPropertyId = statementsForPropertyId.getItemContainer();
+					var statementsForPropertyIdArray = statementsForPropertyId.toArray();
+
+					for ( var i in statementsForPropertyIdArray ) {
+						if ( statementsForPropertyIdArray[ i ].getClaim().getGuid() === guid ) {
+							oldStatement = statementsForPropertyIdArray[ i ];
+							break;
+						}
+					}
+				}
 
 				// Update revision store:
 				self._revisionStore.setClaimRevision( pageInfo.lastrevid, guid );
@@ -158,7 +173,9 @@
 				self._fireHook(
 					'wikibase.statement.saved',
 					self._statementsChangerState.getEntityId(),
-					guid
+					guid,
+					oldStatement,
+					savedStatement
 				);
 
 				self._updateChangerStateOnSetClaim( savedStatement, propertyId, guid );
