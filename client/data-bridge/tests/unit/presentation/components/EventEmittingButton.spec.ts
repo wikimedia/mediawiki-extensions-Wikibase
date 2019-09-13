@@ -49,6 +49,18 @@ describe( 'EventEmittingButton', () => {
 		expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--primaryProgressive' );
 	} );
 
+	describe( 'squary modifier ', () => {
+		it( 'is not added by default', () => {
+			const wrapper = shallowMountWithProps( { type: 'primaryProgressive' } );
+			expect( wrapper.classes() ).not.toContain( 'wb-ui-event-emitting-button--squary' );
+		} );
+
+		it( 'is added if `squary` prop is true', () => {
+			const wrapper = shallowMountWithProps( { type: 'primaryProgressive', squary: true } );
+			expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--squary' );
+		} );
+	} );
+
 	it( 'throws for unknown type', () => {
 		expect( () => shallowMountWithProps( { type: 'potato' } ) ).toThrow();
 	} );
