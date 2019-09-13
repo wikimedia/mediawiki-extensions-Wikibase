@@ -1,0 +1,28 @@
+.DS_Store
+node_modules
+coverage/
+storybook-static/
+dist/*
+!dist/data-bridge.init.js
+!dist/data-bridge.common.js
+!dist/data-bridge.app.css
+
+# local env files
+.env.local
+.env.*.local
+
+docker-compose.override.yml
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
