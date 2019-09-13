@@ -28,23 +28,33 @@ class DataBridgeConfigValueProviderTest extends TestCase {
 		] );
 		$provider = new DataBridgeConfigValueProvider( $settings );
 		$value = $provider->getValue();
-		$this->assertSame(
-			[
-				'hrefRegExp' => 'regexp for test',
-			],
-			$value
-		);
+		$this->assertArrayHasKey( 'hrefRegExp', $value );
+		$this->assertSame( 'regexp for test', $value[ 'hrefRegExp' ] );
 	}
 
 	public function testGetValue_hrefRegExpMissing() {
 		$provider = new DataBridgeConfigValueProvider( new SettingsArray() );
 		$value = $provider->getValue();
-		$this->assertSame(
-			[
-				'hrefRegExp' => null,
-			],
-			$value
-		);
+		$this->assertArrayHasKey( 'hrefRegExp', $value );
+		$this->assertNull( $value[ 'hrefRegExp' ] );
+	}
+
+	public function testGetValue_editTagsProvided() {
+		$tags = [ 'tag1', 'tag2', 'tag3' ];
+		$settings = new SettingsArray( [
+			'dataBridgeEditTags' => $tags,
+		] );
+
+		$provider = new DataBridgeConfigValueProvider( $settings );
+		$value = $provider->getValue();
+		$this->assertArrayHasKey( 'editTags', $value );
+		$this->assertSame( $tags, $value[ 'editTags' ] );
+	}
+
+	public function testGetValue_editTagsMissing() {
+		$provider = new DataBridgeConfigValueProvider( new SettingsArray() );
+		$value = $provider->getValue();
+		$this->assertSame( [], $value[ 'editTags' ] );
 	}
 
 }
