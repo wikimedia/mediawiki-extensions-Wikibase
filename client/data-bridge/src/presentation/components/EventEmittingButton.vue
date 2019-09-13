@@ -88,6 +88,10 @@ $block: '.wb-ui-event-emitting-button';
 		&:focus {
 			box-shadow: $box-shadow-primary--focus;
 		}
+
+		&:active:focus {
+			box-shadow: none;
+		}
 	}
 }
 </style>
