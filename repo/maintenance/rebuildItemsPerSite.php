@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
@@ -55,7 +56,8 @@ class RebuildItemsPerSite extends Maintenance {
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,
 			$entityLookup,
-			$store->getEntityPrefetcher()
+			$store->getEntityPrefetcher(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
 		);
 
 		$builder->setReporter( $reporter );

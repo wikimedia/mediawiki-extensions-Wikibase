@@ -59,6 +59,10 @@ class FakeLBFactory extends LBFactory {
 		return [];
 	}
 
+	public function getLocalDomainID() {
+		return '';
+	}
+
 	public function __destruct() {
 		// no-op
 	}

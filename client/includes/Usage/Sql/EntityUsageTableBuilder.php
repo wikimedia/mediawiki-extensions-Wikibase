@@ -12,8 +12,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\IResultWrapper;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Implements initial population (priming) for the wbc_entity_usage table,
@@ -36,9 +36,9 @@ class EntityUsageTableBuilder {
 	private $idParser;
 
 	/**
-	 * @var ILoadBalancer
+	 * @var ILBFactory
 	 */
-	private $loadBalancer;
+	private $lbFactory;
 
 	/**
 	 * @var string
@@ -62,7 +62,7 @@ class EntityUsageTableBuilder {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param ILoadBalancer $loadBalancer
+	 * @param ILBFactory $lbFactory
 	 * @param int $batchSize defaults to 1000
 	 * @param string|null $usageTableName defaults to wbc_entity_usage
 	 *
@@ -70,7 +70,7 @@ class EntityUsageTableBuilder {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		ILoadBalancer $loadBalancer,
+		ILBFactory $lbFactory,
 		$batchSize = 1000,
 		$usageTableName = null
 	) {
@@ -83,7 +83,7 @@ class EntityUsageTableBuilder {
 		}
 
 		$this->idParser = $idParser;
-		$this->loadBalancer = $loadBalancer;
+		$this->lbFactory = $lbFactory;
 		$this->batchSize = $batchSize;
 		$this->usageTableName = $usageTableName ?: EntityUsageTable::DEFAULT_TABLE_NAME;
 
@@ -119,9 +119,12 @@ class EntityUsageTableBuilder {
 	 * @return int The number of entity usages inserted.
 	 */
 	private function processUsageBatch( &$fromPageId = 0 ) {
-		wfWaitForSlaves();
+		$this->lbFactory->waitForReplication( [
+			'domain' => $this->lbFactory->getLocalDomainID(),
+		] );
 
-		$db = $this->loadBalancer->getConnection( DB_MASTER );
+		$loadBalancer = $this->lbFactory->getMainLB();
+		$db = $loadBalancer->getConnection( DB_MASTER );
 
 		$entityPerPage = $this->getUsageBatch( $db, $fromPageId );
 
@@ -134,7 +137,7 @@ class EntityUsageTableBuilder {
 		// Update $fromPageId to become the first page ID of the next batch.
 		$fromPageId = max( array_keys( $entityPerPage ) ) + 1;
 
-		$this->loadBalancer->reuseConnection( $db );
+		$loadBalancer->reuseConnection( $db );
 
 		return $count;
 	}

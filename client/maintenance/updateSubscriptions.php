@@ -71,6 +71,7 @@ class UpdateSubscriptions extends Maintenance {
 
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$updater = new BulkSubscriptionUpdater(
+			$lbFactory,
 			new SessionConsistentConnectionManager( $lbFactory->getMainLB() ),
 			new SessionConsistentConnectionManager( $lbFactory->getMainLB( $repoDB ), $repoDB ),
 			$clientId,

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.
@@ -44,10 +45,21 @@ class ItemsPerSiteBuilder {
 	 */
 	private $batchSize = 100;
 
-	public function __construct( SiteLinkTable $siteLinkTable, EntityLookup $entityLookup, EntityPrefetcher $entityPrefetcher ) {
+	/**
+	 * @var ILBFactory
+	 */
+	private $lbFactory;
+
+	public function __construct(
+		SiteLinkTable $siteLinkTable,
+		EntityLookup $entityLookup,
+		EntityPrefetcher $entityPrefetcher,
+		ILBFactory $lbFactory
+	) {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->entityLookup = $entityLookup;
 		$this->entityPrefetcher = $entityPrefetcher;
+		$this->lbFactory = $lbFactory;
 	}
 
 	/**
@@ -111,7 +123,9 @@ class ItemsPerSiteBuilder {
 			$c++;
 		}
 		// Wait for the replicas, just in case we e.g. hit a range of ids which need a lot of writes.
-		wfWaitForSlaves();
+		$this->lbFactory->waitForReplication( [
+			'domain' => $this->lbFactory->getLocalDomainID(),
+		] );
 
 		return $c;
 	}

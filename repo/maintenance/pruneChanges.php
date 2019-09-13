@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Repo\ChangePruner;
@@ -53,6 +54,7 @@ class PruneChanges extends Maintenance {
 		}
 
 		$changePruner = new ChangePruner(
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 			$this->mBatchSize,
 			$this->getKeepSeconds(),
 			$this->getGraceSeconds(),

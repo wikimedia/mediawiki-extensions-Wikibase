@@ -9,6 +9,7 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -21,6 +22,11 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @author Daniel Kinzler
  */
 class BulkSubscriptionUpdater {
+
+	/**
+	 * @var ILBFactory
+	 */
+	private $lbFactory;
 
 	/**
 	 * @var SessionConsistentConnectionManager
@@ -60,6 +66,7 @@ class BulkSubscriptionUpdater {
 	private $progressReporter;
 
 	/**
+	 * @param ILBFactory $lbFactory Load balancer factory, used to wait for replication.
 	 * @param SessionConsistentConnectionManager $localConnectionManager Connection manager for DB
 	 * connections to the local wiki.
 	 * @param SessionConsistentConnectionManager $repoConnectionManager Connection manager for DB
@@ -74,6 +81,7 @@ class BulkSubscriptionUpdater {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
+		ILBFactory $lbFactory,
 		SessionConsistentConnectionManager $localConnectionManager,
 		SessionConsistentConnectionManager $repoConnectionManager,
 		$subscriberWikiId,
@@ -92,6 +100,7 @@ class BulkSubscriptionUpdater {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
+		$this->lbFactory = $lbFactory;
 		$this->localConnectionManager = $localConnectionManager;
 		$this->repoConnectionManager = $repoConnectionManager;
 
@@ -122,7 +131,7 @@ class BulkSubscriptionUpdater {
 		$continuation = $startEntity ? [ $startEntity->getSerialization() ] : null;
 
 		while ( true ) {
-			wfWaitForSlaves( null, $this->repoWiki );
+			$this->lbFactory->waitForReplication( [ 'domain' => $this->repoWiki ] );
 
 			$count = $this->processUpdateBatch( $continuation );
 
@@ -264,7 +273,7 @@ class BulkSubscriptionUpdater {
 		$this->repoConnectionManager->prepareForUpdates();
 
 		while ( true ) {
-			wfWaitForSlaves( null, $this->repoWiki );
+			$this->lbFactory->waitForReplication( [ 'domain' => $this->repoWiki ] );
 
 			$count = $this->processDeletionBatch( $continuation );
 
