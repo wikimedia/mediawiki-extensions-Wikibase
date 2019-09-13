@@ -7,6 +7,7 @@ import WbRepo from '@/@types/wikibase/WbRepo';
 
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
+	editTags?: string[];
 	wbRepo?: WbRepo;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
@@ -18,6 +19,7 @@ export function mockMwConfig( values: {
 				case 'wbDataBridgeConfig':
 					return {
 						hrefRegExp: values.hrefRegExp,
+						editTags: values.editTags || [],
 					};
 				case 'wbRepo':
 					return values.wbRepo || {

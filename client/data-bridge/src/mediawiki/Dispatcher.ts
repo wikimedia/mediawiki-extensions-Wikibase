@@ -10,10 +10,12 @@ export default class Dispatcher {
 
 	private readonly mwWindow: MwWindow;
 	private readonly app: AppBridge;
+	private readonly tags: string[];
 
-	public constructor( mwWindow: MwWindow, app: AppBridge ) {
+	public constructor( mwWindow: MwWindow, app: AppBridge, tags: string[] = [] ) {
 		this.mwWindow = mwWindow;
 		this.app = app;
+		this.tags = tags;
 	}
 
 	public dispatch( selectedElement: SelectedElement ): void {
@@ -28,7 +30,7 @@ export default class Dispatcher {
 				propertyId: selectedElement.propertyId,
 				editFlow: selectedElement.editFlow,
 			},
-			createServices( this.mwWindow ), // should be made caching when used repeatedly
+			createServices( this.mwWindow, this.tags ), // should be made caching when used repeatedly
 		);
 
 		subscribeToAppEvents( emitter, dialog.getManager() );
