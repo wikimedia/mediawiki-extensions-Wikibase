@@ -11,15 +11,33 @@ import {
 } from '../../util/mocks';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 
-const mockPrepareContainer = jest.fn();
+const manager = jest.fn();
+const dialog = {
+	getManager: jest.fn( () => manager ),
+};
+
+const mockPrepareContainer = jest.fn( ( _x?: any, _y?: any, _z?: any ) => {
+	return dialog;
+} );
 jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	__esModule: true, // this property makes it work
 	default: ( oo: any, $: any ) => mockPrepareContainer( oo, $ ),
 } ) );
 
+const mockSubscribeToAppEvents = jest.fn();
+jest.mock( '@/mediawiki/subscribeToAppEvents', () => ( {
+	__esModule: true,
+	default: ( emitter: any, windowManager: any ) => mockSubscribeToAppEvents( emitter, windowManager ),
+} ) );
+
 describe( 'init', () => {
 	it( 'loads `wikibase.client.data-bridge.app` and launches it on click', () => {
-		const app = { launch: jest.fn() },
+		const emitter = jest.fn(),
+			app = {
+				launch: jest.fn( () => {
+					return emitter;
+				} ),
+			},
 			require = jest.fn( () => app ),
 			using = jest.fn( () => {
 				return new Promise( ( resolve ) => resolve( require ) );
@@ -69,6 +87,8 @@ describe( 'init', () => {
 				},
 				expectedServices,
 			);
+
+			expect( mockSubscribeToAppEvents ).toBeCalledWith( emitter, manager );
 		} );
 	} );
 } );

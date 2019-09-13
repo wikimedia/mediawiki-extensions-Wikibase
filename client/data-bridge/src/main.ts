@@ -8,6 +8,9 @@ import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import inlanguage from '@/presentation/directives/inlanguage';
+import Events from '@/events';
+import { EventEmitter } from 'events';
+import repeater from '@/events/repeater';
 
 Vue.config.productionTip = false;
 
@@ -15,12 +18,18 @@ export function launch(
 	config: AppConfiguration,
 	information: AppInformation,
 	services: ServiceRepositories,
-): void {
+): EventEmitter {
 	Vue.directive( 'inlanguage', inlanguage( services.getLanguageInfoRepository() ) );
+
 	const store = createStore( services );
 	store.dispatch( BRIDGE_INIT, information );
 
-	new App( {
+	const app = new App( {
 		store,
 	} ).$mount( config.containerSelector );
+
+	const emitter = new EventEmitter();
+	repeater( app, emitter, Object.values( Events ) );
+
+	return emitter;
 }

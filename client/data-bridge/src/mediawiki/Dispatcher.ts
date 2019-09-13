@@ -3,6 +3,7 @@ import AppBridge from '@/definitions/AppBridge';
 import prepareContainer from '@/mediawiki/prepareContainer';
 import createServices from '@/mediawiki/createServices';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
+import subscribeToAppEvents from '@/mediawiki/subscribeToAppEvents';
 
 export default class Dispatcher {
 	public static readonly APP_DOM_CONTAINER_ID = 'data-bridge-container';
@@ -16,9 +17,9 @@ export default class Dispatcher {
 	}
 
 	public dispatch( selectedElement: SelectedElement ): void {
-		prepareContainer( this.mwWindow.OO, this.mwWindow.$, Dispatcher.APP_DOM_CONTAINER_ID );
+		const dialog = prepareContainer( this.mwWindow.OO, this.mwWindow.$, Dispatcher.APP_DOM_CONTAINER_ID );
 
-		this.app.launch(
+		const emitter = this.app.launch(
 			{
 				containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
 			},
@@ -29,5 +30,7 @@ export default class Dispatcher {
 			},
 			createServices( this.mwWindow ), // should be made caching when used repeatedly
 		);
+
+		subscribeToAppEvents( emitter, dialog.getManager() );
 	}
 }
