@@ -1520,19 +1520,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.valueview.experts.SuggestedStringValue' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
-				'experts/SuggestedStringValue.js',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.ui.suggester',
-				'jquery.valueview.experts',
-				'jquery.valueview.experts.StringValue',
-				'jquery.valueview.Expert',
-			],
-		],
-
 		'jquery.valueview.experts.TimeInput' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/TimeInput.js',
