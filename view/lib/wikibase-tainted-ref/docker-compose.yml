@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  node:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: wmde/tainted-ref-node
+    volumes:
+      - '~/.npm:/.npm'
+      - '.:/src/view/lib/wikibase-tainted-ref'
+    working_dir: /src/view/lib/wikibase-tainted-ref
+    environment:
+      - NODE_ENV
+      - NODE_DEBUG
+      - DEBUG
+    security_opt:
+      - label=disable
+
+  csr:
+    extends:
+      service: node
+    ports:
+      - '${CSR_PORT}:8080'
+    command: 'npm run-script serve'
+
+  storybook:
+    extends:
+      service: node
+    ports:
+      - '${STORYBOOK_PORT}:${STORYBOOK_PORT}'
+    command: 'npm run storybook -- -p ${STORYBOOK_PORT} --ci'

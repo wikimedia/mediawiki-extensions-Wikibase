@@ -6,7 +6,10 @@
   "--builtin-classes": true,
   "--external": "HTMLDocument,Window,MouseEvent,KeyboardEvent,File,jQuery,jQuery.Promise,jQuery.Event",
   "--warnings": ["-all"],
-  "--exclude": "view/lib/wikibase-termbox",
+  "--exclude": [
+	  "view/lib/wikibase-termbox",
+	  "view/lib/wikibase-tainted-ref"
+  ],
   "--": [
     "view/"
   ]
