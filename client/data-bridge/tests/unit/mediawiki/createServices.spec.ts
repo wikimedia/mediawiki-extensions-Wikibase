@@ -41,6 +41,7 @@ function mockMwWindow( options: {
 		bcp47(): string;
 	};
 	wgPageContentLanguage?: string;
+	editTags?: string[];
 } = {} ): MwWindow {
 	const get = jest.fn().mockImplementation( ( key ) => {
 		switch ( key ) {
@@ -57,6 +58,10 @@ function mockMwWindow( options: {
 				return options.wgUserName || null;
 			case 'wgPageContentLanguage':
 				return options.wgPageContentLanguage || 'en';
+			case 'wbDataBridgeConfig':
+				return {
+					editTags: options.editTags || [],
+				};
 			default:
 				throw new Error( `Unexpected config key ${key}!` );
 		}
@@ -96,7 +101,7 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
@@ -115,15 +120,14 @@ describe( 'createServices', () => {
 				scriptPath: '/w',
 				articlePath: '',
 			};
+			const editTags = [ 'a' ];
 			const mwWindow = mockMwWindow( {
 				wbRepo,
 				wgUserName,
+				editTags,
 			} );
-			const tags: string[] = [ 'a' ];
+			const services = createServices( mwWindow );
 
-			const services = createServices( mwWindow, tags );
-
-			expect( services ).toBeInstanceOf( ServiceRepositories );
 			expect( mwWindow.mw.ForeignApi )
 				.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
@@ -131,7 +135,7 @@ describe( 'createServices', () => {
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBe( wgUserName );
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
-				.toBe( tags );
+				.toBe( editTags );
 			expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
 		} );
 
@@ -142,13 +146,13 @@ describe( 'createServices', () => {
 				scriptPath: '/w',
 				articlePath: '',
 			};
-
+			const editTags: string[] = [];
 			const mwWindow = mockMwWindow( {
 				wbRepo,
 				wgUserName,
+				editTags,
 			} );
-			const tags: string[] = [];
-			const services = createServices( mwWindow, tags );
+			const services = createServices( mwWindow );
 
 			expect( services ).toBeInstanceOf( ServiceRepositories );
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
@@ -171,7 +175,7 @@ describe( 'createServices', () => {
 			mwLanguage,
 		} );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect(
@@ -190,7 +194,7 @@ describe( 'createServices', () => {
 			wgPageContentLanguage,
 		} );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect(

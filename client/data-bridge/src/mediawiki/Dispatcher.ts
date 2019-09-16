@@ -30,7 +30,7 @@ export default class Dispatcher {
 				propertyId: selectedElement.propertyId,
 				editFlow: selectedElement.editFlow,
 			},
-			createServices( this.mwWindow, this.tags ), // should be made caching when used repeatedly
+			createServices( this.mwWindow ), // should be made caching when used repeatedly
 		);
 
 		subscribeToAppEvents( emitter, dialog.getManager() );
