@@ -80,6 +80,9 @@ return call_user_func( function() {
 						'dependencies' => [
 							'vue2',
 						],
+						'messages' => [
+							'wikibase-client-data-bridge-dialog-title',
+						],
 					],
 					__DIR__ . '/../data-bridge/dist'
 				);
