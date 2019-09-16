@@ -30,10 +30,6 @@ describe( 'snaks/Mutations', () => {
 		},
 		traveler );
 
-		beforeEach( () => {
-			traveler.mockClear();
-		} );
-
 		describe( 'setDataValue', () => {
 			it( 'calls the traveler function to determine the snak', () => {
 				const map = newStatementsState( { Q42: {

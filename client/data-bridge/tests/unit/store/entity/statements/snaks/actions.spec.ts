@@ -34,10 +34,6 @@ describe( 'snak/actions', () => {
 		},
 		traveler );
 
-		beforeEach( () => {
-			traveler.mockClear();
-		} );
-
 		describe( 'setStringDataValue', () => {
 			describe( 'traveler use', () => {
 				it( 'calls the traveler function to determine the snak', () => {

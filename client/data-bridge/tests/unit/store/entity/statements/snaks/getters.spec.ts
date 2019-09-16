@@ -42,10 +42,6 @@ describe( 'snaks/Getters', () => {
 		},
 		traveler );
 
-		beforeEach( () => {
-			traveler.mockClear();
-		} );
-
 		describe( 'snaktype', () => {
 			it( 'calls the traveler function to determine the snak', () => {
 				const map = newStatementsState( { Q42: {

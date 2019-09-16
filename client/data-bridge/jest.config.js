@@ -39,4 +39,5 @@ module.exports = {
 		'!src/mock-data/**',
 		'!src/mock-entry.ts',
 	],
+	clearMocks: true,
 };
