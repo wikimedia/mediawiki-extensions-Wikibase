@@ -23,6 +23,10 @@ class DataBridgePage extends Page {
 		return '.wb-db-stringValue .wb-db-stringValue__input';
 	}
 
+	static get PROPERTY_LABEL() {
+		return '.wb-db-PropertyLabel';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -65,6 +69,12 @@ class DataBridgePage extends Page {
 	get value() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE} ${DataBridgePage.STRING_VALUE}`
+		);
+	}
+
+	get propertyLabel() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE} ${DataBridgePage.PROPERTY_LABEL}`
 		);
 	}
 }
