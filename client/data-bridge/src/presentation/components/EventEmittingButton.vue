@@ -53,11 +53,12 @@ $block: '.wb-ui-event-emitting-button';
 
 %textButton {
 	font-family: $font-family-sans;
-	display: inline-block;
+	display: inline-flex;
 	cursor: pointer;
 	white-space: nowrap;
 	text-decoration: none;
 	font-weight: bold;
+	align-items: center;
 }
 
 %framed {
