@@ -8,10 +8,7 @@ use Title;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpResult;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -93,11 +90,6 @@ class EditEntity extends ModifyEntity {
 	private $entityChangeOpProvider;
 
 	/**
-	 * @var ChangedLanguagesCounter
-	 */
-	private $changedLanguagesCounter;
-
-	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -126,9 +118,7 @@ class EditEntity extends ModifyEntity {
 		FingerprintChangeOpFactory $termChangeOpFactory,
 		StatementChangeOpFactory $statementChangeOpFactory,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
-		EntityChangeOpProvider $entityChangeOpProvider,
-		ChangedLanguagesCounter $changedLanguagesCounter,
-		NonLanguageBoundChangesCounter $nonLanguageBoundChangesCounter
+		EntityChangeOpProvider $entityChangeOpProvider
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -143,8 +133,6 @@ class EditEntity extends ModifyEntity {
 		$this->statementChangeOpFactory = $statementChangeOpFactory;
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->entityChangeOpProvider = $entityChangeOpProvider;
-		$this->changedLanguagesCounter = $changedLanguagesCounter;
-		$this->nonLanguageBoundChangesCounter = $nonLanguageBoundChangesCounter;
 	}
 
 	/**
@@ -260,10 +248,10 @@ class EditEntity extends ModifyEntity {
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
 		}
 
-		$changeOpResult = $this->applyChangeOp( $changeOp, $entity );
+		$this->applyChangeOp( $changeOp, $entity );
 
 		$this->buildResult( $entity );
-		return $this->getSummary( $preparedParameters, $entity, $changeOpResult );
+		return $this->getSummary( $preparedParameters, $entity );
 	}
 
 	/**
@@ -271,46 +259,16 @@ class EditEntity extends ModifyEntity {
 	 * @param EntityDocument $entity
 	 * @return Summary
 	 */
-	private function getSummary(
-		array $preparedParameters,
-		EntityDocument $entity,
-		ChangeOpResult $changeOpResult
-	) {
+	private function getSummary( array $preparedParameters, EntityDocument $entity ) {
+		//TODO: Construct a nice and meaningful summary from the changes that get applied!
+		//      Perhaps that could be based on the resulting diff?
 		$summary = $this->createSummary( $preparedParameters );
-
-		if ( $this->isUpdatingExistingEntity( $preparedParameters ) ) {
-			if ( $preparedParameters[self::PARAM_CLEAR] !== false ) {
-				$summary->setAction( 'override' );
-			} else {
-				$this->prepareUpdateSummary( $summary, $changeOpResult );
-			}
+		if ( isset( $preparedParameters['id'] ) xor ( isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] ) ) ) {
+			$summary->setAction( $preparedParameters[self::PARAM_CLEAR] === false ? 'update' : 'override' );
 		} else {
 			$summary->setAction( 'create-' . $entity->getType() );
 		}
-
 		return $summary;
-	}
-
-	private function isUpdatingExistingEntity( array $preparedParameters ) {
-		$isTargetingEntity = isset( $preparedParameters['id'] );
-		$isTargetingPage = isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] );
-
-		return $isTargetingEntity xor $isTargetingPage;
-	}
-
-	private function prepareUpdateSummary( Summary $summary, ChangeOpResult $changeOpResult ) {
-		$changedLanguagesCount = $this->changedLanguagesCounter->countChangedLanguages( $changeOpResult );
-
-		if ( $changedLanguagesCount === 0 ) {
-			$summary->setAction( 'update' );
-		} else {
-			$nonLanguageBoundChangesCount = $this->nonLanguageBoundChangesCounter->countChanges( $changeOpResult );
-
-			$action = $nonLanguageBoundChangesCount > 0 ? 'update-languages-and-other' : 'update-languages';
-
-			$summary->setAutoCommentArgs( [ $changedLanguagesCount ] );
-			$summary->setAction( $action );
-		}
 	}
 
 	/**

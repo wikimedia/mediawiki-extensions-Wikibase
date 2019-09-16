@@ -6,7 +6,6 @@ use MediaWiki\MediaWikiServices;
 use ReadOnlyError;
 use User;
 use ApiUsageException;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -604,100 +603,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 				);
 			}
 		}
-	}
-
-	public function provideItemIdParamsAndExpectedSummaryPatternForEditEntity() {
-		return [
-			'no languages changed' => [
-				[
-					'action' => 'wbeditentity',
-					'data' => json_encode( [
-						'labels' => [],
-						'descriptions' => [],
-						'aliases' => [],
-						'sitelinks' => [
-							[
-								'site' => 'dewiki',
-								'title' => 'Page',
-								'badges' => []
-							]
-						]
-					] )
-				],
-				preg_quote( '/* wbeditentity-update:0| */' )
-			],
-			'only one language chaned, no other parts changed' => [
-				[
-					'action' => 'wbeditentity',
-					'data' => json_encode( [
-						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
-						'descriptions' => [],
-						'aliases' => []
-					] )
-				],
-				preg_quote( '/* wbeditentity-update-languages:0||1 */' )
-			],
-			'multiple languages changed, no other parts changed' => [
-				[
-					'action' => 'wbeditentity',
-					'data' => json_encode( [
-						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
-						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-						'aliases' => [ 'es' => [ [ 'language' => 'es', 'value' => 'ooF' ], [ 'language' => 'es', 'value' => 'raB' ] ] ]
-					] )
-				],
-				preg_quote( '/* wbeditentity-update-languages:0||3 */' )
-			],
-			'some languages changed and other parts changed' => [
-				[
-					'action' => 'wbeditentity',
-					'data' => json_encode( [
-						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
-						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-						'aliases' => [ 'es' => [ [ 'language' => 'es', 'value' => 'ooF' ], [ 'language' => 'es', 'value' => 'raB' ] ] ],
-						'sitelinks' => [
-							[
-								'site' => 'dewiki',
-								'title' => 'Some Page',
-								'badges' => []
-							]
-						]
-					] ),
-				],
-				preg_quote( '/* wbeditentity-update-languages-and-other:0||3 */' )
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider provideItemIdParamsAndExpectedSummaryPatternForEditEntity
-	 */
-	public function testEditEntity_producesCorrectSummary( $params, $expectedSummaryPattern ) {
-		// Saving entity couldn't be done in the provider because there the
-		// test database setup has not been done yet
-		$item = new Item();
-		$this->saveEntity( $item );
-		$params['id'] = $item->getId()->getSerialization();
-
-		list( $result ) = $this->doApiRequestWithToken( $params );
-
-		$this->assertRevisionSummary(
-			$expectedSummaryPattern,
-			$result['entity']['lastrevid']
-		);
-	}
-
-	protected function saveEntity( EntityDocument $entity ) {
-		$this->getEntityStore()->saveEntity(
-			$entity,
-			static::class,
-			$this->getTestUser()->getUser(),
-			EDIT_NEW
-		);
-	}
-
-	protected function getEntityStore() {
-		return WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}
 
 	/**
