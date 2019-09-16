@@ -5,7 +5,7 @@ import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 
-export default function createServices( mwWindow: MwWindow, tags: string[] = [] ): ServiceRepositories {
+export default function createServices( mwWindow: MwWindow ): ServiceRepositories {
 	const services = new ServiceRepositories();
 
 	const repoConfig = mwWindow.mw.config.get( 'wbRepo' ),
@@ -27,10 +27,11 @@ export default function createServices( mwWindow: MwWindow, tags: string[] = [] 
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
 
+	const editTags = mwWindow.mw.config.get( 'wbDataBridgeConfig' ).editTags;
 	services.setWritingEntityRepository( new ForeignApiWritingRepository(
 		repoForeignApi,
 		mwWindow.mw.config.get( 'wgUserName' ),
-		tags.length === 0 ? undefined : tags,
+		editTags.length === 0 ? undefined : editTags,
 	) );
 
 	services.setEntityLabelRepository(
