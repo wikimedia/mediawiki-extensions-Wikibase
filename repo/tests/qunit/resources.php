@@ -13,13 +13,16 @@ return call_user_func( function() {
 	];
 
 	return [
-		'jquery.wikibase.entitysearch.tests' => $moduleBase + [
-			'scripts' => [
-				'jquery.wikibase/jquery.wikibase.entitysearch.tests.js',
+		'jquery.wikibase.entitysearch.tests' => [
+			'packageFiles' => [
+				'tests/qunit/jquery.wikibase/jquery.wikibase.entitysearch.tests.js',
+				'resources/jquery.wikibase/jquery.wikibase.entitysearch.js',
 			],
 			'dependencies' => [
-				'jquery.wikibase.entitysearch',
+				'jquery.wikibase.entityselector',
 			],
+			'localBasePath' => dirname( dirname( __DIR__ ) ),
+			'remoteExtPath' => 'Wikibase/repo',
 		],
 
 		'wikibase.dataTypes.DataType.tests' => $moduleBase + [

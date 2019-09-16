@@ -6,6 +6,7 @@
  */
 ( function () {
 	'use strict';
+	require( './jquery.wikibase/jquery.wikibase.entitysearch.js' );
 
 	$( function () {
 		var $form = $( '#searchform ' ),

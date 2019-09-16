@@ -7,6 +7,8 @@
 
 	QUnit.module( 'jquery.wikibase.entitysearch' );
 
+	require( '../../../resources/jquery.wikibase/jquery.wikibase.entitysearch.js' );
+
 	/**
 	 * Entity stubs as returned from the API and handled by the entityselector.
 	 * @type {Object[]}
