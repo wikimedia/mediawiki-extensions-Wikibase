@@ -45,6 +45,7 @@
 	"wikibase-aliases-edit-placeholder-language-aware": "איינגעבן עטלעכע אליאסן אין $1",
 	"wikibase-aliases-edit-label": "אַליאַסן, צעשיידט מיט א ראָר:",
 	"wikibase-content-language-edit-label": "שפראַך:",
+	"wikibase-content-language-edit-not-recognized-language": "דער אָנגעגעבענער שפראַכקאד ווערט נישט דערקענט.",
 	"wikibase-diffview-reference": "רעפערענץ",
 	"wikibase-diffview-rank": "ראנג",
 	"wikibase-diffview-rank-preferred": "פרעפֿערירטער ראנג",

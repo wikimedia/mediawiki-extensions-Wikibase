@@ -348,6 +348,7 @@
 	"wikibase-api-no-such-entity": "לא נמצאה ישות עם המזהה \"$1\".",
 	"wikibase-api-no-such-sitelink": "לא נמצא קישור אתר ל־\"$1\" בעת ניסיון לערוך סמלים.",
 	"wikibase-api-not-recognized-datatype": "היה אמור להיות פה סוג נתונים, אבל הוא חסר או בלתי־מוכר.",
+	"wikibase-api-tags-invalid": "הפרמטרים של התגים אינם תקינים.",
 	"wikibase-api-target-not-empty": "אפשר ליצור הפניה רק על גבי ישות ריקה או מחוקה.",
 	"wikibase-api-target-is-redirect": "אסור שיעד ההפניה יהיה בעצמו הפניה.",
 	"wikibase-api-target-is-incompatible": "ניסיון להפנות לישות מסוג אחר.",

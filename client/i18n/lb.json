@@ -46,6 +46,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Ännerung",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-Ännerungen",
+	"wikibase-rcfilters-hide-wikibase-description": "Ännerunge déi vu(n) {{WBREPONAME}} hierkommen.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "All {{WBREPONAME}}-Ännerunge sinn als \"kleng\" markéiert, esou ass de Filter {{WBREPONAME}}-Ännerunge a Konflikt mam Filter \"Keng kleng Ännerungen\".",
@@ -56,6 +57,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|Link mat enger anerer Sprooch|Linke mat anere Sproochen}} op der Säit)",
 	"wikibase-unconnectedpages-submit": "Säite weisen",
 	"pageswithbadges": "Säite mat Badgen",
+	"wikibase-pageswithbadges-invalid-id": "$1 ass keng valabel ID vun engem Element",
 	"wikibase-pageswithbadges-legend": "Lëscht vu Säite mat engem bestëmmte Badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
 	"wikibase-pageswithbadges-submit": "Säite weisen",
@@ -80,6 +82,7 @@
 	"wikibase-otherprojects": "An anere Projeten",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Verbindung|Verbindunge}} mat {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Mech informéiere wann een eng Säit {{GENDER:|déi ech ugeluecht hunn}} mat engem {{WBREPONAME}}-Element verbënnt.",
-	"notification-header-page-connection": "D'Säit <strong>$3</strong> gouf {{GENDER:$2|mat}} {{PLURAL:$4|-1=engem {{WBREPONAME}}-Objet|dem {{WBREPONAME}}-Objet $4}} verbonnen, an deem Donnéeën a Relatioun mam Sujet dra sinn.",
-	"notification-link-text-view-item": "Element {{GENDER:$1|weisen}}"
+	"notification-header-page-connection": "D'Säit <strong>$3</strong> gouf {{GENDER:$2|mat}} {{PLURAL:$4|-1=engem {{WBREPONAME}}-Objet|dem {{WBREPONAME}}-Objet $4}} verbonnen, wou Donnéeën a Relatioun mam Sujet gesammelt kënne ginn.",
+	"notification-link-text-view-item": "Element {{GENDER:$1|weisen}}",
+	"connected-redirect-category": "Viruleedungen déi mat engem {{WBREPONAME}}-Element verbonne sinn"
 }

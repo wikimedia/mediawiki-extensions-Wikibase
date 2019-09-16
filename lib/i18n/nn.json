@@ -108,6 +108,7 @@
 	"wikibase-entity-summary-wbcreateclaim-novalue": "Oppretta {{PLURAL:$1|ei utsegn|utsegner}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "Oppretta {{PLURAL:$1|ei utsegn|utsegner}}",
 	"wikibase-entity-summary-wbcreateclaim": "Oppretta {{PLURAL:$1|ein utsegn|utsegner}}",
+	"wikibase-entity-summary-wbsetclaimvalue": "Sette {{PLURAL:$1|verdi|verdiar}} for påstand",
 	"wikibase-entity-summary-wbremoveclaims": "Fjerna {{PLURAL:$1|ein påstand|påstandar}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "Fjerna {{PLURAL:$1|påstand|påstandar}}",
 	"wikibase-entity-summary-wbremoveclaims-update": "Fjerna {{PLURAL:$1|påstand|påstandar}}",

@@ -18,6 +18,8 @@
 	"wikibase-comment-unlink": "На оваа страница ѝ е раскината врската со елементот од {{WBREPONAME}}. Јазичните врски се отстранети.",
 	"wikibase-comment-restore": "Здружениот предмет од {{WBREPONAME}} е повратен. Јазичните врски се повратени.",
 	"wikibase-comment-update": "Изменет предмет во {{WBREPONAME}}",
+	"wikibase-comment-update-languages": "{{WBREPONAME}} Изменет натпис, опис и/или источначници на $1 {{PLURAL:$1|јазик|јазици}}.",
+	"wikibase-comment-update-languages-and-other": "{{WBREPONAME}} Изменет натпис, опис и/или источначници на $1 {{PLURAL:$1|јазик|јазици}} и други делови.",
 	"wikibase-comment-sitelink-add": "Додадена јазична врска: $1",
 	"wikibase-comment-sitelink-change": "Изменета јазична врска од $1 на $2",
 	"wikibase-comment-sitelink-remove": "Отстранета јазична врска: $1",

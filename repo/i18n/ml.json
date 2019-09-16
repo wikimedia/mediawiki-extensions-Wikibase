@@ -8,7 +8,8 @@
 			"Vssun",
 			"Macofe",
 			"Jameela P.",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Adithyak1997"
 		]
 	},
 	"wikibase-desc": "വിന്യസിത ഡേറ്റാ റെപ്പോസിറ്ററി",
@@ -117,8 +118,10 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "ക്ഷമിക്കുക, താങ്കൾ നൽകിയ ഭാഷാ തിരിച്ചറിയൽ വിവരം സിസ്റ്റത്തിന് അപരിചിതമാണ്. ദയവായി \"ml\" പോലെയുള്ള സാധുവായ തിരിച്ചറിയലുപാധി നൽകുക.",
 	"wikibase-newproperty-datatype": "ഡേറ്റാ തരം:",
 	"wikibase-newproperty-invalid-datatype": "അസാധുവായാ ഡേറ്റാതരമാണ് നൽകിയിരിക്കുന്നത്",
+	"wikibase-description-helppage": "Help:വിവരണം",
 	"special-newitem": "പുതിയൊരു ഇനം സൃഷ്ടിക്കുക",
 	"wikibase-newitem-fieldset": "പുതിയൊരു ഇനം സൃഷ്ടിക്കുക",
+	"wikibase-newentity-language": "ഭാഷ:",
 	"wikibase-newentity-label": "തലക്കുറി:",
 	"wikibase-newentity-description": "വിവരണം:",
 	"wikibase-newentity-submit": "സൃഷ്ടിക്കുക",
@@ -154,6 +157,7 @@
 	"wikibase-entitieswithoutlabel-submit": "കണ്ടെത്തുക",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" എന്നത് സാധുവായ ഭാഷാ കോഡ് അല്ല.",
 	"wikibase-entitypage-bad-id": "അസാധുവായ ഉപയോക്തൃനാമം: $1",
+	"wikibase-redirectentity-submit": "തിരിച്ചുവിടൽ",
 	"wikibase-restoreold": "പുനഃസ്ഥാപിക്കുക",
 	"wikibase-no-direct-editing": "$1  എന്ന നാമമേഖലയിൽ നേരിട്ടുള്ള തിരുത്ത് പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നു",
 	"wikibase-noentity-createone": "ഒപ്പം താങ്കൾക്ക് [[$1|പുതിയൊരെണ്ണം സൃഷ്ടിക്കാവുന്നതുമാണ്]].",
@@ -165,5 +169,6 @@
 	"wikibase-listdatatypes-multilingualtext-head": "ബഹുഭാഷാ എഴുത്ത്",
 	"wikibase-listdatatypes-string-head": "പദം",
 	"wikibase-listdatatypes-time-head": "സമയം",
+	"wikibase-listdatavaluetypes-name-time": "സമയം",
 	"content-model-wikibase-item": "വിക്കിബേസ് ഇനം"
 }

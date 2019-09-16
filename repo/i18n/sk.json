@@ -6,7 +6,8 @@
 			"Macofe",
 			"TomášPolonec",
 			"Lexected",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Luky001"
 		]
 	},
 	"wikibase-desc": "Úložisko štruktúrovaných údajov",
@@ -17,6 +18,7 @@
 	"wikibase-addreference": "pridať zdroj",
 	"wikibase-save-inprogress": "ukladá sa",
 	"wikibase-remove-inprogress": "Odstraňovanie...",
+	"wikibase-statementgrouplistview-add-tooltip": "Pridať tvrdenie",
 	"wikibase-label-empty": "Menovka zatiaľ nebola definovaná",
 	"wikibase-label-edit-placeholder": "zadaj menovku",
 	"wikibase-description-empty": "Popis zatiaľ nebol definovaný",

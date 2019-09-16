@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"MFikriansori"
+		]
+	},
+	"wikibase-comment-update": "Item {{WBREPONAME}} bubêak",
+	"wikibase-dataitem": "Item nêak {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Kunyin",
+	"wikibase-rc-hide-wikidata-show": "Kêmten",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ubêak",
+	"wikibase-otherprojects": "Lêm proyek luyên"
+}

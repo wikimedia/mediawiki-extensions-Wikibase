@@ -70,7 +70,7 @@
 	"wikibase-pageinfo-entity-usage": "اس صفحہ میں مستعمل {{WBREPONAME}} کے موجودات",
 	"wikibase-pageinfo-entity-usage-S": "سائٹ کا ربط",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "نشان: $1",
-	"wikibase-pageinfo-entity-usage-D-with-modifier": "وضاحت: $1",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "وصف: $1",
 	"wikibase-pageinfo-entity-usage-T": "عنوان",
 	"wikibase-pageinfo-entity-usage-C": "کچھ بیانات",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "بیان: $1",

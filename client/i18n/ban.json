@@ -6,9 +6,9 @@
 			"NoiX180"
 		]
 	},
-	"tooltip-t-wikibase": "Pranala sané ngubungang butir ring genah ngenahang data",
+	"tooltip-t-wikibase": "Pranala maring item panyimpenan data sané kasambung",
 	"wikibase-comment-update": "Item {{WBREPONAME}} kauah",
-	"wikibase-dataitem": "item ring {{WBREPONAME}}",
+	"wikibase-dataitem": "Item {{WBREPONAME}}",
 	"wikibase-editlinks": "Uah pranala",
 	"wikibase-editlinkstitle": "Uah pranala pantaraning basa",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

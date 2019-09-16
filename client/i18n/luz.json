@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"علی ساکی لرستانی"
+			"علی ساکی لرستانی",
+			"Shahriar.dehghani24"
 		]
 	},
 	"tooltip-t-wikibase": "لینک مۉتأصل ڤە دادھ مۉرد مأخزأن",
@@ -14,5 +15,5 @@
 	"wikibase-rc-hide-wikidata-show": "نیشۉ دائن",
 	"wikibase-rc-wikibase-edit-letter": "ڤدا",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ئیصلاح",
-	"wikibase-otherprojects": "پرۉجه یل دیه"
+	"wikibase-otherprojects": "مِن بقیه پروژئل"
 }

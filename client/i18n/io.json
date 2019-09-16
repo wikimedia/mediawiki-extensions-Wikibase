@@ -38,9 +38,15 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Redakturi qui originis de {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Atencez ke povas bezonar kelka minuti, til ke omna modifiki divenos videbla en omna Wiki.",
 	"unconnectedpages": "Pagino sen konekto ad artikli",
+	"wikibase-unconnectedpages-submit": "Montrez pagini",
 	"pageswithbadges": "Pagini kun insigni",
+	"pageswithbadges-summary": "Ca pagino montras pagini kun insigni (exemple: bon artiklo, o saliata artiklo). Ca listo organizesas segun identifiko di la pagino, de la maxim recenta til la maxim anciena. La maxim recenta videsas supre.",
+	"wikibase-pageswithbadges-submit": "Montrez pagini",
+	"wikibase-entityusage-submit": "Montrez pagini",
 	"wikibase-pageinfo-entity-id": "Identifiko dil artiklo en {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
+	"wikibase-pageinfo-entity-usage-S": "Ligilo a retsituo",
 	"wikibase-otherprojects": "En altra projeti",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> ed {{PLURAL:$4|altra pagino|$4 altra pagini|100=plu kam 99 altra pagini}} {{GENDER:$2|ligesis}} ad artikli de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidar}} detalo"
 }

@@ -15,7 +15,8 @@
 			"Mateon1",
 			"Woytecr",
 			"Openbk",
-			"Railfail536"
+			"Railfail536",
+			"Rail"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",

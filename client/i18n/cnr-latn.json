@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bellatrix10"
+		]
+	},
+	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikipodaci",
+	"wikibase-comment-update": "{{WBREPONAME}} stavka se promijenila",
+	"wikibase-dataitem": "Stavka ({{WBREPONAME}})",
+	"wikibase-editlinks": "Uredi poveznice",
+	"wikibase-editlinkstitle": "Uredi poveznice na druge jezike",
+	"wikibase-rc-hide-wikidata-hide": "Sakrij",
+	"wikibase-rc-hide-wikidata-show": "Prikaži",
+	"wikibase-otherprojects": "Na drugim projektima"
+}
