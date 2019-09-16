@@ -11,10 +11,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Api\EditEntity;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
-use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 
@@ -129,9 +126,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
-			$wikibaseRepo->getEntityChangeOpProvider(),
-			new ChangedLanguagesCounter(),
-			new NonLanguageBoundChangesCounter()
+			$wikibaseRepo->getEntityChangeOpProvider()
 		);
 	}
 
@@ -154,8 +149,6 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 				if ( $item->getLabels()->isEmpty() ) {
 					throw new \RuntimeException( 'item without labels is really no good' );
 				}
-
-				return new ChangeOpResultStub( $item->getId(), true );
 			} );
 
 		return $changeOp;
