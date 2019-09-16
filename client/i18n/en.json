@@ -118,5 +118,6 @@
 	"unresolved-property-category": "Pages with unresolved properties",
 	"unresolved-property-category-desc": "This category lists pages that reference {{WBREPONAME}} properties that cannot be found neither by their property ID nor label.",
 	"connected-redirect-category": "Redirects connected to a {{WBREPONAME}} item",
-	"connected-redirect-category-desc": "This category lists redirect pages that are connected to a {{WBREPONAME}} item."
+	"connected-redirect-category-desc": "This category lists redirect pages that are connected to a {{WBREPONAME}} item.",
+	"wikibase-client-data-bridge-dialog-title": "Edit Property"
 }
