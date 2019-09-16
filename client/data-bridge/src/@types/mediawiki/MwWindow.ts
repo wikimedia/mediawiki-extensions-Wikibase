@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import MwConfig from '@/@types/mediawiki/MwConfig';
 
+export interface MwMessage {
+	text(): string;
+}
+export type MwMessages = ( key: string, ...params: string[] ) => MwMessage;
+
 interface ResourceLoader {
 	using( module: string|string[] ): Promise<any>;
 }
@@ -36,6 +41,8 @@ export interface ForeignApi {
 
 interface MediaWiki {
 	loader: ResourceLoader;
+	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message */
+	message: MwMessages;
 	config: MwConfig;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log */
 	log: MwLog;

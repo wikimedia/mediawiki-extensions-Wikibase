@@ -3,6 +3,7 @@ import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepo
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
+import MessagesRepository from '@/definitions/data-access/MessagesRepository';
 
 function newServices(): ServiceRepositories {
 	return new ServiceRepositories();
@@ -22,6 +23,10 @@ function newMockLanguageInfoRepository(): LanguageInfoRepository {
 
 function newMockEntityLabelRepository(): EntityLabelRepository {
 	return {} as EntityLabelRepository;
+}
+
+function newMockMessagesRepository(): MessagesRepository {
+	return {} as MessagesRepository;
 }
 
 describe( 'ServiceRepositories', () => {
@@ -74,6 +79,19 @@ describe( 'ServiceRepositories', () => {
 			const mockEntityLabelRepository = newMockEntityLabelRepository();
 			services.setEntityLabelRepository( mockEntityLabelRepository );
 			expect( services.getEntityLabelRepository() ).toBe( mockEntityLabelRepository );
+		} );
+	} );
+
+	describe( 'MessagesRepository', () => {
+		it( 'throws an error if it is not set', () => {
+			expect( () => newServices().getMessagesRepository() ).toThrow();
+		} );
+
+		it( 'can set and get a MessagesRepository', () => {
+			const services = newServices();
+			const mockMessagesRepository = newMockMessagesRepository();
+			services.setMessagesRepository( mockMessagesRepository );
+			expect( services.getMessagesRepository() ).toBe( mockMessagesRepository );
 		} );
 	} );
 } );
