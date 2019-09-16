@@ -20,21 +20,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-
-		'jquery.wikibase.entitysearch' => $moduleTemplate + [
-			'scripts' => [
-				'jquery.wikibase/jquery.wikibase.entitysearch.js',
-			],
-			'styles' => [
-				'jquery.wikibase/themes/default/jquery.wikibase.entitysearch.css',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.ui.ooMenu',
-				'jquery.wikibase.entityselector',
-			],
-		],
-
 		'mw.config.values.wbDataTypes' => $moduleTemplate + [
 			'class' => DataTypesModule::class,
 			'datatypefactory' => function() {
@@ -182,14 +167,18 @@ return call_user_func( function() {
 		],
 
 		'wikibase.ui.entitysearch' => $moduleTemplate + [
-			'scripts' => [
+			'packageFiles' => [
 				'wikibase.ui.entitysearch.js',
+
+				'jquery.wikibase/jquery.wikibase.entitysearch.js',
+			],
+			'styles' => [
+				'jquery.wikibase/themes/default/jquery.wikibase.entitysearch.css',
 			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.spinner',
 				'jquery.ui.ooMenu',
-				'jquery.wikibase.entitysearch',
 				'jquery.wikibase.entityselector',
 			],
 			'messages' => [
