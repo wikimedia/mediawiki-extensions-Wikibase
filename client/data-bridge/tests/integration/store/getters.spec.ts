@@ -11,7 +11,7 @@ import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 
 describe( 'store/getters', () => {
@@ -148,7 +148,7 @@ describe( 'store/getters', () => {
 				it.each( Object.keys( mainSnakGetterTypes ) )(
 					'%s returns null on unknown entity', ( key: string ) => {
 						expect( store.getters[
-							namespacedStoreEvent(
+							getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								( mainSnakGetterTypes as any )[ key ] as string,
@@ -164,7 +164,7 @@ describe( 'store/getters', () => {
 				it.each( Object.keys( mainSnakGetterTypes ) )(
 					'%s returns null on unknown Property', ( key: string ) => {
 						expect( store.getters[
-							namespacedStoreEvent(
+							getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								( mainSnakGetterTypes as any )[ key ] as string,
@@ -180,7 +180,7 @@ describe( 'store/getters', () => {
 				it.each( Object.keys( mainSnakGetterTypes ) )(
 					'%s returns null on unknown index on Property', ( key: string ) => {
 						expect( store.getters[
-							namespacedStoreEvent(
+							getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								( mainSnakGetterTypes as any )[ key ] as string,
@@ -196,7 +196,7 @@ describe( 'store/getters', () => {
 				describe( 'dataValue extended errors', () => {
 					it( 'returns null if the snaktype is novalue/somevalue', () => {
 						expect( store.getters[
-							namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
+							getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
 						]( {
 							entityId: 'Q42',
 							propertyId: 'P60',
@@ -204,7 +204,7 @@ describe( 'store/getters', () => {
 						} ) ).toBeNull();
 
 						expect( store.getters[
-							namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
+							getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
 						]( {
 							entityId: 'Q42',
 							propertyId: 'P60',
@@ -217,7 +217,7 @@ describe( 'store/getters', () => {
 			describe( 'resolved values', () => {
 				it( 'has a snaktype', () => {
 					expect( store.getters[
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
+						getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
 					]( {
 						entityId: 'Q42',
 						propertyId: 'P31',
@@ -225,7 +225,7 @@ describe( 'store/getters', () => {
 					} ) ).toBe( testSet.entity.statements.P31[ 0 ].mainsnak.snaktype );
 
 					expect( store.getters[
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
+						getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
 					]( {
 						entityId: 'Q42',
 						propertyId: 'P23',
@@ -235,7 +235,7 @@ describe( 'store/getters', () => {
 
 				it( 'has a datatype', () => {
 					expect( store.getters[
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataType )
+						getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataType )
 					]( {
 						entityId: 'Q42',
 						propertyId: 'P31',
@@ -243,7 +243,7 @@ describe( 'store/getters', () => {
 					} ) ).toBe( testSet.entity.statements.P31[ 0 ].mainsnak.datatype );
 
 					expect( store.getters[
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataType )
+						getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataType )
 					]( {
 						entityId: 'Q42',
 						propertyId: 'P23',
@@ -253,7 +253,7 @@ describe( 'store/getters', () => {
 
 				it( 'has a datavaluetype', () => {
 					expect( store.getters[
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType )
+						getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType )
 					]( {
 						entityId: 'Q42',
 						propertyId: 'P31',
@@ -263,7 +263,7 @@ describe( 'store/getters', () => {
 
 				it( 'has a datavalue', () => {
 					expect( store.getters[
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
+						getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
 					]( {
 						entityId: 'Q42',
 						propertyId: 'P31',

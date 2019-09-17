@@ -34,7 +34,7 @@ import {
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import DataValue from '@/datamodel/DataValue';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
 
@@ -57,10 +57,10 @@ export default function actions(
 				} );
 
 			return context.dispatch(
-				namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
+				action( NS_ENTITY, ENTITY_INIT ),
 				{ entity: information.entityId },
 			).then( () => {
-				const entityId = context.getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ];
+				const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
 				const path = {
 					entityId,
 					propertyId: context.state.targetProperty,
@@ -68,25 +68,25 @@ export default function actions(
 				};
 
 				if ( context.getters[
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
+					getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
 				]( entityId, context.state.targetProperty ) === false
 				) {
 					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 					// TODO: store information about the error somewhere and show it!
 				} else if ( context.getters[
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS )
+					getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS )
 				]( entityId, context.state.targetProperty ) === true
 				) {
 					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 					// TODO: store information about the error somewhere and show it!
 				} else if ( context.getters[
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
+					getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
 				]( path ) !== 'value'
 				) {
 					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 					// TODO: store information about the error somewhere and show it!
 				} else if ( context.getters[
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType )
+					getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType )
 				]( path ) !== 'string'
 				) {
 					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
@@ -110,7 +110,7 @@ export default function actions(
 				return Promise.reject( null );
 			}
 
-			const entityId = context.getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ];
+			const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
 			const path = {
 				entityId,
 				propertyId: context.state.targetProperty,
@@ -118,7 +118,7 @@ export default function actions(
 			};
 
 			return context.dispatch(
-				namespacedStoreEvent(
+				action(
 					NS_ENTITY,
 					NS_STATEMENTS,
 					mainSnakActionTypes.setStringDataValue,
@@ -142,7 +142,7 @@ export default function actions(
 			}
 
 			return context.dispatch(
-				namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ),
+				action( NS_ENTITY, ENTITY_SAVE ),
 			)
 				.catch( ( error: Error ) => {
 					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );

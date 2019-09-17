@@ -18,7 +18,7 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { action } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 
 describe( 'store/actions', () => {
@@ -199,7 +199,7 @@ describe( 'store/actions', () => {
 			await store.dispatch( BRIDGE_INIT, info );
 			await expect(
 				store.dispatch(
-					namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ),
+					action( NS_ENTITY, ENTITY_SAVE ),
 				),
 			).rejects.toBe( rejectError );
 
@@ -238,7 +238,7 @@ describe( 'store/actions', () => {
 
 			store = createStore( services );
 			await store.dispatch( BRIDGE_INIT, info );
-			await store.dispatch( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
+			await store.dispatch( action( NS_ENTITY, ENTITY_SAVE ) );
 
 			expect( resolver ).toHaveBeenCalledWith( testSet );
 
@@ -351,7 +351,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Entity', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 					{
 						path: {
 							entityId: 'Q3333333',
@@ -369,7 +369,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 					{
 						path: {
 							entityId: 'Q42',
@@ -387,7 +387,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown index on Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 					{
 						path: {
 							entityId: 'Q42',
@@ -405,7 +405,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string value data types', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 					{
 						path: {
 							entityId: 'Q42',
@@ -423,7 +423,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string data value', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 					{
 						path: {
 							entityId: 'Q42',
@@ -447,7 +447,7 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+						action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 						{
 							path: {
 								entityId: 'Q42',
@@ -469,7 +469,7 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+						action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
 						{
 							path: {
 								entityId: 'Q42',

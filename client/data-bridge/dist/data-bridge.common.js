@@ -4529,6 +4529,34 @@ module.exports.f = function (C) {
 
 /***/ }),
 
+/***/ "ab86":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @param namespacesAndName namespace1, namespace2, ..., mutationOrActionOrGetterName
+ */
+function namespaceJoin(...namespacesAndName) {
+    return namespacesAndName.join('/');
+}
+/**
+ * Format the name of an action namespaced inside a store module
+ */
+exports.action = namespaceJoin;
+/**
+ * Format the name of a mutation namespaced inside a store module
+ */
+exports.mutation = namespaceJoin;
+/**
+ * Format the name of a getter namespaced inside a store module
+ */
+exports.getter = namespaceJoin;
+
+
+/***/ }),
+
 /***/ "ac6a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7538,17 +7566,9 @@ var ENTITY_REVISION = 'revision';
 // CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
 var ENTITY_INIT = 'entityInit';
 var ENTITY_SAVE = 'entitySave';
-// CONCATENATED MODULE: ./src/store/namespacedStoreEvent.ts
-/**
- * @param namespacesAndName namespace1, namespace2, ..., mutationOrActionName
- */
-/* harmony default export */ var namespacedStoreEvent = (function () {
-  for (var _len = arguments.length, namespacesAndName = new Array(_len), _key = 0; _key < _len; _key++) {
-    namespacesAndName[_key] = arguments[_key];
-  }
+// EXTERNAL MODULE: ./node_modules/wmde-vuex-helpers/dist/namespacedStoreMethods.js
+var namespacedStoreMethods = __webpack_require__("ab86");
 
-  return namespacesAndName.join('/');
-});
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -7572,23 +7592,23 @@ function actions(entityLabelRepository) {
       context.commit(TARGET_LABEL_SET, label);
     }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
     });
-    return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_INIT), {
+    return context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_INIT), {
       entity: information.entityId
     }).then(function () {
-      var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+      var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
       var path = {
         entityId: entityId,
         propertyId: context.state.targetProperty,
         index: 0
       };
 
-      if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
+      if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
+      } else if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
+      } else if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else if (context.getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
+      } else if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
       } else {
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
@@ -7604,13 +7624,13 @@ function actions(entityLabelRepository) {
       return Promise.reject(null);
     }
 
-    var entityId = context.getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+    var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
     var path = {
       entityId: entityId,
       propertyId: context.state.targetProperty,
       index: 0
     };
-    return context.dispatch(namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
+    return context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
       path: path,
       value: dataValue
     }).catch(function (error) {
@@ -7624,7 +7644,7 @@ function actions(entityLabelRepository) {
       return Promise.reject(null);
     }
 
-    return context.dispatch(namespacedStoreEvent(NS_ENTITY, ENTITY_SAVE)).catch(function (error) {
+    return context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_SAVE)).catch(function (error) {
       context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
       throw error;
@@ -7653,13 +7673,13 @@ var getters_getters = {
       return null;
     }
 
-    var entityId = getters[namespacedStoreEvent(NS_ENTITY, ENTITY_ID)];
+    var entityId = getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
     var path = {
       entityId: entityId,
       propertyId: state.targetProperty,
       index: 0
     };
-    return getters[namespacedStoreEvent(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue)](path);
+    return getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue)](path);
   },
   targetLabel: function targetLabel(state) {
     if (state.targetLabel === null) {
@@ -7741,7 +7761,7 @@ function actions_actions(readingEntityRepository, writingEntityRepository) {
   function updateEntity(context, entity) {
     context.commit(ENTITY_REVISION_UPDATE, entity.revisionId);
     context.commit(ENTITY_UPDATE, entity.entity);
-    return context.dispatch(namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_INIT), {
+    return context.dispatch(Object(namespacedStoreMethods["action"])(NS_STATEMENTS, STATEMENTS_INIT), {
       entityId: entity.entity.id,
       statements: entity.entity.statements
     });
@@ -7755,7 +7775,7 @@ function actions_actions(readingEntityRepository, writingEntityRepository) {
     var entityId = context.getters[ENTITY_ID],
         entityRevision = new EntityRevision_EntityRevision({
       id: entityId,
-      statements: context.getters[namespacedStoreEvent(NS_STATEMENTS, STATEMENTS_MAP)](entityId)
+      statements: context.getters[Object(namespacedStoreMethods["getter"])(NS_STATEMENTS, STATEMENTS_MAP)](entityId)
     }, context.getters[ENTITY_REVISION]);
     return writingEntityRepository.saveEntity(entityRevision).then(function (entity) {
       return updateEntity(context, entity);
