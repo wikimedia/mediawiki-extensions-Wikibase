@@ -4,6 +4,7 @@ import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReading
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
+import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 
 export default function createServices( mwWindow: MwWindow ): ServiceRepositories {
 	const services = new ServiceRepositories();
@@ -49,5 +50,8 @@ export default function createServices( mwWindow: MwWindow ): ServiceRepositorie
 		mwWindow.mw.language,
 		mwWindow.$.uls.data,
 	) );
+
+	services.setMessagesRepository( new MwMessagesRepository( mwWindow.mw.message ) );
+
 	return services;
 }

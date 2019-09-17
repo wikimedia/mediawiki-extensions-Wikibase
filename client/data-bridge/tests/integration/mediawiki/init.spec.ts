@@ -11,6 +11,7 @@ import {
 	mockMwEnv,
 } from '../../util/mocks';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
+import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 
 const manager = jest.fn();
 const dialog = {
@@ -70,6 +71,9 @@ describe( 'init', () => {
 		);
 		expectedServices.setEntityLabelRepository(
 			new ForeignApiEntityLabelRepository( 'en', ForeignApi ),
+		);
+		expectedServices.setMessagesRepository(
+			new MwMessagesRepository( ( window as MwWindow ).mw.message ),
 		);
 		const entityId = 'Q5';
 		const propertyId = 'P4711';

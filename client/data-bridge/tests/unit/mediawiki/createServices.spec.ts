@@ -1,10 +1,11 @@
 import createServices from '@/mediawiki/createServices';
-import MwWindow from '@/@types/mediawiki/MwWindow';
+import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
+import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
 
 const mockReadingEntityRepository = {};
@@ -31,6 +32,11 @@ jest.mock( '@/data-access/MwLanguageInfoRepository', () => {
 	} );
 } );
 
+const mockMessagesRepository = {};
+jest.mock( '@/data-access/MwMessagesRepository', () => {
+	return jest.fn().mockImplementation( () => mockMessagesRepository );
+} );
+
 function mockMwWindow( options: {
 	wbRepo?: WbRepo;
 	wgUserName?: string;
@@ -42,6 +48,7 @@ function mockMwWindow( options: {
 	};
 	wgPageContentLanguage?: string;
 	editTags?: string[];
+	message?: MwMessages;
 } = {} ): MwWindow {
 	const get = jest.fn().mockImplementation( ( key ) => {
 		switch ( key ) {
@@ -71,6 +78,7 @@ function mockMwWindow( options: {
 	const language = options.mwLanguage || { bcp47: jest.fn() };
 	const data = options.ulsData || { getDir: jest.fn() };
 	$.uls = { data };
+	const message = options.message || jest.fn();
 
 	return {
 		mw: {
@@ -79,6 +87,7 @@ function mockMwWindow( options: {
 			},
 			ForeignApi: jest.fn(),
 			language,
+			message,
 		},
 		$,
 	} as unknown as MwWindow;
@@ -194,6 +203,18 @@ describe( 'createServices', () => {
 		expect( ( ForeignApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( services.getEntityLabelRepository() ).toBe( mockEntityLabelRepository );
+	} );
+
+	it( 'creates MessagesRepository', () => {
+		const message = jest.fn();
+		const mwWindow = mockMwWindow( { message } );
+
+		const services = createServices( mwWindow );
+
+		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( MwMessagesRepository ).toHaveBeenCalledTimes( 1 );
+		expect( MwMessagesRepository ).toHaveBeenCalledWith( message );
+		expect( services.getMessagesRepository() ).toBe( mockMessagesRepository );
 	} );
 
 } );
