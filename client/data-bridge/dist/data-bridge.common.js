@@ -8081,6 +8081,50 @@ function createStore(services) {
     el.setAttribute('dir', language.directionality);
   };
 });
+// CONCATENATED MODULE: ./src/definitions/MessageKeys.ts
+var MessageKeys;
+
+(function (MessageKeys) {
+  MessageKeys["BRIDGE_DIALOG_TITLE"] = "wikibase-client-data-bridge-dialog-title";
+})(MessageKeys || (MessageKeys = {}));
+
+/* harmony default export */ var definitions_MessageKeys = (MessageKeys);
+// CONCATENATED MODULE: ./src/presentation/plugins/MessagesPlugin/Messages.ts
+
+
+
+/**
+ * Usage (assuming this has been registered as a Vue plugin):
+ *
+ * `this.$messages.get( this.$messages.KEYS.BRIDGE_DIALOG_TITLE )`
+ */
+
+var Messages_Messages =
+/*#__PURE__*/
+function () {
+  function Messages(messagesRepository) {
+    _classCallCheck(this, Messages);
+
+    this.KEYS = definitions_MessageKeys;
+    this.messagesRepository = messagesRepository;
+  }
+
+  _createClass(Messages, [{
+    key: "get",
+    value: function get(messageKey) {
+      return this.messagesRepository.get(messageKey);
+    }
+  }]);
+
+  return Messages;
+}();
+
+
+// CONCATENATED MODULE: ./src/presentation/plugins/MessagesPlugin/index.ts
+
+function MessagesPlugin(Vue, messages) {
+  Vue.prototype.$messages = new Messages_Messages(messages);
+}
 // EXTERNAL MODULE: ./node_modules/events/events.js
 var events_events = __webpack_require__("faa1");
 
@@ -8109,9 +8153,11 @@ function repeater(app, emitter, eventNames) {
 
 
 
+
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(services.getLanguageInfoRepository()));
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, services.getMessagesRepository());
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   var app = new presentation_App({
