@@ -507,5 +507,6 @@
 	"wikibase-outdated-client-script": "Generic title used for error messages where refreshing the page might solve the original error",
 	"wikibase-shortcopyrightwarning-heading": "Heading of the license agreement warning.\nSee also:\n* {{msg-mw|wikibase-shortcopyrightwarning}}",
 	"wikibase-entity-save-error-heading": "Heading of an error message shown when a change to an entity could not be published for an unknown reason",
-	"wikibase-entity-save-error-message": "Text of an error message shown when a change to an entity could not be published for an unknown reason"
+	"wikibase-entity-save-error-message": "Text of an error message shown when a change to an entity could not be published for an unknown reason",
+	"wikibase-tainted-ref-warning-icon-title": "Title/hover text shown on tainted reference icons"
 }

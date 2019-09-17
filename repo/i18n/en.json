@@ -472,5 +472,6 @@
 	"wikibase-outdated-client-script": "Uh-oh, a hard refresh is due!",
 	"wikibase-shortcopyrightwarning-heading": "License Attribution",
 	"wikibase-entity-save-error-heading": "Something went wrong",
-	"wikibase-entity-save-error-message": "Your change could not be published. You can try clicking the publish button again."
+	"wikibase-entity-save-error-message": "Your change could not be published. You can try clicking the publish button again.",
+	"wikibase-tainted-ref-warning-icon-title": "This statement has some potential issues"
 }
