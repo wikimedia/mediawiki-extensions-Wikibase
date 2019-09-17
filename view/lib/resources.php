@@ -714,15 +714,6 @@ return call_user_func( function() {
 				'targets' => [ 'desktop', 'mobile' ],
 			],
 
-		'wikibase.serialization.StrategyProvider' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'StrategyProvider.js',
-				],
-				'dependencies' => [
-					'wikibase.serialization.__namespace',
-				],
-			],
-
 		'wikibase.serialization.ClaimDeserializer' => $wikibaseSerializationPaths + [
 				'scripts' => [
 					'Deserializers/ClaimDeserializer.js',
@@ -750,88 +741,33 @@ return call_user_func( function() {
 			],
 
 		'wikibase.serialization.EntityDeserializer' => $wikibaseSerializationPaths + [
-				'scripts' => [
+				'packageFiles' => [
 					'Deserializers/EntityDeserializer.js',
+
+					'StrategyProvider.js',
+					'Deserializers/ItemDeserializer.js',
+					'Deserializers/PropertyDeserializer.js',
+					'Deserializers/SiteLinkSetDeserializer.js',
+					'Deserializers/SiteLinkDeserializer.js',
+					'Deserializers/FingerprintDeserializer.js',
+					'Deserializers/MultiTermMapDeserializer.js',
+					'Deserializers/MultiTermDeserializer.js',
 				],
 				'dependencies' => [
 					'util.inherit',
 					'wikibase.datamodel.Item',
 					'wikibase.datamodel.Property',
-					'wikibase.serialization.__namespace',
-					'wikibase.serialization.Deserializer',
-					'wikibase.serialization.ItemDeserializer',
-					'wikibase.serialization.PropertyDeserializer',
-					'wikibase.serialization.StrategyProvider',
-				],
-			],
-
-		'wikibase.serialization.FingerprintDeserializer' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'Deserializers/FingerprintDeserializer.js',
-				],
-				'dependencies' => [
-					'util.inherit',
 					'wikibase.datamodel.Fingerprint',
+					'wikibase.datamodel.MultiTerm',
+					'wikibase.datamodel.MultiTermMap',
+					'wikibase.datamodel.SiteLinkSet',
+					'wikibase.datamodel.SiteLink',
 					'wikibase.serialization.__namespace',
 					'wikibase.serialization.Deserializer',
-					'wikibase.serialization.MultiTermMapDeserializer',
 					'wikibase.serialization.TermMapDeserializer',
-				],
-			],
-
-		'wikibase.serialization.ItemDeserializer' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'Deserializers/ItemDeserializer.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-					'wikibase.datamodel.Item',
-					'wikibase.serialization.__namespace',
-					'wikibase.serialization.Deserializer',
-					'wikibase.serialization.FingerprintDeserializer',
-					'wikibase.serialization.SiteLinkSetDeserializer',
 					'wikibase.serialization.StatementGroupSetDeserializer',
 				],
 			],
-
-		'wikibase.serialization.MultiTermDeserializer' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'Deserializers/MultiTermDeserializer.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-					'wikibase.datamodel.MultiTerm',
-					'wikibase.serialization.__namespace',
-					'wikibase.serialization.Deserializer',
-				],
-			],
-
-		'wikibase.serialization.MultiTermMapDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/MultiTermMapDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.MultiTermMap',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.MultiTermDeserializer',
-			],
-		],
-
-		'wikibase.serialization.PropertyDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/PropertyDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.Property',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.FingerprintDeserializer',
-				'wikibase.serialization.StatementGroupSetDeserializer',
-			],
-		],
 
 		'wikibase.serialization.ReferenceListDeserializer' => $wikibaseSerializationPaths + [
 			'scripts' => [
@@ -859,31 +795,6 @@ return call_user_func( function() {
 				'wikibase.serialization.SnakListDeserializer',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.SiteLinkSetDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/SiteLinkSetDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.SiteLinkSet',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.SiteLinkDeserializer',
-			],
-		],
-
-		'wikibase.serialization.SiteLinkDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/SiteLinkDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.SiteLink',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-			],
 		],
 
 		'wikibase.serialization.SnakListDeserializer' => $wikibaseSerializationPaths + [
