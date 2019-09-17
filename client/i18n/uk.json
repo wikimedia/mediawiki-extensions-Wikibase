@@ -33,8 +33,6 @@
 	"wikibase-comment-unlink": "Ця сторінка була від'єднана від елемента {{grammar:genitive|{{WBREPONAME}}}}. Мовні посилання видалені.",
 	"wikibase-comment-restore": "Пов'язаний елемент {{grammar:genitive|{{WBREPONAME}}}} відновлений. Мовні посилання відновлені.",
 	"wikibase-comment-update": "Елемент {{grammar:genitive|{{WBREPONAME}}}} змінено",
-	"wikibase-comment-update-languages": "{{WBREPONAME}} Змінені назви, описи та\\або синоніми {{PLURAL:$1|1 мовою|$1 мовами}}.",
-	"wikibase-comment-update-languages-and-other": "{{WBREPONAME}} Внесено зміни, зокрема, змінені назви, описи та\\або синоніми {{PLURAL:$1|однією мовою|$1 мовами}}.",
 	"wikibase-comment-sitelink-add": "Додано мовне посилання: $1",
 	"wikibase-comment-sitelink-change": "Мовне посилання змінено з $1 на $2",
 	"wikibase-comment-sitelink-remove": "Мовне посилання видалено: $1",

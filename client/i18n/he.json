@@ -22,8 +22,6 @@
 	"wikibase-comment-unlink": "הדף הזה נותק מִפריט {{WBREPONAME}}. קישורי השפה הוסרו.",
 	"wikibase-comment-restore": "פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך שוחזר. קישורי השפה שוחזרו.",
 	"wikibase-comment-update": "פריט {{WBREPONAME}} השתנה",
-	"wikibase-comment-update-languages": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$1|בשפה אחת|ב־$1 שפות}}",
-	"wikibase-comment-update-languages-and-other": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$1|בשפה אחת|ב־$1 שפות}}, וחלקים אחרים.",
 	"wikibase-comment-sitelink-add": "קישור שפה נוסף: $1",
 	"wikibase-comment-sitelink-change": "קישור השפה שוּנה מ־$1 אל $2",
 	"wikibase-comment-sitelink-remove": "קישור השפה הוסר: $1",

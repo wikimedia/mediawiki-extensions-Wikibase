@@ -40,8 +40,6 @@
 	"wikibase-comment-unlink": "Cette page a été dissociée de l’élément {{WBREPONAME}}. Liens de langue supprimés.",
 	"wikibase-comment-restore": "Suppression de l’élément {{WBREPONAME}} associé annulée. Liens de langue rétablis.",
 	"wikibase-comment-update": "Élément {{WBREPONAME}} modifié",
-	"wikibase-comment-update-languages": "{{WBREPONAME}} Libellé, description ou alias modifiés en $1 {{PLURAL:$1|langue|langues}}.",
-	"wikibase-comment-update-languages-and-other": "{{WBREPONAME}} Libellé, description ou alias modifiés en $1 {{PLURAL:$1|langue|langues}}, et d’autres parties.",
 	"wikibase-comment-sitelink-add": "Lien de langue ajouté : $1",
 	"wikibase-comment-sitelink-change": "Lien de langue modifié de $1 à $2",
 	"wikibase-comment-sitelink-remove": "Lien de langue supprimé : $1",

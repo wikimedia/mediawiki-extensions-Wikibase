@@ -36,8 +36,6 @@
 	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. تمت إزالة وصلات اللغة.",
 	"wikibase-comment-restore": "تم استرجاع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
-	"wikibase-comment-update-languages": "{{WBREPONAME}} تم تغيير التسمية والوصف و/أو الأسماء المستعار بـ$1 {{PLURAL:$1|لغة|لغات}}.",
-	"wikibase-comment-update-languages-and-other": "{{WBREPONAME}} تم تغيير التسمية والوصف و/أو الأسماء المستعار بـ$1 {{PLURAL:$1|لغة|لغات}}، وأجزاء أخرى.",
 	"wikibase-comment-sitelink-add": "وصلة اللغة المُضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
 	"wikibase-comment-sitelink-remove": "وصلة اللغة المُلغاة:$1",
