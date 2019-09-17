@@ -45,7 +45,7 @@ describe( 'StringDataValue', () => {
 
 			wrapper.find( ResizingTextField ).vm.$emit( 'input', testString );
 
-			expect( mockSetter ).toBeCalledWith( { type: 'string', value: testString } );
+			expect( mockSetter ).toHaveBeenCalledWith( { type: 'string', value: testString } );
 		} );
 
 		it( 'binds label and editField', () => {

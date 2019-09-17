@@ -105,6 +105,51 @@ module.exports = {
 		// required
 		'@typescript-eslint/no-require-imports': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
+
+		// we prefer expect().toHaveBeenCalled* over toBeCalled*
+		'no-restricted-properties': [
+			'error',
+			{
+				property: 'toBeCalled',
+				message: 'Please use toHaveBeenCalled instead.',
+			},
+			{
+				property: 'toBeCalledTimes',
+				message: 'Please use toHaveBeenCalledTimes instead.',
+			},
+			{
+				property: 'toBeCalledWith',
+				message: 'Please use toHaveBeenCalledWith instead.',
+			},
+			{
+				property: 'lastCalledWith',
+				message: 'Please use toHaveBeenLastCalledWith instead.',
+			},
+			{
+				property: 'nthCalledWith',
+				message: 'Please use toHaveBeenNthCalledWith instead.',
+			},
+			{
+				property: 'toReturn',
+				message: 'Please use tohaveReturned instead.',
+			},
+			{
+				property: 'toReturnTimes',
+				message: 'Please use toHaveReturnedTimes instead.',
+			},
+			{
+				property: 'toReturnWith',
+				message: 'Please use toHaveReturnedTimes instead.',
+			},
+			{
+				property: 'lastReturnedWith',
+				message: 'Please use toHaveLastReturnedWith instead.',
+			},
+			{
+				property: 'nthReturnedWith',
+				message: 'Please use toHaveNthReturnedWith instead.',
+			},
+		],
 	},
 	overrides: {
 		files: [ '**/*.ts' ],

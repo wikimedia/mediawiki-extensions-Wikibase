@@ -98,7 +98,7 @@ describe( 'Dispatcher', () => {
 				mockServices,
 			);
 
-			expect( mockSubscribeToAppEvents ).toBeCalledWith( emitter, manager );
+			expect( mockSubscribeToAppEvents ).toHaveBeenCalledWith( emitter, manager );
 		} );
 	} );
 } );

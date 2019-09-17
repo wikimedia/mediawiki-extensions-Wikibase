@@ -9,7 +9,7 @@ describe( 'destroyContainer', () => {
 		} as unknown as WindowManager;
 
 		destroyContainer( ooWindow );
-		expect( ooWindow.clearWindows ).toBeCalledTimes( 1 );
+		expect( ooWindow.clearWindows ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'calls destroy on resolving clearWindows', async () => {
@@ -19,7 +19,7 @@ describe( 'destroyContainer', () => {
 		} as unknown as WindowManager;
 
 		await destroyContainer( ooWindow );
-		expect( ooWindow.destroy ).toBeCalledTimes( 1 );
+		expect( ooWindow.destroy ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'calls destroy on rejecting clearWindows', async () => {
@@ -29,6 +29,6 @@ describe( 'destroyContainer', () => {
 		} as unknown as WindowManager;
 
 		await destroyContainer( ooWindow );
-		expect( ooWindow.destroy ).toBeCalledTimes( 1 );
+		expect( ooWindow.destroy ).toHaveBeenCalledTimes( 1 );
 	} );
 } );

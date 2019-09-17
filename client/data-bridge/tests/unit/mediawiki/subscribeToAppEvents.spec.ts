@@ -24,7 +24,7 @@ describe( 'subscribeToAppEvents', () => {
 			subscribeToAppEvents( emitter, ooWindow as any );
 			emitter.emit( Events.onSaved );
 
-			expect( mockDestroyContainer ).toBeCalledWith( ooWindow );
+			expect( mockDestroyContainer ).toHaveBeenCalledWith( ooWindow );
 		} );
 	} );
 } );

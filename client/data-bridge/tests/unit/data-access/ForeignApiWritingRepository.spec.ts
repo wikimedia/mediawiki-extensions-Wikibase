@@ -114,8 +114,8 @@ describe( 'ForeignApiWritingRepository', () => {
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
-				expect( foreignApi.postWithEditToken ).toBeCalledTimes( 1 );
-				expect( foreignApi.postWithEditToken ).toBeCalledWith( {
+				expect( foreignApi.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( foreignApi.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
 					assertuser,
 					baserevid: toBeWrittenEntity.revisionId,
@@ -158,8 +158,8 @@ describe( 'ForeignApiWritingRepository', () => {
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
-				expect( foreignApi.postWithEditToken ).toBeCalledTimes( 1 );
-				expect( foreignApi.postWithEditToken ).toBeCalledWith( {
+				expect( foreignApi.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( foreignApi.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
 					assertuser: undefined,
 					baserevid: toBeWrittenEntity.revisionId,
@@ -203,8 +203,8 @@ describe( 'ForeignApiWritingRepository', () => {
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
-				expect( foreignApi.postWithEditToken ).toBeCalledTimes( 1 );
-				expect( foreignApi.postWithEditToken ).toBeCalledWith( {
+				expect( foreignApi.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( foreignApi.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
 					assertuser,
 					baserevid: toBeWrittenEntity.revisionId,

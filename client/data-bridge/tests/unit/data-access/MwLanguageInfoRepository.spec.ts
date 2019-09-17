@@ -10,8 +10,8 @@ describe( 'MwLanguageInfoRepository', () => {
 		const language = new MwLanguageInfoRepository( { bcp47: jest.fn() }, ulsData );
 
 		language.resolve( languageCode );
-		expect( ulsData.getDir ).toBeCalledTimes( 1 );
-		expect( ulsData.getDir ).toBeCalledWith( languageCode );
+		expect( ulsData.getDir ).toHaveBeenCalledTimes( 1 );
+		expect( ulsData.getDir ).toHaveBeenCalledWith( languageCode );
 	} );
 
 	it( 'returns the directionality provided by uls', () => {
@@ -34,8 +34,8 @@ describe( 'MwLanguageInfoRepository', () => {
 		const language = new MwLanguageInfoRepository( mwLanguage, { getDir: jest.fn() } );
 
 		language.resolve( languageCode );
-		expect( mwLanguage.bcp47 ).toBeCalledTimes( 1 );
-		expect( mwLanguage.bcp47 ).toBeCalledWith( languageCode );
+		expect( mwLanguage.bcp47 ).toHaveBeenCalledTimes( 1 );
+		expect( mwLanguage.bcp47 ).toHaveBeenCalledWith( languageCode );
 	} );
 
 	it( 'returns the a bcp47 conform language code', () => {

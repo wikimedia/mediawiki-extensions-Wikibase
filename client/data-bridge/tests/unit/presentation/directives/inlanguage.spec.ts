@@ -24,7 +24,7 @@ describe( 'inlanguage directive', () => {
 		);
 
 		expect( resolver.resolve ).toHaveBeenCalledWith( languageCode );
-		expect( resolver.resolve ).toBeCalledTimes( 1 );
+		expect( resolver.resolve ).toHaveBeenCalledTimes( 1 );
 		expect( element.setAttribute ).toHaveBeenCalledWith( 'lang', language.code );
 		expect( element.setAttribute ).toHaveBeenCalledWith( 'dir', language.directionality );
 	} );

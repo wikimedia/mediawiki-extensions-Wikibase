@@ -101,8 +101,8 @@ describe( 'ForeignApiEntityLabelRepository', () => {
 
 		return entityLabelReader.getLabel( id ).then(
 			() => {
-				expect( foreignApi.get ).toBeCalledTimes( 1 );
-				expect( foreignApi.get ).toBeCalledWith( {
+				expect( foreignApi.get ).toHaveBeenCalledTimes( 1 );
+				expect( foreignApi.get ).toHaveBeenCalledWith( {
 					action: 'wbgetentities',
 					ids: id,
 					props: 'labels',

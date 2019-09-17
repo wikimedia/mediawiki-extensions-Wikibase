@@ -203,7 +203,7 @@ describe( 'store/actions', () => {
 				),
 			).rejects.toBe( rejectError );
 
-			expect( resolver ).toBeCalledWith( testSet );
+			expect( resolver ).toHaveBeenCalledWith( testSet );
 		} );
 
 		it( 'stores the responded entity, if the request succeeded', async () => {
@@ -240,7 +240,7 @@ describe( 'store/actions', () => {
 			await store.dispatch( BRIDGE_INIT, info );
 			await store.dispatch( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
 
-			expect( resolver ).toBeCalledWith( testSet );
+			expect( resolver ).toHaveBeenCalledWith( testSet );
 
 			const state = store.state as InitializedApplicationState;
 			expect( state.entity.statements ).toStrictEqual( { Q42: response.entity.statements } );
@@ -296,7 +296,7 @@ describe( 'store/actions', () => {
 					store.dispatch( BRIDGE_SAVE ),
 				).rejects.toBe( rejectError );
 
-				expect( resolver ).toBeCalledWith( testSet );
+				expect( resolver ).toHaveBeenCalledWith( testSet );
 				expect( store.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
 			} );
 
@@ -335,7 +335,7 @@ describe( 'store/actions', () => {
 				await store.dispatch( BRIDGE_INIT, info );
 				await store.dispatch( BRIDGE_SAVE );
 
-				expect( resolver ).toBeCalledWith( testSet );
+				expect( resolver ).toHaveBeenCalledWith( testSet );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.entity.statements.Q42 ).toBe( response.entity.statements );
