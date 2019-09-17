@@ -98,10 +98,11 @@ describe( 'createServices', () => {
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
-		expect( ( SpecialPageReadingEntityRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
-			.toBe( mwWindow.$ );
-		expect( ( SpecialPageReadingEntityRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toBe( 'http://localhost/wiki/Special:EntityData' );
+		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
+		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledWith(
+			mwWindow.$,
+			'http://localhost/wiki/Special:EntityData',
+		);
 		expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
 	} );
 
@@ -171,12 +172,8 @@ describe( 'createServices', () => {
 		const services = createServices( mwWindow );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
-		expect(
-			( MwLanguageInfoRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
-		).toBe( mwLanguage );
-		expect(
-			( MwLanguageInfoRepository as jest.Mock ).mock.calls[ 0 ][ 1 ],
-		).toBe( ulsData );
+		expect( MwLanguageInfoRepository ).toHaveBeenCalledTimes( 1 );
+		expect( MwLanguageInfoRepository ).toHaveBeenCalledWith( mwLanguage, ulsData );
 		expect( services.getLanguageInfoRepository() ).toBe( mockMwLanguageInfoRepository );
 	} );
 
