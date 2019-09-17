@@ -85,13 +85,6 @@ function mockMwWindow( options: {
 }
 
 describe( 'createServices', () => {
-	beforeEach( () => {
-		( SpecialPageReadingEntityRepository as jest.Mock ).mockClear();
-		( ForeignApiWritingRepository as unknown as jest.Mock ).mockClear();
-		( MwLanguageInfoRepository as jest.Mock ).mockClear();
-		( ForeignApiEntityLabelRepository as jest.Mock ).mockClear();
-	} );
-
 	it( 'pulls wbRepo and wgUserName from mw.config, ', () => {
 		const wbRepo = {
 			url: 'http://localhost',

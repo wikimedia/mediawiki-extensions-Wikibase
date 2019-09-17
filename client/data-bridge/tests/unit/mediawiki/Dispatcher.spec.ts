@@ -72,7 +72,6 @@ describe( 'Dispatcher', () => {
 			const mockServices = {};
 
 			mockCreateServices.mockImplementation( () => mockServices );
-			mockSubscribeToAppEvents.mockClear();
 
 			const dispatcher = new Dispatcher(
 				mwWindow,
