@@ -1471,6 +1471,25 @@ return call_user_func( function() {
 			],
 			'targets' => 'mobile'
 		],
+		'wikibase.tainted-ref' => [
+			'factory' => function () {
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'tainted-ref.common.js'
+						],
+						'styles' => [
+							//'tainted-ref.app.css',
+						],
+						'dependencies' => [
+							'vue2',
+						],
+						'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
+					],
+					__DIR__ . '/wikibase-tainted-ref/dist'
+				);
+			},
+		],
 	];
 	return $modules;
 } );
