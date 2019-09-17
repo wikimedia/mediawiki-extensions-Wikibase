@@ -65,6 +65,7 @@ export function mockMwEnv(
 		loader: {
 			using,
 		},
+		message: jest.fn(),
 		config,
 		log: {
 			deprecate: jest.fn(),
