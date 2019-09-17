@@ -2,13 +2,14 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\EntityUsageTableBuilder
@@ -42,7 +43,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
 		$primer = new EntityUsageTableBuilder(
 			new ItemIdParser(),
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] ),
 			2
 		);
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );

@@ -8,6 +8,8 @@ use MediaWikiTestCase;
 use Wikibase\EntityChange;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\ChangePruner;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 
@@ -24,32 +26,40 @@ class ChangePrunerTest extends MediaWikiTestCase {
 
 	private $messages = [];
 
+	private $loadBalancer;
+	private $lbFactory;
+
+	public function setUp() {
+		parent::setUp();
+		$this->loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
+		$this->lbFactory = new FakeLBFactory( [ 'lb' => $this->loadBalancer ] );
+	}
+
 	public function testConstructorWithInvalidBatchSize() {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new ChangePruner( 0, 0, 0, false );
+		new ChangePruner( $this->lbFactory, 0, 0, 0, false );
 	}
 
 	public function testConstructorWithInvalidKeepSeconds() {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new ChangePruner( 1, -1, 0, false );
+		new ChangePruner( $this->lbFactory, 1, -1, 0, false );
 	}
 
 	public function testConstructorWithInvalidGraceSeconds() {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new ChangePruner( 1, 0, -1, false );
+		new ChangePruner( $this->lbFactory, 1, 0, -1, false );
 	}
 
 	public function testPrune() {
-		$pruner = new ChangePruner( 1, 1, 1, false );
+		$pruner = new ChangePruner( $this->lbFactory, 1, 1, 1, false );
 
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete( 'wb_changes', '*' );
+		$this->db->delete( 'wb_changes', '*' );
 
-		$this->assertEquals( 0, $dbw->selectRowCount( 'wb_changes' ),
+		$this->assertEquals( 0, $this->db->selectRowCount( 'wb_changes' ),
 			'sanity check: wb_changes table is empty' );
 
 		$this->addTestChanges();
-		$this->assertEquals( 2, $dbw->selectRowCount( 'wb_changes' ),
+		$this->assertEquals( 2, $this->db->selectRowCount( 'wb_changes' ),
 			'sanity check: 2 changes added to wb_changes'
 		);
 
@@ -64,7 +74,7 @@ class ChangePrunerTest extends MediaWikiTestCase {
 		$this->assertContains( '1 rows pruned', $this->messages[3] );
 		$this->assertContains( '0 rows pruned', $this->messages[5] );
 
-		$this->assertEquals( 0, $dbw->selectRowCount( 'wb_changes' ), 'wb_changes table is empty' );
+		$this->assertEquals( 0, $this->db->selectRowCount( 'wb_changes' ), 'wb_changes table is empty' );
 	}
 
 	private function addTestChanges() {

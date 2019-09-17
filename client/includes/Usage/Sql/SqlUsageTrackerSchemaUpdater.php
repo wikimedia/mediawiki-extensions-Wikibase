@@ -87,7 +87,7 @@ class SqlUsageTrackerSchemaUpdater {
 		$primer = new EntityUsageTableBuilder(
 			$idParser,
 			// TODO: Would be nice to pass in $dbUpdater->getDB().
-			MediaWikiServices::getInstance()->getDBLoadBalancer()
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
 		);
 
 		$primer->setProgressReporter(

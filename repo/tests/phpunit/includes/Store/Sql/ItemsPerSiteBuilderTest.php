@@ -8,6 +8,8 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 
 /**
@@ -76,7 +78,8 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 		return new ItemsPerSiteBuilder(
 			$this->getSiteLinkTable(),
 			$this->getEntityLookup(),
-			new NullEntityPrefetcher()
+			new NullEntityPrefetcher(),
+			new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] )
 		);
 	}
 

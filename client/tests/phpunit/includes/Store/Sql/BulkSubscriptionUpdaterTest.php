@@ -2,10 +2,11 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
-use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
@@ -42,9 +43,10 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 	 * @return BulkSubscriptionUpdater
 	 */
 	private function getBulkSubscriptionUpdater( $batchSize = 10 ) {
-		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
 
 		return new BulkSubscriptionUpdater(
+			new FakeLBFactory( [ 'lb' => $loadBalancer ] ),
 			new SessionConsistentConnectionManager( $loadBalancer, false ),
 			new SessionConsistentConnectionManager( $loadBalancer, false ),
 			'testwiki',
