@@ -36,6 +36,13 @@ module.exports = function ( config ) {
 			'tests/DeserializerFactory.tests.js'
 		],
 
+		preprocessors: {
+			'src/**/*.js': [ 'webpack' ],
+			'tests/**/*.tests.js': [ 'webpack' ]
+		},
+
+		webpack: { mode: 'development' },
+
 		port: 9876,
 
 		logLevel: config.LOG_INFO,
