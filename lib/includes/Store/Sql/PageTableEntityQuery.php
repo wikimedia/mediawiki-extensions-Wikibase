@@ -18,7 +18,7 @@ interface PageTableEntityQuery {
 	 * @param array $joins Joins to use, Keys must be table names.
 	 * @param EntityId[] $entityIds EntityIds to select
 	 * @param IDatabase $db DB to query on
-	 * @return array of rows with keys of their entity ID serializations
+	 * @return \stdClass[] Array of rows with keys of their entity ID serializations
 	 */
 	public function selectRows(
 		array $fields,
