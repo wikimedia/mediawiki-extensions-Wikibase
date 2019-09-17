@@ -91,7 +91,7 @@ describe( 'root/actions', () => {
 			};
 
 			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
-				expect( context.commit ).toBeCalledWith(
+				expect( context.commit ).toHaveBeenCalledWith(
 					EDITFLOW_SET,
 					editFlow,
 				);
@@ -109,7 +109,7 @@ describe( 'root/actions', () => {
 			};
 
 			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
-				expect( context.commit ).toBeCalledWith(
+				expect( context.commit ).toHaveBeenCalledWith(
 					PROPERTY_TARGET_SET,
 					propertyId,
 				);
@@ -127,7 +127,7 @@ describe( 'root/actions', () => {
 			};
 
 			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
-				expect( context.dispatch ).toBeCalledWith(
+				expect( context.dispatch ).toHaveBeenCalledWith(
 					namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
 					{ 'entity': entityId },
 				);
@@ -163,7 +163,7 @@ describe( 'root/actions', () => {
 						TARGET_LABEL_SET,
 						term,
 					);
-					expect( entityLabelRepository.getLabel ).toBeCalledWith( propertyId );
+					expect( entityLabelRepository.getLabel ).toHaveBeenCalledWith( propertyId );
 				} );
 			} );
 
@@ -188,7 +188,7 @@ describe( 'root/actions', () => {
 					information,
 				).then( () => {
 					expect( context.commit ).not.toHaveBeenCalledWith( TARGET_LABEL_SET );
-					expect( entityLabelRepository.getLabel ).toBeCalledWith( propertyId );
+					expect( entityLabelRepository.getLabel ).toHaveBeenCalledWith( propertyId );
 				} );
 			} );
 		} );
@@ -256,7 +256,7 @@ describe( 'root/actions', () => {
 								NS_STATEMENTS,
 								STATEMENTS_PROPERTY_EXISTS,
 							) ],
-						).toBeCalledWith( entityId, targetProperty );
+						).toHaveBeenCalledWith( entityId, targetProperty );
 						expect( context.commit ).toHaveBeenCalledWith(
 							APPLICATION_STATUS_SET,
 							ApplicationStatus.ERROR,
@@ -292,7 +292,7 @@ describe( 'root/actions', () => {
 								NS_STATEMENTS,
 								STATEMENTS_IS_AMBIGUOUS,
 							) ],
-						).toBeCalledWith( entityId, targetProperty );
+						).toHaveBeenCalledWith( entityId, targetProperty );
 						expect( context.commit ).toHaveBeenCalledWith(
 							APPLICATION_STATUS_SET,
 							ApplicationStatus.ERROR,
@@ -393,7 +393,7 @@ describe( 'root/actions', () => {
 					},
 				),
 			).rejects.toBeDefined();
-			expect( context.dispatch ).toBeCalledTimes( 0 );
+			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
 			expect( context.commit ).toHaveBeenCalledWith(
 				APPLICATION_STATUS_SET,
 				ApplicationStatus.ERROR,
@@ -484,7 +484,7 @@ describe( 'root/actions', () => {
 			await expect(
 				( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ),
 			).rejects.toBeDefined();
-			expect( context.dispatch ).toBeCalledTimes( 0 );
+			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
 			expect( context.commit ).toHaveBeenCalledWith(
 				APPLICATION_STATUS_SET,
 				ApplicationStatus.ERROR,
@@ -525,8 +525,8 @@ describe( 'root/actions', () => {
 			} );
 
 			return ( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ).then( () => {
-				expect( context.dispatch ).toBeCalledWith( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
-				expect( context.dispatch ).toBeCalledTimes( 1 );
+				expect( context.dispatch ).toHaveBeenCalledWith( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
+				expect( context.dispatch ).toHaveBeenCalledTimes( 1 );
 			} );
 		} );
 	} );

@@ -81,8 +81,8 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			revisionId: 2183,
 		};
 
-		expect( jQueryMock.get ).toBeCalledTimes( 1 );
-		expect( jQueryMock.get ).toBeCalledWith( 'index.php?title=Special:EntityData/Q123.json' );
+		expect( jQueryMock.get ).toHaveBeenCalledTimes( 1 );
+		expect( jQueryMock.get ).toHaveBeenCalledWith( 'index.php?title=Special:EntityData/Q123.json' );
 		expect( actualResultData ).toEqual( expectedData );
 	} );
 

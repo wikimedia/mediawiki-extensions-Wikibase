@@ -34,15 +34,15 @@ describe( 'init', () => {
 		} ) );
 
 		return init().then( () => {
-			expect( using ).toBeCalledTimes( 1 );
-			expect( using ).toBeCalledWith( [
+			expect( using ).toHaveBeenCalledTimes( 1 );
+			expect( using ).toHaveBeenCalledWith( [
 				'wikibase.client.data-bridge.app',
 				'mw.config.values.wbRepo',
 				'mediawiki.ForeignApi',
 				'jquery.uls.data',
 				'mediawiki.language',
 			] );
-			expect( require ).toBeCalledWith( 'wikibase.client.data-bridge.app' );
+			expect( require ).toHaveBeenCalledWith( 'wikibase.client.data-bridge.app' );
 			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );
 			expect( link.addEventListener.mock.calls[ 0 ][ 0 ] ).toBe( 'click' );
 			expect( typeof link.addEventListener.mock.calls[ 0 ][ 1 ] ).toBe( 'function' );
@@ -93,7 +93,7 @@ describe( 'init', () => {
 
 		init();
 
-		expect( using ).toBeCalledTimes( 0 );
+		expect( using ).toHaveBeenCalledTimes( 0 );
 	} );
 
 	it( 'warns on missing hrefRegExp', () => {
@@ -102,7 +102,7 @@ describe( 'init', () => {
 		mockMwEnv( using, mockMwConfig( { hrefRegExp: null } ), warn );
 
 		init();
-		expect( using ).toBeCalledTimes( 0 );
-		expect( warn ).toBeCalledTimes( 1 );
+		expect( using ).toHaveBeenCalledTimes( 0 );
+		expect( warn ).toHaveBeenCalledTimes( 1 );
 	} );
 } );

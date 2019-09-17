@@ -95,7 +95,7 @@ describe( 'init', () => {
 				expectedServices,
 			);
 
-			expect( mockSubscribeToAppEvents ).toBeCalledWith( emitter, manager );
+			expect( mockSubscribeToAppEvents ).toHaveBeenCalledWith( emitter, manager );
 		} );
 	} );
 } );

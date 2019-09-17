@@ -72,7 +72,7 @@ describe( 'entity/actions', () => {
 				entity: id,
 				revision: revisionId,
 			} ).then( () => {
-				expect( context.commit ).toBeCalledWith(
+				expect( context.commit ).toHaveBeenCalledWith(
 					ENTITY_UPDATE,
 					entity.entity,
 				);
@@ -116,7 +116,7 @@ describe( 'entity/actions', () => {
 					entity: id,
 					revision: revisionId,
 				} ).then( () => {
-					expect( context.dispatch ).toBeCalledWith(
+					expect( context.dispatch ).toHaveBeenCalledWith(
 						namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_INIT ),
 						{
 							entityId: id,
