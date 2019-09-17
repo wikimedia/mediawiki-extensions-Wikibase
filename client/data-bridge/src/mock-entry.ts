@@ -50,6 +50,12 @@ services.setEntityLabelRepository( {
 	},
 } );
 
+services.setMessagesRepository( {
+	get( messageKey: string ): string {
+		return `⧼${messageKey}⧽`;
+	},
+} );
+
 const information = {
 	entityId: 'Q42',
 	propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
