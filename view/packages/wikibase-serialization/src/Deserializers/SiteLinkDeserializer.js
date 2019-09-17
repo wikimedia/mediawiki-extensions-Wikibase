@@ -13,7 +13,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.SiteLinkDeserializer = util.inherit( 'WbSiteLinkDeserializer', PARENT, {
+module.exports = util.inherit( 'WbSiteLinkDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *

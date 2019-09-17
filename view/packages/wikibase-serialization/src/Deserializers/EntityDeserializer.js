@@ -2,7 +2,10 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	ItemDeserializer = require( './ItemDeserializer.js' ),
+	PropertyDeserializer = require( './PropertyDeserializer.js' ),
+	StrategyProvider = require( '../StrategyProvider.js' );
 
 /**
  * @class wikibase.serialization.EntityDeserializer
@@ -14,12 +17,12 @@ var MODULE = wb.serialization,
  * @constructor
  */
 MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
-	this._strategyProvider = new MODULE.StrategyProvider();
+	this._strategyProvider = new StrategyProvider();
 	this._strategyProvider.registerStrategy(
-		new MODULE.ItemDeserializer(), wb.datamodel.Item.TYPE
+		new ItemDeserializer(), wb.datamodel.Item.TYPE
 	);
 	this._strategyProvider.registerStrategy(
-		new MODULE.PropertyDeserializer(), wb.datamodel.Property.TYPE
+		new PropertyDeserializer(), wb.datamodel.Property.TYPE
 	);
 }, {
 	/**

@@ -13,7 +13,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.MultiTermDeserializer = util.inherit( 'WbMultiTermDeserializer', PARENT, {
+module.exports = util.inherit( 'WbMultiTermDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *

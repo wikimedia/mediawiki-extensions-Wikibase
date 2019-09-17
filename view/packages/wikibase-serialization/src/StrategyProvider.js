@@ -71,4 +71,6 @@ $.extend( SELF.prototype, {
 	}
 } );
 
+module.exports = SELF;
+
 }( wikibase, jQuery ) );

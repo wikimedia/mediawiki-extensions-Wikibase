@@ -6,6 +6,7 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.SiteLinkDeserializer' );
+var SiteLinkDeserializer = require( '../../src/Deserializers/SiteLinkDeserializer.js' );
 
 var testSets = [
 	[
@@ -20,7 +21,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 1 );
-	var siteLinkDeserializer = new wb.serialization.SiteLinkDeserializer();
+	var siteLinkDeserializer = new SiteLinkDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

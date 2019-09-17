@@ -1,7 +1,12 @@
 ( function( wb, $ ) {
 	'use strict';
 
-var MODULE = wb.serialization;
+var MODULE = wb.serialization,
+	FingerprintDeserializer = require( './Deserializers/FingerprintDeserializer.js' ),
+	MultiTermDeserializer = require( './Deserializers/MultiTermDeserializer.js' ),
+	MultiTermMapDeserializer = require( './Deserializers/MultiTermMapDeserializer.js' ),
+	SiteLinkDeserializer = require( './Deserializers/SiteLinkDeserializer.js' ),
+	SiteLinkSetDeserializer = require( './Deserializers/SiteLinkSetDeserializer.js' );
 
 /**
  * Factory for creating deserializers specific to certain objects, e.g. of the Wikibase data model.
@@ -17,13 +22,13 @@ var SELF = MODULE.DeserializerFactory = function WbSerializationDeserializerFact
 
 	this.registerDeserializer( MODULE.ClaimDeserializer, wb.datamodel.Claim );
 	this.registerDeserializer( MODULE.EntityDeserializer, wb.datamodel.Entity );
-	this.registerDeserializer( MODULE.FingerprintDeserializer, wb.datamodel.Fingerprint );
-	this.registerDeserializer( MODULE.MultiTermDeserializer, wb.datamodel.MultiTerm );
-	this.registerDeserializer( MODULE.MultiTermMapDeserializer, wb.datamodel.MultiTermMap );
+	this.registerDeserializer( FingerprintDeserializer, wb.datamodel.Fingerprint );
+	this.registerDeserializer( MultiTermDeserializer, wb.datamodel.MultiTerm );
+	this.registerDeserializer( MultiTermMapDeserializer, wb.datamodel.MultiTermMap );
 	this.registerDeserializer( MODULE.ReferenceDeserializer, wb.datamodel.Reference );
 	this.registerDeserializer( MODULE.ReferenceListDeserializer, wb.datamodel.ReferenceList );
-	this.registerDeserializer( MODULE.SiteLinkDeserializer, wb.datamodel.SiteLink );
-	this.registerDeserializer( MODULE.SiteLinkSetDeserializer, wb.datamodel.SiteLinkSet );
+	this.registerDeserializer( SiteLinkDeserializer, wb.datamodel.SiteLink );
+	this.registerDeserializer( SiteLinkSetDeserializer, wb.datamodel.SiteLinkSet );
 	this.registerDeserializer( MODULE.SnakDeserializer, wb.datamodel.Snak );
 	this.registerDeserializer( MODULE.SnakListDeserializer, wb.datamodel.SnakList );
 	this.registerDeserializer( MODULE.StatementDeserializer, wb.datamodel.Statement );

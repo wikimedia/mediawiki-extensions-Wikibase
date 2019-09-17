@@ -7,6 +7,7 @@
 	"globals": {
 		"dataValues": false,
 		"module": false,
+		"require": false,
 		"util": false,
 		"wikibase": false
 	},

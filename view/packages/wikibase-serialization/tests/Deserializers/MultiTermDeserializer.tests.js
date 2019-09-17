@@ -6,6 +6,7 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.MultiTermDeserializer' );
+var MultiTermDeserializer = require( '../../src/Deserializers/MultiTermDeserializer.js' );
 
 var testSets = [
 	[
@@ -16,7 +17,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 1 );
-	var multiTermDeserializer = new wb.serialization.MultiTermDeserializer();
+	var multiTermDeserializer = new MultiTermDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(
