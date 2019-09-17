@@ -2,10 +2,10 @@
  * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function ( QUnit, dt ) {
+( function ( QUnit ) {
 	'use strict';
 
-	var DataType = dt.DataType;
+	var DataType = require( '../../../resources/dataTypes/DataType.js' );
 
 	QUnit.module( 'wikibase.dataTypes.DataType' );
 
@@ -80,4 +80,4 @@
 		}
 	} );
 
-}( QUnit, wikibase.dataTypes ) );
+}( QUnit ) );

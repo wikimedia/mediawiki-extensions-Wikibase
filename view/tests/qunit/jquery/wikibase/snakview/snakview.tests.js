@@ -49,7 +49,7 @@
 			getSnakRemover: function () {
 			},
 			valueViewBuilder: 'I am a ValueViewBuilder',
-			dataTypeStore: new wb.dataTypes.DataTypeStore()
+			dataTypeStore: wb.dataTypeStore
 		}, options || {} );
 
 		$node = $node || $( '<div/>' ).appendTo( 'body' );

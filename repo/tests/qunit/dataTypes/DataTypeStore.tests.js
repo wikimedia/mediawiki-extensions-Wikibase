@@ -2,14 +2,17 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( QUnit, dataTypes ) {
+( function ( QUnit ) {
 	'use strict';
+
+	var DataTypeStore = require( '../../../resources/dataTypes/DataTypeStore.js' ),
+		DataType = require( '../../../resources/dataTypes/DataType.js' );
 
 	QUnit.module( 'wikibase.dataTypes.DataTypeStore' );
 
 	QUnit.test( 'Test initializing a DataType object', function ( assert ) {
-		var dataTypeStore = new dataTypes.DataTypeStore(),
-			testDataType = new dataTypes.DataType( 'foo', 'fooDataValueType' ),
+		var dataTypeStore = new DataTypeStore(),
+			testDataType = new DataType( 'foo', 'fooDataValueType' ),
 			testDataTypeId = testDataType.getId();
 
 		dataTypeStore.registerDataType( testDataType );
@@ -27,4 +30,4 @@
 		);
 	} );
 
-}( QUnit, wikibase.dataTypes ) );
+}( QUnit ) );

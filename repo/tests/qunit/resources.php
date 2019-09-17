@@ -25,32 +25,25 @@ return call_user_func( function() {
 			'remoteExtPath' => 'Wikibase/repo',
 		],
 
-		'wikibase.dataTypes.DataType.tests' => $moduleBase + [
-			'scripts' => [
-				'dataTypes/DataType.tests.js',
+		'wikibase.dataTypes.DataType.tests' => [
+			'packageFiles' => [
+				'tests/qunit/dataTypes/DataType.tests.js',
+
+				'resources/dataTypes/DataType.js',
 			],
-			'dependencies' => [
-				'wikibase.dataTypes.DataType'
-			],
+			'localBasePath' => dirname( dirname( __DIR__ ) ),
+			'remoteExtPath' => 'Wikibase/repo',
 		],
 
-		'wikibase.dataTypes.DataTypeStore.tests' => $moduleBase + [
-			'scripts' => [
-				'dataTypes/DataTypeStore.tests.js',
-			],
-			'dependencies' => [
-				'wikibase.dataTypes.DataTypeStore'
-			],
-		],
+		'wikibase.dataTypes.DataTypeStore.tests' => [
+			'packageFiles' => [
+				'tests/qunit/dataTypes/DataTypeStore.tests.js',
 
-		'wikibase.dataTypeStore.tests' => $moduleBase + [
-			'scripts' => [
-				'dataTypes/wikibase.dataTypeStore.tests.js',
+				'resources/dataTypes/DataTypeStore.js',
+				'resources/dataTypes/DataType.js',
 			],
-			'dependencies' => [
-				'wikibase.dataTypes.DataTypeStore',
-				'wikibase.dataTypeStore',
-			],
+			'localBasePath' => dirname( dirname( __DIR__ ) ),
+			'remoteExtPath' => 'Wikibase/repo',
 		],
 
 		'wikibase.experts.Item.tests' => $moduleBase + [

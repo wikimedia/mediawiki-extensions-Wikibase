@@ -17,7 +17,7 @@
 	 * @throws {Error} if data type id is not provided as a string.
 	 * @throws {Error} if data value type is not provided as a string.
 	 */
-	var SELF = wb.dataTypes.DataType = function DtDataType( dataTypeId, dataValueType ) {
+	var SELF = function DtDataType( dataTypeId, dataValueType ) {
 		if ( !dataTypeId || typeof dataTypeId !== 'string' ) {
 			throw new Error( 'A data type\'s ID has to be a string' );
 		}
@@ -78,5 +78,7 @@
 	SELF.newFromJSON = function ( dataTypeId, json ) {
 		return new SELF( dataTypeId, json.dataValueType );
 	};
+
+	module.exports = SELF;
 
 }( wikibase ) );

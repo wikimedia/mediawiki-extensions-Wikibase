@@ -1,15 +1,16 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
+	var DataType = require( './DataType.js' );
+
 	/**
-	 * @class wikibase.dataTypes.DataTypeStore
 	 * @since 0.2
 	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
 	 * @constructor
 	 */
-	var SELF = wb.dataTypes.DataTypeStore = function DtDataTypeStore() {
+	var SELF = function DtDataTypeStore() {
 		this._dataTypes = {};
 	};
 
@@ -58,11 +59,13 @@
 		 * @throws {Error} if data type is not a DataType instance.
 		 */
 		registerDataType: function ( dataType ) {
-			if ( !( dataType instanceof wb.dataTypes.DataType ) ) {
+			if ( !( dataType instanceof DataType ) ) {
 				throw new Error( 'Can only register instances of wikibase.dataTypes.DataType' );
 			}
 			this._dataTypes[ dataType.getId() ] = dataType;
 		}
 	} );
 
-}( wikibase ) );
+	module.exports = SELF;
+
+}() );
