@@ -1024,30 +1024,18 @@ return call_user_func( function() {
 		],
 
 		'wikibase.serialization.TermMapSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'Serializers/TermMapSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.TermMap',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.TermSerializer',
-			],
-		],
-
-		'wikibase.serialization.TermSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
 				'Serializers/TermSerializer.js',
 			],
 			'dependencies' => [
 				'util.inherit',
+				'wikibase.datamodel.TermMap',
 				'wikibase.datamodel.Term',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 			],
 		],
-
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
 		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.
 		'jquery.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
