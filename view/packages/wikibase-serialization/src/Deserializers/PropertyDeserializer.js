@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	FingerprintDeserializer = require( './FingerprintDeserializer.js' );
 
 /**
  * @class wikibase.serialization.PropertyDeserializer
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.PropertyDeserializer = util.inherit( 'WbPropertyDeserializer', PARENT, {
+module.exports = util.inherit( 'WbPropertyDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -26,7 +27,7 @@ MODULE.PropertyDeserializer = util.inherit( 'WbPropertyDeserializer', PARENT, {
 			throw new Error( 'Serialization does not resolve to a Property' );
 		}
 
-		var fingerprintDeserializer = new MODULE.FingerprintDeserializer(),
+		var fingerprintDeserializer = new FingerprintDeserializer(),
 			statementGroupSetDeserializer = new MODULE.StatementGroupSetDeserializer();
 
 		return new wb.datamodel.Property(

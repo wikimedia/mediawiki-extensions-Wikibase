@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	SiteLinkDeserializer = require( './SiteLinkDeserializer.js' );
 
 /**
  * @class wikibase.serialization.SiteLinkSetDeserializer
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.SiteLinkSetDeserializer = util.inherit( 'WbSiteLinkSetDeserializer', PARENT, {
+module.exports = util.inherit( 'WbSiteLinkSetDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -21,7 +22,7 @@ MODULE.SiteLinkSetDeserializer = util.inherit( 'WbSiteLinkSetDeserializer', PARE
 	 */
 	deserialize: function( serialization ) {
 		var siteLinks = [],
-			siteLinkDeserializer = new MODULE.SiteLinkDeserializer();
+			siteLinkDeserializer = new SiteLinkDeserializer();
 
 		for( var siteId in serialization ) {
 			siteLinks.push( siteLinkDeserializer.deserialize( serialization[siteId] ) );

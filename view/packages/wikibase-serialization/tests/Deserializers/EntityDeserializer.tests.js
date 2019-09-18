@@ -6,6 +6,7 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.EntityDeserializer' );
+var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' );
 
 /**
  * @extends wikibase.serialization.Deserializer
@@ -26,7 +27,7 @@ var MockEntityDeserializer = util.inherit(
 			throw new Error( 'Serialization does not resolve to a MockEntity' );
 		}
 
-		var fingerprintDeserializer = new wb.serialization.FingerprintDeserializer();
+		var fingerprintDeserializer = new FingerprintDeserializer();
 
 		return new wb.serialization.tests.MockEntity(
 			serialization.id,

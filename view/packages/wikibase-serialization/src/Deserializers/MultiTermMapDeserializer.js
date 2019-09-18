@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	MultiTermDeserializer = require( './MultiTermDeserializer.js' );
 
 /**
  * @class wikibase.serialization.MultiTermMapDeserializer
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.MultiTermMapDeserializer = util.inherit( 'WbMultiTermMapDeserializer', PARENT, {
+module.exports = util.inherit( 'WbMultiTermMapDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -21,7 +22,7 @@ MODULE.MultiTermMapDeserializer = util.inherit( 'WbMultiTermMapDeserializer', PA
 	 */
 	deserialize: function( serialization ) {
 		var multiTerms = {},
-			multiTermDeserializer = new MODULE.MultiTermDeserializer();
+			multiTermDeserializer = new MultiTermDeserializer();
 
 		for( var languageCode in serialization ) {
 			multiTerms[languageCode]

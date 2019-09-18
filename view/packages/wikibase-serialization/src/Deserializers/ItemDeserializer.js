@@ -2,7 +2,9 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	FingerprintDeserializer = require( './FingerprintDeserializer.js' ),
+	SiteLinkSetDeserializer = require( './SiteLinkSetDeserializer.js' );
 
 /**
  * @class wikibase.serialization.ItemDeserializer
@@ -13,7 +15,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.ItemDeserializer = util.inherit( 'WbItemDeserializer', PARENT, {
+module.exports = util.inherit( 'WbItemDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -26,9 +28,9 @@ MODULE.ItemDeserializer = util.inherit( 'WbItemDeserializer', PARENT, {
 			throw new Error( 'Serialization does not resolve to an Item' );
 		}
 
-		var fingerprintDeserializer = new MODULE.FingerprintDeserializer(),
+		var fingerprintDeserializer = new FingerprintDeserializer(),
 			statementGroupSetDeserializer = new MODULE.StatementGroupSetDeserializer(),
-			siteLinkSetDeserializer = new MODULE.SiteLinkSetDeserializer();
+			siteLinkSetDeserializer = new SiteLinkSetDeserializer();
 
 		return new wb.datamodel.Item(
 			serialization.id,

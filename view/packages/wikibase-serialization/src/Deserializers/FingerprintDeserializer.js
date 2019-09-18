@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	MultiTermMapDeserializer = require( './MultiTermMapDeserializer.js' );
 
 /**
  * @class wikibase.serialization.FingerprintDeserializer
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.FingerprintDeserializer = util.inherit( 'WbFingerprintDeserializer', PARENT, {
+module.exports = util.inherit( 'WbFingerprintDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -21,7 +22,7 @@ MODULE.FingerprintDeserializer = util.inherit( 'WbFingerprintDeserializer', PARE
 	 */
 	deserialize: function( serialization ) {
 		var termMapDeserializer = new MODULE.TermMapDeserializer(),
-			multiTermMapDeserializer = new MODULE.MultiTermMapDeserializer();
+			multiTermMapDeserializer = new MultiTermMapDeserializer();
 
 		return new wb.datamodel.Fingerprint(
 			termMapDeserializer.deserialize( serialization.labels ),

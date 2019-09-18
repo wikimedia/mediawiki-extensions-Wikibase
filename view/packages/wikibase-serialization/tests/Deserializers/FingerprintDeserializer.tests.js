@@ -6,6 +6,7 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.FingerprintDeserializer' );
+var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' );
 
 var testSets = [
 	[
@@ -31,7 +32,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 2 );
-	var fingerprintDeserializer = new wb.serialization.FingerprintDeserializer();
+	var fingerprintDeserializer = new FingerprintDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
