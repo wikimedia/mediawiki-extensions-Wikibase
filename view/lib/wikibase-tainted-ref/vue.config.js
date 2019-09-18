@@ -1,4 +1,4 @@
-const filePrefix = 'data-bridge.';
+const filePrefix = 'tainted-ref.';
 const DEV_MODE = process.env.WEBPACK_TARGET === 'dev';
 
 /**

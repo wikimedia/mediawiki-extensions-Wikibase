@@ -1,5 +1,5 @@
 {
-  "name": "tainted-references",
+  "name": "tainted-ref",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,13 +7,12 @@
     "prepare": "node build/wikimedia-ui-base.js",
     "build": "npm-run-all build:*",
     "build:app": "NODE_ENV=production vue-cli-service build --no-clean --target lib --formats commonjs src/main.ts",
-    "build:init": "NODE_ENV=production vue-cli-service build --no-clean",
     "fix": "vue-cli-service lint --max-warnings 0 .",
     "test": "npm-run-all test:*",
     "test:lint": "vue-cli-service lint --max-warnings 0 --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
     "test:unit": "vue-cli-service test:unit",
     "test:integration": "vue-cli-service test:unit --testMatch '**/tests/integration/**/*.spec.(js|jsx|ts|tsx)'",
-    "test:distnodiff": "npm run build:app -- --dest /tmp/dist && npm run build:init -- --dest /tmp/dist && diff -q ./dist/data-bridge.common.js /tmp/dist/data-bridge.common.js && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js",
+    "test:distnodiff": "npm run build:app -- --dest /tmp/dist && diff -q ./dist/tainted-ref.common.js /tmp/dist/tainted-ref.common.js",
     "selenium-test": "wdio tests/selenium/wdio.conf.js",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook"
