@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Parsers;
 use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
-use ValueParsers\EraParser;
 use ValueParsers\IsoTimestampParser;
 use ValueParsers\MonthNameProvider;
 use ValueParsers\MonthNameUnlocalizer;
@@ -69,7 +68,7 @@ class TimeParserFactory {
 	private function getTimeParsers() {
 		global $wgDefaultUserOptions;
 
-		$eraParser = new EraParser( $this->options );
+		$eraParser = new MwEraParser( $this->options );
 		$isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
 			$this->options
