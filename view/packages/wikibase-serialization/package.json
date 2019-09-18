@@ -39,7 +39,9 @@
     "karma-cli": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-qunit": "^1.2.1",
-    "qunit": "^1.0.0"
+    "karma-webpack": "^4.0.2",
+    "qunit": "^1.0.0",
+    "webpack": "^4.40.2"
   },
   "scripts": {
     "test": "npm run eslint && npm run run-tests",
