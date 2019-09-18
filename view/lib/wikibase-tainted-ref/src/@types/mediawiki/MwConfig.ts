@@ -1,10 +1,10 @@
 import WbRepo from '@/@types/wikibase/WbRepo';
 
 interface MwConfigValues {
-	wbDataBridgeConfig: DataBridgeConfig;
 	wbRepo: WbRepo;
 	wgUserName: string;
 	wgPageContentLanguage: string;
+	wbTaintedReferencesEnabled: boolean;
 }
 
 interface MwConfig {

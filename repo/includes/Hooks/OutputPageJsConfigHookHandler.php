@@ -38,24 +38,32 @@ class OutputPageJsConfigHookHandler {
 	 * @var string[]
 	 */
 	private $badgeItems;
+
 	/**
 	 * @var integer
 	 */
 	private $stringLimit;
+
+	/**
+	 * @var bool
+	 */
+	private $taintedReferencesEnabled;
+
 	/**
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string $dataRightsUrl
 	 * @param string $dataRightsText
 	 * @param string[] $badgeItems
-	 * @param integer stringLimit
+	 * @param integer $stringLimit
+	 * @param bool $taintedReferencesEnabled
 	 */
-
 	public function __construct(
 		EntityNamespaceLookup $entityNamespaceLookup,
 		$dataRightsUrl,
 		$dataRightsText,
 		array $badgeItems,
-		$stringLimit
+		$stringLimit,
+		$taintedReferencesEnabled
 	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->outputPageConfigBuilder = new OutputPageJsConfigBuilder();
@@ -63,6 +71,7 @@ class OutputPageJsConfigHookHandler {
 		$this->dataRightsText = $dataRightsText;
 		$this->badgeItems = $badgeItems;
 		$this->stringLimit = $stringLimit;
+		$this->taintedReferencesEnabled = $taintedReferencesEnabled;
 	}
 
 	/**
@@ -77,7 +86,8 @@ class OutputPageJsConfigHookHandler {
 			$settings->getSetting( 'dataRightsUrl' ),
 			$settings->getSetting( 'dataRightsText' ),
 			$settings->getSetting( 'badgeItems' ),
-			$settings->getSetting( 'string-limits' )['multilang']['length']
+			$settings->getSetting( 'string-limits' )['multilang']['length'],
+			$settings->getSetting( 'taintedReferencesEnabled' )
 		);
 	}
 
@@ -131,7 +141,8 @@ class OutputPageJsConfigHookHandler {
 			$this->dataRightsUrl,
 			$this->dataRightsText,
 			$this->badgeItems,
-			$this->stringLimit
+			$this->stringLimit,
+			$this->taintedReferencesEnabled
 		);
 	}
 

@@ -3,7 +3,9 @@ node_modules
 coverage/
 storybook-static/
 dist/*
+!dist/img/
 !dist/tainted-ref.common.js
+!dist/tainted-ref.init.js
 !dist/tainted-ref.app.css
 
 # local env files

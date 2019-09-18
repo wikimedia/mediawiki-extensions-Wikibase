@@ -1254,18 +1254,34 @@ return call_user_func( function() {
 			],
 			'targets' => 'mobile'
 		],
-		'wikibase.tainted-ref' => [
+		'wikibase.tainted-ref.common' => [
 			'factory' => function () {
 				return new ResourceLoaderFileModule(
 					[
 						'scripts' => [
-							'tainted-ref.common.js'
+							'tainted-ref.common.js',
 						],
 						'styles' => [
-							//'tainted-ref.app.css',
+							'tainted-ref.app.css',
 						],
 						'dependencies' => [
 							'vue2',
+						],
+						'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
+					],
+					__DIR__ . '/wikibase-tainted-ref/dist'
+				);
+			},
+		],
+		'wikibase.tainted-ref.init' => [
+			'factory' => function () {
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'tainted-ref.init.js',
+						],
+						'styles' => [
+							'tainted-ref.app.css',
 						],
 						'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
 					],
