@@ -1,10 +1,20 @@
 <template>
 	<a
 		class="wb-ui-event-emitting-button"
-		:class="[ `wb-ui-event-emitting-button--${this.type}`, { 'wb-ui-event-emitting-button--squary': squary } ]"
+		:class="[
+			`wb-ui-event-emitting-button--${this.type}`,
+			{ 'wb-ui-event-emitting-button--squary': squary },
+			{ 'wb-ui-event-emitting-button--pressed': isPressed },
+		]"
 		:href="href"
+		:tabindex="href ? null : 0"
+		:role="href ? 'link' : 'button'"
 		:title="message"
 		@click="click"
+		@keydown.enter="handleEnterPress"
+		@keydown.space="handleSpacePress"
+		@keyup.enter="unpress"
+		@keyup.space="unpress"
 	>
 		<span
 			class="wb-ui-event-emitting-button__text"
@@ -31,8 +41,8 @@ export default class EventEmittingButton extends Vue {
 	@Prop( { required: true, type: String } )
 	public message!: string;
 
-	@Prop( { required: false, default: '#', type: String } )
-	public href!: string;
+	@Prop( { required: false, default: null, type: String } )
+	public href!: string|null;
 
 	@Prop( { required: false, default: true, type: Boolean } )
 	public preventDefault!: boolean;
@@ -40,11 +50,49 @@ export default class EventEmittingButton extends Vue {
 	@Prop( { required: false, default: false, type: Boolean } )
 	public squary!: boolean;
 
-	public click( event: MouseEvent ) {
+	public isPressed = false;
+
+	public handleSpacePress( event: UIEvent ) {
+		if ( !this.simulateSpaceOnButton() ) {
+			return;
+		}
+		this.preventScrollingDown( event );
+		this.isPressed = true;
+		this.click( event );
+	}
+
+	public handleEnterPress( event: UIEvent ) {
+		this.isPressed = true;
+		if ( this.thereIsNoSeparateClickEvent() ) {
+			this.click( event );
+		}
+	}
+
+	public unpress() {
+		this.isPressed = false;
+	}
+
+	public click( event: UIEvent ) {
 		if ( this.preventDefault ) {
-			event.preventDefault();
+			this.preventOpeningLink( event );
 		}
 		this.$emit( 'click', event );
+	}
+
+	private preventOpeningLink( event: UIEvent ) {
+		event.preventDefault();
+	}
+
+	private preventScrollingDown( event: UIEvent ) {
+		event.preventDefault();
+	}
+
+	private thereIsNoSeparateClickEvent() {
+		return this.href === null;
+	}
+
+	private simulateSpaceOnButton() {
+		return this.href === null;
 	}
 }
 </script>
@@ -96,6 +144,10 @@ $block: '.wb-ui-event-emitting-button';
 		&:active:focus {
 			box-shadow: none;
 		}
+	}
+
+	&--primaryProgressive#{&}--pressed {
+		background-color: $color-primary--active;
 	}
 
 	&--squary {
