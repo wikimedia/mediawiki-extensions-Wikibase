@@ -52,7 +52,35 @@ function prepareTestEnv( options: {
 	return document.querySelector( 'a' );
 }
 
+function mockPropertyLabelResponse(
+	propertyId: string,
+	propertyLabel: string,
+	language: string,
+	fallback?: string,
+): any {
+
+	if ( !fallback ) {
+		fallback = language;
+	}
+	return {
+		success: 1,
+		entities: {
+			[ propertyId ]: {
+				id: propertyId,
+				labels: {
+					[ language ]: {
+						value: propertyLabel,
+						language: fallback,
+						'for-language': language,
+					},
+				},
+			},
+		},
+	};
+}
+
 describe( 'string data value', () => {
+	const pageLanguage = 'en';
 	let app: any;
 	let require: any;
 	let using;
@@ -62,7 +90,7 @@ describe( 'string data value', () => {
 		require = jest.fn( () => app );
 		using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
 
-		mockMwEnv( using, mockMwConfig( { wgPageContentLanguage: 'de' } ) );
+		mockMwEnv( using, mockMwConfig( { wgPageContentLanguage: pageLanguage } ) );
 		( window as MwWindow ).$ = {
 			get() {
 				return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
@@ -79,7 +107,7 @@ describe( 'string data value', () => {
 			};
 		} );
 		( window as MwWindow ).mw.language = {
-			bcp47: jest.fn( () => 'de' ),
+			bcp47: jest.fn( ( x: string ) => x ),
 		};
 	} );
 
@@ -100,31 +128,92 @@ describe( 'string data value', () => {
 	} );
 
 	describe( 'label fallback', () => {
-		it( 'has a input and a label', async () => {
+		it( 'uses property label', async () => {
 			const propertyId = 'P349';
-			const propertyLabel = 'Jochen';
-			const language = 'de';
-			const dir = 'ltr';
-			const testLink = prepareTestEnv( { propertyId } );
+			const propertyLabel = 'Queen';
+
+			const get = jest.fn( () => mockPropertyLabelResponse(
+				propertyId,
+				propertyLabel,
+				pageLanguage,
+			) );
 
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn( () => {
-					return Promise.resolve( {
-						success: 1,
-						entities: {
-							[ propertyId ]: {
-								id: propertyId,
-								labels: {
-									[ language ]: {
-										value: propertyLabel,
-										language,
-									},
-								},
-							},
-						},
-					} );
-				} ),
+				get,
+			} );
+
+			const testLink = prepareTestEnv( { propertyId } );
+
+			await init();
+			testLink!.click();
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			await budge();
+
+			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+
+			expect( label ).not.toBeNull();
+			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
+			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( pageLanguage );
+			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
+			expect( get ).toHaveBeenCalledTimes( 1 );
+			expect( get ).toHaveBeenCalledWith( {
+				action: 'wbgetentities',
+				ids: propertyId,
+				languagefallback: 1,
+				languages: pageLanguage,
+				props: 'labels',
+			} );
+		} );
+
+		it( 'ueses labels fallback language', async () => {
+			const propertyId = 'P349';
+			const propertyLabel = 'Jochen';
+			const language = 'de';
+
+			const get = jest.fn( () => mockPropertyLabelResponse(
+				propertyId,
+				propertyLabel,
+				pageLanguage,
+				language,
+			) );
+
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				expectedUrl: 'http://localhost/w/api.php',
+				get,
+			} );
+
+			const testLink = prepareTestEnv( { propertyId } );
+
+			await init();
+			testLink!.click();
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			await budge();
+
+			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+
+			expect( label ).not.toBeNull();
+			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
+			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
+			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
+			expect( get ).toHaveBeenCalledTimes( 1 );
+			expect( get ).toHaveBeenCalledWith( {
+				action: 'wbgetentities',
+				ids: propertyId,
+				languagefallback: 1,
+				languages: pageLanguage,
+				props: 'labels',
+			} );
+		} );
+
+		it( 'falls back to the property id, if the api call fails', async () => {
+			const propertyId = 'P349';
+			const testLink = prepareTestEnv( { propertyId } );
+
+			const get = jest.fn( () => Promise.reject( 'no' ) );
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				expectedUrl: 'http://localhost/w/api.php',
+				get,
 			} );
 
 			await init();
@@ -132,13 +221,87 @@ describe( 'string data value', () => {
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			await budge();
 
-			const label = select( '.wb-db-app .wb-db-PropertyLabel' );
+			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+			expect( label ).not.toBeNull();
+			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
+			expect( ( label as HTMLElement ).textContent ).toBe( propertyId );
+			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'zxx' );
+			expect( get ).toHaveBeenCalledWith( {
+				action: 'wbgetentities',
+				ids: propertyId,
+				languagefallback: 1,
+				languages: pageLanguage,
+				props: 'labels',
+			} );
+		} );
+	} );
+
+	describe( 'language utils', () => {
+		it( 'determines the directionality of the given language', async () => {
+			const propertyId = 'P349';
+			const propertyLabel = 'רתֵּסְאֶ';
+			const language = 'he';
+
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				expectedUrl: 'http://localhost/w/api.php',
+				get: jest.fn( () => mockPropertyLabelResponse(
+					propertyId,
+					propertyLabel,
+					pageLanguage,
+					language,
+				) ),
+			} );
+
+			( window as MwWindow ).$.uls!.data.getDir = jest.fn( ( x: string ) => {
+				return x === 'he' ? 'rtl' : 'ltr';
+			} );
+
+			const testLink = prepareTestEnv( { propertyId } );
+
+			await init();
+			testLink!.click();
+			await budge();
+
+			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+
+			expect( label ).not.toBeNull();
+			expect( ( label as HTMLElement ).getAttribute( 'dir' ) ).toBe( 'rtl' );
+			expect( ( window as MwWindow ).$.uls!.data.getDir ).toHaveBeenCalledWith( language );
+		} );
+
+		it( 'standardized language code', async () => {
+			const propertyId = 'P349';
+			const propertyLabel = 'Jochen';
+			const language = 'de-formal';
+
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				expectedUrl: 'http://localhost/w/api.php',
+				get: jest.fn( () => mockPropertyLabelResponse(
+					propertyId,
+					propertyLabel,
+					pageLanguage,
+					language,
+				) ),
+			} );
+
+			( window as MwWindow ).mw.language = {
+				bcp47: jest.fn( ( x: string ) => {
+					return x === 'de-formal' ? 'de' : 'en';
+				} ),
+			};
+
+			const testLink = prepareTestEnv( { propertyId } );
+
+			await init();
+			testLink!.click();
+			await budge();
+
+			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
 
 			expect( label ).not.toBeNull();
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
-			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
-			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
-			expect( ( label as HTMLElement ).getAttribute( 'dir' ) ).toBe( dir );
+			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'de' );
+			expect( ( window as MwWindow ).mw.language.bcp47 ).toHaveBeenCalledWith( language );
 		} );
 	} );
 
@@ -163,12 +326,12 @@ describe( 'string data value', () => {
 		testLink!.click();
 		await budge();
 
-		const input = select( '.wb-db-app .wb-db-stringValue__input' );
+		const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
 
 		expect( input ).not.toBeNull();
 		expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
-		await insert( input as HTMLTextAreaElement, testNewValue );
 
+		await insert( input as HTMLTextAreaElement, testNewValue );
 		expect( ( input as HTMLTextAreaElement ).value ).toBe( testNewValue );
 	} );
 } );
