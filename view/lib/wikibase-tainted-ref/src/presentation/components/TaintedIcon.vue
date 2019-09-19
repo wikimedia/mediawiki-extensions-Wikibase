@@ -1,12 +1,11 @@
 <template>
-	<div class="wb-tr-tainted-icon" title="This statement has some potential issues">
-	</div>
+	<div class="wb-tr-tainted-icon" title="This statement has some potential issues" />
 </template>
 
 <script>
-	export default {
-		name: 'TaintedIcon'
-	};
+export default {
+	name: 'TaintedIcon',
+};
 </script>
 
 <style lang="scss">

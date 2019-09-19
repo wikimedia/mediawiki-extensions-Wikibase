@@ -5,5 +5,5 @@ storiesOf( 'TaintedIcon', module )
 	.add( 'Just the icon', () => ( {
 		components: { TaintedIcon },
 		template:
-		`<p><TaintedIcon></TaintedIcon></p>`
+		'<p><TaintedIcon></TaintedIcon></p>',
 	} ) );

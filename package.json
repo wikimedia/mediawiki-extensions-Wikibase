@@ -3,13 +3,15 @@
 	"scripts": {
 		"doc": "jsduck",
 		"install:bridge": "npm --prefix client/data-bridge ci",
-		"postinstall": "npm run install:bridge",
+		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
+		"postinstall": "npm run install:bridge && npm run install:tainted-ref",
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "npm-run-all --continue-on-error selenium-test:*",
 		"selenium-test:repo": "wdio repo/tests/selenium/wdio.conf.js",
 		"selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test",
-		"test": "grunt test && npm run test:bridge",
-		"test:bridge": "npm --prefix client/data-bridge test"
+		"test": "grunt test && npm run test:bridge && npm run test:tainted-ref",
+		"test:bridge": "npm --prefix client/data-bridge test",
+		"test:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test"
 	},
 	"devDependencies": {
 		"eslint-config-wikimedia": "0.9.0",
