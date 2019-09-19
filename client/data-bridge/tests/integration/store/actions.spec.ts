@@ -18,7 +18,7 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
-import { action } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 
 describe( 'store/actions', () => {

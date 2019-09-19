@@ -1,7 +1,7 @@
 import EditFlow from '@/definitions/EditFlow';
 import { ENTITY_ID } from '@/store/entity/getterTypes';
 import { getters } from '@/store/getters';
-import { getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,

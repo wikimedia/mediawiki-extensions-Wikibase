@@ -11,7 +11,7 @@ import {
 	ENTITY_ID,
 } from '@/store/entity/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
-import { getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 
 export const getters: GetterTree<Application, Application> = {

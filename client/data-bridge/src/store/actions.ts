@@ -34,7 +34,7 @@ import {
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import DataValue from '@/datamodel/DataValue';
-import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
 

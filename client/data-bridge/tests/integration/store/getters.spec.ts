@@ -11,7 +11,7 @@ import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import { getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 
 describe( 'store/getters', () => {

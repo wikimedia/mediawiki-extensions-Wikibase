@@ -19,12 +19,12 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@wmde/vuex-helpers": "^0.1.1",
     "core-js": "^2.6.5",
     "events": "^3.0.0",
     "vue": "^2.6.10",
     "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0",
-    "wmde-vuex-helpers": "git+https://github.com/wmde/vuex-helpers.git"
+    "vue-property-decorator": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
