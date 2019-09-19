@@ -472,5 +472,6 @@
 	"wikibase-outdated-client-script": "Hou là, un rafraîchissement forcé est nécessaire !",
 	"wikibase-shortcopyrightwarning-heading": "Attribution de licence",
 	"wikibase-entity-save-error-heading": "Quelque chose s'est mal passé",
-	"wikibase-entity-save-error-message": "Votre modification n'a pas pu être publiée. Vous pouvez essayer de cliquer de nouveau sur le bouton Publier."
+	"wikibase-entity-save-error-message": "Votre modification n'a pas pu être publiée. Vous pouvez essayer de cliquer de nouveau sur le bouton Publier.",
+	"wikibase-tainted-ref-warning-icon-title": "Cette déclaration a des problèmes potentiels"
 }
