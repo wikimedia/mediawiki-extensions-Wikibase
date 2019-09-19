@@ -131,5 +131,6 @@
 	"unresolved-property-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where pages are placed automatically if they reference properties that cannot be resolved.\n\nSee also:\n* {{msg-mw|Unresolved-property-category-desc}}",
 	"unresolved-property-category-desc": "Unresolved property category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Unresolved-property-category}}",
 	"connected-redirect-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where redirect pages are placed automatically if they are connected to a data item.\n\nSee also:\n* {{msg-mw|Connected-redirect-category-desc}}",
-	"connected-redirect-category-desc": "Connected redirect category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Connected-redirect-category}}"
+	"connected-redirect-category-desc": "Connected redirect category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Connected-redirect-category}}",
+	"wikibase-client-data-bridge-dialog-title": "{{notranslate}}"
 }
