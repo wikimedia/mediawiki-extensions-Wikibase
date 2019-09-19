@@ -21,7 +21,7 @@ import {
 import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
-import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import newMockStore from '../newMockStore';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 

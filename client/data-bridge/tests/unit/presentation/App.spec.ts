@@ -24,7 +24,7 @@ import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
-import hotUpdateDeep from 'wmde-vuex-helpers/dist/hotUpdateDeep';
+import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );

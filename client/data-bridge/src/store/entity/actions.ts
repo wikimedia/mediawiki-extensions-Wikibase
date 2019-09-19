@@ -26,7 +26,7 @@ import {
 import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
-import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
+import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 
 export default function actions(
 	readingEntityRepository: ReadingEntityRepository,
