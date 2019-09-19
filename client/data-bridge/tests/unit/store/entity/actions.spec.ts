@@ -21,7 +21,7 @@ import {
 import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import newMockStore from '../newMockStore';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 
@@ -111,13 +111,13 @@ describe( 'entity/actions', () => {
 					getEntity: () => Promise.resolve( entity ),
 				};
 
-				const action = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
-				return ( action as Function )( context, {
+				const entityInit = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+				return ( entityInit as Function )( context, {
 					entity: id,
 					revision: revisionId,
 				} ).then( () => {
 					expect( context.dispatch ).toHaveBeenCalledWith(
-						namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_INIT ),
+						action( NS_STATEMENTS, STATEMENTS_INIT ),
 						{
 							entityId: id,
 							statements,
@@ -142,8 +142,8 @@ describe( 'entity/actions', () => {
 					getEntity: () => Promise.resolve( entity ),
 				};
 
-				const action = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
-				return ( action as Function )( context, {
+				const entityInit = actions( readingEntityRepository, neverWritingEntityRepository )[ ENTITY_INIT ];
+				return ( entityInit as Function )( context, {
 					entity: id,
 					revision: revisionId,
 				} ).catch( ( error: Error ) => {
@@ -163,20 +163,20 @@ describe( 'entity/actions', () => {
 					getters: {
 						[ ENTITY_ID ]: entityId,
 						[ ENTITY_REVISION ]: revision,
-						[ namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
+						[ getter( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
 					},
 				} );
 
-			const action = actions(
+			const entitySaveAction = actions(
 				neverReadingEntityRepository,
 				revidIncrementingWritingEntityRepository,
 			)[ ENTITY_SAVE ];
-			return ( action as Function )( context )
+			return ( entitySaveAction as Function )( context )
 				.then( () => {
 					expect( context.commit ).toHaveBeenCalledWith( ENTITY_UPDATE, entity );
 					expect( context.commit ).toHaveBeenCalledWith( ENTITY_REVISION_UPDATE, revision + 1 );
 					expect( context.dispatch ).toHaveBeenCalledWith(
-						namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_INIT ),
+						action( NS_STATEMENTS, STATEMENTS_INIT ),
 						{ entityId, statements },
 					);
 				} );
@@ -192,7 +192,7 @@ describe( 'entity/actions', () => {
 					getters: {
 						[ ENTITY_ID ]: entityId,
 						[ ENTITY_REVISION ]: revision,
-						[ namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
+						[ getter( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
 					},
 				} ),
 				error = new Error( 'this should be propagated' ),

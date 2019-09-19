@@ -11,7 +11,7 @@ import {
 	ENTITY_ID,
 } from '@/store/entity/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 
 export const getters: GetterTree<Application, Application> = {
@@ -33,7 +33,7 @@ export const getters: GetterTree<Application, Application> = {
 			return null;
 		}
 
-		const entityId = getters[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ];
+		const entityId = getters[ getter( NS_ENTITY, ENTITY_ID ) ];
 		const path = {
 			entityId,
 			propertyId: state.targetProperty,
@@ -41,7 +41,7 @@ export const getters: GetterTree<Application, Application> = {
 		};
 
 		return getters[
-			namespacedStoreEvent( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
+			getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
 		]( path );
 	},
 

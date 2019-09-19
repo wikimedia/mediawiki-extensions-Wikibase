@@ -1,7 +1,7 @@
 import EditFlow from '@/definitions/EditFlow';
 import { ENTITY_ID } from '@/store/entity/getterTypes';
 import { getters } from '@/store/getters';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,
@@ -51,8 +51,8 @@ describe( 'root/getters', () => {
 			const entityId = 'Q42';
 			const otherGetters = {
 				targetProperty,
-				[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
-				[ namespacedStoreEvent(
+				[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
+				[ getter(
 					NS_ENTITY,
 					NS_STATEMENTS,
 					mainSnakGetterTypes.dataValue,
@@ -70,7 +70,7 @@ describe( 'root/getters', () => {
 				applicationState, otherGetters, applicationState, null,
 			) ).toBe( dataValue );
 			expect(
-				otherGetters[ namespacedStoreEvent(
+				otherGetters[ getter(
 					NS_ENTITY,
 					NS_STATEMENTS,
 					mainSnakGetterTypes.dataValue,

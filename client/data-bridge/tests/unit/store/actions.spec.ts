@@ -29,7 +29,7 @@ import {
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import newMockStore from './newMockStore';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 describe( 'root/actions', () => {
@@ -42,19 +42,20 @@ describe( 'root/actions', () => {
 			targetProperty?: string,
 			gettersOverride?: any,
 		): any {
+			// TODO can this profit from hotUpdateDeep?
 			return newMockStore( {
 				state: {
 					targetProperty,
 				},
 				getters: { ...{
-					[ namespacedStoreEvent(
+					[ getter(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						STATEMENTS_PROPERTY_EXISTS,
 					) ]: jest.fn( () => {
 						return true;
 					} ),
-					[ namespacedStoreEvent(
+					[ getter(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						STATEMENTS_IS_AMBIGUOUS,
@@ -62,14 +63,14 @@ describe( 'root/actions', () => {
 					]: jest.fn( () => {
 						return false;
 					} ),
-					[ namespacedStoreEvent(
+					[ getter(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						mainSnakGetterTypes.snakType,
 					) ]: jest.fn( () => {
 						return 'value';
 					} ),
-					[ namespacedStoreEvent(
+					[ getter(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						mainSnakGetterTypes.dataValueType,
@@ -116,7 +117,7 @@ describe( 'root/actions', () => {
 			} );
 		} );
 
-		it( `dispatches to ${namespacedStoreEvent( NS_ENTITY, ENTITY_INIT )}$`, () => {
+		it( `dispatches to ${action( NS_ENTITY, ENTITY_INIT )}$`, () => {
 			const entityId = 'Q42';
 			const context = mockedStore();
 
@@ -128,7 +129,7 @@ describe( 'root/actions', () => {
 
 			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
 				expect( context.dispatch ).toHaveBeenCalledWith(
-					namespacedStoreEvent( NS_ENTITY, ENTITY_INIT ),
+					action( NS_ENTITY, ENTITY_INIT ),
 					{ 'entity': entityId },
 				);
 			} );
@@ -235,8 +236,8 @@ describe( 'root/actions', () => {
 					const context = mockedStore(
 						targetProperty,
 						{
-							[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ namespacedStoreEvent(
+							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
+							[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								STATEMENTS_PROPERTY_EXISTS,
@@ -251,7 +252,7 @@ describe( 'root/actions', () => {
 						information,
 					).then( () => {
 						expect(
-							context.getters[ namespacedStoreEvent(
+							context.getters[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								STATEMENTS_PROPERTY_EXISTS,
@@ -271,8 +272,8 @@ describe( 'root/actions', () => {
 					const context = mockedStore(
 						targetProperty,
 						{
-							[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ namespacedStoreEvent(
+							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
+							[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								STATEMENTS_IS_AMBIGUOUS,
@@ -287,7 +288,7 @@ describe( 'root/actions', () => {
 						information,
 					).then( () => {
 						expect(
-							context.getters[ namespacedStoreEvent(
+							context.getters[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								STATEMENTS_IS_AMBIGUOUS,
@@ -307,8 +308,8 @@ describe( 'root/actions', () => {
 					const context = mockedStore(
 						targetProperty,
 						{
-							[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ namespacedStoreEvent(
+							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
+							[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								mainSnakGetterTypes.snakType,
@@ -323,7 +324,7 @@ describe( 'root/actions', () => {
 						information,
 					).then( () => {
 						expect(
-							context.getters[ namespacedStoreEvent(
+							context.getters[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								mainSnakGetterTypes.snakType,
@@ -343,8 +344,8 @@ describe( 'root/actions', () => {
 					const context = mockedStore(
 						targetProperty,
 						{
-							[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ namespacedStoreEvent(
+							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
+							[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								mainSnakGetterTypes.dataValueType,
@@ -358,7 +359,7 @@ describe( 'root/actions', () => {
 						context, information,
 					).then( () => {
 						expect(
-							context.getters[ namespacedStoreEvent(
+							context.getters[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								mainSnakGetterTypes.dataValueType,
@@ -439,7 +440,7 @@ describe( 'root/actions', () => {
 					targetProperty,
 				},
 				getters: {
-					[ namespacedStoreEvent( NS_ENTITY, ENTITY_ID ) ]: entityId,
+					[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
 				} as any,
 			} );
 
@@ -462,7 +463,7 @@ describe( 'root/actions', () => {
 				dataValue,
 			).then( () => {
 				expect( context.dispatch ).toHaveBeenCalledWith(
-					namespacedStoreEvent(
+					action(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						mainSnakActionTypes.setStringDataValue,
@@ -525,7 +526,7 @@ describe( 'root/actions', () => {
 			} );
 
 			return ( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ).then( () => {
-				expect( context.dispatch ).toHaveBeenCalledWith( namespacedStoreEvent( NS_ENTITY, ENTITY_SAVE ) );
+				expect( context.dispatch ).toHaveBeenCalledWith( action( NS_ENTITY, ENTITY_SAVE ) );
 				expect( context.dispatch ).toHaveBeenCalledTimes( 1 );
 			} );
 		} );

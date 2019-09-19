@@ -26,7 +26,7 @@ import {
 import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
-import namespacedStoreEvent from '@/store/namespacedStoreEvent';
+import { action, getter } from 'wmde-vuex-helpers/dist/namespacedStoreMethods';
 
 export default function actions(
 	readingEntityRepository: ReadingEntityRepository,
@@ -40,7 +40,7 @@ export default function actions(
 		context.commit( ENTITY_REVISION_UPDATE, entity.revisionId );
 		context.commit( ENTITY_UPDATE, entity.entity );
 		return context.dispatch(
-			namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_INIT ),
+			action( NS_STATEMENTS, STATEMENTS_INIT ),
 			{
 				entityId: entity.entity.id,
 				statements: entity.entity.statements,
@@ -66,7 +66,7 @@ export default function actions(
 					{
 						id: entityId,
 						statements: context.getters[
-							namespacedStoreEvent( NS_STATEMENTS, STATEMENTS_MAP )
+							getter( NS_STATEMENTS, STATEMENTS_MAP )
 						]( entityId ),
 					},
 					context.getters[ ENTITY_REVISION ],
