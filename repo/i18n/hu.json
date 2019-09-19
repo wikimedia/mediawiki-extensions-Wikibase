@@ -232,7 +232,7 @@
 	"wikibase-setsitelink-not-badge": "A(z) $1 elem nem egy jelvény.",
 	"wikibase-modifyentity-id": "Azonosító",
 	"wikibase-modifyterm-language": "Nyelvkód:",
-	"special-mergeitems": "Két elem összeolvasztása",
+	"special-mergeitems": "Két elem összevonása",
 	"wikibase-mergeitems-submit": "Elemek összeolvasztása",
 	"wikibase-mergeitems-success": "$1 beleolvasztva $3 elembe és átirányítássá alakítva.",
 	"wikibase-itemmerge-missing-parameter": "Hiányos bemenet.",

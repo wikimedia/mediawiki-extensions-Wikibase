@@ -8,7 +8,8 @@
 			"Nasir8891",
 			"Elias Ahmmad",
 			"আফতাবুজ্জামান",
-			"Mahir256"
+			"Mahir256",
+			"Nokib Sarkar"
 		]
 	},
 	"wikibase-desc": "কাঠামোবদ্ধ তথ্য ভান্ডার",
@@ -300,5 +301,6 @@
 	"right-item-redirect": "আইটেম পুননির্দেশনা তৈরি",
 	"action-property-create": "বৈশিষ্ট্য তৈরি",
 	"right-property-create": "বৈশিষ্ট্য তৈরি",
-	"wikibase-pageinfo-subscription-none": "কিছুই না"
+	"wikibase-pageinfo-subscription-none": "কিছুই না",
+	"wikibase-tainted-ref-warning-icon-title": "এই বক্তব্যটিতে কিছু গুরুতর সমস্যা রয়েছে"
 }

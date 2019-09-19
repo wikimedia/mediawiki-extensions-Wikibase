@@ -27,7 +27,8 @@
 			"Festina90",
 			"Mbch331",
 			"Mar(c)",
-			"Rots61"
+			"Rots61",
+			"Elroy"
 		]
 	},
 	"wikibase-desc": "Opslagplaats voor gestructureerde gegevens",
@@ -386,5 +387,6 @@
 	"wikibase-entity-not-viewable-title": "Inhoudstype komt niet overeen: Inhoud kan niet worden weergegeven",
 	"wikibase-entity-not-viewable": "De gegeven inhoud van het type \"$1\" is niet een Entiteit en kan niet worden weergegeven door Wikibase.",
 	"wikibase-pageinfo-subscription": "Wiki's geabonneerd op deze entiteit",
-	"wikibase-pageinfo-subscription-none": "Geen"
+	"wikibase-pageinfo-subscription-none": "Geen",
+	"wikibase-tainted-ref-warning-icon-title": "Deze verklaring heeft mogelijke problemen"
 }

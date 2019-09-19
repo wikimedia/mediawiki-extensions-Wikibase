@@ -423,5 +423,6 @@
 	"wikibase-outdated-client-script": "Упс. Ќе ви треба цврсто превчитување!",
 	"wikibase-shortcopyrightwarning-heading": "Лиценцен припис",
 	"wikibase-entity-save-error-heading": "Нешто не е во ред",
-	"wikibase-entity-save-error-message": "Не можев да ви ја објавам промената. Повторно стиснете на копчето."
+	"wikibase-entity-save-error-message": "Не можев да ви ја објавам промената. Повторно стиснете на копчето.",
+	"wikibase-tainted-ref-warning-icon-title": "Исказов има извесни потенцијални проблеми"
 }
