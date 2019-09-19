@@ -121,21 +121,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.api.getLocationAgnosticMwApi' => $wikibaseApiPaths + [
-			'scripts' => [
-				'namespace.js',
-				'getLocationAgnosticMwApi.js',
-			],
-			'dependencies' => [
-				'mediawiki.api',
-				'mediawiki.ForeignApi',
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
-			],
-		],
-
 		'wikibase.api.ParseValueCaller' => $wikibaseApiPaths + [
 			'scripts' => [
 				'namespace.js',
