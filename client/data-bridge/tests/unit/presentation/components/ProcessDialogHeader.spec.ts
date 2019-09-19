@@ -19,7 +19,7 @@ describe( 'ProcessDialogHeader', () => {
 	it( 'renders correctly with all props and slots filled', () => {
 		const wrapper = shallowMount( ProcessDialogHeader, {
 			slots: {
-				default: '<button>primary action</button>',
+				primaryAction: '<button>primary action</button>',
 				safeAction: '<button>safe action</button>',
 			},
 			propsData: { title: 'title' },
@@ -27,11 +27,11 @@ describe( 'ProcessDialogHeader', () => {
 		expect( wrapper.element ).toMatchSnapshot();
 	} );
 
-	it( 'gets content through the default slot', () => {
+	it( 'gets content through the primaryAction slot', () => {
 		const message = 'primary action';
 		const wrapper = shallowMount( ProcessDialogHeader, {
 			propsData: { title: 'title' },
-			slots: { default: `<a class="mockPrimaryActionButton">${message}</a>` },
+			slots: { primaryAction: `<a class="mockPrimaryActionButton">${message}</a>` },
 		} );
 		expect( wrapper.find( 'a' ).text() ).toBe( message );
 	} );
@@ -45,11 +45,12 @@ describe( 'ProcessDialogHeader', () => {
 		expect( wrapper.find( 'a' ).text() ).toBe( message );
 	} );
 
-	it( 'gets title through the respective prop', () => {
+	it( 'gets title through respective prop', () => {
 		const message = 'some message';
 		const wrapper = shallowMount( ProcessDialogHeader, {
 			propsData: { title: message },
 		} );
 		expect( wrapper.find( 'h1' ).text() ).toBe( message );
 	} );
+
 } );

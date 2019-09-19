@@ -1,7 +1,7 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
 		<ProcessDialogHeader :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
-			<template v-slot:default>
+			<template v-slot:primaryAction>
 				<EventEmittingButton
 					message="save"
 					type="primaryProgressive"

@@ -8,7 +8,7 @@
 			{{ title }}
 		</h1>
 		<!-- @slot This slot should be filled with the primary action, e.g. publish -->
-		<slot>
+		<slot name="primaryAction">
 			<div />
 		</slot>
 	</div>
