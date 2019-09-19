@@ -10,6 +10,7 @@ export function mockMwConfig( values: {
 	editTags?: string[];
 	wbRepo?: WbRepo;
 	wgPageContentLanguage?: string;
+	wgUserName?: string;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
 		values.hrefRegExp = 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)';
@@ -29,7 +30,7 @@ export function mockMwConfig( values: {
 						articlePath: '/wiki/$1',
 					};
 				case 'wgUserName':
-					return 'Test User';
+					return values.wgUserName || 'Test User';
 				case 'wgPageContentLanguage':
 					return values.wgPageContentLanguage || 'en';
 				default:
@@ -43,6 +44,7 @@ export function mockForeignApiConstructor(
 	options: {
 		expectedUrl?: string;
 		get?: ( ...args: unknown[] ) => any;
+		postWithEditToken?: ( ...args: unknown[] ) => any;
 	},
 ): ForeignApiConstructor {
 	return class MockForeignApi implements ForeignApi {
@@ -62,7 +64,15 @@ export function mockForeignApiConstructor(
 		public getEditToken( ..._args: any[] ): any { return jest.fn(); }
 		public getToken( ..._args: any[] ): any { return jest.fn(); }
 		public post( ..._args: any[] ): any { return jest.fn(); }
-		public postWithEditToken( ..._args: any[] ): any { return jest.fn(); }
+
+		public postWithEditToken( ...args: any[] ): any {
+			if ( options.postWithEditToken ) {
+				return options.postWithEditToken( ...args );
+			}
+
+			return jest.fn();
+		}
+
 		public postWithToken( ..._args: any[] ): any { return jest.fn(); }
 		public login( ..._args: any[] ): any { return jest.fn(); }
 	};

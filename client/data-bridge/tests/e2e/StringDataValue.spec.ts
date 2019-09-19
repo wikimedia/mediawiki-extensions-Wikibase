@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
@@ -14,7 +15,14 @@ import {
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
 
-const manager = jest.fn();
+Vue.config.devtools = false;
+
+const destroy = jest.fn();
+const clearWindows = jest.fn( () => Promise.resolve() );
+const manager = {
+	destroy,
+	clearWindows,
+};
 const dialog = {
 	getManager: jest.fn( () => manager ),
 };
@@ -44,7 +52,7 @@ function prepareTestEnv( options: {
 	return document.querySelector( 'a' );
 }
 
-describe( 'init', () => {
+describe( 'string data value', () => {
 	let app: any;
 	let require: any;
 	let using;
@@ -75,46 +83,73 @@ describe( 'init', () => {
 		};
 	} );
 
-	it( 'has a input and a label', async () => {
-		const propertyId = 'P349';
-		const propertyLabel = 'Jochen';
-		const language = 'de';
-		const dir = 'ltr';
-		const testLink = prepareTestEnv( { propertyId } );
+	it( 'handels string data value types', async () => {
+		const testLink = prepareTestEnv( {} );
+		await init();
 
-		( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-			expectedUrl: 'http://localhost/w/api.php',
-			get: jest.fn( () => {
-				return Promise.resolve( {
-					success: 1,
-					entities: {
-						[ propertyId ]: {
-							id: propertyId,
-							labels: {
-								[ language ]: {
-									value: propertyLabel,
-									language,
+		testLink!.click();
+		expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+
+		expect( select( '.wb-db-app' ) ).not.toBeNull();
+		await budge();
+		expect( select( '.wb-db-app .wb-db-bridge .wb-db-stringValue' ) ).not.toBeNull();
+		expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
+		expect(
+			select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive' ),
+		).not.toBeNull();
+	} );
+
+	describe( 'label fallback', () => {
+		it( 'has a input and a label', async () => {
+			const propertyId = 'P349';
+			const propertyLabel = 'Jochen';
+			const language = 'de';
+			const dir = 'ltr';
+			const testLink = prepareTestEnv( { propertyId } );
+
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				expectedUrl: 'http://localhost/w/api.php',
+				get: jest.fn( () => {
+					return Promise.resolve( {
+						success: 1,
+						entities: {
+							[ propertyId ]: {
+								id: propertyId,
+								labels: {
+									[ language ]: {
+										value: propertyLabel,
+										language,
+									},
 								},
 							},
 						},
-					},
-				} );
-			} ),
+					} );
+				} ),
+			} );
+
+			await init();
+			testLink!.click();
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			await budge();
+
+			const label = select( '.wb-db-app .wb-db-PropertyLabel' );
+
+			expect( label ).not.toBeNull();
+			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
+			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
+			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
+			expect( ( label as HTMLElement ).getAttribute( 'dir' ) ).toBe( dir );
 		} );
+	} );
+
+	it( 'has a input field', async () => {
+		const testLink = prepareTestEnv( {} );
 
 		await init();
 		testLink!.click();
-		expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 		await budge();
 
 		const input = select( '.wb-db-app .wb-db-stringValue__input' );
-		const label = select( '.wb-db-app .wb-db-PropertyLabel' );
-
-		expect( label ).not.toBeNull();
-		expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
-		expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
-		expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
-		expect( ( label as HTMLElement ).getAttribute( 'dir' ) ).toBe( dir );
 
 		expect( input ).not.toBeNull();
 		expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
