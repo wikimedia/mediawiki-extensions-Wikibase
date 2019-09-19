@@ -1,0 +1,197 @@
+
+.mw-content-ltr {
+    direction: ltr
+}
+
+a {
+    text-decoration: none;
+    color: #0645ad;
+    background: none
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+    background: none;
+    font-weight: normal;
+    margin: 0;
+    overflow: hidden;
+    padding-top: 0.5em;
+    padding-bottom: 0.17em;
+    border-bottom: 1px solid #a2a9b1
+}
+
+h2.wb-section-heading {
+    position: relative;
+    float: left;
+    margin-bottom: 0.2em;
+    margin-top: 1em;
+    padding-left: 10px;
+    border-bottom: 0;
+    width: 100%
+}
+
+html {
+    font-size: 100%
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif
+}
+
+body {
+    background-color: #f6f6f6
+}
+
+.mw-body h1, .mw-body-content h1, .mw-body-content h2 {
+    font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+    line-height: 1.3;
+    margin-bottom: 0.25em;
+    padding: 0
+}
+
+.mw-body {
+    margin-left: 10em;
+    border: 1px solid #a7d7f9;
+    border-right-width: 0;
+    margin-top: -1px
+}
+
+
+.mw-body-content {
+    position: relative;
+    line-height: 1.6;
+    font-size: 0.875em;
+    z-index: 0
+}
+
+.mw-body-content p {
+    line-height: inherit;
+    margin: 0.5em 0
+}
+
+.wikibase-statementgrouplistview .wikibase-statementlistview {
+    position: relative;
+    background-color: #fff;
+    float: left;
+    width: 100%;
+    border: 1px solid #c8ccd1
+}
+
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property {
+    width: 15em;
+    background: #eaecf0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1
+}
+
+.wikibase-statementgroupview-property-label {
+    float: left;
+    padding: 10px;
+}
+
+div.wikibase-statementview-mainsnak {
+    position: relative;
+    margin-left: 15em;
+    margin-right: 18em;
+    max-width: 32em;
+    word-wrap: break-word
+}
+
+div.wikibase-snakview {
+    padding: 10px 5px 5px 10px
+}
+
+.wikibase-statementview-qualifiers {
+    padding-left: 17em
+}
+
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-property {
+    width: 12em;
+    position: absolute;
+    font-size: 90%
+}
+
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-property input {
+    width: 100%;
+    font-size: 100%;
+    top: 0;
+    position: absolute
+}
+
+.wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview-value-container {
+    margin-left: 12em;
+    position: relative
+}
+
+.wikibase-statementview {
+    border-bottom: 1px solid #eaecf0;
+    float: left;
+    width: 100%;
+    position: relative;
+    padding-bottom: 1em
+}
+
+
+.wikibase-statementview .wikibase-statementview-rankselector {
+    position: absolute;
+    margin-left: 15.2em;
+    margin-top: 10px;
+    z-index: 1
+}
+
+.wikibase-statementview-references-heading {
+    color: #72777d;
+    margin-top: 0.5em
+}
+
+.wikibase-statementview-references-heading, .wikibase-statementview-references {
+    padding-left: 17em;
+    clear: both
+}
+
+.wikibase-referenceview {
+    position: relative;
+    background: #f8f9fa;
+    overflow: hidden;
+    margin-bottom: 0.5em
+}
+
+.wikibase-referenceview .wikibase-referenceview-listview {
+    padding-top: 0.3em
+}
+
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-property {
+    width: 12em;
+    position: absolute;
+    font-size: 90%
+}
+
+.wikibase-referenceview .wikibase-snaklistview-listview .wikibase-snakview-value-container {
+    margin-left: 12em;
+    position: relative
+}
+
+.wikibase-entityview .wikibase-entityview-main {
+    margin: 0 2em 2em 0;
+    max-width: 65em;
+    width: 100%
+}
+
+.wikibase-statementgroupview {
+    float: left;
+    margin-bottom: 2em;
+    position: relative;
+    width: 100%
+}
+
+.wikibase-statementgroupview .wikibase-statementgroupview-property {
+    border: 1px solid #c8ccd1;
+    border-right: 0
+}
