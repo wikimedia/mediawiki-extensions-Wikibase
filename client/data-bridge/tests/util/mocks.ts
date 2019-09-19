@@ -9,6 +9,7 @@ export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
 	editTags?: string[];
 	wbRepo?: WbRepo;
+	wgPageContentLanguage?: string;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
 		values.hrefRegExp = 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)';
@@ -30,7 +31,7 @@ export function mockMwConfig( values: {
 				case 'wgUserName':
 					return 'Test User';
 				case 'wgPageContentLanguage':
-					return 'en';
+					return values.wgPageContentLanguage || 'en';
 				default:
 					throw new Error( `unexpected config key ${key}` );
 			}
@@ -38,14 +39,26 @@ export function mockMwConfig( values: {
 	};
 }
 
-export function mockForeignApiConstructor( expectedUrl?: string ): ForeignApiConstructor {
+export function mockForeignApiConstructor(
+	options: {
+		expectedUrl?: string;
+		get?: ( ...args: unknown[] ) => any;
+	},
+): ForeignApiConstructor {
 	return class MockForeignApi implements ForeignApi {
 		public constructor( url: string, _options?: any ) {
-			if ( expectedUrl ) {
-				expect( url ).toBe( expectedUrl );
+			if ( options.expectedUrl ) {
+				expect( url ).toBe( options.expectedUrl );
 			}
 		}
-		public get( ..._args: any[] ): any { return jest.fn(); }
+
+		public get( ...args: any[] ): any {
+			if ( options.get ) {
+				return options.get( ...args );
+			}
+			return jest.fn();
+		}
+
 		public getEditToken( ..._args: any[] ): any { return jest.fn(); }
 		public getToken( ..._args: any[] ): any { return jest.fn(); }
 		public post( ..._args: any[] ): any { return jest.fn(); }
@@ -59,7 +72,7 @@ export function mockMwEnv(
 	using: () => Promise<any> = jest.fn(),
 	config: MwConfig = mockMwConfig(),
 	warn: () => void = jest.fn(),
-	ForeignApi: ForeignApiConstructor = mockForeignApiConstructor(),
+	ForeignApi: ForeignApiConstructor = mockForeignApiConstructor( {} ),
 ): void {
 	( window as MwWindow ).mw = {
 		loader: {
