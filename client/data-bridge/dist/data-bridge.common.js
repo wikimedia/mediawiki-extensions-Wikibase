@@ -7758,18 +7758,18 @@ var STATEMENTS_INIT = 'initStatements';
 function actions_actions(readingEntityRepository, writingEntityRepository) {
   var _ref;
 
-  function updateEntity(context, entity) {
-    context.commit(ENTITY_REVISION_UPDATE, entity.revisionId);
-    context.commit(ENTITY_UPDATE, entity.entity);
+  function updateEntity(context, entityRevision) {
+    context.commit(ENTITY_REVISION_UPDATE, entityRevision.revisionId);
+    context.commit(ENTITY_UPDATE, entityRevision.entity);
     return context.dispatch(Object(namespacedStoreMethods["action"])(NS_STATEMENTS, STATEMENTS_INIT), {
-      entityId: entity.entity.id,
-      statements: entity.entity.statements
+      entityId: entityRevision.entity.id,
+      statements: entityRevision.entity.statements
     });
   }
 
   return _ref = {}, _defineProperty(_ref, ENTITY_INIT, function (context, payload) {
-    return readingEntityRepository.getEntity(payload.entity, payload.revision).then(function (entity) {
-      return updateEntity(context, entity);
+    return readingEntityRepository.getEntity(payload.entity, payload.revision).then(function (entityRevision) {
+      return updateEntity(context, entityRevision);
     });
   }), _defineProperty(_ref, ENTITY_SAVE, function (context) {
     var entityId = context.getters[ENTITY_ID],
@@ -7777,8 +7777,8 @@ function actions_actions(readingEntityRepository, writingEntityRepository) {
       id: entityId,
       statements: context.getters[Object(namespacedStoreMethods["getter"])(NS_STATEMENTS, STATEMENTS_MAP)](entityId)
     }, context.getters[ENTITY_REVISION]);
-    return writingEntityRepository.saveEntity(entityRevision).then(function (entity) {
-      return updateEntity(context, entity);
+    return writingEntityRepository.saveEntity(entityRevision).then(function (entityRevision) {
+      return updateEntity(context, entityRevision);
     });
   }), _ref;
 }

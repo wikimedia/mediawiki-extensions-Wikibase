@@ -35,15 +35,15 @@ export default function actions(
 
 	function updateEntity(
 		context: ActionContext<EntityState, Application>,
-		entity: EntityRevision,
+		entityRevision: EntityRevision,
 	): Promise<unknown> {
-		context.commit( ENTITY_REVISION_UPDATE, entity.revisionId );
-		context.commit( ENTITY_UPDATE, entity.entity );
+		context.commit( ENTITY_REVISION_UPDATE, entityRevision.revisionId );
+		context.commit( ENTITY_UPDATE, entityRevision.entity );
 		return context.dispatch(
 			action( NS_STATEMENTS, STATEMENTS_INIT ),
 			{
-				entityId: entity.entity.id,
-				statements: entity.entity.statements,
+				entityId: entityRevision.entity.id,
+				statements: entityRevision.entity.statements,
 			},
 		);
 	}
@@ -55,7 +55,7 @@ export default function actions(
 		): Promise<unknown> {
 			return readingEntityRepository
 				.getEntity( payload.entity, payload.revision )
-				.then( ( entity ) => updateEntity( context, entity ) );
+				.then( ( entityRevision ) => updateEntity( context, entityRevision ) );
 		},
 
 		[ ENTITY_SAVE ](
@@ -74,7 +74,7 @@ export default function actions(
 
 			return writingEntityRepository
 				.saveEntity( entityRevision )
-				.then( ( entity ) => updateEntity( context, entity ) );
+				.then( ( entityRevision ) => updateEntity( context, entityRevision ) );
 		},
 	};
 }
