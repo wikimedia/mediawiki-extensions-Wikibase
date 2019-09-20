@@ -6095,12 +6095,12 @@ var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5a5afc65-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=3abdf22a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{attrs:{"title":"data-bridge"},scopedSlots:_vm._u([{key:"default",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":"save","type":"primaryProgressive","squary":true},on:{"click":_vm.saveAndClose}})]},proxy:true}])}),(_vm.hasError)?_c('ErrorWrapper'):_c(_vm.isInit ? 'DataBridge' : 'Initializing',{tag:"component"})],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5a5afc65-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=61e51528&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"default",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":"save","type":"primaryProgressive","squary":true},on:{"click":_vm.saveAndClose}})]},proxy:true}])}),(_vm.hasError)?_c('ErrorWrapper'):_c(_vm.isInit ? 'DataBridge' : 'Initializing',{tag:"component"})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=3abdf22a&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=61e51528&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -7204,12 +7204,12 @@ var ApplicationStatus;
 })(ApplicationStatus || (ApplicationStatus = {}));
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5a5afc65-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=7b22aa74&
-var ProcessDialogHeadervue_type_template_id_7b22aa74_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v("\n\t\t"+_vm._s(_vm.title)+"\n\t")]),_vm._t("default",[_c('div')])],2)}
-var ProcessDialogHeadervue_type_template_id_7b22aa74_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5a5afc65-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=b41680cc&
+var ProcessDialogHeadervue_type_template_id_b41680cc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v("\n\t\t"+_vm._s(_vm.title)+"\n\t")]),_vm._t("default",[_c('div')])],2)}
+var ProcessDialogHeadervue_type_template_id_b41680cc_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=7b22aa74&
+// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=b41680cc&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
 
@@ -7236,9 +7236,8 @@ function (_Vue) {
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
 __decorate([Prop({
-  required: false,
-  type: String,
-  default: 'data-bridge'
+  required: true,
+  type: String
 })], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader.prototype, "title", void 0);
 
 ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader = __decorate([vue_class_component_common_default.a], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
@@ -7259,8 +7258,8 @@ var ProcessDialogHeadervue_type_style_index_0_lang_scss_ = __webpack_require__("
 
 var ProcessDialogHeader_component = normalizeComponent(
   components_ProcessDialogHeadervue_type_script_lang_ts_,
-  ProcessDialogHeadervue_type_template_id_7b22aa74_render,
-  ProcessDialogHeadervue_type_template_id_7b22aa74_staticRenderFns,
+  ProcessDialogHeadervue_type_template_id_b41680cc_render,
+  ProcessDialogHeadervue_type_template_id_b41680cc_staticRenderFns,
   false,
   null,
   null,
@@ -8069,6 +8068,22 @@ function createStore(services) {
   };
   return new vuex_esm["a" /* Store */](storeBundle);
 }
+// EXTERNAL MODULE: ./node_modules/events/events.js
+var events_events = __webpack_require__("faa1");
+
+// CONCATENATED MODULE: ./src/events/repeater.ts
+
+function repeater(app, emitter, eventNames) {
+  eventNames.forEach(function (value) {
+    app.$on(value, function () {
+      for (var _len = arguments.length, payload = new Array(_len), _key = 0; _key < _len; _key++) {
+        payload[_key] = arguments[_key];
+      }
+
+      emitter.emit.apply(emitter, [value].concat(payload));
+    });
+  });
+}
 // CONCATENATED MODULE: ./src/presentation/directives/inlanguage.ts
 /* harmony default export */ var inlanguage = (function (resolver) {
   return function (el, binding, _vnode) {
@@ -8125,21 +8140,13 @@ function () {
 function MessagesPlugin(Vue, messages) {
   Vue.prototype.$messages = new Messages_Messages(messages);
 }
-// EXTERNAL MODULE: ./node_modules/events/events.js
-var events_events = __webpack_require__("faa1");
+// CONCATENATED MODULE: ./src/presentation/extendVueEnvironment.ts
 
-// CONCATENATED MODULE: ./src/events/repeater.ts
 
-function repeater(app, emitter, eventNames) {
-  eventNames.forEach(function (value) {
-    app.$on(value, function () {
-      for (var _len = arguments.length, payload = new Array(_len), _key = 0; _key < _len; _key++) {
-        payload[_key] = arguments[_key];
-      }
 
-      emitter.emit.apply(emitter, [value].concat(payload));
-    });
-  });
+function extendVueEnvironment(languageInfoRepo, messageRepo) {
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(languageInfoRepo));
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
 }
 // CONCATENATED MODULE: ./src/main.ts
 
@@ -8153,11 +8160,9 @@ function repeater(app, emitter, eventNames) {
 
 
 
-
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(services.getLanguageInfoRepository()));
-  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, services.getMessagesRepository());
+  extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository());
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   var app = new presentation_App({

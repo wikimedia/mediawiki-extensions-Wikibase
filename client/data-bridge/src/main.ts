@@ -7,11 +7,10 @@ import AppInformation from '@/definitions/AppInformation';
 import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
 import ServiceRepositories from '@/services/ServiceRepositories';
-import inlanguage from '@/presentation/directives/inlanguage';
-import MessagesPlugin from '@/presentation/plugins/MessagesPlugin';
 import Events from '@/events';
 import { EventEmitter } from 'events';
 import repeater from '@/events/repeater';
+import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 
 Vue.config.productionTip = false;
 
@@ -20,8 +19,10 @@ export function launch(
 	information: AppInformation,
 	services: ServiceRepositories,
 ): EventEmitter {
-	Vue.directive( 'inlanguage', inlanguage( services.getLanguageInfoRepository() ) );
-	Vue.use( MessagesPlugin, services.getMessagesRepository() );
+	extendVueEnvironment(
+		services.getLanguageInfoRepository(),
+		services.getMessagesRepository(),
+	);
 
 	const store = createStore( services );
 	store.dispatch( BRIDGE_INIT, information );

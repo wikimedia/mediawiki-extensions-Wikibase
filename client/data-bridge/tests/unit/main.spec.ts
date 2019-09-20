@@ -4,7 +4,6 @@ import {
 import { launch } from '@/main';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
-import MessagesPlugin from '@/presentation/plugins/MessagesPlugin';
 import { EventEmitter } from 'events';
 import Events from '@/events';
 
@@ -48,12 +47,10 @@ jest.mock( '@/events/repeater', () => ( {
 	default: ( app: any, emitter: any, events: any ) => mockRepeater( app, emitter, events ),
 } ) );
 
-const inlanguageDirective = {};
-const mockInlanguage = jest.fn( ( _x: any ) => inlanguageDirective );
-jest.mock( '@/presentation/directives/inlanguage', () => ( {
+const extendVueEnvironment = jest.fn();
+jest.mock( '@/presentation/extendVueEnvironment', () => ( {
 	__esModule: true,
-	default: ( languageRepo: any ) => mockInlanguage( languageRepo ),
-
+	default: ( ...args: any[] ) => extendVueEnvironment( ...args ),
 } ) );
 
 const messagesRepository = {};
@@ -63,12 +60,8 @@ describe( 'launch', () => {
 	it( 'modifies Vue', () => {
 		const languageRepo = {};
 		const services = {
-			getLanguageInfoRepository() {
-				return languageRepo;
-			},
-			getMessagesRepository() {
-				return messagesRepository;
-			},
+			getLanguageInfoRepository: () => languageRepo,
+			getMessagesRepository: () => messagesRepository,
 		};
 		const information = {};
 		const configuration = {
@@ -76,21 +69,17 @@ describe( 'launch', () => {
 		};
 
 		launch( configuration, information as any, services as any );
-		expect( mockInlanguage ).toHaveBeenCalledWith( languageRepo );
-		expect( Vue.directive ).toHaveBeenCalledWith( 'inlanguage', inlanguageDirective );
-		expect( Vue.use ).toHaveBeenCalledWith( MessagesPlugin, messagesRepository );
+		expect( extendVueEnvironment ).toHaveBeenCalledTimes( 1 );
+		expect( extendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( languageRepo );
+		expect( extendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( messagesRepository );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
 	it( 'builds app', () => {
 		const languageRepo = {};
 		const services = {
-			getLanguageInfoRepository() {
-				return languageRepo;
-			},
-			getMessagesRepository() {
-				return messagesRepository;
-			},
+			getLanguageInfoRepository: () => languageRepo,
+			getMessagesRepository: () => messagesRepository,
 		};
 
 		const information = {};

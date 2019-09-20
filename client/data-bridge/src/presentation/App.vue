@@ -1,6 +1,6 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
-		<ProcessDialogHeader title="data-bridge">
+		<ProcessDialogHeader :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
 			<template v-slot:default>
 				<EventEmittingButton
 					message="save"

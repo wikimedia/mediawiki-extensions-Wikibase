@@ -25,6 +25,7 @@ import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
+import MessageKeys from '@/definitions/MessageKeys';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -84,13 +85,24 @@ describe( 'App.vue', () => {
 		expect( wrapper.classes() ).toContain( 'wb-db-app' );
 	} );
 
-	it( 'shows the header', () => {
+	it( 'shows the header with title', () => {
+		const titleMessage = 'he ho';
+		const messageGet = jest.fn().mockReturnValue( titleMessage );
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
 		} );
 
 		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBeTruthy();
+		expect( messageGet ).toHaveBeenCalledTimes( 1 );
+		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.BRIDGE_DIALOG_TITLE );
+		expect( wrapper.find( ProcessDialogHeader ).props( 'title' ) ).toBe( titleMessage );
 	} );
 
 	it( 'saves on save button click', async () => {

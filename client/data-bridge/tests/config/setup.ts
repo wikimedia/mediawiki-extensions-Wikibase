@@ -1,3 +1,6 @@
+import { config } from '@vue/test-utils';
+import MessageKeys from '@/definitions/MessageKeys';
+
 // Break on unhandled promise rejection (default warning might be overlooked)
 // https://github.com/facebook/jest/issues/3251#issuecomment-299183885
 // However...
@@ -13,3 +16,8 @@ if ( typeof process.env.LISTENING_TO_UNHANDLED_REJECTION === 'undefined' ) {
 beforeEach( () => {
 	expect.hasAssertions();
 } );
+
+config.mocks!.$messages = {
+	KEYS: MessageKeys,
+	get: ( key: string ) => `<${key}>`,
+};
