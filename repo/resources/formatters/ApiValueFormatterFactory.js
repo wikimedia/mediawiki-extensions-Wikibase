@@ -13,7 +13,7 @@
 	 * @param {wikibase.api.FormatValueCaller} apiCaller
 	 * @param {string} languageCode
 	 */
-	wb.formatters.ApiValueFormatterFactory = util.inherit(
+	module.exports = util.inherit(
 		PARENT,
 		function ( apiCaller, languageCode ) {
 			this._apiCaller = apiCaller;

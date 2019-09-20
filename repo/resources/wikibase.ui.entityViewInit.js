@@ -4,8 +4,15 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb, dataTypeStore, getExpertsStore, getParserStore, performance ) {
+( function ( wb, performance ) {
 	'use strict';
+
+	var getExpertsStore = require( './experts/getStore.js' ),
+		getParserStore = require( './parsers/getStore.js' ),
+		DefaultViewFactoryFactory = require( '../../view/resources/wikibase/view/ViewFactoryFactory.js' ),
+		RevisionStore = require( '../../view/resources/wikibase/wikibase.RevisionStore.js' ),
+		ApiValueFormatterFactory = require( './formatters/ApiValueFormatterFactory.js' ),
+		dataTypeStore = require( './dataTypes/wikibase.dataTypeStore.js' );
 
 	/**
 	 * @return {boolean}
@@ -47,7 +54,7 @@
 			userLanguages = wb.getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[ 0 ] ),
 			contentLanguages = new wikibase.WikibaseContentLanguages(),
-			formatterFactory = new wb.formatters.ApiValueFormatterFactory(
+			formatterFactory = new ApiValueFormatterFactory(
 				new wb.api.FormatValueCaller(
 					repoApi,
 					dataTypeStore
@@ -72,7 +79,7 @@
 			currentRevision = wbCurRev;
 		}
 
-		revisionStore = new wb.RevisionStore( currentRevision );
+		revisionStore = new RevisionStore( currentRevision );
 
 		entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 			repoApi,
@@ -120,7 +127,7 @@
 		return $.when.apply( $, hookResults ).then( function () {
 			ViewFactoryFactory = wb[ entityNamespace ] && wb[ entityNamespace ].view
 				&& wb[ entityNamespace ].view.ViewFactoryFactory
-				|| wb.view.ViewFactoryFactory;
+				|| DefaultViewFactoryFactory;
 
 			viewFactory = ( new ViewFactoryFactory() ).getViewFactory( isEditable(), viewFactoryArguments );
 
@@ -386,8 +393,5 @@
 
 }(
 	wikibase,
-	wikibase.dataTypeStore,
-	wikibase.experts.getStore,
-	wikibase.parsers.getStore,
 	window.performance
 ) );

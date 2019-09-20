@@ -23,16 +23,5 @@ return call_user_func( function() {
 				'valueFormatters',
 			],
 		],
-
-		'wikibase.formatters.ApiValueFormatterFactory' => $moduleTemplate + [
-			'scripts' => [
-				'ApiValueFormatterFactory.js',
-			],
-			'dependencies' => [
-				'wikibase.api.FormatValueCaller',
-				'wikibase.formatters.ApiValueFormatter',
-				'wikibase.ValueFormatterFactory'
-			],
-		],
 	];
 } );

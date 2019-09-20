@@ -2,10 +2,8 @@
  * @license GPL-2.0-or-later
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function ( wb, vp, dv ) {
+( function ( vp, dv ) {
 	'use strict';
-
-	wb.parsers = wb.parsers || {};
 
 	var PARENT = vp.ValueParser;
 
@@ -18,7 +16,7 @@
 	 * @param {wikibase.api.ParseValueCaller} apiValueParser
 	 * @return {Function}
 	 */
-	wb.parsers.getApiBasedValueParserConstructor = function ( apiValueParser ) {
+	module.exports = function ( apiValueParser ) {
 		/**
 		 * Base constructor for objects representing a value parser which is doing an API request to the
 		 * 'parseValue' API module.
@@ -71,4 +69,4 @@
 		} );
 	};
 
-}( wikibase, valueParsers, dataValues ) );
+}( valueParsers, dataValues ) );
