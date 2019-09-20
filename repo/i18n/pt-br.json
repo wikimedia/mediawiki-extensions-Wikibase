@@ -444,5 +444,6 @@
 	"wikibase-outdated-client-script": "Uh-oh, uma atualização difícil é devida!",
 	"wikibase-shortcopyrightwarning-heading": "Atribuição de licença",
 	"wikibase-entity-save-error-heading": "Algo deu errado",
-	"wikibase-entity-save-error-message": "Sua alteração não pôde ser publicada. Você pode tentar clicar no botão publicar novamente."
+	"wikibase-entity-save-error-message": "Sua alteração não pôde ser publicada. Você pode tentar clicar no botão publicar novamente.",
+	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns problemas em potencial"
 }
