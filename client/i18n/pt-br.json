@@ -120,5 +120,6 @@
 	"unresolved-property-category": "Páginas que referenciam propriedades inexistentes",
 	"unresolved-property-category-desc": "Esta categoria lista as páginas que referem propriedades {{WBREPONAME}} que não podem ser encontradas nem por sua ID de propriedade nem pelo rótulo.",
 	"connected-redirect-category": "Redireciona conectado a um item {{WBREPONAME}}",
-	"connected-redirect-category-desc": "Esta categoria lista as páginas de redirecionamento que estão conectadas a um {{WBREPONAME}}."
+	"connected-redirect-category-desc": "Esta categoria lista as páginas de redirecionamento que estão conectadas a um {{WBREPONAME}}.",
+	"wikibase-client-data-bridge-dialog-title": "Editar propriedade"
 }

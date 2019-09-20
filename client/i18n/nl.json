@@ -18,7 +18,8 @@
 			"Mainframe98",
 			"Effeietsanders",
 			"Romaine",
-			"Bdijkstra"
+			"Bdijkstra",
+			"Elroy"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -109,5 +110,6 @@
 	"notification-header-page-connection": "De pagina <strong>$3</strong> werd verbonden met {{PLURAL:$4|-1=een {{WBREPONAME}}-item|het {{WBREPONAME}}-item $4}}, waar gegevens relevant voor het onderwerp kunnen worden verzameld.",
 	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
 	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen",
-	"connected-redirect-category": "Doorverwijzingen verbonden met een {{WBREPONAME}}-item"
+	"connected-redirect-category": "Doorverwijzingen verbonden met een {{WBREPONAME}}-item",
+	"wikibase-client-data-bridge-dialog-title": "Eigenschap bewerken"
 }
