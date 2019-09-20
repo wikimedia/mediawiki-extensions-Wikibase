@@ -1,5 +1,6 @@
 ( function( wb, util ) {
 	'use strict';
+	var TermSerializer = require( './TermSerializer' );
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
@@ -28,7 +29,7 @@ MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
 		}
 
 		var serialization = {},
-			termSerializer = new MODULE.TermSerializer(),
+			termSerializer = new TermSerializer(),
 			languageCodes = termMap.getKeys();
 
 		for( var i = 0; i < languageCodes.length; i++ ) {

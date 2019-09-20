@@ -4,6 +4,7 @@
  */
 ( function( wb, QUnit ) {
 'use strict';
+	var TermSerializer = require( './../../src/Serializers/TermSerializer' );
 
 QUnit.module( 'wikibase.serialization.TermSerializer' );
 
@@ -16,7 +17,7 @@ var testSets = [
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 1 );
-	var termSerializer = new wb.serialization.TermSerializer();
+	var termSerializer = new TermSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

@@ -1,7 +1,8 @@
 ( function( wb, $ ) {
 	'use strict';
 
-var MODULE = wb.serialization;
+var MODULE = wb.serialization,
+	TermSerializer = require( './Serializers/TermSerializer.js' );
 
 /**
  * Factory for creating serializers specific to certain objects, e.g. of the Wikibase data model.
@@ -30,7 +31,7 @@ var SELF = MODULE.SerializerFactory = function WbSerializationSerializerFactory(
 	this.registerSerializer( MODULE.StatementGroupSetSerializer, wb.datamodel.StatementGroupSet );
 	this.registerSerializer( MODULE.StatementListSerializer, wb.datamodel.StatementList );
 	this.registerSerializer( MODULE.StatementSerializer, wb.datamodel.Statement );
-	this.registerSerializer( MODULE.TermSerializer, wb.datamodel.Term );
+	this.registerSerializer( TermSerializer, wb.datamodel.Term );
 	this.registerSerializer( MODULE.TermMapSerializer, wb.datamodel.TermMap );
 };
 

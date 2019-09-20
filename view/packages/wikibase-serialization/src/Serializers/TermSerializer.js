@@ -13,7 +13,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.TermSerializer = util.inherit( 'WbTermSerializer', PARENT, {
+module.exports = util.inherit( 'WbTermSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
