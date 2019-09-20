@@ -57,17 +57,16 @@ services.setMessagesRepository( {
 	},
 } );
 
-const information = {
-	entityId: 'Q42',
-	propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
-	editFlow: EditFlow.OVERWRITE,
-};
-
-const config = {
-	containerSelector: '#data-bridge-container',
-};
-
-const emitter = launch( config, information, services );
-emitter.on( Events.onSaved, () => {
+launch(
+	{
+		containerSelector: '#data-bridge-container',
+	},
+	{
+		entityId: 'Q42',
+		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
+		editFlow: EditFlow.OVERWRITE,
+	},
+	services,
+).on( Events.onSaved, () => {
 	console.info( 'saved' ); // eslint-disable-line no-console
 } );
