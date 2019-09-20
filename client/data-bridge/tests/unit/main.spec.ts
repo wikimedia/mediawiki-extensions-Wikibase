@@ -4,6 +4,7 @@ import {
 import { launch } from '@/main';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
+import MessagesPlugin from '@/presentation/plugins/MessagesPlugin';
 import { EventEmitter } from 'events';
 import Events from '@/events';
 
@@ -25,6 +26,7 @@ jest.mock( 'events', () => ( {
 jest.mock( 'vue', () => {
 	return {
 		directive: jest.fn(),
+		use: jest.fn(),
 		config: {
 			productionTip: true,
 		},
@@ -54,6 +56,8 @@ jest.mock( '@/presentation/directives/inlanguage', () => ( {
 
 } ) );
 
+const messagesRepository = {};
+
 describe( 'launch', () => {
 
 	it( 'modifies Vue', () => {
@@ -61,6 +65,9 @@ describe( 'launch', () => {
 		const services = {
 			getLanguageInfoRepository() {
 				return languageRepo;
+			},
+			getMessagesRepository() {
+				return messagesRepository;
 			},
 		};
 		const information = {};
@@ -71,6 +78,7 @@ describe( 'launch', () => {
 		launch( configuration, information as any, services as any );
 		expect( mockInlanguage ).toHaveBeenCalledWith( languageRepo );
 		expect( Vue.directive ).toHaveBeenCalledWith( 'inlanguage', inlanguageDirective );
+		expect( Vue.use ).toHaveBeenCalledWith( MessagesPlugin, messagesRepository );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
@@ -79,6 +87,9 @@ describe( 'launch', () => {
 		const services = {
 			getLanguageInfoRepository() {
 				return languageRepo;
+			},
+			getMessagesRepository() {
+				return messagesRepository;
 			},
 		};
 
