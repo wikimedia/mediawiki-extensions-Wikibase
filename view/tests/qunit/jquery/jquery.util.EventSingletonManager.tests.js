@@ -42,9 +42,9 @@
 
 	QUnit.test( 'register() & unregister() (multiple sources)', function ( assert ) {
 		var manager = new EventSingletonManager(),
-			$sources = $( '<div/><div/>' ),
+			$sources = $( '<div>' ).add( $( '<div>' ) ),
 			sources = $sources.map( function () { return this; } ),
-			$target = $( '<div/>' ),
+			$target = $( '<div>' ),
 			triggeredForSources = [],
 			event = $.Event( 'custom' ),
 			handler = function ( event, source ) {

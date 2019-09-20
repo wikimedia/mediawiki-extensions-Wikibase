@@ -310,7 +310,7 @@
 				}
 			}
 
-			this.element.focus();
+			this.element.trigger( 'focus' );
 		},
 
 		/**

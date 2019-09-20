@@ -131,7 +131,7 @@
 
 			this.getContainer().off( '.' + this.widgetName );
 
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( this._buttons, function ( buttonName, $button ) {
 				$button.off( '.' + self.widgetName );
 				wbtooltip = $button.data( 'wbtooltip' );
@@ -191,7 +191,7 @@
 
 			$subToolbar.children( '.wikibase-toolbar-button' ).each( function () {
 				var $button = $( this );
-				// eslint-disable-next-line jquery/no-each-util
+				// eslint-disable-next-line no-jquery/no-each-util
 				$.each( self.options.buttonLabels, function ( buttonName, label ) {
 					if ( $button.text() === label ) {
 						self._buttons[ buttonName ] = $button.toolbarbutton( {
@@ -309,7 +309,7 @@
 			}
 
 			this._$tooltipAnchor = $( '<span/>', {
-				'class': 'wb-help-field-hint',
+				class: 'wb-help-field-hint',
 				html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
 			} ).toolbaritem();
 
@@ -435,7 +435,7 @@
 				}
 			}
 
-			this.element.focus();
+			this.element.trigger( 'focus' );
 		}
 	} );
 

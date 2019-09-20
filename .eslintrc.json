@@ -43,7 +43,9 @@
 		"one-var": "off",
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off"
+		"vars-on-top": "off",
+		"no-jquery/no-class-state": "off",
+		"no-jquery/no-global-selector": "off"
 	},
 	"plugins": [
 		"compat"

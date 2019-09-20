@@ -228,9 +228,9 @@
 		 */
 		focus: function () {
 			if ( this.isInEditMode() ) {
-				this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
+				this.$text.children( '.' + this.widgetFullName + '-input' ).trigger( 'focus' );
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

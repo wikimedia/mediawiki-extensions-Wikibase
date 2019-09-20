@@ -44,7 +44,7 @@
 		 * @property {Function}
 		 * @private
 		 */
-		_unbindGlobalListenersFn: $.noop,
+		_unbindGlobalListenersFn: function () {},
 
 		/**
 		 * @see jQuery.Widget._create
@@ -64,6 +64,8 @@
 			.on( 'click.' + widgetName, function ( event ) {
 				// don't show menu if selector is disabled!
 				// otherwise, simply toggle menu's visibility
+				// TODO: Store visiblity in model
+				// eslint-disable-next-line no-jquery/no-sizzle
 				if ( self.options.disabled || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
@@ -92,7 +94,7 @@
 					// support instantiation of multiple snaktypeselector widgets.
 					$( document ).off( 'mouseup.' + widgetName, degrade );
 					$( window ).off( 'resize.' + widgetName, repositionMenu );
-					self._unbindGlobalListenersFn = $.noop;
+					self._unbindGlobalListenersFn = function () {};
 				};
 				$( document ).on( 'mouseup.' + widgetName, degrade );
 				$( window ).on( 'resize.' + widgetName, repositionMenu );

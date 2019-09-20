@@ -70,6 +70,8 @@
 	 * Displays the link which opens the dialog (using jquery.wikibase.linkitem)
 	 */
 	$( function () {
+		// TODO: $.support is deprecated
+		// eslint-disable-next-line no-jquery/no-support
 		if ( !$.support.cors ) {
 			// This will fail horribly w/o CORS support on WMF-like setups (different domains for repo and client)
 			// Just leave the no-JS edit link in place.
@@ -77,9 +79,9 @@
 		}
 
 		$( '.wb-langlinks-link > a' ).eq( 0 )
-		.click( function ( event ) {
-			event.preventDefault();
-			initLinkItem( this );
-		} );
+			.on( 'click', function ( event ) {
+				event.preventDefault();
+				initLinkItem( this );
+			} );
 	} );
 }() );

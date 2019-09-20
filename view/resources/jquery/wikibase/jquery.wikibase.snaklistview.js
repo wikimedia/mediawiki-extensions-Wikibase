@@ -286,7 +286,7 @@
 			if ( $items.length ) {
 				this._lia.liInstance( $items.first() ).focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

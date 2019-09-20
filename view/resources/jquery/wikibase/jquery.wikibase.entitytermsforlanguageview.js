@@ -269,6 +269,7 @@
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
 		focus: function () {
+			// eslint-disable-next-line no-jquery/no-event-shorthand
 			this.$labelview.data( 'labelview' ).focus();
 		},
 

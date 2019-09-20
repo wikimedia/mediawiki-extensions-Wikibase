@@ -240,7 +240,7 @@
 			if ( $items.length ) {
 				this._listview.listItemAdapter().liInstance( $items.first() ).focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

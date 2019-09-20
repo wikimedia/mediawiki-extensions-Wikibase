@@ -106,7 +106,7 @@
 				}
 
 				self._createDialog();
-				$( '#wbclient-linkItem-site' ).focus();
+				$( '#wbclient-linkItem-site' ).trigger( 'focus' );
 			} )
 			.fail( function ( errorCode, errorInfo ) {
 				$dialogSpinner.remove();
@@ -230,7 +230,7 @@
 				.attr( {
 					name: 'wbclient-linkItem-site',
 					id: 'wbclient-linkItem-site',
-					'class': 'wbclient-linkItem-input'
+					class: 'wbclient-linkItem-input'
 				} )
 				.siteselector( {
 					source: this._getLinkableSites()
@@ -330,7 +330,7 @@
 				.attr( {
 					name: 'wbclient-linkItem-page',
 					id: 'wbclient-linkItem-page',
-					'class': 'wbclient-linkItem-input'
+					class: 'wbclient-linkItem-input'
 				} )
 				.prop( 'disabled', true )
 				.on( 'eachchange', function () {
@@ -466,7 +466,7 @@
 			this.$goButton
 				.off( 'click' )
 				.button( 'option', 'label', mw.msg( 'wikibase-linkitem-confirmitem-button' ) )
-				.click( function () {
+				.on( 'click', function () {
 					// The user confirmed that this is the right item...
 					self._showSpinner();
 					self._pageConnector.linkPages()
@@ -563,7 +563,7 @@
 			// Replace the button with one asking to close the dialog and reload the current page
 			this.$goButton
 				.off( 'click' )
-				.click( function () {
+				.on( 'click', function () {
 					this._showSpinner();
 					window.location.reload( true );
 				}.bind( this ) )

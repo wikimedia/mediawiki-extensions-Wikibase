@@ -116,6 +116,8 @@
 				}
 			} )
 			.on( 'click.' + this.widgetName, function ( event ) {
+				// TODO: Store visibility in model
+				// eslint-disable-next-line no-jquery/no-sizzle
 				if ( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
@@ -203,7 +205,7 @@
 			var self = this,
 				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
 
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( datamodel.Statement.RANK, function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 

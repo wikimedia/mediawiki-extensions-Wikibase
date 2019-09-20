@@ -284,7 +284,7 @@
 				$input.attr( {
 					type: 'text',
 					value: value,
-					'class': 'tagadata-label-text'
+					class: 'tagadata-label-text'
 				} )
 				.appendTo( $label );
 
@@ -321,15 +321,18 @@
 			var $tag = $( '<li>' )
 				.addClass( 'tagadata-choice ui-widget-content ui-state-default ui-corner-all' );
 
-			var $removeTag = $( '<a><span class="text-icon">\xd7</span></a>' )// \xd7 is an X
+			var $removeTag = $( '<a>' )
+				// \xd7 is an X
+				.append(
+					$( '<span>' ).addClass( 'text-icon' ).text( '\xd7' ),
+					$( '<span>' ).addClass( 'ui-icon ui-icon-close' )
+				)
 				.addClass( 'tagadata-close' )
-				.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-close' ) )
-				.click( function () {
+				.on( 'click', function () {
 					if ( !self.option( 'disabled' ) ) {
 						self.removeTag( $tag );
 					}
-				} )
-				.appendTo( $tag );
+				} );
 
 			return $tag.append( $removeTag );
 		},
@@ -378,7 +381,7 @@
 							self.removeTag( $tag );
 						}
 					}
-					$targetTag.find( 'input' ).focus();
+					$targetTag.find( 'input' ).trigger( 'focus' );
 				}
 			} );
 
@@ -555,7 +558,7 @@
 
 				if ( value ) {
 					this.getHelperTag().remove();
-					$input.blur();
+					$input.trigger( 'blur' );
 				} else {
 					// Create helper tag if it does not exist already:
 					this.getHelperTag();

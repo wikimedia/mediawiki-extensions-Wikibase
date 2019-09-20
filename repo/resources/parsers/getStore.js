@@ -32,7 +32,7 @@
 			'wikibase-entityid': datamodel.EntityId.TYPE
 		};
 
-		// eslint-disable-next-line jquery/no-each-util
+		// eslint-disable-next-line no-jquery/no-each-util
 		$.each( parserIdToDataValueType, function ( parserId, dvType ) {
 			var Parser = util.inherit(
 				ApiBasedValueParser,

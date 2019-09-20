@@ -187,7 +187,7 @@
 			if ( $items.length ) {
 				listview.listItemAdapter().liInstance( $items.first() ).focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 	} );

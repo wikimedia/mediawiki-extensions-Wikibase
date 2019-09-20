@@ -112,8 +112,8 @@
 					};
 
 				this.element
-				.off( event, updateAutoInput )
-				.on( event, updateAutoInput );
+					.off( event, updateAutoInput )
+					.on( event, updateAutoInput );
 			}
 
 			return $.Deferred().resolve().promise();
@@ -394,7 +394,7 @@
 				$items = listview.items();
 
 			if ( !$items.length ) {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 				return;
 			}
 
@@ -408,6 +408,8 @@
 
 				$nodes.each( function () {
 					var $node = $( this );
+					// TODO: Store visibility in model
+					// eslint-disable-next-line no-jquery/no-sizzle
 					if ( $node.is( ':visible' ) && $node.offset().top > $window.scrollTop() ) {
 						$foundNode = $node;
 					}

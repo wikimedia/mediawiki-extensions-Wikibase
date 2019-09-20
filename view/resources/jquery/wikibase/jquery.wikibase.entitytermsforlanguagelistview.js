@@ -203,9 +203,9 @@
 				return;
 			}
 
-			var $moreLanguagesButton = $( '<a/>' )
+			var $moreLanguagesButton = $( '<a>' )
 				.attr( 'href', '#' )
-				.click( this._onMoreLanguagesButtonClicked.bind( this ) );
+				.on( 'click', this._onMoreLanguagesButtonClicked.bind( this ) );
 			this._toggleMoreLanguagesButton( $moreLanguagesButton );
 
 			this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
@@ -429,7 +429,7 @@
 			if ( $items.length ) {
 				listview.listItemAdapter().liInstance( $items.first() ).focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		},
 

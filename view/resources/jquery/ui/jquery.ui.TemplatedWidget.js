@@ -174,7 +174,7 @@
 		 * Applies focus to the widget.
 		 */
 		focus: function () {
-			this.element.focus();
+			this.element.trigger( 'focus' );
 		},
 
 		/**

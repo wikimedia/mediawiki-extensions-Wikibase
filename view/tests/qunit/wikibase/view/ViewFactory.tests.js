@@ -270,7 +270,7 @@
 	QUnit.test( 'getStatementListView: given no property id, gets id from parent data attribute', function ( assert ) {
 		var factory = newViewFactory(),
 			value = new datamodel.StatementList(),
-			$parent = $( '<div class="wikibase-statementgroupview" />' ),
+			$parent = $( '<div>' ).addClass( 'wikibase-statementgroupview' ),
 			expectedPropertyId = 'P123',
 			$dom = $( '<div/>' );
 

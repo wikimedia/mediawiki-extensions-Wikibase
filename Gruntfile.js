@@ -2,7 +2,6 @@
 
 module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-eslint' );
-	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
 
@@ -10,36 +9,38 @@ module.exports = function ( grunt ) {
 		eslint: {
 			options: {
 				reportUnusedDisableDirectives: true,
+				extensions: [ '.js', '.json' ],
+				cache: true,
 				fix: grunt.option( 'fix' )
 			},
-			all: '.'
-		},
-		jsonlint: {
 			all: [
-				'**/*.json',
-				'!view/lib/**',
-				'!node_modules/**',
-				'!vendor/**',
-				'!extensions/**',
-				'!client/data-bridge/**'
-			]
-		},
-		stylelint: {
-			all: [
-				'**/*.css',
-				'**/*.less',
+				'**/*.{js,json}',
 				'!view/resources/jquery/ui/**',
 				'!view/lib/**',
 				'!node_modules/**',
 				'!vendor/**',
 				'!extensions/**',
-				'!client/data-bridge/**'
+				'!client/data-bridge/**',
+				'!lib/resources/wikibase-api/**'
+			]
+		},
+		stylelint: {
+			all: [
+				'**/*.{css,less}',
+				'!view/resources/jquery/ui/**',
+				'!view/lib/**',
+				'!node_modules/**',
+				'!vendor/**',
+				'!extensions/**',
+				'!client/data-bridge/**',
+				'!lib/resources/wikibase-api/**'
 			]
 		},
 		banana: {
 			options: {
 				disallowDuplicateTranslations: false,
-				disallowUnusedTranslations: false
+				disallowUnusedTranslations: false,
+				requireLowerCase: false
 			},
 			all: [
 				'client/i18n/',
@@ -51,7 +52,7 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'test', [ 'eslint', 'jsonlint', 'banana', 'stylelint' ] );
+	grunt.registerTask( 'test', [ 'eslint', 'banana', 'stylelint' ] );
 	grunt.registerTask( 'fix', function () {
 		grunt.config.set( 'eslint.options.fix', true );
 		grunt.task.run( 'eslint' );

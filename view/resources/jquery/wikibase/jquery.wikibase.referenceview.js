@@ -301,6 +301,7 @@
 					// snaklistview, external components using the snaklistview will be noticed via
 					// the "change" event.
 					self._trigger( 'change' );
+					// eslint-disable-next-line no-jquery/no-event-shorthand
 					$snakview.data( 'snakview' ).focus();
 				} );
 			} );
@@ -348,7 +349,7 @@
 			if ( $items.length ) {
 				lia.liInstance( $items.first() ).focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

@@ -50,7 +50,7 @@
 
 	QUnit.test( 'Close when clicking "close" anchor', function ( assert ) {
 		var $closeable = createCloseable( {
-				$content: $( '<span>test</span>' )
+				$content: $( '<span>' ).text( 'test' )
 			} ),
 			closeable = $closeable.data( 'closeable' );
 
@@ -71,7 +71,7 @@
 	QUnit.test( 'setContent()', function ( assert ) {
 		var $closeable = createCloseable(),
 			closeable = $closeable.data( 'closeable' ),
-			$content = $( '<span>test</span>' );
+			$content = $( '<span>' ).text( 'test' );
 
 		$closeable.on( 'closeableupdate', function () {
 			assert.ok(

@@ -93,7 +93,7 @@
 		assert.notOk( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
 
 		$entitySelector.val( 'does-not-exist' );
-		$entitySelector.blur();
+		$entitySelector.trigger( 'blur' );
 		assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-unrecognized' ) );
 	} );
 
@@ -108,7 +108,7 @@
 
 		$entitySelector
 			.one( 'entityselectorselected', function ( event, id ) {
-				$entitySelector.blur();
+				$entitySelector.trigger( 'blur' );
 				assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
 				done();
 			} );

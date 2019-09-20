@@ -453,12 +453,12 @@
 		 * @return {jQuery}
 		 */
 		_createLabelFromSuggestion: function ( entityStub ) {
-			var $suggestion = $( '<span class="ui-entityselector-itemcontent"/>' ),
-				$label = $( '<span class="ui-entityselector-label"/>' ).text( entityStub.label || entityStub.id );
+			var $suggestion = $( '<span>' ).addClass( 'ui-entityselector-itemcontent' ),
+				$label = $( '<span>' ).addClass( 'ui-entityselector-label' ).text( entityStub.label || entityStub.id );
 
 			if ( entityStub.aliases ) {
 				$label.append(
-					$( '<span class="ui-entityselector-aliases"/>' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
+					$( '<span>' ).addClass( 'ui-entityselector-aliases' ).text( ' (' + entityStub.aliases.join( ', ' ) + ')' )
 				);
 			}
 
@@ -466,7 +466,7 @@
 
 			if ( entityStub.description ) {
 				$suggestion.append(
-					$( '<span class="ui-entityselector-description"/>' )
+					$( '<span>' ).addClass( 'ui-entityselector-description' )
 					.text( entityStub.description )
 				);
 			}

@@ -50,22 +50,22 @@
 			var self = this;
 
 			this.element
-			.on(
-				'descriptionviewafterstartediting.' + this.widgetName
-				+ ' eachchange.' + this.widgetName,
-				function ( event ) {
-					if ( self.value().getText() === '' ) {
-						// Since the widget shall not be in view mode when there is no value, triggering
-						// the event without a proper value is only done when creating the widget. Disabling
-						// other edit buttons shall be avoided.
-						// TODO: Move logic to a sensible place.
-						self.element.addClass( 'wb-empty' );
-						return;
-					}
+				.on(
+					'descriptionviewafterstartediting.' + this.widgetName
+					+ ' eachchange.' + this.widgetName,
+					function ( event ) {
+						if ( self.value().getText() === '' ) {
+							// Since the widget shall not be in view mode when there is no value, triggering
+							// the event without a proper value is only done when creating the widget. Disabling
+							// other edit buttons shall be avoided.
+							// TODO: Move logic to a sensible place.
+							self.element.addClass( 'wb-empty' );
+							return;
+						}
 
-					self.element.removeClass( 'wb-empty' );
-				}
-			);
+						self.element.removeClass( 'wb-empty' );
+					}
+				);
 
 			PARENT.prototype._create.call( this );
 
@@ -214,9 +214,9 @@
 		 */
 		focus: function () {
 			if ( this.isInEditMode() ) {
-				this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
+				this.$text.children( '.' + this.widgetFullName + '-input' ).trigger( 'focus' );
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

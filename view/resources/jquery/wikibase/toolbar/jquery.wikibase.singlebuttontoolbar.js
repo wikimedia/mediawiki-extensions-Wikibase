@@ -97,7 +97,7 @@
 			if ( button ) {
 				button.focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 	} );

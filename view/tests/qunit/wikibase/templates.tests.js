@@ -28,15 +28,15 @@
 			[ // single-parameter templates
 				'param',
 				'<div></div>',
-				$( '<div/>' ).append( 'text' ),
-				$( '<tr/>' ),
-				$( '<td/>' ).append( $( '<span/>' ).text( 'text' ) ),
+				$( '<div>' ).append( 'text' ),
+				$( '<tr>' ),
+				$( '<td>' ).append( $( '<span/>' ).text( 'text' ) ),
 				'text with&nbsp;spaces'
 			],
 			[ // two-parameter templates
 				[ 'param1', 'param2' ],
-				[ 'param1', $( '<div/>' ) ],
-				[ $( '<div/>' ), $( '<div/>' ).text( 'param2' ) ]
+				[ 'param1', $( '<div>' ) ],
+				[ $( '<div>' ), $( '<div>' ).text( 'param2' ) ]
 			]
 		];
 
@@ -201,12 +201,12 @@
 
 			if ( expected === '' ) {
 				assert.throws(
-					function () { $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html(); },
+					function () { $( '<div>' ).append( mw.wbTemplate( key, params ) ).html(); },
 					'Triggered error when trying to create invalid HTML filling single param template "' + template + '" with "' + paramMessage + '"'
 				);
 			} else {
 				assert.strictEqual(
-					replaceChevrons( $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html() ),
+					replaceChevrons( $( '<div>' ).append( mw.wbTemplate( key, params ) ).html() ),
 					replaceChevrons( expected ),
 					'Verified template: "' + template + '" with "' + paramMessage + '"'
 				);
@@ -216,7 +216,7 @@
 
 		// Loop through testsData and params to run the tests
 		testsData.forEach( function ( testData, numberOfParams ) {
-			// eslint-disable-next-line jquery/no-each-util
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( testData, function ( template, expectedResults ) {
 				params[ numberOfParams ].forEach( function ( params, i ) {
 					verifyTemplate( params, template, expectedResults[ i ] );
@@ -231,7 +231,7 @@
 	QUnit.test( '$element.applyTemplate() adds classes from the template', function ( assert ) {
 		mw.wbTemplates.store.set( templateName, '<div class="class-from-template"></div>' );
 
-		var $div = $( '<div class="my-class"/>' );
+		var $div = $( '<div>' ).addClass( 'my-class' );
 		$div.applyTemplate( templateName );
 
 		assert.assertTrue( $div.hasClass( 'my-class' ) );
@@ -243,7 +243,7 @@
 		function ( assert ) {
 			mw.wbTemplates.store.set( templateName, '<div attr1="val1" attr2="val2"></div>' );
 
-			var $div = $( '<div/>' );
+			var $div = $( '<div>' );
 			$div.applyTemplate( templateName );
 
 			assert.strictEqual( $div.attr( 'attr1' ), 'val1' );
@@ -256,7 +256,7 @@
 		function ( assert ) {
 			mw.wbTemplates.store.set( templateName, '<div>template contents</div>' );
 
-			var $div = $( '<div>some contents</div>' );
+			var $div = $( '<div>' ).text( 'some contents' );
 			$div.applyTemplate( templateName );
 
 			assert.strictEqual( $div.html(), 'template contents' );

@@ -14,7 +14,7 @@
 	 */
 	function getSiteIdsOfGroup( group ) {
 		var siteIds = [];
-		// eslint-disable-next-line jquery/no-each-util
+		// eslint-disable-next-line no-jquery/no-each-util
 		$.each( wb.sites.getSitesOfGroup( group ), function ( siteId, site ) {
 			siteIds.push( siteId );
 		} );
@@ -232,6 +232,7 @@
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
 		focus: function () {
+			// eslint-disable-next-line no-jquery/no-event-shorthand
 			this.$sitelinklistview.data( 'sitelinklistview' ).focus();
 		},
 

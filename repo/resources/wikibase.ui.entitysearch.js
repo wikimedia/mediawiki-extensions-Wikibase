@@ -12,7 +12,7 @@
 		var $form = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
 			// Both inputs must be named "search" to support Firefox' smart keyword feature (T60467)
-			$hiddenInput = $( '<input type="hidden" name="search"/>' );
+			$hiddenInput = $( '<input>' ).attr( { type: 'hidden', name: 'search' } );
 
 		/**
 		 * @param {jQuery} $form
@@ -75,7 +75,7 @@
 			);
 
 		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function () {
-			$form.submit();
+			$form.trigger( 'submit' );
 		}, 'wb-entitysearch-suggestions' );
 
 		var $searchMenu = $( '<ul/>' ).ooMenu( {

@@ -314,7 +314,7 @@
 			.on( 'keydown.' + this.widgetName, function ( event ) {
 				if ( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
 					event.stopPropagation();
-					$siteIdInput.val( '' ).focus();
+					$siteIdInput.val( '' ).trigger( 'focus' );
 					$siteIdInput.data( 'siteselector' ).setSelectedSite( null );
 				}
 			} );
@@ -493,11 +493,11 @@
 			if ( $pagesuggester.length
 				&& !$pagesuggester.data( 'pagesuggester' ).option( 'disabled' )
 			) {
-				$pagesuggester.focus();
+				$pagesuggester.trigger( 'focus' );
 			} else if ( $siteselector.length ) {
-				$siteselector.focus();
+				$siteselector.trigger( 'focus' );
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

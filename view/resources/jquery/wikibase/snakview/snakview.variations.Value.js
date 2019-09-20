@@ -151,7 +151,7 @@
 					}
 					self.$viewPort.empty().append(
 						$( '<div/>', {
-							'class': self.variationBaseClass + '-datavaluetypemismatch-message',
+							class: self.variationBaseClass + '-datavaluetypemismatch-message',
 							text: mw.msg(
 								'wikibase-snakview-variation-datavaluetypemismatch',
 								actualDataValueType, intendedDataValueType

@@ -69,7 +69,10 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		} );
 
 		view.element.on( 'entitytermsviewafterstartediting', function () {
+			// eslint-disable-next-line no-jquery/no-sizzle
 			if ( !view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
+				// TODO: Use CSS animation
+				// eslint-disable-next-line no-jquery/no-slide
 				view.$entitytermsforlanguagelistviewContainer.slideDown( {
 					complete: function () {
 						view.$entitytermsforlanguagelistview
@@ -92,7 +95,10 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 				|| showEntitytermslistviewValue === '1'
 				|| showEntitytermslistviewValue === null );
 
+			// eslint-disable-next-line no-jquery/no-sizzle
 			if ( view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) && !showEntitytermslistview ) {
+				// TODO: Use CSS animation
+				// eslint-disable-next-line no-jquery/no-slide
 				view.$entitytermsforlanguagelistviewContainer.slideUp( {
 					complete: function () {
 						view.$entitytermsforlanguagelistviewToggler.data( 'toggler' ).refresh();

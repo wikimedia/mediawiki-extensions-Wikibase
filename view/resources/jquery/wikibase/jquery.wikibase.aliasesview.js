@@ -209,7 +209,7 @@
 			return new datamodel.MultiTerm(
 				this.options.value.getLanguageCode(),
 				// tagadata.getTags() returns a jquery object of html nodes
-				// eslint-disable-next-line jquery/no-map-util
+				// eslint-disable-next-line no-jquery/no-map-util
 				$.map( tagadata.getTags(), function ( tag ) {
 					return tagadata.getTagLabel( $( tag ) );
 				} )
@@ -221,9 +221,9 @@
 		 */
 		focus: function () {
 			if ( this.isInEditMode() ) {
-				this.$list.data( 'tagadata' ).getHelperTag().find( 'input' ).focus();
+				this.$list.data( 'tagadata' ).getHelperTag().find( 'input' ).trigger( 'focus' );
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 

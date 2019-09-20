@@ -326,9 +326,9 @@
 			} else {
 				var propertySelector = this._getPropertySelector();
 				if ( propertySelector ) {
-					propertySelector.element.focus();
+					propertySelector.element.trigger( 'focus' );
 				} else {
-					this.element.focus();
+					this.element.trigger( 'focus' );
 				}
 			}
 		},

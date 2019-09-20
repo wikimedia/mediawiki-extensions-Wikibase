@@ -234,7 +234,7 @@
 			if ( $items.length ) {
 				lia.liInstance( $items.first() ).focus();
 			} else {
-				this.element.focus();
+				this.element.trigger( 'focus' );
 			}
 		}
 	} );

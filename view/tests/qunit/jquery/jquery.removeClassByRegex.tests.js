@@ -9,8 +9,8 @@
 
 	QUnit.test( 'Basics', function ( assert ) {
 		var classes = [ 'a11a', 'bbb', 'c333', 'dddd', 'e', '6', '7' ];
-		var subject = $( '<div/>', {
-			'class': classes.join( '   ' ) // should also work with more than one space
+		var subject = $( '<div>', {
+			class: classes.join( '   ' ) // should also work with more than one space
 		} );
 
 		assert.strictEqual(
@@ -51,11 +51,11 @@
 
 	QUnit.test( 'Multiple elements', function ( assert ) {
 		var subject = $(
-			'<div/>', { 'class': 'A B C 1 2 3' }
+			'<div>', { class: 'A B C 1 2 3' }
 		).add(
-			'<div/>', { 'class': 'AA  BB  CC  11  22  33' }
+			'<div>', { class: 'AA  BB  CC  11  22  33' }
 		).add(
-			'<div/>', { 'class': 'AAA BBB CCC 111 222 333' }
+			'<div>', { class: 'AAA BBB CCC 111 222 333' }
 		);
 
 		assert.ok(

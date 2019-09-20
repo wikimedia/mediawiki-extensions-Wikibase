@@ -107,25 +107,27 @@
 				}
 
 				// If the menu is already visible, hide it
+				// eslint-disable-next-line no-jquery/no-sizzle
 				if ( $menu && $menu.data( self.widgetName ) === self && $menu.is( ':visible' ) ) {
 					self._hideMenu();
 					return;
 				}
 
 				self._initMenu()
-				.done( function () {
-					if ( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
-						$menu.hide();
-						return;
-					}
+					.done( function () {
+						// eslint-disable-next-line no-jquery/no-sizzle
+						if ( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
+							$menu.hide();
+							return;
+						}
 
-					$menu.data( self.widgetName, self );
-					$menu.show();
-					self.repositionMenu();
-					self._attachMenuEventListeners();
+						$menu.data( self.widgetName, self );
+						$menu.show();
+						self.repositionMenu();
+						self._attachMenuEventListeners();
 
-					self.element.addClass( 'ui-state-active' );
-				} );
+						self.element.addClass( 'ui-state-active' );
+					} );
 			} );
 		},
 
@@ -245,7 +247,7 @@
 		_fillMenu: function () {
 			var self = this,
 				deferred = $.Deferred(),
-				// eslint-disable-next-line jquery/no-map-util
+				// eslint-disable-next-line no-jquery/no-map-util
 				badgeIds = $.map( this.options.badges, function ( cssClasses, itemId ) {
 					return itemId;
 				} );

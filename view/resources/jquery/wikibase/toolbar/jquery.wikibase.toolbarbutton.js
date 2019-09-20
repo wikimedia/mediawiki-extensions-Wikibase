@@ -113,7 +113,7 @@
 		 * @see jQuery.wikibase.toolbaritem.focus
 		 */
 		focus: function () {
-			this.$link.focus();
+			this.$link.trigger( 'focus' );
 		},
 
 		/**
