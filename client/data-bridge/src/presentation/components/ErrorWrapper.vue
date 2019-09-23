@@ -12,4 +12,8 @@ import Component from 'vue-class-component';
 export default class ErrorWrapper extends Vue {}
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.wb-db-error {
+	@include dialogBody();
+}
+</style>
