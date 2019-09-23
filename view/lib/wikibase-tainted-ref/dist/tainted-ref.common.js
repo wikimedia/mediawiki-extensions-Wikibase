@@ -111,7 +111,10 @@ if (typeof window !== 'undefined') {
 /***/ }),
 
 /***/ "cd49":
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+ // eslint-disable-next-line no-console
 
 console.log('tainted ref main.ts loaded');
 
