@@ -4,7 +4,7 @@
  */
 ( function( wb, QUnit ) {
 'use strict';
-	var TermSerializer = require( './../../src/Serializers/TermSerializer' );
+	var TermSerializer = require( './../../src/Serializers/TermSerializer.js' );
 
 QUnit.module( 'wikibase.serialization.TermSerializer' );
 

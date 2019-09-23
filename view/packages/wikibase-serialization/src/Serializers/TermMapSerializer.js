@@ -1,6 +1,6 @@
 ( function( wb, util ) {
 	'use strict';
-	var TermSerializer = require( './TermSerializer' );
+	var TermSerializer = require( './TermSerializer.js' );
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Serializer;
