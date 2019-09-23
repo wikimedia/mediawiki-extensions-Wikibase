@@ -155,38 +155,22 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.ui.ooMenu' => $libPaths + [
-			'scripts' => [
-				'jquery.ui/jquery.ui.ooMenu.js',
-			],
-			'styles' => [
-				'jquery.ui/jquery.ui.ooMenu.css',
-			],
-			'dependencies' => [
-				'jquery.ui.widget',
-				'jquery.util.getscrollbarwidth',
-				'util.inherit',
-			],
-		],
-
 		'jquery.ui.suggester' => $libPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'jquery.ui/jquery.ui.suggester.js',
+				'jquery.ui/jquery.ui.ooMenu.js',
+				'jquery.util/jquery.util.getscrollbarwidth.js',
 			],
 			'styles' => [
 				'jquery.ui/jquery.ui.suggester.css',
+				'jquery.ui/jquery.ui.ooMenu.css',
 			],
 			'dependencies' => [
 				'jquery.ui.core',
-				'jquery.ui.ooMenu',
+				'jquery.ui.widget',
 				'jquery.ui.position',
 				'jquery.ui.widget',
-			],
-		],
-
-		'jquery.util.getscrollbarwidth' => $libPaths + [
-			'scripts' => [
-				'jquery.util/jquery.util.getscrollbarwidth.js',
+				'util.inherit',
 			],
 		],
 
