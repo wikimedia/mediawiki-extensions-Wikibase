@@ -1,9 +1,10 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var SELF = wb.entityIdFormatter.EntityIdHtmlFormatter = function () {
-	};
+	var SELF = function () {};
 
 	SELF.prototype.format = util.abstractMember;
 
-}( wikibase ) );
+	module.exports = SELF;
+
+}() );

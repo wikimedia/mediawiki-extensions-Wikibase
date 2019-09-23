@@ -1,5 +1,7 @@
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var DataValueBasedEntityIdHtmlFormatter = require( '../../../../resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js' );
 
 	QUnit.module( 'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' );
 
@@ -26,7 +28,7 @@
 			};
 		}
 		return function () {
-			return new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( parser, formatter );
+			return new DataValueBasedEntityIdHtmlFormatter( parser, formatter );
 		};
 	}
 
@@ -57,4 +59,4 @@
 		} );
 	} );
 
-}( wikibase ) );
+}() );

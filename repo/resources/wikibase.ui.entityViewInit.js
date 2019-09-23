@@ -12,7 +12,14 @@
 		DefaultViewFactoryFactory = require( '../../view/resources/wikibase/view/ViewFactoryFactory.js' ),
 		RevisionStore = require( '../../view/resources/wikibase/wikibase.RevisionStore.js' ),
 		ApiValueFormatterFactory = require( './formatters/ApiValueFormatterFactory.js' ),
-		dataTypeStore = require( './dataTypes/wikibase.dataTypeStore.js' );
+		StructureEditorFactory = require( '../../view/resources/wikibase/view/StructureEditorFactory.js' ),
+		CachingEntityStore = require( '../../view/resources/wikibase/store/store.CachingEntityStore.js' ),
+		ApiEntityStore = require( '../../view/resources/wikibase/store/store.ApiEntityStore.js' ),
+		dataTypeStore = require( './dataTypes/wikibase.dataTypeStore.js' ),
+		CachingEntityIdHtmlFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdHtmlFormatter.js' ),
+		DataValueBasedEntityIdHtmlFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js' ),
+		CachingEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js' ),
+		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' );
 
 	/**
 	 * @return {boolean}
@@ -25,11 +32,11 @@
 	/**
 	 * @param {wikibase.api.RepoApi} repoApi
 	 * @param {string} languageCode The language code of the ui language
-	 * @return {wikibase.store.CachingEntityStore}
+	 * @return {CachingEntityStore}
 	 */
 	function buildEntityStore( repoApi, languageCode ) {
-		return new wb.store.CachingEntityStore(
-			new wb.store.ApiEntityStore(
+		return new CachingEntityStore(
+			new ApiEntityStore(
 				repoApi,
 				new wb.serialization.EntityDeserializer(),
 				[ languageCode ]
@@ -66,7 +73,7 @@
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
-			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
+			structureEditorFactory = new StructureEditorFactory( toolbarFactory ),
 			startEditingCallback = function () {
 				return $.Deferred().resolve().promise();
 			},
@@ -97,11 +104,11 @@
 			structureEditorFactory,
 			contentLanguages,
 			dataTypeStore,
-			new wb.entityIdFormatter.CachingEntityIdHtmlFormatter(
-				new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( entityIdParser, htmlDataValueEntityIdFormatter )
+			new CachingEntityIdHtmlFormatter(
+				new DataValueBasedEntityIdHtmlFormatter( entityIdParser, htmlDataValueEntityIdFormatter )
 			),
-			new wb.entityIdFormatter.CachingEntityIdPlainFormatter(
-				new wb.entityIdFormatter.DataValueBasedEntityIdPlainFormatter( entityIdParser, plaintextDataValueEntityIdFormatter )
+			new CachingEntityIdPlainFormatter(
+				new DataValueBasedEntityIdPlainFormatter( entityIdParser, plaintextDataValueEntityIdFormatter )
 			),
 			entityStore,
 			getExpertsStore( dataTypeStore ),

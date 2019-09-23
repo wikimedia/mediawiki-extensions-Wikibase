@@ -1,7 +1,8 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var MODULE = wb.entityIdFormatter;
+	var testEntityIdHtmlFormatter = require( './testEntityIdHtmlFormatter.js' ),
+		DataValueBasedEntityIdHtmlFormatter = require( '../../../../resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js' );
 
 	QUnit.module( 'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' );
 
@@ -28,13 +29,13 @@
 			};
 		}
 		return function () {
-			return new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( parser, formatter );
+			return new DataValueBasedEntityIdHtmlFormatter( parser, formatter );
 		};
 	}
 
-	MODULE.testEntityIdHtmlFormatter.all( MODULE.DataValueBasedEntityIdHtmlFormatter, newFormatterGetter( 'parsefail' ) );
-	MODULE.testEntityIdHtmlFormatter.all( MODULE.DataValueBasedEntityIdHtmlFormatter, newFormatterGetter( 'formatfail' ) );
-	MODULE.testEntityIdHtmlFormatter.all( MODULE.DataValueBasedEntityIdHtmlFormatter, newFormatterGetter( 'success' ) );
+	testEntityIdHtmlFormatter.all( DataValueBasedEntityIdHtmlFormatter, newFormatterGetter( 'parsefail' ) );
+	testEntityIdHtmlFormatter.all( DataValueBasedEntityIdHtmlFormatter, newFormatterGetter( 'formatfail' ) );
+	testEntityIdHtmlFormatter.all( DataValueBasedEntityIdHtmlFormatter, newFormatterGetter( 'success' ) );
 
 	QUnit.test( 'format returns formatter return value', function ( assert ) {
 		var formatter = newFormatterGetter( 'success' )();
@@ -63,4 +64,4 @@
 		} );
 	} );
 
-}( wikibase ) );
+}() );

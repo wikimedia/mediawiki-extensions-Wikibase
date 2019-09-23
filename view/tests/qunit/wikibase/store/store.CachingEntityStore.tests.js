@@ -2,33 +2,36 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var CachingEntityStore = require( '../../../../resources/wikibase/store/store.CachingEntityStore.js' ),
+		EntityStore = require( '../../../../resources/wikibase/store/store.EntityStore.js' );
 
 	QUnit.module( 'wikibase.store.CachingEntityStore' );
 
 	QUnit.test( 'Initialize', function ( assert ) {
-		var entityStore = new wb.store.CachingEntityStore();
+		var entityStore = new CachingEntityStore();
 		assert.ok( entityStore.get, 'Entity store has get() method.' );
 	} );
 
 	QUnit.test( 'get() returns a jQuery promise', function ( assert ) {
-		var store = new wb.store.EntityStore();
+		var store = new EntityStore();
 		store.get = function ( entityId ) {
 			return $.Deferred().resolve();
 		};
-		var entityStore = new wb.store.CachingEntityStore( store ),
+		var entityStore = new CachingEntityStore( store ),
 			promise = entityStore.get( 'id' );
 
 		assert.ok( promise.done, 'done() method exists.' );
 	} );
 
 	QUnit.test( 'upstream store is called', function ( assert ) {
-		var store = new wb.store.EntityStore();
+		var store = new EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			return $.Deferred().resolve();
 		} );
-		var entityStore = new wb.store.CachingEntityStore( store );
+		var entityStore = new CachingEntityStore( store );
 
 		var promise = entityStore.get( 'id' );
 
@@ -39,11 +42,11 @@
 	} );
 
 	QUnit.test( 'upstream store is called once', function ( assert ) {
-		var store = new wb.store.EntityStore();
+		var store = new EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			return $.Deferred().resolve();
 		} );
-		var entityStore = new wb.store.CachingEntityStore( store );
+		var entityStore = new CachingEntityStore( store );
 
 		var promise = entityStore.get( 'id' );
 
@@ -57,7 +60,7 @@
 	} );
 
 	QUnit.test( 'upstream store is called once for parallel calls', function ( assert ) {
-		var store = new wb.store.EntityStore();
+		var store = new EntityStore();
 		store.get = sinon.spy( function ( entityId ) {
 			var deferred = $.Deferred();
 			setTimeout( function () {
@@ -65,7 +68,7 @@
 			}, 0 );
 			return deferred.promise();
 		} );
-		var entityStore = new wb.store.CachingEntityStore( store );
+		var entityStore = new CachingEntityStore( store );
 
 		var promise1 = entityStore.get( 'id' );
 		var promise2 = entityStore.get( 'id' );
@@ -75,4 +78,4 @@
 		} );
 	} );
 
-}( wikibase ) );
+}() );
