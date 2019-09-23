@@ -3,7 +3,7 @@
 		<ProcessDialogHeader :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
 			<template v-slot:primaryAction>
 				<EventEmittingButton
-					message="save"
+					:message="$messages.get( $messages.KEYS.SAVE_CHANGES )"
 					type="primaryProgressive"
 					:squary="true"
 					@click="saveAndClose"

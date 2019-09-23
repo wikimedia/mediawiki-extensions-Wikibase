@@ -82,6 +82,7 @@ return call_user_func( function() {
 						],
 						'messages' => [
 							'wikibase-client-data-bridge-dialog-title',
+							'savechanges',
 						],
 					],
 					__DIR__ . '/../data-bridge/dist'
