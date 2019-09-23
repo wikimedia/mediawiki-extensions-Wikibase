@@ -19,7 +19,8 @@
 		CachingEntityIdHtmlFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdHtmlFormatter.js' ),
 		DataValueBasedEntityIdHtmlFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js' ),
 		CachingEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js' ),
-		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' );
+		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' ),
+		config = require( './config.json' );
 
 	/**
 	 * @return {boolean}
@@ -121,7 +122,7 @@
 			parserStore,
 			userLanguages,
 			repoApiUrl,
-			mw.config.get( 'wbGeoShapeStorageApiEndpoint' )
+			config.geoShapeStorageApiEndpoint
 		];
 		var hookResults = [];
 		mw.hook( 'wikibase.entityPage.entityView.viewFactoryFactory.required' ).fire(

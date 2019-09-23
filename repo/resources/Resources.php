@@ -35,16 +35,6 @@ return call_user_func( function() {
 			}
 		],
 
-		'mw.config.values.wbGeoShapeStorageApiEndpoint' => $moduleTemplate + [
-			'class' => MediaWikiConfigModule::class,
-			'getconfigvalueprovider' => function () {
-				return WikibaseRepo::getDefaultInstance()->getSettingsValueProvider(
-					'wbGeoShapeStorageApiEndpoint',
-					'geoShapeStorageApiEndpointUrl'
-				);
-			},
-		],
-
 		// Temporary, see: T199197
 		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
@@ -111,6 +101,15 @@ return call_user_func( function() {
 				'view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js',
 				'view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js',
 				'view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js',
+				[
+					"name" => "repo/resources/config.json",
+					"callback" => function () {
+						$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+						return [
+							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' )
+						];
+					}
+				],
 			],
 			'dependencies' => [
 				'mediawiki.api',
@@ -121,7 +120,6 @@ return call_user_func( function() {
 				'mediawiki.user',
 				'mw.config.values.wbEntityTypes',
 				'mw.config.values.wbRepo',
-				'mw.config.values.wbGeoShapeStorageApiEndpoint',
 				'mw.config.values.wbDataTypes',
 				'jquery.wikibase.wbtooltip',
 				'wikibase',
