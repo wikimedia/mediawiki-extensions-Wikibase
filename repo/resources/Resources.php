@@ -56,19 +56,6 @@ return call_user_func( function() {
 			},
 		],
 
-		'wikibase.dataTypeStore' => $moduleTemplate + [
-			'packageFiles' => [
-				'dataTypes/wikibase.dataTypeStore.js',
-
-				'dataTypes/DataTypeStore.js',
-				'dataTypes/DataType.js',
-			],
-			'dependencies' => [
-				'mw.config.values.wbDataTypes',
-				'wikibase',
-			],
-		],
-
 		'wikibase.entityPage.entityLoaded' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.entityPage.entityLoaded.js',
@@ -100,41 +87,65 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'wikibase.ui.entityViewInit' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.ui.entityViewInit.js'
+		'wikibase.ui.entityViewInit' => [
+			'packageFiles' => [
+				'repo/resources/wikibase.ui.entityViewInit.js',
+
+				'repo/resources/experts/getStore.js',
+				'repo/resources/dataTypes/wikibase.dataTypeStore.js',
+				'repo/resources/dataTypes/DataTypeStore.js',
+				'repo/resources/dataTypes/DataType.js',
+				'repo/resources/parsers/getStore.js',
+				'repo/resources/parsers/getApiBasedValueParserConstructor.js',
+				'repo/resources/formatters/ApiValueFormatterFactory.js',
+				'view/resources/wikibase/view/ViewFactoryFactory.js',
+				'view/resources/wikibase/wikibase.RevisionStore.js',
 			],
 			'dependencies' => [
 				'mediawiki.api',
 				'mediawiki.cookie',
 				'mediawiki.notify',
 				'mediawiki.page.watch.ajax',
+				'mediawiki.Uri',
 				'mediawiki.user',
 				'mw.config.values.wbEntityTypes',
 				'mw.config.values.wbRepo',
 				'mw.config.values.wbGeoShapeStorageApiEndpoint',
+				'mw.config.values.wbDataTypes',
 				'jquery.wikibase.wbtooltip',
 				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
+				'wikibase.api.FormatValueCaller',
+				'wikibase.formatters.ApiValueFormatter',
+				'wikibase.ValueFormatterFactory',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.EntityId',
-				'wikibase.dataTypeStore',
-				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.entityPage.entityLoaded',
+				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.EntityInitializer',
-				'wikibase.experts.getStore',
-				'wikibase.formatters.ApiValueFormatterFactory',
 				'wikibase.entityIdFormatter',
-				'wikibase.parsers.getStore',
 				'wikibase.api.RepoApi',
-				'wikibase.RevisionStore',
 				'wikibase.sites',
 				'wikibase.store.EntityStore',
-				'wikibase.view.ViewFactoryFactory',
 				'wikibase.view.StructureEditorFactory',
 				'wikibase.view.ToolbarFactory',
 				'wikibase.WikibaseContentLanguages',
-				'wikibase.getUserLanguages'
+				'wikibase.getUserLanguages',
+				'wikibase.experts.__namespace',
+				'wikibase.experts.modules',
+				'wikibase.view.__namespace',
+				'wikibase.view.ReadModeViewFactory',
+				'wikibase.view.ControllerViewFactory',
+				'dataValues.values',
+				'jquery.valueview.ExpertStore',
+				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.experts.UnDeserializableValue',
+				'jquery.valueview.experts.UnsupportedValue',
+				'dataValues',
+				'dataValues.values',
+				'valueParsers.parsers',
+				'valueParsers.ValueParserStore',
+				'wikibase.api.ParseValueCaller',
 			],
 			'messages' => [
 				'pagetitle',
@@ -142,7 +153,9 @@ return call_user_func( function() {
 				'wikibase-anonymouseditwarning',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
-			]
+			],
+			'localBasePath' => dirname( dirname( __DIR__ ) ),
+			'remoteExtPath' => 'Wikibase',
 		],
 
 		'wikibase.ui.entitysearch' => $moduleTemplate + [
@@ -190,7 +203,6 @@ return call_user_func( function() {
 	return array_merge(
 		$modules,
 		require __DIR__ . '/experts/resources.php',
-		require __DIR__ . '/formatters/resources.php',
-		require __DIR__ . '/parsers/resources.php'
+		require __DIR__ . '/formatters/resources.php'
 	);
 } );

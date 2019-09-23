@@ -209,15 +209,6 @@ return call_user_func( function() {
 			'targets' => 'mobile'
 		],
 
-		'wikibase.RevisionStore' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/wikibase.RevisionStore.js',
-			],
-			'dependencies' => [
-				'wikibase'
-			]
-		],
-
 		'wikibase.templates' => $moduleTemplate + [
 			'class' => TemplateModule::class,
 			'scripts' => 'wikibase/templates.js',
@@ -394,15 +385,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.view.__namespace',
 				'wikibase.view.ViewFactory'
-			],
-		],
-
-		'wikibase.view.ViewFactoryFactory' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/ViewFactoryFactory.js',
-			'dependencies' => [
-				'wikibase.view.__namespace',
-				'wikibase.view.ReadModeViewFactory',
-				'wikibase.view.ControllerViewFactory'
 			],
 		],
 

@@ -4,7 +4,7 @@
  * @license GPL-2.0-or-later
  * @author Tobias Gritschacher
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
 	/**
@@ -13,7 +13,7 @@
 	 * @constructor
 	 * @param {number} baseRev
 	 */
-	var SELF = wb.RevisionStore = function WbRevisionStore( baseRev ) {
+	var SELF = function WbRevisionStore( baseRev ) {
 		this._revisions = {
 			baseRevision: baseRev,
 			labelRevision: baseRev,
@@ -150,4 +150,6 @@
 		}
 
 	} );
-}( wikibase ) );
+
+	module.exports = SELF;
+}() );

@@ -11,9 +11,13 @@ return call_user_func( function() {
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'Wikibase/repo/tests/qunit',
 	];
+	$packageFilesModuleBase = [
+		'localBasePath' => dirname( dirname( __DIR__ ) ),
+		'remoteExtPath' => 'Wikibase/repo/',
+	];
 
 	return [
-		'jquery.wikibase.entitysearch.tests' => [
+		'jquery.wikibase.entitysearch.tests' => $packageFilesModuleBase + [
 			'packageFiles' => [
 				'tests/qunit/jquery.wikibase/jquery.wikibase.entitysearch.tests.js',
 				'resources/jquery.wikibase/jquery.wikibase.entitysearch.js',
@@ -21,8 +25,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.wikibase.entityselector',
 			],
-			'localBasePath' => dirname( dirname( __DIR__ ) ),
-			'remoteExtPath' => 'Wikibase/repo',
 		],
 
 		'wikibase.dataTypes.DataType.tests' => [

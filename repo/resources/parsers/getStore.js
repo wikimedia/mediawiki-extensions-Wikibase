@@ -5,15 +5,15 @@
 ( function ( wb, vp, dv ) {
 	'use strict';
 
-	wb.parsers = wb.parsers || {};
+	var getApiBasedValueParserConstructor = require( './getApiBasedValueParserConstructor.js' );
 
 	/**
 	 * @param {wikibase.api.RepoApi} api
 	 * @return {valueParsers.ValueParserStore}
 	 */
-	wb.parsers.getStore = function ( api ) {
+	module.exports = function ( api ) {
 		var apiCaller = new wb.api.ParseValueCaller( api ),
-			ApiBasedValueParser = wb.parsers.getApiBasedValueParserConstructor( apiCaller ),
+			ApiBasedValueParser = getApiBasedValueParserConstructor( apiCaller ),
 			parserStore = new vp.ValueParserStore( vp.NullParser );
 
 		parserStore.registerDataValueParser(

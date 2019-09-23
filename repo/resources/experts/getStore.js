@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb, vv, dv ) {
+( function ( vv, dv ) {
 	'use strict';
 
 	/**
@@ -10,13 +10,11 @@
 	 */
 	var registeredExperts = require( 'wikibase.experts.modules' );
 
-	var MODULE = wb.experts;
-
 	/**
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
 	 * @returns {jQuery.valueview.ExpertStore}
 	 */
-	MODULE.getStore = function ( dataTypeStore ) {
+	module.exports = function ( dataTypeStore ) {
 		var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
 
 		expertStore.registerDataValueExpert(
@@ -63,4 +61,4 @@
 		return constructors;
 	}
 
-}( wikibase, $.valueview, dataValues ) );
+}( $.valueview, dataValues ) );

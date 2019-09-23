@@ -16,6 +16,6 @@ wikibase.dataTypeStore = ( function () {
 		dataTypeStore.registerDataType( DataType.newFromJSON( dtTypeId, dtDefinition ) );
 	} );
 
-	return dataTypeStore;
+	module.exports = dataTypeStore;
 
 }() );

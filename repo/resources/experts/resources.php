@@ -22,21 +22,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.experts.getStore' => $moduleTemplate + [
-			'scripts' => [
-				'getStore.js',
-			],
-			'dependencies' => [
-				'wikibase.experts.__namespace',
-				'wikibase.experts.modules',
-				'dataValues.values',
-				'jquery.valueview.ExpertStore',
-				'jquery.valueview.experts.StringValue',
-				'jquery.valueview.experts.UnDeserializableValue',
-				'jquery.valueview.experts.UnsupportedValue',
-			],
-		],
-
 		'wikibase.experts.Entity' => $moduleTemplate + [
 			'scripts' => [
 				'Entity.js',

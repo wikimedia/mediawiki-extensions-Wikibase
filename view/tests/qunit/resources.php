@@ -8,6 +8,10 @@ $moduleBase = [
 	'localBasePath' => __DIR__,
 	'remoteExtPath' => 'Wikibase/view/tests/qunit',
 ];
+$packageFilesModuleBase = [
+	'localBasePath' => dirname( dirname( __DIR__ ) ),
+	'remoteExtPath' => 'Wikibase/view',
+];
 
 return [
 	'wikibase.view.tests.getMockListItemAdapter' => $moduleBase + [
@@ -81,7 +85,6 @@ return [
 			'wikibase/view/testViewController.js',
 			'wikibase/view/ToolbarViewController.tests.js',
 			'wikibase/view/ViewFactory.tests.js',
-			'wikibase/view/ViewFactoryFactory.tests.js',
 			'wikibase/view/ToolbarFactory.tests.js',
 			'wikibase/wikibase.WikibaseContentLanguages.tests.js',
 			'wikibase/wikibase.getUserLanguages.tests.js',
@@ -116,10 +119,21 @@ return [
 			'wikibase.view.ToolbarFactory',
 			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.ViewFactory',
-			'wikibase.view.ViewFactoryFactory',
 			'wikibase.view.tests.getMockListItemAdapter',
 			'wikibase.WikibaseContentLanguages',
 			'wikibase.getUserLanguages',
+		],
+	],
+
+	'wikibase.view.tests.ViewFactoryFactory' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/view/ViewFactoryFactory.tests.js',
+			'resources/wikibase/view/ViewFactoryFactory.js',
+		],
+		'dependencies' => [
+			'test.sinonjs',
+			'wikibase.view.ControllerViewFactory',
+			'wikibase.view.ReadModeViewFactory',
 		],
 	],
 ];
