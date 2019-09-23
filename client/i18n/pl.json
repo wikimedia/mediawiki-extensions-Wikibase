@@ -15,7 +15,8 @@
 			"Rzuwig",
 			"Woytecr",
 			"Sp5uhe",
-			"Openbk"
+			"Openbk",
+			"Rail"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
@@ -107,11 +108,12 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Połączenie|Połączenia}} z Wikidanymi",
 	"echo-pref-tooltip-wikibase-action": "Powiadom mnie, gdy ktoś połączy stronę, którą {{GENDER:|utworzyłem|utworzyłam}}, z elementem Wikidanych.",
 	"notification-header-page-connection": "Strona <strong>$3</strong> została {{GENDER:$2|powiązana}} z elementem Wikidanych.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> i {{PLURAL:$4|jedna inna strona zostały|$4 inne strony zostały|100=99+ innych stron zostało}} {{GENDER:$2|powiązanych}} z elementami Wikidanych.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> i {{PLURAL:$4|jedna inna strona zostały powiązane|$4 inne strony zostały powiązane|100=99+ innych stron zostało powiązanych}} {{GENDER:$2|}} z elementami Wikidanych, gdzie można gromadzić dane związane z tematami.",
 	"notification-link-text-view-item": "{{GENDER:$1|Zobacz}} element",
 	"notification-subject-page-connection": "Strona na {{SITENAME}}, którą {{GENDER:$3|utworzyłeś|utworzyłaś}} została {{GENDER:$2|powiązana}} z elementem Wikidanych",
 	"unresolved-property-category": "Strony z nierozwiązanymi właściwościami",
 	"unresolved-property-category-desc": "Ta kategoria zawiera strony, które odwołują się do właściwości Wikidanych, których nie można było odnaleźć ani po numerze właściwości, ani po etykiecie.",
 	"connected-redirect-category": "Przekierowania połączone z elementem Wikidanych",
-	"connected-redirect-category-desc": "Ta kategoria zawiera przekierowania, które są połączone z elementem Wikidanych."
+	"connected-redirect-category-desc": "Ta kategoria zawiera przekierowania, które są połączone z elementem Wikidanych.",
+	"wikibase-client-data-bridge-dialog-title": "Edytuj właściwość"
 }
