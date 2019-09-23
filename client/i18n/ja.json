@@ -14,12 +14,13 @@
 			"Iwai.masaharu",
 			"Hinaloe",
 			"Afaz",
-			"Yusuke1109"
+			"Yusuke1109",
+			"Omotecho"
 		]
 	},
 	"wikibase-client-desc": "ウィキベース拡張機能のクライアント",
 	"tooltip-t-wikibase": "関連付けられたデータリポジトリ項目へのリンク",
-	"wikibase-after-page-move": "移動されたページにある言語リンクを維持するために、関連付けられた{{WBREPONAME}}項目を[$1 更新]することもできます。",
+	"wikibase-after-page-move": "移動されたページの言語リンクは[$1 {{WBREPONAME}}項目に反映]されました。更新されたかどうか、確認をお願いします。",
 	"wikibase-after-page-move-queued": "このページに関連付けられた[$1 {{WBREPONAME}}項目]は、まもなく自動的に更新されます。これは瞬時には起きない場合があるので、気をつけてください。",
 	"wikibase-after-page-delete": "言語間リンクの整合性を保つため、[$1 関連付けられた{{WBREPONAME}}の項目]からこのページへのリンクが取り除かれます。",
 	"wikibase-after-page-delete-queued": "このページに関連付けられた[$1 {{WBREPONAME}}項目]は、自動的に更新されます。瞬時には更新されないかもしれないので、気をつけてください。",

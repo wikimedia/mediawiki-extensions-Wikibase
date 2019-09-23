@@ -37,7 +37,8 @@
 			"Athena Atterdag",
 			"Diralik",
 			"Saimongoltinio",
-			"Movses"
+			"Movses",
+			"Katunchik"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -395,5 +396,6 @@
 	"wikibase-pageinfo-subscription-none": "Нет",
 	"wikibase-pageinfo-wb-claims": "Количестве утверждений в этом объекте",
 	"wikibase-pageinfo-wb-identifiers": "количестве внешних идентификаторов в этом объекте",
-	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1"
+	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1",
+	"wikibase-tainted-ref-warning-icon-title": "Это утверждение имеет некоторые потенциальные проблемы"
 }

@@ -56,5 +56,6 @@
 	"wikibase-pageinfo-entity-usage-X": "Tutte le date de l'entità",
 	"wikibase-pageinfo-entity-usage-O": "Otre (dichiarazziune)",
 	"wikibase-otherprojects": "Jndr'à otre pruggette",
-	"notification-link-text-view-item": "{{GENDER:$1|'Ndruche}} l'elemende"
+	"notification-link-text-view-item": "{{GENDER:$1|'Ndruche}} l'elemende",
+	"wikibase-client-data-bridge-dialog-title": "Cange 'a probbietà"
 }

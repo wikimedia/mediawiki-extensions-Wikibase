@@ -52,5 +52,6 @@
 	"special-itemdisambiguation": "Disambiguation de elementos",
 	"special-newitem": "Crear un nove objecto",
 	"wikibase-api-no-external-page": "Le sito cliente externe \"$1\" non forniva informationes sur le pagina \"$2\".",
-	"wikibase-restoreold": "restaurar"
+	"wikibase-restoreold": "restaurar",
+	"wikibase-tainted-ref-warning-icon-title": "Iste declaration ha possibile problemas"
 }
