@@ -2,10 +2,10 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var MODULE = wb.store;
+	var EntityStore = require( './store.EntityStore.js' );
 
 	/**
 	 * Passes item to the handlers one after the other until it has a resolution
@@ -32,13 +32,13 @@
 	/**
 	 * Entity store wrapping multiple EntityStore instances.
 	 * @constructor
-	 * @extends wikibase.store.EntityStore
+	 * @extends EntityStore
 	 *
 	 * @param {Object[]} stores
 	 */
-	MODULE.CombiningEntityStore = util.inherit(
+	module.exports = util.inherit(
 		'WbCombiningEntityStore',
-		wb.store.EntityStore,
+		EntityStore,
 		function ( stores ) {
 			this._stores = stores;
 		},
@@ -49,7 +49,7 @@
 			_stores: null,
 
 			/**
-			 * @see wikibase.store.EntityStore.get
+			 * @see EntityStore.get
 			 */
 			get: function ( entityId ) {
 				return asyncFallback( entityId, this._stores.map( function ( store ) {
@@ -59,4 +59,4 @@
 				} ) );
 			}
 		} );
-}( wikibase ) );
+}() );

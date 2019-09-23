@@ -252,36 +252,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.entityIdFormatter' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/entityIdFormatter/namespace.js',
-				'wikibase/entityIdFormatter/EntityIdHtmlFormatter.js',
-				'wikibase/entityIdFormatter/EntityIdPlainFormatter.js',
-				'wikibase/entityIdFormatter/CachingEntityIdHtmlFormatter.js',
-				'wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js',
-				'wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js',
-				'wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js',
-			],
-			'dependencies' => [
-				'wikibase.view.__namespace',
-				'util.inherit',
-			]
-		],
-
-		'wikibase.store.EntityStore' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/store/store.js',
-				'wikibase/store/store.EntityStore.js',
-				'wikibase/store/store.ApiEntityStore.js',
-				'wikibase/store/store.CachingEntityStore.js',
-				'wikibase/store/store.CombiningEntityStore.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase',
-			],
-		],
-
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
@@ -316,13 +286,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase'
-			]
-		],
-
-		'wikibase.view.StructureEditorFactory' => $moduleTemplate + [
-			'scripts' => 'wikibase/view/StructureEditorFactory.js',
-			'dependencies' => [
-				'wikibase.view.__namespace',
 			]
 		],
 

@@ -1,7 +1,9 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	wb.entityIdFormatter.testEntityIdHtmlFormatter = {
+	var EntityIdHtmlFormatter = require( '../../../../resources/wikibase/entityIdFormatter/EntityIdHtmlFormatter.js' );
+
+	module.exports = {
 		all: function ( constructor, getInstance ) {
 			this.constructorTests( constructor, getInstance );
 			this.formatTests( getInstance );
@@ -17,7 +19,7 @@
 				);
 
 				assert.ok(
-					instance instanceof wb.entityIdFormatter.EntityIdHtmlFormatter,
+					instance instanceof EntityIdHtmlFormatter,
 					'Instance of EntityIdHtmlFormatter'
 				);
 			} );
@@ -54,4 +56,4 @@
 			} );
 		}
 	};
-}( wikibase ) );
+}() );

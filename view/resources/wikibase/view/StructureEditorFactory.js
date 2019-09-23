@@ -1,7 +1,5 @@
-( function ( wb ) {
+( function () {
 	'use strict';
-
-	var MODULE = wb.view;
 
 	/**
 	 * A factory for creating structure editors
@@ -11,7 +9,7 @@
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 * @constructor
 	 */
-	var SELF = MODULE.StructureEditorFactory = function StructureEditorFactory( toolbarFactory ) {
+	var SELF = function StructureEditorFactory( toolbarFactory ) {
 		this._toolbarFactory = toolbarFactory;
 	};
 
@@ -39,4 +37,6 @@
 		return this._toolbarFactory.getRemoveToolbar( options, $dom );
 	};
 
-}( wikibase ) );
+	module.exports = SELF;
+
+}() );

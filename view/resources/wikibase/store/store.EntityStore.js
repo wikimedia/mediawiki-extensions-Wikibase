@@ -2,10 +2,8 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
-
-	var MODULE = wb.store;
 
 	/**
 	 * Entity store managing wikibase.datamodel.Entity objects.
@@ -13,7 +11,7 @@
 	 * @constructor
 	 * @abstract
 	 */
-	var SELF = MODULE.EntityStore = function WbEntityStore() {};
+	var SELF = function WbEntityStore() {};
 
 	$.extend( SELF.prototype, {
 		/**
@@ -29,4 +27,6 @@
 
 	} );
 
-}( wikibase ) );
+	module.exports = SELF;
+
+}() );

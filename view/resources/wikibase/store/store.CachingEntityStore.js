@@ -2,22 +2,22 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var MODULE = wb.store;
+	var EntityStore = require( './store.EntityStore.js' );
 
 	/**
 	 * An `EntityStore` decorator, adding a cache.
 	 *
 	 * @constructor
-	 * @extends wikibase.store.EntityStore
+	 * @extends EntityStore
 	 *
-	 * @param {wikibase.store.EntityStore} store
+	 * @param {EntityStore} store
 	 */
-	MODULE.CachingEntityStore = util.inherit(
+	module.exports = util.inherit(
 		'WbCachingEntityStore',
-		wb.store.EntityStore,
+		EntityStore,
 		function ( store ) {
 			this._deferreds = {};
 			this._store = store;
@@ -29,12 +29,12 @@
 			_deferreds: null,
 
 			/**
-			 * @type {wikibase.store.EntityStore}
+			 * @type {EntityStore}
 			 */
 			_store: null,
 
 			/**
-			 * @see wikibase.store.EntityStore.get
+			 * @see EntityStore.get
 			 */
 			get: function ( entityId ) {
 				if ( !Object.prototype.hasOwnProperty.call( this._deferreds, entityId ) ) {
@@ -43,4 +43,4 @@
 				return this._deferreds[ entityId ];
 			}
 		} );
-}( wikibase ) );
+}() );

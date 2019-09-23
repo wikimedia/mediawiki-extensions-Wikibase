@@ -2,23 +2,23 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var MODULE = wb.store;
+	var EntityStore = require( './store.EntityStore.js' );
 
 	/**
 	 * Entity store fetching entities from API.
 	 * @constructor
-	 * @extends wikibase.store.EntityStore
+	 * @extends EntityStore
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
 	 * @param {wikibase.serialization.EntityDeserializer} entityDeserializer
 	 * @param {string[]} languages
 	 */
-	MODULE.ApiEntityStore = util.inherit(
+	module.exports = util.inherit(
 		'WbApiEntityStore',
-		MODULE.EntityStore,
+		EntityStore,
 		function ( repoApi, entityDeserializer, languages ) {
 			this._entityDeserializer = entityDeserializer;
 			this._languages = languages;
@@ -42,7 +42,7 @@
 			_repoApi: null,
 
 			/**
-			 * @see wikibase.store.EntityStore.get
+			 * @see EntityStore.get
 			 */
 			get: function ( entityId ) {
 				var deferred = $.Deferred(),
@@ -67,4 +67,4 @@
 				return deferred.promise();
 			}
 		} );
-}( wikibase ) );
+}() );

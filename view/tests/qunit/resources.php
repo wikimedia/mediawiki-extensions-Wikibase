@@ -75,11 +75,6 @@ return [
 			'wikibase/entityChangers/LabelsChanger.tests.js',
 			'wikibase/entityChangers/SiteLinksChanger.tests.js',
 			'wikibase/entityChangers/SiteLinkSetsChanger.tests.js',
-			'wikibase/entityIdFormatter/testEntityIdHtmlFormatter.js',
-			'wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.tests.js',
-			'wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.tests.js',
-			'wikibase/store/store.CachingEntityStore.tests.js',
-			'wikibase/store/store.CombiningEntityStore.tests.js',
 			'wikibase/utilities/ClaimGuidGenerator.tests.js',
 			'wikibase/utilities/GuidGenerator.tests.js',
 			'wikibase/view/testViewController.js',
@@ -104,14 +99,12 @@ return [
 			'test.sinonjs',
 			'wikibase.datamodel',
 			'wikibase.entityChangers.EntityChangersFactory',
-			'wikibase.entityIdFormatter',
 			'wikibase.experts.modules',
 			'wikibase.getLanguageNameByCode',
 			'wikibase.serialization.SnakDeserializer',
 			'wikibase.serialization.SnakSerializer',
 			'wikibase.serialization.StatementDeserializer',
 			'wikibase.serialization.StatementSerializer',
-			'wikibase.store.EntityStore',
 			'wikibase.templates',
 			'wikibase.tests.qunit.testrunner',
 			'wikibase.tests',
@@ -134,6 +127,41 @@ return [
 			'test.sinonjs',
 			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.ReadModeViewFactory',
+		],
+	],
+	'wikibase.view.tests.CachingEntityStore' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/store/store.CachingEntityStore.tests.js',
+
+			'resources/wikibase/store/store.CachingEntityStore.js',
+			'resources/wikibase/store/store.EntityStore.js',
+		],
+	],
+	'wikibase.view.tests.CombiningEntityStore' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/store/store.CombiningEntityStore.tests.js',
+
+			'resources/wikibase/store/store.CombiningEntityStore.js',
+			'resources/wikibase/store/store.EntityStore.js',
+		],
+	],
+	'wikibase.view.tests.DataValueBasedEntityIdHtmlFormatter' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.tests.js',
+
+			'resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js',
+			'resources/wikibase/entityIdFormatter/EntityIdHtmlFormatter.js',
+			'tests/qunit/wikibase/entityIdFormatter/testEntityIdHtmlFormatter.js',
+		],
+	],
+	'wikibase.view.tests.DataValueBasedEntityIdPlainFormatter' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.tests.js',
+
+			'resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js',
+			'resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js',
+			'resources/wikibase/entityIdFormatter/EntityIdPlainFormatter.js',
+			'resources/wikibase/entityIdFormatter/EntityIdHtmlFormatter.js',
 		],
 	],
 ];

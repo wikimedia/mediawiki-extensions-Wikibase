@@ -1,12 +1,14 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
+	var EntityIdHtmlFormatter = require( './EntityIdHtmlFormatter.js' );
+
 	/**
-	 * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} entityIdFormatter
+	 * @param {EntityIdHtmlFormatter} entityIdFormatter
 	 */
-	wb.entityIdFormatter.CachingEntityIdHtmlFormatter = util.inherit(
+	module.exports = util.inherit(
 		'CachingEntityIdHtmlFormatter',
-		wb.entityIdFormatter.EntityIdHtmlFormatter,
+		EntityIdHtmlFormatter,
 		function ( entityIdFormatter ) {
 			this._entityIdFormatter = entityIdFormatter;
 			this._cache = {};
@@ -25,4 +27,4 @@
 
 		}
 	);
-}( wikibase ) );
+}() );
