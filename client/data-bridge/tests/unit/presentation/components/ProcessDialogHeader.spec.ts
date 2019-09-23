@@ -3,12 +3,16 @@ import { shallowMount } from '@vue/test-utils';
 
 describe( 'ProcessDialogHeader', () => {
 	it( 'is a Vue instance', () => {
-		const wrapper = shallowMount( ProcessDialogHeader );
+		const wrapper = shallowMount( ProcessDialogHeader, {
+			propsData: { title: 'title' },
+		} );
 		expect( wrapper.isVueInstance() ).toBeTruthy();
 	} );
 
 	it( 'renders correctly without slots filled', () => {
-		const wrapper = shallowMount( ProcessDialogHeader );
+		const wrapper = shallowMount( ProcessDialogHeader, {
+			propsData: { title: 'title' },
+		} );
 		expect( wrapper.element ).toMatchSnapshot();
 	} );
 
@@ -26,6 +30,7 @@ describe( 'ProcessDialogHeader', () => {
 	it( 'gets content through the default slot', () => {
 		const message = 'primary action';
 		const wrapper = shallowMount( ProcessDialogHeader, {
+			propsData: { title: 'title' },
 			slots: { default: `<a class="mockPrimaryActionButton">${message}</a>` },
 		} );
 		expect( wrapper.find( 'a' ).text() ).toBe( message );
@@ -34,6 +39,7 @@ describe( 'ProcessDialogHeader', () => {
 	it( 'gets content through the safeAction slot', () => {
 		const message = 'safe action';
 		const wrapper = shallowMount( ProcessDialogHeader, {
+			propsData: { title: 'title' },
 			slots: { safeAction: `<a class="mockSafeActionButton">${message}</a>` },
 		} );
 		expect( wrapper.find( 'a' ).text() ).toBe( message );

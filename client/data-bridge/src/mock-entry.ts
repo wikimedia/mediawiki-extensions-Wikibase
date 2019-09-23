@@ -7,6 +7,7 @@ import ServiceRepositories from '@/services/ServiceRepositories';
 import { launch } from '@/main';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Events from '@/events';
+import MessageKeys from '@/definitions/MessageKeys';
 
 const services = new ServiceRepositories();
 
@@ -53,7 +54,12 @@ services.setEntityLabelRepository( {
 
 services.setMessagesRepository( {
 	get( messageKey: string ): string {
-		return `⧼${messageKey}⧽`;
+		switch ( messageKey ) {
+			case MessageKeys.BRIDGE_DIALOG_TITLE:
+				return 'bridge dev';
+			default:
+				return `⧼${messageKey}⧽`;
+		}
 	},
 } );
 

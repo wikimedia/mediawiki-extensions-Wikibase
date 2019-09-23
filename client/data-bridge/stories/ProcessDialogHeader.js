@@ -5,17 +5,17 @@ import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader';
 storiesOf( 'ProcessDialogHeader', module )
 	.add( 'without buttons', () => ( {
 		components: { ProcessDialogHeader },
-		template: '<ProcessDialogHeader />',
+		template: '<ProcessDialogHeader title="ProcessDialogHeader" />',
 	} ), { info: true } )
 	.add( 'with only mock primary button', () => ( {
 		components: { ProcessDialogHeader },
-		template: `<ProcessDialogHeader>
+		template: `<ProcessDialogHeader title="ProcessDialogHeader">
 <button style="background-color: cyan;">primary action</button>
 </ProcessDialogHeader>`,
 	} ), { info: true } )
 	.add( 'with mock buttons', () => ( {
 		components: { ProcessDialogHeader },
-		template: `<ProcessDialogHeader>
+		template: `<ProcessDialogHeader title="ProcessDialogHeader">
 <button style="background-color: cyan;">primary action</button>
 <template slot="safeAction"><button>safe action</button></template>
 </ProcessDialogHeader>`,

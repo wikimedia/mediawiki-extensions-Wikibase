@@ -22,7 +22,7 @@ import { Prop } from 'vue-property-decorator';
 @Component
 export default class ProcessDialogHeader extends Vue {
 
-	@Prop( { required: false, type: String, default: 'data-bridge' } )
+	@Prop( { required: true, type: String } )
 	public title!: string;
 }
 </script>
