@@ -100,9 +100,27 @@ describe( 'App.vue', () => {
 		} );
 
 		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBeTruthy();
-		expect( messageGet ).toHaveBeenCalledTimes( 1 );
 		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.BRIDGE_DIALOG_TITLE );
 		expect( wrapper.find( ProcessDialogHeader ).props( 'title' ) ).toBe( titleMessage );
+	} );
+
+	it( 'renders the save button using the SAVE_CHANGES message', () => {
+		const saveMessage = 'go go go';
+		const messageGet = jest.fn().mockReturnValue( saveMessage );
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			stubs: { ProcessDialogHeader },
+		} );
+
+		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVE_CHANGES );
+		expect( wrapper.find( EventEmittingButton ).props( 'message' ) ).toBe( saveMessage );
 	} );
 
 	it( 'saves on save button click', async () => {
@@ -137,7 +155,7 @@ describe( 'App.vue', () => {
 			expect( wrapper.find( DataBridge ).exists() ).toBeTruthy();
 		} );
 
-		it( 'mounts ErrorWrapper, if a error occures', () => {
+		it( 'mounts ErrorWrapper, if a error occurs', () => {
 			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 			const wrapper = shallowMount( App, {
 				store,

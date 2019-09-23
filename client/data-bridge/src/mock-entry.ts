@@ -57,6 +57,8 @@ services.setMessagesRepository( {
 		switch ( messageKey ) {
 			case MessageKeys.BRIDGE_DIALOG_TITLE:
 				return 'bridge dev';
+			case MessageKeys.SAVE_CHANGES:
+				return 'save changes';
 			default:
 				return `⧼${messageKey}⧽`;
 		}
