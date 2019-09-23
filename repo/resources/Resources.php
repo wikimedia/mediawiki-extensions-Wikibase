@@ -56,35 +56,14 @@ return call_user_func( function() {
 			},
 		],
 
-		'wikibase.dataTypes.__namespace' => $moduleTemplate + [
-			'scripts' => 'dataTypes/__namespace.js',
-			'dependencies' => [
-				'wikibase'
-			],
-	   ],
-
-		'wikibase.dataTypes.DataType' => $moduleTemplate + [
-			'scripts' => 'dataTypes/DataType.js',
-			'dependencies' => [
-				'wikibase.dataTypes.__namespace',
-			],
-		],
-
-		'wikibase.dataTypes.DataTypeStore' => $moduleTemplate + [
-			'scripts' => 'dataTypes/DataTypeStore.js',
-			'dependencies' => [
-				'wikibase.dataTypes.__namespace',
-				'wikibase.dataTypes.DataType',
-			]
-		],
-
 		'wikibase.dataTypeStore' => $moduleTemplate + [
-			'scripts' => [
+			'packageFiles' => [
 				'dataTypes/wikibase.dataTypeStore.js',
+
+				'dataTypes/DataTypeStore.js',
+				'dataTypes/DataType.js',
 			],
 			'dependencies' => [
-				'wikibase.dataTypes.DataType',
-				'wikibase.dataTypes.DataTypeStore',
 				'mw.config.values.wbDataTypes',
 				'wikibase',
 			],
