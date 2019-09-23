@@ -1,3 +1,4 @@
+const path = require( 'path' );
 const filePrefix = 'tainted-ref.';
 const DEV_MODE = process.env.WEBPACK_TARGET === 'dev';
 
@@ -25,6 +26,11 @@ module.exports = {
 			app: './src/main.ts',
 		},
 		externals: [ vueExternal() ],
+		resolve: {
+			alias: {
+				'@': path.join( __dirname, 'src' ),
+			},
+		},
 	} ),
 	chainWebpack: ( config ) => {
 		config.optimization.delete( 'splitChunks' );
