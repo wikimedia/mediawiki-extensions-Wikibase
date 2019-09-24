@@ -5,6 +5,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
+var StatementListDeserializer = require( '../../src/Deserializers/StatementListDeserializer.js' );
+
 QUnit.module( 'wikibase.serialization.StatementListDeserializer' );
 
 var testSets = [
@@ -30,7 +32,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 2 );
-	var statementListDeserializer = new wb.serialization.StatementListDeserializer();
+	var statementListDeserializer = new StatementListDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

@@ -2,10 +2,11 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	ReferenceDeserializer = require( './ReferenceDeserializer.js' );
 
 /**
- * @class wikibase.serialization.ReferenceListDeserializer
+ * @class ReferenceListDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
  * @license GPL-2.0+
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.ReferenceListDeserializer = util.inherit( 'WbReferenceListDeserializer', PARENT, {
+module.exports = util.inherit( 'WbReferenceListDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -21,7 +22,7 @@ MODULE.ReferenceListDeserializer = util.inherit( 'WbReferenceListDeserializer', 
 	 */
 	deserialize: function( serialization ) {
 		var references = [],
-			referenceDeserializer = new MODULE.ReferenceDeserializer();
+			referenceDeserializer = new ReferenceDeserializer();
 
 		for( var i = 0; i < serialization.length; i++ ) {
 			references.push( referenceDeserializer.deserialize( serialization[i] ) );

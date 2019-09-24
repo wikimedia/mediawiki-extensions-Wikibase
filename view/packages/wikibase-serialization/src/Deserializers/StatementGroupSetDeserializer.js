@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	StatementGroupDeserializer = require( './StatementGroupDeserializer.js' );
 
 /**
  * @class wikibase.serialization.StatementGroupSetDeserializer
@@ -20,7 +21,7 @@ MODULE.StatementGroupSetDeserializer = util.inherit( 'WbStatementGroupSetDeseria
 	 * @return {wikibase.datamodel.StatementGroupSet}
 	 */
 	deserialize: function( serialization ) {
-		var statemenGroupDeserializer = new MODULE.StatementGroupDeserializer(),
+		var statemenGroupDeserializer = new StatementGroupDeserializer(),
 			statementGroups = [];
 
 		for( var propertyId in serialization ) {

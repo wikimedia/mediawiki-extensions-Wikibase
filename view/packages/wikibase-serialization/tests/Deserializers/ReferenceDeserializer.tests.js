@@ -5,6 +5,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
+var ReferenceDeserializer = require( '../../src/Deserializers/ReferenceDeserializer.js' );
+
 QUnit.module( 'wikibase.serialization.ReferenceDeserializer' );
 
 var testSets = [
@@ -54,7 +56,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 2 );
-	var referenceDeserializer = new wb.serialization.ReferenceDeserializer();
+	var referenceDeserializer = new ReferenceDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

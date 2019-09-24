@@ -6,6 +6,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
+var SnakListDeserializer = require( '../../src/Deserializers/SnakListDeserializer.js' );
+
 QUnit.module( 'wikibase.serialization.SnakListDeserializer' );
 
 var testSets = [
@@ -53,7 +55,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 3 );
-	var snakListDeserializer = new wb.serialization.SnakListDeserializer();
+	var snakListDeserializer = new SnakListDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

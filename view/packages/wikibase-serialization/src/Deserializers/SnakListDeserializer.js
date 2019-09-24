@@ -20,7 +20,7 @@ function addSerializedSnaksToSnakList( serializedSnaks, snaks ) {
 }
 
 /**
- * @class wikibase.serialization.SnakListDeserializer
+ * @class SnakListDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
  * @license GPL-2.0+
@@ -28,7 +28,7 @@ function addSerializedSnaksToSnakList( serializedSnaks, snaks ) {
  *
  * @constructor
  */
-MODULE.SnakListDeserializer = util.inherit( 'WbSnakListDeserializer', PARENT, {
+module.exports = util.inherit( 'WbSnakListDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *

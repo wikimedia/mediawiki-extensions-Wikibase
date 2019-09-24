@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	SnakListDeserializer = require( './SnakListDeserializer.js' );
 
 /**
  * @class wikibase.serialization.ReferenceDeserializer
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.ReferenceDeserializer = util.inherit( 'WbReferenceDeserializer', PARENT, {
+module.exports = util.inherit( 'WbReferenceDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -21,7 +22,7 @@ MODULE.ReferenceDeserializer = util.inherit( 'WbReferenceDeserializer', PARENT, 
 	 */
 	deserialize: function( serialization ) {
 		return new wikibase.datamodel.Reference(
-			( new MODULE.SnakListDeserializer() ).deserialize(
+			( new SnakListDeserializer() ).deserialize(
 				serialization.snaks,
 				serialization['snaks-order']
 			),

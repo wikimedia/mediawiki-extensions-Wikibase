@@ -5,7 +5,7 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
- * @class wikibase.serialization.StatementListDeserializer
+ * @class StatementListDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
  * @license GPL-2.0+
@@ -13,7 +13,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.StatementListDeserializer = util.inherit( 'WbStatementListDeserializer', PARENT, {
+module.exports = util.inherit( 'WbStatementListDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
