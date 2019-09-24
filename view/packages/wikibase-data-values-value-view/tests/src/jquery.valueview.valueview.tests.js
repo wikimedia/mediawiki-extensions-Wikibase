@@ -6,6 +6,7 @@
 ( function( $, vv, dv, vf, vp, sinon, QUnit ) {
 	'use strict';
 
+	var ExpertStore = require( './../../src/jquery.valueview.ExpertStore.js' );
 	var $vvElem;
 	var vvInst;
 	var stringValue = new dv.StringValue( 'STRING VALUE' );
@@ -26,7 +27,7 @@
 		withExpert: false,
 		generateDom: function() { return $( '<div/>' ); },
 		vvArgs: {
-			expertStore: new vv.ExpertStore(),
+			expertStore: new ExpertStore(),
 			htmlFormatter: new vf.NullFormatter(),
 			plaintextFormatter: new vf.NullFormatter(),
 			parserStore: new vp.ValueParserStore( vp.NullParser ),
