@@ -3,7 +3,7 @@
 		<ProcessDialogHeader :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
 			<template v-slot:primaryAction>
 				<EventEmittingButton
-					:message="$messages.get( $messages.KEYS.SAVE_CHANGES )"
+					:message="$messages.get( publishOrSave )"
 					type="primaryProgressive"
 					:squary="true"
 					@click="saveAndClose"
@@ -53,6 +53,11 @@ export default class App extends Vue {
 
 	public get hasError() {
 		return this.applicationStatus === ApplicationStatus.ERROR;
+	}
+
+	public get publishOrSave() {
+		return this.$bridgeConfig.usePublish ?
+			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}
 
 	@Action( BRIDGE_SAVE )
