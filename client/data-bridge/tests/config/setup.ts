@@ -21,3 +21,7 @@ config.mocks!.$messages = {
 	KEYS: MessageKeys,
 	get: ( key: string ) => `<${key}>`,
 };
+
+config.mocks!.$bridgeConfig = {
+	usePublish: false,
+};
