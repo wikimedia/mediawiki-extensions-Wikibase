@@ -5,6 +5,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
+var ClaimDeserializer = require( '../../src/Deserializers/ClaimDeserializer.js' );
+
 QUnit.module( 'wikibase.serialization.ClaimDeserializer' );
 
 var testSets = [
@@ -44,7 +46,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 2 );
-	var claimDeserializer = new wb.serialization.ClaimDeserializer();
+	var claimDeserializer = new ClaimDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

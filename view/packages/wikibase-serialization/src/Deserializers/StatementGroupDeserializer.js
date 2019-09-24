@@ -2,10 +2,11 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	StatementListDeserializer = require( './StatementListDeserializer.js' );
 
 /**
- * @class wikibase.serialization.StatementGroupDeserializer
+ * @class StatementGroupDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
  * @license GPL-2.0+
@@ -13,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.StatementGroupDeserializer = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
+module.exports = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -26,7 +27,7 @@ MODULE.StatementGroupDeserializer = util.inherit( 'WbStatementGroupDeserializer'
 			throw new Error( 'Cannot deserialize empty serialization' );
 		}
 
-		var statementListDeserializer = new MODULE.StatementListDeserializer(),
+		var statementListDeserializer = new StatementListDeserializer(),
 			statementList = statementListDeserializer.deserialize( serialization );
 
 		return new wb.datamodel.StatementGroup( statementList.getPropertyIds()[0], statementList );

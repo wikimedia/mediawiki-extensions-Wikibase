@@ -2,10 +2,11 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	SnakListDeserializer = require( './SnakListDeserializer.js' );
 
 /**
- * @class wikibase.serialization.ClaimDeserializer
+ * @class ClaimDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
  * @license GPL-2.0+
@@ -14,7 +15,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.ClaimDeserializer = util.inherit( 'WbClaimDeserializer', PARENT, {
+module.exports = util.inherit( 'WbClaimDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -26,7 +27,7 @@ MODULE.ClaimDeserializer = util.inherit( 'WbClaimDeserializer', PARENT, {
 			guid = serialization.id || null;
 
 		if( serialization.qualifiers !== undefined ) {
-			qualifiers = ( new MODULE.SnakListDeserializer() ).deserialize(
+			qualifiers = ( new SnakListDeserializer() ).deserialize(
 				serialization.qualifiers,
 				serialization['qualifiers-order']
 			);
