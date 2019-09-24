@@ -8,6 +8,7 @@ import WbRepo from '@/@types/wikibase/WbRepo';
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
 	editTags?: string[];
+	usePublish?: boolean;
 	wbRepo?: WbRepo;
 	wgPageContentLanguage?: string;
 } = {} ): MwConfig {
@@ -21,6 +22,7 @@ export function mockMwConfig( values: {
 					return {
 						hrefRegExp: values.hrefRegExp,
 						editTags: values.editTags || [],
+						usePublish: values.usePublish || false,
 					};
 				case 'wbRepo':
 					return values.wbRepo || {

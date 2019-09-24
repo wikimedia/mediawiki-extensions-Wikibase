@@ -103,7 +103,7 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
@@ -127,9 +127,8 @@ describe( 'createServices', () => {
 			const mwWindow = mockMwWindow( {
 				wbRepo,
 				wgUserName,
-				editTags,
 			} );
-			const services = createServices( mwWindow );
+			const services = createServices( mwWindow, editTags );
 
 			expect( mwWindow.mw.ForeignApi )
 				.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
@@ -153,9 +152,8 @@ describe( 'createServices', () => {
 			const mwWindow = mockMwWindow( {
 				wbRepo,
 				wgUserName,
-				editTags,
 			} );
-			const services = createServices( mwWindow );
+			const services = createServices( mwWindow, editTags );
 
 			expect( services ).toBeInstanceOf( ServiceRepositories );
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
@@ -178,7 +176,7 @@ describe( 'createServices', () => {
 			mwLanguage,
 		} );
 
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledTimes( 1 );
@@ -193,7 +191,7 @@ describe( 'createServices', () => {
 			wgPageContentLanguage,
 		} );
 
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect(
@@ -209,7 +207,7 @@ describe( 'createServices', () => {
 		const message = jest.fn();
 		const mwWindow = mockMwWindow( { message } );
 
-		const services = createServices( mwWindow );
+		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
 		expect( MwMessagesRepository ).toHaveBeenCalledTimes( 1 );

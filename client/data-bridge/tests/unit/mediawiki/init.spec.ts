@@ -55,8 +55,13 @@ describe( 'init', () => {
 			using = jest.fn( () => Promise.resolve( require ) ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
-			editFlow = EditFlow.OVERWRITE;
-		mockMwEnv( using );
+			editFlow = EditFlow.OVERWRITE,
+			dataBridgeConfig = {
+				hrefRegExp: '',
+				editTags: [],
+				usePublish: false,
+			};
+		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
 
 		const selectedElement = {
 			link: {
@@ -78,7 +83,7 @@ describe( 'init', () => {
 			selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
 			expect( event.preventDefault ).toHaveBeenCalled();
 			expect( event.stopPropagation ).toHaveBeenCalled();
-			expect( Dispatcher ).toHaveBeenCalledWith( window, app );
+			expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig );
 			expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		} );
 	} );

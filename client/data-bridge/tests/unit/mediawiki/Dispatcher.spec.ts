@@ -2,6 +2,7 @@ import Dispatcher from '@/mediawiki/Dispatcher';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import AppBridge from '@/definitions/AppBridge';
 import EditFlow from '@/definitions/EditFlow';
+import DataBridgeConfig from '@/@types/wikibase/DataBridgeConfig';
 
 const manager = jest.fn();
 const dialog = {
@@ -32,6 +33,7 @@ describe( 'Dispatcher', () => {
 		const dispatcher = new Dispatcher(
 			{} as MwWindow,
 			{} as AppBridge,
+			{} as DataBridgeConfig,
 		);
 		expect( dispatcher ).toBeInstanceOf( Dispatcher );
 	} );
@@ -40,6 +42,7 @@ describe( 'Dispatcher', () => {
 		it( 'prepares the DOM container', () => {
 			const OO = new ( jest.fn() )();
 			const $ = new ( jest.fn() )();
+
 			const dispatcher = new Dispatcher(
 				{
 					OO,
@@ -48,6 +51,7 @@ describe( 'Dispatcher', () => {
 				{
 					launch: jest.fn(),
 				},
+				{ usePublish: false } as DataBridgeConfig,
 			);
 
 			dispatcher.dispatch( new ( jest.fn() )() );
@@ -59,6 +63,7 @@ describe( 'Dispatcher', () => {
 		} );
 
 		it( 'triggers service creation and launches app', () => {
+			const usePublish = true;
 			const mwWindow = new ( jest.fn() )();
 			const emitter = jest.fn();
 			const app = {
@@ -74,8 +79,9 @@ describe( 'Dispatcher', () => {
 			mockCreateServices.mockImplementation( () => mockServices );
 
 			const dispatcher = new Dispatcher(
-				mwWindow,
+				mwWindow as MwWindow,
 				app as any,
+				{ usePublish } as DataBridgeConfig,
 			);
 
 			dispatcher.dispatch( {
@@ -89,6 +95,7 @@ describe( 'Dispatcher', () => {
 			expect( app.launch ).toHaveBeenCalledWith(
 				{
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
+					usePublish,
 				},
 				{
 					entityId,

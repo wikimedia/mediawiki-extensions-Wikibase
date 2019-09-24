@@ -66,6 +66,7 @@ describe( 'launch', () => {
 		const information = {};
 		const configuration = {
 			containerSelector: '',
+			usePublish: false,
 		};
 
 		launch( configuration, information as any, services as any );
@@ -85,6 +86,7 @@ describe( 'launch', () => {
 		const information = {};
 		const configuration = {
 			containerSelector: '',
+			usePublish: false,
 		};
 
 		const emitter = launch( configuration, information as any, services as any );
