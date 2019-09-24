@@ -108,6 +108,10 @@ div.wikibase-snakview {
     padding: 10px 5px 5px 10px
 }
 
+.look-away-while-i-staticly-position-this {
+    padding: 10px 5px 5px 10px
+}
+
 .wikibase-statementview-qualifiers {
     padding-left: 17em
 }
@@ -194,4 +198,9 @@ div.wikibase-snakview {
 .wikibase-statementgroupview .wikibase-statementgroupview-property {
     border: 1px solid #c8ccd1;
     border-right: 0
+}
+
+.wb-tr-app {
+    display: inline-block;
+    padding-left: 4px;
 }
