@@ -11,6 +11,13 @@ class DataBridgePage extends Page {
 		return '#data-bridge-app';
 	}
 
+	static get HEADER_ELEMENTS() {
+		const headerClass = '.wb-ui-processdialog-header';
+		return {
+			SAVE: `${headerClass} .wb-ui-event-emitting-button--primaryProgressive`,
+		};
+	}
+
 	static get ROOT_SWITCH() {
 		return {
 			INIT: '.wb-db-init',
@@ -46,6 +53,12 @@ class DataBridgePage extends Page {
 
 	get app() {
 		return $( '#data-bridge-app' );
+	}
+
+	get saveButton() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.SAVE}`
+		);
 	}
 
 	get int() {
