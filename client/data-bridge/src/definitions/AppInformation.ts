@@ -1,10 +1,11 @@
 import EditFlow from '@/definitions/EditFlow';
+import EntityId from '@/datamodel/EntityId';
 
 export default interface AppInformation {
 	/** The entity ID to edit. */
-	entityId: string;
+	entityId: EntityId;
 	/** The property ID of the statement(s) to edit. */
-	propertyId: string;
+	propertyId: EntityId;
 	/** The edit flow to use for editing. */
 	editFlow: EditFlow;
 }

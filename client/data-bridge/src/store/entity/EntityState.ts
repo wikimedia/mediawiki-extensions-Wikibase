@@ -1,8 +1,9 @@
+import EntityId from '@/datamodel/EntityId';
 import StatementState from '@/store/entity/statements/StatementsState';
 import { NS_STATEMENTS } from '@//store/namespaces';
 
 export default interface EntityState {
-	id: string;
+	id: EntityId;
 	baseRevision: number;
 }
 
