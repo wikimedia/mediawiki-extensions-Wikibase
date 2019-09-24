@@ -22,6 +22,7 @@
     "@wmde/vuex-helpers": "^0.1.1",
     "core-js": "^2.6.5",
     "events": "^3.0.0",
+    "uuid": "^3.3.3",
     "vue": "^2.6.10",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0"
