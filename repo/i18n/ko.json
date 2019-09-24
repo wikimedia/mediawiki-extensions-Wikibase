@@ -388,5 +388,6 @@
 	"wikibase-search-bad-profile-name": "잘못된 검색 프로파일 이름: $1",
 	"wikibase-search-config-notfound": "전문 검색 구성을 찾을 수 없습니다: $1",
 	"wikibase-search-config-badclass": "잘못된 쿼리 빌더 클래스: $1",
-	"wikibase-entity-save-error-heading": "무언가가 잘못되었습니다"
+	"wikibase-entity-save-error-heading": "무언가가 잘못되었습니다",
+	"wikibase-tainted-ref-warning-icon-title": "이 문에는 잠재적인 문제가 있습니다"
 }

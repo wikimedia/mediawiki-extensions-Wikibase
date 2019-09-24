@@ -60,5 +60,6 @@
 	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem.",
 	"notification-header-page-connection": "Lapa <strong>$3</strong> tika {{GENDER:$2|pievienota}} {{PLURAL:$4|-1=repozitorija \"{{WBREPONAME}}\" ierakstam|repozitorija \"{{WBREPONAME}}\" ierakstam $4}}, kur var apkopot ar tematu saistītos datus.",
 	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu",
-	"connected-redirect-category-desc": "Pieprasītie konti"
+	"connected-redirect-category-desc": "Pieprasītie konti",
+	"wikibase-client-data-bridge-dialog-title": "Labot īpašību"
 }

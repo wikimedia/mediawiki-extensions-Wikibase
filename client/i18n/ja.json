@@ -51,7 +51,7 @@
 	"wikibase-linkitem-confirmitem-button": "確認",
 	"wikibase-linkitem-not-loggedin-title": "ログインする必要があります",
 	"wikibase-linkitem-not-loggedin": "この機能を使用するには、このウィキおよび[$1 中央データリポジトリ]の両方にログインする必要があります。",
-	"wikibase-linkitem-success-link": "ページのリンクに成功しました。リンクを含んだ項目は[$1 中央データリポジトリ]にあります。",
+	"wikibase-linkitem-success-link": "ページのリンクを作成しました。リンクを含んだ項目は[$1 中央データリポジトリ]にあります。",
 	"wikibase-property-notfound": "プロパティ $1 が見つかりません。",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}を$1",
 	"wikibase-rc-hide-wikidata-hide": "非表示",

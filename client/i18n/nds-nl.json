@@ -32,7 +32,7 @@
 	"wikibase-property-notfound": "Eigenschap $1 niet evunnen.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Verbarg",
-	"wikibase-rc-hide-wikidata-show": "Bekiek",
+	"wikibase-rc-hide-wikidata-show": "Bekyk",
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}-bewarkingen laoten zien in \"Leste wiezigingen\"",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-bewarking",

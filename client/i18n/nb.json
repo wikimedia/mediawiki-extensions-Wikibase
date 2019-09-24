@@ -105,11 +105,12 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tilkobling|Tilkoblinger}} til {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Gi meg et varsel når noen kobler en side {{GENDER:|jeg}} opprettet til et {{WBREPONAME}}-element.",
 	"notification-header-page-connection": "Siden <strong>$3</strong> ble {{GENDER:$2|koblet}} til {{PLURAL:$4|-1=et {{WBREPONAME}}-element|{{WBREPONAME}}-elementet $4}}, der relevant data om emnet kan samles.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|én annen side|$4 andre sider|100=99+ andre sider}} ble {{GENDER:$2|koblet}} til {{WBREPONAME}}-elementer.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|én annen side|$4 andre sider|100=99+ andre sider}} ble {{GENDER:$2|koblet}} til {{WBREPONAME}}-elementer, der relevante data kan hentes.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vis}} element",
 	"notification-subject-page-connection": "En side på {{SITENAME}} som du {{GENDER:$3|opprettet}} ble {{GENDER:$2|koblet}} til et {{WBREPONAME}}-element",
 	"unresolved-property-category": "Sider med uløste egenskaper",
 	"unresolved-property-category-desc": "Denne kategorien lister opp sider som refererer til {{WBREPONAME}}-egenskaper som ikke kan finnes med egenskaps-ID eller etikett.",
 	"connected-redirect-category": "Omdirigeringer knyttet til et {{WBREPONAME}}-objekt",
-	"connected-redirect-category-desc": "Denne kategorien lister opp omdirigeringssider som er koblet til et {{WBREPONAME}}-element."
+	"connected-redirect-category-desc": "Denne kategorien lister opp omdirigeringssider som er koblet til et {{WBREPONAME}}-element.",
+	"wikibase-client-data-bridge-dialog-title": "Rediger egenskap"
 }

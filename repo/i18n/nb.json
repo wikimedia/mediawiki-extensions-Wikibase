@@ -419,5 +419,9 @@
 	"wikibase-search-config-notfound": "Konfigurasjon for fulltekstsøk ikke funnet: $1",
 	"wikibase-search-config-badclass": "Ugyldig spørringsbyggerklasse: $1",
 	"wikibase-refresh-for-missing-datatype": "Datatypen $1 ble ikke funnet i det lokale klientskriptet. Dette kan være på grunn av et utdatert, mellomlagret skript. Prøv å gjøre en hard oppdatering av nettleseren (Ctrl+Shift+R eller Cmd+Shift+R i de fleste nettlesere) for å løse dette problemet.",
-	"wikibase-outdated-client-script": "Ups, på tide med en hard oppdatering!"
+	"wikibase-outdated-client-script": "Ups, på tide med en hard oppdatering!",
+	"wikibase-shortcopyrightwarning-heading": "Lisensattribusjon",
+	"wikibase-entity-save-error-heading": "Noe gikk galt",
+	"wikibase-entity-save-error-message": "Endringen din kunne ikke lagres. Du kan prøve å trykke på publiseringsknappen igjen.",
+	"wikibase-tainted-ref-warning-icon-title": "Denne påstanden har mulige problemer"
 }
