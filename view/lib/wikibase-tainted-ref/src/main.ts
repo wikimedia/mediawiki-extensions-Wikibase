@@ -1,2 +1,5 @@
-// eslint-disable-next-line no-console
-console.log( 'tainted ref main.ts loaded' );
+import App from '@/presentation/App.vue';
+
+export function launch(): void {
+	new App().$mount( '.wikibase-tainted-references-container' );
+}
