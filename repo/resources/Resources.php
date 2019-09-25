@@ -28,13 +28,6 @@ return call_user_func( function() {
 			'datatypesconfigvarname' => 'wbDataTypes',
 		],
 
-		'mw.config.values.wbEntityTypes' => $moduleTemplate + [
-			'class' => MediaWikiConfigModule::class,
-			'getconfigvalueprovider' => function() {
-				return WikibaseRepo::getDefaultInstance()->getEntityTypesConfigValueProvider();
-			}
-		],
-
 		// Temporary, see: T199197
 		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
@@ -58,8 +51,18 @@ return call_user_func( function() {
 		],
 
 		'wikibase.EntityInitializer' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.EntityInitializer.js'
+			'packageFiles' => [
+				'wikibase.EntityInitializer.js',
+
+				[
+				"name" => "config.json",
+				"callback" => function () {
+					return [
+						'entityTypes' => WikibaseRepo::getDefaultInstance()->getEntityTypesConfigValue()
+					];
+				}
+			],
+
 			],
 			'dependencies' => [
 				'wikibase',
@@ -118,7 +121,6 @@ return call_user_func( function() {
 				'mediawiki.page.watch.ajax',
 				'mediawiki.Uri',
 				'mediawiki.user',
-				'mw.config.values.wbEntityTypes',
 				'mw.config.values.wbRepo',
 				'mw.config.values.wbDataTypes',
 				'jquery.wikibase.wbtooltip',

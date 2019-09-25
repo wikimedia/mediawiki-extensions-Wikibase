@@ -7,6 +7,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var config = require( './config.json' );
+
 	/**
 	 * Entity initializer.
 	 * Deserializes the entity passed to JavaScript via mw.config variable or
@@ -78,7 +80,7 @@
 			var entityDeserializer = new wb.serialization.EntityDeserializer(),
 				deferred = $.Deferred();
 
-			var entityTypes = mw.config.get( 'wbEntityTypes' );
+			var entityTypes = config.entityTypes;
 			var modules = [];
 			var typeNames = [];
 			entityTypes.types.forEach( function ( type ) {

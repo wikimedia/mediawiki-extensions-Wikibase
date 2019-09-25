@@ -121,7 +121,6 @@ use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Formatters\MediaWikiNumberLocalizer;
-use Wikibase\Lib\Modules\EntityTypesConfigValueProvider;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
@@ -2296,8 +2295,12 @@ class WikibaseRepo {
 		return $this->cachingCommonsMediaFileNameLookup;
 	}
 
-	public function getEntityTypesConfigValueProvider() {
-		return new EntityTypesConfigValueProvider( $this->entityTypeDefinitions );
+	public function getEntityTypesConfigValue() {
+		return [
+			'types' => $this->entityTypeDefinitions->getEntityTypes(),
+			'deserializer-factory-functions'
+				=> $this->entityTypeDefinitions->getJsDeserializerFactoryFunctions()
+		];
 	}
 
 	public function getSettingsValueProvider( $jsSetting, $phpSetting ) {

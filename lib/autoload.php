@@ -34,7 +34,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\MediaWikiContentLanguages' => __DIR__ . '/includes/MediaWikiContentLanguages.php',
 	'Wikibase\\Lib\\MessageException' => __DIR__ . '/includes/MessageException.php',
 	'Wikibase\\Lib\\Modules\\DataTypesModule' => __DIR__ . '/includes/Modules/DataTypesModule.php',
-	'Wikibase\\Lib\\Modules\\EntityTypesConfigValueProvider' => __DIR__ . '/includes/Modules/EntityTypesConfigValueProvider.php',
 	'Wikibase\\Lib\\Modules\\MediaWikiConfigModule' => __DIR__ . '/includes/Modules/MediaWikiConfigModule.php',
 	'Wikibase\\Lib\\Modules\\MediaWikiConfigValueProvider' => __DIR__ . '/includes/Modules/MediaWikiConfigValueProvider.php',
 	'Wikibase\\Lib\\Modules\\PropertyValueExpertsModule' => __DIR__ . '/includes/Modules/PropertyValueExpertsModule.php',
