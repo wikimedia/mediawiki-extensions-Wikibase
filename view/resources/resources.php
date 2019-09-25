@@ -62,13 +62,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'jquery.wikibase.statementview.RankSelector.styles' => $moduleTemplate + [
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
@@ -103,10 +96,8 @@ return call_user_func( function() {
 
 		'wikibase.mobile' => $moduleTemplate + [
 			'styles' => [
-				'wikibase/wikibase.mobile.css'
-			],
-			'dependencies' => [
-				'jquery.wikibase.statementview.RankSelector.styles',
+				'wikibase/wikibase.mobile.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 			],
 			'targets' => 'mobile'
 		],
@@ -312,6 +303,7 @@ return call_user_func( function() {
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css',
 				'jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 			],
 			'dependencies' => [
 				'dataValues',
@@ -332,7 +324,6 @@ return call_user_func( function() {
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.siteselector',
-				'jquery.wikibase.statementview.RankSelector.styles',
 				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
