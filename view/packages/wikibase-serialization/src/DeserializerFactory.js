@@ -9,7 +9,6 @@ var MODULE = wb.serialization,
 	SiteLinkSetDeserializer = require( './Deserializers/SiteLinkSetDeserializer.js' ),
 	ReferenceListDeserializer = require( './Deserializers/ReferenceListDeserializer.js' ),
 	ReferenceDeserializer = require( './Deserializers/ReferenceDeserializer.js' ),
-	StatementListDeserializer = require( './Deserializers/StatementListDeserializer.js' ),
 	StatementGroupDeserializer = require( './Deserializers/StatementGroupDeserializer.js' ),
 	ClaimDeserializer = require( './Deserializers/ClaimDeserializer.js' ),
 	SnakListDeserializer = require( './Deserializers/SnakListDeserializer.js' );
@@ -40,7 +39,7 @@ var SELF = MODULE.DeserializerFactory = function WbSerializationDeserializerFact
 	this.registerDeserializer( MODULE.StatementDeserializer, wb.datamodel.Statement );
 	this.registerDeserializer( StatementGroupDeserializer, wb.datamodel.StatementGroup );
 	this.registerDeserializer( MODULE.StatementGroupSetDeserializer, wb.datamodel.StatementGroupSet );
-	this.registerDeserializer( StatementListDeserializer, wb.datamodel.StatementList );
+	this.registerDeserializer( MODULE.StatementListDeserializer, wb.datamodel.StatementList );
 	this.registerDeserializer( MODULE.TermDeserializer, wb.datamodel.Term );
 	this.registerDeserializer( MODULE.TermMapDeserializer, wb.datamodel.TermMap );
 };

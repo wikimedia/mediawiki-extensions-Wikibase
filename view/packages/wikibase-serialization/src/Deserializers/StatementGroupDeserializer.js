@@ -2,8 +2,7 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
-	StatementListDeserializer = require( './StatementListDeserializer.js' );
+	PARENT = MODULE.Deserializer;
 
 /**
  * @class StatementGroupDeserializer
@@ -27,7 +26,7 @@ module.exports = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
 			throw new Error( 'Cannot deserialize empty serialization' );
 		}
 
-		var statementListDeserializer = new StatementListDeserializer(),
+		var statementListDeserializer = new MODULE.StatementListDeserializer(),
 			statementList = statementListDeserializer.deserialize( serialization );
 
 		return new wb.datamodel.StatementGroup( statementList.getPropertyIds()[0], statementList );
