@@ -44,7 +44,7 @@ describe( 'init', () => {
 			using = jest.fn( () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} ),
-			ForeignApiConstructor = mockForeignApiConstructor( 'http://localhost/w/api.php' ),
+			ForeignApiConstructor = mockForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
 			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' ),
 			editTags = [ 'a tag' ];
 		mockMwEnv(
