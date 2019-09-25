@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseUsageCheckingTermStoreCleaner;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner
@@ -32,7 +32,7 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 	}
 
 	private function getCleaner(): DatabaseUsageCheckingTermStoreCleaner {
-		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
+		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
 		return new DatabaseUsageCheckingTermStoreCleaner( $loadBalancer, $this->innerCleaner );
 	}
 

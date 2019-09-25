@@ -10,8 +10,8 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
@@ -44,7 +44,7 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	 * @return BulkSubscriptionUpdater
 	 */
 	private function getBulkSubscriptionUpdater( $batchSize = 10 ) {
-		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
+		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
 
 		return new BulkSubscriptionUpdater(
 			new FakeLBFactory( [ 'lb' => $loadBalancer ] ),

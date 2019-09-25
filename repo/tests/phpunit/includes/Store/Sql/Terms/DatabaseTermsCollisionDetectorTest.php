@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\Terms\DatabaseTermsCollisionDetector
@@ -136,7 +136,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	private function makeTestSubject( $entityType ) {
 		return new DatabaseTermsCollisionDetector(
 			$entityType,
-			new FakeLoadBalancer( [ 'dbr' => $this->db ] ),
+			LoadBalancerSingle::newFromConnection( $this->db ),
 			$this->typeIdsLookup
 		);
 	}

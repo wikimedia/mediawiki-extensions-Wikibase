@@ -10,6 +10,7 @@ use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer
@@ -32,9 +33,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 	protected function setUp(): void {
 		$this->db = $this->setUpNewDb();
-		$loadBalancer = new FakeLoadBalancer( [
-			'dbr' => $this->db
-		] );
+		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
 		$this->lbFactory = new FakeLBFactory( [
 			'lb' => $loadBalancer
 		] );

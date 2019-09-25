@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver
@@ -69,9 +69,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 		$terms = $resolver->resolveTermInLangIds( [ $termInLang1Id, $termInLang2Id, $termInLang3Id ] );
 
@@ -190,9 +188,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 		$terms = $resolver->resolveTermInLangIds(
 			$termInLangIds,
@@ -207,7 +203,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 
 		$this->assertSame( [], $resolver->resolveTermInLangIds( [] ) );
@@ -239,9 +235,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
@@ -267,7 +261,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 
 		$this->assertSame( [], $resolver->resolveGroupedTermInLangIds( [] ) );
@@ -277,7 +271,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 
 		$this->assertSame(
@@ -312,9 +306,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
@@ -364,9 +356,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],
@@ -445,9 +435,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 
 		$termIds = $resolver->resolveTermsViaJoin(
@@ -500,9 +488,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
-			new FakeLoadBalancer( [
-				'dbr' => $this->db,
-			] )
+			LoadBalancerSingle::newFromConnection( $this->db )
 		);
 		$terms = $resolver->resolveGroupedTermInLangIds(
 			[

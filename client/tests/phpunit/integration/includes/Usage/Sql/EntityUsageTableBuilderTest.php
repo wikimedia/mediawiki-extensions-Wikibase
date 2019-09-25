@@ -10,7 +10,7 @@ use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
+use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\EntityUsageTableBuilder
@@ -44,7 +44,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$primer = new EntityUsageTableBuilder(
 			new ItemIdParser(),
-			new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] ),
+			new FakeLBFactory( [ 'lb' => LoadBalancerSingle::newFromConnection( $this->db ) ] ),
 			2
 		);
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );
