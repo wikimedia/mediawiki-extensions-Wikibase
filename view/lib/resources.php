@@ -662,21 +662,6 @@ return call_user_func( function() {
 				'targets' => [ 'desktop', 'mobile' ],
 			],
 
-		'wikibase.serialization.ClaimDeserializer' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'Deserializers/ClaimDeserializer.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-					'wikibase.datamodel.Claim',
-					'wikibase.serialization.__namespace',
-					'wikibase.serialization.Deserializer',
-					'wikibase.serialization.SnakListDeserializer',
-					'wikibase.serialization.SnakDeserializer',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
-			],
-
 		'wikibase.serialization.Deserializer' => $wikibaseSerializationPaths + [
 				'scripts' => [
 					'Deserializers/Deserializer.js',
@@ -717,48 +702,6 @@ return call_user_func( function() {
 				],
 			],
 
-		'wikibase.serialization.ReferenceListDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/ReferenceListDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.ReferenceList',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.ReferenceDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.ReferenceDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/ReferenceDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.Reference',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.SnakListDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.SnakListDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/SnakListDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.SnakList',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.SnakDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 		'wikibase.serialization.SnakDeserializer' => $wikibaseSerializationPaths + [
 			'scripts' => [
 				'Deserializers/SnakDeserializer.js',
@@ -777,29 +720,18 @@ return call_user_func( function() {
 		],
 
 		'wikibase.serialization.StatementGroupSetDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'Deserializers/StatementGroupSetDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.StatementGroupSet',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.StatementGroupDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
 
-		'wikibase.serialization.StatementGroupDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
 				'Deserializers/StatementGroupDeserializer.js',
 			],
 			'dependencies' => [
 				'util.inherit',
+				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementGroup',
+				'wikibase.serialization.StatementListDeserializer',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.StatementListDeserializer',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
@@ -819,16 +751,24 @@ return call_user_func( function() {
 		],
 
 		'wikibase.serialization.StatementDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'Deserializers/StatementDeserializer.js',
+
+				'Deserializers/ClaimDeserializer.js',
+				'Deserializers/ReferenceListDeserializer.js',
+				'Deserializers/ReferenceDeserializer.js',
+				'Deserializers/SnakListDeserializer.js',
 			],
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.Reference',
+				'wikibase.datamodel.SnakList',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ClaimDeserializer',
 				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.ReferenceListDeserializer',
+				'wikibase.serialization.SnakDeserializer',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
