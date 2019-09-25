@@ -7,7 +7,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 /**
  * Interface for EntityDocument objects that are also StatementListProviders
  *
- * @since 7.6
+ * @since 8.0
  *
  * @license GPL-2.0-or-later
  */
