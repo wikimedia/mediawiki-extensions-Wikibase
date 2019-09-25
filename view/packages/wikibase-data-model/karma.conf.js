@@ -35,6 +35,13 @@ module.exports = function ( config ) {
 		],
 		port: 9876,
 
+		preprocessors: {
+			'src/**/*.js': [ 'webpack' ],
+			'tests/**/*.tests.js': [ 'webpack' ]
+		},
+
+		webpack: { mode: 'development' },
+
 		// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
 		logLevel: config.LOG_INFO,
 		browsers: [ 'PhantomJS' ]
