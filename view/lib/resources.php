@@ -451,6 +451,12 @@ return call_user_func( function() {
 			],
 		],
 
+		'jquery.focusAt' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery/jquery.focusAt.js',
+			],
+		],
+
 		'jquery.inputautoexpand' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'jquery/jquery.inputautoexpand.js',
@@ -463,6 +469,38 @@ return call_user_func( function() {
 		'jquery.PurposedCallbacks' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'jquery/jquery.PurposedCallbacks.js',
+			],
+		],
+
+		'jquery.ui.inputextender' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.inputextender.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.inputextender.css',
+			],
+			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.event.special.eachchange',
+				'jquery.ui.position',
+				'jquery.ui.widget',
+			],
+		],
+
+		'jquery.ui.listrotator' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.listrotator.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.listrotator.css',
+			],
+			'dependencies' => [
+				'jquery.ui.autocomplete', // needs jquery.ui.menu
+				'jquery.ui.widget',
+				'jquery.ui.position',
+			],
+			'messages' => [
+				'valueview-listrotator-manually',
 			],
 		],
 
@@ -548,6 +586,20 @@ return call_user_func( function() {
 		'util.CombiningMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'util/util.CombiningMessageProvider.js',
+			],
+		],
+
+		'jquery.ui.preview' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.preview.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.preview.css',
+			],
+			'dependencies' => [
+				'jquery.ui.widget',
+				'util.CombiningMessageProvider',
+				'util.HashMessageProvider'
 			],
 		],
 
@@ -1069,47 +1121,36 @@ return call_user_func( function() {
 		'jquery.valueview.experts.MonolingualText' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/MonolingualText.js',
-				'ExpertExtender/ExpertExtender.LanguageSelector.js',
 			],
 			'dependencies' => [
 				'jquery.valueview.Expert',
 				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.ExpertExtender.LanguageSelector',
 				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
-				'jquery.event.special.eachchange',
-				'jquery.ui.languagesuggester',
-				'util.PrefixingMessageProvider',
-			],
-			'messages' => [
-				'valueview-expertextender-languageselector-languagetemplate',
-				'valueview-expertextender-languageselector-label',
 			],
 		],
 
 		'jquery.valueview.experts.QuantityInput' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/QuantityInput.js',
-				'ExpertExtender/ExpertExtender.UnitSelector.js',
 			],
 			'dependencies' => [
 				'jquery.valueview.Expert',
 				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.ExpertExtender.UnitSelector',
 				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
-				'jquery.ui.unitsuggester',
-			],
-			'messages' => [
-				'valueview-expertextender-unitsuggester-label',
 			],
 		],
 
 		'jquery.valueview.experts.StringValue' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/StringValue.js',
-				'../lib/jquery/jquery.focusAt.js',
 			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
+				'jquery.focusAt',
 				'jquery.inputautoexpand',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
@@ -1171,16 +1212,9 @@ return call_user_func( function() {
 		'jquery.valueview.ExpertExtender' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'ExpertExtender/ExpertExtender.js',
-				'../lib/jquery.ui/jquery.ui.inputextender.js',
-			],
-			'styles' => [
-				'../lib/jquery.ui/jquery.ui.inputextender.css',
 			],
 			'dependencies' => [
-				'jquery.animateWithEvent',
-				'jquery.event.special.eachchange',
-				'jquery.ui.position',
-				'jquery.ui.widget',
+				'jquery.ui.inputextender',
 				'jquery.valueview',
 				'util.Extendable',
 			],
@@ -1195,44 +1229,60 @@ return call_user_func( function() {
 			],
 		],
 
+		'jquery.valueview.ExpertExtender.LanguageSelector' => $wikibaseDatavaluesValueviewSrcPaths + [
+			'scripts' => [
+				'ExpertExtender/ExpertExtender.LanguageSelector.js',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.ui.languagesuggester',
+				'jquery.valueview.ExpertExtender',
+				'util.PrefixingMessageProvider',
+			],
+			'messages' => [
+				'valueview-expertextender-languageselector-languagetemplate',
+				'valueview-expertextender-languageselector-label',
+			]
+		],
+
 		'jquery.valueview.ExpertExtender.Listrotator' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'ExpertExtender/ExpertExtender.Listrotator.js',
-				'../lib/jquery.ui/jquery.ui.listrotator.js',
-			],
-			'styles' => [
-				'../lib/jquery.ui/jquery.ui.listrotator.css',
 			],
 			'dependencies' => [
+				'jquery.ui.listrotator',
 				'jquery.valueview.ExpertExtender',
-				'jquery.ui.autocomplete', // needs jquery.ui.menu
-				'jquery.ui.widget',
-				'jquery.ui.position',
-			],
-			'messages' => [
-				'valueview-listrotator-manually',
 			],
 		],
 
 		'jquery.valueview.ExpertExtender.Preview' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'ExpertExtender/ExpertExtender.Preview.js',
-				'../lib/jquery.ui/jquery.ui.preview.js',
 			],
 			'styles' => [
 				'ExpertExtender/ExpertExtender.Preview.css',
-				'../lib/jquery.ui/jquery.ui.preview.css',
 			],
 			'dependencies' => [
-				'jquery.ui.widget',
+				'jquery.ui.preview',
 				'jquery.valueview.ExpertExtender',
-				'util.CombiningMessageProvider',
-				'util.HashMessageProvider',
 				'util.PrefixingMessageProvider',
 			],
 			'messages' => [
 				'valueview-preview-label',
 				'valueview-preview-novalue',
+			],
+		],
+
+		'jquery.valueview.ExpertExtender.UnitSelector' => $wikibaseDatavaluesValueviewSrcPaths + [
+			'scripts' => [
+				'ExpertExtender/ExpertExtender.UnitSelector.js',
+			],
+			'dependencies' => [
+				'jquery.valueview.ExpertExtender',
+				'jquery.ui.unitsuggester',
+			],
+			'messages' => [
+				'valueview-expertextender-unitsuggester-label',
 			],
 		],
 
