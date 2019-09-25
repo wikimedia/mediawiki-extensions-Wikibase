@@ -5,8 +5,6 @@
 ( function () {
 	'use strict';
 
-	$.util = $.util || {};
-
 	/**
 	 * Manages attaching an event handler to a target only once for a set of source objects.
 	 * Since an event is attached only once, the initial event handler (for the combination of target/
@@ -14,7 +12,7 @@
 	 *
 	 * @constructor
 	 */
-	var SELF = $.util.EventSingletonManager = function UtilEventSingletonManager() {
+	var SELF = function UtilEventSingletonManager() {
 		this._registry = [];
 	};
 
@@ -196,5 +194,7 @@
 			}
 		}
 	} );
+
+	module.exports = SELF;
 
 }() );

@@ -65,7 +65,6 @@ return [
 			'jquery/wikibase/jquery.wikibase.statementview.tests.js',
 			'jquery/jquery.removeClassByRegex.tests.js',
 			'jquery/jquery.sticknode.tests.js',
-			'jquery/jquery.util.EventSingletonManager.tests.js',
 			'jquery/jquery.util.getDirectionality.tests.js',
 			'wikibase/entityChangers/AliasesChanger.tests.js',
 			'wikibase/entityChangers/StatementsChanger.tests.js',
@@ -79,13 +78,11 @@ return [
 			'wikibase/utilities/GuidGenerator.tests.js',
 			'wikibase/view/testViewController.js',
 			'wikibase/view/ToolbarViewController.tests.js',
-			'wikibase/view/ViewFactory.tests.js',
 			'wikibase/view/ToolbarFactory.tests.js',
 			'wikibase/wikibase.WikibaseContentLanguages.tests.js',
 			'wikibase/wikibase.getUserLanguages.tests.js',
 			'wikibase/wikibase.getLanguageNameByCode.tests.js',
 			'wikibase/templates.tests.js',
-			'wikibase/wikibase.ValueViewBuilder.tests.js',
 		],
 		'dependencies' => [
 			'dataValues.values',
@@ -111,7 +108,6 @@ return [
 			'wikibase.utilities.ClaimGuidGenerator',
 			'wikibase.view.ToolbarFactory',
 			'wikibase.view.ControllerViewFactory',
-			'wikibase.view.ViewFactory',
 			'wikibase.view.tests.getMockListItemAdapter',
 			'wikibase.WikibaseContentLanguages',
 			'wikibase.getUserLanguages',
@@ -163,5 +159,30 @@ return [
 			'resources/wikibase/entityIdFormatter/EntityIdPlainFormatter.js',
 			'resources/wikibase/entityIdFormatter/EntityIdHtmlFormatter.js',
 		],
+	],
+
+	'wikibase.view.tests.EventSingletonManager' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/jquery/jquery.util.EventSingletonManager.tests.js',
+
+			'resources/jquery/jquery.util.EventSingletonManager.js'
+		],
+	],
+
+	'wikibase.view.tests.ValueViewBuilder' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/wikibase.ValueViewBuilder.tests.js',
+
+			'resources/wikibase/wikibase.ValueViewBuilder.js'
+		],
+	],
+
+	'wikibase.view.tests.ValueFactory' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/view/ViewFactory.tests.js',
+		],
+		'dependencies' => [
+			'wikibase.view.ViewFactory'
+		]
 	],
 ];

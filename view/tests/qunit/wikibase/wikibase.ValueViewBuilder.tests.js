@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb, sinon, QUnit ) {
+( function ( sinon, QUnit ) {
 	'use strict';
+
+	var ValueViewBuilder = require( '../../../resources/wikibase/wikibase.ValueViewBuilder.js' );
 
 	function getValueViewAndDom() {
 		var valueView = {
@@ -28,7 +30,7 @@
 			valueView = vvAndDom.vv,
 			$dom = vvAndDom.$dom;
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			{ getFormatter: function () {} }
 		);
@@ -45,7 +47,7 @@
 			formatterFactory = { getFormatter: function () {} },
 			parserStore = {};
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			expertStore,
 			formatterFactory,
 			parserStore,
@@ -72,7 +74,7 @@
 				}
 			};
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			formatterFactory
 		);
@@ -89,7 +91,7 @@
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom;
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			{ getFormatter: function () {} },
 			null,
@@ -109,7 +111,7 @@
 			$dom = vvAndDom.$dom,
 			messageProvider = {};
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			{ getFormatter: function () {} },
 			null,
@@ -132,7 +134,7 @@
 				getType: sinon.spy( function () { return dataValueType; } )
 			};
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			{ getFormatter: function () {} }
 		);
@@ -155,7 +157,7 @@
 				getDataValueType: sinon.spy( function () { return dataTypeDataValueType; } )
 			};
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			{ getFormatter: function () {} }
 		);
@@ -177,7 +179,7 @@
 				getDataValueType: function () { return 'datavaluetype id'; }
 			};
 
-		var valueViewBuilder = new wb.ValueViewBuilder(
+		var valueViewBuilder = new ValueViewBuilder(
 			null,
 			{ getFormatter: getFormatter }
 		);
@@ -187,4 +189,4 @@
 		sinon.assert.calledWith( getFormatter, sinon.match( 'datatype id', 'property id' ) );
 	} );
 
-}( wikibase, sinon, QUnit ) );
+}( sinon, QUnit ) );

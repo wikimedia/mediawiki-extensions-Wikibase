@@ -136,8 +136,7 @@
 		viewFactory.getSiteLinkListView( null, siteLinks, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinklistview, sinon.match( {
-			value: siteLinks,
-			eventSingletonManager: sinon.match.instanceOf( $.util.EventSingletonManager )
+			value: siteLinks
 		} ) );
 
 		$.wikibase.sitelinklistview.restore();
@@ -534,9 +533,6 @@
 			$dom = $( '<div/>' );
 
 		$dom.snakview = sinon.stub( $.wikibase, 'snakview' );
-
-		sinon.spy( wb, 'ValueViewBuilder' );
-
 		viewFactory.getSnakView( null, false, options, value, $dom );
 
 		sinon.assert.calledWith(
@@ -549,21 +545,9 @@
 				entityIdHtmlFormatter: entityIdHtmlFormatter,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				entityStore: entityStore,
-				valueViewBuilder: wb.ValueViewBuilder.returnValues[ 0 ],
 				drawProperty: false
 			} )
 		);
-
-		sinon.assert.calledWith( wb.ValueViewBuilder,
-			expertStore,
-			formatterFactory,
-			parserStore,
-			userLanguages[ 0 ],
-			messageProvider,
-			contentLanguages
-		);
-
-		wb.ValueViewBuilder.restore();
 
 		$.wikibase.snakview.restore();
 	} );

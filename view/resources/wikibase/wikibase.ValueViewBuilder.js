@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
 	/**
@@ -17,7 +17,7 @@
 	 * @param {string|null} [vocabularyLookupApiUrl=null]
 	 * @param {string} commonsApiUrl
 	 */
-	var SELF = wb.ValueViewBuilder = function WbValueViewBuilder(
+	var SELF = function WbValueViewBuilder(
 		expertStore,
 		formatterFactory,
 		parserStore,
@@ -102,4 +102,5 @@
 		}
 	} );
 
-}( wikibase ) );
+	module.exports = SELF;
+}() );
