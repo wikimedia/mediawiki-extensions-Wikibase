@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\DataBridge\DataBridgeConfigValueProvider;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
@@ -52,7 +53,10 @@ return call_user_func( function() {
 				return new MediaWikiConfigModule(
 					[
 						'getconfigvalueprovider' => function() use ( $clientSettings ) {
-							return new DataBridgeConfigValueProvider( $clientSettings );
+							return new DataBridgeConfigValueProvider(
+								$clientSettings,
+								MediaWikiServices::getInstance()->getMainConfig()->get( 'EditSubmitButtonLabelPublish' )
+							);
 						},
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :

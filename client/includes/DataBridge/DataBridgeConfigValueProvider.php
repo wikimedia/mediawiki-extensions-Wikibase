@@ -13,8 +13,12 @@ class DataBridgeConfigValueProvider implements MediaWikiConfigValueProvider {
 	/** @var SettingsArray */
 	private $settings;
 
-	public function __construct( SettingsArray $settings ) {
+	/** @var bool */
+	private $usePublish;
+
+	public function __construct( SettingsArray $settings, $usePublish ) {
 		$this->settings = $settings;
+		$this->usePublish = $usePublish;
 	}
 
 	public function getKey() {
@@ -39,6 +43,7 @@ class DataBridgeConfigValueProvider implements MediaWikiConfigValueProvider {
 		return [
 			'hrefRegExp' => $hrefRegExp,
 			'editTags' => $editTags,
+			'usePublish' => $this->usePublish,
 		];
 	}
 
