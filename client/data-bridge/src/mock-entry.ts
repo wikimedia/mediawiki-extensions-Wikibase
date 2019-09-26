@@ -68,6 +68,7 @@ services.setMessagesRepository( {
 launch(
 	{
 		containerSelector: '#data-bridge-container',
+		usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',
 	},
 	{
 		entityId: 'Q42',

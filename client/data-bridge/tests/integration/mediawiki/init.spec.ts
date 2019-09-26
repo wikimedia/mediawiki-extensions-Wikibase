@@ -46,10 +46,14 @@ describe( 'init', () => {
 			} ),
 			ForeignApiConstructor = mockForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
 			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' ),
-			editTags = [ 'a tag' ];
+			editTags = [ 'a tag' ],
+			usePublish = true;
 		mockMwEnv(
 			using,
-			mockMwConfig( { editTags } ),
+			mockMwConfig( {
+				editTags,
+				usePublish,
+			} ),
 			undefined,
 			ForeignApiConstructor,
 		);
@@ -90,7 +94,10 @@ describe( 'init', () => {
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			expect( app.launch ).toHaveBeenCalledWith(
-				{ containerSelector: '#data-bridge-container' },
+				{
+					containerSelector: '#data-bridge-container',
+					usePublish,
+				},
 				{
 					entityId,
 					propertyId,
