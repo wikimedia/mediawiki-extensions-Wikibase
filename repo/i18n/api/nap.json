@@ -195,7 +195,7 @@
 	"apihelp-wbsetdescription-param-bot": "Nzegna stu cagnamiento comm'a nu bot. Sta bannera 'URL sarrà surtanto rispettata si l'utente appartene a 'o gruppo \"bot\".",
 	"apihelp-wbsetdescription-param-language": "Lengua d' 'a descrizione",
 	"apihelp-wbsetdescription-param-value": "'O valore 'a mpustà p' 'a descrizione",
-	"apihelp-wbsetdescription-example-1": "Mpusta 'a stringa \"An encyclopedia that everyone can edit\" p' 'a paggena cu ID \"Q42\" comme descripzione int' 'a lengua ngrese",
+	"apihelp-wbsetdescription-example-1": "Mpusta 'a stringa \"<var>An encyclopedia that everyone can edit</var>\" p' 'a paggena cu ID <samp>Q42</samp> comme descripzione int' 'a lengua ngrese",
 	"apihelp-wbsetdescription-example-2": "Mpusta 'a stringa \"An encyclopedia that everyone can edit\" comm'a descrizione int' 'a lengua ngrese p' 'a paggena cu nu sitelink a enwiki:Wikipedia",
 	"apihelp-wbsetlabel-description": "Mpusta n'etichetta pe' n'entità sola 'e Wikibase.",
 	"apihelp-wbsetlabel-param-id": "L'identificatore 'e n'entità, mettenno pure 'o prefisso.\nAusate tutte dduje 'id' o 'sito' e 'titolo' nzieme.",
