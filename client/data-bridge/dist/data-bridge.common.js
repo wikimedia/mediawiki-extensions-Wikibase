@@ -8185,13 +8185,38 @@ function () {
 function MessagesPlugin(Vue, messages) {
   Vue.prototype.$messages = new Messages_Messages(messages);
 }
+// CONCATENATED MODULE: ./src/presentation/plugins/BridgeConfigPlugin/BridgeConfig.ts
+
+
+var BridgeConfig_BridgeConfig = function BridgeConfig(usePublish) {
+  _classCallCheck(this, BridgeConfig);
+
+  if (typeof usePublish !== 'boolean') {
+    throw new Error('No valid usePublish option provided.');
+  }
+
+  this.usePublish = usePublish;
+};
+
+
+// CONCATENATED MODULE: ./src/presentation/plugins/BridgeConfigPlugin/index.ts
+
+function BridgeConfigPlugin(vue, options) {
+  if (!options) {
+    throw new Error('No BridgeConfigOptions provided.');
+  }
+
+  vue.prototype.$bridgeConfig = new BridgeConfig_BridgeConfig(options.usePublish);
+}
 // CONCATENATED MODULE: ./src/presentation/extendVueEnvironment.ts
 
 
 
-function extendVueEnvironment(languageInfoRepo, messageRepo) {
+
+function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions) {
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(languageInfoRepo));
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(BridgeConfigPlugin, bridgeConfigOptions);
 }
 // CONCATENATED MODULE: ./src/main.ts
 
@@ -8207,7 +8232,9 @@ function extendVueEnvironment(languageInfoRepo, messageRepo) {
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository());
+  extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository(), {
+    usePublish: config.usePublish
+  });
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   var app = new presentation_App({

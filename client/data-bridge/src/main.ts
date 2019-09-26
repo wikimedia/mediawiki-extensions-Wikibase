@@ -22,6 +22,7 @@ export function launch(
 	extendVueEnvironment(
 		services.getLanguageInfoRepository(),
 		services.getMessagesRepository(),
+		{ usePublish: config.usePublish },
 	);
 
 	const store = createStore( services );

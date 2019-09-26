@@ -66,13 +66,14 @@ describe( 'launch', () => {
 		const information = {};
 		const configuration = {
 			containerSelector: '',
-			usePublish: false,
+			usePublish: true,
 		};
 
 		launch( configuration, information as any, services as any );
 		expect( extendVueEnvironment ).toHaveBeenCalledTimes( 1 );
 		expect( extendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( languageRepo );
 		expect( extendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( messagesRepository );
+		expect( extendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toStrictEqual( { usePublish: configuration.usePublish } );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
