@@ -306,53 +306,6 @@
 			.on( 'valueviewchange.' + this.variationBaseClass, function ( event ) {
 				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
 			} );
-
-			/* FIXME: Temporarily disabled for user testing. Either re-enable or remove.
-			var $viewPort = this.$viewPort,
-				heightAnimationQueue = self.variationBaseClass + 'height';
-
-			this._valueView.element
-			.on( 'inputextenderanimation.' + this.variationBaseClass, function( animationEvent ) {
-				animationEvent.animationCallbacks.add( 'done', function() {
-					var $input = $( animationEvent.target ),
-						$extension = $input.data( 'inputextender' ).extension(),
-						newHeight = 0;
-
-					$viewPort.stop( heightAnimationQueue, true );
-
-					if ( $extension ) {
-						newHeight = $input.outerHeight() + $extension.outerHeight();
-					} else {
-						var currentHeight = $viewPort.height();
-						$viewPort.css( 'height', 'auto' );
-						newHeight = $viewPort.height();
-						$viewPort.height( currentHeight );
-					}
-
-					$viewPort.animate(
-						{ height: newHeight },
-						{
-							queue: heightAnimationQueue,
-							duration: 'fast', // defaults to 200
-							progress: function( animation, progress, remainingMs ) {
-								$.ui.inputextender.redrawVisibleExtensions();
-							}
-						}
-					).dequeue( heightAnimationQueue );
-				} );
-			} )
-			.on( 'inputextendercontentanimation.' + this.variationBaseClass, function( animationEvent ) {
-				var $input = $( animationEvent.target ),
-					inputHeight = $input.outerHeight(),
-					$extension = $input.data( 'inputextender' ).extension();
-
-				animationEvent.animationCallbacks
-				.add( 'progress', function() {
-					var newHeight = inputHeight + $extension.outerHeight();
-					$viewPort.height( newHeight );
-				} );
-			} );
-			*/
 		},
 
 		/**
