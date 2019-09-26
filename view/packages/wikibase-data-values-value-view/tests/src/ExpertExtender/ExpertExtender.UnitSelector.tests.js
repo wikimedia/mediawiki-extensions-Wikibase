@@ -6,7 +6,9 @@
 ( function( $, ExpertExtender, testExpertExtenderExtension, sinon, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'jquery.valueview.ExpertExtender.UnitSelector' );
+	var UnitSelector = require( '../../../src/ExpertExtender/ExpertExtender.UnitSelector.js' );
+
+	QUnit.module( 'UnitSelector' );
 
 	var messageProvider = {
 		getMessage: function( key, params ) {
@@ -15,9 +17,9 @@
 	};
 
 	testExpertExtenderExtension.all(
-		ExpertExtender.UnitSelector,
+		UnitSelector,
 		function() {
-			return new ExpertExtender.UnitSelector(
+			return new UnitSelector(
 				messageProvider,
 				function() {
 					return {};
@@ -27,7 +29,7 @@
 	);
 
 	QUnit.test( 'getConceptUri() does change if input value changes', function( assert ) {
-		var unitSelector = new ExpertExtender.UnitSelector(
+		var unitSelector = new UnitSelector(
 			messageProvider,
 			function() {
 				return { label: 'Ultrameter' };
@@ -53,7 +55,7 @@
 	} );
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
-		var unitSelector = new ExpertExtender.UnitSelector(
+		var unitSelector = new UnitSelector(
 			messageProvider,
 			function() {
 				return { conceptUri: 'Ultrameter' };

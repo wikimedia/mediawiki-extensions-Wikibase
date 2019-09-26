@@ -1,7 +1,8 @@
-module.exports = ( function( vv, LanguageSelector ) {
+module.exports = ( function( vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue;
+	var PARENT = vv.experts.StringValue,
+		LanguageSelector = require( '../ExpertExtender/ExpertExtender.LanguageSelector.js' );
 
 	/**
 	 * @class jQuery.valueview.experts.MonolingualText
@@ -62,4 +63,4 @@ module.exports = ( function( vv, LanguageSelector ) {
 
 	return vv.experts.MonolingualText;
 
-}( jQuery.valueview, jQuery.valueview.ExpertExtender.LanguageSelector ) );
+}( jQuery.valueview ) );
