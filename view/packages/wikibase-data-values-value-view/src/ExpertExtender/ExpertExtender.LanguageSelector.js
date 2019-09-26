@@ -1,4 +1,4 @@
-( function( $, ExpertExtender, PrefixingMessageProvider ) {
+( function( $, PrefixingMessageProvider ) {
 	'use strict';
 
 	/**
@@ -15,7 +15,7 @@
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
 	 */
-	ExpertExtender.LanguageSelector = function(
+	var LanguageSelector = function(
 		contentLanguages,
 		messageProvider,
 		getUpstreamValue,
@@ -32,7 +32,7 @@
 		this.$selector = $( '<input />' );
 	};
 
-	$.extend( ExpertExtender.LanguageSelector.prototype, {
+	$.extend( LanguageSelector.prototype, {
 		/**
 		 * @property {util.MessageProvider}
 		 * @private
@@ -153,4 +153,6 @@
 		}
 	} );
 
-}( jQuery, jQuery.valueview.ExpertExtender, util.PrefixingMessageProvider ) );
+	module.exports = LanguageSelector;
+
+}( jQuery, util.PrefixingMessageProvider ) );

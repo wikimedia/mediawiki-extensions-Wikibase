@@ -1,4 +1,4 @@
-( function( $, ExpertExtender ) {
+( function( $ ) {
 	'use strict';
 
 	/**
@@ -17,7 +17,7 @@
 	 * @param {string|null} [options.language=null]
 	 * @param {string|null} [options.vocabularyLookupApiUrl=null]
 	 */
-	ExpertExtender.UnitSelector = function(
+	var UnitSelector = function(
 		messageProvider,
 		getUpstreamValue,
 		onValueChange,
@@ -31,7 +31,7 @@
 		this.$selector = $( '<input>' );
 	};
 
-	$.extend( ExpertExtender.UnitSelector.prototype, {
+	$.extend( UnitSelector.prototype, {
 		/**
 		 * @property {util.MessageProvider}
 		 * @private
@@ -126,4 +126,6 @@
 		}
 	} );
 
-}( jQuery, jQuery.valueview.ExpertExtender ) );
+	module.exports = UnitSelector;
+
+}( jQuery ) );

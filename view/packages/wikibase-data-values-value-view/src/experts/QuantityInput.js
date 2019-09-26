@@ -1,7 +1,8 @@
-module.exports = ( function( $, vv, UnitSelector ) {
+module.exports = ( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.StringValue;
+	var PARENT = vv.experts.StringValue,
+		UnitSelector = require( '../ExpertExtender/ExpertExtender.UnitSelector.js' );
 
 	/**
 	 * @class jQuery.valueview.experts.QuantityInput
@@ -70,4 +71,4 @@ module.exports = ( function( $, vv, UnitSelector ) {
 
 	return vv.experts.QuantityInput;
 
-}( jQuery, jQuery.valueview, jQuery.valueview.ExpertExtender.UnitSelector ) );
+}( jQuery, jQuery.valueview ) );
