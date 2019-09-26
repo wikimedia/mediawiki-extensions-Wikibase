@@ -15,10 +15,9 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\StringNormalizer;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter
@@ -83,10 +82,8 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 			$jobQueue = JobQueueGroup::singleton();
 		}
 
-		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
-		$lbFactory = new FakeLBFactory( [
-			'lb' => $loadBalancer
-		] );
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
+		$loadBalancer = $lbFactory->getMainLB();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$loadBalancer,
 			WANObjectCache::newEmpty()

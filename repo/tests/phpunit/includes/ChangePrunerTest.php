@@ -9,9 +9,8 @@ use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Repo\ChangePruner;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Repo\ChangePruner
@@ -26,13 +25,11 @@ class ChangePrunerTest extends MediaWikiIntegrationTestCase {
 
 	private $messages = [];
 
-	private $loadBalancer;
 	private $lbFactory;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
-		$this->lbFactory = new FakeLBFactory( [ 'lb' => $this->loadBalancer ] );
+		$this->lbFactory = LBFactorySingle::newFromConnection( $this->db );
 	}
 
 	public function testConstructorWithInvalidBatchSize() {

@@ -9,9 +9,8 @@ use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\WikibaseSettings;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
@@ -44,10 +43,11 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 	 * @return BulkSubscriptionUpdater
 	 */
 	private function getBulkSubscriptionUpdater( $batchSize = 10 ) {
-		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->db );
+		$lbFactory = LBFactorySingle::newFromConnection( $this->db );
+		$loadBalancer = $lbFactory->getMainLB();
 
 		return new BulkSubscriptionUpdater(
-			new FakeLBFactory( [ 'lb' => $loadBalancer ] ),
+			$lbFactory,
 			new SessionConsistentConnectionManager( $loadBalancer, false ),
 			new SessionConsistentConnectionManager( $loadBalancer, false ),
 			'testwiki',

@@ -18,11 +18,10 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
-use Wikimedia\Rdbms\LoadBalancerSingle;
+use Wikimedia\Rdbms\LBFactorySingle;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup
@@ -45,10 +44,7 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		// We can't use the mediawiki integration test since we union temp tables.
 		$this->sqliteDb = $this->setUpNewDb();
-		$loadBalancer = LoadBalancerSingle::newFromConnection( $this->sqliteDb );
-		$this->lbFactory = new FakeLBFactory( [
-			'lb' => $loadBalancer
-		] );
+		$this->lbFactory = LBFactorySingle::newFromConnection( $this->sqliteDb );
 	}
 
 	private function setUpNewDb() {
