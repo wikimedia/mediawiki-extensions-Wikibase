@@ -352,20 +352,22 @@ return call_user_func( function() {
 		],
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
-			'scripts' => [
+			'packageFiles' => [
+				'wikibase/view/ViewFactory.js',
+
 				'jquery/jquery.util.EventSingletonManager.js',
+				'wikibase/wikibase.ValueViewBuilder.js',
+
 				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
 				'jquery/wikibase/jquery.wikibase.badgeselector.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkview.js',
 				'jquery/wikibase/jquery.wikibase.sitelinklistview.js',
-				'jquery/jquery.sticknode.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js',
 				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
 				'jquery/wikibase/jquery.wikibase.propertyview.js',
 				'jquery/wikibase/jquery.wikibase.labelview.js',
 				'jquery/wikibase/jquery.wikibase.itemview.js',
 				'jquery/wikibase/jquery.wikibase.descriptionview.js',
-				'jquery/ui/jquery.ui.tagadata.js',
 				'jquery/wikibase/jquery.wikibase.aliasesview.js',
 				'jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js',
 				'jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js',
@@ -374,8 +376,8 @@ return call_user_func( function() {
 				'jquery/wikibase/jquery.wikibase.statementlistview.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
-				'wikibase/wikibase.ValueViewBuilder.js',
-				'wikibase/view/ViewFactory.js'
+				'jquery/ui/jquery.ui.tagadata.js',
+				'jquery/jquery.sticknode.js',
 			],
 			'styles' => [
 				'jquery/wikibase/themes/default/jquery.wikibase.badgeselector.css',

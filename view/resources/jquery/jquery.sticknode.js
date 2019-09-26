@@ -6,7 +6,8 @@
 	'use strict';
 
 	var $window = $( window ),
-		eventSingleton = new $.util.EventSingletonManager(),
+		EventSingletonManager = require( './jquery.util.EventSingletonManager.js' ),
+		eventSingleton = new EventSingletonManager(),
 		PLUGIN_NAME = 'sticknode';
 
 	/**

@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		EventSingletonManager = require( '../jquery.util.EventSingletonManager.js' );
 
 	/**
 	 * @param {string} eventNames
@@ -28,7 +29,7 @@
 	 *
 	 * @option {Function} getListItemAdapter
 	 *
-	 * @option {jQuery.util.EventSingletonManager} [eventSingletonManager]
+	 * @option {EventSingletonManager} [eventSingletonManager]
 	 *         Should be set when the widget instance is part of a sitelinkgroupview.
 	 *         Default: null (will be constructed automatically)
 	 *
@@ -58,7 +59,7 @@
 		},
 
 		/**
-		 * @type {jQuery.util.EventSingletonManager}
+		 * @type {EventSingletonManager}
 		 */
 		_eventSingletonManager: null,
 
@@ -73,7 +74,7 @@
 			PARENT.prototype._create.call( this );
 
 			this._eventSingletonManager = this.options.eventSingletonManager
-				|| new $.util.EventSingletonManager();
+				|| new EventSingletonManager();
 
 			this.draw();
 		},

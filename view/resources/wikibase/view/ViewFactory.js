@@ -1,7 +1,33 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.view;
+	var MODULE = wb.view,
+		EventSingletonManager = require( '../../jquery/jquery.util.EventSingletonManager.js' ),
+		ValueViewBuilder = require( '../wikibase.ValueViewBuilder.js' );
+
+	// Widgets
+	require( '../../jquery/wikibase/jquery.wikibase.pagesuggester.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.badgeselector.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinkview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinklistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgroupview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.propertyview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.labelview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.itemview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.descriptionview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.aliasesview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.entitytermsview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementgroupview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementlistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementgrouplistview.js' );
+	require( '../../jquery/ui/jquery.ui.tagadata.js' );
+
+	// Plugins
+	require( '../../jquery/jquery.sticknode.js' );
 
 	/**
 	 * A factory for creating view widgets
@@ -76,7 +102,7 @@
 		// Maybe make userLanguages an argument to getEntityView instead of to the constructor
 		this._userLanguages = userLanguages;
 		this._vocabularyLookupApiUrl = vocabularyLookupApiUrl || null;
-		this._eventSingletonManager = new $.util.EventSingletonManager();
+		this._eventSingletonManager = new EventSingletonManager();
 		this._commonsApiUrl = commonsApiUrl;
 	};
 
@@ -635,10 +661,10 @@
 
 	/**
 	 * @private
-	 * @return {wikibase.ValueViewBuilder}
+	 * @return {ValueViewBuilder}
 	 */
 	SELF.prototype._getValueViewBuilder = function () {
-		return new wb.ValueViewBuilder(
+		return new ValueViewBuilder(
 			this._expertStore,
 			this._formatterFactory,
 			this._parserStore,
