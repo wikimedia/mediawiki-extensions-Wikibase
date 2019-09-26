@@ -16,3 +16,46 @@ export function select( selector: string, nth: number = 0 ): HTMLElement|null {
 		return list.item( nth ) as HTMLElement;
 	}
 }
+
+export async function keydown( element: HTMLElement, key: string ): Promise<void> {
+	const event = new KeyboardEvent(
+		'keydown', {
+			bubbles: true,
+			key,
+		},
+	);
+	element.dispatchEvent( event );
+}
+
+export async function keypressed( element: HTMLElement, key: string ): Promise<void> {
+	const event = new KeyboardEvent(
+		'keypress', {
+			bubbles: true,
+			key,
+		},
+	);
+	element.dispatchEvent( event );
+}
+
+export async function keyup( element: HTMLElement, key: string ): Promise<void> {
+	const event = new KeyboardEvent(
+		'keyup', {
+			bubbles: true,
+			key,
+		},
+	);
+	element.dispatchEvent( event );
+}
+
+// @see: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#Auto-repeat_handling
+export async function enter( element: HTMLElement ): Promise<void> {
+	await keydown( element, 'Enter' );
+	await keypressed( element, 'Enter' );
+	await keyup( element, 'enter' );
+}
+
+export async function space( element: HTMLElement ): Promise<void> {
+	await keydown( element, ' ' );
+	await keypressed( element, ' ' );
+	await keyup( element, ' ' );
+}
