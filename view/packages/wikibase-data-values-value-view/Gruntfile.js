@@ -87,6 +87,11 @@ module.exports = function ( grunt ) {
 					'tests/src/ExpertExtender/testExpertExtenderExtension.js',
 					'tests/src/ExpertExtender/*.js'
 				],
+				preprocessors: {
+					'src/**/*.js': [ 'webpack' ],
+					'tests/**/*.tests.js': [ 'webpack' ]
+				},
+				webpack: { mode: 'development' },
 				singleRun: true,
 				logLevel: 'DEBUG',
 				frameworks: [ 'qunit' ]

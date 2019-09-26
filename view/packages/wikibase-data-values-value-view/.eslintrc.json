@@ -2,13 +2,13 @@
 	"extends": "wikimedia",
 	"env": {
 		"browser": true,
-		"jquery": true
+		"jquery": true,
+		"commonjs": true
 	},
 	"globals": {
 		"dataValues": false,
 		"globeCoordinate": false,
 		"mediaWiki": false,
-		"module": false,
 		"util": false,
 		"valueFormatters": false,
 		"valueParsers": false
