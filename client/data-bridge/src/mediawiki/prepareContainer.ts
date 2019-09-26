@@ -21,7 +21,7 @@ export default function prepareContainer( OO: MwWindowOO, $: JQueryStatic, id: s
 	};
 	OO.inheritClass( BridgeDialog, OO.ui.Dialog );
 	BridgeDialog.static.name = 'data-bridge';
-	BridgeDialog.static.escapable = false;
+	BridgeDialog.static.escapable = true;
 	BridgeDialog.prototype.initialize = function (): void {
 		BridgeDialog.parent.prototype.initialize.call( this );
 		this.content = new OO.ui.PanelLayout( { padded: false, expanded: false } );

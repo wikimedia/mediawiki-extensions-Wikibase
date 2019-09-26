@@ -22,10 +22,10 @@ jest.mock( '@/mediawiki/createServices', () => ( {
 	default: ( mwWindow: any ) => mockCreateServices( mwWindow ),
 } ) );
 
-const mockSubscribeToAppEvents = jest.fn();
-jest.mock( '@/mediawiki/subscribeToAppEvents', () => ( {
+const mockSubscribeToEvents = jest.fn();
+jest.mock( '@/mediawiki/subscribeToEvents', () => ( {
 	__esModule: true,
-	default: ( emitter: any, windowManager: any ) => mockSubscribeToAppEvents( emitter, windowManager ),
+	default: ( emitter: any, windowManager: any ) => mockSubscribeToEvents( emitter, windowManager ),
 } ) );
 
 describe( 'Dispatcher', () => {
@@ -105,7 +105,7 @@ describe( 'Dispatcher', () => {
 				mockServices,
 			);
 
-			expect( mockSubscribeToAppEvents ).toHaveBeenCalledWith( emitter, manager );
+			expect( mockSubscribeToEvents ).toHaveBeenCalledWith( emitter, manager );
 		} );
 	} );
 } );

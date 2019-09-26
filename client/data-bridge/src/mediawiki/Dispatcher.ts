@@ -4,7 +4,7 @@ import AppBridge from '@/definitions/AppBridge';
 import prepareContainer from '@/mediawiki/prepareContainer';
 import createServices from '@/mediawiki/createServices';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
-import subscribeToAppEvents from '@/mediawiki/subscribeToAppEvents';
+import subscribeToEvents from '@/mediawiki/subscribeToEvents';
 
 export default class Dispatcher {
 	public static readonly APP_DOM_CONTAINER_ID = 'data-bridge-container';
@@ -38,6 +38,6 @@ export default class Dispatcher {
 			), // should be made caching when used repeatedly
 		);
 
-		subscribeToAppEvents( emitter, dialog.getManager() );
+		subscribeToEvents( emitter, dialog.getManager() );
 	}
 }
