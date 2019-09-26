@@ -90,13 +90,12 @@ describe( 'App', () => {
 
 		DataBridgePage.saveButton.click();
 
-		browser.waitUntil(
-			() => {
-				return !DataBridgePage.app.isExisting();
-			},
+		DataBridgePage.app.waitForDisplayed(
 			5000,
-			'App didn\'t close after clicking save button'
+			true,
+			'App is still being displayed after clicking the save button'
 		);
+		DataBridgePage.app.waitForExist( 5000, true, 'App still exists in the DOM after clicking the save button' );
 
 		const entity = browser.call( () => WikibaseApi.getEntity( entityId ) );
 		const actualValueAtServer = entity.claims[ propertyId ][ 0 ].mainsnak.datavalue.value;
