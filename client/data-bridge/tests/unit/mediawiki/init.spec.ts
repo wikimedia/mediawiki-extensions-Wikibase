@@ -28,6 +28,7 @@ describe( 'init', () => {
 
 		const link = {
 			addEventListener: jest.fn(),
+			setAttribute: jest.fn(),
 		};
 		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
 			selectElementsToOverload: () => [ { link } ],
@@ -43,6 +44,8 @@ describe( 'init', () => {
 				'mediawiki.language',
 			] );
 			expect( require ).toHaveBeenCalledWith( 'wikibase.client.data-bridge.app' );
+			expect( link.setAttribute ).toHaveBeenCalledTimes( 1 );
+			expect( link.setAttribute ).toHaveBeenCalledWith( 'aria-haspopup', 'dialog' );
 			expect( link.addEventListener ).toHaveBeenCalledTimes( 1 );
 			expect( link.addEventListener.mock.calls[ 0 ][ 0 ] ).toBe( 'click' );
 			expect( typeof link.addEventListener.mock.calls[ 0 ][ 1 ] ).toBe( 'function' );
@@ -66,6 +69,7 @@ describe( 'init', () => {
 		const selectedElement = {
 			link: {
 				addEventListener: jest.fn(),
+				setAttribute: jest.fn(),
 			},
 			entityId,
 			propertyId,
