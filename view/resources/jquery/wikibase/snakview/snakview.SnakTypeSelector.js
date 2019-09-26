@@ -1,17 +1,16 @@
 ( function () {
 	'use strict';
 
-	var PARENT = $.Widget;
+	var PARENT = $.Widget,
+		variations = require( './snakview.variations.js' );
 
 	/**
 	 * Selector for choosing a `Snak` type offering to select from a list of all `Snak` types which
-	 * a `jQuery.snakview.variations.Variation` is registered for and, thus, can be displayed by a
+	 * a `Variation` is registered for and, thus, can be displayed by a
 	 * `jQuery.wikibase.snakview`.
-	 * Because of being tightly bound to the `jQuery.wikibase.snakview.variations`, the widget is
+	 * Because of being tightly bound to the `variations`, the widget is
 	 * considered part of the `jQuery.wikibase.snakview` rather than being a stand-alone widget.
 	 * @see jQuery.wikibase.snakview
-	 * @see jQuery.wikibase.snakview.variations
-	 * @see jQuery.wikibase.snakview.variations.Variation
 	 * @see datamodel.Snak
 	 * @class jQuery.wikibase.snakview.SnakTypeSelector
 	 * @extends jQuery.Widget
@@ -158,7 +157,7 @@
 		_buildMenu: function () {
 			var classPrefix = this.widgetBaseClass + '-menuitem-',
 				$menu = $( '<ul/>' ).addClass( this.widgetBaseClass + '-menu' ),
-				snakTypes = $.wikibase.snakview.variations.getCoveredSnakTypes();
+				snakTypes = variations.getCoveredSnakTypes();
 
 			snakTypes.forEach( function ( type ) {
 				$menu.append(

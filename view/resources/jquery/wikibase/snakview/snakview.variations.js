@@ -1,13 +1,5 @@
 ( function () {
 	'use strict';
-
-	// TODO: Resolve namespace initialization
-	$.wikibase = $.wikibase || {};
-	$.wikibase.snakview = $.wikibase.snakview || {};
-
-	// Backup components initialized already to re-apply them below:
-	var existingVariations = $.wikibase.snakview.variations || {};
-
 	/**
 	 * Map of `Snak` type IDs and related `Variation`s required for representing different kinds of
 	 * `Snaks` with `jQuery.wikibase.snakview`.
@@ -23,7 +15,7 @@
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 */
-	var SELF = $.wikibase.snakview.variations = {
+	var SELF = {
 		/**
 		 * Registers a new `jQuery.wikibase.snakview.variations.Variation` definition to enable
 		 * using a specific `Snak` type within `jQuery.wikibase.snakview`. Acts like the
@@ -37,7 +29,7 @@
 		 *        `jQuery.snakview.variations.Variation`.
 		 * @param {Object} [definition] The new `Variation`'s definition (new members and members
 		 *        overwriting the base `Variation`s members).
-		 * @return {jQuery.snakview.variations.Variation} The new `Variation`'s constructor.
+		 * @return {Variation} The new `Variation`'s constructor.
 		 */
 		variation: function ( snakConstructor, baseOrDefinition, definition ) {
 			if ( typeof snakConstructor !== 'function' || !snakConstructor.TYPE ) {
@@ -100,7 +92,7 @@
 		 * within a `jQuery.wikibase.snakview`.
 		 *
 		 * @param {string} snakType
-		 * @return {jQuery.wikibase.snakview.variations.Variation|*}
+		 * @return {Variation|*}
 		 */
 		getVariation: function ( snakType ) {
 			return variations[ snakType ] || null;
@@ -113,7 +105,7 @@
 		 * @param {string} snakType
 		 * @param {jQuery.wikibase.snakview.ViewState} viewState
 		 * @param {jQuery} $variationViewPort
-		 * @return {jQuery.wikibase.snakview.variations.Variation|null}
+		 * @return {Variation|null}
 		 */
 		newFromSnakType: function ( snakType, viewState, $variationViewPort ) {
 			if ( typeof snakType !== 'string' ) {
@@ -126,6 +118,6 @@
 		}
 	};
 
-	$.extend( $.wikibase.snakview.variations, existingVariations );
+	module.exports = SELF;
 
 }() );

@@ -10,7 +10,9 @@
 	delete $.wikibase.snakview;
 
 	var PARENT = $.ui.EditableTemplatedWidget,
-		datamodel = require( 'wikibase.datamodel' );
+		datamodel = require( 'wikibase.datamodel' ),
+		ViewState = require( './snakview.ViewState.js' ),
+		variations = require( './snakview.variations.js' );
 
 	/**
 	 * View for displaying and editing `datamodel.Snak` objects.
@@ -100,13 +102,13 @@
 		 * `Snak`. May be `null` if an unsupported `Snak` type is represented by the `snakview`. In this
 		 * case, the `snakview` won't be able to display the `Snak` but displays an appropriate message
 		 * instead.
-		 * @property {jQuery.wikibase.snakview.variations.Variation|null}
+		 * @property {Variation|null}
 		 * @private
 		 */
 		_variation: null,
 
 		/**
-		 * Cache for the values of specific `jQuery.wikibase.snakview.variation`s used to have those
+		 * Cache for the values of specific `variation`s used to have those
 		 * values restored when toggling the `Snak` type.
 		 * @property {Object}
 		 * @private
@@ -544,7 +546,7 @@
 		 * Returns the `snakview`'s `Variation` object required for presenting the current `Snak` type.
 		 * If a `Snak` type has not been defined yet, `null` is returned.
 		 *
-		 * @return {jQuery.wikibase.snakview.variations.Variation|null}
+		 * @return {Variation|null}
 		 */
 		variation: function () {
 			return this._variation;
@@ -557,8 +559,7 @@
 			var value = this.value(),
 				propertyId = value ? value.property : null,
 				snakType = value ? value.snaktype : null,
-				variationsFactory = $.wikibase.snakview.variations,
-				VariationConstructor = snakType ? variationsFactory.getVariation( snakType ) : null;
+				VariationConstructor = snakType ? variations.getVariation( snakType ) : null;
 
 			if ( this._variation
 				&& ( !propertyId || this._variation.constructor !== VariationConstructor )
@@ -584,7 +585,7 @@
 			if ( !this._variation && propertyId && VariationConstructor ) {
 				// Snak type has changed so we need another variation Object!
 				this._variation = new VariationConstructor(
-					new $.wikibase.snakview.ViewState( this ),
+					new ViewState( this ),
 					this.$snakValue,
 					this.options.entityStore,
 					this.options.valueViewBuilder,
@@ -745,7 +746,7 @@
 				return;
 			}
 
-			var snakTypes = $.wikibase.snakview.variations.getCoveredSnakTypes(),
+			var snakTypes = variations.getCoveredSnakTypes(),
 				selector = this._getSnakTypeSelector();
 
 			if ( !this.isInEditMode()

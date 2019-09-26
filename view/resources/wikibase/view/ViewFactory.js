@@ -6,29 +6,44 @@
 		ValueViewBuilder = require( '../wikibase.ValueViewBuilder.js' ),
 		datamodel = require( 'wikibase.datamodel' );
 
+	require( '../../jquery/wikibase/snakview/snakview.variations.NoValue.js' );
+	require( '../../jquery/wikibase/snakview/snakview.variations.SomeValue.js' );
+	require( '../../jquery/wikibase/snakview/snakview.variations.Value.js' );
+
 	// Widgets
-	require( '../../jquery/wikibase/jquery.wikibase.pagesuggester.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.badgeselector.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.sitelinkview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.sitelinklistview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgroupview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.propertyview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.labelview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.itemview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.descriptionview.js' );
+	require( '../../jquery/wikibase/snakview/snakview.js' );
+	require( '../../jquery/wikibase/snakview/snakview.SnakTypeSelector.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.snaklistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.listview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js' );
+
 	require( '../../jquery/wikibase/jquery.wikibase.aliasesview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.badgeselector.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.descriptionview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.entitytermsview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.statementgroupview.js' );
-	require( '../../jquery/wikibase/jquery.wikibase.statementlistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.entityview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.itemview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.labelview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.pagesuggester.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.propertyview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.referenceview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinkgroupview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinklistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.sitelinkview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.statementgrouplistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementgroupview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementlistview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementview.js' );
+	require( '../../jquery/wikibase/jquery.wikibase.statementview.RankSelector.js' );
 	require( '../../jquery/ui/jquery.ui.tagadata.js' );
 
 	// Plugins
 	require( '../../jquery/jquery.sticknode.js' );
+	require( '../../jquery/jquery.removeClassByRegex.js' );
 
 	/**
 	 * A factory for creating view widgets

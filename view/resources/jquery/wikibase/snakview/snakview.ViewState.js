@@ -1,16 +1,11 @@
 ( function () {
 	'use strict';
-
-	$.wikibase = $.wikibase || {};
-	$.wikibase.snakview = $.wikibase.snakview || {};
-
 	/**
 	 * Interface to a `jQuery.wikibase.snakview` instance that allows querying the `snakview` for
 	 * information as well as updating the `snakview`. Does not provide functions to actively change
 	 * the view but acts as a state object.
 	 *
 	 * @see jQuery.wikibase.snakview
-	 * @class jQuery.wikibase.snakview.ViewState
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
@@ -20,10 +15,7 @@
 	 *
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
-	var SELF = $.wikibase.snakview.ViewState = function WbSnakviewViewState( snakView ) {
-		if ( !( snakView instanceof $.wikibase.snakview ) ) {
-			throw new Error( 'Can not create a snakview ViewState object without a snakview' );
-		}
+	var SELF = function WbSnakviewViewState( snakView ) {
 		this._view = snakView;
 	};
 	$.extend( SELF.prototype, {
@@ -80,5 +72,7 @@
 			return this._view.option( 'disabled' );
 		}
 	} );
+
+	module.exports = SELF;
 
 }() );

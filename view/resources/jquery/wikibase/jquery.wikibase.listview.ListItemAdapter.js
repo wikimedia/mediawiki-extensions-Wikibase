@@ -1,6 +1,8 @@
 ( function () {
 	'use strict';
 
+	require( './jquery.wikibase.listview.js' );
+
 	/**
 	 * Interface between a `jQuery.wikibase.listview` instance and the widget the `listview` is
 	 * supposed to use for its list items.
