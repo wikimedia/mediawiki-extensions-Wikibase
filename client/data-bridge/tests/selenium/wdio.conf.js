@@ -2,7 +2,8 @@
  * See also: http://webdriver.io/guide/testrunner/configurationfile.html
  */
 const fs = require( 'fs' ),
-	saveScreenshot = require( './ForwardCompatUtil' ).saveScreenshot;
+	saveScreenshot = require( './ForwardCompatUtil' ).saveScreenshot,
+	videoUtil = require( './VideoUtil' );
 
 exports.config = {
 
@@ -129,11 +130,22 @@ exports.config = {
 	// resolved to continue.
 
 	/**
+	 * Function to be executed before a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
+	 * @param {Object} test test details
+	 */
+	beforeTest( test ) {
+		if ( process.env.DISPLAY && process.env.DISPLAY.startsWith( ':' ) ) {
+			videoUtil.startVideoRecording( test );
+		}
+	},
+
+	/**
 	 * Save a screenshot when test fails.
 	 *
 	 * @param {Object} test Mocha Test object
 	 */
 	afterTest( test ) {
+		videoUtil.stopVideoRecording( test );
 		var filePath;
 		if ( !test.passed ) {
 			filePath = saveScreenshot( test.title );
