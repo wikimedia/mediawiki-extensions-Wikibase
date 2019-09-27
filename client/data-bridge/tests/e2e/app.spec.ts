@@ -346,4 +346,44 @@ describe( 'app', () => {
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
 	} );
+
+	describe( 'cancel', () => {
+		let cancel: HTMLElement|null;
+
+		beforeEach( async () => {
+			const testLink = prepareTestEnv( {} );
+			await init();
+
+			testLink!.click();
+			await budge();
+
+			cancel = select(
+				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--cancel',
+			);
+
+			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
+			expect( cancel ).not.toBeNull();
+		} );
+
+		it( 'closes on click', async () => {
+			cancel!.click();
+			await budge();
+
+			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+		} );
+
+		it( 'closes on enter', async () => {
+			enter( cancel! );
+			await budge();
+
+			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+		} );
+
+		it( 'closes on space', async () => {
+			space( cancel! );
+			await budge();
+
+			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+		} );
+	} );
 } );
