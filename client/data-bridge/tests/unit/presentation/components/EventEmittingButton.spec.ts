@@ -165,8 +165,37 @@ describe( 'EventEmittingButton', () => {
 		} );
 	} );
 
+	describe( 'iconOnly modifier', () => {
+		it( 'is not added by default', () => {
+			const wrapper = shallowMountWithProps( { type: 'primaryProgressive' } );
+			expect( wrapper.classes() ).not.toContain( 'wb-ui-event-emitting-button--iconOnly' );
+		} );
+
+		it( 'is added if in part of frameless types', () => {
+			const wrapper = shallowMountWithProps( { type: 'cancel' } );
+			expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--iconOnly' );
+		} );
+	} );
+
+	describe( 'framless modifier', () => {
+		it( 'is not added by default', () => {
+			const wrapper = shallowMountWithProps( { type: 'primaryProgressive' } );
+			expect( wrapper.classes() ).not.toContain( 'wb-ui-event-emitting-button--frameless' );
+		} );
+
+		it( 'is added if in part of frameless types', () => {
+			const wrapper = shallowMountWithProps( { type: 'cancel' } );
+			expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--frameless' );
+		} );
+	} );
+
 	it( 'throws for unknown type', () => {
 		expect( () => shallowMountWithProps( { type: 'potato' } ) ).toThrow();
+	} );
+
+	it( 'supports the cancel type', () => {
+		const wrapper = shallowMountWithProps( { type: 'cancel', squary: true } );
+		expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--cancel' );
 	} );
 
 	it( 'shows a message in its title attribute and text content', () => {
@@ -175,4 +204,5 @@ describe( 'EventEmittingButton', () => {
 		expect( wrapper.find( 'a' ).text() ).toBe( message );
 		expect( wrapper.find( 'a' ).attributes( 'title' ) ).toBe( message );
 	} );
+
 } );

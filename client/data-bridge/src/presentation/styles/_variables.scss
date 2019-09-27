@@ -24,3 +24,5 @@ $padding-horizontal-base: px-to-em( 12px );
 $breakpoint: 500px;// 499+1
 
 $grid-breakpoints: ( breakpoint: $breakpoint );
+
+$svg-cancel: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/close.svg );

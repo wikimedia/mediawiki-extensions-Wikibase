@@ -5,6 +5,8 @@
 			`wb-ui-event-emitting-button--${this.type}`,
 			{ 'wb-ui-event-emitting-button--squary': squary },
 			{ 'wb-ui-event-emitting-button--pressed': isPressed },
+			{ 'wb-ui-event-emitting-button--iconOnly': isIconOnly },
+			{ 'wb-ui-event-emitting-button--frameless': isFrameless },
 		]"
 		:href="href"
 		:tabindex="href ? null : 0"
@@ -28,6 +30,15 @@ import { Prop } from 'vue-property-decorator';
 
 const validTypes = [
 	'primaryProgressive',
+	'cancel',
+];
+
+const framelessTypes = [
+	'cancel',
+];
+
+const imageOnlyTypes = [
+	'cancel',
 ];
 
 @Component
@@ -51,6 +62,14 @@ export default class EventEmittingButton extends Vue {
 	public squary!: boolean;
 
 	public isPressed = false;
+
+	public get isIconOnly() {
+		return imageOnlyTypes.includes( this.type );
+	}
+
+	public get isFrameless() {
+		return framelessTypes.includes( this.type );
+	}
 
 	public handleSpacePress( event: UIEvent ) {
 		if ( !this.simulateSpaceOnButton() ) {
@@ -97,32 +116,23 @@ export default class EventEmittingButton extends Vue {
 }
 </script>
 <style lang="scss">
-$block: '.wb-ui-event-emitting-button';
-
-%textButton {
+.wb-ui-event-emitting-button {
 	font-family: $font-family-sans;
-	display: inline-flex;
 	cursor: pointer;
 	white-space: nowrap;
 	text-decoration: none;
 	font-weight: bold;
 	align-items: center;
-}
-
-%framed {
+	display: inline-flex;
 	border-width: 1px;
 	border-radius: 2px;
 	border-style: solid;
 	box-sizing: border-box;
+	outline: 0;
 	padding: $padding-vertical-base $padding-horizontal-base;
-}
-
-#{$block} {
 	transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms, filter 100ms;
 
 	&--primaryProgressive {
-		@extend %textButton;
-		@extend %framed;
 		background-color: $color-primary;
 		color: $color-base--inverted;
 		border-color: $color-primary;
@@ -144,6 +154,53 @@ $block: '.wb-ui-event-emitting-button';
 		&:active:focus {
 			box-shadow: none;
 		}
+	}
+
+	&--cancel {
+		background-image: $svg-cancel;
+	}
+
+	&--frameless {
+		border-color: transparent;
+		background-color: $wmui-color-base100;
+
+		&:hover,
+		&:active,
+		:not( &:hover:focus ) {
+			box-shadow: none;
+		}
+
+		&:hover {
+			background-color: $wmui-color-base90;
+		}
+
+		&:active {
+			background-color: $wmui-color-base80;
+		}
+
+		&:focus {
+			border-color: $color-primary;
+			box-shadow: $box-shadow-base--focus;
+		}
+
+		&:active:focus {
+			box-shadow: none;
+			border-color: transparent;
+		}
+	}
+
+	&--iconOnly {
+		background-position: center;
+		background-size: 26px;
+		background-repeat: no-repeat;
+		width: 48px;
+		height: 48px;
+		cursor: pointer;
+		display: block;
+	}
+
+	&--iconOnly > #{&}__text {
+		@include sr-only();
 	}
 
 	&--primaryProgressive#{&}--pressed {

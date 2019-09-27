@@ -21,4 +21,19 @@ storiesOf( 'EventEmittingButton', module )
 			:squary="true"
 			message="squary primaryProgressive"
 		/>`,
+	} ), { info: true } )
+	.add( 'cancel', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="cancel"
+			message="cancel"
+		/>`,
+	} ), { info: true } )
+	.add( 'cancel squary', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="cancel"
+			:squary="true"
+			message="cancel"
+		/>`,
 	} ), { info: true } );
