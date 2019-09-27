@@ -7,4 +7,7 @@ export default function subscribeToAppEvents( emitter: EventEmitter, windowManag
 	emitter.on( Events.onSaved, () => {
 		destroyContainer( windowManager );
 	} );
+	emitter.on( Events.onCancel, () => {
+		destroyContainer( windowManager );
+	} );
 }
