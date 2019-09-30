@@ -46,7 +46,6 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.throttle-debounce',
 				'jquery.ui.suggester',
-				'jquery.ui.ooMenu',
 				'jquery.ui.widget',
 			],
 			'messages' => [
@@ -400,7 +399,6 @@ return call_user_func( function() {
 				'jquery.ui.core',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
-				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 				'jquery.ui.toggler',
 				'jquery.util.getDirectionality',

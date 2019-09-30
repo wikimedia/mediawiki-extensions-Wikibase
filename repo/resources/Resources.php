@@ -178,7 +178,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.spinner',
-				'jquery.ui.ooMenu',
 				'jquery.wikibase.entityselector',
 			],
 			'messages' => [

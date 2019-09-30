@@ -19,7 +19,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
-				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 				'util.highlightSubstring',
 			],
