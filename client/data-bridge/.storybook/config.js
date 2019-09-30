@@ -25,6 +25,9 @@ extendVueEnvironment(
 			return `<${messageKey}>`;
 		},
 	},
+	{
+		usePublish: true,
+	},
 );
 
 const req = require.context( '../stories', true, /\.js$/ );
