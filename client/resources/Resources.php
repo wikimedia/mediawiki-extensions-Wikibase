@@ -75,7 +75,7 @@ return call_user_func( function() {
 							'data-bridge.common.js'
 						],
 						'styles' => [
-							'data-bridge.app.css',
+							'data-bridge.css',
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :

@@ -5,7 +5,7 @@ storybook-static/
 dist/*
 !dist/data-bridge.init.js
 !dist/data-bridge.common.js
-!dist/data-bridge.app.css
+!dist/data-bridge.css
 
 # local env files
 .env.local
