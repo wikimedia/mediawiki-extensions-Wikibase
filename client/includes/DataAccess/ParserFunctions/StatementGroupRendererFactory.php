@@ -94,7 +94,7 @@ class StatementGroupRendererFactory {
 				$parser->getTitle()
 			);
 		} elseif ( $this->useVariants( $parser ) ) {
-			$variants = $parser->getConverterLanguage()->getVariants();
+			$variants = $parser->getTargetLanguage()->getVariants();
 			return $this->newVariantsAwareRenderer(
 				$type,
 				$variants,
@@ -241,7 +241,7 @@ class StatementGroupRendererFactory {
 	 */
 	private function useVariants( Parser $parser ) {
 		return $this->isParserUsingVariants( $parser )
-			&& $parser->getConverterLanguage()->hasVariants();
+			&& $parser->getTargetLanguage()->hasVariants();
 	}
 
 }
