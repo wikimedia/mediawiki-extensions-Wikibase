@@ -88,6 +88,7 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-dialog-title',
 							'savechanges',
 							'publishchanges',
+							'cancel',
 						],
 					],
 					__DIR__ . '/../data-bridge/dist'

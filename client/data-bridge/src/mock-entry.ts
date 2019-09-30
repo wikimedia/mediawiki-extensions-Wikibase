@@ -59,6 +59,8 @@ services.setMessagesRepository( {
 				return 'bridge dev';
 			case MessageKeys.SAVE_CHANGES:
 				return 'save changes';
+			case MessageKeys.CANCEL:
+				return 'cancel';
 			default:
 				return `⧼${messageKey}⧽`;
 		}

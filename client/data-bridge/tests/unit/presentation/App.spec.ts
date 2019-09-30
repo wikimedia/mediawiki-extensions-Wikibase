@@ -117,11 +117,12 @@ describe( 'App.vue', () => {
 					get: messageGet,
 				},
 			},
-			stubs: { ProcessDialogHeader },
+			stubs: { ProcessDialogHeader, EventEmittingButton },
 		} );
 
 		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVE_CHANGES );
-		expect( wrapper.find( EventEmittingButton ).props( 'message' ) ).toBe( saveMessage );
+		const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
+		expect( button.props( 'message' ) ).toBe( saveMessage );
 	} );
 
 	it( 'saves on save button click', async () => {
@@ -143,6 +144,39 @@ describe( 'App.vue', () => {
 
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
 		expect( wrapper.emitted( Events.onSaved ) ).toBeTruthy();
+	} );
+
+	it( 'renders the cancel button using the CANCEL message', () => {
+		const cancelMessage = 'cancel that';
+		const messageGet = jest.fn().mockReturnValue( cancelMessage );
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.CANCEL );
+		const button = wrapper.find( '.wb-ui-event-emitting-button--cancel' );
+		expect( button.props( 'message' ) ).toBe( cancelMessage );
+	} );
+
+	it( 'cancels on cancel button click', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		await wrapper.find( '.wb-ui-event-emitting-button--cancel' ).vm.$emit( 'click' );
+		await localVue.nextTick();
+
+		expect( wrapper.emitted( Events.onCancel ) ).toBeTruthy();
 	} );
 
 	describe( 'component switch', () => {

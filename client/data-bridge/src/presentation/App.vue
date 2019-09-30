@@ -9,6 +9,14 @@
 					@click="saveAndClose"
 				/>
 			</template>
+			<template v-slot:safeAction>
+				<EventEmittingButton
+					:message="$messages.get( $messages.KEYS.CANCEL )"
+					type="cancel"
+					:squary="true"
+					@click="cancel"
+				/>
+			</template>
 		</ProcessDialogHeader>
 
 		<ErrorWrapper v-if="hasError" />
@@ -71,6 +79,10 @@ export default class App extends Vue {
 			.catch( ( _error ) => {
 				// TODO store already sets application into error state. Do we need to do anything else?
 			} );
+	}
+
+	public cancel(): void {
+		this.$emit( Events.onCancel );
 	}
 }
 </script>
