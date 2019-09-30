@@ -27,4 +27,23 @@ describe( 'subscribeToAppEvents', () => {
 			expect( mockDestroyContainer ).toHaveBeenCalledWith( ooWindow );
 		} );
 	} );
+
+	describe( Events.onCancel, () => {
+		it( 'subscribes on cancel', () => {
+			const emitter = { on: jest.fn() };
+
+			subscribeToAppEvents( emitter as any, {} as any );
+			expect( emitter.on.mock.calls[ 1 ][ 0 ] ).toBe( Events.onCancel );
+		} );
+
+		it( 'calls destroyContainer on emitted event', () => {
+			const emitter = new EventEmitter();
+			const ooWindow = jest.fn();
+
+			subscribeToAppEvents( emitter, ooWindow as any );
+			emitter.emit( Events.onCancel );
+
+			expect( mockDestroyContainer ).toHaveBeenCalledWith( ooWindow );
+		} );
+	} );
 } );

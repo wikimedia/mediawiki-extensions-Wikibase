@@ -78,4 +78,6 @@ launch(
 	services,
 ).on( Events.onSaved, () => {
 	console.info( 'saved' ); // eslint-disable-line no-console
+} ).on( Events.onCancel, () => {
+	console.info( 'canceled' ); // eslint-disable-line no-console
 } );

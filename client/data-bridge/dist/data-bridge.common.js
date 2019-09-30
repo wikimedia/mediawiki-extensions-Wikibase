@@ -6595,6 +6595,7 @@ var events;
 
 (function (events) {
   events["onSaved"] = "saved";
+  events["onCancel"] = "cancel";
 })(events || (events = {}));
 
 /* harmony default export */ var src_events = (events);
