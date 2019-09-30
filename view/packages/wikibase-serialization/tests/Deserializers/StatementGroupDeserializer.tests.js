@@ -5,7 +5,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-var StatementGroupDeserializer = require( '../../src/Deserializers/StatementGroupDeserializer.js' );
+var StatementGroupDeserializer = require( '../../src/Deserializers/StatementGroupDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 QUnit.module( 'wikibase.serialization.StatementGroupDeserializer' );
 
@@ -21,9 +22,9 @@ var testSets = [
 				rank: 'normal'
 			}
 		],
-		new wb.datamodel.StatementGroup( 'P1',
-			new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new datamodel.StatementGroup( 'P1',
+			new datamodel.StatementList( [ new datamodel.Statement(
+				new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 			) ] )
 		)
 	]

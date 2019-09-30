@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.SiteLinkDeserializer
@@ -18,10 +19,10 @@ module.exports = util.inherit( 'WbSiteLinkDeserializer', PARENT, {
 	 * @inheritdoc
 	 *
 	 * @param {Object} serialization
-	 * @return {wikibase.datamodel.SiteLink}
+	 * @return {datamodel.SiteLink}
 	 */
 	deserialize: function( serialization ) {
-		return new wb.datamodel.SiteLink(
+		return new datamodel.SiteLink(
 			serialization.site,
 			serialization.title,
 			serialization.badges

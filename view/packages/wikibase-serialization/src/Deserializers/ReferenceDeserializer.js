@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	SnakListDeserializer = require( './SnakListDeserializer.js' );
 
 /**
@@ -18,10 +19,10 @@ module.exports = util.inherit( 'WbReferenceDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Reference}
+	 * @return {datamodel.Reference}
 	 */
 	deserialize: function( serialization ) {
-		return new wikibase.datamodel.Reference(
+		return new datamodel.Reference(
 			( new SnakListDeserializer() ).deserialize(
 				serialization.snaks,
 				serialization['snaks-order']

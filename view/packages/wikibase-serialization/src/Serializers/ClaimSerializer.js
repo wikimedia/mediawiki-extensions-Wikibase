@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.ClaimSerializer
@@ -17,14 +18,14 @@ MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Claim} claim
+	 * @param {datamodel.Claim} claim
 	 * @return {Object}
 	 *
 	 * @throws {Error} if claim is not a Claim instance.
 	 */
 	serialize: function( claim ) {
-		if( !( claim instanceof wb.datamodel.Claim ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Claim' );
+		if( !( claim instanceof datamodel.Claim ) ) {
+			throw new Error( 'Not an instance of datamodel.Claim' );
 		}
 
 		var snakSerializer = new MODULE.SnakSerializer(),

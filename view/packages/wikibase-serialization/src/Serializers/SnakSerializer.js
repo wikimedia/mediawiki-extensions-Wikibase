@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.SnakSerializer
@@ -17,14 +18,14 @@ MODULE.SnakSerializer = util.inherit( 'WbSnakSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Snak} snak
+	 * @param {datamodel.Snak} snak
 	 * @return {Object}
 	 *
 	 * @throws {Error} if snak is not a Snak instance.
 	 */
 	serialize: function( snak ) {
-		if( !( snak instanceof wb.datamodel.Snak ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Snak' );
+		if( !( snak instanceof datamodel.Snak ) ) {
+			throw new Error( 'Not an instance of datamodel.Snak' );
 		}
 
 		var serialization = {
@@ -36,7 +37,7 @@ MODULE.SnakSerializer = util.inherit( 'WbSnakSerializer', PARENT, {
 			serialization.hash = snak.getHash();
 		}
 
-		if( snak instanceof wikibase.datamodel.PropertyValueSnak ) {
+		if( snak instanceof datamodel.PropertyValueSnak ) {
 			var dataValue = snak.getValue();
 
 			serialization.datavalue = {

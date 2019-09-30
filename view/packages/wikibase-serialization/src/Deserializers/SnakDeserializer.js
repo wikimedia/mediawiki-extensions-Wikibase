@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.SnakDeserializer
@@ -18,15 +19,15 @@ MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Snak}
+	 * @return {datamodel.Snak}
 	 *
 	 * @throws {Error} if no constructor for the snak type detected exists.
 	 */
 	deserialize: function( serialization ) {
 		if( serialization.snaktype === 'novalue' ) {
-			return new wb.datamodel.PropertyNoValueSnak( serialization.property, serialization.hash );
+			return new datamodel.PropertyNoValueSnak( serialization.property, serialization.hash );
 		} else if( serialization.snaktype === 'somevalue' ) {
-			return new wb.datamodel.PropertySomeValueSnak( serialization.property, serialization.hash );
+			return new datamodel.PropertySomeValueSnak( serialization.property, serialization.hash );
 		} else if( serialization.snaktype === 'value' ) {
 			var dataValue = null,
 				type = serialization.datavalue.type,
@@ -38,7 +39,7 @@ MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 				dataValue = new dv.UnDeserializableValue( value, type, error.message );
 			}
 
-			return new wb.datamodel.PropertyValueSnak( serialization.property, dataValue, serialization.hash );
+			return new datamodel.PropertyValueSnak( serialization.property, dataValue, serialization.hash );
 		}
 
 		throw new Error( 'Incompatible snak type' );

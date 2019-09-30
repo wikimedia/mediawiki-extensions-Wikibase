@@ -41,6 +41,7 @@ module.exports = function ( config ) {
 		preprocessors: {
 			'src/**/*.js': [ 'webpack' ],
 			'tests/**/*.tests.js': [ 'webpack' ],
+			'tests/MockEntity.js': [ 'webpack' ],
 			'node_modules/wikibase-data-model/src/index.js': [ 'webpack' ]
 		},
 

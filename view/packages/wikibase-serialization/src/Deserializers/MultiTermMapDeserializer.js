@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	MultiTermDeserializer = require( './MultiTermDeserializer.js' );
 
 /**
@@ -18,7 +19,7 @@ module.exports = util.inherit( 'WbMultiTermMapDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.MultiTermMap}
+	 * @return {datamodel.MultiTermMap}
 	 */
 	deserialize: function( serialization ) {
 		var multiTerms = {},
@@ -29,7 +30,7 @@ module.exports = util.inherit( 'WbMultiTermMapDeserializer', PARENT, {
 				= multiTermDeserializer.deserialize( serialization[languageCode] );
 		}
 
-		return new wb.datamodel.MultiTermMap( multiTerms );
+		return new datamodel.MultiTermMap( multiTerms );
 	}
 } );
 

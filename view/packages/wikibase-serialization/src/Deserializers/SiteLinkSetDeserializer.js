@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	SiteLinkDeserializer = require( './SiteLinkDeserializer.js' );
 
 /**
@@ -18,7 +19,7 @@ module.exports = util.inherit( 'WbSiteLinkSetDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.SiteLinkSet}
+	 * @return {datamodel.SiteLinkSet}
 	 */
 	deserialize: function( serialization ) {
 		var siteLinks = [],
@@ -28,7 +29,7 @@ module.exports = util.inherit( 'WbSiteLinkSetDeserializer', PARENT, {
 			siteLinks.push( siteLinkDeserializer.deserialize( serialization[siteId] ) );
 		}
 
-		return new wikibase.datamodel.SiteLinkSet( siteLinks );
+		return new datamodel.SiteLinkSet( siteLinks );
 	}
 } );
 

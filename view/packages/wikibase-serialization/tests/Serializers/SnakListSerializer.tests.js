@@ -7,12 +7,14 @@
 
 QUnit.module( 'wikibase.serialization.SnakListSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.SnakList(),
+		new datamodel.SnakList(),
 		{}
 	], [
-		new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
+		new datamodel.SnakList( [ new datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 		{
 			P1: [ {
 				snaktype: 'novalue',
@@ -20,10 +22,10 @@ var testSets = [
 			} ]
 		}
 	], [
-		new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyNoValueSnak( 'P2' ),
-			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-			new wb.datamodel.PropertySomeValueSnak( 'P1' )
+		new datamodel.SnakList( [
+			new datamodel.PropertyNoValueSnak( 'P2' ),
+			new datamodel.PropertyNoValueSnak( 'P1' ),
+			new datamodel.PropertySomeValueSnak( 'P1' )
 		] ),
 		{
 			P1: [ {

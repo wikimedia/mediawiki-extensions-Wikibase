@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	MultiTermMapDeserializer = require( './MultiTermMapDeserializer.js' );
 
 /**
@@ -18,13 +19,13 @@ module.exports = util.inherit( 'WbFingerprintDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Fingerprint}
+	 * @return {datamodel.Fingerprint}
 	 */
 	deserialize: function( serialization ) {
 		var termMapDeserializer = new MODULE.TermMapDeserializer(),
 			multiTermMapDeserializer = new MultiTermMapDeserializer();
 
-		return new wb.datamodel.Fingerprint(
+		return new datamodel.Fingerprint(
 			termMapDeserializer.deserialize( serialization.labels ),
 			termMapDeserializer.deserialize( serialization.descriptions ),
 			multiTermMapDeserializer.deserialize( serialization.aliases )

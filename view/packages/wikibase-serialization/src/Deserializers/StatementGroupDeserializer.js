@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class StatementGroupDeserializer
@@ -17,7 +18,7 @@ module.exports = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.StatementGroup}
+	 * @return {datamodel.StatementGroup}
 	 *
 	 * @throws {Error} if serialization is an empty object.
 	 */
@@ -29,7 +30,7 @@ module.exports = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
 		var statementListDeserializer = new MODULE.StatementListDeserializer(),
 			statementList = statementListDeserializer.deserialize( serialization );
 
-		return new wb.datamodel.StatementGroup( statementList.getPropertyIds()[0], statementList );
+		return new datamodel.StatementGroup( statementList.getPropertyIds()[0], statementList );
 	}
 } );
 

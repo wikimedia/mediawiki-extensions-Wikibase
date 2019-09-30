@@ -6,7 +6,8 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.SiteLinkDeserializer' );
-var SiteLinkDeserializer = require( '../../src/Deserializers/SiteLinkDeserializer.js' );
+var SiteLinkDeserializer = require( '../../src/Deserializers/SiteLinkDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 var testSets = [
 	[
@@ -15,7 +16,7 @@ var testSets = [
 			title: 'page-title',
 			badges: [ 'badge-1', 'badge-2' ]
 		},
-		new wb.datamodel.SiteLink( 'site-id', 'page-title', [ 'badge-1', 'badge-2' ] )
+		new datamodel.SiteLink( 'site-id', 'page-title', [ 'badge-1', 'badge-2' ] )
 	]
 ];
 

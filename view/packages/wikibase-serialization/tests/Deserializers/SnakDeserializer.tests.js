@@ -8,19 +8,21 @@
 
 QUnit.module( 'wikibase.serialization.SnakDeserializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
 		{
 			snaktype: 'novalue',
 			property: 'P1'
 		},
-		new wb.datamodel.PropertyNoValueSnak( 'P1' )
+		new datamodel.PropertyNoValueSnak( 'P1' )
 	], [
 		{
 			snaktype: 'somevalue',
 			property: 'P1'
 		},
-		new wb.datamodel.PropertySomeValueSnak( 'P1' )
+		new datamodel.PropertySomeValueSnak( 'P1' )
 	], [
 		{
 			snaktype: 'value',
@@ -30,7 +32,7 @@ var testSets = [
 				value: 'some string'
 			}
 		},
-		new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'some string' ) )
+		new datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'some string' ) )
 	], [
 		{
 			snaktype: 'value',
@@ -44,7 +46,7 @@ var testSets = [
 				}
 			}
 		},
-		new wb.datamodel.PropertyValueSnak( 'P1', new dv.UnDeserializableValue(
+		new datamodel.PropertyValueSnak( 'P1', new dv.UnDeserializableValue(
 				{ foo: 'bar' },
 				'string',
 				'String is invalid.'

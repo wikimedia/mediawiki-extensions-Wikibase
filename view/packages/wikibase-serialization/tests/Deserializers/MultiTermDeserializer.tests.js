@@ -6,12 +6,13 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.MultiTermDeserializer' );
-var MultiTermDeserializer = require( '../../src/Deserializers/MultiTermDeserializer.js' );
+var MultiTermDeserializer = require( '../../src/Deserializers/MultiTermDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 var testSets = [
 	[
 		[ { language: 'en', value: 'test1' }, { language: 'en', value: 'test2' } ],
-		new wb.datamodel.MultiTerm( 'en', [ 'test1', 'test2' ] )
+		new datamodel.MultiTerm( 'en', [ 'test1', 'test2' ] )
 	]
 ];
 

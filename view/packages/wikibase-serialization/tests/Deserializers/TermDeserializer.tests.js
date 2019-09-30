@@ -7,10 +7,12 @@
 
 QUnit.module( 'wikibase.serialization.TermDeserializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
 		{ language: 'en', value: 'test' },
-		new wb.datamodel.Term( 'en', 'test' )
+		new datamodel.Term( 'en', 'test' )
 	]
 ];
 

@@ -2,6 +2,7 @@
 	'use strict';
 
 var MODULE = wb.serialization,
+	datamodel = require( 'wikibase.datamodel' ),
 	FingerprintDeserializer = require( './Deserializers/FingerprintDeserializer.js' ),
 	MultiTermDeserializer = require( './Deserializers/MultiTermDeserializer.js' ),
 	MultiTermMapDeserializer = require( './Deserializers/MultiTermMapDeserializer.js' ),
@@ -25,23 +26,23 @@ var MODULE = wb.serialization,
 var SELF = MODULE.DeserializerFactory = function WbSerializationDeserializerFactory() {
 	this._strategyProvider = new MODULE.StrategyProvider();
 
-	this.registerDeserializer( ClaimDeserializer, wb.datamodel.Claim );
-	this.registerDeserializer( MODULE.EntityDeserializer, wb.datamodel.Entity );
-	this.registerDeserializer( FingerprintDeserializer, wb.datamodel.Fingerprint );
-	this.registerDeserializer( MultiTermDeserializer, wb.datamodel.MultiTerm );
-	this.registerDeserializer( MultiTermMapDeserializer, wb.datamodel.MultiTermMap );
-	this.registerDeserializer( ReferenceDeserializer, wb.datamodel.Reference );
-	this.registerDeserializer( ReferenceListDeserializer, wb.datamodel.ReferenceList );
-	this.registerDeserializer( SiteLinkDeserializer, wb.datamodel.SiteLink );
-	this.registerDeserializer( SiteLinkSetDeserializer, wb.datamodel.SiteLinkSet );
-	this.registerDeserializer( MODULE.SnakDeserializer, wb.datamodel.Snak );
-	this.registerDeserializer( SnakListDeserializer, wb.datamodel.SnakList );
-	this.registerDeserializer( MODULE.StatementDeserializer, wb.datamodel.Statement );
-	this.registerDeserializer( StatementGroupDeserializer, wb.datamodel.StatementGroup );
-	this.registerDeserializer( MODULE.StatementGroupSetDeserializer, wb.datamodel.StatementGroupSet );
-	this.registerDeserializer( MODULE.StatementListDeserializer, wb.datamodel.StatementList );
-	this.registerDeserializer( MODULE.TermDeserializer, wb.datamodel.Term );
-	this.registerDeserializer( MODULE.TermMapDeserializer, wb.datamodel.TermMap );
+	this.registerDeserializer( ClaimDeserializer, datamodel.Claim );
+	this.registerDeserializer( MODULE.EntityDeserializer, datamodel.Entity );
+	this.registerDeserializer( FingerprintDeserializer, datamodel.Fingerprint );
+	this.registerDeserializer( MultiTermDeserializer, datamodel.MultiTerm );
+	this.registerDeserializer( MultiTermMapDeserializer, datamodel.MultiTermMap );
+	this.registerDeserializer( ReferenceDeserializer, datamodel.Reference );
+	this.registerDeserializer( ReferenceListDeserializer, datamodel.ReferenceList );
+	this.registerDeserializer( SiteLinkDeserializer, datamodel.SiteLink );
+	this.registerDeserializer( SiteLinkSetDeserializer, datamodel.SiteLinkSet );
+	this.registerDeserializer( MODULE.SnakDeserializer, datamodel.Snak );
+	this.registerDeserializer( SnakListDeserializer, datamodel.SnakList );
+	this.registerDeserializer( MODULE.StatementDeserializer, datamodel.Statement );
+	this.registerDeserializer( StatementGroupDeserializer, datamodel.StatementGroup );
+	this.registerDeserializer( MODULE.StatementGroupSetDeserializer, datamodel.StatementGroupSet );
+	this.registerDeserializer( MODULE.StatementListDeserializer, datamodel.StatementList );
+	this.registerDeserializer( MODULE.TermDeserializer, datamodel.Term );
+	this.registerDeserializer( MODULE.TermMapDeserializer, datamodel.TermMap );
 };
 
 $.extend( SELF.prototype, {

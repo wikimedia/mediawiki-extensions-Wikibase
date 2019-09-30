@@ -5,7 +5,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-var ClaimDeserializer = require( '../../src/Deserializers/ClaimDeserializer.js' );
+var ClaimDeserializer = require( '../../src/Deserializers/ClaimDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 QUnit.module( 'wikibase.serialization.ClaimDeserializer' );
 
@@ -19,7 +20,7 @@ var testSets = [
 			},
 			type: 'claim'
 		},
-		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' )
+		new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' )
 	], [
 		{
 			id: 'Q1$1',
@@ -36,9 +37,9 @@ var testSets = [
 			'qualifiers-order': [ 'P1' ],
 			type: 'claim'
 		},
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
+		new datamodel.Claim(
+			new datamodel.PropertyNoValueSnak( 'P1' ),
+			new datamodel.SnakList( [ new datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 			'Q1$1'
 		)
 	]

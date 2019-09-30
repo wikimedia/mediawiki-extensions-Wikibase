@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.TermDeserializer
@@ -17,10 +18,10 @@ MODULE.TermDeserializer = util.inherit( 'WbTermDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Term}
+	 * @return {datamodel.Term}
 	 */
 	deserialize: function( serialization ) {
-		return new wb.datamodel.Term( serialization.language, serialization.value );
+		return new datamodel.Term( serialization.language, serialization.value );
 	}
 } );
 

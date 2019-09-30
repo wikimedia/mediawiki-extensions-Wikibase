@@ -2,6 +2,7 @@
 	'use strict';
 
 var MODULE = wb.serialization,
+	datamodel = require( 'wikibase.datamodel' ),
 	TermSerializer = require( './Serializers/TermSerializer.js' );
 
 /**
@@ -16,23 +17,23 @@ var MODULE = wb.serialization,
 var SELF = MODULE.SerializerFactory = function WbSerializationSerializerFactory() {
 	this._strategyProvider = new MODULE.StrategyProvider();
 
-	this.registerSerializer( MODULE.ClaimSerializer, wb.datamodel.Claim );
-	this.registerSerializer( MODULE.EntitySerializer, wb.datamodel.Entity );
-	this.registerSerializer( MODULE.FingerprintSerializer, wb.datamodel.Fingerprint );
-	this.registerSerializer( MODULE.MultiTermMapSerializer, wb.datamodel.MultiTermMap );
-	this.registerSerializer( MODULE.MultiTermSerializer, wb.datamodel.MultiTerm );
-	this.registerSerializer( MODULE.ReferenceListSerializer, wb.datamodel.ReferenceList );
-	this.registerSerializer( MODULE.ReferenceSerializer, wb.datamodel.Reference );
-	this.registerSerializer( MODULE.SiteLinkSerializer, wb.datamodel.SiteLink );
-	this.registerSerializer( MODULE.SiteLinkSetSerializer, wb.datamodel.SiteLinkSet );
-	this.registerSerializer( MODULE.SnakListSerializer, wb.datamodel.SnakList );
-	this.registerSerializer( MODULE.SnakSerializer, wb.datamodel.Snak );
-	this.registerSerializer( MODULE.StatementGroupSerializer, wb.datamodel.StatementGroup );
-	this.registerSerializer( MODULE.StatementGroupSetSerializer, wb.datamodel.StatementGroupSet );
-	this.registerSerializer( MODULE.StatementListSerializer, wb.datamodel.StatementList );
-	this.registerSerializer( MODULE.StatementSerializer, wb.datamodel.Statement );
-	this.registerSerializer( TermSerializer, wb.datamodel.Term );
-	this.registerSerializer( MODULE.TermMapSerializer, wb.datamodel.TermMap );
+	this.registerSerializer( MODULE.ClaimSerializer, datamodel.Claim );
+	this.registerSerializer( MODULE.EntitySerializer, datamodel.Entity );
+	this.registerSerializer( MODULE.FingerprintSerializer, datamodel.Fingerprint );
+	this.registerSerializer( MODULE.MultiTermMapSerializer, datamodel.MultiTermMap );
+	this.registerSerializer( MODULE.MultiTermSerializer, datamodel.MultiTerm );
+	this.registerSerializer( MODULE.ReferenceListSerializer, datamodel.ReferenceList );
+	this.registerSerializer( MODULE.ReferenceSerializer, datamodel.Reference );
+	this.registerSerializer( MODULE.SiteLinkSerializer, datamodel.SiteLink );
+	this.registerSerializer( MODULE.SiteLinkSetSerializer, datamodel.SiteLinkSet );
+	this.registerSerializer( MODULE.SnakListSerializer, datamodel.SnakList );
+	this.registerSerializer( MODULE.SnakSerializer, datamodel.Snak );
+	this.registerSerializer( MODULE.StatementGroupSerializer, datamodel.StatementGroup );
+	this.registerSerializer( MODULE.StatementGroupSetSerializer, datamodel.StatementGroupSet );
+	this.registerSerializer( MODULE.StatementListSerializer, datamodel.StatementList );
+	this.registerSerializer( MODULE.StatementSerializer, datamodel.Statement );
+	this.registerSerializer( TermSerializer, datamodel.Term );
+	this.registerSerializer( MODULE.TermMapSerializer, datamodel.TermMap );
 };
 
 $.extend( SELF.prototype, {

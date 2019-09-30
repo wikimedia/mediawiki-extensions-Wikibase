@@ -7,6 +7,8 @@
 
 QUnit.module( 'wikibase.serialization.StatementDeserializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
 		{
@@ -17,10 +19,10 @@ var testSets = [
 			type: 'statement',
 			rank: 'normal'
 		},
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
+		new datamodel.Statement(
+			new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) ),
 			null,
-			wb.datamodel.Statement.RANK.NORMAL
+			datamodel.Statement.RANK.NORMAL
 		)
 	], [
 		{
@@ -35,10 +37,10 @@ var testSets = [
 			type: 'statement',
 			rank: 'preferred'
 		},
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] ),
-			wb.datamodel.Statement.RANK.PREFERRED
+		new datamodel.Statement(
+			new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) ),
+			new datamodel.ReferenceList( [ new datamodel.Reference() ] ),
+			datamodel.Statement.RANK.PREFERRED
 		)
 	]
 ];

@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.StatementListSerializer
@@ -17,14 +18,14 @@ MODULE.StatementListSerializer = util.inherit( 'WbStatementListSerializer', PARE
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.StatementList} statementList
+	 * @param {datamodel.StatementList} statementList
 	 * @return {Object[]}
 	 *
 	 * @throws {Error} if statementList is not a StatementList instance.
 	 */
 	serialize: function( statementList ) {
-		if( !( statementList instanceof wb.datamodel.StatementList ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.StatementList' );
+		if( !( statementList instanceof datamodel.StatementList ) ) {
+			throw new Error( 'Not an instance of datamodel.StatementList' );
 		}
 
 		var serialization = [],

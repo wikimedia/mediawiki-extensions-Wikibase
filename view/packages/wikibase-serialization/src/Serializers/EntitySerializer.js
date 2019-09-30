@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.EntitySerializer
@@ -16,10 +17,10 @@ var MODULE = wb.serialization,
 MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function() {
 	this._strategyProvider = new MODULE.StrategyProvider();
 	this._strategyProvider.registerStrategy(
-		new MODULE.ItemSerializer(), wb.datamodel.Item.TYPE
+		new MODULE.ItemSerializer(), datamodel.Item.TYPE
 	);
 	this._strategyProvider.registerStrategy(
-		new MODULE.PropertySerializer(), wb.datamodel.Property.TYPE
+		new MODULE.PropertySerializer(), datamodel.Property.TYPE
 	);
 }, {
 	/**
@@ -39,14 +40,14 @@ MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, function()
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 * @return {Object}
 	 *
 	 * @throws {Error} if entity is not an Entity instance.
 	 */
 	serialize: function( entity ) {
-		if( !( entity instanceof wb.datamodel.Entity ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Entity' );
+		if( !( entity instanceof datamodel.Entity ) ) {
+			throw new Error( 'Not an instance of datamodel.Entity' );
 		}
 
 		return this._strategyProvider.getStrategyFor( entity.getType() ).serialize( entity );

@@ -7,20 +7,22 @@
 
 QUnit.module( 'wikibase.serialization.StatementGroupSetSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.StatementGroupSet(),
+		new datamodel.StatementGroupSet(),
 		{}
 	], [
-		new wb.datamodel.StatementGroupSet( [
-			new wb.datamodel.StatementGroup( 'P1',
-				new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new datamodel.StatementGroupSet( [
+			new datamodel.StatementGroup( 'P1',
+				new datamodel.StatementList( [ new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 				) ] )
 			),
-			new wb.datamodel.StatementGroup( 'P2',
-				new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			new datamodel.StatementGroup( 'P2',
+				new datamodel.StatementList( [ new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P2' ) )
 				) ] )
 			)
 		] ),

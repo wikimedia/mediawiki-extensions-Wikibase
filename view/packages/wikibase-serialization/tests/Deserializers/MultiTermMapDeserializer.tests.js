@@ -6,29 +6,30 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.MultiTermMapDeserializer' );
-var MultiTermMapDeserializer = require( '../../src/Deserializers/MultiTermMapDeserializer.js' );
+var MultiTermMapDeserializer = require( '../../src/Deserializers/MultiTermMapDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 var testSets = [
 	[
 		{},
-		new wb.datamodel.MultiTermMap()
+		new datamodel.MultiTermMap()
 	], [
 		{
 			en: [ { language: 'en', value: 'en-test' } ],
 			de: [ { language: 'de', value: 'de-test' } ]
 		},
-		new wb.datamodel.MultiTermMap( {
-			en: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] ),
-			de: new wb.datamodel.MultiTerm( 'de', [ 'de-test' ] )
+		new datamodel.MultiTermMap( {
+			en: new datamodel.MultiTerm( 'en', [ 'en-test' ] ),
+			de: new datamodel.MultiTerm( 'de', [ 'de-test' ] )
 		} )
 	], [
 		{
 			en: [ { language: 'en', value: 'en-test' } ],
 			de: [ { language: 'en', value: 'en-test' } ]
 		},
-		new wb.datamodel.MultiTermMap( {
-			en: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] ),
-			de: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] )
+		new datamodel.MultiTermMap( {
+			en: new datamodel.MultiTerm( 'en', [ 'en-test' ] ),
+			de: new datamodel.MultiTerm( 'en', [ 'en-test' ] )
 		} )
 	]
 ];

@@ -4,13 +4,15 @@
  */
 ( function( wb, QUnit ) {
 'use strict';
-	var TermSerializer = require( './../../src/Serializers/TermSerializer.js' );
+
+var TermSerializer = require( './../../src/Serializers/TermSerializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 QUnit.module( 'wikibase.serialization.TermSerializer' );
 
 var testSets = [
 	[
-		new wb.datamodel.Term( 'en', 'test' ),
+		new datamodel.Term( 'en', 'test' ),
 		{ language: 'en', value: 'test' }
 	]
 ];

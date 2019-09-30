@@ -7,9 +7,11 @@
 
 QUnit.module( 'wikibase.serialization.ClaimSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' ),
+		new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' ),
 		{
 			id: 'Q1$1',
 			mainsnak: {
@@ -19,9 +21,9 @@ var testSets = [
 			type: 'claim'
 		}
 	], [
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
+		new datamodel.Claim(
+			new datamodel.PropertyNoValueSnak( 'P1' ),
+			new datamodel.SnakList( [ new datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 			'Q1$1'
 		),
 		{

@@ -2,12 +2,13 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @param {Object[]} serializedSnaks
- * @param {wikibase.datamodel.Snak[]} snaks
- * @return {wikibase.datamodel.SnakList}
+ * @param {datamodel.Snak[]} snaks
+ * @return {datamodel.SnakList}
  */
 function addSerializedSnaksToSnakList( serializedSnaks, snaks ) {
 	var snakDeserializer = new MODULE.SnakDeserializer();
@@ -34,7 +35,7 @@ module.exports = util.inherit( 'WbSnakListDeserializer', PARENT, {
 	 *
 	 * @param {Object} serialization
 	 * @param {string[]} [order]
-	 * @return {wikibase.datamodel.SnakList}
+	 * @return {datamodel.SnakList}
 	 *
 	 * @throws {Error} if the order parameter is provided but the property id of a snak
 	 *         serialization is no represented in the order.
@@ -74,7 +75,7 @@ module.exports = util.inherit( 'WbSnakListDeserializer', PARENT, {
 			}
 		}
 
-		return new wb.datamodel.SnakList( snaks );
+		return new datamodel.SnakList( snaks );
 	}
 } );
 

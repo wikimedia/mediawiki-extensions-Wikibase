@@ -6,7 +6,8 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.FingerprintDeserializer' );
-var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' );
+var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 var testSets = [
 	[
@@ -15,17 +16,17 @@ var testSets = [
 			descriptions: {},
 			aliases: {}
 		},
-		new wb.datamodel.Fingerprint()
+		new datamodel.Fingerprint()
 	], [
 		{
 			labels: { en: { language: 'en', value: 'label' } },
 			descriptions: { en: { language: 'en', value: 'description' } },
 			aliases: { en: [ { language: 'en', value: 'alias' } ] }
 		},
-		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'label' ) } ),
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'description' ) } ),
-			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
+		new datamodel.Fingerprint(
+			new datamodel.TermMap( { en: new datamodel.Term( 'en', 'label' ) } ),
+			new datamodel.TermMap( { en: new datamodel.Term( 'en', 'description' ) } ),
+			new datamodel.MultiTermMap( { en: new datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
 		)
 	]
 ];

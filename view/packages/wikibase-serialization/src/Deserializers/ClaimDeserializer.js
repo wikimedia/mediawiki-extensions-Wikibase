@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	SnakListDeserializer = require( './SnakListDeserializer.js' );
 
 /**
@@ -19,7 +20,7 @@ module.exports = util.inherit( 'WbClaimDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Claim}
+	 * @return {datamodel.Claim}
 	 */
 	deserialize: function( serialization ) {
 		var mainSnak = ( new MODULE.SnakDeserializer ).deserialize( serialization.mainsnak ),
@@ -33,7 +34,7 @@ module.exports = util.inherit( 'WbClaimDeserializer', PARENT, {
 			);
 		}
 
-		return new wb.datamodel.Claim( mainSnak, qualifiers, guid );
+		return new datamodel.Claim( mainSnak, qualifiers, guid );
 	}
 } );
 

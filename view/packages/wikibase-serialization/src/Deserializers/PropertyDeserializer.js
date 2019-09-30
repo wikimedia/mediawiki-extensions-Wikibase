@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	FingerprintDeserializer = require( './FingerprintDeserializer.js' );
 
 /**
@@ -18,19 +19,19 @@ module.exports = util.inherit( 'WbPropertyDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Property}
+	 * @return {datamodel.Property}
 	 *
 	 * @throws {Error} if serialization does not resolve to a serialized Property.
 	 */
 	deserialize: function( serialization ) {
-		if( serialization.type !== wb.datamodel.Property.TYPE ) {
+		if( serialization.type !== datamodel.Property.TYPE ) {
 			throw new Error( 'Serialization does not resolve to a Property' );
 		}
 
 		var fingerprintDeserializer = new FingerprintDeserializer(),
 			statementGroupSetDeserializer = new MODULE.StatementGroupSetDeserializer();
 
-		return new wb.datamodel.Property(
+		return new datamodel.Property(
 			serialization.id,
 			serialization.datatype,
 			fingerprintDeserializer.deserialize( serialization ),

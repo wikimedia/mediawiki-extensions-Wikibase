@@ -8,21 +8,23 @@
 
 QUnit.module( 'wikibase.serialization.SnakSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+		new datamodel.PropertyNoValueSnak( 'P1' ),
 		{
 			snaktype: 'novalue',
 			property: 'P1'
 		}
 	], [
-		new wb.datamodel.PropertySomeValueSnak( 'P1' ),
+		new datamodel.PropertySomeValueSnak( 'P1' ),
 		{
 			snaktype: 'somevalue',
 			property: 'P1'
 		}
 	], [
-		new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'some string' ) ),
+		new datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'some string' ) ),
 		{
 			snaktype: 'value',
 			property: 'P1',

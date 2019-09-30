@@ -5,14 +5,15 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-var ReferenceListDeserializer = require( '../../src/Deserializers/ReferenceListDeserializer.js' );
+var ReferenceListDeserializer = require( '../../src/Deserializers/ReferenceListDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 QUnit.module( 'wikibase.serialization.ReferenceListDeserializer' );
 
 var testSets = [
 	[
 		[],
-		new wb.datamodel.ReferenceList()
+		new datamodel.ReferenceList()
 	], [
 		[
 			{
@@ -20,7 +21,7 @@ var testSets = [
 				'snaks-order': []
 			}
 		],
-		new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
+		new datamodel.ReferenceList( [ new datamodel.Reference() ] )
 	], [
 		[
 			{
@@ -33,9 +34,9 @@ var testSets = [
 				hash: 'hash2'
 			}
 		],
-		new wb.datamodel.ReferenceList( [
-			new wb.datamodel.Reference( null, 'hash1' ),
-			new wb.datamodel.Reference( null, 'hash2' )
+		new datamodel.ReferenceList( [
+			new datamodel.Reference( null, 'hash1' ),
+			new datamodel.Reference( null, 'hash2' )
 		] )
 	]
 ];
