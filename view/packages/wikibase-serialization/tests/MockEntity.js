@@ -17,7 +17,7 @@ wb.serialization.tests = wb.serialization.tests || {};
  */
 var SELF = wb.serialization.tests.MockEntity = util.inherit(
 	'wbMockEntity',
-	wb.datamodel.Entity,
+	wb.datamodel.FingerprintableEntity,
 	function WbMockEntity( id, fingerprint ) {
 		this._id = id;
 		this._fingerprint = fingerprint;

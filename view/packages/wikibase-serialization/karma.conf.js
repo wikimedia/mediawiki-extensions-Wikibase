@@ -1,3 +1,5 @@
+var path = require( 'path' );
+
 module.exports = function ( config ) {
 	config.set( {
 		frameworks: [ 'qunit' ],
@@ -38,10 +40,19 @@ module.exports = function ( config ) {
 
 		preprocessors: {
 			'src/**/*.js': [ 'webpack' ],
-			'tests/**/*.tests.js': [ 'webpack' ]
+			'tests/**/*.tests.js': [ 'webpack' ],
+			'node_modules/wikibase-data-model/src/index.js': [ 'webpack' ]
 		},
 
-		webpack: { mode: 'development' },
+		webpack: {
+			mode: 'development',
+			resolve: {
+				alias: {
+					// eslint-disable-next-line no-undef
+					'wikibase.datamodel': path.resolve( __dirname, 'node_modules/wikibase-data-model/src/index.js' )
+				}
+			}
+		},
 
 		port: 9876,
 
