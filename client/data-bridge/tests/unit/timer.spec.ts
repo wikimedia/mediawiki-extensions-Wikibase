@@ -1,4 +1,4 @@
-import { waitFor } from './timer';
+import { waitFor } from './../util/timer';
 
 describe( 'waitFor', () => {
 	it( 'waits for a given condition', () => {

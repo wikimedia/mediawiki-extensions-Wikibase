@@ -14,7 +14,6 @@
     "test:unit": "vue-cli-service test:unit -c ./jest.config.unit.js",
     "test:integration": "vue-cli-service test:unit -c ./jest.config.integration.js",
     "test:e2e": "vue-cli-service test:unit -c ./jest.config.e2e.js",
-    "test:util": "vue-cli-service test:unit -c ./jest.config.util.js",
     "test:distnodiff": "npm run build:app -- --dest /tmp/dist && npm run build:init -- --dest /tmp/dist && diff -q ./dist/data-bridge.common.js /tmp/dist/data-bridge.common.js && diff -q ./dist/data-bridge.init.js /tmp/dist/data-bridge.init.js",
     "selenium-test": "wdio tests/selenium/wdio.conf.js",
     "storybook": "start-storybook",
