@@ -17,11 +17,8 @@ import Entities from '@/mock-data/data/Q42.data.json';
 
 Vue.config.devtools = false;
 
-const destroy = jest.fn();
-const clearWindows = jest.fn( () => Promise.resolve() );
 const manager = {
-	destroy,
-	clearWindows,
+	on: jest.fn(),
 };
 const dialog = {
 	getManager: jest.fn( () => manager ),

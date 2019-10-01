@@ -18,11 +18,11 @@ import Entities from '@/mock-data/data/Q42.data.json';
 
 Vue.config.devtools = false;
 
-const destroy = jest.fn();
+const on = jest.fn();
 const clearWindows = jest.fn( () => Promise.resolve() );
 const manager = {
-	destroy,
 	clearWindows,
+	on,
 };
 const dialog = {
 	getManager: jest.fn( () => manager ),
@@ -92,6 +92,7 @@ describe( 'app', () => {
 				testLink!.click();
 
 				expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+				expect( on ).toHaveBeenCalledTimes( 1 );
 				expect( select( '.wb-db-app' ) ).not.toBeNull();
 				expect( select( '.wb-db-app .wb-db-init' ) ).not.toBeNull();
 				expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
@@ -112,6 +113,7 @@ describe( 'app', () => {
 			await budge();
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			expect( on ).toHaveBeenCalledTimes( 1 );
 			expect( select( '.wb-db-app' ) ).not.toBeNull();
 			expect( select( '.wb-db-app .wb-db-bridge' ) ).not.toBeNull();
 			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
@@ -131,6 +133,7 @@ describe( 'app', () => {
 			await budge();
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			expect( on ).toHaveBeenCalledTimes( 1 );
 			expect( select( '.wb-db-app' ) ).not.toBeNull();
 			expect( select( '.wb-db-app .wb-db-error' ) ).not.toBeNull();
 			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
@@ -269,7 +272,6 @@ describe( 'app', () => {
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
-			expect( destroy ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'saves on enter', async () => {
@@ -306,7 +308,6 @@ describe( 'app', () => {
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
-			expect( destroy ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'saves on space', async () => {
@@ -343,7 +344,6 @@ describe( 'app', () => {
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
-			expect( destroy ).toHaveBeenCalledTimes( 1 );
 		} );
 	} );
 } );

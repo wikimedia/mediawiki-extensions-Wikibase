@@ -12,6 +12,11 @@ function mockOOEnv(): any {
 		$element: new ( jest.fn() )(),
 		destroy: jest.fn(),
 		clearWindows: jest.fn(),
+		emit: jest.fn(),
+		emitThrow: jest.fn(),
+		off: jest.fn(),
+		on: jest.fn(),
+		once: jest.fn(),
 	};
 
 	// simulating base Dialog

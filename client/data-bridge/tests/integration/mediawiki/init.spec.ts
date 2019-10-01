@@ -26,10 +26,10 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	default: ( oo: any, $: any ) => mockPrepareContainer( oo, $ ),
 } ) );
 
-const mockSubscribeToAppEvents = jest.fn();
-jest.mock( '@/mediawiki/subscribeToAppEvents', () => ( {
+const mockSubscribeToEvents = jest.fn();
+jest.mock( '@/mediawiki/subscribeToEvents', () => ( {
 	__esModule: true,
-	default: ( emitter: any, windowManager: any ) => mockSubscribeToAppEvents( emitter, windowManager ),
+	default: ( emitter: any, windowManager: any ) => mockSubscribeToEvents( emitter, windowManager ),
 } ) );
 
 describe( 'init', () => {
@@ -106,7 +106,7 @@ describe( 'init', () => {
 				expectedServices,
 			);
 
-			expect( mockSubscribeToAppEvents ).toHaveBeenCalledWith( emitter, manager );
+			expect( mockSubscribeToEvents ).toHaveBeenCalledWith( emitter, manager );
 		} );
 	} );
 } );

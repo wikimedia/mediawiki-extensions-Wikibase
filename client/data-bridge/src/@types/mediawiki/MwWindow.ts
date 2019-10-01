@@ -52,13 +52,36 @@ interface MediaWiki {
 	language: MwLanguage;
 }
 
+interface Events {
+	[ name: string ]: any[];
+}
+type EventListener<A extends any[]> = ( ...args: A ) => void;
+
+/** https://doc.wikimedia.org/oojs/master/OO.EventEmitter.html */
+export interface OOEventEmitter<E extends Events> {
+	emit<K extends keyof E>( event: K, ...args: E[K] ): boolean;
+	emitThrow<K extends keyof E>( event: K, ...args: E[K] ): boolean;
+	off<K extends keyof E>( event: K, listener: EventListener<E[K]> ): this;
+	on<K extends keyof E>( event: K, listener: EventListener<E[K]> ): this;
+	once<K extends keyof E>( event: K, listener: EventListener<E[K]> ): this;
+}
+
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.Window */
+export interface OOUIWindow extends OOElement {}
+
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */
 export interface WindowInstance {
 	isClosed(): boolean;
 }
 
+interface WindowManagerEvents extends Events {
+	closing: [OOUIWindow, JQuery.Promise<unknown>, object];
+	opening: [OOUIWindow, JQuery.Promise<unknown>, object];
+	resize: [OOUIWindow];
+}
+
 export type WindowManagerConstructor = new() => WindowManager;
-export interface WindowManager {
+export interface WindowManager extends OOEventEmitter<WindowManagerEvents> {
 	addWindows( elements: OOElement[] ): void;
 	openWindow( element: OOElement ): void;
 	clearWindows(): JQuery.Promise<unknown, unknown, unknown>;
