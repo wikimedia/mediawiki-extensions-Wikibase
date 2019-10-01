@@ -7,12 +7,14 @@
 
 QUnit.module( 'wikibase.serialization.ReferenceListSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.ReferenceList(),
+		new datamodel.ReferenceList(),
 		[]
 	], [
-		new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] ),
+		new datamodel.ReferenceList( [ new datamodel.Reference() ] ),
 		[
 			{
 				snaks: {},
@@ -20,9 +22,9 @@ var testSets = [
 			}
 		]
 	], [
-		new wb.datamodel.ReferenceList( [
-			new wb.datamodel.Reference( null, 'hash1' ),
-			new wb.datamodel.Reference( null, 'hash2' )
+		new datamodel.ReferenceList( [
+			new datamodel.Reference( null, 'hash1' ),
+			new datamodel.Reference( null, 'hash2' )
 		] ),
 		[
 			{

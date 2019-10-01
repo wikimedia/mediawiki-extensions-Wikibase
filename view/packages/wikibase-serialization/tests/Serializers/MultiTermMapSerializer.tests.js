@@ -7,23 +7,25 @@
 
 QUnit.module( 'wikibase.serialization.MultiTermMapSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.MultiTermMap(),
+		new datamodel.MultiTermMap(),
 		{}
 	], [
-		new wb.datamodel.MultiTermMap( {
-			en: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] ),
-			de: new wb.datamodel.MultiTerm( 'de', [ 'de-test' ] )
+		new datamodel.MultiTermMap( {
+			en: new datamodel.MultiTerm( 'en', [ 'en-test' ] ),
+			de: new datamodel.MultiTerm( 'de', [ 'de-test' ] )
 		} ),
 		{
 			en: [ { language: 'en', value: 'en-test' } ],
 			de: [ { language: 'de', value: 'de-test' } ]
 		}
 	], [
-		new wb.datamodel.MultiTermMap( {
-			en: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] ),
-			de: new wb.datamodel.MultiTerm( 'en', [ 'en-test' ] )
+		new datamodel.MultiTermMap( {
+			en: new datamodel.MultiTerm( 'en', [ 'en-test' ] ),
+			de: new datamodel.MultiTerm( 'en', [ 'en-test' ] )
 		} ),
 		{
 			en: [ { language: 'en', value: 'en-test' } ],

@@ -7,10 +7,12 @@
 
 QUnit.module( 'wikibase.serialization.ReferenceSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.Reference(
-			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] ),
+		new datamodel.Reference(
+			new datamodel.SnakList( [ new datamodel.PropertyNoValueSnak( 'P1' ) ] ),
 			'i am a hash'
 		),
 		{
@@ -24,11 +26,11 @@ var testSets = [
 			'snaks-order': [ 'P1' ]
 		}
 	], [
-		new wb.datamodel.Reference(
-			new wb.datamodel.SnakList( [
-				new wb.datamodel.PropertyNoValueSnak( 'P2' ),
-				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-				new wb.datamodel.PropertySomeValueSnak( 'P1' )
+		new datamodel.Reference(
+			new datamodel.SnakList( [
+				new datamodel.PropertyNoValueSnak( 'P2' ),
+				new datamodel.PropertyNoValueSnak( 'P1' ),
+				new datamodel.PropertySomeValueSnak( 'P1' )
 			] ),
 			'i am a hash'
 		),

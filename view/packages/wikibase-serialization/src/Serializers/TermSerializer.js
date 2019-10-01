@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.TermSerializer
@@ -17,14 +18,14 @@ module.exports = util.inherit( 'WbTermSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Term} term
+	 * @param {datamodel.Term} term
 	 * @return {Object}
 	 *
 	 * @throws {Error} if term is not a Term instance.
 	 */
 	serialize: function( term ) {
-		if( !( term instanceof wb.datamodel.Term ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Term' );
+		if( !( term instanceof datamodel.Term ) ) {
+			throw new Error( 'Not an instance of datamodel.Term' );
 		}
 
 		return {

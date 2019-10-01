@@ -7,9 +7,11 @@
 
 QUnit.module( 'wikibase.serialization.MultiTermSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.MultiTerm( 'en', [ 'test1', 'test2' ] ),
+		new datamodel.MultiTerm( 'en', [ 'test1', 'test2' ] ),
 		[ { language: 'en', value: 'test1' }, { language: 'en', value: 'test2' } ]
 	]
 ];

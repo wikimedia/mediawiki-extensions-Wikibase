@@ -6,7 +6,8 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-var SnakListDeserializer = require( '../../src/Deserializers/SnakListDeserializer.js' );
+var SnakListDeserializer = require( '../../src/Deserializers/SnakListDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 QUnit.module( 'wikibase.serialization.SnakListDeserializer' );
 
@@ -16,7 +17,7 @@ var testSets = [
 			{},
 			undefined
 		],
-		new wb.datamodel.SnakList()
+		new datamodel.SnakList()
 	], [
 		[
 			{
@@ -27,7 +28,7 @@ var testSets = [
 			},
 			undefined
 		],
-		new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P1' ) ] )
+		new datamodel.SnakList( [ new datamodel.PropertyNoValueSnak( 'P1' ) ] )
 	], [
 		[
 			{
@@ -45,10 +46,10 @@ var testSets = [
 			},
 			[ 'P2', 'P1' ]
 		],
-		new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyNoValueSnak( 'P2' ),
-			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-			new wb.datamodel.PropertySomeValueSnak( 'P1' )
+		new datamodel.SnakList( [
+			new datamodel.PropertyNoValueSnak( 'P2' ),
+			new datamodel.PropertyNoValueSnak( 'P1' ),
+			new datamodel.PropertySomeValueSnak( 'P1' )
 		] )
 	]
 ];

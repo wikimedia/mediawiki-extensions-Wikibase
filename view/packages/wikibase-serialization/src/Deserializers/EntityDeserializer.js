@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	ItemDeserializer = require( './ItemDeserializer.js' ),
 	PropertyDeserializer = require( './PropertyDeserializer.js' ),
 	StrategyProvider = require( '../StrategyProvider.js' );
@@ -19,10 +20,10 @@ var MODULE = wb.serialization,
 MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
 	this._strategyProvider = new StrategyProvider();
 	this._strategyProvider.registerStrategy(
-		new ItemDeserializer(), wb.datamodel.Item.TYPE
+		new ItemDeserializer(), datamodel.Item.TYPE
 	);
 	this._strategyProvider.registerStrategy(
-		new PropertyDeserializer(), wb.datamodel.Property.TYPE
+		new PropertyDeserializer(), datamodel.Property.TYPE
 	);
 }, {
 	/**
@@ -42,7 +43,7 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Entity}
+	 * @return {datamodel.Entity}
 	 *
 	 * @throws {Error} if unable to detect the entity type from the serialization.
 	 */

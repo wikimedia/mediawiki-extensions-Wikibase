@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	StatementGroupDeserializer = require( './StatementGroupDeserializer.js' );
 
 /**
@@ -18,7 +19,7 @@ MODULE.StatementGroupSetDeserializer = util.inherit( 'WbStatementGroupSetDeseria
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.StatementGroupSet}
+	 * @return {datamodel.StatementGroupSet}
 	 */
 	deserialize: function( serialization ) {
 		var statemenGroupDeserializer = new StatementGroupDeserializer(),
@@ -30,7 +31,7 @@ MODULE.StatementGroupSetDeserializer = util.inherit( 'WbStatementGroupSetDeseria
 			);
 		}
 
-		return new wb.datamodel.StatementGroupSet( statementGroups );
+		return new datamodel.StatementGroupSet( statementGroups );
 	}
 } );
 

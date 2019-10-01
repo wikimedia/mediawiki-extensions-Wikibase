@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	ReferenceListDeserializer = require( './ReferenceListDeserializer.js' ),
 	ClaimDeserializer = require( './ClaimDeserializer.js' );
 
@@ -19,19 +20,19 @@ MODULE.StatementDeserializer = util.inherit( 'WbStatementDeserializer', PARENT, 
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.Statement}
+	 * @return {datamodel.Statement}
 	 */
 	deserialize: function( serialization ) {
 		var claim = ( new ClaimDeserializer() ).deserialize( serialization ),
 			references = null,
-			rank = wb.datamodel.Statement.RANK[serialization.rank.toUpperCase()];
+			rank = datamodel.Statement.RANK[serialization.rank.toUpperCase()];
 
 		if( serialization.references !== undefined ) {
 			var referenceDeserializer = new ReferenceListDeserializer();
 			references = referenceDeserializer.deserialize( serialization.references );
 		}
 
-		return new wb.datamodel.Statement( claim, references, rank );
+		return new datamodel.Statement( claim, references, rank );
 	}
 } );
 

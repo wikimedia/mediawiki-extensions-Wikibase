@@ -3,7 +3,8 @@
 	var TermSerializer = require( './TermSerializer.js' );
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.TermMapSerializer
@@ -18,14 +19,14 @@ MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.TermMap} termMap
+	 * @param {datamodel.TermMap} termMap
 	 * @return {Object}
 	 *
 	 * @throws {Error} if termMap is not a TermMap instance.
 	 */
 	serialize: function( termMap ) {
-		if( !( termMap instanceof wb.datamodel.TermMap ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.TermMap' );
+		if( !( termMap instanceof datamodel.TermMap ) ) {
+			throw new Error( 'Not an instance of datamodel.TermMap' );
 		}
 
 		var serialization = {},

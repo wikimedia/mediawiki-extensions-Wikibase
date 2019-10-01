@@ -3,6 +3,7 @@
 
 var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' ),
 	ReferenceDeserializer = require( './ReferenceDeserializer.js' );
 
 /**
@@ -18,7 +19,7 @@ module.exports = util.inherit( 'WbReferenceListDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.ReferenceList}
+	 * @return {datamodel.ReferenceList}
 	 */
 	deserialize: function( serialization ) {
 		var references = [],
@@ -28,7 +29,7 @@ module.exports = util.inherit( 'WbReferenceListDeserializer', PARENT, {
 			references.push( referenceDeserializer.deserialize( serialization[i] ) );
 		}
 
-		return new wikibase.datamodel.ReferenceList( references );
+		return new datamodel.ReferenceList( references );
 	}
 } );
 

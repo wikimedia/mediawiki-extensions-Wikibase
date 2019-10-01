@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.StatementListDeserializer
@@ -17,7 +18,7 @@ MODULE.StatementListDeserializer = util.inherit( 'WbStatementListDeserializer', 
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.StatementList}
+	 * @return {datamodel.StatementList}
 	 */
 	deserialize: function( serialization ) {
 		var statements = [],
@@ -27,7 +28,7 @@ MODULE.StatementListDeserializer = util.inherit( 'WbStatementListDeserializer', 
 			statements.push( statementDeserializer.deserialize( serialization[i] ) );
 		}
 
-		return new wikibase.datamodel.StatementList( statements );
+		return new datamodel.StatementList( statements );
 	}
 } );
 

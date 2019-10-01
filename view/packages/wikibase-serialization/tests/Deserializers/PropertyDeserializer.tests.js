@@ -7,6 +7,8 @@
 
 QUnit.module( 'wikibase.serialization.EntityDeserializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var defaults = [
 	{
 		fingerprint: {
@@ -26,16 +28,16 @@ var defaults = [
 			} ]
 		}
 	}, {
-		fingerprint: new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'label' ) } ),
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'description' ) } ),
-			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
+		fingerprint: new datamodel.Fingerprint(
+			new datamodel.TermMap( { en: new datamodel.Term( 'en', 'label' ) } ),
+			new datamodel.TermMap( { en: new datamodel.Term( 'en', 'description' ) } ),
+			new datamodel.MultiTermMap( { en: new datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
 		),
-		statementGroupSet: new wb.datamodel.StatementGroupSet( [
-			new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1'
+		statementGroupSet: new datamodel.StatementGroupSet( [
+			new datamodel.StatementGroup( 'P1', new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1'
 					)
 				)
 			] ) )
@@ -51,7 +53,7 @@ var testSets = [
 			datatype: 'string',
 			claims: defaults[0].statementGroupSet
 		} ),
-		new wb.datamodel.Property(
+		new datamodel.Property(
 			'P1',
 			'string',
 			defaults[1].fingerprint,

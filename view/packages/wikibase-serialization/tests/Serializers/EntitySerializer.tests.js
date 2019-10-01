@@ -7,6 +7,8 @@
 
 QUnit.module( 'wikibase.serialization.EntitySerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 /**
  * @extends wikibase.serialization.Serializer
  *
@@ -24,7 +26,7 @@ var MockEntitySerializer = util.inherit(
 	 */
 	serialize: function( mockEntity ) {
 		if( !( mockEntity instanceof wb.serialization.tests.MockEntity ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.MockEntity' );
+			throw new Error( 'Not an instance of datamodel.MockEntity' );
 		}
 
 		var fingerprintSerializer = new wb.serialization.FingerprintSerializer();
@@ -38,16 +40,16 @@ var MockEntitySerializer = util.inherit(
 
 var defaults = [
 	{
-		fingerprint: new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'label' ) } ),
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'description' ) } ),
-			new wb.datamodel.MultiTermMap( { en: new wb.datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
+		fingerprint: new datamodel.Fingerprint(
+			new datamodel.TermMap( { en: new datamodel.Term( 'en', 'label' ) } ),
+			new datamodel.TermMap( { en: new datamodel.Term( 'en', 'description' ) } ),
+			new datamodel.MultiTermMap( { en: new datamodel.MultiTerm( 'en', [ 'alias' ] ) } )
 		),
-		statementGroupSet: new wb.datamodel.StatementGroupSet( [
-			new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1'
+		statementGroupSet: new datamodel.StatementGroupSet( [
+			new datamodel.StatementGroup( 'P1', new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1'
 					)
 				)
 			] ) )
@@ -74,7 +76,7 @@ var defaults = [
 
 var testSets = [
 	[
-		new wb.datamodel.Property(
+		new datamodel.Property(
 			'P1',
 			'string',
 			defaults[0].fingerprint,
@@ -87,11 +89,11 @@ var testSets = [
 			claims: defaults[1].statementGroupSet
 		} )
 	], [
-		new wb.datamodel.Item(
+		new datamodel.Item(
 			'Q1',
 			defaults[0].fingerprint,
 			defaults[0].statementGroupSet,
-			new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'someSite', 'page' ) ] )
+			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'someSite', 'page' ) ] )
 		),
 		$.extend( true, {}, defaults[1].fingerprint, {
 			id: 'Q1',

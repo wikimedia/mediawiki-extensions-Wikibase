@@ -7,13 +7,15 @@
 
 QUnit.module( 'wikibase.serialization.StatementListSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.StatementList(),
+		new datamodel.StatementList(),
 		[]
 	], [
-		new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new datamodel.StatementList( [ new datamodel.Statement(
+			new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 		) ] ),
 		[
 			{

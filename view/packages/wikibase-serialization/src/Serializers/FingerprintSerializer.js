@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.FingerprintSerializer
@@ -17,14 +18,14 @@ MODULE.FingerprintSerializer = util.inherit( 'WbFingerprintSerializer', PARENT, 
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Fingerprint} fingerprint
+	 * @param {datamodel.Fingerprint} fingerprint
 	 * @return {Object}
 	 *
 	 * @throws {Error} if fingerprint is not a Fingerprint instance.
 	 */
 	serialize: function( fingerprint ) {
-		if( !( fingerprint instanceof wb.datamodel.Fingerprint ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Fingerprint' );
+		if( !( fingerprint instanceof datamodel.Fingerprint ) ) {
+			throw new Error( 'Not an instance of datamodel.Fingerprint' );
 		}
 
 		var termMapSerializer = new MODULE.TermMapSerializer(),

@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.SiteLinkSetSerializer
@@ -17,14 +18,14 @@ MODULE.SiteLinkSetSerializer = util.inherit( 'WbSiteLinkSetSerializer', PARENT, 
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.SiteLinkSet} siteLinkSet
+	 * @param {datamodel.SiteLinkSet} siteLinkSet
 	 * @return {Object}
 	 *
 	 * @throws {Error} if siteLinkSet is not a SiteLinkSet instance.
 	 */
 	serialize: function( siteLinkSet ) {
-		if( !( siteLinkSet instanceof wb.datamodel.SiteLinkSet ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.SiteLinkSet' );
+		if( !( siteLinkSet instanceof datamodel.SiteLinkSet ) ) {
+			throw new Error( 'Not an instance of datamodel.SiteLinkSet' );
 		}
 
 		var serialization = {},

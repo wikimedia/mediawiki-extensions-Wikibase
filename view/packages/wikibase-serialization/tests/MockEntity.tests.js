@@ -7,21 +7,23 @@
 
 QUnit.module( 'wikibase.serialization.MockEntity' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
 		'i am an id',
-		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.MultiTermMap()
+		new datamodel.Fingerprint(
+			new datamodel.TermMap(),
+			new datamodel.TermMap(),
+			new datamodel.MultiTermMap()
 		)
 	], [
 		'i am an id',
-		new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-label' ) } ),
-			new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-description' ) } ),
-			new wb.datamodel.MultiTermMap( {
-				de: new wb.datamodel.MultiTerm( 'de', [ 'de-alias' ] )
+		new datamodel.Fingerprint(
+			new datamodel.TermMap( { de: new datamodel.Term( 'de', 'de-label' ) } ),
+			new datamodel.TermMap( { de: new datamodel.Term( 'de', 'de-description' ) } ),
+			new datamodel.MultiTermMap( {
+				de: new datamodel.MultiTerm( 'de', [ 'de-alias' ] )
 			} )
 		)
 	]
@@ -43,10 +45,10 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	assert.ok(
 		( new wb.serialization.tests.MockEntity(
 			'i am an id',
-			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermMap(),
-				new wb.datamodel.TermMap(),
-				new wb.datamodel.MultiTermMap()
+			new datamodel.Fingerprint(
+				new datamodel.TermMap(),
+				new datamodel.TermMap(),
+				new datamodel.MultiTermMap()
 			)
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
@@ -55,10 +57,10 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	assert.ok(
 		!( new wb.serialization.tests.MockEntity(
 			'i am an id',
-			new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermMap( { de: new wb.datamodel.Term( 'de', 'de-term' ) } ),
-				new wb.datamodel.TermMap(),
-				new wb.datamodel.MultiTermMap()
+			new datamodel.Fingerprint(
+				new datamodel.TermMap( { de: new datamodel.Term( 'de', 'de-term' ) } ),
+				new datamodel.TermMap(),
+				new datamodel.MultiTermMap()
 			)
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'

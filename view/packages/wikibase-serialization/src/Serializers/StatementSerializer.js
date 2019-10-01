@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.StatementSerializer
@@ -17,14 +18,14 @@ MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Statement} statement
+	 * @param {datamodel.Statement} statement
 	 * @return {Object}
 	 *
 	 * @throws {Error} if statement is not a Statement instance.
 	 */
 	serialize: function( statement ) {
-		if( !( statement instanceof wb.datamodel.Statement ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Statement' );
+		if( !( statement instanceof datamodel.Statement ) ) {
+			throw new Error( 'Not an instance of datamodel.Statement' );
 		}
 
 		var claimSerializer = new MODULE.ClaimSerializer(),
@@ -40,8 +41,8 @@ MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 		}
 
 		if( rank !== undefined ) {
-			for( var rankName in wb.datamodel.Statement.RANK ) {
-				if( rank === wb.datamodel.Statement.RANK[rankName] ) {
+			for( var rankName in datamodel.Statement.RANK ) {
+				if( rank === datamodel.Statement.RANK[rankName] ) {
 					serialization.rank = rankName.toLowerCase();
 					break;
 				}

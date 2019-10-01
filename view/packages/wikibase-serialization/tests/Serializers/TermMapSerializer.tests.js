@@ -7,23 +7,25 @@
 
 QUnit.module( 'wikibase.serialization.TermMapSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.TermMap(),
+		new datamodel.TermMap(),
 		{}
 	], [
-		new wb.datamodel.TermMap( {
-			en: new wb.datamodel.Term( 'en', 'en-test' ),
-			de: new wb.datamodel.Term( 'de', 'de-test' )
+		new datamodel.TermMap( {
+			en: new datamodel.Term( 'en', 'en-test' ),
+			de: new datamodel.Term( 'de', 'de-test' )
 		} ),
 		{
 			en: { language: 'en', value: 'en-test' },
 			de: { language: 'de', value: 'de-test' }
 		}
 	], [
-		new wb.datamodel.TermMap( {
-			en: new wb.datamodel.Term( 'en', 'en-test' ),
-			de: new wb.datamodel.Term( 'en', 'en-test' )
+		new datamodel.TermMap( {
+			en: new datamodel.Term( 'en', 'en-test' ),
+			de: new datamodel.Term( 'en', 'en-test' )
 		} ),
 		{
 			en: { language: 'en', value: 'en-test' },

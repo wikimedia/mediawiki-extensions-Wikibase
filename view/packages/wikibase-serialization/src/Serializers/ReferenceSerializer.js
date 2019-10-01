@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.ReferenceSerializer
@@ -17,14 +18,14 @@ MODULE.ReferenceSerializer = util.inherit( 'WbReferenceSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Reference} reference
+	 * @param {datamodel.Reference} reference
 	 * @return {Object}
 	 *
 	 * @throws {Error} if reference is not a Reference instance.
 	 */
 	serialize: function( reference ) {
-		if( !( reference instanceof wb.datamodel.Reference ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Reference' );
+		if( !( reference instanceof datamodel.Reference ) ) {
+			throw new Error( 'Not an instance of datamodel.Reference' );
 		}
 
 		var snakListSerializer = new MODULE.SnakListSerializer(),

@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.MultiTermMapSerializer
@@ -17,14 +18,14 @@ MODULE.MultiTermMapSerializer = util.inherit( 'WbMultiTermMapSerializer', PARENT
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.MultiTermMap} multiTermMap
+	 * @param {datamodel.MultiTermMap} multiTermMap
 	 * @return {Object}
 	 *
 	 * @throws {Error} if multiTermMap is not a MultiTermMap instance.
 	 */
 	serialize: function( multiTermMap ) {
-		if( !( multiTermMap instanceof wb.datamodel.MultiTermMap ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.MultiTermMap' );
+		if( !( multiTermMap instanceof datamodel.MultiTermMap ) ) {
+			throw new Error( 'Not an instance of datamodel.MultiTermMap' );
 		}
 
 		var serialization = {},

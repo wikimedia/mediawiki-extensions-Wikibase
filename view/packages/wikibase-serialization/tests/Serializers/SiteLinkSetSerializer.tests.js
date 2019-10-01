@@ -7,12 +7,14 @@
 
 QUnit.module( 'wikibase.serialization.SiteLinkSetSerializer' );
 
+var datamodel = require( 'wikibase.datamodel' );
+
 var testSets = [
 	[
-		new wb.datamodel.SiteLinkSet(),
+		new datamodel.SiteLinkSet(),
 		{}
 	], [
-		new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'site', 'page' ) ] ),
+		new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'site', 'page' ) ] ),
 		{
 			site: {
 				site: 'site',

@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer;
+	PARENT = MODULE.Deserializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.MultiTermDeserializer
@@ -17,7 +18,7 @@ module.exports = util.inherit( 'WbMultiTermDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.MultiTerm}
+	 * @return {datamodel.MultiTerm}
 	 *
 	 * @throws {Error} if serialization is empty.
 	 */
@@ -33,7 +34,7 @@ module.exports = util.inherit( 'WbMultiTermDeserializer', PARENT, {
 			terms.push( serialization[i].value );
 		}
 
-		return new wb.datamodel.MultiTerm( languageCode, terms );
+		return new datamodel.MultiTerm( languageCode, terms );
 	}
 } );
 

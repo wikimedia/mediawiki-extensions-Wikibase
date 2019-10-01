@@ -6,12 +6,13 @@
 'use strict';
 
 QUnit.module( 'wikibase.serialization.SiteLinkSetDeserializer' );
-var SiteLinkSetDeserializer = require( '../../src/Deserializers/SiteLinkSetDeserializer.js' );
+var SiteLinkSetDeserializer = require( '../../src/Deserializers/SiteLinkSetDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' );
 
 var testSets = [
 	[
 		{},
-		new wb.datamodel.SiteLinkSet()
+		new datamodel.SiteLinkSet()
 	], [
 		{
 			site: {
@@ -20,7 +21,7 @@ var testSets = [
 				badges: []
 			}
 		},
-		new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'site', 'page' ) ] )
+		new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'site', 'page' ) ] )
 	]
 ];
 

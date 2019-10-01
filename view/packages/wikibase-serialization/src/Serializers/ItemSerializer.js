@@ -2,7 +2,8 @@
 	'use strict';
 
 var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer;
+	PARENT = MODULE.Serializer,
+	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class wikibase.serialization.ItemSerializer
@@ -17,14 +18,14 @@ MODULE.ItemSerializer = util.inherit( 'WbItemSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
-	 * @param {wikibase.datamodel.Item} item
+	 * @param {datamodel.Item} item
 	 * @return {Object}
 	 *
 	 * @throws {Error} if item is not an Item instance.
 	 */
 	serialize: function( item ) {
-		if( !( item instanceof wb.datamodel.Item ) ) {
-			throw new Error( 'Not an instance of wikibase.datamodel.Item' );
+		if( !( item instanceof datamodel.Item ) ) {
+			throw new Error( 'Not an instance of datamodel.Item' );
 		}
 
 		var fingerprintSerializer = new MODULE.FingerprintSerializer(),
