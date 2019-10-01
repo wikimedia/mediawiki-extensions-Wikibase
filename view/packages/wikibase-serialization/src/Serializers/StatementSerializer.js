@@ -53,4 +53,5 @@ MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.StatementSerializer;
 }( wikibase, util ) );

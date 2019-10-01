@@ -36,4 +36,5 @@ MODULE.StatementDeserializer = util.inherit( 'WbStatementDeserializer', PARENT, 
 	}
 } );
 
+module.exports = MODULE.StatementDeserializer;
 }( wikibase, util ) );

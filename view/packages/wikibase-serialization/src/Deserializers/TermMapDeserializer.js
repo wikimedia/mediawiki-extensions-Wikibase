@@ -32,4 +32,5 @@ MODULE.TermMapDeserializer = util.inherit( 'WbTermMapDeserializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.TermMapDeserializer;
 }( wikibase, util ) );

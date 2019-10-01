@@ -45,4 +45,5 @@ MODULE.SnakListSerializer = util.inherit( 'WbSnakListSerializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.SnakListSerializer;
 }( wikibase, util ) );

@@ -46,4 +46,5 @@ MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.SnakDeserializer;
 }( wikibase, util, dataValues ) );

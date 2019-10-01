@@ -40,4 +40,5 @@ MODULE.ReferenceListSerializer = util.inherit( 'WbReferenceLisSerializer', PAREN
 	}
 } );
 
+module.exports = MODULE.ReferenceListSerializer;
 }( wikibase, util ) );

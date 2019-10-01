@@ -58,4 +58,5 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	}
 } );
 
+module.exports = MODULE.EntityDeserializer;
 }( wikibase, util ) );

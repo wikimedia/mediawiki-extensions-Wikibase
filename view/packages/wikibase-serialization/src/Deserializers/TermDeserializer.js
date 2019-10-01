@@ -25,4 +25,5 @@ MODULE.TermDeserializer = util.inherit( 'WbTermDeserializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.TermDeserializer;
 }( wikibase, util ) );

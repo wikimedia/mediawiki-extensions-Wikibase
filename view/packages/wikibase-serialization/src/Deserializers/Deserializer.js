@@ -25,4 +25,5 @@
 		deserialize: util.abstractFunction
 	} );
 
+	module.exports = SELF;
 }( wikibase, util, jQuery ) );

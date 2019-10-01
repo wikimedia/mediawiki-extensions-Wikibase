@@ -51,4 +51,5 @@ MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.ClaimSerializer;
 }( wikibase, util ) );

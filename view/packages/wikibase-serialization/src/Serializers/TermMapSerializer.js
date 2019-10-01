@@ -43,4 +43,5 @@ MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
 	}
 } );
 
+module.exports = MODULE.TermMapSerializer;
 }( wikibase, util ) );

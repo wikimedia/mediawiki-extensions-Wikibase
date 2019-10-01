@@ -32,4 +32,5 @@ MODULE.StatementListDeserializer = util.inherit( 'WbStatementListDeserializer', 
 	}
 } );
 
+module.exports = MODULE.StatementListDeserializer;
 }( wikibase, util ) );
