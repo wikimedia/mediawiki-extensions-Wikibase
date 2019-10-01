@@ -17,6 +17,9 @@ the corresponding serializer, and send back to the API.
 
 ## Release notes
 
+### 5.1.0 (2019-10-01)
+* Added `index.js` exporting all public data model parts
+
 ### 5.0.0 (2018-07-06)
 * Remove references to fingerprint from Entity:
   * Removed `Entity.getFingerprint`
