@@ -80,7 +80,7 @@ class MoreLikeWikibaseTest extends MediaWikiTestCase {
 		if ( $mltUsed ) {
 			$this->assertGreaterThan( 0, $context->getCacheTtl() );
 		} else {
-			$this->assertEquals( 0, $context->getCacheTtl() );
+			$this->assertSame( 0, $context->getCacheTtl() );
 		}
 		if ( $expectedQuery === null ) {
 			$this->assertFalse( $context->areResultsPossible() );
@@ -89,7 +89,7 @@ class MoreLikeWikibaseTest extends MediaWikiTestCase {
 			if ( $expectedQuery instanceof \Elastica\Query\MatchAll ) {
 				$this->assertEquals( $term, $result, 'Term must be unchanged' );
 			} else {
-				$this->assertEquals( '', $result, 'Term must be empty string' );
+				$this->assertSame( '', $result, 'Term must be empty string' );
 			}
 		}
 	}

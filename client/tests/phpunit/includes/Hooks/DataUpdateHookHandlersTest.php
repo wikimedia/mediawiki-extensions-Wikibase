@@ -115,7 +115,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 					self::assertEquals( 'wikibase-addUsagesForPage', $job->getType() );
 					self::assertSame( $title, $job->getTitle() );
-					self::assertEquals( true, $job->ignoreDuplicates() );
+					self::assertTrue( $job->ignoreDuplicates() );
 					self::assertEquals( $params, $jobParams );
 					return true;
 				} ) );
