@@ -177,13 +177,13 @@ class CachingPropertyInfoTest extends \MediaWikiTestCase {
 
 		// The table should now have the property that we stored
 		$this->assertCount( 0, $table->getAllPropertyInfo() );
-		$this->assertEquals( null, $table->getPropertyInfo( $p1 ) );
+		$this->assertNull( $table->getPropertyInfo( $p1 ) );
 		$this->assertEquals( [], $table->getAllPropertyInfo() );
 		$this->assertEquals( [], $table->getPropertyInfoForDataType( $p1Type ) );
 
 		// Using the caching store should not return the property info
 		$this->assertCount( 0, $lookup->getAllPropertyInfo() );
-		$this->assertEquals( null, $lookup->getPropertyInfo( $p1 ) );
+		$this->assertNull( $lookup->getPropertyInfo( $p1 ) );
 		$this->assertEquals( [], $lookup->getAllPropertyInfo() );
 		$this->assertEquals( [], $lookup->getPropertyInfoForDataType( $p1Type ) );
 	}

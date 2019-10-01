@@ -116,7 +116,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 
 		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
 
-		$this->assertEquals( '', $html );
+		$this->assertSame( '', $html );
 
 		unset( $_COOKIE[$cookieName] ); // avoid side effects
 	}
@@ -141,7 +141,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 
 		$html = $expander->getHtmlForPlaceholder( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' );
 
-		$this->assertEquals( '', $html );
+		$this->assertSame( '', $html );
 	}
 
 }
