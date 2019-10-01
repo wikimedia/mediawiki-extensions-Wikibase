@@ -5,7 +5,8 @@
 ( function ( wb, vp, dv ) {
 	'use strict';
 
-	var getApiBasedValueParserConstructor = require( './getApiBasedValueParserConstructor.js' );
+	var getApiBasedValueParserConstructor = require( './getApiBasedValueParserConstructor.js' ),
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {wikibase.api.RepoApi} api
@@ -28,7 +29,7 @@
 			monolingualtext: dv.MonolingualTextValue.TYPE,
 			quantity: dv.QuantityValue.TYPE,
 			time: dv.TimeValue.TYPE,
-			'wikibase-entityid': wb.datamodel.EntityId.TYPE
+			'wikibase-entityid': datamodel.EntityId.TYPE
 		};
 
 		// eslint-disable-next-line jquery/no-each-util

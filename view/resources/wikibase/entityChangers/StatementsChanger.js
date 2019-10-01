@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @constructor
@@ -66,7 +67,7 @@
 		_fireHook: null,
 
 		/**
-		 * @param {wikibase.datamodel.Statement} statement
+		 * @param {datamodel.Statement} statement
 		 * @return {jQuery.Promise}
 		 *         No resolved parameters.
 		 *         Rejected parameters:
@@ -129,10 +130,10 @@
 		},
 
 		/**
-		 * @param {wikibase.datamodel.Statement} statement
+		 * @param {datamodel.Statement} statement
 		 * @return {Object} jQuery.Promise
 		 *         Resolved parameters:
-		 *         - {wikibase.datamodel.Statement} The saved statement
+		 *         - {datamodel.Statement} The saved statement
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
@@ -188,7 +189,7 @@
 		},
 
 		/**
-		 * @param {wikibase.datamodel.Statement} statement
+		 * @param {datamodel.Statement} statement
 		 * @param {string} propertyId
 		 * @param {string} guid
 		 * @private
@@ -209,7 +210,7 @@
 			} else {
 				// No statement with this property id yet, start a new group
 				this._statementsChangerState.getStatements().addItem(
-					new wb.datamodel.StatementGroup( propertyId, new wikibase.datamodel.StatementList() )
+					new datamodel.StatementGroup( propertyId, new datamodel.StatementList() )
 				);
 				statementsForPropertyId = this._statementsChangerState.getStatements().getItemByKey( propertyId );
 			}

@@ -1,10 +1,11 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * Displays and allows editing of a `wikibase.datamodel.Term` acting as an `Entity`'s label.
+	 * Displays and allows editing of a `datamodel.Term` acting as an `Entity`'s label.
 	 * @class jQuery.wikibase.labelview
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @license GPL-2.0-or-later
@@ -13,7 +14,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.Term} options.value
+	 * @param {datamodel.Term} options.value
 	 * @param {string} [options.helpMessage=mw.msg( 'wikibase-label-input-help-message' )]
 	 */
 	$.widget( 'wikibase.labelview', PARENT, {
@@ -46,7 +47,7 @@
 		 * @throws {Error} if a required option is not specified properly.
 		 */
 		_create: function () {
-			if ( !( this.options.value instanceof wb.datamodel.Term )
+			if ( !( this.options.value instanceof datamodel.Term )
 				|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 			) {
 				throw new Error( 'Required option not specified properly' );
@@ -185,11 +186,11 @@
 		 * @protected
 		 *
 		 * @throws {Error} when trying to set the widget's value to something other than a
-		 *         `wikibase.datamodel.Term` instance.
+		 *         `datamodel.Term` instance.
 		 */
 		_setOption: function ( key, value ) {
-			if ( key === 'value' && !( value instanceof wb.datamodel.Term ) ) {
-				throw new Error( 'Value needs to be a wb.datamodel.Term instance' );
+			if ( key === 'value' && !( value instanceof datamodel.Term ) ) {
+				throw new Error( 'Value needs to be a datamodel.Term instance' );
 			}
 
 			var response = PARENT.prototype._setOption.call( this, key, value );
@@ -204,8 +205,8 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @param {wikibase.datamodel.Term} [value]
-		 * @return {wikibase.datamodel.Term|undefined}
+		 * @param {datamodel.Term} [value]
+		 * @return {datamodel.Term|undefined}
 		 */
 		value: function ( value ) {
 			if ( value !== undefined ) {
@@ -216,7 +217,7 @@
 				return this.options.value;
 			}
 
-			return new wb.datamodel.Term(
+			return new datamodel.Term(
 				this.options.value.getLanguageCode(),
 				this.$text.children( '.' + this.widgetFullName + '-input' ).val().trim()
 			);

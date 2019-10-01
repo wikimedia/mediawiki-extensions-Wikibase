@@ -1,11 +1,12 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying and editing `wikibase.datamodel.Reference` objects.
-	 * @see wikibase.datamodel.Reference
+	 * View for displaying and editing `datamodel.Reference` objects.
+	 * @see datamodel.Reference
 	 * @class jQuery.wikibase.referenceview
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @license GPL-2.0-or-later
@@ -14,7 +15,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.Reference|null} options.value
+	 * @param {datamodel.Reference|null} options.value
 	 * @param {Function} options.getListItemAdapter
 	 * @param {Function} options.removeCallback
 	 */
@@ -168,7 +169,7 @@
 		 *
 		 * @private
 		 *
-		 * @param {wikibase.datamodel.Reference|null} reference
+		 * @param {datamodel.Reference|null} reference
 		 */
 		_updateReferenceHashClass: function ( reference ) {
 			var refHash = reference && reference.getHash() || 'new';
@@ -184,8 +185,8 @@
 		 * Sets the `Reference` to be represented by the view or returns the `Reference` currently
 		 * represented by the widget.
 		 *
-		 * @param {wikibase.datamodel.Reference|null} [reference]
-		 * @return {wikibase.datamodel.Reference|null|undefined}
+		 * @param {datamodel.Reference|null} [reference]
+		 * @return {datamodel.Reference|null|undefined}
 		 */
 		value: function ( reference ) {
 			if ( reference ) {
@@ -196,7 +197,7 @@
 				return null;
 			}
 
-			var snakList = new wb.datamodel.SnakList();
+			var snakList = new datamodel.SnakList();
 
 			if ( !this.$listview.data( 'listview' ).value().every( function ( snaklistview ) {
 				var value = snaklistview.value();
@@ -207,7 +208,7 @@
 			}
 
 			if ( this.options.value || snakList.length ) {
-				return new wb.datamodel.Reference(
+				return new datamodel.Reference(
 					snakList,
 					this.options.value ? this.options.value.getHash() : undefined
 				);
@@ -308,12 +309,12 @@
 		 * @protected
 		 *
 		 * @throws {Error} when trying to set the value to something different that a
-		 *         `wikibase.datamodel.Reference` object.
+		 *         `datamodel.Reference` object.
 		 */
 		_setOption: function ( key, value ) {
 			if ( key === 'value' ) {
-				if ( !( value instanceof wb.datamodel.Reference ) ) {
-					throw new Error( 'Value has to be an instance of wikibase.datamodel.Reference' );
+				if ( !( value instanceof datamodel.Reference ) ) {
+					throw new Error( 'Value has to be an instance of datamodel.Reference' );
 				}
 				// TODO: Redraw
 				this._updateReferenceHashClass( value );

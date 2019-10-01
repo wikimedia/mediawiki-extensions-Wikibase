@@ -1,11 +1,12 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying and editing `wikibase.datamodel.Statement` objects.
-	 * @see wikibase.datamodel.Statement
+	 * View for displaying and editing `datamodel.Statement` objects.
+	 * @see datamodel.Statement
 	 * @class jQuery.wikibase.statementview
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @uses jQuery.ui.toggler
@@ -16,10 +17,10 @@
 	 * @uses jQuery.wikibase.snaklistview
 	 * @uses jQuery.wikibase.statementview.RankSelector
 	 * @uses mediaWiki
-	 * @uses wikibase.datamodel.Claim
-	 * @uses wikibase.datamodel.SnakList
-	 * @uses wikibase.datamodel.ReferenceList
-	 * @uses wikibase.datamodel.Statement
+	 * @uses datamodel.Claim
+	 * @uses datamodel.SnakList
+	 * @uses datamodel.ReferenceList
+	 * @uses datamodel.Statement
 	 * @uses wikibase.utilities.ui
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
@@ -28,7 +29,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.Statement|null} [options.value=null]
+	 * @param {datamodel.Statement|null} [options.value=null]
 	 *        The `Statement` displayed by the view.
 	 * @param {Function} options.getReferenceListItemAdapter
 	 * @param {Function} options.buildSnakView
@@ -204,8 +205,8 @@
 		 * @return {string|null}
 		 */
 		_getRankName: function ( rank ) {
-			for ( var rankName in wb.datamodel.Statement.RANK ) {
-				if ( rank === wb.datamodel.Statement.RANK[ rankName ] ) {
+			for ( var rankName in datamodel.Statement.RANK ) {
+				if ( rank === datamodel.Statement.RANK[ rankName ] ) {
 					return rankName.toLowerCase();
 				}
 			}
@@ -246,7 +247,7 @@
 		/**
 		 * @private
 		 *
-		 * @param {wikibase.datamodel.SnakList|null} [qualifiers=null]
+		 * @param {datamodel.SnakList|null} [qualifiers=null]
 		 */
 		_createQualifiersListview: function ( qualifiers ) {
 			if ( this._qualifiers ) {
@@ -286,7 +287,7 @@
 		/**
 		 * @private
 		 *
-		 * @param {wikibase.datamodel.Reference[]} [references]
+		 * @param {datamodel.Reference[]} [references]
 		 */
 		_createReferencesListview: function ( references ) {
 			var self = this;
@@ -439,7 +440,7 @@
 		draw: function () {
 			this._createRankSelector( this.options.value
 				? this.options.value.getRank()
-				: wb.datamodel.Statement.RANK.NORMAL
+				: datamodel.Statement.RANK.NORMAL
 			);
 			this._createMainSnak();
 
@@ -451,7 +452,7 @@
 				this._createQualifiersListview(
 					this.options.value
 						? this.options.value.getClaim().getQualifiers()
-						: new wb.datamodel.SnakList()
+						: new datamodel.SnakList()
 				);
 			}
 			this._createReferencesListview(
@@ -467,7 +468,7 @@
 		 * @private
 		 *
 		 * @param {string} guid
-		 * @return {wikibase.datamodel.Statement|null}
+		 * @return {datamodel.Statement|null}
 		 */
 		_instantiateStatement: function ( guid ) {
 			if ( !this.isInEditMode() ) {
@@ -490,8 +491,8 @@
 				return null;
 			}
 
-			return new wb.datamodel.Statement(
-				new wb.datamodel.Claim( mainSnak, qualifiers, guid ),
+			return new datamodel.Statement(
+				new datamodel.Claim( mainSnak, qualifiers, guid ),
 				references,
 				this._rankSelector.value()
 			);
@@ -512,10 +513,10 @@
 		/**
 		 * @private
 		 *
-		 * @return {wikibase.datamodel.SnakList|null}
+		 * @return {datamodel.SnakList|null}
 		 */
 		_getQualifiers: function () {
-			var qualifiers = new wb.datamodel.SnakList();
+			var qualifiers = new datamodel.SnakList();
 
 			if ( this._qualifiers ) {
 				var snaklistviews = this._qualifiers.value();
@@ -538,7 +539,7 @@
 		 *
 		 * @private
 		 *
-		 * @return {wikibase.datamodel.ReferenceList|null}
+		 * @return {datamodel.ReferenceList|null}
 		 */
 		_getReferences: function () {
 			var references = [];
@@ -551,14 +552,14 @@
 				return null;
 			}
 
-			return new wb.datamodel.ReferenceList( references );
+			return new datamodel.ReferenceList( references );
 		},
 
 		/**
 		 * Returns the current `Statement` represented by the view, considering all pending changes not
 		 * yet stored. Use `this.option( 'value' )` to retrieve the stored/original `Statement`.
 		 *
-		 * @return {wikibase.datamodel.Statement|null}
+		 * @return {datamodel.Statement|null}
 		 */
 		value: function ( newValue ) {
 			if ( typeof newValue !== 'undefined' ) {

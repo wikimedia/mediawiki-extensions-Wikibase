@@ -3,8 +3,10 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {Object} [options]
@@ -12,7 +14,7 @@
 	 */
 	var createAliasesview = function ( options ) {
 		options = $.extend( {
-			value: new wb.datamodel.MultiTerm( 'en', [ 'a', 'b', 'c' ] )
+			value: new datamodel.MultiTerm( 'en', [ 'a', 'b', 'c' ] )
 		}, options || {} );
 
 		var $aliasesview = $( '<div/>' )
@@ -218,7 +220,7 @@
 			'Trying to set no value fails.'
 		);
 
-		newValue = new wb.datamodel.MultiTerm( 'de', [ 'x', 'y' ] );
+		newValue = new datamodel.MultiTerm( 'de', [ 'x', 'y' ] );
 		aliasesview.value( newValue );
 
 		assert.strictEqual(
@@ -227,7 +229,7 @@
 			'Set new value.'
 		);
 
-		newValue = new wb.datamodel.MultiTerm( 'en', [] );
+		newValue = new datamodel.MultiTerm( 'en', [] );
 		aliasesview.value( newValue );
 
 		assert.strictEqual(
@@ -237,4 +239,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

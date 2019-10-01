@@ -5,11 +5,12 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		datamodel = require( 'wikibase.datamodel' );
 	/**
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 */
 	var SELF = MODULE.SiteLinksChanger = function WbEntityChangersSiteLinksChanger( api, revisionStore, entity ) {
 		this._api = api;
@@ -19,7 +20,7 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {datamodel.Entity}
 		 */
 		_entity: null,
 
@@ -34,7 +35,7 @@
 		_api: null,
 
 		/**
-		 * @param {wikibase.datamodel.SiteLink} siteLink
+		 * @param {datamodel.SiteLink} siteLink
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved siteLink
@@ -66,7 +67,7 @@
 				deferred.resolve(
 					typeof resultData.removed !== 'undefined'
 						? null
-						: new wb.datamodel.SiteLink(
+						: new datamodel.SiteLink(
 							siteId,
 							resultData.title,
 							resultData.badges

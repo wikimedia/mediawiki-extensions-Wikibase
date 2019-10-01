@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {Object} [options]
@@ -12,7 +14,7 @@
 	 */
 	var createLabelview = function ( options, $node ) {
 		options = $.extend( {
-			value: new wb.datamodel.Term( 'en', 'test label' )
+			value: new datamodel.Term( 'en', 'test label' )
 		}, options || {} );
 
 		$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -128,7 +130,7 @@
 			'Trying to set no value fails.'
 		);
 
-		newValue = new wb.datamodel.Term( 'de', 'changed label' );
+		newValue = new datamodel.Term( 'de', 'changed label' );
 
 		labelview.value( newValue );
 
@@ -138,7 +140,7 @@
 			'Set new value.'
 		);
 
-		newValue = new wb.datamodel.Term( 'en', '' );
+		newValue = new datamodel.Term( 'en', '' );
 
 		labelview.value( newValue );
 
@@ -149,4 +151,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

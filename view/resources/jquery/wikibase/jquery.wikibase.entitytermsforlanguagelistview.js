@@ -3,10 +3,11 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * Displays multiple fingerprints (see jQuery.wikibase.entitytermsforlanguageview).
@@ -74,7 +75,7 @@
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
 		_create: function () {
-			if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
+			if ( !( this.options.value instanceof datamodel.Fingerprint )
 				|| !Array.isArray( this.options.userLanguages )
 			) {
 				throw new Error( 'Required option(s) missing' );
@@ -368,9 +369,9 @@
 
 			return {
 				language: lang,
-				label: fingerprint.getLabelFor( lang ) || new wb.datamodel.Term( lang, '' ),
-				description: fingerprint.getDescriptionFor( lang ) || new wb.datamodel.Term( lang, '' ),
-				aliases: fingerprint.getAliasesFor( lang ) || new wb.datamodel.MultiTerm( lang, [] )
+				label: fingerprint.getLabelFor( lang ) || new datamodel.Term( lang, '' ),
+				description: fingerprint.getDescriptionFor( lang ) || new datamodel.Term( lang, '' ),
+				aliases: fingerprint.getAliasesFor( lang ) || new datamodel.MultiTerm( lang, [] )
 			};
 		},
 
@@ -458,10 +459,10 @@
 
 			// Clones the current Fingerprint.
 			// FIXME: This accesses the private _items property since there is no copy or clone.
-			value = new wb.datamodel.Fingerprint(
-				new wb.datamodel.TermMap( this.options.value.getLabels()._items ),
-				new wb.datamodel.TermMap( this.options.value.getDescriptions()._items ),
-				new wb.datamodel.MultiTermMap( this.options.value.getAliases()._items )
+			value = new datamodel.Fingerprint(
+				new datamodel.TermMap( this.options.value.getLabels()._items ),
+				new datamodel.TermMap( this.options.value.getDescriptions()._items ),
+				new datamodel.MultiTermMap( this.options.value.getAliases()._items )
 			);
 
 			// this only adds all terms visible in the ui to the Fingerprint, all other languages get ignored
@@ -511,4 +512,4 @@
 		}
 	} );
 
-}( wikibase ) );
+}() );

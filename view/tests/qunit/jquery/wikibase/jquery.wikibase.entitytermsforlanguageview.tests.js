@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {Object} [options]
@@ -14,9 +16,9 @@
 		options = $.extend( {
 			value: {
 				language: 'en',
-				label: new wb.datamodel.Term( 'en', 'test label' ),
-				description: new wb.datamodel.Term( 'en', 'test description' ),
-				aliases: new wb.datamodel.MultiTerm( 'en', [ 'alias1', 'alias2' ] )
+				label: new datamodel.Term( 'en', 'test label' ),
+				description: new datamodel.Term( 'en', 'test description' ),
+				aliases: new datamodel.MultiTerm( 'en', [ 'alias1', 'alias2' ] )
 			}
 		}, options || {} );
 
@@ -204,9 +206,9 @@
 		var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 			entitytermsforlanguageview
 				= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' ),
-			label = new wb.datamodel.Term( 'en', 'changed label' ),
-			description = new wb.datamodel.Term( 'en', 'test description' ),
-			aliases = new wb.datamodel.MultiTerm( 'en', [ 'alias1', 'alias2' ] );
+			label = new datamodel.Term( 'en', 'changed label' ),
+			description = new datamodel.Term( 'en', 'test description' ),
+			aliases = new datamodel.MultiTerm( 'en', [ 'alias1', 'alias2' ] );
 
 		assert.throws(
 			function () {
@@ -232,8 +234,8 @@
 			'Did not change description.'
 		);
 
-		label = new wb.datamodel.Term( 'en', 'test label' );
-		description = new wb.datamodel.Term( 'en', '' );
+		label = new datamodel.Term( 'en', 'test label' );
+		description = new datamodel.Term( 'en', '' );
 
 		entitytermsforlanguageview.value( {
 			language: 'en',
@@ -252,7 +254,7 @@
 			'Removed description.'
 		);
 
-		aliases = new wb.datamodel.MultiTerm( 'en', [ 'alias1', 'alias2', 'alias3' ] );
+		aliases = new datamodel.MultiTerm( 'en', [ 'alias1', 'alias2', 'alias3' ] );
 
 		entitytermsforlanguageview.value( {
 			language: 'en',
@@ -266,7 +268,7 @@
 			'Added alias.'
 		);
 
-		aliases = new wb.datamodel.MultiTerm( 'en', [] );
+		aliases = new datamodel.MultiTerm( 'en', [] );
 
 		entitytermsforlanguageview.value( {
 			language: 'en',
@@ -293,4 +295,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

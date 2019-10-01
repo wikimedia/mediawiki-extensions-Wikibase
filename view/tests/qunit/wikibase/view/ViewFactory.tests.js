@@ -1,6 +1,8 @@
 ( function ( wb, ViewFactory ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'wikibase.view.ViewFactory' );
 
 	function newViewFactory(
@@ -89,7 +91,7 @@
 	} );
 
 	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
-		var sitelinkSet = new wb.datamodel.SiteLinkSet( [] ),
+		var sitelinkSet = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
@@ -107,7 +109,7 @@
 
 	QUnit.test( 'getSitelinkGroupView passes correct options to views', function ( assert ) {
 		var groupName = 'groupid',
-			siteLinks = new wb.datamodel.SiteLinkSet( [] ),
+			siteLinks = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
@@ -143,7 +145,7 @@
 	} );
 
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function ( assert ) {
-		var entity = new wb.datamodel.Item( 'Q1' ),
+		var entity = new datamodel.Item( 'Q1' ),
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
@@ -163,7 +165,7 @@
 			entityIdHtmlFormatter = {},
 			viewFactory = newViewFactory( null, null, null, entityIdHtmlFormatter ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
-			value = new wb.datamodel.StatementGroup( 'P1' ),
+			value = new datamodel.StatementGroup( 'P1' ),
 			htmlIdPrefix = 'X1-Y2';
 
 		viewFactory.getListItemAdapterForStatementGroupView( null, entityId, null, htmlIdPrefix );
@@ -194,8 +196,8 @@
 	} );
 
 	QUnit.test( 'getStatementListView passes correct options to views', function ( assert ) {
-		var value = new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
+		var value = new datamodel.StatementList( [
+				new datamodel.Statement( new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
 			entityId = 'entityId',
 			viewFactory = newViewFactory(),
@@ -223,7 +225,7 @@
 	} );
 
 	QUnit.test( 'getStatementListView passes null for an empty StatementList', function ( assert ) {
-		var value = new wb.datamodel.StatementList(),
+		var value = new datamodel.StatementList(),
 			entityId = 'entityId',
 			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
@@ -246,7 +248,7 @@
 
 	QUnit.test( 'getStatementListView: given property id, passes id to list adapter', function ( assert ) {
 		var factory = newViewFactory(),
-			value = new wb.datamodel.StatementList(),
+			value = new datamodel.StatementList(),
 			expectedPropertyId = 'P123',
 			$dom = $( '<div/>' );
 
@@ -267,7 +269,7 @@
 
 	QUnit.test( 'getStatementListView: given no property id, gets id from parent data attribute', function ( assert ) {
 		var factory = newViewFactory(),
-			value = new wb.datamodel.StatementList(),
+			value = new datamodel.StatementList(),
 			$parent = $( '<div class="wikibase-statementgroupview" />' ),
 			expectedPropertyId = 'P123',
 			$dom = $( '<div/>' );
@@ -384,7 +386,7 @@
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function ( assert ) {
 		var propertyId = 'P1',
-			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
+			value = new datamodel.Statement( new datamodel.Claim( new datamodel.PropertyNoValueSnak( propertyId ) ) ),
 			viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
@@ -553,7 +555,7 @@
 	} );
 
 	QUnit.test( 'getEntityTermsView passes correct options to views', function ( assert ) {
-		var fingerprint = new wb.datamodel.Fingerprint(),
+		var fingerprint = new datamodel.Fingerprint(),
 			message = 'message',
 			messageProvider = { getMessage: function () { return message; } },
 			userLanguages = [],

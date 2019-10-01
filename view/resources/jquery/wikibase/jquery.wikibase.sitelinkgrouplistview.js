@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	/**
 	 * Scrapes site links from static HTML in order to be sure the order in the static HTML matches the
 	 * order set on the widget initialized on the HTML structure since that widget is not supposed to
@@ -13,7 +15,7 @@
 	 * @ignore
 	 *
 	 * @param {jQuery} $siteLinks
-	 * @param {wikibase.datamodel.SiteLinkSet} siteLinkSet
+	 * @param {datamodel.SiteLinkSet} siteLinkSet
 	 * @return {Object}
 	 */
 	function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
@@ -42,7 +44,7 @@
 
 			value.push( {
 				group: group,
-				siteLinks: new wb.datamodel.SiteLinkSet( siteLinksOfGroup )
+				siteLinks: new datamodel.SiteLinkSet( siteLinksOfGroup )
 			} );
 		} );
 
@@ -50,11 +52,11 @@
 	}
 
 	/**
-	 * Maps site links of a `wikibase.datamodel.SiteLinkSet` to their Wikibase site groups.
+	 * Maps site links of a `datamodel.SiteLinkSet` to their Wikibase site groups.
 	 *
 	 * @ignore
 	 *
-	 * @param {wikibase.datamodel.SiteLinkSet} siteLinkSet
+	 * @param {datamodel.SiteLinkSet} siteLinkSet
 	 * @return {Object}
 	 */
 	function orderSiteLinksByGroup( siteLinkSet ) {
@@ -80,7 +82,7 @@
 			if ( !found ) {
 				value.push( {
 					group: site.getGroup(),
-					siteLinks: new wb.datamodel.SiteLinkSet( [ siteLink ] )
+					siteLinks: new datamodel.SiteLinkSet( [ siteLink ] )
 				} );
 			}
 		} );
@@ -95,7 +97,7 @@
 	 * @extends jQuery.ui.TemplatedWidget
 	 *
 	 * @option {jQuery.wikibase.listview.ListItemAdapter} listItemAdapter
-	 * @option {wikibase.datamodel.SiteLinkSet} value
+	 * @option {datamodel.SiteLinkSet} value
 	 */
 	$.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 		options: {

@@ -12,7 +12,7 @@
 	 * @see jQuery.wikibase.snakview
 	 * @see jQuery.wikibase.snakview.variations
 	 * @see jQuery.wikibase.snakview.variations.Variation
-	 * @see wikibase.datamodel.Snak
+	 * @see datamodel.Snak
 	 * @class jQuery.wikibase.snakview.SnakTypeSelector
 	 * @extends jQuery.Widget
 	 * @license GPL-2.0-or-later

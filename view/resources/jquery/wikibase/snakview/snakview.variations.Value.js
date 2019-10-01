@@ -1,15 +1,16 @@
-( function ( wb, dv ) {
+( function ( dv ) {
 	'use strict';
 
 	var MODULE = $.wikibase.snakview.variations,
-		PARENT = MODULE.Variation;
+		PARENT = MODULE.Variation,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * `snakview` `Variation` for displaying and creating `wikibase.datamodel.PropertyValueSnak`s.
+	 * `snakview` `Variation` for displaying and creating `datamodel.PropertyValueSnak`s.
 	 * Serves a `jQuery.valueview` widget used to display and alter the `Snak`'s value.
 	 * @see jQuery.valueview
 	 * @see jQuery.wikibase.snakview
-	 * @see wikibase.datamodel.PropertyValueSnak
+	 * @see datamodel.PropertyValueSnak
 	 * @class jQuery.wikibase.snakview.variations.Value
 	 * @extends jQuery.wikibase.snakview.variations.Variation
 	 * @license GPL-2.0-or-later
@@ -17,7 +18,7 @@
 	 *
 	 * @constructor
 	 */
-	MODULE.variation( wb.datamodel.PropertyValueSnak, PARENT, {
+	MODULE.variation( datamodel.PropertyValueSnak, PARENT, {
 		/**
 		 * The `valueview` widget instance or `null` if the `Property`'s `DataType` is not
 		 * supported.
@@ -109,7 +110,7 @@
 			/**
 			 * @private
 			 *
-			 * @param {wikibase.datamodel.Property|undefined|null} property
+			 * @param {datamodel.Property|undefined|null} property
 			 * @return {wikibase.dataTypes.DataType|null}
 			 */
 			function _getDataType( property ) {
@@ -410,4 +411,4 @@
 		}
 	} );
 
-}( wikibase, dataValues ) );
+}( dataValues ) );

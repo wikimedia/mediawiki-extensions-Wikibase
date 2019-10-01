@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'wikibase.entityChangers.AliasesChanger' );
 
 	var SUBJECT = wikibase.entityChangers.AliasesChanger;
@@ -30,10 +32,10 @@
 		var aliasesChanger = new SUBJECT(
 			api,
 			{ getAliasesRevision: function () { return 0; } },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) );
+		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) );
 
 		assert.ok( api.setAliases.calledOnce );
 	} );
@@ -52,10 +54,10 @@
 				getAliasesRevision: function () { return 0; },
 				setAliasesRevision: function () {}
 			},
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		return aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
+		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
 		.done( function ( savedAliases ) {
 			assert.ok( true, 'setAliases succeeded' );
 		} );
@@ -75,12 +77,12 @@
 				getAliasesRevision: function () { return 0; },
 				setAliasesRevision: function () {}
 			},
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
 		var done = assert.async();
 
-		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
+		aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
 		.done( function ( savedAliases ) {
 			assert.ok( false, 'setAliases succeeded' );
 		} )
@@ -104,11 +106,11 @@
 			} )
 		};
 
-		var item = new wb.datamodel.Item( 'Q1', new wb.datamodel.Fingerprint(
+		var item = new datamodel.Item( 'Q1', new datamodel.Fingerprint(
 			null,
 			null,
-			new wb.datamodel.MultiTermMap( {
-				language: new wb.datamodel.MultiTerm( 'language', [ 'alias' ] )
+			new datamodel.MultiTermMap( {
+				language: new datamodel.MultiTerm( 'language', [ 'alias' ] )
 			} )
 		) );
 
@@ -121,7 +123,7 @@
 			item
 		);
 
-		return aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
+		return aliasesChanger.setAliases( new datamodel.MultiTerm( 'language', [] ) )
 		.done( function () {
 			assert.ok( true, 'setAliases succeeded' );
 

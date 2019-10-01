@@ -5,13 +5,14 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * Displays and allows editing a site link.
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
-	 * @option {wikibase.datamodel.SiteLink} [value]
+	 * @option {datamodel.SiteLink} [value]
 	 *         Default: null
 	 *
 	 * @option {Function} [getAllowedSites]
@@ -393,8 +394,8 @@
 		/**
 		 * Sets/Gets the widget's value.
 		 *
-		 * @param {wikibase.datamodel.SiteLink|null} [siteLink]
-		 * @return {wikibase.datamodel.SiteLink|undefined}
+		 * @param {datamodel.SiteLink|null} [siteLink]
+		 * @return {datamodel.SiteLink|undefined}
 		 */
 		value: function ( siteLink ) {
 			if ( siteLink === undefined ) {
@@ -413,17 +414,17 @@
 					siteId = this.options.value ? this.options.value.getSiteId() : null;
 				}
 
-				// TODO: Do not allow null values for siteId and pageName in wikibase.datamodel.SiteLink
+				// TODO: Do not allow null values for siteId and pageName in datamodel.SiteLink
 				if ( !siteId || $pagesuggester.val() === '' ) {
 					return null;
 				}
 
-				return new wb.datamodel.SiteLink(
+				return new datamodel.SiteLink(
 					siteId,
 					$pagesuggester.val(),
 					this._badgeselector ? this._badgeselector.value() : []
 				);
-			} else if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
+			} else if ( !( siteLink instanceof datamodel.SiteLink ) ) {
 				throw new Error( 'Value needs to be a SiteLink instance' );
 			}
 

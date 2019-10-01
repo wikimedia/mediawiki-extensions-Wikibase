@@ -1,13 +1,14 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.TemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying `wikibase.datamodel.Statement` objects grouped by their main `Snak`'s
+	 * View for displaying `datamodel.Statement` objects grouped by their main `Snak`'s
 	 * `Property` id by managing a list of `jQuery.wikibase.statementgroupview` widgets.
-	 * @see wikibase.datamodel.StatementGroup
-	 * @see wikibase.datamodel.StatementGroupSet
+	 * @see datamodel.StatementGroup
+	 * @see datamodel.StatementGroupSet
 	 * @uses jQuery.wikibase.statementgrouplabelscroll
 	 * @uses jQuery.wikibase.listview
 	 * @uses jQuery.wikibase.listview.ListItemAdapter
@@ -19,7 +20,7 @@
 	 *
 	 * @param {Object} options
 	 * @param {jquery.wikibase.listview.ListItemAdapter} options.listItemAdapter
-	 * @param {wikibase.datamodel.StatementGroupSet} [options.value]
+	 * @param {datamodel.StatementGroupSet} [options.value]
 	 *        The `Statements` to be displayed by this view.
 	 */
 	$.widget( 'wikibase.statementgrouplistview', PARENT, {
@@ -51,7 +52,7 @@
 		 */
 		_create: function () {
 			if ( !this.options.listItemAdapter
-				|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementGroupSet ) )
+				|| ( this.options.value && !( this.options.value instanceof datamodel.StatementGroupSet ) )
 			) {
 				throw new Error( 'Required option not specified properly' );
 			}
@@ -113,8 +114,8 @@
 		/**
 		 * @private
 		 *
-		 * @param {wikibase.datamodel.StatementGroupSet} statementGroupSet
-		 * @return {wikibase.datamodel.StatementGroup[]}
+		 * @param {datamodel.StatementGroupSet} statementGroupSet
+		 * @return {datamodel.StatementGroup[]}
 		 */
 		_statementGroupSetToStatementGroups: function ( statementGroupSet ) {
 			return statementGroupSet.getKeys().map( function ( propertyId ) {
@@ -167,7 +168,7 @@
 		 * @see jQuery.wikibase.listview.addItem
 		 * @private
 		 *
-		 * @param {wikibase.datamodel.StatementGroup} newStatementGroup
+		 * @param {datamodel.StatementGroup} newStatementGroup
 		 */
 		_addStatementGroup: function ( newStatementGroup ) {
 			var lia = this.listview.listItemAdapter(),
@@ -201,9 +202,9 @@
 		 */
 		_setOption: function ( key, value ) {
 			if ( key === 'value' && value !== undefined ) {
-				if ( !( value instanceof wb.datamodel.StatementGroupSet ) ) {
+				if ( !( value instanceof datamodel.StatementGroupSet ) ) {
 					throw new Error(
-						'value needs to be an instance of wb.datamodel.StatementGroupSet'
+						'value needs to be an instance of datamodel.StatementGroupSet'
 					);
 				}
 				this.listview.value(
@@ -238,4 +239,4 @@
 		}
 	} );
 
-}( wikibase ) );
+}() );

@@ -5,11 +5,13 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'wikibase.entityChangers.EntityTermsChanger', QUnit.newMwEnvironment() );
 
 	var EntityTermsChanger = wb.entityChangers.EntityTermsChanger;
-	var Term = wb.datamodel.Term;
-	var Item = wb.datamodel.Item;
+	var Term = datamodel.Term;
+	var Item = datamodel.Item;
 
 	/**
 	 * Syntactic sugar for readability
@@ -436,7 +438,7 @@
 			assert.ok( error instanceof wb.api.RepoApiError, 'save did not fail with a RepoApiError' );
 			assert.strictEqual( error.code, 'errorCode' );
 			assert.strictEqual( error.context.type, 'aliases' );
-			assert.ok( error.context.value.equals( new wb.datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
+			assert.ok( error.context.value.equals( new datamodel.MultiTerm( 'language', [ 'alias' ] ) ) );
 		} ).always( done );
 	} );
 
@@ -511,10 +513,10 @@
 		 * @constructor
 		 */
 		function FingerprintBuilder() {
-			wb.datamodel.Fingerprint.call( this );
+			datamodel.Fingerprint.call( this );
 		}
 
-		$.extend( FingerprintBuilder.prototype, wb.datamodel.Fingerprint.prototype );
+		$.extend( FingerprintBuilder.prototype, datamodel.Fingerprint.prototype );
 
 		FingerprintBuilder.prototype.withLabel = function withLabel( language, value ) {
 			this.setLabel( language, new Term( language, value ) );
@@ -527,7 +529,7 @@
 		};
 
 		FingerprintBuilder.prototype.withAliases = function withDescription( language, aliases ) {
-			this.setAliases( language, new wb.datamodel.MultiTerm( language, aliases ) );
+			this.setAliases( language, new datamodel.MultiTerm( language, aliases ) );
 			return this;
 		};
 

@@ -245,7 +245,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase',
 				'wikibase.api.RepoApiError',
-				'wikibase.datamodel.MultiTerm', // for AliasesChanger.js
+				'wikibase.datamodel', // for AliasesChanger.js
 				'wikibase.serialization.StatementDeserializer', // for EntityChangersFactory.js
 				'wikibase.serialization.StatementSerializer', // for EntityChangersFactory.js
 			]

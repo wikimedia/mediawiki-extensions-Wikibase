@@ -5,11 +5,13 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		datamodel = require( 'wikibase.datamodel' );
+
 	/**
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 */
 	var SELF = MODULE.DescriptionsChanger = function WbEntityChangersDescriptionsChanger( api, revisionStore, entity ) {
 		this._api = api;
@@ -19,7 +21,7 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {datamodel.Entity}
 		 */
 		_entity: null,
 
@@ -34,7 +36,7 @@
 		_api: null,
 
 		/**
-		 * @param {wikibase.datamodel.Term} description
+		 * @param {datamodel.Term} description
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved description
@@ -54,7 +56,7 @@
 			)
 			.done( function ( result ) {
 				var savedText = result.entity.descriptions[ language ].value,
-					savedTerm = savedText ? new wb.datamodel.Term( language, savedText ) : null;
+					savedTerm = savedText ? new datamodel.Term( language, savedText ) : null;
 
 				// Update revision store:
 				self._revisionStore.setDescriptionRevision( result.entity.lastrevid );

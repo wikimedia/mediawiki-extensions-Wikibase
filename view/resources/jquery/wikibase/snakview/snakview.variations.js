@@ -29,7 +29,7 @@
 		 * using a specific `Snak` type within `jQuery.wikibase.snakview`. Acts like the
 		 * `jQuery.Widget` factory.
 		 *
-		 * @param {wikibase.datamodel.Snak} snakConstructor The constructor of the `Snak` the
+		 * @param {datamodel.Snak} snakConstructor The constructor of the `Snak` the
 		 *        `Variation` applies to.
 		 * @param {Function|string|Object} baseOrDefinition Constructor or name of the `Variation`
 		 *        the new `Variation` should be based on. The parameter may be omitted resulting in

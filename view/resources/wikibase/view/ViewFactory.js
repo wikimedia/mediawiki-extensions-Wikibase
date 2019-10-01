@@ -3,7 +3,8 @@
 
 	var MODULE = wb.view,
 		EventSingletonManager = require( '../../jquery/jquery.util.EventSingletonManager.js' ),
-		ValueViewBuilder = require( '../wikibase.ValueViewBuilder.js' );
+		ValueViewBuilder = require( '../wikibase.ValueViewBuilder.js' ),
+		datamodel = require( 'wikibase.datamodel' );
 
 	// Widgets
 	require( '../../jquery/wikibase/jquery.wikibase.pagesuggester.js' );
@@ -194,7 +195,7 @@
 	 * Construct a suitable view for the given entity on the given DOM element
 	 *
 	 * @param {Function} startEditingCallback
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 * @param {jQuery} $entityview
 	 * @return {jQuery.wikibase.entityview} The constructed entity view
 	 * @throws {Error} If there is no view for the given entity type
@@ -217,7 +218,7 @@
 	 * Construct a suitable terms view for the given fingerprint on the given DOM element
 	 *
 	 * @param {Function} startEditingCallback
-	 * @param {wikibase.datamodel.Fingerprint} fingerprint
+	 * @param {datamodel.Fingerprint} fingerprint
 	 * @param {jQuery} $entitytermsview
 	 * @return {jQuery.wikibase.entitytermsview} The constructed entity terms view
 	 */
@@ -237,7 +238,7 @@
 	 * Construct a suitable view for the given sitelink set on the given DOM element
 	 *
 	 * @param {Function} startEditingCallback
-	 * @param {wikibase.datamodel.SiteLinkSet} sitelinkSet
+	 * @param {datamodel.SiteLinkSet} sitelinkSet
 	 * @param {jQuery} $sitelinkgrouplistview
 	 * @return {jQuery.wikibase.sitelinkgrouplistview} The constructed sitelinkgrouplistview
 	 */
@@ -264,7 +265,7 @@
 	 *
 	 * @param {Function} startEditingCallback
 	 * @param {string} groupName
-	 * @param {wikibase.datamodel.SiteLinkSet} siteLinks
+	 * @param {datamodel.SiteLinkSet} siteLinks
 	 * @param {jQuery} $sitelinkgroupview
 	 * @return {jQuery.wikibase.sitelinkgroupview} The constructed sitelinkgroupview
 	 */
@@ -284,7 +285,7 @@
 	 * Construct a suitable view for the given sitelink list on the given DOM element
 	 *
 	 * @param {Function} startEditingCallback
-	 * @param {wikibase.datamodel.SiteLink[]} siteLinks
+	 * @param {datamodel.SiteLink[]} siteLinks
 	 * @param {jQuery} $sitelinklistview
 	 * @param {string[]} allowedSiteIds
 	 * @param {jQuery} $counter
@@ -360,7 +361,7 @@
 	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
 	 *
 	 * @param {Function} startEditingCallback
-	 * @param {wikibase.datamodel.Item|wikibase.datamodel.Property} entity
+	 * @param {datamodel.Item|datamodel.Property} entity
 	 * @param {jQuery} $statementgrouplistview
 	 * @param {string} htmlIdPrefix
 	 *
@@ -406,7 +407,7 @@
 	 *
 	 * @param {Function} startEditingCallback
 	 * @param {string} entityId
-	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
+	 * @param {Function} getStatementForGuid A function returning a `datamodel.Statement` for a given GUID
 	 * @param {string} htmlIdPrefix
 	 *
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
@@ -432,8 +433,8 @@
 	 * @param {string} entityId
 	 * @param {string|null} propertyId Optionally specifies a property
 	 *                                                      all statements should be on or are on
-	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
-	 * @param {wikibase.datamodel.StatementList} value
+	 * @param {Function} getStatementForGuid A function returning a `datamodel.Statement` for a given GUID
+	 * @param {datamodel.StatementList} value
 	 * @param {jQuery} $statementlistview
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
 	 */
@@ -465,7 +466,7 @@
 	 *
 	 * @param {Function} startEditingCallback
 	 * @param {string} entityId
-	 * @param {Function} getValueForDom A function returning a `wikibase.datamodel.Statement` or `null`
+	 * @param {Function} getValueForDom A function returning a `datamodel.Statement` or `null`
 	 *                                  for a given DOM element
 	 * @param {string|null} [propertyId] Optionally a property all statements are or should be on
 	 * @param {Function} removeCallback A function that accepts a statementview and removes it from
@@ -611,7 +612,7 @@
 					},
 					value || {
 						property: null,
-						snaktype: wb.datamodel.PropertyValueSnak.TYPE
+						snaktype: datamodel.PropertyValueSnak.TYPE
 					},
 					$( dom ),
 					removeCallback
@@ -626,7 +627,7 @@
 	 * @param {Function} startEditingCallback
 	 * @param {boolean} drawProperty Whether the snakview should draw its property
 	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
-	 * @param {wikibase.datamodel.Snak|null} snak
+	 * @param {datamodel.Snak|null} snak
 	 * @param {jQuery} $snakview
 	 * @param {Function} removeCallback
 	 * @return {jQuery.wikibase.snakview} The constructed snakview

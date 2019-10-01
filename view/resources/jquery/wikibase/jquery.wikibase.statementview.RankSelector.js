@@ -1,7 +1,8 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * The node of the `RankSelector` menu to select a `RANK` from.
@@ -13,15 +14,15 @@
 	/**
 	 * Returns a `RANK`'s serialized string.
 	 *
-	 * @see wikibase.datamodel.Statement.RANK
+	 * @see datamodel.Statement.RANK
 	 * @ignore
 	 *
 	 * @param {number} rank
 	 * @return {string|null}
 	 */
 	function getRankName( rank ) {
-		for ( var rankName in wb.datamodel.Statement.RANK ) {
-			if ( rank === wb.datamodel.Statement.RANK[ rankName ] ) {
+		for ( var rankName in datamodel.Statement.RANK ) {
+			if ( rank === datamodel.Statement.RANK[ rankName ] ) {
 				return rankName.toLowerCase();
 			}
 		}
@@ -31,7 +32,7 @@
 
 	/**
 	 * Selector for choosing a `Statement` rank.
-	 * @see wikibase.datamodel.Statement.RANK
+	 * @see datamodel.Statement.RANK
 	 * @class jQuery.wikibase.statementview.RankSelector
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @license GPL-2.0-or-later
@@ -40,7 +41,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} [options]
-	 * @param {number} [options.value=wikibase.datamodel.Statement.RANK.NORMAL]
+	 * @param {number} [options.value=datamodel.Statement.RANK.NORMAL]
 	 *        The `RANK` that shall be selected.
 	 * @param {boolean} [options.isRTL=false]
 	 *        Whether the widget is displayed in right-to-left context.
@@ -70,13 +71,13 @@
 			templateShortCuts: {
 				$icon: '.ui-icon-rankselector'
 			},
-			value: wb.datamodel.Statement.RANK.NORMAL,
+			value: datamodel.Statement.RANK.NORMAL,
 			isRtl: false
 		},
 
 		/**
 		 * The `RANK` currently featured by the `RankSelector`.
-		 * @see wikibase.datamodel.Statement.RANK
+		 * @see datamodel.Statement.RANK
 		 * @type {number}
 		 */
 		_rank: null,
@@ -203,7 +204,7 @@
 				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
 
 			// eslint-disable-next-line jquery/no-each-util
-			$.each( wb.datamodel.Statement.RANK, function ( rankName, rank ) {
+			$.each( datamodel.Statement.RANK, function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 
 				$menu.append(
@@ -276,9 +277,9 @@
 		 * @private
 		 */
 		_updateIcon: function () {
-			for ( var rankId in wb.datamodel.Statement.RANK ) {
+			for ( var rankId in datamodel.Statement.RANK ) {
 				var rankName = rankId.toLowerCase(),
-					selected = this._rank === wb.datamodel.Statement.RANK[ rankId ];
+					selected = this._rank === datamodel.Statement.RANK[ rankId ];
 
 				this.$icon.toggleClass( this.widgetFullName + '-' + rankName, selected );
 
@@ -332,4 +333,4 @@
 
 	} );
 
-}( wikibase ) );
+}() );

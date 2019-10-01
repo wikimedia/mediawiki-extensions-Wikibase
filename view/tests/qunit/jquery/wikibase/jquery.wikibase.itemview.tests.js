@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {Object} [options]
@@ -12,7 +14,7 @@
 	 */
 	var createItemview = function ( options, $node ) {
 		options = $.extend( {
-			value: new wb.datamodel.Item( 'Q1' ),
+			value: new datamodel.Item( 'Q1' ),
 			buildEntityTermsView: function () {},
 			buildStatementGroupListView: function () {},
 			buildSitelinkGroupListView: function () {}
@@ -68,4 +70,4 @@
 
 	} );
 
-}( wikibase ) );
+}() );

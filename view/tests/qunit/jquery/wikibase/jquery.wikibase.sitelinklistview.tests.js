@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	/**
 	 * @param {Object} [options]
 	 * @return {jQuery}
@@ -38,7 +40,7 @@
 		var sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 		sitelinklistview._saveSiteLink = function ( siteLink ) {
-			if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
+			if ( !( siteLink instanceof datamodel.SiteLink ) ) {
 				throw new Error( 'SiteLink object expected' );
 			} else {
 				return ( new $.Deferred() ).resolve().promise();
@@ -113,7 +115,7 @@
 	} );
 
 	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinklistview = createSitelinklistview( {
 				value: [ siteLink ]
 			} ),
@@ -145,8 +147,8 @@
 
 		$sitelinklistview = createSitelinklistview( {
 			value: [
-				new wikibase.datamodel.SiteLink( 'aawiki', 'Main Page' ),
-				new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' )
+				new datamodel.SiteLink( 'aawiki', 'Main Page' ),
+				new datamodel.SiteLink( 'enwiki', 'Main Page' )
 			]
 		} );
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
@@ -175,7 +177,7 @@
 
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
 		var $sitelinklistview = createSitelinklistview( {
-				value: [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
+				value: [ new datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ]
 			} ),
 			sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -272,7 +274,7 @@
 			// Mock adding a new item:
 			var listview = sitelinklistview.$listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
-				$sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
+				$sitelinkview = listview.addItem( new datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
 			lia.liInstance( $sitelinkview ).startEditing();
 			sitelinklistview.stopEditing( true );
 		} );
@@ -297,7 +299,7 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		var value = [ new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ) ],
+		var value = [ new datamodel.SiteLink( 'enwiki', 'Main Page' ) ],
 			$sitelinklistview = createSitelinklistview( {
 				value: value
 			} ),
@@ -310,8 +312,8 @@
 		);
 
 		value = [
-			new wikibase.datamodel.SiteLink( 'aawiki', 'a' ),
-			new wikibase.datamodel.SiteLink( 'aawiki', 'b' )
+			new datamodel.SiteLink( 'aawiki', 'a' ),
+			new datamodel.SiteLink( 'aawiki', 'b' )
 		];
 
 		sitelinklistview.value( value );

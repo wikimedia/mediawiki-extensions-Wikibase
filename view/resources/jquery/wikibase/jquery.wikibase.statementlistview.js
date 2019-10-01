@@ -1,14 +1,15 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.TemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying and editing a list of `wikibase.datamodel.Statement` objects by using
+	 * View for displaying and editing a list of `datamodel.Statement` objects by using
 	 * `jQuery.wikibase.statementview` widgets.
 	 * @see jQuery.wikibase.statementview
-	 * @see wikibase.datamodel.Statement
-	 * @see wikibase.datamodel.StatementList
+	 * @see datamodel.Statement
+	 * @see datamodel.StatementList
 	 * @class jQuery.wikibase.statementlistview
 	 * @extends jQuery.ui.TemplatedWidget
 	 * @uses jQuery.wikibase.listview
@@ -19,7 +20,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.StatementList} [options.value]
+	 * @param {datamodel.StatementList} [options.value]
 	 *        The list of `Statement`s to be displayed by this view.
 	 * @param {Function} options.getListItemAdapter
 	 */
@@ -81,7 +82,7 @@
 		 */
 		_create: function () {
 			if ( !this.options.getListItemAdapter
-				|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementList ) )
+				|| ( this.options.value && !( this.options.value instanceof datamodel.StatementList ) )
 			) {
 				throw new Error( 'Required option not specified properly' );
 			}
@@ -161,8 +162,8 @@
 		 * Sets the widget's value or gets the widget's current value (including pending items). (The
 		 * value the widget was initialized with may be retrieved via `.option( 'value' )`.)
 		 *
-		 * @param {wikibase.datamodel.StatementList} [statementList]
-		 * @return {wikibase.datamodel.StatementList|undefined}
+		 * @param {datamodel.StatementList} [statementList]
+		 * @return {datamodel.StatementList|undefined}
 		 */
 		value: function ( statementList ) {
 			if ( statementList !== undefined ) {
@@ -180,7 +181,7 @@
 				}
 			} );
 
-			return new wb.datamodel.StatementList( statements );
+			return new datamodel.StatementList( statements );
 		},
 
 		/**
@@ -212,8 +213,8 @@
 		 */
 		_setOption: function ( key, value ) {
 			if ( key === 'value' && !!value ) {
-				if ( !( value instanceof wb.datamodel.StatementList ) ) {
-					throw new Error( 'value needs to be a wb.datamodel.StatementList instance' );
+				if ( !( value instanceof datamodel.StatementList ) ) {
+					throw new Error( 'value needs to be a datamodel.StatementList instance' );
 				}
 				this._listview.value( value.toArray() );
 			}
@@ -245,4 +246,4 @@
 
 	} );
 
-}( wikibase ) );
+}() );

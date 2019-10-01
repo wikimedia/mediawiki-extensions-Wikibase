@@ -7,7 +7,8 @@
 
 	QUnit.module( 'wikibase.entityChangers.DescriptionsChanger', QUnit.newMwEnvironment() );
 
-	var SUBJECT = wikibase.entityChangers.DescriptionsChanger;
+	var SUBJECT = wikibase.entityChangers.DescriptionsChanger,
+		datamodel = require( 'wikibase.datamodel' );
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.strictEqual(
@@ -30,10 +31,10 @@
 		var descriptionsChanger = new SUBJECT(
 			api,
 			{ getDescriptionRevision: function () { return 0; } },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) );
+		descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ) );
 
 		assert.ok( api.setDescription.calledOnce );
 	} );
@@ -56,10 +57,10 @@
 		var descriptionsChanger = new SUBJECT(
 			api,
 			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		return descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
+		return descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ) )
 		.done( function ( savedDescription ) {
 			assert.strictEqual( savedDescription.getText(), 'description' );
 		} );
@@ -74,12 +75,12 @@
 		var descriptionsChanger = new SUBJECT(
 			api,
 			{ getDescriptionRevision: function () { return 0; }, setDescriptionRevision: function () {} },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
 		var done = assert.async();
 
-		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
+		descriptionsChanger.setDescription( new datamodel.Term( 'language', 'description' ) )
 		.done( function ( savedDescription ) {
 			assert.ok( false, 'setDescription should have failed' );
 		} )
