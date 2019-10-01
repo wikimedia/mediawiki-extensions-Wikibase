@@ -199,6 +199,8 @@
 	"wikibase-item-summary-wbeditentity-create": "Création d’un nouvel élément",
 	"wikibase-item-summary-wbeditentity-create-item": "Nouvel élément créé",
 	"wikibase-item-summary-wbeditentity-update": "Modification d’un élément",
+	"wikibase-item-summary-wbeditentity-update-languages": "Modifier le libellé, la description ou les alias en {{PLURAL:$3|une langue|$3 langues}}.",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Modifier le libellé, la description ou les alias en {{PLURAL:$3|une langue|$3 langues}}, ainsi que d’autres parties.",
 	"wikibase-item-summary-wbeditentity-override": "Élément réinitialisé",
 	"wikibase-item-summary-wblinktitles-create": "Cet élément créé pour connecter les pages",
 	"wikibase-item-summary-wblinktitles-connect": "Lien de langue ajouté pour connecter les pages",

@@ -12,7 +12,8 @@
 			"Macofe",
 			"Dars",
 			"Avatar6",
-			"Vlad5250"
+			"Vlad5250",
+			"Movses"
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",
@@ -180,6 +181,8 @@
 	"wikibase-item-summary-wbeditentity-create": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity-create-item": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity-update": "Елемент змінено",
+	"wikibase-item-summary-wbeditentity-update-languages": "Змінені назви, описи та\\або синоніми {{PLURAL:$3|однією мовою|$3 мовами}}.",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Змінені назви, описи, синоніми та\\або інші частини {{PLURAL:$3|однією мовою|$3 мовами}}.",
 	"wikibase-item-summary-wbeditentity-override": "Перезаписано елемент.",
 	"wikibase-item-summary-wblinktitles-create": "Цей об'єкт створено для зв'язку сторінок",
 	"wikibase-item-summary-wblinktitles-connect": "Додано мовні посилання для зв'язку сторінок",

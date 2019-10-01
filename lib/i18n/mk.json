@@ -172,6 +172,8 @@
 	"wikibase-item-summary-wbeditentity-create": "Создавање на нов предмет",
 	"wikibase-item-summary-wbeditentity-create-item": "Создаден нов предмет",
 	"wikibase-item-summary-wbeditentity-update": "Изменет предмет",
+	"wikibase-item-summary-wbeditentity-update-languages": "Сменети натпис, опис и/или истозначници на $3 {{PLURAL:$3|јазик|јазици}}.",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Сменети натпис, опис и/или истозначници на $3 {{PLURAL:$3|јазик|јазици}} и други делови.",
 	"wikibase-item-summary-wbeditentity-override": "Презапишување врз предмет",
 	"wikibase-item-summary-wblinktitles-create": "Предметот создаден за поврзување на страниците",
 	"wikibase-item-summary-wblinktitles-connect": "Ставена јазична врска за поврзување на страниците",

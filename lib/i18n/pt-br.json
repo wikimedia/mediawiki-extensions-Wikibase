@@ -182,6 +182,8 @@
 	"wikibase-item-summary-wbeditentity-create": "Criado um novo item",
 	"wikibase-item-summary-wbeditentity-create-item": "Criado um novo item",
 	"wikibase-item-summary-wbeditentity-update": "Mudou um item",
+	"wikibase-item-summary-wbeditentity-update-languages": "Etiqueta, descrição e/ou aliases alterados em {{PLURAL:$3|idioma|idiomas}} $3.",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Etiqueta, descrição e/ou aliases alterados em $3 {{PLURAL:$3|idioma|idiomas}}, e outras partes.",
 	"wikibase-item-summary-wbeditentity-override": "Um item foi sobrescrito",
 	"wikibase-item-summary-wblinktitles-create": "Criado este item para conectar as páginas",
 	"wikibase-item-summary-wblinktitles-connect": "Adicionado um link de idioma para conectar as páginas",

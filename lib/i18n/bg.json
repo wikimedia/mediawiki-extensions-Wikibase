@@ -72,7 +72,7 @@
 	"wikibase-entity-summary-wbcreateclaim": "{{PLURAL:$1|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Премахнато изявление|Премахнати изявления}}",
-	"wikibase-entity-summary-special-create-item": "Създаден обект за [$2] с {{PLURAL:$1|стойността|стойностите}}",
+	"wikibase-entity-summary-special-create-item": "Създаден обект за [$2] със {{PLURAL:$1|стойност|стойности}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "Създадено изявление",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Създадено изявление|Създадени изявления}}",
 	"wikibase-entity-summary-clientsitelink-update": "Страницата е преместена от [$3] на [$4]",
@@ -85,11 +85,11 @@
 	"wikibase-item-summary-wbeditentity": "Създаден нов обект",
 	"wikibase-item-summary-wbeditentity-create": "Създаден нов обект",
 	"wikibase-item-summary-wbeditentity-create-item": "Създаден нов обект",
-	"wikibase-item-summary-wbeditentity-update": "Изменен обект",
+	"wikibase-item-summary-wbeditentity-update": "Променен обект",
 	"wikibase-item-summary-wbeditentity-override": "Изчистване на обект",
 	"wikibase-property-summary-wbcreate-new": "Създадено ново свойство",
 	"wikibase-property-summary-wbeditentity-create": "Създадено ново свойство",
 	"wikibase-property-summary-wbeditentity-create-property": "Създадено ново свойство",
-	"wikibase-property-summary-wbeditentity-update": "Изменено свойство",
-	"wikibase-property-summary-special-create-property": "Създадено свойство за [$2] с {{PLURAL:$1|стойността|стойностите}}"
+	"wikibase-property-summary-wbeditentity-update": "Променено свойство",
+	"wikibase-property-summary-special-create-property": "Създадено свойство за [$2] със {{PLURAL:$1|стойност|стойности}}"
 }

@@ -75,7 +75,7 @@
 	"wikibase-validator-unknown-unit": "Nekonata unuo: $1",
 	"wikibase-validator-not-allowed": "Malvalida valoro: $1",
 	"wikibase-validator-no-validators": "Malpermesata",
-	"datatypes-type-string": "Bitĉeno",
+	"datatypes-type-string": "Ĉeno",
 	"datatypes-type-quantity": "Kvanto",
 	"datatypes-type-monolingualtext": "Unulingva teksto",
 	"datatypes-type-multilingualtext": "Plurlingva teksto",

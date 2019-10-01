@@ -7,12 +7,12 @@
 	},
 	"wikibase-edit": "bewarken",
 	"wikibase-add": "tovogen",
-	"wikibase-label-empty": "Gien etiket in-esteld",
+	"wikibase-label-empty": "Geen etiket insteld",
 	"wikibase-description-empty": "Geen beskryving insteld",
 	"wikibase-statementsection-statements": "Verklaoringen",
 	"wikibase-sitelinks-special": "Andere websteaden",
 	"wikibase-statementview-rank-normal": "Normale rang",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|bron|bronnen}}",
-	"special-itembytitle": "Onderwarp op naam",
-	"special-newitem": "Niej onderwarp anmaken"
+	"special-itembytitle": "Objekt up name",
+	"special-newitem": "Een ny objekt anmaken"
 }

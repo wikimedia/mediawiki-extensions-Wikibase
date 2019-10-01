@@ -176,6 +176,8 @@
 	"wikibase-item-summary-wbeditentity-create": "Opprettet et nytt element",
 	"wikibase-item-summary-wbeditentity-create-item": "Opprettet et nytt element",
 	"wikibase-item-summary-wbeditentity-update": "Endret et element",
+	"wikibase-item-summary-wbeditentity-update-languages": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}.",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}, og andre deler.",
 	"wikibase-item-summary-wbeditentity-override": "Overstyrte et element",
 	"wikibase-item-summary-wblinktitles-create": "Opprettet dette elementet for å knytte til sidene",
 	"wikibase-item-summary-wblinktitles-connect": "La til språklenke for å koble sidene",
