@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	QUnit.module( 'jquery.wikibase.entityview' );
 
@@ -11,7 +13,7 @@
 		assert.throws(
 			function () {
 				$( '<div/>' ).entityview( $.extend( {
-					value: new wb.datamodel.Property( 'P1', 'someDataType' ),
+					value: new datamodel.Property( 'P1', 'someDataType' ),
 					languages: 'en'
 				} ) );
 			},
@@ -19,4 +21,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		datamodel = require( 'wikibase.datamodel' );
 
 	function chain( tasks ) {
 		return tasks.reduce( function ( promise, task ) {
@@ -16,7 +17,7 @@
 	/**
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 */
 	var SELF = MODULE.EntityTermsChanger = function WbEntityChangersEntityTermsChanger( api, revisionStore, entity ) {
 		this._aliasesChanger = new MODULE.AliasesChanger( api, revisionStore, entity );
@@ -27,7 +28,7 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {datamodel.Entity}
 		 */
 		_entity: null,
 
@@ -47,11 +48,11 @@
 		_labelsChanger: null,
 
 		/**
-		 * @param {wikibase.datamodel.Fingerprint} newFingerprint
-		 * @param {wikibase.datamodel.Fingerprint} oldFingerprint
+		 * @param {datamodel.Fingerprint} newFingerprint
+		 * @param {datamodel.Fingerprint} oldFingerprint
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {wikibase.datamodel.Fingerprint} The saved fingerprint
+		 *         - {datamodel.Fingerprint} The saved fingerprint
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
@@ -121,8 +122,8 @@
 		},
 
 		/**
-		 * @param {wikibase.datamodel.TermMap|wikibase.datamodel.MultiTermMap} newTerms
-		 * @param {wikibase.datamodel.TermMap|wikibase.datamodel.MultiTermMap} oldTerms
+		 * @param {datamodel.TermMap|datamodel.MultiTermMap} newTerms
+		 * @param {datamodel.TermMap|datamodel.MultiTermMap} oldTerms
 		 * @param {Function} getChange
 		 * @return {Function[]}
 		 * @private
@@ -139,7 +140,7 @@
 			} );
 
 			oldTerms.each( function ( languageCode, oldTerm ) {
-				var isTerm = oldTerm instanceof wb.datamodel.Term;
+				var isTerm = oldTerm instanceof datamodel.Term;
 
 				if ( !newTerms.hasItemForKey( languageCode )
 					// There are also MultiTerms where this does not apply

@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		datamodel = require( 'wikibase.datamodel' );
 
 	function chain( tasks ) {
 		return tasks.reduce( function ( promise, task ) {
@@ -16,7 +17,7 @@
 	/**
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 */
 	var SELF = MODULE.SiteLinkSetsChanger = function WbEntityChangersSiteLinkSetsChanger( api, revisionStore, entity ) {
 		this._siteLinksChanger = new MODULE.SiteLinksChanger( api, revisionStore, entity );
@@ -25,7 +26,7 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {datamodel.Entity}
 		 */
 		_entity: null,
 
@@ -35,8 +36,8 @@
 		_siteLinksChanger: null,
 
 		/**
-		 * @param {wikibase.datamodel.SiteLinkSet} newSiteLinkSet
-		 * @param {wikibase.datamodel.SiteLinkSet} oldSiteLinkSet
+		 * @param {datamodel.SiteLinkSet} newSiteLinkSet
+		 * @param {datamodel.SiteLinkSet} oldSiteLinkSet
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved SiteLinkSet
@@ -61,7 +62,7 @@
 				var siteLinks = [],
 					unchangedSiteLinks = [];
 				siteLinks = siteLinks.concat( getRemovedSiteLinkIds().map( function ( siteId ) {
-					return new wb.datamodel.SiteLink( siteId, '' );
+					return new datamodel.SiteLink( siteId, '' );
 				} ) );
 
 				newSiteLinkSet.each( function ( site, sitelink ) {
@@ -87,7 +88,7 @@
 					} );
 				};
 			} ) ).then( function () {
-				return new wb.datamodel.SiteLinkSet( resultValue.sort( function ( s1, s2 ) {
+				return new datamodel.SiteLinkSet( resultValue.sort( function ( s1, s2 ) {
 					return s1.getSiteId().localeCompare( s2.getSiteId() );
 				} ) );
 			} );

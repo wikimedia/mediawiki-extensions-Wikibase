@@ -1,14 +1,15 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
 	var MODULE = $.wikibase.snakview.variations,
-		PARENT = MODULE.Variation;
+		PARENT = MODULE.Variation,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * `snakview` `Variation` for displaying and creating `wikibase.datamodel.PropertyNoValueSnak`s.
+	 * `snakview` `Variation` for displaying and creating `datamodel.PropertyNoValueSnak`s.
 	 * Only displays a message, does not offer any additional user interface interaction.
 	 * @see jQuery.wikibase.snakview
-	 * @see wikibase.datamodel.PropertyNoValueSnak
+	 * @see datamodel.PropertyNoValueSnak
 	 * @class jQuery.wikibase.snakview.variations.NoValue
 	 * @extends jQuery.wikibase.snakview.variations.Variation
 	 * @license GPL-2.0-or-later
@@ -16,7 +17,7 @@
 	 *
 	 * @constructor
 	 */
-	MODULE.variation( wb.datamodel.PropertyNoValueSnak, PARENT, {
+	MODULE.variation( datamodel.PropertyNoValueSnak, PARENT, {
 		/**
 		 * @inheritdoc
 		 */
@@ -31,4 +32,4 @@
 		}
 	} );
 
-}( wikibase ) );
+}() );

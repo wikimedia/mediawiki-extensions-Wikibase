@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {Object} [options]
@@ -95,10 +97,10 @@
 	} ) );
 
 	QUnit.test( 'Create and destroy', function ( assert ) {
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
-				value: new wb.datamodel.SiteLinkSet( [ siteLink ] )
+				value: new datamodel.SiteLinkSet( [ siteLink ] )
 			} ),
 			sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -127,7 +129,7 @@
 	QUnit.test( 'startEditing() & stopEditing()', function ( assert ) {
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
-				value: new wb.datamodel.SiteLinkSet( [ new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ] )
+				value: new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'enwiki', 'enwiki-page' ) ] )
 			} ),
 			sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -226,7 +228,7 @@
 	QUnit.test( 'setError()', function ( assert ) {
 		var $sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
-				value: new wb.datamodel.SiteLinkSet( [] )
+				value: new datamodel.SiteLinkSet( [] )
 			} ),
 			sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -243,8 +245,8 @@
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
-			siteLinks = new wb.datamodel.SiteLinkSet( [ siteLink ] ),
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
+			siteLinks = new datamodel.SiteLinkSet( [ siteLink ] ),
 			$sitelinkgroupview = createSitelinkgroupview( {
 				groupName: 'group1',
 				value: siteLinks
@@ -257,9 +259,9 @@
 			'Retrieved initial value.'
 		);
 
-		siteLinks = new wb.datamodel.SiteLinkSet( [
-			new wikibase.datamodel.SiteLink( 'dewiki', '1234' ),
-			new wikibase.datamodel.SiteLink( 'enwiki', '5678' )
+		siteLinks = new datamodel.SiteLinkSet( [
+			new datamodel.SiteLink( 'dewiki', '1234' ),
+			new datamodel.SiteLink( 'enwiki', '5678' )
 		] );
 
 		sitelinkgroupview.value( siteLinks );
@@ -271,4 +273,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

@@ -1,11 +1,12 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * Displays and allows editing of `wikibase.datamodel.MultiTerm` objects.
-	 * @see wikibase.datamodel.MultiTerm
+	 * Displays and allows editing of `datamodel.MultiTerm` objects.
+	 * @see datamodel.MultiTerm
 	 * @class jQuery.wikibase.aliasesview
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @license GPL-2.0-or-later
@@ -14,7 +15,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.MultiTerm} options.value
+	 * @param {datamodel.MultiTerm} options.value
 	 * @param {string} [options.helpMessage=mw.msg( 'wikibase-aliases-input-help-message' )]
 	 */
 	$.widget( 'wikibase.aliasesview', PARENT, {
@@ -51,7 +52,7 @@
 		 * @throws {Error} if a required option is not specified properly.
 		 */
 		_create: function () {
-			if ( !( this.options.value instanceof wb.datamodel.MultiTerm ) ) {
+			if ( !( this.options.value instanceof datamodel.MultiTerm ) ) {
 				throw new Error( 'Required option not specified properly' );
 			}
 
@@ -172,11 +173,11 @@
 		 * @protected
 		 *
 		 * @throws {Error} when trying to set the widget's value to something other than a
-		 *         `wikibase.datamodel.MultiTerm` instance.
+		 *         `datamodel.MultiTerm` instance.
 		 */
 		_setOption: function ( key, value ) {
-			if ( key === 'value' && !( value instanceof wb.datamodel.MultiTerm ) ) {
-				throw new Error( 'Value needs to be a wb.datamodel.MultiTerm instance' );
+			if ( key === 'value' && !( value instanceof datamodel.MultiTerm ) ) {
+				throw new Error( 'Value needs to be a datamodel.MultiTerm instance' );
 			}
 
 			var response = PARENT.prototype._setOption.call( this, key, value );
@@ -191,8 +192,8 @@
 		/**
 		 * @inheritdoc
 		 *
-		 * @param {wikibase.datamodel.MultiTerm} [value]
-		 * @return {wikibase.datamodel.MultiTerm|undefined}
+		 * @param {datamodel.MultiTerm} [value]
+		 * @return {datamodel.MultiTerm|undefined}
 		 */
 		value: function ( value ) {
 			if ( value !== undefined ) {
@@ -205,7 +206,7 @@
 
 			var tagadata = this.$list.data( 'tagadata' );
 
-			return new wb.datamodel.MultiTerm(
+			return new datamodel.MultiTerm(
 				this.options.value.getLanguageCode(),
 				// tagadata.getTags() returns a jquery object of html nodes
 				// eslint-disable-next-line jquery/no-map-util
@@ -228,4 +229,4 @@
 
 	} );
 
-}( wikibase ) );
+}() );

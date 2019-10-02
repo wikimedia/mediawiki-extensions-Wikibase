@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	var statementgroupviewListItemAdapter = wb.tests.getMockListItemAdapter(
 		'statementgroupview',
 		function () {
@@ -25,7 +27,7 @@
 				};
 			},
 			listItemAdapter: statementgroupviewListItemAdapter,
-			value: new wb.datamodel.StatementGroupSet()
+			value: new datamodel.StatementGroupSet()
 		}, options || {} );
 
 		$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -68,15 +70,15 @@
 		);
 
 		$statementgrouplistview = createStatementgrouplistview( {
-			value: new wb.datamodel.StatementGroupSet( [
-				new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList() )
+			value: new datamodel.StatementGroupSet( [
+				new datamodel.StatementGroup( 'P1', new datamodel.StatementList() )
 			] )
 		} );
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
 		assert.ok(
 			statementgrouplistview instanceof $.wikibase.statementgrouplistview,
-			'Created widget with filled wb.datamodel.StatementGroupSet instance.'
+			'Created widget with filled datamodel.StatementGroupSet instance.'
 		);
 	} );
 

@@ -7,7 +7,8 @@
 
 	QUnit.module( 'wikibase.entityChangers.SiteLinksChanger', QUnit.newMwEnvironment() );
 
-	var SUBJECT = wikibase.entityChangers.SiteLinksChanger;
+	var SUBJECT = wikibase.entityChangers.SiteLinksChanger,
+		datamodel = require( 'wikibase.datamodel' );
 
 	QUnit.test( 'is a function', function ( assert ) {
 		assert.strictEqual(
@@ -30,10 +31,10 @@
 		var siteLinksChanger = new SUBJECT(
 			api,
 			{ getSitelinksRevision: function () { return 0; } },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName' ) );
+		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) );
 
 		assert.ok( api.setSitelink.calledOnce );
 	} );
@@ -56,12 +57,12 @@
 		var siteLinksChanger = new SUBJECT(
 			api,
 			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		return siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName' ) )
+		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) )
 		.done( function ( savedSiteLink ) {
-			assert.ok( savedSiteLink instanceof wb.datamodel.SiteLink );
+			assert.ok( savedSiteLink instanceof datamodel.SiteLink );
 		} );
 	} );
 
@@ -84,10 +85,10 @@
 		var siteLinksChanger = new SUBJECT(
 			api,
 			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		return siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) )
+		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) )
 		.done( function ( savedSiteLink ) {
 			assert.deepEqual( savedSiteLink.getBadges(), [ 'Q2' ] );
 		} );
@@ -102,12 +103,12 @@
 		var siteLinksChanger = new SUBJECT(
 			api,
 			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
 		var done = assert.async();
 
-		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName' ) )
+		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', 'pageName' ) )
 		.done( function ( savedSiteLink ) {
 			assert.ok( false, 'setSiteLink should have failed' );
 		} )
@@ -127,10 +128,10 @@
 		var siteLinksChanger = new SUBJECT(
 			api,
 			{ getSitelinksRevision: function () { return 0; } },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', '' ) );
+		siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ) );
 
 		assert.ok( api.setSitelink.calledOnce );
 	} );
@@ -154,10 +155,10 @@
 		var siteLinksChanger = new SUBJECT(
 			api,
 			{ getSitelinksRevision: function () { return 0; }, setSitelinksRevision: function () {} },
-			new wb.datamodel.Item( 'Q1' )
+			new datamodel.Item( 'Q1' )
 		);
 
-		return siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', '' ) )
+		return siteLinksChanger.setSiteLink( new datamodel.SiteLink( 'siteId', '' ) )
 		.done( function ( savedSiteLink ) {
 			assert.strictEqual( savedSiteLink, null );
 		} );

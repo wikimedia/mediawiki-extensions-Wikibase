@@ -5,16 +5,17 @@
 ( function ( wb, dv ) {
 	'use strict';
 
-	var snakLists = [
-		new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyValueSnak( 'p1', new dv.StringValue( 'a' ) ),
-			new wb.datamodel.PropertyValueSnak( 'p2', new dv.StringValue( 'b' ) ),
-			new wb.datamodel.PropertyValueSnak( 'p3', new dv.StringValue( 'c' ) )
-		] ),
-		new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyValueSnak( 'p4', new dv.StringValue( 'd' ) )
-		] )
-	];
+	var datamodel = require( 'wikibase.datamodel' ),
+		snakLists = [
+			new datamodel.SnakList( [
+				new datamodel.PropertyValueSnak( 'p1', new dv.StringValue( 'a' ) ),
+				new datamodel.PropertyValueSnak( 'p2', new dv.StringValue( 'b' ) ),
+				new datamodel.PropertyValueSnak( 'p3', new dv.StringValue( 'c' ) )
+			] ),
+			new datamodel.SnakList( [
+				new datamodel.PropertyValueSnak( 'p4', new dv.StringValue( 'd' ) )
+			] )
+		];
 
 	var listItemAdapter = wb.tests.getMockListItemAdapter( 'snakview', function () {
 		var _value = this.options.value;
@@ -42,7 +43,7 @@
 	/**
 	 * Generates a snaklistview widget suitable for testing.
 	 *
-	 * @param {wikibase.datamodel.SnakList} [value]
+	 * @param {datamodel.SnakList} [value]
 	 * @param {Object} [additionalOptions]
 	 * @return {jQuery}
 	 */
@@ -64,7 +65,7 @@
 	 * overwritten by using value() to set a snak list).
 	 *
 	 * @param {jQuery.wikibase.snaklistview} snaklistview
-	 * @param {wikibase.datamodel.SnakList} value
+	 * @param {datamodel.SnakList} value
 	 * @return {jQuery.wikibase.snaklistview}
 	 */
 	function setValueKeepingInitial( snaklistview, value ) {
@@ -168,7 +169,7 @@
 			'Overwrote snak list.'
 		);
 
-		snaklistview.value( new wb.datamodel.SnakList() );
+		snaklistview.value( new datamodel.SnakList() );
 
 		assert.strictEqual(
 			snaklistview.value().length,
@@ -223,7 +224,7 @@
 			'Snaklistview is in edit mode.'
 		);
 
-		snaklistview.value( new wb.datamodel.SnakList() );
+		snaklistview.value( new datamodel.SnakList() );
 
 		assert.strictEqual(
 			snaklistview.value().length,
@@ -439,7 +440,7 @@
 
 		// Set an empty snak list and stop edit mode.
 		snaklistview.startEditing();
-		snaklistview = setValueKeepingInitial( snaklistview, new wb.datamodel.SnakList() );
+		snaklistview = setValueKeepingInitial( snaklistview, new datamodel.SnakList() );
 
 		snaklistview.stopEditing( true );
 
@@ -509,7 +510,7 @@
 
 		// Set an empty snak list and stop edit mode.
 		snaklistview.startEditing();
-		snaklistview = setValueKeepingInitial( snaklistview, new wb.datamodel.SnakList() );
+		snaklistview = setValueKeepingInitial( snaklistview, new datamodel.SnakList() );
 
 		snaklistview.stopEditing();
 

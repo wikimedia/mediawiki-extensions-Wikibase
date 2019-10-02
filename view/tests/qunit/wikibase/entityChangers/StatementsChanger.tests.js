@@ -5,17 +5,19 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'wikibase.entityChangers.StatementsChanger' );
 
 	var SUBJECT = wikibase.entityChangers.StatementsChanger;
 	var statementsChangerState = new wikibase.entityChangers.StatementsChangerState(
 		'Q1',
-		new wikibase.datamodel.StatementGroupSet()
+		new datamodel.StatementGroupSet()
 	);
 
 	function newNoValueSnakStatement( guid ) {
-		return new wb.datamodel.Statement( new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, guid
+		return new datamodel.Statement( new datamodel.Claim(
+			new datamodel.PropertyNoValueSnak( 'P1' ), null, guid
 		) );
 	}
 
@@ -145,10 +147,10 @@
 		var statement2 = newNoValueSnakStatement( 'pie' );
 		var statementsChangerState = new wb.entityChangers.StatementsChangerState(
 			'Q1',
-			new wb.datamodel.StatementGroupSet( [
-				new wb.datamodel.StatementGroup(
+			new datamodel.StatementGroupSet( [
+				new datamodel.StatementGroup(
 					'P1',
-					new wb.datamodel.StatementList( [ statement1, statement2 ] )
+					new datamodel.StatementList( [ statement1, statement2 ] )
 				)
 			] )
 		);
@@ -221,7 +223,7 @@
 		return statementsChanger.save( newNoValueSnakStatement() )
 		.done( function ( savedStatement ) {
 			assert.ok(
-				savedStatement instanceof wb.datamodel.Statement,
+				savedStatement instanceof datamodel.Statement,
 				'save did not resolve with a Statement'
 			);
 		} );
@@ -320,7 +322,7 @@
 		var statement2 = newNoValueSnakStatement( 'pie' );
 		var statementsChangerState = new wb.entityChangers.StatementsChangerState(
 			'Q1',
-			new wb.datamodel.StatementGroupSet()
+			new datamodel.StatementGroupSet()
 		);
 		var statementsChangerStatements = statementsChangerState.getStatements();
 		var statementsChanger = new SUBJECT(
@@ -365,8 +367,8 @@
 
 		// Change statement1 to contain a somevalue snak
 		statement1.setClaim(
-			new wb.datamodel.Claim(
-				new wb.datamodel.PropertySomeValueSnak( 'P1' ),
+			new datamodel.Claim(
+				new datamodel.PropertySomeValueSnak( 'P1' ),
 				null,
 				statement1.getClaim().getGuid()
 			)

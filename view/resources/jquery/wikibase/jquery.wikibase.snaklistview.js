@@ -1,11 +1,12 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying and editing a `wikibase.datamodel.SnakList` object.
-	 * @see wikibase.datamodel.SnakList
+	 * View for displaying and editing a `datamodel.SnakList` object.
+	 * @see datamodel.SnakList
 	 * @class jQuery.wikibase.snaklistview
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @uses jQuery.wikibase.listview
@@ -16,7 +17,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.SnakList} [value=new wikibase.datamodel.SnakList()]
+	 * @param {datamodel.SnakList} [value=new datamodel.SnakList()]
 	 *        The `SnakList` to be displayed by this view.
 	 * @param {Function} options.getListItemAdapter
 	 * @param {boolean} [singleProperty=true]
@@ -83,9 +84,9 @@
 		 * @throws {Error} if a required option is not specified properly.
 		 */
 		_create: function () {
-			this.options.value = this.options.value || new wb.datamodel.SnakList();
+			this.options.value = this.options.value || new datamodel.SnakList();
 
-			if ( !this.options.getListItemAdapter || !( this.options.value instanceof wb.datamodel.SnakList ) ) {
+			if ( !this.options.getListItemAdapter || !( this.options.value instanceof datamodel.SnakList ) ) {
 				throw new Error( 'Required option not specified properly' );
 			}
 
@@ -206,8 +207,8 @@
 		 * Sets a new `SnakList` or returns the current `SnakList` (including pending `Snaks` not yet
 		 * committed).
 		 *
-		 * @param {wikibase.datamodel.SnakList} [snakList]
-		 * @return {wikibase.datamodel.SnakList|undefined|null}
+		 * @param {datamodel.SnakList} [snakList]
+		 * @return {datamodel.SnakList|undefined|null}
 		 */
 		value: function ( snakList ) {
 			if ( snakList !== undefined ) {
@@ -224,7 +225,7 @@
 				return null;
 			}
 
-			return new wb.datamodel.SnakList( snaks );
+			return new datamodel.SnakList( snaks );
 		},
 
 		/**
@@ -257,12 +258,12 @@
 		 * @inheritdoc
 		 *
 		 * @throws {Error} when trying to set the value to something other than a
-		 *         `wikibase.datamodel.SnakList` instance.
+		 *         `datamodel.SnakList` instance.
 		 */
 		_setOption: function ( key, value ) {
 			if ( key === 'value' ) {
-				if ( !( value instanceof wb.datamodel.SnakList ) ) {
-					throw new Error( 'value has to be an instance of wikibase.datamodel.SnakList' );
+				if ( !( value instanceof datamodel.SnakList ) ) {
+					throw new Error( 'value has to be an instance of datamodel.SnakList' );
 				}
 				this._listview.value( value.toArray() );
 			}

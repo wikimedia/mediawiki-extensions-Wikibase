@@ -11,9 +11,9 @@
 
 	/**
 	 * Abstract base for all kinds of `Variation`s to be used by `jQuery.wikibase.snakview` to
-	 * represent the different types of `wikibase.datamodel.Snak` objects.
+	 * represent the different types of `datamodel.Snak` objects.
 	 *
-	 * @see wikibase.datamodel.Snak
+	 * @see datamodel.Snak
 	 * @class jQuery.wikibase.snakview.variations.Variation
 	 * @abstract
 	 *
@@ -76,7 +76,7 @@
 		/**
 		 * The constructor of the `Snak` the `Variation` is for. Will be set by the `Variation`
 		 * factory when creating a new `Variation` definition.
-		 * @property {wikibase.datamodel.Snak}
+		 * @property {datamodel.Snak}
 		 * @readonly
 		 */
 		variationSnakConstructor: null,

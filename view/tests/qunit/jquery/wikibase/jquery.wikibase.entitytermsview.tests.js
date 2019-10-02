@@ -2,28 +2,30 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 *  @return {Fingerprint}
 	 */
 	function createFingerprint() {
-		return new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap( {
-				de: new wb.datamodel.Term( 'de', 'de-label' ),
-				en: new wb.datamodel.Term( 'en', 'en-label' ),
-				fa: new wb.datamodel.Term( 'fa', 'fa-label' )
+		return new datamodel.Fingerprint(
+			new datamodel.TermMap( {
+				de: new datamodel.Term( 'de', 'de-label' ),
+				en: new datamodel.Term( 'en', 'en-label' ),
+				fa: new datamodel.Term( 'fa', 'fa-label' )
 			} ),
-			new wb.datamodel.TermMap( {
-				de: new wb.datamodel.Term( 'de', 'de-description' ),
-				en: new wb.datamodel.Term( 'en', 'en-description' ),
-				fa: new wb.datamodel.Term( 'fa', 'fa-description' )
+			new datamodel.TermMap( {
+				de: new datamodel.Term( 'de', 'de-description' ),
+				en: new datamodel.Term( 'en', 'en-description' ),
+				fa: new datamodel.Term( 'fa', 'fa-description' )
 			} ),
-			new wb.datamodel.MultiTermMap( {
-				de: new wb.datamodel.MultiTerm( 'de', [ 'de-alias' ] ),
-				en: new wb.datamodel.MultiTerm( 'en', [ 'en-alias' ] ),
-				fa: new wb.datamodel.MultiTerm( 'fa', [ 'fa-alias' ] )
+			new datamodel.MultiTermMap( {
+				de: new datamodel.MultiTerm( 'de', [ 'de-alias' ] ),
+				en: new datamodel.MultiTerm( 'en', [ 'en-alias' ] ),
+				fa: new datamodel.MultiTerm( 'fa', [ 'fa-alias' ] )
 			} )
 		);
 	}
@@ -115,4 +117,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

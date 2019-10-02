@@ -5,19 +5,20 @@
 ( function ( wb ) {
 	'use strict';
 
-	var statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
-		'statementview',
-		function () {
-			var _value = this.options.value;
-			this.startEditing = function () {};
-			this.value = function ( newValue ) {
-				if ( arguments.length ) {
-					_value = newValue;
-				}
-				return _value;
-			};
-		}
-	);
+	var datamodel = require( 'wikibase.datamodel' ),
+		statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
+			'statementview',
+			function () {
+				var _value = this.options.value;
+				this.startEditing = function () {};
+				this.value = function ( newValue ) {
+					if ( arguments.length ) {
+						_value = newValue;
+					}
+					return _value;
+				};
+			}
+		);
 
 	/**
 	 * @param {Object} [options={}]
@@ -34,7 +35,7 @@
 			getListItemAdapter: function () {
 				return statementviewListItemAdapter;
 			},
-			value: new wb.datamodel.StatementList()
+			value: new datamodel.StatementList()
 		}, options || {} );
 
 		$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -77,9 +78,9 @@
 		);
 
 		$statementlistview = createStatementlistview( {
-			value: new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement( new wb.datamodel.Claim(
-					new wb.datamodel.PropertyNoValueSnak( 'P1' )
+			value: new datamodel.StatementList( [
+				new datamodel.Statement( new datamodel.Claim(
+					new datamodel.PropertyNoValueSnak( 'P1' )
 				) )
 			] )
 		} );
@@ -87,16 +88,16 @@
 
 		assert.ok(
 			statementlistview instanceof $.wikibase.statementlistview,
-			'Created widget with filled wb.datamodel.StatementList instance.'
+			'Created widget with filled datamodel.StatementList instance.'
 		);
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		var statementList1 = new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		var statementList1 = new datamodel.StatementList( [ new datamodel.Statement(
+				new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 			) ] ),
-			statementList2 = new wb.datamodel.StatementList( [ new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			statementList2 = new datamodel.StatementList( [ new datamodel.Statement(
+				new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P2' ) )
 			) ] ),
 			$statementlistview = createStatementlistview( {
 				value: statementList1
@@ -119,8 +120,8 @@
 			statementlistviewListviewLia = statementlistviewListview.listItemAdapter(),
 			$statementview = statementlistviewListview.items().first(),
 			statementview = statementlistviewListviewLia.liInstance( $statementview ),
-			statement = new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+			statement = new datamodel.Statement(
+				new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P3' ) )
 			);
 
 		statementview.value = function () {
@@ -128,7 +129,7 @@
 		};
 
 		assert.ok(
-			statementlistview.value().equals( new wb.datamodel.StatementList( [ statement ] ) ),
+			statementlistview.value().equals( new datamodel.StatementList( [ statement ] ) ),
 			'Retrieved current value after setting a new value on the statementview encapsulated by '
 				+ 'the statementlistview.'
 		);

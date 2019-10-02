@@ -2,8 +2,10 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
+
+	var datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {Object} [options={}]
@@ -72,9 +74,9 @@
 		);
 
 		$statementgroupview = createStatementgroupview( {
-			value: new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			value: new datamodel.StatementGroup( 'P1', new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 				)
 			] ) )
 		} );
@@ -82,19 +84,19 @@
 
 		assert.ok(
 			statementgroupview instanceof $.wikibase.statementgroupview,
-			'Created widget with filled wb.datamodel.StatementGroup instance.'
+			'Created widget with filled datamodel.StatementGroup instance.'
 		);
 	} );
 
 	QUnit.test( 'value()', function ( assert ) {
-		var statementGroup1 = new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		var statementGroup1 = new datamodel.StatementGroup( 'P1', new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 				)
 			] ) ),
-			statementGroup2 = new wb.datamodel.StatementGroup( 'P2', new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			statementGroup2 = new datamodel.StatementGroup( 'P2', new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P2' ) )
 				)
 			] ) ),
 			$statementgroupview = createStatementgroupview( {
@@ -115,25 +117,25 @@
 		);
 
 		var statementlistview = statementgroupview.statementlistview,
-			statementList1 = new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			statementList1 = new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P2' ) )
 				),
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P2' ) )
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertySomeValueSnak( 'P2' ) )
 				)
 			] ),
-			statementList2 = new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+			statementList2 = new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P3' ) )
 				)
 			] ),
-			statementList3 = new wb.datamodel.StatementList( [
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			statementList3 = new datamodel.StatementList( [
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P1' ) )
 				),
-				new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+				new datamodel.Statement(
+					new datamodel.Claim( new datamodel.PropertyNoValueSnak( 'P2' ) )
 				)
 			] );
 
@@ -141,7 +143,7 @@
 
 		assert.ok(
 			statementgroupview.value().equals(
-				new wb.datamodel.StatementGroup( 'P2', statementList1 )
+				new datamodel.StatementGroup( 'P2', statementList1 )
 			),
 			'Retrieved current value after setting a new value to the statementlistview encapsulated '
 				+ 'by the statementgroupview.'
@@ -156,7 +158,7 @@
 
 		assert.ok(
 			statementgroupview.value().equals(
-				new wb.datamodel.StatementGroup( 'P3', statementList2 )
+				new datamodel.StatementGroup( 'P3', statementList2 )
 			),
 			'Retrieved current value after setting a new value featuring another Property to the '
 				+ 'statementlistview encapsulated by the statementgroupview.'
@@ -175,7 +177,7 @@
 
 	QUnit.test( 'Given a value, sets html id attribute on creation', function ( assert ) {
 		var $statementgroupview = createStatementgroupview( {
-				value: new wb.datamodel.StatementGroup( 'P1' )
+				value: new datamodel.StatementGroup( 'P1' )
 			} ),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
@@ -187,7 +189,7 @@
 
 	QUnit.test( 'Given a value, sets property id data attribute on creation', function ( assert ) {
 		var $statementgroupview = createStatementgroupview( {
-				value: new wb.datamodel.StatementGroup( 'P1' )
+				value: new datamodel.StatementGroup( 'P1' )
 			} ),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
@@ -199,7 +201,7 @@
 
 	QUnit.test( 'Given a value and a prefix, sets prefixed html id attribute on creation', function ( assert ) {
 		var $statementgroupview = createStatementgroupview( {
-				value: new wb.datamodel.StatementGroup( 'P1' ),
+				value: new datamodel.StatementGroup( 'P1' ),
 				htmlIdPrefix: 'X1-Y2'
 			} ),
 			statementgroupview = $statementgroupview.data( 'statementgroupview' );
@@ -210,4 +212,4 @@
 		);
 	} );
 
-}( wikibase ) );
+}() );

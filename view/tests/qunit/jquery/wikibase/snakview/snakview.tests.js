@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
 		teardown: function () {
 			$( '.test_snakview' ).each( function () {
@@ -77,14 +79,14 @@
 		);
 
 		$snakview = createSnakview( {
-			value: new wb.datamodel.PropertyNoValueSnak( 'P1' )
+			value: new datamodel.PropertyNoValueSnak( 'P1' )
 		} );
 		snakview = $snakview.data( 'snakview' );
 
 		assert.notStrictEqual(
 			snakview,
 			undefined,
-			'Created widget passing a wikibase.datamodel.Snak object.'
+			'Created widget passing a datamodel.Snak object.'
 		);
 
 		snakview.destroy();
@@ -96,7 +98,7 @@
 		);
 
 		$snakview = createSnakview( {
-			value: snakSerializer.serialize( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			value: snakSerializer.serialize( new datamodel.PropertyNoValueSnak( 'P1' ) )
 		} );
 		snakview = $snakview.data( 'snakview' );
 
@@ -122,14 +124,14 @@
 		assert.deepEqual(
 			snakview.value(),
 			{
-				snaktype: wb.datamodel.PropertyValueSnak.TYPE
+				snaktype: datamodel.PropertyValueSnak.TYPE
 			},
 			'Verified default value.'
 		);
 
 		var newValue = {
 			property: 'P1',
-			snaktype: wb.datamodel.PropertySomeValueSnak.TYPE
+			snaktype: datamodel.PropertySomeValueSnak.TYPE
 		};
 
 		snakview.value( newValue );
@@ -145,14 +147,14 @@
 			'Verified Snak object returned by snak().'
 		);
 
-		newValue = new wb.datamodel.PropertyNoValueSnak( 'P1' );
+		newValue = new datamodel.PropertyNoValueSnak( 'P1' );
 
 		snakview.value( newValue );
 
 		assert.deepEqual(
 			snakview.value(),
 			snakSerializer.serialize( newValue ),
-			'Set wikibase.datamodel.Snak value.'
+			'Set datamodel.Snak value.'
 		);
 
 		assert.ok(
@@ -161,7 +163,7 @@
 		);
 
 		newValue = {
-			snaktype: wb.datamodel.PropertyValueSnak.TYPE
+			snaktype: datamodel.PropertyValueSnak.TYPE
 		};
 
 		snakview.value( newValue );
@@ -189,7 +191,7 @@
 			'Returning "null" since default value is an incomplete serialization.'
 		);
 
-		var snak = new wb.datamodel.PropertySomeValueSnak( 'P1' );
+		var snak = new datamodel.PropertySomeValueSnak( 'P1' );
 
 		snakview.snak( snak );
 
@@ -245,7 +247,7 @@
 			'Reset Property ID.'
 		);
 
-		snakview.snak( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
+		snakview.snak( new datamodel.PropertyNoValueSnak( 'P1' ) );
 
 		assert.strictEqual(
 			snakview.propertyId(),
@@ -256,7 +258,7 @@
 		snakview.propertyId( 'P2' );
 
 		assert.ok(
-			snakview.snak().equals( new wb.datamodel.PropertyNoValueSnak( 'P2' ) ),
+			snakview.snak().equals( new datamodel.PropertyNoValueSnak( 'P2' ) ),
 			'Updated Property ID of Snak.'
 		);
 	} );
@@ -287,7 +289,7 @@
 			'Reset Snak type.'
 		);
 
-		snakview.snak( new wb.datamodel.PropertySomeValueSnak( 'P1' ) );
+		snakview.snak( new datamodel.PropertySomeValueSnak( 'P1' ) );
 
 		assert.strictEqual(
 			snakview.snakType(),
@@ -298,7 +300,7 @@
 		snakview.snakType( 'novalue' );
 
 		assert.ok(
-			snakview.snak().equals( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
+			snakview.snak().equals( new datamodel.PropertyNoValueSnak( 'P1' ) ),
 			'Updated Snak type of Snak.'
 		);
 	} );

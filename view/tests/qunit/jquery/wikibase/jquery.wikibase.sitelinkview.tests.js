@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	/**
 	 * @param {Object} [options]
 	 * @return {jQuery}
@@ -93,7 +95,7 @@
 	} );
 
 	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
 			} ),
@@ -152,7 +154,7 @@
 	} );
 
 	QUnit.test( 'startEditing(), stopEditing() with initial value', function ( assert ) {
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
 			} ),
@@ -203,7 +205,7 @@
 			'Returning null when no value is set.'
 		);
 
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' );
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' );
 
 		$sitelinkview = createSitelinkview( {
 			value: siteLink
@@ -218,7 +220,7 @@
 	} );
 
 	QUnit.test( 'isEmpty()', function ( assert ) {
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
+		var siteLink = new datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 

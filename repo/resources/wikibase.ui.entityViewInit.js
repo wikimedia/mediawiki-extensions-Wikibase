@@ -20,7 +20,8 @@
 		DataValueBasedEntityIdHtmlFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js' ),
 		CachingEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js' ),
 		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' ),
-		config = require( './config.json' );
+		config = require( './config.json' ),
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @return {boolean}
@@ -46,7 +47,7 @@
 	}
 
 	/**
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 * @param {jQuery} $entityview
 	 * @return {string} The name of the entity view widget class
 	 *
@@ -72,7 +73,7 @@
 			parserStore = getParserStore( repoApi ),
 			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
-			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
+			entityIdParser = new ( parserStore.getParser( datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new StructureEditorFactory( toolbarFactory ),
 			startEditingCallback = function () {

@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	/**
 	 * @param {Object} [options]
 	 * @return {jQuery}
@@ -71,10 +73,10 @@
 	} ) );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		var value = new wb.datamodel.SiteLinkSet( [
-			new wb.datamodel.SiteLink( 'aawiki', 'page1' ),
-			new wb.datamodel.SiteLink( 'dewiki', 'page1' ),
-			new wb.datamodel.SiteLink( 'enwiki', 'page2' )
+		var value = new datamodel.SiteLinkSet( [
+			new datamodel.SiteLink( 'aawiki', 'page1' ),
+			new datamodel.SiteLink( 'dewiki', 'page1' ),
+			new datamodel.SiteLink( 'enwiki', 'page2' )
 		] );
 
 		var $sitelinkgrouplistview = createSitelinkgrouplistview( {

@@ -5,13 +5,14 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * Manages a description.
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
-	 * @option {wikibase.datamodel.Term} value
+	 * @option {datamodel.Term} value
 	 *
 	 * @option {string} [inputNodeName='TEXTAREA']
 	 *         Should either be 'TEXTAREA' or 'INPUT'.
@@ -40,7 +41,7 @@
 		 * @throws {Error} if required parameters are not specified properly.
 		 */
 		_create: function () {
-			if ( !( this.options.value instanceof wb.datamodel.Term )
+			if ( !( this.options.value instanceof datamodel.Term )
 				|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 			) {
 				throw new Error( 'Required parameter(s) missing' );
@@ -174,8 +175,8 @@
 		 * @see jQuery.ui.TemplatedWidget._setOption
 		 */
 		_setOption: function ( key, value ) {
-			if ( key === 'value' && !( value instanceof wb.datamodel.Term ) ) {
-				throw new Error( 'Value needs to be a wb.datamodel.Term instance' );
+			if ( key === 'value' && !( value instanceof datamodel.Term ) ) {
+				throw new Error( 'Value needs to be a datamodel.Term instance' );
 			}
 
 			var response = PARENT.prototype._setOption.call( this, key, value );
@@ -190,8 +191,8 @@
 		/**
 		 * Gets/Sets the widget's value.
 		 *
-		 * @param {wikibase.datamodel.Term} [value]
-		 * @return {wikibase.datamodel.Term|undefined}
+		 * @param {datamodel.Term} [value]
+		 * @return {datamodel.Term|undefined}
 		 */
 		value: function ( value ) {
 			if ( value !== undefined ) {
@@ -202,7 +203,7 @@
 				return this.options.value;
 			}
 
-			return new wb.datamodel.Term(
+			return new datamodel.Term(
 				this.options.value.getLanguageCode(),
 				this.$text.children( '.' + this.widgetFullName + '-input' ).val().trim()
 			);

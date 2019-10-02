@@ -9,11 +9,12 @@
 	// Erase existing object to prevent jQuery.Widget detecting an existing constructor:
 	delete $.wikibase.snakview;
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying and editing `wikibase.datamodel.Snak` objects.
-	 * @see wikibase.datamodel.Snak
+	 * View for displaying and editing `datamodel.Snak` objects.
+	 * @see datamodel.Snak
 	 * @class jQuery.wikibase.snakview
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
@@ -22,11 +23,11 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {Object|wikibase.datamodel.Snak|null} [options.value]
+	 * @param {Object|datamodel.Snak|null} [options.value]
 	 *        The `Snak` this `snakview` should represent initially. If omitted, an empty view will be
 	 *        served, ready to take some input by the user. The value may be overwritten later, by using
 	 *        the `value()` or the `snak()` function.
-	 *        Default: `{ snaktype: wikibase.datamodel.PropertyValueSnak.TYPE }`
+	 *        Default: `{ snaktype: datamodel.PropertyValueSnak.TYPE }`
 	 * @param {Object|boolean} [options.locked=false]
 	 *        Key-value pairs determining which `snakview` elements to lock from being edited by the
 	 *        user. May also be a boolean value enabling/disabling all elements. If `false`, no elements
@@ -78,7 +79,7 @@
 				$snakTypeSelector: '.wikibase-snakview-typeselector'
 			},
 			value: {
-				snaktype: wb.datamodel.PropertyValueSnak.TYPE
+				snaktype: datamodel.PropertyValueSnak.TYPE
 			},
 			locked: {
 				property: false,
@@ -126,7 +127,7 @@
 		_create: function () {
 			if ( this.options.locked === true || this.options.locked.property === true ) {
 				if ( !(
-					this.options.value instanceof wb.datamodel.Snak || ( this.options.value && this.options.value.property )
+					this.options.value instanceof datamodel.Snak || ( this.options.value && this.options.value.property )
 				) ) {
 					mw.log.warn( 'You cannot lock the property without specifying a property' );
 				}
@@ -169,10 +170,10 @@
 			if ( key === 'value' ) {
 				if ( value !== null
 					&& !$.isPlainObject( value )
-					&& !( value instanceof wb.datamodel.Snak )
+					&& !( value instanceof datamodel.Snak )
 				) {
 					throw new Error( 'The given value has to be a plain object, an instance of '
-						+ 'wikibase.datamodel.Snak, or null' );
+						+ 'datamodel.Snak, or null' );
 				}
 			} else if ( key === 'locked' && typeof value === 'boolean' ) {
 				var locked = value;
@@ -403,8 +404,8 @@
 		 * `PropertyValueSnak` where only the `Property` and `Snak` type are specified, but the value
 		 * has not yet been supplied, the returned object would not have a field for the value either.
 		 *
-		 * @param {Object|wikibase.datamodel.Snak|null} [value]
-		 * @return {wikibase.datamodel.Snak|Object|undefined} `undefined` in case `value()` is called to
+		 * @param {Object|datamodel.Snak|null} [value]
+		 * @return {datamodel.Snak|Object|undefined} `undefined` in case `value()` is called to
 		 *         set the value.
 		 */
 		value: function ( value ) {
@@ -414,7 +415,7 @@
 			}
 
 			var snakSerializer = new wikibase.serialization.SnakSerializer(),
-				serialization = this.options.value instanceof wb.datamodel.Snak
+				serialization = this.options.value instanceof datamodel.Snak
 					? snakSerializer.serialize( this.options.value )
 					: this.options.value;
 
@@ -452,12 +453,12 @@
 		},
 
 		/**
-		 * If a `wikibase.datamodel.Snak` instance is passed, the `snakview` is updated to represent the
+		 * If a `datamodel.Snak` instance is passed, the `snakview` is updated to represent the
 		 * `Snak`. If no parameter is supplied, the current `Snak` represented by the `snakview` is
 		 * returned.
 		 *
-		 * @param {wikibase.datamodel.Snak|null} [snak]
-		 * @return {wikibase.datamodel.Snak|null|undefined}
+		 * @param {datamodel.Snak|null} [snak]
+		 * @return {datamodel.Snak|null|undefined}
 		 */
 		snak: function ( snak ) {
 			if ( snak !== undefined ) {
@@ -515,7 +516,7 @@
 		 * Sets/Gets the ID of the `Snak` type for the `Snak` represented by the `snakview`. If no
 		 * `Snak` type is set, `null` is returned.
 		 *
-		 * @see wikibase.datamodel.Snak.TYPE
+		 * @see datamodel.Snak.TYPE
 		 *
 		 * @param {string|null} [snakType]
 		 * @return {string|null|undefined}
@@ -758,7 +759,7 @@
 				return; // No type selector required!
 			}
 
-			var snakType = this.options.value instanceof wb.datamodel.Snak
+			var snakType = this.options.value instanceof datamodel.Snak
 				? this.options.value.getType()
 				: this.options.value.snaktype;
 

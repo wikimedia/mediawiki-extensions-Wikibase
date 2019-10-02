@@ -1,13 +1,14 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.TemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
-	 * View for displaying `wikibase.datamodel.Statement` objects grouped by their main `Snak`'s
+	 * View for displaying `datamodel.Statement` objects grouped by their main `Snak`'s
 	 * `Property` id by managing a list of `jQuery.wikibase.statementview` widgets encapsulated by a
 	 * `jquery.wikibase.statementlistview` widget.
-	 * @see wikibase.datamodel.StatementGroup
+	 * @see datamodel.StatementGroup
 	 * @extends jQuery.ui.TemplatedWidget
 	 * @license GPL-2.0-or-later
 	 * @author H. Snater < mediawiki@snater.com >
@@ -15,7 +16,7 @@
 	 * @constructor
 	 *
 	 * @param {Object} options
-	 * @param {wikibase.datamodel.StatementGroup} [options.value=null]
+	 * @param {datamodel.StatementGroup} [options.value=null]
 	 *        The `Statements` to be displayed by this view. If `null`, the view will only display an
 	 *        "add" button to add new `Statements`.
 	 * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
@@ -142,7 +143,7 @@
 			}
 
 			this.statementlistview = this.options.buildStatementListView(
-				this.options.value ? this.options.value.getItemContainer() : new wb.datamodel.StatementList(),
+				this.options.value ? this.options.value.getItemContainer() : new datamodel.StatementList(),
 				$statementlistview
 			);
 			prefix = this.statementlistview.widgetEventPrefix;
@@ -168,8 +169,8 @@
 		 * Sets the widget's value or gets the widget's current value (including pending items). (The
 		 * value the widget was initialized with may be retrieved via `.option( 'value' )`.)
 		 *
-		 * @param {wikibase.datamodel.StatementGroup} [statementGroupView]
-		 * @return {wikibase.datamodel.StatementGroup|null|undefined}
+		 * @param {datamodel.StatementGroup} [statementGroupView]
+		 * @return {datamodel.StatementGroup|null|undefined}
 		 */
 		value: function ( statementGroupView ) {
 			if ( statementGroupView !== undefined ) {
@@ -183,7 +184,7 @@
 			// Use the first statement's main snak property id as the statementgroupview may have
 			// been initialized without a value (as there is no initial value, the id cannot be
 			// retrieved from this.options.value).
-			return new wb.datamodel.StatementGroup(
+			return new datamodel.StatementGroup(
 				statementList.toArray()[ 0 ].getClaim().getMainSnak().getPropertyId(),
 				statementList
 			);
@@ -194,12 +195,12 @@
 		 * @protected
 		 *
 		 * @throws {Error} when trying to set the value passing something different than a
-		 *         `wikibase.datamodel.StatementGroup´ object.
+		 *         `datamodel.StatementGroup´ object.
 		 */
 		_setOption: function ( key, value ) {
 			if ( key === 'value' && !!value ) {
-				if ( !( value instanceof wb.datamodel.StatementGroup ) ) {
-					throw new Error( 'value needs to be a wb.datamodel.StatementGroup instance' );
+				if ( !( value instanceof datamodel.StatementGroup ) ) {
+					throw new Error( 'value needs to be a datamodel.StatementGroup instance' );
 				}
 				this.statementlistview.value( value.getItemContainer() );
 			}
@@ -235,4 +236,4 @@
 
 	} );
 
-}( wikibase ) );
+}() );

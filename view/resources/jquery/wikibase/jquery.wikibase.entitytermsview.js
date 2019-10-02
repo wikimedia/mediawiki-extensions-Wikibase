@@ -2,10 +2,11 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * Encapsulates a entitytermsforlanguagelistview widget.
@@ -89,7 +90,7 @@
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
 		_create: function () {
-			if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
+			if ( !( this.options.value instanceof datamodel.Fingerprint )
 				|| !Array.isArray( this.options.userLanguages )
 			) {
 				throw new Error( 'Required option(s) missing' );
@@ -408,7 +409,7 @@
 		 * @inheritdoc
 		 */
 		_setOption: function ( key, value ) {
-			if ( key === 'value' && !( value instanceof wb.datamodel.Fingerprint ) ) {
+			if ( key === 'value' && !( value instanceof datamodel.Fingerprint ) ) {
 				throw new Error( 'value must be a Fingerprint' );
 			}
 
@@ -464,4 +465,4 @@
 		}
 	} );
 
-}( wikibase ) );
+}() );

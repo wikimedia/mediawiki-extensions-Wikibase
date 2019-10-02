@@ -5,6 +5,8 @@
 ( function ( wb, dv ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
 		teardown: function () {
 			$( '.test_statementview' ).each( function () {
@@ -107,13 +109,13 @@
 
 	QUnit.test( 'Create & destroy with value', function ( assert ) {
 		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement(
-					new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+				value: new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ),
 						null,
 						'guid'
 					),
-					new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
+					new datamodel.ReferenceList( [ new datamodel.Reference() ] )
 				)
 			} ),
 			statementview = $statementview.data( 'statementview' );
@@ -135,13 +137,13 @@
 
 	QUnit.test( 'value after startEditing with value', function ( assert ) {
 		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement(
-					new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+				value: new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ),
 						null,
 						'guid'
 					),
-					new wb.datamodel.ReferenceList( [ new wb.datamodel.Reference() ] )
+					new datamodel.ReferenceList( [ new datamodel.Reference() ] )
 				)
 			} ),
 			statementview = $statementview.data( 'statementview' );
@@ -179,8 +181,8 @@
 
 	QUnit.test( 'Using tooltip specific for existing claims', function ( assert ) {
 		var $statementview = createStatementview( {
-			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1', new dv.StringValue( 'g' ) )
+			value: new datamodel.Statement( new datamodel.Claim(
+				new datamodel.PropertyNoValueSnak( 'P1', new dv.StringValue( 'g' ) )
 			) )
 		} );
 
@@ -195,13 +197,13 @@
 
 	QUnit.test( 'value with empty reference', function ( assert ) {
 		var $statementview = createStatementview( {
-				value: new wb.datamodel.Statement(
-					new wb.datamodel.Claim(
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+				value: new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ),
 						null,
 						'guid'
 					),
-					new wb.datamodel.ReferenceList( [ ] )
+					new datamodel.ReferenceList( [ ] )
 				)
 			} ),
 			statementview = $statementview.data( 'statementview' );
@@ -218,13 +220,13 @@
 
 		assert.ok( $statementview.hasClass( 'wb-new' ) );
 
-		statementview.value( new wb.datamodel.Statement(
-			new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+		statementview.value( new datamodel.Statement(
+			new datamodel.Claim(
+				new datamodel.PropertyNoValueSnak( 'P1' ),
 				null,
 				'guid'
 			),
-			new wb.datamodel.ReferenceList( [ ] )
+			new datamodel.ReferenceList( [ ] )
 		) );
 
 		assert.notOk( $statementview.hasClass( 'wb-new' ) );

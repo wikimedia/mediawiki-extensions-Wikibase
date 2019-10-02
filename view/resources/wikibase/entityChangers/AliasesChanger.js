@@ -5,14 +5,15 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @constructor
 	 *
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {wikibase.RevisionStore} revisionStore
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {datamodel.Entity} entity
 	 */
 	var SELF = MODULE.AliasesChanger = function WbEntityChangersAliasesChanger( api, revisionStore, entity ) {
 		this._api = api;
@@ -22,7 +23,7 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {wikibase.datamodel.Entity}
+		 * @type {datamodel.Entity}
 		 */
 		_entity: null,
 
@@ -37,7 +38,7 @@
 		_api: null,
 
 		/**
-		 * @param {wikibase.datamodel.MultiTerm} aliases
+		 * @param {datamodel.MultiTerm} aliases
 		 * @return {jQuery.Promise}
 		 *         No resolved parameters.
 		 *         Rejected parameters:
@@ -67,7 +68,7 @@
 						return value.value;
 					} );
 				}
-				deferred.resolve( new wb.datamodel.MultiTerm( language, texts ) );
+				deferred.resolve( new datamodel.MultiTerm( language, texts ) );
 			} )
 			.fail( function ( errorCode, errorObject ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( errorObject, 'save' ) );
@@ -78,16 +79,16 @@
 
 		/**
 		 * @param {string} language
-		 * @return {wikibase.datamodel.MultiTerm}
+		 * @return {datamodel.MultiTerm}
 		 */
 		_getInitialAliases: function ( language ) {
 			return this._entity.getFingerprint().getAliasesFor( language )
-				|| new wb.datamodel.MultiTerm( language, [] );
+				|| new datamodel.MultiTerm( language, [] );
 		},
 
 		/**
-		 * @param {wikibase.datamodel.MultiTerm} currentAliases
-		 * @param {wikibase.datamodel.MultiTerm} initialAliases
+		 * @param {datamodel.MultiTerm} currentAliases
+		 * @param {datamodel.MultiTerm} initialAliases
 		 * @return {string[]}
 		 */
 		_getNewAliasesTexts: function ( currentAliases, initialAliases ) {
@@ -105,8 +106,8 @@
 		},
 
 		/**
-		 * @param {wikibase.datamodel.MultiTerm} currentAliases
-		 * @param {wikibase.datamodel.MultiTerm} initialAliases
+		 * @param {datamodel.MultiTerm} currentAliases
+		 * @param {datamodel.MultiTerm} initialAliases
 		 * @return {string[]}
 		 */
 		_getRemovedAliasesTexts: function ( currentAliases, initialAliases ) {

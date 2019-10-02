@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = $.ui.EditableTemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget,
+		datamodel = require( 'wikibase.datamodel' );
 
 	/**
 	 * @param {string} group
@@ -25,7 +26,7 @@
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {string} groupName
-	 * @option {wikibase.datamodel.SiteLinkSet} value
+	 * @option {datamodel.SiteLinkSet} value
 	 * @option {Function} getSiteLinkListView
 	 *
 	 * @option {string} [helpMessage]
@@ -168,7 +169,7 @@
 		},
 
 		/**
-		 * @return {wikibase.datamodel.SiteLink[]}
+		 * @return {datamodel.SiteLink[]}
 		 */
 		_getSiteLinksOfGroup: function () {
 			var self = this,
@@ -187,14 +188,14 @@
 		},
 
 		/**
-		 * @param {wb.datamodel.SiteLinkSet|null} value
+		 * @param {datamodel.SiteLinkSet|null} value
 		 * @throws {Error}
-		 * @return {wb.datamodel.SiteLinkSet}
+		 * @return {datamodel.SiteLinkSet}
 		 */
 		_checkValue: function ( value ) {
 			if ( !value ) {
-				value = new wb.datamodel.SiteLinkSet( [] );
-			} else if ( !( value instanceof wb.datamodel.SiteLinkSet ) ) {
+				value = new datamodel.SiteLinkSet( [] );
+			} else if ( !( value instanceof datamodel.SiteLinkSet ) ) {
 				throw new Error( 'value must be a SiteLinkSet or null' );
 			}
 
@@ -216,15 +217,15 @@
 		/**
 		 * @see jQuery.ui.EditableTemplatedWidget.value
 		 *
-		 * @param {wikibase.datamodel.SiteLink[]} [value]
-		 * @return {wikibase.datamodel.SiteLinkSet}
+		 * @param {datamodel.SiteLink[]} [value]
+		 * @return {datamodel.SiteLinkSet}
 		 */
 		value: function ( value ) {
 			if ( value !== undefined ) {
 				return this.option( 'value', value );
 			}
 
-			return new wb.datamodel.SiteLinkSet( this.$sitelinklistview.data( 'sitelinklistview' ).value() );
+			return new datamodel.SiteLinkSet( this.$sitelinklistview.data( 'sitelinklistview' ).value() );
 		},
 
 		/**

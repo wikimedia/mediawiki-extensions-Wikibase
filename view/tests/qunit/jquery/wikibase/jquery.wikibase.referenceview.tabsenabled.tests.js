@@ -5,6 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	var listItemAdapter = wb.tests.getMockListItemAdapter(
 		'snaklistview',
 		function () {
@@ -108,8 +110,8 @@
 
 	QUnit.test( 'is initialized with a value', function ( assert ) {
 		var $node = createReferenceview( {
-				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
-					new wb.datamodel.PropertyNoValueSnak( 'P1' )
+				value: new datamodel.Reference( new datamodel.SnakList( [
+					new datamodel.PropertyNoValueSnak( 'P1' )
 				] ) )
 			} ),
 			referenceview = $node.data( 'referenceview' );
