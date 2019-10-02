@@ -1,6 +1,6 @@
 module.exports = {
 	Deserializer: wikibase.serialization.Deserializer,
-	EntityDeserializer: wikibase.serialization.EntityDeserializer.js,
+	EntityDeserializer: wikibase.serialization.EntityDeserializer,
 	SnakDeserializer: wikibase.serialization.SnakDeserializer,
 	StatementDeserializer: wikibase.serialization.StatementDeserializer,
 	StatementListDeserializer: wikibase.serialization.StatementListDeserializer,
