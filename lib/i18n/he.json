@@ -175,7 +175,7 @@
 	"wikibase-item-summary-wbeditentity-create-item": "נוצר פריט חדש",
 	"wikibase-item-summary-wbeditentity-update": "פריט שוּנה",
 	"wikibase-item-summary-wbeditentity-update-languages": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}, וחלקים אחרים.",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}, וחלקים אחרים",
 	"wikibase-item-summary-wbeditentity-override": "פריט נדרס",
 	"wikibase-item-summary-wblinktitles-create": "נוצר הפריט הזה כדי לקשר בין דפים",
 	"wikibase-item-summary-wblinktitles-connect": "נוסף קישור לשוני כדי לקשר בין דפים",

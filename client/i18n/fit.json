@@ -5,5 +5,7 @@
 		]
 	},
 	"wikibase-editlinks": "Mookkaa linkkejä",
-	"wikibase-rc-hide-wikidata-show": "Näytä"
+	"wikibase-rc-hide-wikidata-hide": "Piilota",
+	"wikibase-rc-hide-wikidata-show": "Näytä",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-mookkaus"
 }
