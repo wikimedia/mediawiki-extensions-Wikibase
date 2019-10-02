@@ -13,9 +13,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		// Also used by WikibaseLexeme.
-		// TODO: Rename to "jquery.ui.TemplatedWidget" or merge into a higher-level
-		// module bundle that is shared between WikibaseRepo and WikibaseLexeme.
 		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/ui/jquery.ui.TemplatedWidget.js',
@@ -33,8 +30,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		// Used by both WikibaseView and by WikibaseRepo.
-		// TODO: Create a common bundle for shared dependencies like this.
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',
@@ -65,98 +60,6 @@ return call_user_func( function() {
 				'jquery.ui.EditableTemplatedWidget',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'jquery.wikibase.listview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.listview.js',
-				'jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.ui.widget',
-			],
-		],
-
-		'jquery.wikibase.referenceview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/jquery.removeClassByRegex.js',
-				'jquery/wikibase/jquery.wikibase.referenceview.js',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.wikibase.listview',
-				'jquery.ui.tabs',
-				'mw.config.values.wbRefTabsEnabled',
-				'wikibase.datamodel',
-			],
-			'messages' => [
-				'wikibase-referenceview-tabs-manual',
-			],
-		],
-
-		'jquery.wikibase.statementview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/snakview/snakview.variations.js',
-				'jquery/wikibase/snakview/snakview.variations.Variation.js',
-				'jquery/wikibase/snakview/snakview.variations.NoValue.js',
-				'jquery/wikibase/snakview/snakview.variations.SomeValue.js',
-				'jquery/wikibase/snakview/snakview.variations.Value.js',
-				'jquery/wikibase/snakview/snakview.ViewState.js',
-				'jquery/wikibase/snakview/snakview.js',
-				'jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
-				'jquery/wikibase/jquery.wikibase.snaklistview.js',
-				'jquery/wikibase/jquery.wikibase.statementview.js',
-				'jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
-			],
-			'styles' => [
-				'jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.ui.EditableTemplatedWidget',
-				'jquery.ui.menu',
-				'jquery.ui.position',
-				'jquery.ui.toggler',
-				'util.inherit',
-				'jquery.wikibase.entityselector',
-				'jquery.wikibase.listview',
-				'jquery.wikibase.referenceview',
-				'jquery.wikibase.statementview.RankSelector.styles',
-				'wikibase.datamodel',
-				'wikibase.serialization.SnakDeserializer',
-				'wikibase.serialization.SnakSerializer',
-				'wikibase.utilities',
-				'dataValues',
-				'dataValues.DataValue', // For snakview
-				'mediawiki.legacy.shared', // For snakview
-				'mw.config.values.wbRepo',
-			],
-			'messages' => [
-				'wikibase-addqualifier',
-				'wikibase-addreference',
-				'wikibase-outdated-client-script',
-				'wikibase-refresh-for-missing-datatype',
-				'wikibase-claimview-snak-tooltip',
-				'wikibase-claimview-snak-new-tooltip',
-				'wikibase-snakview-property-input-placeholder',
-				'wikibase-snakview-choosesnaktype',
-				'wikibase-snakview-snaktypeselector-value',
-				'wikibase-snakview-snaktypeselector-somevalue',
-				'wikibase-snakview-snaktypeselector-novalue',
-				'wikibase-snakview-variation-datavaluetypemismatch',
-				'wikibase-snakview-variation-datavaluetypemismatch-details',
-				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
-				'wikibase-snakview-variations-novalue-label',
-				'wikibase-snakview-variations-somevalue-label',
-				'wikibase-statementview-rank-preferred',
-				'wikibase-statementview-rank-tooltip-preferred',
-				'wikibase-statementview-rank-normal',
-				'wikibase-statementview-rank-tooltip-normal',
-				'wikibase-statementview-rank-deprecated',
-				'wikibase-statementview-rank-tooltip-deprecated',
-				'wikibase-statementview-references-counter',
-			],
 		],
 
 		'jquery.wikibase.statementview.RankSelector.styles' => $moduleTemplate + [
@@ -349,34 +252,50 @@ return call_user_func( function() {
 				'wikibase.view.ViewFactory'
 			],
 		],
-
 		'wikibase.view.ViewFactory' => $moduleTemplate + [
 			'packageFiles' => [
 				'wikibase/view/ViewFactory.js',
 
 				'jquery/jquery.util.EventSingletonManager.js',
 				'wikibase/wikibase.ValueViewBuilder.js',
-
 				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
-				'jquery/wikibase/jquery.wikibase.badgeselector.js',
-				'jquery/wikibase/jquery.wikibase.sitelinkview.js',
-				'jquery/wikibase/jquery.wikibase.sitelinklistview.js',
-				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js',
-				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
-				'jquery/wikibase/jquery.wikibase.propertyview.js',
-				'jquery/wikibase/jquery.wikibase.labelview.js',
-				'jquery/wikibase/jquery.wikibase.itemview.js',
-				'jquery/wikibase/jquery.wikibase.descriptionview.js',
+				'jquery/wikibase/snakview/snakview.ViewState.js',
+				'jquery/wikibase/snakview/snakview.variations.js',
+				'jquery/wikibase/snakview/snakview.variations.Variation.js',
+				'jquery/wikibase/snakview/snakview.variations.NoValue.js',
+				'jquery/wikibase/snakview/snakview.variations.SomeValue.js',
+				'jquery/wikibase/snakview/snakview.variations.Value.js',
+				'jquery/wikibase/snakview/snakview.js',
+				'jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
 				'jquery/wikibase/jquery.wikibase.aliasesview.js',
-				'jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js',
+				'jquery/wikibase/jquery.wikibase.badgeselector.js',
+				'jquery/wikibase/jquery.wikibase.descriptionview.js',
 				'jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js',
+				'jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js',
 				'jquery/wikibase/jquery.wikibase.entitytermsview.js',
-				'jquery/wikibase/jquery.wikibase.statementgroupview.js',
-				'jquery/wikibase/jquery.wikibase.statementlistview.js',
+				'jquery/wikibase/jquery.wikibase.entityview.js',
+				'jquery/wikibase/jquery.wikibase.itemview.js',
+				'jquery/wikibase/jquery.wikibase.labelview.js',
+				'jquery/wikibase/jquery.wikibase.listview.js',
+				'jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js',
+				'jquery/wikibase/jquery.wikibase.pagesuggester.js',
+				'jquery/wikibase/jquery.wikibase.propertyview.js',
+				'jquery/wikibase/jquery.wikibase.referenceview.js',
+				'jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
+				'jquery/wikibase/jquery.wikibase.sitelinkgroupview.js',
+				'jquery/wikibase/jquery.wikibase.sitelinklistview.js',
+				'jquery/wikibase/jquery.wikibase.sitelinkview.js',
+				'jquery/wikibase/jquery.wikibase.snaklistview.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
 				'jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
+				'jquery/wikibase/jquery.wikibase.statementgroupview.js',
+				'jquery/wikibase/jquery.wikibase.statementlistview.js',
+				'jquery/wikibase/jquery.wikibase.statementview.js',
+				'jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
 				'jquery/ui/jquery.ui.tagadata.js',
 				'jquery/jquery.sticknode.js',
+				'jquery/jquery.removeClassByRegex.js',
+
 			],
 			'styles' => [
 				'jquery/wikibase/themes/default/jquery.wikibase.badgeselector.css',
@@ -392,23 +311,28 @@ return call_user_func( function() {
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css',
+				'jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 			],
 			'dependencies' => [
+				'dataValues',
+				'dataValues.DataValue', // For snakview
+				'jquery.event.special.eachchange',
 				'jquery.ui.position',
 				'jquery.ui.widget',
 				'jquery.ui.core',
 				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.suggester',
+				'jquery.ui.tabs',
 				'jquery.ui.toggler',
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
 				'jquery.throttle-debounce',
+				'jquery.wikibase.entityselector',
 				'jquery.wikibase.entityview',
-				'jquery.wikibase.listview',
 				'jquery.wikibase.siteselector',
-				'jquery.wikibase.statementview',
+				'jquery.wikibase.statementview.RankSelector.styles',
 				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
@@ -422,14 +346,24 @@ return call_user_func( function() {
 				'mediawiki.api',
 				'mediawiki.cookie',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
+				'mediawiki.legacy.shared', // For snakview
 				'mediawiki.user',
 				'mediawiki.util',
+				'mw.config.values.wbRefTabsEnabled',
+				'mw.config.values.wbRepo',
 				'oojs-ui',
 				'util.highlightSubstring',
+				'util.inherit',
+				'wikibase.serialization.SnakDeserializer',
+				'wikibase.serialization.SnakSerializer',
 			],
 			'messages' => [
 				'parentheses',
+				'wikibase-addqualifier',
+				'wikibase-addreference',
 				'wikibase-badgeselector-badge-placeholder-title',
+				'wikibase-claimview-snak-tooltip',
+				'wikibase-claimview-snak-new-tooltip',
 				'wikibase-entitytermsforlanguagelistview-aliases',
 				'wikibase-entitytermsforlanguagelistview-description',
 				'wikibase-entitytermsforlanguagelistview-label',
@@ -452,14 +386,34 @@ return call_user_func( function() {
 				'wikibase-label-edit-placeholder-language-aware',
 				'wikibase-label-empty',
 				'wikibase-label-input-help-message',
+				'wikibase-outdated-client-script',
+				'wikibase-referenceview-tabs-manual',
+				'wikibase-refresh-for-missing-datatype',
 				'wikibase-remove',
 				'wikibase-sitelink-site-edit-placeholder',
 				'wikibase-sitelink-page-edit-placeholder',
 				'wikibase-sitelinkgroupview-input-help-message',
 				'wikibase-sitelinks-counter',
+				'wikibase-snakview-property-input-placeholder',
+				'wikibase-snakview-choosesnaktype',
+				'wikibase-snakview-snaktypeselector-value',
+				'wikibase-snakview-snaktypeselector-somevalue',
+				'wikibase-snakview-snaktypeselector-novalue',
+				'wikibase-snakview-variation-datavaluetypemismatch',
+				'wikibase-snakview-variation-datavaluetypemismatch-details',
+				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-variations-somevalue-label',
 				'wikibase-statementgrouplistview-add-tooltip',
 				'wikibase-statementlistview-add',
 				'wikibase-statementlistview-add-tooltip',
+				'wikibase-statementview-rank-preferred',
+				'wikibase-statementview-rank-tooltip-preferred',
+				'wikibase-statementview-rank-normal',
+				'wikibase-statementview-rank-tooltip-normal',
+				'wikibase-statementview-rank-deprecated',
+				'wikibase-statementview-rank-tooltip-deprecated',
+				'wikibase-statementview-references-counter',
 			]
 		],
 	];

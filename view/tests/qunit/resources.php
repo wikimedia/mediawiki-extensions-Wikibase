@@ -17,7 +17,7 @@ return [
 	'wikibase.view.tests.getMockListItemAdapter' => $moduleBase + [
 		'scripts' => 'getMockListItemAdapter.js',
 		'dependencies' => [
-			'jquery.wikibase.listview',
+			'wikibase.view.ViewFactory',
 			'wikibase.tests',
 		]
 	],
@@ -90,9 +90,6 @@ return [
 			'jquery.util.getDirectionality',
 			'jquery.wikibase.entityselector',
 			'jquery.wikibase.entityview',
-			'jquery.wikibase.listview',
-			'jquery.wikibase.referenceview',
-			'jquery.wikibase.statementview',
 			'test.sinonjs',
 			'wikibase.datamodel',
 			'wikibase.entityChangers.EntityChangersFactory',

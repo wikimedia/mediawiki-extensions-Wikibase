@@ -4,22 +4,18 @@
  */
 ( function () {
 	'use strict';
-
-	$.wikibase = $.wikibase || {};
-	$.wikibase.snakview = $.wikibase.snakview || {};
-	$.wikibase.snakview.variations = $.wikibase.snakview.variations || {};
+	var ViewState = require( './snakview.ViewState.js' );
 
 	/**
 	 * Abstract base for all kinds of `Variation`s to be used by `jQuery.wikibase.snakview` to
 	 * represent the different types of `datamodel.Snak` objects.
 	 *
 	 * @see datamodel.Snak
-	 * @class jQuery.wikibase.snakview.variations.Variation
 	 * @abstract
 	 *
 	 * @constructor
 	 *
-	 * @param {jQuery.wikibase.snakview.ViewState} viewState Interface that allows retrieving
+	 * @param {ViewState} viewState Interface that allows retrieving
 	 *        information from the related `snakview` instance as well as updating the `snakview`
 	 *        instance.
 	 * @param {jQuery} $viewPort A DOM node which serves as drawing surface for the `Variation`'s
@@ -35,14 +31,14 @@
 	 *
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
-	var SELF = $.wikibase.snakview.variations.Variation = function WbSnakviewVariationsVariation(
+	var SELF = function WbSnakviewVariationsVariation(
 		viewState,
 		$viewPort,
 		entityStore,
 		valueViewBuilder,
 		dataTypeStore
 	) {
-		if ( !( viewState instanceof $.wikibase.snakview.ViewState ) ) {
+		if ( !( viewState instanceof ViewState ) ) {
 			throw new Error( 'No ViewState object was provided to the snakview variation' );
 		}
 		if ( !( $viewPort instanceof $ ) || $viewPort.length !== 1 ) {
@@ -101,7 +97,7 @@
 		_valueViewBuilder: null,
 
 		/**
-		 * @property {jQuery.wikibase.snakview.ViewState}
+		 * @property {ViewState}
 		 */
 		_viewState: null,
 
@@ -141,7 +137,7 @@
 		 *
 		 * @see jQuery.wikibase.snakview
 		 *
-		 * @return {jQuery.wikibase.snakview.ViewState|null} Null when called after the object got
+		 * @return {ViewState|null} Null when called after the object got
 		 *  destroyed.
 		 */
 		viewState: function () {
@@ -239,5 +235,7 @@
 		 */
 		blur: function () {}
 	} );
+
+	module.exports = SELF;
 
 }() );

@@ -1,8 +1,8 @@
 ( function ( dv ) {
 	'use strict';
 
-	var MODULE = $.wikibase.snakview.variations,
-		PARENT = MODULE.Variation,
+	var MODULE = require( './snakview.variations.js' ),
+		Variation = require( './snakview.variations.Variation.js' ),
 		datamodel = require( 'wikibase.datamodel' );
 
 	/**
@@ -12,13 +12,13 @@
 	 * @see jQuery.wikibase.snakview
 	 * @see datamodel.PropertyValueSnak
 	 * @class jQuery.wikibase.snakview.variations.Value
-	 * @extends jQuery.wikibase.snakview.variations.Variation
+	 * @extends Variation
 	 * @license GPL-2.0-or-later
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
 	 * @constructor
 	 */
-	MODULE.variation( datamodel.PropertyValueSnak, PARENT, {
+	MODULE.variation( datamodel.PropertyValueSnak, Variation, {
 		/**
 		 * The `valueview` widget instance or `null` if the `Property`'s `DataType` is not
 		 * supported.
@@ -45,7 +45,7 @@
 				this._valueView.element.off( '.' + this.variationBaseClass );
 				this._valueView.destroy();
 			}
-			PARENT.prototype.destroy.call( this );
+			Variation.prototype.destroy.call( this );
 		},
 
 		/**

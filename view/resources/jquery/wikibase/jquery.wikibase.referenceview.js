@@ -4,6 +4,8 @@
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' );
 
+	require( './jquery.wikibase.listview.ListItemAdapter.js' );
+
 	/**
 	 * View for displaying and editing `datamodel.Reference` objects.
 	 * @see datamodel.Reference

@@ -1,8 +1,8 @@
 ( function () {
 	'use strict';
 
-	var MODULE = $.wikibase.snakview.variations,
-		PARENT = MODULE.Variation,
+	var MODULE = require( './snakview.variations.js' ),
+		PARENT = require( './snakview.variations.Variation.js' ),
 		datamodel = require( 'wikibase.datamodel' );
 
 	/**
