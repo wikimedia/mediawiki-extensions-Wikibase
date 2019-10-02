@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var datamodel = require( 'wikibase.datamodel' );
+	var datamodel = require( 'wikibase.datamodel' ),
+		serialization = require( 'wikibase.serialization' );
 
 	QUnit.module( 'wikibase.entityChangers.StatementsChanger' );
 
@@ -120,8 +121,8 @@
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
 			statementsChangerState,
-			new wb.serialization.StatementSerializer(),
-			new wb.serialization.StatementDeserializer(),
+			new serialization.StatementSerializer(),
+			new serialization.StatementDeserializer(),
 			fireHook
 		);
 		var guid = 'Q1$ffbcf247-0c66-4f97-81a0-9d25822104b8';
@@ -192,7 +193,7 @@
 			api,
 			{ getClaimRevision: function () { return 0; } },
 			statementsChangerState,
-			new wb.serialization.StatementSerializer()
+			new serialization.StatementSerializer()
 		);
 
 		statementsChanger.save( newNoValueSnakStatement() );
@@ -216,8 +217,8 @@
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
 			statementsChangerState,
-			new wb.serialization.StatementSerializer(),
-			new wb.serialization.StatementDeserializer()
+			new serialization.StatementSerializer(),
+			new serialization.StatementDeserializer()
 		);
 
 		return statementsChanger.save( newNoValueSnakStatement() )
@@ -244,8 +245,8 @@
 				setClaimRevision: function () {}
 			},
 			statementsChangerState,
-			new wb.serialization.StatementSerializer(),
-			new wb.serialization.StatementDeserializer()
+			new serialization.StatementSerializer(),
+			new serialization.StatementDeserializer()
 		);
 
 		var done = assert.async();
@@ -277,8 +278,8 @@
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
 			statementsChangerState,
-			new wb.serialization.StatementSerializer(),
-			new wb.serialization.StatementDeserializer(),
+			new serialization.StatementSerializer(),
+			new serialization.StatementDeserializer(),
 			fireHook
 		);
 		var guid = 'Q1$a69d8233-b677-43e6-a7c6-519f525eab0c';
@@ -329,8 +330,8 @@
 			api,
 			{ getClaimRevision: function () { return 0; }, setClaimRevision: function () {} },
 			statementsChangerState,
-			new wb.serialization.StatementSerializer(),
-			new wb.serialization.StatementDeserializer()
+			new serialization.StatementSerializer(),
+			new serialization.StatementDeserializer()
 		);
 
 		assert.strictEqual( statementsChangerStatements.getItemByKey( 'P1' ), null );

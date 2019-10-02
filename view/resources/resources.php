@@ -140,8 +140,7 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.api.RepoApiError',
 				'wikibase.datamodel', // for AliasesChanger.js
-				'wikibase.serialization.StatementDeserializer', // for EntityChangersFactory.js
-				'wikibase.serialization.StatementSerializer', // for EntityChangersFactory.js
+				'wikibase.serialization',
 			]
 		],
 
@@ -329,6 +328,7 @@ return call_user_func( function() {
 				'wikibase.sites',
 				'wikibase.templates',
 				'wikibase.datamodel',
+				'wikibase.serialization',
 				'wikibase.utilities', // wikibase.utilities.ui
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
@@ -345,8 +345,6 @@ return call_user_func( function() {
 				'oojs-ui',
 				'util.highlightSubstring',
 				'util.inherit',
-				'wikibase.serialization.SnakDeserializer',
-				'wikibase.serialization.SnakSerializer',
 				'wikibase.tainted-ref.init',
 			],
 			'messages' => [

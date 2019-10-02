@@ -12,7 +12,8 @@
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' ),
 		ViewState = require( './snakview.ViewState.js' ),
-		variations = require( './snakview.variations.js' );
+		variations = require( './snakview.variations.js' ),
+		wbserialization = require( 'wikibase.serialization' );
 
 	/**
 	 * View for displaying and editing `datamodel.Snak` objects.
@@ -416,7 +417,7 @@
 				return;
 			}
 
-			var snakSerializer = new wikibase.serialization.SnakSerializer(),
+			var snakSerializer = new wbserialization.SnakSerializer(),
 				serialization = this.options.value instanceof datamodel.Snak
 					? snakSerializer.serialize( this.options.value )
 					: this.options.value;
@@ -480,7 +481,7 @@
 				};
 			}
 
-			var snakDeserializer = new wb.serialization.SnakDeserializer();
+			var snakDeserializer = new wbserialization.SnakDeserializer();
 			try {
 				return snakDeserializer.deserialize( value );
 			} catch ( e ) {

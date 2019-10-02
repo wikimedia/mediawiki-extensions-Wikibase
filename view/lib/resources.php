@@ -660,7 +660,31 @@ return call_user_func( function() {
 				'valueParsers',
 			],
 		],
-
+		'wikibase.serialization' => $wikibaseSerializationPaths + [
+			'packageFiles' => [
+				'index.js',
+			],
+			'dependencies' => [
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Deserializer',
+				'wikibase.serialization.EntityDeserializer',
+				'wikibase.serialization.SnakDeserializer',
+				'wikibase.serialization.StatementDeserializer',
+				'wikibase.serialization.StatementListDeserializer',
+				'wikibase.serialization.TermDeserializer',
+				'wikibase.serialization.TermMapDeserializer',
+				'wikibase.serialization.ClaimSerializer',
+				'wikibase.serialization.ReferenceListSerializer',
+				'wikibase.serialization.ReferenceSerializer',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.SnakListSerializer',
+				'wikibase.serialization.SnakSerializer',
+				'wikibase.serialization.StatementListSerializer',
+				'wikibase.serialization.StatementSerializer',
+				'wikibase.serialization.TermMapSerializer',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 		'wikibase.serialization.__namespace' => $wikibaseSerializationPaths + [
 				'scripts' => [
 					'__namespace.js',
@@ -703,6 +727,7 @@ return call_user_func( function() {
 					'wikibase.serialization.TermMapDeserializer',
 					'wikibase.serialization.StatementGroupSetDeserializer',
 				],
+				'targets' => [ 'desktop', 'mobile' ],
 			],
 
 		'wikibase.serialization.SnakDeserializer' => $wikibaseSerializationPaths + [
@@ -917,6 +942,7 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
 		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.

@@ -66,7 +66,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase',
-				'wikibase.serialization.EntityDeserializer'
+				'wikibase.serialization'
 			]
 		],
 

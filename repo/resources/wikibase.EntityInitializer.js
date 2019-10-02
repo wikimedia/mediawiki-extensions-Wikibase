@@ -7,7 +7,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var config = require( './config.json' );
+	var config = require( './config.json' ),
+		serialization = require( 'wikibase.serialization' );
 
 	/**
 	 * Entity initializer.
@@ -73,11 +74,11 @@
 		/**
 		 * @return {Object} jQuery promise
 		 *         Resolved parameters:
-		 *         - {wikibase.serialization.EntityDeserializer}
+		 *         - {serialization.EntityDeserializer}
 		 *         No rejected parameters.
 		 */
 		_getDeserializer: function () {
-			var entityDeserializer = new wb.serialization.EntityDeserializer(),
+			var entityDeserializer = new serialization.EntityDeserializer(),
 				deferred = $.Deferred();
 
 			var entityTypes = config.entityTypes;

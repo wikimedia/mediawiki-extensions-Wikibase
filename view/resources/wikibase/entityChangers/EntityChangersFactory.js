@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var MODULE = wb.entityChangers;
+	var MODULE = wb.entityChangers,
+		serialization = require( 'wikibase.serialization' );
 
 	/**
 	 * @constructor
@@ -74,8 +75,8 @@
 				this._api,
 				this._revisionStore,
 				new wb.entityChangers.StatementsChangerState( this._entity.getId(), this._entity.getStatements() ),
-				new wb.serialization.StatementSerializer(),
-				new wb.serialization.StatementDeserializer(),
+				new serialization.StatementSerializer(),
+				new serialization.StatementDeserializer(),
 				this._fireHook
 			);
 		},

@@ -5,7 +5,8 @@
 ( function ( wb ) {
 	'use strict';
 
-	var datamodel = require( 'wikibase.datamodel' );
+	var datamodel = require( 'wikibase.datamodel' ),
+		serialization = require( 'wikibase.serialization' );
 
 	QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
 		teardown: function () {
@@ -22,8 +23,8 @@
 		}
 	} ) );
 
-	var snakSerializer = new wb.serialization.SnakSerializer(),
-		snakDeserializer = new wb.serialization.SnakDeserializer();
+	var snakSerializer = new serialization.SnakSerializer(),
+		snakDeserializer = new serialization.SnakDeserializer();
 
 	/**
 	 * @param {Object} [options={}]

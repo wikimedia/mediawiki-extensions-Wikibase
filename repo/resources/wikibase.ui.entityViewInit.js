@@ -21,7 +21,8 @@
 		CachingEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js' ),
 		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' ),
 		config = require( './config.json' ),
-		datamodel = require( 'wikibase.datamodel' );
+		datamodel = require( 'wikibase.datamodel' ),
+		serialization = require( 'wikibase.serialization' );
 
 	/**
 	 * @return {boolean}
@@ -40,7 +41,7 @@
 		return new CachingEntityStore(
 			new ApiEntityStore(
 				repoApi,
-				new wb.serialization.EntityDeserializer(),
+				new serialization.EntityDeserializer(),
 				[ languageCode ]
 			)
 		);
