@@ -15,6 +15,7 @@ class DataBridgePage extends Page {
 		const headerClass = '.wb-ui-processdialog-header';
 		return {
 			SAVE: `${headerClass} .wb-ui-event-emitting-button--primaryProgressive`,
+			CANCEL: `${headerClass} .wb-ui-event-emitting-button--cancel`,
 		};
 	}
 
@@ -58,6 +59,12 @@ class DataBridgePage extends Page {
 	get saveButton() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.SAVE}`
+		);
+	}
+
+	get cancelButton() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.CANCEL}`
 		);
 	}
 
