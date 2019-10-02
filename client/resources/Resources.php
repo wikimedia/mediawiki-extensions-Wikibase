@@ -130,7 +130,6 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.linkitem.css'
 			],
 			'dependencies' => [
-				'wikibase.api.getLocationAgnosticMwApi',
 				'jquery.spinner',
 				'jquery.ui.dialog',
 				'jquery.ui.suggester',

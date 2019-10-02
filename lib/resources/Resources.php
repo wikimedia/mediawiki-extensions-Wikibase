@@ -75,6 +75,11 @@ return call_user_func( function() {
 			'scripts' => [
 				'namespace.js',
 				'RepoApi.js',
+				'getLocationAgnosticMwApi.js',
+			],
+			'dependencies' => [
+				'mediawiki.api',
+				'mediawiki.ForeignApi',
 			],
 			'targets' => [
 				'desktop',

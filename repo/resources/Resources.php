@@ -125,7 +125,6 @@ return call_user_func( function() {
 				'mw.config.values.wbDataTypes',
 				'jquery.wikibase.wbtooltip',
 				'wikibase',
-				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.api.FormatValueCaller',
 				'wikibase.formatters.ApiValueFormatter',
 				'wikibase.ValueFormatterFactory',
