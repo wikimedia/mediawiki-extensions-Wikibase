@@ -49,7 +49,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		// Mare Tranquillitatis
 		$value_moon = new GlobeCoordinateValue(
-				new LatLongValue( 8.5, 31.366666666667 ),
+				new LatLongValue( 8.5, 31.4 ),
 				0.1,
 				'http://www.wikidata.org/entity/Q405'
 		);
@@ -99,7 +99,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				[
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
-						. '"<http://www.wikidata.org/entity/Q405> Point(31.3667 8.5)"'
+						. '"<http://www.wikidata.org/entity/Q405> Point(31.4 8.5)"'
 						. '^^<http://acme/geo/wktLiteral> .',
 				]
 			],
