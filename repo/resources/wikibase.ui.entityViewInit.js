@@ -246,9 +246,9 @@
 
 		var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' )
 				.addClass( 'wikibase-copyrightnotification-container' ),
-			$hideMessage = $( '<a/>', {
-				text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
-			} ).appendTo( $message ),
+			$hideMessage = $( '<a>' )
+				.text( mw.msg( 'wikibase-copyrighttooltip-acknowledge' ) )
+				.appendTo( $message ),
 			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
 		// TODO: Use notification system for copyright messages on all widgets.

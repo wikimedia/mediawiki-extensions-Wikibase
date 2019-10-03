@@ -14,6 +14,7 @@
 			}
 		],
 		"qunit/resolve-async": "off",
-		"space-unary-ops": "off"
+		"space-unary-ops": "off",
+		"no-jquery/no-parse-html-literal": "off"
 	}
 }

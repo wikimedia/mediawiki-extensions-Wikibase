@@ -16,7 +16,7 @@
 		"test:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test"
 	},
 	"devDependencies": {
-		"eslint-config-wikimedia": "0.14.1",
+		"eslint-config-wikimedia": "0.14.3",
 		"eslint-plugin-compat": "^2.6.3",
 		"grunt": "1.0.4",
 		"grunt-banana-checker": "0.8.1",

@@ -108,10 +108,9 @@
 			this.$manual = $( '<div>' ).addClass( 'wikibase-referenceview-manual' ).uniqueId();
 
 			manualSection = '#' + this.$manual.attr( 'id' );
-			manualLink = $( '<a>', {
-				href: manualSection,
-				text: manualLabel
-			} );
+			manualLink = $( '<a>' )
+				.attr( 'href', manualSection )
+				.text( manualLabel );
 			this.$tabButtons = $( '<ul>' ).append(
 				$( '<li>' ).append( manualLink )
 			);

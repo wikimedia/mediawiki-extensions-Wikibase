@@ -308,10 +308,10 @@
 				return this._$tooltipAnchor;
 			}
 
-			this._$tooltipAnchor = $( '<span/>', {
-				class: 'wb-help-field-hint',
-				html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
-			} ).toolbaritem();
+			this._$tooltipAnchor = $( '<span>' )
+				.addClass( 'wb-help-field-hint' )
+				.text( '\u00A0' ) // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
+				.toolbaritem();
 
 			// Support promises instead of strings, too, since $.wikibase.statementview does not know
 			// immediately after creation which help message to show.

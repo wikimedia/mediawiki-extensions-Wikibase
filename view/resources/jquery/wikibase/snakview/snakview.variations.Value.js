@@ -150,18 +150,19 @@
 						self._valueView = null;
 					}
 					self.$viewPort.empty().append(
-						$( '<div/>', {
-							class: self.variationBaseClass + '-datavaluetypemismatch-message',
-							text: mw.msg(
+						$( '<div>' )
+							.addClass( self.variationBaseClass + '-datavaluetypemismatch-message' )
+							.text( mw.msg(
 								'wikibase-snakview-variation-datavaluetypemismatch',
 								actualDataValueType, intendedDataValueType
+							) )
+							.append(
+								$( '<div>' )
+									.text( mw.msg(
+										'wikibase-snakview-variation-datavaluetypemismatch-details',
+										actualDataValueType, intendedDataValueType
+									) )
 							)
-						} )
-						.append( $( '<div/>', {
-							text: mw.msg(
-								'wikibase-snakview-variation-datavaluetypemismatch-details',
-								actualDataValueType, intendedDataValueType )
-						} ) )
 					);
 					self.$viewPort.addClass( self.variationBaseClass + '-datavaluetypemismatch' );
 					// TODO: display value nonetheless (if any valueview can handle it) and move
