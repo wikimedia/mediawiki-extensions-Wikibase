@@ -15,5 +15,9 @@
 	"wikibase-rc-hide-wikidata-show": "Dakhoi",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bodol",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} hanga arombh zalolem sompadon.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Soglle {{WBREPONAME}} sompadonak \"dhaktte\" mhonn nemla, tea khatir \"{{WBREPONAME}} sompadon\" gallnnie ani \"Dhaktte nant tea sompadon\" gallnnie modem kijil asa.",
+	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Soglle {{WBREPONAME}} sompadonak \"dhaktte\" mhonn nemla, tea khatir \"{{WBREPONAME}} sompadon\" gallnnie ani \"Dhaktte nant tea sompadon\" gallnnie modem kijil asa.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Soglle {{WBREPONAME}} sompadonak \"dhaktte\" mhonn nemla, tea khatir \"{{WBREPONAME}} sompadon\" gallnnie ani \"Dhaktte nant tea sompadon\" gallnnie modem kijil asa.",
 	"wikibase-otherprojects": "Her prokolpamnim"
 }

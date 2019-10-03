@@ -75,7 +75,7 @@
 	"wikibase-item-summary-wbeditentity": "Yeni bir öge oluşturuldu",
 	"wikibase-item-summary-wbeditentity-create": "Yeni bir öge oluşturuldu",
 	"wikibase-item-summary-wbeditentity-update": "Bir öğe değiştirildi",
-	"wikibase-item-summary-wbeditentity-update-languages": "$3 {{PLURAL:$3|dil|dil}} etiketi, açıklama ve/veya diğer adı değiştirildi",
+	"wikibase-item-summary-wbeditentity-update-languages": "$3 etiketi, açıklama ve/veya diğer {{PLURAL:$3|dil|dil}} adı değiştirildi",
 	"wikibase-item-summary-wbeditentity-update-languages-and-other": "$3 {{PLURAL:$3|dil|dil}} ve diğer parçalarda etiket, açıklama ve/veya diğer ad değiştirildi",
 	"wikibase-item-summary-wbeditentity-override": "Bir öge temizlendi"
 }
