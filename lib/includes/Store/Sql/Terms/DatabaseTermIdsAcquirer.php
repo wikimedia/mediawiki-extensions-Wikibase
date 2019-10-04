@@ -411,7 +411,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 
 		$termsArray = $this->mapToTextIds( $termsArray, $textIdsAcquirer );
 		$termsArray = $this->mapToTextInLangIds( $termsArray, $textInLangIdsAcquirer );
-		$termsArray = $this->mapToTypeIds( $termsArray, $termInLangIdsAcquirer );
+		$termsArray = $this->mapToTypeIds( $termsArray );
 
 		return $this->mapToTermInLangIds( $termsArray, $termInLangIdsAcquirer, $termIdsToRestore );
 	}
