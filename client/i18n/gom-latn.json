@@ -16,6 +16,8 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bodol",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} hanga arombh zalolem sompadon.",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Hi gallnni ek vo odik Iogdanache Gunn vo Vaporpeachea Hetu gallnnent kijil asa. Gunnacho ani Hetuchem parkhop {{WBREPONAME}} sompadonank uplobdh na.",
+	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Iogdanachem Gunnachem parkhop kaim bodolache prokarank uplobdh na, hea khatir gallnnek fuddem ievpi Bodolachea Prokar {{PLURAL:$2|gallnnek|gallnenk}} kijil asa: $1",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Soglle {{WBREPONAME}} sompadonak \"dhaktte\" mhonn nemla, tea khatir \"{{WBREPONAME}} sompadon\" gallnnie ani \"Dhaktte nant tea sompadon\" gallnnie modem kijil asa.",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Soglle {{WBREPONAME}} sompadonak \"dhaktte\" mhonn nemla, tea khatir \"{{WBREPONAME}} sompadon\" gallnnie ani \"Dhaktte nant tea sompadon\" gallnnie modem kijil asa.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Soglle {{WBREPONAME}} sompadonak \"dhaktte\" mhonn nemla, tea khatir \"{{WBREPONAME}} sompadon\" gallnnie ani \"Dhaktte nant tea sompadon\" gallnnie modem kijil asa.",

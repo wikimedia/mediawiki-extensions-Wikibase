@@ -14,7 +14,8 @@
 			"Hex",
 			"Mainframe98",
 			"Wiki13",
-			"Mar(c)"
+			"Mar(c)",
+			"Bdijkstra"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -177,6 +178,7 @@
 	"wikibase-item-summary-wbeditentity-create": "Nieuw item gemaakt",
 	"wikibase-item-summary-wbeditentity-create-item": "Een nieuw item aangemaakt",
 	"wikibase-item-summary-wbeditentity-update": "Een item bijgewerkt",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Label, beschrijving en/of aliassen bijgewerkt in $3 {{PLURAL:$3|taal|talen}}, en andere onderdelen",
 	"wikibase-item-summary-wbeditentity-override": "Item geleegd",
 	"wikibase-item-summary-wblinktitles-create": "Item aangemaakt om pagina's te koppelen",
 	"wikibase-item-summary-wblinktitles-connect": "Taalkoppeling naar gekoppelde pagina's toegevoegd",
