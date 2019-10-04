@@ -52,16 +52,15 @@ class AddUsagesForPageJob extends Job {
 			return $usage->asArray();
 		}, $usages );
 
-		$jobParams = [
-			'pageId' => $title->getArticleID(),
-			'usages' => $usages
-		];
-
 		return new JobSpecification(
 			'wikibase-addUsagesForPage',
-			$jobParams,
-			[ 'removeDuplicates' => true ],
-			$title
+			[
+				'namespace' => $title->getNamespace(),
+				'title' => $title->getDBkey(),
+				'pageId' => $title->getArticleID(),
+				'usages' => $usages,
+			],
+			[ 'removeDuplicates' => true ]
 		);
 	}
 

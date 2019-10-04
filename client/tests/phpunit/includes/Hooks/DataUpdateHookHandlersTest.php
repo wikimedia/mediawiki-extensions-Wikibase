@@ -103,7 +103,9 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 			$params = [
 				'pageId' => $title->getArticleID(),
-				'usages' => $expectedUsageArray
+				'usages' => $expectedUsageArray,
+				'namespace' => $title->getNamespace(),
+				'title' => $title->getDBkey(),
 			];
 
 			$jobScheduler->expects( $this->once() )
@@ -114,7 +116,6 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 					$jobParams = array_intersect_key( $jobParams, $params );
 
 					self::assertEquals( 'wikibase-addUsagesForPage', $job->getType() );
-					self::assertSame( $title, $job->getTitle() );
 					self::assertTrue( $job->ignoreDuplicates() );
 					self::assertEquals( $params, $jobParams );
 					return true;

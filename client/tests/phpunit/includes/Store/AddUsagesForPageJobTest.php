@@ -129,10 +129,11 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 		$expected = [
 			'pageId' => 17,
 			'usages' => [ $usageQ5X->asArray() ],
+			'namespace' => $title->getNamespace(),
+			'title' => $title->getDBkey(),
 		];
 
 		$this->assertEquals( 'wikibase-addUsagesForPage', $spec->getType() );
-		$this->assertSame( $title, $spec->getTitle() );
 		$this->assertEquals( $expected, array_intersect_key( $spec->getParams(), $expected ) );
 	}
 
