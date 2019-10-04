@@ -101,6 +101,12 @@ local function testGetEntityUrl( expectedItemId, itemId )
 	return url:match( '//.*/' .. expectedItemId ) ~= nil
 end
 
+local function testGetGlobalSiteId()
+	-- In WikibaseDataAccessTestItemSetUpHelper we add this sitelink based on the site's global
+	-- id, thus we can (ab)use this to make sure getGlobalSiteId returns the correct site id.
+	return mw.wikibase.getSitelink( 'Q32487', mw.wikibase.getGlobalSiteId() ) == "WikibaseClientDataAccessTest"
+end
+
 local tests = {
 	-- Integration tests
 
@@ -430,6 +436,9 @@ local tests = {
 	{ name = 'mw.wikibase.getReferencedEntityId (toIds must contain strings)', func = mw.wikibase.getReferencedEntityId,
 	  args = { 'Q12', 'P12', { 'P22', 24 } },
 	  expect = "toIds value at index 2 must be string, number given."
+	},
+	{ name = 'mw.wikibase.getGlobalSiteId', func = testGetGlobalSiteId,
+	  expect = { true }
 	},
 }
 
