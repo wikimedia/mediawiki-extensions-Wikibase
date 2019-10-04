@@ -11,7 +11,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\NamespaceChecker;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\FakeResultWrapper;
-use Wikimedia\Rdbms\ResultWrapper;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * List client pages that are not connected to repository items.
@@ -154,7 +154,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @param int|bool $limit
 	 * @param int|bool $offset
 	 *
-	 * @return ResultWrapper
+	 * @return IResultWrapper
 	 */
 	public function reallyDoQuery( $limit, $offset = false ) {
 		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
