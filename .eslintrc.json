@@ -47,6 +47,11 @@
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off"
 	},
+	"settings": {
+		"no-jquery": {
+			"variablePattern": "^\\$.|^element$"
+		}
+	},
 	"plugins": [
 		"compat"
 	]

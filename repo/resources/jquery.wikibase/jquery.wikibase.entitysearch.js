@@ -34,7 +34,10 @@
 			this.element
 			.on( 'eachchange.' + this.widgetName, function () {
 				var menu = self.options.menu;
-				if ( self.options.suggestionsPlaceholder
+				if (
+					self.options.suggestionsPlaceholder
+					// TODO: Store visibility in model
+					// eslint-disable-next-line no-jquery/no-sizzle
 					&& ( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
 				) {
 					self.options.suggestionsPlaceholder.setVisibility( true );
