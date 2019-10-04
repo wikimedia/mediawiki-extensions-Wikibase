@@ -40,6 +40,7 @@
 	require( '../../jquery/wikibase/jquery.wikibase.statementview.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.statementview.RankSelector.js' );
 	require( '../../jquery/ui/jquery.ui.tagadata.js' );
+	require( '../../../lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js' );
 
 	// Plugins
 	require( '../../jquery/jquery.sticknode.js' );

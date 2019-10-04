@@ -499,20 +499,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.ui.toggler' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
-				'jquery.ui/jquery.ui.toggler.js',
-			],
-			'styles' => [
-				'jquery.ui/jquery.ui.toggler.css',
-			],
-			'dependencies' => [
-				'jquery.animateWithEvent',
-				'jquery.ui.core',
-				'jquery.ui.widget',
-			],
-		],
-
 		'jquery.ui.unitsuggester' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'jquery.ui/jquery.ui.unitsuggester.js',
