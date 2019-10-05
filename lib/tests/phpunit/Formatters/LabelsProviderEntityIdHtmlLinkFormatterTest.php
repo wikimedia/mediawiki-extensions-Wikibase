@@ -34,7 +34,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup( Term $term = null ) {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
@@ -46,7 +46,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookupNoLabel() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->throwException( new LabelDescriptionLookupException(
@@ -64,7 +64,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists, $isRedirect ) {
@@ -109,7 +109,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnCallback( function ( $languageCode ) {
@@ -208,7 +208,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	}
 
 	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( $this->anything() )
 			->will( $this->returnValue( null ) );
@@ -229,7 +229,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	public function testGivenForeignEntityId_fullUrlIsUsedInTheOutput() {
 		$this->setUserLang( 'en' );
 
-		$localTitle = $this->getMock( Title::class );
+		$localTitle = $this->createMock( Title::class );
 		$localTitle->expects( $this->any() )
 			->method( 'isLocal' )
 			->will( $this->returnValue( true ) );
@@ -237,7 +237,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->method( 'getLocalUrl' )
 			->will( $this->returnValue( '/wiki/Q42' ) );
 
-		$foreignTitle = $this->getMock( Title::class );
+		$foreignTitle = $this->createMock( Title::class );
 		$foreignTitle->expects( $this->any() )
 			->method( 'isLocal' )
 			->will( $this->returnValue( false ) );
@@ -245,7 +245,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->method( 'getFullUrl' )
 			->will( $this->returnValue( 'http://foo.wiki/wiki/Q42' ) );
 
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function ( EntityId $id ) use ( $localTitle, $foreignTitle ) {

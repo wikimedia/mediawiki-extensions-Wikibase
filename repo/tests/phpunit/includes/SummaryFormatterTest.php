@@ -81,17 +81,17 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @return SummaryFormatter
 	 */
 	private function newFormatter() {
-		$idFormatter = $this->getMock( EntityIdFormatter::class );
+		$idFormatter = $this->createMock( EntityIdFormatter::class );
 		$idFormatter->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback( [ $this, 'formatId' ] ) );
 
-		$valueFormatter = $this->getMock( ValueFormatter::class );
+		$valueFormatter = $this->createMock( ValueFormatter::class );
 		$valueFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback( [ $this, 'formatValue' ] ) );
 
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
 			->will( $this->returnCallback( [ $this, 'formatSnak' ] ) );

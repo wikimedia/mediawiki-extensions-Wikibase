@@ -131,7 +131,7 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function getTitle() {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'UpdateRepoHookHandlersTest' ) );
@@ -171,7 +171,7 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 			->with( $jobName )
 			->will( $this->returnValue( $jobQueue ) );
 
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )
 			->with( 'clientwiki', 'UpdateRepoHookHandlersTest' )

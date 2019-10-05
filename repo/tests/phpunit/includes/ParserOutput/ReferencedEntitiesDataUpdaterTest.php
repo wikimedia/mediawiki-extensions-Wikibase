@@ -49,13 +49,13 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	 * @return ReferencedEntitiesDataUpdater
 	 */
 	private function newInstance( EntityDocument $entity, array $extractedEntities ) {
-		$mockEntityIdExtractor = $this->getMock( EntityReferenceExtractor::class );
+		$mockEntityIdExtractor = $this->createMock( EntityReferenceExtractor::class );
 		$mockEntityIdExtractor->expects( $this->once() )
 			->method( 'extractEntityIds' )
 			->with( $entity )
 			->willReturn( $extractedEntities );
 
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->exactly( count( $extractedEntities ) ) )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

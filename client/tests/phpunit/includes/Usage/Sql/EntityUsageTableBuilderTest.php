@@ -101,7 +101,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	 * @return ExceptionHandler
 	 */
 	private function getExceptionHandler( $matcher ) {
-		$mock = $this->getMock( ExceptionHandler::class );
+		$mock = $this->createMock( ExceptionHandler::class );
 		$mock->expects( $matcher )
 			->method( 'handleException' );
 
@@ -114,7 +114,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	 * @return MessageReporter
 	 */
 	private function getMessageReporter( $matcher ) {
-		$mock = $this->getMock( MessageReporter::class );
+		$mock = $this->createMock( MessageReporter::class );
 		$mock->expects( $matcher )
 			->method( 'reportMessage' );
 

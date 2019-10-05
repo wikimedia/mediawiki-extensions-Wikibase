@@ -75,12 +75,12 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback(
 				function ( EntityId $id ) {
-					$title = $this->getMock( Title::class );
+					$title = $this->createMock( Title::class );
 					$title->expects( $this->any() )
 						->method( 'exists' )
 						->will( $this->returnValue( true ) );
@@ -94,7 +94,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$language = Language::factory( 'en-gb' );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 		$entityIdFormatterFactory = new EntityIdHtmlLinkFormatterFactory(

@@ -35,7 +35,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 	private function getFakeMoveData() {
 		$entityId = new ItemId( 'Q123' );
 
-		$siteLinkLookupMock = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookupMock = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookupMock->expects( $this->any() )
 			->method( 'getItemIdForLink' )

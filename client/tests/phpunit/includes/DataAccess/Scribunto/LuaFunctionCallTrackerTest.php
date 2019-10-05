@@ -51,7 +51,7 @@ class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider incrementKeyProvider
 	 */
 	public function testIncrementKey( $expected, $trackLuaFunctionCallsPerSiteGroup, $trackLuaFunctionCallsPerWiki ) {
-		$statsdFactory = $this->getMock( StatsdDataFactoryInterface::class );
+		$statsdFactory = $this->createMock( StatsdDataFactoryInterface::class );
 
 		$keyBuffer = [];
 		$statsdFactory->expects( $this->exactly( count( $expected ) ) )

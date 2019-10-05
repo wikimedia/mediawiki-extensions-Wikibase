@@ -51,7 +51,7 @@ class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
 	private function getSnakRenderer() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
 			->will( $this->returnCallback( function ( PropertyValueSnak $snak ) {

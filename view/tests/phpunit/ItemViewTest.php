@@ -85,7 +85,7 @@ class ItemViewTest extends EntityViewTestCase {
 	private function newItemView( $placeholders = [] ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
-		$termsView = $this->getMock( CacheableEntityTermsView::class );
+		$termsView = $this->createMock( CacheableEntityTermsView::class );
 		$termsView->method( 'getPlaceholders' )->willReturn( $placeholders );
 
 		return new ItemView(

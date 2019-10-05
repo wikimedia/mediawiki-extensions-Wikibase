@@ -32,7 +32,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )

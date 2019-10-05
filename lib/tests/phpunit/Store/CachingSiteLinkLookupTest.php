@@ -38,7 +38,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetItemIdForLink_cacheMiss() {
 		$cache = new HashBagOStuff();
-		$lookup = $this->getMock( SiteLinkLookup::class );
+		$lookup = $this->createMock( SiteLinkLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getItemIdForLink' )
 			->with( 'foowiki', 'bar' )
@@ -80,7 +80,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testGetItemIdForSiteLink_cacheMiss() {
 		$siteLink = new SiteLink( 'foowiki', 'bar' );
 		$cache = new HashBagOStuff();
-		$lookup = $this->getMock( SiteLinkLookup::class );
+		$lookup = $this->createMock( SiteLinkLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getItemIdForLink' )
 			->with( 'foowiki', 'bar' )
@@ -125,7 +125,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$q42 = new ItemId( 'Q42' );
 
 		$cache = new HashBagOStuff();
-		$lookup = $this->getMock( SiteLinkLookup::class );
+		$lookup = $this->createMock( SiteLinkLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getSiteLinksForItem' )
 			->with( $q42 )
@@ -144,7 +144,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetLinks() {
 		// getLinks is a simple pass through
-		$lookup = $this->getMock( SiteLinkLookup::class );
+		$lookup = $this->createMock( SiteLinkLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getLinks' )
 			->with( [ 1 ], [ 'a' ], [ 'b' ] )

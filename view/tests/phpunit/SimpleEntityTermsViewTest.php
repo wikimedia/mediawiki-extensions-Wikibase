@@ -38,7 +38,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 	use HamcrestPHPUnitIntegration;
 
 	private function getEntityTermsView( $editSectionCalls = 0, TermsListView $termsListView = null ) {
-		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
+		$editSectionGenerator = $this->createMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )
 			->will( $this->returnValue( '<EDITSECTION>' ) );
@@ -49,13 +49,13 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$htmlTermRenderer = $this->getMock( HtmlTermRenderer::class );
+		$htmlTermRenderer = $this->createMock( HtmlTermRenderer::class );
 		$htmlTermRenderer->method( 'renderTerm' )
 			->will( $this->returnCallback( function( Term $term ) {
 				return htmlspecialchars( $term->getText() );
 			} ) );
 
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				$terms = [

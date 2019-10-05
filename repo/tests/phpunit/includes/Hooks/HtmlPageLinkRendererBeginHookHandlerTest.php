@@ -367,7 +367,7 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 	 * @return EntityIdLookup
 	 */
 	private function getEntityIdLookup() {
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )
@@ -386,7 +386,7 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 	 * @return TermLookup
 	 */
 	private function getTermLookup() {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
@@ -437,7 +437,7 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	private function getInterwikiLookup() {
-		$lookup = $this->getMock( InterwikiLookup::class );
+		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->expects( $this->any() )
 			->method( 'isValidInterwiki' )
 			->will(

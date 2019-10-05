@@ -88,7 +88,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionChecker() {
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -109,7 +109,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup() {
-		$mock = $this->getMock( EntityTitleStoreLookup::class );
+		$mock = $this->createMock( EntityTitleStoreLookup::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -169,12 +169,12 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( Title::class );
+				$title = $this->createMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );

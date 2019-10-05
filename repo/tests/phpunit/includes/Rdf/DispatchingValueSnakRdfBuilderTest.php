@@ -23,19 +23,19 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testAddValue() {
-		$writer = $this->getMock( RdfWriter::class );
+		$writer = $this->createMock( RdfWriter::class );
 		$namespace = 'xx';
 		$lname = 'yy';
 
 		$propertyId = new PropertyId( 'P123' );
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'xyz' ) );
 
-		$ptBuilder = $this->getMock( ValueSnakRdfBuilder::class );
+		$ptBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 		$ptBuilder->expects( $this->once() )
 			->method( 'addValue' )
 			->with( $writer, $namespace, $lname, 'foo', $snak );
 
-		$vtBuilder = $this->getMock( ValueSnakRdfBuilder::class );
+		$vtBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 		$vtBuilder->expects( $this->once() )
 			->method( 'addValue' )
 			->with( $writer, $namespace, $lname, 'bar', $snak );

@@ -133,7 +133,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -148,7 +148,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	 * @return EntityIdLookup
 	 */
 	private function getMockEntityIdLookup() {
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )
@@ -181,7 +181,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	 * @return IDatabase
 	 */
 	private function getMockDatabase( array $row ) {
-		$db = $this->getMock( IDatabase::class );
+		$db = $this->createMock( IDatabase::class );
 
 		$db->method( 'selectRow' )
 			->will( $this->returnValue( (object)$row ) );

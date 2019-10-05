@@ -66,12 +66,12 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'MockPrefixedText' ) );
 
-		$mockEntityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$mockEntityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$mockEntityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
-		$mockPropertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$mockPropertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
@@ -1399,7 +1399,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$mockRevision->expects( $this->once() )
 			->method( 'getId' )
 			->will( $this->returnValue( 123 ) );
-		$mockStatus = $this->getMock( Status::class );
+		$mockStatus = $this->createMock( Status::class );
 		$mockStatus->expects( $this->once() )
 			->method( 'getValue' )
 			->will( $this->returnValue( [ 'revision' => $mockRevision ] ) );

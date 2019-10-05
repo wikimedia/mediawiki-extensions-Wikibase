@@ -41,7 +41,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnakFormatter
 	 */
 	private function getMockSnakFormatter( $method, $return ) {
-		$mockFormatter = $this->getMock( SnakFormatter::class );
+		$mockFormatter = $this->createMock( SnakFormatter::class );
 
 		$mockFormatter->expects( $this->once() )
 			->method( $method )
@@ -95,7 +95,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityIdParser
 	 */
 	private function getRepoItemUriParser() {
-		$parser = $this->getMock( EntityIdParser::class );
+		$parser = $this->createMock( EntityIdParser::class );
 		$parser->expects( $this->once() )
 			->method( 'parse' )
 			->will( $this->returnCallback( function ( $id ) {

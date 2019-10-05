@@ -39,12 +39,12 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function ( $id ) {
-				$title = $this->getMock( Title::class );
+				$title = $this->createMock( Title::class );
 
 				$title->expects( $this->any() )
 					->method( 'getFullURL' )
@@ -137,7 +137,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	}
 
 	public function testGivenIdWithNoRelatedPage_pageShowsAnError() {
-		$nullReturningTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$nullReturningTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$nullReturningTitleLookup
 			->expects( $this->any() )
 			->method( 'getTitleForId' )

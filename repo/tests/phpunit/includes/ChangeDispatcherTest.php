@@ -76,7 +76,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	 * @return ChangeNotificationSender
 	 */
 	private function getNotificationSender( array &$notifications = [] ) {
-		$sender = $this->getMock( ChangeNotificationSender::class );
+		$sender = $this->createMock( ChangeNotificationSender::class );
 
 		$sender->expects( $this->any() )
 			->method( 'sendNotification' )
@@ -93,7 +93,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	 * @return ChunkAccess Guaranteed to only return Change objects from loadChunk.
 	 */
 	private function getChunkedChangesAccess( $expectedLoadChunkCalls = null ) {
-		$chunkedAccess = $this->getMock( ChunkAccess::class );
+		$chunkedAccess = $this->createMock( ChunkAccess::class );
 
 		$chunkedAccess->expects( $expectedLoadChunkCalls ?: $this->never() )
 			->method( 'loadChunk' )
@@ -114,7 +114,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	 * @return SubscriptionLookup
 	 */
 	private function getSubscriptionLookup() {
-		$lookup = $this->getMock( SubscriptionLookup::class );
+		$lookup = $this->createMock( SubscriptionLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getSubscriptions' )
@@ -218,7 +218,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testInitialValues() {
-		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
+		$coordinator = $this->createMock( ChangeDispatchCoordinator::class );
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
 			$this->getNotificationSender(),
@@ -246,7 +246,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		$dispatcher->setVerbose( true );
 		$reporter = new NullMessageReporter();
 		$dispatcher->setMessageReporter( $reporter );
-		$exceptionHandler = $this->getMock( ExceptionHandler::class );
+		$exceptionHandler = $this->createMock( ExceptionHandler::class );
 		$dispatcher->setExceptionHandler( $exceptionHandler );
 		$dispatcher->setBatchSize( 1 );
 		$dispatcher->setBatchChunkFactor( 1 );
@@ -271,7 +271,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 			'chd_lock' => null
 		];
 
-		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
+		$coordinator = $this->createMock( ChangeDispatchCoordinator::class );
 
 		$coordinator->expects( $this->once() )
 			->method( 'selectClient' )
@@ -325,7 +325,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		array $expectedChanges,
 		$expectedSeen
 	) {
-		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
+		$coordinator = $this->createMock( ChangeDispatchCoordinator::class );
 
 		$dispatcher = $this->getChangeDispatcher( $coordinator );
 		$dispatcher->setBatchSize( $batchSize );
@@ -424,7 +424,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	public function testDispatchTo( $batchSize, array $wikiState, $expectedFinalSeen, array $expectedNotifications ) {
 		$expectedFinalState = array_merge( $wikiState, [ 'chd_seen' => $expectedFinalSeen ] );
 
-		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
+		$coordinator = $this->createMock( ChangeDispatchCoordinator::class );
 
 		$coordinator->expects( $this->never() )
 			->method( 'lockClient' );

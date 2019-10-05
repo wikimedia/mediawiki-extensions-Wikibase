@@ -43,7 +43,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$wikibaseServices = $this->getMock( WikibaseServices::class );
+		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
 		$wikibaseServices->method( 'getEntityPrefetcher' )
 			->willReturn( new NullEntityPrefetcher() );

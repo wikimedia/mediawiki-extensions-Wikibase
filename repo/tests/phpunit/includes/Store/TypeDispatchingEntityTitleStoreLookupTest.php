@@ -55,7 +55,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
 			[
 				'property' => function ( EntityTitleStoreLookup $defaultService ) use ( $id ) {
-					$customService = $this->getMock( EntityTitleStoreLookup::class );
+					$customService = $this->createMock( EntityTitleStoreLookup::class );
 					$customService->expects( $this->once() )
 						->method( 'getTitleForId' )
 						->with( $id )
@@ -76,7 +76,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 	 * @return EntityTitleStoreLookup
 	 */
 	public function newDefaultService( EntityId $expectedId = null ) {
-		$defaultService = $this->getMock( EntityTitleStoreLookup::class );
+		$defaultService = $this->createMock( EntityTitleStoreLookup::class );
 
 		if ( $expectedId ) {
 			$defaultService->expects( $this->once() )

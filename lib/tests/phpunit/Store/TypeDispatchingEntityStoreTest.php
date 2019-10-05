@@ -41,7 +41,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $entity ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'assignFreshId' )
 						->with( $entity );
@@ -99,7 +99,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $entity, $user, $flags, $baseRevId, $tags ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'saveEntity' )
 						->with( $entity, 'summary', $user, $flags, $baseRevId, $tags )
@@ -138,7 +138,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $redirect, $user ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'saveRedirect' )
 						->with( $redirect, 'summary', $user )
@@ -172,7 +172,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $user, $id ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'deleteEntity' )
 						->with( $id, 'reason', $user );
@@ -207,7 +207,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $user, $id ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'userWasLastToEdit' )
 						->with( $user, $id )
@@ -241,7 +241,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $user, $id ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'updateWatchlist' )
 						->with( $user, $id );
@@ -274,7 +274,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $user, $id ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'isWatching' )
 						->with( $user, $id )
@@ -307,7 +307,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) use ( $id ) {
-					$customService = $this->getMock( EntityStore::class );
+					$customService = $this->createMock( EntityStore::class );
 					$customService->expects( $this->once() )
 						->method( 'canCreateWithCustomId' )
 						->with( $id )
@@ -330,7 +330,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	 * @return TypeDispatchingEntityStore
 	 */
 	public function newDefaultService( $expectedMethod, array $expectedArguments = null ) {
-		$defaultService = $this->getMock( EntityStore::class );
+		$defaultService = $this->createMock( EntityStore::class );
 
 		if ( $expectedArguments ) {
 			$defaultService->expects( $this->once() )
@@ -349,7 +349,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityRevisionLookup
 	 */
 	public function newEntityRevisionLookup() {
-		$lookup = $this->getMock( EntityRevisionLookup::class );
+		$lookup = $this->createMock( EntityRevisionLookup::class );
 		$lookup->expects( $this->never() )
 			->method( 'getEntityRevision' );
 		$lookup->expects( $this->never() )

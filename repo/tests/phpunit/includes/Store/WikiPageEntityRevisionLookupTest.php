@@ -207,7 +207,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 
-		$blobStore = $this->getMock( BlobStore::class );
+		$blobStore = $this->createMock( BlobStore::class );
 		$blobStore->expects( $this->once() )
 			->method( 'getBlob' )
 			->with( 'xx:blob' )
@@ -368,7 +368,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$codec->method( 'decodeEntity' )
 			->willReturn( $oldEntity );
 
-		$blobStore = $this->getMock( BlobStore::class );
+		$blobStore = $this->createMock( BlobStore::class );
 		$blobStore->expects( $this->once() )
 			->method( 'getBlob' )
 			->willReturn( true ); // codec mocks the entity

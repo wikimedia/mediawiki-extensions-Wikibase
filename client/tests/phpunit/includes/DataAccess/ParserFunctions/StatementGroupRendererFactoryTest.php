@@ -194,7 +194,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 						$allowDataAccessInUserLanguage ? 'es' : 'de',
 						$options->getOption( ValueFormatter::OPT_LANG )
 					);
-					return $this->getMock( SnakFormatter::class );
+					return $this->createMock( SnakFormatter::class );
 				}
 			) );
 
@@ -245,7 +245,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnaksFinder
 	 */
 	private function getSnaksFinder() {
-		$snakListFinder = $this->getMock( SnaksFinder::class );
+		$snakListFinder = $this->createMock( SnaksFinder::class );
 
 		$snakListFinder->expects( $this->any() )
 			->method( 'findSnaks' )
@@ -270,7 +270,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function getSnakFormatterFactory() {
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
@@ -291,7 +291,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$entityLookup = $this->getMock( EntityLookup::class );
+		$entityLookup = $this->createMock( EntityLookup::class );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )

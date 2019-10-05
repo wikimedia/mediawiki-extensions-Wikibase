@@ -23,7 +23,7 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider monolingualHtmlFormatProvider
 	 */
 	public function testFormat( MonolingualTextValue $value, $pattern, $not = '' ) {
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );

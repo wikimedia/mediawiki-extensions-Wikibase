@@ -1849,7 +1849,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			] )
 		];
 
-		$entityWithoutTerms = $this->getMock( EntityDocument::class );
+		$entityWithoutTerms = $this->createMock( EntityDocument::class );
 		$entityWithoutTerms->expects( $this->any() )
 			->method( 'getId' )
 			->will( $this->returnValue( $id ) );

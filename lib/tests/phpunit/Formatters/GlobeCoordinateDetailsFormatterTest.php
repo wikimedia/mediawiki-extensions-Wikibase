@@ -24,7 +24,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	private function newFormatter( FormatterOptions $options = null ) {
-		$vocabularyUriFormatter = $this->getMock( ValueFormatter::class );
+		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
 		$vocabularyUriFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback( function( $value ) {

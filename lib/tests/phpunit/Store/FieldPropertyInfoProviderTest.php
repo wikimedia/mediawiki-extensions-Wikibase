@@ -25,7 +25,7 @@ class FieldPropertyInfoProviderTest extends \PHPUnit\Framework\TestCase {
 	public function testGetPropertyInfo( $info, $key, $expected ) {
 		$propertyId = new PropertyId( 'P1' );
 
-		$lookup = $this->getMock( PropertyInfoLookup::class );
+		$lookup = $this->createMock( PropertyInfoLookup::class );
 		$lookup->expects( $this->once() )
 			->method( 'getPropertyInfo' )
 			->with( $propertyId )

@@ -27,7 +27,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityRevisionLookup
 	 */
 	private function getDummyEntityRevisionLookup() {
-		return $this->getMock( EntityRevisionLookup::class );
+		return $this->createMock( EntityRevisionLookup::class );
 	}
 
 	public function testGivenExistingRevision_getEntityRevisionReturnsIt() {

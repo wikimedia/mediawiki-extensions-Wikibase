@@ -70,7 +70,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 * @return IContextSource
 	 */
 	private function getContext( PHPUnit_Framework_MockObject_MockObject $output ) {
-		$context = $this->getMock( IContextSource::class );
+		$context = $this->createMock( IContextSource::class );
 		$context->method( 'getConfig' )
 			->willReturn( new HashConfig( [
 				'UseFileCache' => false,
@@ -132,12 +132,12 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider pageTitleProvider
 	 */
 	public function testGetPageTitle( ItemId $entityId = null, Term $label = null, $expected ) {
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->willReturn( $entityId );
 
-		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelLookup->method( 'getLabel' )
 			->willReturn( $label );
 

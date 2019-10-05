@@ -28,7 +28,7 @@ class DispatchingEntityTypeStatementGrouperTest extends \PHPUnit\Framework\TestC
 	 * @return StatementGrouper
 	 */
 	private function newGrouper( $count ) {
-		$grouper = $this->getMock( StatementGrouper::class );
+		$grouper = $this->createMock( StatementGrouper::class );
 
 		$grouper->expects( $this->exactly( $count ) )
 			->method( 'groupStatements' );

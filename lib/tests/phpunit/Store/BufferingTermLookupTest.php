@@ -80,7 +80,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 			] ),
 		];
 
-		$termIndex = $this->getMock( TermIndex::class );
+		$termIndex = $this->createMock( TermIndex::class );
 
 		$termIndex->expects( $this->exactly( $getTermsOfEntityCalls ) )
 			->method( 'getTermsOfEntity' )

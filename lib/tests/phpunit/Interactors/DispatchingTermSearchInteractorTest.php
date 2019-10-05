@@ -44,7 +44,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getTermSearchInteractor( array $resultsByEntityType ) {
-		$interactor = $this->getMock( TermSearchInteractor::class );
+		$interactor = $this->createMock( TermSearchInteractor::class );
 		$interactor->expects( $this->any() )
 			->method( 'searchForEntities' )
 			->will( $this->returnCallback(
@@ -135,7 +135,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 		$searchOptions->setIsPrefixSearch( true );
 		$searchOptions->setIsCaseSensitive( true );
 
-		$itemInteractor = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$itemInteractor = $this->createMock( ConfigurableTermSearchInteractor::class );
 		$itemInteractor->expects( $this->atLeastOnce() )
 			->method( 'setTermSearchOptions' )
 			->with( $searchOptions );

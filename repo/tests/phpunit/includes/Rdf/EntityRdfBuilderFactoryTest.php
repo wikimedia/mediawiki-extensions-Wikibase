@@ -84,7 +84,7 @@ class EntityRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 		DedupeBag $expectedDedupe,
 		&$called
 	) {
-		$entityRdfBuilder = $this->getMock( EntityRdfBuilder::class );
+		$entityRdfBuilder = $this->createMock( EntityRdfBuilder::class );
 
 		return function(
 			$mode,

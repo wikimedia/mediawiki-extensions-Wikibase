@@ -70,7 +70,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EditEntity
 	 */
 	private function getMockEditEntity( $calls ) {
-		$mock = $this->getMock( EditEntity::class );
+		$mock = $this->createMock( EditEntity::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'attemptSave' )
 			->will( $this->returnValue( Status::newGood() ) );
@@ -96,7 +96,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return EntityStore
 	 */
 	private function getMockEntityStore() {
-		$mock = $this->getMock( EntityStore::class );
+		$mock = $this->createMock( EntityStore::class );
 		$mock->expects( $this->any() )
 			->method( 'canCreateWithCustomId' )
 			->will( $this->returnCallback( function ( EntityId $id ) {

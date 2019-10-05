@@ -85,7 +85,7 @@ class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework
 	}
 
 	public function testGivenBadgeItemsPageIsNull_exceptionIsThrown() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( $this->anything() )
 			->will( $this->returnValue( null ) );
 
@@ -105,11 +105,11 @@ class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework
 	}
 
 	public function testGivenBadgeItemsPageDoesNotExist_exceptionIsThrown() {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->method( 'exists' )
 			->will( $this->returnValue( false ) );
 
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( $this->anything() )
 			->will( $this->returnValue( $title ) );
 
@@ -129,11 +129,11 @@ class SiteLinkBadgeChangeOpSerializationValidatorTest extends \PHPUnit\Framework
 	}
 
 	public function testGivenValidBadgeSerialization_noExceptionIsThrown() {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->method( 'exists' )
 			->will( $this->returnValue( true ) );
 
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->method( $this->anything() )
 			->will( $this->returnValue( $title ) );
 

@@ -60,7 +60,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		EntityRevision $entityRevision = null,
 		Exception $exception = null
 	) {
-		$mock = $this->getMock( EntityRevisionLookup::class );
+		$mock = $this->createMock( EntityRevisionLookup::class );
 
 		if ( !$entityId ) {
 			$mock->expects( $this->never() )
@@ -122,7 +122,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	 * @return EntityRevision|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockRevision() {
-		$entity = $this->getMock( EntityDocument::class );
+		$entity = $this->createMock( EntityDocument::class );
 
 		$revision = $this->getMockBuilder( EntityRevision::class )
 			->disableOriginalConstructor()
@@ -204,7 +204,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'revision' => $revision,
 		] );
 
-		$entityByLinkedTitleLookup = $this->getMock( EntityByLinkedTitleLookup::class );
+		$entityByLinkedTitleLookup = $this->createMock( EntityByLinkedTitleLookup::class );
 		$entityByLinkedTitleLookup->expects( $this->once() )
 			->method( 'getEntityIdForLinkedTitle' )
 			->with( 'foowiki', 'FooBar' )

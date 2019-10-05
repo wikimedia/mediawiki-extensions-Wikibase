@@ -83,7 +83,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @return SearchResult
 	 */
 	private function getSearchResult( $title ) {
-		$mockTitle = $this->getMock( Title::class );
+		$mockTitle = $this->createMock( Title::class );
 		$mockTitle->method( 'getText' )->willReturn( $title );
 		// hack: content model equals title/id
 		$mockTitle->method( 'getContentModel' )->willReturn( $title );
@@ -103,7 +103,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$link = '<a>link</a>';
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
-		$searchResult = $this->getMock( SearchResult::class );
+		$searchResult = $this->createMock( SearchResult::class );
 		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
 		ShowSearchHitHandler::onShowSearchHit(
 			$searchPage,
@@ -127,7 +127,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @return EntityIdLookup
 	 */
 	private function getEntityIdLookup() {
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )
@@ -186,7 +186,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup( array $entities ) {
-		$entityLookup = $this->getMock( EntityLookup::class );
+		$entityLookup = $this->createMock( EntityLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function ( ItemId $id ) use ( $entities ) {

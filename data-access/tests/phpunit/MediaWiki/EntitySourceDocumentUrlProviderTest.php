@@ -43,7 +43,7 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 
 	public function testGivenNonLocalWikiSource_otherWikiUrlIsUsed() {
 		$interwiki = new \Interwiki( 'nonlocal', 'http://other.test/wiki/$1' );
-		$interwikiLookup = $this->getMock( InterwikiLookup::class );
+		$interwikiLookup = $this->createMock( InterwikiLookup::class );
 		$interwikiLookup->method( 'fetch' )
 			->with( 'nonlocal' )
 			->willReturn( $interwiki );

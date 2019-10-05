@@ -188,14 +188,14 @@ class TermboxViewTest extends TestCase {
 	 * @return TermboxRenderer|MockObject
 	 */
 	private function newTermboxRenderer(): TermboxRenderer {
-		return $this->getMock( TermboxRenderer::class );
+		return $this->createMock( TermboxRenderer::class );
 	}
 
 	/**
 	 * @return LocalizedTextProvider|MockObject
 	 */
 	private function newLocalizedTextProvider(): LocalizedTextProvider {
-		return $this->getMock( LocalizedTextProvider::class );
+		return $this->createMock( LocalizedTextProvider::class );
 	}
 
 	private function newTermbox(

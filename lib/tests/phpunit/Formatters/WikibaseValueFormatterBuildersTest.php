@@ -66,7 +66,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup ) {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -88,7 +88,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				];
 			} ) );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );
@@ -151,7 +151,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -577,7 +577,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	public function provideNewFormatter_LabelDescriptionLookupOption() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'Custom LabelDescriptionLookup' ) ) );

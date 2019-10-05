@@ -42,7 +42,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$type,
 		array $returnResults = []
 	) {
-		$mock = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$mock = $this->createMock( ConfigurableTermSearchInteractor::class );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'searchForEntities' )
 			->with(

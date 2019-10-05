@@ -153,7 +153,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetTitleForId_foreign() {
-		$lookup = $this->getMock( InterwikiLookup::class );
+		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
 			->will( $this->returnValue( true ) );
 		$this->setService( 'InterwikiLookup', $lookup );
@@ -176,7 +176,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetTitleForId_foreign_entitySourceBasedFederation() {
-		$lookup = $this->getMock( InterwikiLookup::class );
+		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
 			->will( $this->returnValue( true ) );
 		$this->setService( 'InterwikiLookup', $lookup );

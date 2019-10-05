@@ -83,7 +83,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$fooQ123 = new ItemId( 'foo:Q123' );
 		$fooP42 = new PropertyId( 'foo:P42' );
 
-		$foreignLookup = $this->getMock( EntityLookup::class );
+		$foreignLookup = $this->createMock( EntityLookup::class );
 		$foreignLookup->method( 'hasEntity' )
 			->willReturnCallback( function( EntityId $id ) use ( $fooQ123, $fooP42 ) {
 				return $id->equals( $fooQ123 ) || $id->equals( $fooP42 );

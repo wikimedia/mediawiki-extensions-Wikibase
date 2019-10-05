@@ -30,7 +30,7 @@ class ClientSiteLinkTitleLookupTest extends \PHPUnit\Framework\TestCase {
 		$clientSiteId,
 		$expected
 	) {
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getLinks' )
 			->with( [ $id->getNumericId() ], [ $clientSiteId ] )

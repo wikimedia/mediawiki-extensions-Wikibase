@@ -72,7 +72,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionChecker() {
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -154,12 +154,12 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( Title::class );
+				$title = $this->createMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );

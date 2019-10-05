@@ -40,7 +40,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

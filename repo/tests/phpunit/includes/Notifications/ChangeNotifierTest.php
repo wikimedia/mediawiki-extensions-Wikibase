@@ -30,7 +30,7 @@ use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 class ChangeNotifierTest extends \MediaWikiTestCase {
 
 	private function getChangeNotifier( $expectNotifications = 1 ) {
-		$changeTransmitter = $this->getMock( ChangeTransmitter::class );
+		$changeTransmitter = $this->createMock( ChangeTransmitter::class );
 		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
 			->method( 'transmitChange' );
 

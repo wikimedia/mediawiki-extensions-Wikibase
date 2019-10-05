@@ -287,7 +287,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getMockPropertyDataTypeLookup() {
-		$mockDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
@@ -307,7 +307,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {

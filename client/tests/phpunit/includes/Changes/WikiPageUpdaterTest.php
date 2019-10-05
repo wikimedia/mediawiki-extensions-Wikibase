@@ -84,7 +84,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return StatsdDataFactoryInterface
 	 */
 	private function getStatsdDataFactoryMock( array $expectedStats ) {
-		$stats = $this->getMock( StatsdDataFactoryInterface::class );
+		$stats = $this->createMock( StatsdDataFactoryInterface::class );
 
 		$i = 0;
 		foreach ( $expectedStats as $updateType => $delta ) {

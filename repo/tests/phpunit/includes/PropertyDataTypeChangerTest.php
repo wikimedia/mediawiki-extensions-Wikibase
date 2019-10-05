@@ -31,7 +31,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 		$expectedProperty = new Property( $propertyId, null, 'shinydata' );
 
-		$entityStore = $this->getMock( EntityStore::class );
+		$entityStore = $this->createMock( EntityStore::class );
 		$entityStore->expects( $this->once() )
 			->method( 'saveEntity' )
 			->with(
@@ -49,7 +49,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 	public function testChangeDataType_propertyNotFound() {
 		$propertyId = new PropertyId( 'P43' );
 
-		$entityStore = $this->getMock( EntityStore::class );
+		$entityStore = $this->createMock( EntityStore::class );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
@@ -64,7 +64,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 		$expectedProperty = new Property( $propertyId, null, 'shinydata' );
 		$storageException = new StorageException( 'whatever' );
 
-		$entityStore = $this->getMock( EntityStore::class );
+		$entityStore = $this->createMock( EntityStore::class );
 		$entityStore->expects( $this->once() )
 			->method( 'saveEntity' )
 			->with(
@@ -84,7 +84,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 	public function testChangeDataType_mismatchingDataValueTypes() {
 		$propertyId = new PropertyId( 'P42' );
 
-		$entityStore = $this->getMock( EntityStore::class );
+		$entityStore = $this->createMock( EntityStore::class );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
@@ -94,7 +94,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getPropertyDataTypeChanger( EntityStore $entityStore ) {
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )

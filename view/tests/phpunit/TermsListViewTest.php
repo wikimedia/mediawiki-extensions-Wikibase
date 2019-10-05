@@ -35,14 +35,14 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$languageNameCalls = 0,
 		LocalizedTextProvider $textProvider = null
 	) {
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				return "<LANGUAGENAME-$languageCode>";
 			} ) );
 
-		$languageDirectionalityLookup = $this->getMock( LanguageDirectionalityLookup::class );
+		$languageDirectionalityLookup = $this->createMock( LanguageDirectionalityLookup::class );
 		$languageDirectionalityLookup->method( 'getDirectionality' )
 			->will( $this->returnCallback( function( $languageCode ) {
 				return [
@@ -155,7 +155,7 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetTermsListView_isEscaped() {
-		$textProvider = $this->getMock( LocalizedTextProvider::class );
+		$textProvider = $this->createMock( LocalizedTextProvider::class );
 		$textProvider->method( 'get' )
 			->will( $this->returnCallback( function( $key ) {
 				return $key === 'wikibase-entitytermsforlanguagelistview-language' ? '"RAW"' : "($key)";

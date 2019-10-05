@@ -26,7 +26,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 	 * @return ValueFormatter
 	 */
 	private function getMockFormatter() {
-		$mock = $this->getMock( ValueFormatter::class );
+		$mock = $this->createMock( ValueFormatter::class );
 		$mock->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback(

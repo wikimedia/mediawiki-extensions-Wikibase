@@ -101,7 +101,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	 * @return TitleFactory|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getTitleFactoryMock() {
-		$titleFactory = $this->getMock( TitleFactory::class );
+		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$id = 200;
 		$titleFactory->expects( $this->any() )

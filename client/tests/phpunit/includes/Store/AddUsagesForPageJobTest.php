@@ -117,7 +117,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 	public function testNewSpec() {
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getArticleID' )
 			->will( $this->returnValue( 17 ) );

@@ -63,7 +63,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function getLanguageFallbackChainFactory() {
 		$realFactory = new LanguageFallbackChainFactory();
 
-		$factory = $this->getMock( LanguageFallbackChainFactory::class );
+		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 
 		$factory->expects( $this->once() )
 			->method( 'newFromLanguage' )
@@ -81,7 +81,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

@@ -59,7 +59,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider addUsagesForPageProvider
 	 */
 	public function testAddUsagesForPage( $newUsage, $unusedEntitiesToSubscribe ) {
-		$usageTracker = $this->getMock( UsageTracker::class );
+		$usageTracker = $this->createMock( UsageTracker::class );
 		$usageTracker->expects( empty( $newUsage ) ? $this->never() : $this->once() )
 			->method( 'addUsedEntities' )
 			->with( 23, $newUsage );
@@ -69,7 +69,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$usageEntityIds[$usage->getEntityId()->getSerialization()] = $usage->getEntityId();
 		}
 
-		$usageLookup = $this->getMock( UsageLookup::class );
+		$usageLookup = $this->createMock( UsageLookup::class );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUsagesForPage' );
 		$usageLookup->expects( empty( $newUsage ) ? $this->never() : $this->once() )
@@ -77,7 +77,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->with( $usageEntityIds )
 			->will( $this->returnValue( $unusedEntitiesToSubscribe ) );
 
-		$subscriptionManager = $this->getMock( SubscriptionManager::class );
+		$subscriptionManager = $this->createMock( SubscriptionManager::class );
 		$subscriptionManager->expects( $this->never() )
 			->method( 'unsubscribe' );
 
@@ -124,13 +124,13 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider pruneUsagesForPageProvider
 	 */
 	public function testPruneUsagesForPage( $prunedUsages, $prunedEntityIds, $unused ) {
-		$usageTracker = $this->getMock( UsageTracker::class );
+		$usageTracker = $this->createMock( UsageTracker::class );
 		$usageTracker->expects( $this->once() )
 			->method( 'pruneUsages' )
 			->with( 23 )
 			->will( $this->returnValue( $prunedUsages ) );
 
-		$usageLookup = $this->getMock( UsageLookup::class );
+		$usageLookup = $this->createMock( UsageLookup::class );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUsagesForPage' );
 		$usageLookup->expects( $this->once() )
@@ -142,7 +142,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 			) )
 			->will( $this->returnValue( $unused ) );
 
-		$subscriptionManager = $this->getMock( SubscriptionManager::class );
+		$subscriptionManager = $this->createMock( SubscriptionManager::class );
 		$subscriptionManager->expects( $this->never() )
 			->method( 'subscribe' );
 
@@ -229,13 +229,13 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$prunedUsages = array_diff( $oldUsage, $newUsages );
 		$prunedEntityIds = $this->getEntityIds( $prunedUsages );
 
-		$usageTracker = $this->getMock( UsageTracker::class );
+		$usageTracker = $this->createMock( UsageTracker::class );
 		$usageTracker->expects( $this->once() )
 			->method( 'replaceUsedEntities' )
 			->with( 23, $newUsages )
 			->will( $this->returnValue( $prunedUsages ) );
 
-		$usageLookup = $this->getMock( UsageLookup::class );
+		$usageLookup = $this->createMock( UsageLookup::class );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUsagesForPage' );
 		$usageLookup->expects( empty( $prunedEntityIds ) ? $this->never() : $this->once() )
@@ -247,7 +247,7 @@ class UsageUpdaterTest extends \PHPUnit\Framework\TestCase {
 			) )
 			->will( $this->returnValue( $unused ) );
 
-		$subscriptionManager = $this->getMock( SubscriptionManager::class );
+		$subscriptionManager = $this->createMock( SubscriptionManager::class );
 		$subscriptionManager->expects( empty( $newUsages ) ? $this->never() : $this->once() )
 			->method( 'subscribe' )
 			->with( 'testwiki', $newEntityIds );

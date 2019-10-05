@@ -20,7 +20,7 @@ class ReportingExceptionHandlerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testReportMessage() {
-		$reporter = $this->getMock( MessageReporter::class );
+		$reporter = $this->createMock( MessageReporter::class );
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 

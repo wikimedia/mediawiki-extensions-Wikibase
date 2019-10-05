@@ -35,7 +35,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
-		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$labelLookup->expects( $this->any() )
 			  ->method( 'getLabel' )

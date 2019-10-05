@@ -97,7 +97,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter( $expectedCallCount, $result = '' ) {
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->exactly( $expectedCallCount ) )
 			->method( 'formatSnak' )
 			->with( $this->isInstanceOf( Snak::class ) )
@@ -110,7 +110,7 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getPropertyDataTypeLookup() {
-		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {

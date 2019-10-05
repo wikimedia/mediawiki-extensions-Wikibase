@@ -33,7 +33,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 	 * @return SnakFormatter
 	 */
 	private function newMockSnakFormatter( Snak $expectedSnak = null, $formattedValue = null ): SnakFormatter {
-		$mockFormatter = $this->getMock( SnakFormatter::class );
+		$mockFormatter = $this->createMock( SnakFormatter::class );
 
 		$mockFormatter->expects( $expectedSnak ? $this->once() : $this->never() )
 			->method( 'formatSnak' )
@@ -47,7 +47,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 	}
 
 	public function testConstructor_wrongFormat() {
-		$mockFormatter = $this->getMock( SnakFormatter::class );
+		$mockFormatter = $this->createMock( SnakFormatter::class );
 		$mockFormatter->expects( $this->once() )
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );

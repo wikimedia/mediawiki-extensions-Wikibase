@@ -22,7 +22,7 @@ class GenericEventDispatcherTest extends \PHPUnit\Framework\TestCase {
 	public function testRegisterWatcher_failure() {
 		$this->expectException( InvalidArgumentException::class );
 
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\FooBar' );
 
 		// should fail because $watcher doesn't implement FooBar
@@ -32,7 +32,7 @@ class GenericEventDispatcherTest extends \PHPUnit\Framework\TestCase {
 	public function testDispatch() {
 		$q12 = new ItemId( 'Q12' );
 
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->once() )
 			->method( 'entityDeleted' )
 			->with( $this->equalTo( $q12 ) );

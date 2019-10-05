@@ -22,7 +22,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 
 	private function newHtmlTermRenderer() {
 		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 
 		return new FallbackHintHtmlTermRenderer(
 			$languageDirectionalityLookup,

@@ -106,7 +106,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function getTitle( $prefixedText, $isRedirect = false ) {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 
 		$title->expects( $this->once() )
 			->method( 'getPrefixedText' )
@@ -314,7 +314,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider updateTrackingCategoriesDataProvider
 	 */
 	public function testUpdateTrackingCategories( $titleText, $isRedirect, $expected ) {
-		$parserOutput = $this->getMock( ParserOutput::class );
+		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( $expected ) )
 			->method( 'addTrackingCategory' );
 

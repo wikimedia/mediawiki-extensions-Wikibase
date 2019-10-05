@@ -55,7 +55,7 @@ class SqlStoreTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$wikibaseServices = $this->getMock( WikibaseServices::class );
+		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
 		$wikibaseServices->method( 'getEntityInfoBuilder' )
 			->willReturn( $this->getMock( EntityInfoBuilder::class ) );

@@ -80,7 +80,7 @@ class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 	private function getDiffView( array $path, Diff $diff ) {
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 
-		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
+		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
 		$entityIdFormatter->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( 'FORMATTED BADGE ID' ) );

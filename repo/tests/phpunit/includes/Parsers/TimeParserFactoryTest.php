@@ -28,7 +28,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return MonthNameProvider
 	 */
 	private function newMonthNameProvider() {
-		$monthNameProvider = $this->getMock( MonthNameProvider::class );
+		$monthNameProvider = $this->createMock( MonthNameProvider::class );
 
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
@@ -483,7 +483,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testMonthNameUnlocalizer_withUnlocalizedMonthNumbers() {
-		$monthNameProvider = $this->getMock( MonthNameProvider::class );
+		$monthNameProvider = $this->createMock( MonthNameProvider::class );
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnValue( [ 2 => 'Localized' ] ) );

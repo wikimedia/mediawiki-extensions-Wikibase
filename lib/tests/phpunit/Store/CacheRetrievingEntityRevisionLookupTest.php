@@ -53,7 +53,7 @@ class CacheRetrievingEntityRevisionLookupTest extends EntityRevisionLookupTestCa
 		$id = new ItemId( 'Q123' );
 		$item = new Item( $id );
 
-		$mock = $this->getMock( EntityRevisionLookup::class );
+		$mock = $this->createMock( EntityRevisionLookup::class );
 		$mock->expects( $this->once() )
 			->method( 'getEntityRevision' )
 			->with( $id, 1234, 'load-mode' )

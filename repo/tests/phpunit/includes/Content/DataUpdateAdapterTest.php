@@ -20,7 +20,7 @@ class DataUpdateAdapterTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testDoUpdate() {
-		$reporter = $this->getMock( MessageReporter::class );
+		$reporter = $this->createMock( MessageReporter::class );
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 

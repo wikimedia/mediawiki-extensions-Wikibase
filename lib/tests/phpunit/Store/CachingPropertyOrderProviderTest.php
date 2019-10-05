@@ -41,7 +41,7 @@ class CachingPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 		$cache = new HashBagOStuff();
 		$expected = [ 'P32' => 1, 'P42' => 2 ];
 
-		$provider = $this->getMock( PropertyOrderProvider::class );
+		$provider = $this->createMock( PropertyOrderProvider::class );
 		$provider->expects( $this->once() )
 			->method( 'getPropertyOrder' )
 			->with()

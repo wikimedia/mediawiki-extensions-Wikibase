@@ -47,12 +47,12 @@ class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function getEntityIdFromOutputPageProvider() {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'getContentModel' )
 			->will( $this->returnValue( 'bar' ) );
 
-		$context = $this->getMock( IContextSource::class );
+		$context = $this->createMock( IContextSource::class );
 		$context->expects( $this->any() )
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );

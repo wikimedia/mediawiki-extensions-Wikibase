@@ -31,7 +31,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with(
@@ -83,7 +83,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			'Q3' => '~=[,,_,,]:3'
 		];
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [
@@ -114,7 +114,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			'Q2' => 'cat',
 		];
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [
@@ -143,7 +143,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$fromMaster = EntityRevisionLookup::LATEST_FROM_MASTER;
 		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 3 ) )
 			->method( 'loadRevisionInformation' )
 			->will( $this->returnCallback( function( array $entityIds, $mode ) {
@@ -204,7 +204,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	public function testLoadRevisionInformation_mode() {
 		$q1 = new ItemId( 'Q1' );
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with(
@@ -226,7 +226,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		// lookup function.
 		$q1 = new ItemId( 'Q1' );
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
 			->with( $q1, 123, EntityRevisionLookup::LATEST_FROM_MASTER )
@@ -242,7 +242,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	public function testLoadLatestRevisionIds_usesCache() {
 		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ], $mode )
@@ -264,7 +264,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ], $mode )
@@ -290,7 +290,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1, $q3->getSerialization() => $q3 ], $mode )
@@ -333,7 +333,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	public function testLoadLatestRevisionIds_masterSkipsCache() {
 		$mode = EntityRevisionLookup::LATEST_FROM_MASTER;
 		$q1 = new ItemId( 'Q1' );
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1 ], $mode )
@@ -358,7 +358,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1, $q2->getSerialization() => $q2 ], $mode )
@@ -386,7 +386,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ], $mode )
@@ -415,7 +415,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 
-		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 2 ) )
 			->method( 'loadRevisionInformation' )
 			->with( [ $q1->getSerialization() => $q1 ] )

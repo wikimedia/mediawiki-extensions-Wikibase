@@ -48,7 +48,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 		if ( $result ) {
 			$result = [ 'factor' => $result[0], 'unit' => $result[1] ];
 		}
-		$mockStorage = $this->getMock( UnitStorage::class );
+		$mockStorage = $this->createMock( UnitStorage::class );
 		$mockStorage->method( 'getConversion' )->with( $fromUnit )->willReturn( $result );
 		return new UnitConverter( $mockStorage, 'http://acme.test/' );
 	}

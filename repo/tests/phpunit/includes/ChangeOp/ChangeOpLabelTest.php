@@ -222,7 +222,7 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 
 	public function testApplyNoLabelsProvider() {
 		$changeOp = new ChangeOpLabel( 'en', 'Foo', $this->getTermValidatorFactory() );
-		$entity = $this->getMock( EntityDocument::class );
+		$entity = $this->createMock( EntityDocument::class );
 
 		$this->expectException( InvalidArgumentException::class );
 		$changeOp->apply( $entity );

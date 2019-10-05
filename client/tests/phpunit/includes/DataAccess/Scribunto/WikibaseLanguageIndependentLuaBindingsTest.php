@@ -205,7 +205,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 	) {
 		$usages = new HashUsageAccumulator();
 
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 		$termLookup->expects( $this->exactly( $hasLang && $entityId ? 1 : 0 ) )
 			->method( 'getLabel' )
 			->with( $entityId )
@@ -305,7 +305,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 	 * @return ReferencedEntityIdLookup
 	 */
 	private function newReferencedEntityIdLookupMock( $result ) {
-		$referencedEntityIdLookup = $this->getMock( ReferencedEntityIdLookup::class );
+		$referencedEntityIdLookup = $this->createMock( ReferencedEntityIdLookup::class );
 		$getReferencedEntityIdMocker = $referencedEntityIdLookup
 			->expects( $this->once() )
 			->method( 'getReferencedEntityId' )

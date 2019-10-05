@@ -180,7 +180,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyOrderProvider
 	 */
 	private function getPropertyOrderProvider() {
-		$propertyOrderProvider = $this->getMock( PropertyOrderProvider::class );
+		$propertyOrderProvider = $this->createMock( PropertyOrderProvider::class );
 
 		$propertyOrderProvider->method( 'getPropertyOrder' )
 			->will( $this->returnValue( [
@@ -212,7 +212,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatter() {
-		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
+		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
 
 		$entityIdFormatter->method( 'formatEntityId' )
 			->will( $this->returnValue( '<ID>' ) );

@@ -64,7 +64,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup( $titleExists ) {
-		$enwiki = $this->getMock( Site::class );
+		$enwiki = $this->createMock( Site::class );
 		$enwiki->expects( $this->any() )
 			->method( 'getGlobalId' )
 			->will( $this->returnValue( 'enwiki' ) );
@@ -82,7 +82,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup( ItemId $itemId ) {
-		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->with( $itemId )
@@ -95,7 +95,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getEntityPermissionChecker() {
-		$entityPermissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$entityPermissionChecker->expects( $this->any() )
 				->method( 'getPermissionStatusForEntity' )
 				->will( $this->returnValue( Status::newGood() ) );

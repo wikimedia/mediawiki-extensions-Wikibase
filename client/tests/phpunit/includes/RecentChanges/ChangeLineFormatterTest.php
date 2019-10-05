@@ -522,7 +522,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	 * @return Title
 	 */
 	private function makeTitle( $ns, $text, $pageId, $currentRevision ) {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 
 		$title->expects( $this->any() )
 			->method( 'getNamespace' )
