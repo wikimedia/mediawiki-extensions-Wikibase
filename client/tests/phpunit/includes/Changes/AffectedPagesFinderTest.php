@@ -42,7 +42,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @return TitleFactory
 	 */
 	private function getTitleFactory() {
-		$titleFactory = $this->getMock( TitleFactory::class );
+		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
@@ -69,7 +69,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	private function getAffectedPagesFinder( array $usage, array $expectedAspects ) {
-		$usageLookup = $this->getMock( UsageLookup::class );
+		$usageLookup = $this->createMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
@@ -538,7 +538,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	private function getSiteLinkUsageLookup( $pageTitle ) {
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )

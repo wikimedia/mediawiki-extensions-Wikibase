@@ -29,7 +29,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 	 * @return StatementGrouperBuilder
 	 */
 	private function newInstance( array $specifications ) {
-		$lookup = $this->getMock( PropertyDataTypeLookup::class );
+		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )

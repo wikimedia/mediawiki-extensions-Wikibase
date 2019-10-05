@@ -21,7 +21,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getPropertyDataTypeLookup() {
-		$mock = $this->getMock( PropertyDataTypeLookup::class );
+		$mock = $this->createMock( PropertyDataTypeLookup::class );
 
 		$mock->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )

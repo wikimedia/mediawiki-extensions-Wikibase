@@ -136,7 +136,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 			'wb-badge' => '<BADGE class="$1" id="$3">$2</BADGE>',
 		] ) );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->method( 'getName' )
 			->will( $this->returnValue( '<LANG>' ) );
 
@@ -157,7 +157,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newNumberLocalizer() {
-		$numberLocalizer = $this->getMock( NumberLocalizer::class );
+		$numberLocalizer = $this->createMock( NumberLocalizer::class );
 		$numberLocalizer->method( 'localizeNumber' )
 			->will( $this->returnCallback( 'strval' ) );
 		return $numberLocalizer;
@@ -192,7 +192,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function newEntityIdFormatter() {
-		$formatter = $this->getMock( EntityIdFormatter::class );
+		$formatter = $this->createMock( EntityIdFormatter::class );
 
 		$formatter->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

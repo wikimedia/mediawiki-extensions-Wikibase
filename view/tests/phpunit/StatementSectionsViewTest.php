@@ -34,7 +34,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
 		] ) );
 
-		$statementGrouper = $this->getMock( StatementGrouper::class );
+		$statementGrouper = $this->createMock( StatementGrouper::class );
 		$statementGrouper->method( 'groupStatements' )
 			->will( $this->returnValue( $statementLists ) );
 

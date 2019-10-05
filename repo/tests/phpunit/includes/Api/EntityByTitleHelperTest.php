@@ -42,7 +42,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @return SiteLookup
 	 */
 	public function getSiteLookupMock() {
-		$site = $this->getMock( Site::class );
+		$site = $this->createMock( Site::class );
 
 		$site->expects( $this->any() )
 			->method( 'getGlobalId' )
@@ -73,7 +73,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityByLinkedTitleLookup
 	 */
 	private function getEntityByLinkedTitleLookupMock( $itemId ) {
-		$siteLinkLookupMock = $this->getMock( EntityByLinkedTitleLookup::class );
+		$siteLinkLookupMock = $this->createMock( EntityByLinkedTitleLookup::class );
 
 		$siteLinkLookupMock->expects( $this->any() )
 			->method( 'getEntityIdForLinkedTitle' )

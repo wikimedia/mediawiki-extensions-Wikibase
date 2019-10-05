@@ -64,7 +64,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( [] ) );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
@@ -151,9 +151,9 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityIdFormatterFactory
 	 */
 	private function getEntityIdFormatterFactory( $format ) {
-		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
+		$entityIdFormatter = $this->createMock( EntityIdFormatter::class );
 
-		$formatterFactory = $this->getMock( EntityIdFormatterFactory::class );
+		$formatterFactory = $this->createMock( EntityIdFormatterFactory::class );
 
 		$formatterFactory->method( 'getOutputFormat' )
 			->will( $this->returnValue( $format ) );
@@ -168,12 +168,12 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return HtmlSnakFormatterFactory
 	 */
 	private function getSnakFormatterFactory() {
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		$snakFormatterFactory = $this->getMock( HtmlSnakFormatterFactory::class );
+		$snakFormatterFactory = $this->createMock( HtmlSnakFormatterFactory::class );
 
 		$snakFormatterFactory->method( 'getSnakFormatter' )
 			->will( $this->returnValue( $snakFormatter ) );

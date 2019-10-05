@@ -228,7 +228,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$titlesById = $this->getFakePageIdMap( $pageNamesPerItemId );
 		$pageIdsByTitle = array_flip( $titlesById );
 
-		$titleFactory = $this->getMock( TitleFactory::class );
+		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
@@ -270,7 +270,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * @return UsageLookup
 	 */
 	private function getUsageLookup( SiteLinkLookup $siteLinkLookup ) {
-		$usageLookup = $this->getMock( UsageLookup::class );
+		$usageLookup = $this->createMock( UsageLookup::class );
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
 			->will( $this->returnCallback(

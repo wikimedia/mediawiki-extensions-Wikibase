@@ -21,7 +21,7 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	private function getIndicator() {
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {

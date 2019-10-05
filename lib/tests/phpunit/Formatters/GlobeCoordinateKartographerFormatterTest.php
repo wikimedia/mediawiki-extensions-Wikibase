@@ -99,7 +99,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 	}
 
 	private function newBaseValueFormatter( $expectedFormatCalls ) {
-		$formatter = $this->getMock( ValueFormatter::class );
+		$formatter = $this->createMock( ValueFormatter::class );
 
 		$formatter->expects( $this->exactly( $expectedFormatCalls ) )
 			->method( 'format' )

@@ -253,7 +253,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 
 	public function testApplyNoAliasesProvider() {
 		$changeOp = new ChangeOpAliases( 'en', [ 'Foo' ], 'set', $this->getTermValidatorFactory() );
-		$entity = $this->getMock( EntityDocument::class );
+		$entity = $this->createMock( EntityDocument::class );
 
 		$this->expectException( InvalidArgumentException::class );
 		$changeOp->apply( $entity );

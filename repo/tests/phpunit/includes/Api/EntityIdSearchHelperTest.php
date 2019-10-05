@@ -40,7 +40,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMock( LabelDescriptionLookup::class );
+		$mock = $this->createMock( LabelDescriptionLookup::class );
 
 		$mock->method( 'getLabel' )
 			->will( $this->returnValue( new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ) ) );

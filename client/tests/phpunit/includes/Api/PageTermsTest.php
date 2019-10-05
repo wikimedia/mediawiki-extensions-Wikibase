@@ -115,7 +115,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 			$termObjectsByEntityId[$key] = $this->makeTermsFromGroups( $entityId, $termGroups );
 		}
 
-		$termIndex = $this->getMock( TermIndex::class );
+		$termIndex = $this->createMock( TermIndex::class );
 		$termIndex->expects( $this->any() )
 			->method( 'getTermsOfEntities' )
 			->will( $this->returnCallback(
@@ -205,7 +205,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return EntityIdLookup
 	 */
 	private function getEntityIdLookup( array $entityIds ) {
-		$idLookup = $this->getMock( EntityIdLookup::class );
+		$idLookup = $this->createMock( EntityIdLookup::class );
 		$idLookup->expects( $this->any() )
 			->method( 'getEntityIds' )
 			->will( $this->returnValue( $entityIds ) );

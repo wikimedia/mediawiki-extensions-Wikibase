@@ -41,8 +41,8 @@ class TermboxRemoteRendererTest extends TestCase {
 	private $stats;
 
 	public function setUp() {
-		$this->logger = $this->getMock( LoggerInterface::class );
-		$this->stats = $this->getMock( StatsdDataFactoryInterface::class );
+		$this->logger = $this->createMock( LoggerInterface::class );
+		$this->stats = $this->createMock( StatsdDataFactoryInterface::class );
 	}
 
 	/** private */ const SSR_URL = 'https://ssr/termbox';

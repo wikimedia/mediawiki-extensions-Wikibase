@@ -21,7 +21,7 @@ class WikibaseStringValueNormalizerTest extends \PHPUnit\Framework\TestCase {
 	public function testNormalize() {
 		$input = 'Kittens';
 
-		$mock = $this->getMock( StringNormalizer::class );
+		$mock = $this->createMock( StringNormalizer::class );
 		$mock->expects( $this->once() )
 			->method( 'trimToNFC' )
 			->with( $input );

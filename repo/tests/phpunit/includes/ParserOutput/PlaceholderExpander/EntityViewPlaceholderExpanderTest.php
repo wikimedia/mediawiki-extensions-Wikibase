@@ -42,7 +42,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 
 		$termsLanguages = [ 'de', 'en', 'ru' ];
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 
 		return new EntityViewPlaceholderExpander(
 			$templateFactory,

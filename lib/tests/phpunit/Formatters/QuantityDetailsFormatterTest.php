@@ -26,7 +26,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
-		$vocabularyUriFormatter = $this->getMock( ValueFormatter::class );
+		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );
 		$vocabularyUriFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback( function( $value ) {
@@ -107,7 +107,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {
-		$unitFormatter = $this->getMock( NumberLocalizer::class );
+		$unitFormatter = $this->createMock( NumberLocalizer::class );
 		$unitFormatter->expects( $this->any() )
 			->method( 'localizeNumber' )
 			->will( $this->returnValue( '<a>+2</a>' ) );

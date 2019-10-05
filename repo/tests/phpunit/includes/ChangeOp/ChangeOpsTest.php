@@ -191,7 +191,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	public function testValidate_() {
 		$item = new Item();
 
-		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp = $this->createMock( ChangeOp::class );
 		$changeOp->expects( $this->any() )
 			->method( 'validate' )
 			->will( $this->returnCallback( function( Item $item ) {
@@ -216,10 +216,10 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetActions() {
-		$editChangeOp = $this->getMock( ChangeOp::class );
+		$editChangeOp = $this->createMock( ChangeOp::class );
 		$editChangeOp->method( 'getActions' )->willReturn( [ EntityPermissionChecker::ACTION_EDIT ] );
 
-		$editTermsChangeOp = $this->getMock( ChangeOp::class );
+		$editTermsChangeOp = $this->createMock( ChangeOp::class );
 		$editTermsChangeOp->method( 'getActions' )->willReturn( [ EntityPermissionChecker::ACTION_EDIT_TERMS ] );
 
 		$changeOps = new ChangeOps( [ $editChangeOp, $editTermsChangeOp ] );

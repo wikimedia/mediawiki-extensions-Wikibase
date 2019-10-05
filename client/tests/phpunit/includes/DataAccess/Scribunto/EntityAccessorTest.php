@@ -61,7 +61,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$entitySerializer = $serializerFactory->newItemSerializer();
 		$statementSerializer = $serializerFactory->newStatementListSerializer();
 
-		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'structured-cat' ) );

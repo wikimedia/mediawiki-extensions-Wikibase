@@ -22,9 +22,9 @@ class DatabaseChangeTransmitterTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testTransmitChange() {
-		$change = $this->getMock( Change::class );
+		$change = $this->createMock( Change::class );
 
-		$changeStore = $this->getMock( ChangeStore::class );
+		$changeStore = $this->createMock( ChangeStore::class );
 		$changeStore->expects( $this->once() )
 			->method( 'saveChange' )
 			->with( $change );

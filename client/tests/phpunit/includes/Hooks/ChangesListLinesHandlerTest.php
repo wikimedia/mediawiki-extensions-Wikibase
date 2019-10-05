@@ -69,7 +69,7 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 	private function getWikibaseChange() {
 		$recentChange = $this->getRecentChange( RecentChangeFactory::SRC_WIKIBASE );
 		$recentChange->counter = 1;
-		$recentChange->mTitle = $this->getMock( Title::class );
+		$recentChange->mTitle = $this->createMock( Title::class );
 		return $recentChange;
 	}
 

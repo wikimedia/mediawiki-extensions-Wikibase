@@ -24,12 +24,12 @@ class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\Tes
 		$entity = new Item();
 		$parserOutput = new ParserOutput();
 
-		$dataUpdater1 = $this->getMock( EntityParserOutputUpdater::class );
+		$dataUpdater1 = $this->createMock( EntityParserOutputUpdater::class );
 		$dataUpdater1->expects( $this->once() )
 			->method( 'updateParserOutput' )
 			->with( $parserOutput, $entity );
 
-		$dataUpdater2 = $this->getMock( EntityParserOutputUpdater::class );
+		$dataUpdater2 = $this->createMock( EntityParserOutputUpdater::class );
 		$dataUpdater2->expects( $this->once() )
 			->method( 'updateParserOutput' )
 			->with( $parserOutput, $entity );

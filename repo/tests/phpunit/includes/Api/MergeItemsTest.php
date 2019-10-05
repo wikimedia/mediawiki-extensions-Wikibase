@@ -91,7 +91,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -135,7 +135,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {

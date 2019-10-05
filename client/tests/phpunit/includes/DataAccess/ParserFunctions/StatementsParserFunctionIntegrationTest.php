@@ -89,7 +89,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	private function maskPropertyLabelResolver( WikibaseClient $wikibaseClient ) {
 		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
 
-		$propertyLabelResolver = $this->getMock( PropertyLabelResolver::class );
+		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
 		$propertyLabelResolver->expects( $this->any() )
 			->method( 'getPropertyIdsForLabels' )
 			->with( [ 'LuaTestStringProperty' ] )

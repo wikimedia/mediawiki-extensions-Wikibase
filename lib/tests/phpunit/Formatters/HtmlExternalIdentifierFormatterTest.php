@@ -26,7 +26,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function provideFormatSnak() {
-		$formatterUrlExpander = $this->getMock( SnakUrlExpander::class );
+		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
 
 		$formatterUrlExpander->expects( $this->any() )
 			->method( 'expandUrl' )
@@ -78,7 +78,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideFormatSnak_ParameterTypeException
 	 */
 	public function testFormatSnak_ParameterTypeException( $snak ) {
-		$urlExpander = $this->getMock( SnakUrlExpander::class );
+		$urlExpander = $this->createMock( SnakUrlExpander::class );
 		$formatter = new HtmlExternalIdentifierFormatter( $urlExpander );
 
 		$this->expectException( ParameterTypeException::class );
@@ -86,7 +86,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetFormat() {
-		$urlExpander = $this->getMock( SnakUrlExpander::class );
+		$urlExpander = $this->createMock( SnakUrlExpander::class );
 		$formatter = new HtmlExternalIdentifierFormatter( $urlExpander );
 
 		$this->assertSame( SnakFormatter::FORMAT_HTML, $formatter->getFormat() );

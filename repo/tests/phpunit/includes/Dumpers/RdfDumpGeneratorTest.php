@@ -98,7 +98,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
@@ -162,7 +162,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	protected function newDumpGenerator( $flavor, array $entityRevisions = [], array $redirects = [] ) {
 		$out = fopen( 'php://output', 'w' );
 
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$dataTypeLookup = $this->getTestData()->getMockRepository();
 

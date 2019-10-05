@@ -42,7 +42,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$out->setTitle( Title::newFromText( 'Test' ) );
 		yield 'user does not have edit permission' => [ $out ];
 
-		$request = $this->getMock( WebRequest::class );
+		$request = $this->createMock( WebRequest::class );
 		$request->expects( $this->once() )
 			->method( 'getCheck' )
 			->with( 'diff' )
@@ -54,7 +54,7 @@ class OutputPageEditabilityTest extends TestCase {
 
 		$out = $this->newOutputPage();
 		$out->setRevisionId( 123 );
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getLatestRevID' )
 			->willReturn( 321 );
@@ -88,13 +88,13 @@ class OutputPageEditabilityTest extends TestCase {
 		MediaWikiServices::getInstance()->getPermissionManager()
 			->overrideUserRightsForTesting( $user, [ 'edit' ] );
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( true );
 		$title->method( 'getRestrictions' )->willReturn( [] );
 
-		$request = $this->getMock( WebRequest::class );
+		$request = $this->createMock( WebRequest::class );
 		$request->expects( $this->once() )
 			->method( 'getCheck' )
 			->with( 'diff' )
@@ -121,13 +121,13 @@ class OutputPageEditabilityTest extends TestCase {
 		MediaWikiServices::getInstance()->getPermissionManager()
 			->overrideUserRightsForTesting( $user, [ 'edit' ] );
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( true );
 
-		$request = $this->getMock( WebRequest::class );
+		$request = $this->createMock( WebRequest::class );
 		$request->expects( $this->once() )
 			->method( 'getCheck' )
 			->with( 'diff' )
@@ -151,13 +151,13 @@ class OutputPageEditabilityTest extends TestCase {
 		MediaWikiServices::getInstance()->getPermissionManager()
 			->overrideUserRightsForTesting( $user, [ 'edit', 'create' ] );
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( false );
 
-		$request = $this->getMock( WebRequest::class );
+		$request = $this->createMock( WebRequest::class );
 		$request->expects( $this->once() )
 			->method( 'getCheck' )
 			->with( 'diff' )

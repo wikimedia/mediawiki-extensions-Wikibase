@@ -27,7 +27,7 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framewo
 	 * @return TermLookup
 	 */
 	private function getTermLookupMock() {
-		$termLookup = $this->getMock( TermLookup::class );
+		$termLookup = $this->createMock( TermLookup::class );
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
@@ -47,7 +47,7 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framewo
 	 * @return TermBuffer
 	 */
 	private function getTermBufferMock() {
-		$termBuffer = $this->getMock( TermBuffer::class );
+		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(

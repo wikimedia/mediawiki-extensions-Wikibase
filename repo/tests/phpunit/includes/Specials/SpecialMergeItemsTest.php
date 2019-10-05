@@ -105,7 +105,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
@@ -128,7 +128,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			new HashSiteStore( TestSites::getSites() )
 		);
 
-		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
+		$exceptionLocalizer = $this->createMock( ExceptionLocalizer::class );
 		$exceptionLocalizer->expects( $this->any() )
 			->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {
@@ -197,12 +197,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( Title::class );
+				$title = $this->createMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );
@@ -244,7 +244,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )

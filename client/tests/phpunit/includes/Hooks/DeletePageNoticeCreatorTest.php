@@ -48,7 +48,7 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 	 * @dataProvider getPageDeleteNoticeHtmlProvider
 	 */
 	public function testGetPageDeleteNoticeHtml( $expected, Title $title, $message ) {
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )

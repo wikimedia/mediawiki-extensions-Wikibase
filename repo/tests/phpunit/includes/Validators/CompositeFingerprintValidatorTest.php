@@ -27,12 +27,12 @@ class CompositeFingerprintValidatorTest extends \PHPUnit\Framework\TestCase {
 		$success = Result::newSuccess();
 		$failure = Result::newError( [ Error::newError( 'Foo!' ) ] );
 
-		$good = $this->getMock( FingerprintValidator::class );
+		$good = $this->createMock( FingerprintValidator::class );
 		$good->expects( $this->any() )
 			->method( 'validateFingerprint' )
 			->will( $this->returnValue( $success ) );
 
-		$bad = $this->getMock( FingerprintValidator::class );
+		$bad = $this->createMock( FingerprintValidator::class );
 		$bad->expects( $this->any() )
 			->method( 'validateFingerprint' )
 			->will( $this->returnValue( $failure ) );

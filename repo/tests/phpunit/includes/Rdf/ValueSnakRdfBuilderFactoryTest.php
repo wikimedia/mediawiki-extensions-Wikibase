@@ -83,7 +83,7 @@ class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 		DedupeBag $expectedDedupe,
 		&$called
 	) {
-		$valueSnakRdfBuilder = $this->getMock( ValueSnakRdfBuilder::class );
+		$valueSnakRdfBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 
 		return function(
 			$mode,

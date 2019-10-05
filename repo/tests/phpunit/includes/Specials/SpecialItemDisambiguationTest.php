@@ -67,7 +67,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				],
 			],
 		];
-		$mock = $this->getMock( EntitySearchHelper::class );
+		$mock = $this->createMock( EntitySearchHelper::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getRankedSearchResults' )
@@ -96,7 +96,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return LanguageNameLookup
 	 */
 	private function getMockLanguageNameLookup() {
-		$mock = $this->getMock( LanguageNameLookup::class );
+		$mock = $this->createMock( LanguageNameLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( '<LANG>' ) );

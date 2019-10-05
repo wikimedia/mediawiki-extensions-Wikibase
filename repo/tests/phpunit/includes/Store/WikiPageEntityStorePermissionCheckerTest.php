@@ -579,7 +579,7 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getTitleLookup() {
-		$lookup = $this->getMock( EntityTitleLookup::class );
+		$lookup = $this->createMock( EntityTitleLookup::class );
 
 		$lookup->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

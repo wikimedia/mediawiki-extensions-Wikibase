@@ -112,7 +112,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				], $text ?: $entityId );
 			} ) );
 
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )
@@ -137,7 +137,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			->method( 'newLabelDescriptionLookup' )
 			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
 
-		$idParser = $this->getMock( EntityIdParser::class );
+		$idParser = $this->createMock( EntityIdParser::class );
 
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
@@ -174,7 +174,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	public function newLabelDescriptionLookup() {
-		$lookup = $this->getMock( LabelDescriptionLookup::class );
+		$lookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getLabel' )

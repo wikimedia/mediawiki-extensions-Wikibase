@@ -90,12 +90,12 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( Title::class );
+				$title = $this->createMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );
@@ -111,7 +111,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
+		$exceptionLocalizer = $this->createMock( ExceptionLocalizer::class );
 		$exceptionLocalizer->expects( $this->any() )
 			->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {
@@ -185,7 +185,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )

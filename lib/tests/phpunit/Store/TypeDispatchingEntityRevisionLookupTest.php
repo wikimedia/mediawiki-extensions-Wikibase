@@ -55,7 +55,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[
 				'property' => function ( EntityRevisionLookup $defaultService ) use ( $id ) {
-					$customService = $this->getMock( EntityRevisionLookup::class );
+					$customService = $this->createMock( EntityRevisionLookup::class );
 					$customService->expects( $this->once() )
 						->method( 'getEntityRevision' )
 						->with( $id )
@@ -86,7 +86,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[
 				'property' => function ( EntityRevisionLookup $defaultService ) use ( $id ) {
-					$customService = $this->getMock( EntityRevisionLookup::class );
+					$customService = $this->createMock( EntityRevisionLookup::class );
 					$customService->expects( $this->once() )
 						->method( 'getLatestRevisionId' )
 						->with( $id )
@@ -108,7 +108,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 	 * @return EntityRevisionLookup
 	 */
 	public function newDefaultService( $expectedMethod, EntityId $expectedId = null ) {
-		$defaultService = $this->getMock( EntityRevisionLookup::class );
+		$defaultService = $this->createMock( EntityRevisionLookup::class );
 
 		if ( $expectedId ) {
 			$defaultService->expects( $this->once() )

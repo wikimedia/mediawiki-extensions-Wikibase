@@ -24,12 +24,12 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 		$localIdTwo = new ItemId( 'Q101' );
 		$foreignIdOne = new ItemId( 'foo:Q200' );
 
-		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$localPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->atLeastOnce() )
 			->method( 'prefetch' )
 			->with( [ $localIdOne, $localIdTwo ] );
 
-		$fooPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$fooPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$fooPrefetcher->expects( $this->atLeastOnce() )
 			->method( 'prefetch' )
 			->with( [ $foreignIdOne ] );
@@ -46,7 +46,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 		$localId = new ItemId( 'Q100' );
 		$foreignId = new ItemId( 'foo:Q200' );
 
-		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$localPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->atLeastOnce() )
 			->method( 'prefetch' )
 			->with( [ $localId ] );
@@ -61,10 +61,10 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenEntityIdFromKnownRepo_purgeCallsPurgeOnPrefetcherForThatRepository() {
 		$foreignId = new ItemId( 'foo:Q200' );
 
-		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$localPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->never() )->method( 'purge' );
 
-		$fooPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$fooPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$fooPrefetcher->expects( $this->atLeastOnce() )
 			->method( 'purge' )
 			->with( $foreignId );
@@ -80,7 +80,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenEntityIdFromUnknownRepo_purgeDoesNotDelegateCall() {
 		$foreignId = new ItemId( 'foo:Q200' );
 
-		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$localPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->never() )->method( 'purge' );
 
 		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [
@@ -91,10 +91,10 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testPurgeAllRequestsAllPrefetchersToPurgeTheirCaches() {
-		$localPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$localPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$localPrefetcher->expects( $this->atLeastOnce() )->method( 'purgeAll' );
 
-		$fooPrefetcher = $this->getMock( EntityPrefetcher::class );
+		$fooPrefetcher = $this->createMock( EntityPrefetcher::class );
 		$fooPrefetcher->expects( $this->atLeastOnce() )->method( 'purgeAll' );
 
 		$dispatchingPrefetcher = new DispatchingEntityPrefetcher( [

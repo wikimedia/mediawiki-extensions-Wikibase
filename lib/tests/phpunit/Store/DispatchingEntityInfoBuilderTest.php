@@ -38,14 +38,14 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testCollectEntityInfoMergesEntityInfoFromAllBuilders() {
-		$localBuilder = $this->getMock( EntityInfoBuilder::class );
+		$localBuilder = $this->createMock( EntityInfoBuilder::class );
 		$localBuilder->expects( $this->any() )
 			->method( 'collectEntityInfo' )
 			->will( $this->returnValue( new EntityInfo( [
 				'Q11' => [ 'id' => 'Q11', 'type' => 'item' ],
 			] ) ) );
 
-		$otherBuilder = $this->getMock( EntityInfoBuilder::class );
+		$otherBuilder = $this->createMock( EntityInfoBuilder::class );
 		$otherBuilder->expects( $this->any() )
 			->method( 'collectEntityInfo' )
 			->will( $this->returnValue( new EntityInfo( [

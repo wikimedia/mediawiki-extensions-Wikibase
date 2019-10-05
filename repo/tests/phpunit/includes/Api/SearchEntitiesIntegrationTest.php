@@ -160,7 +160,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return ConfigurableTermSearchInteractor
 	 */
 	private function newConfigurableTermSearchInteractor() {
-		$interactor = $this->getMock( ConfigurableTermSearchInteractor::class );
+		$interactor = $this->createMock( ConfigurableTermSearchInteractor::class );
 		$interactor->method( 'searchForEntities' )->willReturnCallback(
 			function ( $text, $languageCode, $entityType, array $termTypes ) {
 				try {
@@ -180,7 +180,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return EntityLookup
 	 */
 	private function newEntityLookup() {
-		$lookup = $this->getMock( EntityLookup::class );
+		$lookup = $this->createMock( EntityLookup::class );
 		$lookup->method( 'hasEntity' )->willReturn( true );
 
 		return $lookup;
@@ -190,7 +190,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function newEntityTitleLookup() {
-		$lookup = $this->getMock( EntityTitleLookup::class );
+		$lookup = $this->createMock( EntityTitleLookup::class );
 		$lookup->method( 'getTitleForId' )->willReturn( $this->getMock( Title::class ) );
 
 		return $lookup;
@@ -208,7 +208,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			->method( 'getFetchLanguageCodes' )
 			->will( $this->returnValue( [ 'phpunit_lang' ] ) );
 
-		$factory = $this->getMock( LanguageFallbackChainFactory::class );
+		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 		$factory->method( 'newFromLanguage' )->willReturn( $fallbackChain );
 		$factory->method( 'newFromLanguageCode' )->willReturn( $fallbackChain );
 

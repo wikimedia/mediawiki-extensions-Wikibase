@@ -21,7 +21,7 @@ class DataValueFactoryTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function newInstance() {
-		$deserializer = $this->getMock( Deserializer::class );
+		$deserializer = $this->createMock( Deserializer::class );
 		$deserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->will( $this->returnCallback( function( array $data ) {

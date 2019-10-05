@@ -44,7 +44,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenInstantiatorForEntityType_factoryUsesIt() {
-		$dummyVisualizer = $this->getMock( EntityDiffVisualizer::class );
+		$dummyVisualizer = $this->createMock( EntityDiffVisualizer::class );
 
 		$factory = $this->newFactory( [
 			'item' => function () use ( $dummyVisualizer ) {
@@ -80,7 +80,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ 'non-string key' => [
 				123 => function () {
-					return $this->getMock( EntityDiffVisualizer::class );
+					return $this->createMock( EntityDiffVisualizer::class );
 				}
 			] ],
 			[ 'not a callable' => [ 'item' => 'WOOO' ] ],

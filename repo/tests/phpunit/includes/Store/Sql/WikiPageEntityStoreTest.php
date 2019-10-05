@@ -293,7 +293,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 2 ) )
 			->method( 'entityUpdated' );
 		$watcher->expects( $this->never() )
@@ -345,7 +345,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 2 ) )
 			->method( 'entityUpdated' );
 		$watcher->expects( $this->never() )
@@ -389,7 +389,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		$item = new Item();
-		$invalidItemContent = $this->getMock( ItemContent::class );
+		$invalidItemContent = $this->createMock( ItemContent::class );
 		$invalidItemContent->expects( $this->once() )
 			->method( 'isValid' )
 			->will( $this->returnValue( false ) );
@@ -517,7 +517,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// This serializer will yield different (but valid) serializations
 		// for the same content by appending junk.
-		$storageEntitySerializer = $this->getMock( Serializer::class );
+		$storageEntitySerializer = $this->createMock( Serializer::class );
 		$storageEntitySerializer->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( $object ) use ( $oldWikibaseServices ) {
@@ -527,7 +527,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					+ [ 'serializationArtifact' => $c++ ];
 			} ) );
 
-		$wikibaseServices = $this->getMock( WikibaseServices::class );
+		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
 		// Point all WikibaseServices mock methods we don't care about to the real methods
 		$wikibaseServiceMethods = ( new ReflectionClass( WikibaseServices::class ) )->getMethods();
@@ -559,7 +559,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 2 ) )
 			->method( 'entityUpdated' );
 		$watcher->expects( $this->never() )
@@ -583,7 +583,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 1 ) )
 			->method( 'redirectUpdated' );
 		$watcher->expects( $this->never() )
@@ -633,7 +633,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 1 ) )
 			->method( 'redirectUpdated' );
 		$watcher->expects( $this->never() )
@@ -1278,7 +1278,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 1 ) )
 			->method( 'entityDeleted' );
 
@@ -1321,7 +1321,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( EntityStoreWatcher::class );
+		$watcher = $this->createMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 1 ) )
 			->method( 'entityDeleted' );
 

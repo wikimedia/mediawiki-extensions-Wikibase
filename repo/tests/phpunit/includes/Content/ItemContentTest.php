@@ -90,11 +90,11 @@ class ItemContentTest extends EntityContentTestCase {
 	public function provideInvalidConstructorArguments() {
 		$holder = new EntityInstanceHolder( new Item() );
 		$redirect = new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) );
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 
 		$propertyHolder = new EntityInstanceHolder( Property::newFromType( 'string' ) );
 
-		$badTitle = $this->getMock( Title::class );
+		$badTitle = $this->createMock( Title::class );
 		$badTitle->method( 'getContentModel' )
 			->will( $this->returnValue( 'bad content model' ) );
 		$badTitle->method( 'exists' )
@@ -164,7 +164,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$nsLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		$itemNs = $nsLookup->getEntityNamespace( 'item' );
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'getFullText' )
 			->will( $this->returnValue( $targetId->getSerialization() ) );

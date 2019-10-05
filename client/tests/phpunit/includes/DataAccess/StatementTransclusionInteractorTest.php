@@ -225,7 +225,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityRevisionLookup
 	 */
 	private function getEntityRevisionLookup() {
-		$lookup = $this->getMock( EntityRevisionLookup::class );
+		$lookup = $this->createMock( EntityRevisionLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
@@ -253,7 +253,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter( $format ) {
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

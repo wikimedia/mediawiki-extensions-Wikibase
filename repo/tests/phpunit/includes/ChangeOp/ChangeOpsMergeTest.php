@@ -73,7 +73,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$siteLookup = new HashSiteStore( TestSites::getSites() );
 		}
 		// A validator which makes sure that no site link is for page 'DUPE'
-		$siteLinkUniquenessValidator = $this->getMock( EntityValidator::class );
+		$siteLinkUniquenessValidator = $this->createMock( EntityValidator::class );
 		$siteLinkUniquenessValidator->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnCallback( function( Item $item ) {
@@ -425,7 +425,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->andSiteLink( 'enwiki', 'Foo' )
 			->build();
 
-		$enwiki = $this->getMock( Site::class );
+		$enwiki = $this->createMock( Site::class );
 		$enwiki->expects( $this->once() )
 			->method( 'getGlobalId' )
 			->will( $this->returnValue( 'enwiki' ) );

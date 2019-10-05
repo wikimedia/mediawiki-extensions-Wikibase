@@ -70,7 +70,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		Snak $snak = null,
 		array &$mentioned = []
 	) {
-		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
 			->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
@@ -78,7 +78,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$valueBuilder = $this->getMock( ValueSnakRdfBuilder::class );
+		$valueBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 
 		if ( $snak instanceof PropertyValueSnak ) {
 			$valueBuilder->expects( $this->once() )
@@ -113,7 +113,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		Snak $snak = null,
 		array &$mentioned = []
 	) {
-		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
 			->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
@@ -121,7 +121,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$valueBuilder = $this->getMock( ValueSnakRdfBuilder::class );
+		$valueBuilder = $this->createMock( ValueSnakRdfBuilder::class );
 
 		if ( $snak instanceof PropertyValueSnak ) {
 			$valueBuilder->expects( $this->once() )

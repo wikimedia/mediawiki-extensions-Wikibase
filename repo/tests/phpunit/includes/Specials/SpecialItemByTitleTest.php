@@ -44,7 +44,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockTitleLookup() {
-		$mock = $this->getMock( EntityTitleLookup::class );
+		$mock = $this->createMock( EntityTitleLookup::class );
 
 		$mock->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
@@ -58,7 +58,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return LanguageNameLookup|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockLanguageNameLookup() {
-		$mock = $this->getMock( LanguageNameLookup::class );
+		$mock = $this->createMock( LanguageNameLookup::class );
 
 		$mock->method( 'getName' )
 			->will( $this->returnValue( '<LANG>' ) );

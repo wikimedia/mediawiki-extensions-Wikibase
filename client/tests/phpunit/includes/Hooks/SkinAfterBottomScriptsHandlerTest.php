@@ -114,7 +114,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function mockTitle( $baseURL, $titleText, $earliestRevTimestamp = null ) {
-		$mock = $this->getMock( Title::class );
+		$mock = $this->createMock( Title::class );
 		$mock->expects( $this->any() )
 			->method( 'getFullURL' )
 			->will( $this->returnValue( $baseURL . '/' . str_replace( ' ', '_', $titleText ) ) );

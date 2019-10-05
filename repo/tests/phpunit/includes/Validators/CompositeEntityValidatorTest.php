@@ -26,12 +26,12 @@ class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 		$success = Result::newSuccess();
 		$failure = Result::newError( [ Error::newError( 'Foo!' ) ] );
 
-		$good = $this->getMock( EntityValidator::class );
+		$good = $this->createMock( EntityValidator::class );
 		$good->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $success ) );
 
-		$bad = $this->getMock( EntityValidator::class );
+		$bad = $this->createMock( EntityValidator::class );
 		$bad->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $failure ) );

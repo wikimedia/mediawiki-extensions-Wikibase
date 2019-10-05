@@ -37,7 +37,7 @@ class EntityChangeLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetRecordId() {
-		$change = $this->getMock( EntityChange::class );
+		$change = $this->createMock( EntityChange::class );
 		$change->expects( $this->once() )
 			->method( 'getId' )
 			->will( $this->returnValue( 42 ) );

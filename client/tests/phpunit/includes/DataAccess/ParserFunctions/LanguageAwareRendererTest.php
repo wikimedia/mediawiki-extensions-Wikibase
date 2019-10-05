@@ -210,7 +210,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup( $entityAccessLimit ) {
-		$lookup = $this->getMock( EntityLookup::class );
+		$lookup = $this->createMock( EntityLookup::class );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnValue( $this->getMock( StatementListProvider::class ) ) );
@@ -222,7 +222,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter() {
-		$snakFormatter = $this->getMock( SnakFormatter::class );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

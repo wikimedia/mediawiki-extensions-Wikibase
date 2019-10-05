@@ -71,7 +71,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 				new PropertyDataTypeLookupException( new PropertyId( 'P666' ) ) );
 		}
 
-		$typeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$typeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$typeLookup->expects( $this->atLeastOnce() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $getDataTypeIdForPropertyResult );
@@ -136,7 +136,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return ValueFormatter
 	 */
 	private function getMockFormatter( $value ) {
-		$formatter = $this->getMock( ValueFormatter::class );
+		$formatter = $this->createMock( ValueFormatter::class );
 		$formatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( $value ) );
@@ -226,7 +226,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getDummyPropertyValueSnakFormatter( $format = 'test' ) {
-		$typeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$typeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
 		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )

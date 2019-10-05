@@ -60,7 +60,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$mock = $this->getMock( EntityLookup::class );
+		$mock = $this->createMock( EntityLookup::class );
 
 		$item = $this->getTestItem();
 		$mock->expects( $this->exactly( 10 ) )
@@ -87,7 +87,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityIdPager
 	 */
 	private function getEntityIdPager() {
-		$mock = $this->getMock( EntityIdPager::class );
+		$mock = $this->createMock( EntityIdPager::class );
 
 		$itemIds = [
 			$this->getTestItemId(),

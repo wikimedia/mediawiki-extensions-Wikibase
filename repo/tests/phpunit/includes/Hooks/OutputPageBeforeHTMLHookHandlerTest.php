@@ -67,7 +67,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->userLanguageLookup = $this->createMock( UserLanguageLookup::class );
 		$this->contentLanguages = new StaticContentLanguages( [ 'en', 'es', 'ru' ] );
 		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
-		$this->languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$this->languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$this->outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class );
 		$this->entityFactory = $this->createMock( EntityFactory::class );
 		$this->editability = $this->mockEditability();
@@ -212,7 +212,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newUserLanguageLookup() {
-		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
+		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
 		$userLanguageLookup->expects( $this->any() )
 			->method( 'getUserSpecifiedLanguages' )
 			->will( $this->returnValue( [] ) );
@@ -240,7 +240,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @return \PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getEntityRevisionLookupReturningEntity( $itemId ): EntityRevisionLookup {
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
@@ -273,7 +273,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function mockEditability( $permissive = true ) {
-		$editability = $this->getMock( OutputPageEditability::class );
+		$editability = $this->createMock( OutputPageEditability::class );
 		$editability->method( 'validate' )->willReturn( $permissive );
 		return $editability;
 	}

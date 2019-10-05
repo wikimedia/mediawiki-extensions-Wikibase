@@ -52,7 +52,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 * @return EntityTitleStoreLookup
 	 */
 	private function getEntityTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleStoreLookup::class );
+		$titleLookup = $this->createMock( EntityTitleStoreLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -72,7 +72,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getEntityPermissionChecker( array $permissions = null ) {
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
 		$checkAction = function( $user, $action ) use ( $permissions ) {
 			if ( $permissions === null

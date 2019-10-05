@@ -26,7 +26,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	private function newTimeParserFactory( ParserOptions $options = null ) {
-		$monthNameProvider = $this->getMock( MonthNameProvider::class );
+		$monthNameProvider = $this->createMock( MonthNameProvider::class );
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnValue( [

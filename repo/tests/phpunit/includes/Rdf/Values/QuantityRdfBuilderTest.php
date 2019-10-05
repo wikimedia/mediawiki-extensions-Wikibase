@@ -237,7 +237,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getConverter( $result ) {
-		$mockStorage = $this->getMock( UnitStorage::class );
+		$mockStorage = $this->createMock( UnitStorage::class );
 		$mockStorage->method( 'getConversion' )->willReturn( $result );
 		return new UnitConverter( $mockStorage, 'http://acme/' );
 	}

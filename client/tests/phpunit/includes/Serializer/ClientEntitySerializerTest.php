@@ -37,7 +37,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			->method( 'extractPreferredValue' )
 			->will( $this->returnValue( [ 'source' => '<SOURCE>' ] ) );
 
-		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( '<DATATYPE>' ) );

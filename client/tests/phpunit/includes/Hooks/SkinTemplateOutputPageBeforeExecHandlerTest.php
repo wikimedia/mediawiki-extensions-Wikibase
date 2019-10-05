@@ -109,7 +109,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
 	 * @return SkinFallbackTemplate
 	 */
 	private function getTemplate( $languageUrls, &$actualLanguageUrls, &$actualWbeditlanglinks = null ) {
-		$template = $this->getMock( SkinFallbackTemplate::class );
+		$template = $this->createMock( SkinFallbackTemplate::class );
 
 		$template->expects( $this->any() )
 			->method( 'get' )
@@ -137,7 +137,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
 	 * @return Skin
 	 */
 	private function getSkin( array $noexternallanglinks = null ) {
-		$skin = $this->getMock( SkinTemplate::class );
+		$skin = $this->createMock( SkinTemplate::class );
 
 		$output = new OutputPage( $this->getContext() );
 		$output->setProperty( 'noexternallanglinks', $noexternallanglinks );
@@ -163,7 +163,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
 	private function getContext() {
 		$request = new FauxRequest( [ 'action' => 'view' ] );
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->will( $this->returnValue( true ) );
@@ -183,7 +183,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
-		$context = $this->getMock( IContextSource::class );
+		$context = $this->createMock( IContextSource::class );
 		$context->expects( $this->any() )
 			->method( 'canUseWikiPage' )
 			->will( $this->returnValue( true ) );

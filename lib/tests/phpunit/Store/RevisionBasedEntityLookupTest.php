@@ -96,7 +96,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityRevisionLookup
 	 */
 	private function newEntityLookupExceptionThrowingRevisionLookup() {
-		$revisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
@@ -133,7 +133,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityRevisionLookup
 	 */
 	private function newBadExceptionThrowingRevisionLookup() {
-		$revisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )

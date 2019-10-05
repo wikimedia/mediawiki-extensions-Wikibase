@@ -58,7 +58,7 @@ class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 	public function testFormatEntityId( SiteLink $siteLink = null, Term $label = null, $expected ) {
 		$id = new ItemId( 'Q1' );
 
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->with( $id )
@@ -67,7 +67,7 @@ class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 				: null
 			) );
 
-		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->with( $id )

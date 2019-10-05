@@ -40,7 +40,7 @@ class VocabularyUriFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider unitProvider
 	 */
 	public function testFormat( $unit, $expected ) {
-		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {

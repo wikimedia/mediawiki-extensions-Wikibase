@@ -109,7 +109,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 		// Make 'WikiPageEntityMetaDataAccessor' service not an implementation
 		// of EntityPrefetcher interface
 		$container->redefineService( 'WikiPageEntityMetaDataAccessor', function () {
-			return $this->getMock( WikiPageEntityMetaDataAccessor::class );
+			return $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		} );
 
 		$this->expectException( LogicException::class );

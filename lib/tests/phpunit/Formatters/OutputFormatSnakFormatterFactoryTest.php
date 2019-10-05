@@ -53,7 +53,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 			new LanguageFallbackChainFactory()
 		);
 
-		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( $dataType ) );
@@ -72,7 +72,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return ValueFormatter
 	 */
 	public function makeMockValueFormatter( $format ) {
-		$mock = $this->getMock( ValueFormatter::class );
+		$mock = $this->createMock( ValueFormatter::class );
 
 		$mock->expects( $this->any() )
 			->method( 'format' )
@@ -91,7 +91,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return SnakFormatter
 	 */
 	public function makeMockSnakFormatter( $format ) {
-		$mock = $this->getMock( SnakFormatter::class );
+		$mock = $this->createMock( SnakFormatter::class );
 
 		$mock->expects( $this->any() )
 			->method( 'formatSnak' )

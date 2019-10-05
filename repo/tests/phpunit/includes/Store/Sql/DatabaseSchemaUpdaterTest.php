@@ -24,9 +24,9 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 	 * Extremely simple test making sure this isn't going to blow up.
 	 */
 	public function testDoSchemaUpdate() {
-		$store = $this->getMock( Store::class );
+		$store = $this->createMock( Store::class );
 
-		$db = $this->getMock( IMaintainableDatabase::class );
+		$db = $this->createMock( IMaintainableDatabase::class );
 
 		$db->expects( $this->atLeastOnce() )
 			->method( 'getType' )

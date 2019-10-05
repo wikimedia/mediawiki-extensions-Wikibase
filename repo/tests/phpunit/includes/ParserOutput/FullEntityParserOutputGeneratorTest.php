@@ -436,7 +436,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookupMock() {
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

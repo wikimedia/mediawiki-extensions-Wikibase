@@ -165,7 +165,7 @@ class TermSqlIndexSearchFieldsClearerTest extends \MediaWikiTestCase {
 
 	public function testClearBatch_OnClearedTable_NoUpdates() {
 		$dbr = wfGetDB( DB_REPLICA );
-		$dbw = $this->getMock( IDatabase::class );
+		$dbw = $this->createMock( IDatabase::class );
 		$dbw->expects( $this->never() )->method( 'update' );
 
 		$clearer = $this->getClearer();

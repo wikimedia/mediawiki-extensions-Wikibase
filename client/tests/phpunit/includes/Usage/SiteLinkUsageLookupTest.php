@@ -70,7 +70,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 	 * @return TitleFactory
 	 */
 	private function getTitleFactory() {
-		$titleFactory = $this->getMock( TitleFactory::class );
+		$titleFactory = $this->createMock( TitleFactory::class );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
 			->will( $this->returnCallback( function( $text ) {

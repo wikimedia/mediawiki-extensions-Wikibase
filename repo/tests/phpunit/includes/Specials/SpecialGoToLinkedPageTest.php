@@ -38,7 +38,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
-		$mock = $this->getMock( SiteLinkLookup::class );
+		$mock = $this->createMock( SiteLinkLookup::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getLinks' )
@@ -69,7 +69,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return EntityRedirectLookup
 	 */
 	private function getEntityRedirectLookup() {
-		$mock = $this->getMock( EntityRedirectLookup::class );
+		$mock = $this->createMock( EntityRedirectLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getRedirectForEntityId' )
 			->will( $this->returnCallback( function( ItemId $id ) {
@@ -87,7 +87,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return EntityIdParser
 	 */
 	private function getEntityIdParser() {
-		$mock = $this->getMock( EntityIdParser::class );
+		$mock = $this->createMock( EntityIdParser::class );
 		$mock->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->returnCallback( function( $itemString ) {
@@ -105,7 +105,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$mock = $this->getMock( EntityLookup::class );
+		$mock = $this->createMock( EntityLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'hasEntity' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {

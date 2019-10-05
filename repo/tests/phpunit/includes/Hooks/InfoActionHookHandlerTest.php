@@ -111,13 +111,13 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	private function newHookHandler( array $subscriptions, IContextSource $context ) {
 		$itemId = new ItemId( 'Q4' );
 
-		$subLookup = $this->getMock( SubscriptionLookup::class );
+		$subLookup = $this->createMock( SubscriptionLookup::class );
 		$subLookup->expects( $this->once() )
 			->method( 'getSubscribers' )
 			->with( $itemId )
 			->will( $this->returnValue( $subscriptions ) );
 
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )
 			->with( $context->getTitle() )
@@ -149,7 +149,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$site->addInterwikiId( 'en' );
 		$site->setLinkPath( 'https://en.wikipedia.org/wiki/$1' );
 
-		$siteLookup = $this->getMock( SiteLookup::class );
+		$siteLookup = $this->createMock( SiteLookup::class );
 
 		$siteLookup->expects( $this->any() )
 			->method( 'getSite' )
@@ -162,7 +162,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @return IContextSource
 	 */
 	private function getContext() {
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 
 		$title->expects( $this->any() )
 			->method( 'exists' )

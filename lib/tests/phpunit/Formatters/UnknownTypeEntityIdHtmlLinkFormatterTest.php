@@ -90,7 +90,7 @@ class UnknownTypeEntityIdHtmlLinkFormatterTest extends TestCase {
 		$title->method( 'isLocal' )
 			->willReturn( true );
 
-		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup
 			->expects( $this->once() )
 			->method( 'getTitleForId' )

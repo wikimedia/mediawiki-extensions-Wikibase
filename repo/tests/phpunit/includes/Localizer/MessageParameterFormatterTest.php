@@ -65,7 +65,7 @@ class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return ValueFormatter
 	 */
 	private function getMockValueFormatter() {
-		$mock = $this->getMock( ValueFormatter::class );
+		$mock = $this->createMock( ValueFormatter::class );
 		$mock->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback(
@@ -84,7 +84,7 @@ class MessageParameterFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getMockIdFormatter() {
-		$mock = $this->getMock( EntityIdFormatter::class );
+		$mock = $this->createMock( EntityIdFormatter::class );
 		$mock->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback(

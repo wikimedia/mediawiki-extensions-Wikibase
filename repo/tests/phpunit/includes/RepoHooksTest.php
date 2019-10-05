@@ -109,7 +109,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 			$namespace = NS_TALK;
 		}
 
-		$title = $this->getMock( Title::class );
+		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getNamespace' )
 			->willReturn( $namespace );
@@ -119,7 +119,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 
 		$outputPage = new OutputPage( $context );
 
-		$skin = $this->getMock( SkinTemplate::class );
+		$skin = $this->createMock( SkinTemplate::class );
 		$this->getSettings()->setSetting( 'termboxEnabled', $useNewTermbox );
 		RepoHooks::onBeforePageDisplayMobile(
 			$outputPage,
@@ -308,7 +308,7 @@ XML
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$out = new OutputPage( $context );
 
-		$parserOutput = $this->getMock( ParserOutput::class );
+		$parserOutput = $this->createMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( 5 ) )
 			->method( 'getExtensionData' )
 			->will( $this->returnCallback( function ( $key ) use ( $altLinks ) {

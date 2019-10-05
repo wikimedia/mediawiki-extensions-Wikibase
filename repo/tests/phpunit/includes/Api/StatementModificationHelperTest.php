@@ -115,7 +115,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetStatementFromEntity_reportsErrorForInvalidEntity() {
-		$entity = $this->getMock( EntityDocument::class );
+		$entity = $this->createMock( EntityDocument::class );
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
@@ -135,7 +135,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testApplyChangeOp_validatesAndAppliesChangeOp() {
-		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp = $this->createMock( ChangeOp::class );
 
 		$changeOp->expects( $this->once() )
 			->method( 'validate' )
@@ -152,7 +152,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp = $this->createMock( ChangeOp::class );
 
 		$changeOp->method( 'validate' )
 			->will( $this->returnValue( Result::newError( [] ) ) );
@@ -169,7 +169,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp = $this->createMock( ChangeOp::class );
 
 		$changeOp->method( 'validate' )
 			->will( $this->returnValue( Result::newSuccess() ) );

@@ -61,7 +61,7 @@ class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
 		$container = $this->newRepositoryServiceContainer();
 
 		$container->defineService( 'EntityRevisionLookup', function () {
-			return $this->getMock( EntityRevisionLookup::class );
+			return $this->createMock( EntityRevisionLookup::class );
 		} );
 
 		return $container;
@@ -116,13 +116,13 @@ class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
 	 * @return PerRepositoryServiceContainer
 	 */
 	private function getRepositoryServiceContainerForEventTest( $event ) {
-		$watcherService = $this->getMock( EntityStoreWatcher::class );
+		$watcherService = $this->createMock( EntityStoreWatcher::class );
 		$watcherService->expects( $this->atLeastOnce() )->method( $event );
 
-		$unusedWatcherService = $this->getMock( EntityStoreWatcher::class );
+		$unusedWatcherService = $this->createMock( EntityStoreWatcher::class );
 		$unusedWatcherService->expects( $this->never() )->method( $event );
 
-		$nonWatcherService = $this->getMock( stdClass::class );
+		$nonWatcherService = $this->createMock( stdClass::class );
 
 		$container = $this->newRepositoryServiceContainer();
 		$container->defineService( 'watcherService', function () use ( $watcherService ) {

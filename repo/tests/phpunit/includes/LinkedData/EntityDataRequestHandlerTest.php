@@ -79,12 +79,12 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	protected function newHandler() {
 		$mockRepository = EntityDataTestProvider::getMockRepository();
 
-		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
+		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
 
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

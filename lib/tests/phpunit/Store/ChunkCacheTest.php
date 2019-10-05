@@ -110,7 +110,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 		$data = $this->getTestData();
 
 		$realStore = new MockChunkAccess( $data );
-		$store = $this->getMock( ChunkAccess::class );
+		$store = $this->createMock( ChunkAccess::class );
 		$store->method( 'loadChunk' )
 			->withConsecutive( ...array_merge( ...array_map(
 				function ( $action ) {

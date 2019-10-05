@@ -63,12 +63,12 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
 	 * @return LabelPrefetchHookHandlers
 	 */
 	private function getLabelPrefetchHookHandlers( $prefetchTerms, array $termTypes, array $languageCodes ) {
-		$termBuffer = $this->getMock( TermBuffer::class );
+		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
 			->will( $this->returnCallback( $prefetchTerms ) );
 
-		$idLookup = $this->getMock( EntityIdLookup::class );
+		$idLookup = $this->createMock( EntityIdLookup::class );
 		$idLookup->expects( $this->atLeastOnce() )
 			->method( 'getEntityIds' )
 			->will( $this->returnCallback( [ $this, 'titlesToIds' ] ) );

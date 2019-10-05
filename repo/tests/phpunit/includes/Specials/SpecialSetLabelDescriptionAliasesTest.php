@@ -385,7 +385,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$error = Status::newFatal( 'permission error' );
 
-		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
+		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$permissionChecker->method( $this->anything() )
 			->willReturn( $error );
 

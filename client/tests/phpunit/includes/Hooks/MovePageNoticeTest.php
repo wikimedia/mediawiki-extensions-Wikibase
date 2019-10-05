@@ -51,7 +51,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 	 * @dataProvider getMovePageNoticeCaseProvider
 	 */
 	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle ) {
-		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )
@@ -76,7 +76,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 				->method( 'addModules' )
 				->with( 'wikibase.client.miscStyles' );
 
-		$movePageForm = $this->getMock( MovePageForm::class );
+		$movePageForm = $this->createMock( MovePageForm::class );
 		$movePageForm->expects( $this->once() )
 				->method( 'getOutput' )
 				->will( $this->returnValue( $outputPage ) );

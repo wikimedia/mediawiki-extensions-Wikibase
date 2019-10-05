@@ -288,7 +288,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			],
 		] );
 
-		$lookup = $this->getMock( SiteLinkLookup::class );
+		$lookup = $this->createMock( SiteLinkLookup::class );
 		$lookup->expects( $this->any() )
 				->method( 'getItemIdForSiteLink' )
 				->will( $this->returnValue( null ) );
@@ -361,7 +361,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	private function getSiteLinkLookup() {
 		$itemId = new ItemId( self::TEST_ITEM_ID );
 
-		$lookup = $this->getMock( SiteLinkLookup::class );
+		$lookup = $this->createMock( SiteLinkLookup::class );
 		$lookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $itemId ) );
@@ -393,14 +393,14 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	private function getUsageAccumulator() {
-		return $this->getMock( UsageAccumulator::class );
+		return $this->createMock( UsageAccumulator::class );
 	}
 
 	/**
 	 * @return SidebarLinkBadgeDisplay
 	 */
 	private function getSidebarLinkBadgeDisplay() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->method( 'getLabel' )
 			->with( new ItemId( self::BADGE_ITEM_ID ) )
 			->will( $this->returnValue( new Term( 'en', self::BADGE_ITEM_LABEL ) ) );

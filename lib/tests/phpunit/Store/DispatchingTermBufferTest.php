@@ -54,7 +54,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider entityIdsFromDifferentReposProvider
 	 */
 	public function testPrefetchTermsGroupsEntityIdsByRepo( array $ids, array $callsPerRepo ) {
-		$fooTermBuffer = $this->getMock( TermBuffer::class );
+		$fooTermBuffer = $this->createMock( TermBuffer::class );
 		$fooTermBuffer->expects( $this->exactly( $callsPerRepo['foo'] ) )
 			->method( 'prefetchTerms' )
 			->with( $this->callback( function ( array $ids ) {
@@ -67,7 +67,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 				return true;
 			} ) );
 
-		$localTermBuffer = $this->getMock( TermBuffer::class );
+		$localTermBuffer = $this->createMock( TermBuffer::class );
 		$localTermBuffer->expects( $this->exactly( $callsPerRepo[''] ) )
 			->method( 'prefetchTerms' )
 			->with( $this->callback( function ( array $ids ) {
@@ -188,7 +188,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider getLabelsParamsProvider
 	 */
 	public function testGetTermsOfType_prefetchesTerms( $entityId, $languageCodes ) {
-		$termBuffer = $this->getMock( TermBuffer::class );
+		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with( [ $entityId ], [ 'label' ], $languageCodes );
@@ -225,7 +225,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function getTermBufferWithTerms( $terms ) {
-		$termBuffer = $this->getMock( TermBuffer::class );
+		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->method( 'getPrefetchedTerm' )
 			->will( $this->returnCallback( function ( EntityId $entityId, $termType, $languageCode ) use ( $terms ) {
 				return $terms[$termType][$languageCode];

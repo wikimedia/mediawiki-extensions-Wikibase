@@ -27,11 +27,11 @@ class DispatchingEntityDiffVisualizerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testDispatchesRequestToPerEntityTypeVisualizer() {
-		$itemVisualizer = $this->getMock( EntityDiffVisualizer::class );
+		$itemVisualizer = $this->createMock( EntityDiffVisualizer::class );
 		$itemVisualizer->method( 'visualizeEntityContentDiff' )
 			->willReturn( 'ITEM DIFF' );
 
-		$propertyVisualizer = $this->getMock( EntityDiffVisualizer::class );
+		$propertyVisualizer = $this->createMock( EntityDiffVisualizer::class );
 		$propertyVisualizer->method( 'visualizeEntityContentDiff' )
 			->willReturn( 'PrOPERTY DIFF' );
 

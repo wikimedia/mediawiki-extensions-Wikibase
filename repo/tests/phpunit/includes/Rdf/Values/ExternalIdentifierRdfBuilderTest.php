@@ -39,7 +39,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddValue() {
-		$uriPatternProvider = $this->getMock( PropertyInfoProvider::class );
+		$uriPatternProvider = $this->createMock( PropertyInfoProvider::class );
 		$uriPatternProvider->expects( $this->any() )
 			->method( 'getPropertyInfo' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
@@ -92,7 +92,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testAddValue_entitySourceBasedFederation() {
-		$uriPatternProvider = $this->getMock( PropertyInfoProvider::class );
+		$uriPatternProvider = $this->createMock( PropertyInfoProvider::class );
 		$uriPatternProvider->expects( $this->any() )
 			->method( 'getPropertyInfo' )
 			->will( $this->returnCallback( function( PropertyId $id ) {

@@ -18,7 +18,7 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 
 	public function testReturnsValidResult_WhenValidatesEntityDocument() {
 		/** @var EntityDocument $entityDocument */
-		$entityDocument = $this->getMock( EntityDocument::class );
+		$entityDocument = $this->createMock( EntityDocument::class );
 		$nullChangeOp = new NullChangeOp();
 
 		$result = $nullChangeOp->validate( $entityDocument );
@@ -28,7 +28,7 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 
 	public function testDoesNotCallAnyMethodOnEntity_WhenApplied() {
 		/** @var EntityDocument|PHPUnit_Framework_MockObject_MockObject $entityDocument */
-		$entityDocument = $this->getMock( EntityDocument::class );
+		$entityDocument = $this->createMock( EntityDocument::class );
 		$nullChangeOp = new NullChangeOp();
 
 		$this->expectNoMethodWillBeEverCalledOn( $entityDocument );

@@ -55,7 +55,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $this->getMockTitle() ) );
@@ -107,7 +107,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'continue' => 0
 		], $params );
 
-		$mock = $this->getMock( EntitySearchHelper::class );
+		$mock = $this->createMock( EntitySearchHelper::class );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'getRankedSearchResults' )
 			->with(
@@ -126,7 +126,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getMockPropertyDataTypeLookup() {
-		$mock = $this->getMock( PropertyDataTypeLookup::class );
+		$mock = $this->createMock( PropertyDataTypeLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->willReturn( 'PropertyDataType' );

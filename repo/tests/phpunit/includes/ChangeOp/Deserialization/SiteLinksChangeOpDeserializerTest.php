@@ -151,7 +151,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenTitleNotFoundOnSite_createEntityChangeOpThrowsException() {
-		$site = $this->getMock( Site::class );
+		$site = $this->createMock( Site::class );
 		$site->method( 'getGlobalId' )
 			->will( $this->returnValue( self::SITE_ID ) );
 		$site->method( 'getGroup' )

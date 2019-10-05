@@ -114,7 +114,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		$entityRevisions = $this->makeEntityRevisions( $ids );
 
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $missingIds, $redirectedIds ) {
@@ -173,7 +173,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityIdPager
 	 */
 	public function makeIdPager( array $ids, $entityType = null ) {
-		$pager = $this->getMock( EntityIdPager::class );
+		$pager = $this->createMock( EntityIdPager::class );
 
 		$offset = 0;
 
@@ -238,7 +238,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockPropertyDataTypeLookup()
 		);
 
-		$exceptionHandler = $this->getMock( ExceptionHandler::class );
+		$exceptionHandler = $this->createMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( count( $ids ) ) )
 			->method( 'handleException' );
 
@@ -254,7 +254,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getMockPropertyDataTypeLookup() {
-		$mock = $this->getMock( PropertyDataTypeLookup::class );
+		$mock = $this->createMock( PropertyDataTypeLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
@@ -268,7 +268,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityRevisionLookup
 	 */
 	private function getEntityRevisionLookupThrows( Exception $ex ) {
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$entityRevisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $ex ) {
@@ -482,7 +482,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$dumper = $this->newDumpGenerator( $ids, $missingIds );
 		$pager = $this->makeIdPager( $ids );
 
-		$exceptionHandler = $this->getMock( ExceptionHandler::class );
+		$exceptionHandler = $this->createMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( count( $missingIds ) ) )
 			->method( 'handleException' );
 
@@ -508,7 +508,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$dumper = $this->newDumpGenerator( $ids );
 		$pager = $this->makeIdPager( $ids );
 
-		$progressReporter = $this->getMock( MessageReporter::class );
+		$progressReporter = $this->createMock( MessageReporter::class );
 		$progressReporter->expects( $this->exactly( count( $ids ) / 10 ) )
 			->method( 'reportMessage' );
 

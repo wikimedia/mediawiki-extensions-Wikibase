@@ -39,7 +39,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return RecentChangeFactory
 	 */
 	private function newRecentChangeFactoryHelper( $centralIdLookup ) {
-		$siteLookup = $this->getMock( SiteLookup::class );
+		$siteLookup = $this->createMock( SiteLookup::class );
 
 		$lang = Language::factory( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteLookup, 'testwiki' );

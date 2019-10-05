@@ -71,7 +71,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
-		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
 			->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
@@ -118,7 +118,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
 
-		$mentionTracker = $this->getMock( EntityMentionListener::class );
+		$mentionTracker = $this->createMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
 			->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {

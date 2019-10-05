@@ -26,7 +26,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 	use PHPUnit4And6Compat;
 
 	public function provideFormatSnak() {
-		$formatterUrlExpander = $this->getMock( SnakUrlExpander::class );
+		$formatterUrlExpander = $this->createMock( SnakUrlExpander::class );
 
 		$formatterUrlExpander->expects( $this->any() )
 			->method( 'expandUrl' )
@@ -87,7 +87,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 	 * @dataProvider provideFormatSnak_ParameterTypeException
 	 */
 	public function testFormatSnak_ParameterTypeException( $snak ) {
-		$urlExpander = $this->getMock( SnakUrlExpander::class );
+		$urlExpander = $this->createMock( SnakUrlExpander::class );
 		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
 
 		$this->expectException( ParameterTypeException::class );
@@ -95,7 +95,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 	}
 
 	public function testGetFormat() {
-		$urlExpander = $this->getMock( SnakUrlExpander::class );
+		$urlExpander = $this->createMock( SnakUrlExpander::class );
 		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
 
 		$this->assertSame( SnakFormatter::FORMAT_WIKI, $formatter->getFormat() );

@@ -139,7 +139,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 	 * @return ChangeOp
 	 */
 	private function newChangeOp() {
-		$changeOp = $this->getMock( ChangeOp::class );
+		$changeOp = $this->createMock( ChangeOp::class );
 
 		$changeOp->method( 'validate' )
 			->willReturnCallback( function( Item $item ) {

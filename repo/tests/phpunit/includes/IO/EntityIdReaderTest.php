@@ -131,7 +131,7 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 			new PropertyId( 'P42' ),
 		];
 
-		$exceptionHandler = $this->getMock( ExceptionHandler::class );
+		$exceptionHandler = $this->createMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( 2 ) ) //two bad lines in EntityIdReaderTest.bad.txt
 			->method( 'handleException' );
 
