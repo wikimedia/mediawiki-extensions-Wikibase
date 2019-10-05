@@ -17,7 +17,7 @@ class HTMLContentLanguageFieldTest extends \MediaWikiTestCase {
 	 */
 	public function testDoesNotAllowToSetOptions_WhenCreated( $params ) {
 
-		$this->setExpectedException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class );
 		$this->createField( $params );
 	}
 

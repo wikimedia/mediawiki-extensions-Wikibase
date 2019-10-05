@@ -98,7 +98,7 @@ class EntityExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideValidate_exception()
 	 */
 	public function testValidate_exception( $value, $type ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
 		$validator->validate( $value );

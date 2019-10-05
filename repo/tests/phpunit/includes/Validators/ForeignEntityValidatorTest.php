@@ -25,7 +25,7 @@ class ForeignEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidRepositorySettingsProvider
 	 */
 	public function testGivenInvalidRepositorySettings_exceptionIsThrown( $settings ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ForeignEntityValidator( $settings );
 	}
 
@@ -49,7 +49,7 @@ class ForeignEntityValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidValidateArgumentProvider
 	 */
 	public function testGivenNotAnEntityId_validateThrowsException( $notAnEntityId ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$validator = new ForeignEntityValidator( [] );
 		$validator->validate( $notAnEntityId );
 	}

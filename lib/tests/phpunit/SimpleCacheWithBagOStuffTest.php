@@ -53,7 +53,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 		$prefix = '@somePrefix_';
 		$inner = new HashBagOStuff();
 
-		$this->setExpectedException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class );
 		new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
 	}
 
@@ -140,7 +140,7 @@ class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 	public function testSecretCanNotBeEmpty() {
 		$inner = new HashBagOStuff();
 
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		new SimpleCacheWithBagOStuff( $inner, 'prefix_', '' );
 	}
 

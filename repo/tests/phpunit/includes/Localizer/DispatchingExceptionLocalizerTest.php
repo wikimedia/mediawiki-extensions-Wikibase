@@ -70,7 +70,7 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 			'ParseException' => new ParseExceptionLocalizer(),
 		];
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$localizer = new DispatchingExceptionLocalizer( $localizers );
 		$localizer->getExceptionMessage( new RuntimeException( 'oops!' ) );

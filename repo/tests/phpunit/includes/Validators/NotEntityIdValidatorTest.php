@@ -24,7 +24,7 @@ class NotEntityIdValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( $errorCode ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new NotEntityIdValidator( new BasicEntityIdParser(), $errorCode );
 	}
 

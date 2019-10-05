@@ -77,7 +77,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testInvalidConstructorArguments( array $contentModelIds, array $callbacks ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new EntityContentFactory(
 			$contentModelIds,
@@ -296,7 +296,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		$this->assertFalse( $factory->isEntityContentModel( 'this-does-not-exist' ) );
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$factory->getContentHandlerForType( 'foo' );
 	}
 
@@ -309,7 +309,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$this->assertEquals( $model, $handler->getModelID() );
 		}
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$factory->getEntityHandlerForContentModel( 'foo' );
 	}
 

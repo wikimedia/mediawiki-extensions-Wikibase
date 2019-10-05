@@ -90,7 +90,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCas
 		$urlExpander = $this->getMock( SnakUrlExpander::class );
 		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
 
-		$this->setExpectedException( ParameterTypeException::class );
+		$this->expectException( ParameterTypeException::class );
 		$formatter->formatSnak( $snak );
 	}
 

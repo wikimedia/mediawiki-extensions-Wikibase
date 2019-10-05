@@ -18,7 +18,7 @@ class LatestRevisionIdResultTest extends TestCase {
 	public function testMap_NoHandlersProvided_ThrowsLogicException() {
 		$someResult = LatestRevisionIdResult::nonexistentEntity();
 
-		$this->setExpectedException( \LogicException::class );
+		$this->expectException( \LogicException::class );
 		$someResult->map();
 	}
 
@@ -133,22 +133,22 @@ class LatestRevisionIdResultTest extends TestCase {
 	}
 
 	public function testConcreteRevision_NotAnIntegerRevisionId_ThrowsAnException() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		LatestRevisionIdResult::concreteRevision( '1' );
 	}
 
 	public function testConcreteRevision_ZeroRevisionId_ThrowsAnException() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		LatestRevisionIdResult::concreteRevision( 0 );
 	}
 
 	public function testRedirect_NotAnIntegerRevisionId_ThrowsAnException() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		LatestRevisionIdResult::redirect( '1', $this->someEntityId() );
 	}
 
 	public function testRedirect_ZeroRevisionId_ThrowsAnException() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		LatestRevisionIdResult::redirect( 0, $this->someEntityId() );
 	}
 

@@ -83,7 +83,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testInvalidConstruction_deserializeFactoryCallbacks() {
-		$this->setExpectedException( ParameterElementTypeException::class );
+		$this->expectException( ParameterElementTypeException::class );
 		new SingleEntitySourceServices(
 			$this->newGenericServices(),
 			new BasicEntityIdParser(),
@@ -98,7 +98,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testInvalidConstruction_entityMetaDataAccessorCallbacks() {
-		$this->setExpectedException( ParameterElementTypeException::class );
+		$this->expectException( ParameterElementTypeException::class );
 		new SingleEntitySourceServices(
 			$this->newGenericServices(),
 			new BasicEntityIdParser(),

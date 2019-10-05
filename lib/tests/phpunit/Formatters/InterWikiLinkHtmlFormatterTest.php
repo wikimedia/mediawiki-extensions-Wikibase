@@ -61,7 +61,7 @@ class InterWikiLinkHtmlFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new CommonsLinkFormatter();
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

@@ -41,7 +41,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testGivenInvalidArguments_constructorThrowsException( array $args ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new RepositoryDefinitions( $args, $this->getEntityTypeDefinitions() );
 	}
@@ -146,7 +146,7 @@ class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenSameEntityTypeDefinedForMultitpleRepos_exceptionIsThrown() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$irrelevantDefinitions = [ 'database' => 'foo', 'base-uri' => 'http://acme.test/concept/', 'prefix-mapping' => [] ];
 

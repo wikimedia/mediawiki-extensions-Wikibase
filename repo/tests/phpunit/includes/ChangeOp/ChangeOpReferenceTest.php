@@ -302,7 +302,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		Reference $reference,
 		$referenceHash
 	) {
-		$this->setExpectedException( ChangeOpException::class );
+		$this->expectException( ChangeOpException::class );
 
 		$changeOpReference = new ChangeOpReference(
 			$guid,

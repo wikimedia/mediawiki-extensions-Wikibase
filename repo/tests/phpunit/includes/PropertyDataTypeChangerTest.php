@@ -79,7 +79,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
-		$this->setExpectedException( StorageException::class );
+		$this->expectException( StorageException::class );
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
 	}
 

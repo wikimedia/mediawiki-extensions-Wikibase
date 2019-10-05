@@ -47,7 +47,7 @@ class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testConstructorThrowsException( array $dataTypes, $languageCode ) {
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 		new DataTypeSelector( $dataTypes, $languageCode );
 	}
 

@@ -40,7 +40,7 @@ class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testConstructorThrowsException( array $argument ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DataTypeFactory( $argument );
 	}
 
@@ -72,7 +72,7 @@ class DataTypeFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetUnknownType() {
 		$instance = new DataTypeFactory( [] );
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$instance->getType( 'unknownTypeId' );
 	}
 

@@ -66,7 +66,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		array $siteLinkChanges,
 		$otherChanges
 	) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new EntityDiffChangedAspects( $labelChanges, $descriptionChanges, $statementChanges, $siteLinkChanges, $otherChanges );
 	}
@@ -184,7 +184,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 			$entityDiffChangedAspectsSerialization
 		);
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 		unserialize( $entityDiffChangedAspectsSerialization );
 	}
 

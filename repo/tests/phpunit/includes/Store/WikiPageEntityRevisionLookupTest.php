@@ -314,7 +314,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			false
 		);
 
-		$this->setExpectedException( StorageException::class );
+		$this->expectException( StorageException::class );
 		$lookup->getEntityRevision( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER );
 	}
 

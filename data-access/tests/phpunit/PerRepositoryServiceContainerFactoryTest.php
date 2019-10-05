@@ -68,7 +68,7 @@ class PerRepositoryServiceContainerFactoryTest extends \PHPUnit\Framework\TestCa
 	public function testGivenUnknownRepository_newContainerThrowsException() {
 		$factory = $this->getRepositoryServiceContainerFactory();
 
-		$this->setExpectedException( UnknownForeignRepositoryException::class );
+		$this->expectException( UnknownForeignRepositoryException::class );
 
 		$factory->newContainer( 'foo' );
 	}

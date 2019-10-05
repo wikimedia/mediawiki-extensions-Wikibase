@@ -69,7 +69,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 			$this->newEntityRevisionLookup()
 		);
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$store->saveEntity( Property::newFromType( 'string' ), 'summary', $this->newUser() );
 	}
 

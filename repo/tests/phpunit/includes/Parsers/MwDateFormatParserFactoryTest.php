@@ -47,17 +47,17 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	}
 
 	public function testGetMwDateFormatParserWithInvalidLanguageCode() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->factory->getMwDateFormatParser( null );
 	}
 
 	public function testGetMwDateFormatParserWithInvalidFormat() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->factory->getMwDateFormatParser( 'en', null );
 	}
 
 	public function testGetMwDateFormatParserWithInvalidFormatType() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->factory->getMwDateFormatParser( 'en', 'dmy', null );
 	}
 
@@ -212,7 +212,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	 */
 	public function testParseWithInvalidInputs( $input ) {
 		$parser = $this->factory->getMwDateFormatParser();
-		$this->setExpectedException( ParseException::class );
+		$this->expectException( ParseException::class );
 		$parser->parse( $input );
 	}
 

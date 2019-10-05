@@ -21,13 +21,13 @@ class BuilderBasedDataTypeValidatorFactoryTest extends \PHPUnit\Framework\TestCa
 	use PHPUnit4And6Compat;
 
 	public function testInvalidConstructorArgument() {
-		$this->setExpectedException( ParameterElementTypeException::class );
+		$this->expectException( ParameterElementTypeException::class );
 		new BuilderBasedDataTypeValidatorFactory( [ 'invalid' ] );
 	}
 
 	public function testUnknownPropertyType() {
 		$factory = new BuilderBasedDataTypeValidatorFactory( [] );
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$factory->getValidators( 'unknown' );
 	}
 
@@ -35,7 +35,7 @@ class BuilderBasedDataTypeValidatorFactoryTest extends \PHPUnit\Framework\TestCa
 		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
 			return 'invalid';
 		} ] );
-		$this->setExpectedException( PostconditionException::class );
+		$this->expectException( PostconditionException::class );
 		$factory->getValidators( 'id' );
 	}
 
@@ -50,7 +50,7 @@ class BuilderBasedDataTypeValidatorFactoryTest extends \PHPUnit\Framework\TestCa
 		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
 			return [ 'invalid' ];
 		} ] );
-		$this->setExpectedException( PostconditionException::class );
+		$this->expectException( PostconditionException::class );
 		$factory->getValidators( 'id' );
 	}
 

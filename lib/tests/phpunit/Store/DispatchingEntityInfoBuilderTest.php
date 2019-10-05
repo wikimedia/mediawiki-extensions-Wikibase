@@ -32,7 +32,7 @@ class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testGivenInvalidArguments_constructorThrowsException( array $args ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new DispatchingEntityInfoBuilder( $args );
 	}

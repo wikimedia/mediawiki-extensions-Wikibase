@@ -91,7 +91,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit\Framework\TestCase {
 		$options = new FormatterOptions();
 		$builders = $this->getWikibaseSnakFormatterBuilders();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builders->newExternalIdentifierFormatter( 'unknown', $options );
 	}
 

@@ -69,7 +69,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function testConstructionWithBadDetailsFormatter() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DifferencesSnakVisualizer(
 			$this->newEntityIdLabelFormatter(),
 			$this->newSnakFormatter( '', 'qwertyuiop' ),
@@ -79,7 +79,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function testConstructionWithBadTerseFormatter() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DifferencesSnakVisualizer(
 			$this->newEntityIdLabelFormatter(),
 			$this->newSnakFormatter(),

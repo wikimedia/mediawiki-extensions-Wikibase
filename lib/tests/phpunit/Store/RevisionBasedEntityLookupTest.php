@@ -88,7 +88,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenEntityLookupExceptionIsThrown_getEntityPassesItAlong() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( UnresolvedEntityRedirectException::class );
+		$this->expectException( UnresolvedEntityRedirectException::class );
 		$entityLookup->getEntity( new ItemId( 'Q1' ) );
 	}
 
@@ -118,14 +118,14 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenEntityLookupExceptionIsThrown_hasEntityPassesItAlong() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( UnresolvedEntityRedirectException::class );
+		$this->expectException( UnresolvedEntityRedirectException::class );
 		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
 	}
 
 	public function testWhenBadExceptionIsThrown_hasEntityRethrowsAsEntityLookupException() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newBadExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
 	}
 
@@ -149,7 +149,7 @@ class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenBadExceptionIsThrown_getEntityRethrowsAsEntityLookupException() {
 		$entityLookup = new RevisionBasedEntityLookup( $this->newBadExceptionThrowingRevisionLookup() );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$entityLookup->getEntity( new ItemId( 'Q1' ) );
 	}
 

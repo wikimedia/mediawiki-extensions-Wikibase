@@ -90,7 +90,7 @@ class RepositorySpecificDataValueDeserializerFactoryTest extends \PHPUnit\Framew
 
 		$deserializer = $factory->getDeserializer( 'foo' );
 
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 
 		$deserializer->deserialize( [ 'type' => 'wikibase-entityid', 'value' => [ 'entity-type' => 'item', 'numeric-id' => 3 ] ] );
 	}

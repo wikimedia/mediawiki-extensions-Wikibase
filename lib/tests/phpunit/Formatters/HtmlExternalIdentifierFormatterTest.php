@@ -81,7 +81,7 @@ class HtmlExternalIdentifierFormatterTest extends \PHPUnit\Framework\TestCase {
 		$urlExpander = $this->getMock( SnakUrlExpander::class );
 		$formatter = new HtmlExternalIdentifierFormatter( $urlExpander );
 
-		$this->setExpectedException( ParameterTypeException::class );
+		$this->expectException( ParameterTypeException::class );
 		$formatter->formatSnak( $snak );
 	}
 

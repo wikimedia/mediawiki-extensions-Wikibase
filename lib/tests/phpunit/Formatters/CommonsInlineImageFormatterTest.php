@@ -80,7 +80,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 		$formatter = $this->newSubjectInstance();
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

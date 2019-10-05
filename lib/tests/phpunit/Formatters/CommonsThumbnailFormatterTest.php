@@ -42,7 +42,7 @@ class CommonsThumbnailFormatterTest extends MediaWikiTestCase {
 
 	public function testFormatError() {
 		$formatter = new CommonsThumbnailFormatter();
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( 'Image.jpg' );
 	}
 

@@ -33,7 +33,7 @@ class WikibaseContentLanguagesTest extends MediaWikiTestCase {
 		$test1Languages = new StaticContentLanguages( [ 'test1' ] );
 		$wcl = new WikibaseContentLanguages( [ 'test1' => $test1Languages ] );
 
-		$this->setExpectedException( OutOfRangeException::class );
+		$this->expectException( OutOfRangeException::class );
 		$wcl->getContentLanguages( 'test2' );
 	}
 

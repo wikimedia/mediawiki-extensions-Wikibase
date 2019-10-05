@@ -36,7 +36,7 @@ class DispatchingTermSearchInteractorFactoryTest extends \PHPUnit\Framework\Test
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testGivenInvalidArguments_constructorThrowsException( $factories ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 
 		new DispatchingTermSearchInteractorFactory( $factories );
 	}

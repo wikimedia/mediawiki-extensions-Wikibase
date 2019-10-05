@@ -142,7 +142,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetEntityIdForLinkedTitle_doesNotAcceptObjects() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->siteLinkTable->getEntityIdForLinkedTitle( 'enwiki', new TitleValue( 0, 'Beer' ) );
 	}
 

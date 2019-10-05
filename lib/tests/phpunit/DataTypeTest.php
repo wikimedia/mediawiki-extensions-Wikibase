@@ -21,7 +21,7 @@ class DataTypeTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testConstructorThrowsException( $propertyType, $valueType ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DataType( $propertyType, $valueType );
 	}
 

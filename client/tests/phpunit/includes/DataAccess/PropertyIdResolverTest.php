@@ -78,7 +78,7 @@ class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
 	public function testResolvePropertyIdWithInvalidInput_throwsException( $propertyLabelOrId ) {
 		$propertyIdResolver = $this->getPropertyIdResolver();
 
-		$this->setExpectedException( PropertyLabelNotResolvedException::class );
+		$this->expectException( PropertyLabelNotResolvedException::class );
 
 		$propertyIdResolver->resolvePropertyId( $propertyLabelOrId, 'en' );
 	}

@@ -448,7 +448,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	}
 
 	public function testSetRedirect_noPermission() {
-		$this->setExpectedException( ItemMergeException::class );
+		$this->expectException( ItemMergeException::class );
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 

@@ -271,7 +271,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testSetRedirect_noPermission() {
-		$this->setExpectedException( RedirectCreationException::class );
+		$this->expectException( RedirectCreationException::class );
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 

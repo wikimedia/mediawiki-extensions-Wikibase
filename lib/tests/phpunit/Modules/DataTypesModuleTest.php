@@ -130,7 +130,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testConstructorErrors( array $definition, $caseDescription ) {
 		$this->setName( 'Instantiation raises exception in case ' . $caseDescription );
-		$this->setExpectedException( Exception::class );
+		$this->expectException( Exception::class );
 
 		new DataTypesModule( $definition );
 	}

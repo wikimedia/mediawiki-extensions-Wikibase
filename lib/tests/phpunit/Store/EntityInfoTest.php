@@ -139,7 +139,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 			$record
 		);
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$info->getEntityInfo( new ItemId( 'Q99' ) );
 	}
 
@@ -210,7 +210,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetLabel_exception( $data ) {
 		$info = new EntityInfo( $data );
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$info->getLabel( new ItemId( 'Q99' ), 'en' );
 	}
 
@@ -219,7 +219,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetLabels_exception( $data ) {
 		$info = new EntityInfo( $data );
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$info->getLabels( new ItemId( 'Q99' ) );
 	}
 
@@ -228,7 +228,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetDescription_exception( $data ) {
 		$info = new EntityInfo( $data );
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$info->getDescription( new ItemId( 'Q99' ), 'en' );
 	}
 
@@ -237,7 +237,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetDescriptions_exception( $data ) {
 		$info = new EntityInfo( $data );
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$info->getDescriptions( new ItemId( 'Q99' ) );
 	}
 
@@ -263,7 +263,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetLabelWithInvalidArray_throwsRuntimeException( $array ) {
 		$info = new EntityInfo( $array );
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$info->getLabel( new ItemId( 'Q99' ), 'en' );
 	}
 
@@ -272,7 +272,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetLabelsWithInvalidArray_throwsRuntimeException( $array ) {
 		$info = new EntityInfo( $array );
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$info->getLabels( new ItemId( 'Q99' ) );
 	}
 
@@ -281,7 +281,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetDescriptionWithInvalidArray_throwsRuntimeException( $array ) {
 		$info = new EntityInfo( $array );
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$info->getDescription( new ItemId( 'Q99' ), 'en' );
 	}
 
@@ -290,7 +290,7 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetDescriptionsWithInvalidArray_throwsRuntimeException( $array ) {
 		$info = new EntityInfo( $array );
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$info->getDescriptions( new ItemId( 'Q99' ) );
 	}
 

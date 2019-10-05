@@ -94,7 +94,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidForeignLookups
 	 */
 	public function testGivenInvalidPropertyInfoLookup_exceptionIsThrown( $lookups ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DispatchingPropertyInfoLookup( $lookups );
 	}
 

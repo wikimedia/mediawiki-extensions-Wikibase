@@ -72,7 +72,7 @@ class CommonsLinkFormatterTest extends \MediaWikiTestCase {
 		$formatter = new CommonsLinkFormatter();
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

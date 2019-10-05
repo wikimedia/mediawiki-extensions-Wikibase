@@ -206,7 +206,7 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 			$this->mockProvider->getMockSnakValidator()
 		);
 
-		$this->setExpectedException( ChangeOpException::class );
+		$this->expectException( ChangeOpException::class );
 		$changeOpQualifier->apply( $entity );
 	}
 

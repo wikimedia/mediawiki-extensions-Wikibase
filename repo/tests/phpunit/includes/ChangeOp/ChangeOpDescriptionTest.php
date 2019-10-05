@@ -221,7 +221,7 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$changeOp = new ChangeOpDescription( 'en', 'Foo', $this->getTermValidatorFactory() );
 		$entity = $this->getMock( EntityDocument::class );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$changeOp->apply( $entity );
 	}
 

@@ -231,7 +231,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNonSnak_validateFails() {
 		$validator = $this->getSnakValidator();
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$validator->validate( null );
 	}
 

@@ -104,7 +104,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 		$expectedDataType
 	) {
 		if ( $expectedDataType === false ) {
-			$this->setExpectedException( PropertyDataTypeLookupException::class );
+			$this->expectException( PropertyDataTypeLookupException::class );
 		}
 
 		$lookup = new PropertyInfoDataTypeLookup( $infoLookup, new NullLogger(), $fallbackLookup );

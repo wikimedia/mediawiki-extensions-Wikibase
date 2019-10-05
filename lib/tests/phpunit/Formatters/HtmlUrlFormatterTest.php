@@ -48,7 +48,7 @@ class HtmlUrlFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = new HtmlUrlFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

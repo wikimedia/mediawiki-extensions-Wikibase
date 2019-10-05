@@ -39,7 +39,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidInteractorConfig
 	 */
 	public function testGivenInvalidInteractorConfig_exceptionIsThrown( array $interactors ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new DispatchingTermSearchInteractor( $interactors );
 	}
 

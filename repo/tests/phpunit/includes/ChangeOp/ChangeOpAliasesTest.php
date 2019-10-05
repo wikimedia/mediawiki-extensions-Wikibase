@@ -247,7 +247,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 
 		$changeOpAliases = new ChangeOpAliases( 'en', [ 'test' ], 'invalidAction', $validatorFactory );
 
-		$this->setExpectedException( ChangeOpException::class );
+		$this->expectException( ChangeOpException::class );
 		$changeOpAliases->apply( $entity );
 	}
 
@@ -255,7 +255,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 		$changeOp = new ChangeOpAliases( 'en', [ 'Foo' ], 'set', $this->getTermValidatorFactory() );
 		$entity = $this->getMock( EntityDocument::class );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$changeOp->apply( $entity );
 	}
 

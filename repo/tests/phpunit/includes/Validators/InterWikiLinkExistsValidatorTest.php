@@ -74,7 +74,7 @@ class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 			'http://does-not.matter/'
 		);
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$validator->validate( 5 );
 	}
 

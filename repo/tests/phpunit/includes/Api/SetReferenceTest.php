@@ -344,7 +344,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @dataProvider provideInvalidSerializations
 	 */
 	public function testInvalidSerialization( $snaksSerialization ) {
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$params = [
 			'action' => 'wbsetreference',
 			'statement' => 'Foo$Guid',

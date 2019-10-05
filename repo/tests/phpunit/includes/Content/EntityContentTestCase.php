@@ -206,7 +206,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	 * @dataProvider provideContentObjectsWithoutId
 	 */
 	public function testGetEntityIdExceptions( EntityContent $content ) {
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$content->getEntityId();
 	}
 
@@ -365,7 +365,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	 */
 	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected = null ) {
 		if ( $expected === null ) {
-			$this->setExpectedException( PatcherException::class );
+			$this->expectException( PatcherException::class );
 		}
 
 		$actual = $base->getPatchedCopy( $patch );

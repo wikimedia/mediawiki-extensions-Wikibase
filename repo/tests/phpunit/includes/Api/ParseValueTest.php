@@ -306,7 +306,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalid
 	 */
 	public function testParse_failure( array $params ) {
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$this->callApiModule( $params );
 	}
 

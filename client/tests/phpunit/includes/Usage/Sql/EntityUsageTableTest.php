@@ -229,7 +229,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	public function testQueryUsages_InvalidArgumentException( $pageId ) {
 		$usageTable = $this->getEntityUsageTable();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$usageTable->queryUsages( $pageId );
 	}
 

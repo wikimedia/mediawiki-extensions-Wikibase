@@ -186,7 +186,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 		);
 
 		// formatter for 'VT:string' should have been removed
-		$this->setExpectedException( FormattingException::class );
+		$this->expectException( FormattingException::class );
 		$formatter->format( new StringValue( 'boo!' ) ); // expecting a FormattingException
 	}
 

@@ -35,7 +35,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 			$this->newDefaultService( 'getEntityRevision' )
 		);
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$lookup->getEntityRevision( new PropertyId( 'P1' ) );
 	}
 

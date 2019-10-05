@@ -263,7 +263,7 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenInvalidValue_formatThrowsException( $value ) {
 		$formatter = $this->getFormatter();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

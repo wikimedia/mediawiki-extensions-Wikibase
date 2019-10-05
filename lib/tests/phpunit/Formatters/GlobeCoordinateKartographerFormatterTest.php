@@ -71,7 +71,7 @@ class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCa
 			false
 		);
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( new StringValue( 'A string is not a coordinate?!' ) );
 	}
 

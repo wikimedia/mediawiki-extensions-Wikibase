@@ -60,7 +60,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidIndexProvider
 	 */
 	public function testConstructionWithInvalidIndex( $invalidIndex ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$this->newChangeOpStatement(
 			$this->mockProvider->makeStatement( 'P7' ),
@@ -242,7 +242,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @param Statement $statement
 	 */
 	public function testApplyInvalidThrowsException( Item $item, Statement $statement ) {
-		$this->setExpectedException( ChangeOpException::class );
+		$this->expectException( ChangeOpException::class );
 
 		$changeOpStatement = $this->newChangeOpStatement( $statement );
 		$changeOpStatement->apply( $item );
@@ -329,7 +329,7 @@ class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidApply
 	 */
 	public function testInvalidApply( EntityDocument $item, ChangeOpStatement $changeOp ) {
-		$this->setExpectedException( ChangeOpException::class );
+		$this->expectException( ChangeOpException::class );
 
 		$changeOp->apply( $item );
 	}

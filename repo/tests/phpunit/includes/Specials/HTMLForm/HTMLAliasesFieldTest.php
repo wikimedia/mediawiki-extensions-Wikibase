@@ -13,7 +13,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 
 	public function testThrowsExceptionIfFilterCallbackParameterIsSet_WhenCreated() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 
 		new HTMLAliasesField(
 			[
@@ -29,7 +29,7 @@ class HTMLAliasesFieldTest extends \MediaWikiTestCase {
 	 * with any type except "text" which it sets internally {@see testSetsTypeToText_WhenCreated}
 	 */
 	public function testThrowsExceptionIfTypeParameterIsSet_WhenCreated() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 
 		new HTMLAliasesField(
 			[

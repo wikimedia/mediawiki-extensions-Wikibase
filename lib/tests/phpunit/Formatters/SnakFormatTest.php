@@ -51,7 +51,7 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetFallbackFormat_invalidFormat() {
 		$snakFormatHelper = new SnakFormat();
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$snakFormatHelper->getFallbackFormat( 'JSON-XML' );
 	}
 

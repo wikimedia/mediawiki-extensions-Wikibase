@@ -67,7 +67,7 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 	public function testValidate_noString() {
 		$validator = new CommonsMediaExistsValidator( $this->getCachingCommonsMediaFileNameLookup() );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$validator->validate( 5 );
 	}
 

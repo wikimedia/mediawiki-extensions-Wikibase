@@ -488,7 +488,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertEquals( $redirect->getEntityId()->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'redirected Q10 to Q1', $logEntry['summary'] );
 
-		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
+		$this->expectException( RevisionedUnresolvedRedirectException::class );
 		$this->repo->getEntity( $q10 );
 	}
 
@@ -576,7 +576,7 @@ class MockRepositoryTest extends TestCase {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
 		$this->repo->putRedirect( $redirect );
 
-		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
+		$this->expectException( RevisionedUnresolvedRedirectException::class );
 		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
 	}
 
@@ -673,7 +673,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertNull( $mock->getRedirectForEntityId( $q5 ), 'not a redirect' );
 		$this->assertEquals( $q5, $mock->getRedirectForEntityId( $q55 ) );
 
-		$this->setExpectedException( EntityRedirectLookupException::class );
+		$this->expectException( EntityRedirectLookupException::class );
 		$mock->getRedirectForEntityId( $q77 );
 	}
 

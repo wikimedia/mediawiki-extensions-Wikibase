@@ -44,7 +44,7 @@ class DispatchingEntityTypeStatementGrouperTest extends \PHPUnit\Framework\TestC
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( array $groupers ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DispatchingEntityTypeStatementGrouper(
 			$this->getStatementGuidParser(),
 			$groupers

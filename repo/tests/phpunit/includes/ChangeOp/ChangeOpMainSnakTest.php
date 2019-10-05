@@ -174,7 +174,7 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidApply
 	 */
 	public function testInvalidApply( EntityDocument $item, ChangeOp $changeOp ) {
-		$this->setExpectedException( ChangeOpException::class );
+		$this->expectException( ChangeOpException::class );
 
 		$changeOp->apply( $item );
 	}

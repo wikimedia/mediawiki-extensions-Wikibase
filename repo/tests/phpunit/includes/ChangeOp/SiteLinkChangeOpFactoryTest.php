@@ -32,7 +32,7 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidBadgeItemIdList
 	 */
 	public function testGivenInvalidAllowedBadgeItemList_constructorThrowsException( array $allowedBadgeItemIds ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new SiteLinkChangeOpFactory( $allowedBadgeItemIds );
 	}
@@ -57,7 +57,7 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenBadgesIsNotListOfItemIds_exceptionIsThrown() {
 		$factory = new SiteLinkChangeOpFactory( [ 'Q100' ] );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$factory->newSetSiteLinkOp( 'enwiki', 'foo', [ 'Q500' ] );
 	}
@@ -65,7 +65,7 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenBadgeNotInTheAllowedList_exceptionIsThrown() {
 		$factory = new SiteLinkChangeOpFactory( [ 'Q100' ] );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$factory->newSetSiteLinkOp( 'enwiki', 'foo', [ new ItemId( 'Q500' ) ] );
 	}

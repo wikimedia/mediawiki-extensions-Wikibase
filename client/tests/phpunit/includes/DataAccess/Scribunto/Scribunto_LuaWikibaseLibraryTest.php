@@ -158,13 +158,13 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testGetEntityInvalidIdType() {
-		$this->setExpectedException( ScribuntoException::class );
+		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->getEntity( [] );
 	}
 
 	public function testGetEntityInvalidEntityId() {
-		$this->setExpectedException( ScribuntoException::class );
+		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
@@ -189,7 +189,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testGetEntity_entityAccessLimitExceeded() {
-		$this->setExpectedException( ScribuntoException::class );
+		$this->expectException( ScribuntoException::class );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
@@ -356,7 +356,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnak_invalidSerialization() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
-		$this->setExpectedException( ScribuntoException::class );
+		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnak( [ 'a' => 'b' ] );
 	}
 
@@ -400,7 +400,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnaks_invalidSerialization() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
-		$this->setExpectedException( ScribuntoException::class );
+		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnaks( [ 'a' => 'b' ] );
 	}
 
@@ -530,7 +530,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'P2', [ 'Q3' ] )
 		);
 
-		$this->setExpectedException( ScribuntoException::class );
+		$this->expectException( ScribuntoException::class );
 		$luaWikibaseLibrary->getReferencedEntityId( 'Q1', 'P2', [ 'Q3' ] );
 	}
 

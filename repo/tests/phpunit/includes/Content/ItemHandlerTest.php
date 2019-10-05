@@ -144,7 +144,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$this->assertEquals( $target->getFullText(), $content->getRedirectTarget()->getFullText() );
 
 		// getEntity() should fail
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 		$content->getEntity();
 	}
 

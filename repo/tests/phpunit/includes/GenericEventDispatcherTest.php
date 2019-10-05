@@ -20,7 +20,7 @@ class GenericEventDispatcherTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testRegisterWatcher_failure() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$watcher = $this->getMock( EntityStoreWatcher::class );
 		$dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\FooBar' );

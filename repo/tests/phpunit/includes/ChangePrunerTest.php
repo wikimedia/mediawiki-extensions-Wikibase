@@ -36,17 +36,17 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	}
 
 	public function testConstructorWithInvalidBatchSize() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ChangePruner( $this->lbFactory, 0, 0, 0, false );
 	}
 
 	public function testConstructorWithInvalidKeepSeconds() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ChangePruner( $this->lbFactory, 1, -1, 0, false );
 	}
 
 	public function testConstructorWithInvalidGraceSeconds() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ChangePruner( $this->lbFactory, 1, 0, -1, false );
 	}
 

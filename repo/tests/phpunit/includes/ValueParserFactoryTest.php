@@ -27,7 +27,7 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidConstructorArgument
 	 */
 	public function testInvalidConstructorArgument( array $valueParsers ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ValueParserFactory( $valueParsers );
 	}
 
@@ -46,7 +46,7 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewParser_withUnknownParserId() {
 		$factory = new ValueParserFactory( [] );
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$factory->newParser( 'unknown', new ParserOptions() );
 	}
 
@@ -55,7 +55,7 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			return 'invalid';
 		} ] );
 
-		$this->setExpectedException( LogicException::class );
+		$this->expectException( LogicException::class );
 		$factory->newParser( 'id', new ParserOptions() );
 	}
 

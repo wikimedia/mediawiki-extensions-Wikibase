@@ -156,7 +156,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideMarkResultSuccessExceptions
 	 */
 	public function testMarkResultSuccessExceptions( $param ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
@@ -1495,7 +1495,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builder->setList( $path, $name, $values, $tag );
 	}
 
@@ -1563,7 +1563,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builder->setValue( $path, $name, $value );
 	}
 
@@ -1653,7 +1653,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builder->appendValue( $path, $key, $value, $tag );
 	}
 

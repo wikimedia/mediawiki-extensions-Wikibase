@@ -424,7 +424,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup = new MockRepository();
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$entityAccessor->getEntityStatements( 'Q123099', 'ffsdfs', $bestStatementsOnly );
 	}
 

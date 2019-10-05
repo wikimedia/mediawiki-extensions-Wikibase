@@ -56,7 +56,7 @@ class WikiLinkExistsValidatorTest extends \MediaWikiIntegrationTestCase {
 	public function testValidate_noString() {
 		$validator = new WikiLinkExistsValidator( 1 );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$validator->validate( 5 );
 	}
 

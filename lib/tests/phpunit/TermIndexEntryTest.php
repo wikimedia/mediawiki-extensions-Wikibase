@@ -37,7 +37,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenInvalidField_constructorThrowsException() {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new TermIndexEntry( [
 			'entityId' => new ItemId( 'Q23' ),
 			'termType' => TermIndexEntry::TYPE_LABEL,
@@ -77,7 +77,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideIncompleteFields
 	 */
 	public function testGivenIncompleteFields_constructorThrowsException( $fields ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new TermIndexEntry( $fields );
 	}
 
@@ -102,7 +102,7 @@ class TermIndexEntryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidValues
 	 */
 	public function testGivenInvalidValues_constructorThrowsException( $fields ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new TermIndexEntry( $fields );
 	}
 

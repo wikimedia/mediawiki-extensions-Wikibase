@@ -159,7 +159,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 	public function testGivenNonEntityContent_serializeContentThrowsException() {
 		$handler = $this->getHandler();
 		$content = new WikitextContent( '' );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$handler->serializeContent( $content );
 	}
 
@@ -391,13 +391,13 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$content = $this->getHandler()->makeEmptyContent();
 		$this->assertTrue( $content->isEmpty(), 'isEmpty' );
 
-		$this->setExpectedException( LogicException::class );
+		$this->expectException( LogicException::class );
 		$content->getEntity();
 	}
 
 	public function testMakeRedirectContent() {
 		// We don't support title based redirects.
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$handler = $this->getHandler();
 		$handler->makeRedirectContent( Title::newFromText( 'X11', $handler->getEntityNamespace() ) );

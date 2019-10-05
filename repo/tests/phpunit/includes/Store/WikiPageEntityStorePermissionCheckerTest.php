@@ -549,7 +549,7 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 	public function testGivenUnknownPermission_getPermissionStatusForEntityThrowsException() {
 		$checker = $this->getPermissionChecker();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$checker->getPermissionStatusForEntity(
 			$this->getTestUser()->getUser(),
@@ -561,7 +561,7 @@ class WikiPageEntityStorePermissionCheckerTest extends \MediaWikiTestCase {
 	public function testGivenUnknownPermission_getPermissionStatusForEntityIdThrowsException() {
 		$checker = $this->getPermissionChecker();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$checker->getPermissionStatusForEntityId(
 			$this->getTestUser()->getUser(),

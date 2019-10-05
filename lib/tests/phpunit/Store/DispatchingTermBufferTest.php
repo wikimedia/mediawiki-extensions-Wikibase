@@ -25,7 +25,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidTermBufferProvider
 	 */
 	public function testGivenInvalidTermBuffers_exceptionIsThrown( array $termBuffers ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new DispatchingTermBuffer( $termBuffers, new NullLogger() );
 	}
 

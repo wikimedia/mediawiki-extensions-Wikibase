@@ -65,7 +65,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideConstructor_failure
 	 */
 	public function testConstructor_failure( array $params ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new AddUsagesForPageJob( $this->getMock( Title::class ), $params );
 	}

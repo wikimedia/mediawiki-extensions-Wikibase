@@ -31,7 +31,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit\Framework\TestCase {
 	 * with any type except "text" which it sets internally {@see testSetsTypeToText_WhenCreated}
 	 */
 	public function testThrowsExceptionIfTypeParameterIsSet_WhenCreated() {
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 
 		$this->createField( [ 'type' => 'some-type', ] );
 	}

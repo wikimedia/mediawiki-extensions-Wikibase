@@ -59,7 +59,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	 * @dataProvider provideInvalidRepositoryNames
 	 */
 	public function testGivenInvalidRepositoryName_constructorThrowsException( $repositoryName ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new TermSqlIndex(
 			new StringNormalizer(),
 			new EntityIdComposer( [] ),
@@ -1894,7 +1894,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityIdFromAnotherRepository_getTermsOfEntitiesThrowsException() {
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getTermsOfEntities( [ new ItemId( 'Q300' ) ] );
 	}
@@ -1902,7 +1902,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityIdFromAnotherRepository_getTermsOfEntityThrowsException() {
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getTermsOfEntity( new ItemId( 'Q300' ) );
 	}
@@ -1910,7 +1910,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityFromAnotherRepository_getEntityTermsThrowsException() {
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getEntityTerms( new Item( new ItemId( 'Q300' ) ) );
 	}
@@ -1921,7 +1921,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q300' ) );
 		$item->setLabel( 'en', 'Foo' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->saveTermsOfEntity( $item );
 	}
@@ -1929,7 +1929,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityFromAnotherRepository_deleteTermsOfEntityThrowsException() {
 		$fooTermIndex = $this->getTermIndexForRepository( 'foo' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->deleteTermsOfEntity( new ItemId( 'Q300' ) );
 	}
@@ -1937,7 +1937,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityIdFromAnotherSource_getTermsOfEntitiesThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getTermsOfEntities( [ new PropertyId( 'P300' ) ] );
 	}
@@ -1945,7 +1945,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityIdFromAnotherSource_getTermsOfEntityThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getTermsOfEntity( new PropertyId( 'P300' ) );
 	}
@@ -1953,7 +1953,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityFromAnotherSource_getEntityTermsThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getEntityTerms( new Property( new PropertyId( 'P300' ), null, 'string' ) );
 	}
@@ -1964,7 +1964,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$property = new Property( new PropertyId( 'P300' ), null, 'string' );
 		$property->setLabel( 'en', 'Foo' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->saveTermsOfEntity( $property );
 	}
@@ -1972,7 +1972,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityFromAnotherSource_deleteTermsOfEntityThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->deleteTermsOfEntity( new PropertyId( 'P300' ) );
 	}
@@ -1980,7 +1980,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityFromAnotherSource_getLabelConflictsThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getLabelConflicts( 'property', [ 'en' => 'some irrelevant label' ] );
 	}
@@ -1988,7 +1988,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	public function testGivenEntityFromAnotherSource_getLabelWithDescriptionConflictsThrowsException() {
 		$fooTermIndex = $this->getTermSqlIndexForSourceOf( 'item' );
 
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 
 		$fooTermIndex->getLabelWithDescriptionConflicts( 'property', [ 'en' => 'some irrelevant label' ],  [ 'en' => 'random description' ] );
 	}

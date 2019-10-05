@@ -63,7 +63,7 @@ class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
 	public function testGetUnknownSetting( array $settings ) {
 		$settingsArray = new SettingsArray( $settings );
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 
 		$settingsArray->getSetting( 'NyanData ALL the way across the sky' );
 	}

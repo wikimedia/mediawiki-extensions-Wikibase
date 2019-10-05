@@ -185,7 +185,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = $this->getFormatter();
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

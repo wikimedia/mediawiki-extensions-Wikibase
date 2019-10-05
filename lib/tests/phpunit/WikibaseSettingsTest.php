@@ -21,7 +21,7 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		if ( WikibaseSettings::isRepoEnabled() ) {
 			$this->assertNotNull( WikibaseSettings::getRepoSettings() );
 		} else {
-			$this->setExpectedException( MWException::class );
+			$this->expectException( MWException::class );
 			WikibaseSettings::getRepoSettings();
 		}
 	}
@@ -30,7 +30,7 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		if ( WikibaseSettings::isClientEnabled() ) {
 			$this->assertNotNull( WikibaseSettings::getClientSettings() );
 		} else {
-			$this->setExpectedException( MWException::class );
+			$this->expectException( MWException::class );
 			WikibaseSettings::getClientSettings();
 		}
 	}

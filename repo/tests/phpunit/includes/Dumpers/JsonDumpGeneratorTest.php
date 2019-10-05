@@ -424,7 +424,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	public function testInvalidSharding( $shardingFactor, $shard ) {
 		$dumper = $this->newDumpGenerator( [] );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 	}

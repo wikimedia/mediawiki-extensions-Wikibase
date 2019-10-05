@@ -44,7 +44,7 @@ class EditPageTest extends WikibaseApiTestCase {
 		$title = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $item->getId() );
 
 		// try to update the item with valid data via the edit action
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$this->doApiRequestWithToken(
 			[
 				'action' => 'edit',

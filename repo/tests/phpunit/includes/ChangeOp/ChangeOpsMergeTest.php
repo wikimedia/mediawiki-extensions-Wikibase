@@ -142,7 +142,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @dataProvider provideInvalidConstruction
 	 */
 	public function testInvalidIgnoreConflicts( Item $from, Item $to, array $ignoreConflicts ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->makeChangeOpsMerge(
 			$from,
 			$to,

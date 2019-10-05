@@ -97,7 +97,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidArray_getHtmlFails( $array ) {
 		$view = $this->newInstance( $array );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$view->getHtml( new StatementList() );
 	}
 

@@ -92,7 +92,7 @@ class PropertyChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenSitelinkFieldInChangeRequest_createEntityChangeOpThrowsException() {
 		$deserializer = $this->getChangeOpDeserializer();
 
-		$this->setExpectedException( ChangeOpDeserializationException::class );
+		$this->expectException( ChangeOpDeserializationException::class );
 
 		$deserializer->createEntityChangeOp( [ 'sitelinks' => [ 'site-link-change-data' ] ] );
 	}

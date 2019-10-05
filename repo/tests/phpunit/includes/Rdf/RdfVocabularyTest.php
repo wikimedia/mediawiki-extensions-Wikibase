@@ -240,7 +240,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
 		}
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$vocab->getNamespaceURI( 'NonExistingNamespaceForGetNamespaceUriTest' );
 	}
 
@@ -255,7 +255,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
 		}
 
-		$this->setExpectedException( OutOfBoundsException::class );
+		$this->expectException( OutOfBoundsException::class );
 		$vocab->getNamespaceURI( 'NonExistingNamespaceForGetNamespaceUriTest' );
 	}
 

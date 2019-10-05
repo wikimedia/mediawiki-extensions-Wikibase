@@ -43,7 +43,7 @@ class EntityLinkFormatterFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider notACallbackProvider
 	 */
 	public function testGivenNotArrayOfCallbacks_throwsException( $notCallbacks ) {
-		$this->setExpectedException( ParameterElementTypeException::class );
+		$this->expectException( ParameterElementTypeException::class );
 		new EntityLinkFormatterFactory( Language::factory( 'en' ), $notCallbacks );
 	}
 
@@ -51,7 +51,7 @@ class EntityLinkFormatterFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider notAStringProvider
 	 */
 	public function testGivenEntityTypeNotAString_getLinkFormatterThrowsException( $notAString ) {
-		$this->setExpectedException( ParameterTypeException::class );
+		$this->expectException( ParameterTypeException::class );
 		( new EntityLinkFormatterFactory( Language::factory( 'en' ), [] ) )
 			->getLinkFormatter( $notAString );
 	}

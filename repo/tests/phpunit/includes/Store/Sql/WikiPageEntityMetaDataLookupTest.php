@@ -517,7 +517,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$metaDataLookup->loadRevisionInformation(
 			[ $entityId ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA
@@ -529,7 +529,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->newMetaDataLookupForSourceBasedFederation( $namespaceLookup );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$metaDataLookup->loadRevisionInformation(
 			[ $entityId ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA
@@ -539,7 +539,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationThrowsException() {
 		$lookup = $this->getWikiPageEntityMetaDataLookup();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$lookup->loadRevisionInformation(
 			[ new ItemId( 'foo:Q123' ) ],
@@ -550,7 +550,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	public function testGivenEntityFromOtherRepository_loadRevisionInformationByRevisionIdThrowsException() {
 		$lookup = $this->getWikiPageEntityMetaDataLookup();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$lookup->loadRevisionInformationByRevisionId(
 			new ItemId( 'foo:Q123' ),
@@ -782,7 +782,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->getWikiPageEntityMetaDataLookup( $namespaceLookup );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$result = $metaDataLookup->loadLatestRevisionIds(
 			[ $entityId ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA
@@ -794,7 +794,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$namespaceLookup = new EntityNamespaceLookup( [] );
 		$metaDataLookup = $this->newMetaDataLookupForSourceBasedFederation( $namespaceLookup );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$result = $metaDataLookup->loadLatestRevisionIds(
 			[ $entityId ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA

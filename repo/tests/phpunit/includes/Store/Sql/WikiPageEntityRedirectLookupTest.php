@@ -101,7 +101,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGetRedirectForEntityId_entityDoesNotExist() {
-		$this->setExpectedException( EntityRedirectLookupException::class );
+		$this->expectException( EntityRedirectLookupException::class );
 		$this->getWikiPageEntityRedirectLookup()->getRedirectForEntityId( new ItemId( 'Q48758903' ) );
 	}
 

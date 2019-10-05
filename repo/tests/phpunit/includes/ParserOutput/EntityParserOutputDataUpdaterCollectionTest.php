@@ -46,7 +46,7 @@ class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\Tes
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testGivenInvalidDataUpdater_constructorThrowsException( array $argument ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new EntityParserOutputDataUpdaterCollection( new ParserOutput(), $argument );
 	}
 

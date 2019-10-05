@@ -62,7 +62,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 			}
 		] );
 
-		$this->setExpectedException( \LogicException::class );
+		$this->expectException( \LogicException::class );
 
 		$factory->newEntityDiffVisualizer( 'item' );
 	}
@@ -71,7 +71,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidConstructorArgs
 	 */
 	public function testGivenInvalidInstantiators_constructorThrowsException( $instantiators ) {
-		$this->setExpectedException( \InvalidArgumentException::class );
+		$this->expectException( \InvalidArgumentException::class );
 
 		$this->newFactory( $instantiators );
 	}

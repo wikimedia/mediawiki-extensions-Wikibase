@@ -34,7 +34,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidDeserializerInstantiators
 	 */
 	public function testGivenInvalidCallbackList_constructorThrowsException( array $deserializerInstantiators ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new EntityChangeOpProvider( $deserializerInstantiators );
 	}
@@ -56,7 +56,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 			}
 		] );
 
-		$this->setExpectedException( ChangeOpDeserializationException::class );
+		$this->expectException( ChangeOpDeserializationException::class );
 
 		$changeOpProvider->newEntityChangeOp( 'other-entity-type', [ 'some change request data' ] );
 	}
@@ -68,7 +68,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 			}
 		] );
 
-		$this->setExpectedException( LogicException::class );
+		$this->expectException( LogicException::class );
 
 		$changeOpProvider->newEntityChangeOp( 'entity-type', [ 'some change request data' ] );
 	}

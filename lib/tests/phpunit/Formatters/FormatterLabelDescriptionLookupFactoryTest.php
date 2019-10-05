@@ -105,7 +105,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 		$termLookup = $this->getMock( TermLookup::class );
 		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$factory->getLabelDescriptionLookup( $options );
 	}
 

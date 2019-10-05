@@ -112,7 +112,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			return $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		} );
 
-		$this->setExpectedException( LogicException::class );
+		$this->expectException( LogicException::class );
 
 		$container->getService( 'EntityPrefetcher' );
 	}

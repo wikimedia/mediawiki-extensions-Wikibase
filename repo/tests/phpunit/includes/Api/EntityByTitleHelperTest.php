@@ -150,7 +150,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 * Makes sure the request will fail if we want normalization for two titles
 	 */
 	public function testGetEntityIdsNormalizationNotAllowed() {
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 
 		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),
@@ -225,7 +225,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider notEnoughInputProvider
 	 */
 	public function testNotEnoughInput( array $sites, array $titles, $normalize ) {
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 
 		$entityByTitleHelper = new EntityByTitleHelper(
 			$this->getApiBaseMock(),

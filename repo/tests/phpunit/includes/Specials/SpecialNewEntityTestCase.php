@@ -79,7 +79,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 			[ 'createpage', 'property-create' ]
 		);
 
-		$this->setExpectedException( \UserBlockedError::class );
+		$this->expectException( \UserBlockedError::class );
 		$this->executeSpecialPage( '', null, null, $user );
 	}
 

@@ -61,7 +61,7 @@ class PropertyContentTest extends EntityContentTestCase {
 
 	public function testConstructorExceptions() {
 		$holder = new EntityInstanceHolder( new Item() );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new PropertyContent( $holder );
 	}
 

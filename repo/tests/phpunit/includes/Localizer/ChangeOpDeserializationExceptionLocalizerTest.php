@@ -27,7 +27,7 @@ class ChangeOpDeserializationExceptionLocalizerTest extends \PHPUnit\Framework\T
 	public function testGivenExceptionOfOtherType_getExceptionMessageThrowsException() {
 		$localizer = new ChangeOpDeserializationExceptionLocalizer();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$localizer->getExceptionMessage( new InvalidArgumentException( 'foo' ) );
 	}
@@ -45,7 +45,7 @@ class ChangeOpDeserializationExceptionLocalizerTest extends \PHPUnit\Framework\T
 	public function testGivenExceptionAndNoLocalizableMessageExists_getExceptionMessageThrowsException() {
 		$localizer = new ChangeOpDeserializationExceptionLocalizer();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$localizer->getExceptionMessage( $this->getExceptionWithoutLocalizableMessage() );
 	}

@@ -39,7 +39,7 @@ class EntityInfoTermLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenEntityNotFound_getLabelThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( TermLookupException::class );
+		$this->expectException( TermLookupException::class );
 		$termLookup->getLabel( new ItemId( 'Q90000' ), 'en' );
 	}
 
@@ -76,7 +76,7 @@ class EntityInfoTermLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testGetLabels_noEntityThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( TermLookupException::class );
+		$this->expectException( TermLookupException::class );
 		$termLookup->getLabels( new ItemId( 'Q90000' ), [ 'x' ] );
 	}
 
@@ -97,7 +97,7 @@ class EntityInfoTermLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testWhenEntityNotFound_getDescriptionThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( TermLookupException::class );
+		$this->expectException( TermLookupException::class );
 		$termLookup->getDescription( new ItemId( 'Q90000' ), 'en' );
 	}
 
@@ -139,7 +139,7 @@ class EntityInfoTermLookupTest extends \PHPUnit\Framework\TestCase {
 	public function testGetDescriptions_noEntityThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( TermLookupException::class );
+		$this->expectException( TermLookupException::class );
 		$termLookup->getDescriptions( new ItemId( 'Q90000' ), [ 'x' ] );
 	}
 

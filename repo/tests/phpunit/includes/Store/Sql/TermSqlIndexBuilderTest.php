@@ -309,7 +309,7 @@ class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 	public function testGivenNotInteger_setFromIdThrowsException( $invalidFromId ) {
 		$builder = $this->getBuilder( [ Item::ENTITY_TYPE ] );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$builder->setFromId( $invalidFromId );
 	}

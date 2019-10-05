@@ -186,7 +186,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenEntityTypeDefinedInMultipleRepos_constructorThrowsException() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$this->newEntitySearchHelper( [ 'item' => [ '', 'foreign' ] ] );
 	}

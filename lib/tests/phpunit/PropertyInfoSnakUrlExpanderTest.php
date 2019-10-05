@@ -134,7 +134,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit\Framework\TestCase {
 		);
 		$urlExpander = new PropertyInfoSnakUrlExpander( $infoProvider );
 
-		$this->setExpectedException( ParameterTypeException::class );
+		$this->expectException( ParameterTypeException::class );
 		$urlExpander->expandUrl( $snak );
 	}
 

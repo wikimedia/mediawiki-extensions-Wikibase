@@ -177,7 +177,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'dieErrorCode' => 'no-entity-id'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -213,7 +213,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'entityId' => isset( $params['entity'] ) ? new ItemId( $params['entity'] ) : null ,
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -264,7 +264,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'newEditEntityCalls' => 0
 		] );
 
-		$this->setExpectedException( LogicException::class );
+		$this->expectException( LogicException::class );
 		$helper->attemptSaveEntity( new Item(), '' );
 	}
 

@@ -105,7 +105,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetPageUrlInvalidThrowsException( array $settings, $page ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$repoLinker->getPageUrl( $page );
 	}
 

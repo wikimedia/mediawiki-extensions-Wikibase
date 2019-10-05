@@ -98,7 +98,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	public function testDecodeBigEntity() {
 		$entity = new Item( new ItemId( 'Q1' ) );
 		$blob = $this->getCodec()->encodeEntity( $entity, CONTENT_FORMAT_JSON );
-		$this->setExpectedException( MWContentSerializationException::class );
+		$this->expectException( MWContentSerializationException::class );
 		$this->getCodec( 6 )->decodeEntity( $blob, CONTENT_FORMAT_JSON );
 	}
 

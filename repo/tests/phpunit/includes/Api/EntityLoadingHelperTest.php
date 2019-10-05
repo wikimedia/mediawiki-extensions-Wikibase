@@ -223,7 +223,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'invalid-entity-id'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -233,7 +233,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieErrorCode' => 'no-entity-id'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity();
 	}
 
@@ -245,7 +245,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieErrorCode' => 'no-such-entity'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 
@@ -261,7 +261,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'unresolved-redirect'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 
@@ -274,7 +274,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'nosuchrevid'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 
@@ -287,7 +287,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			'dieExceptionCode' => 'cant-load-entity-content'
 		] );
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$helper->loadEntity( $id );
 	}
 

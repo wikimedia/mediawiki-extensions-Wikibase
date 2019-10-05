@@ -190,7 +190,7 @@ class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 	 * @dataProvider unSupportedEntityTypesProvider
 	 */
 	public function testGetEntitiesWithoutTerm_unSupportedEntityTypes( array $entityTypes ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$finder = new SqlEntitiesWithoutTermFinder(
 			new ItemIdParser(),

@@ -157,7 +157,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 
 		$dispatchingLookup = new DispatchingEntityRevisionLookup( [ '' => $localLookup, ] );
 
-		$this->setExpectedException( StorageException::class );
+		$this->expectException( StorageException::class );
 		$dispatchingLookup->getEntityRevision( new ItemId( 'Q123' ), 124 );
 	}
 
@@ -165,7 +165,7 @@ class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidForeignLookups
 	 */
 	public function testGivenInvalidForeignLookups_exceptionIsThrown( array $lookups ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new DispatchingEntityRevisionLookup( $lookups );
 	}
 

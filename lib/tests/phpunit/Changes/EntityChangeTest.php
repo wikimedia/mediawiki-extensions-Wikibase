@@ -339,7 +339,7 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testDoesNotSerializeObjects() {
 		$info = [ 'array' => [ 'object' => new stdClass() ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
-		$this->setExpectedException( MWException::class );
+		$this->expectException( MWException::class );
 		$change->getSerializedInfo();
 	}
 

@@ -67,7 +67,7 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 */
 	public function testIsWikibaseEnabledInvalid( $namespace, $excluded, $enabled ) {
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$namespaceChecker->isWikibaseEnabled( $namespace );
 	}
 

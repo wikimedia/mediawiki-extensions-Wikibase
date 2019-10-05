@@ -452,7 +452,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			'item-merge' => false,
 		] ] );
 
-		$this->setExpectedException( PermissionsError::class );
+		$this->expectException( PermissionsError::class );
 
 		$html = $this->executeSpecialMergeItems( $params, $GLOBALS['wgUser'] );
 	}

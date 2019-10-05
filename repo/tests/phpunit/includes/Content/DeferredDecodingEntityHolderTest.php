@@ -84,7 +84,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenEntityWithoutId_getEntityThrowsException() {
 		$holder = $this->newHolder( new Item() );
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$holder->getEntity();
 	}
 
@@ -93,7 +93,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 		$holder = $this->newHolder( $item );
 
 		$holder->getEntity( Item::class );
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$holder->getEntity( Property::class );
 	}
 
@@ -101,7 +101,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 		$item = $this->newEntity();
 		$holder = $this->newHolder( $item, 'property' );
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$holder->getEntity();
 	}
 
@@ -109,7 +109,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 		$item = $this->newEntity();
 		$holder = $this->newHolder( $item, 'property' );
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$holder->getEntity( Property::class );
 	}
 
@@ -117,7 +117,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 		$item = $this->newEntity();
 		$holder = $this->newHolder( $item, 'item', new ItemId( 'Q42' ) );
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$holder->getEntity();
 	}
 
@@ -148,7 +148,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenEntityWithoutId_getEntityIdThrowsException() {
 		$holder = $this->newHolder( new Item() );
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$holder->getEntityId();
 	}
 

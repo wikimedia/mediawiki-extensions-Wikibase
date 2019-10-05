@@ -44,7 +44,7 @@ class ChangeOpApplyExceptionLocalizerTest extends TestCase {
 	public function testGivenExceptionAndNoLocalizableMessageExists_getExceptionMessageThrowsException() {
 		$localizer = new ChangeOpApplyExceptionLocalizer();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$localizer->getExceptionMessage( $this->getExceptionWithoutLocalizableMessage() );
 	}

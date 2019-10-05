@@ -78,13 +78,13 @@ class StatementRankSerializerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenInvalidRank_serializationFails() {
 		$serializer = new StatementRankSerializer();
-		$this->setExpectedException( SerializationException::class );
+		$this->expectException( SerializationException::class );
 		$serializer->serialize( -1 );
 	}
 
 	public function testGivenInvalidSerialization_deserializeFails() {
 		$serializer = new StatementRankSerializer();
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$serializer->deserialize( 'invalid' );
 	}
 

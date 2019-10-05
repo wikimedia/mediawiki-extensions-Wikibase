@@ -237,7 +237,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testGivenInvalidArguments_constructorThrowsException( $databaseName, $repositoryName ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new SqlEntityInfoBuilder(
 			new BasicEntityIdParser(),

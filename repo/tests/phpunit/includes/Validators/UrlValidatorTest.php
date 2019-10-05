@@ -23,7 +23,7 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( array $validators ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new UrlValidator( $validators );
 	}
 
@@ -36,7 +36,7 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 
 	public function testGivenNonString_validateFails() {
 		$validator = new UrlValidator( [] );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$validator->validate( null );
 	}
 

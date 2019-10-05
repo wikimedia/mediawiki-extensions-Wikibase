@@ -105,7 +105,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $format, array $formattersBySnakType, array $formattersByDataType ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		$dataTypeLookup = $this->getDataTypeLookup();
 

@@ -209,7 +209,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		];
 		$dataTypeDefinitions = new DataTypeDefinitions( $definitions );
 
-		$this->setExpectedException( UnexpectedValueException::class );
+		$this->expectException( UnexpectedValueException::class );
 		$dataTypeDefinitions->getExpertModules();
 	}
 

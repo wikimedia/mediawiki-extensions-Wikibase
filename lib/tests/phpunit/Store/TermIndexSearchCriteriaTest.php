@@ -56,7 +56,7 @@ class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenInvalidField_constructorThrowsException() {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new TermIndexSearchCriteria( [
 			'entityType' => Item::ENTITY_TYPE,
 			'termType' => TermIndexEntry::TYPE_LABEL,
@@ -87,7 +87,7 @@ class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidValues
 	 */
 	public function testGivenInvalidValues_constructorThrowsException( $fields ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new TermIndexSearchCriteria( $fields );
 	}
 

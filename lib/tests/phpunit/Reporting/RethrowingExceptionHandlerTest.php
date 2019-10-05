@@ -19,7 +19,7 @@ class RethrowingExceptionHandlerTest extends \PHPUnit\Framework\TestCase {
 	use PHPUnit4And6Compat;
 
 	public function testReportMessage() {
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 
 		$handler = new RethrowingExceptionHandler();
 		$handler->handleException( new RuntimeException(), "test", "Just a test!" );

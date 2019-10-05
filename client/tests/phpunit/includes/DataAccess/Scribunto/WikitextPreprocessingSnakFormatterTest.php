@@ -52,7 +52,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new WikitextPreprocessingSnakFormatter(
 			$mockFormatter,
 			new Parser( [] )

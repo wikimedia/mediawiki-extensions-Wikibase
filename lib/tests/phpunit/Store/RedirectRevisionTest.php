@@ -28,7 +28,7 @@ class RedirectRevisionTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testConstructorThrowsException( $revisionId, $mwTimestamp ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new RedirectRevision( $this->newRedirect(), $revisionId, $mwTimestamp );
 	}
 

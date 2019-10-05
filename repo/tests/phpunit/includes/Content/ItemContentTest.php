@@ -119,7 +119,7 @@ class ItemContentTest extends EntityContentTestCase {
 		EntityRedirect $redirect = null,
 		Title $title = null
 	) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ItemContent( $holder, $redirect, $title );
 	}
 

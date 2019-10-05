@@ -106,7 +106,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 				'custom' => [ 'type' => 'dataType' ],
 			]
 		] );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
 
@@ -133,7 +133,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 				'custom' => [ 'type' => 'propertySet' ],
 			]
 		] );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
 
@@ -160,7 +160,7 @@ class StatementGrouperBuilderTest extends \PHPUnit\Framework\TestCase {
 				'custom' => [ 'type' => 'invalid' ],
 			]
 		] );
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
 

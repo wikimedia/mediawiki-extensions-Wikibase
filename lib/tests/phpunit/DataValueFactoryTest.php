@@ -35,7 +35,7 @@ class DataValueFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenUnknownType_newDataValueFails() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->newInstance()->newDataValue( 'unknown', '' );
 	}
 
@@ -45,17 +45,17 @@ class DataValueFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenNoType_newFromArrayFails() {
-		$this->setExpectedException( IllegalValueException::class );
+		$this->expectException( IllegalValueException::class );
 		$this->newInstance()->newFromArray( [] );
 	}
 
 	public function testGivenNoValue_newFromArrayFails() {
-		$this->setExpectedException( IllegalValueException::class );
+		$this->expectException( IllegalValueException::class );
 		$this->newInstance()->newFromArray( [ 'type' => 'unknown' ] );
 	}
 
 	public function testGivenUnknownType_newFromArrayFails() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->newInstance()->newFromArray( [
 			'type' => 'unknown',
 			'value' => '',

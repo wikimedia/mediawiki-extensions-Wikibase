@@ -118,7 +118,7 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidConstructorArguments
 	 */
 	public function testGivenInvalidArgumentsConstructorThrowsException( $args ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 
 		new DispatchingEntityPrefetcher( $args );
 	}

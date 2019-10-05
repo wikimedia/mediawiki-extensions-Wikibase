@@ -95,7 +95,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		EntityIdFormatterFactory $htmlFormatterFactory,
 		EntityIdFormatterFactory $plainFormatterFactory
 	) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$this->newViewFactory( $htmlFormatterFactory, $plainFormatterFactory );
 	}
 

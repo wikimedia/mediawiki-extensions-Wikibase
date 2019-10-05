@@ -24,7 +24,7 @@ class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( $field ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new DataFieldValidator( $field, new StringLengthValidator( 0, 0 ) );
 	}
 

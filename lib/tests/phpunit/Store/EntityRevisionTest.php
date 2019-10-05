@@ -41,7 +41,7 @@ class EntityRevisionTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testInvalidConstructorArguments( $revisionId, $mwTimestamp ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new EntityRevision( new Item(), $revisionId, $mwTimestamp );
 	}
 
