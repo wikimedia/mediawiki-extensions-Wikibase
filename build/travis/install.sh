@@ -4,12 +4,6 @@ set -x
 
 PHPVERSION=`phpenv version-name`
 
-if [ "${PHPVERSION}" = 'hhvm' ]
-then
-	PHPINI=/etc/hhvm/php.ini
-	echo "hhvm.enable_zend_compat = true" >> $PHPINI
-fi
-
 originalDirectory=$(pwd)
 
 cd ..
