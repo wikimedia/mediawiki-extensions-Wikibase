@@ -70,10 +70,8 @@ class FormatEntitiesTest extends ApiTestCase {
 			'ids' => 'X',
 		];
 
-		$this->setExpectedException(
-			ApiUsageException::class,
-			'Could not find an entity with the ID "X".'
-		);
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'Could not find an entity with the ID "X".' );
 		$this->doApiRequest( $params );
 	}
 

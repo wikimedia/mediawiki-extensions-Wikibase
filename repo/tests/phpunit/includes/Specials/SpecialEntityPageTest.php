@@ -125,7 +125,8 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	public function testGivenInvalidId_pageShowsBadEntityIdError( $subPage, array $requestParams, $idExpectedInErrorMsg ) {
 		$request = new FauxRequest( $requestParams );
 
-		$this->setExpectedException( HttpError::class, "(wikibase-entitypage-bad-id: $idExpectedInErrorMsg)" );
+		$this->expectException( HttpError::class );
+		$this->expectExceptionMessage( "(wikibase-entitypage-bad-id: $idExpectedInErrorMsg)" );
 
 		try {
 			$this->executeSpecialPage( $subPage, $request );
@@ -147,7 +148,8 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 			$nullReturningTitleLookup
 		);
 
-		$this->setExpectedException( HttpError::class, '(wikibase-entitypage-bad-id: Q123)' );
+		$this->expectException( HttpError::class );
+		$this->expectExceptionMessage( '(wikibase-entitypage-bad-id: Q123)' );
 
 		try {
 			( new SpecialPageExecutor() )->executeSpecialPage( $specialEntityPage, 'Q123' );

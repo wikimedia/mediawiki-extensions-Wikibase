@@ -48,7 +48,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		$this->setExpectedException( RuntimeException::class, 'invalid-entity-id' );
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'invalid-entity-id' );
 		$helper->getEntityIdFromString( $invalidEntityIdString );
 	}
 
@@ -118,7 +119,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		$this->setExpectedException( RuntimeException::class, 'no-such-claim' );
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'no-such-claim' );
 		$helper->getStatementFromEntity( 'foo', $entity );
 	}
 
@@ -127,7 +129,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$errorReporter = $this->newApiErrorReporter();
 		$helper = $this->getNewInstance( $errorReporter );
 
-		$this->setExpectedException( RuntimeException::class, 'no-such-claim' );
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'no-such-claim' );
 		$helper->getStatementFromEntity( 'unknown', $entity );
 	}
 
@@ -157,7 +160,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$changeOp->expects( $this->never() )
 			->method( 'apply' );
 
-		$this->setExpectedException( RuntimeException::class, 'modification-failed' );
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'modification-failed' );
 		$helper->applyChangeOp( $changeOp, new Item() );
 	}
 
@@ -173,7 +177,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$changeOp->method( 'apply' )
 			->will( $this->throwException( new ChangeOpException() ) );
 
-		$this->setExpectedException( RuntimeException::class, 'modification-failed' );
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'modification-failed' );
 		$helper->applyChangeOp( $changeOp, new Item() );
 	}
 

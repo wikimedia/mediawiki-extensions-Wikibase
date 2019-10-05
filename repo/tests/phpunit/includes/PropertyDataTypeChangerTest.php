@@ -53,10 +53,8 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
-		$this->setExpectedException(
-			StorageException::class,
-			"Could not load property: P43"
-		);
+		$this->expectException( StorageException::class );
+		$this->expectExceptionMessage( "Could not load property: P43" );
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
 	}
 
@@ -90,10 +88,8 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
-		$this->setExpectedException(
-			InvalidArgumentException::class,
-			"New and old data type must have the same data value type."
-		);
+		$this->expectException( InvalidArgumentException::class );
+		$this->expectExceptionMessage( "New and old data type must have the same data value type." );
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'otherdatatype' );
 	}
 

@@ -290,10 +290,8 @@ class FormatSnakValueTest extends ApiTestCase {
 			'options' => json_encode( [ 'lang' => 'qqx' ] ),
 		];
 
-		$this->setExpectedException(
-			ApiUsageException::class,
-			'The parameters "datatype" and "property" can not be used together.'
-		);
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'The parameters "datatype" and "property" can not be used together.' );
 		$this->doApiRequest( $params );
 	}
 
@@ -326,10 +324,8 @@ class FormatSnakValueTest extends ApiTestCase {
 	 * @dataProvider provideInvalidParameters
 	 */
 	public function testExecute_throwsApiOnInvalidArgumentException( $params ) {
-		$this->setExpectedException(
-			ApiUsageException::class,
-			'An illegal set of parameters have been used.'
-		);
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( 'An illegal set of parameters have been used.' );
 
 		$this->doApiRequest( $params );
 	}

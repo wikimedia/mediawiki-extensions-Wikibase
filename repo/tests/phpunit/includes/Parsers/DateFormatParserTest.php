@@ -204,7 +204,8 @@ class DateFormatParserTest extends StringValueParserTest {
 		$parser = new DateFormatParser( new ParserOptions( [
 			DateFormatParser::OPT_DATE_FORMAT => $format,
 		] ) );
-		$this->setExpectedException( ParseException::class, 'Unsupported date format' );
+		$this->expectException( ParseException::class );
+		$this->expectExceptionMessage( 'Unsupported date format' );
 		$parser->parse( '' );
 	}
 
@@ -259,7 +260,8 @@ class DateFormatParserTest extends StringValueParserTest {
 
 	public function testInvalidInputException() {
 		$parser = new DateFormatParser();
-		$this->setExpectedException( ParseException::class, 'Failed to parse' );
+		$this->expectException( ParseException::class );
+		$this->expectExceptionMessage( 'Failed to parse' );
 		$parser->parse( '' );
 	}
 
@@ -267,7 +269,8 @@ class DateFormatParserTest extends StringValueParserTest {
 		$parser = new DateFormatParser( new ParserOptions( [
 			DateFormatParser::OPT_DATE_FORMAT => 'Y Y',
 		] ) );
-		$this->setExpectedException( ParseException::class, 'Illegal date format' );
+		$this->expectException( ParseException::class );
+		$this->expectExceptionMessage( 'Illegal date format' );
 		$parser->parse( '' );
 	}
 
@@ -279,7 +282,8 @@ class DateFormatParserTest extends StringValueParserTest {
 			DateFormatParser::OPT_DATE_FORMAT => $format,
 			DateFormatParser::OPT_MONTH_NAMES => [ 6 => 'juin' ],
 		] ) );
-		$this->setExpectedException( ParseException::class, 'Non-continuous date format' );
+		$this->expectException( ParseException::class );
+		$this->expectExceptionMessage( 'Non-continuous date format' );
 		$parser->parse( $input );
 	}
 

@@ -469,10 +469,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			new HashSiteStore()
 		);
 
-		$this->setExpectedException(
-			ChangeOpException::class,
-			'Conflicting sitelinks for enwiki, Failed to normalize'
-		);
+		$this->expectException( ChangeOpException::class );
+		$this->expectExceptionMessage( 'Conflicting sitelinks for enwiki, Failed to normalize' );
 
 		$changeOps->apply();
 	}
@@ -487,7 +485,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$to
 		);
 
-		$this->setExpectedException( ChangeOpException::class, 'SiteLink conflict' );
+		$this->expectException( ChangeOpException::class );
+		$this->expectExceptionMessage( 'SiteLink conflict' );
 		$changeOps->apply();
 	}
 
@@ -521,10 +520,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$changeOps = $this->makeChangeOpsMerge( $from, $to );
 
-		$this->setExpectedException(
-			ChangeOpException::class,
-			'The two items cannot be merged because one of them links to the other using the properties: P42'
-		);
+		$this->expectException( ChangeOpException::class );
+		$this->expectExceptionMessage( 'The two items cannot be merged because one of them links to the other using the properties: P42' );
 		$changeOps->apply();
 	}
 
@@ -540,10 +537,8 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$changeOps = $this->makeChangeOpsMerge( $from, $to );
 
-		$this->setExpectedException(
-			ChangeOpException::class,
-			'The two items cannot be merged because one of them links to the other using the properties: P42'
-		);
+		$this->expectException( ChangeOpException::class );
+		$this->expectExceptionMessage( 'The two items cannot be merged because one of them links to the other using the properties: P42' );
 		$changeOps->apply();
 	}
 

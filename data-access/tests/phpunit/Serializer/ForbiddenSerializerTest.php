@@ -20,7 +20,8 @@ class ForbiddenSerializerTest extends \PHPUnit\Framework\TestCase {
 	public function test() {
 		$serializer = new ForbiddenSerializer( 'customMessage' );
 
-		$this->setExpectedException( RuntimeException::class, 'customMessage' );
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'customMessage' );
 		$serializer->serialize( null );
 	}
 
