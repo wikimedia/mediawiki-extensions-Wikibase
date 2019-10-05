@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Formatters\EscapingSnakFormatter;
@@ -20,7 +19,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Daniel Kinzler
  */
 class EscapingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param string $output

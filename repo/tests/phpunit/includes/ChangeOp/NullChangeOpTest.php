@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
@@ -14,7 +13,6 @@ use Wikibase\Repo\ChangeOp\NullChangeOp;
  * @license GPL-2.0-or-later
  */
 class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testReturnsValidResult_WhenValidatesEntityDocument() {
 		/** @var EntityDocument $entityDocument */

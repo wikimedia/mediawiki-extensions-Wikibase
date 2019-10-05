@@ -6,7 +6,6 @@ use BagOStuff;
 use HashBagOStuff;
 use HashSiteStore;
 use MediaWikiSite;
-use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use Site;
 use Wikibase\SettingsArray;
@@ -21,7 +20,6 @@ use Wikibase\SitesModule;
  * @author Thiemo Kreuz
  */
 class SitesModuleTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ResourceLoaderContext

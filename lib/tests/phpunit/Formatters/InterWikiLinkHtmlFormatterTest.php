@@ -6,7 +6,6 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\Lib\Formatters\CommonsLinkFormatter;
 use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
 
@@ -19,7 +18,6 @@ use Wikibase\Lib\Formatters\InterWikiLinkHtmlFormatter;
  * @author Jonas Kress
  */
 class InterWikiLinkHtmlFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	public function linkFormatProvider() {

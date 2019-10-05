@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
 
 /**
@@ -17,7 +16,6 @@ use Wikibase\Client\DataAccess\Scribunto\LuaFunctionCallTracker;
  * @author Marius Hoch
  */
 class LuaFunctionCallTrackerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function incrementKeyProvider() {
 		return [

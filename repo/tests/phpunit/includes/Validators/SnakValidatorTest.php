@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
-use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\StringValue;
@@ -34,7 +33,6 @@ use Wikibase\Repo\Validators\SnakValidator;
  * @author Daniel Kinzler
  */
 class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var DataTypeFactory

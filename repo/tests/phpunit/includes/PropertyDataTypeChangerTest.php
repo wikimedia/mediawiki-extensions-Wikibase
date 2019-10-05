@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use PHPUnit4And6Compat;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
@@ -24,7 +23,6 @@ use Wikibase\Repo\PropertyDataTypeChanger;
  * @author Marius Hoch
  */
 class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testChangeDataType_success() {
 		$propertyId = new PropertyId( 'P42' );
@@ -43,7 +41,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 			->will( $this->returnValue( new EntityRevision( $expectedProperty, 6790 ) ) );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
-		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
+		$propertyDataTypeChanger->changeDataType( $propertyId, $this->createMock( User::class ), 'shinydata' );
 	}
 
 	public function testChangeDataType_propertyNotFound() {
@@ -55,7 +53,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 		$this->expectException( StorageException::class );
 		$this->expectExceptionMessage( "Could not load property: P43" );
-		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
+		$propertyDataTypeChanger->changeDataType( $propertyId, $this->createMock( User::class ), 'shinydata' );
 	}
 
 	public function testChangeDataType_saveFailed() {
@@ -78,7 +76,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
 		$this->expectException( StorageException::class );
-		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
+		$propertyDataTypeChanger->changeDataType( $propertyId, $this->createMock( User::class ), 'shinydata' );
 	}
 
 	public function testChangeDataType_mismatchingDataValueTypes() {
@@ -90,7 +88,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 
 		$this->expectException( InvalidArgumentException::class );
 		$this->expectExceptionMessage( "New and old data type must have the same data value type." );
-		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'otherdatatype' );
+		$propertyDataTypeChanger->changeDataType( $propertyId, $this->createMock( User::class ), 'otherdatatype' );
 	}
 
 	private function getPropertyDataTypeChanger( EntityStore $entityStore ) {

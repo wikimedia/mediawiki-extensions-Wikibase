@@ -344,9 +344,9 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	 */
 	private function givenSiteWithNoPagesExists( $existingSiteId ) {
 		/** @var \PHPUnit_Framework_MockObject_MockObject|Site $siteMock */
-		$siteMock = $this->getMock( Site::class, [
-			'normalizePageName'
-		] );
+		$siteMock = $this->getMockBuilder( Site::class )
+			->setMethods( [ 'normalizePageName' ] )
+			->getMock();
 		$siteMock->setGlobalId( $existingSiteId );
 		$siteMock->method( 'normalizePageName' )->willReturn( false );
 

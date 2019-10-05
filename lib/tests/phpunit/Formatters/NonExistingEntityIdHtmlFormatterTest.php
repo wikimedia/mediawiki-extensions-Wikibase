@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -18,7 +17,6 @@ use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
  * @author Addshore
  */
 class NonExistingEntityIdHtmlFormatterTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideTestFormatEntityId() {
 		yield [ new ItemId( 'Q1' ), 'Q1 <span class="wb-entity-undefinedinfo">(⧼somePrefix-item⧽)</span>' ];

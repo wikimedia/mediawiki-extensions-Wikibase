@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests;
 
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
 
@@ -17,7 +16,6 @@ use Wikibase\Summary;
  * @author Daniel Kinzler
  */
 class SummaryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	public function testAddAutoCommentArgs() {

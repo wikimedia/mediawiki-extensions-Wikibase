@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
 use ParserOutput;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ParserOutput\EntityParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdaterCollection;
@@ -18,7 +17,6 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdaterCollection;
  * @author Thiemo Kreuz
  */
 class EntityParserOutputDataUpdaterCollectionTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testUpdateParserOutput() {
 		$entity = new Item();

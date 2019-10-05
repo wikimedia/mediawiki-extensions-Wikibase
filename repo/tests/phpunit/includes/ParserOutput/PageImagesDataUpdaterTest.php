@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\BooleanValue;
 use DataValues\StringValue;
-use PHPUnit4And6Compat;
 use ParserOutput;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -22,7 +21,6 @@ use Wikibase\Repo\ParserOutput\PageImagesDataUpdater;
  * @author Thiemo Kreuz
  */
 class PageImagesDataUpdaterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param string[] $propertyIds

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -23,8 +22,6 @@ use Wikibase\TermIndexPropertyTermStore;
  * @license GPL-2.0-or-later
  */
 class TermIndexPropertyTermStoreTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/** @var PropertyId */
 	private $propertyId;

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
 use OutputPage;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
@@ -16,7 +15,6 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
  * @license GPL-2.0-or-later
  */
 class OutputPageRevisionIdReaderTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetOutputPageWithRevId_returnsOutputPageRevId() {
 		$reader = new OutputPageRevisionIdReader();

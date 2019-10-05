@@ -3,7 +3,6 @@
 namespace Wikibase\DataAccess\Tests;
 
 use MediaWiki\Storage\NameTableStoreFactory;
-use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
@@ -31,7 +30,6 @@ use Wikibase\StringNormalizer;
  * @license GPL-2.0-or-later
  */
 class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return NameTableStoreFactory|object
@@ -70,25 +68,25 @@ class MultipleRepositoryAwareWikibaseServicesTest extends \PHPUnit\Framework\Tes
 
 		return [
 			'EntityInfoBuilder' => function () use ( $testCase ) {
-				return $testCase->getMock( EntityInfoBuilder::class );
+				return $testCase->createMock( EntityInfoBuilder::class );
 			},
 			'EntityPrefetcher' => function () use ( $testCase ) {
-				return $testCase->getMock( EntityPrefetcher::class );
+				return $testCase->createMock( EntityPrefetcher::class );
 			},
 			'EntityRevisionLookup' => function () use ( $testCase ) {
-				return $testCase->getMock( EntityRevisionLookup::class );
+				return $testCase->createMock( EntityRevisionLookup::class );
 			},
 			'EntityStoreWatcher' => function () use ( $testCase ) {
-				return $testCase->getMock( EntityStoreWatcher::class );
+				return $testCase->createMock( EntityStoreWatcher::class );
 			},
 			'PropertyInfoLookup' => function () use ( $testCase ) {
-				return $testCase->getMock( PropertyInfoLookup::class );
+				return $testCase->createMock( PropertyInfoLookup::class );
 			},
 			'TermBuffer' => function () use ( $testCase ) {
-				return $testCase->getMock( TermBuffer::class );
+				return $testCase->createMock( TermBuffer::class );
 			},
 			'TermSearchInteractorFactory' => function () use ( $testCase ) {
-				return $testCase->getMock( TermSearchInteractorFactory::class );
+				return $testCase->createMock( TermSearchInteractorFactory::class );
 			},
 		];
 	}

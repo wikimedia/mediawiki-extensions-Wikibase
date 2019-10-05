@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use Language;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -21,7 +20,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return TermLookup

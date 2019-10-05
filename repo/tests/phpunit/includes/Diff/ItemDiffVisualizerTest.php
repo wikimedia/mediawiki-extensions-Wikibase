@@ -127,7 +127,7 @@ class ItemDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
 			new HashSiteStore( [ $enwiki ] ),
-			$this->getMock( EntityIdFormatter::class )
+			$this->createMock( EntityIdFormatter::class )
 		);
 
 		return new ItemDiffVisualizer(
@@ -135,7 +135,7 @@ class ItemDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
 			new HashSiteStore( [ $enwiki ] ),
-			$this->getMock( EntityIdFormatter::class ),
+			$this->createMock( EntityIdFormatter::class ),
 			$basicVisualizer
 		);
 	}

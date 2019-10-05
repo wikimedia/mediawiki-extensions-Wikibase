@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use MediaWiki\Storage\NameTableStore;
-use PHPUnit4And6Compat;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -27,7 +26,6 @@ use Wikimedia\Assert\ParameterElementTypeException;
  * @license GPL-2.0-or-later
  */
 class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testValidConstruction() {
 		$this->newSingleEntitySourceServices();

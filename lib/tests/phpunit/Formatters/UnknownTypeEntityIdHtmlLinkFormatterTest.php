@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,7 +20,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class UnknownTypeEntityIdHtmlLinkFormatterTest extends TestCase {
 
 	use HamcrestPHPUnitIntegration;
-	use PHPUnit4And6Compat;
 
 	public function testFormatEntityIdIdentifyingNullTitle_nonexistingFormatterIsInvoked() {
 		$entityId = new ItemId( 'Q7' );

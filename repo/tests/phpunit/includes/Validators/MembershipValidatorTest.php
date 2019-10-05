@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
@@ -17,7 +16,6 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @author Daniel Kinzler
  */
 class MembershipValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider

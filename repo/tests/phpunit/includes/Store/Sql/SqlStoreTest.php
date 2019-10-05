@@ -58,13 +58,13 @@ class SqlStoreTest extends MediaWikiTestCase {
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
 		$wikibaseServices->method( 'getEntityInfoBuilder' )
-			->willReturn( $this->getMock( EntityInfoBuilder::class ) );
+			->willReturn( $this->createMock( EntityInfoBuilder::class ) );
 		$wikibaseServices->method( 'getEntityPrefetcher' )
 			->willReturn( $prefetchingAccessor );
 		$wikibaseServices->method( 'getEntityRevisionLookup' )
-			->willReturn( $this->getMock( EntityRevisionLookup::class ) );
+			->willReturn( $this->createMock( EntityRevisionLookup::class ) );
 		$wikibaseServices->method( 'getEntityStoreWatcher' )
-			->willReturn( $this->getMock( EntityStoreWatcher::class ) );
+			->willReturn( $this->createMock( EntityStoreWatcher::class ) );
 		$wikibaseServices->method( 'getPropertyInfoLookup' )
 			->willReturn( new MockPropertyInfoLookup() );
 
@@ -72,10 +72,10 @@ class SqlStoreTest extends MediaWikiTestCase {
 			$changeFactory,
 			new ItemIdParser(),
 			$entityIdComposer,
-			$this->getMock( EntityIdLookup::class ),
-			$this->getMock( EntityTitleStoreLookup::class ),
+			$this->createMock( EntityIdLookup::class ),
+			$this->createMock( EntityTitleStoreLookup::class ),
 			new EntityNamespaceLookup( [] ),
-			$this->getMock( IdGenerator::class ),
+			$this->createMock( IdGenerator::class ),
 			$wikibaseServices,
 			new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
 		);

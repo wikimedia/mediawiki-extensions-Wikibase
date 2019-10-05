@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
-use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\HashUsageAccumulator;
@@ -23,7 +22,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class PropertyIdResolverTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getPropertyIdResolver( UsageAccumulator $usageAccumulator = null ) {
 		$mockRepository = $this->getMockRepository();

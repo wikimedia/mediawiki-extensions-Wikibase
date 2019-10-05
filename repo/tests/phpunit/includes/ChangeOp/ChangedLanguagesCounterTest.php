@@ -3,7 +3,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
@@ -16,7 +15,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpsResult;
  * @group ChangeOp
  */
 class ChangedLanguagesCounterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function changeOpResultsProvider() {
 		$entityId = new ItemId( 'Q123' );

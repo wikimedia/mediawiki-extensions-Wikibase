@@ -475,7 +475,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		}
 
 		// check for error
-		$this->setExpectedException( $error );
+		$this->expectException( $error );
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
 	}
 
@@ -504,7 +504,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		}
 
 		// check for error
-		$this->setExpectedException( $error );
+		$this->expectException( $error );
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
 	}
 
@@ -1160,7 +1160,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store = TestingAccessWrapper::newFromObject( $store );
 
 		if ( $expected instanceof Exception ) {
-			$this->setExpectedException( get_class( $expected ), $expected->getMessage() );
+			$this->expectException( get_class( $expected ) );
+			$this->expectExceptionMessage( $expected->getMessage() );
 		}
 
 		$flagsOut = $store->adjustFlagsForMCR( $flagsIn, $parentRevision, $slotRole );

@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Usage;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
@@ -31,7 +30,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Marius Hoch
  */
 class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	/**

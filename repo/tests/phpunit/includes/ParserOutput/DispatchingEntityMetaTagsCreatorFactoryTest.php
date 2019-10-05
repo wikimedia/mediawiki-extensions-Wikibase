@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
 use Language;
-use PHPUnit4And6Compat;
+use LogicException;
 use PHPUnit_Framework_MockObject_MockObject;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +19,6 @@ use Wikibase\View\EntityMetaTagsCreator;
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @expectedException InvalidArgumentException
@@ -59,7 +58,7 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 			]
 		);
 
-		$this->setExpectedException( 'LogicException' );
+		$this->expectException( LogicException::class );
 		$factory->newEntityMetaTags(
 			'dummy-entity-type',
 			$this->getMockLanguage()

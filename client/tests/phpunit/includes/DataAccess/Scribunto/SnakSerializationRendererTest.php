@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Language;
-use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -26,7 +25,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Marius Hoch < hoo@online.de >
  */
 class SnakSerializationRendererTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param DataValue $value

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -22,7 +21,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Daniel Kinzler
  */
 class RevisionBasedEntityLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function getEntityProvider() {
 		$q10 = new ItemId( 'Q10' );

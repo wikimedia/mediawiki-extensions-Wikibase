@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Api;
 
 use ApiMain;
 use Language;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Client\Api\Description;
@@ -22,7 +21,6 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  */
 class DescriptionTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var array[] page id => data

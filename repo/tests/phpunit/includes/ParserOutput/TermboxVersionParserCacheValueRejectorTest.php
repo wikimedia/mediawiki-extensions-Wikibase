@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use ParserOptions;
 use ParserOutput;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 
@@ -17,8 +16,6 @@ use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
  * @license GPL-2.0-or-later
  */
 class TermboxVersionParserCacheValueRejectorTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider allParserOutputAOptionsCombinationsProvider

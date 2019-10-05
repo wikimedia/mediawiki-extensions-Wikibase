@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 use Html;
 use IContextSource;
 use PageProps;
-use PHPUnit4And6Compat;
 use RequestContext;
 use SiteLookup;
 use Site;
@@ -27,7 +26,6 @@ use Wikibase\Store\SubscriptionLookup;
  * @author Thiemo Kreuz
  */
 class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider handleProvider

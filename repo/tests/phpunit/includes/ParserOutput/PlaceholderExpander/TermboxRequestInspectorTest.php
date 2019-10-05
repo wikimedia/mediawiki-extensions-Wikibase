@@ -19,8 +19,6 @@ use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
  */
 class TermboxRequestInspectorTest extends TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	public function testGivenContextWithDefaultLanguages_returnsTrue() {
 		$language = Language::factory( 'de' );
 		$context = $this->newContextWithLanguage( $language );

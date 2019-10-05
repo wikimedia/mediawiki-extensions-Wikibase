@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Localizer;
 
 use Exception;
-use PHPUnit4And6Compat;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -20,7 +19,6 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideGetExceptionMessage() {
 		$result0 = Result::newError( [] );

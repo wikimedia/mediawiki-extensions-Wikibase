@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -32,7 +31,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  */
 class PropertyViewTest extends EntityViewTestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param EntityId|PropertyId $id
@@ -105,13 +103,13 @@ class PropertyViewTest extends EntityViewTestCase {
 		return new PropertyView(
 			$templateFactory,
 			$termsView,
-			$this->getMock( LanguageDirectionalityLookup::class ),
+			$this->createMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),
 			'en',
-			$this->getMock( LocalizedTextProvider::class )
+			$this->createMock( LocalizedTextProvider::class )
 		);
 	}
 

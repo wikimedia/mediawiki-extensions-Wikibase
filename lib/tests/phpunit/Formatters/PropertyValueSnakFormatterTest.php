@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
@@ -37,14 +36,13 @@ use Wikibase\Lib\Formatters\UnDeserializableValueFormatter;
  * @author Daniel Kinzler
  */
 class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	/**
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $format, $error ) {
-		$this->setExpectedException( $error );
+		$this->expectException( $error );
 
 		$this->getDummyPropertyValueSnakFormatter( $format );
 	}
@@ -112,7 +110,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		$expected, $expectedException = null
 	) {
 		if ( $expectedException !== null ) {
-			$this->setExpectedException( $expectedException );
+			$this->expectException( $expectedException );
 		}
 
 		$typeLookup = $this->getMockDataTypeLookup( $dataType );

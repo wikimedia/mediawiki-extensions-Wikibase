@@ -17,7 +17,6 @@ use Wikibase\View\FingerprintableEntityMetaTagsCreator;
  * @license GPL-2.0-or-later
  */
 class FingerprintableEntityMetaTagsCreatorTest extends EntityMetaTagsCreatorTestCase {
-	use \PHPUnit4And6Compat;
 
 	public function provideTestGetMetaTags() {
 		$mock = $this->createMock( LanguageFallbackChain::class );

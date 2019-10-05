@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,7 +25,6 @@ use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
  * @author Thiemo Kreuz
  */
 class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	const MAX_LENGTH = 8;
 

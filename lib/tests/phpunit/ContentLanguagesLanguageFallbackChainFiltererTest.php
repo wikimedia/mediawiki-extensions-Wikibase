@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests;
 
 use Language;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\ContentLanguagesLanguageFallbackChainFilterer;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -16,8 +15,6 @@ use Wikibase\Lib\StaticContentLanguages;
  * @license GPL-2.0-or-later
  */
 class ContentLanguagesLanguageFallbackChainFiltererTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	public function testGetFallbackChain_returnsFallbackChainWithOnlyContentLanguages() {
 		$filterer = new ContentLanguagesLanguageFallbackChainFilterer();

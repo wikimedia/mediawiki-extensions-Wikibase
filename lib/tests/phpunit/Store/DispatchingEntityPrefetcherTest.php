@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
@@ -17,7 +16,6 @@ use Wikibase\Lib\Store\DispatchingEntityPrefetcher;
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testPrefetchGroupsIdsByRepositoryAndDelegatesPrefetchingToRepositorySpecificPrefetcher() {
 		$localIdOne = new ItemId( 'Q100' );
@@ -108,8 +106,8 @@ class DispatchingEntityPrefetcherTest extends \PHPUnit\Framework\TestCase {
 	public function provideInvalidConstructorArguments() {
 		return [
 			'empty prefetcher list' => [ [] ],
-			'not a string as a key' => [ [ 0 => $this->getMock( EntityPrefetcher::class ) ] ],
-			'not a repository name as a key' => [ [ 'fo:o' => $this->getMock( EntityPrefetcher::class ) ] ],
+			'not a string as a key' => [ [ 0 => $this->createMock( EntityPrefetcher::class ) ] ],
+			'not a repository name as a key' => [ [ 'fo:o' => $this->createMock( EntityPrefetcher::class ) ] ],
 			'not an EntityPrefetcher' => [ [ '' => new ItemId( 'Q100' ) ] ],
 		];
 	}

@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use MediaWiki\Storage\NameTableStore;
-use PHPUnit4And6Compat;
 use stdClass;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
@@ -27,7 +26,6 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceContainerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return NameTableStore|object

@@ -16,8 +16,6 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
  */
 class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
 
-	use \PHPUnit4And6Compat;
-
 	protected $skippedTests = [
 		'testClear' => 'Not possible to implement for BagOStuff'
 	];

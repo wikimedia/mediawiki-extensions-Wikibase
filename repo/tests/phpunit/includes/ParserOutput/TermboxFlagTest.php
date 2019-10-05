@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use ExtensionRegistry;
 use MobileContext;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\SettingsArray;
 
@@ -17,8 +16,6 @@ use Wikibase\SettingsArray;
  * @license GPL-2.0-or-later
  */
 class TermboxFlagTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	public function testGetInstance() {
 		$this->assertInstanceOf( TermboxFlag::class, TermboxFlag::getInstance() );

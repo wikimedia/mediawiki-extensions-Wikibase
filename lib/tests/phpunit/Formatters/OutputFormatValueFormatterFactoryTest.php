@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Language;
-use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
@@ -33,14 +32,13 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Daniel Kinzler
  */
 class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $builder, $error ) {
 		$language = Language::factory( 'en' );
-		$this->setExpectedException( $error );
+		$this->expectException( $error );
 		new OutputFormatValueFormatterFactory( $builder, $language, new LanguageFallbackChainFactory() );
 	}
 

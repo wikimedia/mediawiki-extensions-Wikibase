@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Exception;
 use MediaWiki\MediaWikiServices;
-use PHPUnit4And6Compat;
 use TitleFormatter;
 use TitleParser;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings;
@@ -38,7 +37,6 @@ use Wikibase\SettingsArray;
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testConstructor() {
 		$wikibaseLuaBindings = $this->getWikibaseLanguageIndependentLuaBindings();
@@ -61,13 +59,13 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$mediaWikiServices = MediaWikiServices::getInstance();
 
 		return new WikibaseLanguageIndependentLuaBindings(
-			$siteLinkLookup ?: $this->getMock( SiteLinkLookup::class ),
+			$siteLinkLookup ?: $this->createMock( SiteLinkLookup::class ),
 			new SettingsArray(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			new BasicEntityIdParser,
-			$this->getMock( TermLookup::class ),
+			$this->createMock( TermLookup::class ),
 			new StaticContentLanguages( [] ),
-			$referencedEntityIdLookup ?: $this->getMock( ReferencedEntityIdLookup::class ),
+			$referencedEntityIdLookup ?: $this->createMock( ReferencedEntityIdLookup::class ),
 			$mediaWikiServices->getTitleFormatter(),
 			$mediaWikiServices->getTitleParser(),
 			'enwiki'
@@ -85,15 +83,15 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$settings->setSetting( 'a-setting', 'a-value' );
 
 		$bindings = new WikibaseLanguageIndependentLuaBindings(
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			$settings,
 			new HashUsageAccumulator(),
 			new BasicEntityIdParser,
-			$this->getMock( TermLookup::class ),
+			$this->createMock( TermLookup::class ),
 			new StaticContentLanguages( [] ),
-			$this->getMock( ReferencedEntityIdLookup::class ),
-			$this->getMock( TitleFormatter::class ),
-			$this->getMock( TitleParser::class ),
+			$this->createMock( ReferencedEntityIdLookup::class ),
+			$this->createMock( TitleFormatter::class ),
+			$this->createMock( TitleParser::class ),
 			'enwiki'
 		);
 
@@ -212,15 +210,15 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 			->will( $this->returnValue( $hasLabel ? "$prefixedEntityId-$languageCode" : null ) );
 
 		$bindings = new WikibaseLanguageIndependentLuaBindings(
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			new SettingsArray(),
 			$usages,
 			new BasicEntityIdParser,
 			$termLookup,
 			new StaticContentLanguages( $hasLang ? [ $languageCode ] : [] ),
-			$this->getMock( ReferencedEntityIdLookup::class ),
-			$this->getMock( TitleFormatter::class ),
-			$this->getMock( TitleParser::class ),
+			$this->createMock( ReferencedEntityIdLookup::class ),
+			$this->createMock( TitleFormatter::class ),
+			$this->createMock( TitleParser::class ),
 			'enwiki'
 		);
 

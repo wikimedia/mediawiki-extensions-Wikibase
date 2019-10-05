@@ -79,7 +79,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$this->getChangeRunCoalescer(),
-			$this->getMock( SiteLookup::class ),
+			$this->createMock( SiteLookup::class ),
 			new NullLogger(),
 			true
 		);
@@ -604,7 +604,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater,
 			$this->getChangeRunCoalescer(),
-			$this->getMock( SiteLookup::class ),
+			$this->createMock( SiteLookup::class ),
 			new NullLogger()
 		);
 

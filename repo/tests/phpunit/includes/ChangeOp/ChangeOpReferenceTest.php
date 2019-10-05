@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpReference;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -32,7 +31,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @author Daniel Kinzler
  */
 class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ChangeOpTestMockProvider

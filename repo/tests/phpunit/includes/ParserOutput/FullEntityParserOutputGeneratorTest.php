@@ -279,7 +279,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
-			$this->getMock( LocalizedTextProvider::class ),
+			$this->createMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			Language::factory( 'en' )
@@ -519,7 +519,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
-			$this->getMock( LocalizedTextProvider::class ),
+			$this->createMock( LocalizedTextProvider::class ),
 			new EntityDataFormatProvider(),
 			$dataUpdaters,
 			Language::factory( 'en' )

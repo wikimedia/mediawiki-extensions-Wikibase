@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use MediaWikiCoversValidator;
 use Message;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -29,7 +28,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Thiemo Kreuz
  */
 class MessageSnakFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	/**

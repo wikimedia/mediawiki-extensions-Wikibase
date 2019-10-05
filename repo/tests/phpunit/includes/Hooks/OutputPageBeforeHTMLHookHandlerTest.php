@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 use Language;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
-use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
 use User;
@@ -33,7 +32,6 @@ use Wikibase\Repo\ParserOutput\TermboxView;
  * @author Marius Hoch < hoo@online.de >
  */
 class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
-	use PHPUnit4And6Compat;
 
 	private $editability;
 	private $uiLanguageCode;

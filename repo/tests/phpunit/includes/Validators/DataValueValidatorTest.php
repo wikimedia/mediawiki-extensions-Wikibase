@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -19,7 +18,6 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @author Daniel Kinzler
  */
 class DataValueValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );
@@ -36,7 +34,7 @@ class DataValueValidatorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testValidate( $validator, $value, $expected, $exception, $message ) {
 		if ( $exception !== null ) {
-			$this->setExpectedException( $exception );
+			$this->expectException( $exception );
 		}
 
 		$validator = new DataValueValidator( $validator );

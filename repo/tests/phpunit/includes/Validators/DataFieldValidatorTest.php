@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -18,7 +17,6 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @author Daniel Kinzler
  */
 class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider
@@ -55,7 +53,7 @@ class DataFieldValidatorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testValidate( $field, $validator, $value, $expectedError, $expectedException, $message ) {
 		if ( $expectedException !== null ) {
-			$this->setExpectedException( $expectedException );
+			$this->expectException( $expectedException );
 		}
 
 		$validator = new DataFieldValidator( $field, $validator );

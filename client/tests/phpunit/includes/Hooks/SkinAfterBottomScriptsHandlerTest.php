@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use File;
-use PHPUnit4And6Compat;
 use Title;
 
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
@@ -22,7 +21,6 @@ use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
  * @license GPL-2.0-or-later
  */
 class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider createSchemaProvider

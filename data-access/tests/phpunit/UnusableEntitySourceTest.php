@@ -13,8 +13,6 @@ use Wikibase\DataAccess\UnusableEntitySource;
  */
 class UnusableEntitySourceTest extends \PHPUnit_Framework_TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	public function testGetDatabaseNameThrowsException() {
 		$source = new UnusableEntitySource();
 

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\QuantityValue;
-use PHPUnit4And6Compat;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemId;
@@ -30,7 +29,6 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  */
 class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var NTriplesRdfTestHelper

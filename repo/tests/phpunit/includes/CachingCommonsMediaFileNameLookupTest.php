@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use HashBagOStuff;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
-use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 
@@ -17,7 +16,6 @@ use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
  * @author Marius Hoch
  */
 class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testNormalize() {
 		$lookup = new CachingCommonsMediaFileNameLookup(

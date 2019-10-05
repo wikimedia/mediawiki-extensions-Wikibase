@@ -6,7 +6,6 @@ use DataValues\TimeValue;
 use InvalidArgumentException;
 use Language;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
@@ -25,7 +24,6 @@ use Wikibase\Repo\Parsers\MwDateFormatParserFactory;
  * @author Thiemo Kreuz
  */
 class MwDateFormatParserFactoryTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var MwDateFormatParserFactory

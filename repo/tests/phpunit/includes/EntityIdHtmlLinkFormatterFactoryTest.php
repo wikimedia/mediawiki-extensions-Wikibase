@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use Language;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
@@ -22,7 +21,6 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
  * @author Daniel Kinzler
  */
 class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getFormatterFactory() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
@@ -60,7 +58,9 @@ class EntityIdHtmlLinkFormatterFactoryTest extends TestCase {
 
 		$language = Language::factory( 'en' );
 
-		$callbackMock = $this->getMock( \stdClass::class, [ '__invoke' ] );
+		$callbackMock = $this->getMockBuilder( \stdClass::class )
+			->setMethods( [ '__invoke' ] )
+			->getMock();
 		$callbackMock->expects( $this->once() )
 			->method( '__invoke' )
 			->willReturnCallback(

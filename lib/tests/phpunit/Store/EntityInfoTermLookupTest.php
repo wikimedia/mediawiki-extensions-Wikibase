@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
@@ -21,7 +20,6 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
  * @author Daniel Kinzler
  */
 class EntityInfoTermLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	public function testGetLabel() {

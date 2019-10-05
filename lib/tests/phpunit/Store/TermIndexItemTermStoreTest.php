@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -23,8 +22,6 @@ use Wikibase\TermIndexItemTermStore;
  * @license GPL-2.0-or-later
  */
 class TermIndexItemTermStoreTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/** @var ItemId */
 	private $itemId;

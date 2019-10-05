@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
@@ -28,8 +27,6 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  * @license GPL-2.0-or-later
  */
 class TermboxViewTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	private $entityRevisionLookup;
 

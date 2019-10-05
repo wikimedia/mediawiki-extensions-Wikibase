@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -19,7 +18,6 @@ use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	/**

@@ -43,14 +43,14 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 			$this->getMockBuilder( DispatchingEntityViewFactory::class )
 				->disableOriginalConstructor()->getMock(),
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
-			$this->getMock( EntityInfoBuilder::class ),
-			$this->getMock( EntityTitleLookup::class ),
+			$this->createMock( EntityInfoBuilder::class ),
+			$this->createMock( EntityTitleLookup::class ),
 			new LanguageFallbackChainFactory(),
 			$this->getMockBuilder( TemplateFactory::class )
 				->disableOriginalConstructor()->getMock(),
-			$this->getMock( EntityDataFormatProvider::class ),
+			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
-			$this->getMock( Serializer::class ),
+			$this->createMock( Serializer::class ),
 			$this->getMockBuilder( EntityReferenceExtractorDelegator::class )
 				->disableOriginalConstructor()->getMock(),
 			$this->getMockBuilder( CachingKartographerEmbeddingHandler::class )

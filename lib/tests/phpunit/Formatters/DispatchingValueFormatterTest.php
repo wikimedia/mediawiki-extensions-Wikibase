@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
@@ -23,13 +22,12 @@ use Wikibase\Lib\Formatters\DispatchingValueFormatter;
  * @author Daniel Kinzler
  */
 class DispatchingValueFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( array $formatters, $error ) {
-		$this->setExpectedException( $error );
+		$this->expectException( $error );
 
 		new DispatchingValueFormatter( $formatters );
 	}

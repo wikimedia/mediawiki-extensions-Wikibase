@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Diff;
 
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
-use PHPUnit4And6Compat;
 use RequestContext;
 use SiteLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -23,7 +22,6 @@ use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
  * @author Amir Sarabadani
  */
 class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGivenNoType_factoryReturnsBasicEntityDiffVisualizer() {
 		$factory = $this->newFactory();

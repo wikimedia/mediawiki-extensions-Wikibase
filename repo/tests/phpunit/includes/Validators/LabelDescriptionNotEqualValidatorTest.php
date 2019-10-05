@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
-use PHPUnit4And6Compat;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,7 +19,6 @@ use Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator;
  * @author Greta Doci
  */
 class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider provideLabelsDescriptionsAndExpectedErrors

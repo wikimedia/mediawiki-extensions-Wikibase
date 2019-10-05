@@ -6,7 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\MapDiffer;
 use ExternalUserNames;
 use Language;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
@@ -33,7 +32,6 @@ use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
  * @author Daniel Kinzler
  */
 class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return RecentChangeFactory

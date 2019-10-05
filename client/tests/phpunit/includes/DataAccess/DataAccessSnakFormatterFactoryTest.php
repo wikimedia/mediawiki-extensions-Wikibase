@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
 use Language;
-use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -32,7 +31,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @author Marius Hoch
  */
 class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getDataAccessSnakFormatterFactory( $expectedFormat ) {
 		$languageFallbackLabelDescriptionLookup = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
@@ -105,7 +103,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_PLAIN );
 		$snakFormatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'fr' ),
-			$this->getMock( UsageAccumulator::class )
+			$this->createMock( UsageAccumulator::class )
 		);
 
 		$this->assertInstanceOf( SnakFormatter::class, $snakFormatter );
@@ -128,7 +126,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->getDataAccessSnakFormatterFactory( SnakFormatter::FORMAT_WIKI );
 		$snakFormatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'fr' ),
-			$this->getMock( UsageAccumulator::class ),
+			$this->createMock( UsageAccumulator::class ),
 			'rich-wikitext'
 		);
 

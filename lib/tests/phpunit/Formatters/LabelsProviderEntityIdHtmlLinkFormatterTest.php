@@ -214,9 +214,9 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 			->will( $this->returnValue( null ) );
 
 		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
-			$this->getMock( LabelDescriptionLookup::class ),
+			$this->createMock( LabelDescriptionLookup::class ),
 			$entityTitleLookup,
-			$this->getMock( LanguageNameLookup::class )
+			$this->createMock( LanguageNameLookup::class )
 		);
 
 		$expectedPattern = '/^Q123' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
@@ -255,7 +255,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup( new Term( 'en', 'Something' ) ),
 			$entityTitleLookup,
-			$this->getMock( LanguageNameLookup::class )
+			$this->createMock( LanguageNameLookup::class )
 		);
 
 		$this->assertRegExp( '|"http://foo.wiki/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'foo:Q42' ) ) );
@@ -269,7 +269,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
 			$this->getLabelDescriptionLookup(),
 			$entityTitleLookup,
-			$this->getMock( LanguageNameLookup::class )
+			$this->createMock( LanguageNameLookup::class )
 		);
 
 		$formattedEntityId = $formatter->formatEntityId( new ItemId( 'Q42' ) );

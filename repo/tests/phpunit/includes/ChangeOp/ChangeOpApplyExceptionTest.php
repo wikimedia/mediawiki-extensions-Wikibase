@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
 
@@ -14,7 +13,6 @@ use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
  * @license GPL-2.0-or-later
  */
 class ChangeOpApplyExceptionTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGivenConstructionParameters_availableThroughAccessors() {
 		$previous = new \Exception( 'hello' );

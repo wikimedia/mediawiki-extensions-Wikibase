@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Hooks;
 use IJobSpecification;
 use JobQueue;
 use JobQueueGroup;
-use PHPUnit4And6Compat;
 use Psr\Log\NullLogger;
 use ReflectionMethod;
 use Title;
@@ -25,7 +24,6 @@ use Wikibase\Client\NamespaceChecker;
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function doArticleDeleteCompleteProvider() {
 		return [
@@ -59,7 +57,7 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 		$title = $this->getTitle();
 
 		$this->assertTrue(
-			$handler->doArticleDeleteComplete( $title, $this->getMock( User::class ) )
+			$handler->doArticleDeleteComplete( $title, $this->createMock( User::class ) )
 		);
 
 		$this->assertSame(
@@ -106,7 +104,7 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 		$newTitle = $this->getTitle();
 
 		$this->assertTrue(
-			$handler->doTitleMoveComplete( $oldTitle, $newTitle, $this->getMock( User::class ) )
+			$handler->doTitleMoveComplete( $oldTitle, $newTitle, $this->createMock( User::class ) )
 		);
 
 		$this->assertSame(

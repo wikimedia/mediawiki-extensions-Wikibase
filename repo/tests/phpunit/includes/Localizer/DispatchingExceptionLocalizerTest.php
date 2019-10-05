@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Localizer;
 
 use Exception;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use RuntimeException;
 use ValueParsers\ParseException;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
@@ -22,7 +21,6 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class DispatchingExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideGetExceptionMessage() {
 		$localizers = [

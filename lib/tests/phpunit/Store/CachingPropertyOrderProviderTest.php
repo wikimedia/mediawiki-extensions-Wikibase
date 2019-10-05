@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use HashBagOStuff;
-use PHPUnit4And6Compat;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
@@ -17,7 +16,6 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetPropertyOrder_cacheHit() {
 		$expected = [ 'P12' => 1, 'P42' => 2 ];
@@ -26,7 +24,7 @@ class CachingPropertyOrderProviderTest extends \PHPUnit\Framework\TestCase {
 		$cache->set( $cache->makeKey( 'wikibase-PropertyOrderProvider' ), $expected );
 
 		$cachingPropertyOrderProvider = new CachingPropertyOrderProvider(
-			$this->getMock( PropertyOrderProvider::class ),
+			$this->createMock( PropertyOrderProvider::class ),
 			$cache,
 			123
 		);

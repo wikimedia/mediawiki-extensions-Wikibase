@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
 use OutOfBoundsException;
-use PHPUnit4And6Compat;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
@@ -25,7 +24,6 @@ use Wikibase\Rdf\RdfVocabulary;
  * @author Thiemo Kreuz
  */
 class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGivenConceptBaseUriNotDefinedForDefaultRepository_constructorThrowsException() {
 		$this->expectException( \InvalidArgumentException::class );

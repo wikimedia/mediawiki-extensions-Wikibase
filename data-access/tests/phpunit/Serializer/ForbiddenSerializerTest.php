@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess\Tests\Serializer;
 
-use PHPUnit4And6Compat;
 use RuntimeException;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 
@@ -15,7 +14,6 @@ use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
  * @author Thiemo Kreuz
  */
 class ForbiddenSerializerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function test() {
 		$serializer = new ForbiddenSerializer( 'customMessage' );

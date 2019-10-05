@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests;
 
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
@@ -18,7 +17,6 @@ use Wikibase\EntityFactory;
  * @author Daniel Kinzler
  */
 class EntityFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	private function getEntityFactory() {

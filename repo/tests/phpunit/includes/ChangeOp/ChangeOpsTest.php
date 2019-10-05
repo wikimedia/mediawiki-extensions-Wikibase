@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Prophecy\Argument;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -33,7 +32,6 @@ use Wikibase\Summary;
  * @author Thiemo Kreuz
  */
 class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testEmptyChangeOps() {
 		$changeOps = new ChangeOps();

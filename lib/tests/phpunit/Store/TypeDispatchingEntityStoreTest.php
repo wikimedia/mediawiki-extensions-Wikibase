@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
@@ -22,7 +21,6 @@ use Wikibase\Lib\Store\TypeDispatchingEntityStore;
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	public function testGivenUnknownEntityType_assignFreshIdForwardsToDefaultService() {

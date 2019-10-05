@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use Language;
-use PHPUnit4And6Compat;
 use Wikibase\Lib\DataTypeFactory;
 use HashSiteStore;
 use InvalidArgumentException;
@@ -56,7 +55,6 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function newViewFactory(
 		EntityIdFormatterFactory $htmlFactory = null,
@@ -73,17 +71,17 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			new NullStatementGrouper(),
-			$this->getMock( PropertyOrderProvider::class ),
+			$this->createMock( PropertyOrderProvider::class ),
 			new HashSiteStore(),
 			new DataTypeFactory( [] ),
 			$templateFactory,
 			$languageNameLookup,
-			$this->getMock( LanguageDirectionalityLookup::class ),
+			$this->createMock( LanguageDirectionalityLookup::class ),
 			new BasicNumberLocalizer(),
 			[],
 			[],
 			[],
-			$this->getMock( LocalizedTextProvider::class ),
+			$this->createMock( LocalizedTextProvider::class ),
 			$this->createMock( SpecialPageLinker::class )
 		);
 	}
@@ -137,9 +135,9 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewStatementSectionsView() {
 		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
 			'de',
-			$this->getMock( LabelDescriptionLookup::class ),
+			$this->createMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
-			$this->getMock( EditSectionGenerator::class )
+			$this->createMock( EditSectionGenerator::class )
 		);
 
 		$this->assertInstanceOf( StatementSectionsView::class, $statementSectionsView );

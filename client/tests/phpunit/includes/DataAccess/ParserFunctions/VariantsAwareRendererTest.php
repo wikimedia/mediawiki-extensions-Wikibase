@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
-use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer;
 use Wikibase\DataModel\Entity\EntityId;
@@ -19,7 +18,6 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Thiemo Kreuz
  */
 class VariantsAwareRendererTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider renderProvider

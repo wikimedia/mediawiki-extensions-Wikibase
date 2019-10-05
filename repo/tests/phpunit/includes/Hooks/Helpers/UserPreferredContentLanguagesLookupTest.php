@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use User;
 use Wikibase\Lib\StaticContentLanguages;
@@ -17,7 +16,6 @@ use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
  * @license GPL-2.0-or-later
  */
 class UserPreferredContentLanguagesLookupTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	private $userLanguageLookup;
 	private $contentLanguages;

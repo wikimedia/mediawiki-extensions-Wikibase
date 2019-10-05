@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess\Tests;
 use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use MediaWiki\Storage\NameTableStore;
-use PHPUnit4And6Compat;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -28,7 +27,6 @@ use Wikibase\TermIndex;
  * @license GPL-2.0-or-later
  */
 class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return NameTableStore|object

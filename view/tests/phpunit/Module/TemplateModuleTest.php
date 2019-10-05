@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests\Module;
 
-use PHPUnit4And6Compat;
 use ResourceLoaderContext;
 use Wikibase\View\Module\TemplateModule;
 
@@ -19,7 +18,6 @@ use Wikibase\View\Module\TemplateModule;
  * @author Thiemo Kreuz
  */
 class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetScript() {
 		$instance = new TemplateModule();

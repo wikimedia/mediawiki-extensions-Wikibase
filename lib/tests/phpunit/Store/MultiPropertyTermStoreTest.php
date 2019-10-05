@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -22,8 +21,6 @@ use Wikibase\TermStore\PropertyTermStore;
  * @license GPL-2.0-or-later
  */
 class MultiPropertyTermStoreTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/** @var PropertyId */
 	private $propertyId;
@@ -69,7 +66,8 @@ class MultiPropertyTermStoreTest extends TestCase {
 			->method( 'storeTerms' )
 			->with( $this->propertyId, $this->fingerprint );
 
-		$this->setExpectedException( 'Exception', $exception->getMessage() );
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessage( $exception->getMessage() );
 		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
 			->storeTerms( $this->propertyId, $this->fingerprint );
 	}
@@ -88,7 +86,8 @@ class MultiPropertyTermStoreTest extends TestCase {
 			->with( $this->propertyId, $this->fingerprint )
 			->willThrowException( $exception2 );
 
-		$this->setExpectedException( 'Exception', $exception1->getMessage() );
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessage( $exception1->getMessage() );
 		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
 			->storeTerms( $this->propertyId, $this->fingerprint );
 	}
@@ -119,7 +118,8 @@ class MultiPropertyTermStoreTest extends TestCase {
 			->method( 'deleteTerms' )
 			->with( $this->propertyId );
 
-		$this->setExpectedException( 'Exception', $exception->getMessage() );
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessage( $exception->getMessage() );
 		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
 			->deleteTerms( $this->propertyId );
 	}
@@ -138,7 +138,8 @@ class MultiPropertyTermStoreTest extends TestCase {
 			->with( $this->propertyId )
 			->willThrowException( $exception2 );
 
-		$this->setExpectedException( 'Exception', $exception1->getMessage() );
+		$this->expectException( Exception::class );
+		$this->expectExceptionMessage( $exception1->getMessage() );
 		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
 			->deleteTerms( $this->propertyId );
 	}

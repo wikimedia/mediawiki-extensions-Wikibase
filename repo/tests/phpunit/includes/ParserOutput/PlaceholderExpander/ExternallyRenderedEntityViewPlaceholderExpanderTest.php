@@ -29,8 +29,6 @@ use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
  */
 class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	/** @var OutputPage|MockObject */
 	private $outputPage;
 

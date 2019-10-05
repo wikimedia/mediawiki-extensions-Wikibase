@@ -226,7 +226,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$formatter = new ItemPropertyIdHtmlLinkFormatter(
 			$this->createMock( LanguageFallbackLabelDescriptionLookup::class ),
 			$entityTitleLookup,
-			$this->getMock( LanguageNameLookup::class )
+			$this->createMock( LanguageNameLookup::class )
 		);
 
 		$expectedPattern = '/^Q123' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .

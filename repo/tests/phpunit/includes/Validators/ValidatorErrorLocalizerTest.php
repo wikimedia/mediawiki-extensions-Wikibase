@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use Message;
-use PHPUnit4And6Compat;
 use Status;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
@@ -20,7 +19,6 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @author Daniel Kinzler
  */
 class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ValueFormatter

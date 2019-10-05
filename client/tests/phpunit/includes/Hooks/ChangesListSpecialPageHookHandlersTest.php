@@ -7,7 +7,6 @@ use ExtensionRegistry;
 use FauxRequest;
 use FormOptions;
 use MediaWiki\MediaWikiServices;
-use PHPUnit4And6Compat;
 use SpecialRecentChanges;
 use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
@@ -26,7 +25,6 @@ use Wikimedia\TestingAccessWrapper;
  * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
 class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ExtensionRegistry

@@ -12,7 +12,6 @@ use Wikibase\View\EntityMetaTagsCreator;
  * @covers \Wikibase\View\EntityMetaTags
  */
 abstract class EntityMetaTagsCreatorTestCase extends TestCase {
-	use \PHPUnit4And6Compat;
 
 	abstract public function provideTestGetMetaTags();
 

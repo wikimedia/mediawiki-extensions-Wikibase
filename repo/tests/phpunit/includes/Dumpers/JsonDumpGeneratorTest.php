@@ -6,7 +6,6 @@ use Exception;
 use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use MWContentSerializationException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -38,7 +37,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var SerializerFactory|null

@@ -265,7 +265,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$entityId = new ItemId( 'Q6654' );
 
 		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
-		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
+		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */
 		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
@@ -294,7 +294,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$revId = 9876;
 
 		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
-		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
+		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */
 		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();
@@ -323,8 +323,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		// The following would be MediaInfoId consequently.
 		$newEntityId = $this->getMockEntityId( 'M1235' );
 		$oldEntityId = $this->getMockEntityId( 'M1234' );
-		$oldEntity = $this->getMockBuilder( EntityDocument::class )
-			->getMock();
+		$oldEntity = $this->createMock( EntityDocument::class );
 		$oldEntity
 			->method( 'getId' )
 			->willReturn( $oldEntityId );
@@ -398,7 +397,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$entityId = new ItemId( 'Q6654' );
 
 		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
-		$mockRevisionStore = $this->getMock( RevisionStore::class, [], [], '', false );
+		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */
 		$mockBlobStore = $this->prophesize( BlobStore::class )->reveal();

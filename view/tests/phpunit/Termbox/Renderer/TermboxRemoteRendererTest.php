@@ -10,7 +10,6 @@ use MWHttpRequest;
 use NullStatsdDataFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,8 +26,6 @@ use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
  * @license GPL-2.0-or-later
  */
 class TermboxRemoteRendererTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var LoggerInterface|MockObject

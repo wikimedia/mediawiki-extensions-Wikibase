@@ -7,7 +7,6 @@ use ApiResult;
 use HashSiteStore;
 use Language;
 use MediaWiki\MediaWikiServices;
-use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
@@ -33,7 +32,6 @@ use Wikibase\SummaryFormatter;
  * @author Daniel Kinzler
  */
 class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function newApiHelperFactory() {
 		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
@@ -49,15 +47,15 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		return new ApiHelperFactory(
-			$this->getMock( EntityTitleLookup::class ),
-			$this->getMock( ExceptionLocalizer::class ),
+			$this->createMock( EntityTitleLookup::class ),
+			$this->createMock( ExceptionLocalizer::class ),
 			new InMemoryDataTypeLookup(),
 			new HashSiteStore(),
 			$summaryFormatter,
-			$this->getMock( EntityRevisionLookup::class ),
+			$this->createMock( EntityRevisionLookup::class ),
 			$editEntityFactory,
 			$serializerFactory,
-			$this->getMock( Serializer::class ),
+			$this->createMock( Serializer::class ),
 			new ItemIdParser(),
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);

@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use PHPUnit4And6Compat;
 use Site;
 use SiteList;
 use ValueFormatters\NumberLocalizer;
@@ -30,7 +29,6 @@ use Wikibase\View\Template\TemplateRegistry;
  * @license GPL-2.0-or-later
  */
 class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testNoGroups() {
 		$html = $this->newInstance()->getHtml( [], null, [] );
@@ -143,7 +141,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 		return new SiteLinksView(
 			$templateFactory,
 			$this->newSiteList(),
-			$this->getMock( EditSectionGenerator::class ),
+			$this->createMock( EditSectionGenerator::class ),
 			$this->newEntityIdFormatter(),
 			$languageNameLookup,
 			$this->newNumberLocalizer(),

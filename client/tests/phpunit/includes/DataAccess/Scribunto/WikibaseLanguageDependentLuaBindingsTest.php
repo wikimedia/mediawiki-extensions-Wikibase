@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-use PHPUnit4And6Compat;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -21,7 +20,6 @@ use Wikibase\DataModel\Term\TermFallback;
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseLanguageDependentLuaBindingsTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testConstructor() {
 		$wikibaseLuaBindings = $this->getWikibaseLanguageDependentLuaBindings(

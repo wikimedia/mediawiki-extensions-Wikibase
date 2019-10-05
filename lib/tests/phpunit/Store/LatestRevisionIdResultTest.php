@@ -13,8 +13,6 @@ use PHPUnit\Framework\TestCase;
  */
 class LatestRevisionIdResultTest extends TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	public function testMap_NoHandlersProvided_ThrowsLogicException() {
 		$someResult = LatestRevisionIdResult::nonexistentEntity();
 

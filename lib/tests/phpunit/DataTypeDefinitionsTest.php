@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests;
 
-use PHPUnit4And6Compat;
 use UnexpectedValueException;
 use Wikibase\Lib\DataTypeDefinitions;
 
@@ -16,7 +15,6 @@ use Wikibase\Lib\DataTypeDefinitions;
  * @author Daniel Kinzler
  */
 class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getDefinitions() {
 		return [

@@ -70,7 +70,7 @@ class ItemContentTest extends EntityContentTestCase {
 			'redirect' => [
 				null,
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
-				$this->getMock( Title::class )
+				$this->createMock( Title::class )
 			],
 		];
 	}
@@ -292,7 +292,7 @@ class ItemContentTest extends EntityContentTestCase {
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
-			$this->getMock( FieldDefinitions::class ),
+			$this->createMock( FieldDefinitions::class ),
 			$this->getPropertyDataTypeLookup()
 		);
 	}
@@ -323,7 +323,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$cases['redirect'] = [
 			ItemContent::newFromRedirect(
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
-				$this->getMock( Title::class )
+				$this->createMock( Title::class )
 			),
 			[]
 		];

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 
@@ -15,7 +14,6 @@ use Wikibase\Lib\RepositoryDefinitions;
  * @license GPL-2.0-or-later
  */
 class RepositoryDefinitionsTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideInvalidConstructorArguments() {
 		return [

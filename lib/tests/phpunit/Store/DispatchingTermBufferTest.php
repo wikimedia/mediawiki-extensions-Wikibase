@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use PHPUnit4And6Compat;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,7 +18,6 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @license GPL-2.0-or-later
  */
 class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider invalidTermBufferProvider
@@ -37,14 +35,14 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 			],
 			'non-string keys' => [
 				[
-					'' => $this->getMock( TermBuffer::class ),
-					100 => $this->getMock( TermBuffer::class ),
+					'' => $this->createMock( TermBuffer::class ),
+					100 => $this->createMock( TermBuffer::class ),
 				],
 			],
 			'repo name containing colon' => [
 				[
-					'' => $this->getMock( TermBuffer::class ),
-					'fo:oo' => $this->getMock( TermBuffer::class ),
+					'' => $this->createMock( TermBuffer::class ),
+					'fo:oo' => $this->createMock( TermBuffer::class ),
 				],
 			],
 		];
@@ -141,7 +139,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 	public function testGivenUnknownRepository_getPrefetchedTermReturnsNull() {
 		$dispatcher = new DispatchingTermBuffer(
 			[
-				'foo' => $this->getMock( TermBuffer::class ),
+				'foo' => $this->createMock( TermBuffer::class ),
 			],
 			new NullLogger()
 		);

@@ -181,7 +181,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getMockBuilder( ItemSerializer::class )->disableOriginalConstructor()->getMock(),
-			$this->getMock( SiteLookup::class ),
+			$this->createMock( SiteLookup::class ),
 			new InMemoryDataTypeLookup()
 		);
 		$errorReporter = new ApiErrorReporter(

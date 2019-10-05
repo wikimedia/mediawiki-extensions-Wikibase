@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Localizer;
 
 use InvalidArgumentException;
 use Message;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
@@ -17,7 +16,6 @@ use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
  * @license GPL-2.0-or-later
  */
 class ChangeOpApplyExceptionLocalizerTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGivenExceptionOfOtherType_hasExceptionMessageReturnsFalse() {
 		$localizer = new ChangeOpApplyExceptionLocalizer();

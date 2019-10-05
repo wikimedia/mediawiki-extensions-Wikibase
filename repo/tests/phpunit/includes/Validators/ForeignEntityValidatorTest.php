@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -19,7 +18,6 @@ use Wikibase\Repo\Validators\ForeignEntityValidator;
  * @license GPL-2.0-or-later
  */
 class ForeignEntityValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider invalidRepositorySettingsProvider

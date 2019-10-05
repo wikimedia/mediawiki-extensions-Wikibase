@@ -10,7 +10,6 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use PHPUnit4And6Compat;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -39,7 +38,6 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
  * @author Marius Hoch
  */
 class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock
@@ -243,7 +241,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'en' ),
-			$this->getMock( UsageAccumulator::class ),
+			$this->createMock( UsageAccumulator::class ),
 			'rich-wikitext'
 		);
 
@@ -316,7 +314,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
 		$formatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'en' ),
-			$this->getMock( UsageAccumulator::class )
+			$this->createMock( UsageAccumulator::class )
 		);
 
 		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );

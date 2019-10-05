@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataAccess\Tests;
 
-use PHPUnit4And6Compat;
 use Prophecy\Argument;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
@@ -23,7 +22,6 @@ use Wikibase\Lib\RepositoryDefinitions;
  * @license GPL-2.0-or-later
  */
 class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	const ITEM_NAMESPACE = 100;
 	const PROPERTY_NAMESPACE = 300;

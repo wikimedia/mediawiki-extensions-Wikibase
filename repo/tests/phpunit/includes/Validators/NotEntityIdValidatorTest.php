@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Validators\NotEntityIdValidator;
@@ -18,7 +17,6 @@ use Wikibase\Repo\Validators\NotEntityIdValidator;
  * @author Daniel Kinzler
  */
 class NotEntityIdValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider

@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Title;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
@@ -22,7 +21,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  * @author Daniel Kinzler
  */
 class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideConstructor_failure() {
 		$pageId = 17;
@@ -67,7 +65,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 	public function testConstructor_failure( array $params ) {
 		$this->expectException( InvalidArgumentException::class );
 
-		new AddUsagesForPageJob( $this->getMock( Title::class ), $params );
+		new AddUsagesForPageJob( $this->createMock( Title::class ), $params );
 	}
 
 	public function testDeduplicationInfo() {
@@ -108,7 +106,7 @@ class AddUsagesForPageJobTest extends \PHPUnit\Framework\TestCase {
 				[ $usageQ5X ]
 			);
 
-		$job = new AddUsagesForPageJob( $this->getMock( Title::class ), $params );
+		$job = new AddUsagesForPageJob( $this->createMock( Title::class ), $params );
 		$job->overrideServices( $usageUpdater, new ItemIdParser() );
 
 		$job->run();

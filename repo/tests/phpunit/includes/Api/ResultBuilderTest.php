@@ -7,7 +7,6 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use HashSiteStore;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Revision;
 use Status;
 use Title;
@@ -46,7 +45,6 @@ use Wikibase\Repo\Api\ResultBuilder;
  * @author Thiemo Kreuz
  */
 class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getDefaultResult() {
 		return new ApiResult( false );

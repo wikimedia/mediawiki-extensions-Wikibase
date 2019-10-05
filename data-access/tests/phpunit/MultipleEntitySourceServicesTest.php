@@ -33,8 +33,6 @@ use Wikibase\TermIndexEntry;
  */
 class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	public function testGetEntityRevisionLookupReturnsLookupThatReturnsExpectedRevisionData() {
 		$itemRevisionData = 'item revision data';
 		$itemRevisionLookup = $this->createMock( EntityRevisionLookup::class );

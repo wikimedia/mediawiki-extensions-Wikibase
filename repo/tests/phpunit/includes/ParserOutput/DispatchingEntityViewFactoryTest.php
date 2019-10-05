@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use OutOfBoundsException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
@@ -22,7 +21,6 @@ use Wikibase\View\EntityDocumentView;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @expectedException InvalidArgumentException

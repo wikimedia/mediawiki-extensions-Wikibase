@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
@@ -19,7 +18,6 @@ use Wikimedia\Assert\PostconditionException;
  * @author Thiemo Kreuz
  */
 class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	/**

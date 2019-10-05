@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Closure;
-use PHPUnit4And6Compat;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\Rdf\RdfProducer;
@@ -27,7 +26,6 @@ use Wikibase\Rdf\DedupeBag;
  * @author Amir Sarabadani <ladsgroup@gmail.com>
  */
 class EntityRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideBuilderFlags() {
 		return [

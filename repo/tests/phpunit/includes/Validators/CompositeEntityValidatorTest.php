@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
-use PHPUnit4And6Compat;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
@@ -20,7 +19,6 @@ use Wikibase\Repo\Validators\EntityValidator;
  * @author Daniel Kinzler
  */
 class CompositeEntityValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function validEntityProvider() {
 		$success = Result::newSuccess();

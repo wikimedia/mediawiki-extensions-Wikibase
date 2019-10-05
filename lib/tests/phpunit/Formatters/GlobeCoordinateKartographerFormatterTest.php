@@ -7,7 +7,6 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Language;
-use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -23,7 +22,6 @@ use Wikibase\Lib\Formatters\GlobeCoordinateKartographerFormatter;
  * @author Marius Hoch
  */
 class GlobeCoordinateKartographerFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function emitPreviewHtmlProvider() {
 		yield [ true ];

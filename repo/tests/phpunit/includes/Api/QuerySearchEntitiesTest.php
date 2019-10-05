@@ -7,7 +7,6 @@ use ApiMain;
 use ApiPageSet;
 use ApiQuery;
 use FauxRequest;
-use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
@@ -30,7 +29,6 @@ use Wikibase\Repo\Api\QuerySearchEntities;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param array $params

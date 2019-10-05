@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests;
 
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use PHPUnit4And6Compat;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 
@@ -16,7 +15,6 @@ use Wikibase\Lib\StatsdMissRecordingSimpleCache;
  * @author Addshore
  */
 class StatsdMissRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetIncrementsMetric() {
 		// Stats expects to be incremented once

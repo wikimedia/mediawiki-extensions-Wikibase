@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -26,7 +25,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Marius Hoch
  */
 class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider formatSnakProvider
@@ -82,8 +80,8 @@ class BinaryOptionDispatchingSnakFormatterTest extends \PHPUnit\Framework\TestCa
 		$formatter = new BinaryOptionDispatchingSnakFormatter(
 			'text/whatever',
 			new InMemoryDataTypeLookup(),
-			$this->getMock( SnakFormatter::class ),
-			$this->getMock( SnakFormatter::class ),
+			$this->createMock( SnakFormatter::class ),
+			$this->createMock( SnakFormatter::class ),
 			[]
 		);
 

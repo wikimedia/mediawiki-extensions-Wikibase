@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
@@ -17,7 +16,6 @@ use Wikibase\Repo\GenericEventDispatcher;
  * @author Daniel Kinzler
  */
 class GenericEventDispatcherTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testRegisterWatcher_failure() {
 		$this->expectException( InvalidArgumentException::class );

@@ -23,8 +23,6 @@ use Wikibase\Lib\Store\LatestRevisionIdResult;
  */
 class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	/*private */ const TEST_LABEL = 'tomato';
 	/*private */ const TEST_DESCRIPTION = 'The edible berry of the plant Solanum lycopersicum';
 	/*private */ const TTL = 3600; //Bigger than time than it takes to run the tests

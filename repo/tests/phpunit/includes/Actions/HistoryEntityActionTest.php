@@ -8,7 +8,6 @@ use IContextSource;
 use Language;
 use MWContentSerializationException;
 use OutputPage;
-use PHPUnit4And6Compat;
 use PHPUnit_Framework_MockObject_MockObject;
 use Title;
 use User;
@@ -31,7 +30,6 @@ use Wikibase\Store\EntityIdLookup;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/** @see \LanguageQqx */
 	const DUMMY_LANGUAGE = 'qqx';

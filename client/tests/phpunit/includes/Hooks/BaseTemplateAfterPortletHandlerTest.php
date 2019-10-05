@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use BaseTemplate;
-use PHPUnit4And6Compat;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 
 /**
@@ -18,7 +17,6 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
  * @author Marius Hoch < hoo@online.de >
  */
 class BaseTemplateAfterPortletHandlerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider getEditLinkProvider

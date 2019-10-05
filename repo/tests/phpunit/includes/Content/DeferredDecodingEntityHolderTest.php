@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use PHPUnit4And6Compat;
 use RuntimeException;
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
@@ -26,7 +25,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Thiemo Kreuz
  */
 class DeferredDecodingEntityHolderTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return EntityDocument

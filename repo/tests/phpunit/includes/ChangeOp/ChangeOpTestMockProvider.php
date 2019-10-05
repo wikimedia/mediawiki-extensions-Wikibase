@@ -73,8 +73,8 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @return PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getMock( $class ) {
-		return $this->mockBuilderFactory->getMock( $class );
+	private function createMock( $class ) {
+		return $this->mockBuilderFactory->getMockBuilder( $class )->getMock();
 	}
 
 	/**
@@ -147,7 +147,7 @@ class ChangeOpTestMockProvider {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getMockPropertyDataTypeLookup() {
-		$mock = $this->getMock( PropertyDataTypeLookup::class );
+		$mock = $this->createMock( PropertyDataTypeLookup::class );
 		$mock->expects( TestCase::any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( TestCase::returnValue( 'string' ) );
@@ -201,7 +201,7 @@ class ChangeOpTestMockProvider {
 
 		$validators = [ new TypeValidator( DataValue::class ), $topValidator ];
 
-		$mock = $this->getMock( DataTypeValidatorFactory::class );
+		$mock = $this->createMock( DataTypeValidatorFactory::class );
 		$mock->expects( TestCase::any() )
 			->method( 'getValidators' )
 			->will( TestCase::returnCallback( function( $id ) use ( $validators ) {
@@ -218,7 +218,7 @@ class ChangeOpTestMockProvider {
 	 * @return ValueValidator
 	 */
 	public function getMockTermValidator() {
-		$mock = $this->getMock( ValueValidator::class );
+		$mock = $this->createMock( ValueValidator::class );
 		$mock->expects( TestCase::any() )
 			->method( 'validate' )
 			->will( TestCase::returnCallback( function( $text ) {
@@ -401,7 +401,7 @@ class ChangeOpTestMockProvider {
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getMockSiteLinkConflictLookup() {
-		$mock = $this->getMock( SiteLinkConflictLookup::class );
+		$mock = $this->createMock( SiteLinkConflictLookup::class );
 
 		$mock->expects( TestCase::any() )
 			->method( 'getConflictsForItem' )

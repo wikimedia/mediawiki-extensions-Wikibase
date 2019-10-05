@@ -16,8 +16,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  */
 class ByTypeDispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	/**
 	 * @expectedException \InvalidArgumentException
 	 */

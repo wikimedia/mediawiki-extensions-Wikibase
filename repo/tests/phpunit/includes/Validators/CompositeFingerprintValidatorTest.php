@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
-use PHPUnit4And6Compat;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,7 +20,6 @@ use Wikibase\Repo\Validators\FingerprintValidator;
  * @author Daniel Kinzler
  */
 class CompositeFingerprintValidatorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function validFingerprintProvider() {
 		$success = Result::newSuccess();

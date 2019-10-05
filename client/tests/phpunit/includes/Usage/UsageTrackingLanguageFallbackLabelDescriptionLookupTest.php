@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use MediaWikiCoversValidator;
-use PHPUnit4And6Compat;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -23,7 +22,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  * @author Marius Hoch
  */
 class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	use MediaWikiCoversValidator;
 
 	public function provideGetLabel() {

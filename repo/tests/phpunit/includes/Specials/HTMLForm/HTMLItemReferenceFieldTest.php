@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -16,7 +15,6 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLItemReferenceField;
  * @license GPL-2.0-or-later
  */
 class HTMLItemReferenceFieldTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 	/**
 	 * @var InMemoryEntityLookup
 	 */

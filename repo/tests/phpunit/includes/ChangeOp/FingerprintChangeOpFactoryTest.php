@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 
@@ -16,7 +15,6 @@ use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
  * @author Daniel Kinzler
  */
 class FingerprintChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return FingerprintChangeOpFactory

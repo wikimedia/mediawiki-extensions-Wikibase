@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use ChangesList;
 use FauxRequest;
-use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
@@ -29,7 +28,6 @@ use Wikibase\Store\EntityIdLookup;
  * @author Daniel Kinzler
  */
 class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param Title[] $titles

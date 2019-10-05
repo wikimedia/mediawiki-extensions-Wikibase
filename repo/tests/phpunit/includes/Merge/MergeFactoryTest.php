@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Merge;
 
 use HashSiteStore;
-use PHPUnit4And6Compat;
 use TestSites;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
@@ -26,7 +25,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @author Daniel Kinzler
  */
 class MergeFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return MergeFactory

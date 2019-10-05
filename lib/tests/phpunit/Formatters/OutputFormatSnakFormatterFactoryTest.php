@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
@@ -33,7 +32,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Daniel Kinzler
  */
 class OutputFormatSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function newOutputFormatSnakFormatterFactory( $dataType = 'string' ) {
 		$snakFormatterCallbacks = [

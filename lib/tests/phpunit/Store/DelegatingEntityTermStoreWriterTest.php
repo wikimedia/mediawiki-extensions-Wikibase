@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -28,7 +27,6 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
  * @license GPL-2.0-or-later
  */
 class DelegatingEntityTermStoreWriterTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var InMemoryPropertyTermStore

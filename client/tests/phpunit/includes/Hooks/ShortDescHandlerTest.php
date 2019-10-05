@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use MediaWiki\MediaWikiServices;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use UtfNormal\Utils;
 use Wikibase\Client\Hooks\ShortDescHandler;
@@ -18,7 +17,6 @@ use Wikibase\Client\Store\DescriptionLookup;
  * @license GPL-2.0-or-later
  */
 class ShortDescHandlerTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ShortDescHandler

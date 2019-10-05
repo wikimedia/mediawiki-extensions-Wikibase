@@ -446,7 +446,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @dataProvider providerOnFormat
 	 */
 	public function testOnFormat( $type, $root, $pre, $auto, $post, $title, $local, $expected ) {
-		$itemTitle = $this->getMock( $title );
+		$itemTitle = $this->createMock( $title );
 		$itemTitle->expects( $this->once() )
 			->method( 'getNamespace' )
 			->will( $this->returnValue(

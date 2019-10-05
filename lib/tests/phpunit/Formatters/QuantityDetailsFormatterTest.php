@@ -6,7 +6,6 @@ use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use ValueFormatters\BasicNumberLocalizer;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
@@ -23,7 +22,6 @@ use Wikibase\Lib\Formatters\QuantityDetailsFormatter;
  * @author Thiemo Kreuz
  */
 class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
 		$vocabularyUriFormatter = $this->createMock( ValueFormatter::class );

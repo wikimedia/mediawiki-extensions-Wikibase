@@ -7,7 +7,6 @@ use ContentHandler;
 use FauxRequest;
 use IContextSource;
 use OutputPage;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use Skin;
 use SkinFallbackTemplate;
@@ -27,7 +26,6 @@ use WikiPage;
  * @author Marius Hoch < hoo@online.de >
  */
 class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testDoSkinTemplateOutputPageBeforeExec_setEditLink() {
 		$expected = 'I am a Link!';

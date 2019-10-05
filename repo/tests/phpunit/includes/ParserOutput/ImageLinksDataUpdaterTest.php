@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
-use PHPUnit4And6Compat;
 use ParserOutput;
 use RepoGroup;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -21,7 +20,6 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
  * @author Thiemo Kreuz
  */
 class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return ImageLinksDataUpdater

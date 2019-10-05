@@ -198,7 +198,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowEntityImport );
 
 		if ( $expectedException !== null ) {
-			$this->setExpectedException( $expectedException );
+			$this->expectException( $expectedException );
 		}
 
 		RepoHooks::onImportHandleRevisionXMLTag( $importer, [], $revisionInfo );
@@ -295,7 +295,7 @@ XML
 		} );
 
 		if ( $expectedException !== null ) {
-			$this->setExpectedException( $expectedException );
+			$this->expectException( $expectedException );
 		}
 
 		$importer->doImport();

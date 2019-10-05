@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use HashBagOStuff;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
@@ -19,14 +18,13 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetItemIdForLink_cacheHit() {
 		$cache = new HashBagOStuff();
 		$cache->set( 'wikibase:sitelinks-by-page:foowiki:bar', 'Q42' );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			$cache
 		);
 
@@ -67,7 +65,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$cache->set( 'wikibase:sitelinks-by-page:foowiki:bar', 'Q42' );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			$cache
 		);
 
@@ -110,7 +108,7 @@ class CachingSiteLinkLookupTest extends \PHPUnit\Framework\TestCase {
 		$cache->set( 'wikibase:sitelinks:Q42', $siteLinks );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			$cache
 		);
 

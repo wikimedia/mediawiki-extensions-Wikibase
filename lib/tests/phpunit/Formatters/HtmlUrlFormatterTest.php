@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Formatters\HtmlUrlFormatter;
 
@@ -20,7 +19,6 @@ use Wikibase\Lib\Formatters\HtmlUrlFormatter;
  * @author Daniel Kinzler
  */
 class HtmlUrlFormatterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider urlFormatProvider

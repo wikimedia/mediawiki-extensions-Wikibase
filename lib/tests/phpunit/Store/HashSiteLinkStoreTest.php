@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -20,7 +19,6 @@ use Wikibase\Lib\Store\HashSiteLinkStore;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetItemIdForLink() {
 		$itemId = new ItemId( 'Q900' );

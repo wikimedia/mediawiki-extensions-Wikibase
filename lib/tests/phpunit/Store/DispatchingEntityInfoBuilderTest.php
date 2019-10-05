@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\DispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfo;
@@ -18,12 +17,11 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideInvalidConstructorArguments() {
 		return [
 			'empty builder list' => [ [] ],
-			'invalid repository name as a key' => [ [ 'fo:oo' => $this->getMock( EntityInfoBuilder::class ) ] ],
+			'invalid repository name as a key' => [ [ 'fo:oo' => $this->createMock( EntityInfoBuilder::class ) ] ],
 			'not an EntityInfoBuilder provided as a builder' => [ [ '' => new ItemId( 'Q111' ) ] ],
 		];
 	}

@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
@@ -17,8 +16,6 @@ use Wikibase\Lib\Formatters\DispatchingEntityIdHtmlLinkFormatter;
  * @license GPL-2.0-or-later
  */
 class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var EntityIdFormatter|MockObject

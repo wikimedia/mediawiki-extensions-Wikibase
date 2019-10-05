@@ -26,8 +26,6 @@ use Wikibase\Lib\Store\StorageException;
  */
 class MockRepositoryTest extends TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	/**
 	 * @var MockRepository|null
 	 */
@@ -443,7 +441,7 @@ class MockRepositoryTest extends TestCase {
 		$this->setupGetEntities();
 
 		if ( $error !== null ) {
-			$this->setExpectedException( $error );
+			$this->expectException( $error );
 		}
 
 		$rev = $this->repo->saveEntity( $item, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );

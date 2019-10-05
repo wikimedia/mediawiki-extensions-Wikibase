@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Reporting;
 
-use PHPUnit4And6Compat;
 use RuntimeException;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 
@@ -16,7 +15,6 @@ use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
  * @author Daniel Kinzler
  */
 class RethrowingExceptionHandlerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testReportMessage() {
 		$this->expectException( RuntimeException::class );

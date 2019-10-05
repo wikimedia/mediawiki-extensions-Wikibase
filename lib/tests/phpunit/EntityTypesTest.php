@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests;
 
 use Deserializers\Deserializer;
-use PHPUnit4And6Compat;
 use Serializers\Serializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
@@ -15,7 +14,6 @@ use Wikibase\DataModel\SerializerFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getRegistry() {
 		return require __DIR__  . '/../../WikibaseLib.entitytypes.php';
@@ -33,7 +31,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$serializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Serializer' )
-			->will( $this->returnValue( $this->getMock( Serializer::class ) ) );
+			->will( $this->returnValue( $this->createMock( Serializer::class ) ) );
 
 		return $serializerFactory;
 	}
@@ -50,7 +48,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$deserializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Deserializer' )
-			->will( $this->returnValue( $this->getMock( Deserializer::class ) ) );
+			->will( $this->returnValue( $this->createMock( Deserializer::class ) ) );
 
 		return $deserializerFactory;
 	}

@@ -17,7 +17,7 @@ use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 
 	public function testGivenLocalWikiSource_urlOfLocalWikiIsUsed() {
-		$this->setService( 'InterwikiLookup', $this->getMock( InterwikiLookup::class ) );
+		$this->setService( 'InterwikiLookup', $this->createMock( InterwikiLookup::class ) );
 		$this->setContentLang( 'de' );
 		$this->setMwGlobals( 'wgArticlePath', 'http://foo.test/wiki/$1' );
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
@@ -22,7 +21,6 @@ use Wikimedia\Assert\ParameterAssertionException;
  * @license GPL-2.0-or-later
  */
 class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function provideInvalidInteractorConfig() {
 		return [

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use ReflectionClass;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -16,7 +15,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Marius Hoch
  */
 class SnakFormatTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function fallbackFormatProvider() {
 		yield [ SnakFormatter::FORMAT_HTML, SnakFormatter::FORMAT_HTML_VERBOSE ];

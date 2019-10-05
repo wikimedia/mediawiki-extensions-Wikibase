@@ -129,11 +129,11 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 
 		$redirectContent = ItemContent::newFromRedirect(
 			$redirect,
-			$this->getMock( Title::class )
+			$this->createMock( Title::class )
 		);
 		$redirectContent2 = ItemContent::newFromRedirect(
 			$redirect2,
-			$this->getMock( Title::class )
+			$this->createMock( Title::class )
 		);
 
 		return [

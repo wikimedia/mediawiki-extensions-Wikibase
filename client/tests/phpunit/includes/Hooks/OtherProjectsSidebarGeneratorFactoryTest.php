@@ -34,7 +34,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 		$siteLinkLookup = new MockRepository();
 		$siteStore = new HashSiteStore( TestSites::getSites() );
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
-			$this->getMock( LabelDescriptionLookup::class ),
+			$this->createMock( LabelDescriptionLookup::class ),
 			[],
 			Language::factory( 'en' )
 		);
@@ -43,11 +43,11 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 			$settings,
 			$siteLinkLookup,
 			$siteStore,
-			$this->getMock( EntityLookup::class ),
+			$this->createMock( EntityLookup::class ),
 			$sidebarLinkBadgeDisplay
 		);
 
-		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator( $this->getMock( UsageAccumulator::class ) );
+		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator( $this->createMock( UsageAccumulator::class ) );
 
 		$this->assertInstanceOf(
 			OtherProjectsSidebarGenerator::class,

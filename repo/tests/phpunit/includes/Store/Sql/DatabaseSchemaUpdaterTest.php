@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MysqlUpdater;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
 use Wikibase\Store;
 use Wikimedia\Rdbms\IMaintainableDatabase;
@@ -18,7 +17,6 @@ use Wikimedia\Rdbms\IMaintainableDatabase;
  * @author Marius Hoch
  */
 class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * Extremely simple test making sure this isn't going to blow up.

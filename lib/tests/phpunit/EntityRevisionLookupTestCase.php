@@ -120,7 +120,7 @@ abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
 	 */
 	public function testGetEntityRevision( EntityId $id, $revision, $shouldExist, $expectException = null ) {
 		if ( $expectException !== null ) {
-			$this->setExpectedException( $expectException );
+			$this->expectException( $expectException );
 		}
 
 		$revision = $this->resolveLogicalRevision( $revision );

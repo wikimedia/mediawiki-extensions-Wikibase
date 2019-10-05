@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Hooks\Helpers;
 use DerivativeContext;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
-use PHPUnit4And6Compat;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
 use Title;
@@ -21,7 +20,6 @@ use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
  * @license GPL-2.0-or-later
  */
 class OutputPageEditabilityTest extends TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider nonEditableOutputPageProvider

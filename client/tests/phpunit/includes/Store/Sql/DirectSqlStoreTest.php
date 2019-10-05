@@ -48,7 +48,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$wikibaseServices->method( 'getEntityPrefetcher' )
 			->willReturn( new NullEntityPrefetcher() );
 		$wikibaseServices->method( 'getEntityRevisionLookup' )
-			->willReturn( $this->getMock( EntityRevisionLookup::class ) );
+			->willReturn( $this->createMock( EntityRevisionLookup::class ) );
 		$wikibaseServices->method( 'getPropertyInfoLookup' )
 			->willReturn( new MockPropertyInfoLookup() );
 

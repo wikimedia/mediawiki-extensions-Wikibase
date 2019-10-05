@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpStatement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -38,7 +37,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @license GPL-2.0-or-later
  */
 class ChangeOpStatementTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var ChangeOpTestMockProvider

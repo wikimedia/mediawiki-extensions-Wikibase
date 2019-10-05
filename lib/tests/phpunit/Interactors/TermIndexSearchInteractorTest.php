@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -26,7 +25,6 @@ use Wikibase\Lib\Tests\Store\MockTermIndex;
  * @author Addshore
  */
 class TermIndexSearchInteractorTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getMockTermIndex() {
 		return new MockTermIndex(

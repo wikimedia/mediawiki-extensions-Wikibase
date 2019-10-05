@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use InvalidArgumentException;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\DispatchingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -17,7 +16,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @license GPL-2.0-or-later
  */
 class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private $localPropertyInfo;
 	private $fooPropertyInfo;
@@ -106,14 +104,14 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 			],
 			'non-string keys' => [
 				[
-					'' => $this->getMock( PropertyInfoLookup::class ),
-					100 => $this->getMock( PropertyInfoLookup::class ),
+					'' => $this->createMock( PropertyInfoLookup::class ),
+					100 => $this->createMock( PropertyInfoLookup::class ),
 				],
 			],
 			'repo name containing colon' => [
 				[
-					'' => $this->getMock( PropertyInfoLookup::class ),
-					'fo:oo' => $this->getMock( PropertyInfoLookup::class ),
+					'' => $this->createMock( PropertyInfoLookup::class ),
+					'fo:oo' => $this->createMock( PropertyInfoLookup::class ),
 				],
 			],
 		];

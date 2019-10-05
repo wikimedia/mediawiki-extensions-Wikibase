@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -31,7 +30,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  */
 class ItemViewTest extends EntityViewTestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param EntityId|ItemId $id
@@ -91,7 +89,7 @@ class ItemViewTest extends EntityViewTestCase {
 		return new ItemView(
 			$templateFactory,
 			$termsView,
-			$this->getMock( LanguageDirectionalityLookup::class ),
+			$this->createMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()
 				->getMock(),
@@ -100,7 +98,7 @@ class ItemViewTest extends EntityViewTestCase {
 				->disableOriginalConstructor()
 				->getMock(),
 			[],
-			$this->getMock( LocalizedTextProvider::class )
+			$this->createMock( LocalizedTextProvider::class )
 		);
 	}
 

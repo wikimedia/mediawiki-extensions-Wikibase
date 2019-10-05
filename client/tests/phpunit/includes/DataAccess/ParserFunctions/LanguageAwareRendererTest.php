@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
 use Language;
-use PHPUnit4And6Compat;
 use ParserOutput;
 use Title;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -35,7 +34,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Daniel Kinzler
  */
 class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver
@@ -68,7 +66,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			$targetLanguage,
 			$entityStatementsRenderer,
 			$parserOutput,
-			$this->getMock( Title::class )
+			$this->createMock( Title::class )
 		);
 	}
 
@@ -213,7 +211,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 		$lookup = $this->createMock( EntityLookup::class );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnValue( $this->getMock( StatementListProvider::class ) ) );
+			->will( $this->returnValue( $this->createMock( StatementListProvider::class ) ) );
 
 		return new RestrictedEntityLookup( $lookup, $entityAccessLimit );
 	}

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use Language;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
@@ -18,7 +17,6 @@ use Wikibase\View\EntityDocumentView;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	private function getRegistry() {
 		return require __DIR__  . '/../../../WikibaseRepo.entitytypes.php';

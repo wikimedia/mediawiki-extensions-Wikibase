@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use PHPUnit4And6Compat;
 use Parser;
 use ParserOutput;
 use Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler;
@@ -19,7 +18,6 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
  * @author Marius Hoch
  */
 class ParserLimitReportPrepareHookHandlerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testNewFromGlobalState() {
 		$instance = ParserLimitReportPrepareHookHandler::newFromGlobalState();
@@ -43,7 +41,7 @@ class ParserLimitReportPrepareHookHandlerTest extends \PHPUnit\Framework\TestCas
 
 		$parserOutput = new ParserOutput();
 
-		$handler->doParserLimitReportPrepare( $this->getMock( Parser::class ), $parserOutput );
+		$handler->doParserLimitReportPrepare( $this->createMock( Parser::class ), $parserOutput );
 
 		$limitReportData = $parserOutput->getLimitReportData();
 

@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Language;
-use PHPUnit4And6Compat;
 use Parser;
 use ParserOptions;
 use Title;
@@ -44,7 +43,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider wikitextTypeProvider
@@ -201,7 +199,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = new StatementGroupRendererFactory(
 			$labelResolver,
 			new SnaksFinder(),
-			$this->getMock( EntityLookup::class ),
+			$this->createMock( EntityLookup::class ),
 			new DataAccessSnakFormatterFactory(
 				$this->getLanguageFallbackChainFactory(),
 				$formatterFactory,

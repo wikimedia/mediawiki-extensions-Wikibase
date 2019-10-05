@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
@@ -21,7 +20,6 @@ use Wikibase\TermIndexEntry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	const EXISTING_LOCAL_ITEM = 'Q111';
 	const DEFAULT_LANGUAGE = 'pt';

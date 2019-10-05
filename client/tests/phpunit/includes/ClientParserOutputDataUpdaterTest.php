@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests;
 
-use PHPUnit4And6Compat;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
@@ -26,7 +25,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Daniel Kinzler
  */
 class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var MockRepository|null

@@ -20,8 +20,6 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  */
 class CombinedEntitySearchHelperUnitTest extends \PHPUnit\Framework\TestCase {
 
-	use \PHPUnit4And6Compat;
-
 	public function testInternalSearchHelperReceivesCorrectParameters() {
 		$q33 = [ 'Q33' => new TermSearchResult( new Term( 'en', 'foo33' ), 'match', new ItemId( 'Q33' ) ) ];
 

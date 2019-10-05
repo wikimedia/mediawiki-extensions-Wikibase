@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use FauxRequest;
-use PHPUnit4And6Compat;
 use RequestContext;
 use Title;
 use Wikibase\DataAccess\EntitySource;
@@ -36,7 +35,6 @@ use Wikibase\Repo\Api\SearchEntities;
  * @author Daniel Kinzler
  */
 class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @param array $params

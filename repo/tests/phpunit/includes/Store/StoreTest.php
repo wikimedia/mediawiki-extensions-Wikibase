@@ -42,11 +42,11 @@ class StoreTest extends \MediaWikiTestCase {
 				$wikibaseRepo->getEntityChangeFactory(),
 				$wikibaseRepo->getEntityIdParser(),
 				$wikibaseRepo->getEntityIdComposer(),
-				$this->getMock( EntityIdLookup::class ),
-				$this->getMock( EntityTitleStoreLookup::class ),
+				$this->createMock( EntityIdLookup::class ),
+				$this->createMock( EntityTitleStoreLookup::class ),
 				new EntityNamespaceLookup( [] ),
-				$this->getMock( IdGenerator::class ),
-				$this->getMock( WikibaseServices::class ),
+				$this->createMock( IdGenerator::class ),
+				$this->createMock( WikibaseServices::class ),
 				new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
 			)
 		];

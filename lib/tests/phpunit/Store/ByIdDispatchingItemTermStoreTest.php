@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit4And6Compat;
 use Wikibase\ByIdDispatchingItemTermStore;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,8 +17,6 @@ use Wikibase\TermStore\ItemTermStore;
  * @license GPL-2.0-or-later
  */
 class ByIdDispatchingItemTermStoreTest extends TestCase {
-
-	use PHPUnit4And6Compat;
 
 	/** @dataProvider provideMethods */
 	public function testMethod( $methodName, array $extraArguments = [], $returnValue = null ) {

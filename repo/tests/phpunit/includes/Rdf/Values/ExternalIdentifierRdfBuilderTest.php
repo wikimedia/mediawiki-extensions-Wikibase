@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
-use PHPUnit4And6Compat;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -25,7 +24,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Daniel Kinzler
  */
 class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @var NTriplesRdfTestHelper

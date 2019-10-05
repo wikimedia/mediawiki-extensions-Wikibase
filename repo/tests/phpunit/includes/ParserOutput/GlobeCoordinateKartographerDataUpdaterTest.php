@@ -7,7 +7,6 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use Language;
 use ParserOutput;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -24,7 +23,6 @@ use Wikibase\Repo\ParserOutput\GlobeCoordinateKartographerDataUpdater;
  * @author Marius Hoch
  */
 class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testUpdateParserOutput() {
 		$dataUpdater = new GlobeCoordinateKartographerDataUpdater(

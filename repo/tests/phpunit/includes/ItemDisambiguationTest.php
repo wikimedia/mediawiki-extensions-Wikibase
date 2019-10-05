@@ -37,7 +37,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnValue( $this->getMock( Title::class ) ) );
+			->will( $this->returnValue( $this->createMock( Title::class ) ) );
 
 		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Serialization;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 
@@ -15,7 +14,6 @@ use Wikibase\Lib\Serialization\CallbackFactory;
  * @author Thiemo Kreuz
  */
 class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @return PropertyDataTypeLookup

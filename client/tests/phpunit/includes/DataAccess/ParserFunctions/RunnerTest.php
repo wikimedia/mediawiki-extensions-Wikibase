@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
-use PHPUnit4And6Compat;
 use Parser;
 use ParserOptions;
 use PPFrame;
@@ -30,7 +29,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Marius Hoch < hoo@online.de >
  */
 class RunnerTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	/**
 	 * @dataProvider wikitextTypeProvider
@@ -73,7 +71,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
@@ -86,7 +84,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$result = $runner->runPropertyParserFunction(
 			$parser,
 			$frame,
-			[ 'Cat', $this->getMock( PPNode::class ) ]
+			[ 'Cat', $this->createMock( PPNode::class ) ]
 		);
 
 		$expected = [
@@ -108,7 +106,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$restrictedEntityLookup,
 			'enwiki',
@@ -120,7 +118,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$runner->runPropertyParserFunction(
 			$parser,
 			$frame,
-			[ 'Cat', $this->getMock( PPNode::class ) ]
+			[ 'Cat', $this->createMock( PPNode::class ) ]
 		);
 
 		// Still 0 as the entity has been loaded before
@@ -132,7 +130,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
@@ -146,7 +144,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$result = $runner->runPropertyParserFunction(
 			$parser,
 			$frame,
-			[ 'Cat', $this->getMock( PPNode::class ) ]
+			[ 'Cat', $this->createMock( PPNode::class ) ]
 		);
 
 		// No result, as we exceeded the expensive parser function limit
@@ -166,7 +164,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 		$runner = new Runner(
 			$rendererFactory,
-			$this->getMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
@@ -179,7 +177,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$result = $runner->runPropertyParserFunction(
 			$parser,
 			$frame,
-			[ 'Cat', $this->getMock( PPNode::class ) ]
+			[ 'Cat', $this->createMock( PPNode::class ) ]
 		);
 
 		$expected = [
@@ -195,7 +193,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 	 * @return RestrictedEntityLookup
 	 */
 	private function getRestrictedEntityLookup() {
-		return new RestrictedEntityLookup( $this->getMock( EntityLookup::class ), 200 );
+		return new RestrictedEntityLookup( $this->createMock( EntityLookup::class ), 200 );
 	}
 
 	/**
