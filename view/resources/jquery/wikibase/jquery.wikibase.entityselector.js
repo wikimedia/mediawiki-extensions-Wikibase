@@ -211,16 +211,7 @@
 
 			clearTimeout( this._searching );
 			this._searching = setTimeout( function () {
-				self.search( event )
-				.done( function ( suggestions, requestTerm ) {
-					if ( !suggestions.length || self.element.val() !== requestTerm ) {
-						return;
-					}
-
-					if ( self._termMatchesSuggestion( requestTerm, suggestions[ 0 ] ) ) {
-						self._select( suggestions[ 0 ] );
-					}
-				} );
+				self.search( event );
 			}, this.options.delay );
 		},
 
