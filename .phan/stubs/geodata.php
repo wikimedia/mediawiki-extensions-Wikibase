@@ -9,6 +9,7 @@
 namespace GeoData;
 
 class Coord {
+	public $primary = false;
 	/**
 	 * @param float $lat
 	 * @param float $lon
