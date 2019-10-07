@@ -21,6 +21,8 @@ namespace CirrusSearch {
 	}
 
 	class Connection {
+		public function __construct( SearchConfig $config, $cluster = null ) {
+		}
 	}
 
 	class ElasticsearchIntermediary {
@@ -68,6 +70,8 @@ namespace CirrusSearch {
 	}
 
 	class SearchRequestLog {
+		public function __construct( \Elastica\Client $client, $description, $queryType, array $extra = [], array $namespaces = null ) {
+		}
 	}
 
 	class Searcher {
@@ -229,6 +233,8 @@ namespace CirrusSearch\Query {
 
 	}
 	class MoreLikeFeature {
+		public function __construct( SearchConfig $config ) {
+		}
 		protected function doApply( SearchContext $context, $key, $value, $quotedValue, $negated ) {
 		}
 	}

@@ -105,7 +105,7 @@ return call_user_func( function() {
 		],
 		'VT:wikibase-unmapped-entityid' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return new UnmappedEntityIdValueFormatter( $format, $options );
+				return new UnmappedEntityIdValueFormatter();
 			}
 		],
 		'PT:external-id' => [

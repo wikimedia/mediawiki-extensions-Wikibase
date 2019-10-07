@@ -326,8 +326,6 @@ return [
 		"PhanParamSignatureMismatch",
 		// approximate error count: 1
 		"PhanParamSignatureMismatchInternal",
-		// approximate error count: 4
-		"PhanParamTooMany",
 		// approximate error count: 2
 		"PhanTypeComparisonToArray",
 		// approximate error count: 47

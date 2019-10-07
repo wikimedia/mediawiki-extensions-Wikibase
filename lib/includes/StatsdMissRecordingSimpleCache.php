@@ -41,6 +41,8 @@ class StatsdMissRecordingSimpleCache implements CacheInterface {
 	}
 
 	private function recordMisses( $count ) {
+		// FIXME StatsdDataFactoryInterface::increment has only one arg in code, two in docs
+		// @phan-suppress-next-line PhanParamTooMany
 		$this->stats->increment( $this->statsKey, $count );
 	}
 

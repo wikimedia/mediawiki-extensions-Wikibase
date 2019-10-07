@@ -21,6 +21,8 @@ class Scribunto_LuaEngine {
 }
 
 class Scribunto_LuaError {
+	public function __construct( $message, array $options = [] ) {
+	}
 }
 
 class Scribunto_LuaLibraryBase {
