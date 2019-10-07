@@ -6,7 +6,8 @@
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget,
-		EventSingletonManager = require( '../jquery.util.EventSingletonManager.js' );
+		EventSingletonManager = require( '../jquery.util.EventSingletonManager.js' ),
+		buildCounter = require( '../../wikibase/utilities/wikibase.utilities.ui.js' );
 
 	/**
 	 * @param {string} eventNames
@@ -285,7 +286,7 @@
 					return !sitelinkview.isEmpty();
 				} );
 
-			var $counterMsg = wb.utilities.ui.buildCounter(
+			var $counterMsg = buildCounter(
 				'wikibase-sitelinks-counter',
 				$items.length
 			);

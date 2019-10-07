@@ -2,7 +2,8 @@
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget,
-		datamodel = require( 'wikibase.datamodel' );
+		datamodel = require( 'wikibase.datamodel' ),
+		buildCounter = require( '../../wikibase/utilities/wikibase.utilities.ui.js' );
 
 	/**
 	 * View for displaying and editing `datamodel.Statement` objects.
@@ -585,7 +586,7 @@
 				numberOfValues = this._referencesListview.items().length;
 			}
 
-			var $counterMsg = wb.utilities.ui.buildCounter(
+			var $counterMsg = buildCounter(
 				'wikibase-statementview-references-counter',
 				numberOfValues
 			);

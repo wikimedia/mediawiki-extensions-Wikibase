@@ -2,7 +2,7 @@
  * @license GPL-2.0-or-later
  * @author H. Snater < mediawiki@snater.com >
  */
-( function ( wb ) {
+( function () {
 	'use strict';
 
 	/**
@@ -11,10 +11,9 @@
 	 * @abstract
 	 * @constructor
 	 */
-	wb.utilities.GuidGenerator = function GuidGenerator() {
-	};
+	var GuidGenerator = function GuidGenerator() {};
 
-	$.extend( wb.utilities.GuidGenerator.prototype, {
+	$.extend( GuidGenerator.prototype, {
 		/**
 		 * Generates and returns a Globally Unique IDentifier.
 		 *
@@ -28,9 +27,9 @@
 	 * @see http://php.net/manual/en/function.com-create-guid.php
 	 * @return {string}
 	 */
-	wb.utilities.V4GuidGenerator = util.inherit(
+	module.exports = util.inherit(
 		'V4GuidGenerator',
-		wb.utilities.GuidGenerator, {
+		GuidGenerator, {
 			/**
 			 * Returns a random hexadecimal number in a given range of integers.
 			 * (see PHP implementation)
@@ -44,7 +43,7 @@
 			},
 
 			/**
-			 * @see wb.utilities.GuidGenerator
+			 * @see GuidGenerator
 			 */
 			newGuid: function () {
 				var self = this,
@@ -80,4 +79,4 @@
 		}
 	);
 
-}( wikibase ) );
+}() );

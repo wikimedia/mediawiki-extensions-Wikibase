@@ -145,29 +145,14 @@ return call_user_func( function() {
 		],
 
 		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
+			'packageFiles' => [
 				'wikibase/utilities/wikibase.utilities.ClaimGuidGenerator.js',
+
+				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
 			],
 			'dependencies' => [
 				'util.inherit',
-				'wikibase.utilities',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.utilities' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/utilities/wikibase.utilities.js',
-				'wikibase/utilities/wikibase.utilities.ui.js',
-			],
-			'styles' => [
-				'wikibase/utilities/wikibase.utilities.ui.css',
-			],
-			'dependencies' => [
 				'wikibase',
-				'mediawiki.language',
-				'mediawiki.jqueryMsg'
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
@@ -224,7 +209,6 @@ return call_user_func( function() {
 		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
 			'packageFiles' => [
 				'resources/wikibase/view/ControllerViewFactory.js',
-
 				'resources/wikibase/view/ViewController.js',
 				'resources/wikibase/view/ToolbarViewController.js',
 				'resources/wikibase/view/ViewFactory.js',
@@ -268,6 +252,7 @@ return call_user_func( function() {
 				'resources/jquery/jquery.sticknode.js',
 				'resources/jquery/jquery.removeClassByRegex.js',
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js',
+				'resources/wikibase/utilities/wikibase.utilities.ui.js',
 
 			],
 			'styles' => [
@@ -288,6 +273,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
+				'resources/wikibase/utilities/wikibase.utilities.ui.css',
 			],
 			'dependencies' => [
 				'dataValues',
@@ -313,7 +299,6 @@ return call_user_func( function() {
 				'wikibase.templates',
 				'wikibase.datamodel',
 				'wikibase.serialization',
-				'wikibase.utilities', // wikibase.utilities.ui
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
 				'wikibase',
@@ -321,6 +306,7 @@ return call_user_func( function() {
 				'mediawiki.api',
 				'mediawiki.cookie',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
+				'mediawiki.language',
 				'mediawiki.legacy.shared', // For snakview
 				'mediawiki.user',
 				'mediawiki.util',

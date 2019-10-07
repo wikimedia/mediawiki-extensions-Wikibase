@@ -7,13 +7,17 @@
 ( function ( wb ) {
 	'use strict';
 
+	var V4GuidGenerator = require( './wikibase.utilities.GuidGenerator.js' );
+
+	wb.utilities = wb.utilities || {};
+
 	/**
 	 * Claim GUID generator.
 	 *
 	 * @param {string} entityId Prefixed entity id
 	 */
 	wb.utilities.ClaimGuidGenerator = function ClaimGuidGenerator( entityId ) {
-		this._baseGenerator = new wb.utilities.V4GuidGenerator();
+		this._baseGenerator = new V4GuidGenerator();
 		this._entityId = entityId;
 	};
 

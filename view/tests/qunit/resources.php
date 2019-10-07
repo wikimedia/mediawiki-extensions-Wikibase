@@ -75,7 +75,6 @@ return [
 			'wikibase/entityChangers/SiteLinksChanger.tests.js',
 			'wikibase/entityChangers/SiteLinkSetsChanger.tests.js',
 			'wikibase/utilities/ClaimGuidGenerator.tests.js',
-			'wikibase/utilities/GuidGenerator.tests.js',
 			'wikibase/view/testViewController.js',
 			'wikibase/view/ToolbarFactory.tests.js',
 			'wikibase/wikibase.WikibaseContentLanguages.tests.js',
@@ -190,5 +189,14 @@ return [
 			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.ReadModeViewFactory',
 		],
+	],
+	'wikibase.view.tests.GuidGenerator' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/utilities/GuidGenerator.tests.js',
+			'resources/wikibase/utilities/wikibase.utilities.GuidGenerator.js',
+		],
+		'dependencies' => [
+			'wikibase'
+		]
 	],
 ];
