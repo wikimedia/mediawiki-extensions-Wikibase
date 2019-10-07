@@ -424,6 +424,13 @@ function wikibase.setupInterface()
 		return php.getReferencedEntityId( fromEntityId, propertyId, toIds )
 	end
 
+	-- Returns the current site's global id
+	wikibase.getGlobalSiteId = function()
+		php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getGlobalSiteId.call' )
+
+		return php.getSetting( 'siteGlobalID' )
+	end
+
 	mw = mw or {}
 	mw.wikibase = wikibase
 	package.loaded['mw.wikibase'] = wikibase

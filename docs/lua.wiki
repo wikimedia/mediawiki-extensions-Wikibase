@@ -359,6 +359,15 @@ mw.wikibase.getReferencedEntityId( 'Q341', 'P279', { 'Q7397', 'Q2095' } ) -- Ret
 mw.wikibase.getReferencedEntityId( 'Q59', 'P31', { 'Q7366', 'Q2095' } ) -- Returns nil
 </source>
 
+=== mw.wikibase.getGlobalSiteId ===
+<code>wikibase.getGlobalSiteId()</code><br>
+Returns the global site id (the site code used for site links) of the current wiki.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getGlobalSiteId() -- Returns a value like "dewiki" or "eswikibooks"
+</source>
+
 === Legacy aliases ===
 These functions exist solely for backward compatibility, they should not be used in new code.
 
