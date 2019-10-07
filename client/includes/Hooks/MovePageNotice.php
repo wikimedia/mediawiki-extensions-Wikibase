@@ -79,8 +79,6 @@ class MovePageNotice {
 	 * @param MovePageForm $movePage
 	 * @param Title &$oldTitle
 	 * @param Title &$newTitle
-	 *
-	 * @return bool
 	 */
 	public function doSpecialMovepageAfterMove(
 		MovePageForm $movePage,

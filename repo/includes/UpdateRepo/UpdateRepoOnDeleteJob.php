@@ -161,17 +161,14 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	}
 
 	/**
-	 * Apply the changes needed to the given Item.
-	 *
-	 * @param Item $item
-	 *
-	 * @return bool
+	 * @inheritDoc
 	 */
 	protected function applyChanges( Item $item ) {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
 
 		$item->getSiteLinkList()->removeLinkWithSiteId( $siteId );
+		return true;
 	}
 
 }

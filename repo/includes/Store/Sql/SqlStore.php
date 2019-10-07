@@ -250,13 +250,14 @@ class SqlStore implements Store {
 	 * @see Store::getLabelConflictFinder
 	 *
 	 * @return LabelConflictFinder
+	 * @suppress PhanTypeMismatchReturn
 	 */
 	public function getLabelConflictFinder() {
 		return $this->getTermIndex();
 	}
 
 	/**
-	 * @return TermIndex|LabelConflictFinder
+	 * @return TermSqlIndex
 	 */
 	private function newTermIndex() {
 		//TODO: Get $stringNormalizer from WikibaseRepo?

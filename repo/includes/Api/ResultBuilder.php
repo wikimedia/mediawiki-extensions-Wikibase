@@ -277,6 +277,7 @@ class ResultBuilder {
 		$record = [];
 
 		//if there are no props defined only return type and id..
+		// @phan-suppress-next-line PhanTypeComparisonToArray
 		if ( $props === [] ) {
 			$record['id'] = $entityId->getSerialization();
 			$record['type'] = $entityId->getEntityType();

@@ -261,7 +261,7 @@ class ShowSearchHitHandler {
 	 *
 	 * @param string[] $text ['language' => LANG, 'value' => TEXT]
 	 * @param string $displayLanguage
-	 * @return string[] ['language' => LANG, 'value' => TEXT]
+	 * @return array ['language' => LANG, 'value' => TEXT]
 	 */
 	public static function withLanguage( $text, $displayLanguage ) {
 		if ( $text['language'] == $displayLanguage || $text['value'] == '' ) {

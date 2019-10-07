@@ -89,31 +89,17 @@ $cfg['suppress_issue_types'] = array_merge(
 		"PhanParamReqAfterOpt",
 		// approximate error count: 9
 		"PhanParamSignatureMismatch",
-		// approximate error count: 1
-		"PhanParamSignatureMismatchInternal",
-		// approximate error count: 2
-		"PhanTypeComparisonToArray",
 		// approximate error count: 47
 		"PhanTypeMismatchArgument",
 		// approximate error count: 5
 		// Several cases of array_key_exists on Traversables
 		"PhanTypeMismatchArgumentInternal",
-		// approximate error count: 3
-		"PhanTypeMismatchProperty",
-		// approximate error count: 2
-		"PhanTypeMismatchReturn",
-		// approximate error count: 1
-		"PhanTypeMissingReturn",
 		// approximate error count: 72
 		"PhanUndeclaredConstant",
 		// approximate error count: 168
 		"PhanUndeclaredMethod",
 		// approximate error count: 17
 		"PhanUndeclaredProperty",
-		// approximate error count: 4
-		"PhanUndeclaredVariable",
-		// approximate error count: 1
-		"PhanTypeArraySuspicious",
 
 		"PhanAccessClassConstantInternal",
 		"PhanNonClassMethodCall",
