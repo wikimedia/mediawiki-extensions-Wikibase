@@ -1,10 +1,11 @@
 wikibase.view.ControllerViewFactory = ( function ( wb ) {
 	'use strict';
 
-	var PARENT = wikibase.view.ViewFactory;
+	var ViewFactory = require( './ViewFactory.js' ),
+		ToolbarViewController = require( './ToolbarViewController.js' );
 
 	var SELF = util.inherit(
-		PARENT,
+		ViewFactory,
 		function (
 			toolbarFactory,
 			entityChangersFactory,
@@ -24,7 +25,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		) {
 			this._toolbarFactory = toolbarFactory;
 			this._entityChangersFactory = entityChangersFactory;
-			PARENT.apply(
+			ViewFactory.apply(
 				this,
 				[
 					structureEditorFactory,
@@ -50,7 +51,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		var startEditingController = function () {
 			return controller.startEditing();
 		};
-		var view = PARENT.prototype.getEntityTermsView.call( this, startEditingController, value, $entitytermsview );
+		var view = ViewFactory.prototype.getEntityTermsView.call( this, startEditingController, value, $entitytermsview );
 		var $container = this._toolbarFactory.getToolbarContainer( view.element );
 		$container.sticknode( {
 			$container: view.$entitytermsforlanguagelistview,
@@ -113,7 +114,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		var startEditingController = function () {
 			return controller.startEditing();
 		};
-		var statementview = PARENT.prototype.getStatementView.call(
+		var statementview = ViewFactory.prototype.getStatementView.call(
 			this,
 			startEditingController,
 			entityId,
@@ -152,7 +153,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		var startEditingController = function () {
 			return controller.startEditing();
 		};
-		var view = PARENT.prototype.getSitelinkGroupView.call( this, startEditingController, groupName, value, $sitelinkgroupview );
+		var view = ViewFactory.prototype.getSitelinkGroupView.call( this, startEditingController, groupName, value, $sitelinkgroupview );
 		var siteLinkSetsChanger = this._entityChangersFactory.getSiteLinkSetsChanger();
 		controller = this._getController(
 			this._toolbarFactory.getToolbarContainer( view.element.find( '.wikibase-sitelinkgroupview-heading-container' ) ),
@@ -174,7 +175,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 			view.element
 		);
 
-		var controller = new wb.view.ToolbarViewController( model, edittoolbar, view, onRemove, startEditingCallback );
+		var controller = new ToolbarViewController( model, edittoolbar, view, onRemove, startEditingCallback );
 		edittoolbar.setController( controller );
 		controller.setValue( value );
 

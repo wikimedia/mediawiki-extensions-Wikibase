@@ -17,7 +17,7 @@ return [
 	'wikibase.view.tests.getMockListItemAdapter' => $moduleBase + [
 		'scripts' => 'getMockListItemAdapter.js',
 		'dependencies' => [
-			'wikibase.view.ViewFactory',
+			'wikibase.view.ControllerViewFactory',
 			'wikibase.tests',
 		]
 	],
@@ -77,7 +77,6 @@ return [
 			'wikibase/utilities/ClaimGuidGenerator.tests.js',
 			'wikibase/utilities/GuidGenerator.tests.js',
 			'wikibase/view/testViewController.js',
-			'wikibase/view/ToolbarViewController.tests.js',
 			'wikibase/view/ToolbarFactory.tests.js',
 			'wikibase/wikibase.WikibaseContentLanguages.tests.js',
 			'wikibase/wikibase.getUserLanguages.tests.js',
@@ -89,7 +88,6 @@ return [
 			'jquery.ui.EditableTemplatedWidget',
 			'jquery.util.getDirectionality',
 			'jquery.wikibase.entityselector',
-			'jquery.wikibase.entityview',
 			'test.sinonjs',
 			'wikibase.datamodel',
 			'wikibase.entityChangers.EntityChangersFactory',
@@ -176,7 +174,21 @@ return [
 			'tests/qunit/wikibase/view/ViewFactory.tests.js',
 		],
 		'dependencies' => [
-			'wikibase.view.ViewFactory'
+			'wikibase.view.ControllerViewFactory'
 		]
+	],
+	'wikibase.view.tests.ToolbarViewController' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/view/ToolbarViewController.tests.js',
+
+			'tests/qunit/wikibase/view/testViewController.js',
+			'resources/wikibase/view/ToolbarViewController.js',
+			'resources/wikibase/view/ViewController.js',
+		],
+		'dependencies' => [
+			'test.sinonjs',
+			'wikibase.view.ControllerViewFactory',
+			'wikibase.view.ReadModeViewFactory',
+		],
 	],
 ];

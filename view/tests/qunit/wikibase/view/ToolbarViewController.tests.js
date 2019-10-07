@@ -1,10 +1,12 @@
-( function ( wb ) {
+( function () {
 	'use strict';
+	var testViewController = require( './testViewController.js' ),
+		ToolbarViewController = require( '../../../../resources/wikibase/view/ToolbarViewController.js' );
 
 	QUnit.module( 'wikibase.view.ToolbarViewController' );
 
 	function initToolbarViewController() {
-		var controller = new wb.view.ToolbarViewController(
+		var controller = new ToolbarViewController(
 			{
 				remove: function () {
 					return $.Deferred();
@@ -45,6 +47,6 @@
 		return controller;
 	}
 
-	wb.view.testViewController.all( wb.view.ToolbarViewController, initToolbarViewController );
+	testViewController.all( ToolbarViewController, initToolbarViewController );
 
-}( wikibase ) );
+}() );

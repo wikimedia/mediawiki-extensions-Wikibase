@@ -220,37 +220,20 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.view.ControllerViewFactory' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/view/ViewController.js',
-				'wikibase/view/ToolbarViewController.js',
-				'wikibase/view/ControllerViewFactory.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.view.__namespace',
-				'mediawiki.cookie',
-				'mediawiki.user',
-				'wikibase.view.ViewFactory'
-			],
-			'messages' => [
-				// For ToolbarViewController:
-				'wikibase-save-inprogress',
-				'wikibase-publish-inprogress',
-			],
-		],
-
 		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
 			'dependencies' => [
 				'wikibase.view.__namespace',
-				'wikibase.view.ViewFactory'
+				'wikibase.view.ControllerViewFactory'
 			],
 		],
-		'wikibase.view.ViewFactory' => $moduleBaseTemplate + [
+		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
 			'packageFiles' => [
-				'resources/wikibase/view/ViewFactory.js',
+				'resources/wikibase/view/ControllerViewFactory.js',
 
+				'resources/wikibase/view/ViewController.js',
+				'resources/wikibase/view/ToolbarViewController.js',
+				'resources/wikibase/view/ViewFactory.js',
 				'resources/jquery/jquery.util.EventSingletonManager.js',
 				'resources/wikibase/wikibase.ValueViewBuilder.js',
 				'resources/jquery/wikibase/jquery.wikibase.pagesuggester.js',
@@ -310,6 +293,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
 			],
 			'dependencies' => [
 				'dataValues',
@@ -328,7 +312,6 @@ return call_user_func( function() {
 				'jquery.inputautoexpand',
 				'jquery.throttle-debounce',
 				'jquery.wikibase.entityselector',
-				'jquery.wikibase.entityview',
 				'jquery.wikibase.siteselector',
 				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
@@ -411,7 +394,10 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-rank-tooltip-deprecated',
 				'wikibase-statementview-references-counter',
-			]
+				// For ToolbarViewController:
+				'wikibase-save-inprogress',
+				'wikibase-publish-inprogress',
+			],
 		],
 	];
 

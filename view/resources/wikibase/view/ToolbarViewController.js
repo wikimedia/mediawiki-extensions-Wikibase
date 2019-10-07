@@ -1,14 +1,16 @@
-wikibase.view.ToolbarViewController = ( function ( wb ) {
+module.exports = ( function ( wb ) {
 	'use strict';
+
+	var ViewController = require( './ViewController.js' );
 
 	/**
 	 * A view controller implementation for editing wikibase datamodel values
 	 * through wikibase views using toolbars
 	 *
-	 * @class wikibase.view.ToolbarViewController
+	 * @class ToolbarViewController
 	 * @license GPL-2.0-or-later
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
-	 * @extends wikibase.view.ViewController
+	 * @extends ViewController
 	 * @constructor
 	 *
 	 * @param {Object} model A model-controller interaction object, consisting of a set of functions.
@@ -22,7 +24,7 @@ wikibase.view.ToolbarViewController = ( function ( wb ) {
 	 * @param {Function} startEditingCallback
 	 */
 	var SELF = util.inherit(
-		wb.view.ViewController,
+		ViewController,
 		function ( model, toolbar, view, removeView, startEditingCallback ) {
 			this._model = model;
 			this._toolbar = toolbar;

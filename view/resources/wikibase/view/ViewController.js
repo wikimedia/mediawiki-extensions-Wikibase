@@ -1,4 +1,4 @@
-wikibase.view.ViewController = ( function () {
+module.exports = ( function () {
 	'use strict';
 
 	/**
