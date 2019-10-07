@@ -13,6 +13,16 @@ before_script:
 script:
   - npm run test
 
+deploy:
+  provider: npm
+  email: engineering-managers@wikimedia.de
+  api_key:
+    secure: UD4T61ZzgshstkdSRlm67mTozh79hOdJla6skyjp/KlijK21NG/1r5jB1DSo9GZNg/5W9vLOtm1GSf7qFJxrdrZSovM2ElG3VM5d3vwa7AfbR9jibjQzdYfAfAgqa5mIgPNFJjsa5utxPpeOQDzsjKwJsBp3LYlQaAArvZquUiA=
+  on:
+    tags: true
+    branch: master
+    condition: "$TRAVIS_NODE_VERSION = 12"
+
 notifications:
   irc:
     channels:
