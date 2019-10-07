@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use MediaWiki\Storage\NameTableStore;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
@@ -133,7 +134,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|NameTableStore
+	 * @return MockObject|NameTableStore
 	 */
 	private function getMockNameTableStore() {
 		$m = $this->getMockBuilder( NameTableStore::class );

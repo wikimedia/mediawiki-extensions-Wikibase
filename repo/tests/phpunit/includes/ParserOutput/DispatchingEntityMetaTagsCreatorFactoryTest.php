@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use InvalidArgumentException;
 use Language;
 use LogicException;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use PHPUnit\Framework\TestCase;
 use Wikibase\View\DefaultMetaTagsCreator;
@@ -43,7 +43,7 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 	}
 
 	/**
-	 * @return PHPUnit_Framework_MockObject_MockObject|Language
+	 * @return MockObject|Language
 	 */
 	private function getMockLanguage() {
 		return $this->createMock( Language::class );

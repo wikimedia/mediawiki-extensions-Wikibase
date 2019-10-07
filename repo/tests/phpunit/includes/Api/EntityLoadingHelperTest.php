@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
 use Exception;
-use PHPUnit_Framework_MockObject_MockObject;
 use ApiUsageException;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -34,7 +34,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	/**
 	 * @param array $params
 	 *
-	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
+	 * @return ApiBase|MockObject
 	 */
 	protected function getMockApiBase( array $params ) {
 		$apiBase = $this->getMockBuilder( ApiBase::class )
@@ -53,7 +53,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	 * @param EntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
 	 * @param Exception|null $exception The Exception getEntityRevision() should throw.
 	 *
-	 * @return EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityRevisionLookup|MockObject
 	 */
 	protected function getMockEntityRevisionLookup(
 		EntityId $entityId = null,
@@ -119,7 +119,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityRevision|PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityRevision|MockObject
 	 */
 	protected function getMockRevision() {
 		$entity = $this->createMock( EntityDocument::class );

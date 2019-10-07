@@ -14,7 +14,7 @@ use LogicException;
 use MediaWiki\Storage\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MWException;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use Revision;
 use RuntimeException;
@@ -614,7 +614,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityHandler $handler
-	 * @return PHPUnit_Framework_MockObject_MockObject|WikiPage
+	 * @return MockObject|WikiPage
 	 */
 	protected function getMockWikiPage( EntityHandler $handler ) {
 		$title = Title::makeTitle( $handler->getEntityNamespace(), "Asdflogjkasdefgo" );

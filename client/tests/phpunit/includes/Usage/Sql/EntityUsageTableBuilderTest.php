@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use Onoi\MessageReporter\MessageReporter;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -96,7 +96,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return ExceptionHandler
 	 */
@@ -109,7 +109,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return MessageReporter
 	 */

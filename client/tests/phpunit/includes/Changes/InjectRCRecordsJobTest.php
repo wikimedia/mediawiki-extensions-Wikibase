@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Changes;
 
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use RecentChange;
 use Title;
 use Wikibase\Client\Changes\InjectRCRecordsJob;
@@ -36,7 +36,7 @@ use Wikimedia\TestingAccessWrapper;
 class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return RecentChangeFactory|PHPUnit_Framework_MockObject_MockObject
+	 * @return RecentChangeFactory|MockObject
 	 */
 	private function getRCFactoryMock() {
 		$rcFactory = $this->getMockBuilder( RecentChangeFactory::class )
@@ -53,7 +53,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	/**
 	 * @param EntityChange[] $knownChanges
 	 *
-	 * @return PHPUnit_Framework_MockObject_MockObject|EntityChangeLookup
+	 * @return MockObject|EntityChangeLookup
 	 */
 	private function getEntityChangeLookupMock( array $knownChanges = [] ) {
 		$changeLookup = $this->getMockBuilder( EntityChangeLookup::class )
@@ -87,7 +87,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return RecentChangesDuplicateDetector|PHPUnit_Framework_MockObject_MockObject
+	 * @return RecentChangesDuplicateDetector|MockObject
 	 */
 	private function getRCDupeDetectorMock() {
 		$rcDupeDetector = $this->getMockBuilder( RecentChangesDuplicateDetector::class )
@@ -98,7 +98,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return TitleFactory|PHPUnit_Framework_MockObject_MockObject
+	 * @return TitleFactory|MockObject
 	 */
 	private function getTitleFactoryMock() {
 		$titleFactory = $this->createMock( TitleFactory::class );
@@ -117,7 +117,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	 * @param string $text
 	 * @param int $id
 	 *
-	 * @return Title|PHPUnit_Framework_MockObject_MockObject
+	 * @return Title|MockObject
 	 */
 	private function getTitleMock( $text, $id = 23 ) {
 		$title = $this->getMockBuilder( Title::class )
@@ -151,7 +151,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	 * @param int $id
 	 * @param array $fields
 	 *
-	 * @return PHPUnit_Framework_MockObject_MockObject|EntityChange
+	 * @return MockObject|EntityChange
 	 */
 	private function getEntityChangeMock( $id = 77, array $fields = [] ) {
 		$info = isset( $fields['info'] ) ? $fields['info'] : [];
@@ -180,7 +180,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return RecentChange|PHPUnit_Framework_MockObject_MockObject
+	 * @return RecentChange|MockObject
 	 */
 	private function getRecentChangeMock() {
 		$change = $this->getMockBuilder( RecentChange::class )

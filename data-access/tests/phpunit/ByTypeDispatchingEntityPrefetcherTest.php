@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityPrefetcher;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @license GPL-2.0-or-later
  */
-class ByTypeDispatchingEntityPrefetcherTest extends \PHPUnit_Framework_TestCase {
+class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
 	/**
 	 * @expectedException \InvalidArgumentException

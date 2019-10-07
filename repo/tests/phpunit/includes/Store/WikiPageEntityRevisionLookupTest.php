@@ -8,7 +8,7 @@ use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\MutableRevisionRecord;
 use MediaWiki\Storage\SlotRecord;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
@@ -264,7 +264,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	public function testGetEntityRevision_ReturnsNullForNonExistingRevision() {
 		$entityId = new ItemId( 'Q6654' );
 
-		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		/** @var MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */
@@ -293,7 +293,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$entityId = new ItemId( 'Q6654' );
 		$revId = 9876;
 
-		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		/** @var MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */
@@ -396,7 +396,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	public function testGetLatestRevisionId_ReturnsNullForNonExistingEntityRevision() {
 		$entityId = new ItemId( 'Q6654' );
 
-		/** @var PHPUnit_Framework_MockObject_MockObject|RevisionStore $mockRevisionStore */
+		/** @var MockObject|RevisionStore $mockRevisionStore */
 		$mockRevisionStore = $this->createMock( RevisionStore::class );
 
 		/** @var BlobStore|ObjectProphecy $mockBlobStore */

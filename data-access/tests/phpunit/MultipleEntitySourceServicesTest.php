@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\GenericServices;
@@ -31,7 +32,7 @@ use Wikibase\TermIndexEntry;
  *
  * @license GPL-2.0-or-later
  */
-class MultipleEntitySourceServicesTest extends \PHPUnit_Framework_TestCase {
+class MultipleEntitySourceServicesTest extends TestCase {
 
 	public function testGetEntityRevisionLookupReturnsLookupThatReturnsExpectedRevisionData() {
 		$itemRevisionData = 'item revision data';

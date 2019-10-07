@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use FauxRequest;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Block\BlockManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -22,7 +23,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 	use HtmlAssertionHelpers;
 
 	/**
-	 * @var SpecialPageCopyrightView|\PHPUnit_Framework_MockObject_MockObject
+	 * @var SpecialPageCopyrightView|MockObject
 	 */
 	protected $copyrightView;
 

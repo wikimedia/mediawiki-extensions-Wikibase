@@ -6,7 +6,7 @@ use HTMLCacheUpdateJob;
 use Job;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 use RefreshLinksJob;
 use Title;
@@ -28,7 +28,7 @@ use Wikibase\EntityChange;
 class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return JobQueueGroup|PHPUnit_Framework_MockObject_MockObject
+	 * @return JobQueueGroup|MockObject
 	 */
 	private function getJobQueueGroupMock() {
 		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )

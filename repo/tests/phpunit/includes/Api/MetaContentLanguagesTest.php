@@ -6,8 +6,8 @@ use ApiMain;
 use ApiQuery;
 use FauxRequest;
 use Language;
+use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_Error_Warning;
 use RequestContext;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
@@ -43,9 +43,6 @@ class MetaContentLanguagesTest extends TestCase {
 		$this->assertSame( $expectedResults, $results );
 	}
 
-	/**
-	 * @expectedException PHPUnit_Framework_Error_Warning
-	 */
 	public function testExecute_warnsAboutUnknownLanguageNames() {
 		$query = $this->getQuery( [ 'wbclprop' => 'name' ] );
 		$api = new MetaContentLanguages(
@@ -55,6 +52,7 @@ class MetaContentLanguagesTest extends TestCase {
 			'wbcontentlanguages'
 		);
 
+		$this->expectException( Warning::class );
 		$api->execute();
 	}
 

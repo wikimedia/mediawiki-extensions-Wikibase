@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 
 /**
@@ -11,7 +12,7 @@ use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
  *
  * @license GPL-2.0-or-later
  */
-class EntitySourceDefinitionsConfigParserTest extends \PHPUnit_Framework_TestCase {
+class EntitySourceDefinitionsConfigParserTest extends TestCase {
 
 	public function testGivenSingleSourceConfig_newDefinitionsFromConfigArrayParsesSourcaData() {
 		$config = [

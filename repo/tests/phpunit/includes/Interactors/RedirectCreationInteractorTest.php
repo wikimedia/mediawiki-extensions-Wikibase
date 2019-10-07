@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Interactors;
 
 use FauxRequest;
-use PHPUnit_Framework_MockObject_Matcher_InvokedRecorder;
+use PHPUnit\Framework\MockObject\Matcher\InvokedRecorder;
 use RequestContext;
 use Status;
 use Title;
@@ -88,7 +88,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $invokeCount
+	 * @param InvokedRecorder|null $invokeCount
 	 * @param Status|null $hookReturn
 	 *
 	 * @return EditFilterHookRunner
@@ -114,7 +114,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $efHookCalls
+	 * @param InvokedRecorder|null $efHookCalls
 	 * @param Status|null $efHookStatus
 	 * @param User|null $user
 	 *

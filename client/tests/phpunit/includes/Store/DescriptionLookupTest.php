@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Store;
 
 use Language;
 use PageProps;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Client\Store\DescriptionLookup;
@@ -235,7 +236,7 @@ class DescriptionLookupTest extends TestCase {
 	 *   If $centralDescriptions[<pageid>] is missing, there is no linked entity;
 	 *   if it is null, there is no description.
 	 *
-	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityIdLookup
+	 * @return MockObject|EntityIdLookup
 	 */
 	private function getIdLookup( array $centralDescriptions ) {
 		$idLookup = $this->getMockBuilder( EntityIdLookup::class )
@@ -265,7 +266,7 @@ class DescriptionLookupTest extends TestCase {
 	 *   if it is null, there is no description.
 	 *   Description can be a string or an array of descriptions, indexed by language.
 	 *
-	 * @return \PHPUnit_Framework_MockObject_MockObject|TermIndex
+	 * @return MockObject|TermIndex
 	 */
 	private function getTermIndex( array $centralDescriptions ) {
 		$termIndex = $this->getMockBuilder( TermIndex::class )

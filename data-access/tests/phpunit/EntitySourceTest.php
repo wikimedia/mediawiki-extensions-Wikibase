@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 
 /**
@@ -11,7 +12,7 @@ use Wikibase\DataAccess\EntitySource;
  *
  * @license GPL-2.0-or-later
  */
-class EntitySourceTest extends \PHPUnit_Framework_TestCase {
+class EntitySourceTest extends TestCase {
 
 	/**
 	 * @dataProvider provideInvalidConstructorArguments
