@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use HashSiteStore;
+use PHPUnit\Framework\MockObject\MockObject;
 use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -343,7 +344,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	 * @param string $existingSiteId
 	 */
 	private function givenSiteWithNoPagesExists( $existingSiteId ) {
-		/** @var \PHPUnit_Framework_MockObject_MockObject|Site $siteMock */
+		/** @var MockObject|Site $siteMock */
 		$siteMock = $this->getMockBuilder( Site::class )
 			->setMethods( [ 'normalizePageName' ] )
 			->getMock();
@@ -356,7 +357,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	private function getTermValidatorFactorMock() {
 		$validatorMock = $this->getValidatorMock();
 
-		/** @var \PHPUnit_Framework_MockObject_MockObject|TermValidatorFactory $mock */
+		/** @var MockObject|TermValidatorFactory $mock */
 		$mock = $this->createMock( TermValidatorFactory::Class );
 		$mock->method( $this->anything() )
 			->will( $this->returnValue( $validatorMock ) );
@@ -365,7 +366,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	}
 
 	private function getValidatorMock() {
-		/** @var \PHPUnit_Framework_MockObject_MockObject|ValueValidator $validatorMock */
+		/** @var MockObject|ValueValidator $validatorMock */
 		$validatorMock = $this->createMock( ValueValidator::class );
 		$validatorMock->method( 'validate' )->will(
 			$this->returnCallback(

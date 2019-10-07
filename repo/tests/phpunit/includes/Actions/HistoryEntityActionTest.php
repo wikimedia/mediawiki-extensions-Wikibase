@@ -8,7 +8,7 @@ use IContextSource;
 use Language;
 use MWContentSerializationException;
 use OutputPage;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Title;
 use User;
 use WebRequest;
@@ -52,7 +52,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @return PHPUnit_Framework_MockObject_MockObject
+	 * @return MockObject
 	 */
 	private function getOutput() {
 		$output = $this->getMockBuilder( OutputPage::class )
@@ -63,11 +63,11 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_MockObject $output
+	 * @param MockObject $output
 	 *
 	 * @return IContextSource
 	 */
-	private function getContext( PHPUnit_Framework_MockObject_MockObject $output ) {
+	private function getContext( MockObject $output ) {
 		$context = $this->createMock( IContextSource::class );
 		$context->method( 'getConfig' )
 			->willReturn( new HashConfig( [

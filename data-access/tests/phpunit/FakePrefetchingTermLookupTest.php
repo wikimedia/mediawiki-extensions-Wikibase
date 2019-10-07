@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -11,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @license GPL-2.0-or-later
  */
-class FakePrefetchingTermLookupTest extends \PHPUnit_Framework_TestCase {
+class FakePrefetchingTermLookupTest extends TestCase {
 
 	public function testGetLabels() {
 		$lookup = new FakePrefetchingTermLookup();

@@ -7,7 +7,7 @@ use HashSiteStore;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
 use PermissionsError;
-use PHPUnit_Framework_Error;
+use PHPUnit\Framework\Error\Error;
 use RawMessage;
 use SpecialPageTestBase;
 use Status;
@@ -132,7 +132,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$exceptionLocalizer->expects( $this->any() )
 			->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {
-				if ( $ex instanceof PHPUnit_Framework_Error ) {
+				if ( $ex instanceof Error ) {
 					throw $ex;
 				}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @license GPL-2.0-or-later
  */
-class ByTypeDispatchingPrefetchingTermLookupTest extends \PHPUnit_Framework_TestCase {
+class ByTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 
 	/**
 	 * @expectedException \InvalidArgumentException

@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Api;
 
 use ApiMain;
 use Language;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Client\Api\Description;
@@ -217,7 +218,7 @@ class DescriptionTest extends TestCase {
 	 * @param string[] $expectedSources
 	 * @param array $descriptionsToReturn page ID => description text
 	 * @param string[] $sourcesToReturn page ID => DescriptionLookup::SOURCE_*
-	 * @return \PHPUnit_Framework_MockObject_MockObject|DescriptionLookup
+	 * @return MockObject|DescriptionLookup
 	 */
 	private function getDescriptionLookup(
 		$expectedPageIds,

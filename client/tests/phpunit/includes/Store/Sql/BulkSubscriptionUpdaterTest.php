@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Store\Sql;
 
 use Onoi\MessageReporter\MessageReporter;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -252,7 +252,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return ExceptionHandler
 	 */
@@ -265,7 +265,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $matcher
+	 * @param Invocation $matcher
 	 *
 	 * @return MessageReporter
 	 */

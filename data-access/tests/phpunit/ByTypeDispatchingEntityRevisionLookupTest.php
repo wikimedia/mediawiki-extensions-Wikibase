@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityRevisionLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -14,7 +15,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  *
  * @license GPL-2.0-or-later
  */
-class ByTypeDispatchingEntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
+class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 
 	/**
 	 * @expectedException \InvalidArgumentException

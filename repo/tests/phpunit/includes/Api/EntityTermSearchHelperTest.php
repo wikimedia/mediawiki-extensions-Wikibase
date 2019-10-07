@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
@@ -32,7 +33,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $type
 	 * @param TermSearchResult[] $returnResults
 	 *
-	 * @return ConfigurableTermSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
+	 * @return ConfigurableTermSearchInteractor|MockObject
 	 */
 	private function getMockSearchInteractor(
 		$search,

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\UnusableEntitySource;
 
 /**
@@ -11,7 +12,7 @@ use Wikibase\DataAccess\UnusableEntitySource;
  *
  * @license GPL-2.0-or-later
  */
-class UnusableEntitySourceTest extends \PHPUnit_Framework_TestCase {
+class UnusableEntitySourceTest extends TestCase {
 
 	public function testGetDatabaseNameThrowsException() {
 		$source = new UnusableEntitySource();

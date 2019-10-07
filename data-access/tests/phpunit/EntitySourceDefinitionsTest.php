@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 
@@ -12,7 +13,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
  *
  * @license GPL-2.0-or-later
  */
-class EntitySourceDefinitionsTest extends \PHPUnit_Framework_TestCase {
+class EntitySourceDefinitionsTest extends TestCase {
 
 	/**
 	 * @expectedException \InvalidArgumentException

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use HashSiteStore;
+use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Argument;
 use Psr\Log\NullLogger;
 use Site;
@@ -41,7 +42,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	const EXISTING_ITEM_ID = 'Q123';
 
 	/**
-	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityTitleLookup|MockObject
 	 */
 	private function getMockTitleLookup() {
 		$mock = $this->createMock( EntityTitleLookup::class );
@@ -55,7 +56,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return LanguageNameLookup|\PHPUnit_Framework_MockObject_MockObject
+	 * @return LanguageNameLookup|MockObject
 	 */
 	private function getMockLanguageNameLookup() {
 		$mock = $this->createMock( LanguageNameLookup::class );

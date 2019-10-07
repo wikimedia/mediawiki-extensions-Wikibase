@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 use Language;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
+use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use Title;
 use User;
@@ -235,7 +236,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param $itemId
-	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 * @return MockObject
 	 */
 	private function getEntityRevisionLookupReturningEntity( $itemId ): EntityRevisionLookup {
 		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );

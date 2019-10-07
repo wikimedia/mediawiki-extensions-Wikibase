@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
@@ -22,7 +23,7 @@ use Wikimedia\Assert\ParameterAssertionException;
 class DispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCase {
 
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityRevisionLookup
+	 * @return MockObject|EntityRevisionLookup
 	 */
 	private function getDummyEntityRevisionLookup() {
 		return $this->createMock( EntityRevisionLookup::class );

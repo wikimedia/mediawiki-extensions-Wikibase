@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
+use PHPUnit\Framework\MockObject\MockBuilder;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use OutOfBoundsException;
-use PHPUnit_Framework_MockObject_MockBuilder;
-use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit\Framework\TestCase;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -60,7 +60,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @param string $class
 	 *
-	 * @return PHPUnit_Framework_MockObject_MockBuilder
+	 * @return MockBuilder
 	 */
 	private function getMockBuilder( $class ) {
 		return $this->mockBuilderFactory->getMockBuilder( $class );
@@ -71,7 +71,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @param string $class
 	 *
-	 * @return PHPUnit_Framework_MockObject_MockObject
+	 * @return MockObject
 	 */
 	private function createMock( $class ) {
 		return $this->mockBuilderFactory->getMockBuilder( $class )->getMock();

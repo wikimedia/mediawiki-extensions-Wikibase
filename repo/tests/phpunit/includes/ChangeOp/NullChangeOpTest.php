@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
 
@@ -25,7 +25,7 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testDoesNotCallAnyMethodOnEntity_WhenApplied() {
-		/** @var EntityDocument|PHPUnit_Framework_MockObject_MockObject $entityDocument */
+		/** @var EntityDocument|MockObject $entityDocument */
 		$entityDocument = $this->createMock( EntityDocument::class );
 		$nullChangeOp = new NullChangeOp();
 
@@ -33,7 +33,7 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 		$nullChangeOp->apply( $entityDocument );
 	}
 
-	private function expectNoMethodWillBeEverCalledOn( PHPUnit_Framework_MockObject_MockObject $entityMock ) {
+	private function expectNoMethodWillBeEverCalledOn( MockObject $entityMock ) {
 		$entityMock->expects( $this->never() )->method( self::anything() );
 	}
 

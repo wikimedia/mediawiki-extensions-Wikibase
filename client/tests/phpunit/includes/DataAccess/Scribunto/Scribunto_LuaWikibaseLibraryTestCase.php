@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-use PHPUnit_Framework_TestSuite;
+use PHPUnit\Framework\TestSuite;
 use Scribunto_LuaEngineTestBase;
 use Title;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
@@ -121,7 +121,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	 *
 	 * @param string $className
 	 *
-	 * @return PHPUnit_Framework_TestSuite
+	 * @return TestSuite
 	 */
 	public static function suite( $className ) {
 		self::doMock();

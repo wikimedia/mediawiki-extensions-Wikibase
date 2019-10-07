@@ -3,7 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
-use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -31,7 +31,7 @@ use Wikibase\View\Template\TemplateFactory;
 class SnakHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
-	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $formatPropertyIdMatcher
+	 * @param Invocation $formatPropertyIdMatcher
 	 *
 	 * @return SnakHtmlGenerator
 	 */

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use PHPUnit_Framework_Assert;
+use PHPUnit\Framework\Assert;
 use RuntimeException;
 
 /**
@@ -103,7 +103,7 @@ class NTriplesRdfTestHelper {
 		// Cute: $missing and $extra can be equal only if they are empty. Comparing them here
 		// directly looks a bit odd in code, but produces meaningful output, especially if the input
 		// was sorted.
-		PHPUnit_Framework_Assert::assertEquals( $missing, $extra, $message );
+		Assert::assertEquals( $missing, $extra, $message );
 	}
 
 	/**

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use Deserializers\Deserializer;
-use PHPUnit_Framework_Assert as Assert;
+use PHPUnit\Framework\Assert;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
