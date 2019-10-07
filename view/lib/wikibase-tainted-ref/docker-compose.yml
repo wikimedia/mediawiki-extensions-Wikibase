@@ -9,6 +9,7 @@ services:
     volumes:
       - '~/.npm:/.npm'
       - '.:/src/view/lib/wikibase-tainted-ref'
+      - './../../..:/src:ro'
     working_dir: /src/view/lib/wikibase-tainted-ref
     environment:
       - NODE_ENV
