@@ -28,7 +28,14 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $message ) {
 		$entityNamespaceLookup = new EntityNamespaceLookup( [ $title->getNamespace() ] );
 
-		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', [], 42 );
+		$hookHandler = new OutputPageJsConfigHookHandler(
+			$entityNamespaceLookup,
+			'https://creativecommons.org',
+			'CC-0',
+			[],
+			42,
+			false
+		);
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
@@ -43,7 +50,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	public function doOutputPageBeforeHtmlRegisterConfigProvider() {
-		$expected = [ 'wbCopyright', 'wbBadgeItems', 'wbMultiLingualStringLimit' ];
+		$expected = [ 'wbCopyright', 'wbBadgeItems', 'wbMultiLingualStringLimit', 'wbTaintedReferencesEnabled' ];
 
 		$entityId = new ItemId( 'Q4' );
 		$title = $this->getTitleForId( $entityId );

@@ -30,10 +30,18 @@ class OutputPageJsConfigBuilder {
 	 * @param string $rightsText
 	 * @param string[] $badgeItems
 	 * @param integer stringLimit
+	 * @param bool $taintedReferencesEnabled
 	 *
 	 * @return array
 	 */
-	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems, $stringLimit ) {
+	public function build(
+		OutputPage $out,
+		$rightsUrl,
+		$rightsText,
+		array $badgeItems,
+		$stringLimit,
+		$taintedReferencesEnabled
+	) {
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
 
@@ -43,6 +51,7 @@ class OutputPageJsConfigBuilder {
 
 		$configVars['wbBadgeItems'] = $badgeItems;
 		$configVars['wbMultiLingualStringLimit'] = $stringLimit;
+		$configVars['wbTaintedReferencesEnabled'] = $taintedReferencesEnabled;
 
 		return $configVars;
 	}

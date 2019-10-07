@@ -24,9 +24,11 @@ module.exports = {
 		},
 		entry: {
 			app: './src/main.ts',
+			init: './src/tainted-ref.init.ts',
 		},
 		externals: [ vueExternal() ],
 		resolve: {
+			symlinks: false,
 			alias: {
 				'@': path.join( __dirname, 'src' ),
 			},
@@ -41,6 +43,15 @@ module.exports = {
 					Object.assign( {}, options, { filename: `${filePrefix}[name].css` } ),
 					...args,
 				] );
+			config.module
+				.rule( 'images' )
+				.test( /\.(png|jpe?g|gif|svg)(\?.*)?$/ )
+				.use( 'url-loader' )
+				.loader( 'url-loader' )
+				.options( {
+					limit: -1,
+					name: '[path]/[name].[ext]',
+				} );
 		}
 	},
 	css: {

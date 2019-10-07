@@ -30,7 +30,8 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 				'Q12' => 'wb-badge-goodarticle',
 				'Q42' => 'wb-badge-featuredarticle'
 			],
-			250
+			250,
+			false
 		);
 
 		$expected = [
@@ -45,7 +46,8 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 				'Q12' => 'wb-badge-goodarticle',
 				'Q42' => 'wb-badge-featuredarticle'
 			],
-			'wbMultiLingualStringLimit' => 250
+			'wbMultiLingualStringLimit' => 250,
+			'wbTaintedReferencesEnabled' => false,
 		];
 
 		$this->assertEquals( $expected, $configVars );
@@ -60,7 +62,8 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 			'https://creativecommons.org',
 			'CC-0',
 			[],
-			0
+			0,
+			true
 		);
 
 		$expected = [
@@ -73,6 +76,7 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 			],
 			'wbBadgeItems' => [],
 			'wbMultiLingualStringLimit' => 0,
+			'wbTaintedReferencesEnabled' => true,
 		];
 
 		$this->assertEquals( $expected, $configVars );

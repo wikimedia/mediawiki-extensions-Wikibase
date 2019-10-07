@@ -347,6 +347,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
+				'wikibase.tainted-ref.init',
 			],
 			'messages' => [
 				'parentheses',
