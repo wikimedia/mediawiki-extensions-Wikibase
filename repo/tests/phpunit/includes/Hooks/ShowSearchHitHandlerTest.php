@@ -57,8 +57,8 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			->getMock();
 		$searchPage->method( 'msg' )
 			->willReturnCallback(
-				function () {
-					return new RawMessage( implode( ",", func_get_args() ) );
+				function ( ...$args ) {
+					return new RawMessage( implode( ",", $args ) );
 				}
 			);
 		$searchPage->method( 'getLanguage' )

@@ -124,11 +124,11 @@ class Summary implements FormatableSummary {
 	/**
 	 * Add auto comment arguments.
 	 *
-	 * @param mixed $args,... Parts to be stringed together
+	 * @param mixed ...$args Parts to be stringed together
 	 */
-	public function addAutoCommentArgs( $args /*...*/ ) {
-		if ( !is_array( $args ) ) {
-			$args = func_get_args();
+	public function addAutoCommentArgs( ...$args ) {
+		if ( isset( $args[0] ) && is_array( $args[0] ) ) {
+			$args = $args[0];
 		}
 
 		$this->commentArgs = array_merge( $this->commentArgs, $args );
@@ -137,11 +137,11 @@ class Summary implements FormatableSummary {
 	/**
 	 * Add arguments to the summary part.
 	 *
-	 * @param mixed $args,... Parts to be stringed together
+	 * @param mixed ...$args Parts to be stringed together
 	 */
-	public function addAutoSummaryArgs( $args /*...*/ ) {
-		if ( !is_array( $args ) ) {
-			$args = func_get_args();
+	public function addAutoSummaryArgs( ...$args ) {
+		if ( isset( $args[0] ) && is_array( $args[0] ) ) {
+			$args = $args[0];
 		}
 
 		$this->summaryArgs = array_merge( $this->summaryArgs, $args );

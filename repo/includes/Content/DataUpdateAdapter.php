@@ -35,14 +35,11 @@ class DataUpdateAdapter extends DataUpdate {
 
 	/**
 	 * @param callable $doUpdateFunction
-	 * @param mixed [$args,...]
+	 * @param mixed ...$args
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( callable $doUpdateFunction /*...*/ ) {
-		$args = func_get_args();
-		array_shift( $args );
-
+	public function __construct( callable $doUpdateFunction, ...$args ) {
 		$this->doUpdateFunction = $doUpdateFunction;
 		$this->arguments = $args;
 

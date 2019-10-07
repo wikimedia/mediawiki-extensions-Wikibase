@@ -321,9 +321,7 @@ class SiteLinkCommentCreator {
 	 * @return Message
 	 * @throws MWException
 	 */
-	private function msg( $key ) {
-		$params = func_get_args();
-		array_shift( $params );
+	private function msg( $key, ...$params ) {
 		if ( isset( $params[0] ) && is_array( $params[0] ) ) {
 			$params = $params[0];
 		}

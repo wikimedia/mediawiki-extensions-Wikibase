@@ -26,16 +26,11 @@ class NoLangLinkHandler {
 	 * Parser function
 	 *
 	 * @param Parser $parser
-	 * @param string [$languageCode,...] Language codes or '*'
+	 * @param string ...$langs Language codes or '*'
 	 *
 	 * @return string
 	 */
-	public static function handle( Parser $parser /*...*/ ) {
-		$langs = func_get_args();
-
-		// Remove the first member, which is the parser.
-		array_shift( $langs );
-
+	public static function handle( Parser $parser, ...$langs ) {
 		$handler = self::newFromGlobalState();
 		$handler->doHandle( $parser, $langs );
 	}
@@ -89,7 +84,7 @@ class NoLangLinkHandler {
 	 * Parser function
 	 *
 	 * @param Parser $parser
-	 * @param string[] $langs
+	 * @param string ...$langs
 	 *
 	 * @return string
 	 */

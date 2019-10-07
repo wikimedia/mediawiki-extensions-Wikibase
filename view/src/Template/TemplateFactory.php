@@ -61,10 +61,7 @@ class TemplateFactory {
 	 *
 	 * @return string
 	 */
-	public function render( $key /*...*/ ) {
-		$params = func_get_args();
-		array_shift( $params );
-
+	public function render( $key, ...$params ) {
 		if ( isset( $params[0] ) && is_array( $params[0] ) ) {
 			$params = $params[0];
 		}
