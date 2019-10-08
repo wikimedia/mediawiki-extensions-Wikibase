@@ -682,6 +682,7 @@ return call_user_func( function() {
 				'wikibase.serialization.StatementListSerializer',
 				'wikibase.serialization.StatementSerializer',
 				'wikibase.serialization.TermMapSerializer',
+				'wikibase.serialization.StatementGroupSetDeserializer'
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
