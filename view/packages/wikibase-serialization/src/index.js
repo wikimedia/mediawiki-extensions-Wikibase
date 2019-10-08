@@ -3,6 +3,7 @@ module.exports = {
 	EntityDeserializer: wikibase.serialization.EntityDeserializer,
 	SnakDeserializer: wikibase.serialization.SnakDeserializer,
 	StatementDeserializer: wikibase.serialization.StatementDeserializer,
+	StatementGroupSetDeserializer: wikibase.serialization.StatementGroupSetDeserializer,
 	StatementListDeserializer: wikibase.serialization.StatementListDeserializer,
 	TermDeserializer: wikibase.serialization.TermDeserializer,
 	TermMapDeserializer: wikibase.serialization.TermMapDeserializer,
