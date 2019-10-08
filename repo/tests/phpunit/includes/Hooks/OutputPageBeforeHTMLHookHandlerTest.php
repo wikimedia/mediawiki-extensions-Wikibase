@@ -89,7 +89,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function newOutputPage() {
 		$mockContext = $this->createMock( RequestContext::class );
-		$mockContext->method( 'getLanguage' )->willReturn( new Language( 'qqx' ) );
+		$mockContext->method( 'getLanguage' )
+			->willReturn( Language::factory( $this->uiLanguageCode ) );
 		$mockContext->method( 'getUser' )->willReturn( new User() );
 		$outputPage = new OutputPage( $mockContext );
 		$outputPage->setTitle( new Title() );
