@@ -4,6 +4,22 @@ JavaScript library containing serializers and deserializers for the Wikibase Dat
 
 ## Release notes
 
+### 4.0.0 (2019-10-08)
+* Added index.js as the public interface
+* Removed:
+  * DeserializerFactory
+  * SerializerFactory
+  * EntitySerializer
+  * FingerprintSerializer
+  * ItemSerializer
+  * MultiTermMapSerializer
+  * MultiTermSerializer
+  * PropertySerializer
+  * SiteLinkSerializer
+  * SiteLinkSetSerializer
+  * StatementGroupSerializer
+  * StatementGroupSetSerializer
+
 ### 3.0.0 (2017-10-10)
 
 * Made the library a pure JavaScript library.
