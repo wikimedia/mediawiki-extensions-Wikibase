@@ -184,6 +184,8 @@
 	"wikibase-item-summary-wbeditentity-create": "已建立新項目",
 	"wikibase-item-summary-wbeditentity-create-item": "已建立新項目",
 	"wikibase-item-summary-wbeditentity-update": "已變更項目",
+	"wikibase-item-summary-wbeditentity-update-languages": "更改在 $3 個{{PLURAL:$3|語言}}裡的標籤、描述以及/或是別名",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other": "更改在 $3 個{{PLURAL:$3|語言}}裡的標籤、描述以及/或是別名，和其它部份",
 	"wikibase-item-summary-wbeditentity-override": "已清除項目",
 	"wikibase-item-summary-wblinktitles-create": "已建立此項目以連接頁面",
 	"wikibase-item-summary-wblinktitles-connect": "已加入語言連結以連接頁面",

@@ -38,7 +38,8 @@
 			"Diralik",
 			"Saimongoltinio",
 			"Movses",
-			"Katunchik"
+			"Katunchik",
+			"Sunpriat"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -349,7 +350,7 @@
 	"wikibase-api-target-is-incompatible": "Попытка перенаправить на сущность другого типа.",
 	"wikibase-api-cant-redirect": "Не удаётся создать перенаправление (возможно из-за того, что перенаправления между сущностями такого рода вообще не поддерживаются).",
 	"wikibase-self-conflict-patched": "Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.",
-	"wikibase-conflict-patched": "Ваша правка было исправлена в последней версии.",
+	"wikibase-conflict-patched": "Ваша правка была исправлена в последней версии.",
 	"wikibase-restoreold": "восстановить",
 	"wikibase-entity-summary-restore": "Восстановлена версия $3 {{GENDER:$4|участника|участницы}} [[Special:Contributions/$4|$4]]",
 	"wikibase-no-direct-editing": "В пространстве имён «$1» отключено прямое редактирование",
