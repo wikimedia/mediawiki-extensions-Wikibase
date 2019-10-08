@@ -649,11 +649,24 @@ return call_user_func( function() {
 		'wikibase.serialization' => $wikibaseSerializationPaths + [
 			'packageFiles' => [
 				'index.js',
+
+				'Serializers/TermMapSerializer.js',
+				'Serializers/TermSerializer.js',
+				'Deserializers/EntityDeserializer.js',
+				'StrategyProvider.js',
+				'Deserializers/ItemDeserializer.js',
+				'Deserializers/PropertyDeserializer.js',
+				'Deserializers/SiteLinkSetDeserializer.js',
+				'Deserializers/SiteLinkDeserializer.js',
+				'Deserializers/FingerprintDeserializer.js',
+				'Deserializers/MultiTermMapDeserializer.js',
+				'Deserializers/MultiTermDeserializer.js',
 			],
 			'dependencies' => [
+				'util.inherit',
+				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.EntityDeserializer',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.StatementListDeserializer',
@@ -667,7 +680,6 @@ return call_user_func( function() {
 				'wikibase.serialization.SnakSerializer',
 				'wikibase.serialization.StatementListSerializer',
 				'wikibase.serialization.StatementSerializer',
-				'wikibase.serialization.TermMapSerializer',
 				'wikibase.serialization.StatementGroupSetDeserializer'
 			],
 			'targets' => [ 'desktop', 'mobile' ],
@@ -692,31 +704,6 @@ return call_user_func( function() {
 				],
 				'targets' => [ 'desktop', 'mobile' ],
 			],
-
-		'wikibase.serialization.EntityDeserializer' => $wikibaseSerializationPaths + [
-				'packageFiles' => [
-					'Deserializers/EntityDeserializer.js',
-
-					'StrategyProvider.js',
-					'Deserializers/ItemDeserializer.js',
-					'Deserializers/PropertyDeserializer.js',
-					'Deserializers/SiteLinkSetDeserializer.js',
-					'Deserializers/SiteLinkDeserializer.js',
-					'Deserializers/FingerprintDeserializer.js',
-					'Deserializers/MultiTermMapDeserializer.js',
-					'Deserializers/MultiTermDeserializer.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-					'wikibase.datamodel',
-					'wikibase.serialization.__namespace',
-					'wikibase.serialization.Deserializer',
-					'wikibase.serialization.TermMapDeserializer',
-					'wikibase.serialization.StatementGroupSetDeserializer',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
-			],
-
 		'wikibase.serialization.SnakDeserializer' => $wikibaseSerializationPaths + [
 			'scripts' => [
 				'Deserializers/SnakDeserializer.js',
@@ -913,20 +900,6 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.ClaimSerializer',
 				'wikibase.serialization.ReferenceListSerializer',
-				'wikibase.serialization.Serializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.TermMapSerializer' => $wikibaseSerializationPaths + [
-			'packageFiles' => [
-				'Serializers/TermMapSerializer.js',
-				'Serializers/TermSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Serializer',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
