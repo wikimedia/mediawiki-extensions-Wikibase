@@ -38,8 +38,12 @@
 	"pageswithbadges": "Билгеле битләр",
 	"wikibase-pageswithbadges-badge": "Билге:",
 	"wikibase-pageswithbadges-submit": "Битләрне күрсәтү",
+	"wikibase-entityusage-entity": "Асылы:",
+	"wikibase-entityusage-submit": "Битләрне күрсәтү",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ID элементы",
 	"wikibase-pageinfo-entity-id-none": "Юк",
+	"wikibase-pageinfo-entity-usage-L": "Кайбер ярлыклар",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Ярлык: $1",
 	"wikibase-otherprojects": "Башка проектларда",
 	"wikibase-otherprojects-beta-message": "Башка проектлар өлгесе",
 	"wikibase-otherprojects-beta-description": "Ян өлгегә «{{int:wikibase-otherprojects}}» өлешен куя, ул исә {{WBREPONAME}} мәгълүматларына таянып, Викимедиа Фондының башка проекларына илтүче сылтамалар бирә."

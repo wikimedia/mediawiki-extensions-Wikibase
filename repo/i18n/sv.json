@@ -432,5 +432,6 @@
 	"wikibase-outdated-client-script": "Ojdå, det är dags för en hård uppdatering!",
 	"wikibase-shortcopyrightwarning-heading": "Licenstillskrivelse",
 	"wikibase-entity-save-error-heading": "Någonting gick fel",
-	"wikibase-entity-save-error-message": "Din ändring kunde inte publiceras. Du kan försöka klicka på publiceringsknappen igen."
+	"wikibase-entity-save-error-message": "Din ändring kunde inte publiceras. Du kan försöka klicka på publiceringsknappen igen.",
+	"wikibase-tainted-ref-warning-icon-title": "Detta uttalande har några möjliga problem"
 }
