@@ -40,14 +40,12 @@ use Wikimedia\Assert\Assert;
  */
 final class LatestRevisionIdResult {
 
-	//TODO php7
-
 	/**
 	 * Constants to specify type of the result
 	 */
-	/*private*/ const REDIRECT = 'redirect';
-	/*private*/ const NONEXISTENT = 'nonexistent';
-	/*private*/ const CONCRETE_REVISION = 'concrete revision';
+	private const REDIRECT = 'redirect';
+	private const NONEXISTENT = 'nonexistent';
+	private const CONCRETE_REVISION = 'concrete revision';
 
 	/**
 	 * @var string One of the constants

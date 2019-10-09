@@ -72,7 +72,7 @@ class ControlledFallbackEntityIdFormatter implements EntityIdFormatter {
 			$this->statsdDataFactory->increment( $this->statsPrefix . 'targetFormatterCalled' );
 
 			return $formatEntityId;
-		} catch ( \Exception $e ) { //TODO: Catch Throwable once we move to php7
+		} catch ( \Throwable $e ) {
 			$this->logTargetFormatterFailure( $value, $e );
 
 			return $this->formatUsingFallbackFormatter( $value );

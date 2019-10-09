@@ -16,10 +16,7 @@ class ChangeOpResultTraversal {
 	 * @return \Traversable
 	 */
 	public function makeRecursiveTraversable( ChangeOpResult $changeOpResult ) {
-		// TODO (PHP7): use yield from instead when we move to php7
-		foreach ( $this->yieldFrom( $changeOpResult ) as $result ) {
-			yield $result;
-		}
+		yield from $this->yieldFrom( $changeOpResult );
 	}
 
 	private function yieldFrom( ChangeOpResult $changeOpResult ) {
@@ -27,10 +24,7 @@ class ChangeOpResultTraversal {
 
 		if ( $changeOpResult instanceof ChangeOpsResult ) {
 			foreach ( $changeOpResult->getChangeOpsResults() as $childResult ) {
-				// TODO (PHP7): use yield from instead when we move to php7
-				foreach ( $this->yieldFrom( $childResult ) as $result ) {
-					yield $result;
-				}
+				yield from $this->yieldFrom( $childResult );
 			}
 		}
 	}
