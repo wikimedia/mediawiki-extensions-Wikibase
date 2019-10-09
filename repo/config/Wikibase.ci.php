@@ -22,3 +22,6 @@ $wgWBCSUseCirrus = false;
 
 // CirrusSearch should not perform any updates
 $wgDisableSearchUpdate = true;
+
+// enable data bridge
+$wgWBRepoSettings['dataBridgeEnabled'] = true;

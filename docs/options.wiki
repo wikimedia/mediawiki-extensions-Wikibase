@@ -188,6 +188,8 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ; Time after which wikibase aborts the connection to the ssr server.
 ; termboxUserSpecificSsrEnabled
 ; Enable/Disable server-side rendering (SSR) for user-specific termbox markup. The default setting is <code>true</code>. It only comes into effect if the general "termboxEnabled" is <code>true</code>. If disabled, user-specific termbox markup will only be created by client-side rendering after initial displaying of the generic termbox markup.
+; dataBridgeEnabled
+: Enable the repo parts of the Data Bridge Feature; see the corresponding client setting for more information. Default: <code>false</code>
 ; taintedReferencesEnabled
 : Enable/Disable the tainted reference feature. The default setting is <code>false</code>, so that the feature is disabled.
 : ''DEFAULT'': <code>false</code>
@@ -320,7 +322,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ; addEntityUsagesBatchSize
 : Batch size for adding entity usage records. Default is 500
 ; dataBridgeEnabled
-: Enables the Data Bridge Feature, which allows editing a repository directly from a client wiki. To enable it, set this setting to <code>true</code> and also configure <code>dataBridgeHrefRegExp</code> (see below). Default: <code>false</code>
+: Enables the Data Bridge Feature, which allows editing a repository directly from a client wiki. To enable it, set this setting to <code>true</code> on both repo and client and also configure <code>dataBridgeHrefRegExp</code> (see below). Default: <code>false</code>
 ; dataBridgeHrefRegExp
 : Regular expression to match edit links for which the Data Bridge is enabled. Uses JavaScript syntax, with the first capturing group containing the entity ID and the second one containing the property ID to edit. Mandatory if <code>dataBridgeEnabled</code> is set to <code>true</code> – there is no default value.
 ; dataBridgeEditTags
