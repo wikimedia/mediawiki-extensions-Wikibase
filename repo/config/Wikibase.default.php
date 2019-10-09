@@ -338,4 +338,6 @@ return [
 
 	// Namespace id for entity schema data type
 	'entitySchemaNamespace' => 640,
+
+	'dataBridgeEnabled' => false,
 ];
