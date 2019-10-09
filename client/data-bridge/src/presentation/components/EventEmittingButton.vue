@@ -68,15 +68,15 @@ export default class EventEmittingButton extends Vue {
 
 	public isPressed = false;
 
-	public get isIconOnly() {
+	public get isIconOnly(): boolean {
 		return imageOnlyTypes.includes( this.type );
 	}
 
-	public get isFrameless() {
+	public get isFrameless(): boolean {
 		return framelessTypes.includes( this.type );
 	}
 
-	public handleSpacePress( event: UIEvent ) {
+	public handleSpacePress( event: UIEvent ): void {
 		if ( !this.simulateSpaceOnButton() ) {
 			return;
 		}
@@ -85,18 +85,18 @@ export default class EventEmittingButton extends Vue {
 		this.click( event );
 	}
 
-	public handleEnterPress( event: UIEvent ) {
+	public handleEnterPress( event: UIEvent ): void {
 		this.isPressed = true;
 		if ( this.thereIsNoSeparateClickEvent() ) {
 			this.click( event );
 		}
 	}
 
-	public unpress() {
+	public unpress(): void {
 		this.isPressed = false;
 	}
 
-	public click( event: UIEvent ) {
+	public click( event: UIEvent ): void {
 		if ( this.preventDefault ) {
 			this.preventOpeningLink( event );
 		}
@@ -106,7 +106,7 @@ export default class EventEmittingButton extends Vue {
 		this.$emit( 'click', event );
 	}
 
-	public get tabindex() {
+	public get tabindex(): number|null {
 		if ( this.disabled ) {
 			return -1;
 		}
@@ -118,19 +118,19 @@ export default class EventEmittingButton extends Vue {
 		return 0;
 	}
 
-	private preventOpeningLink( event: UIEvent ) {
+	private preventOpeningLink( event: UIEvent ): void {
 		event.preventDefault();
 	}
 
-	private preventScrollingDown( event: UIEvent ) {
+	private preventScrollingDown( event: UIEvent ): void {
 		event.preventDefault();
 	}
 
-	private thereIsNoSeparateClickEvent() {
+	private thereIsNoSeparateClickEvent(): boolean {
 		return this.href === null;
 	}
 
-	private simulateSpaceOnButton() {
+	private simulateSpaceOnButton(): boolean {
 		return this.href === null;
 	}
 }

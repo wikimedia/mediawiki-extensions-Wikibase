@@ -8,8 +8,8 @@ export async function budge(): Promise<typeof setTimeout> {
 
 export async function waitFor(
 	condition: () => boolean,
-	timeout: number = 300,
-	interval: number = 10,
+	timeout = 300,
+	interval = 10,
 ): Promise<unknown> {
 
 	const limit = Math.ceil( timeout / interval );

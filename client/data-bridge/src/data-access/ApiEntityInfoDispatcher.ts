@@ -18,6 +18,12 @@ interface RequestParameters {
 	};
 }
 
+interface GetAndClearRequestData {
+	parameters: RequestParameters;
+	resolveCallbacks: Function[];
+	rejectCallbacks: Function[];
+}
+
 export default class ApiEntityInfoDispatcher implements EntityInfoDispatcher {
 	private api: Api;
 	private parameters: RequestParameters | null = null;
@@ -110,11 +116,7 @@ export default class ApiEntityInfoDispatcher implements EntityInfoDispatcher {
 		} ).catch( ( error ) => rejectCallbacks.forEach( ( reject ) => reject( error ) ) );
 	}
 
-	private getAndClearRequestData(): {
-		parameters: RequestParameters;
-		resolveCallbacks: Function[];
-		rejectCallbacks: Function[];
-	} {
+	private getAndClearRequestData(): GetAndClearRequestData {
 		if ( this.parameters === null ) {
 			throw new Error( 'Request was dispatched, but none was scheduled.' );
 		}

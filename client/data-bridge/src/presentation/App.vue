@@ -58,18 +58,18 @@ export default class App extends Vue {
 	@State( 'applicationStatus' )
 	public applicationStatus!: ApplicationStatus;
 
-	public get isInitializing() {
+	public get isInitializing(): boolean {
 		return this.applicationStatus === ApplicationStatus.INITIALIZING;
 	}
 
-	public get hasError() {
+	public get hasError(): boolean {
 		return this.applicationStatus === ApplicationStatus.ERROR;
 	}
 
 	@Getter( 'isTargetStatementModified' )
 	public isTargetStatementModified!: boolean;
 
-	public get publishOrSave() {
+	public get publishOrSave(): string {
 		return this.$bridgeConfig.usePublish ?
 			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}

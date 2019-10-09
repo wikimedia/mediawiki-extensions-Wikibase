@@ -46,7 +46,7 @@ export default class StringDataValue extends Vue {
 	@Prop( { required: true, type: Function } )
 	public setDataValue!: ( dataValue: DataValue ) => void;
 
-	get value() {
+	public get value(): string {
 		if ( !this.dataValue ) {
 			return '';
 		} else {
@@ -54,7 +54,7 @@ export default class StringDataValue extends Vue {
 		}
 	}
 
-	set value( value: string ) {
+	public set value( value: string ) {
 		this.setDataValue(
 			{
 				type: 'string',

@@ -142,9 +142,9 @@ export function mockDataBridgeConfig(): Promise<object> {
 
 export function mockForeignApiEntityInfoResponse(
 	propertyId: string,
-	propertyLabel: string = 'a property',
-	language: string = 'en',
-	dataType: string = 'string',
+	propertyLabel = 'a property',
+	language = 'en',
+	dataType = 'string',
 	fallbackLanguage?: string,
 ): Promise<object> {
 	if ( !fallbackLanguage ) {

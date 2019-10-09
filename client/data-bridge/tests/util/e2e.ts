@@ -4,7 +4,7 @@ export async function insert( element: HTMLTextAreaElement, value: string ): Pro
 	element.dispatchEvent( event );
 }
 
-export function select( selector: string, nth: number = 0 ): HTMLElement|null {
+export function select( selector: string, nth = 0 ): HTMLElement|null {
 	if ( nth === 0 ) {
 		return document.querySelector( selector );
 	} else {

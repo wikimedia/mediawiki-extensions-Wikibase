@@ -146,9 +146,8 @@ exports.config = {
 	 */
 	afterTest( test ) {
 		videoUtil.stopVideoRecording( test );
-		var filePath;
 		if ( !test.passed ) {
-			filePath = saveScreenshot( test.title );
+			const filePath = saveScreenshot( test.title );
 			/* eslint-disable-next-line no-console */
 			console.log( `\n\tScreenshot: ${filePath}\n` );
 		}
