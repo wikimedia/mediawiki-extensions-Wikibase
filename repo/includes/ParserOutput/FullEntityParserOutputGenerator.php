@@ -250,7 +250,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			'jquery.ui.core.styles',
 			'jquery.wikibase.statementview.RankSelector.styles',
 			'jquery.wikibase.toolbar.styles',
-			'jquery.wikibase.toolbarbutton.styles',
 		] );
 
 		// make sure required client-side resources will be loaded

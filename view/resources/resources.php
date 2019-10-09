@@ -70,11 +70,6 @@ return call_user_func( function() {
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
 			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
-			],
-		],
-
-		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + [
-			'styles' => [
 				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
 			],
 		],
@@ -204,7 +199,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.ui.EditableTemplatedWidget', // for jquery.wikibase.toolbaritem
 				'jquery.wikibase.toolbar.styles',
-				'jquery.wikibase.toolbarbutton.styles',
 				'jquery.wikibase.wbtooltip',
 				'wikibase.api.RepoApiError',
 				'wikibase.view.__namespace',
