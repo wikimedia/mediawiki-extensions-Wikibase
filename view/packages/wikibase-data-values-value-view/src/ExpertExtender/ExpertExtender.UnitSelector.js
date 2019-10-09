@@ -1,6 +1,8 @@
 ( function( $ ) {
 	'use strict';
 
+	require( '../../lib/jquery.ui/jquery.ui.unitsuggester.js' );
+
 	/**
 	 * An `ExpertExtender` module for selecting a quantity's unit.
 	 * @class jQuery.valueview.ExpertExtender.UnitSelector
