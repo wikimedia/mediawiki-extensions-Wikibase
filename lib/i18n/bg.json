@@ -24,7 +24,7 @@
 	"wikibase-error-autocomplete-connection": "Възникна проблем със заявката към API интерфейса на сайта. Опитайте по-късно.",
 	"wikibase-error-autocomplete-response": "Отговор на сървъра: $1",
 	"wikibase-error-ui-no-external-page": "Страницата „$2“ не е намерена на „$1“.",
-	"wikibase-error-ui-edit-conflict": "Настъпил е конфликт на редакции. Презаредете и съхранете отново.",
+	"wikibase-error-ui-edit-conflict": "Същата стойност е междувременно променена, което е довело до конфликт на редакции. Моля, презаредете страницата.",
 	"wikibase-timedetails-timezone": "Часова зона",
 	"wikibase-timedetails-calendar": "Календар",
 	"wikibase-timedetails-before": "Преди",
