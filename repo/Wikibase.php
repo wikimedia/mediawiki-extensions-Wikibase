@@ -1003,6 +1003,7 @@ call_user_func( function() {
 	$wgHooks['ApiMaxLagInfo'][] = '\Wikibase\RepoHooks::onApiMaxLagInfo';
 	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\RepoHooks::onParserOptionsRegister';
 	$wgHooks['RejectParserCacheValue'][] = '\Wikibase\RepoHooks::onRejectParserCacheValue';
+	$wgHooks['ApiQuery::moduleManager'][] = '\Wikibase\RepoHooks::onApiQueryModuleManager';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
