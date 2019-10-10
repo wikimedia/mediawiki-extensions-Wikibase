@@ -157,7 +157,7 @@ class CachingKartographerEmbeddingHandler {
 
 		// Require all needed RL modules, then call initMapframeFromElement with the injected mapframe HTML
 		$javaScript .= "mw.loader.using( $rlModulesJson ).then( " .
-				"function() { mw.loader.require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
+				"function( require ) { require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
 				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map[data-mw=\"interface\"]' ).get( 0 ) ); } );";
 
 		return Html::inlineScript( $javaScript );
