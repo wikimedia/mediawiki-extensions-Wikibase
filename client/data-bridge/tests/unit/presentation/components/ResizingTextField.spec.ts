@@ -27,6 +27,22 @@ describe( 'ResizingTextField', () => {
 		expect( wrapper.emitted( 'input' )[ 0 ] ).toEqual( [ value ] );
 	} );
 
+	it( 'applies the max length limit to the textarea, if supplied', () => {
+		const wrapper = mount( ResizingTextField, {
+			propsData: {
+				maxlength: 8,
+			},
+		} );
+		expect( ( wrapper.element as HTMLTextAreaElement ).getAttribute( 'maxlength' ) )
+			.toBe( '8' );
+	} );
+
+	it( 'set no max length if prop is not given', () => {
+		const wrapper = mount( ResizingTextField );
+		expect( ( wrapper.element as HTMLTextAreaElement ).getAttribute( 'maxlength' ) )
+			.toBe( null );
+	} );
+
 	// the automatically adjusted height is hard to test in a jsdom environment
 
 	describe( 'newline removal', () => {

@@ -3,6 +3,7 @@
 		:value="value"
 		@input="setValue"
 		@keydown.enter.prevent
+		:maxlength="maxlength"
 	/>
 </template>
 
@@ -23,6 +24,9 @@ interface InputEventTarget {
 export default class ResizingTextField extends Vue {
 	@Prop()
 	public value!: string;
+
+	@Prop( { type: Number, default: null } )
+	public maxlength!: number;
 
 	public mounted() {
 		this.resizeTextField();
