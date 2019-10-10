@@ -1,4 +1,4 @@
-wikibase.view.testViewController = ( function ( QUnit, wb ) {
+module.exports = ( function ( QUnit, wb ) {
 	'use strict';
 
 	return {
@@ -12,7 +12,6 @@ wikibase.view.testViewController = ( function ( QUnit, wb ) {
 				var controller = getInstance();
 
 				assert.ok( controller instanceof constructor );
-				assert.ok( controller instanceof wb.view.ViewController );
 			} );
 		},
 

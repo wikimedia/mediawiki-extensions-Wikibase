@@ -708,4 +708,6 @@
 		return $dom.data( viewName );
 	};
 
+	module.exports = SELF;
+
 }( wikibase ) );
