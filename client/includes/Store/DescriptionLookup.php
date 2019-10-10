@@ -96,10 +96,12 @@ class DescriptionLookup {
 	 * @return string|null The description, or null if none was found.
 	 */
 	public function getDescription( Title $title, $sources, &$actualSource = null ) {
+		$actualSources = null;
 		$descriptions = $this->getDescriptions( [ $title ], $sources, $actualSources );
 
 		$pageId = $title->getArticleID();
 		if ( array_key_exists( $pageId, $descriptions ) ) {
+			// @phan-suppress-next-line PhanTypeArraySuspiciousNull False positives due to reference
 			$actualSource = $actualSources[$pageId];
 			return $descriptions[$pageId];
 		} else {
