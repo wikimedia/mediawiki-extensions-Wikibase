@@ -15,5 +15,6 @@ import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 			TaintedIcon,
 		},
 	} )
+
 export default class App extends Vue {}
 </script>
