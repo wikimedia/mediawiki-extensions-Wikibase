@@ -11,6 +11,99 @@ namespace {
 	}
 }
 
+namespace Elastica {
+	class Client {
+	}
+	class Type {
+		/**
+		 * @param string|array|\Elastica\Query $query
+		 * @param int|array $options
+		 *
+		 * @return \Elastica\ResultSet
+		 */
+		public function search($query = '', $options = null) {
+		}
+	}
+	class Param implements ArrayableInterface, \Countable {
+		/**
+		 * @param string $key
+		 * @param mixed $value
+		 * @return $this
+		 */
+		public function setParam($key, $value) {
+		}
+		/**
+		 * @param string $key
+		 * @param mixed  $value
+		 * @return $this
+		 */
+		public function addParam($key, $value) {
+		}
+	}
+	class Query extends Param {
+		/**
+		 * @param array|\Elastica\Query\AbstractQuery $query
+		 */
+		public function __construct($query = null) {
+		}
+		/**
+		 * @param int $from
+		 * @return $this
+		 */
+		public function setFrom($from) {
+		}
+		/**
+		 * @param int $size
+		 * @return $this
+		 */
+		public function setSize($size = 10) {
+		}
+	}
+	class Result {
+	}
+	class ResultSet {
+		/**
+		 * @return Result[]
+		 */
+		public function getResults() {
+		}
+	}
+}
+
+namespace Elastica\Query {
+	use Elastica\Param;
+
+	abstract class AbstractQuery extends Param {
+	}
+}
+
+namespace Elastica\Exception {
+	interface ExceptionInterface {
+
+	}
+	class InvalidException extends \InvalidArgumentException implements ExceptionInterface {
+
+	}
+}
+
+namespace {
+	class ElasticaConnection {
+		/**
+		 * Fetch a connection.
+		 * @return \Elastica\Client
+		 */
+		public function getClient() {
+		}
+		/**
+		 * @param int $timeout Timeout in seconds
+		 *
+		 * @return $this
+		 */
+		public function setTimeout($timeout) {
+		}
+	}
+}
+
 namespace CirrusSearch {
 
 	use User;
@@ -20,25 +113,52 @@ namespace CirrusSearch {
 		}
 	}
 
-	class Connection {
+	class Connection extends \ElasticaConnection {
+		/**
+		 * @param SearchConfig $config
+		 * @param string|null $cluster
+		 */
 		public function __construct( SearchConfig $config, $cluster = null ) {
+		}
+		/**
+		 * @param int[]|null $namespaces
+		 * @return string|false
+		 */
+		public function pickIndexTypeForNamespaces( array $namespaces = null ) {
+		}
+		/**
+		 * @param int[]|null $namespaces
+		 * @return string[]
+		 */
+		public function getAllIndexSuffixesForNamespaces( $namespaces = null ) {
+		}
+		/**
+		 * @param mixed $name
+		 * @param mixed $type
+		 * @return \Elastica\Type
+		 */
+		public function getPageType( $name, $type = false ) {
 		}
 	}
 
 	class ElasticsearchIntermediary {
+		/**
+		 * @var Connection
+		 */
+		protected $connection;
 
 		public function __construct( Connection $connection, User $user = null, $slowSeconds = null, $extraBackendLatency = 0 ) {
 		}
 
 		/**
 		 * @param mixed|null
-		 * @return Status
+		 * @return \Status
 		 */
 		public function success( $result = null ) {
 		}
 
 		/**
-		 * @return Status
+		 * @return \Status
 		 */
 		public function failure( \Elastica\Exception\ExceptionInterface $exception = null ) {
 		}
@@ -53,7 +173,7 @@ namespace CirrusSearch {
 		}
 	}
 
-	class SearchConfig {
+	class SearchConfig implements \Config {
 		const INDEX_BASE_NAME = 'CirrusSearchIndexBaseName';
 
 		/**
@@ -69,7 +189,22 @@ namespace CirrusSearch {
 		}
 	}
 
-	class SearchRequestLog {
+	interface RequestLog {
+
+	}
+
+	class BaseRequestLog implements RequestLog {
+
+	}
+
+	class SearchRequestLog extends BaseRequestLog {
+		/**
+		 * @param \Elastica\Client $client
+		 * @param string $description
+		 * @param string $queryType
+		 * @param array $extra
+		 * @param array|null $namespaces
+		 */
 		public function __construct( \Elastica\Client $client, $description, $queryType, array $extra = [], array $namespaces = null ) {
 		}
 	}
@@ -102,9 +237,6 @@ namespace CirrusSearch {
 		 * @param string|null $param3
 		 */
 		function addWarning( $message, $param1 = null, $param2 = null, $param3 = null );
-	}
-
-	interface RequestLog {
 	}
 }
 
@@ -222,6 +354,7 @@ namespace CirrusSearch\Profile {
 namespace CirrusSearch\Query {
 
 	use CirrusSearch\Search\SearchContext;
+	use CirrusSearch\SearchConfig;
 
 	interface FilterQueryFeature {
 	}
