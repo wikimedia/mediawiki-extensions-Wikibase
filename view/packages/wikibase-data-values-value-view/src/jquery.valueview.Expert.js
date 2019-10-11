@@ -7,11 +7,11 @@ $.valueview = $.valueview || {};
 	 * Creates a new `Expert` definition as it is required by `jQuery.valueview.valueview`.
 	 *
 	 * NOTE: Just by defining a new `Expert` here, the `Expert` won't be available in a `valueview`
-	 * widget automatically. The `Expert` has to be registered in an `ExpertStore`
+	 * widget automatically. The `Expert` has to be registered in a `jQuery.valueview.ExpertStore`
 	 * instance which has to be injected into the `valueview` via its options.
 	 *
 	 * @see jQuery.valueview.Expert
-	 * @see ExpertStore
+	 * @see jQuery.valueview.ExpertStore
 	 *
 	 * @member jQuery.valueview
 	 * @method expert
