@@ -195,9 +195,10 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 
 	/**
 	 * @param EntityId $entityId
-	 * @return [int, EntityId]|null Returns a tuple containing revision ID and target entity ID.
+	 * @return array|null Returns a tuple containing revision ID and target entity ID.
 	 *                              If entity is not present or there is a double redirect null
 	 *                              is returned.
+	 * @phan-return array{0:int,1:EntityId}
 	 * @note Target entity is entity we will take data from. It will differ from the given entity
 	 *       in case of redirect only.
 	 */

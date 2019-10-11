@@ -203,6 +203,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @param Property $property
 	 *
 	 * @return Summary
+	 * @suppress PhanParamSignatureMismatch Uses intersection types
 	 */
 	protected function createSummary( EntityDocument $property ) {
 		$uiLanguageCode = $this->getLanguage()->getCode();

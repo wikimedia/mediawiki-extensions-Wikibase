@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @phan-file-suppress PhanParamSignatureMismatch The point of this class is to change signatures
+ */
 namespace Wikibase\Repo\Specials\HTMLForm;
 
 use HTMLTextField;

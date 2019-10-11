@@ -68,8 +68,9 @@ class EntityByTitleHelper {
 	 * @param bool $normalize
 	 *
 	 * @throws ApiUsageException
-	 * @return array( EntityId[], array[] )
+	 * @return array[] ( EntityId[], array[] )
 	 *         List containing valid $ids and $missingEntities site title combinations
+	 * @phan-return array{0:EntityId[],1:array[]}
 	 */
 	public function getEntityIds( array $sites, array $titles, $normalize ) {
 		$ids = [];

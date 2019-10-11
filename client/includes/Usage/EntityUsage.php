@@ -172,7 +172,8 @@ class EntityUsage {
 	}
 
 	/**
-	 * @return array( 'entityId' => string $entityId, 'aspect' => string $aspect, 'modifier' => string|null $modifier )
+	 * @return array ( 'entityId' => string $entityId, 'aspect' => string $aspect, 'modifier' => string|null $modifier )
+	 * @phan-return array{entityId:string,aspect:string,modifier:?string}
 	 */
 	public function asArray() {
 		return [

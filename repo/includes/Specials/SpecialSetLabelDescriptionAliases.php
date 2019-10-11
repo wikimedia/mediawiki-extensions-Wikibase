@@ -341,7 +341,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param Fingerprint] $fingerprint
+	 * @param Fingerprint $fingerprint
 	 *
 	 * @throws UserInputException
 	 * @return bool

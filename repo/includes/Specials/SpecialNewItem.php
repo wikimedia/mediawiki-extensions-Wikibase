@@ -273,6 +273,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @param Item $item
 	 *
 	 * @return Summary
+	 * @suppress PhanParamSignatureMismatch Uses intersection types
 	 */
 	protected function createSummary( EntityDocument $item ) {
 		$uiLanguageCode = $this->getLanguage()->getCode();

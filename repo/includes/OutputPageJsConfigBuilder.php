@@ -29,7 +29,7 @@ class OutputPageJsConfigBuilder {
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 * @param string[] $badgeItems
-	 * @param integer stringLimit
+	 * @param int $stringLimit
 	 * @param bool $taintedReferencesEnabled
 	 *
 	 * @return array
