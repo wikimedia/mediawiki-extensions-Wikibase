@@ -5,6 +5,8 @@
 ( function () {
 	'use strict';
 
+	require( './jquery.wikibase.singlebuttontoolbar.js' );
+
 	var PARENT = $.wikibase.singlebuttontoolbar;
 
 	/**

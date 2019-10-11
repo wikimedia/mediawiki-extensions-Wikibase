@@ -48,19 +48,4 @@
 		);
 	} );
 
-	QUnit.test( 'action event', function ( assert ) {
-		var $button = createTestButton(),
-			button = $button.data( 'toolbarbutton' );
-
-		$button.on( 'toolbarbuttonaction', function ( event ) {
-			assert.strictEqual(
-				$( event.target ).data( 'toolbarbutton' ),
-				button,
-				'Triggered "action" event.'
-			);
-		} );
-
-		$button.children( 'a' ).trigger( 'click' );
-	} );
-
 }() );

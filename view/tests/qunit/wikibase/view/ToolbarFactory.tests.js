@@ -1,5 +1,7 @@
-( function ( wb, ToolbarFactory ) {
+( function () {
 	'use strict';
+
+	var ToolbarFactory = require( '../../../../resources/wikibase/view/ToolbarFactory.js' );
 
 	QUnit.module( 'wikibase.view.ToolbarFactory' );
 
@@ -67,4 +69,4 @@
 		stub.restore();
 	} );
 
-}( wikibase, wikibase.view.ToolbarFactory ) );
+}() );

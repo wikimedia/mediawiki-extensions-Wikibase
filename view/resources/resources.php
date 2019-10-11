@@ -166,39 +166,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.view.ToolbarFactory' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
-				'jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js', // uses toolbaritem
-				'jquery/wikibase/toolbar/jquery.wikibase.toolbar.js',
-				'jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
-				'jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
-				'jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
-				'jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
-				'wikibase/view/ToolbarFactory.js',
-			],
-			'styles' => [
-				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css',
-				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget', // for jquery.wikibase.toolbaritem
-				'jquery.wikibase.toolbar.styles',
-				'jquery.wikibase.wbtooltip',
-				'wikibase.api.RepoApiError',
-				'wikibase.view.__namespace',
-			],
-			'messages' => [
-				'wikibase-add',
-				'wikibase-cancel',
-				'wikibase-edit',
-				'wikibase-remove',
-				'wikibase-remove-inprogress',
-				'wikibase-save',
-				'wikibase-publish',
-			],
-		],
-
 		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
 			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
 			'dependencies' => [

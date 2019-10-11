@@ -5,6 +5,8 @@
 ( function () {
 	'use strict';
 
+	require( './jquery.wikibase.toolbaritem.js' );
+
 	var PARENT = $.wikibase.toolbaritem;
 
 	/**
