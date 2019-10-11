@@ -11,15 +11,11 @@
 		"wikibase": "readonly"
 	},
 	"rules": {
-		"computed-property-spacing": "off",
-		"keyword-spacing": "off",
 		"max-len": "off",
 		"no-underscore-dangle": "off",
 		"no-use-before-define": [ "error", "nofunc" ],
 		"one-var": "off",
 		"operator-linebreak": "off",
-		"space-before-function-paren": "off",
-		"spaced-comment": "off",
 		"vars-on-top": "off"
 	}
 }
