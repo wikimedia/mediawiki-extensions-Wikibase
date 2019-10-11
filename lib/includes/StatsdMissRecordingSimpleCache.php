@@ -71,12 +71,15 @@ class StatsdMissRecordingSimpleCache implements CacheInterface {
 		$values = $this->inner->getMultiple( $keys, self::DEFAULT_VALUE );
 		$misses = 0;
 
-		foreach ( $values as $key => $value ) {
+		// This is using a reference because $values is just iterable
+		// and might not be an array we can assign $values[$key] on.
+		foreach ( $values as &$value ) {
 			if ( $value === self::DEFAULT_VALUE ) {
 				$misses++;
-				$values[$key] = $default;
+				$value = $default;
 			}
 		}
+		unset( $value );
 
 		$this->recordMisses( $misses );
 		return $values;

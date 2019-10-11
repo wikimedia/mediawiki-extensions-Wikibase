@@ -451,7 +451,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
 	 *
-	 * @return QuantityFormatter
+	 * @return ValueFormatter
 	 */
 	public function newQuantityFormatter( $format, FormatterOptions $options ) {
 		$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
@@ -514,7 +514,7 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 *
-	 * @return MonolingualHtmlFormatter
+	 * @return MonolingualHtmlFormatter|MonolingualWikitextFormatter|MonolingualTextFormatter
 	 */
 	public function newMonolingualFormatter( $format ) {
 		switch ( $this->snakFormat->getBaseFormat( $format ) ) {

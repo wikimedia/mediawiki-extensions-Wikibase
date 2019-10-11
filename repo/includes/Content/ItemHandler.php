@@ -105,7 +105,7 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @return string[]
+	 * @return (\Closure|class-string)[]
 	 */
 	public function getActionOverrides() {
 		return [
