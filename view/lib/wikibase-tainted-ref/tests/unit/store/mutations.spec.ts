@@ -1,4 +1,4 @@
-import { SET_ALL_TAINTED } from '@/store/mutationTypes';
+import { SET_ALL_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
 import { mutations } from '@/store/mutations';
 
 describe( 'mutations', () => {
@@ -7,5 +7,12 @@ describe( 'mutations', () => {
 		mutations[ SET_ALL_TAINTED ]( state, [ 'foo', 'bar' ] );
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: true, bar: true } );
+	} );
+	it( 'should untainted all statements in the store', () => {
+		const state = { statementsTaintedState: {} };
+		mutations[ SET_ALL_TAINTED ]( state, [ 'foo', 'bar' ] );
+		mutations[ SET_UNTAINTED ]( state, 'foo' );
+		expect( state ).toBeDefined();
+		expect( state.statementsTaintedState ).toEqual( { foo: false, bar: true } );
 	} );
 } );
