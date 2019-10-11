@@ -1,4 +1,4 @@
-import newMockStore from '../../../newMockStore';
+import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import SnakErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import Snak from '@/datamodel/Snak';
 import bindableActions from '@/store/entity/statements/snaks/actions';

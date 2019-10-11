@@ -20,7 +20,6 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@wmde/vuex-helpers": "^0.1.1",
     "core-js": "^2.6.5",
     "events": "^3.0.0",
     "uuid": "^3.3.3",
@@ -52,6 +51,7 @@
     "@wdio/mocha-framework": "^5.12.1",
     "@wdio/spec-reporter": "^5.12.1",
     "@wdio/sync": "^5.12.3",
+    "@wmde/vuex-helpers": "^0.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
