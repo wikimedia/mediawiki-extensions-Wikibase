@@ -8,7 +8,6 @@
 	'use strict';
 
 	var vv = $.valueview;
-	var ExpertStore = require( './../../src/jquery.valueview.ExpertStore.js' );
 
 	var DataTypeMock = function( dataTypeId, DataValue ) {
 		this._dataTypeId = dataTypeId;
@@ -59,19 +58,19 @@
 		MockExpertForStringDataType = newMockExpertConstructor( 'ForStringDataType' ),
 		MockExpertForUnsupportedValue = newMockExpertConstructor( 'ForUnsupportedValue' );
 
-	QUnit.module( 'ExpertStore' );
+	QUnit.module( 'jquery.valueview.ExpertStore' );
 
 	QUnit.test( 'Constructor', function( assert ) {
-		var expertStore = new ExpertStore();
+		var expertStore = new vv.ExpertStore();
 
 		assert.ok(
-			expertStore instanceof ExpertStore,
+			expertStore instanceof vv.ExpertStore,
 			'Instantiated ExpertStore.'
 		);
 	} );
 
 	QUnit.test( 'registerDataTypeExpert(): Error handling', function( assert ) {
-		var expertStore = new ExpertStore();
+		var expertStore = new vv.ExpertStore();
 
 		assert.throws(
 			function() {
@@ -91,7 +90,7 @@
 	} );
 
 	QUnit.test( 'registerDataValueExpert(): Error handling', function( assert ) {
-		var expertStore = new ExpertStore();
+		var expertStore = new vv.ExpertStore();
 
 		assert.throws(
 			function() {
@@ -111,7 +110,7 @@
 	} );
 
 	QUnit.test( 'Return default expert constructor on getExpert()', function( assert ) {
-		var expertStore = new ExpertStore( MockExpertForUnsupportedValue );
+		var expertStore = new vv.ExpertStore( MockExpertForUnsupportedValue );
 
 		assert.strictEqual(
 			expertStore.getExpert( StringValue.TYPE ),
@@ -221,7 +220,7 @@
 	 *        constructor and an Expert constructor which is expected to be registered for it.
 	 */
 	function expertStoreRegistrationTest( assert, toRegister, toExpect ) {
-		var expertStore = new ExpertStore();
+		var expertStore = new vv.ExpertStore();
 
 		// Register experts as per definition:
 		$.each( toRegister, function( i, registerPair ) {

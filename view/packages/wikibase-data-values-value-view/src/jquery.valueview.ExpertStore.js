@@ -17,7 +17,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 	/**
 	 * Store managing `jQuery.valueview.Expert` instances.
-	 * @class ExpertStore
+	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
 	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
@@ -28,7 +28,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 *        Constructor of a default expert that shall be returned when no expert is registered
 	 *        for a specific purpose.
 	 */
-	var SELF = function ExpertStore( DefaultExpert ) {
+	var SELF = $.valueview.ExpertStore = function ValueviewExpertStore( DefaultExpert ) {
 		this._DefaultExpert = DefaultExpert || null;
 		this._expertsForDataValueTypes = {};
 		this._expertsForDataTypes = {};
@@ -130,6 +130,5 @@ jQuery.valueview = jQuery.valueview || {};
 			return expert || this._DefaultExpert;
 		}
 	} );
-	module.exports = SELF;
 
 }() );

@@ -1,8 +1,8 @@
 ( function( dv, vf, vp ) {
 'use strict';
 
-var PARENT = $.Widget,
-	ExpertStore = require( './jquery.valueview.ExpertStore.js' );
+var PARENT = $.Widget;
+
 /**
  * Helper for defining a valueview member function which will just call a valueview's Expert's
  * member function and return the value received from that function. If the valueview does not have
@@ -36,7 +36,7 @@ function expertProxy( fnName ) {
  * @constructor
  *
  * @param {Object} options
- * @param {ExpertStore} options.expertStore
+ * @param {jQuery.valueview.ExpertStore} options.expertStore
  *        Used to determine an `Expert` depending on the data value type or the data type the
  *        `valueview` should handle. The `valueview` will be able to handle all data value types and
  *        data types the given store has `Experts` registered for.
@@ -530,11 +530,11 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Will update the constructor currently used for creating an `Expert`, if one is needed.
 	 * @private
 	 *
-	 * @throws {Error} if no `Expert` store being an instance of `ExpertStore` is
+	 * @throws {Error} if no `Expert` store being an instance of `jQuery.valueview.ExpertStore` is
 	 *         set in the options.
 	 */
 	_updateExpertConstructor: function() {
-		if ( !( this.options.expertStore.getExpert ) ) {
+		if ( !( this.options.expertStore instanceof $.valueview.ExpertStore ) ) {
 			throw new Error( 'No ExpertStore set in valueview\'s "expertStore" option' );
 		}
 

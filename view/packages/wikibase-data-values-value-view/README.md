@@ -35,9 +35,9 @@ provide a preview of how the parsed value will be displayed after saving (see
 `DataValue` being edited may be set using `jQuery.valueview.ExpertExtender.*` input elements added
 to the `ExpertExtender` instance.
 
-### ExpertStore
+### jQuery.valueview.ExpertStore
 
-`Expert`s are managed by `ExpertStore` instance which provides its `Expert`s to
+`Expert`s are managed by `jQuery.valueview.ExpertStore` instance which provides its `Expert`s to
 `jQuery.valueview`.
 
 ### jQuery.valueview.ViewState
@@ -53,7 +53,7 @@ For the usage examples, it is assumed the following packages are installed:
 * [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript)
 * [DataTypes](https://github.com/wmde/DataTypes)
 
-When using `jQuery.valueview` for handling a `DataValue`, a `ExpertStore` with
+When using `jQuery.valueview` for handling a `DataValue`, a `jQuery.valueview.ExpertStore` with
 knowledge about an `Expert` dedicated to the `DataValue`'s type is required and can be set up as
 follows:
 
@@ -79,7 +79,7 @@ console.log(
 
 ```
 
-Now, the `ExpertStore` can be injected into a new `jQuery.valueview` instance
+Now, the `jQuery.valueview.ExpertStore` can be injected into a new `jQuery.valueview` instance
 enabling it to edit "string" `DataValue`s.
 
 ```javascript
