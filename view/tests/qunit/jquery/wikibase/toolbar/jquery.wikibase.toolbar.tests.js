@@ -25,7 +25,7 @@
 	 * @return {jQuery}
 	 */
 	function createTestToolbar( options ) {
-		return $( '<span/>' )
+		return $( '<span>' )
 			.addClass( 'test_toolbar' )
 			.toolbar( options || {} );
 	}
@@ -55,8 +55,8 @@
 	} );
 
 	QUnit.test( 'Create & destroy toolbar with initial content', function ( assert ) {
-		var $container = $( '<span/>' ),
-			$button = $( '<span/>' ).toolbarbutton( {
+		var $container = $( '<span>' ),
+			$button = $( '<span>' ).toolbarbutton( {
 				$label: 'label'
 			} ),
 			$toolbar = createTestToolbar( {
@@ -95,7 +95,7 @@
 	QUnit.test( 'Set content dynamically via option()', function ( assert ) {
 		var $toolbar = createTestToolbar(),
 			toolbar = $toolbar.data( 'toolbar' ),
-			$button = $( '<span/>' ).toolbarbutton( {
+			$button = $( '<span>' ).toolbarbutton( {
 				$label: 'label'
 			} );
 

@@ -51,7 +51,7 @@
 			removeCallback: function () {}
 		}, options );
 
-		return $( '<div/>' )
+		return $( '<div>' )
 			.addClass( 'test_referenceview' )
 			.referenceview( options );
 	}

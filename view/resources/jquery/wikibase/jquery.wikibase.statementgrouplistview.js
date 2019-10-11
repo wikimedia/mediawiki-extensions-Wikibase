@@ -100,7 +100,7 @@
 			var $listview = this.element.children( '.wikibase-listview' );
 
 			if ( !$listview.length ) {
-				$listview = $( '<div/>' ).appendTo( this.element );
+				$listview = $( '<div>' ).appendTo( this.element );
 			}
 
 			$listview.listview( {

@@ -42,7 +42,7 @@
 			}
 		}, options );
 
-		var $sitelinkgroupview = $( '<div/>' )
+		var $sitelinkgroupview = $( '<div>' )
 			.addClass( 'test_sitelinkgroupview' )
 			.appendTo( $( 'body' ) )
 			.sitelinkgroupview( options );

@@ -35,7 +35,7 @@
 			languageCode: 'en'
 		}, options || {} );
 
-		var $badgeselector = $( '<span/>' )
+		var $badgeselector = $( '<span>' )
 			.addClass( 'test_badgeselector' )
 			.appendTo( 'body' )
 			.badgeselector( options );

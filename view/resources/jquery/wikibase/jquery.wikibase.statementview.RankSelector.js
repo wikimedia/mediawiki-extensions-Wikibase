@@ -203,18 +203,18 @@
 		 */
 		_buildMenu: function () {
 			var self = this,
-				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
+				$menu = $( '<ul>' ).addClass( this.widgetFullName + '-menu' );
 
 			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( datamodel.Statement.RANK, function ( rankName, rank ) {
 				rankName = rankName.toLowerCase();
 
 				$menu.append(
-					$( '<li/>' )
+					$( '<li>' )
 					.addClass( self.widgetFullName + '-menuitem-' + rankName )
 					.data( self.widgetName + '-menuitem-rank', rank )
 					.append(
-						$( '<a/>' )
+						$( '<a>' )
 						.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
 						.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
 						.on( 'click.' + self.widgetName, function ( event ) {

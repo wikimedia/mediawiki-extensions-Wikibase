@@ -59,7 +59,7 @@
 		 */
 		_initDefaultButton: function ( $scrapedButton ) {
 			var self = this,
-				$defaultButton = $scrapedButton || $( '<span/>' );
+				$defaultButton = $scrapedButton || $( '<span>' );
 
 			return $defaultButton.toolbarbutton( {
 				$label: this.options.label,

@@ -55,7 +55,7 @@
 			}
 		} );
 
-		return $( '<div/>' )
+		return $( '<div>' )
 			.addClass( 'test_snaklistview' )
 			.snaklistview( options );
 	}

@@ -24,7 +24,7 @@
 			}
 		}, options );
 
-		return $( '<div/>' )
+		return $( '<div>' )
 			.addClass( 'test_sitelinkview' )
 			.appendTo( $( 'body' ) )
 			.sitelinkview( options );

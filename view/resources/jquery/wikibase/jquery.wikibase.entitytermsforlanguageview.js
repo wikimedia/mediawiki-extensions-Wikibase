@@ -131,7 +131,7 @@
 				self[ '$' + widgetName ] = self[ '$' + subjectName ].children( '.wikibase-' + widgetName );
 
 				if ( !self[ '$' + widgetName ].length ) {
-					self[ '$' + widgetName ] = $( '<div/>' ).appendTo( self[ '$' + subjectName ] );
+					self[ '$' + widgetName ] = $( '<div>' ).appendTo( self[ '$' + subjectName ] );
 				}
 
 				// Fully encapsulate child widgets by suppressing their events:

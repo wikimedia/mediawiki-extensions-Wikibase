@@ -8,7 +8,7 @@
 	QUnit.module( 'jquery.sticknode' );
 
 	QUnit.test( 'Create & destroy', function ( assert ) {
-		var $node = $( '<div/>' ).sticknode();
+		var $node = $( '<div>' ).sticknode();
 
 		assert.notStrictEqual(
 			$node.data( 'sticknode' ),

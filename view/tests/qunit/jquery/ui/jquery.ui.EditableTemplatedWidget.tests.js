@@ -50,7 +50,7 @@
 		for ( var i = 0; i < testSets.length; i++ ) {
 			mw.wbTemplates.store.set( 'templatedWidget-test', testSets[ i ][ 0 ] );
 
-			var $subject = $( '<div/>' );
+			var $subject = $( '<div>' );
 
 			$subject.editablewidget( $.extend( {
 				template: 'templatedWidget-test'

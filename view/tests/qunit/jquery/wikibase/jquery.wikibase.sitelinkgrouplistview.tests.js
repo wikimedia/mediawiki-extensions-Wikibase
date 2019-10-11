@@ -20,7 +20,7 @@
 			)
 		}, options );
 
-		return $( '<div/>' )
+		return $( '<div>' )
 			.addClass( 'test_sitelinkgrouplistview' )
 			.appendTo( $( 'body' ) )
 			.sitelinkgrouplistview( options );

@@ -227,7 +227,7 @@
 				repoConfig = mw.config.get( 'wbRepo' ),
 				repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php';
 
-			return $( '<input />' ).entityselector( {
+			return $( '<input>' ).entityselector( {
 				url: repoApiUrl,
 				type: 'property'
 			} )
@@ -254,7 +254,7 @@
 
 			// Display spinner as long as the ValueView is loading:
 			this.$snakValue.empty().append(
-				$( '<div/>' ).append( $( '<span/>' ).addClass( 'mw-small-spinner' ) )
+				$( '<div>' ).append( $( '<span>' ).addClass( 'mw-small-spinner' ) )
 			);
 
 			// The "value" variation contains experts that depend on the property and value type. Must
@@ -804,7 +804,7 @@
 
 				if ( propertyId ) {
 					// property ID selected but apparently no variation available to handle it
-					$( '<span/>' ).text( mw.msg( 'wikibase-snakview-choosesnaktype' ) )
+					$( '<span>' ).text( mw.msg( 'wikibase-snakview-choosesnaktype' ) )
 					.addClass( this.widgetBaseClass + '-unsupportedsnaktype' )
 					.appendTo( this.$snakValue );
 					// NOTE: instead of doing this here and checking everywhere whether this._variation
@@ -823,7 +823,7 @@
 		 */
 		_buildSnakTypeSelector: function ( snakType ) {
 			var self = this,
-				$anchor = $( '<span/>' ),
+				$anchor = $( '<span>' ),
 				// initiate snak type selector widget which is a normal widget just without a
 				// jQuery.widget.bridge...
 				selector = new $.wikibase.snakview.SnakTypeSelector( {}, $anchor );

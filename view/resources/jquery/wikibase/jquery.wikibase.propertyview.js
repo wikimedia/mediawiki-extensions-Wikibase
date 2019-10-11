@@ -46,7 +46,7 @@
 
 			this.$statements = $( '.wikibase-statementgrouplistview', this.element );
 			if ( this.$statements.length === 0 ) {
-				this.$statements = $( '<div/>' ).appendTo( this.$main );
+				this.$statements = $( '<div>' ).appendTo( this.$main );
 			}
 
 			this._createDataType();

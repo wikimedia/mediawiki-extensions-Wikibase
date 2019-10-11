@@ -104,7 +104,7 @@
 			var $entityTerms = $( '.wikibase-entitytermsview', this.element );
 
 			if ( !$entityTerms.length ) {
-				$entityTerms = $( '<div/>' ).prependTo( this.$main );
+				$entityTerms = $( '<div>' ).prependTo( this.$main );
 			}
 
 			this._entityTerms = this.options.buildEntityTermsView(

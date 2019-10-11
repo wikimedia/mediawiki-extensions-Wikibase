@@ -30,7 +30,7 @@
 				'<div></div>',
 				$( '<div>' ).append( 'text' ),
 				$( '<tr>' ),
-				$( '<td>' ).append( $( '<span/>' ).text( 'text' ) ),
+				$( '<td>' ).append( $( '<span>' ).text( 'text' ) ),
 				'text with&nbsp;spaces'
 			],
 			[ // two-parameter templates

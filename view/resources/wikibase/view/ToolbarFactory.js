@@ -55,7 +55,7 @@
 	SELF.prototype.getToolbarContainer = function ( $root ) {
 		var $container = $root.children( '.wikibase-toolbar-container' ).first();
 		if ( $container.length === 0 ) {
-			$container = $( '<div/>' ).appendTo( $root );
+			$container = $( '<div>' ).appendTo( $root );
 		}
 		return $container;
 	};

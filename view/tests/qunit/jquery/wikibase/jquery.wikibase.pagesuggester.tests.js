@@ -12,7 +12,7 @@
 	 * @return {jQuery}
 	 */
 	var newTestPageSuggester = function ( options ) {
-		return $( '<input />' )
+		return $( '<input>' )
 			.addClass( 'test_pagesuggester' )
 			.appendTo( 'body' )
 			.pagesuggester( options );

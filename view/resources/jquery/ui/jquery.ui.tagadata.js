@@ -270,8 +270,8 @@
 				return $tag;
 			}
 
-			var $label = $( '<span/>' ).addClass( 'tagadata-label' ),
-				$input = $( '<input/>' ).attr( {
+			var $label = $( '<span>' ).addClass( 'tagadata-label' ),
+				$input = $( '<input>' ).attr( {
 					name: this.options.itemName + '[]',
 					lang: this.element.prop( 'lang' ) || '',
 					// T136543: Setting dir to "auto" must use attr in Internet Explorer.

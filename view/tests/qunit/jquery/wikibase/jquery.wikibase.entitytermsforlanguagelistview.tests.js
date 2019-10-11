@@ -44,7 +44,7 @@
 			userLanguages: [ 'de', 'en' ]
 		}, options || {} );
 
-		return $( '<table/>' )
+		return $( '<table>' )
 			.appendTo( 'body' )
 			.addClass( 'test_entitytermsforlanguagelistview' )
 			.entitytermsforlanguagelistview( options );

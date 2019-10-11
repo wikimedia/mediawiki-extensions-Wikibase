@@ -38,7 +38,7 @@
 			value: new datamodel.StatementList()
 		}, options || {} );
 
-		$node = $node || $( '<div/>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( 'body' );
 
 		return $node
 			.addClass( 'test_statementlistview' )

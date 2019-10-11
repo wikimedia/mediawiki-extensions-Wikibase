@@ -18,7 +18,7 @@
 				return wb.tests.getMockListItemAdapter(
 					'sitelinkview',
 					function () {
-						this.$siteId = $( '<div/>' );
+						this.$siteId = $( '<div>' );
 						this.focus = function () {};
 						this.isEmpty = function () {
 							return !this.options.value;
@@ -32,7 +32,7 @@
 			}
 		}, options );
 
-		var $sitelinklistview = $( '<table/>' )
+		var $sitelinklistview = $( '<table>' )
 			.addClass( 'test_sitelinklistview' )
 			.appendTo( $( 'body' ) )
 			.sitelinklistview( options );

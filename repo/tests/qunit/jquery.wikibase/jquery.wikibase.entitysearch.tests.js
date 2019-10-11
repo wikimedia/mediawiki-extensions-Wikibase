@@ -40,7 +40,7 @@
 			source: entityStubs
 		}, options || {} );
 
-		return $( '<input />' )
+		return $( '<input>' )
 			.addClass( 'test-entitysearch' )
 			.entitysearch( options );
 	};

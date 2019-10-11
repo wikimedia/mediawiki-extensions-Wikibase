@@ -17,7 +17,7 @@
 			value: new datamodel.MultiTerm( 'en', [ 'a', 'b', 'c' ] )
 		}, options || {} );
 
-		var $aliasesview = $( '<div/>' )
+		var $aliasesview = $( '<div>' )
 			.addClass( 'test_aliasesview' )
 			.appendTo( 'body' )
 			.aliasesview( options );

@@ -9,7 +9,7 @@
 
 	QUnit.test( 'getToolbarContainer returns the first container', function ( assert ) {
 		var toolbarFactory = new ToolbarFactory(),
-			$root = $( '<div/>' );
+			$root = $( '<div>' );
 
 		$root.html( '<div/><div class="wikibase-toolbar-container"/><div class="wikibase-toolbar-container"/>' );
 
@@ -21,7 +21,7 @@
 
 	QUnit.test( 'getToolbarContainer returns a new container for an empty element', function ( assert ) {
 		var toolbarFactory = new ToolbarFactory(),
-			$root = $( '<div/>' ).html( '<div/>' );
+			$root = $( '<div>' ).html( '<div>' );
 
 		var res = toolbarFactory.getToolbarContainer( $root );
 
@@ -31,7 +31,7 @@
 
 	QUnit.test( 'getToolbarContainer does not return subchildren container', function ( assert ) {
 		var toolbarFactory = new ToolbarFactory(),
-			$root = $( '<div/>' ).html( '<div><div class="wikibase-toolbar-container"/></div>' );
+			$root = $( '<div>' ).html( '<div><div class="wikibase-toolbar-container"/></div>' );
 
 		var res = toolbarFactory.getToolbarContainer( $root );
 
@@ -42,7 +42,7 @@
 	QUnit.test( 'getEditToolbar creates an edit toolbar', function ( assert ) {
 		var toolbarFactory = new ToolbarFactory(),
 			stub = sinon.stub( $.wikibase, 'edittoolbar' ),
-			$root = $( '<div/>' );
+			$root = $( '<div>' );
 
 		$root.edittoolbar = stub;
 
@@ -55,7 +55,7 @@
 	QUnit.test( 'getEditToolbar passes options', function ( assert ) {
 		var toolbarFactory = new ToolbarFactory(),
 			stub = sinon.stub( $.wikibase, 'edittoolbar' ),
-			$root = $( '<div/>' ),
+			$root = $( '<div>' ),
 			options = {};
 
 		$root.edittoolbar = stub;

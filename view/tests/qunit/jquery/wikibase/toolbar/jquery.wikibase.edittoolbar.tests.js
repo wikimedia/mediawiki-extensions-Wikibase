@@ -25,7 +25,7 @@
 	 * @return {jQuery}
 	 */
 	function createEdittoolbar( options ) {
-		return $( '<span/>' )
+		return $( '<span>' )
 			.addClass( 'test_edittoolbar' )
 			.edittoolbar( $.extend( {
 				getHelpMessage: function () {

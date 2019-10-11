@@ -19,7 +19,7 @@
 			buildStatementGroupListView: function () {}
 		}, options || {} );
 
-		$node = $node || $( '<div/>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( 'body' );
 
 		var $propertyview = $node
 			.addClass( 'test_propertyview' )

@@ -12,7 +12,7 @@
 	QUnit.test( 'Direct initialization fails', function ( assert ) {
 		assert.throws(
 			function () {
-				$( '<div/>' ).entityview( $.extend( {
+				$( '<div>' ).entityview( $.extend( {
 					value: new datamodel.Property( 'P1', 'someDataType' ),
 					languages: 'en'
 				} ) );

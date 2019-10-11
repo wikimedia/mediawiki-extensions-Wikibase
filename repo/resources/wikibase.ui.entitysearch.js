@@ -61,7 +61,7 @@
 		}
 
 		var suggestionsPlaceholder = new $.ui.ooMenu.CustomItem(
-			$( '<div/>' ).append( $.createSpinner() )
+			$( '<div>' ).append( $.createSpinner() )
 		);
 
 		var $searchContaining = $( '<div>' )
@@ -78,7 +78,7 @@
 			$form.trigger( 'submit' );
 		}, 'wb-entitysearch-suggestions' );
 
-		var $searchMenu = $( '<ul/>' ).ooMenu( {
+		var $searchMenu = $( '<ul>' ).ooMenu( {
 			customItems: [ searchContaining ]
 		} );
 

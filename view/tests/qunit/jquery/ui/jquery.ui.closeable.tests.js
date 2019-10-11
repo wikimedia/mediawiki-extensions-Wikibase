@@ -10,7 +10,7 @@
 	 * @return {jQuery}
 	 */
 	function createCloseable( options ) {
-		return $( '<div/>' )
+		return $( '<div>' )
 			.addClass( 'test_closeable' )
 			.closeable( options || {} );
 	}

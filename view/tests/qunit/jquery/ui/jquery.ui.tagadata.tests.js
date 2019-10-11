@@ -10,11 +10,11 @@
 	 * @return {jQuery}
 	 */
 	function createTagadata() {
-		return $( '<ul/>' )
+		return $( '<ul>' )
 			.addClass( 'test_tagadata' )
-			.append( $( '<li/>' ).text( 'A' ) )
-			.append( $( '<li/>' ).text( 'B' ) )
-			.append( $( '<li/>' ).text( 'C' ) )
+			.append( $( '<li>' ).text( 'A' ) )
+			.append( $( '<li>' ).text( 'B' ) )
+			.append( $( '<li>' ).text( 'C' ) )
 			.tagadata()
 			.appendTo( 'body' );
 	}
@@ -114,7 +114,7 @@
 		tagadata.removeTag( tagadata.getTag( 'B' ) );
 
 		assert.strictEqual(
-			tagadata.removeTag( $( '<span/>' ) ),
+			tagadata.removeTag( $( '<span>' ) ),
 			false,
 			'Trying to remove non-existent tag returns "false".'
 		);

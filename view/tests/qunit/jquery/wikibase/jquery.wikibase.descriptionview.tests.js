@@ -17,7 +17,7 @@
 			value: new datamodel.Term( 'en', 'test description' )
 		}, options || {} );
 
-		$node = $node || $( '<div/>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( 'body' );
 
 		var $descriptionview = $node
 			.addClass( 'test_descriptionview' )

@@ -69,10 +69,10 @@
 						|| 'normal';
 				},
 				function () { // Rank selector
-					return $( '<div/>' );
+					return $( '<div>' );
 				},
 				function () { // Main snak
-					return $( '<div/>' );
+					return $( '<div>' );
 				},
 				'', // Qualifiers
 				'', // Toolbar placeholder
@@ -266,7 +266,7 @@
 			// snaklistviews are managed in a listview:
 			var $qualifiers = this.$qualifiers.children( '.wikibase-listview' );
 			if ( !$qualifiers.length ) {
-				$qualifiers = $( '<div/>' ).prependTo( this.$qualifiers );
+				$qualifiers = $( '<div>' ).prependTo( this.$qualifiers );
 			}
 			$qualifiers.listview( {
 				listItemAdapter: this.options.getQualifiersListItemAdapter( function ( snaklistview ) {
@@ -294,7 +294,7 @@
 
 			var $listview = this.$references.children( '.wikibase-listview' );
 			if ( !$listview.length ) {
-				$listview = $( '<div/>' ).prependTo( this.$references );
+				$listview = $( '<div>' ).prependTo( this.$references );
 			} else if ( $listview.data( 'listview' ) ) {
 				return;
 			}
@@ -339,7 +339,7 @@
 			}
 
 			// toggle for references section:
-			this._$toggler = $( '<a/>' ).toggler( {
+			this._$toggler = $( '<a>' ).toggler( {
 				$subject: this.$references,
 				visible: expanded
 			} );

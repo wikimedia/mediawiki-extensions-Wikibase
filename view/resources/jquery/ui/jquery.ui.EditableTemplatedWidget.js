@@ -168,7 +168,7 @@
 		 */
 		notification: function ( $content, additionalCssClasses ) {
 			if ( !this._$notification ) {
-				this._$notification = $( '<div/>' ).closeable( {
+				this._$notification = $( '<div>' ).closeable( {
 					encapsulate: true
 				} );
 			}

@@ -100,7 +100,7 @@
 				$( window ).on( 'resize.' + widgetName, repositionMenu );
 			} );
 
-			this._$icon = $( '<span/>' )
+			this._$icon = $( '<span>' )
 				.addClass( 'ui-icon ui-icon-snaktypeselector' )
 				.appendTo( this.element );
 
@@ -158,16 +158,16 @@
 		 */
 		_buildMenu: function () {
 			var classPrefix = this.widgetBaseClass + '-menuitem-',
-				$menu = $( '<ul/>' ).addClass( this.widgetBaseClass + '-menu' ),
+				$menu = $( '<ul>' ).addClass( this.widgetBaseClass + '-menu' ),
 				snakTypes = variations.getCoveredSnakTypes();
 
 			snakTypes.forEach( function ( type ) {
 				$menu.append(
-					$( '<li/>' )
+					$( '<li>' )
 					.addClass( classPrefix + type ) // type should only be lower case string anyhow!
 					.data( 'snaktypeselector-menuitem-type', type )
 					.append(
-						$( '<a/>' )
+						$( '<a>' )
 						.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
 						.on( 'click', function ( event ) {
 							event.preventDefault();

@@ -150,7 +150,7 @@
 			this.$listview = this.element.find( '.wikibase-listview' );
 
 			if ( !this.$listview.length ) {
-				this.$listview = $( '<div/>' ).appendTo( this.element );
+				this.$listview = $( '<div>' ).appendTo( this.element );
 			}
 
 			this.$listview

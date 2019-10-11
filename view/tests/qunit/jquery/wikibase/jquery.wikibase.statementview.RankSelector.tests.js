@@ -12,7 +12,7 @@
 	 * @return {jQuery.wikibase.statementview.RankSelector}
 	 */
 	function createTestRankSelector( options ) {
-		var $node = $( '<span/>' )
+		var $node = $( '<span>' )
 			.addClass( 'test_rankselector' )
 			.appendTo( 'body' );
 

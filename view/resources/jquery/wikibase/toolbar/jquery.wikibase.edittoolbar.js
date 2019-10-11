@@ -170,7 +170,7 @@
 			var $content = $();
 
 			if ( !$subToolbar.length ) {
-				$subToolbar = $( '<span/>' ).appendTo( this.getContainer() );
+				$subToolbar = $( '<span>' ).appendTo( this.getContainer() );
 			} else {
 				this._scrapeButtons( $subToolbar );
 				$content = $subToolbar.children();
@@ -340,7 +340,7 @@
 		 */
 		getButton: function ( buttonName ) {
 			if ( !this._buttons[ buttonName ] ) {
-				this._buttons[ buttonName ] = $( '<span/>' ).toolbarbutton( {
+				this._buttons[ buttonName ] = $( '<span>' ).toolbarbutton( {
 					$label: this.options.buttonLabels[ buttonName ],
 					cssClassSuffix: buttonName
 				} );
@@ -363,7 +363,7 @@
 			if ( message !== undefined ) {
 				$container.contents().hide();
 
-				$actionMsg = $( '<span/>' )
+				$actionMsg = $( '<span>' )
 					.addClass( actionMessageClass + ' wb-actionmsg' )
 					.text( message )
 					.appendTo( $container );

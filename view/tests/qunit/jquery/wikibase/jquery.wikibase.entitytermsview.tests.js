@@ -40,7 +40,7 @@
 			userLanguages: [ 'de', 'en' ]
 		}, options || {} );
 
-		return $( '<div/>' )
+		return $( '<div>' )
 			.appendTo( 'body' )
 			.addClass( 'test_entitytermsview' )
 			.entitytermsview( options );

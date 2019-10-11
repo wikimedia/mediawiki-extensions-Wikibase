@@ -189,7 +189,7 @@
 				= this.element.find( '.wikibase-entitytermsforlanguagelistview' );
 
 			if ( !this.$entitytermsforlanguagelistview.length ) {
-				this.$entitytermsforlanguagelistview = $( '<div/>' )
+				this.$entitytermsforlanguagelistview = $( '<div>' )
 					.appendTo( this.$entitytermsforlanguagelistviewContainer );
 			}
 
@@ -234,7 +234,7 @@
 			var self = this,
 				api = new mw.Api();
 
-			this.$entitytermsforlanguagelistviewToggler = $( '<div/>' )
+			this.$entitytermsforlanguagelistviewToggler = $( '<div>' )
 				.addClass( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' )
 				.text( mw.msg( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' ) )
 				.toggler( {
@@ -291,10 +291,10 @@
 			var toggler = this.$entitytermsforlanguagelistviewToggler.data( 'toggler' );
 
 			this.$entitytermsforlanguagelistviewHelp =
-				$( '<span/>' )
+				$( '<span>' )
 				.addClass( 'wikibase-entitytermsview-entitytermsforlanguagelistview-configure' )
 				.append(
-					$( '<a/>' )
+					$( '<a>' )
 					.attr(
 						'href',
 						mw.msg(
@@ -428,9 +428,9 @@
 		notification: function ( $content, additionalCssClasses ) {
 			var self = this;
 			if ( !this._$notification ) {
-				var $closeable = $( '<div/>' ).closeable();
+				var $closeable = $( '<div>' ).closeable();
 
-				this._$notification = $( '<tr/>' ).append( $( '<td/>' ).append( $closeable ) );
+				this._$notification = $( '<tr>' ).append( $( '<td>' ).append( $closeable ) );
 
 				this._$notification.data( 'closeable', $closeable.data( 'closeable' ) );
 				this._$notification

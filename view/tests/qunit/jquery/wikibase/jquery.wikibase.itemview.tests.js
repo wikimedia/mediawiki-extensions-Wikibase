@@ -20,7 +20,7 @@
 			buildSitelinkGroupListView: function () {}
 		}, options || {} );
 
-		$node = $node || $( '<div/>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( 'body' );
 
 		var $itemview = $node
 			.addClass( 'test_itemview' )

@@ -39,7 +39,7 @@
 			delay: 0 // Time waster, also some tests below assume this to be < 100ms
 		}, options || {} );
 
-		return $( '<input />' )
+		return $( '<input>' )
 			.addClass( 'test-entityselector' )
 			.appendTo( 'body' )
 			.entityselector( options );

@@ -212,7 +212,7 @@
 			return $( '<form>' )
 			.attr( 'name', 'wikibase-linkItem-form' )
 			.append( this._createSiteInput() )
-			.append( $( '<br />' ) )
+			.append( $( '<br>' ) )
 			.append( this._createPageInput() );
 		},
 
@@ -226,7 +226,7 @@
 			.attr( 'for', 'wbclient-linkItem-site' )
 			.text( mw.msg( 'wikibase-linkitem-input-site' ) )
 			.add(
-				$( '<input />' )
+				$( '<input>' )
 				.attr( {
 					name: 'wbclient-linkItem-site',
 					id: 'wbclient-linkItem-site',
@@ -326,7 +326,7 @@
 			.attr( 'for', 'wbclient-linkItem-page' )
 			.text( mw.msg( 'wikibase-linkitem-input-page' ) )
 			.add(
-				$( '<input />' )
+				$( '<input>' )
 				.attr( {
 					name: 'wbclient-linkItem-page',
 					id: 'wbclient-linkItem-page',
@@ -460,7 +460,7 @@
 			this.$dialog
 				.empty()
 				.append( $( '<div>' ).html( confirmationMsg ) )
-				.append( $( '<br />' ) )
+				.append( $( '<br>' ) )
 				.append( this._createSiteLinkTable( entity ) );
 
 			this.$goButton

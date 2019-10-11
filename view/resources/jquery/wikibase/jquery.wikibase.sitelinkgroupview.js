@@ -92,7 +92,7 @@
 			this.$sitelinklistview = this.element.find( '.wikibase-sitelinklistview' );
 
 			if ( !this.$sitelinklistview.length ) {
-				this.$sitelinklistview = $( '<table/>' ).appendTo( this.element );
+				this.$sitelinklistview = $( '<table>' ).appendTo( this.element );
 			}
 
 			this.draw();

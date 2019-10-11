@@ -193,7 +193,7 @@
 				return $menu;
 			}
 
-			$menu = $( '<ul/>' )
+			$menu = $( '<ul>' )
 				.text( '...' )
 				.addClass( this.widgetFullName + '-menu' )
 				.appendTo( 'body' );
@@ -260,13 +260,13 @@
 
 				badgeIds.forEach( function ( itemId, index ) {
 					var badgeLabel = badgeLabels[ index ];
-					var $item = $( '<a/>' )
+					var $item = $( '<a>' )
 						.on( 'click.' + self.widgetName, function ( event ) {
 							event.preventDefault();
 						} )
 						.text( badgeLabel );
 
-					$( '<li/>' )
+					$( '<li>' )
 					.addClass( self.widgetFullName + '-menuitem-' + itemId )
 					.data( self.widgetName + '-menuitem-badge', itemId )
 					.append( $item

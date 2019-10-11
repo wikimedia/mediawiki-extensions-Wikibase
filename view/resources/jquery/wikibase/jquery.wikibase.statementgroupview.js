@@ -139,7 +139,7 @@
 			var $statementlistview = this.element.find( '.wikibase-statementlistview' );
 
 			if ( !$statementlistview.length ) {
-				$statementlistview = $( '<div/>' ).appendTo( this.element );
+				$statementlistview = $( '<div>' ).appendTo( this.element );
 			}
 
 			this.statementlistview = this.options.buildStatementListView(

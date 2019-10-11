@@ -22,7 +22,7 @@
 			}
 		}, options || {} );
 
-		$node = $node || $( '<tbody/>' ).appendTo( $( '<table/>' ) );
+		$node = $node || $( '<tbody>' ).appendTo( $( '<table>' ) );
 
 		var $entitytermsforlanguageview = $node
 			.addClass( 'test_entitytermsforlanguageview' )

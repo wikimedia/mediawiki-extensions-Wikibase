@@ -51,7 +51,7 @@
 	QUnit.test( 'getEntityView constructs correct views', function ( assert ) {
 		var viewFactory = newViewFactory(),
 			fooView = {},
-			$dom = $( '<div/>' ),
+			$dom = $( '<div>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
 		$dom.data = sinon.spy( function () {
 			return fooView;
@@ -77,7 +77,7 @@
 	QUnit.test( 'getEntityView passes correct options to views', function ( assert ) {
 		var entity = getEntityStub( 'foo' ),
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' ),
+			$dom = $( '<div>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
 
 		viewFactory.getEntityView( null, entity, $dom );
@@ -93,7 +93,7 @@
 	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
 		var sitelinkSet = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.spy( $.wikibase, 'sitelinkgrouplistview' );
 		$dom.sitelinkgrouplistview = $.wikibase.sitelinkgrouplistview;
@@ -111,7 +111,7 @@
 		var groupName = 'groupid',
 			siteLinks = new datamodel.SiteLinkSet( [] ),
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.stub( $.wikibase, 'sitelinkgroupview' );
 		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
@@ -130,7 +130,7 @@
 	QUnit.test( 'getSiteLinkListView passes correct options to views', function ( assert ) {
 		var siteLinks = [],
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.spy( $.wikibase, 'sitelinklistview' );
 		$dom.sitelinklistview = $.wikibase.sitelinklistview;
@@ -147,7 +147,7 @@
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function ( assert ) {
 		var entity = new datamodel.Item( 'Q1' ),
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		$dom.statementgrouplistview = sinon.stub( $.wikibase, 'statementgrouplistview' );
 
@@ -201,7 +201,7 @@
 			] ),
 			entityId = 'entityId',
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		sinon.stub( viewFactory, '_getView' );
@@ -228,7 +228,7 @@
 		var value = new datamodel.StatementList(),
 			entityId = 'entityId',
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		$dom.statementlistview = sinon.stub( $.wikibase, 'statementlistview' );
@@ -250,7 +250,7 @@
 		var factory = newViewFactory(),
 			value = new datamodel.StatementList(),
 			expectedPropertyId = 'P123',
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.stub( factory, 'getAdderWithStartEditing' );
 		factory.getAdderWithStartEditing.returns( function () {} );
@@ -272,7 +272,7 @@
 			value = new datamodel.StatementList(),
 			$parent = $( '<div>' ).addClass( 'wikibase-statementgroupview' ),
 			expectedPropertyId = 'P123',
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.stub( factory, 'getAdderWithStartEditing' );
 		factory.getAdderWithStartEditing.returns( function () {} );
@@ -433,7 +433,7 @@
 		var value = null,
 			viewFactory = newViewFactory(),
 			removeCallback = function () {},
-			$dom = $( '<div/>' ),
+			$dom = $( '<div>' ),
 			referenceview = sinon.stub( $dom, 'referenceview' );
 
 		viewFactory.getReferenceView( null, removeCallback, value, $dom );
@@ -472,7 +472,7 @@
 	QUnit.test( 'getSnakListView passes correct options to view', function ( assert ) {
 		var value = null,
 			viewFactory = newViewFactory(),
-			$dom = $( '<div/>' ),
+			$dom = $( '<div>' ),
 			stub = sinon.stub( $dom, 'snaklistview' );
 
 		viewFactory.getSnakListView( {}, null, $dom, value );
@@ -532,7 +532,7 @@
 				userLanguages
 			),
 			options = {},
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		$dom.snakview = sinon.stub( $.wikibase, 'snakview' );
 		viewFactory.getSnakView( null, false, options, value, $dom );
@@ -572,7 +572,7 @@
 				null,
 				userLanguages
 			),
-			$dom = $( '<div/>' );
+			$dom = $( '<div>' );
 
 		sinon.spy( $.wikibase, 'entitytermsview' );
 		$dom.entitytermsview = $.wikibase.entitytermsview;

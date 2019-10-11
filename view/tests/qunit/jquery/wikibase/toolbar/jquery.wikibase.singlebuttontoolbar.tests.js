@@ -25,7 +25,7 @@
 	 * @return {jQuery}
 	 */
 	function createSinglebuttontoolbar( options ) {
-		return $( '<span/>' )
+		return $( '<span>' )
 			.addClass( 'test_singlebuttontoolbar' )
 			.singlebuttontoolbar( options || {} );
 	}

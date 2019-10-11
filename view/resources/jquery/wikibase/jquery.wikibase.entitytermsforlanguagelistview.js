@@ -208,7 +208,7 @@
 				.on( 'click', this._onMoreLanguagesButtonClicked.bind( this ) );
 			this._toggleMoreLanguagesButton( $moreLanguagesButton );
 
-			this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
+			this.$entitytermsforlanguagelistviewMore = $( '<div>' )
 				.addClass( 'wikibase-entitytermsforlanguagelistview-more' )
 				.append( $moreLanguagesButton );
 

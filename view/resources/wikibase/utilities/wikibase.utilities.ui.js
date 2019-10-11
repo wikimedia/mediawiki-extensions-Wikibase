@@ -18,7 +18,7 @@
 	 * @return {jQuery} The formatted counter output.
 	 */
 	wb.utilities.ui.buildCounter = function ( messageKey, quantity ) {
-		return $( '<span/>' )
+		return $( '<span>' )
 			// TODO: Legacy name kept for compatibility reasons. It's not "pending" any more.
 			.addClass( 'wb-ui-pendingcounter' )
 			.text(

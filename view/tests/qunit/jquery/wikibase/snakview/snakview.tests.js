@@ -55,7 +55,7 @@
 			dataTypeStore: wb.dataTypeStore
 		}, options || {} );
 
-		$node = $node || $( '<div/>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( 'body' );
 
 		return $node
 			.addClass( 'test_snakview' )

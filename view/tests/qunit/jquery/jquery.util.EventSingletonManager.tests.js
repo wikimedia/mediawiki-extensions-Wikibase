@@ -11,8 +11,8 @@
 
 	QUnit.test( 'register() & unregister() (single source)', function ( assert ) {
 		var manager = new EventSingletonManager(),
-			$source = $( '<div/>' ),
-			$target = $( '<div/>' ),
+			$source = $( '<div>' ),
+			$target = $( '<div>' ),
 			event = $.Event( 'custom' );
 
 		manager.register(
@@ -89,8 +89,8 @@
 
 	QUnit.test( 'unregister() & unregister() (multiple events)', function ( assert ) {
 		var manager = new EventSingletonManager(),
-			$source = $( '<div/>' ),
-			$target = $( '<div/>' ),
+			$source = $( '<div>' ),
+			$target = $( '<div>' ),
 			event1 = $.Event( 'custom1' ),
 			event2 = $.Event( 'custom2' ),
 			event3 = $.Event( 'custom3' ),

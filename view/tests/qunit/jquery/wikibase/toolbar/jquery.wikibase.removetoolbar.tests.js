@@ -25,7 +25,7 @@
 	 * @return {jQuery}
 	 */
 	function createRemovetoolbar( options ) {
-		return $( '<span/>' )
+		return $( '<span>' )
 			.addClass( 'test_removetoolbar' )
 			.removetoolbar( options || {} );
 	}

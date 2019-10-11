@@ -13,7 +13,7 @@
 	 * @return {jQuery}
 	 */
 	function createListview( value, options ) {
-		var $node = $( '<div/>' ).addClass( 'test_listview' );
+		var $node = $( '<div>' ).addClass( 'test_listview' );
 
 		options = $.extend( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {

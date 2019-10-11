@@ -37,7 +37,7 @@
 		for ( var i = 0; i < testSets.length; i++ ) {
 			mw.wbTemplates.store.set( 'templatedWidget-test', testSets[ i ][ 0 ] );
 
-			var $subject = $( '<div/>' );
+			var $subject = $( '<div>' );
 
 			$subject.TemplatedWidget( $.extend( {
 				template: 'templatedWidget-test'
@@ -51,8 +51,8 @@
 			$subject.removeAttr( 'class' );
 
 			assert.strictEqual(
-				$( '<div/>' ).append( $subject ).html(),
-				$( '<div/>' ).append(
+				$( '<div>' ).append( $subject ).html(),
+				$( '<div>' ).append(
 					mw.wbTemplate( 'templatedWidget-test', testSets[ i ][ 1 ].templateParams )
 				).html(),
 				'Verified generated HTML.'
