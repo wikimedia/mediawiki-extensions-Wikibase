@@ -100,7 +100,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		$coordinatesOutput = CoordinatesOutput::getOrBuildFromParserOutput( $parserOutput );
 		$primaryCoordKey = $this->findPrimaryCoordinateKey();
 
-		if ( $coordinatesOutput->getPrimary() === false && $primaryCoordKey !== null ) {
+		if ( !$coordinatesOutput->hasPrimary() && $primaryCoordKey !== null ) {
 			$this->addPrimaryCoordinate( $coordinatesOutput, $primaryCoordKey );
 		}
 
