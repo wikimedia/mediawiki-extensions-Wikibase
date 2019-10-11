@@ -1,8 +1,8 @@
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
-import { STATEMENT_TAINTED_STATE_INIT } from '@/store/actionTypes';
+import { STATEMENT_TAINTED_STATE_INIT, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
 
-export function launch(): void {
+export function launch( editStart: Function ): void {
 	const store = createStore();
 	const guids: string[] = [];
 	document.querySelectorAll( '.wikibase-statementview' ).forEach( ( element ) => {
@@ -16,4 +16,7 @@ export function launch(): void {
 		}
 	} );
 	store.dispatch( STATEMENT_TAINTED_STATE_INIT, guids );
+	editStart( ( guid: string ) => {
+		store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, guid );
+	} );
 }

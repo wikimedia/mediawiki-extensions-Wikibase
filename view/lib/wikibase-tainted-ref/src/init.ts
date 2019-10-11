@@ -6,6 +6,9 @@ export default async (): Promise<void> => {
 	if ( mwWindow.mw.config.get( 'wbTaintedReferencesEnabled' ) ) {
 		const require = await mwWindow.mw.loader.using( RL_COMMON_MODULE_NAME );
 		const app = require( RL_COMMON_MODULE_NAME );
-		mwWindow.mw.hook( 'wikibase.entityPage.entityView.rendered' ).add( app.launch );
+		const editStart = mwWindow.mw.hook( 'wikibase.statement.startEditing' ).add;
+		mwWindow.mw.hook( 'wikibase.entityPage.entityView.rendered' ).add(
+			() => { app.launch( editStart ); },
+		);
 	}
 };
