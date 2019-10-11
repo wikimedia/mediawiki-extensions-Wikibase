@@ -22,7 +22,7 @@ import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
 import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
-import newMockStore from '../newMockStore';
+import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 
 describe( 'entity/actions', () => {

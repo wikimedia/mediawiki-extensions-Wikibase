@@ -7,7 +7,7 @@ import {
 } from '@/store/entity/statements/mutationTypes';
 import StatementMap from '@/datamodel/StatementMap';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
-import newMockStore from '../../newMockStore';
+import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 
 describe( 'statements/actions', () => {
 	describe( STATEMENTS_INIT, () => {

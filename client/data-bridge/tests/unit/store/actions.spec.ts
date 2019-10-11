@@ -28,7 +28,7 @@ import {
 } from '@/store/entity/statements/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
-import newMockStore from './newMockStore';
+import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 
