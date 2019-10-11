@@ -3,13 +3,14 @@
 Currently, these tests assume that your wiki doesn’t care about the domain of the links that bridge is overloading,
 that the wiki is both a Wikibase repo and a client of itself,
 and that it tags edits with “Data Bridge”.
-This means that you need something like this in your `LocalSettings.php`:
+This means that you need something like this (be sure to check `repo/config/` & `client/config/` for an exhaustive list) in your `LocalSettings.php`:
 
     $wgEnableWikibaseRepo = true;
     $wgEnableWikibaseClient = true;
     $wgWBClientSettings['dataBridgeEnabled'] = true;
     $wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=](?:Item:)?(Q[1-9][0-9]*).*#(P[1-9][0-9]*)$';
     $wgWBClientSettings['dataBridgeEditTags'] = [ 'Data Bridge' ];
+    $wgWBRepoSettings['dataBridgeEnabled'] = true;
 
 The test pages are created in the talk namespace of the main namespace,
 so your wiki must allow these talk pages to contain wikitext.
