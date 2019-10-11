@@ -27,11 +27,15 @@ return call_user_func( function() {
 		'localBasePath' => __DIR__ . '/wikibase-data-values-value-view/lib',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/lib',
 	];
-
 	$wikibaseDatavaluesValueviewSrcPaths = [
 		'localBasePath' => __DIR__ . '/wikibase-data-values-value-view/src',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/src',
 	];
+	$wikibaseDatavaluesValueviewPaths = [
+		'localBasePath' => __DIR__ . '/wikibase-data-values-value-view',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view',
+	];
+
 	$wikibaseTermboxPaths = [
 		'localBasePath' => __DIR__ . '/wikibase-termbox',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-termbox',
@@ -492,19 +496,6 @@ return call_user_func( function() {
 		'jquery.ui.languagesuggester' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'jquery.ui/jquery.ui.languagesuggester.js',
-			],
-			'dependencies' => [
-				'jquery.ui.suggester',
-				'jquery.ui.widget',
-			],
-		],
-
-		'jquery.ui.unitsuggester' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
-				'jquery.ui/jquery.ui.unitsuggester.js',
-			],
-			'styles' => [
-				'jquery.ui/jquery.ui.unitsuggester.css',
 			],
 			'dependencies' => [
 				'jquery.ui.suggester',
@@ -1093,17 +1084,22 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.valueview.experts.QuantityInput' => $wikibaseDatavaluesValueviewSrcPaths + [
+		'jquery.valueview.experts.QuantityInput' => $wikibaseDatavaluesValueviewPaths + [
 			'packageFiles' => [
-				'experts/QuantityInput.js',
-				'ExpertExtender/ExpertExtender.UnitSelector.js',
+				'src/experts/QuantityInput.js',
+				'src/ExpertExtender/ExpertExtender.UnitSelector.js',
+				'lib/jquery.ui/jquery.ui.unitsuggester.js',
+			],
+			'styles' => [
+				'lib/jquery.ui/jquery.ui.unitsuggester.css',
 			],
 			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
 				'jquery.valueview.Expert',
 				'jquery.valueview.ExpertExtender',
 				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
-				'jquery.ui.unitsuggester',
 			],
 			'messages' => [
 				'valueview-expertextender-unitsuggester-label',
