@@ -21,11 +21,13 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  */
 class TermboxView implements CacheableEntityTermsView {
 
-	/* public */ const TERMBOX_PLACEHOLDER = 'wb-ui';
+	public const TERMBOX_PLACEHOLDER = 'wb-ui';
 
-	/* public */ const TERMBOX_MARKUP = 'termbox-markup';
+	public const TERMBOX_MARKUP = 'termbox-markup';
 
-	/* public */ const TERMBOX_VERSION = 2;
+	public const TERMBOX_VERSION = 2;
+
+	public const CACHE_VERSION = 1;
 
 	private $fallbackChainFactory;
 	private $renderer;
