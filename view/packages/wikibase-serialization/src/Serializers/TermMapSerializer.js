@@ -2,12 +2,11 @@
 	'use strict';
 	var TermSerializer = require( './TermSerializer.js' );
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = wb.serialization.Serializer,
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.TermMapSerializer
+ * @class TermMapSerializer
  * @extends wikibase.serialization.Serializer
  * @since 2.0
  * @license GPL-2.0+
@@ -15,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
+module.exports = util.inherit( 'WbTermMapSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -43,5 +42,4 @@ MODULE.TermMapSerializer = util.inherit( 'WbTermMapSerializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.TermMapSerializer;
 }( wikibase, util ) );

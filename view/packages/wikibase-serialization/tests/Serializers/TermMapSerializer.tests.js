@@ -7,7 +7,8 @@
 
 QUnit.module( 'wikibase.serialization.TermMapSerializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	TermMapSerializer = require( '../../src/Serializers/TermMapSerializer.js' );
 
 var testSets = [
 	[
@@ -36,7 +37,7 @@ var testSets = [
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 3 );
-	var termMapSerializer = new wb.serialization.TermMapSerializer();
+	var termMapSerializer = new TermMapSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

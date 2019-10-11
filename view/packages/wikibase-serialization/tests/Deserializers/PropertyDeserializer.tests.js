@@ -7,7 +7,8 @@
 
 QUnit.module( 'wikibase.serialization.EntityDeserializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	EntityDeserializer = require( '../../src/Deserializers/EntityDeserializer.js' );
 
 var defaults = [
 	{
@@ -64,7 +65,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 1 );
-	var entityDeserializer = new wb.serialization.EntityDeserializer();
+	var entityDeserializer = new EntityDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

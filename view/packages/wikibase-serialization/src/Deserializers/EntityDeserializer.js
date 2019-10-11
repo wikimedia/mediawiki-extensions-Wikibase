@@ -1,15 +1,14 @@
 ( function( wb, util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = wb.serialization.Deserializer,
 	datamodel = require( 'wikibase.datamodel' ),
 	ItemDeserializer = require( './ItemDeserializer.js' ),
 	PropertyDeserializer = require( './PropertyDeserializer.js' ),
 	StrategyProvider = require( '../StrategyProvider.js' );
 
 /**
- * @class wikibase.serialization.EntityDeserializer
+ * @class EntityDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 1.0
  * @license GPL-2.0+
@@ -17,7 +16,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  */
-MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, function() {
+module.exports = util.inherit( 'WbEntityDeserializer', PARENT, function() {
 	this._strategyProvider = new StrategyProvider();
 	this._strategyProvider.registerStrategy(
 		new ItemDeserializer(), datamodel.Item.TYPE
@@ -58,5 +57,4 @@ MODULE.EntityDeserializer = util.inherit( 'WbEntityDeserializer', PARENT, functi
 	}
 } );
 
-module.exports = MODULE.EntityDeserializer;
 }( wikibase, util ) );

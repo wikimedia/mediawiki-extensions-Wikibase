@@ -7,6 +7,7 @@
 
 QUnit.module( 'wikibase.serialization.EntityDeserializer' );
 var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' ),
+	EntityDeserializer = require( '../../src/Deserializers/EntityDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
@@ -111,7 +112,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 2 );
-	var entityDeserializer = new wb.serialization.EntityDeserializer();
+	var entityDeserializer = new EntityDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
@@ -123,7 +124,7 @@ QUnit.test( 'deserialize()', function( assert ) {
 
 QUnit.test( 'registerStrategy()', function( assert ) {
 	assert.expect( 2 );
-	var entityDeserializer = new wb.serialization.EntityDeserializer();
+	var entityDeserializer = new EntityDeserializer();
 
 	var mockEntitySerialization = $.extend( true, {
 		id: 'i am an id',
