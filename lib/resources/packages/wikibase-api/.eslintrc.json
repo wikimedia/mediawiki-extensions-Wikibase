@@ -1,14 +1,14 @@
 {
-	"extends": "wikimedia",
-	"env": {
-		"browser": true,
-		"jquery": true
-	},
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/jquery"
+	],
 	"globals": {
-		"mw": false,
-		"module": false,
-		"util": false,
-		"wikibase": false
+		"mw": "readonly",
+		"module": "readonly",
+		"util": "readonly",
+		"wikibase": "readonly"
 	},
 	"rules": {
 		"computed-property-spacing": "off",

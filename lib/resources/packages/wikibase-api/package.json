@@ -28,11 +28,9 @@
     "wikibase-data-values": "^0.10.0"
   },
   "devDependencies": {
-    "eslint-config-wikimedia": "0.8.1",
-    "eslint-plugin-qunit": "3.3.1",
-    "grunt": "1.0.3",
-    "grunt-eslint": "21.0.0",
-    "grunt-jsonlint": "1.1.0",
+    "eslint-config-wikimedia": "0.14.3",
+    "grunt": "1.0.4",
+    "grunt-eslint": "22.0.0",
     "grunt-karma": "^2.0.0",
     "karma": "^1.7.0",
     "karma-cli": "^1.0.1",

@@ -4,6 +4,6 @@
 		"../.eslintrc.json"
 	],
 	"globals": {
-		"sinon": false
+		"sinon": "readonly"
 	}
 }
