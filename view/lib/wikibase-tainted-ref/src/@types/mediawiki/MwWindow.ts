@@ -43,6 +43,12 @@ interface MediaWiki {
 	ForeignApi?: ForeignApiConstructor;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language */
 	language: MwLanguage;
+	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook */
+	hook( name: string ): Hook;
+}
+
+interface Hook {
+	add( handler: Function ): Hook;
 }
 
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */
