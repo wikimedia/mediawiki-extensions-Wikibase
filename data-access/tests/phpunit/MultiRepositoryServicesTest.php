@@ -79,8 +79,7 @@ class MultiRepositoryServicesTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository(
-	) {
+	public function testGetServiceMap_ReturnsArrayMappingNameOfRepositoryToServiceForThatRepository() {
 		$someServiceName = 'some-service';
 		$localService = $this->someService( 'local' );
 		$fooService = $this->someService( 'foo' );

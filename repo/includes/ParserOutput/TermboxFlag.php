@@ -19,7 +19,7 @@ class TermboxFlag {
 	const TERMBOX_FLAG = 'termboxEnabled';
 
 	public function __construct(
-		SettingsArray  $settings,
+		SettingsArray $settings,
 		ExtensionRegistry $extensionRegistry
 	) {
 		$this->settings = $settings;

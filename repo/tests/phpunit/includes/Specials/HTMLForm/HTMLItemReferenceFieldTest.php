@@ -20,7 +20,7 @@ class HTMLItemReferenceFieldTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $entityLookup;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->entityLookup = new InMemoryEntityLookup();
 	}
 

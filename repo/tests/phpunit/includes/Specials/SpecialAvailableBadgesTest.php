@@ -21,7 +21,7 @@ use Wikibase\Repo\Specials\SpecialAvailableBadges;
  */
 class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setContentLang( 'qqx' );

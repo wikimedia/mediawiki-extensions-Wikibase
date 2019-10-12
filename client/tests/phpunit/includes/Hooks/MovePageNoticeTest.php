@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class MovePageNoticeTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setUserLang( 'de' );

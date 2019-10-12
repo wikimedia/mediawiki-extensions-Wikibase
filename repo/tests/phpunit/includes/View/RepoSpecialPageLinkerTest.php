@@ -16,7 +16,7 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
  */
 class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$services = MediaWikiServices::getInstance();
@@ -25,7 +25,7 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		$services = MediaWikiServices::getInstance();

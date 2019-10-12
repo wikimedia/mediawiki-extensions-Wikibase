@@ -50,7 +50,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	const USER_LANGUAGE = 'en';
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setUserLang( self::USER_LANGUAGE );

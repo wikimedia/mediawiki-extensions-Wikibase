@@ -59,7 +59,7 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 		if ( $url === null ) {
 			return wfEscapeWikiText( $id );
 		} else {
-			return '[' . $this->escapeWikitextInUrl( $url ). ' ' . wfEscapeWikiText( $id ) . ']';
+			return '[' . $this->escapeWikitextInUrl( $url ) . ' ' . wfEscapeWikiText( $id ) . ']';
 		}
 	}
 

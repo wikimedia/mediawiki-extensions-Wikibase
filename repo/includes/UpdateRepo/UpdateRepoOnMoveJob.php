@@ -38,10 +38,10 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	/**
 	 * Constructs a UpdateRepoOnMoveJob propagating a page move to the repo
 	 *
-	 * @note: This is for use by Job::factory, don't call it directly;
+	 * @note This is for use by Job::factory, don't call it directly;
 	 *           use newFrom*() instead.
 	 *
-	 * @note: the constructor's signature is dictated by Job::factory, so we'll have to
+	 * @note the constructor's signature is dictated by Job::factory, so we'll have to
 	 *           live with it even though it's rather ugly for our use case.
 	 *
 	 * @see Job::factory

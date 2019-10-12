@@ -18,7 +18,7 @@ interface LabelConflictFinder {
 	 * If $aliases is not null (but possibly empty), conflicts between aliases and labels
 	 * are also considered.
 	 *
-	 * @note: implementations must return *some* conflicts if there are *any* conflicts,
+	 * @note implementations must return *some* conflicts if there are *any* conflicts,
 	 * but are not required to return *all* conflicts.
 	 *
 	 * @param string $entityType The entity type to consider for conflicts.
@@ -37,7 +37,7 @@ interface LabelConflictFinder {
 	 * same entity. From this it follows that labels with no corresponding description
 	 * cannot contribute to a conflicts.
 	 *
-	 * @note: implementations must return *some* conflicts if there are *any* conflicts,
+	 * @note implementations must return *some* conflicts if there are *any* conflicts,
 	 * but are not required to return *all* conflicts.
 	 *
 	 * @param string|null $entityType The relevant entity type

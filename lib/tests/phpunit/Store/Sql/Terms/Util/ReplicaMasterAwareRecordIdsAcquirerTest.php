@@ -30,7 +30,7 @@ class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 	 */
 	private $dbReplica;
 
-	public function setUp() {
+	public function setUp() : void {
 		$this->dbMaster = DatabaseSqlite::newStandaloneInstance( ':memory:' );
 		$this->dbMaster->sourceFile( self::TABLE_DDL_FILE_PATH );
 

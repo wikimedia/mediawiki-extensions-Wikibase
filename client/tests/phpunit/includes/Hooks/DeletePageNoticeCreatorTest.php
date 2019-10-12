@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setUserLang( 'de' );

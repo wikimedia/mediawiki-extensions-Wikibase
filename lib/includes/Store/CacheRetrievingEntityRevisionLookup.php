@@ -50,7 +50,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	 *
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
-	 * @note: If this lookup is configured to verify revisions, getLatestRevisionId()
+	 * @note If this lookup is configured to verify revisions, getLatestRevisionId()
 	 * will be called on the underlying lookup to check whether the cached revision is
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
@@ -81,7 +81,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	/**
 	 * Try to get an EntityRevision from cache.
 	 *
-	 * @note: If this lookup is configured to verify revisions, getLatestRevisionId()
+	 * @note If this lookup is configured to verify revisions, getLatestRevisionId()
 	 * will be called on the underlying lookup to check whether the cached revision is
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
@@ -134,7 +134,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
-	 * @note: If this lookup is configured to verify revisions, this just delegates
+	 * @note If this lookup is configured to verify revisions, this just delegates
 	 * to the underlying lookup. Otherwise, it may return the ID of a cached
 	 * revision.
 	 *

@@ -43,7 +43,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 	 */
 	private $progressReporter;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->propertyTermStore = new InMemoryPropertyTermStore();

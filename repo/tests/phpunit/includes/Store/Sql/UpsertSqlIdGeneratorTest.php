@@ -18,7 +18,7 @@ use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
  */
 class UpsertSqlIdGeneratorTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		if ( $this->db->getType() !== 'mysql' ) {
 			$this->markTestSkipped( 'Can only be tested with a mysql DB' );

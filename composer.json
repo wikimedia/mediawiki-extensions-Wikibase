@@ -39,13 +39,13 @@
 		"wikimedia/purtle": "^1.0.7",
 		"psr/simple-cache": "^1.0.1",
 		"psr/log": "^1.0.2",
-		"onoi/message-reporter": "~1.4"
+		"onoi/message-reporter": "~1.4",
+		"wikibase/wikibase-codesniffer": "1.0.0"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.3.1",
-		"wikibase/wikibase-codesniffer": "^0.5.1",
 		"cache/integration-tests": "^0.16.0",
 		"mediawiki/mediawiki-phan-config": "0.8.0"
 	},

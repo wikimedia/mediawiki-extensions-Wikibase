@@ -181,7 +181,7 @@ class EntityDataRequestHandler {
 	 *        - action=purge: to purge cached data from (web) caches
 	 * @param OutputPage $output
 	 *
-	 * @note: Instead of an output page, a WebResponse could be sufficient, but
+	 * @note Instead of an output page, a WebResponse could be sufficient, but
 	 *        redirect logic is currently implemented in OutputPage.
 	 *
 	 * @throws HttpError

@@ -25,7 +25,7 @@ class MonolingualTextRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $helper;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->helper = new NTriplesRdfTestHelper();

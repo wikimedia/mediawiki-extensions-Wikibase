@@ -42,7 +42,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	 */
 	private $siteStore;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->siteStore = new HashSiteStore();

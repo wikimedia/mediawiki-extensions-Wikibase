@@ -313,7 +313,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * Saves the entity. If the corresponding page does not exist yet, it will be created
 	 * (ie a new ID will be determined and a new page in the data NS created).
 	 *
-	 * @note: this method should not be overloaded, and should not be extended to save additional
+	 * @note this method should not be overloaded, and should not be extended to save additional
 	 *        information to the database. Such things should be done in a way that will also be
 	 *        triggered when the save is performed by calling WikiPage::doEditContent.
 	 *
@@ -484,7 +484,7 @@ class WikiPageEntityStore implements EntityStore {
 
 		if ( !$ok ) {
 			throw new StorageException(
-				'Failed to delete ' . $entityId->getSerialization(). ': ' . $error
+				'Failed to delete ' . $entityId->getSerialization() . ': ' . $error
 			);
 		}
 

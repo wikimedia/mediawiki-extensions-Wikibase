@@ -21,7 +21,7 @@ if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	 */
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \PHPUnit\Framework\TestCase {
 
-		protected function setUp() {
+		protected function setUp() : void {
 			$this->markTestSkipped( 'Scribunto is not available' );
 		}
 
@@ -133,7 +133,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		return $res;
 	}
 
-	protected function setUp() {
+	protected function setUp() : void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because a local wb_terms table"
 				. " is not available on a WikibaseClient only instance." );

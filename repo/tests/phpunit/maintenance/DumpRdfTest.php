@@ -54,7 +54,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class DumpRdfTest extends MediaWikiLangTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		// Needed because SiteLinksRdfBuilder is constructed from global state

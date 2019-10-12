@@ -38,7 +38,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 		return new MwTimeIsoParser( $options );
 	}
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		if ( class_exists( LanguageFactory::class ) ) {
@@ -57,7 +57,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 		}
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		if ( class_exists( LanguageFactory::class ) ) {
 			MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
 		} else {

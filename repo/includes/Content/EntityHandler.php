@@ -269,7 +269,7 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * @see ContentHandler::makeRedirectContent
 	 *
-	 * @warn Always throws an MWException, since an EntityRedirects needs to know it's own
+	 * @warning Always throws an MWException, since an EntityRedirects needs to know it's own
 	 * ID in addition to the target ID. We have no way to guess that in makeRedirectContent().
 	 * Use makeEntityRedirectContent() instead.
 	 *
@@ -400,7 +400,7 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * Returns the ID of the entity contained by the page of the given title.
 	 *
-	 * @warn This should not really be needed and may just go away!
+	 * @warning This should not really be needed and may just go away!
 	 *
 	 * @param Title $target
 	 *
@@ -414,7 +414,7 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * Returns the appropriate page Title for the given EntityId.
 	 *
-	 * @warn This should not really be needed and may just go away!
+	 * @warning This should not really be needed and may just go away!
 	 *
 	 * @see EntityTitleStoreLookup::getTitleForId
 	 *
@@ -483,7 +483,7 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * Returns true to indicate that the parser cache can be used for data items.
 	 *
-	 * @note: The html representation of entities depends on the user language, so
+	 * @note The html representation of entities depends on the user language, so
 	 * EntityContent::getParserOutput needs to make sure ParserOutput::recordOption( 'userlang' )
 	 * is called to split the cache by user language.
 	 *
@@ -518,10 +518,10 @@ abstract class EntityHandler extends ContentHandler {
 	 * This implementation unconditionally returns the wiki's content language.
 	 * The PageContentLanguage hook is bypassed.
 	 *
-	 * @note: Ideally, this would return 'mul' to indicate multilingual content. But MediaWiki
+	 * @note Ideally, this would return 'mul' to indicate multilingual content. But MediaWiki
 	 * currently doesn't support that.
 	 *
-	 * @note: in several places in mediawiki, most importantly the parser cache, getPageLanguage
+	 * @note in several places in mediawiki, most importantly the parser cache, getPageLanguage
 	 * is used in places where getPageViewLanguage would be more appropriate.
 	 *
 	 * @param Title        $title the page to determine the language for.

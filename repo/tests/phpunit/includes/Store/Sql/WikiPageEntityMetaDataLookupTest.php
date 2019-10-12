@@ -49,7 +49,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 */
 	private $redirectId;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		if ( !$this->data ) {
@@ -248,7 +248,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$entityRevision = $this->data[0];
 
 		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByRevisionId( $entityRevision->getEntity()->getId(), $entityRevision ->getRevisionId() );
+			->loadRevisionInformationByRevisionId( $entityRevision->getEntity()->getId(), $entityRevision->getRevisionId() );
 
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
@@ -259,7 +259,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$entityRevision = $this->data[0];
 
 		$result = $this->newMetaDataLookupForSourceBasedFederation()
-			->loadRevisionInformationByRevisionId( $entityRevision->getEntity()->getId(), $entityRevision ->getRevisionId() );
+			->loadRevisionInformationByRevisionId( $entityRevision->getEntity()->getId(), $entityRevision->getRevisionId() );
 
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->page_latest );
@@ -275,7 +275,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
-			$entityRevision ->getRevisionId(),
+			$entityRevision->getRevisionId(),
 			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
@@ -292,7 +292,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
-			$entityRevision ->getRevisionId(),
+			$entityRevision->getRevisionId(),
 			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
@@ -308,7 +308,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
-			$entityRevision ->getRevisionId(),
+			$entityRevision->getRevisionId(),
 			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 
@@ -324,7 +324,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
-			$entityRevision ->getRevisionId(),
+			$entityRevision->getRevisionId(),
 			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 
@@ -338,7 +338,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformationByRevisionId(
 				$entityRevision->getEntity()->getId(),
-				$entityRevision ->getRevisionId() - 1 // There were two edits to this item in sequence
+				$entityRevision->getRevisionId() - 1 // There were two edits to this item in sequence
 			);
 
 		$this->assertEquals( $entityRevision->getRevisionId() - 1, $result->rev_id );
@@ -352,7 +352,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->newMetaDataLookupForSourceBasedFederation()
 			->loadRevisionInformationByRevisionId(
 				$entityRevision->getEntity()->getId(),
-				$entityRevision ->getRevisionId() - 1 // There were two edits to this item in sequence
+				$entityRevision->getRevisionId() - 1 // There were two edits to this item in sequence
 			);
 
 		$this->assertEquals( $entityRevision->getRevisionId() - 1, $result->rev_id );
@@ -366,7 +366,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformationByRevisionId(
 				$entityRevision->getEntity()->getId(),
-				$entityRevision ->getRevisionId() * 2 // Doesn't exist
+				$entityRevision->getRevisionId() * 2 // Doesn't exist
 			);
 
 		$this->assertFalse( $result );
@@ -378,7 +378,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->newMetaDataLookupForSourceBasedFederation()
 			->loadRevisionInformationByRevisionId(
 				$entityRevision->getEntity()->getId(),
-				$entityRevision ->getRevisionId() * 2 // Doesn't exist
+				$entityRevision->getRevisionId() * 2 // Doesn't exist
 			);
 
 		$this->assertFalse( $result );

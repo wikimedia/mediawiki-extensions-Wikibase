@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SqlEntitiesWithoutTermFinderTest extends MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		static $setUp = false;

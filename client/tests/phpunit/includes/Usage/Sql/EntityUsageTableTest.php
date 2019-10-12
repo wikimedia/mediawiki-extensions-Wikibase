@@ -25,7 +25,7 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class EntityUsageTableTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;

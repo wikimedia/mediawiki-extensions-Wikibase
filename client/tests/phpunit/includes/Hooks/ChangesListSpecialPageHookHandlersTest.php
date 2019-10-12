@@ -36,7 +36,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected $oldExtensionRegistryLoaded;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->extensionRegistry = TestingAccessWrapper::newFromObject(
@@ -51,7 +51,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$this->extensionRegistry->loaded = [ 'Wikibase' ];
 	}
 
-	public function tearDown() {
+	public function tearDown() : void {
 		parent::tearDown();
 
 		$this->extensionRegistry->loaded = $this->oldExtensionRegistryLoaded;

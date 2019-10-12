@@ -358,7 +358,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		];
 	}
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -504,7 +504,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$this->assertContainsAllSiteLinks( $expected['value'], $dbEntity['sitelinks'] );
 
 		// -- check the edit summary --------------------------------------------
-		if ( ! array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
+		if ( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
 			$this->assertRevisionSummary( [ 'wbsetsitelink', $params['linksite'] ], $result['entity']['lastrevid'] );
 			if ( array_key_exists( 'summary', $params ) ) {
 				$this->assertRevisionSummary( "/{$params['summary']}/", $result['entity']['lastrevid'] );

@@ -27,7 +27,7 @@ use WikiPage;
  */
 class EditEntityActionTest extends ActionTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		static $user = null;

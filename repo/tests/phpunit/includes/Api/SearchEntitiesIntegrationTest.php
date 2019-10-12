@@ -47,7 +47,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $idParser;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->idParser = new BasicEntityIdParser();

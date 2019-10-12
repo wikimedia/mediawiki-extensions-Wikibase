@@ -38,7 +38,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $mockRepository = null;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->mockRepository = new MockRepository();

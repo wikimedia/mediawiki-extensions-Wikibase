@@ -20,7 +20,7 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 	 */
 	private $script;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		$this->script = new UpdateUnits();
 		$this->script->setBaseUri( 'http://acme.test/' );

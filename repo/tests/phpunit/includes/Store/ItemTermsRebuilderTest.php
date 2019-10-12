@@ -45,7 +45,7 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 
 	private $itemIds;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->itemTermStore = new InMemoryItemTermStore();

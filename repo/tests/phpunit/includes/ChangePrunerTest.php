@@ -29,7 +29,7 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	private $loadBalancer;
 	private $lbFactory;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		$this->loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
 		$this->lbFactory = new FakeLBFactory( [ 'lb' => $this->loadBalancer ] );

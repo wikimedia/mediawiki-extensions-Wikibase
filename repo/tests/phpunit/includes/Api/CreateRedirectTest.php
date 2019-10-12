@@ -46,7 +46,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	 */
 	private $mockRepository = null;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->mockRepository = new MockRepository();

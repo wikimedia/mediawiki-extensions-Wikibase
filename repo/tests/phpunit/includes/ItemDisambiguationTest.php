@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class ItemDisambiguationTest extends MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setUserLang( 'qqx' );

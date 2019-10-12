@@ -32,7 +32,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 		];
 	}
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$mwServices = MediaWikiServices::getInstance();

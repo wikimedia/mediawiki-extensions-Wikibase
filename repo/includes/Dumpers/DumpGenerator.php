@@ -268,7 +268,7 @@ abstract class DumpGenerator {
 
 				if ( $idPager instanceof SqlEntityIdPager ) {
 					// This message is possibly being parsed for continuation purposes, thus avoid changing it.
-					$this->progressReporter->reportMessage( 'Last SqlEntityIdPager position: ' . $idPager->getPosition() .  '.' );
+					$this->progressReporter->reportMessage( 'Last SqlEntityIdPager position: ' . $idPager->getPosition() . '.' );
 				}
 
 				break;
@@ -305,7 +305,7 @@ abstract class DumpGenerator {
 				$this->writeToDump( $data );
 				$this->postEntityDump( $dumpCount );
 
-				$dumpCount ++;
+				$dumpCount++;
 				if ( $this->limit && $dumpCount >= $this->limit ) {
 					break;
 				}

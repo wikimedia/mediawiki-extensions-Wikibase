@@ -391,7 +391,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * EditEntityHandler::attemptSave(). In particular, the 'errorFlags' and 'errorCode' fields
 	 * from the status value are used to determine the error code to return to the caller.
 	 *
-	 * @note: this function may or may not return normally, depending on whether
+	 * @note this function may or may not return normally, depending on whether
 	 *        the status is fatal or not.
 	 *
 	 * @see handleStatus().

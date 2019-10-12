@@ -49,7 +49,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 */
 	private $testHelper = null;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->testHelper = new EntityModificationTestHelper();

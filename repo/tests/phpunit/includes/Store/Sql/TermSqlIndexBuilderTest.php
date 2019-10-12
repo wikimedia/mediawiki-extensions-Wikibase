@@ -27,7 +27,7 @@ use Wikibase\TermIndexEntry;
  */
 class TermSqlIndexBuilderTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->tablesUsed[] = 'page';
 		$this->tablesUsed[] = 'wb_terms';
 

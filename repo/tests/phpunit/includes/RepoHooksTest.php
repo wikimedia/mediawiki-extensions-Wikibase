@@ -41,13 +41,13 @@ class RepoHooksTest extends MediaWikiTestCase {
 
 	private $saveAllowImport = false;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->saveAllowImport = $this->getSettings()->getSetting( 'allowEntityImport' );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		$this->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
 		Title::clearCaches();
 

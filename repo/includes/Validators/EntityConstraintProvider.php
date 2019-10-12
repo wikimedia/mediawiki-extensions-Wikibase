@@ -67,7 +67,7 @@ class EntityConstraintProvider {
 	 * upon creation of an entity of the given type. This will include at least the
 	 * validators returned by getUpdateValidators() for that type.
 	 *
-	 * @note: During updates, such soft constraints should be checked selectively by the
+	 * @note During updates, such soft constraints should be checked selectively by the
 	 * respective ChangeOps, so not all such (potentially expensive) validators are applied
 	 * for all updates.
 	 *

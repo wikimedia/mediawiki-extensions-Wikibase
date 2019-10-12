@@ -1001,7 +1001,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see LabelConflictFinder::getLabelConflicts
 	 *
-	 * @note: This implementation does not guarantee that all matches are returned.
+	 * @note This implementation does not guarantee that all matches are returned.
 	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
 	 *
 	 * @param string $entityType
@@ -1048,7 +1048,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @see LabelConflictFinder::getLabelWithDescriptionConflicts
 	 *
-	 * @note: This implementation does not guarantee that all matches are returned.
+	 * @note This implementation does not guarantee that all matches are returned.
 	 * The maximum number of conflicts returned is controlled by $this->maxConflicts.
 	 *
 	 * @param string $entityType

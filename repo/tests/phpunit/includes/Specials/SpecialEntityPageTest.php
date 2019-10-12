@@ -28,7 +28,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 	const LOCAL_ENTITY_PAGE_URL = 'https://local.wiki/local-entity-page';
 	const FOREIGN_ENTITY_PAGE_URL = 'https://foreign.wiki/Special:EntityPage/entity-id';
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		// Set the language to qqx pseudo-language to have message keys used as UI messages

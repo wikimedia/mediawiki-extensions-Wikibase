@@ -25,7 +25,7 @@ use Wikibase\Client\Notifications\PageConnectionPresentationModel;
  */
 class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			$this->markTestSkipped( "Echo not loaded" );

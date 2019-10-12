@@ -20,7 +20,7 @@ interface PropertyInfoStore {
 	/**
 	 * Update the info for the given property.
 	 *
-	 * @note: All well known fields MUST be set in $info.
+	 * @note All well known fields MUST be set in $info.
 	 *
 	 * @param PropertyId $propertyId
 	 * @param array $info

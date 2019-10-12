@@ -58,7 +58,7 @@ class TitleFactory {
 
 	/**
 	 * @see Title::makeTitle
-	 * @note: Use this only with values that can be assumed to be safe and already validated!
+	 * @note Use this only with values that can be assumed to be safe and already validated!
 	 * For unsafe values, use makeTitleSafe() instead.
 	 *
 	 * @param int $ns
@@ -86,7 +86,7 @@ class TitleFactory {
 
 	/**
 	 * @see Title::makeTitleSafe
-	 * @note: If all parameters have been validated and can be assumed to be safe,
+	 * @note If all parameters have been validated and can be assumed to be safe,
 	 * makeTitle() can be used, which should be a little faster.
 	 *
 	 * @param int $ns

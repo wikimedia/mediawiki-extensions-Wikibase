@@ -19,8 +19,11 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, EntityStoreWatcher,
-		WikiPageEntityMetaDataAccessor {
+class PrefetchingWikiPageEntityMetaDataAccessor implements
+	EntityPrefetcher,
+	EntityStoreWatcher,
+    WikiPageEntityMetaDataAccessor
+{
 
 	/**
 	 * @var WikiPageEntityMetaDataAccessor

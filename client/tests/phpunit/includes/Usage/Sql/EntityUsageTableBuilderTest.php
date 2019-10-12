@@ -24,7 +24,7 @@ use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
  */
 class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 		$this->tablesUsed[] = 'page_props';
 

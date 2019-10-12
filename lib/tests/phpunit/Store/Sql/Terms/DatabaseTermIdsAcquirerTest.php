@@ -30,7 +30,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	 */
 	private $loadBalancerFactory;
 
-	public function setUp() {
+	public function setUp() : void {
 		$this->db = $this->setUpNewDb();
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db

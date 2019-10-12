@@ -16,7 +16,7 @@ use Wikibase\DataModel\SerializerFactory;
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRegistry() {
-		return require __DIR__  . '/../../WikibaseLib.entitytypes.php';
+		return require __DIR__ . '/../../WikibaseLib.entitytypes.php';
 	}
 
 	/**

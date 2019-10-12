@@ -19,7 +19,7 @@ use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
  */
 class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_changes';

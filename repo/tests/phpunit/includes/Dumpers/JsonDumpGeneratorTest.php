@@ -48,7 +48,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $deserializerFactory = null;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

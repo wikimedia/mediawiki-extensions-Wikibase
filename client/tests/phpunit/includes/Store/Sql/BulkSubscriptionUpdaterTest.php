@@ -26,7 +26,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
  */
 class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes_subscription table." );
 		}

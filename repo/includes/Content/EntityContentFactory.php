@@ -184,7 +184,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	/**
 	 * @see EntityIdLookup::getEntityIds
 	 *
-	 * @note: the current implementation skips non-existing entities, but there is no guarantee
+	 * @note the current implementation skips non-existing entities, but there is no guarantee
 	 * that this will always be the case.
 	 *
 	 * @param Title[] $titles

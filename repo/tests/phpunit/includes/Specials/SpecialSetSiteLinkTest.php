@@ -91,7 +91,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		);
 	}
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true ] ] );
@@ -111,7 +111,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
 
@@ -224,7 +224,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecuteRedirect() {
-		list( $output, ) = $this->executeSpecialPage( self::$redirectId  . '/dewiki', null, 'qqx' );
+		list( $output, ) = $this->executeSpecialPage( self::$redirectId . '/dewiki', null, 'qqx' );
 
 		$this->assertRegExp(
 			'@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@',

@@ -38,7 +38,7 @@ class PidLock {
 	private function isAlive( $pid ) {
 		// Are we anything but Windows, i.e. some kind of Unix?
 		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) !== 'WIN' ) {
-			return !!posix_getsid( $pid );
+			return (bool)posix_getsid( $pid );
 		}
 
 		$processes = explode( "\n", shell_exec( 'tasklist.exe' ) );

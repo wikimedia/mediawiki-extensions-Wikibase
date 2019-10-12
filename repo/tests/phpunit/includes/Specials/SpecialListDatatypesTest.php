@@ -19,7 +19,7 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
  */
 class SpecialListDatatypesTest extends SpecialPageTestBase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->setContentLang( 'qqx' );
@@ -30,7 +30,7 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		$services = MediaWikiServices::getInstance();

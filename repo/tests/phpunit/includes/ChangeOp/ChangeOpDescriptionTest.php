@@ -114,7 +114,7 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	 * @param ChangeOpDescriptionResult $expectedChangeOpDescriptionResult
 	 * @dataProvider changeOpDescriptionAndResultProvider
 	 */
-	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item,  $changeOpLabel,  $expectedChangeOpDescriptionResult ) {
+	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpDescriptionResult ) {
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpDescriptionResult->isEntityChanged(), $changeOpResult->isEntityChanged() );

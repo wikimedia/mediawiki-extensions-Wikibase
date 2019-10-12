@@ -34,7 +34,7 @@ class SetAliases extends ModifyEntity {
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
-		FingerprintChangeOpFactory  $termChangeOpFactory
+		FingerprintChangeOpFactory $termChangeOpFactory
 	) {
 		parent::__construct( $mainModule, $moduleName );
 		$this->termChangeOpFactory = $termChangeOpFactory;

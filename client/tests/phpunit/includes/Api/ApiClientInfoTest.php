@@ -31,7 +31,7 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 	 */
 	protected $apiContext;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->apiContext = new ApiTestContext();

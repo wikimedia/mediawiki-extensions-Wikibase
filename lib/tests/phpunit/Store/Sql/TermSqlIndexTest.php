@@ -37,7 +37,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class TermSqlIndexTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		if ( !WikibaseSettings::isRepoEnabled() ) {
@@ -1088,7 +1088,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		// make list of strings for easy checking
 		$term_keys = [];
 		foreach ( $terms as $t ) {
-			$term_keys[] = $t->getTermType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+			$term_keys[] = $t->getTermType() . '/' . $t->getLanguage() . '/' . $t->getText();
 		}
 
 		$k = TermIndexEntry::TYPE_LABEL . '/en/abc';
@@ -1138,7 +1138,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		// make list of strings for easy checking
 		$term_keys = [];
 		foreach ( $terms as $t ) {
-			$term_keys[] = $t->getTermType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+			$term_keys[] = $t->getTermType() . '/' . $t->getLanguage() . '/' . $t->getText();
 		}
 
 		$k = TermIndexEntry::TYPE_LABEL . '/en/abc';
@@ -1202,7 +1202,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		// make list of strings for easy checking
 		$term_keys = [];
 		foreach ( $terms as $t ) {
-			$term_keys[] = $t->getTermType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+			$term_keys[] = $t->getTermType() . '/' . $t->getLanguage() . '/' . $t->getText();
 		}
 
 		$k = TermIndexEntry::TYPE_LABEL . '/en/abc';
@@ -1270,7 +1270,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		// make list of strings for easy checking
 		$term_keys = [];
 		foreach ( $terms as $t ) {
-			$term_keys[] = $t->getTermType() . '/' .  $t->getLanguage() . '/' . $t->getText();
+			$term_keys[] = $t->getTermType() . '/' . $t->getLanguage() . '/' . $t->getText();
 		}
 
 		$k = TermIndexEntry::TYPE_LABEL . '/en/abc';

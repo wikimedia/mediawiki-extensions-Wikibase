@@ -20,7 +20,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'recentchanges';

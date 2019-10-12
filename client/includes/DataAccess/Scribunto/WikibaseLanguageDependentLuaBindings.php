@@ -32,7 +32,7 @@ class WikibaseLanguageDependentLuaBindings {
 	 * @param EntityIdParser $entityIdParser
 	 * @param FallbackLabelDescriptionLookup $labelDescriptionLookup
 	 *
-	 * @note: label usage is not tracked in $usageAccumulator. This should be done inside
+	 * @note label usage is not tracked in $usageAccumulator. This should be done inside
 	 *        the $labelDescriptionLookup or an underlying TermsLookup.
 	 */
 	public function __construct(

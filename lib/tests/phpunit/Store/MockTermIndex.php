@@ -270,7 +270,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * Implemented to fit the need of PropertyLabelResolver.
 	 *
-	 * @note: The $options parameters is ignored. The language to get is determined by the
+	 * @note The $options parameters is ignored. The language to get is determined by the
 	 * language of the first Term in $terms. $The termType and $entityType parameters are used,
 	 * but the termType and entityType fields of the Terms in $terms are ignored.
 	 *

@@ -51,7 +51,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 	const SOME_TRANSLITERATED_TEXT = 'some-transliterated-text';
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->entityTitleLookup = $this->prophesize( EntityTitleLookup::class );

@@ -115,7 +115,7 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	 * @param ChangeOpLabelResult $expectedChangeOpLabelResult
 	 * @dataProvider changeOpLabelAndResultProvider
 	 */
-	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item,  $changeOpLabel,  $expectedChangeOpLabelResult ) {
+	public function testApplySetsIsEntityChangedCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpLabelResult ) {
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpLabelResult->isEntityChanged(), $changeOpResult->isEntityChanged() );
@@ -127,7 +127,7 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	 * @param ChangeOpLabelResult $expectedChangeOpLabelResult
 	 * @dataProvider changeOpLabelAndResultProvider
 	 */
-	public function testApplySetsLabelsCorrectlyOnResult( $item,  $changeOpLabel,  $expectedChangeOpLabelResult ) {
+	public function testApplySetsLabelsCorrectlyOnResult( $item, $changeOpLabel, $expectedChangeOpLabelResult ) {
 		$changeOpResult = $changeOpLabel->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpLabelResult->getNewLabel(), $changeOpResult->getNewLabel() );

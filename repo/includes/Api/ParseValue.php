@@ -285,7 +285,7 @@ class ParseValue extends ApiBase {
 	/**
 	 * Returns a Status object representing the given exception using a localized message.
 	 *
-	 * @note: The returned Status will always be fatal, that is, $status->isOK() will return false.
+	 * @note The returned Status will always be fatal, that is, $status->isOK() will return false.
 	 *
 	 * @see getExceptionMessage().
 	 *

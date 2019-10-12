@@ -27,7 +27,7 @@ use WikiPage;
  */
 class ActionTestCase extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$testUser = new \TestUser( 'ActionTestUser' );
@@ -45,7 +45,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		ApiQueryInfo::resetTokenCache();
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		ApiQueryInfo::resetTokenCache();
 
 		parent::tearDown();

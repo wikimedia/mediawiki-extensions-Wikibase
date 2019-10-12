@@ -190,7 +190,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 	 * @param ChangeOpAliasesResult $expectedChangeOpAliasesResult
 	 * @dataProvider changeOpAliasesAndResultProvider
 	 */
-	public function testApplyReturnsCorrectChangeOpResult( $item,  $changeOpAliases,  $expectedChangeOpAliasesResult ) {
+	public function testApplyReturnsCorrectChangeOpResult( $item, $changeOpAliases, $expectedChangeOpAliasesResult ) {
 		$changeOpAliasesResult = $changeOpAliases->apply( $item );
 
 		$this->assertEquals( $expectedChangeOpAliasesResult, $changeOpAliasesResult );

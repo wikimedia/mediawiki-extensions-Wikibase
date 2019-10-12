@@ -21,7 +21,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 	/** @var DatabaseBlock */
 	private $block;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$testuser = self::getTestUser()->getUser();
@@ -34,7 +34,7 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 		$this->initTestEntities( [ 'StringProp', 'Berlin', 'Oslo' ] );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 		$this->block->delete();
 	}

@@ -46,7 +46,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	/**
 	 * This is to set up the environment
 	 */
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		//TODO: remove global TestSites DB setup once we can inject sites sanely.

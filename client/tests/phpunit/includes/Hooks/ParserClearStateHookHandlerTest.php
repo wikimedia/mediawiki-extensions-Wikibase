@@ -24,7 +24,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class ParserClearStateHookHandlerTest extends MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
@@ -42,7 +42,7 @@ class ParserClearStateHookHandlerTest extends MediaWikiTestCase {
 		);
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		WikibaseClient::getDefaultInstance( 'reset' );

@@ -32,7 +32,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SqlEntityIdPagerTest extends MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		$this->tablesUsed[] = 'page';
 		$this->tablesUsed[] = 'redirect';

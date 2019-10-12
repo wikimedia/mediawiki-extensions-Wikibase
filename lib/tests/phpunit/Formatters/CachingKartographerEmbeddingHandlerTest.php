@@ -22,7 +22,7 @@ use Xml;
  */
 class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {

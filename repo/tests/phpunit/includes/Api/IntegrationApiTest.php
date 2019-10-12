@@ -22,7 +22,7 @@ use TestSites;
  */
 class IntegrationApiTest extends ApiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 		$sitesTable->clear();

@@ -17,7 +17,7 @@ class LanguageWithConversion {
 	/**
 	 * @var array[]
 	 */
-	static private $objectCache = [];
+	private static $objectCache = [];
 
 	/**
 	 * @var Language|null

@@ -22,7 +22,7 @@ class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
 	 */
 	private $defaultFormatter;
 
-	public function setUp() {
+	public function setUp() : void {
 		$this->defaultFormatter = $this->newMockFormatter();
 	}
 

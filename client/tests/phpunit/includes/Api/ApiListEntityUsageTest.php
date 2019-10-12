@@ -26,7 +26,7 @@ use WikiPage;
  */
 class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->tablesUsed[] = 'wbc_entity_usage';
 		parent::setUp();
 

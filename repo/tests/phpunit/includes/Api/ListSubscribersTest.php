@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ListSubscribersTest extends MediaWikiLangTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->tablesUsed[] = 'wb_changes_subscription';
 		parent::setUp();
 	}

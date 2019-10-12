@@ -33,7 +33,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class SetQualifierTest extends WikibaseApiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		static $hasEntities = false;

@@ -19,7 +19,7 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class TermSqlIndexSearchFieldsClearerTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_terms';

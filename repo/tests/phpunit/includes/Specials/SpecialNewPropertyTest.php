@@ -99,7 +99,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			'only label is set' => [
 				[
 					SpecialNewProperty::FIELD_LANG => 'en',
-					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex ++,
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex++,
 					SpecialNewProperty::FIELD_DESCRIPTION => '',
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
@@ -108,7 +108,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			'another language' => [
 				[
 					SpecialNewProperty::FIELD_LANG => 'fr',
-					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex ++,
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex++,
 					SpecialNewProperty::FIELD_DESCRIPTION => '',
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
@@ -144,7 +144,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			'another datatype is set' => [
 				[
 					SpecialNewProperty::FIELD_LANG => 'en',
-					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex ++,
+					SpecialNewProperty::FIELD_LABEL => 'label' . $labelIndex++,
 					SpecialNewProperty::FIELD_DESCRIPTION => '',
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'url',

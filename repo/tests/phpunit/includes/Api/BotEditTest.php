@@ -25,7 +25,7 @@ class BotEditTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		ApiTestCase::$users['wbbot'] = new TestUser(

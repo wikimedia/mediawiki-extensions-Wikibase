@@ -35,7 +35,7 @@ class EchoNotificationsHandlersTest extends MediaWikiTestCase {
 	 */
 	private $namespaceChecker;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
 			$this->markTestSkipped( "Echo not loaded" );

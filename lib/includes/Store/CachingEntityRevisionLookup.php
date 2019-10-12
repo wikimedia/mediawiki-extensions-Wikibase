@@ -61,7 +61,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	/**
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
-	 * @note: If this lookup is configured to verify revisions, getLatestRevisionId()
+	 * @note If this lookup is configured to verify revisions, getLatestRevisionId()
 	 * will be called on the underlying lookup to check whether the cached revision is
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *

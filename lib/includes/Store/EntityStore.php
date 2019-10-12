@@ -40,12 +40,12 @@ interface EntityStore {
 	/**
 	 * Saves the given Entity to some underlying storage mechanism.
 	 *
-	 * @note: If the item does not have an ID yet (i.e. it was not yet created in the database),
+	 * @note If the item does not have an ID yet (i.e. it was not yet created in the database),
 	 *        saveEntity() will fail with a edit-gone-missing message unless the EDIT_NEW bit is
 	 *        set in $flags. If EDIT_NEW is set and the Entity does not yet have an ID, a new ID
 	 *        is assigned using assignFreshId().
 	 *
-	 * @note: if the save is triggered by any kind of user interaction, consider using
+	 * @note if the save is triggered by any kind of user interaction, consider using
 	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
 	 *        checks, etc.
 	 *

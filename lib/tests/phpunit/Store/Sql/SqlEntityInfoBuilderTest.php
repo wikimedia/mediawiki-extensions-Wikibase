@@ -45,7 +45,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 	const ITEM_NAMESPACE_ID = 120;
 	const PROPERTY_NAMESPACE_ID = 122;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		if ( !WikibaseSettings::isRepoEnabled() ) {

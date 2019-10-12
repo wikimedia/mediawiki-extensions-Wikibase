@@ -69,7 +69,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	 */
 	private $entityViewFactory;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->entityViewFactory = $this->mockEntityViewFactory( false );

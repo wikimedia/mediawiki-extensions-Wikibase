@@ -217,7 +217,7 @@ class RepositoryDefinitions {
 					throw new InvalidArgumentException(
 						'Using same entity types on multiple repositories is not supported yet. '
 						. '"' . $type . '" has already be defined for repository '
-						. '"' . $this->entityTypeToRepositoryMapping[$type][0][0] .'"'
+						. '"' . $this->entityTypeToRepositoryMapping[$type][0][0] . '"'
 					);
 				}
 

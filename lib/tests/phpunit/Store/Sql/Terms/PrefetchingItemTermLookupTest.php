@@ -35,7 +35,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 	/** @var ItemId */
 	private $i2;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_item_terms';
 		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );

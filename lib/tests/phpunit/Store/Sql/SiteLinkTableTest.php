@@ -27,7 +27,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 */
 	private $siteLinkTable;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		if ( !WikibaseSettings::isRepoEnabled() ) {

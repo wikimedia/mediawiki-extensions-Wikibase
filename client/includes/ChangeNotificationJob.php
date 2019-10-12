@@ -37,7 +37,7 @@ class ChangeNotificationJob extends Job {
 	/**
 	 * Constructs a ChangeNotificationJob representing the changes given by $changeIds.
 	 *
-	 * @note: the constructor's signature is dictated by Job::factory, so we'll have to
+	 * @note the constructor's signature is dictated by Job::factory, so we'll have to
 	 *           live with it even though it's rather ugly for our use case.
 	 *
 	 * @see      Job::factory.

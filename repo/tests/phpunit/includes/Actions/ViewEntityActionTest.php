@@ -23,7 +23,7 @@ use WikiPage;
  */
 class ViewEntityActionTest extends ActionTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		// NOTE: use a language here for which we actually have labels etc

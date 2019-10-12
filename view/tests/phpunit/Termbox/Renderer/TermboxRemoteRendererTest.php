@@ -37,7 +37,7 @@ class TermboxRemoteRendererTest extends TestCase {
 	 */
 	private $stats;
 
-	public function setUp() {
+	public function setUp() : void {
 		$this->logger = $this->createMock( LoggerInterface::class );
 		$this->stats = $this->createMock( StatsdDataFactoryInterface::class );
 	}

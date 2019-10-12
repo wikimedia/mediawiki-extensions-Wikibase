@@ -157,7 +157,7 @@ class MwTimeIsoParser extends StringValueParser {
 		$msgRegexp = $this->getRegexpFromMessageText( $msgText );
 
 		if ( preg_match(
-			'/^\s*'. $msgRegexp . '\s*$/i',
+			'/^\s*' . $msgRegexp . '\s*$/i',
 			$value,
 			$matches
 		) ) {

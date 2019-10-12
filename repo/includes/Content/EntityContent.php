@@ -199,7 +199,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * Returns a ParserOutput object containing the HTML.
 	 *
-	 * @note: this calls ParserOutput::recordOption( 'userlang' ) to split the cache
+	 * @note this calls ParserOutput::recordOption( 'userlang' ) to split the cache
 	 * by user language, and ParserOutput::recordOption( 'wb' ) to split the cache on
 	 * EntityHandler::PARSER_VERSION.
 	 *

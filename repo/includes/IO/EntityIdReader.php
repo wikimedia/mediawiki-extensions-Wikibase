@@ -126,7 +126,7 @@ class EntityIdReader implements EntityIdPager {
 	 * internal state of the page, typically implemented by some underlying resource
 	 * such as a file pointer or a database connection.
 	 *
-	 * @note: After some finite number of calls, this method should eventually return
+	 * @note After some finite number of calls, this method should eventually return
 	 * an empty list of IDs, indicating that no more IDs are available.
 	 *
 	 * @param int $limit The maximum number of IDs to return.

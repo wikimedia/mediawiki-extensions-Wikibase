@@ -23,7 +23,7 @@ use WikiPage;
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		static $isSetup = false;

@@ -44,7 +44,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	private static $propertyIds;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		if ( !self::$propertyIds ) {
@@ -173,7 +173,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			'claim' => '{
 				"id":"' . $item->getId() . '$5627445f-43cb-ed6d-3adb-760e85bd17ee",
 				"type":"claim",
-				"mainsnak":{"snaktype":"value","property":"'. self::$propertyIds[0] .'","datavalue":{"value":"City","type":"string"}}
+				"mainsnak":{"snaktype":"value","property":"' . self::$propertyIds[0] . '","datavalue":{"value":"City","type":"string"}}
 			}',
 		] );
 	}

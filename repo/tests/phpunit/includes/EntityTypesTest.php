@@ -19,7 +19,7 @@ use Wikibase\View\EntityDocumentView;
 class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRegistry() {
-		return require __DIR__  . '/../../../WikibaseRepo.entitytypes.php';
+		return require __DIR__ . '/../../../WikibaseRepo.entitytypes.php';
 	}
 
 	public function provideEntityTypes() {

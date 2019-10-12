@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\IMaintainableDatabase;
  */
 class DatabaseTermIdsCleanerTest extends MediaWikiTestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_type';
 		$this->tablesUsed[] = 'wbt_text';

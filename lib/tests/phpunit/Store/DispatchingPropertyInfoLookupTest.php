@@ -20,7 +20,7 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 	private $localPropertyInfo;
 	private $fooPropertyInfo;
 
-	public function setUp() {
+	public function setUp() : void {
 		$this->localPropertyInfo = [
 			'P23' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ],
 			'P42' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' ]

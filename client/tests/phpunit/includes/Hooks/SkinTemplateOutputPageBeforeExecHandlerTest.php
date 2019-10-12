@@ -122,7 +122,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
 				} elseif ( $name === 'wbeditlanglinks' ) {
 					$actualWbeditlanglinks = $val;
 				} else {
-					TestCase::fail( 'Unexpected option ' .  $name . ' set.' );
+					TestCase::fail( 'Unexpected option ' . $name . ' set.' );
 				}
 			} ) );
 

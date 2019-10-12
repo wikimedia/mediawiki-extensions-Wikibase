@@ -435,7 +435,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	/**
 	 * Injects terms from a DB result into the $entityInfo structure.
 	 *
-	 * @note: Keep in sync with EntitySerializer!
+	 * @note Keep in sync with EntitySerializer!
 	 *
 	 * @param IResultWrapper $dbResult
 	 *

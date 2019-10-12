@@ -31,7 +31,7 @@ class MockRepositoryTest extends TestCase {
 	 */
 	private $repo = null;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->repo = new MockRepository();

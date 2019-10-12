@@ -26,7 +26,7 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 */
 	private static $lrm = "\xE2\x80\x8E";
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->language = Language::factory( 'qqx' );
 	}

@@ -269,7 +269,7 @@ class ChangeDispatcher {
 	 * are relevant to the given client wiki. The number of changes returned by this method
 	 * is limited by $this->batchSize. Changes are returned with IDs in ascending order.
 	 *
-	 * @note: due to programmatic filtering, this method may use multiple database queries to
+	 * @note due to programmatic filtering, this method may use multiple database queries to
 	 * collect the changes for the next batch. The number of requests needed can be adjusted
 	 * using $this->batchChunkFactor (via the 'dispatchBatchChunkFactor' setting).
 	 *
@@ -346,7 +346,7 @@ class ChangeDispatcher {
 	 * In particular this check whether the Change modifies any sitelink that refers to the
 	 * given wiki site.
 	 *
-	 * @note: this does not check whether the entity that was changes is or is not at all
+	 * @note this does not check whether the entity that was changes is or is not at all
 	 *        connected with (resp. used on) the target wiki.
 	 *
 	 * @param Change $change the change to examine.

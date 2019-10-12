@@ -38,7 +38,7 @@ class DelegatingEntityTermStoreWriterTest extends TestCase {
 	 */
 	private $itemTermStore;
 
-	public function setUp() {
+	public function setUp() : void {
 		$this->propertyTermStore = new InMemoryPropertyTermStore();
 		$this->itemTermStore = new InMemoryItemTermStore();
 	}

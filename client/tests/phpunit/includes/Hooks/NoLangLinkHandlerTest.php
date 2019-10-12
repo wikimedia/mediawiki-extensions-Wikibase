@@ -30,7 +30,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $namespacesToInclude;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		$this->excludeNamespaces = $settings->getSetting( 'excludeNamespaces' );
@@ -40,7 +40,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 		$settings->setSetting( 'namespaces', [] );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		$settings->setSetting( 'excludeNamespaces', $this->excludeNamespaces );

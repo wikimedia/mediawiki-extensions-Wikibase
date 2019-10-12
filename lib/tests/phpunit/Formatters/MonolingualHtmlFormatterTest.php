@@ -53,7 +53,7 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 				new MonolingualTextValue(
 					'" onclick="alert(\'gotcha!\')"',
 					'Hallo<script>alert(\'gotcha!\')</script>Welt'
-						.'<a href="javascript:alert(\'gotcha!\')">evil</a>'
+						. '<a href="javascript:alert(\'gotcha!\')">evil</a>'
 				),
 				'@ onclick="alert|<script|<a @',
 				'not'
