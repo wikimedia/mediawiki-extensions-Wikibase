@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @phan-file-suppress PhanTypeInvalidThrowsIsInterface
+ */
+
 namespace Wikibase\Lib;
 
 use Psr\Log\LoggerAwareTrait;

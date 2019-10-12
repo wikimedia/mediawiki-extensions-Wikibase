@@ -126,6 +126,7 @@ class ItemDiffView implements DiffView {
 			}
 		} else {
 			$html = '';
+			// @phan-suppress-next-line PhanTypeNoPropertiesForeach
 			foreach ( $op as $key => $subOp ) {
 				$html .= $this->generateOpHtml(
 					array_merge( $path, [ $key ] ),

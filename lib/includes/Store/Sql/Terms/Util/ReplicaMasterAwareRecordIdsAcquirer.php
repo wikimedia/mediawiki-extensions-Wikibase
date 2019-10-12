@@ -64,6 +64,11 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private $flags;
 
 	/**
+	 * @var int
+	 */
+	private $waitForReplicationTimeout;
+
+	/**
 	 * @param ILBFactory $lbFactory
 	 * @param string $table the name of the table this acquirer is for
 	 * @param string $idColumn the name of the column that contains the desired ids

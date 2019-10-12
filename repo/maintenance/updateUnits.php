@@ -193,7 +193,7 @@ class UpdateUnits extends Maintenance {
 	/**
 	 * Convert unit that does not reduce to a basic unit.
 	 *
-	 * @param string  $unit
+	 * @param string[]  $unit
 	 * @param array[] $convertUnits List of units already converted
 	 *
 	 * @return string[]|null Converted data for the unit or null if no conversion possible.
@@ -222,7 +222,7 @@ class UpdateUnits extends Maintenance {
 	 * @param string[] $convertUnits Already converted data
 	 * @param array[] $baseUnits Base unit list
 	 * @param string[]|null $unitUsage Unit usage data
-	 * @param string[] &$reconvert Array collecting units that require re-conversion later,
+	 * @param string[][] &$reconvert Array collecting units that require re-conversion later,
 	 *                 due to their target unit not being base.
 	 * @return string[]|null Produces conversion data for the unit or null if not possible.
 	 */

@@ -125,6 +125,11 @@ class WikibaseValueFormatterBuilders {
 	private $entitySchemaNamespace;
 
 	/**
+	 * @var array
+	 */
+	private $thumbLimits;
+
+	/**
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup

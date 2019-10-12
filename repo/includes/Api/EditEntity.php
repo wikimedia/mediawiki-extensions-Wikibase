@@ -98,6 +98,11 @@ class EditEntity extends ModifyEntity {
 	private $changedLanguagesCounter;
 
 	/**
+	 * @var NonLanguageBoundChangesCounter
+	 */
+	private $nonLanguageBoundChangesCounter;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule

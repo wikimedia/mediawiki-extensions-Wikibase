@@ -120,6 +120,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @param string $languageCode
 	 *
 	 * @throws UserInputException
+	 * @suppress PhanTypeMismatchDeclaredParam Intersection type
 	 */
 	private function assertNoPipeCharacterInAliases( AliasesProvider $entity, $languageCode ) {
 		$aliases = $entity->getAliasGroups();

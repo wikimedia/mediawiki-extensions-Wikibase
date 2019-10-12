@@ -139,6 +139,7 @@ class MovePageNotice {
 	}
 
 	private function getPageMoveMessage( Title $newTitle ) {
+		// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
 		if ( isset( $newTitle->wikibasePushedMoveToRepo ) ) {
 			// We're going to update the item using the repo job queue \o/
 			return 'wikibase-after-page-move-queued';

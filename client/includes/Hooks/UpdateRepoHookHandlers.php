@@ -219,6 +219,7 @@ class UpdateRepoHookHandlers {
 			$updateRepo->injectJob( $this->jobQueueGroup );
 
 			// To be able to find out about this in the ArticleDeleteAfter hook
+			// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
 			$title->wikibasePushedDeleteToRepo = true;
 		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
@@ -273,6 +274,7 @@ class UpdateRepoHookHandlers {
 			$updateRepo->injectJob( $this->jobQueueGroup );
 
 			// To be able to find out about this in the SpecialMovepageAfterMove hook
+			// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
 			$newTitle->wikibasePushedMoveToRepo = true;
 		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just

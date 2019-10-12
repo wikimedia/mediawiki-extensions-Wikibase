@@ -21,7 +21,7 @@ class TermboxModule extends ResourceLoaderFileModule {
 	}
 
 	/**
-	 * @return string[] | null
+	 * @return string[][]|null
 	 * @throws Exception If the file is not valid JSON
 	 */
 	private function readJsonFile( $file ) {

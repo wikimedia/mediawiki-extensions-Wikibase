@@ -42,7 +42,7 @@ class RepositoryDefinitions {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var array[]
+	 * @var array[][]
 	 */
 	private $entityTypeToRepositoryMapping = [];
 
@@ -131,7 +131,7 @@ class RepositoryDefinitions {
 	}
 
 	/**
-	 * @return array[] Associative array (string => array) mapping entity types to a list of
+	 * @return array[][] Associative array (string => array) mapping entity types to a list of
 	 * [string repository name, int namespace, string slot] tupels, for repositories that
 	 * provide entities of the given type, the namespace ID on the respective repository,
 	 * and the name of the slot in which the entities are stored in pages on that namespace.
