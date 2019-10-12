@@ -45,7 +45,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct(
-		NumberLocalizer $numberLocalizer = null,
+		?NumberLocalizer $numberLocalizer,
 		ValueFormatter $vocabularyUriFormatter,
 		FormatterOptions $options = null
 	) {

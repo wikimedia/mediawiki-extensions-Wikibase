@@ -300,7 +300,7 @@ final class RepoHooks {
 		User $user,
 		$reason,
 		$id,
-		Content $content = null,
+		?Content $content,
 		LogEntry $logEntry
 	) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

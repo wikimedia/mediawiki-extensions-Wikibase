@@ -35,7 +35,7 @@ class HistoryEntityAction extends HistoryAction {
 	 */
 	public function __construct(
 		Page $page,
-		IContextSource $context = null,
+		?IContextSource $context,
 		EntityIdLookup $entityIdLookup,
 		LabelDescriptionLookup $labelLookup
 	) {

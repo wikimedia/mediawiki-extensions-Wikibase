@@ -40,7 +40,7 @@ class GlobeCoordinateKartographerFormatter extends ValueFormatterBase {
 	 * @param bool $emitPreviewHtml Whether to emit HTML that can be used for live previews
 	 */
 	public function __construct(
-		FormatterOptions $options = null,
+		?FormatterOptions $options,
 		ValueFormatter $coordinateFormatter,
 		CachingKartographerEmbeddingHandler $cachingKartographerEmbeddingHandler,
 		$emitPreviewHtml

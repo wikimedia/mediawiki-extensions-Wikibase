@@ -127,7 +127,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 	 *
 	 * @return MutableContext
 	 */
-	private function getContextForEditFilter( EntityId $entityId = null, $entityType ) {
+	private function getContextForEditFilter( ?EntityId $entityId, $entityType ) {
 		$context = clone $this->context;
 		if ( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );

@@ -275,7 +275,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ParserOutput
 	 */
 	protected function getParserOutputFromEntityView(
-		$revisionId = null,
+		$revisionId,
 		ParserOptions $options,
 		$generateHtml = true
 	) {

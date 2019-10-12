@@ -337,7 +337,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 	 *
 	 * @return bool
 	 */
-	private function shouldConvert( Title $currentTitle = null, RequestContext $context ) {
+	private function shouldConvert( ?Title $currentTitle, RequestContext $context ) {
 		static $shouldConvert = null;
 		if ( $shouldConvert !== null && !defined( 'MW_PHPUNIT_TEST' ) ) {
 			return $shouldConvert;

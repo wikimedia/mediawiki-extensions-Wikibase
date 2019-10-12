@@ -154,7 +154,7 @@ class MediawikiEditEntity implements EditEntity {
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
 		EntityPatcher $entityPatcher,
-		EntityId $entityId = null,
+		?EntityId $entityId,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
 		$maxSerializedEntitySize,

@@ -40,7 +40,7 @@ class SkinAfterBottomScriptsHandler {
 	 */
 	public function createSchemaElement(
 		Title $title,
-		$revisionTimestamp = null,
+		$revisionTimestamp,
 		EntityId $entityId
 	) {
 		$entityConceptUri = $this->repoLinker->getEntityConceptUri( $entityId );
@@ -68,7 +68,7 @@ class SkinAfterBottomScriptsHandler {
 	 */
 	public function createSchema(
 		Title $title,
-		$revisionTimestamp = null,
+		$revisionTimestamp,
 		$entityConceptUri,
 		File $imageFile = null,
 		$description = null

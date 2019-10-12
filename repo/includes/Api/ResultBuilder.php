@@ -334,7 +334,7 @@ class ResultBuilder {
 	private function getEntityArray(
 		EntityDocument $entity,
 		$props,
-		array $filterSiteIds = null,
+		?array $filterSiteIds,
 		array $filterLangCodes,
 		array $fallbackChains
 	) {

@@ -138,7 +138,7 @@ class EntityParserOutputGeneratorFactory {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		Serializer $entitySerializer,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
-		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
+		?CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler,
 		StatsdDataFactoryInterface $stats,
 		RepoGroup $repoGroup,
 		array $preferredGeoDataProperties = [],

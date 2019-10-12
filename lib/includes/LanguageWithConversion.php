@@ -62,7 +62,7 @@ class LanguageWithConversion {
 	 * @param null|Language $parentLanguage
 	 */
 	private function __construct(
-		Language $language = null,
+		?Language $language,
 		$languageCode,
 		Language $sourceLanguage = null,
 		$sourceLanguageCode = null,

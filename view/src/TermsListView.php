@@ -57,7 +57,7 @@ class TermsListView {
 	public function getHtml(
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null,
+		?AliasGroupList $aliasGroups,
 		array $languageCodes
 	) {
 		$entityTermsForLanguageViewsHtml = '';
@@ -101,7 +101,7 @@ class TermsListView {
 	public function getListItemHtml(
 		TermList $labels,
 		TermList $descriptions,
-		AliasGroupList $aliasGroups = null,
+		?AliasGroupList $aliasGroups,
 		$languageCode
 	) {
 		$languageName = $this->languageNameLookup->getName( $languageCode );

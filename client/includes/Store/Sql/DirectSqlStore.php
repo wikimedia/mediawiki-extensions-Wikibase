@@ -194,7 +194,7 @@ class DirectSqlStore implements ClientStore {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
-		$repoWiki = false,
+		$repoWiki,
 		$languageCode
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;

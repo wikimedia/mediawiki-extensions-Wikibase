@@ -22,7 +22,7 @@ abstract class ChangeOpBase implements ChangeOp {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function updateSummary( Summary $summary = null, $action, $language = '', $args = '' ) {
+	protected function updateSummary( ?Summary $summary, $action, $language = '', $args = '' ) {
 		if ( $summary !== null ) {
 			$summary->setAction( $action );
 			$summary->setLanguage( $language );

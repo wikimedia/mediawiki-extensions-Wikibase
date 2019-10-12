@@ -199,7 +199,7 @@ class LinkTitles extends ApiBase {
 	 *
 	 * @return Status
 	 */
-	private function getAttemptSaveStatus( Item $item = null, Summary $summary, $flags ) {
+	private function getAttemptSaveStatus( ?Item $item, Summary $summary, $flags ) {
 		if ( $item === null ) {
 			// to not have an Item isn't really bad at this point
 			return Status::newGood( true );
@@ -209,7 +209,7 @@ class LinkTitles extends ApiBase {
 		}
 	}
 
-	private function buildResult( Item $item = null, Status $status ) {
+	private function buildResult( ?Item $item, Status $status ) {
 		if ( $item !== null ) {
 			$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
 			$this->resultBuilder->addBasicEntityInformation( $item->getId(), 'entity' );
