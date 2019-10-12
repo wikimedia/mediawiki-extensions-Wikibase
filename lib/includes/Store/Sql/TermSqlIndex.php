@@ -198,7 +198,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$ok = true;
 		$dbw = $this->getConnection( DB_MASTER );
 
-		if ( $ok && $termsToDelete ) {
+		if ( $termsToDelete ) {
 			$this->logger->debug(
 				'{method}: {termsToDeleteCount} terms to delete.',
 				[

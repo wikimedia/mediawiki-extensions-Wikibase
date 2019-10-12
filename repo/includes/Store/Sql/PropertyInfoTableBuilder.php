@@ -170,7 +170,7 @@ class PropertyInfoTableBuilder {
 				$tables,
 				[ 'page_title', 'page_id' ],
 				[
-					'page_id > ' . (int)$pageId,
+					'page_id > ' . $pageId,
 					'page_namespace = ' . $propertyNamespace,
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				],
@@ -187,7 +187,7 @@ class PropertyInfoTableBuilder {
 
 			foreach ( $props as $row ) {
 				$this->updatePropertyInfo( new PropertyId( $row->page_title ) );
-				$pageId = $row->page_id;
+				$pageId = (int)$row->page_id;
 				$c++;
 			}
 

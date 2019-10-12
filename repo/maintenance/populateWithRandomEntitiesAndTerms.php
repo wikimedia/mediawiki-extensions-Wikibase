@@ -275,6 +275,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 	private function createTextGenerator( $duplicationDegree = 0 ) {
 		$prevText = null;
 
+		// @phan-suppress-next-line PhanInfiniteLoop
 		while ( true ) {
 			if ( $prevText === null || $duplicationDegree < ( rand() / getrandmax() ) ) {
 				$prevText = md5( random_bytes( 10 ) );

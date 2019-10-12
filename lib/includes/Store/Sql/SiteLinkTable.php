@@ -117,7 +117,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		$ok = true;
 		$dbw = $this->getConnection( DB_MASTER );
 
-		if ( $ok && $linksToDelete ) {
+		if ( $linksToDelete ) {
 			$this->logger->debug(
 				'{method}: {linksToDeleteCount} links to delete.',
 				[

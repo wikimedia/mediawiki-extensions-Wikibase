@@ -134,6 +134,7 @@ class OtherProjectsSidebarGenerator {
 			return $sidebar;
 		}
 
+		// @phan-suppress-next-line PhanRedundantCondition Hook + pass-by-ref false positive
 		if ( !is_array( $newSidebar ) || !$this->isValidSidebar( $newSidebar ) ) {
 			wfLogWarning( 'Other projects sidebar data invalid after hook run.' );
 			return $sidebar;

@@ -25,6 +25,7 @@ class RangeTraversable implements \IteratorAggregate {
 		$number = $this->startingNumber;
 
 		if ( $this->inclusiveUpperBound === null ) {
+			// @phan-suppress-next-line PhanInfiniteLoop
 			while ( true ) {
 				yield $number++;
 			}

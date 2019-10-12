@@ -168,7 +168,7 @@ class EditEntity extends ModifyEntity {
 	 * @return bool
 	 */
 	private function entityExists( EntityId $entityId ) {
-		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
+		$title = $this->getTitleLookup()->getTitleForId( $entityId );
 		return ( $title !== null && $title->exists() );
 	}
 

@@ -72,10 +72,6 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new InvalidArgumentException( '$referenceHash needs to be a string' );
 		}
 
-		if ( !( $reference instanceof Reference ) ) {
-			throw new InvalidArgumentException( '$reference needs to be an instance of Reference' );
-		}
-
 		if ( !is_int( $index ) && $index !== null ) {
 			throw new InvalidArgumentException( '$index must be an integer or null' );
 		}
