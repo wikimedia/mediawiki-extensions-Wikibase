@@ -163,7 +163,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', true );
 	}
 
-	protected function tearDown() {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();

@@ -50,7 +50,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 		$settings->setSetting( 'trackLuaFunctionCallsPerSiteGroup', false );
 	}
 
-	public function tearDown() {
+	public function tearDown() : void {
 		$mwServices = MediaWikiServices::getInstance();
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
