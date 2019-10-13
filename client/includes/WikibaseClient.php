@@ -1151,7 +1151,8 @@ final class WikibaseClient {
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
-				$this->settings->getSetting( 'siteGlobalID' )
+				$this->settings->getSetting( 'siteGlobalID' ),
+				$this->getLogger()
 			);
 		}
 

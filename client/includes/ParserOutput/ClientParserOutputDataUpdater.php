@@ -4,6 +4,8 @@ namespace Wikibase\Client\ParserOutput;
 
 use InvalidArgumentException;
 use ParserOutput;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -42,11 +44,17 @@ class ClientParserOutputDataUpdater {
 	private $siteId;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 *            Use the factory here to defer initialization of things like Site objects.
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
 	 * @param string $siteId The global site ID for the local wiki
+	 * @param LoggerInterface|null $logger
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -54,7 +62,8 @@ class ClientParserOutputDataUpdater {
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
-		$siteId
+		$siteId,
+		LoggerInterface $logger = null
 	) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId must be a string.' );
@@ -64,6 +73,7 @@ class ClientParserOutputDataUpdater {
 		$this->entityLookup = $entityLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
@@ -133,10 +143,14 @@ class ClientParserOutputDataUpdater {
 		$item = $this->entityLookup->getEntity( $itemId );
 
 		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
-			// Probably some sort of race condition or data inconsistency, better log a warning
-			wfLogWarning(
-				'According to a SiteLinkLookup ' . $itemId->getSerialization() .
-				' is linked to ' . $this->siteId . ' while it is not or it does not exist.'
+			// Probably some sort of race condition or data inconsistency.
+			// See T183993.
+			$this->logger->warning(
+				'According to SiteLinkLookup {item} is linked to {site}, but the link does not exist.',
+				[
+					'item' => $itemId->getSerialization(),
+					'site' => $this->siteId,
+				]
 			);
 
 			return;
