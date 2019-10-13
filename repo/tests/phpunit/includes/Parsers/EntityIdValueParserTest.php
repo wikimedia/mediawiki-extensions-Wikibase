@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
-use PHPUnit4And6Compat;
 use ValueParsers\Test\StringValueParserTest;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -22,7 +21,7 @@ use Wikibase\Repo\Parsers\EntityIdValueParser;
  * @author Daniel Kinzler
  */
 class EntityIdValueParserTest extends StringValueParserTest {
-	use PHPUnit4And6Compat;
+	use PHPUnit4CompatTrait;
 
 	/**
 	 * @see ValueParserTestBase::getInstance
