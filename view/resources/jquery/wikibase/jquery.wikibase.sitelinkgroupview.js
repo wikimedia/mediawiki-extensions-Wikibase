@@ -232,7 +232,6 @@
 		 * @see jQuery.ui.TemplatedWidget.focus
 		 */
 		focus: function () {
-			// eslint-disable-next-line no-jquery/no-event-shorthand
 			this.$sitelinklistview.data( 'sitelinklistview' ).focus();
 		},
 

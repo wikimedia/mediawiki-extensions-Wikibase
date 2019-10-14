@@ -1,10 +1,8 @@
 ( function () {
 	'use strict';
 
-	var form = $( 'form#wb-mergeitems-form1' );
-
-	form.submit( function () {
-		$( this ).find( 'button[type="submit"]' ).prop( 'disabled', true );
+	$( 'form#wb-mergeitems-form1' ).on( 'submit', function () {
+		$( this ).find( 'button[type=submit]' ).prop( 'disabled', true );
 	} );
 
 }() );

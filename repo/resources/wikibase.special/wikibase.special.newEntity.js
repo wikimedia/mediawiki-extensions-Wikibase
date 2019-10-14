@@ -1,10 +1,8 @@
 ( function () {
 	'use strict';
 
-	var form = $( 'form#mw-newentity-form1' );
-
-	form.submit( function () {
-		$( this ).find( 'button[type=\'submit\']' ).prop( 'disabled', true );
+	$( 'form#mw-newentity-form1' ).on( 'submit', function () {
+		$( this ).find( 'button[type=submit]' ).prop( 'disabled', true );
 	} );
 
 }() );

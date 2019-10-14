@@ -102,17 +102,17 @@
 		 */
 		_createTabs: function () {
 			var manualSection,
-				manualLink,
+				$manualLink,
 				manualLabel = mw.msg( 'wikibase-referenceview-tabs-manual' );
 
 			this.$manual = $( '<div>' ).addClass( 'wikibase-referenceview-manual' ).uniqueId();
 
 			manualSection = '#' + this.$manual.attr( 'id' );
-			manualLink = $( '<a>' )
+			$manualLink = $( '<a>' )
 				.attr( 'href', manualSection )
 				.text( manualLabel );
 			this.$tabButtons = $( '<ul>' ).append(
-				$( '<li>' ).append( manualLink )
+				$( '<li>' ).append( $manualLink )
 			);
 
 			this.$manual.append( this.$listview );
@@ -300,7 +300,6 @@
 					// snaklistview, external components using the snaklistview will be noticed via
 					// the "change" event.
 					self._trigger( 'change' );
-					// eslint-disable-next-line no-jquery/no-event-shorthand
 					$snakview.data( 'snakview' ).focus();
 				} );
 			} );
