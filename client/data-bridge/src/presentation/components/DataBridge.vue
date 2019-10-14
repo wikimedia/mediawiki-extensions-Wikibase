@@ -4,6 +4,7 @@
 			:label="targetLabel"
 			:data-value="targetValue"
 			:set-data-value="setDataValue"
+			:maxlength="stringMaxLength"
 		/>
 	</section>
 </template>
@@ -31,6 +32,9 @@ export default class DataBridge extends Vue {
 
 	@Getter( 'targetLabel' )
 	public targetLabel!: Term;
+
+	@Getter( 'stringMaxLength' )
+	public stringMaxLength!: number|null;
 
 	@Action( BRIDGE_SET_TARGET_VALUE )
 	public setDataValue!: ( dataValue: DataValue ) => void;

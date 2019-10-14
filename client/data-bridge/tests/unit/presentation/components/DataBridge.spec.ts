@@ -40,6 +40,7 @@ describe( 'DataBridge', () => {
 			targetValue: { type: 'string', value: '' },
 			targetProperty: 'P123',
 			targetLabel: { value: 'P123', language: 'zxx' },
+			stringMaxLength: null,
 		} );
 		const wrapper = shallowMount( DataBridge, {
 			store,
@@ -53,7 +54,8 @@ describe( 'DataBridge', () => {
 		const targetValue = { type: 'string', value: 'Töfften' };
 		const targetProperty = 'P123';
 		const targetLabel = { value: 'P123', language: 'zxx' };
-		Vue.set( store, 'getters', { targetValue, targetProperty, targetLabel } );
+		const stringMaxLength = 200;
+		Vue.set( store, 'getters', { targetValue, targetProperty, targetLabel, stringMaxLength } );
 
 		const wrapper = shallowMount( DataBridge, {
 			store,
@@ -62,5 +64,6 @@ describe( 'DataBridge', () => {
 
 		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toBe( targetValue );
 		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetLabel );
+		expect( wrapper.find( StringDataValue ).props( 'maxlength' ) ).toBe( stringMaxLength );
 	} );
 } );
