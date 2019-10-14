@@ -55,4 +55,12 @@ export const getters: GetterTree<Application, Application> = {
 
 		return state.targetLabel;
 	},
+
+	stringMaxLength( state: Application ): number|null {
+		if ( state.wikibaseRepoConfiguration === null ) {
+			return null;
+		}
+
+		return state.wikibaseRepoConfiguration.dataTypeLimits.string.maxLength;
+	},
 };

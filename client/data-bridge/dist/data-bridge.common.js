@@ -8151,6 +8151,13 @@ var getters_getters = {
     }
 
     return state.targetLabel;
+  },
+  stringMaxLength: function stringMaxLength(state) {
+    if (state.wikibaseRepoConfiguration === null) {
+      return null;
+    }
+
+    return state.wikibaseRepoConfiguration.dataTypeLimits.string.maxLength;
   }
 };
 // CONCATENATED MODULE: ./src/store/mutations.ts
