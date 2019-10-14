@@ -6,6 +6,7 @@
 ( function () {
 	'use strict';
 
+	require( './jquery.ui.closeable.js' );
 	var PARENT = $.ui.TemplatedWidget;
 
 	/**

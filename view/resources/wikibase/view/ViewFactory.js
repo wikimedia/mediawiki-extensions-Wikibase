@@ -11,6 +11,7 @@
 	require( '../../jquery/wikibase/snakview/snakview.variations.Value.js' );
 
 	// Widgets
+	require( '../../jquery/ui/jquery.ui.EditableTemplatedWidget.js' );
 	require( '../../jquery/wikibase/snakview/snakview.js' );
 	require( '../../jquery/wikibase/snakview/snakview.SnakTypeSelector.js' );
 	require( '../../jquery/wikibase/jquery.wikibase.snaklistview.js' );
