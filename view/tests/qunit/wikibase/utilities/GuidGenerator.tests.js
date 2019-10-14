@@ -5,10 +5,12 @@
 ( function ( wb, QUnit ) {
 	'use strict';
 
+	var V4GuidGenerator = require( '../../../../resources/wikibase/utilities/wikibase.utilities.GuidGenerator.js' );
+
 	QUnit.module( 'wikibase.utilities.GuidGenerator' );
 
 	QUnit.test( 'V4GuidGenerator', function ( assert ) {
-		var generator = new wb.utilities.V4GuidGenerator();
+		var generator = new V4GuidGenerator();
 
 		assert.strictEqual(
 			generator._getRandomHex( 0, 0 ),
