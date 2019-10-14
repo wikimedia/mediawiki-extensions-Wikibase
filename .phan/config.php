@@ -84,11 +84,8 @@ $cfg['redundant_condition_detection'] = false;
 $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
-		// approximate error count: 3
 		// False positives for methods taking nullables, use real nullables now that HHVM is gone
 		"PhanParamReqAfterOpt",
-		// approximate error count: 9
-		"PhanParamSignatureMismatch",
 		// approximate error count: 47
 		"PhanTypeMismatchArgument",
 		// approximate error count: 5
@@ -109,15 +106,8 @@ $cfg['suppress_issue_types'] = array_merge(
 		"PhanTypeMismatchDeclaredParam",
 		"PhanTypeMismatchDimFetch",
 		"PhanTypeNoPropertiesForeach",
-		"PhanUndeclaredInvokeInCallable",
 
 		'PhanPluginDuplicateConditionalNullCoalescing',
-
-		// This extension uses weird parameter descriptions that would be addressed by migrating to 7.2
-		// @todo Enable the checks below once descriptions are fixed, since HHVM is now gone
-		"PhanUnextractableAnnotation",
-		"PhanUnextractableAnnotationElementName",
-		"PhanUnextractableAnnotationSuffix",
 
 		// Both local and global vendor directories have to be analysed
 		"PhanRedefinedExtendedClass",

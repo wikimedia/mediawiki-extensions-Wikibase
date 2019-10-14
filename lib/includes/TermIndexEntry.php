@@ -31,7 +31,7 @@ class TermIndexEntry {
 	];
 
 	/**
-	 * @var string, one of self::TYPE_* constants
+	 * @var string One of self::TYPE_* constants
 	 */
 	private $termType;
 

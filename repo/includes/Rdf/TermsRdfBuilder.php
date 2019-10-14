@@ -41,7 +41,7 @@ class TermsRdfBuilder implements EntityRdfBuilder {
 	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $writer
-	 * @param string[][][] Map of type to array of [ ns, local ] for each label predicate
+	 * @param string[][][] $labelPredicates Map of type to array of [ ns, local ] for each label predicate
 	 * @param string[]|null $languages
 	 */
 	public function __construct(
