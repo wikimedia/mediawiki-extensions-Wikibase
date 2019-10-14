@@ -3,6 +3,7 @@ import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepo
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
+import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 export default class ServiceRepositories {
 	private readingEntityRepository?: ReadingEntityRepository;
@@ -10,6 +11,7 @@ export default class ServiceRepositories {
 	private languageInfoRepository?: LanguageInfoRepository;
 	private entityLabelRepository?: EntityLabelRepository;
 	private messagesRepository?: MessagesRepository;
+	private wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
 
 	public setReadingEntityRepository( lookup: ReadingEntityRepository ): void {
 		this.readingEntityRepository = lookup;
@@ -68,6 +70,18 @@ export default class ServiceRepositories {
 			return this.messagesRepository;
 		} else {
 			throw new Error( 'MessagesRepository is undefined' );
+		}
+	}
+
+	public setWikibaseRepoConfigRepository( wikibaseRepoConfigRepository: WikibaseRepoConfigRepository ): void {
+		this.wikibaseRepoConfigRepository = wikibaseRepoConfigRepository;
+	}
+
+	public getWikibaseRepoConfigRepository(): WikibaseRepoConfigRepository {
+		if ( this.wikibaseRepoConfigRepository ) {
+			return this.wikibaseRepoConfigRepository;
+		} else {
+			throw new Error( 'WikibaseRepoConfigRepository is undefined' );
 		}
 	}
 }

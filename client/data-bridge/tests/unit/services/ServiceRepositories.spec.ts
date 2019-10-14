@@ -25,6 +25,10 @@ describe( 'ServiceRepositories', () => {
 		'MessagesRepository',
 		'getMessagesRepository',
 		'setMessagesRepository',
+	], [
+		'WikibaseRepoConfigRepository',
+		'getWikibaseRepoConfigRepository',
+		'setWikibaseRepoConfigRepository',
 	] ] )( '%s', ( _name: string, getter: string, setter: string ) => {
 		it( 'throws an error if it is not set', () => {
 			expect( () => ( newServices() as any )[ getter ]() ).toThrow();
