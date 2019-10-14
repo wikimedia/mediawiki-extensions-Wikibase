@@ -38,7 +38,15 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView implement
 	 */
 	private $textInjector;
 
-	const TERMBOX_VERSION = 1;
+	public const TERMBOX_VERSION = 1;
+
+	/**
+	 * This is used as a value in the ParserCache `termboxVersion` entry, prefixed with TERMBOX_VERSION.
+	 *
+	 * Note: It's currently set to '' to avoid unnecessarily purging caches. Starting from the next time this is
+	 * changed it should be a number, incremented every time the caches need to be purged.
+	 */
+	public const CACHE_VERSION = '';
 
 	public function __construct(
 		HtmlTermRenderer $htmlTermRenderer,

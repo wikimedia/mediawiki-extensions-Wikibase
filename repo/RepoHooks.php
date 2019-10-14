@@ -1119,8 +1119,8 @@ final class RepoHooks {
 		$inCacheKey['termboxVersion'] = true;
 		$lazyOptions['termboxVersion'] = function () {
 			return TermboxFlag::getInstance()->shouldRenderTermbox() ?
-				TermboxView::TERMBOX_VERSION :
-				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION;
+				TermboxView::TERMBOX_VERSION . TermboxView::CACHE_VERSION :
+				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION . PlaceholderEmittingEntityTermsView::CACHE_VERSION;
 		};
 	}
 
