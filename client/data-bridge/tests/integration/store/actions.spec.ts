@@ -20,6 +20,7 @@ import {
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -112,6 +113,18 @@ describe( 'store/actions', () => {
 		services.setEntityLabelRepository( {
 			async getLabel( _id: string ): Promise<Term> {
 				return labelTerm;
+			},
+		} );
+
+		services.setWikibaseRepoConfigRepository( {
+			async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
+				return {
+					dataTypeLimits: {
+						string: {
+							maxLength: 200,
+						},
+					},
+				};
 			},
 		} );
 

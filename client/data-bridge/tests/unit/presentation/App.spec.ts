@@ -65,6 +65,17 @@ describe( 'App.vue', () => {
 				return Promise.reject();
 			},
 		} );
+		services.setWikibaseRepoConfigRepository( {
+			getRepoConfiguration() {
+				return Promise.resolve( {
+					dataTypeLimits: {
+						string: {
+							maxLength: 200,
+						},
+					},
+				} );
+			},
+		} );
 
 		store = createStore( services );
 

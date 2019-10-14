@@ -19,11 +19,15 @@ export function createStore( services: ServiceRepositories ): Store<Application>
 		targetProperty: '',
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
+		wikibaseRepoConfiguration: null,
 	};
 
 	const storeBundle: StoreOptions<Application> = {
 		state,
-		actions: actions( services.getEntityLabelRepository() ),
+		actions: actions(
+			services.getEntityLabelRepository(),
+			services.getWikibaseRepoConfigRepository(),
+		),
 		getters,
 		mutations,
 		strict: process.env.NODE_ENV !== 'production',

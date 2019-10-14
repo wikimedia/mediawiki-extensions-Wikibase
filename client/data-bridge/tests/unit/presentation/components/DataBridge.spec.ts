@@ -29,6 +29,9 @@ describe( 'DataBridge', () => {
 			getEntityLabelRepository() {
 				return {};
 			},
+			getWikibaseRepoConfigRepository() {
+				return {};
+			},
 		} as ServiceRepositories );
 	} );
 

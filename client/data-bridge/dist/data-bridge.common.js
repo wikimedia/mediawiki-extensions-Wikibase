@@ -788,6 +788,17 @@ module.exports = {
 
 /***/ }),
 
+/***/ "1af6":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
+var $export = __webpack_require__("63b6");
+
+$export($export.S, 'Array', { isArray: __webpack_require__("9003") });
+
+
+/***/ }),
+
 /***/ "1bc3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2447,6 +2458,36 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "40c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// getting tag from 19.1.3.6 Object.prototype.toString()
+var cof = __webpack_require__("6b4c");
+var TAG = __webpack_require__("5168")('toStringTag');
+// ES3 wrong here
+var ARG = cof(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (e) { /* empty */ }
+};
+
+module.exports = function (it) {
+  var O, T, B;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+    // builtinTag case
+    : ARG ? cof(O)
+    // ES3 arguments fallback
+    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+};
+
+
+/***/ }),
+
 /***/ "41a0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2557,6 +2598,16 @@ module.exports = function (bitmap, value) {
 /* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProcessDialogHeader_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProcessDialogHeader_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProcessDialogHeader_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "469f":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("6c1c");
+__webpack_require__("1654");
+module.exports = __webpack_require__("7d7b");
+
 
 /***/ }),
 
@@ -3265,6 +3316,13 @@ module.exports = __webpack_require__("d8d6");
 
 /***/ }),
 
+/***/ "5d73":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("469f");
+
+/***/ }),
+
 /***/ "5dbc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3277,6 +3335,31 @@ module.exports = function (that, target, C) {
     setPrototypeOf(that, P);
   } return that;
 };
+
+
+/***/ }),
+
+/***/ "5df3":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $at = __webpack_require__("02f4")(true);
+
+// 21.1.3.27 String.prototype[@@iterator]()
+__webpack_require__("01f9")(String, 'String', function (iterated) {
+  this._t = String(iterated); // target
+  this._i = 0;                // next index
+// 21.1.5.2.1 %StringIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var index = this._i;
+  var point;
+  if (index >= O.length) return { value: undefined, done: true };
+  point = $at(O, index);
+  this._i += point.length;
+  return { value: point, done: false };
+});
 
 
 /***/ }),
@@ -3996,6 +4079,35 @@ module.exports = function (KEY) {
 
 /***/ }),
 
+/***/ "7cd6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var classof = __webpack_require__("40c3");
+var ITERATOR = __webpack_require__("5168")('iterator');
+var Iterators = __webpack_require__("481b");
+module.exports = __webpack_require__("584a").getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+
+/***/ }),
+
+/***/ "7d7b":
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__("e4ae");
+var get = __webpack_require__("7cd6");
+module.exports = __webpack_require__("584a").getIterator = function (it) {
+  var iterFn = get(it);
+  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
+  return anObject(iterFn.call(it));
+};
+
+
+/***/ }),
+
 /***/ "7e90":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4658,6 +4770,13 @@ module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
 
+
+/***/ }),
+
+/***/ "a745":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("f410");
 
 /***/ }),
 
@@ -5710,6 +5829,15 @@ module.exports = function (object, index, value) {
   if (index in object) $defineProperty.f(object, index, createDesc(0, value));
   else object[index] = value;
 };
+
+
+/***/ }),
+
+/***/ "f410":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("1af6");
+module.exports = __webpack_require__("584a").Array.isArray;
 
 
 /***/ }),
@@ -7802,14 +7930,69 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
+var is_array = __webpack_require__("a745");
+var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithHoles.js
+
+function _arrayWithHoles(arr) {
+  if (is_array_default()(arr)) return arr;
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
+var get_iterator = __webpack_require__("5d73");
+var get_iterator_default = /*#__PURE__*/__webpack_require__.n(get_iterator);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArrayLimit.js
+
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = get_iterator_default()(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableRest.js
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js
+
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
 var es6_promise = __webpack_require__("551c");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.iterator.js
+var es6_string_iterator = __webpack_require__("5df3");
 
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var PROPERTY_TARGET_SET = 'setPropertyPointer';
 var EDITFLOW_SET = 'setEditFlow';
 var APPLICATION_STATUS_SET = 'setApplicationStatus';
 var TARGET_LABEL_SET = 'setTargetLabel';
+var WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -7851,19 +8034,28 @@ var namespacedStoreMethods = __webpack_require__("627d");
 
 
 
-function actions(entityLabelRepository) {
-  var _ref;
 
-  return _ref = {}, _defineProperty(_ref, BRIDGE_INIT, function (context, information) {
+
+
+
+function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
+  var _ref3;
+
+  return _ref3 = {}, _defineProperty(_ref3, BRIDGE_INIT, function (context, information) {
     context.commit(EDITFLOW_SET, information.editFlow);
     context.commit(PROPERTY_TARGET_SET, information.propertyId);
     entityLabelRepository.getLabel(information.propertyId).then(function (label) {
       context.commit(TARGET_LABEL_SET, label);
     }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
     });
-    return context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_INIT), {
+    return Promise.all([wikibaseRepoConfigRepository.getRepoConfiguration(), context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_INIT), {
       entity: information.entityId
-    }).then(function () {
+    })]).then(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          wikibaseRepoConfiguration = _ref2[0],
+          _entityInit = _ref2[1];
+
+      context.commit(WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration);
       var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
       var path = {
         entityId: entityId,
@@ -7887,7 +8079,7 @@ function actions(entityLabelRepository) {
 
       throw error;
     });
-  }), _defineProperty(_ref, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
+  }), _defineProperty(_ref3, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
     if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
       context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
       return Promise.reject(null);
@@ -7907,7 +8099,7 @@ function actions(entityLabelRepository) {
 
       throw error;
     });
-  }), _defineProperty(_ref, BRIDGE_SAVE, function (context) {
+  }), _defineProperty(_ref3, BRIDGE_SAVE, function (context) {
     if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
       context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
       return Promise.reject(null);
@@ -7918,7 +8110,7 @@ function actions(entityLabelRepository) {
 
       throw error;
     });
-  }), _ref;
+  }), _ref3;
 }
 // CONCATENATED MODULE: ./src/store/getters.ts
 
@@ -7975,6 +8167,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   state.applicationStatus = status;
 }), _defineProperty(_mutations, TARGET_LABEL_SET, function (state, label) {
   state.targetLabel = label;
+}), _defineProperty(_mutations, WIKIBASE_REPO_CONFIGURATION_SET, function (state, config) {
+  state.wikibaseRepoConfiguration = config;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
 var ENTITY_UPDATE = 'updateEntity';
@@ -8326,11 +8520,12 @@ function createStore(services) {
     targetLabel: null,
     targetProperty: '',
     editFlow: '',
-    applicationStatus: definitions_ApplicationStatus.INITIALIZING
+    applicationStatus: definitions_ApplicationStatus.INITIALIZING,
+    wikibaseRepoConfiguration: null
   };
   var storeBundle = {
     state: state,
-    actions: actions(services.getEntityLabelRepository()),
+    actions: actions(services.getEntityLabelRepository(), services.getWikibaseRepoConfigRepository()),
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',

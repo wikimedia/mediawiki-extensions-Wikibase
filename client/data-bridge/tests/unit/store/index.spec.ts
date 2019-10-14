@@ -13,6 +13,9 @@ describe( 'store/index', () => {
 			getEntityLabelRepository() {
 				return {};
 			},
+			getWikibaseRepoConfigRepository() {
+				return {};
+			},
 		} as ServiceRepositories );
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();

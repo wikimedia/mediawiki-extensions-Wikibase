@@ -75,6 +75,17 @@ function mockPropertyLabelResponse(
 		},
 	};
 }
+const queryDataBridgeConfigResponse = {
+	query: {
+		wbdatabridgeconfig: {
+			dataTypeLimits: {
+				string: {
+					maxLength: 200,
+				},
+			},
+		},
+	},
+};
 
 describe( 'string data value', () => {
 	const pageLanguage = 'en';
@@ -87,7 +98,16 @@ describe( 'string data value', () => {
 		require = jest.fn( () => app );
 		using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
 
-		mockMwEnv( using, mockMwConfig( { wgPageContentLanguage: pageLanguage } ) );
+		mockMwEnv(
+			using,
+			mockMwConfig( { wgPageContentLanguage: pageLanguage } ),
+			undefined,
+			mockForeignApiConstructor( {
+				get() {
+					return Promise.resolve( queryDataBridgeConfigResponse );
+				},
+			} ),
+		);
 		( window as MwWindow ).$ = {
 			get() {
 				return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
@@ -129,11 +149,11 @@ describe( 'string data value', () => {
 			const propertyId = 'P349';
 			const propertyLabel = 'Queen';
 
-			const get = jest.fn( () => mockPropertyLabelResponse(
+			const get = jest.fn( () => ( { ...mockPropertyLabelResponse(
 				propertyId,
 				propertyLabel,
 				pageLanguage,
-			) );
+			), ...queryDataBridgeConfigResponse } ) );
 
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
@@ -153,7 +173,6 @@ describe( 'string data value', () => {
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
 			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( pageLanguage );
 			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
-			expect( get ).toHaveBeenCalledTimes( 1 );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: propertyId,
@@ -168,12 +187,12 @@ describe( 'string data value', () => {
 			const propertyLabel = 'Jochen';
 			const language = 'de';
 
-			const get = jest.fn( () => mockPropertyLabelResponse(
+			const get = jest.fn( () => ( { ...mockPropertyLabelResponse(
 				propertyId,
 				propertyLabel,
 				pageLanguage,
 				language,
-			) );
+			), ...queryDataBridgeConfigResponse } ) );
 
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
@@ -193,7 +212,6 @@ describe( 'string data value', () => {
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
 			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
 			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
-			expect( get ).toHaveBeenCalledTimes( 1 );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: propertyId,
@@ -207,7 +225,9 @@ describe( 'string data value', () => {
 			const propertyId = 'P349';
 			const testLink = prepareTestEnv( { propertyId } );
 
-			const get = jest.fn( () => Promise.reject( 'no' ) );
+			const get = jest.fn( () => ( {
+				// no entities in the response
+				...queryDataBridgeConfigResponse } ) );
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
@@ -241,12 +261,12 @@ describe( 'string data value', () => {
 
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn( () => mockPropertyLabelResponse(
+				get: jest.fn( () => ( { ...mockPropertyLabelResponse(
 					propertyId,
 					propertyLabel,
 					pageLanguage,
 					language,
-				) ),
+				), ...queryDataBridgeConfigResponse } ) ),
 			} );
 
 			( window as MwWindow ).$.uls!.data.getDir = jest.fn( ( x: string ) => {
@@ -273,12 +293,12 @@ describe( 'string data value', () => {
 
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn( () => mockPropertyLabelResponse(
+				get: jest.fn( () => ( { ...mockPropertyLabelResponse(
 					propertyId,
 					propertyLabel,
 					pageLanguage,
 					language,
-				) ),
+				), ...queryDataBridgeConfigResponse } ) ),
 			} );
 
 			( window as MwWindow ).mw.language = {
