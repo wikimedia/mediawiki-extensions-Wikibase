@@ -8,6 +8,7 @@
 			:id="id"
 			class="wb-db-stringValue__input"
 			:placeholder="placeholder"
+			:maxlength="maxlength"
 			v-model="value"
 		/>
 	</div>
@@ -38,6 +39,9 @@ export default class StringDataValue extends Vue {
 
 	@Prop( { required: false } )
 	public placeholder?: string;
+
+	@Prop( { type: Number, required: false } )
+	public maxlength?: number;
 
 	@Prop( { required: true, type: Function } )
 	public setDataValue!: ( dataValue: DataValue ) => void;

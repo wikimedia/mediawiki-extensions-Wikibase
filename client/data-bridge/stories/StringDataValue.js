@@ -79,4 +79,21 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :placeholder="placeholder" :setDataValue="sampleSetter"/>
 		</div>`,
+	} ), { info: true } )
+
+	.add( 'maxlength=15', () => ( {
+		data() {
+			return {
+				sampleLabel: { value: 'maxlength=15', language: 'en' },
+				sampleValue: { type: 'string', value: 'lorem ipsum' },
+				sampleSetter: ( value ) => {
+					this.sampleValue = { ...value };
+				},
+			};
+		},
+		components: { StringDataValue },
+		template:
+		`<div>
+			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter" maxlength="15"/>
+		</div>`,
 	} ), { info: true } );
