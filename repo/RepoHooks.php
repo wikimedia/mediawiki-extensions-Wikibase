@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use ApiBase;
 use ApiEditPage;
+use ApiModuleManager;
+use ApiQuery;
 use ApiQuerySiteinfo;
 use BaseTemplate;
 use Content;
@@ -33,6 +35,7 @@ use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -1127,6 +1130,25 @@ final class RepoHooks {
 	public static function onRejectParserCacheValue( ParserOutput $parserValue, WikiPage $wikiPage, ParserOptions $parserOpts ) {
 		$rejector = new TermboxVersionParserCacheValueRejector( TermboxFlag::getInstance() );
 		return $rejector->keepCachedValue( $parserValue, $parserOpts );
+	}
+
+	public static function onApiQueryModuleManager( ApiModuleManager $moduleManager ) {
+		global $wgWBRepoSettings;
+
+		if ( isset( $wgWBRepoSettings['dataBridgeEnabled'] ) && $wgWBRepoSettings['dataBridgeEnabled'] ) {
+			$moduleManager->addModule(
+				'wbdatabridgeconfig',
+				'meta',
+				[
+					'class' => MetaDataBridgeConfig::class,
+					'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+						$repo = WikibaseRepo::getDefaultInstance();
+
+						return new MetaDataBridgeConfig( $repo->getSettings(), $apiQuery, $moduleName );
+					},
+				]
+			);
+		}
 	}
 
 	public static function onMediaWikiPHPUnitTestStartTest( $test ) {

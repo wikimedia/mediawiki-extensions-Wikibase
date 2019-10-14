@@ -271,6 +271,7 @@ return call_user_func( function() {
 				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
 					->getSetting( 'string-limits' )['VT:string'];
 				$maxLength = $constraints['length'];
+				// max length is also used in MetaDataBridgeConfig, make sure to keep in sync
 				return $factory->buildStringValidators( $maxLength );
 			},
 			'parser-factory-callback' => function ( ParserOptions $options ) {

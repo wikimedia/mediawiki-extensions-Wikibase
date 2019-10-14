@@ -198,6 +198,8 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "The name of the language in the current language (specified via the <var>uselang</var> parameter), with language fallbacks applied if necessary. Usually, at least an English name is known for all content languages Wikibase accepts.",
 	"apihelp-query+wbcontentlanguages-example-1": "Get the valid language codes for the terms of an entity.",
 	"apihelp-query+wbcontentlanguages-example-2": "Get the valid languages, with language code and autonym, for monolingual text values.",
+	"apihelp-query+wbdatabridgeconfig-summary": "Returns information needed for the [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]] feature.",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "This is an internal module. Please do not use it.",
 	"apihelp-query+wbsearch-description": "Searches for entities using labels and aliases.\nThis can be used as a generator for other queries.\nReturns the matched term that should be displayed.",
 	"apihelp-query+wbsearch-summary": "Searches for entities using labels and aliases.",
 	"apihelp-query+wbsearch-extended-description": "This can be used as a generator for other queries.\nReturns the matched term that should be displayed.",

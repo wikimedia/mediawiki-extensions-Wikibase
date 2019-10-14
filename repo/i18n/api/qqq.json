@@ -220,6 +220,8 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "{{doc-apihelp-paramvalue|query+wbcontentlanguages|prop|name}}",
 	"apihelp-query+wbcontentlanguages-example-1": "{{doc-apihelp-example|query+wbcontentlanguages}}",
 	"apihelp-query+wbcontentlanguages-example-2": "{{doc-apihelp-example|query+wbcontentlanguages}}",
+	"apihelp-query+wbdatabridgeconfig-summary": "{{doc-apihelp-summary|query+wbdatabridgeconfig}}",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "{{doc-apihelp-extended-description|query+wbdatabridgeconfig}}",
 	"apihelp-query+wbsearch-description": "{{doc-apihelp-description|query+wbsearch}}",
 	"apihelp-query+wbsearch-summary": "{{doc-apihelp-summary|query+wbsearch}}",
 	"apihelp-query+wbsearch-extended-description": "{{doc-apihelp-extended-description|query+wbsearch}}",
