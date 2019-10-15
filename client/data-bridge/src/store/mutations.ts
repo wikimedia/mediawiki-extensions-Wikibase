@@ -5,9 +5,11 @@ import {
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
 	TARGET_LABEL_SET,
+	WIKIBASE_REPO_CONFIGURATION_SET,
 } from '@/store/mutationTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 export const mutations: MutationTree<Application> = {
 	[ PROPERTY_TARGET_SET ]( state: Application, targetProperty: string ): void {
@@ -24,5 +26,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ TARGET_LABEL_SET ]( state: Application, label: Term ): void {
 		state.targetLabel = label;
+	},
+
+	[ WIKIBASE_REPO_CONFIGURATION_SET ]( state: Application, config: WikibaseRepoConfiguration ): void {
+		state.wikibaseRepoConfiguration = config;
 	},
 };

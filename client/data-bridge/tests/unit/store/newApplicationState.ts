@@ -7,6 +7,7 @@ export default function ( fields?: any ): Application {
 		targetLabel: null,
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
+		wikibaseRepoConfiguration: null,
 	};
 
 	if ( fields !== null ) {

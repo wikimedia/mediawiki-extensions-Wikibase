@@ -53,6 +53,21 @@ function prepareTestEnv( options: {
 	return document.querySelector( 'a' );
 }
 
+/** Implementation for {@link mockForeignApiConstructor} */
+function getDataBridgeConfig(): Promise<object> {
+	return Promise.resolve( {
+		query: {
+			wbdatabridgeconfig: {
+				dataTypeLimits: {
+					string: {
+						maxLength: 200,
+					},
+				},
+			},
+		},
+	} );
+}
+
 describe( 'app', () => {
 	let app: any;
 	let require: any;
@@ -63,7 +78,12 @@ describe( 'app', () => {
 		require = jest.fn( () => app );
 		using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
 
-		mockMwEnv( using );
+		mockMwEnv(
+			using,
+			undefined,
+			undefined,
+			mockForeignApiConstructor( { get: getDataBridgeConfig } ),
+		);
 		( window as MwWindow ).$ = {
 			get() {
 				return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
@@ -200,6 +220,7 @@ describe( 'app', () => {
 		it( 'asserts username and tags, if given', async () => {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
+				get: getDataBridgeConfig,
 				postWithEditToken,
 			} );
 
@@ -242,6 +263,7 @@ describe( 'app', () => {
 		it( 'saves on click', async () => {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
+				get: getDataBridgeConfig,
 				postWithEditToken,
 			} );
 
@@ -277,6 +299,7 @@ describe( 'app', () => {
 		it( 'saves on enter', async () => {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
+				get: getDataBridgeConfig,
 				postWithEditToken,
 			} );
 
@@ -313,6 +336,7 @@ describe( 'app', () => {
 		it( 'saves on space', async () => {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
+				get: getDataBridgeConfig,
 				postWithEditToken,
 			} );
 

@@ -13,6 +13,7 @@ import {
 } from '@/store/namespaces';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 describe( 'store/getters', () => {
 	let store: Store<Application>;
@@ -115,6 +116,18 @@ describe( 'store/getters', () => {
 		services.setEntityLabelRepository( {
 			async getLabel( _id ): Promise<Term> {
 				return { value: 'ignore me', language: 'en' };
+			},
+		} );
+
+		services.setWikibaseRepoConfigRepository( {
+			async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
+				return {
+					dataTypeLimits: {
+						string: {
+							maxLength: 200,
+						},
+					},
+				};
 			},
 		} );
 

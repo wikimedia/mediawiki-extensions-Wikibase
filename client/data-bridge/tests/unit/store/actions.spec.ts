@@ -18,6 +18,7 @@ import {
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
 	TARGET_LABEL_SET,
+	WIKIBASE_REPO_CONFIGURATION_SET,
 } from '@/store/mutationTypes';
 import {
 	ENTITY_ID,
@@ -32,10 +33,20 @@ import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
+import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 describe( 'root/actions', () => {
 	const entityLabelRepository = {
 		getLabel: jest.fn( () => Promise.resolve() ),
+	};
+	const wikibaseRepoConfigRepository = {
+		getRepoConfiguration: jest.fn( () => Promise.resolve( {
+			dataTypeLimits: {
+				string: {
+					maxLength: 200,
+				},
+			},
+		} ) ),
 	};
 
 	describe( BRIDGE_INIT, () => {
@@ -84,9 +95,11 @@ describe( 'root/actions', () => {
 
 		function initAction( services: {
 			entityLabelRepository?: EntityLabelRepository;
+			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
 		} = {} ): Function {
 			return ( actions as Function )(
 				services.entityLabelRepository || entityLabelRepository,
+				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
 			)[ BRIDGE_INIT ];
 		}
 
@@ -140,6 +153,32 @@ describe( 'root/actions', () => {
 				expect( context.dispatch ).toHaveBeenCalledWith(
 					action( NS_ENTITY, ENTITY_INIT ),
 					{ 'entity': entityId },
+				);
+			} );
+		} );
+
+		it( `commits to ${WIKIBASE_REPO_CONFIGURATION_SET}`, () => {
+			const context = mockedStore();
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId: '',
+				entityId: '',
+			};
+			const wikibaseRepoConfiguration = {
+				dataTypeLimits: {
+					string: {
+						maxLength: 12345,
+					},
+				},
+			};
+			const wikibaseRepoConfigRepository = {
+				getRepoConfiguration: jest.fn( () => Promise.resolve( wikibaseRepoConfiguration ) ),
+			};
+
+			return initAction( { wikibaseRepoConfigRepository } )( context, information ).then( () => {
+				expect( context.commit ).toHaveBeenCalledWith(
+					WIKIBASE_REPO_CONFIGURATION_SET,
+					wikibaseRepoConfiguration,
 				);
 			} );
 		} );
@@ -364,9 +403,11 @@ describe( 'root/actions', () => {
 	describe( BRIDGE_SET_TARGET_VALUE, () => {
 		function setTargetValueAction( services: {
 			entityLabelRepository?: EntityLabelRepository;
+			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
 		} = {} ): Function {
 			return ( actions as Function )(
 				services.entityLabelRepository || entityLabelRepository,
+				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
 			)[ BRIDGE_SET_TARGET_VALUE ];
 		}
 
@@ -471,9 +512,11 @@ describe( 'root/actions', () => {
 	describe( BRIDGE_SAVE, () => {
 		function saveAction( services: {
 			entityLabelRepository?: EntityLabelRepository;
+			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
 		} = {} ): Function {
 			return ( actions as Function )(
 				services.entityLabelRepository || entityLabelRepository,
+				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
 			)[ BRIDGE_SAVE ];
 		}
 

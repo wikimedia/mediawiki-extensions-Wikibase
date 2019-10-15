@@ -15,6 +15,7 @@ import {
 	EDITFLOW_SET,
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
+	WIKIBASE_REPO_CONFIGURATION_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -37,9 +38,11 @@ import DataValue from '@/datamodel/DataValue';
 import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
+import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 export default function actions(
 	entityLabelRepository: EntityLabelRepository,
+	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository,
 ): ActionTree<Application, Application> {
 	return {
 		[ BRIDGE_INIT ](
@@ -56,10 +59,15 @@ export default function actions(
 				// TODO: handling on failed label loading, which is not a bocking error for now
 				} );
 
-			return context.dispatch(
-				action( NS_ENTITY, ENTITY_INIT ),
-				{ entity: information.entityId },
-			).then( () => {
+			return Promise.all( [
+				wikibaseRepoConfigRepository.getRepoConfiguration(),
+				context.dispatch(
+					action( NS_ENTITY, ENTITY_INIT ),
+					{ entity: information.entityId },
+				),
+			] ).then( ( [ wikibaseRepoConfiguration, _entityInit ] ) => {
+				context.commit( WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration );
+
 				const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
 				const path = {
 					entityId,
