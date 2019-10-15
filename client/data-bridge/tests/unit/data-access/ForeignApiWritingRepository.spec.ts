@@ -8,7 +8,7 @@ import Entity from '@/datamodel/Entity';
 
 function mockForeignApi( successObject?: unknown, rejectData?: unknown ): ForeignApi {
 	return {
-		postWithEditToken: (): any => {
+		postWithEditToken(): any {
 			if ( successObject ) {
 				return Promise.resolve( successObject );
 			}
