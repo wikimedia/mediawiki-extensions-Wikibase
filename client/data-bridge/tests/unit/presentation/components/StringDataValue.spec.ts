@@ -80,7 +80,33 @@ describe( 'StringDataValue', () => {
 			.toBe( placeholder );
 	} );
 
-	/* it( 'passes a maxlength down', () => {
+	describe( 'maxlength', () => {
+		test( 'passed through if set', () => {
+			const maxlength = 12345;
+			const wrapper = shallowMount( StringDataValue, {
+				propsData: {
+					label: null,
+					dataValue: null,
+					setDataValue: () => {},
+					maxlength,
+				},
+			} );
 
-	} );*/
+			expect( wrapper.find( ResizingTextField ).attributes( 'maxlength' ) )
+				.toBe( maxlength.toString() );
+		} );
+
+		test( 'unset by default', () => {
+			const wrapper = shallowMount( StringDataValue, {
+				propsData: {
+					label: null,
+					dataValue: null,
+					setDataValue: () => {},
+				},
+			} );
+
+			expect( wrapper.find( ResizingTextField ).attributes( 'maxlength' ) )
+				.toBeUndefined();
+		} );
+	} );
 } );
