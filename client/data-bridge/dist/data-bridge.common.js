@@ -6909,12 +6909,12 @@ var events;
 })(events || (events = {}));
 
 /* harmony default export */ var src_events = (events);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"12265ce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=f8b142a2&
-var DataBridgevue_type_template_id_f8b142a2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue}})],1)}
-var DataBridgevue_type_template_id_f8b142a2_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"12265ce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=06396862&
+var DataBridgevue_type_template_id_06396862_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":_vm.stringMaxLength}})],1)}
+var DataBridgevue_type_template_id_06396862_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=f8b142a2&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=06396862&
 
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
@@ -7414,6 +7414,8 @@ __decorate([Getter('targetProperty')], DataBridgevue_type_script_lang_ts_DataBri
 
 __decorate([Getter('targetLabel')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetLabel", void 0);
 
+__decorate([Getter('stringMaxLength')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "stringMaxLength", void 0);
+
 __decorate([Action(BRIDGE_SET_TARGET_VALUE)], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "setDataValue", void 0);
 
 DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_common_default()({
@@ -7438,8 +7440,8 @@ var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_f8b142a2_render,
-  DataBridgevue_type_template_id_f8b142a2_staticRenderFns,
+  DataBridgevue_type_template_id_06396862_render,
+  DataBridgevue_type_template_id_06396862_staticRenderFns,
   false,
   null,
   null,
