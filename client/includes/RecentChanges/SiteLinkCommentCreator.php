@@ -62,7 +62,7 @@ class SiteLinkCommentCreator {
 	 * @return string|null A human readable edit summary (limited wikitext),
 	 *         or null if no summary could be created for the sitelink change.
 	 */
-	public function getEditComment( Diff $siteLinkDiff = null, $action, Title $title = null ) {
+	public function getEditComment( ?Diff $siteLinkDiff, $action, Title $title = null ) {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$siteLinkMessage = $this->getSiteLinkMessage( $action, $siteLinkDiff, $title );
 

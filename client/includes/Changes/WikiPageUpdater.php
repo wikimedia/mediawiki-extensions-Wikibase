@@ -173,7 +173,7 @@ class WikiPageUpdater implements PageUpdater {
 	 */
 	public function scheduleRefreshLinks(
 		array $titles,
-		array $rootJobParams = [],
+		array $rootJobParams,
 		$causeAction,
 		$causeAgent
 	) {

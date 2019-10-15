@@ -60,7 +60,7 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	public function __construct(
 		EntityContentDataCodec $codec,
 		$blob,
-		$contentFormat = null,
+		$contentFormat,
 		$entityType,
 		EntityId $entityId = null
 	) {

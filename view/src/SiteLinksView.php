@@ -109,7 +109,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( array $siteLinks, ItemId $itemId = null, array $groups ) {
+	public function getHtml( array $siteLinks, ?ItemId $itemId, array $groups ) {
 		$html = '';
 
 		if ( empty( $groups ) ) {
@@ -156,7 +156,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForSiteLinkGroup( array $siteLinks, ItemId $itemId = null, $group ) {
+	private function getHtmlForSiteLinkGroup( array $siteLinks, ?ItemId $itemId, $group ) {
 		$siteLinksForTable = $this->getSiteLinksForTable(
 			$this->getSitesForGroup( $group ),
 			$siteLinks

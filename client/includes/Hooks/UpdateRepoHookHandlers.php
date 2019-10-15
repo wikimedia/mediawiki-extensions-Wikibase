@@ -142,7 +142,7 @@ class UpdateRepoHookHandlers {
 		User &$user,
 		$reason,
 		$id,
-		Content $content = null,
+		?Content $content,
 		LogEntry $logEntry
 	) {
 		$handler = self::newFromGlobalState();

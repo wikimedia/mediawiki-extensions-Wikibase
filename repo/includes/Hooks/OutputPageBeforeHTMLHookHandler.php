@@ -103,7 +103,7 @@ class OutputPageBeforeHTMLHookHandler {
 		EntityFactory $entityFactory,
 		$cookiePrefix,
 		OutputPageEditability $editability,
-		$isExternallyRendered = false,
+		$isExternallyRendered,
 		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages
 	) {
 		$this->templateFactory = $templateFactory;

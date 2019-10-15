@@ -365,7 +365,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
-	private function getSiteLink( Item $item = null, $siteId ) {
+	private function getSiteLink( ?Item $item, $siteId ) {
 		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
 			return '';
 		}
@@ -382,7 +382,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	private function getBadges( Item $item = null, $siteId ) {
+	private function getBadges( ?Item $item, $siteId ) {
 		if ( $item === null || !$item->getSiteLinkList()->hasLinkWithSiteId( $siteId ) ) {
 			return [];
 		}

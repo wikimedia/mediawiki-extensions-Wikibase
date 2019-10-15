@@ -69,7 +69,7 @@ class RepoItemLinkGenerator {
 	 *
 	 * @return string|null HTML or null for no link
 	 */
-	public function getLink( Title $title, $action, $hasLangLinks, array $noExternalLangLinks = null, $prefixedId ) {
+	public function getLink( Title $title, $action, $hasLangLinks, ?array $noExternalLangLinks, $prefixedId ) {
 		if ( $this->canHaveLink( $title, $action, $noExternalLangLinks ) ) {
 			$entityId = null;
 

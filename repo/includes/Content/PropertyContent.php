@@ -136,7 +136,7 @@ class PropertyContent extends EntityContent {
 		return !$this->isRedirect() && ( !$this->propertyHolder || $this->getProperty()->isEmpty() );
 	}
 
-	protected function getParserOutputFromEntityView( $revisionId = null, ParserOptions $options, $generateHtml = true ) {
+	protected function getParserOutputFromEntityView( $revisionId, ParserOptions $options, $generateHtml = true ) {
 		$output = parent::getParserOutputFromEntityView( $revisionId, $options, $generateHtml );
 		$output->recordOption( 'termboxVersion' );
 		return $output;

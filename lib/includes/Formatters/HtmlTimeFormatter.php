@@ -40,7 +40,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 *  returns the formatted date and time, but not the calendar model. Must return HTML.
 	 */
 	public function __construct(
-		FormatterOptions $options = null,
+		?FormatterOptions $options,
 		ValueFormatter $dateTimeFormatter
 	) {
 		parent::__construct( $options );

@@ -12,7 +12,7 @@ class GenericChangeOpResult implements ChangeOpResult {
 	private $entityId;
 	private $isEntityChanged;
 
-	public function __construct( EntityId $entityId = null, $isEntityChanged ) {
+	public function __construct( ?EntityId $entityId, $isEntityChanged ) {
 		$this->entityId = $entityId;
 		$this->isEntityChanged = $isEntityChanged;
 	}

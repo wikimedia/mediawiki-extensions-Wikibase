@@ -142,9 +142,9 @@ class ViewFactory {
 		LanguageNameLookup $languageNameLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		NumberLocalizer $numberLocalizer,
-		array $siteLinkGroups = [],
-		array $specialSiteLinkGroups = [],
-		array $badgeItems = [],
+		array $siteLinkGroups,
+		array $specialSiteLinkGroups,
+		array $badgeItems,
 		LocalizedTextProvider $textProvider,
 		SpecialPageLinker $specialPageLinker
 	) {

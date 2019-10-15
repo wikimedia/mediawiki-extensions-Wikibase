@@ -199,7 +199,7 @@ class EntityDataSerializationService {
 	 */
 	private function rdfSerialize(
 		EntityRevision $entityRevision,
-		RedirectRevision $followedRedirect = null,
+		?RedirectRevision $followedRedirect,
 		array $incomingRedirects,
 		RdfBuilder $rdfBuilder,
 		$flavor = null
@@ -258,7 +258,7 @@ class EntityDataSerializationService {
 	 */
 	private function addIncomingRedirects(
 		EntityId $targetId,
-		EntityRedirect $followedRedirect = null,
+		?EntityRedirect $followedRedirect,
 		array $incomingRedirects,
 		RdfBuilder $rdfBuilder
 	) {

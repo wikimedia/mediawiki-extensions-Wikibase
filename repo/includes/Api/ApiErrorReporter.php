@@ -281,7 +281,7 @@ class ApiErrorReporter {
 	 * @throws ApiUsageException always
 	 * @throws LogicException
 	 */
-	private function trackAndDieWithError( MessageSpecifier $msg, $errorCode, array $extraData = null, $httpRespCode ) {
+	private function trackAndDieWithError( MessageSpecifier $msg, $errorCode, ?array $extraData, $httpRespCode ) {
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
 

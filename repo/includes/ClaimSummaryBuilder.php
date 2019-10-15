@@ -50,7 +50,7 @@ class ClaimSummaryBuilder {
 	 *
 	 * @return Summary
 	 */
-	public function buildClaimSummary( Statement $oldStatement = null, Statement $newStatement ) {
+	public function buildClaimSummary( ?Statement $oldStatement, Statement $newStatement ) {
 		$guid = $newStatement->getGuid();
 
 		$summary = new Summary( $this->apiModuleName );
