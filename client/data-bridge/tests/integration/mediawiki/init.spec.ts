@@ -12,6 +12,7 @@ import {
 } from '../../util/mocks';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
+import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 
 const manager = jest.fn();
 const dialog = {
@@ -78,6 +79,9 @@ describe( 'init', () => {
 		);
 		expectedServices.setMessagesRepository(
 			new MwMessagesRepository( ( window as MwWindow ).mw.message ),
+		);
+		expectedServices.setWikibaseRepoConfigRepository(
+			new ForeignApiRepoConfigRepository( ForeignApi ),
 		);
 		const entityId = 'Q5';
 		const propertyId = 'P4711';
