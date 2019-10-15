@@ -6,7 +6,7 @@
 ( function( QUnit, valueview ) {
 	'use strict';
 
-	var ViewState = valueview.ViewState,
+	var ViewState = require( './../../src/jquery.valueview.ViewState.js' ),
 		MockViewState = valueview.tests.MockViewState;
 
 	QUnit.module( 'jquery.valueview.MockViewState' );
@@ -83,14 +83,13 @@
 	testCases.forEach( function ( params ) {
 		QUnit.test( 'constructor', function( assert ) {
 			var viewState = new MockViewState( params.constructorArg );
-
 			assert.ok(
 				viewState instanceof MockViewState,
 				'MockViewState has been created successfully'
 			);
 
-			assert.ok(
-				viewState instanceof ViewState,
+			assert.notEqual(
+				viewState.getFormattedValue(), 'undefined',
 				'Constructed MockViewState is instanceof ViewState'
 			);
 		} );

@@ -76,7 +76,7 @@ $.valueview = $.valueview || {};
 	 * @constructor
 	 *
 	 * @param {HTMLElement|jQuery} viewPortNode
-	 * @param {jQuery.valueview.ViewState} relatedViewState
+	 * @param {ViewState} relatedViewState
 	 * @param {util.Notifier} [valueViewNotifier=util.Notifier()]
 	 *        Required so the `Expert` can notify the `valueview` about certain events. The
 	 *        following notification keys can be used:
@@ -88,12 +88,12 @@ $.valueview = $.valueview || {};
 	 * @param {Object} [options={}]
 	 *
 	 * @throws {Error} if `viewPortNode` is not or does not feature a proper DOM node.
-	 * @throws {Error} relatedViewState is not a `jQuery.valueview.ViewState` instance.
+	 * @throws {Error} relatedViewState is not a `ViewState` instance.
 	 * @throws {Error} if `valueViewNotifier` is not an `util.Notifier` instance.
 	 * @throws {Error} if neither `messages` nor `messageProvider` is given.
 	 */
 	vv.Expert = function( viewPortNode, relatedViewState, valueViewNotifier, options ) {
-		if ( !( relatedViewState instanceof vv.ViewState ) ) {
+		if ( ( typeof relatedViewState.getFormattedValue() === 'undefined' ) ) {
 			throw new Error( 'No ViewState object was provided to the valueview expert' );
 		}
 
@@ -160,7 +160,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Object representing the state of the related `valueview`.
-		 * @property {jQuery.valueview.ViewState}
+		 * @property {ViewState}
 		 * @protected
 		 */
 		_viewState: null,
@@ -253,7 +253,7 @@ $.valueview = $.valueview || {};
 		 * `Expert` reflects that state, so everything that is true for the related view, is also
 		 * true for the `Expert` (e.g. whether it is in edit mode or disabled).
 		 *
-		 * @return {jQuery.valueview.ViewState}
+		 * @return {ViewState}
 		 */
 		viewState: function() {
 			return this._viewState;

@@ -1,6 +1,8 @@
 ( function( dv, vf, vp ) {
 'use strict';
 
+var ViewState = require( './jquery.valueview.ViewState.js' );
+
 var PARENT = $.Widget;
 
 /**
@@ -918,10 +920,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * passed if information about the view should be revealed to some function or constructor
 	 * without making the whole view object available.
 	 *
-	 * @return {jQuery.valueview.ViewState}
+	 * @return {ViewState}
 	 */
 	viewState: function() {
-		return new $.valueview.ViewState( this );
+		return new ViewState( this );
 	},
 
 	/**

@@ -40,9 +40,9 @@ to the `ExpertExtender` instance.
 `Expert`s are managed by `jQuery.valueview.ExpertStore` instance which provides its `Expert`s to
 `jQuery.valueview`.
 
-### jQuery.valueview.ViewState
+### ViewState
 
-`jQuery.valueview.ViewState` acts as a *Facade* linking `Expert`s and `jQuery.valueview`.
+`ViewState` acts as a *Facade* linking `Expert`s and `jQuery.valueview`.
 `ViewState` allows `Expert`s to observe certain aspects of `jQuery.valueview` and enables `Expert`s
 to update the linked `jQuery.valueview` instance.
 
@@ -123,14 +123,14 @@ strings (which may be accompanied by some options) to `DataValue` instances.
 Since `Expert`s only are used for editing values, they are constructed when starting edit mode and
 destroyed after leaving edit mode. `Expert`s have the following lifecycle:
 * `_init()`: Load parsed, formatted and raw (text) values from the `jQuery.valueview` instance
-  linked via `jQuery.valueview.ViewState` and initialize DOM.
+  linked via `ViewState` and initialize DOM.
 * Edit loop
 	* (User edits)
 	* `Expert` calls `viewNotifier.notify( 'change' )` and triggers parsing and formatting.
 	* `rawValue()`: Return the current raw (text) value.
 	* (optional) `preview.showSpinner()`: Replace preview with a loading spinner.
 	* `draw()`: (Re-)draw non-editable parts of the `Expert` using the (new) parsed and formatted
-	  value from the `jQuery.valueview` instance (via `jQuery.valueview.ViewState`)
+	  value from the `jQuery.valueview` instance (via `ViewState`)
 * `destroy()`: Destroy DOM.
 
 Other methods an `Expert` needs to provide:
