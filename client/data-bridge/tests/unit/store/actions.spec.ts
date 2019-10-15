@@ -31,6 +31,7 @@ import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTyp
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
+import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 
 describe( 'root/actions', () => {
 	const entityLabelRepository = {
@@ -81,6 +82,14 @@ describe( 'root/actions', () => {
 			} );
 		}
 
+		function initAction( services: {
+			entityLabelRepository?: EntityLabelRepository;
+		} = {} ): Function {
+			return ( actions as Function )(
+				services.entityLabelRepository || entityLabelRepository,
+			)[ BRIDGE_INIT ];
+		}
+
 		it( `commits to ${EDITFLOW_SET}`, () => {
 			const editFlow = EditFlow.OVERWRITE;
 			const context = mockedStore();
@@ -91,7 +100,7 @@ describe( 'root/actions', () => {
 				entityId: '',
 			};
 
-			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
+			return initAction()( context, information ).then( () => {
 				expect( context.commit ).toHaveBeenCalledWith(
 					EDITFLOW_SET,
 					editFlow,
@@ -109,7 +118,7 @@ describe( 'root/actions', () => {
 				entityId: '',
 			};
 
-			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
+			return initAction()( context, information ).then( () => {
 				expect( context.commit ).toHaveBeenCalledWith(
 					PROPERTY_TARGET_SET,
 					propertyId,
@@ -127,7 +136,7 @@ describe( 'root/actions', () => {
 				entityId,
 			};
 
-			return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ]( context, information ).then( () => {
+			return initAction()( context, information ).then( () => {
 				expect( context.dispatch ).toHaveBeenCalledWith(
 					action( NS_ENTITY, ENTITY_INIT ),
 					{ 'entity': entityId },
@@ -156,10 +165,7 @@ describe( 'root/actions', () => {
 					} ),
 				};
 
-				return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-					context,
-					information,
-				).then( () => {
+				return initAction( { entityLabelRepository } )( context, information ).then( () => {
 					expect( context.commit ).toHaveBeenCalledWith(
 						TARGET_LABEL_SET,
 						term,
@@ -184,10 +190,7 @@ describe( 'root/actions', () => {
 					} ),
 				};
 
-				return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-					context,
-					information,
-				).then( () => {
+				return initAction( { entityLabelRepository } )( context, information ).then( () => {
 					expect( context.commit ).not.toHaveBeenCalledWith( TARGET_LABEL_SET );
 					expect( entityLabelRepository.getLabel ).toHaveBeenCalledWith( propertyId );
 				} );
@@ -204,10 +207,7 @@ describe( 'root/actions', () => {
 			it( `commits to ${APPLICATION_STATUS_SET} on successful entity lookup`, () => {
 				const context = mockedStore();
 
-				return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-					context,
-					information,
-				).then( () => {
+				return initAction()( context, information ).then( () => {
 					expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.READY );
 				} );
 			} );
@@ -218,10 +218,7 @@ describe( 'root/actions', () => {
 						dispatch: () => Promise.reject(),
 					} );
 
-					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-						context,
-						information,
-					).catch( () => {
+					return initAction()( context, information ).catch( () => {
 						expect( context.commit ).toHaveBeenCalledWith(
 							APPLICATION_STATUS_SET,
 							ApplicationStatus.ERROR,
@@ -247,10 +244,7 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-						context,
-						information,
-					).then( () => {
+					return initAction()( context, information ).then( () => {
 						expect(
 							context.getters[ getter(
 								NS_ENTITY,
@@ -283,10 +277,7 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-						context,
-						information,
-					).then( () => {
+					return initAction()( context, information ).then( () => {
 						expect(
 							context.getters[ getter(
 								NS_ENTITY,
@@ -319,10 +310,7 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-						context,
-						information,
-					).then( () => {
+					return initAction()( context, information ).then( () => {
 						expect(
 							context.getters[ getter(
 								NS_ENTITY,
@@ -355,9 +343,7 @@ describe( 'root/actions', () => {
 						},
 					);
 
-					return ( actions as Function )( entityLabelRepository )[ BRIDGE_INIT ](
-						context, information,
-					).then( () => {
+					return initAction()( context, information ).then( () => {
 						expect(
 							context.getters[ getter(
 								NS_ENTITY,
@@ -376,6 +362,14 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( BRIDGE_SET_TARGET_VALUE, () => {
+		function setTargetValueAction( services: {
+			entityLabelRepository?: EntityLabelRepository;
+		} = {} ): Function {
+			return ( actions as Function )(
+				services.entityLabelRepository || entityLabelRepository,
+			)[ BRIDGE_SET_TARGET_VALUE ];
+		}
+
 		it( 'rejects if the store is not ready and switch into error state', async () => {
 			const context = newMockStore( {
 				state: {
@@ -383,7 +377,7 @@ describe( 'root/actions', () => {
 				},
 			} );
 			await expect(
-				( actions as Function )( entityLabelRepository )[ BRIDGE_SET_TARGET_VALUE ](
+				setTargetValueAction()(
 					context,
 					{
 						path: null,
@@ -415,7 +409,7 @@ describe( 'root/actions', () => {
 			} );
 
 			await expect(
-				( actions as Function )( entityLabelRepository )[ BRIDGE_SET_TARGET_VALUE ](
+				setTargetValueAction()(
 					context,
 					{
 						value: {
@@ -458,7 +452,7 @@ describe( 'root/actions', () => {
 				value: dataValue,
 			};
 
-			return ( actions as Function )( entityLabelRepository )[ BRIDGE_SET_TARGET_VALUE ](
+			return setTargetValueAction()(
 				context,
 				dataValue,
 			).then( () => {
@@ -475,6 +469,14 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( BRIDGE_SAVE, () => {
+		function saveAction( services: {
+			entityLabelRepository?: EntityLabelRepository;
+		} = {} ): Function {
+			return ( actions as Function )(
+				services.entityLabelRepository || entityLabelRepository,
+			)[ BRIDGE_SAVE ];
+		}
+
 		it( 'rejects if the store is not ready and switch into error state', async () => {
 			const context = newMockStore( {
 				state: {
@@ -482,9 +484,7 @@ describe( 'root/actions', () => {
 				},
 			} );
 
-			await expect(
-				( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ),
-			).rejects.toBeDefined();
+			await expect( saveAction()( context ) ).rejects.toBeDefined();
 			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
 			expect( context.commit ).toHaveBeenCalledWith(
 				APPLICATION_STATUS_SET,
@@ -505,9 +505,7 @@ describe( 'root/actions', () => {
 				} ),
 			} );
 
-			await expect(
-				( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ),
-			).rejects.toBe( sampleError );
+			await expect( saveAction()( context ) ).rejects.toBe( sampleError );
 
 			expect( context.commit ).toHaveBeenCalledWith(
 				APPLICATION_STATUS_SET,
@@ -525,7 +523,7 @@ describe( 'root/actions', () => {
 				} ),
 			} );
 
-			return ( actions as Function )( entityLabelRepository )[ BRIDGE_SAVE ]( context ).then( () => {
+			return saveAction()( context ).then( () => {
 				expect( context.dispatch ).toHaveBeenCalledWith( action( NS_ENTITY, ENTITY_SAVE ) );
 				expect( context.dispatch ).toHaveBeenCalledTimes( 1 );
 			} );
