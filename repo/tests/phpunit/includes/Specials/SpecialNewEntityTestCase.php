@@ -55,6 +55,9 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$this->assertEntityMatchesFormData( $formData, $entity );
 	}
 
+	/**
+	 * @group Broken
+	 */
 	public function testExceptionWhenUserBlockedOnNamespace() {
 		$user = $this->getTestUser()->getUser();
 		$block = $this->getMockBuilder( AbstractBlock::class )
