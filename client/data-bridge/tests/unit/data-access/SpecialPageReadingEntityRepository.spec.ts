@@ -5,7 +5,7 @@ import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 
 function jQueryGetMock( successObject: null | unknown, rejectData?: unknown ): JQueryStatic {
 	const jQueryMock = {
-		get: () => {
+		get(): any {
 			if ( successObject !== null ) {
 				return Promise.resolve( successObject );
 			}

@@ -8,7 +8,7 @@ import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWit
 
 function mockForeignApi( successObject?: unknown, rejectData?: unknown ): ForeignApi {
 	return {
-		get: (): any => {
+		get(): any {
 			if ( successObject ) {
 				return Promise.resolve( successObject );
 			}
