@@ -7,6 +7,7 @@ import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabel
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
+import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -35,6 +36,11 @@ jest.mock( '@/data-access/MwLanguageInfoRepository', () => {
 const mockMessagesRepository = {};
 jest.mock( '@/data-access/MwMessagesRepository', () => {
 	return jest.fn().mockImplementation( () => mockMessagesRepository );
+} );
+
+const mockWikibaseRepoConfigRepository = {};
+jest.mock( '@/data-access/ForeignApiRepoConfigRepository', () => {
+	return jest.fn().mockImplementation( () => mockWikibaseRepoConfigRepository );
 } );
 
 function mockMwWindow( options: {
@@ -213,6 +219,25 @@ describe( 'createServices', () => {
 		expect( MwMessagesRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwMessagesRepository ).toHaveBeenCalledWith( message );
 		expect( services.getMessagesRepository() ).toBe( mockMessagesRepository );
+	} );
+
+	it( 'creates WikibaseRepoConfigRepository', () => {
+		const wbRepo = {
+			url: 'http://localhost',
+			scriptPath: '/w',
+			articlePath: '',
+		};
+		const mwWindow = mockMwWindow( {
+			wbRepo,
+		} );
+		const services = createServices( mwWindow, [] );
+
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ForeignApiRepoConfigRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( services.getWikibaseRepoConfigRepository() )
+			.toBe( mockWikibaseRepoConfigRepository );
 	} );
 
 } );

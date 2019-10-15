@@ -5,6 +5,7 @@ import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
+import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceRepositories {
 	const services = new ServiceRepositories();
@@ -51,6 +52,10 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	) );
 
 	services.setMessagesRepository( new MwMessagesRepository( mwWindow.mw.message ) );
+
+	services.setWikibaseRepoConfigRepository( new ForeignApiRepoConfigRepository(
+		repoForeignApi,
+	) );
 
 	return services;
 }
