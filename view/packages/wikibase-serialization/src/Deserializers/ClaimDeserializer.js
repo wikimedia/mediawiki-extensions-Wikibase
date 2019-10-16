@@ -1,14 +1,14 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
+	SnakDeserializer = require( './SnakDeserializer.js' ),
 	SnakListDeserializer = require( './SnakListDeserializer.js' );
 
 /**
  * @class ClaimDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -23,7 +23,7 @@ module.exports = util.inherit( 'WbClaimDeserializer', PARENT, {
 	 * @return {datamodel.Claim}
 	 */
 	deserialize: function( serialization ) {
-		var mainSnak = ( new MODULE.SnakDeserializer ).deserialize( serialization.mainsnak ),
+		var mainSnak = ( new SnakDeserializer ).deserialize( serialization.mainsnak ),
 			qualifiers = null,
 			guid = serialization.id || null;
 
@@ -38,4 +38,4 @@ module.exports = util.inherit( 'WbClaimDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

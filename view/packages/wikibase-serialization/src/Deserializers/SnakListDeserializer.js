@@ -1,8 +1,8 @@
-( function( wb, util, $ ) {
+( function( util, $ ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
+	SnakDeserializer = require( './SnakDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
@@ -11,7 +11,7 @@ var MODULE = wb.serialization,
  * @return {datamodel.SnakList}
  */
 function addSerializedSnaksToSnakList( serializedSnaks, snaks ) {
-	var snakDeserializer = new MODULE.SnakDeserializer();
+	var snakDeserializer = new SnakDeserializer();
 
 	for( var i = 0; i < serializedSnaks.length; i++ ) {
 		snaks.push( snakDeserializer.deserialize( serializedSnaks[i] ) );
@@ -22,7 +22,7 @@ function addSerializedSnaksToSnakList( serializedSnaks, snaks ) {
 
 /**
  * @class SnakListDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -79,4 +79,4 @@ module.exports = util.inherit( 'WbSnakListDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util, jQuery ) );
+}( util, jQuery ) );

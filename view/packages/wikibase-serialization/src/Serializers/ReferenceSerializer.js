@@ -1,20 +1,20 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = require( './Serializer.js' ),
+	SnakListSerializer = require( './SnakListSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.ReferenceSerializer
- * @extends wikibase.serialization.Serializer
+ * @class ReferenceSerializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.ReferenceSerializer = util.inherit( 'WbReferenceSerializer', PARENT, {
+module.exports = util.inherit( 'WbReferenceSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -28,7 +28,7 @@ MODULE.ReferenceSerializer = util.inherit( 'WbReferenceSerializer', PARENT, {
 			throw new Error( 'Not an instance of datamodel.Reference' );
 		}
 
-		var snakListSerializer = new MODULE.SnakListSerializer(),
+		var snakListSerializer = new SnakListSerializer(),
 			snakList = reference.getSnaks(),
 			hash = reference.getHash();
 
@@ -45,5 +45,4 @@ MODULE.ReferenceSerializer = util.inherit( 'WbReferenceSerializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.ReferenceSerializer;
-}( wikibase, util ) );
+}( util ) );

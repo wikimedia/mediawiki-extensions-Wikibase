@@ -1,20 +1,20 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = require( './Serializer.js' ),
+	StatementSerializer = require( './StatementSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.StatementListSerializer
- * @extends wikibase.serialization.Serializer
+ * @class StatementListSerializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.StatementListSerializer = util.inherit( 'WbStatementListSerializer', PARENT, {
+module.exports = util.inherit( 'WbStatementListSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -29,7 +29,7 @@ MODULE.StatementListSerializer = util.inherit( 'WbStatementListSerializer', PARE
 		}
 
 		var serialization = [],
-			statementSerializer = new MODULE.StatementSerializer(),
+			statementSerializer = new StatementSerializer(),
 			statements = statementList.toArray();
 
 		for( var i = 0; i < statements.length; i++ ) {
@@ -40,5 +40,4 @@ MODULE.StatementListSerializer = util.inherit( 'WbStatementListSerializer', PARE
 	}
 } );
 
-module.exports = MODULE.StatementListSerializer;
-}( wikibase, util ) );
+}( util ) );

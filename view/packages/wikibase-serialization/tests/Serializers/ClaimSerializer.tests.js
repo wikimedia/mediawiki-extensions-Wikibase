@@ -5,9 +5,10 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.ClaimSerializer' );
+QUnit.module( 'ClaimSerializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	ClaimSerializer = require( '../../src/Serializers/ClaimSerializer.js' );
 
 var testSets = [
 	[
@@ -46,7 +47,7 @@ var testSets = [
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 2 );
-	var claimSerializer = new wb.serialization.ClaimSerializer();
+	var claimSerializer = new ClaimSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

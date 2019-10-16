@@ -1,20 +1,20 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = require( './Serializer.js' ),
+	ReferenceSerializer = require( './ReferenceSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.ReferenceListSerializer
- * @extends wikibase.serialization.Serializer
+ * @class ReferenceListSerializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.ReferenceListSerializer = util.inherit( 'WbReferenceLisSerializer', PARENT, {
+module.exports = util.inherit( 'WbReferenceLisSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -29,7 +29,7 @@ MODULE.ReferenceListSerializer = util.inherit( 'WbReferenceLisSerializer', PAREN
 		}
 
 		var serialization = [],
-			referenceSerializer = new MODULE.ReferenceSerializer(),
+			referenceSerializer = new ReferenceSerializer(),
 			references = referenceList.toArray();
 
 		for( var i = 0; i < references.length; i++ ) {
@@ -40,5 +40,4 @@ MODULE.ReferenceListSerializer = util.inherit( 'WbReferenceLisSerializer', PAREN
 	}
 } );
 
-module.exports = MODULE.ReferenceListSerializer;
-}( wikibase, util ) );
+}( util ) );

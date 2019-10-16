@@ -5,11 +5,13 @@
 ( function( wb, util, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.Deserializer' );
+QUnit.module( 'Deserializer' );
+
+var Deserializer = require( '../../src/Deserializers/Deserializer.js' );
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 1 );
-	var SomeDeserializer = util.inherit( 'WbTestDeserializer', wb.serialization.Deserializer, {} ),
+	var SomeDeserializer = util.inherit( 'WbTestDeserializer', Deserializer, {} ),
 		someDeserializer = new SomeDeserializer();
 
 	assert.throws(

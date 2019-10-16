@@ -1,14 +1,13 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
 	ReferenceDeserializer = require( './ReferenceDeserializer.js' );
 
 /**
  * @class ReferenceListDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -33,4 +32,4 @@ module.exports = util.inherit( 'WbReferenceListDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

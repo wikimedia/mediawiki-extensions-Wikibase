@@ -6,9 +6,10 @@
 ( function( wb, dv, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.SnakSerializer' );
+QUnit.module( 'SnakSerializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	SnakSerializer = require( '../../src/Serializers/SnakSerializer.js' );
 
 var testSets = [
 	[
@@ -38,7 +39,7 @@ var testSets = [
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 3 );
-	var snakSerializer = new wb.serialization.SnakSerializer();
+	var snakSerializer = new SnakSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

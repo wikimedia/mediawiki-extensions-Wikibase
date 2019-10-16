@@ -1,11 +1,9 @@
-( function( wb, util, $ ) {
+( function( util, $ ) {
 	'use strict';
-
-	var MODULE = wb.serialization;
 
 	/**
 	 * Base for deserializers.
-	 * @class wikibase.serialization.Deserializer
+	 * @class Deserializer
 	 * @abstract
 	 * @since 1.0
 	 * @license GPL-2.0+
@@ -13,7 +11,7 @@
 	 *
 	 * @constructor
 	 */
-	var SELF = MODULE.Deserializer = function WbSerializationDeserializer() {};
+	var SELF = function WbSerializationDeserializer() {};
 
 	$.extend( SELF.prototype, {
 		/**
@@ -26,4 +24,4 @@
 	} );
 
 	module.exports = SELF;
-}( wikibase, util, jQuery ) );
+}( util, jQuery ) );

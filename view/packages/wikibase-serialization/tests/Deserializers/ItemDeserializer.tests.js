@@ -5,7 +5,7 @@
 ( function( $, wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.EntityDeserializer' );
+QUnit.module( 'EntityDeserializer' );
 
 var datamodel = require( 'wikibase.datamodel' ),
 	EntityDeserializer = require( '../../src/Deserializers/EntityDeserializer.js' );

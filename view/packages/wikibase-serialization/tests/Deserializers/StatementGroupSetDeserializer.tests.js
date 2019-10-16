@@ -5,9 +5,10 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.StatementGroupSetDeserializer' );
+QUnit.module( 'StatementGroupSetDeserializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	StatementGroupSetDeserializer = require( '../../src/Deserializers/StatementGroupSetDeserializer.js' );
 
 var testSets = [
 	[
@@ -53,7 +54,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 2 );
-	var statementGroupSetDeserializer = new wb.serialization.StatementGroupSetDeserializer();
+	var statementGroupSetDeserializer = new StatementGroupSetDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(

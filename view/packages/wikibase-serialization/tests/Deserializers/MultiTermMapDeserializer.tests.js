@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.MultiTermMapDeserializer' );
+QUnit.module( 'MultiTermMapDeserializer' );
 var MultiTermMapDeserializer = require( '../../src/Deserializers/MultiTermMapDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 

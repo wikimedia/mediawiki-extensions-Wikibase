@@ -1,14 +1,14 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
+	StatementGroupSetDeserializer = require( './StatementGroupSetDeserializer.js' ),
 	FingerprintDeserializer = require( './FingerprintDeserializer.js' );
 
 /**
- * @class wikibase.serialization.PropertyDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @class PropertyDeserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -29,7 +29,7 @@ module.exports = util.inherit( 'WbPropertyDeserializer', PARENT, {
 		}
 
 		var fingerprintDeserializer = new FingerprintDeserializer(),
-			statementGroupSetDeserializer = new MODULE.StatementGroupSetDeserializer();
+			statementGroupSetDeserializer = new StatementGroupSetDeserializer();
 
 		return new datamodel.Property(
 			serialization.id,
@@ -40,4 +40,4 @@ module.exports = util.inherit( 'WbPropertyDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

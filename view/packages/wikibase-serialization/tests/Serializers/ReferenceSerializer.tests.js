@@ -5,9 +5,10 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.ReferenceSerializer' );
+QUnit.module( 'ReferenceSerializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	ReferenceSerializer = require( '../../src/Serializers/ReferenceSerializer.js' );
 
 var testSets = [
 	[
@@ -56,7 +57,7 @@ var testSets = [
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 2 );
-	var referenceSerializer = new wb.serialization.ReferenceSerializer();
+	var referenceSerializer = new ReferenceSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

@@ -1,20 +1,20 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = require( './Serializer.js' ),
+	SnakSerializer = require( './SnakSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.SnakListSerializer
- * @extends wikibase.serialization.Serializer
+ * @class SnakListSerializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.SnakListSerializer = util.inherit( 'WbSnakListSerializer', PARENT, {
+module.exports = util.inherit( 'WbSnakListSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -29,7 +29,7 @@ MODULE.SnakListSerializer = util.inherit( 'WbSnakListSerializer', PARENT, {
 		}
 
 		var serialization = {},
-			snakSerializer = new MODULE.SnakSerializer();
+			snakSerializer = new SnakSerializer();
 
 		snakList.each( function( i, snak ) {
 			var propertyId = snak.getPropertyId();
@@ -45,5 +45,4 @@ MODULE.SnakListSerializer = util.inherit( 'WbSnakListSerializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.SnakListSerializer;
-}( wikibase, util ) );
+}( util ) );

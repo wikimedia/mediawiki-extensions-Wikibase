@@ -5,9 +5,10 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.TermDeserializer' );
+QUnit.module( 'TermDeserializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	TermDeserializer = require( '../../src/Deserializers/TermDeserializer.js' );
 
 var testSets = [
 	[
@@ -18,7 +19,7 @@ var testSets = [
 
 QUnit.test( 'deserialize()', function( assert ) {
 	assert.expect( 1 );
-	var termDeserializer = new wb.serialization.TermDeserializer();
+	var termDeserializer = new TermDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

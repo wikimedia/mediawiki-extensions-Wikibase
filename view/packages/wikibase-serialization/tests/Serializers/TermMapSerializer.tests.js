@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.TermMapSerializer' );
+QUnit.module( 'TermMapSerializer' );
 
 var datamodel = require( 'wikibase.datamodel' ),
 	TermMapSerializer = require( '../../src/Serializers/TermMapSerializer.js' );

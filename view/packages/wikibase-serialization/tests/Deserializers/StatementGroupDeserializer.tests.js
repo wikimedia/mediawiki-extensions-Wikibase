@@ -8,7 +8,7 @@
 var StatementGroupDeserializer = require( '../../src/Deserializers/StatementGroupDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
-QUnit.module( 'wikibase.serialization.StatementGroupDeserializer' );
+QUnit.module( 'StatementGroupDeserializer' );
 
 var testSets = [
 	[

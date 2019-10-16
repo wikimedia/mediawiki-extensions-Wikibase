@@ -8,7 +8,7 @@
 var TermSerializer = require( './../../src/Serializers/TermSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
-QUnit.module( 'wikibase.serialization.TermSerializer' );
+QUnit.module( 'TermSerializer' );
 
 var testSets = [
 	[

@@ -5,11 +5,13 @@
 ( function( wb, util, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.Serializer' );
+QUnit.module( 'Serializer' );
+
+var Serializer = require( '../../src/Serializers/Serializer.js' );
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 1 );
-	var SomeSerializer = util.inherit( 'WbTestSerializer', wb.serialization.Serializer, {} ),
+	var SomeSerializer = util.inherit( 'WbTestSerializer', Serializer, {} ),
 		someSerializer = new SomeSerializer();
 
 	assert.throws(

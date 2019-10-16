@@ -1,14 +1,14 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
+	TermMapDeserializer = require( './TermMapDeserializer.js' ),
 	MultiTermMapDeserializer = require( './MultiTermMapDeserializer.js' );
 
 /**
- * @class wikibase.serialization.FingerprintDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @class FingerprintDeserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -22,7 +22,7 @@ module.exports = util.inherit( 'WbFingerprintDeserializer', PARENT, {
 	 * @return {datamodel.Fingerprint}
 	 */
 	deserialize: function( serialization ) {
-		var termMapDeserializer = new MODULE.TermMapDeserializer(),
+		var termMapDeserializer = new TermMapDeserializer(),
 			multiTermMapDeserializer = new MultiTermMapDeserializer();
 
 		return new datamodel.Fingerprint(
@@ -33,4 +33,4 @@ module.exports = util.inherit( 'WbFingerprintDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

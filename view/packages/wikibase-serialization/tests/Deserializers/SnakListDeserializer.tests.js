@@ -9,7 +9,7 @@
 var SnakListDeserializer = require( '../../src/Deserializers/SnakListDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
-QUnit.module( 'wikibase.serialization.SnakListDeserializer' );
+QUnit.module( 'SnakListDeserializer' );
 
 var testSets = [
 	[

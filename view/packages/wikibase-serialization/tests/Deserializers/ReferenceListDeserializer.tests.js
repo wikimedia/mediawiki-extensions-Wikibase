@@ -8,7 +8,7 @@
 var ReferenceListDeserializer = require( '../../src/Deserializers/ReferenceListDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
-QUnit.module( 'wikibase.serialization.ReferenceListDeserializer' );
+QUnit.module( 'ReferenceListDeserializer' );
 
 var testSets = [
 	[

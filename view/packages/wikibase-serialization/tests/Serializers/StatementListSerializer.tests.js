@@ -5,9 +5,10 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.StatementListSerializer' );
+QUnit.module( 'StatementListSerializer' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	StatementListSerializer = require( '../../src/Serializers/StatementListSerializer.js' );
 
 var testSets = [
 	[
@@ -32,7 +33,7 @@ var testSets = [
 
 QUnit.test( 'serialize()', function( assert ) {
 	assert.expect( 2 );
-	var statementListSerializer = new wb.serialization.StatementListSerializer();
+	var statementListSerializer = new StatementListSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.deepEqual(

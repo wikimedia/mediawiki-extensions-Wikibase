@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.SiteLinkDeserializer' );
+QUnit.module( 'SiteLinkDeserializer' );
 var SiteLinkDeserializer = require( '../../src/Deserializers/SiteLinkDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 

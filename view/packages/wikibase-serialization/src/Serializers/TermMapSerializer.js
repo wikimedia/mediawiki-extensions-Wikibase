@@ -1,13 +1,12 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
-	var TermSerializer = require( './TermSerializer.js' );
-
-var PARENT = wb.serialization.Serializer,
-	datamodel = require( 'wikibase.datamodel' );
+	var TermSerializer = require( './TermSerializer.js' ),
+		PARENT = require( './Serializer.js' ),
+		datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class TermMapSerializer
- * @extends wikibase.serialization.Serializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -42,4 +41,4 @@ module.exports = util.inherit( 'WbTermMapSerializer', PARENT, {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

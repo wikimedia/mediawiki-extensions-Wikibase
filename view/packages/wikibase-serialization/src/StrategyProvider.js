@@ -1,17 +1,15 @@
-( function( wb, $ ) {
+( function( $ ) {
 	'use strict';
 
-var MODULE = wb.serialization;
-
 /**
- * @class wikibase.serialization.StrategyProvider
+ * @class StrategyProvider
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-var SELF = MODULE.StrategyProvider = function WbSerializationStrategyProvider() {
+var SELF = function WbSerializationStrategyProvider() {
 	this._strategies = [];
 };
 
@@ -73,4 +71,4 @@ $.extend( SELF.prototype, {
 
 module.exports = SELF;
 
-}( wikibase, jQuery ) );
+}( jQuery ) );

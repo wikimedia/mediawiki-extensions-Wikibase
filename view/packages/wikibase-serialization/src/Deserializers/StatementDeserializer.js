@@ -1,22 +1,21 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
 	ReferenceListDeserializer = require( './ReferenceListDeserializer.js' ),
 	ClaimDeserializer = require( './ClaimDeserializer.js' );
 
 /**
  * @class StatementDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.StatementDeserializer = util.inherit( 'WbStatementDeserializer', PARENT, {
+module.exports = util.inherit( 'WbStatementDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -36,5 +35,4 @@ MODULE.StatementDeserializer = util.inherit( 'WbStatementDeserializer', PARENT, 
 	}
 } );
 
-module.exports = MODULE.StatementDeserializer;
-}( wikibase, util ) );
+}( util ) );

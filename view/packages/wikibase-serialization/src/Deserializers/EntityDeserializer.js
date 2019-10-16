@@ -1,7 +1,7 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var PARENT = wb.serialization.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
 	ItemDeserializer = require( './ItemDeserializer.js' ),
 	PropertyDeserializer = require( './PropertyDeserializer.js' ),
@@ -9,7 +9,7 @@ var PARENT = wb.serialization.Deserializer,
 
 /**
  * @class EntityDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -26,13 +26,13 @@ module.exports = util.inherit( 'WbEntityDeserializer', PARENT, function() {
 	);
 }, {
 	/**
-	 * @property {wikibase.serialization.StrategyProvider}
+	 * @property {StrategyProvider}
 	 * @private
 	 */
 	_strategyProvider: null,
 
 	/**
-	 * @param {wikibase.serialization.Deserializer} deserializer
+	 * @param {Deserializer} deserializer
 	 * @param {string} entityType
 	 */
 	registerStrategy: function( deserializer, entityType ) {
@@ -57,4 +57,4 @@ module.exports = util.inherit( 'WbEntityDeserializer', PARENT, function() {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

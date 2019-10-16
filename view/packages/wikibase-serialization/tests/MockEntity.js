@@ -5,7 +5,6 @@
 ( function( wb, util ) {
 'use strict';
 
-wb.serialization.tests = wb.serialization.tests || {};
 var datamodel = require( 'wikibase.datamodel' );
 
 /**
@@ -16,7 +15,7 @@ var datamodel = require( 'wikibase.datamodel' );
  * @param {string} id
  * @param {datamodel.Fingerprint} fingerprint
  */
-var SELF = wb.serialization.tests.MockEntity = util.inherit(
+var SELF = util.inherit(
 	'wbMockEntity',
 	datamodel.FingerprintableEntity,
 	function WbMockEntity( id, fingerprint ) {
@@ -41,4 +40,5 @@ var SELF = wb.serialization.tests.MockEntity = util.inherit(
 
 SELF.TYPE = 'mock';
 
+module.exports = SELF;
 }( wikibase, util ) );

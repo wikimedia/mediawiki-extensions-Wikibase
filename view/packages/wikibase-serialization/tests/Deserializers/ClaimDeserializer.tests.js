@@ -8,7 +8,7 @@
 var ClaimDeserializer = require( '../../src/Deserializers/ClaimDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
-QUnit.module( 'wikibase.serialization.ClaimDeserializer' );
+QUnit.module( 'ClaimDeserializer' );
 
 var testSets = [
 	[

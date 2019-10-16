@@ -1,21 +1,20 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' ),
 	StatementGroupDeserializer = require( './StatementGroupDeserializer.js' );
 
 /**
- * @class wikibase.serialization.StatementGroupSetDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @class StatementGroupSetDeserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.StatementGroupSetDeserializer = util.inherit( 'WbStatementGroupSetDeserializer', PARENT, {
+module.exports = util.inherit( 'WbStatementGroupSetDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -35,4 +34,4 @@ MODULE.StatementGroupSetDeserializer = util.inherit( 'WbStatementGroupSetDeseria
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

@@ -1,20 +1,21 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = require( './Serializer.js' ),
+	ClaimSerializer = require( './ClaimSerializer.js' ),
+	ReferenceListSerializer = require( './ReferenceListSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.StatementSerializer
- * @extends wikibase.serialization.Serializer
+ * @class StatementSerializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
+module.exports = util.inherit( 'WbStatementSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -28,8 +29,8 @@ MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 			throw new Error( 'Not an instance of datamodel.Statement' );
 		}
 
-		var claimSerializer = new MODULE.ClaimSerializer(),
-			referenceListSerializer = new MODULE.ReferenceListSerializer(),
+		var claimSerializer = new ClaimSerializer(),
+			referenceListSerializer = new ReferenceListSerializer(),
 			references = statement.getReferences(),
 			rank = statement.getRank();
 
@@ -53,5 +54,4 @@ MODULE.StatementSerializer = util.inherit( 'WbStatementSerializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.StatementSerializer;
-}( wikibase, util ) );
+}( util ) );

@@ -5,18 +5,19 @@
 ( function( wb, QUnit ) {
 	'use strict';
 
-QUnit.module( 'wikibase.serialization.StrategyProvider' );
+QUnit.module( 'StrategyProvider' );
 
 var testSets = [
 	{
 		strategies: [ [ 0, 'key1' ], [ 1, 'key2' ] ]
 	}
-];
+],
+	StrategyProvider = require( '../src/StrategyProvider.js' );
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 1 );
 	assert.ok(
-		( new wb.serialization.StrategyProvider() ) instanceof wb.serialization.StrategyProvider,
+		( new StrategyProvider() ) instanceof StrategyProvider,
 		'Instantiated StrategyProvider.'
 	);
 } );
@@ -24,7 +25,7 @@ QUnit.test( 'Constructor', function( assert ) {
 QUnit.test( 'registerStrategy() & getStrategyFor()', function( assert ) {
 	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var strategyProvider = new wb.serialization.StrategyProvider();
+		var strategyProvider = new StrategyProvider();
 
 		for( var j = 0; j < testSets[i].strategies.length; j++ ) {
 			strategyProvider.registerStrategy(

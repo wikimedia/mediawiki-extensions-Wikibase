@@ -3,6 +3,8 @@
 JavaScript library containing serializers and deserializers for the Wikibase DataModel.
 
 ## Release notes
+### 5.0.0 (dev)
+* Removed hooking into global variable wikibase.serialization
 
 ### 4.0.0 (2019-10-08)
 * Added index.js as the public interface

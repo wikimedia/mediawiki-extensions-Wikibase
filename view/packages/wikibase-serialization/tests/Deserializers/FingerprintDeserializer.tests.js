@@ -5,7 +5,7 @@
 ( function( wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.FingerprintDeserializer' );
+QUnit.module( 'FingerprintDeserializer' );
 var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 

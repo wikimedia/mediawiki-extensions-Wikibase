@@ -1,20 +1,19 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.TermDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @class TermDeserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.TermDeserializer = util.inherit( 'WbTermDeserializer', PARENT, {
+module.exports = util.inherit( 'WbTermDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -25,5 +24,4 @@ MODULE.TermDeserializer = util.inherit( 'WbTermDeserializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.TermDeserializer;
-}( wikibase, util ) );
+}( util ) );

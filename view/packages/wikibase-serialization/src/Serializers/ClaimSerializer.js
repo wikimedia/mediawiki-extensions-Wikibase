@@ -1,20 +1,21 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Serializer,
+var PARENT = require( './Serializer.js' ),
+	SnakSerializer = require( './SnakSerializer.js' ),
+	SnakListSerializer = require( './SnakListSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.ClaimSerializer
- * @extends wikibase.serialization.Serializer
+ * @class ClaimSerializer
+ * @extends Serializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
+module.exports = util.inherit( 'WbClaimSerializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -28,8 +29,8 @@ MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 			throw new Error( 'Not an instance of datamodel.Claim' );
 		}
 
-		var snakSerializer = new MODULE.SnakSerializer(),
-			snakListSerializer = new MODULE.SnakListSerializer(),
+		var snakSerializer = new SnakSerializer(),
+			snakListSerializer = new SnakListSerializer(),
 			guid = claim.getGuid(),
 			qualifiers = claim.getQualifiers();
 
@@ -51,5 +52,4 @@ MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.ClaimSerializer;
-}( wikibase, util ) );
+}( util ) );

@@ -5,19 +5,21 @@
 ( function( $, wb, QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.serialization.EntityDeserializer' );
+QUnit.module( 'EntityDeserializer' );
 var FingerprintDeserializer = require( '../../src/Deserializers/FingerprintDeserializer.js' ),
+	datamodel = require( 'wikibase.datamodel' ),
+	MockEntity = require( '../MockEntity.js' ),
 	EntityDeserializer = require( '../../src/Deserializers/EntityDeserializer.js' ),
-	datamodel = require( 'wikibase.datamodel' );
+	Deserializer = require( '../../src/Deserializers/Deserializer.js' );
 
 /**
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  *
  * @constructor
  */
 var MockEntityDeserializer = util.inherit(
 	'WbMockEntityDeserializer',
-	wb.serialization.Deserializer,
+	Deserializer,
 {
 	/**
 	 * @inheritdoc
@@ -25,13 +27,13 @@ var MockEntityDeserializer = util.inherit(
 	 * @return {MockEntity}
 	 */
 	deserialize: function( serialization ) {
-		if( serialization.type !== wb.serialization.tests.MockEntity.TYPE ) {
+		if( serialization.type !== MockEntity.TYPE ) {
 			throw new Error( 'Serialization does not resolve to a MockEntity' );
 		}
 
 		var fingerprintDeserializer = new FingerprintDeserializer();
 
-		return new wb.serialization.tests.MockEntity(
+		return new MockEntity(
 			serialization.id,
 			fingerprintDeserializer.deserialize( serialization )
 		);
@@ -140,13 +142,13 @@ QUnit.test( 'registerStrategy()', function( assert ) {
 
 	entityDeserializer.registerStrategy(
 		new MockEntityDeserializer(),
-		wb.serialization.tests.MockEntity.TYPE
+		MockEntity.TYPE
 	);
 
 	var mockEntity = entityDeserializer.deserialize( mockEntitySerialization );
 
 	assert.ok(
-		mockEntity instanceof wb.serialization.tests.MockEntity,
+		mockEntity instanceof MockEntity,
 		'Deserialized Entity after registering a proper Deserializer.'
 	);
 } );

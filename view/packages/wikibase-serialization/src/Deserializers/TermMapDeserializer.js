@@ -1,20 +1,20 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
+	TermDeserializer = require( './TermDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
- * @class wikibase.serialization.TermMapDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @class TermMapDeserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  */
-MODULE.TermMapDeserializer = util.inherit( 'WbTermMapDeserializer', PARENT, {
+module.exports = util.inherit( 'WbTermMapDeserializer', PARENT, {
 	/**
 	 * @inheritdoc
 	 *
@@ -22,7 +22,7 @@ MODULE.TermMapDeserializer = util.inherit( 'WbTermMapDeserializer', PARENT, {
 	 */
 	deserialize: function( serialization ) {
 		var terms = {},
-			termDeserializer = new MODULE.TermDeserializer();
+			termDeserializer = new TermDeserializer();
 
 		for( var languageCode in serialization ) {
 			terms[languageCode] = termDeserializer.deserialize( serialization[languageCode] );
@@ -32,5 +32,4 @@ MODULE.TermMapDeserializer = util.inherit( 'WbTermMapDeserializer', PARENT, {
 	}
 } );
 
-module.exports = MODULE.TermMapDeserializer;
-}( wikibase, util ) );
+}( util ) );

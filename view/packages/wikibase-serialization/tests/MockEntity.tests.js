@@ -5,9 +5,10 @@
 ( function( wb, QUnit ) {
 	'use strict';
 
-QUnit.module( 'wikibase.serialization.MockEntity' );
+QUnit.module( 'MockEntity' );
 
-var datamodel = require( 'wikibase.datamodel' );
+var datamodel = require( 'wikibase.datamodel' ),
+	MockEntity = require( './MockEntity.js' );
 
 var testSets = [
 	[
@@ -32,9 +33,9 @@ var testSets = [
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var mockEntity = new wb.serialization.tests.MockEntity( testSets[i][0], testSets[i][1] );
+		var mockEntity = new MockEntity( testSets[i][0], testSets[i][1] );
 		assert.ok(
-			mockEntity instanceof wb.serialization.tests.MockEntity,
+			mockEntity instanceof MockEntity,
 			'Test set #' + i + ': Instantiated MockEntity object.'
 		);
 	}
@@ -43,7 +44,7 @@ QUnit.test( 'Constructor', function( assert ) {
 QUnit.test( 'isEmpty()', function( assert ) {
 	assert.expect( 2 );
 	assert.ok(
-		( new wb.serialization.tests.MockEntity(
+		( new MockEntity(
 			'i am an id',
 			new datamodel.Fingerprint(
 				new datamodel.TermMap(),
@@ -55,7 +56,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	);
 
 	assert.ok(
-		!( new wb.serialization.tests.MockEntity(
+		!( new MockEntity(
 			'i am an id',
 			new datamodel.Fingerprint(
 				new datamodel.TermMap( { de: new datamodel.Term( 'de', 'de-term' ) } ),
@@ -70,10 +71,10 @@ QUnit.test( 'isEmpty()', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var property1 = new wb.serialization.tests.MockEntity( testSets[i][0], testSets[i][1] );
+		var property1 = new MockEntity( testSets[i][0], testSets[i][1] );
 
 		for( var j = 0; j < testSets.length; j++ ) {
-			var property2 = new wb.serialization.tests.MockEntity( testSets[j][0], testSets[j][1] );
+			var property2 = new MockEntity( testSets[j][0], testSets[j][1] );
 
 			if( i === j ) {
 				assert.ok(

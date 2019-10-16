@@ -1,15 +1,15 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
 	Item = require( 'wikibase.datamodel' ).Item,
+	StatementGroupSetDeserializer = require( './StatementGroupSetDeserializer.js' ),
 	FingerprintDeserializer = require( './FingerprintDeserializer.js' ),
 	SiteLinkSetDeserializer = require( './SiteLinkSetDeserializer.js' );
 
 /**
- * @class wikibase.serialization.ItemDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @class ItemDeserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -30,7 +30,7 @@ module.exports = util.inherit( 'WbItemDeserializer', PARENT, {
 		}
 
 		var fingerprintDeserializer = new FingerprintDeserializer(),
-			statementGroupSetDeserializer = new MODULE.StatementGroupSetDeserializer(),
+			statementGroupSetDeserializer = new StatementGroupSetDeserializer(),
 			siteLinkSetDeserializer = new SiteLinkSetDeserializer();
 
 		return new Item(
@@ -42,4 +42,4 @@ module.exports = util.inherit( 'WbItemDeserializer', PARENT, {
 	}
 } );
 
-}( wikibase, util ) );
+}( util ) );

@@ -1,13 +1,13 @@
-( function( wb, util, $ ) {
+( function( util, $ ) {
 	'use strict';
 
-var MODULE = wb.serialization,
-	PARENT = MODULE.Deserializer,
+var PARENT = require( './Deserializer.js' ),
+	StatementListDeserializer = require( './StatementListDeserializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 /**
  * @class StatementGroupDeserializer
- * @extends wikibase.serialization.Deserializer
+ * @extends Deserializer
  * @since 2.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -27,11 +27,11 @@ module.exports = util.inherit( 'WbStatementGroupDeserializer', PARENT, {
 			throw new Error( 'Cannot deserialize empty serialization' );
 		}
 
-		var statementListDeserializer = new MODULE.StatementListDeserializer(),
+		var statementListDeserializer = new StatementListDeserializer(),
 			statementList = statementListDeserializer.deserialize( serialization );
 
 		return new datamodel.StatementGroup( statementList.getPropertyIds()[0], statementList );
 	}
 } );
 
-}( wikibase, util, jQuery ) );
+}( util, jQuery ) );
