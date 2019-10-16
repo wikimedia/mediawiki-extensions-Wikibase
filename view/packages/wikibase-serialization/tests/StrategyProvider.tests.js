@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 	'use strict';
 
 QUnit.module( 'StrategyProvider' );
@@ -43,4 +43,4 @@ QUnit.test( 'registerStrategy() & getStrategyFor()', function( assert ) {
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
 QUnit.module( 'SiteLinkDeserializer' );
@@ -32,4 +32,4 @@ QUnit.test( 'deserialize()', function( assert ) {
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

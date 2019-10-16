@@ -7,8 +7,7 @@
 	},
 	"globals": {
 		"dataValues": false,
-		"util": false,
-		"wikibase": false
+		"util": false
 	},
 	"rules": {
 		"computed-property-spacing": "off",

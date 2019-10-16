@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, util ) {
+( function( util ) {
 'use strict';
 
 var datamodel = require( 'wikibase.datamodel' );
@@ -41,4 +41,4 @@ var SELF = util.inherit(
 SELF.TYPE = 'mock';
 
 module.exports = SELF;
-}( wikibase, util ) );
+}( util ) );
