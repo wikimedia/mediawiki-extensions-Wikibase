@@ -15,11 +15,10 @@ return call_user_func( function() {
 
 	return [
 		'jquery.valueview.tests.MockViewState' => $moduleTemplate + [
-			'scripts' => [
+			'packageFiles' => [
 				'jquery.valueview.tests.MockViewState.js',
 			],
 			'dependencies' => [
-				'jquery.valueview.ViewState',
 				'util.inherit',
 			],
 		],
