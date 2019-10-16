@@ -45,388 +45,40 @@ return call_user_func( function() {
 		'wikibase.datamodel' => $wikibaseDatamodelPaths + [
 			'packageFiles' => [
 				'index.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.Entity',
-				'wikibase.datamodel.EntityId',
-				'wikibase.datamodel.Fingerprint',
-				'wikibase.datamodel.Item',
-				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.MultiTermMap',
-				'wikibase.datamodel.Property',
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.datamodel.PropertySomeValueSnak',
-				'wikibase.datamodel.PropertyValueSnak',
-				'wikibase.datamodel.Reference',
-				'wikibase.datamodel.ReferenceList',
-				'wikibase.datamodel.SiteLink',
-				'wikibase.datamodel.SiteLinkSet',
-				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.SnakList',
-				'wikibase.datamodel.Statement',
-				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.StatementGroupSet',
-				'wikibase.datamodel.StatementList',
-				'wikibase.datamodel.Term',
-				'wikibase.datamodel.TermMap',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
 
-		'wikibase.datamodel.__namespace' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'__namespace.js',
-			],
-			'dependencies' => [
-				'wikibase', // Just for the namespace
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Claim' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'Claim.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.SnakList',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Entity' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'Entity.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.FingerprintableEntity' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'FingerprintableEntity.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.Entity',
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.EntityId' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'EntityId.js',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Fingerprint' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'Fingerprint.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.MultiTermMap',
-				'wikibase.datamodel.TermMap',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Group' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'Group.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.GroupableCollection' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'GroupableCollection.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Item' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'Item.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.FingerprintableEntity',
-				'wikibase.datamodel.Fingerprint',
-				'wikibase.datamodel.SiteLinkSet',
-				'wikibase.datamodel.StatementGroupSet',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.List' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'List.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.GroupableCollection',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Map' => $wikibaseDatamodelPaths + [
-			'scripts' => [
+				'Group.js',
 				'Map.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.MultiTerm' => $wikibaseDatamodelPaths + [
-			'scripts' => [
+				'Set.js',
+				'GroupableCollection.js',
+				'FingerprintableEntity.js',
+				'Claim.js',
+				'Entity.js',
+				'EntityId.js',
+				'Fingerprint.js',
+				'Item.js',
 				'MultiTerm.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.MultiTermMap' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'MultiTermMap.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Map',
-				'wikibase.datamodel.MultiTerm',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Property' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'Property.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.FingerprintableEntity',
-				'wikibase.datamodel.Fingerprint',
-				'wikibase.datamodel.StatementGroupSet',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.PropertyNoValueSnak' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'PropertyNoValueSnak.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.PropertySomeValueSnak' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'PropertySomeValueSnak.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.PropertyValueSnak' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'PropertyValueSnak.js',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Reference' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'Reference.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.SnakList',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.ReferenceList' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'ReferenceList.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.List',
-				'wikibase.datamodel.Reference',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.SiteLink' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'SiteLink.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.SiteLinkSet' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'SiteLinkSet.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.SiteLink',
-				'wikibase.datamodel.Set',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Snak' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'Snak.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.SnakList' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'SnakList.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.List',
-				'wikibase.datamodel.Snak',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Statement' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'Statement.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Claim',
-				'wikibase.datamodel.ReferenceList',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.StatementGroup' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'StatementGroup.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Group',
-				'wikibase.datamodel.StatementList',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.StatementGroupSet' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'StatementGroupSet.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.StatementGroup',
-				'wikibase.datamodel.Set',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.StatementList' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'StatementList.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.List',
-				'wikibase.datamodel.Statement',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Term' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'Term.js',
-			],
-			'dependencies' => [
-				'wikibase.datamodel.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.TermMap' => $wikibaseDatamodelPaths + [
-			'scripts' => [
 				'TermMap.js',
 			],
 			'dependencies' => [
 				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Map',
-				'wikibase.datamodel.Term',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.datamodel.Set' => $wikibaseDatamodelPaths + [
-			'scripts' => [
-				'Set.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.GroupableCollection',
+				'dataValues.DataValue',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],

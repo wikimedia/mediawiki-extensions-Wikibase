@@ -4,11 +4,13 @@
 ( function ( wb ) {
 	'use strict';
 
+	var datamodel = require( 'wikibase.datamodel' );
+
 	QUnit.module( 'wikibase.entityChangers.StatementsChangerState' );
 
 	var SUBJECT = wikibase.entityChangers.StatementsChangerState,
-		entityId = new wikibase.datamodel.EntityId( 'Q1' ),
-		statements = new wikibase.datamodel.StatementGroupSet();
+		entityId = new datamodel.EntityId( 'Q1' ),
+		statements = new datamodel.StatementGroupSet();
 
 	QUnit.test( 'get EntityId', function ( assert ) {
 		var state = new SUBJECT( entityId, statements );
