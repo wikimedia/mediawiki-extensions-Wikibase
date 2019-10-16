@@ -641,8 +641,21 @@ return call_user_func( function() {
 			'packageFiles' => [
 				'index.js',
 
+				'Deserializers/Deserializer.js',
+				'Deserializers/SnakDeserializer.js',
+				'Deserializers/StatementGroupSetDeserializer.js',
+				'Deserializers/StatementGroupDeserializer.js',
+				'Deserializers/StatementListDeserializer.js',
+				'Deserializers/StatementDeserializer.js',
+				'Deserializers/ClaimDeserializer.js',
+				'Deserializers/TermDeserializer.js',
+				'Serializers/ClaimSerializer.js',
+				'Deserializers/ReferenceListDeserializer.js',
+				'Deserializers/ReferenceDeserializer.js',
+				'Deserializers/SnakListDeserializer.js',
 				'Serializers/TermMapSerializer.js',
 				'Serializers/TermSerializer.js',
+				'Deserializers/TermMapDeserializer.js',
 				'Deserializers/EntityDeserializer.js',
 				'StrategyProvider.js',
 				'Deserializers/ItemDeserializer.js',
@@ -652,246 +665,19 @@ return call_user_func( function() {
 				'Deserializers/FingerprintDeserializer.js',
 				'Deserializers/MultiTermMapDeserializer.js',
 				'Deserializers/MultiTermDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.SnakDeserializer',
-				'wikibase.serialization.StatementDeserializer',
-				'wikibase.serialization.StatementListDeserializer',
-				'wikibase.serialization.TermDeserializer',
-				'wikibase.serialization.TermMapDeserializer',
-				'wikibase.serialization.ClaimSerializer',
-				'wikibase.serialization.ReferenceListSerializer',
-				'wikibase.serialization.ReferenceSerializer',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.SnakListSerializer',
-				'wikibase.serialization.SnakSerializer',
-				'wikibase.serialization.StatementListSerializer',
-				'wikibase.serialization.StatementSerializer',
-				'wikibase.serialization.StatementGroupSetDeserializer'
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-		'wikibase.serialization.__namespace' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'__namespace.js',
-				],
-				'dependencies' => [
-					'wikibase',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
-			],
-
-		'wikibase.serialization.Deserializer' => $wikibaseSerializationPaths + [
-				'scripts' => [
-					'Deserializers/Deserializer.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-					'wikibase.serialization.__namespace',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
-			],
-		'wikibase.serialization.SnakDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/SnakDeserializer.js',
-			],
-			'dependencies' => [
-				'dataValues',
-				'dataValues.values',
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.StatementGroupSetDeserializer' => $wikibaseSerializationPaths + [
-			'packageFiles' => [
-				'Deserializers/StatementGroupSetDeserializer.js',
-
-				'Deserializers/StatementGroupDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.StatementListDeserializer',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.StatementListDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/StatementListDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.StatementDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.StatementDeserializer' => $wikibaseSerializationPaths + [
-			'packageFiles' => [
-				'Deserializers/StatementDeserializer.js',
-
-				'Deserializers/ClaimDeserializer.js',
-				'Deserializers/ReferenceListDeserializer.js',
-				'Deserializers/ReferenceDeserializer.js',
-				'Deserializers/SnakListDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.SnakDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.TermDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/TermDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.TermMapDeserializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Deserializers/TermMapDeserializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Deserializer',
-				'wikibase.serialization.TermDeserializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.ClaimSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Serializers/ClaimSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.SnakListSerializer',
-				'wikibase.serialization.SnakSerializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.ReferenceListSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
+				'Serializers/StatementSerializer.js',
+				'Serializers/StatementListSerializer.js',
 				'Serializers/ReferenceListSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ReferenceSerializer',
-				'wikibase.serialization.Serializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.ReferenceSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
 				'Serializers/ReferenceSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.SnakListSerializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.Serializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
 				'Serializers/Serializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.serialization.__namespace',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.SnakListSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
 				'Serializers/SnakListSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.SnakSerializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.SnakSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
 				'Serializers/SnakSerializer.js',
 			],
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.StatementListSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Serializers/StatementListSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.Serializer',
-				'wikibase.serialization.StatementSerializer',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'wikibase.serialization.StatementSerializer' => $wikibaseSerializationPaths + [
-			'scripts' => [
-				'Serializers/StatementSerializer.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ClaimSerializer',
-				'wikibase.serialization.ReferenceListSerializer',
-				'wikibase.serialization.Serializer',
+				'dataValues',
+				'dataValues.values',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
