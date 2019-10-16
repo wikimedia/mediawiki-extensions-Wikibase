@@ -13,7 +13,8 @@
 		"selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test",
 		"test": "grunt test && npm run test:bridge && npm run test:tainted-ref",
 		"test:bridge": "npm --prefix client/data-bridge test",
-		"test:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test"
+		"test:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test",
+		"fix": "grunt fix"
 	},
 	"devDependencies": {
 		"eslint-config-wikimedia": "0.14.3",
