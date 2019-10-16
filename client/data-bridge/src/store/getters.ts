@@ -1,7 +1,9 @@
 import { GetterTree } from 'vuex';
 import Status from '@/definitions/ApplicationStatus';
 import DataValue from '@/datamodel/DataValue';
-import Application from '@/store/Application';
+import Application, {
+	InitializedApplicationState,
+} from '@/store/Application';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import {
 	NS_ENTITY,
@@ -13,6 +15,8 @@ import {
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
+import Statement from '@/datamodel/Statement';
+import deepEqual from 'deep-equal';
 
 export const getters: GetterTree<Application, Application> = {
 	editFlow( state: Application ): string {
@@ -62,5 +66,19 @@ export const getters: GetterTree<Application, Application> = {
 		}
 
 		return state.wikibaseRepoConfiguration.dataTypeLimits.string.maxLength;
+	},
+
+	isTargetStatementModified( state: Application, getters: { [ key: string ]: string } ): boolean {
+		if ( state.applicationStatus !== Status.READY ) {
+			return false;
+		}
+
+		const initState = state as InitializedApplicationState;
+		const entityId = getters[ getter( NS_ENTITY, ENTITY_ID ) ];
+		return !deepEqual(
+			state.originalStatement as Statement,
+			initState[ NS_ENTITY ][ NS_STATEMENTS ][ entityId ][ state.targetProperty ][ 0 ],
+			{ strict: true },
+		);
 	},
 };

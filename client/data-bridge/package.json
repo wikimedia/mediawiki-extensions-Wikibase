@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.10",
+    "deep-equal": "^1.1.0",
     "events": "^3.0.0",
     "uuid": "^3.3.3",
     "vue": "^2.6.10",
@@ -34,6 +35,7 @@
     "@storybook/addon-links": "^5.2.4",
     "@storybook/addons": "^5.2.4",
     "@storybook/vue": "^5.2.4",
+    "@types/deep-equal": "^1.0.1",
     "@types/jest": "^23.1.4",
     "@types/jquery": "^3.3.31",
     "@types/node": "^12.11.1",
