@@ -164,7 +164,6 @@ return call_user_func( function() {
 				'valueParsers.parsers',
 				'valueParsers.ValueParserStore',
 				'wikibase.api.ParseValueCaller',
-				'jquery.ui.EditableTemplatedWidget', // for jquery.wikibase.toolbaritem
 				'jquery.wikibase.toolbar.styles',
 			],
 			'messages' => [

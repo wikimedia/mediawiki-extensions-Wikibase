@@ -1,6 +1,7 @@
 ( function () {
 	'use strict';
 
+	require( './jquery.ui.TemplatedWidget.js' );
 	var PARENT = $.ui.TemplatedWidget;
 
 	/**

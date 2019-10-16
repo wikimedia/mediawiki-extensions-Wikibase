@@ -83,7 +83,6 @@ return [
 		],
 		'dependencies' => [
 			'dataValues.values',
-			'jquery.ui.EditableTemplatedWidget',
 			'jquery.util.getDirectionality',
 			'jquery.wikibase.entityselector',
 			'test.sinonjs',
@@ -211,7 +210,7 @@ return [
 			'resources/wikibase/view/ToolbarFactory.js',
 		],
 		'dependencies' => [
-			'jquery.ui.EditableTemplatedWidget',
+			'wikibase.view.ControllerViewFactory',
 			'jquery.wikibase.wbtooltip',
 			'wikibase.api.RepoApiError',
 			'wikibase.view.__namespace',

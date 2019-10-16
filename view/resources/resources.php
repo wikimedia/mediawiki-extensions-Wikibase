@@ -18,23 +18,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/ui/jquery.ui.TemplatedWidget.js',
-				'jquery/ui/jquery.ui.closeable.js',
-				'jquery/ui/jquery.ui.EditableTemplatedWidget.js',
-			],
-			'styles' => [
-				'jquery/ui/jquery.ui.closeable.css',
-			],
-			'dependencies' => [
-				'wikibase.templates',
-				'jquery.ui.widget',
-				'util.inherit',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',
@@ -52,19 +35,6 @@ return call_user_func( function() {
 				'wikibase-entityselector-more',
 				'wikibase-entityselector-notfound',
 			],
-		],
-
-		'jquery.wikibase.entityview' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.entityview.js',
-			],
-			'styles' => [
-				'jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
-			],
-			'dependencies' => [
-				'jquery.ui.EditableTemplatedWidget',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
@@ -176,6 +146,10 @@ return call_user_func( function() {
 		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
 			'packageFiles' => [
 				'resources/wikibase/view/ControllerViewFactory.js',
+
+				'resources/jquery/ui/jquery.ui.TemplatedWidget.js',
+				'resources/jquery/ui/jquery.ui.closeable.js',
+				'resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js',
 				'resources/wikibase/view/ViewController.js',
 				'resources/wikibase/view/ToolbarViewController.js',
 				'resources/wikibase/view/ViewFactory.js',
@@ -241,6 +215,7 @@ return call_user_func( function() {
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
 				'resources/wikibase/utilities/wikibase.utilities.ui.css',
+				'resources/jquery/ui/jquery.ui.closeable.css'
 			],
 			'dependencies' => [
 				'dataValues',
@@ -250,7 +225,6 @@ return call_user_func( function() {
 				'jquery.ui.position',
 				'jquery.ui.widget',
 				'jquery.ui.core',
-				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.menu',
 				'jquery.ui.suggester',
 				'jquery.ui.tabs',
