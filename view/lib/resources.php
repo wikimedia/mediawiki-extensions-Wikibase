@@ -933,8 +933,9 @@ return call_user_func( function() {
 
 		// The actual valueview widget:
 		'jquery.valueview.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'jquery.valueview.valueview.js',
+				'jquery.valueview.ViewState.js',
 			],
 			'styles' => [
 				'jquery.valueview.valueview.css',
@@ -942,19 +943,12 @@ return call_user_func( function() {
 			'dependencies' => [
 				'dataValues.DataValue',
 				'jquery.ui.widget',
-				'jquery.valueview.ViewState',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.EmptyValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'util.Notifier',
 				'valueFormatters',
 				'valueParsers.ValueParserStore',
-			],
-		],
-
-		'jquery.valueview.ViewState' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
-				'jquery.valueview.ViewState.js',
 			],
 		],
 
