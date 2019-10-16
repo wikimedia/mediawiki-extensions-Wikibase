@@ -8,7 +8,7 @@ describe( 'mutations', () => {
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: true, bar: true } );
 	} );
-	it( 'should untainted all statements in the store', () => {
+	it( 'should untaint a single statement in the store', () => {
 		const state = { statementsTaintedState: {} };
 		mutations[ SET_ALL_TAINTED ]( state, [ 'foo', 'bar' ] );
 		mutations[ SET_UNTAINTED ]( state, 'foo' );
