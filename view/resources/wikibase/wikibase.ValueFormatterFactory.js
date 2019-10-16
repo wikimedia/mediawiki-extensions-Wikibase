@@ -1,9 +1,8 @@
-( function ( util, wb ) {
+( function ( util ) {
 
 	'use strict';
 
-	var SELF = wb.ValueFormatterFactory = function () {
-	};
+	var SELF = function () {};
 
 	/**
 	 * Returns a ValueFormatter instance for the given DataType ID or Property ID and output type.
@@ -15,4 +14,6 @@
 	 */
 	SELF.prototype.getFormatter = util.abstractMember;
 
-}( util, wikibase ) );
+	module.exports = SELF;
+
+}( util ) );

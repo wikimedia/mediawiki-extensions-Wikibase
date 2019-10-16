@@ -81,16 +81,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'wikibase.ValueFormatterFactory' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase/wikibase.ValueFormatterFactory.js',
-			],
-			'dependencies' => [
-				'util.inherit',
-				'wikibase',
-			],
-		],
-
 		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase/entityChangers/namespace.js',
