@@ -137,7 +137,7 @@ return call_user_func( function() {
 				'mw.config.values.wbDataTypes',
 				'jquery.wikibase.wbtooltip',
 				'wikibase',
-				'wikibase.api.FormatValueCaller',
+				'wikibase.api.ValueCaller',
 				'wikibase.formatters.ApiValueFormatter',
 				'wikibase.ValueFormatterFactory',
 				'wikibase.datamodel',
@@ -163,7 +163,6 @@ return call_user_func( function() {
 				'dataValues.values',
 				'valueParsers.parsers',
 				'valueParsers.ValueParserStore',
-				'wikibase.api.ParseValueCaller',
 				'jquery.wikibase.toolbar.styles',
 			],
 			'messages' => [
