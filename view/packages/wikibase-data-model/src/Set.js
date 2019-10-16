@@ -1,12 +1,12 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
-var PARENT = wb.datamodel.GroupableCollection;
+var PARENT = require( './GroupableCollection.js' );
 
 /**
  * Stores items without imposing any order.
- * @class wikibase.datamodel.Set
- * @extends wikibase.datamodel.GroupableCollection
+ * @class Set
+ * @extends GroupableCollection
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -23,7 +23,7 @@ var PARENT = wb.datamodel.GroupableCollection;
  *         the item key.
  * @throws {Error} when the items array does contain items that feature the same key.
  */
-var SELF = wb.datamodel.Set = util.inherit(
+module.exports = util.inherit(
 	'WbDataModelSet',
 	PARENT,
 	function( ItemConstructor, itemKeyFunctionName, items ) {
@@ -156,7 +156,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 	equals: function( set ) {
 		if( set === this ) {
 			return true;
-		} else if ( !( set instanceof SELF ) || this.length !== set.length ) {
+		} else if ( !( set instanceof this.constructor ) || this.length !== set.length ) {
 			return false;
 		}
 
@@ -246,4 +246,4 @@ var SELF = wb.datamodel.Set = util.inherit(
 
 } );
 
-}( wikibase, jQuery ) );
+}( jQuery ) );

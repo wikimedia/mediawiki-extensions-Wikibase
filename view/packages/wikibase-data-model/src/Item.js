@@ -1,12 +1,16 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var PARENT = wb.datamodel.FingerprintableEntity;
+var FingerprintableEntity = require( './FingerprintableEntity.js' ),
+	Fingerprint = require( './Fingerprint.js' ),
+	StatementGroupSet = require( './StatementGroupSet.js' ),
+	SiteLinkSet = require( './SiteLinkSet.js' ),
+	PARENT = FingerprintableEntity;
 
 /**
  * Entity derivative featuring statements and site links.
- * @class wikibase.datamodel.Item
- * @extends wikibase.datamodel.FingerprintableEntity
+ * @class Item
+ * @extends FingerprintableEntity
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -14,25 +18,25 @@ var PARENT = wb.datamodel.FingerprintableEntity;
  * @constructor
  *
  * @param {string} entityId
- * @param {wikibase.datamodel.Fingerprint|null} [fingerprint=new wikibase.datamodel.Fingerprint()]
- * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet=new wikibase.datamodel.StatementGroupSet()]
- * @param {wikibase.datamodel.SiteLinkSet|null} [siteLinkSet=new wikibase.datamodel.SiteLinkSet()]
+ * @param {Fingerprint|null} [fingerprint=new Fingerprint()]
+ * @param {StatementGroupSet|null} [statementGroupSet=new StatementGroupSet()]
+ * @param {SiteLinkSet|null} [siteLinkSet=new SiteLinkSet()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-var SELF = wb.datamodel.Item = util.inherit(
+var SELF = util.inherit(
 	'WbDataModelItem',
 	PARENT,
 	function( entityId, fingerprint, statementGroupSet, siteLinkSet ) {
-		fingerprint = fingerprint || new wb.datamodel.Fingerprint();
-		statementGroupSet = statementGroupSet || new wb.datamodel.StatementGroupSet();
-		siteLinkSet = siteLinkSet || new wb.datamodel.SiteLinkSet();
+		fingerprint = fingerprint || new Fingerprint();
+		statementGroupSet = statementGroupSet || new StatementGroupSet();
+		siteLinkSet = siteLinkSet || new SiteLinkSet();
 
 		if(
 			typeof entityId !== 'string'
-			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
-			|| !( siteLinkSet instanceof wb.datamodel.SiteLinkSet )
-			|| !( statementGroupSet instanceof wb.datamodel.StatementGroupSet )
+			|| !( fingerprint instanceof Fingerprint )
+			|| !( siteLinkSet instanceof SiteLinkSet )
+			|| !( statementGroupSet instanceof StatementGroupSet )
 		) {
 			throw new Error( 'Required parameter(s) missing or not defined properly' );
 		}
@@ -44,40 +48,40 @@ var SELF = wb.datamodel.Item = util.inherit(
 	},
 {
 	/**
-	 * @property {wikibase.datamodel.SiteLinkSet}
+	 * @property {SiteLinkSet}
 	 * @private
 	 */
 	_siteLinkSet: null,
 
 	/**
-	 * @property {wikibase.datamodel.StatementGroupSet}
+	 * @property {StatementGroupSet}
 	 * @private
 	 */
 	_statementGroupSet: null,
 
 	/**
-	 * @return {wikibase.datamodel.SiteLinkSet}
+	 * @return {SiteLinkSet}
 	 */
 	getSiteLinks: function() {
 		return this._siteLinkSet;
 	},
 
 	/**
-	 * @param {wikibase.datamodel.SiteLink} siteLink
+	 * @param {SiteLink} siteLink
 	 */
 	addSiteLink: function( siteLink ) {
 		this._siteLinkSet.setSiteLink( siteLink );
 	},
 
 	/**
-	 * @param {wikibase.datamodel.SiteLink} siteLink
+	 * @param {SiteLink} siteLink
 	 */
 	removeSiteLink: function( siteLink ) {
 		this._siteLinkSet.removeSiteLink( siteLink );
 	},
 
 	/**
-	 * @return {wikibase.datamodel.StatementGroupSet}
+	 * @return {StatementGroupSet}
 	 */
 	getStatements: function() {
 		return this._statementGroupSet;
@@ -113,4 +117,6 @@ var SELF = wb.datamodel.Item = util.inherit(
  */
 SELF.TYPE = 'item';
 
-}( wikibase, util ) );
+module.exports = SELF;
+
+}( util ) );

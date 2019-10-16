@@ -2,10 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit, $ ) {
+( function( QUnit, $ ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.Set' );
+var Set = require( '../src/Set.js' );
+
+QUnit.module( 'Set' );
 
 /**
  * @constructor
@@ -39,16 +41,16 @@ function getTestItems( n ) {
 
 /**
  * @param {TestItem[]} [items]
- * @return {wikibase.datamodel.Set}
+ * @return {Set}
  */
 function createSet( items ) {
-	return new wb.datamodel.Set( TestItem, 'getKey', items );
+	return new Set( TestItem, 'getKey', items );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 8 );
 	assert.ok(
-		createSet() instanceof wb.datamodel.Set,
+		createSet() instanceof Set,
 		'Instantiated empty Set.'
 	);
 
@@ -56,7 +58,7 @@ QUnit.test( 'Constructor', function( assert ) {
 		set = createSet( items );
 
 	assert.ok(
-		set instanceof wb.datamodel.Set,
+		set instanceof Set,
 		'Instantiated filled Set.'
 	);
 
@@ -74,28 +76,28 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Set( null, 'getKey' );
+			return new Set( null, 'getKey' );
 		},
 		'Throwing error when trying to instantiate a Set without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Set( TestItem );
+			return new Set( TestItem );
 		},
 		'Throwing error when trying to instantiate a Set without "getKey" function.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Set( 'string', 'getKey' );
+			return new Set( 'string', 'getKey' );
 		},
 		'Throwing error when trying to instantiate a Set wit an improper item constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Set( TestItem, 'doesNotExist' );
+			return new Set( TestItem, 'doesNotExist' );
 		},
 		'Throwing error when trying to instantiate a Set with an improper "getKey" '
 			+ 'function name.'
@@ -429,4 +431,4 @@ QUnit.test( 'hasItem()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit, jQuery ) );
+}( QUnit, jQuery ) );

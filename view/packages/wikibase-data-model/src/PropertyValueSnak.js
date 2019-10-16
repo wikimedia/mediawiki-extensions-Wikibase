@@ -1,12 +1,12 @@
-( function( wb, dv, util ) {
+( function( dv, util ) {
 'use strict';
 
-var PARENT = wb.datamodel.Snak;
+var PARENT = require( './Snak.js' );
 
 /**
  * Snak occupying a specific value.
- * @class wikibase.datamodel.PropertyValueSnak
- * @extends wikibase.datamodel.Snak
+ * @class PropertyValueSnak
+ * @extends Snak
  * @since 0.3
  * @license GPL-2.0+
  * @author Daniel Werner
@@ -19,7 +19,7 @@ var PARENT = wb.datamodel.Snak;
  *
  * @throws {Error} value is not a dataValues.DataValue instance.
  */
-var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
+var SELF = util.inherit(
 	'WbDataModelPropertyValueSnak',
 	PARENT,
 	function( propertyId, value, hash ) {
@@ -60,4 +60,6 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit(
  */
 SELF.TYPE = 'value';
 
-}( wikibase, dataValues, util ) );
+module.exports = SELF;
+
+}( dataValues, util ) );

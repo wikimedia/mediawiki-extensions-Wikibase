@@ -2,22 +2,28 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 	'use strict';
 
-QUnit.module( 'wikibase.datamodel.Claim' );
+var PropertyNoValueSnak = require( '../src/PropertyNoValueSnak.js' ),
+	PropertySomeValueSnak = require( '../src/PropertySomeValueSnak.js' ),
+	Claim = require( '../src/Claim.js' ),
+	Statement = require( '../src/Statement.js' ),
+	SnakList = require( '../src/SnakList.js' );
+
+QUnit.module( 'Claim' );
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 7 );
 	var argumentLists = [
 		{
-			mainSnak: new wb.datamodel.PropertyNoValueSnak( 'p1' )
+			mainSnak: new PropertyNoValueSnak( 'p1' )
 		}, {
-			mainSnak: new wb.datamodel.PropertySomeValueSnak( 'p2' ),
-			qualifiers: new wb.datamodel.SnakList( [
-				new wb.datamodel.PropertyNoValueSnak( 'p10' ),
-				new wb.datamodel.PropertySomeValueSnak( 'p10' ),
-				new wb.datamodel.PropertyNoValueSnak( 'p11' )
+			mainSnak: new PropertySomeValueSnak( 'p2' ),
+			qualifiers: new SnakList( [
+				new PropertyNoValueSnak( 'p10' ),
+				new PropertySomeValueSnak( 'p10' ),
+				new PropertyNoValueSnak( 'p11' )
 			] ),
 			guid: 'i am a guid'
 		}
@@ -25,7 +31,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	for( var i = 0; i < argumentLists.length; i++ ) {
 		var args = argumentLists[i],
-			claim = new wb.datamodel.Claim( args.mainSnak, args.qualifiers, args.guid );
+			claim = new Claim( args.mainSnak, args.qualifiers, args.guid );
 
 		assert.ok(
 			claim.getMainSnak().equals( args.mainSnak ),
@@ -33,7 +39,7 @@ QUnit.test( 'Constructor', function( assert ) {
 		);
 
 		assert.ok(
-			claim.getQualifiers().equals( args.qualifiers || new wb.datamodel.SnakList() ),
+			claim.getQualifiers().equals( args.qualifiers || new SnakList() ),
 			'Test set #' + i + ': Qualifiers are set correctly.'
 		);
 
@@ -45,7 +51,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Claim();
+			return new Claim();
 		},
 		'Throwing error when trying to instantiate a Claim without a main Snak.'
 	);
@@ -53,8 +59,8 @@ QUnit.test( 'Constructor', function( assert ) {
 
 QUnit.test( 'setMainSnak() & getMainSnak()', function( assert ) {
 	assert.expect( 1 );
-	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
-		snak = new wb.datamodel.PropertyNoValueSnak( 'p2' );
+	var claim = new Claim( new PropertyNoValueSnak( 'p1' ) ),
+		snak = new PropertyNoValueSnak( 'p2' );
 
 	claim.setMainSnak( snak );
 
@@ -66,11 +72,11 @@ QUnit.test( 'setMainSnak() & getMainSnak()', function( assert ) {
 
 QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
 	assert.expect( 1 );
-	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
-		qualifiers = new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyNoValueSnak( 'p10' ),
-			new wb.datamodel.PropertyNoValueSnak( 'p11' ),
-			new wb.datamodel.PropertySomeValueSnak( 'p10' )
+	var claim = new Claim( new PropertyNoValueSnak( 'p1' ) ),
+		qualifiers = new SnakList( [
+			new PropertyNoValueSnak( 'p10' ),
+			new PropertyNoValueSnak( 'p11' ),
+			new PropertySomeValueSnak( 'p10' )
 		] );
 
 	claim.setQualifiers( qualifiers );
@@ -85,21 +91,21 @@ QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 17 );
 	var claims = [
-		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
-		new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'p1' ) ),
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'p1' ),
-			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'p10' ) ] )
+		new Claim( new PropertyNoValueSnak( 'p1' ) ),
+		new Claim( new PropertySomeValueSnak( 'p1' ) ),
+		new Claim(
+			new PropertyNoValueSnak( 'p1' ),
+			new SnakList( [ new PropertyNoValueSnak( 'p10' ) ] )
 		),
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'p1' ),
-			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'p11' ) ] )
+		new Claim(
+			new PropertyNoValueSnak( 'p1' ),
+			new SnakList( [ new PropertyNoValueSnak( 'p11' ) ] )
 		)
 	];
 
 	// Compare claims:
 	for( var i = 0; i < claims.length; i++ ) {
-		var clonedClaim = new wb.datamodel.Claim(
+		var clonedClaim = new Claim(
 			claims[i].getMainSnak(),
 			claims[i].getQualifiers(),
 			claims[i].getGuid()
@@ -123,9 +129,9 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 
 	// Compare claim to statement:
-	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p42' ) ),
-		statement = new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p42' ) )
+	var claim = new Claim( new PropertyNoValueSnak( 'p42' ) ),
+		statement = new Statement(
+			new Claim( new PropertyNoValueSnak( 'p42' ) )
 		);
 
 	assert.ok(
@@ -135,4 +141,4 @@ QUnit.test( 'equals()', function( assert ) {
 
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

@@ -1,12 +1,12 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
-var PARENT = wb.datamodel.GroupableCollection;
+var PARENT = require( './GroupableCollection.js' );
 
 /**
  * Stores items in order.
- * @class wikibase.datamodel.List
- * @extends wikibase.datamodel.GroupableCollection
+ * @class List
+ * @extends GroupableCollection
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -19,7 +19,7 @@ var PARENT = wb.datamodel.GroupableCollection;
  * @throws {Error} if item constructor is not a Function.
  * @throws {Error} if item constructor prototype does not feature an equals() function.
  */
-var SELF = wb.datamodel.List = util.inherit(
+module.exports = util.inherit(
 	'WbDataModelList',
 	PARENT,
 	function( ItemConstructor, items ) {
@@ -130,7 +130,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	equals: function( list ) {
 		if( list === this ) {
 			return true;
-		} else if( !( list instanceof SELF ) || this.length !== list.length ) {
+		} else if( !( list instanceof this.constructor ) || this.length !== list.length ) {
 			return false;
 		}
 
@@ -184,4 +184,4 @@ var SELF = wb.datamodel.List = util.inherit(
 
 } );
 
-}( wikibase, jQuery ) );
+}( jQuery ) );

@@ -2,22 +2,29 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.StatementGroupSet' );
+var Statement = require( '../src/Statement.js' ),
+	Claim = require( '../src/Claim.js' ),
+	StatementList = require( '../src/StatementList.js' ),
+	StatementGroupSet = require( '../src/StatementGroupSet.js' ),
+	StatementGroup = require( '../src/StatementGroup.js' ),
+	PropertyNoValueSnak = require( '../src/PropertyNoValueSnak.js' );
+
+QUnit.module( 'StatementGroupSet' );
 
 var testSets = [
 	[],
 	[
-		new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
-			new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new StatementGroup( 'P1', new StatementList( [
+			new Statement(
+				new Claim( new PropertyNoValueSnak( 'P1' ) )
 			)
 		] ) ),
-		new wb.datamodel.StatementGroup( 'P2', new wb.datamodel.StatementList( [
-			new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		new StatementGroup( 'P2', new StatementList( [
+			new Statement(
+				new Claim( new PropertyNoValueSnak( 'P2' ) )
 			)
 		] ) )
 	]
@@ -26,13 +33,13 @@ var testSets = [
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var statementGroupSet = new wb.datamodel.StatementGroupSet( testSets[i] );
+		var statementGroupSet = new StatementGroupSet( testSets[i] );
 
 		assert.ok(
-			statementGroupSet instanceof wb.datamodel.StatementGroupSet,
+			statementGroupSet instanceof StatementGroupSet,
 			'Test set #' + i + ': Instantiated StatementGroupSet.'
 		);
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

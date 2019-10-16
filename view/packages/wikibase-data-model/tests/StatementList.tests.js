@@ -2,22 +2,28 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit, $ ) {
+( function( QUnit, $ ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.StatementList' );
+var Statement = require( '../src/Statement.js' ),
+	Claim = require( '../src/Claim.js' ),
+	StatementList = require( '../src/StatementList.js' ),
+	PropertySomeValueSnak = require( '../src/PropertySomeValueSnak.js' ),
+	PropertyNoValueSnak = require( '../src/PropertyNoValueSnak.js' );
+
+QUnit.module( 'StatementList' );
 
 var testSets = [
 	[],
 	[
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new Statement(
+			new Claim( new PropertyNoValueSnak( 'P1' ) )
 		),
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		new Statement(
+			new Claim( new PropertyNoValueSnak( 'P2' ) )
 		),
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P2' ) )
+		new Statement(
+			new Claim( new PropertySomeValueSnak( 'P2' ) )
 		)
 	]
 ];
@@ -26,7 +32,7 @@ QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			( new wb.datamodel.StatementList( testSets[i] ) ) instanceof wb.datamodel.StatementList,
+			( new StatementList( testSets[i] ) ) instanceof StatementList,
 			'Test set #' + i + ': Instantiated StatementList.'
 		);
 	}
@@ -44,7 +50,7 @@ QUnit.test( 'getPropertyIds()', function( assert ) {
 			}
 		}
 
-		var statementList = new wb.datamodel.StatementList( testSets[i] );
+		var statementList = new StatementList( testSets[i] );
 
 		assert.deepEqual(
 			statementList.getPropertyIds(),
@@ -54,4 +60,4 @@ QUnit.test( 'getPropertyIds()', function( assert ) {
 	}
 } );
 
-}( wikibase, QUnit, jQuery ) );
+}( QUnit, jQuery ) );

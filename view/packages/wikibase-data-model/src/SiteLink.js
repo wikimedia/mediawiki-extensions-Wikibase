@@ -1,9 +1,9 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
 /**
  * Combination of a site id, a page name and a list of badges.
- * @class wikibase.datamodel.SiteLink
+ * @class SiteLink
  * @since 0.3
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -16,7 +16,7 @@
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageName, badges ) {
+var SELF = function WbDataModelSiteLink( siteId, pageName, badges ) {
 	if( siteId === undefined || pageName === undefined ) {
 		throw new Error( 'Required parameters not specified' );
 	}
@@ -27,7 +27,7 @@ var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageNam
 };
 
 /**
- * @class wikibase.datamodel.SiteLink
+ * @class SiteLink
  */
 $.extend( SELF.prototype, {
 	/**
@@ -106,4 +106,7 @@ $.extend( SELF.prototype, {
 	}
 
 } );
-}( wikibase, jQuery ) );
+
+module.exports = SELF;
+
+}( jQuery ) );

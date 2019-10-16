@@ -1,26 +1,27 @@
-( function( wb ) {
+( function() {
 'use strict';
 
-var PARENT = wb.datamodel.Set;
+var PARENT = require( './Set.js' ),
+	StatementGroup = require( './StatementGroup.js' );
 
 /**
  * Set of StatementGroup objects.
- * @class wikibase.datamodel.StatementGroupSet
- * @extends wikibase.datamodel.Set
+ * @class StatementGroupSet
+ * @extends Set
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  *
- * @param {wikibase.datamodel.StatementGroup[]} [statementGroups=[]]
+ * @param {StatementGroup[]} [statementGroups=[]]
  */
-wb.datamodel.StatementGroupSet = util.inherit(
+module.exports = util.inherit(
 	'WbDataModelStatementGroupSet',
 	PARENT,
 	function( statementGroups ) {
-		PARENT.call( this, wb.datamodel.StatementGroup, 'getKey', statementGroups );
+		PARENT.call( this, StatementGroup, 'getKey', statementGroups );
 	}
 );
 
-}( wikibase ) );
+}() );

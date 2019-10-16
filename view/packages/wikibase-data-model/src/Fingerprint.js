@@ -1,32 +1,34 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
+
+var TermMap = require( './TermMap.js' ),
+	MultiTerm = require( './MultiTerm.js' ),
+	MultiTermMap = require( './MultiTermMap.js' );
 
 /**
  * Container for sets of labels, descriptions and aliases.
- * @class wikibase.datamodel.Fingerprint
+ * @class Fingerprint
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  *
- * @param {wikibase.datamodel.TermMap|null} [labels=new wikibase.datamodel.TermMap()]
- * @param {wikibase.datamodel.TermMap|null} [descriptions=new wikibase.datamodel.TermMap()]
- * @param {wikibase.datamodel.MultiTermMap|null} [aliases=new wikibase.datamodel.MultiTermMap()]
+ * @param {TermMap|null} [labels=new TermMap()]
+ * @param {TermMap|null} [descriptions=new TermMap()]
+ * @param {MultiTermMap|null} [aliases=new MultiTermMap()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-var SELF
-	= wb.datamodel.Fingerprint
-	= function WbDataModelFingerprint( labels, descriptions, aliases ) {
-		labels = labels || new wb.datamodel.TermMap();
-		descriptions = descriptions || new wb.datamodel.TermMap();
-		aliases = aliases || new wb.datamodel.MultiTermMap();
+var SELF = function WbDataModelFingerprint( labels, descriptions, aliases ) {
+		labels = labels || new TermMap();
+		descriptions = descriptions || new TermMap();
+		aliases = aliases || new MultiTermMap();
 
 		if(
-			!( labels instanceof wb.datamodel.TermMap )
-			|| !( descriptions instanceof wb.datamodel.TermMap )
-			|| !( aliases instanceof wb.datamodel.MultiTermMap )
+			!( labels instanceof TermMap )
+			|| !( descriptions instanceof TermMap )
+			|| !( aliases instanceof MultiTermMap )
 		) {
 			throw new Error( 'Required parameter(s) not specified or not defined properly' );
 		}
@@ -37,29 +39,29 @@ var SELF
 	};
 
 /**
- * @class wikibase.datamodel.Fingerprint
+ * @class Fingerprint
  */
 $.extend( SELF.prototype, {
 	/**
-	 * @property {wikibase.datamodel.TermMap}
+	 * @property {TermMap}
 	 * @private
 	 */
 	_labels: null,
 
 	/**
-	 * @property {wikibase.datamodel.TermMap}
+	 * @property {TermMap}
 	 * @private
 	 */
 	_descriptions: null,
 
 	/**
-	 * @property {wikibase.datamodel.MultiTermMap}
+	 * @property {MultiTermMap}
 	 * @private
 	 */
 	_aliases: null,
 
 	/**
-	 * @return {wikibase.datamodel.TermMap}
+	 * @return {TermMap}
 	 */
 	getLabels: function() {
 		return this._labels;
@@ -67,7 +69,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {wikibase.datamodel.Term|null}
+	 * @return {Term|null}
 	 */
 	getLabelFor: function( languageCode ) {
 		return this._labels.getItemByKey( languageCode );
@@ -75,7 +77,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term} label
+	 * @param {Term} label
 	 * @return {boolean}
 	 */
 	hasLabel: function( languageCode, label ) {
@@ -92,7 +94,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term|null} term
+	 * @param {Term|null} term
 	 */
 	setLabel: function( languageCode, term ) {
 		if ( term === null || term.getText() === '' ) {
@@ -104,7 +106,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term} label
+	 * @param {Term} label
 	 */
 	removeLabel: function( languageCode, label ) {
 		this._labels.removeItem( languageCode, label );
@@ -118,7 +120,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.TermMap}
+	 * @return {TermMap}
 	 */
 	getDescriptions: function() {
 		return this._descriptions;
@@ -126,7 +128,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {wikibase.datamodel.Term|null}
+	 * @return {Term|null}
 	 */
 	getDescriptionFor: function( languageCode ) {
 		return this._descriptions.getItemByKey( languageCode );
@@ -134,7 +136,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term} description
+	 * @param {Term} description
 	 * @return {boolean}
 	 */
 	hasDescription: function( languageCode, description ) {
@@ -151,7 +153,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term|null} term
+	 * @param {Term|null} term
 	 */
 	setDescription: function( languageCode, term ) {
 		if ( term === null || term.getText() === '' ) {
@@ -163,7 +165,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term} description
+	 * @param {Term} description
 	 */
 	removeDescription: function( languageCode, description ) {
 		this._descriptions.removeItem( languageCode, description );
@@ -177,7 +179,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.MultiTermMap}
+	 * @return {MultiTermMap}
 	 */
 	getAliases: function() {
 		return this._aliases;
@@ -185,7 +187,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {wikibase.datamodel.MultiTerm|null}
+	 * @return {MultiTerm|null}
 	 */
 	getAliasesFor: function( languageCode ) {
 		return this._aliases.getItemByKey( languageCode );
@@ -193,7 +195,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.MultiTerm} aliases
+	 * @param {MultiTerm} aliases
 	 * @return {boolean}
 	 */
 	hasAliases: function( languageCode, aliases ) {
@@ -209,8 +211,8 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string|wikibase.datamodel.MultiTermMap} languageCodeOrAliases
-	 * @param {wikibase.datamodel.MultiTerm|null} [aliases]
+	 * @param {string|MultiTermMap} languageCodeOrAliases
+	 * @param {MultiTerm|null} [aliases]
 	 *
 	 * @throws {Error} when passing a MultiTerm without a language code.
 	 * @throws {Error} when passing a MultiTermMap with a language code.
@@ -225,9 +227,9 @@ $.extend( SELF.prototype, {
 			aliases = languageCodeOrAliases;
 		}
 
-		if( aliases === null || aliases instanceof wb.datamodel.MultiTerm ) {
+		if( aliases === null || aliases instanceof MultiTerm ) {
 			if( !languageCode ) {
-				throw new Error( 'Language code the wb.datamodel.MultiTerm object should be set '
+				throw new Error( 'Language code the MultiTerm object should be set '
 					+ 'for needs to be specified' );
 			}
 			if ( aliases === null || aliases.isEmpty() ) {
@@ -235,21 +237,21 @@ $.extend( SELF.prototype, {
 			} else {
 				this._aliases.setItem( languageCode, aliases );
 			}
-		} else if( aliases instanceof wb.datamodel.MultiTermMap ) {
+		} else if( aliases instanceof MultiTermMap ) {
 			if( languageCode ) {
 				throw new Error( 'Unable to handle language code when setting a '
-					+ 'wb.datamodel.MultiTermMap' );
+					+ 'MultiTermMap' );
 			}
 			this._aliases = aliases;
 		} else {
-			throw new Error( 'Aliases need to be specified as wb.datamodel.MultiTerm or '
-				+ 'wb.datamodel.MultiTermMap instance' );
+			throw new Error( 'Aliases need to be specified as MultiTerm or '
+				+ 'MultiTermMap instance' );
 		}
 	},
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.MultiTerm} aliases
+	 * @param {MultiTerm} aliases
 	 */
 	removeAliases: function( languageCode, aliases ) {
 		this._aliases.removeItem( languageCode, aliases );
@@ -285,4 +287,6 @@ $.extend( SELF.prototype, {
 
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

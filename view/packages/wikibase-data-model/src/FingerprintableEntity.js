@@ -1,11 +1,12 @@
-( function( wb, $ ) {
+( function() {
 	'use strict';
 
-var PARENT = wb.datamodel.Entity;
+var Entity = require( './Entity.js' ),
+	PARENT = Entity;
 
 /**
 * Abstract FingerprintableEntity class featuring an id and a fingerprint.
-* @class wikibase.datamodel.FingerprintableEntity
+* @class FingerprintableEntity
 * @abstract
 * @since 4.1.0
 * @license GPL-2.0+
@@ -16,25 +17,25 @@ var PARENT = wb.datamodel.Entity;
 * @throws {Error} when trying to instantiate since FingerprintableEntity is abstract.
 */
 
-var SELF = wb.datamodel.FingerprintableEntity = util.inherit(
+module.exports = util.inherit(
 	'WbDataModelFingerprintableEntity',
 	PARENT,
 	{
 		/**
-		 * @property {wikibase.datamodel.Fingerprint}
+		 * @property {Fingerprint}
 		 * @private
 		 */
 		_fingerprint: null,
 
 		/**
-		 * @return {wikibase.datamodel.Fingerprint}
+		 * @return {Fingerprint}
 		 */
 		getFingerprint: function() {
 			return this._fingerprint;
 		},
 
 		/**
-		 * @param {wikibase.datamodel.Fingerprint} fingerprint
+		 * @param {Fingerprint} fingerprint
 		 */
 		setFingerprint: function( fingerprint ) {
 			this._fingerprint = fingerprint;
@@ -42,4 +43,4 @@ var SELF = wb.datamodel.FingerprintableEntity = util.inherit(
 	}
 );
 
-}( wikibase, jQuery ) );
+}() );

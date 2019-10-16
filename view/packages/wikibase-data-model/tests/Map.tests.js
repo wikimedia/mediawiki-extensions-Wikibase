@@ -2,10 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit, $ ) {
+( function( QUnit, $ ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.Map' );
+var Map = require( '../src/Map.js' );
+
+QUnit.module( 'Map' );
 
 /**
  * @constructor
@@ -39,16 +41,16 @@ function getTestItems( n ) {
 
 /**
  * @param {Object} [map]
- * @return {wikibase.datamodel.Map}
+ * @return {Map}
  */
 function createMap( map ) {
-	return new wb.datamodel.Map( TestItem, map );
+	return new Map( TestItem, map );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 8 );
 	assert.ok(
-		createMap() instanceof wb.datamodel.Map,
+		createMap() instanceof Map,
 		'Instantiated empty Map.'
 	);
 
@@ -56,7 +58,7 @@ QUnit.test( 'Constructor', function( assert ) {
 		map = createMap( items );
 
 	assert.ok(
-		map instanceof wb.datamodel.Map,
+		map instanceof Map,
 		'Instantiated filled Map.'
 	);
 
@@ -75,7 +77,7 @@ QUnit.test( 'Constructor', function( assert ) {
 	map = createMap( { 'a': new TestItem( 'b' ) } );
 
 	assert.ok(
-		map instanceof wb.datamodel.Map,
+		map instanceof Map,
 		'Instantiated filled Map with asynchronous keys.'
 	);
 
@@ -87,14 +89,14 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Map( null );
+			return new Map( null );
 		},
 		'Throwing error when trying to instantiate a Map without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Map( 'string' );
+			return new Map( 'string' );
 		},
 		'Throwing error when trying to instantiate a Map with an improper item constructor.'
 	);
@@ -404,4 +406,4 @@ QUnit.test( 'hasItem()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit, jQuery ) );
+}( QUnit, jQuery ) );

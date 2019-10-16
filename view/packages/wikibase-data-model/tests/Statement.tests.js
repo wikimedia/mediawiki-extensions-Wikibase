@@ -2,31 +2,39 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 	'use strict';
 
-QUnit.module( 'wikibase.datamodel.Statement' );
+var Statement = require( '../src/Statement.js' ),
+	Claim = require( '../src/Claim.js' ),
+	SnakList = require( '../src/SnakList.js' ),
+	Reference = require( '../src/Reference.js' ),
+	ReferenceList = require( '../src/ReferenceList.js' ),
+	PropertySomeValueSnak = require( '../src/PropertySomeValueSnak.js' ),
+	PropertyNoValueSnak = require( '../src/PropertyNoValueSnak.js' );
+
+QUnit.module( 'Statement' );
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 7 );
 	var argumentLists = [
 		{
-			claim: new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) )
+			claim: new Claim( new PropertyNoValueSnak( 'p1' ) )
 		}, {
-			claim: new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
-			references: new wb.datamodel.ReferenceList( [
-				new wb.datamodel.Reference(),
-				new wb.datamodel.Reference( new wb.datamodel.SnakList( [
-					new wb.datamodel.PropertyNoValueSnak( 'p10' )
+			claim: new Claim( new PropertyNoValueSnak( 'p1' ) ),
+			references: new ReferenceList( [
+				new Reference(),
+				new Reference( new SnakList( [
+					new PropertyNoValueSnak( 'p10' )
 				] ) )
 			] ),
-			rank: wb.datamodel.Statement.RANK.PREFERRED
+			rank: Statement.RANK.PREFERRED
 		}
 	];
 
 	for( var i = 0; i < argumentLists.length; i++ ) {
 		var args = argumentLists[i],
-			claim = new wb.datamodel.Statement( args.claim, args.references, args.rank );
+			claim = new Statement( args.claim, args.references, args.rank );
 
 		assert.ok(
 			claim.getClaim().equals( args.claim ),
@@ -34,19 +42,19 @@ QUnit.test( 'Constructor', function( assert ) {
 		);
 
 		assert.ok(
-			claim.getReferences().equals( args.references || new wb.datamodel.ReferenceList() ),
+			claim.getReferences().equals( args.references || new ReferenceList() ),
 			'References are set correctly.'
 		);
 
 		assert.ok(
-			claim.getRank() === ( args.rank || wb.datamodel.Statement.RANK.NORMAL ),
+			claim.getRank() === ( args.rank || Statement.RANK.NORMAL ),
 			'Rank is set correctly.'
 		);
 	}
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Statement();
+			return new Statement();
 		},
 		'Throwing error when trying to instantiate a Statement without a Claim.'
 	);
@@ -54,62 +62,62 @@ QUnit.test( 'Constructor', function( assert ) {
 
 QUnit.test( 'Rank evaluation on instantiation', function( assert ) {
 	assert.expect( 2 );
-	var statement = new wb.datamodel.Statement(
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' )
+	var statement = new Statement(
+		new Claim(
+			new PropertyNoValueSnak( 'P1' )
 		)
 	);
 
 	assert.equal(
 		statement.getRank(),
-		wb.datamodel.Statement.RANK.NORMAL,
+		Statement.RANK.NORMAL,
 		'Assigning \'normal\' rank by default.'
 	);
 
-	statement = new wb.datamodel.Statement(
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' )
+	statement = new Statement(
+		new Claim(
+			new PropertyNoValueSnak( 'P1' )
 		),
 		null,
-		wb.datamodel.Statement.RANK.DEPRECATED
+		Statement.RANK.DEPRECATED
 	);
 
 	assert.equal(
 		statement.getRank(),
-		wb.datamodel.Statement.RANK.DEPRECATED,
+		Statement.RANK.DEPRECATED,
 		'Instantiated statement object with \'deprecated\' rank.'
 	);
 } );
 
 QUnit.test( 'setRank() & getRank()', function( assert ) {
 	assert.expect( 3 );
-	var statement = new wb.datamodel.Statement(
-		new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' )
+	var statement = new Statement(
+		new Claim(
+			new PropertyNoValueSnak( 'P1' )
 		)
 	);
 
-	statement.setRank( wb.datamodel.Statement.RANK.PREFERRED );
+	statement.setRank( Statement.RANK.PREFERRED );
 
 	assert.equal(
 		statement.getRank(),
-		wb.datamodel.Statement.RANK.PREFERRED,
+		Statement.RANK.PREFERRED,
 		'Assigned \'preferred\' rank.'
 	);
 
-	statement.setRank( wb.datamodel.Statement.RANK.DEPRECATED );
+	statement.setRank( Statement.RANK.DEPRECATED );
 
 	assert.equal(
 		statement.getRank(),
-		wb.datamodel.Statement.RANK.DEPRECATED,
+		Statement.RANK.DEPRECATED,
 		'Assigned \'deprecated\' rank.'
 	);
 
-	statement.setRank( wb.datamodel.Statement.RANK.NORMAL );
+	statement.setRank( Statement.RANK.NORMAL );
 
 	assert.equal(
 		statement.getRank(),
-		wb.datamodel.Statement.RANK.NORMAL,
+		Statement.RANK.NORMAL,
 		'Assigned \'normal\' rank.'
 	);
 } );
@@ -117,41 +125,41 @@ QUnit.test( 'setRank() & getRank()', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 26 );
 	var statements = [
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new Statement(
+			new Claim( new PropertyNoValueSnak( 'P1' ) )
 		),
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P1' ) )
+		new Statement(
+			new Claim( new PropertySomeValueSnak( 'P1' ) )
 		),
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P1' ) ),
+		new Statement(
+			new Claim( new PropertySomeValueSnak( 'P1' ) ),
 			null,
-			wb.datamodel.Statement.RANK.PREFERRED
+			Statement.RANK.PREFERRED
 		),
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			new wb.datamodel.ReferenceList(
-				[new wb.datamodel.Reference( new wb.datamodel.SnakList(
-					[new wb.datamodel.PropertyNoValueSnak( 'P10' ) ]
+		new Statement(
+			new Claim( new PropertyNoValueSnak( 'P1' ) ),
+			new ReferenceList(
+				[new Reference( new SnakList(
+					[new PropertyNoValueSnak( 'P10' ) ]
 				) )]
 			),
-			wb.datamodel.Statement.RANK.PREFERRED
+			Statement.RANK.PREFERRED
 		),
-		new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			new wb.datamodel.ReferenceList(
-				[new wb.datamodel.Reference( new wb.datamodel.SnakList(
-					[new wb.datamodel.PropertySomeValueSnak( 'P10' ) ]
+		new Statement(
+			new Claim( new PropertyNoValueSnak( 'P1' ) ),
+			new ReferenceList(
+				[new Reference( new SnakList(
+					[new PropertySomeValueSnak( 'P10' ) ]
 				) )]
 			),
-			wb.datamodel.Statement.RANK.PREFERRED
+			Statement.RANK.PREFERRED
 		)
 	];
 
 	// Compare statements:
 	for( var i = 0; i < statements.length; i++ ) {
-		var clonedStatement = new wb.datamodel.Statement(
-			new wb.datamodel.Claim(
+		var clonedStatement = new Statement(
+			new Claim(
 				statements[i].getClaim().getMainSnak(),
 				statements[i].getClaim().getQualifiers(),
 				statements[i].getClaim().getGuid()
@@ -179,12 +187,12 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 
 	// Compare claim to statement:
-	var claim = new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' )
+	var claim = new Claim(
+			new PropertyNoValueSnak( 'P1' )
 		),
-		statement = new wb.datamodel.Statement(
-			new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
+		statement = new Statement(
+			new Claim(
+				new PropertyNoValueSnak( 'P1' )
 			)
 		);
 
@@ -195,4 +203,4 @@ QUnit.test( 'equals()', function( assert ) {
 
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

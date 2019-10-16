@@ -2,10 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.MultiTerm' );
+var MultiTerm = require( '../src/MultiTerm.js' );
+
+QUnit.module( 'MultiTerm' );
 
 var testSets = [
 	['en', []],
@@ -16,9 +18,9 @@ var testSets = [
 QUnit.test( 'Constructor (positive)', function( assert ) {
 	assert.expect( 3 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var multiTerm = new wb.datamodel.MultiTerm( testSets[i][0], testSets[i][1] );
+		var multiTerm = new MultiTerm( testSets[i][0], testSets[i][1] );
 		assert.ok(
-			multiTerm instanceof wb.datamodel.MultiTerm,
+			multiTerm instanceof MultiTerm,
 			'Test set #' + i +': Instantiated MultiTerm.'
 		);
 	}
@@ -41,7 +43,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 	 */
 	function instantiateObject( languageCode, strings ) {
 		return function() {
-			return new wb.datamodel.MultiTerm( languageCode, strings );
+			return new MultiTerm( languageCode, strings );
 		};
 	}
 
@@ -56,10 +58,10 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 9 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var multiTerm1 = new wb.datamodel.MultiTerm( testSets[i][0], testSets[i][1] );
+		var multiTerm1 = new MultiTerm( testSets[i][0], testSets[i][1] );
 
 		for( var j = 0; j < testSets.length; j++ ) {
-			var multiTerm2 = new wb.datamodel.MultiTerm( testSets[j][0], testSets[j][1] );
+			var multiTerm2 = new MultiTerm( testSets[j][0], testSets[j][1] );
 
 			if( j === i ) {
 				assert.ok(
@@ -77,4 +79,4 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );
