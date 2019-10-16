@@ -19,6 +19,7 @@ import {
 	APPLICATION_STATUS_SET,
 	TARGET_LABEL_SET,
 	WIKIBASE_REPO_CONFIGURATION_SET,
+	ORIGINAL_STATEMENT_SET,
 } from '@/store/mutationTypes';
 import {
 	ENTITY_ID,
@@ -52,6 +53,9 @@ describe( 'root/actions', () => {
 	};
 
 	describe( BRIDGE_INIT, () => {
+		const defaultEntityId = 'Q32';
+		const defaultPropertyId = 'P71';
+
 		function mockedStore(
 			entityId?: string,
 			targetProperty?: string,
@@ -59,15 +63,25 @@ describe( 'root/actions', () => {
 		): any {
 			return newMockStore( {
 				state: {
-					targetProperty,
+					targetProperty: targetProperty || defaultPropertyId,
+					[ NS_ENTITY ]: {
+						[ NS_STATEMENTS ]: {
+							[ entityId || defaultEntityId ]: {
+								[ targetProperty || defaultPropertyId ]: [ {} ],
+							},
+						},
+					},
 				},
 				getters: { ...{
-					[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
 					[ getter(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						STATEMENTS_PROPERTY_EXISTS,
 					) ]: jest.fn( () => true ),
+					[ getter(
+						NS_ENTITY,
+						ENTITY_ID,
+					) ]: entityId || defaultEntityId,
 				}, ...gettersOverride },
 			} );
 		}
@@ -88,8 +102,8 @@ describe( 'root/actions', () => {
 
 			const information = {
 				editFlow,
-				propertyId: '',
-				entityId: '',
+				propertyId: defaultPropertyId,
+				entityId: defaultEntityId,
 			};
 
 			return initAction()( context, information ).then( () => {
@@ -107,7 +121,7 @@ describe( 'root/actions', () => {
 			const information = {
 				editFlow: EditFlow.OVERWRITE,
 				propertyId,
-				entityId: '',
+				entityId: defaultEntityId,
 			};
 
 			return initAction()( context, information ).then( () => {
@@ -124,7 +138,7 @@ describe( 'root/actions', () => {
 
 			const information = {
 				editFlow: EditFlow.OVERWRITE,
-				propertyId: '',
+				propertyId: defaultPropertyId,
 				entityId,
 			};
 
@@ -140,8 +154,8 @@ describe( 'root/actions', () => {
 			const context = mockedStore();
 			const information = {
 				editFlow: EditFlow.OVERWRITE,
-				propertyId: '',
-				entityId: '',
+				propertyId: defaultPropertyId,
+				entityId: defaultEntityId,
 			};
 			const wikibaseRepoConfiguration = {
 				dataTypeLimits: {
@@ -162,6 +176,52 @@ describe( 'root/actions', () => {
 			} );
 		} );
 
+		it( `commits to ${ORIGINAL_STATEMENT_SET}`, () => {
+			const entityId = 'Q42';
+			const propertyId = 'P23';
+			const context = mockedStore( entityId, propertyId );
+			const shallowProperty = {
+				type: 'statement',
+				id: 'opaque statement ID',
+				rank: 'normal',
+				mainsnak: {
+					snaktype: 'value',
+					property: 'P60',
+					datatype: 'string',
+					datavalue: {
+						type: 'string',
+						value: 'a string value',
+					},
+				},
+			};
+
+			const shallowNestedState = { ...context.state, ...{
+				[ NS_ENTITY ]: {
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ propertyId ]: [ shallowProperty ],
+						},
+					},
+				},
+			} };
+
+			context.state = shallowNestedState;
+
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId,
+				entityId,
+			};
+
+			return initAction()( context, information ).then( () => {
+				expect( context.commit ).toHaveBeenCalledWith(
+					ORIGINAL_STATEMENT_SET,
+					shallowProperty,
+				);
+			} );
+
+		} );
+
 		describe( TARGET_LABEL_SET, () => {
 			it( `commits to ${TARGET_LABEL_SET}, on successful label request`, () => {
 				const propertyId = 'P42';
@@ -170,7 +230,7 @@ describe( 'root/actions', () => {
 				const information = {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId,
-					entityId: '',
+					entityId: defaultEntityId,
 				};
 
 				const term = {
@@ -199,7 +259,7 @@ describe( 'root/actions', () => {
 				const information = {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId,
-					entityId: '',
+					entityId: defaultEntityId,
 				};
 
 				const entityLabelRepository = {
@@ -293,7 +353,6 @@ describe( 'root/actions', () => {
 						);
 					} );
 				} );
-
 			} );
 		} );
 	} );

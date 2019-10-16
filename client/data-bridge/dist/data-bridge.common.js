@@ -8062,6 +8062,7 @@ var EDITFLOW_SET = 'setEditFlow';
 var APPLICATION_STATUS_SET = 'setApplicationStatus';
 var TARGET_LABEL_SET = 'setTargetLabel';
 var WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
+var ORIGINAL_STATEMENT_SET = 'setOriginalStatement';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -8159,7 +8160,14 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
         propertyId: context.state.targetProperty,
         index: 0
       };
-      context.commit(APPLICATION_STATUS_SET, validateEntityState(context, path) ? definitions_ApplicationStatus.READY : definitions_ApplicationStatus.ERROR);
+
+      if (validateEntityState(context, path)) {
+        var state = context.state;
+        context.commit(ORIGINAL_STATEMENT_SET, state[NS_ENTITY][NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+      } else {
+        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+      }
     }, function (error) {
       context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
@@ -8246,10 +8254,15 @@ var getters_getters = {
     return state.wikibaseRepoConfiguration.dataTypeLimits.string.maxLength;
   }
 };
+// CONCATENATED MODULE: ./src/store/clone.ts
+function clone(source) {
+  return JSON.parse(JSON.stringify(source));
+}
 // CONCATENATED MODULE: ./src/store/mutations.ts
 
 
 var _mutations;
+
 
 
 var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SET, function (state, targetProperty) {
@@ -8262,6 +8275,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   state.targetLabel = label;
 }), _defineProperty(_mutations, WIKIBASE_REPO_CONFIGURATION_SET, function (state, config) {
   state.wikibaseRepoConfiguration = config;
+}), _defineProperty(_mutations, ORIGINAL_STATEMENT_SET, function (state, revision) {
+  state.originalStatement = clone(revision);
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
 var ENTITY_UPDATE = 'updateEntity';
@@ -8612,6 +8627,7 @@ function createStore(services) {
   var state = {
     targetLabel: null,
     targetProperty: '',
+    originalStatement: null,
     editFlow: '',
     applicationStatus: definitions_ApplicationStatus.INITIALIZING,
     wikibaseRepoConfiguration: null

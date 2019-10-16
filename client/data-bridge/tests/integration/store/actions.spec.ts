@@ -144,6 +144,12 @@ describe( 'store/actions', () => {
 			return successStore.dispatch( BRIDGE_INIT, info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );
 				expect( successStore.state.targetLabel ).toBe( labelTerm );
+				expect( successStore.state.originalStatement ).not.toBe(
+					testSet.entity.statements[ info.propertyId ][ 0 ],
+				);
+				expect( successStore.state.originalStatement ).toStrictEqual(
+					testSet.entity.statements[ info.propertyId ][ 0 ],
+				);
 			} );
 		} );
 
