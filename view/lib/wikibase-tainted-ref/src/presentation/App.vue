@@ -1,6 +1,6 @@
 <template>
 	<div class="wb-tr-app">
-		<TaintedIcon />
+		<TaintedIcon v-if="isTainted" />
 	</div>
 </template>
 
@@ -10,11 +10,19 @@ import {
 	Vue,
 } from 'vue-property-decorator';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
-	@Component( {
-		components: {
-			TaintedIcon,
-		},
-	} )
+import { Getter } from 'vuex-class';
 
-export default class App extends Vue {}
+@Component( {
+	components: {
+		TaintedIcon,
+	},
+} )
+export default class App extends Vue {
+	@Getter( 'statementsTaintedState' )
+	public statementsTaintedStateFunction!: Function;
+
+	public get isTainted(): boolean {
+		return this.statementsTaintedStateFunction( this.$data.id );
+	}
+}
 </script>
