@@ -4766,7 +4766,7 @@ function createStore() {
 
 
 
-function launch(editStart) {
+function launch(hookHandler) {
   var store = createStore();
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
@@ -4786,9 +4786,7 @@ function launch(editStart) {
     }
   });
   store.dispatch(STATEMENT_TAINTED_STATE_INIT, guids);
-  editStart(function (guid) {
-    store.dispatch(STATEMENT_TAINTED_STATE_UNTAINT, guid);
-  });
+  hookHandler.addStore(store);
 }
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
 /* concated harmony reexport launch */__webpack_require__.d(__webpack_exports__, "launch", function() { return launch; });
