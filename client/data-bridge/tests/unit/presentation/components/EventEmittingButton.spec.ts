@@ -125,6 +125,38 @@ describe( 'EventEmittingButton', () => {
 		} );
 	} );
 
+	describe( 'if it is disabled', () => {
+		it( 'doesn\'t emit an event on click', () => {
+			/**
+			 * FIXME: this test may be falsely green because of a bug in @vue/test-utils
+			 *        see https://github.com/vuejs/vue-test-utils/issues/1321
+			 *        It may also be somewhat falsely red because  @vue/test-utils doesn't
+			 *        evalute the CSS "pointer-events: none;" rule.
+			 */
+			const wrapper = shallowMountWithProps( {
+				disabled: true,
+			} );
+			wrapper.find( 'a' ).trigger( 'click' );
+			const clickEvent = wrapper.emitted( 'click' );
+			expect( clickEvent ).toBeFalsy();
+		} );
+
+		it( 'cannot be reached via keyboard without a href', () => {
+			const wrapper = shallowMountWithProps( {
+				disabled: true,
+			} );
+			expect( wrapper.find( 'a' ).attributes( 'tabindex' ) ).toBe( '-1' );
+		} );
+
+		it( 'cannot be reached via keyboard with a href', () => {
+			const wrapper = shallowMountWithProps( {
+				disabled: true,
+				href: 'https://example.com',
+			} );
+			expect( wrapper.find( 'a' ).attributes( 'tabindex' ) ).toBe( '-1' );
+		} );
+	} );
+
 	it( 'can be configured not to prevent default (href) event', () => {
 		const wrapper = shallowMountWithProps( {
 			preventDefault: false,

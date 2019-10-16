@@ -17,6 +17,8 @@ $padding-panel-form: px-to-em( 16px );
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;
 
+$border-color-base--disabled: $wmui-color-base70;
+
 $padding-vertical-base: px-to-em( 6px );
 $padding-horizontal-base: px-to-em( 12px );
 
