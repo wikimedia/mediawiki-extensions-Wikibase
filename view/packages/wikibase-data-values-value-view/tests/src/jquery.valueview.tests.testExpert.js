@@ -110,7 +110,7 @@ function testExpert( testDefinition ) {
 	expertCasesTestAndCleanup( 'viewState', function( args, assert ) {
 		var viewState = args.expert.viewState();
 		assert.notEqual(
-			viewState.getFormattedValue(), 'undefined',
+			viewState.getFormattedValue, 'undefined',
 			'viewState() returns a jQuery.valueview.ViewState instance'
 		);
 	} );

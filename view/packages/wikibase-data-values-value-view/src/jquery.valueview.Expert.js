@@ -93,7 +93,7 @@ $.valueview = $.valueview || {};
 	 * @throws {Error} if neither `messages` nor `messageProvider` is given.
 	 */
 	vv.Expert = function( viewPortNode, relatedViewState, valueViewNotifier, options ) {
-		if ( ( typeof relatedViewState.getFormattedValue() === 'undefined' ) ) {
+		if ( ( typeof relatedViewState.getFormattedValue === 'undefined' ) ) {
 			throw new Error( 'No ViewState object was provided to the valueview expert' );
 		}
 

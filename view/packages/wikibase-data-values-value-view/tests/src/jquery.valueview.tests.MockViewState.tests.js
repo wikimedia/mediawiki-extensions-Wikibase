@@ -89,7 +89,7 @@
 			);
 
 			assert.notEqual(
-				viewState.getFormattedValue(), 'undefined',
+				viewState.getFormattedValue, 'undefined',
 				'Constructed MockViewState is instanceof ViewState'
 			);
 		} );
