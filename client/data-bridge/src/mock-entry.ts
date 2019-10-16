@@ -67,6 +67,18 @@ services.setMessagesRepository( {
 	},
 } );
 
+services.setWikibaseRepoConfigRepository( {
+	async getRepoConfiguration() {
+		return {
+			dataTypeLimits: {
+				string: {
+					maxLength: 200,
+				},
+			},
+		};
+	},
+} );
+
 launch(
 	{
 		containerSelector: '#data-bridge-container',
