@@ -2,23 +2,28 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, dv, QUnit ) {
+( function( dv, QUnit ) {
 	'use strict';
 
-QUnit.module( 'wikibase.datamodel.Snak' );
+var Snak = require( '../src/Snak.js' ),
+	PropertyValueSnak = require( '../src/PropertyValueSnak.js' ),
+	PropertySomeValueSnak = require( '../src/PropertySomeValueSnak.js' ),
+	PropertyNoValueSnak = require( '../src/PropertyNoValueSnak.js' );
+
+QUnit.module( 'Snak' );
 
 var testSets = [
-	[wb.datamodel.PropertyNoValueSnak, ['P1', undefined]],
-	[wb.datamodel.PropertyNoValueSnak, ['P2', 'hash']],
-	[wb.datamodel.PropertySomeValueSnak, ['P1', 'hash']],
-	[wb.datamodel.PropertyValueSnak, ['P1', new dv.StringValue( 'test' ), undefined]],
-	[wb.datamodel.PropertyValueSnak, ['P2', new dv.StringValue( 'test' ), 'hash']]
+	[PropertyNoValueSnak, ['P1', undefined]],
+	[PropertyNoValueSnak, ['P2', 'hash']],
+	[PropertySomeValueSnak, ['P1', 'hash']],
+	[PropertyValueSnak, ['P1', new dv.StringValue( 'test' ), undefined]],
+	[PropertyValueSnak, ['P2', new dv.StringValue( 'test' ), 'hash']]
 ];
 
 /**
  * @param {Function} SnakConstructor
  * @param {*[]} params
- * @return {wikibase.datamodel.Snak}
+ * @return {Snak}
  */
 function constructSnak( SnakConstructor, params ) {
 	return new SnakConstructor( params[0], params[1], params[2] );
@@ -33,7 +38,7 @@ QUnit.test( 'Constructor', function( assert ) {
 			snak = constructSnak( SnakConstructor, snakParams );
 
 		assert.ok(
-			snak instanceof wb.datamodel.Snak,
+			snak instanceof Snak,
 			'Test set #' + i + ': Instantiated Snak object.'
 		);
 
@@ -93,4 +98,4 @@ QUnit.test( 'equals()', function( assert ) {
 
 } );
 
-}( wikibase, dataValues, QUnit ) );
+}( dataValues, QUnit ) );

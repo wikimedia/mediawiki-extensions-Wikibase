@@ -2,10 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.List' );
+var List = require( '../src/List.js' );
+
+QUnit.module( 'List' );
 
 /**
  * @constructor
@@ -32,15 +34,15 @@ function getTestItems( n ) {
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 6 );
 	assert.ok(
-		( new wb.datamodel.List( TestItem ) ) instanceof wb.datamodel.List,
+		( new List( TestItem ) ) instanceof List,
 		'Instantiated empty List.'
 	);
 
 	var items = getTestItems( 2 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	assert.ok(
-		list instanceof wb.datamodel.List,
+		list instanceof List,
 		'Instantiated filled List.'
 	);
 
@@ -58,14 +60,14 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.List();
+			return new List();
 		},
 		'Throwing error when trying to instantiate a List without an item constructor.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.List( 'string' );
+			return new List( 'string' );
 		},
 		'Throwing error when trying to instantiate a List with an improper item constructor.'
 	);
@@ -74,7 +76,7 @@ QUnit.test( 'Constructor', function( assert ) {
 QUnit.test( 'each()', function( assert ) {
 	assert.expect( 2 );
 	var items = getTestItems( 2 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	list.each( function( i, item ) {
 		assert.ok(
@@ -87,7 +89,7 @@ QUnit.test( 'each()', function( assert ) {
 QUnit.test( 'toArray()', function( assert ) {
 	assert.expect( 2 );
 	var item = new TestItem(),
-		list = new wb.datamodel.List( TestItem, [item] ),
+		list = new List( TestItem, [item] ),
 		actual = list.toArray();
 
 	assert.ok(
@@ -105,7 +107,7 @@ QUnit.test( 'toArray()', function( assert ) {
 QUnit.test( 'hasItem()', function( assert ) {
 	assert.expect( 2 );
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	assert.ok(
 		list.hasItem( items[2] ),
@@ -122,7 +124,7 @@ QUnit.test( 'addItem() & length attribute', function( assert ) {
 	assert.expect( 3 );
 	var items = getTestItems( 3 ),
 		newItems = getTestItems( 1 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	assert.equal(
 		list.length,
@@ -148,7 +150,7 @@ QUnit.test( 'removeItem()', function( assert ) {
 	assert.expect( 4 );
 	var items = getTestItems( 3 ),
 		unsetItems = getTestItems( 1 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	assert.equal(
 		list.length,
@@ -180,7 +182,7 @@ QUnit.test( 'removeItem()', function( assert ) {
 QUnit.test( 'isEmpty()', function( assert ) {
 	assert.expect( 3 );
 	var items = getTestItems( 1 ),
-		list = new wb.datamodel.List( TestItem );
+		list = new List( TestItem );
 
 	assert.ok(
 		list.isEmpty(),
@@ -205,17 +207,17 @@ QUnit.test( 'isEmpty()', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 2 );
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	assert.ok(
-		list.equals( new wb.datamodel.List( TestItem, items ) ),
+		list.equals( new List( TestItem, items ) ),
 		'Verified equals() retuning TRUE.'
 	);
 
 	list.addItem( getTestItems( 1 )[0] );
 
 	assert.ok(
-		!list.equals( new wb.datamodel.List( TestItem, items ) ),
+		!list.equals( new List( TestItem, items ) ),
 		'FALSE after adding another item object.'
 	);
 } );
@@ -223,7 +225,7 @@ QUnit.test( 'equals()', function( assert ) {
 QUnit.test( 'indexOf()', function( assert ) {
 	assert.expect( 1 );
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.List( TestItem, items );
+		list = new List( TestItem, items );
 
 	assert.strictEqual(
 		list.indexOf( items[1] ),
@@ -232,4 +234,4 @@ QUnit.test( 'indexOf()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

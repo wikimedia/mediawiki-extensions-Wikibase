@@ -17,6 +17,9 @@ the corresponding serializer, and send back to the API.
 
 ## Release notes
 
+### 6.0.0 (dev)
+* Using CommonJS modules instead of global namespaces for all files
+
 ### 5.1.0 (2019-10-01)
 * Added `index.js` exporting all public data model parts
 

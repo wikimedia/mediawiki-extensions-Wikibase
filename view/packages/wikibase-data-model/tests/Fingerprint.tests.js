@@ -2,28 +2,34 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.Fingerprint' );
+var Fingerprint = require( '../src/Fingerprint.js' ),
+	Term = require( '../src/Term.js' ),
+	MultiTerm = require( '../src/MultiTerm.js' ),
+	TermMap = require( '../src/TermMap.js' ),
+	MultiTermMap = require( '../src/MultiTermMap.js' );
+
+QUnit.module( 'Fingerprint' );
 
 var testSets = [
 	[
-		new wb.datamodel.TermMap(),
-		new wb.datamodel.TermMap(),
-		new wb.datamodel.MultiTermMap()
+		new TermMap(),
+		new TermMap(),
+		new MultiTermMap()
 	], [
-		new wb.datamodel.TermMap( {
-			de: new wb.datamodel.Term( 'de', 'de-label' ),
-			en: new wb.datamodel.Term( 'en', 'en-label' )
+		new TermMap( {
+			de: new Term( 'de', 'de-label' ),
+			en: new Term( 'en', 'en-label' )
 		} ),
-		new wb.datamodel.TermMap( {
-			de: new wb.datamodel.Term( 'de', 'de-description' ),
-			en: new wb.datamodel.Term( 'en', 'en-description' )
+		new TermMap( {
+			de: new Term( 'de', 'de-description' ),
+			en: new Term( 'en', 'en-description' )
 		} ),
-		new wb.datamodel.MultiTermMap( {
-			de: new wb.datamodel.MultiTerm( 'de', ['de-alias1', 'de-alias2'] ),
-			en: new wb.datamodel.MultiTerm( 'en', ['en-alias1'] )
+		new MultiTermMap( {
+			de: new MultiTerm( 'de', ['de-alias1', 'de-alias2'] ),
+			en: new MultiTerm( 'en', ['en-alias1'] )
 		} )
 	]
 ];
@@ -35,7 +41,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 	/**
 	 * @param {QUnit.assert} assert
 	 * @param {string} term
-	 * @param {wikibase.datamodel.Map} map
+	 * @param {Map} map
 	 */
 	function checkGetters( assert, term, map ) {
 		var languageCodes = map.getKeys(),
@@ -74,12 +80,12 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 	}
 
 	for( i = 0; i < testSets.length; i++ ) {
-		fingerprint = new wb.datamodel.Fingerprint(
+		fingerprint = new Fingerprint(
 			testSets[i][0], testSets[i][1], testSets[i][2]
 		);
 
 		assert.ok(
-			fingerprint instanceof wb.datamodel.Fingerprint,
+			fingerprint instanceof Fingerprint,
 			'Test set #' + i +': Instantiated Fingerprint.'
 		);
 
@@ -98,20 +104,20 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 QUnit.test( 'Constructor (negative)', function( assert ) {
 	assert.expect( 3 );
 	var negativeTestSets = [
-		['string', new wb.datamodel.TermMap(), new wb.datamodel.MultiTermMap()],
-		[new wb.datamodel.TermMap(), 'string', new wb.datamodel.MultiTermMap()],
-		[new wb.datamodel.TermMap(), new wb.datamodel.TermMap(), 'string']
+		['string', new TermMap(), new MultiTermMap()],
+		[new TermMap(), 'string', new MultiTermMap()],
+		[new TermMap(), new TermMap(), 'string']
 	];
 
 	/**
-	 * @param {wikibase.datamodel.TermMap} labels
-	 * @param {wikibase.datamodel.TermMap} descriptions
-	 * @param {wikibase.datamodel.MultiTermMap} aliasGroups
+	 * @param {TermMap} labels
+	 * @param {TermMap} descriptions
+	 * @param {MultiTermMap} aliasGroups
 	 * @return {Function}
 	 */
 	function instantiateObject( labels, descriptions, aliasGroups ) {
 		return function() {
-			return new wb.datamodel.Fingerprint( labels, descriptions, aliasGroups );
+			return new Fingerprint( labels, descriptions, aliasGroups );
 		};
 	}
 
@@ -127,8 +133,8 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 
 QUnit.test( 'setLabel()', function( assert ) {
 	assert.expect( 4 );
-	var fingerprint = new wb.datamodel.Fingerprint(),
-		label = new wb.datamodel.Term( 'de', 'de-label' );
+	var fingerprint = new Fingerprint(),
+		label = new Term( 'de', 'de-label' );
 
 	assert.ok(
 		!fingerprint.hasLabel( 'de', label ),
@@ -149,7 +155,7 @@ QUnit.test( 'setLabel()', function( assert ) {
 		'Set label.'
 	);
 
-	fingerprint.setLabel( 'de', new wb.datamodel.Term( 'de', '' ) );
+	fingerprint.setLabel( 'de', new Term( 'de', '' ) );
 
 	assert.ok(
 		!fingerprint.hasLabelFor( 'de' ),
@@ -159,8 +165,8 @@ QUnit.test( 'setLabel()', function( assert ) {
 
 QUnit.test( 'removeLabel()', function( assert ) {
 	assert.expect( 3 );
-	var label = new wb.datamodel.Term( 'de', 'de-label' ),
-		fingerprint = new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( { de: label } ) );
+	var label = new Term( 'de', 'de-label' ),
+		fingerprint = new Fingerprint( new TermMap( { de: label } ) );
 
 	assert.ok(
 		fingerprint.hasLabel( 'de', label ),
@@ -184,8 +190,8 @@ QUnit.test( 'removeLabel()', function( assert ) {
 
 QUnit.test( 'removeLabelFor()', function( assert ) {
 	assert.expect( 2 );
-	var label = new wb.datamodel.Term( 'de', 'de-label' ),
-		fingerprint = new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( { de: label } ) );
+	var label = new Term( 'de', 'de-label' ),
+		fingerprint = new Fingerprint( new TermMap( { de: label } ) );
 
 	assert.ok(
 		fingerprint.hasLabel( 'de', label ),
@@ -202,8 +208,8 @@ QUnit.test( 'removeLabelFor()', function( assert ) {
 
 QUnit.test( 'setDescription()', function( assert ) {
 	assert.expect( 4 );
-	var fingerprint = new wb.datamodel.Fingerprint(),
-		description = new wb.datamodel.Term( 'de', 'de-description' );
+	var fingerprint = new Fingerprint(),
+		description = new Term( 'de', 'de-description' );
 
 	assert.ok(
 		!fingerprint.hasDescription( 'de', description ),
@@ -224,7 +230,7 @@ QUnit.test( 'setDescription()', function( assert ) {
 		'Set description.'
 	);
 
-	fingerprint.setDescription( 'de', new wb.datamodel.Term( 'de', '' ) );
+	fingerprint.setDescription( 'de', new Term( 'de', '' ) );
 
 	assert.ok(
 		!fingerprint.hasDescriptionFor( 'de' ),
@@ -234,10 +240,10 @@ QUnit.test( 'setDescription()', function( assert ) {
 
 QUnit.test( 'removeDescription()', function( assert ) {
 	assert.expect( 3 );
-	var description = new wb.datamodel.Term( 'de', 'de-description' ),
-		fingerprint = new wb.datamodel.Fingerprint(
+	var description = new Term( 'de', 'de-description' ),
+		fingerprint = new Fingerprint(
 			null,
-			new wb.datamodel.TermMap( { de: description } )
+			new TermMap( { de: description } )
 		);
 
 	assert.ok(
@@ -262,10 +268,10 @@ QUnit.test( 'removeDescription()', function( assert ) {
 
 QUnit.test( 'removeDescriptionFor()', function( assert ) {
 	assert.expect( 2 );
-	var description = new wb.datamodel.Term( 'de', 'de-description' ),
-		fingerprint = new wb.datamodel.Fingerprint(
+	var description = new Term( 'de', 'de-description' ),
+		fingerprint = new Fingerprint(
 			null,
-			new wb.datamodel.TermMap( { de: description } )
+			new TermMap( { de: description } )
 		);
 
 	assert.ok(
@@ -283,10 +289,10 @@ QUnit.test( 'removeDescriptionFor()', function( assert ) {
 
 QUnit.test( 'setAliases()', function( assert ) {
 	assert.expect( 8 );
-	var fingerprint = new wb.datamodel.Fingerprint(),
-		deAliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
-		enAliases = new wb.datamodel.MultiTerm( 'en', ['en-alias'] ),
-		aliases = new wb.datamodel.MultiTermMap( { en: enAliases } );
+	var fingerprint = new Fingerprint(),
+		deAliases = new MultiTerm( 'de', ['de-alias'] ),
+		enAliases = new MultiTerm( 'en', ['en-alias'] ),
+		aliases = new MultiTermMap( { en: enAliases } );
 
 	assert.ok(
 		!fingerprint.hasAliases( 'de', deAliases ),
@@ -326,7 +332,7 @@ QUnit.test( 'setAliases()', function( assert ) {
 		'Set aliases passing a MultiTermMap object.'
 	);
 
-	fingerprint.setAliases( 'en', new wb.datamodel.MultiTerm( 'en', [] ) );
+	fingerprint.setAliases( 'en', new MultiTerm( 'en', [] ) );
 
 	assert.ok(
 		!fingerprint.hasAliasesFor( 'en' ),
@@ -335,7 +341,7 @@ QUnit.test( 'setAliases()', function( assert ) {
 
 	assert.throws(
 		function() {
-			fingerprint.setAliases( new wb.datamodel.MultiTerm( 'en', [] ) );
+			fingerprint.setAliases( new MultiTerm( 'en', [] ) );
 		},
 		'Throwing error when trying to set an empty MultiTerm without specifying a language code.'
 	);
@@ -343,11 +349,11 @@ QUnit.test( 'setAliases()', function( assert ) {
 
 QUnit.test( 'removeAliases()', function( assert ) {
 	assert.expect( 3 );
-	var aliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
-		fingerprint = new wb.datamodel.Fingerprint(
+	var aliases = new MultiTerm( 'de', ['de-alias'] ),
+		fingerprint = new Fingerprint(
 			null,
 			null,
-			new wb.datamodel.MultiTermMap( { de: aliases } )
+			new MultiTermMap( { de: aliases } )
 		);
 
 	assert.ok(
@@ -372,11 +378,11 @@ QUnit.test( 'removeAliases()', function( assert ) {
 
 QUnit.test( 'removeAliasesFor()', function( assert ) {
 	assert.expect( 2 );
-	var aliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
-		fingerprint = new wb.datamodel.Fingerprint(
+	var aliases = new MultiTerm( 'de', ['de-alias'] ),
+		fingerprint = new Fingerprint(
 			null,
 			null,
-			new wb.datamodel.MultiTermMap( { de: aliases } )
+			new MultiTermMap( { de: aliases } )
 		);
 
 	assert.ok(
@@ -395,38 +401,38 @@ QUnit.test( 'removeAliasesFor()', function( assert ) {
 QUnit.test( 'isEmpty()', function( assert ) {
 	assert.expect( 4 );
 	assert.ok(
-		( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.MultiTermMap()
+		( new Fingerprint(
+			new TermMap(),
+			new TermMap(),
+			new MultiTermMap()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
 
 	assert.ok(
-		!( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'en-string' ) } ),
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.MultiTermMap()
+		!( new Fingerprint(
+			new TermMap( { en: new Term( 'en', 'en-string' ) } ),
+			new TermMap(),
+			new MultiTermMap()
 		) ).isEmpty(),
 		'FALSE when there is a label.'
 	);
 
 	assert.ok(
-		!( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.TermMap( { en: new wb.datamodel.Term( 'en', 'en-string' ) } ),
-			new wb.datamodel.MultiTermMap()
+		!( new Fingerprint(
+			new TermMap(),
+			new TermMap( { en: new Term( 'en', 'en-string' ) } ),
+			new MultiTermMap()
 		) ).isEmpty(),
 		'FALSE when there is a description.'
 	);
 
 	assert.ok(
-		!( new wb.datamodel.Fingerprint(
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.TermMap(),
-			new wb.datamodel.MultiTermMap( {
-				en: new wb.datamodel.MultiTerm( 'en', ['en-string'] )
+		!( new Fingerprint(
+			new TermMap(),
+			new TermMap(),
+			new MultiTermMap( {
+				en: new MultiTerm( 'en', ['en-string'] )
 			} )
 		) ).isEmpty(),
 		'FALSE when there is an alias.'
@@ -436,12 +442,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var fingerprint1 = new wb.datamodel.Fingerprint(
+		var fingerprint1 = new Fingerprint(
 			testSets[i][0], testSets[i][1], testSets[i][2]
 		);
 
 		for( var j = 0; j < testSets.length; j++ ) {
-			var fingerprint2 = new wb.datamodel.Fingerprint(
+			var fingerprint2 = new Fingerprint(
 				testSets[j][0], testSets[j][1], testSets[j][2]
 			);
 
@@ -461,4 +467,4 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

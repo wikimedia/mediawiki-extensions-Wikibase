@@ -2,17 +2,21 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.ReferenceList' );
+var ReferenceList = require( '../src/ReferenceList.js' ),
+	SnakList = require( '../src/SnakList.js' ),
+	Reference = require( '../src/Reference.js' );
+
+QUnit.module( 'ReferenceList' );
 
 var testSets = [
 	[],
 	[
-		new wb.datamodel.Reference( new wb.datamodel.SnakList(), 'i am a hash' ),
-		new wb.datamodel.Reference( new wb.datamodel.SnakList(), 'i am another hash' ),
-		new wb.datamodel.Reference()
+		new Reference( new SnakList(), 'i am a hash' ),
+		new Reference( new SnakList(), 'i am another hash' ),
+		new Reference()
 	]
 ];
 
@@ -20,10 +24,10 @@ QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			( new wb.datamodel.ReferenceList( testSets[i] ) ) instanceof wb.datamodel.ReferenceList,
+			( new ReferenceList( testSets[i] ) ) instanceof ReferenceList,
 			'Test set #' + i + ': Instantiated ReferenceList.'
 		);
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

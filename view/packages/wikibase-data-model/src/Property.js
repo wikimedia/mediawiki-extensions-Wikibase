@@ -1,12 +1,14 @@
-( function( wb, util ) {
+( function( util ) {
 	'use strict';
 
-var PARENT = wb.datamodel.FingerprintableEntity;
+var PARENT = require( './FingerprintableEntity.js' ),
+	Fingerprint = require( './Fingerprint.js' ),
+	StatementGroupSet = require( './StatementGroupSet.js' );
 
 /**
  * Entity derivative featuring a data type and statements.
- * @class wikibase.datamodel.Property
- * @extends wikibase.datamodel.FingerprintableEntity
+ * @class Property
+ * @extends FingerprintableEntity
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -15,23 +17,23 @@ var PARENT = wb.datamodel.FingerprintableEntity;
  *
  * @param {string} entityId
  * @param {string} dataTypeId
- * @param {wikibase.datamodel.Fingerprint|null} [fingerprint=new wikibase.datamodel.Fingerprint()]
- * @param {wikibase.datamodel.StatementGroupSet|null} [statementGroupSet=new wikibase.datamodel.StatementGroupSet()]
+ * @param {Fingerprint|null} [fingerprint=new Fingerprint()]
+ * @param {StatementGroupSet|null} [statementGroupSet=new StatementGroupSet()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-var SELF = wb.datamodel.Property = util.inherit(
+var SELF = util.inherit(
 	'WbDataModelProperty',
 	PARENT,
 	function( entityId, dataTypeId, fingerprint, statementGroupSet ) {
-		fingerprint = fingerprint || new wb.datamodel.Fingerprint();
-		statementGroupSet = statementGroupSet || new wb.datamodel.StatementGroupSet();
+		fingerprint = fingerprint || new Fingerprint();
+		statementGroupSet = statementGroupSet || new StatementGroupSet();
 
 		if(
 			typeof entityId !== 'string'
 			|| typeof dataTypeId !== 'string'
-			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
-			|| !( statementGroupSet instanceof wb.datamodel.StatementGroupSet )
+			|| !( fingerprint instanceof Fingerprint )
+			|| !( statementGroupSet instanceof StatementGroupSet )
 		) {
 			throw new Error( 'Required parameter(s) missing or not defined properly' );
 		}
@@ -49,7 +51,7 @@ var SELF = wb.datamodel.Property = util.inherit(
 	_dataTypeId: null,
 
 	/**
-	 * @property {wikibase.datamodel.StatementGroupSet}
+	 * @property {StatementGroupSet}
 	 * @private
 	 */
 	_statementGroupSet: null,
@@ -62,7 +64,7 @@ var SELF = wb.datamodel.Property = util.inherit(
 	},
 
 	/**
-	 * @return {wikibase.datamodel.StatementGroupSet}
+	 * @return {StatementGroupSet}
 	 */
 	getStatements: function() {
 		return this._statementGroupSet;
@@ -96,4 +98,6 @@ var SELF = wb.datamodel.Property = util.inherit(
  */
 SELF.TYPE = 'property';
 
-}( wikibase, util ) );
+module.exports = SELF;
+
+}( util ) );

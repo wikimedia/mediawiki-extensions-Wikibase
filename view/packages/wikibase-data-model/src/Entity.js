@@ -1,9 +1,9 @@
-( function( wb, $ ) {
+( function( $ ) {
 	'use strict';
 
 /**
  * Abstract Entity base class featuring an id and a fingerprint.
- * @class wikibase.datamodel.Entity
+ * @class Entity
  * @abstract
  * @since 0.3
  * @license GPL-2.0+
@@ -13,7 +13,7 @@
  *
  * @throws {Error} when trying to instantiate since Entity is abstract.
  */
-var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
+var SELF = function WbDataModelEntity() {
 	throw new Error( 'Cannot construct abstract Entity object' );
 };
 
@@ -25,7 +25,7 @@ var SELF = wb.datamodel.Entity = function WbDataModelEntity() {
 SELF.TYPE = null;
 
 /**
- * @class wikibase.datamodel.Entity
+ * @class Entity
  */
 $.extend( SELF.prototype, {
 	/**
@@ -66,4 +66,6 @@ $.extend( SELF.prototype, {
 	equals: util.abstractMember
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

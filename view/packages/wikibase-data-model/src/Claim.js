@@ -1,38 +1,41 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
+
+var Snak = require( './Snak.js' ),
+	SnakList = require( './SnakList.js' );
 
 /**
  * Object featuring a main snak and a list of qualifiers.
- * @class wikibase.datamodel.Claim
+ * @class Claim
  * @since 0.3
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Snak} mainSnak
- * @param {wikibase.datamodel.SnakList|null} [qualifiers=new wikibase.datamodel.SnakList()]
+ * @param {Snak} mainSnak
+ * @param {SnakList|null} [qualifiers=new SnakList()]
  * @param {string|null} [guid=null] The Global Unique Identifier of this Claim. Can be null if this
  *        is a new Claim, not yet stored in the database and associated with some entity.
  */
-var SELF = wb.datamodel.Claim = function WbDataModelClaim( mainSnak, qualifiers, guid ) {
+var SELF = function WbDataModelClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
-	this.setQualifiers( qualifiers || new wb.datamodel.SnakList() );
+	this.setQualifiers( qualifiers || new SnakList() );
 	this._guid = guid || null;
 };
 
 /**
- * @class wikibase.datamodel.Claim
+ * @class Claim
  */
 $.extend( SELF.prototype, {
 	/**
-	 * @property {wikibase.datamodel.Snak}
+	 * @property {Snak}
 	 * @private
 	 */
 	_mainSnak: null,
 
 	/**
-	 * @property {wikibase.datamodel.SnakList}
+	 * @property {SnakList}
 	 * @private
 	 */
 	_qualifiers: null,
@@ -56,7 +59,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns the main Snak.
 	 *
-	 * @return {wikibase.datamodel.Snak}
+	 * @return {Snak}
 	 */
 	getMainSnak: function() {
 		return this._mainSnak;
@@ -65,31 +68,31 @@ $.extend( SELF.prototype, {
 	/**
 	 * Overwrites the current main Snak.
 	 *
-	 * @param {wikibase.datamodel.Snak} mainSnak
+	 * @param {Snak} mainSnak
 	 *
 	 * @throws {Error} if parameter is not a Snak instance.
 	 */
 	setMainSnak: function( mainSnak ) {
-		if( !( mainSnak instanceof wb.datamodel.Snak ) ) {
+		if( !( mainSnak instanceof Snak ) ) {
 			throw new Error( 'Main snak needs to be a Snak instance' );
 		}
 		this._mainSnak = mainSnak;
 	},
 
 	/**
-	 * @return {wikibase.datamodel.SnakList}
+	 * @return {SnakList}
 	 */
 	getQualifiers: function() {
 		return this._qualifiers;
 	},
 
 	/**
-	 * @param {wikibase.datamodel.SnakList} qualifiers
+	 * @param {SnakList} qualifiers
 	 *
 	 * @throws {Error} if parameter is not a SnakList instance.
 	 */
 	setQualifiers: function( qualifiers ) {
-		if( !( qualifiers instanceof wb.datamodel.SnakList ) ) {
+		if( !( qualifiers instanceof SnakList ) ) {
 			throw new Error( 'Qualifiers have to be a SnakList object' );
 		}
 		this._qualifiers = qualifiers;
@@ -107,4 +110,6 @@ $.extend( SELF.prototype, {
 	}
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

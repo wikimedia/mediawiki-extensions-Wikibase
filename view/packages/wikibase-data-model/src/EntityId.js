@@ -1,11 +1,11 @@
-( function( wb, dv, util ) {
+( function( dv, util ) {
 	'use strict';
 
 var PARENT = dv.DataValue;
 
 /**
  * EntityId data value.
- * @class wikibase.datamodel.EntityId
+ * @class EntityId
  * @extends dataValues.DataValue
  * @since 0.3
  * @license GPL-2.0+
@@ -18,7 +18,7 @@ var PARENT = dv.DataValue;
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-wb.datamodel.EntityId = util.inherit(
+var SELF = util.inherit(
 	'WbDataModelEntityId',
 	PARENT,
 	function( serialization ) {
@@ -55,7 +55,7 @@ wb.datamodel.EntityId = util.inherit(
 	/**
 	 * @inheritdoc
 	 *
-	 * @return {wikibase.datamodel.EntityId}
+	 * @return {EntityId}
 	 */
 	getValue: function() {
 		return this;
@@ -75,18 +75,20 @@ wb.datamodel.EntityId = util.inherit(
  * @inheritdoc
  * @static
  *
- * @return {wikibase.datamodel.EntityId}
+ * @return {EntityId}
  */
-wb.datamodel.EntityId.newFromJSON = function( json ) {
-	return new wb.datamodel.EntityId( json.id );
+SELF.newFromJSON = function( json ) {
+	return new SELF( json.id );
 };
 
 /**
  * @inheritdoc
  * @property {string} [TYPE='wikibase-entityid']
  */
-wb.datamodel.EntityId.TYPE = 'wikibase-entityid';
+SELF.TYPE = 'wikibase-entityid';
 
-dv.registerDataValue( wb.datamodel.EntityId );
+dv.registerDataValue( SELF );
 
-}( wikibase, dataValues, util ) );
+module.exports = SELF;
+
+}( dataValues, util ) );

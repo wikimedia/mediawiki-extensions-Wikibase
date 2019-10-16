@@ -1,9 +1,9 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
 /**
  * List of texts for one language.
- * @class wikibase.datamodel.MultiTerm
+ * @class MultiTerm
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -13,13 +13,13 @@
  * @param {string} languageCode
  * @param {string[]} texts
  */
-var SELF = wb.datamodel.MultiTerm = function WbDataModelMultiTerm( languageCode, texts ) {
+var SELF = function WbDataModelMultiTerm( languageCode, texts ) {
 	this.setLanguageCode( languageCode );
 	this.setTexts( texts );
 };
 
 /**
- * @class wikibase.datamodel.MultiTerm
+ * @class MultiTerm
  */
 $.extend( SELF.prototype, {
 	/**
@@ -108,4 +108,6 @@ $.extend( SELF.prototype, {
 
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

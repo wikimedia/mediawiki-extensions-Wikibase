@@ -1,9 +1,9 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
 /**
  * Stores items by key.
- * @class wikibase.datamodel.Map
+ * @class Map
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -16,7 +16,7 @@
  * @throws {Error} if item constructor is not a Function.
  * @throws {Error} if item constructor prototype does not feature an equals() function.
  */
-var SELF = wb.datamodel.Map = function WbDataModelMap( ItemConstructor, map ) {
+var SELF = function WbDataModelMap( ItemConstructor, map ) {
 	map = map || {};
 
 	if( !$.isFunction( ItemConstructor ) ) {
@@ -36,7 +36,7 @@ var SELF = wb.datamodel.Map = function WbDataModelMap( ItemConstructor, map ) {
 };
 
 /**
- * @class wikibase.datamodel.Map
+ * @class Map
  */
 $.extend( SELF.prototype, {
 	/**
@@ -172,7 +172,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Map} map
+	 * @param {Map} map
 	 * @return {boolean}
 	 */
 	equals: function( map ) {
@@ -205,4 +205,6 @@ $.extend( SELF.prototype, {
 	}
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

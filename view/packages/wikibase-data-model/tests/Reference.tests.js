@@ -4,27 +4,32 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( wb, QUnit ) {
+( function( QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.Reference' );
+	var Reference = require( '../src/Reference.js' ),
+		SnakList = require( '../src/SnakList.js' ),
+		PropertyNoValueSnak = require( '../src/PropertyNoValueSnak.js' ),
+		PropertySomeValueSnak = require( '../src/PropertySomeValueSnak.js' );
+
+	QUnit.module( 'Reference' );
 
 	QUnit.test( 'constructor, getSnaks()', function( assert ) {
 		assert.expect( 7 );
 		var snakLists = [
-			new wb.datamodel.SnakList( [] ),
-			new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
-			new wb.datamodel.SnakList( [
-				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-				new wb.datamodel.PropertySomeValueSnak( 'P2' )
+			new SnakList( [] ),
+			new SnakList( [new PropertyNoValueSnak( 'P1' )] ),
+			new SnakList( [
+				new PropertyNoValueSnak( 'P1' ),
+				new PropertySomeValueSnak( 'P2' )
 			] )
 		];
 
 		for( var i = 0; i < snakLists.length; i++ ) {
-			var reference = new wb.datamodel.Reference( snakLists[i] );
+			var reference = new Reference( snakLists[i] );
 
 			assert.ok(
-				reference instanceof wb.datamodel.Reference,
+				reference instanceof Reference,
 				'Test set #' + i + ': Instantiated Reference object.'
 			);
 
@@ -36,7 +41,7 @@
 
 		assert.throws(
 			function() {
-				return new wb.datamodel.Reference( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] );
+				return new Reference( [new PropertyNoValueSnak( 'P1' )] );
 			},
 			'Throwing an error when trying to instantiate a Reference with a plain array of Snak '
 			+ 'objects.'
@@ -48,13 +53,13 @@
 		var hash = 'hash12390213';
 
 		assert.equal(
-			( new wb.datamodel.Reference( null, hash ) ).getHash(),
+			( new Reference( null, hash ) ).getHash(),
 			hash,
 			'Reference\'s hash from constructor returned in getHash()'
 		);
 
 		assert.equal(
-			( new wb.datamodel.Reference() ).getHash(),
+			( new Reference() ).getHash(),
 			null,
 			'Reference without initial hash will return null in getHash()'
 		);
@@ -63,16 +68,16 @@
 	QUnit.test( 'equals()', function( assert ) {
 		assert.expect( 9 );
 		var references = [
-			new wb.datamodel.Reference(),
-			new wb.datamodel.Reference(
-				new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
+			new Reference(),
+			new Reference(
+				new SnakList( [new PropertyNoValueSnak( 'P1' )] ),
 				'hash12390213'
 			),
-			new wb.datamodel.Reference(
-				new wb.datamodel.SnakList(
+			new Reference(
+				new SnakList(
 					[
-						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-						new wb.datamodel.PropertySomeValueSnak( 'P2' )
+						new PropertyNoValueSnak( 'P1' ),
+						new PropertySomeValueSnak( 'P2' )
 					]
 				)
 			)
@@ -80,7 +85,7 @@
 
 		// Compare references:
 		for( var i = 0; i < references.length; i++ ) {
-			var clonedReference = new wb.datamodel.Reference(
+			var clonedReference = new Reference(
 				references[i].getSnaks(),
 				references[i].getHash()
 			);
@@ -105,4 +110,4 @@
 
 	} );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

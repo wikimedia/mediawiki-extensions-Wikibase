@@ -1,12 +1,13 @@
-( function( wb ) {
+( function() {
 'use strict';
 
-var PARENT = wb.datamodel.Map;
+var PARENT = require( './Map.js' ),
+	Term = require( './Term.js' );
 
 /**
  * Map of Term objects.
- * @class wikibase.datamodel.TermMap
- * @extends wikibase.datamodel.Map
+ * @class TermMap
+ * @extends Map
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -15,8 +16,8 @@ var PARENT = wb.datamodel.Map;
  *
  * @param {Object} [terms={}]
  */
-wb.datamodel.TermMap = util.inherit( 'WbDataModelTermMap', PARENT, function( terms ) {
-	PARENT.call( this, wb.datamodel.Term, terms );
+module.exports = util.inherit( 'WbDataModelTermMap', PARENT, function( terms ) {
+	PARENT.call( this, Term, terms );
 } );
 
-}( wikibase ) );
+}() );

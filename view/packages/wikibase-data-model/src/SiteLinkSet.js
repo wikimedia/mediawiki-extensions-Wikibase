@@ -1,22 +1,23 @@
-( function( wb ) {
+( function() {
 'use strict';
 
-var PARENT = wb.datamodel.Set;
+var PARENT = require( './Set.js' ),
+	SiteLink = require( './SiteLink.js' );
 
 /**
  * Set of SiteLink objects.
- * @class wikibase.datamodel.SiteLinkSet
- * @extends wikibase.datamodel.Set
+ * @class SiteLinkSet
+ * @extends Set
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  *
- * @param {wikibase.datamodel.SiteLink[]} [siteLinks=[]]
+ * @param {SiteLink[]} [siteLinks=[]]
  */
-wb.datamodel.SiteLinkSet = util.inherit( 'WbDataModelSiteLinkSet', PARENT, function( siteLinks ) {
-	PARENT.call( this, wb.datamodel.SiteLink, 'getSiteId', siteLinks );
+module.exports = util.inherit( 'WbDataModelSiteLinkSet', PARENT, function( siteLinks ) {
+	PARENT.call( this, SiteLink, 'getSiteId', siteLinks );
 } );
 
-}( wikibase ) );
+}() );

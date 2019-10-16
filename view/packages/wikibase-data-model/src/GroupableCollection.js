@@ -1,9 +1,9 @@
-( function( wb, $, util ) {
+( function( $, util ) {
 'use strict';
 
 /**
  * Interface defining interaction with a Group instance.
- * @class wikibase.datamodel.GroupableCollection
+ * @class GroupableCollection
  * @abstract
  * @since 1.0
  * @license GPL-2.0+
@@ -11,10 +11,10 @@
  *
  * @constructor
  */
-var SELF = wb.datamodel.GroupableCollection = function WbDataModelGroupableCollection() {};
+var SELF = function WbDataModelGroupableCollection() {};
 
 /**
- * @class wikibase.datamodel.GroupableCollection
+ * @class GroupableCollection
  */
 $.extend( SELF.prototype, {
 	/**
@@ -77,4 +77,6 @@ $.extend( SELF.prototype, {
 	getItemKey: util.abstractMember
 } );
 
-}( wikibase, jQuery, util ) );
+module.exports = SELF;
+
+}( jQuery, util ) );

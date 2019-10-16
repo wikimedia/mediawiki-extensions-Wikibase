@@ -2,14 +2,16 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.SiteLink' );
+var SiteLink = require( '../src/SiteLink.js' );
+
+QUnit.module( 'SiteLink' );
 
 QUnit.test( 'Basic tests', function( assert ) {
 	assert.expect( 2 );
-	var siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-name' );
+	var siteLink = new SiteLink( 'test-id', 'test-name' );
 
 	assert.equal(
 		siteLink.getSiteId(),
@@ -26,7 +28,7 @@ QUnit.test( 'Basic tests', function( assert ) {
 
 QUnit.test( 'Badges', function( assert ) {
 	assert.expect( 4 );
-	var siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-page' ),
+	var siteLink = new SiteLink( 'test-id', 'test-page' ),
 		badges = ['Q123', 'Q456'];
 
 	assert.equal(
@@ -51,7 +53,7 @@ QUnit.test( 'Badges', function( assert ) {
 		'Removed badges.'
 	);
 
-	siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-page', badges );
+	siteLink = new SiteLink( 'test-id', 'test-page', badges );
 
 	assert.equal(
 		badges.join( ',' ),
@@ -81,7 +83,7 @@ QUnit.test( 'equals()', function( assert ) {
 	];
 
 	for( var i = 0; i < testSet.length; i++ ) {
-		var siteLink1 = new wb.datamodel.SiteLink(
+		var siteLink1 = new SiteLink(
 			testSet[i][0],
 			testSet[i][1],
 			testSet[i][2]
@@ -95,7 +97,7 @@ QUnit.test( 'equals()', function( assert ) {
 		}
 
 		for( j = 0; j < testSet.length; j++ ) {
-			var siteLink2 = new wb.datamodel.SiteLink(
+			var siteLink2 = new SiteLink(
 				testSet[j][0],
 				testSet[j][1],
 				testSet[j][2]
@@ -117,4 +119,4 @@ QUnit.test( 'equals()', function( assert ) {
 
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

@@ -2,10 +2,13 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit, $, util ) {
+( function( QUnit, $, util ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.Group' );
+var Group = require( '../src/Group.js' ),
+	GroupableCollection = require( '../src/GroupableCollection.js' );
+
+QUnit.module( 'Group' );
 
 /**
  * @class TestItem
@@ -36,7 +39,7 @@ $.extend( TestItem.prototype, {
  */
 var TestContainer = util.inherit(
 	'TestContainer',
-	wb.datamodel.GroupableCollection,
+	GroupableCollection,
 	function( items ) {
 		this._items = items || [];
 	},
@@ -123,23 +126,23 @@ function getTestContainer( key, n ) {
 /**
  * @param {*} key
  * @param {TestContainer} [container]
- * @return {wikibase.datamodel.Group}
+ * @return {Group}
  */
 function createGroup( key, container ) {
-	return new wb.datamodel.Group( key, TestContainer, 'getKeys', container );
+	return new Group( key, TestContainer, 'getKeys', container );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.expect( 6 );
 	assert.ok(
-		createGroup( 'key', new TestContainer() ) instanceof wb.datamodel.Group,
+		createGroup( 'key', new TestContainer() ) instanceof Group,
 		'Instantiated empty Group.'
 	);
 
 	var group = createGroup( 'key', getTestContainer( 'key', 2 ) );
 
 	assert.ok(
-		group instanceof wb.datamodel.Group,
+		group instanceof Group,
 		'Instantiated filled Group.'
 	);
 
@@ -246,4 +249,4 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit, jQuery, util ) );
+}( QUnit, jQuery, util ) );

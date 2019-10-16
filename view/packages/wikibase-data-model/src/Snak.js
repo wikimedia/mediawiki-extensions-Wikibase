@@ -1,9 +1,9 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
 /**
  * Abstract Snak base class featuring a property id.
- * @class wikibase.datamodel.Snak
+ * @class Snak
  * @abstract
  * @since 0.3
  * @license GPL-2.0+
@@ -17,7 +17,7 @@
  * @throws {Error} when trying to instantiate an abstract Snak object.
  * @throws {Error} when the property id is omitted.
  */
-var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId, hash ) {
+var SELF = function WbDataModelSnak( propertyId, hash ) {
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );
 	} else if( !propertyId ) {
@@ -35,7 +35,7 @@ var SELF = wb.datamodel.Snak = function WbDataModelSnak( propertyId, hash ) {
 SELF.TYPE = null;
 
 /**
- * @class wikibase.datamodel.Snak
+ * @class Snak
  */
 $.extend( SELF.prototype, {
 	/**
@@ -93,4 +93,6 @@ $.extend( SELF.prototype, {
 	}
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

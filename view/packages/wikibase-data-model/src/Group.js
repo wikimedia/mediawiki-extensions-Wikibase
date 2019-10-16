@@ -1,9 +1,11 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
+
+var GroupableCollection = require( './GroupableCollection.js' );
 
 /**
  * References a container of which all items feature the key specified with the Group.
- * @class wikibase.datamodel.Group
+ * @class Group
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -13,11 +15,11 @@
  * @param {*} key
  * @param {Function} GroupableCollectionConstructor
  * @param {string} groupableCollectionGetKeysFunctionName
- * @param {wikibase.datamodel.GroupableCollection} [groupableCollection=new GroupableCollectionConstructor()]
+ * @param {GroupableCollection} [groupableCollection=new GroupableCollectionConstructor()]
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-var SELF = wb.datamodel.Group = function WbDataModelGroup(
+var SELF = function WbDataModelGroup(
 	key,
 	GroupableCollectionConstructor,
 	groupableCollectionGetKeysFunctionName,
@@ -42,7 +44,7 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 };
 
 /**
- * @class wikibase.datamodel.Group
+ * @class Group
  */
 $.extend( SELF.prototype, {
 	/**
@@ -58,7 +60,7 @@ $.extend( SELF.prototype, {
 	_groupableCollectionGetKeysFunctionName: null,
 
 	/**
-	 * @property {wikibase.datamodel.GroupableCollection}
+	 * @property {GroupableCollection}
 	 * @private
 	 */
 	_groupableCollection: null,
@@ -71,20 +73,20 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.datamodel.GroupableCollection}
+	 * @return {GroupableCollection}
 	 */
 	getItemContainer: function() {
 		return this._groupableCollection;
 	},
 
 	/**
-	 * @param {wikibase.datamodel.GroupableCollection} groupableCollection
+	 * @param {GroupableCollection} groupableCollection
 	 *
 	 * @throws {Error} when passed GroupableCollection instance contains an item whose key does not
 	 *         match the key registered with the Group instance.
 	 */
 	setItemContainer: function( groupableCollection ) {
-		if( !( groupableCollection instanceof wb.datamodel.GroupableCollection ) ) {
+		if( !( groupableCollection instanceof GroupableCollection ) ) {
 			throw new Error( 'groupableCollection must be a GroupableCollection' );
 		}
 
@@ -101,7 +103,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {wikibase.datamodel.GroupableCollection} groupableCollection
+	 * @param {GroupableCollection} groupableCollection
 	 * @return {string}
 	 * @private
 	 */
@@ -160,4 +162,6 @@ $.extend( SELF.prototype, {
 
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

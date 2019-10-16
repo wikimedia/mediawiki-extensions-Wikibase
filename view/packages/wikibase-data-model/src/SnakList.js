@@ -1,12 +1,13 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
-var PARENT = wb.datamodel.List;
+var PARENT = require( './List.js' ),
+	Snak = require( './Snak.js' );
 
 /**
  * List of Snak objects.
- * @class wikibase.datamodel.SnakList
- * @extends wikibase.datamodel.List
+ * @class SnakList
+ * @extends List
  * @abstract
  * @since 0.3
  * @license GPL-2.0+
@@ -14,16 +15,16 @@ var PARENT = wb.datamodel.List;
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Snak[]} [snaks=[]]
+ * @param {Snak[]} [snaks=[]]
  */
-wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( snaks ) {
-	PARENT.call( this, wikibase.datamodel.Snak, snaks );
+module.exports = util.inherit( 'WbDataModelSnakList', PARENT, function( snaks ) {
+	PARENT.call( this, Snak, snaks );
 }, {
 	/**
 	 * Returns a SnakList with the snaks featuring a specific property id.
 	 *
 	 * @param {string} propertyId
-	 * @return {wikibase.datamodel.SnakList}
+	 * @return {SnakList}
 	 * @private
 	 */
 	getFilteredSnakList: function( propertyId ) {
@@ -31,7 +32,7 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 			throw new Error( 'Can not filter with no propertyId.' );
 		}
 
-		var filteredSnakList = new wb.datamodel.SnakList();
+		var filteredSnakList = new this.constructor();
 
 		this.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
@@ -45,7 +46,7 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	/**
 	 * Returns a list of SnakList objects, each of them grouped by the property used by the snaks.
 	 *
-	 * @return {wikibase.datamodel.SnakList[]}
+	 * @return {SnakList[]}
 	 */
 	getGroupedSnakLists: function() {
 		var groupedSnakLists = [],
@@ -61,7 +62,7 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	/**
 	 * Adds the Snaks of another SnakList to this SnakList.
 	 *
-	 * @param {wikibase.datamodel.SnakList|null} [snakList=null]
+	 * @param {SnakList|null} [snakList=null]
 	 */
 	merge: function( snakList ) {
 		if( !snakList ) {
@@ -98,4 +99,4 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	}
 } );
 
-}( wikibase, jQuery ) );
+}( jQuery ) );

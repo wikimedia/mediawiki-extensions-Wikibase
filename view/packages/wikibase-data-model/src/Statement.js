@@ -1,9 +1,12 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
+
+var ReferenceList = require( './ReferenceList.js' ),
+	Claim = require( './Claim.js' );
 
 /**
  * Combination of a claim, a rank and references.
- * @class wikibase.datamodel.Statement
+ * @class Statement
  * @since 0.3
  * @license GPL-2.0+
  * @author Daniel Werner
@@ -11,79 +14,79 @@
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Claim} claim
- * @param {wikibase.datamodel.ReferenceList|null} [references=new wikibase.datamodel.ReferenceList()]
- * @param {number} [rank=wikibase.datamodel.Statement.RANK.NORMAL]
+ * @param {Claim} claim
+ * @param {ReferenceList|null} [references=new ReferenceList()]
+ * @param {number} [rank=Statement.RANK.NORMAL]
  */
-var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, references, rank ) {
+var SELF = function WbDataModelStatement( claim, references, rank ) {
 	this.setClaim( claim );
-	this.setReferences( references || new wb.datamodel.ReferenceList() );
-	this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );
+	this.setReferences( references || new ReferenceList() );
+	this.setRank( rank === undefined ? SELF.RANK.NORMAL : rank );
 };
 
 /**
- * @class wikibase.datamodel.Statement
+ * @class Statement
  */
 $.extend( SELF.prototype, {
 	/**
-	 * @property {wikibase.datamodel.Claim}
+	 * @property {Claim}
 	 * @private
 	 */
 	_claim: null,
 
 	/**
-	 * @property {wikibase.datamodel.ReferenceList}
+	 * @property {ReferenceList}
 	 * @private
 	 */
 	_references: null,
 
 	/**
-	 * @see wikibase.datamodel.Statement.RANK
+	 * @see Statement.RANK
 	 * @property {number}
 	 * @private
 	 */
 	_rank: null,
 
 	/**
-	 * @return {wikibase.datamodel.Claim}
+	 * @return {Claim}
 	 */
 	getClaim: function() {
 		return this._claim;
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Claim} claim
+	 * @param {Claim} claim
 	 *
 	 * @throws {Error} if claim is not a Claim instance.
 	 */
 	setClaim: function( claim ) {
-		if( !( claim instanceof wb.datamodel.Claim ) ) {
-			throw new Error( 'Claim needs to be an instance of wikibase.datamodel.Claim' );
+		if( !( claim instanceof Claim ) ) {
+			throw new Error( 'Claim needs to be an instance of Claim' );
 		}
 		this._claim = claim;
 	},
 
 	/**
-	 * @return {wikibase.datamodel.ReferenceList}
+	 * @return {ReferenceList}
 	 */
 	getReferences: function() {
 		return this._references;
 	},
 
 	/**
-	 * @param {wikibase.datamodel.ReferenceList} references
+	 * @param {ReferenceList} references
 	 *
 	 * @throws {Error} if references is not a ReferenceList instance.
 	 */
 	setReferences: function( references ) {
-		if( !( references instanceof wb.datamodel.ReferenceList ) ) {
+		if( !( references instanceof ReferenceList ) ) {
 			throw new Error( 'References have to be supplied in a ReferenceList' );
 		}
 		this._references = references;
 	},
 
 	/**
-	 * @see wikibase.datamodel.Statement.RANK
+	 * @see Statement.RANK
 	 *
 	 * @return {number}
 	 */
@@ -92,11 +95,11 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @see wikibase.datamodel.Statement.RANK
+	 * @see Statement.RANK
 	 *
 	 * @param {number} rank
 	 *
-	 * @throws {Error} if rank is not defined in wikibase.datamodel.Statement.RANK.
+	 * @throws {Error} if rank is not defined in Statement.RANK.
 	 */
 	setRank: function( rank ) {
 		for( var i in SELF.RANK ) {
@@ -132,4 +135,6 @@ SELF.RANK = {
 	DEPRECATED: 0
 };
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

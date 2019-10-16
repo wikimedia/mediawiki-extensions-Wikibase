@@ -1,25 +1,26 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
-var PARENT = wb.datamodel.List;
+var PARENT = require( './List.js' ),
+	Statement = require( './Statement.js' );
 
 /**
  * List of Statement objects.
- * @class wikibase.datamodel.StatementList
- * @extends wikibase.datamodel.List
+ * @class StatementList
+ * @extends List
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
  *
- * @param {wikibase.datamodel.Statement[]} [statements=[]]
+ * @param {Statement[]} [statements=[]]
  */
-wb.datamodel.StatementList = util.inherit(
+module.exports = util.inherit(
 	'WbDataModelStatementList',
 	PARENT,
 	function( statements ) {
-		PARENT.call( this, wikibase.datamodel.Statement, statements );
+		PARENT.call( this, Statement, statements );
 	},
 {
 	/**
@@ -39,7 +40,7 @@ wb.datamodel.StatementList = util.inherit(
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Statement} statement
+	 * @param {Statement} statement
 	 * @return {string}
 	 */
 	getItemKey: function( statement ) {
@@ -47,4 +48,4 @@ wb.datamodel.StatementList = util.inherit(
 	}
 } );
 
-}( wikibase, jQuery ) );
+}( jQuery ) );

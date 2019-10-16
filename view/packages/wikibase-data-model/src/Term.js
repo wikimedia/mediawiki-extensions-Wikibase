@@ -1,9 +1,9 @@
-( function( wb, $ ) {
+( function( $ ) {
 'use strict';
 
 /**
  * Combination of a language code and a text string.
- * @class wikibase.datamodel.Term
+ * @class Term
  * @since 1.0
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -13,13 +13,13 @@
  * @param {string} languageCode
  * @param {string} text
  */
-var SELF = wb.datamodel.Term = function WbDataModelTerm( languageCode, text ) {
+var SELF = function WbDataModelTerm( languageCode, text ) {
 	this.setLanguageCode( languageCode );
 	this.setText( text );
 };
 
 /**
- * @class wikibase.datamodel.Term
+ * @class Term
  */
 $.extend( SELF.prototype, {
 	/**
@@ -85,4 +85,6 @@ $.extend( SELF.prototype, {
 
 } );
 
-}( wikibase, jQuery ) );
+module.exports = SELF;
+
+}( jQuery ) );

@@ -2,10 +2,12 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( QUnit ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.Term' );
+var Term = require( '../src/Term.js' );
+
+QUnit.module( 'Term' );
 
 var testSets = {
 	positive: [
@@ -26,7 +28,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 	for( var i = 0; i < testSets.positive.length; i++ ) {
 		var testSet = testSets.positive[i];
 		assert.ok(
-			( new wb.datamodel.Term( testSet[0], testSet[1] ) ) instanceof wb.datamodel.Term,
+			( new Term( testSet[0], testSet[1] ) ) instanceof Term,
 			'Test set #' + i +': Instantiated Term.'
 		);
 	}
@@ -36,7 +38,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 	assert.expect( 5 );
 	function instantiateObject( languageCode, text ) {
 		return function() {
-			return new wb.datamodel.Term( languageCode, text );
+			return new Term( languageCode, text );
 		};
 	}
 
@@ -52,10 +54,10 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 4 );
 	for( var i = 0; i < testSets.positive.length; i++ ) {
-		var term1 = new wb.datamodel.Term( testSets.positive[i][0], testSets.positive[i][1] );
+		var term1 = new Term( testSets.positive[i][0], testSets.positive[i][1] );
 
 		for( var j = 0; j < testSets.positive.length; j++ ) {
-			var term2 = new wb.datamodel.Term( testSets.positive[j][0], testSets.positive[j][1] );
+			var term2 = new Term( testSets.positive[j][0], testSets.positive[j][1] );
 
 			if( j === i ) {
 				assert.ok(
@@ -73,4 +75,4 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 } );
 
-}( wikibase, QUnit ) );
+}( QUnit ) );

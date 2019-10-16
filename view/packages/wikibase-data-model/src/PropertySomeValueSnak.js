@@ -1,12 +1,12 @@
-( function( wb, util ) {
+( function( util ) {
 'use strict';
 
-var PARENT = wb.datamodel.Snak;
+var PARENT = require( './Snak.js' );
 
 /**
  * Snak occupying some value.
- * @class wikibase.datamodel.PropertySomeValueSnak
- * @extends wikibase.datamodel.Snak
+ * @class PropertySomeValueSnak
+ * @extends Snak
  * @since 0.3
  * @license GPL-2.0+
  * @author Daniel Werner
@@ -16,9 +16,7 @@ var PARENT = wb.datamodel.Snak;
  * @param {string} propertyId
  * @param {string|null} [hash=null]
  */
-var SELF
-	= wb.datamodel.PropertySomeValueSnak
-	= util.inherit( 'WbDataModelPropertySomeValueSnak', PARENT, {} );
+var SELF = util.inherit( 'WbDataModelPropertySomeValueSnak', PARENT, {} );
 
 /**
  * @inheritdoc
@@ -27,4 +25,6 @@ var SELF
  */
 SELF.TYPE = 'somevalue';
 
-}( wikibase, util ) );
+module.exports = SELF;
+
+}( util ) );
