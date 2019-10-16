@@ -21,27 +21,11 @@ module.exports = function ( config ) {
 			'node_modules/wikibase-data-model/src/List.js',
 			'node_modules/wikibase-data-model/src/*.js',
 
-			'src/__namespace.js',
-			'src/Serializers/Serializer.js',
-			'src/Serializers/*.js',
-			'src/SerializerFactory.js',
-			'src/StrategyProvider.js',
-			'src/Deserializers/Deserializer.js',
-			'src/Deserializers/*.js',
-			'src/DeserializerFactory.js',
-			'tests/MockEntity.js',
-			'tests/MockEntity.tests.js',
-			'tests/StrategyProvider.tests.js',
-			'tests/SerializerFactory.tests.js',
-			'tests/Serializers/*.js',
-			'tests/Deserializers/*.js',
-			'tests/DeserializerFactory.tests.js'
+			'tests/**/*.tests.js'
 		],
 
 		preprocessors: {
-			'src/**/*.js': [ 'webpack' ],
 			'tests/**/*.tests.js': [ 'webpack' ],
-			'tests/MockEntity.js': [ 'webpack' ],
 			'node_modules/wikibase-data-model/src/index.js': [ 'webpack' ]
 		},
 
