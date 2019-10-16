@@ -76,7 +76,6 @@ return [
 			'wikibase/entityChangers/SiteLinkSetsChanger.tests.js',
 			'wikibase/utilities/ClaimGuidGenerator.tests.js',
 			'wikibase/view/testViewController.js',
-			'wikibase/view/ToolbarFactory.tests.js',
 			'wikibase/wikibase.WikibaseContentLanguages.tests.js',
 			'wikibase/wikibase.getUserLanguages.tests.js',
 			'wikibase/wikibase.getLanguageNameByCode.tests.js',
@@ -97,7 +96,7 @@ return [
 			'wikibase.tests.qunit.testrunner',
 			'wikibase.tests',
 			'wikibase.utilities.ClaimGuidGenerator',
-			'wikibase.view.ToolbarFactory',
+			'wikibase.ui.entityViewInit',
 			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.tests.getMockListItemAdapter',
 			'wikibase.WikibaseContentLanguages',
@@ -197,6 +196,25 @@ return [
 		],
 		'dependencies' => [
 			'wikibase'
+		]
+	],
+	'wikibase.view.tests.ToolbarFactory' => $packageFilesModuleBase + [
+		'packageFiles' => [
+			'tests/qunit/wikibase/view/ToolbarFactory.tests.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.toolbar.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
+			'resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
+			'resources/wikibase/view/ToolbarFactory.js',
+		],
+		'dependencies' => [
+			'jquery.ui.EditableTemplatedWidget',
+			'jquery.wikibase.wbtooltip',
+			'wikibase.api.RepoApiError',
+			'wikibase.view.__namespace',
 		]
 	],
 ];

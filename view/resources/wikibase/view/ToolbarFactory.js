@@ -1,7 +1,9 @@
-( function ( wb ) {
+( function () {
 	'use strict';
 
-	var MODULE = wb.view;
+	require( '../../jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js' );
+	require( '../../jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js' );
+	require( '../../jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js' );
 
 	/**
 	 * A factory for creating toolbars
@@ -11,7 +13,7 @@
 	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 * @constructor
 	 */
-	var SELF = MODULE.ToolbarFactory = function ToolbarFactory() {};
+	var SELF = wikibase.view.ToolbarFactory = function ToolbarFactory() {};
 
 	/**
 	 * Create a addtoolbar
@@ -75,5 +77,7 @@
 
 		return $dom.data( toolbarName );
 	};
+
+	module.exports = SELF;
 
 }( wikibase ) );

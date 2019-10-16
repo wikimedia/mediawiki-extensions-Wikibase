@@ -20,6 +20,7 @@
 		DataValueBasedEntityIdHtmlFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js' ),
 		CachingEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js' ),
 		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' ),
+		ToolbarFactory = require( '../../view/resources/wikibase/view/ToolbarFactory.js' ),
 		config = require( './config.json' ),
 		datamodel = require( 'wikibase.datamodel' ),
 		serialization = require( 'wikibase.serialization' );
@@ -75,7 +76,7 @@
 			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
 			entityIdParser = new ( parserStore.getParser( datamodel.EntityId.TYPE ) )( { lang: userLanguages[ 0 ] } ),
-			toolbarFactory = new wb.view.ToolbarFactory(),
+			toolbarFactory = new ToolbarFactory(),
 			structureEditorFactory = new StructureEditorFactory( toolbarFactory ),
 			startEditingCallback = function () {
 				return $.Deferred().resolve().promise();

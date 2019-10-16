@@ -5,6 +5,9 @@
 ( function ( wb ) {
 	'use strict';
 
+	require( './jquery.wikibase.toolbar.js' );
+	require( './jquery.wikibase.toolbarbutton.js' );
+
 	var PARENT = $.wikibase.toolbar;
 
 	/**

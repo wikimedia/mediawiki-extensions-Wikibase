@@ -104,6 +104,14 @@ return call_user_func( function() {
 				'view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js',
 				'view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js',
 				'view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.toolbaritem.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.toolbarbutton.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.toolbar.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.singlebuttontoolbar.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.addtoolbar.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
+				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
+				'view/resources/wikibase/view/ToolbarFactory.js',
 				[
 					"name" => "repo/resources/config.json",
 					"callback" => function () {
@@ -113,6 +121,10 @@ return call_user_func( function() {
 						];
 					}
 				],
+			],
+			'styles' => [
+				'view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css',
+				'view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.edittoolbar.css',
 			],
 			'dependencies' => [
 				'mediawiki.api',
@@ -133,8 +145,8 @@ return call_user_func( function() {
 				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.EntityInitializer',
 				'wikibase.api.RepoApi',
+				'wikibase.api.RepoApiError',
 				'wikibase.sites',
-				'wikibase.view.ToolbarFactory',
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.getUserLanguages',
 				'wikibase.experts.__namespace',
@@ -152,6 +164,8 @@ return call_user_func( function() {
 				'valueParsers.parsers',
 				'valueParsers.ValueParserStore',
 				'wikibase.api.ParseValueCaller',
+				'jquery.ui.EditableTemplatedWidget', // for jquery.wikibase.toolbaritem
+				'jquery.wikibase.toolbar.styles',
 			],
 			'messages' => [
 				'pagetitle',
@@ -159,6 +173,13 @@ return call_user_func( function() {
 				'wikibase-anonymouseditwarning',
 				'wikibase-entity-item',
 				'wikibase-entity-property',
+				'wikibase-add',
+				'wikibase-cancel',
+				'wikibase-edit',
+				'wikibase-remove',
+				'wikibase-remove-inprogress',
+				'wikibase-save',
+				'wikibase-publish',
 			],
 			'localBasePath' => dirname( dirname( __DIR__ ) ),
 			'remoteExtPath' => 'Wikibase',
