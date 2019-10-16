@@ -177,6 +177,8 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "Назва мови поточною мовою (визначається параметром <var>uselang</var>), із застосуванням мовних фолбеків, якщо необхідно. Зазвичай для всіх контентних мов, які приймає Вікібаза, відома принаймні англомовна назва мови.",
 	"apihelp-query+wbcontentlanguages-example-1": "Отримати дійсні коди мов для термінів сутності.",
 	"apihelp-query+wbcontentlanguages-example-2": "Отримати дійсні мови, з кодом мови та автонімом, для одномовних текстових значень.",
+	"apihelp-query+wbdatabridgeconfig-summary": "Видає інформацію, необхідну для функції [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]].",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "Це внутрішній модуль. Будь ласка, не використовуйте його.",
 	"apihelp-query+wbsearch-description": "Виконує пошук сутностей, використовуючи назви та альтернативні назви.\nЦе можна використовувати як генератор для інших запитів.\nВиводить виявлений результат, що має бути показаний.",
 	"apihelp-query+wbsearch-summary": "Виконує пошук сутностей за допомогою основних та альтернативних назв.",
 	"apihelp-query+wbsearch-extended-description": "Це можна використати як генератор для інших запитів.\nВиводить відповідний термін, який слід показати.",

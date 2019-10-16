@@ -113,5 +113,6 @@
 	"unresolved-property-category": "Pàgines amb propietats no resoltes",
 	"unresolved-property-category-desc": "Aquesta categoria mostra les pàgines que fan referència a propietats de {{WBREPONAME}} que no es poden trobar ni per l'identificador ni per l'etiqueta.",
 	"connected-redirect-category": "Redireccions associades amb un element de {{WBREPONAME}}",
-	"connected-redirect-category-desc": "Aquesta categoria llista les pàgines de redirecció associades amb qualque element de {{WBREPONAME}}."
+	"connected-redirect-category-desc": "Aquesta categoria llista les pàgines de redirecció associades amb qualque element de {{WBREPONAME}}.",
+	"wikibase-client-data-bridge-dialog-title": "Modifica la propietat"
 }

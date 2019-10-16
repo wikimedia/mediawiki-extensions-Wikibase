@@ -14,7 +14,8 @@
 			"Duolaimi",
 			"Hanyanbo98",
 			"Dimension",
-			"夢蝶葬花"
+			"夢蝶葬花",
+			"Xiplus"
 		]
 	},
 	"wikibase-lib-desc": "储存维基库及其客户端的共同功能",
@@ -146,8 +147,8 @@
 	"wikibase-entity-summary-wbsetsitelink-remove": "已移除至[$2]的链接",
 	"wikibase-entity-summary-wblinktitles-create": "已创建此实体以连接页面",
 	"wikibase-entity-summary-wblinktitles-connect": "已添加语言链接以连接页面",
-	"wikibase-entity-summary-wbcreateclaim-value": "已创建{{PLURAL:$1|声称}}",
-	"wikibase-entity-summary-wbcreateclaim-novalue": "已创建{{PLURAL:$1|声称}}",
+	"wikibase-entity-summary-wbcreateclaim-value": "创建{{PLURAL:$1|声称}}",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "创建{{PLURAL:$1|声称}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "已创建{{PLURAL:$1|声称}}",
 	"wikibase-entity-summary-wbcreateclaim": "已创建{{PLURAL:$1|声称}}",
 	"wikibase-entity-summary-wbsetclaimvalue": "设置{{PLURAL:$1|声称值}}",
@@ -157,7 +158,7 @@
 	"wikibase-entity-summary-special-create-item": "已创建带{{PLURAL:$1|值}}的[$2]项",
 	"wikibase-entity-summary-wbcreateclaim-create": "已创建声称",
 	"wikibase-entity-summary-wbsetclaim-update": "已更改{{PLURAL:$3|声称}}",
-	"wikibase-entity-summary-wbsetclaim-create": "已创建{{PLURAL:$3|声称}}",
+	"wikibase-entity-summary-wbsetclaim-create": "创建{{PLURAL:$3|声称}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "已更改{{PLURAL:$3|声称}}的$4个限定符",
 	"wikibase-entity-summary-wbsetclaim-update-references": "已更改{{PLURAL:$3|声称}}的$4个参考文献",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "已更改{{PLURAL:$3|声称}}的等级",

@@ -16,7 +16,8 @@
 			"Diyapazon",
 			"Hedda",
 			"TmY e12",
-			"ToprakM"
+			"ToprakM",
+			"BaRaN6161 TURK"
 		]
 	},
 	"wikibase-client-desc": "Wikibase uzantısı için istemci",
@@ -115,11 +116,12 @@
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} ile ilgili {{PLURAL:$1|bağlantı|bağlantılar}}",
 	"echo-pref-tooltip-wikibase-action": "Birisi bir {{WBREPONAME}} ögesine {{GENDER:|yarattığım}} bir sayfayı bağladığında bana bildir.",
 	"notification-header-page-connection": "<strong>$3</strong> sayfası, konuyla ilgili verileri içeren {{PLURAL:$4|-1=bir {{WBREPONAME}} ögesine|$4 numaralı {{WBREPONAME}}}} ögesine {{GENDER:$2|bağlandı}}.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> ve {{PLURAL:$4|bir diğer sayfa|$4 diğer sayfa|100=99+ diğer sayfa}}, {{WBREPONAME}} ögelerine {{GENDER:$2|bağlandı}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> ve {{PLURAL:$4|bir diğer sayfa|$4 diğer sayfa|100=99+ diğer sayfa}}, {{WBREPONAME}} ögelerine {{GENDER:$2|bağlandı}}, konularla ilgili verilerin toplanabileceği yerler.",
 	"notification-link-text-view-item": "Ögeyi {{GENDER:$1|görüntüle}}",
 	"notification-subject-page-connection": "{{SITENAME}} üzerinde {{GENDER:$3|oluşturduğunuz}} bir sayfa bir {{WBREPONAME}} öğesine {{GENDER:$2|bağlandı}}.",
 	"unresolved-property-category": "Çözülmemiş özelliklere sahip sayfalar",
 	"unresolved-property-category-desc": "Bu kategori, özellik kimliği veya etiketi ile bulunamayan {{WBREPONAME}} özelliklerine başvuran sayfaları listeler.",
 	"connected-redirect-category": "Bir {{WBREPONAME}} öğesine bağlı olan yönlendirmeler",
-	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler."
+	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler.",
+	"wikibase-client-data-bridge-dialog-title": "Mülkü Düzenle"
 }

@@ -180,6 +180,8 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "在目前語言的語言名稱（經由 <var>uselang</var> 參數指定），若有需要會以語言備用來套用。一般來說，Wikibase 所接受的全部內容語言裡至少會有一個英語名稱 。",
 	"apihelp-query+wbcontentlanguages-example-1": "取得用於實體用語裡的有效語言代碼。",
 	"apihelp-query+wbcontentlanguages-example-2": "取得用於單語言文字值的帶有語言代碼與原名之有效語言。",
+	"apihelp-query+wbdatabridgeconfig-summary": "回傳 [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]] 功能需要的資訊。",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "此為內部模組，請不要使用。",
 	"apihelp-query+wbsearch-description": "搜尋使用標籤和別名的實體。\n這可用作為其它查詢的產生器。\n回傳應顯示出的符合用語。",
 	"apihelp-query+wbsearch-summary": "搜尋實體所使用的標籤和別名。",
 	"apihelp-query+wbsearch-extended-description": "這可用作為其它查詢的產生器。\n回傳應顯示出的符合用語。",
