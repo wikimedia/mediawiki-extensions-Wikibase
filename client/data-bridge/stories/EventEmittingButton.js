@@ -36,4 +36,12 @@ storiesOf( 'EventEmittingButton', module )
 			:squary="true"
 			message="cancel"
 		/>`,
+	} ), { info: true } )
+	.add( 'primaryProgressive disabled', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="primaryProgressive"
+			message="disabled primaryProgressive"
+			:disabled="true"
+		/>`,
 	} ), { info: true } );

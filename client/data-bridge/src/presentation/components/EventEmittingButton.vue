@@ -7,10 +7,12 @@
 			{ 'wb-ui-event-emitting-button--pressed': isPressed },
 			{ 'wb-ui-event-emitting-button--iconOnly': isIconOnly },
 			{ 'wb-ui-event-emitting-button--frameless': isFrameless },
+			{ 'wb-ui-event-emitting-button--disabled': disabled },
 		]"
 		:href="href"
-		:tabindex="href ? null : 0"
+		:tabindex="tabindex"
 		:role="href ? 'link' : 'button'"
+		:aria-disabled="disabled ? 'true' : null"
 		:title="message"
 		@click="click"
 		@keydown.enter="handleEnterPress"
@@ -59,6 +61,9 @@ export default class EventEmittingButton extends Vue {
 	public preventDefault!: boolean;
 
 	@Prop( { required: false, default: false, type: Boolean } )
+	public disabled!: boolean;
+
+	@Prop( { required: false, default: false, type: Boolean } )
 	public squary!: boolean;
 
 	public isPressed = false;
@@ -95,7 +100,22 @@ export default class EventEmittingButton extends Vue {
 		if ( this.preventDefault ) {
 			this.preventOpeningLink( event );
 		}
+		if ( this.disabled ) {
+			return;
+		}
 		this.$emit( 'click', event );
+	}
+
+	public get tabindex() {
+		if ( this.disabled ) {
+			return -1;
+		}
+
+		if ( this.href ) {
+			return null;
+		}
+
+		return 0;
 	}
 
 	private preventOpeningLink( event: UIEvent ) {
@@ -154,6 +174,14 @@ export default class EventEmittingButton extends Vue {
 		&:active:focus {
 			box-shadow: none;
 		}
+	}
+
+	&--disabled {
+		pointer-events: none;
+		cursor: default;
+		background-color: $background-color-filled--disabled;
+		color: $color-filled--disabled;
+		border-color: $border-color-base--disabled;
 	}
 
 	&--cancel {
