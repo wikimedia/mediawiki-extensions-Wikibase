@@ -1,4 +1,4 @@
-( function( dv, vf, vp ) {
+module.exports = ( function( dv, vf, vp ) {
 'use strict';
 
 var ViewState = require( './jquery.valueview.ViewState.js' );

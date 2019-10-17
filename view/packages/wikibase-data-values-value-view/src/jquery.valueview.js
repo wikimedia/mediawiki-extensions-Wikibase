@@ -1,6 +1,8 @@
 ( function () {
 	'use strict';
 
+	require( './jquery.valueview.valueview.js' );
+
 	var origValueview = $.valueview || {};
 
 	// The actual valueview jQuery widget is defined as jQuery.valueview.valueview. Since this is
