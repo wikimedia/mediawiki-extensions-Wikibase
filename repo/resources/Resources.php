@@ -112,6 +112,7 @@ return call_user_func( function() {
 				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js',
 				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
 				'view/resources/wikibase/view/ToolbarFactory.js',
+				'view/resources/wikibase/wikibase.ValueFormatterFactory.js',
 				[
 					"name" => "repo/resources/config.json",
 					"callback" => function () {
@@ -139,7 +140,6 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.api.ValueCaller',
 				'wikibase.formatters.ApiValueFormatter',
-				'wikibase.ValueFormatterFactory',
 				'wikibase.datamodel',
 				'wikibase.entityPage.entityLoaded',
 				'wikibase.entityChangers.EntityChangersFactory',

@@ -6,7 +6,7 @@
 ( function ( wb ) {
 	'use strict';
 
-	var PARENT = wb.ValueFormatterFactory;
+	var PARENT = require( '../../../view/resources/wikibase/wikibase.ValueFormatterFactory.js' );
 	wb.formatters = wb.formatters || {};
 
 	/**
