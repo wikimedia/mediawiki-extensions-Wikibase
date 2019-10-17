@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\InconsistentRedirectException;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
@@ -390,6 +391,86 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				$exception->getMessage()
 			);
 			$this->assertSame( $oldEntity, $exception->getEntityRevision()->getEntity() );
+		}
+	}
+
+	public function testGetLatestRevisionId_ThrowsWhenFoundRevisionContainsInconsistentRedirectIndication() {
+		// For all we know this only happened IRL with MediaInfo entities.
+		// The following would be MediaInfoId consequently.
+		$entityId = $this->getMockEntityId( 'M1234' );
+		$entity = $this->createMock( EntityDocument::class );
+
+		$revId = 2000;
+		$slotRole = 'mediainfo';
+		$lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+
+		$slotRecord = $this->createMock( SlotRecord::class );
+
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision
+			->method( 'hasSlot' )
+			->willReturn( true );
+		$revision
+			->method( 'audienceCan' )
+			->willReturn( true );
+		$revision
+			->method( 'getSlot' )
+			->willReturn( $slotRecord );
+		$revision
+			->method( 'getId' )
+			->willReturn( $revId );
+		$revision
+			->method( 'getTimestamp' )
+			->willReturn( 20160114180301 );
+
+		$revisionStore = $this->createMock( RevisionStore::class );
+
+		$revisionStore
+			->method( 'getRevisionById' )
+			->willReturn( $revision );
+
+		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
+		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
+		$mockMetaDataAccessor
+			->loadRevisionInformation( [ $entityId ], $lookupMode )
+			->willReturn( [
+				$entityId->getSerialization() => (object)[
+					'page_latest' => $revId,
+					'page_is_redirect' => true,
+					'rev_id' => $revId,
+					'role_name' => $slotRole,
+				]
+			] );
+		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
+
+		$codec = $this->createMock( EntityContentDataCodec::class );
+		$codec->method( 'decodeEntity' )
+			->willReturn( $entity );
+
+		$blobStore = $this->createMock( BlobStore::class );
+		$blobStore->expects( $this->once() )
+			->method( 'getBlob' )
+			->willReturn( true ); // codec mocks the entity
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			$codec,
+			$mockMetaDataAccessor,
+			$revisionStore,
+			$blobStore,
+			false
+		);
+
+		try {
+			$lookup->getLatestRevisionId( $entityId, $lookupMode );
+			$this->fail( 'Should throw specific exception' );
+		} catch ( InconsistentRedirectException $exception ) {
+			$this->assertInstanceOf( InconsistentRedirectException::class, $exception );
+			$this->assertSame(
+				"Revision '2000' is marked as revision of page redirecting to another, but no redirect entity data found in slot 'mediainfo'.",
+				$exception->getMessage()
+			);
+			$this->assertSame( $revId, $exception->getRevisionId() );
+			$this->assertSame( $slotRole, $exception->getSlotRole() );
 		}
 	}
 
