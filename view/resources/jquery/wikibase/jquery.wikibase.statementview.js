@@ -96,7 +96,8 @@
 			locked: {
 				mainSnak: false
 			},
-			helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' )
+			helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' ),
+			fireStartEditingHook: mw.hook( 'wikibase.statement.startEditing' ).fire
 		},
 
 		/**
@@ -597,6 +598,10 @@
 
 		_startEditing: function () {
 			var self = this;
+
+			if ( this.options.value ) {
+				self.options.fireStartEditingHook( this.options.value.getClaim().getGuid() );
+			}
 			this._qualifierAdder = this.options.getAdder(
 				function () {
 					var listview = self._qualifiers;

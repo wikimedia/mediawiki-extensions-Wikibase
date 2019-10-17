@@ -232,4 +232,41 @@
 		assert.notOk( $statementview.hasClass( 'wb-new' ) );
 	} );
 
+	QUnit.test( 'fires fireStartEditingHook when starting editing', function ( assert ) {
+		var fireSpy = sinon.spy(),
+			$statementview = createStatementview( {
+				value: new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ),
+						null,
+						'guid-123'
+					),
+					new datamodel.ReferenceList( [ new datamodel.Reference() ] )
+				),
+				fireStartEditingHook: fireSpy
+			} ),
+			statementview = $statementview.data( 'statementview' );
+
+		return statementview.startEditing().done( function () {
+			assert.strictEqual(
+				fireSpy.getCall( 0 ).args[ 0 ],
+				'guid-123',
+				'Then mw.hook().fire() is called with the guid.'
+			);
+		} );
+	} );
+
+	QUnit.test( 'does not fire fireStartEditingHook when creating new statement', function ( assert ) {
+		var fireSpy = sinon.spy(),
+			$statementview = createStatementview( {
+				value: null,
+				fireStartEditingHook: fireSpy
+			} ),
+			statementview = $statementview.data( 'statementview' );
+
+		return statementview.startEditing().done( function () {
+			assert.ok( fireSpy.notCalled );
+		} );
+	} );
+
 }( wikibase, dataValues ) );
