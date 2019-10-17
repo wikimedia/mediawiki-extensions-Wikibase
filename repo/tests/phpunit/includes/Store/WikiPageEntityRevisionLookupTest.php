@@ -21,11 +21,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\InconsistentRedirectException;
 use Wikibase\Lib\Store\DivergingEntityIdException;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
+use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -107,10 +107,12 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		}
 
 		return new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$this->getMetaDataLookup(),
+			new WikiPageEntityDataLoader(
+				WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+				MediaWikiServices::getInstance()->getBlobStore()
+			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
-			MediaWikiServices::getInstance()->getBlobStore(),
 			false
 		);
 	}
@@ -151,10 +153,12 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			) );
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$metaDataLookup,
+			new WikiPageEntityDataLoader(
+				WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+				MediaWikiServices::getInstance()->getBlobStore()
+			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
-			MediaWikiServices::getInstance()->getBlobStore(),
 			false
 		);
 
@@ -217,10 +221,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			) );
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			$codec,
 			$metaDataLookup,
+			new WikiPageEntityDataLoader( $codec, $blobStore ),
 			$revisionStore,
-			$blobStore,
 			false
 		);
 
@@ -237,10 +240,12 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$redirectRevisionId = self::storeTestRedirect( $entityRedirect );
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$this->getMetaDataLookup(),
+			new WikiPageEntityDataLoader(
+				WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+				MediaWikiServices::getInstance()->getBlobStore()
+			),
 			MediaWikiServices::getInstance()->getRevisionStore(),
-			MediaWikiServices::getInstance()->getBlobStore(),
 			false
 		);
 
@@ -279,10 +284,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$mockMetaDataAccessor,
+			new WikiPageEntityDataLoader( WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(), $mockBlobStore ),
 			$mockRevisionStore,
-			$mockBlobStore,
 			false
 		);
 
@@ -308,10 +312,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$mockMetaDataAccessor,
+			new WikiPageEntityDataLoader( WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(), $mockBlobStore ),
 			$mockRevisionStore,
-			$mockBlobStore,
 			false
 		);
 
@@ -329,6 +332,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->method( 'getId' )
 			->willReturn( $oldEntityId );
 		$revId = 4711;
+		$revTimestamp = 20160114180301;
 		$lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
 
 		$slotRecord = $this->createMock( SlotRecord::class );
@@ -348,7 +352,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->willReturn( $revId );
 		$revision
 			->method( 'getTimestamp' )
-			->willReturn( 20160114180301 );
+			->willReturn( $revTimestamp );
 
 		$revisionStore = $this->createMock( RevisionStore::class );
 
@@ -364,20 +368,14 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->willReturn( [ $newEntityId->getSerialization() => (object)[ 'rev_id' => $revId ] ] );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
-		$codec = $this->createMock( EntityContentDataCodec::class );
-		$codec->method( 'decodeEntity' )
-			->willReturn( $oldEntity );
-
-		$blobStore = $this->createMock( BlobStore::class );
-		$blobStore->expects( $this->once() )
-			->method( 'getBlob' )
-			->willReturn( true ); // codec mocks the entity
+		$entityDataLoader = $this->createMock( WikiPageEntityDataLoader::class );
+		$entityDataLoader->method( 'loadEntityDataFromWikiPageRevision' )
+			->willReturn( [ new EntityRevision( $oldEntity, $revId, $revTimestamp ), null ] );
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			$codec,
 			$mockMetaDataAccessor,
+			$entityDataLoader,
 			$revisionStore,
-			$blobStore,
 			false
 		);
 
@@ -443,20 +441,15 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			] );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
-		$codec = $this->createMock( EntityContentDataCodec::class );
-		$codec->method( 'decodeEntity' )
-			->willReturn( $entity );
-
-		$blobStore = $this->createMock( BlobStore::class );
-		$blobStore->expects( $this->once() )
-			->method( 'getBlob' )
-			->willReturn( true ); // codec mocks the entity
+		$entityDataLoader = $this->createMock( WikiPageEntityDataLoader::class );
+		$entityDataLoader
+			->method( 'loadEntityDataFromWikiPageRevision' )
+			->willReturn( [ new EntityRevision( $entity, $revId ), null ] );
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			$codec,
 			$mockMetaDataAccessor,
+			$entityDataLoader,
 			$revisionStore,
-			$blobStore,
 			false
 		);
 
@@ -491,10 +484,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			$mockMetaDataAccessor,
+			new WikiPageEntityDataLoader( WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(), $mockBlobStore ),
 			$mockRevisionStore,
-			$mockBlobStore,
 			false
 		);
 

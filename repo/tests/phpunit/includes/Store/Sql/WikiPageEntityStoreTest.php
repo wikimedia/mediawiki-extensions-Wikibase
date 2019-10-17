@@ -36,6 +36,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
+use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -117,7 +118,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$nsLookup = $wikibaseRepo->getEntityNamespaceLookup();
 
 		$lookup = new WikiPageEntityRevisionLookup(
-			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
 				$nsLookup,
 				new EntityIdLocalPartPageTableEntityQuery(
@@ -127,8 +127,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				new UnusableEntitySource(),
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 			),
+			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore(),
-			MediaWikiServices::getInstance()->getBlobStore(),
 			false
 		);
 
@@ -218,7 +218,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$dataAccessSettings = DataAccessSettingsFactory::entitySourceBasedFederation();
 		$lookup = new WikiPageEntityRevisionLookup(
-			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
 				$nsLookup,
 				new EntityIdLocalPartPageTableEntityQuery(
@@ -228,8 +227,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				$localSource,
 				$dataAccessSettings
 			),
+			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore(),
-			MediaWikiServices::getInstance()->getBlobStore(),
 			false
 		);
 

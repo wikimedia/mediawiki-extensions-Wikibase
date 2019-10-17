@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\RebuildTermsSearchKey;
@@ -205,7 +206,6 @@ class DatabaseSchemaUpdater {
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
-			$contentCodec,
 			new WikiPageEntityMetaDataLookup(
 				$wikibaseRepo->getEntityNamespaceLookup(),
 				new EntityIdLocalPartPageTableEntityQuery(
@@ -216,8 +216,8 @@ class DatabaseSchemaUpdater {
 				$dataAccessSettings,
 				false
 			),
+			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore(),
-			MediaWikiServices::getInstance()->getBlobStore(),
 			false
 		);
 
