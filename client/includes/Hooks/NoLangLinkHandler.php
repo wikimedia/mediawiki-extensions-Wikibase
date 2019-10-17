@@ -82,7 +82,7 @@ class NoLangLinkHandler {
 	 * Parser function
 	 *
 	 * @param Parser $parser
-	 * @param string ...$langs
+	 * @param string[] $langs
 	 *
 	 * @return string
 	 */

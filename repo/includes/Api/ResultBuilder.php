@@ -282,6 +282,7 @@ class ResultBuilder {
 			$record['id'] = $entityId->getSerialization();
 			$record['type'] = $entityId->getEntityType();
 		} else {
+			// @phan-suppress-next-line PhanTypeMismatchArgumentInternal False positive
 			if ( $props == 'all' || in_array( 'info', $props ) ) {
 				$title = $this->entityTitleLookup->getTitleForId( $entityId );
 				$record['pageid'] = $title->getArticleID();

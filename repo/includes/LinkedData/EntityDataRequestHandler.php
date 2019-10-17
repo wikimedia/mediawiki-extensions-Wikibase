@@ -104,6 +104,11 @@ class EntityDataRequestHandler {
 	private $frameOptionsHeader;
 
 	/**
+	 * @var string[]
+	 */
+	private $entityTypesWithoutRdfOutput;
+
+	/**
 	 * @param EntityDataUriManager $uriManager
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser

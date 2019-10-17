@@ -58,6 +58,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 	 * @param FingerprintProvider|EntityDocument $entity
 	 *
 	 * @return string|null
+	 * @suppress PhanTypeMismatchDeclaredParam Intersection type
 	 */
 	private function getTitleText( FingerprintProvider $entity ) {
 		$labels = $entity->getFingerprint()

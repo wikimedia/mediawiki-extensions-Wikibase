@@ -34,8 +34,8 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	private $entityLookup;
 
 	/**
-	 * @var string[] Associative array mapping entity type names (strings) to names of repositories providing
-	 *               entities of this type.
+	 * @var string[][][] Associative array mapping entity type names (strings) to names of
+	 *   repositories providing entities of this type.
 	 */
 	private $entityTypeToRepositoryMapping;
 
@@ -43,8 +43,8 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 * @param EntityLookup $entityLookup
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param array $entityTypeToRepositoryMapping Associative array (string => string[]) mapping entity types to a list of repository names
-	 *              which provide entities of the given type.
+	 * @param string[][][] $entityTypeToRepositoryMapping Associative array (string => string[][])
+	 *   mapping entity types to a list of repository names which provide entities of the given type.
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,
