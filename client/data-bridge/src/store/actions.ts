@@ -21,11 +21,7 @@ import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import {
-	STATEMENTS_IS_AMBIGUOUS,
-	STATEMENTS_PROPERTY_EXISTS,
-} from '@/store/entity/statements/getterTypes';
-import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
+import { STATEMENTS_PROPERTY_EXISTS } from '@/store/entity/statements/getterTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import {
 	ENTITY_ID,
@@ -39,6 +35,21 @@ import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import validateBridgeApplicability from '@/store/validateBridgeApplicability';
+
+function validateEntityState( context: ActionContext<Application, Application> ): boolean {
+	const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
+
+	if (
+		context.getters[
+			getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
+		]( entityId, context.state.targetProperty ) === false
+	) {
+		return false;
+	}
+
+	return validateBridgeApplicability( context );
+}
 
 export default function actions(
 	entityLabelRepository: EntityLabelRepository,
@@ -68,40 +79,10 @@ export default function actions(
 			] ).then( ( [ wikibaseRepoConfiguration, _entityInit ] ) => {
 				context.commit( WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration );
 
-				const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
-				const path = {
-					entityId,
-					propertyId: context.state.targetProperty,
-					index: 0,
-				};
-
-				if ( context.getters[
-					getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
-				]( entityId, context.state.targetProperty ) === false
-				) {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
-					// TODO: store information about the error somewhere and show it!
-				} else if ( context.getters[
-					getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS )
-				]( entityId, context.state.targetProperty ) === true
-				) {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
-					// TODO: store information about the error somewhere and show it!
-				} else if ( context.getters[
-					getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType )
-				]( path ) !== 'value'
-				) {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
-					// TODO: store information about the error somewhere and show it!
-				} else if ( context.getters[
-					getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType )
-				]( path ) !== 'string'
-				) {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
-					// TODO: store information about the error somewhere and show it!
-				} else {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
-				}
+				context.commit(
+					APPLICATION_STATUS_SET,
+					validateEntityState( context ) ? ApplicationStatus.READY : ApplicationStatus.ERROR,
+				);
 			}, ( error ) => {
 				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 				// TODO: store information about the error somewhere and show it!

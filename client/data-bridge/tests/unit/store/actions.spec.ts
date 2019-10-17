@@ -23,17 +23,19 @@ import {
 import {
 	ENTITY_ID,
 } from '@/store/entity/getterTypes';
-import {
-	STATEMENTS_IS_AMBIGUOUS,
-	STATEMENTS_PROPERTY_EXISTS,
-} from '@/store/entity/statements/getterTypes';
-import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
+import { STATEMENTS_PROPERTY_EXISTS } from '@/store/entity/statements/getterTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
+
+const mockValidateBridgeApplicability = jest.fn().mockReturnValue( true );
+jest.mock( '@/store/validateBridgeApplicability', () => ( {
+	__esModule: true,
+	default: ( context: any ) => mockValidateBridgeApplicability( context ),
+} ) );
 
 describe( 'root/actions', () => {
 	const entityLabelRepository = {
@@ -51,44 +53,21 @@ describe( 'root/actions', () => {
 
 	describe( BRIDGE_INIT, () => {
 		function mockedStore(
+			entityId?: string,
 			targetProperty?: string,
 			gettersOverride?: any,
 		): any {
-			// TODO can this profit from hotUpdateDeep?
 			return newMockStore( {
 				state: {
 					targetProperty,
 				},
 				getters: { ...{
+					[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
 					[ getter(
 						NS_ENTITY,
 						NS_STATEMENTS,
 						STATEMENTS_PROPERTY_EXISTS,
-					) ]: jest.fn( () => {
-						return true;
-					} ),
-					[ getter(
-						NS_ENTITY,
-						NS_STATEMENTS,
-						STATEMENTS_IS_AMBIGUOUS,
-					)
-					]: jest.fn( () => {
-						return false;
-					} ),
-					[ getter(
-						NS_ENTITY,
-						NS_STATEMENTS,
-						mainSnakGetterTypes.snakType,
-					) ]: jest.fn( () => {
-						return 'value';
-					} ),
-					[ getter(
-						NS_ENTITY,
-						NS_STATEMENTS,
-						mainSnakGetterTypes.dataValueType,
-					) ]: jest.fn( () => {
-						return 'string';
-					} ),
+					) ]: jest.fn( () => true ),
 				}, ...gettersOverride },
 			} );
 		}
@@ -141,7 +120,7 @@ describe( 'root/actions', () => {
 
 		it( `dispatches to ${action( NS_ENTITY, ENTITY_INIT )}$`, () => {
 			const entityId = 'Q42';
-			const context = mockedStore();
+			const context = mockedStore( entityId );
 
 			const information = {
 				editFlow: EditFlow.OVERWRITE,
@@ -270,16 +249,14 @@ describe( 'root/actions', () => {
 					const targetProperty = 'P23';
 
 					const context = mockedStore(
+						entityId,
 						targetProperty,
 						{
-							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
 							[ getter(
 								NS_ENTITY,
 								NS_STATEMENTS,
 								STATEMENTS_PROPERTY_EXISTS,
-							) ]: jest.fn( () => {
-								return false;
-							} ),
+							) ]: jest.fn( () => false ),
 						},
 					);
 
@@ -298,32 +275,18 @@ describe( 'root/actions', () => {
 					} );
 				} );
 
-				it( `commits to ${APPLICATION_STATUS_SET} on ambiguous statements`, () => {
+				it( `commits to ${APPLICATION_STATUS_SET} on lack of bridge support`, () => {
+					mockValidateBridgeApplicability.mockReturnValue( false );
+
 					const entityId = 'Q42';
 					const targetProperty = 'P23';
 
 					const context = mockedStore(
+						entityId,
 						targetProperty,
-						{
-							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								STATEMENTS_IS_AMBIGUOUS,
-							) ]: jest.fn( () => {
-								return true;
-							} ),
-						},
 					);
 
 					return initAction()( context, information ).then( () => {
-						expect(
-							context.getters[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								STATEMENTS_IS_AMBIGUOUS,
-							) ],
-						).toHaveBeenCalledWith( entityId, targetProperty );
 						expect( context.commit ).toHaveBeenCalledWith(
 							APPLICATION_STATUS_SET,
 							ApplicationStatus.ERROR,
@@ -331,71 +294,6 @@ describe( 'root/actions', () => {
 					} );
 				} );
 
-				it( `commits to ${APPLICATION_STATUS_SET} for not value snak types`, () => {
-					const entityId = 'Q42';
-					const targetProperty = 'P23';
-
-					const context = mockedStore(
-						targetProperty,
-						{
-							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								mainSnakGetterTypes.snakType,
-							) ]: jest.fn( () => {
-								return 'novalue';
-							} ),
-						},
-					);
-
-					return initAction()( context, information ).then( () => {
-						expect(
-							context.getters[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								mainSnakGetterTypes.snakType,
-							) ],
-						).toHaveBeenCalledWith( { entityId, propertyId: targetProperty, index: 0 } );
-						expect( context.commit ).toHaveBeenCalledWith(
-							APPLICATION_STATUS_SET,
-							ApplicationStatus.ERROR,
-						);
-					} );
-				} );
-
-				it( `commits to ${APPLICATION_STATUS_SET} for non string data types`, () => {
-					const entityId = 'Q42';
-					const targetProperty = 'P23';
-
-					const context = mockedStore(
-						targetProperty,
-						{
-							[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
-							[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								mainSnakGetterTypes.dataValueType,
-							) ]: jest.fn( () => {
-								return 'noStringType';
-							} ),
-						},
-					);
-
-					return initAction()( context, information ).then( () => {
-						expect(
-							context.getters[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								mainSnakGetterTypes.dataValueType,
-							) ],
-						).toHaveBeenCalledWith( { entityId, propertyId: targetProperty, index: 0 } );
-						expect( context.commit ).toHaveBeenCalledWith(
-							APPLICATION_STATUS_SET,
-							ApplicationStatus.ERROR,
-						);
-					} );
-				} );
 			} );
 		} );
 	} );

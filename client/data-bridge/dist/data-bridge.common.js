@@ -8027,13 +8027,6 @@ var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
 var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
 var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
 var STATEMENTS_MAP = 'statementsMap';
-// CONCATENATED MODULE: ./src/store/entity/statements/mainSnakGetterTypes.ts
-var mainSnakGetterTypes = {
-  dataType: 'mainSnakDataType',
-  dataValue: 'mainSnakDataValue',
-  dataValueType: 'mainSnakDataValueType',
-  snakType: 'mainSnakSnakType'
-};
 // CONCATENATED MODULE: ./src/store/entity/statements/mainSnakActionTypes.ts
 var mainSnakActionTypes = {
   setStringDataValue: 'setMainSnakStringDataValue'
@@ -8047,6 +8040,41 @@ var ENTITY_SAVE = 'entitySave';
 // EXTERNAL MODULE: ./node_modules/@wmde/vuex-helpers/dist/namespacedStoreMethods.js
 var namespacedStoreMethods = __webpack_require__("627d");
 
+// CONCATENATED MODULE: ./src/store/entity/statements/mainSnakGetterTypes.ts
+var mainSnakGetterTypes = {
+  dataType: 'mainSnakDataType',
+  dataValue: 'mainSnakDataValue',
+  dataValueType: 'mainSnakDataValueType',
+  snakType: 'mainSnakSnakType'
+};
+// CONCATENATED MODULE: ./src/store/validateBridgeApplicability.ts
+
+
+
+
+
+function validateBridgeApplicability(context) {
+  var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
+  var path = {
+    entityId: entityId,
+    propertyId: context.state.targetProperty,
+    index: 0
+  };
+
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
+    return false;
+  }
+
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
+    return false;
+  }
+
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
+    return false;
+  }
+
+  return true;
+}
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -8063,6 +8091,17 @@ var namespacedStoreMethods = __webpack_require__("627d");
 
 
 
+
+
+function validateEntityState(context) {
+  var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
+
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
+    return false;
+  }
+
+  return validateBridgeApplicability(context);
+}
 
 function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
   var _ref3;
@@ -8082,24 +8121,7 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
           _entityInit = _ref2[1];
 
       context.commit(WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration);
-      var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
-      var path = {
-        entityId: entityId,
-        propertyId: context.state.targetProperty,
-        index: 0
-      };
-
-      if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
-        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
-        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
-        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
-        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
-      } else {
-        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
-      }
+      context.commit(APPLICATION_STATUS_SET, validateEntityState(context) ? definitions_ApplicationStatus.READY : definitions_ApplicationStatus.ERROR);
     }, function (error) {
       context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
