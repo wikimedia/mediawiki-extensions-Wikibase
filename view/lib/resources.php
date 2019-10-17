@@ -684,11 +684,23 @@ return call_user_func( function() {
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
 		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.
 		'jquery.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'jquery.valueview.js',
+				'jquery.valueview.valueview.js',
+				'jquery.valueview.ViewState.js',
+			],
+			'styles' => [
+				'jquery.valueview.valueview.css',
 			],
 			'dependencies' => [
-				'jquery.valueview.valueview',
+				'dataValues.DataValue',
+				'jquery.ui.widget',
+				'jquery.valueview.ExpertStore',
+				'jquery.valueview.experts.EmptyValue',
+				'jquery.valueview.experts.UnsupportedValue',
+				'util.Notifier',
+				'valueFormatters',
+				'valueParsers.ValueParserStore',
 			],
 		],
 
@@ -714,27 +726,6 @@ return call_user_func( function() {
 		'jquery.valueview.experts' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'jquery.valueview.experts.js',
-			],
-		],
-
-		// The actual valueview widget:
-		'jquery.valueview.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'packageFiles' => [
-				'jquery.valueview.valueview.js',
-				'jquery.valueview.ViewState.js',
-			],
-			'styles' => [
-				'jquery.valueview.valueview.css',
-			],
-			'dependencies' => [
-				'dataValues.DataValue',
-				'jquery.ui.widget',
-				'jquery.valueview.ExpertStore',
-				'jquery.valueview.experts.EmptyValue',
-				'jquery.valueview.experts.UnsupportedValue',
-				'util.Notifier',
-				'valueFormatters',
-				'valueParsers.ValueParserStore',
 			],
 		],
 
