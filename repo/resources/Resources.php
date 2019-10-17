@@ -154,7 +154,6 @@ return call_user_func( function() {
 				'wikibase.view.__namespace',
 				'wikibase.view.ReadModeViewFactory',
 				'wikibase.view.ControllerViewFactory',
-				'dataValues.values',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.UnDeserializableValue',
