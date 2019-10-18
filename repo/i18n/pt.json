@@ -350,6 +350,7 @@
 	"wikibase-api-no-such-entity": "Não foi possível encontrar uma entidade com o identificador \"$1\".",
 	"wikibase-api-no-such-sitelink": "Não foi possível encontrar uma hiperligação intersites para \"$1\" ao tentar editar emblemas.",
 	"wikibase-api-not-recognized-datatype": "Era esperado um tipo de dados, mas está em falta ou não foi reconhecido.",
+	"wikibase-api-tags-invalid": "Parâmetro de etiquetas inválido.",
 	"wikibase-api-target-not-empty": "O redirecionamento só pode ser criado sobre uma entidade vazia ou eliminada.",
 	"wikibase-api-target-is-redirect": "O destino do redirecionamento não pode ser também um redirecionamento.",
 	"wikibase-api-target-is-incompatible": "Tentativa de redirecionar para uma entidade de tipo diferente.",
@@ -432,5 +433,6 @@
 	"wikibase-outdated-client-script": "É necessária uma atualização forçada!",
 	"wikibase-shortcopyrightwarning-heading": "Atribuição da licença",
 	"wikibase-entity-save-error-heading": "Ocorreu um problema",
-	"wikibase-entity-save-error-message": "Não foi possível publicar a sua alteração. Pode tentar clicar novamente o botão de publicar."
+	"wikibase-entity-save-error-message": "Não foi possível publicar a sua alteração. Pode tentar clicar novamente o botão de publicar.",
+	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns possíveis problemas"
 }

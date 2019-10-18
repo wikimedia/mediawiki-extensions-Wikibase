@@ -223,6 +223,7 @@
 	"wikibase-itemmerge-no-such-entity": "Kohdetta ei löytynyt.",
 	"wikibase-itemmerge-cant-load-entity-content": "Kohteen lataaminen epäonnistui.",
 	"wikibase-itemmerge-cant-merge-self": "Ei voi yhdistää kohdetta itsensä kanssa.",
+	"wikibase-tokencheck-missingtoken": "Muokkauspoletti puuttuu.",
 	"special-dispatchstats": "Muutoksen lähetystilastot",
 	"wikibase-dispatchstats-no-stats": "Tilastoja ei ole tällä hetkellä saatavilla.",
 	"wikibase-dispatchstats-changes": "Muutoslokitilastot",
