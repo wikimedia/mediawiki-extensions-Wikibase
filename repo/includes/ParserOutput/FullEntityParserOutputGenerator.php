@@ -248,7 +248,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$parserOutput->addModuleStyles( [
 			'wikibase.common',
 			'jquery.ui.core.styles',
-			'jquery.wikibase.statementview.RankSelector.styles',
 			'jquery.wikibase.toolbar.styles',
 		] );
 
