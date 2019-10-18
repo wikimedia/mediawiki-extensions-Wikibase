@@ -77,12 +77,16 @@ class ClientEntitySerializer extends ClientSerializer {
 	 * @return array
 	 */
 	private function addEntitySerializationFallbackInfo( array $serialization ) {
-		$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
-			$serialization['labels']
-		);
-		$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
-			$serialization['descriptions']
-		);
+		if ( array_key_exists( 'labels', $serialization ) ) {
+			$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
+				$serialization['labels']
+			);
+		}
+		if ( array_key_exists( 'descriptions', $serialization ) ) {
+			$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
+				$serialization['descriptions']
+			);
+		}
 
 		return $serialization;
 	}
