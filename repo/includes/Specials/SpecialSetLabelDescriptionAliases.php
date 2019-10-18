@@ -333,6 +333,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 
 		try {
+			// @phan-suppress-next-line PhanTypeMismatchArgument
 			return $this->applyChangeOpList( $changeOps, $entity );
 		} catch ( ChangeOpException $ex ) {
 			$this->showErrorHTML( $ex->getMessage() );

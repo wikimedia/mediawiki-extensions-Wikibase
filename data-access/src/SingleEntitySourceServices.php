@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataAccess;
 
-use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -103,7 +103,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		GenericServices $genericServices,
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
-		DataValueDeserializer $dataValueDeserializer,
+		Deserializer $dataValueDeserializer,
 		NameTableStore $slotRoleStore,
 		DataAccessSettings $settings,
 		EntitySource $entitySource,

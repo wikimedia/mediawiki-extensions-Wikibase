@@ -71,8 +71,6 @@ if ( is_dir( 'vendor' ) ) {
 $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
-		// approximate error count: 47
-		"PhanTypeMismatchArgument",
 		// approximate error count: 72
 		"PhanUndeclaredConstant",
 		// approximate error count: 168

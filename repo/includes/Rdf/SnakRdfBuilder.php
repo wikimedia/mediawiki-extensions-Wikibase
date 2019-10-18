@@ -80,6 +80,7 @@ class SnakRdfBuilder {
 		switch ( $snak->getType() ) {
 			case 'value':
 				/** @var PropertyValueSnak $snak */
+				'@phan-var PropertyValueSnak $snak';
 				$this->addSnakValue( $writer, $snak, $propertyNamespace );
 				break;
 			case 'somevalue':

@@ -315,6 +315,7 @@ final class RepoHooks {
 		}
 
 		/** @var EntityContent $content */
+		'@phan-var EntityContent $content';
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.

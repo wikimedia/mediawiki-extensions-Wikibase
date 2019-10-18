@@ -112,6 +112,7 @@ class ItemView extends EntityView {
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	protected function getMainHtml( EntityDocument $item ) {
 		if ( !( $item instanceof StatementListProvider ) ) {

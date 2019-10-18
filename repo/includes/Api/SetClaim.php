@@ -15,11 +15,11 @@ use OutOfBoundsException;
 use ApiUsageException;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Summary;
 
@@ -123,7 +123,7 @@ class SetClaim extends ApiBase {
 		$entityId = $statementGuid->getEntityId();
 		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
-		if ( !( $entity instanceof StatementListProvider ) ) {
+		if ( !( $entity instanceof StatementListProvidingEntity ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}

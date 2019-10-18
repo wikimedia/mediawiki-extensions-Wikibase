@@ -65,6 +65,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 			->value( $point, RdfVocabulary::NS_GEO, "wktLiteral" );
 
 		if ( $this->complexValueHelper !== null ) {
+			// @phan-suppress-next-line PhanTypeMismatchArgument
 			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
 		}
 	}

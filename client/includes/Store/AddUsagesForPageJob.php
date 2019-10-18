@@ -24,7 +24,8 @@ class AddUsagesForPageJob extends Job {
 	private $pageId;
 
 	/**
-	 * @var EntityUsage[]
+	 * @var array[]
+	 * @phan-var array<int,array{entityId:string,aspect:string,modifier:?string}>
 	 */
 	private $usages;
 

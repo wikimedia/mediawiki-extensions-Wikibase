@@ -45,6 +45,7 @@ class HtmlExternalIdentifierFormatter implements SnakFormatter {
 	public function formatSnak( Snak $snak ) {
 		Assert::parameterType( PropertyValueSnak::class, $snak, '$snak' );
 		/** @var PropertyValueSnak $snak */
+		'@phan-var PropertyValueSnak $snak';
 
 		$id = $snak->getDataValue()->getValue();
 		$url = $this->urlExpander->expandUrl( $snak );

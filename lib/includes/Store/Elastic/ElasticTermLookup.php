@@ -54,6 +54,7 @@ class ElasticTermLookup implements PrefetchingTermLookup {
 	 */
 	public static function fromDefaultConfig( EntityTitleLookup $titleLookup, EntityIdParser $idParser ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CirrusSearch' );
+		'@phan-var SearchConfig $config';
 		$connection = new Connection( $config );
 		$searcher = new TermLookupSearcher( $connection, $config->get( SearchConfig::INDEX_BASE_NAME ),
 				$config->get( 'CirrusSearchSlowSearch' ),

@@ -463,6 +463,8 @@ final class ClientHooks {
 
 				return [ 'currentSite' => $currentSite ];
 			},
+			// @fixme These options only exist in WanObjectCache, but this code is using BagOStuff!
+			// @phan-suppress-next-line PhanTypeMismatchArgument
 			[ 'lockTSE' => 10, 'pcTTL' => $cache::TTL_PROC_LONG ]
 		);
 	}

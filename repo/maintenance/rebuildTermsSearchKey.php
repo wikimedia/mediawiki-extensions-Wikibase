@@ -48,6 +48,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$table = $wikibaseRepo->getStore()->getTermIndex();
 
+		// @phan-suppress-next-line PhanTypeMismatchArgument
 		$builder = new TermSearchKeyBuilder( $table, $wikibaseRepo->getLogger() );
 		$builder->setReporter( $reporter );
 

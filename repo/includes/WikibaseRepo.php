@@ -1793,7 +1793,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return Deserializer
+	 * @return DataValueDeserializer
 	 */
 	private function getDataValueDeserializer() {
 		return new DataValueDeserializer( [

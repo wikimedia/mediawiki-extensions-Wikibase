@@ -35,6 +35,7 @@ class SqlChangeStore implements ChangeStore {
 	 */
 	public function saveChange( Change $change ) {
 		Assert::parameterType( ChangeRow::class, $change, '$change' );
+		'@phan-var ChangeRow $change';
 
 		if ( $change->getId() === null ) {
 			$this->insertChange( $change );

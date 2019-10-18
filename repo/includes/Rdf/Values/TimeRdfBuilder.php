@@ -60,6 +60,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 
 		/** @var TimeValue $value */
 		$value = $snak->getDataValue();
+		'@phan-var TimeValue $value';
 		$this->sayDateLiteral( $writer, $value );
 
 		if ( $this->complexValueHelper !== null ) {

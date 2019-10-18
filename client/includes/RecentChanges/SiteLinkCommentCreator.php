@@ -168,7 +168,7 @@ class SiteLinkCommentCreator {
 	}
 
 	/**
-	 * @param Diff[] $diffs
+	 * @param DiffOp[] $diffs
 	 *
 	 * @return array|null
 	 */

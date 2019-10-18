@@ -285,6 +285,7 @@ class ApiErrorReporter {
 		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
 		$stats->increment( 'wikibase.repo.api.errors.total' );
 
+		// @phan-suppress-next-line PhanTypeMismatchArgument
 		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
