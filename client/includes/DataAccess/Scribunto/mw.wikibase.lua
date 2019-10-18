@@ -90,8 +90,10 @@ function wikibase.setupInterface()
 			return nil
 		end
 
+		local entityModule = require( php.getEntityModuleName( id ) )
+
 		-- Use a deep clone here, so that people can't modify the entity
-		return wikibase.entity.create( mw.clone( entity ) )
+		return entityModule.create( mw.clone( entity ) )
 	end
 
 	-- Get the entity id for the current page. Cached.
