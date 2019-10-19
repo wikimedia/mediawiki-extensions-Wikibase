@@ -146,10 +146,7 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.ooMenu.css',
 			],
 			'dependencies' => [
-				'jquery.ui.core',
-				'jquery.ui.widget',
-				'jquery.ui.position',
-				'jquery.ui.widget',
+				'jquery.ui',
 				'util.inherit',
 			],
 		],

@@ -131,7 +131,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.spinner',
-				'jquery.ui.dialog',
+				'jquery.ui',
 				'jquery.ui.suggester',
 				'jquery.wikibase.siteselector',
 				'jquery.wikibase.wbtooltip',

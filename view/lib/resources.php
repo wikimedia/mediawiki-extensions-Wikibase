@@ -140,7 +140,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.ui.suggester',
-				'jquery.ui.widget',
+				'jquery.ui',
 				'util.highlightSubstring',
 			],
 		],
@@ -151,7 +151,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.ui.suggester',
-				'jquery.ui.widget',
+				'jquery.ui',
 			],
 		],
 
@@ -346,7 +346,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'dataValues.DataValue',
-				'jquery.ui.widget',
+				'jquery.ui',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.EmptyValue',
 				'jquery.valueview.experts.UnsupportedValue',
@@ -491,7 +491,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.ui.suggester',
-				'jquery.ui.widget',
+				'jquery.ui',
 				'jquery.valueview.Expert',
 				'jquery.valueview.ExpertExtender',
 				'jquery.valueview.experts',
@@ -578,8 +578,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.animateWithEvent',
 				'jquery.event.special.eachchange',
-				'jquery.ui.position',
-				'jquery.ui.widget',
+				'jquery.ui',
 				'jquery.valueview',
 				'util.Extendable',
 			],
@@ -604,9 +603,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.valueview.ExpertExtender',
-				'jquery.ui.autocomplete', // needs jquery.ui.menu
-				'jquery.ui.widget',
-				'jquery.ui.position',
+				'jquery.ui',
 			],
 			'messages' => [
 				'valueview-listrotator-manually',
@@ -623,7 +620,7 @@ return call_user_func( function() {
 				'../lib/jquery.ui/jquery.ui.preview.css',
 			],
 			'dependencies' => [
-				'jquery.ui.widget',
+				'jquery.ui',
 				'jquery.valueview.ExpertExtender',
 				'util.CombiningMessageProvider',
 				'util.HashMessageProvider',

@@ -29,7 +29,7 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'jquery.throttle-debounce',
 				'jquery.ui.suggester',
-				'jquery.ui.widget',
+				'jquery.ui',
 			],
 			'messages' => [
 				'wikibase-entityselector-more',
@@ -212,12 +212,8 @@ return call_user_func( function() {
 				'dataValues.DataValue', // For snakview
 				'jquery.animateWithEvent',
 				'jquery.event.special.eachchange',
-				'jquery.ui.position',
-				'jquery.ui.widget',
-				'jquery.ui.core',
-				'jquery.ui.menu',
+				'jquery.ui',
 				'jquery.ui.suggester',
-				'jquery.ui.tabs',
 				'jquery.util.getDirectionality',
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
