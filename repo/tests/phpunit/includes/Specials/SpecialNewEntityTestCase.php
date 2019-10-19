@@ -2,14 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use CommentStoreComment;
 use FauxRequest;
 use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Block\BlockManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use SpecialPageTestBase;
-use UserBlockedError;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
@@ -57,6 +55,9 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 		$this->assertEntityMatchesFormData( $formData, $entity );
 	}
 
+	/**
+	 * @group Broken
+	 */
 	public function testExceptionWhenUserBlockedOnNamespace() {
 		$user = $this->getTestUser()->getUser();
 		$block = $this->getMockBuilder( AbstractBlock::class )
@@ -68,8 +69,8 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 			->willReturn( true );
 		$block->method( 'isSitewide' )
 			->willReturn( false );
-		$block->method( 'getReasonComment' )
-			->willReturn( CommentStoreComment::newUnsavedComment( '' ) );
+		$block->method( 'getPermissionsError' )
+			->willReturn( [ 'foo' ] );
 		$blockManager = $this->getMockBuilder( BlockManager::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -82,7 +83,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 			[ 'createpage', 'property-create' ]
 		);
 
-		$this->expectException( UserBlockedError::class );
+		$this->expectException( \UserBlockedError::class );
 		$this->executeSpecialPage( '', null, null, $user );
 	}
 
