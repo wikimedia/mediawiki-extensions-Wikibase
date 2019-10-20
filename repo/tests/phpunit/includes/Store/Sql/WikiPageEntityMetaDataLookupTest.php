@@ -559,24 +559,20 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGivenEntityFromOtherSource_loadRevisionInformationThrowsException() {
 		$lookup = $this->newLookupForEntitySourceProvidingItemsOnly();
 
+		$this->expectException( InvalidArgumentException::class );
 		$lookup->loadRevisionInformation(
 			[ new PropertyId( 'P123' ) ],
 			EntityRevisionLookup::LATEST_FROM_REPLICA
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGivenEntityFromOtherSource_loadRevisionInformationByRevisionIdThrowsException() {
 		$lookup = $this->newLookupForEntitySourceProvidingItemsOnly();
 
+		$this->expectException( InvalidArgumentException::class );
 		$lookup->loadRevisionInformationByRevisionId(
 			new PropertyId( 'P123' ),
 			1,

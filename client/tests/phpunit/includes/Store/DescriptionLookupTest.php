@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Store;
 
+use InvalidArgumentException;
 use Language;
 use PageProps;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -129,12 +130,10 @@ class DescriptionLookupTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGetDescription_error() {
 		$title = $this->makeTitle( 1, 'de' );
 		$descriptionLookup = $this->makeDescriptionLookup( [], [] );
+		$this->expectException( InvalidArgumentException::class );
 		$descriptionLookup->getDescription( $title, 'foo' );
 	}
 

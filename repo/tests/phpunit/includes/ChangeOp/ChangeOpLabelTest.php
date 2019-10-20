@@ -29,13 +29,11 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		return $mockProvider->getMockTermValidatorFactory();
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testInvalidConstruct() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpLabel( 42, 'myNew', $validatorFactory );
 	}
 

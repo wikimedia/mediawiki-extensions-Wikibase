@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use ReflectionClass;
+use RuntimeException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
@@ -59,15 +61,13 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 		$this->assertTrue( true );
 	}
 
-	/**
-	 * @expectedException \RuntimeException
-	 */
 	public function testGivenClearedEntity_applyExplodes() {
 		$item = $this->newItem();
 		$item->clear();
 
 		$changeOp = $this->newChangeOp();
 
+		$this->expectException( RuntimeException::class );
 		$changeOp->apply( $item );
 	}
 
@@ -91,9 +91,6 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 		$this->assertTrue( true );
 	}
 
-		/**
-	 * @expectedException \ApiUsageException
-	 */
 	public function testGivenNotClearedEntityAndClearParameter_apiErrors() {
 		$item = $this->newItem();
 
@@ -109,6 +106,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 			->getMethod( 'modifyEntity' );
 		$modifyEntity->setAccessible( true );
 
+		$this->expectException( ApiUsageException::class );
 		$modifyEntity->invokeArgs( $api, [ &$item, $changeOp, $params ] );
 	}
 

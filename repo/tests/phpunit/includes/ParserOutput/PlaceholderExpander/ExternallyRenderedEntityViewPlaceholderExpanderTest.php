@@ -6,6 +6,7 @@ use Language;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -183,10 +184,8 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @expectedException \RuntimeException
-	 */
 	public function testGivenUnknownPlaceholder_getHtmlForPlaceholderThrows() {
+		$this->expectException( RuntimeException::class );
 		$this->newPlaceholderExpander()->getHtmlForPlaceholder( 'unknown-placeholder' );
 	}
 

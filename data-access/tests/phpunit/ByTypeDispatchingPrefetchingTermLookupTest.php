@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,17 +17,13 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class ByTypeDispatchingPrefetchingTermLookupTest extends TestCase {
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotPrefetchingTermLookupInstance_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingPrefetchingTermLookup( [ 'item' => 'FOOBAR' ] );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotStringIndexedArray_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingPrefetchingTermLookup( [ new FakePrefetchingTermLookup() ] );
 	}
 

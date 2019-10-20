@@ -22,23 +22,19 @@ use Wikibase\View\EntityDocumentView;
  */
 class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testInvalidConstructorArgument() {
+		$this->expectException( InvalidArgumentException::class );
 		new DispatchingEntityViewFactory(
 			[ 'invalid' ]
 		);
 	}
 
-	/**
-	 * @expectedException OutOfBoundsException
-	 */
 	public function testUnknownEntityType() {
 		$factory = new DispatchingEntityViewFactory(
 			[]
 		);
 
+		$this->expectException( OutOfBoundsException::class );
 		$factory->newEntityView(
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
@@ -47,9 +43,6 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	/**
-	 * @expectedException LogicException
-	 */
 	public function testNoEntityViewReturned() {
 		$factory = new DispatchingEntityViewFactory(
 			[
@@ -64,6 +57,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getType' )
 			->willReturn( 'foo' );
 
+		$this->expectException( LogicException::class );
 		$factory->newEntityView(
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),

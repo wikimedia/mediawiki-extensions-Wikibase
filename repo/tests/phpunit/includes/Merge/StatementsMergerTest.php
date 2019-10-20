@@ -44,10 +44,9 @@ class StatementsMergerTest extends TestCase {
 
 	/**
 	 * @dataProvider nonEntityDocumentProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenNotAnEntity_mergeThrowsException( $source, $target ) {
+		$this->expectException( InvalidArgumentException::class );
 		$this->newStatementsMerger()->merge( $source, $target );
 	}
 

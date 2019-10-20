@@ -24,10 +24,9 @@ class EntityReferenceExtractorDelegatorTest extends TestCase {
 
 	/**
 	 * @dataProvider nonCallableArrayProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenNonCallables_throwsException( $nonCallables ) {
+		$this->expectException( InvalidArgumentException::class );
 		new EntityReferenceExtractorDelegator( $nonCallables, $this->getMockStatementEntityReferenceExtractor() );
 	}
 

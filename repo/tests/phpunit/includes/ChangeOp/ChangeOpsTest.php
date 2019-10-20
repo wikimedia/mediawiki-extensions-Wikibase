@@ -102,10 +102,10 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidChangeOpProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidAdd( $invalidChangeOp ) {
 		$changeOps = new ChangeOps();
+		$this->expectException( InvalidArgumentException::class );
 		$changeOps->add( $invalidChangeOp );
 	}
 

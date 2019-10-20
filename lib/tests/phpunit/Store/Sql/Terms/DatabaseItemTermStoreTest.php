@@ -220,24 +220,18 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testStoreTerms_throwsForForeignItemId() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->propertyTermStore->storeTerms( new ItemId( 'wd:P1' ), $this->fingerprintEmpty );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testDeleteTerms_throwsForForeignItemId() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->propertyTermStore->deleteTerms( new ItemId( 'wd:P1' ) );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGetTerms_throwsForForeignItemId() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->propertyTermStore->getTerms( new ItemId( 'wd:P1' ) );
 	}
 

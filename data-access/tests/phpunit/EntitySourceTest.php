@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 
@@ -16,7 +17,6 @@ class EntitySourceTest extends TestCase {
 
 	/**
 	 * @dataProvider provideInvalidConstructorArguments
-	 * @expectedException \InvalidArgumentException
 	 */
 	public function testGivenInvalidArg_constructorThrowsException(
 		$slotName,
@@ -27,6 +27,7 @@ class EntitySourceTest extends TestCase {
 		$validRdfPredicateNamespacePrefix,
 		$interwikiPrefix
 	) {
+		$this->expectException( InvalidArgumentException::class );
 		new EntitySource(
 			$slotName,
 			$databaseName,

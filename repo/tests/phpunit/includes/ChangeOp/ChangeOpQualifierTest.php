@@ -64,10 +64,9 @@ class ChangeOpQualifierTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidArgumentProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $statementGuid, $snak, $snakHash ) {
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpQualifier(
 			$statementGuid,
 			$snak,

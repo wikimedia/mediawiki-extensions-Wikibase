@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -58,7 +59,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	private function newThrowingEntityRevisionLookup() {
 		$propertyRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$propertyRevisionLookup->method( $this->anything() )
-			->willThrowException( new \LogicException( 'This service should not be used' ) );
+			->willThrowException( new LogicException( 'This service should not be used' ) );
 		return $propertyRevisionLookup;
 	}
 
@@ -260,9 +261,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$this->assertEquals( [ 'type' => 'string' ], $lookup->getPropertyInfo( $propertyId ) );
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 */
 	public function testGivenNoSourceProvidingProperties_getPropertyInfoLookupThrowsException() {
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
@@ -272,6 +270,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 			[]
 		);
 
+		$this->expectException( LogicException::class );
 		$services->getPropertyInfoLookup();
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityRevisionLookup;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,17 +18,13 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  */
 class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotEntityRevisionLookupInstance_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingEntityRevisionLookup( [ 'item' => 'FOOBAR' ] );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotStringIndexedArray_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingEntityRevisionLookup( [ $this->createMock( EntityRevisionLookup::class ) ] );
 	}
 

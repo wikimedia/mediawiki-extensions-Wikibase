@@ -22,10 +22,9 @@ class EntityReferenceExtractorCollectionTest extends TestCase {
 
 	/**
 	 * @dataProvider nonEntityReferenceExtractorsProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenNonEntityReferenceExtractorArray_throwsException( $extractors ) {
+		$this->expectException( InvalidArgumentException::class );
 		new EntityReferenceExtractorCollection( $extractors );
 	}
 

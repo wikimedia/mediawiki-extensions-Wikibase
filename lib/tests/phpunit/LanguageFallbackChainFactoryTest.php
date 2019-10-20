@@ -364,10 +364,10 @@ class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideNewFromLanguageCodeException
-	 * @expectedException MWException
 	 */
 	public function testNewFromLanguageCodeException( $languageCode ) {
 		$factory = $this->getLanguageFallbackChainFactory();
+		$this->expectException( MWException::class );
 		$factory->newFromLanguageCode( $languageCode );
 	}
 

@@ -20,10 +20,8 @@ use Wikibase\View\EntityMetaTagsCreator;
  */
 class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testInvalidConstructorArgument() {
+		$this->expectException( InvalidArgumentException::class );
 		new DispatchingEntityMetaTagsCreatorFactory(
 			[ 'invalid' ]
 		);
