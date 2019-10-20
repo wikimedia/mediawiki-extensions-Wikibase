@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use LogicException;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\EntitySource;
@@ -62,9 +63,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenEntitySourceDoesNotProvideProperties_getPropertyInfoLookupThrowsException() {
 		$services = new SingleEntitySourceServices(
 			$this->newGenericServices(),
@@ -74,10 +72,11 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
-			[ null ],
+			[ 'strval' ],
 			[]
 		);
 
+		$this->expectException( LogicException::class );
 		$services->getPropertyInfoLookup();
 	}
 
