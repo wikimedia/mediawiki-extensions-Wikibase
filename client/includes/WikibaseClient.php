@@ -482,7 +482,8 @@ final class WikibaseClient {
 				$this->getDataAccessSettings(),
 				$source,
 				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
-				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
+				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks()
 			);
 		}
 

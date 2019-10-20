@@ -97,6 +97,13 @@ class EntityTypeDefinitions {
 	/**
 	 * @return callable[]
 	 */
+	public function getPrefetchingTermLookupCallbacks() {
+		return $this->getMapForDefinitionField( 'prefetching-term-lookup-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
 	public function getSerializerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'serializer-factory-callback' );
 	}
