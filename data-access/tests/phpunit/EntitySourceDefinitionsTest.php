@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -15,30 +16,24 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
  */
 class EntitySourceDefinitionsTest extends TestCase {
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenInvalidArguments_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new EntitySourceDefinitions( [ 'foobar' ] );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenEntityTypeProvidedByMultipleSources_constructorThrowsException() {
 		$itemSourceOne = $this->newItemSource();
 		$itemSourceTwo = new EntitySource( 'dupe test', 'foodb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
 
+		$this->expectException( InvalidArgumentException::class );
 		new EntitySourceDefinitions( [ $itemSourceOne, $itemSourceTwo ] );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testTwoSourcesWithSameName_constructorThrowsException() {
 		$sourceOne = new EntitySource( 'same name', 'aaa', [ 'entityOne' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
 		$sourceTwo = new EntitySource( 'same name', 'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ], '', '', '', '' );
 
+		$this->expectException( InvalidArgumentException::class );
 		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ] );
 	}
 

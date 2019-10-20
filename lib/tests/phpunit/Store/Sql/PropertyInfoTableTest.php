@@ -405,27 +405,21 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$infoTable->removePropertyInfo( $id );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_setPropertyInfoThrowsException() {
 		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+		$this->expectException( InvalidArgumentException::class );
 		$infoTable->setPropertyInfo( new PropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_getPropertyInfoThrowsException() {
 		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+		$this->expectException( InvalidArgumentException::class );
 		$infoTable->getPropertyInfo( new PropertyId( 'P1' ) );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_removePropertyInfoThrowsException() {
 		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+		$this->expectException( InvalidArgumentException::class );
 		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
 	}
 

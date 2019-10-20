@@ -79,17 +79,17 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideFactoryException
-	 * @expectedException MWException
 	 */
 	public function testFactoryCodeException( $langCode, $sourceLangCode ) {
+		$this->expectException( MWException::class );
 		LanguageWithConversion::factory( $langCode, $sourceLangCode );
 	}
 
 	/**
 	 * @dataProvider provideFactoryException
-	 * @expectedException MWException
 	 */
 	public function testFactoryException( $langCode, $sourceLangCode ) {
+		$this->expectException( MWException::class );
 		LanguageWithConversion::factory( Language::factory( $langCode ),
 			$sourceLangCode === null ? null : Language::factory( $sourceLangCode ) );
 	}

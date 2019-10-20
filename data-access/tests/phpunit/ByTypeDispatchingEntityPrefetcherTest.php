@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityPrefetcher;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,17 +17,13 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotEntityInfoBuilderInstance_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingEntityPrefetcher( [ 'item' => 'FOOBAR' ] );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotStringIndexedArray_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingEntityPrefetcher( [ new EntityPrefetcherSpy() ] );
 	}
 

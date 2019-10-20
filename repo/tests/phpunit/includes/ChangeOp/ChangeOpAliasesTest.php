@@ -39,7 +39,6 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorProvider
-	 * @expectedException InvalidArgumentException
 	 *
 	 * @param string $language
 	 * @param string[] $aliases
@@ -49,6 +48,7 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpAliases( $language, $aliases, $action, $validatorFactory );
 	}
 

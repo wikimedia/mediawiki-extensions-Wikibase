@@ -60,10 +60,9 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidArgumentProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $guid, $snak ) {
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpMainSnak(
 			$guid,
 			$snak,

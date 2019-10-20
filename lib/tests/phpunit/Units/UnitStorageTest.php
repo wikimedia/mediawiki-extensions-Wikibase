@@ -76,13 +76,13 @@ class UnitStorageTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider badStorageModels
-	 * @expectedException RuntimeException
-	 * @expectedExceptionMessage Failed to load unit storage
 	 */
 	public function testBadStorage( $class, array $args ) {
 		$def = [ 'class' => $class, 'args' => $args ];
 		$storage = ObjectFactory::getObjectFromSpec( $def );
 
+		$this->expectException( RuntimeException::class );
+		$this->expectExceptionMessage( 'Failed to load unit storage' );
 		$storage->getConversion( 'Q1' );
 	}
 

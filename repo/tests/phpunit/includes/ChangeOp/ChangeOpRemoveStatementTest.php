@@ -32,9 +32,9 @@ class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $guid ) {
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpRemoveStatement( $guid );
 	}
 

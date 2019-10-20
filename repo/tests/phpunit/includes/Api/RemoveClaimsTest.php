@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -162,8 +163,6 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @expectedException \ApiUsageException
-	 *
 	 * @dataProvider invalidClaimProvider
 	 */
 	public function testRemoveInvalidClaims( $claimGuids ) {
@@ -172,6 +171,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			'claim' => is_array( $claimGuids ) ? implode( '|', $claimGuids ) : $claimGuids,
 		];
 
+		$this->expectException( ApiUsageException::class );
 		$this->doApiRequestWithToken( $params );
 	}
 

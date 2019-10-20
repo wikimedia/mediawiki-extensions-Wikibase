@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
@@ -48,12 +49,10 @@ class DispatchingEntityIdHtmlLinkFormatterTest extends TestCase {
 		$formatter->formatEntityId( $mockEntityId );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenInvalidFormatter() {
 		$formatters = [ 'foo' => 'aStringIsNotAFormatter' ];
 
+		$this->expectException( InvalidArgumentException::class );
 		new DispatchingEntityIdHtmlLinkFormatter( $formatters, $this->defaultFormatter );
 	}
 

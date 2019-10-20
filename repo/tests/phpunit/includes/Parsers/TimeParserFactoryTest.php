@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 use DataValues\TimeValue;
 use ValueParsers\IsoTimestampParser;
 use ValueParsers\MonthNameProvider;
+use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\TimeParserFactory;
@@ -240,12 +241,12 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidInputProvider
-	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParseThrowsException( $value ) {
 		$factory = new TimeParserFactory( null, $this->newMonthNameProvider() );
 		$parser = $factory->getTimeParser();
 
+		$this->expectException( ParseException::class );
 		$parser->parse( $value );
 	}
 

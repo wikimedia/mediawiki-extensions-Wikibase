@@ -68,8 +68,6 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidArgumentProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct(
 		$guid,
@@ -77,6 +75,7 @@ class ChangeOpReferenceTest extends \PHPUnit\Framework\TestCase {
 		$referenceHash,
 		$index = null
 	) {
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpReference(
 			$guid,
 			$reference,

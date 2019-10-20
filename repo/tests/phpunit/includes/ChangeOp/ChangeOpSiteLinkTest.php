@@ -39,10 +39,9 @@ class ChangeOpSiteLinkTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testConstructorWithInvalidArguments( $siteId, $linkPage, array $badges = null ) {
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
 	}
 

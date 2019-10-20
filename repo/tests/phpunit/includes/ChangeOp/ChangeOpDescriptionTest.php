@@ -29,13 +29,11 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		return $mockProvider->getMockTermValidatorFactory();
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testInvalidConstruct() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpDescription( 42, 'myNew', $validatorFactory );
 	}
 

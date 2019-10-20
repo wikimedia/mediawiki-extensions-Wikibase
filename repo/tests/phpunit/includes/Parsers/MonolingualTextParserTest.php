@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
+use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
 
@@ -41,11 +42,9 @@ class MonolingualTextParserTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( trim( $languageCode ), $value->getLanguageCode() );
 	}
 
-	/**
-	 * @expectedException \ValueParsers\ParseException
-	 */
 	public function testParse_missingLanguageOption() {
 		$parser = new MonolingualTextParser();
+		$this->expectException( ParseException::class );
 		$parser->parse( 'Text' );
 	}
 
@@ -58,20 +57,18 @@ class MonolingualTextParserTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParse_invalidLanguageOption( $languageCode ) {
 		$options = new ParserOptions( [ 'valuelang' => $languageCode ] );
 		$parser = new MonolingualTextParser( $options );
+		$this->expectException( ParseException::class );
 		$parser->parse( 'Text' );
 	}
 
-	/**
-	 * @expectedException \ValueParsers\ParseException
-	 */
 	public function testParse_invalidText() {
 		$options = new ParserOptions( [ 'valuelang' => 'en' ] );
 		$parser = new MonolingualTextParser( $options );
+		$this->expectException( ParseException::class );
 		$parser->parse( null );
 	}
 

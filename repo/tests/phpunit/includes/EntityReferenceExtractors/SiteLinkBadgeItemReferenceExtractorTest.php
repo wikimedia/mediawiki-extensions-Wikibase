@@ -35,11 +35,10 @@ class SiteLinkBadgeItemReferenceExtractorTest extends TestCase {
 
 	/**
 	 * @dataProvider nonItemProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenNotAnItem_extractEntityIdsThrows( $entity ) {
 		$instance = new SiteLinkBadgeItemReferenceExtractor();
+		$this->expectException( InvalidArgumentException::class );
 		$instance->extractEntityIds( $entity );
 	}
 

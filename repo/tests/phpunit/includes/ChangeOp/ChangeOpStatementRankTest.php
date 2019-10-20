@@ -39,10 +39,9 @@ class ChangeOpStatementRankTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider invalidArgumentProvider
-	 *
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $guid, $rank ) {
+		$this->expectException( InvalidArgumentException::class );
 		new ChangeOpStatementRank( $guid, $rank );
 	}
 

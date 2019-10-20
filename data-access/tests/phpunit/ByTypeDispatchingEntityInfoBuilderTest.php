@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\ByTypeDispatchingEntityInfoBuilder;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,17 +19,13 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  */
 class ByTypeDispatchingEntityInfoBuilderTest extends TestCase {
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotEntityInfoBuilderInstance_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingEntityInfoBuilder( [ 'item' => 'FOOBAR' ] );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testGivenNotStringIndexedArray_constructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new ByTypeDispatchingEntityInfoBuilder( [ $this->createMock( EntityInfoBuilder::class ) ] );
 	}
 
