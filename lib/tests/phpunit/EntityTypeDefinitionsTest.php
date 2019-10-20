@@ -37,6 +37,7 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'rdf-builder-factory-callback' => 'new-rdf-builder-factory-callback',
 				'entity-diff-visualizer-callback' => 'new-entity-diff-visualizer-callback',
 				'entity-search-callback' => 'foo-search',
+				'prefetching-term-lookup-callback' => 'foo-prefetching-term-lookup-instantiator'
 			],
 			'bar' => [
 				'serializer-factory-callback' => 'bar-serializer',
@@ -225,6 +226,15 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame(
 			[ 'foo' => 'foo-search', 'bar' => 'bar-search' ],
 			$definitions->getEntitySearchHelperCallbacks()
+		);
+	}
+
+	public function testGetPrefetchingTermLookupCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-prefetching-term-lookup-instantiator' ],
+			$definitions->getPrefetchingTermLookupCallbacks()
 		);
 	}
 

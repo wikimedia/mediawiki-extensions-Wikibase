@@ -2467,7 +2467,8 @@ class WikibaseRepo {
 				$this->getDataAccessSettings(),
 				$source,
 				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
-				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks()
+				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
+				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks()
 			);
 		}
 		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
