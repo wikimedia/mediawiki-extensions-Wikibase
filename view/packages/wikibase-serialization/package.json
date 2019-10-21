@@ -1,7 +1,7 @@
 {
   "name": "wikibase-serialization",
   "description": "Wikibase datamodel serialization implementation in JavaScript",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "license": "GPL-2.0+",
   "contributors": [
     {
