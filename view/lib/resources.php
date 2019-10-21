@@ -6,21 +6,13 @@ use Wikibase\View\Termbox\TermboxModule;
  * @license GPL-2.0-or-later
  */
 return call_user_func( function() {
-	$wikibaseDatamodelPaths = [
-		'localBasePath' => __DIR__ . '/wikibase-data-model/src',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-model/src',
-	];
-	$wikibaseDatavaluesLibPaths = [
-		'localBasePath' => __DIR__ . '/wikibase-data-values/lib',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values/lib',
-	];
 	$wikibaseDatavaluesSrcPaths = [
 		'localBasePath' => __DIR__ . '/wikibase-data-values/src',
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values/src',
 	];
-	$wikibaseSerializationPaths = [
-		'localBasePath' => __DIR__ . '/wikibase-serialization/src',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
+	$wikibaseDatavaluesPaths = [
+		'localBasePath' => __DIR__ . '/wikibase-data-values',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values',
 	];
 
 	$wikibaseDatavaluesValueviewLibPaths = [
@@ -42,7 +34,7 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'wikibase.datamodel' => $wikibaseDatamodelPaths + [
+		'wikibase.datamodel' => [
 			'packageFiles' => [
 				'index.js',
 
@@ -81,14 +73,8 @@ return call_user_func( function() {
 				'dataValues.DataValue',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
-		],
-
-		'globeCoordinate.js' => $wikibaseDatavaluesLibPaths + [
-			'scripts' => [
-				'globeCoordinate/globeCoordinate.js',
-				'globeCoordinate/globeCoordinate.GlobeCoordinate.js',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
+			'localBasePath' => __DIR__ . '/wikibase-data-model/src',
+			'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-model/src',
 		],
 
 		'dataValues' => $wikibaseDatavaluesSrcPaths + [
@@ -186,26 +172,27 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'dataValues.values' => $wikibaseDatavaluesSrcPaths + [
+		'dataValues.values' => $wikibaseDatavaluesPaths + [
 			'scripts' => [
 				// Note: The order here is relevant, scripts should be places after the ones they
 				//  depend on.
-				'values/BoolValue.js',
-				'values/DecimalValue.js',
-				'values/GlobeCoordinateValue.js',
-				'values/MonolingualTextValue.js',
-				'values/MultilingualTextValue.js',
-				'values/StringValue.js',
-				'values/NumberValue.js',
-				'values/TimeValue.js',
-				'values/QuantityValue.js',
-				'values/UnknownValue.js',
-				'values/UnDeserializableValue.js',
+				'lib/globeCoordinate/globeCoordinate.js',
+				'lib/globeCoordinate/globeCoordinate.GlobeCoordinate.js',
+				'src/values/BoolValue.js',
+				'src/values/DecimalValue.js',
+				'src/values/GlobeCoordinateValue.js',
+				'src/values/MonolingualTextValue.js',
+				'src/values/MultilingualTextValue.js',
+				'src/values/StringValue.js',
+				'src/values/NumberValue.js',
+				'src/values/TimeValue.js',
+				'src/values/QuantityValue.js',
+				'src/values/UnknownValue.js',
+				'src/values/UnDeserializableValue.js',
 			],
 			'dependencies' => [
 				'dataValues.DataValue',
 				'dataValues.TimeValue',
-				'globeCoordinate.js', // required by GlobeCoordinateValue
 				'util.inherit',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
@@ -263,7 +250,7 @@ return call_user_func( function() {
 				'valueParsers',
 			],
 		],
-		'wikibase.serialization' => $wikibaseSerializationPaths + [
+		'wikibase.serialization' => [
 			'packageFiles' => [
 				'index.js',
 
@@ -306,6 +293,8 @@ return call_user_func( function() {
 				'dataValues.values',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
+			'localBasePath' => __DIR__ . '/wikibase-serialization/src',
+			'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
 		],
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
 		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.
