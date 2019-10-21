@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests;
 
 use ParserOutput;
+use Psr\Log\LogLevel;
+use TestLogger;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -257,20 +259,21 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$mockRepoNoSiteLinks->putEntity( $itemNoSiteLinks );
 		}
 
+		$logger = new TestLogger( true );
+
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
-			'srwiki'
+			'srwiki',
+			$logger
 		);
 
-		// Suppress warnings as this is supposed to throw one.
-		\Wikimedia\suppressWarnings();
 		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
-		\Wikimedia\restoreWarnings();
+		$logs = $logger->getBuffer();
 
-		// Stuff didn't blow up
-		$this->assertTrue( true );
+		$this->assertCount( 1, $logs );
+		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
 	}
 
 	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupNoSuchEntity() {
@@ -283,20 +286,21 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$siteLinkLookup->putEntity( $item );
 		}
 
+		$logger = new TestLogger( true );
+
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			new MockRepository(),
-			'srwiki'
+			'srwiki',
+			$logger
 		);
 
-		// Suppress warnings as this is supposed to throw one.
-		\Wikimedia\suppressWarnings();
 		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
-		\Wikimedia\restoreWarnings();
+		$logs = $logger->getBuffer();
 
-		// Stuff didn't blow up
-		$this->assertTrue( true );
+		$this->assertCount( 1, $logs );
+		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
 	}
 
 	public function updateTrackingCategoriesDataProvider() {
