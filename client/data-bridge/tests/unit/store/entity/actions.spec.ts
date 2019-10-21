@@ -7,21 +7,16 @@ import {
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import {
-	ENTITY_ID,
-	ENTITY_REVISION,
-} from '@/store/entity/getterTypes';
-import {
 	ENTITY_UPDATE,
 	ENTITY_REVISION_UPDATE,
 } from '@/store/entity/mutationTypes';
-import { STATEMENTS_MAP } from '@/store/entity/statements/getterTypes';
 import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
-import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
+import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 
@@ -157,14 +152,13 @@ describe( 'entity/actions', () => {
 				statements = {},
 				entity = { id: entityId, statements },
 				revision = 1234,
-				statementsGetter = jest.fn( () => statements ),
 				context = newMockStore( {
-					commit: jest.fn(),
-					getters: {
-						[ ENTITY_ID ]: entityId,
-						[ ENTITY_REVISION ]: revision,
-						[ getter( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
+					state: {
+						baseRevision: revision,
+						id: entityId,
+						[ NS_STATEMENTS ]: { [ entityId ]: statements },
 					},
+					commit: jest.fn(),
 				} );
 
 			const entitySaveAction = actions(
@@ -185,15 +179,11 @@ describe( 'entity/actions', () => {
 		it( 'propagates error on failed save', () => {
 			const entityId = 'Q42',
 				statements = {},
-				revision = 1234,
-				statementsGetter = jest.fn( () => statements ),
 				context = newMockStore( {
-					commit: jest.fn(),
-					getters: {
-						[ ENTITY_ID ]: entityId,
-						[ ENTITY_REVISION ]: revision,
-						[ getter( NS_STATEMENTS, STATEMENTS_MAP ) ]: statementsGetter,
+					state: {
+						[ NS_STATEMENTS ]: { [ entityId ]: statements },
 					},
+					commit: jest.fn(),
 				} ),
 				error = new Error( 'this should be propagated' ),
 				writingEntityRepository = {

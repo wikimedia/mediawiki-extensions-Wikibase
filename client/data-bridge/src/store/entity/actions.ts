@@ -1,16 +1,11 @@
 import EntityRevision from '@/datamodel/EntityRevision';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import {
-	ENTITY_ID,
-	ENTITY_REVISION,
-} from '@/store/entity/getterTypes';
-import { STATEMENTS_MAP } from '@/store/entity/statements/getterTypes';
-import {
 	ActionContext,
 	ActionTree,
 } from 'vuex';
 import Application from '@/store/Application';
-import EntityState from '@/store/entity/EntityState';
+import EntityState, { InitializedEntityState } from '@/store/entity/EntityState';
 import {
 	ENTITY_INIT,
 	ENTITY_SAVE,
@@ -26,7 +21,7 @@ import {
 import {
 	STATEMENTS_INIT,
 } from '@/store/entity/statements/actionTypes';
-import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
+import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 
 export default function actions(
 	readingEntityRepository: ReadingEntityRepository,
@@ -61,16 +56,13 @@ export default function actions(
 		[ ENTITY_SAVE ](
 			context: ActionContext<EntityState, Application>,
 		): Promise<unknown> {
-			const entityId = context.getters[ ENTITY_ID ],
-				entityRevision = new EntityRevision(
-					{
-						id: entityId,
-						statements: context.getters[
-							getter( NS_STATEMENTS, STATEMENTS_MAP )
-						]( entityId ),
-					},
-					context.getters[ ENTITY_REVISION ],
-				);
+			const entityRevision = new EntityRevision(
+				{
+					id: context.state.id,
+					statements: ( context.state as InitializedEntityState )[ NS_STATEMENTS ][ context.state.id ],
+				},
+				context.state.baseRevision,
+			);
 
 			return writingEntityRepository
 				.saveEntity( entityRevision )

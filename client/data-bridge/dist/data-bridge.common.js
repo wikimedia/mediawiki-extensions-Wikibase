@@ -7207,12 +7207,12 @@ var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=2c4cbb03&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=4be4efa0&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"primaryAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.isTargetStatementModified},on:{"click":_vm.saveAndClose}})]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),(_vm.hasError)?_c('ErrorWrapper'):_c(_vm.isInit ? 'DataBridge' : 'Initializing',{tag:"component"})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=2c4cbb03&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=4be4efa0&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -7675,12 +7675,12 @@ var events;
 })(events || (events = {}));
 
 /* harmony default export */ var src_events = (events);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=005b474a&
-var DataBridgevue_type_template_id_005b474a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}})],1)}
-var DataBridgevue_type_template_id_005b474a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=4c2b8a28&
+var DataBridgevue_type_template_id_4c2b8a28_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}})],1)}
+var DataBridgevue_type_template_id_4c2b8a28_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=005b474a&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=4c2b8a28&
 
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
@@ -8175,7 +8175,7 @@ function (_Vue) {
 
 __decorate([Getter('targetValue')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetValue", void 0);
 
-__decorate([Getter('targetProperty')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetProperty", void 0);
+__decorate([State('targetProperty')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetProperty", void 0);
 
 __decorate([Getter('targetLabel')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetLabel", void 0);
 
@@ -8203,8 +8203,8 @@ var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_005b474a_render,
-  DataBridgevue_type_template_id_005b474a_staticRenderFns,
+  DataBridgevue_type_template_id_4c2b8a28_render,
+  DataBridgevue_type_template_id_4c2b8a28_staticRenderFns,
   false,
   null,
   null,
@@ -8663,7 +8663,7 @@ function (_Vue) {
   return App;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-__decorate([Getter('applicationStatus')], Appvue_type_script_lang_ts_App.prototype, "applicationStatus", void 0);
+__decorate([State('applicationStatus')], Appvue_type_script_lang_ts_App.prototype, "applicationStatus", void 0);
 
 __decorate([Getter('isTargetStatementModified')], Appvue_type_script_lang_ts_App.prototype, "isTargetStatementModified", void 0);
 
@@ -8840,14 +8840,10 @@ var NS_STATEMENTS = 'statements';
 var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
 var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
 var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
-var STATEMENTS_MAP = 'statementsMap';
 // CONCATENATED MODULE: ./src/store/entity/statements/mainSnakActionTypes.ts
 var mainSnakActionTypes = {
   setStringDataValue: 'setMainSnakStringDataValue'
 };
-// CONCATENATED MODULE: ./src/store/entity/getterTypes.ts
-var ENTITY_ID = 'id';
-var ENTITY_REVISION = 'revision';
 // CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
 var ENTITY_INIT = 'entityInit';
 var ENTITY_SAVE = 'entitySave';
@@ -8907,7 +8903,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-
 function validateEntityState(context, path) {
   if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](path.entityId, path.propertyId) === false) {
     return false;
@@ -8934,14 +8929,14 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
           _entityInit = _ref2[1];
 
       BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, _objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
+      var state = context.state;
       var path = {
-        entityId: context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)],
-        propertyId: context.state.targetProperty,
+        entityId: state[NS_ENTITY].id,
+        propertyId: state.targetProperty,
         index: 0
       };
 
       if (validateEntityState(context, path)) {
-        var state = context.state;
         context.commit(ORIGINAL_STATEMENT_SET, state[NS_ENTITY][NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
       } else {
@@ -8958,10 +8953,10 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
       return Promise.reject(null);
     }
 
-    var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
+    var state = context.state;
     var path = {
-      entityId: entityId,
-      propertyId: context.state.targetProperty,
+      entityId: state[NS_ENTITY].id,
+      propertyId: state.targetProperty,
       index: 0
     };
     return context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue), {
@@ -8995,24 +8990,14 @@ var deep_equal_default = /*#__PURE__*/__webpack_require__.n(deep_equal);
 
 
 
-
 var getters_getters = {
-  editFlow: function editFlow(state) {
-    return state.editFlow;
-  },
-  targetProperty: function targetProperty(state) {
-    return state.targetProperty;
-  },
-  applicationStatus: function applicationStatus(state) {
-    return state.applicationStatus;
-  },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   targetValue: function targetValue(state, getters) {
     if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
       return null;
     }
 
-    var entityId = getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
+    var entityId = state[NS_ENTITY].id;
     var path = {
       entityId: entityId,
       propertyId: state.targetProperty,
@@ -9030,13 +9015,13 @@ var getters_getters = {
 
     return state.targetLabel;
   },
-  isTargetStatementModified: function isTargetStatementModified(state, getters) {
+  isTargetStatementModified: function isTargetStatementModified(state) {
     if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
       return false;
     }
 
     var initState = state;
-    var entityId = getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
+    var entityId = initState[NS_ENTITY].id;
     return !deep_equal_default()(state.originalStatement, initState[NS_ENTITY][NS_STATEMENTS][entityId][state.targetProperty][0], {
       strict: true
     });
@@ -9078,17 +9063,6 @@ var entity_mutations_mutations = (mutations_mutations = {}, _defineProperty(muta
 }), _defineProperty(mutations_mutations, ENTITY_REVISION_UPDATE, function (state, revision) {
   state.baseRevision = revision;
 }), mutations_mutations);
-// CONCATENATED MODULE: ./src/store/entity/getters.ts
-
-
-var _getters;
-
-
-var entity_getters_getters = (_getters = {}, _defineProperty(_getters, ENTITY_ID, function (state) {
-  return state.id;
-}), _defineProperty(_getters, ENTITY_REVISION, function (state) {
-  return state.baseRevision;
-}), _getters);
 // CONCATENATED MODULE: ./src/datamodel/EntityRevision.ts
 
 
@@ -9103,8 +9077,6 @@ var EntityRevision_EntityRevision = function EntityRevision(entity, revisionId) 
 // CONCATENATED MODULE: ./src/store/entity/statements/actionTypes.ts
 var STATEMENTS_INIT = 'initStatements';
 // CONCATENATED MODULE: ./src/store/entity/actions.ts
-
-
 
 
 
@@ -9129,11 +9101,10 @@ function actions_actions(readingEntityRepository, writingEntityRepository) {
       return updateEntity(context, entityRevision);
     });
   }), _defineProperty(_ref, ENTITY_SAVE, function (context) {
-    var entityId = context.getters[ENTITY_ID],
-        entityRevision = new EntityRevision_EntityRevision({
-      id: entityId,
-      statements: context.getters[Object(namespacedStoreMethods["getter"])(NS_STATEMENTS, STATEMENTS_MAP)](entityId)
-    }, context.getters[ENTITY_REVISION]);
+    var entityRevision = new EntityRevision_EntityRevision({
+      id: context.state.id,
+      statements: context.state[NS_STATEMENTS][context.state.id]
+    }, context.state.baseRevision);
     return writingEntityRepository.saveEntity(entityRevision).then(function (entityRevision) {
       return updateEntity(context, entityRevision);
     });
@@ -9217,10 +9188,6 @@ var statementGetters = (_statementGetters = {}, _defineProperty(_statementGetter
 }), _defineProperty(_statementGetters, STATEMENTS_IS_AMBIGUOUS, function (state) {
   return function (entityId, propertyId) {
     return state[entityId][propertyId] !== undefined && state[entityId][propertyId].length > 1;
-  };
-}), _defineProperty(_statementGetters, STATEMENTS_MAP, function (state) {
-  return function (entityId) {
-    return state[entityId];
   };
 }), _statementGetters);
 // CONCATENATED MODULE: ./src/store/entity/statements/snaks/getters.ts
@@ -9377,7 +9344,6 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
 
 
 
-
 /* harmony default export */ var store_entity = (function (readingEntityRepository, writingEntityRepository) {
   var state = {
     id: '',
@@ -9386,7 +9352,6 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
   return {
     namespaced: true,
     state: state,
-    getters: entity_getters_getters,
     mutations: entity_mutations_mutations,
     actions: actions_actions(readingEntityRepository, writingEntityRepository),
     modules: _defineProperty({}, NS_STATEMENTS, statements())
