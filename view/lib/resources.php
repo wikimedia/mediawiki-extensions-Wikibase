@@ -99,20 +99,10 @@ return call_user_func( function() {
 		],
 
 		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
+			'packageFiles' => [
 				'jquery/jquery.animateWithEvent.js',
-			],
-			'dependencies' => [
-				'jquery.AnimationEvent',
-			],
-		],
-
-		'jquery.AnimationEvent' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
 				'jquery/jquery.AnimationEvent.js',
-			],
-			'dependencies' => [
-				'jquery.PurposedCallbacks',
+				'jquery/jquery.PurposedCallbacks.js',
 			],
 		],
 
@@ -122,12 +112,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.event.special.eachchange',
-			],
-		],
-
-		'jquery.PurposedCallbacks' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
-				'jquery/jquery.PurposedCallbacks.js',
 			],
 		],
 
