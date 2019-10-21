@@ -51,7 +51,9 @@ $specialPageAliases['de'] = [
 
 /** Spanish (español) */
 $specialPageAliases['es'] = [
-	'UnconnectedPages' => [ 'PáginasSinConexión' ],
+	'EntityUsage' => [ 'Uso_de_entidades', 'Datos_de_uso_de_entidades' ],
+	'PagesWithBadges' => [ 'Páginas_con_insignias', 'Buscar_insignias' ],
+	'UnconnectedPages' => [ 'PáginasSinConexión', 'Páginas_sin_conexión' ],
 ];
 
 /** Estonian (eesti) */
