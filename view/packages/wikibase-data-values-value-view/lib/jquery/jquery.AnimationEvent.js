@@ -1,6 +1,7 @@
-( function( $, PurposedCallbacks ) {
+( function( $ ) {
 	'use strict';
 
+	var PurposedCallbacks = require( './jquery.PurposedCallbacks.js' );
 	/**
 	 * Event dedicated to providing information about an animation which will be added to an
 	 * animations queue. This is just a standard jQuery event object providing additional
@@ -160,4 +161,4 @@
 
 	module.exports = SELF;
 
-}( jQuery, jQuery.PurposedCallbacks ) );
+}( jQuery ) );

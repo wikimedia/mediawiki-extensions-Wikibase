@@ -2,9 +2,11 @@
  * @license GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( $, QUnit, PurposedCallbacks ) {
+( function( $, QUnit ) {
 	'use strict';
 	/* jshint newcap: false */
+
+	var PurposedCallbacks = require( './../../../lib/jquery/jquery.PurposedCallbacks.js' );
 
 	QUnit.module( 'jquery.PurposedCallbacks' );
 
@@ -302,4 +304,4 @@
 		);
 	} );
 
-}( jQuery, QUnit, jQuery.PurposedCallbacks ) );
+}( jQuery, QUnit ) );

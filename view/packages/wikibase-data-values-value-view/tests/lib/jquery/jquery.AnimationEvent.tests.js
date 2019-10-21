@@ -3,11 +3,12 @@
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 
-( function( $, QUnit, PurposedCallbacks ) {
+( function( $, QUnit ) {
 	'use strict';
 	/* jshint newcap: false */
 
-	var AnimationEvent = require( './../../../lib/jquery/jquery.AnimationEvent.js' );
+	var AnimationEvent = require( './../../../lib/jquery/jquery.AnimationEvent.js' ),
+		PurposedCallbacks = require( './../../../lib/jquery/jquery.PurposedCallbacks.js' );
 
 	QUnit.module( 'jquery.AnimationEvent' );
 
@@ -168,4 +169,4 @@
 			} );
 	} );
 
-}( jQuery, QUnit, jQuery.PurposedCallbacks ) );
+}( jQuery, QUnit ) );

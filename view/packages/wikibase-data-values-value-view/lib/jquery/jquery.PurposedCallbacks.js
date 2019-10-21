@@ -1,4 +1,4 @@
-jQuery.PurposedCallbacks = ( function () {
+( function () {
 	'use strict';
 
 	/**
@@ -42,7 +42,6 @@ jQuery.PurposedCallbacks = ( function () {
 	 *        If of type `string`, the parameter is assumed to be the callback options.
 	 * @param {string} [callbackOptions] Same options as for `jQuery.Callbacks`, will be
 	 *        forwarded.
-	 * @return {jQuery.PurposedCallbacks} Can be instantiated without `new`.
 	 *
 	 * @throws {Error} if purpose is unknown.
 	 */
@@ -242,6 +241,6 @@ jQuery.PurposedCallbacks = ( function () {
 		} );
 	};
 
-	return SELF;
+	module.exports = SELF;
 
 }() );
