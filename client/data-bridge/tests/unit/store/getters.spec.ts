@@ -9,6 +9,7 @@ import {
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import newApplicationState from './newApplicationState';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
+import clone from '@/store/clone';
 
 describe( 'root/getters', () => {
 	it( 'has an targetProperty', () => {
@@ -126,6 +127,120 @@ describe( 'root/getters', () => {
 			expect( getters.stringMaxLength(
 				applicationState, null, applicationState, null,
 			) ).toBe( 12345 );
+		} );
+	} );
+
+	describe( 'isTargetPropertyModified', () => {
+		const entityId = 'Q42';
+		const otherGetters = {
+			[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
+		};
+		const targetProperty = 'P23';
+
+		it( 'returns false if the application is not ready', () => {
+			const actualTargetProperty = {
+				type: 'statement',
+				id: 'opaque statement ID',
+				rank: 'normal',
+				mainsnak: {
+					snaktype: 'value',
+					property: 'P60',
+					datatype: 'string',
+					datavalue: {
+						type: 'string',
+						value: 'a string value',
+					},
+				},
+			};
+
+			const originalStatement = JSON.stringify( actualTargetProperty );
+			actualTargetProperty.mainsnak.datavalue.value = 'modified teststring';
+			const applicationState = newApplicationState( {
+				targetProperty,
+				applicationStatus: ApplicationStatus.INITIALIZING,
+				originalStatement,
+				[ NS_ENTITY ]: {
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ targetProperty ]: [ actualTargetProperty ],
+						},
+					},
+				},
+			} );
+			expect( getters.isTargetStatementModified(
+				applicationState, otherGetters, applicationState, null,
+			) ).toBe( false );
+		} );
+
+		it( 'returns false if there is no diff', () => {
+			const actualTargetProperty = {
+				type: 'statement',
+				id: 'opaque statement ID',
+				rank: 'normal',
+				mainsnak: {
+					snaktype: 'value',
+					property: 'P60',
+					datatype: 'string',
+					datavalue: {
+						type: 'string',
+						value: 'a string value',
+					},
+				},
+			};
+
+			const originalStatement = clone( actualTargetProperty );
+			const applicationState = newApplicationState( {
+				targetProperty,
+				applicationStatus: ApplicationStatus.READY,
+				originalStatement,
+				[ NS_ENTITY ]: {
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ targetProperty ]: [ actualTargetProperty ],
+						},
+					},
+				},
+			} );
+
+			expect( getters.isTargetStatementModified(
+				applicationState, otherGetters, applicationState, null,
+			) ).toBe( false );
+		} );
+
+		it( 'returns true if there is a diff', () => {
+			const actualTargetProperty = {
+				type: 'statement',
+				id: 'opaque statement ID',
+				rank: 'normal',
+				mainsnak: {
+					snaktype: 'value',
+					property: 'P60',
+					datatype: 'string',
+					datavalue: {
+						type: 'string',
+						value: 'a string value',
+					},
+				},
+			};
+
+			const originalStatement = clone( actualTargetProperty );
+			actualTargetProperty.mainsnak.datavalue.value = 'modified teststring';
+
+			const applicationState = newApplicationState( {
+				targetProperty,
+				applicationStatus: ApplicationStatus.READY,
+				originalStatement,
+				[ NS_ENTITY ]: {
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ targetProperty ]: [ actualTargetProperty ],
+						},
+					},
+				},
+			} );
+			expect( getters.isTargetStatementModified(
+				applicationState, otherGetters, applicationState, null,
+			) ).toBe( true );
 		} );
 	} );
 } );
