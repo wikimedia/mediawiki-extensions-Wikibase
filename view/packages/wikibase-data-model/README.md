@@ -17,7 +17,7 @@ the corresponding serializer, and send back to the API.
 
 ## Release notes
 
-### 6.0.0 (dev)
+### 6.0.0 (2019-10-21)
 * Using CommonJS modules instead of global namespaces for all files
 
 ### 5.1.0 (2019-10-01)
