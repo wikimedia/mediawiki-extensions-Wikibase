@@ -36,19 +36,21 @@ import EntityLabelRepository from '@/definitions/data-access/EntityLabelReposito
 import Term from '@/datamodel/Term';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import validateBridgeApplicability from '@/store/validateBridgeApplicability';
+import MainSnakPath from '@/store/entity/statements/MainSnakPath';
 
-function validateEntityState( context: ActionContext<Application, Application> ): boolean {
-	const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
-
+function validateEntityState(
+	context: ActionContext<Application, Application>,
+	path: MainSnakPath,
+): boolean {
 	if (
 		context.getters[
 			getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
-		]( entityId, context.state.targetProperty ) === false
+		]( path.entityId, path.propertyId ) === false
 	) {
 		return false;
 	}
 
-	return validateBridgeApplicability( context );
+	return validateBridgeApplicability( context, path );
 }
 
 export default function actions(
@@ -78,10 +80,15 @@ export default function actions(
 				),
 			] ).then( ( [ wikibaseRepoConfiguration, _entityInit ] ) => {
 				context.commit( WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration );
+				const path = {
+					entityId: context.getters[ getter( NS_ENTITY, ENTITY_ID ) ],
+					propertyId: context.state.targetProperty,
+					index: 0,
+				};
 
 				context.commit(
 					APPLICATION_STATUS_SET,
-					validateEntityState( context ) ? ApplicationStatus.READY : ApplicationStatus.ERROR,
+					validateEntityState( context, path ) ? ApplicationStatus.READY : ApplicationStatus.ERROR,
 				);
 			}, ( error ) => {
 				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );

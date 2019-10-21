@@ -8095,16 +8095,8 @@ var mainSnakGetterTypes = {
 
 
 
-
-function validateBridgeApplicability(context) {
-  var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
-  var path = {
-    entityId: entityId,
-    propertyId: context.state.targetProperty,
-    index: 0
-  };
-
-  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](entityId, context.state.targetProperty) === true) {
+function validateBridgeApplicability(context, path) {
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](path.entityId, path.propertyId) === true) {
     return false;
   }
 
@@ -8136,14 +8128,12 @@ function validateBridgeApplicability(context) {
 
 
 
-function validateEntityState(context) {
-  var entityId = context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)];
-
-  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](entityId, context.state.targetProperty) === false) {
+function validateEntityState(context, path) {
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](path.entityId, path.propertyId) === false) {
     return false;
   }
 
-  return validateBridgeApplicability(context);
+  return validateBridgeApplicability(context, path);
 }
 
 function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
@@ -8164,7 +8154,12 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
           _entityInit = _ref2[1];
 
       context.commit(WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration);
-      context.commit(APPLICATION_STATUS_SET, validateEntityState(context) ? definitions_ApplicationStatus.READY : definitions_ApplicationStatus.ERROR);
+      var path = {
+        entityId: context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)],
+        propertyId: context.state.targetProperty,
+        index: 0
+      };
+      context.commit(APPLICATION_STATUS_SET, validateEntityState(context, path) ? definitions_ApplicationStatus.READY : definitions_ApplicationStatus.ERROR);
     }, function (error) {
       context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
 
