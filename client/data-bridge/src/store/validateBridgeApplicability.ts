@@ -1,25 +1,19 @@
 import { ActionContext } from 'vuex';
 import Application from '@/store/Application';
 import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
-import { ENTITY_ID } from '@/store/entity/getterTypes';
 import { STATEMENTS_IS_AMBIGUOUS } from '@/store/entity/statements/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
+import MainSnakPath from '@/store/entity/statements/MainSnakPath';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 
 export default function validateBridgeApplicability(
 	context: ActionContext<Application, Application>,
+	path: MainSnakPath,
 ): boolean {
-	const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
-	const path = {
-		entityId,
-		propertyId: context.state.targetProperty,
-		index: 0,
-	};
-
 	if (
 		context.getters[
 			getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS )
-		]( entityId, context.state.targetProperty ) === true
+		]( path.entityId, path.propertyId ) === true
 	) {
 		return false;
 	}

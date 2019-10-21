@@ -6,10 +6,13 @@ import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import { ENTITY_ID } from '@/store/entity/getterTypes';
 
+const defaultEntity = 'Q815';
+const defaultProperty = 'P4711';
+
 function mockedStore(
 	gettersOverride?: any,
-	entityId: string = 'Q815',
-	targetProperty: string = 'P4711',
+	entityId: string = defaultEntity,
+	targetProperty: string = defaultProperty,
 ): any {
 	return newMockStore( {
 		state: {
@@ -43,19 +46,23 @@ function mockedStore(
 describe( 'validateBridgeApplicability', () => {
 
 	it( 'returns true if applicable', () => {
-		const targetProperty = 'P4711';
-		const entityId = 'Q815';
-		const context = mockedStore( {}, entityId, targetProperty );
+		const context = mockedStore( {}, defaultEntity, defaultProperty );
 
-		expect( validateBridgeApplicability( context ) )
-			.toBe( true );
+		expect( validateBridgeApplicability(
+			context,
+			{
+				entityId: defaultEntity,
+				propertyId: defaultProperty,
+				index: 0,
+			},
+		) ).toBe( true );
 		expect(
 			context.getters[ getter(
 				NS_ENTITY,
 				NS_STATEMENTS,
 				STATEMENTS_IS_AMBIGUOUS,
 			) ],
-		).toHaveBeenCalledWith( entityId, targetProperty );
+		).toHaveBeenCalledWith( defaultEntity, defaultProperty );
 		expect(
 			context.getters[ getter(
 				NS_ENTITY,
@@ -63,8 +70,8 @@ describe( 'validateBridgeApplicability', () => {
 				mainSnakGetterTypes.snakType,
 			) ],
 		).toHaveBeenCalledWith( {
-			entityId,
-			propertyId: targetProperty,
+			entityId: defaultEntity,
+			propertyId: defaultProperty,
 			index: 0,
 		} );
 		expect(
@@ -74,8 +81,8 @@ describe( 'validateBridgeApplicability', () => {
 				mainSnakGetterTypes.dataValueType,
 			) ],
 		).toHaveBeenCalledWith( {
-			entityId,
-			propertyId: targetProperty,
+			entityId: defaultEntity,
+			propertyId: defaultProperty,
 			index: 0,
 		} );
 	} );
@@ -89,8 +96,10 @@ describe( 'validateBridgeApplicability', () => {
 			) ]: jest.fn( () => true ),
 		} );
 
-		expect( validateBridgeApplicability( context ) )
-			.toBe( false );
+		expect( validateBridgeApplicability(
+			context,
+			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 },
+		) ).toBe( false );
 	} );
 
 	it( 'returns false for non-value snak types', () => {
@@ -102,8 +111,8 @@ describe( 'validateBridgeApplicability', () => {
 			) ]: jest.fn( () => 'novalue' ),
 		} );
 
-		expect( validateBridgeApplicability( context ) )
-			.toBe( false );
+		expect( validateBridgeApplicability( context,
+			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 } ) ).toBe( false );
 	} );
 
 	it( 'returns false for non-string data types', () => {
@@ -115,7 +124,9 @@ describe( 'validateBridgeApplicability', () => {
 			) ]: jest.fn( () => 'noStringType' ),
 		} );
 
-		expect( validateBridgeApplicability( context ) )
-			.toBe( false );
+		expect( validateBridgeApplicability(
+			context,
+			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 },
+		) ).toBe( false );
 	} );
 } );
