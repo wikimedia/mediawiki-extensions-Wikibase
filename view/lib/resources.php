@@ -445,9 +445,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.ExpertExtender.Container',
-				'jquery.valueview.ExpertExtender.Listrotator',
-				'jquery.valueview.ExpertExtender.Preview',
 				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
@@ -525,9 +522,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'dataValues.TimeValue',
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.ExpertExtender.Container',
-				'jquery.valueview.ExpertExtender.Listrotator',
-				'jquery.valueview.ExpertExtender.Preview',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 				'util.MessageProvider',
@@ -571,62 +565,30 @@ return call_user_func( function() {
 			'scripts' => [
 				'ExpertExtender/ExpertExtender.js',
 				'../lib/jquery.ui/jquery.ui.inputextender.js',
-			],
-			'styles' => [
-				'../lib/jquery.ui/jquery.ui.inputextender.css',
-			],
-			'dependencies' => [
-				'jquery.animateWithEvent',
-				'jquery.event.special.eachchange',
-				'jquery.ui',
-				'jquery.valueview',
-				'util.Extendable',
-			],
-		],
-
-		'jquery.valueview.ExpertExtender.Container' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
 				'ExpertExtender/ExpertExtender.Container.js',
-			],
-			'dependencies' => [
-				'jquery.valueview.ExpertExtender',
-			],
-		],
-
-		'jquery.valueview.ExpertExtender.Listrotator' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
 				'ExpertExtender/ExpertExtender.Listrotator.js',
 				'../lib/jquery.ui/jquery.ui.listrotator.js',
-			],
-			'styles' => [
-				'../lib/jquery.ui/jquery.ui.listrotator.css',
-			],
-			'dependencies' => [
-				'jquery.valueview.ExpertExtender',
-				'jquery.ui',
-			],
-			'messages' => [
-				'valueview-listrotator-manually',
-			],
-		],
-
-		'jquery.valueview.ExpertExtender.Preview' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
 				'ExpertExtender/ExpertExtender.Preview.js',
 				'../lib/jquery.ui/jquery.ui.preview.js',
 			],
 			'styles' => [
+				'../lib/jquery.ui/jquery.ui.inputextender.css',
+				'../lib/jquery.ui/jquery.ui.listrotator.css',
 				'ExpertExtender/ExpertExtender.Preview.css',
 				'../lib/jquery.ui/jquery.ui.preview.css',
 			],
 			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.event.special.eachchange',
+				'jquery.valueview',
+				'util.Extendable',
 				'jquery.ui',
-				'jquery.valueview.ExpertExtender',
 				'util.CombiningMessageProvider',
 				'util.HashMessageProvider',
 				'util.PrefixingMessageProvider',
 			],
 			'messages' => [
+				'valueview-listrotator-manually',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
 			],
