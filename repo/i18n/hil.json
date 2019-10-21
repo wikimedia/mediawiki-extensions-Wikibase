@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Redhotchili23"
+			"Redhotchili23",
+			"Pare Mo"
 		]
 	},
 	"wikibase-edit": "bayluhan",
 	"wikibase-add": "dugangan",
-	"wikibase-statementsection-statements": "Mga Panaysay"
+	"wikibase-label-empty": "Walay naibutang nga etiketa",
+	"wikibase-statementsection-statements": "Mga Panaysay",
+	"wikibase-sitelinks-special": "Ibang sityo"
 }

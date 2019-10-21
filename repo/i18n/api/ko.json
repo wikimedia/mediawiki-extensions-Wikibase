@@ -27,6 +27,7 @@
 	"apihelp-wbsearchentities-example-6": "엔티티 ID와 일치하기 위해 영어로 \"Q1234\"를 검색합니다.",
 	"apihelp-query+wbcontentlanguages-param-prop": "각 언어에 대해 반환되어야 할 속성입니다.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "언어 코드입니다.",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "이것은 내부 모듈입니다. 사용하지 말아 주십시오.",
 	"apihelp-query+wbsearch-param-search": "이 텍스트를 찾습니다.",
 	"apihelp-query+wbsearch-param-language": "이 언어로 검색합니다.",
 	"apihelp-query+wbsearch-param-type": "이 유형의 엔티티를 검색합니다.",

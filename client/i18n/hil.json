@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Redhotchili23"
+			"Redhotchili23",
+			"Pare Mo"
 		]
 	},
-	"wikibase-rc-hide-wikidata-show": "Ipakita"
+	"wikibase-comment-update": "Nabag·o ang {{WBREPONAME}}",
+	"wikibase-editlinks": "Liwaton ang mga enlase",
+	"wikibase-rc-hide-wikidata-hide": "Itago",
+	"wikibase-rc-hide-wikidata-show": "Ipakita",
+	"wikibase-rc-wikibase-edit-title": "liwaton",
+	"wikibase-otherprojects": "sa ibang proyekto"
 }

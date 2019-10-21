@@ -11,7 +11,8 @@
 			"Jayarathina",
 			"தமிழ்க்குரிசில்",
 			"ElangoRamanujam",
-			"Nisha"
+			"Nisha",
+			"Balajijagadesh"
 		]
 	},
 	"wikibase-entity-item": "உருப்படி",
@@ -33,6 +34,7 @@
 	"wikibase-remove": "நீக்கு",
 	"wikibase-disambiguation-title": "\"$1\" க்கான பக்க நெறிப்படுத்தல்",
 	"wikibase-propertypage-datatype": "தரவு வகை",
+	"wikibase-statementview-rank-normal": "சாதாரண தரநிலை",
 	"special-itembytitle": "தலைப்பு வாரியாக உருப்படி",
 	"wikibase-itembytitle-lookup-site": "தளம்:",
 	"wikibase-itembytitle-lookup-page": "பக்கம்:",

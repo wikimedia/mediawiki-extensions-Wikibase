@@ -8,7 +8,8 @@
 			"AntanO",
 			"Rakeshonwiki",
 			"ElangoRamanujam",
-			"Aswn"
+			"Aswn",
+			"Balajijagadesh"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}உருப்படி",
@@ -21,6 +22,6 @@
 	"wikibase-rc-wikibase-edit-letter": "த",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} தொகுப்பு",
 	"wikibase-pageinfo-entity-usage-T": "தலைப்பு",
-	"wikibase-otherprojects": "பிற திட்டங்கள்",
+	"wikibase-otherprojects": "பிற திட்டங்களில்",
 	"connected-redirect-category": "{{WBREPONAME}}-இற்கு இணைக்கப்பட்டுள்ள வழிமாற்றுகள்"
 }

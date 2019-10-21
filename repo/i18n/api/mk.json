@@ -122,6 +122,7 @@
 	"apihelp-wbsearchentities-example-3": "Пребарајте „alphabet“ на англиски за типско својство",
 	"apihelp-wbsearchentities-example-5": "Пребарајте „alphabet“ на англиски изоставувајќи го својството за URL",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "Јазичниот код:",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "Ова е внатрешен модул. Не користете го.",
 	"apihelp-query+wbsearch-summary": "Пребарување на единици што користат натписи и истозначници.",
 	"apihelp-query+wbsearch-param-search": "Побарајте го текстов.",
 	"apihelp-query+wbsearch-param-language": "Пребарајте на овој јазик.",

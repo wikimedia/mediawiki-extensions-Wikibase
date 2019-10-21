@@ -44,6 +44,8 @@
 	"wikibase-error-invalid-entity-id": "Et nummer \"$2\" is neet bekend in et systeem. Gebruuk een geldig nummer.",
 	"unconnectedpages": "Syden dee neet an objekten koppeld binnet",
 	"wikibase-unconnectedpages-submit": "Syden bekyken",
+	"pageswithbadges": "Syden mid underskeidingen",
+	"entityusage": "Entiteitsgebruuk",
 	"wikibase-pageinfo-entity-id-none": "Geen",
 	"wikibase-otherprojects": "In andere projekten",
 	"wikibase-otherprojects-beta-message": "Andere projekten-sydbalke",
