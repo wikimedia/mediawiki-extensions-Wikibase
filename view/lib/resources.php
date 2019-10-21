@@ -161,27 +161,17 @@ return call_user_func( function() {
 			],
 		],
 
-		'util.HashMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+		'util.MessageProviders' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'util/util.HashMessageProvider.js',
-			],
-		],
-
-		'util.CombiningMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
 				'util/util.CombiningMessageProvider.js',
+				'util/util.PrefixingMessageProvider.js',
 			],
 		],
 
 		'util.Notifier' => $wikibaseDatavaluesValueviewLibPaths + [
 			'scripts' => [
 				'util/util.Notifier.js',
-			],
-		],
-
-		'util.PrefixingMessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
-			'scripts' => [
-				'util/util.PrefixingMessageProvider.js',
 			],
 		],
 
@@ -346,8 +336,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'util.inherit',
-				'util.CombiningMessageProvider',
-				'util.HashMessageProvider',
+				'util.MessageProviders',
 				'util.Notifier',
 				'util.Extendable'
 			],
@@ -453,7 +442,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.StringValue',
 				'jquery.event.special.eachchange',
 				'jquery.ui.languagesuggester',
-				'util.PrefixingMessageProvider',
+				'util.MessageProviders',
 			],
 			'messages' => [
 				'valueview-expertextender-languageselector-languagetemplate',
@@ -567,9 +556,7 @@ return call_user_func( function() {
 				'jquery.valueview',
 				'util.Extendable',
 				'jquery.ui',
-				'util.CombiningMessageProvider',
-				'util.HashMessageProvider',
-				'util.PrefixingMessageProvider',
+				'util.MessageProviders',
 			],
 			'messages' => [
 				'valueview-listrotator-manually',
