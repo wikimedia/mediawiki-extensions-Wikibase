@@ -208,7 +208,6 @@ return call_user_func( function() {
 				'resources/jquery/ui/jquery.ui.closeable.css'
 			],
 			'dependencies' => [
-				'dataValues',
 				'dataValues.DataValue', // For snakview
 				'jquery.animateWithEvent',
 				'jquery.event.special.eachchange',
