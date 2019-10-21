@@ -332,6 +332,7 @@ return call_user_func( function() {
 
 		'jquery.valueview.Expert' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
+				'jquery.valueview.experts.js',
 				'jquery.valueview.Expert.js',
 			],
 			'dependencies' => [
@@ -348,12 +349,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'jquery.valueview.experts' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
-				'jquery.valueview.experts.js',
-			],
-		],
-
 		'jquery.valueview.experts.CommonsMediaType' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/CommonsMediaType.js',
@@ -361,7 +356,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.ui.commonssuggester',
-				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
 			],
@@ -374,7 +368,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.ui.commonssuggester',
-				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
 			],
@@ -387,7 +380,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.ui.commonssuggester',
-				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
 			],
@@ -401,7 +393,6 @@ return call_user_func( function() {
 				'experts/EmptyValue.css',
 			],
 			'dependencies' => [
-				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 			],
 			'messages' => [
@@ -418,7 +409,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
 				'util.MessageProvider',
@@ -438,7 +428,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.valueview.Expert',
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 				'jquery.event.special.eachchange',
 				'jquery.ui.languagesuggester',
@@ -464,7 +453,6 @@ return call_user_func( function() {
 				'jquery.ui',
 				'jquery.valueview.Expert',
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
 			],
 			'messages' => [
@@ -480,7 +468,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'jquery.event.special.eachchange',
 				'jquery.inputautoexpand',
-				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 			],
 		],
@@ -495,7 +482,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'dataValues.TimeValue',
 				'jquery.valueview.ExpertExtender',
-				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 				'util.MessageProvider',
 			],
@@ -512,7 +498,6 @@ return call_user_func( function() {
 				'experts/UnDeserializableValue.js'
 			],
 			'dependencies' => [
-				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 			]
 		],
@@ -525,7 +510,6 @@ return call_user_func( function() {
 				'experts/UnsupportedValue.css',
 			],
 			'dependencies' => [
-				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 			],
 			'messages' => [
