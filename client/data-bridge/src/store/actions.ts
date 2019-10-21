@@ -2,7 +2,9 @@ import {
 	ActionContext,
 	ActionTree,
 } from 'vuex';
-import Application from '@/store/Application';
+import Application, {
+	InitializedApplicationState,
+} from '@/store/Application';
 import {
 	BRIDGE_INIT,
 	BRIDGE_SAVE,
@@ -16,6 +18,7 @@ import {
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
 	WIKIBASE_REPO_CONFIGURATION_SET,
+	ORIGINAL_STATEMENT_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -86,10 +89,24 @@ export default function actions(
 					index: 0,
 				};
 
-				context.commit(
-					APPLICATION_STATUS_SET,
-					validateEntityState( context, path ) ? ApplicationStatus.READY : ApplicationStatus.ERROR,
-				);
+				if ( validateEntityState( context, path ) ) {
+					const state = context.state as InitializedApplicationState;
+
+					context.commit(
+						ORIGINAL_STATEMENT_SET,
+						state[ NS_ENTITY ][ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ],
+					);
+
+					context.commit(
+						APPLICATION_STATUS_SET,
+						ApplicationStatus.READY,
+					);
+				} else {
+					context.commit(
+						APPLICATION_STATUS_SET,
+						ApplicationStatus.ERROR,
+					);
+				}
 			}, ( error ) => {
 				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 				// TODO: store information about the error somewhere and show it!

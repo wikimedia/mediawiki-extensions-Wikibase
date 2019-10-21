@@ -17,6 +17,7 @@ export function createStore( services: ServiceRepositories ): Store<Application>
 	const state: Application = {
 		targetLabel: null,
 		targetProperty: '',
+		originalStatement: null,
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
 		wikibaseRepoConfiguration: null,

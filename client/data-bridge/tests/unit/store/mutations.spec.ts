@@ -5,6 +5,7 @@ import {
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
 	TARGET_LABEL_SET,
+	ORIGINAL_STATEMENT_SET,
 } from '@/store/mutationTypes';
 import Application from '@/store/Application';
 import newApplicationState from './newApplicationState';
@@ -35,5 +36,22 @@ describe( 'root/mutations', () => {
 		const store: Application = newApplicationState();
 		mutations[ TARGET_LABEL_SET ]( store, targetLabel );
 		expect( store.targetLabel ).toBe( targetLabel );
+	} );
+
+	it( 'changes the originalStatement of the store', () => {
+		const targetProperty = {
+			type: 'statement',
+			id: 'opaque statement ID',
+			rank: 'normal',
+			mainsnak: {
+				snaktype: 'novalue',
+				property: 'P60',
+				datatype: 'string',
+			},
+		};
+		const store: Application = newApplicationState();
+		mutations[ ORIGINAL_STATEMENT_SET ]( store, targetProperty );
+		expect( store.originalStatement ).not.toBe( targetProperty );
+		expect( store.originalStatement ).toStrictEqual( targetProperty );
 	} );
 } );
