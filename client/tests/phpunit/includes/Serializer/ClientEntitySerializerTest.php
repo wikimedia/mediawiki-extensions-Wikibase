@@ -3,9 +3,11 @@
 namespace Wikibase\Client\Tests\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
+use Serializers\Serializer;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\LanguageFallbackChain;
@@ -83,6 +85,22 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 		$this->assertSame( $expected, $serialization );
+	}
+
+	public function testSerializeEmptySerialization() {
+		$serializer = $this->createMock( Serializer::class );
+		$serializer->method( 'serialize' )
+			->willReturn( [] );
+		$instance = new ClientEntitySerializer(
+			$serializer,
+			new InMemoryDataTypeLookup(),
+			[ 'en' ],
+			[ 'en' => new LanguageFallbackChain( [] ) ]
+		);
+
+		$serialization = $instance->serialize( new Item() );
+
+		$this->assertEmpty( $serialization );
 	}
 
 }
