@@ -95,12 +95,14 @@ describe( 'Dispatcher', () => {
 			expect( app.launch ).toHaveBeenCalledWith(
 				{
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
-					usePublish,
 				},
 				{
 					entityId,
 					propertyId,
 					editFlow,
+					client: {
+						usePublish,
+					},
 				},
 				mockServices,
 			);

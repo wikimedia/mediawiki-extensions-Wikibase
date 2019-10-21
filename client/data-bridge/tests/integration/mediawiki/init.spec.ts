@@ -100,12 +100,12 @@ describe( 'init', () => {
 			expect( app.launch ).toHaveBeenCalledWith(
 				{
 					containerSelector: '#data-bridge-container',
-					usePublish,
 				},
 				{
 					entityId,
 					propertyId,
 					editFlow,
+					client: { usePublish },
 				},
 				expectedServices,
 			);

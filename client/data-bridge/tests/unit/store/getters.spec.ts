@@ -105,31 +105,6 @@ describe( 'root/getters', () => {
 		} );
 	} );
 
-	describe( 'stringMaxLength', () => {
-		it( 'returns null if Wikibase repo config is not set', () => {
-			const applicationState = newApplicationState();
-
-			expect( getters.stringMaxLength(
-				applicationState, null, applicationState, null,
-			) ).toBeNull();
-		} );
-
-		it( 'returns value from Wikibase repo config if set', () => {
-			const wikibaseRepoConfiguration = {
-				dataTypeLimits: {
-					string: {
-						maxLength: 12345,
-					},
-				},
-			};
-			const applicationState = newApplicationState( { wikibaseRepoConfiguration } );
-
-			expect( getters.stringMaxLength(
-				applicationState, null, applicationState, null,
-			) ).toBe( 12345 );
-		} );
-	} );
-
 	describe( 'isTargetPropertyModified', () => {
 		const entityId = 'Q42';
 		const otherGetters = {

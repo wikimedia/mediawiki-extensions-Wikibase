@@ -60,14 +60,6 @@ export const getters: GetterTree<Application, Application> = {
 		return state.targetLabel;
 	},
 
-	stringMaxLength( state: Application ): number|null {
-		if ( state.wikibaseRepoConfiguration === null ) {
-			return null;
-		}
-
-		return state.wikibaseRepoConfiguration.dataTypeLimits.string.maxLength;
-	},
-
 	isTargetStatementModified( state: Application, getters: { [ key: string ]: string } ): boolean {
 		if ( state.applicationStatus !== Status.READY ) {
 			return false;

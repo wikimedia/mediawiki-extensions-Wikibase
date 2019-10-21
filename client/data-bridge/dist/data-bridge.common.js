@@ -7675,12 +7675,12 @@ var events;
 })(events || (events = {}));
 
 /* harmony default export */ var src_events = (events);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=06396862&
-var DataBridgevue_type_template_id_06396862_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":_vm.stringMaxLength}})],1)}
-var DataBridgevue_type_template_id_06396862_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=005b474a&
+var DataBridgevue_type_template_id_005b474a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}})],1)}
+var DataBridgevue_type_template_id_005b474a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=06396862&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=005b474a&
 
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
@@ -8179,8 +8179,6 @@ __decorate([Getter('targetProperty')], DataBridgevue_type_script_lang_ts_DataBri
 
 __decorate([Getter('targetLabel')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetLabel", void 0);
 
-__decorate([Getter('stringMaxLength')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "stringMaxLength", void 0);
-
 __decorate([Action(BRIDGE_SET_TARGET_VALUE)], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "setDataValue", void 0);
 
 DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_common_default()({
@@ -8205,8 +8203,8 @@ var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_06396862_render,
-  DataBridgevue_type_template_id_06396862_staticRenderFns,
+  DataBridgevue_type_template_id_005b474a_render,
+  DataBridgevue_type_template_id_005b474a_staticRenderFns,
   false,
   null,
   null,
@@ -8721,6 +8719,12 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
+var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
+var es6_object_keys = __webpack_require__("456d");
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
 var is_array = __webpack_require__("a745");
 var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
@@ -8787,6 +8791,39 @@ var es6_promise = __webpack_require__("551c");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.iterator.js
 var es6_string_iterator = __webpack_require__("5df3");
 
+// CONCATENATED MODULE: ./src/presentation/plugins/BridgeConfigPlugin/BridgeConfig.ts
+
+
+var BridgeConfig_BridgeConfig = function BridgeConfig(config) {
+  _classCallCheck(this, BridgeConfig);
+
+  if (typeof config.usePublish !== 'boolean') {
+    throw new Error('No valid usePublish option provided.');
+  }
+
+  this.usePublish = config.usePublish;
+
+  if (config.dataTypeLimits) {
+    if (typeof config.dataTypeLimits.string.maxLength !== 'number') {
+      throw new Error('No valid stringMaxLength option provided.');
+    }
+
+    this.stringMaxLength = config.dataTypeLimits.string.maxLength;
+  } else {
+    this.stringMaxLength = null;
+  }
+};
+
+
+// CONCATENATED MODULE: ./src/presentation/plugins/BridgeConfigPlugin/index.ts
+
+function BridgeConfigPlugin(vue, options) {
+  if (!options) {
+    throw new Error('No BridgeConfigOptions provided.');
+  }
+
+  vue.prototype.$bridgeConfig = new BridgeConfig_BridgeConfig(options);
+}
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var PROPERTY_TARGET_SET = 'setPropertyPointer';
 var EDITFLOW_SET = 'setEditFlow';
@@ -8852,6 +8889,15 @@ function validateBridgeApplicability(context, path) {
 
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+
 
 
 
@@ -8885,7 +8931,7 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
           wikibaseRepoConfiguration = _ref2[0],
           _entityInit = _ref2[1];
 
-      context.commit(WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration);
+      BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, _objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
       var path = {
         entityId: context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, ENTITY_ID)],
         propertyId: context.state.targetProperty,
@@ -8982,13 +9028,6 @@ var getters_getters = {
 
     return state.targetLabel;
   },
-  stringMaxLength: function stringMaxLength(state) {
-    if (state.wikibaseRepoConfiguration === null) {
-      return null;
-    }
-
-    return state.wikibaseRepoConfiguration.dataTypeLimits.string.maxLength;
-  },
   isTargetStatementModified: function isTargetStatementModified(state, getters) {
     if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
       return false;
@@ -9020,8 +9059,6 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   state.applicationStatus = status;
 }), _defineProperty(_mutations, TARGET_LABEL_SET, function (state, label) {
   state.targetLabel = label;
-}), _defineProperty(_mutations, WIKIBASE_REPO_CONFIGURATION_SET, function (state, config) {
-  state.wikibaseRepoConfiguration = config;
 }), _defineProperty(_mutations, ORIGINAL_STATEMENT_SET, function (state, revision) {
   state.originalStatement = clone(revision);
 }), _mutations);
@@ -9100,12 +9137,6 @@ function actions_actions(readingEntityRepository, writingEntityRepository) {
     });
   }), _ref;
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
-var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
-var es6_object_keys = __webpack_require__("456d");
-
 // CONCATENATED MODULE: ./src/store/entity/statements/mutationTypes.ts
 var STATEMENTS_SET = 'setStatements';
 // CONCATENATED MODULE: ./src/store/entity/statements/statementMutations.ts
@@ -9157,16 +9188,16 @@ function resolveMainSnak(state, coordinates) {
 
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function mutations_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function mutations_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { mutations_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { mutations_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
 
 
 var mainSnakMutations = snaks_mutations(mainSnakMutationTypes, resolveMainSnak);
-var statements_mutations_mutations = _objectSpread({}, statementMutations, {}, mainSnakMutations);
+var statements_mutations_mutations = mutations_objectSpread({}, statementMutations, {}, mainSnakMutations);
 // CONCATENATED MODULE: ./src/store/entity/statements/statementGetters.ts
 
 
@@ -9464,29 +9495,6 @@ function () {
 function MessagesPlugin(Vue, messages) {
   Vue.prototype.$messages = new Messages_Messages(messages);
 }
-// CONCATENATED MODULE: ./src/presentation/plugins/BridgeConfigPlugin/BridgeConfig.ts
-
-
-var BridgeConfig_BridgeConfig = function BridgeConfig(usePublish) {
-  _classCallCheck(this, BridgeConfig);
-
-  if (typeof usePublish !== 'boolean') {
-    throw new Error('No valid usePublish option provided.');
-  }
-
-  this.usePublish = usePublish;
-};
-
-
-// CONCATENATED MODULE: ./src/presentation/plugins/BridgeConfigPlugin/index.ts
-
-function BridgeConfigPlugin(vue, options) {
-  if (!options) {
-    throw new Error('No BridgeConfigOptions provided.');
-  }
-
-  vue.prototype.$bridgeConfig = new BridgeConfig_BridgeConfig(options.usePublish);
-}
 // CONCATENATED MODULE: ./src/presentation/extendVueEnvironment.ts
 
 
@@ -9511,9 +9519,7 @@ function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository(), {
-    usePublish: config.usePublish
-  });
+  extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository(), information.client);
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   var app = new presentation_App({

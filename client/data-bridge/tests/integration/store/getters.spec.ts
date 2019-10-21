@@ -135,6 +135,9 @@ describe( 'store/getters', () => {
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',
 			entityId: 'Q42',
+			client: {
+				usePublish: true,
+			},
 		};
 
 		store = createStore( services );

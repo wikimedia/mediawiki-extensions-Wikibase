@@ -25,12 +25,14 @@ export default class Dispatcher {
 		const emitter = this.app.launch(
 			{
 				containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
-				usePublish: this.dataBridgeConfig.usePublish,
 			},
 			{
 				entityId: selectedElement.entityId,
 				propertyId: selectedElement.propertyId,
 				editFlow: selectedElement.editFlow,
+				client: {
+					usePublish: this.dataBridgeConfig.usePublish,
+				},
 			},
 			createServices(
 				this.mwWindow,

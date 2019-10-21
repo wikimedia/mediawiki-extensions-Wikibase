@@ -82,12 +82,14 @@ services.setWikibaseRepoConfigRepository( {
 launch(
 	{
 		containerSelector: '#data-bridge-container',
-		usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',
 	},
 	{
 		entityId: 'Q42',
 		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
 		editFlow: EditFlow.OVERWRITE,
+		client: {
+			usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',
+		},
 	},
 	services,
 ).on( Events.onSaved, () => {
