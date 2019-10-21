@@ -17,7 +17,7 @@ deploy:
   provider: npm
   email: engineering-managers@wikimedia.de
   api_key:
-    secure: yes
+    secure: O0erQiLHaqKq1LQXFytIKskuBNd23Oy4yB/ePOl02sUKBv7O6bmT0bolr101TbttsOg7UXXsJU4XucPSjEAxohbKGC3eLasGyDA4bi5TN1gRPsOpKlfEngk4sCnAHZW7cEPxHWoMG3TceQSxza41Fhuo+dSvXdLeBfnj74CRX5k=
   on:
     tags: true
     branch: master
