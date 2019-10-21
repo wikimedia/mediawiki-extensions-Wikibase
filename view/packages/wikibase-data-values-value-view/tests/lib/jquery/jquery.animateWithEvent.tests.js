@@ -57,7 +57,7 @@
 					'Context of the callback is the DOM node to be animated.'
 				);
 				assert.ok(
-					animationEvent instanceof $.AnimationEvent,
+					animationEvent.animationOptions,
 					'First argument is an instance of jQuery.AnimationEvent.'
 				);
 

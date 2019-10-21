@@ -1,4 +1,4 @@
-jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
+( function( $, PurposedCallbacks ) {
 	'use strict';
 
 	/**
@@ -42,7 +42,6 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	 * @param {string} animationPurpose Will be available as `animationPurpose` field. This will not
 	 *        end up as the event's `type`. The `type` will always be set to `animation`.
 	 * @param {Object} props Additional event properties which will be copied into the object.
-	 * @return {jQuery.AnimationEvent} Can be instantiated without `new`.
 	 *
 	 * @throws {Error} when the animation purpose is not specified.
 	 */
@@ -159,6 +158,6 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	 */
 	SELF.ANIMATION_STEPS = [ 'start', 'step', 'progress', 'complete', 'done', 'fail', 'always' ];
 
-	return SELF;
+	module.exports = SELF;
 
 }( jQuery, jQuery.PurposedCallbacks ) );

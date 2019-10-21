@@ -2,15 +2,18 @@
  * @license GNU GPL v2+
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
-( function( $, QUnit, AnimationEvent, PurposedCallbacks ) {
+
+( function( $, QUnit, PurposedCallbacks ) {
 	'use strict';
 	/* jshint newcap: false */
+
+	var AnimationEvent = require( './../../../lib/jquery/jquery.AnimationEvent.js' );
 
 	QUnit.module( 'jquery.AnimationEvent' );
 
 	function assertSuccessfulConstruction( assert, instance, purpose ) {
 		assert.ok(
-			instance instanceof AnimationEvent,
+			instance.animationOptions,
 			'Instantiated'
 		);
 		assert.ok(
@@ -165,4 +168,4 @@
 			} );
 	} );
 
-}( jQuery, QUnit, jQuery.AnimationEvent, jQuery.PurposedCallbacks ) );
+}( jQuery, QUnit, jQuery.PurposedCallbacks ) );

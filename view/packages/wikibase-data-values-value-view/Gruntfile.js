@@ -89,6 +89,7 @@ module.exports = function ( grunt ) {
 				],
 				preprocessors: {
 					'src/**/*.js': [ 'webpack' ],
+					'lib/**/*.js': [ 'webpack' ],
 					'tests/**/*.tests.js': [ 'webpack' ]
 				},
 				webpack: { mode: 'development' },
