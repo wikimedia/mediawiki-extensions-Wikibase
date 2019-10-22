@@ -7765,12 +7765,12 @@ function merge(a, b) {
 // CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
 
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=e5cc93e0&
-var StringDataValuevue_type_template_id_e5cc93e0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('PropertyLabel',{attrs:{"term":_vm.label,"html-for":_vm.id}}),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder,"maxlength":_vm.maxlength},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
-var StringDataValuevue_type_template_id_e5cc93e0_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7232ac66-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=1ee584f6&
+var StringDataValuevue_type_template_id_1ee584f6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('PropertyLabel',{attrs:{"term":_vm.label,"html-for":_vm.id}}),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder,"maxlength":_vm.maxlength},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
+var StringDataValuevue_type_template_id_1ee584f6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=e5cc93e0&
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=1ee584f6&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
@@ -8057,7 +8057,6 @@ var uuid = __webpack_require__("11c1");
 
 
 
-
 var StringDataValuevue_type_script_lang_ts_StringDataValue =
 /*#__PURE__*/
 function (_Vue) {
@@ -8138,8 +8137,8 @@ var StringDataValuevue_type_style_index_0_lang_scss_ = __webpack_require__("2f88
 
 var StringDataValue_component = normalizeComponent(
   components_StringDataValuevue_type_script_lang_ts_,
-  StringDataValuevue_type_template_id_e5cc93e0_render,
-  StringDataValuevue_type_template_id_e5cc93e0_staticRenderFns,
+  StringDataValuevue_type_template_id_1ee584f6_render,
+  StringDataValuevue_type_template_id_1ee584f6_staticRenderFns,
   false,
   null,
   null,

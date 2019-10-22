@@ -16,9 +16,9 @@
 <script lang="ts">
 import {
 	Component,
+	Prop,
 	Vue,
 } from 'vue-property-decorator';
-import { Prop } from 'vue-property-decorator';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
