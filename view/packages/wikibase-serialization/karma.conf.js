@@ -13,13 +13,6 @@ module.exports = function ( config ) {
 			'node_modules/wikibase-data-values/src/DataValue.js',
 			'node_modules/wikibase-data-values/src/values/StringValue.js',
 			'node_modules/wikibase-data-values/src/values/UnDeserializableValue.js',
-			'node_modules/wikibase-data-model/src/__namespace.js',
-			'node_modules/wikibase-data-model/src/GroupableCollection.js',
-			'node_modules/wikibase-data-model/src/Group.js',
-			'node_modules/wikibase-data-model/src/Snak.js',
-			'node_modules/wikibase-data-model/src/Set.js',
-			'node_modules/wikibase-data-model/src/List.js',
-			'node_modules/wikibase-data-model/src/*.js',
 
 			'tests/**/*.tests.js'
 		],
