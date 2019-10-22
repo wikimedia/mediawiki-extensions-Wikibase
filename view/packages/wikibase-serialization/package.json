@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "jquery": "^3.2.1",
-    "wikibase-data-model": "^5.1.0",
+    "wikibase-data-model": "^6.0.0",
     "wikibase-data-values": "^0.10.0"
   },
   "devDependencies": {
