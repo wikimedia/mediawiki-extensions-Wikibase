@@ -310,9 +310,8 @@ return call_user_func( function() {
 			'dependencies' => [
 				'dataValues.DataValue',
 				'jquery.ui',
-				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.EmptyValue',
-				'jquery.valueview.experts.UnsupportedValue',
+				'jquery.valueview.ExpertStore',
 				'util.Notifier',
 				'valueFormatters',
 				'valueParsers.ValueParserStore',
@@ -329,12 +328,6 @@ return call_user_func( function() {
 				'util.MessageProviders',
 				'util.Notifier',
 				'util.Extendable'
-			],
-		],
-
-		'jquery.valueview.ExpertStore' => $wikibaseDatavaluesValueviewSrcPaths + [
-			'scripts' => [
-				'jquery.valueview.ExpertStore.js',
 			],
 		],
 
@@ -491,9 +484,10 @@ return call_user_func( function() {
 			]
 		],
 
-		'jquery.valueview.experts.UnsupportedValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+		'jquery.valueview.ExpertStore' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/UnsupportedValue.js',
+				'jquery.valueview.ExpertStore.js',
 			],
 			'styles' => [
 				'experts/UnsupportedValue.css',
