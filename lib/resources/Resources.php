@@ -81,21 +81,12 @@ return call_user_func( function() {
 				'namespace.js',
 				'RepoApi.js',
 				'getLocationAgnosticMwApi.js',
+				'RepoApiError.js',
 			],
 			'dependencies' => [
 				'mediawiki.api',
 				'mediawiki.ForeignApi',
-			],
-			'targets' => [
-				'desktop',
-				'mobile'
-			]
-		],
-
-		'wikibase.api.RepoApiError' => $wikibaseApiPaths + [
-			'scripts' => [
-				'namespace.js',
-				'RepoApiError.js',
+				'util.inherit',
 			],
 			'messages' => [
 				'wikibase-error-unexpected',
@@ -106,14 +97,18 @@ return call_user_func( function() {
 				'wikibase-error-ui-no-external-page',
 				'wikibase-error-ui-edit-conflict',
 			],
-			'dependencies' => [
-				'util.inherit',
-			],
 			'targets' => [
 				'desktop',
 				'mobile'
-			],
+			]
 		],
+
+		'wikibase.api.RepoApiError' => $wikibaseApiPaths + [
+			'deprecated' => 'Please use the main `wikibase.api.RepoApi` module, not this alias.',
+			'dependencies' => [ 'wikibase.api.RepoApi' ],
+			'targets' => [ 'desktop', 'mobile' ]
+		],
+
 		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
 			'scripts' => [
 				'namespace.js',
@@ -121,7 +116,7 @@ return call_user_func( function() {
 				'FormatValueCaller.js',
 			],
 			'dependencies' => [
-				'wikibase.api.RepoApiError',
+				'wikibase.api.RepoApi',
 				'dataValues.DataValue',
 			]
 		],
