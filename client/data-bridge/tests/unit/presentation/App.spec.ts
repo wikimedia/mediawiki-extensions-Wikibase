@@ -116,24 +116,66 @@ describe( 'App.vue', () => {
 		expect( wrapper.find( ProcessDialogHeader ).props( 'title' ) ).toBe( titleMessage );
 	} );
 
-	it( 'renders the save button using the SAVE_CHANGES message', () => {
-		const saveMessage = 'go go go';
-		const messageGet = jest.fn().mockReturnValue( saveMessage );
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
+	describe( 'save button rendering', () => {
+		it( 'renders the save button using the SAVE_CHANGES message', () => {
+			const saveMessage = 'go go go';
+			const messageGet = jest.fn(
+				( key: string ) => {
+					if ( key === MessageKeys.SAVE_CHANGES ) {
+						return saveMessage;
+					}
+
+					return '';
 				},
-			},
-			stubs: { ProcessDialogHeader, EventEmittingButton },
+			);
+
+			const wrapper = shallowMount( App, {
+				store,
+				localVue,
+				mocks: {
+					$bridgeConfig: { usePublish: false },
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
+				},
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVE_CHANGES );
+			const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
+			expect( button.props( 'message' ) ).toBe( saveMessage );
 		} );
 
-		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVE_CHANGES );
-		const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
-		expect( button.props( 'message' ) ).toBe( saveMessage );
+		it( 'renders the save button using the PUBLISH_CHANGES message', () => {
+			const publishMessage = 'run run run';
+			const messageGet = jest.fn(
+				( key: string ) => {
+					if ( key === MessageKeys.PUBLISH_CHANGES ) {
+						return publishMessage;
+					}
+
+					return '';
+				},
+			);
+
+			const wrapper = shallowMount( App, {
+				store,
+				localVue,
+				mocks: {
+					$bridgeConfig: { usePublish: true },
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
+				},
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.PUBLISH_CHANGES );
+			const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
+			expect( button.props( 'message' ) ).toBe( publishMessage );
+		} );
 	} );
 
 	it( 'saves on save button click', async () => {
