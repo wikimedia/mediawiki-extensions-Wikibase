@@ -77,13 +77,6 @@ return call_user_func( function() {
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-model/src',
 		],
 
-		'dataValues' => $wikibaseDatavaluesSrcPaths + [
-			'scripts' => [
-				'dataValues.js',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
 			'packageFiles' => [
 				'jquery/jquery.animateWithEvent.js',
@@ -163,10 +156,10 @@ return call_user_func( function() {
 
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
+				'dataValues.js',
 				'DataValue.js',
 			],
 			'dependencies' => [
-				'dataValues',
 				'util.inherit',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
@@ -289,7 +282,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'util.inherit',
 				'wikibase.datamodel',
-				'dataValues',
 				'dataValues.values',
 			],
 			'targets' => [ 'desktop', 'mobile' ],
