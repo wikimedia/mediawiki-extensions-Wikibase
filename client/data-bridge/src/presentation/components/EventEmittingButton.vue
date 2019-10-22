@@ -221,8 +221,8 @@ export default class EventEmittingButton extends Vue {
 		background-position: center;
 		background-size: 26px;
 		background-repeat: no-repeat;
-		width: 48px;
-		height: 48px;
+		width: 46px;
+		height: 40px;
 		cursor: pointer;
 		display: block;
 	}
