@@ -114,7 +114,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexão|Conexões}} com {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notifique-me quando alguém conecta uma página {{GENDER:|que eu criei}} para um item {{WBREPONAME}}.",
 	"notification-header-page-connection": "A página <strong> $3</strong> foi {{GENDER: $2|conectada}} para {{PLURAL:$4|-1=a {{WBREPONAME}} item|o {{WBREPONAME }} item $4}}, onde os dados relevantes para o tópico podem ser coletados.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|uma outra página|$4 outras páginas|100=+ de 99 outras páginas}} foram {{GENDER: $2|conectado}} para {{ WBREPONAME}} itens.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|outra página|outras $4 páginas|100=mais de 99 páginas}} foram {{GENDER:$2|ligadas}} a elementos {{WBREPONAME}}, onde podem ser recolhidos dados relevantes para os assuntos.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} item",
 	"notification-subject-page-connection": "Uma página em {{SITENAME}} que você {{GENDER: $3|criou}} foi {{GENDER: $2|conectada}} para um item {{WBREPONAME}}",
 	"unresolved-property-category": "Páginas que referenciam propriedades inexistentes",
