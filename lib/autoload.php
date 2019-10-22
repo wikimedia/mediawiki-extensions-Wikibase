@@ -12,6 +12,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\DiffChange' => __DIR__ . '/includes/Changes/DiffChange.php',
 	'Wikibase\\EntityChange' => __DIR__ . '/includes/Changes/EntityChange.php',
 	'Wikibase\\EntityFactory' => __DIR__ . '/includes/EntityFactory.php',
+	'Wikibase\\InconsistentRedirectException' => __DIR__ . '/includes/Store/InconsistentRedirectException.php',
 	'Wikibase\\ItemChange' => __DIR__ . '/includes/Changes/ItemChange.php',
 	'Wikibase\\LanguageFallbackChain' => __DIR__ . '/includes/LanguageFallbackChain.php',
 	'Wikibase\\LanguageFallbackChainFactory' => __DIR__ . '/includes/LanguageFallbackChainFactory.php',

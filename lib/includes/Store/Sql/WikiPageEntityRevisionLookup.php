@@ -15,6 +15,7 @@ use Psr\Log\LoggerInterface;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\InconsistentRedirectException;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -34,6 +35,8 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  */
 class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisionLookup {
+
+	private const MAIN_SLOT = 'main';
 
 	/**
 	 * @var EntityContentDataCodec
@@ -193,6 +196,17 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			if ( $row->page_is_redirect ) {
 				/** @var EntityRedirect $redirect */
 				list( , $redirect ) = $this->loadEntity( $row, $mode );
+				if ( $redirect === null ) {
+					$revisionId = $row->rev_id;
+					$slot = $row->role_name ?? self::MAIN_SLOT;
+
+					throw new InconsistentRedirectException(
+						$revisionId,
+						$slot,
+						"Revision '$revisionId' is marked as revision of page redirecting to another, but no redirect entity data found in slot '$slot'."
+					);
+				}
+
 				return LatestRevisionIdResult::redirect(
 					(int)$row->page_latest,
 					$redirect->getTargetId()
@@ -222,7 +236,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		// TODO: WikiPageEntityMetaDataLookup should use RevisionStore::getQueryInfo,
 		// then we could use RevisionStore::newRevisionFromRow here!
 		$revision = $this->revisionStore->getRevisionById( $row->rev_id, $revStoreFlags );
-		$slotRole = $row->role_name ?? 'main';
+		$slotRole = $row->role_name ?? self::MAIN_SLOT;
 
 		// NOTE: Support for cross-wiki content access in RevisionStore is incomplete when,
 		// reading from the pre-MCR database schema, see T201194.
