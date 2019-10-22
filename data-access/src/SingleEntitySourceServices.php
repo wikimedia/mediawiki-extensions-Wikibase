@@ -28,6 +28,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -147,10 +148,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 			$databaseName = $this->entitySource->getDatabaseName();
 			$this->entityRevisionLookup = new WikiPageEntityRevisionLookup(
-				$codec,
 				$metaDataAccessor,
+				new WikiPageEntityDataLoader( $codec, $blobStoreFactory->newBlobStore( $databaseName ) ),
 				$revisionStoreFactory->getRevisionStore( $databaseName ),
-				$blobStoreFactory->newBlobStore( $databaseName ),
 				$databaseName
 			);
 		}

@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
@@ -93,10 +94,9 @@ return [
 		$blobStoreFactory = \MediaWiki\MediaWikiServices::getInstance()->getBlobStoreFactory();
 
 		return new WikiPageEntityRevisionLookup(
-			$codec,
 			$metaDataAccessor,
+			new WikiPageEntityDataLoader( $codec, $blobStoreFactory->newBlobStore( $services->getDatabaseName() ) ),
 			$revisionStoreFactory->getRevisionStore( $services->getDatabaseName() ),
-			$blobStoreFactory->newBlobStore( $services->getDatabaseName() ),
 			$services->getDatabaseName()
 		);
 	},
