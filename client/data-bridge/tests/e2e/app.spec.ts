@@ -217,21 +217,13 @@ describe( 'app', () => {
 			} );
 		} );
 
-		it( 'asserts username and tags, if given', async () => {
+		async function getSaveButton(): Promise<HTMLElement> {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get: getDataBridgeConfig,
 				postWithEditToken,
 			} );
-
-			const assertuser = 'asserUsername';
-			const tags = [ 'abc' ];
 			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
-
-			( window as MwWindow ).mw.config = mockMwConfig( {
-				wgUserName: assertuser,
-				editTags: tags,
-			} );
 
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 			await init();
@@ -244,6 +236,20 @@ describe( 'app', () => {
 			);
 			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
 			expect( save ).not.toBeNull();
+
+			return save as HTMLElement;
+		}
+
+		it( 'asserts username and tags, if given', async () => {
+			const assertuser = 'asserUsername';
+			const tags = [ 'abc' ];
+
+			( window as MwWindow ).mw.config = mockMwConfig( {
+				wgUserName: assertuser,
+				editTags: tags,
+			} );
+
+			const save = await getSaveButton();
 
 			save!.click();
 			await budge();
@@ -261,25 +267,7 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on click', async () => {
-			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-				expectedUrl: 'http://localhost/w/api.php',
-				get: getDataBridgeConfig,
-				postWithEditToken,
-			} );
-
-			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
-
-			const testLink = prepareTestEnv( { propertyId, entityId } );
-			await init();
-
-			testLink!.click();
-			await budge();
-
-			const save = select(
-				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
-			);
-			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
-			expect( save ).not.toBeNull();
+			const save = await getSaveButton();
 
 			save!.click();
 			await budge();
@@ -297,26 +285,7 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on enter', async () => {
-			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-				expectedUrl: 'http://localhost/w/api.php',
-				get: getDataBridgeConfig,
-				postWithEditToken,
-			} );
-
-			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
-
-			const testLink = prepareTestEnv( { propertyId, entityId } );
-
-			await init();
-
-			testLink!.click();
-			await budge();
-
-			const save = select(
-				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
-			);
-			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
-			expect( save ).not.toBeNull();
+			const save = await getSaveButton();
 
 			enter( save! );
 			await budge();
@@ -334,26 +303,7 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on space', async () => {
-			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-				expectedUrl: 'http://localhost/w/api.php',
-				get: getDataBridgeConfig,
-				postWithEditToken,
-			} );
-
-			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
-
-			const testLink = prepareTestEnv( { propertyId, entityId } );
-
-			await init();
-
-			testLink!.click();
-			await budge();
-
-			const save = select(
-				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
-			);
-			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
-			expect( save ).not.toBeNull();
+			const save = await getSaveButton();
 
 			space( save! );
 			await budge();
