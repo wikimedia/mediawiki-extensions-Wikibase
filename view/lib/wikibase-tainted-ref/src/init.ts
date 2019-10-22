@@ -1,5 +1,6 @@
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import MWHookHandler from '@/MWHookHandler';
+import TaintedChecker from '@/TaintedChecker';
 
 const RL_COMMON_MODULE_NAME = 'wikibase.tainted-ref.common';
 export default async (): Promise<void> => {
@@ -7,7 +8,7 @@ export default async (): Promise<void> => {
 	if ( mwWindow.mw.config.get( 'wbTaintedReferencesEnabled' ) ) {
 		const require = await mwWindow.mw.loader.using( RL_COMMON_MODULE_NAME );
 		const app = require( RL_COMMON_MODULE_NAME );
-		const hookHandler = new MWHookHandler( mwWindow.mw.hook );
+		const hookHandler = new MWHookHandler( mwWindow.mw.hook, new TaintedChecker() );
 		mwWindow.mw.hook( 'wikibase.entityPage.entityView.rendered' ).add(
 			() => { app.launch( hookHandler ); },
 		);
