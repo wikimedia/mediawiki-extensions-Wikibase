@@ -141,7 +141,7 @@ return call_user_func( function() {
 		],
 
 		'jquery.ui.suggester' => $libPaths + [
-			'packageFiles' => [
+			'scripts' => [
 				'jquery.ui/jquery.ui.suggester.js',
 				'jquery.ui/jquery.ui.ooMenu.js',
 				'jquery.util/jquery.util.getscrollbarwidth.js',
