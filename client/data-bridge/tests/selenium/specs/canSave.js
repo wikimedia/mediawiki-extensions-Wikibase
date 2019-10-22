@@ -80,6 +80,16 @@ describe( 'App', () => {
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
+		let isSaveButtonClickable = true;
+		try {
+			DataBridgePage.saveButton.click(); // This should do exactly nothing because the button is disabled
+		} catch ( e ) {
+			isSaveButtonClickable = false;
+		}
+		assert.ok( !isSaveButtonClickable, 'Save button should not be clickable unless value was changed' );
+		assert.ok( !DataBridgePage.saveButton.isFocused(), 'disabled button should not be focusable' );
+		assert.ok( !DataBridgePage.saveButton.isSelected(), 'disabled button should not be selectable' );
+
 		const newValue = 'newValue';
 		browser.waitUntil(
 			() => {
