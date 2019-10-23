@@ -1,5 +1,8 @@
 {
         "extends": "wikimedia",
+        "plugins": [
+                "resource-loader"
+        ],
         "env": {
                 "browser": true,
                 "jquery": true,
@@ -10,6 +13,7 @@
 		"util": false
 	},
 	"rules": {
+		"resource-loader/valid-package-file-require": "error",
 		"computed-property-spacing": "off",
 		"indent": "off",
 		"keyword-spacing": "off",

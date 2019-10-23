@@ -35,6 +35,7 @@
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-wikimedia": "0.4.0",
+    "eslint-plugin-resource-loader": "wmde/eslint-plugin-resource-loader#b84d53f22794bb15b98f611b541fe4d32e153720",
     "karma": "^1.7.1",
     "karma-cli": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
