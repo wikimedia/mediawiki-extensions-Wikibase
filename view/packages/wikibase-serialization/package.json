@@ -33,7 +33,7 @@
     "wikibase-data-values": "^0.10.0"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
+    "eslint": "^6.5.1",
     "eslint-config-wikimedia": "0.4.0",
     "karma": "^1.7.1",
     "karma-cli": "^1.0.1",
