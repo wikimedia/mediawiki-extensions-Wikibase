@@ -5,7 +5,7 @@
 ( function( QUnit ) {
 'use strict';
 
-var TermSerializer = require( './../../src/Serializers/TermSerializer.js' ),
+var TermSerializer = require( '../../src/Serializers/TermSerializer.js' ),
 	datamodel = require( 'wikibase.datamodel' );
 
 QUnit.module( 'TermSerializer' );
