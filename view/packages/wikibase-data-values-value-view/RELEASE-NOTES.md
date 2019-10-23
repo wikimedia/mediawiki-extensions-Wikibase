@@ -1,5 +1,22 @@
 # ValueView release notes
 
+## 1.0.0 (2019-10-23)
+
+* Using CommonJS modules instead of global namespaces for these files:
+  * ExpertExtender/ExpertExtender.LanguageSelector.js 
+  * ExpertExtender/ExpertExtender.UnitSelector.js 
+  * jquery.valueview.ViewState.js 
+  * jquery.valueview.valueview.js 
+  * experts/MonolingualText.js 
+  * experts/GeoShape.js 
+  * experts/TimeInput.js 
+  * experts/GlobeCoordinateInput.js 
+  * experts/TabularData.js 
+  * experts/QuantityInput.js 
+  * experts/CommonsMediaType.js 
+  * experts/StringValue.js 
+* Updated i18n message translations.
+
 ## 0.22.4 (2018-11-19)
 
 * Re-render "globecoordinate" values for preview.
