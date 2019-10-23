@@ -9,9 +9,7 @@ use ApiUsageException;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -93,14 +91,9 @@ class EditEntity extends ModifyEntity {
 	private $entityChangeOpProvider;
 
 	/**
-	 * @var ChangedLanguagesCounter
+	 * @var EditSummaryHelper
 	 */
-	private $changedLanguagesCounter;
-
-	/**
-	 * @var NonLanguageBoundChangesCounter
-	 */
-	private $nonLanguageBoundChangesCounter;
+	private $editSummaryHelper;
 
 	/**
 	 * @see ModifyEntity::__construct
@@ -117,6 +110,7 @@ class EditEntity extends ModifyEntity {
 	 * @param StatementChangeOpFactory $statementChangeOpFactory
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 * @param EntityChangeOpProvider $entityChangeOpProvider
+	 * @param EditSummaryHelper $editSummaryHelper
 	 *
 	 */
 	public function __construct(
@@ -132,8 +126,7 @@ class EditEntity extends ModifyEntity {
 		StatementChangeOpFactory $statementChangeOpFactory,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		EntityChangeOpProvider $entityChangeOpProvider,
-		ChangedLanguagesCounter $changedLanguagesCounter,
-		NonLanguageBoundChangesCounter $nonLanguageBoundChangesCounter
+		EditSummaryHelper $editSummaryHelper
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -148,8 +141,7 @@ class EditEntity extends ModifyEntity {
 		$this->statementChangeOpFactory = $statementChangeOpFactory;
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->entityChangeOpProvider = $entityChangeOpProvider;
-		$this->changedLanguagesCounter = $changedLanguagesCounter;
-		$this->nonLanguageBoundChangesCounter = $nonLanguageBoundChangesCounter;
+		$this->editSummaryHelper = $editSummaryHelper;
 	}
 
 	/**
@@ -287,7 +279,7 @@ class EditEntity extends ModifyEntity {
 			if ( $preparedParameters[self::PARAM_CLEAR] !== false ) {
 				$summary->setAction( 'override' );
 			} else {
-				$this->prepareUpdateSummary( $summary, $changeOpResult );
+				$this->editSummaryHelper->prepareEditSummary( $summary, $changeOpResult );
 			}
 		} else {
 			$summary->setAction( 'create-' . $entity->getType() );
@@ -301,21 +293,6 @@ class EditEntity extends ModifyEntity {
 		$isTargetingPage = isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] );
 
 		return $isTargetingEntity xor $isTargetingPage;
-	}
-
-	private function prepareUpdateSummary( Summary $summary, ChangeOpResult $changeOpResult ) {
-		$changedLanguagesCount = $this->changedLanguagesCounter->countChangedLanguages( $changeOpResult );
-
-		if ( $changedLanguagesCount === 0 ) {
-			$summary->setAction( 'update' );
-		} else {
-			$nonLanguageBoundChangesCount = $this->nonLanguageBoundChangesCounter->countChanges( $changeOpResult );
-
-			$action = $nonLanguageBoundChangesCount > 0 ? 'update-languages-and-other' : 'update-languages';
-
-			$summary->setAutoCommentArgs( [ $changedLanguagesCount ] );
-			$summary->setAction( $action );
-		}
 	}
 
 	/**

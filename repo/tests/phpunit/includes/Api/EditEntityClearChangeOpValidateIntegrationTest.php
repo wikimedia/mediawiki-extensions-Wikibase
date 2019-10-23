@@ -13,6 +13,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Api\EditEntity;
+use Wikibase\Repo\Api\EditSummaryHelper;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
@@ -128,8 +129,10 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			$wikibaseRepo->getEntityChangeOpProvider(),
-			new ChangedLanguagesCounter(),
-			new NonLanguageBoundChangesCounter()
+			new EditSummaryHelper(
+				new ChangedLanguagesCounter(),
+				new NonLanguageBoundChangesCounter()
+			)
 		);
 	}
 

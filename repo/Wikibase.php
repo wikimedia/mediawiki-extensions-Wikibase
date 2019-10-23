@@ -233,8 +233,10 @@ call_user_func( function() {
 				$changeOpFactoryProvider->getStatementChangeOpFactory(),
 				$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 				$wikibaseRepo->getEntityChangeOpProvider(),
-				new Wikibase\Repo\ChangeOp\ChangedLanguagesCounter(),
-				new Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter()
+				new Wikibase\Repo\Api\EditSummaryHelper(
+					new Wikibase\Repo\ChangeOp\ChangedLanguagesCounter(),
+					new Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter()
+				)
 			);
 		}
 	];
