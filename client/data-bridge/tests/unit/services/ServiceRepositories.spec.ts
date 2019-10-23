@@ -29,6 +29,10 @@ describe( 'ServiceRepositories', () => {
 		'WikibaseRepoConfigRepository',
 		'getWikibaseRepoConfigRepository',
 		'setWikibaseRepoConfigRepository',
+	], [
+		'Tracker',
+		'getTracker',
+		'setTracker',
 	] ] )( '%s', ( _name: string, getter: string, setter: string ) => {
 		it( 'throws an error if it is not set', () => {
 			expect( () => ( newServices() as any )[ getter ]() ).toThrow();

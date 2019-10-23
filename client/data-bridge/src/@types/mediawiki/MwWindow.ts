@@ -39,6 +39,8 @@ export interface ForeignApi {
 	login( username: string, password: string ): JQuery.Promise<any>;
 }
 
+export type MwTracker = ( topic: string, data?: unknown ) => void;
+
 interface MediaWiki {
 	loader: ResourceLoader;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message */
@@ -50,6 +52,8 @@ interface MediaWiki {
 	ForeignApi?: ForeignApiConstructor;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language */
 	language: MwLanguage;
+	/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw */
+	track: MwTracker;
 }
 
 interface Events {

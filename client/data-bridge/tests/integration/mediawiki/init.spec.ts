@@ -13,6 +13,8 @@ import {
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
+import EventTracker from '@/mediawiki/facades/EventTracker';
 
 const manager = jest.fn();
 const dialog = {
@@ -83,6 +85,10 @@ describe( 'init', () => {
 		expectedServices.setWikibaseRepoConfigRepository(
 			new ForeignApiRepoConfigRepository( ForeignApi ),
 		);
+		expectedServices.setTracker(
+			new DataBridgeTrackerService( new EventTracker( ( window as MwWindow ).mw.track ) ),
+		);
+
 		const entityId = 'Q5';
 		const propertyId = 'P4711';
 		const editFlow = EditFlow.OVERWRITE;

@@ -8,6 +8,8 @@ import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
+import EventTracker from '@/mediawiki/facades/EventTracker';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -43,6 +45,16 @@ jest.mock( '@/data-access/ForeignApiRepoConfigRepository', () => {
 	return jest.fn().mockImplementation( () => mockWikibaseRepoConfigRepository );
 } );
 
+const mockDataBridgeTrackerService = {};
+jest.mock( '@/data-access/DataBridgeTrackerService', () => {
+	return jest.fn().mockImplementation( () => mockDataBridgeTrackerService );
+} );
+
+const mockEventTracker = {};
+jest.mock( '@/mediawiki/facades/EventTracker', () => {
+	return jest.fn().mockImplementation( () => mockEventTracker );
+} );
+
 function mockMwWindow( options: {
 	wbRepo?: WbRepo;
 	wgUserName?: string;
@@ -55,6 +67,7 @@ function mockMwWindow( options: {
 	wgPageContentLanguage?: string;
 	editTags?: string[];
 	message?: MwMessages;
+	tracker?: ( key: string, payload?: unknown ) => void;
 } = {} ): MwWindow {
 	const get = jest.fn().mockImplementation( ( key ) => {
 		switch ( key ) {
@@ -85,6 +98,7 @@ function mockMwWindow( options: {
 	const data = options.ulsData || { getDir: jest.fn() };
 	$.uls = { data };
 	const message = options.message || jest.fn();
+	const track = options.tracker || jest.fn();
 
 	return {
 		mw: {
@@ -94,6 +108,7 @@ function mockMwWindow( options: {
 			ForeignApi: jest.fn(),
 			language,
 			message,
+			track,
 		},
 		$,
 	} as unknown as MwWindow;
@@ -240,4 +255,15 @@ describe( 'createServices', () => {
 			.toBe( mockWikibaseRepoConfigRepository );
 	} );
 
+	it( 'creates DataBridgeTrackerService', () => {
+		const tracker = jest.fn();
+		const mwWindow = mockMwWindow( { tracker } );
+
+		const services = createServices( mwWindow, [] );
+
+		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( EventTracker ).toHaveBeenCalledWith( tracker );
+		expect( DataBridgeTrackerService ).toHaveBeenCalledWith( mockEventTracker );
+		expect( services.getTracker() ).toBe( mockDataBridgeTrackerService );
+	} );
 } );

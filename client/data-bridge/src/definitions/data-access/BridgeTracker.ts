@@ -1,3 +1,3 @@
-export default interface Tracker {
+export default interface BridgeTracker {
 	trackPropertyDatatype( datatype: string ): void;
 }
