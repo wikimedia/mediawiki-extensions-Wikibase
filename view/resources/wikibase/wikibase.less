@@ -169,8 +169,15 @@ div.wikibase-statementview textarea {
 	border: 1px solid #c8ccd1;
 }
 
+/* Highlight target statement groups, e.g. https://www.wikidata.org/wiki/Q42#P735 */
 .wikibase-statementgrouplistview :target .wikibase-statementlistview {
 	outline: 2px solid #36c;
+}
+
+/* Highlight individual target statements, e.g. https://www.wikidata.org/wiki/Q42#Q42$1d7d0ea9-412f-8b5b-ba8d-405ab9ecf026 */
+.wikibase-statementgrouplistview .wikibase-statementlistview .wikibase-statementview:target {
+	outline: 2px solid #36c;
+	z-index: 1;
 }
 
 /* Container for the section title */
