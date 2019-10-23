@@ -99,6 +99,7 @@ class WikibaseContentLanguages {
 					'kld', // T198366
 					'koy', // T125066
 					'lag', // T161983
+					'lcm', //T234761
 					'lkt', // T125066
 					'lld', // T125066
 					'mid', // T155418
