@@ -13,8 +13,10 @@ import {
 	select,
 	enter,
 	space,
+	insert,
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
+import { v4 as uuid } from 'uuid';
 
 Vue.config.devtools = false;
 
@@ -217,7 +219,7 @@ describe( 'app', () => {
 			} );
 		} );
 
-		async function getSaveButton(): Promise<HTMLElement> {
+		async function getEnabledSaveButton(): Promise<HTMLElement> {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get: getDataBridgeConfig,
@@ -230,6 +232,9 @@ describe( 'app', () => {
 
 			testLink!.click();
 			await budge();
+
+			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			await insert( input as HTMLTextAreaElement, uuid() );
 
 			const save = select(
 				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
@@ -249,7 +254,7 @@ describe( 'app', () => {
 				editTags: tags,
 			} );
 
-			const save = await getSaveButton();
+			const save = await getEnabledSaveButton();
 
 			save!.click();
 			await budge();
@@ -267,7 +272,7 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on click', async () => {
-			const save = await getSaveButton();
+			const save = await getEnabledSaveButton();
 
 			save!.click();
 			await budge();
@@ -285,7 +290,7 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on enter', async () => {
-			const save = await getSaveButton();
+			const save = await getEnabledSaveButton();
 
 			enter( save! );
 			await budge();
@@ -303,7 +308,7 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on space', async () => {
-			const save = await getSaveButton();
+			const save = await getEnabledSaveButton();
 
 			space( save! );
 			await budge();
@@ -318,6 +323,44 @@ describe( 'app', () => {
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+		} );
+
+		it( 'has the save button intially disabled', async () => {
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				expectedUrl: 'http://localhost/w/api.php',
+				get: getDataBridgeConfig,
+				postWithEditToken,
+			} );
+
+			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
+			const testLink = prepareTestEnv( { propertyId: 'P31' } );
+			await init();
+
+			testLink!.click();
+			await budge();
+
+			const save = select(
+				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
+			);
+
+			save!.click();
+			await budge();
+			expect( postWithEditToken ).toHaveBeenCalledTimes( 0 );
+
+			enter( save! );
+			await budge();
+			expect( postWithEditToken ).toHaveBeenCalledTimes( 0 );
+
+			space( save! );
+			await budge();
+			expect( postWithEditToken ).toHaveBeenCalledTimes( 0 );
+
+			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			await insert( input as HTMLTextAreaElement, uuid() );
+
+			save!.click();
+			await budge();
+			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 		} );
 	} );
 
