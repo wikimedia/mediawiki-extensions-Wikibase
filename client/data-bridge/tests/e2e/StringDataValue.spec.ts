@@ -322,65 +322,126 @@ describe( 'string data value', () => {
 		} );
 	} );
 
-	it( 'has a input field', async () => {
-		const testLink = prepareTestEnv( {} );
+	describe( 'input', () => {
+		it( 'has a input field', async () => {
+			const testLink = prepareTestEnv( {} );
 
-		await init();
-		testLink!.click();
-		await budge();
+			await init();
+			testLink!.click();
+			await budge();
 
-		const input = select( '.wb-db-app .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-stringValue__input' );
 
-		expect( input ).not.toBeNull();
-		expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
-	} );
+			expect( input ).not.toBeNull();
+			expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
+		} );
 
-	it( 'can alter its value', async () => {
-		const testNewValue = 'test1234';
-		const testLink = prepareTestEnv( {} );
+		it( 'can alter its value', async () => {
+			const testNewValue = 'test1234';
+			const testLink = prepareTestEnv( {} );
 
-		await init();
-		testLink!.click();
-		await budge();
+			await init();
+			testLink!.click();
+			await budge();
 
-		const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
 
-		expect( input ).not.toBeNull();
-		expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
+			expect( input ).not.toBeNull();
+			expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
 
-		await insert( input as HTMLTextAreaElement, testNewValue );
-		expect( ( input as HTMLTextAreaElement ).value ).toBe( testNewValue );
-	} );
+			await insert( input as HTMLTextAreaElement, testNewValue );
+			expect( ( input as HTMLTextAreaElement ).value ).toBe( testNewValue );
+		} );
 
-	it( 'propagates the max length to the input field', async () => {
-		const maxLength = 666;
-		const queryDataBridgeConfigResponse = {
-			query: {
-				wbdatabridgeconfig: {
-					dataTypeLimits: {
-						string: {
-							maxLength,
+		describe( 'influence on save button', () => {
+			it( 'enables the save button, if it has a different value then the original value', async () => {
+				const testNewValue = 'test1234';
+				const testLink = prepareTestEnv( {} );
+				await init();
+
+				testLink!.click();
+				await budge();
+
+				let save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
+				expect( save ).not.toBeNull();
+
+				const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+
+				expect( input ).not.toBeNull();
+				expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
+
+				await insert( input as HTMLTextAreaElement, testNewValue );
+				expect( ( input as HTMLTextAreaElement ).value ).toBe( testNewValue );
+
+				save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
+				expect( save ).toBeNull();
+			} );
+
+			it( 'disables the save button, if it has the same value like the original value', async () => {
+				const testNewValue = 'test1234';
+				const testLink = prepareTestEnv( {} );
+				await init();
+
+				testLink!.click();
+				await budge();
+
+				let save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
+				expect( save ).not.toBeNull();
+
+				const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+
+				expect( input ).not.toBeNull();
+				expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
+
+				await insert( input as HTMLTextAreaElement, testNewValue );
+				expect( ( input as HTMLTextAreaElement ).value ).toBe( testNewValue );
+
+				save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
+				expect( save ).toBeNull();
+
+				await insert(
+					input as HTMLTextAreaElement,
+					Entities.entities.Q42.claims.P349[ 0 ].mainsnak.datavalue.value,
+				);
+
+				expect( ( input as HTMLTextAreaElement ).value ).toBe(
+					Entities.entities.Q42.claims.P349[ 0 ].mainsnak.datavalue.value,
+				);
+				save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
+				expect( input ).not.toBeNull();
+			} );
+		} );
+
+		it( 'propagates the max length to the input field', async () => {
+			const maxLength = 666;
+			const queryDataBridgeConfigResponse = {
+				query: {
+					wbdatabridgeconfig: {
+						dataTypeLimits: {
+							string: {
+								maxLength,
+							},
 						},
 					},
 				},
-			},
-		};
+			};
 
-		( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-			get() {
-				return Promise.resolve( queryDataBridgeConfigResponse );
-			},
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				get() {
+					return Promise.resolve( queryDataBridgeConfigResponse );
+				},
+			} );
+
+			const testLink = prepareTestEnv( {} );
+
+			await init();
+			testLink!.click();
+			await budge();
+
+			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+
+			expect( input ).not.toBeNull();
+			expect( ( input as HTMLTextAreaElement ).maxLength ).toBe( maxLength );
 		} );
-
-		const testLink = prepareTestEnv( {} );
-
-		await init();
-		testLink!.click();
-		await budge();
-
-		const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
-
-		expect( input ).not.toBeNull();
-		expect( ( input as HTMLTextAreaElement ).maxLength ).toBe( maxLength );
 	} );
 } );
