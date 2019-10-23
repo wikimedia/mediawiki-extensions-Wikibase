@@ -102,16 +102,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks
 	) {
-		Assert::parameterElementType(
-			'callable',
-			$deserializerFactoryCallbacks,
-			'$deserializerFactoryCallbacks'
-		);
-		Assert::parameterElementType(
-			'callable',
-			$entityMetaDataAccessorCallbacks,
-			'$entityMetaDataAccessorCallbacks'
-		);
+		$this->assertCallbackArrayTypes( $deserializerFactoryCallbacks, $entityMetaDataAccessorCallbacks );
 
 		$this->genericServices = $genericServices;
 		$this->entityIdParser = $entityIdParser;
@@ -122,6 +113,22 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->entitySource = $entitySource;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
+	}
+
+	private function assertCallbackArrayTypes(
+		array $deserializerFactoryCallbacks,
+		array $entityMetaDataAccessorCallbacks
+	) {
+		Assert::parameterElementType(
+			'callable',
+			$deserializerFactoryCallbacks,
+			'$deserializerFactoryCallbacks'
+		);
+		Assert::parameterElementType(
+			'callable',
+			$entityMetaDataAccessorCallbacks,
+			'$entityMetaDataAccessorCallbacks'
+		);
 	}
 
 	public function getEntityRevisionLookup() {
@@ -275,30 +282,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			);
 
 			if ( $this->settings->useNormalizedPropertyTerms() ) {
-				$mediaWikiServices = MediaWikiServices::getInstance();
-				$logger = LoggerFactory::getInstance( 'Wikibase' );
-
-				$repoDbDomain = $this->entitySource->getDatabaseName();
-				$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
-				$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
-				$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-					$loadBalancer,
-					$mediaWikiServices->getMainWANObjectCache(),
-					$repoDbDomain,
-					$logger
-				);
-
-				$propertyTermLookup = new PrefetchingPropertyTermLookup(
-					$loadBalancer,
-					new DatabaseTermIdsResolver(
-						$databaseTypeIdsStore,
-						$databaseTypeIdsStore,
-						$loadBalancer,
-						$repoDbDomain,
-						$logger
-					),
-					$repoDbDomain
-				);
+				$propertyTermLookup = $this->newNormalizedPropertyTermLookup();
 				$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup(
 					[ 'property' => $propertyTermLookup ],
 					$this->prefetchingTermLookup
@@ -306,6 +290,33 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			}
 		}
 		return $this->prefetchingTermLookup;
+	}
+
+	private function newNormalizedPropertyTermLookup(): PrefetchingPropertyTermLookup {
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+		$repoDbDomain = $this->entitySource->getDatabaseName();
+		$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
+		$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
+		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$mediaWikiServices->getMainWANObjectCache(),
+			$repoDbDomain,
+			$logger
+		);
+
+		return new PrefetchingPropertyTermLookup(
+			$loadBalancer,
+			new DatabaseTermIdsResolver(
+				$databaseTypeIdsStore,
+				$databaseTypeIdsStore,
+				$loadBalancer,
+				$repoDbDomain,
+				$logger
+			),
+			$repoDbDomain
+		);
 	}
 
 	public function getEntityPrefetcher() {
