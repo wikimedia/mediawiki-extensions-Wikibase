@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Action, Getter } from 'vuex-class';
+import { Action, Getter, State } from 'vuex-class';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
@@ -27,7 +27,7 @@ export default class DataBridge extends Vue {
 	@Getter( 'targetValue' )
 	public targetValue!: DataValue;
 
-	@Getter( 'targetProperty' )
+	@State( 'targetProperty' )
 	public targetProperty!: string;
 
 	@Getter( 'targetLabel' )

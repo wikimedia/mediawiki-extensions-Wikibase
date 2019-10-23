@@ -3,7 +3,6 @@ import { Module } from 'vuex';
 import Application from '@/store/Application';
 import EntityState from '@/store/entity/EntityState';
 import { mutations } from '@/store/entity/mutations';
-import { getters } from '@/store/entity/getters';
 import actions from '@/store/entity/actions';
 import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import createStatements from '@/store/entity/statements';
@@ -23,7 +22,6 @@ export default function (
 	return {
 		namespaced: true,
 		state,
-		getters,
 		mutations,
 		actions: actions( readingEntityRepository, writingEntityRepository ),
 		modules: {

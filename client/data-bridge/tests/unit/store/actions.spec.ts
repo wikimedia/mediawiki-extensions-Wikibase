@@ -20,9 +20,6 @@ import {
 	TARGET_LABEL_SET,
 	ORIGINAL_STATEMENT_SET,
 } from '@/store/mutationTypes';
-import {
-	ENTITY_ID,
-} from '@/store/entity/getterTypes';
 import { STATEMENTS_PROPERTY_EXISTS } from '@/store/entity/statements/getterTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
@@ -46,6 +43,8 @@ jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
 } ) );
 
 describe( 'root/actions', () => {
+	const defaultEntityId = 'Q32';
+	const defaultPropertyId = 'P71';
 	const entityLabelRepository = {
 		getLabel: jest.fn( () => Promise.resolve() ),
 	};
@@ -60,9 +59,6 @@ describe( 'root/actions', () => {
 	};
 
 	describe( BRIDGE_INIT, () => {
-		const defaultEntityId = 'Q32';
-		const defaultPropertyId = 'P71';
-
 		function mockedStore(
 			entityId?: string,
 			targetProperty?: string,
@@ -72,6 +68,7 @@ describe( 'root/actions', () => {
 				state: {
 					targetProperty: targetProperty || defaultPropertyId,
 					[ NS_ENTITY ]: {
+						id: entityId || defaultEntityId,
 						[ NS_STATEMENTS ]: {
 							[ entityId || defaultEntityId ]: {
 								[ targetProperty || defaultPropertyId ]: [ {} ],
@@ -85,10 +82,6 @@ describe( 'root/actions', () => {
 						NS_STATEMENTS,
 						STATEMENTS_PROPERTY_EXISTS,
 					) ]: jest.fn( () => true ),
-					[ getter(
-						NS_ENTITY,
-						ENTITY_ID,
-					) ]: entityId || defaultEntityId,
 				}, ...gettersOverride },
 			} );
 		}
@@ -207,6 +200,7 @@ describe( 'root/actions', () => {
 
 			const shallowNestedState = { ...context.state, ...{
 				[ NS_ENTITY ]: {
+					id: entityId,
 					[ NS_STATEMENTS ]: {
 						[ entityId ]: {
 							[ propertyId ]: [ shallowProperty ],
@@ -408,6 +402,9 @@ describe( 'root/actions', () => {
 			const context = newMockStore( {
 				state: {
 					applicationStatus: ApplicationStatus.READY,
+					[ NS_ENTITY ]: {
+						id: defaultEntityId,
+					},
 				},
 				dispatch: jest.fn( () => {
 					return new Promise( () => {
@@ -440,10 +437,10 @@ describe( 'root/actions', () => {
 				state: {
 					applicationStatus: ApplicationStatus.READY,
 					targetProperty,
+					[ NS_ENTITY ]: {
+						id: entityId,
+					},
 				},
-				getters: {
-					[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
-				} as any,
 			} );
 
 			const dataValue = {

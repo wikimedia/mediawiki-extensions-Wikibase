@@ -1,5 +1,3 @@
-import EditFlow from '@/definitions/EditFlow';
-import { ENTITY_ID } from '@/store/entity/getterTypes';
 import { getters } from '@/store/getters';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import {
@@ -10,32 +8,9 @@ import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTyp
 import newApplicationState from './newApplicationState';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import clone from '@/store/clone';
+import { InitializedApplicationState } from '@/store/Application';
 
 describe( 'root/getters', () => {
-	it( 'has an targetProperty', () => {
-		const targetProperty = 'P23';
-		const applicationState = newApplicationState( { targetProperty } );
-		expect( getters.targetProperty(
-			applicationState, null, applicationState, null,
-		) ).toBe( targetProperty );
-	} );
-
-	it( 'has an editFlow', () => {
-		const editFlow = EditFlow.OVERWRITE;
-		const applicationState = newApplicationState( { editFlow } );
-		expect( getters.editFlow(
-			applicationState, null, applicationState, null,
-		) ).toBe( editFlow );
-	} );
-
-	it( 'has an application status', () => {
-		const applicationStatus = ApplicationStatus.READY;
-		const applicationState = newApplicationState( { applicationStatus } );
-		expect( getters.applicationStatus(
-			applicationState, null, applicationState, null,
-		) ).toBe( ApplicationStatus.READY );
-	} );
-
 	describe( 'targetValue', () => {
 		it( 'returns null if the application is in error state', () => {
 			const applicationState = newApplicationState( {
@@ -51,8 +26,6 @@ describe( 'root/getters', () => {
 			const targetProperty = 'P23';
 			const entityId = 'Q42';
 			const otherGetters = {
-				targetProperty,
-				[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
 				[ getter(
 					NS_ENTITY,
 					NS_STATEMENTS,
@@ -67,9 +40,15 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.READY,
 			} );
 
-			expect( getters.targetValue(
-				applicationState, otherGetters, applicationState, null,
-			) ).toBe( dataValue );
+			( applicationState as InitializedApplicationState )[ NS_ENTITY ] = {
+				id: entityId,
+				baseRevision: 0,
+				[ NS_STATEMENTS ]: {},
+			};
+
+			expect(
+				getters.targetValue( applicationState, otherGetters, applicationState, null ),
+			).toBe( dataValue );
 			expect(
 				otherGetters[ getter(
 					NS_ENTITY,
@@ -107,9 +86,6 @@ describe( 'root/getters', () => {
 
 	describe( 'isTargetPropertyModified', () => {
 		const entityId = 'Q42';
-		const otherGetters = {
-			[ getter( NS_ENTITY, ENTITY_ID ) ]: entityId,
-		};
 		const targetProperty = 'P23';
 
 		it( 'returns false if the application is not ready', () => {
@@ -135,6 +111,7 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.INITIALIZING,
 				originalStatement,
 				[ NS_ENTITY ]: {
+					id: entityId,
 					[ NS_STATEMENTS ]: {
 						[ entityId ]: {
 							[ targetProperty ]: [ actualTargetProperty ],
@@ -143,7 +120,7 @@ describe( 'root/getters', () => {
 				},
 			} );
 			expect( getters.isTargetStatementModified(
-				applicationState, otherGetters, applicationState, null,
+				applicationState, null, applicationState, null,
 			) ).toBe( false );
 		} );
 
@@ -169,6 +146,7 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.READY,
 				originalStatement,
 				[ NS_ENTITY ]: {
+					id: entityId,
 					[ NS_STATEMENTS ]: {
 						[ entityId ]: {
 							[ targetProperty ]: [ actualTargetProperty ],
@@ -178,7 +156,7 @@ describe( 'root/getters', () => {
 			} );
 
 			expect( getters.isTargetStatementModified(
-				applicationState, otherGetters, applicationState, null,
+				applicationState, null, applicationState, null,
 			) ).toBe( false );
 		} );
 
@@ -206,6 +184,7 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.READY,
 				originalStatement,
 				[ NS_ENTITY ]: {
+					id: entityId,
 					[ NS_STATEMENTS ]: {
 						[ entityId ]: {
 							[ targetProperty ]: [ actualTargetProperty ],
@@ -214,7 +193,7 @@ describe( 'root/getters', () => {
 				},
 			} );
 			expect( getters.isTargetStatementModified(
-				applicationState, otherGetters, applicationState, null,
+				applicationState, null, applicationState, null,
 			) ).toBe( true );
 		} );
 	} );

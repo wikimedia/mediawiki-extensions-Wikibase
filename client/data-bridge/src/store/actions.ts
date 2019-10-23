@@ -28,9 +28,6 @@ import {
 import { STATEMENTS_PROPERTY_EXISTS } from '@/store/entity/statements/getterTypes';
 import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import {
-	ENTITY_ID,
-} from '@/store/entity/getterTypes';
-import {
 	ENTITY_INIT,
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
@@ -85,16 +82,14 @@ export default function actions(
 			] ).then( ( [ wikibaseRepoConfiguration, _entityInit ] ) => {
 
 				BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
-
+				const state = context.state as InitializedApplicationState;
 				const path = {
-					entityId: context.getters[ getter( NS_ENTITY, ENTITY_ID ) ],
-					propertyId: context.state.targetProperty,
+					entityId: state[ NS_ENTITY ].id,
+					propertyId: state.targetProperty,
 					index: 0,
 				};
 
 				if ( validateEntityState( context, path ) ) {
-					const state = context.state as InitializedApplicationState;
-
 					context.commit(
 						ORIGINAL_STATEMENT_SET,
 						state[ NS_ENTITY ][ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ],
@@ -126,10 +121,10 @@ export default function actions(
 				return Promise.reject( null );
 			}
 
-			const entityId = context.getters[ getter( NS_ENTITY, ENTITY_ID ) ];
+			const state = context.state as InitializedApplicationState;
 			const path = {
-				entityId,
-				propertyId: context.state.targetProperty,
+				entityId: state[ NS_ENTITY ].id,
+				propertyId: state.targetProperty,
 				index: 0,
 			};
 

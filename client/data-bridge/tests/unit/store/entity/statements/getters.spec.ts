@@ -7,7 +7,6 @@ import {
 	STATEMENTS_CONTAINS_ENTITY,
 	STATEMENTS_IS_AMBIGUOUS,
 	STATEMENTS_PROPERTY_EXISTS,
-	STATEMENTS_MAP,
 } from '@/store/entity/statements/getterTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 
@@ -85,33 +84,6 @@ describe( 'statements/Getters', () => {
 		expect( getters[ STATEMENTS_IS_AMBIGUOUS ](
 			newStatementsState( statements ), null, newApplicationState(), null,
 		)( entityId, 'P21' ) ).toBe( false );
-	} );
-
-	it( 'returns the full statements map', () => {
-		const entityId = 'Q42',
-			statements = { [ entityId ]: {
-				P23: [ {
-					type: 'statement',
-					id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
-					rank: 'normal',
-					mainsnak: {} as Snak,
-				}, {
-					type: 'statement',
-					id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
-					rank: 'normal',
-					mainsnak: {} as Snak,
-				} ],
-				P42: [ {
-					type: 'statement',
-					id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
-					rank: 'normal',
-					mainsnak: {} as Snak,
-				} ],
-			} as StatementMap };
-
-		expect( getters[ STATEMENTS_MAP ](
-			newStatementsState( statements ), null, newApplicationState(), null,
-		)( entityId ) ).toBe( statements[ entityId ] );
 	} );
 
 	it( 'integrates the snak unit', () => {

@@ -4,14 +4,12 @@ import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTyp
 import validateBridgeApplicability from '@/store/validateBridgeApplicability';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
-import { ENTITY_ID } from '@/store/entity/getterTypes';
 
 const defaultEntity = 'Q815';
 const defaultProperty = 'P4711';
 
 function mockedStore(
 	gettersOverride?: any,
-	entityId: string = defaultEntity,
 	targetProperty: string = defaultProperty,
 ): any {
 	return newMockStore( {
@@ -20,9 +18,6 @@ function mockedStore(
 		},
 		getters: {
 			...{
-				get [ getter( NS_ENTITY, ENTITY_ID ) ]() {
-					return entityId;
-				},
 				[ getter(
 					NS_ENTITY,
 					NS_STATEMENTS,
@@ -46,7 +41,7 @@ function mockedStore(
 describe( 'validateBridgeApplicability', () => {
 
 	it( 'returns true if applicable', () => {
-		const context = mockedStore( {}, defaultEntity, defaultProperty );
+		const context = mockedStore( {}, defaultProperty );
 
 		expect( validateBridgeApplicability(
 			context,
