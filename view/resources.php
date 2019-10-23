@@ -1,0 +1,896 @@
+<?php
+
+use Wikibase\View\Module\TemplateModule;
+use Wikibase\View\Termbox\TermboxModule;
+
+/**
+ * @license GPL-2.0-or-later
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
+ */
+return call_user_func( function() {
+	$moduleTemplate = [
+		'localBasePath' => __DIR__ . '/resources',
+		'remoteExtPath' => 'Wikibase/view/resources',
+	];
+
+	$moduleBaseTemplate = [
+		'localBasePath' => __DIR__,
+		'remoteExtPath' => 'Wikibase/view',
+	];
+
+	$wikibaseDatavaluesSrcPaths = [
+		'localBasePath' => __DIR__ . '/lib/wikibase-data-values/src',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values/src',
+	];
+	$wikibaseDatavaluesPaths = [
+		'localBasePath' => __DIR__ . '/lib/wikibase-data-values',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values',
+	];
+
+	$wikibaseDatavaluesValueviewLibPaths = [
+		'localBasePath' => __DIR__ . '/lib/wikibase-data-values-value-view/lib',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/lib',
+	];
+	$wikibaseDatavaluesValueviewSrcPaths = [
+		'localBasePath' => __DIR__ . '/lib/wikibase-data-values-value-view/src',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/src',
+	];
+	$wikibaseDatavaluesValueviewPaths = [
+		'localBasePath' => __DIR__ . '/lib/wikibase-data-values-value-view',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view',
+	];
+
+	$wikibaseTermboxPaths = [
+		'localBasePath' => __DIR__ . '/lib/wikibase-termbox',
+		'remoteExtPath' => 'Wikibase/view/lib/wikibase-termbox',
+	];
+
+	$modules = [
+		'jquery.wikibase.entityselector' => $moduleTemplate + [
+			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.entityselector.js',
+			],
+			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.entityselector.css',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.throttle-debounce',
+				'jquery.ui.suggester',
+				'jquery.ui',
+			],
+			'messages' => [
+				'wikibase-entityselector-more',
+				'wikibase-entityselector-notfound',
+			],
+		],
+
+		'jquery.wikibase.toolbar.styles' => $moduleTemplate + [
+			'styles' => [
+				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbar.css',
+				'jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css',
+			],
+		],
+
+		// Common styles independent from JavaScript being enabled or disabled.
+		'wikibase.common' => $moduleTemplate + [
+			'styles' => [
+				// Order must be hierarchical, do not order alphabetically
+				'wikibase/wikibase.less',
+				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.statementgroupview.css',
+			]
+		],
+
+		'wikibase.mobile' => $moduleTemplate + [
+			'styles' => [
+				'wikibase/wikibase.mobile.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
+			],
+			'targets' => 'mobile'
+		],
+
+		'wikibase.templates' => $moduleTemplate + [
+			'class' => TemplateModule::class,
+			'scripts' => 'wikibase/templates.js',
+			'dependencies' => [
+				'jquery.getAttrs'
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
+		'wikibase.entityChangers.EntityChangersFactory' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase/entityChangers/namespace.js',
+
+				'wikibase/entityChangers/AliasesChanger.js',
+				'wikibase/entityChangers/StatementsChanger.js',
+				'wikibase/entityChangers/StatementsChangerState.js',
+				'wikibase/entityChangers/DescriptionsChanger.js',
+				'wikibase/entityChangers/EntityTermsChanger.js',
+				'wikibase/entityChangers/LabelsChanger.js',
+				'wikibase/entityChangers/SiteLinksChanger.js',
+				'wikibase/entityChangers/SiteLinkSetsChanger.js',
+
+				'wikibase/entityChangers/EntityChangersFactory.js',
+			],
+			'dependencies' => [
+				'wikibase',
+				'wikibase.api.RepoApiError',
+				'wikibase.datamodel', // for AliasesChanger.js
+				'wikibase.serialization',
+			]
+		],
+
+		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + [
+			'packageFiles' => [
+				'wikibase/utilities/wikibase.utilities.ClaimGuidGenerator.js',
+
+				'wikibase/utilities/wikibase.utilities.GuidGenerator.js',
+			],
+			'dependencies' => [
+				'util.inherit',
+				'wikibase',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
+		'wikibase.view.__namespace' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase/view/namespace.js'
+			],
+			'dependencies' => [
+				'wikibase'
+			]
+		],
+
+		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + [
+			'scripts' => 'wikibase/view/ReadModeViewFactory.js',
+			'dependencies' => [
+				'wikibase.view.__namespace',
+				'wikibase.view.ControllerViewFactory'
+			],
+		],
+		'wikibase.view.ControllerViewFactory' => $moduleBaseTemplate + [
+			'packageFiles' => [
+				'resources/wikibase/view/ControllerViewFactory.js',
+
+				'resources/jquery/ui/jquery.ui.TemplatedWidget.js',
+				'resources/jquery/ui/jquery.ui.closeable.js',
+				'resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js',
+				'resources/wikibase/view/ViewController.js',
+				'resources/wikibase/view/ToolbarViewController.js',
+				'resources/wikibase/view/ViewFactory.js',
+				'resources/jquery/jquery.util.EventSingletonManager.js',
+				'resources/wikibase/wikibase.ValueViewBuilder.js',
+				'resources/jquery/wikibase/jquery.wikibase.pagesuggester.js',
+				'resources/jquery/wikibase/snakview/snakview.ViewState.js',
+				'resources/jquery/wikibase/snakview/snakview.variations.js',
+				'resources/jquery/wikibase/snakview/snakview.variations.Variation.js',
+				'resources/jquery/wikibase/snakview/snakview.variations.NoValue.js',
+				'resources/jquery/wikibase/snakview/snakview.variations.SomeValue.js',
+				'resources/jquery/wikibase/snakview/snakview.variations.Value.js',
+				'resources/jquery/wikibase/snakview/snakview.js',
+				'resources/jquery/wikibase/snakview/snakview.SnakTypeSelector.js',
+				'resources/jquery/wikibase/jquery.wikibase.aliasesview.js',
+				'resources/jquery/wikibase/jquery.wikibase.badgeselector.js',
+				'resources/jquery/wikibase/jquery.wikibase.descriptionview.js',
+				'resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js',
+				'resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js',
+				'resources/jquery/wikibase/jquery.wikibase.entitytermsview.js',
+				'resources/jquery/wikibase/jquery.wikibase.entityview.js',
+				'resources/jquery/wikibase/jquery.wikibase.itemview.js',
+				'resources/jquery/wikibase/jquery.wikibase.labelview.js',
+				'resources/jquery/wikibase/jquery.wikibase.listview.js',
+				'resources/jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js',
+				'resources/jquery/wikibase/jquery.wikibase.pagesuggester.js',
+				'resources/jquery/wikibase/jquery.wikibase.propertyview.js',
+				'resources/jquery/wikibase/jquery.wikibase.referenceview.js',
+				'resources/jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js',
+				'resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js',
+				'resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js',
+				'resources/jquery/wikibase/jquery.wikibase.sitelinkview.js',
+				'resources/jquery/wikibase/jquery.wikibase.snaklistview.js',
+				'resources/jquery/wikibase/jquery.wikibase.statementgrouplabelscroll.js',
+				'resources/jquery/wikibase/jquery.wikibase.statementgrouplistview.js',
+				'resources/jquery/wikibase/jquery.wikibase.statementgroupview.js',
+				'resources/jquery/wikibase/jquery.wikibase.statementlistview.js',
+				'resources/jquery/wikibase/jquery.wikibase.statementview.js',
+				'resources/jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
+				'resources/jquery/ui/jquery.ui.tagadata.js',
+				'resources/jquery/jquery.sticknode.js',
+				'resources/jquery/jquery.removeClassByRegex.js',
+				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js',
+				'resources/wikibase/utilities/wikibase.utilities.ui.js',
+
+			],
+			'styles' => [
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.badgeselector.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.mw-collapsible.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.labelview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
+				'resources/jquery/ui/jquery.ui.tagadata.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css',
+				'resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
+				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
+				'resources/wikibase/utilities/wikibase.utilities.ui.css',
+				'resources/jquery/ui/jquery.ui.closeable.css'
+			],
+			'dependencies' => [
+				'dataValues.DataValue', // For snakview
+				'jquery.animateWithEvent',
+				'jquery.event.special.eachchange',
+				'jquery.ui',
+				'jquery.ui.suggester',
+				'jquery.util.getDirectionality',
+				'jquery.event.special.eachchange',
+				'jquery.inputautoexpand',
+				'jquery.throttle-debounce',
+				'jquery.wikibase.entityselector',
+				'jquery.wikibase.siteselector',
+				'wikibase.buildErrorOutput',
+				'wikibase.getLanguageNameByCode',
+				'wikibase.sites',
+				'wikibase.templates',
+				'wikibase.datamodel',
+				'wikibase.serialization',
+				'wikibase.utilities.ClaimGuidGenerator',
+				'wikibase.view.__namespace',
+				'wikibase',
+				'jquery.valueview',
+				'mediawiki.api',
+				'mediawiki.cookie',
+				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
+				'mediawiki.language',
+				'mediawiki.legacy.shared', // For snakview
+				'mediawiki.user',
+				'mediawiki.util',
+				'mw.config.values.wbRefTabsEnabled',
+				'mw.config.values.wbRepo',
+				'oojs-ui',
+				'util.highlightSubstring',
+				'util.inherit',
+				'wikibase.tainted-ref.init',
+			],
+			'messages' => [
+				'parentheses',
+				'wikibase-addqualifier',
+				'wikibase-addreference',
+				'wikibase-badgeselector-badge-placeholder-title',
+				'wikibase-claimview-snak-tooltip',
+				'wikibase-claimview-snak-new-tooltip',
+				'wikibase-entitytermsforlanguagelistview-aliases',
+				'wikibase-entitytermsforlanguagelistview-description',
+				'wikibase-entitytermsforlanguagelistview-label',
+				'wikibase-entitytermsforlanguagelistview-language',
+				'wikibase-entitytermsforlanguagelistview-less',
+				'wikibase-entitytermsforlanguagelistview-more',
+				'wikibase-entitytermsview-input-help-message',
+				'wikibase-aliases-separator',
+				'wikibase-aliases-input-help-message',
+				'wikibase-alias-edit-placeholder',
+				'wikibase-description-edit-placeholder',
+				'wikibase-description-edit-placeholder-language-aware',
+				'wikibase-description-empty',
+				'wikibase-statementgrouplistview-add',
+				'wikibase-description-empty',
+				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label',
+				'wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link',
+				'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler',
+				'wikibase-label-edit-placeholder',
+				'wikibase-label-edit-placeholder-language-aware',
+				'wikibase-label-empty',
+				'wikibase-label-input-help-message',
+				'wikibase-outdated-client-script',
+				'wikibase-referenceview-tabs-manual',
+				'wikibase-refresh-for-missing-datatype',
+				'wikibase-remove',
+				'wikibase-sitelink-site-edit-placeholder',
+				'wikibase-sitelink-page-edit-placeholder',
+				'wikibase-sitelinkgroupview-input-help-message',
+				'wikibase-sitelinks-counter',
+				'wikibase-snakview-property-input-placeholder',
+				'wikibase-snakview-choosesnaktype',
+				'wikibase-snakview-snaktypeselector-value',
+				'wikibase-snakview-snaktypeselector-somevalue',
+				'wikibase-snakview-snaktypeselector-novalue',
+				'wikibase-snakview-variation-datavaluetypemismatch',
+				'wikibase-snakview-variation-datavaluetypemismatch-details',
+				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-variations-somevalue-label',
+				'wikibase-statementgrouplistview-add-tooltip',
+				'wikibase-statementlistview-add',
+				'wikibase-statementlistview-add-tooltip',
+				'wikibase-statementview-rank-preferred',
+				'wikibase-statementview-rank-tooltip-preferred',
+				'wikibase-statementview-rank-normal',
+				'wikibase-statementview-rank-tooltip-normal',
+				'wikibase-statementview-rank-deprecated',
+				'wikibase-statementview-rank-tooltip-deprecated',
+				'wikibase-statementview-references-counter',
+				// For ToolbarViewController:
+				'wikibase-save-inprogress',
+				'wikibase-publish-inprogress',
+			],
+		],
+		'wikibase.datamodel' => [
+			'packageFiles' => [
+				'index.js',
+
+				'List.js',
+				'Group.js',
+				'Map.js',
+				'Set.js',
+				'GroupableCollection.js',
+				'FingerprintableEntity.js',
+				'Claim.js',
+				'Entity.js',
+				'EntityId.js',
+				'Fingerprint.js',
+				'Item.js',
+				'MultiTerm.js',
+				'MultiTermMap.js',
+				'Property.js',
+				'PropertyNoValueSnak.js',
+				'PropertySomeValueSnak.js',
+				'PropertyValueSnak.js',
+				'Reference.js',
+				'ReferenceList.js',
+				'SiteLink.js',
+				'SiteLinkSet.js',
+				'Snak.js',
+				'SnakList.js',
+				'Statement.js',
+				'StatementGroup.js',
+				'StatementGroupSet.js',
+				'StatementList.js',
+				'Term.js',
+				'TermMap.js',
+			],
+			'dependencies' => [
+				'util.inherit',
+				'dataValues.DataValue',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+			'localBasePath' => __DIR__ . '/lib/wikibase-data-model/src',
+			'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-model/src',
+		],
+
+		'dataValues' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'dataValues.js',
+				],
+				'targets' => [ 'desktop', 'mobile' ],
+			],
+
+		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
+				'packageFiles' => [
+					'jquery/jquery.animateWithEvent.js',
+					'jquery/jquery.AnimationEvent.js',
+					'jquery/jquery.PurposedCallbacks.js',
+				],
+			],
+
+		'jquery.inputautoexpand' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'jquery/jquery.inputautoexpand.js',
+				],
+				'dependencies' => [
+					'jquery.event.special.eachchange',
+				],
+			],
+
+		'jquery.ui.commonssuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'jquery.ui/jquery.ui.commonssuggester.js',
+				],
+				'styles' => [
+					'jquery.ui/jquery.ui.commonssuggester.css',
+				],
+				'dependencies' => [
+					'jquery.ui.suggester',
+					'jquery.ui',
+					'util.highlightSubstring',
+				],
+			],
+
+		'jquery.ui.languagesuggester' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'jquery.ui/jquery.ui.languagesuggester.js',
+				],
+				'dependencies' => [
+					'jquery.ui.suggester',
+					'jquery.ui',
+				],
+			],
+
+		'util.ContentLanguages' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'util/util.ContentLanguages.js',
+				],
+				'dependencies' => [
+					'util.inherit',
+				],
+				'targets' => [ 'desktop', 'mobile' ],
+			],
+
+		'util.Extendable' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'util/util.Extendable.js',
+				],
+			],
+
+		'util.MessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'util/util.MessageProvider.js',
+				],
+			],
+
+		'util.MessageProviders' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'util/util.HashMessageProvider.js',
+					'util/util.CombiningMessageProvider.js',
+					'util/util.PrefixingMessageProvider.js',
+				],
+			],
+
+		'util.Notifier' => $wikibaseDatavaluesValueviewLibPaths + [
+				'scripts' => [
+					'util/util.Notifier.js',
+				],
+			],
+
+		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'DataValue.js',
+				],
+				'dependencies' => [
+					'dataValues',
+					'util.inherit',
+				],
+				'targets' => [ 'desktop', 'mobile' ],
+			],
+
+		'dataValues.values' => $wikibaseDatavaluesPaths + [
+				'scripts' => [
+					// Note: The order here is relevant, scripts should be places after the ones they
+					//  depend on.
+					'lib/globeCoordinate/globeCoordinate.js',
+					'lib/globeCoordinate/globeCoordinate.GlobeCoordinate.js',
+					'src/values/BoolValue.js',
+					'src/values/DecimalValue.js',
+					'src/values/GlobeCoordinateValue.js',
+					'src/values/MonolingualTextValue.js',
+					'src/values/MultilingualTextValue.js',
+					'src/values/StringValue.js',
+					'src/values/NumberValue.js',
+					'src/values/TimeValue.js',
+					'src/values/QuantityValue.js',
+					'src/values/UnknownValue.js',
+					'src/values/UnDeserializableValue.js',
+				],
+				'dependencies' => [
+					'dataValues.DataValue',
+					'dataValues.TimeValue',
+					'util.inherit',
+				],
+				'targets' => [ 'desktop', 'mobile' ],
+			],
+
+		'dataValues.TimeValue' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'values/TimeValue.js',
+				],
+				'dependencies' => [
+					'dataValues.DataValue',
+					'util.inherit',
+				],
+				'targets' => [ 'desktop', 'mobile' ],
+			],
+
+		'valueFormatters' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'valueFormatters/valueFormatters.js',
+					'valueFormatters/formatters/ValueFormatter.js',
+				],
+				'dependencies' => [
+					'util.inherit',
+				],
+			],
+
+		'valueParsers' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'valueParsers/valueParsers.js',
+				],
+			],
+
+		'valueParsers.ValueParserStore' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'valueParsers/ValueParserStore.js',
+				],
+				'dependencies' => [
+					'valueParsers',
+				],
+			],
+
+		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
+				'scripts' => [
+					'valueParsers/parsers/ValueParser.js',
+
+					'valueParsers/parsers/BoolParser.js',
+					'valueParsers/parsers/FloatParser.js',
+					'valueParsers/parsers/IntParser.js',
+					'valueParsers/parsers/NullParser.js',
+					'valueParsers/parsers/StringParser.js',
+				],
+				'dependencies' => [
+					'dataValues.values',
+					'util.inherit',
+					'valueParsers',
+				],
+			],
+		'wikibase.serialization' => [
+			'packageFiles' => [
+				'index.js',
+
+				'Deserializers/Deserializer.js',
+				'Deserializers/SnakDeserializer.js',
+				'Deserializers/StatementGroupSetDeserializer.js',
+				'Deserializers/StatementGroupDeserializer.js',
+				'Deserializers/StatementListDeserializer.js',
+				'Deserializers/StatementDeserializer.js',
+				'Deserializers/ClaimDeserializer.js',
+				'Deserializers/TermDeserializer.js',
+				'Serializers/ClaimSerializer.js',
+				'Deserializers/ReferenceListDeserializer.js',
+				'Deserializers/ReferenceDeserializer.js',
+				'Deserializers/SnakListDeserializer.js',
+				'Serializers/TermMapSerializer.js',
+				'Serializers/TermSerializer.js',
+				'Deserializers/TermMapDeserializer.js',
+				'Deserializers/EntityDeserializer.js',
+				'StrategyProvider.js',
+				'Deserializers/ItemDeserializer.js',
+				'Deserializers/PropertyDeserializer.js',
+				'Deserializers/SiteLinkSetDeserializer.js',
+				'Deserializers/SiteLinkDeserializer.js',
+				'Deserializers/FingerprintDeserializer.js',
+				'Deserializers/MultiTermMapDeserializer.js',
+				'Deserializers/MultiTermDeserializer.js',
+				'Serializers/StatementSerializer.js',
+				'Serializers/StatementListSerializer.js',
+				'Serializers/ReferenceListSerializer.js',
+				'Serializers/ReferenceSerializer.js',
+				'Serializers/Serializer.js',
+				'Serializers/SnakListSerializer.js',
+				'Serializers/SnakSerializer.js',
+			],
+			'dependencies' => [
+				'util.inherit',
+				'wikibase.datamodel',
+				'dataValues',
+				'dataValues.values',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+			'localBasePath' => __DIR__ . '/lib/wikibase-serialization/src',
+			'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
+		],
+		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
+		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.
+		'jquery.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'packageFiles' => [
+					'jquery.valueview.js',
+					'jquery.valueview.valueview.js',
+					'jquery.valueview.ViewState.js',
+				],
+				'styles' => [
+					'jquery.valueview.valueview.css',
+				],
+				'dependencies' => [
+					'dataValues.DataValue',
+					'jquery.ui',
+					'jquery.valueview.experts.EmptyValue',
+					'jquery.valueview.ExpertStore',
+					'util.Notifier',
+					'valueFormatters',
+					'valueParsers.ValueParserStore',
+				],
+			],
+
+		'jquery.valueview.Expert' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'jquery.valueview.experts.js',
+					'jquery.valueview.Expert.js',
+				],
+				'dependencies' => [
+					'util.inherit',
+					'util.MessageProviders',
+					'util.Notifier',
+					'util.Extendable'
+				],
+			],
+
+		'jquery.valueview.experts.CommonsMediaType' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/CommonsMediaType.js',
+				],
+				'dependencies' => [
+					'jquery.event.special.eachchange',
+					'jquery.ui.commonssuggester',
+					'jquery.valueview.experts.StringValue',
+					'jquery.valueview.Expert',
+				],
+			],
+
+		'jquery.valueview.experts.GeoShape' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/GeoShape.js',
+				],
+				'dependencies' => [
+					'jquery.event.special.eachchange',
+					'jquery.ui.commonssuggester',
+					'jquery.valueview.experts.StringValue',
+					'jquery.valueview.Expert',
+				],
+			],
+
+		'jquery.valueview.experts.TabularData' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/TabularData.js',
+				],
+				'dependencies' => [
+					'jquery.event.special.eachchange',
+					'jquery.ui.commonssuggester',
+					'jquery.valueview.experts.StringValue',
+					'jquery.valueview.Expert',
+				],
+			],
+
+		'jquery.valueview.experts.EmptyValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/EmptyValue.js',
+				],
+				'styles' => [
+					'experts/EmptyValue.css',
+				],
+				'dependencies' => [
+					'jquery.valueview.Expert',
+				],
+				'messages' => [
+					'valueview-expert-emptyvalue-empty',
+				],
+			],
+
+		'jquery.valueview.experts.GlobeCoordinateInput' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/GlobeCoordinateInput.js',
+				],
+				'styles' => [
+					'experts/GlobeCoordinateInput.css',
+				],
+				'dependencies' => [
+					'jquery.valueview.ExpertExtender',
+					'jquery.valueview.experts.StringValue',
+					'jquery.valueview.Expert',
+					'util.MessageProvider',
+				],
+				'messages' => [
+					'valueview-expert-globecoordinateinput-precision',
+					'valueview-expert-globecoordinateinput-nullprecision',
+					'valueview-expert-globecoordinateinput-customprecision',
+				],
+			],
+
+		'jquery.valueview.experts.MonolingualText' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'packageFiles' => [
+					'experts/MonolingualText.js',
+					'ExpertExtender/ExpertExtender.LanguageSelector.js',
+				],
+				'dependencies' => [
+					'jquery.valueview.Expert',
+					'jquery.valueview.ExpertExtender',
+					'jquery.valueview.experts.StringValue',
+					'jquery.event.special.eachchange',
+					'jquery.ui.languagesuggester',
+					'util.MessageProviders',
+				],
+				'messages' => [
+					'valueview-expertextender-languageselector-languagetemplate',
+					'valueview-expertextender-languageselector-label',
+				],
+			],
+
+		'jquery.valueview.experts.QuantityInput' => $wikibaseDatavaluesValueviewPaths + [
+				'packageFiles' => [
+					'src/experts/QuantityInput.js',
+					'src/ExpertExtender/ExpertExtender.UnitSelector.js',
+					'lib/jquery.ui/jquery.ui.unitsuggester.js',
+				],
+				'styles' => [
+					'lib/jquery.ui/jquery.ui.unitsuggester.css',
+				],
+				'dependencies' => [
+					'jquery.ui.suggester',
+					'jquery.ui',
+					'jquery.valueview.Expert',
+					'jquery.valueview.ExpertExtender',
+					'jquery.valueview.experts.StringValue',
+				],
+				'messages' => [
+					'valueview-expertextender-unitsuggester-label',
+				],
+			],
+
+		'jquery.valueview.experts.StringValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/StringValue.js',
+					'../lib/jquery/jquery.focusAt.js',
+				],
+				'dependencies' => [
+					'jquery.event.special.eachchange',
+					'jquery.inputautoexpand',
+					'jquery.valueview.Expert',
+				],
+			],
+
+		'jquery.valueview.experts.TimeInput' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/TimeInput.js',
+				],
+				'styles' => [
+					'experts/TimeInput.css',
+				],
+				'dependencies' => [
+					'dataValues.TimeValue',
+					'jquery.valueview.ExpertExtender',
+					'jquery.valueview.Expert',
+					'util.MessageProvider',
+				],
+				'messages' => [
+					'valueview-expert-timeinput-calendar',
+					'valueview-expert-timeinput-precision',
+					'valueview-expert-timevalue-calendar-gregorian',
+					'valueview-expert-timevalue-calendar-julian',
+				],
+			],
+
+		'jquery.valueview.experts.UnDeserializableValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/UnDeserializableValue.js'
+				],
+				'dependencies' => [
+					'jquery.valueview.Expert',
+				]
+			],
+
+		'jquery.valueview.ExpertStore' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'experts/UnsupportedValue.js',
+					'jquery.valueview.ExpertStore.js',
+				],
+				'styles' => [
+					'experts/UnsupportedValue.css',
+				],
+				'dependencies' => [
+					'jquery.valueview.Expert',
+				],
+				'messages' => [
+					'valueview-expert-unsupportedvalue-unsupporteddatatype',
+					'valueview-expert-unsupportedvalue-unsupporteddatavalue',
+				]
+			],
+
+		'jquery.valueview.ExpertExtender' => $wikibaseDatavaluesValueviewSrcPaths + [
+				'scripts' => [
+					'ExpertExtender/ExpertExtender.js',
+					'../lib/jquery.ui/jquery.ui.inputextender.js',
+					'ExpertExtender/ExpertExtender.Container.js',
+					'ExpertExtender/ExpertExtender.Listrotator.js',
+					'../lib/jquery.ui/jquery.ui.listrotator.js',
+					'ExpertExtender/ExpertExtender.Preview.js',
+					'../lib/jquery.ui/jquery.ui.preview.js',
+				],
+				'styles' => [
+					'../lib/jquery.ui/jquery.ui.inputextender.css',
+					'../lib/jquery.ui/jquery.ui.listrotator.css',
+					'ExpertExtender/ExpertExtender.Preview.css',
+					'../lib/jquery.ui/jquery.ui.preview.css',
+				],
+				'dependencies' => [
+					'jquery.animateWithEvent',
+					'jquery.event.special.eachchange',
+					'jquery.valueview',
+					'util.Extendable',
+					'jquery.ui',
+					'util.MessageProviders',
+				],
+				'messages' => [
+					'valueview-listrotator-manually',
+					'valueview-preview-label',
+					'valueview-preview-novalue',
+				],
+			],
+
+		'wikibase.termbox' => $wikibaseTermboxPaths + [
+				'class' => TermboxModule::class,
+				'scripts' => [
+					'dist/wikibase.termbox.main.js',
+				],
+				'targets' => 'mobile',
+				'dependencies' => [
+					'wikibase.termbox.styles',
+					'wikibase.getLanguageNameByCode',
+					'wikibase.entityPage.entityLoaded',
+					'wikibase.WikibaseContentLanguages',
+					'wikibase.getUserLanguages',
+					'mw.config.values.wbRepo'
+				],
+				// 'messages' are declared by ./resources.json via TermboxModule.
+			],
+
+		'wikibase.termbox.styles' => $wikibaseTermboxPaths + [
+				'styles' => [
+					'../../resources/wikibase/termbox/main.less',
+					'dist/wikibase.termbox.main.css',
+				],
+				'targets' => 'mobile'
+			],
+		'wikibase.tainted-ref.common' => [
+			'factory' => function () {
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'tainted-ref.common.js',
+						],
+						'styles' => [
+							'tainted-ref.app.css',
+						],
+						'dependencies' => [
+							'vue2',
+						],
+						'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
+					],
+					__DIR__ . '/lib/wikibase-tainted-ref/dist'
+				);
+			},
+		],
+		'wikibase.tainted-ref.init' => [
+			'factory' => function () {
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'tainted-ref.init.js',
+						],
+						'styles' => [
+							'tainted-ref.app.css',
+						],
+						'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
+					],
+					__DIR__ . '/lib/wikibase-tainted-ref/dist'
+				);
+			},
+		],
+	];
+
+	return $modules;
+} );

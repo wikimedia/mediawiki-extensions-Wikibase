@@ -21,8 +21,7 @@ final class ViewHooks {
 
 		$wgResourceModules = array_merge(
 			$wgResourceModules,
-			require __DIR__ . '/lib/resources.php',
-			require __DIR__ . '/resources/resources.php'
+			require __DIR__ . '/resources.php'
 		);
 	}
 
