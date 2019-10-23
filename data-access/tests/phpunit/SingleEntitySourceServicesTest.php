@@ -10,6 +10,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -73,6 +74,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[ 'strval' ],
+			[],
 			[]
 		);
 
@@ -91,6 +93,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[ null ],
+			[],
 			[]
 		);
 	}
@@ -106,8 +109,60 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[],
+			[ null ],
+			[]
+		);
+	}
+
+	public function testInvalidConstruction_prefetchingTermLookupCallbacks() {
+		$this->expectException( ParameterElementTypeException::class );
+		new SingleEntitySourceServices(
+			$this->newGenericServices(),
+			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
+			new DataValueDeserializer( [] ),
+			$this->getMockNameTableStore(),
+			DataAccessSettingsFactory::anySettings(),
+			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
+			[],
+			[],
 			[ null ]
 		);
+	}
+
+	public function testGivenCustomLookupConstructingCallbacks_getPrefetchingTermLookupReturnsCustomLookup() {
+		$customLookup = $this->createMock( PrefetchingTermLookup::class );
+		$customLookup->method( $this->anything() )
+			->willReturn( 'CUSTOM' );
+
+		$customItemLookupCallback = function() use ( $customLookup ) {
+			return $customLookup;
+		};
+
+		$services = new SingleEntitySourceServices(
+			$this->newGenericServices(),
+			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
+			new DataValueDeserializer( [] ),
+			$this->getMockNameTableStore(),
+			DataAccessSettingsFactory::anySettings(),
+			new EntitySource(
+				'source',
+				'sourcedb',
+				[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+				'',
+				'',
+				'',
+				''
+			),
+			[],
+			[],
+			[ 'item' => $customItemLookupCallback ]
+		);
+
+		$lookup = $services->getPrefetchingTermLookup();
+
+		$this->assertSame( 'CUSTOM', $lookup->getLabel( new ItemId( 'Q123' ), 'fake' ) );
 	}
 
 	public function newSingleEntitySourceServices() {
@@ -119,6 +174,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
+			[],
 			[],
 			[]
 		);

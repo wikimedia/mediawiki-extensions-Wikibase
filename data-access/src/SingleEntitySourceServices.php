@@ -19,6 +19,7 @@ use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -73,6 +74,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $deserializerFactoryCallbacks;
 	private $entityMetaDataAccessorCallbacks;
 
+	/**
+	 * @var callable[]
+	 */
+	private $prefetchingTermLookupCallbacks;
+
 	private $slotRoleStore;
 	private $entityRevisionLookup = null;
 
@@ -100,9 +106,10 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		DataAccessSettings $settings,
 		EntitySource $entitySource,
 		array $deserializerFactoryCallbacks,
-		array $entityMetaDataAccessorCallbacks
+		array $entityMetaDataAccessorCallbacks,
+		array $prefetchingTermLookupCallbacks
 	) {
-		$this->assertCallbackArrayTypes( $deserializerFactoryCallbacks, $entityMetaDataAccessorCallbacks );
+		$this->assertCallbackArrayTypes( $deserializerFactoryCallbacks, $entityMetaDataAccessorCallbacks, $prefetchingTermLookupCallbacks );
 
 		$this->genericServices = $genericServices;
 		$this->entityIdParser = $entityIdParser;
@@ -113,11 +120,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->entitySource = $entitySource;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
+		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
 	}
 
 	private function assertCallbackArrayTypes(
 		array $deserializerFactoryCallbacks,
-		array $entityMetaDataAccessorCallbacks
+		array $entityMetaDataAccessorCallbacks,
+		array $prefetchingTermLookupCallbacks
 	) {
 		Assert::parameterElementType(
 			'callable',
@@ -128,6 +137,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			'callable',
 			$entityMetaDataAccessorCallbacks,
 			'$entityMetaDataAccessorCallbacks'
+		);
+		Assert::parameterElementType(
+			'callable',
+			$prefetchingTermLookupCallbacks,
+			'$prefetchingTermLookupCallbacks'
 		);
 	}
 
@@ -276,10 +290,16 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getPrefetchingTermLookup() {
 		if ( $this->prefetchingTermLookup === null ) {
-			$this->prefetchingTermLookup = new BufferingTermLookup(
+			$bufferingLookup = new BufferingTermLookup(
 				$this->getTermIndex(),
 				1000 // TODO: customize buffer sizes
 			);
+
+			$this->prefetchingTermLookup = $bufferingLookup;
+
+			if ( $this->entitySourceProvideTypesWithCustomPrefetchingTermLookups() ) {
+				$this->prefetchingTermLookup = $this->newPrefetchingTermLookupWithCustomLookups( $bufferingLookup );
+			}
 
 			if ( $this->settings->useNormalizedPropertyTerms() ) {
 				$propertyTermLookup = $this->newNormalizedPropertyTermLookup();
@@ -290,6 +310,34 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			}
 		}
 		return $this->prefetchingTermLookup;
+	}
+
+	private function entitySourceProvideTypesWithCustomPrefetchingTermLookups() {
+		$typesWithCustomLookups = array_keys( $this->prefetchingTermLookupCallbacks );
+
+		return array_intersect( $typesWithCustomLookups, $this->entitySource->getEntityTypes() );
+	}
+
+	private function newPrefetchingTermLookupWithCustomLookups( PrefetchingTermLookup $defaultLookup ): PrefetchingTermLookup {
+		$typesWithCustomLookups = array_keys( $this->prefetchingTermLookupCallbacks );
+
+		$lookupConstructorsByType = array_intersect( $typesWithCustomLookups, $this->entitySource->getEntityTypes() );
+		$customLookups = [];
+		foreach ( $lookupConstructorsByType as $type ) {
+			$callback = $this->prefetchingTermLookupCallbacks[$type];
+			$lookup = call_user_func( $callback, $this );
+
+			Assert::postcondition(
+				$lookup instanceof PrefetchingTermLookup,
+				"Callback creating a lookup for $type must create an instance of PrefetchingTermLookup"
+			);
+
+			$customLookups[$type] = $lookup;
+		}
+		return new ByTypeDispatchingPrefetchingTermLookup(
+			$customLookups,
+			$defaultLookup
+		);
 	}
 
 	private function newNormalizedPropertyTermLookup(): PrefetchingPropertyTermLookup {
