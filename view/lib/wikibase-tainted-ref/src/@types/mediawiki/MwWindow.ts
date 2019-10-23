@@ -44,10 +44,12 @@ interface MediaWiki {
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language */
 	language: MwLanguage;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook */
-	hook( name: string ): Hook;
+	hook: HookRegistry;
 }
 
-interface Hook {
+export type HookRegistry = ( name: string ) => Hook;
+
+export interface Hook {
 	add( handler: Function ): Hook;
 }
 
