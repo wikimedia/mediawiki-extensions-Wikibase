@@ -1,7 +1,7 @@
 <template>
-	<div class="wb-tr-app">
+	<span class="wb-tr-app">
 		<TaintedIcon v-if="isTainted" />
-	</div>
+	</span>
 </template>
 
 <script lang="ts">
@@ -26,3 +26,9 @@ export default class App extends Vue {
 	}
 }
 </script>
+
+<style lang="scss">
+	.wb-tr-app {
+		padding-left: 0.5em;
+	}
+</style>
