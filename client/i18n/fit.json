@@ -5,8 +5,12 @@
 		]
 	},
 	"wikibase-editlinks": "Mookkaa linkkejä",
+	"wikibase-linkitem-addlinks": "Lissää länkkejä",
+	"wikibase-linkitem-title": "Länkitä sivuun",
+	"wikibase-linkitem-linkpage": "Länkitä sivuun",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Piilota",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-mookkaus"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-mookkaus",
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-mookkaukset"
 }

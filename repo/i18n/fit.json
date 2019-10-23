@@ -5,5 +5,26 @@
 		]
 	},
 	"wikibase-edit": "mookkaa",
-	"wikibase-add": "lissää"
+	"wikibase-save": "säästä",
+	"wikibase-publish": "anna ulos",
+	"wikibase-cancel": "lopeta",
+	"wikibase-add": "lissää",
+	"wikibase-save-inprogress": "Säästethään...",
+	"wikibase-publish-inprogress": "Annethaan ulos...",
+	"wikibase-remove-inprogress": "Otetaan poies...",
+	"wikibase-entitytermsforlanguagelistview-description": "Kuvvaus",
+	"wikibase-description-empty": "Kuvvausta ei ole lisätty",
+	"wikibase-description-edit-placeholder": "kirjota kuvvaus",
+	"wikibase-diffview-description": "kuvvaus",
+	"wikibase-diffview-link": "länkit",
+	"wikibase-move-up": "siirä ylös",
+	"wikibase-move-down": "siirä alas",
+	"wikibase-undo-title": "Kumothaan sivuun $1 tehty mookkaus",
+	"wikibase-restore-title": "Sivun ”$1” vanhan versuunin palauttaminen",
+	"wikibase-partial-undo": "Mookkaus voidaan kumota osittain.",
+	"wikibase-gotolinkedpage-submit": "Siiry",
+	"wikibase-newentity-description": "Kuvvaus:",
+	"wikibase-setdescription-submit": "Aseta kuvvaus",
+	"wikibase-setlabeldescriptionaliases-description-label": "Kuvvaus:",
+	"wikibase-entitieswithoutlabel-label-language": "Kielikooti:"
 }

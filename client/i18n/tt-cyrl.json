@@ -31,7 +31,7 @@
 	"wikibase-rc-wikibase-edit-letter": "м",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} үзгәртүе",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} үзгәртүләре",
-	"wikibase-rcfilters-hide-wikibase-description": "Викимәгълүматта ясалган үзгәртүләр.",
+	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} дагы төзәтмәләр.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}} булган үзгәртүләрне күзәтү исемлегендә карау",
 	"unconnectedpages": "Элементлар белән бәйләнмәгән битләр",
 	"wikibase-unconnectedpages-submit": "Битләрне күрсәтү",
