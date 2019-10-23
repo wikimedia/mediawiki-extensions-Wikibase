@@ -19,7 +19,74 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/repo/resources',
 	];
 
+	$formattersPaths = [
+		'localBasePath' => __DIR__ . '/formatters',
+		'remoteExtPath' => 'Wikibase/repo/resources/formatters',
+	];
+
+	$expertsPaths = [
+		'localBasePath' => __DIR__ . '/experts',
+		'remoteExtPath' => 'Wikibase/repo/resources/experts',
+	];
+
 	$modules = [
+		'wikibase.formatters.ApiValueFormatter' => $formattersPaths + [
+			'scripts' => [
+				'ApiValueFormatter.js',
+			],
+			'dependencies' => [
+				'wikibase',
+				'util.inherit',
+				'valueFormatters',
+			],
+		],
+
+		'wikibase.experts.__namespace' => $expertsPaths + [
+			'scripts' => [
+				'__namespace.js'
+			],
+			'dependencies' => [
+				'wikibase',
+			]
+		],
+
+		'wikibase.experts.Entity' => $expertsPaths + [
+			'scripts' => [
+				'Entity.js',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.valueview.Expert',
+				'jquery.valueview.experts.StringValue',
+				'jquery.wikibase.entityselector',
+				'mw.config.values.wbRepo',
+				'util.inherit',
+				'wikibase.experts.__namespace',
+			],
+		],
+
+		'wikibase.experts.Item' => $expertsPaths + [
+			'scripts' => [
+				'Item.js',
+			],
+			'dependencies' => [
+				'jquery.valueview.Expert',
+				'wikibase.experts.__namespace',
+				'wikibase.experts.Entity',
+			],
+		],
+
+		'wikibase.experts.Property' => $expertsPaths + [
+			'scripts' => [
+				'Property.js',
+			],
+			'dependencies' => [
+				'jquery.valueview.Expert',
+				'wikibase.experts.__namespace',
+				'wikibase.experts.Entity',
+			],
+		],
+
 		'mw.config.values.wbDataTypes' => $moduleTemplate + [
 			'class' => DataTypesModule::class,
 			'datatypefactory' => function() {
@@ -218,12 +285,7 @@ return call_user_func( function() {
 					return WikibaseRepo::getDefaultInstance()->getPropertyValueExpertsModule();
 				}
 		],
-
 	];
 
-	return array_merge(
-		$modules,
-		require __DIR__ . '/experts/resources.php',
-		require __DIR__ . '/formatters/resources.php'
-	);
+	return $modules;
 } );
