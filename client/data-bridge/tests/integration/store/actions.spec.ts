@@ -27,6 +27,7 @@ describe( 'store/actions', () => {
 	let testSet: EntityRevision;
 	let labelTerm: Term;
 	const services = new ServiceRepositories();
+	const client = { usePublish: false };
 	let info: AppInformation;
 	// fill repository
 	beforeEach( async () => {
@@ -132,6 +133,7 @@ describe( 'store/actions', () => {
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',
 			entityId: 'Q42',
+			client,
 		};
 
 		store = createStore( services );
@@ -160,6 +162,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P2312',
 					entityId: 'Q42',
+					client,
 				};
 
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
@@ -173,6 +176,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P60',
 					entityId: 'Q42',
+					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
@@ -185,6 +189,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P23',
 					entityId: 'Q42',
+					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
@@ -197,6 +202,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P42',
 					entityId: 'Q42',
+					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );

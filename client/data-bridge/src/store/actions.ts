@@ -1,3 +1,5 @@
+import Vue from 'vue';
+import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
 import {
 	ActionContext,
 	ActionTree,
@@ -17,7 +19,6 @@ import {
 	EDITFLOW_SET,
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
-	WIKIBASE_REPO_CONFIGURATION_SET,
 	ORIGINAL_STATEMENT_SET,
 } from '@/store/mutationTypes';
 import {
@@ -82,7 +83,9 @@ export default function actions(
 					{ entity: information.entityId },
 				),
 			] ).then( ( [ wikibaseRepoConfiguration, _entityInit ] ) => {
-				context.commit( WIKIBASE_REPO_CONFIGURATION_SET, wikibaseRepoConfiguration );
+
+				BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
+
 				const path = {
 					entityId: context.getters[ getter( NS_ENTITY, ENTITY_ID ) ],
 					propertyId: context.state.targetProperty,

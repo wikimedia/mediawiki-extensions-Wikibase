@@ -8,7 +8,8 @@ jest.mock( 'vue', () => {
 import Vue from 'vue';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import MessagesPlugin from '@/presentation/plugins/MessagesPlugin';
-import BridgeConfig, { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin';
+import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
+import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
 
 const inlanguageDirective = {};
 const mockInlanguage = jest.fn( ( _x: any ) => inlanguageDirective );
@@ -23,7 +24,7 @@ describe( 'extendVueEnvironment', () => {
 		extendVueEnvironment(
 			languageInfoRepo,
 			new ( jest.fn() )(),
-			{} as BridgeConfigOptions,
+			{} as WikibaseClientConfiguration,
 		);
 		expect( mockInlanguage ).toHaveBeenCalledWith( languageInfoRepo );
 		expect( Vue.directive ).toHaveBeenCalledWith( 'inlanguage', inlanguageDirective );
@@ -34,18 +35,19 @@ describe( 'extendVueEnvironment', () => {
 		extendVueEnvironment(
 			new ( jest.fn() )(),
 			messageRepo,
-			{} as BridgeConfigOptions,
+			{} as WikibaseClientConfiguration,
 		);
 		expect( Vue.use ).toHaveBeenCalledWith( MessagesPlugin, messageRepo );
 	} );
 
 	it( 'invokes the BridgeConfig plugin', () => {
-		const BridgeConfigOptions = { usePublish: true };
+		const config = { usePublish: true };
 		extendVueEnvironment(
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
-			BridgeConfigOptions,
+			config,
 		);
-		expect( Vue.use ).toHaveBeenCalledWith( BridgeConfig, BridgeConfigOptions );
+
+		expect( Vue.use ).toHaveBeenCalledWith( BridgeConfig, config );
 	} );
 } );

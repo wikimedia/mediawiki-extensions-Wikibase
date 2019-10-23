@@ -81,7 +81,7 @@ describe( 'StringDataValue', () => {
 	} );
 
 	describe( 'maxlength', () => {
-		test( 'passed through if set', () => {
+		it( 'passes through if set', () => {
 			const maxlength = 12345;
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
@@ -92,11 +92,12 @@ describe( 'StringDataValue', () => {
 				},
 			} );
 
-			expect( wrapper.find( ResizingTextField ).attributes( 'maxlength' ) )
-				.toBe( maxlength.toString() );
+			expect(
+				wrapper.find( ResizingTextField ).attributes( 'maxlength' ),
+			).toBe( maxlength.toString() );
 		} );
 
-		test( 'unset by default', () => {
+		it( 'is unset by default', () => {
 			const wrapper = shallowMount( StringDataValue, {
 				propsData: {
 					label: null,

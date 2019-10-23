@@ -63,17 +63,20 @@ describe( 'launch', () => {
 			getLanguageInfoRepository: () => languageRepo,
 			getMessagesRepository: () => messagesRepository,
 		};
-		const information = {};
+		const information = {
+			client: {
+				usePublish: true,
+			},
+		};
 		const configuration = {
 			containerSelector: '',
-			usePublish: true,
 		};
 
 		launch( configuration, information as any, services as any );
 		expect( extendVueEnvironment ).toHaveBeenCalledTimes( 1 );
 		expect( extendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( languageRepo );
 		expect( extendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( messagesRepository );
-		expect( extendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toStrictEqual( { usePublish: configuration.usePublish } );
+		expect( extendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( information.client );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
@@ -84,10 +87,13 @@ describe( 'launch', () => {
 			getMessagesRepository: () => messagesRepository,
 		};
 
-		const information = {};
+		const information = {
+			client: {
+				usePublish: false,
+			},
+		};
 		const configuration = {
 			containerSelector: '',
-			usePublish: false,
 		};
 
 		const emitter = launch( configuration, information as any, services as any );

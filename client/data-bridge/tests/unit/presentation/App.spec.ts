@@ -83,6 +83,9 @@ describe( 'App.vue', () => {
 			entityId,
 			propertyId,
 			editFlow,
+			client: {
+				usePublish: true,
+			},
 		};
 
 		await store.dispatch( BRIDGE_INIT, information );

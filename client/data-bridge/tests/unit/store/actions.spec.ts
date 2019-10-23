@@ -18,7 +18,6 @@ import {
 	EDITFLOW_SET,
 	APPLICATION_STATUS_SET,
 	TARGET_LABEL_SET,
-	WIKIBASE_REPO_CONFIGURATION_SET,
 	ORIGINAL_STATEMENT_SET,
 } from '@/store/mutationTypes';
 import {
@@ -31,11 +30,19 @@ import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import Vue, { VueConstructor } from 'vue';
+import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin';
 
 const mockValidateBridgeApplicability = jest.fn().mockReturnValue( true );
 jest.mock( '@/store/validateBridgeApplicability', () => ( {
 	__esModule: true,
 	default: ( context: any ) => mockValidateBridgeApplicability( context ),
+} ) );
+
+const mockBridgeConfig = jest.fn();
+jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
+	__esModule: true,
+	default: ( vue: VueConstructor<Vue>, options?: BridgeConfigOptions ) => mockBridgeConfig( vue, options ),
 } ) );
 
 describe( 'root/actions', () => {
@@ -150,12 +157,15 @@ describe( 'root/actions', () => {
 			} );
 		} );
 
-		it( `commits to ${WIKIBASE_REPO_CONFIGURATION_SET}`, () => {
+		it( 'resets the BridgeConfigPlugin', () => {
 			const context = mockedStore();
 			const information = {
 				editFlow: EditFlow.OVERWRITE,
 				propertyId: defaultPropertyId,
 				entityId: defaultEntityId,
+				client: {
+					usePublish: true,
+				},
 			};
 			const wikibaseRepoConfiguration = {
 				dataTypeLimits: {
@@ -169,9 +179,9 @@ describe( 'root/actions', () => {
 			};
 
 			return initAction( { wikibaseRepoConfigRepository } )( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					WIKIBASE_REPO_CONFIGURATION_SET,
-					wikibaseRepoConfiguration,
+				expect( mockBridgeConfig ).toHaveBeenCalledWith(
+					Vue,
+					{ ...wikibaseRepoConfiguration, ...information.client },
 				);
 			} );
 		} );
