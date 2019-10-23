@@ -26,6 +26,6 @@ describe( 'App.vue', () => {
 			data: () => { return { id: 'fooId' }; },
 		} );
 		store.dispatch( STATEMENT_TAINTED_STATE_INIT, [ 'fooId' ] );
-		expect( wrapper.find( TaintedIcon ).exists() ).toBeTruthy();
+		expect( wrapper.find( TaintedIcon ).exists() ).toBeFalsy();
 	} );
 } );

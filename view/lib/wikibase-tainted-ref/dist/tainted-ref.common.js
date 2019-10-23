@@ -4700,7 +4700,7 @@ var STATEMENT_TAINTED_STATE_INIT = 'initTaintedState';
 var STATEMENT_TAINTED_STATE_TAINT = 'taintTaintedState';
 var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
-var SET_ALL_TAINTED = 'setAllTainted';
+var SET_ALL_UNTAINTED = 'setAllUntainted';
 var SET_TAINTED = 'setTainted';
 var SET_UNTAINTED = 'setUntainted';
 // CONCATENATED MODULE: ./src/store/actions.ts
@@ -4711,7 +4711,7 @@ function actions() {
   var _ref;
 
   return _ref = {}, _defineProperty(_ref, STATEMENT_TAINTED_STATE_INIT, function (context, payload) {
-    context.commit(SET_ALL_TAINTED, payload);
+    context.commit(SET_ALL_UNTAINTED, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_UNTAINT, function (context, payload) {
     context.commit(SET_UNTAINTED, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_TAINT, function (context, payload) {
@@ -4726,9 +4726,9 @@ var _mutations;
 
 
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_TAINTED, function (state, payload) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED, function (state, payload) {
   payload.forEach(function (guid) {
-    external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsTaintedState, guid, true);
+    external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsTaintedState, guid, false);
   });
 }), _defineProperty(_mutations, SET_TAINTED, function (state, payload) {
   state.statementsTaintedState[payload] = true;
