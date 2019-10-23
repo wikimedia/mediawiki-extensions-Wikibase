@@ -28,6 +28,11 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/lib/resources/lib',
 	];
 
+	$jqueryWikibasePaths = [
+		'localBasePath' => __DIR__ . '/jquery.wikibase',
+		'remoteExtPath' => 'Wikibase/lib/resources/jquery.wikibase',
+	];
+
 	$modules = [
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
@@ -164,12 +169,31 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-	];
+		'jquery.wikibase.siteselector' => $jqueryWikibasePaths + [
+			'scripts' => [
+				'jquery.wikibase.siteselector.js',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.ui.suggester',
+				'util.highlightSubstring',
+			],
+		],
 
-	$modules = array_merge(
-		$modules,
-		require __DIR__ . '/jquery.wikibase/resources.php'
-	);
+		'jquery.wikibase.wbtooltip' => $jqueryWikibasePaths + [
+			'scripts' => [
+				'jquery.wikibase.wbtooltip.js',
+			],
+			'styles' => [
+				'themes/default/jquery.wikibase.wbtooltip.css'
+			],
+			'dependencies' => [
+				'jquery.tipsy',
+				'jquery.ui',
+				'wikibase.buildErrorOutput',
+			],
+		],
+	];
 
 	return $modules;
 } );
