@@ -351,4 +351,36 @@ describe( 'string data value', () => {
 		await insert( input as HTMLTextAreaElement, testNewValue );
 		expect( ( input as HTMLTextAreaElement ).value ).toBe( testNewValue );
 	} );
+
+	it( 'propagates the max length to the input field', async () => {
+		const maxLength = 666;
+		const queryDataBridgeConfigResponse = {
+			query: {
+				wbdatabridgeconfig: {
+					dataTypeLimits: {
+						string: {
+							maxLength,
+						},
+					},
+				},
+			},
+		};
+
+		( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+			get() {
+				return Promise.resolve( queryDataBridgeConfigResponse );
+			},
+		} );
+
+		const testLink = prepareTestEnv( {} );
+
+		await init();
+		testLink!.click();
+		await budge();
+
+		const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+
+		expect( input ).not.toBeNull();
+		expect( ( input as HTMLTextAreaElement ).maxLength ).toBe( maxLength );
+	} );
 } );
