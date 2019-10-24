@@ -10,6 +10,7 @@ Vue.use( Vuex );
 export function createStore(): Store<Application> {
 	const state: Application = {
 		statementsTaintedState: { },
+		statementsPopperIsOpen: { },
 	};
 	return new Store( {
 		state,

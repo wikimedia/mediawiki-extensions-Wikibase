@@ -6,7 +6,7 @@ describe( 'getters', () => {
 			const mockState = { statementsTaintedState: {
 				foo: false,
 				bar: true,
-			} };
+			}, statementsPopperIsOpen: {} };
 			const getStatementsTaintedState = getters.statementsTaintedState( mockState, {}, mockState, {} );
 			expect( getStatementsTaintedState ).toBeDefined();
 			expect( getStatementsTaintedState( 'bar' ) ).toBeTruthy();

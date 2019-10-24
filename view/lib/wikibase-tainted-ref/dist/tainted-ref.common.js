@@ -4774,7 +4774,8 @@ var getters = {
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(vuex_esm["b" /* default */]);
 function createStore() {
   var state = {
-    statementsTaintedState: {}
+    statementsTaintedState: {},
+    statementsPopperIsOpen: {}
   };
   return new vuex_esm["a" /* Store */]({
     state: state,

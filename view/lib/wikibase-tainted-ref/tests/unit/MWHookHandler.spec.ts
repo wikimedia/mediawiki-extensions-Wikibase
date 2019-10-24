@@ -20,7 +20,7 @@ describe( 'MWHookHandler', () => {
 		const mockTaintedChecker = { check: () => true };
 
 		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
-		const store = new Vuex.Store( { state: { statementsTaintedState: {} } } );
+		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
 		expect( mwHookRegistry ).toHaveBeenCalledWith( 'wikibase.statement.startEditing' );
@@ -41,7 +41,7 @@ describe( 'MWHookHandler', () => {
 		const mockTaintedChecker = { check: () => true };
 
 		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
-		const store = new Vuex.Store( { state: { statementsTaintedState: {} } } );
+		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
 		expect( mwHookRegistry ).toHaveBeenCalledWith( 'wikibase.statement.saved' );
@@ -66,7 +66,7 @@ describe( 'MWHookHandler', () => {
 		mockTaintedChecker.check.mockReturnValue( false );
 
 		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
-		const store = new Vuex.Store( { state: { statementsTaintedState: {} } } );
+		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
 		expect( mockTaintedChecker.check ).toHaveBeenCalledWith( s1, s2 );

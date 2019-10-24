@@ -3,19 +3,19 @@ import { mutations } from '@/store/mutations';
 
 describe( 'mutations', () => {
 	it( 'should set the StatementsTaintedState in the store', () => {
-		const state = { statementsTaintedState: {} };
+		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {} };
 		mutations[ SET_ALL_UNTAINTED ]( state, [ 'foo', 'bar' ] );
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: false, bar: false } );
 	} );
 	it( 'should taint a single statement in the store', () => {
-		const state = { statementsTaintedState: {} };
+		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {} };
 		mutations[ SET_TAINTED ]( state, 'foo' );
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: true } );
 	} );
 	it( 'should untaint a single statement in the store', () => {
-		const state = { statementsTaintedState: { foo: true, bar: true } };
+		const state = { statementsTaintedState: { foo: true, bar: true }, statementsPopperIsOpen: {} };
 		mutations[ SET_UNTAINTED ]( state, 'foo' );
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: false, bar: true } );
