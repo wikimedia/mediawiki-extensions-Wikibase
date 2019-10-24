@@ -488,7 +488,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
@@ -507,7 +507,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

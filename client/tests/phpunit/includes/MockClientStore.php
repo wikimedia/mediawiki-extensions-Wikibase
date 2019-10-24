@@ -96,13 +96,13 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::clear
+	 * @inheritDoc
 	 */
 	public function clear() {
 	}
 
 	/**
-	 * @see ClientStore::rebuild
+	 * @inheritDoc
 	 */
 	public function rebuild() {
 	}

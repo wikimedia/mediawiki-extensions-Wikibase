@@ -33,7 +33,7 @@ class RebuildItemsPerSite extends Maintenance {
 	}
 
 	/**
-	 * @see Maintenance::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {

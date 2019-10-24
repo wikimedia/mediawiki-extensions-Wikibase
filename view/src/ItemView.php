@@ -78,7 +78,7 @@ class ItemView extends EntityView {
 	}
 
 	/**
-	 * @see EntityView::getTitleHtml()
+	 * @inheritDoc
 	 */
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider ) {

@@ -194,7 +194,7 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
@@ -218,7 +218,7 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

@@ -230,7 +230,7 @@ abstract class DumpEntities extends Maintenance {
 	}
 
 	/**
-	 * @see Maintenance::finalSetup
+	 * @inheritDoc
 	 */
 	public function finalSetup() {
 		global $wgDBDefaultGroup;

@@ -15,7 +15,7 @@ use Wikibase\Repo\WikibaseRepo;
 class AvailableBadges extends ApiBase {
 
 	/**
-	 * @see ApiBase::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );
@@ -32,7 +32,7 @@ class AvailableBadges extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

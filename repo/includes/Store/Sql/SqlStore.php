@@ -280,7 +280,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::clear
+	 * @inheritDoc
 	 */
 	public function clear() {
 		$this->newSiteLinkStore()->clear();
@@ -288,7 +288,7 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::rebuild
+	 * @inheritDoc
 	 */
 	public function rebuild() {
 		$dbw = wfGetDB( DB_MASTER );

@@ -116,7 +116,7 @@ class SetLabel extends ModifyTerm {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [
@@ -128,7 +128,7 @@ class SetLabel extends ModifyTerm {
 	}
 
 	/**
-	 * @see ModifyEntity::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return array_merge(

@@ -114,7 +114,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 	}
 
 	/**
-	 * @see EntityPrefetcher::purgeAll
+	 * @inheritDoc
 	 */
 	public function purgeAll() {
 		$this->cache->clear();

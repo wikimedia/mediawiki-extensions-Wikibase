@@ -238,7 +238,7 @@ class PageTerms extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -260,7 +260,7 @@ class PageTerms extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		if ( WikibaseSettings::isRepoEnabled() ) {

@@ -73,7 +73,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * @see SpecialPage::isListed()
+	 * @inheritDoc
 	 */
 	public function isListed() {
 		return $this->entityNamespaceLookup->getEntityNamespace( $this->getEntityType() ) !== null;

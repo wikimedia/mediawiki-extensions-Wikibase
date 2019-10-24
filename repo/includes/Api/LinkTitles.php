@@ -230,7 +230,7 @@ class LinkTitles extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::isWriteMode
+	 * @inheritDoc
 	 */
 	public function isWriteMode() {
 		return true;
@@ -246,7 +246,7 @@ class LinkTitles extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
@@ -274,7 +274,7 @@ class LinkTitles extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

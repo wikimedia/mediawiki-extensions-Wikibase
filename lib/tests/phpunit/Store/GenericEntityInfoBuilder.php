@@ -107,7 +107,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	/**
-	 * @see EntityInfoBuilder::resolveRedirects
+	 * @inheritDoc
 	 */
 	private function resolveRedirects() {
 		$ids = array_keys( $this->entityInfo );

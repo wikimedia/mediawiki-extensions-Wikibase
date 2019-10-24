@@ -52,7 +52,7 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	}
 
 	/**
-	 * @see StringValueParserTest::invalidInputProvider
+	 * @inheritDoc
 	 */
 	public function invalidInputProvider() {
 		$argLists = parent::invalidInputProvider();

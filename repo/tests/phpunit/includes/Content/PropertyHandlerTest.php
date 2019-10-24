@@ -38,7 +38,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	}
 
 	/**
-	 * @see EntityHandlerTestCase::contentProvider
+	 * @inheritDoc
 	 */
 	public function contentProvider() {
 		$contents = [];
