@@ -204,3 +204,20 @@ div.wikibase-snakview {
     display: inline-block;
     padding-left: 4px;
 }
+
+.wikibase-statementview .wikibase-toolbar-container {
+    top: 10px; /* even out padding */
+    white-space: nowrap;
+}
+
+.wikibase-entityview .wikibase-toolbar-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18em;
+}
+
+.wikibase-entityview .wikibase-toolbar-container > .wikibase-toolbar-container {
+    position: static;
+    width: auto;
+}
