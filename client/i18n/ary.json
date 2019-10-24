@@ -7,6 +7,15 @@
 			"SADIQUI"
 		]
 	},
+	"tooltip-t-wikibase": "الربط بعنصر مرتابط في مستودع البيانات",
+	"wikibase-comment-update": "تبديل عنصر {{WBREPONAME}}",
+	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الروابط",
-	"wikibase-rc-hide-wikidata-hide": "خبي"
+	"wikibase-editlinkstitle": "تعديل الروابط ما بين اللغات",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "خبي",
+	"wikibase-rc-hide-wikidata-show": "وري",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
+	"wikibase-otherprojects": "في مشاريع أخرى"
 }

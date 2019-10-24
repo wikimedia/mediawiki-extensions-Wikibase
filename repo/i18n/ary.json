@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Anass Sedrati"
+			"Anass Sedrati",
+			"SADIQUI"
 		]
 	},
-	"wikibase-add": "زيد"
+	"wikibase-edit": "عدل",
+	"wikibase-add": "زيد",
+	"wikibase-sitelinks-special": "مواقع أخرى"
 }
