@@ -175,10 +175,10 @@ describe( 'string data value', () => {
 			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
-				ids: propertyId,
+				ids: [ propertyId ],
 				languagefallback: 1,
 				languages: pageLanguage,
-				props: 'labels',
+				props: [ 'labels' ],
 			} );
 		} );
 
@@ -214,10 +214,10 @@ describe( 'string data value', () => {
 			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
-				ids: propertyId,
+				ids: [ propertyId ],
 				languagefallback: 1,
 				languages: pageLanguage,
-				props: 'labels',
+				props: [ 'labels' ],
 			} );
 		} );
 
@@ -245,10 +245,10 @@ describe( 'string data value', () => {
 			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'zxx' );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
-				ids: propertyId,
+				ids: [ propertyId ],
 				languagefallback: 1,
 				languages: pageLanguage,
-				props: 'labels',
+				props: [ 'labels' ],
 			} );
 		} );
 	} );

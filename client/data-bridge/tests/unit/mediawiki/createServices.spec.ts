@@ -3,7 +3,8 @@ import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
 import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
-import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
+import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
+import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
@@ -23,8 +24,13 @@ jest.mock( '@/data-access/ForeignApiWritingRepository', () => {
 	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
 } );
 
+const mockEntityInfoDispatcher = {};
+jest.mock( '@/data-access/ForeignApiEntityInfoDispatcher', () => {
+	return jest.fn().mockImplementation( () => mockEntityInfoDispatcher );
+} );
+
 const mockEntityLabelRepository = {};
-jest.mock( '@/data-access/ForeignApiEntityLabelRepository', () => {
+jest.mock( '@/data-access/DispatchingEntityLabelRepository', () => {
 	return jest.fn().mockImplementation( () => mockEntityLabelRepository );
 } );
 
@@ -215,12 +221,18 @@ describe( 'createServices', () => {
 		const services = createServices( mwWindow, [] );
 
 		expect( services ).toBeInstanceOf( ServiceRepositories );
+
+		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			.toStrictEqual( [ 'labels' ] );
+
 		expect(
-			( ForeignApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
+			( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
 		).toBe( wgPageContentLanguage );
 
-		expect( ( ForeignApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( ( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			.toBe( mockEntityInfoDispatcher );
 		expect( services.getEntityLabelRepository() ).toBe( mockEntityLabelRepository );
 	} );
 
