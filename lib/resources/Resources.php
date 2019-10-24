@@ -103,12 +103,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'wikibase.api.RepoApiError' => $wikibaseApiPaths + [
-			'deprecated' => 'Please use the main `wikibase.api.RepoApi` module, not this alias.',
-			'dependencies' => [ 'wikibase.api.RepoApi' ],
-			'targets' => [ 'desktop', 'mobile' ]
-		],
-
 		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
 			'scripts' => [
 				'namespace.js',
