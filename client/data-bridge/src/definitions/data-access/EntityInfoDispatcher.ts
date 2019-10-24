@@ -1,6 +1,8 @@
+import DataType from '@/datamodel/DataType';
+
 export interface WellFormedResponse {
 	entities: {
-		[ entityId: string ]: EntityWithLabelData;
+		[ entityId: string ]: EntityWithLabelData | EntityResponseWithDataType;
 	};
 }
 
@@ -12,6 +14,10 @@ export interface EntityWithLabelData {
 			'for-language'?: string;
 		};
 	};
+}
+
+export interface EntityResponseWithDataType {
+	datatype: DataType;
 }
 
 export default interface EntityInfoDispatcher {
