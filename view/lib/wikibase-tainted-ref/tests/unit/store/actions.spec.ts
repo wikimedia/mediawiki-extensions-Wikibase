@@ -1,4 +1,4 @@
-import { SET_ALL_TAINTED, SET_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
+import { SET_ALL_UNTAINTED, SET_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
 import actions from '@/store/actions';
 import {
 	STATEMENT_TAINTED_STATE_INIT,
@@ -8,11 +8,11 @@ import {
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 
 describe( 'actions', () => {
-	it( `commits to ${SET_ALL_TAINTED}`, async () => {
+	it( `commits to ${SET_ALL_UNTAINTED}`, async () => {
 		const context = newMockStore( {} );
 		const payload = [ 'foo' ];
 		await ( actions as Function )()[ STATEMENT_TAINTED_STATE_INIT ]( context, payload );
-		expect( context.commit ).toBeCalledWith( SET_ALL_TAINTED, payload );
+		expect( context.commit ).toBeCalledWith( SET_ALL_UNTAINTED, payload );
 	} );
 	it( `commits to ${SET_UNTAINTED}`, async () => {
 		const context = newMockStore( {} );

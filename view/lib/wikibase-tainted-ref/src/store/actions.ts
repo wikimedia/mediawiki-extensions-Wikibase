@@ -5,7 +5,7 @@ import {
 } from '@/store/actionTypes';
 import Application from './Application';
 import { ActionContext, ActionTree } from 'vuex';
-import { SET_ALL_TAINTED, SET_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
+import { SET_ALL_UNTAINTED, SET_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
 
 export default function actions(): ActionTree<Application, Application> {
 	return {
@@ -13,7 +13,7 @@ export default function actions(): ActionTree<Application, Application> {
 			context: ActionContext<Application, Application>,
 			payload: string[],
 		): void {
-			context.commit( SET_ALL_TAINTED, payload );
+			context.commit( SET_ALL_UNTAINTED, payload );
 		},
 		[ STATEMENT_TAINTED_STATE_UNTAINT ](
 			context: ActionContext<Application, Application>,
