@@ -16,7 +16,9 @@ describe( 'MWHookHandler', () => {
 			return { add: dummyEditHook };
 		} );
 
-		const hookHandler = new MWHookHandler( mwHookRegistry );
+		const mockTaintedChecker = { check: () => true };
+
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
 		const store = new Vuex.Store( { state: { statementsTaintedState: {} } } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
@@ -24,7 +26,8 @@ describe( 'MWHookHandler', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, 'gooGuid' );
 	} );
 
-	it( 'should dispatch ${STATEMENT_TAINTED_STATE_TAINT} with statement guid on save hook firing', () => {
+	it( 'should dispatch ${STATEMENT_TAINTED_STATE_TAINT} with statement guid' +
+		'on save hook firing and checker is true', () => {
 		const dummySaveHook = ( randomFunction: Function ): Hook => {
 			randomFunction( 'Q1', 'gooGuid' );
 			return { add: jest.fn() };
@@ -34,7 +37,9 @@ describe( 'MWHookHandler', () => {
 			return { add: dummySaveHook };
 		} );
 
-		const hookHandler = new MWHookHandler( mwHookRegistry );
+		const mockTaintedChecker = { check: () => true };
+
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
 		const store = new Vuex.Store( { state: { statementsTaintedState: {} } } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
