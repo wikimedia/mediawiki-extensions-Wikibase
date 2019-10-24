@@ -2,7 +2,7 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import MWHookHandler from '@/MWHookHandler';
 import TaintedChecker from '@/TaintedChecker';
 
-const RL_COMMON_MODULE_NAME = 'wikibase.tainted-ref.common';
+const RL_COMMON_MODULE_NAME = 'wikibase.tainted-ref';
 export default async (): Promise<void> => {
 	const mwWindow = window as MwWindow;
 	if ( mwWindow.mw.config.get( 'wbTaintedReferencesEnabled' ) ) {
