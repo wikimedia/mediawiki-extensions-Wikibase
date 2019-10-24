@@ -218,7 +218,7 @@ mw.wikibase.resolvePropertyId( 'father' ) -- Returns the property id for the pro
 
 === mw.wikibase.getPropertyOrder ===
 <code>wikibase.getPropertyOrder()</code><br>
-Returns a table with the order of property IDs as provided by the page MediaWiki:Wikibase-SortedProperties. If the page does not exist, a nil value is returned.
+Returns a table with the order of property IDs as provided by the page MediaWiki:Wikibase-SortedProperties ([[d:MediaWiki:Wikibase-SortedProperties]] on Wikimedia operated sites). If the page does not exist, a nil value is returned.
 
 An example call might look like this:
 <source lang="lua">
@@ -227,7 +227,7 @@ mw.wikibase.getPropertyOrder() -- Returns a table with the order of the property
 
 === mw.wikibase.orderProperties ===
 <code>wikibase.orderProperties( tableOfPropertyIds )</code><br>
-Returns a table with the given property IDs ordered according to the page MediaWiki:Wikibase-SortedProperties.
+Returns a table with the given property IDs ordered according to the page MediaWiki:Wikibase-SortedProperties ([[d:MediaWiki:Wikibase-SortedProperties]] on Wikimedia operated sites).
 
 An example call might look like this:
 <source lang="lua">
