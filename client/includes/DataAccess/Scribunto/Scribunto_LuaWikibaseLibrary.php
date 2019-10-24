@@ -88,6 +88,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $luaFunctionCallTracker = null;
 
 	/**
+	 * @var string[]|null
+	 */
+	private $luaEntityModules = null;
+
+	/**
 	 * @return WikibaseLanguageIndependentLuaBindings
 	 */
 	private function getLanguageIndependentLuaBindings() {
@@ -383,6 +388,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getPropertyOrder' => [ $this, 'getPropertyOrder' ],
 			'orderProperties' => [ $this, 'orderProperties' ],
 			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
+			'getEntityModuleName' => [ $this, 'getEntityModuleName' ],
 		];
 
 		return $this->getEngine()->registerInterface(
@@ -788,6 +794,25 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * Get the entity module name to use for the entity with this ID.
+	 *
+	 * @param string $prefixedEntityId
+	 * @return string[]
+	 */
+	public function getEntityModuleName( $prefixedEntityId ) {
+		$this->checkType( 'getEntityModuleName', 1, $prefixedEntityId, 'string' );
+
+		try {
+			$entityId = $this->getEntityIdParser()->parse( $prefixedEntityId );
+			$type = $entityId->getEntityType();
+			$moduleName = $this->getLuaEntityModules()[$type] ?? 'mw.wikibase.entity';
+		} catch ( EntityIdParsingException $e ) {
+			$moduleName = 'mw.wikibase.entity';
+		}
+		return [ $moduleName ];
+	}
+
+	/**
 	 * @return PropertyOrderProvider
 	 */
 	private function getPropertyOrderProvider() {
@@ -800,6 +825,14 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	public function setPropertyOrderProvider( PropertyOrderProvider $propertyOrderProvider ) {
 		$this->propertyOrderProvider = $propertyOrderProvider;
+	}
+
+	private function getLuaEntityModules() {
+		if ( !$this->luaEntityModules ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$this->luaEntityModules = $wikibaseClient->getLuaEntityModules();
+		}
+		return $this->luaEntityModules;
 	}
 
 }

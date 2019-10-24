@@ -62,6 +62,8 @@ The entity types repository is an associative array mapping entity type identifi
 : Configuration context to allow instantiating a fulltext search query builder
 ; search-field-definitions (repo only)
 : Field definitions for search indexing
+; lua-entity-module (optional) (client only)
+: The name of a Lua module that should be used to represent entities of this type. The module must expose a create() function; mw.wikibase.getEntity() will call this function with a clone of the entity data and return its result. If this is not specified, the standard mw.wikibase.entity module is used.
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or WikibaseClientEntityTypes hooks to provide additional entity type definitions.
 

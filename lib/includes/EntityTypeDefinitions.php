@@ -302,4 +302,13 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'rdf-builder-label-predicates' );
 	}
 
+	/**
+	 * @return string[] An array mapping entity type identifiers
+	 * to Lua module names to represent entities of this type.
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getLuaEntityModules() {
+		return $this->getMapForDefinitionField( 'lua-entity-module' );
+	}
+
 }

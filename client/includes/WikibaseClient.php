@@ -1246,6 +1246,13 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public function getLuaEntityModules() {
+		return $this->entityTypeDefinitions->getLuaEntityModules();
+	}
+
+	/**
 	 * Returns a SerializerFactory creating serializers that generate the most compact serialization.
 	 * A factory returned has knowledge about items, properties, and the elements they are made of,
 	 * but no other entity types.
