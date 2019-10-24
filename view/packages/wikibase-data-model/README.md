@@ -17,6 +17,9 @@ the corresponding serializer, and send back to the API.
 
 ## Release notes
 
+### 6.1.0 (2019-10-24)
+* Bundle some very basic Typescript types
+
 ### 6.0.0 (2019-10-21)
 * Using CommonJS modules instead of global namespaces for all files
 
