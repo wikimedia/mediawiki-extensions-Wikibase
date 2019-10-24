@@ -850,8 +850,10 @@ return call_user_func( function() {
 
 		'wikibase.termbox.styles' => $wikibaseTermboxPaths + [
 				'styles' => [
-					'../../resources/wikibase/termbox/main.less',
 					'dist/wikibase.termbox.main.css',
+				],
+				'skinStyles' => [
+					'minerva' => '../../resources/wikibase/termbox/minerva.less',
 				],
 				'targets' => 'mobile'
 			],

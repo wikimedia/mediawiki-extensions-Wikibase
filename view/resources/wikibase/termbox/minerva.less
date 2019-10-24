@@ -1,0 +1,41 @@
+@import '_variables';
+
+.wb-entitypage {
+	.pre-content.heading-holder {
+		@minerva-default-header-top-padding: 20px; // aka @titleSectionSpacingTop in minerva.variables.less
+		@header-height-reduction: 5px;
+		padding-top: @minerva-default-header-top-padding - @header-height-reduction;
+	}
+
+	.page-actions-menu {
+		border-top: 0 none;
+	}
+
+	.page-actions-menu__list { // cf. skins.minerva.base.styles/pageactions.less
+		justify-content: flex-end; // make all actions go to the end (avoid colliding with id)
+	}
+
+	.page-actions-menu__list-item:first-child { // in contrast to minerva default first must behave like the lot of them
+		flex-grow: unset;
+		justify-content: flex-end;
+	}
+
+	.page-actions-menu__list-item#page-actions-watch { // watch star is always supposed to be the outermost action
+		order: 99;
+	}
+
+	#page-actions {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.pre-content h1 {
+		font-size: 1em;
+		color: @color-light-azureish-gray;
+	}
+
+	#bodyContent {
+		margin-top: 0.3em;
+	}
+}
