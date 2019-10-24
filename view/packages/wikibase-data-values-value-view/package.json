@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "eslint-config-wikimedia": "0.9.0",
+    "eslint-plugin-mediawiki": "^0.2.1",
     "grunt": "1.0.1",
     "grunt-banana-checker": "0.3.0",
     "grunt-eslint": "21.0.0",

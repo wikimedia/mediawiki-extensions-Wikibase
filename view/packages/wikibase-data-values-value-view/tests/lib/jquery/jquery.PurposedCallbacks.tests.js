@@ -6,7 +6,7 @@
 	'use strict';
 	/* jshint newcap: false */
 
-	var PurposedCallbacks = require( './../../../lib/jquery/jquery.PurposedCallbacks.js' );
+	var PurposedCallbacks = require( '../../../lib/jquery/jquery.PurposedCallbacks.js' );
 
 	QUnit.module( 'jquery.PurposedCallbacks' );
 

@@ -1,5 +1,8 @@
 {
 	"extends": "wikimedia",
+	"plugins": [
+		"mediawiki"
+	],
 	"env": {
 		"browser": true,
 		"jquery": true,
@@ -14,6 +17,7 @@
 		"valueParsers": false
 	},
 	"rules": {
+		"mediawiki/valid-package-file-require": "error",
 		"array-bracket-spacing": "off",
 		"comma-spacing": "off",
 		"computed-property-spacing": "off",

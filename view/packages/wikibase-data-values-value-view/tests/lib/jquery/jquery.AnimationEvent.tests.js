@@ -7,8 +7,8 @@
 	'use strict';
 	/* jshint newcap: false */
 
-	var AnimationEvent = require( './../../../lib/jquery/jquery.AnimationEvent.js' ),
-		PurposedCallbacks = require( './../../../lib/jquery/jquery.PurposedCallbacks.js' );
+	var AnimationEvent = require( '../../../lib/jquery/jquery.AnimationEvent.js' ),
+		PurposedCallbacks = require( '../../../lib/jquery/jquery.PurposedCallbacks.js' );
 
 	QUnit.module( 'jquery.AnimationEvent' );
 

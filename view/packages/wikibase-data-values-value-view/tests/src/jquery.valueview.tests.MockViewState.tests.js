@@ -6,7 +6,7 @@
 ( function( QUnit, valueview ) {
 	'use strict';
 
-	var ViewState = require( './../../src/jquery.valueview.ViewState.js' ),
+	var ViewState = require( '../../src/jquery.valueview.ViewState.js' ),
 		MockViewState = valueview.tests.MockViewState;
 
 	QUnit.module( 'jquery.valueview.MockViewState' );
