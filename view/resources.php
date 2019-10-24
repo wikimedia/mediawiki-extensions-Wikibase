@@ -126,7 +126,7 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase',
-				'wikibase.api.RepoApiError',
+				'wikibase.api.RepoApi',
 				'wikibase.datamodel', // for AliasesChanger.js
 				'wikibase.serialization',
 			]

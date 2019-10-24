@@ -212,7 +212,6 @@ return call_user_func( function() {
 				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.EntityInitializer',
 				'wikibase.api.RepoApi',
-				'wikibase.api.RepoApiError',
 				'wikibase.sites',
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.getUserLanguages',

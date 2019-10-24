@@ -141,7 +141,6 @@ return call_user_func( function() {
 				'jquery.event.special.eachchange',
 				'wikibase.sites',
 				'wikibase.api.RepoApi',
-				'wikibase.api.RepoApiError',
 			],
 			'messages' => [
 				'wikibase-error-unexpected',

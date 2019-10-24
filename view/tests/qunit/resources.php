@@ -212,7 +212,7 @@ return [
 		'dependencies' => [
 			'wikibase.view.ControllerViewFactory',
 			'jquery.wikibase.wbtooltip',
-			'wikibase.api.RepoApiError',
+			'wikibase.api.RepoApi',
 			'wikibase.view.__namespace',
 		]
 	],
