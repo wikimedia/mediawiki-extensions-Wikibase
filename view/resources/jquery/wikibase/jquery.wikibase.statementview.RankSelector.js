@@ -215,11 +215,19 @@
 					.data( self.widgetName + '-menuitem-rank', rank )
 					.append(
 						$( '<a>' )
-						.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
-						.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
-						.on( 'click.' + self.widgetName, function ( event ) {
-							event.preventDefault();
-						} )
+							// The following messages are used here:
+							// * wikibase-statementview-rank-preferred
+							// * wikibase-statementview-rank-normal
+							// * wikibase-statementview-rank-deprecated
+							.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
+							// The following messages are used here:
+							// * wikibase-statementview-rank-tooltip-preferred
+							// * wikibase-statementview-rank-tooltip-normal
+							// * wikibase-statementview-rank-tooltip-deprecated
+							.attr( 'title', mw.msg( 'wikibase-statementview-rank-tooltip-' + rankName ) )
+							.on( 'click.' + self.widgetName, function ( event ) {
+								event.preventDefault();
+							} )
 					)
 				);
 			} );
@@ -286,6 +294,10 @@
 				this.$icon.toggleClass( this.widgetFullName + '-' + rankName, selected );
 
 				if ( selected ) {
+					// The following messages are used here:
+					// * wikibase-statementview-rank-preferred
+					// * wikibase-statementview-rank-normal
+					// * wikibase-statementview-rank-deprecated
 					this.$icon.attr( 'title', mw.msg( 'wikibase-statementview-rank-' + rankName ) );
 				}
 			}

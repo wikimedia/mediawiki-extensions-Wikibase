@@ -168,10 +168,13 @@
 					.data( 'snaktypeselector-menuitem-type', type )
 					.append(
 						$( '<a>' )
-						.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
-						.on( 'click', function ( event ) {
-							event.preventDefault();
-						} )
+							// The following messages are used here:
+							// * wikibase-snakview-snaktypeselector-somevalue
+							// * wikibase-snakview-snaktypeselector-novalue
+							.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
+							.on( 'click', function ( event ) {
+								event.preventDefault();
+							} )
 					)
 				);
 			} );

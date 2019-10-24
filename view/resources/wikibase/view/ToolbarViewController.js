@@ -140,12 +140,13 @@ module.exports = ( function ( wb ) {
 			return;
 		}
 
-		var self = this,
-			messageKey = mw.config.get( 'wgEditSubmitButtonLabelPublish' )
-				? 'wikibase-publish-inprogress'
-				: 'wikibase-save-inprogress';
+		var self = this;
 
-		this._toolbar.toggleActionMessage( mw.msg( messageKey ) );
+		this._toolbar.toggleActionMessage( mw.msg(
+			mw.config.get( 'wgEditSubmitButtonLabelPublish' )
+				? 'wikibase-publish-inprogress'
+				: 'wikibase-save-inprogress'
+		) );
 		this._model.save( this._view.value(), this._value ).done( function ( savedValue ) {
 			self.setValue( savedValue );
 			self._view.value( savedValue );
