@@ -99,6 +99,8 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			static::getEntityAccessLimit()
 		);
 
+		$settings->setSetting( 'repoDatabase', false );
+
 		$testHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$testHelper->setUp();
 	}
