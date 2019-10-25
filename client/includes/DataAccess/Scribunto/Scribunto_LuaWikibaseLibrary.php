@@ -12,6 +12,7 @@ use ScribuntoException;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\Client\WikibaseClient;
@@ -156,7 +157,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getUsageAccumulator() {
 		if ( $this->usageAccumulator === null ) {
 			$parserOutput = $this->getParser()->getOutput();
-			$this->usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput );
+			$this->usageAccumulator = new ParserOutputUsageAccumulator(
+				$parserOutput,
+				new EntityUsageFactory( WikibaseClient::getDefaultInstance()->getEntityIdParser() )
+			);
 		}
 
 		return $this->usageAccumulator;

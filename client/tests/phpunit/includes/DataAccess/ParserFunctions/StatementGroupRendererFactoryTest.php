@@ -14,7 +14,9 @@ use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\VariantsAwareRenderer;
 use Wikibase\Client\DataAccess\SnaksFinder;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -135,7 +137,10 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testTitleUsageTracking( $wikitextType, $expectedWikitext, $titleUsageExpected ) {
 		$parser = $this->getParser();
-		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
+		$usageAccumulator = new ParserOutputUsageAccumulator(
+			$parser->getOutput(),
+			new EntityUsageFactory( new BasicEntityIdParser() )
+		);
 
 		$this->getStatementGroupRendererFactory()
 			->newRendererFromParser( $parser, $wikitextType )
@@ -161,7 +166,10 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
 		$renderer = $rendererFactory->newRendererFromParser( $parser, 'rich-wikitext' );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
+		$usageAccumulator = new ParserOutputUsageAccumulator(
+			$parser->getOutput(),
+			new EntityUsageFactory( new BasicEntityIdParser() )
+		);
 
 		$renderer->render( new ItemId( 'Q1' ), 'P1' );
 
@@ -207,6 +215,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				new ItemIdParser(),
 				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
+			new EntityUsageFactory( new BasicEntityIdParser() ),
 			$allowDataAccessInUserLanguage
 		);
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
@@ -235,6 +244,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 				new ItemIdParser(),
 				$this->getLanguageFallbackLabelDescriptionLookupFactory()
 			),
+			new EntityUsageFactory( new BasicEntityIdParser() ),
 			$allowDataAccessInUserLanguage
 		);
 	}

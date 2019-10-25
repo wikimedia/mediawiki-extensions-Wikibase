@@ -8,6 +8,7 @@ use MediaWiki\MediaWikiServices;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -172,7 +173,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return ParserOutputUsageAccumulator
 	 */
 	public function getUsageAccumulator() {
-		return new ParserOutputUsageAccumulator( $this->getParser()->getOutput() );
+		return new ParserOutputUsageAccumulator(
+			$this->getParser()->getOutput(),
+			new EntityUsageFactory( WikibaseClient::getDefaultInstance()->getEntityIdParser() )
+		);
 	}
 
 	/**

@@ -23,12 +23,18 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	private $parserOutput;
 
 	/**
+	 * @var EntityUsageFactory
+	 */
+	private $entityUsageFactory;
+
+	/**
 	 * @var UsageDeduplicator
 	 */
 	private $usageDeduplicator;
 
 	public function __construct(
 		ParserOutput $parserOutput,
+		EntityUsageFactory $entityUsageFactory = null,
 		UsageDeduplicator $deduplicator = null
 	) {
 		$this->parserOutput = $parserOutput;
@@ -37,6 +43,14 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 			'entityUsageModifierLimits'
 		);
 		$this->usageDeduplicator = $deduplicator ?: new UsageDeduplicator( $usageModifierLimits );
+		$this->entityUsageFactory = $entityUsageFactory;
+
+		// FIXME: $entityUsageFactory is temporarily optional, as Lexeme directly constructs this
+		if ( $entityUsageFactory === null ) {
+			$this->entityUsageFactory = new EntityUsageFactory(
+				WikibaseClient::getDefaultInstance()->getEntityIdParser()
+			);
+		}
 	}
 
 	/**
@@ -47,10 +61,8 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	public function addUsage( EntityUsage $usage ) {
 		$usages = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
 		$key = $usage->getIdentityString();
-		if ( !isset( $usages[$key] ) ) {
-			$usages[$key] = $usage;
-			$this->parserOutput->setExtensionData( self::EXTENSION_DATA_KEY, $usages );
-		}
+		$usages[$key] = null;
+		$this->parserOutput->setExtensionData( self::EXTENSION_DATA_KEY, $usages );
 	}
 
 	/**
@@ -59,7 +71,20 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	 * @return EntityUsage[]
 	 */
 	public function getUsages() {
-		$usages = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY );
+		$usageIdentities = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
+
+		$usages = [];
+		foreach ( $usageIdentities as $usageIdentity => $value ) {
+			if ( $value instanceof EntityUsage ) {
+				// TODO: Remove this after 2019-12-12
+				// Backwards compat: We used to store actual EntityUsage objects in there
+				$usages[] = $value;
+
+				continue;
+			}
+			$usages[] = $this->entityUsageFactory->newFromIdentity( $usageIdentity );
+		}
+
 		if ( $usages ) {
 			return $this->usageDeduplicator->deduplicate( $usages );
 		}

@@ -16,6 +16,7 @@ use User;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
@@ -50,13 +51,21 @@ class DataUpdateHookHandlers {
 	private $usageLookup;
 
 	/**
+	 * @var EntityUsageFactory
+	 */
+	private $entityUsageFactory;
+
+	/**
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
 		return new self(
-			WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater(),
+			$wikibaseClient->getStore()->getUsageUpdater(),
 			JobQueueGroup::singleton(),
-			WikibaseClient::getDefaultInstance()->getStore()->getUsageLookup()
+			$wikibaseClient->getStore()->getUsageLookup(),
+			new EntityUsageFactory( $wikibaseClient->getEntityIdParser() )
 		);
 	}
 
@@ -126,11 +135,13 @@ class DataUpdateHookHandlers {
 	public function __construct(
 		UsageUpdater $usageUpdater,
 		JobQueueGroup $jobScheduler,
-		UsageLookup $usageLookup
+		UsageLookup $usageLookup,
+		EntityUsageFactory $entityUsageFactory
 	) {
 		$this->usageUpdater = $usageUpdater;
 		$this->jobScheduler = $jobScheduler;
 		$this->usageLookup = $usageLookup;
+		$this->entityUsageFactory = $entityUsageFactory;
 	}
 
 	/**
@@ -143,7 +154,7 @@ class DataUpdateHookHandlers {
 		$title = $linksUpdate->getTitle();
 
 		$parserOutput = $linksUpdate->getParserOutput();
-		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
 
 		// Please note that page views that happen between the page save but before this is run will have
 		// their usages removed (as we might add the usages via doParserCacheSaveComplete before this is run).
@@ -159,7 +170,7 @@ class DataUpdateHookHandlers {
 	 */
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
 		DeferredUpdates::addCallableUpdate( function() use ( $parserOutput, $title ) {
-			$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+			$usageAcc = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
 
 			$usages = $this->reindexEntityUsages( $usageAcc->getUsages() );
 			if ( $usages === [] ) {

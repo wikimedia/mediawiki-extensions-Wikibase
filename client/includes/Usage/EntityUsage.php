@@ -117,7 +117,7 @@ class EntityUsage {
 	 */
 	public function __construct( EntityId $entityId, $aspect, $modifier = null ) {
 		if ( !array_key_exists( $aspect, self::$aspects ) ) {
-			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants!' );
+			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants, "' . $aspect . '" given!' );
 		}
 
 		$this->entityId = $entityId;

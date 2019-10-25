@@ -10,7 +10,9 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
@@ -76,8 +78,13 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
 			$this->mockRepo,
 			$this->mockRepo,
+			$this->newEntityUsageFactory(),
 			'srwiki'
 		);
+	}
+
+	private function newEntityUsageFactory(): EntityUsageFactory {
+		return new EntityUsageFactory( new BasicEntityIdParser() );
 	}
 
 	/**
@@ -153,7 +160,10 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
-		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+		$usageAcc = new ParserOutputUsageAccumulator(
+			$parserOutput,
+			$this->newEntityUsageFactory()
+		);
 		$usage = $usageAcc->getUsages();
 		$expected = new EntityUsage( $id, $aspect );
 
@@ -265,6 +275,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
+			$this->newEntityUsageFactory(),
 			'srwiki',
 			$logger
 		);
@@ -292,6 +303,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			new MockRepository(),
+			$this->newEntityUsageFactory(),
 			'srwiki',
 			$logger
 		);
