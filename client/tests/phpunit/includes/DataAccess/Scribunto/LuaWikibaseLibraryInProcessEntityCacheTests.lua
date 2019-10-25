@@ -11,17 +11,21 @@ function testGetEntities()
 	-- Get Q1-Q18 and Q199024 (19 entities)
 	for i = 1, 18 do
 		mw.wikibase.getEntity( 'Q' .. i )
+		-- Always load Q2 to keep it on top of the cache
+		mw.wikibase.getEntity( 'Q2' )
 	end
 	mw.wikibase.getEntity( 'Q199024' )
 
-	-- These are in memory cached now
+	-- These are in memory cached now (Q3-Q5 have been purged)
+	mw.wikibase.getEntity( 'Q2' )
+	mw.wikibase.getEntity( 'Q6' )
 	mw.wikibase.getEntity( 'Q16' )
 	mw.wikibase.getEntity( 'Q12' )
 	mw.wikibase.getEntity( 'Q13' )
 	mw.wikibase.getEntity( 'Q14' )
 
-	-- Q1 is no longer cached, thus we just loaded 20 entities
-	mw.wikibase.getEntity( 'Q1' )
+	-- Q4 is no longer cached, thus we just loaded exactly 20 entities
+	mw.wikibase.getEntity( 'Q4' )
 
 	-- Make sure this points to the right table (cached)
 	return mw.wikibase.getEntity( 'Q199024' ).id

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use ReflectionClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -23,6 +24,34 @@ class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_Lua
 
 	protected static $moduleName = 'LuaWikibaseLibraryInProcessEntityCacheTests';
 
+	public function provideLuaData() {
+		if ( ( new ReflectionClass( parent::class ) )->hasMethod( 'provideLuaData' ) ) {
+			return parent::provideLuaData();
+		}
+		return [];
+	}
+
+	/**
+	 * @dataProvider provideLuaData
+	 * @param string $key
+	 * @param string $testName
+	 * @param mixed $expected
+	 */
+	public function testLua( $key, $testName, $expected ) {
+		$entityLookup = self::getEntityLookup();
+
+		$this->registerMockObject( $entityLookup );
+		$entityLookup->expects( $this->exactly( 20 ) )
+			->method( 'getEntity' )
+			->will( $this->returnCallback(
+				function( ItemId $id ) {
+					return new Item( $id );
+				}
+			) );
+
+		parent::testLua( $key, $testName, $expected );
+	}
+
 	protected function getTestModules() {
 		return parent::getTestModules() + [
 			'LuaWikibaseLibraryInProcessEntityCacheTests' => __DIR__ . '/LuaWikibaseLibraryInProcessEntityCacheTests.lua',
@@ -35,14 +64,10 @@ class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_Lua
 	protected static function getEntityLookup() {
 		$phpunit = new self();
 
-		$entityLookup = $phpunit->createMock( EntityLookup::class );
-		$entityLookup->expects( $phpunit->exactly( 20 ) )
-			->method( 'getEntity' )
-			->will( $phpunit->returnCallback(
-				function( ItemId $id ) {
-					return new Item( $id );
-				}
-			) );
+		static $entityLookup = null;
+		if ( !$entityLookup ) {
+			$entityLookup = $phpunit->createMock( EntityLookup::class );
+		}
 
 		return $entityLookup;
 	}
