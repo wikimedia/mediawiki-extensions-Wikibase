@@ -1,7 +1,7 @@
 {
         "extends": "wikimedia",
         "plugins": [
-                "resource-loader"
+                "mediawiki"
         ],
         "env": {
                 "browser": true,
@@ -13,7 +13,7 @@
 		"util": false
 	},
 	"rules": {
-		"resource-loader/valid-package-file-require": "error",
+		"mediawiki/valid-package-file-require": "error",
 		"computed-property-spacing": "off",
 		"indent": "off",
 		"keyword-spacing": "off",
