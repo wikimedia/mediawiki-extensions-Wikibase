@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use \Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * Interface for creating meta tags (e.g. title and description) for all different kinds of EntityDocument.

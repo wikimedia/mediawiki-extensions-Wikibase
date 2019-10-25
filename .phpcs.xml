@@ -13,7 +13,6 @@
 		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceSameLine" />
 		<exclude name="PSR2.Classes.ClassDeclaration.FirstInterfaceSameLine" />
 		<exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterHint" />
-		<exclude name="PSR12.Files.ImportStatement.LeadingSlash" />
 	</rule>
 
 	<rule ref="Generic.Files.LineLength">
