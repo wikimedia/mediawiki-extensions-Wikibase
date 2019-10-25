@@ -190,6 +190,8 @@ function wikibase.setupInterface()
 		local cacheKey = entityId .. '-' .. propertyId .. '-' .. rank
 		local statements = getFromCache( statementCache, cacheKey )
 		if statements == nil then
+			php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.cache_miss' )
+
 			statements = php.getEntityStatements( entityId, propertyId, rank )
 			addToCache( statementCache, maxStatementCacheSize, cacheKey, statements )
 		end
