@@ -4,12 +4,15 @@
 			"Flixtey",
 			"Mybluberet",
 			"Amire80",
-			"Owula kpakpo"
+			"Owula kpakpo",
+			"Zimosa"
 		]
 	},
+	"tooltip-t-wikibase": "Gbɛtsɔɔmɔ kɛboteɔ saji atoohe",
 	"wikibase-comment-update": "{{WBREPONAME}} atsake nii lɛ",
 	"wikibase-dataitem": "{{WBREPONAME}} nii",
 	"wikibase-editlinks": "Tsakemɔ tsalɔi",
+	"wikibase-editlinkstitle": "Tsakemɔ wiemɔisrɔtoi agbɛtsɔɔmɔ",
 	"wikibase-rc-hide-wikidata-hide": "Kɛto",
 	"wikibase-rc-hide-wikidata-show": "Tsɔɔmɔ",
 	"wikibase-rc-wikibase-edit-letter": "D",
