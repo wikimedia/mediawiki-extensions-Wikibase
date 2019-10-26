@@ -64,8 +64,6 @@ module.exports = function ( grunt ) {
 					'node_modules/wikibase-data-values//src/valueParsers/parsers/*.js',
 					'node_modules/wikibase-data-values//src/values/*.js',
 
-					'tests/phantomjs.bootstrap.js',
-
 					'src/jquery.valueview.valueview.js',
 					'src/*.js',
 					'src/ExpertExtender/ExpertExtender.js',
