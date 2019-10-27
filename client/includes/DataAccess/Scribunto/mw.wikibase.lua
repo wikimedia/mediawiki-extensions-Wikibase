@@ -15,22 +15,54 @@ local util = require 'libraryUtil'
 local checkType = util.checkType
 local checkTypeMulti = util.checkTypeMulti
 
-local cacheSize = 15 -- Size of the LRU cache being used to cache entities
-local cacheOrder = {}
+local maxEntityCacheSize = 15 -- Size of the LRU cache being used to cache entities
 local entityCache = {}
+
+-- Cache a given value (can also be false, in case it doesn't exist).
+--
+-- @param cache
+-- @param maxCacheSize
+-- @param key
+-- @param value
+local addToCache = function( cache, maxCacheSize, key, value )
+	if type( cache.data ) ~= 'table' then
+		cache.data = {}
+		cache.order = {}
+	end
+
+	if #cache.order == maxCacheSize then
+		local toRemove = table.remove( cache.order, maxCacheSize )
+		cache[ toRemove ] = nil
+	end
+
+	table.insert( cache.order, 1, key )
+	cache[ key ] = value
+end
+
+-- Retrieve a value from a cache. Will return nil in case of a cache miss.
+--
+-- @param cache
+-- @param key
+local getFromCache = function( cache, key )
+	if cache[ key ] ~= nil then
+		for cacheOrderId, cacheOrderKey in pairs( cache.order ) do
+			if cacheOrderKey == key then
+				table.remove( cache.order, cacheOrderId )
+				break
+			end
+		end
+		table.insert( cache.order, 1, key )
+	end
+
+	return cache[ key ]
+end
 
 -- Cache a given entity (can also be false, in case it doesn't exist).
 --
 -- @param entityId
 -- @param entity
 local cacheEntity = function( entityId, entity )
-	if #cacheOrder == cacheSize then
-		local entityIdToRemove = table.remove( cacheOrder, cacheSize )
-		entityCache[ entityIdToRemove ] = nil
-	end
-
-	table.insert( cacheOrder, 1, entityId )
-	entityCache[ entityId ] = entity
+	addToCache( entityCache, maxEntityCacheSize, entityId, entity )
 end
 
 -- Retrieve an entity. Will return false in case it's known to not exist
@@ -38,17 +70,7 @@ end
 --
 -- @param entityId
 local getCachedEntity = function( entityId )
-	if entityCache[ entityId ] ~= nil then
-		for cacheOrderId, cacheOrderEntityId in pairs( cacheOrder ) do
-			if cacheOrderEntityId == entityId then
-				table.remove( cacheOrder, cacheOrderId )
-				break
-			end
-		end
-		table.insert( cacheOrder, 1, entityId )
-	end
-
-	return entityCache[ entityId ]
+	return getFromCache( entityCache, entityId )
 end
 
 function wikibase.setupInterface()
