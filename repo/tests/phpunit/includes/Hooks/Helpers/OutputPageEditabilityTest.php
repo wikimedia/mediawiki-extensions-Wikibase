@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Hooks\Helpers;
 
 use DerivativeContext;
+use FauxResponse;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
@@ -45,6 +46,8 @@ class OutputPageEditabilityTest extends TestCase {
 			->method( 'getCheck' )
 			->with( 'diff' )
 			->willReturn( true );
+		$request->method( 'response' )
+			->willReturn( new FauxResponse );
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 		$context->setTitle( new Title() );
@@ -160,6 +163,8 @@ class OutputPageEditabilityTest extends TestCase {
 			->method( 'getCheck' )
 			->with( 'diff' )
 			->willReturn( false );
+		$request->method( 'response' )
+			->willReturn( new FauxResponse );
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
 		$context->setTitle( $title );
