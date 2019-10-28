@@ -27,6 +27,7 @@
 			}
 		],
 		"max-len": "off",
+		"mediawiki/valid-package-file-require": "error",
 		"new-cap": "off",
 		"no-underscore-dangle": "off",
 		"no-use-before-define": [
@@ -53,6 +54,7 @@
 		}
 	},
 	"plugins": [
-		"compat"
+		"compat",
+		"mediawiki"
 	]
 }
