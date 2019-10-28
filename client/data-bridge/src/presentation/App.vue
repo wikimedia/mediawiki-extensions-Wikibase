@@ -1,6 +1,6 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
-		<ProcessDialogHeader :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
+		<ProcessDialogHeader class="wb-db-app__header" :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
 			<template v-slot:primaryAction>
 				<EventEmittingButton
 					:message="$messages.get( publishOrSave )"
@@ -20,11 +20,13 @@
 			</template>
 		</ProcessDialogHeader>
 
-		<ErrorWrapper v-if="hasError" />
-		<component
-			:is="isInit ? 'DataBridge' : 'Initializing'"
-			v-else
-		/>
+		<div class="wb-db-app__body">
+			<ErrorWrapper v-if="hasError" />
+			<component
+				:is="isInit ? 'DataBridge' : 'Initializing'"
+				v-else
+			/>
+		</div>
 	</div>
 </template>
 
@@ -107,14 +109,25 @@ ol { // overcome very strong selector, e.g. .content ul li
 }
 
 .wb-db-app {
-	height: 100%;
 	font-family: $font-family-system-sans;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #2c3e50;
+	overflow: hidden;
 
-	@include media-breakpoint-up(breakpoint) {
-		height: 448px;
+	&__header {
+		height: $size-dialog-bar--desktop;
+		overflow: hidden;
+	}
+
+	&__body {
+		position: absolute;
+		top: $size-dialog-bar--desktop;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 }
 </style>

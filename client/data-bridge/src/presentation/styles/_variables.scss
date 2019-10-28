@@ -9,7 +9,7 @@ $base-font-size-browser: 16px; // assumed browser default
 $base-font-size-desired-factor: 0.875;
 $base-font-size-desired: $base-font-size-browser * $base-font-size-desired-factor; // i.e. 14px
 
-$size-dialog-bar--desktop: px-to-em( 40px );
+$size-dialog-bar--desktop: 40px;
 $font-size-dialog-process-title: 1.1em;
 
 $padding-panel-form: px-to-em( 16px );

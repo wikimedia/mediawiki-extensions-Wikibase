@@ -29,9 +29,10 @@ export default function prepareContainer( OO: MwWindowOO, $: JQueryStatic, id: s
 		this.$body.append( this.content.$element );
 	};
 	BridgeDialog.prototype.getBodyHeight = function (): number {
-		return this.content.$element.outerHeight( true );
+		return 448;
 	};
 	const bridgeDialog = new BridgeDialog( {
+		classes: [ 'wb-db-dialog' ],
 		size: 'medium',
 	} );
 	// Create and append a window manager, which opens and closes the window.

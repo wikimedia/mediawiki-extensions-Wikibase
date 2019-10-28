@@ -40,7 +40,6 @@ export default class DataBridge extends Vue {
 
 <style lang="scss">
 .wb-db-bridge {
-	@include dialogBody();
 	padding: $padding-panel-form;
 }
 </style>

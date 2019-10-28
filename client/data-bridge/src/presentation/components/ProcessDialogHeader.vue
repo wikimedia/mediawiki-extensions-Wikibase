@@ -31,7 +31,8 @@ export default class ProcessDialogHeader extends Vue {
 .wb-ui-processdialog-header {
 	display: flex;
 	justify-content: space-between;
-	min-height: $size-dialog-bar--desktop;
+	box-sizing: border-box;
+	border-bottom: 1px solid $wmui-color-base70;
 
 	&__title {
 		display: inline-flex;

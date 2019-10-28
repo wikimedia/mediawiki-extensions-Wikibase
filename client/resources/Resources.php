@@ -54,6 +54,7 @@ return call_user_func( function() {
 					[
 						'styles' => [
 							'edit-links.css',
+							'box-layout.css',
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
