@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
-use PHPUnit4And6Compat;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\Test\StringValueParserTest;
@@ -21,7 +20,7 @@ use Wikibase\Repo\Parsers\DateFormatParser;
  * @author Thiemo Kreuz
  */
 class DateFormatParserTest extends StringValueParserTest {
-	use PHPUnit4And6Compat;
+	use PHPUnit4CompatTrait;
 
 	/**
 	 * @see ValueParserTestBase::getInstance

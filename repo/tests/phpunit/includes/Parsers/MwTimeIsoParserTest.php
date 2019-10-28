@@ -6,7 +6,6 @@ use DataValues\TimeValue;
 use Language;
 use LanguageFactory;
 use MediaWiki\MediaWikiServices;
-use PHPUnit4And6Compat;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use ValueParsers\Test\StringValueParserTest;
@@ -24,7 +23,7 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
  * @author Marius Hoch
  */
 class MwTimeIsoParserTest extends StringValueParserTest {
-	use PHPUnit4And6Compat;
+	use PHPUnit4CompatTrait;
 
 	/**
 	 * @see ValueParserTestBase::getInstance
