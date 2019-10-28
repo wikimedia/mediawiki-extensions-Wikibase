@@ -270,5 +270,6 @@
 	"action-item-merge": "fletta saman element",
 	"right-item-merge": "Fletta saman element",
 	"action-property-create": "oppretta eigenskapar",
-	"right-property-create": "Oppretta eigenskapar"
+	"right-property-create": "Oppretta eigenskapar",
+	"wikibase-pageinfo-subscription": "Wikiar som tingar denne eininga"
 }

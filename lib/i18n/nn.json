@@ -131,6 +131,7 @@
 	"wikibase-item-summary-wbeditentity-create": "Oppretta eit nytt element",
 	"wikibase-item-summary-wbeditentity-create-item": "Oppretta eit nytt element",
 	"wikibase-item-summary-wbeditentity-update": "Oppdaterte eit element",
+	"wikibase-item-summary-wbeditentity-update-languages": "Endra merkelapp, skildring og/eller tilleggsnamn for $3 {{PLURAL:$3|språk}}",
 	"wikibase-item-summary-wbeditentity-override": "Overstyrte eit element",
 	"wikibase-item-summary-wblinktitles-create": "Oppretta elementet for å kopla saman sidene",
 	"wikibase-item-summary-wblinktitles-connect": "La til ei språklenkje for å kopla sidene",

@@ -7,5 +7,7 @@
 	},
 	"wikibase-edit": "عدل",
 	"wikibase-add": "زيد",
-	"wikibase-sitelinks-special": "مواقع أخرى"
+	"wikibase-description-empty": "ما كاين حتى شي وصف",
+	"wikibase-sitelinks-special": "مواقع أخرى",
+	"wikibase-statementview-rank-normal": "ترتيب طبيعي"
 }
