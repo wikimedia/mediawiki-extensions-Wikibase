@@ -258,7 +258,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		yield 'enabled' => [
 			[ 'wikibase.client.data-bridge.init' ],
-			[],
+			[ 'wikibase.client.data-bridge.externalModifiers' ],
 			true, // data bridge enabled
 			true, // Wikibase enabled
 		];
