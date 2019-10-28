@@ -122,7 +122,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->writer = $writer;
 		$this->produceWhat = $flavor;
-		$this->dedupeBag = $dedupeBag ?: new HashDedupeBag();
+		$this->dedupeBag = $dedupeBag;
 		$this->titleLookup = $titleLookup;
 
 		// XXX: move construction of sub-builders to a factory class.

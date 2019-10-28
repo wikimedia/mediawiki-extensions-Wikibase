@@ -202,6 +202,7 @@ class BulkSubscriptionUpdater {
 		}
 
 		$res = $dbr->select(
+			// @phan-suppress-next-line PhanAccessClassConstantInternal
 			EntityUsageTable::DEFAULT_TABLE_NAME,
 			[ 'DISTINCT eu_entity_id' ],
 			$continuationCondition,

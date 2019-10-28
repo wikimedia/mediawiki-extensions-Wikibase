@@ -75,8 +75,6 @@ if ( is_dir( 'vendor' ) ) {
 	$cfg['exclude_analysis_directory_list'][] = 'vendor';
 }
 
-$cfg['redundant_condition_detection'] = false;
-
 /*
  * NOTE: adding things here should be meant as a last resort.
  * Inline, method-docblock or file-wide suppression is to be preferred.
@@ -91,7 +89,6 @@ $cfg['suppress_issue_types'] = array_merge(
 		// approximate error count: 168
 		"PhanUndeclaredMethod",
 
-		"PhanAccessClassConstantInternal",
 		"PhanTypeArraySuspiciousNullable",
 
 		'PhanPluginDuplicateConditionalNullCoalescing',
