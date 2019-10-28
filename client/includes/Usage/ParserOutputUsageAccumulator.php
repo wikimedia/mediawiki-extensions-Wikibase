@@ -47,8 +47,10 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 	public function addUsage( EntityUsage $usage ) {
 		$usages = $this->parserOutput->getExtensionData( self::EXTENSION_DATA_KEY ) ?: [];
 		$key = $usage->getIdentityString();
-		$usages[$key] = $usage;
-		$this->parserOutput->setExtensionData( self::EXTENSION_DATA_KEY, $usages );
+		if ( !isset( $usages[$key] ) ) {
+			$usages[$key] = $usage;
+			$this->parserOutput->setExtensionData( self::EXTENSION_DATA_KEY, $usages );
+		}
 	}
 
 	/**
