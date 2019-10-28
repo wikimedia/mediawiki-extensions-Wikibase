@@ -18,6 +18,9 @@ local checkTypeMulti = util.checkTypeMulti
 local maxEntityCacheSize = 15 -- Size of the LRU cache being used to cache entities
 local entityCache = {}
 
+local maxStatementCacheSize = 50 -- Size of the LRU cache being used to cache statements
+local statementCache = {}
+
 -- Cache a given value (can also be false, in case it doesn't exist).
 --
 -- @param cache
@@ -184,9 +187,16 @@ function wikibase.setupInterface()
 		checkType( funcName, 1, entityId, 'string' )
 		checkType( funcName, 2, propertyId, 'string' )
 
-		local statements = php.getEntityStatements( entityId, propertyId, rank )
+		local cacheKey = entityId .. '-' .. propertyId .. '-' .. rank
+		local statements = getFromCache( statementCache, cacheKey )
+		if statements == nil then
+			statements = php.getEntityStatements( entityId, propertyId, rank )
+			addToCache( statementCache, maxStatementCacheSize, cacheKey, statements )
+		end
+
 		if statements and statements[propertyId] then
-			return statements[propertyId]
+			-- Use a clone here, so that users can't modify the cached statement
+			return mw.clone( statements[propertyId] )
 		end
 
 		return {}
