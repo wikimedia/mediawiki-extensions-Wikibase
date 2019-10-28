@@ -91,6 +91,10 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			__METHOD__
 		);
 
+		if ( $potentiallyUnusedTextInLangIds === [] ) {
+			return;
+		}
+
 		$stillUsedTextInLangIds = $this->dbw->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_text_in_lang_id',
@@ -159,6 +163,10 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			[ 'wbxl_id' => $textInLangIds ],
 			__METHOD__
 		);
+
+		if ( $potentiallyUnusedTextIds === [] ) {
+			return;
+		}
 
 		$stillUsedTextIds = $this->dbw->selectFieldValues(
 			'wbt_text_in_lang',
