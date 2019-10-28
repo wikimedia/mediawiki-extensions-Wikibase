@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use IContextSource;
 use OutputPage;
+use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -54,6 +55,10 @@ class OutputPageEntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		$context->expects( $this->any() )
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
+		$context->method( 'getRequest' )
+			->willReturn( RequestContext::getMain()->getRequest() );
+		$context->method( 'getConfig' )
+			->willReturn( RequestContext::getMain()->getConfig() );
 
 		$outputPage = new OutputPage( $context );
 		$outputPageEntityId = clone $outputPage;
