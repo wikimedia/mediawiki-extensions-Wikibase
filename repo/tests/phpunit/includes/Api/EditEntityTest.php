@@ -502,9 +502,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 * @return User
 	 */
 	private function createUserWithGroup( $groupName ) {
-		$user = $this->createTestUser()->getUser();
-		$user->addGroup( $groupName );
-		return $user;
+		return $this->getTestUser( [ 'wbeditor', $groupName ] )->getUser();
 	}
 
 	private function addSiteLink( $id ) {
