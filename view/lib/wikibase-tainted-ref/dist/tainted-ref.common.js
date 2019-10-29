@@ -4721,10 +4721,14 @@ function _defineProperty(obj, key, value) {
 var STATEMENT_TAINTED_STATE_INIT = 'initTaintedState';
 var STATEMENT_TAINTED_STATE_TAINT = 'taintTaintedState';
 var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
+var POPPER_SHOW = 'showPopper';
+var POPPER_HIDE = 'hidePopper';
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var SET_ALL_UNTAINTED = 'setAllUntainted';
 var SET_TAINTED = 'setTainted';
 var SET_UNTAINTED = 'setUntainted';
+var SET_POPPER_HIDDEN = 'setPopperHidden';
+var SET_POPPER_VISIBLE = 'setPopperVisible';
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -4738,6 +4742,10 @@ function actions() {
     context.commit(SET_UNTAINTED, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_TAINT, function (context, payload) {
     context.commit(SET_TAINTED, payload);
+  }), _defineProperty(_ref, POPPER_HIDE, function (context, payload) {
+    context.commit(SET_POPPER_HIDDEN, payload);
+  }), _defineProperty(_ref, POPPER_SHOW, function (context, payload) {
+    context.commit(SET_POPPER_VISIBLE, payload);
   }), _ref;
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
@@ -4756,6 +4764,10 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED,
   state.statementsTaintedState[payload] = true;
 }), _defineProperty(_mutations, SET_UNTAINTED, function (state, payload) {
   state.statementsTaintedState[payload] = false;
+}), _defineProperty(_mutations, SET_POPPER_HIDDEN, function (state, payload) {
+  state.statementsPopperIsOpen[payload] = false;
+}), _defineProperty(_mutations, SET_POPPER_VISIBLE, function (state, payload) {
+  state.statementsPopperIsOpen[payload] = true;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/getters.ts
 var getters = {
