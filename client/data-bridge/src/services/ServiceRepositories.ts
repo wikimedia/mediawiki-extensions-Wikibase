@@ -4,6 +4,7 @@ import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoReposi
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 
 export default class ServiceRepositories {
 	private readingEntityRepository?: ReadingEntityRepository;
@@ -12,6 +13,7 @@ export default class ServiceRepositories {
 	private entityLabelRepository?: EntityLabelRepository;
 	private messagesRepository?: MessagesRepository;
 	private wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
+	private tracker?: BridgeTracker;
 
 	public setReadingEntityRepository( lookup: ReadingEntityRepository ): void {
 		this.readingEntityRepository = lookup;
@@ -82,6 +84,18 @@ export default class ServiceRepositories {
 			return this.wikibaseRepoConfigRepository;
 		} else {
 			throw new Error( 'WikibaseRepoConfigRepository is undefined' );
+		}
+	}
+
+	public setTracker( tracker: BridgeTracker ): void {
+		this.tracker = tracker;
+	}
+
+	public getTracker(): BridgeTracker {
+		if ( this.tracker ) {
+			return this.tracker;
+		} else {
+			throw new Error( 'Tracker is undefined' );
 		}
 	}
 }

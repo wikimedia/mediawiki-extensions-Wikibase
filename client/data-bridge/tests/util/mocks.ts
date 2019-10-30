@@ -101,6 +101,7 @@ export function mockMwEnv(
 		language: {
 			bcp47: jest.fn(),
 		},
+		track: jest.fn(),
 	};
 	( window as MwWindow ).$ = new ( jest.fn() )();
 	( window as MwWindow ).$.uls = {

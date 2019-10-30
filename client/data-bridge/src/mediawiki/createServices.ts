@@ -6,6 +6,8 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
+import EventTracker from '@/mediawiki/facades/EventTracker';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceRepositories {
 	const services = new ServiceRepositories();
@@ -56,6 +58,12 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	services.setWikibaseRepoConfigRepository( new ForeignApiRepoConfigRepository(
 		repoForeignApi,
 	) );
+
+	services.setTracker(
+		new DataBridgeTrackerService(
+			new EventTracker( mwWindow.mw.track ),
+		),
+	);
 
 	return services;
 }
