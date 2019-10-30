@@ -7,4 +7,9 @@ export const getters: GetterTree<Application, Application> = {
 			return state.statementsTaintedState[ guid ];
 		};
 	},
+	popperState( state: Application ): Function {
+		return ( guid: string ): boolean => {
+			return state.statementsPopperIsOpen[ guid ];
+		};
+	},
 };

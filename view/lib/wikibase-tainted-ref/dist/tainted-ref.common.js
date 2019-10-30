@@ -4763,6 +4763,11 @@ var getters = {
     return function (guid) {
       return state.statementsTaintedState[guid];
     };
+  },
+  popperState: function popperState(state) {
+    return function (guid) {
+      return state.statementsPopperIsOpen[guid];
+    };
   }
 };
 // CONCATENATED MODULE: ./src/store/index.ts
