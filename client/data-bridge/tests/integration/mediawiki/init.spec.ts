@@ -2,7 +2,7 @@ import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingReposito
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import {
@@ -62,38 +62,35 @@ describe( 'init', () => {
 			undefined,
 			ForeignApiConstructor,
 		);
-		const expectedServices = new ServiceRepositories();
-		expectedServices.setReadingEntityRepository(
-			new SpecialPageReadingEntityRepository(
-				( window as MwWindow ).$,
-				'http://localhost/wiki/Special:EntityData',
-			),
-		);
-		expectedServices.setWritingEntityRepository(
-			new ForeignApiWritingRepository( ForeignApi, 'Test User', editTags ),
-		);
-		expectedServices.setLanguageInfoRepository(
-			new MwLanguageInfoRepository(
-				( window as MwWindow ).mw.language,
-				( window as MwWindow ).$.uls!.data,
-			),
-		);
+		const expectedServices = new ServiceContainer();
+		expectedServices.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
+			( window as MwWindow ).$,
+			'http://localhost/wiki/Special:EntityData',
+		) );
+		expectedServices.set( 'writingEntityRepository', new ForeignApiWritingRepository(
+			ForeignApi,
+			'Test User',
+			editTags,
+		) );
+		expectedServices.set( 'languageInfoRepository', new MwLanguageInfoRepository(
+			( window as MwWindow ).mw.language,
+			( window as MwWindow ).$.uls!.data,
+		) );
 		const entityInfoDispatcher = new ForeignApiEntityInfoDispatcher( ForeignApi, [ 'labels', 'datatype' ] );
-		expectedServices.setEntityLabelRepository(
-			new DispatchingEntityLabelRepository( 'en', entityInfoDispatcher ),
-		);
-		expectedServices.setPropertyDatatypeRepository(
-			new DispatchingPropertyDataTypeRepository( entityInfoDispatcher ),
-		);
-		expectedServices.setMessagesRepository(
-			new MwMessagesRepository( ( window as MwWindow ).mw.message ),
-		);
-		expectedServices.setWikibaseRepoConfigRepository(
-			new ForeignApiRepoConfigRepository( ForeignApi ),
-		);
-		expectedServices.setTracker(
-			new DataBridgeTrackerService( new EventTracker( ( window as MwWindow ).mw.track ) ),
-		);
+		expectedServices.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
+			'en',
+			entityInfoDispatcher,
+		) );
+		expectedServices.set( 'propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository(
+			entityInfoDispatcher,
+		) );
+		expectedServices.set( 'messagesRepository', new MwMessagesRepository(
+			( window as MwWindow ).mw.message,
+		) );
+		expectedServices.set( 'wikibaseRepoConfigRepository', new ForeignApiRepoConfigRepository( ForeignApi ) );
+		expectedServices.set( 'tracker', new DataBridgeTrackerService(
+			new EventTracker( ( window as MwWindow ).mw.track ),
+		) );
 
 		const entityId = 'Q5';
 		const propertyId = 'P4711';

@@ -1,12 +1,12 @@
 import { EventEmitter } from 'events';
 import AppConfiguration from '@/definitions/AppConfiguration';
 import AppInformation from '@/definitions/AppInformation';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 
 export default interface AppBridge {
 	launch(
 		config: AppConfiguration,
 		info: AppInformation,
-		services: ServiceRepositories
+		services: ServiceContainer
 	): EventEmitter;
 }

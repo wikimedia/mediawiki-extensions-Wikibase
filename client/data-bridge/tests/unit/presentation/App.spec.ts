@@ -22,7 +22,7 @@ import DataBridge from '@/presentation/components/DataBridge.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
 import MessageKeys from '@/definitions/MessageKeys';
@@ -36,7 +36,7 @@ describe( 'App.vue', () => {
 	let entityId: EntityId;
 	let propertyId: string;
 	let editFlow: EditFlow;
-	const services = new ServiceRepositories();
+	const services = new ServiceContainer();
 
 	beforeEach( async () => {
 		entityId = 'Q42';
@@ -44,7 +44,7 @@ describe( 'App.vue', () => {
 		editFlow = EditFlow.OVERWRITE;
 		( Entities.entities.Q42 as any ).statements = Entities.entities.Q42.claims;
 
-		services.setReadingEntityRepository( {
+		services.set( 'readingEntityRepository', {
 			getEntity: () => {
 				return Promise.resolve( {
 					revisionId: 984899757,
@@ -52,7 +52,7 @@ describe( 'App.vue', () => {
 				} as any );
 			},
 		} );
-		services.setWritingEntityRepository( {
+		services.set( 'writingEntityRepository', {
 			saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
 				return Promise.resolve( new EntityRevision(
 					entity.entity,
@@ -60,12 +60,12 @@ describe( 'App.vue', () => {
 				) );
 			},
 		} );
-		services.setEntityLabelRepository( {
+		services.set( 'entityLabelRepository', {
 			getLabel( _id ) {
 				return Promise.reject();
 			},
 		} );
-		services.setWikibaseRepoConfigRepository( {
+		services.set( 'wikibaseRepoConfigRepository', {
 			getRepoConfiguration() {
 				return Promise.resolve( {
 					dataTypeLimits: {

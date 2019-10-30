@@ -4,7 +4,7 @@ import Application, { InitializedApplicationState } from '@/store/Application';
 import EditFlow from '@/definitions/EditFlow';
 import EntityRevision from '@/datamodel/EntityRevision';
 import AppInformation from '@/definitions/AppInformation';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import { createStore } from '@/store';
 import {
 	BRIDGE_INIT,
@@ -26,7 +26,7 @@ describe( 'store/actions', () => {
 	let store: Store<Application>;
 	let testSet: EntityRevision;
 	let labelTerm: Term;
-	const services = new ServiceRepositories();
+	const services = new ServiceContainer();
 	const client = { usePublish: false };
 	let info: AppInformation;
 	// fill repository
@@ -99,25 +99,25 @@ describe( 'store/actions', () => {
 
 		labelTerm = { language: 'en', value: 'potato' };
 
-		services.setReadingEntityRepository( {
+		services.set( 'readingEntityRepository', {
 			async getEntity( _id: string, _revision?: number ): Promise<EntityRevision> {
 				return testSet;
 			},
 		} );
 
-		services.setWritingEntityRepository( {
+		services.set( 'writingEntityRepository', {
 			async saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
 				throw new Error( 'These tests should not write any entities' );
 			},
 		} );
 
-		services.setEntityLabelRepository( {
+		services.set( 'entityLabelRepository', {
 			async getLabel( _id: string ): Promise<Term> {
 				return labelTerm;
 			},
 		} );
 
-		services.setWikibaseRepoConfigRepository( {
+		services.set( 'wikibaseRepoConfigRepository', {
 			async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
 				return {
 					dataTypeLimits: {
@@ -216,7 +216,7 @@ describe( 'store/actions', () => {
 			const rejectError = new Error( 'no' );
 			const resolver = jest.fn( () => Promise.reject( rejectError ) );
 
-			services.setWritingEntityRepository( {
+			services.set( 'writingEntityRepository', {
 				saveEntity: resolver as any,
 			} );
 
@@ -257,7 +257,7 @@ describe( 'store/actions', () => {
 
 			const resolver = jest.fn( () => Promise.resolve( response ) );
 
-			services.setWritingEntityRepository( {
+			services.set( 'writingEntityRepository', {
 				saveEntity: resolver as any,
 			} );
 
@@ -311,7 +311,7 @@ describe( 'store/actions', () => {
 				const rejectError = new Error( 'no' );
 				const resolver = jest.fn( () => Promise.reject( rejectError ) );
 
-				services.setWritingEntityRepository( {
+				services.set( 'writingEntityRepository', {
 					saveEntity: resolver as any,
 				} );
 
@@ -351,7 +351,7 @@ describe( 'store/actions', () => {
 
 				const resolver = jest.fn( () => Promise.resolve( response ) );
 
-				services.setWritingEntityRepository( {
+				services.set( 'writingEntityRepository', {
 					saveEntity: resolver as any,
 				} );
 

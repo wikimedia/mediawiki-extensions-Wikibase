@@ -9334,11 +9334,11 @@ function createStore(services) {
   };
   var storeBundle = {
     state: state,
-    actions: actions(services.getEntityLabelRepository(), services.getWikibaseRepoConfigRepository()),
+    actions: actions(services.get('entityLabelRepository'), services.get('wikibaseRepoConfigRepository')),
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',
-    modules: _defineProperty({}, NS_ENTITY, store_entity(services.getReadingEntityRepository(), services.getWritingEntityRepository()))
+    modules: _defineProperty({}, NS_ENTITY, store_entity(services.get('readingEntityRepository'), services.get('writingEntityRepository')))
   };
   return new vuex_esm["a" /* Store */](storeBundle);
 }
@@ -9441,11 +9441,11 @@ function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository(), information.client);
+  extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client);
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
-  services.getPropertyDatatypeRepository().getDataType(information.propertyId).then(function (dataType) {
-    services.getTracker().trackPropertyDatatype(dataType);
+  services.get('propertyDatatypeRepository').getDataType(information.propertyId).then(function (dataType) {
+    services.get('tracker').trackPropertyDatatype(dataType);
   });
   var app = new presentation_App({
     store: store

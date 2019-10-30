@@ -3,7 +3,7 @@ import Application from '@/store/Application';
 import EditFlow from '@/definitions/EditFlow';
 import EntityRevision from '@/datamodel/EntityRevision';
 import AppInformation from '@/definitions/AppInformation';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import { createStore } from '@/store';
 import { BRIDGE_INIT } from '@/store/actionTypes';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
@@ -18,7 +18,7 @@ import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRep
 describe( 'store/getters', () => {
 	let store: Store<Application>;
 	let testSet: EntityRevision;
-	const services = new ServiceRepositories();
+	const services = new ServiceContainer();
 	let info: AppInformation;
 	// fill repository
 	beforeEach( async () => {
@@ -101,25 +101,25 @@ describe( 'store/getters', () => {
 			},
 		};
 
-		services.setReadingEntityRepository( {
+		services.set( 'readingEntityRepository', {
 			async getEntity( _id: string, _revision?: number ): Promise<EntityRevision> {
 				return testSet;
 			},
 		} );
 
-		services.setWritingEntityRepository( {
+		services.set( 'writingEntityRepository', {
 			async saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
 				throw new Error( 'These tests should not write any entities' );
 			},
 		} );
 
-		services.setEntityLabelRepository( {
+		services.set( 'entityLabelRepository', {
 			async getLabel( _id ): Promise<Term> {
 				return { value: 'ignore me', language: 'en' };
 			},
 		} );
 
-		services.setWikibaseRepoConfigRepository( {
+		services.set( 'wikibaseRepoConfigRepository', {
 			async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
 				return {
 					dataTypeLimits: {

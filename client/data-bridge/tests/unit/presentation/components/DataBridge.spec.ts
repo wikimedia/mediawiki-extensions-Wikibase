@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import ServiceRepositories from '@/services/ServiceRepositories';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import {
 	createLocalVue,
@@ -11,6 +10,7 @@ import Vuex, {
 } from 'vuex';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import Application from '@/store/Application';
+import newMockServiceContainer from '../../services/newMockServiceContainer';
 
 let store: Store<Application>;
 const localVue = createLocalVue();
@@ -19,20 +19,14 @@ localVue.use( Vuex );
 
 describe( 'DataBridge', () => {
 	beforeEach( () => {
-		store = createStore( {
-			getReadingEntityRepository() {
-				return {};
-			},
-			getWritingEntityRepository() {
-				return {};
-			},
-			getEntityLabelRepository() {
-				return {};
-			},
-			getWikibaseRepoConfigRepository() {
-				return {};
-			},
-		} as ServiceRepositories );
+		store = createStore(
+			newMockServiceContainer( {
+				readingEntityRepository: {},
+				writingEntityRepository: {},
+				entityLabelRepository: {},
+				wikibaseRepoConfigRepository: {},
+			} ),
+		);
 	} );
 
 	it( 'mounts StringDataValue', () => {
