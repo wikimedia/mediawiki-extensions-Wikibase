@@ -258,42 +258,19 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 				'wbpt_term_in_lang_id',
 				[ 'wbpt_term_in_lang_id' => $termIds ],
 				__METHOD__,
-				[ 'DISTINCT' ]
+				[
+					'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+					// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
+				]
 			);
 			$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
 				'wbt_item_terms',
 				'wbit_term_in_lang_id',
 				[ 'wbit_term_in_lang_id' => $termIds ],
 				__METHOD__,
-				[ 'DISTINCT' ]
-			);
-
-			$termIdsUnused = array_diff(
-				$termIds,
-				$termIdsUsedInProperties,
-				$termIdsUsedInItems
-			);
-
-			if ( $termIdsUnused === [] ) {
-				return;
-			}
-
-			$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
-				'wbt_property_terms',
-				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
-				__METHOD__,
 				[
-					'FOR UPDATE'  // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-				]
-			);
-			$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
-				'wbt_item_terms',
-				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termIdsUnused ],
-				__METHOD__,
-				[
-					'FOR UPDATE' // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+					'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+					// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
 				]
 			);
 
