@@ -180,6 +180,8 @@
 	"wikibase-property-summary-wbeditentity-create": "Created a new Property",
 	"wikibase-property-summary-wbeditentity-create-property": "Created a new Property",
 	"wikibase-property-summary-wbeditentity-update": "Changed a Property",
+	"wikibase-property-summary-wbeditentity-update-languages": "Changed label, description and/or aliases in $3 {{PLURAL:$3|language|languages}}",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Changed label, description and/or aliases in $3 {{PLURAL:$3|language|languages}}, and other parts",
 	"wikibase-property-summary-wbeditentity-override": "Cleared a Property",
 	"wikibase-property-summary-special-create-property": "Created a [$2] Property with {{PLURAL:$1|value|values}}",
 	"wikibase-SortedProperties": ""
