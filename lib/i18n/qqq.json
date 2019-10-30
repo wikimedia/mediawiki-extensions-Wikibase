@@ -193,6 +193,8 @@
 	"wikibase-property-summary-wbeditentity-create": "Automatic edit summary generated when creating a new property.\n{{Related|Wikibase-property-summary}}",
 	"wikibase-property-summary-wbeditentity-create-property": "Automatic edit summary generated when creating a new property.\n{{Identical|Wikibase-property-summary-wbeditentity-create}}",
 	"wikibase-property-summary-wbeditentity-update": "Autocomment message for client (e.g. Wikipedia) recent changes when a linked Wikidata item non-term parts get changed.",
+	"wikibase-property-summary-wbeditentity-update-languages": "Autocomment message for client (e.g. Wikipedia) recent changes when updating only terms on an existing property",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Autocomment message for client (e.g. Wikipedia) recent changes when updating terms and other parts on an existing property",
 	"wikibase-property-summary-wbeditentity-override": "Automatic edit summary generated when overriding an existing property.\n{{Related|Wikibase-property-summary}}",
 	"wikibase-property-summary-special-create-property": "Automatic edit summary when creating a property, and supplying one or more values. Parameters:\n* $1 - the number of values set (that is 0 - zero)\n* $2 - the language code of the entity page during creation\n{{Related|Wikibase-property-summary}}",
 	"wikibase-SortedProperties": "Used to defines the sorting of the properties. Example: https://www.wikidata.org/wiki/MediaWiki:Wikibase-SortedProperties"
