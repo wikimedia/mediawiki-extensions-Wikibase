@@ -158,31 +158,33 @@ class DataUpdateHookHandlers {
 	 * @param Title $title
 	 */
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
-		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+		DeferredUpdates::addCallableUpdate( function() use ( $parserOutput, $title ) {
+			$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		$usages = $this->reindexEntityUsages( $usageAcc->getUsages() );
-		if ( $usages === [] ) {
-			// no usages or no title, bail out
-			return;
-		}
+			$usages = $this->reindexEntityUsages( $usageAcc->getUsages() );
+			if ( $usages === [] ) {
+				// no usages or no title, bail out
+				return;
+			}
 
-		// Add any usages present in the new rendering.
-		// This allows us to track usages in each user language separately, for multilingual sites.
+			// Add any usages present in the new rendering.
+			// This allows us to track usages in each user language separately, for multilingual sites.
 
-		// NOTE: Since parser cache updates may be triggered by page views (in a new language),
-		// schedule the usage updates in the job queue, to avoid writing to the database
-		// during a GET request.
+			// NOTE: Since parser cache updates may be triggered by page views (in a new language),
+			// schedule the usage updates in the job queue, to avoid writing to the database
+			// during a GET request.
 
-		$currentUsages = $this->reindexEntityUsages(
-			$this->usageLookup->getUsagesForPage( $title->getArticleID() )
-		);
-		$newUsages = array_diff_key( $usages, $currentUsages );
-		if ( $newUsages === [] ) {
-			return;
-		}
+			$currentUsages = $this->reindexEntityUsages(
+				$this->usageLookup->getUsagesForPage( $title->getArticleID() )
+			);
+			$newUsages = array_diff_key( $usages, $currentUsages );
+			if ( $newUsages === [] ) {
+				return;
+			}
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $newUsages );
-		$this->jobScheduler->lazyPush( $addUsagesForPageJob );
+			$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $newUsages );
+			$this->jobScheduler->push( $addUsagesForPageJob );
+		} );
 	}
 
 	/**
