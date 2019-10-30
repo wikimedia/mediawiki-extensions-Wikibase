@@ -308,7 +308,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 */
 	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
 		try {
-			$this->getDbMaster()->insert( $this->table, $neededRecords );
+			$this->getDbMaster()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
 		} catch ( DBQueryError $dbError ) {
 			$this->logger->info(
 				'{method}: Inserting records into {table} failed: {exception}',
