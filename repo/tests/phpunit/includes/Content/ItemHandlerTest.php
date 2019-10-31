@@ -53,7 +53,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	}
 
 	/**
-	 * @see EntityHandlerTestCase::contentProvider
+	 * @inheritDoc
 	 */
 	public function contentProvider() {
 		/** @var ItemContent $content */

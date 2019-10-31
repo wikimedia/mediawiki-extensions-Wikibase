@@ -96,7 +96,7 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute()
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -183,7 +183,7 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -215,7 +215,7 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

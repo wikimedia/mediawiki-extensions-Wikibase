@@ -62,7 +62,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @see ApiBase::execute()
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -130,14 +130,14 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @see ApiBase::isInternal
+	 * @inheritDoc
 	 */
 	public function isInternal() {
 		return true; // mark this api module as internal until we settled on a solution for search
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -167,7 +167,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

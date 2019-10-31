@@ -42,7 +42,7 @@ class MetaContentLanguages extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -101,7 +101,7 @@ class MetaContentLanguages extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -124,7 +124,7 @@ class MetaContentLanguages extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		$pathUrl = 'action=' . $this->getQuery()->getModuleName() .

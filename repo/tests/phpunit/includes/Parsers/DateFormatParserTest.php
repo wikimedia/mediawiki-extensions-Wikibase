@@ -32,7 +32,7 @@ class DateFormatParserTest extends StringValueParserTest {
 	}
 
 	/**
-	 * @see ValueParserTestBase::validInputProvider
+	 * @inheritDoc
 	 */
 	public function validInputProvider() {
 		$monthNames = [ 9 => [ 'Sep', 'September' ] ];
@@ -166,7 +166,7 @@ class DateFormatParserTest extends StringValueParserTest {
 	}
 
 	/**
-	 * @see StringValueParserTest::invalidInputProvider
+	 * @inheritDoc
 	 */
 	public function invalidInputProvider() {
 		$invalid = [

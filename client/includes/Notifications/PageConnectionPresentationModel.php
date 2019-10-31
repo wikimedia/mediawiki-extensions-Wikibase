@@ -29,14 +29,14 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::getIconType()
+	 * @inheritDoc
 	 */
 	public function getIconType() {
 		return EchoNotificationsHandlers::NOTIFICATION_TYPE;
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::canRender()
+	 * @inheritDoc
 	 */
 	public function canRender() {
 		$title = $this->event->getTitle();
@@ -49,7 +49,7 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::getHeaderMessage()
+	 * @inheritDoc
 	 */
 	public function getHeaderMessage() {
 		$count = $this->getNotificationCountForOutput(
@@ -74,14 +74,14 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::getSubjectMessageKey()
+	 * @inheritDoc
 	 */
 	protected function getSubjectMessageKey() {
 		return "notification-subject-{$this->type}";
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::getPrimaryLink()
+	 * @inheritDoc
 	 */
 	public function getPrimaryLink() {
 		$title = $this->event->getTitle();
@@ -92,7 +92,7 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	}
 
 	/**
-	 * @see EchoEventPresentationModel::getSecondaryLinks()
+	 * @inheritDoc
 	 */
 	public function getSecondaryLinks() {
 		$ret = [];

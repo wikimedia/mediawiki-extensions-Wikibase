@@ -85,7 +85,7 @@ class RemoveClaims extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -185,7 +185,7 @@ class RemoveClaims extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::isWriteMode
+	 * @inheritDoc
 	 */
 	public function isWriteMode() {
 		return true;
@@ -201,7 +201,7 @@ class RemoveClaims extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
@@ -229,7 +229,7 @@ class RemoveClaims extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

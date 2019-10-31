@@ -153,7 +153,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::getLegend()
+	 * @inheritDoc
 	 */
 	protected function getLegend() {
 		return $this->msg( 'wikibase-newproperty-fieldset' );
@@ -228,7 +228,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::getEntityType
+	 * @inheritDoc
 	 */
 	protected function getEntityType() {
 		return Property::ENTITY_TYPE;

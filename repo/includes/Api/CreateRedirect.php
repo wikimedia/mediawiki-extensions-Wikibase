@@ -68,7 +68,7 @@ class CreateRedirect extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute()
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -118,28 +118,28 @@ class CreateRedirect extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::isWriteMode()
+	 * @inheritDoc
 	 */
 	public function isWriteMode() {
 		return true;
 	}
 
 	/**
-	 * @see ApiBase::needsToken()
+	 * @inheritDoc
 	 */
 	public function needsToken() {
 		return 'csrf';
 	}
 
 	/**
-	 * @see ApiBase::mustBePosted()
+	 * @inheritDoc
 	 */
 	public function mustBePosted() {
 		return true;
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -163,7 +163,7 @@ class CreateRedirect extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

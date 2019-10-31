@@ -55,7 +55,7 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	}
 
 	/**
-	 * @see SpecialPage::setHeaders
+	 * @inheritDoc
 	 */
 	public function setHeaders() {
 		$out = $this->getOutput();

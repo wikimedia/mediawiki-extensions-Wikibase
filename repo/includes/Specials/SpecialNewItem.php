@@ -298,7 +298,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::getEntityType
+	 * @inheritDoc
 	 */
 	protected function getEntityType() {
 		return Item::ENTITY_TYPE;

@@ -102,7 +102,7 @@ class SetClaim extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -210,7 +210,7 @@ class SetClaim extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::isWriteMode
+	 * @inheritDoc
 	 */
 	public function isWriteMode() {
 		return true;
@@ -226,7 +226,7 @@ class SetClaim extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
@@ -256,7 +256,7 @@ class SetClaim extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

@@ -36,14 +36,14 @@ class SettingsValueProvider implements MediaWikiConfigValueProvider {
 	}
 
 	/**
-	 * @see MediaWikiConfigValueProvider::getKey()
+	 * @inheritDoc
 	 */
 	public function getKey() {
 		return $this->jsSettingName;
 	}
 
 	/**
-	 * @see MediaWikiConfigValueProvider::getValue()
+	 * @inheritDoc
 	 */
 	public function getValue() {
 		return $this->settings->getSetting( $this->phpSettingName );

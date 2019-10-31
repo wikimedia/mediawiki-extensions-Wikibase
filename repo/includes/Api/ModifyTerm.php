@@ -35,7 +35,7 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return array_merge(

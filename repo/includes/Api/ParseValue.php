@@ -94,7 +94,7 @@ class ParseValue extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );
@@ -302,7 +302,7 @@ class ParseValue extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	public function getAllowedParams() {
 		return [
@@ -338,7 +338,7 @@ class ParseValue extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

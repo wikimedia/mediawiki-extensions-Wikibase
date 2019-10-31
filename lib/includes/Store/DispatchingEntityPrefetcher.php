@@ -59,7 +59,7 @@ class DispatchingEntityPrefetcher implements EntityPrefetcher {
 	}
 
 	/**
-	 * @see EntityPrefetcher::purgeAll
+	 * @inheritDoc
 	 */
 	public function purgeAll() {
 		foreach ( $this->prefetchers as $prefetcher ) {

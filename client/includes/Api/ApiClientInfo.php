@@ -34,7 +34,7 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::execute
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -92,7 +92,7 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -107,7 +107,7 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

@@ -244,7 +244,7 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::execute()
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );
@@ -303,7 +303,7 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return [
@@ -344,7 +344,7 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [

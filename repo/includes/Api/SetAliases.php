@@ -205,7 +205,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getAllowedParams
+	 * @inheritDoc
 	 */
 	protected function getAllowedParams() {
 		return array_merge(
@@ -248,7 +248,7 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages
+	 * @inheritDoc
 	 */
 	protected function getExamplesMessages() {
 		return [
