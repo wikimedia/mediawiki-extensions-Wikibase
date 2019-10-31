@@ -14,7 +14,6 @@ import Statement from '@/datamodel/Statement';
 import deepEqual from 'deep-equal';
 
 export const getters: GetterTree<Application, Application> = {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	targetValue(
 		state: Application,
 		getters: {
