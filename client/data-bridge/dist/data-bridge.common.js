@@ -8991,7 +8991,6 @@ var deep_equal_default = /*#__PURE__*/__webpack_require__.n(deep_equal);
 
 
 var getters_getters = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   targetValue: function targetValue(state, getters) {
     if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
       return null;
