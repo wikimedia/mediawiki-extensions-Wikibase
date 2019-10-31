@@ -193,6 +193,8 @@
 	"wikibase-property-summary-wbeditentity-create": "已建立新屬性",
 	"wikibase-property-summary-wbeditentity-create-property": "已建立新屬性",
 	"wikibase-property-summary-wbeditentity-update": "屬性已變更",
+	"wikibase-property-summary-wbeditentity-update-languages": "更改在 $3 個{{PLURAL:$3|語言}}裡的標籤、描述以及/或是別名",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "更改在 $3 個{{PLURAL:$3|語言}}裡的標籤、描述以及/或是別名，和其它部份",
 	"wikibase-property-summary-wbeditentity-override": "已清空屬性",
 	"wikibase-property-summary-special-create-property": "已建立含{{PLURAL:$1|數值}}的 [$2] 屬性"
 }

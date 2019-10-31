@@ -196,6 +196,8 @@
 	"wikibase-property-summary-wbeditentity-create": "إنشاء خاصية جديدة",
 	"wikibase-property-summary-wbeditentity-create-property": "إنشاء خاصية جديدة",
 	"wikibase-property-summary-wbeditentity-update": "تعديل خاصية",
+	"wikibase-property-summary-wbeditentity-update-languages": "تم تغيير التسمية والوصف و/أو الأسماء المستعار بـ$3 {{PLURAL:$3|لغة|لغات}}.",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "تم تغيير التسمية والوصف و/أو الأسماء المستعار بـ$3 {{PLURAL:$3|لغة|لغات}}.",
 	"wikibase-property-summary-wbeditentity-override": "إفراغ خاصية",
 	"wikibase-property-summary-special-create-property": "إنشاء خاصية بـ[$2] ذات {{PLURAL:$1|ذات قيمة واحدة|ذات قيمتين|ذات $1 قيم|ذات $1 قيمة|0=بلا قيم}}"
 }
