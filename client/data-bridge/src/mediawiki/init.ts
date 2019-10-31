@@ -36,7 +36,7 @@ export default async (): Promise<void> => {
 			app = require( APP_MODULE ),
 			dispatcher = new Dispatcher( mwWindow, app, dataBridgeConfig );
 
-		linksToOverload.map( ( selectedElement: SelectedElement ) => {
+		linksToOverload.forEach( ( selectedElement: SelectedElement ) => {
 			selectedElement.link.setAttribute( 'aria-haspopup', 'dialog' );
 			selectedElement.link.addEventListener( 'click', ( event: Event ) => {
 				stopNativeClickHandling( event );
