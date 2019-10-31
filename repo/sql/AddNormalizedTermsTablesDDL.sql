@@ -11,7 +11,7 @@
 --
 -- This design is normalized for the sake of reducing duplication and redundancy
 -- that accounted for ~70% of the disk space occupied by wb_terms table as of
--- March 2019. It requires few joins for queris, and impact on performance
+-- March 2019. It requires few joins for queries, and impact on performance
 -- will be addressed as the need arise.
 --
 -- Note on splitting Items and Properties:
@@ -24,18 +24,18 @@
 --   index that includes items as well, but rather a very small one.
 -- - conceptually, items and properties are two different entity types, and
 --   since different entity types might have different constraints and maybe
---   even structure, splitting them into corrisponding tables saves us from
+--   even structure, splitting them into corresponding tables saves us from
 --   ending up with a wide polymorphic table again (lesson learned from
 --   wb_terms table itself)
 --
 -- Note on Entity IDs:
 -- ------------------
--- Since wikidata entity ids are fixed and known to always be Q (like in Q123),
+-- Since Wikidata entity ids are fixed and known to always be Q (like in Q123),
 --  entity ids are stored as integers after dropping that prefix, in both
 -- wb_item_terms and wb_property_terms tables.
 -- e.g. entity id Q123 has integer id of 123.
 --
--- when a new entity type gets introdced into the instance then one can either:
+-- when a new entity type gets introduced into the instance then one can either:
 -- - store it in wb_item_terms/wb_property_items if it has the same prefix (Q), or
 -- - create a separate table similar to wb_item_terms in structure for those
 --   entities if the prefix is different.
