@@ -1,4 +1,10 @@
-import { SET_ALL_UNTAINTED, SET_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
+import {
+	SET_ALL_UNTAINTED,
+	SET_POPPER_HIDDEN,
+	SET_POPPER_VISIBLE,
+	SET_TAINTED,
+	SET_UNTAINTED,
+} from '@/store/mutationTypes';
 import { mutations } from '@/store/mutations';
 
 describe( 'mutations', () => {
@@ -19,5 +25,17 @@ describe( 'mutations', () => {
 		mutations[ SET_UNTAINTED ]( state, 'foo' );
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: false, bar: true } );
+	} );
+	it( 'should hide a popper', () => {
+		const state = { statementsPopperIsOpen: { foo: true, cat: true } };
+		mutations[ SET_POPPER_HIDDEN ]( state as any, 'foo' );
+		expect( state ).toBeDefined();
+		expect( state.statementsPopperIsOpen ).toEqual( { foo: false, cat: true } );
+	} );
+	it( 'should show a popper', () => {
+		const state = { statementsPopperIsOpen: { burger: false, pizza: false } };
+		mutations[ SET_POPPER_VISIBLE ]( state as any, 'pizza' );
+		expect( state ).toBeDefined();
+		expect( state.statementsPopperIsOpen ).toEqual( { burger: false, pizza: true } );
 	} );
 } );

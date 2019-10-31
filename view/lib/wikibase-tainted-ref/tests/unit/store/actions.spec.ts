@@ -1,6 +1,13 @@
-import { SET_ALL_UNTAINTED, SET_TAINTED, SET_UNTAINTED } from '@/store/mutationTypes';
+import {
+	SET_ALL_UNTAINTED,
+	SET_POPPER_HIDDEN,
+	SET_POPPER_VISIBLE,
+	SET_TAINTED,
+	SET_UNTAINTED,
+} from '@/store/mutationTypes';
 import actions from '@/store/actions';
 import {
+	POPPER_HIDE, POPPER_SHOW,
 	STATEMENT_TAINTED_STATE_INIT,
 	STATEMENT_TAINTED_STATE_TAINT,
 	STATEMENT_TAINTED_STATE_UNTAINT,
@@ -23,5 +30,15 @@ describe( 'actions', () => {
 		const context = newMockStore( {} );
 		await ( actions as Function )()[ STATEMENT_TAINTED_STATE_TAINT ]( context, 'blah' );
 		expect( context.commit ).toBeCalledWith( SET_TAINTED, 'blah' );
+	} );
+	it( `should commit to ${SET_POPPER_HIDDEN}`, async () => {
+		const context = newMockStore( {} );
+		await ( actions as Function )()[ POPPER_HIDE ]( context, 'potato' );
+		expect( context.commit ).toBeCalledWith( SET_POPPER_HIDDEN, 'potato' );
+	} );
+	it( `should commit to ${SET_POPPER_VISIBLE}`, async () => {
+		const context = newMockStore( {} );
+		await ( actions as Function )()[ POPPER_SHOW ]( context, 'duck' );
+		expect( context.commit ).toBeCalledWith( SET_POPPER_VISIBLE, 'duck' );
 	} );
 } );
