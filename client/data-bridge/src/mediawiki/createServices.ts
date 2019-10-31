@@ -9,6 +9,7 @@ import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDi
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
+import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceRepositories {
 	const services = new ServiceRepositories();
@@ -38,10 +39,21 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		editTags.length === 0 ? undefined : editTags,
 	) );
 
+	const foreignApiEntityInfoDispatcher = new ForeignApiEntityInfoDispatcher(
+		repoForeignApi,
+		[ 'labels', 'datatype' ],
+	);
+
 	services.setEntityLabelRepository(
 		new DispatchingEntityLabelRepository(
 			mwWindow.mw.config.get( 'wgPageContentLanguage' ),
-			new ForeignApiEntityInfoDispatcher( repoForeignApi, [ 'labels' ] ),
+			foreignApiEntityInfoDispatcher,
+		),
+	);
+
+	services.setPropertyDatatypeRepository(
+		new DispatchingPropertyDataTypeRepository(
+			foreignApiEntityInfoDispatcher,
 		),
 	);
 

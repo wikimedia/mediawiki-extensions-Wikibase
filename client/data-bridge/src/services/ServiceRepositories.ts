@@ -5,6 +5,7 @@ import EntityLabelRepository from '@/definitions/data-access/EntityLabelReposito
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
+import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 
 export default class ServiceRepositories {
 	private readingEntityRepository?: ReadingEntityRepository;
@@ -14,6 +15,7 @@ export default class ServiceRepositories {
 	private messagesRepository?: MessagesRepository;
 	private wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
 	private tracker?: BridgeTracker;
+	private propertyDatatypeRepository?: PropertyDatatypeRepository;
 
 	public setReadingEntityRepository( lookup: ReadingEntityRepository ): void {
 		this.readingEntityRepository = lookup;
@@ -60,6 +62,18 @@ export default class ServiceRepositories {
 			return this.entityLabelRepository;
 		} else {
 			throw new Error( 'EntityLabelRepository is undefined' );
+		}
+	}
+
+	public setPropertyDatatypeRepository( propertyDatatypeRepository: PropertyDatatypeRepository ): void {
+		this.propertyDatatypeRepository = propertyDatatypeRepository;
+	}
+
+	public getPropertyDatatypeRepository(): PropertyDatatypeRepository {
+		if ( this.propertyDatatypeRepository ) {
+			return this.propertyDatatypeRepository;
+		} else {
+			throw new Error( 'PropertyDatatypeRepository is undefined' );
 		}
 	}
 

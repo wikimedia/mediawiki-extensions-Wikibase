@@ -9444,6 +9444,9 @@ function launch(config, information, services) {
   extendVueEnvironment(services.getLanguageInfoRepository(), services.getMessagesRepository(), information.client);
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
+  services.getPropertyDatatypeRepository().getDataType(information.propertyId).then(function (dataType) {
+    services.getTracker().trackPropertyDatatype(dataType);
+  });
   var app = new presentation_App({
     store: store
   }).$mount(config.containerSelector);

@@ -54,59 +54,86 @@ jest.mock( '@/presentation/extendVueEnvironment', () => ( {
 } ) );
 
 const messagesRepository = {};
+const propertyDataTypeRepository = {
+	getDataType: jest.fn().mockResolvedValue( 'string' ),
+};
+const bridgeTracker = {
+	trackPropertyDatatype: jest.fn(),
+};
+const appInformation = {
+	client: {
+		usePublish: true,
+	},
+	propertyId: 'P42',
+};
+const appConfiguration = {
+	containerSelector: '',
+};
 
 describe( 'launch', () => {
 
 	it( 'modifies Vue', () => {
 		const languageRepo = {};
+
 		const services = {
 			getLanguageInfoRepository: () => languageRepo,
 			getMessagesRepository: () => messagesRepository,
-		};
-		const information = {
-			client: {
-				usePublish: true,
-			},
-		};
-		const configuration = {
-			containerSelector: '',
+			getPropertyDatatypeRepository: () => propertyDataTypeRepository,
+			getTracker: () => bridgeTracker,
 		};
 
-		launch( configuration, information as any, services as any );
+		launch( appConfiguration, appInformation as any, services as any );
+
 		expect( extendVueEnvironment ).toHaveBeenCalledTimes( 1 );
 		expect( extendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( languageRepo );
 		expect( extendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( messagesRepository );
-		expect( extendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( information.client );
+		expect( extendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( appInformation.client );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
 	it( 'builds app', () => {
 		const languageRepo = {};
+
 		const services = {
 			getLanguageInfoRepository: () => languageRepo,
 			getMessagesRepository: () => messagesRepository,
+			getPropertyDatatypeRepository: () => propertyDataTypeRepository,
+			getTracker: () => bridgeTracker,
 		};
 
-		const information = {
-			client: {
-				usePublish: false,
-			},
-		};
-		const configuration = {
-			containerSelector: '',
-		};
-
-		const emitter = launch( configuration, information as any, services as any );
+		const emitter = launch( appConfiguration, appInformation as any, services as any );
 
 		expect( emitter ).toBe( mockEmitter );
 		expect( mockCreateStore ).toHaveBeenCalledWith( services );
-		expect( store.dispatch ).toHaveBeenCalledWith( BRIDGE_INIT, information );
+		expect( store.dispatch ).toHaveBeenCalledWith( BRIDGE_INIT, appInformation );
 		expect( App ).toHaveBeenCalledWith( { store } );
-		expect( mockApp.$mount ).toHaveBeenCalledWith( configuration.containerSelector );
+		expect( mockApp.$mount ).toHaveBeenCalledWith( appConfiguration.containerSelector );
 		expect( mockRepeater ).toHaveBeenCalledWith(
 			mockApp,
 			mockEmitter,
 			Object.values( Events ),
 		);
+	} );
+
+	it( 'tracks opening of the bridge with the expected data type', () => {
+		const languageRepo = {};
+		const dataType = 'string';
+		const getDataTypePromise = Promise.resolve( dataType );
+		const propertyDataTypeRepository = {
+			getDataType: jest.fn().mockReturnValue( getDataTypePromise ),
+		};
+		const services = {
+			getLanguageInfoRepository: () => languageRepo,
+			getMessagesRepository: () => messagesRepository,
+			getPropertyDatatypeRepository: () => propertyDataTypeRepository,
+			getTracker: () => bridgeTracker,
+		};
+
+		launch( appConfiguration, appInformation as any, services as any );
+
+		return getDataTypePromise.then( () => {
+			expect( propertyDataTypeRepository.getDataType ).toHaveBeenCalledWith( appInformation.propertyId );
+			expect( bridgeTracker.trackPropertyDatatype ).toHaveBeenCalledWith( dataType );
+		} );
 	} );
 } );

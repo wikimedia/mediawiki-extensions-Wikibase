@@ -143,7 +143,7 @@ describe( 'string data value', () => {
 				ids: [ propertyId ],
 				languagefallback: 1,
 				languages: pageLanguage,
-				props: [ 'labels' ],
+				props: [ 'labels', 'datatype' ],
 			} );
 		} );
 
@@ -179,7 +179,7 @@ describe( 'string data value', () => {
 				ids: [ propertyId ],
 				languagefallback: 1,
 				languages: pageLanguage,
-				props: [ 'labels' ],
+				props: [ 'labels', 'datatype' ],
 			} );
 		} );
 
@@ -221,7 +221,7 @@ describe( 'string data value', () => {
 				ids: [ propertyId ],
 				languagefallback: 1,
 				languages: pageLanguage,
-				props: [ 'labels' ],
+				props: [ 'labels', 'datatype' ],
 			} );
 		} );
 	} );
