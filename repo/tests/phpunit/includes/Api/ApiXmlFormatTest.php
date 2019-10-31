@@ -6,6 +6,7 @@ use ApiBase;
 use DOMDocument;
 use DOMXPath;
 use HashSiteStore;
+use MediaWiki\MediaWikiServices;
 use TestSites;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\GetClaims;
@@ -31,6 +32,21 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * @author Addshore
  */
 class ApiXmlFormatTest extends ApiFormatTestCase {
+
+	protected function setUp() : void {
+
+		parent::setUp();
+		$this->setupSiteLinkGroups();
+	}
+
+	private function setupSiteLinkGroups() {
+		global $wgWBRepoSettings;
+
+		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
+		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
+	}
 
 	public function testGetEntitiesXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );

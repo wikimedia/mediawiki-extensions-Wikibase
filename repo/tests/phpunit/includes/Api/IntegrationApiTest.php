@@ -24,9 +24,21 @@ class IntegrationApiTest extends ApiTestCase {
 
 	protected function setUp() : void {
 		parent::setUp();
+
+		$this->setupSiteLinkGroups();
+
 		$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
 		$sitesTable->clear();
 		$sitesTable->saveSites( TestSites::getSites() );
+	}
+
+	private function setupSitelinkGroups() {
+		global $wgWBRepoSettings;
+
+		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
+		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 	}
 
 	public function apiRequestProvider() {

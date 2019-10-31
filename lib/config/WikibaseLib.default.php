@@ -16,9 +16,7 @@ return [
 	// whether changes get recorded to wb_changes
 	'useChangesTable' => true,
 
-	'siteLinkGroups' => [
-		'wikipedia',
-	],
+	'siteLinkGroups' => [],
 
 	'specialSiteLinkGroups' => [],
 
