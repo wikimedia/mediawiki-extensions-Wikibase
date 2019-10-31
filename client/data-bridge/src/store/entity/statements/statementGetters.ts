@@ -6,7 +6,6 @@ import {
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/entity/statements/getterTypes';
 import StatementsState from '@/store/entity/statements/StatementsState';
-import StatementMap from '@/datamodel/StatementMap';
 import EntityId from '@/datamodel/EntityId';
 
 export const statementGetters: GetterTree<StatementsState, Application> = {
@@ -18,14 +17,14 @@ export const statementGetters: GetterTree<StatementsState, Application> = {
 		entityId: EntityId,
 		propertyId: EntityId,
 	): boolean => {
-		return ( state[ entityId ] as StatementMap )[ propertyId ] !== undefined;
+		return state[ entityId ][ propertyId ] !== undefined;
 	},
 
 	[ STATEMENTS_IS_AMBIGUOUS ]: ( state: StatementsState ) => (
 		entityId: EntityId,
 		propertyId: EntityId,
 	): boolean => {
-		return ( state[ entityId ] as StatementMap )[ propertyId ] !== undefined
-			&& ( state[ entityId ] as StatementMap )[ propertyId ].length > 1;
+		return state[ entityId ][ propertyId ] !== undefined
+			&& state[ entityId ][ propertyId ].length > 1;
 	},
 };
