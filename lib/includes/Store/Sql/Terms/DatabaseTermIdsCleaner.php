@@ -95,10 +95,28 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			return;
 		}
 
+		$unusedTextInLangIds = [];
+		foreach ( $potentiallyUnusedTextInLangIds as  $textInLangId ) {
+			// Note: Not batching here is intentional, see T234948
+			$stillUsed = $this->dbw->selectField(
+				'wbt_term_in_lang',
+				'wbtl_text_in_lang_id',
+				[ 'wbtl_text_in_lang_id' => $textInLangId ]
+			);
+
+			if ( $stillUsed === false ) {
+				$unusedTextInLangIds[] = $textInLangId;
+			}
+		}
+
+		if ( $unusedTextInLangIds === [] ) {
+			return;
+		}
+
 		$stillUsedTextInLangIds = $this->dbw->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_text_in_lang_id',
-			[ 'wbtl_text_in_lang_id' => $potentiallyUnusedTextInLangIds ],
+			[ 'wbtl_text_in_lang_id' => $unusedTextInLangIds ],
 			__METHOD__,
 			[
 				/**
@@ -120,7 +138,6 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 				 * request’s insert will block and wait for the other to complete.
 				 */
 				'FOR UPDATE',
-				// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
 			]
 		);
 		$unusedTextInLangIds = array_diff(
@@ -168,15 +185,30 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			return;
 		}
 
+		$unusedTextIds = [];
+		foreach ( $potentiallyUnusedTextIds as  $textId ) {
+			// Note: Not batching here is intentional, see T234948
+			$stillUsed = $this->dbw->selectField(
+				'wbt_text_in_lang',
+				'wbxl_text_id',
+				[ 'wbxl_text_id' => $textId ]
+			);
+
+			if ( $stillUsed === false ) {
+				$unusedTextIds[] = $textId;
+			}
+		}
+
+		if ( $unusedTextIds === [] ) {
+			return;
+		}
+
 		$stillUsedTextIds = $this->dbw->selectFieldValues(
 			'wbt_text_in_lang',
 			'wbxl_text_id',
-			[ 'wbxl_text_id' => $potentiallyUnusedTextIds ],
+			[ 'wbxl_text_id' => $unusedTextIds ],
 			__METHOD__,
-			[
-				'FOR UPDATE', // see comment in cleanTermInLangIds
-				// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
-			]
+			[ 'FOR UPDATE' ]
 		);
 		$unusedTextIds = array_diff(
 			$potentiallyUnusedTextIds,

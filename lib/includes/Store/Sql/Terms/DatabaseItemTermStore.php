@@ -253,24 +253,44 @@ class DatabaseItemTermStore implements ItemTermStore {
 	 */
 	private function cleanTermsIfUnused( array $termIds ) {
 		try {
+			$termIdsUnused = [];
+			foreach ( $termIds as  $termId ) {
+				// Note: Not batching here is intentional, see T234948
+				$usedInProperties = $this->getDbw()->selectField(
+					'wbt_property_terms',
+					'wbpt_term_in_lang_id',
+					[ 'wbpt_term_in_lang_id' => $termId ]
+				);
+				$usedInItems = $this->getDbw()->selectField(
+					'wbt_item_terms',
+					'wbit_term_in_lang_id',
+					[ 'wbit_term_in_lang_id' => $termId ]
+				);
+
+				if ( $usedInProperties === false && $usedInItems === false ) {
+					$termIdsUnused[] = $termId;
+				}
+			}
+			if ( $termIdsUnused === [] ) {
+				return;
+			}
+
 			$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
 				'wbt_property_terms',
 				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termIds ],
+				[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
 				__METHOD__,
 				[
-					'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-					// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
+					'FOR UPDATE'  // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
 				]
 			);
 			$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
 				'wbt_item_terms',
 				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termIds ],
+				[ 'wbit_term_in_lang_id' => $termIdsUnused ],
 				__METHOD__,
 				[
-					'FOR UPDATE', // see comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-					// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
+					'FOR UPDATE' // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
 				]
 			);
 
