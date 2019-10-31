@@ -96,22 +96,6 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			'wbtl_text_in_lang_id',
 			[ 'wbtl_text_in_lang_id' => $potentiallyUnusedTextInLangIds ],
 			__METHOD__,
-			[ 'DISTINCT' ]
-		);
-		$unusedTextInLangIds = array_diff(
-			$potentiallyUnusedTextInLangIds,
-			$stillUsedTextInLangIds
-		);
-
-		if ( $unusedTextInLangIds === [] ) {
-			return;
-		}
-
-		$stillUsedTextInLangIds = $this->dbw->selectFieldValues(
-			'wbt_term_in_lang',
-			'wbtl_text_in_lang_id',
-			[ 'wbtl_text_in_lang_id' => $unusedTextInLangIds ],
-			__METHOD__,
 			[
 				/**
 				 * If we try to clean up a text_in_lang whose last use in a term_in_lang we just
@@ -132,6 +116,7 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 				 * request’s insert will block and wait for the other to complete.
 				 */
 				'FOR UPDATE',
+				// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
 			]
 		);
 		$unusedTextInLangIds = array_diff(
@@ -180,23 +165,10 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			'wbxl_text_id',
 			[ 'wbxl_text_id' => $potentiallyUnusedTextIds ],
 			__METHOD__,
-			[ 'DISTINCT' ]
-		);
-		$unusedTextIds = array_diff(
-			$potentiallyUnusedTextIds,
-			$stillUsedTextIds
-		);
-
-		if ( $unusedTextIds === [] ) {
-			return;
-		}
-
-		$stillUsedTextIds = $this->dbw->selectFieldValues(
-			'wbt_text_in_lang',
-			'wbxl_text_id',
-			[ 'wbxl_text_id' => $unusedTextIds ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
+			[
+				'FOR UPDATE', // see comment in cleanTermInLangIds
+				// 'DISTINCT', // not supported in combination with FOR UPDATE on some DB types
+			]
 		);
 		$unusedTextIds = array_diff(
 			$potentiallyUnusedTextIds,
