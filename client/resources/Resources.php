@@ -47,6 +47,24 @@ return call_user_func( function() {
 			},
 		],
 
+		'wikibase.client.data-bridge.externalModifiers' => [
+			'factory' => function () {
+				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+				return new ResourceLoaderFileModule(
+					[
+						'styles' => [
+							'edit-links.css',
+						],
+						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
+							[ 'desktop', 'mobile' ] :
+							[],
+						'remoteExtPath' => 'Wikibase/client/data-bridge/modules/externalModifiers',
+					],
+					__DIR__ . '/../data-bridge/modules/externalModifiers'
+				);
+			},
+		],
+
 		'mw.config.values.wbDataBridgeConfig' => [
 			'factory' => function () {
 				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();

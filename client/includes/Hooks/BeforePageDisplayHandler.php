@@ -48,6 +48,10 @@ class BeforePageDisplayHandler {
 		if ( $this->hasEditOrAddLinks( $out, $title, $actionName ) ) {
 			$out->addModuleStyles( 'wikibase.client.init' );
 		}
+
+		if ( $this->dataBridgeEnabled ) {
+			$out->addModuleStyles( 'wikibase.client.data-bridge.externalModifiers' );
+		}
 	}
 
 	private function addJsModules( OutputPage $out, Title $title, $actionName ) {
