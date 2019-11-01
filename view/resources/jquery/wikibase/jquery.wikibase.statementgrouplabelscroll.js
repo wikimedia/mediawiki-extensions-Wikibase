@@ -68,7 +68,7 @@
 	 * @return {null|jQuery}
 	 */
 	function findFirstVisibleMainSnakElement( $searchRange ) {
-		var result = null;
+		var result;
 
 		// Caring about the visibility of ".wikibase-snakview-value-container" is better than about
 		// ".wikibase-statementview" or ".wikibase-statementview-mainsnak" since the label will
@@ -100,11 +100,10 @@
 			return !result;
 		} );
 
-		if ( result ) {
-			// Don't forget to get the actual Snak node rather than the value container.
-			result = $( result ).closest( '.wikibase-statementview-mainsnak' );
-		}
-		return result;
+		// Don't forget to get the actual Snak node rather than the value container.
+		return result ?
+			$( result ).closest( '.wikibase-statementview-mainsnak' ) :
+			null;
 	}
 
 	/**

@@ -2,10 +2,10 @@
 	"root": true,
 	"extends": [
 		"wikimedia/client",
-		"wikimedia/jquery"
+		"wikimedia/jquery",
+		"wikimedia/mediawiki"
 	],
 	"globals": {
-		"mw": false,
 		"module": false,
 		"dataTypes": false,
 		"dataValues": false,
@@ -46,11 +46,12 @@
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
 		"no-jquery/no-class-state": "off",
-		"no-jquery/no-global-selector": "off"
+		"no-jquery/no-global-selector": "off",
+		"mediawiki/msg-doc": "off"
 	},
 	"settings": {
 		"no-jquery": {
-			"variablePattern": "^\\$.|^element$"
+			"variablePattern": "^_?\\$.|^element$"
 		}
 	},
 	"plugins": [

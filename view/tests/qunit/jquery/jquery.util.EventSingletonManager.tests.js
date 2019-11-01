@@ -43,7 +43,6 @@
 	QUnit.test( 'register() & unregister() (multiple sources)', function ( assert ) {
 		var manager = new EventSingletonManager(),
 			$sources = $( '<div>' ).add( $( '<div>' ) ),
-			sources = $sources.map( function () { return this; } ),
 			$target = $( '<div>' ),
 			triggeredForSources = [],
 			event = $.Event( 'custom' ),
@@ -63,13 +62,13 @@
 		);
 
 		assert.strictEqual(
-			triggeredForSources.indexOf( sources[ 0 ] ) !== -1,
+			triggeredForSources.indexOf( $sources[ 0 ] ) !== -1,
 			true,
 			'Handler was called for first source.'
 		);
 
 		assert.strictEqual(
-			triggeredForSources.indexOf( sources[ 1 ] ) !== -1,
+			triggeredForSources.indexOf( $sources[ 1 ] ) !== -1,
 			true,
 			'Handler was called for second source.'
 		);
