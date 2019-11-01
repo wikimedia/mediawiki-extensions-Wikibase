@@ -31,6 +31,7 @@
 	 * @return {string}
 	 */
 	function mwMsgOrString( msgKey, string ) {
+		// eslint-disable-next-line mediawiki/msg-doc
 		return IS_MODULE_LOADED ? mw.msg( msgKey ) : string;
 	}
 

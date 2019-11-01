@@ -46,8 +46,7 @@
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
 		"no-jquery/no-class-state": "off",
-		"no-jquery/no-global-selector": "off",
-		"mediawiki/msg-doc": "off"
+		"no-jquery/no-global-selector": "off"
 	},
 	"settings": {
 		"no-jquery": {

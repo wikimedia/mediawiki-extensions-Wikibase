@@ -160,6 +160,10 @@
 				var options = {
 					value: self.options.value[ subjectName ],
 					helpMessage: mw.msg(
+						// The following messages can be used here:
+						// * wikibase-label-input-help-message
+						// * wikibase-description-input-help-message
+						// * wikibase-aliases-input-help-message
 						'wikibase-' + subjectName + '-input-help-message',
 						wb.getLanguageNameByCode( self.options.value.language )
 					)

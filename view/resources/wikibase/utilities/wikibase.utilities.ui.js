@@ -16,9 +16,9 @@
 			// TODO: Legacy name kept for compatibility reasons. It's not "pending" any more.
 			.addClass( 'wb-ui-pendingcounter' )
 			.text(
-				// Messages:
-				// wikibase-sitelinks-counter
-				// wikibase-statementview-references-counter
+				// Messages used here:
+				// * wikibase-sitelinks-counter
+				// * wikibase-statementview-references-counter
 				mw.msg( messageKey, mw.language.convertNumber( quantity ) )
 			);
 	};

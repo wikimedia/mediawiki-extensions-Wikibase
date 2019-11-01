@@ -263,8 +263,9 @@
 		 */
 		_toggleMoreLanguagesButton: function ( $button ) {
 			$button.text( mw.msg(
-				'wikibase-entitytermsforlanguagelistview-'
-					+ ( this._isMoreLanguagesExpanded() ? 'less' : 'more' )
+				this._isMoreLanguagesExpanded() ?
+					'wikibase-entitytermsforlanguagelistview-less' :
+					'wikibase-entitytermsforlanguagelistview-more'
 			) );
 		},
 

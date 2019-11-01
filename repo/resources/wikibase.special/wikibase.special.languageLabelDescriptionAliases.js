@@ -55,6 +55,10 @@
 			}
 
 			fields.forEach( function ( field ) {
+				// The following messages can be used here:
+				// * wikibase-label-edit-placeholder-language-aware
+				// * wikibase-description-edit-placeholder-language-aware
+				// * wikibase-aliases-edit-placeholder-language-aware
 				field.$input.prop( 'placeholder', mw.msg( field.msgAware, autonym ) );
 				if ( langDir ) {
 					field.$input.prop( 'dir', langDir );
