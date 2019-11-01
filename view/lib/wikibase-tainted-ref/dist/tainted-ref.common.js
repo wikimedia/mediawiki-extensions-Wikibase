@@ -4399,14 +4399,22 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=54795ab3&
-var TaintedIconvue_type_template_id_54795ab3_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"}})}
-var TaintedIconvue_type_template_id_54795ab3_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=653d6ea1&
+var TaintedIconvue_type_template_id_653d6ea1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":_vm.onClick}})}
+var TaintedIconvue_type_template_id_653d6ea1_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=54795ab3&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=653d6ea1&
 
+// CONCATENATED MODULE: ./src/store/actionTypes.ts
+var STATEMENT_TAINTED_STATE_INIT = 'initTaintedState';
+var STATEMENT_TAINTED_STATE_TAINT = 'taintTaintedState';
+var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
+var POPPER_SHOW = 'showPopper';
+var POPPER_HIDE = 'hidePopper';
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=script&lang=ts&
+
+
 
 
 
@@ -4425,6 +4433,14 @@ function (_Vue) {
 
     return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(TaintedIcon).apply(this, arguments));
   }
+
+  _createClass(TaintedIcon, [{
+    key: "onClick",
+    value: function onClick(event) {
+      event.preventDefault();
+      this.$store.dispatch(POPPER_SHOW, this.$parent.$data.id);
+    }
+  }]);
 
   return TaintedIcon;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
@@ -4542,8 +4558,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_TaintedIconvue_type_script_lang_ts_,
-  TaintedIconvue_type_template_id_54795ab3_render,
-  TaintedIconvue_type_template_id_54795ab3_staticRenderFns,
+  TaintedIconvue_type_template_id_653d6ea1_render,
+  TaintedIconvue_type_template_id_653d6ea1_staticRenderFns,
   false,
   null,
   null,
@@ -4717,12 +4733,6 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
-// CONCATENATED MODULE: ./src/store/actionTypes.ts
-var STATEMENT_TAINTED_STATE_INIT = 'initTaintedState';
-var STATEMENT_TAINTED_STATE_TAINT = 'taintTaintedState';
-var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
-var POPPER_SHOW = 'showPopper';
-var POPPER_HIDE = 'hidePopper';
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var SET_ALL_UNTAINTED = 'setAllUntainted';
 var SET_TAINTED = 'setTainted';
