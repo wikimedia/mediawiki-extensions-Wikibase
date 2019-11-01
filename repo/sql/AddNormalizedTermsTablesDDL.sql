@@ -85,7 +85,7 @@ CREATE UNIQUE INDEX /*i*/wbt_term_in_lang_text_in_lang_id_lang_id ON /*_*/wbt_te
 -- text is normalized through wb_term_text table.
 CREATE TABLE IF NOT EXISTS /*_*/wbt_text_in_lang (
   wbxl_id                         INT unsigned       NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  wbxl_language                   VARBINARY(10)      NOT NULL,
+  wbxl_language                   VARBINARY(20)      NOT NULL,
   wbxl_text_id                    INT unsigned       NOT NULL
 ) /*$wgDBTableOptions*/;
 
