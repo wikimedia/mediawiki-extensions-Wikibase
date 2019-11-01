@@ -75,12 +75,14 @@ class WikibaseContentLanguages {
 					'abq', // T155367
 					'alc', // T190981
 					'ami', // T174238
+					'bdr', // T234330
 					'bnn', // T174230
 					'brx', // T155369
 					'chn', // T155370
 					'clc', // T222020
 					'cnr', // T185800
 					'cop', // T155371
+					'crb', // T220284
 					'el-cy', // T198674
 					'ett', // T125066
 					'eya', // T155372
@@ -111,6 +113,7 @@ class WikibaseContentLanguages {
 					'ood', // T155423
 					'otk', // T137809
 					'peo', // T189427
+					'pi-sidd', // T230881
 					'pjt', // T155426
 					'ppu', // T174233
 					'pwn', // T174231
@@ -118,6 +121,7 @@ class WikibaseContentLanguages {
 					'quc', // T155376
 					'qya', // T185194
 					'rar', // T155427
+					'sa-sidd', // T230881
 					'shy', // T184783
 					'sia', // T217521
 					'sjd', // T188596
@@ -131,6 +135,7 @@ class WikibaseContentLanguages {
 					'syc', // T164580
 					'tlb', // T216798
 					'tli', // T230145
+					'tnq', // T220284
 					'trv', // T174228
 					'tzl', // T98314
 					'uga', // T155431
