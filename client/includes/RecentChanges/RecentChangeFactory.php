@@ -131,7 +131,7 @@ class RecentChangeFactory {
 			$userText = '';
 		}
 
-		$time = isset( $metadata['time'] ) ? $metadata['time'] : wfTimestamp( TS_MW );
+		$time = $metadata['time'] ?? wfTimestamp( TS_MW );
 
 		$params = [
 			'wikibase-repo-change' => $metadata,

@@ -112,7 +112,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private function extractLanguageCode( WebRequest $request, array $subPageParts ) {
 		$languageCode = $request->getRawVal(
 			'language',
-			isset( $subPageParts[0] ) ? $subPageParts[0] : ''
+			$subPageParts[0] ?? ''
 		);
 
 		if ( $languageCode === '' ) {

@@ -78,8 +78,6 @@ $cfg['suppress_issue_types'] = array_merge(
 
 		"PhanTypeArraySuspiciousNullable",
 
-		'PhanPluginDuplicateConditionalNullCoalescing',
-
 		// Both local and global vendor directories have to be analysed
 		"PhanRedefinedExtendedClass",
 		"PhanRedefinedInheritedInterface",

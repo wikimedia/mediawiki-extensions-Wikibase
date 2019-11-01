@@ -167,7 +167,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$entityRevision = null;
 		}
 
-		$new = isset( $params['new'] ) ? $params['new'] : null;
+		$new = $params['new'] ?? null;
 		if ( is_null( $entityRevision ) ) {
 			if ( $baseRev > 0 ) {
 				$this->errorReporter->dieError(
@@ -382,7 +382,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		}
 
 		// Null fails the token check.
-		return isset( $params['token'] ) ? $params['token'] : null;
+		return $params['token'] ?? null;
 	}
 
 	/**

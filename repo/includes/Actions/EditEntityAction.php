@@ -308,7 +308,7 @@ class EditEntityAction extends ViewEntityAction {
 	private function getTitleText() {
 		$meta = $this->getOutput()->getProperty( 'wikibase-meta-tags' );
 
-		return isset( $meta['title'] ) ? $meta['title'] : $this->getTitle()->getPrefixedText();
+		return $meta['title'] ?? $this->getTitle()->getPrefixedText();
 	}
 
 	/**

@@ -101,8 +101,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		// Setup
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
-		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
-		$page = trim( $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' ) );
+		$site = trim( $request->getVal( 'site', $parts[0] ?? '' ) );
+		$page = trim( $request->getVal( 'page', $parts[1] ?? '' ) );
 
 		$itemContent = null;
 

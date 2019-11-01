@@ -112,7 +112,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			],
 			self::FIELD_LABEL => [
 				'name' => self::FIELD_LABEL,
-				'default' => isset( $this->parts[0] ) ? $this->parts[0] : '',
+				'default' => $this->parts[0] ?? '',
 				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-label',
 				'placeholder-message' => 'wikibase-label-edit-placeholder',
@@ -120,7 +120,7 @@ class SpecialNewItem extends SpecialNewEntity {
 			],
 			self::FIELD_DESCRIPTION => [
 				'name' => self::FIELD_DESCRIPTION,
-				'default' => isset( $this->parts[1] ) ? $this->parts[1] : '',
+				'default' => $this->parts[1] ?? '',
 				'class' => HTMLTrimmedTextField::class,
 				'id' => 'wb-newentity-description',
 				'placeholder-message' => 'wikibase-description-edit-placeholder',

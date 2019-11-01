@@ -40,8 +40,8 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 
 		$this->outputRow( [
 			$label,
-			isset( $state->chd_site ) ? $state->chd_site : '-',
-			isset( $state->chd_seen ) ? $state->chd_seen : '-',
+			$state->chd_site ?? '-',
+			$state->chd_seen ?? '-',
 			$lang->formatNum( $state->chd_pending ),
 			$state->chd_lag === null
 				? wfMessage( 'wikibase-dispatchstats-large-lag' )->text()

@@ -85,7 +85,7 @@ call_user_func( function() {
 
 	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
 	foreach ( $repoDataTypes as $type => $repoDef ) {
-		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : [];
+		$baseDef = $wgWBRepoDataTypes[$type] ?? [];
 		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
 	}
 

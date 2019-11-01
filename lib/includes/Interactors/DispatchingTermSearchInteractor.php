@@ -67,7 +67,7 @@ class DispatchingTermSearchInteractor implements ConfigurableTermSearchInteracto
 	 * @return TermSearchInteractor|null
 	 */
 	private function getInteractorForEntityType( $entityType ) {
-		return isset( $this->interactors[$entityType] ) ? $this->interactors[$entityType] : null;
+		return $this->interactors[$entityType] ?? null;
 	}
 
 	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ) {

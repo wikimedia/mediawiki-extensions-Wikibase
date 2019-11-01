@@ -73,7 +73,7 @@ class DispatchingEntityPrefetcher implements EntityPrefetcher {
 	 * @return EntityPrefetcher|null
 	 */
 	private function getPrefetcherForRepository( $repositoryName ) {
-		return isset( $this->prefetchers[$repositoryName ] ) ? $this->prefetchers[$repositoryName] : null;
+		return $this->prefetchers[$repositoryName] ?? null;
 	}
 
 	/**
