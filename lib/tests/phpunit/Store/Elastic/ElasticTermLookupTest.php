@@ -27,7 +27,7 @@ class ElasticTermLookupTest extends EntityTermLookupTest {
 
 	private static $termData;
 
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass() : void {
 		parent::setUpBeforeClass();
 		self::$termData = self::getTermData();
 		if ( !class_exists( CirrusSearch::class ) ) {

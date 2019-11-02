@@ -20,7 +20,7 @@ use Wikibase\Client\MoreLikeWikibase;
  */
 class MoreLikeWikibaseTest extends MediaWikiTestCase {
 
-	public static function setUpBeforeClass() {
+	public static function setUpBeforeClass() : void {
 		if ( !class_exists( CirrusSearch::class ) ||
 			!class_exists( \Elastica\Query\BoolQuery::class ) ) {
 			self::markTestSkipped( "CirrusSearch needs to be enabled to run this test" );
