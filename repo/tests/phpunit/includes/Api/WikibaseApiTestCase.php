@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
 use ChangeTags;
+use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Revision;
 use TestSites;
@@ -24,11 +25,14 @@ use WikiPage;
 abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	protected function setUp() : void {
+
 		parent::setUp();
 
 		static $isSetup = false;
 
 		$this->setupUser();
+
+		$this->setupSiteLinkGroups();
 
 		$siteStore = new \HashSiteStore( TestSites::getSites() );
 		$this->setService( 'SiteStore', $siteStore );
@@ -65,6 +69,15 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			'edit' => true,
 			'writeapi' => true
 		] ] );
+	}
+
+	private function setupSiteLinkGroups() {
+		global $wgWBRepoSettings;
+
+		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
+		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'SiteLookup' );
 	}
 
 	/**
