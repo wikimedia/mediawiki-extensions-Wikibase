@@ -10,8 +10,9 @@ import {
 	mockMwConfig,
 	mockMwEnv,
 } from '../../util/mocks';
-import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
+import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
+import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
@@ -76,8 +77,9 @@ describe( 'init', () => {
 				( window as MwWindow ).$.uls!.data,
 			),
 		);
+		const entityInfoDispatcher = new ForeignApiEntityInfoDispatcher( ForeignApi, [ 'labels' ] );
 		expectedServices.setEntityLabelRepository(
-			new ForeignApiEntityLabelRepository( 'en', ForeignApi ),
+			new DispatchingEntityLabelRepository( 'en', entityInfoDispatcher ),
 		);
 		expectedServices.setMessagesRepository(
 			new MwMessagesRepository( ( window as MwWindow ).mw.message ),

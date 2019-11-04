@@ -3,8 +3,9 @@ import ServiceRepositories from '@/services/ServiceRepositories';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
-import ForeignApiEntityLabelRepository from '@/data-access/ForeignApiEntityLabelRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
+import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
+import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
@@ -38,9 +39,9 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	) );
 
 	services.setEntityLabelRepository(
-		new ForeignApiEntityLabelRepository(
+		new DispatchingEntityLabelRepository(
 			mwWindow.mw.config.get( 'wgPageContentLanguage' ),
-			repoForeignApi,
+			new ForeignApiEntityInfoDispatcher( repoForeignApi, [ 'labels' ] ),
 		),
 	);
 
