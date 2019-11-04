@@ -3936,12 +3936,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=06a00a6f&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=51d07fa2&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"wb-tr-app"},[(_vm.isTainted)?_c('TaintedIcon'):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=06a00a6f&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=51d07fa2&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -4399,12 +4399,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=653d6ea1&
-var TaintedIconvue_type_template_id_653d6ea1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":_vm.onClick}})}
-var TaintedIconvue_type_template_id_653d6ea1_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=328a49b5&
+var TaintedIconvue_type_template_id_328a49b5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":_vm.onClick}})}
+var TaintedIconvue_type_template_id_328a49b5_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=653d6ea1&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=328a49b5&
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var STATEMENT_TAINTED_STATE_INIT = 'initTaintedState';
@@ -4558,8 +4558,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_TaintedIconvue_type_script_lang_ts_,
-  TaintedIconvue_type_template_id_653d6ea1_render,
-  TaintedIconvue_type_template_id_653d6ea1_staticRenderFns,
+  TaintedIconvue_type_template_id_328a49b5_render,
+  TaintedIconvue_type_template_id_328a49b5_staticRenderFns,
   false,
   null,
   null,
