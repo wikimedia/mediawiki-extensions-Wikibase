@@ -185,6 +185,8 @@
 	"wikibase-property-summary-wbeditentity-create": "Opprettet en ny egenskap",
 	"wikibase-property-summary-wbeditentity-create-property": "Opprettet en ny egenskap",
 	"wikibase-property-summary-wbeditentity-update": "Endret en egenskap",
+	"wikibase-property-summary-wbeditentity-update-languages": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}, og andre deler",
 	"wikibase-property-summary-wbeditentity-override": "Renset en egenskap",
 	"wikibase-property-summary-special-create-property": "Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}"
 }

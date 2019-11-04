@@ -4,13 +4,22 @@
 			"Pyscowicz"
 		]
 	},
+	"wikibase-comment-sitelink-add": "Kielilänkki lisätty: $1",
+	"wikibase-comment-sitelink-change": "Kielilänkki $1 muutettu muothoon $2",
+	"wikibase-comment-sitelink-remove": "Kielilänkki otettu poies: $1",
 	"wikibase-editlinks": "Mookkaa länkkejä",
+	"wikibase-editlinkstitle": "Mookkaa kieltenvälisiä länkkejä",
+	"wikibase-addlinkstitle": "Lissää kieltenvälisiä länkkejä",
 	"wikibase-linkitem-addlinks": "Lissää länkkejä",
+	"wikibase-linkitem-close": "Sulje ikkuna ja lattaa sivu uuesti",
 	"wikibase-linkitem-title": "Länkitä sivuun",
 	"wikibase-linkitem-linkpage": "Länkitä sivuun",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Piilota",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-mookkaus",
-	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-mookkaukset"
+	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-mookkaukset",
+	"wikibase-pageinfo-description-local": "Paikallinen kuvvaus",
+	"wikibase-pageinfo-entity-usage-S": "Sivulänkki",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Kuvvaus: $1"
 }

@@ -181,6 +181,8 @@
 	"wikibase-property-summary-wbeditentity-create": "Создадено ново својство",
 	"wikibase-property-summary-wbeditentity-create-property": "Создадено ново својство",
 	"wikibase-property-summary-wbeditentity-update": "Изменето својство",
+	"wikibase-property-summary-wbeditentity-update-languages": "Изменет натпис, опис и/или истозначници на $3 {{PLURAL:$3|јазик|јазици}}",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Изменет натпис, опис и/или истозначници на $3 {{PLURAL:$3|јазик|јазици}}, и други делови",
 	"wikibase-property-summary-wbeditentity-override": "Презапишано својство",
 	"wikibase-property-summary-special-create-property": "Создадено својство за [$2] со {{PLURAL:$1|вредноста|вредностите}}"
 }

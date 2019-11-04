@@ -49,5 +49,6 @@
 	"wikibase-pageinfo-entity-id-none": "Geen",
 	"wikibase-otherprojects": "In andere projekten",
 	"wikibase-otherprojects-beta-message": "Andere projekten-sydbalke",
-	"wikibase-otherprojects-beta-description": "Voogt een \"{{int:wikibase-otherprojects}}\"-sekty to an de sydbalke dee togang givt tot andere Wikimedia-projekten up basis van gegeavens van {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Voogt een \"{{int:wikibase-otherprojects}}\"-sekty to an de sydbalke dee togang givt tot andere Wikimedia-projekten up basis van gegeavens van {{WBREPONAME}}.",
+	"connected-redirect-category": "Döärverwysingen verbünden mid een {{WBREPONAME}}-objekt"
 }
