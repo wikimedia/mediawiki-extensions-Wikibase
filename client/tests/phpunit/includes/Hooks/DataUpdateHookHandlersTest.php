@@ -95,7 +95,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 		if ( empty( $expectedUsages ) || !$useJobQueue ) {
 			$jobScheduler->expects( $this->never() )
-				->method( 'lazyPush' );
+				->method( 'push' );
 		} else {
 			$expectedUsageArray = array_map( function ( EntityUsage $usage ) {
 				return $usage->asArray();
@@ -109,7 +109,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			];
 
 			$jobScheduler->expects( $this->once() )
-				->method( 'lazyPush' )
+				->method( 'push' )
 				->with( $this->callback( function ( $job ) use ( $params, $title ) {
 					$jobParams = $job->getParams();
 					// Unrelated parameter used by mw core to tie together logging of jobs
