@@ -23,11 +23,15 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 
+	private function newEntityUsageFactory(): EntityUsageFactory {
+		return new EntityUsageFactory( new BasicEntityIdParser() );
+	}
+
 	public function testAddGetUsage() {
 		$parserOutput = new ParserOutput();
 		$acc = new ParserOutputUsageAccumulator(
 			$parserOutput,
-			new EntityUsageFactory( new BasicEntityIdParser() )
+			$this->newEntityUsageFactory()
 		);
 		$tester = new UsageAccumulatorContractTester( $acc );
 
@@ -36,9 +40,12 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNotNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
 	}
 
-	public function testAddGetUsageLegacyDataAndConstruction() {
+	public function testAddGetUsageLegacyData() {
 		$parserOutput = new ParserOutput();
-		$acc = new ParserOutputUsageAccumulator( $parserOutput );
+		$acc = new ParserOutputUsageAccumulator(
+			$parserOutput,
+			$this->newEntityUsageFactory()
+		);
 
 		$entityUsage = new EntityUsage( new ItemId( 'Q5' ), EntityUsage::LABEL_USAGE );
 		$parserOutput->setExtensionData( 'wikibase-entity-usage', [ $entityUsage ] );
@@ -61,7 +68,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$id = new ItemId( 'Q1' );
 		$acc = new ParserOutputUsageAccumulator(
 			new ParserOutput(),
-			new EntityUsageFactory( new BasicEntityIdParser() ),
+			$this->newEntityUsageFactory(),
 			$deduplicator
 		);
 		$acc->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE ) );
