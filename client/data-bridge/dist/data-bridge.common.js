@@ -8970,6 +8970,16 @@ var getters_getters = {
 
     return state.targetLabel;
   },
+  targetReferences: function targetReferences(state) {
+    if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
+      return [];
+    }
+
+    var activeState = state;
+    var entityId = activeState[NS_ENTITY].id;
+    var statements = activeState[NS_ENTITY][NS_STATEMENTS][entityId][state.targetProperty][0];
+    return statements.references ? statements.references : [];
+  },
   isTargetStatementModified: function isTargetStatementModified(state) {
     if (state.applicationStatus !== definitions_ApplicationStatus.READY) {
       return false;
@@ -9283,7 +9293,7 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
 
 
 
-/* harmony default export */ var statements = (function () {
+/* harmony default export */ var entity_statements = (function () {
   var state = {};
   return {
     namespaced: true,
@@ -9309,7 +9319,7 @@ var statements_actions_actions = actions_objectSpread({}, statementActions, {}, 
     state: state,
     mutations: entity_mutations_mutations,
     actions: actions_actions(readingEntityRepository, writingEntityRepository),
-    modules: _defineProperty({}, NS_STATEMENTS, statements())
+    modules: _defineProperty({}, NS_STATEMENTS, entity_statements())
   };
 });
 // CONCATENATED MODULE: ./src/store/index.ts
