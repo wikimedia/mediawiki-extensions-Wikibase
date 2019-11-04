@@ -16,7 +16,9 @@ use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -320,12 +322,10 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$expectedUsage = [
-			new EntityUsage(
-				new ItemId( $expectedItem ),
-				EntityUsage::SITELINK_USAGE
-			)
-		];
+		$expectedUsage = new EntityUsage(
+			new ItemId( $expectedItem ),
+			EntityUsage::SITELINK_USAGE
+		);
 
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
@@ -333,7 +333,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$actualUsage = $parserOutput->getExtensionData( 'wikibase-entity-usage' );
 
-		$this->assertEquals( array_values( $expectedUsage ), array_values( $actualUsage ) );
+		$this->assertEquals( [ $expectedUsage->getIdentityString() ], array_keys( $actualUsage ) );
 
 		$actualBadges = $parserOutput->getExtensionData( 'wikibase_badges' );
 
@@ -455,6 +455,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo, $siteLinkData ),
 			$mockRepo,
 			$mockRepo,
+			new EntityUsageFactory( new BasicEntityIdParser() ),
 			$settings->getSetting( 'siteGlobalID' )
 		);
 	}

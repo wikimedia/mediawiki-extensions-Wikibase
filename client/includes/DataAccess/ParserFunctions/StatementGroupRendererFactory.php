@@ -10,6 +10,7 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -48,6 +49,11 @@ class StatementGroupRendererFactory {
 	private $dataAccessSnakFormatterFactory;
 
 	/**
+	 * @var EntityUsageFactory
+	 */
+	private $entityUsageFactory;
+
+	/**
 	 * @var bool
 	 */
 	private $allowDataAccessInUserLanguage;
@@ -57,6 +63,7 @@ class StatementGroupRendererFactory {
 	 * @param SnaksFinder $snaksFinder
 	 * @param EntityLookup $entityLookup
 	 * @param DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory
+	 * @param EntityUsageFactory $entityUsageFactory
 	 * @param bool $allowDataAccessInUserLanguage
 	 */
 	public function __construct(
@@ -64,12 +71,14 @@ class StatementGroupRendererFactory {
 		SnaksFinder $snaksFinder,
 		EntityLookup $entityLookup,
 		DataAccessSnakFormatterFactory $dataAccessSnakFormatterFactory,
+		EntityUsageFactory $entityUsageFactory,
 		$allowDataAccessInUserLanguage
 	) {
 		$this->propertyLabelResolver = $propertyLabelResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->entityLookup = $entityLookup;
 		$this->dataAccessSnakFormatterFactory = $dataAccessSnakFormatterFactory;
+		$this->entityUsageFactory = $entityUsageFactory;
 		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 	}
 
@@ -80,7 +89,7 @@ class StatementGroupRendererFactory {
 	 * @return StatementGroupRenderer
 	 */
 	public function newRendererFromParser( Parser $parser, $type = 'escaped-plaintext' ) {
-		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
+		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput(), $this->entityUsageFactory );
 
 		if ( $this->allowDataAccessInUserLanguage ) {
 			// Use the user's language.

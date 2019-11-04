@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -39,6 +40,11 @@ class ClientParserOutputDataUpdater {
 	private $siteLinkLookup;
 
 	/**
+	 * @var EntityUsageFactory
+	 */
+	private $entityUsageFactory;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -53,6 +59,7 @@ class ClientParserOutputDataUpdater {
 	 *            Use the factory here to defer initialization of things like Site objects.
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
+	 * @param EntityUsageFactory $entityUsageFactory
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param LoggerInterface|null $logger
 	 *
@@ -62,6 +69,7 @@ class ClientParserOutputDataUpdater {
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
+		EntityUsageFactory $entityUsageFactory,
 		$siteId,
 		LoggerInterface $logger = null
 	) {
@@ -72,6 +80,7 @@ class ClientParserOutputDataUpdater {
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
 		$this->entityLookup = $entityLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityUsageFactory = $entityUsageFactory;
 		$this->siteId = $siteId;
 		$this->logger = $logger ?: new NullLogger();
 	}
@@ -88,7 +97,7 @@ class ClientParserOutputDataUpdater {
 		if ( $itemId ) {
 			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
 
-			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
+			$usageAccumulator = new ParserOutputUsageAccumulator( $out, $this->entityUsageFactory );
 			$usageAccumulator->addSiteLinksUsage( $itemId );
 		} else {
 			$out->unsetProperty( 'wikibase_item' );
@@ -113,7 +122,7 @@ class ClientParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
+			$usageAccumulator = new ParserOutputUsageAccumulator( $out, $this->entityUsageFactory );
 			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
 				->getOtherProjectsSidebarGenerator( $usageAccumulator );
 			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );

@@ -6,12 +6,15 @@ use Language;
 use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
+use ParserOutput;
 use Title;
 use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikimedia\TestingAccessWrapper;
@@ -76,6 +79,13 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
 	}
 
+	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): ParserOutputUsageAccumulator {
+		return new ParserOutputUsageAccumulator(
+			$parserOutput,
+			new EntityUsageFactory( new BasicEntityIdParser() )
+		);
+	}
+
 	protected function tearDown() : void {
 		parent::tearDown();
 
@@ -96,7 +106,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'P342#L.de', 'Q32487#O', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -108,7 +118,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32487#O', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -120,7 +130,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32488#O', 'Q32488#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -132,7 +142,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p>Lua&#160;:), Lua&#160;:)\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32489#O', 'Q32489#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -144,7 +154,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q1234567#O', 'Q1234567#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -159,7 +169,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 			$result->getText( [ 'unwrap' => true ] )
 		);
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32487#O' ], // 'Q32487#C.P2147483645' is not tracked, as P2147483645 doesn't exist
 			array_keys( $usageAccumulator->getUsages() )
@@ -174,7 +184,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[],
 			array_keys( $usageAccumulator->getUsages() )

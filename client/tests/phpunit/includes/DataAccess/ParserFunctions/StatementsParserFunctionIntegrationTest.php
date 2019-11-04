@@ -13,7 +13,9 @@ use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -100,6 +102,13 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
 	}
 
+	private function newParserOutputUsageAccumulator( ParserOutput $parserOutput ): ParserOutputUsageAccumulator {
+		return new ParserOutputUsageAccumulator(
+			$parserOutput,
+			new EntityUsageFactory( new BasicEntityIdParser() )
+		);
+	}
+
 	protected function tearDown() : void {
 		parent::tearDown();
 
@@ -124,7 +133,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'P342#L.de', 'Q32487#O', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -136,7 +145,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32487#O', 'Q32487#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -148,7 +157,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p><span><span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32488#O', 'Q32488#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -160,7 +169,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32489#O', 'Q32489#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -172,7 +181,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q1234567#O', 'Q1234567#C.P342' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -197,7 +206,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( "<p><span><span>X303</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q999#O', 'Q999#C.P666' ],
 			array_keys( $usageAccumulator->getUsages() )
@@ -212,7 +221,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 			$result->getText( [ 'unwrap' => true ] )
 		);
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[ 'Q32487#O' ], // 'Q32487#C.P2147483645' is not tracked, as P2147483645 doesn't exist
 			array_keys( $usageAccumulator->getUsages() )
@@ -227,7 +236,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$this->assertSame( '', $result->getText( [ 'unwrap' => true ] ) );
 
-		$usageAccumulator = new ParserOutputUsageAccumulator( $result );
+		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(
 			[],
 			array_keys( $usageAccumulator->getUsages() )

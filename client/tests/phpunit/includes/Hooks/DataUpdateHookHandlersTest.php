@@ -9,8 +9,10 @@ use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -170,7 +172,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		return new DataUpdateHookHandlers(
 			$usageUpdater,
 			$jobScheduler,
-			$usageLookup
+			$usageLookup,
+			new EntityUsageFactory( new BasicEntityIdParser() )
 		);
 	}
 
@@ -183,7 +186,10 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$output = new ParserOutput();
 
 		if ( $usages ) {
-			$acc = new ParserOutputUsageAccumulator( $output );
+			$acc = new ParserOutputUsageAccumulator(
+				$output,
+				new EntityUsageFactory( new BasicEntityIdParser() )
+			);
 
 			foreach ( $usages as $u ) {
 				$acc->addUsage( $u );
@@ -308,7 +314,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$handler = new DataUpdateHookHandlers(
 			$usageUpdater,
 			$jobScheduler,
-			$usageLookup
+			$usageLookup,
+			new EntityUsageFactory( new BasicEntityIdParser() )
 		);
 		$handler->doParserCacheSaveComplete( $parserOutput, $title );
 	}
@@ -341,7 +348,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$handler = new DataUpdateHookHandlers(
 			$usageUpdater,
 			$jobScheduler,
-			$usageLookup
+			$usageLookup,
+			new EntityUsageFactory( new BasicEntityIdParser() )
 		);
 		$handler->doParserCacheSaveComplete( $parserOutput, $title );
 	}

@@ -62,6 +62,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\WikibaseServices;
@@ -1147,6 +1148,7 @@ final class WikibaseClient {
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
+				new EntityUsageFactory( $this->getEntityIdParser() ),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getLogger()
 			);
@@ -1346,6 +1348,7 @@ final class WikibaseClient {
 			new SnaksFinder(),
 			$this->getRestrictedEntityLookup(),
 			$this->getDataAccessSnakFormatterFactory(),
+			new EntityUsageFactory( $this->getEntityIdParser() ),
 			$this->settings->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
