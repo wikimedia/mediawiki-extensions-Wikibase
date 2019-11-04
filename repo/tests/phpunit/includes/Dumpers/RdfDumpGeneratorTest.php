@@ -26,6 +26,7 @@ use Wikibase\Rdf\PropertyRdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
@@ -98,11 +99,22 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( BatchedEntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				return Title::newFromText( $entityId->getSerialization() );
+			} ) );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitlesForIds' )
+			->will( $this->returnCallback( function( array $entityIds ) {
+				$titles = [];
+				foreach ( $entityIds as $entityId ) {
+					$titles[ $entityId->getSerialization() ] = Title::newFromText(
+						$entityId->getSerialization()
+					);
+				}
+				return $titles;
 			} ) );
 
 		return $entityTitleLookup;
@@ -262,7 +274,11 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 
 		foreach ( $ids as $id ) {
 			$id = $id->getSerialization();
-			$entityRevisions[$id] = new EntityRevision( $this->getTestData()->getEntity( $id ), 12, '19700112134640' );
+			$entityRevisions[$id] = new EntityRevision(
+				$this->getTestData()->getEntity( $id ),
+				12,
+				'19700112134640'
+			);
 		}
 
 		$dumper = $this->newDumpGenerator( 'full-dump', $entityRevisions );

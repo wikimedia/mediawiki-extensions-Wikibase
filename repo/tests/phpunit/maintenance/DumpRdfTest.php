@@ -38,6 +38,7 @@ use Wikibase\DumpRdf;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -307,7 +308,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
+		$entityTitleLookup = $this->createMock( BatchedEntityTitleStoreLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
