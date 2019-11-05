@@ -1,13 +1,15 @@
 export interface WellFormedResponse {
 	entities: {
-		[ entityId: string ]: {
-			labels: {
-				[ lang: string ]: {
-					language: string;
-					value: string;
-					'for-language'?: string;
-				};
-			};
+		[ entityId: string ]: EntityWithLabelData;
+	};
+}
+
+export interface EntityWithLabelData {
+	labels: {
+		[ lang: string ]: {
+			language: string;
+			value: string;
+			'for-language'?: string;
 		};
 	};
 }

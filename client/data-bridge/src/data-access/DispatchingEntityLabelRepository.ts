@@ -1,7 +1,7 @@
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
 import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWithoutLabelInLanguageException';
-import EntityInfoDispatcher from '@/definitions/data-access/EntityInfoDispatcher';
+import EntityInfoDispatcher, { EntityWithLabelData } from '@/definitions/data-access/EntityInfoDispatcher';
 
 export default class DispatchingEntityLabelRepository implements EntityLabelRepository {
 	private readonly forLanguageCode: string;
@@ -22,7 +22,7 @@ export default class DispatchingEntityLabelRepository implements EntityLabelRepo
 			},
 		} );
 
-		const entity = entities[ entityId ];
+		const entity = entities[ entityId ] as EntityWithLabelData;
 
 		if ( !( this.forLanguageCode in entity.labels ) ) {
 			throw new EntityWithoutLabelInLanguageException(
