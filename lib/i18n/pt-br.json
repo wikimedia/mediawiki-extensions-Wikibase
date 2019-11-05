@@ -191,6 +191,8 @@
 	"wikibase-property-summary-wbeditentity-create": "Criada uma nova propriedade",
 	"wikibase-property-summary-wbeditentity-create-property": "Criada uma nova propriedade",
 	"wikibase-property-summary-wbeditentity-update": "Mudou uma propriedade",
+	"wikibase-property-summary-wbeditentity-update-languages": "Etiqueta, descrição e/ou aliases alterados em $3 {{PLURAL:$3|idioma|idiomas}}",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Etiqueta, descrição e/ou aliases alterados em $3 {{PLURAL:$3|idioma|idiomas}}, e outras partes",
 	"wikibase-property-summary-wbeditentity-override": "Limpou uma propriedade",
 	"wikibase-property-summary-special-create-property": "Criou uma propriedade com {{PLURAL:$1|um valor [$2]|valores [$2]}}"
 }
