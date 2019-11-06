@@ -34,7 +34,7 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 
 	public function __construct(
 		ParserOutput $parserOutput,
-		EntityUsageFactory $entityUsageFactory = null,
+		EntityUsageFactory $entityUsageFactory,
 		UsageDeduplicator $deduplicator = null
 	) {
 		$this->parserOutput = $parserOutput;
@@ -44,13 +44,6 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 		);
 		$this->usageDeduplicator = $deduplicator ?: new UsageDeduplicator( $usageModifierLimits );
 		$this->entityUsageFactory = $entityUsageFactory;
-
-		// FIXME: $entityUsageFactory is temporarily optional, as Lexeme directly constructs this
-		if ( $entityUsageFactory === null ) {
-			$this->entityUsageFactory = new EntityUsageFactory(
-				WikibaseClient::getDefaultInstance()->getEntityIdParser()
-			);
-		}
 	}
 
 	/**
