@@ -10,7 +10,10 @@ export default async (): Promise<void> => {
 		const app = require( RL_COMMON_MODULE_NAME );
 		const hookHandler = new MWHookHandler( mwWindow.mw.hook, new TaintedChecker() );
 		mwWindow.mw.hook( 'wikibase.entityPage.entityView.rendered' ).add(
-			() => { app.launch( hookHandler ); },
+			() => {
+				const helpLink = mwWindow.mw.util.getUrl( 'Special:MyLanguage/Help:Sources' );
+				app.launch( hookHandler, helpLink );
+			},
 		);
 	}
 };

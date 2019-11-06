@@ -45,12 +45,18 @@ interface MediaWiki {
 	language: MwLanguage;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.hook */
 	hook: HookRegistry;
+	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util */
+	util: MwUtil;
 }
 
 export type HookRegistry = ( name: string ) => Hook;
 
 export interface Hook {
 	add( handler: Function ): Hook;
+}
+
+export interface MwUtil {
+	getUrl( pageName: string ): string;
 }
 
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */

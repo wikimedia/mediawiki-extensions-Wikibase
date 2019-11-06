@@ -1,9 +1,9 @@
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
-import { STORE_INIT } from '@/store/actionTypes';
+import { STORE_INIT, HELP_LINK_SET } from '@/store/actionTypes';
 import { HookHandler } from '@/HookHandler';
 
-export function launch( hookHandler: HookHandler ): void {
+export function launch( hookHandler: HookHandler, helpLink: string ): void {
 	const store = createStore();
 	const guids: string[] = [];
 	document.querySelectorAll( '.wikibase-statementview' ).forEach( ( element ) => {
@@ -17,5 +17,6 @@ export function launch( hookHandler: HookHandler ): void {
 		}
 	} );
 	store.dispatch( STORE_INIT, guids );
+	store.dispatch( HELP_LINK_SET, helpLink );
 	hookHandler.addStore( store );
 }

@@ -3,6 +3,7 @@ import {
 	STORE_INIT,
 	STATEMENT_TAINTED_STATE_TAINT,
 	STATEMENT_TAINTED_STATE_UNTAINT,
+	HELP_LINK_SET,
 } from '@/store/actionTypes';
 import Application from './Application';
 import { ActionContext, ActionTree } from 'vuex';
@@ -13,6 +14,7 @@ import {
 	SET_POPPER_VISIBLE,
 	SET_TAINTED,
 	SET_UNTAINTED,
+	SET_HELP_LINK,
 } from '@/store/mutationTypes';
 
 export default function actions(): ActionTree<Application, Application> {
@@ -48,6 +50,12 @@ export default function actions(): ActionTree<Application, Application> {
 			payload: string,
 		): void {
 			context.commit( SET_POPPER_VISIBLE, payload );
+		},
+		[ HELP_LINK_SET ](
+			context: ActionContext<Application, Application>,
+			payload: string,
+		): void {
+			context.commit( SET_HELP_LINK, payload );
 		},
 
 	};

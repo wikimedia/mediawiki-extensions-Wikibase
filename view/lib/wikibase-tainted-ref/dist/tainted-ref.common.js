@@ -4412,6 +4412,7 @@ var STATEMENT_TAINTED_STATE_TAINT = 'taintTaintedState';
 var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
 var POPPER_SHOW = 'showPopper';
 var POPPER_HIDE = 'hidePopper';
+var HELP_LINK_SET = 'setHelpLink';
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=script&lang=ts&
 
 
@@ -4740,6 +4741,7 @@ var SET_TAINTED = 'setTainted';
 var SET_UNTAINTED = 'setUntainted';
 var SET_POPPER_HIDDEN = 'setPopperHidden';
 var SET_POPPER_VISIBLE = 'setPopperVisible';
+var SET_HELP_LINK = 'setHelpLink';
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -4759,6 +4761,8 @@ function actions() {
     context.commit(SET_POPPER_HIDDEN, payload);
   }), _defineProperty(_ref, POPPER_SHOW, function (context, payload) {
     context.commit(SET_POPPER_VISIBLE, payload);
+  }), _defineProperty(_ref, HELP_LINK_SET, function (context, payload) {
+    context.commit(SET_HELP_LINK, payload);
   }), _ref;
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
@@ -4785,6 +4789,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED,
   state.statementsPopperIsOpen[payload] = false;
 }), _defineProperty(_mutations, SET_POPPER_VISIBLE, function (state, payload) {
   state.statementsPopperIsOpen[payload] = true;
+}), _defineProperty(_mutations, SET_HELP_LINK, function (state, payload) {
+  state.helpLink = payload;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/getters.ts
 var getters = {
@@ -4797,6 +4803,9 @@ var getters = {
     return function (guid) {
       return state.statementsPopperIsOpen[guid];
     };
+  },
+  helpLink: function helpLink(state) {
+    return state.helpLink;
   }
 };
 // CONCATENATED MODULE: ./src/store/index.ts
@@ -4809,7 +4818,8 @@ external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(vuex_esm[
 function createStore() {
   var state = {
     statementsTaintedState: {},
-    statementsPopperIsOpen: {}
+    statementsPopperIsOpen: {},
+    helpLink: ''
   };
   return new vuex_esm["a" /* Store */]({
     state: state,
@@ -4823,7 +4833,7 @@ function createStore() {
 
 
 
-function launch(hookHandler) {
+function launch(hookHandler, helpLink) {
   var store = createStore();
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
@@ -4843,6 +4853,7 @@ function launch(hookHandler) {
     }
   });
   store.dispatch(STORE_INIT, guids);
+  store.dispatch(HELP_LINK_SET, helpLink);
   hookHandler.addStore(store);
 }
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js

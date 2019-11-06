@@ -12,4 +12,7 @@ export const getters: GetterTree<Application, Application> = {
 			return state.statementsPopperIsOpen[ guid ];
 		};
 	},
+	helpLink( state: Application ): string {
+		return state.helpLink;
+	},
 };
