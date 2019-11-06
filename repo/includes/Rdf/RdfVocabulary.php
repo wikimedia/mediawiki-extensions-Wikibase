@@ -103,7 +103,7 @@ class RdfVocabulary {
 	public $statementNamespaceNames = [];
 
 	/**
-	 * @var array Associative array mapping repository names to maps, each mapping the "general" property
+	 * @var array[] Associative array mapping repository names to maps, each mapping the "general" property
 	 * namespace name to the name specific to the particular repository (ie. containing repository suffix).
 	 */
 	public $propertyNamespaceNames = [];
