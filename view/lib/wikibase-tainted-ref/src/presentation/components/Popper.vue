@@ -4,7 +4,7 @@
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
 				<span class="wb-tr-popper-title">Potential Reference/Value Mismatch</span>
-				<span class="wb-tr-popper-close">x</span>
+				<a class="wb-tr-popper-close" @click="closeClick">x</a>
 			</div>
 			<p class="wb-tr-popper-text">
 				The value of "point in time" was changed, but the reference remained the same.
@@ -14,11 +14,17 @@
 </template>
 
 <script lang="ts">
+import { POPPER_HIDE } from '@/store/actionTypes';
 import Component from 'vue-class-component';
 import Vue from 'vue';
 
 @Component
-export default class Popper extends Vue {}
+export default class Popper extends Vue {
+	public closeClick( event: MouseEvent ) {
+		event.preventDefault();
+		this.$store.dispatch( POPPER_HIDE, this.$parent.$data.id );
+	}
+}
 </script>
 
 <style lang="scss">
