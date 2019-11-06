@@ -4750,6 +4750,7 @@ function actions() {
     context.commit(SET_ALL_UNTAINTED, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_UNTAINT, function (context, payload) {
     context.commit(SET_UNTAINTED, payload);
+    context.commit(SET_POPPER_HIDDEN, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_TAINT, function (context, payload) {
     context.commit(SET_TAINTED, payload);
   }), _defineProperty(_ref, POPPER_HIDE, function (context, payload) {
