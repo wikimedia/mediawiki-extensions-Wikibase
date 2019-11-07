@@ -60,32 +60,6 @@
 		);
 	} );
 
-	QUnit.test( 'Implicitly select entity by matching label / selectedEntity()', function ( assert ) {
-		var $entitySelector = newTestEntitySelector(),
-			entitySelector = $entitySelector.data( 'entityselector' ),
-			done = assert.async();
-		$entitySelector.val( 'abc' );
-
-		$entitySelector
-		.one( 'entityselectorselected', function ( event, id ) {
-			assert.deepEqual(
-				id,
-				entityStubs[ 0 ].id,
-				'Selected first entity.'
-			);
-
-			assert.deepEqual(
-				entitySelector.selectedEntity(),
-				entityStubs[ 0 ],
-				'Verified selected entity using selectedEntity().'
-			);
-
-			done();
-		} );
-
-		$entitySelector.trigger( 'eachchange.entityselector' );
-	} );
-
 	QUnit.test( 'Indicate unrecognized input', function ( assert ) {
 		var $entitySelector = newTestEntitySelector();
 		$entitySelector.data( 'entityselector' );
@@ -98,40 +72,15 @@
 	} );
 
 	QUnit.test( 'Indicate recognized input', function ( assert ) {
-		var done = assert.async(),
-			$entitySelector = newTestEntitySelector();
+		var $entitySelector = newTestEntitySelector();
 
-		$entitySelector.data( 'entityselector' );
+		var entitySelector = $entitySelector.data( 'entityselector' );
 
 		assert.notOk( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
-		$entitySelector.val( 'abc' );
+		entitySelector.selectedEntity( 'abc' );
 
-		$entitySelector
-			.one( 'entityselectorselected', function ( event, id ) {
-				$entitySelector.trigger( 'blur' );
-				assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
-				done();
-			} );
-
-		$entitySelector.trigger( 'eachchange.entityselector' );
-	} );
-
-	QUnit.test( 'Don\'t implicitly select entity by matching alias / selectedEntity()', function ( assert ) {
-		var $entitySelector = newTestEntitySelector(),
-			done = assert.async();
-
-		assert.expect( 0 );
-
-		$entitySelector.val( 'yz' );
-
-		$entitySelector
-		.one( 'entityselectorselected', function ( event, id ) {
-			assert.ok( false, 'entity should not automatically be selected based on the alias' );
-		} );
-
-		$entitySelector.trigger( 'eachchange.entityselector' );
-
-		window.setTimeout( done, 100 );
+		$entitySelector.trigger( 'blur' );
+		assert.ok( $entitySelector.hasClass( 'ui-entityselector-input-recognized' ) );
 	} );
 
 	QUnit.test( 'Item constructor', function ( assert ) {

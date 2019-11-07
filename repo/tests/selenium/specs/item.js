@@ -18,11 +18,13 @@ describe( 'item', function () {
 		ItemPage.addStatementLink.waitForVisible();
 		ItemPage.addStatementLink.click();
 		// enter the main value
-		// property input automatically foclused
 		ItemPage.propertyInputField.waitForVisible();
+		// property field should be automatically focused
 		browser.keys( propertyId );
-		// value input automatically focused
+		ItemPage.selectFirstSuggestedEntityOnEntitySelector();
+
 		ItemPage.valueInputField.waitForVisible();
+		// focus auto moved after selection
 		browser.keys( 'main value' );
 
 		// move focus to “add qualifier” and activate link
@@ -31,11 +33,12 @@ describe( 'item', function () {
 		// property input automatically focused
 		let statement = ItemPage.statements[ 0 ];
 		ItemPage.getNthQualifierPropertyInput( statement, 0 ).waitForVisible();
+		// property field should be automatically focused
 		browser.keys( propertyId );
-		// value input automatically focused
+		ItemPage.selectFirstSuggestedEntityOnEntitySelector();
 		ItemPage.firstQualifier.waitForExist();
+		// focus auto moved after selection
 		browser.keys( 'qualifier 1' );
-
 		browser.waitUntil( () => ItemPage.isSaveButtonEnabled() );
 
 		// move focus to “add reference” and activate link
@@ -44,10 +47,12 @@ describe( 'item', function () {
 		browser.keys( [ 'Enter' ] ); // this should also not save the statement (T154869)
 		// property input automatically focused
 		ItemPage.getNthReferencePropertyInput( statement, 0 ).waitForVisible();
+		// property field should be automatically focused
 		browser.keys( propertyId );
-		// value input automatically focused
+		ItemPage.selectFirstSuggestedEntityOnEntitySelector();
+
 		ItemPage.firstReference.waitForExist();
-		// value input automatically focused
+		// focus auto moved after selection
 		browser.keys( 'reference 1-1' );
 		browser.waitUntil( () => {
 			return ItemPage.isSaveButtonEnabled();

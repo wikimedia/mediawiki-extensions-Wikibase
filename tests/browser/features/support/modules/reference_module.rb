@@ -16,6 +16,7 @@ module ReferencePage
   a(:add_reference_snak, css: 'div.wikibase-statementview-references div.wikibase-referenceview span.wikibase-toolbar-button-add:not(.wikibase-toolbarbutton-disabled) > a')
   a(:add_reference_snak_disabled, css: 'div.wikibase-statementview-references div.wikibase-referenceview span.wikibase-toolbar-button-add.wikibase-toolbarbutton-disabled > a')
   span(:reference_counter, css: 'div.wikibase-statementview-references-heading span.ui-toggler-label')
+  a(:first_suggested_entity_link, xpath: '//ul[contains(@class, "ui-entityselector-list")][not(contains(@style,"display: none"))][not(contains(@class, "wikibase-entitysearch-list"))]//a')
 
   def remove_reference_snak(snak_index = 1)
     element('a', css: "div.wikibase-statementview-references div.wikibase-referenceview div.wikibase-snaklistview:nth-child(#{snak_index}) span.wikibase-toolbar-button-remove:not(.wikibase-toolbarbutton-disabled) > a")
@@ -63,6 +64,7 @@ module ReferencePage
       snak_entity_selector_input(index).when_visible.clear
       snak_entity_selector_input(index).send_keys properties[property_handle]['label']
       ajax_wait
+      first_suggested_entity_link_element.when_visible.click
       snak_value_input_field(index).when_visible.clear
       snak_value_input_field(index).send_keys value
       ajax_wait
