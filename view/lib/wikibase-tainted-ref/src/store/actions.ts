@@ -27,6 +27,7 @@ export default function actions(): ActionTree<Application, Application> {
 			payload: string,
 		): void {
 			context.commit( SET_UNTAINTED, payload );
+			context.commit( SET_POPPER_HIDDEN, payload );
 		},
 		[ STATEMENT_TAINTED_STATE_TAINT ](
 			context: ActionContext<Application, Application>,

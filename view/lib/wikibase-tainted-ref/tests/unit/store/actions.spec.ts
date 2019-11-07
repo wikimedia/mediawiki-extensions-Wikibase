@@ -25,6 +25,7 @@ describe( 'actions', () => {
 		const context = newMockStore( {} );
 		await ( actions as Function )()[ STATEMENT_TAINTED_STATE_UNTAINT ]( context, 'blah' );
 		expect( context.commit ).toBeCalledWith( SET_UNTAINTED, 'blah' );
+		expect( context.commit ).toBeCalledWith( SET_POPPER_HIDDEN, 'blah' );
 	} );
 	it( `commits to ${SET_TAINTED}`, async () => {
 		const context = newMockStore( {} );
