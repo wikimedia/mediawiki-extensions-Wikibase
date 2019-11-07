@@ -9138,11 +9138,11 @@ var statementGetters = (_statementGetters = {}, _defineProperty(_statementGetter
   };
 }), _defineProperty(_statementGetters, STATEMENTS_PROPERTY_EXISTS, function (state) {
   return function (entityId, propertyId) {
-    return state[entityId][propertyId] !== undefined;
+    return state[entityId] !== undefined && state[entityId][propertyId] !== undefined;
   };
 }), _defineProperty(_statementGetters, STATEMENTS_IS_AMBIGUOUS, function (state) {
   return function (entityId, propertyId) {
-    return state[entityId][propertyId] !== undefined && state[entityId][propertyId].length > 1;
+    return state[entityId] !== undefined && state[entityId][propertyId] !== undefined && state[entityId][propertyId].length > 1;
   };
 }), _statementGetters);
 // CONCATENATED MODULE: ./src/store/entity/statements/snaks/getters.ts

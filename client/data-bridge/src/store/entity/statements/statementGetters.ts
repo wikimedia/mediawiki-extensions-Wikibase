@@ -17,14 +17,16 @@ export const statementGetters: GetterTree<StatementsState, Application> = {
 		entityId: EntityId,
 		propertyId: EntityId,
 	): boolean => {
-		return state[ entityId ][ propertyId ] !== undefined;
+		return state[ entityId ] !== undefined
+			&& state[ entityId ][ propertyId ] !== undefined;
 	},
 
 	[ STATEMENTS_IS_AMBIGUOUS ]: ( state: StatementsState ) => (
 		entityId: EntityId,
 		propertyId: EntityId,
 	): boolean => {
-		return state[ entityId ][ propertyId ] !== undefined
+		return state[ entityId ] !== undefined
+			&& state[ entityId ][ propertyId ] !== undefined
 			&& state[ entityId ][ propertyId ].length > 1;
 	},
 };
