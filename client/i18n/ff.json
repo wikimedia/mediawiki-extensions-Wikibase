@@ -4,11 +4,14 @@
 			"Ibrahima"
 		]
 	},
+	"tooltip-t-wikibase": "Jokkol faade to temre resorde keɓe ceŋiiɗe",
 	"wikibase-comment-update": "Temre {{WBREPONAME}} wayliima",
 	"wikibase-dataitem": "Temre {{WBREPONAME}}",
 	"wikibase-editlinks": "Taƴto jokkorɗe",
 	"wikibase-editlinkstitle": "Taƴto jokkorɗe hakkunde ɗemɗe",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Suuɗ",
 	"wikibase-rc-hide-wikidata-show": "Hollu",
-	"wikibase-rc-wikibase-edit-title": "Taƴto {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Taƴto {{WBREPONAME}}",
+	"wikibase-otherprojects": "E eɓɓooje goɗɗe"
 }
