@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Store\Sql\Terms\Util;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -307,19 +306,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * @suppress SecurityCheck-SQLInjection
 	 */
 	private function insertNonExistingRecordsIntoMaster( array $neededRecords ) {
-		try {
-			$this->getDbMaster()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
-		} catch ( DBQueryError $dbError ) {
-			$this->logger->info(
-				'{method}: Inserting records into {table} failed: {exception}',
-				[
-					'method' => __METHOD__,
-					'exception' => $dbError,
-					'table' => $this->table,
-					'records' => $neededRecords
-				]
-			);
-		}
+		$this->getDbMaster()->insert( $this->table, $neededRecords, __METHOD__, [ 'IGNORE' ] );
 	}
 
 	private function filterNonExistingRecords( $neededRecords, $existingRecords ): array {
