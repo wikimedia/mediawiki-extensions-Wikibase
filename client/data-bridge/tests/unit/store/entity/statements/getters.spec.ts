@@ -50,6 +50,9 @@ describe( 'statements/Getters', () => {
 		expect( getters[ STATEMENTS_PROPERTY_EXISTS ](
 			newStatementsState( statements ), null, newApplicationState(), null,
 		)( entityId, 'P42' ) ).toBe( false );
+		expect( getters[ STATEMENTS_PROPERTY_EXISTS ](
+			newStatementsState( statements ), null, newApplicationState(), null,
+		)( `${entityId}0`, 'P23' ) ).toBe( false );
 	} );
 
 	it( 'determines if a statement on property is ambiguous', () => {
@@ -84,6 +87,9 @@ describe( 'statements/Getters', () => {
 		expect( getters[ STATEMENTS_IS_AMBIGUOUS ](
 			newStatementsState( statements ), null, newApplicationState(), null,
 		)( entityId, 'P21' ) ).toBe( false );
+		expect( getters[ STATEMENTS_IS_AMBIGUOUS ](
+			newStatementsState( statements ), null, newApplicationState(), null,
+		)( `${entityId}0`, 'P23' ) ).toBe( false );
 	} );
 
 	it( 'integrates the snak unit', () => {
