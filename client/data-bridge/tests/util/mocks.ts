@@ -110,3 +110,59 @@ export function mockMwEnv(
 		},
 	};
 }
+
+export function mockForeignApiGet(
+	getDataBridgeConfig: Promise<object>,
+	foreignApiEntityInfoResponse: Promise<object>,
+) {
+	return ( params: any ) => {
+		if ( params.action === 'query' && params.meta === 'wbdatabridgeconfig' ) {
+			return getDataBridgeConfig;
+		} else if ( params.action === 'wbgetentities' && params.ids ) {
+			return foreignApiEntityInfoResponse;
+		}
+		throw new Error( 'Request did not match mockForeignApiGet abilities!' );
+	};
+}
+
+export function mockDataBridgeConfig(): Promise<object> {
+	return Promise.resolve( {
+		query: {
+			wbdatabridgeconfig: {
+				dataTypeLimits: {
+					string: {
+						maxLength: 200,
+					},
+				},
+			},
+		},
+	} );
+}
+
+export function mockForeignApiEntityInfoResponse(
+	propertyId: string,
+	propertyLabel: string = 'a property',
+	language: string = 'en',
+	dataType: string = 'string',
+	fallbackLanguage?: string,
+): Promise<object> {
+	if ( !fallbackLanguage ) {
+		fallbackLanguage = language;
+	}
+	return Promise.resolve( {
+		success: 1,
+		entities: {
+			[ propertyId ]: {
+				id: propertyId,
+				datatype: dataType,
+				labels: {
+					[ language ]: {
+						value: propertyLabel,
+						language: fallbackLanguage,
+						'for-language': language,
+					},
+				},
+			},
+		},
+	} );
+}
