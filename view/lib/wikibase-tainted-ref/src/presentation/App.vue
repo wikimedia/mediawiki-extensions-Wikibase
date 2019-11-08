@@ -29,6 +29,7 @@ export default class App extends Vue {
 
 <style lang="scss">
 	.wb-tr-app {
+		margin-top: 0.7em;
 		padding-left: 0.5em;
 	}
 </style>

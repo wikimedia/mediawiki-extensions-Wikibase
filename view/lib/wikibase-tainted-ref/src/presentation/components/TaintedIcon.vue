@@ -23,14 +23,12 @@ export default class TaintedIcon extends Vue {
 <style lang="scss">
 	.wb-tr-tainted-icon {
 		display: block;
-		min-width: 20px;
-		min-height: 23px;
-		width: 20px;
-		height: 25px;
+		width: 1.4em;
+		height: 1.4em;
 		background-color: transparent;
 		background-image: $svg-tainted-icon;
 		background-position: top left;
-		background-size: 20px 30px;
+		background-size: 100%;
 		background-repeat: no-repeat;
 	}
 </style>
