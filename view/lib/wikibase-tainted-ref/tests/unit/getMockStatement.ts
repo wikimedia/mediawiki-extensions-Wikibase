@@ -2,8 +2,8 @@ import { Statement } from '@/definitions/wikibase-js-datamodel/Statement';
 
 export default function getMockStatement(
 	mainSnakEqual: boolean,
-	referencesEqual: boolean = true,
-	emptyReferences: boolean = false,
+	referencesEqual = true,
+	emptyReferences = false,
 ): Statement {
 	return {
 		getClaim: () => {

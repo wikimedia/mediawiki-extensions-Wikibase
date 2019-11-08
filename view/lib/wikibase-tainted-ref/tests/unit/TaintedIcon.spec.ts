@@ -8,7 +8,9 @@ import Track from '@/vue-plugins/Track';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
-localVue.use( Track, { trackingFunction: () => {} } );
+localVue.use( Track, { trackingFunction: () => {
+	// do nothing on track
+} } );
 
 describe( 'TaintedIcon.vue', () => {
 	it( 'should render the icon', () => {
