@@ -122,8 +122,9 @@ class EntityAccessor {
 			if ( !is_array( $value ) ) {
 				continue;
 			}
-			if ( array_key_exists( 0, $value ) ) {
-				$value = array_combine( range( 1, count( $value ) ), array_values( $value ) );
+			if ( isset( $value[0] ) ) {
+				array_unshift( $value, null );
+				unset( $value[0] );
 			}
 			$this->renumber( $value );
 		}
