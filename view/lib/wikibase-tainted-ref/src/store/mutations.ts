@@ -1,6 +1,7 @@
 import { MutationTree } from 'vuex';
 import {
 	SET_ALL_UNTAINTED,
+	SET_ALL_POPPERS_HIDDEN,
 	SET_POPPER_HIDDEN,
 	SET_POPPER_VISIBLE,
 	SET_TAINTED,
@@ -16,6 +17,14 @@ export const mutations: MutationTree<Application> = {
 	): void {
 		payload.forEach( ( guid ) => {
 			Vue.set( state.statementsTaintedState, guid, false );
+		} );
+	},
+	[ SET_ALL_POPPERS_HIDDEN ](
+		state: Application,
+		payload: string[],
+	): void {
+		payload.forEach( ( guid ) => {
+			Vue.set( state.statementsPopperIsOpen, guid, false );
 		} );
 	},
 	[ SET_TAINTED ](

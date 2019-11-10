@@ -4,7 +4,7 @@ import Vuex, { Store } from 'vuex';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
-import { STATEMENT_TAINTED_STATE_INIT, STATEMENT_TAINTED_STATE_TAINT } from '@/store/actionTypes';
+import { STORE_INIT, STATEMENT_TAINTED_STATE_TAINT } from '@/store/actionTypes';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -25,7 +25,7 @@ describe( 'App.vue', () => {
 			localVue,
 			data: () => { return { id: 'fooId' }; },
 		} );
-		store.dispatch( STATEMENT_TAINTED_STATE_INIT, [ 'fooId' ] );
+		store.dispatch( STORE_INIT, [ 'fooId' ] );
 		expect( wrapper.find( TaintedIcon ).exists() ).toBeFalsy();
 		store.dispatch( STATEMENT_TAINTED_STATE_TAINT, 'fooId' );
 		expect( wrapper.find( TaintedIcon ).exists() ).toBeTruthy();

@@ -1,5 +1,6 @@
 import {
 	SET_ALL_UNTAINTED,
+	SET_ALL_POPPERS_HIDDEN,
 	SET_POPPER_HIDDEN,
 	SET_POPPER_VISIBLE,
 	SET_TAINTED,
@@ -13,6 +14,12 @@ describe( 'mutations', () => {
 		mutations[ SET_ALL_UNTAINTED ]( state, [ 'foo', 'bar' ] );
 		expect( state ).toBeDefined();
 		expect( state.statementsTaintedState ).toEqual( { foo: false, bar: false } );
+	} );
+	it( 'should set the StatementsPopperIsOpen in the store', () => {
+		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {} };
+		mutations[ SET_ALL_POPPERS_HIDDEN ]( state, [ 'foo', 'bar' ] );
+		expect( state ).toBeDefined();
+		expect( state.statementsPopperIsOpen ).toEqual( { foo: false, bar: false } );
 	} );
 	it( 'should taint a single statement in the store', () => {
 		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {} };

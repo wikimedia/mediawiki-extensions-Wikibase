@@ -1,6 +1,6 @@
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
-import { STATEMENT_TAINTED_STATE_INIT } from '@/store/actionTypes';
+import { STORE_INIT } from '@/store/actionTypes';
 import { HookHandler } from '@/HookHandler';
 
 export function launch( hookHandler: HookHandler ): void {
@@ -16,6 +16,6 @@ export function launch( hookHandler: HookHandler ): void {
 			new App( { store, data: { id } } ).$mount( appElement );
 		}
 	} );
-	store.dispatch( STATEMENT_TAINTED_STATE_INIT, guids );
+	store.dispatch( STORE_INIT, guids );
 	hookHandler.addStore( store );
 }
