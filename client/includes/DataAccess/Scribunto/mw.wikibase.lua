@@ -15,31 +15,34 @@ local util = require 'libraryUtil'
 local checkType = util.checkType
 local checkTypeMulti = util.checkTypeMulti
 
-local maxEntityCacheSize = 15 -- Size of the LRU cache being used to cache entities
-local entityCache = {}
-
-local maxStatementCacheSize = 50 -- Size of the LRU cache being used to cache statements
-local statementCache = {}
+-- Get a cache data structure to use with addToCache and getFromCache
+-- with a given maximum size.
+--
+-- @param maxCacheSize
+local function initCache( maxCacheSize )
+	return {
+		data = {},
+		order = {},
+		size = 0,
+		maxCacheSize = maxCacheSize,
+	}
+end
 
 -- Cache a given value (can also be false, in case it doesn't exist).
 --
 -- @param cache
--- @param maxCacheSize
 -- @param key
 -- @param value
-local function addToCache( cache, maxCacheSize, key, value )
-	if type( cache.data ) ~= 'table' then
-		cache.data = {}
-		cache.order = {}
-	end
-
-	if #cache.order == maxCacheSize then
-		local toRemove = table.remove( cache.order, maxCacheSize )
-		cache[ toRemove ] = nil
+local function addToCache( cache, key, value )
+	if cache.size == cache.maxCacheSize then
+		local toRemove = table.remove( cache.order, cache.maxCacheSize )
+		cache.data[ toRemove ] = nil
+	else
+		cache.size = cache.size + 1
 	end
 
 	table.insert( cache.order, 1, key )
-	cache[ key ] = value
+	cache.data[ key ] = value
 end
 
 -- Retrieve a value from a cache. Will return nil in case of a cache miss.
@@ -47,7 +50,7 @@ end
 -- @param cache
 -- @param key
 local function getFromCache( cache, key )
-	if cache[ key ] ~= nil then
+	if cache.data[ key ] ~= nil then
 		for cacheOrderId, cacheOrderKey in pairs( cache.order ) do
 			if cacheOrderKey == key then
 				table.remove( cache.order, cacheOrderId )
@@ -57,15 +60,21 @@ local function getFromCache( cache, key )
 		table.insert( cache.order, 1, key )
 	end
 
-	return cache[ key ]
+	return cache.data[ key ]
 end
+
+-- 15 slot cache for entities
+local entityCache = initCache( 15 )
+
+-- 50 slot cache for statements
+local statementCache = initCache( 50 )
 
 -- Cache a given entity (can also be false, in case it doesn't exist).
 --
 -- @param entityId
 -- @param entity
 local function cacheEntity( entityId, entity )
-	addToCache( entityCache, maxEntityCacheSize, entityId, entity )
+	addToCache( entityCache, entityId, entity )
 end
 
 -- Retrieve an entity. Will return false in case it's known to not exist
@@ -193,7 +202,7 @@ function wikibase.setupInterface()
 			php.incrementStatsKey( 'wikibase.client.scribunto.wikibase.getEntityStatements.cache_miss' )
 
 			statements = php.getEntityStatements( entityId, propertyId, rank )
-			addToCache( statementCache, maxStatementCacheSize, cacheKey, statements )
+			addToCache( statementCache, cacheKey, statements )
 		end
 
 		if statements and statements[propertyId] then
