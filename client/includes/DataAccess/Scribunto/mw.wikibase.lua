@@ -69,22 +69,6 @@ local entityCache = initCache( 15 )
 -- 50 slot cache for statements
 local statementCache = initCache( 50 )
 
--- Cache a given entity (can also be false, in case it doesn't exist).
---
--- @param entityId
--- @param entity
-local function cacheEntity( entityId, entity )
-	addToCache( entityCache, entityId, entity )
-end
-
--- Retrieve an entity. Will return false in case it's known to not exist
--- and nil in case of a cache miss.
---
--- @param entityId
-local function getCachedEntity( entityId )
-	return getFromCache( entityCache, entityId )
-end
-
 function wikibase.setupInterface()
 	local php = mw_interface
 	mw_interface = nil
@@ -103,7 +87,7 @@ function wikibase.setupInterface()
 
 	-- Get the mw.wikibase.entity object for a given id. Cached.
 	local function getEntityObject( id )
-		local entity = getCachedEntity( id )
+		local entity = getFromCache( entityCache, id )
 
 		if entity == nil then
 			entity = php.getEntity( id )
@@ -117,7 +101,7 @@ function wikibase.setupInterface()
 				entity = false
 			end
 
-			cacheEntity( id, entity )
+			addToCache( entityCache, id, entity )
 		end
 
 		if type( entity ) ~= 'table' then
