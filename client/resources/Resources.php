@@ -105,6 +105,8 @@ return call_user_func( function() {
 						],
 						'messages' => [
 							'wikibase-client-data-bridge-dialog-title',
+							'wikibase-client-data-bridge-references-heading',
+							'wikibase-client-data-bridge-reference-snak-separator',
 							'savechanges',
 							'publishchanges',
 							'cancel',

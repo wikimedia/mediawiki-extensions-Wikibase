@@ -119,5 +119,7 @@
 	"unresolved-property-category-desc": "This category lists pages that reference {{WBREPONAME}} properties that cannot be found neither by their property ID nor label.",
 	"connected-redirect-category": "Redirects connected to a {{WBREPONAME}} item",
 	"connected-redirect-category-desc": "This category lists redirect pages that are connected to a {{WBREPONAME}} item.",
-	"wikibase-client-data-bridge-dialog-title": "Edit Property"
+	"wikibase-client-data-bridge-dialog-title": "Edit Property",
+	"wikibase-client-data-bridge-references-heading": "References",
+	"wikibase-client-data-bridge-reference-snak-separator": ".&#32;"
 }

@@ -9378,6 +9378,8 @@ var MessageKeys;
   MessageKeys["SAVE_CHANGES"] = "savechanges";
   MessageKeys["PUBLISH_CHANGES"] = "publishchanges";
   MessageKeys["CANCEL"] = "cancel";
+  MessageKeys["REFERENCES_HEADING"] = "wikibase-client-data-bridge-references-heading";
+  MessageKeys["REFERENCE_SNAK_SEPARATOR"] = "wikibase-client-data-bridge-reference-snak-separator";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);
