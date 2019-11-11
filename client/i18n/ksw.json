@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rul1902"
+			"Rul1902",
+			"Jaeminlovetaejoon",
+			"SawJaemin"
 		]
 	},
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-dataitem": "{{WBREPONAME}} တၢ်ဖိလံး",
+	"wikibase-editlinks": "အဲၣ်ဒံၣ် links",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "ပၤဘၢ",
+	"wikibase-rc-hide-wikidata-show": "နဲၣ်ဖျါ",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အဲးဒံၣ်"
 }

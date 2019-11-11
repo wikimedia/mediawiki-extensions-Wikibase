@@ -9,7 +9,8 @@
 			"WikiPhoenix",
 			"Rockyfelle",
 			"Josve05a",
-			"Lejonel"
+			"Lejonel",
+			"Pyscowicz"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
@@ -23,7 +24,7 @@
 	"wikibase-comment-linked": "Ett {{WBREPONAME}}objekt har länkats till den här sidan.",
 	"wikibase-comment-unlink": "Denna sida har gjorts olänkad från {{WBREPONAME}}objektet. Språklänkar togs bort.",
 	"wikibase-comment-restore": "Tillhörande {{WBREPONAME}}objekt togs bort. Språklänkar återställdes.",
-	"wikibase-comment-update": "{{WBREPONAME}}objekt ändrades",
+	"wikibase-comment-update": "{{WBREPONAME}}-objekt ändrades",
 	"wikibase-comment-sitelink-add": "Språklänk lades till: $1",
 	"wikibase-comment-sitelink-change": "Språklänk ändrades från $1 till $2",
 	"wikibase-comment-sitelink-remove": "Språklänk togs bort: $1",

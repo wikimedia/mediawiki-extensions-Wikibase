@@ -23,7 +23,8 @@
 	"wikibase-linkitem-title": "صفحي سان ڳنڍيو",
 	"wikibase-linkitem-linkpage": "صفحي سان ڳنڍيو",
 	"wikibase-linkitem-selectlink": "ھن صفحي کي توھان جنھن سائيٽ ۽ صفحي سان ڳنڍڻ چاھيو ٿا، مھرباني ڪري ان کي چونڊيو.",
-	"wikibase-linkitem-confirmitem-text": "جنهن صفحي کي اوهان هن صفحي سان ڳنڍيو آهي اهو اڳئي [$1 اسان مرڪزي ڊيٽا مخزن جي آئٽم] سان ڳنڍيل آهي. مهرباني ڪري تصديق ڪري وٺو ته جيڪي {{PLURAL:$2|صفحو هيٺ ڏيکاريو وڃي پيو اهو ئي صفحو آهي.|صفحا هيٺ ڏيکاريا وڃن پيا، اهو صفحو آهي}}  جنهن سان اوهان ڳنڍڻ چاهيو ٿا.",
+	"wikibase-linkitem-input-page": "صفحو:",
+	"wikibase-linkitem-confirmitem-text": "جنھن صفحي کي اوهان هن صفحي سان ڳنڍيو آهي اهو اڳ ئي [$1 اسان مرڪزي ڊيٽا مخزن جي آئٽم] سان ڳنڍيل آهي. مھرباني ڪري تصديق ڪريو تہ جيڪو {{PLURAL:$2|صفحو هيٺ ڏيکاريو وڃي پيو اهو ئي صفحو آهي.|صفحا هيٺ ڏيکاريا وڃن پيا، اهو صفحو آهي}}  جنھن سان اوهان ڳنڍڻ چاهيو ٿا.",
 	"wikibase-linkitem-confirmitem-button": "پڪ ڪريو",
 	"wikibase-linkitem-success-link": "صفحا ڳنڍيا ويا آھن. توھان انھن ڳنڍڻ تي مشتمل آئٽم اسان جي [$1 مرڪزي ڊيٽا ذخيري] ۾ ڏسي سگھو ٿا.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -34,6 +35,11 @@
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} تي وجود وٺندڙ سنوارون.",
 	"wikibase-replicationnote": "مھرباني ڪري اھو ياد رھي تہ سڀني وڪين تي تبديليون نظر اچڻ ۾ ڪجھ منٽن جو وقت لڳي سگھي ٿو.",
 	"wikibase-unconnectedpages-submit": "صفحا ڏيکاريو",
+	"wikibase-pageswithbadges-submit": "صفحا ڏيکاريو",
+	"wikibase-entityusage-submit": "صفحا ڏيکاريو",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} آئٽم آئِڊي",
+	"wikibase-pageinfo-entity-id-none": "ڪوبہ نہ",
 	"wikibase-pageinfo-entity-usage": "هن صفحي تي {{WBREPONAME}} جا استعمال ٿيل حصا",
+	"wikibase-pageinfo-entity-usage-S": "سرزمين-ڳنڍڻو",
 	"wikibase-otherprojects": "ٻيون رٿائون"
 }
