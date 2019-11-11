@@ -7,6 +7,9 @@ import {
 	mockForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
+	mockForeignApiGet,
+	mockDataBridgeConfig,
+	mockForeignApiEntityInfoResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -31,14 +34,53 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	default: ( oo: any, $: any ) => mockPrepareContainer( oo, $ ),
 } ) );
 
+const DEFAULT_ENTITY = 'Q42';
+const DEFAULT_PROPERTY = 'P349';
+
 function prepareTestEnv( options: {
 	entityId?: string;
 	propertyId?: string;
 	editFlow?: string;
-} ): HTMLElement|null {
-	const entityId = options.entityId || 'Q42';
-	const propertyId = options.propertyId || 'P349';
+	pageLanguage?: string;
+} ): HTMLElement {
+	const entityId = options.entityId || DEFAULT_ENTITY;
+	const propertyId = options.propertyId || DEFAULT_PROPERTY;
 	const editFlow = options.editFlow || EditFlow.OVERWRITE;
+	const pageLanguage = options.pageLanguage || 'en';
+
+	const app = { launch };
+	const require = jest.fn( () => app );
+	const using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
+
+	mockMwEnv(
+		using,
+		mockMwConfig( { wgPageContentLanguage: pageLanguage } ),
+		undefined,
+		mockForeignApiConstructor( {
+			get: mockForeignApiGet(
+				mockDataBridgeConfig(),
+				mockForeignApiEntityInfoResponse( propertyId, undefined, pageLanguage ),
+			),
+		} ),
+	);
+	( window as MwWindow ).$ = {
+		get() {
+			return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
+		},
+		uls: {
+			data: {
+				getDir: jest.fn( () => 'ltr' ),
+			},
+		},
+	} as any;
+	( window as MwWindow ).mw.message = jest.fn( ( key: string ) => {
+		return {
+			text: () => `<${key}>`,
+		};
+	} );
+	( window as MwWindow ).mw.language = {
+		bcp47: jest.fn( ( x: string ) => x ),
+	};
 
 	const testLinkHref = `https://www.wikidata.org/wiki/${entityId}?uselang=en#${propertyId}`;
 	document.body.innerHTML = `
@@ -46,89 +88,13 @@ function prepareTestEnv( options: {
 	<a rel="nofollow" class="external text" href="${testLinkHref}">a link to be selected</a>
 </span>
 <div id="data-bridge-container"/>`;
-	return document.querySelector( 'a' );
+	return document.querySelector( 'a' ) as HTMLElement;
 }
-
-function mockPropertyLabelResponse(
-	propertyId: string,
-	propertyLabel: string,
-	language: string,
-	fallback?: string,
-): any {
-
-	if ( !fallback ) {
-		fallback = language;
-	}
-	return {
-		success: 1,
-		entities: {
-			[ propertyId ]: {
-				id: propertyId,
-				labels: {
-					[ language ]: {
-						value: propertyLabel,
-						language: fallback,
-						'for-language': language,
-					},
-				},
-			},
-		},
-	};
-}
-const queryDataBridgeConfigResponse = {
-	query: {
-		wbdatabridgeconfig: {
-			dataTypeLimits: {
-				string: {
-					maxLength: 200,
-				},
-			},
-		},
-	},
-};
 
 describe( 'string data value', () => {
 	const pageLanguage = 'en';
-	let app: any;
-	let require: any;
-	let using;
 
-	beforeEach( () => {
-		app = { launch };
-		require = jest.fn( () => app );
-		using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
-
-		mockMwEnv(
-			using,
-			mockMwConfig( { wgPageContentLanguage: pageLanguage } ),
-			undefined,
-			mockForeignApiConstructor( {
-				get() {
-					return Promise.resolve( queryDataBridgeConfigResponse );
-				},
-			} ),
-		);
-		( window as MwWindow ).$ = {
-			get() {
-				return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
-			},
-			uls: {
-				data: {
-					getDir: jest.fn( () => 'ltr' ),
-				},
-			},
-		} as any;
-		( window as MwWindow ).mw.message = jest.fn( ( key: string ) => {
-			return {
-				text: () => `<${key}>`,
-			};
-		} );
-		( window as MwWindow ).mw.language = {
-			bcp47: jest.fn( ( x: string ) => x ),
-		};
-	} );
-
-	it( 'handels string data value types', async () => {
+	it( 'handles string data value types', async () => {
 		const testLink = prepareTestEnv( {} );
 		await init();
 
@@ -144,23 +110,22 @@ describe( 'string data value', () => {
 		).not.toBeNull();
 	} );
 
-	describe( 'label fallback', () => {
-		it( 'uses property label', async () => {
+	describe( 'property label', () => {
+		it( 'is used to illustrate property', async () => {
 			const propertyId = 'P349';
 			const propertyLabel = 'Queen';
 
-			const get = jest.fn( () => ( { ...mockPropertyLabelResponse(
-				propertyId,
-				propertyLabel,
-				pageLanguage,
-			), ...queryDataBridgeConfigResponse } ) );
+			const testLink = prepareTestEnv( { propertyId } );
+
+			const get = jest.fn().mockImplementation( mockForeignApiGet(
+				mockDataBridgeConfig(),
+				mockForeignApiEntityInfoResponse( propertyId, propertyLabel, pageLanguage ),
+			) );
 
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
 			} );
-
-			const testLink = prepareTestEnv( { propertyId } );
 
 			await init();
 			testLink!.click();
@@ -182,24 +147,21 @@ describe( 'string data value', () => {
 			} );
 		} );
 
-		it( 'ueses labels fallback language', async () => {
+		it( 'optionally uses label in fallback language', async () => {
 			const propertyId = 'P349';
 			const propertyLabel = 'Jochen';
 			const language = 'de';
 
-			const get = jest.fn( () => ( { ...mockPropertyLabelResponse(
-				propertyId,
-				propertyLabel,
-				pageLanguage,
-				language,
-			), ...queryDataBridgeConfigResponse } ) );
+			const testLink = prepareTestEnv( { propertyId } );
 
+			const get = jest.fn().mockImplementation( mockForeignApiGet(
+				mockDataBridgeConfig(),
+				mockForeignApiEntityInfoResponse( propertyId, propertyLabel, pageLanguage, 'string', language ),
+			) );
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
 			} );
-
-			const testLink = prepareTestEnv( { propertyId } );
 
 			await init();
 			testLink!.click();
@@ -225,9 +187,20 @@ describe( 'string data value', () => {
 			const propertyId = 'P349';
 			const testLink = prepareTestEnv( { propertyId } );
 
-			const get = jest.fn( () => ( {
-				// no entities in the response
-				...queryDataBridgeConfigResponse } ) );
+			const get = jest.fn().mockImplementation( mockForeignApiGet(
+				mockDataBridgeConfig(),
+				Promise.resolve( {
+					success: 1,
+					entities: {
+						[ propertyId ]: {
+							id: propertyId,
+							datatype: 'string',
+							labels: {},
+						},
+					},
+				} ),
+			) );
+
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
@@ -259,21 +232,19 @@ describe( 'string data value', () => {
 			const propertyLabel = 'רתֵּסְאֶ';
 			const language = 'he';
 
+			const testLink = prepareTestEnv( { propertyId } );
+
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn( () => ( { ...mockPropertyLabelResponse(
-					propertyId,
-					propertyLabel,
-					pageLanguage,
-					language,
-				), ...queryDataBridgeConfigResponse } ) ),
+				get: mockForeignApiGet(
+					mockDataBridgeConfig(),
+					mockForeignApiEntityInfoResponse( propertyId, propertyLabel, pageLanguage, 'string', language ),
+				),
 			} );
 
 			( window as MwWindow ).$.uls!.data.getDir = jest.fn( ( x: string ) => {
 				return x === 'he' ? 'rtl' : 'ltr';
 			} );
-
-			const testLink = prepareTestEnv( { propertyId } );
 
 			await init();
 			testLink!.click();
@@ -291,14 +262,14 @@ describe( 'string data value', () => {
 			const propertyLabel = 'Jochen';
 			const language = 'de-formal';
 
+			const testLink = prepareTestEnv( { propertyId } );
+
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn( () => ( { ...mockPropertyLabelResponse(
-					propertyId,
-					propertyLabel,
-					pageLanguage,
-					language,
-				), ...queryDataBridgeConfigResponse } ) ),
+				get: mockForeignApiGet(
+					mockDataBridgeConfig(),
+					mockForeignApiEntityInfoResponse( propertyId, propertyLabel, pageLanguage, 'string', language ),
+				),
 			} );
 
 			( window as MwWindow ).mw.language = {
@@ -306,8 +277,6 @@ describe( 'string data value', () => {
 					return x === 'de-formal' ? 'de' : 'en';
 				} ),
 			};
-
-			const testLink = prepareTestEnv( { propertyId } );
 
 			await init();
 			testLink!.click();
@@ -354,7 +323,7 @@ describe( 'string data value', () => {
 		} );
 
 		describe( 'influence on save button', () => {
-			it( 'enables the save button, if it has a different value then the original value', async () => {
+			it( 'enables the save button, if it has a different value than the original value', async () => {
 				const testNewValue = 'test1234';
 				const testLink = prepareTestEnv( {} );
 				await init();
@@ -401,11 +370,11 @@ describe( 'string data value', () => {
 
 				await insert(
 					input as HTMLTextAreaElement,
-					Entities.entities.Q42.claims.P349[ 0 ].mainsnak.datavalue.value,
+					Entities.entities[ DEFAULT_ENTITY ].claims[ DEFAULT_PROPERTY ][ 0 ].mainsnak.datavalue.value,
 				);
 
 				expect( ( input as HTMLTextAreaElement ).value ).toBe(
-					Entities.entities.Q42.claims.P349[ 0 ].mainsnak.datavalue.value,
+					Entities.entities[ DEFAULT_ENTITY ].claims[ DEFAULT_PROPERTY ][ 0 ].mainsnak.datavalue.value,
 				);
 				save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
 				expect( input ).not.toBeNull();
@@ -426,13 +395,14 @@ describe( 'string data value', () => {
 				},
 			};
 
-			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-				get() {
-					return Promise.resolve( queryDataBridgeConfigResponse );
-				},
-			} );
-
 			const testLink = prepareTestEnv( {} );
+
+			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+				get: mockForeignApiGet(
+					Promise.resolve( queryDataBridgeConfigResponse ),
+					mockForeignApiEntityInfoResponse( DEFAULT_PROPERTY ),
+				),
+			} );
 
 			await init();
 			testLink!.click();

@@ -7,6 +7,9 @@ import {
 	mockForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
+	mockForeignApiGet,
+	mockDataBridgeConfig,
+	mockForeignApiEntityInfoResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -37,14 +40,51 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	default: ( oo: any, $: any ) => mockPrepareContainer( oo, $ ),
 } ) );
 
+const DEFAULT_ENTITY = 'Q42';
+const DEFAULT_PROPERTY = 'P349';
+
 function prepareTestEnv( options: {
 	entityId?: string;
 	propertyId?: string;
 	editFlow?: string;
-} ): HTMLElement|null {
-	const entityId = options.entityId || 'Q42';
-	const propertyId = options.propertyId || 'P349';
+} ): HTMLElement {
+	const entityId = options.entityId || DEFAULT_ENTITY;
+	const propertyId = options.propertyId || DEFAULT_PROPERTY;
 	const editFlow = options.editFlow || EditFlow.OVERWRITE;
+
+	const app = { launch };
+	const require = jest.fn( () => app );
+	const using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
+
+	mockMwEnv(
+		using,
+		undefined,
+		undefined,
+		mockForeignApiConstructor( {
+			get: mockForeignApiGet(
+				mockDataBridgeConfig(),
+				mockForeignApiEntityInfoResponse( propertyId ),
+			),
+		} ),
+	);
+	( window as MwWindow ).$ = {
+		get() {
+			return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
+		},
+		uls: {
+			data: {
+				getDir: jest.fn( () => 'ltr' ),
+			},
+		},
+	} as any;
+	( window as MwWindow ).mw.message = jest.fn( ( key: string ) => {
+		return {
+			text: () => `<${key}>`,
+		};
+	} );
+	( window as MwWindow ).mw.language = {
+		bcp47: jest.fn( () => 'de' ),
+	};
 
 	const testLinkHref = `https://www.wikidata.org/wiki/${entityId}?uselang=en#${propertyId}`;
 	document.body.innerHTML = `
@@ -52,59 +92,10 @@ function prepareTestEnv( options: {
 	<a rel="nofollow" class="external text" href="${testLinkHref}">a link to be selected</a>
 </span>
 <div id="data-bridge-container"/>`;
-	return document.querySelector( 'a' );
-}
-
-/** Implementation for {@link mockForeignApiConstructor} */
-function getDataBridgeConfig(): Promise<object> {
-	return Promise.resolve( {
-		query: {
-			wbdatabridgeconfig: {
-				dataTypeLimits: {
-					string: {
-						maxLength: 200,
-					},
-				},
-			},
-		},
-	} );
+	return document.querySelector( 'a' ) as HTMLElement;
 }
 
 describe( 'app', () => {
-	let app: any;
-	let require: any;
-	let using;
-
-	beforeEach( () => {
-		app = { launch };
-		require = jest.fn( () => app );
-		using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
-
-		mockMwEnv(
-			using,
-			undefined,
-			undefined,
-			mockForeignApiConstructor( { get: getDataBridgeConfig } ),
-		);
-		( window as MwWindow ).$ = {
-			get() {
-				return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
-			},
-			uls: {
-				data: {
-					getDir: jest.fn( () => 'ltr' ),
-				},
-			},
-		} as any;
-		( window as MwWindow ).mw.message = jest.fn( ( key: string ) => {
-			return {
-				text: () => `<${key}>`,
-			};
-		} );
-		( window as MwWindow ).mw.language = {
-			bcp47: jest.fn( () => 'de' ),
-		};
-	} );
 
 	describe( 'app states', () => {
 		it( 'shows loading when app is launched', () => {
@@ -219,15 +210,17 @@ describe( 'app', () => {
 			} );
 		} );
 
-		async function getEnabledSaveButton(): Promise<HTMLElement> {
+		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: getDataBridgeConfig,
+				get: mockForeignApiGet(
+					mockDataBridgeConfig(),
+					mockForeignApiEntityInfoResponse( propertyId ),
+				),
 				postWithEditToken,
 			} );
 			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
 
-			const testLink = prepareTestEnv( { propertyId, entityId } );
 			await init();
 
 			testLink!.click();
@@ -246,15 +239,17 @@ describe( 'app', () => {
 		}
 
 		it( 'asserts username and tags, if given', async () => {
-			const assertuser = 'asserUsername';
+			const assertuser = 'assertUsername';
 			const tags = [ 'abc' ];
+
+			const testLink = prepareTestEnv( { propertyId, entityId } );
 
 			( window as MwWindow ).mw.config = mockMwConfig( {
 				wgUserName: assertuser,
 				editTags: tags,
 			} );
 
-			const save = await getEnabledSaveButton();
+			const save = await getEnabledSaveButton( testLink );
 
 			save!.click();
 			await budge();
@@ -262,9 +257,9 @@ describe( 'app', () => {
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
-				id: 'Q42',
+				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities.Q42.claims } ),
+				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
 				assertuser,
 				tags,
 			} );
@@ -272,7 +267,9 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on click', async () => {
-			const save = await getEnabledSaveButton();
+			const testLink = prepareTestEnv( { propertyId, entityId } );
+
+			const save = await getEnabledSaveButton( testLink );
 
 			save!.click();
 			await budge();
@@ -280,9 +277,9 @@ describe( 'app', () => {
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
-				id: 'Q42',
+				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities.Q42.claims } ),
+				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
 				assertuser: 'Test User',
 				tags: undefined,
 			} );
@@ -290,7 +287,9 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on enter', async () => {
-			const save = await getEnabledSaveButton();
+			const testLink = prepareTestEnv( { propertyId, entityId } );
+
+			const save = await getEnabledSaveButton( testLink );
 
 			enter( save! );
 			await budge();
@@ -298,9 +297,9 @@ describe( 'app', () => {
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
-				id: 'Q42',
+				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities.Q42.claims } ),
+				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
 				assertuser: 'Test User',
 				tags: undefined,
 			} );
@@ -308,7 +307,9 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on space', async () => {
-			const save = await getEnabledSaveButton();
+			const testLink = prepareTestEnv( { propertyId, entityId } );
+
+			const save = await getEnabledSaveButton( testLink );
 
 			space( save! );
 			await budge();
@@ -316,24 +317,28 @@ describe( 'app', () => {
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
-				id: 'Q42',
+				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities.Q42.claims } ),
+				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
 				assertuser: 'Test User',
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
 
-		it( 'has the save button intially disabled', async () => {
+		it( 'has the save button initially disabled', async () => {
+			const testLink = prepareTestEnv( { propertyId } );
 			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: getDataBridgeConfig,
+				get: mockForeignApiGet(
+					mockDataBridgeConfig(),
+					mockForeignApiEntityInfoResponse( propertyId ),
+				),
 				postWithEditToken,
 			} );
 
 			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
-			const testLink = prepareTestEnv( { propertyId: 'P31' } );
+
 			await init();
 
 			testLink!.click();
