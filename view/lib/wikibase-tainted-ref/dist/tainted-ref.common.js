@@ -4407,7 +4407,7 @@ var TaintedIconvue_type_template_id_328a49b5_staticRenderFns = []
 // CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=328a49b5&
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
-var STATEMENT_TAINTED_STATE_INIT = 'initTaintedState';
+var STORE_INIT = 'initStore';
 var STATEMENT_TAINTED_STATE_TAINT = 'taintTaintedState';
 var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
 var POPPER_SHOW = 'showPopper';
@@ -4735,6 +4735,7 @@ function _defineProperty(obj, key, value) {
 }
 // CONCATENATED MODULE: ./src/store/mutationTypes.ts
 var SET_ALL_UNTAINTED = 'setAllUntainted';
+var SET_ALL_POPPERS_HIDDEN = 'setAllPoppersHidden';
 var SET_TAINTED = 'setTainted';
 var SET_UNTAINTED = 'setUntainted';
 var SET_POPPER_HIDDEN = 'setPopperHidden';
@@ -4746,8 +4747,9 @@ var SET_POPPER_VISIBLE = 'setPopperVisible';
 function actions() {
   var _ref;
 
-  return _ref = {}, _defineProperty(_ref, STATEMENT_TAINTED_STATE_INIT, function (context, payload) {
+  return _ref = {}, _defineProperty(_ref, STORE_INIT, function (context, payload) {
     context.commit(SET_ALL_UNTAINTED, payload);
+    context.commit(SET_ALL_POPPERS_HIDDEN, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_UNTAINT, function (context, payload) {
     context.commit(SET_UNTAINTED, payload);
     context.commit(SET_POPPER_HIDDEN, payload);
@@ -4770,6 +4772,10 @@ var _mutations;
 var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED, function (state, payload) {
   payload.forEach(function (guid) {
     external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsTaintedState, guid, false);
+  });
+}), _defineProperty(_mutations, SET_ALL_POPPERS_HIDDEN, function (state, payload) {
+  payload.forEach(function (guid) {
+    external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsPopperIsOpen, guid, false);
   });
 }), _defineProperty(_mutations, SET_TAINTED, function (state, payload) {
   state.statementsTaintedState[payload] = true;
@@ -4836,7 +4842,7 @@ function launch(hookHandler) {
       }).$mount(appElement);
     }
   });
-  store.dispatch(STATEMENT_TAINTED_STATE_INIT, guids);
+  store.dispatch(STORE_INIT, guids);
   hookHandler.addStore(store);
 }
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
