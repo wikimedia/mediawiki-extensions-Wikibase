@@ -6,6 +6,7 @@ import {
 	SET_POPPER_VISIBLE,
 	SET_TAINTED,
 	SET_UNTAINTED,
+	SET_HELP_LINK,
 } from '@/store/mutationTypes';
 import Vue from 'vue';
 import Application from '@/store/Application';
@@ -50,5 +51,11 @@ export const mutations: MutationTree<Application> = {
 		payload: string,
 	): void {
 		state.statementsPopperIsOpen[ payload ] = true;
+	},
+	[ SET_HELP_LINK ](
+		state: Application,
+		payload: string,
+	): void {
+		state.helpLink = payload;
 	},
 };

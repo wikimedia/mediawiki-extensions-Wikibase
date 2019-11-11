@@ -5,6 +5,7 @@ import {
 	SET_POPPER_VISIBLE,
 	SET_TAINTED,
 	SET_UNTAINTED,
+	SET_HELP_LINK,
 } from '@/store/mutationTypes';
 import actions from '@/store/actions';
 import {
@@ -12,6 +13,7 @@ import {
 	STORE_INIT,
 	STATEMENT_TAINTED_STATE_TAINT,
 	STATEMENT_TAINTED_STATE_UNTAINT,
+	HELP_LINK_SET,
 } from '@/store/actionTypes';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 
@@ -43,5 +45,10 @@ describe( 'actions', () => {
 		const context = newMockStore( {} );
 		await ( actions as Function )()[ POPPER_SHOW ]( context, 'duck' );
 		expect( context.commit ).toBeCalledWith( SET_POPPER_VISIBLE, 'duck' );
+	} );
+	it( `should commit to ${SET_HELP_LINK}`, async () => {
+		const context = newMockStore( {} );
+		await ( actions as Function )()[ HELP_LINK_SET ]( context, 'wikidata/help' );
+		expect( context.commit ).toBeCalledWith( SET_HELP_LINK, 'wikidata/help' );
 	} );
 } );

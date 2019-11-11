@@ -3,7 +3,7 @@ import Vuex, { Store } from 'vuex';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import Popper from '@/presentation/components/Popper.vue';
-import { POPPER_HIDE } from '@/store/actionTypes';
+import { POPPER_HIDE, HELP_LINK_SET } from '@/store/actionTypes';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -16,6 +16,15 @@ describe( 'Popper.vue', () => {
 			localVue,
 		} );
 		expect( wrapper.classes() ).toContain( 'wb-tr-popper-wrapper' );
+	} );
+	it( 'sets the help link according to the store', () => {
+		const store: Store<Application> = createStore();
+		const wrapper = shallowMount( Popper, {
+			store,
+			localVue,
+		} );
+		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
+		expect( wrapper.find( '.wb-tr-popper-help' ).attributes().href ).toEqual( 'https://wdtest/Help' );
 	} );
 	it( 'closes the popper when the x is clicked', () => {
 		const store: Store<Application> = createStore();
