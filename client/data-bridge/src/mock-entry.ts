@@ -3,56 +3,50 @@ import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import Entities from '@/mock-data/data/Q42.data.json';
 import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import { launch } from '@/main';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Events from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
 
-const services = new ServiceRepositories();
+const services = new ServiceContainer();
 
-services.setReadingEntityRepository(
-	new SpecialPageReadingEntityRepository(
-		{
-			get() {
-				return Entities;
-			},
-		} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
-		'',
-	),
-);
-
-services.setWritingEntityRepository(
+services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 	{
-		saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
-			console.log( 'save', entity ); // eslint-disable-line no-console
-			return Promise.reject();
+		get() {
+			return Entities;
+		},
+	} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
+	'',
+) );
+
+services.set( 'writingEntityRepository', {
+	saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
+		console.log( 'save', entity ); // eslint-disable-line no-console
+		return Promise.reject();
+	},
+} );
+
+services.set( 'languageInfoRepository', new MwLanguageInfoRepository(
+	{
+		bcp47() {
+			return 'de';
 		},
 	},
-);
-
-services.setLanguageInfoRepository(
-	new MwLanguageInfoRepository(
-		{
-			bcp47() {
-				return 'de';
-			},
+	{
+		getDir() {
+			return 'ltr';
 		},
-		{
-			getDir() {
-				return 'ltr';
-			},
-		},
-	),
-);
+	},
+) );
 
-services.setEntityLabelRepository( {
+services.set( 'entityLabelRepository', {
 	getLabel( _x ) {
 		return Promise.resolve( { language: 'de', value: 'Kartoffel' } );
 	},
 } );
 
-services.setMessagesRepository( {
+services.set( 'messagesRepository', {
 	get( messageKey: string ): string {
 		switch ( messageKey ) {
 			case MessageKeys.BRIDGE_DIALOG_TITLE:
@@ -67,7 +61,7 @@ services.setMessagesRepository( {
 	},
 } );
 
-services.setWikibaseRepoConfigRepository( {
+services.set( 'wikibaseRepoConfigRepository', {
 	async getRepoConfiguration() {
 		return {
 			dataTypeLimits: {
@@ -79,11 +73,11 @@ services.setWikibaseRepoConfigRepository( {
 	},
 } );
 
-services.setPropertyDatatypeRepository( {
+services.set( 'propertyDatatypeRepository', {
 	getDataType: async ( _id ) => 'string',
 } );
 
-services.setTracker( {
+services.set( 'tracker', {
 	trackPropertyDatatype( datatype: string ) {
 		console.info( `Tracking datatype: '${datatype}'` ); // eslint-disable-line no-console
 	},

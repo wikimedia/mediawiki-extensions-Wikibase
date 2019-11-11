@@ -6,7 +6,7 @@ import App from '@/presentation/App.vue';
 import AppInformation from '@/definitions/AppInformation';
 import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import Events from '@/events';
 import { EventEmitter } from 'events';
 import repeater from '@/events/repeater';
@@ -18,20 +18,20 @@ Vue.config.productionTip = false;
 export function launch(
 	config: AppConfiguration,
 	information: AppInformation,
-	services: ServiceRepositories,
+	services: ServiceContainer,
 ): EventEmitter {
 	extendVueEnvironment(
-		services.getLanguageInfoRepository(),
-		services.getMessagesRepository(),
+		services.get( 'languageInfoRepository' ),
+		services.get( 'messagesRepository' ),
 		information.client,
 	);
 
 	const store = createStore( services );
 	store.dispatch( BRIDGE_INIT, information );
 
-	services.getPropertyDatatypeRepository().getDataType( information.propertyId )
+	services.get( 'propertyDatatypeRepository' ).getDataType( information.propertyId )
 		.then( ( dataType: DataType ) => {
-			services.getTracker().trackPropertyDatatype( dataType );
+			services.get( 'tracker' ).trackPropertyDatatype( dataType );
 		} );
 
 	const app = new App( {

@@ -1,18 +1,18 @@
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
-import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
+import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
+import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
 
-export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceRepositories {
-	const services = new ServiceRepositories();
+export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
+	const services = new ServiceContainer();
 
 	const repoConfig = mwWindow.mw.config.get( 'wbRepo' ),
 		specialEntityDataUrl = repoConfig.url + repoConfig.articlePath.replace(
@@ -20,7 +20,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 			'Special:EntityData',
 		);
 
-	services.setReadingEntityRepository( new SpecialPageReadingEntityRepository(
+	services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 		mwWindow.$,
 		specialEntityDataUrl,
 	) );
@@ -33,7 +33,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
 
-	services.setWritingEntityRepository( new ForeignApiWritingRepository(
+	services.set( 'writingEntityRepository', new ForeignApiWritingRepository(
 		repoForeignApi,
 		mwWindow.mw.config.get( 'wgUserName' ),
 		editTags.length === 0 ? undefined : editTags,
@@ -44,39 +44,33 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		[ 'labels', 'datatype' ],
 	);
 
-	services.setEntityLabelRepository(
-		new DispatchingEntityLabelRepository(
-			mwWindow.mw.config.get( 'wgPageContentLanguage' ),
-			foreignApiEntityInfoDispatcher,
-		),
-	);
+	services.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
+		mwWindow.mw.config.get( 'wgPageContentLanguage' ),
+		foreignApiEntityInfoDispatcher,
+	) );
 
-	services.setPropertyDatatypeRepository(
-		new DispatchingPropertyDataTypeRepository(
-			foreignApiEntityInfoDispatcher,
-		),
-	);
+	services.set( 'propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository(
+		foreignApiEntityInfoDispatcher,
+	) );
 
 	if ( mwWindow.$.uls === undefined ) {
 		throw new Error( '$.uls was not loaded!' );
 	}
 
-	services.setLanguageInfoRepository( new MwLanguageInfoRepository(
+	services.set( 'languageInfoRepository', new MwLanguageInfoRepository(
 		mwWindow.mw.language,
 		mwWindow.$.uls.data,
 	) );
 
-	services.setMessagesRepository( new MwMessagesRepository( mwWindow.mw.message ) );
+	services.set( 'messagesRepository', new MwMessagesRepository( mwWindow.mw.message ) );
 
-	services.setWikibaseRepoConfigRepository( new ForeignApiRepoConfigRepository(
+	services.set( 'wikibaseRepoConfigRepository', new ForeignApiRepoConfigRepository(
 		repoForeignApi,
 	) );
 
-	services.setTracker(
-		new DataBridgeTrackerService(
-			new EventTracker( mwWindow.mw.track ),
-		),
-	);
+	services.set( 'tracker', new DataBridgeTrackerService(
+		new EventTracker( mwWindow.mw.track ),
+	) );
 
 	return services;
 }

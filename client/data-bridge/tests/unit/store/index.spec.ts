@@ -1,22 +1,16 @@
 import { createStore } from '@/store';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import newMockServiceContainer from '../services/newMockServiceContainer';
 
 describe( 'store/index', () => {
 	it( 'creates the store', () => {
-		const store = createStore( {
-			getReadingEntityRepository() {
-				return {};
-			},
-			getWritingEntityRepository() {
-				return {};
-			},
-			getEntityLabelRepository() {
-				return {};
-			},
-			getWikibaseRepoConfigRepository() {
-				return {};
-			},
-		} as ServiceRepositories );
+		const store = createStore(
+			newMockServiceContainer( {
+				readingEntityRepository: {},
+				writingEntityRepository: {},
+				entityLabelRepository: {},
+				wikibaseRepoConfigRepository: {},
+			} ),
+		);
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();
 		expect( store.state.targetProperty ).toBe( '' );

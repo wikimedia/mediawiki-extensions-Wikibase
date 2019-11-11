@@ -9,11 +9,11 @@ import createEntity from './entity';
 import {
 	NS_ENTITY,
 } from '@/store/namespaces';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 
 Vue.use( Vuex );
 
-export function createStore( services: ServiceRepositories ): Store<Application> {
+export function createStore( services: ServiceContainer ): Store<Application> {
 	const state: Application = {
 		targetLabel: null,
 		targetProperty: '',
@@ -26,16 +26,16 @@ export function createStore( services: ServiceRepositories ): Store<Application>
 	const storeBundle: StoreOptions<Application> = {
 		state,
 		actions: actions(
-			services.getEntityLabelRepository(),
-			services.getWikibaseRepoConfigRepository(),
+			services.get( 'entityLabelRepository' ),
+			services.get( 'wikibaseRepoConfigRepository' ),
 		),
 		getters,
 		mutations,
 		strict: process.env.NODE_ENV !== 'production',
 		modules: {
 			[ NS_ENTITY ]: createEntity(
-				services.getReadingEntityRepository(),
-				services.getWritingEntityRepository(),
+				services.get( 'readingEntityRepository' ),
+				services.get( 'writingEntityRepository' ),
 			),
 		},
 	};

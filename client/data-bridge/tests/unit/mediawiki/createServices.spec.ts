@@ -1,6 +1,6 @@
 import createServices from '@/mediawiki/createServices';
 import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
-import ServiceRepositories from '@/services/ServiceRepositories';
+import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
 import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
@@ -138,14 +138,14 @@ describe( 'createServices', () => {
 		} );
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledWith(
 			mwWindow.$,
 			'http://localhost/wiki/Special:EntityData',
 		);
-		expect( services.getReadingEntityRepository() ).toBe( mockReadingEntityRepository );
+		expect( services.get( 'readingEntityRepository' ) ).toBe( mockReadingEntityRepository );
 	} );
 
 	describe( 'WritingEntityRepository', () => {
@@ -171,7 +171,7 @@ describe( 'createServices', () => {
 				.toBe( wgUserName );
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
 				.toBe( editTags );
-			expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
+			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
 		} );
 
 		it( 'add undefinded to tags, if they are a empty list', () => {
@@ -188,10 +188,10 @@ describe( 'createServices', () => {
 			} );
 			const services = createServices( mwWindow, editTags );
 
-			expect( services ).toBeInstanceOf( ServiceRepositories );
+			expect( services ).toBeInstanceOf( ServiceContainer );
 			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
 				.toBeUndefined();
-			expect( services.getWritingEntityRepository() ).toBe( mockWritingEntityRepository );
+			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
 		} );
 	} );
 
@@ -211,10 +211,10 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledWith( mwLanguage, ulsData );
-		expect( services.getLanguageInfoRepository() ).toBe( mockMwLanguageInfoRepository );
+		expect( services.get( 'languageInfoRepository' ) ).toBe( mockMwLanguageInfoRepository );
 	} );
 
 	it( 'creates ForeignApiEntityInfoDispatcher and its two users', () => {
@@ -226,7 +226,7 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( services ).toBeInstanceOf( ServiceContainer );
 
 		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
@@ -236,14 +236,14 @@ describe( 'createServices', () => {
 		expect(
 			( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
 		).toBe( wgPageContentLanguage );
-
 		expect( ( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBe( mockEntityInfoDispatcher );
-		expect( services.getEntityLabelRepository() ).toBe( mockEntityLabelRepository );
+		expect( services.get( 'entityLabelRepository' ) ).toBe( mockEntityLabelRepository );
 
 		expect( ( DispatchingPropertyDataTypeRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBe( mockEntityInfoDispatcher );
-		expect( services.getPropertyDatatypeRepository() ).toBe( mockPropertyDataTypeRepository );
+		expect( services.get( 'propertyDatatypeRepository' ) ).toBe( mockPropertyDataTypeRepository );
+
 	} );
 
 	it( 'creates MessagesRepository', () => {
@@ -252,10 +252,10 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( MwMessagesRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwMessagesRepository ).toHaveBeenCalledWith( message );
-		expect( services.getMessagesRepository() ).toBe( mockMessagesRepository );
+		expect( services.get( 'messagesRepository' ) ).toBe( mockMessagesRepository );
 	} );
 
 	it( 'creates WikibaseRepoConfigRepository', () => {
@@ -273,7 +273,7 @@ describe( 'createServices', () => {
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
 		expect( ( ForeignApiRepoConfigRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
-		expect( services.getWikibaseRepoConfigRepository() )
+		expect( services.get( 'wikibaseRepoConfigRepository' ) )
 			.toBe( mockWikibaseRepoConfigRepository );
 	} );
 
@@ -283,9 +283,9 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceRepositories );
+		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( EventTracker ).toHaveBeenCalledWith( tracker );
 		expect( DataBridgeTrackerService ).toHaveBeenCalledWith( mockEventTracker );
-		expect( services.getTracker() ).toBe( mockDataBridgeTrackerService );
+		expect( services.get( 'tracker' ) ).toBe( mockDataBridgeTrackerService );
 	} );
 } );
