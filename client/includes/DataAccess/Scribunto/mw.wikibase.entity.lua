@@ -271,10 +271,13 @@ methodtable.getBestStatements = function( entity, propertyLabelOrId )
 	local statements = {}
 	local bestRank = 'normal'
 
+	local i = 0
 	for _, statement in pairs( entityStatements ) do
 		if statement.rank == bestRank then
-			statements[#statements + 1] = statement
+			i = i + 1
+			statements[i] = statement
 		elseif statement.rank == 'preferred' then
+			i = 1
 			statements = { statement }
 			bestRank = 'preferred'
 		end
