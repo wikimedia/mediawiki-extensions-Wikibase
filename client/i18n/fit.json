@@ -4,6 +4,7 @@
 			"Pyscowicz"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}}-kohetta muutettu",
 	"wikibase-comment-sitelink-add": "Kielilänkki lisätty: $1",
 	"wikibase-comment-sitelink-change": "Kielilänkki $1 muutettu muothoon $2",
 	"wikibase-comment-sitelink-remove": "Kielilänkki otettu poies: $1",

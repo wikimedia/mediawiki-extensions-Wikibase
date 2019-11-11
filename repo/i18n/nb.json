@@ -331,6 +331,7 @@
 	"special-mylanguagefallbackchain": "Min språktilbakefallskjede",
 	"wikibase-mylanguagefallbackchain-text": "Språktilbakefallskjeden som brukes for å vise entitetsetiketter for deg vises under.",
 	"wikibase-mylanguagefallbackchain-babel": "Du kan redigere den ved å legge inn <nowiki>{{#babel: }}</nowiki> på [[Special:MyPage|brukersiden]] {{GENDER:$1|din}}.",
+	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, konvertert fra $3 - $4",
 	"wikibase-api-claim-value-missing": "En verdi må angis når man oppretter en påstand med en PropertyValueSnak-snak.",
 	"wikibase-api-claim-value-unexpected": "Du kan ikke gi en verdi når du oppretter en påstand uten PropertyValueSnak som hovedsnak.",
