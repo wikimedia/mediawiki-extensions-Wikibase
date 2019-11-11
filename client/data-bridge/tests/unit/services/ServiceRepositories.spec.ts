@@ -22,6 +22,10 @@ describe( 'ServiceRepositories', () => {
 		'getEntityLabelRepository',
 		'setEntityLabelRepository',
 	], [
+		'PropertyDatatypeRepository',
+		'getPropertyDatatypeRepository',
+		'setPropertyDatatypeRepository',
+	], [
 		'MessagesRepository',
 		'getMessagesRepository',
 		'setMessagesRepository',

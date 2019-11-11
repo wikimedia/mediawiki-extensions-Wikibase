@@ -16,6 +16,7 @@ import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDi
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
+import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
 
 const manager = jest.fn();
 const dialog = {
@@ -77,9 +78,12 @@ describe( 'init', () => {
 				( window as MwWindow ).$.uls!.data,
 			),
 		);
-		const entityInfoDispatcher = new ForeignApiEntityInfoDispatcher( ForeignApi, [ 'labels' ] );
+		const entityInfoDispatcher = new ForeignApiEntityInfoDispatcher( ForeignApi, [ 'labels', 'datatype' ] );
 		expectedServices.setEntityLabelRepository(
 			new DispatchingEntityLabelRepository( 'en', entityInfoDispatcher ),
+		);
+		expectedServices.setPropertyDatatypeRepository(
+			new DispatchingPropertyDataTypeRepository( entityInfoDispatcher ),
 		);
 		expectedServices.setMessagesRepository(
 			new MwMessagesRepository( ( window as MwWindow ).mw.message ),

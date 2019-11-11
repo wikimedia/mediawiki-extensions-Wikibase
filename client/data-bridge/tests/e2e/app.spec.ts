@@ -408,4 +408,28 @@ describe( 'app', () => {
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
 	} );
+
+	it( 'opening of bridge is tracked with data type', async () => {
+		const propertyId = 'P4711';
+		const dataType = 'peculiar-type';
+		const testLink = prepareTestEnv( { propertyId } );
+		( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+			get: mockForeignApiGet(
+				mockDataBridgeConfig(),
+				mockForeignApiEntityInfoResponse( propertyId, 'something', 'en', dataType ),
+			),
+		} );
+
+		await init();
+
+		testLink!.click();
+		await budge();
+
+		expect( ( window as MwWindow ).mw.track ).toHaveBeenCalledTimes( 1 );
+		expect( ( window as MwWindow ).mw.track ).toHaveBeenCalledWith(
+			`counter.MediaWiki.wikibase.client.databridge.datatype.${dataType}`,
+			1,
+		);
+	} );
+
 } );

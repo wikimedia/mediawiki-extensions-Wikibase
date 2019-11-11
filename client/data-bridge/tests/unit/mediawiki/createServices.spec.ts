@@ -11,6 +11,7 @@ import WbRepo from '@/@types/wikibase/WbRepo';
 import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
+import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -32,6 +33,11 @@ jest.mock( '@/data-access/ForeignApiEntityInfoDispatcher', () => {
 const mockEntityLabelRepository = {};
 jest.mock( '@/data-access/DispatchingEntityLabelRepository', () => {
 	return jest.fn().mockImplementation( () => mockEntityLabelRepository );
+} );
+
+const mockPropertyDataTypeRepository = {};
+jest.mock( '@/data-access/DispatchingPropertyDataTypeRepository', () => {
+	return jest.fn().mockImplementation( () => mockPropertyDataTypeRepository );
 } );
 
 const mockMwLanguageInfoRepository = {};
@@ -211,7 +217,7 @@ describe( 'createServices', () => {
 		expect( services.getLanguageInfoRepository() ).toBe( mockMwLanguageInfoRepository );
 	} );
 
-	it( 'creates EntityLabelRepository', () => {
+	it( 'creates ForeignApiEntityInfoDispatcher and its two users', () => {
 		const wgPageContentLanguage = 'de';
 
 		const mwWindow = mockMwWindow( {
@@ -225,7 +231,7 @@ describe( 'createServices', () => {
 		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toStrictEqual( [ 'labels' ] );
+			.toStrictEqual( [ 'labels', 'datatype' ] );
 
 		expect(
 			( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
@@ -234,6 +240,10 @@ describe( 'createServices', () => {
 		expect( ( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBe( mockEntityInfoDispatcher );
 		expect( services.getEntityLabelRepository() ).toBe( mockEntityLabelRepository );
+
+		expect( ( DispatchingPropertyDataTypeRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBe( mockEntityInfoDispatcher );
+		expect( services.getPropertyDatatypeRepository() ).toBe( mockPropertyDataTypeRepository );
 	} );
 
 	it( 'creates MessagesRepository', () => {

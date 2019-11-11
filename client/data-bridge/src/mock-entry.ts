@@ -79,6 +79,16 @@ services.setWikibaseRepoConfigRepository( {
 	},
 } );
 
+services.setPropertyDatatypeRepository( {
+	getDataType: async ( _id ) => 'string',
+} );
+
+services.setTracker( {
+	trackPropertyDatatype( datatype: string ) {
+		console.info( `Tracking datatype: '${datatype}'` ); // eslint-disable-line no-console
+	},
+} );
+
 launch(
 	{
 		containerSelector: '#data-bridge-container',

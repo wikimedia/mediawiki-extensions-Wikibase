@@ -11,6 +11,7 @@ import Events from '@/events';
 import { EventEmitter } from 'events';
 import repeater from '@/events/repeater';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
+import DataType from '@/datamodel/DataType';
 
 Vue.config.productionTip = false;
 
@@ -27,6 +28,11 @@ export function launch(
 
 	const store = createStore( services );
 	store.dispatch( BRIDGE_INIT, information );
+
+	services.getPropertyDatatypeRepository().getDataType( information.propertyId )
+		.then( ( dataType: DataType ) => {
+			services.getTracker().trackPropertyDatatype( dataType );
+		} );
 
 	const app = new App( {
 		store,
