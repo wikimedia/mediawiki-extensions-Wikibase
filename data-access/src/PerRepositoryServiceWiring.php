@@ -10,6 +10,8 @@ use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
@@ -41,6 +43,21 @@ return [
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
+		global $wgSecretKey;
+
+		$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+		$cache = new SimpleCacheWithBagOStuff(
+			MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+			'wikibase.sqlEntityInfoBuilder.',
+			$cacheSecret
+		);
+		$cache = new StatsdMissRecordingSimpleCache(
+			$cache,
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			'wikibase.sqlEntityInfoBuilder.miss'
+		);
+
 		return new SqlEntityInfoBuilder(
 			$services->getEntityIdParser(),
 			$services->getEntityIdComposer(),
@@ -48,6 +65,7 @@ return [
 			LoggerFactory::getInstance( 'Wikibase' ),
 			new UnusableEntitySource(),
 			$settings,
+			$cache,
 			$services->getDatabaseName(),
 			$services->getRepositoryName()
 		);
