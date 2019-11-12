@@ -16,6 +16,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
+use Wikibase\Lib\SimpleCacheWithBagOStuff;
+use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -232,12 +234,27 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	}
 
 	public function getEntityInfoBuilder() {
+		global $wgSecretKey;
+
 		if ( $this->entityInfoBuilder === null ) {
 			// TODO: Having this lookup in GenericServices seems shady, this class should
 			// probably create/provide one for itself (all data needed in in the entity source)
 			$entityNamespaceLookup = $this->genericServices->getEntityNamespaceLookup();
 			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
+
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+			$cache = new SimpleCacheWithBagOStuff(
+				MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+				'wikibase.sqlEntityInfoBuilder.',
+				$cacheSecret
+			);
+			$cache = new StatsdMissRecordingSimpleCache(
+				$cache,
+				MediaWikiServices::getInstance()->getStatsdDataFactory(),
+				'wikibase.sqlEntityInfoBuilder.miss'
+			);
 
 			$this->entityInfoBuilder = new SqlEntityInfoBuilder(
 				$this->entityIdParser,
@@ -246,6 +263,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				LoggerFactory::getInstance( 'Wikibase' ),
 				$this->entitySource,
 				$this->settings,
+				$cache,
 				$databaseName,
 				$repositoryName
 			);

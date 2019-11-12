@@ -6,6 +6,7 @@ use DBAccessBase;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
+use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
@@ -25,6 +26,8 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @author Daniel Kinzler
  */
 class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
+
+	private const TTL = 60;
 
 	/**
 	 * Maps term types to fields used for lists of these terms in entity serializations.
@@ -112,6 +115,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entityNamespaceLookup;
 
 	/**
+	 * @var CacheInterface
+	 */
+	private $termCache;
+
+	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -147,6 +155,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		LoggerInterface $logger,
 		EntitySource $entitySource,
 		DataAccessSettings $dataAccessSettings,
+		CacheInterface $termCache,
 		$wiki = false,
 		$repositoryName = ''
 	) {
@@ -168,6 +177,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->logger = $logger;
 		$this->entitySource = $entitySource;
 		$this->dataAccessSettings = $dataAccessSettings;
+		$this->termCache = $termCache;
 	}
 
 	/**
@@ -383,7 +393,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		//NOTE: we make one DB query per entity type, so we can take advantage of the
 		//      database index on the term_entity_type field.
 		foreach ( array_keys( $this->localIdsByType ) as $type ) {
-			$this->collectTermsForEntities( $type, $languages );
+			$results = $this->collectTermsForEntities( $type, $languages );
+			foreach ( $results as  $result ) {
+				$this->injectTerms( $result );
+			}
 		}
 	}
 
@@ -392,15 +405,20 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @param string $entityType
 	 * @param string[] $languages
+	 * @return IResultWrapper[]
 	 */
 	private function collectTermsForEntities( $entityType, array $languages ) {
 		$termTypes = array_keys( self::$termTypeFields );
 
-		$where = [
-			'term_full_entity_id' => $this->localIdsByType[$entityType],
-			'term_language' => $languages,
-		];
+		list( $uncachedLanguages, $uncachedEntityIds, $cachedResults ) = $this->tryGettingTermsFromCache( $languages, $entityType );
+		if ( $uncachedLanguages === [] ) {
+			return [ $cachedResults ];
+		}
 
+		$where = [
+			'term_full_entity_id' => $uncachedEntityIds,
+			'term_language' => $uncachedLanguages,
+		];
 		$fields = [ 'term_type', 'term_language', 'term_text', 'term_full_entity_id' ];
 
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->updateCount(
@@ -418,18 +436,42 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$dbr = $this->getConnection( DB_REPLICA );
 
 		// Do one query per term type here, this is way faster on MySQL: T147748
+		$results = [];
 		foreach ( $termTypes as $termType ) {
-			$res = $dbr->select(
+			$results[] = $dbr->select(
 				$this->termTable,
 				$fields,
 				array_merge( $where, [ 'term_type' => $termType ] ),
 				__METHOD__
 			);
-
-			$this->injectTerms( $res );
 		}
 
-		$this->releaseConnection( $dbr );
+		$results[] = $cachedResults;
+
+		return $results;
+	}
+
+	private function tryGettingTermsFromCache( array $languages, string $entityType ) {
+		$uncachedLanguages = [];
+		$uncachedEntityIds = [];
+		$cachedResults = [];
+		foreach ( $languages as $language ) {
+			$isCached = true;
+			foreach ( $this->localIdsByType[$entityType] as $entityId ) {
+				$value = $this->termCache->get( implode( '.', [ $entityId, $language ] ), false );
+				if ( $value === false ) {
+					$isCached = false;
+					$uncachedEntityIds[] = $entityId;
+				} else {
+					$cachedResults[] = $value;
+				}
+			}
+			if ( $isCached === false ) {
+				$uncachedLanguages[] = $language;
+			}
+		}
+
+		return [ $uncachedLanguages, $uncachedEntityIds, $cachedResults ];
 	}
 
 	/**
@@ -437,43 +479,54 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @note Keep in sync with EntitySerializer!
 	 *
-	 * @param IResultWrapper $dbResult
+	 * @param IResultWrapper|array $dbResult
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function injectTerms( IResultWrapper $dbResult ) {
+	private function injectTerms( $dbResult ) {
 		foreach ( $dbResult as $row ) {
-			try {
-				$entityId = $this->idParser->parse( $row->term_full_entity_id );
-			} catch ( EntityIdParsingException $ex ) {
-				wfLogWarning( 'Unsupported entity serialization "' . $row->term_full_entity_id . '"' );
-				continue;
-			}
+			// Turning it from stdClass to array for better cache-ablity
+			$row = json_decode( json_encode( $row ), true );
+			$this->injectRow( $row );
 
-			$key = $entityId->getSerialization();
+			// Cache it
+			$key = implode( '.', [ $row['term_full_entity_id'], $row['term_language'] ] );
+			$this->termCache->set( $key, $row, self::TTL );
 
-			if ( !isset( $this->entityInfo[$key] ) ) {
-				continue;
-			}
+		}
+	}
 
-			$field = self::$termTypeFields[$row->term_type];
+	private function injectRow( array $row ) {
+		try {
+			$entityId = $this->idParser->parse( $row['term_full_entity_id'] );
+		} catch ( EntityIdParsingException $ex ) {
+			wfLogWarning( 'Unsupported entity serialization "' . $row['term_full_entity_id'] . '"' );
+			return;
+		}
 
-			switch ( $row->term_type ) {
-				case 'label':
-					$this->injectLabel( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
-					break;
-				case 'description':
-					$this->injectDescription( $this->entityInfo[$key][$field], $row->term_language, $row->term_text );
-					break;
-				default:
-					$this->logger->debug(
-						'{method}: unknown term type: {termType}',
-						[
-							'method' => __METHOD__,
-							'termType' => $row->term_type,
-						]
-					);
-			}
+		$key = $entityId->getSerialization();
+
+		if ( !isset( $this->entityInfo[$key] ) ) {
+			return;
+		}
+
+		$field = self::$termTypeFields[$row['term_type']];
+
+		switch ( $row['term_type'] ) {
+			case 'label':
+				$this->injectLabel( $this->entityInfo[$key][$field], $row['term_language'], $row['term_text'] );
+				break;
+			case 'description':
+				$this->injectDescription( $this->entityInfo[$key][$field], $row['term_language'], $row['term_text'] );
+				break;
+			default:
+				$this->logger->debug(
+					'{method}: unknown term type: {termType}',
+					[
+						'method' => __METHOD__,
+						'termType' => $row['term_type'],
+					]
+				);
 		}
 	}
 

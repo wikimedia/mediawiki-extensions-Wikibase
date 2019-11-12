@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use Psr\Log\NullLogger;
+use Psr\SimpleCache\CacheInterface;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
@@ -203,7 +204,8 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [], '', '', '', '' ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			$this->getCache()
 		);
 	}
 
@@ -214,6 +216,17 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 		return $this->getMockBuilder( EntityIdComposer::class )
 			->disableOriginalConstructor()
 			->getMock();
+	}
+
+	/**
+	 * @return \PHPUnit\Framework\MockObject\MockObject|CacheInterface
+	 */
+	private function getCache() {
+		$mock = $this->createMock( CacheInterface::class );
+		$mock->method( 'get' )
+			->willReturn( false );
+
+		return $mock;
 	}
 
 	/**
@@ -246,6 +259,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new NullLogger(),
 			new UnusableEntitySource(),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			$this->getCache(),
 			$databaseName,
 			$repositoryName
 		);
@@ -262,6 +276,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new NullLogger(),
 			new EntitySource( 'source', false, [], '', '', '', '' ),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			$this->getCache(),
 			false,
 			''
 		);
@@ -282,7 +297,8 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
+			$this->getCache()
 		);
 
 		$entityInfo = $builder->collectEntityInfo( [ $itemId, $propertyId ], [] );
@@ -352,6 +368,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new NullLogger(),
 			new EntitySource( 'source', false, [], '', '', '', '' ),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			$this->getCache(),
 			false,
 			'foo'
 		);
@@ -471,7 +488,8 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'testsource', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
+			$this->getCache()
 		);
 	}
 
