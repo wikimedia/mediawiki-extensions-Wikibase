@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\ChangeStore;
-use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
@@ -65,11 +64,6 @@ interface Store {
 	 * @return LabelConflictFinder
 	 */
 	public function getLabelConflictFinder();
-
-	/**
-	 * @return EntitiesWithoutTermFinder
-	 */
-	public function newEntitiesWithoutTermFinder();
 
 	/**
 	 * @return ItemsWithoutSitelinksFinder

@@ -13,8 +13,6 @@ $specialPageAliases = [];
 $specialPageAliases['en'] = [
 	'AvailableBadges' => [ 'AvailableBadges' ],
 	'DispatchStats' => [ 'DispatchStats' ],
-	'EntitiesWithoutDescription' => [ 'EntitiesWithoutDescription' ],
-	'EntitiesWithoutLabel' => [ 'EntitiesWithoutLabel' ],
 	'EntityData' => [ 'EntityData' ],
 	'EntityPage' => [ 'EntityPage' ],
 	'GoToLinkedPage' => [ 'GoToLinkedPage' ],
@@ -38,8 +36,6 @@ $specialPageAliases['en'] = [
 /** Arabic (العربية) */
 $specialPageAliases['ar'] = [
 	'DispatchStats' => [ 'إحصاءات_الوصول' ],
-	'EntitiesWithoutDescription' => [ 'الكيانات_بدون_وصف' ],
-	'EntitiesWithoutLabel' => [ 'الكيانات_بدون_علامة' ],
 	'EntityData' => [ 'بيانات_الكيانات' ],
 	'GoToLinkedPage' => [ 'الذهاب_للصفحة_الموصولة' ],
 	'ItemByTitle' => [ 'المدخلات_بالعنوان' ],
@@ -66,8 +62,6 @@ $specialPageAliases['arc'] = [
 /** Egyptian Arabic (مصرى) */
 $specialPageAliases['arz'] = [
 	'DispatchStats' => [ 'احصاءات_الوصول' ],
-	'EntitiesWithoutDescription' => [ 'الكيانات_من_غير_وصف' ],
-	'EntitiesWithoutLabel' => [ 'الكيانات_من_غير_علامه' ],
 	'EntityData' => [ 'بيانات_الكيانات' ],
 	'ItemByTitle' => [ 'المدخلات_بالعنوان' ],
 	'ItemDisambiguation' => [ 'المدخلات_بالعلامه' ],
@@ -86,8 +80,6 @@ $specialPageAliases['arz'] = [
 /** Bengali (বাংলা) */
 $specialPageAliases['bn'] = [
 	'DispatchStats' => [ 'ডিসপ্যাচ_পরিসংখ্যান' ],
-	'EntitiesWithoutDescription' => [ 'বিবরণহীন_সত্তা' ],
-	'EntitiesWithoutLabel' => [ 'লেভেলহীন_সত্তা' ],
 	'EntityData' => [ 'সত্তার_উপাত্ত' ],
 	'GoToLinkedPage' => [ 'সংযুক্ত_পাতায়_যান' ],
 	'ItemByTitle' => [ 'শিরোনাম_অনুযায়ী_আইটেম' ],
@@ -118,7 +110,6 @@ $specialPageAliases['bxr'] = [
 /** Min Dong Chinese (Mìng-dĕ̤ng-ngṳ̄) */
 $specialPageAliases['cdo'] = [
 	'DispatchStats' => [ '特派統計' ],
-	'EntitiesWithoutLabel' => [ '無標籤其條目' ],
 	'EntityData' => [ '條目數據' ],
 	'ItemByTitle' => [ '標題其單單' ],
 	'ItemDisambiguation' => [ '消除歧義其單單' ],
@@ -136,8 +127,6 @@ $specialPageAliases['cdo'] = [
 /** Czech (česky) */
 $specialPageAliases['cs'] = [
 	'DispatchStats' => [ 'Statistiky_distribuce' ],
-	'EntitiesWithoutDescription' => [ 'Entity_bez_popisku' ],
-	'EntitiesWithoutLabel' => [ 'Entity_bez_štítku' ],
 	'EntityData' => [ 'Data_entity' ],
 	'GoToLinkedPage' => [ 'Jít_na_odkazovanou_stránku' ],
 	'ItemByTitle' => [ 'Položka_podle_názvu' ],
@@ -160,8 +149,6 @@ $specialPageAliases['cs'] = [
 /** German (Deutsch) */
 $specialPageAliases['de'] = [
 	'DispatchStats' => [ 'Abfertigungsstatistiken' ],
-	'EntitiesWithoutDescription' => [ 'Objekte_ohne_Beschreibung' ],
-	'EntitiesWithoutLabel' => [ 'Objekte_ohne_Bezeichnung' ],
 	'EntityData' => [ 'Objektdaten' ],
 	'GoToLinkedPage' => [ 'Gehe_zur_verlinkten_Seite' ],
 	'ItemByTitle' => [ 'Datenelement_nach_Name' ],
@@ -198,8 +185,6 @@ $specialPageAliases['eo'] = [
 
 /** Spanish (español) */
 $specialPageAliases['es'] = [
-	'EntitiesWithoutDescription' => [ 'EntidadesSinDescripción' ],
-	'EntitiesWithoutLabel' => [ 'EntidadesSinEtiqueta' ],
 	'EntityData' => [ 'DatosDeEntidad' ],
 	'ItemByTitle' => [ 'ElementoPorTítulo' ],
 	'ItemDisambiguation' => [ 'DesambiguaciónDeElementos' ],
@@ -216,8 +201,6 @@ $specialPageAliases['es'] = [
 
 /** Finnish (suomi) */
 $specialPageAliases['fi'] = [
-	'EntitiesWithoutDescription' => [ 'Aiheet_ilman_kuvausta' ],
-	'EntitiesWithoutLabel' => [ 'Aiheet_ilman_nimeä' ],
 	'ItemByTitle' => [ 'Hae_kohdetta_otsikolla' ],
 	'ItemDisambiguation' => [ 'Kohteet_samalla_nimellä' ],
 	'ItemsWithoutSitelinks' => [ 'Kohteet_ilman_sivustolinkkejä' ],
@@ -232,7 +215,6 @@ $specialPageAliases['fi'] = [
 
 /** Icelandic (íslenska) */
 $specialPageAliases['is'] = [
-	'EntitiesWithoutLabel' => [ 'Færslur_án_merkimiða' ],
 	'ItemByTitle' => [ 'Hlutur_eftir_nafni' ],
 	'ItemDisambiguation' => [ 'Hlutur_eftir_merkimiða' ],
 	'ListDatatypes' => [ 'Gagnagerðir' ],
@@ -244,8 +226,6 @@ $specialPageAliases['is'] = [
 /** Italian (italiano) */
 $specialPageAliases['it'] = [
 	'DispatchStats' => [ 'StatistichePropagazione' ],
-	'EntitiesWithoutDescription' => [ 'EntitàSenzaDescrizione' ],
-	'EntitiesWithoutLabel' => [ 'EntitàSenzaEtichetta' ],
 	'EntityData' => [ 'DatiEntità' ],
 	'ItemByTitle' => [ 'ElementiPerTitolo' ],
 	'ItemDisambiguation' => [ 'ElementiDisambigui' ],
@@ -263,8 +243,6 @@ $specialPageAliases['it'] = [
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = [
 	'DispatchStats' => [ '発送統計' ],
-	'EntitiesWithoutDescription' => [ '説明のない実体', '説明のないエンティティ' ],
-	'EntitiesWithoutLabel' => [ 'ラベルのない実体', 'ラベルのないエンティティ' ],
 	'EntityData' => [ '実体データ', 'エンティティデータ' ],
 	'ItemByTitle' => [ 'タイトルから項目を探す' ],
 	'ItemDisambiguation' => [ '項目の曖昧さ回避' ],
@@ -282,8 +260,6 @@ $specialPageAliases['ja'] = [
 $specialPageAliases['ko'] = [
 	'AvailableBadges' => [ '사용가능한뱃지' ],
 	'DispatchStats' => [ '전송통계' ],
-	'EntitiesWithoutDescription' => [ '설명없는개체' ],
-	'EntitiesWithoutLabel' => [ '레이블없는개체' ],
 	'EntityData' => [ '개체데이터' ],
 	'EntityPage' => [ '개체문서', '개체페이지' ],
 	'GoToLinkedPage' => [ '링크된문서로가기', '링크된문서로이동' ],
@@ -307,8 +283,6 @@ $specialPageAliases['ko'] = [
 /** Luxembourgish (Lëtzebuergesch) */
 $specialPageAliases['lb'] = [
 	'DispatchStats' => [ 'Statistike_verbreeden' ],
-	'EntitiesWithoutDescription' => [ 'Elementer_ouni_Beschreiwung' ],
-	'EntitiesWithoutLabel' => [ 'Elementer_ouni_Etiquette' ],
 	'ItemByTitle' => [ 'Element_nom_Titel' ],
 	'ItemDisambiguation' => [ 'Homonymie_vun_engem_Element' ],
 	'ItemsWithoutSitelinks' => [ 'Elementer_ouni_Weblinken' ],
@@ -324,8 +298,6 @@ $specialPageAliases['lb'] = [
 
 /** Northern Luri (لۊری شومالی) */
 $specialPageAliases['lrc'] = [
-	'EntitiesWithoutDescription' => [ 'چیایی_کە_توضی_نارئن' ],
-	'EntitiesWithoutLabel' => [ 'چیایی_کە_ریتئراز_نارئن' ],
 	'ItemsWithoutSitelinks' => [ 'چیایی_کئ_ھوم_پئیڤأند_دیارگە_نارئن' ],
 	'ListDatatypes' => [ 'میزوٙنکاری_جوٙر_دادە_یا' ],
 	'MergeItems' => [ 'سأریأک_سازی_چیا' ],
@@ -340,8 +312,6 @@ $specialPageAliases['lrc'] = [
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = [
 	'DispatchStats' => [ 'СтатистикиСпроведување' ],
-	'EntitiesWithoutDescription' => [ 'ЕдинициБезОпис' ],
-	'EntitiesWithoutLabel' => [ 'ЕдинициБезНатпис' ],
 	'EntityData' => [ 'ЕдиницаПодатоци' ],
 	'GoToLinkedPage' => [ 'ОдиНаСврзанаСтраница' ],
 	'ItemByTitle' => [ 'ПредметПоНаслов' ],
@@ -362,8 +332,6 @@ $specialPageAliases['mk'] = [
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = [
 	'DispatchStats' => [ 'Verwerkingsstatistieken' ],
-	'EntitiesWithoutDescription' => [ 'EntiteitenZonderBeschrijving' ],
-	'EntitiesWithoutLabel' => [ 'EntiteitenZonderLabel' ],
 	'EntityData' => [ 'Entiteitsgegevens' ],
 	'GoToLinkedPage' => [ 'NaarGekoppeldePaginaGaan' ],
 	'ItemByTitle' => [ 'ItemPerTitel' ],
@@ -382,15 +350,8 @@ $specialPageAliases['nl'] = [
 	'SetSiteLink' => [ 'SitekoppelingInstellen' ],
 ];
 
-/** Polish (polski) */
-$specialPageAliases['pl'] = [
-	'EntitiesWithoutDescription' => [ 'Encje_bez_opisu' ],
-	'EntitiesWithoutLabel' => [ 'Encje_bez_etykiety' ],
-];
-
 /** Sicilian (sicilianu) */
 $specialPageAliases['scn'] = [
-	'EntitiesWithoutLabel' => [ 'EntitàSenzaEtichetta' ],
 	'EntityData' => [ 'DatiEntità' ],
 	'ItemByTitle' => [ 'ElementiPerTitolo' ],
 	'ItemDisambiguation' => [ 'ElementiDisambigui' ],
@@ -402,8 +363,6 @@ $specialPageAliases['scn'] = [
 
 /** Swedish (svenska) */
 $specialPageAliases['sv'] = [
-	'EntitiesWithoutDescription' => [ 'Objekt_utan_beskrivning' ],
-	'EntitiesWithoutLabel' => [ 'Objekt_utan_etikett' ],
 	'EntityData' => [ 'Objektdata' ],
 	'ItemByTitle' => [ 'Objekt_efter_titel' ],
 	'ItemDisambiguation' => [ 'Objektsärskiljning' ],
@@ -423,8 +382,6 @@ $specialPageAliases['sv'] = [
 $specialPageAliases['ur'] = [
 	'AvailableBadges' => [ 'دستیاب_علامتیں', 'دستیاب_علامات' ],
 	'DispatchStats' => [ 'شماریات_ارسال' ],
-	'EntitiesWithoutDescription' => [ 'موجودات_بدون_وضاحت' ],
-	'EntitiesWithoutLabel' => [ 'موجودات_بدون_لیبل' ],
 	'EntityData' => [ 'موجودات_کا_ڈیٹا' ],
 	'EntityPage' => [ 'صفحہ_موجود' ],
 	'GoToLinkedPage' => [ 'مربوط_صفحے_میں_جائیں' ],
@@ -448,8 +405,6 @@ $specialPageAliases['ur'] = [
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = [
 	'DispatchStats' => [ 'Thống_kê_truyền_bá' ],
-	'EntitiesWithoutDescription' => [ 'Thực_thể_không_miêu_tả', 'Thực_thể_không_mô_tả' ],
-	'EntitiesWithoutLabel' => [ 'Thực_thể_không_nhãn' ],
 	'EntityData' => [ 'Dữ_liệu_thực_thể' ],
 	'GoToLinkedPage' => [ 'Đi_đến_trang_liên_kết' ],
 	'ItemByTitle' => [ 'Khoản_mục_theo_tên' ],
@@ -469,8 +424,6 @@ $specialPageAliases['vi'] = [
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = [
 	'DispatchStats' => [ '发送统计' ],
-	'EntitiesWithoutDescription' => [ '无说明实体' ],
-	'EntitiesWithoutLabel' => [ '无标签实体' ],
 	'EntityData' => [ '实体数据' ],
 	'GoToLinkedPage' => [ '前往已链接页面' ],
 	'ItemByTitle' => [ '项按标题' ],
@@ -491,8 +444,6 @@ $specialPageAliases['zh-hans'] = [
 /** Traditional Chinese (中文（繁體）‎) */
 $specialPageAliases['zh-hant'] = [
 	'DispatchStats' => [ '發佈統計' ],
-	'EntitiesWithoutDescription' => [ '無類型實體' ],
-	'EntitiesWithoutLabel' => [ '無標籤實體' ],
 	'EntityData' => [ '實體資料' ],
 	'GoToLinkedPage' => [ '前往已連結頁面' ],
 	'ItemByTitle' => [ '依標題搜尋項目' ],
