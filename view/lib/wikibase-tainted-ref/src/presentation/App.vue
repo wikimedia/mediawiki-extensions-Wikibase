@@ -3,10 +3,10 @@
 		<div v-if="isTainted">
 			<span>
 				<TaintedIcon />
+				<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
+					<Popper />
+				</div>
 			</span>
-			<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
-				<Popper />
-			</div>
 		</div>
 	</div>
 </template>
@@ -54,7 +54,9 @@ export default class App extends Vue {
 	.wb-tr-float-wrapper {
 		display: block;
 		position: absolute;
+		margin-top: 15px;
+		// Move left by 50% of its width, minus half the icon width
+		transform: translateX( calc( -50% + 1.4em / 2 ) );
 		z-index: 999;
-		transform: translate( -60%, 10% );
 	}
 </style>
