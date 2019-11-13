@@ -22,6 +22,10 @@ class FingerprintChangeOpFactory {
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
+	public function newFingerprintChangeOp( ChangeOps $changeOps ): ChangeOp {
+		return new ChangeOpFingerprint( $changeOps );
+	}
+
 	/**
 	 * @param string $languageCode
 	 * @param string[] $aliases
