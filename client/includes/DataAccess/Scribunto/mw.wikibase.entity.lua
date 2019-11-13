@@ -30,7 +30,7 @@ Entity.claimRanks = {
 -- Is this a valid property id (Pnnn)?
 --
 -- @param {string} propertyId
-local isValidPropertyId = function( propertyId )
+local function isValidPropertyId( propertyId )
 	return type( propertyId ) == 'string' and propertyId:match( '^P[1-9]%d*$' )
 end
 
@@ -38,7 +38,7 @@ end
 --
 -- @param {string} entityId
 -- @param {string} propertyId
-local addStatementUsage = function( entityId, propertyId )
+local function addStatementUsage( entityId, propertyId )
 	if isValidPropertyId( propertyId ) then
 		-- Only attempt to track the usage if we have a valid property id.
 		php.addStatementUsage( entityId, propertyId )
@@ -51,24 +51,15 @@ end
 -- @param {table} entity
 -- @param {string} tableName
 -- @param {function} usageFunc
-local maskEntityTable = function( entity, tableName, usageFunc )
+local function maskEntityTable( entity, tableName, usageFunc )
 	if entity[tableName] == nil then
 		return
 	end
+
 	local actualEntityTable = entity[tableName]
 	entity[tableName] = {}
 
-	local pseudoTableMetatable = {}
-	pseudoTableMetatable.__index = function( _, key )
-		usageFunc( entity.id, key )
-		return actualEntityTable[key]
-	end
-
-	pseudoTableMetatable.__newindex = function( _, _, _ )
-		error( 'Entity cannot be modified', 2 )
-	end
-
-	local logNext = function( _, key )
+	local function logNext( _, key )
 		local k, v = next( actualEntityTable, key )
 		if k ~= nil then
 			usageFunc( entity.id, k )
@@ -76,21 +67,32 @@ local maskEntityTable = function( entity, tableName, usageFunc )
 		return k, v
 	end
 
-	pseudoTableMetatable.__pairs = function( _ )
-		return logNext, {}, nil
-	end
+	local pseudoTableMetatable = {
+		__index = function( _, key )
+			usageFunc( entity.id, key )
+			return actualEntityTable[key]
+		end,
+
+		__newindex = function( _, _, _ )
+			error( 'Entity cannot be modified', 2 )
+		end,
+
+		__pairs = function( _ )
+			return logNext, {}, nil
+		end,
+	}
 
 	setmetatable( entity[tableName], pseudoTableMetatable )
 end
 
-local noUsageTracking = function()
+local function noUsageTracking()
 end
 
 -- Function to mask an entity's subtables in order to log access and prevent modifications
 --
 -- @param {table} entity
 -- @param {bool} fineGrainedTracking
-local maskEntityTables = function ( entity, fineGrainedTracking )
+local function maskEntityTables( entity, fineGrainedTracking )
 	if fineGrainedTracking then
 		maskEntityTable( entity, 'claims', addStatementUsage )
 		maskEntityTable( entity, 'labels', php.addLabelUsage )
@@ -109,7 +111,7 @@ end
 -- Create new entity object from given data
 --
 -- @param {table} data
-Entity.create = function( data )
+function Entity.create( data )
 	if type( data ) ~= 'table' then
 		error( 'Expected a table obtained via mw.wikibase.getEntityObject, got ' .. type( data ) .. ' instead' )
 	end
@@ -134,7 +136,7 @@ Entity.create = function( data )
 end
 
 -- Get the id serialization from this entity.
-methodtable.getId = function( entity )
+function methodtable.getId( entity )
 	return entity.id
 end
 
@@ -145,7 +147,7 @@ end
 -- @param {table} entity
 -- @param {string} termType A valid key in the entity table (either labels, descriptions or aliases)
 -- @param {string|number} langCode
-local getTermAndLang = function( entity, termType, langCode )
+local function getTermAndLang( entity, termType, langCode )
 	php.incrementStatsKey( 'wikibase.client.scribunto.entity.getTermAndLang.call' )
 
 	langCode = langCode or php.getLanguageCode()
@@ -172,7 +174,7 @@ end
 -- or the user's language (on multilingual wikis).
 --
 -- @param {string|number} [langCode]
-methodtable.getLabel = function( entity, langCode )
+function methodtable.getLabel( entity, langCode )
 	checkTypeMulti( 'getLabel', 1, langCode, { 'string', 'number', 'nil' } )
 
 	local label = getTermAndLang( entity, 'labels', langCode )
@@ -183,7 +185,7 @@ end
 -- or the user's language (on multilingual wikis).
 --
 -- @param {string|number} [langCode]
-methodtable.getDescription = function( entity, langCode )
+function methodtable.getDescription( entity, langCode )
 	checkTypeMulti( 'getDescription', 1, langCode, { 'string', 'number', 'nil' } )
 
 	local description = getTermAndLang( entity, 'descriptions', langCode )
@@ -195,7 +197,7 @@ end
 -- Has the language the returned label is in as an additional second return parameter.
 --
 -- @param {string|number} [langCode]
-methodtable.getLabelWithLang = function( entity, langCode )
+function methodtable.getLabelWithLang( entity, langCode )
 	checkTypeMulti( 'getLabelWithLang', 1, langCode, { 'string', 'number', 'nil' } )
 
 	return getTermAndLang( entity, 'labels', langCode )
@@ -206,7 +208,7 @@ end
 -- Has the language the returned description is in as an additional second return parameter.
 --
 -- @param {string|number} [langCode]
-methodtable.getDescriptionWithLang = function( entity, langCode )
+function methodtable.getDescriptionWithLang( entity, langCode )
 	checkTypeMulti( 'getDescriptionWithLang', 1, langCode, { 'string', 'number', 'nil' } )
 
 	return getTermAndLang( entity, 'descriptions', langCode )
@@ -215,7 +217,7 @@ end
 -- Get the sitelink title linking to the given site id
 --
 -- @param {string|number} [globalSiteId]
-methodtable.getSitelink = function( entity, globalSiteId )
+function methodtable.getSitelink( entity, globalSiteId )
 	php.incrementStatsKey( 'wikibase.client.scribunto.entity.getSitelink.call' )
 
 	checkTypeMulti( 'getSitelink', 1, globalSiteId, { 'string', 'number', 'nil' } )
@@ -242,7 +244,7 @@ end
 -- @param {table} entity
 -- @param {string} propertyLabelOrId
 -- @param {string} funcName for error logging
-local getEntityStatements = function( entity, propertyLabelOrId, funcName )
+local function getEntityStatements( entity, propertyLabelOrId, funcName )
 	php.incrementStatsKey( 'wikibase.client.scribunto.entity.getEntityStatements.call' )
 
 	checkType( funcName, 1, propertyLabelOrId, 'string' )
@@ -266,7 +268,7 @@ end
 -- Get the best statements with the given property id or label
 --
 -- @param {string} propertyLabelOrId
-methodtable.getBestStatements = function( entity, propertyLabelOrId )
+function methodtable.getBestStatements( entity, propertyLabelOrId )
 	local entityStatements = getEntityStatements( entity, propertyLabelOrId, 'getBestStatements' )
 	local statements = {}
 	local bestRank = 'normal'
@@ -289,12 +291,12 @@ end
 -- Get all statements with the given property id or label
 --
 -- @param {string} propertyLabelOrId
-methodtable.getAllStatements = function( entity, propertyLabelOrId )
+function methodtable.getAllStatements( entity, propertyLabelOrId )
 	return getEntityStatements( entity, propertyLabelOrId, 'getAllStatements' )
 end
 
 -- Get a table with all property ids attached to the entity.
-methodtable.getProperties = function( entity )
+function methodtable.getProperties( entity )
 	php.incrementStatsKey( 'wikibase.client.scribunto.entity.getProperties.call' )
 
 	if entity.claims == nil then
@@ -319,7 +321,7 @@ end
 -- @param {string} phpFormatterFunction
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
-local formatValuesByPropertyId = function( entity, phpFormatterFunction, propertyLabelOrId, acceptableRanks )
+local function formatValuesByPropertyId( entity, phpFormatterFunction, propertyLabelOrId, acceptableRanks )
 	acceptableRanks = acceptableRanks or nil
 
 	local formatted = php[phpFormatterFunction](
@@ -349,7 +351,7 @@ end
 --
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
-methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
+function methodtable.formatPropertyValues( entity, propertyLabelOrId, acceptableRanks )
 	php.incrementStatsKey( 'wikibase.client.scribunto.entity.formatPropertyValues.call' )
 
 	checkType( 'formatPropertyValues', 1, propertyLabelOrId, 'string' )
@@ -368,7 +370,7 @@ end
 --
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
-methodtable.formatStatements = function( entity, propertyLabelOrId, acceptableRanks )
+function methodtable.formatStatements( entity, propertyLabelOrId, acceptableRanks )
 	php.incrementStatsKey( 'wikibase.client.scribunto.entity.formatStatements.call' )
 
 	checkType( 'formatStatements', 1, propertyLabelOrId, 'string' )
