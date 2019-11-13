@@ -43,6 +43,10 @@ interface ChangeOp {
 	/**
 	 * Applies the change represented by this ChangeOp to the given Entity.
 	 *
+	 * As `ChagngeOp` does not yet know whether it is going to change the entity or
+	 * not, and since expensive validations should be run only on `ChangeOp`s that will
+	 * change the entity, {@link ChangeOpResult::validate} is recommended for such validations.
+	 *
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *

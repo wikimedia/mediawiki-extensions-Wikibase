@@ -1,8 +1,8 @@
 <?php
 
-
 namespace Wikibase\Repo\Tests\ChangeOp;
 
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 
@@ -17,10 +17,12 @@ class ChangeOpResultStub implements ChangeOpResult {
 	/**
 	 * @param EntityId|null $entityId
 	 * @param bool $isEntityChanged
+	 * @param array|null $validationErrors
 	 */
-	public function __construct( EntityId $entityId = null, $isEntityChanged = false ) {
+	public function __construct( EntityId $entityId = null, $isEntityChanged = false, array $validationErrors = null ) {
 		$this->isEntityChanged = $isEntityChanged;
 		$this->entityId = $entityId;
+		$this->validationErrors = $validationErrors;
 	}
 
 	public function getEntityId() {
@@ -31,4 +33,11 @@ class ChangeOpResultStub implements ChangeOpResult {
 		return $this->isEntityChanged;
 	}
 
+	public function validate(): Result {
+		if ( $this->validationErrors !== null ) {
+			return Result::newError( $this->validationErrors );
+		} else {
+			return Resutl::newSuccess();
+		}
+	}
 }

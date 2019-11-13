@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\ChangeOp;
 
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -22,5 +23,25 @@ interface ChangeOpResult {
 	 * @return bool
 	 */
 	public function isEntityChanged();
+
+	/**
+	 * Validate a ChangeOpResult
+	 *
+	 * Mostly suitable for validations that need to run only on the parts
+	 * that have been actually changed on an entity. Example of those are
+	 * expensive validations that need to run on db or other external
+	 * slower types of stores.
+	 *
+	 * For simpler and less-expensive validations, {@link ChangeOp::validate}
+	 * can be used as well.
+	 *
+	 * Concrete example:
+	 * Checking for uniqueness of terms (fingerprint) across the store is an expensive operation.
+	 * It better be checked only on terms that are actually going to change on entity, rather than
+	 * validate uniqueness on all terms including the ones that are not changed.
+	 *
+	 * @return Result
+	 */
+	public function validate(): Result;
 
 }

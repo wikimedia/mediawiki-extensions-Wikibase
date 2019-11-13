@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ChangeOp\GenericChangeOpResult;
 
@@ -31,6 +32,14 @@ class GenericChangeOpResultTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertTrue( $resultWithChange->isEntityChanged() );
 		$this->assertFalse( $resultWithoutChange->isEntityChanged() );
+	}
+
+	public function testValidate() {
+		$resultWithChange = new GenericChangeOpResult( new ItemId( 'Q123' ), true );
+		$resultWithoutChange = new GenericChangeOpResult( new ItemId( 'Q123' ), true );
+
+		$this->assertEquals( Result::newSuccess(), $resultWithChange->validate() );
+		$this->assertEquals( Result::newSuccess(), $resultWithoutChange->validate() );
 	}
 
 }
