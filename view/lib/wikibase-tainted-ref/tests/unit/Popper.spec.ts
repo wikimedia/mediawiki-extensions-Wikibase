@@ -1,5 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
+import Track from '@/vue-plugins/Track';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import Popper from '@/presentation/components/Popper.vue';
@@ -25,6 +26,18 @@ describe( 'Popper.vue', () => {
 		} );
 		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
 		expect( wrapper.find( '.wb-tr-popper-help' ).attributes().href ).toEqual( 'https://wdtest/Help' );
+	} );
+	it( 'clicking the help link triggers a tracking event', () => {
+		const trackingFunction = jest.fn();
+		localVue.use( Track, { trackingFunction } );
+		const store: Store<Application> = createStore();
+		const wrapper = shallowMount( Popper, {
+			store,
+			localVue,
+		} );
+		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
+		wrapper.find( '.wb-tr-popper-help' ).trigger( 'click' );
+		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	} );
 	it( 'closes the popper when the x is clicked', () => {
 		const store: Store<Application> = createStore();

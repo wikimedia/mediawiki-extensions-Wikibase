@@ -47,6 +47,8 @@ interface MediaWiki {
 	hook: HookRegistry;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util */
 	util: MwUtil;
+	/** @see https://www.mediawiki.org/wiki/ResourceLoader/Core_modules#mw.track */
+	track( topic: string, data: object|number|string ): void;
 }
 
 export type HookRegistry = ( name: string ) => Hook;
