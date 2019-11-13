@@ -26,22 +26,32 @@ export default async (): Promise<void> => {
 	const bridgeElementSelector = new BridgeDomElementsSelector( dataBridgeConfig.hrefRegExp );
 	const linksToOverload: SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
 	if ( linksToOverload.length > 0 ) {
-		const require = await mwWindow.mw.loader.using( [
-				APP_MODULE,
-				WBREPO_MODULE,
-				FOREIGNAPI_MODULE,
-				ULS_MODULE,
-				MWLANGUAGE_MODULE,
-			] ),
-			app = require( APP_MODULE ),
-			dispatcher = new Dispatcher( mwWindow, app, dataBridgeConfig );
+		const dispatcherPromise = mwWindow.mw.loader.using( [
+			APP_MODULE,
+			WBREPO_MODULE,
+			FOREIGNAPI_MODULE,
+			ULS_MODULE,
+			MWLANGUAGE_MODULE,
+		] ).then( ( require ) => {
+			const app = require( APP_MODULE );
+			return new Dispatcher( mwWindow, app, dataBridgeConfig );
+		} );
 
 		linksToOverload.forEach( ( selectedElement: SelectedElement ) => {
+			let isOpening = false;
 			selectedElement.link.setAttribute( 'aria-haspopup', 'dialog' );
-			selectedElement.link.addEventListener( 'click', ( event: Event ) => {
+			selectedElement.link.addEventListener( 'click', async ( event: Event ) => {
 				stopNativeClickHandling( event );
+				if ( isOpening ) {
+					return; // user clicked link again while we were awaiting dispatcherPromise, ignore
+				}
+				isOpening = true;
+				const dispatcher = await dispatcherPromise;
 				dispatcher.dispatch( selectedElement );
+				isOpening = false;
 			} );
 		} );
+
+		await dispatcherPromise; // tests need to know when they can expect the click listeners to work
 	}
 };

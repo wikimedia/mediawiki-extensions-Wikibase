@@ -99,10 +99,10 @@ describe( 'string data value', () => {
 		await init();
 
 		testLink!.click();
-		expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
-
-		expect( select( '.wb-db-app' ) ).not.toBeNull();
 		await budge();
+
+		expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+		expect( select( '.wb-db-app' ) ).not.toBeNull();
 		expect( select( '.wb-db-app .wb-db-bridge .wb-db-stringValue' ) ).not.toBeNull();
 		expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
 		expect(
@@ -129,8 +129,9 @@ describe( 'string data value', () => {
 
 			await init();
 			testLink!.click();
-			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			await budge();
+
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
 
@@ -165,8 +166,9 @@ describe( 'string data value', () => {
 
 			await init();
 			testLink!.click();
-			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			await budge();
+
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
 
@@ -208,8 +210,9 @@ describe( 'string data value', () => {
 
 			await init();
 			testLink!.click();
-			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			await budge();
+
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
 			expect( label ).not.toBeNull();

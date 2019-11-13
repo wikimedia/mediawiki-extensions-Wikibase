@@ -6,6 +6,7 @@ import {
 } from '../../util/mocks';
 import EditFlow from '@/definitions/EditFlow';
 import Dispatcher from '@/mediawiki/Dispatcher';
+import { budge } from '../../util/timer';
 
 jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 	return jest.fn().mockImplementation( () => {} );
@@ -83,13 +84,71 @@ describe( 'init', () => {
 			selectElementsToOverload: () => [ selectedElement ],
 		} ) );
 
-		return init().then( () => {
-			selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
+		return init().then( async () => {
+			await selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
 			expect( event.preventDefault ).toHaveBeenCalled();
 			expect( event.stopPropagation ).toHaveBeenCalled();
 			expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig );
 			expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		} );
+	} );
+
+	it( 'does not dispatch app twice if clicked a second time before app loads', async () => {
+		const app = {},
+			require = jest.fn().mockReturnValue( app );
+		let resolveUsing: ( require: Function ) => void;
+		const using = jest.fn(
+				() => new Promise( ( resolve ) => {
+					resolveUsing = resolve;
+				} ),
+			),
+			entityId = 'Q5',
+			propertyId = 'P4711',
+			editFlow = EditFlow.OVERWRITE,
+			dataBridgeConfig = {
+				hrefRegExp: '',
+				editTags: [],
+				usePublish: false,
+			};
+		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
+
+		const selectedElement = {
+			link: {
+				addEventListener: jest.fn(),
+				setAttribute: jest.fn(),
+			},
+			entityId,
+			propertyId,
+			editFlow,
+		};
+		const event = {
+			preventDefault: jest.fn(),
+			stopPropagation: jest.fn(),
+		};
+		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
+			selectElementsToOverload: () => [ selectedElement ],
+		} ) );
+		init();
+
+		selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
+		await budge();
+		expect( event.preventDefault ).toHaveBeenCalled();
+		event.preventDefault.mockClear();
+		expect( event.stopPropagation ).toHaveBeenCalled();
+		event.stopPropagation.mockClear();
+		expect( Dispatcher ).not.toHaveBeenCalled();
+		expect( mockDispatcher.dispatch ).not.toHaveBeenCalled();
+
+		selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
+		await budge();
+		expect( event.preventDefault ).toHaveBeenCalled();
+		expect( event.stopPropagation ).toHaveBeenCalled();
+		resolveUsing!( require );
+		await budge();
+		expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig );
+		expect( Dispatcher ).toHaveBeenCalledTimes( 1 );
+		expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
+		expect( mockDispatcher.dispatch ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'loads does nothing if no supported links are found', () => {
