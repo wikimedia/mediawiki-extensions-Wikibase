@@ -11,6 +11,7 @@ import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTyp
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
+import Reference from '@/datamodel/Reference';
 import deepEqual from 'deep-equal';
 
 export const getters: GetterTree<Application, Application> = {
@@ -45,6 +46,18 @@ export const getters: GetterTree<Application, Application> = {
 		}
 
 		return state.targetLabel;
+	},
+
+	targetReferences( state: Application ): Reference[] {
+		if ( state.applicationStatus !== Status.READY ) {
+			return [];
+		}
+
+		const activeState = state as InitializedApplicationState;
+		const entityId = activeState[ NS_ENTITY ].id;
+		const statements = activeState[ NS_ENTITY ][ NS_STATEMENTS ][ entityId ][ state.targetProperty ][ 0 ];
+
+		return statements.references ? statements.references : [];
 	},
 
 	isTargetStatementModified( state: Application ) {

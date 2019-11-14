@@ -11,6 +11,9 @@ import clone from '@/store/clone';
 import { InitializedApplicationState } from '@/store/Application';
 
 describe( 'root/getters', () => {
+	const entityId = 'Q42';
+	const targetProperty = 'P23';
+
 	describe( 'targetValue', () => {
 		it( 'returns null if the application is in error state', () => {
 			const applicationState = newApplicationState( {
@@ -23,8 +26,6 @@ describe( 'root/getters', () => {
 
 		it( 'returns the target value', () => {
 			const dataValue = { type: 'string', value: 'a string' };
-			const targetProperty = 'P23';
-			const entityId = 'Q42';
 			const otherGetters = {
 				[ getter(
 					NS_ENTITY,
@@ -66,7 +67,6 @@ describe( 'root/getters', () => {
 	describe( 'targetLabel', () => {
 		it( 'returns the targetProperty and no linguistic content' +
 			', if no targetLabel is set.', () => {
-			const targetProperty = 'P23';
 			const applicationState = newApplicationState( { targetProperty } );
 
 			expect( getters.targetLabel(
@@ -85,8 +85,6 @@ describe( 'root/getters', () => {
 	} );
 
 	describe( 'isTargetPropertyModified', () => {
-		const entityId = 'Q42';
-		const targetProperty = 'P23';
 
 		it( 'returns false if the application is not ready', () => {
 			const actualTargetProperty = {
@@ -195,6 +193,89 @@ describe( 'root/getters', () => {
 			expect( getters.isTargetStatementModified(
 				applicationState, null, applicationState, null,
 			) ).toBe( true );
+		} );
+	} );
+
+	describe( 'targetReferences', () => {
+		const expectedTargetReferences = [
+			{
+				snaks: {
+					P268: [
+						{
+							snaktype: 'value',
+							property: 'P268',
+							hash: '8721e8944f95e9ce185c270dd1e12b81d13f7e9b',
+							datavalue: {
+								value: '11888092r',
+								type: 'string',
+							},
+							'datatype': 'external-id',
+						},
+					],
+				},
+				'snaks-order': [ 'P268' ],
+			},
+		];
+
+		it( 'returns the references datablob', () => {
+			const applicationState = newApplicationState( {
+				targetProperty,
+				applicationStatus: ApplicationStatus.READY,
+				[ NS_ENTITY ]: {
+					id: entityId,
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ targetProperty ]: [ {
+								references: expectedTargetReferences,
+							} ],
+						},
+					},
+				},
+			} );
+
+			expect(
+				getters.targetReferences( applicationState, null, applicationState, null ),
+			).toBe( expectedTargetReferences );
+		} );
+
+		it( 'returns an empty array, if there are no references', () => {
+			const applicationState = newApplicationState( {
+				targetProperty,
+				applicationStatus: ApplicationStatus.READY,
+				[ NS_ENTITY ]: {
+					id: entityId,
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ targetProperty ]: [ {} ],
+						},
+					},
+				},
+			} );
+
+			expect(
+				getters.targetReferences( applicationState, null, applicationState, null ),
+			).toStrictEqual( [] );
+		} );
+
+		it( 'returns an empty array, if the application is not ready', () => {
+			const applicationState = newApplicationState( {
+				targetProperty,
+				applicationStatus: ApplicationStatus.INITIALIZING,
+				[ NS_ENTITY ]: {
+					id: entityId,
+					[ NS_STATEMENTS ]: {
+						[ entityId ]: {
+							[ targetProperty ]: [ {
+								references: expectedTargetReferences,
+							} ],
+						},
+					},
+				},
+			} );
+
+			expect(
+				getters.targetReferences( applicationState, null, applicationState, null ),
+			).toStrictEqual( [] );
 		} );
 	} );
 } );
