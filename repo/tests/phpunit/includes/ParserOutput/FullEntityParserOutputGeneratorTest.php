@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Language;
 use MediaWikiTestCase;
 use Psr\Log\NullLogger;
+use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use SpecialPage;
 use Title;
@@ -264,6 +265,10 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			)
 		];
 
+		$cache = $this->createMock( CacheInterface::class );
+		$cache->method( 'get' )
+			->willReturn( false );
+
 		return new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->getEntityMetaTagsFactory( $title, $description ),
@@ -275,7 +280,8 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
 				new UnusableEntitySource(),
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+				$cache
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
@@ -499,6 +505,9 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				$entityTitleLookup
 			)
 		];
+		$cache = $this->createMock( CacheInterface::class );
+		$cache->method( 'get' )
+			->willReturn( false );
 
 		return new FullEntityParserOutputGenerator(
 			$this->getViewFactoryForRedirectTest(),
@@ -515,7 +524,8 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
 				new UnusableEntitySource(),
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+				$cache
 			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
