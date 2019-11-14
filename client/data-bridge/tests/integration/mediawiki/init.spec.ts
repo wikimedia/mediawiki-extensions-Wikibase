@@ -17,6 +17,7 @@ import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRe
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
+import { budge } from '../../util/timer';
 
 const manager = jest.fn();
 const dialog = {
@@ -102,8 +103,9 @@ describe( 'init', () => {
 </span>`;
 		const testLink = document.querySelector( 'a' );
 
-		return init().then( () => {
+		return init().then( async () => {
 			testLink!.click();
+			await budge();
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			expect( app.launch ).toHaveBeenCalledWith(

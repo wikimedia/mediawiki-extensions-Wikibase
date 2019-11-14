@@ -98,24 +98,26 @@ function prepareTestEnv( options: {
 describe( 'app', () => {
 
 	describe( 'app states', () => {
-		it( 'shows loading when app is launched', () => {
+		it( 'shows loading when app is launched', async () => {
 			const testLink = prepareTestEnv( {} );
+			( window as MwWindow ).$.get = function () {
+				return new Promise( () => { /* never resolves */ } );
+			} as any;
 
-			return init().then( () => {
-				testLink!.click();
+			await init();
+			testLink!.click();
+			await budge();
 
-				expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
-				expect( on ).toHaveBeenCalledTimes( 1 );
-				expect( select( '.wb-db-app' ) ).not.toBeNull();
-				expect( select( '.wb-db-app .wb-db-init' ) ).not.toBeNull();
-				expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
-				expect(
-					select(
-						'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
-					),
-				).not.toBeNull();
-
-			} );
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			expect( on ).toHaveBeenCalledTimes( 1 );
+			expect( select( '.wb-db-app' ) ).not.toBeNull();
+			expect( select( '.wb-db-app .wb-db-init' ) ).not.toBeNull();
+			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
+			expect(
+				select(
+					'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
+				),
+			).not.toBeNull();
 		} );
 
 		it( 'shows databridge on valid data', async () => {
