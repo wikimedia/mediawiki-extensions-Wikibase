@@ -459,7 +459,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$isCached = true;
 			foreach ( $this->localIdsByType[$entityType] as $entityId ) {
 				$value = $this->termCache->get( implode( '.', [ $entityId, $language ] ), false );
-				if ( $value === false ) {
+				if ( $value === false || $value === null ) { // Paranoia
 					$isCached = false;
 					$uncachedEntityIds[] = $entityId;
 				} else {
@@ -487,6 +487,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		foreach ( $dbResult as $row ) {
 			// Turning it from stdClass to array for better cache-ablity
 			$row = json_decode( json_encode( $row ), true );
+			if ( $row === null ) {
+				continue;
+			}
 			$this->injectRow( $row );
 
 			// Cache it
