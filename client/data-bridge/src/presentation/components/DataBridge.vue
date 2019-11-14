@@ -6,6 +6,7 @@
 			:set-data-value="setDataValue"
 			:maxlength="this.$bridgeConfig.stringMaxLength"
 		/>
+		<ReferenceSection />
 	</section>
 </template>
 
@@ -16,11 +17,13 @@ import { Action, Getter, State } from 'vuex-class';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
+import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import { BRIDGE_SET_TARGET_VALUE } from '@/store/actionTypes';
 
 @Component( {
 	components: {
 		StringDataValue,
+		ReferenceSection,
 	},
 } )
 export default class DataBridge extends Vue {
