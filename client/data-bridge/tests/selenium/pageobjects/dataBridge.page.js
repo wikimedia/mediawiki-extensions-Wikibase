@@ -35,6 +35,14 @@ class DataBridgePage extends Page {
 		return '.wb-db-PropertyLabel';
 	}
 
+	static get REFERENCES_SECTION() {
+		return '.wb-db-references';
+	}
+
+	static get REFERENCE() {
+		return '.wb-db-references__listItem';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -95,6 +103,13 @@ class DataBridgePage extends Page {
 	get propertyLabel() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE} ${DataBridgePage.PROPERTY_LABEL}`
+		);
+	}
+
+	nthReference( n ) {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}
+				${DataBridgePage.REFERENCES_SECTION} ${DataBridgePage.REFERENCE}:nth-child( ${n} )`
 		);
 	}
 }

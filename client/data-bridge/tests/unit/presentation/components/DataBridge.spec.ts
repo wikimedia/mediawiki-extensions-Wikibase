@@ -9,6 +9,7 @@ import Vuex, {
 	Store,
 } from 'vuex';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
+import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 
@@ -62,5 +63,20 @@ describe( 'DataBridge', () => {
 		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toBe( targetValue );
 		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetLabel );
 		expect( wrapper.find( StringDataValue ).props( 'maxlength' ) ).toBe( stringMaxLength );
+	} );
+
+	it( 'mounts ReferenceSection', () => {
+		Vue.set( store, 'getters', {
+			targetValue: { type: 'string', value: '' },
+			targetProperty: 'P123',
+			targetLabel: { value: 'P123', language: 'zxx' },
+			targetReferences: [],
+		} );
+		const wrapper = shallowMount( DataBridge, {
+			store,
+			localVue,
+		} );
+
+		expect( wrapper.find( ReferenceSection ).exists() ).toBeTruthy();
 	} );
 } );

@@ -92,6 +92,74 @@ describe( 'init', () => {
 			assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 		} );
 
+		it( 'shows the current targetReference', () => {
+			const title = DataBridgePage.getDummyTitle();
+			const stringPropertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+			const urlPropertyId = browser.call( () => WikibaseApi.getProperty( 'url' ) );
+			const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+				'claims': { [ stringPropertyId ]: [ {
+					'mainsnak': {
+						'snaktype': 'value',
+						'property': stringPropertyId,
+						'datavalue': { 'value': 'a string', 'type': 'string' },
+					},
+					'type': 'statement',
+					'rank': 'normal',
+					'references': [
+						{
+							'snaks': {
+								[ urlPropertyId ]: [ {
+									'snaktype': 'value',
+									'property': urlPropertyId,
+									'datatype': 'string',
+									'datavalue': { 'type': 'string', 'value': 'https://example.com' },
+								} ],
+								[ stringPropertyId ]: [
+									{
+										'snaktype': 'value',
+										'property': stringPropertyId,
+										'datatype': 'string',
+										'datavalue': { 'type': 'string', 'value': 'A' },
+									},
+									{
+										'snaktype': 'value',
+										'property': stringPropertyId,
+										'datatype': 'string',
+										'datavalue': { 'type': 'string', 'value': 'B' },
+									},
+								],
+							},
+							'snaks-order': [ stringPropertyId, urlPropertyId ],
+						},
+						{
+							'snaks': { [ stringPropertyId ]: [ {
+								'snaktype': 'value',
+								'property': stringPropertyId,
+								'datatype': 'string',
+								'datavalue': { 'type': 'string', 'value': 'C' },
+							} ] },
+							'snaks-order': [ stringPropertyId ],
+						},
+					],
+				} ] },
+			} ) );
+			const editFlow = 'overwrite';
+			const content = `{|class="wikitable"
+|-
+| official website
+| {{#statements:${stringPropertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${stringPropertyId} Edit this on Wikidata]</span>
+|}`;
+			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+
+			DataBridgePage.open( title );
+			DataBridgePage.overloadedLink.click();
+			DataBridgePage.bridge.waitForDisplayed();
+
+			assert.ok( DataBridgePage.bridge.isDisplayed() );
+			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com' );
+			assert.strictEqual( DataBridgePage.nthReference( 2 ).getText(), 'C' );
+		} );
+
 		describe( 'target property label', () => {
 
 			/**
