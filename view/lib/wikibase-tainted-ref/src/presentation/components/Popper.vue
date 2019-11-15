@@ -14,6 +14,7 @@
 						title="Help page for this constraint type"
 						:href="helpLink"
 						target="_blank"
+						@click="helpClick"
 					>Help</a>
 				</small>
 			</h4>
@@ -38,6 +39,10 @@ export default class Popper extends Vue {
 	public closeClick( event: MouseEvent ) {
 		event.preventDefault();
 		this.$store.dispatch( POPPER_HIDE, this.$parent.$data.id );
+	}
+
+	public helpClick() {
+		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	}
 }
 </script>
