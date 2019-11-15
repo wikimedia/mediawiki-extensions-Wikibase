@@ -177,6 +177,8 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-name": "שם השפה בשפה הנוכחית (מוגדר דרך הפרמטר <var>uselang</var>), עם החלת שפות גיבוי אם זה נחוץ. בדרך־כלל, לפחות השם האנגלי ידוע עבור כל שפות התוכן שוויקיבייס מקבל.",
 	"apihelp-query+wbcontentlanguages-example-1": "קבלת קודי שפות תקינים עבור איברים של ישות.",
 	"apihelp-query+wbcontentlanguages-example-2": "קבלת השפות התקינות, עם קודי שפה ושם עצמי, עבור ערכי טקסט חד־לשוני.",
+	"apihelp-query+wbdatabridgeconfig-summary": "מחזיק מידע שנחוץ לאפשרות [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]] (גשר נתונים).",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "זהו מודול פנימי. נא לא להשתמש בו.",
 	"apihelp-query+wbsearch-description": "חיפוש ישויות באמצעות תוויות וכינויים.\nזה יכול להיות מחולל עבור שאילתות אחרות.\nמחזיר את המילה המתאימה שכדאי להציג.",
 	"apihelp-query+wbsearch-summary": "חיפוש ישויות באמצעות תוויות וכינויים.",
 	"apihelp-query+wbsearch-extended-description": "זה יכול לשמש בתור מחולל לשאילתות אחרות.",

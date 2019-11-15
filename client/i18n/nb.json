@@ -112,5 +112,6 @@
 	"unresolved-property-category-desc": "Denne kategorien lister opp sider som refererer til {{WBREPONAME}}-egenskaper som ikke kan finnes med egenskaps-ID eller etikett.",
 	"connected-redirect-category": "Omdirigeringer knyttet til et {{WBREPONAME}}-objekt",
 	"connected-redirect-category-desc": "Denne kategorien lister opp omdirigeringssider som er koblet til et {{WBREPONAME}}-element.",
-	"wikibase-client-data-bridge-dialog-title": "Rediger egenskap"
+	"wikibase-client-data-bridge-dialog-title": "Rediger egenskap",
+	"wikibase-client-data-bridge-references-heading": "Referanser"
 }

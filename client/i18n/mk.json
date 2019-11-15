@@ -109,5 +109,6 @@
 	"unresolved-property-category-desc": "Во категоријава се наведени страници што се повикуваат на својства од {{WBREPONAME}} кои не можат да се пронајдат ниту по назнаката на својството, ниту по патписот.",
 	"connected-redirect-category": "Пренасочувања поврзани со предмет на {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Во категоријава се наведени пренасочувачки страници поврзани со предметот {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "Уреди својство"
+	"wikibase-client-data-bridge-dialog-title": "Уреди својство",
+	"wikibase-client-data-bridge-references-heading": "Наводи"
 }

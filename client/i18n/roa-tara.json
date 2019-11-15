@@ -107,5 +107,6 @@
 	"unresolved-property-category-desc": "Sta categorije elenghe le pàggene ca tènene refereminde a probbietà {{WBREPONAME}} ca non ge ponne essere acchiate nè cu 'u lore ID probbietà nè da l'etichette.",
 	"connected-redirect-category": "Redirezionaminde collegate a 'nu elemende {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Sta categorije elenghe le redirezionaminde ca sò collegate a 'nu elemende {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "Cange 'a probbietà"
+	"wikibase-client-data-bridge-dialog-title": "Cange 'a probbietà",
+	"wikibase-client-data-bridge-references-heading": "Refereminde"
 }

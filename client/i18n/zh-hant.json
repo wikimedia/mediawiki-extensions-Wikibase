@@ -130,5 +130,6 @@
 	"unresolved-property-category-desc": "此分類列舉了無法透過屬性 ID 或標籤來找出參照到{{WBREPONAME}}屬性的頁面。",
 	"connected-redirect-category": "連結至 {{WBREPONAME}} 項目的重新導向",
 	"connected-redirect-category-desc": "此分類列舉了連接到{{WBREPONAME}}項目的重新導向頁面。",
-	"wikibase-client-data-bridge-dialog-title": "編輯屬性"
+	"wikibase-client-data-bridge-dialog-title": "編輯屬性",
+	"wikibase-client-data-bridge-references-heading": "參考"
 }
