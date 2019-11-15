@@ -11,8 +11,11 @@ matrix:
       php: 7.2
     - env: DM=@dev
       php: 7.3
+    - env: DM=@dev
+      php: 7.4snapshot
   allow_failures:
     - env: DM=@dev
+    - php: 7.4snapshot
 
 sudo: false
 
