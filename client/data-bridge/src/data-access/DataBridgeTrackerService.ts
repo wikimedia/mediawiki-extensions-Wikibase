@@ -9,7 +9,7 @@ export default class DataBridgeTrackerService implements BridgeTracker {
 	}
 
 	public trackPropertyDatatype( datatype: string ): void {
-		this.tracker.increment( `counter.MediaWiki.wikibase.client.databridge.datatype.${datatype}` );
+		this.tracker.increment( `MediaWiki.wikibase.client.databridge.datatype.${datatype}` );
 	}
 
 }

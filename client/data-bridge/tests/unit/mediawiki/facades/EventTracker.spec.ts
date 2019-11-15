@@ -8,6 +8,6 @@ describe( 'EventTracker', () => {
 
 		service.increment( topic );
 
-		expect( mwTrack ).toHaveBeenCalledWith( topic, 1 );
+		expect( mwTrack ).toHaveBeenCalledWith( `counter.${topic}`, 1 );
 	} );
 } );

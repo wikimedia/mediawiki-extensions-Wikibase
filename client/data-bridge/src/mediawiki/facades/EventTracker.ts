@@ -9,7 +9,7 @@ export default class EventTracker implements Tracker {
 	}
 
 	public increment( topic: string ): void {
-		this.tracker( topic, 1 );
+		this.tracker( `counter.${topic}`, 1 );
 	}
 
 }

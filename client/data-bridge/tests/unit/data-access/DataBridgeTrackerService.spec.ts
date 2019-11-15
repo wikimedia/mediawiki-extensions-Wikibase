@@ -10,7 +10,7 @@ describe( 'DataBridgeTrackerService', () => {
 		service.trackPropertyDatatype( 'string' );
 
 		expect( tracker.increment ).toHaveBeenCalledWith(
-			'counter.MediaWiki.wikibase.client.databridge.datatype.string',
+			'MediaWiki.wikibase.client.databridge.datatype.string',
 		);
 	} );
 } );
