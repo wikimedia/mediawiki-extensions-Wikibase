@@ -118,6 +118,7 @@ call_user_func( function() {
 	$wgMessagesDirs['WikibaseApi'] = __DIR__ . '/i18n/api';
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
+	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
 
 	/**
 	 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
@@ -998,6 +999,7 @@ call_user_func( function() {
 	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\RepoHooks::onParserOptionsRegister';
 	$wgHooks['RejectParserCacheValue'][] = '\Wikibase\RepoHooks::onRejectParserCacheValue';
 	$wgHooks['ApiQuery::moduleManager'][] = '\Wikibase\RepoHooks::onApiQueryModuleManager';
+	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\RepoHooks::onParserFirstCallInit';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';

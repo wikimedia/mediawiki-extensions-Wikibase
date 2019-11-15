@@ -5,6 +5,7 @@ namespace Wikibase\Client\Hooks;
 use Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
+use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 
 /**
  * @license GPL-2.0-or-later
@@ -74,6 +75,11 @@ class ParserFunctionRegistrant {
 				return Runner::renderRichWikitext( $parser, $frame, $args );
 			},
 			Parser::SFH_OBJECT_ARGS
+		);
+
+		$parser->setFunctionHook(
+			CommaSeparatedList::NAME,
+			[ CommaSeparatedList::class, 'handle' ]
 		);
 	}
 

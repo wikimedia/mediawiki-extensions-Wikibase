@@ -21,6 +21,7 @@ use MediaWiki\Revision\SlotRecord;
 use MWException;
 use OutputPage;
 use PageProps;
+use Parser;
 use ParserOptions;
 use ParserOutput;
 use RecentChange;
@@ -35,6 +36,7 @@ use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
@@ -1155,4 +1157,15 @@ final class RepoHooks {
 		WikibaseRepo::resetClassStatics();
 	}
 
+	/**
+	 * Register the parser functions.
+	 *
+	 * @param Parser $parser
+	 */
+	public static function onParserFirstCallInit( Parser $parser ) {
+		$parser->setFunctionHook(
+			CommaSeparatedList::NAME,
+			[ CommaSeparatedList::class, 'handle' ]
+		);
+	}
 }
