@@ -49,7 +49,6 @@ export default class Popper extends Vue {
 
 <style lang="scss">
 .wb-tr-popper-wrapper {
-	margin-left: 130px;
 	z-index: 1;
 	position: relative;
 }
@@ -58,14 +57,13 @@ export default class Popper extends Vue {
 	width: 27px;
 	position: absolute;
 	top: -14px;
-	left: 268px;
+	left: calc( 50% - 29px / 2 );
 	overflow: hidden;
 	border-bottom: 0 transparent;
 	border-right: 1px solid transparent;
 	border-left: 1px solid transparent;
 	z-index: 3;
 	height: 15px;
-	background: #fff;
 }
 
 .wb-tr-popper-triangle:before {
@@ -83,16 +81,18 @@ export default class Popper extends Vue {
 	transform: rotate( 45deg );
 	border-top: 1px solid #a2a9b1;
 	border-left: 1px solid #a2a9b1;
+	background: #fff;
 }
 
 .wb-tr-popper-body {
-	padding: 7px 7px 7px 15px;
+	padding: 7px 7px 7px 7px;
 	width: 415px;
 	height: 150px;
 	border: #a2a9b1 1px solid;
 	overflow: hidden;
 	z-index: 2;
 	position: relative;
+	background-color: #ffff;
 }
 
 .wb-tr-popper-title {
