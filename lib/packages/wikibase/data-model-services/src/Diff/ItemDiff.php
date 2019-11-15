@@ -38,7 +38,7 @@ class ItemDiff extends EntityDiff {
 	 *
 	 * @return bool
 	 */
-	public function isEmpty() {
+	public function isEmpty(): bool {
 		return parent::isEmpty()
 			&& $this->getSiteLinkDiff()->isEmpty();
 	}
@@ -48,7 +48,7 @@ class ItemDiff extends EntityDiff {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public function getType(): string {
 		return 'diff/item';
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Diff;
 
+use Diff\Comparer\ComparableComparer;
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use UnexpectedValueException;
@@ -36,13 +37,7 @@ class StatementListDiffer {
 	}
 
 	private function newDiffer() {
-		$differ = new MapDiffer();
-
-		$differ->setComparisonCallback( function( Statement $fromStatement, Statement $toStatement ) {
-			return $fromStatement->equals( $toStatement );
-		} );
-
-		return $differ;
+		return new MapDiffer( false, null, new ComparableComparer() );
 	}
 
 	private function toDiffArray( StatementList $statementList ) {
