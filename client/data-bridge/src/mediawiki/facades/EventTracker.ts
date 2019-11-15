@@ -12,4 +12,8 @@ export default class EventTracker implements Tracker {
 		this.tracker( `counter.${topic}`, 1 );
 	}
 
+	public recordTiming( topic: string, timeInMS: number ): void {
+		this.tracker( `timing.${topic}`, timeInMS );
+	}
+
 }

@@ -412,7 +412,7 @@ describe( 'app', () => {
 		} );
 	} );
 
-	it( 'opening of bridge is tracked with data type', async () => {
+	it( 'tracks opening of bridge with opening performance and data type', async () => {
 		const propertyId = 'P4711';
 		const dataType = 'peculiar-type';
 		const testLink = prepareTestEnv( { propertyId } );
@@ -422,14 +422,23 @@ describe( 'app', () => {
 				mockForeignApiEntityInfoResponse( propertyId, 'something', 'en', dataType ),
 			),
 		} );
+		const mockTracker = jest.fn();
+		( window as MwWindow ).mw.track = mockTracker;
 
 		await init();
 
 		testLink!.click();
 		await budge();
 
-		expect( ( window as MwWindow ).mw.track ).toHaveBeenCalledTimes( 1 );
-		expect( ( window as MwWindow ).mw.track ).toHaveBeenCalledWith(
+		expect( mockTracker ).toHaveBeenCalledTimes( 2 );
+
+		expect( mockTracker.mock.calls[ 0 ][ 0 ] ).toBe(
+			'timing.MediaWiki.wikibase.client.databridge.clickDelay',
+		);
+		expect( mockTracker.mock.calls[ 0 ][ 1 ] ).toBeGreaterThan( 0 );
+
+		expect( mockTracker ).toHaveBeenNthCalledWith(
+			2,
 			`counter.MediaWiki.wikibase.client.databridge.datatype.${dataType}`,
 			1,
 		);

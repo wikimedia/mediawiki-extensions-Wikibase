@@ -3,4 +3,5 @@
  */
 export default interface Tracker {
 	increment( topic: string ): void;
+	recordTiming( topic: string, timeInMS: number ): void;
 }

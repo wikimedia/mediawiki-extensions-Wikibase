@@ -10,4 +10,15 @@ describe( 'EventTracker', () => {
 
 		expect( mwTrack ).toHaveBeenCalledWith( `counter.${topic}`, 1 );
 	} );
+
+	it( 'tracks timing call', () => {
+		const mwTrack = jest.fn();
+		const service = new EventTracker( mwTrack );
+		const topic = 'foo.bar.baz';
+		const timing = 123;
+
+		service.recordTiming( topic, timing );
+
+		expect( mwTrack ).toHaveBeenCalledWith( `timing.${topic}`, timing );
+	} );
 } );
