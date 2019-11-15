@@ -3,8 +3,6 @@ language: php
 matrix:
   fast_finish: true
   include:
-    - env: DM=~6.3
-      php: hhvm-3.18
     - env: DM=~7.5
       php: 7
     - env: DM=~8.0
@@ -17,9 +15,6 @@ matrix:
 sudo: false
 
 install: travis_retry composer require "wikibase/data-model=$DM" --prefer-source
-
-# Hack: Don't run phpmd with HHVM
-script: if $(php --version | grep -q HipHop); then composer test; else composer ci; fi
 
 notifications:
   irc:
