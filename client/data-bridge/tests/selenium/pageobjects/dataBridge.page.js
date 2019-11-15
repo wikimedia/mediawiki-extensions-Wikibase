@@ -44,6 +44,12 @@ class DataBridgePage extends Page {
 		ForwardCompatUtil.waitForModuleState( 'wikibase.client.data-bridge.app' );
 	}
 
+	openBridgeOnPage( title ) {
+		this.open( title );
+		this.overloadedLink.click();
+		this.app.waitForDisplayed( 10000 );
+	}
+
 	get overloadedLink() {
 		return $( 'a=Edit this on Wikidata' );
 	}

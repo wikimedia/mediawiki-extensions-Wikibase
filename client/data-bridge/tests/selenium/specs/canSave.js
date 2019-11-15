@@ -73,10 +73,9 @@ describe( 'App', () => {
 |}`;
 		browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
-		DataBridgePage.open( title );
-		DataBridgePage.overloadedLink.click();
-		DataBridgePage.bridge.waitForDisplayed();
+		DataBridgePage.openBridgeOnPage( title );
 
+		DataBridgePage.bridge.waitForDisplayed( 5000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
