@@ -5,6 +5,12 @@
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}}-kohdetta muttám",
+	"wikibase-dataitem": "{{WBREPONAME}}-čuosâttâh",
+	"wikibase-editlinks": "Hammii liiŋkâid",
+	"wikibase-editlinkstitle": "hammii kielâikoskâsijd liiŋkâid",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Čievâ",
+	"wikibase-rc-hide-wikidata-show": "Čääiti",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-editistem"
 }
